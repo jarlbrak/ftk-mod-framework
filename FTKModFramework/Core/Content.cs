@@ -151,6 +151,41 @@ namespace FTKModFramework.Core
             Localization.SetName(id, displayName);
             return row;
         }
+
+        /// <summary>
+        /// Add a new overworld ENCOUNTER / event (clones an existing FTK_miniEncounter row).
+        ///
+        /// Encounters are the events placed on overworld hexes during a run. The game's selector
+        /// (<c>GameLogic.GetMiniEncounter</c>) walks the WHOLE FTK_miniEncounterDB by index, keeps every
+        /// row that passes its realm gate (<c>m_RealmInclude</c>/<c>m_RealmExclude</c>; an EMPTY include
+        /// list means "every realm"), tier gate, and condition gate, then rolls a weighted draw using
+        /// each row's <c>m_Rarity</c> -&gt; FTK_encounterDrawChanceDB probability. So a freshly registered
+        /// row is automatically a candidate — no generator/selection patch is needed; you only need the
+        /// id to round-trip (handled here via ContentRegistry + the GetEnum/GetIntFromID patches).
+        ///
+        /// Display text: <c>FTK_miniEncounter.GetDisplay*</c> calls <c>FTKHub.Localized&lt;TextMiniEncounters&gt;</c>,
+        /// which returns the key string itself when there's no text row — so we set <c>m_DisplayName</c>
+        /// to your literal <paramref name="displayName"/> and it shows verbatim (no localization table edit).
+        /// </summary>
+        /// <param name="template">An existing encounter to clone (e.g. FTK_miniEncounter.ID.TreasureChest).</param>
+        public static FTK_miniEncounter AddEncounter(
+            string modGuid, string id, FTK_miniEncounter.ID template, string displayName,
+            Action<FTK_miniEncounter> configure = null)
+        {
+            FTK_miniEncounterDB db = Db<FTK_miniEncounterDB>();
+            FTK_miniEncounter tmpl = db.GetEntry(template);
+            FTK_miniEncounter row = (FTK_miniEncounter)ContentRegistry.Register(db, modGuid, id, tmpl,
+                o =>
+                {
+                    FTK_miniEncounter e = (FTK_miniEncounter)o;
+                    // Literal display name (GetDisplayName returns it verbatim via Localized<>'s key-passthrough).
+                    e.m_DisplayName = displayName;
+                    if (configure != null) configure(e);
+                });
+            // Also register under the generic name map (harmless; keeps parity with other content kinds).
+            Localization.SetName(id, displayName);
+            return row;
+        }
     }
 
     /// <summary>

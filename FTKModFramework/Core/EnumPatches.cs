@@ -53,4 +53,19 @@ namespace FTKModFramework.Core
             return true;
         }
     }
+
+    [HarmonyPatch(typeof(FTK_miniEncounter), "GetEnum")]
+    internal static class MiniEncounterGetEnum_Patch
+    {
+        private static bool Prefix(string _id, ref FTK_miniEncounter.ID __result)
+        {
+            int v;
+            if (ContentRegistry.TryGetSyntheticId(_id, out v, typeof(FTK_miniEncounterDB)))
+            {
+                __result = (FTK_miniEncounter.ID)v;
+                return false; // resolved; skip the vanilla Enum.Parse + warning
+            }
+            return true;
+        }
+    }
 }

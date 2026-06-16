@@ -28,6 +28,12 @@ namespace FTKModFramework
         /// </summary>
         public static ConfigEntry<bool> EnableSampleContent;
 
+        /// <summary>
+        /// DEBUG verification aid: replace every overworld encounter the game spawns with the custom
+        /// "Smuggler's Cache" so injection is immediately visible in a normal run. Turn off for normal play.
+        /// </summary>
+        public static ConfigEntry<bool> ForceCustomEncounter;
+
         private Harmony _harmony;
 
         private void Awake()
@@ -38,6 +44,10 @@ namespace FTKModFramework
             EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
                 "Register the bundled example content (a custom weapon + ability, given to the Blacksmith). " +
                 "Set false if you only want the framework as a dependency for other content mods.");
+
+            ForceCustomEncounter = Config.Bind("Adventures", "ForceCustomEncounter", true,
+                "DEBUG: replace every overworld encounter that spawns with the custom 'Smuggler's Cache' so " +
+                "encounter injection is immediately visible in-game. Set false for normal play.");
 
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             fsConfig.SerializeEnumsAsInteger = true;
@@ -66,6 +76,7 @@ namespace FTKModFramework
             if (!Plugin.EnableSampleContent.Value) return;
             Run("sample weapon/ability", SampleContent.Register);
             Run("thief class", ThiefClass.Register);
+            Run("sample adventure (encounter)", AdventureContent.Register);
         }
 
         private static void Run(string what, Action register)

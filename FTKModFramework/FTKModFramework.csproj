@@ -48,6 +48,11 @@
     <Reference Include="Assembly-CSharp-firstpass" Publicize="true" Private="false">
       <HintPath>$(FtkManagedDir)/Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
+    <!-- The game bundles Newtonsoft.Json; adventures (.ftk2) are JSON. Bind to the game's exact
+         version (Private=false) so there is no serializer-version conflict. -->
+    <Reference Include="Newtonsoft.Json" Private="false">
+      <HintPath>$(FtkManagedDir)/Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <!-- Unity 2017.2 split UnityEngine into modules (MonoBehaviour lives in CoreModule).
          Reference the whole module set so any game type resolves. -->
     <Reference Include="$(FtkManagedDir)/UnityEngine*.dll" Private="false" />
