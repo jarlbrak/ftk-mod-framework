@@ -74,5 +74,21 @@ namespace FTKModFramework.Core
             }
             map[id] = synthetic;
         }
+
+        /// <summary>
+        /// Look up the synthetic int we minted for a custom string id, searching the given DB types.
+        /// Used by the GetEnum patches to make the game's string-&gt;enum conversion resolve our ids.
+        /// </summary>
+        public static bool TryGetSyntheticId(string contentId, out int id, params Type[] dbTypes)
+        {
+            for (int i = 0; i < dbTypes.Length; i++)
+            {
+                Dictionary<string, int> map;
+                if (CustomIds.TryGetValue(dbTypes[i], out map) && map.TryGetValue(contentId, out id))
+                    return true;
+            }
+            id = -1;
+            return false;
+        }
     }
 }
