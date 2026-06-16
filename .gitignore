@@ -14,9 +14,16 @@ obj/
 /decomp/
 /scratch/
 
+# Superpowers process artifacts (specs/brainstorm output) — keep local, not committed
+docs/superpowers/
+
 # Do NOT commit game assemblies (copyright). Reference them from the install instead.
 *.dll
 !**/lib/**/*.dll
 
 # Pre-existing local file, not part of the framework
 backend.log
+
+# Claude Code private tooling (local-only, never committed)
+AGENTS.md
+.claude/
