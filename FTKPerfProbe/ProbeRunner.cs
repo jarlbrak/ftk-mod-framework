@@ -25,8 +25,8 @@ namespace FTKPerfProbe
         private static readonly double TicksToMs = 1000.0 / Stopwatch.Frequency;
 
         private GcFrame _lastGc;
-        private int _idCalls, _pmCalls, _canvasCalls;
-        private double _idMs, _owMs, _pmMs, _canvasMs;
+        private int _idCalls, _pmCalls, _canvasCalls, _photonCalls;
+        private double _idMs, _owMs, _pmMs, _canvasMs, _photonMs;
 
         public void Init(ProbeConfig cfg, ManualLogSource log)
         {
@@ -64,16 +64,17 @@ namespace FTKPerfProbe
 
             _lastGc = _gc.Update(GC.CollectionCount(0), GC.GetTotalMemory(false));
 
-            int idC, owC, pmC, canC;
-            long idT, owT, pmT, canT;
+            int idC, owC, pmC, canC, phC;
+            long idT, owT, pmT, canT, phT;
             Buckets.Id.SnapshotAndReset(out idC, out idT);
             Buckets.Ow.SnapshotAndReset(out owC, out owT);
             Buckets.Pm.SnapshotAndReset(out pmC, out pmT);
             Buckets.Canvas.SnapshotAndReset(out canC, out canT);
+            Buckets.Photon.SnapshotAndReset(out phC, out phT);
 
-            _idCalls = idC; _pmCalls = pmC; _canvasCalls = canC;
+            _idCalls = idC; _pmCalls = pmC; _canvasCalls = canC; _photonCalls = phC;
             _idMs = idT * TicksToMs; _owMs = owT * TicksToMs;
-            _pmMs = pmT * TicksToMs; _canvasMs = canT * TicksToMs;
+            _pmMs = pmT * TicksToMs; _canvasMs = canT * TicksToMs; _photonMs = phT * TicksToMs;
 
             if (_capture.IsActive)
             {
@@ -83,7 +84,9 @@ namespace FTKPerfProbe
                     Gc0Delta = _lastGc.Gc0Delta, GcFired = _lastGc.GcFired,
                     HeapBytes = _lastGc.HeapBytes, AllocEstBytes = _lastGc.AllocEstBytes,
                     IdCalls = idC, IdMs = _idMs, OwMs = _owMs,
-                    PmCalls = pmC, PmMs = _pmMs, CanvasCalls = canC, CanvasMs = _canvasMs
+                    PmCalls = pmC, PmMs = _pmMs,
+                    CanvasCalls = canC, CanvasMs = _canvasMs,
+                    PhotonCalls = phC, PhotonMs = _photonMs
                 };
                 _capture.Record(row, _stats);
             }
@@ -93,7 +96,7 @@ namespace FTKPerfProbe
         {
             if (!_showOverlay) return;
             _overlay.Draw(_stats, _lastGc, _idMs, _idCalls, _owMs, _pmMs, _pmCalls,
-                _canvasMs, _canvasCalls, _capture.IsActive);
+                _canvasMs, _canvasCalls, _photonMs, _photonCalls, _capture.IsActive);
         }
     }
 }

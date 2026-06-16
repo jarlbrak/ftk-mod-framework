@@ -6,7 +6,7 @@ using HarmonyLib;
 
 namespace FTKPerfProbe
 {
-    internal sealed class ProbeCounts { public int Id, Ow, Pm, Canvas; }
+    internal sealed class ProbeCounts { public int Id, Ow, Pm, Canvas, Photon; }
 
     /// <summary>
     /// Resolves the four buckets' target methods (null-guarded) and attaches the shared read-only
@@ -29,6 +29,7 @@ namespace FTKPerfProbe
             if (cfg.Overworld.Value)    c.Ow = PatchOverworld(h, log);
             if (cfg.PlayMaker.Value)    c.Pm = PatchPlayMaker(h, log);
             if (cfg.Canvas.Value)       c.Canvas = PatchCanvas(h, log);
+            if (cfg.Photon.Value)       c.Photon = PatchPhoton(h, log);
             return c;
         }
 
@@ -121,6 +122,17 @@ namespace FTKPerfProbe
             else
                 TryPatch(h, m, pre, post, ref n, log);
             log.LogInfo("canvas probes attached: " + n);
+            return n;
+        }
+
+        // Bucket 5: per-frame main-thread Photon pump (dispatch + serialize + send).
+        private static int PatchPhoton(Harmony h, ManualLogSource log)
+        {
+            HarmonyMethod pre = HM("PhotonPre"), post = HM("PhotonPost");
+            int n = 0;
+            if (!PatchNamed(h, "PhotonHandler", "Update", pre, post, ref n, log))
+                log.LogWarning("PhotonHandler.Update not found (single-player or PUN layout changed)");
+            log.LogInfo("photon probes attached: " + n);
             return n;
         }
 

@@ -23,7 +23,8 @@ namespace FTKPerfProbe
             _harmony = new Harmony(Guid);
             ProbeCounts counts = ProbeInstaller.Install(_harmony, cfg, Log);
             Log.LogInfo(Name + " " + Version + " loaded. probes attached: id=" + counts.Id +
-                " overworld=" + counts.Ow + " playmaker=" + counts.Pm + " canvas=" + counts.Canvas);
+                " overworld=" + counts.Ow + " playmaker=" + counts.Pm + " canvas=" + counts.Canvas +
+                " photon=" + counts.Photon);
 
             GameObject go = new GameObject("FTKPerfProbe.Runner");
             Object.DontDestroyOnLoad(go);

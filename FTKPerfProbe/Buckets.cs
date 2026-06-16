@@ -14,6 +14,7 @@ namespace FTKPerfProbe
         public static readonly Accumulator Ow = new Accumulator();
         public static readonly Accumulator Pm = new Accumulator();
         public static readonly Accumulator Canvas = new Accumulator();
+        public static readonly Accumulator Photon = new Accumulator();
 
         public static void IdPre()  { Id.Enter(Stopwatch.GetTimestamp()); }
         public static void IdPost() { Id.Exit(Stopwatch.GetTimestamp()); }
@@ -26,5 +27,8 @@ namespace FTKPerfProbe
 
         public static void CanvasPre()  { Canvas.Enter(Stopwatch.GetTimestamp()); }
         public static void CanvasPost() { Canvas.Exit(Stopwatch.GetTimestamp()); }
+
+        public static void PhotonPre()  { Photon.Enter(Stopwatch.GetTimestamp()); }
+        public static void PhotonPost() { Photon.Exit(Stopwatch.GetTimestamp()); }
     }
 }

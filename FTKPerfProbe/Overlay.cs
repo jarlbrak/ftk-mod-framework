@@ -8,7 +8,7 @@ namespace FTKPerfProbe
         private GUIStyle _style;
 
         public void Draw(FrameStats stats, GcFrame gc, double idMs, int idCalls, double owMs,
-            double pmMs, int pmCalls, double canvasMs, int canvasCalls, bool capturing)
+            double pmMs, int pmCalls, double canvasMs, int canvasCalls, double photonMs, int photonCalls, bool capturing)
         {
             if (_style == null)
             {
@@ -28,10 +28,11 @@ namespace FTKPerfProbe
                 "   ow " + owMs.ToString("F2") + "ms" +
                 "   pm " + pmMs.ToString("F2") + "ms(" + pmCalls + ")" +
                 "   canvas " + canvasMs.ToString("F2") + "ms(" + canvasCalls + ")" +
+                "   photon " + photonMs.ToString("F2") + "ms(" + photonCalls + ")" +
                 (capturing ? "\n[CAPTURING]" : "");
 
-            GUI.Box(new Rect(8, 8, 780, 92), GUIContent.none);
-            GUI.Label(new Rect(14, 12, 772, 86), text, _style);
+            GUI.Box(new Rect(8, 8, 940, 92), GUIContent.none);
+            GUI.Label(new Rect(14, 12, 932, 86), text, _style);
         }
     }
 }

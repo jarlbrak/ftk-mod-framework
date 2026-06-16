@@ -17,6 +17,7 @@ namespace FTKPerfProbe
         public double OwMs;
         public int PmCalls; public double PmMs;
         public int CanvasCalls; public double CanvasMs;
+        public int PhotonCalls; public double PhotonMs;
     }
 
     /// <summary>Invariant-culture CSV header + row formatting (locale-safe across Mac/Windows/Linux).</summary>
@@ -26,7 +27,7 @@ namespace FTKPerfProbe
 
         public const string Header =
             "frame,unscaled_dt_ms,fps,gc0_delta,gc_fired,heap_bytes,alloc_est_bytes," +
-            "id_calls,id_ms,ow_ms,pm_calls,pm_ms,canvas_calls,canvas_ms";
+            "id_calls,id_ms,ow_ms,pm_calls,pm_ms,canvas_calls,canvas_ms,photon_calls,photon_ms";
 
         public static string Row(CaptureRow r)
         {
@@ -44,7 +45,9 @@ namespace FTKPerfProbe
             sb.Append(r.PmCalls.ToString(Inv)).Append(',');
             sb.Append(r.PmMs.ToString("F3", Inv)).Append(',');
             sb.Append(r.CanvasCalls.ToString(Inv)).Append(',');
-            sb.Append(r.CanvasMs.ToString("F3", Inv));
+            sb.Append(r.CanvasMs.ToString("F3", Inv)).Append(',');
+            sb.Append(r.PhotonCalls.ToString(Inv)).Append(',');
+            sb.Append(r.PhotonMs.ToString("F3", Inv));
             return sb.ToString();
         }
     }

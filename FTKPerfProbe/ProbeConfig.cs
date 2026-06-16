@@ -15,6 +15,7 @@ namespace FTKPerfProbe
         public readonly ConfigEntry<bool> Overworld;
         public readonly ConfigEntry<bool> PlayMaker;
         public readonly ConfigEntry<bool> Canvas;
+        public readonly ConfigEntry<bool> Photon;
         public readonly ConfigEntry<bool> ShowOverlayOnStart;
 
         public ProbeConfig(ConfigFile c)
@@ -36,6 +37,8 @@ namespace FTKPerfProbe
                 "Probe OverworldCamera.Update and overworld UI LateUpdates.");
             PlayMaker = c.Bind("Probes", "PlayMaker", true, "Probe PlayMakerFSM.Update.");
             Canvas = c.Bind("Probes", "Canvas", true, "Probe uGUI CanvasUpdateRegistry.PerformUpdate.");
+            Photon = c.Bind("Probes", "Photon", true,
+                "Probe PhotonHandler.Update (per-frame main-thread networking; co-op).");
 
             ShowOverlayOnStart = c.Bind("Overlay", "ShowOnStart", false,
                 "Show the overlay immediately on load.");
