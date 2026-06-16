@@ -1,0 +1,22 @@
+# Build output
+bin/
+obj/
+*.user
+
+# Rider / VS
+.idea/
+.vs/
+
+# macOS
+.DS_Store
+
+# Local decompile dumps / scratch
+/decomp/
+/scratch/
+
+# Do NOT commit game assemblies (copyright). Reference them from the install instead.
+*.dll
+!**/lib/**/*.dll
+
+# Pre-existing local file, not part of the framework
+backend.log

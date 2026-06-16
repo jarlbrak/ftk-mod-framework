@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    FTK Mod Framework - BepInEx 5 (Mono) plugin for For The King (original, 2018).
+    Target: Unity 2017.2.2p2 / .NET 3.5 / Mono  (verified from the local install).
+
+    Build:  dotnet build -c Release
+    Output: bin/Release/net35/FTKModFramework.dll  -> copy to <game>/BepInEx/plugins/
+
+    FtkManagedDir must point at the game's managed-assembly folder. The default below
+    is the macOS Steam path on this machine; override on other machines/OSes, e.g.:
+      dotnet build -c Release -p:FtkManagedDir="C:\Program Files (x86)\Steam\steamapps\common\For The King\FTK_Data\Managed"
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>FTKModFramework</AssemblyName>
+    <Product>FTKModFramework</Product>
+    <Version>0.1.0</Version>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <NoWarn>$(NoWarn);CS0436;NU1701</NoWarn>
+
+    <!-- Game managed-assembly folder. Override with -p:FtkManagedDir=... -->
+    <FtkManagedDir Condition="'$(FtkManagedDir)' == ''">$(HOME)/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed</FtkManagedDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Mod loader + HarmonyX (brings 0Harmony / HarmonyLib transitively). -->
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <!-- Lets us reference the game's private members by publicizing Assembly-CSharp at build time. -->
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.*" PrivateAssets="all" />
+    <!-- net35 reference assemblies so this builds on macOS/Linux without .NET Framework installed. -->
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Game assemblies, referenced straight from the install. Publicize=true exposes private fields
+         like FTK_itemsDB.m_Array / FTK_itembase.* so the framework can clone-and-register content.
+         Private=false: do NOT copy these into our output (the game already provides them). -->
+    <Reference Include="Assembly-CSharp" Publicize="true" Private="false">
+      <HintPath>$(FtkManagedDir)/Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass" Publicize="true" Private="false">
+      <HintPath>$(FtkManagedDir)/Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <!-- Unity 2017.2 split UnityEngine into modules (MonoBehaviour lives in CoreModule).
+         Reference the whole module set so any game type resolves. -->
+    <Reference Include="$(FtkManagedDir)/UnityEngine*.dll" Private="false" />
+  </ItemGroup>
+
+</Project>

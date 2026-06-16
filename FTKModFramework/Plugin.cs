@@ -1,0 +1,65 @@
+using System;
+using BepInEx;
+using BepInEx.Logging;
+using HarmonyLib;
+using FullSerializer;
+using GridEditor;
+using FTKModFramework.Core;
+
+namespace FTKModFramework
+{
+    [BepInPlugin(Guid, Name, Version)]
+    // NOTE: intentionally no [BepInProcess(...)]. The process is "FTK.exe" on Windows but "FTK"
+    // on macOS/Linux; gating on one name would stop the plugin loading cross-platform. We only
+    // ever install this into FTK's BepInEx/plugins, so the gate adds nothing anyway.
+    public class Plugin : BaseUnityPlugin
+    {
+        public const string Guid = "com.ftkmf.framework";
+        public const string Name = "FTK Mod Framework";
+        public const string Version = "0.1.0";
+
+        public static Plugin Instance;
+        public static ManualLogSource Log;
+
+        private Harmony _harmony;
+
+        private void Awake()
+        {
+            Instance = this;
+            Log = Logger;
+
+            // Save-safety: synthetic enum ids must round-trip through saves as their int value.
+            fsConfig.SerializeEnumsAsInteger = true;
+
+            _harmony = new Harmony(Guid);
+            DbLookupPatcher.Init(_harmony);
+            _harmony.PatchAll();
+
+            Log.LogInfo(Name + " " + Version + " loaded (For The King / Unity 2017.2.2p2 / Mono).");
+        }
+    }
+
+    /// <summary>
+    /// Single content entry point. By the time TableManager.Initialize() returns, every
+    /// FTK_*DB table is populated, so this is the one safe place to inject custom content.
+    /// </summary>
+    [HarmonyPatch(typeof(TableManager), "Initialize")]
+    internal static class TableManager_Initialize_Patch
+    {
+        private static bool _done;
+
+        private static void Postfix()
+        {
+            if (_done) return; // Initialize can be reached more than once; only seed content once.
+            _done = true;
+            try
+            {
+                SampleContent.Register();
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Content registration failed: " + e);
+            }
+        }
+    }
+}
