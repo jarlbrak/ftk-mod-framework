@@ -14,7 +14,7 @@ namespace FTKModFramework
         public static void Register()
         {
             // --- a named weapon, in shops ---
-            Content.AddWeapon(Plugin.Guid, "ftkmf_emberbrand", FTK_itembase.ID.bladeShortsword, "Emberbrand",
+            FTK_weaponStats2 emberbrand = Content.AddWeapon(Plugin.Guid, "ftkmf_emberbrand", FTK_itembase.ID.bladeShortsword, "Emberbrand",
                 w =>
                 {
                     w._maxdmg += 3f;
@@ -25,13 +25,48 @@ namespace FTKModFramework
                     w.m_Dropable = true;
                 });
 
-            // --- a named combat action (ability) ---
+            // --- a named combat action (ability), cloned from fire1 ---
             Content.AddProficiency(Plugin.Guid, "ftkmf_emberlash", FTK_proficiencyTable.ID.fire1, "Ember Lash",
                 p => { p.m_DmgMultiplier = 1.5f; });
 
+            // --- give Emberbrand the new ability (its own prefab copy, so Shortswords are untouched) ---
+            Content.AttachProficiency(emberbrand, "ftkmf_emberlash");
+
             VerifyWeapon();
             VerifyProficiency();
+            VerifyAbilityAttached();
             GiveToBlacksmith();
+        }
+
+        private static void VerifyAbilityAttached()
+        {
+            FTK_weaponStats2DB db = Content.Db<FTK_weaponStats2DB>();
+            FTK_weaponStats2 weapon = db.GetEntryByStringID("ftkmf_emberbrand");
+            if (weapon == null || weapon.m_Prefab == null)
+            {
+                Plugin.Log.LogError("SELF-TEST FAIL [attach]: weapon/prefab missing.");
+                return;
+            }
+
+            // Replicate the game's uiWeaponDetail.GetWeaponProfIDs path exactly: instantiate the
+            // prefab, read the Weapon WITHOUT includeInactive, then destroy it.
+            UnityEngine.GameObject inst = UnityEngine.Object.Instantiate(weapon.m_Prefab);
+            Weapon w = inst.GetComponentInChildren<Weapon>();
+            int profCount = 0;
+            bool hasEmber = false;
+            if (w != null)
+            {
+                System.Collections.Generic.List<FTK_proficiencyTable.ID> ids = w.GetProficiencyIDs();
+                profCount = ids.Count;
+                int emberId = TableManager.Instance.Get<FTK_proficiencyTableDB>().GetIntFromID("ftkmf_emberlash");
+                hasEmber = ids.Contains((FTK_proficiencyTable.ID)emberId);
+            }
+            UnityEngine.Object.Destroy(inst);
+
+            if (hasEmber)
+                Plugin.Log.LogInfo("SELF-TEST PASS [attach]: instantiated Emberbrand prefab exposes Ember Lash (" + profCount + " total combat actions).");
+            else
+                Plugin.Log.LogError("SELF-TEST FAIL [attach]: Ember Lash not found via instantiate path (weapon=" + (w == null ? "no Weapon" : profCount + " actions") + ").");
         }
 
         /// <summary>

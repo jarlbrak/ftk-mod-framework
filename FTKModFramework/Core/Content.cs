@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using GridEditor;
 using HarmonyLib;
+using UnityEngine;
 
 namespace FTKModFramework.Core
 {
@@ -63,6 +65,62 @@ namespace FTKModFramework.Core
                 o => { if (configure != null) configure((FTK_proficiencyTable)o); });
             Localization.SetName(id, displayName);
             return row;
+        }
+
+        /// <summary>
+        /// Give a weapon a proficiency (combat action) it didn't have.
+        ///
+        /// A weapon's available actions are the keys of its prefab's Weapon.m_ProficiencyEffects.
+        /// Custom weapons clone an existing weapon and therefore SHARE its prefab, so we first
+        /// Instantiate a private copy of the prefab (kept inactive + persistent), add our proficiency
+        /// to the copy, and repoint the weapon at it — leaving the original weapon untouched.
+        /// Returns true on success.
+        /// </summary>
+        public static bool AttachProficiency(FTK_weaponStats2 weapon, string proficiencyId)
+        {
+            if (weapon == null) return false;
+            GameObject src = weapon.m_Prefab;
+            if (src == null)
+            {
+                Plugin.Log.LogWarning("AttachProficiency: weapon '" + weapon.m_ID + "' has no prefab.");
+                return false;
+            }
+
+            GameObject copy = UnityEngine.Object.Instantiate(src);
+            UnityEngine.Object.DontDestroyOnLoad(copy);
+            copy.name = src.name + "_ftkmf";
+            // Keep it ACTIVE but park it far off-screen: the game re-Instantiates this prefab and reads
+            // its Weapon via GetComponentInChildren<Weapon>() WITHOUT includeInactive, so an inactive
+            // copy would resolve to null and NPE.
+            copy.transform.position = new Vector3(0f, -100000f, 0f);
+
+            Weapon w = copy.GetComponentInChildren<Weapon>(true);
+            if (w == null)
+            {
+                Plugin.Log.LogWarning("AttachProficiency: no Weapon component on prefab of '" + weapon.m_ID + "'.");
+                UnityEngine.Object.Destroy(copy);
+                return false;
+            }
+
+            if (w.m_ProficiencyEffects == null)
+                w.m_ProficiencyEffects = new Dictionary<ProficiencyID, HitEffect>();
+
+            // Reuse an existing HitEffect (the visual/impact) from this weapon so the action renders.
+            HitEffect reuse = null;
+            foreach (HitEffect v in w.m_ProficiencyEffects.Values) { reuse = v; break; }
+
+            ProficiencyID key = new ProficiencyID((FTK_proficiencyTable.ID)0);
+            key.m_ID = proficiencyId; // resolved back to our synthetic id via the patched GetEnum
+            w.m_ProficiencyEffects[key] = reuse;
+
+            // Push the runtime dictionary into FullInspector's serialized backing so the change
+            // survives the game's Object.Instantiate(_prefab) (which re-deserializes it).
+            w.SaveState();
+
+            weapon.m_Prefab = copy;
+            Plugin.Log.LogInfo("AttachProficiency: added '" + proficiencyId + "' to '" + weapon.m_ID +
+                "' (now " + w.m_ProficiencyEffects.Count + " actions).");
+            return true;
         }
     }
 
