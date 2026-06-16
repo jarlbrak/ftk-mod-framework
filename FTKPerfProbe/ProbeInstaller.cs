@@ -14,9 +14,17 @@ namespace FTKPerfProbe
     /// </summary>
     internal static class ProbeInstaller
     {
+        private static bool _installed;
+
         public static ProbeCounts Install(Harmony h, ProbeConfig cfg, ManualLogSource log)
         {
             var c = new ProbeCounts();
+            if (_installed)
+            {
+                log.LogWarning("ProbeInstaller.Install called more than once; ignoring to avoid double-patching.");
+                return c;
+            }
+            _installed = true;
             if (cfg.IdResolution.Value) c.Id = PatchIdResolution(h, log);
             if (cfg.Overworld.Value)    c.Ow = PatchOverworld(h, log);
             if (cfg.PlayMaker.Value)    c.Pm = PatchPlayMaker(h, log);
@@ -53,7 +61,7 @@ namespace FTKPerfProbe
         {
             HarmonyMethod pre = HM("IdPre"), post = HM("IdPost");
             int n = 0;
-            Assembly asm = typeof(GridEditor.TableManager).Assembly;
+            Assembly asm = typeof(GridEditor.TableManager).Assembly; // any Assembly-CSharp type; TableManager is public
             foreach (Type t in SafeGetTypes(asm))
             {
                 MethodInfo ge = t.GetMethod("GetEnum",
@@ -75,6 +83,7 @@ namespace FTKPerfProbe
         {
             HarmonyMethod pre = HM("OwPre"), post = HM("OwPost");
             int n = 0;
+            // OverworldCamera has Update only (no LateUpdate); the ui*OW types below prefer LateUpdate.
             PatchNamed(h, "OverworldCamera", "Update", pre, post, ref n, log);
             string[] uiTypes = { "uiBoatHealthOW", "uiCharactPortraitOW", "uiHexStatusOverworld",
                                  "uiPoiNameTag", "uiActionPointLabel" };
@@ -107,8 +116,10 @@ namespace FTKPerfProbe
             HarmonyMethod pre = HM("CanvasPre"), post = HM("CanvasPost");
             int n = 0;
             MethodInfo m = AccessTools.Method(typeof(UnityEngine.UI.CanvasUpdateRegistry), "PerformUpdate");
-            TryPatch(h, m, pre, post, ref n, log);
-            if (m == null) log.LogWarning("CanvasUpdateRegistry.PerformUpdate not found");
+            if (m == null)
+                log.LogWarning("CanvasUpdateRegistry.PerformUpdate not found");
+            else
+                TryPatch(h, m, pre, post, ref n, log);
             log.LogInfo("canvas probes attached: " + n);
             return n;
         }
