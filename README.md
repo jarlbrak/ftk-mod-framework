@@ -76,13 +76,40 @@ are git-ignored (they're copyrighted — reference them from the install).
 > platform-agnostic managed IL. Also note: **co-op requires every player to have identical mods**
 > (no asset streaming), which is why `IdAllocator` makes IDs deterministic across machines.
 
+## Using the framework (writing a content mod)
+
+Depend on this plugin and register content from a single hook. Full guide:
+[`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md).
+
+```csharp
+[HarmonyPatch(typeof(GridEditor.TableManager), "Initialize")]
+static class Register
+{
+    static bool _done;
+    static void Postfix()
+    {
+        if (_done) return; _done = true;
+        var sword = Content.AddWeapon("com.you.mymod", "mymod_flamesword",
+            FTK_itembase.ID.bladeShortsword, "Flame Sword",
+            w => { w._maxdmg += 5f; w.m_ItemRarity = FTK_itemRarityLevel.ID.rare; });
+        Content.AddProficiency("com.you.mymod", "mymod_flamelash",
+            FTK_proficiencyTable.ID.fire1, "Flame Lash", p => p.m_DmgMultiplier = 1.5f);
+        Content.AttachProficiency(sword, "mymod_flamelash");
+    }
+}
+```
+
+The bundled sample (`Content/SampleContent.cs`) is a working reference for all of the above; it's
+gated behind the `Demo / EnableSampleContent` config (set it false to use the framework purely as a
+dependency for other mods).
+
 ## The five goals — where each stands
 
 | Goal | DB / types | Status |
 |---|---|---|
-| New items / weapons | `FTK_itemsDB`, `FTK_weaponStats2DB` | engine works (sample item builds) |
-| New combat actions | `FTK_proficiencyTableDB`, `FTK_hitEffectDB` | DBs identified; helper next |
-| New enemies | `FTK_enemyCombatDB`, `FTK_enemySetDB` | DBs identified (was the big unknown) |
+| New items / weapons | `FTK_itemsDB`, `FTK_weaponStats2DB` | ✅ working + verified in-game |
+| New combat actions | `FTK_proficiencyTableDB`, `FTK_hitEffectDB` | ✅ working (create + attach to a weapon) |
+| New enemies | `FTK_enemyCombatDB`, `FTK_enemySetDB` | DBs identified; helper next |
 | New classes | `FTK_playerGameStartDB`, `FTK_skinsetDB` | DBs identified; precedent exists (CommunityDLC Paladin) |
 | New adventures | `FTK_realmDB`, `FTK_gameParamsDB`, encounter DBs | DBs identified; hardest, RE needed |
 

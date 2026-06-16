@@ -1,5 +1,6 @@
 using System;
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using FullSerializer;
@@ -21,12 +22,22 @@ namespace FTKModFramework
         public static Plugin Instance;
         public static ManualLogSource Log;
 
+        /// <summary>
+        /// Whether to register the bundled example content (Emberbrand weapon + Ember Lash ability,
+        /// added to the Blacksmith's starting kit). Off = the framework only powers other mods.
+        /// </summary>
+        public static ConfigEntry<bool> EnableSampleContent;
+
         private Harmony _harmony;
 
         private void Awake()
         {
             Instance = this;
             Log = Logger;
+
+            EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
+                "Register the bundled example content (a custom weapon + ability, given to the Blacksmith). " +
+                "Set false if you only want the framework as a dependency for other content mods.");
 
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             fsConfig.SerializeEnumsAsInteger = true;
@@ -52,6 +63,7 @@ namespace FTKModFramework
         {
             if (_done) return; // Initialize can be reached more than once; only seed content once.
             _done = true;
+            if (!Plugin.EnableSampleContent.Value) return;
             try
             {
                 SampleContent.Register();
