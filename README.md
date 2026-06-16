@@ -5,10 +5,12 @@ BepInEx 5 + HarmonyX. Goal: let modders add new **classes, items, combat actions
 adventures** through one clean, save-safe, multiplayer-deterministic API — and serve as the base
 for porting *For The King II* class/ability ideas back into the original game.
 
-> Status: **early scaffold (v0.1).** The core injection engine compiles against the real game
-> assembly and there is a working sample item. Higher-level content APIs and in-game testing are
-> the next steps. See `docs/PHASE0-TYPE-INVENTORY.md` for the verified game data model and
-> `docs/ROADMAP.md` for the plan.
+> Status: **actively developed.** Items, weapons, combat actions, and **playable classes** all work
+> and are verified in-game — see the bundled **Thief** class (custom stats, a dagger, custom
+> abilities, and a Focus-guaranteeable Steal). Enemies and adventures are next. See
+> [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) for the modder API,
+> [`docs/PHASE0-TYPE-INVENTORY.md`](docs/PHASE0-TYPE-INVENTORY.md) for the game data model, and
+> [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
 
 ## Verified facts (from this machine's install)
 
@@ -29,13 +31,19 @@ FTKModFramework/
   FTKModFramework.csproj   net35 plugin; references + publicizes the game's Assembly-CSharp
   Plugin.cs                BepInEx entry point + the single TableManager.Initialize content hook
   Core/
-    IdAllocator.cs         deterministic synthetic enum-IDs (save + multiplayer stable)
+    Content.cs             high-level API: AddWeapon / AddItem / AddProficiency / AddClass / AttachProficiencies
     ContentRegistry.cs     generic "add a row to any FTK_*DB" engine
-    DbLookupPatcher.cs      Harmony patch so the game resolves our custom string IDs
+    IdAllocator.cs         deterministic synthetic enum-IDs (save + multiplayer stable)
+    DbLookupPatcher.cs     Harmony patches so the game resolves our custom string IDs
+    EnumPatches.cs         GetEnum prefixes (items / proficiencies / classes) for custom IDs
+    Localization.cs        custom names, class flavor text, and proficiency tooltip text
     Reflect.cs             reflection helpers (field copy, etc.)
   Content/
-    SampleContent.cs       proof-of-pipeline: clones the Shortsword into a new shop item
+    SampleContent.cs       demo: a custom weapon ("Emberbrand") that casts a custom ability
+    ThiefClass.cs          the Thief — a full custom class (stats, dagger, abilities, Steal)
+    ThiefStealProficiency.cs  custom combat behaviour (ProficiencyBase subclass) powering Steal
 docs/
+  WRITING-CONTENT.md        modder API guide (how to add content)
   PHASE0-TYPE-INVENTORY.md  the full content-table inventory decompiled from the game
   ROADMAP.md                phased plan toward the five content goals + FTK2 ports
 nuget.config                adds the BepInEx NuGet feed
@@ -67,8 +75,9 @@ are git-ignored (they're copyrighted — reference them from the install).
    sits next to the executable. (Easiest via the r2modman / Thunderstore mod manager.)
 2. Also install **Amadare-HookGenPatcher** (needed once we use `On.*` MonoMod hooks).
 3. Copy `FTKModFramework.dll` into `<game>/BepInEx/plugins/`.
-4. Launch. Check `BepInEx/LogOutput.log` for `FTK Mod Framework 0.1.0 loaded` and
-   `Registered 'ftkmf_testblade'`. The sample blade should appear in town shops.
+4. Launch. Check `BepInEx/LogOutput.log` for `FTK Mod Framework ... loaded` and the
+   `SELF-TEST PASS` lines. With the demo enabled, the **Thief** appears at character-select and the
+   "Emberbrand" weapon is in the Blacksmith's starting kit.
 
 > **macOS note:** BepInEx on the Mac Unity-Mono build uses `run_bepinex.sh` + a Doorstop dylib
 > rather than the Windows `winhttp.dll`. It works, but the FTK community packs are Windows-first, so
@@ -95,22 +104,29 @@ static class Register
         Content.AddProficiency("com.you.mymod", "mymod_flamelash",
             FTK_proficiencyTable.ID.fire1, "Flame Lash", p => p.m_DmgMultiplier = 1.5f);
         Content.AttachProficiency(sword, "mymod_flamelash");
+
+        // ...and a playable class (cloned from the Gladiator):
+        Content.AddClass("com.you.mymod", "mymod_blademaster",
+            FTK_playerGameStart.ID.gladiator, "Blademaster",
+            c => { c._quickness = 0.7f; c._toughness = 0.7f;
+                   c.m_StartWeapon = FTK_itembase.ID.bladeShortsword; });
     }
 }
 ```
 
-The bundled sample (`Content/SampleContent.cs`) is a working reference for all of the above; it's
-gated behind the `Demo / EnableSampleContent` config (set it false to use the framework purely as a
-dependency for other mods).
+The bundled content is a working reference: `Content/SampleContent.cs` (a custom weapon + ability)
+and `Content/ThiefClass.cs` (a full custom class, including a custom-behaviour `ProficiencyBase` in
+`ThiefStealProficiency.cs`). Both are gated behind the `Demo / EnableSampleContent` config (set it
+false to use the framework purely as a dependency for other mods).
 
 ## The five goals — where each stands
 
 | Goal | DB / types | Status |
 |---|---|---|
 | New items / weapons | `FTK_itemsDB`, `FTK_weaponStats2DB` | ✅ working + verified in-game |
-| New combat actions | `FTK_proficiencyTableDB`, `FTK_hitEffectDB` | ✅ working (create + attach to a weapon) |
+| New combat actions | `FTK_proficiencyTableDB`, `FTK_hitEffectDB` | ✅ working (create + attach to weapons; custom `ProficiencyBase` behaviours) |
+| New **classes** | `FTK_playerGameStartDB`, `FTK_skinsetDB` | ✅ working + verified (`Content.AddClass`; the **Thief**) |
 | New enemies | `FTK_enemyCombatDB`, `FTK_enemySetDB` | DBs identified; helper next |
-| New classes | `FTK_playerGameStartDB`, `FTK_skinsetDB` | DBs identified; precedent exists (CommunityDLC Paladin) |
 | New adventures | `FTK_realmDB`, `FTK_gameParamsDB`, encounter DBs | DBs identified; hardest, RE needed |
 
 ## Credits / prior art this builds on
