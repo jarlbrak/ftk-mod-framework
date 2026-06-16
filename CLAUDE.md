@@ -116,7 +116,7 @@ Work is tracked as a three-level hierarchy:
 
 Skills for managing the hierarchy: `/create-epic`, `/create-spec`, `/create-workitem`, `/complete-workitems`, `/validate-spec`, `/validate-epic`.
 
-Other labels in use: `bug`, `RE`, `class`, `item`, `ability`, `enemy`, `adventure`, `ftk2-port`, `infra`, `docs`.
+Other labels in use: `bug`, `RE`, `class`, `item`, `ability`, `enemy`, `adventure`, `ftk2-port`, `infra`, `docs`. Routing and state labels (used by the workflow skills): `core` and `content` (which code area), `remediation` (a fix work item from validation), `design-needed` (needs a game-designer brief first).
 
 ## Subagent-First Rule
 
