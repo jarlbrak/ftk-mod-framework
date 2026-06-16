@@ -78,11 +78,17 @@ namespace FTKModFramework.Core
         /// </summary>
         public static bool AttachProficiency(FTK_weaponStats2 weapon, string proficiencyId)
         {
+            return AttachProficiencies(weapon, proficiencyId);
+        }
+
+        /// <summary>Attach one or more proficiencies to a weapon in a single private prefab copy.</summary>
+        public static bool AttachProficiencies(FTK_weaponStats2 weapon, params string[] proficiencyIds)
+        {
             if (weapon == null) return false;
             GameObject src = weapon.m_Prefab;
             if (src == null)
             {
-                Plugin.Log.LogWarning("AttachProficiency: weapon '" + weapon.m_ID + "' has no prefab.");
+                Plugin.Log.LogWarning("AttachProficiencies: weapon '" + weapon.m_ID + "' has no prefab.");
                 return false;
             }
 
@@ -97,7 +103,7 @@ namespace FTKModFramework.Core
             Weapon w = copy.GetComponentInChildren<Weapon>(true);
             if (w == null)
             {
-                Plugin.Log.LogWarning("AttachProficiency: no Weapon component on prefab of '" + weapon.m_ID + "'.");
+                Plugin.Log.LogWarning("AttachProficiencies: no Weapon component on prefab of '" + weapon.m_ID + "'.");
                 UnityEngine.Object.Destroy(copy);
                 return false;
             }
@@ -105,22 +111,45 @@ namespace FTKModFramework.Core
             if (w.m_ProficiencyEffects == null)
                 w.m_ProficiencyEffects = new Dictionary<ProficiencyID, HitEffect>();
 
-            // Reuse an existing HitEffect (the visual/impact) from this weapon so the action renders.
+            // Reuse an existing HitEffect (the visual/impact) from this weapon so the actions render.
             HitEffect reuse = null;
             foreach (HitEffect v in w.m_ProficiencyEffects.Values) { reuse = v; break; }
 
-            ProficiencyID key = new ProficiencyID((FTK_proficiencyTable.ID)0);
-            key.m_ID = proficiencyId; // resolved back to our synthetic id via the patched GetEnum
-            w.m_ProficiencyEffects[key] = reuse;
+            foreach (string profId in proficiencyIds)
+            {
+                ProficiencyID key = new ProficiencyID((FTK_proficiencyTable.ID)0);
+                key.m_ID = profId; // resolved back to our synthetic id via the patched GetEnum
+                w.m_ProficiencyEffects[key] = reuse;
+            }
 
             // Push the runtime dictionary into FullInspector's serialized backing so the change
             // survives the game's Object.Instantiate(_prefab) (which re-deserializes it).
             w.SaveState();
 
             weapon.m_Prefab = copy;
-            Plugin.Log.LogInfo("AttachProficiency: added '" + proficiencyId + "' to '" + weapon.m_ID +
+            Plugin.Log.LogInfo("AttachProficiencies: added " + proficiencyIds.Length + " to '" + weapon.m_ID +
                 "' (now " + w.m_ProficiencyEffects.Count + " actions).");
             return true;
+        }
+
+        /// <summary>
+        /// Add a new playable CLASS (clones an existing class's FTK_playerGameStart row).
+        /// Classes are registered with id == their array index (the next sequential enum value),
+        /// because the character-select UI uses the class id as BOTH an enum key and an array index;
+        /// any other id would be unreachable by the cycle and crash the index-based reads.
+        /// </summary>
+        public static FTK_playerGameStart AddClass(
+            string modGuid, string id, FTK_playerGameStart.ID template, string displayName,
+            Action<FTK_playerGameStart> configure = null)
+        {
+            FTK_playerGameStartDB db = Db<FTK_playerGameStartDB>();
+            FTK_playerGameStart tmpl = db.GetEntry(template);
+            int index = ((Array)Reflect.GetField(db, "m_Array")).Length; // slot this class will occupy
+
+            FTK_playerGameStart row = (FTK_playerGameStart)ContentRegistry.Register(db, modGuid, id, tmpl,
+                o => { if (configure != null) configure((FTK_playerGameStart)o); }, index);
+            Localization.SetName(id, displayName);
+            return row;
         }
     }
 

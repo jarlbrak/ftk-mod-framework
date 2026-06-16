@@ -64,14 +64,14 @@ namespace FTKModFramework
             if (_done) return; // Initialize can be reached more than once; only seed content once.
             _done = true;
             if (!Plugin.EnableSampleContent.Value) return;
-            try
-            {
-                SampleContent.Register();
-            }
-            catch (Exception e)
-            {
-                Plugin.Log.LogError("Content registration failed: " + e);
-            }
+            Run("sample weapon/ability", SampleContent.Register);
+            Run("thief class", ThiefClass.Register);
+        }
+
+        private static void Run(string what, Action register)
+        {
+            try { register(); }
+            catch (Exception e) { Plugin.Log.LogError(what + " registration failed: " + e); }
         }
     }
 }

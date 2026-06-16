@@ -38,4 +38,19 @@ namespace FTKModFramework.Core
             return true;
         }
     }
+
+    [HarmonyPatch(typeof(FTK_playerGameStart), "GetEnum")]
+    internal static class ClassGetEnum_Patch
+    {
+        private static bool Prefix(string _id, ref FTK_playerGameStart.ID __result)
+        {
+            int v;
+            if (ContentRegistry.TryGetSyntheticId(_id, out v, typeof(FTK_playerGameStartDB)))
+            {
+                __result = (FTK_playerGameStart.ID)v;
+                return false;
+            }
+            return true;
+        }
+    }
 }

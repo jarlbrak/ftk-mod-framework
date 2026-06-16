@@ -32,17 +32,23 @@ namespace FTKModFramework.Core
         /// <param name="template">An existing row to clone defaults from (recommended). May be null.</param>
         /// <param name="configure">Callback to set fields on the freshly created row.</param>
         /// <returns>The new row instance (a GEDataBase subtype, e.g. FTK_items).</returns>
+        /// <param name="explicitId">
+        /// If &gt;= 0, use this exact int id instead of the IdAllocator's high band. Classes REQUIRE
+        /// this: the character-select UI uses the class id as both an enum key and an array index, so
+        /// a class's id must equal the array index it's appended at (the next sequential enum value).
+        /// </param>
         public static object Register(
             GEDataArrayBase db,
             string modGuid,
             string id,
             object template = null,
-            Action<object> configure = null)
+            Action<object> configure = null,
+            int explicitId = -1)
         {
             if (db == null) throw new ArgumentNullException("db");
             Type dbType = db.GetType();
 
-            int synthetic = IdAllocator.Allocate(modGuid, dbType.Name + "/" + id);
+            int synthetic = explicitId >= 0 ? explicitId : IdAllocator.Allocate(modGuid, dbType.Name + "/" + id);
             Record(dbType, id, synthetic);
 
             // Patch lookups BEFORE indexing so MakeIndex() maps our row under the synthetic int.

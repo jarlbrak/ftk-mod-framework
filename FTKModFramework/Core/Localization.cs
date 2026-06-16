@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GridEditor;
+using Google2u;
 using HarmonyLib;
 
 namespace FTKModFramework.Core
@@ -27,6 +28,34 @@ namespace FTKModFramework.Core
             if (contentId == null) { displayName = null; return false; }
             return Names.TryGetValue(contentId, out displayName);
         }
+
+        // Class flavor/description text (the character-select panel reads it inline, not via a method).
+        private static readonly Dictionary<string, string> ClassFlavors = new Dictionary<string, string>();
+
+        public static void SetClassFlavor(string classId, string flavor)
+        {
+            ClassFlavors[classId] = flavor;
+        }
+
+        public static bool TryGetClassFlavor(string classId, out string flavor)
+        {
+            if (classId == null) { flavor = null; return false; }
+            return ClassFlavors.TryGetValue(classId, out flavor);
+        }
+
+        // Proficiency description (the combat tooltip's effect line, normally derived from the category).
+        private static readonly Dictionary<string, string> ProficiencyDescriptions = new Dictionary<string, string>();
+
+        public static void SetProficiencyDescription(string proficiencyId, string description)
+        {
+            ProficiencyDescriptions[proficiencyId] = description;
+        }
+
+        public static bool TryGetProficiencyDescription(string proficiencyId, out string description)
+        {
+            if (proficiencyId == null) { description = null; return false; }
+            return ProficiencyDescriptions.TryGetValue(proficiencyId, out description);
+        }
     }
 
     [HarmonyPatch(typeof(FTK_itembase), "GetLocalizedName")]
@@ -46,6 +75,61 @@ namespace FTKModFramework.Core
         {
             string name;
             if (Localization.TryGetName(__instance.m_ID, out name)) __result = name;
+        }
+    }
+
+    // The combat ability tooltip header uses DisplayTitle (not DisplayName); show our name there too.
+    [HarmonyPatch(typeof(FTK_proficiencyTable), "GetLocalizedDisplayTitle")]
+    internal static class ProficiencyTitle_Patch
+    {
+        private static void Postfix(FTK_proficiencyTable __instance, ref string __result)
+        {
+            string name;
+            if (Localization.TryGetName(__instance.m_ID, out name)) __result = name;
+        }
+    }
+
+    // Override the tooltip's effect-description line for proficiencies whose category has no
+    // built-in description (e.g. StealGold falls through to a "GetCategoryDescription #...#" placeholder).
+    [HarmonyPatch(typeof(FTK_proficiencyTable), "GetCategoryDescription")]
+    internal static class ProficiencyCategoryDesc_Patch
+    {
+        private static void Postfix(FTK_proficiencyTable __instance, ref string __result)
+        {
+            // 1) explicit per-proficiency override wins
+            string desc;
+            if (Localization.TryGetProficiencyDescription(__instance.m_ID, out desc)) { __result = desc; return; }
+
+            // 2) fill in the StealGold category the game's switch forgot, using its own "Robbed" string
+            if (__instance.m_ProficiencyPrefab != null &&
+                __instance.m_ProficiencyPrefab.m_Category == ProficiencyBase.Category.StealGold)
+            {
+                __result = FTKHub.Localized<TextMisc>("STR_profRobbed");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(FTK_playerGameStart), "GetDisplayName")]
+    internal static class ClassName_Patch
+    {
+        private static void Postfix(FTK_playerGameStart __instance, ref string __result)
+        {
+            string name;
+            if (Localization.TryGetName(__instance.m_ID, out name)) __result = name;
+        }
+    }
+
+    // The class-select panel sets the flavor text inline (FTKHub.Localized<TextCharacters>(m_Flavor)),
+    // so we override it after the fact for custom classes.
+    [HarmonyPatch(typeof(uiSelectCharacterInfo), "ShowCharacterInfo")]
+    internal static class ClassFlavor_Patch
+    {
+        private static void Postfix(uiSelectCharacterInfo __instance, FTK_playerGameStart.ID _characterType)
+        {
+            FTK_playerGameStart entry = FTK_playerGameStartDB.GetDB().GetEntry(_characterType);
+            string flavor;
+            if (entry != null && Localization.TryGetClassFlavor(entry.m_ID, out flavor) && __instance.m_ClassFlavor != null)
+                __instance.m_ClassFlavor.text = flavor;
         }
     }
 }
