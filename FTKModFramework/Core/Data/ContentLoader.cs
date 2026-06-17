@@ -68,6 +68,11 @@ namespace FTKModFramework.Core.Data
         /// Parse every discovered mod's files into a flat, ordered work list. Parsing is fault-tolerant
         /// (a malformed file is recorded and skipped). The work list preserves the deterministic
         /// (modGuid, folder, filename, in-file) order so id minting is reproducible before the final sort.
+        ///
+        /// Each discovered mod is REGISTERED into <see cref="ModRegistry"/> first (so a disabled mod still
+        /// appears in <c>ModRegistry.Entries</c> and the UI can re-enable it), THEN its files are skipped
+        /// when <c>ModRegistry.IsEnabled</c> is false. A disabled mod contributes NO PendingEntry, so the
+        /// global (modGuid, id) sort and the id minting that follows see only the surviving set (FR-3/NFR-3).
         /// </summary>
         private static List<PendingEntry> CollectEntries(List<DiscoveredMod> mods, ValidationReport report)
         {
@@ -75,6 +80,16 @@ namespace FTKModFramework.Core.Data
 
             foreach (DiscoveredMod mod in mods)
             {
+                string modGuid = mod.Manifest.ModGuid;
+
+                // Register BEFORE gating: a disabled mod must still be listed in ModRegistry.Entries.
+                ModRegistry.Register(modGuid, mod.Manifest.Name, false, true);
+                if (!ModRegistry.IsEnabled(modGuid))
+                {
+                    Plugin.Log.LogInfo("ModRegistry: skipping disabled mod '" + modGuid + "' (no entries loaded).");
+                    continue; // disabled: queue none of its files, so nothing reaches the pending work list.
+                }
+
                 foreach (string path in mod.ContentFilePaths)
                 {
                     ContentFile file = JsonContentParser.ParseFile(path, report);

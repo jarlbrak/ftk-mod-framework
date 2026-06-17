@@ -107,8 +107,14 @@ namespace FTKModFramework
             if (_done) return; // Initialize can be reached more than once; only seed content once.
             _done = true;
 
-            // Bundled demo content (opt-in). Disabling it must NOT skip the data loader below.
-            if (Plugin.EnableSampleContent.Value)
+            // Register the bundled-demo row UNCONDITIONALLY, before its gate is read. EnableSampleContent.Value
+            // backs the row's Enabled state (so a disabled demo stays listed and re-enableable); registration
+            // itself never depends on that value. Doing this before the gate is what stops the FR-3 fail-open
+            // default from silently re-enabling sample content the user turned off.
+            ModRegistry.Register(Plugin.Guid, "Bundled Sample Content", true, Plugin.EnableSampleContent.Value);
+
+            // Bundled demo content (opt-in via the gate). Disabling it must NOT skip the data loader below.
+            if (ModRegistry.IsEnabled(Plugin.Guid))
             {
                 Run("sample weapon/ability", SampleContent.Register);
                 Run("thief class", ThiefClass.Register);
@@ -117,9 +123,37 @@ namespace FTKModFramework
             }
 
             // JSON data-content mods (opt-in, independent of the demo). Runs AFTER sample content so a
-            // data mod can reference vanilla rows the same way the demo does.
+            // data mod can reference vanilla rows the same way the demo does. ContentLoader registers each
+            // discovered mod into ModRegistry, so the summary below sees data mods too.
             if (Plugin.EnableDataContent.Value)
                 Run("data content", LoadDataContent);
+            else
+                Plugin.Log.LogInfo("ModRegistry: data discovery skipped (EnableDataContent=false).");
+
+            // Emit AFTER both registration sites so N counts the demo + every discovered data mod. Kept in the
+            // postfix (not inside ContentLoader.Load) so it still fires when EnableDataContent is false.
+            LogModRegistrySummary();
+        }
+
+        /// <summary>
+        /// FR-8 observability: a single "ModRegistry: N mods, M enabled" line over the whole registry, plus an
+        /// info line per disabled row. Runs once, after both registration sites have populated the registry.
+        /// </summary>
+        private static void LogModRegistrySummary()
+        {
+            int total = 0;
+            int enabled = 0;
+            foreach (ModEntry e in ModRegistry.Entries)
+            {
+                total++;
+                if (e.Enabled) enabled++;
+            }
+
+            Plugin.Log.LogInfo("ModRegistry: " + total + " mods, " + enabled + " enabled.");
+
+            foreach (ModEntry e in ModRegistry.Entries)
+                if (!e.Enabled)
+                    Plugin.Log.LogInfo("ModRegistry: '" + e.Key + "' is disabled (its content was not loaded).");
         }
 
         private static void LoadDataContent()
