@@ -146,12 +146,21 @@ namespace FTKModFramework.Core.UI
         }
 
         /// <summary>
-        /// PLACEHOLDER click target. Work item #18 replaces this body with code that opens the real Mods
-        /// panel (via FTKInput.Instance.SetFocus / Close). For now it only logs.
+        /// Title-button click target: opens the real Mods panel (<see cref="ModsPanel"/>), which builds itself
+        /// lazily on first call and shows via FTKInput.Instance.SetFocus. Fully guarded: any failure to build
+        /// or show the panel is logged and swallowed so the title screen stays usable (no soft-lock, no
+        /// unhandled exception bubbling out of the button click).
         /// </summary>
         private static void OpenModsPanel()
         {
-            Plugin.Log.LogInfo("Mods button clicked (panel arrives in #18).");
+            try
+            {
+                ModsPanel.Open();
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("[ftkmf] Failed to open the Mods panel (title screen left usable): " + e);
+            }
         }
     }
 }
