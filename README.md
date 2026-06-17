@@ -5,9 +5,10 @@ BepInEx 5 + HarmonyX. Goal: let modders add new **classes, items, combat actions
 adventures** through one clean, save-safe, multiplayer-deterministic API — and serve as the base
 for porting *For The King II* class/ability ideas back into the original game.
 
-> Status: **actively developed.** Items, weapons, combat actions, and **playable classes** all work
-> and are verified in-game — see the bundled **Thief** class (custom stats, a dagger, custom
-> abilities, and a Focus-guaranteeable Steal). Enemies and adventures are next. See
+> Status: **actively developed.** Items, weapons, combat actions, **playable classes**, and **enemies**
+> all work and are verified in-game — see the bundled **Thief** class (custom stats, a dagger, custom
+> abilities, and a Focus-guaranteeable Steal) and the **Cutpurse** enemy (custom stats, a gold-stealing
+> Pilfer ability, and custom loot, spawning in real fights). Adventures are next. See
 > [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) for the modder API,
 > [`docs/PHASE0-TYPE-INVENTORY.md`](docs/PHASE0-TYPE-INVENTORY.md) for the game data model, and
 > [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
@@ -126,7 +127,7 @@ false to use the framework purely as a dependency for other mods).
 | New items / weapons | `FTK_itemsDB`, `FTK_weaponStats2DB` | ✅ working + verified in-game |
 | New combat actions | `FTK_proficiencyTableDB`, `FTK_hitEffectDB` | ✅ working (create + attach to weapons; custom `ProficiencyBase` behaviours) |
 | New **classes** | `FTK_playerGameStartDB`, `FTK_skinsetDB` | ✅ working + verified (`Content.AddClass`; the **Thief**) |
-| New enemies | `FTK_enemyCombatDB`, `FTK_enemySetDB` | DBs identified; helper next |
+| New **enemies** | `FTK_enemyCombatDB`, `GameCache.Enemies` | ✅ working + verified (`Content.AddEnemy`; the **Cutpurse**) |
 | New adventures | `FTK_realmDB`, `FTK_gameParamsDB`, encounter DBs | DBs identified; hardest, RE needed |
 
 ## Credits / prior art this builds on

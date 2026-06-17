@@ -29,6 +29,12 @@ namespace FTKModFramework
         public static ConfigEntry<bool> EnableSampleContent;
 
         /// <summary>
+        /// DEBUG verification aid: replace every overworld LAND enemy the game spawns with the custom
+        /// "Cutpurse" so enemy injection is immediately visible in combat. Turn off for normal play.
+        /// </summary>
+        public static ConfigEntry<bool> ForceCustomEnemy;
+
+        /// <summary>
         /// DEBUG verification aid: replace every overworld encounter the game spawns with the custom
         /// "Smuggler's Cache" so injection is immediately visible in a normal run. Turn off for normal play.
         /// </summary>
@@ -44,6 +50,10 @@ namespace FTKModFramework
             EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
                 "Register the bundled example content (a custom weapon + ability, given to the Blacksmith). " +
                 "Set false if you only want the framework as a dependency for other content mods.");
+
+            ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", false,
+                "DEBUG: replace every overworld LAND enemy that spawns with the custom 'Cutpurse' so enemy " +
+                "injection is immediately visible in combat. Set false for normal play.");
 
             ForceCustomEncounter = Config.Bind("Adventures", "ForceCustomEncounter", false,
                 "DEBUG: replace every overworld encounter that spawns with the custom 'Smuggler's Cache' so " +
@@ -76,6 +86,7 @@ namespace FTKModFramework
             if (!Plugin.EnableSampleContent.Value) return;
             Run("sample weapon/ability", SampleContent.Register);
             Run("thief class", ThiefClass.Register);
+            Run("cutpurse enemy", CutpurseEnemy.Register);
             Run("sample encounter + adventure", AdventureContent.Register);
         }
 

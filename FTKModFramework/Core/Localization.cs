@@ -56,6 +56,20 @@ namespace FTKModFramework.Core
             if (proficiencyId == null) { description = null; return false; }
             return ProficiencyDescriptions.TryGetValue(proficiencyId, out description);
         }
+
+        // Enemy description (the bestiary / inspect text). The display NAME reuses the shared Names map.
+        private static readonly Dictionary<string, string> EnemyDescriptions = new Dictionary<string, string>();
+
+        public static void SetEnemyDescription(string enemyId, string description)
+        {
+            EnemyDescriptions[enemyId] = description;
+        }
+
+        public static bool TryGetEnemyDescription(string enemyId, out string description)
+        {
+            if (enemyId == null) { description = null; return false; }
+            return EnemyDescriptions.TryGetValue(enemyId, out description);
+        }
     }
 
     [HarmonyPatch(typeof(FTK_itembase), "GetLocalizedName")]
@@ -96,13 +110,19 @@ namespace FTKModFramework.Core
     {
         private static void Postfix(FTK_proficiencyTable __instance, ref string __result)
         {
-            // 1) explicit per-proficiency override wins
+            // 1) explicit per-proficiency override wins. Our custom steal abilities (Cutpurse, Thief Steal)
+            //    each register an explicit description, so tier-1 always handles OUR content.
             string desc;
             if (Localization.TryGetProficiencyDescription(__instance.m_ID, out desc)) { __result = desc; return; }
 
-            // 2) fill in the StealGold category the game's switch forgot, using its own "Robbed" string
+            // 2) Fallback for VANILLA steal abilities only. The game's own GetCategoryDescription switch has
+            //    no case for StealGold / StealItem, so those categories fall through to a
+            //    "GetCategoryDescription #StealGold#" placeholder. We fill them in with the game's own
+            //    "Robbed" string. Kept (not deleted) because removing it would regress vanilla steal
+            //    tooltips that hit the same placeholder; custom steal abilities never reach here (tier-1).
             if (__instance.m_ProficiencyPrefab != null &&
-                __instance.m_ProficiencyPrefab.m_Category == ProficiencyBase.Category.StealGold)
+                (__instance.m_ProficiencyPrefab.m_Category == ProficiencyBase.Category.StealGold ||
+                 __instance.m_ProficiencyPrefab.m_Category == ProficiencyBase.Category.StealItem))
             {
                 __result = FTKHub.Localized<TextMisc>("STR_profRobbed");
             }
@@ -130,6 +150,29 @@ namespace FTKModFramework.Core
             string flavor;
             if (entry != null && Localization.TryGetClassFlavor(entry.m_ID, out flavor) && __instance.m_ClassFlavor != null)
                 __instance.m_ClassFlavor.text = flavor;
+        }
+    }
+
+    // Enemy name shown in combat / the bestiary. GetEnemyDisplay() is wrapped in try/catch and otherwise
+    // falls back to Localized<TextEnemy>("STR_"+m_ID) (a placeholder for our custom ids), so a postfix
+    // cleanly substitutes the name we registered.
+    [HarmonyPatch(typeof(FTK_enemyCombat), "GetEnemyDisplay")]
+    internal static class EnemyName_Patch
+    {
+        private static void Postfix(FTK_enemyCombat __instance, ref string __result)
+        {
+            string name;
+            if (Localization.TryGetName(__instance.m_ID, out name)) __result = name;
+        }
+    }
+
+    [HarmonyPatch(typeof(FTK_enemyCombat), "GetEnemyDescription")]
+    internal static class EnemyDescription_Patch
+    {
+        private static void Postfix(FTK_enemyCombat __instance, ref string __result)
+        {
+            string desc;
+            if (Localization.TryGetEnemyDescription(__instance.m_ID, out desc)) __result = desc;
         }
     }
 }
