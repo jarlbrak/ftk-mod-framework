@@ -177,6 +177,15 @@ namespace FTKModFramework.Core.UI
             row.name = "ModRow_" + key;
             row.SetActive(true); // the source may be inactive at rest; the clone must be visible.
 
+            // The cloned options row carries the source's sizing, which does not stack in our
+            // VerticalLayoutGroup: rows overlapped with no height (the second row's toggle hid behind the
+            // first). Give each row an explicit height so the layout puts every mod on its own line.
+            LayoutElement rowLayout = row.GetComponent<LayoutElement>();
+            if (rowLayout == null) rowLayout = row.AddComponent<LayoutElement>();
+            rowLayout.minHeight = 48f;
+            rowLayout.preferredHeight = 48f;
+            rowLayout.flexibleHeight = 0f;
+
             Toggle toggle = row.GetComponent<Toggle>();
             if (toggle == null)
             {
@@ -191,9 +200,15 @@ namespace FTKModFramework.Core.UI
             // one if the clone lacks it. A non-"STR_" literal is left untouched by FTKLocalizationUI.
             Text label = row.GetComponentInChildren<Text>(true);
             if (label != null)
+            {
                 label.text = RowLabel(entry);
+                label.color = Color.white;             // the source label can render faint; normalize it
+                label.alignment = TextAnchor.MiddleLeft;
+            }
             else
+            {
                 AddLabelChild(row.transform, RowLabel(entry));
+            }
 
             // Reflect current state, THEN wire the listener. Order matters: setting isOn can invoke
             // onValueChanged, so we set it first (while no listener is attached) to avoid a spurious persist.
