@@ -53,6 +53,70 @@ namespace FTKModFramework.Core.Data
         }
 
         /// <summary>
+        /// True iff <paramref name="fieldType"/> is one of the five content-id enums (FR-6), or an array
+        /// whose element type is one of them. These are the Phase-2 REFERENCE fields: their value names a
+        /// row that may be registered by a DIFFERENT file (e.g. a class' m_StartWeapon naming a custom
+        /// weapon), so they can only be resolved AFTER every base row exists. Every other field type
+        /// (scalars, vanilla enums like FTK_weaponStats2.SkillType, nested objects like CharacterSkills,
+        /// non-content-id id-arrays like FTK_skinset.ID[]) is a Phase-1 BASE field.
+        ///
+        /// This reuses the SINGLE <see cref="ContentIdDbsByEnum"/> table that drives content-id resolution;
+        /// the two-phase split and the resolution share one definition of "content-id enum", never two.
+        /// </summary>
+        internal static bool IsContentIdField(Type fieldType)
+        {
+            if (fieldType == null) return false;
+            Type t = fieldType.IsArray ? fieldType.GetElementType() : fieldType;
+            return t != null && t.IsEnum && ContentIdDbsByEnum.ContainsKey(t);
+        }
+
+        /// <summary>
+        /// Partition an entry's <paramref name="fields"/> into Phase-1 BASE writes and Phase-2 REFERENCE
+        /// writes for a row of type <paramref name="rowType"/> (FR-6). Each member name is alias-resolved
+        /// (the same path <see cref="Apply"/> uses), looked up by its <see cref="System.Reflection.FieldInfo"/>,
+        /// then classified by <see cref="IsContentIdField"/>. An UNKNOWN member is recorded once here (as a
+        /// warning) and dropped from BOTH buckets so neither phase warns about it twice. The two returned
+        /// dictionaries are keyed by the alias-resolved REAL field name, so the phases call
+        /// <c>ApplyResolved</c> (raw names) rather than re-running alias resolution.
+        /// </summary>
+        public static void Split(Type rowType, string kind, Dictionary<string, object> fields,
+            string context, ValidationReport report,
+            out Dictionary<string, object> baseFields, out Dictionary<string, object> referenceFields)
+        {
+            baseFields = new Dictionary<string, object>();
+            referenceFields = new Dictionary<string, object>();
+            if (rowType == null || fields == null) return;
+
+            foreach (KeyValuePair<string, object> kv in fields)
+            {
+                string realName = AliasTable.Resolve(kind, kv.Key);
+                System.Reflection.FieldInfo field = Reflect.Field(rowType, realName);
+                if (field == null)
+                {
+                    report.Warning(context + ": unknown field '" + realName + "' on " + rowType.Name + " (skipped).");
+                    continue;
+                }
+                if (IsContentIdField(field.FieldType)) referenceFields[realName] = kv.Value;
+                else baseFields[realName] = kv.Value;
+            }
+        }
+
+        /// <summary>
+        /// Apply a dictionary of ALREADY alias-resolved (raw) field names to <paramref name="row"/>.
+        /// Used by the two-phase loader after <see cref="Split"/> has bucketed and pre-resolved the names.
+        /// Returns the count successfully written.
+        /// </summary>
+        public static int ApplyResolved(object row, Dictionary<string, object> resolvedFields, string context, ValidationReport report)
+        {
+            if (row == null || resolvedFields == null) return 0;
+
+            int applied = 0;
+            foreach (KeyValuePair<string, object> kv in resolvedFields)
+                if (ApplyField(row, kv.Key, kv.Value, context, report)) applied++;
+            return applied;
+        }
+
+        /// <summary>
         /// Set one member, branching on the resolved field type. Returns true if the write succeeded.
         /// </summary>
         private static bool ApplyField(object row, string name, object value, string context, ValidationReport report)
@@ -143,8 +207,10 @@ namespace FTKModFramework.Core.Data
                     result = Enum.ToObject(enumType, synthetic);
                     return true;
                 }
-                report.Warning(context + ": field '" + name + "' value '" + token +
-                    "' is neither a vanilla " + enumType.Name + " name nor a known custom id (skipped).");
+                // A content-id REFERENCE that resolves to neither a vanilla name nor a known custom id is a
+                // DANGLING REFERENCE (FR-7) — an error (the named row does not exist), not a coercion warning.
+                report.Error(context + ": field '" + name + "' references '" + token +
+                    "' which is neither a vanilla " + enumType.Name + " name nor a known custom id (dangling reference; skipped).");
                 return false;
             }
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using GridEditor;
+using FTKModFramework.Core;
 
 namespace FTKModFramework.Core.Data
 {
@@ -10,63 +12,62 @@ namespace FTKModFramework.Core.Data
     /// rows directly and never re-implements <c>ContentRegistry</c> (spec #6): it only DRIVES the
     /// authoring helpers, exactly as a hand-written content class would.
     ///
-    /// P1a was single-phase. P1b keeps the collect/register split but SORTS the collected work list by
-    /// ordinal <c>(modGuid, id)</c> before registering, so positional content (classes register at
-    /// id == array index) lands in IDENTICAL slots on every co-op client regardless of OS enumeration
-    /// order (spec FR-1/FR-3/FR-8). The collect/register split is also the two-phase seam — P1c (#9)
-    /// inserts a "declare ids" pass before a "resolve references" pass without reshaping this class.
+    /// P1c is TWO-PHASE (FR-6). A field is a Phase-2 REFERENCE field iff its type is one of the five
+    /// content-id enums (or an array of one) — see <see cref="OverrideEngine.IsContentIdField"/>; every
+    /// other field is a Phase-1 BASE field.
+    ///   Phase 1: for each entry (sorted by ordinal (modGuid, id)) call the matching <c>Content.Add*</c>
+    ///            applying ONLY base fields, then CACHE the returned live row tagged with its kind.
+    ///   Phase 2: for each cached row apply its REFERENCE fields (a custom weapon a class points at may
+    ///            be registered by a later file, so references resolve only after every base row exists),
+    ///            then attach inline <c>proficiencies</c>, then map flavor/description to Localization.
+    /// This makes cross-file references ORDER-INDEPENDENT: the class file may sort before the weapon file
+    /// it references and still resolve, because Phase 2 runs after every Phase-1 row is registered.
     ///
-    /// Fault isolation is total: one bad manifest, file, entry, template, or field never aborts the
-    /// load. Everything tolerated is recorded on the <see cref="ValidationReport"/> and summarized at
-    /// the end via <c>Plugin.Log</c>.
+    /// The (modGuid, id) pre-sort is the load-order contract positional content depends on: a class
+    /// registers at id == array index, so every co-op client MUST mint those indices in the same order
+    /// (FR-1/FR-3/FR-8). Fault isolation is total: one bad manifest, file, entry, template, field, or
+    /// reference never aborts the load. Everything tolerated is recorded on the <see cref="ValidationReport"/>
+    /// and summarized at the end via <c>Plugin.Log</c>.
     /// </summary>
     internal static class ContentLoader
     {
         /// <summary>Entry point called from the TableManager.Initialize postfix (after sample content).</summary>
         public static void Load(string contentRoot)
         {
+            Stopwatch sw = Stopwatch.StartNew();
             ValidationReport report = new ValidationReport();
 
             List<DiscoveredMod> mods = ModDiscovery.Discover(contentRoot, report);
             List<PendingEntry> pending = CollectEntries(mods, report);
 
             // Deterministic registration order across machines: sort by ordinal (modGuid, id). This is the
-            // load-order contract positional content depends on — a class registers at id == array index,
-            // so every co-op client MUST mint those indices in the same order (spec FR-1/FR-3/FR-8).
+            // load-order contract positional content depends on (a class registers at id == array index),
+            // and it is also the determinism contract for the synthetic-id band (FR-1/FR-3/FR-8).
             pending.Sort(CompareEntries);
 
-            int registered = 0;
-            int weaponCount = 0;
-            string firstWeaponId = null;
-            float firstWeaponMaxDmg = 0f;
-            ClassResult firstClass = ClassResult.None;
-
+            // --- Phase 1: register base rows, cache them for phase 2 ---
+            List<Cached> cached = new List<Cached>();
+            HashSet<string> seenIds = new HashSet<string>(StringComparer.Ordinal); // modGuid + "/" + id
             foreach (PendingEntry pe in pending)
             {
-                RegisterResult r = RegisterEntry(pe, report);
-                if (!r.Registered) continue;
-                registered++;
-                if (r.IsWeapon)
-                {
-                    weaponCount++;
-                    if (firstWeaponId == null)
-                    {
-                        firstWeaponId = pe.Entry.Id;
-                        firstWeaponMaxDmg = r.WeaponMaxDmg;
-                    }
-                }
-                if (r.IsClass && !firstClass.Present) firstClass = r.ClassInfo;
+                Cached c = RegisterPhase1(pe, seenIds, report);
+                if (c != null) cached.Add(c);
             }
 
-            EmitSelfTest(registered, weaponCount, firstWeaponId, firstWeaponMaxDmg);
-            EmitClassSelfTest(firstClass);
-            LogSummary(report);
+            // --- Phase 2: resolve cross-file references, attach proficiencies, set localization ---
+            foreach (Cached c in cached) ResolvePhase2(c, report);
+
+            sw.Stop();
+
+            EmitParitySelfTest(cached);
+            EmitDeterminismSelfTest(cached);
+            LogSummary(report, cached.Count, pending.Count, sw.ElapsedMilliseconds);
         }
 
         /// <summary>
-        /// Phase-1 collect: parse every discovered mod's files into a flat, ordered work list. Parsing
-        /// is fault-tolerant (a malformed file is recorded and skipped). The work list preserves the
-        /// deterministic (modGuid, folder, filename, in-file) order so id minting is reproducible.
+        /// Parse every discovered mod's files into a flat, ordered work list. Parsing is fault-tolerant
+        /// (a malformed file is recorded and skipped). The work list preserves the deterministic
+        /// (modGuid, folder, filename, in-file) order so id minting is reproducible before the final sort.
         /// </summary>
         private static List<PendingEntry> CollectEntries(List<DiscoveredMod> mods, ValidationReport report)
         {
@@ -91,148 +92,357 @@ namespace FTKModFramework.Core.Data
             return pending;
         }
 
+        // ===================== PHASE 1 =====================
+
         /// <summary>
-        /// Register one entry through the matching public helper. Resolves the <c>template</c> string to
-        /// the kind's <c>.ID</c> enum via case-insensitive <c>Enum.Parse</c>, then applies scalar field
-        /// overrides inside the helper's configure callback via <see cref="OverrideEngine"/>. Unknown
-        /// kind / template / missing id are recorded errors and skip the entry.
+        /// Phase 1: validate the entry, split its fields into base/reference, register the base row via the
+        /// kind's public helper (applying ONLY base fields), and cache the live row for Phase 2. A duplicate
+        /// id within the same mod is an error and the SECOND entry is skipped (FR-7). Returns null when the
+        /// entry was skipped for any reason.
         /// </summary>
-        private static RegisterResult RegisterEntry(PendingEntry pe, ValidationReport report)
+        private static Cached RegisterPhase1(PendingEntry pe, HashSet<string> seenIds, ValidationReport report)
         {
             ContentEntry entry = pe.Entry;
             string ctx = Context(pe);
 
-            if (IsBlank(entry.Kind)) { report.Error(ctx + ": entry missing 'kind'."); return RegisterResult.Skipped; }
-            if (IsBlank(entry.Id)) { report.Error(ctx + ": entry missing 'id'."); return RegisterResult.Skipped; }
-            if (IsBlank(entry.Template)) { report.Error(ctx + ": entry '" + entry.Id + "' missing 'template'."); return RegisterResult.Skipped; }
+            if (IsBlank(entry.Kind)) { report.Error(ctx + ": entry missing 'kind'."); return null; }
+            if (IsBlank(entry.Id)) { report.Error(ctx + ": entry missing 'id'."); return null; }
+            if (IsBlank(entry.Template)) { report.Error(ctx + ": entry '" + entry.Id + "' missing 'template'."); return null; }
 
+            string idKey = pe.ModGuid + "/" + entry.Id;
+            if (!seenIds.Add(idKey))
+            {
+                report.Error(ctx + ": duplicate id '" + entry.Id + "' within mod '" + pe.ModGuid + "' (skipped).");
+                return null;
+            }
+
+            string entryCtx = ctx + " '" + entry.Id + "'";
             switch (entry.Kind.ToLowerInvariant())
             {
-                case "weapon": return RegisterWeapon(pe, ctx, report);
-                case "class": return RegisterClass(pe, ctx, report);
+                case "weapon": return RegisterWeapon(pe, entryCtx, report);
+                case "item": return RegisterItem(pe, entryCtx, report);
+                case "proficiency": return RegisterProficiency(pe, entryCtx, report);
+                case "class": return RegisterClass(pe, entryCtx, report);
+                case "enemy": return RegisterEnemy(pe, entryCtx, report);
+                case "encounter": return RegisterEncounter(pe, entryCtx, report);
                 default:
                     report.Error(ctx + ": entry '" + entry.Id + "' has unknown kind '" + entry.Kind + "' (skipped).");
-                    return RegisterResult.Skipped;
+                    return null;
             }
         }
 
-        private static RegisterResult RegisterWeapon(PendingEntry pe, string ctx, ValidationReport report)
+        private static Cached RegisterWeapon(PendingEntry pe, string ctx, ValidationReport report)
         {
             ContentEntry entry = pe.Entry;
-
             FTK_itembase.ID template;
-            if (!TryParseEnum<FTK_itembase.ID>(entry.Template, out template))
+            if (!TryParseEnum(entry.Template, out template))
             {
-                report.Error(ctx + ": entry '" + entry.Id + "' has unknown weapon template '" + entry.Template + "' (skipped).");
-                return RegisterResult.Skipped;
+                report.Error(ctx + ": unknown weapon template '" + entry.Template + "' (skipped).");
+                return null;
             }
 
-            int appliedFields = 0;
-            FTK_weaponStats2 row = Content.AddWeapon(
-                pe.ModGuid, entry.Id, template, entry.DisplayName,
-                w => { appliedFields = OverrideEngine.Apply(w, "weapon", entry.Fields, ctx + " '" + entry.Id + "'", report); });
+            Dictionary<string, object> baseFields, refFields;
+            OverrideEngine.Split(typeof(FTK_weaponStats2), "weapon", entry.Fields, ctx, report, out baseFields, out refFields);
 
-            Plugin.Log.LogInfo("Data: registered weapon '" + entry.Id + "' (template " + template +
-                ", " + appliedFields + " field override(s)).");
+            int applied = 0;
+            FTK_weaponStats2 row = Content.AddWeapon(pe.ModGuid, entry.Id, template, entry.DisplayName,
+                w => { applied = OverrideEngine.ApplyResolved(w, baseFields, ctx, report); });
 
-            return RegisterResult.Weapon(row != null ? row._maxdmg : 0f);
+            Plugin.Log.LogInfo("Data: registered weapon '" + entry.Id + "' (template " + template + ", " + applied + " base field(s)).");
+            return Cached.Make(pe, "weapon", row, refFields);
+        }
+
+        private static Cached RegisterItem(PendingEntry pe, string ctx, ValidationReport report)
+        {
+            ContentEntry entry = pe.Entry;
+            FTK_itembase.ID template;
+            if (!TryParseEnum(entry.Template, out template))
+            {
+                report.Error(ctx + ": unknown item template '" + entry.Template + "' (skipped).");
+                return null;
+            }
+
+            Dictionary<string, object> baseFields, refFields;
+            OverrideEngine.Split(typeof(FTK_items), "item", entry.Fields, ctx, report, out baseFields, out refFields);
+
+            int applied = 0;
+            FTK_items row = Content.AddItem(pe.ModGuid, entry.Id, template, entry.DisplayName,
+                it => { applied = OverrideEngine.ApplyResolved(it, baseFields, ctx, report); });
+
+            Plugin.Log.LogInfo("Data: registered item '" + entry.Id + "' (template " + template + ", " + applied + " base field(s)).");
+            return Cached.Make(pe, "item", row, refFields);
+        }
+
+        private static Cached RegisterProficiency(PendingEntry pe, string ctx, ValidationReport report)
+        {
+            ContentEntry entry = pe.Entry;
+            FTK_proficiencyTable.ID template;
+            if (!TryParseEnum(entry.Template, out template))
+            {
+                report.Error(ctx + ": unknown proficiency template '" + entry.Template + "' (skipped).");
+                return null;
+            }
+
+            Dictionary<string, object> baseFields, refFields;
+            OverrideEngine.Split(typeof(FTK_proficiencyTable), "proficiency", entry.Fields, ctx, report, out baseFields, out refFields);
+
+            int applied = 0;
+            FTK_proficiencyTable row = Content.AddProficiency(pe.ModGuid, entry.Id, template, entry.DisplayName,
+                p => { applied = OverrideEngine.ApplyResolved(p, baseFields, ctx, report); });
+
+            Plugin.Log.LogInfo("Data: registered proficiency '" + entry.Id + "' (template " + template + ", " + applied + " base field(s)).");
+            return Cached.Make(pe, "proficiency", row, refFields);
         }
 
         /// <summary>
         /// Register a playable CLASS via <see cref="Content.AddClass"/>. The class id == its array index
-        /// (positional, load-order-dependent) — which is exactly why <see cref="Load"/> sorts the pending
-        /// list by (modGuid, id) first. Fields (the stat block, m_StartItems, m_CharacterSkills, the
-        /// primary stat, ...) are resolved by <see cref="OverrideEngine"/>; aliases map friendly names
-        /// (strength -&gt; _toughness, skills -&gt; m_CharacterSkills, ...) to the real fields.
+        /// (positional, load-order-dependent), which is exactly why <see cref="Load"/> sorts the pending
+        /// list by (modGuid, id) first. The stat block and other base fields apply now; m_StartWeapon /
+        /// m_StartItems are content-id REFERENCES and resolve in Phase 2 (FR-6).
         /// </summary>
-        private static RegisterResult RegisterClass(PendingEntry pe, string ctx, ValidationReport report)
+        private static Cached RegisterClass(PendingEntry pe, string ctx, ValidationReport report)
         {
             ContentEntry entry = pe.Entry;
-
             FTK_playerGameStart.ID template;
-            if (!TryParseEnum<FTK_playerGameStart.ID>(entry.Template, out template))
+            if (!TryParseEnum(entry.Template, out template))
             {
-                report.Error(ctx + ": entry '" + entry.Id + "' has unknown class template '" + entry.Template + "' (skipped).");
-                return RegisterResult.Skipped;
+                report.Error(ctx + ": unknown class template '" + entry.Template + "' (skipped).");
+                return null;
             }
 
-            int appliedFields = 0;
-            FTK_playerGameStart row = Content.AddClass(
-                pe.ModGuid, entry.Id, template, entry.DisplayName,
-                c => { appliedFields = OverrideEngine.Apply(c, "class", entry.Fields, ctx + " '" + entry.Id + "'", report); });
+            Dictionary<string, object> baseFields, refFields;
+            OverrideEngine.Split(typeof(FTK_playerGameStart), "class", entry.Fields, ctx, report, out baseFields, out refFields);
+
+            int applied = 0;
+            FTK_playerGameStart row = Content.AddClass(pe.ModGuid, entry.Id, template, entry.DisplayName,
+                c => { applied = OverrideEngine.ApplyResolved(c, baseFields, ctx, report); });
 
             if (row == null)
             {
-                report.Error(ctx + ": entry '" + entry.Id + "' failed to register as a class (skipped).");
-                return RegisterResult.Skipped;
+                report.Error(ctx + ": failed to register as a class (skipped).");
+                return null;
             }
 
-            FTK_playerGameStartDB db = Content.Db<FTK_playerGameStartDB>();
-            int id = db.GetIntFromID(entry.Id);
-            int lastIndex = ((Array)Reflect.GetField(db, "m_Array")).Length - 1;
-
-            Plugin.Log.LogInfo("Data: registered class '" + entry.Id + "' (template " + template +
-                ", id/index " + id + ", " + appliedFields + " field override(s)).");
-
-            return RegisterResult.Class(new ClassResult(entry.Id, id, lastIndex, row));
+            int id = Content.Db<FTK_playerGameStartDB>().GetIntFromID(entry.Id);
+            Plugin.Log.LogInfo("Data: registered class '" + entry.Id + "' (template " + template + ", id/index " + id + ", " + applied + " base field(s)).");
+            return Cached.Make(pe, "class", row, refFields);
         }
 
-        private static void EmitSelfTest(int registered, int weaponCount, string firstWeaponId, float firstWeaponMaxDmg)
+        private static Cached RegisterEnemy(PendingEntry pe, string ctx, ValidationReport report)
         {
-            if (weaponCount > 0 && firstWeaponId != null)
+            ContentEntry entry = pe.Entry;
+            FTK_enemyCombat.ID template;
+            if (!TryParseEnum(entry.Template, out template))
             {
-                Plugin.Log.LogInfo("SELF-TEST PASS: data-content loaded " + registered + " entries (" +
-                    weaponCount + " weapon '" + firstWeaponId + "' maxdmg=" + firstWeaponMaxDmg + ").");
+                report.Error(ctx + ": unknown enemy template '" + entry.Template + "' (skipped).");
+                return null;
             }
-            else if (registered > 0)
+
+            Dictionary<string, object> baseFields, refFields;
+            OverrideEngine.Split(typeof(FTK_enemyCombat), "enemy", entry.Fields, ctx, report, out baseFields, out refFields);
+
+            int applied = 0;
+            FTK_enemyCombat row = Content.AddEnemy(pe.ModGuid, entry.Id, template, entry.DisplayName,
+                e => { applied = OverrideEngine.ApplyResolved(e, baseFields, ctx, report); });
+
+            Plugin.Log.LogInfo("Data: registered enemy '" + entry.Id + "' (template " + template + ", " + applied + " base field(s)).");
+            return Cached.Make(pe, "enemy", row, refFields);
+        }
+
+        private static Cached RegisterEncounter(PendingEntry pe, string ctx, ValidationReport report)
+        {
+            ContentEntry entry = pe.Entry;
+            FTK_miniEncounter.ID template;
+            if (!TryParseEnum(entry.Template, out template))
             {
-                Plugin.Log.LogInfo("SELF-TEST PASS: data-content loaded " + registered + " entries (no weapons).");
+                report.Error(ctx + ": unknown encounter template '" + entry.Template + "' (skipped).");
+                return null;
+            }
+
+            Dictionary<string, object> baseFields, refFields;
+            OverrideEngine.Split(typeof(FTK_miniEncounter), "encounter", entry.Fields, ctx, report, out baseFields, out refFields);
+
+            int applied = 0;
+            FTK_miniEncounter row = Content.AddEncounter(pe.ModGuid, entry.Id, template, entry.DisplayName,
+                en => { applied = OverrideEngine.ApplyResolved(en, baseFields, ctx, report); });
+
+            Plugin.Log.LogInfo("Data: registered encounter '" + entry.Id + "' (template " + template + ", " + applied + " base field(s)).");
+            return Cached.Make(pe, "encounter", row, refFields);
+        }
+
+        // ===================== PHASE 2 =====================
+
+        /// <summary>
+        /// Phase 2 for one cached row: apply its content-id REFERENCE fields (now that every base row
+        /// exists, a cross-file reference like a class' m_StartWeapon resolves regardless of file order),
+        /// attach any inline <c>proficiencies</c> by kind, then map flavor/description to Localization.
+        /// </summary>
+        private static void ResolvePhase2(Cached c, ValidationReport report)
+        {
+            string ctx = c.Context;
+
+            int refs = OverrideEngine.ApplyResolved(c.Row, c.ReferenceFields, ctx, report);
+            if (refs > 0) Plugin.Log.LogInfo("Data: resolved " + refs + " reference field(s) on '" + c.Id + "'.");
+
+            AttachProficiencies(c, report);
+            ApplyLocalization(c);
+        }
+
+        /// <summary>Attach inline <c>proficiencies</c>: weapon -&gt; AttachProficiencies, enemy -&gt; AttachEnemyProficiencies.</summary>
+        private static void AttachProficiencies(Cached c, ValidationReport report)
+        {
+            string[] profs = c.Entry.Proficiencies;
+            if (profs == null || profs.Length == 0) return;
+
+            if (c.Kind == "weapon")
+            {
+                Content.AttachProficiencies((FTK_weaponStats2)c.Row, profs);
+            }
+            else if (c.Kind == "enemy")
+            {
+                Content.AttachEnemyProficiencies((FTK_enemyCombat)c.Row, profs);
             }
             else
             {
-                Plugin.Log.LogInfo("Data: no content entries registered (root empty or all skipped).");
+                report.Warning(c.Context + ": 'proficiencies' is only supported on weapon/enemy, not '" + c.Kind + "' (ignored).");
             }
+        }
+
+        /// <summary>Map the entry's flavor/description text to the Localization helper for its kind.</summary>
+        private static void ApplyLocalization(Cached c)
+        {
+            if (c.Kind == "class" && !IsBlank(c.Entry.Flavor))
+                Localization.SetClassFlavor(c.Id, c.Entry.Flavor);
+            else if (c.Kind == "proficiency" && !IsBlank(c.Entry.Description))
+                Localization.SetProficiencyDescription(c.Id, c.Entry.Description);
+            else if (c.Kind == "enemy" && !IsBlank(c.Entry.Description))
+                Localization.SetEnemyDescription(c.Id, c.Entry.Description);
+        }
+
+        // ===================== SELF-TESTS =====================
+
+        /// <summary>
+        /// Parity self-test (the #9 grep target): reproduce <c>Content/ThiefClass.cs</c> in JSON minus the
+        /// custom Steal MonoBehaviour. Asserts the class' m_StartWeapon resolved CROSS-FILE to a custom
+        /// synthetic id, three proficiencies are attached to that weapon, the seeded dangling start-item was
+        /// skipped (the rest of m_StartItems still loaded), and the flavor text was registered.
+        /// </summary>
+        private static void EmitParitySelfTest(List<Cached> cached)
+        {
+            Cached thief = Find(cached, "class", "sampledata_thief");
+            Cached weapon = Find(cached, "weapon", "sampledata_shadowfang");
+            if (thief == null || weapon == null) return; // sample data not present: nothing to assert.
+
+            FTK_playerGameStart row = (FTK_playerGameStart)thief.Row;
+            int weaponSynthetic = Content.Db<FTK_weaponStats2DB>().GetIntFromID("sampledata_shadowfang");
+
+            bool startWeaponResolved = (int)row.m_StartWeapon == weaponSynthetic && IdAllocator.IsCustom((int)row.m_StartWeapon);
+            int startItems = row.m_StartItems != null ? row.m_StartItems.Length : 0;
+            bool danglingSkipped = startItems == 4;   // four vanilla ids kept; the seeded dangling element dropped.
+
+            int profCount = ProficiencyCount((FTK_weaponStats2)weapon.Row);
+            bool profsAttached = profCount >= 3;
+
+            string flavor;
+            bool flavorSet = Localization.TryGetClassFlavor("sampledata_thief", out flavor) && !IsBlank(flavor);
+
+            bool ok = startWeaponResolved && profsAttached && danglingSkipped && flavorSet;
+            if (ok)
+                Plugin.Log.LogInfo("SELF-TEST PASS: data-content ThiefClass parity (startWeapon=" + weaponSynthetic +
+                    " resolved cross-file, 3 profs attached, dangling skipped, flavor set)");
+            else
+                Plugin.Log.LogError("SELF-TEST FAIL [data-parity]: startWeaponResolved=" + startWeaponResolved +
+                    " profsAttached=" + profsAttached + " (" + profCount + ") danglingSkipped=" + danglingSkipped +
+                    " (startItems=" + startItems + ") flavorSet=" + flavorSet + ".");
         }
 
         /// <summary>
-        /// Prove the data-class path end to end: the class registered via Content.AddClass at id == array
-        /// index; a stat resolved; a content-id array element (m_StartItems[0]) resolved to a real int id;
-        /// a nested skill bool set; and that a value set by ALIAS equals the same value set by the RAW
-        /// field name (the test class sets _toughness via the 'strength' alias and _awareness via the raw
-        /// field, both to the same number, so equality proves alias and raw share one resolution path).
+        /// Determinism self-test (the #9 grep target): for the HASHED kinds (weapon + proficiency — those
+        /// minted from IdAllocator's high band, NOT classes which use id == array index), assert the
+        /// registered synthetic id equals <c>IdAllocator.Allocate(modGuid, dbType.Name + "/" + id)</c>
+        /// computed directly. The expected int is DERIVED from the allocator, never a literal (FR-8).
         /// </summary>
-        private static void EmitClassSelfTest(ClassResult c)
+        private static void EmitDeterminismSelfTest(List<Cached> cached)
         {
-            if (!c.Present) return; // no data class in the loaded mods: nothing to assert.
+            int hashedKinds = 0;
+            bool allMatch = true;
 
-            FTK_playerGameStart row = c.Row;
-            bool idIsIndex = c.Id == c.LastIndex;
-            float strength = row._toughness;
-            bool aliasEqualsRaw = row._toughness == row._awareness; // alias 'strength' vs raw '_awareness'
+            foreach (Cached c in cached)
+            {
+                Type dbType;
+                int registered;
+                if (!TryHashedRegisteredId(c, out dbType, out registered)) continue; // class/encounter/etc: skip.
+                hashedKinds++;
 
-            int startItemCount = row.m_StartItems != null ? row.m_StartItems.Length : 0;
-            bool firstItemResolved = startItemCount > 0 && row.m_StartItems[0] != FTK_itembase.ID.None;
-            bool sneak = row.m_CharacterSkills != null && row.m_CharacterSkills.m_Sneak;
+                int expected = IdAllocator.Allocate(c.ModGuid, dbType.Name + "/" + c.Id);
+                if (registered != expected)
+                {
+                    allMatch = false;
+                    Plugin.Log.LogError("SELF-TEST FAIL [data-determinism]: '" + c.Id + "' registered=" +
+                        registered + " expected=" + expected + " (db " + dbType.Name + ").");
+                }
+            }
 
-            bool ok = idIsIndex && firstItemResolved && sneak && aliasEqualsRaw;
-            if (ok)
-                Plugin.Log.LogInfo("SELF-TEST PASS: data-content class '" + c.ContentId + "' at index " + c.Id +
-                    " (str=" + strength + ", startItems=" + startItemCount + " resolved, skills.Sneak=true, alias strength==raw).");
-            else
-                Plugin.Log.LogError("SELF-TEST FAIL [data-class]: id=" + c.Id + " lastIndex=" + c.LastIndex +
-                    " idIsIndex=" + idIsIndex + " firstItemResolved=" + firstItemResolved +
-                    " sneak=" + sneak + " aliasEqualsRaw=" + aliasEqualsRaw + ".");
+            if (hashedKinds == 0) return; // no hashed content in the loaded mods: nothing to assert.
+            if (allMatch)
+                Plugin.Log.LogInfo("SELF-TEST PASS: data-content determinism (" + hashedKinds +
+                    " hashed kinds, synthetic id == IdAllocator.Allocate)");
         }
 
-        private static void LogSummary(ValidationReport report)
+        /// <summary>
+        /// The registered synthetic id for a HASHED-band kind (weapon -&gt; FTK_weaponStats2DB,
+        /// proficiency -&gt; FTK_proficiencyTableDB). Returns false for kinds that are not hash-allocated
+        /// (class uses id == array index; encounters/enemies/items are out of scope for this test set).
+        /// </summary>
+        private static bool TryHashedRegisteredId(Cached c, out Type dbType, out int registered)
         {
-            Plugin.Log.LogInfo("Data content load complete: " + report.Errors.Count + " error(s), " +
-                report.Warnings.Count + " warning(s).");
+            dbType = null;
+            registered = 0;
+            if (c.Kind == "weapon")
+            {
+                dbType = typeof(FTK_weaponStats2DB);
+                registered = Content.Db<FTK_weaponStats2DB>().GetIntFromID(c.Id);
+                return true;
+            }
+            if (c.Kind == "proficiency")
+            {
+                dbType = typeof(FTK_proficiencyTableDB);
+                registered = Content.Db<FTK_proficiencyTableDB>().GetIntFromID(c.Id);
+                return true;
+            }
+            return false;
+        }
+
+        // ===================== SUMMARY =====================
+
+        private static void LogSummary(ValidationReport report, int registered, int total, long elapsedMs)
+        {
+            Plugin.Log.LogInfo("Data content load complete: " + registered + "/" + total + " entries registered, " +
+                report.Errors.Count + " error(s), " + report.Warnings.Count + " warning(s), " + elapsedMs + " ms.");
             foreach (string w in report.Warnings) Plugin.Log.LogWarning("Data warning: " + w);
             foreach (string e in report.Errors) Plugin.Log.LogError("Data error: " + e);
         }
 
-        // --- helpers ---
+        // ===================== HELPERS =====================
+
+        /// <summary>Count distinct proficiencies on a weapon's prefab (the game's own read path).</summary>
+        private static int ProficiencyCount(FTK_weaponStats2 weapon)
+        {
+            if (weapon == null || weapon.m_Prefab == null) return 0;
+            UnityEngine.GameObject inst = UnityEngine.Object.Instantiate(weapon.m_Prefab);
+            int count = 0;
+            Weapon w = inst.GetComponentInChildren<Weapon>(true);
+            if (w != null && w.m_ProficiencyEffects != null) count = w.m_ProficiencyEffects.Count;
+            UnityEngine.Object.Destroy(inst);
+            return count;
+        }
+
+        private static Cached Find(List<Cached> cached, string kind, string id)
+        {
+            foreach (Cached c in cached)
+                if (c.Kind == kind && c.Id == id) return c;
+            return null;
+        }
 
         private static bool TryParseEnum<TEnum>(string value, out TEnum result) where TEnum : struct
         {
@@ -248,7 +458,6 @@ namespace FTKModFramework.Core.Data
         /// <summary>
         /// Deterministic ordinal sort key for the work list: (modGuid, id). Identical on every machine,
         /// so positional content (classes register at id == array index) gets the same slot everywhere.
-        /// A null id sorts before a non-null one; both null are equal (the register loop skips them).
         /// </summary>
         private static int CompareEntries(PendingEntry a, PendingEntry b)
         {
@@ -282,54 +491,36 @@ namespace FTKModFramework.Core.Data
             }
         }
 
-        /// <summary>Outcome of registering one entry, with the bits the self-test needs.</summary>
-        private struct RegisterResult
+        /// <summary>
+        /// A Phase-1 registered row carried into Phase 2: the live game row, its kind, the entry it came
+        /// from, and the alias-resolved REFERENCE (content-id) fields still to apply once every base row
+        /// exists.
+        /// </summary>
+        private sealed class Cached
         {
-            public bool Registered;
-            public bool IsWeapon;
-            public float WeaponMaxDmg;
-            public bool IsClass;
-            public ClassResult ClassInfo;
+            public readonly string ModGuid;
+            public readonly string Id;
+            public readonly string Kind;
+            public readonly object Row;
+            public readonly ContentEntry Entry;
+            public readonly Dictionary<string, object> ReferenceFields;
+            public readonly string Context;
 
-            public static readonly RegisterResult Skipped = new RegisterResult();
-
-            public static RegisterResult Weapon(float maxDmg)
+            private Cached(PendingEntry pe, string kind, object row, Dictionary<string, object> referenceFields)
             {
-                RegisterResult r = new RegisterResult();
-                r.Registered = true;
-                r.IsWeapon = true;
-                r.WeaponMaxDmg = maxDmg;
-                return r;
-            }
-
-            public static RegisterResult Class(ClassResult c)
-            {
-                RegisterResult r = new RegisterResult();
-                r.Registered = true;
-                r.IsClass = true;
-                r.ClassInfo = c;
-                return r;
-            }
-        }
-
-        /// <summary>The bits the class self-test reads: id/index match + the live row to probe fields on.</summary>
-        private struct ClassResult
-        {
-            public bool Present;
-            public string ContentId;
-            public int Id;
-            public int LastIndex;
-            public FTK_playerGameStart Row;
-
-            public static readonly ClassResult None = new ClassResult();
-
-            public ClassResult(string contentId, int id, int lastIndex, FTK_playerGameStart row)
-            {
-                Present = true;
-                ContentId = contentId;
-                Id = id;
-                LastIndex = lastIndex;
+                ModGuid = pe.ModGuid;
+                Id = pe.Entry.Id;
+                Kind = kind;
                 Row = row;
+                Entry = pe.Entry;
+                ReferenceFields = referenceFields;
+                Context = "[" + pe.ModGuid + "] " + System.IO.Path.GetFileName(pe.SourcePath) + " '" + pe.Entry.Id + "'";
+            }
+
+            public static Cached Make(PendingEntry pe, string kind, object row, Dictionary<string, object> referenceFields)
+            {
+                if (row == null) return null;
+                return new Cached(pe, kind, row, referenceFields);
             }
         }
     }
