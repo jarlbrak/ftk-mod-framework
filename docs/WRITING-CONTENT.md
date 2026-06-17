@@ -136,6 +136,45 @@ Gotchas (learned the hard way building the Thief's Steal):
 
 See `Content/ThiefStealProficiency.cs` for the full worked example.
 
+## New adventures & encounters
+
+> Design reference + the full how-it-works: [`ADVENTURES.md`](ADVENTURES.md).
+
+A whole **adventure / game-mode** is not a DB row — it's a `GameDefinition` deserialized from a
+`.ftk2` JSON file in the game's `StreamingAssets/mods`. `Adventures.AddFromTemplate` clones one of the
+player's *installed* adventures at runtime (so it ships no game content), retunes a few JSON fields, and
+registers it. The one required Harmony patch whitelists the name through `FTKHub.IsValidSaveFileName`
+(the single hardcoded gate the start screen checks). World generation, win condition, and saves are all
+data-driven off the cloned definition, so an adventure built from existing realms needs **no** generator
+patch and appears on the start screen automatically.
+
+```csharp
+using FTKModFramework.Core;
+using Newtonsoft.Json.Linq;
+
+// A new selectable adventure, cloned from the installed DungeonCrawl and retuned.
+Adventures.AddFromTemplate(
+    "com.you.mymod", "MyRun", "DungeonCrawl",
+    "My Run", "A richer romp across Fahrul.",
+    jo => { jo["m_GoldMultiplier"] = 1.5; jo["m_SelectionPriority"] = 250; });
+```
+
+A new **overworld encounter/event** *is* a DB row (`FTK_miniEncounterDB`), so it injects with the same
+clone-register pattern as items. The selector (`GameLogic.GetMiniEncounter`) walks the whole table and
+weight-rolls every eligible row, so a freshly registered one is automatically a candidate — no generator
+patch. An empty `m_RealmInclude` means "every realm"; `m_Rarity` reuses an existing draw-chance bucket
+(`Common`/`Uncommon`/`Rare`/`SuperRare`); display strings show verbatim (the game's text lookup returns
+the key itself when it has no row).
+
+```csharp
+Content.AddEncounter("com.you.mymod", "mymod_cache", FTK_miniEncounter.ID.TreasureChest, "Hidden Cache",
+    e => { e.m_Rarity = "Common"; e.m_RealmInclude = new FTK_realm.ID[0]; });
+```
+
+> Registering any custom **class** also installs a small guard on `uiQuickPlayerCreate.CanUseClass`: an
+> out-of-range class id in the party lobby falls back to a default class (the game's own intent) instead
+> of throwing and breaking the character-create screen.
+
 ## 6. How it works (why it's safe)
 
 - **IDs** — the `FTK_*.ID` enums are compile-time fixed. `IdAllocator` mints a deterministic
@@ -160,5 +199,6 @@ Synthetic IDs are deterministic precisely so host/client agree on what each id m
 The full inventory of the 57 `FTK_*DB` tables (items, weapons, proficiencies, hit effects,
 classes, skinsets, enemies, realms, encounters, quests, ...) is in
 [`PHASE0-TYPE-INVENTORY.md`](PHASE0-TYPE-INVENTORY.md). Helpers exist for items, weapons,
-proficiencies, and classes; an enemy helper is next. For any other table you can register directly
+proficiencies, classes, overworld encounters (`Content.AddEncounter`), and whole adventures
+(`Adventures.AddFromTemplate`); an enemy helper is next. For any other table you can register directly
 with `ContentRegistry.Register(db, guid, id, template, configure)`.
