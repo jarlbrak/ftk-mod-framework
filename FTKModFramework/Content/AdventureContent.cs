@@ -1,6 +1,4 @@
-using System.Text;
 using GridEditor;
-using HarmonyLib;
 using FTKModFramework.Core;
 
 namespace FTKModFramework
@@ -18,9 +16,6 @@ namespace FTKModFramework
     internal static class AdventureContent
     {
         public const string EncounterId = "ftkmf_smugglers_cache";
-
-        /// <summary>The synthetic int the encounter resolved to (read by the debug force-spawn patch).</summary>
-        internal static int EncounterIntId = -1;
 
         public static void Register()
         {
@@ -50,10 +45,7 @@ namespace FTKModFramework
                     e.m_DisplayBottom = "Fortune favours the curious.";
                 });
 
-            EncounterIntId = Content.Db<FTK_miniEncounterDB>().GetIntFromID(EncounterId);
-
             SelfTest();
-            DumpDrawChances();
 
             RegisterAdventure();
         }
@@ -103,38 +95,6 @@ namespace FTKModFramework
             else
                 Plugin.Log.LogError("SELF-TEST FAIL [encounter]: int=" + intId + " enum=" + (int)enumId +
                     " byInt=" + (byInt == null ? "null" : "ok") + " name=\"" + name + "\".");
-        }
-
-        /// <summary>
-        /// Runtime dump of FTK_encounterDrawChanceDB (the rarity -> weight table). Confirms the real
-        /// probability values behind our chosen "Common" bucket — one of the open questions from recon.
-        /// </summary>
-        private static void DumpDrawChances()
-        {
-            FTK_encounterDrawChanceDB db = Content.Db<FTK_encounterDrawChanceDB>();
-            StringBuilder sb = new StringBuilder("FTK_encounterDrawChanceDB rarity weights:");
-            foreach (FTK_encounterDrawChance row in db.m_Array)
-                sb.Append(" ").Append(row.m_ID).Append("=").Append(row.m_Probability).Append(";");
-            Plugin.Log.LogInfo(sb.ToString());
-        }
-    }
-
-    /// <summary>
-    /// DEBUG verification aid (config: Adventures/ForceCustomEncounter). When enabled, every overworld
-    /// encounter the game decides to spawn is replaced by the custom "Smuggler's Cache" — giving an
-    /// immediate, unambiguous in-game confirmation that injection worked. We only swap when the game
-    /// already chose to spawn SOMETHING (__result != None), so the target hex is guaranteed valid.
-    /// Turn this off for normal play.
-    /// </summary>
-    [HarmonyPatch(typeof(GameLogic), "GetMiniEncounter")]
-    internal static class ForceCustomEncounter_Patch
-    {
-        private static void Postfix(ref FTK_miniEncounter.ID __result)
-        {
-            if (Plugin.ForceCustomEncounter == null || !Plugin.ForceCustomEncounter.Value) return;
-            if (AdventureContent.EncounterIntId < 0) return;
-            if (__result == FTK_miniEncounter.ID.None) return; // nothing was going to spawn here anyway
-            __result = (FTK_miniEncounter.ID)AdventureContent.EncounterIntId;
         }
     }
 }

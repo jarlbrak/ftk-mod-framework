@@ -57,6 +57,29 @@ namespace FTKModFramework.Core
                 return null;
             }
 
+            string edited = LoadAndEditTemplate(templatePath, saveFileName, displayName, infoText, configureJson);
+            if (edited == null) return null;
+
+            GameDefinitionPreview preview = BuildPreview(edited, templatePath, saveFileName);
+            if (preview == null) return null;
+
+            // Adventures are string-keyed .ftk2 GameDefinitions registered by m_SaveFileName; they
+            // intentionally bypass IdAllocator (which is only for synthetic GridEditor FTK_*DB row ids).
+            Registered[saveFileName] = preview;
+            Whitelist.Add(saveFileName.ToUpper());
+
+            EnsureLoaded(); // inject immediately if the cache is already built
+            Plugin.Log.LogInfo("Adventure '" + saveFileName + "' (\"" + displayName +
+                "\") registered, cloned from '" + templateSaveFileName + "'.");
+            return preview;
+        }
+
+        /// <summary>Locate + parse the template, apply identity/display fields, run the caller's hook,
+        /// and return the edited JSON (null on parse failure).</summary>
+        private static string LoadAndEditTemplate(
+            string templatePath, string saveFileName, string displayName, string infoText,
+            Action<JObject> configureJson)
+        {
             JObject jo;
             try { jo = JObject.Parse(File.ReadAllText(templatePath)); }
             catch (Exception e)
@@ -72,8 +95,12 @@ namespace FTKModFramework.Core
             if (infoText != null) jo["m_GameInfoText"] = infoText;
             if (configureJson != null) configureJson(jo);
 
-            string edited = jo.ToString();
+            return jo.ToString();
+        }
 
+        /// <summary>Deserialize the preview from edited JSON and load its attract art (null on failure).</summary>
+        private static GameDefinitionPreview BuildPreview(string edited, string templatePath, string saveFileName)
+        {
             // Build the preview exactly as Cache.GameDefinitions.Initialize does (StringEnumConverter,
             // NO TypeNameHandling — the preview only needs the base scalar fields + the raw JSON).
             GameDefinitionPreview preview;
@@ -95,13 +122,6 @@ namespace FTKModFramework.Core
             preview.m_FullFileData = edited;                            // GetNewGameDefInstance() re-parses this
             preview.m_ModFolderPath = Path.GetDirectoryName(templatePath); // reuse the template's preview art
             TryLoadAttractImage(preview);
-
-            Registered[saveFileName] = preview;
-            Whitelist.Add(saveFileName.ToUpper());
-
-            EnsureLoaded(); // inject immediately if the cache is already built
-            Plugin.Log.LogInfo("Adventure '" + saveFileName + "' (\"" + displayName +
-                "\") registered, cloned from '" + templateSaveFileName + "'.");
             return preview;
         }
 

@@ -182,8 +182,6 @@ namespace FTKModFramework.Core
                     e.m_DisplayName = displayName;
                     if (configure != null) configure(e);
                 });
-            // Also register under the generic name map (harmless; keeps parity with other content kinds).
-            Localization.SetName(id, displayName);
             return row;
         }
     }
