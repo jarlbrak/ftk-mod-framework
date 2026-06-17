@@ -138,6 +138,8 @@ See `Content/ThiefStealProficiency.cs` for the full worked example.
 
 ## New adventures & encounters
 
+> Design reference + the full how-it-works: [`ADVENTURES.md`](ADVENTURES.md).
+
 A whole **adventure / game-mode** is not a DB row — it's a `GameDefinition` deserialized from a
 `.ftk2` JSON file in the game's `StreamingAssets/mods`. `Adventures.AddFromTemplate` clones one of the
 player's *installed* adventures at runtime (so it ships no game content), retunes a few JSON fields, and
