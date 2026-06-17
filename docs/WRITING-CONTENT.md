@@ -246,7 +246,35 @@ Content.AddEncounter("com.you.mymod", "mymod_cache", FTK_miniEncounter.ID.Treasu
 Co-op is Photon and has **no asset streaming** — every player must have the same mods installed.
 Synthetic IDs are deterministic precisely so host/client agree on what each id means.
 
-## 10. Content tables
+## 10. The in-game Mods menu: toggling, saves, and co-op
+
+The title screen has a **Mods** button (added by `Core/UI/ModsButtonPatch.cs`) that opens a panel
+listing every installed mod: the bundled sample content plus each discovered data mod. Each row has
+an on/off toggle. Toggling persists immediately (data mods to `PlayerPrefs`, the bundled demo to the
+`EnableSampleContent` config entry) and takes effect on the **next launch**: the framework injects all
+content once during `TableManager.Initialize`, so there is no live un-injection. This is spec #14.
+
+Two hazards are **documented but not enforced** in this slice:
+
+- **Disabling a mod can break a save that references its content.** A save stores entities by their id.
+  The sharpest case is a playable class: classes register at `id == array index` (see §8), so a saved
+  party member of a custom class is stored by that index. Turn the class's mod off and relaunch, and
+  that index now resolves to a different class or to nothing, which can fail to load or corrupt the
+  save. The same applies to any saved item, weapon, or in-progress encounter whose synthetic id is no
+  longer registered because its mod is off. The toggle does not check whether a mod's content is
+  referenced by an existing save; if you turned a mod off for a save that uses it, turn it back on to
+  recover that save.
+
+- **Co-op requires every player to enable the identical mod set.** Co-op is Photon with no asset
+  streaming (see §9): each client resolves ids locally, so all players already need the same mods
+  installed. The toggles are per machine (`PlayerPrefs` / local config), so two players can have the
+  same mods installed but different mods enabled, which desyncs exactly as a missing mod would. This
+  slice does **not** enforce a matching enabled set across clients. A host/client mod-set compatibility
+  check is a separate roadmap item (the cross-cutting "Determinism / saves / co-op" line in
+  [`ROADMAP.md`](ROADMAP.md)). Until it exists, agree on the enabled set with the other players before
+  starting a co-op run.
+
+## 11. Content tables
 
 The full inventory of the 57 `FTK_*DB` tables (items, weapons, proficiencies, hit effects,
 classes, skinsets, enemies, realms, encounters, quests, ...) is in
