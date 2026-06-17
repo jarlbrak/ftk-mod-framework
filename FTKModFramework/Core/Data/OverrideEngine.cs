@@ -160,6 +160,22 @@ namespace FTKModFramework.Core.Data
             {
                 if (TryCoerce(value, Enum.GetUnderlyingType(enumType), out result))
                 {
+                    // A raw int on a content-id enum that lands in the synthetic band MUST be backed by a
+                    // real ContentRegistry row, or it is an UNBACKED dangling reference (FR-7): the same
+                    // failure as a named id that resolves to nothing, just expressed numerically. Below the
+                    // band it is a legitimate vanilla ordinal (items start at 100000, far below the band)
+                    // and passes through unchanged for every enum, content-id or vanilla.
+                    Type[] numericDbTypes;
+                    int n = Convert.ToInt32(result);
+                    if (ContentIdDbsByEnum.TryGetValue(enumType, out numericDbTypes) &&
+                        IdAllocator.IsCustom(n) && !ContentRegistry.IsRegisteredSyntheticId(n, numericDbTypes))
+                    {
+                        report.Error(context + ": field '" + name + "' value '" + n +
+                            "' is an unbacked custom-band id for " + enumType.Name +
+                            " (no registered content owns it; dangling reference; skipped).");
+                        result = null;
+                        return false;
+                    }
                     result = Enum.ToObject(enumType, result);
                     return true;
                 }

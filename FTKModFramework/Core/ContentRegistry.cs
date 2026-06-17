@@ -96,5 +96,23 @@ namespace FTKModFramework.Core
             id = -1;
             return false;
         }
+
+        /// <summary>
+        /// Reverse lookup: true iff <paramref name="id"/> is a synthetic int this framework actually
+        /// REGISTERED under one of <paramref name="dbTypes"/>. Unlike <see cref="IdAllocator.IsCustom"/>
+        /// (which only tests the band) this confirms the int is BACKED by a real registered row, so a
+        /// raw int in the custom band that no entry created can be caught as a dangling reference.
+        /// </summary>
+        public static bool IsRegisteredSyntheticId(int id, params Type[] dbTypes)
+        {
+            for (int i = 0; i < dbTypes.Length; i++)
+            {
+                Dictionary<string, int> map;
+                if (CustomIds.TryGetValue(dbTypes[i], out map))
+                    foreach (int synthetic in map.Values)
+                        if (synthetic == id) return true;
+            }
+            return false;
+        }
     }
 }

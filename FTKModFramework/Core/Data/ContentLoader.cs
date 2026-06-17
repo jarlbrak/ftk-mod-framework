@@ -338,7 +338,12 @@ namespace FTKModFramework.Core.Data
 
             bool startWeaponResolved = (int)row.m_StartWeapon == weaponSynthetic && IdAllocator.IsCustom((int)row.m_StartWeapon);
             int startItems = row.m_StartItems != null ? row.m_StartItems.Length : 0;
-            bool danglingSkipped = startItems == 4;   // four vanilla ids kept; the seeded dangling element dropped.
+            // Derive the expectation from the AUTHORED fixture instead of hardcoding a count: kept items ==
+            // authored - dangling, where a dangling element resolves to NEITHER a vanilla FTK_itembase.ID
+            // name NOR a registered custom id. So the assertion follows the fixture if it ever changes.
+            int authoredCount, danglingCount;
+            CountAuthoredStartItems(thief.Entry, out authoredCount, out danglingCount);
+            bool danglingSkipped = authoredCount > 0 && startItems == authoredCount - danglingCount;
 
             int profCount = ProficiencyCount((FTK_weaponStats2)weapon.Row);
             bool profsAttached = profCount >= 3;
@@ -429,6 +434,10 @@ namespace FTKModFramework.Core.Data
         private static int ProficiencyCount(FTK_weaponStats2 weapon)
         {
             if (weapon == null || weapon.m_Prefab == null) return 0;
+            // Intentional: instantiate the prefab and read m_ProficiencyEffects off the live Weapon
+            // component, i.e. the game's REAL read path, then Destroy the throwaway clone. This is the
+            // highest-fidelity count and only runs in the sample-data parity self-test (guarded by the
+            // null check above and by the caller only invoking it when sample data is present).
             UnityEngine.GameObject inst = UnityEngine.Object.Instantiate(weapon.m_Prefab);
             int count = 0;
             Weapon w = inst.GetComponentInChildren<Weapon>(true);
@@ -442,6 +451,54 @@ namespace FTKModFramework.Core.Data
             foreach (Cached c in cached)
                 if (c.Kind == kind && c.Id == id) return c;
             return null;
+        }
+
+        /// <summary>
+        /// Read the AUTHORED start-items array off a class entry and count its elements plus how many are
+        /// dangling. The fixture writes the array under the alias "startItems" (raw "m_StartItems"); take
+        /// whichever is present. An element is dangling iff it resolves to NEITHER a vanilla
+        /// FTK_itembase.ID name (case-insensitive) NOR a registered custom id in the weapon+item DBs. The
+        /// elements arrive as a Newtonsoft JArray (or list) of boxed values, so coerce each to a string.
+        /// </summary>
+        private static void CountAuthoredStartItems(ContentEntry entry, out int authored, out int dangling)
+        {
+            authored = 0;
+            dangling = 0;
+            if (entry == null || entry.Fields == null) return;
+
+            object raw;
+            if (!entry.Fields.TryGetValue("startItems", out raw) &&
+                !entry.Fields.TryGetValue("m_StartItems", out raw))
+                return;
+
+            System.Collections.IEnumerable elements = raw as System.Collections.IEnumerable;
+            if (elements == null || raw is string) return; // a string is enumerable too; not an array.
+
+            foreach (object element in elements)
+            {
+                authored++;
+                string token = StartItemToken(element);
+                if (token == null) { dangling++; continue; }
+                int synthetic;
+                bool isCustom = ContentRegistry.TryGetSyntheticId(token, out synthetic,
+                    typeof(FTK_weaponStats2DB), typeof(FTK_itemsDB));
+                if (!IsVanillaItemName(token) && !isCustom) dangling++;
+            }
+        }
+
+        /// <summary>Unwrap a start-items element (a JValue or scalar box) to its string token.</summary>
+        private static string StartItemToken(object element)
+        {
+            Newtonsoft.Json.Linq.JValue jv = element as Newtonsoft.Json.Linq.JValue;
+            object box = jv != null ? jv.Value : element;
+            return box == null ? null : box.ToString();
+        }
+
+        /// <summary>Case-insensitive: is <paramref name="token"/> a vanilla FTK_itembase.ID name?</summary>
+        private static bool IsVanillaItemName(string token)
+        {
+            FTK_itembase.ID parsed;
+            return TryParseEnum(token, out parsed);
         }
 
         private static bool TryParseEnum<TEnum>(string value, out TEnum result) where TEnum : struct
