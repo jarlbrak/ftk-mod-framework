@@ -6,6 +6,7 @@ using HarmonyLib;
 using FullSerializer;
 using GridEditor;
 using FTKModFramework.Core;
+using FTKModFramework.Core.Data;
 
 namespace FTKModFramework
 {
@@ -40,6 +41,20 @@ namespace FTKModFramework
         /// </summary>
         public static ConfigEntry<bool> ForceCustomEncounter;
 
+        /// <summary>
+        /// Whether to run the JSON data-content loader: discover mod folders under
+        /// <see cref="DataContentRoot"/>, parse their content files, and register them through the
+        /// public Content.* API. Independent of <see cref="EnableSampleContent"/>: disabling the bundled
+        /// demo never disables third-party data mods.
+        /// </summary>
+        public static ConfigEntry<bool> EnableDataContent;
+
+        /// <summary>
+        /// Folder the data loader scans for mod subfolders (each with a manifest.json). Defaults to
+        /// BepInEx's plugins dir, so dropping a content-mod folder in alongside plugins just works.
+        /// </summary>
+        public static ConfigEntry<string> DataContentRoot;
+
         private Harmony _harmony;
 
         private void Awake()
@@ -58,6 +73,14 @@ namespace FTKModFramework
             ForceCustomEncounter = Config.Bind("Adventures", "ForceCustomEncounter", false,
                 "DEBUG: replace every overworld encounter that spawns with the custom 'Smuggler's Cache' so " +
                 "encounter injection is immediately visible in-game. Set false for normal play.");
+
+            EnableDataContent = Config.Bind("Data", "EnableDataContent", true,
+                "Run the JSON data-content loader (discovers content-mod folders under DataContentRoot and " +
+                "registers their content). Independent of EnableSampleContent.");
+
+            DataContentRoot = Config.Bind("Data", "DataContentRoot", Paths.PluginPath,
+                "Folder scanned for content-mod subfolders (each with a manifest.json). Defaults to the " +
+                "BepInEx plugins directory.");
 
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             fsConfig.SerializeEnumsAsInteger = true;
@@ -83,11 +106,25 @@ namespace FTKModFramework
         {
             if (_done) return; // Initialize can be reached more than once; only seed content once.
             _done = true;
-            if (!Plugin.EnableSampleContent.Value) return;
-            Run("sample weapon/ability", SampleContent.Register);
-            Run("thief class", ThiefClass.Register);
-            Run("cutpurse enemy", CutpurseEnemy.Register);
-            Run("sample encounter + adventure", AdventureContent.Register);
+
+            // Bundled demo content (opt-in). Disabling it must NOT skip the data loader below.
+            if (Plugin.EnableSampleContent.Value)
+            {
+                Run("sample weapon/ability", SampleContent.Register);
+                Run("thief class", ThiefClass.Register);
+                Run("cutpurse enemy", CutpurseEnemy.Register);
+                Run("sample encounter + adventure", AdventureContent.Register);
+            }
+
+            // JSON data-content mods (opt-in, independent of the demo). Runs AFTER sample content so a
+            // data mod can reference vanilla rows the same way the demo does.
+            if (Plugin.EnableDataContent.Value)
+                Run("data content", LoadDataContent);
+        }
+
+        private static void LoadDataContent()
+        {
+            ContentLoader.Load(Plugin.DataContentRoot.Value);
         }
 
         private static void Run(string what, Action register)
