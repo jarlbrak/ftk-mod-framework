@@ -364,7 +364,7 @@ namespace FTKModFramework.Core.Data
         /// </summary>
         private static void EmitDeterminismSelfTest(List<Cached> cached)
         {
-            int hashedKinds = 0;
+            int hashedEntries = 0;
             bool allMatch = true;
 
             foreach (Cached c in cached)
@@ -372,7 +372,7 @@ namespace FTKModFramework.Core.Data
                 Type dbType;
                 int registered;
                 if (!TryHashedRegisteredId(c, out dbType, out registered)) continue; // class/encounter/etc: skip.
-                hashedKinds++;
+                hashedEntries++;
 
                 int expected = IdAllocator.Allocate(c.ModGuid, dbType.Name + "/" + c.Id);
                 if (registered != expected)
@@ -383,10 +383,10 @@ namespace FTKModFramework.Core.Data
                 }
             }
 
-            if (hashedKinds == 0) return; // no hashed content in the loaded mods: nothing to assert.
+            if (hashedEntries == 0) return; // no hashed content in the loaded mods: nothing to assert.
             if (allMatch)
-                Plugin.Log.LogInfo("SELF-TEST PASS: data-content determinism (" + hashedKinds +
-                    " hashed kinds, synthetic id == IdAllocator.Allocate)");
+                Plugin.Log.LogInfo("SELF-TEST PASS: data-content determinism (" + hashedEntries +
+                    " hashed entries across weapon+proficiency, synthetic id == IdAllocator.Allocate)");
         }
 
         /// <summary>

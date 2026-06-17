@@ -35,24 +35,6 @@ namespace FTKModFramework.Core.Data
         private static readonly Dictionary<Type, Type[]> ContentIdDbsByEnum = BuildContentIdMap();
 
         /// <summary>
-        /// Apply every entry of <paramref name="fields"/> to <paramref name="row"/>. <paramref name="kind"/>
-        /// selects the alias table; member names are alias-resolved before lookup. Returns the count of
-        /// members successfully written. Null/empty <paramref name="fields"/> is a no-op returning 0.
-        /// </summary>
-        public static int Apply(object row, string kind, Dictionary<string, object> fields, string context, ValidationReport report)
-        {
-            if (row == null || fields == null) return 0;
-
-            int applied = 0;
-            foreach (KeyValuePair<string, object> kv in fields)
-            {
-                string realName = AliasTable.Resolve(kind, kv.Key);
-                if (ApplyField(row, realName, kv.Value, context, report)) applied++;
-            }
-            return applied;
-        }
-
-        /// <summary>
         /// True iff <paramref name="fieldType"/> is one of the five content-id enums (FR-6), or an array
         /// whose element type is one of them. These are the Phase-2 REFERENCE fields: their value names a
         /// row that may be registered by a DIFFERENT file (e.g. a class' m_StartWeapon naming a custom
@@ -73,7 +55,7 @@ namespace FTKModFramework.Core.Data
         /// <summary>
         /// Partition an entry's <paramref name="fields"/> into Phase-1 BASE writes and Phase-2 REFERENCE
         /// writes for a row of type <paramref name="rowType"/> (FR-6). Each member name is alias-resolved
-        /// (the same path <see cref="Apply"/> uses), looked up by its <see cref="System.Reflection.FieldInfo"/>,
+        /// (the same alias-resolution path the per-field writes use), looked up by its <see cref="System.Reflection.FieldInfo"/>,
         /// then classified by <see cref="IsContentIdField"/>. An UNKNOWN member is recorded once here (as a
         /// warning) and dropped from BOTH buckets so neither phase warns about it twice. The two returned
         /// dictionaries are keyed by the alias-resolved REAL field name, so the phases call
