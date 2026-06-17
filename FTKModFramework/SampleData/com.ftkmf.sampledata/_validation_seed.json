@@ -1,5 +1,5 @@
 {
-  "_comment": "INTENTIONAL TEST DATA. Each entry below trips a different ValidationReport category so the end-of-load summary lists every kind: duplicate id, unknown kind, unknown template, unknown field, coercion failure. The dangling-reference category is covered by 'sampledata_does_not_exist' in a_thief_class.json; the malformed-file category by broken.json. None of these register; they only prove fault isolation never blocks the good entries.",
+  "_comment": "INTENTIONAL TEST DATA. Each entry below trips a different ValidationReport category so the end-of-load summary lists every kind: duplicate id, unknown kind, unknown template, unknown field, coercion failure, and a raw custom-band id on a content-id field (an UNBACKED synthetic id, caught as a dangling reference). The named dangling-reference category is also covered by 'sampledata_does_not_exist' in a_thief_class.json; the malformed-file category by broken.json. None of these register their intended state; they only prove fault isolation never blocks the good entries. The 'sampledata_zzz_rawid_class' id sorts AFTER 'sampledata_thief' so it never shifts the thief's positional class index.",
   "entries": [
     {
       "kind": "proficiency",
@@ -27,6 +27,15 @@
       "fields": {
         "thisFieldDoesNotExist": 1,
         "damage": "not_a_number"
+      }
+    },
+    {
+      "kind": "class",
+      "id": "sampledata_zzz_rawid_class",
+      "template": "treasureHunter",
+      "displayName": "Raw custom-band id on a content-id field -> unbacked dangling reference, skipped",
+      "fields": {
+        "startWeapon": 1073741824
       }
     }
   ]
