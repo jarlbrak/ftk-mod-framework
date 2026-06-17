@@ -96,6 +96,13 @@ namespace FTKModFramework.Core.UI
                 Button button = clone.GetComponent<Button>();
                 if (button != null)
                 {
+                    // The source button's click is wired IN-SCENE as PERSISTENT UnityEvent listeners (e.g.
+                    // Resume/New Game). UnityEvent.RemoveAllListeners() drops only RUNTIME listeners, so the
+                    // persistent ones survive a naive clear and the clone would still fire the source action
+                    // (observed: clicking "Mods" opened the Resume screen). Disable every persistent listener
+                    // first, THEN clear runtime listeners, THEN wire our own, so only OpenModsPanel runs.
+                    for (int i = button.onClick.GetPersistentEventCount() - 1; i >= 0; i--)
+                        button.onClick.SetPersistentListenerState(i, UnityEngine.Events.UnityEventCallState.Off);
                     button.onClick.RemoveAllListeners();
                     button.onClick.AddListener(OpenModsPanel);
                 }
