@@ -25,8 +25,14 @@ namespace FTKModFramework.Core.Data
         /// <summary>Raw member overrides: member name -&gt; JSON value (scalar in P1a).</summary>
         [JsonProperty("fields")] public Dictionary<string, object> Fields;
 
-        /// <summary>Proficiency ids to attach (P1c; carried but not consumed in P1a).</summary>
+        /// <summary>Proficiency ids to attach in Phase 2 (weapon -&gt; AttachProficiencies, enemy -&gt; AttachEnemyProficiencies).</summary>
         [JsonProperty("proficiencies")] public string[] Proficiencies;
+
+        /// <summary>Class flavor text -&gt; <c>Localization.SetClassFlavor</c> in Phase 2 (class kind).</summary>
+        [JsonProperty("flavor")] public string Flavor;
+
+        /// <summary>Tooltip/bestiary description -&gt; Localization in Phase 2 (proficiency / enemy kind).</summary>
+        [JsonProperty("description")] public string Description;
 #pragma warning restore CS0649
     }
 }

@@ -1,0 +1,33 @@
+{
+  "_comment": "INTENTIONAL TEST DATA. Each entry below trips a different ValidationReport category so the end-of-load summary lists every kind: duplicate id, unknown kind, unknown template, unknown field, coercion failure. The dangling-reference category is covered by 'sampledata_does_not_exist' in a_thief_class.json; the malformed-file category by broken.json. None of these register; they only prove fault isolation never blocks the good entries.",
+  "entries": [
+    {
+      "kind": "proficiency",
+      "id": "sampledata_backstab",
+      "template": "bladeKnifeArmor",
+      "displayName": "Duplicate id (same as proficiencies.json -> error, second skipped)"
+    },
+    {
+      "kind": "contraption",
+      "id": "sampledata_unknown_kind",
+      "template": "bladeDagger",
+      "displayName": "Unknown kind -> error, skipped"
+    },
+    {
+      "kind": "weapon",
+      "id": "sampledata_unknown_template",
+      "template": "definitelyNotARealTemplate",
+      "displayName": "Unknown template -> error, skipped"
+    },
+    {
+      "kind": "weapon",
+      "id": "sampledata_unknown_field",
+      "template": "bladeDagger",
+      "displayName": "Unknown field warning",
+      "fields": {
+        "thisFieldDoesNotExist": 1,
+        "damage": "not_a_number"
+      }
+    }
+  ]
+}
