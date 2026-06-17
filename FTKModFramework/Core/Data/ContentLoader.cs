@@ -83,7 +83,7 @@ namespace FTKModFramework.Core.Data
                 string modGuid = mod.Manifest.ModGuid;
 
                 // Register BEFORE gating: a disabled mod must still be listed in ModRegistry.Entries.
-                ModRegistry.Register(modGuid, mod.Manifest.Name, false, true);
+                ModRegistry.Register(modGuid, mod.Manifest.Name, false, mod.Manifest.Version, true);
                 if (!ModRegistry.IsEnabled(modGuid))
                 {
                     Plugin.Log.LogInfo("ModRegistry: skipping disabled mod '" + modGuid + "' (no entries loaded).");

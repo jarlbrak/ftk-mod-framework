@@ -111,7 +111,7 @@ namespace FTKModFramework
             // backs the row's Enabled state (so a disabled demo stays listed and re-enableable); registration
             // itself never depends on that value. Doing this before the gate is what stops the FR-3 fail-open
             // default from silently re-enabling sample content the user turned off.
-            ModRegistry.Register(Plugin.Guid, "Bundled Sample Content", true, Plugin.EnableSampleContent.Value);
+            ModRegistry.Register(Plugin.Guid, "Bundled Sample Content", true, null, Plugin.EnableSampleContent.Value);
 
             // Bundled demo content (opt-in via the gate). Disabling it must NOT skip the data loader below.
             if (ModRegistry.IsEnabled(Plugin.Guid))

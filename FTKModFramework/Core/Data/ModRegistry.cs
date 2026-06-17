@@ -87,7 +87,7 @@ namespace FTKModFramework.Core.Data
         /// reads <c>Plugin.EnableSampleContent.Value</c>; a data-mod row reads its PlayerPrefs key, defaulting
         /// to <paramref name="defaultEnabled"/> when absent.
         /// </summary>
-        public static ModEntry Register(string key, string displayName, bool isBundledDemo, bool defaultEnabled)
+        public static ModEntry Register(string key, string displayName, bool isBundledDemo, string version, bool defaultEnabled)
         {
             ModEntry existing;
             if (_byKey.TryGetValue(key, out existing)) return existing; // idempotent: never re-seed.
@@ -97,9 +97,9 @@ namespace FTKModFramework.Core.Data
                 : (UnityEngine.PlayerPrefs.GetInt(PrefKeyPrefix + key, defaultEnabled ? 1 : 0) != 0);
 
             string name = (displayName == null || displayName.Trim().Length == 0) ? key : displayName;
-            // Version is UI-only metadata; the demo has none. Register does not receive it (the spec's row is
-            // Key/DisplayName/IsBundledDemo/Enabled), so it stays null here.
-            ModEntry entry = new ModEntry(key, name, isBundledDemo, null, enabled);
+            // Version is UI-only metadata for the row label: data mods carry it from their manifest, the demo
+            // passes null. It is not part of the gating contract.
+            ModEntry entry = new ModEntry(key, name, isBundledDemo, version, enabled);
             _entries.Add(entry);
             _byKey[key] = entry;
             return entry;

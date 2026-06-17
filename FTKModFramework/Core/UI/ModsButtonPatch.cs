@@ -73,7 +73,7 @@ namespace FTKModFramework.Core.UI
                 Button source = FindCloneSource(menuParent);
                 if (source == null)
                 {
-                    Plugin.Log.LogWarning("[ftkmf] Mods button: no active UnityEngine.UI.Button found under " +
+                    Plugin.Log.LogWarning("Mods button: no active UnityEngine.UI.Button found under " +
                         "m_SelectableParent to clone. Title screen left unchanged.");
                     return;
                 }
@@ -105,7 +105,7 @@ namespace FTKModFramework.Core.UI
                 if (label != null)
                     label.text = "Mods";
                 else
-                    Plugin.Log.LogWarning("[ftkmf] Mods button: cloned cell had no Text child to label; " +
+                    Plugin.Log.LogWarning("Mods button: cloned cell had no Text child to label; " +
                         "button added without a caption.");
 
                 // Rewire the inner Button (the clone is a cell, so its Button is a child). Disable the source's
@@ -116,7 +116,7 @@ namespace FTKModFramework.Core.UI
                 {
                     // An unwired button is worse than none: remove it rather than leave a button that fires
                     // nothing or the wrong action.
-                    Plugin.Log.LogWarning("[ftkmf] Mods button: cloned cell has no Button; removing it.");
+                    Plugin.Log.LogWarning("Mods button: cloned cell has no Button; removing it.");
                     UnityEngine.Object.Destroy(clone);
                     return;
                 }
@@ -127,7 +127,7 @@ namespace FTKModFramework.Core.UI
                 button.onClick.AddListener(OpenModsPanel);
 
                 _done = true;
-                Plugin.Log.LogInfo("[ftkmf] Mods button added to the title screen (cloned cell '" +
+                Plugin.Log.LogInfo("Mods button added to the title screen (cloned cell '" +
                     cellToClone.name + "', placed in grid, click -> Mods panel).");
             }
             catch (Exception e)
@@ -136,7 +136,7 @@ namespace FTKModFramework.Core.UI
                 // duplicate button behind. Destroy the clone if it was already instantiated.
                 if (clone != null)
                     UnityEngine.Object.Destroy(clone);
-                Plugin.Log.LogError("[ftkmf] Mods button injection failed (title screen left unchanged): " + e);
+                Plugin.Log.LogError("Mods button injection failed (title screen left unchanged): " + e);
             }
         }
 
@@ -172,7 +172,7 @@ namespace FTKModFramework.Core.UI
                     preferred = b;
             }
 
-            Plugin.Log.LogDebug("[ftkmf] Mods button: candidates (button/cell) = [" + seen + "].");
+            Plugin.Log.LogDebug("Mods button: candidates (button/cell) = [" + seen + "].");
             return preferred != null ? preferred : firstActive;
         }
 
@@ -217,7 +217,7 @@ namespace FTKModFramework.Core.UI
             }
             catch (Exception e)
             {
-                Plugin.Log.LogError("[ftkmf] Failed to open the Mods panel (title screen left usable): " + e);
+                Plugin.Log.LogError("Failed to open the Mods panel (title screen left usable): " + e);
             }
         }
     }

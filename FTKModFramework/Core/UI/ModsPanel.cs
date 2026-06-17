@@ -138,7 +138,7 @@ namespace FTKModFramework.Core.UI
                 panel.m_SelectableParent = containerGo.transform;
                 panel.m_NavigationSetup = FTKInputFocus.NavigationSetup.Vertical;
 
-                Plugin.Log.LogInfo("[ftkmf] Mods panel built (" +
+                Plugin.Log.LogInfo("Mods panel built (" +
                     ((entries == null) ? 0 : entries.Count) + " row(s)).");
                 return panel;
             }
@@ -227,7 +227,7 @@ namespace FTKModFramework.Core.UI
             uiOptionsMenu menu = uiOptionsMenu.Instance;
             if (menu == null)
             {
-                Plugin.Log.LogWarning("[ftkmf] Mods panel: uiOptionsMenu.Instance is null; rows fall back to " +
+                Plugin.Log.LogWarning("Mods panel: uiOptionsMenu.Instance is null; rows fall back to " +
                     "plain labels (toggles unavailable this session).");
                 return null;
             }
@@ -235,7 +235,7 @@ namespace FTKModFramework.Core.UI
             uiOptionsGame game = menu.m_GameOptions;
             if (game == null)
             {
-                Plugin.Log.LogWarning("[ftkmf] Mods panel: uiOptionsMenu.m_GameOptions is null; rows fall back " +
+                Plugin.Log.LogWarning("Mods panel: uiOptionsMenu.m_GameOptions is null; rows fall back " +
                     "to plain labels.");
                 return null;
             }
@@ -243,7 +243,7 @@ namespace FTKModFramework.Core.UI
             Toggle autosave = game.m_AutoSave;
             if (autosave == null)
             {
-                Plugin.Log.LogWarning("[ftkmf] Mods panel: m_GameOptions.m_AutoSave is null; rows fall back to " +
+                Plugin.Log.LogWarning("Mods panel: m_GameOptions.m_AutoSave is null; rows fall back to " +
                     "plain labels.");
                 return null;
             }
