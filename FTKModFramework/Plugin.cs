@@ -34,6 +34,12 @@ namespace FTKModFramework
         /// </summary>
         public static ConfigEntry<bool> ForceCustomEnemy;
 
+        /// <summary>
+        /// DEBUG verification aid: replace every overworld encounter the game spawns with the custom
+        /// "Smuggler's Cache" so injection is immediately visible in a normal run. Turn off for normal play.
+        /// </summary>
+        public static ConfigEntry<bool> ForceCustomEncounter;
+
         private Harmony _harmony;
 
         private void Awake()
@@ -48,6 +54,10 @@ namespace FTKModFramework
             ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", false,
                 "DEBUG: replace every overworld LAND enemy that spawns with the custom 'Cutpurse' so enemy " +
                 "injection is immediately visible in combat. Set false for normal play.");
+
+            ForceCustomEncounter = Config.Bind("Adventures", "ForceCustomEncounter", false,
+                "DEBUG: replace every overworld encounter that spawns with the custom 'Smuggler's Cache' so " +
+                "encounter injection is immediately visible in-game. Set false for normal play.");
 
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             fsConfig.SerializeEnumsAsInteger = true;
@@ -77,6 +87,7 @@ namespace FTKModFramework
             Run("sample weapon/ability", SampleContent.Register);
             Run("thief class", ThiefClass.Register);
             Run("cutpurse enemy", CutpurseEnemy.Register);
+            Run("sample encounter + adventure", AdventureContent.Register);
         }
 
         private static void Run(string what, Action register)

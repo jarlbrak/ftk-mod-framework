@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- FTKPerfProbe - read-only diagnostic BepInEx plugin for For The King (Unity 2017.2 / Mono net35).
+       Build:  dotnet build FTKPerfProbe/FTKPerfProbe.csproj -c Release
+       Output: FTKPerfProbe/bin/Release/net35/FTKPerfProbe.dll -> copy to <game>/BepInEx/plugins/ -->
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>FTKPerfProbe</AssemblyName>
+    <Product>FTKPerfProbe</Product>
+    <Version>0.1.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <NoWarn>$(NoWarn);CS0436;NU1701</NoWarn>
+    <!-- Game managed-assembly folder. Override with -p:FtkManagedDir=... -->
+    <FtkManagedDir Condition="'$(FtkManagedDir)' == ''">$(HOME)/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed</FtkManagedDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Public game types only (GridEditor.TableManager); no publicizer needed for this plugin. -->
+    <Reference Include="Assembly-CSharp" Private="false">
+      <HintPath>$(FtkManagedDir)/Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass" Private="false">
+      <HintPath>$(FtkManagedDir)/Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <!-- Whole UnityEngine module set: CoreModule, UI (CanvasUpdateRegistry/Graphic), IMGUIModule (OnGUI). -->
+    <Reference Include="$(FtkManagedDir)/UnityEngine*.dll" Private="false" />
+  </ItemGroup>
+
+</Project>

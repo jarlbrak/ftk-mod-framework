@@ -156,12 +156,9 @@ FTK_enemyCombat cutpurse = Content.AddEnemy(
         e.m_Rarity = "Common";                       // draw weight (FTK_encounterDrawChanceDB)
         e.m_SpawnDay = e.m_SpawnNight = e.m_SpawnLand = e.m_SpawnDungeon = true;
         e.m_RealmInclude = new FTK_realm.ID[0];      // empty => eligible in every realm
-        // custom loot: give it its OWN ItemDrops (the clone shares the template's by reference)
-        var drops = new FTK_enemyCombat.ItemDrops();
-        Reflect.CopyFields(e.m_ItemDrops, drops);
-        drops._golddrop = 25;
-        drops.m_AlwaysDropItems = new[] { FTK_itembase.ID.conLockpicks };
-        e.m_ItemDrops = drops;
+        // custom loot: AddEnemy deep-copies the cloned row's m_ItemDrops, so edit it directly
+        e.m_ItemDrops._golddrop = 25;
+        e.m_ItemDrops.m_AlwaysDropItems = new[] { FTK_itembase.ID.conLockpicks };
     });
 Localization.SetEnemyDescription("mymod_cutpurse", "A nimble thief who robs the unwary.");
 
@@ -191,7 +188,46 @@ Cutpurse, so you can verify a custom enemy fights and drops loot without waiting
 
 See `Content/CutpurseEnemy.cs` (+ `Content/CutpurseStealProficiency.cs`) for the full worked example.
 
-## 7. How it works (why it's safe)
+## 7. New adventures & encounters
+
+> Design reference + the full how-it-works: [`ADVENTURES.md`](ADVENTURES.md).
+
+A whole **adventure / game-mode** is not a DB row — it's a `GameDefinition` deserialized from a
+`.ftk2` JSON file in the game's `StreamingAssets/mods`. `Adventures.AddFromTemplate` clones one of the
+player's *installed* adventures at runtime (so it ships no game content), retunes a few JSON fields, and
+registers it. The one required Harmony patch whitelists the name through `FTKHub.IsValidSaveFileName`
+(the single hardcoded gate the start screen checks). World generation, win condition, and saves are all
+data-driven off the cloned definition, so an adventure built from existing realms needs **no** generator
+patch and appears on the start screen automatically.
+
+```csharp
+using FTKModFramework.Core;
+using Newtonsoft.Json.Linq;
+
+// A new selectable adventure, cloned from the installed DungeonCrawl and retuned.
+Adventures.AddFromTemplate(
+    "com.you.mymod", "MyRun", "DungeonCrawl",
+    "My Run", "A richer romp across Fahrul.",
+    jo => { jo["m_GoldMultiplier"] = 1.5; jo["m_SelectionPriority"] = 250; });
+```
+
+A new **overworld encounter/event** *is* a DB row (`FTK_miniEncounterDB`), so it injects with the same
+clone-register pattern as items. The selector (`GameLogic.GetMiniEncounter`) walks the whole table and
+weight-rolls every eligible row, so a freshly registered one is automatically a candidate — no generator
+patch. An empty `m_RealmInclude` means "every realm"; `m_Rarity` reuses an existing draw-chance bucket
+(`Common`/`Uncommon`/`Rare`/`SuperRare`); display strings show verbatim (the game's text lookup returns
+the key itself when it has no row).
+
+```csharp
+Content.AddEncounter("com.you.mymod", "mymod_cache", FTK_miniEncounter.ID.TreasureChest, "Hidden Cache",
+    e => { e.m_Rarity = "Common"; e.m_RealmInclude = new FTK_realm.ID[0]; });
+```
+
+> Registering any custom **class** also installs a small guard on `uiQuickPlayerCreate.CanUseClass`: an
+> out-of-range class id in the party lobby falls back to a default class (the game's own intent) instead
+> of throwing and breaking the character-create screen.
+
+## 8. How it works (why it's safe)
 
 - **IDs** — the `FTK_*.ID` enums are compile-time fixed. `IdAllocator` mints a deterministic
   synthetic int per `(modGuid, contentKey)` in a high band (`0x40000000+`), identical on every
@@ -205,15 +241,16 @@ See `Content/CutpurseEnemy.cs` (+ `Content/CutpurseStealProficiency.cs`) for the
   `id >= 100000 -> weapon DB` rule.
 - **Save-safety** — the framework sets `FullSerializer.fsConfig.SerializeEnumsAsInteger = true`.
 
-## 8. Multiplayer
+## 9. Multiplayer
 
 Co-op is Photon and has **no asset streaming** — every player must have the same mods installed.
 Synthetic IDs are deterministic precisely so host/client agree on what each id means.
 
-## 9. Content tables
+## 10. Content tables
 
 The full inventory of the 57 `FTK_*DB` tables (items, weapons, proficiencies, hit effects,
 classes, skinsets, enemies, realms, encounters, quests, ...) is in
 [`PHASE0-TYPE-INVENTORY.md`](PHASE0-TYPE-INVENTORY.md). Helpers exist for items, weapons,
-proficiencies, classes, and enemies. For any other table you can register directly
+proficiencies, classes, enemies (`Content.AddEnemy`), overworld encounters (`Content.AddEncounter`),
+and whole adventures (`Adventures.AddFromTemplate`). For any other table you can register directly
 with `ContentRegistry.Register(db, guid, id, template, configure)`.
