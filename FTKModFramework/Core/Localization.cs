@@ -110,13 +110,16 @@ namespace FTKModFramework.Core
     {
         private static void Postfix(FTK_proficiencyTable __instance, ref string __result)
         {
-            // 1) explicit per-proficiency override wins
+            // 1) explicit per-proficiency override wins. Our custom steal abilities (Cutpurse, Thief Steal)
+            //    each register an explicit description, so tier-1 always handles OUR content.
             string desc;
             if (Localization.TryGetProficiencyDescription(__instance.m_ID, out desc)) { __result = desc; return; }
 
-            // 2) fill in the steal categories the game's switch forgot, using its own "Robbed" string.
-            // (Our Thief Steal flips between StealGold and StealItem per outcome, so cover both so the
-            // tooltip description stays correct whichever the last steal was.)
+            // 2) Fallback for VANILLA steal abilities only. The game's own GetCategoryDescription switch has
+            //    no case for StealGold / StealItem, so those categories fall through to a
+            //    "GetCategoryDescription #StealGold#" placeholder. We fill them in with the game's own
+            //    "Robbed" string. Kept (not deleted) because removing it would regress vanilla steal
+            //    tooltips that hit the same placeholder; custom steal abilities never reach here (tier-1).
             if (__instance.m_ProficiencyPrefab != null &&
                 (__instance.m_ProficiencyPrefab.m_Category == ProficiencyBase.Category.StealGold ||
                  __instance.m_ProficiencyPrefab.m_Category == ProficiencyBase.Category.StealItem))

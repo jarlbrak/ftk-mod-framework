@@ -45,7 +45,7 @@ namespace FTKModFramework
                 "Register the bundled example content (a custom weapon + ability, given to the Blacksmith). " +
                 "Set false if you only want the framework as a dependency for other content mods.");
 
-            ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", true,
+            ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", false,
                 "DEBUG: replace every overworld LAND enemy that spawns with the custom 'Cutpurse' so enemy " +
                 "injection is immediately visible in combat. Set false for normal play.");
 

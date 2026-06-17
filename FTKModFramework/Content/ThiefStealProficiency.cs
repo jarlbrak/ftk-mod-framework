@@ -30,42 +30,41 @@ namespace FTKModFramework
             // text shows everywhere. (In single-player isMasterClient is true, so the same path runs.)
             bool grant = PhotonNetwork.isMasterClient;
 
+            // 50/50: lift an item off the target's loot table, or grab gold. TryStealItem itself falls back
+            // to gold for a non-enemy target or an empty loot roll, so the gold path covers every miss.
             bool stoleItem = false;
-            int amount;
+            int amount = (Random.Range(0, 2) == 0)
+                ? TryStealItem(_dummy, attacker.m_CharacterOverworld, grant, out stoleItem)
+                : GiveGold(stats, grant);
 
-            // 50/50: lift an item off the target's loot table, or grab gold.
-            if (Random.Range(0, 2) == 0 && _dummy is EnemyDummy)
-            {
-                FTK_itembase.ID item = RollEnemyLootItem((EnemyDummy)_dummy);
-                if (item != FTK_itembase.ID.None)
-                {
-                    if (grant) attacker.m_CharacterOverworld.AddItemToBackpack(item); // _hud:true -> shows the pickup
-                    amount = (int)item;
-                    stoleItem = true;
-                    Plugin.Log.LogInfo("[Thief] Steal lifted item '" + item + "' from the enemy.");
-                }
-                else
-                {
-                    amount = GiveGold(stats, grant); // enemy had nothing liftable
-                }
-            }
-            else
-            {
-                amount = GiveGold(stats, grant);
-            }
-
-            // Match the HUD label to the outcome. The steal text is formatted by the proficiency's CATEGORY:
-            // StealItem renders m_ProficiencyAmount as an item NAME, StealGold renders it as a GOLD number.
-            // Leaving it StealGold while storing an item id is what printed the item's id (~100000+) as a
-            // giant "stole N gold" number above the enemy (no gold actually moved).
-            m_Category = stoleItem ? ProficiencyBase.Category.StealItem : ProficiencyBase.Category.StealGold;
-
-            // Mark a successful steal so the HUD shows the gain instead of "Nothing To Steal".
+            // m_Category is a TRANSIENT per-hit presentation flag, read synchronously by the HUD formatter
+            // right after this (not durable config): StealItem renders m_ProficiencyAmount as an item NAME,
+            // StealGold renders it as a GOLD number. Kept adjacent to the HUD write it drives.
             if (_dummy.m_DamageInfo != null)
             {
-                _dummy.m_DamageInfo.m_ProfHasAmount = true;
+                m_Category = stoleItem ? ProficiencyBase.Category.StealItem : ProficiencyBase.Category.StealGold;
+                _dummy.m_DamageInfo.m_ProfHasAmount = true;     // show the gain instead of "Nothing To Steal"
                 _dummy.m_DamageInfo.m_ProficiencyAmount = amount;
             }
+        }
+
+        /// <summary>
+        /// Item branch of the 50/50: roll the target enemy's loot table and lift one item. Sets
+        /// <paramref name="stoleItem"/> and returns the item id (as the HUD amount) on success; on a
+        /// non-enemy target or an empty roll, returns gold instead (stoleItem stays false).
+        /// </summary>
+        private static int TryStealItem(CharacterDummy dummy, CharacterOverworld attacker, bool grant, out bool stoleItem)
+        {
+            stoleItem = false;
+            if (!(dummy is EnemyDummy)) return GiveGold(attacker.m_CharacterStats, grant);
+
+            FTK_itembase.ID item = RollEnemyLootItem((EnemyDummy)dummy);
+            if (item == FTK_itembase.ID.None) return GiveGold(attacker.m_CharacterStats, grant); // nothing liftable
+
+            if (grant) attacker.AddItemToBackpack(item); // _hud:true -> shows the pickup
+            stoleItem = true;
+            Plugin.Log.LogInfo("[Thief] Steal lifted item '" + item + "' from the enemy.");
+            return (int)item;
         }
 
         // Roll the enemy's real loot table (same call the game uses on death) and pick one item.
@@ -84,8 +83,7 @@ namespace FTKModFramework
 
         private static int GiveGold(CharacterStats stats, bool grant)
         {
-            // Half of the Entertain payout: Entertain = Random(2..4) * (level+1) * GoldModifier.
-            int gold = FTKUtil.RoundToInt((float)(Random.Range(2, 5) * (stats.m_PlayerLevel + 1)) * stats.GoldModifier * 0.5f);
+            int gold = ProficiencyMath.HalfEntertainGold(stats);
             if (gold < 1) gold = 1;
             if (grant) stats.ChangeGold(gold); // _hud:true by default; ChangeGold itself broadcasts to all clients
             Plugin.Log.LogInfo("[Thief] Steal grabbed " + gold + " gold (level " + stats.m_PlayerLevel + ").");

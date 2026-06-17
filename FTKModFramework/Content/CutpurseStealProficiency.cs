@@ -29,8 +29,8 @@ namespace FTKModFramework
 
             CharacterStats stats = victim.m_CharacterStats;
 
-            // Roughly the Thief's gold formula, halved: Random(2..4) * (level+1) * GoldModifier.
-            int gold = FTKUtil.RoundToInt((float)(Random.Range(2, 5) * (stats.m_PlayerLevel + 1)) * stats.GoldModifier * 0.5f);
+            // The same half-Entertain gold formula the Thief's Steal uses (shared helper).
+            int gold = ProficiencyMath.HalfEntertainGold(stats);
             if (gold > stats.m_Gold) gold = stats.m_Gold; // can't steal more than they carry
             if (gold <= 0) return;
 

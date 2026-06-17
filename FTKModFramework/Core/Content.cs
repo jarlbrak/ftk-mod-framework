@@ -108,12 +108,33 @@ namespace FTKModFramework.Core
                 return false;
             }
 
+            int count = AddProfsToWeapon(w, proficiencyIds);
+
+            weapon.m_Prefab = copy;
+            Plugin.Log.LogInfo("AttachProficiencies: added " + proficiencyIds.Length + " to '" + weapon.m_ID +
+                "' (now " + count + " actions).");
+            return true;
+        }
+
+        /// <summary>
+        /// Shared tail of the weapon / enemy proficiency-attach paths. Ensures the weapon's
+        /// <see cref="Weapon.m_ProficiencyEffects"/> dictionary exists, reuses an existing
+        /// <see cref="HitEffect"/> from it so the added actions render (warning if there is none to reuse,
+        /// since the new actions would then have no impact visual), adds each proficiency id to the dict,
+        /// and pushes the runtime dictionary into FullInspector's serialized backing via
+        /// <see cref="Weapon.SaveState"/> so it survives the game's re-Instantiate of the weapon.
+        /// Returns the dictionary's new entry count.
+        /// </summary>
+        private static int AddProfsToWeapon(Weapon w, string[] proficiencyIds)
+        {
             if (w.m_ProficiencyEffects == null)
                 w.m_ProficiencyEffects = new Dictionary<ProficiencyID, HitEffect>();
 
             // Reuse an existing HitEffect (the visual/impact) from this weapon so the actions render.
             HitEffect reuse = null;
             foreach (HitEffect v in w.m_ProficiencyEffects.Values) { reuse = v; break; }
+            if (reuse == null)
+                Plugin.Log.LogWarning("AddProfsToWeapon: weapon had no HitEffect to reuse; new actions may lack an impact visual.");
 
             foreach (string profId in proficiencyIds)
             {
@@ -123,13 +144,9 @@ namespace FTKModFramework.Core
             }
 
             // Push the runtime dictionary into FullInspector's serialized backing so the change
-            // survives the game's Object.Instantiate(_prefab) (which re-deserializes it).
+            // survives the game's Object.Instantiate of the weapon (which re-deserializes it).
             w.SaveState();
-
-            weapon.m_Prefab = copy;
-            Plugin.Log.LogInfo("AttachProficiencies: added " + proficiencyIds.Length + " to '" + weapon.m_ID +
-                "' (now " + w.m_ProficiencyEffects.Count + " actions).");
-            return true;
+            return w.m_ProficiencyEffects.Count;
         }
 
         /// <summary>
@@ -176,7 +193,21 @@ namespace FTKModFramework.Core
             FTK_enemyCombatDB db = Db<FTK_enemyCombatDB>();
             FTK_enemyCombat tmpl = db.GetEntry(template);
             FTK_enemyCombat row = (FTK_enemyCombat)ContentRegistry.Register(db, modGuid, id, tmpl,
-                o => { if (configure != null) configure((FTK_enemyCombat)o); });
+                o =>
+                {
+                    FTK_enemyCombat e = (FTK_enemyCombat)o;
+                    // Register's CopyFields shallow-copies the template, so the clone's m_ItemDrops is the
+                    // SAME instance as the template's. Deep-copy it into a fresh ItemDrops here (BEFORE the
+                    // caller's configure runs) so authored content can safely mutate e.m_ItemDrops._golddrop
+                    // etc. without rewriting the vanilla template's loot table.
+                    if (e.m_ItemDrops != null)
+                    {
+                        FTK_enemyCombat.ItemDrops fresh = new FTK_enemyCombat.ItemDrops();
+                        Reflect.CopyFields(e.m_ItemDrops, fresh);
+                        e.m_ItemDrops = fresh;
+                    }
+                    if (configure != null) configure(e);
+                });
             Localization.SetName(id, displayName);
 
             // Make the new row visible to the level-bucketed spawn pool. GameCache.Enemies rebuilds straight
@@ -220,29 +251,11 @@ namespace FTKModFramework.Core
             AttackSchedule schedule = copy.GetComponent<AttackSchedule>();
             if (schedule != null) UnityEngine.Object.Destroy(schedule);
 
-            if (copy.m_ProficiencyEffects == null)
-                copy.m_ProficiencyEffects = new Dictionary<ProficiencyID, HitEffect>();
-
-            // Reuse an existing HitEffect (the visual/impact) from this weapon so the new actions render.
-            HitEffect reuse = null;
-            foreach (HitEffect v in copy.m_ProficiencyEffects.Values) { reuse = v; break; }
-            if (reuse == null)
-                Plugin.Log.LogWarning("AttachEnemyProficiencies: '" + enemy.m_ID + "' weapon had no HitEffect to reuse; new actions may lack an impact visual.");
-
-            foreach (string profId in proficiencyIds)
-            {
-                ProficiencyID key = new ProficiencyID((FTK_proficiencyTable.ID)0);
-                key.m_ID = profId; // resolved back to our synthetic id via the patched GetEnum
-                copy.m_ProficiencyEffects[key] = reuse;
-            }
-
-            // Push the runtime dictionary into FullInspector's serialized backing so it survives the
-            // Object.Instantiate(m_WeaponAsset) that CreateWeapon does at combat time.
-            copy.SaveState();
+            int count = AddProfsToWeapon(copy, proficiencyIds);
 
             enemy.m_WeaponAsset = copy;
             Plugin.Log.LogInfo("AttachEnemyProficiencies: added " + proficiencyIds.Length + " to '" + enemy.m_ID +
-                "' (now " + copy.m_ProficiencyEffects.Count + " actions).");
+                "' (now " + count + " actions).");
             return true;
         }
     }

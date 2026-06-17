@@ -60,15 +60,12 @@ namespace FTKModFramework
                     e.m_RealmInclude = new FTK_realm.ID[0]; // empty include => eligible in every realm
                     e.m_RealmExclude = new FTK_realm.ID[0];
 
-                    // Custom loot. The clone shares the template bandit's ItemDrops instance by reference, so
-                    // duplicate it into a fresh one before editing (else we'd rewrite vanilla bandit loot).
-                    FTK_enemyCombat.ItemDrops drops = new FTK_enemyCombat.ItemDrops();
-                    if (e.m_ItemDrops != null) Reflect.CopyFields(e.m_ItemDrops, drops);
-                    drops._golddrop = 25;               // it steals coin, so it drops coin
-                    drops._itemdropcount = 1;
-                    drops._itemdropchance = 0.5f;
-                    drops.m_AlwaysDropItems = new FTK_itembase.ID[] { FTK_itembase.ID.conLockpicks }; // a rogue's tool
-                    e.m_ItemDrops = drops;
+                    // Custom loot. AddEnemy already deep-copies the cloned row's m_ItemDrops before this
+                    // lambda runs, so we can mutate its fields directly without rewriting vanilla bandit loot.
+                    e.m_ItemDrops._golddrop = 25;       // it steals coin, so it drops coin
+                    e.m_ItemDrops._itemdropcount = 1;
+                    e.m_ItemDrops._itemdropchance = 0.5f;
+                    e.m_ItemDrops.m_AlwaysDropItems = new FTK_itembase.ID[] { FTK_itembase.ID.conLockpicks }; // a rogue's tool
                 });
 
             // 3) Give the Cutpurse its Pilfer action (its own private weapon copy; vanilla bandits untouched).
@@ -102,16 +99,8 @@ namespace FTKModFramework
 
             // Does its weapon expose Pilfer? Replicate the game path: instantiate m_WeaponAsset, read profs.
             int stealId = TableManager.Instance.Get<FTK_proficiencyTableDB>().GetIntFromID("ftkmf_cutpursesteal");
-            bool weaponHasSteal = false;
             int profCount = 0;
-            if (e != null && e.m_WeaponAsset != null)
-            {
-                Weapon w = UnityEngine.Object.Instantiate(e.m_WeaponAsset);
-                List<FTK_proficiencyTable.ID> ids = w.GetProficiencyIDs();
-                profCount = ids.Count;
-                weaponHasSteal = ids.Contains((FTK_proficiencyTable.ID)stealId);
-                UnityEngine.Object.Destroy(w.gameObject);
-            }
+            bool weaponHasSteal = e != null && WeaponExposes(e, stealId, out profCount);
 
             bool hasLoot = e != null && e.m_ItemDrops != null;
 
@@ -124,6 +113,24 @@ namespace FTKModFramework
                 Plugin.Log.LogError("SELF-TEST FAIL [enemy]: name=\"" + name + "\" notBoss=" + notBoss +
                     " model=" + hasModel + " notScaled=" + notScaled + " inPool=" + inPool +
                     " weaponHasSteal=" + weaponHasSteal + " hasLoot=" + hasLoot + ".");
+        }
+
+        /// <summary>
+        /// Replicate the game's path for reading a weapon's actions: instantiate the enemy's m_WeaponAsset,
+        /// read its proficiency ids, then destroy the temp instance. Reports the action count and whether
+        /// <paramref name="profId"/> is among them. Isolates the Instantiate/Destroy lifecycle in one place.
+        /// </summary>
+        private static bool WeaponExposes(FTK_enemyCombat e, int profId, out int profCount)
+        {
+            profCount = 0;
+            if (e == null || e.m_WeaponAsset == null) return false;
+
+            Weapon w = UnityEngine.Object.Instantiate(e.m_WeaponAsset);
+            List<FTK_proficiencyTable.ID> ids = w.GetProficiencyIDs();
+            profCount = ids.Count;
+            bool has = ids.Contains((FTK_proficiencyTable.ID)profId);
+            UnityEngine.Object.Destroy(w.gameObject);
+            return has;
         }
     }
 

@@ -38,6 +38,9 @@ namespace FTKModFramework
                     p.m_ChanceToAffect = 1f;               // a landed roll always steals (no hidden second roll)
                     p.m_ProficiencyPrefab = stealBehaviour; // custom: 50/50 item-or-gold on a successful roll
                 });
+            // Explicit (tier-1) tooltip so Steal doesn't depend on the mutable m_Category / tier-2 fallback.
+            Localization.SetProficiencyDescription("ftkmf_steal",
+                "Lands a quick strike that lifts either gold or an item from the enemy.");
 
             // 2) The Thief's dagger (cloned from the vanilla Dagger)
             FTK_weaponStats2 dagger = Content.AddWeapon(Plugin.Guid, "ftkmf_shadowfang", FTK_itembase.ID.bladeDagger, "Shadowfang",
