@@ -151,6 +151,100 @@ namespace FTKModFramework.Core
             Localization.SetName(id, displayName);
             return row;
         }
+
+        /// <summary>
+        /// Add a new ENEMY (clones an existing enemy's FTK_enemyCombat row). Uses a high-band synthetic id
+        /// like items/weapons/proficiencies — NOT id == array index like classes; nothing indexes enemies
+        /// by array position (every lookup is dictionary- or string-based, and selection round-trips the id
+        /// through its decimal string over Photon).
+        ///
+        /// Cloning a template inherits its 3D body (m_EnemyAsset), weapon (m_WeaponAsset) and a sane field
+        /// layout, so the custom enemy renders and fights immediately. Pick a NON-boss, NON-scourge template
+        /// that is NOT a level-scaling enemy (i.e. not present in FTK_enemyScaleDB) and has a valid
+        /// m_EnemyAsset — otherwise the spawn-pool builder silently filters it out.
+        ///
+        /// After registering we flag the level-bucketed spawn cache (GameCache.Enemies) for rebuild, so the
+        /// new enemy becomes eligible for ordinary overworld/dungeon encounters (the cache re-reads the live
+        /// DB on its next draw). To actually be drawn it must also pass the picker's gates: a nonzero
+        /// m_Rarity draw-chance, matching m_SpawnDay/Night/Land/Water/Dungeon, and realm include/exclude —
+        /// all inherited from a template that already spawns naturally (override in <paramref name="configure"/>).
+        /// </summary>
+        public static FTK_enemyCombat AddEnemy(
+            string modGuid, string id, FTK_enemyCombat.ID template, string displayName,
+            Action<FTK_enemyCombat> configure = null)
+        {
+            FTK_enemyCombatDB db = Db<FTK_enemyCombatDB>();
+            FTK_enemyCombat tmpl = db.GetEntry(template);
+            FTK_enemyCombat row = (FTK_enemyCombat)ContentRegistry.Register(db, modGuid, id, tmpl,
+                o => { if (configure != null) configure((FTK_enemyCombat)o); });
+            Localization.SetName(id, displayName);
+
+            // Make the new row visible to the level-bucketed spawn pool. GameCache.Enemies rebuilds straight
+            // from the live FTK_enemyCombatDB.m_Array whenever NeedsRebuild is set, so our row flows in with
+            // no static-list surgery. (The game also re-flags this at every game-start, but set it now too.)
+            GameCache.Cache.Enemies.NeedsRebuild = true;
+            return row;
+        }
+
+        /// <summary>
+        /// Give an ENEMY one or more proficiencies (combat actions) it didn't have, without mutating the
+        /// shared template weapon. An enemy's attacks are the keys of its <c>m_WeaponAsset</c>'s
+        /// <c>Weapon.m_ProficiencyEffects</c>. Unlike a player weapon (a <c>GameObject m_Prefab</c>),
+        /// <c>m_WeaponAsset</c> is a <c>Weapon</c> COMPONENT, so we Instantiate a private copy of it, add our
+        /// proficiencies, push them into the FullInspector serialized backing (<c>SaveState</c>) so they
+        /// survive the game's re-Instantiate of the weapon, and repoint the enemy at the copy.
+        ///
+        /// We also strip any <c>AttackSchedule</c> from the copy so the enemy uses the RNG attack path
+        /// (gated by <c>m_ChanceToProf</c>, picking uniformly across all of the weapon's proficiencies) —
+        /// a scheduled weapon would only ever fire its fixed script and never our added action.
+        /// </summary>
+        public static bool AttachEnemyProficiencies(FTK_enemyCombat enemy, params string[] proficiencyIds)
+        {
+            if (enemy == null) return false;
+            Weapon src = enemy.m_WeaponAsset;
+            if (src == null)
+            {
+                Plugin.Log.LogWarning("AttachEnemyProficiencies: enemy '" + enemy.m_ID + "' has no m_WeaponAsset.");
+                return false;
+            }
+
+            // Instantiating a Component clones its whole GameObject and returns the matching component.
+            Weapon copy = UnityEngine.Object.Instantiate(src);
+            UnityEngine.Object.DontDestroyOnLoad(copy.gameObject);
+            copy.gameObject.name = src.gameObject.name + "_ftkmf";
+            // Keep it active but parked off-screen (mirrors the proven weapon path; enemy weapons are read
+            // with includeInactive:true, but this avoids relying on that).
+            copy.transform.position = new Vector3(0f, -100000f, 0f);
+
+            // Force the RNG attack path so our added action can actually be chosen.
+            AttackSchedule schedule = copy.GetComponent<AttackSchedule>();
+            if (schedule != null) UnityEngine.Object.Destroy(schedule);
+
+            if (copy.m_ProficiencyEffects == null)
+                copy.m_ProficiencyEffects = new Dictionary<ProficiencyID, HitEffect>();
+
+            // Reuse an existing HitEffect (the visual/impact) from this weapon so the new actions render.
+            HitEffect reuse = null;
+            foreach (HitEffect v in copy.m_ProficiencyEffects.Values) { reuse = v; break; }
+            if (reuse == null)
+                Plugin.Log.LogWarning("AttachEnemyProficiencies: '" + enemy.m_ID + "' weapon had no HitEffect to reuse; new actions may lack an impact visual.");
+
+            foreach (string profId in proficiencyIds)
+            {
+                ProficiencyID key = new ProficiencyID((FTK_proficiencyTable.ID)0);
+                key.m_ID = profId; // resolved back to our synthetic id via the patched GetEnum
+                copy.m_ProficiencyEffects[key] = reuse;
+            }
+
+            // Push the runtime dictionary into FullInspector's serialized backing so it survives the
+            // Object.Instantiate(m_WeaponAsset) that CreateWeapon does at combat time.
+            copy.SaveState();
+
+            enemy.m_WeaponAsset = copy;
+            Plugin.Log.LogInfo("AttachEnemyProficiencies: added " + proficiencyIds.Length + " to '" + enemy.m_ID +
+                "' (now " + copy.m_ProficiencyEffects.Count + " actions).");
+            return true;
+        }
     }
 
     /// <summary>

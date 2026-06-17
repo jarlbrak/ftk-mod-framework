@@ -53,4 +53,23 @@ namespace FTKModFramework.Core
             return true;
         }
     }
+
+    // Load-bearing for enemies: the overworld spawn picker calls FTK_enemyCombat.GetEnum(row.m_ID) on our
+    // (non-numeric) string id while building the candidate pool, and DROPS the enemy if it returns None.
+    // (The Photon path resolves the decimal-string form via vanilla Enum.Parse, so this is only for the
+    // picker's human-id lookup — but without it the custom enemy never reaches a fight.)
+    [HarmonyPatch(typeof(FTK_enemyCombat), "GetEnum")]
+    internal static class EnemyGetEnum_Patch
+    {
+        private static bool Prefix(string _id, ref FTK_enemyCombat.ID __result)
+        {
+            int v;
+            if (ContentRegistry.TryGetSyntheticId(_id, out v, typeof(FTK_enemyCombatDB)))
+            {
+                __result = (FTK_enemyCombat.ID)v;
+                return false;
+            }
+            return true;
+        }
+    }
 }

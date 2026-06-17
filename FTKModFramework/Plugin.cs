@@ -28,6 +28,12 @@ namespace FTKModFramework
         /// </summary>
         public static ConfigEntry<bool> EnableSampleContent;
 
+        /// <summary>
+        /// DEBUG verification aid: replace every overworld LAND enemy the game spawns with the custom
+        /// "Cutpurse" so enemy injection is immediately visible in combat. Turn off for normal play.
+        /// </summary>
+        public static ConfigEntry<bool> ForceCustomEnemy;
+
         private Harmony _harmony;
 
         private void Awake()
@@ -38,6 +44,10 @@ namespace FTKModFramework
             EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
                 "Register the bundled example content (a custom weapon + ability, given to the Blacksmith). " +
                 "Set false if you only want the framework as a dependency for other content mods.");
+
+            ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", true,
+                "DEBUG: replace every overworld LAND enemy that spawns with the custom 'Cutpurse' so enemy " +
+                "injection is immediately visible in combat. Set false for normal play.");
 
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             fsConfig.SerializeEnumsAsInteger = true;
@@ -66,6 +76,7 @@ namespace FTKModFramework
             if (!Plugin.EnableSampleContent.Value) return;
             Run("sample weapon/ability", SampleContent.Register);
             Run("thief class", ThiefClass.Register);
+            Run("cutpurse enemy", CutpurseEnemy.Register);
         }
 
         private static void Run(string what, Action register)

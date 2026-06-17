@@ -136,29 +136,84 @@ Gotchas (learned the hard way building the Thief's Steal):
 
 See `Content/ThiefStealProficiency.cs` for the full worked example.
 
-## 6. How it works (why it's safe)
+## 6. Enemies
+
+`Content.AddEnemy` clones an existing enemy's `FTK_enemyCombat` row (so you inherit a valid 3D body,
+weapon, and animations) and registers it with a high-band synthetic id. Unlike classes, enemies are
+**not** id == array index — every enemy lookup is dictionary/string-based, and selection round-trips the
+id through its decimal string over Photon. After registering, `AddEnemy` flips
+`GameCache.Enemies.NeedsRebuild` so the game's level-bucketed spawn pool re-reads the DB and your enemy
+becomes eligible for ordinary overworld/dungeon fights — **no spawn-selection patch needed.**
+
+```csharp
+FTK_enemyCombat cutpurse = Content.AddEnemy(
+    "com.you.mymod", "mymod_cutpurse", FTK_enemyCombat.ID.banditA, "Cutpurse",
+    e => {
+        e.m_EnemyLevel = 1;                          // which level bucket it spawns in
+        e.m_HealthTotal = 26; e.m_EvadeRating = 0.20f;
+        e.m_ArchType = FTK_enemyCombat.EnemyArchType.Evade;
+        e.m_ChanceToProf = 0.5f;                     // how often it uses a proficiency vs a normal attack
+        e.m_Rarity = "Common";                       // draw weight (FTK_encounterDrawChanceDB)
+        e.m_SpawnDay = e.m_SpawnNight = e.m_SpawnLand = e.m_SpawnDungeon = true;
+        e.m_RealmInclude = new FTK_realm.ID[0];      // empty => eligible in every realm
+        // custom loot: give it its OWN ItemDrops (the clone shares the template's by reference)
+        var drops = new FTK_enemyCombat.ItemDrops();
+        Reflect.CopyFields(e.m_ItemDrops, drops);
+        drops._golddrop = 25;
+        drops.m_AlwaysDropItems = new[] { FTK_itembase.ID.conLockpicks };
+        e.m_ItemDrops = drops;
+    });
+Localization.SetEnemyDescription("mymod_cutpurse", "A nimble thief who robs the unwary.");
+
+// give it a custom/cloned attack (its own private weapon copy; vanilla enemies untouched)
+Content.AttachEnemyProficiencies(cutpurse, "mymod_pilfer");
+```
+
+Things that matter:
+- **It must pass the spawn-pool filter or it's silently dropped:** clone a template that is **not a boss,
+  not a scourge, and not in `FTK_enemyScaleDB`**, and keep its `m_EnemyAsset` non-null.
+- **`m_EnemyAsset`** (a `CharacterEventListener`) is the 3D body and **`m_WeaponAsset`** (a `Weapon`
+  component) carries the attacks — both are reference fields, so cloning reuses them and the enemy renders
+  and fights for free. `m_ArchType` is only a *stat* archetype, not the model.
+- **Abilities:** `AttachEnemyProficiencies` instantiates a private copy of `m_WeaponAsset`, adds your
+  proficiency, strips any `AttackSchedule` (so the RNG attack path can pick it), and `SaveState()`s it.
+  Set `m_ChanceToProf > 0` so the AI actually fires it. A custom `ProficiencyBase` behaviour (§5) works
+  when the enemy is the attacker — guard any shared-state mutation (gold, etc.) with
+  `PhotonNetwork.isMasterClient` so co-op applies it once.
+- **Spawn gating:** `m_EnemyLevel` (which bucket), `m_Rarity` (draw weight), `m_SpawnDay/Night/Land/Water/Dungeon`,
+  and `m_RealmInclude`/`m_RealmExclude` decide *where/when* it appears. Cloning a template that already
+  spawns gives sane defaults.
+- **Multiplayer:** enemy spawns are master-authoritative and cross the wire as the enemy's id *string*;
+  the deterministic synthetic id round-trips, so co-op stays in sync as long as every player has the mod.
+
+There's also a DEBUG config (`Enemies/ForceCustomEnemy`) that replaces every overworld land enemy with the
+Cutpurse, so you can verify a custom enemy fights and drops loot without waiting on the weighted draw.
+
+See `Content/CutpurseEnemy.cs` (+ `Content/CutpurseStealProficiency.cs`) for the full worked example.
+
+## 7. How it works (why it's safe)
 
 - **IDs** — the `FTK_*.ID` enums are compile-time fixed. `IdAllocator` mints a deterministic
   synthetic int per `(modGuid, contentKey)` in a high band (`0x40000000+`), identical on every
   machine — so saves and co-op stay in sync. `DbLookupPatcher` + the `GetEnum` prefixes make the
   game's lookups resolve those synthetic ids.
 - **Names & text** — `Localization` patches the game's text lookups (item/weapon `GetLocalizedName`,
-  proficiency `GetLocalizedDisplayName`/`DisplayTitle`, class `GetDisplayName`, class flavor, and
-  proficiency tooltip descriptions) to return what you registered — the game otherwise reads from
-  Google2u text tables it doesn't have entries for.
+  proficiency `GetLocalizedDisplayName`/`DisplayTitle`, class `GetDisplayName`, class flavor, enemy
+  `GetEnemyDisplay`/`GetEnemyDescription`, and proficiency tooltip descriptions) to return what you
+  registered — the game otherwise reads from Google2u text tables it doesn't have entries for.
 - **Routing** — a patch on `FTK_itembase.GetItemBase` keeps custom items resolvable despite the
   `id >= 100000 -> weapon DB` rule.
 - **Save-safety** — the framework sets `FullSerializer.fsConfig.SerializeEnumsAsInteger = true`.
 
-## 7. Multiplayer
+## 8. Multiplayer
 
 Co-op is Photon and has **no asset streaming** — every player must have the same mods installed.
 Synthetic IDs are deterministic precisely so host/client agree on what each id means.
 
-## 8. Content tables
+## 9. Content tables
 
 The full inventory of the 57 `FTK_*DB` tables (items, weapons, proficiencies, hit effects,
 classes, skinsets, enemies, realms, encounters, quests, ...) is in
 [`PHASE0-TYPE-INVENTORY.md`](PHASE0-TYPE-INVENTORY.md). Helpers exist for items, weapons,
-proficiencies, and classes; an enemy helper is next. For any other table you can register directly
+proficiencies, classes, and enemies. For any other table you can register directly
 with `ContentRegistry.Register(db, guid, id, template, configure)`.
