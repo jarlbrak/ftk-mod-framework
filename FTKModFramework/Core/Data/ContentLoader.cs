@@ -7,13 +7,33 @@ using FTKModFramework.Core;
 namespace FTKModFramework.Core.Data
 {
     /// <summary>
+    /// Immutable result of one content load: the registered/total entry counts and the elapsed load time,
+    /// all taken from the SINGLE existing Stopwatch/count measurement inside <see cref="ContentLoader.Load"/>.
+    /// The scale-budget gate reads this directly; there is deliberately no static "last load" field on
+    /// ContentLoader (a mutable global would be a co-op/determinism hazard and is forbidden by the spec).
+    /// </summary>
+    public sealed class LoadResult
+    {
+        public readonly int RegisteredCount;
+        public readonly int TotalCount;
+        public readonly long ElapsedMs;
+
+        public LoadResult(int registeredCount, int totalCount, long elapsedMs)
+        {
+            RegisteredCount = registeredCount;
+            TotalCount = totalCount;
+            ElapsedMs = elapsedMs;
+        }
+    }
+
+    /// <summary>
     /// Orchestrates the JSON data pipeline: discover manifest-valid mod folders, parse their content
     /// files, then register each entry through the PUBLIC <c>Content.Add*</c> API. It never registers
     /// rows directly and never re-implements <c>ContentRegistry</c> (spec #6): it only DRIVES the
     /// authoring helpers, exactly as a hand-written content class would.
     ///
     /// P1c is TWO-PHASE (FR-6). A field is a Phase-2 REFERENCE field iff its type is one of the five
-    /// content-id enums (or an array of one) — see <see cref="OverrideEngine.IsContentIdField"/>; every
+    /// content-id enums (or an array of one), see <see cref="OverrideEngine.IsContentIdField"/>; every
     /// other field is a Phase-1 BASE field.
     ///   Phase 1: for each entry (sorted by ordinal (modGuid, id)) call the matching <c>Content.Add*</c>
     ///            applying ONLY base fields, then CACHE the returned live row tagged with its kind.
@@ -32,7 +52,7 @@ namespace FTKModFramework.Core.Data
     internal static class ContentLoader
     {
         /// <summary>Entry point called from the TableManager.Initialize postfix (after sample content).</summary>
-        public static void Load(string contentRoot)
+        public static LoadResult Load(string contentRoot)
         {
             Stopwatch sw = Stopwatch.StartNew();
             ValidationReport report = new ValidationReport();
@@ -62,6 +82,9 @@ namespace FTKModFramework.Core.Data
             EmitParitySelfTest(cached);
             EmitDeterminismSelfTest(cached);
             LogSummary(report, cached.Count, pending.Count, sw.ElapsedMilliseconds);
+
+            // Return the SAME measured values the summary just logged: no second Stopwatch, no re-count.
+            return new LoadResult(cached.Count, pending.Count, sw.ElapsedMilliseconds);
         }
 
         /// <summary>
@@ -377,7 +400,7 @@ namespace FTKModFramework.Core.Data
         }
 
         /// <summary>
-        /// Determinism self-test (the #9 grep target): for the HASHED kinds (weapon + proficiency — those
+        /// Determinism self-test (the #9 grep target): for the HASHED kinds (weapon + proficiency, those
         /// minted from IdAllocator's high band, NOT classes which use id == array index), assert the
         /// registered synthetic id equals <c>IdAllocator.Allocate(modGuid, dbType.Name + "/" + id)</c>
         /// computed directly. The expected int is DERIVED from the allocator, never a literal (FR-8).
