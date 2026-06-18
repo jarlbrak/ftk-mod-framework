@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "kind": "proficiency",
+      "id": "danglingbehavior_phantomstrike",
+      "template": "bladeDamage",
+      "displayName": "Phantom Strike",
+      "fields": { "damage": 0.5, "chancetoaffect": 1.0 },
+      "behavior": "NoSuchBehavior",
+      "description": "A proficiency that names a behaviour no DLL supplies. Phase-2 wiring (#31) must WARN and skip the prefab wiring; this row's data fields (damage, chanceToAffect) still loaded in Phase 1, and every other mod still loads. (FR-5 dangling path + FR-9 dangling-name fixture: loads with warnings and zero crash.)"
+    }
+  ]
+}

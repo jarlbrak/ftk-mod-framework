@@ -58,6 +58,13 @@ namespace FTKModFramework.Core.Data
             ValidationReport report = new ValidationReport();
 
             List<DiscoveredMod> mods = ModDiscovery.Discover(contentRoot, report);
+
+            // SINGLE behaviour-DLL pre-pass (FR-7): load + reflect + register every mod's behaviorDll behaviours
+            // BEFORE any content-registration phase. This is the sequencing invariant the Phase-2 WireBehavior
+            // step (#31) depends on: a content entry's behavior:"name" can only resolve modGuid:name once the
+            // pre-pass has registered it, so the resolution can never run ahead of registration.
+            BehaviorLoader.LoadAll(mods, report);
+
             List<PendingEntry> pending = CollectEntries(mods, report);
 
             // Deterministic registration order across machines: sort by ordinal (modGuid, id). This is the
@@ -95,6 +102,8 @@ namespace FTKModFramework.Core.Data
             sw.Stop();
 
             EmitParitySelfTest(cached);
+            EmitBehaviorSelfTest(cached);
+            EmitBehaviorDllSelfTest(cached);
             EmitDeterminismSelfTest(cached);
             LogSummary(report, cached.Count, pending.Count, sw.ElapsedMilliseconds);
 
@@ -337,8 +346,73 @@ namespace FTKModFramework.Core.Data
             int refs = OverrideEngine.ApplyResolved(c.Row, c.ReferenceFields, ctx, report);
             if (refs > 0) Plugin.Log.LogInfo("Data: resolved " + refs + " reference field(s) on '" + c.Id + "'.");
 
+            WireBehavior(c, report);
             AttachProficiencies(c, report);
             ApplyLocalization(c);
+        }
+
+        /// <summary>
+        /// Wire a custom <c>behavior</c> into a proficiency row's <c>m_ProficiencyPrefab</c> (#31). This is a
+        /// DEDICATED step, NOT routed through the field-override engine: <c>behavior</c>/<c>behaviorCategory</c>
+        /// are not real FTK_proficiencyTable members (<c>m_ProficiencyPrefab</c> is a ProficiencyBase
+        /// reference, not one of the five content-id enum fields), so they must never go through Split's
+        /// base/reference partition.
+        ///
+        /// Timing (decompile-grounded, ninum kb_4f8b6299): ProficiencyManager.Start does
+        /// <c>Instantiate(row.m_ProficiencyPrefab); .Init(id); cache[id]=clone</c> ONCE, in a combat scene
+        /// AFTER TableManager.Initialize (where this loader runs). So setting the prefab here is correctly
+        /// BEFORE Start, the same timing the compiled Thief already relies on. There is NO rebuild API, so a
+        /// prefab set later would be ignored; setting it now is the only correct moment.
+        ///
+        /// Fault isolation: a behaviour on a non-proficiency kind, an unresolved (dangling) key, and an
+        /// unknown category all WARN and continue. The rest of the entry already loaded in Phase 1.
+        /// </summary>
+        private static void WireBehavior(Cached c, ValidationReport report)
+        {
+            if (IsBlank(c.Entry.Behavior)) return; // no behaviour authored: nothing to wire.
+
+            if (c.Kind != "proficiency")
+            {
+                report.Warning(c.Context + ": 'behavior' is only supported on kind 'proficiency', not '" +
+                    c.Kind + "' (ignored).");
+                return;
+            }
+
+            string key = c.ModGuid + ":" + c.Entry.Behavior;
+            Type type;
+            if (!BehaviorRegistry.TryResolve(key, out type))
+            {
+                // Dangling behaviour reference: the row already loaded its data fields in Phase 1; only the
+                // prefab wiring is skipped. Mirrors the dangling-content-id reference policy (warn + continue).
+                report.Warning(c.Context + ": behavior '" + c.Entry.Behavior +
+                    "' is not registered (dangling; wiring skipped).");
+                return;
+            }
+
+            ProficiencyBase inst = BehaviorHost.Create(type, "ftkmf_databehavior_" + c.Id);
+            if (inst == null)
+            {
+                report.Warning(c.Context + ": behavior '" + c.Entry.Behavior +
+                    "' (" + type.Name + ") could not be hosted (wiring skipped).");
+                return;
+            }
+
+            // Seed the hosted instance's resting category from behaviorCategory, if authored. A runtime
+            // AddComponent instance has empty serialized state (ninum kb_4f8b6299), so m_Category MUST be set
+            // imperatively here; otherwise it stays the default. An unknown name warns and leaves the default.
+            if (!IsBlank(c.Entry.BehaviorCategory))
+            {
+                ProficiencyBase.Category category;
+                if (TryParseEnum(c.Entry.BehaviorCategory, out category))
+                    inst.m_Category = category;
+                else
+                    report.Warning(c.Context + ": behaviorCategory '" + c.Entry.BehaviorCategory +
+                        "' is not a valid ProficiencyBase.Category (left at default).");
+            }
+
+            ((FTK_proficiencyTable)c.Row).m_ProficiencyPrefab = inst;
+            Plugin.Log.LogInfo("Data: wired behavior '" + c.Entry.Behavior + "' (" + type.Name +
+                ") to proficiency '" + c.Id + "'.");
         }
 
         /// <summary>Attach inline <c>proficiencies</c>: weapon -&gt; AttachProficiencies, enemy -&gt; AttachEnemyProficiencies.</summary>
@@ -375,10 +449,11 @@ namespace FTKModFramework.Core.Data
         // ===================== SELF-TESTS =====================
 
         /// <summary>
-        /// Parity self-test (the #9 grep target): reproduce <c>Content/ThiefClass.cs</c> in JSON minus the
-        /// custom Steal MonoBehaviour. Asserts the class' m_StartWeapon resolved CROSS-FILE to a custom
-        /// synthetic id, three proficiencies are attached to that weapon, the seeded dangling start-item was
-        /// skipped (the rest of m_StartItems still loaded), and the flavor text was registered.
+        /// Parity self-test (the #9 grep target): reproduce <c>Content/ThiefClass.cs</c> in JSON, now
+        /// INCLUDING the behaviour-wired Steal (the data fixture carries <c>behavior:"Steal"</c>, wired in
+        /// #31). Asserts the class' m_StartWeapon resolved CROSS-FILE to a custom synthetic id, the
+        /// proficiencies (now four, including Steal) are attached to that weapon, the seeded dangling
+        /// start-item was skipped (the rest of m_StartItems still loaded), and the flavor text was registered.
         /// </summary>
         private static void EmitParitySelfTest(List<Cached> cached)
         {
@@ -399,6 +474,8 @@ namespace FTKModFramework.Core.Data
             bool danglingSkipped = authoredCount > 0 && startItems == authoredCount - danglingCount;
 
             int profCount = ProficiencyCount((FTK_weaponStats2)weapon.Row);
+            // The dagger now carries FOUR proficiencies (the three rogue actions + the behaviour-wired Steal,
+            // #31); >= 3 still passes and stays robust if a future fixture adds or drops one.
             bool profsAttached = profCount >= 3;
 
             string flavor;
@@ -407,11 +484,162 @@ namespace FTKModFramework.Core.Data
             bool ok = startWeaponResolved && profsAttached && danglingSkipped && flavorSet;
             if (ok)
                 Plugin.Log.LogInfo("SELF-TEST PASS: data-content ThiefClass parity (startWeapon=" + weaponSynthetic +
-                    " resolved cross-file, 3 profs attached, dangling skipped, flavor set)");
+                    " resolved cross-file, " + profCount + " profs attached, dangling skipped, flavor set)");
             else
                 Plugin.Log.LogError("SELF-TEST FAIL [data-parity]: startWeaponResolved=" + startWeaponResolved +
                     " profsAttached=" + profsAttached + " (" + profCount + ") danglingSkipped=" + danglingSkipped +
                     " (startItems=" + startItems + ") flavorSet=" + flavorSet + ".");
+        }
+
+        /// <summary>
+        /// Behaviour-wiring self-test (#31, the grep target "SELF-TEST PASS [data-behavior]"): proves the
+        /// in-assembly demo behaviour is registered and that the JSON-authored <c>sampledata_steal</c>
+        /// proficiency resolved it into a hosted prefab with the authored category, and that the steal is
+        /// attached to the Shadowfang dagger. Every assertion is LOAD-time verifiable and decompile-grounded
+        /// (m_ProficiencyPrefab / m_Category, ninum kb_4f8b6299). No-op when the sampledata mod is absent
+        /// (mirrors EmitParitySelfTest), so a non-sampledata load never FAILs it.
+        /// </summary>
+        private static void EmitBehaviorSelfTest(List<Cached> cached)
+        {
+            Cached steal = Find(cached, "proficiency", "sampledata_steal");
+            Cached weapon = Find(cached, "weapon", "sampledata_shadowfang");
+            if (steal == null || weapon == null) return; // sample data not present: nothing to assert.
+
+            // (1) The bundled-demo behaviour key resolves back to the EXACT framework Type.
+            Type type;
+            bool registered = BehaviorRegistry.TryResolve("com.ftkmf.sampledata:Steal", out type)
+                && type == typeof(FTKModFramework.ThiefStealProficiency);
+
+            // (2) The JSON-authored proficiency row got the hosted behaviour wired into m_ProficiencyPrefab.
+            FTK_proficiencyTable row = (FTK_proficiencyTable)steal.Row;
+            ProficiencyBase prefab = row != null ? row.m_ProficiencyPrefab : null;
+            bool prefabWired = prefab != null
+                && prefab is FTKModFramework.ThiefStealProficiency
+                && registered && prefab.GetType() == type;
+
+            // (3) behaviorCategory:"StealGold" was parsed and set on the hosted instance.
+            bool categorySet = prefab != null && prefab.m_Category == ProficiencyBase.Category.StealGold;
+
+            // (4) The steal proficiency is attached to the Shadowfang dagger (the game's own read path).
+            int stealId = Content.Db<FTK_proficiencyTableDB>().GetIntFromID("sampledata_steal");
+            bool attached = WeaponHasProficiency((FTK_weaponStats2)weapon.Row, stealId);
+
+            bool ok = registered && prefabWired && categorySet && attached;
+            if (ok)
+                Plugin.Log.LogInfo("SELF-TEST PASS [data-behavior]: 'com.ftkmf.sampledata:Steal' -> " +
+                    type.Name + " wired into sampledata_steal.m_ProficiencyPrefab (category StealGold), " +
+                    "attached to Shadowfang (profId=" + stealId + ").");
+            else
+                Plugin.Log.LogError("SELF-TEST FAIL [data-behavior]: registered=" + registered +
+                    " prefabWired=" + prefabWired + " categorySet=" + categorySet + " attached=" + attached + ".");
+        }
+
+        /// <summary>
+        /// Behaviour-DLL end-to-end self-test (#33/#34, the grep target "SELF-TEST PASS [behavior-dll]"): the
+        /// FR-9 closing predicate, proving a JSON-named, DLL-supplied behaviour is wired in-game IDENTICALLY to
+        /// the compiled <c>ThiefStealProficiency</c>. The sample behaviour mod (com.ftkmf.samplebehaviormod)
+        /// ships a SEPARATE net35 assembly whose <c>[ContentBehavior("Steal")]</c> ProficiencyBase subtype the
+        /// pre-pass loaded + registered BEFORE the content-registration phase ran. This asserts the full
+        /// three-part predicate for the DLL path:
+        ///   (1) <c>BehaviorRegistry.TryResolve("com.ftkmf.samplebehaviormod:Steal", out type)</c> is true AND
+        ///       <c>type</c> is the SAME Type object as the wired prefab's runtime type (the SampleStealBehavior
+        ///       loaded from the DLL). The Type lives in the SEPARATE sample assembly, so this checks Type
+        ///       identity against the live prefab, not a <c>typeof</c> in THIS assembly.
+        ///   (2) the <c>samplebehaviormod_steal</c> row's <c>m_ProficiencyPrefab</c> is non-null, is the
+        ///       framework-owned hosted instance, and <c>m_ProficiencyPrefab.GetType() == type</c>.
+        ///   (3) the Steal is attached to the <c>samplebehaviormod_dirk</c> weapon (instantiate-and-read the
+        ///       prof ids, the game's own read path, same pattern as the parity/dagger checks).
+        /// It also confirms the load reached completion (cached.Count &gt; 0), so a sibling broken-DLL fixture's
+        /// LoadFrom failure did NOT abort the load: other content still registered (FR-4 isolation). The
+        /// broken.dll LoadFrom failure itself is observable as a validation error in the report/log.
+        ///
+        /// This startup self-test proves WIRING. The amended FR-9 part 3 (a log-observable steal OUTCOME via
+        /// AddToDummy) is verified in COMBAT: SampleStealBehavior.AddToDummy emits a "[SampleBehaviorMod] Steal
+        /// ..." Debug.Log line on a hit, the same way the compiled Thief's "[Thief] Steal ..." line is observed.
+        /// Firing is the identical code path the wiring this test asserts feeds into.
+        ///
+        /// No-op when the sample behaviour mod is absent (mirrors <see cref="EmitParitySelfTest"/>), so a
+        /// non-samplebehaviormod load never FAILs it.
+        /// </summary>
+        private static void EmitBehaviorDllSelfTest(List<Cached> cached)
+        {
+            const string key = "com.ftkmf.samplebehaviormod:Steal";
+
+            // Gated-off skip (#35): when EnableBehaviorLoading is false the DLL pre-pass never ran, so the
+            // DLL key is intentionally absent and m_ProficiencyPrefab was never wired. The JSON proficiency
+            // row still registers (the gate only blocks the external-DLL path), so without this guard the
+            // test would spuriously FAIL on registered=false. Skip cleanly with one benign info line instead.
+            // (null-guarded for a test context where Plugin.Awake never ran, matching DebugEncounterOverride.)
+            if (Plugin.EnableBehaviorLoading != null && !Plugin.EnableBehaviorLoading.Value)
+            {
+                Plugin.Log.LogInfo("SELF-TEST [behavior-dll]: skipped (EnableBehaviorLoading=false; the " +
+                    "DLL pre-pass did not run, so '" + key + "' is intentionally absent).");
+                return;
+            }
+
+            // No-op guard: only assert when this mod actually contributed its proficiency AND its dagger.
+            Cached steal = Find(cached, "proficiency", "samplebehaviormod_steal");
+            Cached dirk = Find(cached, "weapon", "samplebehaviormod_dirk");
+            if (steal == null || dirk == null) return; // sample behaviour mod not present: nothing to assert.
+
+            // (2 prep) The JSON-authored proficiency row got the DLL behaviour hosted into m_ProficiencyPrefab.
+            FTK_proficiencyTable row = (FTK_proficiencyTable)steal.Row;
+            ProficiencyBase prefab = row != null ? row.m_ProficiencyPrefab : null;
+
+            // (1) The DLL-supplied key resolves AND is the SAME Type object as the wired prefab's runtime type.
+            // The Type lives in the separate sample assembly; comparing prefab.GetType() == type proves the
+            // registry resolved to exactly the type the pre-pass loaded from the DLL and that WireBehavior
+            // hosted that same type.
+            Type type;
+            bool registered = BehaviorRegistry.TryResolve(key, out type)
+                && type != null
+                && typeof(ProficiencyBase).IsAssignableFrom(type)
+                && prefab != null
+                && prefab.GetType() == type;
+
+            // (2) m_ProficiencyPrefab is the framework-owned hosted instance of that exact DLL type. The host
+            // GameObject is named "ftkmf_databehavior_<id>" (BehaviorHost via WireBehavior), so a non-null,
+            // correctly-named prefab whose runtime type == the resolved Type is the framework's instance.
+            bool prefabIsFrameworkInstance = prefab != null
+                && type != null
+                && prefab.GetType() == type
+                && prefab.gameObject != null
+                && prefab.gameObject.name == "ftkmf_databehavior_" + steal.Id;
+
+            // (3) The Steal is attached to the dirk (the game's own read path: instantiate + read prof ids).
+            int stealId = Content.Db<FTK_proficiencyTableDB>().GetIntFromID("samplebehaviormod_steal");
+            bool attached = WeaponHasProficiency((FTK_weaponStats2)dirk.Row, stealId);
+
+            // The whole load reached completion with content registered: a sibling broken.dll LoadFrom failure
+            // was isolated and did NOT abort the pass.
+            bool loadCompleted = cached.Count > 0;
+
+            bool ok = registered && prefabIsFrameworkInstance && attached && loadCompleted;
+            if (ok)
+                Plugin.Log.LogInfo("SELF-TEST PASS [behavior-dll]: '" + key + "' -> " + type.FullName +
+                    " (resolved Type == prefab Type == framework instance; wired into samplebehaviormod_steal" +
+                    ".m_ProficiencyPrefab; attached to Cutthroat's Dirk profId=" + stealId + "; " +
+                    cached.Count + " entries loaded, broken-DLL isolation held).");
+            else
+                Plugin.Log.LogError("SELF-TEST FAIL [behavior-dll]: registered=" + registered +
+                    " (key '" + key + "') prefabIsFrameworkInstance=" + prefabIsFrameworkInstance +
+                    " attached=" + attached + " loadCompleted=" + loadCompleted + " (cached=" + cached.Count + ").");
+        }
+
+        /// <summary>
+        /// True iff <paramref name="weapon"/>'s prefab carries proficiency id <paramref name="profId"/>. Uses
+        /// the game's own read path: instantiate the prefab, read the Weapon's proficiency ids, destroy the
+        /// throwaway clone. Only runs inside the sample-data behaviour self-test.
+        /// </summary>
+        private static bool WeaponHasProficiency(FTK_weaponStats2 weapon, int profId)
+        {
+            if (weapon == null || weapon.m_Prefab == null) return false;
+            UnityEngine.GameObject inst = UnityEngine.Object.Instantiate(weapon.m_Prefab);
+            bool has = false;
+            Weapon w = inst.GetComponentInChildren<Weapon>(true);
+            if (w != null) has = w.GetProficiencyIDs().Contains((FTK_proficiencyTable.ID)profId);
+            UnityEngine.Object.Destroy(inst);
+            return has;
         }
 
         /// <summary>

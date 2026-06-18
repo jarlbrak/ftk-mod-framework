@@ -16,6 +16,9 @@ namespace FTKModFramework
     ///
     /// Wired in as the proficiency row's m_ProficiencyPrefab; ProficiencyManager Instantiate()s it and
     /// combat calls AddToDummy() on the victim when the action applies.
+    ///
+    /// Pilfer is gold-only: m_Category is set once to StealGold at seed time on the shared prefab and never
+    /// mutated here, so it trivially satisfies the shared-instance rule (no per-hit category write needed).
     /// </summary>
     public class CutpurseStealProficiency : ProficiencyBase
     {

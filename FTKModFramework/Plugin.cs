@@ -51,6 +51,15 @@ namespace FTKModFramework
         public static ConfigEntry<bool> EnableDataContent;
 
         /// <summary>
+        /// Whether to run the external-DLL behaviour pre-pass (#33): for each discovered mod that declares a
+        /// behaviorDll, Assembly.LoadFrom + reflect + register its [ContentBehavior] proficiencies. Gates ONLY
+        /// the external-DLL pre-pass; the in-assembly Phase-1 behaviours (FrameworkBehaviors /
+        /// com.ftkmf.sampledata:Steal) are registered separately and are NOT affected. Default on; inert when
+        /// no mod declares a behaviorDll. Set false to skip all Assembly.LoadFrom work (0 DLL behaviours loaded).
+        /// </summary>
+        public static ConfigEntry<bool> EnableBehaviorLoading;
+
+        /// <summary>
         /// Folder the data loader scans for mod subfolders (each with a manifest.json). Defaults to
         /// BepInEx's plugins dir, so dropping a content-mod folder in alongside plugins just works.
         /// </summary>
@@ -127,6 +136,13 @@ namespace FTKModFramework
             EnableDataContent = Config.Bind("Data", "EnableDataContent", true,
                 "Run the JSON data-content loader (discovers content-mod folders under DataContentRoot and " +
                 "registers their content). Independent of EnableSampleContent.");
+
+            EnableBehaviorLoading = Config.Bind("Data", "EnableBehaviorLoading", true,
+                "Run the external-DLL behaviour pre-pass: for each mod that declares a behaviorDll, load + " +
+                "reflect + register its [ContentBehavior] proficiencies. Gates ONLY the external-DLL pre-pass; " +
+                "the in-assembly behaviours (FrameworkBehaviors / com.ftkmf.sampledata:Steal) are unaffected. " +
+                "Default on; inert when no mod declares a behaviorDll. Set false to skip all Assembly.LoadFrom " +
+                "work (0 DLL behaviours loaded).");
 
             DataContentRoot = Config.Bind("Data", "DataContentRoot", Paths.PluginPath,
                 "Folder scanned for content-mod subfolders (each with a manifest.json). Defaults to the " +
@@ -216,6 +232,15 @@ namespace FTKModFramework
                 Run("sample encounter + adventure", AdventureContent.Register);
             }
 
+            // Behaviour primitives self-test (P3, #29). Runs UNCONDITIONALLY (independent of EnableSampleContent):
+            // it only exercises its own throwaway keys/types and proves BehaviorRegistry + BehaviorHost work.
+            Run("behavior primitives", BehaviorSelfTest.Run);
+
+            // behaviorDll path-traversal guard self-test (P3, #32). Runs UNCONDITIONALLY: it exercises the
+            // manifest guard as a pure function (no filesystem, no game state), proving '..'/separator/
+            // absolute values are rejected and a bare filename resolves under the mod root.
+            Run("behavior dll guard", BehaviorDllGuardSelfTest.Run);
+
             // Synthetic stress content (P5b, #23). Runs ALWAYS, BEFORE the data load, so a count-0 run still
             // clears a stale reserved subfolder a prior higher-N run may have left. When count > 0 it writes N
             // synthetic entries into the reserved subfolder under DataContentRoot; the single existing
@@ -227,6 +252,13 @@ namespace FTKModFramework
                 Plugin.SyntheticContentCount.Value,
                 Plugin.SyntheticContentKind.Value,
                 Plugin.SyntheticContentTemplate.Value));
+
+            // Framework-shipped behaviours (#31). Runs UNCONDITIONALLY (independent of EnableSampleContent)
+            // and BEFORE the data loader, so the bundled-demo behaviour key (com.ftkmf.sampledata:Steal) is
+            // present when the loader resolves the demo fixture's behavior:"Steal". This is the in-assembly
+            // demo path that lets the shipped sampledata fixture drop the "minus the MonoBehaviour" caveat;
+            // real third-party mods supply behaviours via their own DLL under their own guid (#33/#34).
+            Run("framework behaviors", FrameworkBehaviors.Register);
 
             // JSON data-content mods (opt-in, independent of the demo). Runs AFTER sample content so a
             // data mod can reference vanilla rows the same way the demo does. ContentLoader registers each

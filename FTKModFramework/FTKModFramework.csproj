@@ -59,6 +59,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- The Samples/ tree is a SEPARATE assembly (the sample behaviour mod, #33), built on its own and
+         deployed into a sample MOD folder, NOT into BepInEx/plugins. Exclude it from the plugin's default
+         SDK globs so the plugin build gate (`dotnet build -c Release`) stays UNCHANGED and never pulls the
+         sample source (or its generated obj/ AssemblyInfo) into FTKModFramework.dll. -->
+    <Compile Remove="Samples\**\*.cs" />
+    <None Remove="Samples\**\*" />
+    <Content Remove="Samples\**\*" />
+    <EmbeddedResource Remove="Samples\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Share the pure, Unity-free scale-budget math (records + ScaleBudgetEval) by link-compiling the
          same FTKPerfProbe/Pure source the test project compiles. No assembly reference between the two
          plugins; the source is the single shared unit. (FTKPerfProbe.Tests uses the identical glob.) -->

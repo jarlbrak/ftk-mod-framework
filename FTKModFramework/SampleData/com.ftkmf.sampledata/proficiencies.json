@@ -27,6 +27,16 @@
       "fields": {
         "damage": 1.6
       }
+    },
+    {
+      "kind": "proficiency",
+      "id": "sampledata_steal",
+      "template": "bladeDamage",
+      "displayName": "Steal",
+      "fields": { "damage": 0.15, "ignoresarmor": true, "slots": 1, "m_PerSlotSkillRoll": -0.5, "chancetoaffect": 1.0 },
+      "behavior": "Steal",
+      "behaviorCategory": "StealGold",
+      "description": "Lands a quick strike that lifts either gold or an item from the enemy."
     }
   ]
 }
