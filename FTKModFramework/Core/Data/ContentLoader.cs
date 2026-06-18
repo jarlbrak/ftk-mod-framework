@@ -33,7 +33,7 @@ namespace FTKModFramework.Core.Data
     /// authoring helpers, exactly as a hand-written content class would.
     ///
     /// P1c is TWO-PHASE (FR-6). A field is a Phase-2 REFERENCE field iff its type is one of the five
-    /// content-id enums (or an array of one) — see <see cref="OverrideEngine.IsContentIdField"/>; every
+    /// content-id enums (or an array of one), see <see cref="OverrideEngine.IsContentIdField"/>; every
     /// other field is a Phase-1 BASE field.
     ///   Phase 1: for each entry (sorted by ordinal (modGuid, id)) call the matching <c>Content.Add*</c>
     ///            applying ONLY base fields, then CACHE the returned live row tagged with its kind.
@@ -400,7 +400,7 @@ namespace FTKModFramework.Core.Data
         }
 
         /// <summary>
-        /// Determinism self-test (the #9 grep target): for the HASHED kinds (weapon + proficiency — those
+        /// Determinism self-test (the #9 grep target): for the HASHED kinds (weapon + proficiency, those
         /// minted from IdAllocator's high band, NOT classes which use id == array index), assert the
         /// registered synthetic id equals <c>IdAllocator.Allocate(modGuid, dbType.Name + "/" + id)</c>
         /// computed directly. The expected int is DERIVED from the allocator, never a literal (FR-8).
