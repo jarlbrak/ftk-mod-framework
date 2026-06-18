@@ -29,13 +29,33 @@ namespace FTKModFramework.Core.Data
     /// </summary>
     internal static class BehaviorLoader
     {
+        /// <summary>Cap on per-type ReflectionTypeLoadException diagnostic lines, so a pathological DLL
+        /// (e.g. hundreds of types failing to resolve a missing dependency) cannot flood the log. After this
+        /// many per-type lines a single "+K more" line summarizes the rest.</summary>
+        private const int MaxLoaderExceptionLines = 10;
+
         /// <summary>
         /// For each mod with a resolved <see cref="DiscoveredMod.BehaviorDllPath"/>, load + reflect + register
         /// its behaviours. Records every tolerated problem on <paramref name="report"/>; never throws.
+        ///
+        /// Gated by <c>Plugin.EnableBehaviorLoading</c> (#35): when that flag is false the WHOLE external-DLL
+        /// pre-pass is skipped, so NO Assembly.LoadFrom runs and ZERO DLL behaviours register. This gates ONLY
+        /// the external-DLL path; the in-assembly behaviours (FrameworkBehaviors / com.ftkmf.sampledata:Steal)
+        /// register on their own unconditional path and are unaffected. The flag is null-guarded so a test
+        /// context where Plugin.Awake never ran defaults to running the pre-pass (matching DebugEncounterOverride
+        /// / CutpurseEnemy, which guard <c>Plugin.&lt;cfg&gt; == null</c>).
         /// </summary>
         internal static void LoadAll(List<DiscoveredMod> mods, ValidationReport report)
         {
             if (mods == null) return;
+
+            // Gate the external-DLL pre-pass. null => no Awake (test context): default to enabled.
+            if (Plugin.EnableBehaviorLoading != null && !Plugin.EnableBehaviorLoading.Value)
+            {
+                Plugin.Log.LogInfo("BehaviorLoader: behavior loading disabled by config " +
+                    "(EnableBehaviorLoading=false); 0 DLL behaviors loaded.");
+                return;
+            }
 
             foreach (DiscoveredMod mod in mods)
             {
@@ -87,13 +107,40 @@ namespace FTKModFramework.Core.Data
             }
             catch (ReflectionTypeLoadException ex)
             {
-                // P0: keep every non-null entry, log, continue. NEVER rethrow. A partially loadable assembly
-                // (e.g. one type references a member missing at runtime) still yields its loadable behaviours.
-                // The per-failed-type diagnostic SUMMARY is deferred to #35; here we only keep + continue.
+                // P0 (#33): keep every non-null entry, log, continue. NEVER rethrow. A partially loadable
+                // assembly (e.g. one type references a member missing at runtime) still yields its loadable
+                // behaviours. This keep-non-null-and-continue behavior is unchanged.
                 Plugin.Log.LogWarning("[" + modGuid + "] ReflectionTypeLoadException loading behaviors; using the types that did load.");
                 List<Type> ok = new List<Type>();
                 if (ex.Types != null) foreach (Type t in ex.Types) if (t != null) ok.Add(t);
                 types = ok.ToArray();
+
+                // #35: per-failed-type diagnostic SUMMARY. Each non-null LoaderException names ONE type that
+                // failed to resolve (e.g. a missing transitive dependency the type referenced). Log up to
+                // MaxLoaderExceptionLines of them, then a single "+K more" line, so a pathological DLL with
+                // hundreds of broken types cannot flood the log. This is defensive instrumentation only: the
+                // broken.dll fixture fails at Assembly.LoadFrom (the LoadFrom catch above), NOT at GetTypes,
+                // so it does NOT exercise THIS path. THIS path fires only for a DLL that loads but whose
+                // individual types fail to resolve, which no shipped fixture deliberately produces.
+                Exception[] loaderExceptions = ex.LoaderExceptions;
+                if (loaderExceptions != null)
+                {
+                    int logged = 0;
+                    int total = 0;
+                    foreach (Exception le in loaderExceptions)
+                    {
+                        if (le == null) continue; // a LoaderExceptions slot can be null; skip it.
+                        total++;
+                        if (logged < MaxLoaderExceptionLines)
+                        {
+                            Plugin.Log.LogWarning("[" + modGuid + "] behavior type load failure: " + le.Message);
+                            logged++;
+                        }
+                    }
+                    if (total > logged)
+                        Plugin.Log.LogWarning("[" + modGuid + "] behavior type load failure: +" +
+                            (total - logged) + " more (capped at " + MaxLoaderExceptionLines + ").");
+                }
             }
 
             // Collect the attributed types, then SORT by Type.FullName (ordinal) BEFORE registration so the

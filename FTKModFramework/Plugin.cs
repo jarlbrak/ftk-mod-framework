@@ -51,6 +51,15 @@ namespace FTKModFramework
         public static ConfigEntry<bool> EnableDataContent;
 
         /// <summary>
+        /// Whether to run the external-DLL behaviour pre-pass (#33): for each discovered mod that declares a
+        /// behaviorDll, Assembly.LoadFrom + reflect + register its [ContentBehavior] proficiencies. Gates ONLY
+        /// the external-DLL pre-pass; the in-assembly Phase-1 behaviours (FrameworkBehaviors /
+        /// com.ftkmf.sampledata:Steal) are registered separately and are NOT affected. Default on; inert when
+        /// no mod declares a behaviorDll. Set false to skip all Assembly.LoadFrom work (0 DLL behaviours loaded).
+        /// </summary>
+        public static ConfigEntry<bool> EnableBehaviorLoading;
+
+        /// <summary>
         /// Folder the data loader scans for mod subfolders (each with a manifest.json). Defaults to
         /// BepInEx's plugins dir, so dropping a content-mod folder in alongside plugins just works.
         /// </summary>
@@ -127,6 +136,13 @@ namespace FTKModFramework
             EnableDataContent = Config.Bind("Data", "EnableDataContent", true,
                 "Run the JSON data-content loader (discovers content-mod folders under DataContentRoot and " +
                 "registers their content). Independent of EnableSampleContent.");
+
+            EnableBehaviorLoading = Config.Bind("Data", "EnableBehaviorLoading", true,
+                "Run the external-DLL behaviour pre-pass: for each mod that declares a behaviorDll, load + " +
+                "reflect + register its [ContentBehavior] proficiencies. Gates ONLY the external-DLL pre-pass; " +
+                "the in-assembly behaviours (FrameworkBehaviors / com.ftkmf.sampledata:Steal) are unaffected. " +
+                "Default on; inert when no mod declares a behaviorDll. Set false to skip all Assembly.LoadFrom " +
+                "work (0 DLL behaviours loaded).");
 
             DataContentRoot = Config.Bind("Data", "DataContentRoot", Paths.PluginPath,
                 "Folder scanned for content-mod subfolders (each with a manifest.json). Defaults to the " +

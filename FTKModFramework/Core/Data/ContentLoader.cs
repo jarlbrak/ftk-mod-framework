@@ -565,6 +565,18 @@ namespace FTKModFramework.Core.Data
         {
             const string key = "com.ftkmf.samplebehaviormod:Steal";
 
+            // Gated-off skip (#35): when EnableBehaviorLoading is false the DLL pre-pass never ran, so the
+            // DLL key is intentionally absent and m_ProficiencyPrefab was never wired. The JSON proficiency
+            // row still registers (the gate only blocks the external-DLL path), so without this guard the
+            // test would spuriously FAIL on registered=false. Skip cleanly with one benign info line instead.
+            // (null-guarded for a test context where Plugin.Awake never ran, matching DebugEncounterOverride.)
+            if (Plugin.EnableBehaviorLoading != null && !Plugin.EnableBehaviorLoading.Value)
+            {
+                Plugin.Log.LogInfo("SELF-TEST [behavior-dll]: skipped (EnableBehaviorLoading=false; the " +
+                    "DLL pre-pass did not run, so '" + key + "' is intentionally absent).");
+                return;
+            }
+
             // No-op guard: only assert when this mod actually contributed its proficiency AND its dagger.
             Cached steal = Find(cached, "proficiency", "samplebehaviormod_steal");
             Cached dirk = Find(cached, "weapon", "samplebehaviormod_dirk");
