@@ -49,6 +49,48 @@ namespace FTKModFramework.Core
             string modGuid, string saveFileName, string templateSaveFileName,
             string displayName, string infoText, Action<JObject> configureJson = null)
         {
+            // AddFromTemplate is the no-campaign case of the shared pipeline: edit gamedef scalars, then
+            // register, with no CampaignBuilder pass over m_Stages.
+            return AddFromTemplateInternal(
+                modGuid, saveFileName, templateSaveFileName, displayName, infoText, configureJson, null);
+        }
+
+        /// <summary>
+        /// Register a new adventure as above, then author a multi-stage linear CAMPAIGN over the cloned
+        /// definition's <c>m_Stages</c>. A STRICT SUPERSET of <see cref="AddFromTemplate"/>: it applies the
+        /// same <paramref name="configureJson"/> gamedef-scalar retune first, then hands a
+        /// <see cref="CampaignBuilder"/> over the (still-JSON) stage list so the caller can append valid
+        /// stages and reuse-based objective quests as DATA, then deserializes/registers the result exactly
+        /// like <see cref="AddFromTemplate"/>. The quests authored here are native <c>QuestDefBase</c> JSON
+        /// objects carrying the correct Newtonsoft <c>$type</c> discriminator; no Harmony patch is involved.
+        /// </summary>
+        /// <param name="modGuid">Your plugin GUID (reserved for future per-mod namespacing/save-stamping).</param>
+        /// <param name="saveFileName">Unique key for the new adventure (also its save namespace + room-property id).</param>
+        /// <param name="templateSaveFileName">An installed adventure to clone, e.g. "DungeonCrawl".</param>
+        /// <param name="displayName">Shown on the start screen (literal — displayed verbatim).</param>
+        /// <param name="infoText">The adventure's info/description text (literal — displayed verbatim).</param>
+        /// <param name="configure">Authors the campaign: append stages + quests over the cloned m_Stages.</param>
+        /// <param name="configureJson">Optional gamedef-scalar retune, applied BEFORE <paramref name="configure"/> (same semantics as AddFromTemplate).</param>
+        public static GameDefinitionPreview AddCampaignFromTemplate(
+            string modGuid, string saveFileName, string templateSaveFileName,
+            string displayName, string infoText,
+            Action<CampaignBuilder> configure, Action<JObject> configureJson = null)
+        {
+            return AddFromTemplateInternal(
+                modGuid, saveFileName, templateSaveFileName, displayName, infoText, configureJson, configure);
+        }
+
+        /// <summary>
+        /// The single clone/edit/build/register path shared by <see cref="AddFromTemplate"/> and
+        /// <see cref="AddCampaignFromTemplate"/>. <paramref name="configureCampaign"/> is null for the plain
+        /// adventure case; when present it runs over the cloned <c>m_Stages</c> AFTER the gamedef-scalar
+        /// <paramref name="configureJson"/> retune and BEFORE preview build/registration.
+        /// </summary>
+        private static GameDefinitionPreview AddFromTemplateInternal(
+            string modGuid, string saveFileName, string templateSaveFileName,
+            string displayName, string infoText,
+            Action<JObject> configureJson, Action<CampaignBuilder> configureCampaign)
+        {
             string templatePath = FindTemplate(templateSaveFileName);
             if (templatePath == null)
             {
@@ -57,7 +99,8 @@ namespace FTKModFramework.Core
                 return null;
             }
 
-            string edited = LoadAndEditTemplate(templatePath, saveFileName, displayName, infoText, configureJson);
+            string edited = LoadAndEditTemplate(
+                templatePath, saveFileName, displayName, infoText, configureJson, configureCampaign);
             if (edited == null) return null;
 
             GameDefinitionPreview preview = BuildPreview(edited, templatePath, saveFileName);
@@ -74,11 +117,12 @@ namespace FTKModFramework.Core
             return preview;
         }
 
-        /// <summary>Locate + parse the template, apply identity/display fields, run the caller's hook,
-        /// and return the edited JSON (null on parse failure).</summary>
+        /// <summary>Locate + parse the template, apply identity/display fields, run the caller's gamedef-scalar
+        /// hook, then (if present) the campaign builder over m_Stages, and return the edited JSON (null on
+        /// parse failure).</summary>
         private static string LoadAndEditTemplate(
             string templatePath, string saveFileName, string displayName, string infoText,
-            Action<JObject> configureJson)
+            Action<JObject> configureJson, Action<CampaignBuilder> configureCampaign)
         {
             JObject jo;
             try { jo = JObject.Parse(File.ReadAllText(templatePath)); }
@@ -94,6 +138,10 @@ namespace FTKModFramework.Core
             if (displayName != null) jo["m_DisplayName"] = displayName;
             if (infoText != null) jo["m_GameInfoText"] = infoText;
             if (configureJson != null) configureJson(jo);
+
+            // Campaign authoring runs AFTER the gamedef-scalar retune so a campaign can still observe/override
+            // any scalar the configureJson hook set. The builder edits the live JObject's m_Stages in place.
+            if (configureCampaign != null) configureCampaign(new CampaignBuilder(jo));
 
             return jo.ToString();
         }

@@ -48,6 +48,11 @@ namespace FTKModFramework
             SelfTest();
 
             RegisterAdventure();
+
+            // Campaign builder (#38): author + register a 2-stage linear campaign and prove its $type
+            // discriminators round-trip through the game's own serializer. Gated identically (this runs
+            // only when EnableSampleContent is on, since it registers a real selectable demo adventure).
+            CampaignSelfTest.Run();
         }
 
         /// <summary>
