@@ -8,7 +8,16 @@
       "fields": { "damage": 0.15, "ignoresarmor": true, "slots": 1, "m_PerSlotSkillRoll": -0.5, "chancetoaffect": 1.0 },
       "behavior": "Steal",
       "behaviorCategory": "StealGold",
-      "description": "Lands a quick strike that lifts gold from the enemy (sample behaviour supplied by an external DLL)."
+      "description": "Lands a quick strike that lifts either gold or an item from the enemy (sample behaviour supplied by an external DLL)."
+    },
+    {
+      "kind": "weapon",
+      "id": "samplebehaviormod_dirk",
+      "template": "bladeDagger",
+      "displayName": "Cutthroat's Dirk",
+      "proficiencies": [
+        "samplebehaviormod_steal"
+      ]
     }
   ]
 }

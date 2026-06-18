@@ -535,14 +535,28 @@ namespace FTKModFramework.Core.Data
         }
 
         /// <summary>
-        /// Behaviour-DLL self-test (#33, the grep target "SELF-TEST PASS [behavior-dll]"): proves the
-        /// EXTERNAL-DLL path works end to end. The sample behaviour mod (com.ftkmf.samplebehaviormod) ships a
-        /// SEPARATE net35 assembly whose <c>[ContentBehavior("Steal")]</c> ProficiencyBase subtype the
-        /// pre-pass loaded + registered BEFORE the content-registration phase ran. This asserts:
-        ///   (1) the DLL behaviour key resolves to a ProficiencyBase subtype (the pre-pass registered it), and
-        ///   (2) the load reached completion (cached.Count &gt; 0), so a sibling broken-DLL fixture's
-        ///       LoadFrom failure did NOT abort the load: other content still registered (FR-4 isolation).
-        /// The broken.dll LoadFrom failure itself is observable as a validation error in the report/log.
+        /// Behaviour-DLL end-to-end self-test (#33/#34, the grep target "SELF-TEST PASS [behavior-dll]"): the
+        /// FR-9 closing predicate, proving a JSON-named, DLL-supplied behaviour is wired in-game IDENTICALLY to
+        /// the compiled <c>ThiefStealProficiency</c>. The sample behaviour mod (com.ftkmf.samplebehaviormod)
+        /// ships a SEPARATE net35 assembly whose <c>[ContentBehavior("Steal")]</c> ProficiencyBase subtype the
+        /// pre-pass loaded + registered BEFORE the content-registration phase ran. This asserts the full
+        /// three-part predicate for the DLL path:
+        ///   (1) <c>BehaviorRegistry.TryResolve("com.ftkmf.samplebehaviormod:Steal", out type)</c> is true AND
+        ///       <c>type</c> is the SAME Type object as the wired prefab's runtime type (the SampleStealBehavior
+        ///       loaded from the DLL). The Type lives in the SEPARATE sample assembly, so this checks Type
+        ///       identity against the live prefab, not a <c>typeof</c> in THIS assembly.
+        ///   (2) the <c>samplebehaviormod_steal</c> row's <c>m_ProficiencyPrefab</c> is non-null, is the
+        ///       framework-owned hosted instance, and <c>m_ProficiencyPrefab.GetType() == type</c>.
+        ///   (3) the Steal is attached to the <c>samplebehaviormod_dirk</c> weapon (instantiate-and-read the
+        ///       prof ids, the game's own read path, same pattern as the parity/dagger checks).
+        /// It also confirms the load reached completion (cached.Count &gt; 0), so a sibling broken-DLL fixture's
+        /// LoadFrom failure did NOT abort the load: other content still registered (FR-4 isolation). The
+        /// broken.dll LoadFrom failure itself is observable as a validation error in the report/log.
+        ///
+        /// This startup self-test proves WIRING. The amended FR-9 part 3 (a log-observable steal OUTCOME via
+        /// AddToDummy) is verified in COMBAT: SampleStealBehavior.AddToDummy emits a "[SampleBehaviorMod] Steal
+        /// ..." Debug.Log line on a hit, the same way the compiled Thief's "[Thief] Steal ..." line is observed.
+        /// Firing is the identical code path the wiring this test asserts feeds into.
         ///
         /// No-op when the sample behaviour mod is absent (mirrors <see cref="EmitParitySelfTest"/>), so a
         /// non-samplebehaviormod load never FAILs it.
@@ -551,29 +565,53 @@ namespace FTKModFramework.Core.Data
         {
             const string key = "com.ftkmf.samplebehaviormod:Steal";
 
-            // No-op guard: only assert when this mod actually contributed an entry to this load.
+            // No-op guard: only assert when this mod actually contributed its proficiency AND its dagger.
             Cached steal = Find(cached, "proficiency", "samplebehaviormod_steal");
-            if (steal == null) return; // sample behaviour mod not present: nothing to assert.
+            Cached dirk = Find(cached, "weapon", "samplebehaviormod_dirk");
+            if (steal == null || dirk == null) return; // sample behaviour mod not present: nothing to assert.
 
-            // (1) The DLL-supplied behaviour key resolves to a ProficiencyBase subtype. The Type lives in the
-            // SEPARATE sample-behaviour assembly, so we check assignability (not a typeof in THIS assembly).
+            // (2 prep) The JSON-authored proficiency row got the DLL behaviour hosted into m_ProficiencyPrefab.
+            FTK_proficiencyTable row = (FTK_proficiencyTable)steal.Row;
+            ProficiencyBase prefab = row != null ? row.m_ProficiencyPrefab : null;
+
+            // (1) The DLL-supplied key resolves AND is the SAME Type object as the wired prefab's runtime type.
+            // The Type lives in the separate sample assembly; comparing prefab.GetType() == type proves the
+            // registry resolved to exactly the type the pre-pass loaded from the DLL and that WireBehavior
+            // hosted that same type.
             Type type;
             bool registered = BehaviorRegistry.TryResolve(key, out type)
                 && type != null
-                && typeof(ProficiencyBase).IsAssignableFrom(type);
+                && typeof(ProficiencyBase).IsAssignableFrom(type)
+                && prefab != null
+                && prefab.GetType() == type;
 
-            // (2) The whole load reached completion with content registered: a sibling broken.dll LoadFrom
-            // failure was isolated and did NOT abort the pass.
+            // (2) m_ProficiencyPrefab is the framework-owned hosted instance of that exact DLL type. The host
+            // GameObject is named "ftkmf_databehavior_<id>" (BehaviorHost via WireBehavior), so a non-null,
+            // correctly-named prefab whose runtime type == the resolved Type is the framework's instance.
+            bool prefabIsFrameworkInstance = prefab != null
+                && type != null
+                && prefab.GetType() == type
+                && prefab.gameObject != null
+                && prefab.gameObject.name == "ftkmf_databehavior_" + steal.Id;
+
+            // (3) The Steal is attached to the dirk (the game's own read path: instantiate + read prof ids).
+            int stealId = Content.Db<FTK_proficiencyTableDB>().GetIntFromID("samplebehaviormod_steal");
+            bool attached = WeaponHasProficiency((FTK_weaponStats2)dirk.Row, stealId);
+
+            // The whole load reached completion with content registered: a sibling broken.dll LoadFrom failure
+            // was isolated and did NOT abort the pass.
             bool loadCompleted = cached.Count > 0;
 
-            bool ok = registered && loadCompleted;
+            bool ok = registered && prefabIsFrameworkInstance && attached && loadCompleted;
             if (ok)
-                Plugin.Log.LogInfo("SELF-TEST PASS [behavior-dll]: '" + key + "' -> " +
-                    type.FullName + " (DLL behaviour registered by the pre-pass before content phases; " +
+                Plugin.Log.LogInfo("SELF-TEST PASS [behavior-dll]: '" + key + "' -> " + type.FullName +
+                    " (resolved Type == prefab Type == framework instance; wired into samplebehaviormod_steal" +
+                    ".m_ProficiencyPrefab; attached to Cutthroat's Dirk profId=" + stealId + "; " +
                     cached.Count + " entries loaded, broken-DLL isolation held).");
             else
                 Plugin.Log.LogError("SELF-TEST FAIL [behavior-dll]: registered=" + registered +
-                    " (key '" + key + "') loadCompleted=" + loadCompleted + " (cached=" + cached.Count + ").");
+                    " (key '" + key + "') prefabIsFrameworkInstance=" + prefabIsFrameworkInstance +
+                    " attached=" + attached + " loadCompleted=" + loadCompleted + " (cached=" + cached.Count + ").");
         }
 
         /// <summary>

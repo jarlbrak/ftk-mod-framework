@@ -49,11 +49,14 @@
     </Reference>
 
     <!-- Game assemblies, referenced straight from the install (same shape as the plugin) but WITHOUT the
-         publicizer: every member this sample touches (ProficiencyBase.AddToDummy/GetAttacker/m_Category,
-         CharacterDummy/CharacterOverworld/CharacterStats fields, ChangeGold, FTKUtil.RoundToInt,
-         PhotonNetwork.isMasterClient) is already PUBLIC in the stock assemblies (decompile-verified), so the
-         sample does NOT depend on the publicizer MSBuild task the plugin imports. Private=false: the game
-         already provides these. -->
+         publicizer: every member the FAITHFUL 50/50 steal touches is already PUBLIC in the stock assemblies
+         (decompile-verified, #34), so the sample does NOT depend on the publicizer MSBuild task the plugin
+         imports. The full member set, all public: ProficiencyBase.AddToDummy/GetAttacker/m_Category,
+         CharacterDummy.m_CharacterOverworld/m_DamageInfo, CharacterOverworld.m_CharacterStats/AddItemToBackpack,
+         CharacterStats.ChangeGold/m_PlayerLevel/GoldModifier, DummyDamageInfo.m_ProfHasAmount/m_ProficiencyAmount,
+         EnemyDummy/EnemyInfo.m_EnemyCombat, FTK_enemyCombat.m_ItemDrops, FTK_enemyCombat.ItemDrops.GetLootItems,
+         GameLogic.Instance/GetGameDef, GameDefinition.GetGameStage, GameStage.GetItemLevel, FTKUtil.RoundToInt,
+         PhotonNetwork.isMasterClient. Private=false: the game already provides these. -->
     <Reference Include="Assembly-CSharp" Private="false">
       <HintPath>$(FtkManagedDir)/Assembly-CSharp.dll</HintPath>
     </Reference>
