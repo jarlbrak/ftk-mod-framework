@@ -7,6 +7,26 @@ using FTKModFramework.Core;
 namespace FTKModFramework.Core.Data
 {
     /// <summary>
+    /// Immutable result of one content load: the registered/total entry counts and the elapsed load time,
+    /// all taken from the SINGLE existing Stopwatch/count measurement inside <see cref="ContentLoader.Load"/>.
+    /// The scale-budget gate reads this directly; there is deliberately no static "last load" field on
+    /// ContentLoader (a mutable global would be a co-op/determinism hazard and is forbidden by the spec).
+    /// </summary>
+    public sealed class LoadResult
+    {
+        public readonly int RegisteredCount;
+        public readonly int TotalCount;
+        public readonly long ElapsedMs;
+
+        public LoadResult(int registeredCount, int totalCount, long elapsedMs)
+        {
+            RegisteredCount = registeredCount;
+            TotalCount = totalCount;
+            ElapsedMs = elapsedMs;
+        }
+    }
+
+    /// <summary>
     /// Orchestrates the JSON data pipeline: discover manifest-valid mod folders, parse their content
     /// files, then register each entry through the PUBLIC <c>Content.Add*</c> API. It never registers
     /// rows directly and never re-implements <c>ContentRegistry</c> (spec #6): it only DRIVES the
@@ -29,26 +49,6 @@ namespace FTKModFramework.Core.Data
     /// reference never aborts the load. Everything tolerated is recorded on the <see cref="ValidationReport"/>
     /// and summarized at the end via <c>Plugin.Log</c>.
     /// </summary>
-    /// <summary>
-    /// Immutable result of one content load: the registered/total entry counts and the elapsed load time,
-    /// all taken from the SINGLE existing Stopwatch/count measurement inside <see cref="ContentLoader.Load"/>.
-    /// The scale-budget gate reads this directly; there is deliberately no static "last load" field on
-    /// ContentLoader (a mutable global would be a co-op/determinism hazard and is forbidden by the spec).
-    /// </summary>
-    public sealed class LoadResult
-    {
-        public readonly int RegisteredCount;
-        public readonly int TotalCount;
-        public readonly long ElapsedMs;
-
-        public LoadResult(int registeredCount, int totalCount, long elapsedMs)
-        {
-            RegisteredCount = registeredCount;
-            TotalCount = totalCount;
-            ElapsedMs = elapsedMs;
-        }
-    }
-
     internal static class ContentLoader
     {
         /// <summary>Entry point called from the TableManager.Initialize postfix (after sample content).</summary>

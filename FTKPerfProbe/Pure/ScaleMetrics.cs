@@ -25,7 +25,14 @@ namespace FTKPerfProbe
         /// </summary>
         public readonly long SaveProxyBytes;
 
-        /// <summary>High-band synthetic-id row count this proxy is computed from (excludes positional classes).</summary>
+        /// <summary>
+        /// High-band synthetic-id row count this proxy is computed from (excludes positional classes). This
+        /// is the WHOLE-PROCESS high-band count at gate time (sample + data + synthetic, i.e. every id minted
+        /// through IdAllocator), NOT the per-load cached.Count from the "Data content load complete: X/Y"
+        /// summary line. It is the value shown as N= in the verdict line; co-op clients that load identical
+        /// content register an identical count, but the count varies with which optional content each client
+        /// enabled.
+        /// </summary>
         public readonly int RegisteredEntries;
 
         /// <summary>Informational only: Profiler.GetMonoUsedSizeLong(). Never budgeted.</summary>

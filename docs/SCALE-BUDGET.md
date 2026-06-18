@@ -17,11 +17,22 @@ SCALE-BUDGET PASS|FAIL|CALIBRATED: load=<ms>/<budget> heap=<bytes>/<budget> save
 - `FAIL` (error): at least one metric breached its budget; the line is followed by `breached: ...` naming each tripped metric.
 - `CALIBRATED` (info): this run wrote the baseline (no comparison was made). The budget slots show the metrics' own values, since a calibration run has nothing to compare against.
 
-`N` is the high-band registered row count (the ids that pass through `IdAllocator`).
+`N` is the high-band registered row count (the ids that pass through `IdAllocator`). It counts ALL
+high-band rows registered this session (sample + data + synthetic), measured whole-process at gate time,
+not just the data-load count. Because of that it will NOT equal the "Data content load complete: X/Y"
+number, and it excludes positional class ids. Co-op clients that load identical content register an
+identical `N` (the ids are hash-deterministic); the count itself varies only with which optional content
+each client enabled.
 
 `saveProxy` is a registration-footprint ESTIMATE (high-band registered rows times a per-id byte cost),
 not a measured save file. The proxy is only meaningful while synthetic enum ids round-trip through saves
 as their integer value, which the framework guarantees by setting `SerializeEnumsAsInteger = true`.
+
+Until P5d (measured save-size) lands, `saveProxy` is INFORMATIONAL only: it is computed as the same
+high-band count times the same per-id constant that forms its own budget, so the save axis reports the
+registration-footprint magnitude but can never FAIL. The per-id constant (`SaveSizePerEntryBudgetBytes`)
+is a deferred-P5d calibration placeholder, not a real measured footprint. `load=` (load-ms) and `heap=`
+(managed-heap) are the axes that can actually FAIL today.
 
 ## Config fields (`[Diagnostics]` section)
 

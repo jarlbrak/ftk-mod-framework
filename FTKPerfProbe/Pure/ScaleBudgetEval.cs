@@ -57,6 +57,18 @@ namespace FTKPerfProbe
     /// </summary>
     public static class ScaleBudgetEval
     {
+        /// <summary>
+        /// Computes each metric's budget from the baseline and tunables, then returns a verdict that is
+        /// PASS only when every budgeted metric is within budget (one fail reason per breach otherwise).
+        ///
+        /// Note on the save axis: until P5d calibrates a MEASURED per-entry save footprint, the save-size
+        /// proxy equals its own budget by construction. Both sides are the SAME registered high-band count
+        /// (<see cref="ScaleMetrics.RegisteredEntries"/>) times the SAME per-entry constant
+        /// (<c>SaveSizePerEntryBudgetBytes</c>), so the save axis reports the registration-footprint
+        /// magnitude in the verdict line but can never BREACH on a real run. The load and heap axes are the
+        /// enforceable ones today. Do not edit only one of the two constants: keep them paired so the
+        /// intended symmetry holds until P5d supplies a real measured per-entry footprint.
+        /// </summary>
         public static ScaleVerdict Compare(ScaleMetrics metrics, BaselineRecord baseline, ScaleBudget budget)
         {
             // load budget   = max(baselineLoadMs * headroom, absoluteFloorMs)
