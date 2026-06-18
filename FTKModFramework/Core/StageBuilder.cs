@@ -93,13 +93,57 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
-        /// Build the shared <c>SingleQuestDefBase</c> skeleton common to every reuse verb: the required
-        /// <c>$type</c> discriminator, the unique <c>m_StoryQuestID</c>, and a resolvable destination
-        /// (<c>m_DestinationRealmType = Specified</c> + <c>m_SpecifiedRealm</c>). <c>m_OnelinerOverride</c> is
-        /// intentionally left empty so the built-in vanilla one-liner (STR_*_OneLine) renders the objective
-        /// text; setting a custom override with no TextQuest row would render the literal "TextQuest".
+        /// Append a COLLECT-N objective: a <see cref="ModQuestDef"/> carrying the framework collect-N verb key,
+        /// the target item, and the required party-wide count. Unlike the reuse verbs above (which emit native
+        /// <c>Assembly-CSharp</c> quest defs), this emits a FRAMEWORK quest def: its <c>$type</c> names THIS
+        /// assembly (<c>FTKModFramework</c>), and at runtime <see cref="QuestVerbResolverPatch"/> resolves
+        /// <c>m_BehaviorKey</c> to <see cref="CollectNQuestLogic"/>, which completes the quest when the party's
+        /// combined Backpack holds at least <paramref name="count"/> of <paramref name="item"/>.
+        ///
+        /// The destination scaffolding (<c>m_DestinationRealmType = Specified</c> + <c>m_SpecifiedRealm</c>) is
+        /// authored just like the reuse verbs so the quest is map-gen valid; collect-N is satisfied by inventory
+        /// regardless of where the destination lands.
+        /// </summary>
+        /// <param name="storyQuestId">Globally-unique quest id (must be non-empty and unique across the whole campaign).</param>
+        /// <param name="item">The <c>FTK_itembase.ID</c> the verb counts across the party Backpack.</param>
+        /// <param name="count">Required party-wide count; MUST be >= 1.</param>
+        /// <param name="specifiedRealm">Destination realm (an <c>FTK_realm.ID</c> name present in the stage's m_RealmStages).</param>
+        /// <exception cref="ArgumentOutOfRangeException">If <paramref name="count"/> is less than 1.</exception>
+        public QuestBuilder AddCollectQuest(string storyQuestId, GridEditor.FTK_itembase.ID item, int count, string specifiedRealm)
+        {
+            if (count < 1)
+                throw new ArgumentOutOfRangeException("count",
+                    "StageBuilder.AddCollectQuest: count must be >= 1 (got " + count + ").");
+
+            // Framework $type: names FTKModFramework (resolved by Newtonsoft's default binder via
+            // LoadWithPartialName, which finds the already-loaded BepInEx plugin), not Assembly-CSharp.
+            JObject q = NewQuestWithType("FTKModFramework.Core.ModQuestDef, FTKModFramework", storyQuestId, specifiedRealm);
+            q["m_BehaviorKey"] = FrameworkBehaviors.CollectNVerbKey; // resolver -> CollectNQuestLogic
+            q["m_ItemId"] = item.ToString();                         // StringEnumConverter on the round-trip
+            q["m_Count"] = count;
+            _quests.Add(q);
+            return new QuestBuilder(storyQuestId);
+        }
+
+        /// <summary>
+        /// Build the shared <c>SingleQuestDefBase</c> skeleton common to every reuse verb, with the <c>$type</c>
+        /// formed from a short native type NAME (<c>"&lt;typeName&gt;, Assembly-CSharp"</c>). Thin wrapper over
+        /// <see cref="NewQuestWithType"/> for the vanilla verbs; see it for the field rationale.
         /// </summary>
         private static JObject NewSingleQuest(string typeName, string storyQuestId, string specifiedRealm)
+        {
+            return NewQuestWithType(typeName + ", Assembly-CSharp", storyQuestId, specifiedRealm);
+        }
+
+        /// <summary>
+        /// Build the shared quest skeleton from a FULL Newtonsoft <c>$type</c> token (so a framework-assembly
+        /// def like <see cref="ModQuestDef"/> can name its own assembly): the required <c>$type</c> discriminator,
+        /// the unique <c>m_StoryQuestID</c>, and a resolvable destination (<c>m_DestinationRealmType = Specified</c>
+        /// + <c>m_SpecifiedRealm</c>). <c>m_OnelinerOverride</c> is intentionally left empty so the built-in
+        /// vanilla one-liner (STR_*_OneLine) renders the objective text; setting a custom override with no
+        /// TextQuest row would render the literal "TextQuest".
+        /// </summary>
+        private static JObject NewQuestWithType(string fullType, string storyQuestId, string specifiedRealm)
         {
             if (string.IsNullOrEmpty(storyQuestId))
                 throw new ArgumentException("StageBuilder: storyQuestId must be non-empty.", "storyQuestId");
@@ -107,7 +151,7 @@ namespace FTKModFramework.Core
                 throw new ArgumentException("StageBuilder: specifiedRealm must be non-empty.", "specifiedRealm");
 
             JObject q = new JObject();
-            q["$type"] = typeName + ", Assembly-CSharp"; // short form, matches GameDefJSONMapper's TypeNameHandling.Auto
+            q["$type"] = fullType;                        // full token; matches GameDefJSONMapper's TypeNameHandling.Auto
             q["m_StoryQuestID"] = storyQuestId;           // unique m_QuestLookup key; empty would break HashID
             q["m_DestinationRealmType"] = "Specified";    // resolve the destination in m_SpecifiedRealm
             q["m_SpecifiedRealm"] = specifiedRealm;       // must be an FTK_realm.ID present in the stage's m_RealmStages

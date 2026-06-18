@@ -53,6 +53,12 @@ namespace FTKModFramework
             // discriminators round-trip through the game's own serializer. Gated identically (this runs
             // only when EnableSampleContent is on, since it registers a real selectable demo adventure).
             CampaignSelfTest.Run();
+
+            // Custom-verb resolver + collect-N (#40): author a collect-N quest, prove the framework-$type
+            // ModQuestDef round-trips through the game serializer (the OQ2 in-engine check), the resolver
+            // Prefix substitutes a CollectNQuestLogic, and the count<1 guard fires. Same gate (it registers a
+            // real selectable demo adventure via AddCampaignFromTemplate, like the campaign self-test).
+            CollectNSelfTest.Run();
         }
 
         /// <summary>
