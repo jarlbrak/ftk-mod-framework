@@ -59,6 +59,11 @@ namespace FTKModFramework
             // Prefix substitutes a CollectNQuestLogic, and the count<1 guard fires. Same gate (it registers a
             // real selectable demo adventure via AddCampaignFromTemplate, like the campaign self-test).
             CollectNSelfTest.Run();
+
+            // Campaign-flag store (#41): prove a populated CampaignStateQuest round-trips through BOTH the disk
+            // serializer (FullSerializer) and the co-op RPC serializer (Newtonsoft TypeNameHandling.Auto),
+            // recovering identical flags AND the concrete subtype. Standalone (no live GameLogic/save needed).
+            CampaignFlagSelfTest.Run();
         }
 
         /// <summary>
