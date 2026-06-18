@@ -37,9 +37,17 @@ namespace FTKModFramework
                 ? TryStealItem(_dummy, attacker.m_CharacterOverworld, grant, out stoleItem)
                 : GiveGold(stats, grant);
 
-            // m_Category is a TRANSIENT per-hit presentation flag, read synchronously by the HUD formatter
-            // right after this (not durable config): StealItem renders m_ProficiencyAmount as an item NAME,
-            // StealGold renders it as a GOLD number. Kept adjacent to the HUD write it drives.
+            // m_Category is a SERIALIZED field on a single SHARED ProficiencyBase instance: the game caches one
+            // instance per proficiency id in ProficiencyManager.m_ProficiencyTable, shared across all dummies and
+            // applications. This per-hit write is a deliberate, documented exception for the single-row 50/50 Steal:
+            // the steal HUD (HitEffect.Play) and the tooltip both decide item-vs-gold by reading m_Category off this
+            // shared prefab keyed by _ddi.m_Prof, and DummyDamageInfo has NO category field (it is Photon-serialized,
+            // so one cannot be added). StealItem renders m_ProficiencyAmount as an item NAME, StealGold as a GOLD
+            // number. It is safe in practice: the write is synchronous immediately before the same-frame HUD read,
+            // combat is turn-based single-target melee (no concurrent same-frame Steal), and it mutates only a local
+            // presentation field, not combat / id-allocation / wire-serialized state. The vanilla alternative is two
+            // separate stable-category rows (ProficiencyStealGold / ProficiencyStealEquippedItem), deferred as a
+            // future design change.
             if (_dummy.m_DamageInfo != null)
             {
                 m_Category = stoleItem ? ProficiencyBase.Category.StealItem : ProficiencyBase.Category.StealGold;

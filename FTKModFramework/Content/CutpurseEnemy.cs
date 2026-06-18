@@ -19,11 +19,9 @@ namespace FTKModFramework
         {
             // 1) The Cutpurse's signature ability: a light, armor-ignoring hit that also steals party gold.
             //    A pure 0-damage proficiency is auto-cancelled, so we give it a real (small) chip of damage.
-            GameObject stealPrefab = new GameObject("ftkmf_CutpurseStealProf");
-            UnityEngine.Object.DontDestroyOnLoad(stealPrefab);
-            stealPrefab.transform.position = new Vector3(0f, -100000f, 0f); // park off-screen, stays active
-            CutpurseStealProficiency stealBehaviour = stealPrefab.AddComponent<CutpurseStealProficiency>();
-            stealBehaviour.m_Category = ProficiencyBase.Category.StealGold;
+            CutpurseStealProficiency stealBehaviour =
+                (CutpurseStealProficiency)BehaviorHost.Create(typeof(CutpurseStealProficiency), "ftkmf_CutpurseStealProf");
+            stealBehaviour.m_Category = ProficiencyBase.Category.StealGold; // gold-only: set once, never mutated
 
             Content.AddProficiency(Plugin.Guid, "ftkmf_cutpursesteal", FTK_proficiencyTable.ID.bladeDamage, "Pilfer",
                 p =>

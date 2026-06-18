@@ -22,11 +22,9 @@ namespace FTKModFramework
                 p => { p.m_DmgMultiplier = 1.6f; });
 
             // Native Steal: light damage + level-scaling gold via a custom ProficiencyBase behaviour.
-            GameObject stealPrefab = new GameObject("ftkmf_ThiefStealProf");
-            UnityEngine.Object.DontDestroyOnLoad(stealPrefab);
-            stealPrefab.transform.position = new Vector3(0f, -100000f, 0f); // park off-screen, stays active
-            ThiefStealProficiency stealBehaviour = stealPrefab.AddComponent<ThiefStealProficiency>();
-            stealBehaviour.m_Category = ProficiencyBase.Category.StealGold;
+            ThiefStealProficiency stealBehaviour =
+                (ThiefStealProficiency)BehaviorHost.Create(typeof(ThiefStealProficiency), "ftkmf_ThiefStealProf");
+            stealBehaviour.m_Category = ProficiencyBase.Category.StealGold; // resting default; AddToDummy retargets per hit
 
             Content.AddProficiency(Plugin.Guid, "ftkmf_steal", FTK_proficiencyTable.ID.bladeDamage, "Steal",
                 p =>
