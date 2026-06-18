@@ -59,6 +59,19 @@ namespace FTKModFramework.Core.Data
                 if (manifest == null) continue;           // malformed manifest JSON: error already recorded
                 if (!manifest.Validate(report)) continue; // missing required field: error already recorded
 
+                // RESERVED guid: com.ftkmf.synthetic belongs ONLY to the generator's own reserved subfolder
+                // (SyntheticContentGenerator.ReservedSubfolderName). A real data mod declaring it from any
+                // other folder is rejected and skipped, so it cannot perturb the deterministic (modGuid, id)
+                // sort the synthetic-id band depends on. The generator's own folder passes this check.
+                if (string.Equals(manifest.ModGuid, SyntheticContentGenerator.ReservedModGuid, StringComparison.Ordinal) &&
+                    !IsReservedSyntheticFolder(folder))
+                {
+                    report.Error("manifest.json (" + folder + "): modGuid '" + SyntheticContentGenerator.ReservedModGuid +
+                        "' is RESERVED for generated synthetic content and may only be used by the '" +
+                        SyntheticContentGenerator.ReservedSubfolderName + "' subfolder (mod skipped).");
+                    continue;
+                }
+
                 List<string> contentFiles = ContentFilesIn(folder);
                 mods.Add(new DiscoveredMod(manifest, contentFiles));
             }
@@ -100,6 +113,14 @@ namespace FTKModFramework.Core.Data
             }
             files.Sort(StringComparer.Ordinal); // deterministic per-mod file order
             return files;
+        }
+
+        /// <summary>True iff this folder's leaf name is the reserved synthetic subfolder (the one folder
+        /// allowed to declare the reserved synthetic guid).</summary>
+        private static bool IsReservedSyntheticFolder(string folder)
+        {
+            string leaf = Path.GetFileName(folder.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
+            return string.Equals(leaf, SyntheticContentGenerator.ReservedSubfolderName, StringComparison.Ordinal);
         }
 
         private static int CompareMods(DiscoveredMod a, DiscoveredMod b)

@@ -82,6 +82,21 @@ namespace FTKModFramework
         /// <summary>Per-high-band-id save-size footprint in bytes; the save-size PROXY's per-entry cost.</summary>
         public static ConfigEntry<long> DiagnosticsSaveSizePerEntryBytes;
 
+        // ---- Diagnostics: synthetic content generator (P5b, #23) ---------------------------------------
+        // DEV/STRESS only. When count > 0, the generator writes N throwaway synthetic entries under a reserved
+        // subfolder of DataContentRoot BEFORE the data load, so the single existing ContentLoader.Load pass
+        // registers them through the public Content.* API and the scale-budget gate measures the load at scale.
+        // Default 0 = a true no-op (and any stale reserved subfolder is removed). See SyntheticContentGenerator.
+
+        /// <summary>DEBUG/stress: number of throwaway synthetic content entries to generate. 0 = off.</summary>
+        public static ConfigEntry<int> SyntheticContentCount;
+
+        /// <summary>Kind for every generated synthetic entry (default "weapon").</summary>
+        public static ConfigEntry<string> SyntheticContentKind;
+
+        /// <summary>Template (vanilla row to clone) for every generated synthetic entry (default "bladeDagger").</summary>
+        public static ConfigEntry<string> SyntheticContentTemplate;
+
         private Harmony _harmony;
 
         private void Awake()
@@ -137,6 +152,16 @@ namespace FTKModFramework
                 "Per-high-band-id footprint (bytes) for the save-size PROXY (a registration-footprint " +
                 "estimate, not a real save measurement).");
 
+            SyntheticContentCount = Config.Bind("Diagnostics", "SyntheticContentCount", 0,
+                "DEBUG/stress: generate this many throwaway synthetic content entries under DataContentRoot " +
+                "before the data load, to exercise the scale-budget gate. 0 = off (no synthetic content).");
+
+            SyntheticContentKind = Config.Bind("Diagnostics", "SyntheticContentKind", "weapon",
+                "Kind for each generated synthetic entry (weapon clones land in the save-proxy's high band).");
+
+            SyntheticContentTemplate = Config.Bind("Diagnostics", "SyntheticContentTemplate", "bladeDagger",
+                "Template (vanilla row to clone) for each generated synthetic entry.");
+
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             // The save-size proxy depends on this invariant holding (ids persist as ints).
             fsConfig.SerializeEnumsAsInteger = true;
@@ -177,6 +202,18 @@ namespace FTKModFramework
                 Run("cutpurse enemy", CutpurseEnemy.Register);
                 Run("sample encounter + adventure", AdventureContent.Register);
             }
+
+            // Synthetic stress content (P5b, #23). Runs ALWAYS, BEFORE the data load, so a count-0 run still
+            // clears a stale reserved subfolder a prior higher-N run may have left. When count > 0 it writes N
+            // synthetic entries into the reserved subfolder under DataContentRoot; the single existing
+            // ContentLoader.Load(DataContentRoot) pass below then discovers and registers them. NOTE: if
+            // EnableDataContent is false the loader does not run, so the synthetic mod is written/cleared but
+            // not registered; the stress workflow assumes EnableDataContent=true (the default).
+            Run("synthetic content", () => SyntheticContentGenerator.Generate(
+                Plugin.DataContentRoot.Value,
+                Plugin.SyntheticContentCount.Value,
+                Plugin.SyntheticContentKind.Value,
+                Plugin.SyntheticContentTemplate.Value));
 
             // JSON data-content mods (opt-in, independent of the demo). Runs AFTER sample content so a
             // data mod can reference vanilla rows the same way the demo does. ContentLoader registers each
