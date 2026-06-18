@@ -26,6 +26,41 @@ namespace FTKModFramework.Core
         internal static readonly Dictionary<Type, Dictionary<string, int>> CustomIds =
             new Dictionary<Type, Dictionary<string, int>>();
 
+        // OPT-IN batch mode. Non-null only between BeginBatch/EndBatch. While set, Register records
+        // each touched DB here instead of reindexing it immediately, so N registrations into one DB
+        // cost ONE MakeIndex (at EndBatch) instead of N (which is O(N^2) MakeIndex calls). DB rows are
+        // singletons from TableManager.Instance.Get<T>(), so default reference equality is correct.
+        // Only ContentLoader uses this; hand-written content keeps the immediate-MakeIndex path.
+        // The content load and all hand-written registration run on the Unity main thread.
+        private static HashSet<GEDataArrayBase> _batchDirty;
+
+        /// <summary>
+        /// Enter batch mode: subsequent <see cref="Register"/> calls DEFER their per-DB MakeIndex and
+        /// record the touched DB instead. Pair with <see cref="EndBatch"/> in a try/finally so the
+        /// indices always rebuild. Re-entrant safe: a second BeginBatch while batching is a no-op (the
+        /// outermost EndBatch flushes everything).
+        /// Core-internal: only the data ContentLoader batches; modders use the per-row Content.* helpers.
+        /// </summary>
+        internal static void BeginBatch()
+        {
+            if (_batchDirty == null) _batchDirty = new HashSet<GEDataArrayBase>();
+        }
+
+        /// <summary>
+        /// Exit batch mode and rebuild the int-&gt;row dictionary of every DB touched while batching,
+        /// exactly once each. Clears the batch state FIRST (before any MakeIndex runs) so a throwing
+        /// MakeIndex cannot strand us in batch mode. A no-op if not currently batching.
+        /// Core-internal: see <see cref="BeginBatch"/>.
+        /// </summary>
+        internal static void EndBatch()
+        {
+            if (_batchDirty == null) return;
+            HashSet<GEDataArrayBase> snapshot = _batchDirty;
+            _batchDirty = null; // leave batch mode FIRST so a MakeIndex throw can't strand us in it.
+            foreach (GEDataArrayBase db in snapshot)
+                Reflect.Invoke(db, "MakeIndex");
+        }
+
         /// <param name="db">The target table, e.g. TableManager.Instance.Get&lt;FTK_itemsDB&gt;().</param>
         /// <param name="modGuid">Your plugin GUID (namespaces the id so two mods never clash).</param>
         /// <param name="id">A unique string id for the new row, e.g. "mymod_flamesword".</param>
@@ -54,6 +89,11 @@ namespace FTKModFramework.Core
             // Patch lookups BEFORE indexing so MakeIndex() maps our row under the synthetic int.
             DbLookupPatcher.EnsurePatched(dbType);
 
+            // AddEntry stays per-row and immediate (NOT batched): positional classes register at
+            // id == m_Array.Length, so the next class must see the updated length right away. Its
+            // residual O(N^2) (a new T[Length+1] + element copy each call) is an accepted negligible
+            // cost: the constant is an object-reference copy only. MakeIndex is the real O(N^2) cost
+            // and is the only thing we defer.
             db.AddEntry(id); // appends a blank row with m_ID == id
 
             Array arr = (Array)Reflect.GetField(db, "m_Array");
@@ -62,8 +102,10 @@ namespace FTKModFramework.Core
             if (template != null) Reflect.CopyFields(template, row, "m_ID");
             if (configure != null) configure(row);
 
-            // Force a full reindex so the int->row dictionary includes the new entry.
-            Reflect.Invoke(db, "MakeIndex");
+            // Rebuild the int->row dictionary so it includes the new entry. While batching, defer this
+            // to one MakeIndex per DB at EndBatch; otherwise reindex immediately (hand-written content).
+            if (_batchDirty != null) _batchDirty.Add(db);
+            else Reflect.Invoke(db, "MakeIndex");
 
             Plugin.Log.LogInfo(
                 "Registered '" + id + "' in " + dbType.Name + " (synthetic id " + synthetic + ").");
