@@ -65,18 +65,33 @@ namespace FTKModFramework.Core.Data
             // and it is also the determinism contract for the synthetic-id band (FR-1/FR-3/FR-8).
             pending.Sort(CompareEntries);
 
-            // --- Phase 1: register base rows, cache them for phase 2 ---
+            // Batch index rebuilds across BOTH phases: ContentRegistry.Register defers each DB's
+            // MakeIndex while batching, so registering N rows into one DB costs ONE reindex at
+            // EndBatch instead of N (the O(N^2) MakeIndex blow-up at scale). The try/finally is a load
+            // invariant: EndBatch MUST run even if a phase throws, so every touched DB is left correctly
+            // indexed (fault isolation), and it MUST run before the self-tests read rows by int.
             List<Cached> cached = new List<Cached>();
-            HashSet<string> seenIds = new HashSet<string>(StringComparer.Ordinal); // modGuid + "/" + id
-            foreach (PendingEntry pe in pending)
+            ContentRegistry.BeginBatch();
+            try
             {
-                Cached c = RegisterPhase1(pe, seenIds, report);
-                if (c != null) cached.Add(c);
+                // --- Phase 1: register base rows, cache them for phase 2 ---
+                HashSet<string> seenIds = new HashSet<string>(StringComparer.Ordinal); // modGuid + "/" + id
+                foreach (PendingEntry pe in pending)
+                {
+                    Cached c = RegisterPhase1(pe, seenIds, report);
+                    if (c != null) cached.Add(c);
+                }
+
+                // --- Phase 2: resolve cross-file references, attach proficiencies, set localization ---
+                foreach (Cached c in cached) ResolvePhase2(c, report);
+            }
+            finally
+            {
+                ContentRegistry.EndBatch(); // one MakeIndex per touched DB, before any int-keyed read.
             }
 
-            // --- Phase 2: resolve cross-file references, attach proficiencies, set localization ---
-            foreach (Cached c in cached) ResolvePhase2(c, report);
-
+            // Stop AFTER EndBatch so the gated load time INCLUDES the (now single) index build: the
+            // scale-budget gate must measure the real end-to-end cost, not a load minus its reindex.
             sw.Stop();
 
             EmitParitySelfTest(cached);
