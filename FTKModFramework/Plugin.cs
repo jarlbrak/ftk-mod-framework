@@ -216,6 +216,10 @@ namespace FTKModFramework
                 Run("sample encounter + adventure", AdventureContent.Register);
             }
 
+            // Behaviour primitives self-test (P3, #29). Runs UNCONDITIONALLY (independent of EnableSampleContent):
+            // it only exercises its own throwaway keys/types and proves BehaviorRegistry + BehaviorHost work.
+            Run("behavior primitives", BehaviorSelfTest.Run);
+
             // Synthetic stress content (P5b, #23). Runs ALWAYS, BEFORE the data load, so a count-0 run still
             // clears a stale reserved subfolder a prior higher-N run may have left. When count > 0 it writes N
             // synthetic entries into the reserved subfolder under DataContentRoot; the single existing
