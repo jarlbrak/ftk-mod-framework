@@ -30,7 +30,7 @@ namespace FTKModFramework.Core
             // ThiefStealProficiency lives in the modder-facing Content/ namespace (FTKModFramework); Core
             // references it by full namespace, as it does elsewhere. Registering typeof(...) keys the demo
             // fixture's behavior:"Steal" to the framework's compiled-in Steal behaviour.
-            BehaviorRegistry.Register(SampleDataModGuid, "Steal", typeof(FTKModFramework.ThiefStealProficiency));
+            BehaviorRegistry.Register(SampleDataModGuid, "Steal", typeof(FTKModFramework.ThiefStealProficiency), BehaviorKind.Proficiency);
             Plugin.Log.LogInfo("FrameworkBehaviors: registered bundled-demo behaviour '" +
                 SampleDataModGuid + ":Steal' -> ThiefStealProficiency.");
         }
