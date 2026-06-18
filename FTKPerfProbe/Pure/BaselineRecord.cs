@@ -6,9 +6,10 @@ namespace FTKPerfProbe
     /// only thing that reads/writes the JSON; this type just defines the SHAPE so that shape is stable.
     ///
     /// The four metadata fields (SchemaVersion, FrameworkVersion, CalibratedAtUtc,
-    /// CustomRowCountAtCalibration) are written and read in P5a but NOT yet acted upon: P5c (#24) adds
-    /// schema / framework-version staleness handling and the recalibrate flag. They live here NOW so the
-    /// on-disk JSON shape never changes when P5c lands.
+    /// CustomRowCountAtCalibration) were written and read in P5a and are now ACTED UPON by P5c (#24):
+    /// SchemaVersion + FrameworkVersion drive staleness (a baseline from a different build/schema is treated
+    /// as absent, see BaselineStore.IsStale), and a nonzero CustomRowCountAtCalibration triggers the
+    /// poisoned-anchor warning on a normal gating run. CalibratedAtUtc remains informational.
     ///
     /// Public settable fields (not readonly): the JSON round-trips through Newtonsoft, which needs a
     /// parameterless ctor and writable members. Mutability is confined to (de)serialization; the gate

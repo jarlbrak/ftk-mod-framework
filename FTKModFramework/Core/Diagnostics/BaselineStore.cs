@@ -12,13 +12,30 @@ namespace FTKModFramework.Core.Diagnostics
     /// baseline file that a calibration run writes and every later run reads.
     ///
     /// P5a definition of "no readable baseline" = the file is MISSING or UNPARSEABLE. Both produce a
-    /// calibration run (TryLoad returns false). P5c (#24) will add schema / framework-version staleness on
-    /// top of the four metadata fields already present on <see cref="BaselineRecord"/>.
+    /// calibration run (TryLoad returns false). P5c (#24) adds schema / framework-version STALENESS via
+    /// <see cref="IsStale"/>: a baseline whose schema version or framework version does not match this build
+    /// is treated as absent (the gate recalibrates, it never FAILs). The schema/version authority lives here
+    /// so "current" is defined in one place; the gate calls IsStale rather than re-deriving the rule.
     /// </summary>
     internal static class BaselineStore
     {
         public const int CurrentSchemaVersion = 1;
         private const string FileName = "scale-baseline.json";
+
+        /// <summary>
+        /// True when a loaded baseline is STALE: its on-disk schema version differs from
+        /// <see cref="CurrentSchemaVersion"/>, or its recorded framework version differs from the running
+        /// <see cref="Plugin.Version"/>. A stale baseline is treated as absent by the gate (it recalibrates,
+        /// never FAILs), because a baseline taken under a different framework build / schema is not a
+        /// trustworthy anchor for this build's load. Centralised here so the schema/version definitions stay
+        /// in one place. A null record is reported stale (defensive; the gate only calls this on a loaded one).
+        /// </summary>
+        public static bool IsStale(BaselineRecord b)
+        {
+            if (b == null) return true;
+            return b.SchemaVersion != CurrentSchemaVersion ||
+                   !string.Equals(b.FrameworkVersion, Plugin.Version, StringComparison.Ordinal);
+        }
 
         /// <summary>The baseline file path under the configured output directory.</summary>
         public static string PathFor(string outputDir)

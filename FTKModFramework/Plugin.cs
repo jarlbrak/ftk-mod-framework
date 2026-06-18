@@ -82,6 +82,14 @@ namespace FTKModFramework
         /// <summary>Per-high-band-id save-size footprint in bytes; the save-size PROXY's per-entry cost.</summary>
         public static ConfigEntry<long> DiagnosticsSaveSizePerEntryBytes;
 
+        /// <summary>
+        /// One-shot recalibration switch (P5c, #24). When true the gate re-measures and OVERWRITES the
+        /// scale-budget baseline on that run (emitting CALIBRATED), then the operator sets it back to false
+        /// for normal PASS/FAIL gating. The gate never auto-resets this flag in the config file; a normal run
+        /// (flag false) never auto-updates the baseline.
+        /// </summary>
+        public static ConfigEntry<bool> DiagnosticsRecalibrateBaseline;
+
         // ---- Diagnostics: synthetic content generator (P5b, #23) ---------------------------------------
         // DEV/STRESS only. When count > 0, the generator writes N throwaway synthetic entries under a reserved
         // subfolder of DataContentRoot BEFORE the data load, so the single existing ContentLoader.Load pass
@@ -151,6 +159,11 @@ namespace FTKModFramework
             DiagnosticsSaveSizePerEntryBytes = Config.Bind("Diagnostics", "SaveSizePerEntryBudgetBytes", 64L,
                 "Per-high-band-id footprint (bytes) for the save-size PROXY (a registration-footprint " +
                 "estimate, not a real save measurement).");
+
+            DiagnosticsRecalibrateBaseline = Config.Bind("Diagnostics", "RecalibrateBaseline", false,
+                "Set true for ONE run to re-measure and overwrite the scale-budget baseline (emits CALIBRATED), " +
+                "then set it back to false for normal PASS/FAIL gating. A normal run never auto-updates the baseline. " +
+                "Recalibrate with custom/synthetic content DISABLED so the baseline anchors on vanilla load only.");
 
             SyntheticContentCount = Config.Bind("Diagnostics", "SyntheticContentCount", 0,
                 "DEBUG/stress: generate this many throwaway synthetic content entries under DataContentRoot " +

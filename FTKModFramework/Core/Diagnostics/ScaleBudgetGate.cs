@@ -13,8 +13,10 @@ namespace FTKModFramework.Core.Diagnostics
     ///
     ///   1. captures metrics from the <see cref="LoadResult"/> + a one-shot heap/profiler read,
     ///   2. computes the save-size PROXY (high-band registered rows * a per-id footprint),
-    ///   3. on a calibration run (no readable baseline) writes the baseline and emits CALIBRATED,
-    ///   4. otherwise compares against the baseline+budget and emits PASS or FAIL,
+    ///   3. on a calibration run (no readable baseline, OR a STALE one, OR RecalibrateBaseline=true)
+    ///      writes the baseline and emits CALIBRATED,
+    ///   4. otherwise compares against the baseline+budget and emits PASS or FAIL (warning first if the
+    ///      trusted baseline was a poisoned anchor, i.e. calibrated with custom rows present),
     ///
     /// emitting EXACTLY ONE "SCALE-BUDGET ..." line via <see cref="Plugin.Log"/>. The pass/fail decision and
     /// budget arithmetic live in the Unity-free Pure layer (<see cref="ScaleBudgetEval"/>); this class only
@@ -39,14 +41,53 @@ namespace FTKModFramework.Core.Diagnostics
             ScaleBudget budget = BuildBudget();
 
             BaselineRecord baseline;
-            if (!BaselineStore.TryLoad(outputDir, out baseline))
+            bool haveBaseline = BaselineStore.TryLoad(outputDir, out baseline);
+            bool stale = haveBaseline && BaselineStore.IsStale(baseline); // schema / framework-version mismatch.
+            bool recalibrate = Plugin.DiagnosticsRecalibrateBaseline.Value;
+
+            // Calibration run: no baseline, a stale one (different schema/framework build), or the operator
+            // asked for a re-measure. Writes the baseline + emits CALIBRATED, never PASS/FAIL. A NORMAL run
+            // (valid trusted baseline, no recalibrate) never reaches Calibrate, so it never modifies the file.
+            if (!haveBaseline || stale || recalibrate)
             {
+                // Explain WHY we are recalibrating (one extra INFO line) when it is not just a missing file,
+                // so the log makes clear this was deliberate (version bump / schema bump / operator request).
+                if (stale || recalibrate)
+                    Plugin.Log.LogInfo("SCALE-BUDGET: recalibrating baseline (reason: " +
+                        RecalibrateReason(stale, recalibrate, baseline) + ").");
+
                 Calibrate(metrics, outputDir);
                 return;
             }
 
+            // Normal gating run with a TRUSTED baseline. A nonzero CustomRowCountAtCalibration means the
+            // anchor was taken with custom rows present, so the budgets derived from it are inflated: warn
+            // ALONGSIDE the normal PASS/FAIL line (this never fires on a calibration / stale / recalibrate run).
+            if (baseline.CustomRowCountAtCalibration != 0)
+                Plugin.Log.LogWarning("SCALE-BUDGET: baseline was calibrated with " +
+                    baseline.CustomRowCountAtCalibration + " custom row(s) present (poisoned anchor); budgets " +
+                    "may be inflated. Recalibrate with content disabled (set RecalibrateBaseline=true and " +
+                    "EnableSampleContent=false / EnableDataContent=false for one run).");
+
             ScaleVerdict verdict = ScaleBudgetEval.Compare(metrics, baseline, budget);
             EmitVerdict(verdict);
+        }
+
+        /// <summary>
+        /// Human-readable reason for a recalibration, for the single INFO line emitted before CALIBRATED.
+        /// Distinguishes the operator request (RecalibrateBaseline=true) from a stale baseline, and within
+        /// stale, which of schema vs framework version drifted (both, if both).
+        /// </summary>
+        private static string RecalibrateReason(bool stale, bool recalibrate, BaselineRecord b)
+        {
+            if (recalibrate) return "RecalibrateBaseline=true";
+            if (b == null) return "no readable baseline";
+            bool schemaDrift = b.SchemaVersion != BaselineStore.CurrentSchemaVersion;
+            bool versionDrift = !string.Equals(b.FrameworkVersion, Plugin.Version, System.StringComparison.Ordinal);
+            if (schemaDrift && versionDrift) return "schema + framework-version mismatch";
+            if (schemaDrift) return "schema mismatch";
+            if (versionDrift) return "framework-version mismatch";
+            return "stale baseline"; // unreachable (stale implies one of the above), kept defensive.
         }
 
         /// <summary>
