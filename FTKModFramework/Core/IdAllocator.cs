@@ -46,6 +46,18 @@ namespace FTKModFramework.Core
             return id >= Band;
         }
 
+        /// <summary>
+        /// Count of distinct high-band synthetic ids minted so far. Every id this allocator hands out is
+        /// in the custom band (see <see cref="Allocate"/>), so this is exactly the high-band row count.
+        /// Positional class ids are EXCLUDED by construction: classes register through
+        /// <see cref="ContentRegistry.Register"/> with an explicit id == array index and never call
+        /// <see cref="Allocate"/>, so they never enter this map. Read by the scale-budget save-size proxy.
+        /// </summary>
+        public static int CustomIdCount
+        {
+            get { return KeyToInt.Count; }
+        }
+
         private static uint Fnv1a(string s)
         {
             uint h = 2166136261u;

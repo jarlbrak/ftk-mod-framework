@@ -58,4 +58,11 @@
     <Reference Include="$(FtkManagedDir)/UnityEngine*.dll" Private="false" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Share the pure, Unity-free scale-budget math (records + ScaleBudgetEval) by link-compiling the
+         same FTKPerfProbe/Pure source the test project compiles. No assembly reference between the two
+         plugins; the source is the single shared unit. (FTKPerfProbe.Tests uses the identical glob.) -->
+    <Compile Include="..\FTKPerfProbe\Pure\**\*.cs" Link="Pure\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
 </Project>
