@@ -106,6 +106,16 @@ namespace FTKModFramework.Core
             GameDefinitionPreview preview = BuildPreview(edited, templatePath, saveFileName);
             if (preview == null) return null;
 
+            // CAMPAIGN LOAD PRE-PASS (#43): when a campaign was authored (configureCampaign != null) and the
+            // engine is on, validate the authored GameDefinition + its BranchSidecar BEFORE registering the
+            // preview, emitting precise diagnostics through the SAME ValidationReport channel the data loader
+            // uses. This is a load pre-pass (campaigns are not in ContentLoader's collection, so validating here
+            // right after authoring is the cleanest load-time seam). Diagnostics are surfaced; registration still
+            // proceeds (tolerate-and-report, matching the data loader) so a broken campaign's FAIL is visible
+            // in-game without changing the demo path. The validator itself is gated by EnableCampaignEngine.
+            if (configureCampaign != null)
+                ValidateCampaign(preview, saveFileName);
+
             // Adventures are string-keyed .ftk2 GameDefinitions registered by m_SaveFileName; they
             // intentionally bypass IdAllocator (which is only for synthetic GridEditor FTK_*DB row ids).
             Registered[saveFileName] = preview;
@@ -171,6 +181,42 @@ namespace FTKModFramework.Core
             preview.m_ModFolderPath = Path.GetDirectoryName(templatePath); // reuse the template's preview art
             TryLoadAttractImage(preview);
             return preview;
+        }
+
+        /// <summary>
+        /// Run the load-time campaign validator over the authored preview, emitting diagnostics through a fresh
+        /// <see cref="Data.ValidationReport"/> and logging a one-line summary (mirroring the data loader's
+        /// LogSummary). Gated by <c>EnableCampaignEngine</c> (null-guarded for test contexts, where it defaults
+        /// to running). The campaign is deserialized from <c>m_FullFileData</c> with the EXACT game settings
+        /// (<c>TypeNameHandling.Auto</c> + <c>StringEnumConverter</c>, as GameDefJSONMapper.Start does), giving
+        /// the validator the concrete quest subtypes it needs for per-type id resolution. Never throws.
+        /// </summary>
+        internal static void ValidateCampaign(GameDefinitionPreview preview, string saveFileName)
+        {
+            // Engine off => skip validation entirely (the patches aren't installed; nothing to validate against).
+            if (Plugin.EnableCampaignEngine != null && !Plugin.EnableCampaignEngine.Value) return;
+            if (preview == null || string.IsNullOrEmpty(preview.m_FullFileData)) return;
+
+            Data.ValidationReport report = new Data.ValidationReport();
+            try
+            {
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.TypeNameHandling = TypeNameHandling.Auto;
+                settings.Converters.Add(new StringEnumConverter());
+                GameDefinition gd = JsonConvert.DeserializeObject<GameDefinition>(preview.m_FullFileData, settings);
+
+                QuestValidator.Validate(gd, saveFileName, report);
+            }
+            catch (Exception e)
+            {
+                report.Error("[campaign '" + saveFileName + "'] validator threw: " + e.Message);
+            }
+
+            // One-line summary, then per-item detail, exactly like ContentLoader.LogSummary.
+            Plugin.Log.LogInfo("Campaign validation '" + saveFileName + "': " +
+                report.Errors.Count + " error(s), " + report.Warnings.Count + " warning(s).");
+            foreach (string w in report.Warnings) Plugin.Log.LogWarning("Campaign warning: " + w);
+            foreach (string er in report.Errors) Plugin.Log.LogError("Campaign error: " + er);
         }
 
         private static string FindTemplate(string templateSaveFileName)

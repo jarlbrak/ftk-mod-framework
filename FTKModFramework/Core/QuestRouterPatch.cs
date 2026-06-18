@@ -33,13 +33,24 @@ namespace FTKModFramework.Core
     /// clients (clients do NOT recompute <c>GetNextQuest</c>). So the body is guarded on
     /// <c>PhotonNetwork.isMasterClient</c> and the redirect syncs for free.
     ///
-    /// For this slice the patch installs UNCONDITIONALLY: it is a no-op when the sidecar has no entry for the
-    /// current key, so a vanilla game (or any quest with no branch rules) is untouched. #43 wraps the campaign
-    /// engine behind the <c>EnableCampaignEngine</c> config gate.
+    /// CAMPAIGN-ENGINE GATE (#43): the patch is PREPARE-GATED on <c>Plugin.EnableCampaignEngine</c>. HarmonyX's
+    /// <c>PatchAll</c> calls a patch class's <c>static bool Prepare()</c> before installing; returning false means
+    /// the patch is NEVER applied (provably identical to a router-free build), so when the engine is OFF this
+    /// Postfix is not even attached to <c>GetNextQuest</c>. When ON (the default == today's behavior) it installs
+    /// and remains a no-op for any quest with no sidecar entry, so a vanilla game is still untouched. The flag is
+    /// null-guarded for test contexts where <c>Plugin.Awake</c> never ran (defaults to ON, matching the engine's
+    /// shipped default and <see cref="QuestVerbResolverPatch"/>).
     /// </summary>
     [HarmonyPatch(typeof(GameDefinition), "GetNextQuest")]
     internal static class QuestRouterPatch
     {
+        // HarmonyX PatchAll honors a class-level Prepare(): return false => the patch is not installed at all.
+        // null (no Awake / test context) defaults to enabled, matching BehaviorLoader's null-guard convention.
+        private static bool Prepare()
+        {
+            return Plugin.EnableCampaignEngine == null || Plugin.EnableCampaignEngine.Value;
+        }
+
         // The method is an INSTANCE method, so __instance is the GameDefinition; the just-completed quest's STRING
         // key is read off it via the public getter (__instance.StoryQuestID => m_GameDefData.m_StoryQuestID), NOT
         // a parameter. __result is the vanilla linear successor (or null at chain end) that we may redirect.

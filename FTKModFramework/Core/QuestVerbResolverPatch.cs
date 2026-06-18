@@ -27,13 +27,23 @@ namespace FTKModFramework.Core
     /// equivalent instances, just as the unpatched game would. The patch CLASS is installed exactly once via the
     /// plugin's single <c>Harmony.PatchAll()</c> (the existing one-shot registration path).
     ///
-    /// For this slice the patch installs UNCONDITIONALLY: it is a no-op for any non-ModQuestDef quest (returns
-    /// true to run the vanilla path untouched), so it cannot affect a vanilla game. #43 wraps the campaign
-    /// engine (including this resolver) behind the EnableCampaignEngine config gate.
+    /// CAMPAIGN-ENGINE GATE (#43): PREPARE-GATED on <c>Plugin.EnableCampaignEngine</c> (same mechanism as
+    /// <see cref="QuestRouterPatch"/>). HarmonyX's <c>PatchAll</c> calls <c>static bool Prepare()</c> before
+    /// installing; returning false means this Prefix is never attached to
+    /// <c>GetQuestLogicTypeInstanceFromQuestDef</c> (provably identical to today when the engine is OFF). When ON
+    /// (the default == today's behavior) it installs and remains a no-op for any non-ModQuestDef quest. The flag
+    /// is null-guarded for test contexts where <c>Plugin.Awake</c> never ran (defaults to ON).
     /// </summary>
     [HarmonyPatch(typeof(QuestLogicBase), "GetQuestLogicTypeInstanceFromQuestDef")]
     internal static class QuestVerbResolverPatch
     {
+        // HarmonyX PatchAll honors a class-level Prepare(): return false => the patch is not installed at all.
+        // null (no Awake / test context) defaults to enabled, matching BehaviorLoader's null-guard convention.
+        private static bool Prepare()
+        {
+            return Plugin.EnableCampaignEngine == null || Plugin.EnableCampaignEngine.Value;
+        }
+
         // The method is STATIC, so there is no __instance; the def is arg 0 (_questDef). Parameter names match
         // the decompiled signature so Harmony binds them positionally regardless of name.
         private static bool Prefix(

@@ -60,6 +60,19 @@ namespace FTKModFramework
         public static ConfigEntry<bool> EnableBehaviorLoading;
 
         /// <summary>
+        /// Master switch for the campaign engine (#43, spec #37 P4): the flag-conditioned branch router
+        /// (<see cref="QuestRouterPatch"/>, #42) and the custom-objective-verb resolver
+        /// (<see cref="QuestVerbResolverPatch"/>, #40). Both patches are PREPARE-gated on this flag, so when it is
+        /// false NEITHER patch is installed and behavior is provably identical to a router-free / resolver-free
+        /// build. When true (the default) the patches install but stay inert on any vanilla quest (no sidecar
+        /// entry / no ModQuestDef), so ON == today's behavior. Default ON, mirroring EnableBehaviorLoading (an
+        /// engine feature that is inert until content uses it); set false to disable the campaign engine entirely.
+        /// The flag store accessors (Campaign.SetFlag/GetFlag/EnsureStore) are unaffected: they are already inert
+        /// without campaign content. Also gates the load-time QuestValidator pre-pass.
+        /// </summary>
+        public static ConfigEntry<bool> EnableCampaignEngine;
+
+        /// <summary>
         /// Folder the data loader scans for mod subfolders (each with a manifest.json). Defaults to
         /// BepInEx's plugins dir, so dropping a content-mod folder in alongside plugins just works.
         /// </summary>
@@ -143,6 +156,14 @@ namespace FTKModFramework
                 "the in-assembly behaviours (FrameworkBehaviors / com.ftkmf.sampledata:Steal) are unaffected. " +
                 "Default on; inert when no mod declares a behaviorDll. Set false to skip all Assembly.LoadFrom " +
                 "work (0 DLL behaviours loaded).");
+
+            EnableCampaignEngine = Config.Bind("Campaign", "EnableCampaignEngine", true,
+                "Master switch for the campaign engine: the flag-conditioned branch router (Postfix on " +
+                "GameDefinition.GetNextQuest) and the custom-objective-verb resolver (Prefix on " +
+                "QuestLogicBase.GetQuestLogicTypeInstanceFromQuestDef). Both patches are Prepare-gated on this " +
+                "flag, so false => NEITHER is installed (provably identical to a build without them). Default on, " +
+                "mirroring EnableBehaviorLoading; inert on any vanilla quest even when on. Also gates the " +
+                "load-time campaign QuestValidator pre-pass.");
 
             DataContentRoot = Config.Bind("Data", "DataContentRoot", Paths.PluginPath,
                 "Folder scanned for content-mod subfolders (each with a manifest.json). Defaults to the " +
