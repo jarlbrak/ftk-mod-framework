@@ -245,13 +245,23 @@ namespace FTKModFramework.Core
                 bool prevOffline = (bool)Reflect.Field(typeof(PhotonNetwork), "isOfflineMode").GetValue(null);
                 Reflect.Field(typeof(PhotonNetwork), "isOfflineMode").SetValue(null, true);
 
-                // GameLogic.Instance reads private static gGameLogic. Install an uninitialized instance so
-                // GetQuestTable() (lazy-creates its backing dict) gives Campaign a live store, with no MonoBehaviour.
-                object prevGl = Reflect.Field(typeof(GameLogic), "gGameLogic").GetValue(null);
-                GameLogic fake = (GameLogic)FormatterServices.GetUninitializedObject(typeof(GameLogic));
-                Reflect.Field(typeof(GameLogic), "gGameLogic").SetValue(null, fake);
+                // Setup is not atomic: once isOfflineMode is flipped, any throw before the disposable exists would
+                // leak offline-mode into the real game. Guard the second mutation so a partial failure restores it.
+                try
+                {
+                    // GameLogic.Instance reads private static gGameLogic. Install an uninitialized instance so
+                    // GetQuestTable() (lazy-creates its backing dict) gives Campaign a live store, with no MonoBehaviour.
+                    object prevGl = Reflect.Field(typeof(GameLogic), "gGameLogic").GetValue(null);
+                    GameLogic fake = (GameLogic)FormatterServices.GetUninitializedObject(typeof(GameLogic));
+                    Reflect.Field(typeof(GameLogic), "gGameLogic").SetValue(null, fake);
 
-                return new FakeHostGame(prevOffline, prevGl);
+                    return new FakeHostGame(prevOffline, prevGl);
+                }
+                catch
+                {
+                    Reflect.Field(typeof(PhotonNetwork), "isOfflineMode").SetValue(null, prevOffline);
+                    throw;
+                }
             }
 
             public void Dispose()
