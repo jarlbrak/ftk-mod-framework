@@ -1,7 +1,9 @@
 # Adventures & encounters
 
 How For The King's adventure/game-mode system works, and how this framework adds to it. This is the
-design reference; for the short API recipe see [`WRITING-CONTENT.md`](WRITING-CONTENT.md).
+design reference; for the short API recipe see [`WRITING-CONTENT.md`](WRITING-CONTENT.md). To author the
+*questline inside* an adventure (multi-stage quests, branching, custom objective verbs), see
+[`CAMPAIGNS.md`](CAMPAIGNS.md).
 
 ## How FTK models an "adventure"
 
