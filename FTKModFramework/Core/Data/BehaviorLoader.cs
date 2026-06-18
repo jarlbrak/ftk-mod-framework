@@ -167,18 +167,23 @@ namespace FTKModFramework.Core.Data
                 ContentBehaviorAttribute attr =
                     (ContentBehaviorAttribute)Attribute.GetCustomAttribute(t, typeof(ContentBehaviorAttribute));
 
+                // [ContentBehavior]-attributed DLL types are proficiencies today: this slice's only DLL-loadable
+                // kind. The questlogic kind is registered in-assembly (FrameworkBehaviors / self-test) for now; a
+                // future spec may extend the attribute to carry a kind. So the kind is fixed to Proficiency here.
+                const BehaviorKind kind = BehaviorKind.Proficiency;
                 if (!typeof(ProficiencyBase).IsAssignableFrom(t))
                 {
-                    // Author intent was to register a behaviour; the type just isn't hostable. Report it (not
-                    // silent) and do NOT register. (FR-4.)
+                    // Author intent was to register a behaviour; the type just doesn't match its kind's base
+                    // type, so it isn't hostable. Report it (not silent) and do NOT register. (FR-4.)
                     report.Warning("[" + modGuid + "] '" + t.FullName +
-                        "' has [ContentBehavior] but is not a ProficiencyBase (skipped).");
+                        "' has [ContentBehavior] but does not match kind '" + kind +
+                        "' (not a ProficiencyBase; skipped).");
                     continue;
                 }
 
                 // BehaviorRegistry is first-wins-with-warning, so a duplicate Name within this DLL keeps the
                 // first (deterministic by the sort above) and warns; nothing here needs to dedupe.
-                BehaviorRegistry.Register(modGuid, attr.Name, t);
+                BehaviorRegistry.Register(modGuid, attr.Name, t, kind);
                 Plugin.Log.LogInfo("BehaviorLoader: registered '" + modGuid + ":" + attr.Name + "' -> " + t.FullName + ".");
                 registered++;
             }

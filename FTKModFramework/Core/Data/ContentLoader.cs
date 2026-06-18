@@ -380,12 +380,27 @@ namespace FTKModFramework.Core.Data
 
             string key = c.ModGuid + ":" + c.Entry.Behavior;
             Type type;
-            if (!BehaviorRegistry.TryResolve(key, out type))
+            BehaviorKind kind;
+            if (!BehaviorRegistry.TryResolve(key, out type, out kind))
             {
                 // Dangling behaviour reference: the row already loaded its data fields in Phase 1; only the
                 // prefab wiring is skipped. Mirrors the dangling-content-id reference policy (warn + continue).
                 report.Warning(c.Context + ": behavior '" + c.Entry.Behavior +
                     "' is not registered (dangling; wiring skipped).");
+                return;
+            }
+
+            // Branch on the resolved kind (closed: proficiency or questlogic). Only the proficiency kind is
+            // wired into a proficiency row's m_ProficiencyPrefab; the questlogic kind is a plain
+            // (non-MonoBehaviour) object and must NOT be routed through BehaviorHost.Create / AddComponent.
+            if (kind != BehaviorKind.Proficiency)
+            {
+                // No questlogic content is wired into a proficiency row in this slice: the runtime questlogic
+                // resolution path (Activator.CreateInstance) lands in #40. Skip cleanly so a future questlogic
+                // registration is never mis-hosted as a proficiency prefab.
+                report.Warning(c.Context + ": behavior '" + c.Entry.Behavior + "' resolved as kind '" + kind +
+                    "', which is not wired into a proficiency row here (questlogic runtime resolution lands in " +
+                    "#40; wiring skipped).");
                 return;
             }
 
