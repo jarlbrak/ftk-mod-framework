@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    SAMPLE behaviour MOD assembly (#33). A SEPARATE, self-contained net35 DLL that proves the
+    BehaviorLoader's external-DLL path. It is NOT part of the plugin build and is NEVER copied into
+    BepInEx/plugins; it is deployed into the sample MOD folder (SampleData/com.ftkmf.samplebehaviormod/)
+    so the data loader's pre-pass discovers it via that mod's manifest.behaviorDll.
+
+    It references ONLY the framework's PUBLIC ContentBehaviorAttribute (carried in FTKModFramework.dll,
+    Private=false) plus the game assemblies. It references NO Core/ internal type (it cannot anyway:
+    those are `internal` to FTKModFramework). The build gate for the plugin is untouched.
+
+    Build (from the repo root or anywhere, absolute path is fine):
+      dotnet build FTKModFramework/Samples/SampleBehaviorMod/SampleBehavior.csproj -c Release
+    Output: SampleBehaviorMod.dll under this project's bin/Release/net35/.
+
+    FtkManagedDir mirrors the main csproj; override the same way on other machines/OSes.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>SampleBehaviorMod</AssemblyName>
+    <Product>SampleBehaviorMod</Product>
+    <Version>1.0.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <NoWarn>$(NoWarn);CS0436;NU1701</NoWarn>
+
+    <!-- Game managed-assembly folder. Override with -p:FtkManagedDir=... (same as the plugin). -->
+    <FtkManagedDir Condition="'$(FtkManagedDir)' == ''">$(HOME)/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed</FtkManagedDir>
+
+    <!-- The built plugin DLL we reference for the public ContentBehaviorAttribute. -->
+    <FtkPluginDll Condition="'$(FtkPluginDll)' == ''">$(MSBuildThisFileDirectory)../../bin/Release/net35/FTKModFramework.dll</FtkPluginDll>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- net35 reference assemblies so this builds on macOS/Linux without .NET Framework installed. -->
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The framework plugin, for its PUBLIC ContentBehaviorAttribute only. Private=false: the game already
+         has FTKModFramework.dll in BepInEx/plugins, so do NOT copy it next to this sample DLL. -->
+    <Reference Include="FTKModFramework" Private="false">
+      <HintPath>$(FtkPluginDll)</HintPath>
+    </Reference>
+
+    <!-- Game assemblies, referenced straight from the install (same shape as the plugin) but WITHOUT the
+         publicizer: every member this sample touches (ProficiencyBase.AddToDummy/GetAttacker/m_Category,
+         CharacterDummy/CharacterOverworld/CharacterStats fields, ChangeGold, FTKUtil.RoundToInt,
+         PhotonNetwork.isMasterClient) is already PUBLIC in the stock assemblies (decompile-verified), so the
+         sample does NOT depend on the publicizer MSBuild task the plugin imports. Private=false: the game
+         already provides these. -->
+    <Reference Include="Assembly-CSharp" Private="false">
+      <HintPath>$(FtkManagedDir)/Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass" Private="false">
+      <HintPath>$(FtkManagedDir)/Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="$(FtkManagedDir)/UnityEngine*.dll" Private="false" />
+  </ItemGroup>
+
+</Project>

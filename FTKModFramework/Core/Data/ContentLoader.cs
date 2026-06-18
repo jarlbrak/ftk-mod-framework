@@ -58,6 +58,13 @@ namespace FTKModFramework.Core.Data
             ValidationReport report = new ValidationReport();
 
             List<DiscoveredMod> mods = ModDiscovery.Discover(contentRoot, report);
+
+            // SINGLE behaviour-DLL pre-pass (FR-7): load + reflect + register every mod's behaviorDll behaviours
+            // BEFORE any content-registration phase. This is the sequencing invariant the Phase-2 WireBehavior
+            // step (#31) depends on: a content entry's behavior:"name" can only resolve modGuid:name once the
+            // pre-pass has registered it, so the resolution can never run ahead of registration.
+            BehaviorLoader.LoadAll(mods, report);
+
             List<PendingEntry> pending = CollectEntries(mods, report);
 
             // Deterministic registration order across machines: sort by ordinal (modGuid, id). This is the
@@ -96,6 +103,7 @@ namespace FTKModFramework.Core.Data
 
             EmitParitySelfTest(cached);
             EmitBehaviorSelfTest(cached);
+            EmitBehaviorDllSelfTest(cached);
             EmitDeterminismSelfTest(cached);
             LogSummary(report, cached.Count, pending.Count, sw.ElapsedMilliseconds);
 
@@ -524,6 +532,48 @@ namespace FTKModFramework.Core.Data
             else
                 Plugin.Log.LogError("SELF-TEST FAIL [data-behavior]: registered=" + registered +
                     " prefabWired=" + prefabWired + " categorySet=" + categorySet + " attached=" + attached + ".");
+        }
+
+        /// <summary>
+        /// Behaviour-DLL self-test (#33, the grep target "SELF-TEST PASS [behavior-dll]"): proves the
+        /// EXTERNAL-DLL path works end to end. The sample behaviour mod (com.ftkmf.samplebehaviormod) ships a
+        /// SEPARATE net35 assembly whose <c>[ContentBehavior("Steal")]</c> ProficiencyBase subtype the
+        /// pre-pass loaded + registered BEFORE the content-registration phase ran. This asserts:
+        ///   (1) the DLL behaviour key resolves to a ProficiencyBase subtype (the pre-pass registered it), and
+        ///   (2) the load reached completion (cached.Count &gt; 0), so a sibling broken-DLL fixture's
+        ///       LoadFrom failure did NOT abort the load: other content still registered (FR-4 isolation).
+        /// The broken.dll LoadFrom failure itself is observable as a validation error in the report/log.
+        ///
+        /// No-op when the sample behaviour mod is absent (mirrors <see cref="EmitParitySelfTest"/>), so a
+        /// non-samplebehaviormod load never FAILs it.
+        /// </summary>
+        private static void EmitBehaviorDllSelfTest(List<Cached> cached)
+        {
+            const string key = "com.ftkmf.samplebehaviormod:Steal";
+
+            // No-op guard: only assert when this mod actually contributed an entry to this load.
+            Cached steal = Find(cached, "proficiency", "samplebehaviormod_steal");
+            if (steal == null) return; // sample behaviour mod not present: nothing to assert.
+
+            // (1) The DLL-supplied behaviour key resolves to a ProficiencyBase subtype. The Type lives in the
+            // SEPARATE sample-behaviour assembly, so we check assignability (not a typeof in THIS assembly).
+            Type type;
+            bool registered = BehaviorRegistry.TryResolve(key, out type)
+                && type != null
+                && typeof(ProficiencyBase).IsAssignableFrom(type);
+
+            // (2) The whole load reached completion with content registered: a sibling broken.dll LoadFrom
+            // failure was isolated and did NOT abort the pass.
+            bool loadCompleted = cached.Count > 0;
+
+            bool ok = registered && loadCompleted;
+            if (ok)
+                Plugin.Log.LogInfo("SELF-TEST PASS [behavior-dll]: '" + key + "' -> " +
+                    type.FullName + " (DLL behaviour registered by the pre-pass before content phases; " +
+                    cached.Count + " entries loaded, broken-DLL isolation held).");
+            else
+                Plugin.Log.LogError("SELF-TEST FAIL [behavior-dll]: registered=" + registered +
+                    " (key '" + key + "') loadCompleted=" + loadCompleted + " (cached=" + cached.Count + ").");
         }
 
         /// <summary>

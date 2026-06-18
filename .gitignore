@@ -18,8 +18,13 @@ obj/
 docs/superpowers/
 
 # Do NOT commit game assemblies (copyright). Reference them from the install instead.
+# This also ignores the BUILT sample-behaviour DLL (it is a build artifact: rebuild it via
+# `dotnet build FTKModFramework/Samples/SampleBehaviorMod/SampleBehavior.csproj -c Release`).
 *.dll
 !**/lib/**/*.dll
+# Exception: the BehaviorLoader broken-DLL test fixture is a tiny committed text file (NOT a real
+# assembly), used to prove Assembly.LoadFrom failure is isolated. It must be tracked.
+!FTKModFramework/SampleData/com.ftkmf.brokendll/broken.dll
 
 # Pre-existing local file, not part of the framework
 backend.log
