@@ -26,8 +26,8 @@ namespace FTKModFramework.Core.Data
         /// <c>"mymod.behaviors.dll"</c>. NOT a required field: a manifest without it validates and loads
         /// exactly as one with it, just with no behaviour assembly. It is NOT loaded by this slice (#33
         /// owns <c>Assembly.LoadFrom</c>); here it is only parsed and run through a path-traversal guard
-        /// (see <see cref="TryResolveBehaviorDll"/>): any separator, <c>..</c>, rooted path, or value that
-        /// canonicalizes outside the mod folder is rejected and the mod's content still loads without it.
+        /// (see <see cref="TryResolveBehaviorDll"/>): a value containing <c>..</c>, a rooted path, any separator,
+        /// or one that canonicalizes outside the mod folder is rejected and the mod's content still loads without it.
         /// </summary>
         [JsonProperty("behaviorDll")] public string BehaviorDll;
 #pragma warning restore CS0649
@@ -62,9 +62,11 @@ namespace FTKModFramework.Core.Data
         /// install path must resolve the SAME relative file, never something outside the folder.
         ///
         /// Rejects (returns false, sets <paramref name="rejectReason"/>, <paramref name="resolvedPath"/> =
-        /// null) when the value contains a directory separator, contains <c>..</c>, is rooted/absolute, or
-        /// canonicalizes outside the mod-folder root. net35 has no <c>Path.GetRelativePath</c>, so the
-        /// escape test is <c>Path.GetFullPath</c> + an ORDINAL <c>StartsWith(root + separator)</c>.
+        /// null) for, in MOST-SPECIFIC-FIRST order so every branch is independently reachable: (1) a value
+        /// containing <c>..</c> (path traversal), (2) a rooted/absolute value, (3) a value containing any
+        /// directory separator, (4) a value that canonicalizes outside the mod-folder root. net35 has no
+        /// <c>Path.GetRelativePath</c>, so the escape test is <c>Path.GetFullPath</c> + an ORDINAL
+        /// <c>StartsWith(root + separator)</c>.
         /// Accepts (returns true) with <paramref name="resolvedPath"/> = the canonicalized absolute path.
         /// </summary>
         public static bool TryResolveBehaviorDll(string modFolder, string behaviorDll,
@@ -73,26 +75,33 @@ namespace FTKModFramework.Core.Data
             resolvedPath = null;
             rejectReason = null;
 
-            // Reject any separator (both platform separators plus the literal forms) up front: a behaviour
-            // DLL is a bare filename inside the mod folder, never a sub-path.
-            if (behaviorDll.IndexOf(Path.DirectorySeparatorChar) >= 0 ||
-                behaviorDll.IndexOf(Path.AltDirectorySeparatorChar) >= 0 ||
-                behaviorDll.IndexOf('/') >= 0 ||
-                behaviorDll.IndexOf('\\') >= 0)
-            {
-                rejectReason = "contains a directory separator (must be a bare filename)";
-                return false;
-            }
+            // Checks are ordered MOST-SPECIFIC-FIRST so each rejection gives the most informative reason and
+            // every branch is independently reachable (a generic separator test would otherwise mask the
+            // '..' and rooted cases, since "../evil.dll" and "/etc/evil.dll" both also contain a separator).
+            // The ACCEPT/REJECT decision is unchanged: the union of reject conditions is identical to before.
 
+            // 1) Path traversal: a literal ".." anywhere is the most dangerous and most specific signal.
             if (behaviorDll.IndexOf("..", StringComparison.Ordinal) >= 0)
             {
                 rejectReason = "contains '..' (path traversal)";
                 return false;
             }
 
+            // 2) Rooted/absolute: a leading separator or drive-qualified path escapes the mod folder outright.
             if (Path.IsPathRooted(behaviorDll))
             {
                 rejectReason = "is rooted/absolute (must be a bare filename)";
+                return false;
+            }
+
+            // 3) Any remaining separator (both platform separators plus the literal forms): a behaviour DLL is
+            // a bare filename inside the mod folder, never a sub-path.
+            if (behaviorDll.IndexOf(Path.DirectorySeparatorChar) >= 0 ||
+                behaviorDll.IndexOf(Path.AltDirectorySeparatorChar) >= 0 ||
+                behaviorDll.IndexOf('/') >= 0 ||
+                behaviorDll.IndexOf('\\') >= 0)
+            {
+                rejectReason = "contains a directory separator (must be a bare filename)";
                 return false;
             }
 

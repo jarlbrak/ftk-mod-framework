@@ -118,10 +118,16 @@ namespace FTKModFramework.Core.Data
                 // #35: per-failed-type diagnostic SUMMARY. Each non-null LoaderException names ONE type that
                 // failed to resolve (e.g. a missing transitive dependency the type referenced). Log up to
                 // MaxLoaderExceptionLines of them, then a single "+K more" line, so a pathological DLL with
-                // hundreds of broken types cannot flood the log. This is defensive instrumentation only: the
-                // broken.dll fixture fails at Assembly.LoadFrom (the LoadFrom catch above), NOT at GetTypes,
-                // so it does NOT exercise THIS path. THIS path fires only for a DLL that loads but whose
-                // individual types fail to resolve, which no shipped fixture deliberately produces.
+                // hundreds of broken types cannot flood the log.
+                //
+                // This block is DELIBERATE defensive instrumentation that is INTENTIONALLY NOT EXERCISED by any
+                // shipped fixture, and that is by design: the broken.dll fixture is a non-assembly/bad-format
+                // file, so it fails earlier at Assembly.LoadFrom (the LoadFrom catch above), NOT at GetTypes,
+                // and so never reaches here. THIS path fires only for a DLL that LOADS successfully but whose
+                // individual types fail to resolve at GetTypes time (e.g. a missing transitive dependency).
+                // We deliberately do NOT add a fixture for it: constructing a DLL that loads but has
+                // individually-unresolvable types is fragile and over-engineered for the value, so the
+                // instrumentation stands on inspection rather than on a self-test.
                 Exception[] loaderExceptions = ex.LoaderExceptions;
                 if (loaderExceptions != null)
                 {

@@ -102,9 +102,10 @@ namespace FTKMF.SampleBehaviorMod
 
         private static int GiveGold(CharacterStats stats, bool grant)
         {
-            // Half the Entertain payout (INLINED, faithful to the framework's ProficiencyMath.HalfEntertainGold,
-            // reproduced here so the sample DLL stays self-contained): Entertain = Random(2..4) * (level+1) *
-            // GoldModifier; halve and round. Floor at 1 so a landed steal always grants something.
+            // Inlined copy of FTKModFramework Content/ProficiencyMath.HalfEntertainGold; kept in sync
+            // deliberately (this separate assembly cannot reference the plugin-internal helper). Half the
+            // Entertain payout: Entertain = Random(2..4) * (level+1) * GoldModifier; halve and round. Floor at
+            // 1 so a landed steal always grants something.
             int gold = FTKUtil.RoundToInt((float)(Random.Range(2, 5) * (stats.m_PlayerLevel + 1)) * stats.GoldModifier * 0.5f);
             if (gold < 1) gold = 1;
             if (grant) stats.ChangeGold(gold); // _hud:true by default; ChangeGold itself broadcasts to all clients

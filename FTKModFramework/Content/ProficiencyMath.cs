@@ -12,6 +12,9 @@ namespace FTKModFramework
         /// Half the Entertain payout: Entertain = Random(2..4) * (level+1) * GoldModifier; this returns that
         /// halved and rounded. Returns the RAW amount: callers apply their own clamps (Thief floors at 1,
         /// Cutpurse caps at what the victim carries).
+        ///
+        /// NOTE: Samples/SampleBehaviorMod/SampleStealBehavior.cs inlines this same formula (it is a separate
+        /// assembly that cannot reference this internal helper); keep them in sync.
         /// </summary>
         internal static int HalfEntertainGold(CharacterStats stats)
         {
