@@ -39,8 +39,9 @@ namespace FTKModFramework.Core
         /// record the touched DB instead. Pair with <see cref="EndBatch"/> in a try/finally so the
         /// indices always rebuild. Re-entrant safe: a second BeginBatch while batching is a no-op (the
         /// outermost EndBatch flushes everything).
+        /// Core-internal: only the data ContentLoader batches; modders use the per-row Content.* helpers.
         /// </summary>
-        public static void BeginBatch()
+        internal static void BeginBatch()
         {
             if (_batchDirty == null) _batchDirty = new HashSet<GEDataArrayBase>();
         }
@@ -49,8 +50,9 @@ namespace FTKModFramework.Core
         /// Exit batch mode and rebuild the int-&gt;row dictionary of every DB touched while batching,
         /// exactly once each. Clears the batch state FIRST (before any MakeIndex runs) so a throwing
         /// MakeIndex cannot strand us in batch mode. A no-op if not currently batching.
+        /// Core-internal: see <see cref="BeginBatch"/>.
         /// </summary>
-        public static void EndBatch()
+        internal static void EndBatch()
         {
             if (_batchDirty == null) return;
             HashSet<GEDataArrayBase> snapshot = _batchDirty;
