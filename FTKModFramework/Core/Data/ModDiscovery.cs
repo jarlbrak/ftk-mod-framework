@@ -13,10 +13,18 @@ namespace FTKModFramework.Core.Data
         public readonly ModManifest Manifest;
         public readonly List<string> ContentFilePaths;
 
-        public DiscoveredMod(ModManifest manifest, List<string> contentFilePaths)
+        /// <summary>
+        /// Resolved ABSOLUTE path of the mod's behaviour DLL (the canonicalized, traversal-guarded
+        /// <c>manifest.behaviorDll</c>), or null when the manifest declares none OR the declared value was
+        /// rejected by the guard. This slice (#32) only records the path; loading it is #33's job.
+        /// </summary>
+        public readonly string BehaviorDllPath;
+
+        public DiscoveredMod(ModManifest manifest, List<string> contentFilePaths, string behaviorDllPath)
         {
             Manifest = manifest;
             ContentFilePaths = contentFilePaths;
+            BehaviorDllPath = behaviorDllPath;
         }
     }
 
@@ -73,7 +81,15 @@ namespace FTKModFramework.Core.Data
                 }
 
                 List<string> contentFiles = ContentFilesIn(folder);
-                mods.Add(new DiscoveredMod(manifest, contentFiles));
+
+                // OPTIONAL behaviorDll (FR-3 manifest side, #32): only parsed + shape-validated here; #33
+                // owns the actual Assembly.LoadFrom. An absent value is no error and no log. A present but
+                // traversal-unsafe value is a validation ERROR, but the mod's CONTENT still loads (the DLL
+                // path is just dropped). Determinism is preserved: this neither aborts discovery nor skips
+                // the mod, so the (modGuid, id) load order is identical with or without a valid behaviorDll.
+                string behaviorDllPath = ResolveBehaviorDll(manifest, folder, report);
+
+                mods.Add(new DiscoveredMod(manifest, contentFiles, behaviorDllPath));
             }
 
             // Deterministic across machines: order by (modGuid, folder name).
@@ -100,6 +116,30 @@ namespace FTKModFramework.Core.Data
                 report.Error("manifest.json (" + folder + "): malformed JSON: " + e.Message);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Resolve the manifest's optional <c>behaviorDll</c> against the mod folder. Returns the
+        /// canonicalized absolute path on success, or null when the value is absent (no error, no log) or
+        /// rejected by the traversal guard (a validation error is recorded; the mod's content still loads).
+        /// </summary>
+        private static string ResolveBehaviorDll(ModManifest manifest, string folder, ValidationReport report)
+        {
+            string declared = manifest.BehaviorDll;
+            // Absent: not an error and not logged. The mod simply has no behaviour DLL.
+            if (declared == null || declared.Trim().Length == 0) return null;
+
+            string resolvedPath;
+            string reason;
+            if (!ModManifest.TryResolveBehaviorDll(folder, declared, out resolvedPath, out reason))
+            {
+                report.Error("manifest.json (" + folder + "): behaviorDll '" + declared +
+                    "' rejected (" + reason + "); not loaded.");
+                return null; // content still loads; only the DLL path is dropped.
+            }
+
+            Plugin.Log.LogInfo("ModDiscovery: '" + manifest.ModGuid + "' behaviorDll resolved to " + resolvedPath);
+            return resolvedPath;
         }
 
         private static List<string> ContentFilesIn(string folder)

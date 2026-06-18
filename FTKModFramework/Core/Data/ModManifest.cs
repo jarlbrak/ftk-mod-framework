@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace FTKModFramework.Core.Data
@@ -18,6 +20,16 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("modGuid")] public string ModGuid;
         [JsonProperty("name")] public string Name;
         [JsonProperty("version")] public string Version;
+
+        /// <summary>
+        /// OPTIONAL bare FILENAME (not a path) of the mod's behaviour DLL inside its own folder, e.g.
+        /// <c>"mymod.behaviors.dll"</c>. NOT a required field: a manifest without it validates and loads
+        /// exactly as one with it, just with no behaviour assembly. It is NOT loaded by this slice (#33
+        /// owns <c>Assembly.LoadFrom</c>); here it is only parsed and run through a path-traversal guard
+        /// (see <see cref="TryResolveBehaviorDll"/>): any separator, <c>..</c>, rooted path, or value that
+        /// canonicalizes outside the mod folder is rejected and the mod's content still loads without it.
+        /// </summary>
+        [JsonProperty("behaviorDll")] public string BehaviorDll;
 #pragma warning restore CS0649
 
         /// <summary>Absolute path of the folder this manifest was loaded from (filled by discovery).</summary>
@@ -40,6 +52,72 @@ namespace FTKModFramework.Core.Data
         private static bool IsBlank(string s)
         {
             return s == null || s.Trim().Length == 0;
+        }
+
+        /// <summary>
+        /// Path-traversal guard for a PRESENT <c>behaviorDll</c> value: the caller only invokes this when
+        /// <paramref name="behaviorDll"/> is non-blank, so a reject here is ALWAYS an error (a blank value
+        /// means "no behaviour DLL" and is handled by the caller, not here). The DLL must live directly
+        /// inside the mod folder under a bare filename: a co-op client loading a mod from a different
+        /// install path must resolve the SAME relative file, never something outside the folder.
+        ///
+        /// Rejects (returns false, sets <paramref name="rejectReason"/>, <paramref name="resolvedPath"/> =
+        /// null) when the value contains a directory separator, contains <c>..</c>, is rooted/absolute, or
+        /// canonicalizes outside the mod-folder root. net35 has no <c>Path.GetRelativePath</c>, so the
+        /// escape test is <c>Path.GetFullPath</c> + an ORDINAL <c>StartsWith(root + separator)</c>.
+        /// Accepts (returns true) with <paramref name="resolvedPath"/> = the canonicalized absolute path.
+        /// </summary>
+        public static bool TryResolveBehaviorDll(string modFolder, string behaviorDll,
+            out string resolvedPath, out string rejectReason)
+        {
+            resolvedPath = null;
+            rejectReason = null;
+
+            // Reject any separator (both platform separators plus the literal forms) up front: a behaviour
+            // DLL is a bare filename inside the mod folder, never a sub-path.
+            if (behaviorDll.IndexOf(Path.DirectorySeparatorChar) >= 0 ||
+                behaviorDll.IndexOf(Path.AltDirectorySeparatorChar) >= 0 ||
+                behaviorDll.IndexOf('/') >= 0 ||
+                behaviorDll.IndexOf('\\') >= 0)
+            {
+                rejectReason = "contains a directory separator (must be a bare filename)";
+                return false;
+            }
+
+            if (behaviorDll.IndexOf("..", StringComparison.Ordinal) >= 0)
+            {
+                rejectReason = "contains '..' (path traversal)";
+                return false;
+            }
+
+            if (Path.IsPathRooted(behaviorDll))
+            {
+                rejectReason = "is rooted/absolute (must be a bare filename)";
+                return false;
+            }
+
+            // Defence in depth: even with the checks above, confirm the canonicalized path stays inside the
+            // mod folder. Build root with a trailing separator so the prefix test cannot match a sibling
+            // folder that merely shares a name prefix (e.g. ".../mod" vs ".../mod-evil").
+            string full = Path.GetFullPath(Path.Combine(modFolder, behaviorDll));
+            string root = Path.GetFullPath(modFolder);
+            string rootWithSep = root;
+            if (rootWithSep.Length == 0 ||
+                (rootWithSep[rootWithSep.Length - 1] != Path.DirectorySeparatorChar &&
+                 rootWithSep[rootWithSep.Length - 1] != Path.AltDirectorySeparatorChar))
+            {
+                rootWithSep = root + Path.DirectorySeparatorChar;
+            }
+
+            if (!string.Equals(full, root, StringComparison.Ordinal) &&
+                !full.StartsWith(rootWithSep, StringComparison.Ordinal))
+            {
+                rejectReason = "canonicalizes outside the mod folder";
+                return false;
+            }
+
+            resolvedPath = full;
+            return true;
         }
     }
 }
