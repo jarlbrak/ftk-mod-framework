@@ -33,6 +33,22 @@ namespace FTKModFramework.Core.Data
 
         /// <summary>Tooltip/bestiary description -&gt; Localization in Phase 2 (proficiency / enemy kind).</summary>
         [JsonProperty("description")] public string Description;
+
+        /// <summary>
+        /// Bare behaviour name (the part after the owning mod guid in a <c>BehaviorRegistry</c> key); the
+        /// loader prefixes the owning mod guid to form (modGuid + ":" + behavior) before resolving it.
+        /// Meaningful ONLY on <c>kind:"proficiency"</c>: it wires the resolved <c>ProficiencyBase</c>
+        /// subclass into the row's <c>m_ProficiencyPrefab</c> in Phase 2. Ignored (with a warning) on any
+        /// other kind.
+        /// </summary>
+        [JsonProperty("behavior")] public string Behavior;
+
+        /// <summary>
+        /// Optional <c>ProficiencyBase.Category</c> enum NAME (case-insensitive, e.g. "StealGold") set on the
+        /// hosted behaviour instance after it is created. Meaningful only alongside <see cref="Behavior"/> on
+        /// a proficiency. An unknown name leaves the instance's default category untouched and warns.
+        /// </summary>
+        [JsonProperty("behaviorCategory")] public string BehaviorCategory;
 #pragma warning restore CS0649
     }
 }

@@ -232,6 +232,13 @@ namespace FTKModFramework
                 Plugin.SyntheticContentKind.Value,
                 Plugin.SyntheticContentTemplate.Value));
 
+            // Framework-shipped behaviours (#31). Runs UNCONDITIONALLY (independent of EnableSampleContent)
+            // and BEFORE the data loader, so the bundled-demo behaviour key (com.ftkmf.sampledata:Steal) is
+            // present when the loader resolves the demo fixture's behavior:"Steal". This is the in-assembly
+            // demo path that lets the shipped sampledata fixture drop the "minus the MonoBehaviour" caveat;
+            // real third-party mods supply behaviours via their own DLL under their own guid (#33/#34).
+            Run("framework behaviors", FrameworkBehaviors.Register);
+
             // JSON data-content mods (opt-in, independent of the demo). Runs AFTER sample content so a
             // data mod can reference vanilla rows the same way the demo does. ContentLoader registers each
             // discovered mod into ModRegistry, so the summary below sees data mods too. The LoadResult is
