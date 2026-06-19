@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  guard:
+    name: No copyrighted game DLLs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail if any copyrighted game assembly is tracked
+        shell: bash
+        run: |
+          set -euo pipefail
+          matches="$(git ls-files | grep -E '(Assembly-CSharp[^/]*|UnityEngine[^/]*|Newtonsoft\.Json)\.dll$' || true)"
+          if [ -n "$matches" ]; then
+            echo "ERROR: copyrighted game assemblies are tracked in git:"
+            echo "$matches"
+            echo "These must never be committed. Reference them from the local game install instead."
+            exit 1
+          fi
+          echo "OK: no copyrighted game assemblies are tracked."
+
+  test:
+    name: Unit tests (Unity-free)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Run the game-free unit tests
+        run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
