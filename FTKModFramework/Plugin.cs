@@ -127,6 +127,30 @@ namespace FTKModFramework
         /// <summary>Template (vanilla row to clone) for every generated synthetic entry (default "bladeDagger").</summary>
         public static ConfigEntry<string> SyntheticContentTemplate;
 
+        // ---- Diagnostics: synthetic CAMPAIGN scale gate (P5, #45) --------------------------------------
+        // The campaign analogue of the data-content scale gate. It authors a synthetic multi-stage campaign at
+        // a scale target through the PUBLIC campaign builder, then gates load-time, memory, and the REAL
+        // serialized save-size (campaigns bypass IdAllocator, so the data gate's IdAllocator proxy captures none
+        // of their growth, spec #37 NFR-1). The two stage/quest binds default to 0 = "use the fixed default scale
+        // target" so the gate is OBSERVABLE by default (deterministic smoke line) yet inert beyond that fixed
+        // target until a tester raises it; the three budget binds are ABSOLUTE (the baseline model does not map to
+        // a one-shot campaign authoring or to real-bytes save-size). All five are read by CampaignScaleBudgetGate.
+
+        /// <summary>Stages in the synthetic scale-probe campaign. 0 = use the fixed default target (20).</summary>
+        public static ConfigEntry<int> SyntheticCampaignStages;
+
+        /// <summary>Quests per stage in the synthetic scale-probe campaign. 0 = use the fixed default target (25).</summary>
+        public static ConfigEntry<int> SyntheticCampaignQuestsPerStage;
+
+        /// <summary>Absolute load-time budget (ms) for authoring the synthetic campaign at scale.</summary>
+        public static ConfigEntry<long> CampaignLoadMsBudget;
+
+        /// <summary>Absolute memory budget (bytes) for the heap delta the synthetic campaign adds.</summary>
+        public static ConfigEntry<long> CampaignMemoryBytesBudget;
+
+        /// <summary>Absolute save-size budget (bytes) for the synthetic campaign's REAL serialized m_FullFileData.</summary>
+        public static ConfigEntry<long> CampaignSaveSizeBytesBudget;
+
         private Harmony _harmony;
 
         private void Awake()
@@ -211,6 +235,28 @@ namespace FTKModFramework
 
             SyntheticContentTemplate = Config.Bind("Diagnostics", "SyntheticContentTemplate", "bladeDagger",
                 "Template (vanilla row to clone) for each generated synthetic entry.");
+
+            SyntheticCampaignStages = Config.Bind("Diagnostics", "SyntheticCampaignStages", 0,
+                "P5 campaign scale gate: stages in the synthetic scale-probe campaign. 0 = use the fixed default " +
+                "target (20 stages). Capped at 200. The gate authors stages x questsPerStage quests through the " +
+                "public campaign builder and gates load/memory/real-save-size.");
+
+            SyntheticCampaignQuestsPerStage = Config.Bind("Diagnostics", "SyntheticCampaignQuestsPerStage", 0,
+                "P5 campaign scale gate: quests per stage in the synthetic scale-probe campaign. 0 = use the fixed " +
+                "default target (25 per stage). Capped at 200. Default 20x25 = 500 quests = 250x vanilla DungeonCrawl (2).");
+
+            CampaignLoadMsBudget = Config.Bind("Diagnostics", "CampaignLoadMsBudget", 3000L,
+                "P5 campaign scale gate: ABSOLUTE load-time budget (ms) for authoring+deserializing+validating " +
+                "the synthetic campaign at scale (the baseline model does not map to a one-shot campaign authoring).");
+
+            CampaignMemoryBytesBudget = Config.Bind("Diagnostics", "CampaignMemoryBytesBudget", 67108864L,
+                "P5 campaign scale gate: ABSOLUTE memory budget (bytes, 64 MiB default) for the heap delta the " +
+                "synthetic campaign adds (GC.GetTotalMemory(true) before/after, matching the data gate's figure).");
+
+            CampaignSaveSizeBytesBudget = Config.Bind("Diagnostics", "CampaignSaveSizeBytesBudget", 4194304L,
+                "P5 campaign scale gate: ABSOLUTE save-size budget (bytes, 4 MiB default) for the REAL serialized " +
+                "campaign save artifact (m_FullFileData byte length), NOT the IdAllocator proxy (campaigns are " +
+                "string-keyed and bypass IdAllocator, spec #37 NFR-1).");
 
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             // The save-size proxy depends on this invariant holding (ids persist as ints).
@@ -297,6 +343,16 @@ namespace FTKModFramework
             // was disabled; the gate then captures metrics with registered/elapsed = 0 and still emits its
             // one SCALE-BUDGET line (one line per content load). When the gate itself is disabled it emits none.
             Run("scale budget", () => ScaleBudgetGate.Evaluate(loadResult));
+
+            // Campaign scale gate (#45). Sibling of the data-content gate above: it authors a SYNTHETIC multi-stage
+            // campaign at a fixed scale target (default 20x25 = 500 quests, 250x vanilla) through the PUBLIC campaign
+            // builder, then gates load-time, memory, and the REAL serialized save-size. It runs INDEPENDENTLY of
+            // EnableDataContent (campaigns are not part of the data load) and of EnableSampleContent (it registers its
+            // OWN reserved scale-probe adventure), gated only by DiagnosticsEnableGate so the smoke log shows a
+            // deterministic SCALE-BUDGET [campaign] + SELF-TEST PASS [campaign-scale] line without config edits. The
+            // data gate's IdAllocator save-proxy captures ZERO campaign growth (string-keyed quests, NFR-1), so this
+            // gate measures the campaign's own m_FullFileData bytes and asserts CustomIdCount is unchanged.
+            Run("campaign scale budget", CampaignScaleBudgetGate.Evaluate);
 
             // Emit AFTER both registration sites so N counts the demo + every discovered data mod. Kept in the
             // postfix (not inside ContentLoader.Load) so it still fires when EnableDataContent is false.
