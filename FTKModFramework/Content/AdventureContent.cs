@@ -70,6 +70,12 @@ namespace FTKModFramework
             // first, then the m_Stages-walk target swap), a non-match leaves the vanilla successor, and an unknown
             // op (compare + mutate) is rejected at authoring. Same gate (registers a real selectable demo adventure).
             BranchRouterSelfTest.Run();
+
+            // Campaign QuestValidator (#43): author a clean linear campaign + a broken one (unconditional cycle
+            // that never reaches victory), and prove the load-time validator passes the valid one with 0 errors
+            // and catches the broken one with the precise victory-reachability FAIL naming the offending quest.
+            // Same gate (registers real selectable demo adventures via AddCampaignFromTemplate).
+            QuestValidatorSelfTest.Run();
         }
 
         /// <summary>
