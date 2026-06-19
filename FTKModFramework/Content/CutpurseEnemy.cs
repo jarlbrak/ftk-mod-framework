@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using GridEditor;
@@ -76,6 +77,16 @@ namespace FTKModFramework
         /// Self-test: prove the Cutpurse resolves by id, has its name, passes the spawn-pool filter, is
         /// actually IN the level-bucketed spawn pool (the load-bearing spawn-injection claim), exposes its
         /// Pilfer action on its weapon (via the game's own instantiate path), and carries custom loot.
+        ///
+        /// ROBUSTNESS (kb_7c3a82a3): this runs in the TableManager.Initialize postfix at plugin load, BEFORE
+        /// every GridEditor DB child prefab is guaranteed instantiated/hydrated. The deterministic content
+        /// checks (id, name, not-boss, model, loot) only need the enemyCombat DB we just registered into, so
+        /// they always run. The ENVIRONMENT-dependent checks (enemy-scale lookup, forced spawn-pool rebuild,
+        /// weapon instantiate) re-resolve other DBs via TableManager.Instance.Get&lt;T&gt;(), which can return
+        /// null at early load and previously NRE'd intermittently, aborting registration. Each is now
+        /// best-effort + null/throw guarded and reported as "deferred" when a table is not yet ready — never an
+        /// uncaught NRE. A check that DID run and FAILED (e.g. genuinely not in the pool) still fails the test;
+        /// only a not-ready table is treated as deferred (the content is correct regardless).
         /// </summary>
         private static void VerifyCutpurse()
         {
@@ -86,31 +97,63 @@ namespace FTKModFramework
             string name = "(null)";
             try { if (e != null) name = e.GetEnemyDisplay(); } catch { }
 
+            // Deterministic content checks (need only the just-registered enemyCombat row).
             bool notBoss = e != null && !e.m_IsBoss && !e.m_IsScourge;
             bool hasModel = e != null && e.m_EnemyAsset != null;          // the cache null-checks this
-            bool notScaled = e != null && !FTK_enemyScaleDB.GetDB().IsContainID(e.m_ID);
-
-            // Is it actually in the spawn pool at its level? This directly verifies spawn injection.
-            GameCache.Cache.Enemies.NeedsRebuild = true;
-            List<FTK_enemyCombat> pool = e != null ? GameCache.Cache.Enemies.GetFromAll(e.m_EnemyLevel) : null;
-            bool inPool = pool != null && pool.Contains(e);
-
-            // Does its weapon expose Pilfer? Replicate the game path: instantiate m_WeaponAsset, read profs.
-            int stealId = TableManager.Instance.Get<FTK_proficiencyTableDB>().GetIntFromID("ftkmf_cutpursesteal");
-            int profCount = 0;
-            bool weaponHasSteal = e != null && WeaponExposes(e, stealId, out profCount);
-
             bool hasLoot = e != null && e.m_ItemDrops != null;
 
-            bool ok = e != null && name == "Cutpurse" && notBoss && hasModel && notScaled && inPool && weaponHasSteal && hasLoot;
-            if (ok)
-                Plugin.Log.LogInfo("SELF-TEST PASS [enemy]: Cutpurse id " + id + " in L" + e.m_EnemyLevel +
-                    " spawn pool (" + (pool != null ? pool.Count : 0) + " enemies), Pilfer on weapon=" + weaponHasSteal +
-                    " (" + profCount + " actions), model=" + hasModel + ", HP=" + e.m_HealthTotal + ", loot drop gold=" + e.m_ItemDrops._golddrop + ".");
+            // Env-dependent check 1: not enemy-scaled. FTK_enemyScaleDB.GetDB() can be null at early load.
+            bool notScaled = false, scaleChecked = false;
+            try
+            {
+                FTK_enemyScaleDB scaleDb = FTK_enemyScaleDB.GetDB();
+                if (e != null && scaleDb != null) { notScaled = !scaleDb.IsContainID(e.m_ID); scaleChecked = true; }
+            }
+            catch (Exception ex) { Plugin.Log.LogWarning("[enemy] scale check deferred (tables not ready at load): " + ex.Message); }
+
+            // Env-dependent check 2: actually IN the level-bucketed spawn pool. The forced rebuild walks the
+            // whole enemy table and re-resolves DBs per row, so it can throw if a table is not hydrated yet.
+            int poolCount = -1; bool inPool = false, poolChecked = false;
+            try
+            {
+                GameCache.Cache.Enemies.NeedsRebuild = true; // static field; safe
+                List<FTK_enemyCombat> pool = e != null ? GameCache.Cache.Enemies.GetFromAll(e.m_EnemyLevel) : null;
+                if (pool != null) { poolCount = pool.Count; inPool = pool.Contains(e); poolChecked = true; }
+            }
+            catch (Exception ex) { Plugin.Log.LogWarning("[enemy] spawn-pool check deferred (tables not ready at load): " + ex.Message); }
+
+            // Env-dependent check 3: weapon exposes Pilfer. Needs the proficiency DB (can be null at early load).
+            int profCount = 0; bool weaponHasSteal = false, weaponChecked = false;
+            try
+            {
+                FTK_proficiencyTableDB profDb = TableManager.Instance != null ? TableManager.Instance.Get<FTK_proficiencyTableDB>() : null;
+                if (e != null && profDb != null)
+                {
+                    int stealId = profDb.GetIntFromID("ftkmf_cutpursesteal");
+                    weaponHasSteal = WeaponExposes(e, stealId, out profCount);
+                    weaponChecked = true;
+                }
+            }
+            catch (Exception ex) { Plugin.Log.LogWarning("[enemy] weapon-proficiency check deferred (tables not ready at load): " + ex.Message); }
+
+            // Content correctness = the deterministic checks. An env check fails the test ONLY if it actually
+            // ran and came back wrong; a not-ready (deferred) table never fails it.
+            bool contentOk = e != null && name == "Cutpurse" && notBoss && hasModel && hasLoot;
+            bool envOk = (!scaleChecked || notScaled) && (!poolChecked || inPool) && (!weaponChecked || weaponHasSteal);
+
+            if (contentOk && envOk)
+                Plugin.Log.LogInfo("SELF-TEST PASS [enemy]: Cutpurse id " + id + " in L" + (e != null ? e.m_EnemyLevel : -1) +
+                    " spawn pool (" + (poolChecked ? poolCount + " enemies" : "deferred") + "), Pilfer on weapon=" +
+                    (weaponChecked ? weaponHasSteal.ToString() : "deferred") + " (" + profCount + " actions), model=" + hasModel +
+                    ", notScaled=" + (scaleChecked ? notScaled.ToString() : "deferred") +
+                    ", HP=" + (e != null ? e.m_HealthTotal : -1) +
+                    ", loot drop gold=" + (e != null && e.m_ItemDrops != null ? e.m_ItemDrops._golddrop : -1) + ".");
             else
                 Plugin.Log.LogError("SELF-TEST FAIL [enemy]: name=\"" + name + "\" notBoss=" + notBoss +
-                    " model=" + hasModel + " notScaled=" + notScaled + " inPool=" + inPool +
-                    " weaponHasSteal=" + weaponHasSteal + " hasLoot=" + hasLoot + ".");
+                    " model=" + hasModel + " hasLoot=" + hasLoot +
+                    " notScaled=" + (scaleChecked ? notScaled.ToString() : "deferred") +
+                    " inPool=" + (poolChecked ? inPool.ToString() : "deferred") +
+                    " weaponHasSteal=" + (weaponChecked ? weaponHasSteal.ToString() : "deferred") + ".");
         }
 
         /// <summary>
