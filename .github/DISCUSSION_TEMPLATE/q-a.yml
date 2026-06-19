@@ -1,0 +1,17 @@
+title: "[Question] "
+labels: []
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What are you trying to do, and where are you stuck?
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you have tried
+      description: Code snippets, log lines, or docs you already looked at.
+    validations:
+      required: false

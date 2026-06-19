@@ -1,0 +1,17 @@
+title: "[Show and tell] "
+labels: []
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What you made
+      description: Describe the mod or content you built with the framework. Screenshots and clips welcome.
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link (optional)
+      description: A repo, Thunderstore page, or video.
+    validations:
+      required: false
