@@ -21,12 +21,23 @@ namespace FTKModFramework.Core
     /// </summary>
     public sealed class StageBuilder
     {
-        private readonly JArray _quests; // the stage's m_Quests (the live array)
+        private readonly JArray _quests;   // the stage's m_Quests (the live array)
+        private readonly int _stageIndex;  // this stage's positional index in GameDefinition.m_Stages
 
-        /// <summary>Internal: built by <see cref="CampaignBuilder.AddStage"/> over the stage's m_Quests array.</summary>
-        internal StageBuilder(JArray quests)
+        /// <summary>
+        /// Internal: built by <see cref="CampaignBuilder.AddStage"/> over the stage's m_Quests array.
+        /// <paramref name="stageIndex"/> is the stage's position in <c>GameDefinition.m_Stages</c>; the game
+        /// keys its per-stage realm/hex allocation buckets by that positional index
+        /// (<c>FTKHex.m_HexLandInRealmStage[stageIndex][realm]</c>, <c>m_StoryQuestRealmStageQueue[stageIndex]</c>,
+        /// see <c>GameDefinition.cs</c> stage loops), so every quest this builder emits must carry
+        /// <c>m_SpecifiedRealmStageIndex = stageIndex</c> for its Specified-realm destination to resolve against
+        /// the correct stage bucket (verified: <c>QuestLogicBase.DetermineDestinations</c> copies
+        /// <c>m_SpecifiedRealmStageIndex</c> straight into <c>m_DestStageIndex</c>).
+        /// </summary>
+        internal StageBuilder(JArray quests, int stageIndex)
         {
             _quests = quests;
+            _stageIndex = stageIndex;
         }
 
         /// <summary>
@@ -39,7 +50,12 @@ namespace FTKModFramework.Core
         public QuestBuilder AddKillQuest(string storyQuestId, string enemySet, string specifiedRealm)
         {
             JObject q = NewSingleQuest("BountyQuestDef", storyQuestId, specifiedRealm);
-            q["m_DestinationType"] = "RandomRealmPoi";      // place the bounty at a random POI in the realm
+            // None => a plain Bounty. BountyQuestDef.GetQuestType() returns BountySiege for ANY non-None
+            // m_DestinationType, and a BountySiege needs siege scaffolding the framework does not author, so it
+            // never commences (the in-game soft-lock); additionally BountyQuestLogic's RandomRealmPoi branch
+            // does an unguarded list[Random.Range(0,0)] on an empty static-POI list. None keeps it a Bounty and
+            // uses BountyQuestLogic's robust spawn-queue/clear-hex destination fallback. (Vanilla bounties: None.)
+            q["m_DestinationType"] = "None";
             q["m_EnemySet"] = RequireValue(enemySet, "enemySet"); // priority target field (over m_Enemies)
             _quests.Add(q);
             return new QuestBuilder(storyQuestId);
@@ -55,7 +71,12 @@ namespace FTKModFramework.Core
         public QuestBuilder AddVisitQuest(string storyQuestId, string specifiedRealm)
         {
             JObject q = NewSingleQuest("VisitQuestDef", storyQuestId, specifiedRealm);
-            q["m_DestinationType"] = "RandomRealmPoi"; // visit a random POI in the realm
+            // RealmCapital => VisitQuestLogic resolves the destination to the realm's capital town (always present
+            // in the cloned realm scaffolding). RandomRealmPoi instead does an unguarded list[Random.Range(0,0)]
+            // on an empty static-POI list and never places the destination (the soft-lock); no vanilla Visit uses
+            // it. The quest TYPE stays Visit because VisitQuestDef.GetQuestType() keys off m_DeliveryInstructions
+            // (None => Visit), not m_DestinationType.
+            q["m_DestinationType"] = "RealmCapital";
             q["m_DeliveryInstructions"] = "None";      // None => plain Visit (no deliver/fetch)
             _quests.Add(q);
             return new QuestBuilder(storyQuestId);
@@ -86,7 +107,11 @@ namespace FTKModFramework.Core
         public QuestBuilder AddEncounterQuest(string storyQuestId, string miniEncounterId, string specifiedRealm)
         {
             JObject q = NewSingleQuest("MiniEncounterQuestDef", storyQuestId, specifiedRealm);
-            q["m_DestinationType"] = "RealmMiniEncounter";                    // destination is the mini encounter POI
+            // No m_DestinationType: MiniEncounterQuestDef does not declare that field (only BountyQuestDef and
+            // VisitQuestDef do), and MiniEncounterQuestLogic ignores destination type entirely, resolving the
+            // destination via the spawn-queue/clear-hex fallback and spawning the encounter hex at m_MiniEncounterID.
+            // The previously-authored "RealmMiniEncounter" was a phantom property (silently dropped by the gamedef
+            // deserializer's default MissingMemberHandling) that masked the fact that the verb needs only the id.
             q["m_MiniEncounterID"] = RequireValue(miniEncounterId, "miniEncounterId");
             _quests.Add(q);
             return new QuestBuilder(storyQuestId);
@@ -130,7 +155,7 @@ namespace FTKModFramework.Core
         /// formed from a short native type NAME (<c>"&lt;typeName&gt;, Assembly-CSharp"</c>). Thin wrapper over
         /// <see cref="NewQuestWithType"/> for the vanilla verbs; see it for the field rationale.
         /// </summary>
-        private static JObject NewSingleQuest(string typeName, string storyQuestId, string specifiedRealm)
+        private JObject NewSingleQuest(string typeName, string storyQuestId, string specifiedRealm)
         {
             return NewQuestWithType(typeName + ", Assembly-CSharp", storyQuestId, specifiedRealm);
         }
@@ -143,7 +168,7 @@ namespace FTKModFramework.Core
         /// vanilla one-liner (STR_*_OneLine) renders the objective text; setting a custom override with no
         /// TextQuest row would render the literal "TextQuest".
         /// </summary>
-        private static JObject NewQuestWithType(string fullType, string storyQuestId, string specifiedRealm)
+        private JObject NewQuestWithType(string fullType, string storyQuestId, string specifiedRealm)
         {
             if (string.IsNullOrEmpty(storyQuestId))
                 throw new ArgumentException("StageBuilder: storyQuestId must be non-empty.", "storyQuestId");
@@ -151,10 +176,15 @@ namespace FTKModFramework.Core
                 throw new ArgumentException("StageBuilder: specifiedRealm must be non-empty.", "specifiedRealm");
 
             JObject q = new JObject();
-            q["$type"] = fullType;                        // full token; matches GameDefJSONMapper's TypeNameHandling.Auto
-            q["m_StoryQuestID"] = storyQuestId;           // unique m_QuestLookup key; empty would break HashID
-            q["m_DestinationRealmType"] = "Specified";    // resolve the destination in m_SpecifiedRealm
-            q["m_SpecifiedRealm"] = specifiedRealm;       // must be an FTK_realm.ID present in the stage's m_RealmStages
+            q["$type"] = fullType;                          // full token; matches GameDefJSONMapper's TypeNameHandling.Auto
+            q["m_StoryQuestID"] = storyQuestId;             // unique m_QuestLookup key; empty would break HashID
+            q["m_DestinationRealmType"] = "Specified";      // resolve the destination in m_SpecifiedRealm
+            q["m_SpecifiedRealm"] = specifiedRealm;         // must be an FTK_realm.ID present in the stage's m_RealmStages
+            q["m_SpecifiedRealmStageIndex"] = _stageIndex;  // MUST equal this quest's stage index: DetermineDestinations
+                                                            // copies it into m_DestStageIndex, the key into the game's
+                                                            // per-stage hex/realm allocation (FTKHex.m_HexLandInRealmStage
+                                                            // [stageIndex][realm]); leaving it at the default 0 resolved
+                                                            // every stage's Specified realm against stage 0's bucket.
             return q;
         }
 

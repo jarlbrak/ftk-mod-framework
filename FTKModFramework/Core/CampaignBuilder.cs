@@ -59,8 +59,14 @@ namespace FTKModFramework.Core
             JObject stage = (JObject)_stageTemplate.DeepClone();
             stage["m_ThisStageID"] = stageId;
             stage["m_Quests"] = new JArray(); // a fresh, empty quest list; StageBuilder fills it in play order
+
+            // The new stage's positional index == its slot in m_Stages == the current Count BEFORE the Add. The
+            // game keys its per-stage hex/realm allocation by this index, so the StageBuilder stamps it onto every
+            // quest's m_SpecifiedRealmStageIndex (see StageBuilder ctor) so Specified-realm destinations resolve
+            // against THIS stage's bucket rather than always stage 0's.
+            int stageIndex = _stages.Count;
             _stages.Add(stage);
-            return new StageBuilder((JArray)stage["m_Quests"]);
+            return new StageBuilder((JArray)stage["m_Quests"], stageIndex);
         }
     }
 }

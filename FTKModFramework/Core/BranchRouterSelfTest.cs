@@ -177,7 +177,7 @@ namespace FTKModFramework.Core
         // Case C: both closed vocabularies reject an unknown op at AUTHORING time (the builder throws).
         private static bool CheckUnknownOpRejected()
         {
-            QuestBuilder qb = new StageBuilder(new Newtonsoft.Json.Linq.JArray())
+            QuestBuilder qb = new StageBuilder(new Newtonsoft.Json.Linq.JArray(), 0)
                 .AddVisitQuest("ftkmf_branch_guard", DestRealm);
 
             bool compareRejected = false;
