@@ -167,7 +167,7 @@ namespace FTKModFramework.Core
         // (its internal ctor is reachable from this same-assembly Core type) is enough to exercise the guard.
         private static bool CheckCountGuard()
         {
-            StageBuilder stage = new StageBuilder(new Newtonsoft.Json.Linq.JArray());
+            StageBuilder stage = new StageBuilder(new Newtonsoft.Json.Linq.JArray(), 0);
             try
             {
                 stage.AddCollectQuest("ftkmf_collectn_guard", Item, 0, DestRealm);

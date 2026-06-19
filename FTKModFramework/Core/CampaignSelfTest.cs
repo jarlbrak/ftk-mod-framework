@@ -111,16 +111,43 @@ namespace FTKModFramework.Core
             int totalQuests = eachStageHasQuest
                 ? gd.m_Stages[0].m_Quests.Count + gd.m_Stages[1].m_Quests.Count : 0;
 
-            if (stagesOk && eachStageHasQuest && typesOk)
+            // MAP-LAYOUT REGRESSION GUARD (#37): the round-tripped gamedef must carry per-stage caster coverage
+            // for stage index 1, else map gen produces no hexes for stage 1 and GameStage.ComputeMapInfo() throws
+            // (the multi-stage soft-lock). CampaignBuilder.FinalizeCampaign clones stage-0 generic casters onto
+            // each authored stage index, so we assert a RealmCasterData with m_StageIndex == 1 now exists.
+            bool stage1CasterOk = HasCasterForStage(gd, 1);
+
+            if (stagesOk && eachStageHasQuest && typesOk && stage1CasterOk)
                 Plugin.Log.LogInfo("SELF-TEST PASS [campaign-builder]: 2-stage linear campaign registered (stages=" +
-                    stageCount + ", quests=" + totalQuests + "; types: " +
-                    s1q0.GetType().Name + ", " + s1q1.GetType().Name + ", " +
+                    stageCount + ", quests=" + totalQuests + ", stage1Casters=" + CountCastersForStage(gd, 1) +
+                    "; types: " + s1q0.GetType().Name + ", " + s1q1.GetType().Name + ", " +
                     s2q0.GetType().Name + ", " + s2q1.GetType().Name + ").");
             else
                 Plugin.Log.LogError("SELF-TEST FAIL [campaign-builder]: stagesOk=" + stagesOk +
                     " eachStageHasQuest=" + eachStageHasQuest + " typesOk=" + typesOk +
+                    " stage1CasterOk=" + stage1CasterOk +
                     " (stages=" + stageCount + ", types=" +
                     TypeName(s1q0) + "/" + TypeName(s1q1) + "/" + TypeName(s2q0) + "/" + TypeName(s2q1) + ").");
+        }
+
+        /// <summary>True if any MapLayoutData carries a RealmCasterData with the given m_StageIndex (so map gen
+        /// produces hexes for that stage index; verified against GameDefinition._createRealmCasterTable).</summary>
+        private static bool HasCasterForStage(GameDefinition gd, int stageIndex)
+        {
+            return CountCastersForStage(gd, stageIndex) > 0;
+        }
+
+        private static int CountCastersForStage(GameDefinition gd, int stageIndex)
+        {
+            int n = 0;
+            if (gd == null || gd.m_MapLayoutOptions == null) return 0;
+            foreach (MapLayoutData layout in gd.m_MapLayoutOptions)
+            {
+                if (layout == null || layout.m_RealmCasterData == null) continue;
+                foreach (RealmCasterData caster in layout.m_RealmCasterData)
+                    if (caster != null && caster.m_StageIndex == stageIndex) n++;
+            }
+            return n;
         }
 
         private static string TypeName(QuestDefBase q)
