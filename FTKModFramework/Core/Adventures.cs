@@ -151,7 +151,15 @@ namespace FTKModFramework.Core
 
             // Campaign authoring runs AFTER the gamedef-scalar retune so a campaign can still observe/override
             // any scalar the configureJson hook set. The builder edits the live JObject's m_Stages in place.
-            if (configureCampaign != null) configureCampaign(new CampaignBuilder(jo));
+            // FinalizeCampaign() runs ONCE after all stages are authored and BEFORE the preview round-trip: it
+            // extends m_MapLayoutOptions with per-stage RealmCasterData so EVERY authored stage index generates
+            // hexes (without it, multi-stage campaigns soft-lock; #37, see CampaignBuilder.FinalizeCampaign).
+            if (configureCampaign != null)
+            {
+                CampaignBuilder builder = new CampaignBuilder(jo);
+                configureCampaign(builder);
+                builder.FinalizeCampaign();
+            }
 
             return jo.ToString();
         }
