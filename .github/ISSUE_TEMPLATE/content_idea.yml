@@ -1,0 +1,42 @@
+name: Content idea
+description: Propose a new class, item, ability, enemy, or adventure
+title: "Idea: "
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: Pitch a piece of content. Design discussion happens here; if it is accepted it becomes a spec.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of content
+      options:
+        - Class
+        - Item or weapon
+        - Combat action / ability
+        - Enemy
+        - Adventure
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: pitch
+    attributes:
+      label: The pitch
+      description: What is it, and what makes it fun? A sentence or two of fantasy plus the core mechanic.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Mechanics and balance
+      description: Stats, abilities, costs, how it fits the existing roster. Rough is fine.
+    validations:
+      required: false
+  - type: input
+    id: ftk2
+    attributes:
+      label: For The King II reference (optional)
+      description: If this ports an idea from FTK2, name the class or ability.
+    validations:
+      required: false

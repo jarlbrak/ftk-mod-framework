@@ -1,0 +1,49 @@
+name: Bug report
+description: Something in FTK is broken or behaving incorrectly
+title: "Bug: "
+labels: ["bug"]
+assignees: ["jarlbrak"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for filing a bug. The more of this you fill in, the faster it gets fixed.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One sentence describing what is wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Repro steps (in-game)
+      description: Step-by-step, starting from a fresh game session with BepInEx and FTK loaded.
+      placeholder: |
+        1. Launch For The King with BepInEx and the FTK mod loaded.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected vs actual
+      description: What should happen, and what actually happens.
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: LogOutput.log excerpt
+      description: Paste the relevant section from BepInEx/LogOutput.log, including any stack trace.
+      render: text
+    validations:
+      required: false
+  - type: input
+    id: affected
+    attributes:
+      label: Affected content / game mode
+      description: Which content (class, item, ability, enemy, adventure) and which mode (solo, co-op, ironman)?
+    validations:
+      required: false
