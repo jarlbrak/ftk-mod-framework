@@ -1,17 +1,36 @@
-# FTK Mod Framework
+<p align="center">
+  <img src="assets/brand/ftk-logo.svg" alt="FTK Mod Framework" width="620">
+</p>
 
-A content-modding framework for **For The King** (the original 2018 IronOak game), built on
-BepInEx 5 + HarmonyX. Goal: let modders add new **classes, items, combat actions, enemies, and
-adventures** through one clean, save-safe, multiplayer-deterministic API — and serve as the base
-for porting *For The King II* class/ability ideas back into the original game.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/jarlbrak/ftk-mod-framework/actions/workflows/ci.yml"><img src="https://github.com/jarlbrak/ftk-mod-framework/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/jarlbrak/ftk-mod-framework/discussions"><img src="https://img.shields.io/badge/Discussions-join-1f883d.svg" alt="Discussions"></a>
+  <img src="https://img.shields.io/badge/BepInEx-5.4.x-blue.svg" alt="BepInEx 5.4.x">
+  <img src="https://img.shields.io/badge/For%20The%20King-2018-8a5a2b.svg" alt="For The King (2018)">
+  <img src="https://img.shields.io/badge/.NET-3.5%20%2F%20Mono-512bd4.svg" alt=".NET 3.5 / Mono">
+</p>
 
-> Status: **actively developed.** Items, weapons, combat actions, **playable classes**, and **enemies**
-> all work and are verified in-game — see the bundled **Thief** class (custom stats, a dagger, custom
-> abilities, and a Focus-guaranteeable Steal) and the **Cutpurse** enemy (custom stats, a gold-stealing
-> Pilfer ability, and custom loot, spawning in real fights). Adventures are next. See
-> [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) for the modder API,
-> [`docs/PHASE0-TYPE-INVENTORY.md`](docs/PHASE0-TYPE-INVENTORY.md) for the game data model, and
-> [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
+**A content-modding framework for [For The King](https://store.steampowered.com/app/527230/) (the original 2018 IronOak game), built on BepInEx 5 + HarmonyX.** Add new classes, items, combat actions, enemies, and adventures through one clean, save-safe, multiplayer-deterministic API. It also serves as a base for porting *For The King II* class and ability ideas back into the original game.
+
+## Status
+
+| Area | State |
+|---|---|
+| Items and weapons | Working and verified in-game |
+| Combat actions / abilities | Working and verified (create, attach to weapons, custom `ProficiencyBase` behaviours) |
+| Playable classes | Working and verified (the bundled **Thief**: custom stats, a dagger, abilities, and a Focus-guaranteeable Steal) |
+| Enemies | Working and verified (the bundled **Cutpurse**: custom stats, a gold-stealing Pilfer ability, custom loot, real spawns) |
+| Adventures | Research in progress (DBs identified; the hardest surface, still being reverse-engineered) |
+
+"Verified in-game" means the content has been loaded into a running game with `SELF-TEST PASS` confirmed in `BepInEx/LogOutput.log`, not just compiled. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
+
+## Two ways to get involved
+
+- **Use the framework** (make your own mod): add content through the public `Content.*` API. Start with [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md). The bundled `Content/ThiefClass.cs` and `Content/CutpurseEnemy.cs` are working references.
+- **Contribute to the framework** (work on the engine and content pipeline): see [`CONTRIBUTING.md`](CONTRIBUTING.md). Work is scoped as epics, specs, and work-items in [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues); every change is verified in-game before it counts as done.
+
+Questions and ideas are welcome in [Discussions](https://github.com/jarlbrak/ftk-mod-framework/discussions).
 
 ## Verified facts (from this machine's install)
 
