@@ -64,6 +64,12 @@ namespace FTKModFramework
             // serializer (FullSerializer) and the co-op RPC serializer (Newtonsoft TypeNameHandling.Auto),
             // recovering identical flags AND the concrete subtype. Standalone (no live GameLogic/save needed).
             CampaignFlagSelfTest.Run();
+
+            // Branch router (#42): author a 3-quest campaign with an on-complete flag + a flag-conditioned branch,
+            // then drive the REAL QuestRouterPatch.Postfix and prove the match redirects (on-complete flag applied
+            // first, then the m_Stages-walk target swap), a non-match leaves the vanilla successor, and an unknown
+            // op (compare + mutate) is rejected at authoring. Same gate (registers a real selectable demo adventure).
+            BranchRouterSelfTest.Run();
         }
 
         /// <summary>
