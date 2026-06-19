@@ -20,10 +20,24 @@ namespace FTKModFramework.Core
         // is (owningModGuid + ":" + behaviorName) and the fixture is the owning mod of the reference.
         private const string SampleDataModGuid = "com.ftkmf.sampledata";
 
+        // The verb name of the framework's built-in collect-N quest objective (#40). Keyed under the FRAMEWORK's
+        // own guid (Plugin.Guid), so the registry key is "com.ftkmf.framework:CollectN".
+        private const string CollectNVerbName = "CollectN";
+
         /// <summary>
-        /// Register the framework's bundled demo behaviour(s). Idempotent: <see cref="BehaviorRegistry"/> is
-        /// first-wins and warns on a duplicate, so a second call is a safe no-op. MUST run BEFORE the data
-        /// loader resolves behaviour references, so the key is present when the demo fixture asks for it.
+        /// The framework key for the built-in collect-N custom objective verb, in the
+        /// <c>modGuid + ":" + verbName</c> form <see cref="BehaviorRegistry"/> uses. The campaign builder
+        /// (<see cref="StageBuilder.AddCollectQuest"/>) stamps this onto the <see cref="ModQuestDef"/> it emits,
+        /// and <see cref="QuestVerbResolverPatch"/> resolves it to <see cref="CollectNQuestLogic"/>. Exposed so
+        /// the builder and the self-test reference one source of truth instead of a literal.
+        /// </summary>
+        public static readonly string CollectNVerbKey = BehaviorRegistry.MakeKey(Plugin.Guid, CollectNVerbName);
+
+        /// <summary>
+        /// Register the framework's bundled demo behaviour(s) AND its built-in quest verbs. Idempotent:
+        /// <see cref="BehaviorRegistry"/> is first-wins and warns on a duplicate, so a second call is a safe
+        /// no-op. MUST run BEFORE the data loader resolves behaviour references, so the keys are present when a
+        /// fixture (or an authored campaign) asks for them.
         /// </summary>
         public static void Register()
         {
@@ -33,6 +47,13 @@ namespace FTKModFramework.Core
             BehaviorRegistry.Register(SampleDataModGuid, "Steal", typeof(FTKModFramework.ThiefStealProficiency), BehaviorKind.Proficiency);
             Plugin.Log.LogInfo("FrameworkBehaviors: registered bundled-demo behaviour '" +
                 SampleDataModGuid + ":Steal' -> ThiefStealProficiency.");
+
+            // The built-in collect-N quest verb (#40). Registered as kind=QuestLogic so the resolver
+            // instantiates it via Activator.CreateInstance (NOT BehaviorHost): CollectNQuestLogic is a plain
+            // QuestLogicBase, not a MonoBehaviour. BehaviorRegistry enforces the QuestLogicBase base for this kind.
+            BehaviorRegistry.Register(CollectNVerbKey, typeof(CollectNQuestLogic), BehaviorKind.QuestLogic);
+            Plugin.Log.LogInfo("FrameworkBehaviors: registered built-in quest verb '" +
+                CollectNVerbKey + "' -> CollectNQuestLogic.");
         }
     }
 }
