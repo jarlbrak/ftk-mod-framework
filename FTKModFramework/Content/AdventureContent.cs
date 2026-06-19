@@ -76,6 +76,13 @@ namespace FTKModFramework
             // and catches the broken one with the precise victory-reachability FAIL naming the offending quest.
             // Same gate (registers real selectable demo adventures via AddCampaignFromTemplate).
             QuestValidatorSelfTest.Run();
+
+            // Bundled sample campaign (#44, spec #37 P5): the consumer-side deliverable. ONE cohesive campaign
+            // authored SOLELY through the public Adventures.*/builder API, exercising all four objective types
+            // (kill/visit/clear/encounter) + collect-N + one flag-conditioned (convergent) branch, terminating in
+            // a last-quest victory. Emits SELF-TEST PASS [campaign]; same gate (registers a real selectable demo
+            // adventure via AddCampaignFromTemplate; the load pre-pass reports 0 validation errors).
+            CampaignContent.Register();
         }
 
         /// <summary>
