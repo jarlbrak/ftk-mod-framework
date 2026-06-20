@@ -32,7 +32,7 @@
 
 Questions and ideas are welcome in [Discussions](https://github.com/jarlbrak/ftk-mod-framework/discussions).
 
-## Verified facts (from this machine's install)
+## Verified facts
 
 | Thing | Value |
 |---|---|
@@ -41,8 +41,9 @@ Questions and ideas are welcome in [Discussions](https://github.com/jarlbrak/ftk
 | Mod loader | BepInEx **5.4.x** (Mono x64) |
 | Patching | HarmonyX (`HarmonyLib`) |
 | Content model | `GridEditor.TableManager` → `FTK_*DB` data tables (clone-and-register) |
-| Install (this Mac) | `~/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed` |
-| Toolchain present | `dotnet` 10.0.301, `ilspycmd` 10.1.0 |
+| Managed dir (macOS) | `~/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed` |
+| Managed dir (Windows) | `<Steam>\steamapps\common\For The King\FTK_Data\Managed` |
+| Build toolchain | .NET SDK (builds the net35 plugin via reference assemblies); ILSpy for decompiling |
 
 ## Repo layout
 
@@ -71,7 +72,7 @@ nuget.config                adds the BepInEx NuGet feed
 
 ## Build
 
-Requires the .NET SDK (already installed here).
+Requires the .NET SDK.
 
 ```bash
 cd FTKModFramework
