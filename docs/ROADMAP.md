@@ -12,7 +12,7 @@ Strategy: a generic DB-injection core with a typed `Content.AddX` helper per con
 | **4. Classes** ✅ | Goal 1 | `Content.AddClass` (id == array index); reused skinset; character skills; class-name + flavor patches; custom `ProficiencyBase` behaviours | done — the **Thief** (stats, dagger, Backstab/Sinister Strike/Eviscerate, Focus-guaranteeable Steal) |
 | **3. Enemies** ✅ | Goal 4 | `Content.AddEnemy`/`AttachEnemyProficiencies` over `FTK_enemyCombatDB`; `GameCache.Enemies.NeedsRebuild` spawn injection (no selection patch); `FTK_enemyCombat.GetEnum` + enemy-name patches; `m_ChanceToProf` AI; master-guarded ability behaviour | done — the **Cutpurse** (custom stats, a gold-stealing Pilfer, custom loot; spawns + fights + drops in real combat) |
 | **5. Adventures** 🟡 | Goal 5 (hardest) | `Content.AddEncounter` (inject `FTK_miniEncounterDB` rows) + `Adventures.AddFromTemplate` (clone a `.ftk2` `GameDefinition` at runtime, whitelist via `IsValidSaveFileName` patch); `CanUseClass` char-create guard | slices B+C done — **"Smuggler's Run"** selectable + plays solo (verified); full custom realm/boss + co-op next |
-| **6. FTK2 ports** | Inspiration | FTK2 passives/status-effects/summons as data-driven traits (Groups A→C); recreate art originally | backlog in Ninum project |
+| **6. FTK2 ports** | Inspiration | FTK2 passives/status-effects/summons as data-driven traits (Groups A→C); recreate art originally | backlog |
 | **Custom 3D models** | (cross-cutting) | Skinset/voxel art pipeline (Unity 2017.2.2 AssetBundles); current classes reuse existing skinsets | not started |
 
 ### Cross-cutting (touches every phase)
@@ -21,7 +21,7 @@ Strategy: a generic DB-injection core with a typed `Content.AddX` helper per con
 - **Asset pipeline:** AssetBundles must be built in Unity **2017.2.2**. OBJ/PNG fallbacks for simple cases.
 - **FTK2 legal:** reference-only; never redistribute FTK2 art/JSON. Recreate originally.
 
-### Lessons banked (see Ninum project for detail)
+### Lessons banked
 - **Classes need id == array index** (sequential), not the high-band synthetic id — character-select uses the id as
   both an enum key and an array index. `ContentRegistry.Register(..., explicitId)` handles this.
 - **Difficulty applies a flat `m_StatBonus` to every class equally** (Low/Apprentice +5, Medium 0, High/Master 0) —
@@ -36,5 +36,5 @@ Strategy: a generic DB-injection core with a typed `Content.AddX` helper per con
 3. Custom 3D voxel models may need IronOak's rig/avatar conventions.
 4. Adventure/world generation is the least-mapped system — scope to a realm/encounter variant first.
 
-Full architecture, capability matrix, and FTK2 backlog live in the Ninum Knowledge project
-**"For The King Mod Framework."**
+Architecture, the capability matrix, and the FTK2-ports backlog are tracked as epics and specs in
+[GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues).
