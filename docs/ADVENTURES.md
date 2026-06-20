@@ -95,6 +95,18 @@ the game falls back to its own `Default_Classes` instead of crashing.
 draw pool; a cloned adventure ("Smuggler's Run") is selectable, generates a full overworld, and starts a
 real run with its retuned rules.
 
-**Not yet done (Slice D):** a bespoke custom realm + boss; 2-client co-op (no desync) and a save
-round-trip. Open question to confirm: the overworld map-sync mechanism (host-authoritative scene-object
-spawn vs. deterministic re-generation from the shared seed) and a host/client mod-set parity check.
+**Shipped (Slice D1, solo): a bespoke custom realm + boss.** The FR-1 gating spike PASSED in-game
+(`SELF-TEST PASS [realm-spike]`): a synthetic realm id round-trips as the `m_RealmStages` dictionary KEY
+when written as its decimal integer, and resolves through the game's own `GetRealmProperties`. So the
+**bespoke-realm path is in use** (not a vanilla-realm fallback). The demo ("The Hollow Mire") is a single
+self-contained adventure with its own realm (cloned from PoisonBog, flagged `m_GameStartRealm`), its own
+boss ("Mudwretch Foreman", a cloned enemy with signature procs), and a true-victory questline. One enemy
+set serves both the overworld set-piece (`RealmProperties.m_BossEnemy`) and the final boss bounty (the
+last quest of the last stage, with `m_EndGameAfterLastQuest = true`). Load-time self-tests
+(`SELF-TEST PASS [realm-boss-set]` and `SELF-TEST PASS [realm-boss]`) confirm the boss/set/realm resolve,
+the set-piece boss is wired into the realm, and the final quest is a boss bounty in the custom realm; the
+full playthrough-to-victory is a manual in-game gate.
+
+**Not yet done (Slice D2):** 2-client co-op (no desync) and a save round-trip for the bespoke realm/boss.
+Open question to confirm: the overworld map-sync mechanism (host-authoritative scene-object spawn vs.
+deterministic re-generation from the shared seed) and a host/client mod-set parity check.

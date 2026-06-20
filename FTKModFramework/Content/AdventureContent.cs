@@ -83,6 +83,27 @@ namespace FTKModFramework
             // a last-quest victory. Emits SELF-TEST PASS [campaign]; same gate (registers a real selectable demo
             // adventure via AddCampaignFromTemplate; the load pre-pass reports 0 validation errors).
             CampaignContent.Register();
+
+            // Bespoke realm + boss slice (spec #57). Two Core registration helpers + their load-time self-tests:
+            //   #59 RegisterEnemySet: clone bounty1A, fill m_HalfParty/m_FullParty*, prove the set resolves by int
+            //       and is a non-empty, non-GenericBoss solo set. Emits SELF-TEST PASS [enemyset].
+            EnemySetSelfTest.Run();
+
+            //   #58 RegisterRealm + the gating dict-key spike: register a realm cloned from PoisonBog, then prove
+            //       a SYNTHETIC realm int survives a full GameDefinition Newtonsoft round-trip (its decimal-string
+            //       dictionary KEY in m_RealmStages converts to the enum-typed key) and resolves through the
+            //       game's own GetRealmProperties. Emits SELF-TEST PASS [realm-spike] or FAIL with the exact
+            //       failure (never throws out of registration). This is the make-or-break for bespoke custom realms.
+            RealmSpikeSelfTest.Run();
+
+            // Slice D1 (#60/#61/#62): the bespoke custom-realm + boss DEMO, the consumer-side deliverable that
+            // builds on the spike (which PASSED in-game, so the bespoke-realm path is in use). ONE cohesive
+            // adventure: the realm "The Hollow Mire" (cloned from PoisonBog, m_GameStartRealm), the boss
+            // "Mudwretch Foreman" (cloned enemy + signature procs), an enemy set serving BOTH the overworld
+            // set-piece (RealmProperties.m_BossEnemy) AND the final boss bounty, and a true-victory questline
+            // ending on that bounty (m_EndGameAfterLastQuest). Emits SELF-TEST PASS [realm-boss-set] (#60) and
+            // SELF-TEST PASS [realm-boss] (#61/#62 at load). Same gate (registers a real selectable adventure).
+            RealmBossAdventure.Register();
         }
 
         /// <summary>
