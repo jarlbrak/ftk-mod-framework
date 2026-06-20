@@ -107,6 +107,21 @@ last quest of the last stage, with `m_EndGameAfterLastQuest = true`). Load-time 
 the set-piece boss is wired into the realm, and the final quest is a boss bounty in the custom realm; the
 full playthrough-to-victory is a manual in-game gate.
 
+The questline is a three-beat arc (arrive → clear the Flooded Crypt → confront the Foreman), each beat framed
+by a **data-authored narrative popup** spoken by a custom NPC, **Reeve Maddow** (her own portrait + name,
+shipped via `Adventures.RegisterUserNpc`; see [`CAMPAIGNS.md`](CAMPAIGNS.md) "Quest narrative and custom NPCs").
+The realm name and the custom-NPC narrative both render in-game (verified): the realm shows "The Hollow Mire"
+(not a raw `STR_<id>Display` key) via concrete-method localization postfixes, and Reeve Maddow's popups deliver
+without the `SetMessageTalkerParam` softlock the framework now guards. The middle beat is a Clear-Dungeon quest
+(legibly marked) rather than a mini-encounter (which tracked one designated hex and confused playtesters).
+
+**Single-realm authoring pitfalls (learned building D1, now handled by the demo):** a one-realm clone of a
+multi-realm adventure must set `m_LimitMainDungeons = false` (DungeonCrawl ships it `true` with
+`m_LimitMainDungeonsAmount = 5`; with one realm-stage the map-gen dedup loop never reaches 5 and **hangs** at
+"Crafting Adventure"); set `m_OceanRealmID = "None"` and disable water POIs when the realm fills the map; and
+**clear the cloned stage's `m_StageStartEvents`/`m_StageCompleteEvents`**, or the template's stock narrative
+(e.g. DungeonCrawl's Queen / chaos-generator intro) plays over your own.
+
 **Not yet done (Slice D2):** 2-client co-op (no desync) and a save round-trip for the bespoke realm/boss.
 Open question to confirm: the overworld map-sync mechanism (host-authoritative scene-object spawn vs.
 deterministic re-generation from the shared seed) and a host/client mod-set parity check.

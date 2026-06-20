@@ -58,7 +58,7 @@ namespace FTKModFramework.Core
             q["m_DestinationType"] = "None";
             q["m_EnemySet"] = RequireValue(enemySet, "enemySet"); // priority target field (over m_Enemies)
             _quests.Add(q);
-            return new QuestBuilder(storyQuestId);
+            return new QuestBuilder(storyQuestId, q); // q is the live quest JObject, for narrative authoring
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace FTKModFramework.Core
             q["m_DestinationType"] = "RealmCapital";
             q["m_DeliveryInstructions"] = "None";      // None => plain Visit (no deliver/fetch)
             _quests.Add(q);
-            return new QuestBuilder(storyQuestId);
+            return new QuestBuilder(storyQuestId, q); // q is the live quest JObject, for narrative authoring
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace FTKModFramework.Core
             JObject q = NewSingleQuest("DungeonQuestDef", storyQuestId, specifiedRealm);
             q["m_DungeonID"] = RequireValue(dungeonId, "dungeonId"); // the only target field DungeonQuestDef adds
             _quests.Add(q);
-            return new QuestBuilder(storyQuestId);
+            return new QuestBuilder(storyQuestId, q); // q is the live quest JObject, for narrative authoring
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace FTKModFramework.Core
             // deserializer's default MissingMemberHandling) that masked the fact that the verb needs only the id.
             q["m_MiniEncounterID"] = RequireValue(miniEncounterId, "miniEncounterId");
             _quests.Add(q);
-            return new QuestBuilder(storyQuestId);
+            return new QuestBuilder(storyQuestId, q); // q is the live quest JObject, for narrative authoring
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace FTKModFramework.Core
             q["m_ItemId"] = item.ToString();                         // StringEnumConverter on the round-trip
             q["m_Count"] = count;
             _quests.Add(q);
-            return new QuestBuilder(storyQuestId);
+            return new QuestBuilder(storyQuestId, q); // q is the live quest JObject, for narrative authoring
         }
 
         /// <summary>

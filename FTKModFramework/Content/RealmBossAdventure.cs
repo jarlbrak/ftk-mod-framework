@@ -56,7 +56,24 @@ namespace FTKModFramework
 
         private const string SaveFileName = "HollowMire";
         private const string DisplayName = "The Hollow Mire";
+        private const string RealmDisplay = "The Hollow Mire";
         private const string Template = "DungeonCrawl";
+
+        // The narrative speaker: a custom UserNPC shipped with this adventure (data-only, no Harmony patch). Her
+        // folder name IS the key the game and the WithStartStory/WithCompleteStory npcKey reference. The portrait is
+        // embedded in this assembly and extracted to npcs/<NpcKey>/portrait.png at Register() time; the framework
+        // ships a single DLL. NpcPortraitResource must match the EmbeddedResource name (RootNamespace + asset path).
+        private const string NpcKey = "reeve_maddow";
+        private const string NpcName = "Reeve Maddow";
+        private const string NpcTitle = "Warden of the Hollow Mire";
+        private const string NpcPortraitResource = "FTKModFramework.assets.npcs.reeve_maddow.portrait.png";
+
+        // The game intro (m_HasTextIntro gate + title/body), shown on a new game. Body renders verbatim.
+        private const string IntroTitle = "The Hollow Mire";
+        private const string IntroBody =
+            "A generation ago, men came to the Mire to dig, and the Mire dug back. The works flooded, the whistle " +
+            "drowned, and the crew was never counted out. Now the water has grown a taste for the living, and the " +
+            "village upstream is running short of neighbors.";
 
         // The boss display name + a wry, lightly-grim FTK-tone description (shown verbatim).
         private const string BossDisplay = "Mudwretch Foreman";
@@ -77,11 +94,15 @@ namespace FTKModFramework
         // Stage + quest ids (m_StageLookup / m_QuestLookup keys; unique across the campaign).
         private const string Stage1 = "FtkmfHollowMire_Stage1";
         private const string Q1Visit = "ftkmf_hollowmire_arrive";   // arrive at the drowned worksite
-        private const string Q2Encounter = "ftkmf_hollowmire_signs"; // signs of the lost crew
+        private const string Q2Dungeon = "ftkmf_hollowmire_crypt";  // clear the Flooded Crypt (the sunken works)
         private const string Q3Boss = "ftkmf_hollowmire_foreman";    // the boss bounty (VICTORY)
 
-        // A vanilla overworld encounter present in DungeonCrawl, reused for the mid quest (resolves cleanly).
-        private const string MidEncounter = "TreasureChest";         // FTK_miniEncounter.ID
+        // The realm's main dungeon (a valid FTK_dungeonEncounter.ID, placed by map-gen since m_MainDungeon is set
+        // and m_LimitMainDungeons is off). A Clear-Dungeon quest is the legible middle beat: DungeonQuestLogic
+        // finds this placed dungeon by id, gives the quest a marked destination, and completes when it is cleared.
+        // (Replaces the earlier MiniEncounter/TreasureChest quest, which tracked one designated chest hex and so
+        // did not complete when the player opened other overworld chests.)
+        private const string MidDungeon = "FloodedCrypt";            // FTK_dungeonEncounter.ID (the realm's m_MainDungeon)
 
         // Captured synthetic ints (filled during Register, read by the self-tests).
         private static int _bossInt = -1;
@@ -122,6 +143,13 @@ namespace FTKModFramework
                 r => { r.m_PartOf = new FTK_realm.ID[0]; });
             _realmInt = Content.Db<FTK_realmDB>().GetIntFromID(RealmId);
 
+            // Give the synthetic realm a real in-world name. With no enum name, the game renders the realm from
+            // the raw key "STR_<int>Display"; the framework's concrete-caller postfixes (HexLand.GetRealmDisplayValue
+            // + QuestLogicBase.GetMessageParams in Core/Localization) substitute this name. We deliberately do NOT
+            // patch the generic FTKHub.Localized<T>: a generic-method patch corrupts Mono's shared generic code body
+            // and blanks every text table. This call touches only the public Localization API, no engine internals.
+            Localization.SetRealmName(_realmInt, RealmDisplay);
+
             // 4) The playable ADVENTURE: clone DungeonCrawl, replace its stage with one bespoke custom-realm stage
             //    (configureJson), then author the questline over it (builder). configureCampaign != null keeps the
             //    QuestValidator load pre-pass engaged.
@@ -132,6 +160,13 @@ namespace FTKModFramework
                 "and all, but someone is still keeping the shift. Wade in, find the Foreman, and clock him out.",
                 configure: Author,
                 configureJson: BuildHollowMireStage);
+
+            // 5) The narrative SPEAKER: ship a custom UserNPC ("Reeve Maddow") scoped to THIS adventure. This gives
+            //    the adventure its OWN writable mod folder (next to the DLL), writes the bare UserNPC JSON +
+            //    extracts the embedded portrait into npcs/<NpcKey>/, and repoints preview.m_ModFolderPath there so
+            //    the game scans her at game start. Data-only (no Harmony patch); the attract art is already an
+            //    in-memory Sprite, so repointing the folder does not lose the preview image. Guarded internally.
+            Adventures.RegisterUserNpc(preview, "HollowMire", NpcKey, NpcName, NpcTitle, NpcPortraitResource);
 
             // Self-tests (each fully wrapped; a FAIL is logged, never thrown).
             SelfTestRealmBossSet(boss);
@@ -222,15 +257,39 @@ namespace FTKModFramework
 
             StageBuilder stage = campaign.AddStage(Stage1);
 
-            // Q1 (reach): wade into the drowned worksite. A plain Visit resolves to the realm capital.
-            stage.AddVisitQuest(Q1Visit, realm);
+            // Q1 (reach): wade into the drowned worksite. A plain Visit resolves to the realm capital. Maddow sets
+            // the hook on quest start (3 popup pages, her portrait/name/title verbatim).
+            stage.AddVisitQuest(Q1Visit, realm)
+                .WithStartStory(NpcKey,
+                    "Visitors. Good. The Mire's been eating my census, and I am tired of crossing out names.",
+                    "Four gone in a fortnight. No bodies, no struggle, just empty beds and wet footprints leading " +
+                    "the wrong way: toward the old works, not away from them.",
+                    "Folk say it is a shade out of the drowned crypts, come to collect. I say a thing that takes " +
+                    "people can be made to give them back. Follow the wet prints down.");
 
-            // Q2 (encounter): signs of the lost crew (a reused vanilla overworld encounter in the custom realm).
-            stage.AddEncounterQuest(Q2Encounter, MidEncounter, realm);
+            // Q2 (clear): descend into the Flooded Crypt, the sunken works. A Clear-Dungeon objective resolves to
+            // the realm's placed main dungeon (a marked, obvious POI) and completes when it is cleared. Maddow
+            // narrates the descent on quest start (3 pages).
+            stage.AddClearDungeonQuest(Q2Dungeon, MidDungeon, realm)
+                .WithStartStory(NpcKey,
+                    "This is as far as my authority reaches. Below here it is the works' jurisdiction, and the " +
+                    "works do not recognize me.",
+                    "Listen for water that moves on its own. The drowned do not drift down here, they march. " +
+                    "Whatever is taking my people, it has them doing something.",
+                    "They are not dead down there. They are working, clocked in by lantern-rot, waiting on a " +
+                    "whistle. Find who is blowing it.");
 
             // Q3 (kill): the Mudwretch Foreman bounty, targeting the custom set in the custom realm. LAST quest of
             // the LAST stage -> victory on completion (with m_EndGameAfterLastQuest=true, set in configureJson).
-            stage.AddKillQuest(Q3Boss, set, realm);
+            // Maddow names the boss on start (2 pages) and gives the victory beat on complete (2 pages).
+            stage.AddKillQuest(Q3Boss, set, realm)
+                .WithStartStory(NpcKey,
+                    "At the bottom of the works there is a foreman who never clocked out. He kept the dig going " +
+                    "long after the bog took his crew, and now he fills the empty slots with the living.",
+                    "He keeps a ledger, they say, and your names are already on it. Go and strike his out first.")
+                .WithCompleteStory(NpcKey,
+                    "Four out, all breathing. First time in a fortnight I am adding names instead of striking them.",
+                    "The whistle is quiet now. Latch your doors upstream tonight, just the same.");
         }
 
         // ---- the bespoke custom-realm stage (configureJson) ------------------------------------------------
@@ -252,6 +311,27 @@ namespace FTKModFramework
             // True victory on the last quest.
             jo["m_EndGameAfterLastQuest"] = true;
 
+            // The new-game text intro (m_HasTextIntro gate + title/body). Body/title render VERBATIM on a new game
+            // (GameDefinition.GetIntroTitle/Body resolve via Localized<TextStory> -> GetUserModText, pass-through on
+            // a miss). This is the opener before the first quest.
+            jo["m_HasTextIntro"] = true;
+            jo["m_IntroTitle"] = IntroTitle;
+            jo["m_IntroBody"] = IntroBody;
+
+            // CRITICAL (single-realm map-gen): DungeonCrawl ships m_LimitMainDungeons=true with
+            // m_LimitMainDungeonsAmount=5 (it has 9 realms). GenerateHexGrid._buildHexCoroutine then runs
+            // `while (allowedMainDungeonsInRealmStages.Count < 5)` picking DISTINCT realm-stages that have a main
+            // dungeon; a one-realm stage saturates that dedup list at 1, so 1 < 5 loops FOREVER (a silent 99% CPU
+            // hang right after "GenerateMap: Coroutine Start", with no yield/log). Turning the limit off skips the
+            // while-block (the else-branch just takes all realm-stages). This is what the vanilla single-realm
+            // adventures GraveRobber and HildebrantsCellar do.
+            jo["m_LimitMainDungeons"] = false;
+
+            // No ocean realm: the Mire is one land realm that fills the map. Leaving the inherited
+            // m_OceanRealmID=Ocean would invite the ocean/port POI passes to resolve an "Ocean" realm that is not a
+            // key in m_RealmStages. None disables those passes cleanly (GraveRobber does the same).
+            jo["m_OceanRealmID"] = "None";
+
             string realmKey = _realmInt.ToString(); // decimal-string dictionary KEY for the synthetic realm
 
             // The bespoke RealmProperties: a realistic POI mix copied from PoisonBog, marked as the game-start
@@ -264,7 +344,7 @@ namespace FTKModFramework
             realmProps["m_RealmSize"] = 6;                          // a touch larger than PoisonBog's 5 for the arc
             realmProps["m_TownsToSpawn"] = 2;
             realmProps["m_IsolateFromOtherRealms"] = false;
-            realmProps["m_GenerateIslands"] = true;
+            realmProps["m_GenerateIslands"] = false;               // no water features (no ocean realm)
             realmProps["m_FillMap"] = true;                        // single realm: fill the map with it
             realmProps["m_BaseEnemyAmount"] = 7;
             realmProps["m_UseTypicalOverworldProperties"] = true;  // reuse the realm row's overworld props
@@ -281,8 +361,8 @@ namespace FTKModFramework
             realmProps["m_GamblingDens"] = 0;
             realmProps["m_StoneTables"] = 1;
             realmProps["m_LocalArenas"] = 1;
-            realmProps["m_HasPorts"] = true;
-            realmProps["m_HasAlluringPools"] = true;
+            realmProps["m_HasPorts"] = false;             // no ocean realm => no ports
+            realmProps["m_HasAlluringPools"] = false;     // no water features
             realmProps["m_EnemyCampChance"] = 0.2;
             realmProps["m_MimicChance"] = 0.25;
             realmProps["m_TownCostMultiplier"] = 1;
@@ -316,6 +396,14 @@ namespace FTKModFramework
             stage["m_RealmStages"] = realmStages;
             stage["m_RealmStartFilter"] = new JArray(_realmInt); // inert but coherent
             stage["m_Quests"] = new JArray();                     // the builder authors these
+
+            // Drop DungeonCrawl's STAGE-LEVEL narrative (the cloned stage carries them): m_StageStartEvents is the
+            // Queen "Rosomon" / chaos-generator intro (STR_dungeonCrawlQueenIntro), m_StageCompleteEvents its
+            // stage-end beat. Without clearing these, the Queen's stock chaos-generator message plays alongside our
+            // Reeve Maddow narrative. Our own story lives on the quests (m_StartEvents via WithStartStory) + the game
+            // intro (m_IntroBody), so the stage-level lists must be emptied for The Hollow Mire to read as its own.
+            stage["m_StageStartEvents"] = new JArray();
+            stage["m_StageCompleteEvents"] = new JArray();
 
             JArray newStages = new JArray();
             newStages.Add(stage);

@@ -261,6 +261,127 @@ namespace FTKModFramework.Core
         {
             return saveFileName != null && Whitelist.Contains(saveFileName.ToUpper());
         }
+
+        // ---- custom UserNPCs (data-only narrative speakers) -------------------------------------------------
+
+        /// <summary>
+        /// Give an adventure its OWN writable mod folder containing a custom UserNPC, and repoint the adventure's
+        /// preview at it so the game scans the NPC at game start. PURE DATA + filesystem: no Harmony patch.
+        ///
+        /// WHY A NEW FOLDER: <see cref="BuildPreview"/> sets <c>preview.m_ModFolderPath</c> to the cloned TEMPLATE's
+        /// directory (under StreamingAssets, read-only) only to load the attract art, which it does immediately and
+        /// caches as an IN-MEMORY <c>Sprite</c> on <c>preview.m_AttractImage</c>. After that, the template dir is no
+        /// longer needed by the preview; the only later reader of <c>m_ModFolderPath</c> is the game's
+        /// <c>GameDefinition._findAllUserNPCs</c>, which scans <c>m_ModFolderPath/npcs/&lt;key&gt;/</c> at gamedef
+        /// init. So we point <c>m_ModFolderPath</c> at a WRITABLE folder next to the plugin DLL, drop the NPC there,
+        /// and the attract art is preserved (it is already a loaded Sprite). The preview object is held by reference
+        /// in the adventure cache, so <see cref="EnsureLoaded"/> re-injects this SAME instance on any cache rebuild
+        /// and the repointed path persists.
+        ///
+        /// The NPC is written as the game expects (<c>GameDefinition._findAllUserNPCs</c>): under
+        /// <c>&lt;adventureFolder&gt;/npcs/&lt;npcKey&gt;/</c>, a single <c>.txt</c> holding the bare-deserialized
+        /// <c>UserNPC</c> JSON (Name/Title; the game ignores extra fields), plus a <c>portrait.png</c> loaded from
+        /// disk into the NPC's Sprite. <paramref name="npcKey"/> MUST equal the <c>m_UserNPC</c> value the narrative
+        /// references (the folder name IS the key the game keys the NPC by).
+        ///
+        /// All IO is guarded; on failure it logs and returns the unmodified preview (the adventure still loads, just
+        /// without the custom speaker, which falls back to a portrait-less popup). Idempotent: it overwrites the
+        /// json + portrait each call.
+        /// </summary>
+        /// <param name="preview">The adventure preview returned by <see cref="AddCampaignFromTemplate"/>/<see cref="AddFromTemplate"/>.</param>
+        /// <param name="adventureFolderName">A unique subfolder name for this adventure's mod folder (e.g. "HollowMire").</param>
+        /// <param name="npcKey">The UserNPC folder key (== the narrative's <c>m_UserNPC</c>); non-empty.</param>
+        /// <param name="npcName">The NPC's display name (verbatim in the popup header).</param>
+        /// <param name="npcTitle">The NPC's title/subtitle (verbatim in the popup header).</param>
+        /// <param name="portraitResourceName">Embedded-resource name of the portrait PNG in THIS assembly
+        /// (e.g. "FTKModFramework.assets.npcs.reeve_maddow.portrait.png"); extracted to <c>portrait.png</c>.</param>
+        /// <returns>The same <paramref name="preview"/>, for chaining (null if it was null).</returns>
+        public static GameDefinitionPreview RegisterUserNpc(
+            GameDefinitionPreview preview, string adventureFolderName, string npcKey,
+            string npcName, string npcTitle, string portraitResourceName)
+        {
+            if (preview == null)
+            {
+                Plugin.Log.LogWarning("Adventures.RegisterUserNpc: preview is null; skipping NPC '" +
+                    (npcKey ?? "?") + "'.");
+                return null;
+            }
+            if (string.IsNullOrEmpty(adventureFolderName) || string.IsNullOrEmpty(npcKey))
+            {
+                Plugin.Log.LogWarning("Adventures.RegisterUserNpc: adventureFolderName/npcKey must be non-empty; " +
+                    "skipping NPC for adventure folder '" + (adventureFolderName ?? "?") + "'.");
+                return preview;
+            }
+
+            bool portraitWritten = false;
+            string npcDir = null;
+            try
+            {
+                // A writable mod folder next to the plugin DLL: <pluginDir>/FTKModFramework_content/<adventureFolderName>.
+                string pluginDir = Path.GetDirectoryName(typeof(Plugin).Assembly.Location);
+                string adventureDir = Path.Combine(Path.Combine(pluginDir, "FTKModFramework_content"), adventureFolderName);
+                npcDir = Path.Combine(Path.Combine(adventureDir, "npcs"), npcKey);
+                Directory.CreateDirectory(npcDir); // idempotent; creates the whole chain
+
+                // The bare UserNPC JSON the game deserializes (NO $type, NO settings). Portrait is loaded from disk,
+                // never from JSON, so it is not present here. Build via JObject so values are escaped correctly.
+                JObject npcJson = new JObject();
+                npcJson["Name"] = npcName ?? string.Empty;
+                npcJson["Title"] = npcTitle ?? string.Empty;
+                File.WriteAllText(Path.Combine(npcDir, npcKey + ".txt"), npcJson.ToString());
+
+                portraitWritten = ExtractEmbeddedPortrait(portraitResourceName, Path.Combine(npcDir, "portrait.png"));
+
+                // Repoint AFTER the preview already cached its attract Sprite (BuildPreview loaded it from the
+                // template dir into m_AttractImage). The only later reader of m_ModFolderPath is _findAllUserNPCs.
+                preview.m_ModFolderPath = adventureDir;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Adventures.RegisterUserNpc: failed to write NPC '" + npcKey + "' for adventure '" +
+                    adventureFolderName + "': " + e.Message);
+            }
+
+            Plugin.Log.LogInfo("[narrative] " + npcKey + " npc written to " +
+                (npcDir ?? "(unwritten)") + ", portrait=" + portraitWritten);
+            return preview;
+        }
+
+        /// <summary>
+        /// Extract an embedded-resource PNG from this assembly to <paramref name="destPath"/> (overwrite). Returns
+        /// true on success. On a name miss it logs the available manifest names so a rename is immediately visible.
+        /// </summary>
+        private static bool ExtractEmbeddedPortrait(string resourceName, string destPath)
+        {
+            if (string.IsNullOrEmpty(resourceName)) return false;
+            System.Reflection.Assembly asm = typeof(Plugin).Assembly;
+            try
+            {
+                using (Stream src = asm.GetManifestResourceStream(resourceName))
+                {
+                    if (src == null)
+                    {
+                        Plugin.Log.LogWarning("Adventures.RegisterUserNpc: embedded portrait '" + resourceName +
+                            "' not found. Manifest resources: " + string.Join(", ", asm.GetManifestResourceNames()));
+                        return false;
+                    }
+                    using (FileStream dst = new FileStream(destPath, FileMode.Create, FileAccess.Write))
+                    {
+                        byte[] buffer = new byte[8192];
+                        int read;
+                        while ((read = src.Read(buffer, 0, buffer.Length)) > 0)
+                            dst.Write(buffer, 0, read);
+                    }
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("Adventures.RegisterUserNpc: extracting portrait '" + resourceName +
+                    "' to '" + destPath + "' failed: " + e.Message);
+                return false;
+            }
+        }
     }
 
     // The game builds its adventure cache once (lazily). Re-inject ours right after, so they survive
