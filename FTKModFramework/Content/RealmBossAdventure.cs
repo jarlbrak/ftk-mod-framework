@@ -25,6 +25,13 @@ namespace FTKModFramework
     /// Localized&lt;T&gt; passes an unknown key straight through, and the framework's Localization postfixes
     /// substitute our registered name/description).
     ///
+    /// BOSS LOOK (visual identity): the Foreman uses a HULKING-HUMANOID chassis (an ordered fallback chain headed
+    /// by trollCaveA/ogreA/yetiA, with swampmonsterA/banditA as on-theme/floor fallbacks), then RECOLORED mossy
+    /// brown-green and UPSCALED (Content.SetEnemyVisual) so it reads as the victory-screen art: a big mossy bog
+    /// brute. The recolor/rescale is visual-only and applied per-combat to the spawned clone (leak-safe), and
+    /// determinism/save-safe (enemy visuals never network or persist; only the enum-int id + m_MarkerScale are
+    /// shared state, read identically from the same mod DB on every machine).
+    ///
     /// AUTHORING SHAPE (decision, grounded in CampaignBuilder.cs):
     ///   The CampaignBuilder ctor SNAPSHOTS m_Stages[0] as its per-stage clone template, then CLEARS the live
     ///   m_Stages array; every AddStage() deep-clones that snapshot. So the builder NEVER appends to the template
@@ -86,11 +93,31 @@ namespace FTKModFramework
             "He kept the dig going long after the bog took the crew. Still clocking everyone in, still expecting " +
             "a full shift. The whistle never stopped; neither did he.";
 
-        // Chassis: PRIMARY swampmonsterA (on-theme bog beast); FALLBACK banditA (the proven Cutpurse chassis).
-        // One-line switchable: the demo picks swampmonsterA unless its cloned m_EnemyAsset is unusable at
-        // registration, in which case it re-clones from banditA (see PickAndBuildBoss).
-        private const FTK_enemyCombat.ID PrimaryChassis = FTK_enemyCombat.ID.swampmonsterA;
-        private const FTK_enemyCombat.ID FallbackChassis = FTK_enemyCombat.ID.banditA;
+        // Chassis: an ORDERED hulking-humanoid fallback CHAIN. PickAndBuildBoss walks it and uses the FIRST
+        // chassis whose TEMPLATE row has BOTH a body (m_EnemyAsset) and a weapon (m_WeaponAsset), since the boss
+        // renders from m_EnemyAsset and we attach its signature procs to m_WeaponAsset. The first three are big
+        // broad-shouldered humanoids (the victory-art read); swampmonsterA is the on-theme bog regression; banditA
+        // is the guaranteed-usable floor. The chosen body is then recolored mossy + upscaled (SetEnemyVisual) so
+        // it matches the victory-screen brute. Enum members verified (FTK_enemyCombat.ID): trollCaveA(191/ord),
+        // ogreA, yetiA, swampmonsterA, banditA.
+        private static readonly FTK_enemyCombat.ID[] ChassisChain =
+        {
+            FTK_enemyCombat.ID.trollCaveA,      // PRIMARY: classic hunched broad-shouldered troll (closest hulk)
+            FTK_enemyCombat.ID.ogreA,           // large hunched humanoid
+            FTK_enemyCombat.ID.yetiA,           // large humanoid
+            FTK_enemyCombat.ID.swampmonsterA,   // on-theme bog beast (safe regression)
+            FTK_enemyCombat.ID.banditA,         // floor: guaranteed body + weapon (the proven Cutpurse chassis)
+        };
+
+        // ---- visual identity (tunable from the in-engine screenshot WITHOUT a re-brief) --------------------
+        // The boss body is recolored mossy brown-green + upscaled to read as the victory-screen bog brute. These
+        // are visual-only (per-combat clone edit, leak-safe, determinism/save-safe; see Content.SetEnemyVisual).
+        // Tuned from the in-crypt screenshot: greener + lower blue than a neutral olive, so it still reads mossy
+        // under the Flooded Crypt's cool/dim lighting (a plain olive went muddy-purple in shadow). Multiplies the
+        // troll body's Standard-shader albedo (_Color), verified in-engine on material 'matTrollCaveA'.
+        private static readonly UnityEngine.Color BossTint = new UnityEngine.Color(0.46f, 0.66f, 0.30f); // mossy brown-green
+        private const float BossBodyScale = 1.4f;   // hulking; reads well at 1.4x in the crypt diorama
+        private const float BossMarkerScale = 1.4f; // keep ~ BossBodyScale so the target footprint matches
 
         // Signature procs: a DoT ("the mire poisons you") + an armor shred ("drags your guard down"). Confirmed
         // FTK_proficiencyTable.ID members (FTK_proficiencyTable.cs lines 26, 257).
@@ -114,7 +141,7 @@ namespace FTKModFramework
         private static int _bossInt = -1;
         private static int _setInt = -1;
         private static int _realmInt = -1;
-        private static string _chassisUsedName;   // "swampmonsterA" or "banditA", for the self-test log line
+        private static string _chassisUsedName;   // the chassis actually used (see ChassisChain), for the log line
         private static bool _done;
 
         public static void Register()
@@ -189,22 +216,33 @@ namespace FTKModFramework
 
         /// <summary>
         /// Choose the chassis, then build the boss EXACTLY ONCE (registering twice under the same id would append a
-        /// duplicate DB row). PRIMARY is swampmonsterA (on-theme bog beast); we inspect its TEMPLATE row first and
-        /// fall back to banditA (the proven Cutpurse body) only if the primary template's render/fight assets
-        /// (m_EnemyAsset / m_WeaponAsset) are missing, since the boss renders from m_EnemyAsset and we attach its
-        /// signature procs to m_WeaponAsset. One-line switchable via <see cref="PrimaryChassis"/>.
+        /// duplicate DB row). Walks the ordered <see cref="ChassisChain"/> and uses the FIRST chassis whose TEMPLATE
+        /// row has BOTH a body (m_EnemyAsset) and a weapon (m_WeaponAsset): the boss renders from m_EnemyAsset and
+        /// we attach its signature procs to m_WeaponAsset, so a template missing either is unusable. The early
+        /// entries are hulking-humanoid bodies (the victory-art read); the chosen body is then recolored + upscaled
+        /// (SetEnemyVisual in BuildBoss). banditA at the chain's tail is the guaranteed-usable floor.
         /// </summary>
         private static FTK_enemyCombat PickAndBuildBoss()
         {
             FTK_enemyCombatDB db = Content.Db<FTK_enemyCombatDB>();
-            FTK_enemyCombat primaryTmpl = db.GetEntry(PrimaryChassis);
-            bool primaryUsable = primaryTmpl != null && primaryTmpl.m_EnemyAsset != null
-                                 && primaryTmpl.m_WeaponAsset != null;
 
-            FTK_enemyCombat.ID chassis = primaryUsable ? PrimaryChassis : FallbackChassis;
-            if (!primaryUsable)
-                Plugin.Log.LogWarning("[realm-boss] primary chassis " + PrimaryChassis +
-                    " is unusable (template m_EnemyAsset/m_WeaponAsset null); falling back to " + FallbackChassis + ".");
+            FTK_enemyCombat.ID chassis = ChassisChain[ChassisChain.Length - 1]; // floor default
+            bool picked = false;
+            for (int i = 0; i < ChassisChain.Length; i++)
+            {
+                FTK_enemyCombat tmpl = db.GetEntry(ChassisChain[i]);
+                bool usable = tmpl != null && tmpl.m_EnemyAsset != null && tmpl.m_WeaponAsset != null;
+                if (usable)
+                {
+                    chassis = ChassisChain[i];
+                    picked = true;
+                    break;
+                }
+                Plugin.Log.LogWarning("[realm-boss] chassis " + ChassisChain[i] +
+                    " is unusable (template m_EnemyAsset/m_WeaponAsset null); trying the next in the chain.");
+            }
+            if (!picked)
+                Plugin.Log.LogWarning("[realm-boss] no chassis in the chain was usable; using the floor " + chassis + ".");
 
             return BuildBoss(chassis);
         }
@@ -234,6 +272,12 @@ namespace FTKModFramework
                     e.m_ChanceToProf = 0.4f;
                     e.m_UseFirstProfAsReg = false;
 
+                    // Match the up-scaled body's click/target collider footprint (X/Z). Set on the FRAMEWORK'S
+                    // OWN cloned row via the AddEnemy configure path, NOT on a vanilla row. m_MarkerScale is the
+                    // only shared/persisted visual-adjacent field, read identically from the same mod DB on every
+                    // machine (so it stays determinism/save-safe).
+                    e.m_MarkerScale = BossMarkerScale;
+
                     // Modestly upgraded reward for a boss kill (AddEnemy already deep-copied m_ItemDrops, so these
                     // mutate a private copy; the chassis's vanilla loot table is untouched).
                     if (e.m_ItemDrops != null)
@@ -251,6 +295,11 @@ namespace FTKModFramework
                 // weapon is untouched). If an id fails to resolve at runtime the helper logs and proceeds with
                 // whichever attaches; both are confirmed-present FTK_proficiencyTable.ID keys.
                 Content.AttachEnemyProficiencies(boss, BossProficiencies);
+
+                // Custom VISUAL identity: recolor the body mossy brown-green + upscale it so the chosen
+                // hulking-humanoid chassis reads as the victory-screen bog brute. Applied per-combat to the
+                // spawned clone (leak-safe; determinism/save-safe: enemy visuals never network or persist).
+                Content.SetEnemyVisual(boss, BossTint, BossBodyScale);
             }
             return boss;
         }
@@ -562,11 +611,24 @@ namespace FTKModFramework
                     Plugin.Log.LogWarning("[realm-boss-set] proc check deferred (tables not ready at load): " + pe.Message);
                 }
 
+                // VISUAL: the boss's custom look (mossy tint + upscale) was registered into the Core visual
+                // registry under its id, with the expected body scale, AND the row carries the matching collider
+                // footprint (m_MarkerScale). Best-effort + guarded; visual is logged as part of the PASS line.
+                bool visualRegistered = false; bool visualScaleOk = false; bool markerOk = false;
+                EnemyVisualPatch.EnemyVisual reg = default(EnemyVisualPatch.EnemyVisual);
+                if (boss != null && boss.m_ID != null)
+                {
+                    visualRegistered = EnemyVisualPatch.TryGet(boss.m_ID, out reg);
+                    visualScaleOk = visualRegistered && Math.Abs(reg.scale - BossBodyScale) < 0.001f;
+                    markerOk = Math.Abs(boss.m_MarkerScale - BossMarkerScale) < 0.001f;
+                }
+                bool visualOk = visualRegistered && visualScaleOk && markerOk;
+
                 bool contentOk = boss != null && bossResolves && setResolves && halfPartyNonEmpty
                                  && notGenericBoss && setTargetsBoss;
                 bool procOk = !procChecked || hasProcs;
 
-                if (contentOk && procOk)
+                if (contentOk && procOk && visualOk)
                     Plugin.Log.LogInfo("SELF-TEST PASS [realm-boss-set]: boss '" + BossId + "' (int=" + _bossInt +
                         ", chassis=" + ChassisName() + ", HP=" + (boss != null ? boss.m_HealthTotal : -1) +
                         ", defPhys=" + (boss != null ? boss.m_BaseDefPhys : -1) + "/defMag=" +
@@ -574,13 +636,18 @@ namespace FTKModFramework
                         ") resolve by int; set m_HalfParty=" + (set != null ? set.m_HalfParty.Length : -1) +
                         " targets the boss, m_Type=" + (set != null ? set.m_Type.ToString() : "null") +
                         " (!= GenericBoss); boss procs on weapon=" +
-                        (procChecked ? hasProcs.ToString() + " (" + profCount + " actions)" : "deferred") + ".");
+                        (procChecked ? hasProcs.ToString() + " (" + profCount + " actions)" : "deferred") +
+                        "; visual: tint set, scale=" + reg.scale + ", marker=" +
+                        (boss != null ? boss.m_MarkerScale : -1f) + ".");
                 else
                     Plugin.Log.LogError("SELF-TEST FAIL [realm-boss-set]: bossInt=" + _bossInt +
                         " bossResolves=" + bossResolves + " setInt=" + _setInt + " setResolves=" + setResolves +
                         " halfPartyNonEmpty=" + halfPartyNonEmpty + " setTargetsBoss=" + setTargetsBoss +
                         " notGenericBoss=" + notGenericBoss + " procs=" +
-                        (procChecked ? hasProcs.ToString() : "deferred") + ".");
+                        (procChecked ? hasProcs.ToString() : "deferred") +
+                        " visualRegistered=" + visualRegistered + " visualScaleOk=" + visualScaleOk +
+                        " markerOk=" + markerOk + " (scale=" + reg.scale + " expected " + BossBodyScale +
+                        ", marker=" + (boss != null ? boss.m_MarkerScale : -1f) + " expected " + BossMarkerScale + ").");
             }
             catch (Exception e)
             {
@@ -755,7 +822,8 @@ namespace FTKModFramework
             return null;
         }
 
-        /// <summary>The chassis the boss was actually cloned from (swampmonsterA or banditA), for the log line.</summary>
+        /// <summary>The chassis the boss was actually cloned from (the first usable <see cref="ChassisChain"/>
+        /// entry, e.g. trollCaveA), for the log line.</summary>
         private static string ChassisName()
         {
             return _chassisUsedName ?? "(unknown)";

@@ -110,6 +110,19 @@ victory. Load-time self-tests (`SELF-TEST PASS [realm-boss-set]` and `SELF-TEST 
 the boss/set/realm resolve, that there is no overworld set-piece, that the crypt boss-room override is
 Specific with the custom set, and that the last quest clears that crypt.
 
+**Custom boss visual identity (verified in-game).** The Foreman no longer reuses the small swamp-creature
+body: it clones a hulking-humanoid chassis (`trollCaveA`, with an `ogreA → yetiA → swampmonsterA → banditA`
+usable-template fallback chain) and is recolored mossy brown-green and upscaled (`1.4x`) so it reads as the
+hunched, broad-shouldered bog brute on the victory screen. This is data-only and visual-only:
+`Content.SetEnemyVisual(enemy, tint, scale)` registers the look, and a single HarmonyX postfix on
+`EnemyDummy.InitEnemyDummyForCombat` recolors (`_Color` on the body's per-clone instanced materials) and
+rescales the **per-combat clone**, so vanilla `trollCaveA` is untouched and nothing crosses the save or the
+co-op wire (only the enemy's enum-int identity and `m_MarkerScale` are shared state, read identically from the
+same mod DB, so co-op stays deterministic). Confirmed by an in-game screenshot of the boss in the Flooded
+Crypt, alongside `SELF-TEST PASS [realm-boss-set]: ... chassis=trollCaveA ... visual: tint set, scale=1.4`. A
+bespoke rigged 3D model (a Unity 2017.2.2p2 AssetBundle mesh + shipped shader) is the higher-fidelity
+follow-up; an off-hand lantern prop is a deferred polish item.
+
 **Full playthrough-to-victory is now VERIFIED in-game** (no longer a manual gate). Driven by the in-process
 agent test harness (`FTKModFramework/Agent/`, env-gated `FTK_AGENT_BRIDGE=1`, single-player only): a fresh
 "The Hollow Mire" run advances to the clear-crypt `DungeonQuestLogic` (the last quest), enters and clears

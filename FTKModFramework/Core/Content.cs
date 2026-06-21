@@ -260,6 +260,33 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
+        /// Give a registered ENEMY a custom VISUAL identity: a body <paramref name="tint"/> and a uniform body
+        /// <paramref name="scale"/>, applied PER COMBAT to the enemy's freshly-instantiated body clone (a
+        /// CharacterEventListener) in a postfix on <c>EnemyDummy.InitEnemyDummyForCombat</c>.
+        ///
+        /// VISUAL-ONLY and LEAK-SAFE: edits the per-combat clone (m_EventListener), never the shared prefab, so
+        /// nothing (incl. vanilla enemies) is affected. DETERMINISM- and SAVE-SAFE: enemy visuals never network
+        /// or persist (model/material/body localScale never cross Photon and are never serialized); only the
+        /// enum-int identity and the DB field m_MarkerScale are shared state, both read identically from the same
+        /// mod DB on every machine. Raise <c>m_MarkerScale</c> at registration (via the AddEnemy configure path)
+        /// to match an up-scaled body's target footprint.
+        /// </summary>
+        /// <param name="enemy">The registered enemy row whose spawned body to recolor/rescale.</param>
+        /// <param name="tint">The body tint (applied to each material's "_Color", or its .color if absent).</param>
+        /// <param name="scale">Uniform body scale (1 = unchanged; &gt;1 = larger/hulking).</param>
+        public static void SetEnemyVisual(FTK_enemyCombat enemy, Color tint, float scale)
+        {
+            if (enemy == null)
+            {
+                Plugin.Log.LogWarning("SetEnemyVisual: enemy is null; no visual registered.");
+                return;
+            }
+
+            EnemyVisualPatch.Register(enemy.m_ID, tint, scale);
+            Plugin.Log.LogInfo("SetEnemyVisual: '" + enemy.m_ID + "' tint=" + tint + " scale=" + scale + ".");
+        }
+
+        /// <summary>
         /// Add a new overworld ENCOUNTER / event (clones an existing FTK_miniEncounter row).
         ///
         /// Encounters are the events placed on overworld hexes during a run. The game's selector
