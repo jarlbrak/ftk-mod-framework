@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "ftk-agent": {
+      "command": "python3",
+      "args": ["harness/ftk_mcp_server.py"],
+      "env": { "FTK_BRIDGE_URL": "http://127.0.0.1:8777" }
+    }
+  }
+}

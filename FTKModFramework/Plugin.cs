@@ -266,6 +266,12 @@ namespace FTKModFramework
             DbLookupPatcher.Init(_harmony);
             _harmony.PatchAll();
 
+            // Agentic test harness bridge (env-gated). No-ops unless FTK_AGENT_BRIDGE==1: with the env var
+            // unset nothing is created (no thread, no listener, no GameObject) and shipped behavior is
+            // byte-identical. SINGLE-PLAYER TEST USE ONLY; every action additionally checks IsSinglePlayer().
+            try { FTKModFramework.Agent.AgentBridge.Start(); }
+            catch (Exception e) { Log.LogError("AgentBridge.Start() failed: " + e); }
+
             Log.LogInfo(Name + " " + Version + " loaded (For The King / Unity 2017.2.2p2 / Mono).");
         }
     }
