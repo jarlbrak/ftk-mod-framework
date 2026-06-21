@@ -110,14 +110,50 @@ namespace FTKModFramework
         };
 
         // ---- visual identity (tunable from the in-engine screenshot WITHOUT a re-brief) --------------------
-        // The boss body is recolored mossy brown-green + upscaled to read as the victory-screen bog brute. These
-        // are visual-only (per-combat clone edit, leak-safe, determinism/save-safe; see Content.SetEnemyVisual).
+        // The boss body is recolored mossy brown-green, given a wet-bog skin, hulked into a non-uniform broad-shouldered
+        // silhouette, hunched forward, and handed a glowing lantern (the axe is hidden) to read as the victory-screen
+        // bog brute. All of this is visual-only (per-combat clone edit, leak-safe, determinism/save-safe; see
+        // Content.SetEnemyVisual). Iterate every value below from screenshots without a re-brief.
+        //
         // Tuned from the in-crypt screenshot: greener + lower blue than a neutral olive, so it still reads mossy
         // under the Flooded Crypt's cool/dim lighting (a plain olive went muddy-purple in shadow). Multiplies the
         // troll body's Standard-shader albedo (_Color), verified in-engine on material 'matTrollCaveA'.
         private static readonly UnityEngine.Color BossTint = new UnityEngine.Color(0.46f, 0.66f, 0.30f); // mossy brown-green
-        private const float BossBodyScale = 1.4f;   // hulking; reads well at 1.4x in the crypt diorama
-        private const float BossMarkerScale = 1.4f; // keep ~ BossBodyScale so the target footprint matches
+        private const float BossBodyScale = 1.4f;   // hulking; the "tall" axis; reads well at ~1.4x in the crypt diorama
+        private const float BossWidthBoost = 1.12f; // extra x/z multiplier on top of BossBodyScale (>1 = broader than tall)
+        // m_MarkerScale (the target/click footprint) tracks the x/z, i.e. BossBodyScale * BossWidthBoost.
+        private const float BossMarkerScale = BossBodyScale * BossWidthBoost;
+
+        // Wet-bog skin (Standard shader): high smoothness + low metallic so the body reads waterlogged/slimy. Guarded
+        // by HasProperty in the patch, so a non-Standard material is left alone.
+        private const float BossSmoothness = 0.6f;  // _Glossiness (0..1); high = slimy
+        private const float BossMetallic = 0.0f;    // _Metallic (0..1); low for skin
+
+        // Spine hunch (best-effort): forward rotation (deg) of the first matching spine bone about its local right
+        // axis, to exaggerate the hunch. Set to 0 to disable.
+        private const float BossHunchDegrees = 14f;
+
+        // Hide the held axe so the boss reads as the lantern-bearer (the art's lantern-not-axe read). Flip to false
+        // to show the weapon again.
+        private const bool BossHideWeapon = true;
+
+        // Procedural lantern (best-effort): a small emissive cube + warm point light attached to a hand bone.
+        // Iteration 1 read green-white / too hot (the Light was left white and the emission was *2). Warmed the
+        // albedo + emission, dropped the emission to *1.2, and now drive the point Light with its OWN warm color.
+        private static readonly UnityEngine.Color LanternColor =
+            new UnityEngine.Color(1.0f, 0.62f, 0.28f);                 // warm amber albedo
+        private static readonly UnityEngine.Color LanternEmission =
+            new UnityEngine.Color(1.0f, 0.50f, 0.16f) * 1.2f;          // warm orange glow (intensity-scaled, NOT *2)
+        private static readonly UnityEngine.Color LanternLightColor =
+            new UnityEngine.Color(1.0f, 0.62f, 0.28f);                 // warm point-light color (was white = the blowout)
+        private const float LanternSize = 0.16f;                       // desired WORLD size of the lantern body cube
+        private const float LanternLightRange = 2.6f;                  // point-light range (units)
+        private const float LanternLightIntensity = 0.9f;              // point-light intensity
+
+        // Swamp aura (best-effort): a procedural ParticleSystem of bog flies / marsh gas drifting around the torso.
+        // Off-network and never serialized (a per-combat clone child), so it stays determinism/save-safe like the
+        // rest of the visual. Flip to false to drop the aura.
+        private const bool BossSwampAura = true;
 
         // Signature procs: a DoT ("the mire poisons you") + an armor shred ("drags your guard down"). Confirmed
         // FTK_proficiencyTable.ID members (FTK_proficiencyTable.cs lines 26, 257).
@@ -296,10 +332,28 @@ namespace FTKModFramework
                 // whichever attaches; both are confirmed-present FTK_proficiencyTable.ID keys.
                 Content.AttachEnemyProficiencies(boss, BossProficiencies);
 
-                // Custom VISUAL identity: recolor the body mossy brown-green + upscale it so the chosen
-                // hulking-humanoid chassis reads as the victory-screen bog brute. Applied per-combat to the
+                // Custom VISUAL identity: recolor the body mossy brown-green, give it a wet-bog skin, hulk it into a
+                // non-uniform broad silhouette, hunch it forward, hide the axe, and hand it a glowing lantern so the
+                // chosen hulking-humanoid chassis reads as the victory-screen bog brute. Applied per-combat to the
                 // spawned clone (leak-safe; determinism/save-safe: enemy visuals never network or persist).
-                Content.SetEnemyVisual(boss, BossTint, BossBodyScale);
+                EnemyVisualPatch.EnemyVisual visual = default(EnemyVisualPatch.EnemyVisual);
+                visual.tint = BossTint;
+                visual.scale = BossBodyScale;
+                visual.widthBoost = BossWidthBoost;
+                visual.applyWetSkin = true;
+                visual.smoothness = BossSmoothness;
+                visual.metallic = BossMetallic;
+                visual.hunchDegrees = BossHunchDegrees;
+                visual.hideWeapon = BossHideWeapon;
+                visual.addLantern = true;
+                visual.lanternColor = LanternColor;
+                visual.lanternEmission = LanternEmission;
+                visual.lanternLightColor = LanternLightColor;
+                visual.lanternSize = LanternSize;
+                visual.lanternLightRange = LanternLightRange;
+                visual.lanternLightIntensity = LanternLightIntensity;
+                visual.swampAura = BossSwampAura;
+                Content.SetEnemyVisual(boss, visual);
             }
             return boss;
         }

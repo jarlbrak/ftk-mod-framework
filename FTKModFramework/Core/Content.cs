@@ -287,6 +287,40 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
+        /// Give a registered ENEMY a FULL custom visual identity in one call: a non-uniform body tint/scale, an
+        /// optional wet-bog skin (high smoothness / low metallic on Standard materials), a best-effort spine hunch,
+        /// an optional procedural glowing lantern attached to a hand bone, and an optional axe-hide. All of it is
+        /// applied PER COMBAT to the enemy's freshly-instantiated body clone (a CharacterEventListener) in a postfix
+        /// on <c>EnemyDummy.InitEnemyDummyForCombat</c>.
+        ///
+        /// VISUAL-ONLY and LEAK-SAFE / DETERMINISM- and SAVE-SAFE: see the single-arg overload. Every added object
+        /// (lantern, light) lives on the per-combat clone, never networks, and is never serialized; emission is put
+        /// only on OUR objects (the game resets _EmissionColor to black on CEL-managed body materials).
+        ///
+        /// The aesthetic values live as tunable constants in the caller (RealmBossAdventure.cs); this overload just
+        /// carries the populated <see cref="EnemyVisualPatch.EnemyVisual"/> into the Core visual registry.
+        /// </summary>
+        /// <param name="enemy">The registered enemy row whose spawned body to dress.</param>
+        /// <param name="visual">The fully-populated visual override.</param>
+        /// <remarks>Internal (not the public single-arg overload): the rich options struct is Core engine plumbing,
+        /// consumed in-assembly by the bundled content (RealmBossAdventure). External modders use the public
+        /// tint+scale overload above; this richer one stays internal so the struct can stay an engine type.</remarks>
+        internal static void SetEnemyVisual(FTK_enemyCombat enemy, EnemyVisualPatch.EnemyVisual visual)
+        {
+            if (enemy == null)
+            {
+                Plugin.Log.LogWarning("SetEnemyVisual: enemy is null; no visual registered.");
+                return;
+            }
+
+            EnemyVisualPatch.Register(enemy.m_ID, visual);
+            Plugin.Log.LogInfo("SetEnemyVisual: '" + enemy.m_ID + "' tint=" + visual.tint + " scale=" + visual.scale +
+                " widthBoost=" + visual.widthBoost + " wetSkin=" + visual.applyWetSkin + " hunch=" +
+                visual.hunchDegrees + " lantern=" + visual.addLantern + " lanternLightColor=" +
+                visual.lanternLightColor + " hideWeapon=" + visual.hideWeapon + " swampAura=" + visual.swampAura + ".");
+        }
+
+        /// <summary>
         /// Add a new overworld ENCOUNTER / event (clones an existing FTK_miniEncounter row).
         ///
         /// Encounters are the events placed on overworld hexes during a run. The game's selector
