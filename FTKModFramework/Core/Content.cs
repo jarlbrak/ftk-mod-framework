@@ -317,7 +317,120 @@ namespace FTKModFramework.Core
             Plugin.Log.LogInfo("SetEnemyVisual: '" + enemy.m_ID + "' tint=" + visual.tint + " scale=" + visual.scale +
                 " widthBoost=" + visual.widthBoost + " wetSkin=" + visual.applyWetSkin + " hunch=" +
                 visual.hunchDegrees + " lantern=" + visual.addLantern + " lanternLightColor=" +
-                visual.lanternLightColor + " hideWeapon=" + visual.hideWeapon + " swampAura=" + visual.swampAura + ".");
+                visual.lanternLightColor + " hideWeapon=" + visual.hideWeapon + " swampAura=" + visual.swampAura +
+                " proceduralBody=" + visual.proceduralBody + " golemTorsoRadius=" + visual.golemTorsoRadius +
+                " golemLimbRadius=" + visual.golemLimbRadius + " golemEyeGlow=" + visual.golemEyeGlow + ".");
+        }
+
+        /// <summary>
+        /// MESH-SWAP custom model (RECOMMENDED): give a registered ENEMY an artist-authored body MESH from a shipped
+        /// AssetBundle, REUSING the enemy's existing skeleton + bindposes + animations. On each combat spawn the
+        /// enemy's freshly-instantiated body clone (a CharacterEventListener) has its body SkinnedMeshRenderer's
+        /// <c>sharedMesh</c> set to the bundle-loaded <see cref="Mesh"/> (and, if <paramref name="textureName"/> is
+        /// given, the body material's <c>_MainTex</c> set to a bundle-loaded Texture2D). Applied via the same per-clone
+        /// postfix on <c>EnemyDummy.InitEnemyDummyForCombat</c> that drives the procedural visuals.
+        ///
+        /// The custom mesh MUST be skinned to the SAME skeleton you are reskinning (identical bone names / hierarchy /
+        /// bindposes, e.g. trollCaveA's Root_M/Chest_M/... rig) so the vanilla animations deform it correctly. Ship the
+        /// bundle at <c>FTKModFramework_content/models/&lt;bundleFileName&gt;</c>.
+        ///
+        /// VISUAL-ONLY and DETERMINISM- / SAVE-SAFE: the mesh/texture never network or persist; the only shared state
+        /// is the enemy enum-int identity (deterministic via IdAllocator). As long as the bundle ships INSIDE the mod
+        /// (byte-identical on every co-op client, no per-machine paths, no streaming), game state stays byte-for-byte
+        /// identical in co-op. If the bundle or mesh fails to load it is LOGGED and the original mesh (or the
+        /// procedural golem, if also registered) is left intact. Returns true if the request was registered.
+        /// </summary>
+        /// <param name="enemy">The registered enemy row whose spawned body mesh to swap.</param>
+        /// <param name="bundleFileName">Bundle file under FTKModFramework_content/models/ (e.g. "mybeast.unity3d").</param>
+        /// <param name="meshName">The Mesh asset name inside the bundle.</param>
+        /// <param name="textureName">Optional Texture2D asset name to push into the body material's _MainTex.</param>
+        public static bool SetEnemyBodyMesh(FTK_enemyCombat enemy, string bundleFileName, string meshName,
+            string textureName = null)
+        {
+            if (enemy == null)
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyMesh: enemy is null; no mesh registered.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(bundleFileName) || string.IsNullOrEmpty(meshName))
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyMesh: bundleFileName and meshName are required; '" + enemy.m_ID +
+                    "' unchanged.");
+                return false;
+            }
+
+            EnemyVisualPatch.RegisterMeshSwap(enemy.m_ID, bundleFileName, meshName, textureName);
+            Plugin.Log.LogInfo("SetEnemyBodyMesh: '" + enemy.m_ID + "' bundle='" + bundleFileName + "' mesh='" +
+                meshName + "'" + (string.IsNullOrEmpty(textureName) ? "" : " texture='" + textureName + "'") + ".");
+            return true;
+        }
+
+        /// <summary>
+        /// FULL-PREFAB custom model (for a fully BESPOKE rig): give a registered ENEMY a whole artist-authored body
+        /// prefab from a shipped AssetBundle, repointing <c>FTK_enemyCombat.m_EnemyAsset</c> at the prefab's
+        /// <see cref="CharacterEventListener"/>. The prefab is loaded, Instantiated once (kept persistent via
+        /// <c>DontDestroyOnLoad</c> and parked far off-screen), and verified to carry a CharacterEventListener (the
+        /// spawn path Instantiates m_EnemyAsset and requires one). The game then clones THIS template per combat, so
+        /// the bespoke body shows for the enemy with no further per-spawn work.
+        ///
+        /// The prefab MUST carry: a <c>CharacterEventListener</c> (root), a <c>SkinnedMeshRenderer</c> (body), an
+        /// <c>Animator</c> (so the game's animation events drive it), and <c>WEAPON_HOLDER_L</c>/<c>WEAPON_HOLDER_R</c>
+        /// bones (so the held weapon mounts). Build it in Unity 2017.2.2p2 and ship the bundle at
+        /// <c>FTKModFramework_content/models/&lt;bundleFileName&gt;</c>.
+        ///
+        /// VISUAL-ONLY and DETERMINISM- / SAVE-SAFE: the body asset never networks or persists; only the enemy
+        /// enum-int identity (deterministic via IdAllocator) is shared state. As long as the bundle ships INSIDE the
+        /// mod (byte-identical on every client, no per-machine paths, no streaming) co-op state stays identical. On any
+        /// failure (bundle/prefab missing, or no CharacterEventListener on the prefab) it is LOGGED and the enemy's
+        /// original m_EnemyAsset is left intact. Returns true on success.
+        /// </summary>
+        /// <param name="enemy">The registered enemy row whose body prefab to replace.</param>
+        /// <param name="bundleFileName">Bundle file under FTKModFramework_content/models/ (e.g. "mybeast.unity3d").</param>
+        /// <param name="prefabName">The GameObject prefab asset name inside the bundle.</param>
+        public static bool SetEnemyBodyFromBundle(FTK_enemyCombat enemy, string bundleFileName, string prefabName)
+        {
+            if (enemy == null)
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyFromBundle: enemy is null; no prefab registered.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(bundleFileName) || string.IsNullOrEmpty(prefabName))
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyFromBundle: bundleFileName and prefabName are required; '" +
+                    enemy.m_ID + "' unchanged.");
+                return false;
+            }
+
+            GameObject prefab = CustomModelLoader.LoadPrefab(bundleFileName, prefabName);
+            if (prefab == null)
+            {
+                // LoadPrefab already logged the reason. Leave the original m_EnemyAsset intact.
+                Plugin.Log.LogWarning("SetEnemyBodyFromBundle: prefab '" + prefabName + "' from bundle '" +
+                    bundleFileName + "' not loaded; '" + enemy.m_ID + "' unchanged.");
+                return false;
+            }
+
+            // Instantiate a private, persistent template (parked off-screen, mirroring AttachProficiencies). The game
+            // Instantiates m_EnemyAsset per combat, so this template is the cloned source, never shown directly.
+            GameObject copy = UnityEngine.Object.Instantiate(prefab);
+            UnityEngine.Object.DontDestroyOnLoad(copy);
+            copy.name = prefab.name + "_ftkmf";
+            copy.transform.position = new Vector3(0f, -100000f, 0f);
+
+            CharacterEventListener cel = copy.GetComponentInChildren<CharacterEventListener>(true);
+            if (cel == null)
+            {
+                Plugin.Log.LogError("SetEnemyBodyFromBundle: prefab '" + prefabName + "' has NO CharacterEventListener; " +
+                    "the spawn path requires one. '" + enemy.m_ID + "' unchanged. (Add a CharacterEventListener + " +
+                    "SkinnedMeshRenderer + Animator + WEAPON_HOLDER bones to the prefab.)");
+                UnityEngine.Object.Destroy(copy);
+                return false;
+            }
+
+            enemy.m_EnemyAsset = cel;
+            Plugin.Log.LogInfo("SetEnemyBodyFromBundle: '" + enemy.m_ID + "' body prefab set from bundle '" +
+                bundleFileName + "' prefab '" + prefabName + "'.");
+            return true;
         }
 
         /// <summary>

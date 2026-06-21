@@ -155,6 +155,26 @@ namespace FTKModFramework
         // rest of the visual. Flip to false to drop the aura.
         private const bool BossSwampAura = true;
 
+        // Procedural GOLEM body (best-effort): when true, HIDE the chassis' skinned mesh and assemble a runtime
+        // low-poly mossy bog-golem from bone-segment + joint-blob meshes parented to the existing skeleton, so the new
+        // body animates with the bones. Visual-only / per-combat clone / deterministic (the meshes are generated from
+        // index hashes, no Random), so it stays determinism/save-safe like the rest of the visual. Flip to false to
+        // show the recolored troll chassis again. Radii are in WORLD units at the (un-scaled) bone, then the cel-root
+        // hulking scale (BossBodyScale*BossWidthBoost) scales the whole golem along with the bones.
+        // EXPERIMENTAL, default OFF: the procedural golem renders + animates a genuinely custom code-built mesh
+        // (proven in-engine), but it is rough "code-art" and at large radii it can occlude the boss's in-rig
+        // EncounterCam (a black combat view). The shipped demo therefore defaults to the polished recolored chassis
+        // (the better-looking, camera-safe result); flip this to true to show the procedural golem, and tune the
+        // radii down first if the combat view goes black. A true high-fidelity model should come via the AssetBundle
+        // loader (Content.SetEnemyBodyMesh / SetEnemyBodyFromBundle; see docs/CUSTOM-MODELS.md).
+        private const bool BossProceduralBody = false;
+        private const float GolemTorsoRadius = 0.32f;  // world radius of the spine/torso segments (thickest; hulking)
+        private const float GolemLimbRadius = 0.15f;   // world radius of the arm/leg segments (chunky; tapers down)
+        private const float GolemLumpiness = 0.22f;    // 0 = clean prisms; higher = chunkier mossy lumps (index-derived)
+        // Sickly bog-green glowing eyes (emissive). Iterate from screenshots without a re-brief.
+        private static readonly UnityEngine.Color GolemEyeGlow =
+            new UnityEngine.Color(0.55f, 1.0f, 0.35f) * 1.4f;          // sickly green glow (intensity-scaled)
+
         // Signature procs: a DoT ("the mire poisons you") + an armor shred ("drags your guard down"). Confirmed
         // FTK_proficiencyTable.ID members (FTK_proficiencyTable.cs lines 26, 257).
         private static readonly string[] BossProficiencies = { "enPoison2", "enArmorDestroy" };
@@ -353,6 +373,14 @@ namespace FTKModFramework
                 visual.lanternLightRange = LanternLightRange;
                 visual.lanternLightIntensity = LanternLightIntensity;
                 visual.swampAura = BossSwampAura;
+                // PROCEDURAL GOLEM BODY: hide the troll chassis mesh and build a runtime low-poly mossy bog-golem from
+                // bone-segment + joint-blob meshes parented to the skeleton (animates with the bones). The recolor /
+                // wet-skin above now harmlessly tints a hidden renderer; the lantern + aura + hunch still read on top.
+                visual.proceduralBody = BossProceduralBody;
+                visual.golemTorsoRadius = GolemTorsoRadius;
+                visual.golemLimbRadius = GolemLimbRadius;
+                visual.golemLumpiness = GolemLumpiness;
+                visual.golemEyeGlow = GolemEyeGlow;
                 Content.SetEnemyVisual(boss, visual);
             }
             return boss;

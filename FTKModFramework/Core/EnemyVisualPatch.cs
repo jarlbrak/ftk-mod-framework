@@ -70,6 +70,27 @@ namespace FTKModFramework.Core
 
             // ---- swamp aura (best-effort, guarded) ----
             public bool swampAura;           // a procedural ParticleSystem of bog flies / marsh gas around the torso
+
+            // ---- procedural golem body (best-effort, guarded) ----
+            // When true, HIDE the chassis' skinned mesh and assemble a runtime low-poly mossy BOG-GOLEM from
+            // bone-segment + joint-blob meshes parented to the existing skeleton bones, so the new body animates with
+            // the skeleton. Visual-only / per-clone / deterministic (the meshes are generated from index hashes, no
+            // Random), exactly like the rest of this struct: nothing networks or persists.
+            public bool  proceduralBody;
+            public float golemTorsoRadius;   // world radius of the spine/torso segments (thickest)
+            public float golemLimbRadius;    // world radius of the arm/leg segments (medium; tapers to extremities)
+            public float golemLumpiness;     // 0 = clean prisms; ~0.15 = chunky mossy lumps (index-derived, no Random)
+            public Color golemEyeGlow;       // emissive eye color (sickly green / warm) on the two head eye blobs
+
+            // ---- AssetBundle mesh swap (best-effort, guarded) ----
+            // When meshBundle is set, swap the chassis body SkinnedMeshRenderer's sharedMesh to a bundle-loaded Mesh,
+            // REUSING the vanilla skeleton + bindposes + animations (so the custom mesh must be skinned to that same
+            // rig). Optionally also swap its material's _MainTex to a bundle-loaded Texture2D. Visual-only / per-clone
+            // / deterministic (the bundle ships inside the mod, byte-identical on every client), exactly like the rest
+            // of this struct: nothing networks or persists. See Content.SetEnemyBodyMesh.
+            public string meshBundle;        // bundle file name under FTKModFramework_content/models/ (null disables)
+            public string meshName;          // Mesh asset name inside the bundle
+            public string meshTextureName;   // optional Texture2D asset name to push into the body material's _MainTex
         }
 
         // Name of the procedural lantern parent, used for the per-clone idempotency check.
@@ -125,6 +146,29 @@ namespace FTKModFramework.Core
             v.scale = scale;
             v.widthBoost = 1f;
             Register(enemyId, v);
+        }
+
+        /// <summary>
+        /// Register (or MERGE) just the AssetBundle mesh-swap fields onto an enemy id, leaving any other visual knobs
+        /// (tint / scale / lantern / golem) already registered for that id untouched. If no entry exists yet, a
+        /// neutral one is created (scale 1, identity tint, widthBoost 1) so the swap alone is harmless. Internal:
+        /// callers go through <see cref="Content.SetEnemyBodyMesh"/>.
+        /// </summary>
+        internal static void RegisterMeshSwap(string enemyId, string meshBundle, string meshName, string meshTextureName)
+        {
+            if (string.IsNullOrEmpty(enemyId)) return;
+            EnemyVisual v;
+            if (!_visuals.TryGetValue(enemyId, out v))
+            {
+                v = default(EnemyVisual);
+                v.tint = Color.white; // neutral: SetEnemyBodyMesh on its own must not recolor the body
+                v.scale = 1f;
+                v.widthBoost = 1f;
+            }
+            v.meshBundle = meshBundle;
+            v.meshName = meshName;
+            v.meshTextureName = meshTextureName;
+            _visuals[enemyId] = v;
         }
 
         /// <summary>True if an enemy id has a registered visual override (used by self-tests).</summary>
@@ -189,6 +233,28 @@ namespace FTKModFramework.Core
                             if (m.HasProperty("_Metallic"))   m.SetFloat("_Metallic", v.metallic);
                         }
                     }
+                }
+
+                // ASSETBUNDLE MESH SWAP (best-effort, guarded): repoint the chassis body SkinnedMeshRenderer's
+                // sharedMesh to an artist-authored Mesh loaded from a shipped bundle, reusing the vanilla skeleton +
+                // bindposes + animations. Applied to THIS fresh clone only; on any failure the original mesh (or the
+                // procedural golem, if also requested) is left intact. Per-clone re-application is correct (the clone
+                // is brand-new every combat), so there is no _done guard.
+                if (!string.IsNullOrEmpty(v.meshBundle) && !string.IsNullOrEmpty(v.meshName))
+                {
+                    try { ApplyMeshSwap(ec.m_ID, cel, v); }
+                    catch (Exception me) { Plugin.Log.LogWarning("[enemy-visual] mesh swap failed: " + me.Message); }
+                }
+
+                // PROCEDURAL GOLEM BODY (best-effort, guarded): hide the chassis skinned mesh and assemble a runtime
+                // low-poly mossy bog-golem from bone-segment + blob meshes parented to the skeleton, so the new body
+                // animates with the existing bones. Built BEFORE the hunch so the torso/arm segments (children of
+                // Chest_M) inherit the hunch rotation; the lantern (on WEAPON_HOLDER_L) and aura (on Chest_M) still
+                // read on top of the golem because they attach to the same bones.
+                if (v.proceduralBody)
+                {
+                    try { BuildProceduralBody(cel, v); }
+                    catch (Exception ge) { Plugin.Log.LogWarning("[enemy-visual] golem body failed: " + ge.Message); }
                 }
 
                 // SPINE HUNCH (best-effort, guarded): rotate the first matching spine bone forward.
@@ -514,6 +580,341 @@ namespace FTKModFramework.Core
 
             Plugin.Log.LogInfo("[enemy-visual] swamp aura: mounted on " + via + " (shader '" + usedShader +
                 "') for '" + enemyId + "'.");
+        }
+
+        // ---- procedural golem body --------------------------------------------------------------------------
+
+        // Name of the procedural golem parent, used for the per-clone idempotency check.
+        private const string GolemName = "ftkmf_golem";
+        private const string GolemMeshChild = "enTroll01"; // the chassis SkinnedMeshRenderer child (exact name, in-engine)
+
+        // The skeleton chains, as ordered exact bone names (parent -> child). We build a tapered segment for each
+        // adjacent pair (skipping zero-length Scapula links by starting each arm at the Shoulder and each leg at the
+        // Hip), parenting it to the PROXIMAL bone and pointing it at the DISTAL bone, so each segment animates with
+        // the bone it hangs from. Verified in-engine on enTrollCave(Clone).
+        private static readonly string[] SpineChain = { "Root_M", "BackA_M", "BackB_M", "Chest_M", "Neck_M", "Head_M" };
+        private static readonly string[] ArmLChain  = { "Shoulder_L", "Elbow_L", "Wrist_L" };
+        private static readonly string[] ArmRChain  = { "Shoulder_R", "Elbow_R", "Wrist_R" };
+        private static readonly string[] LegLChain  = { "Hip_L", "Knee_L", "Ankle_L" };
+        private static readonly string[] LegRChain  = { "Hip_R", "Knee_R", "Ankle_R" };
+
+        // Interior bones that get a covering joint blob (sized to the adjacent segment radius).
+        private static readonly string[] JointBones =
+        {
+            "Chest_M", "Neck_M",
+            "Shoulder_L", "Elbow_L", "Wrist_L",
+            "Shoulder_R", "Elbow_R", "Wrist_R",
+            "Hip_L", "Knee_L", "Ankle_L",
+            "Hip_R", "Knee_R", "Ankle_R",
+        };
+
+        /// <summary>
+        /// Hide the chassis skinned mesh and assemble a runtime low-poly mossy bog-golem from per-bone segment meshes
+        /// (one tapered prism per adjacent bone pair in each chain) plus joint blobs and a head + two glowing eyes,
+        /// all parented to the existing skeleton so the new body animates. Idempotent per clone (name check). Fully
+        /// guarded by the caller; logs a one-line summary. Visual-only / deterministic (the meshes are generated from
+        /// index hashes, no Random), so it stays co-op- and save-safe like the rest of this file.
+        /// </summary>
+        private static void BuildProceduralBody(CharacterEventListener cel, EnemyVisual v)
+        {
+            // IDEMPOTENCY PER CLONE: a re-apply on the same fresh clone must not stack a second golem.
+            Transform existing = FindExact(cel, GolemName);
+            if (existing != null) return;
+
+            // 1) HIDE the chassis mesh ('enTroll01'): disable its SkinnedMeshRenderer (and any Renderer on the GO).
+            bool trollHidden = false;
+            Transform meshChild = FindExact(cel, GolemMeshChild);
+            if (meshChild != null)
+            {
+                SkinnedMeshRenderer smr = meshChild.GetComponent<SkinnedMeshRenderer>();
+                if (smr != null) { smr.enabled = false; trollHidden = true; }
+                // Belt-and-suspenders: disable any other Renderer on the same GameObject too.
+                Renderer anyR = meshChild.GetComponent<Renderer>();
+                if (anyR != null) anyR.enabled = false;
+            }
+            Plugin.Log.LogInfo("[enemy-visual] golem: chassis mesh '" + GolemMeshChild + "' " +
+                (trollHidden ? "hidden (SkinnedMeshRenderer disabled)." : "NOT found; chassis may peek through."));
+
+            // 2) The shared mossy-green wet material for every golem part (flat-shaded meshes give the faceted look).
+            Material golemMat = BuildGolemMaterial(v);
+
+            // 3) The golem parent under the CEL root (so the non-uniform body localScale on the root scales it too).
+            GameObject golem = new GameObject(GolemName);
+            golem.transform.SetParent(cel.transform, false);
+            golem.transform.localPosition = Vector3.zero;
+            golem.transform.localRotation = Quaternion.identity;
+            golem.transform.localScale = Vector3.one; // do NOT add extra scale: the cel-root scale already covers it
+
+            // Cache every bone by exact name once (one hierarchy walk).
+            Dictionary<string, Transform> bones = new Dictionary<string, Transform>();
+            Transform[] all = cel.GetComponentsInChildren<Transform>(true);
+            foreach (Transform t in all)
+            {
+                if (t == null || t.name == null) continue;
+                if (!bones.ContainsKey(t.name)) bones[t.name] = t;
+            }
+
+            int segs = 0;
+            // SPINE: thick torso, slight taper up to the neck.
+            segs += BuildChainSegments(SpineChain, bones, golemMat, v.golemTorsoRadius, v.golemTorsoRadius * 0.7f, 6, v.golemLumpiness);
+            // ARMS: medium, taper toward the wrist.
+            segs += BuildChainSegments(ArmLChain, bones, golemMat, v.golemLimbRadius, v.golemLimbRadius * 0.55f, 5, v.golemLumpiness);
+            segs += BuildChainSegments(ArmRChain, bones, golemMat, v.golemLimbRadius, v.golemLimbRadius * 0.55f, 5, v.golemLumpiness);
+            // LEGS: a touch thicker than arms, taper toward the ankle.
+            segs += BuildChainSegments(LegLChain, bones, golemMat, v.golemLimbRadius * 1.15f, v.golemLimbRadius * 0.7f, 5, v.golemLumpiness);
+            segs += BuildChainSegments(LegRChain, bones, golemMat, v.golemLimbRadius * 1.15f, v.golemLimbRadius * 0.7f, 5, v.golemLumpiness);
+
+            // 4) JOINT BLOBS: cover the gaps at interior bones, sized to the limb/torso radius.
+            int joints = 0;
+            for (int i = 0; i < JointBones.Length; i++)
+            {
+                Transform jb;
+                if (!bones.TryGetValue(JointBones[i], out jb) || jb == null) continue;
+                bool isTorso = JointBones[i] == "Chest_M" || JointBones[i] == "Neck_M";
+                float jr = isTorso ? v.golemTorsoRadius * 0.85f : v.golemLimbRadius * 0.7f;
+                BuildBlobAt(jb, golemMat, jr, v.golemLumpiness);
+                joints++;
+            }
+
+            // 5) HEAD: a larger blob on Head_M + two emissive eyes offset forward and apart.
+            int eyes = 0;
+            Transform head;
+            if (bones.TryGetValue("Head_M", out head) && head != null)
+            {
+                float headR = v.golemTorsoRadius * 1.0f;
+                BuildBlobAt(head, golemMat, headR, v.golemLumpiness);
+
+                Material eyeMat = BuildEyeMaterial(v);
+                // Eyes: small blobs, forward (+Z local of the head) and split left/right (+/-X). World-size compensated.
+                float eyeWorld = headR * 0.28f;
+                float fwd = headR * 0.85f;
+                float side = headR * 0.40f;
+                float up = headR * 0.15f;
+                eyes += BuildEyeAt(head, eyeMat, eyeWorld, new Vector3(-side, up, fwd), v.golemLumpiness);
+                eyes += BuildEyeAt(head, eyeMat, eyeWorld, new Vector3( side, up, fwd), v.golemLumpiness);
+            }
+
+            Plugin.Log.LogInfo("[enemy-visual] golem: built " + segs + " bone segments + " + joints +
+                " joint blobs + " + eyes + " eyes; chassis " + (trollHidden ? "hidden" : "NOT hidden") + ".");
+        }
+
+        /// <summary>
+        /// For each adjacent (parent,child) pair in <paramref name="chain"/>, build a tapered segment parented to the
+        /// PARENT bone, oriented so its local +Y points at the CHILD bone, length ~ rest-distance * 1.08 (slight
+        /// overlap to cover joints), with world-thickness held constant despite the bone's lossyScale. Radius lerps
+        /// from <paramref name="radius0"/> (proximal) to <paramref name="radius1"/> (distal) across the chain. Returns
+        /// the number of segments actually built (a missing/zero-length pair is skipped).
+        /// </summary>
+        private static int BuildChainSegments(string[] chain, Dictionary<string, Transform> bones, Material mat,
+            float radius0, float radius1, int sides, float lumpiness)
+        {
+            int built = 0;
+            int pairs = chain.Length - 1;
+            if (pairs <= 0) return 0;
+
+            for (int i = 0; i < pairs; i++)
+            {
+                Transform parent, child;
+                if (!bones.TryGetValue(chain[i], out parent) || parent == null) continue;
+                if (!bones.TryGetValue(chain[i + 1], out child) || child == null) continue;
+
+                float d = Vector3.Distance(parent.position, child.position);
+                if (d <= 1e-4f) continue; // zero-length link (e.g. a degenerate Scapula): skip
+
+                // Per-segment radii lerp across the chain so limbs taper toward the extremity.
+                float t0 = (float)i / pairs;
+                float t1 = (float)(i + 1) / pairs;
+                float rA = Mathf.Lerp(radius0, radius1, t0);
+                float rB = Mathf.Lerp(radius0, radius1, t1);
+
+                // The segment mesh is authored in WORLD-units (length d*1.08, world radii rA/rB), then we counter the
+                // parent bone's lossyScale via localScale so it lands at that world size on the up-scaled skeleton.
+                float lenWorld = d * 1.08f;
+
+                Vector3 ls = parent.lossyScale;
+                float ax = Mathf.Approximately(ls.x, 0f) ? 1f : Mathf.Abs(ls.x);
+                float ay = Mathf.Approximately(ls.y, 0f) ? 1f : Mathf.Abs(ls.y);
+                float az = Mathf.Approximately(ls.z, 0f) ? 1f : Mathf.Abs(ls.z);
+
+                // Author the mesh in the bone's LOCAL units (divide world by lossyScale) so localScale can stay 1 and
+                // the orientation math (which is in local space) is unaffected by non-uniform scale. Length runs along
+                // local +Y (use ay), radius is in the x/z plane (use an average of ax/az for a round cross-section).
+                float lenLocal = lenWorld / ay;
+                float rxz = (ax + az) * 0.5f;
+                float rALocal = rA / rxz;
+                float rBLocal = rB / rxz;
+
+                Mesh mesh = ProceduralCreature.BuildSegment(lenLocal, rALocal, rBLocal, sides, lumpiness);
+
+                GameObject go = new GameObject("ftkmf_golem_seg_" + chain[i] + "_" + chain[i + 1]);
+                go.transform.SetParent(parent, false);
+                go.transform.localPosition = Vector3.zero;
+                // Point local +Y at the child (in the parent's local space), so the segment spans parent->child.
+                Vector3 dirLocal = parent.InverseTransformPoint(child.position);
+                if (dirLocal.sqrMagnitude > 1e-8f)
+                    go.transform.localRotation = Quaternion.FromToRotation(Vector3.up, dirLocal.normalized);
+                else
+                    go.transform.localRotation = Quaternion.identity;
+                go.transform.localScale = Vector3.one;
+
+                MeshFilter mf = go.AddComponent<MeshFilter>();
+                mf.sharedMesh = mesh;
+                MeshRenderer mr = go.AddComponent<MeshRenderer>();
+                mr.sharedMaterial = mat;
+
+                built++;
+            }
+            return built;
+        }
+
+        /// <summary>Build a lumpy blob of world-radius <paramref name="worldRadius"/> parented at a bone, world-size
+        /// compensated for the bone's lossyScale, oriented with the bone.</summary>
+        private static void BuildBlobAt(Transform bone, Material mat, float worldRadius, float lumpiness)
+        {
+            Vector3 ls = bone.lossyScale;
+            float ax = Mathf.Approximately(ls.x, 0f) ? 1f : Mathf.Abs(ls.x);
+            float az = Mathf.Approximately(ls.z, 0f) ? 1f : Mathf.Abs(ls.z);
+            float rxz = (ax + az) * 0.5f;
+            float rLocal = worldRadius / rxz;
+
+            Mesh mesh = ProceduralCreature.BuildBlob(rLocal, 1, lumpiness);
+
+            GameObject go = new GameObject("ftkmf_golem_joint_" + bone.name);
+            go.transform.SetParent(bone, false);
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localRotation = Quaternion.identity;
+            go.transform.localScale = Vector3.one;
+
+            MeshFilter mf = go.AddComponent<MeshFilter>();
+            mf.sharedMesh = mesh;
+            MeshRenderer mr = go.AddComponent<MeshRenderer>();
+            mr.sharedMaterial = mat;
+        }
+
+        /// <summary>Build one emissive eye blob parented at the head, at a local offset (world-size compensated).
+        /// Returns 1 (so the caller can sum eye counts).</summary>
+        private static int BuildEyeAt(Transform head, Material eyeMat, float worldRadius, Vector3 localOffsetWorld,
+            float lumpiness)
+        {
+            Vector3 ls = head.lossyScale;
+            float ax = Mathf.Approximately(ls.x, 0f) ? 1f : Mathf.Abs(ls.x);
+            float ay = Mathf.Approximately(ls.y, 0f) ? 1f : Mathf.Abs(ls.y);
+            float az = Mathf.Approximately(ls.z, 0f) ? 1f : Mathf.Abs(ls.z);
+            float rxz = (ax + az) * 0.5f;
+            float rLocal = worldRadius / rxz;
+
+            // The offset is expressed in world units; convert to the head's local units by dividing per-axis.
+            Vector3 offLocal = new Vector3(localOffsetWorld.x / ax, localOffsetWorld.y / ay, localOffsetWorld.z / az);
+
+            Mesh mesh = ProceduralCreature.BuildBlob(rLocal, 0, lumpiness * 0.5f); // low subdiv: a small bead
+
+            GameObject go = new GameObject("ftkmf_golem_eye");
+            go.transform.SetParent(head, false);
+            go.transform.localPosition = offLocal;
+            go.transform.localRotation = Quaternion.identity;
+            go.transform.localScale = Vector3.one;
+
+            MeshFilter mf = go.AddComponent<MeshFilter>();
+            mf.sharedMesh = mesh;
+            MeshRenderer mr = go.AddComponent<MeshRenderer>();
+            mr.sharedMaterial = eyeMat;
+            return 1;
+        }
+
+        /// <summary>The shared mossy-green wet Standard material for every golem segment/blob. Reuses the body tint
+        /// + the wet-skin knobs (smoothness/metallic) so the golem matches the registered identity.</summary>
+        private static Material BuildGolemMaterial(EnemyVisual v)
+        {
+            Material mat = new Material(Shader.Find("Standard"));
+            if (mat.HasProperty("_Color")) mat.SetColor("_Color", v.tint);
+            else mat.color = v.tint;
+            if (mat.HasProperty("_Glossiness")) mat.SetFloat("_Glossiness", v.smoothness);
+            if (mat.HasProperty("_Metallic"))   mat.SetFloat("_Metallic", v.metallic);
+            return mat;
+        }
+
+        /// <summary>An emissive eye material (Standard + _EMISSION on the golemEyeGlow color). Emission is safe here:
+        /// it lives on OUR object, which the game's CEL hit-flash reset never touches.</summary>
+        private static Material BuildEyeMaterial(EnemyVisual v)
+        {
+            Material mat = new Material(Shader.Find("Standard"));
+            Color glow = v.golemEyeGlow;
+            if (mat.HasProperty("_Color")) mat.SetColor("_Color", glow);
+            else mat.color = glow;
+            mat.EnableKeyword("_EMISSION");
+            if (mat.HasProperty("_EmissionColor")) mat.SetColor("_EmissionColor", glow);
+            return mat;
+        }
+
+        // ---- AssetBundle mesh swap --------------------------------------------------------------------------
+
+        /// <summary>
+        /// Swap the chassis body SkinnedMeshRenderer's <c>sharedMesh</c> to a bundle-loaded <see cref="Mesh"/>,
+        /// REUSING the existing skeleton (bones + bindposes) and animations, and optionally push a bundle-loaded
+        /// <see cref="Texture2D"/> into the body material's <c>_MainTex</c>. The body SMR is the one on the exact child
+        /// <see cref="GolemMeshChild"/> ("enTroll01"); if that is absent we fall back to the first SkinnedMeshRenderer
+        /// under the CEL. On any miss we LOG and leave the original mesh intact (so the body never disappears). The
+        /// custom mesh must be authored/skinned against the SAME skeleton this clone uses, or it will deform wrongly.
+        /// </summary>
+        private static void ApplyMeshSwap(string enemyId, CharacterEventListener cel, EnemyVisual v)
+        {
+            // Resolve the body SkinnedMeshRenderer: exact 'enTroll01' child first, else the first SMR under the CEL.
+            SkinnedMeshRenderer smr = null;
+            string via;
+            Transform meshChild = FindExact(cel, GolemMeshChild);
+            if (meshChild != null) smr = meshChild.GetComponent<SkinnedMeshRenderer>();
+            if (smr != null)
+            {
+                via = "exact child '" + GolemMeshChild + "'";
+            }
+            else
+            {
+                smr = cel.GetComponentInChildren<SkinnedMeshRenderer>(true);
+                via = smr != null ? "first SkinnedMeshRenderer under CEL" : null;
+            }
+
+            if (smr == null)
+            {
+                Plugin.Log.LogWarning("[enemy-visual] mesh swap: no body SkinnedMeshRenderer found for '" + enemyId +
+                    "'; original mesh kept.");
+                return;
+            }
+
+            Mesh mesh = CustomModelLoader.LoadMesh(v.meshBundle, v.meshName);
+            if (mesh == null)
+            {
+                // LoadMesh already logged the reason. Leave the original mesh intact.
+                Plugin.Log.LogWarning("[enemy-visual] mesh swap: mesh '" + v.meshName + "' from bundle '" +
+                    v.meshBundle + "' not loaded for '" + enemyId + "'; original mesh kept.");
+                return;
+            }
+
+            // Reuse the existing skeleton: sharedMesh swap keeps smr.bones / rootBone untouched, and the custom mesh's
+            // own bindposes drive the skinning, so all vanilla animations continue to play on the new mesh.
+            smr.sharedMesh = mesh;
+
+            // OPTIONAL TEXTURE: push a bundle-loaded Texture2D into the body material's _MainTex. Use .materials (the
+            // instanced per-clone copies) so the vanilla shared material is untouched.
+            if (!string.IsNullOrEmpty(v.meshTextureName))
+            {
+                Texture2D tex = CustomModelLoader.LoadTexture(v.meshBundle, v.meshTextureName);
+                if (tex != null)
+                {
+                    Material[] mats = smr.materials;
+                    for (int i = 0; i < mats.Length; i++)
+                    {
+                        Material m = mats[i];
+                        if (m == null) continue;
+                        if (m.HasProperty("_MainTex")) m.SetTexture("_MainTex", tex);
+                        else m.mainTexture = tex;
+                    }
+                }
+                // a texture miss is non-fatal: the mesh swap above already applied.
+            }
+
+            Plugin.Log.LogInfo("[enemy-visual] mesh swap: set body mesh '" + v.meshName + "' (bundle '" + v.meshBundle +
+                "', SMR via " + via + ")" + (string.IsNullOrEmpty(v.meshTextureName) ? "" : " + texture '" +
+                v.meshTextureName + "'") + " for '" + enemyId + "'.");
         }
 
         /// <summary>Full slash-separated path from the body root to a transform (for the lantern mount log line).</summary>
