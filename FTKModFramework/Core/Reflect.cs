@@ -44,6 +44,21 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
+        /// Overload-aware invoke. <see cref="Invoke"/> resolves with GetMethod(name, flags) and no parameter
+        /// types, which throws AmbiguousMatchException when a method has several overloads (e.g.
+        /// FTKHex.GetHexLand(int,int) vs GetHexLand(HexLandID)). This resolves the exact overload by the
+        /// supplied <paramref name="sig"/> type array, walking the base-type chain.
+        /// </summary>
+        public static object InvokeArgs(object obj, string name, Type[] sig, object[] args)
+        {
+            if (obj == null) return null;
+            MethodInfo m = null;
+            for (Type cur = obj.GetType(); cur != null && m == null; cur = cur.BaseType)
+                m = cur.GetMethod(name, All | BindingFlags.DeclaredOnly, null, sig, null);
+            return m != null ? m.Invoke(obj, args) : null;
+        }
+
+        /// <summary>
         /// Shallow-copy every instance field from <paramref name="src"/> onto <paramref name="dst"/>,
         /// walking the whole type hierarchy (so inherited private fields are copied too).
         /// Fields named in <paramref name="skip"/> are left untouched.
