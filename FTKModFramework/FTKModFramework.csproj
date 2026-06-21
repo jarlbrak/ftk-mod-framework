@@ -76,4 +76,18 @@
     <Compile Include="..\FTKPerfProbe\Pure\**\*.cs" Link="Pure\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- Ship the framework as a SINGLE DLL: bundled NPC portraits are embedded here and extracted at runtime
+         (Adventures.RegisterUserNpc) into the adventure's own npcs/<key>/portrait.png, which the game scans at
+         gamedef init. These PNGs are OUR assets (not game content), so they are fine to embed/commit. The
+         default resource name is "<RootNamespace>.<path-with-/-as-.>", e.g.
+         "FTKModFramework.assets.npcs.reeve_maddow.portrait.png" (RootNamespace defaults to the AssemblyName,
+         FTKModFramework). The runtime extractor logs the manifest names so a rename is immediately visible. -->
+    <EmbeddedResource Include="assets\npcs\reeve_maddow\portrait.png" />
+    <!-- The custom end-game (victory) plate for "The Hollow Mire": extracted at runtime
+         (Adventures.RegisterEndGameImage) to <adventureFolder>/EndGameImage.png, which the
+         gamedef's GetEndGameImage() loads for the flat (non-StoneHero) victory tableau. -->
+    <EmbeddedResource Include="assets\adventures\hollowmire\EndGameImage.png" />
+  </ItemGroup>
+
 </Project>

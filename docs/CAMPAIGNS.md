@@ -57,7 +57,28 @@ Adventures.AddCampaignFromTemplate(
 | `StageBuilder.AddCollectQuest(id, FTK_itembase.ID, count, realm)` | `ModQuestDef` (collect-N verb) | completes when the **party** collectively holds `count` of the item; `count >= 1` |
 | `QuestBuilder.BranchTo(nextQuestId, params BranchCondition[])` | a branch edge in the sidecar | first-match wins; empty conditions = unconditional default edge |
 | `QuestBuilder.OnCompleteSetFlag(flag, op, value)` | an on-complete flag mutation in the sidecar | applied before the branch resolves |
+| `QuestBuilder.WithStartStory(npcKey, params pages)` | a story popup on the quest's `m_StartEvents` | shown when the objective appears; one `page` = one dialogue box; text is verbatim |
+| `QuestBuilder.WithCompleteStory(npcKey, params pages)` | a story popup on the quest's `m_CompleteEvents` | shown on quest completion (use it on the last quest for a victory beat) |
 | `Campaign.SetFlag/GetFlag/HasFlag` | reads/writes the flag store | **writes are host-authoritative** |
+
+### Quest narrative and custom NPCs
+
+`WithStartStory`/`WithCompleteStory` attach FTK's portrait-dialogue popups to a quest as DATA (no Harmony
+patch, no per-quest C#). Each `page` string is one dialogue box and renders **verbatim** (the game's
+`Localized<TextStory>` passes an unknown key through, then `GetUserModText` returns the literal). Avoid the
+characters `{` and `}` in narrative text (the body is run through `string.Format`).
+
+`npcKey` names a **custom NPC** that speaks the lines with its own portrait, name, and title. A custom NPC is
+shipped as a folder `npcs/<npcKey>/` (containing a `<name>.txt` JSON of `{ "Name": ..., "Title": ... }` and a
+square `portrait.png`) inside the adventure's own mod folder; `Adventures.RegisterUserNpc(...)` writes/registers
+it (the bundled demo embeds its portrait in the DLL and extracts it at load). The game scans
+`<m_ModFolderPath>/npcs/`, so a custom-NPC adventure needs its **own** mod folder (not the cloned template's).
+A game-level cold-open is authored with `m_HasTextIntro`/`m_IntroTitle`/`m_IntroBody` (also verbatim).
+
+> Gotcha (handled by the framework): FTK's `QuestLogicBase.SetMessageTalkerParam(string)` (the custom-NPC code
+> path) forgets to initialize its message-params array, so the FIRST mod to use a custom NPC speaker would NRE
+> every frame and softlock. The framework installs a small concrete-method prefix that performs the init the
+> game omits, so custom-NPC narrative is safe.
 
 **Quest order** is stage order x within-stage order, flattened; **victory** is the last quest of the last
 stage. Quest keys (`m_StoryQuestID`) must be globally unique.
