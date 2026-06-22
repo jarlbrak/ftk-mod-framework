@@ -371,21 +371,43 @@ namespace FTKModFramework
                 // clone (leak-safe; determinism/save-safe: enemy visuals never network or persist; the .glb+png ship
                 // inside the mod, byte-identical on every co-op client).
                 EnemyVisualPatch.EnemyVisual visual = default(EnemyVisualPatch.EnemyVisual);
-                // EDITOR-FREE runtime-glb body path: the real custom mesh + its baked basecolor.
-                visual.glbMesh = BossGlbMesh;
-                visual.glbTexture = BossGlbTexture;
-                visual.tint = UnityEngine.Color.white;   // do NOT green-multiply the baked mossy texture
-                visual.scale = BossBodyScale;             // modest uniform scale; the mesh is ~2.65 tall in local space
-                visual.widthBoost = 1f;                   // uniform: non-uniform scale would distort the real mesh
-                visual.applyWetSkin = true;
-                visual.smoothness = BossSmoothness;
-                visual.metallic = BossMetallic;
-                visual.hunchDegrees = 0f;                 // a spine bend would distort the real mesh
-                visual.hideWeapon = BossHideWeapon;
-                visual.addLantern = false;                // the mesh has a lantern baked into its geometry
-                visual.swampAura = false;                 // OFF: the magenta sprite cloud obscured the custom mesh in the diorama
-                // PROCEDURAL GOLEM BODY off (the real glb mesh is the body now); golem knobs left at defaults.
-                visual.proceduralBody = false;
+                // TEST LEVER (visual-gate baseline capture, NOT a modder feature): when FTK_BASELINE_STOCK_BODY==1
+                // SKIP the custom glb body and force the STOCK trollCaveA chassis posture (no mesh/texture, white
+                // tint, unit scale, no width boost, no swamp aura, weapon shown). Core/EnemyVisualPatch falls back to
+                // the chassis cleanly when glbMesh is empty, so this renders the UNMODIFIED cave-troll. Mirrors the
+                // FTK_AGENT_BRIDGE env-gate idiom (Agent/AgentBridge.cs). When unset or != "1" the env read has NO
+                // effect: the else-branch below is byte-identical to the shipped custom-body wiring.
+                if (Environment.GetEnvironmentVariable("FTK_BASELINE_STOCK_BODY") == "1")
+                {
+                    // No glbMesh/glbTexture (default null) => Core falls back to the stock chassis mesh/texture.
+                    visual.tint = UnityEngine.Color.white;   // no recolor
+                    visual.scale = 1f;                        // no scale change
+                    visual.widthBoost = 1f;                   // no width boost
+                    visual.applyWetSkin = false;
+                    visual.hunchDegrees = 0f;
+                    visual.hideWeapon = false;                // weapon shown (stock posture)
+                    visual.addLantern = false;
+                    visual.swampAura = false;                 // no aura
+                    visual.proceduralBody = false;
+                }
+                else
+                {
+                    // EDITOR-FREE runtime-glb body path: the real custom mesh + its baked basecolor.
+                    visual.glbMesh = BossGlbMesh;
+                    visual.glbTexture = BossGlbTexture;
+                    visual.tint = UnityEngine.Color.white;   // do NOT green-multiply the baked mossy texture
+                    visual.scale = BossBodyScale;             // modest uniform scale; the mesh is ~2.65 tall in local space
+                    visual.widthBoost = 1f;                   // uniform: non-uniform scale would distort the real mesh
+                    visual.applyWetSkin = true;
+                    visual.smoothness = BossSmoothness;
+                    visual.metallic = BossMetallic;
+                    visual.hunchDegrees = 0f;                 // a spine bend would distort the real mesh
+                    visual.hideWeapon = BossHideWeapon;
+                    visual.addLantern = false;                // the mesh has a lantern baked into its geometry
+                    visual.swampAura = false;                 // OFF: the magenta sprite cloud obscured the custom mesh in the diorama
+                    // PROCEDURAL GOLEM BODY off (the real glb mesh is the body now); golem knobs left at defaults.
+                    visual.proceduralBody = false;
+                }
                 Content.SetEnemyVisual(boss, visual);
             }
             return boss;
@@ -703,10 +725,15 @@ namespace FTKModFramework
                 // footprint (m_MarkerScale). Best-effort + guarded; visual is logged as part of the PASS line.
                 bool visualRegistered = false; bool visualScaleOk = false; bool markerOk = false;
                 EnemyVisualPatch.EnemyVisual reg = default(EnemyVisualPatch.EnemyVisual);
+                // The visual-gate baseline lever (FTK_BASELINE_STOCK_BODY==1, see BuildBoss) deliberately registers the
+                // STOCK chassis at unit scale, so the expected body scale is 1 in that mode and BossBodyScale otherwise.
+                // When the lever is off this is byte-identical to asserting BossBodyScale (the shipped self-test).
+                bool stockBodyBaseline = Environment.GetEnvironmentVariable("FTK_BASELINE_STOCK_BODY") == "1";
+                float expectedBodyScale = stockBodyBaseline ? 1f : BossBodyScale;
                 if (boss != null && boss.m_ID != null)
                 {
                     visualRegistered = EnemyVisualPatch.TryGet(boss.m_ID, out reg);
-                    visualScaleOk = visualRegistered && Math.Abs(reg.scale - BossBodyScale) < 0.001f;
+                    visualScaleOk = visualRegistered && Math.Abs(reg.scale - expectedBodyScale) < 0.001f;
                     markerOk = Math.Abs(boss.m_MarkerScale - BossMarkerScale) < 0.001f;
                 }
                 bool visualOk = visualRegistered && visualScaleOk && markerOk;
@@ -733,7 +760,7 @@ namespace FTKModFramework
                         " notGenericBoss=" + notGenericBoss + " procs=" +
                         (procChecked ? hasProcs.ToString() : "deferred") +
                         " visualRegistered=" + visualRegistered + " visualScaleOk=" + visualScaleOk +
-                        " markerOk=" + markerOk + " (scale=" + reg.scale + " expected " + BossBodyScale +
+                        " markerOk=" + markerOk + " (scale=" + reg.scale + " expected " + expectedBodyScale +
                         ", marker=" + (boss != null ? boss.m_MarkerScale : -1f) + " expected " + BossMarkerScale + ").");
             }
             catch (Exception e)
