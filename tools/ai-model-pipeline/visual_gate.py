@@ -50,11 +50,42 @@ ROI_BOTTOM = 0.88    # drop everything below 88 percent (UI / health bar)
 ROI_LEFT = 0.04
 ROI_RIGHT = 0.96
 
-# Foreground threshold: a pixel is foreground if it is clearly brighter than the
-# dark diorama / Workbench background OR is colorful enough to be the subject.
-# Luminance is 0..255; saturation is 0..1.
-FG_LUM_FLOOR = 45.0     # background corners measure ~0.1; lit subject reaches >150
-FG_SAT_FLOOR = 0.18     # colored subject pixels even where not especially bright
+# --- Unified foreground rule (works in BOTH contexts; #70) -----------------
+# The ONE segmentation must isolate the boss against two very different
+# backgrounds, so it keys on HUE, not luminance:
+#   - IN-GAME: the boss is colorful (cool purple/teal torso, green chest, a
+#     pink/magenta cone, a bright sword) against warm desaturated tan/brown
+#     stone, warm candle alcoves, and a near-black top vignette. The stone and
+#     candles are WARM (red is the dominant channel), so any rule that demands a
+#     cool / green / magenta hue rejects them while the boss pops.
+#   - OFFLINE preview: a bright near-white emission silhouette on a near-black
+#     world. Warm/cool hue does not separate it (it is colorless), but it is very
+#     bright and unsaturated, so the bright_white clause catches it.
+# A pixel is foreground if it satisfies ANY of the four clauses below. The
+# per-channel deltas and saturation floors were tuned empirically against the
+# committed fixtures (baseline_boss.png, candidate_boss.png) and the offline
+# white render so the troll silhouette (not the room) is the largest component
+# in-game and the white body is one clean blob offline.
+FG_COOL_BR_DELTA = 10.0     # cool: blue >= red + this (purple/teal break warm)
+FG_COOL_BG_DELTA = 5.0      # ... and blue >= green - this
+FG_COOL_SAT = 0.20
+FG_GREEN_DELTA = 25.0       # green: green >= red+ AND green >= blue+ this
+FG_GREEN_SAT = 0.25
+FG_MAGENTA_RG = 40.0        # magenta/pink: red >= green + this ...
+FG_MAGENTA_BG = 25.0        # ... and blue >= green + this (green is the min)
+FG_MAGENTA_SAT = 0.30
+FG_WHITE_LUM = 200.0        # bright_white (offline silhouette): luminance above ...
+FG_WHITE_SAT = 0.25         # ... and saturation below this (near-colorless)
+
+# Morphological closing kernel, as a fraction of min(H, W). The hue rule leaves
+# thin internal gaps where the boss has dark shadow seams (between shoulder and
+# torso, around the sword); a small close bridges them so a single coherent body
+# reads as ONE component, while a genuine shatter (many separated colored shards)
+# stays fragmented. Tuned at 0.010 * min(H,W): on the 2294x1432 in-game frame the
+# stock troll closes to count=1 / fill~0.95 (pass) and the shatter stays count~6 /
+# fill~0.40 (fail); a larger kernel would wrongly fuse the shards. Normalized so
+# the 720px offline render uses a proportionally smaller kernel.
+CLOSE_KERNEL_FRAC = 0.010
 
 # Connected-component noise floor for COUNTING significant components. A
 # component counts only if it is a meaningful fraction of the LARGEST component
@@ -72,24 +103,47 @@ INCONCLUSIVE_FG_FRAC_FLOOR = 0.004  # foreground fraction of the ROI below this 
 INCONCLUSIVE_BOSS_SIZE_FLOOR = 0.01 # largest comp below this fraction of ROI -> not in frame
 CORNER_ROI_FRAC = 0.18              # centroid inside a corner box this size -> not in frame
 
-# --- Four mechanical criteria, initial thresholds (spec #66 FR-4 table) ---
-# connected (baseline-free)
-CONNECTED_FILL_FLOOR = 0.85
-CONNECTED_MAX_COMPONENTS = 2        # body plus an optional baked lantern
+# --- Four mechanical criteria, FINALIZED thresholds (#70) -----------------
+# Finalized against the real captured baseline (fixtures/baseline_boss.png) with
+# the unified hue segmentation above. Numbers verified empirically:
+#   stock troll silhouette -> connected PASS (count=1, fill~0.95), upright PASS
+#     (angle~1.9deg, aspect~1.37), centered PASS (cx~0.495, cy~0.628).
+#   runtime shatter (candidate_boss.png) -> connected FAIL (count~6, fill~0.40).
 
-# upright
+# connected (baseline-free): a coherent body is one near-solid blob; a shatter is
+# many comparable shards. Floor 0.85 of the largest component over all foreground,
+# count cap 2 (body plus an optional baked lantern). Stock troll fill ~0.95.
+CONNECTED_FILL_FLOOR = 0.85
+CONNECTED_MAX_COMPONENTS = 2
+
+# upright (angle baseline-free, aspect baseline-anchored). Stock troll major-axis
+# angle is ~1.9deg from vertical and aspect ~1.37; 15deg tolerance and a 0.9 *
+# baseline-aspect floor leave comfortable margin while a toppled / wider-than-tall
+# shatter (candidate angle ~18deg, aspect ~0.80) fails.
 UPRIGHT_ANGLE_TOL_DEG = 15.0
 UPRIGHT_ASPECT_BASELINE_FRAC = 0.9  # aspect must be >= 0.9 * baseline aspect
 
-# centered (fractions of frame size)
+# centered (fractions of frame size), anchored to baseline.centroid_norm
+# (~0.495, 0.628). The boss stands center-x but low-center-y (the diorama frames
+# it in the lower-middle), so dy is naturally larger than dx; tolerances bracket
+# normal combat-settle jitter without admitting an off-screen body.
 CENTERED_DX_TOL = 0.06
 CENTERED_DY_TOL = 0.08
 
-# scaled (ratios vs baseline; band centered on ~1.4 = BossBodyScale vs scale-1 stock)
-SCALED_HEIGHT_LO = 1.15
-SCALED_HEIGHT_HI = 1.70
-SCALED_AREA_LO = 1.30
-SCALED_AREA_HI = 2.90
+# scaled (ratios vs baseline). Decompile-verified: the custom boss body renders at
+# EnemyVisual.scale = 1.4 (localScale.Y set ABSOLUTELY on a fresh 1.0 clone in
+# EnemyVisualPatch; the game applies NO extra spawn scale, per
+# EnemyDummy.InitEnemyDummyForCombat / FTKHub.GetEnemyPrefab). So the authoritative
+# signal is the HEIGHT (Y) ratio, centered on 1.4. We do NOT key on width/diagonal
+# (X/Z carry widthBoost, broader than tall) and do NOT compare against m_MarkerScale
+# = 1.568 (a collider footprint, not visible height). With widthBoost = 1 the area
+# ratio is ~1.4^2 = 1.96, kept as a secondary check centered there. The band
+# DELIBERATELY excludes 1.0, so the scale-1.0 stock troll baseline does NOT pass
+# scaled: correct gate behavior (it is the stock chassis, not the upscaled body).
+SCALED_HEIGHT_LO = 1.20             # excludes the scale-1.0 stock troll (ratio ~1.0)
+SCALED_HEIGHT_HI = 1.65             # centered on 1.4 (1.42 mid)
+SCALED_AREA_LO = 1.45               # centered on ~1.96 (1.4^2)
+SCALED_AREA_HI = 2.60
 
 # --- Offline defaults (baseline is None) ---------------------------------
 # When no game baseline exists yet (THIS offline phase, #67), the three
@@ -126,12 +180,30 @@ def _load_baseline(baseline):
         return json.load(f)
 
 
+def _hue_foreground(r, g, b, lum, sat):
+    """Per-pixel boolean foreground from the four hue clauses (see constants).
+
+    r/g/b/lum/sat are matching float arrays. A pixel is foreground if it is a
+    cool (purple/teal), green, or magenta/pink subject color, OR a bright
+    near-white silhouette pixel (the offline render). Warm stone and warm candle
+    glow have red as the dominant channel and pass none of the colored clauses.
+    """
+    cool = (b >= r + FG_COOL_BR_DELTA) & (b >= g - FG_COOL_BG_DELTA) & (sat > FG_COOL_SAT)
+    green = (g >= r + FG_GREEN_DELTA) & (g >= b + FG_GREEN_DELTA) & (sat > FG_GREEN_SAT)
+    magenta = (r >= g + FG_MAGENTA_RG) & (b >= g + FG_MAGENTA_BG) & (sat > FG_MAGENTA_SAT)
+    white = (lum > FG_WHITE_LUM) & (sat < FG_WHITE_SAT)
+    return cool | green | magenta | white
+
+
 def _foreground_mask(rgb):
-    """Return (mask, roi_slice) for the single binary foreground mask.
+    """Return (mask, roi_slice, lum) for the single binary foreground mask.
 
     rgb is an (H, W, 3) uint8/float array. The mask is True for foreground and
     is restricted to the center ROI band; pixels outside the band are False.
-    Foreground = luminance above FG_LUM_FLOOR OR saturation above FG_SAT_FLOOR.
+    Foreground is the unified hue rule (_hue_foreground), then a small
+    size-normalized morphological close bridges shadow seams so a coherent body
+    is one component. `lum` (whole-frame luminance) is returned for the
+    inconclusive unlit check.
     """
     a = rgb.astype(np.float32)
     h, w = a.shape[0], a.shape[1]
@@ -141,15 +213,21 @@ def _foreground_mask(rgb):
     mn = a.min(axis=2)
     sat = np.where(mx > 0, (mx - mn) / np.maximum(mx, 1.0), 0.0)
 
-    fg = (lum >= FG_LUM_FLOOR) | (sat >= FG_SAT_FLOOR)
-
-    roi = np.zeros((h, w), dtype=bool)
     y0, y1 = int(ROI_TOP * h), int(ROI_BOTTOM * h)
     x0, x1 = int(ROI_LEFT * w), int(ROI_RIGHT * w)
-    roi[y0:y1, x0:x1] = True
 
-    mask = fg & roi
-    return mask, (y0, y1, x0, x1), lum
+    fg = np.zeros((h, w), dtype=bool)
+    fg[y0:y1, x0:x1] = _hue_foreground(
+        a[y0:y1, x0:x1, 0], a[y0:y1, x0:x1, 1], a[y0:y1, x0:x1, 2],
+        lum[y0:y1, x0:x1], sat[y0:y1, x0:x1],
+    )
+
+    k = max(3, int(round(CLOSE_KERNEL_FRAC * min(h, w))) | 1)  # odd, >= 3
+    mask = ndimage.binary_closing(fg, structure=np.ones((k, k), dtype=bool))
+    # Closing can only grow into the ROI interior; re-clip to the band for safety.
+    clipped = np.zeros((h, w), dtype=bool)
+    clipped[y0:y1, x0:x1] = mask[y0:y1, x0:x1]
+    return clipped, (y0, y1, x0, x1), lum
 
 
 def _pca_major_axis_angle_deg(ys, xs):
