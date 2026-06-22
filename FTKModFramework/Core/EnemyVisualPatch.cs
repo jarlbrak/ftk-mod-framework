@@ -952,45 +952,13 @@ namespace FTKModFramework.Core
                         smr.bones = rebind;
                     }
 
-                    // TEMP scale lever (#74/#75): env-tunable for gate sweep; bake const + drop env in #75.
-                    // The combat body is a fresh scale-1.0 clone (EnemyDummy sets only localPosition/localRotation,
-                    // never scale), so BossBodyScale wired in Content/ never reaches the diorama body. Apply the scale
-                    // here at spawn on the body root: smr.transform.parent is 'enTrollCave(Clone)', the root holding
-                    // BOTH the mesh (enTroll01) and the skeleton (Root_M), so scaling it uniformly scales the whole
-                    // boss. Idempotent per clone (re-setting the same localScale each spawn is harmless).
-                    float sy;
-                    {
-                        string s = System.Environment.GetEnvironmentVariable("FTK_BOSS_SCALE");
-                        float f;
-                        if (string.IsNullOrEmpty(s) ||
-                            !float.TryParse(s, System.Globalization.NumberStyles.Float,
-                                System.Globalization.CultureInfo.InvariantCulture, out f) ||
-                            f <= 0f)
-                        {
-                            f = 2.0f;
-                        }
-                        sy = f;
-                    }
-                    float wxz;
-                    {
-                        string s = System.Environment.GetEnvironmentVariable("FTK_BOSS_WIDTH");
-                        float f;
-                        if (string.IsNullOrEmpty(s) ||
-                            !float.TryParse(s, System.Globalization.NumberStyles.Float,
-                                System.Globalization.CultureInfo.InvariantCulture, out f) ||
-                            f <= 0f)
-                        {
-                            f = 1.0f;
-                        }
-                        wxz = f;
-                    }
-                    float sxz = sy * wxz;
+                    // Boss body scale: the custom AI golem mesh is ~0.7x the stock troll's on-screen height,
+                    // so scale the body root up to a boss-appropriate size. The combat body is a fresh scale-1.0
+                    // clone (EnemyDummy never scales it), so apply it here at spawn. Idempotent per clone.
+                    const float BossBodyScale = 2.0f;
                     Transform bodyRoot = smr.transform.parent;
                     if (bodyRoot == null) bodyRoot = smr.transform;
-                    bodyRoot.localScale = new Vector3(sxz, sy, sxz);
-                    Plugin.Log.LogInfo("[enemy-visual] boss body scale: set '" + bodyRoot.name +
-                        "'.localScale = (" + sxz + ", " + sy + ", " + sxz + ") (FTK_BOSS_SCALE=" + sy +
-                        ", FTK_BOSS_WIDTH=" + wxz + ") for '" + enemyId + "'.");
+                    bodyRoot.localScale = Vector3.one * BossBodyScale;
 
                     // OPTIONAL TEXTURE: load a .png from FTKModFramework_content/models/<glbTexture> and push it into
                     // the body material's _MainTex (same .materials loop as the bundle path). A miss is non-fatal.
@@ -1003,26 +971,6 @@ namespace FTKModFramework.Core
                             {
                                 Texture2D tex = new Texture2D(2, 2);
                                 tex.LoadImage(System.IO.File.ReadAllBytes(texPath));
-
-                                // TEMP emission lever (#74/#75): env-tunable for gate sweep; bake const + drop env in #75.
-                                // Multiplies the self-illumination emission color so the golem can be swept up until the
-                                // whole body reads in the Flooded Crypt's dim cool light (default 1.0 = current behavior,
-                                // byte-identical when unset/1). Read once before the material loop.
-                                float emit;
-                                {
-                                    string es = System.Environment.GetEnvironmentVariable("FTK_BOSS_EMIT");
-                                    float f;
-                                    if (string.IsNullOrEmpty(es) ||
-                                        !float.TryParse(es, System.Globalization.NumberStyles.Float,
-                                            System.Globalization.CultureInfo.InvariantCulture, out f) ||
-                                        f < 0f)
-                                    {
-                                        f = 1.0f;
-                                    }
-                                    emit = f;
-                                }
-                                Plugin.Log.LogInfo("[enemy-visual] boss emission: _EmissionColor base*" + emit +
-                                    " (FTK_BOSS_EMIT) for '" + enemyId + "'.");
 
                                 Material[] gmats = smr.materials;
                                 for (int i = 0; i < gmats.Length; i++)
@@ -1038,7 +986,7 @@ namespace FTKModFramework.Core
                                     {
                                         m.EnableKeyword("_EMISSION");
                                         if (m.HasProperty("_EmissionMap")) m.SetTexture("_EmissionMap", tex);
-                                        m.SetColor("_EmissionColor", new Color(0.45f * emit, 0.50f * emit, 0.40f * emit));
+                                        m.SetColor("_EmissionColor", new Color(0.45f, 0.50f, 0.40f));
                                     }
                                 }
                             }
