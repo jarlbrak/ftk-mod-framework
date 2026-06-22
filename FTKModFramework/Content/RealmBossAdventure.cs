@@ -87,6 +87,14 @@ namespace FTKModFramework
             "drowned, and the crew was never counted out. Now the water has grown a taste for the living, and the " +
             "village upstream is running short of neighbors.";
 
+        // EDITOR-FREE runtime-glb body: a bespoke rigged mesh shipped at FTKModFramework_content/models/, name-keyed
+        // to the vanilla troll skeleton and skinned at runtime over the live bindposes (no Unity editor, no
+        // AssetBundle). The .png is the baked mossy basecolor pushed into the body _MainTex. Set on the visual below
+        // (Content.SetEnemyBodyMeshFromGlb plumbing) so the Foreman renders as the real custom model, not the recolored
+        // troll chassis.
+        private const string BossGlbMesh = "mudwretch_rigged.glb";
+        private const string BossGlbTexture = "mudwretch_basecolor.png";
+
         // The boss display name + a wry, lightly-grim FTK-tone description (shown verbatim).
         private const string BossDisplay = "Mudwretch Foreman";
         private const string BossDescription =
@@ -352,35 +360,32 @@ namespace FTKModFramework
                 // whichever attaches; both are confirmed-present FTK_proficiencyTable.ID keys.
                 Content.AttachEnemyProficiencies(boss, BossProficiencies);
 
-                // Custom VISUAL identity: recolor the body mossy brown-green, give it a wet-bog skin, hulk it into a
-                // non-uniform broad silhouette, hunch it forward, hide the axe, and hand it a glowing lantern so the
-                // chosen hulking-humanoid chassis reads as the victory-screen bog brute. Applied per-combat to the
-                // spawned clone (leak-safe; determinism/save-safe: enemy visuals never network or persist).
+                // Custom VISUAL identity: the Foreman now wears a BESPOKE RUNTIME-GLB MESH (BossGlbMesh + its baked
+                // mossy basecolor BossGlbTexture), name-keyed to the vanilla troll skeleton and skinned over the live
+                // bindposes at spawn (EDITOR-FREE; see Core/RuntimeGltfMeshLoader). Because the real mesh carries its
+                // own mossy texture and a baked lantern, the old chassis-recolor effects are stood DOWN so they do not
+                // fight the model: tint is WHITE (no green-multiply over the baked basecolor), the procedural lantern
+                // is OFF (the mesh has one in its geometry), and the non-uniform width/hunch are neutralized (they
+                // would distort a real mesh). We KEEP the swamp aura and the hidden weapon, and a modest uniform scale
+                // (BossBodyScale) so the ~2.65-tall mesh reads as an imposing boss. Applied per-combat to the spawned
+                // clone (leak-safe; determinism/save-safe: enemy visuals never network or persist; the .glb+png ship
+                // inside the mod, byte-identical on every co-op client).
                 EnemyVisualPatch.EnemyVisual visual = default(EnemyVisualPatch.EnemyVisual);
-                visual.tint = BossTint;
-                visual.scale = BossBodyScale;
-                visual.widthBoost = BossWidthBoost;
+                // EDITOR-FREE runtime-glb body path: the real custom mesh + its baked basecolor.
+                visual.glbMesh = BossGlbMesh;
+                visual.glbTexture = BossGlbTexture;
+                visual.tint = UnityEngine.Color.white;   // do NOT green-multiply the baked mossy texture
+                visual.scale = BossBodyScale;             // modest uniform scale; the mesh is ~2.65 tall in local space
+                visual.widthBoost = 1f;                   // uniform: non-uniform scale would distort the real mesh
                 visual.applyWetSkin = true;
                 visual.smoothness = BossSmoothness;
                 visual.metallic = BossMetallic;
-                visual.hunchDegrees = BossHunchDegrees;
+                visual.hunchDegrees = 0f;                 // a spine bend would distort the real mesh
                 visual.hideWeapon = BossHideWeapon;
-                visual.addLantern = true;
-                visual.lanternColor = LanternColor;
-                visual.lanternEmission = LanternEmission;
-                visual.lanternLightColor = LanternLightColor;
-                visual.lanternSize = LanternSize;
-                visual.lanternLightRange = LanternLightRange;
-                visual.lanternLightIntensity = LanternLightIntensity;
-                visual.swampAura = BossSwampAura;
-                // PROCEDURAL GOLEM BODY: hide the troll chassis mesh and build a runtime low-poly mossy bog-golem from
-                // bone-segment + joint-blob meshes parented to the skeleton (animates with the bones). The recolor /
-                // wet-skin above now harmlessly tints a hidden renderer; the lantern + aura + hunch still read on top.
-                visual.proceduralBody = BossProceduralBody;
-                visual.golemTorsoRadius = GolemTorsoRadius;
-                visual.golemLimbRadius = GolemLimbRadius;
-                visual.golemLumpiness = GolemLumpiness;
-                visual.golemEyeGlow = GolemEyeGlow;
+                visual.addLantern = false;                // the mesh has a lantern baked into its geometry
+                visual.swampAura = false;                 // OFF: the magenta sprite cloud obscured the custom mesh in the diorama
+                // PROCEDURAL GOLEM BODY off (the real glb mesh is the body now); golem knobs left at defaults.
+                visual.proceduralBody = false;
                 Content.SetEnemyVisual(boss, visual);
             }
             return boss;

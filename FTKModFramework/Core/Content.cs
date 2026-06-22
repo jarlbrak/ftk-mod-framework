@@ -366,6 +366,51 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
+        /// RUNTIME glTF (.glb) custom model (EDITOR-FREE): give a registered ENEMY an artist-authored body MESH from a
+        /// shipped <c>.glb</c>, REUSING the enemy's existing skeleton + bindposes + animations, with NO Unity editor
+        /// and NO AssetBundle build step. On each combat spawn the enemy's freshly-instantiated body clone (a
+        /// CharacterEventListener) has its body SkinnedMeshRenderer's <c>sharedMesh</c> set to a Mesh built at runtime
+        /// from the <c>.glb</c> (and, if <paramref name="textureFileName"/> is given, the body material's
+        /// <c>_MainTex</c> set to a <c>Texture2D</c> loaded from a shipped <c>.png</c>). Applied via the same per-clone
+        /// postfix on <c>EnemyDummy.InitEnemyDummyForCombat</c> that drives the bundle path and the procedural visuals.
+        ///
+        /// The <c>.glb</c> must be KEYED TO THE VANILLA SKELETON BY BONE NAME: its per-vertex joints index bone names
+        /// that are remapped onto the live <c>smr.bones[]</c>, and the LIVE bindposes are reused (the glb's own
+        /// inverseBindMatrices are ignored), so the vanilla animations deform it correctly. Ship the <c>.glb</c> (and
+        /// optional <c>.png</c>) at <c>FTKModFramework_content/models/</c>.
+        ///
+        /// VISUAL-ONLY and DETERMINISM- / SAVE-SAFE: the mesh/texture never network or persist; the only shared state
+        /// is the enemy enum-int identity (deterministic via IdAllocator). As long as the <c>.glb</c>+<c>.png</c> ship
+        /// INSIDE the mod (byte-identical on every co-op client, no per-machine paths, no streaming), game state stays
+        /// byte-for-byte identical in co-op. If the glb fails to load it is LOGGED and the original mesh (or a
+        /// registered AssetBundle mesh, or the procedural golem) is left intact. Returns true if the request was
+        /// registered.
+        /// </summary>
+        /// <param name="enemy">The registered enemy row whose spawned body mesh to swap.</param>
+        /// <param name="glbFileName">.glb file under FTKModFramework_content/models/ (e.g. "mybeast.glb").</param>
+        /// <param name="textureFileName">Optional .png file under the same folder for the body material's _MainTex.</param>
+        public static bool SetEnemyBodyMeshFromGlb(FTK_enemyCombat enemy, string glbFileName,
+            string textureFileName = null)
+        {
+            if (enemy == null)
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyMeshFromGlb: enemy is null; no mesh registered.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(glbFileName))
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyMeshFromGlb: glbFileName is required; '" + enemy.m_ID +
+                    "' unchanged.");
+                return false;
+            }
+
+            EnemyVisualPatch.RegisterGlbMeshSwap(enemy.m_ID, glbFileName, textureFileName);
+            Plugin.Log.LogInfo("SetEnemyBodyMeshFromGlb: '" + enemy.m_ID + "' glb='" + glbFileName + "'" +
+                (string.IsNullOrEmpty(textureFileName) ? "" : " texture='" + textureFileName + "'") + ".");
+            return true;
+        }
+
+        /// <summary>
         /// FULL-PREFAB custom model (for a fully BESPOKE rig): give a registered ENEMY a whole artist-authored body
         /// prefab from a shipped AssetBundle, repointing <c>FTK_enemyCombat.m_EnemyAsset</c> at the prefab's
         /// <see cref="CharacterEventListener"/>. The prefab is loaded, Instantiated once (kept persistent via

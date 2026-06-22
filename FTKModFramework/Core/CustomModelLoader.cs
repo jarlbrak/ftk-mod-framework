@@ -33,6 +33,18 @@ namespace FTKModFramework.Core
         private const string ContentFolder = "FTKModFramework_content";
         private const string ModelsSubFolder = "models";
 
+        /// <summary>
+        /// Resolve the absolute path to a file shipped under
+        /// <c>&lt;pluginDir&gt;/FTKModFramework_content/models/&lt;fileName&gt;</c>. Shared so other Core loaders
+        /// (e.g. <see cref="RuntimeGltfMeshLoader"/>) resolve the models folder the SAME way as the bundle path,
+        /// without duplicating the two ship-folder constants. Never throws.
+        /// </summary>
+        internal static string ResolveModelPath(string fileName)
+        {
+            string pluginDir = Path.GetDirectoryName(typeof(Plugin).Assembly.Location);
+            return Path.Combine(Path.Combine(Path.Combine(pluginDir, ContentFolder), ModelsSubFolder), fileName);
+        }
+
         // Loaded bundles, keyed by the bundle file name (not the full path). AssetBundle.LoadFromFile on the SAME
         // path twice throws ("The AssetBundle ... can't be loaded because another AssetBundle with the same files
         // is already loaded"), so we load each bundle exactly once and reuse the handle.
@@ -60,8 +72,7 @@ namespace FTKModFramework.Core
             string path = null;
             try
             {
-                string pluginDir = Path.GetDirectoryName(typeof(Plugin).Assembly.Location);
-                path = Path.Combine(Path.Combine(Path.Combine(pluginDir, ContentFolder), ModelsSubFolder), bundleFileName);
+                path = ResolveModelPath(bundleFileName);
 
                 if (!File.Exists(path))
                 {

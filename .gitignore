@@ -39,3 +39,21 @@ __pycache__/
 # Claude Code private tooling (local-only, never committed)
 AGENTS.md
 .claude/
+
+# AI model pipeline: heavy raw generated meshes are reproducible; keep only lowpoly + concept
+ai-model-gen/*.obj
+ai-model-gen/*_triposr.glb
+.venv-3dgen/
+tools/trellis-mac/
+ai-model-gen/mudwretch_trellis.glb
+tools/trellis-mac/mudwretch_trellis*
+
+# Ship ONLY the final rigged glb + its AI-baked texture. Everything else under ai-model-gen/
+# (raw troll skeleton/mesh extracts, heavy fbx/glb intermediates, dev renders) is reproducible
+# via tools/ai-model-pipeline/ and/or is game-derived, so it is not committed.
+ai-model-gen/*
+!ai-model-gen/mudwretch_rigged.glb
+!ai-model-gen/mudwretch_basecolor.png
+
+# One-off task prompt (local scratch)
+ULTRACODE_PROMPT_finish_ai_mesh_boss.md

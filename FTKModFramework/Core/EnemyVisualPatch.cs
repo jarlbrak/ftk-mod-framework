@@ -60,6 +60,10 @@ namespace FTKModFramework.Core
             public bool hideWeapon;    // disable the weapon renderers so the held item reads as the lantern
 
             // ---- procedural lantern (best-effort, guarded) ----
+            // OPTIONAL visual knobs, set by a caller when addLantern is on. The bundled demo now ships the runtime-glb
+            // body (which carries a baked lantern) and leaves these at defaults, so no in-assembly code assigns them;
+            // silence "never assigned" exactly like the other data-carrier structs (ContentFile / ModManifest).
+#pragma warning disable CS0649
             public bool  addLantern;
             public Color lanternColor;       // body albedo (warm amber)
             public Color lanternEmission;    // emission (warm orange, intensity-scaled by the caller)
@@ -67,6 +71,7 @@ namespace FTKModFramework.Core
             public float lanternSize;        // desired WORLD size of the lantern body cube (units)
             public float lanternLightRange;
             public float lanternLightIntensity;
+#pragma warning restore CS0649
 
             // ---- swamp aura (best-effort, guarded) ----
             public bool swampAura;           // a procedural ParticleSystem of bog flies / marsh gas around the torso
@@ -75,12 +80,16 @@ namespace FTKModFramework.Core
             // When true, HIDE the chassis' skinned mesh and assemble a runtime low-poly mossy BOG-GOLEM from
             // bone-segment + joint-blob meshes parented to the existing skeleton bones, so the new body animates with
             // the skeleton. Visual-only / per-clone / deterministic (the meshes are generated from index hashes, no
-            // Random), exactly like the rest of this struct: nothing networks or persists.
+            // Random), exactly like the rest of this struct: nothing networks or persists. OPTIONAL knobs (set when
+            // proceduralBody is on); the bundled demo now ships the runtime-glb body and leaves these at defaults, so
+            // no in-assembly code assigns them; silence "never assigned" like the other data-carrier structs.
+#pragma warning disable CS0649
             public bool  proceduralBody;
             public float golemTorsoRadius;   // world radius of the spine/torso segments (thickest)
             public float golemLimbRadius;    // world radius of the arm/leg segments (medium; tapers to extremities)
             public float golemLumpiness;     // 0 = clean prisms; ~0.15 = chunky mossy lumps (index-derived, no Random)
             public Color golemEyeGlow;       // emissive eye color (sickly green / warm) on the two head eye blobs
+#pragma warning restore CS0649
 
             // ---- AssetBundle mesh swap (best-effort, guarded) ----
             // When meshBundle is set, swap the chassis body SkinnedMeshRenderer's sharedMesh to a bundle-loaded Mesh,
@@ -91,6 +100,17 @@ namespace FTKModFramework.Core
             public string meshBundle;        // bundle file name under FTKModFramework_content/models/ (null disables)
             public string meshName;          // Mesh asset name inside the bundle
             public string meshTextureName;   // optional Texture2D asset name to push into the body material's _MainTex
+
+            // ---- runtime glTF (.glb) mesh swap (best-effort, guarded; EDITOR-FREE) ----
+            // When glbMesh is set, swap the chassis body SkinnedMeshRenderer's sharedMesh to a Mesh built at runtime
+            // from a shipped .glb, name-keyed to the VANILLA skeleton (the glb's per-vertex joints index bone NAMES,
+            // remapped onto the live smr.bones[], reusing the live bindposes). Unlike meshBundle this needs NO Unity
+            // editor and NO AssetBundle build: pure-managed glTF parsing (net35). Optionally also load a .png and push
+            // it into the body material's _MainTex. Visual-only / per-clone / deterministic (the .glb+png ship inside
+            // the mod, byte-identical on every client), exactly like the rest of this struct: nothing networks or
+            // persists. See Content.SetEnemyBodyMeshFromGlb / RuntimeGltfMeshLoader.
+            public string glbMesh;           // .glb file name under FTKModFramework_content/models/ (null disables)
+            public string glbTexture;        // optional .png file name under the same folder for the body _MainTex
         }
 
         // Name of the procedural lantern parent, used for the per-clone idempotency check.
@@ -171,6 +191,29 @@ namespace FTKModFramework.Core
             _visuals[enemyId] = v;
         }
 
+        /// <summary>
+        /// Register (or MERGE) just the runtime .glb mesh-swap fields onto an enemy id, leaving any other visual knobs
+        /// already registered for that id untouched. If no entry exists yet, a neutral one is created (scale 1,
+        /// identity tint, widthBoost 1) so the swap alone is harmless. Editor-free path: name-keyed to the vanilla
+        /// skeleton, reusing the live bindposes. Internal: callers go through
+        /// <see cref="Content.SetEnemyBodyMeshFromGlb"/>.
+        /// </summary>
+        internal static void RegisterGlbMeshSwap(string enemyId, string glbMesh, string glbTexture)
+        {
+            if (string.IsNullOrEmpty(enemyId)) return;
+            EnemyVisual v;
+            if (!_visuals.TryGetValue(enemyId, out v))
+            {
+                v = default(EnemyVisual);
+                v.tint = Color.white; // neutral: a glb swap on its own must not recolor the body
+                v.scale = 1f;
+                v.widthBoost = 1f;
+            }
+            v.glbMesh = glbMesh;
+            v.glbTexture = glbTexture;
+            _visuals[enemyId] = v;
+        }
+
         /// <summary>True if an enemy id has a registered visual override (used by self-tests).</summary>
         internal static bool TryGet(string enemyId, out EnemyVisual visual)
         {
@@ -235,12 +278,14 @@ namespace FTKModFramework.Core
                     }
                 }
 
-                // ASSETBUNDLE MESH SWAP (best-effort, guarded): repoint the chassis body SkinnedMeshRenderer's
-                // sharedMesh to an artist-authored Mesh loaded from a shipped bundle, reusing the vanilla skeleton +
-                // bindposes + animations. Applied to THIS fresh clone only; on any failure the original mesh (or the
+                // MESH SWAP (best-effort, guarded): repoint the chassis body SkinnedMeshRenderer's sharedMesh to a
+                // custom Mesh, reusing the vanilla skeleton + bindposes + animations. Two sources: a runtime .glb
+                // (glbMesh, EDITOR-FREE; tried FIRST inside ApplyMeshSwap) or an artist-authored AssetBundle
+                // (meshBundle/meshName). Applied to THIS fresh clone only; on any failure the original mesh (or the
                 // procedural golem, if also requested) is left intact. Per-clone re-application is correct (the clone
                 // is brand-new every combat), so there is no _done guard.
-                if (!string.IsNullOrEmpty(v.meshBundle) && !string.IsNullOrEmpty(v.meshName))
+                if (!string.IsNullOrEmpty(v.glbMesh) ||
+                    (!string.IsNullOrEmpty(v.meshBundle) && !string.IsNullOrEmpty(v.meshName)))
                 {
                     try { ApplyMeshSwap(ec.m_ID, cel, v); }
                     catch (Exception me) { Plugin.Log.LogWarning("[enemy-visual] mesh swap failed: " + me.Message); }
@@ -879,6 +924,76 @@ namespace FTKModFramework.Core
                     "'; original mesh kept.");
                 return;
             }
+
+            // RUNTIME glTF (.glb) PATH (EDITOR-FREE), tried FIRST: build a Mesh from a shipped .glb, name-keyed to the
+            // VANILLA skeleton, REUSING the live troll bindposes (captured BEFORE the swap). On success swap the mesh
+            // (+ optional .png into _MainTex) and return; on a null load LOG and fall through to the bundle path below
+            // (so a registered bundle still works). Never throws (the loader logs + returns null on any failure).
+            if (!string.IsNullOrEmpty(v.glbMesh))
+            {
+                // Capture the LIVE troll bindposes BEFORE swapping. Unity guarantees mesh.bindposes[i] pairs with
+                // smr.bones[i], so these drive the name-remapped skinning on the new mesh.
+                Matrix4x4[] origBind = (smr.sharedMesh != null) ? smr.sharedMesh.bindposes : null;
+                Mesh gmesh = RuntimeGltfMeshLoader.LoadSkinnedGlb(v.glbMesh, smr.bones, origBind);
+                if (gmesh != null)
+                {
+                    smr.sharedMesh = gmesh;
+
+                    // OPTIONAL TEXTURE: load a .png from FTKModFramework_content/models/<glbTexture> and push it into
+                    // the body material's _MainTex (same .materials loop as the bundle path). A miss is non-fatal.
+                    if (!string.IsNullOrEmpty(v.glbTexture))
+                    {
+                        try
+                        {
+                            string texPath = CustomModelLoader.ResolveModelPath(v.glbTexture);
+                            if (System.IO.File.Exists(texPath))
+                            {
+                                Texture2D tex = new Texture2D(2, 2);
+                                tex.LoadImage(System.IO.File.ReadAllBytes(texPath));
+                                Material[] gmats = smr.materials;
+                                for (int i = 0; i < gmats.Length; i++)
+                                {
+                                    Material m = gmats[i];
+                                    if (m == null) continue;
+                                    if (m.HasProperty("_MainTex")) m.SetTexture("_MainTex", tex);
+                                    else m.mainTexture = tex;
+                                    // Self-illuminate with the baked basecolor so the golem READS in the
+                                    // Flooded Crypt's dim cool light (which otherwise mutes the mossy texture
+                                    // to a dark purple). Subtle moss-grey emission, texture-modulated.
+                                    if (m.HasProperty("_EmissionColor"))
+                                    {
+                                        m.EnableKeyword("_EMISSION");
+                                        if (m.HasProperty("_EmissionMap")) m.SetTexture("_EmissionMap", tex);
+                                        m.SetColor("_EmissionColor", new Color(0.45f, 0.50f, 0.40f));
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Plugin.Log.LogWarning("[enemy-visual] glb texture: not found at '" + texPath +
+                                    "' for '" + enemyId + "'; mesh applied without it.");
+                            }
+                        }
+                        catch (Exception te)
+                        {
+                            Plugin.Log.LogWarning("[enemy-visual] glb texture load failed for '" + enemyId + "': " +
+                                te.Message + "; mesh applied without it.");
+                        }
+                    }
+
+                    Plugin.Log.LogInfo("[enemy-visual] mesh swap: set body mesh from runtime glb '" + v.glbMesh +
+                        "' (SMR via " + via + ")" + (string.IsNullOrEmpty(v.glbTexture) ? "" : " + texture '" +
+                        v.glbTexture + "'") + " for '" + enemyId + "'.");
+                    return;
+                }
+
+                Plugin.Log.LogWarning("[enemy-visual] mesh swap: runtime glb '" + v.glbMesh + "' did not load for '" +
+                    enemyId + "'; falling back to the bundle path (if any).");
+            }
+
+            // ASSETBUNDLE PATH (unchanged): only runs if a bundle is registered. If only a glb was registered and it
+            // failed to load, both names are empty here and the body keeps its original/procedural mesh.
+            if (string.IsNullOrEmpty(v.meshBundle) || string.IsNullOrEmpty(v.meshName)) return;
 
             Mesh mesh = CustomModelLoader.LoadMesh(v.meshBundle, v.meshName);
             if (mesh == null)

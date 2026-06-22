@@ -9,21 +9,71 @@ never written into a save. The only shared state is the enemy's deterministic en
 `IdAllocator`). So a model is co-op- and save-safe on exactly one condition: **the AssetBundle ships inside
 the mod and is byte-identical on every client**. No per-machine paths, no streaming, no downloading.
 
-There are two paths. Pick based on the rig you have.
+There are three paths. Pick based on the rig you have and whether you can run a Unity editor.
 
-| Path | API | Use when | Reuses vanilla animations? |
-|---|---|---|---|
-| Mesh swap (recommended) | `Content.SetEnemyBodyMesh` | You reskin an existing creature's rig | Yes |
-| Full prefab | `Content.SetEnemyBodyFromBundle` | You have a fully bespoke rig | No (you ship your own) |
+| Path | API | Use when | Needs Unity editor? | Reuses vanilla animations? |
+|---|---|---|---|---|
+| Runtime glTF (recommended, editor-free) | `Content.SetEnemyBodyMeshFromGlb` | You reskin an existing creature's rig, with NO Unity 2017 editor | No | Yes |
+| Mesh swap (AssetBundle) | `Content.SetEnemyBodyMesh` | You reskin a rig and have the editor | Yes | Yes |
+| Full prefab | `Content.SetEnemyBodyFromBundle` | You have a fully bespoke rig | Yes | No (you ship your own) |
 
-Ship the bundle at:
+Ship the asset at:
 
 ```
-<game>/BepInEx/plugins/FTKModFramework_content/models/<yourbundle>.unity3d
+<game>/BepInEx/plugins/FTKModFramework_content/models/<file>      # .glb (Path A0) or .unity3d (Paths A/B)
 ```
 
 (`FTKModFramework_content/` is the same folder the framework already uses for adventure art. The `models/`
 subfolder is created/expected by the loader.)
+
+---
+
+## Path A0: Runtime glTF mesh swap (recommended, editor-free)
+
+The mesh swap **without a Unity editor**. The framework parses a self-format `.glb` at runtime (a pure
+net35/Mono glTF reader, `Core/RuntimeGltfMeshLoader`), builds the `Mesh` in C#, and swaps it onto the
+vanilla body `SkinnedMeshRenderer` exactly like Path A, reusing the vanilla skeleton + animations. No
+AssetBundle, no Unity 2017 editor, no license activation.
+
+### The non-standard glb contract
+
+This loader is paired with the mod's own exporter (`tools/ai-model-pipeline/05b_rig_numpy.py`), NOT a
+general glTF reader. The `.glb`:
+
+- stores vertex POSITIONs **already in Unity mesh-local space** (no axis/handedness conversion on read);
+- is keyed to the live skeleton by **bone NAME**: each per-vertex `JOINTS_0` slot indexes `skins[0].joints`,
+  and `nodes[joint].name` is the vanilla bone name. At spawn the loader reads the live `smr.bones[i].name`
+  and remaps every influence onto the live bone index, so it is robust to runtime bone-order differences
+  (getting that wrong is what renders an exploded mesh);
+- carries the vanilla bind poses as `inverseBindMatrices` (the loader uses these, falling back to the live
+  `sharedMesh.bindposes`); must be `< 65,535` verts (Unity 2017.2 has no 32-bit mesh index support).
+
+### Author the mesh (editor-free pipeline)
+
+`tools/ai-model-pipeline/` runs end to end on macOS/Linux with Blender + a Python venv, no Unity:
+
+1. `04b_extract_troll_skinned.py` (UnityPy) extracts the vanilla `enTroll01` skinned mesh + 37-bone
+   skeleton + bind poses from the game's `resources.assets` into `troll_skinned.npz` / `troll_skel.json`.
+2. Decimate your AI/source mesh in headless Blender (geometry only) to a Unity-1.0 budget (`< 65k` verts).
+3. `05b_rig_numpy.py` (numpy, all in Unity coordinates) aligns the mesh into the troll's mesh-local space,
+   transfers skin weights from the vanilla troll by nearest surface, optionally welds + smooths + poses the
+   arms, and writes the rigged `.glb` keyed by the 37 bone names. `--rigid <bone>` weights everything to one
+   bone (a stable prop that cannot deform-spike, good for a stone golem with mismatched proportions);
+   `--posearms <deg>` drops the T-pose arms to the sides.
+
+### Wire it up
+
+```csharp
+// editor-free; ship mudwretch_rigged.glb + mudwretch_basecolor.png at FTKModFramework_content/models/
+Content.SetEnemyBodyMeshFromGlb(enemy, "mudwretch_rigged.glb", "mudwretch_basecolor.png");
+```
+
+The texture is loaded from the `.png` via `Texture2D.LoadImage` and pushed into the body material's
+`_MainTex` (and a subtle `_EmissionColor` so it reads in dim dioramas). The loader **never throws**: any
+parse/decode/bone-name miss is logged and the original (or procedural) body is kept.
+
+> Shipped demo: the Flooded Crypt boss "Mudwretch Foreman" (`RealmBossAdventure`) renders an AI-generated
+> mossy bog-golem this way, with the procedural golem, recolor, and lantern stood down. Verified in-game.
 
 ---
 
