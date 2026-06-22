@@ -251,8 +251,10 @@ numbers below are copied verbatim from `visual_gate.py`.
   `component_count <= 2`. A coherent body is one near-solid blob (plus at most an
   optional baked lantern); a shatter is many comparable shards.
 - **upright**: major-axis angle `<= 15deg` from vertical AND
-  `aspect >= 0.9 * baseline_aspect`. The stock troll is `angle ~1.9deg`,
-  `aspect ~1.37`.
+  `aspect >= 0.9 * baseline_aspect` (the baseline aspect is read from
+  `baseline.json`; it is mildly pose-dependent, ~1.1 to 1.4, so the angle is the
+  primary upright signal and the aspect a secondary floor). The stock troll sits
+  near `angle ~1.5deg`.
 - **centered** (anchored to `baseline.centroid_norm` ~ `0.495, 0.628`):
   `|cx - baseline_cx| <= 0.06` AND `|cy - baseline_cy| <= 0.08`. The diorama
   frames the boss center-x but low-center-y, so the dy tolerance is the larger.
@@ -281,6 +283,20 @@ active + camera/modal settled" rather than the hero's first turn. A black or
 unlit frame from that fallback is caught by the `unlit-or-empty-frame`
 INCONCLUSIVE before any PASS/FAIL is computed, so the anchor fallback can never
 yield a false PASS.
+
+Segmentation scope (read before applying the gate to a NEW creature). The
+in-game foreground mask in `visual_gate._hue_foreground` is tuned to the
+Mudwretch Foreman palette: a few hue clauses (cool purple/teal, green, magenta,
+plus bright-white for the offline silhouette) that separate the boss from the
+warm desaturated stone of the Flooded Crypt. This is a deliberate single-creature
+choice (spec #66 NFR-4). A custom creature whose dominant hue overlaps the warm
+stone, or that is mostly grey/tan, will NOT be isolated correctly by these clauses
+and would read a confident-but-wrong verdict. Before trusting the gate on a new
+creature, re-tune `_hue_foreground` against that creature's captured frames and
+re-validate it isolates the body (annotated mask) on a coherent capture and stays
+fragmented on a shattered one. The four mechanical criteria and the
+INCONCLUSIVE/baseline machinery are creature-agnostic; only this color front-end
+is creature-specific.
 
 ### Worked example: the Mudwretch Foreman
 

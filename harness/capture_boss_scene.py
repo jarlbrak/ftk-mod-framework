@@ -291,26 +291,36 @@ def enter_flooded_crypt(max_tries=10, settle_s=1.0):
                        "FloodedCrypt not enterable after %d tries: %s" % (max_tries, last_detail))
 
 
-def drain_messages(max_calls=8):
-    """Dismiss any queued story / boss-intro messages until the queue is empty.
+def _try_dismiss(action):
+    """Post a dismiss action; return True only if it cleared something (ok:true).
 
-    The Hollow Mire run opens a StoryQuestMessage modal after start_run (it blocks
-    enter_dungeon) and re-fires the boss-intro dialog in combat (it blocks the
-    hero turn). dismiss_message returns {ok:true} while a message is queued and
-    {ok:false, error:"no message open"} once drained, so that {ok:false} is the
-    NATURAL terminal of draining, not a failure; this helper therefore posts
-    dismiss_message directly instead of via act() (which raises on {ok:false}).
-    Best-effort: a transport error here is surfaced by the next real step. NEVER
-    uses `advance` (which would end the turn and black out the diorama)."""
+    {ok:false} (nothing to clear) and any transport hiccup return False, so the
+    caller can stop once neither dismiss kind clears anything."""
+    try:
+        status, _ctype, body = _post_json(
+            "/action", {"action": action, "args": {}}, ACTION_TIMEOUT)
+    except (urllib.error.URLError, OSError):
+        return False
+    result = _json_or_empty(body)
+    return status == 200 and isinstance(result, dict) and bool(result.get("ok", False))
+
+
+def drain_messages(max_calls=8):
+    """Clear any open story message OR combat turn-prep dialog before acting/capture.
+
+    Two popup kinds block or occlude the boss: the StoryQuestMessage (opens after
+    start_run, blocking enter_dungeon, and re-fires in combat) and the "Player's
+    Turn / press Ready" turn-prep dialog that appears when the hero turn readies
+    and OVERLAYS the boss's upper body (it would corrupt the silhouette). Both
+    return {ok:true} while there is something to clear and {ok:false} once drained
+    (the natural terminal, not a failure), and BOTH are distinct from `advance`
+    (which would end the turn and black out the diorama). dismiss_message clears
+    the message; dismiss_dialog clears the turn-prep dialog. We alternate until
+    neither clears anything."""
     for _ in range(max_calls):
-        try:
-            status, _ctype, body = _post_json(
-                "/action", {"action": "dismiss_message", "args": {}}, ACTION_TIMEOUT)
-        except (urllib.error.URLError, OSError):
-            return
-        result = _json_or_empty(body)
-        if status != 200 or not isinstance(result, dict) or not result.get("ok", False):
-            return  # "no message open" (or transport hiccup): queue drained.
+        cleared = _try_dismiss("dismiss_message") or _try_dismiss("dismiss_dialog")
+        if not cleared:
+            return  # nothing left to clear
 
 
 def screenshot(save_path, step):
@@ -395,11 +405,48 @@ def wait_for_lit_combat(step):
 # The documented boss sequence (everything up to and including the LIT frame).
 # --------------------------------------------------------------------------- #
 
-def run_boss_sequence(frame_path):
+def _coherence_fill(frame_path):
+    """Largest-component fill fraction of a frame (0.0 if analyze is degenerate).
+
+    Baseline-free (the connected metric needs no baseline), so it is a valid
+    coherence probe regardless of mode."""
+    try:
+        v = visual_gate.analyze(frame_path, baseline=None)
+        return float((v.get("metrics") or {}).get("fill_fraction", 0.0) or 0.0)
+    except Exception:
+        return 0.0
+
+
+def capture_lit_frame(frame_path, require_coherent):
+    """Screenshot the lit frame. In baseline mode (require_coherent) the stock-troll
+    silhouette MUST be a single coherent blob to anchor the thresholds, so we retry
+    the shot, draining any turn-prep dialog and letting the pose settle between
+    tries, until the largest-component fill reaches the connected floor (0.85).
+    A shatter would never satisfy this, but the baseline is always the coherent
+    stock chassis, so this is safe here; candidate mode passes require_coherent=
+    False (a shatter is the expected, valid outcome) and shoots once."""
+    path, _nbytes = screenshot(frame_path, "screenshot")
+    if not require_coherent:
+        return path
+    for _ in range(6):
+        if _coherence_fill(path) >= 0.85:
+            return path
+        drain_messages(max_calls=4)
+        time.sleep(1.5)
+        path, _nbytes = screenshot(frame_path, "screenshot")
+    raise Inconclusive(
+        "baseline-frame-not-coherent",
+        "stock-troll silhouette never reached a coherent fill (last=%.3f); the "
+        "capture may be occluded by a turn-prep dialog" % _coherence_fill(path))
+
+
+def run_boss_sequence(frame_path, require_coherent=False):
     """Drive start_run -> ... -> dismiss_message -> screenshot(frame_path).
 
-    Returns the absolute frame path on success. Raises Inconclusive(step) with a
-    named step on any failure; NEVER calls `advance` before the screenshot."""
+    Returns (abs_frame_path, anchor) on success. Raises Inconclusive(step) with a
+    named step on any failure; NEVER calls `advance` before the screenshot. When
+    require_coherent is set (baseline mode), the captured silhouette must be a
+    single coherent blob (see capture_lit_frame)."""
     # 0. Liveness. A dead bridge here is the no-session / unreachable case.
     health("bridge-unreachable")
 
@@ -452,8 +499,8 @@ def run_boss_sequence(frame_path):
     #    (advance ends the turn and blacks out the diorama).
     drain_messages(max_calls=4)
 
-    # 9. Capture the LIT full frame.
-    path, _nbytes = screenshot(frame_path, "screenshot")
+    # 9. Capture the LIT full frame (coherence-retried in baseline mode).
+    path = capture_lit_frame(frame_path, require_coherent)
     return path, anchor
 
 
@@ -601,7 +648,7 @@ def _image_size(frame_path):
 
 def run_baseline():
     """BASELINE: capture the LIT stock-troll frame, measure it, write baseline.json."""
-    frame, anchor = run_boss_sequence(BASELINE_FRAME_PNG)
+    frame, anchor = run_boss_sequence(BASELINE_FRAME_PNG, require_coherent=True)
     bl = measure_baseline(frame, capture_anchor=anchor)
     return {
         "mode": "baseline",
