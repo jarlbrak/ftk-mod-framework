@@ -216,6 +216,17 @@ namespace FTKModFramework.Core
                 // 7) Assemble the Mesh. Vertices BEFORE triangles. NO coordinate conversion on positions/normals;
                 //    UV V is flipped. Bindposes come from the glb's OWN inverseBindMatrices (name-remapped to runtime
                 //    order), falling back to the LIVE troll bindposes per-slot / wholesale.
+                //
+                // TEMPORARY DIAGNOSTIC INSTRUMENTATION (work item #73, FR-1; to be removed/fenced in #75, FR-5):
+                // FTK_DIAG_SKIP_SKIN==1 is the "split the problem in half" discriminator. When set, we SKIP assigning
+                // mesh.boneWeights/mesh.bindposes, leaving a STATIC unskinned mesh, to isolate a skinning-rebind bug
+                // from a decode bug: if the static mesh renders correctly the decode is sound and the fault is in the
+                // skin rebind; if it is still wrong the decode itself is suspect. Read ONCE into a local bool (mirrors
+                // the single-env-read idiom of the FTK_BASELINE_STOCK_BODY lever in Content/RealmBossAdventure.cs);
+                // distinct name, NEVER reuse FTK_BASELINE_STOCK_BODY. When unset or != "1" the behavior below is
+                // BYTE-IDENTICAL to the shipped path (assign boneWeights + bindposes, no diagnostic log).
+                bool diagSkipSkin = Environment.GetEnvironmentVariable("FTK_DIAG_SKIP_SKIN") == "1";
+
                 Mesh mesh = new Mesh();
                 mesh.name = "ftkmf_glb_" + glbFileName;
                 mesh.vertices = positions;                 // set vertices first
@@ -226,14 +237,24 @@ namespace FTKModFramework.Core
                     mesh.uv = uvs;
                 }
                 mesh.triangles = triangles;                // then triangles (16-bit indices; never touch indexFormat)
-                mesh.boneWeights = boneWeights;
-                mesh.bindposes = bindposes;                // glb IBM (name-remapped) or live-bindpose fallback
+                if (diagSkipSkin)
+                {
+                    // Skip boneWeights/bindposes: a static unskinned mesh, to isolate rebind vs decode.
+                    Plugin.Log.LogInfo("[gltf][DIAG] FTK_DIAG_SKIP_SKIN=1: skipping boneWeights/bindposes " +
+                        "(static unskinned mesh) to isolate rebind vs decode.");
+                }
+                else
+                {
+                    mesh.boneWeights = boneWeights;
+                    mesh.bindposes = bindposes;            // glb IBM (name-remapped) or live-bindpose fallback
+                }
                 if (normals == null || normals.Length != vCount) mesh.RecalculateNormals();
                 mesh.RecalculateBounds();
 
                 int triCount = triangles.Length / 3;
                 Plugin.Log.LogInfo("[gltf] LoadSkinnedGlb: built '" + glbFileName + "' (" + vCount + " verts, " +
-                    triCount + " tris; 16-bit indices; bindposes=" + (usedGlbIbm ? "glb-IBM" : "live-fallback") +
+                    triCount + " tris; 16-bit indices; bindposes=" +
+                    (diagSkipSkin ? "DIAG-SKIPPED (static unskinned)" : (usedGlbIbm ? "glb-IBM" : "live-fallback")) +
                     "; joint slots=" + jointBoneNames.Length +
                     ", dropped slots (name not on live rig)=" + droppedSlots + ").");
                 return mesh;
