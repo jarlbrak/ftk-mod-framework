@@ -61,12 +61,27 @@ by the consistently-PASSing offline preview).
 
 ## Final shipped state
 
-- `Core/EnemyVisualPatch.cs`: FR-2 `smr.bones` rebind (permanent) + baked `BossBodyScale = 2.0f`
-  (the custom golem is ~0.7x troll height; 2.0x is a boss-appropriate size). Original emission.
+- `Core/EnemyVisualPatch.cs`: FR-2 `smr.bones` rebind (permanent). The boss is scaled by the
+  SINGLE existing registered `EnemyVisual.scale` seam (the `cel.transform.localScale` at ~line 243,
+  fed by `RealmBossAdventure`'s `BossBodyScale = 1.4f`). A second Core-side scale seam I briefly
+  added was REMOVED after ftk-architect flagged it compounded with the registered scale (~2.8x
+  effective) and was invisible to the self-test; single-source-of-truth restored. Original emission.
 - `Core/RuntimeGltfMeshLoader.cs`: unchanged decoder; ALL spike diagnostics removed
   (`FTK_DIAG_SKIP_SKIN`, the WDIAG built-weight dump) per FR-5/NFR-5. No `Environment.*` reads.
 - `ai-model-gen/mudwretch_rigged.glb`: sliver-cleaned (13068 tris, was 13213; rig byte-preserved).
 - Build green; `SELF-TEST PASS` (x24) with no diagnostic flags; offline preview 4/4 consistently.
+
+## In-game gate is scene/pose dominated, not coherence (load-bearing for the deferral)
+
+Across repeated runs of the SAME final config, the in-game `connected` component count swung
+1, 2, 3, 5 and `upright` swung 7deg..65deg, while the mesh is provably constant (rigid, cleaned,
+`RIGID_OK=True`, offline 4/4 every time) and EVERY captured crop shows the same coherent golem.
+The variance is the doorway VEGETATION flanking the boss being intermittently segmented as extra
+components plus the dark-armor silhouette being noisy in the dim crypt plus the combat animation
+pose at capture. So for this dark boss in this busy doorway scene the in-game silhouette criteria
+do NOT track boss coherence; that is a gate/harness hardening item (fixed-pose capture or
+boss-region scene masking), filed under the epic #65 placement/animation child. Boss coherence is
+established by the cleaned rigid mesh + the consistently-PASSing offline preview + the visual crops.
 
 ## Artifacts in this folder
 
