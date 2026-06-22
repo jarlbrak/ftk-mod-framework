@@ -939,6 +939,19 @@ namespace FTKModFramework.Core
                 {
                     smr.sharedMesh = gmesh;
 
+                    // FR-2 (spec #72): force the SkinnedMeshRenderer to rebind the skin to the NEW mesh's bindpose set.
+                    // A bare sharedMesh swap leaves the SMR's skin binding pointed at the previous mesh's bindposes, which
+                    // scatters the new vertices (the Phase 0 skip-skin discriminator isolated the shatter to this rebind).
+                    // The custom mesh carries its OWN bindposes (name-remapped to runtime order by the loader); we reuse the
+                    // SAME live bones in the SAME order, just reassigned (fresh array) so Unity re-establishes the binding.
+                    Transform[] liveBones = smr.bones;
+                    if (liveBones != null)
+                    {
+                        Transform[] rebind = new Transform[liveBones.Length];
+                        System.Array.Copy(liveBones, rebind, liveBones.Length);
+                        smr.bones = rebind;
+                    }
+
                     // OPTIONAL TEXTURE: load a .png from FTKModFramework_content/models/<glbTexture> and push it into
                     // the body material's _MainTex (same .materials loop as the bundle path). A miss is non-fatal.
                     if (!string.IsNullOrEmpty(v.glbTexture))
