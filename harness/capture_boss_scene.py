@@ -232,6 +232,39 @@ def act(action, args, step):
     return result
 
 
+def start_hollow_mire(max_tries=12, settle_s=2.0):
+    """Start the Hollow Mire run, tolerating the fresh-launch injection window.
+
+    On a cold-launched game the bridge /health can answer before the framework
+    has injected the custom adventure into the title preview, so start_run
+    rejects with "adventure 'HollowMire' not injected". We retry with a short
+    settle until it starts. A rejection that does NOT name the not-injected /
+    not-ready window is raised immediately, so a genuine registration failure is
+    never masked by the retry loop."""
+    last_detail = ""
+    for _ in range(max_tries):
+        payload = {"action": "start_run", "args": {"adventure": "HollowMire"}}
+        try:
+            status, _ctype, body = _post_json("/action", payload, ACTION_TIMEOUT)
+        except (urllib.error.URLError, OSError) as e:
+            raise Inconclusive("start_run", "action 'start_run' unreachable (%s): %s"
+                               % (e.__class__.__name__, e))
+        result = _json_or_empty(body)
+        if status == 200 and isinstance(result, dict) and result.get("ok", False):
+            return result
+        err = (result.get("error") if isinstance(result, dict) else None) or str(result)
+        last_detail = err
+        low = err.lower()
+        transient = ("not injected" in low or "not ready" in low
+                     or "get-preview" in low or "no preview" in low)
+        if not transient:
+            raise Inconclusive("start_run", "action 'start_run' failed (HTTP %d): %s"
+                               % (status, err))
+        time.sleep(settle_s)
+    raise Inconclusive("start_run",
+                       "HollowMire not startable after %d tries: %s" % (max_tries, last_detail))
+
+
 def enter_flooded_crypt(max_tries=10, settle_s=1.0):
     """Enter the Flooded Crypt, tolerating the post-start_run settle window.
 
@@ -370,8 +403,8 @@ def run_boss_sequence(frame_path):
     # 0. Liveness. A dead bridge here is the no-session / unreachable case.
     health("bridge-unreachable")
 
-    # 1. Start the Hollow Mire run.
-    act("start_run", {"adventure": "HollowMire"}, "start_run")
+    # 1. Start the Hollow Mire run (retry through the fresh-launch injection window).
+    start_hollow_mire()
 
     # 1b. Enter the Flooded Crypt dungeon. After start_run the realm needs a few
     #     frames to place the FloodedCrypt POI on the map AND the intro

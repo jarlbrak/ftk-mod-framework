@@ -151,6 +151,153 @@ touched; a mesh is purely visual). So a custom model is co-op/save safe, same ba
 as the procedural-mesh and recolor paths already shipped. See
 [`CUSTOM-MODELS.md`](CUSTOM-MODELS.md).
 
+## Visual-verification gate
+
+Eyeballing a flattering crop was the old way to decide whether a custom model
+"looked right" in-game, and it hid real failures (a body can shatter at runtime
+yet still produce a recognizable crop of one good piece). The gate replaces that
+with an objective PASS / FAIL / INCONCLUSIVE verdict over the FULL frame, using
+one shared analyzer (`tools/ai-model-pipeline/visual_gate.py`, schema
+`ftk-visual-gate/1`; numpy + scipy + Pillow only, no ML). There is exactly one
+`analyze()` function with two callers, so "the offline preview predicts the
+in-game verdict" is true by construction, not by two implementations that drift.
+
+The gate runs in two halves and **always shows both verdicts side by side; it
+never reconciles them into one number.** An offline-PASS / in-game-FAIL
+divergence is the headline signal (it means the runtime reconstruction broke an
+asset that is geometrically sound on disk), so collapsing the two would erase
+exactly the failure the gate exists to catch.
+
+- **Offline preview** (`03b_preview_metrics.py`): Blender renders the candidate
+  `.glb` to a flat-emission silhouette PNG, then the shared `analyze()` scores
+  it. This is the **launch gate**: its exit code decides whether an in-game run
+  is even attempted (0 pass / 1 fail / 2 arg-or-render-error / 3 inconclusive).
+- **In-game** (`visual_verdict.py`): the same `analyze()` scores a full-frame
+  in-game screenshot captured by `harness/capture_boss_scene.py`, and writes
+  `verdict.json` plus an annotated frame and a boss crop.
+
+### The single command
+
+`tools/ai-model-pipeline/run_visual_gate.py` runs the WHOLE gate end to end:
+
+```bash
+.venv-3dgen/bin/python tools/ai-model-pipeline/run_visual_gate.py \
+  --glb ai-model-gen/mudwretch_rigged.glb \
+  --texture ai-model-gen/mudwretch_basecolor.png \
+  --baseline tools/ai-model-pipeline/baseline.json \
+  --out-dir /tmp/ftk_gate
+```
+
+What it does, in order:
+
+1. **Offline preview (the launch gate):** invokes `03b_preview_metrics.py` on the
+   candidate `.glb` and reads back `preview_verdict.json`.
+2. **Gate:** if the preview verdict is FAIL or INCONCLUSIVE, the game is NOT
+   launched and NO in-game capture is attempted; the offline result is printed
+   with its per-criterion reasons and the artifact paths, and the run exits
+   non-zero. The in-game half is reached only on an offline PASS.
+3. **In-game (only on an offline PASS):** ensures an `FTK_AGENT_BRIDGE=1` game is
+   reachable, runs `capture_boss_scene.py --mode candidate` to grab the LIT boss
+   frame, then runs `visual_verdict.py` over that frame against `baseline.json`.
+4. **Side by side:** prints the PREVIEW verdict and the IN-GAME verdict, each with
+   the four criteria's measured value AND the threshold applied, plus the artifact
+   paths (preview render + verdict, in-game annotated + crop + verdict). A
+   divergence is surfaced explicitly (for example `PREVIEW=pass IN-GAME=fail ->
+   RUNTIME-ONLY SHATTER`).
+
+It is deterministic: the same `.glb` plus the same captured frame yield the same
+mechanical verdict (`analyze()` is pure; the script only orchestrates).
+
+Bridge handling. By default the script launches the game itself
+(`FTK_AGENT_BRIDGE=1 bash run_bepinex.sh FTK.app`; `run_bepinex.sh` requires the
+`.app` path as its first arg), polls `http://127.0.0.1:8777/health` until it is
+reachable (cap ~120s), and SHUTS IT DOWN afterward
+(`pkill -f "FTK.app/Contents/MacOS"`). Pass `--assume-bridge` to use an
+**already-running** `FTK_AGENT_BRIDGE=1` game instead: the script then does NOT
+launch (and does NOT shut down) the game, and if the bridge is down under that
+flag it reports the fact clearly and exits non-zero rather than launching or
+faking a verdict. The controller that manages its own launches uses
+`--assume-bridge`.
+
+### The baseline-capture step
+
+The three baseline-anchored criteria (`upright` aspect, `centered`, `scaled`)
+compare the candidate against the stock-troll silhouette recorded in
+`tools/ai-model-pipeline/baseline.json`. Capture it once, with the body forced to
+the stock troll so the baseline is the un-customized chassis:
+
+```bash
+FTK_BASELINE_STOCK_BODY=1 \
+  python3 harness/capture_boss_scene.py --mode baseline
+```
+
+This drives the same Hollow Mire boss sequence, measures the LIT frame through
+the SAME `analyze()` front-end candidates use, and writes `baseline.json`:
+`bbox`, `centroid_norm`, normalized `height`, `aspect` (height/width), `area`
+(bbox-area fraction of the frame), the capture resolution (`image_w`/`image_h`),
+and provenance (`chassis`, `framework_commit`, `ftk_baseline_stock_body`,
+`capture_anchor`, `source_image`). Candidate and baseline captures MUST share the
+window resolution; the driver asserts this and reports
+`resolution-mismatch-baseline-vs-candidate` otherwise.
+
+### The four mechanical criteria (finalized thresholds)
+
+All thresholds are normalized (fractions of frame size or ratios to the
+baseline), never raw pixel constants, so a 720px Blender preview and a
+`Screen.width` x `Screen.height` in-game frame compare on the same criteria. The
+numbers below are copied verbatim from `visual_gate.py`.
+
+- **connected** (baseline-free): `fill_fraction >= 0.85` AND
+  `component_count <= 2`. A coherent body is one near-solid blob (plus at most an
+  optional baked lantern); a shatter is many comparable shards.
+- **upright**: major-axis angle `<= 15deg` from vertical AND
+  `aspect >= 0.9 * baseline_aspect`. The stock troll is `angle ~1.9deg`,
+  `aspect ~1.37`.
+- **centered** (anchored to `baseline.centroid_norm` ~ `0.495, 0.628`):
+  `|cx - baseline_cx| <= 0.06` AND `|cy - baseline_cy| <= 0.08`. The diorama
+  frames the boss center-x but low-center-y, so the dy tolerance is the larger.
+- **scaled** (ratios vs baseline): HEIGHT ratio in `[1.20, 1.65]` (centered on
+  1.4) AND area ratio in `[1.45, 2.60]` (~ 1.4^2). **HEIGHT is the authoritative
+  signal.** The band deliberately excludes 1.0, so the scale-1.0 stock troll
+  baseline does NOT pass `scaled` (correct: it is the stock chassis, not the
+  upscaled custom body).
+- **INCONCLUSIVE** (decided before any PASS/FAIL, mutually exclusive with them):
+  `unlit-or-empty-frame` (whole-frame mean luminance or foreground fraction below
+  the floor), `boss-not-in-frame` (largest component too small or its centroid in
+  a corner), or a caller-supplied `capture-error`.
+
+Why HEIGHT, and why 1.4 (decompile-verified). The troll body takes NO spawn-time
+scale: `EnemyDummy.InitEnemyDummyForCombat` / `FTKHub.GetEnemyPrefab` apply no
+extra scale to the body clone, so the custom boss (which sets
+`EnemyVisual.scale = 1.4` absolutely on a fresh scale-1.0 clone in
+`EnemyVisualPatch`) renders at exactly 1.4x the scale-1.0 stock-troll baseline
+HEIGHT. The `m_MarkerScale` value (1.568) is a collider footprint only and is NOT
+used by `scaled`; width/depth carry a separate `widthBoost`, which is why the
+criterion keys on Y (height), with the area ratio (~ 1.4^2) as a secondary check.
+
+The capture-anchor reality. The synthetic dungeon entry never sets
+`combat.heroTurnReady`, so `capture_boss_scene.py` anchors the capture to "combat
+active + camera/modal settled" rather than the hero's first turn. A black or
+unlit frame from that fallback is caught by the `unlit-or-empty-frame`
+INCONCLUSIVE before any PASS/FAIL is computed, so the anchor fallback can never
+yield a false PASS.
+
+### Worked example: the Mudwretch Foreman
+
+The SAME `mudwretch_rigged.glb` is the gate's headline case. In the OFFLINE
+preview it scores **4 mechanical PASS** (the on-disk geometry is sound). But the
+IN-GAME capture (`fixtures/candidate_boss.png`) is **`connected: FAIL`**
+(`fill_fraction ~0.40`, `component_count = 6`): the runtime reconstruction
+SHATTERS the body. That offline-PASS / in-game-FAIL divergence is precisely the
+failure the gate exists to surface, and exactly what a flattering crop hid before
+the gate existed.
+
+There is currently NO coherent in-game custom-boss capture: the runtime shatter
+is a separate, open issue (tracked in `TROUBLESHOOT_boss_visual.md`), not a gate
+defect. The committed stock-troll baseline passes `connected` / `upright` /
+`centered` and is correctly NOT `scaled` (it renders at scale 1.0, not the 1.4 of
+the custom body), which is the gate behaving as designed.
+
 ## What is autonomous vs needs you
 - **Fully autonomous on this Mac (no Unity editor):** concept/mesh generation,
   Blender decimation, vanilla-rig extraction (UnityPy), numpy weight-transfer rig,
