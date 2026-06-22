@@ -952,6 +952,31 @@ namespace FTKModFramework.Core
                         smr.bones = rebind;
                     }
 
+                    // TEMP scale lever (#74/#75): env-tunable for gate sweep; bake const + drop env in #75.
+                    // The combat body is a fresh scale-1.0 clone (EnemyDummy sets only localPosition/localRotation,
+                    // never scale), so BossBodyScale wired in Content/ never reaches the diorama body. Apply the scale
+                    // here at spawn on the body root: smr.transform.parent is 'enTrollCave(Clone)', the root holding
+                    // BOTH the mesh (enTroll01) and the skeleton (Root_M), so scaling it uniformly scales the whole
+                    // boss. Idempotent per clone (re-setting the same localScale each spawn is harmless).
+                    float scale;
+                    {
+                        string s = System.Environment.GetEnvironmentVariable("FTK_BOSS_SCALE");
+                        float f;
+                        if (string.IsNullOrEmpty(s) ||
+                            !float.TryParse(s, System.Globalization.NumberStyles.Float,
+                                System.Globalization.CultureInfo.InvariantCulture, out f) ||
+                            f <= 0f)
+                        {
+                            f = 2.0f;
+                        }
+                        scale = f;
+                    }
+                    Transform bodyRoot = smr.transform.parent;
+                    if (bodyRoot == null) bodyRoot = smr.transform;
+                    bodyRoot.localScale = Vector3.one * scale;
+                    Plugin.Log.LogInfo("[enemy-visual] boss body scale: set '" + bodyRoot.name +
+                        "'.localScale = " + scale + " (FTK_BOSS_SCALE) for '" + enemyId + "'.");
+
                     // OPTIONAL TEXTURE: load a .png from FTKModFramework_content/models/<glbTexture> and push it into
                     // the body material's _MainTex (same .materials loop as the bundle path). A miss is non-fatal.
                     if (!string.IsNullOrEmpty(v.glbTexture))
