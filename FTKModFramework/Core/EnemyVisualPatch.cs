@@ -988,6 +988,27 @@ namespace FTKModFramework.Core
                             {
                                 Texture2D tex = new Texture2D(2, 2);
                                 tex.LoadImage(System.IO.File.ReadAllBytes(texPath));
+
+                                // TEMP emission lever (#74/#75): env-tunable for gate sweep; bake const + drop env in #75.
+                                // Multiplies the self-illumination emission color so the golem can be swept up until the
+                                // whole body reads in the Flooded Crypt's dim cool light (default 1.0 = current behavior,
+                                // byte-identical when unset/1). Read once before the material loop.
+                                float emit;
+                                {
+                                    string es = System.Environment.GetEnvironmentVariable("FTK_BOSS_EMIT");
+                                    float f;
+                                    if (string.IsNullOrEmpty(es) ||
+                                        !float.TryParse(es, System.Globalization.NumberStyles.Float,
+                                            System.Globalization.CultureInfo.InvariantCulture, out f) ||
+                                        f < 0f)
+                                    {
+                                        f = 1.0f;
+                                    }
+                                    emit = f;
+                                }
+                                Plugin.Log.LogInfo("[enemy-visual] boss emission: _EmissionColor base*" + emit +
+                                    " (FTK_BOSS_EMIT) for '" + enemyId + "'.");
+
                                 Material[] gmats = smr.materials;
                                 for (int i = 0; i < gmats.Length; i++)
                                 {
@@ -1002,7 +1023,7 @@ namespace FTKModFramework.Core
                                     {
                                         m.EnableKeyword("_EMISSION");
                                         if (m.HasProperty("_EmissionMap")) m.SetTexture("_EmissionMap", tex);
-                                        m.SetColor("_EmissionColor", new Color(0.45f, 0.50f, 0.40f));
+                                        m.SetColor("_EmissionColor", new Color(0.45f * emit, 0.50f * emit, 0.40f * emit));
                                     }
                                 }
                             }
