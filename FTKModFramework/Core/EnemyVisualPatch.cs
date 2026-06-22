@@ -952,14 +952,6 @@ namespace FTKModFramework.Core
                         smr.bones = rebind;
                     }
 
-                    // Boss body scale: the custom AI golem mesh is ~0.7x the stock troll's on-screen height,
-                    // so scale the body root up to a boss-appropriate size. The combat body is a fresh scale-1.0
-                    // clone (EnemyDummy never scales it), so apply it here at spawn. Idempotent per clone.
-                    const float BossBodyScale = 2.0f;
-                    Transform bodyRoot = smr.transform.parent;
-                    if (bodyRoot == null) bodyRoot = smr.transform;
-                    bodyRoot.localScale = Vector3.one * BossBodyScale;
-
                     // OPTIONAL TEXTURE: load a .png from FTKModFramework_content/models/<glbTexture> and push it into
                     // the body material's _MainTex (same .materials loop as the bundle path). A miss is non-fatal.
                     if (!string.IsNullOrEmpty(v.glbTexture))
