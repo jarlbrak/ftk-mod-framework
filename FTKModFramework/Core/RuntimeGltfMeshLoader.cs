@@ -207,6 +207,15 @@ namespace FTKModFramework.Core
                         "' has no decodable skins[0].inverseBindMatrices; falling back to LIVE runtime bindposes.");
                 }
 
+                // TEMP DIAGNOSTIC (#74): remove in #75
+                // Read-only log of the ACTUAL built boneWeights[]/bindposes[] (no behavior change). The custom boss
+                // .glb is provably 100% RIGID (every vert weighted 1.0 to slot 0 = Root_M, verified by decoding the
+                // deployed file), yet with skinning ON the body scatters a radiating triangle cloud. A rigid mesh
+                // cannot scatter under one affine transform, so this confirms whether the loader BUILT non-rigid
+                // weights at runtime despite the rigid file. Never throws (logs a LogWarning on any failure).
+                LogBuiltBoneWeightDistribution(glbFileName, vCount, boneWeights, bindposes, runtimeBones,
+                    nameToRuntimeIndex);
+
                 // 6c) DIAGNOSTICS (cheap LogInfo): dump the runtime bone NAME order so file-vs-runtime permutation is
                 //     visible, then for 3 probe bones compare the LIVE bind position vs the GLB bind position. A
                 //     bind position is the inverse bindpose's translation column (column 3 of the inverse matrix).
@@ -463,6 +472,162 @@ namespace FTKModFramework.Core
         {
             System.Globalization.CultureInfo inv = System.Globalization.CultureInfo.InvariantCulture;
             return "(" + c.x.ToString("0.###", inv) + "," + c.y.ToString("0.###", inv) + "," + c.z.ToString("0.###", inv) + ")";
+        }
+
+        // TEMP DIAGNOSTIC (#74): remove in #75
+        /// <summary>
+        /// Read-only dump (tag <c>[gltf][WDIAG #74]</c>) of the ACTUAL built <paramref name="boneWeights"/> +
+        /// <paramref name="bindposes"/>, to confirm whether the loader builds rigid weights at runtime despite a
+        /// provably rigid .glb. Logs: the Root_M runtime index; how many verts are effectively-rigid (weight0&gt;=0.999),
+        /// how many carry a SECOND influence (weight1&gt;0.001), and how many point boneIndex0 at Root_M; the top
+        /// boneIndex0 buckets (with resolved bone names); the Root_M bindpose translation column + finiteness; the
+        /// count of non-finite bindpose matrices; and a one-line <c>RIGID_OK</c> verdict. Never throws.
+        /// </summary>
+        private static void LogBuiltBoneWeightDistribution(string glbFileName, int vCount, BoneWeight[] boneWeights,
+            Matrix4x4[] bindposes, Transform[] runtimeBones, Dictionary<string, int> nameToRuntimeIndex)
+        {
+            const string Tag = "[gltf][WDIAG #74]";
+            try
+            {
+                int rootMIndex;
+                if (nameToRuntimeIndex == null || !nameToRuntimeIndex.TryGetValue("Root_M", out rootMIndex))
+                    rootMIndex = -1;
+
+                Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': vCount=" + vCount + " RootM_runtimeIndex=" +
+                    rootMIndex + ".");
+
+                if (boneWeights == null)
+                {
+                    Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': boneWeights is null; nothing to inspect.");
+                }
+                else
+                {
+                    int rigidPrimary = 0;     // weight0 >= 0.999
+                    int hasSecond = 0;        // weight1 > 0.001
+                    int rootPrimary = 0;      // boneIndex0 == rootMIndex
+                    Dictionary<int, int> idx0Counts = new Dictionary<int, int>();
+
+                    for (int i = 0; i < boneWeights.Length; i++)
+                    {
+                        BoneWeight bw = boneWeights[i];
+                        if (bw.weight0 >= 0.999f) rigidPrimary++;
+                        if (bw.weight1 > 0.001f) hasSecond++;
+                        if (rootMIndex >= 0 && bw.boneIndex0 == rootMIndex) rootPrimary++;
+
+                        int c;
+                        if (idx0Counts.TryGetValue(bw.boneIndex0, out c)) idx0Counts[bw.boneIndex0] = c + 1;
+                        else idx0Counts[bw.boneIndex0] = 1;
+                    }
+
+                    Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': rigidPrimary(weight0>=0.999)=" + rigidPrimary +
+                        "/" + boneWeights.Length + " hasSecondInfluence(weight1>0.001)=" + hasSecond +
+                        " boneIndex0==RootM=" + rootPrimary + ".");
+
+                    // Top ~10 distinct boneIndex0 buckets by count (with resolved runtime bone names). Net35-safe
+                    // selection: linear repeated-max over the dictionary (no LINQ OrderBy needed, small N).
+                    int distinct = idx0Counts.Count;
+                    int top = distinct < 10 ? distinct : 10;
+                    int[] keys = new int[distinct];
+                    int[] vals = new int[distinct];
+                    int n = 0;
+                    foreach (KeyValuePair<int, int> kv in idx0Counts)
+                    {
+                        keys[n] = kv.Key;
+                        vals[n] = kv.Value;
+                        n++;
+                    }
+                    StringBuilder topSb = new StringBuilder();
+                    topSb.Append(Tag).Append(" '").Append(glbFileName).Append("': distinct boneIndex0=")
+                        .Append(distinct).Append("; top ").Append(top).Append(" -> ");
+                    for (int r = 0; r < top; r++)
+                    {
+                        int bestAt = -1;
+                        int bestVal = -1;
+                        for (int j = 0; j < distinct; j++)
+                        {
+                            if (vals[j] > bestVal) { bestVal = vals[j]; bestAt = j; }
+                        }
+                        if (bestAt < 0) break;
+                        int bIdx = keys[bestAt];
+                        vals[bestAt] = -1; // consume this bucket so the next pass finds the next-largest
+                        string bName = "<oob>";
+                        if (runtimeBones != null && bIdx >= 0 && bIdx < runtimeBones.Length)
+                        {
+                            Transform b = runtimeBones[bIdx];
+                            bName = (b != null && b.name != null) ? b.name : "<null>";
+                        }
+                        if (r > 0) topSb.Append(", ");
+                        topSb.Append("idx").Append(bIdx).Append("('").Append(bName).Append("')=").Append(bestVal);
+                    }
+                    Plugin.Log.LogInfo(topSb.ToString());
+                }
+
+                // Bindposes: Root_M translation column (m03,m13,m23) + finiteness, and count of non-finite matrices.
+                if (bindposes == null)
+                {
+                    Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': bindposes is null; nothing to inspect.");
+                }
+                else
+                {
+                    if (rootMIndex >= 0 && rootMIndex < bindposes.Length)
+                    {
+                        Matrix4x4 bp = bindposes[rootMIndex];
+                        float tx = bp.m03, ty = bp.m13, tz = bp.m23;
+                        bool finite = IsFinite(tx) && IsFinite(ty) && IsFinite(tz);
+                        System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.InvariantCulture;
+                        Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': RootM bindpose translation=(" +
+                            tx.ToString("0.####", ci) + "," + ty.ToString("0.####", ci) + "," +
+                            tz.ToString("0.####", ci) + ") finite=" + finite + ".");
+                    }
+                    else
+                    {
+                        Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': RootM index " + rootMIndex +
+                            " out of bindposes range (len=" + bindposes.Length + ").");
+                    }
+
+                    int nonFinite = 0;
+                    for (int i = 0; i < bindposes.Length; i++)
+                    {
+                        if (!MatrixIsFinite(bindposes[i])) nonFinite++;
+                    }
+                    Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': bindposes len=" + bindposes.Length +
+                        " nonFinite(NaN/Inf)=" + nonFinite + ".");
+                }
+
+                // One-line verdict: RIGID_OK iff every vert has weight0>=0.999 AND boneIndex0==RootM.
+                bool rigidOk = false;
+                if (boneWeights != null && rootMIndex >= 0)
+                {
+                    int rp = 0, rb = 0;
+                    for (int i = 0; i < boneWeights.Length; i++)
+                    {
+                        if (boneWeights[i].weight0 >= 0.999f) rp++;
+                        if (boneWeights[i].boneIndex0 == rootMIndex) rb++;
+                    }
+                    rigidOk = (rp == vCount) && (rb == vCount);
+                }
+                Plugin.Log.LogInfo(Tag + " '" + glbFileName + "': RIGID_OK=" + rigidOk + ".");
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning(Tag + " '" + glbFileName + "': diagnostic failed: " + e.Message);
+            }
+        }
+
+        /// <summary>net35-safe finite check (no <c>float.IsFinite</c> on Mono 3.5): not NaN and not +/-Inf.</summary>
+        private static bool IsFinite(float f)
+        {
+            return !float.IsNaN(f) && !float.IsInfinity(f);
+        }
+
+        /// <summary>True iff every element of a 4x4 matrix is finite (no NaN/Inf).</summary>
+        private static bool MatrixIsFinite(Matrix4x4 m)
+        {
+            for (int k = 0; k < 16; k++)
+            {
+                if (!IsFinite(m[k])) return false;
+            }
+            return true;
         }
 
         // ---- glTF JSON walker (over the hand-rolled parser) -------------------------------------------------
