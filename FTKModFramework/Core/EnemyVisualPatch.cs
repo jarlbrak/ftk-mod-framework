@@ -633,6 +633,9 @@ namespace FTKModFramework.Core
         private const string GolemName = "ftkmf_golem";
         private const string GolemMeshChild = "enTroll01"; // the chassis SkinnedMeshRenderer child (exact name, in-engine)
 
+        // EXPERIMENT (#72): name of the static-attach glb body child (under Root_M), for the per-clone idempotency check.
+        private const string GlbStaticBodyName = "ftkmf_glb_static_body";
+
         // The skeleton chains, as ordered exact bone names (parent -> child). We build a tapered segment for each
         // adjacent pair (skipping zero-length Scapula links by starting each arm at the Shoulder and each leg at the
         // Hip), parenting it to the PROXIMAL bone and pointing it at the DISTAL bone, so each segment animates with
@@ -937,6 +940,19 @@ namespace FTKModFramework.Core
                 Mesh gmesh = RuntimeGltfMeshLoader.LoadSkinnedGlb(v.glbMesh, smr.bones, origBind);
                 if (gmesh != null)
                 {
+                    if (IsStaticBossMode())
+                    {
+                        // EXPERIMENT (#72): static-attach for rigid mesh; see ftk-architect/decompile-analyst review.
+                        // The custom boss mesh is 100% RIGID (all verts weighted to one bone, Root_M). For a one-bone
+                        // mesh, skinning is unnecessary: a plain MeshRenderer parented to that bone is behaviorally
+                        // equivalent and sidesteps the bindpose/rebind problem that scattered the skinned vertices
+                        // (Phase 0 discriminator). Mirrors the proven BuildProceduralBody + weapon-prop precedent:
+                        // hide the chassis SMR, then build a static MeshFilter+MeshRenderer under the live bone.
+                        ApplyStaticBossAttach(enemyId, cel, smr, gmesh, via, v);
+                        return;
+                    }
+
+                    // OLD SKINNED PATH (FTK_BOSS_STATIC=0): kept intact for A/B comparison against the static path.
                     smr.sharedMesh = gmesh;
 
                     // FR-2 (spec #72): force the SkinnedMeshRenderer to rebind the skin to the NEW mesh's bindpose set.
@@ -1044,6 +1060,129 @@ namespace FTKModFramework.Core
             Plugin.Log.LogInfo("[enemy-visual] mesh swap: set body mesh '" + v.meshName + "' (bundle '" + v.meshBundle +
                 "', SMR via " + via + ")" + (string.IsNullOrEmpty(v.meshTextureName) ? "" : " + texture '" +
                 v.meshTextureName + "'") + " for '" + enemyId + "'.");
+        }
+
+        // ---- EXPERIMENT (#72): static-attach render path for a rigid (one-bone) glb boss mesh ---------------
+
+        /// <summary>
+        /// Whether the static-attach experiment path is active. Gated by env var <c>FTK_BOSS_STATIC</c>:
+        /// unset OR "1" = ON (the experiment / candidate fix), "0" = the old skinned sharedMesh+rebind path.
+        /// Default ON so the controller's boss-isolated capture exercises the static path without a rebuild.
+        /// </summary>
+        private static bool IsStaticBossMode()
+        {
+            string s = null;
+            try { s = Environment.GetEnvironmentVariable("FTK_BOSS_STATIC"); }
+            catch { /* env read can throw under restricted hosts; treat as unset (default ON) */ }
+            if (string.IsNullOrEmpty(s)) return true;     // default ON for this experiment
+            return !string.Equals(s.Trim(), "0", StringComparison.Ordinal);
+        }
+
+        /// <summary>
+        /// EXPERIMENT (#72): render the rigid one-bone glb mesh as a PLAIN static MeshRenderer parented to the live
+        /// <c>Root_M</c> bone (the mesh's single weighted bone), skipping skinning/bindpose entirely. The chassis
+        /// SkinnedMeshRenderer is DISABLED (not destroyed) so it does not peek through; the new child inherits the
+        /// boss up-scale from the CEL-root localScale via the bone hierarchy. Idempotent per clone (name guard, like
+        /// the lantern/golem). Visual-only / deterministic, so it stays co-op- and save-safe like the rest of this file.
+        /// Mirrors the proven BuildProceduralBody + weapon-prop pattern (MeshFilter+MeshRenderer under a skeleton bone).
+        /// </summary>
+        private static void ApplyStaticBossAttach(string enemyId, CharacterEventListener cel, SkinnedMeshRenderer smr,
+            Mesh gmesh, string via, EnemyVisual v)
+        {
+            // IDEMPOTENCY PER CLONE: a re-apply on this same fresh clone must not stack a second static body.
+            if (FindExact(cel, GlbStaticBodyName) != null) return;
+
+            // 1) HIDE the troll body SMR (do NOT destroy: the skeleton/bones must stay live so the child follows it).
+            smr.enabled = false;
+
+            // 2) Resolve the live Root_M bone: the rigid mesh's single weighted bone. Search smr.bones by exact name
+            //    first (that is the bone set the loader was handed), then fall back to smr.rootBone, then smr.transform.
+            Transform mount = null;
+            string boneName = "Root_M";
+            Transform[] bones = smr.bones;
+            if (bones != null)
+            {
+                for (int i = 0; i < bones.Length; i++)
+                {
+                    Transform b = bones[i];
+                    if (b == null || b.name == null) continue;
+                    if (string.Equals(b.name, "Root_M", StringComparison.Ordinal)) { mount = b; break; }
+                }
+            }
+            if (mount == null && smr.rootBone != null)
+            {
+                mount = smr.rootBone;
+                boneName = "rootBone:" + (mount.name != null ? mount.name : "(unnamed)");
+                Plugin.Log.LogWarning("[enemy-visual] static-attach: 'Root_M' not found in smr.bones for '" + enemyId +
+                    "'; falling back to smr.rootBone '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
+            }
+            if (mount == null)
+            {
+                mount = smr.transform;
+                boneName = "smr.transform:" + (mount.name != null ? mount.name : "(unnamed)");
+                Plugin.Log.LogWarning("[enemy-visual] static-attach: neither 'Root_M' nor smr.rootBone resolved for '" +
+                    enemyId + "'; falling back to smr.transform '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
+            }
+
+            // 3) Build the static body child under the mount bone, at identity local TRS (the bone carries the boss
+            //    up-scale + animation; the rigid mesh is authored in that bone's space, so identity is correct).
+            GameObject body = new GameObject(GlbStaticBodyName);
+            body.transform.SetParent(mount, false);
+            body.transform.localPosition = Vector3.zero;
+            body.transform.localRotation = Quaternion.identity;
+            body.transform.localScale = Vector3.one;
+
+            // Correct bounds matter for a static MeshRenderer (no updateWhenOffscreen on MeshRenderer); the loader
+            // already recalculates, but RecalculateBounds is idempotent so we re-assert it cheaply here.
+            gmesh.RecalculateBounds();
+
+            MeshFilter mf = body.AddComponent<MeshFilter>();
+            mf.sharedMesh = gmesh;
+            MeshRenderer mr = body.AddComponent<MeshRenderer>();
+
+            // 4) MATERIAL: instance off the troll body material (so the in-engine shader/setup carries over), then push
+            //    the glb texture into _MainTex + the same moss-grey emission as the skinned glb-texture block, so the
+            //    body READS in the dim crypt (a postfix-added MeshRenderer is NOT covered by the engine light-probe setup).
+            Material srcMat = smr.sharedMaterial;
+            Material bodyMat = (srcMat != null) ? new Material(srcMat) : new Material(Shader.Find("Standard"));
+            bool texApplied = false;
+            string texFile = v.glbTexture;
+            if (!string.IsNullOrEmpty(v.glbTexture))
+            {
+                try
+                {
+                    string texPath = CustomModelLoader.ResolveModelPath(v.glbTexture);
+                    if (System.IO.File.Exists(texPath))
+                    {
+                        Texture2D tex = new Texture2D(2, 2);
+                        tex.LoadImage(System.IO.File.ReadAllBytes(texPath));
+                        if (bodyMat.HasProperty("_MainTex")) bodyMat.SetTexture("_MainTex", tex);
+                        else bodyMat.mainTexture = tex;
+                        if (bodyMat.HasProperty("_EmissionColor"))
+                        {
+                            bodyMat.EnableKeyword("_EMISSION");
+                            if (bodyMat.HasProperty("_EmissionMap")) bodyMat.SetTexture("_EmissionMap", tex);
+                            bodyMat.SetColor("_EmissionColor", new Color(0.45f, 0.50f, 0.40f));
+                        }
+                        texApplied = true;
+                    }
+                    else
+                    {
+                        Plugin.Log.LogWarning("[enemy-visual] static-attach: glb texture not found at '" + texPath +
+                            "' for '" + enemyId + "'; body rendered without it.");
+                    }
+                }
+                catch (Exception te)
+                {
+                    Plugin.Log.LogWarning("[enemy-visual] static-attach: glb texture load failed for '" + enemyId +
+                        "': " + te.Message + "; body rendered without it.");
+                }
+            }
+            mr.sharedMaterial = bodyMat;
+
+            Plugin.Log.LogInfo("[enemy-visual] static-attach: rendered glb '" + v.glbMesh + "' as MeshRenderer under '" +
+                boneName + "' (SMR disabled, via " + via + ")" +
+                (texApplied ? " + texture '" + texFile + "'" : "") + " for '" + enemyId + "'.");
         }
 
         /// <summary>Full slash-separated path from the body root to a transform (for the lantern mount log line).</summary>
