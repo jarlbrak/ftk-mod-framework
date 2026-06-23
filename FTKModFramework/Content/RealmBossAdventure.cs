@@ -87,14 +87,6 @@ namespace FTKModFramework
             "drowned, and the crew was never counted out. Now the water has grown a taste for the living, and the " +
             "village upstream is running short of neighbors.";
 
-        // EDITOR-FREE runtime-glb body: a bespoke rigged mesh shipped at FTKModFramework_content/models/, name-keyed
-        // to the vanilla troll skeleton and skinned at runtime over the live bindposes (no Unity editor, no
-        // AssetBundle). The .png is the baked mossy basecolor pushed into the body _MainTex. Set on the visual below
-        // (Content.SetEnemyBodyMeshFromGlb plumbing) so the Foreman renders as the real custom model, not the recolored
-        // troll chassis.
-        private const string BossGlbMesh = "mudwretch_rigged.glb";
-        private const string BossGlbTexture = "mudwretch_basecolor.png";
-
         // The boss display name + a wry, lightly-grim FTK-tone description (shown verbatim).
         private const string BossDisplay = "Mudwretch Foreman";
         private const string BossDescription =
@@ -163,22 +155,21 @@ namespace FTKModFramework
         // rest of the visual. Flip to false to drop the aura.
         private const bool BossSwampAura = true;
 
-        // Procedural GOLEM body (best-effort): when true, HIDE the chassis' skinned mesh and assemble a runtime
-        // low-poly mossy bog-golem from bone-segment + joint-blob meshes parented to the existing skeleton, so the new
-        // body animates with the bones. Visual-only / per-combat clone / deterministic (the meshes are generated from
-        // index hashes, no Random), so it stays determinism/save-safe like the rest of the visual. Flip to false to
-        // show the recolored troll chassis again. Radii are in WORLD units at the (un-scaled) bone, then the cel-root
-        // hulking scale (BossBodyScale*BossWidthBoost) scales the whole golem along with the bones.
-        // EXPERIMENTAL, default OFF: the procedural golem renders + animates a genuinely custom code-built mesh
-        // (proven in-engine), but it is rough "code-art" and at large radii it can occlude the boss's in-rig
-        // EncounterCam (a black combat view). The shipped demo therefore defaults to the polished recolored chassis
-        // (the better-looking, camera-safe result); flip this to true to show the procedural golem, and tune the
-        // radii down first if the combat view goes black. A true high-fidelity model should come via the AssetBundle
-        // loader (Content.SetEnemyBodyMesh / SetEnemyBodyFromBundle; see docs/CUSTOM-MODELS.md).
-        private const bool BossProceduralBody = false;
+        // Procedural GOLEM body (the SHIPPED boss body, per spec #72): HIDE the chassis' skinned mesh and assemble a
+        // runtime low-poly mossy bog-golem from bone-segment + joint-blob meshes parented to the existing skeleton, so
+        // the new body animates with the bones. Visual-only / per-combat clone / deterministic (the meshes are
+        // generated from index hashes, no Random), so it stays determinism/save-safe like the rest of the visual. Radii
+        // are in WORLD units at the (un-scaled) bone, then the cel-root hulking scale (BossBodyScale*BossWidthBoost)
+        // scales the whole golem along with the bones.
+        // DECISION (spec #72): this clean, coherent, editor-free procedural-golem-on-skeleton path is the boss body. The
+        // earlier AI image-to-3D runtime-glb mesh rendered as a noisy/spiky blob in-game, so it was dropped; the
+        // procedural golem (the known-good "hulking mossy chassis" config used before the glb switch at commit 4bb3299)
+        // is the coherent result. Radii kept at the proven values; lumpiness nudged up a touch for a chunkier, mossier
+        // bog brute. Flip to false to show the recolored troll chassis again.
+        private const bool BossProceduralBody = true;
         private const float GolemTorsoRadius = 0.32f;  // world radius of the spine/torso segments (thickest; hulking)
         private const float GolemLimbRadius = 0.15f;   // world radius of the arm/leg segments (chunky; tapers down)
-        private const float GolemLumpiness = 0.22f;    // 0 = clean prisms; higher = chunkier mossy lumps (index-derived)
+        private const float GolemLumpiness = 0.26f;    // 0 = clean prisms; higher = chunkier mossy lumps (index-derived)
         // Sickly bog-green glowing eyes (emissive). Iterate from screenshots without a re-brief.
         private static readonly UnityEngine.Color GolemEyeGlow =
             new UnityEngine.Color(0.55f, 1.0f, 0.35f) * 1.4f;          // sickly green glow (intensity-scaled)
@@ -360,26 +351,27 @@ namespace FTKModFramework
                 // whichever attaches; both are confirmed-present FTK_proficiencyTable.ID keys.
                 Content.AttachEnemyProficiencies(boss, BossProficiencies);
 
-                // Custom VISUAL identity: the Foreman now wears a BESPOKE RUNTIME-GLB MESH (BossGlbMesh + its baked
-                // mossy basecolor BossGlbTexture), name-keyed to the vanilla troll skeleton and skinned over the live
-                // bindposes at spawn (EDITOR-FREE; see Core/RuntimeGltfMeshLoader). Because the real mesh carries its
-                // own mossy texture and a baked lantern, the old chassis-recolor effects are stood DOWN so they do not
-                // fight the model: tint is WHITE (no green-multiply over the baked basecolor), the procedural lantern
-                // is OFF (the mesh has one in its geometry), and the non-uniform width/hunch are neutralized (they
-                // would distort a real mesh). We KEEP the swamp aura and the hidden weapon, and a modest uniform scale
-                // (BossBodyScale) so the ~2.65-tall mesh reads as an imposing boss. Applied per-combat to the spawned
-                // clone (leak-safe; determinism/save-safe: enemy visuals never network or persist; the .glb+png ship
-                // inside the mod, byte-identical on every co-op client).
+                // Custom VISUAL identity (spec #72): the Foreman wears the framework's PROCEDURAL GOLEM BODY, a clean
+                // editor-free low-poly mossy bog-golem built at runtime from bone-segment + joint-blob meshes parented
+                // to the vanilla troll skeleton (so it animates with the bones). The earlier AI image-to-3D runtime-glb
+                // mesh rendered as a noisy/spiky blob in-game and was dropped; this is the coherent, known-good
+                // "hulking mossy chassis" config used before the glb switch (commit 4bb3299). The chassis' own skinned
+                // mesh is hidden and the golem replaces it: a mossy-green recolor (BossTint) on a wet-bog material,
+                // hulked into a non-uniform broad silhouette (BossBodyScale/BossWidthBoost), hunched forward, the axe
+                // hidden, a warm lantern in hand, a drifting swamp aura, and sickly-green emissive eyes. Applied
+                // per-combat to the spawned clone (leak-safe; determinism/save-safe: enemy visuals never network or
+                // persist; the golem meshes are index-derived, no Random, so they are byte-identical on every co-op
+                // client).
                 EnemyVisualPatch.EnemyVisual visual = default(EnemyVisualPatch.EnemyVisual);
                 // TEST LEVER (visual-gate baseline capture, NOT a modder feature): when FTK_BASELINE_STOCK_BODY==1
-                // SKIP the custom glb body and force the STOCK trollCaveA chassis posture (no mesh/texture, white
-                // tint, unit scale, no width boost, no swamp aura, weapon shown). Core/EnemyVisualPatch falls back to
-                // the chassis cleanly when glbMesh is empty, so this renders the UNMODIFIED cave-troll. Mirrors the
-                // FTK_AGENT_BRIDGE env-gate idiom (Agent/AgentBridge.cs). When unset or != "1" the env read has NO
-                // effect: the else-branch below is byte-identical to the shipped custom-body wiring.
+                // SKIP the custom body and force the STOCK trollCaveA chassis posture (no procedural golem, white tint,
+                // unit scale, no width boost, no swamp aura, weapon shown). Core/EnemyVisualPatch renders the chassis
+                // mesh unchanged when proceduralBody is off and no mesh swap is requested, so this is the UNMODIFIED
+                // cave-troll. Mirrors the FTK_AGENT_BRIDGE env-gate idiom (Agent/AgentBridge.cs). When unset or != "1"
+                // the env read has NO effect: the else-branch below is the shipped procedural-golem wiring.
                 if (Environment.GetEnvironmentVariable("FTK_BASELINE_STOCK_BODY") == "1")
                 {
-                    // No glbMesh/glbTexture (default null) => Core falls back to the stock chassis mesh/texture.
+                    // No glbMesh/glbTexture (default null) and no procedural golem => Core renders the stock chassis.
                     visual.tint = UnityEngine.Color.white;   // no recolor
                     visual.scale = 1f;                        // no scale change
                     visual.widthBoost = 1f;                   // no width boost
@@ -392,21 +384,33 @@ namespace FTKModFramework
                 }
                 else
                 {
-                    // EDITOR-FREE runtime-glb body path: the real custom mesh + its baked basecolor.
-                    visual.glbMesh = BossGlbMesh;
-                    visual.glbTexture = BossGlbTexture;
-                    visual.tint = UnityEngine.Color.white;   // do NOT green-multiply the baked mossy texture
-                    visual.scale = BossBodyScale;             // modest uniform scale; the mesh is ~2.65 tall in local space
-                    visual.widthBoost = 1f;                   // uniform: non-uniform scale would distort the real mesh
+                    // PROCEDURAL GOLEM BODY path (the shipped boss body): hide the troll chassis mesh and build the
+                    // runtime mossy bog-golem on the skeleton. The AI runtime-glb body is explicitly stood down (the
+                    // glb path renders a noisy blob), so glbMesh/glbTexture are cleared and the golem is the body.
+                    visual.glbMesh = null;                    // CLEARED: do NOT run the AI runtime-glb mesh path
+                    visual.glbTexture = null;                 // CLEARED: no baked basecolor either
+                    visual.tint = BossTint;                   // mossy brown-green recolor of the golem material
+                    visual.scale = BossBodyScale;             // hulking; the "tall" axis, also scales the whole golem
+                    visual.widthBoost = BossWidthBoost;       // broader-than-tall bog brute silhouette
                     visual.applyWetSkin = true;
                     visual.smoothness = BossSmoothness;
                     visual.metallic = BossMetallic;
-                    visual.hunchDegrees = 0f;                 // a spine bend would distort the real mesh
+                    visual.hunchDegrees = BossHunchDegrees;   // forward hunch (the golem torso inherits it)
                     visual.hideWeapon = BossHideWeapon;
-                    visual.addLantern = false;                // the mesh has a lantern baked into its geometry
-                    visual.swampAura = false;                 // OFF: the magenta sprite cloud obscured the custom mesh in the diorama
-                    // PROCEDURAL GOLEM BODY off (the real glb mesh is the body now); golem knobs left at defaults.
-                    visual.proceduralBody = false;
+                    visual.addLantern = true;                 // warm hand lantern (the lantern-bearer read)
+                    visual.lanternColor = LanternColor;
+                    visual.lanternEmission = LanternEmission;
+                    visual.lanternLightColor = LanternLightColor;
+                    visual.lanternSize = LanternSize;
+                    visual.lanternLightRange = LanternLightRange;
+                    visual.lanternLightIntensity = LanternLightIntensity;
+                    visual.swampAura = BossSwampAura;         // drifting bog-fly / marsh-gas aura around the torso
+                    // PROCEDURAL GOLEM BODY ON: replace the chassis mesh with the runtime mossy golem on the skeleton.
+                    visual.proceduralBody = BossProceduralBody;
+                    visual.golemTorsoRadius = GolemTorsoRadius;
+                    visual.golemLimbRadius = GolemLimbRadius;
+                    visual.golemLumpiness = GolemLumpiness;
+                    visual.golemEyeGlow = GolemEyeGlow;
                 }
                 Content.SetEnemyVisual(boss, visual);
             }
