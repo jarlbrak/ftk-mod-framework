@@ -1079,12 +1079,15 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
-        /// EXPERIMENT (#72): render the rigid one-bone glb mesh as a PLAIN static MeshRenderer parented to the live
-        /// <c>Root_M</c> bone (the mesh's single weighted bone), skipping skinning/bindpose entirely. The chassis
-        /// SkinnedMeshRenderer is DISABLED (not destroyed) so it does not peek through; the new child inherits the
-        /// boss up-scale from the CEL-root localScale via the bone hierarchy. Idempotent per clone (name guard, like
-        /// the lantern/golem). Visual-only / deterministic, so it stays co-op- and save-safe like the rest of this file.
-        /// Mirrors the proven BuildProceduralBody + weapon-prop pattern (MeshFilter+MeshRenderer under a skeleton bone).
+        /// EXPERIMENT (#72): render the rigid one-bone glb mesh as a PLAIN static MeshRenderer, skipping
+        /// skinning/bindpose entirely. The chassis SkinnedMeshRenderer is DISABLED (not destroyed) so it does not
+        /// peek through; the mount inherits the boss up-scale from the CEL hierarchy above it. The mesh's verts are
+        /// an UPRIGHT model-space figure, so by default it is parented to the WORLD-ALIGNED clone/body slot root
+        /// (NOT the <c>Root_M</c> bone, whose bone-local orientation/offset + the skipped inverse-bind put an
+        /// identity-local child off-frame). The mount is env-tunable via <c>FTK_BOSS_STATIC_MOUNT</c>
+        /// (<c>clone</c> default / <c>rootm</c> / <c>cel</c>) for A/B without a rebuild. Idempotent per clone (name
+        /// guard, like the lantern/golem). Visual-only / deterministic, so it stays co-op- and save-safe like the
+        /// rest of this file. Mirrors the proven BuildProceduralBody + weapon-prop pattern (MeshFilter+MeshRenderer).
         /// </summary>
         private static void ApplyStaticBossAttach(string enemyId, CharacterEventListener cel, SkinnedMeshRenderer smr,
             Mesh gmesh, string via, EnemyVisual v)
@@ -1095,37 +1098,83 @@ namespace FTKModFramework.Core
             // 1) HIDE the troll body SMR (do NOT destroy: the skeleton/bones must stay live so the child follows it).
             smr.enabled = false;
 
-            // 2) Resolve the live Root_M bone: the rigid mesh's single weighted bone. Search smr.bones by exact name
-            //    first (that is the bone set the loader was handed), then fall back to smr.rootBone, then smr.transform.
-            Transform mount = null;
-            string boneName = "Root_M";
-            Transform[] bones = smr.bones;
-            if (bones != null)
+            // 2) Resolve the MOUNT transform. The rigid mesh's verts are an UPRIGHT figure in model space (Y-up,
+            //    standing on Y=0, X/Z centered ~0), so it must hang off a WORLD-ALIGNED slot root, NOT a skeleton
+            //    bone. Root_M carries its own bone-local orientation/offset AND we skip the glb inverse-bind in
+            //    static mode, so identity-local under Root_M renders the mesh off-frame. Default to the clone/body
+            //    root (the enTroll...(Clone) slot, world-aligned at the diorama enemy slot, inheriting the boss
+            //    up-scale from the CEL above it). Env-tunable via FTK_BOSS_STATIC_MOUNT for A/B without a rebuild:
+            //      "clone" (default): smr.transform.parent (the body/clone root); fall back to smr.transform.
+            //      "rootm": the live Root_M bone (the prior behavior; for comparison).
+            //      "cel"  : the CharacterEventListener root transform.
+            string mountMode = "clone";
+            try
             {
-                for (int i = 0; i < bones.Length; i++)
+                string ms = Environment.GetEnvironmentVariable("FTK_BOSS_STATIC_MOUNT");
+                if (!string.IsNullOrEmpty(ms))
                 {
-                    Transform b = bones[i];
-                    if (b == null || b.name == null) continue;
-                    if (string.Equals(b.name, "Root_M", StringComparison.Ordinal)) { mount = b; break; }
+                    ms = ms.Trim().ToLowerInvariant();
+                    if (ms == "rootm" || ms == "cel" || ms == "clone") mountMode = ms;
                 }
             }
-            if (mount == null && smr.rootBone != null)
+            catch { /* env read can throw under restricted hosts; keep the "clone" default */ }
+
+            Transform mount = null;
+            string boneName = null;
+
+            if (mountMode == "rootm")
             {
-                mount = smr.rootBone;
-                boneName = "rootBone:" + (mount.name != null ? mount.name : "(unnamed)");
-                Plugin.Log.LogWarning("[enemy-visual] static-attach: 'Root_M' not found in smr.bones for '" + enemyId +
-                    "'; falling back to smr.rootBone '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
+                // Live Root_M bone: search smr.bones by exact name first (the bone set the loader was handed),
+                // then fall back to smr.rootBone, then smr.transform.
+                Transform[] bones = smr.bones;
+                if (bones != null)
+                {
+                    for (int i = 0; i < bones.Length; i++)
+                    {
+                        Transform b = bones[i];
+                        if (b == null || b.name == null) continue;
+                        if (string.Equals(b.name, "Root_M", StringComparison.Ordinal)) { mount = b; boneName = "Root_M"; break; }
+                    }
+                }
+                if (mount == null && smr.rootBone != null)
+                {
+                    mount = smr.rootBone;
+                    boneName = "rootBone:" + (mount.name != null ? mount.name : "(unnamed)");
+                    Plugin.Log.LogWarning("[enemy-visual] static-attach: 'Root_M' not found in smr.bones for '" + enemyId +
+                        "'; falling back to smr.rootBone '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
+                }
+                if (mount == null)
+                {
+                    mount = smr.transform;
+                    boneName = "smr.transform:" + (mount.name != null ? mount.name : "(unnamed)");
+                    Plugin.Log.LogWarning("[enemy-visual] static-attach: neither 'Root_M' nor smr.rootBone resolved for '" +
+                        enemyId + "'; falling back to smr.transform '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
+                }
             }
-            if (mount == null)
+            else if (mountMode == "cel")
             {
-                mount = smr.transform;
-                boneName = "smr.transform:" + (mount.name != null ? mount.name : "(unnamed)");
-                Plugin.Log.LogWarning("[enemy-visual] static-attach: neither 'Root_M' nor smr.rootBone resolved for '" +
-                    enemyId + "'; falling back to smr.transform '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
+                mount = cel.transform;
+                boneName = (mount != null && mount.name != null) ? mount.name : "(cel)";
+            }
+            else // "clone" (default): the world-aligned body/clone root above the SMR.
+            {
+                mount = smr.transform.parent;
+                if (mount == null)
+                {
+                    mount = smr.transform;
+                    boneName = "smr.transform:" + (mount.name != null ? mount.name : "(unnamed)");
+                    Plugin.Log.LogWarning("[enemy-visual] static-attach: smr.transform.parent is null for '" + enemyId +
+                        "'; falling back to smr.transform '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
+                }
+                else
+                {
+                    boneName = (mount.name != null) ? mount.name : "(unnamed)";
+                }
             }
 
-            // 3) Build the static body child under the mount bone, at identity local TRS (the bone carries the boss
-            //    up-scale + animation; the rigid mesh is authored in that bone's space, so identity is correct).
+            // 3) Build the static body child under the chosen mount, at identity local TRS. Under a world-aligned
+            //    slot root the upright model-space mesh renders upright at the boss slot; the mount inherits the
+            //    boss up-scale from the CEL hierarchy above it.
             GameObject body = new GameObject(GlbStaticBodyName);
             body.transform.SetParent(mount, false);
             body.transform.localPosition = Vector3.zero;
@@ -1181,7 +1230,7 @@ namespace FTKModFramework.Core
             mr.sharedMaterial = bodyMat;
 
             Plugin.Log.LogInfo("[enemy-visual] static-attach: rendered glb '" + v.glbMesh + "' as MeshRenderer under '" +
-                boneName + "' (SMR disabled, via " + via + ")" +
+                boneName + "' (mode=" + mountMode + ", SMR disabled, via " + via + ")" +
                 (texApplied ? " + texture '" + texFile + "'" : "") + " for '" + enemyId + "'.");
         }
 
