@@ -1241,11 +1241,19 @@ namespace FTKModFramework.Core
             mf.sharedMesh = gmesh;
             MeshRenderer mr = body.AddComponent<MeshRenderer>();
 
-            // 4) MATERIAL: instance off the troll body material (so the in-engine shader/setup carries over), then push
-            //    the glb texture into _MainTex + the same moss-grey emission as the skinned glb-texture block, so the
-            //    body READS in the dim crypt (a postfix-added MeshRenderer is NOT covered by the engine light-probe setup).
-            Material srcMat = smr.sharedMaterial;
-            Material bodyMat = (srcMat != null) ? new Material(srcMat) : new Material(Shader.Find("Standard"));
+            // 4) MATERIAL: MIRROR BuildProceduralBody's WORKING MeshRenderer material. The golem segments/blobs (which
+            //    render fine on plain MeshRenderers in-engine, e.g. BuildGolemMaterial) use a FRESH Shader.Find("Standard")
+            //    material, NOT an instance off smr.sharedMaterial. The troll's skinned-character shader can render NOTHING
+            //    on a non-skinned MeshRenderer (it expects skin/bone inputs a MeshRenderer never supplies), which was the
+            //    suspected invisibility. So build a Standard material from scratch, push the glb texture into _MainTex,
+            //    and keep the same moss-grey emission the skinned glb-texture block uses so the body READS in the dim
+            //    crypt (a postfix-added MeshRenderer is NOT covered by the engine light-probe setup).
+            Material bodyMat = new Material(Shader.Find("Standard"));
+
+            // RULE OUT BACK-FACE CULLING: if the shader exposes _Cull, render double-sided (_Cull=0 => Off) so an
+            // inverted-winding mesh is not invisible from the camera side. Harmless if the winding is already correct.
+            if (bodyMat.HasProperty("_Cull")) bodyMat.SetInt("_Cull", 0);
+
             bool texApplied = false;
             string texFile = v.glbTexture;
             if (!string.IsNullOrEmpty(v.glbTexture))
@@ -1280,6 +1288,27 @@ namespace FTKModFramework.Core
                 }
             }
             mr.sharedMaterial = bodyMat;
+
+            // TEMP STATIC-DIAG (#72): remove once static render confirmed. One line, fully null-guarded, never throws:
+            // the renderer/object/bounds/mesh/shader state so a STILL-invisible body can be diagnosed exactly.
+            try
+            {
+                Bounds wb = mr.bounds;                              // WORLD-space bounds of the live renderer
+                Mesh dm = (mf != null) ? mf.sharedMesh : null;
+                int verts = (dm != null) ? dm.vertexCount : -1;
+                Shader dsh = (bodyMat != null) ? bodyMat.shader : null;
+                string shName = (dsh != null && dsh.name != null) ? dsh.name : "(null)";
+                Plugin.Log.LogInfo("[enemy-visual][STATIC-DIAG] enabled=" + mr.enabled +
+                    " isVisible=" + mr.isVisible +
+                    " activeInHierarchy=" + body.activeInHierarchy +
+                    " activeSelf=" + body.activeSelf +
+                    " bounds.center=" + wb.center + " bounds.size=" + wb.size +
+                    " vertexCount=" + verts + " shader='" + shName + "'");
+            }
+            catch (Exception de)
+            {
+                Plugin.Log.LogWarning("[enemy-visual][STATIC-DIAG] diag read failed for '" + enemyId + "': " + de.Message);
+            }
 
             Plugin.Log.LogInfo("[enemy-visual] static-attach: rendered glb '" + v.glbMesh + "' as MeshRenderer under '" +
                 boneName + "' (mode=" + mountMode + ", SMR disabled, via " + via + ")" +
