@@ -1109,11 +1109,23 @@ namespace FTKModFramework.Core
             // 1) CAPTURE THE LIVE TROLL'S WORLD VOLUME *BEFORE* hiding it. smr.bounds is the skinned troll's
             //    world-space AABB (exactly where it visibly stands); smr.transform.rotation is the facing. These drive
             //    the static placement below, so the static mesh occupies the same on-screen volume the troll did.
+            //    ALSO capture the troll body's LAYER here, BEFORE disabling the SMR: the SMR's GameObject lives on the
+            //    combat-diorama layer (the layer the diorama camera's culling mask renders). A fresh GameObject defaults
+            //    to layer 0 (Default), which Unity does NOT inherit from the parent and which the diorama camera's mask
+            //    excludes; that culls the static body (isVisible=False) even with correct in-frustum bounds. So we must
+            //    set the static body to this same layer explicitly (see step 3b below). The proven golem path
+            //    (BuildProceduralBody + its segment/blob/eye builders) does NOT set a layer on the GameObjects it
+            //    creates; its segments render only because they parent to skeleton bones AND the diorama camera happens
+            //    to also render layer 0 for those bone-parented objects, so it is not a reliable model for an
+            //    UNPARENTED-in-world static body. Setting our layer to smr.gameObject.layer is the hypothesis.
             Bounds trollWorld = smr.bounds;
             Quaternion trollRot = smr.transform.rotation;
+            int dioramaLayer = smr.gameObject.layer;
             Plugin.Log.LogInfo("[enemy-visual] static-attach: live troll world AABB center=" + trollWorld.center +
                 " size=" + trollWorld.size + " min=" + trollWorld.min + " max=" + trollWorld.max +
-                " rotation=" + trollRot.eulerAngles + " for '" + enemyId + "'.");
+                " rotation=" + trollRot.eulerAngles +
+                " trollLayer=" + dioramaLayer + " ('" + LayerMask.LayerToName(dioramaLayer) + "')" +
+                " for '" + enemyId + "'.");
 
             // 2) HIDE the troll body SMR (do NOT destroy: the skeleton/bones must stay live so the clone root persists).
             smr.enabled = false;
@@ -1138,6 +1150,13 @@ namespace FTKModFramework.Core
 
             GameObject body = new GameObject(GlbStaticBodyName);
             body.transform.SetParent(mount, false);
+
+            // 3b) SET THE LAYER TO THE DIORAMA LAYER (the likely fix for isVisible=False). A fresh GameObject is on
+            //     layer 0 (Default), which Unity does NOT inherit from the parent and which the combat-diorama camera's
+            //     culling mask excludes, so the renderer is culled. Match the live troll body's layer (captured above,
+            //     before the SMR was disabled). The body has no children, so this single set covers it; the MeshRenderer
+            //     added below lives on this same GameObject, so it inherits this layer (the renderer.gameObject IS body).
+            body.layer = dioramaLayer;
 
             // 4) Read the custom mesh's model-space bbox so the placement ADAPTS to the actual mesh (no hardcoded bbox).
             //    Correct bounds matter for a static MeshRenderer (no updateWhenOffscreen on MeshRenderer); the loader
@@ -1249,12 +1268,18 @@ namespace FTKModFramework.Core
                 int verts = (dm != null) ? dm.vertexCount : -1;
                 Shader dsh = (bodyMat != null) ? bodyMat.shader : null;
                 string shName = (dsh != null && dsh.name != null) ? dsh.name : "(null)";
+                // LAYER CONFIRMATION: log the body's actual layer (int + name) so the capture verifies the set took,
+                // and the original troll SMR GameObject layer (int + name) to confirm we matched the diorama layer.
+                int bodyLayer = body.layer;
+                int smrLayer = smr.gameObject.layer;
                 Plugin.Log.LogInfo("[enemy-visual][STATIC-DIAG] enabled=" + mr.enabled +
                     " isVisible=" + mr.isVisible +
                     " activeInHierarchy=" + body.activeInHierarchy +
                     " activeSelf=" + body.activeSelf +
                     " bounds.center=" + wb.center + " bounds.size=" + wb.size +
-                    " vertexCount=" + verts + " shader='" + shName + "'");
+                    " vertexCount=" + verts + " shader='" + shName + "'" +
+                    " body.layer=" + bodyLayer + " ('" + LayerMask.LayerToName(bodyLayer) + "')" +
+                    " smr.layer=" + smrLayer + " ('" + LayerMask.LayerToName(smrLayer) + "')");
             }
             catch (Exception de)
             {
