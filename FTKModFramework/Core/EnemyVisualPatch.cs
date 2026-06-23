@@ -1211,18 +1211,35 @@ namespace FTKModFramework.Core
             mf.sharedMesh = gmesh;
             MeshRenderer mr = body.AddComponent<MeshRenderer>();
 
-            // 4) MATERIAL: MIRROR BuildProceduralBody's WORKING MeshRenderer material. The golem segments/blobs (which
-            //    render fine on plain MeshRenderers in-engine, e.g. BuildGolemMaterial) use a FRESH Shader.Find("Standard")
-            //    material, NOT an instance off smr.sharedMaterial. The troll's skinned-character shader can render NOTHING
-            //    on a non-skinned MeshRenderer (it expects skin/bone inputs a MeshRenderer never supplies), which was the
-            //    suspected invisibility. So build a Standard material from scratch, push the glb texture into _MainTex,
-            //    and keep the same moss-grey emission the skinned glb-texture block uses so the body READS in the dim
-            //    crypt (a postfix-added MeshRenderer is NOT covered by the engine light-probe setup).
-            Material bodyMat = new Material(Shader.Find("Standard"));
+            // 4) MATERIAL: render the rigid boss OPAQUE, SINGLE-SIDED, and LIGHTING-INDEPENDENT. GEODIAG proved the
+            //    in-engine mesh is geometrically coherent, so the earlier "shattered cloud" was a RENDER artifact: a
+            //    Standard material with _Cull=0 (double-sided, so the camera saw straight through the front faces) on a
+            //    postfix-added MeshRenderer that gets NO light probes (so it rendered dark, only visible when the capture
+            //    was brightened ~2.2x). Fix both at the shader level: use an UNLIT textured shader so scene lighting /
+            //    diorama light probes are irrelevant (the baked texture reads at full brightness regardless), and do NOT
+            //    touch _Cull so the shader's default back-face culling (single-sided, solid surface) applies.
+            //    If "Unlit/Texture" is unavailable in this build, fall back to Standard + full-white emission so the
+            //    body is still bright; the fallback is logged. Either way the troll's skinned-character shader is NOT
+            //    reused (it expects skin/bone inputs a plain MeshRenderer never supplies).
+            Shader bodyShader = Shader.Find("Unlit/Texture");
+            bool usedUnlit = bodyShader != null;
+            if (!usedUnlit) bodyShader = Shader.Find("Standard");
+            Material bodyMat = new Material(bodyShader);
+            Plugin.Log.LogInfo("[enemy-visual] static-attach: body shader = '" +
+                (bodyMat.shader != null && bodyMat.shader.name != null ? bodyMat.shader.name : "(null)") + "'" +
+                (usedUnlit ? " (Unlit/Texture)" : " (Standard fallback; Unlit/Texture unavailable)") +
+                " for '" + enemyId + "'.");
 
-            // RULE OUT BACK-FACE CULLING: if the shader exposes _Cull, render double-sided (_Cull=0 => Off) so an
-            // inverted-winding mesh is not invisible from the camera side. Harmless if the winding is already correct.
-            if (bodyMat.HasProperty("_Cull")) bodyMat.SetInt("_Cull", 0);
+            // STANDARD FALLBACK ONLY: make it bright with full-white emission so it reads without light probes. The
+            // Unlit shader has no _EmissionColor (HasProperty is false), so this block is a clean no-op there.
+            if (!usedUnlit && bodyMat.HasProperty("_EmissionColor"))
+            {
+                bodyMat.EnableKeyword("_EMISSION");
+                bodyMat.SetColor("_EmissionColor", Color.white);
+            }
+
+            // NOTE: do NOT set _Cull. Leaving it at the shader default gives back-face culling = single-sided, so the
+            // boss renders as a solid opaque surface (the see-through artifact came from the old _Cull=0 override).
 
             bool texApplied = false;
             string texFile = v.glbTexture;
@@ -1237,11 +1254,13 @@ namespace FTKModFramework.Core
                         tex.LoadImage(System.IO.File.ReadAllBytes(texPath));
                         if (bodyMat.HasProperty("_MainTex")) bodyMat.SetTexture("_MainTex", tex);
                         else bodyMat.mainTexture = tex;
-                        if (bodyMat.HasProperty("_EmissionColor"))
+                        // On the Standard fallback, modulate the white emission by the texture so the lit surface still
+                        // reads the baked detail. On Unlit there is no _EmissionColor, so this self-skips.
+                        if (!usedUnlit && bodyMat.HasProperty("_EmissionColor"))
                         {
                             bodyMat.EnableKeyword("_EMISSION");
                             if (bodyMat.HasProperty("_EmissionMap")) bodyMat.SetTexture("_EmissionMap", tex);
-                            bodyMat.SetColor("_EmissionColor", new Color(0.45f, 0.50f, 0.40f));
+                            bodyMat.SetColor("_EmissionColor", Color.white);
                         }
                         texApplied = true;
                     }
