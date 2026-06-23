@@ -49,6 +49,7 @@ namespace FTKModFramework.Core
         private const int CompFloat32 = 5126;
         private const int CompUint32 = 5125;
         private const int CompUint16 = 5123;
+        private const int CompUint8 = 5121;
 
         /// <summary>
         /// Build a runtime skinned <see cref="Mesh"/> from the <c>.glb</c> at
@@ -237,6 +238,16 @@ namespace FTKModFramework.Core
                     (usedGlbIbm ? "glb-IBM" : "live-fallback") +
                     "; joint slots=" + jointBoneNames.Length +
                     ", dropped slots (name not on live rig)=" + droppedSlots + ").");
+
+                // 8) ONE-SHOT GEOMETRY DIAGNOSTIC (#72): read the geometry BACK OFF the assembled Unity Mesh (not the
+                //    decode arrays) so the in-engine Mesh can be compared byte-for-byte against diag_decode_replica.py.
+                //    This is the discriminator for "coherent decode -> shattered in-engine Mesh": if the readback below
+                //    disagrees with the Python replica (different triCount, out-of-range indices, or first-triangle verts
+                //    that span the whole bbox instead of clustering), the scramble is in the Unity Mesh assembly, not the
+                //    decode. Best-effort + fully guarded: never affects the load. Index componentType is logged so the
+                //    5121/5123/5125 branch taken by ReadScalarIndices is visible alongside the result.
+                LogGeometryDiagnostics(glbFileName, mesh, doc.AccessorComponentType(indicesAcc));
+
                 return mesh;
             }
             catch (Exception e)
@@ -445,6 +456,86 @@ namespace FTKModFramework.Core
             return "(" + c.x.ToString("0.###", inv) + "," + c.y.ToString("0.###", inv) + "," + c.z.ToString("0.###", inv) + ")";
         }
 
+        private static string Fmt3(Vector3 v)
+        {
+            System.Globalization.CultureInfo inv = System.Globalization.CultureInfo.InvariantCulture;
+            return "(" + v.x.ToString("0.####", inv) + "," + v.y.ToString("0.####", inv) + "," + v.z.ToString("0.####", inv) + ")";
+        }
+
+        /// <summary>
+        /// ONE-SHOT GEOMETRY DUMP (tag <c>[gltf][GEODIAG #72]</c>): reads the assembled Unity <see cref="Mesh"/> BACK and
+        /// logs <c>vertexCount</c>, <c>triangles.Length/3</c>, the index accessor componentType the decode branched on,
+        /// the first 6 triangles (as their 3 vertex indices), the <c>mesh.vertices[]</c> positions of those 18 referenced
+        /// verts, and <c>mesh.bounds</c>. Lets the controller compare the in-engine Mesh against diag_decode_replica.py:
+        /// same triCount + in-range indices + first-triangle verts that CLUSTER (not span the bbox) means the geometry is
+        /// coherent in-engine; a divergence localizes the shatter to the Mesh assembly rather than the decode. Reads off
+        /// the Mesh (not the decode arrays) on purpose. Fully guarded: any failure logs and never affects the load.
+        /// </summary>
+        private static void LogGeometryDiagnostics(string glbFileName, Mesh mesh, int indexComponentType)
+        {
+            try
+            {
+                int vCount = mesh.vertexCount;
+                int[] tris = mesh.triangles;            // read BACK off the Mesh (post-assembly, in-engine state)
+                Vector3[] verts = mesh.vertices;        // read BACK off the Mesh
+                int triCount = (tris != null) ? tris.Length / 3 : 0;
+
+                // Index range over the whole readback index buffer (an out-of-range index here would mean the Mesh
+                // index buffer itself is corrupt, e.g. a 16-bit truncation/wrap the decode arrays did not have).
+                int idxMin = int.MaxValue, idxMax = int.MinValue, oor = 0;
+                if (tris != null)
+                {
+                    for (int i = 0; i < tris.Length; i++)
+                    {
+                        int t = tris[i];
+                        if (t < idxMin) idxMin = t;
+                        if (t > idxMax) idxMax = t;
+                        if (t < 0 || t >= vCount) oor++;
+                    }
+                }
+                if (idxMin == int.MaxValue) { idxMin = 0; idxMax = 0; }
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("[gltf][GEODIAG #72] '").Append(glbFileName).Append("': vertexCount=").Append(vCount)
+                  .Append(" triCount=").Append(triCount)
+                  .Append(" indexComponentType=").Append(indexComponentType)
+                  .Append(" (").Append(IndexCompName(indexComponentType)).Append(")")
+                  .Append(" indexMin=").Append(idxMin).Append(" indexMax=").Append(idxMax)
+                  .Append(" outOfRange=").Append(oor)
+                  .Append(" bounds(center=").Append(Fmt3(mesh.bounds.center))
+                  .Append(", size=").Append(Fmt3(mesh.bounds.size)).Append(")");
+
+                int probe = (triCount < 6) ? triCount : 6;
+                for (int t = 0; t < probe; t++)
+                {
+                    int a = tris[t * 3], b = tris[t * 3 + 1], c = tris[t * 3 + 2];
+                    sb.Append(" | tri").Append(t).Append("=[").Append(a).Append(',').Append(b).Append(',').Append(c).Append("]");
+                    if (verts != null && a >= 0 && a < verts.Length && b >= 0 && b < verts.Length && c >= 0 && c < verts.Length)
+                    {
+                        sb.Append(" pA=").Append(Fmt3(verts[a])).Append(" pB=").Append(Fmt3(verts[b])).Append(" pC=").Append(Fmt3(verts[c]));
+                    }
+                }
+
+                Plugin.Log.LogInfo(sb.ToString());
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogInfo("[gltf][GEODIAG #72] '" + glbFileName + "': skipped (" + e.Message + ").");
+            }
+        }
+
+        /// <summary>Human-readable name for a glTF index accessor componentType (for the GEODIAG line).</summary>
+        private static string IndexCompName(int comp)
+        {
+            switch (comp)
+            {
+                case 5121: return "u8";
+                case CompUint16: return "u16";
+                case CompUint32: return "u32";
+                default: return "?";
+            }
+        }
+
         // ---- glTF JSON walker (over the hand-rolled parser) -------------------------------------------------
 
         /// <summary>
@@ -555,6 +646,15 @@ namespace FTKModFramework.Core
 
             // ---- accessor decode (tightly packed; one bufferView each; no byteStride) ----
 
+            /// <summary>The componentType of an accessor (e.g. 5125/u32, 5123/u16, 5121/u8), or 0 if absent. For
+            /// GEODIAG only: shows which branch ReadScalarIndices took. Does not resolve the bufferView.</summary>
+            internal int AccessorComponentType(int accIndex)
+            {
+                if (_accessors == null || accIndex < 0 || accIndex >= _accessors.Count) return 0;
+                JObj acc = _accessors.GetObj(accIndex);
+                return acc != null ? acc.GetInt("componentType", 0) : 0;
+            }
+
             /// <summary>Resolve an accessor to (byteOffset into BIN, count, componentType). Returns false on miss.</summary>
             private bool AccessorView(int accIndex, out int byteOffset, out int count, out int componentType)
             {
@@ -643,8 +743,14 @@ namespace FTKModFramework.Core
                 return r;
             }
 
-            /// <summary>SCALAR indices as int[] (componentType u32 or u16). &lt; 65,535 verts, so values fit in int
-            /// and the Mesh uses 16-bit indices regardless of the source width (we never set indexFormat).</summary>
+            /// <summary>SCALAR indices as int[]. Branches on the accessor componentType so the SOURCE WIDTH (u8 5121 /
+            /// u16 5123 / u32 5125) is honoured exactly: reading a u32 index buffer as if it were u16 (or vice versa)
+            /// halves/doubles the stride and scrambles EVERY triangle into the exploded-triangle cloud. The element
+            /// COUNT is the accessor's <c>count</c> (index count), NOT byteLength/width, and each index is bounds-read
+            /// at its own width. The Mesh stores these as 16-bit indices regardless of the source width because there
+            /// are &lt; 65,535 verts (we never set Mesh.indexFormat, which does not exist in Unity 2017.2.2p2); the
+            /// VALUES fit in 16 bits, so no truncation occurs. Returns null on an unknown componentType or a buffer
+            /// overrun.</summary>
             internal int[] ReadScalarIndices(int accIndex)
             {
                 int off, count, comp;
@@ -656,7 +762,10 @@ namespace FTKModFramework.Core
                     if (off + (long)count * 4 > _bin.Length) return null;
                     for (int i = 0; i < count; i++)
                     {
-                        r[i] = (int)(uint)(_bin[p] | (_bin[p + 1] << 8) | (_bin[p + 2] << 16) | (_bin[p + 3] << 24));
+                        // 4-byte LE -> uint -> int. Values are vertex indices (< 65,535), so the high bytes are 0 and
+                        // the (uint)->(int) round-trip is exact; the explicit (uint) cast keeps a hypothetical
+                        // top-bit-set word non-negative before the (int) reinterpret.
+                        r[i] = (int)(uint)((uint)_bin[p] | ((uint)_bin[p + 1] << 8) | ((uint)_bin[p + 2] << 16) | ((uint)_bin[p + 3] << 24));
                         p += 4;
                     }
                     return r;
@@ -668,6 +777,16 @@ namespace FTKModFramework.Core
                     {
                         r[i] = _bin[p] | (_bin[p + 1] << 8);
                         p += 2;
+                    }
+                    return r;
+                }
+                if (comp == CompUint8)
+                {
+                    if (off + (long)count > _bin.Length) return null;
+                    for (int i = 0; i < count; i++)
+                    {
+                        r[i] = _bin[p];
+                        p += 1;
                     }
                     return r;
                 }
