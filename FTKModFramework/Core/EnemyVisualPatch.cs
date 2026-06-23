@@ -1079,19 +1079,22 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
-        /// EXPERIMENT (#72): render the rigid one-bone glb mesh as a PLAIN static MeshRenderer, skipping
+        /// EXPERIMENT (#72/#74): render the rigid one-bone glb mesh as a PLAIN static MeshRenderer, skipping
         /// skinning/bindpose entirely. The chassis SkinnedMeshRenderer is DISABLED (not destroyed) so it does not
-        /// peek through. The mesh's verts are an UPRIGHT model-space figure, so by default it is parented to the
-        /// WORLD-ALIGNED clone/body slot root (NOT the <c>Root_M</c> bone, whose bone-local orientation/offset put
-        /// an identity-local child off-frame). The mount is env-tunable via <c>FTK_BOSS_STATIC_MOUNT</c>
-        /// (<c>clone</c> default / <c>rootm</c> / <c>cel</c>) for A/B without a rebuild.
+        /// peek through.
         ///
-        /// The child is then placed EXPLICITLY in world units (not at identity local), mirroring
-        /// <see cref="BuildProceduralBody"/>'s lossyScale compensation: the mount carries a large baked lossyScale,
-        /// so a localScale=1 child rendered enormous/off-frame. We set a target WORLD height
-        /// (<c>FTK_BOSS_STATIC_HEIGHT</c>, default 3.6 = the mesh's ~2.65 natural height times the boss scale ~1.4),
-        /// compute <c>localScale = targetWorldScale / mount.lossyScale</c> per-axis, and stand the mesh feet-on-floor
-        /// at the slot by mapping the read <c>gmesh.bounds</c> bottom-center onto the mount's world origin.
+        /// PLACEMENT (this iteration): stop guessing anchors. Capture the LIVE skinned troll's world-space AABB
+        /// (<c>smr.bounds</c>) and rotation (<c>smr.transform.rotation</c>) BEFORE disabling the SMR, then drop the
+        /// static mesh into that EXACT world volume. Earlier iterations anchored "feet at the clone-root origin",
+        /// which floated the boss ~8u above the floor because the clone-root pivot is NOT at the floor (the troll's
+        /// BONES are at the floor; the clone-root pivot sits up high). Setting the body's WORLD transform
+        /// (rotation/scale/position) directly is parent-agnostic, so it is correct whether the body is parented to the
+        /// clone root or left unparented.
+        ///
+        /// The body's WORLD scale is uniform, sized so the mesh's natural height matches the troll AABB height
+        /// (<c>FTK_BOSS_STATIC_HEIGHT</c> overrides if set); its WORLD rotation matches the troll's; its WORLD position
+        /// is solved so the scaled+rotated mesh bbox's bottom-center lands on the troll's floor point
+        /// (<c>center.x, min.y, center.z</c>). Deterministic: the boss stands exactly where the troll visibly stood.
         ///
         /// Idempotent per clone (name guard, like the lantern/golem). Visual-only / deterministic, so it stays co-op-
         /// and save-safe like the rest of this file. Mirrors the proven BuildProceduralBody pattern (MeshFilter +
@@ -1103,108 +1106,51 @@ namespace FTKModFramework.Core
             // IDEMPOTENCY PER CLONE: a re-apply on this same fresh clone must not stack a second static body.
             if (FindExact(cel, GlbStaticBodyName) != null) return;
 
-            // 1) HIDE the troll body SMR (do NOT destroy: the skeleton/bones must stay live so the child follows it).
+            // 1) CAPTURE THE LIVE TROLL'S WORLD VOLUME *BEFORE* hiding it. smr.bounds is the skinned troll's
+            //    world-space AABB (exactly where it visibly stands); smr.transform.rotation is the facing. These drive
+            //    the static placement below, so the static mesh occupies the same on-screen volume the troll did.
+            Bounds trollWorld = smr.bounds;
+            Quaternion trollRot = smr.transform.rotation;
+            Plugin.Log.LogInfo("[enemy-visual] static-attach: live troll world AABB center=" + trollWorld.center +
+                " size=" + trollWorld.size + " min=" + trollWorld.min + " max=" + trollWorld.max +
+                " rotation=" + trollRot.eulerAngles + " for '" + enemyId + "'.");
+
+            // 2) HIDE the troll body SMR (do NOT destroy: the skeleton/bones must stay live so the clone root persists).
             smr.enabled = false;
 
-            // 2) Resolve the MOUNT transform. The rigid mesh's verts are an UPRIGHT figure in model space (Y-up,
-            //    standing on Y=0, X/Z centered ~0), so it must hang off a WORLD-ALIGNED slot root, NOT a skeleton
-            //    bone. Root_M carries its own bone-local orientation/offset AND we skip the glb inverse-bind in
-            //    static mode, so identity-local under Root_M renders the mesh off-frame. Default to the clone/body
-            //    root (the enTroll...(Clone) slot, world-aligned at the diorama enemy slot, inheriting the boss
-            //    up-scale from the CEL above it). Env-tunable via FTK_BOSS_STATIC_MOUNT for A/B without a rebuild:
-            //      "clone" (default): smr.transform.parent (the body/clone root); fall back to smr.transform.
-            //      "rootm": the live Root_M bone (the prior behavior; for comparison).
-            //      "cel"  : the CharacterEventListener root transform.
-            string mountMode = "clone";
-            try
+            // 3) Choose a PARENT for the static body. Placement below is set in WORLD space (rotation/position) so the
+            //    parent does not change where the mesh renders; we still parent to the clone root (smr.transform.parent)
+            //    by default so the body is cleaned up with the clone and inherits its active/inactive state. Fall back
+            //    to smr.transform if the parent is null.
+            Transform mount = smr.transform.parent;
+            string parentName;
+            if (mount == null)
             {
-                string ms = Environment.GetEnvironmentVariable("FTK_BOSS_STATIC_MOUNT");
-                if (!string.IsNullOrEmpty(ms))
-                {
-                    ms = ms.Trim().ToLowerInvariant();
-                    if (ms == "rootm" || ms == "cel" || ms == "clone") mountMode = ms;
-                }
+                mount = smr.transform;
+                parentName = "smr.transform:" + (mount.name != null ? mount.name : "(unnamed)");
+                Plugin.Log.LogWarning("[enemy-visual] static-attach: smr.transform.parent is null for '" + enemyId +
+                    "'; parenting to smr.transform '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
             }
-            catch { /* env read can throw under restricted hosts; keep the "clone" default */ }
-
-            Transform mount = null;
-            string boneName = null;
-
-            if (mountMode == "rootm")
+            else
             {
-                // Live Root_M bone: search smr.bones by exact name first (the bone set the loader was handed),
-                // then fall back to smr.rootBone, then smr.transform.
-                Transform[] bones = smr.bones;
-                if (bones != null)
-                {
-                    for (int i = 0; i < bones.Length; i++)
-                    {
-                        Transform b = bones[i];
-                        if (b == null || b.name == null) continue;
-                        if (string.Equals(b.name, "Root_M", StringComparison.Ordinal)) { mount = b; boneName = "Root_M"; break; }
-                    }
-                }
-                if (mount == null && smr.rootBone != null)
-                {
-                    mount = smr.rootBone;
-                    boneName = "rootBone:" + (mount.name != null ? mount.name : "(unnamed)");
-                    Plugin.Log.LogWarning("[enemy-visual] static-attach: 'Root_M' not found in smr.bones for '" + enemyId +
-                        "'; falling back to smr.rootBone '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
-                }
-                if (mount == null)
-                {
-                    mount = smr.transform;
-                    boneName = "smr.transform:" + (mount.name != null ? mount.name : "(unnamed)");
-                    Plugin.Log.LogWarning("[enemy-visual] static-attach: neither 'Root_M' nor smr.rootBone resolved for '" +
-                        enemyId + "'; falling back to smr.transform '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
-                }
-            }
-            else if (mountMode == "cel")
-            {
-                mount = cel.transform;
-                boneName = (mount != null && mount.name != null) ? mount.name : "(cel)";
-            }
-            else // "clone" (default): the world-aligned body/clone root above the SMR.
-            {
-                mount = smr.transform.parent;
-                if (mount == null)
-                {
-                    mount = smr.transform;
-                    boneName = "smr.transform:" + (mount.name != null ? mount.name : "(unnamed)");
-                    Plugin.Log.LogWarning("[enemy-visual] static-attach: smr.transform.parent is null for '" + enemyId +
-                        "'; falling back to smr.transform '" + (mount.name != null ? mount.name : "(unnamed)") + "'.");
-                }
-                else
-                {
-                    boneName = (mount.name != null) ? mount.name : "(unnamed)";
-                }
+                parentName = (mount.name != null) ? mount.name : "(unnamed)";
             }
 
-            // 3) Build the static body child under the chosen mount, then place it EXPLICITLY in world units.
-            //    The earlier naive identity-local placement (localScale=1) rendered off-frame: the mount carries a
-            //    large baked lossyScale, so a localScale=1 child became enormous (camera inside it) and the upright
-            //    model-space mesh's feet/center never landed at the slot floor. Mirror BuildProceduralBody's
-            //    lossyScale compensation exactly: BuildChainSegments/BuildBlobAt author a WORLD size then divide by
-            //    the parent bone's lossyScale per-axis (guarded by Mathf.Approximately(ls,0)?1:Abs(ls)) so the child
-            //    lands at that world size; BuildEyeAt likewise converts a WORLD offset to local units per-axis. Here
-            //    we set a target WORLD scale (so the mesh stands at a boss-appropriate on-screen size) and place the
-            //    mesh bbox's bottom-center on the anchor's world origin (the slot floor).
             GameObject body = new GameObject(GlbStaticBodyName);
             body.transform.SetParent(mount, false);
-            body.transform.localRotation = Quaternion.identity; // align to the anchor (faces the camera like the troll)
 
-            // Correct bounds matter for a static MeshRenderer (no updateWhenOffscreen on MeshRenderer); the loader
-            // already recalculates, but RecalculateBounds is idempotent so we re-assert it cheaply here. We then read
-            // gmesh.bounds so the placement ADAPTS to the actual mesh (no hardcoded bbox).
+            // 4) Read the custom mesh's model-space bbox so the placement ADAPTS to the actual mesh (no hardcoded bbox).
+            //    Correct bounds matter for a static MeshRenderer (no updateWhenOffscreen on MeshRenderer); the loader
+            //    already recalculates, but RecalculateBounds is idempotent so we re-assert it cheaply here.
             gmesh.RecalculateBounds();
             Bounds mb = gmesh.bounds;                 // model-space bbox of the custom mesh
             float meshHeight = mb.size.y;             // natural authored height (feet->head), ~2.65 for the mudwretch
             if (meshHeight <= 1e-4f) meshHeight = 1f;  // degenerate guard
 
-            // TARGET WORLD HEIGHT: env-tunable so size can be swept without a rebuild. Default ~3.6 world units
-            // (= the mesh's ~2.65 natural height times the registered boss scale ~1.4), which puts the mudwretch at
-            // the same on-screen size the stock troll body occupied at this slot.
-            float targetHeight = 3.6f;
+            // 5) TARGET WORLD HEIGHT: match the troll's on-screen height by default. FTK_BOSS_STATIC_HEIGHT is an
+            //    OPTIONAL override (env-tunable so size can be swept without a rebuild).
+            float targetHeight = trollWorld.size.y;
+            if (targetHeight <= 1e-4f) targetHeight = meshHeight; // degenerate-AABB guard
             try
             {
                 string hs = Environment.GetEnvironmentVariable("FTK_BOSS_STATIC_HEIGHT");
@@ -1214,28 +1160,33 @@ namespace FTKModFramework.Core
                     if (float.TryParse(hs.Trim(), out parsed) && parsed > 1e-4f) targetHeight = parsed;
                 }
             }
-            catch { /* env read can throw under restricted hosts; keep the default */ }
+            catch { /* env read can throw under restricted hosts; keep the troll-matched default */ }
 
             // The uniform WORLD scale that makes the mesh's natural height equal the target world height.
             float worldScale = targetHeight / meshHeight;
 
-            // LOSSYSCALE COMPENSATION (the BuildProceduralBody idiom): localScale = targetWorldScale / parent.lossyScale
-            // per-axis, so the child renders at worldScale in WORLD units despite the mount's baked lossyScale. Guard a
-            // zero/near-zero lossyScale axis with 1 (matching BuildChainSegments/BuildBlobAt/BuildEyeAt).
-            Vector3 ls = mount.lossyScale;
-            float ax = Mathf.Approximately(ls.x, 0f) ? 1f : Mathf.Abs(ls.x);
-            float ay = Mathf.Approximately(ls.y, 0f) ? 1f : Mathf.Abs(ls.y);
-            float az = Mathf.Approximately(ls.z, 0f) ? 1f : Mathf.Abs(ls.z);
-            Vector3 localScale = new Vector3(worldScale / ax, worldScale / ay, worldScale / az);
-            body.transform.localScale = localScale;
+            // 6) SET WORLD TRANSFORM to occupy the troll's volume. Order: scale -> rotation -> position, so Unity's
+            //    world<->local resolution is consistent. Setting .rotation and .position in WORLD space is correct
+            //    regardless of the parent's transform.
+            //    Scale: uniform worldScale in WORLD units. If parented, the lossyScale of the parent is baked in, so
+            //    divide per-axis (guarded against a zero/near-zero axis) to land at worldScale in world units. (When
+            //    the parent is identity-scaled this reduces to Vector3.one * worldScale.)
+            Vector3 pls = mount.lossyScale;
+            float ax = Mathf.Approximately(pls.x, 0f) ? 1f : Mathf.Abs(pls.x);
+            float ay = Mathf.Approximately(pls.y, 0f) ? 1f : Mathf.Abs(pls.y);
+            float az = Mathf.Approximately(pls.z, 0f) ? 1f : Mathf.Abs(pls.z);
+            body.transform.localScale = new Vector3(worldScale / ax, worldScale / ay, worldScale / az);
 
-            // FEET-ON-FLOOR, CENTERED AT THE SLOT: with identity local rotation and the localScale above, a model-space
-            // point p maps to localPosition + Scale(localScale, p). We want the mesh bbox's bottom-center
-            // (center.x, min.y, center.z) to map to the anchor origin (Vector3.zero, the slot floor point under a
-            // world-aligned mount). Solve: localPosition = -Scale(localScale, bottomCenter).
-            Vector3 bottomCenter = new Vector3(mb.center.x, mb.min.y, mb.center.z);
-            Vector3 localPosition = -Vector3.Scale(localScale, bottomCenter);
-            body.transform.localPosition = localPosition;
+            // Rotation: face the camera exactly as the troll did.
+            body.transform.rotation = trollRot;
+
+            // Position: stand the SCALED mesh's bottom-center on the troll's floor point. The floor point is the AABB
+            // bottom-center (center.x, min.y, center.z). The mesh's model-space bottom-center is bc; after scale and
+            // rotation, the world offset of that point from the body origin is trollRot * (worldScale * bc). So the
+            // body origin must sit at floorPoint - that offset. Set position AFTER rotation+scale.
+            Vector3 floorPoint = new Vector3(trollWorld.center.x, trollWorld.min.y, trollWorld.center.z);
+            Vector3 bc = new Vector3(mb.center.x, mb.min.y, mb.center.z);
+            body.transform.position = floorPoint - trollRot * (worldScale * bc);
 
             MeshFilter mf = body.AddComponent<MeshFilter>();
             mf.sharedMesh = gmesh;
@@ -1310,12 +1261,14 @@ namespace FTKModFramework.Core
                 Plugin.Log.LogWarning("[enemy-visual][STATIC-DIAG] diag read failed for '" + enemyId + "': " + de.Message);
             }
 
-            Plugin.Log.LogInfo("[enemy-visual] static-attach: rendered glb '" + v.glbMesh + "' as MeshRenderer under '" +
-                boneName + "' (mode=" + mountMode + ", SMR disabled, via " + via + ")" +
+            Plugin.Log.LogInfo("[enemy-visual] static-attach: rendered glb '" + v.glbMesh + "' as MeshRenderer parented to '" +
+                parentName + "' (SMR disabled, via " + via + ")" +
                 (texApplied ? " + texture '" + texFile + "'" : "") + " for '" + enemyId + "'." +
-                " anchor.lossyScale=" + ls + " meshHeight=" + meshHeight.ToString("0.###") +
-                " targetHeight=" + targetHeight.ToString("0.###") + " worldScale=" + worldScale.ToString("0.###") +
-                " localScale=" + localScale + " localPosition=" + localPosition + " meshBounds(c=" + mb.center +
+                " trollWorld.center=" + trollWorld.center + " trollWorld.size=" + trollWorld.size +
+                " meshHeight=" + meshHeight.ToString("0.###") + " targetHeight=" + targetHeight.ToString("0.###") +
+                " worldScale=" + worldScale.ToString("0.###") +
+                " body.position=" + body.transform.position + " body.lossyScale=" + body.transform.lossyScale +
+                " body.rotation=" + body.transform.rotation.eulerAngles + " meshBounds(c=" + mb.center +
                 ", min=" + mb.min + ", max=" + mb.max + ")");
         }
 
