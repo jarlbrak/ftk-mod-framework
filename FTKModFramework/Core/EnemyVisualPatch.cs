@@ -636,6 +636,16 @@ namespace FTKModFramework.Core
         // EXPERIMENT (#72): name of the static-attach glb body child (under Root_M), for the per-clone idempotency check.
         private const string GlbStaticBodyName = "ftkmf_glb_static_body";
 
+        // EXPERIMENT (#72/#74): Mesh instanceIDs whose normals we have already recalculated in the static-attach path,
+        // so RecalculateNormals runs ONCE per Mesh instance (it is not free, and the static path runs per clone).
+        private static readonly HashSet<int> _normalsRecalculated = new HashSet<int>();
+
+        // EXPERIMENT (#72/#74): modest emission for the static boss body on the Lit Standard material, so it reads in
+        // the dim crypt WITHOUT washing out the scene-light shading (a postfix MeshRenderer gets no light probes, but the
+        // diorama's direct lights still hit it). Texture-modulated via _EmissionMap; subtle grey lifts it out of pure
+        // black while letting the diorama lights shape the form. No FTK_BOSS_EMIT env lever exists, so this is a const.
+        private static readonly Color StaticBossEmission = new Color(0.35f, 0.35f, 0.35f);
+
         // The skeleton chains, as ordered exact bone names (parent -> child). We build a tapered segment for each
         // adjacent pair (skipping zero-length Scapula links by starting each arm at the Shoulder and each leg at the
         // Hip), parenting it to the PROXIMAL bone and pointing it at the DISTAL bone, so each segment animates with
@@ -1162,6 +1172,21 @@ namespace FTKModFramework.Core
             //    Correct bounds matter for a static MeshRenderer (no updateWhenOffscreen on MeshRenderer); the loader
             //    already recalculates, but RecalculateBounds is idempotent so we re-assert it cheaply here.
             gmesh.RecalculateBounds();
+
+            // 4a) RECALCULATE NORMALS so the Lit Standard material (below) shades with CONSISTENT normals. The AI-authored
+            //     glb's per-vertex normals are unreliable (inconsistent winding -> inconsistent normals -> patchy, broken
+            //     shading), so we recompute smooth-ish normals from the geometry, giving the Standard shader a coherent
+            //     basis to read the boss's form. Guarded so it runs ONCE per Mesh instance (RecalculateNormals is not
+            //     free, and the static path runs per clone; the loader builds a fresh Mesh per LoadSkinnedGlb call, but
+            //     the guard also makes a hypothetical reused-instance path safe).
+            int meshId = gmesh.GetInstanceID();
+            if (_normalsRecalculated.Add(meshId))
+            {
+                gmesh.RecalculateNormals();
+                Plugin.Log.LogInfo("[enemy-visual] static-attach: recalculated mesh normals (instanceID=" + meshId +
+                    ") for '" + enemyId + "'.");
+            }
+
             Bounds mb = gmesh.bounds;                 // model-space bbox of the custom mesh
             float meshHeight = mb.size.y;             // natural authored height (feet->head), ~2.65 for the mudwretch
             if (meshHeight <= 1e-4f) meshHeight = 1f;  // degenerate guard
@@ -1211,35 +1236,28 @@ namespace FTKModFramework.Core
             mf.sharedMesh = gmesh;
             MeshRenderer mr = body.AddComponent<MeshRenderer>();
 
-            // 4) MATERIAL: render the rigid boss OPAQUE, SINGLE-SIDED, and LIGHTING-INDEPENDENT. GEODIAG proved the
-            //    in-engine mesh is geometrically coherent, so the earlier "shattered cloud" was a RENDER artifact: a
-            //    Standard material with _Cull=0 (double-sided, so the camera saw straight through the front faces) on a
-            //    postfix-added MeshRenderer that gets NO light probes (so it rendered dark, only visible when the capture
-            //    was brightened ~2.2x). Fix both at the shader level: use an UNLIT textured shader so scene lighting /
-            //    diorama light probes are irrelevant (the baked texture reads at full brightness regardless), and do NOT
-            //    touch _Cull so the shader's default back-face culling (single-sided, solid surface) applies.
-            //    If "Unlit/Texture" is unavailable in this build, fall back to Standard + full-white emission so the
-            //    body is still bright; the fallback is logged. Either way the troll's skinned-character shader is NOT
-            //    reused (it expects skin/bone inputs a plain MeshRenderer never supplies).
-            Shader bodyShader = Shader.Find("Unlit/Texture");
-            bool usedUnlit = bodyShader != null;
-            if (!usedUnlit) bodyShader = Shader.Find("Standard");
-            Material bodyMat = new Material(bodyShader);
+            // 4) MATERIAL: render the rigid boss LIT and DOUBLE-SIDED so the coherent mesh reads as its true best
+            //    in-game form (the offline Blender preview rendered lit + double-sided; we match that here). The earlier
+            //    Unlit + single-sided setup showed the mesh as flat gappy triangle-soup: UNLIT gives no shading, so the
+            //    form was lost (a flat silhouette), and SINGLE-SIDED back-face culling dropped the backward-wound
+            //    triangles (the AI mesh has inconsistent winding) -> see-through holes. The fixes:
+            //      - LIT Standard shader: scene/diorama direct lights shade the recalculated normals (step 4a), giving
+            //        the mesh real form instead of a flat plate.
+            //      - DOUBLE-SIDED (_Cull=0, Off): both faces render, filling the holes from inconsistent winding.
+            //      - MODEST texture-modulated emission: a postfix MeshRenderer gets NO light probes, so in the dim crypt
+            //        it would read near-black; a subtle grey emission (StaticBossEmission) lifts it out of pure black
+            //        while still letting the diorama's direct lights shape the shading (full-white emission would wash
+            //        the shading out). Emission is safe on OUR object: the game's CEL hit-flash _EmissionColor reset only
+            //        touches CEL-managed body materials, never this added MeshRenderer.
+            //    The troll's skinned-character shader is NOT reused (it expects skin/bone inputs a plain MeshRenderer
+            //    never supplies).
+            Material bodyMat = new Material(Shader.Find("Standard"));
             Plugin.Log.LogInfo("[enemy-visual] static-attach: body shader = '" +
-                (bodyMat.shader != null && bodyMat.shader.name != null ? bodyMat.shader.name : "(null)") + "'" +
-                (usedUnlit ? " (Unlit/Texture)" : " (Standard fallback; Unlit/Texture unavailable)") +
-                " for '" + enemyId + "'.");
+                (bodyMat.shader != null && bodyMat.shader.name != null ? bodyMat.shader.name : "(null)") +
+                "' (Lit Standard, double-sided) for '" + enemyId + "'.");
 
-            // STANDARD FALLBACK ONLY: make it bright with full-white emission so it reads without light probes. The
-            // Unlit shader has no _EmissionColor (HasProperty is false), so this block is a clean no-op there.
-            if (!usedUnlit && bodyMat.HasProperty("_EmissionColor"))
-            {
-                bodyMat.EnableKeyword("_EMISSION");
-                bodyMat.SetColor("_EmissionColor", Color.white);
-            }
-
-            // NOTE: do NOT set _Cull. Leaving it at the shader default gives back-face culling = single-sided, so the
-            // boss renders as a solid opaque surface (the see-through artifact came from the old _Cull=0 override).
+            // DOUBLE-SIDED: _Cull=0 (Off) renders both faces so the inconsistent-winding holes are filled.
+            if (bodyMat.HasProperty("_Cull")) bodyMat.SetInt("_Cull", 0);
 
             bool texApplied = false;
             string texFile = v.glbTexture;
@@ -1254,13 +1272,14 @@ namespace FTKModFramework.Core
                         tex.LoadImage(System.IO.File.ReadAllBytes(texPath));
                         if (bodyMat.HasProperty("_MainTex")) bodyMat.SetTexture("_MainTex", tex);
                         else bodyMat.mainTexture = tex;
-                        // On the Standard fallback, modulate the white emission by the texture so the lit surface still
-                        // reads the baked detail. On Unlit there is no _EmissionColor, so this self-skips.
-                        if (!usedUnlit && bodyMat.HasProperty("_EmissionColor"))
+                        // MODEST emission, texture-modulated: lift the body out of pure black in the dim crypt without
+                        // washing out the scene-light shading. _EmissionMap = the basecolor texture, _EmissionColor = a
+                        // subtle grey (StaticBossEmission), so the emission carries the baked detail at low intensity.
+                        if (bodyMat.HasProperty("_EmissionColor"))
                         {
                             bodyMat.EnableKeyword("_EMISSION");
                             if (bodyMat.HasProperty("_EmissionMap")) bodyMat.SetTexture("_EmissionMap", tex);
-                            bodyMat.SetColor("_EmissionColor", Color.white);
+                            bodyMat.SetColor("_EmissionColor", StaticBossEmission);
                         }
                         texApplied = true;
                     }
@@ -1276,6 +1295,15 @@ namespace FTKModFramework.Core
                         "': " + te.Message + "; body rendered without it.");
                 }
             }
+
+            // NO TEXTURE: still enable the modest emission (flat grey) so an untextured body is not pure black in the
+            // crypt; the diorama lights shade it via the recalculated normals.
+            if (!texApplied && bodyMat.HasProperty("_EmissionColor"))
+            {
+                bodyMat.EnableKeyword("_EMISSION");
+                bodyMat.SetColor("_EmissionColor", StaticBossEmission);
+            }
+
             mr.sharedMaterial = bodyMat;
 
             // TEMP STATIC-DIAG (#72): remove once static render confirmed. One line, fully null-guarded, never throws:
