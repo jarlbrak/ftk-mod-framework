@@ -1081,13 +1081,21 @@ namespace FTKModFramework.Core
         /// <summary>
         /// EXPERIMENT (#72): render the rigid one-bone glb mesh as a PLAIN static MeshRenderer, skipping
         /// skinning/bindpose entirely. The chassis SkinnedMeshRenderer is DISABLED (not destroyed) so it does not
-        /// peek through; the mount inherits the boss up-scale from the CEL hierarchy above it. The mesh's verts are
-        /// an UPRIGHT model-space figure, so by default it is parented to the WORLD-ALIGNED clone/body slot root
-        /// (NOT the <c>Root_M</c> bone, whose bone-local orientation/offset + the skipped inverse-bind put an
-        /// identity-local child off-frame). The mount is env-tunable via <c>FTK_BOSS_STATIC_MOUNT</c>
-        /// (<c>clone</c> default / <c>rootm</c> / <c>cel</c>) for A/B without a rebuild. Idempotent per clone (name
-        /// guard, like the lantern/golem). Visual-only / deterministic, so it stays co-op- and save-safe like the
-        /// rest of this file. Mirrors the proven BuildProceduralBody + weapon-prop pattern (MeshFilter+MeshRenderer).
+        /// peek through. The mesh's verts are an UPRIGHT model-space figure, so by default it is parented to the
+        /// WORLD-ALIGNED clone/body slot root (NOT the <c>Root_M</c> bone, whose bone-local orientation/offset put
+        /// an identity-local child off-frame). The mount is env-tunable via <c>FTK_BOSS_STATIC_MOUNT</c>
+        /// (<c>clone</c> default / <c>rootm</c> / <c>cel</c>) for A/B without a rebuild.
+        ///
+        /// The child is then placed EXPLICITLY in world units (not at identity local), mirroring
+        /// <see cref="BuildProceduralBody"/>'s lossyScale compensation: the mount carries a large baked lossyScale,
+        /// so a localScale=1 child rendered enormous/off-frame. We set a target WORLD height
+        /// (<c>FTK_BOSS_STATIC_HEIGHT</c>, default 3.6 = the mesh's ~2.65 natural height times the boss scale ~1.4),
+        /// compute <c>localScale = targetWorldScale / mount.lossyScale</c> per-axis, and stand the mesh feet-on-floor
+        /// at the slot by mapping the read <c>gmesh.bounds</c> bottom-center onto the mount's world origin.
+        ///
+        /// Idempotent per clone (name guard, like the lantern/golem). Visual-only / deterministic, so it stays co-op-
+        /// and save-safe like the rest of this file. Mirrors the proven BuildProceduralBody pattern (MeshFilter +
+        /// MeshRenderer with explicit world placement).
         /// </summary>
         private static void ApplyStaticBossAttach(string enemyId, CharacterEventListener cel, SkinnedMeshRenderer smr,
             Mesh gmesh, string via, EnemyVisual v)
@@ -1172,18 +1180,62 @@ namespace FTKModFramework.Core
                 }
             }
 
-            // 3) Build the static body child under the chosen mount, at identity local TRS. Under a world-aligned
-            //    slot root the upright model-space mesh renders upright at the boss slot; the mount inherits the
-            //    boss up-scale from the CEL hierarchy above it.
+            // 3) Build the static body child under the chosen mount, then place it EXPLICITLY in world units.
+            //    The earlier naive identity-local placement (localScale=1) rendered off-frame: the mount carries a
+            //    large baked lossyScale, so a localScale=1 child became enormous (camera inside it) and the upright
+            //    model-space mesh's feet/center never landed at the slot floor. Mirror BuildProceduralBody's
+            //    lossyScale compensation exactly: BuildChainSegments/BuildBlobAt author a WORLD size then divide by
+            //    the parent bone's lossyScale per-axis (guarded by Mathf.Approximately(ls,0)?1:Abs(ls)) so the child
+            //    lands at that world size; BuildEyeAt likewise converts a WORLD offset to local units per-axis. Here
+            //    we set a target WORLD scale (so the mesh stands at a boss-appropriate on-screen size) and place the
+            //    mesh bbox's bottom-center on the anchor's world origin (the slot floor).
             GameObject body = new GameObject(GlbStaticBodyName);
             body.transform.SetParent(mount, false);
-            body.transform.localPosition = Vector3.zero;
-            body.transform.localRotation = Quaternion.identity;
-            body.transform.localScale = Vector3.one;
+            body.transform.localRotation = Quaternion.identity; // align to the anchor (faces the camera like the troll)
 
             // Correct bounds matter for a static MeshRenderer (no updateWhenOffscreen on MeshRenderer); the loader
-            // already recalculates, but RecalculateBounds is idempotent so we re-assert it cheaply here.
+            // already recalculates, but RecalculateBounds is idempotent so we re-assert it cheaply here. We then read
+            // gmesh.bounds so the placement ADAPTS to the actual mesh (no hardcoded bbox).
             gmesh.RecalculateBounds();
+            Bounds mb = gmesh.bounds;                 // model-space bbox of the custom mesh
+            float meshHeight = mb.size.y;             // natural authored height (feet->head), ~2.65 for the mudwretch
+            if (meshHeight <= 1e-4f) meshHeight = 1f;  // degenerate guard
+
+            // TARGET WORLD HEIGHT: env-tunable so size can be swept without a rebuild. Default ~3.6 world units
+            // (= the mesh's ~2.65 natural height times the registered boss scale ~1.4), which puts the mudwretch at
+            // the same on-screen size the stock troll body occupied at this slot.
+            float targetHeight = 3.6f;
+            try
+            {
+                string hs = Environment.GetEnvironmentVariable("FTK_BOSS_STATIC_HEIGHT");
+                if (!string.IsNullOrEmpty(hs))
+                {
+                    float parsed;
+                    if (float.TryParse(hs.Trim(), out parsed) && parsed > 1e-4f) targetHeight = parsed;
+                }
+            }
+            catch { /* env read can throw under restricted hosts; keep the default */ }
+
+            // The uniform WORLD scale that makes the mesh's natural height equal the target world height.
+            float worldScale = targetHeight / meshHeight;
+
+            // LOSSYSCALE COMPENSATION (the BuildProceduralBody idiom): localScale = targetWorldScale / parent.lossyScale
+            // per-axis, so the child renders at worldScale in WORLD units despite the mount's baked lossyScale. Guard a
+            // zero/near-zero lossyScale axis with 1 (matching BuildChainSegments/BuildBlobAt/BuildEyeAt).
+            Vector3 ls = mount.lossyScale;
+            float ax = Mathf.Approximately(ls.x, 0f) ? 1f : Mathf.Abs(ls.x);
+            float ay = Mathf.Approximately(ls.y, 0f) ? 1f : Mathf.Abs(ls.y);
+            float az = Mathf.Approximately(ls.z, 0f) ? 1f : Mathf.Abs(ls.z);
+            Vector3 localScale = new Vector3(worldScale / ax, worldScale / ay, worldScale / az);
+            body.transform.localScale = localScale;
+
+            // FEET-ON-FLOOR, CENTERED AT THE SLOT: with identity local rotation and the localScale above, a model-space
+            // point p maps to localPosition + Scale(localScale, p). We want the mesh bbox's bottom-center
+            // (center.x, min.y, center.z) to map to the anchor origin (Vector3.zero, the slot floor point under a
+            // world-aligned mount). Solve: localPosition = -Scale(localScale, bottomCenter).
+            Vector3 bottomCenter = new Vector3(mb.center.x, mb.min.y, mb.center.z);
+            Vector3 localPosition = -Vector3.Scale(localScale, bottomCenter);
+            body.transform.localPosition = localPosition;
 
             MeshFilter mf = body.AddComponent<MeshFilter>();
             mf.sharedMesh = gmesh;
@@ -1231,7 +1283,11 @@ namespace FTKModFramework.Core
 
             Plugin.Log.LogInfo("[enemy-visual] static-attach: rendered glb '" + v.glbMesh + "' as MeshRenderer under '" +
                 boneName + "' (mode=" + mountMode + ", SMR disabled, via " + via + ")" +
-                (texApplied ? " + texture '" + texFile + "'" : "") + " for '" + enemyId + "'.");
+                (texApplied ? " + texture '" + texFile + "'" : "") + " for '" + enemyId + "'." +
+                " anchor.lossyScale=" + ls + " meshHeight=" + meshHeight.ToString("0.###") +
+                " targetHeight=" + targetHeight.ToString("0.###") + " worldScale=" + worldScale.ToString("0.###") +
+                " localScale=" + localScale + " localPosition=" + localPosition + " meshBounds(c=" + mb.center +
+                ", min=" + mb.min + ", max=" + mb.max + ")");
         }
 
         /// <summary>Full slash-separated path from the body root to a transform (for the lantern mount log line).</summary>
