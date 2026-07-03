@@ -1280,8 +1280,10 @@ namespace FTKModFramework.Agent
         // the id. Static call by name to keep the Agent layer decoupled from the typed game item hierarchy.
         private static object ResolveFtkItem(object itemId)
         {
-            Type t = AccessTools.TypeByName("FTKItemName+FTKItem");
-            if (t == null) t = AccessTools.TypeByName("FTKItemName/FTKItem");
+            // FTKItemName is a NAMESPACE (decompile: "namespace FTKItemName { public class FTKItem ... }"),
+            // not an enclosing class, so the dotted form is the correct lookup.
+            Type t = AccessTools.TypeByName("FTKItemName.FTKItem");
+            if (t == null) t = AccessTools.TypeByName("FTKItemName+FTKItem");
             if (t == null) return null;
             MethodInfo get = t.GetMethod("Get", BindingFlags.Public | BindingFlags.Static, null,
                 new[] { itemId.GetType() }, null);
