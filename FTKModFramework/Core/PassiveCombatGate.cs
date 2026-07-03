@@ -25,6 +25,12 @@ namespace FTKModFramework.Core
         internal static string IdentityOf(CharacterDummy dummy)
         {
             if (dummy == null) return null;
+            // A COW-less dummy (an enemy dummy, or one not yet initialised) has no player identity: dummy.FID
+            // dereferences m_CharacterOverworld.m_FTKPlayerID, so a null COW would NPE. Guard it here so the
+            // unguarded ResetForCombat/CombatFinished lifecycle postfixes (which call ResetFor -> IdentityOf on
+            // EVERY dummy, enemies included) can never throw. Mirrors the negate path's cow==null guard; a null
+            // identity makes ResetFor/HasFired/MarkFired clean no-ops.
+            if (dummy.m_CharacterOverworld == null) return null;
             FTKPlayerID fid = dummy.FID;
             return fid.m_TurnIndex + ":" + fid.m_PhotonID;
         }

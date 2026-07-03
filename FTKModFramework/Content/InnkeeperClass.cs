@@ -8,8 +8,9 @@ namespace FTKModFramework
     /// Blacksmith template. A pure tank identity, Toughness/Vitality-forward with deliberately low Speed
     /// and low offense, and the two showcase passives bound DORMANT via the public
     /// <see cref="Content.AddPassive"/> API (they do NOTHING in Phase 1; the trigger patches that read
-    /// them land in Phases 2 and 3). This file is authored SOLELY through the public Content.* surface and
-    /// touches nothing in Core/.
+    /// them land in Phases 2 and 3). The gameplay registration is authored SOLELY through the public
+    /// Content.* surface; only the load-time self-test reaches for the framework-internal Reflect idiom (to
+    /// read the live Blacksmith row for its field-by-field asserts), mirroring ThiefClass.VerifyThief.
     ///
     /// Primary stat: TOUGHNESS (physical armor), co-primary VITALITY (HP). The stats are derived by DELTA
     /// off the cloned Blacksmith row, so the "survival at-or-above / offense below the Blacksmith" identity

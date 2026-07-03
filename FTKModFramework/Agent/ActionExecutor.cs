@@ -78,6 +78,7 @@ namespace FTKModFramework.Agent
                     case "attack": return Attack(args);
                     case "resolve_turn": return ResolveTurn(args);
                     case "end_turn": return EndTurn(args);
+                    case "use_item": return UseItem(args);
                     case "select_choice": return SelectChoice(args);
                     case "advance": return Advance(args);
                     case "dismiss_message": return DismissMessage(args);
@@ -1185,6 +1186,102 @@ namespace FTKModFramework.Agent
             if (t == null) t = AccessTools.TypeByName(typeName.Replace('+', '/'));
             if (t == null || !t.IsEnum) return null;
             try { return Enum.IsDefined(t, member) ? Enum.Parse(t, member) : null; }
+            catch { return null; }
+        }
+
+        // ============================================================ items ===========================
+
+        /// <summary>
+        /// USE a named consumable from the CURRENT-TURN hero's inventory, in combat, via the REAL item-use path
+        /// (the one an item-bar click takes): <c>FTKItemName.FTKItem.Get(id).OnUse(cow, containerID)</c>. For a
+        /// drink the consumable subclass OnUse runs base.OnUse (the using handle + combat log), UseItemBuff ->
+        /// EncounterSession.CombatPartyBuff (the buff RPC that #82's Iron Belly prefix scopes), UsingFinished(true)
+        /// (removes the item from its container) and the combat-turn transition. This exercises the consumable
+        /// path end to end, NOT a synthetic CombatPartyBuff. args: {"item":"conRum"} (a vanilla FTK_itembase.ID
+        /// member name). Fails clearly when not in combat, not the hero's turn, or the hero does not hold the item.
+        /// Single-player only (the outer Execute gate already enforces IsSinglePlayer()).
+        /// </summary>
+        private static object UseItem(IDictionary<string, object> args)
+        {
+            string itemName = GetString(args, "item");
+            if (string.IsNullOrEmpty(itemName))
+                return Fail("use_item: missing 'item'");
+
+            // The current-turn hero (GameLogic.GetCurrentCombatCOW): the COW whose combat turn it is.
+            object cow = CurrentCombatCow();
+            if (cow == null)
+                return Fail("use_item: no current-turn hero (not in combat)");
+
+            // In combat? Drinks only apply in combat (ConsumableBase.CanUseCombat gates on m_IsInCombat).
+            object stats = SafeField(cow, "m_CharacterStats");
+            if (stats == null || !ToBool(SafeField(stats, "m_IsInCombat")))
+                return Fail("use_item: not in combat");
+
+            // It must be the hero's actionable turn (battle-stance UI parked in "Wait For Stance").
+            if (!HeroTurnReady())
+                return Fail("use_item: not the hero's turn (stance UI not ready)");
+
+            // Resolve the item id from its vanilla enum-member name (e.g. "conRum").
+            object itemId = ResolveNestedEnum("FTK_itembase+ID", itemName);
+            if (itemId == null)
+                return Fail("use_item: unknown item '" + itemName + "'");
+
+            // Which container holds it? Combat consumables live in the Backpack or the Belt.
+            object containerId = FindItemContainer(cow, itemId);
+            if (containerId == null)
+                return Fail("use_item: current-turn hero does not hold '" + itemName + "'");
+
+            // The FTKItem for this id (its consumable subclass, e.g. conRum) + the CharacterOverworld param type.
+            object item = ResolveFtkItem(itemId);
+            Type cowType = AccessTools.TypeByName("CharacterOverworld");
+            if (item == null || cowType == null)
+                return Fail("use_item: could not resolve FTKItem/CharacterOverworld for '" + itemName + "'");
+
+            // The item's own gate (== the item-bar's enable check: turn/combat/already-used/confused), so residual
+            // cases like "already used an item this combat turn" fail with the game's own logic rather than a NPE.
+            object canUse = SafeInvokeArgs(item, "CanUse",
+                new[] { cowType, typeof(bool) }, new object[] { cow, false });
+            if (canUse is bool && !(bool)canUse)
+                return Fail("use_item: '" + itemName + "' cannot be used now (CanUse=false)");
+
+            // The real full use. OnUse(CharacterOverworld, PlayerInventory.ContainerID) on the resolved subclass.
+            SafeInvokeArgs(item, "OnUse",
+                new[] { cowType, containerId.GetType() }, new object[] { cow, containerId });
+
+            return Ok(Result("used", itemName));
+        }
+
+        // Find which of the hero's consumable-holding containers (Backpack, then Belt) holds the item, returning
+        // that container's PlayerInventory.ContainerID (to pass to OnUse so UsingFinished removes from the right
+        // one). Null if the hero holds none. Uses PlayerInventory.GetItemCount(ContainerID, FTK_itembase.ID).
+        private static object FindItemContainer(object cow, object itemId)
+        {
+            object inv = SafeField(cow, "m_PlayerInventory");
+            if (inv == null) return null;
+            string[] containers = { "Backpack", "Belt" };
+            for (int i = 0; i < containers.Length; i++)
+            {
+                object cid = ResolveNestedEnum("PlayerInventory+ContainerID", containers[i]);
+                if (cid == null) continue;
+                object count = SafeInvokeArgs(inv, "GetItemCount",
+                    new[] { cid.GetType(), itemId.GetType() }, new object[] { cid, itemId });
+                int? n = ToInt(count);
+                if (n.HasValue && n.Value > 0) return cid;
+            }
+            return null;
+        }
+
+        // Resolve FTKItemName.FTKItem.Get(FTK_itembase.ID) -> the FTKItem instance (its consumable subclass) for
+        // the id. Static call by name to keep the Agent layer decoupled from the typed game item hierarchy.
+        private static object ResolveFtkItem(object itemId)
+        {
+            Type t = AccessTools.TypeByName("FTKItemName+FTKItem");
+            if (t == null) t = AccessTools.TypeByName("FTKItemName/FTKItem");
+            if (t == null) return null;
+            MethodInfo get = t.GetMethod("Get", BindingFlags.Public | BindingFlags.Static, null,
+                new[] { itemId.GetType() }, null);
+            if (get == null) return null;
+            try { return get.Invoke(null, new object[] { itemId }); }
             catch { return null; }
         }
 
