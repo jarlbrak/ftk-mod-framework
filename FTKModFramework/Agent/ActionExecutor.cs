@@ -1223,8 +1223,11 @@ namespace FTKModFramework.Agent
             // exact item-bar enable check (FSM "Wait For Stance", no item used this turn, coherent dummy),
             // so a wrong-turn use fails there with the game's own logic instead of a harness false negative.
 
-            // Resolve the item id from its vanilla enum-member name (e.g. "conRum").
-            object itemId = ResolveNestedEnum("FTK_itembase+ID", itemName);
+            // Resolve the item id from its vanilla enum-member name (e.g. "conRum"). FTK_itembase lives in
+            // the GridEditor namespace (unlike the global-namespace EncounterSessionMC the loot surface
+            // resolves), so probe the qualified name first.
+            object itemId = ResolveNestedEnum("GridEditor.FTK_itembase+ID", itemName);
+            if (itemId == null) itemId = ResolveNestedEnum("FTK_itembase+ID", itemName);
             if (itemId == null)
                 return Fail("use_item: unknown item '" + itemName + "'");
 
