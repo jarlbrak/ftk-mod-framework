@@ -1111,6 +1111,13 @@ namespace FTKModFramework.Agent
                 if (OkayMessageSurface(ui, "m_PortraitMessage")) return Ok(Result("advanced", "portrait"));
                 if (OkayMessageSurface(ui, "m_QuestConfirm")) return Ok(Result("advanced", "questConfirm"));
 
+                // Post-combat loot / item-gain choice panel ("Victory! ... find [item card] COLLECT / DISCARD").
+                // It is NOT an FTKUI message surface (it lives on a COW's HUD as a VoteType.Loot vote), so the
+                // OkayMessageSurface probes and the global-message fallback all miss it and the session wedges in
+                // phase==combat. Collect it (never discard) when open; clean no-op otherwise. Probed BEFORE the
+                // global-message fallback so a raised loot panel is taken rather than falling through.
+                if (LootCollectSurface()) return Ok(Result("advanced", "lootCollect"));
+
                 object gm = Reflect.GetField(ui, "m_GlobalMessage");
                 if (gm != null)
                 {
@@ -1126,6 +1133,59 @@ namespace FTKModFramework.Agent
                 }
             }
             return Fail("no continue/okay surface available");
+        }
+
+        /// <summary>
+        /// Probe the post-combat loot / item-gain choice panel and COLLECT (never discard) when it is open.
+        /// The panel is the <c>VoteButtonContainer</c> at
+        /// <c>CharacterOverworld.m_UIPlayMainHud.m_LootCollectionButtons</c>: after a win the game raises it with
+        /// <c>m_VoteType == EncounterSessionMC.VoteType.Loot</c> and a Collect + Pass/Discard button pair over an
+        /// item card. We find the open loot container, pull its Collect button
+        /// (<c>m_VoteButtonTable[VoteButton.VoteOption.Collect]</c>) and invoke that button's own click path
+        /// (<c>VoteButton.OnLeftClick</c>): in single-player that hides the loot buttons and RPCs
+        /// <c>VoteButtonClick</c> with <c>VoteOption.Collect</c>, taking the item. Returns true iff a loot panel
+        /// was open and Collect was invoked; a clean no-op (false) otherwise. Never throws. One item per call
+        /// (matches the message-advance idiom): a multi-item loot is collected by successive advance() calls.
+        /// </summary>
+        private static bool LootCollectSurface()
+        {
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return false;
+            IEnumerable cows = SafeField(hub, "m_CharacterOverworlds") as IEnumerable;
+            if (cows == null) return false;
+
+            object lootType = ResolveNestedEnum("EncounterSessionMC+VoteType", "Loot");
+            object collectKey = ResolveNestedEnum("VoteButton+VoteOption", "Collect");
+            if (lootType == null || collectKey == null) return false;
+
+            foreach (object cow in cows)
+            {
+                if (cow == null) continue;
+                object hud = SafeField(cow, "m_UIPlayMainHud");
+                object container = SafeField(hud, "m_LootCollectionButtons");
+                if (container == null) continue;
+                if (!lootType.Equals(SafeField(container, "m_VoteType"))) continue; // only the OPEN loot vote
+
+                IDictionary table = SafeField(container, "m_VoteButtonTable") as IDictionary;
+                if (table == null || !table.Contains(collectKey)) continue;
+                object collectButton = table[collectKey];
+                if (collectButton == null) continue;
+
+                SafeInvoke(collectButton, "OnLeftClick"); // the Collect button's own path (never Discard/Pass)
+                return true;
+            }
+            return false;
+        }
+
+        // Resolve a nested enum value by name (e.g. "EncounterSessionMC+VoteType", "Loot"); null if unresolved.
+        // Tries the '+' and '/' nested-type spellings, mirroring StartRunDriver's AssignDevice.Type resolve.
+        private static object ResolveNestedEnum(string typeName, string member)
+        {
+            Type t = AccessTools.TypeByName(typeName);
+            if (t == null) t = AccessTools.TypeByName(typeName.Replace('+', '/'));
+            if (t == null || !t.IsEnum) return null;
+            try { return Enum.IsDefined(t, member) ? Enum.Parse(t, member) : null; }
+            catch { return null; }
         }
 
         /// <summary>
