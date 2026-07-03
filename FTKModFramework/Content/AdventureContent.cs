@@ -49,6 +49,12 @@ namespace FTKModFramework
 
             RegisterAdventure();
 
+            // Passive-trait Core plumbing (#79, spec #78 Phase 1): bind a THROWAWAY passive to the Thief's
+            // registered class row (present by now) and prove the bind, idempotent, and reject paths, then CLEAR
+            // the probe so no trait stays bound to a real class (load-bearing once the Phase-2 trigger patches
+            // land). Runs here alongside the other sample-content self-tests; the registry stays otherwise empty.
+            PassiveSelfTest.Run();
+
             // Campaign builder (#38): author + register a 2-stage linear campaign and prove its $type
             // discriminators round-trip through the game's own serializer. Gated identically (this runs
             // only when EnableSampleContent is on, since it registers a real selectable demo adventure).
