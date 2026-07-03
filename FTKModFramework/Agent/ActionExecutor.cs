@@ -1347,10 +1347,42 @@ namespace FTKModFramework.Agent
             if (preview == null)
                 return Fail("start_run failed at get-preview: adventure '" + adventureKey + "' not injected");
 
+            // Optional: start the run AS a specific class (its local key, e.g. "ftkmf_innkeeper"). Resolve it UP
+            // FRONT against FTK_playerGameStartDB so an unknown class fails the action cleanly (rather than
+            // silently keeping the driver's RandomClass pick). DbLookupPatcher makes GetIntFromID resolve our
+            // custom class string ids to their (index-equal) int. Absent/empty => -1 => keep RandomClass.
+            string classKey = GetString(args, "class");
+            int classId = -1;
+            if (!string.IsNullOrEmpty(classKey))
+            {
+                classId = ResolveClassId(classKey);
+                if (classId < 0)
+                    return Fail("start_run failed at resolve-class: class '" + classKey +
+                        "' not found in FTK_playerGameStartDB");
+            }
+
             // Arm the full waited coroutine (dismiss -> settle -> NewGame -> GameConfig -> configure -> room ->
             // map-wait -> ready -> EnterFahrul -> intro). It owns all FSM/Photon sequencing.
-            StartRunDriver.Arm(adventureKey);
+            StartRunDriver.Arm(adventureKey, classId);
             return Ok(StartResult(false, "starting"));
+        }
+
+        /// <summary>
+        /// Resolve a class LOCAL KEY (e.g. "ftkmf_innkeeper") to its FTK_playerGameStart int id, or -1 if it is
+        /// unknown. Resolved by name (FTK_playerGameStartDB.GetDB().GetIntFromID) to keep the Agent layer
+        /// decoupled from typed game DBs; GetIntFromID is patched by DbLookupPatcher so our custom class string
+        /// ids resolve (a vanilla key falls through to the original Enum.Parse, which yields its ordinal).
+        /// </summary>
+        private static int ResolveClassId(string classKey)
+        {
+            Type dbType = AccessTools.TypeByName("FTK_playerGameStartDB");
+            if (dbType == null) return -1;
+            MethodInfo getDb = dbType.GetMethod("GetDB", BindingFlags.Public | BindingFlags.Static);
+            object db = getDb != null ? getDb.Invoke(null, null) : null;
+            if (db == null) return -1;
+            object res = SafeInvokeArgs(db, "GetIntFromID", new[] { typeof(string) }, new object[] { classKey });
+            int? id = ToInt(res);
+            return id.HasValue ? id.Value : -1;
         }
 
         // ----------------------------------------------------------- start-run helpers ------------------

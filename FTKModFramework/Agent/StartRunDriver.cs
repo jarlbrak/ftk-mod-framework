@@ -97,14 +97,19 @@ namespace FTKModFramework.Agent
         private static bool _running;
         private static string _adventureKey;
 
+        // The class id to force onto each hero slot (an FTK_playerGameStart int id, resolved up front by
+        // ActionExecutor). -1 => no class requested: keep the driver's RandomClass pick. Set on each Arm.
+        private static int _classId = -1;
+
         public static bool IsRunning { get { return _running; } }
 
         /// <summary>
         /// Start the full continuation coroutine on the BridgeHost (must be called on the main thread). Returns
         /// false if already running (idempotent re-arm) or if no host is available. <paramref name="adventureKey"/>
-        /// is the adventure save-file key (e.g. "HollowMire").
+        /// is the adventure save-file key (e.g. "HollowMire"); <paramref name="classId"/> is the resolved
+        /// FTK_playerGameStart id to start AS (e.g. the Innkeeper), or -1 to keep the RandomClass pick.
         /// </summary>
-        public static bool Arm(string adventureKey)
+        public static bool Arm(string adventureKey, int classId = -1)
         {
             if (_running) return false;
             BridgeHost host = BridgeHost.Instance;
@@ -114,6 +119,7 @@ namespace FTKModFramework.Agent
                 return false;
             }
             _adventureKey = string.IsNullOrEmpty(adventureKey) ? "HollowMire" : adventureKey;
+            _classId = classId;
             _running = true;
             try { host.StartCoroutine(Drive()); }
             catch (Exception e)
@@ -484,11 +490,34 @@ namespace FTKModFramework.Agent
                 {
                     if (qc == null) continue;
                     if (ToBool(Reflect.GetField(qc, "m_IsReady"))) continue;
-                    SafeInvoke(qc, "RandomClass");   // pick a guaranteed-usable class first
+                    SafeInvoke(qc, "RandomClass");   // pick a guaranteed-usable class first (unlock/ready invariant)
+                    ApplyClassOverride(qc);          // then force the requested class onto the slot, if any
                     SafeInvoke(qc, "SetPlayerReady"); // then ready (IsUnlock now passes)
                 }
             }
             catch (Exception e) { Plugin.Log.LogWarning("[agent] start_run ready: " + e.Message); }
+        }
+
+        /// <summary>
+        /// Force the start_run-requested class (its resolved id) onto one hero slot before it is readied. No-op
+        /// when no class was requested (<see cref="_classId"/> &lt; 0), so the RandomClass pick stands. The
+        /// character-create UI commits a class by assigning the public <c>m_ClassID</c> field and calling
+        /// <c>SyncSettings()</c> (exactly what RandomClass / OnClassClick do): SyncSettings recomputes
+        /// m_ClassUnlock and pushes the class into the offline serialized/party state, so the spawned COW is that
+        /// class. CanUseClass / IsUnlock already pass the showcase custom classes (Thief / Innkeeper are
+        /// m_Release + revealed), so no extra gating is needed here. Called from <see cref="ReadyAllHeroes"/>,
+        /// which the ready loop re-issues every ~30 frames, so a late slot gets the class too. Best-effort: a
+        /// throw is logged, never propagated (mirrors the ready/assign paths).
+        /// </summary>
+        private static void ApplyClassOverride(object qc)
+        {
+            if (_classId < 0) return;
+            try
+            {
+                Reflect.SetField(qc, "m_ClassID", _classId);
+                SafeInvoke(qc, "SyncSettings");
+            }
+            catch (Exception e) { Plugin.Log.LogWarning("[agent] start_run class-set: " + e.Message); }
         }
 
         // Resolve PhotonNetwork.player.ID (offlineMode: master = the only player). PhotonNetwork.player is a
