@@ -43,8 +43,15 @@ namespace FTKModFramework
 
                     c.m_DLC = FTK_dlc.ID.None; // base-game class (matches the Blacksmith it clones).
                     c.m_Release = true;        // available in release builds, not gated to dev/test.
-                    // m_StartWeapon / m_StartItems / m_CharacterSkills / m_Skinsets are inherited from the
-                    // Blacksmith clone (all valid), so the class is immediately usable in-game.
+                    // m_StartWeapon / m_CharacterSkills / m_Skinsets are inherited from the Blacksmith
+                    // clone (all valid), so the class is immediately usable in-game. m_StartItems is the
+                    // inherited set PLUS a rum: an innkeeper never travels dry, and rum's enConfuse
+                    // downside is the consumable-path showcase Iron Belly is verified against in-game.
+                    FTK_itembase.ID[] baseItems = c.m_StartItems ?? new FTK_itembase.ID[0];
+                    FTK_itembase.ID[] withRum = new FTK_itembase.ID[baseItems.Length + 1];
+                    System.Array.Copy(baseItems, withRum, baseItems.Length);
+                    withRum[baseItems.Length] = FTK_itembase.ID.conRum;
+                    c.m_StartItems = withRum;
                 });
 
             // Phase 1 DORMANT rule: the flavor must NOT advertise either trait (they do nothing yet).
