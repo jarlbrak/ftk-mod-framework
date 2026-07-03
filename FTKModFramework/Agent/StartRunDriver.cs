@@ -486,38 +486,65 @@ namespace FTKModFramework.Agent
                 if (usg == null) return;
                 IEnumerable seq = Reflect.GetField(usg, "m_CreateUIs") as IEnumerable;
                 if (seq == null) return;
+                int slot = 0;
                 foreach (object qc in seq)
                 {
-                    if (qc == null) continue;
-                    if (ToBool(Reflect.GetField(qc, "m_IsReady"))) continue;
-                    SafeInvoke(qc, "RandomClass");   // pick a guaranteed-usable class first (unlock/ready invariant)
-                    ApplyClassOverride(qc);          // then force the requested class onto the slot, if any
-                    SafeInvoke(qc, "SetPlayerReady"); // then ready (IsUnlock now passes)
+                    if (qc == null) { slot++; continue; }
+                    if (ToBool(Reflect.GetField(qc, "m_IsReady")))
+                    {
+                        // Slot is ALREADY ready (e.g. m_IsReady + m_ClassID persisted from a previous session in
+                        // this process). RandomClass / SetPlayerReady would be skipped, so a requested class would
+                        // never apply (the live bug: party kept the persisted class). Re-class it IN PLACE: setting
+                        // m_ClassID + SyncSettings runs CheckClassUnlock, which in single-player re-sets
+                        // m_IsReady=true for the (unlocked) target, so the slot stays ready as the new class with no
+                        // unready/re-ready dance; we still re-issue SetPlayerReady to guarantee the ready flag.
+                        if (ForceRequestedClass(qc, slot, true))
+                            SafeInvoke(qc, "SetPlayerReady");
+                        slot++;
+                        continue;
+                    }
+                    SafeInvoke(qc, "RandomClass");        // pick a guaranteed-usable class first (unlock/ready invariant)
+                    ForceRequestedClass(qc, slot, false); // then force the requested class onto the slot, if any
+                    SafeInvoke(qc, "SetPlayerReady");      // then ready (IsUnlock now passes)
+                    slot++;
                 }
             }
             catch (Exception e) { Plugin.Log.LogWarning("[agent] start_run ready: " + e.Message); }
         }
 
         /// <summary>
-        /// Force the start_run-requested class (its resolved id) onto one hero slot before it is readied. No-op
-        /// when no class was requested (<see cref="_classId"/> &lt; 0), so the RandomClass pick stands. The
-        /// character-create UI commits a class by assigning the public <c>m_ClassID</c> field and calling
-        /// <c>SyncSettings()</c> (exactly what RandomClass / OnClassClick do): SyncSettings recomputes
-        /// m_ClassUnlock and pushes the class into the offline serialized/party state, so the spawned COW is that
-        /// class. CanUseClass / IsUnlock already pass the showcase custom classes (Thief / Innkeeper are
-        /// m_Release + revealed), so no extra gating is needed here. Called from <see cref="ReadyAllHeroes"/>,
-        /// which the ready loop re-issues every ~30 frames, so a late slot gets the class too. Best-effort: a
-        /// throw is logged, never propagated (mirrors the ready/assign paths).
+        /// Force the start_run-requested class (its resolved id) onto one hero slot. Returns true iff the class was
+        /// actually changed, so the caller can re-issue SetPlayerReady for a re-classed pre-ready slot. No-op
+        /// (returns false, logs nothing) when no class was requested (<see cref="_classId"/> &lt; 0) or the slot is
+        /// already that class, so the RandomClass pick / an already-correct slot is untouched and the ~30-frame
+        /// retries do not spam. The character-create UI commits a class by assigning the public <c>m_ClassID</c>
+        /// field and calling <c>SyncSettings()</c> (exactly what RandomClass / OnClassClick do): SyncSettings runs
+        /// CheckClassUnlock (which in single-player re-sets m_IsReady=true for an unlocked class) and pushes the
+        /// class into the offline serialized/party state, so the spawned COW is that class. The showcase custom
+        /// classes (Thief / Innkeeper) are m_Release + revealed, so IsUnlock / CanUseClass pass. Emits ONE LogInfo
+        /// (slot, from-class, to-class, and whether the slot was pre-ready) when it applies, so a live test can
+        /// confirm it ran. Best-effort: a throw is logged, never propagated (mirrors the ready/assign paths).
         /// </summary>
-        private static void ApplyClassOverride(object qc)
+        private static bool ForceRequestedClass(object qc, int slot, bool wasReady)
         {
-            if (_classId < 0) return;
+            if (_classId < 0) return false;
             try
             {
+                int? from = ToNullableInt(Reflect.GetField(qc, "m_ClassID"));
+                if (from.HasValue && from.Value == _classId) return false; // already the requested class
+
                 Reflect.SetField(qc, "m_ClassID", _classId);
                 SafeInvoke(qc, "SyncSettings");
+                Plugin.Log.LogInfo("[agent] start_run class-set: slot " + slot + " classId " +
+                    (from.HasValue ? from.Value.ToString() : "?") + " -> " + _classId +
+                    (wasReady ? " (was pre-ready, re-classed)" : "") + ".");
+                return true;
             }
-            catch (Exception e) { Plugin.Log.LogWarning("[agent] start_run class-set: " + e.Message); }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning("[agent] start_run class-set: " + e.Message);
+                return false;
+            }
         }
 
         // Resolve PhotonNetwork.player.ID (offlineMode: master = the only player). PhotonNetwork.player is a
