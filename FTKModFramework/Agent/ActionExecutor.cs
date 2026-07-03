@@ -1217,9 +1217,11 @@ namespace FTKModFramework.Agent
             if (stats == null || !ToBool(SafeField(stats, "m_IsInCombat")))
                 return Fail("use_item: not in combat");
 
-            // It must be the hero's actionable turn (battle-stance UI parked in "Wait For Stance").
-            if (!HeroTurnReady())
-                return Fail("use_item: not the hero's turn (stance UI not ready)");
+            // Deliberately NOT gated on HeroTurnReady(): its readyParts.initialized probe reads false in
+            // live sessions even while the game accepts hero actions (the same sessions where
+            // choose_ability/attack work). The item's own CanUse gate below is the authority: it is the
+            // exact item-bar enable check (FSM "Wait For Stance", no item used this turn, coherent dummy),
+            // so a wrong-turn use fails there with the game's own logic instead of a harness false negative.
 
             // Resolve the item id from its vanilla enum-member name (e.g. "conRum").
             object itemId = ResolveNestedEnum("FTK_itembase+ID", itemName);
