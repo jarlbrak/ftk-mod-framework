@@ -66,6 +66,8 @@ namespace FTKModFramework.Core
                     && !PassiveRegistry.TryResolve(def.ClassId, PassiveTrigger.ConsumableDebuff, out dupTrigger);
 
                 // --- reject: a null class row, then an unregistered (bare) class row => null, no mutation ---
+                // These two reject probes are INTENTIONALLY never registered (AddPassive returns null before
+                // touching the registry), so unlike the bind probe above they need no PassiveRegistry.Remove cleanup.
                 PassiveTraitDef nullDef = Content.AddPassive(
                     Plugin.Guid, "_selftest_passive_null", null, PassiveTrigger.IncomingAttack, "X");
                 FTK_playerGameStart bareRow = new FTK_playerGameStart();

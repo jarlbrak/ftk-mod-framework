@@ -219,6 +219,9 @@ namespace FTKModFramework.Core
 
             // Bind the display name only on a FRESH registration (candidate is what Register returns on insert;
             // on an idempotent re-register it returns the PRE-EXISTING def, so we must not overwrite its name).
+            // NOTE: the key here is the trait's synthetic Key (modGuid + ":" + passiveId), which DELIBERATELY
+            // differs from the DB-backed helpers that key Localization by a row's string m_ID: a passive writes no
+            // FTK_*DB row, so its name (and the Phase 2/3 ":hud"/":log" feedback templates) live under this Key.
             if (registered == candidate)
                 Localization.SetName(key, displayName);
             return registered;
