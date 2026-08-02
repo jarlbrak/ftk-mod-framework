@@ -314,6 +314,12 @@ namespace FTKModFramework
             // absolute values are rejected and a bare filename resolves under the mod root.
             Run("behavior dll guard", BehaviorDllGuardSelfTest.Run);
 
+            // Passive-trait registry self-test (spec #78). Runs UNCONDITIONALLY: it binds a THROWAWAY probe to
+            // whatever class row is present (the bundled Thief when sample content is on, otherwise the first
+            // vanilla row) and clears it again, so it never depends on sample content and never leaves a trait
+            // bound to a real class.
+            Run("passive registry", PassiveSelfTest.Run);
+
             // Synthetic stress content (P5b, #23). Runs ALWAYS, BEFORE the data load, so a count-0 run still
             // clears a stale reserved subfolder a prior higher-N run may have left. When count > 0 it writes N
             // synthetic entries into the reserved subfolder under DataContentRoot; the single existing
