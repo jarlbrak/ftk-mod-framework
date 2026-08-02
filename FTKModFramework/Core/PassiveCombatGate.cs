@@ -17,6 +17,18 @@ namespace FTKModFramework.Core
         private static readonly Dictionary<string, HashSet<string>> Fired =
             new Dictionary<string, HashSet<string>>();
 
+        // character identity -> feedback armed by a negate but not yet shown. See ArmFeedback for why the
+        // FR-6 surfaces cannot be emitted at the moment the negate decision is made.
+        private static readonly Dictionary<string, PendingFeedback> Pending =
+            new Dictionary<string, PendingFeedback>();
+
+        /// <summary>One negate's worth of FR-6 feedback, waiting for the impact frame that it describes.</summary>
+        internal sealed class PendingFeedback
+        {
+            internal PassiveTraitDef Def;
+            internal int DamageZeroed;
+        }
+
         /// <summary>
         /// Stable per-character identity for the gate: the dummy's FTKPlayerID (turn index + photon id). It is
         /// distinct per party member (and per enemy), present on every dummy, and never networked, so its exact
@@ -57,13 +69,53 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
+        /// Record that a negate just happened for <paramref name="identity"/> and that its FR-6 surfaces still owe
+        /// the player a showing. The negate DECISION runs in the DummyDamageInfo ctor, which the decompile places
+        /// in DamageCalculator._finishEngageAttack BEFORE _playAttackSequence: the whole attack animation (windup,
+        /// projectile travel, impact) has not started yet. A hud popup emitted there is displayed and expired by
+        /// CharacterDummy.DisplayNextHud (a flat WaitForSeconds(1f)) long before the blow it describes visibly
+        /// lands, so it reads as a missing popup. We therefore ARM here and let the impact-frame consumer show it.
+        /// <para>
+        /// At most one entry per character per combat (an IncomingAttack negate is a once-per-combat charge gated by HasFired
+        /// above), so a later re-arm can only follow a reset. If the armed attack never reaches its impact frame,
+        /// the entry is dropped by ResetFor at combat start/end and is never shown, which is the correct outcome.
+        /// </para>
+        /// </summary>
+        internal static void ArmFeedback(string identity, PassiveTraitDef def, int damageZeroed)
+        {
+            if (identity == null || def == null) return;
+            PendingFeedback pending = new PendingFeedback();
+            pending.Def = def;
+            pending.DamageZeroed = damageZeroed;
+            Pending[identity] = pending;
+        }
+
+        /// <summary>
+        /// Take the feedback armed for <paramref name="identity"/>, if any, and clear it so it shows exactly once.
+        /// Returns null when this character has no negate awaiting a showing (the overwhelmingly common case: every
+        /// ordinary hit on every character).
+        /// </summary>
+        internal static PendingFeedback TryConsumeFeedback(string identity)
+        {
+            if (identity == null) return null;
+            PendingFeedback pending;
+            if (!Pending.TryGetValue(identity, out pending)) return null;
+            Pending.Remove(identity);
+            return pending;
+        }
+
+        /// <summary>
         /// Drop all fired-state for one character. Called on BOTH combat START (ResetForCombat) and combat END
         /// (CombatFinished), so each fight begins with every charge available and nothing leaks across combats.
+        /// Also drops any armed-but-unshown feedback, so a negate whose attack never reached its impact frame can
+        /// never surface a stale popup in a later fight.
         /// </summary>
         internal static void ResetFor(CharacterDummy dummy)
         {
             string identity = IdentityOf(dummy);
-            if (identity != null) Fired.Remove(identity);
+            if (identity == null) return;
+            Fired.Remove(identity);
+            Pending.Remove(identity);
         }
     }
 }

@@ -15,5 +15,13 @@ namespace FTKModFramework.Core
 
         /// <summary>Fires when a consumable would apply a debuff to the owning character.</summary>
         ConsumableDebuff,
+
+        /// <summary>
+        /// Fires when the owning character drinks a PERSONAL consumable, and shares its beneficial effects with
+        /// the rest of the party. Only personal drinks qualify: <c>ConsumableBase.UseItemBuff</c> passes a
+        /// single-target group, whereas an orb (<c>OrbItemBase.UsePartyBuffOrb</c>) already passes the whole
+        /// party and is left alone.
+        /// </summary>
+        ConsumableBuff,
     }
 }
