@@ -45,6 +45,10 @@ namespace FTKModFramework
                     e.m_DisplayBottom = "Fortune favours the curious.";
                 });
 
+            // Wire the debug ForceCustomEncounter override at this sample's encounter (sample -> framework,
+            // so Core/ never names a content pack; left null when sample content is off, keeping it inert).
+            ForceCustomEncounter_Patch.TargetEncounterId = EncounterId;
+
             SelfTest();
 
             RegisterAdventure();
