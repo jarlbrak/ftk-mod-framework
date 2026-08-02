@@ -97,14 +97,27 @@ namespace FTKModFramework.Agent
         private static bool _running;
         private static string _adventureKey;
 
+        // The class id to force onto each hero slot (an FTK_playerGameStart int id, resolved up front by
+        // ActionExecutor). -1 => no class requested: keep the driver's RandomClass pick. Set on each Arm.
+        private static int _classId = -1;
+
+        // How many hero slots the run starts with (1..3). Single-player in FTK still allows a local party of up
+        // to GameFlowMC.gMaxPlayers=3 characters, which is what a party-facing passive needs in order to have
+        // anyone to affect. 1 keeps the original solo behaviour. Set on each Arm.
+        private static int _partySize = 1;
+
         public static bool IsRunning { get { return _running; } }
 
         /// <summary>
         /// Start the full continuation coroutine on the BridgeHost (must be called on the main thread). Returns
         /// false if already running (idempotent re-arm) or if no host is available. <paramref name="adventureKey"/>
-        /// is the adventure save-file key (e.g. "HollowMire").
+        /// is the adventure save-file key (e.g. "HollowMire"); <paramref name="classId"/> is the resolved
+        /// FTK_playerGameStart id to start AS (e.g. the Innkeeper), or -1 to keep the RandomClass pick;
+        /// <paramref name="partySize"/> is how many local hero slots to create (1..3, clamped). Only slot 0 takes
+        /// the requested class; companions keep their RandomClass pick, which is what makes a party-facing passive
+        /// testable against a NON-holder.
         /// </summary>
-        public static bool Arm(string adventureKey)
+        public static bool Arm(string adventureKey, int classId = -1, int partySize = 1)
         {
             if (_running) return false;
             BridgeHost host = BridgeHost.Instance;
@@ -114,6 +127,8 @@ namespace FTKModFramework.Agent
                 return false;
             }
             _adventureKey = string.IsNullOrEmpty(adventureKey) ? "HollowMire" : adventureKey;
+            _classId = classId;
+            _partySize = partySize < 1 ? 1 : (partySize > 3 ? 3 : partySize); // gMaxPlayers=3
             _running = true;
             try { host.StartCoroutine(Drive()); }
             catch (Exception e)
@@ -368,8 +383,10 @@ namespace FTKModFramework.Agent
                 }
                 catch (Exception e) { Plugin.Log.LogWarning("[agent] start_run difficulty: " + e.Message); }
 
-                // Solo: exactly one create slot. Set AFTER GameConfig.Show (it reset this to gMaxPlayers=3).
-                Reflect.SetField(usg, "m_ActualMaxCharCount", 1);
+                // How many create slots this run gets (1 = solo). Set AFTER GameConfig.Show (it reset this to
+                // gMaxPlayers=3). Still single-player either way: these are local characters, not Photon peers,
+                // so the bridge's IsSinglePlayer() guard keeps holding.
+                Reflect.SetField(usg, "m_ActualMaxCharCount", _partySize);
 
                 // Create the offline room. Async: fires OnJoinedRoom on a later pump -> (now in the GameConfig
                 // FSM state) _OnJoinedRoom -> "Continue" -> ShowCreateCharacter -> CreateAllCreatePlayerUIs +
@@ -480,15 +497,68 @@ namespace FTKModFramework.Agent
                 if (usg == null) return;
                 IEnumerable seq = Reflect.GetField(usg, "m_CreateUIs") as IEnumerable;
                 if (seq == null) return;
+                int slot = 0;
                 foreach (object qc in seq)
                 {
-                    if (qc == null) continue;
-                    if (ToBool(Reflect.GetField(qc, "m_IsReady"))) continue;
-                    SafeInvoke(qc, "RandomClass");   // pick a guaranteed-usable class first
-                    SafeInvoke(qc, "SetPlayerReady"); // then ready (IsUnlock now passes)
+                    if (qc == null) { slot++; continue; }
+                    if (ToBool(Reflect.GetField(qc, "m_IsReady")))
+                    {
+                        // Slot is ALREADY ready (e.g. m_IsReady + m_ClassID persisted from a previous session in
+                        // this process). RandomClass / SetPlayerReady would be skipped, so a requested class would
+                        // never apply (the live bug: party kept the persisted class). Re-class it IN PLACE: setting
+                        // m_ClassID + SyncSettings runs CheckClassUnlock, which in single-player re-sets
+                        // m_IsReady=true for the (unlocked) target, so the slot stays ready as the new class with no
+                        // unready/re-ready dance; we still re-issue SetPlayerReady to guarantee the ready flag.
+                        if (ForceRequestedClass(qc, slot, true))
+                            SafeInvoke(qc, "SetPlayerReady");
+                        slot++;
+                        continue;
+                    }
+                    SafeInvoke(qc, "RandomClass");        // pick a guaranteed-usable class first (unlock/ready invariant)
+                    ForceRequestedClass(qc, slot, false); // then force the requested class onto the slot, if any
+                    SafeInvoke(qc, "SetPlayerReady");      // then ready (IsUnlock now passes)
+                    slot++;
                 }
             }
             catch (Exception e) { Plugin.Log.LogWarning("[agent] start_run ready: " + e.Message); }
+        }
+
+        /// <summary>
+        /// Force the start_run-requested class (its resolved id) onto one hero slot. Returns true iff the class was
+        /// actually changed, so the caller can re-issue SetPlayerReady for a re-classed pre-ready slot. No-op
+        /// (returns false, logs nothing) when no class was requested (<see cref="_classId"/> &lt; 0) or the slot is
+        /// already that class, so the RandomClass pick / an already-correct slot is untouched and the ~30-frame
+        /// retries do not spam. The character-create UI commits a class by assigning the public <c>m_ClassID</c>
+        /// field and calling <c>SyncSettings()</c> (exactly what RandomClass / OnClassClick do): SyncSettings runs
+        /// CheckClassUnlock (which in single-player re-sets m_IsReady=true for an unlocked class) and pushes the
+        /// class into the offline serialized/party state, so the spawned COW is that class. The showcase custom
+        /// classes (Thief / Innkeeper) are m_Release + revealed, so IsUnlock / CanUseClass pass. Emits ONE LogInfo
+        /// (slot, from-class, to-class, and whether the slot was pre-ready) when it applies, so a live test can
+        /// confirm it ran. Best-effort: a throw is logged, never propagated (mirrors the ready/assign paths).
+        /// </summary>
+        private static bool ForceRequestedClass(object qc, int slot, bool wasReady)
+        {
+            if (_classId < 0) return false;
+            // The requested class is the PLAYER's character (slot 0). Companions keep their RandomClass pick, so a
+            // multi-hero run is a mixed party: exactly what a party-facing passive must be tested against.
+            if (slot != 0) return false;
+            try
+            {
+                int? from = ToNullableInt(Reflect.GetField(qc, "m_ClassID"));
+                if (from.HasValue && from.Value == _classId) return false; // already the requested class
+
+                Reflect.SetField(qc, "m_ClassID", _classId);
+                SafeInvoke(qc, "SyncSettings");
+                Plugin.Log.LogInfo("[agent] start_run class-set: slot " + slot + " classId " +
+                    (from.HasValue ? from.Value.ToString() : "?") + " -> " + _classId +
+                    (wasReady ? " (was pre-ready, re-classed)" : "") + ".");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogWarning("[agent] start_run class-set: " + e.Message);
+                return false;
+            }
         }
 
         // Resolve PhotonNetwork.player.ID (offlineMode: master = the only player). PhotonNetwork.player is a

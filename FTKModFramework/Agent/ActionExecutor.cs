@@ -64,6 +64,7 @@ namespace FTKModFramework.Agent
                 switch (action)
                 {
                     case "snap_to": return SnapTo(args);
+                    case "snap_party": return SnapParty(args);
                     case "move_to": return MoveTo(args);
                     case "engage": return Engage(args);
                     case "combat_turn": return CombatTurn(args);
@@ -78,6 +79,7 @@ namespace FTKModFramework.Agent
                     case "attack": return Attack(args);
                     case "resolve_turn": return ResolveTurn(args);
                     case "end_turn": return EndTurn(args);
+                    case "use_item": return UseItem(args);
                     case "select_choice": return SelectChoice(args);
                     case "advance": return Advance(args);
                     case "dismiss_message": return DismissMessage(args);
@@ -124,6 +126,53 @@ namespace FTKModFramework.Agent
             // cow.SnapTo(dest, false, true) -- deterministic placement without an encounter roll.
             object snap = Reflect.Invoke(cow, "SnapTo", dest, false, true);
             return Ok(Tile("snappedTo", big, small));
+        }
+
+        /// <summary>
+        /// Snap EVERY party member onto one hex. <c>snap_to</c> only moves the current-turn character, and in FTK
+        /// each hero is an independent overworld token, so an <c>engage</c> after it starts a fight containing that
+        /// hero ALONE. Anything that affects other party members (a party-facing passive, a group buff) is therefore
+        /// untestable without first co-locating the party, which is exactly what this does. Deterministic placement
+        /// via the same COW.SnapTo(dest, false, true) as snap_to, so no encounter roll fires while placing.
+        /// </summary>
+        private static object SnapParty(IDictionary<string, object> args)
+        {
+            int big, small;
+            if (!GetTile(args, out big, out small)) return Fail("snap_party needs int args {big,small}");
+
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return Fail("snap_party failed at hub: FTKHub.Instance unavailable");
+            object hexInstance = StaticInstance("FTKHex");
+            if (hexInstance == null) return Fail("snap_party failed at hex: FTKHex.Instance unavailable");
+            object dest = GetHexLandByIndex(hexInstance, big, small);
+            if (dest == null) return Fail("snap_party failed at hex: no hex at (" + big + "," + small + ")");
+
+            IEnumerable cows = SafeField(hub, "m_CharacterOverworlds") as IEnumerable;
+            if (cows == null) return Fail("snap_party failed at party: m_CharacterOverworlds unreadable");
+
+            int moved = 0, skipped = 0;
+            foreach (object cow in cows)
+            {
+                if (cow == null) { skipped++; continue; }
+                try
+                {
+                    Reflect.Invoke(cow, "SnapTo", dest, false, true);
+                    moved++;
+                }
+                catch (Exception e)
+                {
+                    skipped++;
+                    Plugin.Log.LogWarning("[agent] snap_party: one member failed: " + e.Message);
+                }
+            }
+
+            Dictionary<string, object> d = new Dictionary<string, object>();
+            d["action"] = "snappedParty";
+            d["big"] = big;
+            d["small"] = small;
+            d["moved"] = moved;
+            d["skipped"] = skipped;
+            return Ok(d);
         }
 
         private static object MoveTo(IDictionary<string, object> args)
@@ -1111,6 +1160,13 @@ namespace FTKModFramework.Agent
                 if (OkayMessageSurface(ui, "m_PortraitMessage")) return Ok(Result("advanced", "portrait"));
                 if (OkayMessageSurface(ui, "m_QuestConfirm")) return Ok(Result("advanced", "questConfirm"));
 
+                // Post-combat loot / item-gain choice panel ("Victory! ... find [item card] COLLECT / DISCARD").
+                // It is NOT an FTKUI message surface (it lives on a COW's HUD as a VoteType.Loot vote), so the
+                // OkayMessageSurface probes and the global-message fallback all miss it and the session wedges in
+                // phase==combat. Collect it (never discard) when open; clean no-op otherwise. Probed BEFORE the
+                // global-message fallback so a raised loot panel is taken rather than falling through.
+                if (LootCollectSurface()) return Ok(Result("advanced", "lootCollect"));
+
                 object gm = Reflect.GetField(ui, "m_GlobalMessage");
                 if (gm != null)
                 {
@@ -1126,6 +1182,162 @@ namespace FTKModFramework.Agent
                 }
             }
             return Fail("no continue/okay surface available");
+        }
+
+        /// <summary>
+        /// Probe the post-combat loot / item-gain choice panel and COLLECT (never discard) when it is open.
+        /// The panel is the <c>VoteButtonContainer</c> at
+        /// <c>CharacterOverworld.m_UIPlayMainHud.m_LootCollectionButtons</c>: after a win the game raises it with
+        /// <c>m_VoteType == EncounterSessionMC.VoteType.Loot</c> and a Collect + Pass/Discard button pair over an
+        /// item card. We find the open loot container, pull its Collect button
+        /// (<c>m_VoteButtonTable[VoteButton.VoteOption.Collect]</c>) and invoke that button's own click path
+        /// (<c>VoteButton.OnLeftClick</c>): in single-player that hides the loot buttons and RPCs
+        /// <c>VoteButtonClick</c> with <c>VoteOption.Collect</c>, taking the item. Returns true iff a loot panel
+        /// was open and Collect was invoked; a clean no-op (false) otherwise. Never throws. One item per call
+        /// (matches the message-advance idiom): a multi-item loot is collected by successive advance() calls.
+        /// </summary>
+        private static bool LootCollectSurface()
+        {
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return false;
+            IEnumerable cows = SafeField(hub, "m_CharacterOverworlds") as IEnumerable;
+            if (cows == null) return false;
+
+            object lootType = ResolveNestedEnum("EncounterSessionMC+VoteType", "Loot");
+            object collectKey = ResolveNestedEnum("VoteButton+VoteOption", "Collect");
+            if (lootType == null || collectKey == null) return false;
+
+            foreach (object cow in cows)
+            {
+                if (cow == null) continue;
+                object hud = SafeField(cow, "m_UIPlayMainHud");
+                object container = SafeField(hud, "m_LootCollectionButtons");
+                if (container == null) continue;
+                if (!lootType.Equals(SafeField(container, "m_VoteType"))) continue; // only the OPEN loot vote
+
+                IDictionary table = SafeField(container, "m_VoteButtonTable") as IDictionary;
+                if (table == null || !table.Contains(collectKey)) continue;
+                object collectButton = table[collectKey];
+                if (collectButton == null) continue;
+
+                SafeInvoke(collectButton, "OnLeftClick"); // the Collect button's own path (never Discard/Pass)
+                return true;
+            }
+            return false;
+        }
+
+        // Resolve a nested enum value by name (e.g. "EncounterSessionMC+VoteType", "Loot"); null if unresolved.
+        // Tries the '+' and '/' nested-type spellings, mirroring StartRunDriver's AssignDevice.Type resolve.
+        private static object ResolveNestedEnum(string typeName, string member)
+        {
+            Type t = AccessTools.TypeByName(typeName);
+            if (t == null) t = AccessTools.TypeByName(typeName.Replace('+', '/'));
+            if (t == null || !t.IsEnum) return null;
+            try { return Enum.IsDefined(t, member) ? Enum.Parse(t, member) : null; }
+            catch { return null; }
+        }
+
+        // ============================================================ items ===========================
+
+        /// <summary>
+        /// USE a named consumable from the CURRENT-TURN hero's inventory, in combat, via the REAL item-use path
+        /// (the one an item-bar click takes): <c>FTKItemName.FTKItem.Get(id).OnUse(cow, containerID)</c>. For a
+        /// drink the consumable subclass OnUse runs base.OnUse (the using handle + combat log), UseItemBuff ->
+        /// EncounterSession.CombatPartyBuff (the buff RPC that #82's Iron Belly prefix scopes), UsingFinished(true)
+        /// (removes the item from its container) and the combat-turn transition. This exercises the consumable
+        /// path end to end, NOT a synthetic CombatPartyBuff. args: {"item":"conRum"} (a vanilla FTK_itembase.ID
+        /// member name). Fails clearly when not in combat, not the hero's turn, or the hero does not hold the item.
+        /// Single-player only (the outer Execute gate already enforces IsSinglePlayer()).
+        /// </summary>
+        private static object UseItem(IDictionary<string, object> args)
+        {
+            string itemName = GetString(args, "item");
+            if (string.IsNullOrEmpty(itemName))
+                return Fail("use_item: missing 'item'");
+
+            // The current-turn hero (GameLogic.GetCurrentCombatCOW): the COW whose combat turn it is.
+            object cow = CurrentCombatCow();
+            if (cow == null)
+                return Fail("use_item: no current-turn hero (not in combat)");
+
+            // In combat? Drinks only apply in combat (ConsumableBase.CanUseCombat gates on m_IsInCombat).
+            object stats = SafeField(cow, "m_CharacterStats");
+            if (stats == null || !ToBool(SafeField(stats, "m_IsInCombat")))
+                return Fail("use_item: not in combat");
+
+            // Deliberately NOT gated on HeroTurnReady(): its readyParts.initialized probe reads false in
+            // live sessions even while the game accepts hero actions (the same sessions where
+            // choose_ability/attack work). The item's own CanUse gate below is the authority: it is the
+            // exact item-bar enable check (FSM "Wait For Stance", no item used this turn, coherent dummy),
+            // so a wrong-turn use fails there with the game's own logic instead of a harness false negative.
+
+            // Resolve the item id from its vanilla enum-member name (e.g. "conRum"). FTK_itembase lives in
+            // the GridEditor namespace (unlike the global-namespace EncounterSessionMC the loot surface
+            // resolves), so probe the qualified name first.
+            object itemId = ResolveNestedEnum("GridEditor.FTK_itembase+ID", itemName);
+            if (itemId == null) itemId = ResolveNestedEnum("FTK_itembase+ID", itemName);
+            if (itemId == null)
+                return Fail("use_item: unknown item '" + itemName + "'");
+
+            // Which container holds it? Combat consumables live in the Backpack or the Belt.
+            object containerId = FindItemContainer(cow, itemId);
+            if (containerId == null)
+                return Fail("use_item: current-turn hero does not hold '" + itemName + "'");
+
+            // The FTKItem for this id (its consumable subclass, e.g. conRum) + the CharacterOverworld param type.
+            object item = ResolveFtkItem(itemId);
+            Type cowType = AccessTools.TypeByName("CharacterOverworld");
+            if (item == null || cowType == null)
+                return Fail("use_item: could not resolve FTKItem/CharacterOverworld for '" + itemName + "'");
+
+            // The item's own gate (== the item-bar's enable check: turn/combat/already-used/confused), so residual
+            // cases like "already used an item this combat turn" fail with the game's own logic rather than a NPE.
+            object canUse = SafeInvokeArgs(item, "CanUse",
+                new[] { cowType, typeof(bool) }, new object[] { cow, false });
+            if (canUse is bool && !(bool)canUse)
+                return Fail("use_item: '" + itemName + "' cannot be used now (CanUse=false)");
+
+            // The real full use. OnUse(CharacterOverworld, PlayerInventory.ContainerID) on the resolved subclass.
+            SafeInvokeArgs(item, "OnUse",
+                new[] { cowType, containerId.GetType() }, new object[] { cow, containerId });
+
+            return Ok(Result("used", itemName));
+        }
+
+        // Find which of the hero's consumable-holding containers (Backpack, then Belt) holds the item, returning
+        // that container's PlayerInventory.ContainerID (to pass to OnUse so UsingFinished removes from the right
+        // one). Null if the hero holds none. Uses PlayerInventory.GetItemCount(ContainerID, FTK_itembase.ID).
+        private static object FindItemContainer(object cow, object itemId)
+        {
+            object inv = SafeField(cow, "m_PlayerInventory");
+            if (inv == null) return null;
+            string[] containers = { "Backpack", "Belt" };
+            for (int i = 0; i < containers.Length; i++)
+            {
+                object cid = ResolveNestedEnum("PlayerInventory+ContainerID", containers[i]);
+                if (cid == null) continue;
+                object count = SafeInvokeArgs(inv, "GetItemCount",
+                    new[] { cid.GetType(), itemId.GetType() }, new object[] { cid, itemId });
+                int? n = ToInt(count);
+                if (n.HasValue && n.Value > 0) return cid;
+            }
+            return null;
+        }
+
+        // Resolve FTKItemName.FTKItem.Get(FTK_itembase.ID) -> the FTKItem instance (its consumable subclass) for
+        // the id. Static call by name to keep the Agent layer decoupled from the typed game item hierarchy.
+        private static object ResolveFtkItem(object itemId)
+        {
+            // FTKItemName is a NAMESPACE (decompile: "namespace FTKItemName { public class FTKItem ... }"),
+            // not an enclosing class, so the dotted form is the correct lookup.
+            Type t = AccessTools.TypeByName("FTKItemName.FTKItem");
+            if (t == null) t = AccessTools.TypeByName("FTKItemName+FTKItem");
+            if (t == null) return null;
+            MethodInfo get = t.GetMethod("Get", BindingFlags.Public | BindingFlags.Static, null,
+                new[] { itemId.GetType() }, null);
+            if (get == null) return null;
+            try { return get.Invoke(null, new object[] { itemId }); }
+            catch { return null; }
         }
 
         /// <summary>
@@ -1347,10 +1559,46 @@ namespace FTKModFramework.Agent
             if (preview == null)
                 return Fail("start_run failed at get-preview: adventure '" + adventureKey + "' not injected");
 
+            // Optional: start the run AS a specific class (its local key, e.g. "ftkmf_innkeeper"). Resolve it UP
+            // FRONT against FTK_playerGameStartDB so an unknown class fails the action cleanly (rather than
+            // silently keeping the driver's RandomClass pick). DbLookupPatcher makes GetIntFromID resolve our
+            // custom class string ids to their (index-equal) int. Absent/empty => -1 => keep RandomClass.
+            string classKey = GetString(args, "class");
+            int classId = -1;
+            if (!string.IsNullOrEmpty(classKey))
+            {
+                classId = ResolveClassId(classKey);
+                if (classId < 0)
+                    return Fail("start_run failed at resolve-class: class '" + classKey +
+                        "' not found in FTK_playerGameStartDB");
+            }
+
+            // Optional: how many local hero slots (1..3, clamped by the driver). Absent => 1 (solo), the original
+            // behaviour. A party is required to exercise anything that affects OTHER party members.
+            int? party = GetInt(args, "party");
+
             // Arm the full waited coroutine (dismiss -> settle -> NewGame -> GameConfig -> configure -> room ->
             // map-wait -> ready -> EnterFahrul -> intro). It owns all FSM/Photon sequencing.
-            StartRunDriver.Arm(adventureKey);
+            StartRunDriver.Arm(adventureKey, classId, party.HasValue ? party.Value : 1);
             return Ok(StartResult(false, "starting"));
+        }
+
+        /// <summary>
+        /// Resolve a class LOCAL KEY (e.g. "ftkmf_innkeeper") to its FTK_playerGameStart int id, or -1 if it is
+        /// unknown. Resolved by name (FTK_playerGameStartDB.GetDB().GetIntFromID) to keep the Agent layer
+        /// decoupled from typed game DBs; GetIntFromID is patched by DbLookupPatcher so our custom class string
+        /// ids resolve (a vanilla key falls through to the original Enum.Parse, which yields its ordinal).
+        /// </summary>
+        private static int ResolveClassId(string classKey)
+        {
+            Type dbType = AccessTools.TypeByName("FTK_playerGameStartDB");
+            if (dbType == null) return -1;
+            MethodInfo getDb = dbType.GetMethod("GetDB", BindingFlags.Public | BindingFlags.Static);
+            object db = getDb != null ? getDb.Invoke(null, null) : null;
+            if (db == null) return -1;
+            object res = SafeInvokeArgs(db, "GetIntFromID", new[] { typeof(string) }, new object[] { classKey });
+            int? id = ToInt(res);
+            return id.HasValue ? id.Value : -1;
         }
 
         // ----------------------------------------------------------- start-run helpers ------------------
