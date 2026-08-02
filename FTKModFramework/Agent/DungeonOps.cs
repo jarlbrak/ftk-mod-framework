@@ -347,7 +347,9 @@ namespace FTKModFramework.Agent
 
                 object bsb = BattleStanceButtons();
                 if (bsb == null) return;
-                SafeInvokeArgs(bsb, "SelectEnemyDummy", new[] { enemyFid.GetType() }, new object[] { enemyFid });
+                // Both args (see SelectEnemyDummy): the old 1-type signature never matched the real
+                // 2-parameter method, so this selection silently no-opped.
+                SelectEnemyDummy(bsb, enemyFid);
                 Reflect.Invoke(bsb, "CheatKillAll");
                 Plugin.Log.LogInfo("[agent] dungeon: in-room CheatKillAll committed.");
             }
@@ -638,7 +640,7 @@ namespace FTKModFramework.Agent
             {
                 object bsb = BattleStanceButtons();
                 if (bsb == null) return false;
-                if (!ToBool(SafeField(bsb, "m_Initialized"))) return false;
+                if (!StanceUiInitialized(bsb)) return false;
                 // The ACTING hero's dummy (#93), resolved from the fight order rather than from the
                 // GetCurrentCombatCOW FSM global (which holds the enemy's victim on an enemy turn and never
                 // tracks heroes 1..n, so an in-dungeon multi-hero party never read ready past slot 0).
@@ -866,6 +868,54 @@ namespace FTKModFramework.Agent
             object ui = StaticInstance("FTKUI");
             if (ui == null) return null;
             return SafeField(ui, "m_BattleStanceButtons");
+        }
+
+        // uiBattleStanceButtons.m_Initialized read as a PROPERTY first. The decompile declares it
+        // 'public bool m_Initialized { get; private set; }', an auto-property backed by the generated
+        // '<m_Initialized>k__BackingField'; Reflect.GetField matches a field by literal name only, so the old
+        // SafeField probe returned null and ToBool(null) is false ALWAYS, permanently closing this readiness
+        // gate. Field read kept as a fallback. Mirrors ActionExecutor/CombatDriver/StateReader.
+        private static bool StanceUiInitialized(object bsb)
+        {
+            if (bsb == null) return false;
+            object v = SafeProp(bsb, "m_Initialized");
+            if (v == null) v = SafeField(bsb, "m_Initialized");
+            return ToBool(v);
+        }
+
+        // uiBattleStanceButtons.SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID _itemID = FTK_itembase.ID.None).
+        // An optional parameter is a CALL-SITE compiler feature: the emitted method still takes TWO parameters
+        // and reflection knows nothing of the default, so a 1-type GetMethod signature could never match and
+        // selection silently no-opped. Pass both. Returns false, never throws, on any resolve miss.
+        private static bool SelectEnemyDummy(object bsb, object enemyFid)
+        {
+            if (bsb == null || enemyFid == null) return false;
+            // FTK_itembase lives in the GridEditor namespace; try the qualified spelling first.
+            object none = ResolveEnumMember("GridEditor.FTK_itembase+ID", "None");
+            if (none == null) none = ResolveEnumMember("FTK_itembase+ID", "None");
+            if (none == null) return false;
+            try
+            {
+                Type[] sig = new[] { enemyFid.GetType(), none.GetType() };
+                MethodInfo mi = null;
+                for (Type cur = bsb.GetType(); cur != null && mi == null; cur = cur.BaseType)
+                    mi = cur.GetMethod("SelectEnemyDummy", Reflect.All | BindingFlags.DeclaredOnly, null, sig, null);
+                if (mi == null) return false;
+                mi.Invoke(bsb, new object[] { enemyFid, none });
+                return true;
+            }
+            catch { return false; }
+        }
+
+        // Resolve a nested enum member by name; null if unresolved. Tries the '+' and '/' nested spellings,
+        // mirroring ActionExecutor.ResolveNestedEnum (this file keeps its own reflection utils by design).
+        private static object ResolveEnumMember(string typeName, string member)
+        {
+            Type t = AccessTools.TypeByName(typeName);
+            if (t == null) t = AccessTools.TypeByName(typeName.Replace('+', '/'));
+            if (t == null || !t.IsEnum) return null;
+            try { return Enum.IsDefined(t, member) ? Enum.Parse(t, member) : null; }
+            catch { return null; }
         }
 
         // GameLogic.GetCurrentCOW path: FTKHub.GetCharacterOverworldByFID(GameLogic.m_CurrentPlayer).

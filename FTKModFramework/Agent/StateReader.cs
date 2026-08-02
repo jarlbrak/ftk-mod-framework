@@ -389,7 +389,7 @@ namespace FTKModFramework.Agent
             {
                 object ui = StaticInstance("FTKUI");
                 object bsb = ui != null ? Reflect.GetField(ui, "m_BattleStanceButtons") : null;
-                rp["initialized"] = bsb != null && ToBool(SafeField(bsb, "m_Initialized"));
+                rp["initialized"] = StanceUiInitialized(bsb);
                 // The ACTING hero's dummy (m_FightOrder[0] in a fight), so fsmState describes the hero the
                 // commit gates read rather than hero 0 or an enemy's victim. See ActingCow (#93).
                 object cow = ActingCow();
@@ -481,7 +481,7 @@ namespace FTKModFramework.Agent
                 // genuinely in "Wait For Stance" (the authoritative gate); require m_Initialized only on the
                 // overworld. Mirrors CombatDriver.HeroTurnReady so /state and the driver agree. m_Initialized is
                 // singleton-scoped (one uiBattleStanceButtons for the party), so it stays a global probe.
-                if (!DungeonOps.InDungeon() && !ToBool(SafeField(bsb, "m_Initialized"))) return false;
+                if (!DungeonOps.InDungeon() && !StanceUiInitialized(bsb)) return false;
                 // The dummy must be the ACTING hero's own (#93), resolved from the fight order, not from the
                 // GetCurrentCombatCOW FSM global (which holds the enemy's victim on an enemy turn and never
                 // tracks heroes 1..n). Same source as ActionExecutor/CombatDriver so all three agree.
@@ -495,6 +495,20 @@ namespace FTKModFramework.Agent
                 return stateName is string && (string)stateName == "Wait For Stance";
             }
             catch (Exception e) { warnings.Add("combat.heroTurnReady: " + e.Message); return false; }
+        }
+
+        // uiBattleStanceButtons.m_Initialized read as a PROPERTY first. The decompile declares it
+        // 'public bool m_Initialized { get; private set; }', an auto-property backed by the generated
+        // '<m_Initialized>k__BackingField'; Reflect.GetField matches a field by literal name only, so the old
+        // SafeField probe returned null and ToBool(null) is false ALWAYS, publishing readyParts.initialized
+        // false (and heroTurnReady false on the overworld) even with the acting hero parked in
+        // "Wait For Stance". Field read kept as a fallback. Mirrors ActionExecutor/CombatDriver.
+        private static bool StanceUiInitialized(object bsb)
+        {
+            if (bsb == null) return false;
+            object v = SafeProp(bsb, "m_Initialized");
+            if (v == null) v = SafeField(bsb, "m_Initialized");
+            return ToBool(v);
         }
 
         /// <summary>

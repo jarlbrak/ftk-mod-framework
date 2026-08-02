@@ -686,8 +686,10 @@ namespace FTKModFramework.Agent
 
             int? hpBefore = EnemyHpByFid(es, enemyFid);
 
-            // STEP 6 select.
-            SafeInvokeArgs(bsb, "SelectEnemyDummy", new[] { enemyFid.GetType() }, new object[] { enemyFid });
+            // STEP 6 select. Both args (see SelectEnemyDummy); the old 1-type signature never matched, so the
+            // commit below silently hit the game-selected default enemy instead of the requested one.
+            if (!SelectEnemyDummy(bsb, enemyFid))
+                return Fail("at combat_turn.select: SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID) unresolved");
 
             // STEP 7/8/9 commit exactly ONCE through the real turn-ending path. (We are already in "Wait For
             // Stance", so SelectEnemyDummy + the commit settle synchronously within this main-thread call; the
@@ -910,7 +912,7 @@ namespace FTKModFramework.Agent
             try
             {
                 object bsb = BattleStanceButtons();
-                rp["initialized"] = bsb != null && ToBool(SafeField(bsb, "m_Initialized"));
+                rp["initialized"] = StanceUiInitialized(bsb);
                 string fsmState = null;
                 // The ACTING hero's dummy (m_FightOrder[0] in combat), so fsmState describes the hero the
                 // commit gates actually read. See ActingCow (#93).
@@ -958,7 +960,7 @@ namespace FTKModFramework.Agent
             {
                 object bsb = BattleStanceButtons();
                 if (bsb == null) return false;
-                if (!ToBool(SafeField(bsb, "m_Initialized"))) return false;
+                if (!StanceUiInitialized(bsb)) return false;
                 object cow = ActingCow();
                 if (cow == null) return false;
                 object dummy = SafeField(cow, "m_CurrentDummy");
@@ -1087,7 +1089,9 @@ namespace FTKModFramework.Agent
 
             object bsb = BattleStanceButtons();
             if (bsb == null) return Fail("battle stance buttons unavailable");
-            Reflect.Invoke(bsb, "SelectEnemyDummy", fid);
+            // Both args, always (see SelectEnemyDummy): the old 1-arg Reflect.Invoke threw here.
+            if (!SelectEnemyDummy(bsb, fid))
+                return Fail("set_target: SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID) unresolved");
             return Ok(null);
         }
 
@@ -1196,7 +1200,10 @@ namespace FTKModFramework.Agent
             object targetFid = ResolveFid(args, "targetFid");
             if (targetFid == null) targetFid = FirstLiveEnemyFid(es);
             if (targetFid == null) return Ok(WaitingResult("no_live_enemy"));
-            SafeInvokeArgs(bsb, "SelectEnemyDummy", new[] { targetFid.GetType() }, new object[] { targetFid });
+            // Both args (see SelectEnemyDummy); the old 1-type signature never matched, so an explicit
+            // targetFid was silently ignored and the commit hit the game-selected default enemy.
+            if (!SelectEnemyDummy(bsb, targetFid))
+                return Fail("at resolve_turn.select: SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID) unresolved");
 
             // (2) Commit through the verified turn-ending paths on uiBattleStanceButtons. These set
             // m_PlayerSlots.m_CheatAttack then call ComputeAttackSlotResults(CombatCow,true), advancing the
@@ -1774,6 +1781,62 @@ namespace FTKModFramework.Agent
             object ui = StaticInstance("FTKUI");
             if (ui == null) return null;
             return Reflect.GetField(ui, "m_BattleStanceButtons");
+        }
+
+        /// <summary>
+        /// uiBattleStanceButtons.m_Initialized, read as a PROPERTY first.
+        ///
+        /// THE BUG THIS FIXES: the decompile declares it <c>public bool m_Initialized { get; private set; }</c>,
+        /// an auto-property whose storage is the compiler-generated backing field
+        /// <c>&lt;m_Initialized&gt;k__BackingField</c>. Reflect.GetField looks up a field by the LITERAL name
+        /// only (Core/Reflect.cs Field()), so a SafeField("m_Initialized") probe always returned null and
+        /// ToBool(null) is false. The readiness gate was therefore permanently closed on the overworld: every
+        /// gated commit path (combat_turn, resolve_turn, win_combat) reported stance_not_ready even with the
+        /// acting hero's dummy genuinely parked in "Wait For Stance"; only the dungeon carve-out, which skips
+        /// this flag, ever let a commit through.
+        ///
+        /// The field read is kept as a fallback so a build that declares it as a plain field still works.
+        /// </summary>
+        private static bool StanceUiInitialized(object bsb)
+        {
+            if (bsb == null) return false;
+            object v = SafeProp(bsb, "m_Initialized");
+            if (v == null) v = SafeField(bsb, "m_Initialized");
+            return ToBool(v);
+        }
+
+        /// <summary>
+        /// uiBattleStanceButtons.SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID _itemID = FTK_itembase.ID.None).
+        ///
+        /// THE BUG THIS FIXES: a C# optional parameter is a CALL-SITE compiler feature. The emitted method still
+        /// has TWO parameters and reflection has no notion of the default, so every one-argument invoke was
+        /// wrong: a 1-type GetMethod signature cannot match the 2-parameter method (silent no-op, after which
+        /// the commit landed on whatever enemy the game had already selected, harmless in a 1-enemy fight and
+        /// wrong in any other), and a 1-arg Reflect.Invoke threw "parameters do not match signature". Both args
+        /// are now passed explicitly.
+        ///
+        /// Returns false (never throws) when the enum, the method, or either argument cannot be resolved, so
+        /// callers can degrade to a precise ok:false instead of an exception.
+        /// </summary>
+        private static bool SelectEnemyDummy(object bsb, object enemyFid)
+        {
+            if (bsb == null || enemyFid == null) return false;
+            // FTK_itembase lives in the GridEditor namespace; probe the qualified spelling first, exactly as
+            // the use_item item-id resolve does.
+            object none = ResolveNestedEnum("GridEditor.FTK_itembase+ID", "None");
+            if (none == null) none = ResolveNestedEnum("FTK_itembase+ID", "None");
+            if (none == null) return false;
+            try
+            {
+                Type[] sig = new[] { enemyFid.GetType(), none.GetType() };
+                MethodInfo mi = null;
+                for (Type cur = bsb.GetType(); cur != null && mi == null; cur = cur.BaseType)
+                    mi = cur.GetMethod("SelectEnemyDummy", Reflect.All | BindingFlags.DeclaredOnly, null, sig, null);
+                if (mi == null) return false;
+                mi.Invoke(bsb, new object[] { enemyFid, none });
+                return true;
+            }
+            catch { return false; }
         }
 
         private static object CurrentCow()

@@ -153,7 +153,9 @@ namespace FTKModFramework.Agent
 
                 // G4: select the victim, then YIELD ONE FRAME so the selection settles before the commit (the
                 // BridgeHost marshals on its own coroutine; select + cheat want a frame between them).
-                SafeInvokeArgs(bsb, "SelectEnemyDummy", new[] { enemyFid.GetType() }, new object[] { enemyFid });
+                // Both args (see SelectEnemyDummy): the old 1-type signature never matched the real
+                // 2-parameter method, so the per-enemy loop silently committed on the game-selected default.
+                SelectEnemyDummy(bsb, enemyFid);
                 Plugin.Log.LogInfo("[agent] combat: " + Tag() + " selected enemy " + FidLabel(enemyFid)
                                    + " (committing KillSingle).");
                 yield return null;
@@ -309,7 +311,7 @@ namespace FTKModFramework.Agent
                 // leaves it false while the dummy IS genuinely in "Wait For Stance". So require m_Initialized on the
                 // overworld, but inside a dungeon gate on the FSM state alone. NOTE m_Initialized is
                 // singleton-scoped (one uiBattleStanceButtons, not one per hero), so it stays a global probe.
-                if (!DungeonOps.InDungeon() && !ToBool(SafeField(bsb, "m_Initialized"))) return false;
+                if (!DungeonOps.InDungeon() && !StanceUiInitialized(bsb)) return false;
                 // The dummy, however, MUST be the acting hero's own (#93): GetCurrentCombatCOW reads the FSM
                 // global compCombatOverworld, which CharacterDummy.EngageBattle also sets to the enemy's VICTIM
                 // on an enemy turn, and with a multi-hero party it does not track heroes 1..n. Resolve from the
@@ -378,6 +380,57 @@ namespace FTKModFramework.Agent
             object ui = StaticInstance("FTKUI");
             if (ui == null) return null;
             return SafeField(ui, "m_BattleStanceButtons");
+        }
+
+        // uiBattleStanceButtons.m_Initialized read as a PROPERTY first. The decompile declares it
+        // 'public bool m_Initialized { get; private set; }', an auto-property backed by the generated
+        // '<m_Initialized>k__BackingField'; Reflect.GetField matches a field by literal name only, so the old
+        // SafeField probe returned null and ToBool(null) is false ALWAYS. That kept the overworld readiness
+        // gate permanently closed, so this driver could only ever commit through the dungeon carve-out below.
+        // The field read stays as a fallback in case a build declares it as a plain field.
+        // Mirrors ActionExecutor/StateReader.StanceUiInitialized so all three agree.
+        private static bool StanceUiInitialized(object bsb)
+        {
+            if (bsb == null) return false;
+            object v = SafeProp(bsb, "m_Initialized");
+            if (v == null) v = SafeField(bsb, "m_Initialized");
+            return ToBool(v);
+        }
+
+        // uiBattleStanceButtons.SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID _itemID = FTK_itembase.ID.None).
+        // An optional parameter is a CALL-SITE compiler feature: the emitted method still takes TWO parameters
+        // and reflection knows nothing of the default, so a 1-type GetMethod signature could never match and
+        // selection silently no-opped (the commit then landed on the game-selected default enemy). Pass both.
+        // Returns false, never throws, when the enum or the method cannot be resolved.
+        private static bool SelectEnemyDummy(object bsb, object enemyFid)
+        {
+            if (bsb == null || enemyFid == null) return false;
+            // FTK_itembase lives in the GridEditor namespace; try the qualified spelling first.
+            object none = ResolveEnumMember("GridEditor.FTK_itembase+ID", "None");
+            if (none == null) none = ResolveEnumMember("FTK_itembase+ID", "None");
+            if (none == null) return false;
+            try
+            {
+                Type[] sig = new[] { enemyFid.GetType(), none.GetType() };
+                MethodInfo mi = null;
+                for (Type cur = bsb.GetType(); cur != null && mi == null; cur = cur.BaseType)
+                    mi = cur.GetMethod("SelectEnemyDummy", Reflect.All | BindingFlags.DeclaredOnly, null, sig, null);
+                if (mi == null) return false;
+                mi.Invoke(bsb, new object[] { enemyFid, none });
+                return true;
+            }
+            catch { return false; }
+        }
+
+        // Resolve a nested enum member by name; null if unresolved. Tries the '+' and '/' nested spellings,
+        // mirroring ActionExecutor.ResolveNestedEnum (this file keeps its own reflection utils by design).
+        private static object ResolveEnumMember(string typeName, string member)
+        {
+            Type t = AccessTools.TypeByName(typeName);
+            if (t == null) t = AccessTools.TypeByName(typeName.Replace('+', '/'));
+            if (t == null || !t.IsEnum) return null;
+            try { return Enum.IsDefined(t, member) ? Enum.Parse(t, member) : null; }
+            catch { return null; }
         }
 
         private static string FidLabel(object fid)
