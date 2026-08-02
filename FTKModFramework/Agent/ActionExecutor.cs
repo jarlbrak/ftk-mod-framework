@@ -1180,6 +1180,16 @@ namespace FTKModFramework.Agent
                 Reflect.Invoke(menu, "LeaveOrEndTurn");
                 return Ok(Result("ended", "overworld"));
             }
+
+            // Plain hex, no POI menu open: drive the same path the overworld hourglass button does
+            // (uiEndTurnButton.OnEndTurn is just FTKHub.EndTurn plus button cosmetics). Calling FTKHub
+            // directly skips the button object, which is deactivated between turns and unreliable to probe.
+            object hub = StaticInstance("FTKHub");
+            if (hub != null)
+            {
+                Reflect.Invoke(hub, "EndTurn");
+                return Ok(Result("ended", "hourglass"));
+            }
             return Fail("no end-turn surface available");
         }
 
