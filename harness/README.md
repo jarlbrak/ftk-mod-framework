@@ -49,8 +49,12 @@ Grouped by phase. All are fully defensive (a missing precondition returns
 - **Run / flow**: `start_run {adventure?}` (autonomous title -> in-world),
   `list_adventures`, `dismiss_message` / `dismiss_dialog`, `select_choice {index}`,
   `advance`, `enter_tile`, `end_turn`.
-- **Overworld**: `move_to {big,small}`, `snap_to {big,small}`, `engage` (snap onto
-  the nearest enemy POI and start an overworld fight).
+- **Overworld**: `move_to {big,small}`, `snap_to {big,small}`,
+  `engage {hexBig?,hexSmall?,party?}` (snap onto the nearest enemy POI and start an
+  overworld fight). Combatants are collected from the enemy hex's combat radius at
+  session init, so a plain `engage` fights with the acting hero alone; pass
+  `{party:true}` to co-locate the whole party on that hex first and get a full-party
+  fight (the result then reports `partyMoved` / `partySkipped`).
 - **Combat**: `set_target {enemyFid}`, `choose_ability {profId}`, `set_focus {n}`,
   `attack`, `resolve_turn {attackerFid?,targetFid?,profId?,hit?}`, `combat_turn`,
   `force_win` / `win_combat` / `auto_combat` / `auto_combat_turn`, `combat_status`.

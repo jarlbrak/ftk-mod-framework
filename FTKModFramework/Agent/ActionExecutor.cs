@@ -331,6 +331,11 @@ namespace FTKModFramework.Agent
         /// Optional args {hexBig,hexSmall} pick a specific adjacent enemy hex; otherwise the first adjacent
         /// MiniHexEnemy/Camp is used. Fully gated and defensive: any precondition miss returns ok:false with a
         /// precise "at engage.&lt;step&gt;" error and never throws.
+        ///
+        /// Optional {party:true} co-locates the WHOLE party on the enemy hex first, so the fight has every hero
+        /// as a combatant instead of just the acting one (see SnapPartyToHex for why this must happen BEFORE
+        /// the session starts). Default false: an engage without it is byte-identical to previous behaviour.
+        /// When requested, the result carries partyMoved/partySkipped.
         /// </summary>
         private static object Engage(IDictionary<string, object> args)
         {
@@ -346,10 +351,17 @@ namespace FTKModFramework.Agent
             if (hex == null) hex = SafeField(cow, "m_HexLand");
             if (hex == null) return Fail("at engage.cow: no current hex");
 
+            // Optional whole-party co-location. Absent (or false) => the exact previous single-hero behaviour.
+            bool wantParty = GetBool(args, "party") ?? false;
+            int partyMoved = 0, partySkipped = 0;
+
             // Already standing on an enemy hex (e.g. a prior engage hopped on but combat did not start)?
             // Skip straight to session init.
             if (IsEnemyMiniHex(SafeInvoke(cow, "GetMiniHexInfo")))
-                return StartCombatSession(cow, "already-on-enemy-hex");
+            {
+                if (wantParty) SnapPartyToHex(hex, out partyMoved, out partySkipped);
+                return StartCombatSession(cow, "already-on-enemy-hex", wantParty, partyMoved, partySkipped);
+            }
 
             // STEP 3: find an adjacent enemy hex (MiniHexEnemy; camps subclass it). Respect an explicit
             // {hexBig,hexSmall} if supplied.
@@ -370,7 +382,8 @@ namespace FTKModFramework.Agent
                 Plugin.Log.LogInfo("[agent] engage: snapped onto enemy POI (" + sb + "," + ss + ")");
                 if (!IsEnemyMiniHex(SafeInvoke(cow, "GetMiniHexInfo")))
                     return Fail("at engage.snapEnemy: not on an enemy POI after snap (" + sb + "," + ss + ")");
-                return StartCombatSession(cow, "snapped " + sb + "," + ss);
+                if (wantParty) SnapPartyToHex(enemyHex, out partyMoved, out partySkipped);
+                return StartCombatSession(cow, "snapped " + sb + "," + ss, wantParty, partyMoved, partySkipped);
             }
 
             int tb = ToInt(SafeField(targetHex, "m_ParentIndex")) ?? -1;
@@ -388,14 +401,63 @@ namespace FTKModFramework.Agent
                 return Fail("at engage.onEnemyHex: GetMiniHexInfo() not a MiniHexEnemy after hop "
                             + "(POI may have been consumed; try again or move adjacent + retry)");
 
-            return StartCombatSession(cow, tb + "," + ts);
+            // Party co-location here is an EXPLICIT snap onto targetHex, NOT a side effect of the hop above:
+            // MoveTo(target,0,1,true) walks the acting cow, and whatever the game's own move radius drags with
+            // it is not a guarantee that heroes 1..n end up inside the enemy hex's combat radius. The hop and
+            // its verify still gate the acting cow exactly as before.
+            if (wantParty) SnapPartyToHex(targetHex, out partyMoved, out partySkipped);
+
+            return StartCombatSession(cow, tb + "," + ts, wantParty, partyMoved, partySkipped);
+        }
+
+        /// <summary>
+        /// Snap EVERY party member onto one hex, via the same defensive loop as <c>snap_party</c>
+        /// (FTKHub.m_CharacterOverworlds + COW.SnapTo(dest,false,true), deterministic placement that fires no
+        /// encounter roll).
+        ///
+        /// WHY THIS MUST RUN BEFORE THE SESSION STARTS: GameFlow.LocalInitCombatSession collects the
+        /// combatants SYNCHRONOUSLY at session init via MiniHexInfo.GetLoadPartyPlayers -> GetNearByPlayers,
+        /// which takes the source cow plus every player whose hex is already inside the enemy hex's
+        /// GameLogic.GetCombatRadius (realm-dependent, and reduced by 1 at rainy night). A hero standing
+        /// outside that radius when the session opens is simply not in the fight, and no later move adds it.
+        /// So co-locating the party is the only deterministic way to assemble a multi-hero encounter.
+        ///
+        /// Never throws: a member that fails to place is counted in <paramref name="skipped"/> and the rest
+        /// still move, matching the rest of this file's fail-soft reflection idiom.
+        /// </summary>
+        private static void SnapPartyToHex(object dest, out int moved, out int skipped)
+        {
+            moved = 0; skipped = 0;
+            if (dest == null) return;
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return;
+            IEnumerable cows = SafeField(hub, "m_CharacterOverworlds") as IEnumerable;
+            if (cows == null) return;
+
+            foreach (object cow in cows)
+            {
+                if (cow == null) { skipped++; continue; }
+                try
+                {
+                    Reflect.Invoke(cow, "SnapTo", dest, false, true);
+                    moved++;
+                }
+                catch (Exception e)
+                {
+                    skipped++;
+                    Plugin.Log.LogWarning("[agent] engage: one party member failed to snap: " + e.Message);
+                }
+            }
+            Plugin.Log.LogInfo("[agent] engage: party co-located on the enemy hex (moved=" + moved
+                               + ", skipped=" + skipped + ")");
         }
 
         // STEP 6: GameFlow.LocalInitCombatSession("fight", new ContinueFSM(noop)) -- the verified deterministic
         // managed combat-start terminus. ContinueFSM ctor takes a finish callback; mirror MiniHexInfo.OnFight
         // (new ContinueFSM(FightFinished)) with a trivial main-thread no-op. Fire-and-forget: combat goes live
         // on a later pump, observed via /state.combat.active.
-        private static object StartCombatSession(object cow, string where)
+        private static object StartCombatSession(object cow, string where,
+                                                 bool partyRequested, int partyMoved, int partySkipped)
         {
             object gf = StaticInstance("GameFlow");
             if (gf == null) return Fail("at engage.combatStart: GameFlow.Instance unavailable");
@@ -411,6 +473,12 @@ namespace FTKModFramework.Agent
             Dictionary<string, object> d = new Dictionary<string, object>();
             d["engaged"] = true;
             d["where"] = where;
+            // Only surfaced when {party:true} was asked for, so the default result shape is unchanged.
+            if (partyRequested)
+            {
+                d["partyMoved"] = partyMoved;
+                d["partySkipped"] = partySkipped;
+            }
             d["note"] = "poll /state.combat.active until true";
             return Ok(d);
         }
