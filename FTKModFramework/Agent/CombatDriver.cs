@@ -39,8 +39,14 @@ namespace FTKModFramework.Agent
     ///   uiBattleStanceButtons.CheatKillSingle(): m_PlayerSlots.m_CheatAttack=KillSingle;
     ///     ComputeAttackSlotResults(CombatCow,true); BattleButtonsOff(false). Routes the real damage+death path.
     ///   SlotControl.AttackCheatType { None=0, Miss=1, KillSingle=2, KillAll=3, TriggerAbility=4 }.
-    ///   GameLogic.GetCurrentCombatCOW().m_CurrentDummy.m_CharacterDummyFSM.ActiveStateName == "Wait For Stance".
-    ///   EncounterSessionMC.m_IsInCombat / m_FightOrder[0].m_Pid (FTKPlayerID, IsPlayer()).
+    ///   &lt;acting hero&gt;.m_CurrentDummy.m_CharacterDummyFSM.ActiveStateName == "Wait For Stance", where the
+    ///     acting hero is resolved by ActingCow (m_FightOrder[0] in a fight), NOT by GetCurrentCombatCOW:
+    ///     that FSM global also holds the enemy's VICTIM on an enemy turn and never tracks heroes 1..n (#93).
+    ///   FTKHub.GetCharacterOverworldByFID(FTKPlayerID) -> the hero COW, null on a miss (does not throw).
+    ///   EncounterSessionMC.m_IsInCombat / m_FightOrder[0].m_Pid (FTKPlayerID, IsPlayer()). m_FightOrder is a
+    ///     List&lt;FightOrderEntry&gt; {m_Pid, m_TTA, m_EntryID}, a TTA-sorted rolling timeline whose head is
+    ///     the current actor and is dequeued (RemoveAt(0)) only when the turn resolves. Never read the
+    ///     EncounterSession.m_FightOrderVisual decoy.
     ///   EncounterSession.m_IsInCombat / m_EnemyDummies (Dictionary&lt;FTKPlayerID,EnemyDummy&gt;).
     ///   EnemyDummy : EnemyInfo : CharacterDummy. CharacterDummy.m_IsAlive (bool, cleared by the CombatEnemyDie
     ///     RPC via RemoveCombatant). EnemyInfo.m_CurrentHealth (int).
@@ -260,7 +266,35 @@ namespace FTKModFramework.Agent
             return r is bool && (bool)r;
         }
 
-        // m_BattleStanceButtons.m_Initialized && GetCurrentCombatCOW().m_CurrentDummy.m_CharacterDummyFSM
+        /// <summary>
+        /// The CharacterOverworld actually acting right now (#93): in a FIGHT that is the head of the fight
+        /// order, FTKHub.GetCharacterOverworldByFID(m_FightOrder[0].m_Pid); outside one it is the overworld
+        /// turn holder (DungeonOps.CurrentCow -> GameLogic.m_CurrentPlayer, which combat never updates).
+        /// Mirrors ActionExecutor.ActingCow so the driver and the /action gates agree frame for frame.
+        ///
+        /// The in-combat test is EncounterSession.m_IsInCombat, NOT the sibling EncounterSessionMC flag:
+        /// EncounterSessionMC is a separate MonoBehaviour whose m_IsInCombat means "an encounter session is
+        /// active" (shops included), while EncounterSession.m_IsInCombat means "this encounter is a fight".
+        /// Null on an enemy turn, an empty fight order, or a hub miss (fail-closed: callers wait).
+        /// </summary>
+        private static object ActingCow()
+        {
+            object es = StaticInstance("EncounterSession");
+            if (es == null || !ToBool(SafeField(es, "m_IsInCombat")))
+                return DungeonOps.CurrentCow();
+
+            object fid = ActiveTurnFid();
+            if (fid == null) return null;
+            // IsPlayer() is m_PhotonID >= 0 and FTKPlayerID.Null is {0,0}, so it rules out enemies but is not
+            // proof of a hero; the hub lookup returns null (never throws) on a miss and closes that gap.
+            if (!FidIsPlayer(fid)) return null;
+
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return null;
+            return SafeInvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid });
+        }
+
+        // m_BattleStanceButtons.m_Initialized && the ACTING hero's m_CurrentDummy.m_CharacterDummyFSM
         // .ActiveStateName == "Wait For Stance".
         private static bool HeroTurnReady()
         {
@@ -273,11 +307,14 @@ namespace FTKModFramework.Agent
                 // stance-buttons UI flag) is a belt-and-suspenders signal that is reliably true on the overworld,
                 // but the in-dungeon forced-ack path (DungeonScrollComplete skips the FSM's button Initialize step)
                 // leaves it false while the dummy IS genuinely in "Wait For Stance". So require m_Initialized on the
-                // overworld, but inside a dungeon gate on the FSM state alone.
+                // overworld, but inside a dungeon gate on the FSM state alone. NOTE m_Initialized is
+                // singleton-scoped (one uiBattleStanceButtons, not one per hero), so it stays a global probe.
                 if (!DungeonOps.InDungeon() && !ToBool(SafeField(bsb, "m_Initialized"))) return false;
-                object gl = StaticInstance("GameLogic");
-                if (gl == null) return false;
-                object cow = SafeInvoke(gl, "GetCurrentCombatCOW");
+                // The dummy, however, MUST be the acting hero's own (#93): GetCurrentCombatCOW reads the FSM
+                // global compCombatOverworld, which CharacterDummy.EngageBattle also sets to the enemy's VICTIM
+                // on an enemy turn, and with a multi-hero party it does not track heroes 1..n. Resolve from the
+                // fight order instead, exactly as the game's per-hero gate uiRemapButton.CanUseCombat(cow) does.
+                object cow = ActingCow();
                 if (cow == null) return false;
                 object dummy = SafeField(cow, "m_CurrentDummy");
                 if (dummy == null) return false;

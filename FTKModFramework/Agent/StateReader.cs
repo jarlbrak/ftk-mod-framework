@@ -390,8 +390,9 @@ namespace FTKModFramework.Agent
                 object ui = StaticInstance("FTKUI");
                 object bsb = ui != null ? Reflect.GetField(ui, "m_BattleStanceButtons") : null;
                 rp["initialized"] = bsb != null && ToBool(SafeField(bsb, "m_Initialized"));
-                object gl = StaticInstance("GameLogic");
-                object cow = gl != null ? SafeInvoke(gl, "GetCurrentCombatCOW") : null;
+                // The ACTING hero's dummy (m_FightOrder[0] in a fight), so fsmState describes the hero the
+                // commit gates read rather than hero 0 or an enemy's victim. See ActingCow (#93).
+                object cow = ActingCow();
                 object dummy = cow != null ? SafeField(cow, "m_CurrentDummy") : null;
                 object fsm = dummy != null ? SafeField(dummy, "m_CharacterDummyFSM") : null;
                 object sn = fsm != null ? SafeProp(fsm, "ActiveStateName") : null;
@@ -466,7 +467,7 @@ namespace FTKModFramework.Agent
             catch (Exception e) { warnings.Add("combat.whoseTurn: " + e.Message); return null; }
         }
 
-        // heroTurnReady: m_BattleStanceButtons.m_Initialized && GetCurrentCombatCOW().m_CurrentDummy
+        // heroTurnReady: m_BattleStanceButtons.m_Initialized && the ACTING hero's m_CurrentDummy
         // .m_CharacterDummyFSM.ActiveStateName == "Wait For Stance".
         private static object ReadHeroTurnReady(List<object> warnings)
         {
@@ -478,11 +479,13 @@ namespace FTKModFramework.Agent
                 if (bsb == null) return false;
                 // Inside a dungeon the forced-scroll-ack commit path leaves m_Initialized false while the dummy is
                 // genuinely in "Wait For Stance" (the authoritative gate); require m_Initialized only on the
-                // overworld. Mirrors CombatDriver.HeroTurnReady so /state and the driver agree.
+                // overworld. Mirrors CombatDriver.HeroTurnReady so /state and the driver agree. m_Initialized is
+                // singleton-scoped (one uiBattleStanceButtons for the party), so it stays a global probe.
                 if (!DungeonOps.InDungeon() && !ToBool(SafeField(bsb, "m_Initialized"))) return false;
-                object gl = StaticInstance("GameLogic");
-                if (gl == null) return false;
-                object cow = SafeInvoke(gl, "GetCurrentCombatCOW");
+                // The dummy must be the ACTING hero's own (#93), resolved from the fight order, not from the
+                // GetCurrentCombatCOW FSM global (which holds the enemy's victim on an enemy turn and never
+                // tracks heroes 1..n). Same source as ActionExecutor/CombatDriver so all three agree.
+                object cow = ActingCow();
                 if (cow == null) return false;
                 object dummy = SafeField(cow, "m_CurrentDummy");
                 if (dummy == null) return false;
@@ -492,6 +495,50 @@ namespace FTKModFramework.Agent
                 return stateName is string && (string)stateName == "Wait For Stance";
             }
             catch (Exception e) { warnings.Add("combat.heroTurnReady: " + e.Message); return false; }
+        }
+
+        /// <summary>
+        /// The CharacterOverworld actually acting right now. StateReader is deliberately self-contained, so
+        /// this mirrors ActionExecutor.ActingCow / CombatDriver.ActingCow rather than calling them: in a FIGHT
+        /// (EncounterSession.m_IsInCombat, not the sibling EncounterSessionMC flag, which is also true for
+        /// shops) resolve FTKHub.GetCharacterOverworldByFID(EncounterSessionMC.m_FightOrder[0].m_Pid);
+        /// otherwise fall back to the overworld turn holder, GameLogic.m_CurrentPlayer, which combat never
+        /// writes. currentTurnFid and combat.whoseTurn stay two separate published views on purpose; only the
+        /// readiness probes move onto this one. Null on an enemy turn or any miss (never throws).
+        /// </summary>
+        private static object ActingCow()
+        {
+            try
+            {
+                object hub = StaticInstance("FTKHub");
+                if (hub == null) return null;
+
+                object es = StaticInstance("EncounterSession");
+                bool inFight = es != null && ToBool(SafeField(es, "m_IsInCombat"));
+
+                object fid;
+                if (inFight)
+                {
+                    object mc = StaticInstance("EncounterSessionMC");
+                    IList fo = mc != null ? SafeField(mc, "m_FightOrder") as IList : null;
+                    if (fo == null || fo.Count == 0 || fo[0] == null) return null;
+                    fid = SafeField(fo[0], "m_Pid");
+                    if (fid == null) return null;
+                    // IsPlayer() is m_PhotonID >= 0 and FTKPlayerID.Null is {0,0}, so it excludes enemies but
+                    // is not proof of a hero; the hub lookup below returns null on a miss and closes that gap.
+                    object isPlayer = SafeInvoke(fid, "IsPlayer");
+                    if (!(isPlayer is bool) || !(bool)isPlayer) return null;
+                }
+                else
+                {
+                    object gl = StaticInstance("GameLogic");
+                    fid = gl != null ? SafeField(gl, "m_CurrentPlayer") : null;
+                    if (fid == null) return null;
+                }
+
+                return SafeInvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid });
+            }
+            catch { return null; }
         }
 
         private static object ReadEnemyName(object enemyCombat, object dummy)
@@ -1049,6 +1096,14 @@ namespace FTKModFramework.Agent
         {
             if (obj == null) return null;
             try { return Reflect.Invoke(obj, name); } catch { return null; }
+        }
+
+        // Overload-aware invoke (Reflect.Invoke resolves by name alone and throws AmbiguousMatchException on a
+        // multi-overload method). Mirrors ActionExecutor/CombatDriver.SafeInvokeArgs.
+        private static object SafeInvokeArgs(object obj, string name, Type[] sig, object[] args)
+        {
+            if (obj == null) return null;
+            try { return Reflect.InvokeArgs(obj, name, sig, args); } catch { return null; }
         }
 
         private static string SafeString(object obj, string name)

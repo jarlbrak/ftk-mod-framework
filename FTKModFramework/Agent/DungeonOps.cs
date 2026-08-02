@@ -610,6 +610,28 @@ namespace FTKModFramework.Agent
             return SafeField(first, "m_Pid");
         }
 
+        // The CharacterOverworld actually acting right now (#93). Mirrors ActionExecutor.ActingCow: in a FIGHT
+        // (EncounterSession.m_IsInCombat, not the sibling EncounterSessionMC flag, which is also true for
+        // shops) it is FTKHub.GetCharacterOverworldByFID(m_FightOrder[0].m_Pid); outside one it is the
+        // overworld turn holder, GameLogic.m_CurrentPlayer, which combat never writes. Null on an enemy turn,
+        // an empty fight order, or a hub miss (fail-closed: TryWinCombatTurn simply does not commit).
+        private static object ActingCow()
+        {
+            object es = StaticInstance("EncounterSession");
+            if (es == null || !ToBool(SafeField(es, "m_IsInCombat"))) return CurrentCow();
+
+            object fid = ActiveTurnFid(StaticInstance("EncounterSessionMC"));
+            if (fid == null) return null;
+            // IsPlayer() is m_PhotonID >= 0 and FTKPlayerID.Null is {0,0}, so it excludes enemies but is not
+            // proof of a hero; the hub lookup returns null (never throws) on a miss and closes that gap.
+            object isPlayer = SafeInvoke(fid, "IsPlayer");
+            if (!(isPlayer is bool) || !(bool)isPlayer) return null;
+
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return null;
+            return SafeInvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid });
+        }
+
         private static bool HeroTurnReady()
         {
             try
@@ -617,9 +639,10 @@ namespace FTKModFramework.Agent
                 object bsb = BattleStanceButtons();
                 if (bsb == null) return false;
                 if (!ToBool(SafeField(bsb, "m_Initialized"))) return false;
-                object gl = StaticInstance("GameLogic");
-                if (gl == null) return false;
-                object cow = SafeInvoke(gl, "GetCurrentCombatCOW");
+                // The ACTING hero's dummy (#93), resolved from the fight order rather than from the
+                // GetCurrentCombatCOW FSM global (which holds the enemy's victim on an enemy turn and never
+                // tracks heroes 1..n, so an in-dungeon multi-hero party never read ready past slot 0).
+                object cow = ActingCow();
                 if (cow == null) return false;
                 object dummy = SafeField(cow, "m_CurrentDummy");
                 if (dummy == null) return false;
