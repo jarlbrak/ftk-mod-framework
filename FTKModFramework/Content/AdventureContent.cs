@@ -1,4 +1,5 @@
 using GridEditor;
+using HarmonyLib;
 using FTKModFramework.Core;
 
 namespace FTKModFramework
@@ -44,10 +45,6 @@ namespace FTKModFramework
                     e.m_DisplayTop = "You stumble onto a cache hidden by smugglers.";
                     e.m_DisplayBottom = "Fortune favours the curious.";
                 });
-
-            // Wire the debug ForceCustomEncounter override at this sample's encounter (sample -> framework,
-            // so Core/ never names a content pack; left null when sample content is off, keeping it inert).
-            ForceCustomEncounter_Patch.TargetEncounterId = EncounterId;
 
             SelfTest();
 
@@ -155,6 +152,38 @@ namespace FTKModFramework
             else
                 Plugin.Log.LogError("SELF-TEST FAIL [encounter]: int=" + intId + " enum=" + (int)enumId +
                     " byInt=" + (byInt == null ? "null" : "ok") + " name=\"" + name + "\".");
+        }
+    }
+
+    /// <summary>
+    /// DEBUG verification aid (config: Adventures/ForceCustomEncounter): replace every overworld encounter
+    /// the game decides to spawn with this sample's "Smuggler's Cache", giving an immediate, unambiguous
+    /// in-game confirmation that encounter injection worked. We only swap where the game already chose to
+    /// spawn SOMETHING (__result != None), so the target hex is guaranteed valid. Off for normal play.
+    ///
+    /// It lives HERE, beside the encounter it forces (the same placement as ForceCutpurse_Patch in
+    /// CutpurseEnemy.cs), so deleting Content/ removes the debug feature cleanly and Core/ never names a
+    /// content pack. HarmonyX PatchAll discovers the attribute on this class wherever it sits in the
+    /// assembly, so no registration wiring is needed.
+    ///
+    /// Samples-off behaviour: <see cref="AdventureContent.Register"/> only runs under
+    /// ModRegistry.IsEnabled(Plugin.Guid), so with EnableSampleContent off the encounter row is never
+    /// registered, GetIntFromID returns a negative value, and the intId &lt; 0 guard below makes this patch
+    /// inert. That guard IS the samples-off gate.
+    /// </summary>
+    [HarmonyPatch(typeof(GameLogic), "GetMiniEncounter")]
+    internal static class ForceCustomEncounter_Patch
+    {
+        private static void Postfix(ref FTK_miniEncounter.ID __result)
+        {
+            if (Plugin.ForceCustomEncounter == null || !Plugin.ForceCustomEncounter.Value) return;
+            if (__result == FTK_miniEncounter.ID.None) return; // nothing was going to spawn here anyway
+
+            // The string id is the source of truth; resolve the synthetic int on demand (the same lookup the
+            // registration uses) rather than caching it, so a re-registration can never leave a stale int.
+            int intId = Content.Db<FTK_miniEncounterDB>().GetIntFromID(AdventureContent.EncounterId);
+            if (intId < 0) return; // not registered (samples off) => inert
+            __result = (FTK_miniEncounter.ID)intId;
         }
     }
 }

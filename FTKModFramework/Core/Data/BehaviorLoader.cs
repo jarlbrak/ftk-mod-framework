@@ -42,8 +42,9 @@ namespace FTKModFramework.Core.Data
         /// pre-pass is skipped, so NO Assembly.LoadFrom runs and ZERO DLL behaviours register. This gates ONLY
         /// the external-DLL path; the in-assembly behaviours (FrameworkBehaviors / com.ftkmf.sampledata:Steal)
         /// register on their own unconditional path and are unaffected. The flag is null-guarded so a test
-        /// context where Plugin.Awake never ran defaults to running the pre-pass (matching DebugEncounterOverride
-        /// / CutpurseEnemy, which guard <c>Plugin.&lt;cfg&gt; == null</c>).
+        /// context where Plugin.Awake never ran defaults to running the pre-pass (matching the debug override
+        /// patches in Content/, e.g. ForceCustomEncounter_Patch / ForceCutpurse_Patch, which guard
+        /// <c>Plugin.&lt;cfg&gt; == null</c>).
         /// </summary>
         internal static void LoadAll(List<DiscoveredMod> mods, ValidationReport report)
         {

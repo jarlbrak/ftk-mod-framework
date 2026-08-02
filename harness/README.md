@@ -49,9 +49,12 @@ Grouped by phase. All are fully defensive (a missing precondition returns
 - **Run / flow**: `start_run {adventure?}` (autonomous title -> in-world),
   `list_adventures`, `dismiss_message` / `dismiss_dialog`, `select_choice {index}`,
   `advance`, `enter_tile`, `end_turn`. In the overworld `end_turn` prefers the open
-  POI menu (`uiEncounterMenu.LeaveOrEndTurn`) and otherwise drives the hourglass
-  path directly (`FTKHub.EndTurn`), so a turn can be ended from a plain hex; this
-  is what advances rounds/time (and with it the per-turn encounter spawn roll).
+  POI menu, resolved through `FTKUI.m_EncounterMenu` and gated on its `m_MenuOn`
+  flag (`LeaveOrEndTurn`); otherwise it drives the hourglass path directly
+  (`FTKHub.EndTurn`), so a turn can be ended from a plain hex. `FTKHub.EndTurn`
+  only acts in certain movement-FSM states, so when the end cannot be confirmed
+  the result reports the observed state as `fsmState`. Ending a turn is what
+  advances rounds/time (and with it the per-turn encounter spawn roll).
 - **Overworld**: `move_to {big,small}`, `snap_to {big,small}`,
   `engage {hexBig?,hexSmall?,party?}` (snap onto the nearest enemy POI and start an
   overworld fight). Combatants are collected from the enemy hex's combat radius at

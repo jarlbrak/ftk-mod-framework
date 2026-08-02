@@ -167,8 +167,9 @@ namespace FTKModFramework
                 "injection is immediately visible in combat. Set false for normal play.");
 
             ForceCustomEncounter = Config.Bind("Adventures", "ForceCustomEncounter", false,
-                "DEBUG: replace every overworld encounter that spawns with the custom 'Smuggler's Cache' so " +
-                "encounter injection is immediately visible in-game. Set false for normal play.");
+                "DEBUG: replace every overworld encounter that spawns with the bundled sample's 'Smuggler's " +
+                "Cache' so encounter injection is immediately visible in-game (requires EnableSampleContent; " +
+                "inert otherwise). Set false for normal play.");
 
             EnableDataContent = Config.Bind("Data", "EnableDataContent", true,
                 "Run the JSON data-content loader (discovers content-mod folders under DataContentRoot and " +
