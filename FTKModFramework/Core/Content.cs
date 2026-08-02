@@ -170,6 +170,64 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
+        /// Declare a class-innate PASSIVE trait: bind a named trait to an existing class row, to fire at a
+        /// closed <see cref="PassiveTrigger"/> moment (spec #78). Unlike the other Add* helpers this
+        /// writes NO FTK_*DB row and mints NO <see cref="IdAllocator"/> id: a passive is behaviour bound to a
+        /// class, not a new content row. It records the trait in the internal <see cref="PassiveRegistry"/> and
+        /// registers its display name through <see cref="Localization"/>; the combat patches in
+        /// <c>PassiveTriggerPatches</c> read it back by (classId, trigger).
+        ///
+        /// The trait's identity is the string Key (modGuid + ":" + passiveId), which is what appears in logs
+        /// (and any co-op sync): stable across sessions and machines. Re-registering the same
+        /// (modGuid, passiveId) is IDEMPOTENT: it returns the existing def and logs a warning (first-wins, so a
+        /// differing second call never overwrites the trait or its display name). A null or unregistered class
+        /// row is rejected: logged error, no registry mutation, returns null.
+        /// </summary>
+        /// <param name="modGuid">Your plugin GUID (namespaces the trait so two mods never clash).</param>
+        /// <param name="passiveId">A unique-per-mod trait id, e.g. "myclass_ironhide".</param>
+        /// <param name="classRow">The owning class (must be a row already registered in the class DB).</param>
+        /// <param name="trigger">When the trait fires (a closed set).</param>
+        /// <param name="displayName">The name shown for the trait (resolved via the Localization path).</param>
+        /// <returns>The registered (or pre-existing) trait, or null if the class row is null/unregistered.</returns>
+        public static PassiveTraitDef AddPassive(
+            string modGuid, string passiveId, FTK_playerGameStart classRow,
+            PassiveTrigger trigger, string displayName)
+        {
+            string key = modGuid + ":" + passiveId;
+
+            if (classRow == null)
+            {
+                Plugin.Log.LogError("AddPassive: classRow is null; '" + key + "' not registered.");
+                return null;
+            }
+
+            // Resolve the owning class's int id through the DB. GetIntFromID returns -1 for an id that is not a
+            // registered class (decompile-confirmed: it Enum.Parses and catches to -1; the DbLookupPatcher
+            // prefix resolves our custom class string ids to their synthetic int). GetEntryByInt then confirms
+            // a real row actually sits at that id, so a bare/unregistered row is rejected here.
+            FTK_playerGameStartDB db = Db<FTK_playerGameStartDB>();
+            int classId = db.GetIntFromID(classRow.m_ID);
+            if (classId < 0 || db.GetEntryByInt(classId) == null)
+            {
+                Plugin.Log.LogError("AddPassive: class row '" + (classRow.m_ID ?? "(null id)") +
+                    "' is not registered in FTK_playerGameStartDB; '" + key + "' not registered.");
+                return null;
+            }
+
+            PassiveTraitDef candidate = new PassiveTraitDef(key, classId, trigger, displayName);
+            PassiveTraitDef registered = PassiveRegistry.Register(candidate);
+
+            // Bind the display name only on a FRESH registration (candidate is what Register returns on insert;
+            // on an idempotent re-register it returns the PRE-EXISTING def, so we must not overwrite its name).
+            // NOTE: the key here is the trait's synthetic Key (modGuid + ":" + passiveId), which DELIBERATELY
+            // differs from the DB-backed helpers that key Localization by a row's string m_ID: a passive writes no
+            // FTK_*DB row, so its name (and the ":hud"/":log" feedback templates) live under this Key.
+            if (registered == candidate)
+                Localization.SetName(key, displayName);
+            return registered;
+        }
+
+        /// <summary>
         /// Add a new ENEMY (clones an existing enemy's FTK_enemyCombat row). Uses a high-band synthetic id
         /// like items/weapons/proficiencies — NOT id == array index like classes; nothing indexes enemies
         /// by array position (every lookup is dictionary- or string-based, and selection round-trips the id
