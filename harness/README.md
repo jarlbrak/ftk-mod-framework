@@ -49,8 +49,12 @@ Grouped by phase. All are fully defensive (a missing precondition returns
 - **Run / flow**: `start_run {adventure?}` (autonomous title -> in-world),
   `list_adventures`, `dismiss_message` / `dismiss_dialog`, `select_choice {index}`,
   `advance`, `enter_tile`, `end_turn`.
-- **Overworld**: `move_to {big,small}`, `snap_to {big,small}`, `engage` (snap onto
-  the nearest enemy POI and start an overworld fight).
+- **Overworld**: `move_to {big,small}`, `snap_to {big,small}`,
+  `engage {hexBig?,hexSmall?,party?}` (snap onto the nearest enemy POI and start an
+  overworld fight). Combatants are collected from the enemy hex's combat radius at
+  session init, so a plain `engage` fights with the acting hero alone; pass
+  `{party:true}` to co-locate the whole party on that hex first and get a full-party
+  fight (the result then reports `partyMoved` / `partySkipped`).
 - **Combat**: `set_target {enemyFid}`, `choose_ability {profId}`, `set_focus {n}`,
   `attack`, `resolve_turn {attackerFid?,targetFid?,profId?,hit?}`, `combat_turn`,
   `force_win` / `win_combat` / `auto_combat` / `auto_combat_turn`, `combat_status`.
@@ -179,7 +183,9 @@ observe-decide-act loop using the four tools. A representative scenario:
    otherwise.
 5. **Overworld**: `ftk_wait_for("phase==overworld", 120)`. `ftk_observe()` ->
    confirm `party[0].realmId == map.realmId ==` the D1 Hollow Mire realm id
-   (cross-check the realm name in the snapshot). Record `currentTurnFid`.
+   (cross-check the realm name in the snapshot). `currentTurnFid` is the
+   **overworld** turn holder; note it for navigation only. It is *not* the combat
+   attacker: in a fight those two diverge (see step 8).
 6. **Navigate to the boss tile**: read `map.neighbors` and the party hex, then
    `ftk_act("move_to", {big,small})` toward the boss POI (or
    `ftk_act("snap_to", {big,small})` for deterministic placement). After each
@@ -187,11 +193,19 @@ observe-decide-act loop using the four tools. A representative scenario:
 7. **Combat**: on reaching the boss tile combat fires.
    `ftk_wait_for("phase==combat", 60)`. `ftk_observe()` -> assert `enemies[]`
    contains the D1 boss, `fightOrder` non-empty, `abilities[]` listed.
-8. **Combat loop** until `combat.liveEnemies==0`: each player turn ->
-   `ftk_act("set_target", {enemyFid})`, then a deterministic kill via
-   `ftk_act("resolve_turn", {attackerFid, targetFid, hit:1.0})` (or
-   `choose_ability`/`attack`). For enemy turns, just re-observe; the engine
-   resolves them. `ftk_wait_for("phase==combat OR phase==overworld")`.
+8. **Combat loop** until `combat.liveEnemies==0`: act only while
+   `combat.whoseTurn.isPlayer==true`. Take `attackerFid` from
+   **`combat.whoseTurn.fid`, copied verbatim, both `turnIndex` AND `photonId`**.
+   Never use `currentTurnFid` (that is the overworld fid, which stays pinned to
+   slot 0 for the whole fight) and never hand-build `{turnIndex: n}` alone: the
+   bridge defaults a missing `photonId` to 0, while local heroes carry 1, so the
+   guard rejects it. Then `ftk_act("set_target", {enemyFid})` and a deterministic
+   kill via `ftk_act("resolve_turn", {attackerFid, targetFid, hit:1.0})` (or
+   `choose_ability`/`attack`). A mismatch returns
+   `{acted:false, waiting:"not_attacker_turn", activeFid:{...}}`, where
+   `activeFid` is the fid the bridge actually observed: copy that one. For enemy
+   turns, just re-observe; the engine resolves them.
+   `ftk_wait_for("phase==combat OR phase==overworld")`.
 9. **Victory**: the boss quest is the last quest of the last stage, so its
    completion arms victory. `ftk_wait_for("signals.modalOpen==true OR phase==victory")`,
    then `ftk_act("advance")` / `ftk_act("select_choice", {index})` to clear the

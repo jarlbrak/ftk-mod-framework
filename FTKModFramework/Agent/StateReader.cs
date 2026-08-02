@@ -380,8 +380,11 @@ namespace FTKModFramework.Agent
             return c;
         }
 
-        // readyParts:{initialized:bool, fsmState:string}. fsmState surfaces the banner-vs-enemy-turn distinction
-        // when heroTurnReady is false (e.g. "Wait For Stance" means ready; a banner/anim state means not yet).
+        // readyParts:{initialized:bool, fsmState:string, actingFid:{turnIndex,photonId}}. fsmState surfaces the
+        // banner-vs-enemy-turn distinction when heroTurnReady is false ("Wait For Stance" means ready; a
+        // banner/anim state means not yet). actingFid is the fight-order HEAD, which may be an ENEMY: that is
+        // what makes a null fsmState self-explaining, since ActingCow returns null on an enemy turn rather
+        // than reporting some other hero's dummy. Same source as ActionExecutor.ReadyParts.
         private static object ReadReadyParts(List<object> warnings)
         {
             Dictionary<string, object> rp = new Dictionary<string, object>();
@@ -389,18 +392,20 @@ namespace FTKModFramework.Agent
             {
                 object ui = StaticInstance("FTKUI");
                 object bsb = ui != null ? Reflect.GetField(ui, "m_BattleStanceButtons") : null;
-                rp["initialized"] = bsb != null && ToBool(SafeField(bsb, "m_Initialized"));
-                object gl = StaticInstance("GameLogic");
-                object cow = gl != null ? SafeInvoke(gl, "GetCurrentCombatCOW") : null;
+                rp["initialized"] = DungeonOps.StanceUiInitialized(bsb);
+                // The ACTING hero's dummy (m_FightOrder[0] in a fight), so fsmState describes the hero the
+                // commit gates read rather than hero 0 or an enemy's victim. See DungeonOps.ActingCow (#93).
+                object cow = DungeonOps.ActingCow();
                 object dummy = cow != null ? SafeField(cow, "m_CurrentDummy") : null;
                 object fsm = dummy != null ? SafeField(dummy, "m_CharacterDummyFSM") : null;
                 object sn = fsm != null ? SafeProp(fsm, "ActiveStateName") : null;
                 rp["fsmState"] = sn as string;
+                rp["actingFid"] = FidDict(DungeonOps.ActingFid());
             }
             catch (Exception e)
             {
                 warnings.Add("combat.readyParts: " + e.Message);
-                rp["initialized"] = false; rp["fsmState"] = null;
+                rp["initialized"] = false; rp["fsmState"] = null; rp["actingFid"] = null;
             }
             return rp;
         }
@@ -466,31 +471,13 @@ namespace FTKModFramework.Agent
             catch (Exception e) { warnings.Add("combat.whoseTurn: " + e.Message); return null; }
         }
 
-        // heroTurnReady: m_BattleStanceButtons.m_Initialized && GetCurrentCombatCOW().m_CurrentDummy
-        // .m_CharacterDummyFSM.ActiveStateName == "Wait For Stance".
+        // heroTurnReady: the SHARED commit gate, DungeonOps.StanceReady. /state and /action must never
+        // disagree about whether a hero can act, so this reads the very same method the drivers and the
+        // combat actions gate on rather than reimplementing it (a local copy is how the in-dungeon
+        // m_Initialized carve-out drifted out of two gates and deadlocked in-dungeon commits).
         private static object ReadHeroTurnReady(List<object> warnings)
         {
-            try
-            {
-                object ui = StaticInstance("FTKUI");
-                if (ui == null) return false;
-                object bsb = Reflect.GetField(ui, "m_BattleStanceButtons");
-                if (bsb == null) return false;
-                // Inside a dungeon the forced-scroll-ack commit path leaves m_Initialized false while the dummy is
-                // genuinely in "Wait For Stance" (the authoritative gate); require m_Initialized only on the
-                // overworld. Mirrors CombatDriver.HeroTurnReady so /state and the driver agree.
-                if (!DungeonOps.InDungeon() && !ToBool(SafeField(bsb, "m_Initialized"))) return false;
-                object gl = StaticInstance("GameLogic");
-                if (gl == null) return false;
-                object cow = SafeInvoke(gl, "GetCurrentCombatCOW");
-                if (cow == null) return false;
-                object dummy = SafeField(cow, "m_CurrentDummy");
-                if (dummy == null) return false;
-                object fsm = SafeField(dummy, "m_CharacterDummyFSM");
-                if (fsm == null) return false;
-                object stateName = SafeProp(fsm, "ActiveStateName");
-                return stateName is string && (string)stateName == "Wait For Stance";
-            }
+            try { return DungeonOps.StanceReady(); }
             catch (Exception e) { warnings.Add("combat.heroTurnReady: " + e.Message); return false; }
         }
 

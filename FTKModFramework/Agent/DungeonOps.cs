@@ -340,14 +340,16 @@ namespace FTKModFramework.Agent
                 if (active == null) return;
                 object isPlayer = SafeInvoke(active, "IsPlayer");
                 if (!(isPlayer is bool) || !(bool)isPlayer) return;
-                if (!HeroTurnReady()) return;
+                if (!StanceReady()) return;
 
                 object enemyFid = FirstLiveEnemyFid(es);
                 if (enemyFid == null) return; // victory likely; combat will flip off.
 
                 object bsb = BattleStanceButtons();
                 if (bsb == null) return;
-                SafeInvokeArgs(bsb, "SelectEnemyDummy", new[] { enemyFid.GetType() }, new object[] { enemyFid });
+                // Both args (see SelectEnemyDummy): the old 1-type signature never matched the real
+                // 2-parameter method, so this selection silently no-opped.
+                SelectEnemyDummy(bsb, enemyFid);
                 Reflect.Invoke(bsb, "CheatKillAll");
                 Plugin.Log.LogInfo("[agent] dungeon: in-room CheatKillAll committed.");
             }
@@ -610,16 +612,83 @@ namespace FTKModFramework.Agent
             return SafeField(first, "m_Pid");
         }
 
-        private static bool HeroTurnReady()
+        // ==================================================== shared combat-actor gates ================
+        // ActingFid / ActingCow / StanceReady / StanceUiInitialized / SelectEnemyDummy live HERE, as public
+        // statics, and are the SINGLE definition used by ActionExecutor, CombatDriver and StateReader. They
+        // were briefly copied per file; that let the in-dungeon carve-out in StanceReady drift out of two of
+        // the copies, which deadlocked in-dungeon commits and made /state contradict /action. One definition
+        // means one carve-out and no drift.
+
+        /// <summary>
+        /// The head of the combat turn timeline: EncounterSessionMC.m_FightOrder[0].m_Pid, an FTKPlayerID.
+        /// May be an ENEMY fid (m_PhotonID &lt; 0); callers that need a hero must test IsPlayer or use
+        /// <see cref="ActingCow"/>. Null on a missing session or an empty order.
+        /// </summary>
+        public static object ActingFid()
+        {
+            return ActiveTurnFid(StaticInstance("EncounterSessionMC"));
+        }
+
+        /// <summary>
+        /// The CharacterOverworld actually acting right now (#93).
+        ///
+        ///   in a FIGHT  -> FTKHub.GetCharacterOverworldByFID(m_FightOrder[0].m_Pid)
+        ///   otherwise   -> CurrentCow(), the overworld turn holder GameLogic.m_CurrentPlayer
+        ///
+        /// GameLogic.m_CurrentPlayer is written only by the overworld turn flow (GameFlow.BeginTurn RPC,
+        /// FTKHub.EnterFahrul, GameEventManager start) and nothing in combat updates it, so with a multi-hero
+        /// party it stays pinned to slot 0. GameLogic.GetCurrentCombatCOW is no better: it reads the FSM
+        /// global compCombatOverworld, which CharacterDummy.EngageBattle also sets to the enemy's VICTIM on an
+        /// enemy turn.
+        ///
+        /// The in-combat test is EncounterSession.m_IsInCombat, NOT the sibling EncounterSessionMC flag: they
+        /// are separate MonoBehaviours, and the MC flag means "an encounter session is active" (shops
+        /// included), which would wrongly route a shop through the fight order.
+        ///
+        /// Null on an enemy turn, an empty fight order, or a hub miss. Fail-closed by design: callers treat
+        /// null as "no acting hero" rather than acting for the wrong one.
+        /// </summary>
+        public static object ActingCow()
+        {
+            object es = StaticInstance("EncounterSession");
+            if (es == null || !ToBool(SafeField(es, "m_IsInCombat"))) return CurrentCow();
+
+            object fid = ActingFid();
+            if (fid == null) return null;
+            // IsPlayer() is m_PhotonID >= 0 and FTKPlayerID.Null is {0,0}, so it excludes enemies but is not
+            // proof of a hero; the hub lookup returns null (never throws) on a miss and closes that gap.
+            object isPlayer = SafeInvoke(fid, "IsPlayer");
+            if (!(isPlayer is bool) || !(bool)isPlayer) return null;
+
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return null;
+            return SafeInvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid });
+        }
+
+        /// <summary>
+        /// THE readiness gate for committing a hero combat turn, and the only definition of it.
+        ///
+        /// Two halves:
+        ///   (1) uiBattleStanceButtons.m_Initialized, but ONLY on the overworld. That flag is set inside
+        ///       Initialize(), which the in-dungeon forced-ack path (DungeonScrollComplete) skips, so it reads
+        ///       false in a dungeon while the dummy IS genuinely in "Wait For Stance". Requiring it there
+        ///       deadlocks every in-dungeon commit, which is exactly what happened while this carve-out was
+        ///       missing from two of the copied gates.
+        ///   (2) the ACTING hero's own m_CurrentDummy FSM parked in "Wait For Stance". Per-hero by
+        ///       construction, mirroring the game's own uiRemapButton.CanUseCombat(cow) check; a global dummy
+        ///       probe reads the wrong hero the moment the party is larger than one.
+        ///
+        /// m_Initialized stays a GLOBAL probe on purpose: there is one uiBattleStanceButtons for the party,
+        /// not one per hero. Never throws; false on any miss.
+        /// </summary>
+        public static bool StanceReady()
         {
             try
             {
                 object bsb = BattleStanceButtons();
                 if (bsb == null) return false;
-                if (!ToBool(SafeField(bsb, "m_Initialized"))) return false;
-                object gl = StaticInstance("GameLogic");
-                if (gl == null) return false;
-                object cow = SafeInvoke(gl, "GetCurrentCombatCOW");
+                if (!InDungeon() && !StanceUiInitialized(bsb)) return false;
+                object cow = ActingCow();
                 if (cow == null) return false;
                 object dummy = SafeField(cow, "m_CurrentDummy");
                 if (dummy == null) return false;
@@ -843,6 +912,68 @@ namespace FTKModFramework.Agent
             object ui = StaticInstance("FTKUI");
             if (ui == null) return null;
             return SafeField(ui, "m_BattleStanceButtons");
+        }
+
+        /// <summary>
+        /// uiBattleStanceButtons.m_Initialized, read as a PROPERTY first. The decompile declares it
+        /// <c>public bool m_Initialized { get; private set; }</c>, an auto-property whose storage is the
+        /// generated <c>&lt;m_Initialized&gt;k__BackingField</c>. Reflect.GetField matches a field by the
+        /// LITERAL name only, so a SafeField("m_Initialized") probe always returned null and ToBool(null) is
+        /// false: the readiness gate was permanently closed on the overworld and no gated commit could fire.
+        /// The field read is kept as a fallback in case a build declares it as a plain field.
+        ///
+        /// Public because the /state readyParts surfaces report this half of the gate on its own.
+        /// </summary>
+        public static bool StanceUiInitialized(object bsb)
+        {
+            if (bsb == null) return false;
+            object v = SafeProp(bsb, "m_Initialized");
+            if (v == null) v = SafeField(bsb, "m_Initialized");
+            return ToBool(v);
+        }
+
+        /// <summary>
+        /// uiBattleStanceButtons.SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID _itemID = FTK_itembase.ID.None).
+        ///
+        /// A C# optional parameter is a CALL-SITE compiler feature: the emitted method still takes TWO
+        /// parameters and reflection knows nothing of the default, so every one-argument invoke was wrong. A
+        /// 1-type GetMethod signature cannot match the 2-parameter method (silent no-op, after which the
+        /// commit landed on whatever enemy the game had already selected, harmless in a 1-enemy fight and
+        /// wrong in any other), and a 1-arg Reflect.Invoke threw "parameters do not match signature".
+        ///
+        /// The MethodInfo is resolved by hand rather than through Reflect.InvokeArgs because that returns null
+        /// BOTH when the method is not found and when a void method succeeds, so it cannot tell a caller
+        /// whether the selection actually happened. Returns false, never throws, on any resolve miss.
+        /// </summary>
+        public static bool SelectEnemyDummy(object bsb, object enemyFid)
+        {
+            if (bsb == null || enemyFid == null) return false;
+            // FTK_itembase lives in the GridEditor namespace; try the qualified spelling first.
+            object none = ResolveEnumMember("GridEditor.FTK_itembase+ID", "None");
+            if (none == null) none = ResolveEnumMember("FTK_itembase+ID", "None");
+            if (none == null) return false;
+            try
+            {
+                Type[] sig = new[] { enemyFid.GetType(), none.GetType() };
+                MethodInfo mi = null;
+                for (Type cur = bsb.GetType(); cur != null && mi == null; cur = cur.BaseType)
+                    mi = cur.GetMethod("SelectEnemyDummy", Reflect.All | BindingFlags.DeclaredOnly, null, sig, null);
+                if (mi == null) return false;
+                mi.Invoke(bsb, new object[] { enemyFid, none });
+                return true;
+            }
+            catch { return false; }
+        }
+
+        // Resolve a nested enum member by name; null if unresolved. Tries the '+' and '/' nested spellings,
+        // mirroring ActionExecutor.ResolveNestedEnum (this file keeps its own reflection utils by design).
+        private static object ResolveEnumMember(string typeName, string member)
+        {
+            Type t = AccessTools.TypeByName(typeName);
+            if (t == null) t = AccessTools.TypeByName(typeName.Replace('+', '/'));
+            if (t == null || !t.IsEnum) return null;
+            try { return Enum.IsDefined(t, member) ? Enum.Parse(t, member) : null; }
+            catch { return null; }
         }
 
         // GameLogic.GetCurrentCOW path: FTKHub.GetCharacterOverworldByFID(GameLogic.m_CurrentPlayer).

@@ -19,7 +19,7 @@ namespace FTKModFramework.Agent
     /// stance UI was ready (the EngageBattle banner/camera intro had not finished initializing
     /// uiBattleStanceButtons), so ComputeAttackSlotResults ran in a not-ready state, corrupted the turn-commit
     /// FSM, and combat hung. The driver eliminates that by committing ONLY when
-    /// <c>inCombat &amp;&amp; m_FightOrder[0].m_Pid.IsPlayer() &amp;&amp; HeroTurnReady()</c> all hold, and by
+    /// <c>inCombat &amp;&amp; m_FightOrder[0].m_Pid.IsPlayer() &amp;&amp; DungeonOps.StanceReady()</c> all hold, and by
     /// WAITING OUT each commit (the targeted enemy goes m_IsAlive==false, or the turn leaves the player) before
     /// it loops; it never re-fires mid-commit (re-entrancy = the corruption).
     ///
@@ -39,8 +39,15 @@ namespace FTKModFramework.Agent
     ///   uiBattleStanceButtons.CheatKillSingle(): m_PlayerSlots.m_CheatAttack=KillSingle;
     ///     ComputeAttackSlotResults(CombatCow,true); BattleButtonsOff(false). Routes the real damage+death path.
     ///   SlotControl.AttackCheatType { None=0, Miss=1, KillSingle=2, KillAll=3, TriggerAbility=4 }.
-    ///   GameLogic.GetCurrentCombatCOW().m_CurrentDummy.m_CharacterDummyFSM.ActiveStateName == "Wait For Stance".
-    ///   EncounterSessionMC.m_IsInCombat / m_FightOrder[0].m_Pid (FTKPlayerID, IsPlayer()).
+    ///   &lt;acting hero&gt;.m_CurrentDummy.m_CharacterDummyFSM.ActiveStateName == "Wait For Stance", where the
+    ///     acting hero is resolved by DungeonOps.ActingCow (m_FightOrder[0] in a fight), NOT by
+    ///     GetCurrentCombatCOW: that FSM global also holds the enemy's VICTIM on an enemy turn and never
+    ///     tracks heroes 1..n (#93). The whole gate lives in DungeonOps.StanceReady, one definition.
+    ///   FTKHub.GetCharacterOverworldByFID(FTKPlayerID) -> the hero COW, null on a miss (does not throw).
+    ///   EncounterSessionMC.m_IsInCombat / m_FightOrder[0].m_Pid (FTKPlayerID, IsPlayer()). m_FightOrder is a
+    ///     List&lt;FightOrderEntry&gt; {m_Pid, m_TTA, m_EntryID}, a TTA-sorted rolling timeline whose head is
+    ///     the current actor and is dequeued (RemoveAt(0)) only when the turn resolves. Never read the
+    ///     EncounterSession.m_FightOrderVisual decoy.
     ///   EncounterSession.m_IsInCombat / m_EnemyDummies (Dictionary&lt;FTKPlayerID,EnemyDummy&gt;).
     ///   EnemyDummy : EnemyInfo : CharacterDummy. CharacterDummy.m_IsAlive (bool, cleared by the CombatEnemyDie
     ///     RPC via RemoveCombatant). EnemyInfo.m_CurrentHealth (int).
@@ -119,7 +126,7 @@ namespace FTKModFramework.Agent
 
                 // G2: stance UI ready (m_Initialized && dummy FSM == "Wait For Stance"). Until BOTH hold the
                 // commit would corrupt the turn, so WAIT.
-                if (!HeroTurnReady())
+                if (!DungeonOps.StanceReady())
                 {
                     total++;
                     yield return null;
@@ -147,7 +154,9 @@ namespace FTKModFramework.Agent
 
                 // G4: select the victim, then YIELD ONE FRAME so the selection settles before the commit (the
                 // BridgeHost marshals on its own coroutine; select + cheat want a frame between them).
-                SafeInvokeArgs(bsb, "SelectEnemyDummy", new[] { enemyFid.GetType() }, new object[] { enemyFid });
+                // Both args (see DungeonOps.SelectEnemyDummy): a 1-type signature never matched the real
+                // 2-parameter method, so the per-enemy loop silently committed on the game-selected default.
+                DungeonOps.SelectEnemyDummy(bsb, enemyFid);
                 Plugin.Log.LogInfo("[agent] combat: " + Tag() + " selected enemy " + FidLabel(enemyFid)
                                    + " (committing KillSingle).");
                 yield return null;
@@ -156,7 +165,7 @@ namespace FTKModFramework.Agent
                 // that frame, do NOT commit (that mismatch is exactly what corrupts the turn).
                 if (!CombatActive()) break;
                 active = ActiveTurnFid();
-                if (active == null || !FidIsPlayer(active) || !HeroTurnReady())
+                if (active == null || !FidIsPlayer(active) || !DungeonOps.StanceReady())
                 {
                     total++;
                     yield return null;
@@ -260,35 +269,6 @@ namespace FTKModFramework.Agent
             return r is bool && (bool)r;
         }
 
-        // m_BattleStanceButtons.m_Initialized && GetCurrentCombatCOW().m_CurrentDummy.m_CharacterDummyFSM
-        // .ActiveStateName == "Wait For Stance".
-        private static bool HeroTurnReady()
-        {
-            try
-            {
-                object bsb = BattleStanceButtons();
-                if (bsb == null) return false;
-                // The authoritative readiness is the active dummy FSM reaching "Wait For Stance" (kb_9f7c454b):
-                // committing there routes the kill through the real damage RPC safely. m_Initialized (the
-                // stance-buttons UI flag) is a belt-and-suspenders signal that is reliably true on the overworld,
-                // but the in-dungeon forced-ack path (DungeonScrollComplete skips the FSM's button Initialize step)
-                // leaves it false while the dummy IS genuinely in "Wait For Stance". So require m_Initialized on the
-                // overworld, but inside a dungeon gate on the FSM state alone.
-                if (!DungeonOps.InDungeon() && !ToBool(SafeField(bsb, "m_Initialized"))) return false;
-                object gl = StaticInstance("GameLogic");
-                if (gl == null) return false;
-                object cow = SafeInvoke(gl, "GetCurrentCombatCOW");
-                if (cow == null) return false;
-                object dummy = SafeField(cow, "m_CurrentDummy");
-                if (dummy == null) return false;
-                object fsm = SafeField(dummy, "m_CharacterDummyFSM");
-                if (fsm == null) return false;
-                object stateName = SafeProp(fsm, "ActiveStateName");
-                return stateName is string && (string)stateName == "Wait For Stance";
-            }
-            catch { return false; }
-        }
-
         // First live enemy FID from EncounterSession.m_EnemyDummies, keyed by m_IsAlive && m_CurrentHealth>0.
         private static object FirstLiveEnemyFid()
         {
@@ -368,31 +348,10 @@ namespace FTKModFramework.Agent
             try { return Reflect.GetField(obj, name); } catch { return null; }
         }
 
-        private static object SafeProp(object obj, string name)
-        {
-            if (obj == null) return null;
-            try
-            {
-                for (Type cur = obj.GetType(); cur != null; cur = cur.BaseType)
-                {
-                    PropertyInfo pi = cur.GetProperty(name, Reflect.All | BindingFlags.DeclaredOnly);
-                    if (pi != null && pi.CanRead) return pi.GetValue(obj, null);
-                }
-            }
-            catch { }
-            return null;
-        }
-
         private static object SafeInvoke(object obj, string name)
         {
             if (obj == null) return null;
             try { return Reflect.Invoke(obj, name); } catch { return null; }
-        }
-
-        private static object SafeInvokeArgs(object obj, string name, Type[] sig, object[] args)
-        {
-            if (obj == null) return null;
-            try { return Reflect.InvokeArgs(obj, name, sig, args); } catch { return null; }
         }
 
         private static bool ToBool(object o) { return o is bool && (bool)o; }
