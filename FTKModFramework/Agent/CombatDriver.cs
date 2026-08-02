@@ -19,7 +19,7 @@ namespace FTKModFramework.Agent
     /// stance UI was ready (the EngageBattle banner/camera intro had not finished initializing
     /// uiBattleStanceButtons), so ComputeAttackSlotResults ran in a not-ready state, corrupted the turn-commit
     /// FSM, and combat hung. The driver eliminates that by committing ONLY when
-    /// <c>inCombat &amp;&amp; m_FightOrder[0].m_Pid.IsPlayer() &amp;&amp; HeroTurnReady()</c> all hold, and by
+    /// <c>inCombat &amp;&amp; m_FightOrder[0].m_Pid.IsPlayer() &amp;&amp; DungeonOps.StanceReady()</c> all hold, and by
     /// WAITING OUT each commit (the targeted enemy goes m_IsAlive==false, or the turn leaves the player) before
     /// it loops; it never re-fires mid-commit (re-entrancy = the corruption).
     ///
@@ -40,8 +40,9 @@ namespace FTKModFramework.Agent
     ///     ComputeAttackSlotResults(CombatCow,true); BattleButtonsOff(false). Routes the real damage+death path.
     ///   SlotControl.AttackCheatType { None=0, Miss=1, KillSingle=2, KillAll=3, TriggerAbility=4 }.
     ///   &lt;acting hero&gt;.m_CurrentDummy.m_CharacterDummyFSM.ActiveStateName == "Wait For Stance", where the
-    ///     acting hero is resolved by ActingCow (m_FightOrder[0] in a fight), NOT by GetCurrentCombatCOW:
-    ///     that FSM global also holds the enemy's VICTIM on an enemy turn and never tracks heroes 1..n (#93).
+    ///     acting hero is resolved by DungeonOps.ActingCow (m_FightOrder[0] in a fight), NOT by
+    ///     GetCurrentCombatCOW: that FSM global also holds the enemy's VICTIM on an enemy turn and never
+    ///     tracks heroes 1..n (#93). The whole gate lives in DungeonOps.StanceReady, one definition.
     ///   FTKHub.GetCharacterOverworldByFID(FTKPlayerID) -> the hero COW, null on a miss (does not throw).
     ///   EncounterSessionMC.m_IsInCombat / m_FightOrder[0].m_Pid (FTKPlayerID, IsPlayer()). m_FightOrder is a
     ///     List&lt;FightOrderEntry&gt; {m_Pid, m_TTA, m_EntryID}, a TTA-sorted rolling timeline whose head is
@@ -125,7 +126,7 @@ namespace FTKModFramework.Agent
 
                 // G2: stance UI ready (m_Initialized && dummy FSM == "Wait For Stance"). Until BOTH hold the
                 // commit would corrupt the turn, so WAIT.
-                if (!HeroTurnReady())
+                if (!DungeonOps.StanceReady())
                 {
                     total++;
                     yield return null;
@@ -153,9 +154,9 @@ namespace FTKModFramework.Agent
 
                 // G4: select the victim, then YIELD ONE FRAME so the selection settles before the commit (the
                 // BridgeHost marshals on its own coroutine; select + cheat want a frame between them).
-                // Both args (see SelectEnemyDummy): the old 1-type signature never matched the real
+                // Both args (see DungeonOps.SelectEnemyDummy): a 1-type signature never matched the real
                 // 2-parameter method, so the per-enemy loop silently committed on the game-selected default.
-                SelectEnemyDummy(bsb, enemyFid);
+                DungeonOps.SelectEnemyDummy(bsb, enemyFid);
                 Plugin.Log.LogInfo("[agent] combat: " + Tag() + " selected enemy " + FidLabel(enemyFid)
                                    + " (committing KillSingle).");
                 yield return null;
@@ -164,7 +165,7 @@ namespace FTKModFramework.Agent
                 // that frame, do NOT commit (that mismatch is exactly what corrupts the turn).
                 if (!CombatActive()) break;
                 active = ActiveTurnFid();
-                if (active == null || !FidIsPlayer(active) || !HeroTurnReady())
+                if (active == null || !FidIsPlayer(active) || !DungeonOps.StanceReady())
                 {
                     total++;
                     yield return null;
@@ -268,66 +269,6 @@ namespace FTKModFramework.Agent
             return r is bool && (bool)r;
         }
 
-        /// <summary>
-        /// The CharacterOverworld actually acting right now (#93): in a FIGHT that is the head of the fight
-        /// order, FTKHub.GetCharacterOverworldByFID(m_FightOrder[0].m_Pid); outside one it is the overworld
-        /// turn holder (DungeonOps.CurrentCow -> GameLogic.m_CurrentPlayer, which combat never updates).
-        /// Mirrors ActionExecutor.ActingCow so the driver and the /action gates agree frame for frame.
-        ///
-        /// The in-combat test is EncounterSession.m_IsInCombat, NOT the sibling EncounterSessionMC flag:
-        /// EncounterSessionMC is a separate MonoBehaviour whose m_IsInCombat means "an encounter session is
-        /// active" (shops included), while EncounterSession.m_IsInCombat means "this encounter is a fight".
-        /// Null on an enemy turn, an empty fight order, or a hub miss (fail-closed: callers wait).
-        /// </summary>
-        private static object ActingCow()
-        {
-            object es = StaticInstance("EncounterSession");
-            if (es == null || !ToBool(SafeField(es, "m_IsInCombat")))
-                return DungeonOps.CurrentCow();
-
-            object fid = ActiveTurnFid();
-            if (fid == null) return null;
-            // IsPlayer() is m_PhotonID >= 0 and FTKPlayerID.Null is {0,0}, so it rules out enemies but is not
-            // proof of a hero; the hub lookup returns null (never throws) on a miss and closes that gap.
-            if (!FidIsPlayer(fid)) return null;
-
-            object hub = StaticInstance("FTKHub");
-            if (hub == null) return null;
-            return SafeInvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid });
-        }
-
-        // m_BattleStanceButtons.m_Initialized && the ACTING hero's m_CurrentDummy.m_CharacterDummyFSM
-        // .ActiveStateName == "Wait For Stance".
-        private static bool HeroTurnReady()
-        {
-            try
-            {
-                object bsb = BattleStanceButtons();
-                if (bsb == null) return false;
-                // The authoritative readiness is the active dummy FSM reaching "Wait For Stance" (kb_9f7c454b):
-                // committing there routes the kill through the real damage RPC safely. m_Initialized (the
-                // stance-buttons UI flag) is a belt-and-suspenders signal that is reliably true on the overworld,
-                // but the in-dungeon forced-ack path (DungeonScrollComplete skips the FSM's button Initialize step)
-                // leaves it false while the dummy IS genuinely in "Wait For Stance". So require m_Initialized on the
-                // overworld, but inside a dungeon gate on the FSM state alone. NOTE m_Initialized is
-                // singleton-scoped (one uiBattleStanceButtons, not one per hero), so it stays a global probe.
-                if (!DungeonOps.InDungeon() && !StanceUiInitialized(bsb)) return false;
-                // The dummy, however, MUST be the acting hero's own (#93): GetCurrentCombatCOW reads the FSM
-                // global compCombatOverworld, which CharacterDummy.EngageBattle also sets to the enemy's VICTIM
-                // on an enemy turn, and with a multi-hero party it does not track heroes 1..n. Resolve from the
-                // fight order instead, exactly as the game's per-hero gate uiRemapButton.CanUseCombat(cow) does.
-                object cow = ActingCow();
-                if (cow == null) return false;
-                object dummy = SafeField(cow, "m_CurrentDummy");
-                if (dummy == null) return false;
-                object fsm = SafeField(dummy, "m_CharacterDummyFSM");
-                if (fsm == null) return false;
-                object stateName = SafeProp(fsm, "ActiveStateName");
-                return stateName is string && (string)stateName == "Wait For Stance";
-            }
-            catch { return false; }
-        }
-
         // First live enemy FID from EncounterSession.m_EnemyDummies, keyed by m_IsAlive && m_CurrentHealth>0.
         private static object FirstLiveEnemyFid()
         {
@@ -382,57 +323,6 @@ namespace FTKModFramework.Agent
             return SafeField(ui, "m_BattleStanceButtons");
         }
 
-        // uiBattleStanceButtons.m_Initialized read as a PROPERTY first. The decompile declares it
-        // 'public bool m_Initialized { get; private set; }', an auto-property backed by the generated
-        // '<m_Initialized>k__BackingField'; Reflect.GetField matches a field by literal name only, so the old
-        // SafeField probe returned null and ToBool(null) is false ALWAYS. That kept the overworld readiness
-        // gate permanently closed, so this driver could only ever commit through the dungeon carve-out below.
-        // The field read stays as a fallback in case a build declares it as a plain field.
-        // Mirrors ActionExecutor/StateReader.StanceUiInitialized so all three agree.
-        private static bool StanceUiInitialized(object bsb)
-        {
-            if (bsb == null) return false;
-            object v = SafeProp(bsb, "m_Initialized");
-            if (v == null) v = SafeField(bsb, "m_Initialized");
-            return ToBool(v);
-        }
-
-        // uiBattleStanceButtons.SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID _itemID = FTK_itembase.ID.None).
-        // An optional parameter is a CALL-SITE compiler feature: the emitted method still takes TWO parameters
-        // and reflection knows nothing of the default, so a 1-type GetMethod signature could never match and
-        // selection silently no-opped (the commit then landed on the game-selected default enemy). Pass both.
-        // Returns false, never throws, when the enum or the method cannot be resolved.
-        private static bool SelectEnemyDummy(object bsb, object enemyFid)
-        {
-            if (bsb == null || enemyFid == null) return false;
-            // FTK_itembase lives in the GridEditor namespace; try the qualified spelling first.
-            object none = ResolveEnumMember("GridEditor.FTK_itembase+ID", "None");
-            if (none == null) none = ResolveEnumMember("FTK_itembase+ID", "None");
-            if (none == null) return false;
-            try
-            {
-                Type[] sig = new[] { enemyFid.GetType(), none.GetType() };
-                MethodInfo mi = null;
-                for (Type cur = bsb.GetType(); cur != null && mi == null; cur = cur.BaseType)
-                    mi = cur.GetMethod("SelectEnemyDummy", Reflect.All | BindingFlags.DeclaredOnly, null, sig, null);
-                if (mi == null) return false;
-                mi.Invoke(bsb, new object[] { enemyFid, none });
-                return true;
-            }
-            catch { return false; }
-        }
-
-        // Resolve a nested enum member by name; null if unresolved. Tries the '+' and '/' nested spellings,
-        // mirroring ActionExecutor.ResolveNestedEnum (this file keeps its own reflection utils by design).
-        private static object ResolveEnumMember(string typeName, string member)
-        {
-            Type t = AccessTools.TypeByName(typeName);
-            if (t == null) t = AccessTools.TypeByName(typeName.Replace('+', '/'));
-            if (t == null || !t.IsEnum) return null;
-            try { return Enum.IsDefined(t, member) ? Enum.Parse(t, member) : null; }
-            catch { return null; }
-        }
-
         private static string FidLabel(object fid)
         {
             if (fid == null) return "?";
@@ -458,31 +348,10 @@ namespace FTKModFramework.Agent
             try { return Reflect.GetField(obj, name); } catch { return null; }
         }
 
-        private static object SafeProp(object obj, string name)
-        {
-            if (obj == null) return null;
-            try
-            {
-                for (Type cur = obj.GetType(); cur != null; cur = cur.BaseType)
-                {
-                    PropertyInfo pi = cur.GetProperty(name, Reflect.All | BindingFlags.DeclaredOnly);
-                    if (pi != null && pi.CanRead) return pi.GetValue(obj, null);
-                }
-            }
-            catch { }
-            return null;
-        }
-
         private static object SafeInvoke(object obj, string name)
         {
             if (obj == null) return null;
             try { return Reflect.Invoke(obj, name); } catch { return null; }
-        }
-
-        private static object SafeInvokeArgs(object obj, string name, Type[] sig, object[] args)
-        {
-            if (obj == null) return null;
-            try { return Reflect.InvokeArgs(obj, name, sig, args); } catch { return null; }
         }
 
         private static bool ToBool(object o) { return o is bool && (bool)o; }

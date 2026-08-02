@@ -340,7 +340,7 @@ namespace FTKModFramework.Agent
                 if (active == null) return;
                 object isPlayer = SafeInvoke(active, "IsPlayer");
                 if (!(isPlayer is bool) || !(bool)isPlayer) return;
-                if (!HeroTurnReady()) return;
+                if (!StanceReady()) return;
 
                 object enemyFid = FirstLiveEnemyFid(es);
                 if (enemyFid == null) return; // victory likely; combat will flip off.
@@ -612,17 +612,48 @@ namespace FTKModFramework.Agent
             return SafeField(first, "m_Pid");
         }
 
-        // The CharacterOverworld actually acting right now (#93). Mirrors ActionExecutor.ActingCow: in a FIGHT
-        // (EncounterSession.m_IsInCombat, not the sibling EncounterSessionMC flag, which is also true for
-        // shops) it is FTKHub.GetCharacterOverworldByFID(m_FightOrder[0].m_Pid); outside one it is the
-        // overworld turn holder, GameLogic.m_CurrentPlayer, which combat never writes. Null on an enemy turn,
-        // an empty fight order, or a hub miss (fail-closed: TryWinCombatTurn simply does not commit).
-        private static object ActingCow()
+        // ==================================================== shared combat-actor gates ================
+        // ActingFid / ActingCow / StanceReady / StanceUiInitialized / SelectEnemyDummy live HERE, as public
+        // statics, and are the SINGLE definition used by ActionExecutor, CombatDriver and StateReader. They
+        // were briefly copied per file; that let the in-dungeon carve-out in StanceReady drift out of two of
+        // the copies, which deadlocked in-dungeon commits and made /state contradict /action. One definition
+        // means one carve-out and no drift.
+
+        /// <summary>
+        /// The head of the combat turn timeline: EncounterSessionMC.m_FightOrder[0].m_Pid, an FTKPlayerID.
+        /// May be an ENEMY fid (m_PhotonID &lt; 0); callers that need a hero must test IsPlayer or use
+        /// <see cref="ActingCow"/>. Null on a missing session or an empty order.
+        /// </summary>
+        public static object ActingFid()
+        {
+            return ActiveTurnFid(StaticInstance("EncounterSessionMC"));
+        }
+
+        /// <summary>
+        /// The CharacterOverworld actually acting right now (#93).
+        ///
+        ///   in a FIGHT  -> FTKHub.GetCharacterOverworldByFID(m_FightOrder[0].m_Pid)
+        ///   otherwise   -> CurrentCow(), the overworld turn holder GameLogic.m_CurrentPlayer
+        ///
+        /// GameLogic.m_CurrentPlayer is written only by the overworld turn flow (GameFlow.BeginTurn RPC,
+        /// FTKHub.EnterFahrul, GameEventManager start) and nothing in combat updates it, so with a multi-hero
+        /// party it stays pinned to slot 0. GameLogic.GetCurrentCombatCOW is no better: it reads the FSM
+        /// global compCombatOverworld, which CharacterDummy.EngageBattle also sets to the enemy's VICTIM on an
+        /// enemy turn.
+        ///
+        /// The in-combat test is EncounterSession.m_IsInCombat, NOT the sibling EncounterSessionMC flag: they
+        /// are separate MonoBehaviours, and the MC flag means "an encounter session is active" (shops
+        /// included), which would wrongly route a shop through the fight order.
+        ///
+        /// Null on an enemy turn, an empty fight order, or a hub miss. Fail-closed by design: callers treat
+        /// null as "no acting hero" rather than acting for the wrong one.
+        /// </summary>
+        public static object ActingCow()
         {
             object es = StaticInstance("EncounterSession");
             if (es == null || !ToBool(SafeField(es, "m_IsInCombat"))) return CurrentCow();
 
-            object fid = ActiveTurnFid(StaticInstance("EncounterSessionMC"));
+            object fid = ActingFid();
             if (fid == null) return null;
             // IsPlayer() is m_PhotonID >= 0 and FTKPlayerID.Null is {0,0}, so it excludes enemies but is not
             // proof of a hero; the hub lookup returns null (never throws) on a miss and closes that gap.
@@ -634,16 +665,29 @@ namespace FTKModFramework.Agent
             return SafeInvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid });
         }
 
-        private static bool HeroTurnReady()
+        /// <summary>
+        /// THE readiness gate for committing a hero combat turn, and the only definition of it.
+        ///
+        /// Two halves:
+        ///   (1) uiBattleStanceButtons.m_Initialized, but ONLY on the overworld. That flag is set inside
+        ///       Initialize(), which the in-dungeon forced-ack path (DungeonScrollComplete) skips, so it reads
+        ///       false in a dungeon while the dummy IS genuinely in "Wait For Stance". Requiring it there
+        ///       deadlocks every in-dungeon commit, which is exactly what happened while this carve-out was
+        ///       missing from two of the copied gates.
+        ///   (2) the ACTING hero's own m_CurrentDummy FSM parked in "Wait For Stance". Per-hero by
+        ///       construction, mirroring the game's own uiRemapButton.CanUseCombat(cow) check; a global dummy
+        ///       probe reads the wrong hero the moment the party is larger than one.
+        ///
+        /// m_Initialized stays a GLOBAL probe on purpose: there is one uiBattleStanceButtons for the party,
+        /// not one per hero. Never throws; false on any miss.
+        /// </summary>
+        public static bool StanceReady()
         {
             try
             {
                 object bsb = BattleStanceButtons();
                 if (bsb == null) return false;
-                if (!StanceUiInitialized(bsb)) return false;
-                // The ACTING hero's dummy (#93), resolved from the fight order rather than from the
-                // GetCurrentCombatCOW FSM global (which holds the enemy's victim on an enemy turn and never
-                // tracks heroes 1..n, so an in-dungeon multi-hero party never read ready past slot 0).
+                if (!InDungeon() && !StanceUiInitialized(bsb)) return false;
                 object cow = ActingCow();
                 if (cow == null) return false;
                 object dummy = SafeField(cow, "m_CurrentDummy");
@@ -870,12 +914,17 @@ namespace FTKModFramework.Agent
             return SafeField(ui, "m_BattleStanceButtons");
         }
 
-        // uiBattleStanceButtons.m_Initialized read as a PROPERTY first. The decompile declares it
-        // 'public bool m_Initialized { get; private set; }', an auto-property backed by the generated
-        // '<m_Initialized>k__BackingField'; Reflect.GetField matches a field by literal name only, so the old
-        // SafeField probe returned null and ToBool(null) is false ALWAYS, permanently closing this readiness
-        // gate. Field read kept as a fallback. Mirrors ActionExecutor/CombatDriver/StateReader.
-        private static bool StanceUiInitialized(object bsb)
+        /// <summary>
+        /// uiBattleStanceButtons.m_Initialized, read as a PROPERTY first. The decompile declares it
+        /// <c>public bool m_Initialized { get; private set; }</c>, an auto-property whose storage is the
+        /// generated <c>&lt;m_Initialized&gt;k__BackingField</c>. Reflect.GetField matches a field by the
+        /// LITERAL name only, so a SafeField("m_Initialized") probe always returned null and ToBool(null) is
+        /// false: the readiness gate was permanently closed on the overworld and no gated commit could fire.
+        /// The field read is kept as a fallback in case a build declares it as a plain field.
+        ///
+        /// Public because the /state readyParts surfaces report this half of the gate on its own.
+        /// </summary>
+        public static bool StanceUiInitialized(object bsb)
         {
             if (bsb == null) return false;
             object v = SafeProp(bsb, "m_Initialized");
@@ -883,11 +932,20 @@ namespace FTKModFramework.Agent
             return ToBool(v);
         }
 
-        // uiBattleStanceButtons.SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID _itemID = FTK_itembase.ID.None).
-        // An optional parameter is a CALL-SITE compiler feature: the emitted method still takes TWO parameters
-        // and reflection knows nothing of the default, so a 1-type GetMethod signature could never match and
-        // selection silently no-opped. Pass both. Returns false, never throws, on any resolve miss.
-        private static bool SelectEnemyDummy(object bsb, object enemyFid)
+        /// <summary>
+        /// uiBattleStanceButtons.SelectEnemyDummy(FTKPlayerID, FTK_itembase.ID _itemID = FTK_itembase.ID.None).
+        ///
+        /// A C# optional parameter is a CALL-SITE compiler feature: the emitted method still takes TWO
+        /// parameters and reflection knows nothing of the default, so every one-argument invoke was wrong. A
+        /// 1-type GetMethod signature cannot match the 2-parameter method (silent no-op, after which the
+        /// commit landed on whatever enemy the game had already selected, harmless in a 1-enemy fight and
+        /// wrong in any other), and a 1-arg Reflect.Invoke threw "parameters do not match signature".
+        ///
+        /// The MethodInfo is resolved by hand rather than through Reflect.InvokeArgs because that returns null
+        /// BOTH when the method is not found and when a void method succeeds, so it cannot tell a caller
+        /// whether the selection actually happened. Returns false, never throws, on any resolve miss.
+        /// </summary>
+        public static bool SelectEnemyDummy(object bsb, object enemyFid)
         {
             if (bsb == null || enemyFid == null) return false;
             // FTK_itembase lives in the GridEditor namespace; try the qualified spelling first.

@@ -380,8 +380,11 @@ namespace FTKModFramework.Agent
             return c;
         }
 
-        // readyParts:{initialized:bool, fsmState:string}. fsmState surfaces the banner-vs-enemy-turn distinction
-        // when heroTurnReady is false (e.g. "Wait For Stance" means ready; a banner/anim state means not yet).
+        // readyParts:{initialized:bool, fsmState:string, actingFid:{turnIndex,photonId}}. fsmState surfaces the
+        // banner-vs-enemy-turn distinction when heroTurnReady is false ("Wait For Stance" means ready; a
+        // banner/anim state means not yet). actingFid is the fight-order HEAD, which may be an ENEMY: that is
+        // what makes a null fsmState self-explaining, since ActingCow returns null on an enemy turn rather
+        // than reporting some other hero's dummy. Same source as ActionExecutor.ReadyParts.
         private static object ReadReadyParts(List<object> warnings)
         {
             Dictionary<string, object> rp = new Dictionary<string, object>();
@@ -389,19 +392,20 @@ namespace FTKModFramework.Agent
             {
                 object ui = StaticInstance("FTKUI");
                 object bsb = ui != null ? Reflect.GetField(ui, "m_BattleStanceButtons") : null;
-                rp["initialized"] = StanceUiInitialized(bsb);
+                rp["initialized"] = DungeonOps.StanceUiInitialized(bsb);
                 // The ACTING hero's dummy (m_FightOrder[0] in a fight), so fsmState describes the hero the
-                // commit gates read rather than hero 0 or an enemy's victim. See ActingCow (#93).
-                object cow = ActingCow();
+                // commit gates read rather than hero 0 or an enemy's victim. See DungeonOps.ActingCow (#93).
+                object cow = DungeonOps.ActingCow();
                 object dummy = cow != null ? SafeField(cow, "m_CurrentDummy") : null;
                 object fsm = dummy != null ? SafeField(dummy, "m_CharacterDummyFSM") : null;
                 object sn = fsm != null ? SafeProp(fsm, "ActiveStateName") : null;
                 rp["fsmState"] = sn as string;
+                rp["actingFid"] = FidDict(DungeonOps.ActingFid());
             }
             catch (Exception e)
             {
                 warnings.Add("combat.readyParts: " + e.Message);
-                rp["initialized"] = false; rp["fsmState"] = null;
+                rp["initialized"] = false; rp["fsmState"] = null; rp["actingFid"] = null;
             }
             return rp;
         }
@@ -467,92 +471,14 @@ namespace FTKModFramework.Agent
             catch (Exception e) { warnings.Add("combat.whoseTurn: " + e.Message); return null; }
         }
 
-        // heroTurnReady: m_BattleStanceButtons.m_Initialized && the ACTING hero's m_CurrentDummy
-        // .m_CharacterDummyFSM.ActiveStateName == "Wait For Stance".
+        // heroTurnReady: the SHARED commit gate, DungeonOps.StanceReady. /state and /action must never
+        // disagree about whether a hero can act, so this reads the very same method the drivers and the
+        // combat actions gate on rather than reimplementing it (a local copy is how the in-dungeon
+        // m_Initialized carve-out drifted out of two gates and deadlocked in-dungeon commits).
         private static object ReadHeroTurnReady(List<object> warnings)
         {
-            try
-            {
-                object ui = StaticInstance("FTKUI");
-                if (ui == null) return false;
-                object bsb = Reflect.GetField(ui, "m_BattleStanceButtons");
-                if (bsb == null) return false;
-                // Inside a dungeon the forced-scroll-ack commit path leaves m_Initialized false while the dummy is
-                // genuinely in "Wait For Stance" (the authoritative gate); require m_Initialized only on the
-                // overworld. Mirrors CombatDriver.HeroTurnReady so /state and the driver agree. m_Initialized is
-                // singleton-scoped (one uiBattleStanceButtons for the party), so it stays a global probe.
-                if (!DungeonOps.InDungeon() && !StanceUiInitialized(bsb)) return false;
-                // The dummy must be the ACTING hero's own (#93), resolved from the fight order, not from the
-                // GetCurrentCombatCOW FSM global (which holds the enemy's victim on an enemy turn and never
-                // tracks heroes 1..n). Same source as ActionExecutor/CombatDriver so all three agree.
-                object cow = ActingCow();
-                if (cow == null) return false;
-                object dummy = SafeField(cow, "m_CurrentDummy");
-                if (dummy == null) return false;
-                object fsm = SafeField(dummy, "m_CharacterDummyFSM");
-                if (fsm == null) return false;
-                object stateName = SafeProp(fsm, "ActiveStateName");
-                return stateName is string && (string)stateName == "Wait For Stance";
-            }
+            try { return DungeonOps.StanceReady(); }
             catch (Exception e) { warnings.Add("combat.heroTurnReady: " + e.Message); return false; }
-        }
-
-        // uiBattleStanceButtons.m_Initialized read as a PROPERTY first. The decompile declares it
-        // 'public bool m_Initialized { get; private set; }', an auto-property backed by the generated
-        // '<m_Initialized>k__BackingField'; Reflect.GetField matches a field by literal name only, so the old
-        // SafeField probe returned null and ToBool(null) is false ALWAYS, publishing readyParts.initialized
-        // false (and heroTurnReady false on the overworld) even with the acting hero parked in
-        // "Wait For Stance". Field read kept as a fallback. Mirrors ActionExecutor/CombatDriver.
-        private static bool StanceUiInitialized(object bsb)
-        {
-            if (bsb == null) return false;
-            object v = SafeProp(bsb, "m_Initialized");
-            if (v == null) v = SafeField(bsb, "m_Initialized");
-            return ToBool(v);
-        }
-
-        /// <summary>
-        /// The CharacterOverworld actually acting right now. StateReader is deliberately self-contained, so
-        /// this mirrors ActionExecutor.ActingCow / CombatDriver.ActingCow rather than calling them: in a FIGHT
-        /// (EncounterSession.m_IsInCombat, not the sibling EncounterSessionMC flag, which is also true for
-        /// shops) resolve FTKHub.GetCharacterOverworldByFID(EncounterSessionMC.m_FightOrder[0].m_Pid);
-        /// otherwise fall back to the overworld turn holder, GameLogic.m_CurrentPlayer, which combat never
-        /// writes. currentTurnFid and combat.whoseTurn stay two separate published views on purpose; only the
-        /// readiness probes move onto this one. Null on an enemy turn or any miss (never throws).
-        /// </summary>
-        private static object ActingCow()
-        {
-            try
-            {
-                object hub = StaticInstance("FTKHub");
-                if (hub == null) return null;
-
-                object es = StaticInstance("EncounterSession");
-                bool inFight = es != null && ToBool(SafeField(es, "m_IsInCombat"));
-
-                object fid;
-                if (inFight)
-                {
-                    object mc = StaticInstance("EncounterSessionMC");
-                    IList fo = mc != null ? SafeField(mc, "m_FightOrder") as IList : null;
-                    if (fo == null || fo.Count == 0 || fo[0] == null) return null;
-                    fid = SafeField(fo[0], "m_Pid");
-                    if (fid == null) return null;
-                    // IsPlayer() is m_PhotonID >= 0 and FTKPlayerID.Null is {0,0}, so it excludes enemies but
-                    // is not proof of a hero; the hub lookup below returns null on a miss and closes that gap.
-                    object isPlayer = SafeInvoke(fid, "IsPlayer");
-                    if (!(isPlayer is bool) || !(bool)isPlayer) return null;
-                }
-                else
-                {
-                    object gl = StaticInstance("GameLogic");
-                    fid = gl != null ? SafeField(gl, "m_CurrentPlayer") : null;
-                    if (fid == null) return null;
-                }
-
-                return SafeInvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid });
-            }
-            catch { return null; }
         }
 
         private static object ReadEnemyName(object enemyCombat, object dummy)
@@ -1110,14 +1036,6 @@ namespace FTKModFramework.Agent
         {
             if (obj == null) return null;
             try { return Reflect.Invoke(obj, name); } catch { return null; }
-        }
-
-        // Overload-aware invoke (Reflect.Invoke resolves by name alone and throws AmbiguousMatchException on a
-        // multi-overload method). Mirrors ActionExecutor/CombatDriver.SafeInvokeArgs.
-        private static object SafeInvokeArgs(object obj, string name, Type[] sig, object[] args)
-        {
-            if (obj == null) return null;
-            try { return Reflect.InvokeArgs(obj, name, sig, args); } catch { return null; }
         }
 
         private static string SafeString(object obj, string name)
