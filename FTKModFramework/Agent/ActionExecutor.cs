@@ -1174,13 +1174,41 @@ namespace FTKModFramework.Agent
                 return Fail("battle stance buttons unavailable");
             }
 
-            object menu = StaticInstance("uiEncounterMenu");
-            if (menu != null)
+            // The POI menu has NO static Instance of its own; the live one hangs off FTKUI.m_EncounterMenu.
+            // m_MenuOn is the menu's own "I am open" flag (set true in its open path), so gating on it is what
+            // keeps us from calling LeaveOrEndTurn on a menu that is not showing.
+            object ui = StaticInstance("FTKUI");
+            object menu = SafeField(ui, "m_EncounterMenu");
+            if (menu != null && ToBool(SafeField(menu, "m_MenuOn")))
             {
-                Reflect.Invoke(menu, "LeaveOrEndTurn");
+                SafeInvoke(menu, "LeaveOrEndTurn");
                 return Ok(Result("ended", "overworld"));
             }
-            return Fail("no end-turn surface available");
+
+            // Plain hex, no POI menu open: drive the same path the overworld hourglass button does
+            // (uiEndTurnButton.OnEndTurn branches on OverworldCamera.Instance.m_Camera.enabled; the overworld
+            // branch calls FTKHub.EndTurn, the other bypasses combat slots). Calling FTKHub directly skips the
+            // button object, which is deactivated between turns and unreliable to probe.
+            object hub = StaticInstance("FTKHub");
+            if (hub == null) return Fail("no end-turn surface available");
+
+            // FTKHub.EndTurn only ACTS in movement-FSM states "Tracking" or "NoMoreActions", or when the
+            // current sub-FSM is "OnStopAtHex" (which we cannot cheaply read, so we still attempt the call).
+            // In any other state it just logs "cannot end turn" and returns, so report the observed state to
+            // make that silent no-op diagnosable from the harness.
+            object movement = StaticInstance("Movement");
+            object fsm = SafeField(movement, "m_MovementFSM");
+            string fsmState = SafeProp(fsm, "ActiveStateName") as string;
+
+            // EndTurn is void, so SafeInvoke's null return cannot distinguish "ran" from "missing": resolve the
+            // method first and Fail on a miss, so a renamed target is reported rather than silently swallowed.
+            if (AccessTools.Method(hub.GetType(), "EndTurn", new Type[0]) == null)
+                return Fail("at end_turn.hourglass: FTKHub.EndTurn unresolved");
+            SafeInvoke(hub, "EndTurn");
+
+            Dictionary<string, object> d = Result("ended", "hourglass");
+            if (fsmState != "Tracking" && fsmState != "NoMoreActions") d["fsmState"] = fsmState;
+            return Ok(d);
         }
 
         private static object SelectChoice(IDictionary<string, object> args)
