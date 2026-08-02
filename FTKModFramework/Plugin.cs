@@ -301,6 +301,7 @@ namespace FTKModFramework
             {
                 Run("sample weapon/ability", SampleContent.Register);
                 Run("thief class", ThiefClass.Register);
+                Run("innkeeper class", InnkeeperClass.Register);
                 Run("cutpurse enemy", CutpurseEnemy.Register);
                 Run("sample encounter + adventure", AdventureContent.Register);
             }
