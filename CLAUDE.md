@@ -15,8 +15,8 @@ The decompiled `Assembly-CSharp` is the **only correctness authority.** Do not t
 | Mod loader | BepInEx 5.4.x (Mono x64) |
 | Patching | HarmonyX (`HarmonyLib`) |
 | Content model | `GridEditor.TableManager` -> `FTK_*DB` data tables (clone-and-register) |
-| Managed dir (this Mac) | `~/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed` |
-| Toolchain | `dotnet` 10.0.301, `ilspycmd` 10.1.0 |
+| Managed dir (macOS) | `~/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed` |
+| Toolchain | `dotnet` SDK, `ilspycmd` |
 | Remote | `jarlbrak/ftk-mod-framework` (public), branch `master` |
 
 Game DLLs are copyrighted and git-ignored. The build references them from the local install and publicizes `Assembly-CSharp` at compile time. Never commit them.
@@ -50,7 +50,7 @@ Every implementation slice must follow this sequence:
 5. Build: `cd FTKModFramework && dotnet build -c Release`. Fix any errors before proceeding.
 6. Verify in-game: launch FTK with the DLL installed and confirm `SELF-TEST PASS` lines appear in `BepInEx/LogOutput.log`.
 7. Update the GitHub issue with findings, close it only when the code is verified in-game.
-8. Update `docs/` and the ninum hub entry as needed.
+8. Update `docs/` as needed.
 9. Commit with a faithful summary.
 
 No bulk closes. A closed issue means real code was verified in-game, not just built.
@@ -104,7 +104,6 @@ static void Postfix()
 |---|---|
 | Specs, features, work items | GitHub Issues (`jarlbrak/ftk-mod-framework`) |
 | Architecture, patterns, modder guides | `docs/` (e.g., `WRITING-CONTENT.md`, `ROADMAP.md`, `PHASE0-TYPE-INVENTORY.md`) |
-| Cross-session notes, RE findings, type inventory | ninum (project `proj_4f015453`) |
 
 ## Planning = GitHub Issues
 
@@ -129,32 +128,11 @@ When a task matches a specialized agent, delegate to that agent via the Agent to
 | Inspect decompiled `Assembly-CSharp` for fields, enum order, method behavior | `game-decompile-analyst` |
 | Author content via the public `Content.*` API (classes, items, abilities) | `content-author` |
 | Design classes, abilities, enemies, adventures (fun, balance, tone) | `game-designer` |
-| Maintain the ninum knowledge hub | `knowledge-curator` |
 
 `ftk-architect` is an advisor and reviewer, not an implementer. Always consult it before merging a spec or non-trivial PR.
 
 When multiple independent tasks exist, launch agents in parallel in a single message.
 
-## ninum Usage
-
-Hub project: `proj_4f015453` (FTK Mod Framework).
-
-Store: verified RE findings, type-inventory deltas, gotchas about specific `FTK_*DB` fields, milestone notes, session handoffs.
-
-Prefer updating an existing entry over creating a new one. Keep entries short and factual. Agents should use ninum sparingly (only for findings worth preserving across sessions).
-
-**Local-only caveat:** ninum-knowledge is a stdio MCP subprocess on this Mac. It is not reachable from cloud or remote agent sessions. If running in a remote context, record findings in a local file and transfer them to ninum when back on the local session.
-
 ## Writing Style
 
 Never use em dashes in any file or output. Use commas, colons, semicolons, periods, or parentheses instead. This rule applies to all files, comments, commit messages, and issue bodies.
-
-## File Deletion Safety
-
-Never use `rm` or `rm -rf` to delete files. Always move to macOS Trash so the deletion is recoverable:
-
-```bash
-mv file_or_folder ~/.Trash/
-```
-
-Before deleting any untracked file or folder, ask the user first. Untracked files may contain important work that is intentionally not committed.

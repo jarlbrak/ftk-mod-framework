@@ -85,11 +85,11 @@ var classes = Content.Db<FTK_playerGameStartDB>();
 var blacksmith = classes.GetEntry(FTK_playerGameStart.ID.blacksmith);
 ```
 
-## 4. Playable classes — things to know
+## 4. Playable classes: things to know
 
 `Content.AddClass` clones an existing class's `FTK_playerGameStart` row (so you inherit a valid 3D
 model/skinset, portrait, and a sane field layout) and registers it. The character-select roster is
-DB-driven, so your class appears automatically — but mind these:
+DB-driven, so your class appears automatically, but mind these:
 
 - **It's id == array index.** Unlike other content (high-band synthetic ids), a class is registered
   with the next sequential enum value, because character-select uses the id as *both* an enum key and
@@ -98,7 +98,7 @@ DB-driven, so your class appears automatically — but mind these:
   `_fortitude` (Intelligence), `_awareness`, `_talent`, `_quickness` (Speed), `_vitality`. There is
   **no per-class Luck** (Luck is global). `_basefocus` (1–9) and `_startinggold` round it out.
 - **Difficulty** adds a flat bonus to *every* class equally (Apprentice +5, Journeyman/Master 0), so
-  one stat block is correct on all difficulties — don't try to tune per difficulty.
+  one stat block is correct on all difficulties; don't try to tune per difficulty.
 - **Availability:** keep `m_DLC = FTK_dlc.ID.None` and `m_Release = true`; add no lore-unlock entry and
   the class is unlocked + visible by default.
 - **Model/portrait:** reuse an existing `m_Skinsets` (cloned). Custom voxel models need a
@@ -125,7 +125,7 @@ public class MyZap : ProficiencyBase
 ```
 
 Gotchas (learned the hard way building the Thief's Steal):
-- A **0-damage** proficiency is auto-cancelled unless flagged `m_Harmless` — but `m_Harmless` then
+- A **0-damage** proficiency is auto-cancelled unless flagged `m_Harmless`, but `m_Harmless` then
   makes it ignore the slot roll. To make the **roll itself the gate** (so spending Focus guarantees
   it), give it a tiny chip of damage with **`m_IgnoresArmor = true`** (else armor reduces the chip to
   0 and re-blocks it).
@@ -140,10 +140,10 @@ See `Content/ThiefStealProficiency.cs` for the full worked example.
 
 `Content.AddEnemy` clones an existing enemy's `FTK_enemyCombat` row (so you inherit a valid 3D body,
 weapon, and animations) and registers it with a high-band synthetic id. Unlike classes, enemies are
-**not** id == array index — every enemy lookup is dictionary/string-based, and selection round-trips the
+**not** id == array index: every enemy lookup is dictionary/string-based, and selection round-trips the
 id through its decimal string over Photon. After registering, `AddEnemy` flips
 `GameCache.Enemies.NeedsRebuild` so the game's level-bucketed spawn pool re-reads the DB and your enemy
-becomes eligible for ordinary overworld/dungeon fights — **no spawn-selection patch needed.**
+becomes eligible for ordinary overworld/dungeon fights: **no spawn-selection patch needed.**
 
 ```csharp
 FTK_enemyCombat cutpurse = Content.AddEnemy(
@@ -170,12 +170,12 @@ Things that matter:
 - **It must pass the spawn-pool filter or it's silently dropped:** clone a template that is **not a boss,
   not a scourge, and not in `FTK_enemyScaleDB`**, and keep its `m_EnemyAsset` non-null.
 - **`m_EnemyAsset`** (a `CharacterEventListener`) is the 3D body and **`m_WeaponAsset`** (a `Weapon`
-  component) carries the attacks — both are reference fields, so cloning reuses them and the enemy renders
+  component) carries the attacks; both are reference fields, so cloning reuses them and the enemy renders
   and fights for free. `m_ArchType` is only a *stat* archetype, not the model.
 - **Abilities:** `AttachEnemyProficiencies` instantiates a private copy of `m_WeaponAsset`, adds your
   proficiency, strips any `AttackSchedule` (so the RNG attack path can pick it), and `SaveState()`s it.
   Set `m_ChanceToProf > 0` so the AI actually fires it. A custom `ProficiencyBase` behaviour (§5) works
-  when the enemy is the attacker — guard any shared-state mutation (gold, etc.) with
+  when the enemy is the attacker; guard any shared-state mutation (gold, etc.) with
   `PhotonNetwork.isMasterClient` so co-op applies it once.
 - **Spawn gating:** `m_EnemyLevel` (which bucket), `m_Rarity` (draw weight), `m_SpawnDay/Night/Land/Water/Dungeon`,
   and `m_RealmInclude`/`m_RealmExclude` decide *where/when* it appears. Cloning a template that already
@@ -192,7 +192,7 @@ See `Content/CutpurseEnemy.cs` (+ `Content/CutpurseStealProficiency.cs`) for the
 
 > Design reference + the full how-it-works: [`ADVENTURES.md`](ADVENTURES.md).
 
-A whole **adventure / game-mode** is not a DB row — it's a `GameDefinition` deserialized from a
+A whole **adventure / game-mode** is not a DB row: it's a `GameDefinition` deserialized from a
 `.ftk2` JSON file in the game's `StreamingAssets/mods`. `Adventures.AddFromTemplate` clones one of the
 player's *installed* adventures at runtime (so it ships no game content), retunes a few JSON fields, and
 registers it. The one required Harmony patch whitelists the name through `FTKHub.IsValidSaveFileName`
@@ -213,8 +213,8 @@ Adventures.AddFromTemplate(
 
 A new **overworld encounter/event** *is* a DB row (`FTK_miniEncounterDB`), so it injects with the same
 clone-register pattern as items. The selector (`GameLogic.GetMiniEncounter`) walks the whole table and
-weight-rolls every eligible row, so a freshly registered one is automatically a candidate — no generator
-patch. An empty `m_RealmInclude` means "every realm"; `m_Rarity` reuses an existing draw-chance bucket
+weight-rolls every eligible row, so a freshly registered one is automatically a candidate (no generator
+patch needed). An empty `m_RealmInclude` means "every realm"; `m_Rarity` reuses an existing draw-chance bucket
 (`Common`/`Uncommon`/`Rare`/`SuperRare`); display strings show verbatim (the game's text lookup returns
 the key itself when it has no row).
 
@@ -229,21 +229,21 @@ Content.AddEncounter("com.you.mymod", "mymod_cache", FTK_miniEncounter.ID.Treasu
 
 ## 8. How it works (why it's safe)
 
-- **IDs** — the `FTK_*.ID` enums are compile-time fixed. `IdAllocator` mints a deterministic
+- **IDs**: the `FTK_*.ID` enums are compile-time fixed. `IdAllocator` mints a deterministic
   synthetic int per `(modGuid, contentKey)` in a high band (`0x40000000+`), identical on every
-  machine — so saves and co-op stay in sync. `DbLookupPatcher` + the `GetEnum` prefixes make the
+  machine, so saves and co-op stay in sync. `DbLookupPatcher` + the `GetEnum` prefixes make the
   game's lookups resolve those synthetic ids.
-- **Names & text** — `Localization` patches the game's text lookups (item/weapon `GetLocalizedName`,
+- **Names & text**: `Localization` patches the game's text lookups (item/weapon `GetLocalizedName`,
   proficiency `GetLocalizedDisplayName`/`DisplayTitle`, class `GetDisplayName`, class flavor, enemy
   `GetEnemyDisplay`/`GetEnemyDescription`, and proficiency tooltip descriptions) to return what you
-  registered — the game otherwise reads from Google2u text tables it doesn't have entries for.
-- **Routing** — a patch on `FTK_itembase.GetItemBase` keeps custom items resolvable despite the
+  registered; the game otherwise reads from Google2u text tables it doesn't have entries for.
+- **Routing**: a patch on `FTK_itembase.GetItemBase` keeps custom items resolvable despite the
   `id >= 100000 -> weapon DB` rule.
-- **Save-safety** — the framework sets `FullSerializer.fsConfig.SerializeEnumsAsInteger = true`.
+- **Save-safety**: the framework sets `FullSerializer.fsConfig.SerializeEnumsAsInteger = true`.
 
 ## 9. Multiplayer
 
-Co-op is Photon and has **no asset streaming** — every player must have the same mods installed.
+Co-op is Photon and has **no asset streaming**: every player must have the same mods installed.
 Synthetic IDs are deterministic precisely so host/client agree on what each id means.
 
 ## 10. The in-game Mods menu: toggling, saves, and co-op

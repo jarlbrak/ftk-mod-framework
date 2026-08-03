@@ -2,18 +2,19 @@
 
 Five content goals → classes, items, combat actions, enemies, adventures, plus FTK2-inspired ports.
 Strategy: a generic DB-injection core with a typed `Content.AddX` helper per content kind on top.
-(Classes — Phase 4 — shipped ahead of enemies; enemies/adventures are the remaining gaps.)
+(All five goals now work and are verified in-game solo; co-op verification of adventures and the
+FTK2 ports are the active fronts.)
 
 | Phase | Goal | Key work | Status |
 |---|---|---|---|
 | **0. Recon** ✅ | Ground every unknown | Decompile `Assembly-CSharp`; map all `FTK_*DB` tables incl. enemies/adventures | done (`docs/PHASE0-TYPE-INVENTORY.md`) |
 | **1. Core** ✅ | Generic injection engine | `ContentRegistry`, `IdAllocator`, `DbLookupPatcher`, `TableManager.Initialize` hook | done, verified in-game |
-| **2. Items + actions** ✅ | Goals 2 & 3 | `Content.AddItem`/`AddWeapon`/`AddProficiency`/`AttachProficiencies`; `EnumPatches` + `DbLookupPatcher` + `GetItemBase` routing; `Localization` (names + tooltips) | done — custom weapon casts a custom ability in-game |
-| **4. Classes** ✅ | Goal 1 | `Content.AddClass` (id == array index); reused skinset; character skills; class-name + flavor patches; custom `ProficiencyBase` behaviours | done — the **Thief** (stats, dagger, Backstab/Sinister Strike/Eviscerate, Focus-guaranteeable Steal) |
-| **3. Enemies** ✅ | Goal 4 | `Content.AddEnemy`/`AttachEnemyProficiencies` over `FTK_enemyCombatDB`; `GameCache.Enemies.NeedsRebuild` spawn injection (no selection patch); `FTK_enemyCombat.GetEnum` + enemy-name patches; `m_ChanceToProf` AI; master-guarded ability behaviour | done — the **Cutpurse** (custom stats, a gold-stealing Pilfer, custom loot; spawns + fights + drops in real combat) |
-| **5. Adventures** 🟡 | Goal 5 (hardest) | `Content.AddEncounter` (inject `FTK_miniEncounterDB` rows) + `Adventures.AddFromTemplate` (clone a `.ftk2` `GameDefinition` at runtime, whitelist via `IsValidSaveFileName` patch); `CanUseClass` char-create guard | slices B+C done — **"Smuggler's Run"** selectable + plays solo (verified); full custom realm/boss + co-op next |
-| **6. FTK2 ports** | Inspiration | FTK2 passives/status-effects/summons as data-driven traits (Groups A→C); recreate art originally | backlog |
-| **Custom 3D models** | (cross-cutting) | Skinset/voxel art pipeline (Unity 2017.2.2 AssetBundles); current classes reuse existing skinsets | not started |
+| **2. Items + actions** ✅ | Goals 2 & 3 | `Content.AddItem`/`AddWeapon`/`AddProficiency`/`AttachProficiencies`; `EnumPatches` + `DbLookupPatcher` + `GetItemBase` routing; `Localization` (names + tooltips) | done: custom weapon casts a custom ability in-game |
+| **4. Classes** ✅ | Goal 1 | `Content.AddClass` (id == array index); reused skinset; character skills; class-name + flavor patches; custom `ProficiencyBase` behaviours | done: the **Thief** (stats, dagger, Backstab/Sinister Strike/Eviscerate, Focus-guaranteeable Steal) |
+| **3. Enemies** ✅ | Goal 4 | `Content.AddEnemy`/`AttachEnemyProficiencies` over `FTK_enemyCombatDB`; `GameCache.Enemies.NeedsRebuild` spawn injection (no selection patch); `FTK_enemyCombat.GetEnum` + enemy-name patches; `m_ChanceToProf` AI; master-guarded ability behaviour | done: the **Cutpurse** (custom stats, a gold-stealing Pilfer, custom loot; spawns + fights + drops in real combat) |
+| **5. Adventures** 🟡 | Goal 5 (hardest) | `Content.AddEncounter` (inject `FTK_miniEncounterDB` rows) + `Adventures.AddFromTemplate` (clone a `.ftk2` `GameDefinition` at runtime, whitelist via `IsValidSaveFileName` patch); `AddCampaignFromTemplate` (branching questlines, flags, custom verbs; `docs/CAMPAIGNS.md`); `CanUseClass` char-create guard | D1 done (solo, verified): cloned **"Smuggler's Run"** plays; the bespoke realm + boss **"The Hollow Mire"** plays to victory (driven by the agent harness). D2 next: 2-client co-op parity + save round-trip |
+| **6. FTK2 ports** 🟡 | Inspiration | FTK2 passives/status-effects/summons as data-driven traits (Groups A→C); recreate art originally | in progress: passive traits shipped (`Content.AddPassive`, trigger patches, the **Innkeeper** sample); combat status effects next (spec #85, epic #77) |
+| **Custom 3D models** 🟡 | (cross-cutting) | Enemy model pipeline (runtime glTF + Unity 2017.2.2 AssetBundles, `docs/CUSTOM-MODELS.md`); skinset pipeline for classes | enemy path shipped + verified (the Hollow Mire boss renders a custom glTF body); class/skinset pipeline still open (epic #65) |
 
 ### Cross-cutting (touches every phase)
 - **Determinism / saves / co-op:** synthetic ids stable across machines (`IdAllocator`); set
@@ -22,19 +23,20 @@ Strategy: a generic DB-injection core with a typed `Content.AddX` helper per con
 - **FTK2 legal:** reference-only; never redistribute FTK2 art/JSON. Recreate originally.
 
 ### Lessons banked
-- **Classes need id == array index** (sequential), not the high-band synthetic id — character-select uses the id as
+- **Classes need id == array index** (sequential), not the high-band synthetic id; character-select uses the id as
   both an enum key and an array index. `ContentRegistry.Register(..., explicitId)` handles this.
-- **Difficulty applies a flat `m_StatBonus` to every class equally** (Low/Apprentice +5, Medium 0, High/Master 0) —
+- **Difficulty applies a flat `m_StatBonus` to every class equally** (Low/Apprentice +5, Medium 0, High/Master 0):
   there is no per-class per-difficulty table, so one stat block per class is correct everywhere.
 - **Custom combat behaviour** = subclass `ProficiencyBase`, override `AddToDummy`, set it as the row's
   `m_ProficiencyPrefab`. 0-damage hits are auto-cancelled unless `m_Harmless` (which then ignores the roll); to make
   the *roll* the gate, use a tiny `m_IgnoresArmor` chip instead.
 
 ### Remaining risks
-1. Enemy/adventure DB enums: verify synthetic-int tolerance per DB (proven for items/profs/classes).
-2. Status-effect duration encoding (likely on the `FTK_hitEffect` prefab) — needs a trace.
-3. Custom 3D voxel models may need IronOak's rig/avatar conventions.
-4. Adventure/world generation is the least-mapped system — scope to a realm/encounter variant first.
+1. 2-client co-op for custom adventures/campaigns is designed-for but unverified: the overworld
+   map-sync mechanism and a host/client mod-set parity check are open (Adventures Slice D2).
+2. Status-effect duration encoding (likely on the `FTK_hitEffect` prefab): needs a trace (spec #85).
+3. Custom 3D models for playable classes (skinsets) may need IronOak's rig/avatar conventions;
+   the enemy-model path is solved.
 
 Architecture, the capability matrix, and the FTK2-ports backlog are tracked as epics and specs in
 [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues).

@@ -81,7 +81,7 @@ the FSM state `"Wait For Stance"` (the authoritative readiness gate).
 ### In-dungeon combat and true-victory (verified findings)
 
 Driving the boss-in-crypt design to a real victory required solving three
-decompile-verified gates (full RE in ninum `kb_c5ca36f8`, `kb_d8b843fd`):
+decompile-verified gates:
 
 1. **Start the fight with the right mechanism.** Inside a `MiniHexDungeon`, the
    overworld `engage` path (`GameFlow.LocalInitCombatSession`) builds an
@@ -111,7 +111,7 @@ depend on it.
 ## Install
 
 ```bash
-cd /Users/tbrack/Documents/Projects/FTK/harness
+cd harness
 python3 -m pip install -r requirements.txt   # only the mcp SDK; HTTP is stdlib
 ```
 
@@ -154,7 +154,7 @@ playthrough to victory.
 ### 0. Build and deploy the framework DLL
 
 ```bash
-cd /Users/tbrack/Documents/Projects/FTK/FTKModFramework
+cd FTKModFramework
 dotnet build -c Release
 # copy bin/Release/net35/FTKModFramework.dll into <game>/BepInEx/plugins/
 ```
