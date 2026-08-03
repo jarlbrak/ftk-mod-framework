@@ -173,7 +173,7 @@ namespace FTKModFramework.Core
     /// (<c>ConsumableBase.UseItemBuff</c> / <c>OrbItemBase.UsePartyBuffOrb</c> -> this RPC). For a target whose
     /// class resolves a ConsumableDebuff passive it strips the vanilla drink downsides from the applied prof array;
     /// buffs still land, and enemy attacks are untouched (they flow through DummyDamageInfo -> RespondToHit ->
-    /// AddProfToDummy, never CombatPartyBuff, per ninum kb_7e48c334).
+    /// AddProfToDummy, never CombatPartyBuff; decompile-verified).
     /// <para>
     /// Shape rationale (grounded in the decompiled body): CombatPartyBuff applies the SAME <c>_prof</c> array to
     /// every target in <c>_group</c> (a plain per-target loop: <c>GetDummyByFID(_group[i]).AddProfToDummy(_prof,
@@ -192,7 +192,7 @@ namespace FTKModFramework.Core
     {
         // The vanilla drink downsides a ConsumableDebuff holder negates. Source: the hardcoded ConsumableBase.OnUse set
         // (conMeadPoison / conMushroomPoison apply enPoison1; conRum applies enConfuse), the ONLY harmful ids any
-        // consumable routes through CombatPartyBuff. Verified in ninum kb_7e48c334. Enemy attacks carry these same
+        // consumable routes through CombatPartyBuff (decompile-verified). Enemy attacks carry these same
         // ids down the DummyDamageInfo path, which this patch never touches.
         private static readonly FTK_proficiencyTable.ID[] HarmfulDrinkIds =
         {

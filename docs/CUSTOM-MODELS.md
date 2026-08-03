@@ -37,8 +37,8 @@ AssetBundle, no Unity 2017 editor, no license activation.
 
 ### The non-standard glb contract
 
-This loader is paired with the mod's own exporter (`tools/ai-model-pipeline/05b_rig_numpy.py`), NOT a
-general glTF reader. The `.glb`:
+This loader consumes a purpose-built `.glb`, NOT arbitrary glTF: no general-purpose exporter emits
+this shape, so whatever tooling you use must write to the contract below. The `.glb`:
 
 - stores vertex POSITIONs **already in Unity mesh-local space** (no axis/handedness conversion on read);
 - is keyed to the live skeleton by **bone NAME**: each per-vertex `JOINTS_0` slot indexes `skins[0].joints`,
@@ -50,16 +50,20 @@ general glTF reader. The `.glb`:
 
 ### Author the mesh (editor-free pipeline)
 
-`tools/ai-model-pipeline/` runs end to end on macOS/Linux with Blender + a Python venv, no Unity:
+The reference pipeline runs end to end on macOS/Linux with Blender + a Python venv, no Unity.
+(The scripts are not yet shipped in this repo; that is tracked as issue #98 under epic #65. Until
+then, the steps below describe what any equivalent tooling must do.)
 
-1. `04b_extract_troll_skinned.py` (UnityPy) extracts the vanilla `enTroll01` skinned mesh + 37-bone
-   skeleton + bind poses from the game's `resources.assets` into `troll_skinned.npz` / `troll_skel.json`.
+1. Extract the vanilla creature's skinned mesh, skeleton (37 bones for the cave troll), and bind
+   poses from the game's `resources.assets`. UnityPy reads these without a Unity editor; never
+   redistribute the extracted assets themselves.
 2. Decimate your AI/source mesh in headless Blender (geometry only) to a Unity-1.0 budget (`< 65k` verts).
-3. `05b_rig_numpy.py` (numpy, all in Unity coordinates) aligns the mesh into the troll's mesh-local space,
-   transfers skin weights from the vanilla troll by nearest surface, optionally welds + smooths + poses the
-   arms, and writes the rigged `.glb` keyed by the 37 bone names. `--rigid <bone>` weights everything to one
-   bone (a stable prop that cannot deform-spike, good for a stone golem with mismatched proportions);
-   `--posearms <deg>` drops the T-pose arms to the sides.
+3. Rig and export with numpy, all in Unity coordinates: align the mesh into the vanilla creature's
+   mesh-local space, transfer skin weights from the vanilla mesh by nearest surface, optionally weld +
+   smooth + pose the arms, and write the rigged `.glb` keyed by the vanilla bone names. Two useful
+   variants: weighting everything to a single bone gives a stable prop that cannot deform-spike (good
+   for a stone golem with mismatched proportions), and a small arm rotation drops the T-pose arms to
+   the sides.
 
 ### Wire it up
 

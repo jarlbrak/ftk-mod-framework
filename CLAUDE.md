@@ -6,7 +6,7 @@ This is the operating guide for Claude Code in the FTK repo. If it conflicts wit
 
 FTK Mod Framework is a content-modding framework for **For The King** (IronOak, 2018), built on BepInEx 5 + HarmonyX. It lets modders add classes, items, combat actions, enemies, and adventures through a clean, save-safe, multiplayer-deterministic API. It also serves as the base for porting *For The King II* class/ability ideas back into the original game.
 
-The decompiled `Assembly-CSharp` is the **only correctness authority.** Do not trust old AI summaries, the README, or this file over the actual game types. Verify exact fields, enum values, and enum order via the `game-decompile-analyst` agent or the `/decompile-lookup` skill before implementing anything that touches game data.
+The decompiled `Assembly-CSharp` is the **only correctness authority.** Do not trust old AI summaries, the README, or this file over the actual game types. Verify exact fields, enum values, and enum order against the decompiled `Assembly-CSharp` before implementing anything that touches game data.
 
 | Thing | Value |
 |---|---|
@@ -44,7 +44,7 @@ ls "$HOME/Library/Application Support/Steam/steamapps/common/For The King/FTK.ap
 Every implementation slice must follow this sequence:
 
 1. Pick a real documented gap: an open GitHub issue.
-2. Locate the exact game type(s) via `game-decompile-analyst` (read the decompiled `Assembly-CSharp`, not summaries).
+2. Locate the exact game type(s) in the decompiled `Assembly-CSharp` (read the source, not summaries).
 3. Compare the existing `Core/` and `Content/` code against what the game types actually require.
 4. Implement the smallest faithful change that fills the gap: clone the right `FTK_*DB` row and register it via `ContentRegistry`.
 5. Build: `cd FTKModFramework && dotnet build -c Release`. Fix any errors before proceeding.
@@ -113,25 +113,7 @@ Work is tracked as a three-level hierarchy:
 - **Spec** (`spec` label): a scoped deliverable under an epic, with acceptance criteria.
 - **Work Item** (`work-item` label): a concrete implementation task under a spec.
 
-Skills for managing the hierarchy: `/create-epic`, `/create-spec`, `/create-workitem`, `/complete-workitems`, `/validate-spec`, `/validate-epic`.
-
-Other labels in use: `bug`, `RE`, `class`, `item`, `ability`, `enemy`, `adventure`, `ftk2-port`, `infra`, `docs`. Routing and state labels (used by the workflow skills): `core` and `content` (which code area), `remediation` (a fix work item from validation), `design-needed` (needs a game-designer brief first).
-
-## Subagent-First Rule
-
-When a task matches a specialized agent, delegate to that agent via the Agent tool. Do not perform the work inline. Exceptions: single-line or trivial fixes, reading code to answer a question, running commands.
-
-| Task | Required agent |
-|---|---|
-| Review specs, PRs, or work items for correctness and simplicity | `ftk-architect` |
-| Framework internals: BepInEx/Harmony, `Core/`, `ContentRegistry`, `IdAllocator`, patchers | `csharp-harmony-engineer` |
-| Inspect decompiled `Assembly-CSharp` for fields, enum order, method behavior | `game-decompile-analyst` |
-| Author content via the public `Content.*` API (classes, items, abilities) | `content-author` |
-| Design classes, abilities, enemies, adventures (fun, balance, tone) | `game-designer` |
-
-`ftk-architect` is an advisor and reviewer, not an implementer. Always consult it before merging a spec or non-trivial PR.
-
-When multiple independent tasks exist, launch agents in parallel in a single message.
+Other labels in use: `bug`, `RE`, `class`, `item`, `ability`, `enemy`, `adventure`, `ftk2-port`, `infra`, `docs`. Routing and state labels: `core` and `content` (which code area), `remediation` (a fix work item from validation), `design-needed` (needs a design brief first).
 
 ## Writing Style
 
