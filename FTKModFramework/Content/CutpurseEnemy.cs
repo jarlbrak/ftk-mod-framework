@@ -78,7 +78,7 @@ namespace FTKModFramework
         /// actually IN the level-bucketed spawn pool (the load-bearing spawn-injection claim), exposes its
         /// Pilfer action on its weapon (via the game's own instantiate path), and carries custom loot.
         ///
-        /// ROBUSTNESS (kb_7c3a82a3): this runs in the TableManager.Initialize postfix at plugin load, BEFORE
+        /// ROBUSTNESS: this runs in the TableManager.Initialize postfix at plugin load, BEFORE
         /// every GridEditor DB child prefab is guaranteed instantiated/hydrated. The deterministic content
         /// checks (id, name, not-boss, model, loot) only need the enemyCombat DB we just registered into, so
         /// they always run. The ENVIRONMENT-dependent checks (enemy-scale lookup, forced spawn-pool rebuild,

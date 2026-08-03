@@ -14,7 +14,7 @@ namespace FTKModFramework.Core
     /// such as <c>IsLastQuestOfStage</c>/<c>m_NextStoryQuestID</c>); it computes the chain itself from
     /// declaration order, exactly the way the game would build it.
     ///
-    /// CHECKS (decompile-grounded against kb_50d90b0e / kb_dfc6bd89):
+    /// CHECKS (decompile-grounded):
     /// <list type="number">
     /// <item>Duplicate <c>m_StoryQuestID</c> across all stages -> ERROR. (The game keys m_QuestLookup by this
     /// string; a duplicate silently collapses two quests onto one chain node.)</item>

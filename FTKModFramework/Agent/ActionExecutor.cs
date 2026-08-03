@@ -308,7 +308,7 @@ namespace FTKModFramework.Agent
         // ============================================================ engage ===========================
 
         /// <summary>
-        /// Deterministically enter an overworld combat (Option A from kb_b834abf4). The move_to path bypasses
+        /// Deterministically enter an overworld combat. The move_to path bypasses
         /// the encounter trigger because a single direct MoveTo(goal,0,1,true) hop skips the per-hex FSM rolls.
         /// engage instead walks the party ONTO an ADJACENT enemy hex in Attack mode, then calls the verified
         /// managed terminus GameFlow.LocalInitCombatSession("fight", new ContinueFSM(noop)). Combat does not go
@@ -1080,7 +1080,7 @@ namespace FTKModFramework.Agent
 
         /// <summary>
         /// Low-level manual fallback for taking a hero turn. RETIRED as the win path in favour of
-        /// auto_combat_turn (kb_62f31d88): calling DamageCalculator.StartEngageAttack DIRECTLY only plays the
+        /// auto_combat_turn: calling DamageCalculator.StartEngageAttack DIRECTLY only plays the
         /// attack sequence and does NOT advance the dummy turn-commit FSM, so the turn never ends. The real
         /// commit must route through SlotControl.ComputeAttackSlotResults(cow,true), which drives the FSM and
         /// ends the turn. This method therefore (1) optionally selects a target, then (2) commits via the

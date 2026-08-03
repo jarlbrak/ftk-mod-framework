@@ -358,7 +358,7 @@ namespace FTKModFramework.Core.Data
         /// reference, not one of the five content-id enum fields), so they must never go through Split's
         /// base/reference partition.
         ///
-        /// Timing (decompile-grounded, ninum kb_4f8b6299): ProficiencyManager.Start does
+        /// Timing (decompile-grounded): ProficiencyManager.Start does
         /// <c>Instantiate(row.m_ProficiencyPrefab); .Init(id); cache[id]=clone</c> ONCE, in a combat scene
         /// AFTER TableManager.Initialize (where this loader runs). So setting the prefab here is correctly
         /// BEFORE Start, the same timing the compiled Thief already relies on. There is NO rebuild API, so a
@@ -413,7 +413,7 @@ namespace FTKModFramework.Core.Data
             }
 
             // Seed the hosted instance's resting category from behaviorCategory, if authored. A runtime
-            // AddComponent instance has empty serialized state (ninum kb_4f8b6299), so m_Category MUST be set
+            // AddComponent instance has empty serialized state (decompile-verified), so m_Category MUST be set
             // imperatively here; otherwise it stays the default. An unknown name warns and leaves the default.
             if (!IsBlank(c.Entry.BehaviorCategory))
             {
@@ -511,7 +511,7 @@ namespace FTKModFramework.Core.Data
         /// in-assembly demo behaviour is registered and that the JSON-authored <c>sampledata_steal</c>
         /// proficiency resolved it into a hosted prefab with the authored category, and that the steal is
         /// attached to the Shadowfang dagger. Every assertion is LOAD-time verifiable and decompile-grounded
-        /// (m_ProficiencyPrefab / m_Category, ninum kb_4f8b6299). No-op when the sampledata mod is absent
+        /// (m_ProficiencyPrefab / m_Category). No-op when the sampledata mod is absent
         /// (mirrors EmitParitySelfTest), so a non-sampledata load never FAILs it.
         /// </summary>
         private static void EmitBehaviorSelfTest(List<Cached> cached)

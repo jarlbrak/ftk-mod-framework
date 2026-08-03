@@ -9,14 +9,14 @@ namespace FTKModFramework.Core
     /// points. Branch rules + on-complete flag ops live in the framework <see cref="BranchSidecar"/> keyed by the
     /// just-completed quest's STRING <c>QuestDefBase.m_StoryQuestID</c> (NEVER inside <c>QuestDefBase</c>).
     ///
-    /// POSTFIX, NOT PREFIX (decompile-grounded, kb_50d90b0e): <c>GetNextQuest</c>'s only in-method side effect is
+    /// POSTFIX, NOT PREFIX (decompile-grounded): <c>GetNextQuest</c>'s only in-method side effect is
     /// <c>FTKGameStats.Inst.m_QuestTaken++</c>, a write-only analytics counter read nowhere in gameplay. A Postfix
     /// runs AFTER the single original call and only reads <c>__instance.StoryQuestID</c> + overwrites
     /// <c>ref __result</c>; it never re-enters the method, so the counter increments EXACTLY ONCE. A Prefix
     /// returning false that substituted the result would either skip or (via a re-invoke) double-count it, and the
     /// method has no try/catch.
     ///
-    /// EXACTLY-ONCE CADENCE (kb_50d90b0e #5): <c>GetNextQuest</c> has a single call site
+    /// EXACTLY-ONCE CADENCE (decompile-grounded): <c>GetNextQuest</c> has a single call site
     /// (<c>GameEventManager._advanceStoryQuest</c>), itself called once per quest completion by the FSM-driven
     /// <c>GetNextStoryQuest</c>. There are no speculative/loop calls, so this Postfix fires exactly once per real
     /// advance. THAT is what makes applying the just-completed quest's on-complete <see cref="FlagOp"/>s INCLUDING
@@ -28,7 +28,7 @@ namespace FTKModFramework.Core
     /// the single call site, and it has no shared static mutable state of its own. The patch CLASS is installed
     /// exactly once via the plugin's single <c>Harmony.PatchAll()</c>.
     ///
-    /// HOST-ONLY + FREE CLIENT SYNC (kb_50d90b0e #3): the advance chain is host-gated; after advancing,
+    /// HOST-ONLY + FREE CLIENT SYNC (decompile-grounded): the advance chain is host-gated; after advancing,
     /// <c>SyncProgress</c> -&gt; <c>SyncProgressRPC</c> pushes the resulting <c>m_StoryQuestID</c> string to
     /// clients (clients do NOT recompute <c>GetNextQuest</c>). So the body is guarded on
     /// <c>PhotonNetwork.isMasterClient</c> and the redirect syncs for free.

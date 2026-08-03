@@ -64,7 +64,7 @@ namespace FTKModFramework.Agent
     //   is uiStoryIntroCycle.Next() (public, no args) -> close callback -> FSM "Continue" -> StartGame.
     // - In-world: uiStartGame.m_GameStarted && FTKHub.Instance.m_CharacterOverworlds populated (COW.m_HexLand).
     //
-    // RE NOTE (COW-creation fix, re-verified via ilspycmd Jun 2026; see ninum kb_7a612756):
+    // RE NOTE (COW-creation fix, re-verified via ilspycmd Jun 2026):
     // - uiQuickPlayerCreate.m_PhotonID DEFAULTS TO -1 (the create-UI ctor sets m_PhotonID = -1). It is only set
     //   to a real id by AssignPhotonID(int,AssignDevice.Type,int,bool) -> AssignPhotonIDRPC, which the game runs
     //   exactly once, inside uiStartGame.WaitUntilPanningFinished (SP branch:

@@ -19,7 +19,7 @@ namespace FTKModFramework
     /// m_RealmStages decimal-string KEY: "SELF-TEST PASS [realm-spike]"), so the BESPOKE-realm path is in use; no
     /// fallback realm is needed.
     ///
-    /// THEME (game-designer + game-decompile-analyst brief, this session): the realm "The Hollow Mire" is a
+    /// THEME: the realm "The Hollow Mire" is a
     /// drowned-worksite poison bog cloned from PoisonBog; the boss "Mudwretch Foreman" is the foreman who kept
     /// the work going after the bog took the crew. Names/flavor display verbatim (literal strings; the game's
     /// Localized&lt;T&gt; passes an unknown key straight through, and the framework's Localization postfixes
