@@ -16,7 +16,7 @@ table like items/classes/encounters are. It is a **`GameDefinition`** object **d
   raw JSON in `m_FullFileData`), and stores them in `_previews[m_SaveFileName]`. The stock adventures
   ship as editable `.ftk2` files on disk (e.g. `DungeonCrawl.ftk2`).
 - **Selection UI.** `StartGameFE.GameConfig.Show()` lists `Cache.GameDefinitions.GetNames()`, but gates
-  each name through one **hardcoded whitelist** — `FTKHub.IsValidSaveFileName` — so an unknown name is
+  each name through one **hardcoded whitelist** (`FTKHub.IsValidSaveFileName`), so an unknown name is
   silently dropped. The list is string-keyed and ordered by `m_SelectionPriority`; there is **no**
   id==array-index constraint (unlike playable classes).
 - **Starting a run.** On start, `GetNewGameDefInstance()` re-deserializes the full `GameDefinition` from
@@ -27,12 +27,12 @@ table like items/classes/encounters are. It is a **`GameDefinition`** object **d
   branch** in the core loop, so a new adventure built from existing realms needs no generator patch.
 - **Win condition** is per-`GameDefinition` data: completing the last quest of the last stage fires the
   victory path; `m_EndGameAfterLastQuest` / `m_EndGameOnFullChaos` decide the end. No dedicated
-  final-boss enum — the final boss is whatever enemy that last quest points at.
+  final-boss enum: the final boss is whatever enemy that last quest points at.
 - **Saves & co-op.** A save stores the adventure as the **string** `m_GameDefinition` (= `m_SaveFileName`),
   so adding a new adventure can't collide with or shift any enum ids (low save risk). Co-op carries only
   `[map seed, gamedef-name string, difficulty, rules]` from host to clients; the adventure must exist
   on every client (the engine only checks a version string, not a content hash). Resuming a custom-
-  adventure save without the mod throws — the run is unloadable until the mod is reinstalled (not corrupt).
+  adventure save without the mod throws: the run is unloadable until the mod is reinstalled (not corrupt).
 
 ## How the framework adds one
 
@@ -67,13 +67,13 @@ Adventures.AddFromTemplate(
 
 An overworld encounter/event **is** a GE row (`FTK_miniEncounterDB`), so it injects with the normal
 clone-register path. `GameLogic.GetMiniEncounter` walks the whole table each spawn turn and weight-rolls
-every eligible row, so a registered row is automatically a candidate — no generator patch.
+every eligible row, so a registered row is automatically a candidate (no generator patch needed).
 
 - Empty `m_RealmInclude` ⇒ eligible in every realm; `m_RealmExclude` to subtract.
-- `m_Rarity` is a string key into `FTK_encounterDrawChanceDB` — reuse `Common`/`Uncommon`/`Rare`/`SuperRare`
+- `m_Rarity` is a string key into `FTK_encounterDrawChanceDB`: reuse `Common`/`Uncommon`/`Rare`/`SuperRare`
   (measured weights `1 / 0.5 / 0.25 / 0.1`); no new draw-chance row needed.
 - `m_DisplayName`/`m_DisplayTop`/`m_DisplayBottom` show verbatim (same key-passthrough as above).
-- Selection is host-authoritative and replicated by RPC, so all clients agree — but every client must
+- Selection is host-authoritative and replicated by RPC, so all clients agree, but every client must
   have the row under the same synthetic id (the framework's `IdAllocator` guarantees this).
 
 ```csharp

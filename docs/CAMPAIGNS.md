@@ -85,9 +85,9 @@ stage. Quest keys (`m_StoryQuestID`) must be globally unique.
 
 ### Branch conditions and flag ops (closed, non-DSL)
 
-Two small, disjoint, **closed** operator vocabularies — there is deliberately no expression language:
+Two small, disjoint, **closed** operator vocabularies; there is deliberately no expression language:
 
-- `BranchCondition.Op` (comparison): `eq` / `ne` / `ge` / `le`. (`gt`/`lt` are intentionally omitted —
+- `BranchCondition.Op` (comparison): `eq` / `ne` / `ge` / `le`. (`gt`/`lt` are intentionally omitted;
   express strictly-greater/less via `ge`/`le` on the adjacent integer.)
 - `FlagOp.Op` (mutation): `set` / `add`.
 
@@ -132,9 +132,9 @@ any vanilla quest even when the flag is on (they act only on `ModQuestDef`s / qu
 
 ## Known limitation: resume-without-mod (NFR-5)
 
-Resuming a custom-campaign save **without the authoring mod installed** throws on `GetPreview` — the same
+Resuming a custom-campaign save **without the authoring mod installed** throws on `GetPreview`, the same
 limitation custom adventures already have (see [`ADVENTURES.md`](ADVENTURES.md)). The framework does **not**
-attempt graceful degradation: the run is unloadable until the mod is reinstalled (it is not corrupt — reinstall
+attempt graceful degradation: the run is unloadable until the mod is reinstalled (it is not corrupt; reinstall
 the mod and the save loads). This is honest scope, not a bug; a host/client mod-parity check is deferred
 with co-op verification.
 

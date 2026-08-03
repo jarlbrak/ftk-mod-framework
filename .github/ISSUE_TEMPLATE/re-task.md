@@ -23,7 +23,7 @@ assignees: jarlbrak
 
 _Not yet investigated._
 
-## ninum Entry to Record
+## Where to Record the Findings
 
-<!-- Which ninum-knowledge entry (project proj_4f015453) should be updated or created with these findings?
-     Include the entry title or ID if it already exists. -->
+<!-- Which docs/ file (or code comment near the affected patch) should capture the verified findings,
+     so the next person does not have to re-derive them from the decompile? -->
