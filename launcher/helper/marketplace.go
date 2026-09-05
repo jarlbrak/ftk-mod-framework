@@ -308,7 +308,9 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 		if l.Packages == nil {
 			l.Packages = []marketPackage{}
 		}
-		return &marketSnapshot{id, filepath.Join(r.StateRoot, "generations", id, "content"), l.Packages}, nil
+		cachedScreenshots := marketCatalog{SchemaVersion: 1, Packages: l.Packages}
+		marketScreenshots(&cachedScreenshots, r, true)
+		return &marketSnapshot{id, filepath.Join(r.StateRoot, "generations", id, "content"), cachedScreenshots.Packages}, nil
 	}
 	out.Active, e = snapshot(state.Current)
 	if e != nil {
@@ -336,6 +338,9 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 		if e != nil {
 			return out, e
 		}
+		selectedGallery := marketCatalog{SchemaVersion: 1, Packages: selected}
+		marketScreenshots(&selectedGallery, r, true)
+		out.Packages = selected
 		out.Plan = marketMakePlan(out.Active, selected, r.Selection)
 		type revisionPackage struct {
 			Dependencies []marketDependency

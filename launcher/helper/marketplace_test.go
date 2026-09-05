@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"image"
+	"image/png"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -568,5 +570,61 @@ func TestMarketplaceCatalogStateMessages(t *testing.T) {
 	marketCatalogStatus(&out, cat, false)
 	if out.Status != "empty" {
 		t.Fatal("online empty catalog conflated with unavailable", out)
+	}
+}
+func TestMarketplacePlanExposesResolvedSelection(t *testing.T) {
+	r, a, _ := marketFixture(t)
+	b := a
+	b.PackageID = "community.component"
+	b.ModGUID = "com.community.component"
+	b.Classification = "dependency"
+	c := a
+	c.PackageID = "community.nested"
+	c.ModGUID = "com.community.nested"
+	c.Classification = "dependency"
+	a.Dependencies = []marketDependency{{b.PackageID, b.Version}}
+	b.Dependencies = []marketDependency{{c.PackageID, c.Version}}
+	r.localCatalog = &marketCatalog{SchemaVersion: 1, Packages: []marketPackage{a, b, c}}
+	r.Selection = []marketSelection{{b.PackageID, b.Version, false}, {a.PackageID, a.Version, true}}
+	r.DryRun = true
+	out, e := marketRun("prepare", r)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if len(out.Packages) != 3 {
+		t.Fatal("confirmation omits resolved required components", out.Packages)
+	}
+	for _, p := range out.Packages {
+		if !p.Enabled {
+			t.Fatal("confirmation exposes requested state instead of dependency promotion", p)
+		}
+	}
+}
+func TestMarketplaceInstalledScreenshotCache(t *testing.T) {
+	r, p, _ := marketFixture(t)
+	s := "https://github.com/jarlbrak/ftk-mod-framework/releases/download/test/preview.png"
+	p.Screenshots = []string{s}
+	p.ScreenshotPaths = []string{"/untrusted/display/path.png"}
+	r.localCatalog.Packages = []marketPackage{p}
+	cache := filepath.Join(r.StateRoot, "cache", "screenshots", marketHash([]byte(s))+".png")
+	os.MkdirAll(filepath.Dir(cache), 0700)
+	var data bytes.Buffer
+	if e := png.Encode(&data, image.NewRGBA(image.Rect(0, 0, 8, 8))); e != nil {
+		t.Fatal(e)
+	}
+	os.WriteFile(cache, data.Bytes(), 0600)
+	prepared, e := marketRun("prepare", r)
+	if e != nil {
+		t.Fatal(e)
+	}
+	if len(prepared.Pending.Packages[0].ScreenshotPaths) != 1 || prepared.Pending.Packages[0].ScreenshotPaths[0] != cache {
+		t.Fatal("pending snapshot did not hydrate validated cached image", prepared.Pending.Packages)
+	}
+	active, e := marketRun("activate", r)
+	if e != nil || !active.OK {
+		t.Fatal(active, e)
+	}
+	if len(active.Active.Packages[0].ScreenshotPaths) != 1 || active.Active.Packages[0].ScreenshotPaths[0] != cache {
+		t.Fatal("installed snapshot lost offline gallery", active.Active.Packages)
 	}
 }

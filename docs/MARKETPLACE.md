@@ -2,6 +2,8 @@
 
 The title-screen Mods panel is the entry point for free community content. Discover lists curated packages; Installed distinguishes managed downloads, bundled content and manually installed mods. The catalog starts empty. Test fixtures and the interface preview's concept listings are not downloadable community mods.
 
+The interface puts gameplay descriptions and the next available action first. Mod cards distinguish what is enabled now from changes waiting for a restart. Package metadata, dependency details and recovery tools are available from secondary views. Required components stay separate from the gameplay list.
+
 Players review the complete package/dependency plan before preparing a change. Prepared content applies on the next game launch, including launches from the original Steam entry. Installing, updating, disabling and removing managed packages never changes registrations inside the running game. Updates are explicit; cancellation leaves the active content unchanged. Rollback selects the retained previous generation for a subsequent launch.
 
 Existing saves can depend on the current mod set, especially playable classes with positional IDs. Start a new run when changing content. Marketplace operations do not edit saves. A managed-set export records exact versions and hashes, but it does not prove compatibility with saves or another player's complete installation.
@@ -25,6 +27,14 @@ Submit proposed packages through the repository's GitHub review workflow. A main
 5. Successful registration and visible behavior in an actual game launch for each advertised build.
 
 Published versions retain their bytes and SHA-256. Corrections use a new version. Initial hosting uses reviewed release archives in this repository; catalog edits belong in `marketplace/catalog.json`. Enable immutable releases before publishing package versions. Publication is a separate maintainer action from building the client.
+
+## Preview images
+
+A catalog listing can provide up to three curated PNG or JPEG images in its `screenshots` list. These may be item renders, character portraits, artwork, or in-game screenshots that accurately represent the mod. Put the cover image first; the interface uses it for the card thumbnail and main preview, with the remaining images available in the gallery. Preview images are optional.
+
+Host previews as approved repository release assets. Each image must be at most 2 MiB, no more than 4096 pixels on either side, and at most 8,388,608 pixels total. The helper validates and caches images before the interface displays them. Keep labels and important details readable at thumbnail size; use the larger gallery for inspection. Credit image creators and include the rights to distribute their work during review.
+
+The bundled Adventure Pack reuses its existing Hollow Mire artwork and Reeve Maddow portrait. These are illustrations included in the content, not screenshots or interactive 3D previews.
 
 ## Storage and recovery
 
