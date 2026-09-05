@@ -62,3 +62,42 @@ REAL_STATUS="$(bash "$ROOT/../../install.sh" --launcher-status --game-dir "$FTK_
 [ ! -e "$FTK_TEST_GAME/BepInEx" ]
 printf 'PASS: real installer launcher status reads game path without modifying installation\n'
 printf 'Fixtures retained: %s\n' "$WORK"
+
+# An older pinned framework may have no Updates UI. The external recovery action
+# must reset the choice before launching, and must never launch after failed repair.
+RECOVERY="$WORK/Recovery package"
+mkdir -p "$RECOVERY/For The King Modded.app/Contents/Resources"
+RECOVERY_RES="$RECOVERY/For The King Modded.app/Contents/Resources"
+cp "$ROOT/restore-bundled.sh" "$RECOVERY/Restore bundled.command"
+cp "$ROOT/setup.command" "$RECOVERY_RES/setup.command"
+cp "$RES/install.sh" "$RECOVERY_RES/install.sh"
+cat > "$RECOVERY_RES/ftkmf-launcher-helper" <<'STUB'
+#!/bin/bash
+set -eu
+[ "$#" = 7 ] && [ "$1" = prepare-launch ] && [ "$2" = --game-dir ] &&
+[ "$3" = "$FTK_TEST_GAME" ] && [ "$4" = --bundle-dir ] &&
+[ "$6" = --repair-only ] && [ "$7" = --reset-update-selection ] || exit 99
+printf 'restore-and-reset\n' >> "$FTK_TEST_TRACE"
+[ "$FTK_TEST_FAILURE" != repair ]
+STUB
+cat > "$RECOVERY_RES/launch.sh" <<'STUB'
+#!/bin/bash
+printf 'launch-after-reset\n' >> "$FTK_TEST_TRACE"
+STUB
+chmod +x "$RECOVERY_RES/ftkmf-launcher-helper"
+export FTK_TEST_FAILURE=none
+: > "$FTK_TEST_TRACE"
+bash "$RECOVERY/Restore bundled.command"
+[ "$(cat "$FTK_TEST_TRACE")" = $'restore-and-reset\nlaunch-after-reset' ]
+printf 'PASS: external Mac recovery resets the pin before launching\n'
+export FTK_TEST_FAILURE=repair
+: > "$FTK_TEST_TRACE"
+if bash "$RECOVERY/Restore bundled.command" > "$WORK/repair-error" 2>&1; then exit 1; fi
+[ "$(cat "$FTK_TEST_TRACE")" = restore-and-reset ]
+printf 'PASS: failed external recovery does not launch the game\n'
+cp "$ROOT/restore-bundled.sh" "$RECOVERY_RES/Restore bundled.sh"
+export FTK_TEST_FAILURE=none
+: > "$FTK_TEST_TRACE"
+bash "$RECOVERY_RES/Restore bundled.sh"
+[ "$(cat "$FTK_TEST_TRACE")" = $'restore-and-reset\nlaunch-after-reset' ]
+printf 'PASS: flat Linux package recovery resets the pin before launching\n'

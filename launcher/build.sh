@@ -55,6 +55,7 @@ PLIST
 python3 "$ROOT/launcher/tools/release-manifest.py" bundle "$RES" "$VERSION" --platform macos-universal
 cp "$ROOT/launcher/unix/add-to-steam.sh" "$OUT/macos/Add to Steam.command"
 cp "$ROOT/launcher/README.md" "$OUT/macos/README.md"
+cp "$ROOT/launcher/unix/restore-bundled.sh" "$OUT/macos/Restore bundled.command"
 (cd "$OUT/macos" && zip -qr "$OUT/FTKModdedLauncher-macos-universal.zip" .)
 for arch in amd64 arm64; do
   DIR="$OUT/linux-$arch/For The King Modded"
@@ -64,6 +65,7 @@ for arch in amd64 arm64; do
   cp "$ROOT/launcher/unix/launch.sh" "$ROOT/launcher/unix/setup.command" "$DIR/"
   cp "$ROOT/launcher/unix/launch.sh" "$DIR/For The King Modded.sh"
   cp "$ROOT/launcher/unix/add-to-steam.sh" "$DIR/Add to Steam.sh"
+  cp "$ROOT/launcher/unix/restore-bundled.sh" "$DIR/Restore bundled.sh"
   helper linux "$arch" "$DIR/ftkmf-launcher-helper"
   cp "$DIR/ftkmf-launcher-helper" "$OUT/ftkmf-helper-linux-$arch"
   cp "$OUT/ftkmf-helper-windows-amd64.exe" "$DIR/ftkmf-launcher-helper.exe"

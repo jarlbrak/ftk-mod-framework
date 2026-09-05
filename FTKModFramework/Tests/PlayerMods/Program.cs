@@ -80,6 +80,7 @@ internal static class Program
         Assert(!bundled.Enabled, "renamed bundled pack preserves config disabled state");
         Assert(object.ReferenceEquals(bundled, ModRegistry.Register(bundled.Key, "Other name", true, null, true, null, null)), "registration remains idempotent by stable key");
         MarketplaceChecks.Run(root);
+        FrameworkUpdateChecks.Run(root);
         Console.WriteLine("Fixtures retained at " + root);
     }
 }

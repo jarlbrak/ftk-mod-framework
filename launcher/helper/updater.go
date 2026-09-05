@@ -66,6 +66,12 @@ type updateJournal struct {
 	Files         []updateJournalFile `json:"files"`
 }
 type updateRelease struct {
+	ID          int64  `json:"id"`
+	Body        string `json:"body"`
+	PublishedAt string `json:"published_at"`
+	Assets      []struct {
+		Name string `json:"name"`
+	} `json:"assets"`
 	TagName    string `json:"tag_name"`
 	Prerelease bool   `json:"prerelease"`
 	Draft      bool   `json:"draft"`
@@ -84,6 +90,7 @@ func prepareLaunchMain(args []string) error {
 	launch := fs.Bool("launch", false, "dispatch original Steam entry after verification")
 	installMissing := fs.Bool("install-if-missing", false, "install the verified bundled framework if missing")
 	repairOnly := fs.Bool("repair-only", false, "repair from the verified local bundle without launching")
+	resetSelection := fs.Bool("reset-update-selection", false, "restore Stable after successful bundled repair")
 	if e := fs.Parse(args); e != nil {
 		return e
 	}
@@ -93,7 +100,10 @@ func prepareLaunchMain(args []string) error {
 	if *repairOnly && *launch {
 		return errors.New("--repair-only cannot be combined with --launch")
 	}
-	message, e := prepareLaunchMode(*game, *bundle, *launch, *installMissing, *repairOnly)
+	if *resetSelection && !*repairOnly {
+		return errors.New("--reset-update-selection requires --repair-only")
+	}
+	message, e := prepareLaunchModeReset(*game, *bundle, *launch, *installMissing, *repairOnly, *resetSelection)
 	if message != "" {
 		fmt.Println(message)
 	}
@@ -135,7 +145,10 @@ func updateManagedAssembly(game string) string {
 func prepareLaunch(game, bundle string, launch bool) (string, error) {
 	return prepareLaunchMode(game, bundle, launch, false, false)
 }
-func prepareLaunchMode(game, bundle string, launch, installMissing, repairOnly bool) (message string, resultErr error) {
+func prepareLaunchMode(game, bundle string, launch, installMissing, repairOnly bool) (string, error) {
+	return prepareLaunchModeReset(game, bundle, launch, installMissing, repairOnly, false)
+}
+func prepareLaunchModeReset(game, bundle string, launch, installMissing, repairOnly, resetSelection bool) (message string, resultErr error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 350*time.Second)
 	defer cancel()
 	if info, e := os.Stat(game); e != nil || !info.IsDir() {
@@ -181,6 +194,9 @@ func prepareLaunchMode(game, bundle string, launch, installMissing, repairOnly b
 	if e = updateRecover(game); e != nil {
 		return "", fmt.Errorf("framework update recovery failed; do not launch until repaired: %w", e)
 	}
+	if e = marketWrite(filepath.Join(root, "launcher-capabilities.json"), updateCapabilities{1, 1, bundledFrameworkVersion}); e != nil {
+		return "", e
+	}
 	_, dllErr := os.Stat(filepath.Join(game, updatePaths(game)[0]))
 	if repairOnly || (installMissing && os.IsNotExist(dllErr)) {
 		if bundle == "" {
@@ -200,6 +216,11 @@ func prepareLaunchMode(game, bundle string, launch, installMissing, repairOnly b
 	if repairOnly {
 		if !known {
 			return "", errors.New("repaired framework does not match the bundled manifest")
+		}
+		if resetSelection {
+			if e = updateWriteSettings(game, updateSettings{SchemaVersion: 1, Mode: "stable"}); e != nil {
+				return "", e
+			}
 		}
 		return "Bundled FTK Mod Framework installed and verified.", nil
 	}
@@ -312,7 +333,7 @@ func updateVerifyBaseline(game, bundle string) (updateReceipt, bool, error) {
 	return receipt, false, nil
 }
 func updateHTTP(ctx context.Context, s string, limit int64) ([]byte, error) {
-	if s != updaterLatestURL {
+	if !updateAPIAllowed(s) {
 		if e := marketURL(s, false); e != nil {
 			return nil, e
 		}
@@ -335,7 +356,7 @@ func updateHTTP(ctx context.Context, s string, limit int64) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		return nil, fmt.Errorf("official release endpoint returned HTTP %d", resp.StatusCode)
+		return nil, &updateHTTPError{resp.StatusCode}
 	}
 	b, e := io.ReadAll(io.LimitReader(resp.Body, limit+1))
 	if int64(len(b)) > limit {
@@ -344,26 +365,24 @@ func updateHTTP(ctx context.Context, s string, limit int64) ([]byte, error) {
 	return b, e
 }
 func updateCandidate(ctx context.Context, game string, current updateReceipt) (*updateManifest, map[string][]byte, error) {
-	metadataCtx, metadataCancel := context.WithTimeout(ctx, 5*time.Second)
-	b, e := updateFetch(metadataCtx, updaterLatestURL, marketLimit)
-	metadataCancel()
+	release, settings, e := updateSelectRelease(ctx, game)
 	if e != nil {
 		return nil, nil, e
 	}
-	var release updateRelease
-	if e = json.Unmarshal(b, &release); e != nil {
-		return nil, nil, e
-	}
 	version := strings.TrimPrefix(release.TagName, "v")
-	if release.Draft || release.Prerelease || !marketVersion.MatchString(version) {
-		return nil, nil, errors.New("latest release is not a supported stable version")
+	if release.Draft || !updateValidTag(release.TagName) || (settings.Mode == "stable" && release.Prerelease) {
+		return nil, nil, errors.New("selected release is not supported by the chosen update mode")
 	}
-	if marketCompare(version, current.FrameworkVersion) <= 0 {
+	comparison := marketCompare(version, current.FrameworkVersion)
+	if comparison == 0 {
 		return nil, nil, nil
 	}
+	if comparison < 0 && settings.Mode != "pinned" {
+		return nil, nil, errors.New("selected channel is older than the installed version; keeping the current version until the channel catches up")
+	}
 	prefix := "https://github.com/jarlbrak/ftk-mod-framework/releases/download/" + url.PathEscape(release.TagName) + "/"
-	metadataCtx, metadataCancel = context.WithTimeout(ctx, 5*time.Second)
-	b, e = updateFetch(metadataCtx, prefix+"update.json", marketLimit)
+	metadataCtx, metadataCancel := context.WithTimeout(ctx, 5*time.Second)
+	b, e := updateFetch(metadataCtx, prefix+"update.json", marketLimit)
 	metadataCancel()
 	if e != nil {
 		return nil, nil, e
@@ -372,7 +391,7 @@ func updateCandidate(ctx context.Context, game string, current updateReceipt) (*
 	if e = marketJSON(b, &manifest); e != nil {
 		return nil, nil, e
 	}
-	if manifest.SchemaVersion != 1 || manifest.HelperProtocol != 1 || manifest.FrameworkVersion != version || !marketRange(manifest.AutoUpdateFrom, current.FrameworkVersion) {
+	if manifest.SchemaVersion != 1 || manifest.HelperProtocol != 1 || manifest.FrameworkVersion != version || (settings.Mode != "pinned" && !marketRange(manifest.AutoUpdateFrom, current.FrameworkVersion)) {
 		return nil, nil, errors.New("release does not support automatic upgrade from the installed framework")
 	}
 	gameHash, e := marketHashFile(updateManagedAssembly(game))
@@ -399,38 +418,57 @@ func updateCandidate(ctx context.Context, game string, current updateReceipt) (*
 	}
 	return &manifest, files, nil
 }
-func updateManagedCompatibility(game, version string) error {
+func updateManagedPackages(game string) ([]marketPackage, error) {
 	root := filepath.Join(updateRoot(game), "marketplace")
 	var state marketState
 	e := marketRead(filepath.Join(root, "state.json"), &state, marketLimit)
 	if os.IsNotExist(e) {
-		return nil
+		return nil, nil
 	}
 	if e != nil {
-		return e
+		return nil, e
 	}
 	if state.SchemaVersion != 1 {
-		return errors.New("unsupported managed state schema")
+		return nil, errors.New("unsupported managed state schema")
 	}
+	packages := []marketPackage{}
 	for _, id := range []string{state.Current, state.Pending} {
 		if id == "" {
 			continue
 		}
 		if !marketHex.MatchString(id) {
-			return errors.New("invalid managed generation identity")
+			return nil, errors.New("invalid managed generation identity")
 		}
 		var lock marketLock
 		if e = marketRead(filepath.Join(root, "generations", id, "lock.json"), &lock, marketLimit); e != nil {
-			return e
+			return nil, e
 		}
-		for _, p := range lock.Packages {
-			if !marketRange(p.FrameworkRange, version) {
-				return fmt.Errorf("%s %s requires framework %s; update deferred", p.Name, p.Version, p.FrameworkRange)
-			}
+		if lock.SchemaVersion != 1 {
+			return nil, errors.New("unsupported managed generation lock schema")
+		}
+		if lock.Packages == nil && len(lock.Files) != 0 {
+			return nil, errors.New("managed generation has files but no package selection")
+		}
+		packages = append(packages, lock.Packages...)
+	}
+	return packages, nil
+}
+func updatePackagesCompatibility(packages []marketPackage, version string) error {
+	for _, p := range packages {
+		if !marketRange(p.FrameworkRange, version) {
+			return fmt.Errorf("%s %s requires framework %s; update deferred", p.Name, p.Version, p.FrameworkRange)
 		}
 	}
 	return nil
 }
+func updateManagedCompatibility(game, version string) error {
+	packages, e := updateManagedPackages(game)
+	if e != nil {
+		return e
+	}
+	return updatePackagesCompatibility(packages, version)
+}
+
 func updateCommit(game string, manifest updateManifest, downloads map[string][]byte) error {
 	paths := updatePaths(game)
 	id := marketToken()

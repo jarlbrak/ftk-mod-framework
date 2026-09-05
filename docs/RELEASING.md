@@ -23,7 +23,9 @@ refresh shortcut artwork. These limits belong in every early release's notes.
 2. Review `launcher/update-policy.json`. `autoUpdateFrom` is the range of existing framework
    versions this release can safely upgrade automatically. Add only game assembly hashes
    verified against the release. The initial policy contains the tested macOS game hash;
-   other builds keep their bundled version until explicitly supported.
+   other builds keep their bundled version until explicitly supported. The range governs
+   automatic channels; an explicitly pinned version may bypass that range while retaining
+   game, protocol, and managed-mod compatibility checks.
 3. Run the framework Release build, game smoke with `SELF-TEST PASS`, installer tests,
    Go helper tests, launcher tests, and release manifest tests. Inspect `git diff --check`
    and confirm no game assemblies or private development files are staged.
@@ -63,7 +65,8 @@ own `bundle-manifest.json` so the launcher can recognize an installation of its 
 
 `update.json` schema 1 contains the framework version, helper protocol, compatible upgrade
 range, verified game assembly hashes, and exact asset names, sizes, and SHA-256 hashes.
-The updater uses only the official repository's latest stable release and derives download
+The updater uses only the official repository: Stable filters out prereleases, Preview
+allows them, and Pin resolves an exact selected release identity. It derives download
 locations from that release. It does not execute a downloaded installer or update script.
 The DLL and installed marketplace helper are staged together, validated, and replaced under
 a recoverable transaction before Steam app 527230 starts. Existing and pending marketplace
@@ -71,8 +74,9 @@ package constraints can defer an otherwise valid update. Settings and user conte
 part of the replacement transaction.
 
 GitHub's [latest release endpoint](https://docs.github.com/en/rest/releases/releases#get-the-latest-release)
-excludes drafts and prereleases. Publishing a preview therefore does not test the live stable
-feed. Local automated fixtures exercise newer releases, bad hashes, interrupted writes, and
+excludes drafts and prereleases. Preview clients use the release list, while pinned clients
+resolve their selected tag and verify its release identity. Publishing a preview does not
+test the stable feed. Local automated fixtures exercise newer releases, bad hashes, interrupted writes, and
 offline fallback; a first stable publication still needs an end-to-end download/launch check.
 Hashes establish consistency with the official release metadata, not an independent publisher
 signature. Account/repository security remains part of the distribution trust model.
@@ -80,3 +84,15 @@ signature. Account/repository security remains part of the distribution trust mo
 Automatic updates do not replace the launcher bootstrap or BepInEx and do not update community
 mods. Unknown local builds are preserved. For an incompatible launcher protocol, ship a new
 launcher archive and explain the required manual download in release notes.
+
+## Version-selection bootstrap
+
+Launcher 0.1.1 introduces Stable, Preview, and pinned-version selection. Launcher 0.1.0
+cannot read these preferences; existing users need the new bundle once. The new helper
+records launcher capabilities so the in-game picker can report this requirement accurately.
+Metadata browsing and preference changes never replace the running framework.
+
+Keep the external Restore bundled action in every future package. Pinning an older release
+can remove the in-game version picker. Restore verifies the package, reinstalls its pair,
+and resets the update choice to Stable under the same launcher lock. Do not silently reset
+preferences during normal Play or rewrite an immutable older release to add this feature.

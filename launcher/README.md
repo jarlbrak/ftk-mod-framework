@@ -29,24 +29,46 @@ framework and the matching BepInEx loader. Then the launcher checks for updates 
 so Steam retains its native/Proton choice and ownership checks. Game activity may appear
 under the original For The King entry while playing.
 
-## Automatic updates
+## Choose your framework version
 
-Each **Play** through this launcher checks the official GitHub repository for a newer
-stable framework release before starting the game. The framework DLL and its matching
-marketplace helper update together. Downloads are checked against the release's SHA-256
-metadata before installation. Your settings, mods, and saves are preserved.
+Open **Mods > Updates** at the game title screen. Browse release versions and patch notes,
+then choose an update preference:
 
-If GitHub is unavailable, the launcher uses the verified installed version. A release
-that does not support your game build or conflicts with an installed or pending marketplace
-mod is deferred. Interrupted updates are recovered before the next launch. A damaged
-installation blocks launch and needs **Install / Repair** (Windows) or **setup.command**
-(macOS/Linux). Unrecognized development installations are preserved instead of overwritten.
+- **Follow Stable:** install newer stable releases automatically.
+- **Follow Preview:** install newer releases, including previews.
+- **Pin version:** keep one exact release until you change your preference.
 
-Preview releases are downloaded manually and do not enter the stable update feed. The
-launcher itself and BepInEx are bundled bootstrap components; this updater replaces the
-framework and paired helper only. A future incompatible bootstrap change requires a new
-launcher download. Launching the original For The King shortcut directly does not run
-this launcher's update check.
+The panel shows your running version and saved preference. Selecting a version does not
+replace files while the game is running; the launcher applies the choice on the next Play.
+Switching automatic channels never downgrades a newer installation. Pinning an older version
+is an explicit choice. Compatibility is checked before installation, including installed and
+pending marketplace mods; manual mods cannot be verified completely. An unsupported target
+is deferred, with the working installation retained.
+
+Versions and patch notes come from the official GitHub repository. Cached information remains
+readable offline and is marked with its refresh time. A pinned version stays pinned; an
+unavailable release does not silently select a different one.
+
+Each launcher Play checks the saved preference before starting the game. The framework DLL
+and matching marketplace helper update together, with SHA-256 verification and recovery for
+interrupted replacements. Normal version changes preserve settings, mods, and saves. If
+GitHub is unavailable, the verified installed pair is retained.
+
+**Upgrading from launcher 0.1.0:** download the new launcher bundle once and replace your old
+launcher files. Its original startup helper does not understand version selection. Future
+selections work through this updated launcher. The in-game panel reports when an updated
+launcher has not yet been detected.
+
+**Return from an older release:** close the game, then choose **Restore bundled** in the
+Windows launcher, or run **Restore bundled.command** (Mac) / **Restore bundled.sh** (Linux)
+from the extracted package. This reinstalls the package's version, returns the update choice
+to Stable, and restores player defaults without removing your installed mods. On Mac, keep
+the command alongside the app; `Contents/Resources/setup.command` inside the app performs
+the same recovery. This works even when the selected older framework has no Updates panel.
+
+This updater replaces the framework and paired helper only. BepInEx and the launcher bootstrap
+remain bundled components. Launching the original For The King shortcut directly skips the
+launcher's update check. A damaged installation blocks launch and needs Restore bundled.
 
 ## Platform status
 

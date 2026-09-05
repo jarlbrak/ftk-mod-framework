@@ -67,3 +67,19 @@ func TestUpdaterBundledBootstrapCancellation(t *testing.T) {
 		t.Fatal("installer child outlived cancellation", e)
 	}
 }
+func TestUpdaterBundledRestoreChecksManagedCompatibility(t *testing.T) {
+	game, bundle, _, _, _ := updateFixture(t)
+	id := strings.Repeat("d", 32)
+	root := filepath.Join(updateRoot(game), "marketplace")
+	marketWrite(filepath.Join(root, "state.json"), marketState{SchemaVersion: 1, Pending: id})
+	marketWrite(filepath.Join(root, "generations", id, "lock.json"), marketLock{SchemaVersion: 1, Packages: []marketPackage{{Name: "Requires newer framework", Version: "1.0.0", FrameworkRange: "0.1.1"}}})
+	marker := filepath.Join(game, "restore-ran")
+	os.WriteFile(filepath.Join(bundle, "install.sh"), []byte("#!/bin/bash\nprintf ran > \"$2/restore-ran\"\n"), 0600)
+	err := updateInstallBundled(context.Background(), game, bundle)
+	if err == nil || !strings.Contains(err.Error(), "incompatible") {
+		t.Fatal("incompatible restore was not rejected before reading/invoking installer", err)
+	}
+	if _, err = os.Stat(marker); !os.IsNotExist(err) {
+		t.Fatal("incompatible restore invoked installer")
+	}
+}

@@ -46,7 +46,7 @@ namespace FtkModdedLauncher
             Controls.Add(title);
             Controls.Add(new Label { Text = "Your adventures. Your mods.\nPlay checks for framework updates before opening Steam.", Location = new Point(38, 145), Size = new Size(520, 60) });
             AddButton("Play", 38, delegate { PreparePlay(false); });
-            AddButton("Install / Repair", 213, delegate { PreparePlay(true); });
+            AddButton("Restore bundled", 213, delegate { PreparePlay(true); });
             AddButton("Add to Steam / Art", 388, delegate {
                 UseWaitCursor = true;
                 try { MessageBox.Show(this, RunHelper("register"), "For The King Modded", MessageBoxButtons.OK, MessageBoxIcon.Information); }
@@ -84,7 +84,7 @@ namespace FtkModdedLauncher
             _busy = true;
             _playUsed = true;
             foreach (Button button in _actions) button.Enabled = false;
-            _artworkStatus.Text = repairOnly ? "Installing / repairing the bundled framework..." : "Checking your mod installation and framework updates...";
+            _artworkStatus.Text = repairOnly ? "Restoring the bundled framework and Stable updates..." : "Checking your mod installation and framework updates...";
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += delegate(object sender, DoWorkEventArgs e) {
                 string directory = AppDomain.CurrentDomain.BaseDirectory;
@@ -102,8 +102,8 @@ namespace FtkModdedLauncher
                 // The bundled helper serializes installer/update writes and Steam dispatch.
                 string result = RunProcess(Path.Combine(directory, "ftkmf-launcher-helper.exe"),
                     "prepare-launch --game-dir " + Quote(gameDir) + " --bundle-dir " + Quote(directory) +
-                    (repairOnly ? " --repair-only" : " --install-if-missing --launch"), repairOnly || !(bool)present ? 720000 : 120000);
-                e.Result = repairOnly ? "Install / Repair completed. Choose Play when ready." : result;
+                    (repairOnly ? " --repair-only --reset-update-selection" : " --install-if-missing --launch"), repairOnly || !(bool)present ? 720000 : 120000);
+                e.Result = repairOnly ? "Bundled version restored. Update choice is Stable. Choose Play when ready." : result;
             };
             worker.RunWorkerCompleted += delegate(object sender, RunWorkerCompletedEventArgs e) {
                 worker.Dispose();

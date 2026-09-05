@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "0.1.0";
+        public const string Version = "0.1.1";
 
         public static Plugin Instance;
         public static ManualLogSource Log;

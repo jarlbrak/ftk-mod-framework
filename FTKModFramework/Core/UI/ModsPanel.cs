@@ -11,7 +11,7 @@ namespace FTKModFramework.Core.UI
 {
     /// <summary>Title-screen marketplace. Native helper work is polled without blocking Unity;
     /// every action is a stock Button with the game's FTKSelectable controller adapter.</summary>
-    internal sealed class ModsPanel : uiScreen
+    internal sealed partial class ModsPanel : uiScreen
     {
         private static ModsPanel _instance;
         private Transform _container;
@@ -45,6 +45,7 @@ namespace FTKModFramework.Core.UI
         private static readonly Color MutedInk = new Color(0.34f, 0.38f, 0.36f, 1f);
         private static readonly Color Gold = new Color(0.48f, 0.32f, 0.07f, 1f);
         private static readonly Color WarmBorder = new Color(0.78f, 0.75f, 0.68f, 1f);
+        private static bool PanelBusy { get { return MarketplaceRuntime.Busy || FrameworkUpdateRuntime.Busy; } }
         private const string Alphabet = " abcdefghijklmnopqrstuvwxyz0123456789-";
         private static readonly string[] Categories = { "All", "items", "weapons", "proficiencies", "classes", "enemies", "encounters" };
 
@@ -111,7 +112,7 @@ namespace FTKModFramework.Core.UI
             }
             List<string> loadedFonts = new List<string>();
             foreach (Font font in Resources.FindObjectsOfTypeAll<Font>()) loadedFonts.Add(font.name + ": " + string.Join(", ", font.fontNames));
-            return new Dictionary<string, object> { { "loadedFonts", loadedFonts }, { "osFonts", Font.GetOSInstalledFontNames() }, { "renderCount", _instance._renderCount }, { "view", _instance._view }, { "texts", texts }, { "buttons", visibleButtons }, { "busy", MarketplaceRuntime.Busy },
+            return new Dictionary<string, object> { { "loadedFonts", loadedFonts }, { "osFonts", Font.GetOSInstalledFontNames() }, { "renderCount", _instance._renderCount }, { "view", _instance._view }, { "texts", texts }, { "buttons", visibleButtons }, { "busy", PanelBusy },
                 { "screenWidth", Screen.width }, { "screenHeight", Screen.height }, { "textMetrics", metrics } };
         }
 
@@ -189,7 +190,8 @@ namespace FTKModFramework.Core.UI
         internal void Tick()
         {
             MarketplaceRuntime.Poll();
-            bool busy = MarketplaceRuntime.Busy;
+            FrameworkUpdateRuntime.Poll();
+            bool busy = PanelBusy;
             if (_wasBusy != busy) { _wasBusy = busy; Refresh(); }
             if (_view == "search" && Input.inputString.Length > 0)
             {
@@ -208,7 +210,7 @@ namespace FTKModFramework.Core.UI
             _page = 0;
             _detailPage = 0;
             _showAdvanced = false; _showGallery = false; _imagePage = 0;
-            _focusIndex = view == "installed" ? 1 : 0;
+            _focusIndex = view == "updates" ? 2 : view == "installed" ? 1 : 0;
             _message = "";
             if (view == "installed" || view == "discover" || view == "components") { _entry = null; _package = null; }
             Refresh();
@@ -272,6 +274,7 @@ namespace FTKModFramework.Core.UI
                 }
                 _container = _rootContent;
             }
+            else if (_view == "updates") BuildUpdates();
             else if (_view == "details") Details();
             else if (_view == "confirm") Confirmation();
             else if (_view == "search") Search();
@@ -378,7 +381,7 @@ namespace FTKModFramework.Core.UI
                 }
                 if (row == 1)
                 {
-                    Button refresh = ActionButton("Refresh", LoadCatalog, !MarketplaceRuntime.Busy, 36);
+                    Button refresh = ActionButton("Refresh", LoadCatalog, !PanelBusy, 36);
                     SetWidth(refresh.gameObject, 170);
                     refresh.GetComponentInChildren<Text>().fontSize = 20;
                 }
@@ -388,8 +391,8 @@ namespace FTKModFramework.Core.UI
             if (catalog == null || catalog.Status == "unavailable")
             {
                 Spacer(24);
-                TextLine(MarketplaceRuntime.Busy ? "Opening the community catalog..." : "The catalog is unavailable right now", 30, 86);
-                TextLine(MarketplaceRuntime.Busy ? "Your installed mods stay available while we check." : "Try Refresh when you are online. You can keep playing with everything in Installed.", 24, 104);
+                TextLine(PanelBusy ? "Opening the community catalog..." : "The catalog is unavailable right now", 30, 86);
+                TextLine(PanelBusy ? "Your installed mods stay available while we check." : "Try Refresh when you are online. You can keep playing with everything in Installed.", 24, 104);
                 return;
             }
             TextLine(catalog.Status == "offline" ? "Offline / saved catalog from " + FriendlyAge(catalog.CatalogAgeSeconds) + " ago" : "Free mods, reviewed before publication", 20, 36);
@@ -532,7 +535,7 @@ namespace FTKModFramework.Core.UI
             if (_detailPage < pages.Count) TextLine(pages[_detailPage], 24, 280); else AddScreenshot(screenshots[_detailPage - pages.Count]);
             if (total > 1) ActionButton("Next detail / screenshot (" + (_detailPage + 1) + " of " + total + ")", delegate { _detailPage = (_detailPage + 1) % total; Refresh(); });
             if (_package != null && MarketplaceRuntime.FindManaged(_package.ModGuid) != null)
-                LinkButton("Remove this community mod...", delegate { ReviewSelection(_package, true, false); }, !MarketplaceRuntime.Busy);
+                LinkButton("Remove this community mod...", delegate { ReviewSelection(_package, true, false); }, !PanelBusy);
             LinkButton("Back to overview", delegate { _showAdvanced = false; _showGallery = false; _imagePage = 0; Refresh(); });
         }
 
@@ -549,15 +552,15 @@ namespace FTKModFramework.Core.UI
                 LinkButton(active == null ? "Cancel this install" : "Undo this mod's change", delegate {
                     if (active == null) ReviewSelection(package, true, false);
                     else ReviewSelection(active, false, active.Enabled);
-                }, !MarketplaceRuntime.Busy);
+                }, !PanelBusy);
                 return;
             }
             if (package.Revoked) TextLine("This mod is no longer offered in the catalog. An installed copy stays until you choose to remove it.", 22, 76).color = Gold;
             else if (active == null && !package.Compatible) TextLine(Short(package.CompatibilityReason, 125), 22, 76).color = Gold;
             else TextLine(active != null ? (active.Enabled ? "On for this adventure" : "Currently turned off") : "Free / Changes apply after restart", 22, 38);
             if (active == null || active.Version != package.Version)
-                PrimaryButton(active == null ? "Install..." : "Update to " + package.Version + "...", delegate { ReviewSelection(package, false, true); }, package.Compatible && !package.Revoked && !MarketplaceRuntime.Busy);
-            else PrimaryButton(active.Enabled ? "Turn off after restart..." : "Turn on after restart...", delegate { ReviewSelection(active, false, !active.Enabled); }, !MarketplaceRuntime.Busy);
+                PrimaryButton(active == null ? "Install..." : "Update to " + package.Version + "...", delegate { ReviewSelection(package, false, true); }, package.Compatible && !package.Revoked && !PanelBusy);
+            else PrimaryButton(active.Enabled ? "Turn off after restart..." : "Turn on after restart...", delegate { ReviewSelection(active, false, !active.Enabled); }, !PanelBusy);
         }
 
         private static string Bullets(string[] values)
@@ -738,7 +741,7 @@ namespace FTKModFramework.Core.UI
             PrimaryButton(_confirmOperation == "prepare" ? "Save for next launch" : _confirmOperation == "rollback" ? "Restore on next launch" : "Discard community changes", delegate {
                 MarketplaceRuntime.Start(_confirmOperation, _confirmOperation == "prepare" ? _planSelection : null, false, delegate(MarketplaceResult result) { Navigate("maintenance"); _message = result.Ok && PendingCount() == 0 ? "Your selection is saved. No gameplay changes will apply." : result.Message ?? result.Status; Refresh(); }, _confirmOperation == "prepare" && _plan != null ? _plan.PlanRevision : null);
                 Refresh();
-            }, !MarketplaceRuntime.Busy);
+            }, !PanelBusy);
         }
 
         private void Maintenance()
@@ -766,11 +769,11 @@ namespace FTKModFramework.Core.UI
             if (pendingCount > 0)
             {
                 TextLine("Start a new run after changing class mods. Existing saves may need their original mod set.", 22, 40);
-                PrimaryButton("Quit and apply on next launch", delegate { Application.Quit(); }, !MarketplaceRuntime.Busy);
+                PrimaryButton("Quit and apply on next launch", delegate { Application.Quit(); }, !PanelBusy);
 
             }
             if (MarketplaceRuntime.Pending != null)
-                LinkButton("Discard community download changes...", delegate { _confirmOperation = "cancel"; Navigate("confirm"); }, !MarketplaceRuntime.Busy);
+                LinkButton("Discard community download changes...", delegate { _confirmOperation = "cancel"; Navigate("confirm"); }, !PanelBusy);
             bool preferences = false;
             foreach (ModEntry entry in ModRegistry.Entries) if (!entry.IsManaged && entry.PendingEnabled.HasValue) preferences = true;
             if (preferences) TextLine("Undo included or manual mod changes in Installed.", 22, 32);
@@ -785,11 +788,11 @@ namespace FTKModFramework.Core.UI
             TextLine(pages[_detailPage], 23, 225);
             if (pages.Count > 1) ActionButton("Next status detail (" + (_detailPage + 1) + " of " + pages.Count + ")", delegate { _detailPage = (_detailPage + 1) % pages.Count; Refresh(); });
             ActionButton("Review next-launch changes", delegate { Navigate("maintenance"); });
-            ActionButton("Restore the previous community mod set...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !MarketplaceRuntime.Busy);
+            ActionButton("Restore the previous community mod set...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !PanelBusy);
             ActionButton("Export community mod list", delegate {
                 MarketplaceRuntime.Start("export", null, false, delegate(MarketplaceResult result) { _message = result.Ok ? "Exported: " + result.ExportPath + ". Manual mods are not fully fingerprinted; this is not a co-op compatibility guarantee." : result.Message; Refresh(); });
                 Refresh();
-            }, !MarketplaceRuntime.Busy);
+            }, !PanelBusy);
             TextLine("Need to repair marketplace access? Use Install / Repair in the launcher. Your manually installed files are not removed.", 23, 76);
         }
 
@@ -827,6 +830,9 @@ namespace FTKModFramework.Core.UI
             Button installed = ActionButton("Installed", delegate { Navigate("installed"); }, true, 48);
             SetWidth(installed.gameObject, 170);
             if (_view == "installed") Border(installed.gameObject, Gold, 2);
+            Button updates = ActionButton("Updates", delegate { Navigate("updates"); if (FrameworkUpdateRuntime.State == null) LoadUpdates("refresh"); }, true, 48);
+            SetWidth(updates.gameObject, 170);
+            if (_view == "updates") Border(updates.gameObject, Gold, 2);
             if (PendingCount() > 0)
             {
                 Button changes = ActionButton(PendingCount() == 0 ? "Next-launch selection" : "Review changes (" + PendingCount() + ")", delegate { Navigate("maintenance"); }, true, 48);
@@ -842,13 +848,14 @@ namespace FTKModFramework.Core.UI
             Rule();
             Transform row = HorizontalRow("Footer", 60);
             _container = row;
-            string notice = MarketplaceRuntime.Busy ? "Working... Your current mods stay unchanged." : PendingCount() > 0 ? "Changes are saved for next launch." : MarketplaceRuntime.Pending != null ? "Your selection is saved. No gameplay changes will apply." : "Your installed mods stay unchanged until you restart.";
-            if (_message.Length > 0) notice = Short(_message, 120);
+            string notice = PanelBusy ? "Working... Your current mods stay unchanged." : PendingCount() > 0 ? "Changes are saved for next launch." : MarketplaceRuntime.Pending != null ? "Your selection is saved. No gameplay changes will apply." : "Your installed mods stay unchanged until you restart.";
+            if (_view == "updates") notice = Short(FrameworkUpdateRuntime.Notice, 120);
+            else if (_message.Length > 0) notice = Short(_message, 120);
             Text status = TextLine(notice, 21, 58);
             status.GetComponent<LayoutElement>().flexibleWidth = 1;
-            if (MarketplaceRuntime.Busy)
+            if (PanelBusy)
             {
-                Button cancel = LinkButton("Cancel operation", delegate { MarketplaceRuntime.CancelRunning(); Refresh(); });
+                Button cancel = LinkButton("Cancel operation", delegate { if (FrameworkUpdateRuntime.Busy) FrameworkUpdateRuntime.Cancel(); else MarketplaceRuntime.CancelRunning(); Refresh(); });
                 SetWidth(cancel.gameObject, 200);
             }
             else

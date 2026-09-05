@@ -7,6 +7,6 @@ if [ "$#" -ne 0 ]; then
 fi
 STATUS="$(bash "$ROOT/install.sh" --launcher-status)"
 IFS= read -r GAME_DIR <<< "$STATUS"
-# Explicit repair uses the same lock and refreshes the verified installation receipt.
-"$ROOT/ftkmf-launcher-helper" prepare-launch --game-dir "$GAME_DIR" --bundle-dir "$ROOT" --repair-only
+# Restore the bundled version under the shared lock and clear any pinned version.
+"$ROOT/ftkmf-launcher-helper" prepare-launch --game-dir "$GAME_DIR" --bundle-dir "$ROOT" --repair-only --reset-update-selection
 exec bash "$ROOT/launch.sh"

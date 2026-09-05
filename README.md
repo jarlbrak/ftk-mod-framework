@@ -37,9 +37,9 @@
 
 First launch installs the bundled framework and its loader. Steam artwork is applied
 automatically; Steam may need one restart to show it. Each launcher Play checks for a
-compatible stable framework update before opening your owned game, preserving mods and
-settings and using the verified installed version when offline. Preview releases stay
-out of the stable update feed.
+compatible framework update before opening your owned game, preserving mods and settings
+and using the verified installed version when offline. In **Mods > Updates**, follow Stable
+or Preview, or pin a specific release after reading its patch notes. Stable excludes previews.
 
 The title screen includes a **Mods** browser, and bundled content includes the **Thief**,
 **Innkeeper**, **Smuggler's Run**, and **The Hollow Mire**. See
