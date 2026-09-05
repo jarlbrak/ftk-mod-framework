@@ -19,6 +19,15 @@ CACHE="${FTKMF_TEST_CACHE:-${TMPDIR:-/tmp}/ftkmf-test-cache}"
 # match byte for byte even when TMPDIR is a symlink (/var -> /private/var on macOS).
 WORK="$(mktemp -d "${TMPDIR:-/tmp}/ftkmf-test.XXXXXX")"
 WORK="$(cd -P "$WORK" && pwd -P)"
+mkdir -p "$WORK/bin"
+# Mock Steam folders do not isolate the real Steam process or application launcher.
+printf '#!/bin/sh\nexit 1\n' > "$WORK/bin/pgrep"
+for tool in osascript open steam flatpak; do
+  # shellcheck disable=SC2016
+  printf '#!/bin/sh\necho "Unexpected host application command: $0" >&2\ntouch "%s/host-command-called"\nexit 99\n' "$WORK" > "$WORK/bin/$tool"
+done
+chmod +x "$WORK/bin/"*
+export PATH="$WORK/bin:$PATH"
 trap 'rm -rf "$WORK"' EXIT
 
 BEPINEX_VERSION="$(sed -n 's/^BEPINEX_VERSION="\(.*\)"/\1/p' "$INSTALLER")"
@@ -131,9 +140,9 @@ make_steam() {
 
 run_installer() {
   # $1 = HOME for the run; remaining args pass through. Runs quietly, prints output only on failure.
-  local home="$1"; shift
+  local fixture_home="$1"; shift
   local out="$WORK/out.txt" rc=0
-  HOME="$home" FTKMF_NO_COLOR=1 FTKMF_BEPINEX_BASE_URL="file://$CACHE" \
+  HOME="$fixture_home" FTKMF_NO_COLOR=1 FTKMF_BEPINEX_BASE_URL="file://$CACHE" \
     bash "$INSTALLER" --yes "$@" > "$out" 2>&1 || rc=$?
   if [ "$rc" != "0" ]; then
     printf '  installer exited %s:\n' "$rc"; sed 's/^/    | /' "$out"
@@ -246,6 +255,11 @@ scenario_foreign_bepinex() {
   assert_nogrep "$game/BepInEx/core/BepInEx.dll" "foreign"
   if ls "$game"/run_bepinex.sh.ftkmf-backup-* >/dev/null 2>&1; then pass "custom run_bepinex.sh backed up"; else fail "no backup of the custom run_bepinex.sh"; fi
   assert_grep "$game/run_bepinex.sh" 'executable_name="FTK.exe"'
+  assert_nogrep "$game/BepInEx/ftkmf-install.state" "bepinex_installed_by_us=1"
+  printf 'other mod' > "$game/BepInEx/plugins/OtherMod.dll"
+  run_installer "$home" --uninstall --purge || fail "foreign purge failed"
+  assert_file "$game/BepInEx/plugins/OtherMod.dll"
+  assert_file "$game/BepInEx/core/BepInEx.dll"
 }
 
 scenario_dry_run_and_errors() {
@@ -300,6 +314,71 @@ scenario_macos() {
   assert_grep "$acct" "\"LaunchOptions\"		\"\\\"$game/run_bepinex.sh\\\" %command%\""
 }
 
+scenario_release_checksums() {
+  printf '\n[release downloads require a valid matching checksum]\n'
+  local fixture_home="$WORK/checksums" root game mode
+  if [ "$OS" = Darwin ]; then
+    root="$fixture_home/Library/Application Support/Steam"
+    game="$(make_steam "$root" "$root" app)"
+  else
+    root="$fixture_home/.local/share/Steam"
+    game="$(make_steam "$root" "$root" elf)"
+  fi
+  fake_dll "$WORK/release.dll"
+  # Seed BepInEx from the cache before replacing curl with a release-only mock.
+  run_installer "$fixture_home" --framework "$WORK/release.dll" --no-launch-options || fail "seed install failed"
+  printf 'old framework' > "$game/BepInEx/plugins/FTKModFramework.dll"
+  export FTKMF_TEST_RELEASE_DIR="$WORK"
+  cat > "$WORK/bin/curl" <<'SH'
+#!/bin/bash
+dest=""; url=""; probe=0
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -o) dest="$2"; shift 2 ;;
+    -w) probe=1; shift 2 ;;
+    --retry|--retry-delay|--connect-timeout) shift 2 ;;
+    https://*) url="$1"; shift ;;
+    *) shift ;;
+  esac
+done
+if [ "$probe" = 1 ]; then printf 200; exit 0; fi
+case "$url" in
+  */FTKModFramework.dll) cp "$FTKMF_TEST_RELEASE_DIR/release.dll" "$dest" ;;
+  */SHA256SUMS)
+    case "$FTKMF_TEST_SUM_MODE" in
+      missing) exit 22 ;;
+      absent) printf '%064d  other.dll\n' 0 > "$dest" ;;
+      malformed) printf 'bad  FTKModFramework.dll\n' > "$dest" ;;
+      mismatch) printf '%064d  FTKModFramework.dll\n' 0 > "$dest" ;;
+      valid) cp "$FTKMF_TEST_RELEASE_DIR/valid-sums" "$dest" ;;
+    esac ;;
+  *) exit 99 ;;
+esac
+SH
+  chmod +x "$WORK/bin/curl"
+  if command -v shasum >/dev/null 2>&1; then
+    shasum -a 256 "$WORK/release.dll"
+  else
+    sha256sum "$WORK/release.dll"
+  fi | awk '{print $1 "  FTKModFramework.dll"}' > "$WORK/valid-sums"
+  for mode in missing absent malformed mismatch; do
+    export FTKMF_TEST_SUM_MODE="$mode"
+    if run_installer "$fixture_home" --no-launch-options >/dev/null 2>&1; then
+      fail "$mode checksum accepted"
+    else
+      pass "$mode checksum rejected"
+    fi
+    assert_grep "$game/BepInEx/plugins/FTKModFramework.dll" "old framework"
+  done
+  export FTKMF_TEST_SUM_MODE=valid
+  run_installer "$fixture_home" --no-launch-options || fail "valid checksum rejected"
+  if cmp -s "$WORK/release.dll" "$game/BepInEx/plugins/FTKModFramework.dll"; then
+    pass "verified release installed"
+  else
+    fail "verified release not installed"
+  fi
+}
+
 # ---- run ---------------------------------------------------------------------------------------------
 printf 'install.sh tests (%s, BepInEx %s)\n' "$OS" "$BEPINEX_VERSION"
 fetch_bepinex
@@ -312,6 +391,9 @@ else
   scenario_dry_run_and_errors
   scenario_dev_config
 fi
+
+scenario_release_checksums
+assert_nofile "$WORK/host-command-called"
 
 printf '\n%d passed, %d failed\n' "$PASSED" "$FAILED"
 [ "$FAILED" = "0" ]

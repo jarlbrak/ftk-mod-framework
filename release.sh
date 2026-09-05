@@ -22,7 +22,7 @@ shift
 NOTES_FILE=""; DRY_RUN=0
 while [ $# -gt 0 ]; do
   case "$1" in
-    --notes-file) NOTES_FILE="$2"; shift 2 ;;
+    --notes-file) [ $# -ge 2 ] || { echo "--notes-file needs a path" >&2; exit 1; }; NOTES_FILE="$2"; shift 2 ;;
     --dry-run) DRY_RUN=1; shift ;;
     *) echo "unknown option: $1" >&2; exit 1 ;;
   esac
@@ -44,6 +44,13 @@ if [ -n "$(git -C "$ROOT" status --porcelain)" ]; then
 fi
 
 # 3) Guard: no copyrighted game assembly tracked.
+SOURCE_COMMIT="$(git -C "$ROOT" rev-parse HEAD)"
+# Refuse an existing tag: release assets must correspond to this exact source commit.
+if [ -n "$(git -C "$ROOT" ls-remote --tags origin "refs/tags/$TAG" "refs/tags/$TAG^{}")" ]; then
+  echo "tag $TAG already exists on origin; choose a new version." >&2
+  exit 1
+fi
+
 if git -C "$ROOT" ls-files | grep -Eq '(Assembly-CSharp[^/]*|UnityEngine[^/]*|Newtonsoft\.Json)\.dll$'; then
   echo "ABORT: a copyrighted game assembly is tracked in git." >&2
   exit 1
@@ -66,15 +73,24 @@ case "$(head -c 2 "$DIST/FTKModFramework.dll")" in MZ) ;; *) echo "DLL is not a 
 
 if [ "$DRY_RUN" = "1" ]; then echo "dry run: not publishing $TAG"; exit 0; fi
 
+if [ "$(gh api user --jq .login)" != "jarlbrak" ]; then
+  echo "publishing requires the jarlbrak GitHub account." >&2
+  exit 1
+fi
+if ! gh api "repos/$REPO/commits/$SOURCE_COMMIT" --silent; then
+  echo "source commit $SOURCE_COMMIT is not on GitHub; push the reviewed branch first." >&2
+  exit 1
+fi
+
 printf 'Publish release %s to github.com/%s with these assets? [y/N] ' "$TAG" "$REPO"
 read -r answer
 case "$answer" in y|Y|yes) ;; *) echo "not published."; exit 0 ;; esac
 
 if [ -n "$NOTES_FILE" ]; then
-  gh release create "$TAG" --repo "$REPO" --title "$TAG" --notes-file "$NOTES_FILE" \
+  gh release create "$TAG" --repo "$REPO" --target "$SOURCE_COMMIT" --title "$TAG" --notes-file "$NOTES_FILE" \
     "$DIST/FTKModFramework.dll" "$DIST/SHA256SUMS" "$DIST/install.sh"
 else
-  gh release create "$TAG" --repo "$REPO" --title "$TAG" --generate-notes \
+  gh release create "$TAG" --repo "$REPO" --target "$SOURCE_COMMIT" --title "$TAG" --generate-notes \
     "$DIST/FTKModFramework.dll" "$DIST/SHA256SUMS" "$DIST/install.sh"
 fi
 echo "published: https://github.com/$REPO/releases/tag/$TAG"

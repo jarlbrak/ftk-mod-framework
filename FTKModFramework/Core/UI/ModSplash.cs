@@ -45,18 +45,22 @@ namespace FTKModFramework.Core.UI
             GameObject root = null;
             try
             {
-                root = Build(hold);
+                root = new GameObject("FtkmfSplash");
+                Build(root, hold);
             }
             catch (Exception e)
             {
-                if (root != null) UnityEngine.Object.Destroy(root);
+                if (root != null)
+                {
+                    root.SetActive(false);
+                    UnityEngine.Object.Destroy(root);
+                }
                 Plugin.Log.LogError("Splash: build failed (title screen left unchanged): " + e);
             }
         }
 
-        private static GameObject Build(float hold)
+        private static void Build(GameObject root, float hold)
         {
-            GameObject root = new GameObject("FtkmfSplash");
             UnityEngine.Object.DontDestroyOnLoad(root);
 
             Canvas canvas = root.AddComponent<Canvas>();
@@ -126,7 +130,6 @@ namespace FTKModFramework.Core.UI
 
             Plugin.Log.LogInfo("Splash: shown (" + enabledCount + " mod(s) enabled, logo=" + (logo != null) +
                 ", hold=" + hold + "s).");
-            return root;
         }
 
         /// <summary>"N mods enabled: A, B (v1.2), C" from the registry, capped at a few names; or a nudge when none.</summary>

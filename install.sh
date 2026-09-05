@@ -506,6 +506,9 @@ check_codesign() {
 
 install_bepinex() {
   local asset sha zip extract src
+  local owned
+  owned="$(state_get bepinex_installed_by_us)"
+  if [ ! -d "$GAME_DIR/BepInEx" ]; then owned=1; fi
   asset="$(bepinex_asset)"; sha="$(bepinex_sha)"
 
   if bepinex_present && [ "$OPT_REINSTALL_BEPINEX" != "1" ]; then
@@ -556,7 +559,7 @@ install_bepinex() {
   configure_run_script
   clear_quarantine
   state_set bepinex_version "$BEPINEX_VERSION"
-  state_set bepinex_installed_by_us 1
+  state_set bepinex_installed_by_us "${owned:-0}"
   ok "BepInEx $BEPINEX_VERSION installed ($(describe_build))."
 }
 
@@ -598,17 +601,20 @@ obtain_framework() {
     download "$(framework_release_url "$FRAMEWORK_DLL_NAME")" "$TMP_DIR/$FRAMEWORK_DLL_NAME"
     FRAMEWORK_SRC="$TMP_DIR/$FRAMEWORK_DLL_NAME"
     FRAMEWORK_ORIGIN="github.com/$FRAMEWORK_REPO release $OPT_RELEASE"
-    # Verify against the release's checksum file when it ships one.
+    # Every release must include a valid checksum for the framework DLL.
     sums="$TMP_DIR/$FRAMEWORK_SUMS_NAME"
     if download "$(framework_release_url "$FRAMEWORK_SUMS_NAME")" "$sums" 2>/dev/null; then
       expected="$(awk -v n="$FRAMEWORK_DLL_NAME" '$2==n || $2=="*"n { print $1; exit }' "$sums")"
-      if [ -n "$expected" ]; then
+      if [ "${#expected}" = 64 ] && ! printf '%s' "$expected" | LC_ALL=C grep -q '[^0-9a-fA-F]'; then
+        expected="$(printf '%s' "$expected" | tr 'A-F' 'a-f')"
         actual="$(sha256_of "$FRAMEWORK_SRC")"
         [ "$actual" = "$expected" ] || die "checksum mismatch for $FRAMEWORK_DLL_NAME (expected $expected, got $actual). Nothing was changed."
         ok "checksum verified"
+      else
+        die "$FRAMEWORK_SUMS_NAME has no valid checksum for $FRAMEWORK_DLL_NAME."
       fi
     else
-      note "release has no $FRAMEWORK_SUMS_NAME; skipping checksum verification."
+      die "could not download $FRAMEWORK_SUMS_NAME; refusing an unverified framework DLL."
     fi
   fi
   case "$(magic_hex "$FRAMEWORK_SRC")" in
