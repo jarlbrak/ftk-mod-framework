@@ -19,6 +19,9 @@ jobs:
         with:
           go-version: '1.26.x'
           cache: false
+      - name: Validate community catalog
+        working-directory: launcher/helper
+        run: go run . marketplace-catalog-validate --catalog ../../marketplace/catalog.json
       - name: Shortcut and artwork tests
         working-directory: launcher/helper
         run: go test ./...

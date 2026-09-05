@@ -213,11 +213,16 @@ scenario_proton() {
   card="$WORK/run/media/deck/CARD"
   game="$(make_steam "$root" "$card" pe)"
   acct="$root/userdata/333/config/localconfig.vdf"; write_localconfig "$acct" optscmd
-  fake_dll "$WORK/fake.dll"
+  mkdir -p "$WORK/proton-bundle"
+  fake_dll "$WORK/proton-bundle/FTKModFramework.dll"
+  fake_dll "$WORK/proton-bundle/ftkmf-launcher-helper.exe"
 
-  run_installer "$home" --framework "$WORK/fake.dll" || fail "installer failed"
+  run_installer "$home" --framework "$WORK/proton-bundle/FTKModFramework.dll" || fail "installer failed"
   assert_file "$game/BepInEx/core/BepInEx.dll"
   assert_file "$game/winhttp.dll"
+  assert_file "$game/BepInEx/ftkmf/ftkmf-launcher-helper.exe"
+  assert_nofile "$game/BepInEx/ftkmf/ftkmf-launcher-helper"
+  assert_grep "$game/BepInEx/ftkmf/helper.json" '"protocolVersion":1'
   assert_file "$game/doorstop_config.ini"
   assert_nofile "$game/run_bepinex.sh"
   assert_grep "$game/BepInEx/ftkmf-install.state" "build=proton"
@@ -369,6 +374,7 @@ done
 if [ "$probe" = 1 ]; then printf 200; exit 0; fi
 case "$url" in
   */FTKModFramework.dll) cp "$FTKMF_TEST_RELEASE_DIR/release.dll" "$dest" ;;
+  */ftkmf-helper-*) cp "$FTKMF_TEST_RELEASE_DIR/release.dll" "$dest" ;;
   */SHA256SUMS)
     case "$FTKMF_TEST_SUM_MODE" in
       missing) exit 22 ;;
@@ -376,6 +382,8 @@ case "$url" in
       malformed) printf 'bad  FTKModFramework.dll\n' > "$dest" ;;
       mismatch) printf '%064d  FTKModFramework.dll\n' 0 > "$dest" ;;
       valid) cp "$FTKMF_TEST_RELEASE_DIR/valid-sums" "$dest" ;;
+      helper-absent) head -n 1 "$FTKMF_TEST_RELEASE_DIR/valid-sums" > "$dest" ;;
+      helper-mismatch) sed '/ftkmf-helper-/s/^[^ ]*/0000000000000000000000000000000000000000000000000000000000000000/' "$FTKMF_TEST_RELEASE_DIR/valid-sums" > "$dest" ;;
     esac ;;
   *) exit 99 ;;
 esac
@@ -386,7 +394,12 @@ SH
   else
     sha256sum "$WORK/release.dll"
   fi | awk '{print $1 "  FTKModFramework.dll"}' > "$WORK/valid-sums"
-  for mode in missing absent malformed mismatch; do
+  local helper_hash helper_asset
+  helper_hash="$(awk '{print $1}' "$WORK/valid-sums")"
+  for helper_asset in ftkmf-helper-macos-universal ftkmf-helper-linux-amd64 ftkmf-helper-linux-arm64 ftkmf-helper-windows-amd64.exe; do
+    printf '%s  %s\n' "$helper_hash" "$helper_asset" >> "$WORK/valid-sums"
+  done
+  for mode in missing absent malformed mismatch helper-absent helper-mismatch; do
     export FTKMF_TEST_SUM_MODE="$mode"
     if run_installer "$fixture_home" --no-launch-options >/dev/null 2>&1; then
       fail "$mode checksum accepted"
@@ -399,6 +412,9 @@ SH
   run_installer "$fixture_home" --no-launch-options || fail "valid checksum rejected"
   if cmp -s "$WORK/release.dll" "$game/BepInEx/plugins/FTKModFramework.dll"; then
     pass "verified release installed"
+    assert_exec "$game/BepInEx/ftkmf/ftkmf-launcher-helper"
+    assert_grep "$game/BepInEx/ftkmf/helper.json" "$helper_hash"
+    assert_grep "$game/BepInEx/ftkmf/helper.json" '"protocolVersion":1'
   else
     fail "verified release not installed"
   fi

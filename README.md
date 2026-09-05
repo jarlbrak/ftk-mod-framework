@@ -205,3 +205,7 @@ each mod on or off (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §1
 - **FTKAPI** (Amadare / ftk-modding) and **FTKModLib** (lulzsun): the existing FTK modding APIs.
 - **CommunityDLC** (Theta_Hat_Society / Dehydrated-Mud): the worked example of a custom class.
 - Decompilation via **ILSpy**; loader **BepInEx**; patching **HarmonyX**.
+
+## Community marketplace
+
+The title-screen Mods panel includes Discover and Installed views for curated free content, with changes applied on restart. The initial catalog is empty until reviewed packages are published. See [the marketplace guide](docs/MARKETPLACE.md) for installation, author submissions and current validation limits.

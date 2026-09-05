@@ -29,6 +29,8 @@ helper darwin arm64 "$OUT/helper-mac-arm64"
 helper darwin amd64 "$OUT/helper-mac-amd64"
 lipo -create "$OUT/helper-mac-arm64" "$OUT/helper-mac-amd64" -output "$RES/ftkmf-launcher-helper"
 codesign --force --sign - "$RES/ftkmf-launcher-helper"
+cp "$RES/ftkmf-launcher-helper" "$OUT/ftkmf-helper-macos-universal"
+helper windows amd64 "$OUT/ftkmf-helper-windows-amd64.exe"
 cat > "$MAC/Contents/MacOS/For The King Modded" <<'SH'
 #!/bin/bash
 ROOT="$(cd "$(dirname "$0")/../Resources" && pwd)"
@@ -62,6 +64,8 @@ for arch in amd64 arm64; do
   cp "$ROOT/launcher/unix/launch.sh" "$DIR/For The King Modded.sh"
   cp "$ROOT/launcher/unix/add-to-steam.sh" "$DIR/Add to Steam.sh"
   helper linux "$arch" "$DIR/ftkmf-launcher-helper"
+  cp "$DIR/ftkmf-launcher-helper" "$OUT/ftkmf-helper-linux-$arch"
+  cp "$OUT/ftkmf-helper-windows-amd64.exe" "$DIR/ftkmf-launcher-helper.exe"
   (cd "$OUT/linux-$arch" && tar -czf "$OUT/FTKModdedLauncher-linux-$arch.tar.gz" 'For The King Modded')
 done
 WIN="$OUT/windows/For The King Modded"

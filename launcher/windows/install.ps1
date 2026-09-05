@@ -3,6 +3,7 @@
 param(
     [string]$GameDir,
     [string]$Framework,
+    [string]$Helper,
     [string]$Release = 'latest',
     [switch]$ReinstallLoader,
     [switch]$Dev
@@ -105,11 +106,13 @@ New-Item -ItemType Directory -Path $stage | Out-Null
 Write-Host "Game: $GameDir"
 Write-Host "Download staging: $stage"
 
+$remoteFramework = -not $Framework
 if (-not $Framework) {
     $bundled = Join-Path $PSScriptRoot 'FTKModFramework.dll'
     if (Test-Path -LiteralPath $bundled) { $Framework = $bundled }
 }
 if ($Framework) {
+    $remoteFramework = $false
     $Framework = (Resolve-Path -LiteralPath $Framework).Path
     if ([IO.Path]::GetExtension($Framework) -ne '.dll') { throw '-Framework must name a local framework DLL.' }
 } else {
@@ -127,6 +130,27 @@ if ($Framework) {
     Download $asset[0].browser_download_url $Framework
     Assert-Hash $Framework $matches[0].Groups[1].Value
 }
+
+# Validate both release assets before replacing the installed framework.
+$helperName = 'ftkmf-launcher-helper.exe'
+if ($remoteFramework) {
+    if ($Helper) { throw '-Helper requires a trusted local -Framework.' }
+    $helperAssetName = 'ftkmf-helper-windows-amd64.exe'
+    $helperAssets = @($releaseInfo.assets | Where-Object { $_.name -eq $helperAssetName })
+    if ($helperAssets.Count -ne 1) { throw "Release must provide $helperAssetName for the in-game marketplace." }
+    $helperMatches = @([regex]::Matches((Get-Content -LiteralPath $sums -Raw), '(?m)^([0-9a-fA-F]{64})\s+\*?ftkmf-helper-windows-amd64\.exe\s*$'))
+    if ($helperMatches.Count -ne 1) { throw 'SHA256SUMS must contain exactly one checksum for the marketplace helper.' }
+    $Helper = Join-Path $stage $helperName
+    Download $helperAssets[0].browser_download_url $Helper
+    Assert-Hash $Helper $helperMatches[0].Groups[1].Value
+} elseif (-not $Helper) {
+    $sibling = Join-Path (Split-Path -Parent $Framework) $helperName
+    if (Test-Path -LiteralPath $sibling) { $Helper = $sibling }
+}
+if ($Helper) {
+    $Helper = (Resolve-Path -LiteralPath $Helper).Path
+    if ((Get-Item -LiteralPath $Helper).Length -eq 0) { throw 'Marketplace helper is empty.' }
+} else { Write-Warning 'Local DLL only: marketplace helper missing. Installed mods remain available; use launcher Install / Repair to enable downloads.' }
 
 $loaderFiles = @('winhttp.dll', 'BepInEx\core\BepInEx.dll', 'doorstop_config.ini')
 $presentLoaderFiles = @($loaderFiles | Where-Object { Test-Path -LiteralPath (Join-Path $GameDir $_) -PathType Leaf })
@@ -156,6 +180,17 @@ if (-not $hasLoader -or $ReinstallLoader) {
     }
 } else { Write-Host 'Existing loader preserved. Use -ReinstallLoader to explicitly replace loader files.' }
 
+if ($Helper) {
+    $helperDir = Join-Path $GameDir 'BepInEx\ftkmf'
+    New-Item -ItemType Directory -Force -Path $helperDir | Out-Null
+    $helperDestination = Join-Path $helperDir $helperName
+    if (Test-Path -LiteralPath $helperDestination) {
+        Copy-Item -LiteralPath $helperDestination -Destination ($helperDestination + '.' + [Guid]::NewGuid().ToString('N') + '.bak')
+    }
+    Copy-Item -LiteralPath $Helper -Destination $helperDestination -Force
+    $helperRecord = @{ schemaVersion = 1; protocolVersion = 1; sha256 = (Get-FileHash -LiteralPath $Helper -Algorithm SHA256).Hash.ToLowerInvariant() }
+    [IO.File]::WriteAllText((Join-Path $helperDir 'helper.json'), ($helperRecord | ConvertTo-Json -Compress), (New-Object Text.UTF8Encoding($false)))
+}
 $plugins = Join-Path $GameDir 'BepInEx\plugins'
 New-Item -ItemType Directory -Force -Path $plugins | Out-Null
 $destination = Join-Path $plugins 'FTKModFramework.dll'

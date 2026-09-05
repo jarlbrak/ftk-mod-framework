@@ -137,3 +137,7 @@ CI runs it on Ubuntu and macOS.
 Normal installs reset developer self-tests, scale probes and forced enemy/encounter overrides. The Mods screen lists gameplay content, including the bundled **FTK Adventure Pack**, with descriptions. Developer example packages and intentional failure fixtures are excluded before loading in player mode. Files and saves are retained; saves made with developer-only content still require that content and its original configuration.
 
 Use `./deploy.sh --player` to return a development install to player mode, or `install.sh --dev` (Windows: `install.ps1 -Dev`) for framework diagnostics. Gameplay preferences such as `EnableSampleContent` are preserved. Disabling a mod takes effect on the next game launch.
+
+### Community marketplace
+
+Open **Mods** from the title screen to browse Discover or manage Installed content. Changes are prepared for the next launch. The initial catalog has no published community packages; the bundled Adventure Pack remains playable. See [Marketplace](MARKETPLACE.md) for package review, offline behavior, repair and save limitations.

@@ -354,6 +354,8 @@ namespace FTKModFramework
             if (_done) return; // Initialize can be reached more than once; only seed content once.
             _done = true;
 
+            Core.Marketplace.MarketplaceRuntime.InitializeBeforeDiscovery();
+
             // Register the bundled-demo row UNCONDITIONALLY, before its gate is read. EnableSampleContent.Value
             // backs the row's Enabled state (so a disabled demo stays listed and re-enableable); registration
             // itself never depends on that value. Doing this before the gate is what stops the FR-3 fail-open

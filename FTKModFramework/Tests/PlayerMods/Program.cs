@@ -24,6 +24,11 @@ internal static class Program
 
     private static void Main(string[] args)
     {
+        if (args.Length > 0 && args[0] == "--startup-recovery")
+        {
+            MarketplaceChecks.RecoveryProcess(args[1], args[2] == "invalid");
+            return;
+        }
         ModManifest legacy = JsonContentParser.Deserialize<ModManifest>("{\"modGuid\":\"thirdparty.legacy\",\"name\":\"Legacy mod\",\"version\":\"1\"}");
         Assert(legacy.Validate(new ValidationReport()) && !legacy.IsDevelopmentOnly && legacy.Description == null,
             "existing player manifests need no new metadata fields");
@@ -64,12 +69,17 @@ internal static class Program
         BehaviorLoader.LoadAll(disabled, report);
         Assert(report.Errors.Count == 0, "disabled mod skips behavior DLL file access and loading");
         ModRegistry.SetEnabled(key, true);
+        Assert(!entry.Enabled && entry.PendingEnabled == true && !ModRegistry.IsEnabled(key), "toggle writes pending state without changing this session's enabled snapshot");
+        string enabledKey = "thirdparty.enabled";
+        ModRegistry.Register(enabledKey, "Enabled mod", false, "1", true, null, null);
+        disabled[0] = new DiscoveredMod(new ModManifest { ModGuid = enabledKey }, new List<string>(), Path.Combine(root, "missing.dll"));
         BehaviorLoader.LoadAll(disabled, report);
         Assert(report.Errors.Count == 1 && report.Errors[0].Contains("behaviorDll not found"), "enabled mod reaches behavior DLL validation");
         Plugin.EnableSampleContent.Value = false;
         ModEntry bundled = ModRegistry.Register("com.ftkmf.framework", "FTK Adventure Pack", true, null, true, "Classes and adventures", "FTK Mod Framework team");
         Assert(!bundled.Enabled, "renamed bundled pack preserves config disabled state");
         Assert(object.ReferenceEquals(bundled, ModRegistry.Register(bundled.Key, "Other name", true, null, true, null, null)), "registration remains idempotent by stable key");
+        MarketplaceChecks.Run(root);
         Console.WriteLine("Fixtures retained at " + root);
     }
 }

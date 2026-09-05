@@ -370,6 +370,20 @@ func run(args []string) error {
 	return nil
 }
 func main() {
+	if len(os.Args) > 1 && (os.Args[1] == "marketplace-validate" || os.Args[1] == "marketplace-fixture" || os.Args[1] == "marketplace-catalog-validate") {
+		if e := marketDeveloper(os.Args[1:]); e != nil {
+			fmt.Fprintln(os.Stderr, e)
+			os.Exit(1)
+		}
+		return
+	}
+	if len(os.Args) > 1 && os.Args[1] == "marketplace" {
+		if e := marketplaceMain(os.Args[2:]); e != nil {
+			fmt.Fprintln(os.Stderr, e)
+			os.Exit(1)
+		}
+		return
+	}
 	if e := run(os.Args[1:]); e != nil {
 		fmt.Fprintln(os.Stderr, e)
 		os.Exit(1)

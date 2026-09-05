@@ -30,9 +30,13 @@ namespace FTKModFramework.Core.Data
         /// <summary>Optional author credit shown beside the description.</summary>
         public readonly string Author;
 
-        /// <summary>Current enabled state. Mutated only by <see cref="ModRegistry.SetEnabled"/>, which also
-        /// persists it. Read by <see cref="ModRegistry.IsEnabled"/> for load-time gating.</summary>
-        public bool Enabled;
+        /// <summary>Immutable enabled snapshot for this process. Pending changes never alter loaded state.</summary>
+        public readonly bool Enabled;
+        public bool? PendingEnabled;
+        public bool IsManaged { get; private set; }
+        public string PackageId { get; private set; }
+
+        internal void MarkManaged(string packageId) { IsManaged = true; PackageId = packageId; }
 
         public ModEntry(string key, string displayName, bool isBundledDemo, string version, bool enabled, string description, string author)
         {
@@ -112,6 +116,18 @@ namespace FTKModFramework.Core.Data
             return entry;
         }
 
+        internal static ModEntry RegisterManaged(ModManifest manifest, Marketplace.PackageDescriptor package)
+        {
+            ModEntry existing;
+            if (_byKey.TryGetValue(manifest.ModGuid, out existing)) return existing;
+            ModEntry entry = new ModEntry(manifest.ModGuid, manifest.Name, false, manifest.Version,
+                package.Enabled, package.Description ?? manifest.Description, package.Author ?? manifest.Author);
+            entry.MarkManaged(package.PackageId);
+            _entries.Add(entry);
+            _byKey[entry.Key] = entry;
+            return entry;
+        }
+
         /// <summary>
         /// Gating read used at load time. Returns the registered row's <c>Enabled</c> state, or TRUE for an
         /// unknown key (fail-open): a key the registry never saw must not be silently dropped.
@@ -125,7 +141,7 @@ namespace FTKModFramework.Core.Data
 
         /// <summary>
         /// Set and PERSIST a mod's enabled state. The demo row writes <c>Plugin.EnableSampleContent.Value</c>;
-        /// a data-mod row writes its PlayerPrefs key (then Save). Updates the in-memory row too. No live
+        /// a data-mod row writes its PlayerPrefs key (then Save). Only PendingEnabled changes in memory. No live
         /// re-inject: a change takes effect on the next load. A no-op (with a warning) for an unknown key,
         /// since there is nothing to persist against.
         /// </summary>
@@ -138,7 +154,12 @@ namespace FTKModFramework.Core.Data
                 return;
             }
 
-            entry.Enabled = enabled;
+            if (entry.IsManaged)
+            {
+                Plugin.Log.LogWarning("Managed selections must be prepared through the marketplace confirmation flow.");
+                return;
+            }
+            entry.PendingEnabled = enabled == entry.Enabled ? (bool?)null : enabled;
 
             if (entry.IsBundledDemo)
             {

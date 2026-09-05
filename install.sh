@@ -42,6 +42,7 @@ STATE_FILE_NAME="ftkmf-install.state"
 # ---------------------------------------------------------------------------------------------------
 OPT_GAME_DIR="${FTK_DIR:-}"
 OPT_FRAMEWORK="${FTKMF_DLL:-}"
+OPT_HELPER=""
 OPT_RELEASE="${FTKMF_RELEASE:-latest}"
 OPT_DEV=0
 OPT_NO_LAUNCH=0
@@ -86,6 +87,7 @@ Usage: install.sh [options]
   --game-dir PATH       Game folder (default: found through your Steam libraries).
   --framework PATH      Install this FTKModFramework.dll (or a .zip holding it) instead of downloading.
   --release TAG         Framework release tag to download (default: latest).
+  --helper PATH         Install a trusted local marketplace helper alongside a local framework.
   --dev                 Developer mode: turn on the framework's load-time self-tests in its config.
   --player              Player mode (default): disable diagnostics and forced test encounters/enemies.
   --reinstall-bepinex   Replace an existing BepInEx with the pinned ${BEPINEX_VERSION}.
@@ -107,6 +109,7 @@ while [ $# -gt 0 ]; do
     --game-dir=*) OPT_GAME_DIR="${1#*=}"; shift ;;
     --framework) [ $# -ge 2 ] || die "--framework needs a path"; OPT_FRAMEWORK="$2"; shift 2 ;;
     --framework=*) OPT_FRAMEWORK="${1#*=}"; shift ;;
+    --helper) [ $# -ge 2 ] || die "--helper needs a path"; OPT_HELPER="$2"; shift 2 ;;
     --release) [ $# -ge 2 ] || die "--release needs a tag"; OPT_RELEASE="$2"; shift 2 ;;
     --release=*) OPT_RELEASE="${1#*=}"; shift ;;
     --dev) OPT_DEV=1; shift ;;
@@ -625,6 +628,61 @@ obtain_framework() {
   esac
 }
 
+# Marketplace executable is framework-owned and outside all scanned plugin roots.
+HELPER_SRC=""
+HELPER_NAME="ftkmf-launcher-helper"
+obtain_helper() {
+  local asset expected actual count sibling
+  case "$BUILD" in
+    mac) asset="ftkmf-helper-macos-universal" ;;
+    proton) asset="ftkmf-helper-windows-amd64.exe"; HELPER_NAME="ftkmf-launcher-helper.exe" ;;
+    linux)
+      case "$(uname -m)" in
+        x86_64) asset="ftkmf-helper-linux-amd64" ;;
+        aarch64|arm64) asset="ftkmf-helper-linux-arm64" ;;
+        *) die "No marketplace helper is available for this architecture." ;;
+      esac ;;
+  esac
+  if [ -n "$OPT_HELPER" ]; then
+    [ -n "$OPT_FRAMEWORK" ] || die "--helper requires --framework; release installs use verified release assets."
+    [ -f "$OPT_HELPER" ] || die "--helper path does not exist: $OPT_HELPER"
+    HELPER_SRC="$OPT_HELPER"
+  elif [ -n "$OPT_FRAMEWORK" ]; then
+    sibling="$(dirname "$FRAMEWORK_SRC")/$HELPER_NAME"
+    [ ! -f "$sibling" ] || HELPER_SRC="$sibling"
+    if [ -z "$HELPER_SRC" ]; then
+      warn "Local DLL only: marketplace helper was not supplied. Installed mods remain available; use --helper or the launcher Install / Repair to enable downloads."
+      return 0
+    fi
+  else
+    count="$(awk -v n="$asset" '$2==n || $2=="*"n {c++} END {print c+0}' "$TMP_DIR/$FRAMEWORK_SUMS_NAME")"
+    expected="$(awk -v n="$asset" '$2==n || $2=="*"n {print $1}' "$TMP_DIR/$FRAMEWORK_SUMS_NAME")"
+    if [ "$count" != 1 ] || [ "${#expected}" != 64 ] || printf '%s' "$expected" | LC_ALL=C grep -q '[^0-9a-fA-F]'; then
+      die "SHA256SUMS must contain exactly one valid checksum for $asset."
+    fi
+    HELPER_SRC="$TMP_DIR/$asset"
+    download "$(framework_release_url "$asset")" "$HELPER_SRC"
+    actual="$(sha256_of "$HELPER_SRC")"
+    expected="$(printf '%s' "$expected" | tr 'A-F' 'a-f')"
+    [ "$actual" = "$expected" ] || die "checksum mismatch for $asset; framework was not replaced."
+  fi
+  [ -s "$HELPER_SRC" ] || die "Marketplace helper is empty."
+}
+
+install_helper() {
+  [ -n "$HELPER_SRC" ] || return 0
+  local dest="$GAME_DIR/BepInEx/ftkmf" hash
+  mkdir -p "$dest"
+  hash="$(sha256_of "$HELPER_SRC")"
+  cp "$HELPER_SRC" "$dest/$HELPER_NAME.new.$$"
+  chmod 755 "$dest/$HELPER_NAME.new.$$"
+  mv "$dest/$HELPER_NAME.new.$$" "$dest/$HELPER_NAME"
+  printf '{"schemaVersion":1,"protocolVersion":1,"sha256":"%s"}\n' "$hash" > "$TMP_DIR/helper.json"
+  cp "$TMP_DIR/helper.json" "$dest/helper.json.new.$$"
+  mv "$dest/helper.json.new.$$" "$dest/helper.json"
+  ok "marketplace helper installed (protocol 1)."
+}
+
 # Set Key = Value inside [Section] of a BepInEx .cfg, creating the section or file as needed.
 cfg_set() {
   local file="$1" section="$2" key="$3" value="$4" tmp="$TMP_DIR/cfg.$$"
@@ -652,10 +710,12 @@ cfg_set() {
 install_framework() {
   local plugins="$GAME_DIR/BepInEx/plugins" cfg="$GAME_DIR/BepInEx/config/$FRAMEWORK_PLUGIN_GUID.cfg"
   obtain_framework
+  obtain_helper
   if [ "$OPT_DRY_RUN" = "1" ]; then
     info "[dry-run] would copy $FRAMEWORK_DLL_NAME ($FRAMEWORK_ORIGIN) to $plugins/"
     return 0
   fi
+  install_helper
   mkdir -p "$plugins"
   cp "$FRAMEWORK_SRC" "$plugins/$FRAMEWORK_DLL_NAME"
   state_set framework_origin "$FRAMEWORK_ORIGIN"
@@ -1054,6 +1114,9 @@ do_uninstall() {
 # Install
 # ---------------------------------------------------------------------------------------------------
 do_install() {
+  if [ "$OPT_DRY_RUN" != 1 ] && game_running; then
+    die "Close For The King before installing or repairing the framework."
+  fi
   step "Installing the mod loader (BepInEx)"
   check_codesign
   install_bepinex

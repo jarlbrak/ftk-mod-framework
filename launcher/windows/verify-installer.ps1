@@ -29,10 +29,14 @@ function New-Game([string]$Name, [uint16]$Machine = 0x8664) {
     return $path
 }
 
+# Fixture installs must not inspect or control the host game process.
+function Get-Process { param($Name, $ErrorAction) return @() }
+
 function Invoke-RestMethod {
     param($Uri)
     $assets = @([pscustomobject]@{ name = 'FTKModFramework.dll'; browser_download_url = 'https://fixture.invalid/framework' })
     if ($global:FtkFixtureScenario -ne 'missing-checksums') { $assets += [pscustomobject]@{ name = 'SHA256SUMS'; browser_download_url = 'https://fixture.invalid/sums' } }
+    if ($global:FtkFixtureScenario -ne 'missing-helper') { $assets += [pscustomobject]@{ name = 'ftkmf-helper-windows-amd64.exe'; browser_download_url = 'https://fixture.invalid/helper' } }
     return [pscustomobject]@{ assets = $assets }
 }
 
@@ -44,8 +48,14 @@ function Invoke-WebRequest {
             $entry = "$global:FtkFixtureFixtureHash  FTKModFramework.dll"
             if ($global:FtkFixtureScenario -eq 'missing-entry') { $entry = "$global:FtkFixtureFixtureHash  unrelated.dll" }
             if ($global:FtkFixtureScenario -eq 'bad-hash') { $entry = ('0' * 64) + '  FTKModFramework.dll' }
+            if ($global:FtkFixtureScenario -ne 'missing-helper-hash') {
+                $helperHash = $global:FtkFixtureFixtureHash
+                if ($global:FtkFixtureScenario -eq 'bad-helper-hash') { $helperHash = '0' * 64 }
+                $entry += "`n$helperHash  ftkmf-helper-windows-amd64.exe"
+            }
             [IO.File]::WriteAllText($OutFile, $entry)
         }
+        'https://fixture.invalid/helper' { [IO.File]::WriteAllBytes($OutFile, $global:FtkFixtureFrameworkBytes) }
         'https://fixture.invalid/framework' { [IO.File]::WriteAllBytes($OutFile, $global:FtkFixtureFrameworkBytes) }
         default { throw "Unexpected network request: $Uri" }
     }
@@ -67,7 +77,10 @@ Expect-Failure 'reject x86 game' '*requires the Windows x64*' $game
 foreach ($case in @(
     @('missing-checksums', '*must provide FTKModFramework.dll and SHA256SUMS*'),
     @('missing-entry', '*exactly one checksum*'),
-    @('bad-hash', '*SHA256 verification failed*')
+    @('bad-hash', '*SHA256 verification failed*'),
+    @('missing-helper', '*Release must provide ftkmf-helper*'),
+    @('missing-helper-hash', '*exactly one checksum for the marketplace helper*'),
+    @('bad-helper-hash', '*SHA256 verification failed*')
 )) {
     $global:FtkFixtureScenario = $case[0]
     $game = New-Game $case[0]
@@ -88,7 +101,10 @@ New-Item -ItemType Directory -Path (Join-Path $game 'BepInEx/core') -Force | Out
 & $installer -GameDir $game
 if ((Get-FileHash -LiteralPath (Join-Path $game 'BepInEx/plugins/FTKModFramework.dll')).Hash -ne $global:FtkFixtureFixtureHash) { throw 'Verified framework was not installed' }
 if ([IO.File]::ReadAllText((Join-Path $game 'winhttp.dll')) -ne 'existing-loader') { throw 'Existing loader changed' }
-Write-Host 'PASS: verified release installs and preserves loader'
+if (-not (Test-Path -LiteralPath (Join-Path $game 'BepInEx/ftkmf/ftkmf-launcher-helper.exe'))) { throw 'Marketplace helper was not installed' }
+$helperRecord = Get-Content -Raw -LiteralPath (Join-Path $game 'BepInEx/ftkmf/helper.json') | ConvertFrom-Json
+if ($helperRecord.protocolVersion -ne 1 -or $helperRecord.sha256 -ne $global:FtkFixtureFixtureHash.ToLowerInvariant()) { throw 'Incorrect helper verification record' }
+Write-Host 'PASS: verified release installs helper, records hash and preserves loader'
 
 $source = Join-Path $fixtureRoot 'local-framework.dll'
 [IO.File]::WriteAllBytes($source, $global:FtkFixtureFrameworkBytes)

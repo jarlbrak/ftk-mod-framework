@@ -41,6 +41,33 @@ namespace FTKModFramework.Core.Data
     /// </summary>
     internal static class ModDiscovery
     {
+        internal static List<DiscoveredMod> DiscoverAll(string manualRoot, string managedRoot, ValidationReport report)
+        {
+            List<DiscoveredMod> mods = Discover(manualRoot, report);
+            if (!string.IsNullOrEmpty(managedRoot) && !string.Equals(Path.GetFullPath(manualRoot), Path.GetFullPath(managedRoot), StringComparison.Ordinal))
+                mods.AddRange(Discover(managedRoot, report));
+            mods.Sort(CompareMods);
+            Dictionary<string, string> seen = new Dictionary<string, string>(StringComparer.Ordinal);
+            List<DiscoveredMod> unique = new List<DiscoveredMod>();
+            foreach (DiscoveredMod mod in mods)
+            {
+                string prior;
+                if (mod.Manifest.ModGuid == Plugin.Guid)
+                {
+                    report.Error("Mod GUID conflicts with bundled FTK Adventure Pack: " + mod.Manifest.FolderPath);
+                    continue;
+                }
+                if (seen.TryGetValue(mod.Manifest.ModGuid, out prior))
+                {
+                    report.Error("Duplicate mod GUID '" + mod.Manifest.ModGuid + "': " + prior + " and " + mod.Manifest.FolderPath + ". Restart after resolving the conflict.");
+                    continue;
+                }
+                seen[mod.Manifest.ModGuid] = mod.Manifest.FolderPath;
+                unique.Add(mod);
+            }
+            return unique;
+        }
+
         public static List<DiscoveredMod> Discover(string contentRoot, ValidationReport report)
         {
             List<DiscoveredMod> mods = new List<DiscoveredMod>();
