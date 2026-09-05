@@ -27,8 +27,24 @@
 
 "Verified in-game" means the content has been loaded into a running game with `SELF-TEST PASS` confirmed in `BepInEx/LogOutput.log`, not just compiled. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
 
-## Two ways to get involved
+## Play with mods (macOS, SteamOS, Bazzite, Linux)
 
+No build tools, no mod manager. Open a terminal (SteamOS/Bazzite: Desktop Mode, Konsole) and paste:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/jarlbrak/ftk-mod-framework/master/install.sh | bash
+```
+
+It finds your Steam copy of For The King, installs the BepInEx loader for your build (macOS, native
+Linux, or Proton), installs the framework, and sets the Steam launch option. Launch the game from
+Steam: a splash card confirms the framework and its mods loaded, a **Mods** button appears on the
+title screen, the **Thief** and **Innkeeper** at character select, and **Smuggler's Run** and
+**The Hollow Mire** in the adventure list. Details, updating, and removal:
+[`docs/INSTALL.md`](docs/INSTALL.md).
+
+## Three ways to get involved
+
+- **Play** (above), and drop other content mods into `<game>/BepInEx/plugins/`.
 - **Use the framework** (make your own mod): add content through the public `Content.*` API. Start with [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md). The bundled `Content/ThiefClass.cs` and `Content/CutpurseEnemy.cs` are working references.
 - **Contribute to the framework** (work on the engine and content pipeline): see [`CONTRIBUTING.md`](CONTRIBUTING.md). Work is scoped as epics, specs, and work-items in [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues); every change is verified in-game before it counts as done.
 
@@ -72,7 +88,12 @@ FTKModFramework/
   Agent/                   opt-in test bridge (env-gated, loopback-only, single-player; see harness/)
 FTKPerfProbe/              standalone perf-probe plugin (+ FTKPerfProbe.Tests)
 harness/                   MCP server that lets an agent drive the game to verify content
+install.sh                 the player installer (macOS + Linux): BepInEx + plugin + Steam launch option
+deploy.sh                  developer build-and-install through install.sh (self-tests on)
+release.sh                 maintainer: publish a GitHub release the installer downloads from
+tests/installer/           the installer's test suite (mock Steam layouts; runs in CI)
 docs/
+  INSTALL.md               player install guide: what the installer does per platform, troubleshooting
   WRITING-CONTENT.md       modder API guide (items, abilities, classes, enemies, encounters)
   ADVENTURES.md            how FTK models adventures + how the framework adds them
   CAMPAIGNS.md             data-authored questlines (branching, flags, custom objective verbs)
@@ -105,18 +126,18 @@ are git-ignored (they're copyrighted; reference them from the install).
 
 ## Install & run
 
-1. Install the **BepInExPack for For The King** (Thunderstore) into the game so a `BepInEx/` folder
-   sits next to the executable. (Easiest via the r2modman / Thunderstore mod manager.)
-2. Copy `FTKModFramework.dll` into `<game>/BepInEx/plugins/`.
-3. Launch. Check `BepInEx/LogOutput.log` for `FTK Mod Framework ... loaded` and the
-   `SELF-TEST PASS` lines. With the demo enabled, the **Thief** appears at character-select and the
-   "Emberbrand" weapon is in the Blacksmith's starting kit.
+Players: use the one-line installer above (it handles BepInEx, the plugin, and Steam's launch
+option on macOS and Linux; [`docs/INSTALL.md`](docs/INSTALL.md) has the per-platform details and
+troubleshooting). On Windows, install the **BepInExPack for For The King** (Thunderstore / r2modman)
+and copy `FTKModFramework.dll` into `<game>/BepInEx/plugins/`.
 
-> **macOS note:** BepInEx on the Mac Unity-Mono build uses `run_bepinex.sh` + a Doorstop dylib
-> rather than the Windows `winhttp.dll`. It works, but the FTK community packs are Windows-first, so
-> a Windows install (or a VM) is the smoother path for *testing*. The framework DLL itself is
-> platform-agnostic managed IL. Also note: **co-op requires every player to have identical mods**
-> (no asset streaming), which is why `IdAllocator` makes IDs deterministic across machines.
+Developers: `./deploy.sh` builds the framework and installs your build into your Steam copy through
+the same installer, with the load-time self-tests switched on (`Diagnostics/RunSelfTests`). Launch,
+then check `BepInEx/LogOutput.log` for `FTK Mod Framework ... loaded` and the `SELF-TEST PASS` lines.
+The installer has its own test suite: `bash tests/installer/test-install.sh`.
+
+> **Co-op requires every player to have identical mods** (no asset streaming), which is why
+> `IdAllocator` makes IDs deterministic across machines.
 
 ## Using the framework (writing a content mod)
 

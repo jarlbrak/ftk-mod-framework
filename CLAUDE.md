@@ -48,7 +48,7 @@ Every implementation slice must follow this sequence:
 3. Compare the existing `Core/` and `Content/` code against what the game types actually require.
 4. Implement the smallest faithful change that fills the gap: clone the right `FTK_*DB` row and register it via `ContentRegistry`.
 5. Build: `cd FTKModFramework && dotnet build -c Release`. Fix any errors before proceeding.
-6. Verify in-game: launch FTK with the DLL installed and confirm `SELF-TEST PASS` lines appear in `BepInEx/LogOutput.log`.
+6. Verify in-game: deploy with `./deploy.sh` (builds, installs the DLL through `install.sh`, and turns on `Diagnostics/RunSelfTests`), launch FTK, and confirm `SELF-TEST PASS` lines appear in `BepInEx/LogOutput.log`.
 7. Update the GitHub issue with findings, close it only when the code is verified in-game.
 8. Update `docs/` as needed.
 9. Commit with a faithful summary.
@@ -69,7 +69,9 @@ On a different machine or OS, override the managed dir:
 dotnet build -c Release -p:FtkManagedDir="C:\Program Files (x86)\Steam\steamapps\common\For The King\FTK_Data\Managed"
 ```
 
-**In-game gate:** after copying `FTKModFramework.dll` to `<game>/BepInEx/plugins/` and launching, confirm `BepInEx/LogOutput.log` contains `FTK Mod Framework ... loaded` and `SELF-TEST PASS` lines. If those lines are absent, the content registration failed.
+**In-game gate:** after copying `FTKModFramework.dll` to `<game>/BepInEx/plugins/` and launching, confirm `BepInEx/LogOutput.log` contains `FTK Mod Framework ... loaded` and `SELF-TEST PASS` lines. If those lines are absent, the content registration failed. The engine self-tests (behaviour primitives, passive registry, campaign engine, realm spike, scale gates) only run when `Diagnostics/RunSelfTests = true` in `BepInEx/config/com.ftkmf.framework.cfg`; they are off for players because they register probe adventures and rows. `./deploy.sh` sets the flag; the bundled sample content emits its own `SELF-TEST` lines regardless.
+
+**Installer gate:** `install.sh` (the player installer for macOS and Linux) has a mock-Steam test suite: `bash tests/installer/test-install.sh` (also run by CI on Ubuntu and macOS). Run it after any change to `install.sh`.
 
 **Determinism invariants:** Co-op requires every player to have identical mods (no asset streaming). `IdAllocator` assigns synthetic enum IDs that are deterministic across machines, making saves portable and multiplayer sessions consistent. Any new registered content must go through `IdAllocator`; hard-coded integer IDs are forbidden.
 

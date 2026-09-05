@@ -88,6 +88,10 @@
          (Adventures.RegisterEndGameImage) to <adventureFolder>/EndGameImage.png, which the
          gamedef's GetEndGameImage() loads for the flat (non-StoneHero) victory tableau. -->
     <EmbeddedResource Include="assets\adventures\hollowmire\EndGameImage.png" />
+    <!-- The framework's own logo for the title-screen splash card (Core/UI/ModSplash.cs), rasterized from
+         assets/brand/ftk-logo.svg at the repo root. LogicalName pins the manifest name so the loader's constant
+         cannot drift from MSBuild's default naming of a hyphenated file. -->
+    <EmbeddedResource Include="assets\brand\splash-logo.png" LogicalName="FTKModFramework.assets.brand.splash-logo.png" />
   </ItemGroup>
 
 </Project>
