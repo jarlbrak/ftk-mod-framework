@@ -27,31 +27,28 @@
 
 "Verified in-game" means the content has been loaded into a running game with `SELF-TEST PASS` confirmed in `BepInEx/LogOutput.log`, not just compiled. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
 
-## Play with mods (macOS, SteamOS, Bazzite, Linux)
+## Play with mods (macOS, Linux, Windows preview)
 
-No build tools, no mod manager. Open a terminal (SteamOS/Bazzite: Desktop Mode, Konsole) and paste:
+1. Download your platform launcher archive from [GitHub Releases](https://github.com/jarlbrak/ftk-mod-framework/releases).
+2. Extract it to a permanent folder, keeping the files together.
+3. In Steam, choose **Games > Add a Non-Steam Game > Browse** and select **For The King Modded.app**
+   (Mac), **For The King Modded.sh** (Linux), or **FtkModdedLauncher.exe** (Windows).
+4. Name it **For The King Modded** and launch. On Windows, choose **Play** in the launcher.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/jarlbrak/ftk-mod-framework/master/install.sh | bash
-```
+First launch installs the bundled framework and its loader. Steam artwork is applied
+automatically; Steam may need one restart to show it. Each launcher Play checks for a
+compatible stable framework update before opening your owned game, preserving mods and
+settings and using the verified installed version when offline. Preview releases stay
+out of the stable update feed.
 
-It finds your Steam copy of For The King, installs the BepInEx loader for your build (macOS, native
-Linux, or Proton), installs the framework, and sets the Steam launch option. Launch the game from
-Steam: a splash card confirms the framework and its mods loaded, a **Mods** button appears on the
-title screen, the **Thief** and **Innkeeper** at character select, and **Smuggler's Run** and
-**The Hollow Mire** in the adventure list. Details, updating, and removal:
-[`docs/INSTALL.md`](docs/INSTALL.md).
+The title screen includes a **Mods** browser, and bundled content includes the **Thief**,
+**Innkeeper**, **Smuggler's Run**, and **The Hollow Mire**. See
+[the launcher guide](launcher/README.md) for setup and platform limits. macOS gameplay
+has been smoke-tested; Windows and Linux/Proton gameplay still need platform testing.
 
-## Branded Steam launcher (macOS, Linux, Windows preview)
-
-The launcher packages provide a **For The King Modded** entry through Steam's
-**Add a Non-Steam Game** flow. Library artwork is applied on launch; Steam may need
-one restart to save the shortcut and refresh its artwork. The launcher starts the
-owned Steam copy, and keeps the existing native/Proton configuration.
-
-See [`launcher/README.md`](launcher/README.md) for package setup and platform limits.
-Windows builds and offline installer checks are supported; Windows gameplay remains
-untested. Launchers are attached by `release.sh` alongside the plugin and checksums.
+The standalone terminal installer remains available for manual setup and removal;
+see [the installation guide](docs/INSTALL.md). It downloads the latest stable release
+by default, so use the launcher archive for this early-access preview.
 
 ## Three ways to get involved
 

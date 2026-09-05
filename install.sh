@@ -117,6 +117,7 @@ while [ $# -gt 0 ]; do
     --reinstall-bepinex) OPT_REINSTALL_BEPINEX=1; shift ;;
     --no-launch-options) OPT_NO_LAUNCH=1; shift ;;
     --status) OPT_ACTION="status"; shift ;;
+    --launcher-status) OPT_ACTION="launcher-status"; shift ;;
     --uninstall) OPT_ACTION="uninstall"; shift ;;
     --purge) OPT_PURGE=1; shift ;;
     --dry-run) OPT_DRY_RUN=1; shift ;;
@@ -388,6 +389,7 @@ EOF
     if [ -z "$STEAM_ROOTS" ]; then
       warn "no Steam installation found either (looked in the usual places)."
     fi
+    [ "$OPT_ACTION" != "launcher-status" ] || die "For The King not found. Install it through Steam first, or set FTK_DIR to its game folder."
     typed="$(ask_line "Enter the game folder path (the one holding FTK.app or FTK.exe), or leave blank to stop:")"
     [ -n "$typed" ] || die "For The King not found. Install it through Steam first, or re-run with --game-dir PATH."
     d="$(normalize_game_dir "$typed")"
@@ -398,7 +400,7 @@ EOF
 
   if [ "$count" -gt 1 ]; then
     warn "found more than one For The King install; using the first. Pass --game-dir to choose:"
-    printf '%s' "$found" | while IFS= read -r d; do [ -n "$d" ] && info "  $d"; done
+    printf '%s' "$found" | while IFS= read -r d; do [ -n "$d" ] && info "  $d" >&2; done
   fi
   GAME_DIR="$(printf '%s' "$found" | head -n 1)"
 }
@@ -1153,6 +1155,15 @@ do_install() {
 # Main
 # ---------------------------------------------------------------------------------------------------
 main() {
+  if [ "$OPT_ACTION" = "launcher-status" ]; then
+    detect_platform
+    find_game_dir
+    detect_build
+    case "$GAME_DIR" in *$'\n'*|*$'\r'*) die "Game folder contains unsupported line breaks." ;; esac
+    printf '%s\n%s\n' "$GAME_DIR" "$BUILD"
+    if [ -f "$GAME_DIR/BepInEx/plugins/$FRAMEWORK_DLL_NAME" ]; then printf 'installed\n'; else printf 'missing\n'; fi
+    return
+  fi
   say "${C_BOLD}FTK Mod Framework installer ${INSTALLER_VERSION}${C_OFF}"
   detect_platform
   step "Finding For The King"

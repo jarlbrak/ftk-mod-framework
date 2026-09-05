@@ -34,6 +34,9 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: ./launcher/windows/verify-installer.ps1
+      - name: Release integrity metadata checks
+        if: runner.os != 'Windows'
+        run: python3 launcher/tools/test-release-manifest.py
       - name: Unix launcher fast path
         if: runner.os != 'Windows'
         run: bash launcher/unix/test-launch.sh

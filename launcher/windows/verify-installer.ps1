@@ -87,6 +87,17 @@ foreach ($case in @(
     Expect-Failure $case[0] $case[1] $game
 }
 
+$statusGame = New-Game 'status-only'
+$beforeRequests = $global:FtkFixtureRequests
+$statusRecord = (& $installer -GameDir $statusGame -Status) | ConvertFrom-Json
+if ($statusRecord.gameDir -ne $statusGame -or $statusRecord.frameworkInstalled) { throw 'Status returned incorrect missing-install state.' }
+if ($global:FtkFixtureRequests -ne $beforeRequests -or (Test-Path -LiteralPath (Join-Path $statusGame 'BepInEx'))) { throw 'Status performed network or installation mutations.' }
+New-Item -ItemType Directory -Path (Join-Path $statusGame 'BepInEx/plugins') -Force | Out-Null
+[IO.File]::WriteAllBytes((Join-Path $statusGame 'BepInEx/plugins/FTKModFramework.dll'), [byte[]]@(1))
+$statusRecord = (& $installer -GameDir $statusGame -Status) | ConvertFrom-Json
+if (-not $statusRecord.frameworkInstalled) { throw 'Status did not report the existing framework.' }
+Write-Host 'PASS: launcher status is read-only and distinguishes initial from existing installation'
+
 $global:FtkFixtureScenario = 'valid-release'
 $game = New-Game 'partial-loader'
 [IO.File]::WriteAllText((Join-Path $game 'winhttp.dll'), 'foreign-or-incomplete-loader')

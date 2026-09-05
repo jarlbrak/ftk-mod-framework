@@ -10,7 +10,7 @@ DLL="$ROOT/FTKModFramework/bin/Release/net35/FTKModFramework.dll"
 [ -f "$DLL" ] || { echo 'Build FTKModFramework Release first.' >&2; exit 1; }
 VERSION="$(sed -n 's/.*public const string Version = "\(.*\)";/\1/p' "$ROOT/FTKModFramework/Plugin.cs")"
 helper() {
-  (cd "$ROOT/launcher/helper" && CGO_ENABLED=0 GOOS="$1" GOARCH="$2" go build -trimpath -ldflags='-s -w' -o "$3" .)
+  (cd "$ROOT/launcher/helper" && CGO_ENABLED=0 GOOS="$1" GOARCH="$2" go build -trimpath -ldflags="-s -w -X main.bundledFrameworkVersion=$VERSION" -o "$3" .)
 }
 bundle_common() {
   mkdir -p "$1/assets/steam"
@@ -52,6 +52,7 @@ cat > "$MAC/Contents/Info.plist" <<PLIST
 <key>NSHumanReadableCopyright</key><string>FTK Mod Framework community launcher. Requires For The King on Steam.</string>
 </dict></plist>
 PLIST
+python3 "$ROOT/launcher/tools/release-manifest.py" bundle "$RES" "$VERSION" --platform macos-universal
 cp "$ROOT/launcher/unix/add-to-steam.sh" "$OUT/macos/Add to Steam.command"
 cp "$ROOT/launcher/README.md" "$OUT/macos/README.md"
 (cd "$OUT/macos" && zip -qr "$OUT/FTKModdedLauncher-macos-universal.zip" .)
@@ -66,6 +67,7 @@ for arch in amd64 arm64; do
   helper linux "$arch" "$DIR/ftkmf-launcher-helper"
   cp "$DIR/ftkmf-launcher-helper" "$OUT/ftkmf-helper-linux-$arch"
   cp "$OUT/ftkmf-helper-windows-amd64.exe" "$DIR/ftkmf-launcher-helper.exe"
+  python3 "$ROOT/launcher/tools/release-manifest.py" bundle "$DIR" "$VERSION" --platform "linux-$arch"
   (cd "$OUT/linux-$arch" && tar -czf "$OUT/FTKModdedLauncher-linux-$arch.tar.gz" 'For The King Modded')
 done
 WIN="$OUT/windows/For The King Modded"
@@ -76,5 +78,6 @@ cp "$ROOT/launcher/windows/bin/Release/net48/FtkModdedLauncher.exe" "$WIN/"
 cp "$ROOT/launcher/windows/bin/Release/net48/FtkModdedLauncher.exe.config" "$WIN/"
 cp "$ROOT/launcher/windows/install.ps1" "$WIN/"
 helper windows amd64 "$WIN/ftkmf-launcher-helper.exe"
+python3 "$ROOT/launcher/tools/release-manifest.py" bundle "$WIN" "$VERSION" --platform windows-amd64
 (cd "$OUT/windows" && zip -qr "$OUT/FTKModdedLauncher-windows-x64.zip" .)
 printf 'Launcher packages: %s\n' "$OUT"

@@ -6,9 +6,11 @@ param(
     [string]$Helper,
     [string]$Release = 'latest',
     [switch]$ReinstallLoader,
-    [switch]$Dev
+    [switch]$Dev,
+    [switch]$Status
 )
 $ErrorActionPreference = 'Stop'
+[Console]::OutputEncoding = New-Object Text.UTF8Encoding($false)
 Set-StrictMode -Version Latest
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
@@ -100,6 +102,10 @@ function Set-ConfigValue([string]$Path, [string]$Section, [string]$Key, [string]
 if (-not $GameDir) { $GameDir = Find-Game }
 $GameDir = (Resolve-Path -LiteralPath $GameDir).Path
 Assert-Game $GameDir
+if ($Status) {
+    @{ gameDir = $GameDir; frameworkInstalled = (Test-Path -LiteralPath (Join-Path $GameDir 'BepInEx\plugins\FTKModFramework.dll') -PathType Leaf) } | ConvertTo-Json -Compress
+    return
+}
 if (Get-Process -Name FTK -ErrorAction SilentlyContinue) { throw 'Close For The King before installing.' }
 $stage = Join-Path ([IO.Path]::GetTempPath()) ('ftkmf-' + [Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $stage | Out-Null

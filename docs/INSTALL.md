@@ -4,6 +4,17 @@ One command sets up everything: it finds your Steam copy of For The King, instal
 loader that matches your build, installs the FTK Mod Framework, and sets the Steam launch option
 that turns the loader on. No mod manager, no manual file copying, no editing Steam settings.
 
+## Recommended: Steam launcher
+
+For the early-access preview, download a platform archive from
+[GitHub Releases](https://github.com/jarlbrak/ftk-mod-framework/releases) and follow
+[the launcher guide](../launcher/README.md). First Play handles setup, Steam artwork,
+and the prelaunch framework update check. Windows players should use that bundle.
+
+The terminal instructions below are for manual macOS/Linux installations. The default
+remote installer uses the latest **stable** release and does not select previews. Before
+a stable release exists, use the launcher bundle's local installer/assets instead.
+
 ## Install
 
 Open a terminal (macOS: Terminal; SteamOS or Bazzite: switch to Desktop Mode and open Konsole) and
@@ -40,7 +51,7 @@ Drop a mod folder (one holding a `manifest.json`) or a plugin `.dll` into
 
 ```bash
 bash install.sh --status      # what is installed, the launch option, and the last log's verdict
-bash install.sh               # run again any time: updates the framework to the latest release
+bash install.sh               # run again any time: updates the framework to the latest stable release
 bash install.sh --uninstall   # removes the framework and restores your launch option
 bash install.sh --uninstall --purge   # also removes BepInEx (only if this installer put it there)
 ```
