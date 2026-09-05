@@ -83,6 +83,13 @@ Details worth knowing:
   loader handles that without any extra launch-option trickery.
 - **Multiple Steam accounts** on one machine each get the launch option.
 
+## Branded non-Steam shortcut
+
+For an identifiable **For The King Modded** library entry, use the platform launcher
+package and follow [the launcher guide](../launcher/README.md). It applies bundled
+library artwork on launch. Windows has a separate native installer in that package;
+`install.sh` remains the macOS/Linux installer. Windows runtime testing is pending.
+
 ## Troubleshooting
 
 **Nothing changed in the game.** Run `bash install.sh --status`. The last line reports whether the

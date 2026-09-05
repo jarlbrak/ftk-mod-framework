@@ -42,6 +42,17 @@ title screen, the **Thief** and **Innkeeper** at character select, and **Smuggle
 **The Hollow Mire** in the adventure list. Details, updating, and removal:
 [`docs/INSTALL.md`](docs/INSTALL.md).
 
+## Branded Steam launcher (macOS, Linux, Windows preview)
+
+The launcher packages provide a **For The King Modded** entry through Steam's
+**Add a Non-Steam Game** flow. Library artwork is applied on launch; Steam may need
+one restart to save the shortcut and refresh its artwork. The launcher starts the
+owned Steam copy, and keeps the existing native/Proton configuration.
+
+See [`launcher/README.md`](launcher/README.md) for package setup and platform limits.
+Windows builds and offline installer checks are supported; Windows gameplay remains
+untested. Launchers are attached by `release.sh` alongside the plugin and checksums.
+
 ## Three ways to get involved
 
 - **Play** (above), and drop other content mods into `<game>/BepInEx/plugins/`.

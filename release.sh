@@ -5,7 +5,7 @@
 #   ./release.sh v0.2.0 --notes-file f  # release notes from a file
 #   ./release.sh v0.2.0 --dry-run       # everything except the publish step
 #
-# The release carries three assets the installer relies on:
+# The release carries the installer assets plus platform launcher archives:
 #   FTKModFramework.dll   the plugin (built locally against the game's DLLs; CI cannot build it)
 #   SHA256SUMS            checksums the installer verifies the DLL against
 #   install.sh            a copy of the installer, so the release page is self-contained
@@ -64,7 +64,9 @@ dotnet build "$ROOT/FTKModFramework" -c Release
 DIST="$(mktemp -d "${TMPDIR:-/tmp}/ftkmf-release.XXXXXX")"
 cp "$DLL" "$DIST/FTKModFramework.dll"
 cp "$ROOT/install.sh" "$DIST/install.sh"
-(cd "$DIST" && if command -v sha256sum >/dev/null 2>&1; then sha256sum FTKModFramework.dll install.sh; else shasum -a 256 FTKModFramework.dll install.sh; fi > SHA256SUMS)
+bash "$ROOT/launcher/build.sh" "$DIST/launchers"
+cp "$DIST/launchers/"*.zip "$DIST/launchers/"*.tar.gz "$DIST/"
+(cd "$DIST" && if command -v sha256sum >/dev/null 2>&1; then sha256sum FTKModFramework.dll install.sh ./*.zip ./*.tar.gz; else shasum -a 256 FTKModFramework.dll install.sh ./*.zip ./*.tar.gz; fi > SHA256SUMS)
 echo "assets:"; (cd "$DIST" && ls -la && cat SHA256SUMS)
 
 # 6) The installer must accept the DLL we are about to publish.
@@ -88,10 +90,10 @@ case "$answer" in y|Y|yes) ;; *) echo "not published."; exit 0 ;; esac
 
 if [ -n "$NOTES_FILE" ]; then
   gh release create "$TAG" --repo "$REPO" --target "$SOURCE_COMMIT" --title "$TAG" --notes-file "$NOTES_FILE" \
-    "$DIST/FTKModFramework.dll" "$DIST/SHA256SUMS" "$DIST/install.sh"
+    "$DIST/FTKModFramework.dll" "$DIST/SHA256SUMS" "$DIST/install.sh" "$DIST/"*.zip "$DIST/"*.tar.gz
 else
   gh release create "$TAG" --repo "$REPO" --target "$SOURCE_COMMIT" --title "$TAG" --generate-notes \
-    "$DIST/FTKModFramework.dll" "$DIST/SHA256SUMS" "$DIST/install.sh"
+    "$DIST/FTKModFramework.dll" "$DIST/SHA256SUMS" "$DIST/install.sh" "$DIST/"*.zip "$DIST/"*.tar.gz
 fi
 echo "published: https://github.com/$REPO/releases/tag/$TAG"
 echo "players can now run:  curl -fsSL https://raw.githubusercontent.com/$REPO/master/install.sh | bash"

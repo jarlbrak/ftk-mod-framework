@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>FtkModdedLauncher</AssemblyName>
+    <RootNamespace>FtkModdedLauncher</RootNamespace>
+    <LangVersion>7.3</LangVersion>
+    <ApplicationIcon Condition="Exists('../../assets/steam/icon.ico')">../../assets/steam/icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <None Update="install.ps1" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
