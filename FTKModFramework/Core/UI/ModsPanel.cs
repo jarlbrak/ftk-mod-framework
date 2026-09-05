@@ -121,7 +121,10 @@ namespace FTKModFramework.Core.UI
                 {
                     Toggle source = ResolveToggleSource();
                     for (int i = 0; i < entries.Count; i++)
+                    {
                         AddModRow(containerGo.transform, source, entries[i]);
+                        AddModDetails(containerGo.transform, entries[i]);
+                    }
                 }
 
                 // Back button: explicit click-to-close AND the wiring that makes the inherited cancel/B-button
@@ -215,6 +218,29 @@ namespace FTKModFramework.Core.UI
             toggle.onValueChanged.RemoveAllListeners();
             toggle.isOn = initial;
             toggle.onValueChanged.AddListener(delegate(bool value) { ModRegistry.SetEnabled(key, value); });
+        }
+
+        private static void AddModDetails(Transform parent, ModEntry entry)
+        {
+            string details = entry.Description == null ? "" : entry.Description.Trim();
+            if (entry.Author != null && entry.Author.Trim().Length > 0)
+                details += (details.Length == 0 ? "" : "\n") + "By " + entry.Author.Trim();
+            if (details.Length == 0) return;
+
+            GameObject go = NewUIChild("ModDetails", parent);
+            go.GetComponent<RectTransform>().sizeDelta = new Vector2(592f, 0f);
+            Text text = go.AddComponent<Text>();
+            ApplyText(text, details);
+            text.fontSize = 18;
+            text.alignment = TextAnchor.UpperLeft;
+            text.color = new Color(0.78f, 0.80f, 0.84f, 1f);
+            text.supportRichText = false;
+            text.horizontalOverflow = HorizontalWrapMode.Wrap;
+            text.raycastTarget = false;
+            LayoutElement layout = go.AddComponent<LayoutElement>();
+            layout.minHeight = text.preferredHeight;
+            layout.preferredHeight = text.preferredHeight;
+            layout.flexibleHeight = 0f;
         }
 
         /// <summary>

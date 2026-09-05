@@ -207,7 +207,7 @@ namespace FTKModFramework
             Log = Logger;
 
             EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
-                "Register the bundled example content (a custom weapon + ability, given to the Blacksmith). " +
+                "Enable the FTK Adventure Pack: Thief and Innkeeper classes, the Cutpurse enemy, equipment, and adventures. " +
                 "Set false if you only want the framework as a dependency for other content mods.");
 
             ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", false,
@@ -358,7 +358,9 @@ namespace FTKModFramework
             // backs the row's Enabled state (so a disabled demo stays listed and re-enableable); registration
             // itself never depends on that value. Doing this before the gate is what stops the FR-3 fail-open
             // default from silently re-enabling sample content the user turned off.
-            ModRegistry.Register(Plugin.Guid, "Bundled Sample Content", true, null, Plugin.EnableSampleContent.Value);
+            ModRegistry.Register(Plugin.Guid, "FTK Adventure Pack", true, null, Plugin.EnableSampleContent.Value,
+                "Adds the Thief and Innkeeper classes, the Cutpurse enemy, new equipment, encounters, and adventures.",
+                "FTK Mod Framework team");
 
             // Framework-shipped behaviours (#31): the bundled-demo Steal behaviour key (com.ftkmf.sampledata:Steal)
             // and the built-in CollectN quest verb (com.ftkmf.framework:CollectN). Runs UNCONDITIONALLY

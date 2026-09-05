@@ -131,3 +131,9 @@ bash tests/installer/test-install.sh
 ```
 
 CI runs it on Ubuntu and macOS.
+
+### Player content and developer fixtures
+
+Normal installs reset developer self-tests, scale probes and forced enemy/encounter overrides. The Mods screen lists gameplay content, including the bundled **FTK Adventure Pack**, with descriptions. Developer example packages and intentional failure fixtures are excluded before loading in player mode. Files and saves are retained; saves made with developer-only content still require that content and its original configuration.
+
+Use `./deploy.sh --player` to return a development install to player mode, or `install.sh --dev` (Windows: `install.ps1 -Dev`) for framework diagnostics. Gameplay preferences such as `EnableSampleContent` are preserved. Disabling a mod takes effect on the next game launch.

@@ -314,6 +314,31 @@ scenario_macos() {
   assert_grep "$acct" "\"LaunchOptions\"		\"\\\"$game/run_bepinex.sh\\\" %command%\""
 }
 
+scenario_player_config() {
+  printf '\n[player install resets development flags and preserves gameplay settings]\n'
+  local fixture_home="$WORK/player" root game cfg
+  if [ "$OS" = Darwin ]; then
+    root="$fixture_home/Library/Application Support/Steam"
+    game="$(make_steam "$root" "$root" app)"
+  else
+    root="$fixture_home/.local/share/Steam"
+    game="$(make_steam "$root" "$root" elf)"
+  fi
+  cfg="$game/BepInEx/config/com.ftkmf.framework.cfg"
+  mkdir -p "$(dirname "$cfg")"
+  printf '[Diagnostics]\nRunSelfTests = true\nEnableScaleBudgetGate = true\nSyntheticContentCount = 50\n[Enemies]\nForceCustomEnemy = true\n[Adventures]\nForceCustomEncounter = true\n[Demo]\nEnableSampleContent = false\n' > "$cfg"
+  fake_dll "$WORK/player.dll"
+  run_installer "$fixture_home" --framework "$WORK/player.dll" --dev --player --no-launch-options || fail "player install failed"
+  assert_grep "$cfg" "RunSelfTests = false"
+  assert_grep "$cfg" "EnableScaleBudgetGate = false"
+  assert_grep "$cfg" "SyntheticContentCount = 0"
+  assert_grep "$cfg" "ForceCustomEnemy = false"
+  assert_grep "$cfg" "ForceCustomEncounter = false"
+  assert_grep "$cfg" "EnableSampleContent = false"
+  run_installer "$fixture_home" --framework "$WORK/player.dll" --dev --no-launch-options || fail "developer install failed"
+  assert_grep "$cfg" "RunSelfTests = true"
+}
+
 scenario_release_checksums() {
   printf '\n[release downloads require a valid matching checksum]\n'
   local fixture_home="$WORK/checksums" root game mode
@@ -392,6 +417,7 @@ else
   scenario_dev_config
 fi
 
+scenario_player_config
 scenario_release_checksums
 assert_nofile "$WORK/host-command-called"
 

@@ -4,7 +4,8 @@ param(
     [string]$GameDir,
     [string]$Framework,
     [string]$Release = 'latest',
-    [switch]$ReinstallLoader
+    [switch]$ReinstallLoader,
+    [switch]$Dev
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
@@ -71,6 +72,28 @@ function Download([string]$Url, [string]$Path) {
 
 function Assert-Hash([string]$Path, [string]$Expected) {
     if ((Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash -ne $Expected) { throw "SHA256 verification failed: $Path" }
+}
+
+function Set-ConfigValue([string]$Path, [string]$Section, [string]$Key, [string]$Value) {
+    $lines = New-Object 'System.Collections.Generic.List[string]'
+    $inSection = $false
+    $written = $false
+    $source = @()
+    if (Test-Path -LiteralPath $Path) { $source = @(Get-Content -LiteralPath $Path) }
+    foreach ($line in $source) {
+        if ($line -match '^\s*\[([^\]]+)\]\s*$') {
+            if ($inSection -and -not $written) { $lines.Add("$Key = $Value"); $written = $true }
+            $inSection = $Matches[1] -eq $Section
+        }
+        if ($inSection -and $line -match ('^\s*' + [regex]::Escape($Key) + '\s*=')) {
+            if (-not $written) { $lines.Add("$Key = $Value"); $written = $true }
+        } else { $lines.Add($line) }
+    }
+    if (-not $written) {
+        if (-not $inSection) { $lines.Add("[$Section]") }
+        $lines.Add("$Key = $Value")
+    }
+    [IO.File]::WriteAllLines($Path, $lines, (New-Object Text.UTF8Encoding($false)))
 }
 
 if (-not $GameDir) { $GameDir = Find-Game }
@@ -140,5 +163,19 @@ if (Test-Path -LiteralPath $destination) {
     Copy-Item -LiteralPath $destination -Destination ($destination + '.' + [Guid]::NewGuid().ToString('N') + '.bak')
 }
 Copy-Item -LiteralPath $Framework -Destination $destination -Force
+$configDir = Join-Path $GameDir 'BepInEx\config'
+New-Item -ItemType Directory -Force -Path $configDir | Out-Null
+$config = Join-Path $configDir 'com.ftkmf.framework.cfg'
+if (Test-Path -LiteralPath $config) {
+    Copy-Item -LiteralPath $config -Destination ($config + '.' + [Guid]::NewGuid().ToString('N') + '.bak')
+}
+if ($Dev) { Set-ConfigValue $config 'Diagnostics' 'RunSelfTests' 'true' }
+else {
+    Set-ConfigValue $config 'Diagnostics' 'RunSelfTests' 'false'
+    Set-ConfigValue $config 'Diagnostics' 'EnableScaleBudgetGate' 'false'
+    Set-ConfigValue $config 'Diagnostics' 'SyntheticContentCount' '0'
+    Set-ConfigValue $config 'Enemies' 'ForceCustomEnemy' 'false'
+    Set-ConfigValue $config 'Adventures' 'ForceCustomEncounter' 'false'
+}
 Write-Host 'Installed. No Steam launch option is needed on native Windows.'
 Write-Host 'Launch using Play, then check BepInEx\LogOutput.log for SELF-TEST PASS.'

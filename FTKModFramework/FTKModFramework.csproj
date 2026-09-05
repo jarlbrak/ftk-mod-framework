@@ -64,6 +64,10 @@
          SDK globs so the plugin build gate (`dotnet build -c Release`) stays UNCHANGED and never pulls the
          sample source (or its generated obj/ AssemblyInfo) into FTKModFramework.dll. -->
     <Compile Remove="Samples\**\*.cs" />
+    <Compile Remove="Tests\**\*.cs" />
+    <None Remove="Tests\**\*" />
+    <Content Remove="Tests\**\*" />
+    <EmbeddedResource Remove="Tests\**\*" />
     <None Remove="Samples\**\*" />
     <Content Remove="Samples\**\*" />
     <EmbeddedResource Remove="Samples\**\*" />

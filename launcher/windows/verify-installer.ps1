@@ -98,3 +98,15 @@ if ($global:FtkFixtureRequests -ne $before) { throw 'Local framework unexpectedl
 $backups = @(Get-ChildItem -LiteralPath (Join-Path $game 'BepInEx/plugins') -Filter '*.bak')
 if ($backups.Count -ne 1) { throw 'Existing framework was not backed up' }
 Write-Host 'PASS: local framework installs offline and backs up existing DLL'
+
+$config = Join-Path $game 'BepInEx/config/com.ftkmf.framework.cfg'
+[IO.File]::WriteAllText($config, "[Diagnostics]`nRunSelfTests = true`nEnableScaleBudgetGate = true`nSyntheticContentCount = 99`n[Enemies]`nForceCustomEnemy = true`n[Adventures]`nForceCustomEncounter = true`n[Demo]`nEnableSampleContent = false`n")
+& $installer -GameDir $game -Framework $source
+$playerConfig = Get-Content -LiteralPath $config -Raw
+foreach ($expected in @('RunSelfTests = false', 'EnableScaleBudgetGate = false', 'SyntheticContentCount = 0', 'ForceCustomEnemy = false', 'ForceCustomEncounter = false', 'EnableSampleContent = false')) {
+    if (-not $playerConfig.Contains($expected)) { throw "Missing preserved/reset config: $expected" }
+}
+Write-Host 'PASS: player install clears developer flags and preserves gameplay selection'
+& $installer -GameDir $game -Framework $source -Dev
+if (-not (Get-Content -LiteralPath $config -Raw).Contains('RunSelfTests = true')) { throw 'Explicit developer mode did not enable self-tests' }
+Write-Host 'PASS: explicit developer mode remains available'

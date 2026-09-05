@@ -59,6 +59,11 @@ namespace FTKModFramework.Core.Data
 
             List<DiscoveredMod> mods = ModDiscovery.Discover(contentRoot, report);
 
+            // Read persisted enabled states before any external code can execute.
+            foreach (DiscoveredMod mod in mods)
+                ModRegistry.Register(mod.Manifest.ModGuid, mod.Manifest.Name, false, mod.Manifest.Version, true,
+                    mod.Manifest.Description, mod.Manifest.Author);
+
             // SINGLE behaviour-DLL pre-pass (FR-7): load + reflect + register every mod's behaviorDll behaviours
             // BEFORE any content-registration phase. This is the sequencing invariant the Phase-2 WireBehavior
             // step (#31) depends on: a content entry's behavior:"name" can only resolve modGuid:name once the
@@ -116,8 +121,8 @@ namespace FTKModFramework.Core.Data
         /// (a malformed file is recorded and skipped). The work list preserves the deterministic
         /// (modGuid, folder, filename, in-file) order so id minting is reproducible before the final sort.
         ///
-        /// Each discovered mod is REGISTERED into <see cref="ModRegistry"/> first (so a disabled mod still
-        /// appears in <c>ModRegistry.Entries</c> and the UI can re-enable it), THEN its files are skipped
+        /// Discovery already registered each mod before the DLL pre-pass (so a disabled mod still
+        /// appears in <c>ModRegistry.Entries</c> and the UI can re-enable it). Its files are skipped
         /// when <c>ModRegistry.IsEnabled</c> is false. A disabled mod contributes NO PendingEntry, so the
         /// global (modGuid, id) sort and the id minting that follows see only the surviving set (FR-3/NFR-3).
         /// </summary>
@@ -129,8 +134,6 @@ namespace FTKModFramework.Core.Data
             {
                 string modGuid = mod.Manifest.ModGuid;
 
-                // Register BEFORE gating: a disabled mod must still be listed in ModRegistry.Entries.
-                ModRegistry.Register(modGuid, mod.Manifest.Name, false, mod.Manifest.Version, true);
                 if (!ModRegistry.IsEnabled(modGuid))
                 {
                     Plugin.Log.LogInfo("ModRegistry: skipping disabled mod '" + modGuid + "' (no entries loaded).");

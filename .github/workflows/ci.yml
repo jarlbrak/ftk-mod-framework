@@ -61,6 +61,8 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+      - name: Player mod discovery and enable-state checks
+        run: dotnet run --project FTKModFramework/Tests/PlayerMods/PlayerMods.csproj -c Release
       - name: Run the game-free unit tests
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
 

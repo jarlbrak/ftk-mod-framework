@@ -60,6 +60,11 @@ namespace FTKModFramework.Core.Data
 
             foreach (DiscoveredMod mod in mods)
             {
+                if (!ModRegistry.IsEnabled(mod.Manifest.ModGuid))
+                {
+                    Plugin.Log.LogInfo("BehaviorLoader: skipping disabled mod '" + mod.Manifest.ModGuid + "'.");
+                    continue;
+                }
                 string path = mod.BehaviorDllPath;
                 if (path == null) continue; // no behaviour DLL declared (or its path was rejected by the #32 guard).
 

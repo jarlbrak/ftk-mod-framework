@@ -65,6 +65,13 @@ namespace FTKModFramework.Core.Data
 
                 ModManifest manifest = ReadManifest(manifestPath, folder, report);
                 if (manifest == null) continue;           // malformed manifest JSON: error already recorded
+                // Filter before content enumeration or behavior resolution, so fixtures contribute no
+                // registry rows, DLL loads, validation noise, or content in player mode.
+                if (manifest.IsDevelopmentOnly && !Plugin.SelfTestsEnabled)
+                {
+                    Plugin.Log.LogDebug("Skipping development-only mod '" + manifest.ModGuid + "'.");
+                    continue;
+                }
                 if (!manifest.Validate(report)) continue; // missing required field: error already recorded
 
                 // RESERVED guid: com.ftkmf.synthetic belongs ONLY to the generator's own reserved subfolder

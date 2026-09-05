@@ -87,6 +87,7 @@ Usage: install.sh [options]
   --framework PATH      Install this FTKModFramework.dll (or a .zip holding it) instead of downloading.
   --release TAG         Framework release tag to download (default: latest).
   --dev                 Developer mode: turn on the framework's load-time self-tests in its config.
+  --player              Player mode (default): disable diagnostics and forced test encounters/enemies.
   --reinstall-bepinex   Replace an existing BepInEx with the pinned ${BEPINEX_VERSION}.
   --no-launch-options   Do not touch Steam's launch options (prints the line to paste instead).
   --dry-run             Show what would change without changing anything.
@@ -109,6 +110,7 @@ while [ $# -gt 0 ]; do
     --release) [ $# -ge 2 ] || die "--release needs a tag"; OPT_RELEASE="$2"; shift 2 ;;
     --release=*) OPT_RELEASE="${1#*=}"; shift ;;
     --dev) OPT_DEV=1; shift ;;
+    --player) OPT_DEV=0; shift ;;
     --reinstall-bepinex) OPT_REINSTALL_BEPINEX=1; shift ;;
     --no-launch-options) OPT_NO_LAUNCH=1; shift ;;
     --status) OPT_ACTION="status"; shift ;;
@@ -662,6 +664,13 @@ install_framework() {
   if [ "$OPT_DEV" = "1" ]; then
     cfg_set "$cfg" "Diagnostics" "RunSelfTests" "true"
     ok "developer mode: Diagnostics/RunSelfTests = true in $(basename "$cfg")."
+  else
+    cfg_set "$cfg" "Diagnostics" "RunSelfTests" "false"
+    cfg_set "$cfg" "Diagnostics" "EnableScaleBudgetGate" "false"
+    cfg_set "$cfg" "Diagnostics" "SyntheticContentCount" "0"
+    cfg_set "$cfg" "Enemies" "ForceCustomEnemy" "false"
+    cfg_set "$cfg" "Adventures" "ForceCustomEncounter" "false"
+    ok "player mode: developer fixtures, scale probes, and forced encounters/enemies are disabled."
   fi
 }
 

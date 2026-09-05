@@ -6,7 +6,7 @@ namespace FTKModFramework.Core.Data
 {
     /// <summary>
     /// A mod's <c>manifest.json</c>: the per-folder identity card the loader needs before it will
-    /// queue any of that folder's content files. All three fields are required; a manifest missing
+    /// queue any of that folder's content files. The identity fields are required; a manifest missing
     /// one is a validation error and the whole mod folder is skipped (other mods still load).
     ///
     /// <see cref="ModGuid"/> is passed straight through to the public <c>Content.Add*</c> API as the
@@ -20,6 +20,11 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("modGuid")] public string ModGuid;
         [JsonProperty("name")] public string Name;
         [JsonProperty("version")] public string Version;
+        [JsonProperty("description")] public string Description;
+        [JsonProperty("author")] public string Author;
+
+        /// <summary>Developer fixtures load only when Diagnostics/RunSelfTests is enabled.</summary>
+        [JsonProperty("developmentOnly")] public bool DevelopmentOnly;
 
         /// <summary>
         /// OPTIONAL bare FILENAME (not a path) of the mod's behaviour DLL inside its own folder, e.g.
@@ -31,6 +36,18 @@ namespace FTKModFramework.Core.Data
         /// </summary>
         [JsonProperty("behaviorDll")] public string BehaviorDll;
 #pragma warning restore CS0649
+
+        /// <summary>Also recognizes fixture manifests installed before developmentOnly was introduced.</summary>
+        [JsonIgnore]
+        public bool IsDevelopmentOnly
+        {
+            get
+            {
+                return DevelopmentOnly || ModGuid == "com.ftkmf.behaviorguard" ||
+                    ModGuid == "com.ftkmf.brokendll" || ModGuid == "com.ftkmf.danglingbehavior" ||
+                    ModGuid == "com.ftkmf.samplebehaviormod" || ModGuid == "com.ftkmf.sampledata";
+            }
+        }
 
         /// <summary>Absolute path of the folder this manifest was loaded from (filled by discovery).</summary>
         [JsonIgnore] public string FolderPath;
