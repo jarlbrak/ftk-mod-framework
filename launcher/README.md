@@ -32,7 +32,7 @@ under the original For The King entry while playing.
 ## Choose your framework version
 
 Open **Mods > Updates** at the game title screen. Browse release versions and patch notes,
-then choose an update preference:
+with Markdown formatting. Scroll through the notes or expand the reader, then choose an update preference:
 
 - **Follow Stable:** install newer stable releases automatically.
 - **Follow Preview:** install newer releases, including previews.

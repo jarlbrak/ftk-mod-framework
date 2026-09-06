@@ -13,6 +13,16 @@ internal static class FrameworkUpdateChecks
     private static void Reject(Action action, string message) { bool rejected = false; try { action(); } catch (IOException) { rejected = true; } Check(rejected, message); }
     internal static void Run(string fixture)
     {
+        List<ReleaseNoteBlock> markdown = ReleaseNotesMarkdown.Parse("# Title\n\nA **bold** and *italic* word with `code_file`.\n\n- First\n  continued\n- Second\n\n1. Ordered\n2. Next");
+        Check(markdown[0].Heading == 1 && markdown[0].Text == "Title" && markdown[1].Text.Contains("<b>bold</b>") && markdown[1].Text.Contains("<i>italic</i>"), "release Markdown renders headings and emphasis");
+        Check(markdown[2].Text == "• First continued" && markdown[3].Text == "• Second" && markdown[4].Text == "1. Ordered", "release Markdown preserves list boundaries and joins wrapped source lines");
+        markdown = ReleaseNotesMarkdown.Parse("| Platform | File |\n| --- | --- |\n| Mac | `a_long_file.zip` |\n| Linux | `b.tar.gz` |");
+        Check(markdown.Count == 2 && markdown[0].Text.Contains("<b>Platform:</b> Mac") && markdown[0].Text.Contains("a_long_file.zip"), "release tables become complete labeled records for narrow panes");
+        markdown = ReleaseNotesMarkdown.Parse("<size=999>unsafe</size> [Safe](https://example.com/notes) [Bad](file:///tmp/no)\n\n```cs\n<b>literal</b>\n```");
+        Check(!markdown[0].Text.Contains("<size=") && markdown[0].Links.Count == 1 && markdown[0].Links[0].Url == "https://example.com/notes" && markdown[1].Code && !markdown[1].Text.Contains("<b>"), "release Markdown neutralizes Unity markup and excludes unsafe link actions");
+        Check(!ReleaseNotesMarkdown.SafeUrl("javascript:alert(1)") && !ReleaseNotesMarkdown.SafeUrl("https://user:secret@example.com") && !ReleaseNotesMarkdown.SafeUrl("https://example.com\\evil") && ReleaseNotesMarkdown.SafeUrl("https://example.com/path?q=1"), "release links require unambiguous HTTP or HTTPS destinations");
+        markdown = ReleaseNotesMarkdown.Parse("Unclosed **format and [link](broken\n\n~~~\nraw *text*\n~~~");
+        Check(markdown[0].Text.Contains("Unclosed **format") && markdown[1].Text == "raw *text*", "malformed Markdown stays readable and fenced code remains literal");
         FrameworkRelease old = new FrameworkRelease { Version = "0.1.0", Tag = "v0.1.0", Available = true };
         FrameworkRelease newer = new FrameworkRelease { Version = "0.1.2", Tag = "v0.1.2", Available = true, Prerelease = true };
         Check(FrameworkUpdatePresentation.EffectiveTarget("preview", old, "0.1.1").StartsWith("Keep v0.1.1"), "automatic preview review does not promise a downgrade");

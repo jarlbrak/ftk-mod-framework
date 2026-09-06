@@ -113,7 +113,7 @@ namespace FTKModFramework.Core.UI
             List<string> loadedFonts = new List<string>();
             foreach (Font font in Resources.FindObjectsOfTypeAll<Font>()) loadedFonts.Add(font.name + ": " + string.Join(", ", font.fontNames));
             return new Dictionary<string, object> { { "loadedFonts", loadedFonts }, { "osFonts", Font.GetOSInstalledFontNames() }, { "renderCount", _instance._renderCount }, { "view", _instance._view }, { "texts", texts }, { "buttons", visibleButtons }, { "busy", PanelBusy },
-                { "screenWidth", Screen.width }, { "screenHeight", Screen.height }, { "textMetrics", metrics } };
+                { "screenWidth", Screen.width }, { "screenHeight", Screen.height }, { "textMetrics", metrics }, { "notesScroll", _instance.NotesScrollMetrics() } };
         }
 
         private static Dictionary<string, object> ScreenBounds(RectTransform rect)

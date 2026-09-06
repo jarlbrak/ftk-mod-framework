@@ -33,6 +33,16 @@ namespace FTKModFramework.Core.UI
         {
             Transform left;
             Transform right;
+            if (_expandedNotes && !_updateReview && _frameworkRelease != null)
+            {
+                GameObject body = NewChild("Expanded release notes", _rootContent);
+                Height(body, 700);
+                _container = Column(body.transform, "Details", 1508, CardPaper);
+                Stretch(_container.GetComponent<RectTransform>());
+                UpdateReleaseDetails(FrameworkUpdateRuntime.State);
+                _container = _rootContent;
+                return;
+            }
             CreateColumns(out left, out right);
             _container = left;
             FrameworkUpdateResult state = FrameworkUpdateRuntime.State;
@@ -99,10 +109,9 @@ namespace FTKModFramework.Core.UI
             TextLine("Framework " + release.Tag, 34, 50);
             TextLine((release.Prerelease ? "Preview release" : "Stable release") + " / " + ReleaseDate(release), 22, 26);
             LauncherUpdateNotice(state);
-            List<string> notes = TextPages(new List<string> { string.IsNullOrEmpty(release.Notes) ? "No release notes were provided." : release.Notes });
-            _detailPage = Math.Min(_detailPage, notes.Count - 1);
-            TextLine(notes[_detailPage], 21, 196);
-            if (notes.Count > 1) UpdateLink("Next notes page (" + (_detailPage + 1) + " of " + notes.Count + ")", delegate { _detailPage = (_detailPage + 1) % notes.Count; Refresh(); });
+            float notesHeight = state != null && state.LauncherCompatible ? 370 : 274;
+            if (!release.Available) notesHeight -= 58;
+            ReleaseNotes(release, notesHeight);
             if (!release.Available) TextLine(Short(string.IsNullOrEmpty(release.Reason) ? "This release is not available for this installation." : release.Reason, 115), 21, 52).color = Gold;
             bool alreadyPinned = state != null && state.SelectedMode == "pinned" && state.SelectedTag == release.Tag;
             PrimaryButton(alreadyPinned ? "Pinned for next launch" : "Pin " + release.Tag + "...", delegate { ReviewUpdate("pinned", release); },
