@@ -449,20 +449,23 @@ func updateManagedPackages(game string) ([]marketPackage, error) {
 		if lock.Packages == nil && len(lock.Files) != 0 {
 			return nil, errors.New("managed generation has files but no package selection")
 		}
-		packages = append(packages, lock.Packages...)
+		for _, p := range lock.Packages {
+			p.legacyFrameworkAnchor = lock.FrameworkVersion
+			packages = append(packages, p)
+		}
 	}
 	return packages, nil
 }
 func updatePackagesCompatibility(packages []marketPackage, version string) error {
 	for _, p := range packages {
-		if !marketRange(p.FrameworkRange, version) {
-			return fmt.Errorf("%s %s requires framework %s; update deferred", p.Name, p.Version, p.FrameworkRange)
+		if why := marketPackageFrameworkCompatibility(p, version); why != "" {
+			return fmt.Errorf("%s %s: %s Update deferred.", p.Name, p.Version, why)
 		}
 	}
 	return nil
 }
 func updateManagedCompatibility(game, version string) error {
-	packages, e := updateManagedPackages(game)
+	packages, e := updateVersionPackages(game)
 	if e != nil {
 		return e
 	}

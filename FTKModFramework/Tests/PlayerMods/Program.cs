@@ -29,9 +29,9 @@ internal static class Program
             MarketplaceChecks.RecoveryProcess(args[1], args[2] == "invalid");
             return;
         }
-        ModManifest legacy = JsonContentParser.Deserialize<ModManifest>("{\"modGuid\":\"thirdparty.legacy\",\"name\":\"Legacy mod\",\"version\":\"1\"}");
+        ModManifest legacy = JsonContentParser.Deserialize<ModManifest>("{\"modGuid\":\"thirdparty.legacy\",\"name\":\"Legacy mod\",\"version\":\"1.0.0\"}");
         Assert(legacy.Validate(new ValidationReport()) && !legacy.IsDevelopmentOnly && legacy.Description == null,
-            "existing player manifests need no new metadata fields");
+            "legacy identity remains valid but framework compatibility is unverified");
         string fixtures = args.Length > 0 ? Path.GetFullPath(args[0]) : Path.GetFullPath("FTKModFramework/SampleData");
         string root = Path.Combine(Path.GetTempPath(), "ftkmf-player-mods-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
@@ -42,11 +42,12 @@ internal static class Program
             Assert(manifest.DevelopmentOnly, manifest.ModGuid + " explicitly marked developmentOnly");
             // Simulate already-installed, pre-metadata copies of the known fixtures.
             manifest.DevelopmentOnly = false;
+            manifest.FrameworkVersion = Plugin.Version;
             WriteMod(root, Path.GetFileName(path), manifest);
             fixturesCopied++;
         }
-        WriteMod(root, "dev", new ModManifest { ModGuid = "thirdparty.dev", Name = "Developer fixture", Version = "1", DevelopmentOnly = true, BehaviorDll = "../unsafe.dll" });
-        WriteMod(root, "player", new ModManifest { ModGuid = "thirdparty.player", Name = "Playable mod", Version = "2", Description = "An actual adventure.", Author = "A modder" });
+        WriteMod(root, "dev", new ModManifest { ModGuid = "thirdparty.dev", Name = "Developer fixture", Version = "1.0.0", FrameworkVersion = Plugin.Version, DevelopmentOnly = true, BehaviorDll = "../unsafe.dll" });
+        WriteMod(root, "player", new ModManifest { ModGuid = "thirdparty.player", Name = "Playable mod", Version = "2.0.0", FrameworkVersion = Plugin.Version, Description = "An actual adventure.", Author = "A modder" });
         ValidationReport report = new ValidationReport();
         List<DiscoveredMod> mods = ModDiscovery.Discover(root, report);
         Assert(mods.Count == 1 && mods[0].Manifest.ModGuid == "thirdparty.player", "player mode excludes flagged and legacy fixtures");
@@ -64,7 +65,7 @@ internal static class Program
         ModEntry entry = ModRegistry.Register(key, "Disabled mod", false, "3", true, "Description", "Author");
         Assert(!entry.Enabled && entry.Description == "Description" && entry.Author == "Author", "metadata preserves existing disabled preference");
         List<DiscoveredMod> disabled = new List<DiscoveredMod>();
-        disabled.Add(new DiscoveredMod(new ModManifest { ModGuid = key }, new List<string>(), Path.Combine(root, "missing.dll")));
+        disabled.Add(new DiscoveredMod(new ModManifest { ModGuid = key, FrameworkVersion = Plugin.Version }, new List<string>(), Path.Combine(root, "missing.dll")));
         report = new ValidationReport();
         BehaviorLoader.LoadAll(disabled, report);
         Assert(report.Errors.Count == 0, "disabled mod skips behavior DLL file access and loading");
@@ -72,13 +73,14 @@ internal static class Program
         Assert(!entry.Enabled && entry.PendingEnabled == true && !ModRegistry.IsEnabled(key), "toggle writes pending state without changing this session's enabled snapshot");
         string enabledKey = "thirdparty.enabled";
         ModRegistry.Register(enabledKey, "Enabled mod", false, "1", true, null, null);
-        disabled[0] = new DiscoveredMod(new ModManifest { ModGuid = enabledKey }, new List<string>(), Path.Combine(root, "missing.dll"));
+        disabled[0] = new DiscoveredMod(new ModManifest { ModGuid = enabledKey, FrameworkVersion = Plugin.Version }, new List<string>(), Path.Combine(root, "missing.dll"));
         BehaviorLoader.LoadAll(disabled, report);
         Assert(report.Errors.Count == 1 && report.Errors[0].Contains("behaviorDll not found"), "enabled mod reaches behavior DLL validation");
         Plugin.EnableSampleContent.Value = false;
         ModEntry bundled = ModRegistry.Register("com.ftkmf.framework", "FTK Adventure Pack", true, null, true, "Classes and adventures", "FTK Mod Framework team");
         Assert(!bundled.Enabled, "renamed bundled pack preserves config disabled state");
         Assert(object.ReferenceEquals(bundled, ModRegistry.Register(bundled.Key, "Other name", true, null, true, null, null)), "registration remains idempotent by stable key");
+        CompatibilityChecks.Run(root);
         MarketplaceChecks.Run(root);
         FrameworkUpdateChecks.Run(root);
         Console.WriteLine("Fixtures retained at " + root);

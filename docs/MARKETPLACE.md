@@ -22,11 +22,13 @@ Submit proposed packages through the repository's GitHub review workflow. A main
 
 1. Permanent package ID and mod GUID, semantic version, license and author attribution.
 2. Description, content changes, category, requirements, changelog, source/support links and screenshots or other content evidence.
-3. Exact dependency versions and tested framework range, platform/build and game assembly fingerprint.
+3. Exact dependency versions, author-confirmed frameworkVersion and its derived same-major range, platform/build and game assembly fingerprint.
 4. Archive hash, file inventory and size limits, with no unsafe paths, links, code files or unsupported JSON fields.
 5. Successful registration and visible behavior in an actual game launch for each advertised build.
 
 Published versions retain their bytes and SHA-256. Corrections use a new version. Initial hosting uses reviewed release archives in this repository; catalog edits belong in `marketplace/catalog.json`. Enable immutable releases before publishing package versions. Publication is a separate maintainer action from building the client.
+
+See [mod versioning](MOD-VERSIONING.md) for the manifest compatibility policy, missing declarations, and confirming a new framework major.
 
 ## Preview images
 

@@ -73,7 +73,7 @@ namespace FTKModFramework.Core.Data
                     ModRegistry.RegisterManaged(mod.Manifest, package);
                 else
                     ModRegistry.Register(mod.Manifest.ModGuid, mod.Manifest.Name, false, mod.Manifest.Version, true,
-                        mod.Manifest.Description, mod.Manifest.Author);
+                        mod.Manifest.Description, mod.Manifest.Author, mod.Manifest.FrameworkVersion, true);
             }
 
             // SINGLE behaviour-DLL pre-pass (FR-7): load + reflect + register every mod's behaviorDll behaviours
@@ -147,7 +147,7 @@ namespace FTKModFramework.Core.Data
             {
                 string modGuid = mod.Manifest.ModGuid;
 
-                if (!ModRegistry.IsEnabled(modGuid))
+                if (mod.Manifest.CompatibilityReason != null || !ModRegistry.IsEnabled(modGuid))
                 {
                     Plugin.Log.LogInfo("ModRegistry: skipping disabled mod '" + modGuid + "' (no entries loaded).");
                     continue; // disabled: queue none of its files, so nothing reaches the pending work list.

@@ -139,7 +139,7 @@ namespace FTKModFramework.Core.UI
             List<string> names = new List<string>();
             foreach (ModEntry e in ModRegistry.Entries)
             {
-                if (!e.Enabled) continue;
+                if (!e.Enabled || !e.FrameworkCompatible) continue;
                 enabledCount++;
                 if (names.Count < MaxNamesListed)
                 {

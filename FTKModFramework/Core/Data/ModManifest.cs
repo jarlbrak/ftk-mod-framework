@@ -20,6 +20,8 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("modGuid")] public string ModGuid;
         [JsonProperty("name")] public string Name;
         [JsonProperty("version")] public string Version;
+        [JsonProperty("frameworkVersion")] public string FrameworkVersion;
+        [JsonIgnore] public string CompatibilityReason { get { return ModFrameworkCompatibility.Reason(FrameworkVersion, Plugin.Version); } }
         [JsonProperty("description")] public string Description;
         [JsonProperty("author")] public string Author;
 
@@ -61,7 +63,8 @@ namespace FTKModFramework.Core.Data
             bool ok = true;
             if (IsBlank(ModGuid)) { report.Error("manifest.json (" + FolderPath + "): missing required field 'modGuid'."); ok = false; }
             if (IsBlank(Name)) { report.Error("manifest.json (" + FolderPath + "): missing required field 'name'."); ok = false; }
-            if (IsBlank(Version)) { report.Error("manifest.json (" + FolderPath + "): missing required field 'version'."); ok = false; }
+            System.Version parsed;
+            if (!ModFrameworkCompatibility.TryParse(Version, out parsed)) { report.Error("manifest.json (" + FolderPath + "): version must be strict X.Y.Z."); ok = false; }
             return ok;
         }
 

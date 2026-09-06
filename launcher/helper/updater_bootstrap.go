@@ -28,7 +28,7 @@ func updateInstallBundled(ctx context.Context, game, bundle string) error {
 		return errors.New("bundled manifest version does not match this launcher")
 	}
 	if e := updateManagedCompatibility(game, manifest.FrameworkVersion); e != nil {
-		return fmt.Errorf("bundled restore is incompatible with the managed mod selection: %w", e)
+		return fmt.Errorf("bundled restore is incompatible with the installed mod selection: %w", e)
 	}
 	dll := filepath.Join(bundle, "FTKModFramework.dll")
 	helper := filepath.Join(bundle, updateHelperName(game))

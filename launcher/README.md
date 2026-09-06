@@ -118,3 +118,8 @@ private Steam format, so malformed or unsupported shortcut files are rejected.
 
 Maintainers: the source repository includes `docs/RELEASING.md` with the compatibility
 policy, preview and stable release commands, and complete verified asset set.
+
+**Mod compatibility checks:** launcher bundle 0.1.3 adds prelaunch checks for manually
+installed content manifests. Replace older launcher bundles to get those checks; updating
+the framework and installed helper alone does not replace the bundled startup helper.
+See [mod versioning](../docs/MOD-VERSIONING.md).
