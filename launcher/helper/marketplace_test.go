@@ -23,8 +23,8 @@ func marketFixture(t *testing.T) (marketRequest, marketPackage, []byte) {
 	os.WriteFile(game, []byte("test-game-fingerprint"), 0600)
 	r := marketRequest{SchemaVersion: 1, OperationID: strings.Repeat("a", 32), StateRoot: filepath.Join(root, "marketplace"), FrameworkVersion: "0.1.0", GameAssemblyPath: game, Platform: "macos"}
 	r.gameFingerprint, _ = marketHashFile(game)
-	p := marketPackage{PackageID: "community.test", ModGUID: "com.community.test", Name: "Test equipment", Author: "Community", Description: "Test JSON content", Category: "items", Version: "1.0.0", License: "MIT", FrameworkRange: ">=0.1.0 <0.2.0", GameFingerprints: []string{r.gameFingerprint}, Platforms: []string{"macos"}, Classification: "gameplay", URL: "https://github.com/jarlbrak/ftk-mod-framework/releases/download/test/test.zip"}
-	files := map[string]string{"manifest.json": `{"modGuid":"com.community.test","name":"Test equipment","version":"1.0.0"}`, "items.json": `{"entries":[{"kind":"weapon","id":"test_blade","template":"bladeDagger","displayName":"Test Blade","fields":{}}]}`}
+	p := marketPackage{PackageID: "community.test", ModGUID: "com.community.test", Name: "Test equipment", Author: "Community", Description: "Test JSON content", Category: "items", Version: "1.0.0", License: "MIT", FrameworkVersion: "0.1.0", FrameworkRange: ">=0.1.0 <1.0.0", GameFingerprints: []string{r.gameFingerprint}, Platforms: []string{"macos"}, Classification: "gameplay", URL: "https://github.com/jarlbrak/ftk-mod-framework/releases/download/test/test.zip"}
+	files := map[string]string{"manifest.json": `{"modGuid":"com.community.test","name":"Test equipment","version":"1.0.0","frameworkVersion":"0.1.0"}`, "items.json": `{"entries":[{"kind":"weapon","id":"test_blade","template":"bladeDagger","displayName":"Test Blade","fields":{}}]}`}
 	b := marketZip(t, files)
 	p.CompressedSize = int64(len(b))
 	for _, v := range files {
@@ -134,7 +134,7 @@ func TestMarketplaceFailurePreservesActive(t *testing.T) {
 }
 func TestMarketplaceArchiveGuards(t *testing.T) {
 	_, p, _ := marketFixture(t)
-	base := `{"modGuid":"com.community.test","name":"Test","version":"1.0.0"}`
+	base := `{"modGuid":"com.community.test","name":"Test","version":"1.0.0","frameworkVersion":"0.1.0"}`
 	for _, name := range []string{"../evil.json", "/evil.json", "C:/evil.json", "folder\\evil.json", "evil.dll", "evil.ps1", "assets/fake.png", "MANIFEST.json", "content/../../evil.json", "con.json", "foo./bar.json"} {
 		t.Run(name, func(t *testing.T) {
 			files := map[string]string{"manifest.json": base, name: `{"entries":[]}`}

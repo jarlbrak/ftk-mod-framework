@@ -60,7 +60,7 @@ namespace FTKModFramework.Core.Data
 
             foreach (DiscoveredMod mod in mods)
             {
-                if (!ModRegistry.IsEnabled(mod.Manifest.ModGuid))
+                if (mod.Manifest.CompatibilityReason != null || !ModRegistry.IsEnabled(mod.Manifest.ModGuid))
                 {
                     Plugin.Log.LogInfo("BehaviorLoader: skipping disabled mod '" + mod.Manifest.ModGuid + "'.");
                     continue;

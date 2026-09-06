@@ -206,3 +206,5 @@ each mod on or off (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §1
 ## Community marketplace
 
 The title-screen Mods panel includes Discover and Installed views for curated free content, with changes applied on restart. The initial catalog is empty until reviewed packages are published. See [the marketplace guide](docs/MARKETPLACE.md) for installation, author submissions and current validation limits.
+
+See [mod versioning](docs/MOD-VERSIONING.md) for manifest framework requirements and major-version compatibility.

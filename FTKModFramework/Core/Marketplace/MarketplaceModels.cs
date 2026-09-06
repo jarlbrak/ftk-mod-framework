@@ -20,6 +20,7 @@ namespace FTKModFramework.Core.Marketplace
         [JsonProperty("category")] public string Category;
         [JsonProperty("version")] public string Version;
         [JsonProperty("license")] public string License;
+        [JsonProperty("frameworkVersion")] public string FrameworkVersion;
         [JsonProperty("frameworkRange")] public string FrameworkRange;
         [JsonProperty("gameFingerprints")] public string[] GameFingerprints;
         [JsonProperty("platforms")] public string[] Platforms;

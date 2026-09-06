@@ -308,7 +308,7 @@ namespace FTKModFramework.Core.UI
                 if (MarketplaceRuntime.FindManaged(package.ModGuid) != null) continue;
                 bool component = package.Classification == "dependency" || package.Classification == "component";
                 if (component != components) continue;
-                ModEntry queued = new ModEntry(package.ModGuid, package.Name, false, package.Version, false, package.Description, package.Author);
+                ModEntry queued = new ModEntry(package.ModGuid, package.Name, false, package.Version, false, package.Description, package.Author, package.FrameworkVersion, true);
                 queued.MarkManaged(package.PackageId);
                 entries.Add(queued);
             }
@@ -348,6 +348,7 @@ namespace FTKModFramework.Core.UI
 
         private static string EntryState(ModEntry entry)
         {
+            if (!entry.FrameworkCompatible) return "BLOCKED / FRAMEWORK REQUIREMENT";
             if (!entry.IsManaged)
                 return entry.PendingEnabled.HasValue ? "NOW: " + OnOff(entry.Enabled) + " / NEXT LAUNCH: " + OnOff(entry.PendingEnabled.Value) : OnOff(entry.Enabled);
             PackageDescriptor active = MarketplaceRuntime.FindManaged(entry.Key);
@@ -446,6 +447,15 @@ namespace FTKModFramework.Core.UI
             title.resizeTextForBestFit = true;
             title.resizeTextMinSize = 24;
             title.resizeTextMaxSize = 36;
+            if (_entry != null && !_entry.FrameworkCompatible && !_showAdvanced)
+            {
+                TextLine("Not loaded this launch", 28, 40).color = Gold;
+                TextLine("Declared framework: " + Declared(_entry.FrameworkVersion) + "\nRunning framework: " + Plugin.Version, 24, 70);
+                TextLine(_entry.CompatibilityReason, 24, 120);
+                TextLine("Your saved On / Off preference is unchanged. Ask the mod author for an updated manifest or use a compatible framework version.", 22, 100);
+                LinkButton("Details and requirements", delegate { _showAdvanced = true; _detailPage = 0; Refresh(); });
+                return;
+            }
             if (_showGallery && previews.Count > 0)
             {
                 _imagePage = Math.Min(_imagePage, previews.Count - 1);
@@ -512,13 +522,13 @@ namespace FTKModFramework.Core.UI
             if (fullName != null && fullName.Length > 50) blocks.Add("Full mod name\n" + fullName);
             if (_package == null)
             {
-                blocks.Add(Declared(_entry.Description) + "\nAuthor: " + Declared(_entry.Author) + "\n" + (_entry.IsBundledDemo ? "Included with FTK Mod Framework " + Plugin.Version + "\nLicense: MIT." : "Version: " + Declared(_entry.Version) + "\nLicense: Not declared. Compatibility: Unknown.\nInstalled manually; marketplace actions cannot remove these files."));
+                blocks.Add(Declared(_entry.Description) + "\nAuthor: " + Declared(_entry.Author) + "\n" + (_entry.IsBundledDemo ? "Included with FTK Mod Framework " + Plugin.Version + "\nLicense: MIT." : "Version: " + Declared(_entry.Version) + "\nLicense: Not declared.\nInstalled manually; marketplace actions cannot remove these files."));
             }
             else
             {
                 PackageDescriptor p = _package;
                 blocks.Add(Declared(p.Description) + "\nAuthor: " + Declared(p.Author) + "\nVersion: " + Declared(p.Version) + " / License: " + Declared(p.License) + "\nCategory: " + Declared(p.Category));
-                blocks.Add("Compatibility\n" + CompatibilityText(p) + "\nRequirements\n" + Join(p.Requirements) + "\nFramework: " + Declared(p.FrameworkRange) + "\nPlatforms: " + Join(p.Platforms));
+                blocks.Add("Compatibility\n" + CompatibilityText(p) + "\nRequirements\n" + Join(p.Requirements) + "\nFramework: " + Declared(p.FrameworkVersion) + "\nPlatforms: " + Join(p.Platforms));
                 blocks.Add("What changes\n" + Join(p.ContentChanges) + "\nChangelog\n" + Declared(p.Changelog));
                 StringBuilder dependencies = new StringBuilder("Required components\n");
                 if (p.Dependencies == null || p.Dependencies.Length == 0) dependencies.Append("None declared.");
@@ -526,6 +536,9 @@ namespace FTKModFramework.Core.UI
                 blocks.Add(dependencies.ToString());
                 blocks.Add("Source: " + Declared(p.SourceUrl) + "\nSupport: " + Declared(p.SupportUrl) + "\nScreenshots: " + Join(p.Screenshots) + "\nArtifact SHA-256: " + Declared(p.Sha256) + "\nA checksum verifies bytes, not author trust or runtime safety.");
             }
+            if (_entry != null && !_entry.IsBundledDemo)
+                blocks.Add("Declared framework: " + Declared(_entry.FrameworkVersion) + "\n" +
+                    (_entry.CompatibilityReason ?? "Meets the declared minimum within the same framework major. This is not a save or co-op guarantee."));
             List<string> pages = TextPages(blocks);
             List<string> screenshots = new List<string>();
             if (_package != null && _package.ScreenshotPaths != null) foreach (string path in _package.ScreenshotPaths)
@@ -541,6 +554,14 @@ namespace FTKModFramework.Core.UI
 
         private void PackageActions(PackageDescriptor package)
         {
+            string reason = ModFrameworkCompatibility.Reason(package.FrameworkVersion, Plugin.Version);
+            string installedReason = ModRegistry.CompatibilityReasonFor(package.ModGuid, package.Version);
+            if (installedReason != null) reason = installedReason;
+            if (reason != null)
+            {
+                TextLine(Short(reason, 170), 22, 96).color = Gold;
+                return;
+            }
             PackageDescriptor active = MarketplaceRuntime.FindManaged(package.ModGuid);
             PackageDescriptor desired = DesiredPackage(package.PackageId);
             bool queued = MarketplaceRuntime.Pending != null && (active == null ? desired != null : desired == null || desired.Version != active.Version || desired.Enabled != active.Enabled);
@@ -572,6 +593,8 @@ namespace FTKModFramework.Core.UI
 
         private static string CompatibilityText(PackageDescriptor package)
         {
+            string requirement = ModFrameworkCompatibility.Reason(package.FrameworkVersion, Plugin.Version);
+            if (requirement != null) return requirement;
             if (package.Compatible) return "Requirements match the reported build. This is not a save or co-op guarantee.";
             if (string.IsNullOrEmpty(package.CompatibilityReason) && MarketplaceRuntime.FindManaged(package.ModGuid) != null)
                 return "Active this launch. Compatibility has not been refreshed from the catalog.";

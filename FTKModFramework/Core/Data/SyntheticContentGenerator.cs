@@ -128,6 +128,7 @@ namespace FTKModFramework.Core.Data
             dto.ModGuid = ReservedModGuid;
             dto.Name = ManifestName;
             dto.Version = ManifestVersion;
+            dto.FrameworkVersion = Plugin.Version;
 
             string json = JsonConvert.SerializeObject(dto, Formatting.Indented);
             File.WriteAllText(Path.Combine(subfolder, ManifestFileName), json);
@@ -170,6 +171,7 @@ namespace FTKModFramework.Core.Data
         {
             [JsonProperty("modGuid")] public string ModGuid;
             [JsonProperty("name")] public string Name;
+            [JsonProperty("frameworkVersion")] public string FrameworkVersion;
             [JsonProperty("version")] public string Version;
         }
 

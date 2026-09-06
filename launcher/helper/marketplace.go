@@ -42,35 +42,37 @@ type marketDependency struct {
 	Version   string `json:"version"`
 }
 type marketPackage struct {
-	ScreenshotPaths     []string           `json:"screenshotPaths,omitempty"`
-	PackageID           string             `json:"packageId"`
-	ModGUID             string             `json:"modGuid"`
-	Name                string             `json:"name"`
-	Author              string             `json:"author"`
-	Description         string             `json:"description"`
-	Category            string             `json:"category"`
-	Version             string             `json:"version"`
-	License             string             `json:"license"`
-	FrameworkRange      string             `json:"frameworkRange"`
-	GameFingerprints    []string           `json:"gameFingerprints"`
-	Platforms           []string           `json:"platforms"`
-	Dependencies        []marketDependency `json:"dependencies"`
-	SHA256              string             `json:"sha256"`
-	URL                 string             `json:"packageUrl"`
-	CompressedSize      int64              `json:"compressedSize"`
-	ExpandedSize        int64              `json:"expandedSize"`
-	FileCount           int                `json:"fileCount"`
-	Classification      string             `json:"classification"`
-	Requirements        []string           `json:"requirements"`
-	ContentChanges      []string           `json:"contentChanges"`
-	Changelog           string             `json:"changelog"`
-	SourceURL           string             `json:"sourceUrl"`
-	SupportURL          string             `json:"supportUrl"`
-	Screenshots         []string           `json:"screenshots"`
-	Compatible          bool               `json:"compatible"`
-	CompatibilityReason string             `json:"compatibilityReason"`
-	Revoked             bool               `json:"revoked"`
-	Enabled             bool               `json:"enabled"`
+	FrameworkVersion      string `json:"frameworkVersion"`
+	legacyFrameworkAnchor string
+	ScreenshotPaths       []string           `json:"screenshotPaths,omitempty"`
+	PackageID             string             `json:"packageId"`
+	ModGUID               string             `json:"modGuid"`
+	Name                  string             `json:"name"`
+	Author                string             `json:"author"`
+	Description           string             `json:"description"`
+	Category              string             `json:"category"`
+	Version               string             `json:"version"`
+	License               string             `json:"license"`
+	FrameworkRange        string             `json:"frameworkRange"`
+	GameFingerprints      []string           `json:"gameFingerprints"`
+	Platforms             []string           `json:"platforms"`
+	Dependencies          []marketDependency `json:"dependencies"`
+	SHA256                string             `json:"sha256"`
+	URL                   string             `json:"packageUrl"`
+	CompressedSize        int64              `json:"compressedSize"`
+	ExpandedSize          int64              `json:"expandedSize"`
+	FileCount             int                `json:"fileCount"`
+	Classification        string             `json:"classification"`
+	Requirements          []string           `json:"requirements"`
+	ContentChanges        []string           `json:"contentChanges"`
+	Changelog             string             `json:"changelog"`
+	SourceURL             string             `json:"sourceUrl"`
+	SupportURL            string             `json:"supportUrl"`
+	Screenshots           []string           `json:"screenshots"`
+	Compatible            bool               `json:"compatible"`
+	CompatibilityReason   string             `json:"compatibilityReason"`
+	Revoked               bool               `json:"revoked"`
+	Enabled               bool               `json:"enabled"`
 }
 type marketCatalog struct {
 	SchemaVersion int             `json:"schemaVersion"`
@@ -343,11 +345,12 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 		out.Packages = selected
 		out.Plan = marketMakePlan(out.Active, selected, r.Selection)
 		type revisionPackage struct {
-			Dependencies []marketDependency
-			ID           string
-			Version      string
-			SHA256       string
-			Enabled      bool
+			FrameworkVersion string
+			Dependencies     []marketDependency
+			ID               string
+			Version          string
+			SHA256           string
+			Enabled          bool
 		}
 		revisionSelection := []revisionPackage{}
 		for _, p := range selected {
@@ -355,7 +358,7 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 			sort.Slice(dependencies, func(i, j int) bool {
 				return dependencies[i].PackageID+"@"+dependencies[i].Version < dependencies[j].PackageID+"@"+dependencies[j].Version
 			})
-			revisionSelection = append(revisionSelection, revisionPackage{dependencies, p.PackageID, p.Version, p.SHA256, p.Enabled})
+			revisionSelection = append(revisionSelection, revisionPackage{p.FrameworkVersion, dependencies, p.PackageID, p.Version, p.SHA256, p.Enabled})
 		}
 		revisionBytes, _ := json.Marshal(struct {
 			State     marketState
@@ -587,14 +590,26 @@ func marketGetCatalog(r marketRequest) (marketCatalog, bool, error) {
 	marketScreenshots(&cat, r, offline)
 	return cat, offline, nil
 }
-func marketValidateCatalog(c marketCatalog) error {
+func marketValidateCatalog(c marketCatalog) error { return marketValidateCatalogPolicy(c, false) }
+func marketValidateCatalogPolicy(c marketCatalog, allowLegacy bool) error {
 	if c.SchemaVersion != 1 {
 		return errors.New("unsupported catalog schema")
 	}
 	ids := map[string]string{}
 	versions := map[string]bool{}
-	for _, p := range c.Packages {
-		if !marketID.MatchString(p.PackageID) || !marketID.MatchString(p.ModGUID) || !marketVersion.MatchString(p.Version) || !marketSHA.MatchString(p.SHA256) || p.Name == "" || p.Author == "" || p.Description == "" || p.License == "" || p.Category == "" || p.FrameworkRange == "" || len(p.GameFingerprints) == 0 || len(p.Platforms) == 0 {
+	for i := range c.Packages {
+		p := &c.Packages[i]
+		if p.FrameworkVersion != "" || !allowLegacy {
+			canonical, ok := marketFrameworkRange(p.FrameworkVersion)
+			if !ok {
+				return fmt.Errorf("package %s must declare a valid frameworkVersion (X.Y.Z)", p.PackageID)
+			}
+			if p.FrameworkRange != canonical {
+				return fmt.Errorf("package %s frameworkRange must match confirmed frameworkVersion: %s", p.PackageID, canonical)
+			}
+			p.FrameworkRange = canonical
+		}
+		if !marketID.MatchString(p.PackageID) || !marketID.MatchString(p.ModGUID) || !marketStrictVersion(p.Version) || !marketSHA.MatchString(p.SHA256) || p.Name == "" || p.Author == "" || p.Description == "" || p.License == "" || p.Category == "" || p.FrameworkRange == "" || len(p.GameFingerprints) == 0 || len(p.Platforms) == 0 {
 			return fmt.Errorf("invalid descriptor for %s", p.PackageID)
 		}
 		if p.Classification != "gameplay" && p.Classification != "dependency" {
@@ -637,7 +652,7 @@ func marketValidateCatalog(c marketCatalog) error {
 			}
 		}
 		for _, d := range p.Dependencies {
-			if !marketID.MatchString(d.PackageID) || !marketVersion.MatchString(d.Version) {
+			if !marketID.MatchString(d.PackageID) || !marketStrictVersion(d.Version) {
 				return errors.New("invalid exact dependency")
 			}
 		}
@@ -651,8 +666,8 @@ func marketCompatibility(p marketPackage, r marketRequest) string {
 	if !contains(p.Platforms, r.Platform) {
 		return "This platform has no advertised support."
 	}
-	if !marketRange(p.FrameworkRange, r.FrameworkVersion) {
-		return "Framework version does not satisfy " + p.FrameworkRange
+	if why := marketPackageFrameworkCompatibility(p, r.FrameworkVersion); why != "" {
+		return why
 	}
 	h := r.gameFingerprint
 	if h == "" || !contains(p.GameFingerprints, h) {
@@ -961,17 +976,21 @@ func marketExtract(b []byte, p marketPackage, dest string) ([]marketFile, error)
 }
 func marketManifest(b []byte, p marketPackage) error {
 	var m struct {
-		ModGUID         string `json:"modGuid"`
-		Name            string `json:"name"`
-		Version         string `json:"version"`
-		Description     string `json:"description"`
-		Author          string `json:"author"`
-		DevelopmentOnly bool   `json:"developmentOnly"`
+		FrameworkVersion string `json:"frameworkVersion"`
+		ModGUID          string `json:"modGuid"`
+		Name             string `json:"name"`
+		Version          string `json:"version"`
+		Description      string `json:"description"`
+		Author           string `json:"author"`
+		DevelopmentOnly  bool   `json:"developmentOnly"`
 	}
 	if e := marketJSON(b, &m); e != nil {
 		return e
 	}
-	if m.ModGUID != p.ModGUID || m.Version != p.Version || m.Name == "" || m.DevelopmentOnly {
+	if _, valid := marketFrameworkVersion(m.FrameworkVersion); !valid || m.FrameworkVersion != p.FrameworkVersion {
+		return errors.New("archive manifest frameworkVersion is missing, invalid, or differs from the catalog descriptor")
+	}
+	if !marketStrictVersion(m.Version) || m.ModGUID != p.ModGUID || m.Version != p.Version || m.Name == "" || m.DevelopmentOnly {
 		return errors.New("runtime manifest identity mismatch or developer fixture")
 	}
 	return nil
@@ -1056,7 +1075,7 @@ func marketValidateGeneration(ctx context.Context, r marketRequest, id string) e
 	if lock.SchemaVersion != 1 || len(lock.Files) > 5000 {
 		return errors.New("unsupported or oversized generation lock")
 	}
-	if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: lock.Packages}); e != nil {
+	if e := marketValidateCatalogPolicy(marketCatalog{SchemaVersion: 1, Packages: lock.Packages}, true); e != nil {
 		return e
 	}
 	conflicts := map[string]string{}
@@ -1113,6 +1132,7 @@ func marketValidateGeneration(ctx context.Context, r marketRequest, id string) e
 
 	packages := map[string]marketPackage{}
 	for _, p := range lock.Packages {
+		p.legacyFrameworkAnchor = lock.FrameworkVersion
 		if source, ok := conflicts[p.ModGUID]; ok {
 			return fmt.Errorf("GUID %s conflicts with %s", p.ModGUID, source)
 		}

@@ -29,6 +29,9 @@ namespace FTKModFramework.Core.Data
 
         /// <summary>Optional author credit shown beside the description.</summary>
         public readonly string Author;
+        public readonly string FrameworkVersion;
+        public readonly string CompatibilityReason;
+        public bool FrameworkCompatible { get { return CompatibilityReason == null; } }
 
         /// <summary>Immutable enabled snapshot for this process. Pending changes never alter loaded state.</summary>
         public readonly bool Enabled;
@@ -38,7 +41,7 @@ namespace FTKModFramework.Core.Data
 
         internal void MarkManaged(string packageId) { IsManaged = true; PackageId = packageId; }
 
-        public ModEntry(string key, string displayName, bool isBundledDemo, string version, bool enabled, string description, string author)
+        public ModEntry(string key, string displayName, bool isBundledDemo, string version, bool enabled, string description, string author, string frameworkVersion = null, bool requiresDeclaration = false)
         {
             Key = key;
             DisplayName = displayName;
@@ -47,6 +50,8 @@ namespace FTKModFramework.Core.Data
             Enabled = enabled;
             Description = description;
             Author = author;
+            FrameworkVersion = frameworkVersion;
+            CompatibilityReason = requiresDeclaration ? ModFrameworkCompatibility.Reason(frameworkVersion, Plugin.Version) : null;
         }
     }
 
@@ -98,7 +103,7 @@ namespace FTKModFramework.Core.Data
         /// to <paramref name="defaultEnabled"/> when absent.
         /// </summary>
         public static ModEntry Register(string key, string displayName, bool isBundledDemo, string version, bool defaultEnabled,
-            string description, string author)
+            string description, string author, string frameworkVersion = null, bool requiresDeclaration = false)
         {
             ModEntry existing;
             if (_byKey.TryGetValue(key, out existing)) return existing; // idempotent: never re-seed.
@@ -110,7 +115,7 @@ namespace FTKModFramework.Core.Data
             string name = (displayName == null || displayName.Trim().Length == 0) ? key : displayName;
             // Version is UI-only metadata for the row label: data mods carry it from their manifest, the demo
             // passes null. It is not part of the gating contract.
-            ModEntry entry = new ModEntry(key, name, isBundledDemo, version, enabled, description, author);
+            ModEntry entry = new ModEntry(key, name, isBundledDemo, version, enabled, description, author, frameworkVersion, requiresDeclaration);
             _entries.Add(entry);
             _byKey[key] = entry;
             return entry;
@@ -121,7 +126,7 @@ namespace FTKModFramework.Core.Data
             ModEntry existing;
             if (_byKey.TryGetValue(manifest.ModGuid, out existing)) return existing;
             ModEntry entry = new ModEntry(manifest.ModGuid, manifest.Name, false, manifest.Version,
-                package.Enabled, package.Description ?? manifest.Description, package.Author ?? manifest.Author);
+                package.Enabled, package.Description ?? manifest.Description, package.Author ?? manifest.Author, manifest.FrameworkVersion, true);
             entry.MarkManaged(package.PackageId);
             _entries.Add(entry);
             _byKey[entry.Key] = entry;
@@ -132,10 +137,16 @@ namespace FTKModFramework.Core.Data
         /// Gating read used at load time. Returns the registered row's <c>Enabled</c> state, or TRUE for an
         /// unknown key (fail-open): a key the registry never saw must not be silently dropped.
         /// </summary>
+        internal static string CompatibilityReasonFor(string key, string version)
+        {
+            ModEntry entry;
+            return _byKey.TryGetValue(key, out entry) && entry.Version == version ? entry.CompatibilityReason : null;
+        }
+
         public static bool IsEnabled(string key)
         {
             ModEntry entry;
-            if (_byKey.TryGetValue(key, out entry)) return entry.Enabled;
+            if (_byKey.TryGetValue(key, out entry)) return entry.Enabled && entry.FrameworkCompatible;
             return true; // fail-open (FR-3): unknown key is treated as enabled.
         }
 
@@ -154,6 +165,11 @@ namespace FTKModFramework.Core.Data
                 return;
             }
 
+            if (enabled && !entry.FrameworkCompatible)
+            {
+                Plugin.Log.LogWarning("Cannot enable '" + key + "': " + entry.CompatibilityReason);
+                return;
+            }
             if (entry.IsManaged)
             {
                 Plugin.Log.LogWarning("Managed selections must be prepared through the marketplace confirmation flow.");

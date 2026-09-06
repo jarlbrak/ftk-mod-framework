@@ -114,6 +114,12 @@ namespace FTKModFramework.Core.Data
                     continue;
                 }
 
+                if (manifest.CompatibilityReason != null)
+                {
+                    Plugin.Log.LogWarning("Blocked mod '" + manifest.ModGuid + "': " + manifest.CompatibilityReason);
+                    mods.Add(new DiscoveredMod(manifest, new List<string>(), null));
+                    continue;
+                }
                 List<string> contentFiles = ContentFilesIn(folder);
 
                 // OPTIONAL behaviorDll (FR-3 manifest side, #32): only parsed + shape-validated here; #33

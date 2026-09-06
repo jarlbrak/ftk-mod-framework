@@ -338,7 +338,7 @@ func updateChannels(op string, r updateChannelRequest) (updateChannelResult, err
 		out.Status = "unavailable"
 		out.Message = "Refresh to load official releases and patch notes."
 	}
-	managedPackages, managedErr := updateManagedPackages(r.GameDir)
+	managedPackages, managedErr := updateVersionPackages(r.GameDir)
 	for _, release := range history.Releases {
 		release.URL = "https://github.com/jarlbrak/ftk-mod-framework/releases/tag/" + url.PathEscape(release.Tag)
 		release.Available = updateReleaseHasAssets(release, r.GameDir)

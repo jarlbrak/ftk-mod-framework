@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "0.1.2";
+        public const string Version = "0.1.3";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -460,13 +460,15 @@ namespace FTKModFramework
             foreach (ModEntry e in ModRegistry.Entries)
             {
                 total++;
-                if (e.Enabled) enabled++;
+                if (e.Enabled && e.FrameworkCompatible) enabled++;
             }
 
             Plugin.Log.LogInfo("ModRegistry: " + total + " mods, " + enabled + " enabled.");
 
             foreach (ModEntry e in ModRegistry.Entries)
-                if (!e.Enabled)
+                if (!e.FrameworkCompatible)
+                    Plugin.Log.LogInfo("ModRegistry: '" + e.Key + "' is blocked: " + e.CompatibilityReason);
+                else if (!e.Enabled)
                     Plugin.Log.LogInfo("ModRegistry: '" + e.Key + "' is disabled (its content was not loaded).");
         }
 
