@@ -483,7 +483,9 @@ clear_quarantine() {
   have xattr || return 0
   local p
   for p in "$GAME_DIR/BepInEx" "$GAME_DIR/run_bepinex.sh" "$GAME_DIR/libdoorstop.dylib"; do
-    [ -e "$p" ] && xattr -dr com.apple.quarantine "$p" >/dev/null 2>&1 || true
+    if [ -e "$p" ]; then
+      xattr -dr com.apple.quarantine "$p" >/dev/null 2>&1 || true
+    fi
   done
 }
 
