@@ -5,9 +5,7 @@ namespace FTKModFramework.Core.Data
 {
     /// <summary>
     /// One row in the <see cref="ModRegistry"/>: a single mod's identity and current enabled state.
-    /// Deliberately flat (four fields). No descriptions, categories, dependencies, or load-order data:
-    /// item #18's UI reads exactly these fields. <see cref="Version"/> is carried for the UI only and
-    /// is not part of the gating contract.
+    /// Description, author, and version are display metadata only and never affect identity or gating.
     /// </summary>
     internal sealed class ModEntry
     {
@@ -26,17 +24,29 @@ namespace FTKModFramework.Core.Data
         /// <summary>Optional mod version for the UI (data mods only). Null for the demo. Not used for gating.</summary>
         public readonly string Version;
 
-        /// <summary>Current enabled state. Mutated only by <see cref="ModRegistry.SetEnabled"/>, which also
-        /// persists it. Read by <see cref="ModRegistry.IsEnabled"/> for load-time gating.</summary>
-        public bool Enabled;
+        /// <summary>Optional player-facing explanation of the mod's content.</summary>
+        public readonly string Description;
 
-        public ModEntry(string key, string displayName, bool isBundledDemo, string version, bool enabled)
+        /// <summary>Optional author credit shown beside the description.</summary>
+        public readonly string Author;
+
+        /// <summary>Immutable enabled snapshot for this process. Pending changes never alter loaded state.</summary>
+        public readonly bool Enabled;
+        public bool? PendingEnabled;
+        public bool IsManaged { get; private set; }
+        public string PackageId { get; private set; }
+
+        internal void MarkManaged(string packageId) { IsManaged = true; PackageId = packageId; }
+
+        public ModEntry(string key, string displayName, bool isBundledDemo, string version, bool enabled, string description, string author)
         {
             Key = key;
             DisplayName = displayName;
             IsBundledDemo = isBundledDemo;
             Version = version;
             Enabled = enabled;
+            Description = description;
+            Author = author;
         }
     }
 
@@ -46,7 +56,7 @@ namespace FTKModFramework.Core.Data
     /// <c>TableManager.Initialize</c> load path, off two registration sites that are deliberately NOT
     /// unified:
     ///   1. <c>Plugin</c>'s postfix registers the one bundled-demo row (keyed <c>Plugin.Guid</c>).
-    ///   2. <c>ContentLoader.CollectEntries</c> registers each discovered data mod (keyed
+    ///   2. <c>ContentLoader.Load</c> registers each discovered data mod (keyed
     ///      <c>Manifest.ModGuid</c>) before gating its files.
     /// There is no second filesystem discovery pass: the registry only records what discovery already found.
     ///
@@ -87,7 +97,8 @@ namespace FTKModFramework.Core.Data
         /// reads <c>Plugin.EnableSampleContent.Value</c>; a data-mod row reads its PlayerPrefs key, defaulting
         /// to <paramref name="defaultEnabled"/> when absent.
         /// </summary>
-        public static ModEntry Register(string key, string displayName, bool isBundledDemo, string version, bool defaultEnabled)
+        public static ModEntry Register(string key, string displayName, bool isBundledDemo, string version, bool defaultEnabled,
+            string description, string author)
         {
             ModEntry existing;
             if (_byKey.TryGetValue(key, out existing)) return existing; // idempotent: never re-seed.
@@ -99,9 +110,21 @@ namespace FTKModFramework.Core.Data
             string name = (displayName == null || displayName.Trim().Length == 0) ? key : displayName;
             // Version is UI-only metadata for the row label: data mods carry it from their manifest, the demo
             // passes null. It is not part of the gating contract.
-            ModEntry entry = new ModEntry(key, name, isBundledDemo, version, enabled);
+            ModEntry entry = new ModEntry(key, name, isBundledDemo, version, enabled, description, author);
             _entries.Add(entry);
             _byKey[key] = entry;
+            return entry;
+        }
+
+        internal static ModEntry RegisterManaged(ModManifest manifest, Marketplace.PackageDescriptor package)
+        {
+            ModEntry existing;
+            if (_byKey.TryGetValue(manifest.ModGuid, out existing)) return existing;
+            ModEntry entry = new ModEntry(manifest.ModGuid, manifest.Name, false, manifest.Version,
+                package.Enabled, package.Description ?? manifest.Description, package.Author ?? manifest.Author);
+            entry.MarkManaged(package.PackageId);
+            _entries.Add(entry);
+            _byKey[entry.Key] = entry;
             return entry;
         }
 
@@ -118,7 +141,7 @@ namespace FTKModFramework.Core.Data
 
         /// <summary>
         /// Set and PERSIST a mod's enabled state. The demo row writes <c>Plugin.EnableSampleContent.Value</c>;
-        /// a data-mod row writes its PlayerPrefs key (then Save). Updates the in-memory row too. No live
+        /// a data-mod row writes its PlayerPrefs key (then Save). Only PendingEnabled changes in memory. No live
         /// re-inject: a change takes effect on the next load. A no-op (with a warning) for an unknown key,
         /// since there is nothing to persist against.
         /// </summary>
@@ -131,7 +154,12 @@ namespace FTKModFramework.Core.Data
                 return;
             }
 
-            entry.Enabled = enabled;
+            if (entry.IsManaged)
+            {
+                Plugin.Log.LogWarning("Managed selections must be prepared through the marketplace confirmation flow.");
+                return;
+            }
+            entry.PendingEnabled = enabled == entry.Enabled ? (bool?)null : enabled;
 
             if (entry.IsBundledDemo)
             {

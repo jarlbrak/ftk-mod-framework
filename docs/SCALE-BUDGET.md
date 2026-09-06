@@ -38,7 +38,7 @@ is a deferred-P5d calibration placeholder, not a real measured footprint. `load=
 
 | Key | Default | Meaning |
 |---|---|---|
-| `EnableScaleBudgetGate` | `true` | Master switch. When false, no SCALE-BUDGET line is emitted at all. |
+| `EnableScaleBudgetGate` | `false` | Master switch. When false, no SCALE-BUDGET line is emitted at all. Off by default because the gates are development tooling (the campaign gate registers a synthetic 500-quest probe adventure in the New Game list); set it true in `BepInEx/config/com.ftkmf.framework.cfg` for a measurement run. |
 | `OutputDirectory` | `BepInEx/FTKPerfProbe` | Folder for `scale-baseline.json`. Relative paths root at the game folder. |
 | `LoadMsHeadroomMultiplier` | `2.0` | Load budget = max(baselineLoadMs * this, LoadMsAbsoluteFloorMs). |
 | `LoadMsAbsoluteFloorMs` | `1000` | Absolute floor (ms) for the load budget, so a fast vanilla load never trips the gate. |

@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "0.1.0";
+        public const string Version = "0.1.2";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -73,17 +73,65 @@ namespace FTKModFramework
         public static ConfigEntry<bool> EnableCampaignEngine;
 
         /// <summary>
-        /// Folder the data loader scans for mod subfolders (each with a manifest.json). Defaults to
-        /// BepInEx's plugins dir, so dropping a content-mod folder in alongside plugins just works.
+        /// Folder the data loader scans for mod subfolders (each with a manifest.json). Blank (the default)
+        /// means BepInEx's plugins dir, resolved at runtime, so dropping a content-mod folder in alongside
+        /// plugins just works AND the config file never bakes in an absolute path (a baked path goes stale
+        /// the moment the game moves: a new Steam library, an SD card, a different machine). A relative
+        /// value is rooted at the game folder; an absolute value is used as-is. Read through
+        /// <see cref="DataContentRootPath"/>, never through <c>.Value</c> directly.
         /// </summary>
         public static ConfigEntry<string> DataContentRoot;
+
+        /// <summary>
+        /// The resolved data-content root (see <see cref="DataContentRoot"/>): blank -> BepInEx plugins dir,
+        /// relative -> under the game folder, absolute -> as-is. Never null once Awake has run.
+        /// </summary>
+        public static string DataContentRootPath
+        {
+            get
+            {
+                string configured = DataContentRoot != null ? DataContentRoot.Value : null;
+                if (configured == null || configured.Trim().Length == 0) return Paths.PluginPath;
+                configured = configured.Trim();
+                if (System.IO.Path.IsPathRooted(configured)) return configured;
+                return System.IO.Path.Combine(Paths.GameRootPath, configured);
+            }
+        }
+
+        // ---- UI ----------------------------------------------------------------------------------------
+
+        /// <summary>Show the framework's splash card (logo, version, enabled mods) the first time the title appears.</summary>
+        public static ConfigEntry<bool> ShowSplash;
+
+        /// <summary>Seconds the splash card holds at full opacity before fading (0.5 to 120; any key skips).</summary>
+        public static ConfigEntry<float> SplashSeconds;
+
+        // ---- Diagnostics: framework self-tests ---------------------------------------------------------
+        // The load-time self-tests are a DEVELOPMENT gate (CLAUDE.md: "SELF-TEST PASS lines in the log"). They
+        // register throwaway probe rows and probe ADVENTURES (which show up in the New Game list), deliberately
+        // exercise failure paths (so they log errors by design), and add load time. None of that belongs in a
+        // player's game, so they are off by default; the bundled sample content still emits its own SELF-TEST
+        // lines as part of registering, so a plain install keeps a health signal in the log.
+
+        /// <summary>
+        /// Run the framework's load-time self-tests (behaviour primitives, passive registry, campaign engine,
+        /// realm spike, ...). Off by default: they exist for framework development, not for play.
+        /// </summary>
+        public static ConfigEntry<bool> RunSelfTests;
+
+        /// <summary>True iff the self-tests are configured on. Null-safe (a test context without Awake => off).</summary>
+        public static bool SelfTestsEnabled
+        {
+            get { return RunSelfTests != null && RunSelfTests.Value; }
+        }
 
         // ---- Diagnostics: scale-and-performance gate (P5a, #22) ----------------------------------------
         // The gate measures one content load against a persisted calibration baseline + tunable budgets and
         // emits exactly one SCALE-BUDGET line. The five budget fields are calibrated later; the values here
         // are conservative starting points (small load floor, 64 MiB memory floor, 2x headroom).
 
-        /// <summary>Master switch for the scale-budget gate. When false, NO SCALE-BUDGET line is emitted.</summary>
+        /// <summary>Master switch for the scale-budget gates (data + campaign). Off by default: it is a development
+        /// tool, and the campaign gate registers a synthetic 500-quest probe adventure in the New Game list.</summary>
         public static ConfigEntry<bool> DiagnosticsEnableGate;
 
         /// <summary>Directory the baseline JSON is written to / read from (relative paths root at the game folder).</summary>
@@ -159,7 +207,7 @@ namespace FTKModFramework
             Log = Logger;
 
             EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
-                "Register the bundled example content (a custom weapon + ability, given to the Blacksmith). " +
+                "Enable the FTK Adventure Pack: Thief and Innkeeper classes, the Cutpurse enemy, equipment, and adventures. " +
                 "Set false if you only want the framework as a dependency for other content mods.");
 
             ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", false,
@@ -190,14 +238,29 @@ namespace FTKModFramework
                 "mirroring EnableBehaviorLoading; inert on any vanilla quest even when on. Also gates the " +
                 "load-time campaign QuestValidator pre-pass.");
 
-            DataContentRoot = Config.Bind("Data", "DataContentRoot", Paths.PluginPath,
-                "Folder scanned for content-mod subfolders (each with a manifest.json). Defaults to the " +
-                "BepInEx plugins directory.");
+            DataContentRoot = Config.Bind("Data", "DataContentRoot", "",
+                "Folder scanned for content-mod subfolders (each with a manifest.json). Leave blank to use the " +
+                "BepInEx plugins directory (resolved at runtime, so the install can move). A relative path is " +
+                "taken from the game folder; an absolute path is used as-is.");
 
-            DiagnosticsEnableGate = Config.Bind("Diagnostics", "EnableScaleBudgetGate", true,
-                "Measure each content load against a calibration baseline and budgets, emitting one " +
-                "SCALE-BUDGET line. First run with no baseline writes one and emits CALIBRATED. " +
-                "Set false to emit no SCALE-BUDGET line at all.");
+            ShowSplash = Config.Bind("UI", "ShowSplash", true,
+                "Show the framework's splash card (logo, version, and the enabled mods) the first time the title " +
+                "screen appears, so you can see the framework loaded. Any key or click skips it.");
+
+            SplashSeconds = Config.Bind("UI", "SplashSeconds", 4f,
+                "How many seconds the splash card holds at full opacity before fading out (0.5 to 120).");
+
+            RunSelfTests = Config.Bind("Diagnostics", "RunSelfTests", false,
+                "DEVELOPMENT: run the framework's load-time self-tests (behaviour primitives, passive registry, " +
+                "campaign engine, realm spike, ...). They register throwaway probe rows and probe adventures " +
+                "(visible in the New Game list), log deliberate failure-path errors, and add load time. " +
+                "Leave false for normal play. The bundled sample content emits its own SELF-TEST lines regardless.");
+
+            DiagnosticsEnableGate = Config.Bind("Diagnostics", "EnableScaleBudgetGate", false,
+                "DEVELOPMENT: measure each content load against a calibration baseline and budgets, emitting one " +
+                "SCALE-BUDGET line, and author a synthetic 500-quest probe campaign (visible in the New Game list) " +
+                "to gate the campaign engine at scale. First run with no baseline writes one and emits CALIBRATED. " +
+                "Leave false for normal play.");
 
             DiagnosticsOutputDirectory = Config.Bind("Diagnostics", "OutputDirectory", "BepInEx/FTKPerfProbe",
                 "Folder for the scale-baseline.json calibration file. Relative paths root at the game " +
@@ -291,11 +354,23 @@ namespace FTKModFramework
             if (_done) return; // Initialize can be reached more than once; only seed content once.
             _done = true;
 
+            Core.Marketplace.MarketplaceRuntime.InitializeBeforeDiscovery();
+
             // Register the bundled-demo row UNCONDITIONALLY, before its gate is read. EnableSampleContent.Value
             // backs the row's Enabled state (so a disabled demo stays listed and re-enableable); registration
             // itself never depends on that value. Doing this before the gate is what stops the FR-3 fail-open
             // default from silently re-enabling sample content the user turned off.
-            ModRegistry.Register(Plugin.Guid, "Bundled Sample Content", true, null, Plugin.EnableSampleContent.Value);
+            ModRegistry.Register(Plugin.Guid, "FTK Adventure Pack", true, null, Plugin.EnableSampleContent.Value,
+                "Adds the Thief and Innkeeper classes, the Cutpurse enemy, new equipment, encounters, and adventures.",
+                "FTK Mod Framework team");
+
+            // Framework-shipped behaviours (#31): the bundled-demo Steal behaviour key (com.ftkmf.sampledata:Steal)
+            // and the built-in CollectN quest verb (com.ftkmf.framework:CollectN). Runs UNCONDITIONALLY
+            // (independent of EnableSampleContent) and FIRST: the sample campaign below validates its collect-N
+            // quest against the verb registry at registration time, and the data loader later resolves the demo
+            // fixture's behavior:"Steal", so both keys must exist before either consumer runs. (It used to run
+            // after the samples, which only worked because a self-test registered the verb early.)
+            Run("framework behaviors", FrameworkBehaviors.Register);
 
             // Bundled demo content (opt-in via the gate). Disabling it must NOT skip the data loader below.
             if (ModRegistry.IsEnabled(Plugin.Guid))
@@ -307,39 +382,40 @@ namespace FTKModFramework
                 Run("sample encounter + adventure", AdventureContent.Register);
             }
 
-            // Behaviour primitives self-test (P3, #29). Runs UNCONDITIONALLY (independent of EnableSampleContent):
-            // it only exercises its own throwaway keys/types and proves BehaviorRegistry + BehaviorHost work.
-            Run("behavior primitives", BehaviorSelfTest.Run);
+            // Framework self-tests (development gate; config Diagnostics/RunSelfTests, off by default). Each is
+            // independent of EnableSampleContent: they only exercise their own throwaway keys, types, and probe
+            // rows. They are skipped for players because they log deliberate failure-path errors and cost load
+            // time; the sample content above still emits its own SELF-TEST lines as part of registering.
+            if (Plugin.SelfTestsEnabled)
+            {
+                // Behaviour primitives (P3, #29): proves BehaviorRegistry + BehaviorHost work on throwaway types.
+                Run("behavior primitives", BehaviorSelfTest.Run);
 
-            // behaviorDll path-traversal guard self-test (P3, #32). Runs UNCONDITIONALLY: it exercises the
-            // manifest guard as a pure function (no filesystem, no game state), proving '..'/separator/
-            // absolute values are rejected and a bare filename resolves under the mod root.
-            Run("behavior dll guard", BehaviorDllGuardSelfTest.Run);
+                // behaviorDll path-traversal guard (P3, #32): the manifest guard as a pure function (no
+                // filesystem, no game state): '..'/separator/absolute values rejected, a bare filename resolves.
+                Run("behavior dll guard", BehaviorDllGuardSelfTest.Run);
 
-            // Passive-trait registry self-test (spec #78). Runs UNCONDITIONALLY: it binds a THROWAWAY probe to
-            // whatever class row is present (the bundled Thief when sample content is on, otherwise the first
-            // vanilla row) and clears it again, so it never depends on sample content and never leaves a trait
-            // bound to a real class.
-            Run("passive registry", PassiveSelfTest.Run);
+                // Passive-trait registry (spec #78): binds a THROWAWAY probe to whatever class row is present
+                // (the bundled Thief when sample content is on, otherwise the first vanilla row) and clears it
+                // again, so it never leaves a trait bound to a real class.
+                Run("passive registry", PassiveSelfTest.Run);
+            }
+            else
+            {
+                Plugin.Log.LogInfo("Self-tests skipped (Diagnostics/RunSelfTests=false).");
+            }
 
             // Synthetic stress content (P5b, #23). Runs ALWAYS, BEFORE the data load, so a count-0 run still
             // clears a stale reserved subfolder a prior higher-N run may have left. When count > 0 it writes N
-            // synthetic entries into the reserved subfolder under DataContentRoot; the single existing
-            // ContentLoader.Load(DataContentRoot) pass below then discovers and registers them. NOTE: if
-            // EnableDataContent is false the loader does not run, so the synthetic mod is written/cleared but
-            // not registered; the stress workflow assumes EnableDataContent=true (the default).
+            // synthetic entries into the reserved subfolder under the data-content root; the single existing
+            // ContentLoader.Load pass below then discovers and registers them. NOTE: if EnableDataContent is
+            // false the loader does not run, so the synthetic mod is written/cleared but not registered; the
+            // stress workflow assumes EnableDataContent=true (the default).
             Run("synthetic content", () => SyntheticContentGenerator.Generate(
-                Plugin.DataContentRoot.Value,
+                Plugin.DataContentRootPath,
                 Plugin.SyntheticContentCount.Value,
                 Plugin.SyntheticContentKind.Value,
                 Plugin.SyntheticContentTemplate.Value));
-
-            // Framework-shipped behaviours (#31). Runs UNCONDITIONALLY (independent of EnableSampleContent)
-            // and BEFORE the data loader, so the bundled-demo behaviour key (com.ftkmf.sampledata:Steal) is
-            // present when the loader resolves the demo fixture's behavior:"Steal". This is the in-assembly
-            // demo path that lets the shipped sampledata fixture drop the "minus the MonoBehaviour" caveat;
-            // real third-party mods supply behaviours via their own DLL under their own guid (#33/#34).
-            Run("framework behaviors", FrameworkBehaviors.Register);
 
             // JSON data-content mods (opt-in, independent of the demo). Runs AFTER sample content so a
             // data mod can reference vanilla rows the same way the demo does. ContentLoader registers each
@@ -396,7 +472,7 @@ namespace FTKModFramework
 
         private static LoadResult LoadDataContent()
         {
-            return ContentLoader.Load(Plugin.DataContentRoot.Value);
+            return ContentLoader.Load(Plugin.DataContentRootPath);
         }
 
         private static void Run(string what, Action register)

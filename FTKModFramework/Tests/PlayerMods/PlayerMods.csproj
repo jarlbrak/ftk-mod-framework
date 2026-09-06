@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Compile Include="../../Core/Marketplace/*.cs" Link="Source/Marketplace/%(Filename)%(Extension)" />
+    <Compile Include="../../Core/Data/ModManifest.cs" Link="Source/ModManifest.cs" />
+    <Compile Include="../../Core/Data/ModDiscovery.cs" Link="Source/ModDiscovery.cs" />
+    <Compile Include="../../Core/Data/ModRegistry.cs" Link="Source/ModRegistry.cs" />
+    <Compile Include="../../Core/Data/JsonContentParser.cs" Link="Source/JsonContentParser.cs" />
+    <Compile Include="../../Core/Data/ContentFile.cs" Link="Source/ContentFile.cs" />
+    <Compile Include="../../Core/Data/ContentEntry.cs" Link="Source/ContentEntry.cs" />
+    <Compile Include="../../Core/Data/ValidationReport.cs" Link="Source/ValidationReport.cs" />
+    <Compile Include="../../Core/Data/BehaviorLoader.cs" Link="Source/BehaviorLoader.cs" />
+    <Compile Include="../../Behaviors/ContentBehaviorAttribute.cs" Link="Source/ContentBehaviorAttribute.cs" />
+  </ItemGroup>
+</Project>

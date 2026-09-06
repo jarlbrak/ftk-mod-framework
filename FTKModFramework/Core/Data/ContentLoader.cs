@@ -54,10 +54,27 @@ namespace FTKModFramework.Core.Data
         /// <summary>Entry point called from the TableManager.Initialize postfix (after sample content).</summary>
         public static LoadResult Load(string contentRoot)
         {
+            if (!Marketplace.MarketplaceRuntime.CanDiscover)
+            {
+                Plugin.Log.LogError("Data discovery skipped: activation helper is still running. Quit and repair the framework.");
+                return new LoadResult(0, 0, 0);
+            }
             Stopwatch sw = Stopwatch.StartNew();
             ValidationReport report = new ValidationReport();
 
-            List<DiscoveredMod> mods = ModDiscovery.Discover(contentRoot, report);
+            Marketplace.ManagedSnapshot managed = Marketplace.MarketplaceRuntime.Active;
+            List<DiscoveredMod> mods = ModDiscovery.DiscoverAll(contentRoot, managed == null ? null : managed.ContentRoot, report);
+
+            // Read persisted enabled states before any external code can execute.
+            foreach (DiscoveredMod mod in mods)
+            {
+                Marketplace.PackageDescriptor package = Marketplace.MarketplaceRuntime.FindManaged(mod.Manifest.ModGuid);
+                if (package != null && managed != null && mod.Manifest.FolderPath.StartsWith(managed.ContentRoot + System.IO.Path.DirectorySeparatorChar, StringComparison.Ordinal))
+                    ModRegistry.RegisterManaged(mod.Manifest, package);
+                else
+                    ModRegistry.Register(mod.Manifest.ModGuid, mod.Manifest.Name, false, mod.Manifest.Version, true,
+                        mod.Manifest.Description, mod.Manifest.Author);
+            }
 
             // SINGLE behaviour-DLL pre-pass (FR-7): load + reflect + register every mod's behaviorDll behaviours
             // BEFORE any content-registration phase. This is the sequencing invariant the Phase-2 WireBehavior
@@ -106,6 +123,7 @@ namespace FTKModFramework.Core.Data
             EmitBehaviorDllSelfTest(cached);
             EmitDeterminismSelfTest(cached);
             LogSummary(report, cached.Count, pending.Count, sw.ElapsedMilliseconds);
+            Marketplace.MarketplaceRuntime.RecordRegistrationErrors(report);
 
             // Return the SAME measured values the summary just logged: no second Stopwatch, no re-count.
             return new LoadResult(cached.Count, pending.Count, sw.ElapsedMilliseconds);
@@ -116,8 +134,8 @@ namespace FTKModFramework.Core.Data
         /// (a malformed file is recorded and skipped). The work list preserves the deterministic
         /// (modGuid, folder, filename, in-file) order so id minting is reproducible before the final sort.
         ///
-        /// Each discovered mod is REGISTERED into <see cref="ModRegistry"/> first (so a disabled mod still
-        /// appears in <c>ModRegistry.Entries</c> and the UI can re-enable it), THEN its files are skipped
+        /// Discovery already registered each mod before the DLL pre-pass (so a disabled mod still
+        /// appears in <c>ModRegistry.Entries</c> and the UI can re-enable it). Its files are skipped
         /// when <c>ModRegistry.IsEnabled</c> is false. A disabled mod contributes NO PendingEntry, so the
         /// global (modGuid, id) sort and the id minting that follows see only the surviving set (FR-3/NFR-3).
         /// </summary>
@@ -129,8 +147,6 @@ namespace FTKModFramework.Core.Data
             {
                 string modGuid = mod.Manifest.ModGuid;
 
-                // Register BEFORE gating: a disabled mod must still be listed in ModRegistry.Entries.
-                ModRegistry.Register(modGuid, mod.Manifest.Name, false, mod.Manifest.Version, true);
                 if (!ModRegistry.IsEnabled(modGuid))
                 {
                     Plugin.Log.LogInfo("ModRegistry: skipping disabled mod '" + modGuid + "' (no entries loaded).");

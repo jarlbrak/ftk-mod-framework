@@ -5,13 +5,13 @@ using FTKModFramework.Core;
 namespace FTKModFramework
 {
     /// <summary>
-    /// Goal #5 (Adventures) — Slice B: inject a brand-new overworld ENCOUNTER into the live draw pool
+    /// Goal #5 (Adventures), Slice B: inject a brand-new overworld ENCOUNTER into the live draw pool
     /// and prove it appears in a normal run, WITHOUT touching world generation.
     ///
     /// The "Smuggler's Cache" is cloned from TreasureChest, made eligible in every realm at Common
     /// rarity. The selector (GameLogic.GetMiniEncounter) walks the whole FTK_miniEncounterDB by index
     /// and weighted-rolls the eligible rows, so our freshly registered row is automatically a candidate
-    /// — see Content.AddEncounter. To make verification deterministic (rather than waiting for a ~1/170
+    /// (see Content.AddEncounter). To make verification deterministic (rather than waiting for a ~1/170
     /// weighted roll), a debug toggle swaps our encounter in wherever the game already chose to spawn one.
     /// </summary>
     internal static class AdventureContent
@@ -50,33 +50,38 @@ namespace FTKModFramework
 
             RegisterAdventure();
 
-            // Campaign builder (#38): author + register a 2-stage linear campaign and prove its $type
-            // discriminators round-trip through the game's own serializer. Gated identically (this runs
-            // only when EnableSampleContent is on, since it registers a real selectable demo adventure).
-            CampaignSelfTest.Run();
+            // Engine self-tests that ride on the sample content (development gate: Diagnostics/RunSelfTests,
+            // off by default). Every one of these registers PROBE content a player would otherwise see: throwaway
+            // campaigns in the New Game list (several of them deliberately broken, logged as errors by design), a
+            // probe enemy set, and a probe realm. They run only when EnableSampleContent is on (they need the
+            // demo's rows) AND the self-tests are on. The real shipped content below is unaffected.
+            if (Plugin.SelfTestsEnabled)
+            {
+                // Campaign builder (#38): author + register a 2-stage linear campaign and prove its $type
+                // discriminators round-trip through the game's own serializer.
+                CampaignSelfTest.Run();
 
-            // Custom-verb resolver + collect-N (#40): author a collect-N quest, prove the framework-$type
-            // ModQuestDef round-trips through the game serializer (the OQ2 in-engine check), the resolver
-            // Prefix substitutes a CollectNQuestLogic, and the count<1 guard fires. Same gate (it registers a
-            // real selectable demo adventure via AddCampaignFromTemplate, like the campaign self-test).
-            CollectNSelfTest.Run();
+                // Custom-verb resolver + collect-N (#40): author a collect-N quest, prove the framework-$type
+                // ModQuestDef round-trips through the game serializer (the OQ2 in-engine check), the resolver
+                // Prefix substitutes a CollectNQuestLogic, and the count<1 guard fires.
+                CollectNSelfTest.Run();
 
-            // Campaign-flag store (#41): prove a populated CampaignStateQuest round-trips through BOTH the disk
-            // serializer (FullSerializer) and the co-op RPC serializer (Newtonsoft TypeNameHandling.Auto),
-            // recovering identical flags AND the concrete subtype. Standalone (no live GameLogic/save needed).
-            CampaignFlagSelfTest.Run();
+                // Campaign-flag store (#41): prove a populated CampaignStateQuest round-trips through BOTH the disk
+                // serializer (FullSerializer) and the co-op RPC serializer (Newtonsoft TypeNameHandling.Auto),
+                // recovering identical flags AND the concrete subtype. Standalone (no live GameLogic/save needed).
+                CampaignFlagSelfTest.Run();
 
-            // Branch router (#42): author a 3-quest campaign with an on-complete flag + a flag-conditioned branch,
-            // then drive the REAL QuestRouterPatch.Postfix and prove the match redirects (on-complete flag applied
-            // first, then the m_Stages-walk target swap), a non-match leaves the vanilla successor, and an unknown
-            // op (compare + mutate) is rejected at authoring. Same gate (registers a real selectable demo adventure).
-            BranchRouterSelfTest.Run();
+                // Branch router (#42): author a 3-quest campaign with an on-complete flag + a flag-conditioned
+                // branch, then drive the REAL QuestRouterPatch.Postfix and prove the match redirects (on-complete
+                // flag applied first, then the m_Stages-walk target swap), a non-match leaves the vanilla
+                // successor, and an unknown op (compare + mutate) is rejected at authoring.
+                BranchRouterSelfTest.Run();
 
-            // Campaign QuestValidator (#43): author a clean linear campaign + a broken one (unconditional cycle
-            // that never reaches victory), and prove the load-time validator passes the valid one with 0 errors
-            // and catches the broken one with the precise victory-reachability FAIL naming the offending quest.
-            // Same gate (registers real selectable demo adventures via AddCampaignFromTemplate).
-            QuestValidatorSelfTest.Run();
+                // Campaign QuestValidator (#43): author a clean linear campaign + a broken one (unconditional cycle
+                // that never reaches victory), and prove the load-time validator passes the valid one with 0
+                // errors and catches the broken one with the precise victory-reachability FAIL naming the quest.
+                QuestValidatorSelfTest.Run();
+            }
 
             // Bundled sample campaign (#44, spec #37 P5): the consumer-side deliverable. ONE cohesive campaign
             // authored SOLELY through the public Adventures.*/builder API, exercising all four objective types
@@ -85,17 +90,21 @@ namespace FTKModFramework
             // adventure via AddCampaignFromTemplate; the load pre-pass reports 0 validation errors).
             CampaignContent.Register();
 
-            // Bespoke realm + boss slice (spec #57). Two Core registration helpers + their load-time self-tests:
-            //   #59 RegisterEnemySet: clone bounty1A, fill m_HalfParty/m_FullParty*, prove the set resolves by int
-            //       and is a non-empty, non-GenericBoss solo set. Emits SELF-TEST PASS [enemyset].
-            EnemySetSelfTest.Run();
+            // Bespoke realm + boss slice (spec #57): the two Core registration helpers' load-time self-tests.
+            // Same development gate as above (each registers a probe row a player never needs).
+            if (Plugin.SelfTestsEnabled)
+            {
+                //   #59 RegisterEnemySet: clone bounty1A, fill m_HalfParty/m_FullParty*, prove the set resolves by
+                //       int and is a non-empty, non-GenericBoss solo set. Emits SELF-TEST PASS [enemyset].
+                EnemySetSelfTest.Run();
 
-            //   #58 RegisterRealm + the gating dict-key spike: register a realm cloned from PoisonBog, then prove
-            //       a SYNTHETIC realm int survives a full GameDefinition Newtonsoft round-trip (its decimal-string
-            //       dictionary KEY in m_RealmStages converts to the enum-typed key) and resolves through the
-            //       game's own GetRealmProperties. Emits SELF-TEST PASS [realm-spike] or FAIL with the exact
-            //       failure (never throws out of registration). This is the make-or-break for bespoke custom realms.
-            RealmSpikeSelfTest.Run();
+                //   #58 RegisterRealm + the gating dict-key spike: register a realm cloned from PoisonBog, then
+                //       prove a SYNTHETIC realm int survives a full GameDefinition Newtonsoft round-trip (its
+                //       decimal-string dictionary KEY in m_RealmStages converts to the enum-typed key) and resolves
+                //       through the game's own GetRealmProperties. Emits SELF-TEST PASS [realm-spike] or FAIL with
+                //       the exact failure (never throws out of registration).
+                RealmSpikeSelfTest.Run();
+            }
 
             // Slice D1 (#60/#61/#62): the bespoke custom-realm + boss DEMO, the consumer-side deliverable that
             // builds on the spike (which PASSED in-game, so the bespoke-realm path is in use). ONE cohesive
@@ -119,7 +128,7 @@ namespace FTKModFramework
                 Plugin.Guid, "SmugglersRun", "DungeonCrawl",
                 "Smuggler's Run",
                 "A treasure-hunter's romp across Fahrul: looser purse-strings, richer lore, and " +
-                "smugglers' caches hidden down every road. Same dangers as the Dungeon Crawl — deeper pockets.",
+                "smugglers' caches hidden down every road. Same dangers as the Dungeon Crawl, deeper pockets.",
                 jo =>
                 {
                     jo["m_GoldMultiplier"] = 1.5;        // richer pickings

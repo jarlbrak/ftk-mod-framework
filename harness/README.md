@@ -154,9 +154,9 @@ playthrough to victory.
 ### 0. Build and deploy the framework DLL
 
 ```bash
-cd FTKModFramework
-dotnet build -c Release
-# copy bin/Release/net35/FTKModFramework.dll into <game>/BepInEx/plugins/
+./deploy.sh
+# = dotnet build -c Release, then install.sh --framework <the build> --dev
+#   (installs BepInEx if missing, the DLL, the Steam launch option, and turns on the self-tests)
 ```
 
 ### 1. Launch For The King with the bridge enabled

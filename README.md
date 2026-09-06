@@ -27,8 +27,32 @@
 
 "Verified in-game" means the content has been loaded into a running game with `SELF-TEST PASS` confirmed in `BepInEx/LogOutput.log`, not just compiled. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
 
-## Two ways to get involved
+## Play with mods (macOS, Linux, Windows preview)
 
+1. Download your platform launcher archive from [GitHub Releases](https://github.com/jarlbrak/ftk-mod-framework/releases).
+2. Extract it to a permanent folder, keeping the files together.
+3. In Steam, choose **Games > Add a Non-Steam Game > Browse** and select **For The King Modded.app**
+   (Mac), **For The King Modded.sh** (Linux), or **FtkModdedLauncher.exe** (Windows).
+4. Name it **For The King Modded** and launch. On Windows, choose **Play** in the launcher.
+
+First launch installs the bundled framework and its loader. Steam artwork is applied
+automatically; Steam may need one restart to show it. Each launcher Play checks for a
+compatible framework update before opening your owned game, preserving mods and settings
+and using the verified installed version when offline. In **Mods > Updates**, follow Stable
+or Preview, or pin a specific release after reading its patch notes. Stable excludes previews.
+
+The title screen includes a **Mods** browser, and bundled content includes the **Thief**,
+**Innkeeper**, **Smuggler's Run**, and **The Hollow Mire**. See
+[the launcher guide](launcher/README.md) for setup and platform limits. macOS gameplay
+has been smoke-tested; Windows and Linux/Proton gameplay still need platform testing.
+
+The standalone terminal installer remains available for manual setup and removal;
+see [the installation guide](docs/INSTALL.md). It downloads the latest stable release
+by default, so use the launcher archive for this early-access preview.
+
+## Three ways to get involved
+
+- **Play** (above), and drop other content mods into `<game>/BepInEx/plugins/`.
 - **Use the framework** (make your own mod): add content through the public `Content.*` API. Start with [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md). The bundled `Content/ThiefClass.cs` and `Content/CutpurseEnemy.cs` are working references.
 - **Contribute to the framework** (work on the engine and content pipeline): see [`CONTRIBUTING.md`](CONTRIBUTING.md). Work is scoped as epics, specs, and work-items in [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues); every change is verified in-game before it counts as done.
 
@@ -72,7 +96,12 @@ FTKModFramework/
   Agent/                   opt-in test bridge (env-gated, loopback-only, single-player; see harness/)
 FTKPerfProbe/              standalone perf-probe plugin (+ FTKPerfProbe.Tests)
 harness/                   MCP server that lets an agent drive the game to verify content
+install.sh                 the player installer (macOS + Linux): BepInEx + plugin + Steam launch option
+deploy.sh                  developer build-and-install through install.sh (self-tests on)
+release.sh                 maintainer: publish a GitHub release the installer downloads from
+tests/installer/           the installer's test suite (mock Steam layouts; runs in CI)
 docs/
+  INSTALL.md               player install guide: what the installer does per platform, troubleshooting
   WRITING-CONTENT.md       modder API guide (items, abilities, classes, enemies, encounters)
   ADVENTURES.md            how FTK models adventures + how the framework adds them
   CAMPAIGNS.md             data-authored questlines (branching, flags, custom objective verbs)
@@ -105,18 +134,18 @@ are git-ignored (they're copyrighted; reference them from the install).
 
 ## Install & run
 
-1. Install the **BepInExPack for For The King** (Thunderstore) into the game so a `BepInEx/` folder
-   sits next to the executable. (Easiest via the r2modman / Thunderstore mod manager.)
-2. Copy `FTKModFramework.dll` into `<game>/BepInEx/plugins/`.
-3. Launch. Check `BepInEx/LogOutput.log` for `FTK Mod Framework ... loaded` and the
-   `SELF-TEST PASS` lines. With the demo enabled, the **Thief** appears at character-select and the
-   "Emberbrand" weapon is in the Blacksmith's starting kit.
+Players: use the one-line installer above (it handles BepInEx, the plugin, and Steam's launch
+option on macOS and Linux; [`docs/INSTALL.md`](docs/INSTALL.md) has the per-platform details and
+troubleshooting). On Windows, install the **BepInExPack for For The King** (Thunderstore / r2modman)
+and copy `FTKModFramework.dll` into `<game>/BepInEx/plugins/`.
 
-> **macOS note:** BepInEx on the Mac Unity-Mono build uses `run_bepinex.sh` + a Doorstop dylib
-> rather than the Windows `winhttp.dll`. It works, but the FTK community packs are Windows-first, so
-> a Windows install (or a VM) is the smoother path for *testing*. The framework DLL itself is
-> platform-agnostic managed IL. Also note: **co-op requires every player to have identical mods**
-> (no asset streaming), which is why `IdAllocator` makes IDs deterministic across machines.
+Developers: `./deploy.sh` builds the framework and installs your build into your Steam copy through
+the same installer, with the load-time self-tests switched on (`Diagnostics/RunSelfTests`). Launch,
+then check `BepInEx/LogOutput.log` for `FTK Mod Framework ... loaded` and the `SELF-TEST PASS` lines.
+The installer has its own test suite: `bash tests/installer/test-install.sh`.
+
+> **Co-op requires every player to have identical mods** (no asset streaming), which is why
+> `IdAllocator` makes IDs deterministic across machines.
 
 ## Using the framework (writing a content mod)
 
@@ -173,3 +202,7 @@ each mod on or off (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §1
 - **FTKAPI** (Amadare / ftk-modding) and **FTKModLib** (lulzsun): the existing FTK modding APIs.
 - **CommunityDLC** (Theta_Hat_Society / Dehydrated-Mud): the worked example of a custom class.
 - Decompilation via **ILSpy**; loader **BepInEx**; patching **HarmonyX**.
+
+## Community marketplace
+
+The title-screen Mods panel includes Discover and Installed views for curated free content, with changes applied on restart. The initial catalog is empty until reviewed packages are published. See [the marketplace guide](docs/MARKETPLACE.md) for installation, author submissions and current validation limits.

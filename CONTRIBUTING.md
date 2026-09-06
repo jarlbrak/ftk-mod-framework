@@ -31,7 +31,7 @@ Every change should be the smallest faithful slice:
 3. Compare the existing `Core/` and `Content/` code against what the game types actually require.
 4. Implement the smallest faithful change: clone the right `FTK_*DB` row and register it through `ContentRegistry`. Never mutate game rows in place.
 5. Build: `cd FTKModFramework && dotnet build -c Release`. Fix every error before moving on.
-6. Verify in-game: install the DLL and confirm the `SELF-TEST PASS` lines appear in `BepInEx/LogOutput.log`.
+6. Verify in-game: `./deploy.sh` installs your build with the self-tests on (`Diagnostics/RunSelfTests`); launch and confirm the `SELF-TEST PASS` lines appear in `BepInEx/LogOutput.log`.
 7. Update the issue with findings; close it only when the code is verified in-game.
 
 ### Determinism rules

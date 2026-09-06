@@ -25,7 +25,7 @@ namespace FTKModFramework.Agent
         // IsSinglePlayer()==true up front would deadlock the very flow that establishes it. Each still
         // confirms GameLogic.Instance where it actually needs it.
         private static readonly HashSet<string> MenuActions =
-            new HashSet<string> { "start_run", "dismiss_dialog", "list_adventures" };
+            new HashSet<string> { "start_run", "dismiss_dialog", "list_adventures", "marketplace_ui" };
 
         public static object Execute(string action, IDictionary<string, object> args)
         {
@@ -40,6 +40,7 @@ namespace FTKModFramework.Agent
                 {
                     switch (action)
                     {
+                        case "marketplace_ui": return Ok(Core.UI.ModsPanel.TestBridge(args));
                         case "dismiss_dialog": return DismissDialog(args);
                         case "list_adventures": return ListAdventures(args);
                         case "start_run": return StartRun(args);

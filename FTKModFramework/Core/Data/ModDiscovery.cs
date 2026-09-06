@@ -41,6 +41,33 @@ namespace FTKModFramework.Core.Data
     /// </summary>
     internal static class ModDiscovery
     {
+        internal static List<DiscoveredMod> DiscoverAll(string manualRoot, string managedRoot, ValidationReport report)
+        {
+            List<DiscoveredMod> mods = Discover(manualRoot, report);
+            if (!string.IsNullOrEmpty(managedRoot) && !string.Equals(Path.GetFullPath(manualRoot), Path.GetFullPath(managedRoot), StringComparison.Ordinal))
+                mods.AddRange(Discover(managedRoot, report));
+            mods.Sort(CompareMods);
+            Dictionary<string, string> seen = new Dictionary<string, string>(StringComparer.Ordinal);
+            List<DiscoveredMod> unique = new List<DiscoveredMod>();
+            foreach (DiscoveredMod mod in mods)
+            {
+                string prior;
+                if (mod.Manifest.ModGuid == Plugin.Guid)
+                {
+                    report.Error("Mod GUID conflicts with bundled FTK Adventure Pack: " + mod.Manifest.FolderPath);
+                    continue;
+                }
+                if (seen.TryGetValue(mod.Manifest.ModGuid, out prior))
+                {
+                    report.Error("Duplicate mod GUID '" + mod.Manifest.ModGuid + "': " + prior + " and " + mod.Manifest.FolderPath + ". Restart after resolving the conflict.");
+                    continue;
+                }
+                seen[mod.Manifest.ModGuid] = mod.Manifest.FolderPath;
+                unique.Add(mod);
+            }
+            return unique;
+        }
+
         public static List<DiscoveredMod> Discover(string contentRoot, ValidationReport report)
         {
             List<DiscoveredMod> mods = new List<DiscoveredMod>();
@@ -65,6 +92,13 @@ namespace FTKModFramework.Core.Data
 
                 ModManifest manifest = ReadManifest(manifestPath, folder, report);
                 if (manifest == null) continue;           // malformed manifest JSON: error already recorded
+                // Filter before content enumeration or behavior resolution, so fixtures contribute no
+                // registry rows, DLL loads, validation noise, or content in player mode.
+                if (manifest.IsDevelopmentOnly && !Plugin.SelfTestsEnabled)
+                {
+                    Plugin.Log.LogDebug("Skipping development-only mod '" + manifest.ModGuid + "'.");
+                    continue;
+                }
                 if (!manifest.Validate(report)) continue; // missing required field: error already recorded
 
                 // RESERVED guid: com.ftkmf.synthetic belongs ONLY to the generator's own reserved subfolder
