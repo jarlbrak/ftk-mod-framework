@@ -562,7 +562,6 @@ namespace FTKModFramework.Core.UI
                 AddScreenshot(previews[_imagePage]);
                 TextLine(bundled ? (_imagePage == 0 ? "The Hollow Mire / adventure artwork" : "Reeve Maddow / character portrait") : "Preview supplied by the mod author", 22, 48);
                 if (previews.Count > 1) ActionButton("Next preview (" + (_imagePage + 1) + " of " + previews.Count + ")", delegate { _imagePage = (_imagePage + 1) % previews.Count; Refresh(); });
-                LinkButton("Back to overview", delegate { _showGallery = false; Refresh(); });
                 return;
             }
             if (_showAdvanced)
@@ -654,7 +653,6 @@ namespace FTKModFramework.Core.UI
             if (total > 1) ActionButton("Next detail / screenshot (" + (_detailPage + 1) + " of " + total + ")", delegate { _detailPage = (_detailPage + 1) % total; Refresh(); });
             if (_package != null && MarketplaceRuntime.FindManaged(_package.ModGuid) != null)
                 LinkButton("Remove this community mod...", delegate { ReviewSelection(_package, true, false); }, !PanelBusy);
-            LinkButton("Back to overview", delegate { _showAdvanced = false; _showGallery = false; _imagePage = 0; Refresh(); });
         }
 
         /// <summary>Names a required component from a descriptor that declares the exact version.
@@ -937,10 +935,11 @@ namespace FTKModFramework.Core.UI
                 ? MarketplaceRuntime.RegistrationNotice + "\nBepInEx/LogOutput.log names the content that failed. Turn that mod off in Installed, or restore your previous community mods below."
                 : "Installed content is selected for this launch. Changes never unload it mid-game.");
             blocks.Add(MarketplaceRuntime.Notice ?? "No marketplace status to report.");
-            // Six lines is what 170px holds at this size; the rest goes on the next status page.
+            // Cap a status page at six lines; the rest goes on the next page, and PageHeight sizes
+            // the box to whichever page is tallest.
             List<string> pages = TextPages(blocks, 6);
             _detailPage = Math.Min(_detailPage, pages.Count - 1);
-            TextLine(pages[_detailPage], 23, 170);
+            TextLine(pages[_detailPage], 23, PageHeight(pages, 23));
             if (pages.Count > 1) ActionButton("Next status detail (" + (_detailPage + 1) + " of " + pages.Count + ")", delegate { _detailPage = (_detailPage + 1) % pages.Count; Refresh(); });
             ActionButton("Review next-launch changes", delegate { Navigate("maintenance"); });
             ActionButton("Restore previous mods...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !PanelBusy);
@@ -957,6 +956,21 @@ namespace FTKModFramework.Core.UI
             }, !PanelBusy);
             TextLine("Saves a list of your community mods to share when you ask for help. Manual mods are not fully fingerprinted, so it does not prove save or co-op compatibility.", 23, 62);
             TextLine("Required components used by community mods are listed under Components in Installed. To repair marketplace access, use Install / Repair in the launcher; your manually installed files are not removed.", 23, 76);
+        }
+
+        /// <summary>Height for a paged text block, sized to the tallest page so the controls below
+        /// it do not move as pages turn and no page reserves space it does not use. TextPages ends
+        /// every line with a newline, so a page renders one more line than it has separators.</summary>
+        private static float PageHeight(List<string> pages, int size)
+        {
+            int longest = 0;
+            foreach (string page in pages)
+            {
+                int lines = 0;
+                foreach (char c in page) if (c == '\n') lines++;
+                if (lines > longest) longest = lines;
+            }
+            return (longest + 1) * (size + 5);
         }
 
         private void Search()
@@ -1008,6 +1022,16 @@ namespace FTKModFramework.Core.UI
         private void AddFooter()
         {
             _container = _rootContent;
+            // Browse and Updates fill the body with a fixed-height column pair. The stacked views
+            // size to their content, so absorb the remainder here and keep the footer at the
+            // bottom edge instead of floating wherever the content happens to end.
+            if (!ModsPanelNavigation.IsBrowse(_view) && _view != "updates")
+            {
+                GameObject fill = NewChild("Footer fill", _container);
+                LayoutElement grow = fill.AddComponent<LayoutElement>();
+                grow.minHeight = grow.preferredHeight = 0;
+                grow.flexibleHeight = 1;
+            }
             Rule();
             Transform row = HorizontalRow("Footer", 60);
             _container = row;
