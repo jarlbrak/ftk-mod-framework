@@ -1,0 +1,114 @@
+{
+  "status": "RESOLVED_RESOURCE_PLACEHOLDER_UNBINDABLE_NO_NATIVE_SKINSET",
+  "topologyGroup": "94dbc18f21284ec2",
+  "rendererId": 121018,
+  "resource": {
+    "resourcePath": "player_mayor",
+    "managerFile": "globalgamemanagers",
+    "managerId": 13,
+    "pointer": {
+      "m_FileID": 4,
+      "m_PathID": 10680
+    },
+    "targetFile": "resources.assets",
+    "targetId": 10680,
+    "targetName": "Player_Mayor",
+    "managerSha256": "b5c4c33b18b6098cf27d2ad70d5ded1654e571a068f4d52c1b8782ca3372226a"
+  },
+  "root": {
+    "path": "/Player_Mayor",
+    "transform_id": 58030,
+    "active": true,
+    "components": [
+      {
+        "type": "Transform",
+        "id": 58030
+      },
+      {
+        "type": "Animator",
+        "id": 116419
+      },
+      {
+        "type": "MonoBehaviour",
+        "id": 134799,
+        "script": "CharacterEventListener"
+      }
+    ],
+    "localPosition": {
+      "x": -8.588842391967773,
+      "y": 4.596076011657715,
+      "z": 2.6787424087524414
+    },
+    "localRotation": {
+      "x": 0.12878383696079254,
+      "y": 0.001392003963701427,
+      "z": -0.008125772699713707,
+      "w": -0.9916384220123291
+    },
+    "localScale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0000001192092896
+    }
+  },
+  "rendererRelativePath": "Player_Mayor",
+  "celId": 134799,
+  "animatorId": 116419,
+  "controllerId": 5981,
+  "controllerName": "playerOverworldController",
+  "boneReferenceCount": 34,
+  "meshPointer": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "materialSlots": 8,
+  "allMaterialPointersNull": true,
+  "nativeBindposeCount": null,
+  "classification": {
+    "renderer_path_id": 121018,
+    "renderer_name": "Player_Mayor",
+    "ancestor_names": [
+      "Player_Mayor",
+      "Player_Mayor"
+    ],
+    "rig_profile_fingerprint": null,
+    "joint_count": 34,
+    "skinset_avatar_references": [],
+    "enemy_db_referenced": false,
+    "rig_profile_used_by_enemy": false,
+    "ancestor_component_evidence": [
+      {
+        "component_class": "CharacterEventListener",
+        "ancestor_game_object": "Player_Mayor",
+        "component_path_id": 134799
+      }
+    ],
+    "positive_role": "empty_renderer_no_mesh",
+    "integration_path": "no source mesh to replace; inspect owner and intended populated renderer"
+  },
+  "skinsetDatabaseFile": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/sharedassets1.assets",
+  "skinsetDatabaseId": 5406,
+  "nativeSkinsetRowsAudited": 96,
+  "matchingNativeSkinsetAvatarRows": [],
+  "nativeClassRoute": "FTK_playerGameStart selects FTK_skinset through m_Skinsets/default SkinType; all96 serialized skinset avatar pointers independently re-parsed,none CEL134799. Native class enum has14 named classes,noMayor. Hence no current native class->skinset->this avatar route found. Resource name is positive provenance, not gameplay reachability.",
+  "supportedClassification": "Existing Resources path player_mayor points to a CEL/player-controller hierarchy with an empty34-bone SMR and8nullmaterials. Invalid for current strict replacement because sharedMesh absent: no native surface/IBMs or rig fingerprint. May be obsolete/incomplete placeholder, but obsolete/never-used is not established by database absence. No enemy support inferred.",
+  "entryPathRequirements": "Existing public player API requires registered class and member skinset; real native path uses skinset.m_Avatar then exact renderer replacement. There is no existing skinset to select for this resource. Supporting this exact hierarchy would require an explicit reviewed custom skinset/avatar construction path and authored mesh/IBMs/material baseline for empty renderer (new bounded integration,not existing strict swap). Do not invent native IBMs or substitute another34-bone fingerprint; using another valid skinset supports that other rig only.",
+  "coverageCorrection": "Retain in raw renderer/topology inventory but label resolved_no_mesh_no_bind_profile_no_native_skinset; exclude from usablebind/profile denominators and unresolvednativeenemy work. Do not mark PASS/completedmodelcoverage. New desired originalrig support remains explicitfeaturebacklog if user wants emptyhierarchyauthoring.",
+  "limits": [
+    "No game operations/live resource load.",
+    "No proof of historical obsolescence or global code-string non-use.",
+    "No nativegeometry extracted/archived; null source mesh cannot be decoded.",
+    "Custom content registration not performed."
+  ],
+  "pins": {
+    "scratch/renderer-121018-ownership-analysis/native-metadata.json": "0f47e4044852e8329f57977c2e31ca971e276d71b0e8cc4d2603935730d0c886",
+    "scratch/renderer-121018-ownership-analysis/renderer-fields.json": "9fbbda751941701c99f071ceea67ff42f622ce2624acfe42ba577427682a34ec",
+    "scratch/renderer-121018-ownership-analysis/resource-reference.json": "ce1072814dff99a1c11d5c871870428b2a9b4504f1777f18afd90ef702b903df",
+    "scratch/renderer-121018-ownership-analysis/reclassified.json": "76d84376fbe4c915d57af2200c8fa8d32ba794ad106dd7fbe6bce373167b2a50",
+    "scratch/renderer-121018-ownership-analysis/FTK_playerGameStart.cs": "f47c41e646c3109bd63a918fcea3f4552244ef5c3f9d6054241db1fb2367b07b",
+    "scratch/FTK_skinset.analysis.cs": "0d3963be483f59b344a90438ba8d0f08bb18a2aa35d504ea80ed38dc6e41d304",
+    "FTKModFramework/Core/PlayerMeshPatch.cs": "3e9abe0d7bb070a7ef52c797ec191007b9033b2bc93f740aa7a9a0f030ac8873",
+    "FTKModFramework/Core/ExplicitEnemyMeshSwap.cs": "a92e7255fd60a0949c4483bf9213875b3fcdd9ddd905a1cec4e887f5afcc1791",
+    "tools/ai-model-pipeline/classify_rig_candidates.py": "1c628c9812356598ad3f13e4ca0a768c5e72c07c57e234ed863e660966262b6a"
+  }
+}

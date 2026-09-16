@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "nativeChassis": "snakeDesertA",
+  "targetRendererId": 121552,
+  "rendererPath": "enDesertSnakeA",
+  "boneCount": 46,
+  "weightedBoneCount": 46,
+  "allPaletteBonesWeighted": true,
+  "boneNamesSha256": "7db3ce58f179dbcfb005f690469a7432229173435afebf9c4bc36bb3d50dfbae",
+  "inverseBindMatricesSha256": "81ccbf4b9bc00599f02762120659838c6ce848c90eea3aa009017078f43755da",
+  "sourceSha256": "e986061ddace3d27f601e334699ff46d5351a9e546a66f05e0c5bb33274b0ae6",
+  "reference": {
+    "path": "scratch/skeleton-audit/121552/reference.npz",
+    "sha256": "744391450fe0c4ccccfbf8e8109d6f11e3d2328ce14bc0176683bac9df2b7b6d"
+  },
+  "bindingLandmarks": {
+    "BackRib_End": [
+      -1.1368683771214484e-13,
+      0.22899919748306274,
+      -9.970161437988281
+    ],
+    "BackRib_20": [
+      -1.0240305083231585e-13,
+      0.23260565552825738,
+      -9.223646848730864
+    ],
+    "Root_M": [
+      0.0,
+      0.23739750683307648,
+      -1.6235188245773315
+    ],
+    "FrontRib_01": [
+      3.5266915031718687e-15,
+      0.17881831526756287,
+      -1.5976561307907104
+    ],
+    "FrontRib_11": [
+      -2.829765022577425e-14,
+      0.17881851124020745,
+      2.4055662365548076
+    ],
+    "Head": [
+      -3.1136846333791845e-14,
+      0.20193652071797535,
+      2.77930123406648
+    ],
+    "joint13": [
+      5.890424608987367e-23,
+      0.35605430603027344,
+      3.727129220962524
+    ],
+    "Jaw": [
+      0.04848994687196343,
+      0.24243300782745833,
+      2.9271570536789344
+    ],
+    "Jaw_End": [
+      0.04848994314662714,
+      -0.18389026794406788,
+      3.534758177426226
+    ],
+    "Tongue_01": [
+      0.04848994687196406,
+      0.10785859167952391,
+      2.8628495778838046
+    ],
+    "Tongue_08": [
+      0.048489946871951746,
+      0.09853121215907235,
+      3.9847686174342574
+    ],
+    "Tongue_End": [
+      0.04848995432257652,
+      0.09089849144219218,
+      4.058546543121338
+    ]
+  },
+  "authoringBoundary": "The original surface follows only the exact tail-to-head BackRib/Root_M/FrontRib chain and adds independently head-, jaw-, tongue-, and joint13-bound anatomy. It retains every palette entry without copying native surface data.",
+  "scope": "Exact palette and bind identity for snakeDesertA/enDesertSnakeA. It does not establish source-surface similarity, animation safety, portrait framing, material behavior, culling, ragdoll, or live art acceptance."
+}

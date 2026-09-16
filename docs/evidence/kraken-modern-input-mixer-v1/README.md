@@ -1,0 +1,7 @@
+# Original two-clip Kraken mixer experiment
+
+All five same-session paired scenarios completed mechanically and failed numerical native equivalence at the unchanged 1e-5 tolerance. Each run retains 241 observations, same-frame captured inputs, first/repeated samples and every mismatch. Appearance-contributing frames remain excluded only under the explicit original protocol. These are owned sampling experiments, not enemy gameplay or skin acceptance.
+
+The damaged case shows failures in pure damage and later pure idle as well as transitions. Several driver bones stay at immutable rest after clip replacement. A dynamic binding-initialization problem is a hypothesis, not an established cause; the next separate fixed-four-clip experiment tests it without rewriting these results.
+
+Each scenario preserves its manifest, requests, full verification report, deployment and Ready observations. Raw first/repeat JSON is gzip compressed losslessly; validation.json pins decompressed bytes. Native resources.assets and Assembly-CSharp.dll remain local and are never included. Reconstruct manifest paths to the decompressed records and matching local native files before running the pinned verifier with its repository dependencies. Source snapshots preserve the original two-clip protocol before subsequent experiments. Runtime cleanup and source invariance are checked by the verifier, but no production adapter acceptance follows.

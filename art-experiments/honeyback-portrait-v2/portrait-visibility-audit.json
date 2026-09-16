@@ -1,0 +1,415 @@
+{
+  "method": "Resolve exact native head-attached marker into bind space using inverse(bindHead) @ inverse(sourceHeadWorld) @ sourcePortraitWorld. Cast rays to eye center plus eight half-radius XY samples against original Head_M-rigid triangles, excluding target eye itself.",
+  "camera_transform_id": 90260,
+  "head_transform_id": 85163,
+  "camera_bind_matrix": [
+    [
+      -0.9702319322561153,
+      0.0057207470006820724,
+      0.24211091590603157,
+      -0.8290001261857469
+    ],
+    [
+      0.15687944837423407,
+      0.7764584703872286,
+      0.6103298030752725,
+      -0.6831741394285267
+    ],
+    [
+      -0.18449735774133888,
+      0.6301434936189737,
+      -0.7542419700187096,
+      4.796747104819964
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "limitations": "Only head-rigid geometry; excludes pose-dependent other-body/jaw occlusion, actual offscreen FOV/crop, shader/light and native portrait animation. Sample visibility is not a quality verdict.",
+  "versions": [
+    {
+      "source": "art-experiments/honeyback-bear/honeyback.source.json",
+      "source_sha256": "57257b68f0ca2d7c24eb44c36d0b8741d14ee568777d04268d47deaa9b9b305f",
+      "eyes": [
+        {
+          "eye": "Amber eye -1",
+          "center": [
+            -0.28199999999999964,
+            1.704000000000007,
+            2.440000000000004
+          ],
+          "unobstructed_samples": 9,
+          "total_samples": 9,
+          "samples": [
+            {
+              "offset": [
+                0,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                -1,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                -1,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                -1,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                0,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            }
+          ]
+        },
+        {
+          "eye": "Amber eye 1",
+          "center": [
+            0.2819999999999997,
+            1.704000000000007,
+            2.440000000000004
+          ],
+          "unobstructed_samples": 0,
+          "total_samples": 9,
+          "samples": [
+            {
+              "offset": [
+                0,
+                0
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                -1,
+                -1
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                -1,
+                0
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                -1,
+                1
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                0,
+                -1
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                1,
+                -1
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                1,
+                0
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                1,
+                1
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Black nose",
+                "Cream upper muzzle"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "art-experiments/honeyback-portrait-v2/honeyback_portrait_v2.source.json",
+      "source_sha256": "c9419832b3d04a2562d5c19e8cb5e72924848bb0d72c59690f890db6ea2c0b62",
+      "eyes": [
+        {
+          "eye": "Amber eye -1",
+          "center": [
+            -0.3700000000000006,
+            1.7040000000000042,
+            2.440000000000007
+          ],
+          "unobstructed_samples": 9,
+          "total_samples": 9,
+          "samples": [
+            {
+              "offset": [
+                0,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                -1,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                -1,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                -1,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                0,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            }
+          ]
+        },
+        {
+          "eye": "Amber eye 1",
+          "center": [
+            0.37000000000000055,
+            1.7040000000000042,
+            2.440000000000007
+          ],
+          "unobstructed_samples": 7,
+          "total_samples": 9,
+          "samples": [
+            {
+              "offset": [
+                0,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                -1,
+                -1
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                -1,
+                0
+              ],
+              "unobstructed": false,
+              "occluders": [
+                "Cream upper muzzle"
+              ]
+            },
+            {
+              "offset": [
+                -1,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                0,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                0,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                -1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                0
+              ],
+              "unobstructed": true,
+              "occluders": []
+            },
+            {
+              "offset": [
+                1,
+                1
+              ],
+              "unobstructed": true,
+              "occluders": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_assets_sha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "reference_sha256": "7b02d3f8c47bf5624e189ae23078f768abdfc867a54d79abb0a0df0838a91ff9"
+}

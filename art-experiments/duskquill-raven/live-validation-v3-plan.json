@@ -1,0 +1,107 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/duskquill-raven/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-892bef4c1835463dae9e07e97b90bfe0/case-result.json",
+  "visualReview": "scratch/model-route-ba17c1398db51453-directenemy-v2-root-review.json",
+  "assetFiles": [
+    "art-experiments/duskquill-raven/duskquill.glb",
+    "art-experiments/duskquill-raven/duskquill_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/duskquill-raven/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-ba17c1398db51453-directenemy-v2-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-352e34b851f346faa344a409af2d249c/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-352e34b851f346faa344a409af2d249c/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    },
+    {
+      "path": "scratch/model-route-ba17c1398db51453-directenemy-run.json",
+      "pinAs": "priorEscapeRunnerRecord"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-c41f98ef59d449dda1654d625d7d56bd/case-result.json",
+      "pinAs": "priorEscapeCaseResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/22f039ba27db4cee8cede772b68d74ed.json",
+      "pinAs": "priorEscapeRawCapture"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled flight idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enCrow",
+        "mesh": "ftkmf_glb_duskquill.glb",
+        "boneSignature": "2a6aedba3870e1a46346aeb7e123ae8c49fbcb21b9f9aea42f43167e7bffe4ff"
+      }
+    },
+    "attack": {
+      "label": "ordinary-hit-and-native-retaliation",
+      "scope": "Ordinary no-focus player attack, native damage response, recovery, and exact native enemy counterattack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enCrow",
+        "mesh": "ftkmf_glb_duskquill.glb",
+        "boneSignature": "2a6aedba3870e1a46346aeb7e123ae8c49fbcb21b9f9aea42f43167e7bffe4ff"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-animated-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enCrow",
+        "mesh": "ftkmf_glb_duskquill.glb",
+        "boneSignature": "2a6aedba3870e1a46346aeb7e123ae8c49fbcb21b9f9aea42f43167e7bffe4ff"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Duskquill Raven",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "crowC",
+    "nativeChassis": "crowC",
+    "rendererPaths": [
+      "enCrow"
+    ],
+    "sourceRendererIds": [
+      120964
+    ],
+    "binding": {
+      "rendererPath": "enCrow",
+      "mesh": "ftkmf_glb_duskquill.glb",
+      "boneSignature": "2a6aedba3870e1a46346aeb7e123ae8c49fbcb21b9f9aea42f43167e7bffe4ff"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native crowC / enCrow / renderer 120964 source assignment only; no sibling bird row, source route, or topology receives credit.",
+      "The ordinary no-focus hit reduced the same target from 58 HP to 50 HP; death used the separate explicit KillSingle fixture at 50 HP and is not ordinary lethal-damage evidence.",
+      "Twenty selected original PNGs were reviewed; the remaining 340 retained capture frames and generated videos are preserved evidence but were not individually reviewed.",
+      "The fixture death completed all 120 requested frames through BirdDeath with m_DoRagdoll=false and zero rigid bodies; this is animated death evidence, not ragdoll proof, and no corpse lifetime beyond the sampled window is claimed.",
+      "The exact renderer stayed active, enabled, and visible in all 360 retained frames; native combat UI, bright effects, foreground hero overlap, loot overlay, depth blur, camera motion, and the small flying scale limit fine inspection.",
+      "Two native Collect actions reached strict Ready at level 0 room 2; broader campaign progression was not exercised.",
+      "A preserved earlier isolated run retained the exact renderer through pass frame 50, then the crow deactivated from frame 51 and was destroyed after 107 of 120 requested frames without a death trigger or combat event. That stochastic escape or self-removal boundary is rejected as canonical capture evidence and is not a model-binding failure.",
+      "Other bird controller clips and attacks, sibling bird sources, portraits, collision, extended culling, long-session resource lifetime, final art-direction approval, and behavior after the sampled death window remain outside this archive."
+    ]
+  }
+}

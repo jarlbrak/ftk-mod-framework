@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 1,
+  "asset": "Moonreed Sylph",
+  "iteration": "V1 original fairyA live trial",
+  "status": "SCOPED_SELECTED_BODY_PORTRAIT_HIT_DEATH_PASS",
+  "session": "562b6a069c5c423db397761109e7336c",
+  "catalogSha256": "f729688048af598c1fe8b026178e2e8eade60dc682dd93698fb2e5024d712fea",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "562b6a069c5c423db397761109e7336c",
+    "case": "59021c2f58b846309bfaa472c0386b0b",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_moonreed",
+    "class": null,
+    "profile": {
+      "key": "ftkmf_modeltest_moonreed",
+      "baseEnemy": "fairyA",
+      "displayName": "Moonreed Sylph",
+      "combatProfile": "b63a0354dfdcab92ca25e71ac4960e0bb459863e30677d401965b5db00716ab7",
+      "renderers": [
+        {
+          "rendererPath": "enFairy01",
+          "glbFile": "moonreed.glb",
+          "textureFile": "moonreed_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64,
+      "visualScale": 1.0
+    },
+    "profileInputSha256": "f729688048af598c1fe8b026178e2e8eade60dc682dd93698fb2e5024d712fea",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "assetHashes": {
+    "moonreed.glb": "8dce58206cc84ec022d29735eb363d0cc15eeaf06f2844b2abaabd7070ba84f1",
+    "moonreed_basecolor.png": "c42aad0d545bec1702b63b3b6ce4cc5dd3042ce81f61a7af9b417896ca207db9"
+  },
+  "binaries": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "session": "562b6a069c5c423db397761109e7336c",
+    "binaries": {
+      "framework": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+        "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+        "sha256": "cdbbe7ece2b53e443c1c9c4fad8607379f1c94f1b263592815252e26ac0f4b4a",
+        "bytes": 1967616
+      },
+      "helper": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "sha256": "8d9c58439aba919b6489faef9fc89cb6326331f2c39079cd4b36ed06fe81dc87",
+        "bytes": 229376
+      }
+    },
+    "measurement": "on_disk_binary_sha256",
+    "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+  },
+  "stage": {
+    "path": "scratch/mirewarden-game/model-test-output/case-59021c2f58b846309bfaa472c0386b0b/journal.jsonl",
+    "sha256": "a514fbacfa2c874e654f26b168aaee389b5630a17ba8164739cf228078e836e4"
+  },
+  "captures": [
+    {
+      "kind": "pass",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/41feec4767f440b2b1f3d70bbac0d922.json",
+        "sha256": "912e5aa8b9b0bbf7ffa2e6495de2c5c5d033b868724e567b7a7ee8e9f4d69c0d"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-edd09e3f7a394adf9e34778071d9bc8f/journal.jsonl",
+        "sha256": "8166126622c2948dfe768afa7371bc24cf3c421c1f43607b0a2580f92b45895b"
+      },
+      "summary": {
+        "path": "art-experiments/moonreed-sylph/live-v1/pass-summary.json",
+        "sha256": "95bae43608479d621cd949407791f26e0d0dac46d2ecf274929f247448fdde25"
+      },
+      "video": {
+        "path": "art-experiments/moonreed-sylph/live-v1/pass.mp4",
+        "sha256": "b7f2853528e6025e850ffc4fc12a573b81a97599f5975f0307c545bb8a7539fd"
+      },
+      "frames": 120,
+      "actualGameSeconds": 10.908332824707031,
+      "reviewedFrames": [
+        0,
+        48
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "fairy_cIdle"
+          ],
+          "sampleCount": 104,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 40,
+              "firstNormalizedTime": 16.349143981933594,
+              "lastNormalizedTime": 19.099159240722656,
+              "gameSeconds": 3.6666641235351562
+            },
+            {
+              "firstFrame": 57,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10879890620708466,
+              "lastNormalizedTime": 4.371296405792236,
+              "gameSeconds": 5.6833343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "fairy_attackProf"
+          ],
+          "sampleCount": 16,
+          "occurrences": [
+            {
+              "firstFrame": 41,
+              "lastFrame": 56,
+              "firstNormalizedTime": 0.11224488914012909,
+              "lastNormalizedTime": 0.9540814161300659,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "firstAttack",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/743a5638c19449c887c25b702a42e981.json",
+        "sha256": "6a4acbe5013aa30490bb716acfe71dc5bd1dd17be2ab17bf0160730532314cde"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-11cf456f01df4447adcaad39ea91302e/journal.jsonl",
+        "sha256": "dcad5ea8cf633f0eaa175970aafc64cc47838202382d49961c0350b29b5bf930"
+      },
+      "summary": {
+        "path": "art-experiments/moonreed-sylph/live-v1/firstAttack-summary.json",
+        "sha256": "2500f9041f328cbbffe11be09212292d1f292faeac0ae2a205560a21b1da316a"
+      },
+      "video": {
+        "path": "art-experiments/moonreed-sylph/live-v1/firstAttack.mp4",
+        "sha256": "a2ce0852253a9ac555f16088b61fe6f2b3acab2cf53bd4852df7e2b7ee7b8aae"
+      },
+      "frames": 120,
+      "actualGameSeconds": 10.908332824707031,
+      "reviewedFrames": [
+        30
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "fairy_cIdle"
+          ],
+          "sampleCount": 62,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 22,
+              "firstNormalizedTime": 5.172800540924072,
+              "lastNormalizedTime": 6.685298442840576,
+              "gameSeconds": 2.0166702270507812
+            },
+            {
+              "firstFrame": 49,
+              "lastFrame": 65,
+              "firstNormalizedTime": 0.441963791847229,
+              "lastNormalizedTime": 1.5419641733169556,
+              "gameSeconds": 1.4666671752929688
+            },
+            {
+              "firstFrame": 82,
+              "lastFrame": 97,
+              "firstNormalizedTime": 0.10879890620708466,
+              "lastNormalizedTime": 1.1400490999221802,
+              "gameSeconds": 1.375
+            },
+            {
+              "firstFrame": 114,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10879890620708466,
+              "lastNormalizedTime": 0.45254889130592346,
+              "gameSeconds": 0.4583282470703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -478722116,
+          "clips": [
+            "fairy_dodge"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 23,
+              "lastFrame": 48,
+              "firstNormalizedTime": 0.10443037748336792,
+              "lastNormalizedTime": 0.9746835231781006,
+              "gameSeconds": 2.2916641235351562
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "fairy_attackProf"
+          ],
+          "sampleCount": 32,
+          "occurrences": [
+            {
+              "firstFrame": 66,
+              "lastFrame": 81,
+              "firstNormalizedTime": 0.11224488914012909,
+              "lastNormalizedTime": 0.9540814161300659,
+              "gameSeconds": 1.375
+            },
+            {
+              "firstFrame": 98,
+              "lastFrame": 113,
+              "firstNormalizedTime": 0.11224488914012909,
+              "lastNormalizedTime": 0.9540814161300659,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "secondAttack",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/de5b6b4fdff44cc8945428157fe8ca7a.json",
+        "sha256": "2aec84d14cc3a2517c947afbcfe0c7a5a85cb6e1f65c406ee6d26956fb8e48d4"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-a20d2c9834084b5294ded00a09958a8e/journal.jsonl",
+        "sha256": "3c87662cb5c7e7ed7a257b68f1122ef92c772eb5de6e33b0f5ae3bacc738e37a"
+      },
+      "summary": {
+        "path": "art-experiments/moonreed-sylph/live-v1/secondAttack-summary.json",
+        "sha256": "423b39947589b5aaeeb38ac3d621ddff5d95daf9e6865b4f1ad9832ebed78f5e"
+      },
+      "video": {
+        "path": "art-experiments/moonreed-sylph/live-v1/secondAttack.mp4",
+        "sha256": "e5387edd5d89f7bf614b387c550e850c18ce5b2b8d867f37d9733866ea47ba48"
+      },
+      "frames": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "reviewedFrames": [
+        30
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "fairy_cIdle"
+          ],
+          "sampleCount": 98,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 121.92440032958984,
+              "lastNormalizedTime": 123.71186065673828,
+              "gameSeconds": 2.383331298828125
+            },
+            {
+              "firstFrame": 33,
+              "lastFrame": 64,
+              "firstNormalizedTime": 0.07874999195337296,
+              "lastNormalizedTime": 2.2100000381469727,
+              "gameSeconds": 2.8416748046875
+            },
+            {
+              "firstFrame": 81,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10879890620708466,
+              "lastNormalizedTime": 2.7212984561920166,
+              "gameSeconds": 3.48333740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "fairy_damaged"
+          ],
+          "sampleCount": 6,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 32,
+              "firstNormalizedTime": 0.34375,
+              "lastNormalizedTime": 0.9166666269302368,
+              "gameSeconds": 0.45831298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "fairy_attackProf"
+          ],
+          "sampleCount": 16,
+          "occurrences": [
+            {
+              "firstFrame": 65,
+              "lastFrame": 80,
+              "firstNormalizedTime": 0.11224488914012909,
+              "lastNormalizedTime": 0.9540814161300659,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "death",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/c689d3d99e6643518449c6310c80f9d7.json",
+        "sha256": "1873ec6472f5d5b17678eb8ec3004b70f247e497b802c30e7f90ebac3fe0a7b2"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-403c78fc4ba74960ae1cf90e12223911/journal.jsonl",
+        "sha256": "d52bad35a2b96bce146dbb70555160110b9aa2abde33b0e9d78f8a8057b33ba6"
+      },
+      "summary": {
+        "path": "art-experiments/moonreed-sylph/live-v1/death-summary.json",
+        "sha256": "339416f107cb59b8c40419a4a6001dad442d36fd00936e3458e48cfe6cb7fc67"
+      },
+      "video": {
+        "path": "art-experiments/moonreed-sylph/live-v1/death.mp4",
+        "sha256": "17d4b319b73e3230e043c3d9b369b431933fda23b8aa71d4ed347511fc23cdd2"
+      },
+      "frames": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "fairy_cIdle"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 82.07810974121094,
+              "lastNormalizedTime": 83.79682159423828,
+              "gameSeconds": 2.291656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "fairy_die"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.1410256326198578,
+              "lastNormalizedTime": 6.698714256286621,
+              "gameSeconds": 8.524993896484375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "firstStoppedWrapper": {
+    "path": "art-experiments/moonreed-sylph/live-v1/first-wrapper-stopped.json",
+    "sha256": "08edf5d4d8ab2fd8fd41e4b5db95a8494fdda32ca48520d29b286ce620af2a33"
+  },
+  "firstAttempt": {
+    "observedOutcome": "DODGED in reviewed frame30",
+    "hpBefore": 58,
+    "hpAfter": 58,
+    "rawWrapperStatus": "stopped",
+    "rawWrapperError": "Attack gate unmet: no_hp_loss_unclassified"
+  },
+  "normalHit": {
+    "damage": 5,
+    "hpBefore": 58,
+    "hpAfter": 53
+  },
+  "death": {
+    "trigger": "Explicit KillSingle",
+    "nativeDoRagdollFalseAll120": true,
+    "animatorEnabledAll120": true,
+    "appearance": "Selected40/60 coherent prone corpse, warm yellow illumination on pale wings; no independent emission-property conclusion."
+  },
+  "materialClaim": "PostReady inventory contains no matching live Moonreed renderer; no independent runtime material-property validation. Source material metadata remains offline only.",
+  "progress": {
+    "collectCount": 1,
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "evidence": {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-ready.json",
+      "sha256": "1c44d820c321d51ba061247c4f4ce950e0244aa6f81db059b6119b8b9b2a4c0b"
+    }
+  },
+  "rootReview": {
+    "path": "art-experiments/moonreed-sylph/live-v1/root-review.json",
+    "sha256": "6ed4b4f710c9f28b689b3b2079f7b8c76a633db73582bb54860a34d0d5fe66ab"
+  },
+  "limits": [
+    "Sixselectedframesnotfullmotion/cameracoverage.",
+    "OneexactfairyAprofile, nototherrows/specialroutes.",
+    "NativeFXretained andpartialocclusionexplicit.",
+    "PostReadyinventoryhasnomatchingliveMoonreedrenderer, noindependentmaterialpropertyclaim.",
+    "Deathisexplicitfixture; firstattackdodgerawfailurepreserved."
+  ],
+  "evidence": [
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-ready.json",
+      "sha256": "1c44d820c321d51ba061247c4f4ce950e0244aa6f81db059b6119b8b9b2a4c0b"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-collect-1.json",
+      "sha256": "bedc4689a054c6db977c3da2ce2240b933b0ba39a41085282496fc572b3d3d7e"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-startup-evidence.json",
+      "sha256": "2f266810acf916dc8745a5f6b450ec8e2c427d379b3e39ecb29a5de57cbe72fd"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-material-inventory.json",
+      "sha256": "302bf29d74dfe380feb396e2862faa4145b68843b960204e9af6e67d80683b59"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-death-fixture.json",
+      "sha256": "7f57a1869cc76f7f0d0cd20ee4e5b57beb29f3e8a4a1ad1423502a7b51c1d79e"
+    }
+  ],
+  "media": [
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/death-0040.png",
+      "sha256": "29f5c35d51f5a030a1e4dad0e4244a146c70cd79ba7458ca67d538aa13134863"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/death-0060.png",
+      "sha256": "597e07291907398ff7d714d9a221d8704e3cc419fc6657eec849befd97854c6d"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/death-summary.json",
+      "sha256": "339416f107cb59b8c40419a4a6001dad442d36fd00936e3458e48cfe6cb7fc67"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/death.mp4",
+      "sha256": "17d4b319b73e3230e043c3d9b369b431933fda23b8aa71d4ed347511fc23cdd2"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/first-wrapper-stopped.json",
+      "sha256": "08edf5d4d8ab2fd8fd41e4b5db95a8494fdda32ca48520d29b286ce620af2a33"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/firstAttack-0030.png",
+      "sha256": "80d7b404ee9a8420207d4f9512bf910831a5d3f80212b0177635bf05b323407f"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/firstAttack-summary.json",
+      "sha256": "2500f9041f328cbbffe11be09212292d1f292faeac0ae2a205560a21b1da316a"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/firstAttack.mp4",
+      "sha256": "a2ce0852253a9ac555f16088b61fe6f2b3acab2cf53bd4852df7e2b7ee7b8aae"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-collect-1.json",
+      "sha256": "bedc4689a054c6db977c3da2ce2240b933b0ba39a41085282496fc572b3d3d7e"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-death-fixture.json",
+      "sha256": "7f57a1869cc76f7f0d0cd20ee4e5b57beb29f3e8a4a1ad1423502a7b51c1d79e"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-material-inventory.json",
+      "sha256": "302bf29d74dfe380feb396e2862faa4145b68843b960204e9af6e67d80683b59"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-ready.json",
+      "sha256": "1c44d820c321d51ba061247c4f4ce950e0244aa6f81db059b6119b8b9b2a4c0b"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/moonreed-startup-evidence.json",
+      "sha256": "2f266810acf916dc8745a5f6b450ec8e2c427d379b3e39ecb29a5de57cbe72fd"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/pass-0000.png",
+      "sha256": "5d49bcd2cbff0889bcbed8dfc564fd56c41777119ea0618aee08c6cb4abe7a4e"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/pass-0048.png",
+      "sha256": "9846dfd732ee2cb6d90f6bab485b24c709b3903e8d2ae19f32093dc5f032c68d"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/pass-summary.json",
+      "sha256": "95bae43608479d621cd949407791f26e0d0dac46d2ecf274929f247448fdde25"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/pass.mp4",
+      "sha256": "b7f2853528e6025e850ffc4fc12a573b81a97599f5975f0307c545bb8a7539fd"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/root-review.json",
+      "sha256": "6ed4b4f710c9f28b689b3b2079f7b8c76a633db73582bb54860a34d0d5fe66ab"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/secondAttack-0030.png",
+      "sha256": "6e3c16e89147dfade7ffd87e5f6f307ad8677a50ea6faadfa8620fd8b8edd4b0"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/secondAttack-summary.json",
+      "sha256": "423b39947589b5aaeeb38ac3d621ddff5d95daf9e6865b4f1ad9832ebed78f5e"
+    },
+    {
+      "path": "art-experiments/moonreed-sylph/live-v1/secondAttack.mp4",
+      "sha256": "e5387edd5d89f7bf614b387c550e850c18ce5b2b8d867f37d9733866ea47ba48"
+    }
+  ]
+}

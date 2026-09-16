@@ -1,0 +1,35 @@
+{
+  "status": "SELECTED_OFFLINE_POSES_REVIEWED_LIVE_PENDING",
+  "reviewedFiles": [
+    {
+      "path": "art-experiments/reefstrider-fish/native-pass-pose-study.png",
+      "sha256": "dc88e4f53379977c164c191f37be9516ba79b460a0eb2e5666e4c3e9ac333178"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-dodge-pose-study.png",
+      "sha256": "290633b40864420b11399ca7010d42795887c2c57a9a8d483c1a91d94072f68b"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-hit-pose-study.png",
+      "sha256": "dc8ee5fcf7429eaf021cc219f28295af59bed8b7b98f040585ccc460377fc03d"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-ragdoll-transition-pose-study.png",
+      "sha256": "164df8b2f05b01d5f0b48094ba5af32763fcaa17df865139930ce7792de67f03"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-death-pose-study.png",
+      "sha256": "26c19e69b1065bea5e63220bdf50ed2cd48eddf22218e3ad29e2aac94ca694b0"
+    }
+  ],
+  "observations": [
+    "Shoulders/hips/long legs remain attached in selected motion and ragdoll views.",
+    "Eyes remain seated in reviewed face-visible poses.",
+    "Ragdoll silhouette retains connected torso and limbs during tumble."
+  ],
+  "limits": [
+    "Selectedviews only; selfocclusion limits face assessment in ragdoll.",
+    "No live original camera/portrait/material acceptance.",
+    "No physics contacts or IsSleeping proof."
+  ]
+}

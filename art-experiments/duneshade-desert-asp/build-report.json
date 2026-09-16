@@ -1,0 +1,43 @@
+{
+  "name": "Duneshade Asp",
+  "nativeChassis": "snakeDesertA",
+  "referenceRenderer": 121552,
+  "rendererPath": "enDesertSnakeA",
+  "boneCount": 46,
+  "nativeSurfaceCopied": false,
+  "authoringInputs": "bone_names and inverse bind matrices only",
+  "directValidation": {
+    "file": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/duneshade-desert-asp/duneshade-desert-asp.glb",
+    "vertices": 6012,
+    "triangles": 2004,
+    "bones": 46,
+    "primitives": 1,
+    "triangles_per_primitive": [
+      2004
+    ],
+    "bounds_min": [
+      -1.2980624437332153,
+      -0.27566346526145935,
+      -10.670161247253418
+    ],
+    "bounds_max": [
+      1.2980624437332153,
+      0.9834225177764893,
+      4.299300670623779
+    ],
+    "max_bind_rest_error": 3.552713678800501e-15,
+    "source_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.02295537479221821,
+      "informative_triangles": 2004
+    },
+    "reference_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.0063045766231814414,
+      "informative_triangles": 6102
+    },
+    "status": "PASS (binary and skin contract; live animation still requires in-game check)"
+  },
+  "artStatus": "Original Desert Snake A candidate generated and binary-validated; Blender/studio and live validation pending.",
+  "scope": "The generated 46-bone body follows the actual back/front spine, head, jaw, full nine-joint tongue, and joint13 chains. It does not establish native combat, portrait, material, culling, ragdoll, lifecycle, or art acceptance."
+}

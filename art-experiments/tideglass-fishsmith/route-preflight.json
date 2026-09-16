@@ -1,0 +1,83 @@
+{
+  "status": "PASS_EXACT_PLAYER_SKINSET_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only player skinset/avatar route/profile/asset preflight. Class registration, native equipment branches, preview, runtime, visual, motion, and gameplay remain separate checks.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_player_tideglass_fishsmith",
+      "baseClass": "blacksmith",
+      "defaultSkinType": "Fish",
+      "skinset": "blacksmith_Fish",
+      "avatar": {
+        "prefab": "Player_FishPerson",
+        "celPathId": 139636,
+        "assetFile": "resources.assets"
+      },
+      "renderers": [
+        {
+          "rendererPath": "hairBottom",
+          "sourceRendererId": 121521,
+          "rendererName": "hairBottom",
+          "rigProfile": "9fbb21ab13f61ab25cf8013f1cd86a7b93e077bb3559c8203d29ab8d13671fca",
+          "jointCount": 7,
+          "glbFile": "tideglass-hair-bottom.glb",
+          "textureFile": "tideglass-palette.png"
+        },
+        {
+          "rendererPath": "hairTop",
+          "sourceRendererId": 121490,
+          "rendererName": "hairTop",
+          "rigProfile": "21b7a8cf531610f6c011686fdf011838ab4a56889fb74254718c9379ddd2d8b1",
+          "jointCount": 6,
+          "glbFile": "tideglass-hair-top.glb",
+          "textureFile": "tideglass-palette.png"
+        },
+        {
+          "rendererPath": "playerFIsh",
+          "sourceRendererId": 121366,
+          "rendererName": "playerFIsh",
+          "rigProfile": "6db299d85711a3d4f28247dde796f7aa7031fe226bca8d8fd5fd46f3e01a29fa",
+          "jointCount": 25,
+          "glbFile": "tideglass-body.glb",
+          "textureFile": "tideglass-palette.png"
+        }
+      ],
+      "apparel": [],
+      "declaredAssets": [
+        {
+          "file": "tideglass-body.glb",
+          "sha256": "499e6aa71ff2469184c899cb03a93b2aac4bd0d5b5186197c61861389c1af941",
+          "bytes": 340592
+        },
+        {
+          "file": "tideglass-hair-bottom.glb",
+          "sha256": "f7a2a720035805d905c9cc1641b3aa9842c4ad4d1d58e340c2c1273da66d0654",
+          "bytes": 41752
+        },
+        {
+          "file": "tideglass-hair-top.glb",
+          "sha256": "28f8dcfe9e24a3271b096fa59d037258ee03fd8c70c0cbca3c2f33fcad9bc1be",
+          "bytes": 38868
+        },
+        {
+          "file": "tideglass-palette.png",
+          "sha256": "1e70f760d752d9e2c4b304aba75abafedc16df70877013da4056077a63a70b83",
+          "bytes": 5798
+        }
+      ]
+    }
+  ],
+  "rigClassification": {
+    "path": "scratch/rig-candidate-classification.json",
+    "sha256": "19efc5fd06ede8544a13fcefe1ee3a960ed9fddcc6decb295b586281cd2b7234",
+    "sourceAssetSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+    "skinsetDatabase": {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/sharedassets1.assets",
+      "sha256": "e38abff2efd7ca8ef8ede4b92754d6b3a06c6498a774ee55d0d1ddbffba4750f"
+    }
+  },
+  "profileDocument": {
+    "path": "art-experiments/tideglass-fishsmith/runtime-profile.json",
+    "sha256": "f687ec7b1acbb4b3d14d394927ceb322057597fa35cb4b9e10d0064b85475c36"
+  },
+  "assetDirectory": "art-experiments/tideglass-fishsmith"
+}

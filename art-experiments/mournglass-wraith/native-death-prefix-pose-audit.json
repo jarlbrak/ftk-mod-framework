@@ -1,0 +1,54 @@
+{
+  "capture": "scratch/mirewarden-game/model-test-output/89ded9e532624d04b2ee62dcc93af2e9.json",
+  "captureSha256": "ddeb701f29ce971349ca135abfb83a941c7a90ea3045e6ca8dba6101a0ce8718",
+  "sourceSha256": "22564d4c70d25ce8dcbc8622af3c958368cbd8bc065fff686eaf5874d202769b",
+  "frames": 91,
+  "sampledFrames": [
+    0,
+    25,
+    27,
+    28,
+    29,
+    60
+  ],
+  "maximumEdgeStretch": 1.5150418566129957,
+  "worstEdge": {
+    "frame": 10,
+    "piece": "Ivory long fingers R",
+    "triangle": 766,
+    "vertexIndices": [
+      2299,
+      2300
+    ],
+    "restLength": 0.10095958863174244,
+    "posedLength": 0.15295800260351936,
+    "ratio": 1.5150418566129957
+  },
+  "posedBoundsMin": [
+    -0.9835822217091946,
+    0.6522982983204774,
+    -0.4500511763140196
+  ],
+  "posedBoundsMax": [
+    1.0116383135953435,
+    2.125990180573873,
+    0.6459572190200957
+  ],
+  "nativeTravelBoundsMin": [
+    -0.9835822217091946,
+    0.6522982983204774,
+    -0.4500511763140196
+  ],
+  "nativeTravelBoundsMax": [
+    1.0116383135953435,
+    2.125990180573873,
+    0.6459572190200957
+  ],
+  "glbSha256": "c1c04fbac1b7ca604f9091148d14b75f48b95b913327e2aeb7404b0986caa029",
+  "rootMotionRetained": true,
+  "method": "Renderer-local travel retained in sheet. Original source skinned with full captured bone matrices and native IBMs, Anatomy mode removes Root_M transform for deformation inspection; keep-root-motion mode retains renderer-local travel in the sheet. Travel bounds always retain renderer-local motion. Orthographic depth raster with fixed all-frame bounds. Mesh-space anatomy front+Z/upY.",
+  "captureReportedOk": false,
+  "captureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__171.MoveNext () [0x00000] in <filename unknown>:0 ",
+  "materialMethod": "Per-triangle first-vertex nearest texel from each original material slot; no UV-scroll/shader/light simulation.",
+  "scope": "Offline native pose study; no material/culling/portrait/whole-controller or live original-art acceptance."
+}

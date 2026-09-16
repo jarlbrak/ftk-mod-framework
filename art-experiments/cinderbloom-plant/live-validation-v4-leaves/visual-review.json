@@ -1,0 +1,133 @@
+{
+  "schema": "ftkmf.model-root-visual-review-template.v1",
+  "session": "e4890060b24a4e8e90968268898bcdf4",
+  "reviewStatus": "reviewed_direct_planta_leaf_binding_motion_gameplay_observed_camera_fit_accepted_limited_art_pending",
+  "binding": {
+    "rendererPath": "enPlant01Leaves",
+    "mesh": "ftkmf_glb_cinderbloom_leaves.glb",
+    "boneSignature": "5986c6bf9143cd84d7d81a10c360af1a16ebc5cfb2ce604d91ef010fb074438a"
+  },
+  "frames": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0580934d51db4e60bf8f901170e02f16/0012.png",
+      "sha256": "88668557ad885461bd6bd5ed3dee4b54bfccb5b997a0e273ee5de3e1a0f12149",
+      "action": "pass",
+      "index": 12,
+      "observation": "Normal combat framing keeps the complete authored plant, including the selected leaf renderer, visible and readable. The mesh is connected with no collapsed bind pose, clipping at the frame edge, or detached leaf pieces."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0580934d51db4e60bf8f901170e02f16/0024.png",
+      "sha256": "a434923c089c5934c23668fac5fe0588bac040d400d8b924d827061decae1c63",
+      "action": "pass",
+      "index": 24,
+      "observation": "A later native idle frame preserves the same connected silhouette and material colors. This single frame supports stable idle appearance in the combat camera, not all-cycle or long-session art approval."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/691fb3ceda114f14ade32410f09db932/0006.png",
+      "sha256": "ae010cbadc07f21da9532eabdd0beeded5b48780f45333cc3333a5644818800d",
+      "action": "attack",
+      "index": 6,
+      "observation": "The ordinary player-attack capture keeps the full target visible before impact. The authored head, stem, and base leaves remain aligned while the native targeting UI is active.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/691fb3ceda114f14ade32410f09db932/0012.png",
+      "sha256": "5b38c4ae923b3162cd9fadd2b6b1e077ba46ec6b0b3392e3daaf317b120bd172",
+      "action": "attack",
+      "index": 12,
+      "observation": "The ordinary player-attack capture remains stable immediately before the native hit response. This frame does not by itself show the later DamagedHeavy deformation.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2871c06b5be2490cbfd556f84aad9ed0/0000.png",
+      "sha256": "6bbd194263c0e66f44fdb3364b429769a5e837e98c8bb898f021122074e5dca6",
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The exact pre-death idle frame shows the authored plant intact at 8 HP, fully visible in the normal combat camera with no bind collapse or disconnected leaf geometry."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2871c06b5be2490cbfd556f84aad9ed0/0119.png",
+      "sha256": "70a8e0af3d3cb569048984ae8705f4adcd056c315bf9fd0675d91a126cdc3ee4",
+      "action": "kill-fixture",
+      "index": 119,
+      "observation": "The end of the fixture-death capture shows the connected authored corpse behind the native loot UI. It supports completed visible collapse and progression handoff, while the UI blur limits detailed surface review."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0580934d51db4e60bf8f901170e02f16/0000.png",
+      "sha256": "dd68cd6700da4d6069c12743c84ee1dd591df9b09f3d3b17adcae647cf9588f9",
+      "action": "pass",
+      "index": 0,
+      "observation": "The event capture begins from an enabled settled native IDLE state. The complete Cinderbloom silhouette fits the combat camera and all authored leaf groups are visible and connected."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0580934d51db4e60bf8f901170e02f16/0050.png",
+      "sha256": "1637a5911aeee4c084b471f711edf46d13b97e5c5377638cc0083fc96b1b82f6",
+      "action": "pass",
+      "index": 50,
+      "observation": "Native AttackProf1 wind-up bends and rotates the stem, head, and base leaves as one coherent plant. The camera tracks the motion without cropping the authored target."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0580934d51db4e60bf8f901170e02f16/0060.png",
+      "sha256": "476d5d79ac5772ad8a17b9b3b68fde15d936c688ae7effd07e76bfc2774313e6",
+      "action": "pass",
+      "index": 60,
+      "observation": "Mid-attack articulation changes the head angle and stem curve while the leaf renderer follows without shearing, gaps, or detached pieces. The silhouette remains readable against the room."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0580934d51db4e60bf8f901170e02f16/0070.png",
+      "sha256": "40537e230de09381bc674be49083ad3aec9f7be3bf259d9d31e814b33e1f8c73",
+      "action": "pass",
+      "index": 70,
+      "observation": "Late attack motion retains the connected mouth, stem, and leaf assembly through the native exit transition. No bounds pop or camera-edge disappearance is visible in this sampled frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/691fb3ceda114f14ade32410f09db932/0027.png",
+      "sha256": "37fb0e3b2fc7c6aba8bc7ed4501721e67b56048d9a395714d03928e60785bb21",
+      "action": "attack",
+      "index": 27,
+      "observation": "The ordinary 10-damage DamagedHeavy response produces a strong readable recoil. Head, stem, and leaves remain connected despite the extreme bend, with no exploded vertices or detached leaf cluster.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/691fb3ceda114f14ade32410f09db932/0030.png",
+      "sha256": "c9005dd5625ee94d3a9fd71ee8969dc15adbda66cb6280f42bc9671ecced4c05",
+      "action": "attack",
+      "index": 30,
+      "observation": "The later DamagedHeavy frame shows coherent recovery toward the native stance. The selected leaf renderer remains attached and visible; the player briefly overlaps the target as part of the native close attack camera.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2871c06b5be2490cbfd556f84aad9ed0/0030.png",
+      "sha256": "4b1b8430a823ab402c6788aded20833e15af8065ed9f020b112070d276ffd211",
+      "action": "kill-fixture",
+      "index": 30,
+      "observation": "Early native Death motion begins from the intact authored target after the explicit fixture hit. The complete model remains in frame and connected."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2871c06b5be2490cbfd556f84aad9ed0/0040.png",
+      "sha256": "9544dc8bc00b7e0716736260f8f646a3973210306c00ae6e3b0b23c6425174ec",
+      "action": "kill-fixture",
+      "index": 40,
+      "observation": "The plant bends deeply during the native death collapse while the head, stem, and leaf geometry remain a continuous assembly. No camera clipping or culling pop is visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2871c06b5be2490cbfd556f84aad9ed0/0050.png",
+      "sha256": "91620206243354c899b7a69eae60d684cae62cb76186a4e0b0bb7052c62548e4",
+      "action": "kill-fixture",
+      "index": 50,
+      "observation": "The later collapse keeps the authored leaf renderer attached to the curved stem. The target remains fully visible and retains its intended colors and low-poly surfaces."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2871c06b5be2490cbfd556f84aad9ed0/0060.png",
+      "sha256": "152d227b213eb86c1b271c0db70781719d433ccaf79907e9e1480a299623a55d",
+      "action": "kill-fixture",
+      "index": 60,
+      "observation": "The settled corpse remains coherent and inside the normal combat framing. This verifies the sampled fixture-death appearance, not ordinary lethal damage or ragdoll behavior."
+    }
+  ],
+  "requirements": [
+    "Inspect each referenced original PNG before changing reviewStatus to a reviewed value.",
+    "Replace every pending observation with the exact observed result and state its limits.",
+    "Add selected source PNGs only when their hash, action, and frame index are verified from the fresh case."
+  ]
+}

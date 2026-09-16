@@ -1,0 +1,178 @@
+{
+  "schema": "ftkmf.model-root-visual-review-template.v1",
+  "session": "e9d57811cedf4bc695c773ab87f5ff5d",
+  "reviewStatus": "reviewed_exact_bootsbossgladiator_binding_material_idle_native_attacks_hit_recovery_ragdoll_death_and_gameplay_accepted_limited_art_pending",
+  "binding": {
+    "rendererPath": "bootsBossGladiator",
+    "mesh": "ftkmf_glb_bronzewake_boots.glb",
+    "boneSignature": "9dab517a577b96ba9923e06782faa1786306469392eab546ff016c4c9112b04e"
+  },
+  "frames": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/facee19bb73a4fb7ab5223704ec4fad8/0000.png",
+      "sha256": "525787a0be51d977bda1a731d0cd208e3646e4ee7894ec971b07a7bec8b229fe",
+      "bytes": 1110812,
+      "action": "pass",
+      "index": 0,
+      "observation": "The exact Bronzewake boots and shin guards are readable on both legs in settled 2HandWield_CombatIdle at 11 HP. They remain aligned below the native body and form a coherent low-poly silhouette."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/facee19bb73a4fb7ab5223704ec4fad8/0048.png",
+      "sha256": "10e262622bf3c7f84a6f2c5e4749693eb7e58a0be75e459cfb4a24bcbc2296e3",
+      "bytes": 1100400,
+      "action": "pass",
+      "index": 48,
+      "observation": "At the transition into 2HandWield_CriticalAttack the feet advance with the legs and retain their expected orientation while the exact boots renderer stays visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/facee19bb73a4fb7ab5223704ec4fad8/0055.png",
+      "sha256": "e6afe76818f7ab11e3af2c458881f14c86de20be82872cb9e7dced21d6b98101",
+      "bytes": 1149242,
+      "action": "pass",
+      "index": 55,
+      "observation": "The critical lunge carries both authored boots into the close attack pose without sampled detachment, inversion, or vertex burst. The impact flash and foreground hero partly obscure the lower legs."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/facee19bb73a4fb7ab5223704ec4fad8/0065.png",
+      "sha256": "dae272297990ed6986fa566859ccd06eb9aca44fcc126cf83481eaf3702e236a",
+      "bytes": 1061264,
+      "action": "pass",
+      "index": 65,
+      "observation": "During critical-attack recovery the near shin guard remains centered on the lower leg and the far boot stays attached despite hero overlap."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/facee19bb73a4fb7ab5223704ec4fad8/0075.png",
+      "sha256": "caff31558fc8f2904d02ad86edcd010fc4a862bdd9fbc53da0f111f40ba35cff",
+      "bytes": 1063242,
+      "action": "pass",
+      "index": 75,
+      "observation": "The model has returned to 2HandWield_CombatIdle with both authored boots seated beneath the native trousers and no visible gap or orientation error."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/facee19bb73a4fb7ab5223704ec4fad8/0090.png",
+      "sha256": "0233ef0f901ac0386f510a382ea95dcd366962210e10f56c965638643e5cf785",
+      "bytes": 1173512,
+      "action": "pass",
+      "index": 90,
+      "observation": "A later idle sample preserves the expected boot placement, but strong camera motion blur prevents fine edge or texture inspection in this exact frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a69d94884bfb48b0824190151ad929f2/0000.png",
+      "sha256": "209c16d7b13460a512857d323456a8eabc4b9feb373bed3dc83b3935deb87afe",
+      "bytes": 1099968,
+      "action": "attack",
+      "index": 0,
+      "attempt": 1,
+      "observation": "The ordinary no-focus attack begins from a settled 11 HP combat-idle pose with the exact boots visible and aligned on both feet."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a69d94884bfb48b0824190151ad929f2/0023.png",
+      "sha256": "f3480ba96069eef1008184ac88be4db031d93aea2bb35386d653f9163389116d",
+      "bytes": 1137954,
+      "action": "attack",
+      "index": 23,
+      "attempt": 1,
+      "observation": "At the native DamagedHeavy trigger boundary the target is mostly hidden by the hero and impact sphere. This frame establishes timing but provides little fine footwear evidence."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a69d94884bfb48b0824190151ad929f2/0030.png",
+      "sha256": "d826a358dbb63f47a7eb1c01cb8fdf1e06948b87017a4798bc8b39ac1d6e578c",
+      "bytes": 1095102,
+      "action": "attack",
+      "index": 30,
+      "attempt": 1,
+      "observation": "During 2HandWield_HitBig the champion is lifted backward while both boots follow their lower-leg bones coherently. The ordinary 10-damage label is visible as HP resolves toward 1."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a69d94884bfb48b0824190151ad929f2/0045.png",
+      "sha256": "59ab8b2cc4fad9d2f54644602568a177848f7331a3289155f5d7d07057dae06a",
+      "bytes": 1108908,
+      "action": "attack",
+      "index": 45,
+      "attempt": 1,
+      "observation": "The final heavy-hit frame returns the target toward standing at 1 HP with both shin guards still attached and correctly oriented."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a69d94884bfb48b0824190151ad929f2/0066.png",
+      "sha256": "72c254e16642af3edc50b58617413061d8c92266bc9511b8c3edc6943e23329e",
+      "bytes": 1079511,
+      "action": "attack",
+      "index": 66,
+      "attempt": 1,
+      "observation": "The native 2HandWield_BasicAttack begins from the recovered 1 HP stance with both authored boots planted under the body."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a69d94884bfb48b0824190151ad929f2/0078.png",
+      "sha256": "e71fae56cb2f90470473629178453617f8ea33b06ca9ed4e82c27476cf404372",
+      "bytes": 1154666,
+      "action": "attack",
+      "index": 78,
+      "attempt": 1,
+      "observation": "At basic-attack contact the champion closes on the hero and both feet remain connected to the animated legs. The large Steadfast effect obscures most lower-body surface detail."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a69d94884bfb48b0824190151ad929f2/0092.png",
+      "sha256": "964e683be974a61798d15c4c5f347ca7a73bd22708b82b5db4ebbb43ff9c2f84",
+      "bytes": 1069763,
+      "action": "attack",
+      "index": 92,
+      "attempt": 1,
+      "observation": "After the basic attack the target settles back into combat idle with both authored boots readable and aligned."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/cbca3021dd444492b9941ec6b2f27278/0000.png",
+      "sha256": "ab761e60ebd3e5a0549a870fca744f678f67602f0545bcc8a73502b573a13a2d",
+      "bytes": 1113429,
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The separate explicit KillSingle fixture begins from a settled 1 HP combat-idle pose with both exact boots visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/cbca3021dd444492b9941ec6b2f27278/0023.png",
+      "sha256": "ecafa98d3cdfdadff10dec05a6e45764d71d2ad2c172bf3ddfd4e5760f69272a",
+      "bytes": 1137712,
+      "action": "kill-fixture",
+      "index": 23,
+      "observation": "At the explicit fixture impact, the bright sphere and hero obscure the target. This frame supports fixture timing and is not used for a detailed deformation claim."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/cbca3021dd444492b9941ec6b2f27278/0027.png",
+      "sha256": "188db9ad9ad4c0fbe2ffc39d0e0991d9d8413f566314becbef5b7f8077ca1f03",
+      "bytes": 1100454,
+      "action": "kill-fixture",
+      "index": 27,
+      "observation": "The native Death transition has begun and the target recoils with red particles. The exact boots remain aligned immediately before all 11 surviving rigid bodies become nonkinematic at frame 28."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/cbca3021dd444492b9941ec6b2f27278/0035.png",
+      "sha256": "0724f884122960475f3a8cd41b23859aa2958cc1102ede9d724328ac4f63d660",
+      "bytes": 1077289,
+      "action": "kill-fixture",
+      "index": 35,
+      "observation": "During the native ragdoll fall the body bends backward while the authored boots remain attached at the feet without sampled stretching or inversion."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/cbca3021dd444492b9941ec6b2f27278/0060.png",
+      "sha256": "408f965d87ca702b047a9c19711df758e57b292e63cecb277ebaf2aacece693c",
+      "bytes": 1075736,
+      "action": "kill-fixture",
+      "index": 60,
+      "observation": "The ragdoll has reached a floor pose with both lower legs and footwear still forming a coherent visible shape. Depth blur limits fine surface inspection."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/cbca3021dd444492b9941ec6b2f27278/0089.png",
+      "sha256": "e3db5337a9cbfe6fe3cf740f5f0f6417f1e78faf140201d54243a982dc11a798",
+      "bytes": 976403,
+      "action": "kill-fixture",
+      "index": 89,
+      "observation": "The same sampled ragdoll floor pose remains visible at the final retained frame. Camera focus limits detail, and no corpse lifetime beyond this controller-boundary capture is claimed."
+    }
+  ],
+  "requirements": [
+    "All 19 referenced original PNGs were inspected at original resolution before assigning this reviewed status.",
+    "The ordinary no-focus gameplay claim is limited to the same-target HP change from 11 to 1; the separate KillSingle fixture at 1 HP is not ordinary lethal evidence.",
+    "The death claim is a sampled native ragdoll prefix: m_DoRagdoll is true, the body set changes from 15 to 11 at frame 26, and all 11 surviving bodies become nonkinematic at frame 28.",
+    "The exact boots renderer remained active, enabled and visible in all 330 retained frames; selected originals support visual conclusions only for their sampled views.",
+    "Native sibling surfaces, combat UI, attack effects, foreground hero overlap, depth blur and camera movement limit fine surface, culling and corpse inspection."
+  ]
+}

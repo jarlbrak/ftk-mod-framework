@@ -1,0 +1,135 @@
+{
+  "ok": true,
+  "provenance": "read-only fixture readiness snapshot",
+  "strictReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "strictLootCollect": {
+    "ok": false,
+    "reason": "Both current encounter vote types must be Loot."
+  },
+  "voteSurfaces": [
+    {
+      "heroInstanceId": -235492,
+      "alive": true,
+      "containerInstanceId": -237228,
+      "containerActive": true,
+      "voteType": "Ready",
+      "buttons": [
+        {
+          "option": "Collect",
+          "instanceId": -237270,
+          "active": false,
+          "enabled": true,
+          "interactable": true,
+          "focusing": false,
+          "usable": false,
+          "item": "None",
+          "belongsToHero": true
+        },
+        {
+          "option": "Ready",
+          "instanceId": -237670,
+          "active": true,
+          "enabled": true,
+          "interactable": true,
+          "focusing": false,
+          "usable": true,
+          "item": "None",
+          "belongsToHero": true
+        }
+      ]
+    }
+  ],
+  "playerScopes": [
+    {
+      "scope": "player-overworld",
+      "avatars": [
+        {
+          "ownerInstanceId": -235492,
+          "celInstanceId": -239096,
+          "ownerActive": true,
+          "avatarActive": true,
+          "renderers": 5,
+          "usableRenderers": 5
+        }
+      ]
+    },
+    {
+      "scope": "player-combat",
+      "avatars": [
+        {
+          "ownerInstanceId": 358974,
+          "celInstanceId": -245696,
+          "ownerActive": true,
+          "avatarActive": true,
+          "renderers": 5,
+          "usableRenderers": 5
+        }
+      ]
+    },
+    {
+      "scope": "player-preview",
+      "avatars": []
+    }
+  ],
+  "identity": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "rootName": "mirewarden-game",
+    "session": "b5a47adc0e444701b9a02e9f49187976",
+    "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+  },
+  "sessions": {
+    "esInCombat": false,
+    "mcInCombat": true,
+    "mcEncounterType": "Ready",
+    "esVoteType": "Ready",
+    "mcVoteType": "Ready",
+    "fightOrderCount": 0,
+    "esFsm": {
+      "present": true,
+      "enabled": true,
+      "state": "Wait for Battle to End"
+    },
+    "voteFsm": {
+      "present": true,
+      "enabled": true,
+      "state": "Show Vote Buttons"
+    },
+    "lootFsm": {
+      "present": true,
+      "enabled": true,
+      "state": "Wait for initialize"
+    }
+  },
+  "dungeon": {
+    "level": 0,
+    "room": 2,
+    "activeDungeonEncounterType": "Enemy",
+    "nextLevelGenerated": true,
+    "isAtLastLevel": false,
+    "isDungeonCleared": false,
+    "definitionLevelCount": 2,
+    "definitionRoomCount": 5,
+    "generatedRoomCount": 6,
+    "queuedSlotValid": true,
+    "withinDefinitionRoomBounds": true,
+    "queuedRoomType": "Enemy",
+    "queuedContext": -1,
+    "queuedObjects": [
+      "cubeA",
+      "1080276148"
+    ],
+    "slotAllowsEnemySubstitution": true,
+    "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+  },
+  "testFixtureMaxHpTarget": 999,
+  "tutorialsQuiet": true,
+  "session": "b5a47adc0e444701b9a02e9f49187976",
+  "id": "0ad153bd1e474964aee52387369ac0e4",
+  "frame": 36955,
+  "savePath": "save-model-test-81fab5f083e30704"
+}

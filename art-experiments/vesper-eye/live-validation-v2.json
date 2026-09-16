@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "asset": "Vesper Eye",
+  "iteration": "emission correction; original geometry unchanged",
+  "status": "material correction PASS and scoped motion observed; native effects limit review",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "a1eba409646e41f2b0784d751865866e",
+    "case": "f0cd8830d3554f009cb8fa4505a8df1b",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_vesper_eye",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_vesper_eye",
+      "baseEnemy": "beholderA",
+      "displayName": "Vesper Eye",
+      "combatProfile": "2614f9be5c3a8448ca923c624c35c8d8569dc042e9a65ef0338ed276c7eea7da",
+      "minimumBaseHealth": 64,
+      "renderers": [
+        {
+          "rendererPath": "EyeBody",
+          "glbFile": "vesper_body.glb",
+          "textureFile": "vesper_basecolor.png",
+          "disableNativeEmission": true
+        },
+        {
+          "rendererPath": "EyeBody/EyeEye",
+          "glbFile": "vesper_eye.glb",
+          "textureFile": "vesper_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ]
+    },
+    "profileInputSha256": "4d88f8086da64d8e265a1395a06782a67e7b5f79798a4f69814b326d4b2215d1",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "900f",
+  "helperVersionPrefix": "434",
+  "assetHashes": {
+    "vesper_body.glb": "a8d9ea5c8265510372a84ae5b84b8b6ae5087e07db26308e146af0666c28cde0",
+    "vesper_basecolor.png": "e5f165bafbe3110bcb71e8cbd8d365758691e39f9343a90d209e4442632b5e38",
+    "vesper_eye.glb": "0afcd61cde59791bc05912b67588f45f528f176fc31a58d761dc58708ca2066b"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-f0cd8830d3554f009cb8fa4505a8df1b/journal.jsonl",
+    "sha256": "ef8528cd199b55b519b689ccf6a4ebc786f04ca7017fd491121f5ca5f025a284"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "a33ec670fc234399ac3ff0ef36202984",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/c938614161f44159badabd09062b4d00.json",
+        "sha256": "d8d3a4524f3d858b50272b64cc95c0bfc338d50c62442dbc5d4b480640e2c18a"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-a33ec670fc234399ac3ff0ef36202984/journal.jsonl",
+        "sha256": "5ff42d9df162fe82c3ddd21140e07f8b5b46435274b7cb75fdcd027b9a3c3d3c"
+      },
+      "summary": {
+        "path": "art-experiments/vesper-eye/live-v2/attack-summary.json",
+        "sha256": "809e4e12dc7a519a672287b281ff684415fe0193fe499aa6243ae989ee342b3d"
+      },
+      "video": {
+        "path": "art-experiments/vesper-eye/live-v2/attack.mp4",
+        "sha256": "73d1fd362538e6b4a7cd74b4bfcad70d8fea881f5cd713a3a2f46cac6d128563"
+      },
+      "reviewedFrames": [
+        0,
+        50,
+        95
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/vesper-eye/live-v2/attack-0000.png",
+          "sha256": "5d9976e3a917fd79486c1020d43f44dc679112493d9c42680825ef4a38ae1a36"
+        },
+        {
+          "path": "art-experiments/vesper-eye/live-v2/attack-0050.png",
+          "sha256": "3e350602284da2df64b495ea6e5e328c77026b259e2b56b4822a00ff6d5b3398"
+        },
+        {
+          "path": "art-experiments/vesper-eye/live-v2/attack-0095.png",
+          "sha256": "e9f11fd13b36f4bf07b3d831fb091c5b258fa29ef83b722b4ae02c497e2164e9"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908329010009766,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "eye_idle"
+          ],
+          "sampleCount": 80,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 44,
+              "firstNormalizedTime": 5.45590877532959,
+              "lastNormalizedTime": 6.267992973327637,
+              "gameSeconds": 4.033329010009766
+            },
+            {
+              "firstFrame": 65,
+              "lastFrame": 89,
+              "firstNormalizedTime": 0.041853927075862885,
+              "lastNormalizedTime": 0.4848068356513977,
+              "gameSeconds": 2.1999969482421875
+            },
+            {
+              "firstFrame": 110,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.041853927075862885,
+              "lastNormalizedTime": 0.2079612910747528,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "eye_attack1"
+          ],
+          "sampleCount": 40,
+          "occurrences": [
+            {
+              "firstFrame": 45,
+              "lastFrame": 64,
+              "firstNormalizedTime": 0.23571428656578064,
+              "lastNormalizedTime": 0.9821429252624512,
+              "gameSeconds": 1.741668701171875
+            },
+            {
+              "firstFrame": 90,
+              "lastFrame": 109,
+              "firstNormalizedTime": 0.23571428656578064,
+              "lastNormalizedTime": 0.9821429252624512,
+              "gameSeconds": 1.741668701171875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "914fbd5923094913a229b2bfb5d2983a",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/51931c3e893747e682d524e744fd26d2.json",
+        "sha256": "93f16e5675f2e15c15fd8076358dd790c42be040a379cc2b7c671490b557ece8"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-914fbd5923094913a229b2bfb5d2983a/journal.jsonl",
+        "sha256": "ff54391b284c5bb7aecf4b2591ad4c9e23b156075e7e3f2d65cda6ba8f8fafe0"
+      },
+      "summary": {
+        "path": "art-experiments/vesper-eye/live-v2/nonlethal-hit-summary.json",
+        "sha256": "5690a8cf45afa881e438b263d89571cc7db230e39a456a2c8678f39a4c0bec70"
+      },
+      "video": {
+        "path": "art-experiments/vesper-eye/live-v2/nonlethal-hit.mp4",
+        "sha256": "c0b957435b6f372bbfead8f4d9d564a4bf6bb5e8685835396c23e53974fa433f"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/vesper-eye/live-v2/nonlethal-hit-0030.png",
+          "sha256": "28ae640d59f2f9a601f2d6e88358cd266dd215e8be902d3dc2c92293972784bc"
+        }
+      ],
+      "hpBeforeAfter": [
+        135,
+        125
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "eye_idle"
+          ],
+          "sampleCount": 85,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 32,
+              "firstNormalizedTime": 11.399510383605957,
+              "lastNormalizedTime": 11.990117073059082,
+              "gameSeconds": 2.9333343505859375
+            },
+            {
+              "firstFrame": 40,
+              "lastFrame": 66,
+              "firstNormalizedTime": 0.12172887474298477,
+              "lastNormalizedTime": 0.6015946865081787,
+              "gameSeconds": 2.383331298828125
+            },
+            {
+              "firstFrame": 92,
+              "lastFrame": 116,
+              "firstNormalizedTime": 0.05387435108423233,
+              "lastNormalizedTime": 0.49682724475860596,
+              "gameSeconds": 2.1999969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "eye_damage"
+          ],
+          "sampleCount": 7,
+          "occurrences": [
+            {
+              "firstFrame": 33,
+              "lastFrame": 39,
+              "firstNormalizedTime": 0.9025611877441406,
+              "lastNormalizedTime": 1.4525600671768188,
+              "gameSeconds": 0.5500030517578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "eye_attack2"
+          ],
+          "sampleCount": 25,
+          "occurrences": [
+            {
+              "firstFrame": 67,
+              "lastFrame": 91,
+              "firstNormalizedTime": 0.04693705216050148,
+              "lastNormalizedTime": 0.9897941946983337,
+              "gameSeconds": 2.20001220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "eye_attack1"
+          ],
+          "sampleCount": 3,
+          "occurrences": [
+            {
+              "firstFrame": 117,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.23571428656578064,
+              "lastNormalizedTime": 0.3142857253551483,
+              "gameSeconds": 0.1833343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "72dad59024224396a6d6ba8255f5472a",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/95413eef8a964171934ca589e785fb49.json",
+        "sha256": "2d8a7c25880831dcd4359d3acf4713ca15271638067c2c9fd4cc6268a88041ed"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-72dad59024224396a6d6ba8255f5472a/journal.jsonl",
+        "sha256": "b8cea679d01648cae87d79a02d7eb2ffdf65a86ba9886fa4467387655eadd2d5"
+      },
+      "summary": {
+        "path": "art-experiments/vesper-eye/live-v2/kill-fixture-death-summary.json",
+        "sha256": "473d8b0eb485a426f0157f61e3b6d3f8323b282d01a0a83de02b7b6be2fd92ef"
+      },
+      "video": {
+        "path": "art-experiments/vesper-eye/live-v2/kill-fixture-death.mp4",
+        "sha256": "82b25071688a58a0253696be86388165a602dcec085321efff6451076b216c86"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/vesper-eye/live-v2/kill-fixture-death-0040.png",
+          "sha256": "e4000f280159237517aa59b0b464255dccf0a0d8ee74e76ad4ee87c781e737bc"
+        },
+        {
+          "path": "art-experiments/vesper-eye/live-v2/kill-fixture-death-0060.png",
+          "sha256": "42e64222e96207c55106f641bbe405af3826d84115b2a6a5d72776f2bd97eb30"
+        }
+      ],
+      "hpBeforeAfter": [
+        125,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "eye_idle"
+          ],
+          "sampleCount": 30,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 29,
+              "firstNormalizedTime": 5.322619438171387,
+              "lastNormalizedTime": 5.857856750488281,
+              "gameSeconds": 2.6583404541015625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "eye_death"
+          ],
+          "sampleCount": 90,
+          "occurrences": [
+            {
+              "firstFrame": 30,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.8249984383583069,
+              "lastNormalizedTime": 13.062479972839355,
+              "gameSeconds": 8.158340454101562
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Pupil is correctly black and amber iris readable; idle fit looks proper. Native attack effects obscure reviewed50/95; native effects hide death geometry at40/60.",
+    "limits": "Scoped material correction and motion pass. Native effects hide visible death deformation. Culling, full attack visibility and complete animation coverage remain unverified."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "collect1": {
+      "path": "scratch/vesper-v2-collect1.json",
+      "sha256": "b529a66b4faaeefabaf4f8b59faa449e2e8387e6ec847c89789586337c43003a"
+    },
+    "collect2": {
+      "path": "scratch/vesper-v2-collect2.json",
+      "sha256": "4b55d70f9ca16054a9e493617dee33639b12163aa5bfaf3bb5c4badc5324a7f3"
+    },
+    "result": "two guarded Collect actions; strict Ready0/2 confirmed",
+    "ready": {
+      "path": "scratch/vesper-v2-ready.json",
+      "sha256": "08daf9dbf183f8faa53fdf934d6f374cb8b78e47da4a67b3eb94567b1d41a80b"
+    }
+  },
+  "materialSource": {
+    "path": "scratch/vesper-v2-material-inventory.json",
+    "sha256": "f53e79fa5c04e8e37480e1b899c1d2e96662234e6a195187939eaf1e41d06934"
+  },
+  "materialValidation": {
+    "evidence": {
+      "path": "scratch/vesper-v2-material-inventory.json",
+      "sha256": "f53e79fa5c04e8e37480e1b899c1d2e96662234e6a195187939eaf1e41d06934"
+    },
+    "status": "both replacement materials emission keyword off, RGB black and map null"
+  },
+  "motionObservation": {
+    "source": "parent pass capture component-range analysis",
+    "eyeLocalRotationComponentVariation": 0.06005,
+    "rootLocalRotationComponentVariation": 0.05681,
+    "limits": "Quaternion component variation, not angular displacement or full clip coverage."
+  }
+}

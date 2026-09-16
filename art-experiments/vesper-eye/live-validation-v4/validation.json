@@ -1,0 +1,1079 @@
+{
+  "status": "reviewed_exact_source_pending_any_remaining_limits",
+  "revision": "V4 exact-source corrected-material multipart",
+  "displayName": "Vesper Eye",
+  "sourceKind": "native_enemy_row",
+  "nativeEnemy": "beholderA",
+  "nativeChassis": "beholderA",
+  "rendererPaths": [
+    "EyeBody",
+    "EyeBody/EyeEye"
+  ],
+  "sourceRendererIds": [
+    121031,
+    121210
+  ],
+  "binding": {
+    "rendererPath": "EyeBody",
+    "mesh": "ftkmf_glb_vesper_body.glb",
+    "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4"
+  },
+  "ordinaryLethal": false,
+  "limits": [
+    "KillSingle is an explicit fixture death, not ordinary lethal damage.",
+    "The custom renderers become inactive at sample 26 before eye_death begins at sample 30, so the capture establishes the Death trigger, controller state, cleanup, and Victory progression without visible custom death deformation, corpse, ragdoll, floor contact, or corpse lifetime.",
+    "Native effects, the foreground hero, UI, and the Victory surface limit fine surface and hidden-side review.",
+    "One isolated session does not establish every controller clip, extended culling, portraits, resource lifetime, unperturbed performance, indirect death, natural-arena behavior, or finished-art acceptance.",
+    "Presentation videos replay fixed-frame captures and are not real-time performance evidence."
+  ],
+  "renderers": [
+    {
+      "rendererPath": "EyeBody",
+      "mesh": "ftkmf_glb_vesper_body.glb",
+      "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4"
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235418,
+        "alive": true,
+        "containerInstanceId": -237154,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237196,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237596,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235418,
+            "celInstanceId": -239022,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245598,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "ca692eff36494692b938a76bff8ee9c3",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "ca692eff36494692b938a76bff8ee9c3",
+    "id": "2d4d890c852b416295c9115508acc73b",
+    "frame": 5631,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "profile": {
+    "key": "ftkmf_modeltest_vesper_eye",
+    "baseEnemy": "beholderA",
+    "displayName": "Vesper Eye",
+    "combatProfile": "2614f9be5c3a8448ca923c624c35c8d8569dc042e9a65ef0338ed276c7eea7da",
+    "renderers": [
+      {
+        "rendererPath": "EyeBody",
+        "glbFile": "vesper_body.glb",
+        "textureFile": "vesper_basecolor.png",
+        "disableNativeEmission": true
+      },
+      {
+        "rendererPath": "EyeBody/EyeEye",
+        "glbFile": "vesper_eye.glb",
+        "textureFile": "vesper_basecolor.png",
+        "disableNativeEmission": true
+      }
+    ]
+  },
+  "ordinaryHit": {
+    "beforeHp": 135,
+    "afterHp": 125,
+    "focus": false
+  },
+  "explicitKillFixture": {
+    "action": "kill-fixture",
+    "accepted": true
+  },
+  "schema": "ftkmf.model-validation-archive.v1",
+  "session": "ca692eff36494692b938a76bff8ee9c3",
+  "enemy": "ftkmf_modeltest_vesper_eye",
+  "catalogSha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+  "assetHashes": {
+    "vesper_basecolor.png": "e5f165bafbe3110bcb71e8cbd8d365758691e39f9343a90d209e4442632b5e38",
+    "vesper_body.glb": "a8d9ea5c8265510372a84ae5b84b8b6ae5087e07db26308e146af0666c28cde0",
+    "vesper_eye.glb": "0afcd61cde59791bc05912b67588f45f528f176fc31a58d761dc58708ca2066b"
+  },
+  "captures": [
+    {
+      "action": "pass",
+      "caseAction": "pass",
+      "attempt": null,
+      "label": "idle-and-native-attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23.json",
+        "sha256": "bd4a01bbb54984a215c2ab282bbe5bdf6a8a19a959b308aa11ed662346c2a105",
+        "bytes": 638353
+      },
+      "rawCaptureReportedOk": true,
+      "rawCaptureError": null,
+      "captureBoundary": {
+        "partial": false,
+        "completeCapture": true,
+        "allowRendererDestroyedPrefix": false,
+        "rawCaptureOk": true,
+        "rawCaptureError": null,
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 120,
+        "firstRetainedFrame": 4476,
+        "lastRetainedFrame": 4595,
+        "resultFrame": 4595,
+        "termination": null,
+        "allowDeathControllerTeardownPrefix": false,
+        "limitation": null
+      },
+      "frameCount": 120,
+      "width": 1280,
+      "height": 832,
+      "timingMode": "offline-fixed-step-gameplay",
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "pass",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245362,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 0.8662440180778503,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 4476,
+          "sample": {
+            "animatorInstanceId": -245362,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 0.8680959939956665,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0000.png",
+            "sha256": "5425180356757e2b3c11c3289ee42a87b18d581a398b34f2576aa5ed56d4a3ca",
+            "bytes": 1114407
+          }
+        },
+        "attack": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 4515,
+            "realtime": 73.08760070800781,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245364,
+            "targetRendererInstanceId": -245370,
+            "targetAnimatorInstanceId": -245362,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "attacker",
+            "actorInstanceId": 369188,
+            "actorFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "Attack",
+            "primary": {
+              "attackerFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "damage": 46,
+              "newHealth": 861,
+              "attackerHealthMod": 0,
+              "proficiencyId": 499,
+              "proficiencySuccess": true,
+              "attackResponse": "Damaged"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 135
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 4515,
+            "realtime": 73.09453582763672,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245364,
+            "targetRendererInstanceId": -245370,
+            "targetAnimatorInstanceId": -245362,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "Attack",
+            "forceAnim": false,
+            "preIssueLastTrigger": "Attack",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "Attack"
+          },
+          "sampleIndex": 39,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0039.png",
+            "sha256": "a64d7b305ee3894e854afced36e7ff897bb2a9ad2c932d132675c48a136d7b69",
+            "bytes": 1151267
+          }
+        },
+        "limitations": "Native action and trigger chronology select frames. Human review still judges pose, deformation, visibility and clip coverage."
+      },
+      "captureScope": "Settled idle and exact native enemy attack capture."
+    },
+    {
+      "action": "attack",
+      "caseAction": "attack",
+      "attempt": 1,
+      "label": "attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0.json",
+        "sha256": "b6dde9e89b3b33cc7d3e915a7b2a3a271998b6682838b22ba3dd7b6141e9b6e1",
+        "bytes": 640850
+      },
+      "rawCaptureReportedOk": true,
+      "rawCaptureError": null,
+      "captureBoundary": {
+        "partial": false,
+        "completeCapture": true,
+        "allowRendererDestroyedPrefix": false,
+        "rawCaptureOk": true,
+        "rawCaptureError": null,
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 120,
+        "firstRetainedFrame": 4769,
+        "lastRetainedFrame": 4888,
+        "resultFrame": 4888,
+        "termination": null,
+        "allowDeathControllerTeardownPrefix": false,
+        "limitation": null
+      },
+      "frameCount": 120,
+      "width": 1280,
+      "height": 832,
+      "timingMode": "offline-fixed-step-gameplay",
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "attack",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245362,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 0.564814031124115,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 4769,
+          "sample": {
+            "animatorInstanceId": -245362,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 0.5666075348854065,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0000.png",
+            "sha256": "f58b29e5603e2c940f10c1d26d068cd22c2ec59b8900e5b0bfbb7cc17968031f",
+            "bytes": 1107692
+          }
+        },
+        "hit": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 4782,
+            "realtime": 94.75384521484375,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245364,
+            "targetRendererInstanceId": -245370,
+            "targetAnimatorInstanceId": -245362,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "victim",
+            "actorInstanceId": 358974,
+            "actorFid": {
+              "photonId": 1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "None",
+            "primary": {
+              "attackerFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "damage": 10,
+              "newHealth": 125,
+              "attackerHealthMod": 0,
+              "proficiencyId": -1,
+              "proficiencySuccess": false,
+              "attackResponse": "Damaged"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 135
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 4792,
+            "realtime": 96.8758316040039,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245364,
+            "targetRendererInstanceId": -245370,
+            "targetAnimatorInstanceId": -245362,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "Damaged",
+            "forceAnim": false,
+            "preIssueLastTrigger": "AttackProf",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "Damaged"
+          },
+          "sampleIndex": 23,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0023.png",
+            "sha256": "c53d62aca0cfd52d372ddac5f3d6175da7005609b7324c36c267798f6e2dfbaa",
+            "bytes": 1156037
+          }
+        },
+        "limitations": "A nonlethal native damage response is proven. Human review still judges the retained hit pose and visual quality."
+      },
+      "captureScope": "Ordinary no-focus player attack capture; preserve its measured outcome separately."
+    },
+    {
+      "action": "kill-fixture",
+      "caseAction": "kill-fixture",
+      "attempt": null,
+      "label": "explicit-fixture-death",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7.json",
+        "sha256": "c4fcc79913971dddb1684fb8324ebf58e50019073a9b54f377fa7f6ba2ef9f94",
+        "bytes": 639108
+      },
+      "rawCaptureReportedOk": true,
+      "rawCaptureError": null,
+      "captureBoundary": {
+        "partial": false,
+        "completeCapture": true,
+        "allowRendererDestroyedPrefix": true,
+        "rawCaptureOk": true,
+        "rawCaptureError": null,
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 120,
+        "firstRetainedFrame": 5249,
+        "lastRetainedFrame": 5368,
+        "resultFrame": 5368,
+        "termination": null,
+        "allowDeathControllerTeardownPrefix": true,
+        "limitation": null
+      },
+      "frameCount": 120,
+      "width": 1280,
+      "height": 832,
+      "timingMode": "offline-fixed-step-gameplay",
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "kill-fixture",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245362,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 0.5849050879478455,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 5249,
+          "sample": {
+            "animatorInstanceId": -245362,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 0.5867382287979126,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0000.png",
+            "sha256": "b027f306bea16982a6f68c46f8aea20111568b23050981a1a51faaec0f82e4b3",
+            "bytes": 1130503
+          }
+        },
+        "death": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 5262,
+            "realtime": 125.88162231445312,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245364,
+            "targetRendererInstanceId": -245370,
+            "targetAnimatorInstanceId": -245362,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "victim",
+            "actorInstanceId": 358974,
+            "actorFid": {
+              "photonId": 1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "None",
+            "primary": {
+              "attackerFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "damage": 1000,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "proficiencyId": -1,
+              "proficiencySuccess": false,
+              "attackResponse": "Death"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 125
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 5272,
+            "realtime": 127.97222900390625,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245364,
+            "targetRendererInstanceId": -245370,
+            "targetAnimatorInstanceId": -245362,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "Death",
+            "forceAnim": false,
+            "preIssueLastTrigger": "Attack",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "Death"
+          },
+          "sampleIndex": 23,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0023.png",
+            "sha256": "0620b800e1a7675db89be80d654e44105c2d09a4c73e90bfb8e1e91f4fe8532a",
+            "bytes": 1141208
+          }
+        },
+        "limitations": "This is an explicit KillSingle fixture on the native damage path, not ordinary lethal-damage proof. Human review still judges retained death frames and cleanup."
+      },
+      "captureScope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage."
+    }
+  ],
+  "rootVisualReview": "visual-review.json",
+  "rootVisualReviewPin": {
+    "path": "visual-review.json",
+    "sha256": "0e2196a01fd16936b4cb9f47de75386549c20c8b52c4da99ea587d8aeb4a7343",
+    "bytes": 11639
+  },
+  "visualReview": "reviewed_exact_beholdera_multipart_binding_material_idle_attack_hit_cleanup_and_gameplay_accepted_visible_death_deformation_limited",
+  "selectedPNGs": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0000.png",
+      "sha256": "5425180356757e2b3c11c3289ee42a87b18d581a398b34f2576aa5ed56d4a3ca",
+      "bytes": 1114407,
+      "action": "pass",
+      "index": 0,
+      "observation": "The corrected multipart Vesper Eye is fully visible at native scale. The faceted dark body, ivory lid armor, copper seams, amber iris, and black vertical pupil read as one centered enemy before native motion.",
+      "source": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0000.png",
+      "archive": "selected/pass-0000.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0024.png",
+      "sha256": "7d0d093a05b24a0a40bee0971b2addfa8a7e322bf0299ac192961e96545dda09",
+      "bytes": 1112784,
+      "action": "pass",
+      "index": 24,
+      "observation": "A clean eye_idle view shows the separate eye seated inside the body plates. The pupil remains black and the iris readable without the yellow wash from inherited native emission.",
+      "source": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0024.png",
+      "archive": "selected/pass-0024.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0045.png",
+      "sha256": "20eeb8e893b1f940dfb34889f13113ea0d0e7f30ef6d1807ee2978005249aee0",
+      "bytes": 1067670,
+      "action": "pass",
+      "index": 45,
+      "observation": "The first eye_attack1 sample moves the multipart eye toward the hero while the body plates, iris, and pupil remain assembled. A native light effect obscures only the area beneath the model.",
+      "source": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0045.png",
+      "archive": "selected/pass-0045.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0069.png",
+      "sha256": "21955da3b93d479085f37e785ef0fd83aa616105e4f27987ea57533fdf7f4447",
+      "bytes": 1060659,
+      "action": "pass",
+      "index": 69,
+      "observation": "After eye_attack1, the enemy has returned to its combat position with the eye still seated and the authored silhouette intact. Native haze and the stunned hero do not cover the target.",
+      "source": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0069.png",
+      "archive": "selected/pass-0069.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0094.png",
+      "sha256": "0336fa807a19b0bc8a27554ee1d6ccaf7231909062c3acff835820d1c37f0ee1",
+      "bytes": 1138769,
+      "action": "pass",
+      "index": 94,
+      "observation": "During eye_attack2 the native radiance and status icons partly cover the front, but the outer body, amber iris, and dark pupil remain aligned with no sampled separation or inversion.",
+      "source": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0094.png",
+      "archive": "selected/pass-0094.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0119.png",
+      "sha256": "b35f81f79e118c55ba2c80965ff2d0a5d46f13dac82ba879a797b19d2cd1e38e",
+      "bytes": 1041043,
+      "action": "pass",
+      "index": 119,
+      "observation": "The final pass sample returns to a clear eye_idle presentation. Both custom parts retain the corrected colors and a coherent native-scale fit after both attack variants.",
+      "source": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0119.png",
+      "archive": "selected/pass-0119.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0000.png",
+      "sha256": "f58b29e5603e2c940f10c1d26d068cd22c2ec59b8900e5b0bfbb7cc17968031f",
+      "bytes": 1107692,
+      "action": "attack",
+      "attempt": 1,
+      "index": 0,
+      "observation": "The ordinary no-focus attempt starts with the corrected body and eye fully visible at HP 135. This is the visual baseline and does not by itself establish damage.",
+      "source": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0000.png",
+      "archive": "selected/attack-0000.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0023.png",
+      "sha256": "c53d62aca0cfd52d372ddac5f3d6175da7005609b7324c36c267798f6e2dfbaa",
+      "bytes": 1156037,
+      "action": "attack",
+      "attempt": 1,
+      "index": 23,
+      "observation": "At the causal native Damaged trigger, the hero and bright impact effect cover much of the eye. The visible lid and iris remain aligned, but this frame cannot support a fine deformation judgment.",
+      "source": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0023.png",
+      "archive": "selected/attack-0023.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0033.png",
+      "sha256": "8ab174bfdc1e2b59b24e581fb6bb47a06c60c98a2f9b858bd1dbc991b43c4882",
+      "bytes": 1104158,
+      "action": "attack",
+      "attempt": 1,
+      "index": 33,
+      "observation": "The opening eye_damage sample visibly narrows and shifts the eye behind the foreground hero while retaining a continuous lid, iris, and black pupil. The hero limits review of the lower body.",
+      "source": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0033.png",
+      "archive": "selected/attack-0033.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0036.png",
+      "sha256": "dd723eb5b61f969faa6c43f78b52948973962a21b237333db14db917ea896306",
+      "bytes": 1120833,
+      "action": "attack",
+      "attempt": 1,
+      "index": 36,
+      "observation": "Mid-recoil, the pupil and iris remain seated within the ivory plates as the eye changes pose. No sampled multipart tear, inversion, or missing surface is visible.",
+      "source": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0036.png",
+      "archive": "selected/attack-0036.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0039.png",
+      "sha256": "afc3fec45c81af80bbb0d5bdead958a3a0c95b5834f896e90f3c33d8a577798e",
+      "bytes": 1136424,
+      "action": "attack",
+      "attempt": 1,
+      "index": 39,
+      "observation": "The final sampled eye_damage pose shows the HP 135 to 125 result and an intact eye after the hero clears more of the target. The lower edge remains partly occluded.",
+      "source": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0039.png",
+      "archive": "selected/attack-0039.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0069.png",
+      "sha256": "298846745e37ae408db0dd3532909959ea4431b0eae9761fdea95111d769b37b",
+      "bytes": 1083954,
+      "action": "attack",
+      "attempt": 1,
+      "index": 69,
+      "observation": "The subsequent eye_attack1 counterattack begins with the corrected pupil still dark and both custom parts coherent above the native light effect.",
+      "source": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0069.png",
+      "archive": "selected/attack-0069.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0000.png",
+      "sha256": "b027f306bea16982a6f68c46f8aea20111568b23050981a1a51faaec0f82e4b3",
+      "bytes": 1130503,
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The explicit KillSingle fixture begins with the intact corrected Vesper Eye at HP 125. This baseline is fixture evidence and does not establish ordinary lethal damage.",
+      "source": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0000.png",
+      "archive": "selected/kill-fixture-0000.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0022.png",
+      "sha256": "b51e43db3b9572a564f860656fb2e8223bf023674a65358e8494aba688055567",
+      "bytes": 1124960,
+      "action": "kill-fixture",
+      "index": 22,
+      "observation": "Immediately before the Death trigger, the custom eye is still visible and assembled behind the approaching hero. Foreground occlusion prevents review of its center.",
+      "source": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0022.png",
+      "archive": "selected/kill-fixture-0022.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0023.png",
+      "sha256": "0620b800e1a7675db89be80d654e44105c2d09a4c73e90bfb8e1e91f4fe8532a",
+      "bytes": 1141208,
+      "action": "kill-fixture",
+      "index": 23,
+      "observation": "At the causal native Death trigger, the impact radiance and hero cover most of the target. The body rim remains identifiable, but this frame does not establish death deformation.",
+      "source": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0023.png",
+      "archive": "selected/kill-fixture-0023.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0025.png",
+      "sha256": "3318e581decbf076e145feba5f56baf710695456a295e8dff37b738c6521b0a8",
+      "bytes": 1117588,
+      "action": "kill-fixture",
+      "index": 25,
+      "observation": "This is the final active-renderer sample. Purple native particles obscure much of the eye, but the dark body, ivory rim, amber iris, and pupil remain present and aligned behind the effect.",
+      "source": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0025.png",
+      "archive": "selected/kill-fixture-0025.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0026.png",
+      "sha256": "78c7977551f9755808805f2b121435284494c384e6d4fcf63a28fe3f687e424f",
+      "bytes": 1109612,
+      "action": "kill-fixture",
+      "index": 26,
+      "observation": "The first inactive-renderer sample contains only native particles at the enemy position. The custom mesh is no longer visible, four samples before eye_death begins, so no visible death-pose or corpse claim is made.",
+      "source": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0026.png",
+      "archive": "selected/kill-fixture-0026.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0119.png",
+      "sha256": "bf7b72ca28626ea6093171610d7ba384158424e195b019d9a6c7282353c53f74",
+      "bytes": 859933,
+      "action": "kill-fixture",
+      "index": 119,
+      "observation": "The native Victory and loot surface confirms encounter cleanup after the explicit fixture. No custom corpse is visible, and no corpse deformation, floor contact, or lifetime is inferred.",
+      "source": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0119.png",
+      "archive": "selected/kill-fixture-0119.png"
+    }
+  ],
+  "videos": [
+    {
+      "path": "pass.mp4",
+      "sha256": "60c8417a9cde78a46c38d01d20605e47d75590f6341c8eb744bb1b8020b69c6d",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative; raw capture metadata is the timing evidence.",
+      "action": "pass"
+    },
+    {
+      "path": "attack.mp4",
+      "sha256": "3872658b6d5df67eadf080309a3e96fd66491550fc487c734feffe6aaba10dab",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative; raw capture metadata is the timing evidence.",
+      "action": "attack"
+    },
+    {
+      "path": "kill-fixture.mp4",
+      "sha256": "be45442e729ef9e4fcc1923bac50a9385ee11fbb1557544af3951fd64d7c6811",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative; raw capture metadata is the timing evidence.",
+      "action": "kill-fixture"
+    }
+  ],
+  "sourceImageCount": 361,
+  "captureImageCount": 360,
+  "sourceImagePins": "source-image-pins.json",
+  "captureImagePins": "capture-image-pins.json",
+  "assetPins": "asset-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/vesper-eye/live-validation-v4-plan.json",
+      "sourceSha256": "c23a6d69ba1a2d1488cb3b98fdb7b3e7b5d573cd688d6c89cf6ec06a07a644fb",
+      "archive": "metadata/art-experiments/vesper-eye/live-validation-v4-plan.json.gz",
+      "archiveSha256": "e0e6ec4d0be750b5704b08031967a5928180e7b9204899cf86af47ae055681d9",
+      "encoding": "gzip-lossless",
+      "bytes": 3874
+    },
+    {
+      "source": "art-experiments/vesper-eye/runtime-profile.json",
+      "sourceSha256": "29fff38a9fb57f571fe197d53f981b7fc036591a0735b6891f1ed8fb279c9f8d",
+      "archive": "metadata/art-experiments/vesper-eye/runtime-profile.json.gz",
+      "archiveSha256": "209a6e422c785be6e26a1769543a05101db366983e07907c1eff5b75ed89926f",
+      "encoding": "gzip-lossless",
+      "bytes": 661
+    },
+    {
+      "source": "art-experiments/vesper-eye/vesper_body.glb",
+      "sourceSha256": "a8d9ea5c8265510372a84ae5b84b8b6ae5087e07db26308e146af0666c28cde0",
+      "archive": "metadata/art-experiments/vesper-eye/vesper_body.glb.gz",
+      "archiveSha256": "9e19d40e89a71c1c80ede42ef0d8ac354a75e164256258fde8a8750349613a51",
+      "encoding": "gzip-lossless",
+      "bytes": 101176
+    },
+    {
+      "source": "art-experiments/vesper-eye/vesper_eye.glb",
+      "sourceSha256": "0afcd61cde59791bc05912b67588f45f528f176fc31a58d761dc58708ca2066b",
+      "archive": "metadata/art-experiments/vesper-eye/vesper_eye.glb.gz",
+      "archiveSha256": "0b5f301f69efd01419c72db8faf47b7b48a7aa701278640cc61df4337a0aa9c3",
+      "encoding": "gzip-lossless",
+      "bytes": 87956
+    },
+    {
+      "source": "docs/model-validation-execution-queue.json",
+      "sourceSha256": "ef6a90315369ba37af87e82cf4f64c667c5895f7d298e7f9848dc3fd56ecc3e1",
+      "archive": "metadata/docs/model-validation-execution-queue.json.gz",
+      "archiveSha256": "24f94a994cc5d4614bda618445bb700bbf2ee3123ca9e97feb7b4909e11ca0de",
+      "encoding": "gzip-lossless",
+      "bytes": 131647
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23.json",
+      "sourceSha256": "bd4a01bbb54984a215c2ab282bbe5bdf6a8a19a959b308aa11ed662346c2a105",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23.json.gz",
+      "archiveSha256": "b3793b436e99d10b15a1f72b6c42bf00342f26b15c5f2a17d69cabd21228e668",
+      "encoding": "gzip-lossless",
+      "bytes": 638353
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0.json",
+      "sourceSha256": "b6dde9e89b3b33cc7d3e915a7b2a3a271998b6682838b22ba3dd7b6141e9b6e1",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0.json.gz",
+      "archiveSha256": "3e5be9bb64a93b763dc4164aea13deee26778b6142da064e9258bad17770220e",
+      "encoding": "gzip-lossless",
+      "bytes": 640850
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7.json",
+      "sourceSha256": "c4fcc79913971dddb1684fb8324ebf58e50019073a9b54f377fa7f6ba2ef9f94",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7.json.gz",
+      "archiveSha256": "923dcee9b310f68e2f0bc548e35ea57123945fc06279a1991853e84af60bd258",
+      "encoding": "gzip-lossless",
+      "bytes": 639108
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-3fd48ee1fc6648a1bea21100b1fc9712/case-result.json",
+      "sourceSha256": "cc3f73d99f9bf5f747555e4bb797f44d403c46c75ac0d5ee0a9203bd57dd60ee",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-3fd48ee1fc6648a1bea21100b1fc9712/case-result.json.gz",
+      "archiveSha256": "891ad66e6b4cff7af432b0a99573948d628f11712d9acbd950c98194eaaf9663",
+      "encoding": "gzip-lossless",
+      "bytes": 351654
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-5272dac3162d4c47aa30e8d5b9519316/journal.jsonl",
+      "sourceSha256": "7df3f3ebb7d872b46bca6c765c01cece138e8b8e3f1a233f7e2e5903b3de747d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-5272dac3162d4c47aa30e8d5b9519316/journal.jsonl.gz",
+      "archiveSha256": "96a856995880f9d6c70b649ced1d7c72b37e28ff6b752cd567ea5fe85f8882ef",
+      "encoding": "gzip-lossless",
+      "bytes": 598706
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-5272dac3162d4c47aa30e8d5b9519316/result.json",
+      "sourceSha256": "58064becb342c504e87a136db47f43d12ec8e652cddc6b8394c83d112c492c59",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-5272dac3162d4c47aa30e8d5b9519316/result.json.gz",
+      "archiveSha256": "1e76a3e834eb2323f87728a3a0e71951380a060ba25589e5ab6a404cc702b305",
+      "encoding": "gzip-lossless",
+      "bytes": 1041
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-5fa469b602bb41aa996d4de7bdf28a12/journal.jsonl",
+      "sourceSha256": "ee86d00fda0719fb0327c89251d4355087c823fff7363e15a3f268d73ed0d163",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-5fa469b602bb41aa996d4de7bdf28a12/journal.jsonl.gz",
+      "archiveSha256": "0f7a547d90a10cbff44c7cb16cafcdfc00062f5f83b62d61720f596f5bd4f8ea",
+      "encoding": "gzip-lossless",
+      "bytes": 596478
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-5fa469b602bb41aa996d4de7bdf28a12/result.json",
+      "sourceSha256": "7a72f54b97814ce088ae350db7ebd55af204ebf714f81ba6a6f981e6b8858429",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-5fa469b602bb41aa996d4de7bdf28a12/result.json.gz",
+      "archiveSha256": "42ad6f3faeee7267d4ff7cba0c25e08d594a19581f22ac10863527d913b9badb",
+      "encoding": "gzip-lossless",
+      "bytes": 782
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/journal.jsonl",
+      "sourceSha256": "65d2b7fb44b33c502555c9fee10252c9f05b141e105436bd9f06ff3189d204c4",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/journal.jsonl.gz",
+      "archiveSha256": "25cd38a5711ab74a4298f4fa00b46fca60dc54b5a5dff39634817e37b987edf5",
+      "encoding": "gzip-lossless",
+      "bytes": 826470
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/result.json",
+      "sourceSha256": "67ebb5cd30cfecdecd1e31cbca2d11b35ef8ad4e61ff0315cb2c6eb5f39fec94",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/result.json.gz",
+      "archiveSha256": "5ba45ddbfde694d9e0b9427da2d33a5b4e029cb8cfa20da26316c3185145f772",
+      "encoding": "gzip-lossless",
+      "bytes": 6176
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ec2c8a0c2aff42dc800ba41b8837e931/journal.jsonl",
+      "sourceSha256": "b3564d4135bbb3f642b4216413ce94d0fda0ef9ec0cc43bdb810cabc7b7c6ca8",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ec2c8a0c2aff42dc800ba41b8837e931/journal.jsonl.gz",
+      "archiveSha256": "e6091e200b44529892cb0c82e6f01cb5fb5ff438de0a3b20f7a3039aeaf1c3a0",
+      "encoding": "gzip-lossless",
+      "bytes": 597965
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ec2c8a0c2aff42dc800ba41b8837e931/result.json",
+      "sourceSha256": "82f8ccbce29e5e015bc1f9dcb445393ff84ff5a2faaced425414c2476626398c",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ec2c8a0c2aff42dc800ba41b8837e931/result.json.gz",
+      "archiveSha256": "88b443b5cce71e38613fc9c161829eb52629c9ab915de1f23f311c0c9c49e748",
+      "encoding": "gzip-lossless",
+      "bytes": 1465
+    },
+    {
+      "source": "scratch/model-route-73739eaf6fd8f0e4-directenemy-root-review-v4.json",
+      "sourceSha256": "0e2196a01fd16936b4cb9f47de75386549c20c8b52c4da99ea587d8aeb4a7343",
+      "archive": "metadata/scratch/model-route-73739eaf6fd8f0e4-directenemy-root-review-v4.json.gz",
+      "archiveSha256": "c6079c46d4dcde999af5e9f8a2045ab9560a29ac949205ba78629f34874dc843",
+      "encoding": "gzip-lossless",
+      "bytes": 11639
+    },
+    {
+      "source": "scratch/model-route-73739eaf6fd8f0e4-directenemy-run-v4-material-verified.json",
+      "sourceSha256": "eb151cc22b172401c9f323ed5af08531a75d35e979efc010d5c3256bbc5d7758",
+      "archive": "metadata/scratch/model-route-73739eaf6fd8f0e4-directenemy-run-v4-material-verified.json.gz",
+      "archiveSha256": "775d2c503de39d4dd6e868de313cf1073c7c40143cd9aaf91e43f87ebec2f6b3",
+      "encoding": "gzip-lossless",
+      "bytes": 11410
+    },
+    {
+      "source": "scratch/model-validation-stage-readiness.json",
+      "sourceSha256": "502e27dec7801f737f8fc5379d9650890622be2a4d1c6137120dbef0448d8b00",
+      "archive": "metadata/scratch/model-validation-stage-readiness.json.gz",
+      "archiveSha256": "029aba7c3c0706ef408a67d9939b005fcfb7180fc23860fea74a4547b3bcd740",
+      "encoding": "gzip-lossless",
+      "bytes": 172067
+    },
+    {
+      "source": "tools/ai-model-pipeline/archive_model_validation_case.py",
+      "sourceSha256": "a3c9223e93c190cc9502b18a6a26b60e445363def56a17996a47fd8f14c6154c",
+      "archive": "metadata/tools/ai-model-pipeline/archive_model_validation_case.py.gz",
+      "archiveSha256": "88ab99aff20d07dc424f0bb8ebd603bcc605ad086e1e96f9c34b5f235d09f629",
+      "encoding": "gzip-lossless",
+      "bytes": 30096
+    }
+  ],
+  "archivePlan": {
+    "path": "art-experiments/vesper-eye/live-validation-v4-plan.json",
+    "sha256": "c23a6d69ba1a2d1488cb3b98fdb7b3e7b5d573cd688d6c89cf6ec06a07a644fb",
+    "bytes": 3874
+  },
+  "caseResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-3fd48ee1fc6648a1bea21100b1fc9712/case-result.json",
+    "sha256": "cc3f73d99f9bf5f747555e4bb797f44d403c46c75ac0d5ee0a9203bd57dd60ee",
+    "bytes": 351654
+  },
+  "visualReviewSource": {
+    "path": "scratch/model-route-73739eaf6fd8f0e4-directenemy-root-review-v4.json",
+    "sha256": "0e2196a01fd16936b4cb9f47de75386549c20c8b52c4da99ea587d8aeb4a7343",
+    "bytes": 11639
+  },
+  "runtimeProfile": {
+    "path": "art-experiments/vesper-eye/runtime-profile.json",
+    "sha256": "29fff38a9fb57f571fe197d53f981b7fc036591a0735b6891f1ed8fb279c9f8d",
+    "bytes": 661
+  },
+  "runnerRecord": {
+    "path": "scratch/model-route-73739eaf6fd8f0e4-directenemy-run-v4-material-verified.json",
+    "sha256": "eb151cc22b172401c9f323ed5af08531a75d35e979efc010d5c3256bbc5d7758",
+    "bytes": 11410
+  },
+  "executionQueue": {
+    "path": "docs/model-validation-execution-queue.json",
+    "sha256": "ef6a90315369ba37af87e82cf4f64c667c5895f7d298e7f9848dc3fd56ecc3e1",
+    "bytes": 131647
+  },
+  "stageReadiness": {
+    "path": "scratch/model-validation-stage-readiness.json",
+    "sha256": "502e27dec7801f737f8fc5379d9650890622be2a4d1c6137120dbef0448d8b00",
+    "bytes": 172067
+  },
+  "stageBindingResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/result.json",
+    "sha256": "67ebb5cd30cfecdecd1e31cbca2d11b35ef8ad4e61ff0315cb2c6eb5f39fec94",
+    "bytes": 6176
+  },
+  "stageBindingJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/journal.jsonl",
+    "sha256": "65d2b7fb44b33c502555c9fee10252c9f05b141e105436bd9f06ff3189d204c4",
+    "bytes": 826470
+  },
+  "profileDocumentSha256": "29fff38a9fb57f571fe197d53f981b7fc036591a0735b6891f1ed8fb279c9f8d"
+}

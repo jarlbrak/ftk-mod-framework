@@ -64,7 +64,21 @@ namespace FTKModFramework.Core
         /// <paramref name="runtimeBones"/> by index).</param>
         internal static Mesh LoadSkinnedGlb(string glbFileName, Transform[] runtimeBones, Matrix4x4[] runtimeBindposes)
         {
+            return LoadSkinnedGlb(glbFileName, runtimeBones, runtimeBindposes, false);
+        }
+
+        /// <summary>Strict mode serves explicit renderer sets; legacy callers keep permissive remapping.</summary>
+        internal static Mesh LoadSkinnedGlb(string glbFileName, Transform[] runtimeBones,
+            Matrix4x4[] runtimeBindposes, bool strict)
+        {
+            return LoadSkinnedGlb(glbFileName, runtimeBones, runtimeBindposes, strict, null);
+        }
+
+        internal static Mesh LoadSkinnedGlb(string glbFileName, Transform[] runtimeBones,
+            Matrix4x4[] runtimeBindposes, bool strict, int[] primitiveToSlot)
+        {
             string path = null;
+            Mesh allocatedMesh = null;
             try
             {
                 if (string.IsNullOrEmpty(glbFileName))
@@ -150,14 +164,35 @@ namespace FTKModFramework.Core
                     return null;
                 }
 
+                int[][] submeshes = null;
+                if (primitiveToSlot != null)
+                {
+                    if (!strict) throw new FormatException("Multiple primitives require strict mode");
+                    submeshes = doc.ReadMappedPrimitives(primitiveToSlot, posAcc, normAcc, uvAcc, jointsAcc, weightsAcc);
+                    List<int> all = new List<int>();
+                    foreach (int[] submesh in submeshes) all.AddRange(submesh);
+                    triangles = all.ToArray();
+                }
                 int vCount = positions.Length;
+                if (strict)
+                {
+                    doc.ValidateStrictPrimitive(posAcc, normAcc, uvAcc, jointsAcc, weightsAcc, indicesAcc, primitiveToSlot == null ? 1 : primitiveToSlot.Length);
+                    if (normAcc >= 0 && normals == null || uvAcc >= 0 && uvs == null)
+                        throw new FormatException("Optional normal/UV accessor failed to decode");
+                }
 
                 // 5) Build the live bone NAME -> runtime index map (smr.bones[i].name -> i).
                 Dictionary<string, int> nameToRuntimeIndex = new Dictionary<string, int>(StringComparer.Ordinal);
                 for (int i = 0; i < runtimeBones.Length; i++)
                 {
                     Transform b = runtimeBones[i];
-                    if (b == null || b.name == null) continue;
+                    if (b == null || string.IsNullOrEmpty(b.name))
+                    {
+                        if (strict) throw new FormatException("Live skeleton has a null or unnamed bone");
+                        continue;
+                    }
+                    if (strict && nameToRuntimeIndex.ContainsKey(b.name))
+                        throw new FormatException("Duplicate live bone name: " + b.name);
                     if (!nameToRuntimeIndex.ContainsKey(b.name)) nameToRuntimeIndex[b.name] = i;
                 }
 
@@ -173,6 +208,9 @@ namespace FTKModFramework.Core
                     else { slotToRuntime[s] = -1; droppedSlots++; }
                 }
 
+                if (primitiveToSlot != null && (jointBoneNames.Length != runtimeBones.Length || droppedSlots != 0))
+                    throw new FormatException("Multi-material skin must retain the full exact target palette");
+
                 // 6) Remap each vertex's 4 (slot, weight) influences onto live bone indices; drop unmatched ones;
                 //    renormalize the kept weights to sum to 1 (all-dropped -> weight 1.0 on bone 0).
                 BoneWeight[] boneWeights = BuildBoneWeights(vCount, joints, weights, slotToRuntime);
@@ -184,6 +222,8 @@ namespace FTKModFramework.Core
                 //     DIFFERENT mesh's vertices) scatters the vertices, hence the exploded triangle cloud.
                 //     Fallback per-slot to runtimeBindposes; whole-array fallback if the glb has no IBM accessor.
                 Matrix4x4[] glbIBM = doc.ReadInverseBindMatrices(); // indexed by glb joint slot; null if absent
+                if (strict) ValidateStrictSkin(positions, normals, uvs, triangles, joints, weights,
+                    jointBoneNames, slotToRuntime, glbIBM, runtimeBindposes);
                 Matrix4x4[] bindposes;
                 bool usedGlbIbm;
                 if (glbIBM != null && glbIBM.Length > 0)
@@ -217,6 +257,7 @@ namespace FTKModFramework.Core
                 //    UV V is flipped. Bindposes come from the glb's OWN inverseBindMatrices (name-remapped to runtime
                 //    order), falling back to the LIVE troll bindposes per-slot / wholesale.
                 Mesh mesh = new Mesh();
+                allocatedMesh = mesh;
                 mesh.name = "ftkmf_glb_" + glbFileName;
                 mesh.vertices = positions;                 // set vertices first
                 if (normals != null && normals.Length == vCount) mesh.normals = normals;
@@ -225,7 +266,12 @@ namespace FTKModFramework.Core
                     for (int i = 0; i < uvs.Length; i++) uvs[i].y = 1f - uvs[i].y; // V flip
                     mesh.uv = uvs;
                 }
-                mesh.triangles = triangles;                // then triangles (16-bit indices; never touch indexFormat)
+                if (submeshes == null) mesh.triangles = triangles;
+                else
+                {
+                    mesh.subMeshCount = submeshes.Length;
+                    for (int slot = 0; slot < submeshes.Length; slot++) mesh.SetTriangles(submeshes[slot], slot);
+                }
                 mesh.boneWeights = boneWeights;
                 mesh.bindposes = bindposes;                // glb IBM (name-remapped) or live-bindpose fallback
                 if (normals == null || normals.Length != vCount) mesh.RecalculateNormals();
@@ -241,9 +287,180 @@ namespace FTKModFramework.Core
             }
             catch (Exception e)
             {
+                if (allocatedMesh != null) UnityEngine.Object.Destroy(allocatedMesh);
                 Plugin.Log.LogWarning("[gltf] LoadSkinnedGlb: failed to load '" +
                     (path != null ? path : glbFileName) + "': " + e.Message);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Build a rigid runtime mesh from a strict static GLB. Static GLBs have one triangle primitive and no
+        /// skin, JOINTS_0, or WEIGHTS_0 attributes. Their positions are in the selected MeshFilter transform's
+        /// local space, so a parent animation may move the whole object without a skinning palette.
+        /// </summary>
+        internal static Mesh LoadStaticGlb(string glbFileName, bool strict)
+        {
+            string path = null;
+            Mesh allocatedMesh = null;
+            try
+            {
+                if (string.IsNullOrEmpty(glbFileName))
+                {
+                    Plugin.Log.LogWarning("[gltf] LoadStaticGlb: glbFileName is null/empty; skipped.");
+                    return null;
+                }
+                path = CustomModelLoader.ResolveModelPath(glbFileName);
+                if (!File.Exists(path))
+                {
+                    Plugin.Log.LogWarning("[gltf] LoadStaticGlb: file not found at '" + path +
+                        "'. Ship it at FTKModFramework_content/models/" + glbFileName + ".");
+                    return null;
+                }
+
+                string json;
+                byte[] bin;
+                if (!SplitGlb(File.ReadAllBytes(path), out json, out bin))
+                {
+                    Plugin.Log.LogWarning("[gltf] LoadStaticGlb: '" + glbFileName +
+                        "' is not a valid GLB (bad magic / version / chunks).");
+                    return null;
+                }
+                JObj root = JsonParser.Parse(json) as JObj;
+                if (root == null)
+                {
+                    Plugin.Log.LogWarning("[gltf] LoadStaticGlb: '" + glbFileName + "' JSON root is not an object.");
+                    return null;
+                }
+                GltfDoc doc = new GltfDoc(root, bin);
+                int posAcc, normAcc, uvAcc, indicesAcc;
+                if (!doc.ReadStaticPrimitive(out posAcc, out normAcc, out uvAcc, out indicesAcc))
+                {
+                    Plugin.Log.LogWarning("[gltf] LoadStaticGlb: '" + glbFileName +
+                        "' has no usable meshes[0].primitives[0] (POSITION and indices required).");
+                    return null;
+                }
+                Vector3[] positions = doc.ReadVec3(posAcc);
+                Vector3[] normals = normAcc >= 0 ? doc.ReadVec3(normAcc) : null;
+                Vector2[] uvs = uvAcc >= 0 ? doc.ReadVec2(uvAcc) : null;
+                int[] triangles = doc.ReadScalarIndices(indicesAcc);
+                if (positions == null || triangles == null)
+                {
+                    Plugin.Log.LogWarning("[gltf] LoadStaticGlb: '" + glbFileName +
+                        "' accessor decode failed (positions or indices null).");
+                    return null;
+                }
+                if (strict)
+                {
+                    doc.ValidateStrictStaticPrimitive(posAcc, normAcc, uvAcc, indicesAcc);
+                    if (normAcc >= 0 && normals == null || uvAcc >= 0 && uvs == null)
+                        throw new FormatException("Optional normal/UV accessor failed to decode");
+                    ValidateStrictStaticMesh(positions, normals, uvs, triangles);
+                }
+
+                Mesh mesh = new Mesh();
+                allocatedMesh = mesh;
+                mesh.name = "ftkmf_static_glb_" + glbFileName;
+                mesh.vertices = positions;
+                if (normals != null && normals.Length == positions.Length) mesh.normals = normals;
+                if (uvs != null && uvs.Length == positions.Length)
+                {
+                    for (int i = 0; i < uvs.Length; i++) uvs[i].y = 1f - uvs[i].y;
+                    mesh.uv = uvs;
+                }
+                mesh.triangles = triangles;
+                if (normals == null || normals.Length != positions.Length) mesh.RecalculateNormals();
+                mesh.RecalculateBounds();
+                Plugin.Log.LogInfo("[gltf] LoadStaticGlb: built '" + glbFileName + "' (" + positions.Length +
+                    " verts, " + triangles.Length / 3 + " tris; 16-bit indices; static local space).");
+                return mesh;
+            }
+            catch (Exception e)
+            {
+                if (allocatedMesh != null) UnityEngine.Object.Destroy(allocatedMesh);
+                Plugin.Log.LogWarning("[gltf] LoadStaticGlb: failed to load '" +
+                    (path != null ? path : glbFileName) + "': " + e.Message);
+                return null;
+            }
+        }
+
+        private static bool Finite(float value) { return !float.IsNaN(value) && !float.IsInfinity(value); }
+
+        private static void ValidateStrictStaticMesh(Vector3[] positions, Vector3[] normals, Vector2[] uvs,
+            int[] triangles)
+        {
+            int count = positions.Length;
+            if (count < 1 || count >= 65535) throw new FormatException("Invalid static vertex count");
+            if (normals != null && normals.Length != count || uvs != null && uvs.Length != count)
+                throw new FormatException("Static normal/UV count differs from vertex count");
+            if (triangles.Length == 0 || triangles.Length % 3 != 0)
+                throw new FormatException("Invalid static triangle count");
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 p = positions[i];
+                if (!Finite(p.x) || !Finite(p.y) || !Finite(p.z)) throw new FormatException("Nonfinite static position");
+                if (normals != null && (!Finite(normals[i].x) || !Finite(normals[i].y) || !Finite(normals[i].z)))
+                    throw new FormatException("Nonfinite static normal");
+                if (uvs != null && (!Finite(uvs[i].x) || !Finite(uvs[i].y)))
+                    throw new FormatException("Nonfinite static UV");
+            }
+            foreach (int index in triangles) if (index < 0 || index >= count)
+                throw new FormatException("Static triangle index outside vertex range");
+        }
+
+        private static void ValidateStrictSkin(Vector3[] positions, Vector3[] normals, Vector2[] uvs,
+            int[] triangles, ushort[] joints, float[] weights, string[] names, int[] remap,
+            Matrix4x4[] bindposes, Matrix4x4[] runtimeBindposes)
+        {
+            int count = positions.Length;
+            if (count < 1 || count >= 65535 || joints.Length != count * 4 || weights.Length != count * 4)
+                throw new FormatException("Invalid vertex count or skin accessor lengths");
+            if (normals != null && normals.Length != count || uvs != null && uvs.Length != count)
+                throw new FormatException("Normal/UV count differs from vertex count");
+            if (triangles.Length == 0 || triangles.Length % 3 != 0)
+                throw new FormatException("Invalid triangle count");
+            foreach (int index in triangles) if (index < 0 || index >= count)
+                throw new FormatException("Triangle index outside vertex range");
+            if (bindposes == null || bindposes.Length != names.Length)
+                throw new FormatException("Strict GLB requires one inverse bind matrix per joint slot");
+            Dictionary<string, bool> unique = new Dictionary<string, bool>(StringComparer.Ordinal);
+            for (int slot = 0; slot < names.Length; slot++)
+            {
+                if (string.IsNullOrEmpty(names[slot]) || unique.ContainsKey(names[slot]))
+                    throw new FormatException("Missing or duplicate GLB bone name: " + names[slot]);
+                unique.Add(names[slot], true);
+                for (int k = 0; k < 16; k++)
+                {
+                    float value = bindposes[slot][k];
+                    if (!Finite(value)) throw new FormatException("Nonfinite inverse bind matrix");
+                    if (remap[slot] >= 0)
+                    {
+                        float native = runtimeBindposes[remap[slot]][k];
+                        float tolerance = 0.0001f * Math.Max(1f, Math.Abs(native));
+                        if (!Finite(native) || Math.Abs(value - native) > tolerance)
+                            throw new FormatException("Inverse bind matrix differs from target renderer: " + names[slot]);
+                    }
+                }
+            }
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 p = positions[i];
+                if (!Finite(p.x) || !Finite(p.y) || !Finite(p.z)) throw new FormatException("Nonfinite position");
+                if (normals != null && (!Finite(normals[i].x) || !Finite(normals[i].y) || !Finite(normals[i].z)))
+                    throw new FormatException("Nonfinite normal");
+                if (uvs != null && (!Finite(uvs[i].x) || !Finite(uvs[i].y))) throw new FormatException("Nonfinite UV");
+                float total = 0f;
+                for (int w = 0; w < 4; w++)
+                {
+                    int k = i * 4 + w;
+                    if (!Finite(weights[k]) || weights[k] < 0f || joints[k] >= names.Length)
+                        throw new FormatException("Invalid vertex influence");
+                    if (weights[k] > 0f && remap[joints[k]] < 0)
+                        throw new FormatException("Weighted GLB bone missing on target: " + names[joints[k]]);
+                    total += weights[k];
+                }
+                if (!Finite(total) || Math.Abs(total - 1f) > 0.001f)
+                    throw new FormatException("Vertex weights must sum to one");
             }
         }
 
@@ -498,6 +715,26 @@ namespace FTKModFramework.Core
                 return pos >= 0 && joints >= 0 && weights >= 0 && indices >= 0;
             }
 
+            /// <summary>Read the single rigid primitive accessors. Static loading deliberately has no skin attributes.</summary>
+            internal bool ReadStaticPrimitive(out int pos, out int norm, out int uv, out int indices)
+            {
+                pos = norm = uv = indices = -1;
+                if (_meshes == null || _meshes.Count == 0) return false;
+                JObj mesh0 = _meshes.GetObj(0);
+                if (mesh0 == null) return false;
+                JArr prims = mesh0.GetArr("primitives");
+                if (prims == null || prims.Count == 0) return false;
+                JObj prim0 = prims.GetObj(0);
+                if (prim0 == null) return false;
+                JObj attrs = prim0.GetObj("attributes");
+                if (attrs == null) return false;
+                pos = attrs.GetInt("POSITION", -1);
+                norm = attrs.GetInt("NORMAL", -1);
+                uv = attrs.GetInt("TEXCOORD_0", -1);
+                indices = prim0.GetInt("indices", -1);
+                return pos >= 0 && indices >= 0;
+            }
+
             /// <summary>For each skins[0].joints[k] node index, return nodes[idx].name. The returned array is indexed
             /// by the per-vertex JOINTS_0 slot (0..joints-1).</summary>
             internal string[] ReadSkinJointNames()
@@ -551,6 +788,94 @@ namespace FTKModFramework.Core
                     r[i] = mtx;
                 }
                 return r;
+            }
+
+            internal int[][] ReadMappedPrimitives(int[] map, int pos, int norm, int uv, int joints, int weights)
+            {
+                if (map.Length < 2 || map.Length > 4 || _meshes == null || _meshes.Count != 1 ||
+                    _skins == null || _skins.Count != 1 || norm < 0 || uv < 0)
+                    throw new FormatException("Multi-material GLB requires 2..4 primitives, one mesh/skin and complete shared attributes");
+                JArr primitives = _meshes.GetObj(0).GetArr("primitives");
+                JArr materials = _root.GetArr("materials");
+                if (primitives == null || primitives.Count != map.Length || materials == null || materials.Count != map.Length)
+                    throw new FormatException("Primitive/material mapping count mismatch");
+                int[][] result = new int[map.Length][];
+                Dictionary<int, bool> indexAccessors = new Dictionary<int, bool>();
+                for (int i = 0; i < map.Length; i++)
+                {
+                    if (map[i] < 0 || map[i] >= map.Length || result[map[i]] != null)
+                        throw new FormatException("Primitive mapping must bijectively cover native slots");
+                    JObj p = primitives.GetObj(i);
+                    JObj a = p == null ? null : p.GetObj("attributes");
+                    if (a == null || p.GetInt("material", -1) != i || p.GetInt("mode", 4) != 4 || p.GetArr("targets") != null ||
+                        a.GetInt("POSITION", -1) != pos || a.GetInt("NORMAL", -1) != norm || a.GetInt("TEXCOORD_0", -1) != uv ||
+                        a.GetInt("JOINTS_0", -1) != joints || a.GetInt("WEIGHTS_0", -1) != weights)
+                        throw new FormatException("Primitives require identical shared attributes, triangle mode and ordered material IDs");
+                    int index = p.GetInt("indices", -1);
+                    if (indexAccessors.ContainsKey(index)) throw new FormatException("Primitives must have distinct index accessors");
+                    indexAccessors.Add(index, true);
+                    ValidateStrictAccessor(index, "SCALAR", CompUint16, 2);
+                    int[] triangles = ReadScalarIndices(index);
+                    if (triangles == null || triangles.Length == 0 || triangles.Length % 3 != 0)
+                        throw new FormatException("Each primitive requires nonempty triangles");
+                    result[map[i]] = triangles;
+                }
+                return result;
+            }
+
+            internal void ValidateStrictPrimitive(int pos, int norm, int uv, int joints, int weights, int indices, int primitiveCount = 1)
+            {
+                if (_meshes.Count != 1 || _meshes.GetObj(0).GetArr("primitives").Count != primitiveCount || _skins.Count != 1)
+                    throw new FormatException("Strict GLB requires one mesh primitive and one skin");
+                if (_meshes.GetObj(0).GetArr("primitives").GetObj(0).GetInt("mode", 4) != 4)
+                    throw new FormatException("Strict GLB requires triangle topology");
+                ValidateStrictAccessor(pos, "VEC3", CompFloat32, 12);
+                if (norm >= 0) ValidateStrictAccessor(norm, "VEC3", CompFloat32, 12);
+                if (uv >= 0) ValidateStrictAccessor(uv, "VEC2", CompFloat32, 8);
+                ValidateStrictAccessor(joints, "VEC4", CompUint16, 8);
+                ValidateStrictAccessor(weights, "VEC4", CompFloat32, 16);
+                JObj index = _accessors.GetObj(indices);
+                int component = index.GetInt("componentType", -1);
+                if (component != CompUint16 && component != CompUint32) throw new FormatException("Invalid index component type");
+                ValidateStrictAccessor(indices, "SCALAR", component, component == CompUint16 ? 2 : 4);
+                JObj skin = _skins.GetObj(0);
+                ValidateStrictAccessor(skin.GetInt("inverseBindMatrices", -1), "MAT4", CompFloat32, 64);
+            }
+
+            internal void ValidateStrictStaticPrimitive(int pos, int norm, int uv, int indices)
+            {
+                if (_meshes == null || _meshes.Count != 1 || _skins != null && _skins.Count != 0)
+                    throw new FormatException("Strict static GLB requires one mesh and no skins");
+                JObj mesh = _meshes.GetObj(0);
+                JArr primitives = mesh == null ? null : mesh.GetArr("primitives");
+                JObj primitive = primitives == null || primitives.Count != 1 ? null : primitives.GetObj(0);
+                JObj attributes = primitive == null ? null : primitive.GetObj("attributes");
+                if (primitive == null || attributes == null || primitive.GetInt("mode", 4) != 4 ||
+                    attributes.GetInt("JOINTS_0", -1) >= 0 || attributes.GetInt("WEIGHTS_0", -1) >= 0)
+                    throw new FormatException("Strict static GLB requires one unskinned triangle primitive");
+                ValidateStrictAccessor(pos, "VEC3", CompFloat32, 12);
+                if (norm >= 0) ValidateStrictAccessor(norm, "VEC3", CompFloat32, 12);
+                if (uv >= 0) ValidateStrictAccessor(uv, "VEC2", CompFloat32, 8);
+                JObj index = _accessors == null ? null : _accessors.GetObj(indices);
+                int component = index == null ? -1 : index.GetInt("componentType", -1);
+                if (component != CompUint16 && component != CompUint32)
+                    throw new FormatException("Invalid static index component type");
+                ValidateStrictAccessor(indices, "SCALAR", component, component == CompUint16 ? 2 : 4);
+            }
+
+            private void ValidateStrictAccessor(int index, string kind, int component, int stride)
+            {
+                JObj a = _accessors.GetObj(index);
+                if (a == null || a.GetObj("sparse") != null || a.GetString("type", null) != kind || a.GetInt("componentType", -1) != component)
+                    throw new FormatException("Invalid strict accessor type");
+                JObj view = _bufferViews.GetObj(a.GetInt("bufferView", -1));
+                if (view == null || view.GetInt("buffer", -1) != 0 || view.GetInt("byteStride", -1) != -1)
+                    throw new FormatException("Strict accessors require packed buffer 0 views");
+                int offset = a.GetInt("byteOffset", 0), start = view.GetInt("byteOffset", 0);
+                int count = a.GetInt("count", 0), length = view.GetInt("byteLength", -1);
+                if (offset < 0 || start < 0 || count <= 0 || (long)offset + (long)count * stride > length ||
+                    (long)start + length > _bin.Length)
+                    throw new FormatException("Strict accessor exceeds its buffer view");
             }
 
             // ---- accessor decode (tightly packed; one bufferView each; no byteStride) ----

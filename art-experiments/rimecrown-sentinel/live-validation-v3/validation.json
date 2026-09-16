@@ -1,0 +1,303 @@
+{
+  "status": "fresh_catalog_411_scale_correction_binding_motion_and_gameplay_observed",
+  "session": "35ba69223a7c4ee1a20c781289b181e4",
+  "enemy": "ftkmf_modeltest_rimecrown",
+  "nativeChassis": "snowmanB",
+  "rendererPaths": [
+    "SnowMan_Geo/enSnowmanHat",
+    "SnowMan_Geo/enSnowmanHead",
+    "SnowMan_Geo/enSnowmanBase",
+    "SnowMan_Geo/enSnowmanScarf",
+    "SnowMan_Geo/enSnowmanmiddleBody"
+  ],
+  "visualScale": 0.75,
+  "captures": [
+    {
+      "label": "pass",
+      "captureId": "d39f564238244b5987e33a5ce1679554",
+      "frames": 120,
+      "rawSha256": "8788508359358df7015686132a7bbf80a0c2c739fe938ec721ee058578b846d5"
+    },
+    {
+      "label": "attack",
+      "captureId": "732e6ed9d3244dcf89813bca13158116",
+      "frames": 120,
+      "rawSha256": "44c3c27b6319cf2d104fd1b2eb476dabb0a59b100c7001e6d3a2defb7078935c"
+    },
+    {
+      "label": "kill-fixture",
+      "captureId": "492db27b423045d4a61a0319642679bc",
+      "frames": 120,
+      "rawSha256": "93e8ef90a11ba1a0feede742c91a58488fd9f74a09f75618b76fbca2ef40b248"
+    }
+  ],
+  "ordinaryHit": {
+    "beforeHp": 58,
+    "afterHp": 50,
+    "cheat": "None",
+    "focus": false
+  },
+  "ordinaryLethal": false,
+  "explicitKillFixture": true,
+  "nativeCollects": 2,
+  "finalReady": {
+    "level": 0,
+    "room": 2
+  },
+  "selectedPNGs": [
+    {
+      "source": "scratch/mirewarden-game/model-test-output/d39f564238244b5987e33a5ce1679554/0012.png",
+      "archive": "selected/d39f564238244b5987e33a5ce1679554/0012.png",
+      "sha256": "5728c8a21b2c6e9c63bead178856f8822f4a8c353d5c41f97ad525e7b7a8aef8",
+      "action": "pass",
+      "index": 12,
+      "observation": "Five-part snowman body, crown, scarf and articulated hands are visible and fully inside the combat frame; native health portrait is coherent."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/d39f564238244b5987e33a5ce1679554/0024.png",
+      "archive": "selected/d39f564238244b5987e33a5ce1679554/0024.png",
+      "sha256": "e14f114446231e366a28b06bce9870094c10584d9d4890e9d7fbabf640a9fcd2",
+      "action": "pass",
+      "index": 24,
+      "observation": "Idle/turn pose remains inside the corrected camera envelope; scarf and hand parts stay connected under native effects."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/732e6ed9d3244dcf89813bca13158116/0006.png",
+      "archive": "selected/732e6ed9d3244dcf89813bca13158116/0006.png",
+      "sha256": "a660ad60be7b229f7aed65294f269014e59741c770b023c635ed5320efbb2d44",
+      "action": "attack",
+      "index": 6,
+      "observation": "Native attack frame keeps crown and body on screen; incoming frost effect and hero occlude the lower foreground."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/732e6ed9d3244dcf89813bca13158116/0012.png",
+      "archive": "selected/732e6ed9d3244dcf89813bca13158116/0012.png",
+      "sha256": "9d529fc20db297d94b4019a7c4287d101786c1ca6eccba79348f34bb87aac0c3",
+      "action": "attack",
+      "index": 12,
+      "observation": "Attack effect is active while the complete upper body remains framed; no obvious new stretch or camera crop is visible."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/492db27b423045d4a61a0319642679bc/0040.png",
+      "archive": "selected/492db27b423045d4a61a0319642679bc/0040.png",
+      "sha256": "61dd703689c733bdd989a7d7c6e22af9ebde66105626269a01e328cf12621d76",
+      "action": "kill-fixture",
+      "index": 40,
+      "observation": "Explicit fixture death produces the native smoke and a falling/disassembling upper section; effects obscure fine surface detail."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/492db27b423045d4a61a0319642679bc/0060.png",
+      "archive": "selected/492db27b423045d4a61a0319642679bc/0060.png",
+      "sha256": "17b7c59215e2db8d7a0fac7b5d67fe656a8c5badea8f791fa29427307d8a7737",
+      "action": "kill-fixture",
+      "index": 60,
+      "observation": "Native Root_M-weighted base remains on the floor while upper pieces and scarf are displaced; this matches the authored/native base weighting and is not treated as a defect from this frame alone."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/492db27b423045d4a61a0319642679bc/0119.png",
+      "archive": "selected/492db27b423045d4a61a0319642679bc/0119.png",
+      "sha256": "8c66c0e6345ab81d7514ce01ec2f3826db9a756cb5e931f86e50d0b20bd26b59",
+      "action": "kill-fixture",
+      "index": 119,
+      "observation": "Loot panel is active after the native death sequence; the frame confirms gameplay progression, not corpse-surface detail."
+    }
+  ],
+  "videos": [
+    {
+      "label": "pass",
+      "captureId": "d39f564238244b5987e33a5ce1679554",
+      "path": "pass.mp4",
+      "sha256": "86cd2b8b55ba8819b2f3d900185b18a3dd45f44454c18e6d87a175cd1c7a47dc",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing"
+    },
+    {
+      "label": "attack",
+      "captureId": "732e6ed9d3244dcf89813bca13158116",
+      "path": "attack.mp4",
+      "sha256": "66edd17b5a96cfb395d46c9db0549fd44d840992cd4a3cf482b4934bd3f0f532",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing"
+    },
+    {
+      "label": "kill-fixture",
+      "captureId": "492db27b423045d4a61a0319642679bc",
+      "path": "kill-fixture.mp4",
+      "sha256": "eb01183bf7e27f2e75010105f7caf74eaf334b2fb53b0e11b3008c5872dae86f",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing"
+    }
+  ],
+  "sourceImageCount": 360,
+  "sourceImagePins": "source-image-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/rimecrown-sentinel/manifest.json",
+      "sourceSha256": "f3be9b23c5ac59b36ced392f287b17bf777d5475e9e3268ed95ccb512b2d9ed2",
+      "archive": "metadata/art-experiments/rimecrown-sentinel/manifest.json.gz",
+      "archiveSha256": "8ada57e18d24aeae316866040d143d93be04b68e7bf5314b93b0d3e99946dd97",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/rimecrown-sentinel/native-material-metadata.json",
+      "sourceSha256": "2826d19cac3ecdcdfda6d91cb05d3f51a48aad80cab1220116e67b332cd01e6d",
+      "archive": "metadata/art-experiments/rimecrown-sentinel/native-material-metadata.json.gz",
+      "archiveSha256": "fcb0b47d0b09f690d633c17c1c24e88d20bc8865c9c6aa488e4a73261e3b6d19",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/rimecrown-sentinel/runtime-profile.json",
+      "sourceSha256": "ab38c770f95e0d7c009681d3f8879843edf68476c1b62e8a1a6f6165ff4d9212",
+      "archive": "metadata/art-experiments/rimecrown-sentinel/runtime-profile.json.gz",
+      "archiveSha256": "dc1ba78ac48cad4da0a47312df9cb157e1901dc408fd2d8c79c37d9538d4f627",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/492db27b423045d4a61a0319642679bc.json",
+      "sourceSha256": "93e8ef90a11ba1a0feede742c91a58488fd9f74a09f75618b76fbca2ef40b248",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/492db27b423045d4a61a0319642679bc.json.gz",
+      "archiveSha256": "3b97fdcb11e85a8623470bab8d333716e13d9e0a088b4abc0ea0a495decf608e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/732e6ed9d3244dcf89813bca13158116.json",
+      "sourceSha256": "44c3c27b6319cf2d104fd1b2eb476dabb0a59b100c7001e6d3a2defb7078935c",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/732e6ed9d3244dcf89813bca13158116.json.gz",
+      "archiveSha256": "d1b5468a6627fe5e6922251a4ce4ae9b2d48ca449b79fd6d30f3f1a6bc314abd",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0eb76cc564ee4f7db9676b740989ab92/case-result.json",
+      "sourceSha256": "668ee025731a524eb22be4c8a8f754507c945401b8d2d71fa1acf9ecc56580b1",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0eb76cc564ee4f7db9676b740989ab92/case-result.json.gz",
+      "archiveSha256": "638f660aea60eb9e7211a2c0b334143853c85d5306228c23b83aee1c99a1164f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-cac8a0d72da343649baaeac71d431a81/journal.jsonl",
+      "sourceSha256": "9bcbbfcc46361b3505510e860758c2313ce411cc99aad24314fbedf6f0f4874e",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-cac8a0d72da343649baaeac71d431a81/journal.jsonl.gz",
+      "archiveSha256": "051013794d2f54fab00b682646d5d7d74bcac9918f381e7943985255a6629b6b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-cac8a0d72da343649baaeac71d431a81/result.json",
+      "sourceSha256": "c5fec907304af90438540786acacdad226d7e83f46a93f89e1e3670e4a8eab9b",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-cac8a0d72da343649baaeac71d431a81/result.json.gz",
+      "archiveSha256": "650d2a344ebc62c1913a2687c9ac82d27e3317396390a13ce0cd344d5cdbe90b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-d9d376a88df6407c9a615c050b2b8ab8/journal.jsonl",
+      "sourceSha256": "0ba5c9331c652f9ad37c6478ea9eb4946a0ef014f586acd22adf32140fa756cf",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-d9d376a88df6407c9a615c050b2b8ab8/journal.jsonl.gz",
+      "archiveSha256": "427e125c1c8f3b2b7a10a13172ade233f7b631e87193ad62322ab69a8b63cab8",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-d9d376a88df6407c9a615c050b2b8ab8/result.json",
+      "sourceSha256": "977244bfbcd59452f40d2250718db95b53f3c498472862022e3a46c3d1d7f396",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-d9d376a88df6407c9a615c050b2b8ab8/result.json.gz",
+      "archiveSha256": "558008ffce710a0f42693058ee8921a2c85c978d2d2097d9a674bf58f87e10ce",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ffe9aa759b3e497191762a51fc2f4153/journal.jsonl",
+      "sourceSha256": "64876368bf62ab3bee05835af35b9875a1559484fa6a2e1c90ec26663eaa2735",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ffe9aa759b3e497191762a51fc2f4153/journal.jsonl.gz",
+      "archiveSha256": "0605cb370809ea2060997f0e482eab003d6769cff694ac858c320d0eec4160e3",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ffe9aa759b3e497191762a51fc2f4153/result.json",
+      "sourceSha256": "ecb82bdc96ebc750192fb3c2e1a96d69c3c970c49de2efc511bb2698958cc3a3",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ffe9aa759b3e497191762a51fc2f4153/result.json.gz",
+      "archiveSha256": "5e9f627e50158d3664cce593ce166b232df9f508d825fea249a4376c29c6199b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/d39f564238244b5987e33a5ce1679554.json",
+      "sourceSha256": "8788508359358df7015686132a7bbf80a0c2c739fe938ec721ee058578b846d5",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/d39f564238244b5987e33a5ce1679554.json.gz",
+      "archiveSha256": "3ca943efe8fa6b757850f10ec495374c3e5b302790ba575c5dde7adb9389680a",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/exercise-claim-d306188506c20c8d081366b3605d118de9b4bc9af10ded0ca1bab0c58b87fa63.json",
+      "sourceSha256": "12495c2a9452eba8042380bccdaf6f4accd08398307b13910feb16ff27c4d4c9",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/exercise-claim-d306188506c20c8d081366b3605d118de9b4bc9af10ded0ca1bab0c58b87fa63.json.gz",
+      "archiveSha256": "d543334b1cbb9930ce99d12c889ac1c64c0dd63c1dfbbf89826735ce5aeeb80e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/new-run-session-35ba69223a7c4ee1a20c781289b181e4.json",
+      "sourceSha256": "2019b6666593fff6602994370ea456274a3253d4e5e5cacb2076a8450e131334",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/new-run-session-35ba69223a7c4ee1a20c781289b181e4.json.gz",
+      "archiveSha256": "ff94acb11c3b367776bddabf0981c4710fb6686f158ae12e3c39c9c37e73ab5a",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-profiles.json",
+      "sourceSha256": "f30d96713384e94e97ffca1dca4fc719374eac0e401a98e69ca95eacbb47cc12",
+      "archive": "metadata/scratch/mirewarden-game/model-test-profiles.json.gz",
+      "archiveSha256": "14f217857188e061cab892acdbdeaa168d16c6359ec72c643885e230e450d2cb",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/rimecrown-root-visual-review.json",
+      "sourceSha256": "d9613947d443fd20eb72c31387120f4d1387fbe1f69d930c23cda37fe2a0f6cd",
+      "archive": "metadata/scratch/rimecrown-root-visual-review.json.gz",
+      "archiveSha256": "acb33f3dae047c8194463dc56b1838eb28e0e151cda8ffd782a028f84930102b",
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "rootVisualReview": "scratch/rimecrown-root-visual-review.json",
+  "limits": [
+    "Selected frames do not establish every animation interval or full culling envelope.",
+    "KillSingle is an explicit fixture, not ordinary lethal damage.",
+    "Native Root_M base weighting and upper-part falloff do not establish collision or physics sleeping.",
+    "Material/tint fidelity and final native clone/resource disposal remain separate checks.",
+    "Prototype and selected-frame evidence do not establish finished art for every snowman variant."
+  ],
+  "artifactSha256": {
+    "README.md": "556f2858b056fbd119bcc880f13084d3dc579ddc18a8cd70227d79f4007e9802",
+    "archive.py": "6e2718f6589b59a825a686d43b06ec7ee4faeec91c777fcafc0a76b69bd061fd",
+    "attack.mp4": "66edd17b5a96cfb395d46c9db0549fd44d840992cd4a3cf482b4934bd3f0f532",
+    "kill-fixture.mp4": "eb01183bf7e27f2e75010105f7caf74eaf334b2fb53b0e11b3008c5872dae86f",
+    "metadata/art-experiments/rimecrown-sentinel/manifest.json.gz": "8ada57e18d24aeae316866040d143d93be04b68e7bf5314b93b0d3e99946dd97",
+    "metadata/art-experiments/rimecrown-sentinel/native-material-metadata.json.gz": "fcb0b47d0b09f690d633c17c1c24e88d20bc8865c9c6aa488e4a73261e3b6d19",
+    "metadata/art-experiments/rimecrown-sentinel/runtime-profile.json.gz": "dc1ba78ac48cad4da0a47312df9cb157e1901dc408fd2d8c79c37d9538d4f627",
+    "metadata/scratch/mirewarden-game/model-test-output/492db27b423045d4a61a0319642679bc.json.gz": "3b97fdcb11e85a8623470bab8d333716e13d9e0a088b4abc0ea0a495decf608e",
+    "metadata/scratch/mirewarden-game/model-test-output/732e6ed9d3244dcf89813bca13158116.json.gz": "d1b5468a6627fe5e6922251a4ce4ae9b2d48ca449b79fd6d30f3f1a6bc314abd",
+    "metadata/scratch/mirewarden-game/model-test-output/case-0eb76cc564ee4f7db9676b740989ab92/case-result.json.gz": "638f660aea60eb9e7211a2c0b334143853c85d5306228c23b83aee1c99a1164f",
+    "metadata/scratch/mirewarden-game/model-test-output/case-cac8a0d72da343649baaeac71d431a81/journal.jsonl.gz": "051013794d2f54fab00b682646d5d7d74bcac9918f381e7943985255a6629b6b",
+    "metadata/scratch/mirewarden-game/model-test-output/case-cac8a0d72da343649baaeac71d431a81/result.json.gz": "650d2a344ebc62c1913a2687c9ac82d27e3317396390a13ce0cd344d5cdbe90b",
+    "metadata/scratch/mirewarden-game/model-test-output/case-d9d376a88df6407c9a615c050b2b8ab8/journal.jsonl.gz": "427e125c1c8f3b2b7a10a13172ade233f7b631e87193ad62322ab69a8b63cab8",
+    "metadata/scratch/mirewarden-game/model-test-output/case-d9d376a88df6407c9a615c050b2b8ab8/result.json.gz": "558008ffce710a0f42693058ee8921a2c85c978d2d2097d9a674bf58f87e10ce",
+    "metadata/scratch/mirewarden-game/model-test-output/case-ffe9aa759b3e497191762a51fc2f4153/journal.jsonl.gz": "0605cb370809ea2060997f0e482eab003d6769cff694ac858c320d0eec4160e3",
+    "metadata/scratch/mirewarden-game/model-test-output/case-ffe9aa759b3e497191762a51fc2f4153/result.json.gz": "5e9f627e50158d3664cce593ce166b232df9f508d825fea249a4376c29c6199b",
+    "metadata/scratch/mirewarden-game/model-test-output/d39f564238244b5987e33a5ce1679554.json.gz": "3ca943efe8fa6b757850f10ec495374c3e5b302790ba575c5dde7adb9389680a",
+    "metadata/scratch/mirewarden-game/model-test-output/exercise-claim-d306188506c20c8d081366b3605d118de9b4bc9af10ded0ca1bab0c58b87fa63.json.gz": "d543334b1cbb9930ce99d12c889ac1c64c0dd63c1dfbbf89826735ce5aeeb80e",
+    "metadata/scratch/mirewarden-game/model-test-output/new-run-session-35ba69223a7c4ee1a20c781289b181e4.json.gz": "ff94acb11c3b367776bddabf0981c4710fb6686f158ae12e3c39c9c37e73ab5a",
+    "metadata/scratch/mirewarden-game/model-test-profiles.json.gz": "14f217857188e061cab892acdbdeaa168d16c6359ec72c643885e230e450d2cb",
+    "metadata/scratch/rimecrown-root-visual-review.json.gz": "acb33f3dae047c8194463dc56b1838eb28e0e151cda8ffd782a028f84930102b",
+    "pass.mp4": "86cd2b8b55ba8819b2f3d900185b18a3dd45f44454c18e6d87a175cd1c7a47dc",
+    "selected/492db27b423045d4a61a0319642679bc/0040.png": "61dd703689c733bdd989a7d7c6e22af9ebde66105626269a01e328cf12621d76",
+    "selected/492db27b423045d4a61a0319642679bc/0060.png": "17b7c59215e2db8d7a0fac7b5d67fe656a8c5badea8f791fa29427307d8a7737",
+    "selected/492db27b423045d4a61a0319642679bc/0119.png": "8c66c0e6345ab81d7514ce01ec2f3826db9a756cb5e931f86e50d0b20bd26b59",
+    "selected/732e6ed9d3244dcf89813bca13158116/0006.png": "a660ad60be7b229f7aed65294f269014e59741c770b023c635ed5320efbb2d44",
+    "selected/732e6ed9d3244dcf89813bca13158116/0012.png": "9d529fc20db297d94b4019a7c4287d101786c1ca6eccba79348f34bb87aac0c3",
+    "selected/d39f564238244b5987e33a5ce1679554/0012.png": "5728c8a21b2c6e9c63bead178856f8822f4a8c353d5c41f97ad525e7b7a8aef8",
+    "selected/d39f564238244b5987e33a5ce1679554/0024.png": "e14f114446231e366a28b06bce9870094c10584d9d4890e9d7fbabf640a9fcd2",
+    "source-image-pins.json": "5d2cfe0cd0a89350ddb566e7b8ba676ea10d525454f0bcfc8bab80d0f62f8f92"
+  }
+}

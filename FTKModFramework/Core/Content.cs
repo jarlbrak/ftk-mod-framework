@@ -170,6 +170,31 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>
+        /// Assign original meshes to a registered custom class and one of its resolved skinsets. Exact renderer
+        /// paths are relative to the assembled CharacterEventListener root; "." targets the root itself.
+        /// Applied after native preview/overworld avatar assembly. Combat clones retain the same owned resources.
+        /// No vanilla class or skinset is changed. Returns registration acceptance, not live validation.
+        /// </summary>
+        public static bool SetClassBodyMeshesFromGlb(FTK_playerGameStart classRow, FTK_skinset.ID skinset,
+            params PlayerRendererMesh[] meshes)
+        {
+            return PlayerMeshRegistry.Register(classRow, skinset, meshes);
+        }
+
+        /// <summary>
+        /// Register required body renderers and conditional apparel for one custom class/skinset. All required
+        /// paths must exist. Only an absent conditional path is skipped; a present conditional must uniquely
+        /// match its native mesh name. Required and present conditional meshes share one strict transaction
+        /// and resource lease. Unknown outfits retain native apparel and may be unstyled. Returns registration
+        /// acceptance, not live validation. Input arrays are snapshotted; re-register for future avatars.
+        /// </summary>
+        public static bool SetClassBodyMeshesFromGlb(FTK_playerGameStart classRow, FTK_skinset.ID skinset,
+            PlayerRendererMesh[] requiredBodyMeshes, PlayerApparelMesh[] conditionalApparel)
+        {
+            return PlayerMeshRegistry.Register(classRow, skinset, requiredBodyMeshes, conditionalApparel);
+        }
+
+        /// <summary>
         /// Declare a class-innate PASSIVE trait: bind a named trait to an existing class row, to fire at a
         /// closed <see cref="PassiveTrigger"/> moment (spec #78). Unlike the other Add* helpers this
         /// writes NO FTK_*DB row and mints NO <see cref="IdAllocator"/> id: a passive is behaviour bound to a
@@ -364,7 +389,8 @@ namespace FTKModFramework.Core
         /// </summary>
         /// <param name="enemy">The registered enemy row whose spawned body to recolor/rescale.</param>
         /// <param name="tint">The body tint (applied to each material's "_Color", or its .color if absent).</param>
-        /// <param name="scale">Uniform body scale (1 = unchanged; &gt;1 = larger/hulking).</param>
+        /// <param name="scale">Multiplier of the spawned body's original local scale, preserving each native axis
+        /// (1 = unchanged; &gt;1 = larger/hulking). Repeated application uses the same original baseline.</param>
         public static void SetEnemyVisual(FTK_enemyCombat enemy, Color tint, float scale)
         {
             if (enemy == null)
@@ -466,8 +492,8 @@ namespace FTKModFramework.Core
         /// postfix on <c>EnemyDummy.InitEnemyDummyForCombat</c> that drives the bundle path and the procedural visuals.
         ///
         /// The <c>.glb</c> must be KEYED TO THE VANILLA SKELETON BY BONE NAME: its per-vertex joints index bone names
-        /// that are remapped onto the live <c>smr.bones[]</c>, and the LIVE bindposes are reused (the glb's own
-        /// inverseBindMatrices are ignored), so the vanilla animations deform it correctly. Ship the <c>.glb</c> (and
+        /// that are remapped onto the live <c>smr.bones[]</c>. The GLB's own inverseBindMatrices are used
+        /// in that remapped order, with live bind poses as the legacy fallback. Ship the <c>.glb</c> (and
         /// optional <c>.png</c>) at <c>FTKModFramework_content/models/</c>.
         ///
         /// VISUAL-ONLY and DETERMINISM- / SAVE-SAFE: the mesh/texture never network or persist; the only shared state
@@ -499,6 +525,69 @@ namespace FTKModFramework.Core
             Plugin.Log.LogInfo("SetEnemyBodyMeshFromGlb: '" + enemy.m_ID + "' glb='" + glbFileName + "'" +
                 (string.IsNullOrEmpty(textureFileName) ? "" : " texture='" + textureFileName + "'") + ".");
             return true;
+        }
+
+        /// <summary>
+        /// Register exact renderer-path GLB assignments for a multipart enemy. Every assignment is preflighted
+        /// before changing the spawned body. Missing/ambiguous paths, incompatible bones/binds, or a missing
+        /// requested texture reject the complete set. One GLB replaces one renderer; unlisted renderers stay.
+        /// Paths are relative to CharacterEventListener.transform, case-sensitive, with "." for the root.
+        /// This explicit mode takes precedence over legacy mesh and procedural-body settings. A successful
+        /// registration is not proof of a successful runtime swap; inspect the per-spawn log and model.
+        /// </summary>
+        public static bool SetEnemyBodyMeshesFromGlb(FTK_enemyCombat enemy, params EnemyRendererMesh[] meshes)
+        {
+            string error;
+            if (enemy == null || string.IsNullOrEmpty(enemy.m_ID))
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyMeshesFromGlb: registered enemy is required.");
+                return false;
+            }
+            if (!ExplicitEnemyMeshSwap.ValidateAssignments(meshes, out error))
+            {
+                Plugin.Log.LogWarning("SetEnemyBodyMeshesFromGlb: " + error + "; '" + enemy.m_ID + "' unchanged.");
+                return false;
+            }
+            EnemyVisualPatch.RegisterRendererMeshSwaps(enemy.m_ID, meshes);
+            Plugin.Log.LogInfo("SetEnemyBodyMeshesFromGlb: registered " + meshes.Length +
+                " explicit renderer assignments for '" + enemy.m_ID + "'.");
+            return true;
+        }
+
+        /// <summary>
+        /// Select the native fall-off behavior for future spawns of an explicitly assigned enemy body.
+        /// <see cref="EnemyFallOffPolicy.PreserveNative"/> is the default and leaves all native behavior unchanged.
+        /// <see cref="EnemyFallOffPolicy.PreserveCustomBody"/> suppresses <c>FallOffLimb.FallOff</c> only when the
+        /// spawned CEL has a successful explicit mesh lease that owns that exact fall-off renderer. Failed swaps,
+        /// legacy singular assignments, and unowned renderers retain native behavior. Returns registration acceptance,
+        /// not proof of a live fall-off transition.
+        /// </summary>
+        public static bool SetEnemyFallOffPolicy(FTK_enemyCombat enemy, EnemyFallOffPolicy policy)
+        {
+            if (enemy == null || string.IsNullOrEmpty(enemy.m_ID))
+            {
+                Plugin.Log.LogWarning("SetEnemyFallOffPolicy: registered enemy is required.");
+                return false;
+            }
+            if (policy != EnemyFallOffPolicy.PreserveNative && policy != EnemyFallOffPolicy.PreserveCustomBody)
+            {
+                Plugin.Log.LogWarning("SetEnemyFallOffPolicy: unsupported policy for '" + enemy.m_ID + "'.");
+                return false;
+            }
+            EnemyVisualPatch.RegisterFallOffPolicy(enemy.m_ID, policy);
+            Plugin.Log.LogInfo("SetEnemyFallOffPolicy: registered '" + policy + "' for '" + enemy.m_ID + "'.");
+            return true;
+        }
+
+        /// <summary>
+        /// Select one exact child marker for PortraitCam snapshots of an exact registered custom enemy row.
+        /// The native offscreen clone must contain the path and a unique marker leaf name; otherwise native
+        /// framing is retained. This affects portrait capture only, not body placement or combat cameras.
+        /// Returns false without changing a previous registration when validation fails.
+        /// </summary>
+        public static bool SetEnemyPortraitMarker(FTK_enemyCombat enemy, string markerPath)
+        {
+            return EnemyPortraitRegistry.Register(enemy, markerPath);
         }
 
         /// <summary>

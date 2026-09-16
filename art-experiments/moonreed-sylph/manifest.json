@@ -1,0 +1,172 @@
+{
+  "name": "Moonreed Sylph",
+  "native_chassis": "fairyA",
+  "reference_renderer": 121395,
+  "renderer_path": "enFairy01",
+  "native_surface_copied": false,
+  "art_status": "Original fairy, scoped selected live body/portrait/hit/death appearance reviewed; material properties/all-view coverage unverified",
+  "native_forward": "Mesh+Y up, anatomical face+Z; native binding transforms unchanged",
+  "remaining": [
+    "Original live body/portrait/material/ragdoll/cleanup acceptance"
+  ],
+  "parts": [
+    {
+      "name": "moonreed",
+      "vertices": 7728,
+      "triangles": 2576,
+      "palette_joints": 66,
+      "max_bind_rest_error": 2.9349596641914388e-08,
+      "blender_reopen_max_bind_rest_error": 2.9349596641914388e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.5085179805755615,
+        0.010571177117526531,
+        -0.37301474809646606
+      ],
+      "bind_bounds_max": [
+        0.5085180401802063,
+        1.5275177955627441,
+        0.08555950969457626
+      ],
+      "blender_roundtrip_glb_sha256": "08ecf9958fc085d5e3b518b1d20472c7396ce022b0eea386b68f957afe3803a2"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121395,
+      "local_reference_path": "scratch/skeleton-audit/121395/reference.npz",
+      "sha256": "ffeb12f6a76448e37c20f0462276c63cbc7a902cdb35d705a97ec99e83a52b53"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "parent approved for live test; studio-review.json pins exact reviewed images",
+    "live_binding": "exact mesh/signature observed",
+    "live_animation": "four120-frame captures with firstDODGE wrapperstop preserved; selectedposes only",
+    "live_material_and_culling": "no matching postReady renderer; no independent runtime material property or all-view culling verdict"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "15c4cd6a6d51a8b41e0b0588827f692c54027732955f54b53d0b604903993cb1",
+      "bytes": 5923
+    },
+    "audit_native_poses.py": {
+      "sha256": "616861ec75296b16c94faca1e7b836354733bc0c237069b682c2c0800f41a86f",
+      "bytes": 4484
+    },
+    "build_blender.py": {
+      "sha256": "51f43a216169c7ad47dd31f096bbf335a4c11680ffee93abd56f46055078597b",
+      "bytes": 5378
+    },
+    "build_geometry.py": {
+      "sha256": "e08bbb4cc347aa74079f8b98e5f45177c554e82c91e36b12cc5a3c518c042bec",
+      "bytes": 7450
+    },
+    "finalize_manifest.py": {
+      "sha256": "c1069e8939c69df3b8ace46170d763131aa18434416d058ff5361232c1d5da71",
+      "bytes": 2926
+    },
+    "hero.png": {
+      "sha256": "99661fd5edbaa43b8e8e7752c2438490dcf52a46ebf5413896e96ad1d2a7984c",
+      "bytes": 1052504
+    },
+    "inspect_materials.py": {
+      "sha256": "71c0b000a819ac5e202c5e3f9de60d13549833364bf7a7c379eacc95c7a49d4b",
+      "bytes": 1214
+    },
+    "live-validation.json": {
+      "sha256": "d931410c7f3c0a3e845491142007b5ce719fe2e112c0108fd7e3123237be204f",
+      "bytes": 19870
+    },
+    "moonreed-studio.blend": {
+      "sha256": "95f8dca89373f66d0b8409eaaf94319ef2301f4a79d58297e230550ef4c3292b",
+      "bytes": 266291
+    },
+    "moonreed.blend": {
+      "sha256": "80986de0b462ce73dbc744922d47411c3cacecc49d12c22949f260c3a8003f8c",
+      "bytes": 265449
+    },
+    "moonreed.glb": {
+      "sha256": "8dce58206cc84ec022d29735eb363d0cc15eeaf06f2844b2abaabd7070ba84f1",
+      "bytes": 455636
+    },
+    "moonreed.pieces.json": {
+      "sha256": "ef8042ddd9908fc2d646271d869da82be1789d469297ba14b1b6b89b852968e8",
+      "bytes": 4122
+    },
+    "moonreed.source.json": {
+      "sha256": "394fb524d49915ab007faee61f43cde60218274117fc91d4c542f93ba3aaaff6",
+      "bytes": 1292836
+    },
+    "moonreed.validation.json": {
+      "sha256": "b084d8c08839e3d8441ea664e25c2d9e3a50cce0459507575d582a5dcb91afe6",
+      "bytes": 794
+    },
+    "moonreed_basecolor.png": {
+      "sha256": "c42aad0d545bec1702b63b3b6ce4cc5dd3042ce81f61a7af9b417896ca207db9",
+      "bytes": 264
+    },
+    "native-death-pose-audit.json": {
+      "sha256": "23aa992da8820e59ade981cd9b1c72b6918c46f8cd2a0fa382baa2836e6e0020",
+      "bytes": 1527
+    },
+    "native-death-pose-study.png": {
+      "sha256": "361b21eabc149f76c8a6d2ab90b90b494efd806aa72afa5ea139170cc6496497",
+      "bytes": 37103
+    },
+    "native-hit-pose-audit.json": {
+      "sha256": "257ed7df633f6824dcd32484a9d916564622f22c8ff4307fa52e645c8b2ff3bc",
+      "bytes": 1531
+    },
+    "native-hit-pose-study.png": {
+      "sha256": "80752f3225b6d528c91c075094bf159125e9dfd2b21b89b22f5295865cba7e24",
+      "bytes": 52092
+    },
+    "native-material-metadata.json": {
+      "sha256": "10d2afc02f9c276195c0d5a558b5bcaa187bc5c43c26c5a7ab82ef60ce1cbc2d",
+      "bytes": 4033
+    },
+    "native-pass-pose-audit.json": {
+      "sha256": "32ba76fa7c687f5450adfd740944d7f4f133923eddad9c5db02be4b945d4f768",
+      "bytes": 1526
+    },
+    "native-pass-pose-study.png": {
+      "sha256": "7fbec1e5c30773a84b3d536ec800e6648e54d30a109567741a0d401a5e9be987",
+      "bytes": 50730
+    },
+    "original-geometry-proof.json": {
+      "sha256": "e93c53c088182de4dfdf0c85a68ac0bf93f96fef1a10a7067763024a92782f3b",
+      "bytes": 1084
+    },
+    "runtime-profile.json": {
+      "sha256": "12e3fc3ce344397df8fb3982baf17c5eded9cbc109f6d96d09cdda19d15e6df5",
+      "bytes": 526
+    },
+    "side.png": {
+      "sha256": "9387a2798a9cf2b4c9824aa679800d8c7b6ee4cd3cb0bb350554038df90d451f",
+      "bytes": 1012940
+    },
+    "studio-review.json": {
+      "sha256": "2c701e44840c46d53079cc5e636e44dab1e4781c7729ccba5fc7c4b9e7adbc12",
+      "bytes": 614
+    },
+    "verify_original_geometry.py": {
+      "sha256": "96854c03328d5469cf61ef928fdbc366d101ff64f854bd3383600f1f5c18fbc6",
+      "bytes": 2331
+    }
+  },
+  "live_v1": {
+    "status": "SCOPED_SELECTED_BODY_PORTRAIT_HIT_DEATH_PASS",
+    "evidence": "live-validation.json",
+    "sha256": "d931410c7f3c0a3e845491142007b5ce719fe2e112c0108fd7e3123237be204f",
+    "limits": [
+      "Sixselectedframesnotfullmotion/cameracoverage.",
+      "OneexactfairyAprofile, nototherrows/specialroutes.",
+      "NativeFXretained andpartialocclusionexplicit.",
+      "PostReadyinventoryhasnomatchingliveMoonreedrenderer, noindependentmaterialpropertyclaim.",
+      "Deathisexplicitfixture; firstattackdodgerawfailurepreserved."
+    ]
+  }
+}

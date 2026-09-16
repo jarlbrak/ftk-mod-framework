@@ -1,0 +1,94 @@
+{
+  "status": "source_verified_runtime_material_support_pending",
+  "scope": "cubeA material dependency and separate cubeE baseline candidate; no live acceptance",
+  "sourceFindingsSha256": "da7f8c2dbc65d4d2a4a105a2b0f2d23f23d74af851cf4d6e71a617ad924b9819",
+  "topology": "6d40f2e6eba19a6b47d1b67deeaf66ccfeea36449388df8ce562df112e7b38bb",
+  "palette": [
+    "Root_M",
+    "jellyCubeMid",
+    "jellyCubeTop"
+  ],
+  "cubeA": {
+    "enemy": "cubeA",
+    "rendererPathId": 121012,
+    "rendererPath": "enJellyCube",
+    "celPathId": 136469,
+    "controllerPathId": 5972,
+    "nativeMaterialSlots": [
+      {
+        "slot": 0,
+        "materialPathId": 1089,
+        "name": "matBone"
+      },
+      {
+        "slot": 1,
+        "materialPathId": 157,
+        "name": "matJellyCubeA"
+      }
+    ],
+    "scrollingComponentPathId": 135154,
+    "materialIndex": 1,
+    "uvAnimationRate": [
+      0,
+      0.20000000298023224
+    ],
+    "textureName": "_MainTex",
+    "observedSourceBehavior": "LateUpdate accumulates delta-time UV offset and accesses Renderer.materials[materialIndex] when renderer.enabled.",
+    "currentReplacementConflict": "The pinned implementation assigns exactly one private material, leaving native index 1 out of range. Source-proven incompatibility; not observed in a live cubeA run."
+  },
+  "cubeE": {
+    "profile": {
+      "key": "ftkmf_modeltest_probe_cubee",
+      "baseEnemy": "cubeE",
+      "displayName": "Rig probe: cubeE",
+      "combatProfile": "363001291edce5b2bc3500d1051bb1295369ee45f44e0feb47a9b5cea606c9f7",
+      "renderers": [
+        {
+          "rendererPath": "enIceCube",
+          "glbFile": "probe_121011.glb",
+          "textureFile": "probe_palette.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "nativeScale": {
+      "x": 1.149999976158142,
+      "y": 1.149999976158142,
+      "z": 1.149999976158142
+    },
+    "rendererPathId": 121496,
+    "celPathId": 139258,
+    "controllerPathId": 5972,
+    "sourceSubtree": "No ScrollingUVs, Rigidbody, FallOffLimb or ParticleSystem found in the complete inspected subtree.",
+    "scopeLimit": "Same exact binds/controller do not establish cubeA material support or live cubeE acceptance."
+  },
+  "requiredValidation": [
+    "Original geometry with distinct stationary interior and scrolling outer submeshes; exact source-slot mapping.",
+    "Native slot-1 UV motion across several frames while slot 0 remains stationary.",
+    "Actual material identity and ownership after native .materials accesses.",
+    "Atomic failure rollback, source prefab isolation, combat and row-portrait application, final owned-resource disposal.",
+    "Live binding, appearance, idle, attack, hit, death and gameplay progression for the exact row."
+  ],
+  "sourcePins": [
+    {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/resources.assets",
+      "sha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117"
+    },
+    {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll",
+      "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+    },
+    {
+      "path": "scratch/cube-topology-analysis/scroll-serialized.json",
+      "sha256": "bfeda01046042808f7a036a5e13e522df369d6e42efb6d4966ae01152a7d6d76"
+    },
+    {
+      "path": "scratch/cube-topology-analysis/ScrollingUVs.cs",
+      "sha256": "1d5a28043f64f4a4b457832852b25f8513f189f128da5f4d03db5abce86fb9d6"
+    },
+    {
+      "path": "FTKModFramework/Core/ExplicitEnemyMeshSwap.cs",
+      "sha256": "e75f4b464b810a00d79254c12851b0f698d82f1b86289373e8eebffe1987a165"
+    }
+  ]
+}

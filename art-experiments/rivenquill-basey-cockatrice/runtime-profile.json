@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_rivenquill_basey_cockatrice_boss",
+      "baseEnemy": "bossCockatrice",
+      "resourcePrefab": "enbaseycockatriceboss",
+      "displayName": "Rivenquill Cockatrice",
+      "minimumBaseHealth": 64,
+      "combatProfile": "b5d1919dda0eb14fc093007013c70f4441308081495026b8f5e5b4bb8eeada2c",
+      "renderers": [
+        {
+          "rendererPath": "enBaseyCockatrice",
+          "glbFile": "rivenquill.glb",
+          "textureFile": "rivenquill-palette.png",
+          "disableNativeEmission": true
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_rivenquill_basey_cockatrice_small",
+      "baseEnemy": "cockatriceC",
+      "resourcePrefab": "enbaseycockatricesmall",
+      "displayName": "Rivenquill Hatchling",
+      "minimumBaseHealth": 64,
+      "combatProfile": "adc47b1916710812cc9e5415964285ad28314575ba83832db5a446c2d30dee23",
+      "renderers": [
+        {
+          "rendererPath": "enBaseyCockatrice",
+          "glbFile": "rivenquill.glb",
+          "textureFile": "rivenquill-palette.png",
+          "disableNativeEmission": true
+        }
+      ]
+    }
+  ]
+}

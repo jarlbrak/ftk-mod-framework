@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "status": "CRITICAL_HIT_AND_SUBSEQUENT_EXPLICIT_DEATH_SELECTED_DIAGNOSTIC_VIEWS_REVIEWED",
+  "nativeEnemy": "scourgeG",
+  "rendererId": 121222,
+  "controllerId": 5934,
+  "captures": [
+    {
+      "label": "critical-hit",
+      "source": {
+        "path": "scratch/mirewarden-game/model-test-output/fb869d7abbe84f5e833730e944a510c4.json",
+        "sha256": "85b61d52904e4d8fdf775f176e8f772de6f9422ca7141dd1f769061d7370beef"
+      },
+      "raw": {
+        "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/critical-hit.json.gz",
+        "sha256": "9df3a534e5f6fdee2d9fde448e0cf5d077ddaa6d22c2e14c16b32e675c0dd556"
+      },
+      "frames": 120,
+      "video": {
+        "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/critical-hit.mp4",
+        "sha256": "3e9b3e184150bd6411277b31bf3443b05a90a62ba35a34e1d90574f46f30ebe1"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "session": "86eb82f91dc44277b2d3ae675b216e76",
+      "pins": {
+        "deployed-binaries": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "session": "86eb82f91dc44277b2d3ae675b216e76",
+          "binaries": {
+            "framework": {
+              "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+              "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+              "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+              "bytes": 1974272
+            },
+            "helper": {
+              "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+              "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+              "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1",
+              "bytes": 304640
+            }
+          },
+          "measurement": "on_disk_binary_sha256",
+          "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+        },
+        "profile-assets": {
+          "probe_121222.glb": "d73e567db65806f1f0442740d8f506d7e1de39c543b841092e0113e113f38706",
+          "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+        },
+        "provenance": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "port": 8788,
+          "session": "86eb82f91dc44277b2d3ae675b216e76",
+          "case": "4a1f19eb52aa44b5b58d711731e4f28b",
+          "mode": "record-action",
+          "enemy": "ftkmf_modeltest_probe_scourgeg",
+          "class": null,
+          "profile": {
+            "key": "ftkmf_modeltest_probe_scourgeg",
+            "baseEnemy": "scourgeG",
+            "displayName": "Rig probe: scourgeG",
+            "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+            "renderers": [
+              {
+                "rendererPath": "enScourgeLeprechaun",
+                "glbFile": "probe_121222.glb",
+                "textureFile": "probe_palette.png"
+              }
+            ],
+            "minimumBaseHealth": 64
+          },
+          "profileInputSha256": "65227877f96d5faafe658be3316848e4d4d6f1d3b273e1593123a19f3dc705e8",
+          "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+        }
+      },
+      "clips": {
+        "cidle_impUnarmed": {
+          "first": 0,
+          "last": 104,
+          "positiveFrameCount": 80
+        },
+        "damageHeavy_imp": {
+          "first": 25,
+          "last": 31,
+          "positiveFrameCount": 7
+        },
+        "attackProf_leprechaun": {
+          "first": 69,
+          "last": 119,
+          "positiveFrameCount": 33
+        }
+      },
+      "rootReview": {
+        "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/fergus-hit-root-review.json",
+        "sha256": "4d19deddae27238043b3d3371f44847f7e266df947757844f0de54317d77130f"
+      }
+    },
+    {
+      "label": "explicit-death",
+      "source": {
+        "path": "scratch/mirewarden-game/model-test-output/2a14463dc6d8443892571520ad644327.json",
+        "sha256": "23709ea86f944ff3f8f99b8438078d1c8ce41529ede6b209a20d58dae698030b"
+      },
+      "raw": {
+        "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/explicit-death.json.gz",
+        "sha256": "8230c758bab063b0b87f7c23ae207d1b699cea9bfb71a360fea429919e206278"
+      },
+      "frames": 120,
+      "video": {
+        "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/explicit-death.mp4",
+        "sha256": "ad85f8819003c34fd1548bffec322822c61f8f933a0b6f7f8998beb4fad31c96"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "session": "86eb82f91dc44277b2d3ae675b216e76",
+      "pins": {
+        "deployed-binaries": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "session": "86eb82f91dc44277b2d3ae675b216e76",
+          "binaries": {
+            "framework": {
+              "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+              "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+              "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+              "bytes": 1974272
+            },
+            "helper": {
+              "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+              "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+              "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1",
+              "bytes": 304640
+            }
+          },
+          "measurement": "on_disk_binary_sha256",
+          "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+        },
+        "profile-assets": {
+          "probe_121222.glb": "d73e567db65806f1f0442740d8f506d7e1de39c543b841092e0113e113f38706",
+          "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+        },
+        "provenance": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "port": 8788,
+          "session": "86eb82f91dc44277b2d3ae675b216e76",
+          "case": "aef4e2e8c8784c41a1cef17916279f86",
+          "mode": "record-action",
+          "enemy": "ftkmf_modeltest_probe_scourgeg",
+          "class": null,
+          "profile": {
+            "key": "ftkmf_modeltest_probe_scourgeg",
+            "baseEnemy": "scourgeG",
+            "displayName": "Rig probe: scourgeG",
+            "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+            "renderers": [
+              {
+                "rendererPath": "enScourgeLeprechaun",
+                "glbFile": "probe_121222.glb",
+                "textureFile": "probe_palette.png"
+              }
+            ],
+            "minimumBaseHealth": 64
+          },
+          "profileInputSha256": "65227877f96d5faafe658be3316848e4d4d6f1d3b273e1593123a19f3dc705e8",
+          "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+        }
+      },
+      "clips": {
+        "cidle_impUnarmed": {
+          "first": 0,
+          "last": 24,
+          "positiveFrameCount": 25
+        },
+        "deathHeavy_imp": {
+          "first": 25,
+          "last": 119,
+          "positiveFrameCount": 95
+        }
+      },
+      "rootReview": {
+        "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/fergus-hit-death-root-review.json",
+        "sha256": "624749f26acb96368f046f089d9acba4b692701dd8adfe8df4685e7e4767f4b7"
+      }
+    }
+  ],
+  "observedActions": [
+    "Ordinary attack critical HP58\u219245, damageHeavy_imp25\u201331, enemy alive.",
+    "Subsequent explicit KillSingle45\u21920, deathHeavy_imp25\u2013119.",
+    "Two once-only Collect submissions; strict Ready0/3 Trap1."
+  ],
+  "limits": [
+    "Calibration probe only, not original Thistlewick live art.",
+    "Critical heavy hit is not evidence for unobserved light-hit variation.",
+    "Explicit KillSingle is not ordinary lethal damage.",
+    "Native hat/hero occludes portions of reviewed frames.",
+    "Synthetic row does not prove global Fergus haunt progression."
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/case-4a1f19eb52aa44b5b58d711731e4f28b/capture-summary.json",
+      "sha256": "343e937a42bac445a008733fdc3b067f5636cfc7e6f34193bc0edbd5311cad93"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/case-4a1f19eb52aa44b5b58d711731e4f28b/journal.jsonl",
+      "sha256": "6057f00d83ae695ebf5244fe8b8247e97d60969742f4336200dbd61843081314"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/case-4a1f19eb52aa44b5b58d711731e4f28b/result.json",
+      "sha256": "35a553e394e9594a15c444e541a9c43706ee45709f4a5a52ae3601c4609040ac"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/case-aef4e2e8c8784c41a1cef17916279f86/capture-summary.json",
+      "sha256": "f1e6911c989472da558118b7e0950d80e8893fae61e19c734fdc9d21fba7e6fe"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/case-aef4e2e8c8784c41a1cef17916279f86/journal.jsonl",
+      "sha256": "73c543e155d084450be6ab168e1a8b8325a868827317c0cde5d4db6c122a590a"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/case-aef4e2e8c8784c41a1cef17916279f86/result.json",
+      "sha256": "7e25e36fae9fb772ff72f3c0ba379a0113baafdb41dc66fd4d580d41b37ae767"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/critical-hit-0030.png",
+      "sha256": "9a6c055d3b0b82671c951e0b18c343946ebf042b1e78b443dc9938afdfff91bf"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/critical-hit-source-image-pins.json",
+      "sha256": "bf11e548e191dab09f007745be1ad4e5946688a2bc6166f4a7aa2bc28d580c87"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/critical-hit.json.gz",
+      "sha256": "9df3a534e5f6fdee2d9fde448e0cf5d077ddaa6d22c2e14c16b32e675c0dd556"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/critical-hit.mp4",
+      "sha256": "3e9b3e184150bd6411277b31bf3443b05a90a62ba35a34e1d90574f46f30ebe1"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/explicit-death-0060.png",
+      "sha256": "41d33054847eac7a4a0864984d86205e89aea255dd9f46763ddf44cf982837b3"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/explicit-death-source-image-pins.json",
+      "sha256": "63a29bd8d4997660481a9dbf4a2c2e548820f7046315b7608e842866e2ed82de"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/explicit-death.json.gz",
+      "sha256": "8230c758bab063b0b87f7c23ae207d1b699cea9bfb71a360fea429919e206278"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/explicit-death.mp4",
+      "sha256": "ad85f8819003c34fd1548bffec322822c61f8f933a0b6f7f8998beb4fad31c96"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/fergus-hit-death-root-review.json",
+      "sha256": "624749f26acb96368f046f089d9acba4b692701dd8adfe8df4685e7e4767f4b7"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/fergus-hit-root-review.json",
+      "sha256": "4d19deddae27238043b3d3371f44847f7e266df947757844f0de54317d77130f"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/fergus-hit-second-loot-before.json",
+      "sha256": "e89f5f93ae92df9cd38be372755e8f8a7a84bf7b40e950bbe3e7cd08b59c8feb"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-critical-hit-v1/fergus-hit-second-loot-ledger.json",
+      "sha256": "53c8b9d38d003a357b7daca75384dd705182b256241f779b21f2e2d1a4188d73"
+    }
+  ]
+}

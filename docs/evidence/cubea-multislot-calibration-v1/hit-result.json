@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "status": "recorded_action_and_frames",
+  "captureScope": "enemies",
+  "classKey": null,
+  "action": "attack",
+  "minimumBaseHealth": 64,
+  "actionResult": {
+    "ok": true,
+    "error": null,
+    "result": {
+      "committed": "Attack",
+      "target": {
+        "turnIndex": 0,
+        "photonId": -1
+      },
+      "whoseTurnWas": "player",
+      "enemyHpBefore": 58,
+      "note": "turn committed; poll /state.combat (active flips false on resolve, or it becomes the enemy turn next)"
+    }
+  },
+  "capture": {
+    "result": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/6933d3ba40d84c31871be2ce96e5d36a.json",
+    "summary": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-ea8ddd05f85f4970aaff95f80ceb5322/capture-summary.json",
+    "frames": 120
+  },
+  "errors": [],
+  "note": "No visual acceptance verdict. Kill-fixture uses explicit cheat death, not normal damage. Never retry uncertain action."
+}

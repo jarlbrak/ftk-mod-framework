@@ -1,0 +1,18 @@
+{
+  "status": "OFFLINE_RESUME_BOUNDARY_REGRESSION_PASS",
+  "changes": "Interrupted-start continuation uses same encounter/story boundary and returns pending before inventory.",
+  "tests": 127,
+  "files": [
+    {
+      "path": "tools/ai-model-pipeline/runtime-test/resume_after_start.py",
+      "sha256": "9ed72ceaa6d19c35206ec57a4b874fd3241f3462ed63a2c803efa4c4901c77d5"
+    },
+    {
+      "path": "tools/ai-model-pipeline/runtime-test/test_resume_after_start.py",
+      "sha256": "2fba0817e3eeb29cb95878c200f848cfe544608bd3ecb316c3d266cc9073066a"
+    }
+  ],
+  "testOutput": "resume-runner-test-output.txt",
+  "testOutputSha256": "baf4ba437ea743305764d4bcedbd27b2b6826a046d43f8483ff0e51ddeed4790",
+  "scope": "Companion regression addendum. Previous126-test report preserved. Does not prove live startup prevention or model acceptance."
+}

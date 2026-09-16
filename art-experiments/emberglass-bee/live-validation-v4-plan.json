@@ -1,0 +1,99 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/emberglass-bee/live-validation-v4",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-a7675b647df54756b1294f2fa9ede469/case-result.json",
+  "visualReview": "scratch/model-route-6fdb7ff148451731-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/emberglass-bee/emberglass.glb",
+    "art-experiments/emberglass-bee/emberglass_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/emberglass-bee/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-6fdb7ff148451731-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-76e7a2f53a8d4b41952350baee52a85a/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "Monster Bee",
+        "mesh": "ftkmf_glb_emberglass.glb",
+        "boneSignature": "14b49cbaf8d8e62092f5ea4062498c3b4eaa16b7f2bdf1121ecc2296da33e2a9"
+      }
+    },
+    "attack-attempt-1": {
+      "label": "attack-attempt-1",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "Monster Bee",
+        "mesh": "ftkmf_glb_emberglass.glb",
+        "boneSignature": "14b49cbaf8d8e62092f5ea4062498c3b4eaa16b7f2bdf1121ecc2296da33e2a9"
+      }
+    },
+    "attack-attempt-2": {
+      "label": "attack-attempt-2",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "Monster Bee",
+        "mesh": "ftkmf_glb_emberglass.glb",
+        "boneSignature": "14b49cbaf8d8e62092f5ea4062498c3b4eaa16b7f2bdf1121ecc2296da33e2a9"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "Monster Bee",
+        "mesh": "ftkmf_glb_emberglass.glb",
+        "boneSignature": "14b49cbaf8d8e62092f5ea4062498c3b4eaa16b7f2bdf1121ecc2296da33e2a9"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "live-validation-v4",
+    "displayName": "Emberglass Bee",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "beeA",
+    "nativeChassis": "beeA",
+    "rendererPaths": [
+      "Monster Bee"
+    ],
+    "sourceRendererIds": [
+      121062
+    ],
+    "binding": {
+      "rendererPath": "Monster Bee",
+      "mesh": "ftkmf_glb_emberglass.glb",
+      "boneSignature": "14b49cbaf8d8e62092f5ea4062498c3b4eaa16b7f2bdf1121ecc2296da33e2a9"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "This scope is the exact beeA / Monster Bee / renderer 121062 source assignment only; sibling Bee chassis and topology peers receive no credit from this record.",
+      "The first ordinary no-focus attempt left health at 58 and is retained as a zero-loss attempt with an observed native Dodge trigger, dodge_bee clip, and DODGED game label; the second ordinary attempt reduced health from 58 to 50 and supplies the required nonlethal hit evidence.",
+      "Death reduced health from 50 to 0 through the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Twenty-four selected original PNGs were reviewed across all four accepted captures; the remaining 440 retained capture frames and generated videos are pinned evidence but were not individually reviewed.",
+      "The fixture drives BeeDie with m_DoRagdoll true; all 16 recorded rigid bodies become nonkinematic at sample 27, the model reaches the floor by sample 40, and the grounded body remains visible through sample 102. The next sample records the renderer inactive and capture termination, so this establishes only the observed physics-ragdoll and corpse interval, not native cleanup causality, full requested capture duration, or later corpse lifetime.",
+      "The runtime material is the native matBee instance using the authored base-color texture; alternate shaders, emission behavior, clone independence, and long-session material lifetime remain outside this archive.",
+      "The foreground hero, impact flare, poison particles, UI, and depth blur obscure parts of the causal hit and death frames; other native attacks, portrait, collision, extended culling, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

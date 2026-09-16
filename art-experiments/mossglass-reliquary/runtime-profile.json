@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_mossglass",
+      "baseEnemy": "cubeA",
+      "displayName": "Mossglass Reliquary",
+      "combatProfile": "363001291edce5b2bc3500d1051bb1295369ee45f44e0feb47a9b5cea606c9f7",
+      "minimumBaseHealth": 64,
+      "visualScale": 1.0,
+      "renderers": [
+        {
+          "rendererPath": "enJellyCube",
+          "glbFile": "mossglass.glb",
+          "materialSlots": [
+            {
+              "primitiveIndex": 0,
+              "nativeMaterialSlot": 0,
+              "textureFile": "mossglass.slot0.png",
+              "disableNativeEmission": false
+            },
+            {
+              "primitiveIndex": 1,
+              "nativeMaterialSlot": 1,
+              "textureFile": "mossglass.slot1.png",
+              "disableNativeEmission": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

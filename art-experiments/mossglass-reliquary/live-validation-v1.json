@@ -1,0 +1,530 @@
+{
+  "version": 1,
+  "model": "Mossglass Reliquary",
+  "iteration": "V1 mixed-atlas shell",
+  "status": "COLOR_FAILED_DEATH_VISIBILITY_LIMITED",
+  "session": "9f0ae43125194a17809ae5144a76a953",
+  "assetHashes": {
+    "mossglass.glb": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+    "mossglass.slot0.png": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+    "mossglass.slot1.png": "3258757324a7156128f446cddc7b66ffedf320463edd3d503c1179489509b059"
+  },
+  "profileSha256": "733776f5e28cb86c873da51d81292707a1c942361dfcee3b01b1751a184696dc",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "c87a894ef225e7e89f7809984c68bacb17bffbabeefc4615d4c3b90f3df3793f",
+      "bytes": 281600
+    }
+  },
+  "sourceManifest": {
+    "path": "art-experiments/mossglass-reliquary/manifest.json",
+    "sha256": "84133583d7b6b9d398973c7a02271774c66b2c11f9bb79db6052af74090a0f88"
+  },
+  "rawCase": {
+    "original": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-3cef8be740bc4e2ca3ed94946f8b1a38/case-result.json",
+      "sha256": "181c6545903d8281989cafb8682debad0ce36af4aee0ab6e1384200ee226f99e"
+    },
+    "archive": {
+      "path": "art-experiments/mossglass-reliquary/live-v1/case-result.json.gz",
+      "sha256": "afe7179f5ffaa9d60360911dd5c601d26108de33fb8d6a2f5d5afbf0c34e4a28"
+    }
+  },
+  "rawWrapperStatus": "needs_visual_review",
+  "runs": [
+    {
+      "action": "pass",
+      "raw": {
+        "original": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/3dbd433faa06493480e84435c22da4fc.json",
+          "sha256": "c269a3d4d079f9375014be8e2f34af96ee5ce7e3f8627d5f17dee2706df75a37"
+        },
+        "archive": {
+          "path": "art-experiments/mossglass-reliquary/live-v1/pass.json.gz",
+          "sha256": "df6cb3df64e565df6d48d3aadbb664ec7bab30356d2abc1664df46734b6752ec"
+        }
+      },
+      "video": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/pass.mp4",
+        "sha256": "d1e15771c2cf077674767a81e09ff5473e36e6d2d05461e42473087859a2c3f0"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "reviewedFrames": [
+        0,
+        40
+      ],
+      "images": [
+        {
+          "path": "art-experiments/mossglass-reliquary/live-v1/pass-0000.png",
+          "sha256": "40aa58a5532caed6b22148e10105da2f6fe54a6da4caf2dbcec810f8456fc098"
+        },
+        {
+          "path": "art-experiments/mossglass-reliquary/live-v1/pass-0040.png",
+          "sha256": "d982a20985fdde07543ee8d360c3b44b9f86516cac70596a45844c953a0fa220"
+        }
+      ],
+      "journal": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/pass-journal.jsonl",
+        "sha256": "5590a1c6ec1f5430cbdc097b3c6753fb65968219cce5c6d778e5967b05dde31c"
+      },
+      "actionResult": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/pass-result.json",
+        "sha256": "704feef9d8e4235554a07975e928e821a8286d60acfb1eda00a690f1ca3db661"
+      },
+      "timedAudit": {
+        "action": "pass",
+        "sha256": "c269a3d4d079f9375014be8e2f34af96ee5ce7e3f8627d5f17dee2706df75a37"
+      }
+    },
+    {
+      "action": "hit",
+      "raw": {
+        "original": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/9b3895b658e04aaabe7ef34bb536405a.json",
+          "sha256": "6c4ffe12b12d2ef5cf0df3cd2b51e0ef6217d79e664b4b8eefbb3ba30155361b"
+        },
+        "archive": {
+          "path": "art-experiments/mossglass-reliquary/live-v1/hit.json.gz",
+          "sha256": "20dcf646005978f50cfd23117a0fd16713e9795dfde346c40ba736c5bf205953"
+        }
+      },
+      "video": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/hit.mp4",
+        "sha256": "e58a728758c9548ece835a790c84ebfaec3a3cbd42b800bde5bb7aa539aa138d"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "images": [
+        {
+          "path": "art-experiments/mossglass-reliquary/live-v1/hit-0030.png",
+          "sha256": "ea9182471829ad6853f7da31636a2cb382f6b16c3f63720bcacc7d3b6c857191"
+        }
+      ],
+      "journal": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/hit-journal.jsonl",
+        "sha256": "79e830e3e3f8133df358c7cec918b79804e4dea79c79e49901bafb3c97063b9a"
+      },
+      "actionResult": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/hit-result.json",
+        "sha256": "7c15edd5d59fa42c4812e2e7fd6ce912173d17ac45035f54acd37de51b7d566b"
+      },
+      "timedAudit": {
+        "action": "hit",
+        "sha256": "6c4ffe12b12d2ef5cf0df3cd2b51e0ef6217d79e664b4b8eefbb3ba30155361b"
+      }
+    },
+    {
+      "action": "death",
+      "raw": {
+        "original": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/65c631cc567d4a41986ceafd2a375d49.json",
+          "sha256": "9f6a927286c73a21271ae69aecf38ebe62bd839895657d4794482ec80de04198"
+        },
+        "archive": {
+          "path": "art-experiments/mossglass-reliquary/live-v1/death.json.gz",
+          "sha256": "9f67db61abd68d6312594e5a8940a1e8d4a8464653f1a1288569a1065564c214"
+        }
+      },
+      "video": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/death.mp4",
+        "sha256": "1d141de20d2c29e09b4a9fbdcd71071ae11d0a2eba11ce2bc5af4f387912b327"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "images": [
+        {
+          "path": "art-experiments/mossglass-reliquary/live-v1/death-0040.png",
+          "sha256": "539b60ae3e518ba660f1946ce0efd412567a03d537eb8fb17ef4f671cb680b71"
+        },
+        {
+          "path": "art-experiments/mossglass-reliquary/live-v1/death-0060.png",
+          "sha256": "b9584b27d0ee19be9ff5c8634a59047114e8d41df3ab5642850136b98526ca84"
+        }
+      ],
+      "journal": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/death-journal.jsonl",
+        "sha256": "1c958d53f4a097fee81ac7ce9645c78a54eb36568bec874627a5ed7131894efe"
+      },
+      "actionResult": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/death-result.json",
+        "sha256": "7631874da89d14665ab9651fce7009ca6e3edbee5ff86d6c06798950c87ce09d"
+      },
+      "timedAudit": {
+        "action": "death",
+        "sha256": "9f6a927286c73a21271ae69aecf38ebe62bd839895657d4794482ec80de04198"
+      }
+    }
+  ],
+  "visualReview": {
+    "path": "art-experiments/mossglass-reliquary/live-v1/root-visual-review.json",
+    "sha256": "b984b66fe4b2b45931f9f6c52fdbcf0770182804426badf5094d17dbc26afada"
+  },
+  "normalHit": {
+    "status": "nonlethal_hp_loss",
+    "beforeHp": 58,
+    "afterHp": 50,
+    "nativeOutcome": null,
+    "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+  },
+  "deathAction": "explicit KillSingle fixture",
+  "collects": [
+    {
+      "before": {
+        "heroInstanceId": -235444,
+        "buttonInstanceId": -237222,
+        "item": "None"
+      },
+      "result": {
+        "ok": true,
+        "status": "clicked",
+        "heroInstanceId": -235444,
+        "buttonInstanceId": -237222,
+        "item": "None",
+        "method": "VoteButton.OnLeftClick(Collect)",
+        "note": "One native current Loot vote submitted; observe fixture-state again before any further collection.",
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "9f0ae43125194a17809ae5144a76a953",
+        "id": "7b6310971ecd4ce398f886862c0ef131",
+        "frame": 20433,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    },
+    {
+      "before": {
+        "heroInstanceId": -235444,
+        "buttonInstanceId": -237222,
+        "item": "None"
+      },
+      "result": {
+        "ok": true,
+        "status": "clicked",
+        "heroInstanceId": -235444,
+        "buttonInstanceId": -237222,
+        "item": "None",
+        "method": "VoteButton.OnLeftClick(Collect)",
+        "note": "One native current Loot vote submitted; observe fixture-state again before any further collection.",
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "9f0ae43125194a17809ae5144a76a953",
+        "id": "7cb92c395cc048e7b175fe894cf60729",
+        "frame": 20466,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235444,
+        "alive": true,
+        "containerInstanceId": -237180,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237222,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237622,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235444,
+            "celInstanceId": -239048,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245782,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "9f0ae43125194a17809ae5144a76a953",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "9f0ae43125194a17809ae5144a76a953",
+    "id": "909f3f25c70b4e958872dd85a1c10e8c",
+    "frame": 20764,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "setupHistory": {
+    "failure": {
+      "original": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-06d6ac2a10e840c6aeac7596c9d49901/case-result.json",
+        "sha256": "b93cf283eea7b76352a3ee73cb2586f68a7cfde2ef59ce0c40712dbc8902ee94"
+      },
+      "archive": {
+        "path": "art-experiments/mossglass-reliquary/live-v1/wrong-path-case-result.json.gz",
+        "sha256": "52ce73e96f5a26776497f0312e768057caf932e7eed992ff71f56b8090a6c548"
+      }
+    },
+    "actions": 0,
+    "verifiedHelperRequests": [
+      "fixture-state",
+      "inventory"
+    ],
+    "verifiedHttpRequests": [
+      "/state"
+    ],
+    "limitation": "Local exclusive claim created then retired; no mutating game request in journal."
+  },
+  "evidence": [
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/case-result.json.gz",
+      "sha256": "afe7179f5ffaa9d60360911dd5c601d26108de33fb8d6a2f5d5afbf0c34e4a28"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/death-0040.png",
+      "sha256": "539b60ae3e518ba660f1946ce0efd412567a03d537eb8fb17ef4f671cb680b71"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/death-0060.png",
+      "sha256": "b9584b27d0ee19be9ff5c8634a59047114e8d41df3ab5642850136b98526ca84"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/death-journal.jsonl",
+      "sha256": "1c958d53f4a097fee81ac7ce9645c78a54eb36568bec874627a5ed7131894efe"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/death-result.json",
+      "sha256": "7631874da89d14665ab9651fce7009ca6e3edbee5ff86d6c06798950c87ce09d"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/death.json.gz",
+      "sha256": "9f67db61abd68d6312594e5a8940a1e8d4a8464653f1a1288569a1065564c214"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/death.mp4",
+      "sha256": "1d141de20d2c29e09b4a9fbdcd71071ae11d0a2eba11ce2bc5af4f387912b327"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/deployment-pointer.txt",
+      "sha256": "6b6cdba62eb2b4fa8c16bb941d9a5dc79933db597b9aa0ae7e16ba39a87d5f6c"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/deployment.json",
+      "sha256": "1ded9423aecd41aed6a389f64811ad7b1008782a15949aae5be4d08146ffa3cd"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/exercise-claim.json",
+      "sha256": "5fb21f69512f881033b5ac0d8e407816504f04cf4b077382bc73f3adf9f04028"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/exercise-journal.jsonl",
+      "sha256": "eaf617049c120000d9a7d3b74ffbf1d238eb61b193e6b70d6bfb5e321988cae9"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/hit-0030.png",
+      "sha256": "ea9182471829ad6853f7da31636a2cb382f6b16c3f63720bcacc7d3b6c857191"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/hit-journal.jsonl",
+      "sha256": "79e830e3e3f8133df358c7cec918b79804e4dea79c79e49901bafb3c97063b9a"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/hit-result.json",
+      "sha256": "7c15edd5d59fa42c4812e2e7fd6ce912173d17ac45035f54acd37de51b7d566b"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/hit.json.gz",
+      "sha256": "20dcf646005978f50cfd23117a0fd16713e9795dfde346c40ba736c5bf205953"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/hit.mp4",
+      "sha256": "e58a728758c9548ece835a790c84ebfaec3a3cbd42b800bde5bb7aa539aa138d"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/mossglass-readonly-path-recovery.json",
+      "sha256": "441b4ccf82c027e1f4430617167716b7fac075797c311409cb5ddd6f3a03e9f2"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/pass-0000.png",
+      "sha256": "40aa58a5532caed6b22148e10105da2f6fe54a6da4caf2dbcec810f8456fc098"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/pass-0040.png",
+      "sha256": "d982a20985fdde07543ee8d360c3b44b9f86516cac70596a45844c953a0fa220"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/pass-journal.jsonl",
+      "sha256": "5590a1c6ec1f5430cbdc097b3c6753fb65968219cce5c6d778e5967b05dde31c"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/pass-result.json",
+      "sha256": "704feef9d8e4235554a07975e928e821a8286d60acfb1eda00a690f1ca3db661"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/pass.json.gz",
+      "sha256": "df6cb3df64e565df6d48d3aadbb664ec7bab30356d2abc1664df46734b6752ec"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/pass.mp4",
+      "sha256": "d1e15771c2cf077674767a81e09ff5473e36e6d2d05461e42473087859a2c3f0"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/retired-readonly-claim.json",
+      "sha256": "c2c0b7eb4c46a5c5bb4c53b46a6a5d2b59c37288ac714555099379920d461259"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/root-visual-review.json",
+      "sha256": "b984b66fe4b2b45931f9f6c52fdbcf0770182804426badf5094d17dbc26afada"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/scroll-verification.json",
+      "sha256": "f98ff4946d175cbcbf28996ecd5db16d6e05a6770864b98e1a621674d5f403e1"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/v1-tiling-diagnosis.json",
+      "sha256": "29a6e03be5568d521f3f617f43b29476f728f7a13dcbd08f1823d6e8def58855"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/wrong-path-case-result.json.gz",
+      "sha256": "52ce73e96f5a26776497f0312e768057caf932e7eed992ff71f56b8090a6c548"
+    },
+    {
+      "path": "art-experiments/mossglass-reliquary/live-v1/wrong-path-journal.jsonl",
+      "sha256": "458234d3d96b70e1c9a6070a86f7edbfd67726453576d90deea30ff621f70dca"
+    }
+  ],
+  "limitations": [
+    "Selected views only. Material color failure does not negate recorded geometry/scroll identity. No complete art, cleanup or clone-independence acceptance.",
+    "Native2x shell tiling causes mixed atlas color remapping; V1 preserved unchanged."
+  ],
+  "independentScrollVerification": {
+    "path": "art-experiments/mossglass-reliquary/live-v1/scroll-verification.json",
+    "sha256": "f98ff4946d175cbcbf28996ecd5db16d6e05a6770864b98e1a621674d5f403e1"
+  },
+  "tilingDiagnosis": {
+    "path": "art-experiments/mossglass-reliquary/live-v1/v1-tiling-diagnosis.json",
+    "sha256": "29a6e03be5568d521f3f617f43b29476f728f7a13dcbd08f1823d6e8def58855"
+  }
+}

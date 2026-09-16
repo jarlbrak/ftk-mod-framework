@@ -1,0 +1,39 @@
+{
+  "status": "OFFLINE_REGRESSION_PASS_LIVE_PREVENTION_PENDING",
+  "change": "Detect known post-stage StoryQuestMessage before combat exists, return pending_story_message without inventory, binding acceptance or UI submission. Reject unknown modal/choice.",
+  "fixtureProvenance": {
+    "archive": "validation.json",
+    "journalSequence": 112,
+    "session": "dffaaf037f494dce9430a2bf6f1351e4"
+  },
+  "tests": {
+    "command": "python3 -m unittest discover -s tools/ai-model-pipeline/runtime-test -p 'test_*.py'",
+    "count": 126,
+    "result": "PASS",
+    "output": "runner-test-output.txt"
+  },
+  "files": [
+    {
+      "path": "tools/ai-model-pipeline/runtime-test/run_case.py",
+      "sha256": "854d52454191ab7fb7361341cde1dde282319e051c783c4e4a1c9e64d8e8b686"
+    },
+    {
+      "path": "tools/ai-model-pipeline/runtime-test/test_run_case.py",
+      "sha256": "d701ef9102cffac3c9594a4b5a1d5e33dd6a35fce23d01fc1098a32dcae469f2"
+    },
+    {
+      "path": "tools/ai-model-pipeline/runtime-test/fixtures/reefstrider-post-stage-story.json",
+      "sha256": "7cb63c900155c49be9fa0934884fc44bdd35130a70024c9bc84a3996008acfb6"
+    },
+    {
+      "path": "tools/ai-model-pipeline/runtime-test/README.md",
+      "sha256": "6dae363f054ea7427f9241943db34eef517fc855cf33afb7173ede8f7c8ea7d6"
+    }
+  ],
+  "limits": [
+    "No new live trial or original Reefstrider acceptance.",
+    "Classification fix does not prevent a new native quest from being triggered during dungeon entry.",
+    "Pre-entry native quest-completion design and implementation remain pending.",
+    "Architect source/review remains in progress."
+  ]
+}

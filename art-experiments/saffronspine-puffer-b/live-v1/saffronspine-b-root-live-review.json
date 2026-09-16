@@ -1,0 +1,108 @@
+{
+  "session": "d19a563dd2ab48948fa23342bd31fbfd",
+  "reviewedSteps": {
+    "pass": [
+      0,
+      53
+    ],
+    "dodge": [
+      30
+    ],
+    "hit": [
+      30
+    ],
+    "death": [
+      60
+    ]
+  },
+  "selectedAppearance": "PASS for reviewed original body and both portraits; attack roll icons overlap top of inflated body, no selected frame crop",
+  "hit": "Normal attack -8 HP58\u219250 after separately preserved dodge",
+  "death": "Explicit KillSingle50\u21920, selected60 hiddenbody/nativeFX; native DeathFade source-consistent, actual CEL fade field not captured",
+  "limits": [
+    "Exact B only",
+    "Selected images only",
+    "Ordinary lethal and indirect death untested",
+    "Final owned resource teardown unproved"
+  ],
+  "captures": {
+    "pass": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/c29ac4d6b16c4f4784303285e9a8c22b.json",
+      "frames": 120,
+      "clips": {
+        "BlowFish_Idle": [
+          0,
+          119
+        ],
+        "BlowFish_Attack1": [
+          45,
+          62
+        ]
+      },
+      "firstRendererDisabled": null
+    },
+    "dodge": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/853b285bcfda48578d7f3b72528ad2a9.json",
+      "frames": 120,
+      "clips": {
+        "BlowFish_Idle": [
+          0,
+          111
+        ],
+        "BlowFish_Dodge": [
+          22,
+          39
+        ],
+        "BlowFish_Attack2": [
+          69,
+          86
+        ],
+        "BlowFish_Attack1": [
+          112,
+          119
+        ]
+      },
+      "firstRendererDisabled": null
+    },
+    "hit": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/c9c2fca49bd64fb8a0528f65894a2a07.json",
+      "frames": 120,
+      "clips": {
+        "BlowFish_Idle": [
+          0,
+          119
+        ],
+        "BlowFish_HitSmall": [
+          28,
+          37
+        ],
+        "BlowFish_Attack1": [
+          69,
+          86
+        ]
+      },
+      "firstRendererDisabled": null
+    },
+    "death": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/eb4e5bdd75aa44048a35460119d3ede6.json",
+      "frames": 120,
+      "clips": {
+        "BlowFish_Idle": [
+          0,
+          26
+        ],
+        "BlowFish_DeathDirect": [
+          27,
+          119
+        ]
+      },
+      "firstRendererDisabled": 27
+    }
+  },
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "collectCount": 2
+}

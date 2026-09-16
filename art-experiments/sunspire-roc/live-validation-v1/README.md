@@ -1,0 +1,7 @@
+# Sunspire Roc fresh live trial V1
+
+This archive records the fresh catalog-412 session `c244446c2d9443759ce4a67cf7eaa022` against the exact `rocA` `enRoc01` renderer. The authored `sunspire-roc.glb` bound under one native owner with the expected 36-bone signature and preserved 0.9 native root scale. Its cloned Standard material uses the authored palette with emission disabled; the native head `PortraitCam` marker registered successfully, though this archive does not contain a separate portrait-pixel capture.
+
+Pass, focused attack, and explicit `KillSingle` fixture captures each contain all 120 requested fixed-step frames. The focused `Attack(focus)` changed the same target from 81 to 71 HP. The selected review samples show the original bird remaining coherent through native wing, head, tail, leg, and death motion. Native combat UI/effects and victory/loot overlay restrict fine detail review. The fixture reached strict native Ready at level 0 room 2 after two guarded native Collect actions.
+
+`validation.json` records binding, material, action, clip, and progression facts. `metadata/` stores lossless non-payload records, `selected/` contains nine reviewed original PNGs, and each MP4 is a 12 fps presentation derivative. The ordinary no-focus hit, ordinary lethal behavior, portrait pixels, full culling envelope, final material lifetime, and full art acceptance remain separate checks. `archive.py` refuses to overwrite a completed result.

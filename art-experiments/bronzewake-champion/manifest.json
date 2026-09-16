@@ -1,0 +1,327 @@
+{
+  "name": "Bronzewake Champion",
+  "native_chassis": "bossGladiator",
+  "native_surface_copied": false,
+  "art_status": "Original multipart surface model; exact armor topology has canonical V4 evidence, exact body topology has canonical V5 evidence, exact boots topology has canonical V6 evidence, and exact hair topology has canonical V7 evidence; full art acceptance remains",
+  "native_forward": "+UnityZ, established by toe chain and native facial extent",
+  "assignments": [
+    {
+      "renderer_path": "enBossGladiator",
+      "reference_renderer": 121272,
+      "glb": "bronzewake_body.glb",
+      "texture": "bronzewake_basecolor.png"
+    },
+    {
+      "renderer_path": "hairBottomBossGladiator",
+      "reference_renderer": 121500,
+      "glb": "bronzewake_hair.glb",
+      "texture": "bronzewake_basecolor.png"
+    },
+    {
+      "renderer_path": "armorBossGladiator",
+      "reference_renderer": 121522,
+      "glb": "bronzewake_armor.glb",
+      "texture": "bronzewake_basecolor.png"
+    },
+    {
+      "renderer_path": "bootsBossGladiator",
+      "reference_renderer": 121661,
+      "glb": "bronzewake_boots.glb",
+      "texture": "bronzewake_basecolor.png"
+    }
+  ],
+  "accessory_boundary": "Native helmet and weapon/shield rigid accessories retained; studio excludes proprietary accessories; no automatic rigid replacement",
+  "remaining": [
+    "Additional proficiencies, DeathLight and broader native accessory intersection review",
+    "Portraits, collision, extended culling, long-session resource lifetime, full campaign completion and finished-art acceptance"
+  ],
+  "parts": [
+    {
+      "name": "bronzewake_body",
+      "vertices": 2640,
+      "triangles": 880,
+      "palette_joints": 25,
+      "max_bind_rest_error": 4.932284269898446e-08,
+      "blender_reopen_max_bind_rest_error": 4.932284269898446e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.15468168258667,
+        1.4550000429153442,
+        -0.0769958421587944
+      ],
+      "bind_bounds_max": [
+        1.15468168258667,
+        2.004499912261963,
+        0.3677975535392761
+      ],
+      "blender_roundtrip_glb_sha256": "c22912602273ec2a8518246e4af93c9dd20f4f6e66978acd826d87852ede203f"
+    },
+    {
+      "name": "bronzewake_hair",
+      "vertices": 1188,
+      "triangles": 396,
+      "palette_joints": 8,
+      "max_bind_rest_error": 2.220446049250313e-16,
+      "blender_reopen_max_bind_rest_error": 2.220446049250313e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.22298496961593628,
+        1.6627999544143677,
+        -0.12532924115657806
+      ],
+      "bind_bounds_max": [
+        0.22298496961593628,
+        1.9371999502182007,
+        0.06848274916410446
+      ],
+      "blender_roundtrip_glb_sha256": "77373794b53a004e3557ba1440098a5e30257c840234fa1652c37381b5ff3563"
+    },
+    {
+      "name": "bronzewake_armor",
+      "vertices": 2364,
+      "triangles": 788,
+      "palette_joints": 26,
+      "max_bind_rest_error": 4.174187773209326e-09,
+      "blender_reopen_max_bind_rest_error": 4.174187773209326e-09,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.5199999809265137,
+        0.3921549618244171,
+        -0.1146935373544693
+      ],
+      "bind_bounds_max": [
+        0.5199999809265137,
+        1.6959999799728394,
+        0.27292323112487793
+      ],
+      "blender_roundtrip_glb_sha256": "5258d50b30757296853257ce8b5d159edc201d6fde4c77f78953cca8507f9c70"
+    },
+    {
+      "name": "bronzewake_boots",
+      "vertices": 864,
+      "triangles": 288,
+      "palette_joints": 11,
+      "max_bind_rest_error": 1.1102230246251565e-16,
+      "blender_reopen_max_bind_rest_error": 1.1102230246251565e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.3140000104904175,
+        0.004011247772723436,
+        -0.041802532970905304
+      ],
+      "bind_bounds_max": [
+        0.3140000104904175,
+        0.5376247763633728,
+        0.32322609424591064
+      ],
+      "blender_roundtrip_glb_sha256": "2da26a98eacd0611398e2eceebce1343f451b2452c976b89248860c6f27dffb5"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121272,
+      "local_reference_path": "scratch/skeleton-audit/121272/reference.npz",
+      "sha256": "8899fdd4067fc175165c41c04b1442128eb9538ebd4ad414accca006f657597a"
+    },
+    {
+      "renderer_id": 121500,
+      "local_reference_path": "scratch/skeleton-audit/121500/reference.npz",
+      "sha256": "0d9b132dd2c1023fd4fae9ae8981ef1526482e6d7f6fa7eee438406e9a29e61b"
+    },
+    {
+      "renderer_id": 121522,
+      "local_reference_path": "scratch/skeleton-audit/121522/reference.npz",
+      "sha256": "35e9f3ee110e80b7b2cf3ce7f39d7f86d9a4907e7b7b4d298cd945dbf5ea7029"
+    },
+    {
+      "renderer_id": 121661,
+      "local_reference_path": "scratch/skeleton-audit/121661/reference.npz",
+      "sha256": "76f1ddc4b1187578d8db650bf0990975a9d921b993e31771db650bee274c6cc8"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for all four parts",
+    "saved_blender_reopen_export": "pass for all four parts",
+    "native_bind_bounds": "all four original surfaces contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "canonical V4 exact armor source, canonical V5 exact body source, canonical V6 exact boots source and canonical V7 exact hair source observed; each stage also verified all four companion assignments on the same native owner",
+    "live_animation": "canonical V4 armor, V5 body, V6 boots and V7 hair archives sample idle, attack, ordinary hit, recovery and explicit KillSingle death prefixes",
+    "live_material_and_culling": "V5 body, V6 boots and V7 hair material readbacks confirm authored base textures with emission disabled; extended culling and final art remain open"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "5cc4463aa5d34dc848dd513cc9f39f65f28ce010a7ca20224a03bf8feaee684a",
+      "bytes": 18228
+    },
+    "bronzewake-studio.blend": {
+      "sha256": "3d0bd590f94c3d6f112246db709597a288c70a757aff5b65d34763e06cc560a7",
+      "bytes": 191229
+    },
+    "bronzewake_armor.blend": {
+      "sha256": "0d4ed2e98c405ede75755d42d4c51d8c9ec2a51811ecc2d5d55ae09f36722061",
+      "bytes": 145441
+    },
+    "bronzewake_armor.glb": {
+      "sha256": "741af2298aa0066423bf52110cbfee05644958b6a4d0c712b91cf60801bb2dd8",
+      "bytes": 140864
+    },
+    "bronzewake_armor.pieces.json": {
+      "sha256": "3b79aa90c4a7bf9a9a67fb02b7614dced2f55cdb8c041fee10f91e49d91da51a",
+      "bytes": 1722
+    },
+    "bronzewake_armor.source.json": {
+      "sha256": "f68b43eeb8f550962283efb4c443d4e8c6bedaec9ceef3b0b5da742c10dab667",
+      "bytes": 377320
+    },
+    "bronzewake_armor.validation.json": {
+      "sha256": "16c2c6017b10c5a784ba95cd727a62017012e93c345bf2f81c086e08840e4b05",
+      "bytes": 800
+    },
+    "bronzewake_basecolor.png": {
+      "sha256": "7e52ed6e45ac5a0bf07a72b3e1ce278fac7357f88c4554522f65245b7abb3996",
+      "bytes": 266
+    },
+    "bronzewake_body.blend": {
+      "sha256": "0c704d4e1dcd3af02e74c79a92a27ef6657770c0a0e18819a089caf53155c745",
+      "bytes": 147836
+    },
+    "bronzewake_body.glb": {
+      "sha256": "f102309727fb90db311bd63df17790751807e153090d31858867160851bd705c",
+      "bytes": 156840
+    },
+    "bronzewake_body.pieces.json": {
+      "sha256": "4818550c6acca78a71f88be2c6cef9f482fe3b0bc22937e5f097c950e843f010",
+      "bytes": 1217
+    },
+    "bronzewake_body.source.json": {
+      "sha256": "2f277ef39dee835a8680e19edcd2d00abdb81284a209b67cb5b5a1b0af697772",
+      "bytes": 425600
+    },
+    "bronzewake_body.validation.json": {
+      "sha256": "934d27db30255eaedbd9ff903b0132a5707195e9ad687b931d47a8c9300990a2",
+      "bytes": 793
+    },
+    "bronzewake_boots.blend": {
+      "sha256": "b414294f2a580312e5e39efa358c3b96df157a077d503dc167e917b06d04f1b0",
+      "bytes": 114408
+    },
+    "bronzewake_boots.glb": {
+      "sha256": "99fe78bb8a077ed417f62caba208c63dd6b01e335980d29da849b2ee503bfecd",
+      "bytes": 52544
+    },
+    "bronzewake_boots.pieces.json": {
+      "sha256": "eb15dd6cd4a16f843497b873e39fb9ca9e395b5108d21600328f7a2dc6e87c0d",
+      "bytes": 537
+    },
+    "bronzewake_boots.source.json": {
+      "sha256": "340e8c2f7e57d112666e6f11da901cdabf911cd86071709477526e146ecb4e7e",
+      "bytes": 139804
+    },
+    "bronzewake_boots.validation.json": {
+      "sha256": "0f7f5fd2cbf8be6aee42e1f348f4e735be5b2201e31dbc02bd5d0c1f20a9d94f",
+      "bytes": 804
+    },
+    "bronzewake_hair.blend": {
+      "sha256": "8395d22e12f65fb751d4de8efe2a776d22ca7c06091717d4ac7a3db851d16c2b",
+      "bytes": 113748
+    },
+    "bronzewake_hair.glb": {
+      "sha256": "4f63a0cfad3895e6c8a1a40afe7db48cf9e28af64292a9ab85f3bf6abdc9e2fd",
+      "bytes": 71076
+    },
+    "bronzewake_hair.pieces.json": {
+      "sha256": "1d60f79f3da3a14a03fac5c58cd48219514eb5745b28f24bd15b4a354f927937",
+      "bytes": 451
+    },
+    "bronzewake_hair.source.json": {
+      "sha256": "fac2eaf32b28204d6c5bb7a134e1884a249b874329995b3474f21cfe38feaf23",
+      "bytes": 184006
+    },
+    "bronzewake_hair.validation.json": {
+      "sha256": "d296520a12e201db424e6b185a23591bfe6a28c412f1c5d95db0bc6d9cd89dde",
+      "bytes": 802
+    },
+    "build_blender.py": {
+      "sha256": "51f532581df6cd5ad8e6724136ad89eb3f6d1be811b0f511a30b527a3e9dabac",
+      "bytes": 5701
+    },
+    "build_geometry.py": {
+      "sha256": "cd624ffb66f9d5fd40eab0e3fcb8ef64369c38de7aeb02135aa95080c45f503a",
+      "bytes": 8992
+    },
+    "finalize_manifest.py": {
+      "sha256": "a1867e07a0d0f9241f1a31e260c9d67d1136f30fc2763a5be2f5d6f9dd0dcf97",
+      "bytes": 2529
+    },
+    "hero.png": {
+      "sha256": "ec4d65a03b0b6d475c730ae2647b18972f1c46b3d84ae259690ddc974df65510",
+      "bytes": 1044492
+    },
+    "native-material-metadata.json": {
+      "sha256": "53932e1e7a382f9fe2272d1ef3d1e5f59b3ee1c0a338ccd7e9c28f011bad1cce",
+      "bytes": 19905
+    },
+    "runtime-profile.json": {
+      "sha256": "f60f940149758bda9e8a4e8deeb390f34adc310d453865e59036d354d8927baa",
+      "bytes": 1125
+    },
+    "side.png": {
+      "sha256": "579f67be4d34632192efb2aeed6df7ec07afca3b297b02c2fd33e4533df85595",
+      "bytes": 1050779
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/bronzewake-champion/live-validation.json",
+    "sha256": "74da2bce6d9582fe01d1788fe6a1111a3cf272519a84f2dbce9f9a5c082b6e3d"
+  },
+  "live_v3": {
+    "path": "art-experiments/bronzewake-champion/live-validation-v3/validation.json",
+    "status": "fresh_catalog_411_multipart_binding_complete_attack_kill_prefix_ready_observed",
+    "session": "591ba03f086341369926e56e8f4dc444",
+    "ordinary_attack": "HP 58 to 48 with cheat=None and no focus",
+    "kill_fixture": "HP 48 to 0; renderer-destroyed death prefix at frame 91/120",
+    "native_collects": 0,
+    "strict_ready": "level 0 room 2",
+    "next_enemy_room_observed": ["cubeA", "ftkmf_modeltest_probe_cultista"]
+  },
+  "live_v4": {
+    "path": "art-experiments/bronzewake-champion/live-validation-v4/validation.json",
+    "sha256": "e5bc817479cdae37f5bd8913dc588da75bf5efe02d068d12fb3f2fa4e8477f36",
+    "status": "canonical exact armor source with scoped reviewed live evidence",
+    "session": "4049537c607648bfbf525e75570102ed",
+    "ordinary_attack": "HP 11 to 1 with no focus",
+    "kill_fixture": "explicit KillSingle at 1 HP; 90 of 120 frames retained through native death before controller-unresolved boundary",
+    "native_collects": 0,
+    "strict_ready": "level 0 room 2"
+  },
+  "live_v5": {
+    "path": "art-experiments/bronzewake-champion/live-validation-v5/validation.json",
+    "sha256": "37a5b65c98851baa17939e4dff7b3cbc2d4c958cae2540cb426dda66cd1df9aa",
+    "status": "canonical exact body source with scoped reviewed live evidence",
+    "session": "eb80d5aa8b494998ba63acfdac8a4b56",
+    "ordinary_attack": "HP 11 to 6 with no focus",
+    "kill_fixture": "explicit KillSingle at 6 HP; 90 of 120 frames retained with m_DoRagdoll=true and 11 active surviving rigid bodies nonkinematic from frame 28 before controller-unresolved boundary",
+    "native_collects": 0,
+    "strict_ready": "level 0 room 2"
+  },
+  "live_v6": {
+    "path": "art-experiments/bronzewake-champion/live-validation-v6/validation.json",
+    "sha256": "b12554b93e3238d082cf99ea6452b921c701ad80f6fe1882fc16cb9e7f63099e",
+    "status": "canonical exact boots source with scoped reviewed live evidence",
+    "session": "e9d57811cedf4bc695c773ab87f5ff5d",
+    "ordinary_attack": "HP 11 to 1 with no focus and DamagedHeavy",
+    "kill_fixture": "explicit KillSingle at 1 HP; 90 of 120 frames retained with m_DoRagdoll=true, 11 surviving rigid bodies, and all survivors nonkinematic from frame 28 before controller-unresolved boundary",
+    "native_collects": 0,
+    "strict_ready": "level 0 room 2"
+  },
+  "live_v7": {
+    "path": "art-experiments/bronzewake-champion/live-validation-v7/validation.json",
+    "sha256": "1051a07a2b3f54e0c20c8c568fc442dc09a7ee5e78c4a8cee16f0075b0de46a8",
+    "status": "canonical exact hair source with scoped reviewed live evidence",
+    "session": "80a9400b41074c35bf82c590526ffdbd",
+    "ordinary_attack": "HP 11 to 1 with no focus and DamagedHeavy",
+    "kill_fixture": "explicit KillSingle at 1 HP; 90 of 120 frames retained with m_DoRagdoll=true, 11 surviving rigid bodies, and all survivors nonkinematic from frame 28 before controller-unresolved boundary",
+    "native_collects": 0,
+    "strict_ready": "level 0 room 2"
+  }
+}

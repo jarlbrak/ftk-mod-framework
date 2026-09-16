@@ -1,0 +1,20 @@
+{
+  "status": "INWARD_TOP_AND_BOTTOM_CAP_WINDING_CONFIRMED",
+  "glbSha256": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+  "topTriangles": 16,
+  "bottomTriangles": 16,
+  "topSignedYNormalRange": [
+    -0.08633094280958176,
+    -0.03849644958972931
+  ],
+  "bottomSignedYNormalRange": [
+    0.09788616001605988,
+    0.21951644122600555
+  ],
+  "expectedOutwardTopY": "positive",
+  "expectedOutwardBottomY": "negative",
+  "limits": [
+    "Binary signed cross-product audit establishes cap winding; actual native material backface culling remains source/live comparison evidence.",
+    "Shared generated normals and winding can agree while both face inward."
+  ]
+}

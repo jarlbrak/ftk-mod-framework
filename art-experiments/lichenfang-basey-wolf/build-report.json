@@ -1,0 +1,42 @@
+{
+  "name": "Lichenfang Prowler",
+  "status": "PASS_ORIGINAL_BIND_AUTHORED",
+  "artScope": "Original lichen-armored wolf geometry and palette; offline binary/bind validation only.",
+  "authoringNativeSurfaceRead": false,
+  "validationReadsNativeReference": true,
+  "allowedReferenceFields": [
+    "bone_names",
+    "bindposes"
+  ],
+  "target": {
+    "resourcePrefab": "enbaseywolf",
+    "nativeEnemy": "wolfA",
+    "rendererPath": "Wolfie",
+    "sourceRendererId": 120975,
+    "controller": "wolfController",
+    "controllerId": 6007,
+    "joints": 33
+  },
+  "reference": {
+    "path": "scratch/basey-wolf-reference-v1/reference.npz",
+    "sha256": "2acee740166d02288fe4195066f25bc39da69928b5e7ff7a45c89288769b2248"
+  },
+  "assets": {
+    "lichenfang": {
+      "glbSha256": "a53986fcd2ab4f65479cb1f39055163e5dea44381ecad2f84c2b94fa9f8d09b5",
+      "vertices": 8538,
+      "triangles": 2846,
+      "paletteBones": 33,
+      "allPaletteBonesWeighted": true,
+      "maxBindRestError": 5.728821861339384e-08
+    },
+    "palette": {
+      "sha256": "64a203e5f15eef9f39d83dabd70b18ae46ebdf81f2ee111cf95bcfe2b7c67445",
+      "bytes": 12357
+    }
+  },
+  "limits": [
+    "Offline bind validation does not establish resource prefab selection, runtime renderer binding, animation, materials, culling, portraits, or gameplay.",
+    "Direct wolfA evidence and sibling resource-prefab evidence do not establish this enbaseywolf source pair."
+  ]
+}

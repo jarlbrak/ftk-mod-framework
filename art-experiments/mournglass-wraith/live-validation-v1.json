@@ -1,0 +1,2278 @@
+{
+  "status": "SELECTED_ORIGINAL_LIVE_POSES_REVIEWED_WITH_NATIVE_FX_OCCLUSION_LIMITS",
+  "nativeEnemy": "chaosBeast",
+  "rendererId": 121008,
+  "controllerId": 5960,
+  "rigProfile": "f8480a2d2d6a276730a02dca4d86b93484137a0a7ae861123ad26a9e947809c2",
+  "combatProfile": "1d2808cbd2bc1cb6f31a3d51b0787cb854efdf316b9ba44fb3b7825899d35d78",
+  "session": "9476272a23d04891bee71aa188f24f02",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "fbd04bedd64c8ad7990d6e0e2625c0ba3fbefb1f5eb907e26a52d1d6ac7f5d49",
+      "bytes": 351232
+    }
+  },
+  "assetHashes": {
+    "mournglass.glb": "c1c04fbac1b7ca604f9091148d14b75f48b95b913327e2aeb7404b0986caa029",
+    "mournglass.slot0.png": "6d5d0f1e4b179dc017b5800164035108613cc79a3e83e533920694a93414476e",
+    "mournglass.slot1.png": "76fde08cf639f6cd1fd078d9943f2470b2c9ea2c0555b4fbe8c8b5f279126186"
+  },
+  "profileSha256": "9934b1acece6df69868ad6cfb74269be2119886950a75b22593e51a806faadc1",
+  "frozenAuthoringManifestSha256": "09ef2b0cd960c4185b188e29d117963b69dbc147263fa15a6e616369cc676da0",
+  "rawWrapperStatus": "needs_visual_review",
+  "captures": [
+    {
+      "label": "pass",
+      "action": "pass",
+      "raw": {
+        "path": "art-experiments/mournglass-wraith/live-v1/pass.json.gz",
+        "sha256": "942c053417ad9d18e6eecf6a52ca29fa95f7da1d67dd534639dc6301f3cf5910"
+      },
+      "boundary": {
+        "partial": false,
+        "completeCapture": true,
+        "allowRendererDestroyedPrefix": false,
+        "rawCaptureOk": true,
+        "rawCaptureError": null,
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 120,
+        "firstRetainedFrame": 21480,
+        "lastRetainedFrame": 21599,
+        "resultFrame": 21599,
+        "termination": null,
+        "limitation": null
+      },
+      "frames": 120,
+      "video": {
+        "path": "art-experiments/mournglass-wraith/live-v1/pass.mp4",
+        "sha256": "fc270bd3a3e6273351ba607596cb66d3eb9da91307d176316c0a1d1688b763a1"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "positiveClipFrames": {
+        "cidle_ghost": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119
+        ],
+        "attackProf_ghost": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106
+        ]
+      },
+      "rendererDisabledFrames": [],
+      "animatorDisabledFrames": []
+    },
+    {
+      "label": "normal-hit",
+      "action": "attack",
+      "raw": {
+        "path": "art-experiments/mournglass-wraith/live-v1/normal-hit.json.gz",
+        "sha256": "e9fb2ec970be2209e9abe3326b65f36d7bf325f1332d59644db6ee06e6913b02"
+      },
+      "boundary": {
+        "partial": false,
+        "completeCapture": true,
+        "allowRendererDestroyedPrefix": false,
+        "rawCaptureOk": true,
+        "rawCaptureError": null,
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 120,
+        "firstRetainedFrame": 22629,
+        "lastRetainedFrame": 22748,
+        "resultFrame": 22748,
+        "termination": null,
+        "limitation": null
+      },
+      "frames": 120,
+      "video": {
+        "path": "art-experiments/mournglass-wraith/live-v1/normal-hit.mp4",
+        "sha256": "eb8de6abdfdf1d8c37f40daf62259ba62c4f3805a6a6cd125c623e5721b3d409"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "positiveClipFrames": {
+        "cidle_ghost": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106
+        ],
+        "damageSmall_ghost": [
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38
+        ],
+        "attackProf_ghost": [
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119
+        ]
+      },
+      "rendererDisabledFrames": [],
+      "animatorDisabledFrames": []
+    },
+    {
+      "label": "explicit-death",
+      "action": "kill-fixture",
+      "raw": {
+        "path": "art-experiments/mournglass-wraith/live-v1/explicit-death.json.gz",
+        "sha256": "33eae855a0eeb752b22035db9022487246e8ffcdede366339b017aa23ff0483a"
+      },
+      "boundary": {
+        "partial": true,
+        "completeCapture": false,
+        "allowRendererDestroyedPrefix": true,
+        "rawCaptureOk": false,
+        "rawCaptureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__197.MoveNext () [0x00000] in <filename unknown>:0 ",
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 100,
+        "firstRetainedFrame": 23438,
+        "lastRetainedFrame": 23537,
+        "resultFrame": 23538,
+        "termination": "renderer_destroyed",
+        "limitation": "Failure category only; neither native cleanup causality nor full death-animation coverage is inferred."
+      },
+      "frames": 100,
+      "video": {
+        "path": "art-experiments/mournglass-wraith/live-v1/explicit-death.mp4",
+        "sha256": "62b1a22f1d1f4f2a0d579ac7937a45821673643bf0fc464b5a1221e346264f6f"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "100"
+      },
+      "positiveClipFrames": {
+        "cidle_ghost": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "death_ghost": [
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98
+        ]
+      },
+      "rendererDisabledFrames": [
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+      ],
+      "animatorDisabledFrames": [
+        99
+      ]
+    }
+  ],
+  "normalHitHpOutcome": {
+    "status": "nonlethal_hp_loss",
+    "beforeHp": 58,
+    "afterHp": 50,
+    "nativeOutcome": null,
+    "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+  },
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235520,
+        "alive": true,
+        "containerInstanceId": -237256,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237298,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237698,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235520,
+            "celInstanceId": -239124,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245942,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "9476272a23d04891bee71aa188f24f02",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "9476272a23d04891bee71aa188f24f02",
+    "id": "8fc2cc42bd364ffc8f4f7a0201ca54e0",
+    "frame": 23605,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "collectCount": 0,
+  "rootReview": {
+    "status": "SELECTED_ORIGINAL_LIVE_POSES_REVIEWED_WITH_NATIVE_FX_OCCLUSION_LIMITS",
+    "session": "9476272a23d04891bee71aa188f24f02",
+    "sourceRendererId": 121008,
+    "runtimeRendererId": -245500,
+    "views": [
+      {
+        "path": "scratch/mirewarden-game/model-test-output/d1cdf07b051a49d58055e3c3d9d5bef3/0000.png",
+        "sha256": "56ebd0dc69cd6d6d03161e1064b3aac4dfd4c2dffc1f548498cf0761026f8d13",
+        "captureId": "d1cdf07b051a49d58055e3c3d9d5bef3",
+        "index": 0,
+        "actualImageViewed": true,
+        "verdict": "Idle: dark reflective mantle and sleeves visible within native purple FX; ivory mask readable in both portraits; status icons obscure part of combat face."
+      },
+      {
+        "path": "scratch/mirewarden-game/model-test-output/d1cdf07b051a49d58055e3c3d9d5bef3/0050.png",
+        "sha256": "e02d2af528b4a99fbab45cf27dfcf756df8aac7b9d6e3e933ddb2a52cb0889f9",
+        "captureId": "d1cdf07b051a49d58055e3c3d9d5bef3",
+        "index": 50,
+        "actualImageViewed": true,
+        "verdict": "Positive attack: raised arms and ivory mask remain connected; native FX obscure lower mantle. Dark cloth has green/purple highlights under native lighting."
+      },
+      {
+        "path": "scratch/mirewarden-game/model-test-output/d1cdf07b051a49d58055e3c3d9d5bef3/0060.png",
+        "sha256": "a9c62a6d72c7edbec7e7fdef9042d9c84feae4650a55c23fd820cc12e33147cd",
+        "captureId": "d1cdf07b051a49d58055e3c3d9d5bef3",
+        "index": 60,
+        "actualImageViewed": true,
+        "verdict": "Positive attack: mask, both sleeves and visible mantle remain connected; torso/hem partly obscured by native FX."
+      },
+      {
+        "path": "scratch/mirewarden-game/model-test-output/8fe79300b6b742598ad5ea019d878e7a/0030.png",
+        "sha256": "7e20eb5db05162f933a304482328bf1ba3817070c0cb5d09c398700fdb59e086",
+        "captureId": "8fe79300b6b742598ad5ea019d878e7a",
+        "index": 30,
+        "actualImageViewed": true,
+        "verdict": "Hit: -8 and HP50 visible; sleeves/upper mantle connected; hero and native effects obscure lower silhouette and HUD icons overlap face."
+      },
+      {
+        "path": "scratch/mirewarden-game/model-test-output/899466d1625e4bf38b62b23723593fc6/0027.png",
+        "sha256": "0e59b336773fbb3b7fe09d7eb59137649857d159d9d204decb9ff161ce94bf73",
+        "captureId": "899466d1625e4bf38b62b23723593fc6",
+        "index": 27,
+        "actualImageViewed": true,
+        "verdict": "Explicit KillSingle -1000: original visible during early death with mask/sleeves/mantle connected; native purple burst and shards visible."
+      },
+      {
+        "path": "scratch/mirewarden-game/model-test-output/899466d1625e4bf38b62b23723593fc6/0040.png",
+        "sha256": "80675b6218033d223ee0d743f4d310aa52e8dcf52d5d296c4a90fcd4b64fb097",
+        "captureId": "899466d1625e4bf38b62b23723593fc6",
+        "index": 40,
+        "actualImageViewed": true,
+        "verdict": "Original body absent after renderer disable; residual native particles visible. No visible-corpse or full-death recording claim."
+      }
+    ],
+    "limits": [
+      "Six selected images; not full unoccluded motion or all-angle inspection.",
+      "Both portrait masks readable; not general camera framing acceptance for siblings.",
+      "Dark reflective cloth and native colored lighting alter offline palette appearance.",
+      "Death recording interrupted after100frames by renderer destruction; not complete120.",
+      "No ordinary lethal damage, campaign, collision/culling or final owned-resource teardown proof."
+    ]
+  },
+  "materialScroll": {
+    "pass": {
+      "status": "single_enabled_scroller_observed",
+      "frames": 120,
+      "materialIds": [
+        -245850,
+        -245854
+      ],
+      "leaseId": 4,
+      "targetSlot": 0,
+      "rate": [
+        0.0,
+        -0.5
+      ],
+      "firstPhase": [
+        0.0,
+        -54.706321716308594
+      ],
+      "lastPhase": [
+        0.0,
+        -60.160518646240234
+      ],
+      "maximumFloat32RecurrenceError": 0,
+      "limits": [
+        "Current owner membership only; no clone independence or final disposal proof.",
+        "Exactly one enabled _MainTex scroller with owned textures; other layouts need another verifier.",
+        "Numeric metadata does not establish appearance, visible death, or finished model quality."
+      ],
+      "rawCaptureSha256": "122f4052bc56b0e4867eb204a184e419956b54d68c89fdeb98c39746679e0edd"
+    },
+    "hit": {
+      "status": "single_enabled_scroller_observed",
+      "frames": 120,
+      "materialIds": [
+        -245850,
+        -245854
+      ],
+      "leaseId": 4,
+      "targetSlot": 0,
+      "rate": [
+        0.0,
+        -0.5
+      ],
+      "firstPhase": [
+        0.0,
+        -65.6783447265625
+      ],
+      "lastPhase": [
+        0.0,
+        -71.13208770751953
+      ],
+      "maximumFloat32RecurrenceError": 0,
+      "limits": [
+        "Current owner membership only; no clone independence or final disposal proof.",
+        "Exactly one enabled _MainTex scroller with owned textures; other layouts need another verifier.",
+        "Numeric metadata does not establish appearance, visible death, or finished model quality."
+      ],
+      "rawCaptureSha256": "6859ae193ea5b0bc4a1df21c24f5a16c2405fae8057e668cf83574b0f78141e6"
+    },
+    "death": {
+      "status": "VERIFIER_REJECTED_PARTIAL_CAPTURE_AS_EXPECTED",
+      "capture": "scratch/mirewarden-game/model-test-output/899466d1625e4bf38b62b23723593fc6.json",
+      "sha256": "c358f947e70c95f0293bfd4f88f9720917bcf6fd9583d22f57740b66178fd7c3",
+      "frames": 100,
+      "rawOk": false,
+      "error": "ValueError: Successful raw capture required",
+      "verifier": "tools/ai-model-pipeline/runtime-test/verify_material_scroll.py",
+      "interpretation": "No complete-capture material-scroll verdict; raw partial was not modified or relabeled."
+    }
+  },
+  "limits": [
+    "Selected original views only; native FX, hero and status icons obscure portions of the face, torso and hem.",
+    "Cloth appears dark and reflective under native lighting; both portraits show a readable ivory mask. No unconditional color-fidelity claim.",
+    "Two-slot pass/hit scroller metadata passed independently with zero float32 recurrence error; current owner only, no clone independence or final resource disposal.",
+    "Explicit KillSingle death is not ordinary lethal damage.",
+    "Death retains100of120requested frames with exact renderer-destroyed failure; partial raw was not relabeled successful. Complete-capture material-scroll verifier rejected it as expected.",
+    "Native Ready0/2 reached without Collect; full campaign, ordinary lethal and final owned-resource teardown remain unverified."
+  ],
+  "losslessMappings": [
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-6db2c72d64ff401e9208257482ff9cfa/journal.jsonl",
+      "sourceSha256": "4f13aaaae9e73a58ed6df30177f303f6f86cae72532e753ce43177995ffd8572",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-6db2c72d64ff401e9208257482ff9cfa/journal.jsonl.gz",
+        "sha256": "74be171d3eb30aa30e1276bd416c7781c704d3b4f1c86bc119e6f26181da207c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-6db2c72d64ff401e9208257482ff9cfa/case-result.json",
+      "sourceSha256": "a94bc9c68dbfc835fb888efa18a6d6ed721620375035114a699edf5ae8bae2f6",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-6db2c72d64ff401e9208257482ff9cfa/case-result.json.gz",
+        "sha256": "5ac19fd453e07a9a9832b27a207e769552c7ce58b43c027f576b47a51eaa1d72"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-6db2c72d64ff401e9208257482ff9cfa/selected-frames.html",
+      "sourceSha256": "d108bf93ab2d339b889a4262a081b5714178d2060869d273c8e07d370128f1a4",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-6db2c72d64ff401e9208257482ff9cfa/selected-frames.html.gz",
+        "sha256": "52308d0a37c9fe9758f75ae8c42739a1fa1754f83f64a47215211623f74099a9"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/33e024533be6466e88821a2e0f402549.json",
+      "sourceSha256": "3252730c9b112254b80b06af2fd1aff18ee0f036d93a82c1e0cd598673188db0",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/33e024533be6466e88821a2e0f402549.json.gz",
+        "sha256": "7413e980e0aad800b13500b7eb0e8b52eb643ab0124aba85f2ffc7f5685e1782"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/214a4ee8edc24d708b8c66436d5bd8bc.json",
+      "sourceSha256": "f226ac7793961c43cf2e0e872d4bcd90fbdc5177401ac530e3438cff542ce7c2",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/214a4ee8edc24d708b8c66436d5bd8bc.json.gz",
+        "sha256": "f9a9b9b7daea7090c4916411ffb541ea1aef84b489f12777c315a181f62b057e"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8fc2cc42bd364ffc8f4f7a0201ca54e0.json",
+      "sourceSha256": "4543d4280a0f49b08476f12d8e04694846274456ce84a941e7ded9fb027efb08",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8fc2cc42bd364ffc8f4f7a0201ca54e0.json.gz",
+        "sha256": "1b3828f4421d3389fd828f821d4274451bd0bc3da4e80a540aa492678ebcc2ab"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-df2a58dd9ffc4e2d9730d74b9180567a/result.json",
+      "sourceSha256": "7d4ac1ba69ad244464b045f6c7d51c2f14de496a73241d59b1ec4b9412dd841b",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-df2a58dd9ffc4e2d9730d74b9180567a/result.json.gz",
+        "sha256": "be2a6fb05ac30fcdc072321a7c10bc45223675bd84b1ed3a248fc230ee3ce38a"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-df2a58dd9ffc4e2d9730d74b9180567a/journal.jsonl",
+      "sourceSha256": "a6f93b71c703180909f07d5e31a57d8193c52919bcd71b9c4f4f9c279e7b8b02",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-df2a58dd9ffc4e2d9730d74b9180567a/journal.jsonl.gz",
+        "sha256": "ab1234ba4aa5ec636464e93e6b40ec5cafaa7cc512fab160cc43a074c369f635"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8f21007105674ef786e24b0489dc6297.json",
+      "sourceSha256": "c21b3bd3aba8a0fc105dbfd56ebe9247670b053ddd442009298326a117c08fac",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8f21007105674ef786e24b0489dc6297.json.gz",
+        "sha256": "81525573f9d2665fa88f70cbc951450c76134db5627157b516927d06ceb0639c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/66474a32b85f4baf8beff4682b6f47b1.json",
+      "sourceSha256": "1460eaa004871aa54624bbe9048d4f4dfc71af22c12e5fcac26718e8607d991a",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/66474a32b85f4baf8beff4682b6f47b1.json.gz",
+        "sha256": "6c14353e53222069c07b1b5787333b5008744b4644ca2a98f2fc948bdcc29055"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/58f4ea2fb10048059f876b344dc90935.json",
+      "sourceSha256": "c7480e7ad87b6341f0ee16ff95ea20b6a0e210a38ba6832d877f93169a1808ad",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/58f4ea2fb10048059f876b344dc90935.json.gz",
+        "sha256": "c8a09739128d39050c6c738c06b31fe53a95b23217ca52e6afc7a50bcb89bed2"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/20950af71da846329780d400bf0fbdd7.json",
+      "sourceSha256": "c5310d077909327c3795b45e70707bb3a9696edf6b74a8db1338af6808bf3a33",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/20950af71da846329780d400bf0fbdd7.json.gz",
+        "sha256": "4be793275a7c70200b0540d70570a49d56029f05d84043575be3274999741e73"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/11944912be8a4f408eb87c067f81a96a.json",
+      "sourceSha256": "2aaff7dec0c080221835877f6e941a68e35d85937488e6c02e45cabd3512f11d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/11944912be8a4f408eb87c067f81a96a.json.gz",
+        "sha256": "5acadaf8163bf30994a51d2758da81e210d5f771bc244c24612a48b0ee1a1cd4"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/e235c071957147299cd75365ce883ff8.json",
+      "sourceSha256": "8636d1eafabc58419fb71d9fc6385fe6e781a94b92caace9c102c283092a4eed",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/e235c071957147299cd75365ce883ff8.json.gz",
+        "sha256": "931c30e7b4998097d26bd7e10b0502104ea7ab72e2525af39fa11270647b698f"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/1b94624ee3aa4bcf9e3fcccb9b4d638d.json",
+      "sourceSha256": "ab53b45008252652c1d0c9460583d69da97a5974b86ee14ae8698c4e1a20db26",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/1b94624ee3aa4bcf9e3fcccb9b4d638d.json.gz",
+        "sha256": "9036194474637e66c1f29a3dda17c6fffdf9c9e92e72630ab4de52778e417dc7"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/168e18dad0bc449689823041cd58eeaf.json",
+      "sourceSha256": "82de4859707df7ca24bb20c7543456c4dc81b060bcab82f28a4329ffa82a7ba9",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/168e18dad0bc449689823041cd58eeaf.json.gz",
+        "sha256": "1a1a19fe3b37d16e03677f20d637b4b452e4b61e95e069e7409d1edfee6229c7"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/dc8e8cb76ad449409e6303cb42b9679f.json",
+      "sourceSha256": "e61439c01d3353d83c1d7d07610fa00fdcc3b5c2119c87c9ccdd6849c9a24fea",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/dc8e8cb76ad449409e6303cb42b9679f.json.gz",
+        "sha256": "1fcca7ffd728cf4406dd531e4ea1b281cfc65f055be8b6a86c1a26332692e93b"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8d35b8e217064d3eb301c457543fa1c3.json",
+      "sourceSha256": "76207d3526092f9f8e63ffab90abef58acc94b7e7e32ee4d7d1ee74a56630c34",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8d35b8e217064d3eb301c457543fa1c3.json.gz",
+        "sha256": "1361a84ca72671d7da5398aef2217f4adb2471b776c25d7221fa26b3013f4645"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/0874e378780a45ebb9cfb4b0a2ce5dc5.json",
+      "sourceSha256": "84702ed6d4ed6a6df3d461d4d107b01c4912971e38c34158cfca07a53e5ef652",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/0874e378780a45ebb9cfb4b0a2ce5dc5.json.gz",
+        "sha256": "dac0361de811f1ba2f06e30c82ca1b5879f55171edd3f874662fc027dab9ec06"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/630bf21de1a649db8bb8a44296a6e12f.json",
+      "sourceSha256": "5f98b69eb51b00dc170265349bd901d67bc598315dfd766eb3ceb5bc8debfb98",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/630bf21de1a649db8bb8a44296a6e12f.json.gz",
+        "sha256": "59071b16e7a3d2c1eee3c98f070a27d7035e174ee97ad88e1f65203d8b8a586d"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/b4081fd4205a44f48ba4329b1c82b82c.json",
+      "sourceSha256": "43a31b87ad8f34174ba36f3e03f2e410a38edfd2007a95b5dc95ca911f70e4a5",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b4081fd4205a44f48ba4329b1c82b82c.json.gz",
+        "sha256": "2f512f5dd14aa5c1fd5409f57685cedefca50dd4874a3cb39061fe49c2193e16"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/6061af31c7bf4fb19315328169e0acbf.json",
+      "sourceSha256": "6cb80dc2c6225976aca580c3109bfb89cc7057acf02460c1c9f04f5c38c5234e",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/6061af31c7bf4fb19315328169e0acbf.json.gz",
+        "sha256": "46bdd507ca2d73adcdfb24da3f4b7a63df7eee2bc9048eee85ebde7423bc0c52"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/9f37604e0d2848e58b918ce8d54d3fb8.json",
+      "sourceSha256": "5f8ea6ea85b18ec9a1bc2a1cb30315e659e06a22e097bfe8a4adfd4d7ca5a499",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/9f37604e0d2848e58b918ce8d54d3fb8.json.gz",
+        "sha256": "20de9e3db0300a539d3ef4156de8a83f37a12c2fc1ce224bfc7ac50bce802713"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/fe5f6a44df9443a3acb2e564aa97795b.json",
+      "sourceSha256": "52bc584982f70d75efb4a5dd72274fbd5fa7560dd6a3ddb2d5769a09f0aeb49d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/fe5f6a44df9443a3acb2e564aa97795b.json.gz",
+        "sha256": "e93e41fa150632e71361fc8c682ea95f4e2a533229cc3fa7e7f57df4b91b1a71"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/40fa5d924f3a460d9b8bb00652bf7355.json",
+      "sourceSha256": "8f06bb3463a19e0e7cbf0eb47e1878ad56184a9ddb4bec5e3d61842566fdce5d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/40fa5d924f3a460d9b8bb00652bf7355.json.gz",
+        "sha256": "20fd8a31f22bb71a3344beec238f56478324dcd25fc9b6cecc370173c71262ba"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/c8d0da35c95b40ab94491cdb121b1389.json",
+      "sourceSha256": "9be13107a9b9bd40a097892569df36e051ffbfa1b3634bc446a4000db95b84e8",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/c8d0da35c95b40ab94491cdb121b1389.json.gz",
+        "sha256": "e50c50c152351a2c04e15cc8bd8fcefaa33669ff164ae9884332163ec9442fad"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/cdf079dcdbff4e419816e5c29359e184.json",
+      "sourceSha256": "d56c81ee03dad4aa50097a4bceed1b8597c5f671dca387742fc52ab5793f6d0f",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/cdf079dcdbff4e419816e5c29359e184.json.gz",
+        "sha256": "bd2696b995c4fb681606792cc28a78a18787b4ae19fd22d625fa3d54772d0f9d"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/7c248cc8b87a46b1b24d86e64aa58b01.json",
+      "sourceSha256": "409301f077e91dd418fb86c101fffb0158b7572b34f399728e28fbda65911906",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/7c248cc8b87a46b1b24d86e64aa58b01.json.gz",
+        "sha256": "f6252f6ce522d17ca069df1e2ae1c514a3b5b1c813dcc1a99dfbcef9069b9621"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/b7459c02fb424b47a0aba8bd1879aed0.json",
+      "sourceSha256": "3b92b946592bb6a1eba521ceefce3106e837258c34e6ffb30065a0edc3edaf7d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b7459c02fb424b47a0aba8bd1879aed0.json.gz",
+        "sha256": "d9f1037bdc40ca10750486dcbcaf81269c77f9ea3997c7333da8cac9b14060d2"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/4e29ff95eab844f0b0337e7e793c931b.json",
+      "sourceSha256": "caa21648020c0193262056aaeb095cd6879084e17f996b0e3c7b627ffba53f59",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/4e29ff95eab844f0b0337e7e793c931b.json.gz",
+        "sha256": "850999cc5535423bb73b06067ba90b0b2e408b06aa9a24434494e5394ed6fd73"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8d46e5bcd9d44a3c86f5391c750b5930.json",
+      "sourceSha256": "d92f211a696ea5b45ac8dc819b47d96932dbb82d93f2e1fbf82dbd70b0c07046",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8d46e5bcd9d44a3c86f5391c750b5930.json.gz",
+        "sha256": "1a199c2419291326d9e2c2d230c9c2509d004d14de5d79bb569bb8fdbc36b80c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/4d72bf7b261d4f7d9f7eed445e931fd7.json",
+      "sourceSha256": "62cdc38a8a19be316ea4dd7fb45b49623733dc360477c9e7cdefc2d64eaa205e",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/4d72bf7b261d4f7d9f7eed445e931fd7.json.gz",
+        "sha256": "e8f4b1259e0dc61724f365a9c208fb8dc0808293f47b77835e86110e38c02e00"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/a191d9fe02f844d289113839a76fce04.json",
+      "sourceSha256": "9c2ab71c0d0d5179cd74959629cb037cdbcba26bdd7e207f41f5cbffc884e24d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/a191d9fe02f844d289113839a76fce04.json.gz",
+        "sha256": "9a017ab9f46750c312725194d8eb6d4aab3e06ae9acfeb35ff01541711567542"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/90ba0edc19e24984824b574ecd9c7304.json",
+      "sourceSha256": "d5fad4b674e75132527973eb2b34f3c1a37377543b0deabfad3c55b2e7f5400b",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/90ba0edc19e24984824b574ecd9c7304.json.gz",
+        "sha256": "977bfd30b422f07eea05efe1c5c9f44f55ff72a965b12f685460c9b65268dceb"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/548127a7662f4011be86ea05f38bf049.json",
+      "sourceSha256": "9ce3cf52add514644c1fa23238c848f355a39f23b0f1b428cf0783c5cd90f12f",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/548127a7662f4011be86ea05f38bf049.json.gz",
+        "sha256": "ebf9aeafc9a124008ee8d670c38149bd42006f99b5b86b6e98ca8b0f53088d48"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d004fd8b6ae445d7871dda73767d0c5c.json",
+      "sourceSha256": "7136e98bded4014f42e78609524bd561847187a9dcb7d8ddde269b28888cb8a6",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/d004fd8b6ae445d7871dda73767d0c5c.json.gz",
+        "sha256": "c0dcc8184d2803abf74b94278eb8765569b6ab4497c16035b0fdc7050c52cf3c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/fd573d2bbbdf409081ae885ecd26a967.json",
+      "sourceSha256": "2005b0b29e048f4713d1cb2e9ea62e8c286a5f1299d6c48e85ddf7c52adf6714",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/fd573d2bbbdf409081ae885ecd26a967.json.gz",
+        "sha256": "b7f7dbc28db5102474b4014e0782c3a81e314b0b7c959d99af7dbb44a254514d"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/6912b9e73b064cf48ee50fa5daacb623.json",
+      "sourceSha256": "8a2028b9698cb57e3feb9a402fd3e4cd0d550bfba4003feae1b6b99aea33127c",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/6912b9e73b064cf48ee50fa5daacb623.json.gz",
+        "sha256": "75fa0b0661e53f06bb84d97e046ef58c60d4d0cb2e9467338f0795205210d647"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/c6285a86f12b4cd8824b0ba652c1cae5.json",
+      "sourceSha256": "395c560f067e4c7005a024c32ff835312b4bc5d6d1da4f81b8a98ae2e021db2d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/c6285a86f12b4cd8824b0ba652c1cae5.json.gz",
+        "sha256": "fbec2933d724caa5a43f36a814cb4fb5dc73df2db8aa6b99b5a1d967cbab630c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/b68770ab63da48ca8b6c653e5f643df3.json",
+      "sourceSha256": "79fd00547c8866a3d3940204a4171f3ab4ad46dfd764908ee40e3e5240665e92",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b68770ab63da48ca8b6c653e5f643df3.json.gz",
+        "sha256": "f686fd93642aaff17968531468cb9f7bd420b2256b65f154b0fc878fb1a44c91"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/bd99603c74844a958d6eaf94a68e2a7b.json",
+      "sourceSha256": "2ba299886a745c6199ab3c8b1dc9c86d360f86136ac4f1f5305996e324e815bd",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/bd99603c74844a958d6eaf94a68e2a7b.json.gz",
+        "sha256": "252b53f005a5bd81332a7a176c69cbf0a48e7fb3d988ac0a3cb1725226c2e6f8"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/6882ba33148d4c95ba395266afe07443.json",
+      "sourceSha256": "0f6efed88d0bd85f43bbccbc69370a9276d36fad4a9695404cabd7addf58e99c",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/6882ba33148d4c95ba395266afe07443.json.gz",
+        "sha256": "5001fddc88b66df048cf5828427a41c2d9277f8c77d29148c74c1ad1541d19e8"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/0c53574419aa4195aa4d0f081150dca4.json",
+      "sourceSha256": "4204b2cf35c663c1a26331df1b52d2dc488143675cca68a3de4007ec99b07581",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/0c53574419aa4195aa4d0f081150dca4.json.gz",
+        "sha256": "68134841ca3ad6ad6195ee5f5762348c68f7dfc7b1a679964009b511a6341201"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/21f094b3e45042a2b004fa6cae9b0307.json",
+      "sourceSha256": "41ebd165040fdebc02cb82af0981671927081994807882272836f6b50fc7de40",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/21f094b3e45042a2b004fa6cae9b0307.json.gz",
+        "sha256": "ef7aa9f46521efeab9724e6ff298c7997c28f3281ec06e491f2de0e3ff643f97"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/67233e030e42473caa046f5081cb872c.json",
+      "sourceSha256": "057bebfc57a39aac540672d402303e7ad1e98b41eea70c7172dd3c2ece27c830",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/67233e030e42473caa046f5081cb872c.json.gz",
+        "sha256": "87799a7892f6f4eebddd6a1d57381469e140a113a80570bad1e72df7a2228737"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/4c3cb41ed0554b63b49637cf75d6ae39.json",
+      "sourceSha256": "0ac68fa2eef984de082a16ebc69e00ed466bbe72602a91df97167a82e5b1223f",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/4c3cb41ed0554b63b49637cf75d6ae39.json.gz",
+        "sha256": "ad48bbd755c436ab6ddb45acb0d8391e970e664a4024e8de4a30e08c4825624f"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/094a8ffce1824b148ca17883d566819a.json",
+      "sourceSha256": "83cb5b2665c781529621f311fa1a252291eb763cbe71ee6c83239dc2b36799a2",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/094a8ffce1824b148ca17883d566819a.json.gz",
+        "sha256": "7829b454f0d96ad820cfbd215abd6dab63de8b8e669471e75e78d3450bace422"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/289d787a25d949b3b755b0ca050d4801.json",
+      "sourceSha256": "6f2cdd6b924ad5c5824abfc35e802554945a06c34c19fca812232b95a4afc335",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/289d787a25d949b3b755b0ca050d4801.json.gz",
+        "sha256": "b9b02241a96de84d16e01fc0ff63b45e520e88fb0783bb3ac41c91e4de31f43a"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/bc40b06afc3f4e89bb2e62322627bab5.json",
+      "sourceSha256": "8013824e4f4c3fda8566a12a8a4e6d40b437ce9c817d5f385c35c89dd567d053",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/bc40b06afc3f4e89bb2e62322627bab5.json.gz",
+        "sha256": "c0357fa2d849f94f1c3c9412d1cf1c2120e80f78a24ba4b3872ab59a7392af9a"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/2afbd712793048e4b036afb6976ef813.json",
+      "sourceSha256": "91b98fe2dc8eade37554416578aa0a9f57e130012a65e3813f5ab2586baa08d5",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/2afbd712793048e4b036afb6976ef813.json.gz",
+        "sha256": "a738857342ab3d8e2b0d209d15227507c457bff380150ca59655b6bd48254217"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/0b952d23dd924b1badc4b4a699265b9c.json",
+      "sourceSha256": "72a19544a63d421ef706feb697ca962a7273c321b8d09a0641a7eeedf238f5f5",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/0b952d23dd924b1badc4b4a699265b9c.json.gz",
+        "sha256": "9c82e5db3562fc65e0fa9e1f0d708e0cace68c79f4381e9896a0901484b98f27"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/eff9996e58c74ac4b428a095da178e14.json",
+      "sourceSha256": "a9c6b03be8e073368bce9a3adf720171066dae11b4e44542ed0f63d894b8af0f",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/eff9996e58c74ac4b428a095da178e14.json.gz",
+        "sha256": "c499dbed4ec2f401201f00a7cc57b223d3cbff0ec043a5f61a4f365ae3ad9efa"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/bea8145e2b28410aadf05ca58722c544.json",
+      "sourceSha256": "40ece7d89e9d091aa42c1682869084ff754ae959e04217fb7286ce3df3167d65",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/bea8145e2b28410aadf05ca58722c544.json.gz",
+        "sha256": "ded0217657bed00d0a9dbebb7d5859e1595cfd46a42a6a6947b02648ee6939b4"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/59c762c3cbc145d5bebf5c6546f159e2.json",
+      "sourceSha256": "16cbeb2f19b6b8bf08c03c0f74b8297c3ed0b90a11a98e99f0e09c2af2272f1a",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/59c762c3cbc145d5bebf5c6546f159e2.json.gz",
+        "sha256": "03bfb9407bc1401a1a02082abd4618e35eb1ccdb44d098da80893290845e50ac"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d94b19229f164049a412e822c1b195f2.json",
+      "sourceSha256": "18eb0d93f58350d8676e8618b9494a0b003fc46c47acba0345c714fa3e2f25a0",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/d94b19229f164049a412e822c1b195f2.json.gz",
+        "sha256": "b940258b754c128ebc2ccc368caff3b367060ad7d3b08766fad25f771b1f74ee"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/62552a09d9bc45298df9b887b0445edf.json",
+      "sourceSha256": "a9e0e28367faa3807777b252ed09f4feba946bfe8dff4729543b6ac48fa4139f",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/62552a09d9bc45298df9b887b0445edf.json.gz",
+        "sha256": "4b92d1eb2436b7e51d2eaf69da1d2ab8673ae583a616ef57269a3658bdf8a7f6"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/e7e8f7f8995c464f9bf769e0d5e7d361.json",
+      "sourceSha256": "c4664be79047b114dff837d2025f42cf4789ba4dc642c9789352e25eec02c721",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/e7e8f7f8995c464f9bf769e0d5e7d361.json.gz",
+        "sha256": "06a07bdfb3e851ce0a8feb10ad26581259787822e18d7e5725d3275aa3144697"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/34132ed912ac46fc9fe9e7a9bd274176.json",
+      "sourceSha256": "2d32b6ea34f110a87453d528bc12d622578726fc6bed26edae53fb91914f13cb",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/34132ed912ac46fc9fe9e7a9bd274176.json.gz",
+        "sha256": "3100a3871e05ca0635f87078d737b422152d111fd7acc8d27280bf95b086d8f1"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/1bbaf243171644e29655df4310f15e59.json",
+      "sourceSha256": "73e946f939d52f43ebc79d5b059070fb3d08d69b717a7973cfff8255b0d0cd62",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/1bbaf243171644e29655df4310f15e59.json.gz",
+        "sha256": "bcfc7d7e2519dffa09ed9cdfa056a6f222399afc46905dee1964de7bcd1d4740"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/362eddbf1e8746d584d84aa809269376.json",
+      "sourceSha256": "2bfc5abbaaf7cf8d2acf12ce059cd74f8ef05b015bbf4593ac10b786b49037e8",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/362eddbf1e8746d584d84aa809269376.json.gz",
+        "sha256": "0c77230dd409223337bf103683aaf1ec7a2ec0d65c58e1baff17590aa33b0b39"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/ec932ae6424e435cb0174ab54a823b13.json",
+      "sourceSha256": "85b52af4cb6b00fd00251b6bb1c61a37bb1aeebd0b8a96bd68ca5d127940a267",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/ec932ae6424e435cb0174ab54a823b13.json.gz",
+        "sha256": "5b528fbe1fd01e31a2ccd5a4dc34268ad89b707f68619e40606553eb4d6df231"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/b7bff7ccd4e245ae812a096e9dd68291.json",
+      "sourceSha256": "6b97f9b1ba8840896c500c77901de429d38360ec732069ba75fefdad06fb9aed",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b7bff7ccd4e245ae812a096e9dd68291.json.gz",
+        "sha256": "fdbbb5cb28d1045e369b7712d467de0324cce5a334ada7b5a6b55757b2421175"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/caa48699057a40cea7c7f0f239d0c770.json",
+      "sourceSha256": "a94c418bbdac955b2e2eca13fef92a82c5f19b2e7da9a0134dea4054e189bc8c",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/caa48699057a40cea7c7f0f239d0c770.json.gz",
+        "sha256": "89d58e900e56824fcdfa9d2498342e91a1db79c630003792ec714847b6520d6d"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-301c84ed60fa42c2bd5caefefc74bb2d/capture-summary.json",
+      "sourceSha256": "53f16781e76c1247429a385d1e9bc2f84001554ccc245cd41e32758edeb0a1ca",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-301c84ed60fa42c2bd5caefefc74bb2d/capture-summary.json.gz",
+        "sha256": "de09e2fc39a084d7accfa6d316c57bdad669f6438d4cdbe2efc61cfe4829f6bc"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-301c84ed60fa42c2bd5caefefc74bb2d/result.json",
+      "sourceSha256": "4f0e28afb43893d93f7c64be778a112edb26286205b3c43bb24cebc98de31136",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-301c84ed60fa42c2bd5caefefc74bb2d/result.json.gz",
+        "sha256": "bdde356840e9ea93ac38b3aa11d1b8e6714fb4613a80961697d494ad1fd24f1e"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-301c84ed60fa42c2bd5caefefc74bb2d/journal.jsonl",
+      "sourceSha256": "9bc7a487c0cc45338c592a1c266c086f559479884d0aeb7116471544b12ce192",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-301c84ed60fa42c2bd5caefefc74bb2d/journal.jsonl.gz",
+        "sha256": "a46fdbaa2d67b800d6d3242503df6df2f4a216d30bfc07bbd21bf0d0040ba5ce"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/1e8b6e94975d487281bf89f9a1ac6b5c.json",
+      "sourceSha256": "8d074080047431b71331b33606455c648c800559e07a7ce096b7387268fb5a1c",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/1e8b6e94975d487281bf89f9a1ac6b5c.json.gz",
+        "sha256": "211f1217b60cf53d87296c4549bce8e4a26fd9ac7ad3e164713236046d636f39"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-fa51537d64394fc8a3f1c1763bbb4797/capture-summary.json",
+      "sourceSha256": "efd0a5ccce654a8da333f55ea75dc221f601d47fc79136a1f7cffbcae5541387",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-fa51537d64394fc8a3f1c1763bbb4797/capture-summary.json.gz",
+        "sha256": "c233c71f8b95f1bf697793b4c37774b74dc0ba562a83c5f8c5255306dcb55432"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-fa51537d64394fc8a3f1c1763bbb4797/result.json",
+      "sourceSha256": "912786a0b3193594b7b993910c0bfe58d479fc699ffa2b60d8b94cb7a8b33efb",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-fa51537d64394fc8a3f1c1763bbb4797/result.json.gz",
+        "sha256": "00ffdb2037bcd148d37d6c5305a2d3028ee23366562845ac6ddfd10ce154eed9"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-fa51537d64394fc8a3f1c1763bbb4797/journal.jsonl",
+      "sourceSha256": "5ecff5133091ab2dc7d9f4ae66072c38b38500a27e928c7482ce57005aa70f39",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-fa51537d64394fc8a3f1c1763bbb4797/journal.jsonl.gz",
+        "sha256": "a7189d6a28fdf96b86cf48798d6241f1459c825988c40be9453d055e21c1f6e7"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d928d4675e2c47578fbba63982c022b6.json",
+      "sourceSha256": "01168486238cfa7ad733f9136efbc7518b7475a764b854404ddb1c362693c05f",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/d928d4675e2c47578fbba63982c022b6.json.gz",
+        "sha256": "978d31258f733a07e2e22b72f7702d715eb1b12e782b3ce40bab6b52d9b58bd5"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-91c3dd9d13744eddb533276b637895dc/capture-summary.json",
+      "sourceSha256": "e340a079e327df65849ee889f27fcc91a6b526b0fcdb1644c2aa4504cac196c8",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-91c3dd9d13744eddb533276b637895dc/capture-summary.json.gz",
+        "sha256": "6442f6364a6affdd89cd21822c4a4bb948509b28e8509508f97e64b35c11a8a7"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-91c3dd9d13744eddb533276b637895dc/result.json",
+      "sourceSha256": "da9291664618a4b169ee7c73dfcb48cfefbfb6fa5fba303c2f733e5bad147f3d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-91c3dd9d13744eddb533276b637895dc/result.json.gz",
+        "sha256": "721616d2329b1a9882fe758344a42195327b684b3ad61d87936efc0791652b85"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-91c3dd9d13744eddb533276b637895dc/journal.jsonl",
+      "sourceSha256": "9545f670b4ad5649cac5c2243c7761e331add41870a8e83214d085142e05831c",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/case-91c3dd9d13744eddb533276b637895dc/journal.jsonl.gz",
+        "sha256": "c49264614403ee35d8d9fd1cb24436b3bbaae0ba4bc1c0dd959a75e0969239a9"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/b1d07b0cbeb348eda43672380258f97f.json",
+      "sourceSha256": "9ac5b9d8502f498cd9f04c4e82f1ad5f4c84c1dd2b15aa16017cae78cc3b138a",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b1d07b0cbeb348eda43672380258f97f.json.gz",
+        "sha256": "31b84d9a9b8ed12df591ec9671ad70d8140215bf73c97f97d33280199972dac6"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-first-exercise-result.txt",
+      "sourceSha256": "985a36de044c2c756f8bc6455e21a6c3b35fdc9ac6b06f0b600bf8e6b82ce20c",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-exercise-result.txt.gz",
+        "sha256": "e07270140973bfa9a24e9a86a6d9fe62123cc16a78b857c08891a015274683ef"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-first-stage-result.txt",
+      "sourceSha256": "7d4ac1ba69ad244464b045f6c7d51c2f14de496a73241d59b1ec4b9412dd841b",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-stage-result.txt.gz",
+        "sha256": "be2a6fb05ac30fcdc072321a7c10bc45223675bd84b1ed3a248fc230ee3ce38a"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-arrival-first-startup.json",
+      "sourceSha256": "e640eb37c8542b000f6773a30a913fcaff6c1ada8b0463cac519e16941fe4c0d",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-arrival-first-startup.json.gz",
+        "sha256": "1651625835ece81e0c8695a0b7e265f5dcd4a166bbe4e9a12b297939f34a0acc"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-arrival-deployment-result.json",
+      "sourceSha256": "0237bf92f392fb869a83b8b09c5c8152e6d2a47997ebeac5e4837f301667166a",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-arrival-deployment-result.json.gz",
+        "sha256": "86238a72c27e54211e15eba82ce60c4548a758014980019d65b62c791294a0ec"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-first-live-inventory.json",
+      "sourceSha256": "53bdf6f0bc364e510ab0129314dc69fd8a077ae2dcbe09e612a32d9b25771b72",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-live-inventory.json.gz",
+        "sha256": "c7f7a105369e54e3080d35ac8d1dba628eab459372b13d38692c09212d7eb3a3"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-first-material-state.json",
+      "sourceSha256": "64889a2556f13c23dc7671d50b1961d48f5b9a39e0e0e23f7fa07e728546b725",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-material-state.json.gz",
+        "sha256": "8ed149b91702b7570549837fc7e4a91da2b372d6ee2fcfb0adc31058e70003af"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-root-live-review.json",
+      "sourceSha256": "e9b2bddbdb625edb783e6bdcc4690df58ace3a4d39debcebc07add1d966d0595",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-root-live-review.json.gz",
+        "sha256": "f161124bf0ae81bb8428323eba89a9df77a96d239c862e0cd4e32d21a6b69d6d"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-pass-scroll-verification.json",
+      "sourceSha256": "476731f9e3431d8e74f2eef8d4f70a651a3117ff057b63dd4252f28fc877df22",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-pass-scroll-verification.json.gz",
+        "sha256": "ba2fd5bec4f21a236c97c848d42620e3b14fff01caa46dcbc807a18a4b709b11"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-hit-scroll-verification.json",
+      "sourceSha256": "b2ae37c333c0cf83a7b9baf10f68ec3dd450bf10e16656b068503afa03fdefa7",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-hit-scroll-verification.json.gz",
+        "sha256": "870d57796093abb7d1a3d1b71f0de587928ec35f2fcce67750bf18768c49bc9d"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mournglass-death-prefix-scroll-verification.json",
+      "sourceSha256": "d204fcef0b3081a78a2688234b09e832e721dad60c9e37cd63bd510a15d9d8b6",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/mournglass-death-prefix-scroll-verification.json.gz",
+        "sha256": "929c6065155c12a28fffbf6d292d1c7c3a2c70e781f1ac1641d950004fe562be"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/manifest.json",
+      "sourceSha256": "09ef2b0cd960c4185b188e29d117963b69dbc147263fa15a6e616369cc676da0",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/manifest.json.gz",
+        "sha256": "78fa3c85ed10eb5f45bdf8994aa47c8dbd99a51d159d4cb6fec8d331995e6d91"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/source-findings.json",
+      "sourceSha256": "18ea071dcc48ee1d044bbdc629949bd8d1bbfa401a55692fe4c8b3e3e10cf55e",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/source-findings.json.gz",
+        "sha256": "14b17d2f708ef2bc1b7c2e213b4dc4cef45173f2e68194da47b30192d6bd28a4"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/root-native-pose-review.json",
+      "sourceSha256": "01ce3a34262d19e537c2c27a12e6cefb6b91f13a978790caf19a2f29d53b9124",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/root-native-pose-review.json.gz",
+        "sha256": "fd388ca82cb4cc855cbbea2924f9226934bad195bababea392a179c1c47d51d6"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/native-pass-pose-audit.json",
+      "sourceSha256": "0055e0d742d75d4802eb1d4bc2b412002fa130c7e590bccaa6bdfa073a2c8e62",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-pass-pose-audit.json.gz",
+        "sha256": "353b060a118d410705cba009b8b92f11321471cb73a4ea2d4fcf70c3e7ba4fbf"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/native-hit-pose-audit.json",
+      "sourceSha256": "f1a0288b042c5a68c42936a87e3a91d2a16d2100f1b73c26860a3df252c57bd2",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-hit-pose-audit.json.gz",
+        "sha256": "ce14d04c1f2e8b3debe0cda79f908dbc51c28fba546724a6a3b2d76b9807cf09"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/native-death-prefix-pose-audit.json",
+      "sourceSha256": "4d0a55b7a278f00faec6b79b5f7d230e7ebe6b0d0cb7da44da4befb496aa4a46",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-death-prefix-pose-audit.json.gz",
+        "sha256": "50c55a34c10fcf46b86f69cfed515befab91f7303311dba9fe2c8ebee7ef2b1c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/native-shoulder-worst-pose-audit.json",
+      "sourceSha256": "7e47508c55dee41d9e44131048ecfe0b27bc4ef2acf372106a8bc6d8d147959e",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-shoulder-worst-pose-audit.json.gz",
+        "sha256": "ea7d6d9d04561e829a7aad817abbbb4155bce61a1c15157ae6099096d945a48b"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/material-partition-audit.json",
+      "sourceSha256": "af585a9aa86e5e9a02fbe2d730d98484cd5265ec9d0f0db99744ce318d110b6f",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/material-partition-audit.json.gz",
+        "sha256": "03d866a0b822b38b4efab1643b23d011c8b4233786992cd6de85790839671145"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/original-geometry-proof.json",
+      "sourceSha256": "ea2986d3cc3d7e161dc79c8923ad0301b604330718d0aabf28c4f8f115b65255",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/original-geometry-proof.json.gz",
+        "sha256": "a68de6816124182aa60876f4a7edcfffd3332ce7fc5174abae869b5dd40db1ce"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/mournglass-wraith/surface-bounds-audit.json",
+      "sourceSha256": "d338e85d52562fe95bc56caab39ddb5547410d6e0c9d7cb8e2fcc5cd9edf4534",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/authoring/surface-bounds-audit.json.gz",
+        "sha256": "e60240c8af821d25f34ce3bda086a94c0dd4bcfb67c97f0c22758d91d2535bb5"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/runtime-profile-406-mournglass/receipt.json",
+      "sourceSha256": "5797146898d0754d8d598af1527a3ec135b04c0a64fe8abca03db54b5bfa0ed9",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/staged-profile-receipt.json.gz",
+        "sha256": "9c0b7f2563fb45e924389657a6eb7ca14367344defc24807aeeb32aceea12acc"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/runtime-profile-406-mournglass/model-test-profiles.json",
+      "sourceSha256": "9934b1acece6df69868ad6cfb74269be2119886950a75b22593e51a806faadc1",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/model-test-profiles.json.gz",
+        "sha256": "1dd6649e485cdf42ae78f3a8c1604a1a9ce340d3b4bacc19fdd52987d8542cb9"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/archive-mournglass-live.py",
+      "sourceSha256": "6d4330350227f3919deb0338bff7a408fee8649ad52ff9c99b09dbe4eb917c4a",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/archive-script.py",
+        "sha256": "6d4330350227f3919deb0338bff7a408fee8649ad52ff9c99b09dbe4eb917c4a"
+      },
+      "compression": "none"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d1cdf07b051a49d58055e3c3d9d5bef3.json",
+      "sourceSha256": "122f4052bc56b0e4867eb204a184e419956b54d68c89fdeb98c39746679e0edd",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/pass.json.gz",
+        "sha256": "942c053417ad9d18e6eecf6a52ca29fa95f7da1d67dd534639dc6301f3cf5910"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d1cdf07b051a49d58055e3c3d9d5bef3/0000.png",
+      "sourceSha256": "56ebd0dc69cd6d6d03161e1064b3aac4dfd4c2dffc1f548498cf0761026f8d13",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/pass-0000.png",
+        "sha256": "56ebd0dc69cd6d6d03161e1064b3aac4dfd4c2dffc1f548498cf0761026f8d13"
+      },
+      "compression": "none"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d1cdf07b051a49d58055e3c3d9d5bef3/0050.png",
+      "sourceSha256": "e02d2af528b4a99fbab45cf27dfcf756df8aac7b9d6e3e933ddb2a52cb0889f9",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/pass-0050.png",
+        "sha256": "e02d2af528b4a99fbab45cf27dfcf756df8aac7b9d6e3e933ddb2a52cb0889f9"
+      },
+      "compression": "none"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d1cdf07b051a49d58055e3c3d9d5bef3/0060.png",
+      "sourceSha256": "a9c62a6d72c7edbec7e7fdef9042d9c84feae4650a55c23fd820cc12e33147cd",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/pass-0060.png",
+        "sha256": "a9c62a6d72c7edbec7e7fdef9042d9c84feae4650a55c23fd820cc12e33147cd"
+      },
+      "compression": "none"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8fe79300b6b742598ad5ea019d878e7a.json",
+      "sourceSha256": "6859ae193ea5b0bc4a1df21c24f5a16c2405fae8057e668cf83574b0f78141e6",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/normal-hit.json.gz",
+        "sha256": "e9fb2ec970be2209e9abe3326b65f36d7bf325f1332d59644db6ee06e6913b02"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8fe79300b6b742598ad5ea019d878e7a/0030.png",
+      "sourceSha256": "7e20eb5db05162f933a304482328bf1ba3817070c0cb5d09c398700fdb59e086",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/normal-hit-0030.png",
+        "sha256": "7e20eb5db05162f933a304482328bf1ba3817070c0cb5d09c398700fdb59e086"
+      },
+      "compression": "none"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/899466d1625e4bf38b62b23723593fc6.json",
+      "sourceSha256": "c358f947e70c95f0293bfd4f88f9720917bcf6fd9583d22f57740b66178fd7c3",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/explicit-death.json.gz",
+        "sha256": "33eae855a0eeb752b22035db9022487246e8ffcdede366339b017aa23ff0483a"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/899466d1625e4bf38b62b23723593fc6/0027.png",
+      "sourceSha256": "0e59b336773fbb3b7fe09d7eb59137649857d159d9d204decb9ff161ce94bf73",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/explicit-death-0027.png",
+        "sha256": "0e59b336773fbb3b7fe09d7eb59137649857d159d9d204decb9ff161ce94bf73"
+      },
+      "compression": "none"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/899466d1625e4bf38b62b23723593fc6/0040.png",
+      "sourceSha256": "80675b6218033d223ee0d743f4d310aa52e8dcf52d5d296c4a90fcd4b64fb097",
+      "archive": {
+        "path": "art-experiments/mournglass-wraith/live-v1/explicit-death-0040.png",
+        "sha256": "80675b6218033d223ee0d743f4d310aa52e8dcf52d5d296c4a90fcd4b64fb097"
+      },
+      "compression": "none"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/README.md",
+      "sha256": "0b34c2665498d5e35e6ad94b7263a8c7b77da84ffd6058b1e5654b68b47ecb63"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/archive-script.py",
+      "sha256": "6d4330350227f3919deb0338bff7a408fee8649ad52ff9c99b09dbe4eb917c4a"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/manifest.json.gz",
+      "sha256": "78fa3c85ed10eb5f45bdf8994aa47c8dbd99a51d159d4cb6fec8d331995e6d91"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/material-partition-audit.json.gz",
+      "sha256": "03d866a0b822b38b4efab1643b23d011c8b4233786992cd6de85790839671145"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-death-prefix-pose-audit.json.gz",
+      "sha256": "50c55a34c10fcf46b86f69cfed515befab91f7303311dba9fe2c8ebee7ef2b1c"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-hit-pose-audit.json.gz",
+      "sha256": "ce14d04c1f2e8b3debe0cda79f908dbc51c28fba546724a6a3b2d76b9807cf09"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-pass-pose-audit.json.gz",
+      "sha256": "353b060a118d410705cba009b8b92f11321471cb73a4ea2d4fcf70c3e7ba4fbf"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/native-shoulder-worst-pose-audit.json.gz",
+      "sha256": "ea7d6d9d04561e829a7aad817abbbb4155bce61a1c15157ae6099096d945a48b"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/original-geometry-proof.json.gz",
+      "sha256": "a68de6816124182aa60876f4a7edcfffd3332ce7fc5174abae869b5dd40db1ce"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/root-native-pose-review.json.gz",
+      "sha256": "fd388ca82cb4cc855cbbea2924f9226934bad195bababea392a179c1c47d51d6"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/source-findings.json.gz",
+      "sha256": "14b17d2f708ef2bc1b7c2e213b4dc4cef45173f2e68194da47b30192d6bd28a4"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/authoring/surface-bounds-audit.json.gz",
+      "sha256": "e60240c8af821d25f34ce3bda086a94c0dd4bcfb67c97f0c22758d91d2535bb5"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-301c84ed60fa42c2bd5caefefc74bb2d/capture-summary.json.gz",
+      "sha256": "de09e2fc39a084d7accfa6d316c57bdad669f6438d4cdbe2efc61cfe4829f6bc"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-301c84ed60fa42c2bd5caefefc74bb2d/journal.jsonl.gz",
+      "sha256": "a46fdbaa2d67b800d6d3242503df6df2f4a216d30bfc07bbd21bf0d0040ba5ce"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-301c84ed60fa42c2bd5caefefc74bb2d/result.json.gz",
+      "sha256": "bdde356840e9ea93ac38b3aa11d1b8e6714fb4613a80961697d494ad1fd24f1e"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-6db2c72d64ff401e9208257482ff9cfa/case-result.json.gz",
+      "sha256": "5ac19fd453e07a9a9832b27a207e769552c7ce58b43c027f576b47a51eaa1d72"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-6db2c72d64ff401e9208257482ff9cfa/journal.jsonl.gz",
+      "sha256": "74be171d3eb30aa30e1276bd416c7781c704d3b4f1c86bc119e6f26181da207c"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-6db2c72d64ff401e9208257482ff9cfa/selected-frames.html.gz",
+      "sha256": "52308d0a37c9fe9758f75ae8c42739a1fa1754f83f64a47215211623f74099a9"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-91c3dd9d13744eddb533276b637895dc/capture-summary.json.gz",
+      "sha256": "6442f6364a6affdd89cd21822c4a4bb948509b28e8509508f97e64b35c11a8a7"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-91c3dd9d13744eddb533276b637895dc/journal.jsonl.gz",
+      "sha256": "c49264614403ee35d8d9fd1cb24436b3bbaae0ba4bc1c0dd959a75e0969239a9"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-91c3dd9d13744eddb533276b637895dc/result.json.gz",
+      "sha256": "721616d2329b1a9882fe758344a42195327b684b3ad61d87936efc0791652b85"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-df2a58dd9ffc4e2d9730d74b9180567a/journal.jsonl.gz",
+      "sha256": "ab1234ba4aa5ec636464e93e6b40ec5cafaa7cc512fab160cc43a074c369f635"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-df2a58dd9ffc4e2d9730d74b9180567a/result.json.gz",
+      "sha256": "be2a6fb05ac30fcdc072321a7c10bc45223675bd84b1ed3a248fc230ee3ce38a"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-fa51537d64394fc8a3f1c1763bbb4797/capture-summary.json.gz",
+      "sha256": "c233c71f8b95f1bf697793b4c37774b74dc0ba562a83c5f8c5255306dcb55432"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-fa51537d64394fc8a3f1c1763bbb4797/journal.jsonl.gz",
+      "sha256": "a7189d6a28fdf96b86cf48798d6241f1459c825988c40be9453d055e21c1f6e7"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/case-fa51537d64394fc8a3f1c1763bbb4797/result.json.gz",
+      "sha256": "00ffdb2037bcd148d37d6c5305a2d3028ee23366562845ac6ddfd10ce154eed9"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/explicit-death-0027.png",
+      "sha256": "0e59b336773fbb3b7fe09d7eb59137649857d159d9d204decb9ff161ce94bf73"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/explicit-death-0040.png",
+      "sha256": "80675b6218033d223ee0d743f4d310aa52e8dcf52d5d296c4a90fcd4b64fb097"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/explicit-death-source-image-pins.json",
+      "sha256": "470cda4b530d55986733caff973055ec553829b5590e6aa30978c39efadf9c12"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/explicit-death.json.gz",
+      "sha256": "33eae855a0eeb752b22035db9022487246e8ffcdede366339b017aa23ff0483a"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/explicit-death.mp4",
+      "sha256": "62b1a22f1d1f4f2a0d579ac7937a45821673643bf0fc464b5a1221e346264f6f"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/0874e378780a45ebb9cfb4b0a2ce5dc5.json.gz",
+      "sha256": "dac0361de811f1ba2f06e30c82ca1b5879f55171edd3f874662fc027dab9ec06"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/094a8ffce1824b148ca17883d566819a.json.gz",
+      "sha256": "7829b454f0d96ad820cfbd215abd6dab63de8b8e669471e75e78d3450bace422"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/0b952d23dd924b1badc4b4a699265b9c.json.gz",
+      "sha256": "9c82e5db3562fc65e0fa9e1f0d708e0cace68c79f4381e9896a0901484b98f27"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/0c53574419aa4195aa4d0f081150dca4.json.gz",
+      "sha256": "68134841ca3ad6ad6195ee5f5762348c68f7dfc7b1a679964009b511a6341201"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/11944912be8a4f408eb87c067f81a96a.json.gz",
+      "sha256": "5acadaf8163bf30994a51d2758da81e210d5f771bc244c24612a48b0ee1a1cd4"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/168e18dad0bc449689823041cd58eeaf.json.gz",
+      "sha256": "1a1a19fe3b37d16e03677f20d637b4b452e4b61e95e069e7409d1edfee6229c7"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/1b94624ee3aa4bcf9e3fcccb9b4d638d.json.gz",
+      "sha256": "9036194474637e66c1f29a3dda17c6fffdf9c9e92e72630ab4de52778e417dc7"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/1bbaf243171644e29655df4310f15e59.json.gz",
+      "sha256": "bcfc7d7e2519dffa09ed9cdfa056a6f222399afc46905dee1964de7bcd1d4740"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/1e8b6e94975d487281bf89f9a1ac6b5c.json.gz",
+      "sha256": "211f1217b60cf53d87296c4549bce8e4a26fd9ac7ad3e164713236046d636f39"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/20950af71da846329780d400bf0fbdd7.json.gz",
+      "sha256": "4be793275a7c70200b0540d70570a49d56029f05d84043575be3274999741e73"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/214a4ee8edc24d708b8c66436d5bd8bc.json.gz",
+      "sha256": "f9a9b9b7daea7090c4916411ffb541ea1aef84b489f12777c315a181f62b057e"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/21f094b3e45042a2b004fa6cae9b0307.json.gz",
+      "sha256": "ef7aa9f46521efeab9724e6ff298c7997c28f3281ec06e491f2de0e3ff643f97"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/289d787a25d949b3b755b0ca050d4801.json.gz",
+      "sha256": "b9b02241a96de84d16e01fc0ff63b45e520e88fb0783bb3ac41c91e4de31f43a"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/2afbd712793048e4b036afb6976ef813.json.gz",
+      "sha256": "a738857342ab3d8e2b0d209d15227507c457bff380150ca59655b6bd48254217"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/33e024533be6466e88821a2e0f402549.json.gz",
+      "sha256": "7413e980e0aad800b13500b7eb0e8b52eb643ab0124aba85f2ffc7f5685e1782"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/34132ed912ac46fc9fe9e7a9bd274176.json.gz",
+      "sha256": "3100a3871e05ca0635f87078d737b422152d111fd7acc8d27280bf95b086d8f1"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/362eddbf1e8746d584d84aa809269376.json.gz",
+      "sha256": "0c77230dd409223337bf103683aaf1ec7a2ec0d65c58e1baff17590aa33b0b39"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/40fa5d924f3a460d9b8bb00652bf7355.json.gz",
+      "sha256": "20fd8a31f22bb71a3344beec238f56478324dcd25fc9b6cecc370173c71262ba"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/4c3cb41ed0554b63b49637cf75d6ae39.json.gz",
+      "sha256": "ad48bbd755c436ab6ddb45acb0d8391e970e664a4024e8de4a30e08c4825624f"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/4d72bf7b261d4f7d9f7eed445e931fd7.json.gz",
+      "sha256": "e8f4b1259e0dc61724f365a9c208fb8dc0808293f47b77835e86110e38c02e00"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/4e29ff95eab844f0b0337e7e793c931b.json.gz",
+      "sha256": "850999cc5535423bb73b06067ba90b0b2e408b06aa9a24434494e5394ed6fd73"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/548127a7662f4011be86ea05f38bf049.json.gz",
+      "sha256": "ebf9aeafc9a124008ee8d670c38149bd42006f99b5b86b6e98ca8b0f53088d48"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/58f4ea2fb10048059f876b344dc90935.json.gz",
+      "sha256": "c8a09739128d39050c6c738c06b31fe53a95b23217ca52e6afc7a50bcb89bed2"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/59c762c3cbc145d5bebf5c6546f159e2.json.gz",
+      "sha256": "03bfb9407bc1401a1a02082abd4618e35eb1ccdb44d098da80893290845e50ac"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/6061af31c7bf4fb19315328169e0acbf.json.gz",
+      "sha256": "46bdd507ca2d73adcdfb24da3f4b7a63df7eee2bc9048eee85ebde7423bc0c52"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/62552a09d9bc45298df9b887b0445edf.json.gz",
+      "sha256": "4b92d1eb2436b7e51d2eaf69da1d2ab8673ae583a616ef57269a3658bdf8a7f6"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/630bf21de1a649db8bb8a44296a6e12f.json.gz",
+      "sha256": "59071b16e7a3d2c1eee3c98f070a27d7035e174ee97ad88e1f65203d8b8a586d"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/66474a32b85f4baf8beff4682b6f47b1.json.gz",
+      "sha256": "6c14353e53222069c07b1b5787333b5008744b4644ca2a98f2fc948bdcc29055"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/67233e030e42473caa046f5081cb872c.json.gz",
+      "sha256": "87799a7892f6f4eebddd6a1d57381469e140a113a80570bad1e72df7a2228737"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/6882ba33148d4c95ba395266afe07443.json.gz",
+      "sha256": "5001fddc88b66df048cf5828427a41c2d9277f8c77d29148c74c1ad1541d19e8"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/6912b9e73b064cf48ee50fa5daacb623.json.gz",
+      "sha256": "75fa0b0661e53f06bb84d97e046ef58c60d4d0cb2e9467338f0795205210d647"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/7c248cc8b87a46b1b24d86e64aa58b01.json.gz",
+      "sha256": "f6252f6ce522d17ca069df1e2ae1c514a3b5b1c813dcc1a99dfbcef9069b9621"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8d35b8e217064d3eb301c457543fa1c3.json.gz",
+      "sha256": "1361a84ca72671d7da5398aef2217f4adb2471b776c25d7221fa26b3013f4645"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8d46e5bcd9d44a3c86f5391c750b5930.json.gz",
+      "sha256": "1a199c2419291326d9e2c2d230c9c2509d004d14de5d79bb569bb8fdbc36b80c"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8f21007105674ef786e24b0489dc6297.json.gz",
+      "sha256": "81525573f9d2665fa88f70cbc951450c76134db5627157b516927d06ceb0639c"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/8fc2cc42bd364ffc8f4f7a0201ca54e0.json.gz",
+      "sha256": "1b3828f4421d3389fd828f821d4274451bd0bc3da4e80a540aa492678ebcc2ab"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/90ba0edc19e24984824b574ecd9c7304.json.gz",
+      "sha256": "977bfd30b422f07eea05efe1c5c9f44f55ff72a965b12f685460c9b65268dceb"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/9f37604e0d2848e58b918ce8d54d3fb8.json.gz",
+      "sha256": "20de9e3db0300a539d3ef4156de8a83f37a12c2fc1ce224bfc7ac50bce802713"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/a191d9fe02f844d289113839a76fce04.json.gz",
+      "sha256": "9a017ab9f46750c312725194d8eb6d4aab3e06ae9acfeb35ff01541711567542"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b1d07b0cbeb348eda43672380258f97f.json.gz",
+      "sha256": "31b84d9a9b8ed12df591ec9671ad70d8140215bf73c97f97d33280199972dac6"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b4081fd4205a44f48ba4329b1c82b82c.json.gz",
+      "sha256": "2f512f5dd14aa5c1fd5409f57685cedefca50dd4874a3cb39061fe49c2193e16"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b68770ab63da48ca8b6c653e5f643df3.json.gz",
+      "sha256": "f686fd93642aaff17968531468cb9f7bd420b2256b65f154b0fc878fb1a44c91"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b7459c02fb424b47a0aba8bd1879aed0.json.gz",
+      "sha256": "d9f1037bdc40ca10750486dcbcaf81269c77f9ea3997c7333da8cac9b14060d2"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/b7bff7ccd4e245ae812a096e9dd68291.json.gz",
+      "sha256": "fdbbb5cb28d1045e369b7712d467de0324cce5a334ada7b5a6b55757b2421175"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/bc40b06afc3f4e89bb2e62322627bab5.json.gz",
+      "sha256": "c0357fa2d849f94f1c3c9412d1cf1c2120e80f78a24ba4b3872ab59a7392af9a"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/bd99603c74844a958d6eaf94a68e2a7b.json.gz",
+      "sha256": "252b53f005a5bd81332a7a176c69cbf0a48e7fb3d988ac0a3cb1725226c2e6f8"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/bea8145e2b28410aadf05ca58722c544.json.gz",
+      "sha256": "ded0217657bed00d0a9dbebb7d5859e1595cfd46a42a6a6947b02648ee6939b4"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/c6285a86f12b4cd8824b0ba652c1cae5.json.gz",
+      "sha256": "fbec2933d724caa5a43f36a814cb4fb5dc73df2db8aa6b99b5a1d967cbab630c"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/c8d0da35c95b40ab94491cdb121b1389.json.gz",
+      "sha256": "e50c50c152351a2c04e15cc8bd8fcefaa33669ff164ae9884332163ec9442fad"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/caa48699057a40cea7c7f0f239d0c770.json.gz",
+      "sha256": "89d58e900e56824fcdfa9d2498342e91a1db79c630003792ec714847b6520d6d"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/cdf079dcdbff4e419816e5c29359e184.json.gz",
+      "sha256": "bd2696b995c4fb681606792cc28a78a18787b4ae19fd22d625fa3d54772d0f9d"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/d004fd8b6ae445d7871dda73767d0c5c.json.gz",
+      "sha256": "c0dcc8184d2803abf74b94278eb8765569b6ab4497c16035b0fdc7050c52cf3c"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/d928d4675e2c47578fbba63982c022b6.json.gz",
+      "sha256": "978d31258f733a07e2e22b72f7702d715eb1b12e782b3ce40bab6b52d9b58bd5"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/d94b19229f164049a412e822c1b195f2.json.gz",
+      "sha256": "b940258b754c128ebc2ccc368caff3b367060ad7d3b08766fad25f771b1f74ee"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/dc8e8cb76ad449409e6303cb42b9679f.json.gz",
+      "sha256": "1fcca7ffd728cf4406dd531e4ea1b281cfc65f055be8b6a86c1a26332692e93b"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/e235c071957147299cd75365ce883ff8.json.gz",
+      "sha256": "931c30e7b4998097d26bd7e10b0502104ea7ab72e2525af39fa11270647b698f"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/e7e8f7f8995c464f9bf769e0d5e7d361.json.gz",
+      "sha256": "06a07bdfb3e851ce0a8feb10ad26581259787822e18d7e5725d3275aa3144697"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/ec932ae6424e435cb0174ab54a823b13.json.gz",
+      "sha256": "5b528fbe1fd01e31a2ccd5a4dc34268ad89b707f68619e40606553eb4d6df231"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/eff9996e58c74ac4b428a095da178e14.json.gz",
+      "sha256": "c499dbed4ec2f401201f00a7cc57b223d3cbff0ec043a5f61a4f365ae3ad9efa"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/fd573d2bbbdf409081ae885ecd26a967.json.gz",
+      "sha256": "b7f7dbc28db5102474b4014e0782c3a81e314b0b7c959d99af7dbb44a254514d"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/helper-results/fe5f6a44df9443a3acb2e564aa97795b.json.gz",
+      "sha256": "e93e41fa150632e71361fc8c682ea95f4e2a533229cc3fa7e7f57df4b91b1a71"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/model-test-profiles.json.gz",
+      "sha256": "1dd6649e485cdf42ae78f3a8c1604a1a9ce340d3b4bacc19fdd52987d8542cb9"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-arrival-deployment-result.json.gz",
+      "sha256": "86238a72c27e54211e15eba82ce60c4548a758014980019d65b62c791294a0ec"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-arrival-first-startup.json.gz",
+      "sha256": "1651625835ece81e0c8695a0b7e265f5dcd4a166bbe4e9a12b297939f34a0acc"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-death-prefix-scroll-verification.json.gz",
+      "sha256": "929c6065155c12a28fffbf6d292d1c7c3a2c70e781f1ac1641d950004fe562be"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-exercise-result.txt.gz",
+      "sha256": "e07270140973bfa9a24e9a86a6d9fe62123cc16a78b857c08891a015274683ef"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-live-inventory.json.gz",
+      "sha256": "c7f7a105369e54e3080d35ac8d1dba628eab459372b13d38692c09212d7eb3a3"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-material-state.json.gz",
+      "sha256": "8ed149b91702b7570549837fc7e4a91da2b372d6ee2fcfb0adc31058e70003af"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-first-stage-result.txt.gz",
+      "sha256": "be2a6fb05ac30fcdc072321a7c10bc45223675bd84b1ed3a248fc230ee3ce38a"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-hit-scroll-verification.json.gz",
+      "sha256": "870d57796093abb7d1a3d1b71f0de587928ec35f2fcce67750bf18768c49bc9d"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-pass-scroll-verification.json.gz",
+      "sha256": "ba2fd5bec4f21a236c97c848d42620e3b14fff01caa46dcbc807a18a4b709b11"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/mournglass-root-live-review.json.gz",
+      "sha256": "f161124bf0ae81bb8428323eba89a9df77a96d239c862e0cd4e32d21a6b69d6d"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/normal-hit-0030.png",
+      "sha256": "7e20eb5db05162f933a304482328bf1ba3817070c0cb5d09c398700fdb59e086"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/normal-hit-source-image-pins.json",
+      "sha256": "7460a313614bea0a8b9a3f5a2870ffa09f9c4a6b6d4b862f306ba9e99620237e"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/normal-hit.json.gz",
+      "sha256": "e9fb2ec970be2209e9abe3326b65f36d7bf325f1332d59644db6ee06e6913b02"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/normal-hit.mp4",
+      "sha256": "eb8de6abdfdf1d8c37f40daf62259ba62c4f3805a6a6cd125c623e5721b3d409"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/pass-0000.png",
+      "sha256": "56ebd0dc69cd6d6d03161e1064b3aac4dfd4c2dffc1f548498cf0761026f8d13"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/pass-0050.png",
+      "sha256": "e02d2af528b4a99fbab45cf27dfcf756df8aac7b9d6e3e933ddb2a52cb0889f9"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/pass-0060.png",
+      "sha256": "a9c62a6d72c7edbec7e7fdef9042d9c84feae4650a55c23fd820cc12e33147cd"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/pass-source-image-pins.json",
+      "sha256": "90308f9857488d8344d2044106eaa9b56d324286526456c3f30bf931c0914639"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/pass.json.gz",
+      "sha256": "942c053417ad9d18e6eecf6a52ca29fa95f7da1d67dd534639dc6301f3cf5910"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/pass.mp4",
+      "sha256": "fc270bd3a3e6273351ba607596cb66d3eb9da91307d176316c0a1d1688b763a1"
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/live-v1/staged-profile-receipt.json.gz",
+      "sha256": "9c0b7f2563fb45e924389657a6eb7ca14367344defc24807aeeb32aceea12acc"
+    }
+  ]
+}

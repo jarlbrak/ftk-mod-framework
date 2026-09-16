@@ -1,0 +1,103 @@
+{
+  "status": "ROOT_REVIEWED_LIMITED_FRAME_SETS",
+  "reviewedBy": "Codex root agent",
+  "reviewedFrames": {
+    "pass": {
+      "archive": "reviewed-frames/pass.png",
+      "sha256": "e361a0ee0b984fb6bd8b61c861ea98d3934e6da8f5b0cef571df5e5478e51bdb",
+      "bytes": 301189,
+      "sourceFrames": {
+        "12": {
+          "source": "scratch/mirewarden-game/model-test-output/aac053265b314ec180a11067cae4d994/0012.png",
+          "sha256": "4b1eb6438d45ab8da28c9d65c8a1195ca91f118adc0506458625fab4110c38bb",
+          "bytes": 1080515
+        },
+        "24": {
+          "source": "scratch/mirewarden-game/model-test-output/aac053265b314ec180a11067cae4d994/0024.png",
+          "sha256": "d6dc5d9c403e2158bcb85c5456566cbb93ce1a782fe29fd2e2cea7bee55bebc6",
+          "bytes": 1084075
+        }
+      }
+    },
+    "attack": {
+      "archive": "reviewed-frames/attack.png",
+      "sha256": "f2a361cf2f5126b1899259978262925d3821dcd6e78f9978c5cc121ef0982a26",
+      "bytes": 721890,
+      "sourceFrames": {
+        "6": {
+          "source": "scratch/mirewarden-game/model-test-output/42955bd838234a2b98a54975ae9613c3/0006.png",
+          "sha256": "bce457285be06960e8492ae51ba495ca3945e04d8b4856bdce4009209ae64040",
+          "bytes": 1093161
+        },
+        "12": {
+          "source": "scratch/mirewarden-game/model-test-output/42955bd838234a2b98a54975ae9613c3/0012.png",
+          "sha256": "b73cfdb657968dd88a44e47aeb0427f89b5be7d3ef064877f057303f206b8d01",
+          "bytes": 1094154
+        },
+        "24": {
+          "source": "scratch/mirewarden-game/model-test-output/42955bd838234a2b98a54975ae9613c3/0024.png",
+          "sha256": "8d79c67c8f9e320f28e56d082d9b5c074faca7e152a2493d5c7fad0097260938",
+          "bytes": 1105766
+        },
+        "27": {
+          "source": "scratch/mirewarden-game/model-test-output/42955bd838234a2b98a54975ae9613c3/0027.png",
+          "sha256": "2d2a220628fb2f721669c9c7962a8685af561eb7d3d05e59061ad4d483707edd",
+          "bytes": 1087083
+        },
+        "30": {
+          "source": "scratch/mirewarden-game/model-test-output/42955bd838234a2b98a54975ae9613c3/0030.png",
+          "sha256": "3c132f19b35f739be03f487f87bccbc1d1f8ae71d91223dc2cda82519486443e",
+          "bytes": 1076082
+        }
+      }
+    },
+    "death": {
+      "archive": "reviewed-frames/death.png",
+      "sha256": "fd31dd1f81c94de0300d93929a2a5f8f3a4ddcdf446298ac3f5a2e5c91950189",
+      "bytes": 1003691,
+      "sourceFrames": {
+        "0": {
+          "source": "scratch/mirewarden-game/model-test-output/8de182d73f78432ba32eea70d6f7c453/0000.png",
+          "sha256": "c85674d67af65bce76c699398263dcaf4dd92d553e9b88b0463391fe2108f8a4",
+          "bytes": 1081871
+        },
+        "24": {
+          "source": "scratch/mirewarden-game/model-test-output/8de182d73f78432ba32eea70d6f7c453/0024.png",
+          "sha256": "2aa14ef0660e43e94b1e909bc7701a8d7fd00ad9e128e0afe16491b94de79900",
+          "bytes": 1103453
+        },
+        "27": {
+          "source": "scratch/mirewarden-game/model-test-output/8de182d73f78432ba32eea70d6f7c453/0027.png",
+          "sha256": "f775f0eb53888a4bd949e7cb1a6aeb96fd936da3bed9de11d7cae20f70487b90",
+          "bytes": 1085949
+        },
+        "28": {
+          "source": "scratch/mirewarden-game/model-test-output/8de182d73f78432ba32eea70d6f7c453/0028.png",
+          "sha256": "2ff88abe2ba3e2d9daf91006b53f82981c0c8c6f84e3698d0681a0e9139b5083",
+          "bytes": 1080022
+        },
+        "40": {
+          "source": "scratch/mirewarden-game/model-test-output/8de182d73f78432ba32eea70d6f7c453/0040.png",
+          "sha256": "ab1e7ebcb476a158a29250b369b5e32db6256e5944198100c27ec168402fbf8b",
+          "bytes": 1071345
+        },
+        "60": {
+          "source": "scratch/mirewarden-game/model-test-output/8de182d73f78432ba32eea70d6f7c453/0060.png",
+          "sha256": "ba981546c289233c93170f12d70f1f90bfbcf8d0b1f1083f82bf45000482377c",
+          "bytes": 1077037
+        },
+        "119": {
+          "source": "scratch/mirewarden-game/model-test-output/8de182d73f78432ba32eea70d6f7c453/0119.png",
+          "sha256": "f0e72a6675edb9bed2cfcc5ac3d42d6c3c98aa5576f11c431f4d1c0cd79851ca",
+          "bytes": 849847
+        }
+      }
+    }
+  },
+  "observations": [
+    "The original moon-violet/teal/orange serpent remains coherent and visibly bound in the pass and ordinary attack samples.",
+    "The attack capture contains the native Snake_HitSmall/Damaged segment while preserving the exact custom renderer identity.",
+    "The explicit death fixture keeps the full custom silhouette visible as the ordinary Desert A skeleton ragdoll becomes dynamic and settles; no native fragment substitution is visible in the selected frames."
+  ],
+  "limitations": "Selected screenshots are a limited visual review only. They do not prove all motion, all camera angles, portrait rendering, material lifetime, or finished-art acceptance."
+}

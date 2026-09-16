@@ -1,0 +1,61 @@
+{
+  "name": "Rivenquill Cockatrice",
+  "status": "PASS_ORIGINAL_BIND_AUTHORED",
+  "artScope": "Original cobalt-and-copper cockatrice geometry and palette; offline binary/bind validation only.",
+  "authoringNativeSurfaceRead": false,
+  "validationReadsNativeReference": true,
+  "allowedReferenceFields": [
+    "bone_names",
+    "bindposes"
+  ],
+  "routes": [
+    {
+      "resourcePrefab": "enbaseycockatriceboss",
+      "nativeEnemy": "bossCockatrice",
+      "rendererPath": "enBaseyCockatrice",
+      "sourceRendererId": 121693,
+      "controller": "cockatriceController",
+      "controllerId": 5949
+    },
+    {
+      "resourcePrefab": "enbaseycockatricesmall",
+      "nativeEnemy": "cockatriceC",
+      "rendererPath": "enBaseyCockatrice",
+      "sourceRendererId": 121694,
+      "controller": "cockatriceController",
+      "controllerId": 5949
+    }
+  ],
+  "references": [
+    {
+      "path": "scratch/basey-cockatrice-boss-reference-v1/reference.npz",
+      "sha256": "f4e29ed00ed5459aced738b0835cb12e113d99b13f34201ef10721562231c399"
+    },
+    {
+      "path": "scratch/basey-cockatrice-small-reference-v1/reference.npz",
+      "sha256": "f4e29ed00ed5459aced738b0835cb12e113d99b13f34201ef10721562231c399"
+    }
+  ],
+  "sharedBindReference": {
+    "sameOrderedBoneNames": true,
+    "sameInverseBindMatrices": true
+  },
+  "assets": {
+    "rivenquill": {
+      "glbSha256": "5accc076dfb5ef0e11b4193bada85ac6778961db767b24be0acb758fda411f1f",
+      "vertices": 8562,
+      "triangles": 2854,
+      "paletteBones": 50,
+      "allPaletteBonesWeighted": true,
+      "maxBindRestError": 1.1048086845377725e-07
+    },
+    "palette": {
+      "sha256": "30db7fc5ef913c6329ad3d6f22faf149ef89f5d1256afee028e4d8ef91ebd47c",
+      "bytes": 11132
+    }
+  },
+  "limits": [
+    "Offline bind validation does not establish resource selection, runtime binding, animation, material response, culling, portraits or gameplay.",
+    "The two resource profiles share only checked bind data and asset bytes; each needs its own native controller/source-pair trial."
+  ]
+}

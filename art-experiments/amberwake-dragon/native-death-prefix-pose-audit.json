@@ -1,0 +1,62 @@
+{
+  "capture": "scratch/mirewarden-game/model-test-output/2561a6acafeb4bcfb8ec29fbae6393b9.json",
+  "captureSha256": "0fc7e2c7fd86ca2e54707679abb911cfb5c9ab013a7a4b6c38ebe47f449d8711",
+  "sourceSha256": "cb2c38832585064b186035eacd373fd0be837b3ed3f8c380cae296920bf52a14",
+  "frames": 91,
+  "sampledFrames": [
+    0,
+    27,
+    35,
+    45,
+    70,
+    90
+  ],
+  "maximumEdgeStretch": 1.8656646619992114,
+  "worstEdge": {
+    "frame": 41,
+    "piece": "Rear haunch and hock R",
+    "triangle": 1766,
+    "vertexIndices": [
+      5299,
+      5300
+    ],
+    "restLength": 0.27331556480007885,
+    "posedLength": 0.5099151908218627,
+    "ratio": 1.8656646619992114
+  },
+  "posedBoundsMin": [
+    -12.000777949608182,
+    -0.6972452463151457,
+    -11.093338082624312
+  ],
+  "posedBoundsMax": [
+    8.69785133177227,
+    7.655555634494402,
+    3.9949122178911805
+  ],
+  "nativeTravelBoundsMin": [
+    -12.000777949608182,
+    -0.6972452463151457,
+    -11.093338082624312
+  ],
+  "nativeTravelBoundsMax": [
+    8.69785133177227,
+    7.655555634494402,
+    3.9949122178911805
+  ],
+  "glbSha256": "b03bc6738f652447ba9579cd1d3cdfcdc655eee20d5fd61c7f43461dbaeb0d36",
+  "rootMotionRetained": true,
+  "viewDirection": [
+    0.7,
+    0.8,
+    1.0
+  ],
+  "method": "Renderer-local travel retained in sheet. Original source skinned with full captured bone matrices and native IBMs, Anatomy mode removes Root_M transform for deformation inspection; keep-root-motion mode retains renderer-local travel in the sheet. Travel bounds always retain renderer-local motion. Orthographic depth raster with fixed all-frame bounds. Mesh-space anatomy front+Z/upY.",
+  "captureReportedOk": false,
+  "captureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__221.MoveNext () [0x00000] in <filename unknown>:0 ",
+  "hiddenFrames": [
+    90
+  ],
+  "materialMethod": "Per-triangle first-vertex nearest texel from original palette; no shader/light/weapon simulation.",
+  "scope": "Offline native pose study; no material/culling/portrait/whole-controller or live original-art acceptance."
+}

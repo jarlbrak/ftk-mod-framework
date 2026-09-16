@@ -1,0 +1,370 @@
+{
+  "schemaVersion": 1,
+  "asset": "Emberjaw",
+  "iteration": "native-scale regression; unchanged geometry",
+  "status": "native-scale regression PASS in reviewed views; prototype art remains limited",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "b3478c0c658f47c6a3ba82b94b9a6f2a",
+    "case": "b6f278ffc95145a39abc4fcd8ec5d371",
+    "mode": "next-case",
+    "enemy": "ftkmf_modeltest_emberjaw",
+    "class": null,
+    "profile": {
+      "key": "ftkmf_modeltest_emberjaw",
+      "baseEnemy": "skullA",
+      "displayName": "Emberjaw",
+      "combatProfile": "c73ebdf864c5252f19a11439d9666ae32ba9a80ddf35008dfcf159730b22c124",
+      "renderers": [
+        {
+          "rendererPath": "ChaosSkullBottom",
+          "glbFile": "emberjaw_bottom.glb",
+          "textureFile": "emberjaw_basecolor.png"
+        },
+        {
+          "rendererPath": "ChaosSkullTop",
+          "glbFile": "emberjaw_top.glb",
+          "textureFile": "emberjaw_basecolor.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "6a0e012c9250ac234e3c0e1808a471c79caca807a34a70a1ffa45a6f1d73fd99",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkSha256": "9e533f894a2a6efa43125e89869ecbdca668eaa53a8cf44c3e6bbb632b4c4708",
+  "helperVersionPrefix": "5ec62a33",
+  "assetHashes": {
+    "emberjaw_bottom.glb": "5b871353ea35c091b7eef4450232d59d5bfc4e1a2fe9b65e823349e6a936d438",
+    "emberjaw_basecolor.png": "eb5d336e08ea85c8b5b759fa1bd02c7104ac16ef097fcfb4a027e1951fbae188",
+    "emberjaw_top.glb": "5ad303859323c0a918505ea7e071593a6a336bf50fb0f89f48a99c6f0a58d880"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-b6f278ffc95145a39abc4fcd8ec5d371/journal.jsonl",
+    "sha256": "56e9b77ebfa33d68c9f6ad9a007ce2718496d604fb1a1f439f9835ebaf6479c1"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "521f6310c7c7443e8cc6a455109bb7fe",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/dc3dc8708d07475d837ce007f7156aca.json",
+        "sha256": "bfb399777b22226dd0c91dcbe71bf4e406a71c6fdb6a7a44a599608d79dc853e"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-521f6310c7c7443e8cc6a455109bb7fe/journal.jsonl",
+        "sha256": "104f10878274438e479d23b5ec3b9559643ffae72ce81a95c82911a802bb5a5c"
+      },
+      "summary": {
+        "path": "art-experiments/emberjaw-skull/live-native-scale/attack-summary.json",
+        "sha256": "37a2f176797f5d8d22c9651f5f5a5fe9305943701e3bb53c5a4754409306c149"
+      },
+      "video": {
+        "path": "art-experiments/emberjaw-skull/live-native-scale/attack.mp4",
+        "sha256": "f39141ea3b01ef5f9aa657c474f52a20b8a2449a71c6186aca4a03818fe8f734"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/emberjaw-skull/live-native-scale/attack-0000.png",
+          "sha256": "5cd04f2f4c8609e13c6ff46119d3d354a6044c467581aedcf113ad7afa1314d7"
+        },
+        {
+          "path": "art-experiments/emberjaw-skull/live-native-scale/attack-0050.png",
+          "sha256": "c747bbad2ee0bf8aa87a94868a37118ca2601dca2a7a8a22b37488727075f093"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle_skull"
+          ],
+          "sampleCount": 107,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 40,
+              "firstNormalizedTime": 32.742218017578125,
+              "lastNormalizedTime": 34.502166748046875,
+              "gameSeconds": 3.66668701171875
+            },
+            {
+              "firstFrame": 54,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.07551100850105286,
+              "lastNormalizedTime": 2.935509443283081,
+              "gameSeconds": 5.95831298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attackReg_skull"
+          ],
+          "sampleCount": 13,
+          "occurrences": [
+            {
+              "firstFrame": 41,
+              "lastFrame": 53,
+              "firstNormalizedTime": 0.1964285671710968,
+              "lastNormalizedTime": 0.9821427464485168,
+              "gameSeconds": 1.10003662109375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "4494d13b828e49be95a7d804dbb30946",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/f5470d77fac54f02bc0137fade4434ed.json",
+        "sha256": "300388205681a72f1b12cb7db6a8341c6c11709a18da91475f60b88b762acb38"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-4494d13b828e49be95a7d804dbb30946/journal.jsonl",
+        "sha256": "db09027ae122b2fb833efc46be574d7d4eca9c9334ca6145c6053b80495ef563"
+      },
+      "summary": {
+        "path": "art-experiments/emberjaw-skull/live-native-scale/nonlethal-hit-summary.json",
+        "sha256": "c510b660969481daab30898ee184bdb19b2841e4e2f69e9d2937388e1eb9166b"
+      },
+      "video": {
+        "path": "art-experiments/emberjaw-skull/live-native-scale/nonlethal-hit.mp4",
+        "sha256": "01e6087ee5134275fe3a03228c440deb66d7e9a542b56f6a019df2514d576748"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/emberjaw-skull/live-native-scale/nonlethal-hit-0030.png",
+          "sha256": "b9dfa08d5acb0a82eb948973ffb0965de961cf2851a3f2d0e23a05e6b3f62a8e"
+        }
+      ],
+      "hpBeforeAfter": [
+        69,
+        64
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle_skull"
+          ],
+          "sampleCount": 83,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 27,
+              "firstNormalizedTime": 23.852588653564453,
+              "lastNormalizedTime": 25.040605545043945,
+              "gameSeconds": 2.4749755859375
+            },
+            {
+              "firstFrame": 40,
+              "lastFrame": 63,
+              "firstNormalizedTime": 0.16763557493686676,
+              "lastNormalizedTime": 1.1796354055404663,
+              "gameSeconds": 2.10833740234375
+            },
+            {
+              "firstFrame": 89,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.08597051352262497,
+              "lastNormalizedTime": 1.4059704542160034,
+              "gameSeconds": 2.75
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damageLight_skull"
+          ],
+          "sampleCount": 12,
+          "occurrences": [
+            {
+              "firstFrame": 28,
+              "lastFrame": 39,
+              "firstNormalizedTime": 0.44422927498817444,
+              "lastNormalizedTime": 1.452562928199768,
+              "gameSeconds": 1.00830078125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "attackStare_skull"
+          ],
+          "sampleCount": 25,
+          "occurrences": [
+            {
+              "firstFrame": 64,
+              "lastFrame": 88,
+              "firstNormalizedTime": 0.04608198255300522,
+              "lastNormalizedTime": 0.9627483487129211,
+              "gameSeconds": 2.20001220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "9a6a75b9d06c409e92902ed50749554e",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/ef8c5257c85748deb808150e03538794.json",
+        "sha256": "fb300f6d54a271d4f1a43faf763160ef9730a6c7a586378594a28d7a24f1d99f"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-9a6a75b9d06c409e92902ed50749554e/journal.jsonl",
+        "sha256": "c38d7fb2f435e9dcc6feef625a61beea0c13ad3221631c4fdd0d942c313be6c1"
+      },
+      "summary": {
+        "path": "art-experiments/emberjaw-skull/live-native-scale/kill-fixture-death-summary.json",
+        "sha256": "2a1433f758a1250653d88603ab759cb1098c76cfb69274fabe28010294f34713"
+      },
+      "video": {
+        "path": "art-experiments/emberjaw-skull/live-native-scale/kill-fixture-death.mp4",
+        "sha256": "9afa0773e6b2953bad184c5557cd98ea218d13f2ad5e63788de05f89134ecdeb"
+      },
+      "reviewedFrames": [
+        30,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/emberjaw-skull/live-native-scale/kill-fixture-death-0030.png",
+          "sha256": "8f8618aae1cc4b8e6c77e667a98f326f7884d9dc1e9a694cfacffbe3d7733d15"
+        },
+        {
+          "path": "art-experiments/emberjaw-skull/live-native-scale/kill-fixture-death-0060.png",
+          "sha256": "10328aaf304354671167c2cabf7d650579638343c19e336197a5b387fff3e234"
+        }
+      ],
+      "hpBeforeAfter": [
+        64,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle_skull"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 66.8145751953125,
+              "lastNormalizedTime": 67.95854187011719,
+              "gameSeconds": 2.38330078125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathDirect_skull"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13750000298023224,
+              "lastNormalizedTime": 4.354166030883789,
+              "gameSeconds": 8.433349609375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Face and independent jaw remain coherent at native scale0.75 in sampled views. Hit is visible. Death body is already hidden by native effects at reviewed frames30/60.",
+    "limits": "Native effects prevent full visible death deformation proof; culling, full animation endpoints and all-controller variants remain unverified."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "collect": {
+      "path": "scratch/emberjaw-scale-collect1.json",
+      "sha256": "a01db5ed3f7f1f773a256b0b723a0cd2a5b83168d63957d21acd0f63f5562364"
+    },
+    "secondCollect": {
+      "path": "scratch/emberjaw-scale-collect2.json",
+      "sha256": "fd5c5aa8bb6d85bd11699324ba93b08e06ad8433382eeeb6526bae8a813b746b"
+    },
+    "afterCollect": {
+      "path": "scratch/emberjaw-scale-ready.json",
+      "sha256": "fd4666eb067617bf7a65500aac25d33e6a48ad11202a4597f19df594007113bc"
+    },
+    "result": "two guarded Collect actions; strict Ready level0 room3"
+  },
+  "historicalEvidencePreserved": "live-validation.json retains prior old-framework prototype and effect-occluded death evidence.",
+  "scale": {
+    "requestedFactor": 1,
+    "nativePrefabRootLocalScale": [
+      0.75,
+      0.75,
+      0.75
+    ],
+    "observedRendererWorldAxes": [
+      {
+        "path": "ChaosSkullBottom",
+        "worldAxisLengths": [
+          0.7500000582874314,
+          0.75,
+          0.7500000582874314
+        ]
+      },
+      {
+        "path": "ChaosSkullTop",
+        "worldAxisLengths": [
+          0.7500000582874314,
+          0.75,
+          0.7500000582874314
+        ]
+      }
+    ],
+    "inventory": {
+      "path": "scratch/mirewarden-game/model-test-output/65a111454f184d939edf476f036de3b2.json",
+      "sha256": "45f7800ab9a44bba248d4ae9ca51b264cb43493889e8ec243264f373fa12ac9a"
+    },
+    "limit": "World axis measurement is distinct from directly recorded CEL local scale."
+  }
+}

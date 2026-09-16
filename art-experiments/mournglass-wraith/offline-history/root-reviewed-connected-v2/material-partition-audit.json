@@ -1,0 +1,31 @@
+{
+  "status": "PASS_DISJOINT_ORIGINAL_SURFACES",
+  "primitiveTriangleCounts": [
+    588,
+    436
+  ],
+  "mapping": [
+    {
+      "primitive": 0,
+      "nativeSlot": 0,
+      "texture": "mournglass.slot0.png",
+      "scope": "Only repeat-safe blue-green cloth tile; no palette atlas",
+      "scrollRate": [
+        0,
+        -0.5
+      ],
+      "property": "_MainTex"
+    },
+    {
+      "primitive": 1,
+      "nativeSlot": 1,
+      "texture": "mournglass.slot1.png",
+      "scope": "Fixed ivory mask and hands palette"
+    }
+  ],
+  "limits": [
+    "Native UV phase untouched by authoring; live recurrence not tested",
+    "Native8particles/FlickerLight/Light retained",
+    "No runtime profile or staging"
+  ]
+}

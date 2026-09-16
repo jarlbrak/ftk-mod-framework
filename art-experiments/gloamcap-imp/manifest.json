@@ -1,0 +1,132 @@
+{
+  "name": "Gloamcap Trickster",
+  "native_chassis": "impA",
+  "resource_prefab": "enbaseyimp",
+  "reference_renderer": 121117,
+  "renderer_path": "enBaseyImp",
+  "native_surface_copied": false,
+  "art_status": "Original multipart surface model; exact resource-route live binding, motion, material, gameplay and scoped visual acceptance recorded in V3",
+  "native_forward": "+UnityZ verified from toe chain and native weighted face envelope",
+  "rig_boundary": "Full37-joint resource Imp palette retained. Mushroom cap follows Head_M, not unused Hair_M; trunk and limbs blend locally.",
+  "remaining": [
+    "Final art-direction approval",
+    "Other Imp clips and proficiencies",
+    "Portrait, collision, extended culling, cleanup causality and long-session resource lifetime"
+  ],
+  "parts": [
+    {
+      "name": "gloamcap",
+      "vertices": 6984,
+      "triangles": 2328,
+      "palette_joints": 37,
+      "max_bind_rest_error": 2.3350630984353415e-08,
+      "blender_reopen_max_bind_rest_error": 2.3350630984353415e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.0173308849334717,
+        0.01307741366326809,
+        -0.12142025679349899
+      ],
+      "bind_bounds_max": [
+        1.0173308849334717,
+        1.5436534881591797,
+        0.2991543114185333
+      ],
+      "blender_roundtrip_glb_sha256": "fadae0b6f54fcb85bec8cb64299030aabe87547bb6fa22c299bfc312110cdaf2"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121117,
+      "local_reference_path": "scratch/skeleton-audit/121117/reference.npz",
+      "sha256": "a0fd653997c8d0cec2c67abc790ab367ae29d8a890063d1f3104c96da9cc4f83"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "scoped in-game visual acceptance recorded from 29 exact original PNGs in live-validation-v3",
+    "live_binding": "pass for exact impA / enbaseyimp / enBaseyImp / renderer 121117 resource route in live-validation-v3",
+    "live_animation": "pass for sampled idle, repeated native attacks, two dodges, ordinary heavy-damage recovery and explicit-fixture physics death in live-validation-v3",
+    "live_material_and_culling": "material observed and exact renderer identity stable in all 600 retained V3 frames; extended culling and long-session lifetime remain pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "48129009b7d88964c1e6b352f38476db7519e31a2cc2879c4943aa5d92e617ee",
+      "bytes": 7779
+    },
+    "build_blender.py": {
+      "sha256": "96650683004fbcbe4168e5f357b940cd7cb9ea41eff7ef2c94d2c5fd6bd83865",
+      "bytes": 5381
+    },
+    "build_geometry.py": {
+      "sha256": "3e0d171b1d08159c1abfc14cbda7aafc8c7244ee6855449b13193de23f8f9bd5",
+      "bytes": 7917
+    },
+    "finalize_manifest.py": {
+      "sha256": "83b4120e4953e28b557eaeb48e230a4795e0e9db6fd00e9ba6a8c76f9f37b125",
+      "bytes": 2410
+    },
+    "gloamcap-studio.blend": {
+      "sha256": "2eae1ff2f10fabb9b2d85b195be042d2b3335e5a7439bc0b75db7f2ff4a9993f",
+      "bytes": 226650
+    },
+    "gloamcap-studio.blend1": {
+      "sha256": "7a67ed83c6c767f197046b1d87a014001b0ee8fbd2839eeb7ddc4401562b93c7",
+      "bytes": 220046
+    },
+    "gloamcap.blend": {
+      "sha256": "3a84d6c051181f1ce161c2319607465260a91cb0258e1e9ae90a92932ed86d82",
+      "bytes": 223296
+    },
+    "gloamcap.glb": {
+      "sha256": "efc35ca12e5d200b681b6e14800b71dbd0cb62fb4d53efe9bbb516f9cda9c13c",
+      "bytes": 409848
+    },
+    "gloamcap.pieces.json": {
+      "sha256": "f398695945a32a13ec67e5f88f31dac9e466db5f6a3dc9aacf7502e2cd77fa46",
+      "bytes": 3189
+    },
+    "gloamcap.source.json": {
+      "sha256": "b1c0540747a176dcdba11551f9412c0ef441aa67a1b75a159d078a06e21944f8",
+      "bytes": 1101909
+    },
+    "gloamcap.validation.json": {
+      "sha256": "2b01add4aae4117e5393d690e5a0e93c115a020b1c6bb94ffcf67aafc6c9cd0a",
+      "bytes": 790
+    },
+    "gloamcap_basecolor.png": {
+      "sha256": "8c10afa1fe476009ed65b524f2367bb6bfdb35eb4a2d8a4f4c5d4e4f430543a6",
+      "bytes": 270
+    },
+    "hero.png": {
+      "sha256": "a90e02c2fed105029eee27b5ae76d4124764dae03c4c2335d024ad0b5978c203",
+      "bytes": 1030035
+    },
+    "inspect_materials.py": {
+      "sha256": "c84354be8ef9da60be0e91b90507b670674c05a77b23299d9fd8b773ef90d584",
+      "bytes": 1214
+    },
+    "native-material-metadata.json": {
+      "sha256": "56075c0e7da74beb66e58e67386adcf940d58a11b447e20fdc2e48a83b2d9947",
+      "bytes": 2361
+    },
+    "runtime-profile.json": {
+      "sha256": "7739de66d255fe59992b11388029503a3256f9793b880cff680d45bdccfc8c43",
+      "bytes": 541
+    },
+    "side.png": {
+      "sha256": "09c85b19051cb5903f035e0339cc14d82fdb258126ee1c5628e43a9819f3fdcb",
+      "bytes": 1033542
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/gloamcap-imp/live-validation.json",
+    "sha256": "bbe9ca420b4c341426f505d824de93bddc44fad7e045d935c83d6884f86a058c"
+  },
+  "live_v3": {
+    "path": "art-experiments/gloamcap-imp/live-validation-v3/validation.json",
+    "sha256": "79ae75422b1334578f4c4a78beaf586d8a18819c9724127606eab12b5992cc9d"
+  }
+}

@@ -1,0 +1,1025 @@
+{
+  "status": "fresh_catalog_419_opted_falloff_policy_semantic_deathlight_paired_normal_death_and_native_ready",
+  "scope": "Exact original Bramblecoil binding on isolated FTK only. KillSingle remains an explicit fixture, not ordinary lethal combat.",
+  "enemy": "ftkmf_modeltest_bramblecoil_jungle_snake",
+  "nativeChassis": "snakeJungleC",
+  "referenceRendererId": 121424,
+  "rendererPath": "enJungleSnakeC",
+  "assetHashes": {
+    "bramblecoil-jungle-snake.glb": "87b7f5c4c5a660175ac1d29eb5f8e2faa6c94fae221343e74a56a5792ebbeb13",
+    "bramblecoil-jungle-snake_basecolor.png": "d5c4646d772a28639c106eb787ab73d60635fa7a2eddd6293feb0df2693112b0"
+  },
+  "sharedDeployment": {
+    "receipt": {
+      "path": "scratch/bramblecoil-policy-control-idle-gate-419/receipt.json",
+      "sha256": "2344cc882a764aa91d7a04eaa185867519c49bab6722c6c442f32dd567bcdc13",
+      "bytes": 4410
+    },
+    "catalog": {
+      "path": "scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "6ae146a0665a56aa1fed6ad3b9fc342c1a792eb2b8a9271995f64536c41f1164",
+      "bytes": 191522
+    },
+    "plugins": {
+      "FTKModFramework.dll": {
+        "path": "scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+        "sha256": "536a9c762be6555dacfe74619f5a455bb2d2e606ec9a746b27caa04c5cff87c2",
+        "bytes": 1981440
+      },
+      "FtkRuntimeModelTest.dll": {
+        "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "sha256": "e71ac974c347fae76bc9e6942842a769a1aed4d4ed362c70a660b4b27af2b84a",
+        "bytes": 406528
+      },
+      "FtkRuntimeModelTestContent.dll": {
+        "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTestContent.dll",
+        "sha256": "a485618bc181e39edd2f121afc8eb0d9b1117425014274c432a13126b67c1595",
+        "bytes": 34304
+      }
+    }
+  },
+  "semanticDeathLight": {
+    "summary": {
+      "source": "scratch/bramblecoil-deathlight-trigger-v1-20260911-183256.json",
+      "sha256": "fc32dd1fdb30c73dcd38a7900be0bf3532e56560543bdf6390043151dc534845",
+      "bytes": 81249
+    },
+    "session": "57bba202d85842728af97aa808ff428d",
+    "capture": {
+      "source": "scratch/mirewarden-game/model-test-output/9fbb3e779d654ed8b0ae641842781b36.json",
+      "sha256": "b49edcf5762e0104ce558f45d3006143f0dbe79d76afbe8acadde727606c6739",
+      "bytes": 1522583
+    },
+    "provenance": "native-combat-trigger:DeathLight",
+    "trigger": {
+      "issuedMethod": "EnemyDummy.PlayAnim",
+      "trigger": "DeathLight",
+      "expectedLastTrigger": "DeathLight",
+      "preIssueLastTrigger": "Attack",
+      "postIssueLastTrigger": "DeathLight",
+      "enemyInstanceId": 369188,
+      "celInstanceId": -245350,
+      "rendererInstanceId": -245358,
+      "soleEnemyCount": 1,
+      "preIssueGate": {
+        "target": {
+          "enemyInstanceId": 369188,
+          "isAttacking": false,
+          "priorActionAnimationPlayed": true,
+          "baseLayerIdle": true,
+          "baseLayerTransition": false,
+          "baseLayerStateHash": -1009909005,
+          "baseLayerNormalizedTime": 1.2664580345153809
+        },
+        "playerTurn": {
+          "fightOrderHead": {
+            "photonId": 1,
+            "turnIndex": 0
+          },
+          "playerInstanceId": 358974,
+          "alive": true,
+          "actionAnimationPlayed": false,
+          "fsmState": "Wait For Stance"
+        },
+        "note": "Target priorActionAnimationPlayed is native historical telemetry; live safety requires a non-attacking settled target and a player Wait For Stance turn."
+      }
+    },
+    "verdict": {
+      "frames": 24,
+      "firstGameSeconds": 0.0,
+      "lastGameSeconds": 2.1083335876464844,
+      "allFramesExactCustomBody": true,
+      "allFramesDeathLight": true,
+      "allFramesVisible": true
+    }
+  },
+  "pairedNormalDeath": {
+    "report": {
+      "source": "art-experiments/bramblecoil-jungle-snake/falloff-policy-comparison-v2.json",
+      "sha256": "01eccfd5d83b7f4fe054d40f71111a2b7158df46aacb7390978c32e8ebdd538f",
+      "bytes": 15234
+    },
+    "opted": {
+      "summary": {
+        "source": "scratch/bramblecoil-falloff-opted-v2-20260911-183817.json",
+        "sha256": "189b38b60c27bf1937ae7ef90d3559390fc9f8f9007241898dc0d55a09fdd46e",
+        "bytes": 4917
+      },
+      "capture": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9.json",
+        "sha256": "cc53dba6e35fccd25dbae987306faf6ccf3193c3f6f9e27e0f4e4c6b90d88c37",
+        "bytes": 7660812
+      },
+      "registration": {
+        "source": "scratch/mirewarden-game/model-test-registration.json",
+        "sha256": "5b95f83583ac330ac0e1c3c4fcd058bc184cf26707db2106cc41035ebb0840a3",
+        "bytes": 215136
+      },
+      "fixture": {
+        "source": "scratch/mirewarden-game/model-test-output/case-ed15667ef0d14135a5d2ee0fdd5f2794/result.json",
+        "sha256": "522d68e58ac3e439204d7e234da141cde6ef29390848d0cdffacce4ad5bec122",
+        "bytes": 1018
+      },
+      "session": "ffc687f51b21401caf59b83575901ac9",
+      "profile": "ftkmf_modeltest_bramblecoil_jungle_snake",
+      "policy": "preserve-custom-body",
+      "identity": {
+        "mesh": "ftkmf_glb_bramblecoil-jungle-snake.glb",
+        "ownerInstanceId": 369188,
+        "instanceId": -245292,
+        "boneSignature": "4535db0bcba0e3ef1ab9de51e4a8594296378992462eed739edb5a3a63399fe1"
+      },
+      "firstNativeDeathFrame": 27,
+      "firstNativeDeathGameSeconds": 2.4749984741210938,
+      "firstHiddenFrame": null,
+      "firstDynamicFrame": 0,
+      "checkpoints": [
+        {
+          "frame": 0,
+          "gameSeconds": 0.0,
+          "state": [
+            "Snake_Idle"
+          ],
+          "lastCombatTrigger": "Attack",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 25,
+          "gameSeconds": 2.2916641235351562,
+          "state": [
+            "Snake_Idle"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 26,
+          "gameSeconds": 2.383331298828125,
+          "state": [
+            "Snake_Idle"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 27,
+          "gameSeconds": 2.4749984741210938,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 28,
+          "gameSeconds": 2.5666656494140625,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 26
+        },
+        {
+          "frame": 30,
+          "gameSeconds": 2.75,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 26
+        },
+        {
+          "frame": 40,
+          "gameSeconds": 3.6666641235351562,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 26
+        },
+        {
+          "frame": 60,
+          "gameSeconds": 5.5,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 26
+        },
+        {
+          "frame": 119,
+          "gameSeconds": 10.908332824707031,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 26
+        }
+      ],
+      "screenshots": {
+        "0": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0000.png",
+          "sha256": "0fae45a0e3c193abae84d09e3add7e8d2ecaf74be84b68725c3b842948439afa",
+          "bytes": 1086645
+        },
+        "25": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0025.png",
+          "sha256": "b2dd86abeb256edef3e78b8a262c99f18cf6bcceb8cf9e59e27b261fd7d9781f",
+          "bytes": 1108891
+        },
+        "26": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0026.png",
+          "sha256": "58f489aa95e25bbc9394aed5e13908174025f5e7e83539fe44ca339cc558be71",
+          "bytes": 1104136
+        },
+        "27": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0027.png",
+          "sha256": "fd9366baddddf9ec81e8906adaf4d79d8d0684e5a34ab063e532d089490c83c6",
+          "bytes": 1096261
+        },
+        "28": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0028.png",
+          "sha256": "9c8d60f461073e8d948db8e28da722409c9aed516074ad7b49919e644abf1c27",
+          "bytes": 1096533
+        },
+        "30": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0030.png",
+          "sha256": "dca639a29004f86de535b84eaece1428e54e7b714762758a7f0d236183cbf99a",
+          "bytes": 1098216
+        },
+        "40": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0040.png",
+          "sha256": "e8726fad7366fe7809c435842a9a495a5ac3f3e9c629ec2ef1fdb6e0d7f1700c",
+          "bytes": 1107450
+        },
+        "60": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0060.png",
+          "sha256": "0087b8322de814f639400f441b0f7bc012c82efeb6e85290e5c58642c41f217e",
+          "bytes": 1101587
+        },
+        "119": {
+          "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0119.png",
+          "sha256": "eb3c40134823b97ec3793b61c84bcac176fb2acae709c2f497fcc680e85e2480",
+          "bytes": 859963
+        }
+      }
+    },
+    "nativeControl": {
+      "summary": {
+        "source": "scratch/bramblecoil-falloff-native-control-v2-20260911-184006.json",
+        "sha256": "3820603d2d5caac6aadf6eb3859036ef9076a9108b1c171804c78c5773ef15d2",
+        "bytes": 4938
+      },
+      "capture": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a.json",
+        "sha256": "dd5593c77ea88ea3972af487f8f6fd080a106cc5eacbf079e88d3311c93400ac",
+        "bytes": 6839529
+      },
+      "registration": {
+        "source": "scratch/mirewarden-game/model-test-registration.json",
+        "sha256": "5b95f83583ac330ac0e1c3c4fcd058bc184cf26707db2106cc41035ebb0840a3",
+        "bytes": 215136
+      },
+      "fixture": {
+        "source": "scratch/mirewarden-game/model-test-output/case-e89e5cf0ab4f473bbe0887c05923f758/result.json",
+        "sha256": "03611813f8d2f37c416e6aac7149ddf839cd5e37ddc59974381119f80768a16a",
+        "bytes": 1018
+      },
+      "session": "794de98b47924ae2912758ce566d32dd",
+      "profile": "ftkmf_modeltest_bramblecoil_jungle_snake_native_falloff_control",
+      "policy": null,
+      "identity": {
+        "mesh": "ftkmf_glb_bramblecoil-jungle-snake.glb",
+        "ownerInstanceId": 369188,
+        "instanceId": -245436,
+        "boneSignature": "4535db0bcba0e3ef1ab9de51e4a8594296378992462eed739edb5a3a63399fe1"
+      },
+      "firstNativeDeathFrame": 27,
+      "firstNativeDeathGameSeconds": 2.4749984741210938,
+      "firstHiddenFrame": 25,
+      "firstDynamicFrame": 0,
+      "checkpoints": [
+        {
+          "frame": 0,
+          "gameSeconds": 0.0,
+          "state": [
+            "Snake_Idle"
+          ],
+          "lastCombatTrigger": "AttackProf",
+          "active": true,
+          "visible": true,
+          "enabled": true,
+          "rigidbodyCount": 26,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 25,
+          "gameSeconds": 2.2916641235351562,
+          "state": [
+            "Snake_Idle"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 0
+        },
+        {
+          "frame": 26,
+          "gameSeconds": 2.383331298828125,
+          "state": [
+            "Snake_Idle"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 0
+        },
+        {
+          "frame": 27,
+          "gameSeconds": 2.4749984741210938,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 0
+        },
+        {
+          "frame": 28,
+          "gameSeconds": 2.5666656494140625,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 30,
+          "gameSeconds": 2.75,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 40,
+          "gameSeconds": 3.6666641235351562,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 60,
+          "gameSeconds": 5.5,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 13
+        },
+        {
+          "frame": 119,
+          "gameSeconds": 10.908332824707031,
+          "state": [
+            "Snake_DeathBig"
+          ],
+          "lastCombatTrigger": "Death",
+          "active": false,
+          "visible": false,
+          "enabled": true,
+          "rigidbodyCount": 13,
+          "dynamicBodies": 13
+        }
+      ],
+      "screenshots": {
+        "0": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0000.png",
+          "sha256": "75b59514f71b335286ff256fc1b622d8bf20c4c47daf6d6ca36e864276698d1e",
+          "bytes": 1095625
+        },
+        "25": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0025.png",
+          "sha256": "c1ff1bbf6d0e1aa7e2e5f3cde048eb83e33dcdd01a5e73670cbcfccac0175574",
+          "bytes": 1103087
+        },
+        "26": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0026.png",
+          "sha256": "b6f2b6ce59aec9788391971f069dee8e0e6455d800b9a4407bb2de2f59db8183",
+          "bytes": 1096351
+        },
+        "27": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0027.png",
+          "sha256": "0fe97e95c8ea6e3e4f5e160ed062d1a2922cc26a713d403e13d2f3cf2464f596",
+          "bytes": 1085731
+        },
+        "28": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0028.png",
+          "sha256": "069c320261f25954b234ae5d6cd9c1fce04c692b0340354c843c3a3277315ce8",
+          "bytes": 1081783
+        },
+        "30": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0030.png",
+          "sha256": "b8f20963d8cfada804c71da1cdf0d467a83ac6f11d05855e500a4b9d30f9d459",
+          "bytes": 1085241
+        },
+        "40": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0040.png",
+          "sha256": "9be323166d231eee2016d84276e5cdd878f208622676d30050fc38d8dbff0593",
+          "bytes": 1081999
+        },
+        "60": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0060.png",
+          "sha256": "bf1e5b9a53e0a9624d146aee0a9b3087675eec058a0f05e2826ced35aeb91160",
+          "bytes": 1068323
+        },
+        "119": {
+          "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0119.png",
+          "sha256": "50a42a35d8a720dc825928610c04d32e70d1fc31ae7d00f52905e7ca6f847aba",
+          "bytes": 849048
+        }
+      }
+    },
+    "observedDifference": {
+      "sameNativeDeathState": [
+        27,
+        27
+      ],
+      "opted": "The explicitly leased custom renderer stayed active, visible, and enabled from the first native Snake_Death frame through the final captured frame; its 26 native ragdoll bodies were dynamic by the next frame.",
+      "nativeControl": "With the policy omitted, the same custom renderer became inactive and invisible by capture frame 25; the native 13-piece fall-off body was dynamic by the next death frame."
+    }
+  },
+  "nativeCleanup": {
+    "summary": {
+      "source": "scratch/bramblecoil-falloff-cleanup-v1-20260911-184717.json",
+      "sha256": "9db7ae875fa6746bbf2b16e5bc9b939d6c22ae71297899b806c39823e6a89eed",
+      "bytes": 11897
+    },
+    "session": "ffc387bc1f0d4ae48d7b1f40b5136d73",
+    "capture": {
+      "source": "scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb.json",
+      "sha256": "b7ba055fc860f4fd85323e3fc17b05f0f90030a650f9e57f96264fd7855de2de",
+      "bytes": 7673300
+    },
+    "startDungeon": {
+      "level": 0,
+      "room": 1
+    },
+    "collects": [
+      {
+        "before": {
+          "heroInstanceId": -235452,
+          "buttonInstanceId": -237230,
+          "item": "None"
+        },
+        "result": {
+          "ok": true,
+          "status": "clicked",
+          "heroInstanceId": -235452,
+          "buttonInstanceId": -237230,
+          "item": "None",
+          "method": "VoteButton.OnLeftClick(Collect)",
+          "note": "One native current Loot vote submitted; observe fixture-state again before any further collection.",
+          "testFixtureMaxHpTarget": 999,
+          "tutorialsQuiet": true,
+          "session": "ffc387bc1f0d4ae48d7b1f40b5136d73",
+          "id": "dc051976cfa6493b9fda19fb8634bcb4",
+          "frame": 4015,
+          "savePath": "save-model-test-81fab5f083e30704"
+        }
+      }
+    ],
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "postDeathBody": [
+      {
+        "frame": 27,
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 28,
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "dynamicBodies": 26
+      },
+      {
+        "frame": 60,
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "dynamicBodies": 26
+      },
+      {
+        "frame": 119,
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "dynamicBodies": 26
+      }
+    ]
+  },
+  "visualReview": {
+    "status": "ROOT_REVIEWED_LIMITED_FRAME_SETS",
+    "reviewedBy": "Codex root agent",
+    "reviewedFrames": {
+      "semanticDeathLight": {
+        "archive": "reviewed-frames/semantic-deathlight.png",
+        "sha256": "99e50da04251815b6fb31fc38570d4c41b7e5c40cad59888a2e574117b1e144f",
+        "bytes": 424483,
+        "sourceFrames": {
+          "0": {
+            "source": "scratch/mirewarden-game/model-test-output/9fbb3e779d654ed8b0ae641842781b36/0000.png",
+            "sha256": "7df6d7b3a71ea6014a346149766a29d6bd91f23f9a8d5d47b14a8bbfe211c638",
+            "bytes": 1095544
+          },
+          "11": {
+            "source": "scratch/mirewarden-game/model-test-output/9fbb3e779d654ed8b0ae641842781b36/0011.png",
+            "sha256": "053fc73b4653dd3181a9b16e4b4d0041e52926cfa44b9912fc2cedb9fae033a0",
+            "bytes": 1090443
+          },
+          "23": {
+            "source": "scratch/mirewarden-game/model-test-output/9fbb3e779d654ed8b0ae641842781b36/0023.png",
+            "sha256": "65b60c496b56eb0b355d6835fff08aabc806cfe4f0b96400873c7692e4508367",
+            "bytes": 1102269
+          }
+        }
+      },
+      "optedNormalDeath": {
+        "archive": "reviewed-frames/opted-normal-death.png",
+        "sha256": "acd0590501e263273219115c2676e54f311ec78d9b64a7d9e55c9ee622b1ce30",
+        "bytes": 1017117,
+        "sourceFrames": {
+          "20": {
+            "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0020.png",
+            "sha256": "374887b8c2a548e5af68835259e5b3e3378c93145f18f0e37256bdf116bb4e6c",
+            "bytes": 1090413
+          },
+          "25": {
+            "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0025.png",
+            "sha256": "b2dd86abeb256edef3e78b8a262c99f18cf6bcceb8cf9e59e27b261fd7d9781f",
+            "bytes": 1108891
+          },
+          "27": {
+            "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0027.png",
+            "sha256": "fd9366baddddf9ec81e8906adaf4d79d8d0684e5a34ab063e532d089490c83c6",
+            "bytes": 1096261
+          },
+          "28": {
+            "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0028.png",
+            "sha256": "9c8d60f461073e8d948db8e28da722409c9aed516074ad7b49919e644abf1c27",
+            "bytes": 1096533
+          },
+          "40": {
+            "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0040.png",
+            "sha256": "e8726fad7366fe7809c435842a9a495a5ac3f3e9c629ec2ef1fdb6e0d7f1700c",
+            "bytes": 1107450
+          },
+          "60": {
+            "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0060.png",
+            "sha256": "0087b8322de814f639400f441b0f7bc012c82efeb6e85290e5c58642c41f217e",
+            "bytes": 1101587
+          },
+          "119": {
+            "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0119.png",
+            "sha256": "eb3c40134823b97ec3793b61c84bcac176fb2acae709c2f497fcc680e85e2480",
+            "bytes": 859963
+          }
+        }
+      },
+      "nativeControlNormalDeath": {
+        "archive": "reviewed-frames/native-control-normal-death.png",
+        "sha256": "77130498d1afe126f6ca428709bff3b3ae626a3c153f675279b71e24411b17d7",
+        "bytes": 995902,
+        "sourceFrames": {
+          "20": {
+            "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0020.png",
+            "sha256": "9d150f9b5f6494f233c3a125644bfc1793aa598d881ba81f13cc3be756de68e1",
+            "bytes": 1093260
+          },
+          "25": {
+            "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0025.png",
+            "sha256": "c1ff1bbf6d0e1aa7e2e5f3cde048eb83e33dcdd01a5e73670cbcfccac0175574",
+            "bytes": 1103087
+          },
+          "27": {
+            "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0027.png",
+            "sha256": "0fe97e95c8ea6e3e4f5e160ed062d1a2922cc26a713d403e13d2f3cf2464f596",
+            "bytes": 1085731
+          },
+          "28": {
+            "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0028.png",
+            "sha256": "069c320261f25954b234ae5d6cd9c1fce04c692b0340354c843c3a3277315ce8",
+            "bytes": 1081783
+          },
+          "40": {
+            "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0040.png",
+            "sha256": "9be323166d231eee2016d84276e5cdd878f208622676d30050fc38d8dbff0593",
+            "bytes": 1081999
+          },
+          "60": {
+            "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0060.png",
+            "sha256": "bf1e5b9a53e0a9624d146aee0a9b3087675eec058a0f05e2826ced35aeb91160",
+            "bytes": 1068323
+          },
+          "119": {
+            "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0119.png",
+            "sha256": "50a42a35d8a720dc825928610c04d32e70d1fc31ae7d00f52905e7ca6f847aba",
+            "bytes": 849048
+          }
+        }
+      },
+      "optedCleanup": {
+        "archive": "reviewed-frames/opted-cleanup.png",
+        "sha256": "067651a85b10d9f78ddc1fe0f2ab1d7beb9d4be109c68b65f7343d8d30d9ca12",
+        "bytes": 720286,
+        "sourceFrames": {
+          "0": {
+            "source": "scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb/0000.png",
+            "sha256": "9bfec26f8b6d7e8ee61f899230b07b3fe0233371821c1c678e95914a4588ab53",
+            "bytes": 1083982
+          },
+          "27": {
+            "source": "scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb/0027.png",
+            "sha256": "4c5b6c96133f6fe8e1921c07c610dc2b385a9aa95e9e62fab9a3292dd8d336cb",
+            "bytes": 1095329
+          },
+          "28": {
+            "source": "scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb/0028.png",
+            "sha256": "ebf227587bb4ee6e886bd41a191bcde79152c4649c5a2f69782f8caa1af780e7",
+            "bytes": 1088281
+          },
+          "60": {
+            "source": "scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb/0060.png",
+            "sha256": "6c46932732f10e300e03d349539e809db6ab5d0c65687c0a4597aaf2f07dc868",
+            "bytes": 1091018
+          },
+          "119": {
+            "source": "scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb/0119.png",
+            "sha256": "04d78a71a47fef28d56d527fa5caec1e83b2cf51956bfe49e667008e904081ec",
+            "bytes": 864987
+          }
+        }
+      }
+    },
+    "observations": [
+      "The semantic sheet keeps the jade-and-teal custom serpent visibly rendered throughout the bounded DeathLight capture.",
+      "The opted normal-death sheet keeps the custom serpent visible as its native ragdoll settles; the omitted-policy control instead shows the native fall-off fragments after the custom body disappears.",
+      "The opted cleanup sheet keeps the custom serpent visible into the victory/loot presentation before the guarded native Collect vote reaches strict Ready."
+    ],
+    "limitations": "These selected screenshots support only a limited visual review. They do not prove every animation instant, camera angle, portrait, material lifetime, or finished-art acceptance."
+  },
+  "limitations": [
+    "No ordinary attack hit, ordinary lethal-damage, or native combat-cause claim is made; the existing ordinary and focus attack diagnostics recorded no same-target HP loss.",
+    "The fixture and cleanup evidence does not prove portrait pixels, all-angle culling, material lifetime, corpse presentation quality, or full campaign progression.",
+    "The policy is intentionally narrow: it only protects an exact explicitly leased FallOffLimb renderer; unrelated renderers retain native behavior."
+  ],
+  "metadata": [
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/README.md",
+      "sourceSha256": "f2c12885955842e869190a73cdbebfd23cbe94924882860a83a2bd3d9d3be7bf",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/README.md.gz",
+      "archiveSha256": "a7d9613b6a10f8e60ff8e20a7ef2856ecd8bde2030d571847d3c842037882e0c",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/death-handoff-analysis-v1.json",
+      "sourceSha256": "b785ec40de4cda3b6a8befcf3598131625b64ffb225d50302cddb70f0b33ac3e",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/death-handoff-analysis-v1.json.gz",
+      "archiveSha256": "db7ec40702e83bbbaa4490fba85da0b4407c626ffbfb8b5f6b33cf79cc3042c4",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/falloff-policy-comparison-v2.json",
+      "sourceSha256": "01eccfd5d83b7f4fe054d40f71111a2b7158df46aacb7390978c32e8ebdd538f",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/falloff-policy-comparison-v2.json.gz",
+      "archiveSha256": "4d47771d01f79d0b76e18fa53ac88a189150dbf4a5c372a0317778f8abdefe1d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/finalize_manifest.py",
+      "sourceSha256": "abf8ec1fe9bf0bbae30d528be55ecad4a1d49101044225485bbe10ac2f4842e7",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/finalize_manifest.py.gz",
+      "archiveSha256": "40808299220b07574a72dbcb3ce0411d1c8b998d10cf412eca05832bfec6fe94",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/live-validation-v1/README.md",
+      "sourceSha256": "95d3e9d94cb4f082078f8974c2db07b1cf60774608daa89db415aba8114862ca",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/live-validation-v1/README.md.gz",
+      "archiveSha256": "4c84c762f4299e90cbb9101abcd5be0f71aedb5bc6c6a4c4101e860d6681ab1b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/live-validation-v1/archive.py",
+      "sourceSha256": "609c69a9efc12398934c88ee48bde50a06e6baea5c2c50883cbd83ffad4af8e9",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/live-validation-v1/archive.py.gz",
+      "archiveSha256": "39076e3ffb9a7a2d03440812420ea9b9da673f4209f710c5f9947de2b42b26d5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/run_deathlight_trigger_v1.py",
+      "sourceSha256": "81b4660ff8a10ccb475f878b36f1670fb8cade6087bdcfb000d8a6e320d0ee1f",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/run_deathlight_trigger_v1.py.gz",
+      "archiveSha256": "516f5854ddd44d00509849459d5e35c6c094e0aa73fa16e91c1d2e7036861f27",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/run_falloff_cleanup_v1.py",
+      "sourceSha256": "88607b495423283639db75249d405355388d64e99f0567228d496cbfe614e78a",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/run_falloff_cleanup_v1.py.gz",
+      "archiveSha256": "88ba4e325600cf75b02096d0c6b83082af6b10f96d63666956476eb407318ff3",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/run_falloff_fixture_v2.py",
+      "sourceSha256": "f9bbdb5babead7a761e834ceb195148e48d01c5d112b46e720f453f397aec325",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/run_falloff_fixture_v2.py.gz",
+      "archiveSha256": "dc4a85904dc6fc0d1a5fe05857c15e6197e1cc6fce12d96b8da6c90bb54a9b52",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/runtime-profile.json",
+      "sourceSha256": "6769713f9a788d766c6652cc1ebb5a409ce0630461255e4de0b8422c72e5300e",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/runtime-profile.json.gz",
+      "archiveSha256": "993de719095246bb6d7e45192938f0c44a17b7b9475c7734e29bec57eb3ff0e6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/bramblecoil-jungle-snake/verify_falloff_fixture_v2.py",
+      "sourceSha256": "ce36242e6c7ff4290786dcb830ea810b7b89bd2523d46e88f0e0b16aeb60e1db",
+      "archive": "metadata/art-experiments/bramblecoil-jungle-snake/verify_falloff_fixture_v2.py.gz",
+      "archiveSha256": "3a8cab04d29b44587b0258f6db835a0a188a8c3fae6e591e660d937ddb9f3d40",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bramblecoil-deathlight-trigger-v1-20260911-183256.json",
+      "sourceSha256": "fc32dd1fdb30c73dcd38a7900be0bf3532e56560543bdf6390043151dc534845",
+      "archive": "metadata/scratch/bramblecoil-deathlight-trigger-v1-20260911-183256.json.gz",
+      "archiveSha256": "376ee480b36481a9f2b1dbf7c445b84b2d2e357867af61c0b2cbc220a3f16a33",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bramblecoil-falloff-cleanup-v1-20260911-184717.json",
+      "sourceSha256": "9db7ae875fa6746bbf2b16e5bc9b939d6c22ae71297899b806c39823e6a89eed",
+      "archive": "metadata/scratch/bramblecoil-falloff-cleanup-v1-20260911-184717.json.gz",
+      "archiveSha256": "81e3d806985321e2f30e4b0d2b82ee41586ba96b198d0b715d1d78bdc8046330",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bramblecoil-falloff-native-control-v2-20260911-184006.json",
+      "sourceSha256": "3820603d2d5caac6aadf6eb3859036ef9076a9108b1c171804c78c5773ef15d2",
+      "archive": "metadata/scratch/bramblecoil-falloff-native-control-v2-20260911-184006.json.gz",
+      "archiveSha256": "e35dd01a631ffaa549014df01827d9e7fa0ccb710cb98b4f49c668a2a42a02a2",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bramblecoil-falloff-opted-v2-20260911-183817.json",
+      "sourceSha256": "189b38b60c27bf1937ae7ef90d3559390fc9f8f9007241898dc0d55a09fdd46e",
+      "archive": "metadata/scratch/bramblecoil-falloff-opted-v2-20260911-183817.json.gz",
+      "archiveSha256": "d2278b15a7f00b5f05b68cf369574d0ed879e0bf9baa02e6f44cc7a426aa186c",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bramblecoil-policy-control-idle-gate-419/receipt.json",
+      "sourceSha256": "2344cc882a764aa91d7a04eaa185867519c49bab6722c6c442f32dd567bcdc13",
+      "archive": "metadata/scratch/bramblecoil-policy-control-idle-gate-419/receipt.json.gz",
+      "archiveSha256": "0447594df4cbcce1dfea08bf1db6019ac5fb2e255e080e5601af31e04c8b06e5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/deploy-bramblecoil-policy-control-idle-gate.py",
+      "sourceSha256": "4885da403b8831ea92e4b108d86b4144d6ae66e6e993321c8014043a03e3452f",
+      "archive": "metadata/scratch/deploy-bramblecoil-policy-control-idle-gate.py.gz",
+      "archiveSha256": "ef02dfd12068bbc1cbd7fda32e2559ef98c48c376da770d8290ba0062c63703b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/0585495bfde247008c1095e64457059c.json",
+      "sourceSha256": "a4f27bc822d2374afc9ae47d501e92d93f35b7d624b384cf68e9eb54babac52d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/0585495bfde247008c1095e64457059c.json.gz",
+      "archiveSha256": "512ab076e4d43a8e9f176e2b21cbec150342f6ff952a6374729e843eb9d474af",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9.json",
+      "sourceSha256": "cc53dba6e35fccd25dbae987306faf6ccf3193c3f6f9e27e0f4e4c6b90d88c37",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9.json.gz",
+      "archiveSha256": "431a7065745cc774d81bdef6bbea78c85a2e6dfb92f08fe2904a3e7cb5ca3dbf",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a.json",
+      "sourceSha256": "dd5593c77ea88ea3972af487f8f6fd080a106cc5eacbf079e88d3311c93400ac",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a.json.gz",
+      "archiveSha256": "1705ba82106677df4af6507940e6f9d866163ca16255a76eb58240409d3e5950",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb.json",
+      "sourceSha256": "b7ba055fc860f4fd85323e3fc17b05f0f90030a650f9e57f96264fd7855de2de",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/6e15fbde18d8414d809c8a7d23a004bb.json.gz",
+      "archiveSha256": "5a13c7538bf495bd1be94468df6bdc1377653bb54b5f4d0f4465d143409e2d5f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/9fbb3e779d654ed8b0ae641842781b36.json",
+      "sourceSha256": "b49edcf5762e0104ce558f45d3006143f0dbe79d76afbe8acadde727606c6739",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/9fbb3e779d654ed8b0ae641842781b36.json.gz",
+      "archiveSha256": "52b3315417286caf18ba27c2403fcf567a1fdbbe17f64cdad84c2778ce52e90c",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/af6e063e84f44fbebd62e3372a00bf32.json",
+      "sourceSha256": "8a454bc1e3ad63fec9fe0801731a333492809b6db60a541a88cd01a2c93a9318",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/af6e063e84f44fbebd62e3372a00bf32.json.gz",
+      "archiveSha256": "4cb9aa76ce8167c95a4faf389a7f7f3903885e38165c9cbfe35a22621565808e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0dee3d5a6b3c4335bf61bf9ce5b45500/journal.jsonl",
+      "sourceSha256": "71dd8a41e2c31f6ed874fc1d9b1c2d189680ca5ba8206e1b3955c79f2527fa76",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0dee3d5a6b3c4335bf61bf9ce5b45500/journal.jsonl.gz",
+      "archiveSha256": "7ac809a9fb0ae3398c530c2aa312257f38d14e24da6950040f031c69bceae65b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0dee3d5a6b3c4335bf61bf9ce5b45500/result.json",
+      "sourceSha256": "af43581d0b3a33f2a6faa1a45e4cfdbe21ac2d8be1e78c80b34a0658add76efc",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0dee3d5a6b3c4335bf61bf9ce5b45500/result.json.gz",
+      "archiveSha256": "3d1c072af106bd3b3cf462c52e52b64697bcd44531ee8a546745f26664d92b2f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-1f9cf59262b545df987b4993083fc067/journal.jsonl",
+      "sourceSha256": "b9560acc642325a86a37581094d91883d1e34195e52665ebcc9e78ae9b31fb2c",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-1f9cf59262b545df987b4993083fc067/journal.jsonl.gz",
+      "archiveSha256": "025e14c6a5e78b1d1bc67828b3bd50d05fe990ead74c9398e87cc75e1e8c0fb6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-1f9cf59262b545df987b4993083fc067/result.json",
+      "sourceSha256": "3ee205e9bd4a76697faaafdb9f6ee991780314f368cd1ee9c6060fe47e1e31eb",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-1f9cf59262b545df987b4993083fc067/result.json.gz",
+      "archiveSha256": "e95c8e6ce64849e0b3509779655064787ebb68620a286ec4bd4de4decd36228c",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-3c55f2ea9b0a4557adbaaea8869a78f7/journal.jsonl",
+      "sourceSha256": "231b09f1b469d210a4c2ef2916f0957fec664c6a2a9f9ca9cbcec3b1fdc718b4",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-3c55f2ea9b0a4557adbaaea8869a78f7/journal.jsonl.gz",
+      "archiveSha256": "f5fed3e7a3f311438045f3f64f50184f34aaa2d22f10ee7aea6d2bd616454ab9",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-62aa439cad95473bbf9290aff49816ca/journal.jsonl",
+      "sourceSha256": "002553bafac39ed38c1efc0d2b4e88f45d1efef072d6d489683d781fff2cebad",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-62aa439cad95473bbf9290aff49816ca/journal.jsonl.gz",
+      "archiveSha256": "75752fcd8a465018ddee2eb2ad094b07240f074257b69201c9c42e9f2ef25fd5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-62aa439cad95473bbf9290aff49816ca/result.json",
+      "sourceSha256": "5f3ecc132cd4cab20c6843216794fc41c37cc1d07d5c6deac8cc6e0d01a89df5",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-62aa439cad95473bbf9290aff49816ca/result.json.gz",
+      "archiveSha256": "3f3cb727fc1996d4b83375ce7ad22281bfeb69dd2e029b88e082ca1890879404",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-8ec9d49226e24fa5835fb093688bae14/journal.jsonl",
+      "sourceSha256": "e0490f900881c26931d4649f50f41268981c7792f3e94496bb0c5163e5484fa4",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-8ec9d49226e24fa5835fb093688bae14/journal.jsonl.gz",
+      "archiveSha256": "665c0adc32e450cf27ee8782f5a96761d51a7428336a38180f1309ed18ca52ab",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-8ec9d49226e24fa5835fb093688bae14/result.json",
+      "sourceSha256": "20f705d61beb7eda246d923379df456f1a46f8d93a2e6a26e7fd07f28f140b35",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-8ec9d49226e24fa5835fb093688bae14/result.json.gz",
+      "archiveSha256": "ef344585a7e0cff76e426688214f1ca229f22f0cae64b4993db8a657df4ff324",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-90dd3b832fa84077815ab17d39860d5b/journal.jsonl",
+      "sourceSha256": "7b6da1ff2d5ab83186e7bf641b76bb82853ea92c4164777cb57dc5ccd292f7cd",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-90dd3b832fa84077815ab17d39860d5b/journal.jsonl.gz",
+      "archiveSha256": "48b4088ed8541a3b92f5ef1aba3780ba3e0c1707c2e3386ff6b5b336bd85c4d6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-90dd3b832fa84077815ab17d39860d5b/result.json",
+      "sourceSha256": "34663b3b9877fcab5e9bbd492f9e0329090e4ad57a010ffc06bee7e968becc19",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-90dd3b832fa84077815ab17d39860d5b/result.json.gz",
+      "archiveSha256": "d15e5a8eb314db146e791f62bc4ad331913c771600412ea5d77b2d37a91cb92b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-e89e5cf0ab4f473bbe0887c05923f758/journal.jsonl",
+      "sourceSha256": "bdb28df3eb15b75f8785f6d795b31827dd9d9216576ac0ff3e74e719b69a5783",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-e89e5cf0ab4f473bbe0887c05923f758/journal.jsonl.gz",
+      "archiveSha256": "4c76e1ae2e2cfe7cfc98b3de6f5ce9300a95367f6f42105e38028733d860e062",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-e89e5cf0ab4f473bbe0887c05923f758/result.json",
+      "sourceSha256": "03611813f8d2f37c416e6aac7149ddf839cd5e37ddc59974381119f80768a16a",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-e89e5cf0ab4f473bbe0887c05923f758/result.json.gz",
+      "archiveSha256": "a1bc73c35b5554908f537decb10f191d946cdafbc2344ccfd452ff298509a7b4",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ed15667ef0d14135a5d2ee0fdd5f2794/journal.jsonl",
+      "sourceSha256": "58fee71f0b6459bbc56d65d7bed92fd3d71b799a8b777ff3e810853f9279de14",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ed15667ef0d14135a5d2ee0fdd5f2794/journal.jsonl.gz",
+      "archiveSha256": "a17370f34501080ce5a2b15ebcd43a257f84e7928be8a9fb82f57f16329a6be6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ed15667ef0d14135a5d2ee0fdd5f2794/result.json",
+      "sourceSha256": "522d68e58ac3e439204d7e234da141cde6ef29390848d0cdffacce4ad5bec122",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ed15667ef0d14135a5d2ee0fdd5f2794/result.json.gz",
+      "archiveSha256": "565fb084bb6de0b89f18b34e0964303e635a7b0af54886ad45b5a092e99994de",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/stage-bramblecoil-policy-control-idle-gate.py",
+      "sourceSha256": "f98dec22a19f8da9d959887aa39333ad53a7adfc6cd7a4ac68521282c52c4e0a",
+      "archive": "metadata/scratch/stage-bramblecoil-policy-control-idle-gate.py.gz",
+      "archiveSha256": "ec4392a55a0fca533e4dab61e75fbf8d3a5dcfc4e588f28ebb3b11cbe4e1be16",
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "sourceImages": {
+    "source": "art-experiments/bramblecoil-jungle-snake/live-validation-v1/source-image-pins.json",
+    "sha256": "6c8e24ffd6b1ba5a4656b7cb2270880a9242f60d86893347ffdbb98a203b53ae",
+    "bytes": 76305
+  }
+}

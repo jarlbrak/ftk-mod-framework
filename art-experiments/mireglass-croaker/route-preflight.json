@@ -1,0 +1,50 @@
+{
+  "status": "PASS_EXACT_DIRECT_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only direct-enemy route/profile/asset preflight. No stage, deployment, runtime, visual, motion, or gameplay claim.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_mireglass_croaker_acidblob_b",
+      "baseEnemy": "acidBlobB",
+      "prefab": "enAcidMonsterB",
+      "controllerCandidates": [
+        {
+          "id": 5931,
+          "name": "AcidBlobController"
+        }
+      ],
+      "renderers": [
+        {
+          "rendererPath": "enAcidMonster",
+          "sourceRendererId": 121345,
+          "rigProfile": "8543acf9d2ecbc77f1e00cb12ba0d1c46cab36f09d31cbd86f4ebfb8a79ce001",
+          "combatProfile": "28b118c92eeeb3b809e7a8d5762fbc483c1af5c68159a0f69a3f22d476ba5836",
+          "controllerIds": [
+            5931
+          ]
+        }
+      ],
+      "declaredAssets": [
+        {
+          "file": "mireglass-palette.png",
+          "sha256": "9f4831a5241192064dc4dc68371743d0e392d723c10870d06c2f025ca41b71d4",
+          "bytes": 6315
+        },
+        {
+          "file": "mireglass.glb",
+          "sha256": "821d317864ea8d6c68ee2d48bbc402a28c54082abbec982c5f8da5671f281565",
+          "bytes": 606616
+        }
+      ]
+    }
+  ],
+  "mapping": {
+    "path": "scratch/enemy-rig-mapping-reproducible.json",
+    "sha256": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52",
+    "sourceAssetSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117"
+  },
+  "profileDocument": {
+    "path": "art-experiments/mireglass-croaker/runtime-profile.json",
+    "sha256": "fdbad06da6152d56e7e3ce72d68069443722aa5cd146dd054a5aa0c28ed21881"
+  },
+  "assetDirectory": "art-experiments/mireglass-croaker"
+}

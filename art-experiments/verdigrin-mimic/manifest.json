@@ -1,0 +1,170 @@
+{
+  "name": "Verdigrin Coffer",
+  "status": "ORIGINAL_MIMIC_OFFLINE_PASS_LIVE_V4_CANONICAL_SCOPED_VALIDATED",
+  "native_chassis": "mimicA",
+  "reference_renderer": 121192,
+  "renderer_path": "mimic01",
+  "native_surface_copied": false,
+  "art_status": "Original multipart surface with canonical exact-source binding, appearance, idle, attack, hit, animated death and gameplay evidence; studio and remaining scoped acceptance pending",
+  "native_forward": "+UnityZ from mid/front surface and rear upright lid envelope",
+  "rig_boundary": "Exact nine-joint palette and inverse binds. Lid follows weighted lidHinge, unused lidTop remains unweighted, lower chest follows mid and Root_M, and the tongue follows the native vertical rest chain. No surface bridge crosses the hinge.",
+  "remaining": [
+    "Studio review and finished-art acceptance",
+    "Every hinge and tongue interval, floor collision and sleeping",
+    "Full culling, portraits, resource lifetime and final disposal",
+    "Sibling mimic source pairs"
+  ],
+  "parts": [
+    {
+      "name": "verdigrin",
+      "vertices": 3492,
+      "triangles": 1164,
+      "palette_joints": 9,
+      "max_bind_rest_error": 1.3877787807814457e-16,
+      "blender_reopen_max_bind_rest_error": 1.3877787807814457e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.8199999928474426,
+        0.017000000923871994,
+        -0.6449999809265137
+      ],
+      "bind_bounds_max": [
+        0.8199999928474426,
+        1.9524999856948853,
+        0.6779999732971191
+      ],
+      "blender_roundtrip_glb_sha256": "a4b2e02d8a714abdcc07116dd1d809c61ab574ecc61378d65d3593c602fceb79"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121192,
+      "local_reference_path": "scratch/skeleton-audit/121192/reference.npz",
+      "sha256": "d62ca7f71eda9ee1cc30cbcad678f7c96255596405b5e99e25816537a689a9d8"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "Original surface remains inside the corresponding native rest-surface bounds; this is not animated-envelope proof.",
+    "studio_review": "pending",
+    "live_binding": "exact mimicA / mimic01 / renderer 121192 observed in canonical V4",
+    "live_animation": "V4 records complete native idle, attack, ordinary hit and explicit animated death captures",
+    "live_material_and_culling": "native material readback observed; full culling remains pending"
+  },
+  "runtimeProfile": {
+    "path": "runtime-profile.json",
+    "sha256": "aa4e78bee58cc87c70c30292dc7e3ac4c1b7ffc604168ab36b127ef41b93a5d4",
+    "bytes": 502
+  },
+  "liveV1": {
+    "path": "live-validation.json",
+    "sha256": "37b1079d639c3511c50c7dbd8e5819f60820205e238d10f1ab762d86afae8b82",
+    "bytes": 12398
+  },
+  "liveV2": {
+    "path": "live-validation-v2/validation.json",
+    "sha256": "f8eb1a353a8a4b97380f3fdc1b94a4f5dcb9ca46dcce59c53e6f0c4acc489557",
+    "bytes": 127497,
+    "status": "fresh_catalog_411_binding_appearance_motion_and_partial_progression_observed",
+    "session": "956d5a3eecae4fc0b9aee0bf11d2293f"
+  },
+  "liveV3": {
+    "path": "live-validation-v3/validation.json",
+    "sha256": "d17f969101d06e659301e9cdf437e140bbdc2db0a879693a73feb970e6b7b4e7",
+    "bytes": 59134,
+    "status": "fresh_catalog_411_single_process_mimicA_binding_complete_attack_kill_loot_ready_observed",
+    "session": "abb0e9c1bb414743b45603efa7c7dd05"
+  },
+  "liveV4": {
+    "path": "live-validation-v4/validation.json",
+    "sha256": "530d13570d84cb6c86e6c63de9585e9c3ba523467125f2c25c6e9732df041003",
+    "bytes": 37152,
+    "status": "reviewed_exact_mimicA_binding_appearance_idle_attack_hit_death_and_gameplay_observed",
+    "sessions": [
+      "e087741594c041d29c7a5f19adf364ce",
+      "abb0e9c1bb414743b45603efa7c7dd05"
+    ],
+    "ordinaryHit": "58_to_52",
+    "nativeCollects": 2,
+    "strictReady": "level0_room2"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "a59f976bb4558acf4313587d097c7fe49a75b7b85b68bb388db545011c3b0716",
+      "bytes": 9290
+    },
+    "build_blender.py": {
+      "sha256": "33e738a4177b843216914858d8e305e34e2b0d29d856aad1293d6a5ca3c6b859",
+      "bytes": 5384
+    },
+    "build_geometry.py": {
+      "sha256": "3243a7234f6484caafc48d0ba69f57291c1833469a7481c14b2b2da33761497c",
+      "bytes": 8121
+    },
+    "finalize_manifest.py": {
+      "sha256": "9d05a59869a46834c27237cd6ce6646d5291cf02e4bd4dfc74bd89f2e07f504e",
+      "bytes": 5334
+    },
+    "hero.png": {
+      "sha256": "0df91550efd22279374dba1f092721d9debdbbe28d8a6dce89b4dec6464a2689",
+      "bytes": 1147402
+    },
+    "inspect_materials.py": {
+      "sha256": "ad4527283cd2fc54e75255ba42caab8d03d1ae12f61e5bf223a7df09a0891bc9",
+      "bytes": 1214
+    },
+    "live-validation.json": {
+      "sha256": "37b1079d639c3511c50c7dbd8e5819f60820205e238d10f1ab762d86afae8b82",
+      "bytes": 12398
+    },
+    "native-material-metadata.json": {
+      "sha256": "ff25ef9ff63329f888e6c5e4d5a3dbeadbb4b041c4d1de6d60f1566bb534dbe7",
+      "bytes": 6763
+    },
+    "runtime-profile.json": {
+      "sha256": "aa4e78bee58cc87c70c30292dc7e3ac4c1b7ffc604168ab36b127ef41b93a5d4",
+      "bytes": 502
+    },
+    "side.png": {
+      "sha256": "76b8cd36f6e19447b1ba683605fa6ec363a66c17a3f49344e24d6a581db2037a",
+      "bytes": 1124542
+    },
+    "verdigrin-studio.blend": {
+      "sha256": "adcad46576fa281286d78100991485f0e2c53ecb732e42961c9b033e683862b3",
+      "bytes": 148588
+    },
+    "verdigrin.blend": {
+      "sha256": "a9770bb9316c14be6adb0218bbebddac083e783a97578579170730c17027d178",
+      "bytes": 145421
+    },
+    "verdigrin.glb": {
+      "sha256": "97838ca8be15265f429d24a33e021b55b45faf6472e05137481d303a3d30c0bb",
+      "bytes": 204792
+    },
+    "verdigrin.pieces.json": {
+      "sha256": "e2f01afe0ee1fb351898abe89e1a7277514da0f011ef8979ec3652bbb78ce9a1",
+      "bytes": 4031
+    },
+    "verdigrin.source.json": {
+      "sha256": "22a46635dd6bc9106898a42252755078bc98c91f070ea599cde394ea423bb57b",
+      "bytes": 507061
+    },
+    "verdigrin.validation.json": {
+      "sha256": "39a3413a50327ce3630cb2710fec597404512428ad92f0fa5dc3c58f786721e6",
+      "bytes": 791
+    },
+    "verdigrin_basecolor.png": {
+      "sha256": "24b8512b9a647ef97362793f47eb8d0f1fcae5398401a22d11721c5e4986de2e",
+      "bytes": 266
+    }
+  },
+  "limits": [
+    "The fresh ordinary no-focus hit records HP 58 to 52 and damageSmall_mimic. Same-target HP and the causal native damage response are recorded without inferring another damage source.",
+    "The explicit KillSingle fixture records HP 52 to 0 and deathHeavy_mimic. Fixture death is not ordinary lethal-damage evidence.",
+    "The exact custom renderer reports m_DoRagdoll false. Its death is animated, not a body ragdoll.",
+    "The fresh process accepted one native Collect and stopped without strict Ready. The prior V3 process separately supplies two guarded Collects, strict Ready and next-room progression.",
+    "Hero, weapon, UI, depth blur and native effects obscure some surfaces. Every hinge and tongue interval, floor collision, sleeping, full culling, portraits, resource lifetime, final disposal and finished-art acceptance remain outside this archive.",
+    "The retained Victory frame does not establish a precise visible corpse lifetime."
+  ]
+}

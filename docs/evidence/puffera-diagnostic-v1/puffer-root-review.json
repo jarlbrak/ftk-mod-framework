@@ -1,0 +1,37 @@
+{
+  "schema": "root-puffer-diagnostic-review-v1",
+  "session": "5abf7c7f19ce42f4a3add683145953a9",
+  "captures": {
+    "pass": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/e6816644ce3045e9b67c087cd8bdf807.json",
+      "sha256": "905d4dff60c9fc8d2a2f6551cd7103aaaa5ade14818f1bbcc3de2199573b9a45",
+      "frames": 120
+    },
+    "hit": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/bfd7bf821f604f9ba5b4e8488bc10c58.json",
+      "sha256": "f401e37b132aeffa03e3e422e93f2bf33d4771c787cbbec66efc4cae261e56bb",
+      "frames": 120
+    },
+    "death": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/522a98de26de4111a8c89b4585b5506c.json",
+      "sha256": "385a36923dae66c825e289f9f3176d5d301e0f9fd7682bb7ab98dc4f48608bd9",
+      "frames": 120
+    }
+  },
+  "reviewedPngs": {
+    "pass": [
+      0,
+      60
+    ],
+    "hit": [
+      30
+    ],
+    "death": [
+      60
+    ]
+  },
+  "visualReview": "Bound pastel probe visible in both portraits and combat. Pass60 native attack hero-12. Hit30 nativeHUD normal-10/enemy48 from58. Death60 probe notvisible.",
+  "deathInterpretation": "Renderer first disabled27, BlowFish_DeathDirect positive27\u2013119; consistent with native DeathFade event. Actual CEL fade-material field not captured, so conditional source path not directly observed.",
+  "progression": "one nativeCollect ->strictReady0/2",
+  "scope": "Calibration only; no original puffer, indirect death, final resource teardown or pufferB acceptance."
+}

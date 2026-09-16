@@ -1,0 +1,405 @@
+{
+  "schemaVersion": 1,
+  "asset": "Emberjaw",
+  "iteration": "v1",
+  "artStatus": "integrated_usable_original_prototype_observed_final_polish_pending",
+  "native_chassis": "skullA",
+  "enemy_id": "ftkmf_modeltest_emberjaw",
+  "session": "6dd2bce53bfa4af2907d96d4ef59ba1a",
+  "catalog_sha256": "4b4513164a0a635bd9d83cdd2bbaddb2b11ca958b54d8f92d0ded581c47a2dc8",
+  "journal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-7992f3d02fd849e7b17441040bec9111/journal.jsonl",
+    "sha256": "35ea4c3df2039ff7b0c1b4a8fa18ba5d47c3a02969b2cf85844a4bcbcb1aedab"
+  },
+  "binding": {
+    "status": "binding_metadata_observed",
+    "enemy": "ftkmf_modeltest_emberjaw",
+    "matches": [
+      {
+        "rendererPath": "ChaosSkullBottom",
+        "glbFile": "emberjaw_bottom.glb",
+        "rendererInstanceId": -248924,
+        "ownerInstanceId": 369188,
+        "boneSignature": "68ca14bd21428d7421aec38e3c89c94195458104a3167e3b79033e09080b4bb4"
+      },
+      {
+        "rendererPath": "ChaosSkullTop",
+        "glbFile": "emberjaw_top.glb",
+        "rendererInstanceId": -248930,
+        "ownerInstanceId": 369188,
+        "boneSignature": "ceefd5e5f8af79aea68956212570ab8131db6694a32ce054b4b47e8ef543f30b"
+      }
+    ],
+    "session": "6dd2bce53bfa4af2907d96d4ef59ba1a",
+    "journal": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-7992f3d02fd849e7b17441040bec9111/journal.jsonl",
+    "limitations": "No appearance, motion, gameplay, material-quality or full asset-content acceptance."
+  },
+  "runtime_asset_sha256": {
+    "emberjaw_bottom.glb": "5b871353ea35c091b7eef4450232d59d5bfc4e1a2fe9b65e823349e6a936d438",
+    "emberjaw_basecolor.png": "eb5d336e08ea85c8b5b759fa1bd02c7104ac16ef097fcfb4a027e1951fbae188",
+    "emberjaw_top.glb": "5ad303859323c0a918505ea7e071593a6a336bf50fb0f89f48a99c6f0a58d880"
+  },
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/originals377-20260906-025521/deployment.json",
+    "sha256": "57798807bee79fa60570066121094d78b7e855727770df72921aeb22c0832f54"
+  },
+  "captures": {
+    "attack": {
+      "captureId": "1d748a6915a54e69817617b4e4356671",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_emberjaw_top.glb",
+          "ceefd5e5f8af79aea68956212570ab8131db6694a32ce054b4b47e8ef543f30b"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle_skull"
+          ],
+          "sampleCount": 97,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 39,
+              "firstNormalizedTime": 7.922070503234863,
+              "lastNormalizedTime": 9.63805866241455,
+              "gameSeconds": 3.574981689453125
+            },
+            {
+              "firstFrame": 63,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.12470877170562744,
+              "lastNormalizedTime": 2.58870792388916,
+              "gameSeconds": 5.133331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "attackScream_skull"
+          ],
+          "sampleCount": 23,
+          "occurrences": [
+            {
+              "firstFrame": 40,
+              "lastFrame": 62,
+              "firstNormalizedTime": 0.050620097666978836,
+              "lastNormalizedTime": 0.9959325790405273,
+              "gameSeconds": 2.01666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ],
+      "summary": {
+        "path": "art-experiments/emberjaw-skull/live/attack-summary.json",
+        "sha256": "da8db33c805f33f447fdae5977a72cdf4e5758d534824d70f182ad0689868886"
+      },
+      "sourceCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/1d748a6915a54e69817617b4e4356671.json",
+        "sha256": "8ca45b6726c583261c4d3594f70e79429be90c8239f0a61f54e27efb68d06b4f"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-c12b160ce4c748fdbc61803e01d78e79/journal.jsonl",
+        "sha256": "16ecea92fd5d6ecd7125647f006e7591a93187b1a1ac7b0a9eddf7334d33cc84"
+      },
+      "result": {
+        "path": "scratch/mirewarden-game/model-test-output/case-c12b160ce4c748fdbc61803e01d78e79/result.json",
+        "sha256": "276f16efcf2393b46c6ee1e0caa97eb0fbb3c3eaf5204e69155212fc6f35d980"
+      },
+      "video": {
+        "path": "art-experiments/emberjaw-skull/live/attack.mp4",
+        "sha256": "9451f64556a793248f719bf1a1fcda9f919f8cfa1dc1b346ec197074c92a9980",
+        "metadata": {
+          "width": 1280,
+          "height": 832,
+          "r_frame_rate": "12/1",
+          "nb_read_frames": "120"
+        }
+      }
+    },
+    "nonlethal-hit": {
+      "captureId": "1e2bd5059cba4adcabe8c13695485e15",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_emberjaw_bottom.glb",
+          "68ca14bd21428d7421aec38e3c89c94195458104a3167e3b79033e09080b4bb4"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle_skull"
+          ],
+          "sampleCount": 83,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 27,
+              "firstNormalizedTime": 12.502031326293945,
+              "lastNormalizedTime": 13.690022468566895,
+              "gameSeconds": 2.4749755859375
+            },
+            {
+              "firstFrame": 40,
+              "lastFrame": 63,
+              "firstNormalizedTime": 0.16763557493686676,
+              "lastNormalizedTime": 1.1796354055404663,
+              "gameSeconds": 2.10833740234375
+            },
+            {
+              "firstFrame": 89,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.08597051352262497,
+              "lastNormalizedTime": 1.4059704542160034,
+              "gameSeconds": 2.75
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damageLight_skull"
+          ],
+          "sampleCount": 12,
+          "occurrences": [
+            {
+              "firstFrame": 28,
+              "lastFrame": 39,
+              "firstNormalizedTime": 0.44422927498817444,
+              "lastNormalizedTime": 1.452562928199768,
+              "gameSeconds": 1.008331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "attackStare_skull"
+          ],
+          "sampleCount": 25,
+          "occurrences": [
+            {
+              "firstFrame": 64,
+              "lastFrame": 88,
+              "firstNormalizedTime": 0.04608198255300522,
+              "lastNormalizedTime": 0.9627483487129211,
+              "gameSeconds": 2.199981689453125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ],
+      "summary": {
+        "path": "art-experiments/emberjaw-skull/live/nonlethal-hit-summary.json",
+        "sha256": "1775c5eaf376df95f45fcab0cc7a0f8d7edb1ddce18489ffbd0f45e6f50e5328"
+      },
+      "sourceCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/1e2bd5059cba4adcabe8c13695485e15.json",
+        "sha256": "6300e31aa9923b692689edef1ab4390cfdd96eb94d625359d7a916510ca14795"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-22e7eb9df38e4b999167211c52fdbc69/journal.jsonl",
+        "sha256": "f209cccb96c540960b181d3f198a87d0a60c4abeea5e225c2780d779472b1087"
+      },
+      "result": {
+        "path": "scratch/mirewarden-game/model-test-output/case-22e7eb9df38e4b999167211c52fdbc69/result.json",
+        "sha256": "f38dcc2fed72bb5ac4ea28d1122c7f1d8d4a21d4502fb826e68c0832c0215475"
+      },
+      "video": {
+        "path": "art-experiments/emberjaw-skull/live/nonlethal-hit.mp4",
+        "sha256": "de686da876b438bb738dfa4bd1dad291f4623b71bf5d36c21f04aaa2c1f7974f",
+        "metadata": {
+          "width": 1280,
+          "height": 832,
+          "r_frame_rate": "12/1",
+          "nb_read_frames": "120"
+        }
+      }
+    },
+    "kill-fixture-death": {
+      "captureId": "cd15b01fb90d40d5bbff2c397aeef691",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_emberjaw_top.glb",
+          "ceefd5e5f8af79aea68956212570ab8131db6694a32ce054b4b47e8ef543f30b"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle_skull"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 17.694976806640625,
+              "lastNormalizedTime": 18.838993072509766,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathDirect_skull"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13750000298023224,
+              "lastNormalizedTime": 4.354166030883789,
+              "gameSeconds": 8.433319091796875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "summary": {
+        "path": "art-experiments/emberjaw-skull/live/kill-fixture-death-summary.json",
+        "sha256": "85557e3bf04eabfefde97c8dbff0c38d5c959b0e875ff94c8ba3840ca7234cdb"
+      },
+      "sourceCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/cd15b01fb90d40d5bbff2c397aeef691.json",
+        "sha256": "b1f0bf62c785abe6993b8d4e87aff2b4458d7f3623aafed3455350aa56f5813f"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-6b801457c51740df93730512c3beab25/journal.jsonl",
+        "sha256": "1581fcaa3d72badd1f9c92f5691baa21b342bb4b71449558ae4112b9d9874827"
+      },
+      "result": {
+        "path": "scratch/mirewarden-game/model-test-output/case-6b801457c51740df93730512c3beab25/result.json",
+        "sha256": "2716d9de5fd1ee424a2f315a87bbf1eaf809eab13b5297823d17bb78e0120a42"
+      },
+      "video": {
+        "path": "art-experiments/emberjaw-skull/live/kill-fixture-death.mp4",
+        "sha256": "012eca4135e974d60dca945c1a2a91aa7beff00491af1fbc6140fe2e522df12c",
+        "metadata": {
+          "width": 1280,
+          "height": 832,
+          "r_frame_rate": "12/1",
+          "nb_read_frames": "120"
+        }
+      }
+    }
+  },
+  "gameplay": {
+    "observedCombatHpBeforeHit": 53,
+    "ordinary_attack_hp": [
+      53,
+      48
+    ],
+    "actual_damage": 5,
+    "explicit_KillSingle_fixture_hp": [
+      48,
+      0
+    ],
+    "loot": "Two guarded Collect actions then strict Ready level0 room3."
+  },
+  "visualReview": {
+    "status": "integrated_usable_prototype_observed_not_final_art_acceptance",
+    "reviewer": "Parent agent viewed listed frames live.",
+    "observations": "Proper front-facing readable floating skull; independent jaw opens wide. Native purple effects strongly alter studio colors and occlude mouth. Horns near HUD/upper edge; hit motion partly hero-occluded.",
+    "death_limit": "Death disappears inside native purple burst before reviewed frame30; later telemetry records deathDirect but full visible death deformation is not established.",
+    "limits": "Final art polish, color/effect readability, culling envelope and unobscured death review remain pending. No complete-animation or other-controller acceptance.",
+    "reviewed_frames": [
+      {
+        "path": "art-experiments/emberjaw-skull/live/attack-0000.png",
+        "sha256": "fe855953307e7aba6938d5fcc6c05977ab3c6622bbc449f67acbe3be85395cef"
+      },
+      {
+        "path": "art-experiments/emberjaw-skull/live/attack-0045.png",
+        "sha256": "3415d6a6fdeb38fe3a3c75c46e2914e0db3f3d9affa24af76eace90dd67768d7"
+      },
+      {
+        "path": "art-experiments/emberjaw-skull/live/attack-0055.png",
+        "sha256": "0157a5083960169520f0d0baeb0f4b699170016e5bbd49ec041393001988dfda"
+      },
+      {
+        "path": "art-experiments/emberjaw-skull/live/nonlethal-hit-0033.png",
+        "sha256": "57f01b66853351cbe09d318c80b79d9a2c75692b36f42da01212dd7e712878e9"
+      },
+      {
+        "path": "art-experiments/emberjaw-skull/live/nonlethal-hit-0075.png",
+        "sha256": "31f9d706e89e27ab0f8a7c8eb0da70741b41c593ca84f7545ce5a01efc572464"
+      },
+      {
+        "path": "art-experiments/emberjaw-skull/live/kill-fixture-death-0030.png",
+        "sha256": "08d05282aa21f548ff35de2c4eeb6377501302c7683d3243a0b5c74e42c32a1a"
+      },
+      {
+        "path": "art-experiments/emberjaw-skull/live/kill-fixture-death-0040.png",
+        "sha256": "93022042336bb38b2cda20a8448b287de466f4db2ae1366c7857f9bd3b796b9e"
+      },
+      {
+        "path": "art-experiments/emberjaw-skull/live/kill-fixture-death-0060.png",
+        "sha256": "e28d087a381600b7e6e58452864f1286ac596833c22ad457aacdb4cda4a6ee18"
+      }
+    ]
+  },
+  "fixture": {
+    "minimumBaseHealth": 64,
+    "heroMaxHp": 999,
+    "tutorialsQuiet": true,
+    "health_note": "Observed combat HP53, not assumed equal to requested base floor64.",
+    "videoReplay": "120 screenshots at12fps create10-second replays; measured game progress about10.9083 seconds is not real-time performance proof."
+  },
+  "sourceEvidence": [
+    {
+      "path": "scratch/emberjaw-collect1.json",
+      "sha256": "cdf7f1a9efc049aae3f5ac7d790578003b75efc61dc2743faf34153c2e1f08c4"
+    },
+    {
+      "path": "scratch/emberjaw-collect2.json",
+      "sha256": "fde35be7377c7c561736fc02a64c51dd4420c60a713a2a6a4c8066918a0d8613"
+    },
+    {
+      "path": "scratch/emberjaw-loot-fixture.json",
+      "sha256": "8b30033ac5fab7d76c5831cceae23d88e6e78f2f02abe38bdf3c62387b885b42"
+    },
+    {
+      "path": "scratch/emberjaw-postcollect1.json",
+      "sha256": "2ba0df34b50115ad84c00dd6db577094cefb0228e0f2480fe70c14888662a012"
+    },
+    {
+      "path": "scratch/emberjaw-ready-fixture.json",
+      "sha256": "0af08b81a9573a6044109a15571e0421e897dbe1145359c45aa657122a1f002e"
+    }
+  ],
+  "sourceRetention": "Exact original GLB/PNG hashes come from immutable stage journal; source rebuilds must not reinterpret this archived iteration."
+}

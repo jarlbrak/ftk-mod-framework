@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "status": "ORIGINAL_EXPLICIT_DEATH_FIRST_SELECTED_VIEWS_REVIEWED",
+  "model": "Thistlewick Hexer",
+  "nativeEnemy": "scourgeG",
+  "rendererId": 121222,
+  "session": "621d536f4b7847b396d5334e2a05075d",
+  "frozenAuthoringManifest": {
+    "path": "art-experiments/thistlewick-hexer/manifest.json",
+    "sha256": "5f18bef829e11607edb5fbfa6217de535604c87e14d0cbef6d9af3eab383ded0"
+  },
+  "source": {
+    "path": "scratch/mirewarden-game/model-test-output/452c693f01a546e493813c7e6484425d.json",
+    "sha256": "165d5c77d4118a1a4587e2d1a6b143b6bd6f68d781db214d686b90cc6d3b1934"
+  },
+  "raw": {
+    "path": "art-experiments/thistlewick-hexer/live-death-v1/explicit-death-first.json.gz",
+    "sha256": "cc69cacb5fa9e978ea4ce72190d1b05b11321f9ef888853335283d8ee64ca5f3"
+  },
+  "frames": 120,
+  "video": {
+    "path": "art-experiments/thistlewick-hexer/live-death-v1/explicit-death-first.mp4",
+    "sha256": "da21402619393b7f75e647e347a6953fb38a7a1d1549688b3dccf661be705db3"
+  },
+  "videoMetadata": {
+    "width": 1280,
+    "height": 832,
+    "r_frame_rate": "12/1",
+    "nb_read_frames": "120"
+  },
+  "pins": {
+    "deployed-binaries": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "session": "621d536f4b7847b396d5334e2a05075d",
+      "binaries": {
+        "framework": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+          "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+          "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+          "bytes": 1974272
+        },
+        "helper": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1",
+          "bytes": 304640
+        }
+      },
+      "measurement": "on_disk_binary_sha256",
+      "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+    },
+    "profile-assets": {
+      "thistlewick.glb": "c808bf91b52f9ffefae0d4b365f569bcc83bcbb3fd60317ed79e3bc47ad0165c",
+      "thistlewick_basecolor.png": "3ae7dd8434a28252dad251363051eaf0b031b0e0ca6b4268f8ff7e7e07adf476"
+    },
+    "provenance": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "port": 8788,
+      "session": "621d536f4b7847b396d5334e2a05075d",
+      "case": "47e6ec9502164a498db84c248770bc8e",
+      "mode": "record-action",
+      "enemy": "ftkmf_modeltest_thistlewick",
+      "class": null,
+      "profile": {
+        "key": "ftkmf_modeltest_thistlewick",
+        "baseEnemy": "scourgeG",
+        "displayName": "Thistlewick Hexer",
+        "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+        "renderers": [
+          {
+            "rendererPath": "enScourgeLeprechaun",
+            "glbFile": "thistlewick.glb",
+            "textureFile": "thistlewick_basecolor.png",
+            "disableNativeEmission": false
+          }
+        ],
+        "minimumBaseHealth": 64,
+        "visualScale": 1.0
+      },
+      "profileInputSha256": "4fb54ce0d4fc17d86491f02b9e1a0053f0fb43e8715634fe64b6dbf28b42de56",
+      "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+    }
+  },
+  "clips": {
+    "cidle_impUnarmed": {
+      "first": 0,
+      "last": 24,
+      "positiveFrameCount": 25
+    },
+    "deathHeavy_imp": {
+      "first": 25,
+      "last": 119,
+      "positiveFrameCount": 95
+    }
+  },
+  "rootReview": {
+    "path": "art-experiments/thistlewick-hexer/live-death-v1/thistlewick-death-root-review.json",
+    "sha256": "97f4cb4905ebf5aae3fa6780f1fd16e13ea68dc34cd5dbdcbbaf954ac4d57182"
+  },
+  "limits": [
+    "Native hat remains connected; lower face cropped in both portraits.",
+    "Explicit KillSingle58\u21920; not ordinary lethal damage.",
+    "Native hat, green effects, hero and scene blur limit reviewed views.",
+    "Global Fergus progression and final owned-resource teardown beyond capture remain unverified."
+  ],
+  "evidence": [
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/case-47e6ec9502164a498db84c248770bc8e/capture-summary.json",
+      "sha256": "f0728b65778b8fb962720dab99cb892b111fc55dc96390350292402bde6c5856"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/case-47e6ec9502164a498db84c248770bc8e/journal.jsonl",
+      "sha256": "49f944e9a8f0a9c3622b67bf1341e65f4dccfcfef3d18f846b6a7ab37be5d7ce"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/case-47e6ec9502164a498db84c248770bc8e/result.json",
+      "sha256": "3715493d940160629da5108a4016d46a5d0ae2b6cf1692ad4b85187775879849"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/explicit-death-first-0030.png",
+      "sha256": "e6c26668e9ecf8649127715d6660e55c8bd6030c1310fe2b905986214f6f157d"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/explicit-death-first-0060.png",
+      "sha256": "a966c7689b11eeb4ef728f3dc60d1a883826751a4a1f13876891d32107f90660"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/explicit-death-first.json.gz",
+      "sha256": "cc69cacb5fa9e978ea4ce72190d1b05b11321f9ef888853335283d8ee64ca5f3"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/explicit-death-first.mp4",
+      "sha256": "da21402619393b7f75e647e347a6953fb38a7a1d1549688b3dccf661be705db3"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/source-image-pins.json",
+      "sha256": "873dfb5123812fc604c3d8af1f230e36780a1fea47749fa37504ee6aadd77f04"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/thistlewick-death-loot-before.json",
+      "sha256": "f2199681947d03b8bff0c5ade1eeddb3536de96c2b50164891b49a0b12f8a204"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/thistlewick-death-loot-ledger.json",
+      "sha256": "d78ea3472216c708f8fdc6ab11e0e0574563c1dbf40ce562eb5764a41bb06c88"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-death-v1/thistlewick-death-root-review.json",
+      "sha256": "97f4cb4905ebf5aae3fa6780f1fd16e13ea68dc34cd5dbdcbbaf954ac4d57182"
+    }
+  ]
+}

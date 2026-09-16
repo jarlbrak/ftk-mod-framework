@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_abyssal_crown_kraken_head",
+      "baseEnemy": "krakenHead",
+      "displayName": "Abyssal Crown V3",
+      "combatProfile": "cec974e3be711225508204ce60ba00ebc9f5cc604ea7d5a573e1a3269bc9038d",
+      "renderers": [
+        {
+          "rendererPath": "kraken2",
+          "glbFile": "abyssal-crown-kraken-head-v2.glb",
+          "textureFile": "abyssal-crown-kraken-head-v2.png",
+          "disableNativeEmission": true
+        },
+        {
+          "rendererPath": "Root_M/base/body/neck/eye/kraken2_eye",
+          "rendererKind": "MeshRenderer",
+          "glbFile": "abyssal-crown-kraken-eye-v3.glb",
+          "textureFile": "abyssal-crown-kraken-eye-v3.png",
+          "disableNativeEmission": true
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_sargassum_kraken_tentacle",
+      "baseEnemy": "krakenTentacle",
+      "displayName": "Sargassum Lash V2",
+      "combatProfile": "c415ffbaa3d1977a40283b36d0b9bea4fbd2295df45de7b16daa9a7cdb668386",
+      "renderers": [
+        {
+          "rendererPath": "krakenTentacle",
+          "glbFile": "sargassum-kraken-tentacle-v2.glb",
+          "textureFile": "sargassum-kraken-tentacle-v2.png"
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_sargassum_kraken_tentacle_mirror",
+      "baseEnemy": "krakenTentacleMirror",
+      "displayName": "Sargassum Lash V2, Mirrored",
+      "combatProfile": "fa962d81c18292667cd1fee784ca2336f1a9308e3cf0db645dc6979324c246bf",
+      "renderers": [
+        {
+          "rendererPath": "krakenTentacle",
+          "glbFile": "sargassum-kraken-tentacle-v2.glb",
+          "textureFile": "sargassum-kraken-tentacle-v2.png"
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_royal_sargassum_seaking_tentacle_a",
+      "baseEnemy": "seaKingTentacleA",
+      "displayName": "Royal Sargassum V3 A",
+      "combatProfile": "aa8798555a9876e579fda1faf71871097edfc3a90ba0e62d674a68940830cbdb",
+      "renderers": [
+        {
+          "rendererPath": "KrakenGodTentacle",
+          "glbFile": "royal-sargassum-seaking-tentacle-v3.glb",
+          "textureFile": "royal-sargassum-seaking-tentacle-v3.png",
+          "disableNativeEmission": true
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_royal_sargassum_seaking_tentacle_b",
+      "baseEnemy": "seaKingTentacleB",
+      "displayName": "Royal Sargassum V3 B",
+      "combatProfile": "cee96fb0824c1d84efa9c6db52e917494dac3f6e321878c55294b7a2fe6f24de",
+      "renderers": [
+        {
+          "rendererPath": "KrakenGodTentacle",
+          "glbFile": "royal-sargassum-seaking-tentacle-v3.glb",
+          "textureFile": "royal-sargassum-seaking-tentacle-v3.png",
+          "disableNativeEmission": true
+        }
+      ]
+    }
+  ]
+}

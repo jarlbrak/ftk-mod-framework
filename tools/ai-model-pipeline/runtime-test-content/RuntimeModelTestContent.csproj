@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework><AssemblyName>FtkRuntimeModelTestContent</AssemblyName>
+    <LangVersion>7.3</LangVersion><GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TestManagedDir Condition="'$(TestManagedDir)' == '' and Exists('$(TestGameRoot)/FTK.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll')">$(TestGameRoot)/FTK.app/Contents/Resources/Data/Managed</TestManagedDir>
+    <TestManagedDir Condition="'$(TestManagedDir)' == '' and Exists('$(TestGameRoot)/FTK_Data/Managed/Assembly-CSharp.dll')">$(TestGameRoot)/FTK_Data/Managed</TestManagedDir>
+  </PropertyGroup>
+  <Target Name="RequireIsolatedGame" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(TestGameRoot)' == ''" Text="Pass -p:TestGameRoot=/absolute/path/to/scratch/game-copy. Original installation is not a build default." />
+    <Error Condition="'$(TestManagedDir)' == '' or !Exists('$(TestManagedDir)/Assembly-CSharp.dll')" Text="Game managed assemblies not found. Place a valid FTK copy under TestGameRoot (Mac FTK.app/Contents/Resources/Data/Managed or FTK_Data/Managed), or pass -p:TestManagedDir=/absolute/path/to/the/copy/Managed containing Assembly-CSharp.dll." />
+  </Target>
+  <ItemGroup><PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" /></ItemGroup>
+  <ItemGroup>
+    <Reference Include="FTKModFramework" Private="false"><HintPath>../../../FTKModFramework/bin/Release/net35/FTKModFramework.dll</HintPath></Reference>
+    <Reference Include="BepInEx" Private="false"><HintPath>$(TestGameRoot)/BepInEx/core/BepInEx.dll</HintPath></Reference>
+    <Reference Include="0Harmony" Private="false"><HintPath>$(TestGameRoot)/BepInEx/core/0Harmony.dll</HintPath></Reference>
+    <Reference Include="Assembly-CSharp" Private="false"><HintPath>$(TestManagedDir)/Assembly-CSharp.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json" Private="false"><HintPath>$(TestManagedDir)/Newtonsoft.Json.dll</HintPath></Reference>
+    <Reference Include="$(TestManagedDir)/UnityEngine*.dll" Private="false" />
+  </ItemGroup>
+</Project>

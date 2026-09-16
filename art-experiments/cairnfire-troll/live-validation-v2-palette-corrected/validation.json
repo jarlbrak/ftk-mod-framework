@@ -1,0 +1,312 @@
+{
+  "status": "fresh_v2_palette_corrected_cairnfire_trollb_exact_binding_motion_gameplay_ready_observed_art_unapproved",
+  "scope": "Fresh isolated corrected-palette Troll B run. It establishes exact binding, sampled native motion, one ordinary same-target HP loss, KillSingle fixture death, one native Collect, and strict Ready progression. It does not grant final art approval.",
+  "profile": {
+    "key": "ftkmf_modeltest_cairnfire_trollb",
+    "baseEnemy": "trollB",
+    "displayName": "Cairnfire Troll B",
+    "combatProfile": "ab549dcfcad738d283caac671d43a8b7053e64a95ae0805babf218599efe09a2",
+    "renderers": [
+      {
+        "rendererPath": "enTroll01",
+        "glbFile": "cairnfire-trollb.glb",
+        "textureFile": "cairnfire-trollb.png",
+        "disableNativeEmission": true
+      }
+    ],
+    "minimumBaseHealth": 64
+  },
+  "target": {
+    "nativeChassis": "trollB",
+    "nativePrefab": "enTroll02",
+    "celComponentPathId": "137393",
+    "rendererSourceId": 121256,
+    "rendererPath": "enTroll01",
+    "controller": "trollController",
+    "boneSignature": "fb452d83882447420a1beecc09d88cbf4e12a775fda39d57944a486c9c3fe402"
+  },
+  "provenance": {
+    "catalog": {
+      "path": "scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "32351b3c32bcb0dc6d0e84b81a89de319537578abf7a613f8cabe8f2d99f7a37"
+    },
+    "initialStage": {
+      "path": "scratch/cairnfire-trollb-stage/receipt.json",
+      "sha256": "851fbd8e0742b59f9127cab72a4c6f465c7935b5f53b9fb27bcf07527dc3030c"
+    },
+    "initialDeployment": {
+      "path": "scratch/mirewarden-game/deployment-backups/cairnfire-trollb-20260911-220430/deployment.json",
+      "sha256": "f2062dc3a7afce458f603194e5919ed90c3128505759a265a6f8b3e7b28cca0a"
+    },
+    "paletteRevisionStage": {
+      "path": "scratch/cairnfire-trollb-palette-v2-stage/receipt.json",
+      "sha256": "7c2d96e0d27a5aa4a7b0e8bdc6adcee4ac5e10d9cd14747f5679ddb208e79e06"
+    },
+    "paletteRevisionDeployment": {
+      "path": "scratch/mirewarden-game/deployment-backups/cairnfire-trollb-palette-v2-20260911-221402/deployment.json",
+      "sha256": "e10b7cf47c805a8ec205319e75f1e9462f23d2e5c836b3b4730a69f96dcab507"
+    },
+    "currentGameAssets": {
+      "cairnfire-trollb.glb": "719e7c836eaf9420ac59b9edcfaf5c1eeb6575b02827c5c4596e86bf1e21b03b",
+      "cairnfire-trollb.png": "3a2918930420914da3c80b2a2424fd7e1792659a5963142e5f241743a3066c2a"
+    },
+    "coverageManifest": {
+      "path": "scratch/coverage-batch-20260911-221638.json",
+      "sha256": "26ae0dd68924b98fbd22a6c3c293f12a3839733e8242524b26a7e72ec6987dab"
+    }
+  },
+  "session": "e36135bb345f4697a89f917cc7033aca",
+  "stageCase": {
+    "path": "scratch/mirewarden-game/model-test-output/case-36fcddc247d249c393d04d124c8f13d2/result.json",
+    "sha256": "6f6ac1fa08c33555d50c6e64b7c6b1341a6828745893738cff792a3773367ba1",
+    "status": "binding_metadata_observed"
+  },
+  "exerciseCase": {
+    "path": "scratch/mirewarden-game/model-test-output/case-08a1f70c16854700baf33c46fe5c683b/case-result.json",
+    "sha256": "16edcaa282d83e63e53ff1f743645ed6af37a5a146e2acc8e7c280eb64dabf23",
+    "status": "needs_visual_review"
+  },
+  "binding": {
+    "celRootName": "enTroll02(Clone)",
+    "celRelativeRendererPath": "enTroll01",
+    "rendererKind": "SkinnedMeshRenderer",
+    "mesh": "ftkmf_glb_cairnfire-trollb.glb",
+    "rootBone": "Root_M",
+    "boneSignature": "fb452d83882447420a1beecc09d88cbf4e12a775fda39d57944a486c9c3fe402",
+    "controller": "trollController",
+    "material": {
+      "instanceId": -245930,
+      "name": "matTrollB (Instance)",
+      "shader": "Standard",
+      "emissionKeyword": false,
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245932,
+        "name": "ftkmf_cairnfire-trollb.png"
+      },
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null
+    },
+    "lease": {
+      "available": true,
+      "present": true,
+      "leaseId": 4,
+      "acquired": true,
+      "applied": true,
+      "references": 1
+    }
+  },
+  "captures": [
+    {
+      "label": "pass",
+      "captureId": "3db7ac0fddbe4cdd8112750da2deae28",
+      "rawCapture": {
+        "source": "scratch/mirewarden-game/model-test-output/3db7ac0fddbe4cdd8112750da2deae28.json",
+        "sha256": "287d55a64562fb07eff3e2e11135fbcf22b2d7d26903bad10213637f4f71c4d2"
+      },
+      "frames": 120,
+      "complete": true,
+      "dimensions": {
+        "width": 1280,
+        "height": 832,
+        "requestedFps": 12.0
+      },
+      "enemyHpBefore": 72,
+      "enemyHpAfter": 72
+    },
+    {
+      "label": "attack",
+      "captureId": "78cae2c2e3db474b836d03e00f4f6859",
+      "rawCapture": {
+        "source": "scratch/mirewarden-game/model-test-output/78cae2c2e3db474b836d03e00f4f6859.json",
+        "sha256": "d2faeea397e6d5c401bc2bb6c629822ffe0ec4bd8b4ab8d36f4638c78acf29cb"
+      },
+      "frames": 120,
+      "complete": true,
+      "dimensions": {
+        "width": 1280,
+        "height": 832,
+        "requestedFps": 12.0
+      },
+      "enemyHpBefore": 72,
+      "enemyHpAfter": 62
+    },
+    {
+      "label": "kill-fixture",
+      "captureId": "12cdf776d5d34e92a387287f12448faa",
+      "rawCapture": {
+        "source": "scratch/mirewarden-game/model-test-output/12cdf776d5d34e92a387287f12448faa.json",
+        "sha256": "b5f4241b1ef31abfe1c3a8253d0ebfa3c33137e06160cbbdf96806caf72cc258"
+      },
+      "frames": 120,
+      "complete": true,
+      "dimensions": {
+        "width": 1280,
+        "height": 832,
+        "requestedFps": 12.0
+      },
+      "enemyHpBefore": 62,
+      "enemyHpAfter": 0
+    }
+  ],
+  "ordinaryAttack": [
+    {
+      "attempt": 1,
+      "status": "nonlethal_hp_loss",
+      "beforeHp": 72,
+      "afterHp": 62,
+      "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+    }
+  ],
+  "collect": [
+    {
+      "before": {
+        "heroInstanceId": -235518,
+        "buttonInstanceId": -237296,
+        "item": "None"
+      },
+      "result": {
+        "ok": true,
+        "status": "clicked",
+        "heroInstanceId": -235518,
+        "buttonInstanceId": -237296,
+        "item": "None",
+        "method": "VoteButton.OnLeftClick(Collect)",
+        "note": "One native current Loot vote submitted; observe fixture-state again before any further collection.",
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "e36135bb345f4697a89f917cc7033aca",
+        "id": "8d9f101f44254ca68da13d5b8a64bb31",
+        "frame": 4195,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    }
+  ],
+  "ready": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "selectedFrames": [
+    {
+      "label": "harness-pass-0012",
+      "source": "scratch/mirewarden-game/model-test-output/3db7ac0fddbe4cdd8112750da2deae28/0012.png",
+      "archive": "selected/harness-pass-0012.png",
+      "sha256": "cd85dd9e5cf66c588f2ad07ff2f0764127d9cde700acf55d0497fcd680a24df4",
+      "observation": "Harness-selected live frame. It establishes this frame only and grants no all-camera or final-art verdict."
+    },
+    {
+      "label": "harness-pass-0024",
+      "source": "scratch/mirewarden-game/model-test-output/3db7ac0fddbe4cdd8112750da2deae28/0024.png",
+      "archive": "selected/harness-pass-0024.png",
+      "sha256": "6c2adf9cfae26387d0355bbf6196e807363997c574f7f35d0d17a14ced065763",
+      "observation": "Harness-selected live frame. It establishes this frame only and grants no all-camera or final-art verdict."
+    },
+    {
+      "label": "harness-attack-0006",
+      "source": "scratch/mirewarden-game/model-test-output/78cae2c2e3db474b836d03e00f4f6859/0006.png",
+      "archive": "selected/harness-attack-0006.png",
+      "sha256": "67e5b8e753c2d5586f819c1cd3ddd7845abc038235513970a9fd72babe224d7d",
+      "observation": "Harness-selected live frame. It establishes this frame only and grants no all-camera or final-art verdict."
+    },
+    {
+      "label": "harness-attack-0012",
+      "source": "scratch/mirewarden-game/model-test-output/78cae2c2e3db474b836d03e00f4f6859/0012.png",
+      "archive": "selected/harness-attack-0012.png",
+      "sha256": "479bccd14e5cde8598e0dd14c1a723b9143b353cb024a2810238936d7b285b12",
+      "observation": "Harness-selected live frame. It establishes this frame only and grants no all-camera or final-art verdict."
+    },
+    {
+      "label": "harness-kill-fixture-0000",
+      "source": "scratch/mirewarden-game/model-test-output/12cdf776d5d34e92a387287f12448faa/0000.png",
+      "archive": "selected/harness-kill-fixture-0000.png",
+      "sha256": "c3c1e13742898ff0a7f649dea99ce2598135625c2f3634b4f9a92826ee71b30a",
+      "observation": "Harness-selected live frame. It establishes this frame only and grants no all-camera or final-art verdict."
+    },
+    {
+      "label": "harness-kill-fixture-0119",
+      "source": "scratch/mirewarden-game/model-test-output/12cdf776d5d34e92a387287f12448faa/0119.png",
+      "archive": "selected/harness-kill-fixture-0119.png",
+      "sha256": "ca9ccf2217b8d848dc8af7de98bc36d9bfa51ebdf6cec401be75a9b225c2cb1f",
+      "observation": "Harness-selected live frame. It establishes this frame only and grants no all-camera or final-art verdict."
+    },
+    {
+      "label": "pass-native-attack",
+      "source": "scratch/mirewarden-game/model-test-output/3db7ac0fddbe4cdd8112750da2deae28/0060.png",
+      "archive": "selected/pass-native-attack.png",
+      "sha256": "6beca5a850bf048b327a5de55666cb9d46a680311b6a59e12edc8556b55fab7c",
+      "observation": "Native attack_troll pose inside the pass window. This is a sampled visual record only."
+    },
+    {
+      "label": "attack-native-attack",
+      "source": "scratch/mirewarden-game/model-test-output/78cae2c2e3db474b836d03e00f4f6859/0080.png",
+      "archive": "selected/attack-native-attack.png",
+      "sha256": "5cfc1b811d0cf9eb56a3425f009a3ae94b8c4dd5abe85b66ba5ee27ec27de3bb",
+      "observation": "Native attack_troll pose during the ordinary-hit window. This is a sampled visual record only."
+    },
+    {
+      "label": "kill-ragdoll",
+      "source": "scratch/mirewarden-game/model-test-output/12cdf776d5d34e92a387287f12448faa/0040.png",
+      "archive": "selected/kill-ragdoll.png",
+      "sha256": "5dcce217db9cec99af065a63b06bf560f923fc99973f5de6c359b3fb75edf43d",
+      "observation": "Native deathHeavy_troll and ragdoll pose after the fixture death. This is a sampled visual record only."
+    },
+    {
+      "label": "kill-settled",
+      "source": "scratch/mirewarden-game/model-test-output/12cdf776d5d34e92a387287f12448faa/0060.png",
+      "archive": "selected/kill-settled.png",
+      "sha256": "86133dac25ad735a024da0909315b938ec5bcc33041eff9a2d7c6de77db9a00e",
+      "observation": "Later sampled ragdoll pose after the fixture death. This is a sampled visual record only."
+    }
+  ],
+  "videos": [
+    {
+      "label": "pass",
+      "path": "video/pass.mp4",
+      "sha256": "2d0e15478a740707ae5c4667d4b590abe5b36700e970fa22166749c93ea90463",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "label": "attack",
+      "path": "video/attack.mp4",
+      "sha256": "bb717fe6a426763e670315d87346eeadea74ab8adaed14ab498f08b88c14dff6",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "label": "kill-fixture",
+      "path": "video/kill-fixture.mp4",
+      "sha256": "5996df2804db670d25e94944a4bccf6b220a648426528efa5a5233f3a7b5f9ce",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    }
+  ],
+  "visualReview": {
+    "status": "corrected_palette_rendered_live_art_unapproved",
+    "observed": "The revised PNG maps to dark blue-green basalt with copper and ember accents in live combat. Selected frames show a coherent silhouette during idle, native attack_troll, and deathHeavy_troll/ragdoll sampling.",
+    "notAccepted": "The review does not establish all cameras, all animation intervals, portrait framing, culling behavior, resource disposal, or final artistic acceptance."
+  },
+  "limitations": [
+    "The ordinary attack records same-target HP only. It does not infer hit, block, dodge, damage source, or balance behavior.",
+    "KillSingle is an explicit fixture, not ordinary lethal gameplay.",
+    "The 120-frame death window observes a sampled ragdoll interval, not every possible death or cleanup state.",
+    "The V1 color-inverted trial is a recorded revision finding, not art acceptance evidence for V2."
+  ]
+}

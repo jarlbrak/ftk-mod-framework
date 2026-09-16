@@ -1,0 +1,109 @@
+{
+  "schema": "ftkmf.kraken-portrait-followup-evidence.v1",
+  "status": "portrait_appearance_and_native_hud_use_passed",
+  "route": {
+    "topologyGroup": "6a28ac3cf4523c24",
+    "sourceKind": "resource_prefab_override",
+    "nativeEnemy": "krakenHead",
+    "resourcePrefab": "enkrakenhead",
+    "registeredEnemy": "ftkmf_modeltest_gloamfin_kraken_legacy",
+    "rendererPath": "krakenHead",
+    "sourceRendererId": 121260
+  },
+  "session": "47fdfbed59434fb5a26842327373e0db",
+  "framework": {
+    "path": "FTKModFramework/bin/Release/net35/FTKModFramework.dll",
+    "sha256": "60917286ce044bfc57480ac34596cf54a596e6db0ec8a179c2518502f0847510",
+    "legacyPortraitSource": {
+      "path": "FTKModFramework/Core/LegacyKrakenPortrait.cs",
+      "sha256": "3a8664432056ce2e55447c3d937bb24764e781c4863d7d22d00cff2c67c9dbab"
+    },
+    "framingSource": {
+      "path": "FTKModFramework/Core/PortraitFraming.cs",
+      "sha256": "8bdb1c1a7df4ac7d262aba77af6a579e669ddf9e3e13ea474162794f65361df9"
+    }
+  },
+  "runtimeHelper": {
+    "path": "tools/ai-model-pipeline/runtime-test/bin/Release/net35/FtkRuntimeModelTest.dll",
+    "sha256": "9fceefc7fe986a93102facca59ca199f1f6e5013af570d14bafea1c85ffb38a5",
+    "portraitTraceSource": {
+      "path": "tools/ai-model-pipeline/runtime-test/PortraitTrace.cs",
+      "sha256": "8ff0be04e9efcb4acb8f17646bf50328005087f0ce279b4872c153ad1c11acd2"
+    }
+  },
+  "runner": {
+    "path": "scratch/kraken-portrait-followup-v2.json",
+    "sha256": "edd5e3dc19432a54f81ec29cfa5767cfbbc80b26209a0c87dfb37b4f82f94d4f"
+  },
+  "deployments": [
+    {
+      "path": "scratch/mirewarden-game/deployment-backups/kraken-portrait-v1-20260915-214843/deployment.json",
+      "sha256": "68c83305079437ef65060021e67ef6d86f54f60ba6526eafbdac1fb8941ca836"
+    },
+    {
+      "path": "scratch/mirewarden-game/deployment-backups/kraken-portrait-helper-v1-20260915-215323/deployment.json",
+      "sha256": "a3134e1cabaeae8b1ba64972378086cc25af9a8c7c7565570254fbaa892fc481"
+    }
+  ],
+  "nativeCapture": {
+    "traceFrame": 3555,
+    "enemyDummyInstanceId": 369188,
+    "fid": {
+      "photonId": -1,
+      "turnIndex": 0
+    },
+    "identityResolution": "verified_live_enemy_dummy",
+    "nativeSnapshotFinalized": true,
+    "nativeSnapshotException": null,
+    "telemetryComplete": true,
+    "camera": {
+      "fieldOfView": 20.0,
+      "near": 0.30000001192092896,
+      "far": 30.0,
+      "renderTextureWidth": 204,
+      "renderTextureHeight": 172
+    },
+    "generatedMarker": "FTK_LegacyKrakenPortraitFrame",
+    "portraitCloneUniformScale": 0.8447812795639038,
+    "sourceRootUniformScale": 1.0,
+    "customMesh": "ftkmf_glb_gloamfin.glb",
+    "customTexture": "ftkmf_gloamfin_basecolor.png",
+    "sourceLeaseReferencesDuringSnapshot": 1,
+    "portraitCloneLeaseReferencesDuringSnapshot": 2,
+    "activeHudRawImagesUsingExactTexture": 6
+  },
+  "portrait": {
+    "path": "docs/evidence/kraken-portrait-followup-v1/portrait.png",
+    "sha256": "56e0265adff77589c92855619e83d716c321582454ab3493440b49ea5be63c56",
+    "bytes": 14309,
+    "width": 204,
+    "height": 172,
+    "review": {
+      "status": "pass",
+      "finding": "The native HUD texture shows the complete Gloamfin face and upper body on a transparent background. Both eyes, the central nose and mouth, lateral limbs and tapered lower body are readable with no clipped silhouette, blank tile, exploded geometry or foreign native surface."
+    }
+  },
+  "gates": {
+    "firstNativeHudSnapshot": "pass",
+    "exactCustomMeshAndTexture": "pass",
+    "generatedMarkerSelected": "pass",
+    "nativeRenderTargetAspect": "pass",
+    "portraitCloneOnlyBoundedScale": "pass",
+    "nativeSnapshotFinalization": "pass",
+    "activeInitiativeRawImageUse": "pass",
+    "manualPixelAppearance": "pass"
+  },
+  "reconciliation": {
+    "preFixReview": "docs/evidence/kraken-production-visual-v1/review.json",
+    "productionCampaign": "docs/evidence/kraken-production-adapter-v1/validation.json",
+    "scope": "This narrow follow-up replaces only the earlier failed portrait gate. Existing exact-route combat, ordinary lethal, enemy victory, natural teardown, appearance, idle, attack, hit, fixture death, camera and sampled culling evidence remain separate authorities."
+  },
+  "limits": [
+    "The capture proves one native 204x172 HUD portrait and six active initiative RawImages using that exact texture in this encounter.",
+    "The disposable portrait clone was uniformly scaled to 0.8447812795639038; this is presentation-only and does not establish other camera sizes or projections.",
+    "The passive trace proves successful native Snapshot finalization but does not independently retain the destroyed clone after native cleanup.",
+    "Source and live immutability remain bounded by the traced fields, exact ownership tests and route-scoped implementation; this is not a whole-process mutation proof.",
+    "This follow-up does not replay combat, death, victory or natural teardown.",
+    "Final art approval remains outside this evidence."
+  ]
+}

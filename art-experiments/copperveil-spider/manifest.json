@@ -1,0 +1,125 @@
+{
+  "name": "Copperveil Weaver",
+  "native_chassis": "spiderB",
+  "reference_renderer": 121386,
+  "renderer_path": "enSpiderB",
+  "native_surface_copied": false,
+  "art_status": "Original multipart surface model; manual studio and live acceptance pending after regeneration",
+  "native_forward": "+UnityZ from head/fang chains; abdomen Tail chain extends -Z",
+  "rig_boundary": "Exact65-joint palette and inverse binds; original local leg/tail/palp/fang geometry, no native surface",
+  "live_baseline": "No indexed spider live baseline located when authoring; native diagnostic pending separately",
+  "remaining": [
+    "Studio review",
+    "Native spiderB baseline",
+    "Exact authored mesh live assignment",
+    "Native attacks/hit/death/material/culling/cleanup"
+  ],
+  "parts": [
+    {
+      "name": "copperveil",
+      "vertices": 7812,
+      "triangles": 2604,
+      "palette_joints": 65,
+      "max_bind_rest_error": 2.220446049250313e-16,
+      "blender_reopen_max_bind_rest_error": 2.220446049250313e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.615676760673523,
+        0.020003939047455788,
+        -1.4146806001663208
+      ],
+      "bind_bounds_max": [
+        1.6156755685806274,
+        1.3398988246917725,
+        1.292266845703125
+      ],
+      "blender_roundtrip_glb_sha256": "e8a2c20b082e0bcf1d79573db39110ddf5a838cca34315c522b2bee69b365663"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121386,
+      "local_reference_path": "scratch/skeleton-audit/121386/reference.npz",
+      "sha256": "f81b85f5e1f702c50d15ea22261071db3c1048c85a0c860ea8c15fe0c8aa3749"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "8c427ede1e8aac17dd82f3958c34b9b4c07d68379917dadf2990f2fa98f90f21",
+      "bytes": 3455
+    },
+    "build_blender.py": {
+      "sha256": "aa27806a17f0dde8e43dc5d71aaa6660507be9021d91c16e701a81cf24244ed6",
+      "bytes": 5398
+    },
+    "build_geometry.py": {
+      "sha256": "0cb10749353ebb7f2199de922aa2637bae4508b0a18ac2a59b21bf21e7bd171b",
+      "bytes": 7348
+    },
+    "copperveil-studio.blend": {
+      "sha256": "9a097706c50b99741d2498c04dc325fc9845d260554c56cefba412dfefe7edc5",
+      "bytes": 267046
+    },
+    "copperveil.blend": {
+      "sha256": "7e0991f5bff0351829a410dddd470632c62fa52daca527c688588a3f7c731cb4",
+      "bytes": 263603
+    },
+    "copperveil.glb": {
+      "sha256": "a2f2d2a7f81fb93068f9ae2e628cf4bfb70dfeac8843831ca46fc5207145e804",
+      "bytes": 460384
+    },
+    "copperveil.pieces.json": {
+      "sha256": "3c62471cf035074096fca9d237a53481fc655c79b91e4195f762410e2b196f39",
+      "bytes": 3955
+    },
+    "copperveil.source.json": {
+      "sha256": "a4321dbf571fbc40b50edba89fe47ef1039cbaab7d77894f7e162c676051927a",
+      "bytes": 1259391
+    },
+    "copperveil.validation.json": {
+      "sha256": "409c1e965296e165e8fdac7f0d9493efd86de11a35fc1a8e6daa96b1db59971b",
+      "bytes": 794
+    },
+    "copperveil_basecolor.png": {
+      "sha256": "3ea691a26eecc62717c0597fac4b4c4a86b3cbb6391fce0861de07bef947f5fc",
+      "bytes": 264
+    },
+    "finalize_manifest.py": {
+      "sha256": "177f0e55b957202ec4dfe4f0f1b712dea4af302b3f03177351f9182c3bf4da27",
+      "bytes": 2416
+    },
+    "hero.png": {
+      "sha256": "3c1600eb965ca1c81d63303cb6609463d49f44a4446ec18eb685666cfc130fa9",
+      "bytes": 1092480
+    },
+    "inspect_materials.py": {
+      "sha256": "6e90f77740ba8eba2a75cc27208d7399ea0a42fe62f00a6d92fc9253d985ce42",
+      "bytes": 1214
+    },
+    "native-material-metadata.json": {
+      "sha256": "99bb20812e1da6f41ee7bf273a3fee4a4ce5143d02a4702be51e82c2e9c089ac",
+      "bytes": 2085
+    },
+    "runtime-profile.json": {
+      "sha256": "97e1411732e45fc6744cd1c804831b0a69f1fe27ea8aaf3b5c287fbf317316dd",
+      "bytes": 510
+    },
+    "side.png": {
+      "sha256": "54467504a654df99c81bceca1865cf383af5b89cbb64f91b8950208e50934828",
+      "bytes": 1095894
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/copperveil-spider/live-validation.json",
+    "sha256": "50262b48f1800306d496cbcace68521ff25812dc6f3d6b32813ea8445eb2064f"
+  }
+}

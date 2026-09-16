@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_player_hearthveil_blacksmith_female",
+      "baseClass": "blacksmith",
+      "displayName": "Hearthveil Blacksmith",
+      "skinset": "blacksmith_Female",
+      "defaultSkinType": "Female",
+      "renderers": [
+        {
+          "rendererPath": "playerBlacksmith",
+          "glbFile": "hearthveil-body.glb",
+          "textureFile": "hearthveil-palette.png"
+        },
+        {
+          "rendererPath": "hairTop",
+          "glbFile": "hearthveil-hair-top.glb",
+          "textureFile": "hearthveil-palette.png"
+        },
+        {
+          "rendererPath": "hairBottom",
+          "glbFile": "hearthveil-hair-bottom.glb",
+          "textureFile": "hearthveil-palette.png"
+        }
+      ],
+      "startingArmor": "armorCloth1",
+      "apparel": [
+        {
+          "rendererPath": "armorBlacksmithF(Clone)",
+          "expectedNativeMeshName": "armorBlacksmith",
+          "glbFile": "hearthveil-default-armor.glb",
+          "textureFile": "hearthveil-palette.png"
+        },
+        {
+          "rendererPath": "bootsBlacksmith(Clone)",
+          "expectedNativeMeshName": "bootsBlacksmith",
+          "glbFile": "hearthveil-boots.glb",
+          "textureFile": "hearthveil-palette.png"
+        },
+        {
+          "rendererPath": "armorGambesonF(Clone)",
+          "expectedNativeMeshName": "armorGambesonF",
+          "glbFile": "hearthveil-gambeson.glb",
+          "textureFile": "hearthveil-palette.png"
+        }
+      ]
+    }
+  ]
+}

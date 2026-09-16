@@ -1,0 +1,61 @@
+{
+  "status": "APPROVED_FOR_BOUNDED_PINNED_LIVE_TRIAL_ONLY",
+  "reviewer": "ftk_architect",
+  "pins": {
+    "art-experiments/bronzehollow-sentinel/hero.png": "808676d26f3c580ea97dd4aea9c5e984d313119b072634e93b7a0f347e8b0ee0",
+    "art-experiments/bronzehollow-sentinel/side.png": "0fa03e9aa542226020d8e3f49a64a49f60abf3ec54666a3c5fdf89b592485d57",
+    "art-experiments/bronzehollow-sentinel/native-pass-pose-study.png": "f407c4e6d53d7ec2a26ed83b203c0599a8d6a3c28d3903e1c5397bed39f18892",
+    "art-experiments/bronzehollow-sentinel/native-death-pose-study.png": "952e5d336dfaa4a921375bb305652408dd8f1a560d5e55263aa001396c4bdf08",
+    "art-experiments/bronzehollow-sentinel/bronzehollow.glb": "8d13200e7dee5ab2e50096fb9da90c9f27ffed012ff8fac2cfc5522ff169132c",
+    "art-experiments/bronzehollow-sentinel/bronzehollow.source.json": "b9187fb4288968d098d858d9b50ae321575dcb756729d75199557a42eea65a32",
+    "art-experiments/bronzehollow-sentinel/surface-bounds-audit.json": "ac5d2b8c9c436bfa65cc5e13644932f7cab6446b748ae0063c518db3ca6e99e9",
+    "art-experiments/bronzehollow-sentinel/native-death-pose-audit.json": "01bac5cb4b75061ffcec36eb84d29de894f2270904ca162f30fd6e8f802d5c13"
+  },
+  "independentChecks": {
+    "rootPins": 8,
+    "captureHashAndOrderedBoneFrames": 360,
+    "exactPaletteBones": 36,
+    "glbInverseBindMaximumError": 0.0,
+    "roundtripMaximumDifferences": {
+      "positions": 5.940577540997083e-08,
+      "normals": 6.287528958637267e-05,
+      "uvs": 9.934107481068821e-09,
+      "joints": 0.0,
+      "weights": 0.0,
+      "triangles": 0.0
+    }
+  },
+  "viewsInspected": [
+    "hero.png",
+    "side.png",
+    "native-pass-pose-study.png",
+    "native-death-pose-study.png"
+  ],
+  "observations": [
+    "Bronze rib bands retain a clear silhouette around dark articulated cores in hero and side views.",
+    "Selected pass and death poses show intentional separated rigid armor pieces without visible gross stretching.",
+    "Small head core is suitable only as the declared body replacement beneath retained native helmet."
+  ],
+  "trialContract": {
+    "nativeRenderer": 121217,
+    "rendererPath": "deathKnight",
+    "binding": "explicit-plural body only",
+    "visualScale": 1,
+    "nativeCelScaleRetained": 1.2,
+    "disableNativeEmission": true,
+    "retainNativeAccessories": [
+      "helmet",
+      "shield",
+      "weapon"
+    ]
+  },
+  "limits": [
+    "No original live trial acceptance.",
+    "Blocked native attack evidence is not ordinary-hit evidence.",
+    "Two-sided root-normalized pose sheets do not prove culling, collision, floor contact or all-angle appearance.",
+    "Live shoulder/shield and head/helmet intersections, actual material metallic/emission behavior, HUD/row portrait and native physics transition require review.",
+    "Bind surface exceeds native fingertips/toes slightly; unchanged native animation bounds require live culling checks.",
+    "Two scapula joints retain exact binding but lack direct positive weights; descendants remain influenced."
+  ],
+  "blockers": []
+}

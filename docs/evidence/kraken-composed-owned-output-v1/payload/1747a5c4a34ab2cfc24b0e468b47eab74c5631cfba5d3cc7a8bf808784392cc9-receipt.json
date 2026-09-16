@@ -1,0 +1,33 @@
+{
+  "status": "architect_approved_owned_trial_live_gate_pending",
+  "sha256": "0c65f1275f3eae761ec87bae6240c91dcfa49a13e34c5fc08334b92a88bc6163",
+  "artifact": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/candidate-composed-output-helper-0c65f127/FtkRuntimeModelTest.dll",
+  "bytes": 308736,
+  "sourcePins": {
+    "runtime-test/KrakenControllerFixture.cs": "f0d83f7a43ef3a71fcec89912e05a15e7406c0ee76a7b8c6f06b3b765f117dd3",
+    "runtime-test/KrakenEndpointFixture.cs": "07f345d490d14711e943758ad48828827e80b52796748c51d847a9d7c667590e",
+    "runtime-test/KrakenSkinProbe.cs": "7c69a583e97d48c91e2c95cef7ac32bdf352e21540a421caf98a7a3fadf97f41",
+    "runtime-test/KrakenModernMixerFixture.cs": "2af80918fd2f8e4f068bc7a5447b89bcc5de5a148d2a3697ef3b59bdc5576c55",
+    "verify_kraken_endpoint_fixture.py": "924acfd6baa89a2500f63d2a890ddc52a4f83f34804c1d6dc201c9a84e771ec3",
+    "verify_kraken_composed_fixture.py": "ecfd92a12279753fa5ea8ce0c3316e39fd7f958c9eae4c5663aaa0f034ec182a",
+    "verify_kraken_composed_skin.py": "04df50de45514c729f00a1d80faef880a9066c8d31c43297dbee61a1d70df600",
+    "test_verify_kraken_composed.py": "2d2987a6be9cb76909b2c1b118ab3ead78108b5a704c7382bc41ac7b803ea404",
+    "test_verify_kraken_composed_skin.py": "d372f460fe3a92630ddc2ed462516c7c7edcaa73b3144b6c6f1e51a54a789eb8",
+    "runtime-test/KRAKEN-COMPOSED-OUTPUT.md": "d15359ee14d482484b8a4606017f637dd6b3b1be37487e63b012a6d45f598fcb"
+  },
+  "preservedHelper": {
+    "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/candidate-fixed-four-helper-43529c75/FtkRuntimeModelTest.dll",
+    "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1"
+  },
+  "tests": {
+    "krakenVerifierRegression": 82,
+    "runtimePython": 115,
+    "newComposedNumerics": 8,
+    "newComposedSkinRouting": 3
+  },
+  "build": "Release net35 helper only; 0 warnings/errors",
+  "deployed": false,
+  "scope": "Owned five-scenario fixed input endpoint composition; live pair, full weighted skin and visual review remain pending; no production adapter or attack support",
+  "review": "ftk_architect independently matched all10source pins and DLL and reran11composedtests PASS. Bounded five-scenario owned composition only; production state gaps remain.",
+  "historicalCompatibility": "All five original Gloamfin endpoint manifests revalidated; maximum2.783289961172386e-6."
+}

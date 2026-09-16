@@ -1,0 +1,83 @@
+{
+  "status": "PASS_EXACT_RESOURCE_PREFAB_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only resource-prefab route/profile/asset preflight. No stage, deployment, runtime, visual, motion, or gameplay claim.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_rivenquill_basey_cockatrice_boss",
+      "baseEnemy": "bossCockatrice",
+      "resourcePrefab": "enbaseycockatriceboss",
+      "gameObjectId": 44361,
+      "celIds": [
+        139976
+      ],
+      "renderer": {
+        "rendererPath": "enBaseyCockatrice",
+        "sourceRendererId": 121693,
+        "rigProfile": "dd8ee00dfcee3bba6199896ffaba83f1c8f27008ec6053d43ab5a61089535671"
+      },
+      "controller": {
+        "controller_path_id": 5949,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "cockatriceController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 716
+      },
+      "combatProfile": "b5d1919dda0eb14fc093007013c70f4441308081495026b8f5e5b4bb8eeada2c",
+      "declaredAssets": [
+        {
+          "file": "rivenquill-palette.png",
+          "sha256": "30db7fc5ef913c6329ad3d6f22faf149ef89f5d1256afee028e4d8ef91ebd47c",
+          "bytes": 11132
+        },
+        {
+          "file": "rivenquill.glb",
+          "sha256": "5accc076dfb5ef0e11b4193bada85ac6778961db767b24be0acb758fda411f1f",
+          "bytes": 502464
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_rivenquill_basey_cockatrice_small",
+      "baseEnemy": "cockatriceC",
+      "resourcePrefab": "enbaseycockatricesmall",
+      "gameObjectId": 44362,
+      "celIds": [
+        139977
+      ],
+      "renderer": {
+        "rendererPath": "enBaseyCockatrice",
+        "sourceRendererId": 121694,
+        "rigProfile": "dd8ee00dfcee3bba6199896ffaba83f1c8f27008ec6053d43ab5a61089535671"
+      },
+      "controller": {
+        "controller_path_id": 5949,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "cockatriceController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 660
+      },
+      "combatProfile": "adc47b1916710812cc9e5415964285ad28314575ba83832db5a446c2d30dee23",
+      "declaredAssets": [
+        {
+          "file": "rivenquill-palette.png",
+          "sha256": "30db7fc5ef913c6329ad3d6f22faf149ef89f5d1256afee028e4d8ef91ebd47c",
+          "bytes": 11132
+        },
+        {
+          "file": "rivenquill.glb",
+          "sha256": "5accc076dfb5ef0e11b4193bada85ac6778961db767b24be0acb758fda411f1f",
+          "bytes": 502464
+        }
+      ]
+    }
+  ],
+  "resourcePreflight": {
+    "path": "scratch/resource-enemy-base-preflight.json",
+    "sha256": "9bd8792896468be5e771e4857b0262c7e4ee9cb664d69ba2c444698ba7441296"
+  },
+  "profileDocument": {
+    "path": "art-experiments/rivenquill-basey-cockatrice/runtime-profile.json",
+    "sha256": "02820b588dee3d52e490d0eda085e1382fc844a4d752a0ff9e96c9210abd6488"
+  },
+  "assetDirectory": "art-experiments/rivenquill-basey-cockatrice"
+}

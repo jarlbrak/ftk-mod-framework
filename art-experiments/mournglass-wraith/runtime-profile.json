@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_mournglass",
+      "baseEnemy": "chaosBeast",
+      "displayName": "Mournglass Wraith",
+      "combatProfile": "1d2808cbd2bc1cb6f31a3d51b0787cb854efdf316b9ba44fb3b7825899d35d78",
+      "renderers": [
+        {
+          "rendererPath": "enChaosBeast",
+          "glbFile": "mournglass.glb",
+          "materialSlots": [
+            {
+              "primitiveIndex": 0,
+              "nativeMaterialSlot": 0,
+              "textureFile": "mournglass.slot0.png",
+              "disableNativeEmission": true
+            },
+            {
+              "primitiveIndex": 1,
+              "nativeMaterialSlot": 1,
+              "textureFile": "mournglass.slot1.png",
+              "disableNativeEmission": true
+            }
+          ]
+        }
+      ],
+      "minimumBaseHealth": 64,
+      "visualScale": 1.0
+    }
+  ]
+}

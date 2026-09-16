@@ -1,0 +1,221 @@
+{
+  "schema": "ftkmf.model-root-visual-review-template.v1",
+  "session": "6b24887886c84815a06146b2cfa90494",
+  "reviewStatus": "reviewed_direct_beea_binding_motion_gameplay_and_native_physics_ragdoll_accepted_limited_art_pending",
+  "binding": {
+    "rendererPath": "Monster Bee",
+    "mesh": "ftkmf_glb_emberglass.glb",
+    "boneSignature": "14b49cbaf8d8e62092f5ea4062498c3b4eaa16b7f2bdf1121ecc2296da33e2a9"
+  },
+  "frames": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0b2af2f13de245bc8a4c5410ad7dddc8/0000.png",
+      "sha256": "01542d8d3c044d6d03d0f8be7674988d3563c3157a8b06b7193e7c862cb759dd",
+      "bytes": 1088671,
+      "action": "pass",
+      "index": 0,
+      "observation": "The exact authored Bee is fully visible at native scale with an amber segmented body, paired pale wings, feelers, legs, and tail forming one readable flying silhouette. No sampled part is detached, inverted, or clipped by the viewport."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0b2af2f13de245bc8a4c5410ad7dddc8/0020.png",
+      "sha256": "9e9807dcfe5bd3a7bd6d15d5decff15e969aa8b79a138432c71a60fb04cbd6af",
+      "bytes": 1062107,
+      "action": "pass",
+      "index": 20,
+      "observation": "A second BeeIdle sample shows a different wing sweep while the body, feelers, legs, and tail remain coherent and centered in the native enemy position."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0b2af2f13de245bc8a4c5410ad7dddc8/0042.png",
+      "sha256": "b15c5b752f65579cf6e231ce1b8574f8b088796cd09ffc63f687c2c68d0ac1fe",
+      "bytes": 1072645,
+      "action": "pass",
+      "index": 42,
+      "observation": "At the causal native AttackProf trigger, the Bee remains assembled and readable as it begins the stinger action. The native poison effect starts below it without hiding the full model."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0b2af2f13de245bc8a4c5410ad7dddc8/0047.png",
+      "sha256": "18c7b2b52fbc45dedcd5c9ed52fe1c4c392a5cbad6f245f928836dcbcd9cda09",
+      "bytes": 1080169,
+      "action": "pass",
+      "index": 47,
+      "observation": "The beeStingerAttack launch brings the Bee forward with its wings spread and abdomen aimed toward the hero. The body and appendages deform together without a sampled tear or stray limb."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0b2af2f13de245bc8a4c5410ad7dddc8/0051.png",
+      "sha256": "d1ce1205b8a66518a508b10140c55ca7cad594bc509418a568f3dfa6d033f66c",
+      "bytes": 1099505,
+      "action": "pass",
+      "index": 51,
+      "observation": "Near contact, the Bee overlaps the foreground hero and green poison particles. Its exposed wing, body, and stinger remain connected, while the hero and effects prevent judging the hidden side."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0b2af2f13de245bc8a4c5410ad7dddc8/0060.png",
+      "sha256": "7891e7eedacdf4aea83a15e2aa068b5d14613883009665b7ebb8413814b49502",
+      "bytes": 1074620,
+      "action": "pass",
+      "index": 60,
+      "observation": "The Bee has returned to its enemy position in settled idle after the stinger action. Its full silhouette is restored with no sampled residual stretching or missing surface."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0867e70e09b24bccabf8ba0700cc4ae4/0000.png",
+      "sha256": "0adf48b3e50ad1226b6adabf52374a03ac2bd60effee3d28aa334488360721d1",
+      "bytes": 1102532,
+      "action": "attack-attempt-1",
+      "attempt": 1,
+      "index": 0,
+      "observation": "The first ordinary no-focus attempt starts with the exact Bee intact at HP 58. This is a visual baseline and does not establish a hit outcome."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0867e70e09b24bccabf8ba0700cc4ae4/0019.png",
+      "sha256": "996ba2bdfa6f50d0f50567de173d26653ba43b5be39ee1433dc405840ea93681",
+      "bytes": 1100549,
+      "action": "attack-attempt-1",
+      "attempt": 1,
+      "index": 19,
+      "observation": "The native Dodge trigger begins while the Bee remains fully visible and assembled behind the approaching hero."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0867e70e09b24bccabf8ba0700cc4ae4/0023.png",
+      "sha256": "608f6345336000abcdd6bf394e73d6427378b0db3535cce8c35f6ee76fbd5b4d",
+      "bytes": 1118817,
+      "action": "attack-attempt-1",
+      "attempt": 1,
+      "index": 23,
+      "observation": "The opening dodge_bee pose shifts and banks the Bee away from the hero. Both wings, the amber abdomen, and the visible limbs retain a coherent relationship."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0867e70e09b24bccabf8ba0700cc4ae4/0028.png",
+      "sha256": "b41fc27c0da6e3ac2934ef06ae148bcc7f6df9a9a974d4555434c7c3dd1a2b1b",
+      "bytes": 1101055,
+      "action": "attack-attempt-1",
+      "attempt": 1,
+      "index": 28,
+      "observation": "Mid-dodge, the game displays DODGED and the Bee stays clear of the attack line. The custom surface remains continuous through the strongest sampled bank."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0867e70e09b24bccabf8ba0700cc4ae4/0035.png",
+      "sha256": "f33b0d8cc08e09c2c91a7d4665768128d2fadba49f6fa607221c978524db23a6",
+      "bytes": 1089873,
+      "action": "attack-attempt-1",
+      "attempt": 1,
+      "index": 35,
+      "observation": "After the dodge, the Bee is back in an intact idle pose at HP 58. The zero-loss result remains classified only from measured same-target HP and this visible game label."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/0867e70e09b24bccabf8ba0700cc4ae4/0070.png",
+      "sha256": "451003c682478d994c29cb81a4cbf598597890906a8df9a287ffc1790d69f8a7",
+      "bytes": 1084746,
+      "action": "attack-attempt-1",
+      "attempt": 1,
+      "index": 70,
+      "observation": "The later native attack2_bee counterattack lifts the Bee over its effect with the wings, body, legs, and tail still visibly joined."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d5b4b4cc538544a2a54f593f1513b45e/0000.png",
+      "sha256": "eb531d2e4d44c17ee4faf8065ae55848e7b4ffe7b5a1c713f75a856b616b0731",
+      "bytes": 1104642,
+      "action": "attack-attempt-2",
+      "attempt": 2,
+      "index": 0,
+      "observation": "The second ordinary no-focus attempt begins with the exact custom mesh fully visible at HP 58 and with the same native-scale silhouette."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d5b4b4cc538544a2a54f593f1513b45e/0023.png",
+      "sha256": "23cc3322acfd63e1891544b169a7ec11cb2d754dc39d9a8190574874d55f1531",
+      "bytes": 1156012,
+      "action": "attack-attempt-2",
+      "attempt": 2,
+      "index": 23,
+      "observation": "At the causal native Damaged trigger, the bright impact flare and foreground hero obscure most of the target. This frame establishes the action boundary but cannot support a detailed deformation judgment."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d5b4b4cc538544a2a54f593f1513b45e/0027.png",
+      "sha256": "c3f3016bcde980122161cf355604d4222ce99c968013f66e41ca6c20d3472907",
+      "bytes": 1112806,
+      "action": "attack-attempt-2",
+      "attempt": 2,
+      "index": 27,
+      "observation": "The BeeTakeDamage recoil moves the Bee upward and backward while the game displays the measured damage. Its wings, abdomen, and visible limbs remain attached."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d5b4b4cc538544a2a54f593f1513b45e/0030.png",
+      "sha256": "6b6bdd57abd4eefb0048a4a78ebf326d3441e2df43c6e1a38a245ed1b9e3a2d2",
+      "bytes": 1094332,
+      "action": "attack-attempt-2",
+      "attempt": 2,
+      "index": 30,
+      "observation": "A later BeeTakeDamage pose keeps the authored silhouette coherent near the peak of recoil. The body does not show a sampled tear, inversion, or viewport clip."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d5b4b4cc538544a2a54f593f1513b45e/0034.png",
+      "sha256": "3d3fc59f24b2cd522ca28fac3a8129740e1c0b5eb51de75e9f4336899990f5c4",
+      "bytes": 1098750,
+      "action": "attack-attempt-2",
+      "attempt": 2,
+      "index": 34,
+      "observation": "After the ordinary HP 58 to 50 hit, the Bee has returned to an intact idle pose with no sampled residual deformation."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d5b4b4cc538544a2a54f593f1513b45e/0072.png",
+      "sha256": "5dbf2aa347a2e177da06e065e7131b3932857bb4f158674bdf7285c72a5911ec",
+      "bytes": 1120857,
+      "action": "attack-attempt-2",
+      "attempt": 2,
+      "index": 72,
+      "observation": "The later attack2_bee counterattack shows the full custom model above the native effect with its segmented body and wings still coherent."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/fc7c4ccc01f146d2b9afe5181dd92e35/0000.png",
+      "sha256": "a9bcdbde3c9fa0f31e79a6af47a67b7b7df8df2ebfe91929b97ed3410e7ba894",
+      "bytes": 1105016,
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The explicit fixture starts from an intact visible Bee at HP 50. This baseline is fixture evidence and does not establish ordinary lethal damage."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/fc7c4ccc01f146d2b9afe5181dd92e35/0023.png",
+      "sha256": "981a22355bbbf60f0ad19ced2f7b416a6a017c6f48fa101c3be1eb92350b188e",
+      "bytes": 1138128,
+      "action": "kill-fixture",
+      "index": 23,
+      "observation": "At the causal native Death trigger, the hit flare almost completely covers the target. This frame establishes the fixture action boundary but not the death pose."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/fc7c4ccc01f146d2b9afe5181dd92e35/0027.png",
+      "sha256": "083f8f5cc924e49a146b586cdf0ba975633c2f3e18e4269acfab59eedbcf882a",
+      "bytes": 1097572,
+      "action": "kill-fixture",
+      "index": 27,
+      "observation": "The first sampled dynamic-ragdoll frame still shows the Bee above the floor with its custom surface intact. Runtime readback records m_DoRagdoll true and all 16 rigid bodies nonkinematic from this frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/fc7c4ccc01f146d2b9afe5181dd92e35/0034.png",
+      "sha256": "04e228453b8ed885e8c895f02ce2b7a1a8ff0065eae4f30543c47bbb1d728083",
+      "bytes": 1068595,
+      "action": "kill-fixture",
+      "index": 34,
+      "observation": "The dynamic Bee tumbles toward the floor with the amber body, pale wings, and tail still recognizable. Green native particles partially obscure the lower trajectory."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/fc7c4ccc01f146d2b9afe5181dd92e35/0040.png",
+      "sha256": "6670d6f642f129b863825ef920abb430afa1fdd2e06ba73af3dcccef3a01f30b",
+      "bytes": 1085414,
+      "action": "kill-fixture",
+      "index": 40,
+      "observation": "The Bee is visibly grounded behind the hero after the native physics fall. The compact corpse silhouette remains coherent enough to distinguish body, wing, and tail regions."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/fc7c4ccc01f146d2b9afe5181dd92e35/0102.png",
+      "sha256": "89d072b6ef2eb77ab27164695a237eaf5e910527b44273656411c0b27cbb4cc2",
+      "bytes": 943821,
+      "action": "kill-fixture",
+      "index": 102,
+      "observation": "The grounded Bee remains visible in the background at the final retained active-renderer sample, about 6.25 captured seconds after the rigid bodies became dynamic. The next sampled frame records the renderer inactive and the capture terminates, so no later corpse lifetime is claimed."
+    }
+  ],
+  "requirements": [
+    "Inspect each referenced original PNG before changing reviewStatus to a reviewed value.",
+    "Replace every pending observation with the exact observed result and state its limits.",
+    "Add selected source PNGs only when their hash, action, attempt, and frame index are verified from the fresh case."
+  ]
+}

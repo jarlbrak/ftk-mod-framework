@@ -1,0 +1,37 @@
+{
+  "status": "scoped_selected_live_views_reviewed",
+  "reviewedFrames": {
+    "pass": [
+      0,
+      40,
+      60
+    ],
+    "hit": [
+      30
+    ],
+    "death": [
+      40,
+      60,
+      119
+    ]
+  },
+  "observations": [
+    "Pass0 shows the original dark indigo raven, ivory beak, attached broad wings and visible custom face in both native portrait surfaces.",
+    "Pass40 has strong camera blur; pass60 clearly shows the attached flight silhouette and native PIERCED -6 hero damage.",
+    "Hit30 shows CRITICAL -13 and enemy HP45, with the hero largely occluding the bird and native feather effects. Hit detail behind the hero is not accepted from this view.",
+    "Death40/60 show the fallen original body and spread wings under native feather effects/camera blur;119 is heavily obscured by native loot UI and depth blur. Fine death-surface detail remains limited."
+  ],
+  "limits": [
+    "Selected camera views only, dark body contrast and native blur/occlusion limit detail.",
+    "Explicit KillSingle death fixture, not an ordinary lethal hit or every death variant.",
+    "No independent runtime material-property capture in this trial."
+  ],
+  "sourceEditBoundary": {
+    "reportedUtc": "2026-09-06T23:23:38Z",
+    "files": [
+      "run_case.py",
+      "profile_materials.py"
+    ],
+    "change": "Additive all-slot asset pinning while wrapper ran; record_case.py/exercise_case.py and deployed binaries unchanged. Per-case raw journals retain actual loaded provenance."
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "status": "STOPPED_BEFORE_HERO_READY_NO_MOTION_CAPTURE",
+  "nativeEnemy": "monkeyC",
+  "rendererId": 121301,
+  "paletteBones": 42,
+  "session": "86aa14f97fb84aa7bed96fe1416a705e",
+  "journal": {
+    "path": "docs/evidence/monkeyc-setup-removal-v1/journal.jsonl.gz",
+    "sha256": "f4541775e0dec317bde9939fb97488f86da7a47408143b27d34f7b59381cac26"
+  },
+  "decompressedJournalSha256": "1e98ffc50aca03df28da1499a2c4368e7d1a4565f2a0848a44c0080383007b80",
+  "sourceFindings": {
+    "path": "docs/evidence/monkeyc-setup-removal-v1/source-removal-findings.json",
+    "sha256": "1ebaec862efd5b087deab437c259d8e3ecd6e684c4c731084ba6673c6007689c"
+  },
+  "deployedBinaryObservation": {
+    "sequence": 1,
+    "utc": "2026-09-08T03:29:53.729879+00:00",
+    "monotonic": 257942.713811291,
+    "kind": "deployed-binaries",
+    "data": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "session": "86aa14f97fb84aa7bed96fe1416a705e",
+      "binaries": {
+        "framework": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+          "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+          "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+          "bytes": 1974272
+        },
+        "helper": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "sha256": "2c42e55ddcfcc01331aa66d45721ed404ac98608fe1ed3d4a7ca5a90b3e52186",
+          "bytes": 325632
+        }
+      },
+      "measurement": "on_disk_binary_sha256",
+      "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+    }
+  },
+  "outcome": "Observed58alive to0removed before any heroReady. Source suicide proficiency is verified; actual attack/callback attribution remains inferred.",
+  "progression": "Two guarded Collect submissions, gold18to63 and strictReady0/3Trap1; no combat action issued by root.",
+  "limits": [
+    "No captured native poses, animation or model acceptance.",
+    "No ordinary lethal or explicit KillSingle performed.",
+    "Loader42-bone binding log is not motion validation.",
+    "No calibration completion or original-model coverage increment."
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/deployment.json",
+      "sha256": "f392c6884d7d88ce01b6a74af96d1b9c933a0a8e3195f7f16e87819ddcc34994"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/exact-source-findings.json",
+      "sha256": "1dc4f52eaaac66c3f8f3aa7ec8eee31abdbb16190e125b519b955566495901dc"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/journal.jsonl.gz",
+      "sha256": "f4541775e0dec317bde9939fb97488f86da7a47408143b27d34f7b59381cac26"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-after-collect1.json",
+      "sha256": "be72a4358526a254ecf87b10efc9109a333e8cf02e9fc7957e98cc39b56cad9d"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-before-collect.json",
+      "sha256": "f5bee516a89f23fc19a1ad6ede9e30a55e4defbceeece6bcab477a268cc7c137"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-before-collect2.json",
+      "sha256": "2d0878b711f2323dfddf81285701782b155f19cd664f9fac38fb9d03423916d3"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-collect1.json",
+      "sha256": "3fb2fa6fbbdec6cbfcbbaaba6f535037bee667b6a62ffad8d56857f1e7b0f2e6"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-collect2.json",
+      "sha256": "25560e02f0e13720b84f09e9796608d4a2aa330b0b1ae4f173c58b44b1d7ee5b"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-final-ready.json",
+      "sha256": "afb70fbdc10cf4ff9457740805ca029b2f08403a2283a8b129fe5278bb021957"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-first-stage-result.txt",
+      "sha256": "f6541d53562196a372609c791d1df45efd0c9e3768f7878d2b7024bf31e1ec5f"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-post-stage-fixture.json",
+      "sha256": "c549b044de27062ffa0ff57e7260e6df3097182da9c67d3c65f29327c79577a3"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-post-stage-inventory.json",
+      "sha256": "c947066de07d772b62af532d05a9738e66d57489ed40f2ec8554432a09ca7734"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/monkeyc-post-stage-state.json",
+      "sha256": "f302363592693d9c04380dac772a3fbf64f34d7fa888a8274ff50269c4339d0c"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/source-removal-findings.json",
+      "sha256": "1ebaec862efd5b087deab437c259d8e3ecd6e684c4c731084ba6673c6007689c"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/startup.json",
+      "sha256": "f3372e4ecf1510f318bd57fc8455b622048d5cb6389d1d04686522eba9cb07a2"
+    },
+    {
+      "path": "docs/evidence/monkeyc-setup-removal-v1/README.md",
+      "sha256": "8b20ecfff24142633307854eb25b6840502c195b7c55ffc67057eee095b6470e"
+    }
+  ]
+}

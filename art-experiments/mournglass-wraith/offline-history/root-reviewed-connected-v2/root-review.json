@@ -1,0 +1,53 @@
+{
+  "status": "REVISED_BIND_DIRECTION_ACCEPTED_FOR_MOTION_FITTING_ONLY",
+  "candidateSha256": "fe4e5d7adc38267f9436f9ceca6543f63f723c0caaeb2c237c02cf41024471e8",
+  "verifiedFiles": 27,
+  "viewedImages": {
+    "hero.png": "0165a67432fad73cd027ba60fe692b4caa69e3e4052432092294ebb1b2b359c3",
+    "side.png": "91d1706c27b69ea5299e23c3f9c13ffb9545646e6e3d5dfc02b1bcfb0e957976"
+  },
+  "observed": [
+    "Continuous tapered mantle replaces two separated block-like lower pieces.",
+    "Slimmer torso and sleeves form a coherent floating silhouette in both bind views.",
+    "Ivory mask remains legible against dark hood."
+  ],
+  "independentGlbValidation": {
+    "file": "art-experiments/mournglass-wraith/mournglass.glb",
+    "vertices": 3072,
+    "triangles": 1024,
+    "bones": 31,
+    "primitives": 2,
+    "triangles_per_primitive": [
+      588,
+      436
+    ],
+    "bounds_min": [
+      -1.15162992477417,
+      0.7269508242607117,
+      -0.09892432391643524
+    ],
+    "bounds_max": [
+      1.15162992477417,
+      2.060788631439209,
+      0.26471561193466187
+    ],
+    "max_bind_rest_error": 5.091908761301056e-08,
+    "source_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.0040471116080880165,
+      "informative_triangles": 1024
+    },
+    "reference_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.003293315937181838,
+      "informative_triangles": 1400
+    },
+    "status": "PASS (binary and skin contract; live animation still requires in-game check)"
+  },
+  "remaining": [
+    "Native motion and shoulder/hem deformation.",
+    "Actual two-slot materials and timed native scrolling readback.",
+    "Native particles/light, portraits, culling, death and gameplay."
+  ],
+  "limits": "Studio/bind direction only; no live appearance acceptance. Rejected prior geometry/images preserved separately."
+}

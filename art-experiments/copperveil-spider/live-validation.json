@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 1,
+  "asset": "Copperveil Weaver",
+  "iteration": "first original spiderB baseline",
+  "status": "scoped appearance and motion observed; occlusion limits",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "98049d8298334aeda9e92d2725e4944d",
+    "case": "d9580cdbba80468a9a9b957fb23c61b1",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_copperveil",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_copperveil",
+      "baseEnemy": "spiderB",
+      "displayName": "Copperveil Weaver",
+      "combatProfile": "ac86fda01c15eea07fdc783ef52ea95fb759f6fbfb9e1d706fcd55e7330ecb5a",
+      "renderers": [
+        {
+          "rendererPath": "enSpiderB",
+          "glbFile": "copperveil.glb",
+          "textureFile": "copperveil_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "edbe3ef15861d3d526fa07872bfe5022e885ee67eca13005fb69b5c1adcde422",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "bb8497",
+  "helperVersionPrefix": "bfa586",
+  "assetHashes": {
+    "copperveil.glb": "a2f2d2a7f81fb93068f9ae2e628cf4bfb70dfeac8843831ca46fc5207145e804",
+    "copperveil_basecolor.png": "3ea691a26eecc62717c0597fac4b4c4a86b3cbb6391fce0861de07bef947f5fc"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-d9580cdbba80468a9a9b957fb23c61b1/journal.jsonl",
+    "sha256": "2b50cc31dcd94106c588e64c88d60a4dcf8a2cd610bedb87de67309abb49dd98"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "b98e787164044a6694bba148c4e43ca9",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/8d7bca438899453892a049b7b2212ecf.json",
+        "sha256": "fae7c8d1da54d4c2235e8f2c774928ee30e1937c39801cbe498ecffee67397b0"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-b98e787164044a6694bba148c4e43ca9/journal.jsonl",
+        "sha256": "0c3b734fb18803fbaf900d34c813d7ea8abdd60c3700670a99c2db8ab9ae4320"
+      },
+      "summary": {
+        "path": "art-experiments/copperveil-spider/live/attack-summary.json",
+        "sha256": "32b9dcb762a23afa2c0bd51202654dfff005eb6b11cd560c152f9937d6d4e303"
+      },
+      "video": {
+        "path": "art-experiments/copperveil-spider/live/attack.mp4",
+        "sha256": "75249e7406c8c47a86a65848338308603bf61faeb4828fe94ab5cbfaac6ef846"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/copperveil-spider/live/attack-0000.png",
+          "sha256": "525b7ff86c8533596a9e01b55f30b57dd7e620fc1f29ee8ebd6916bba3b4243d"
+        },
+        {
+          "path": "art-experiments/copperveil-spider/live/attack-0050.png",
+          "sha256": "aab65830ecfaca6dec83a1d200db7e451a60f5830198f82b75743f9e45a64697"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "spider_idle"
+          ],
+          "sampleCount": 78,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 42,
+              "firstNormalizedTime": 11.540650367736816,
+              "lastNormalizedTime": 13.2391939163208,
+              "gameSeconds": 3.8499984741210938
+            },
+            {
+              "firstFrame": 61,
+              "lastFrame": 83,
+              "firstNormalizedTime": 0.055081456899642944,
+              "lastNormalizedTime": 0.9447871446609497,
+              "gameSeconds": 2.0166702270507812
+            },
+            {
+              "firstFrame": 108,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.054857831448316574,
+              "lastNormalizedTime": 0.4997107982635498,
+              "gameSeconds": 1.008331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "spider_attack2"
+          ],
+          "sampleCount": 18,
+          "occurrences": [
+            {
+              "firstFrame": 43,
+              "lastFrame": 60,
+              "firstNormalizedTime": 0.053658537566661835,
+              "lastNormalizedTime": 0.965853750705719,
+              "gameSeconds": 1.5583343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "spider_attack1"
+          ],
+          "sampleCount": 24,
+          "occurrences": [
+            {
+              "firstFrame": 84,
+              "lastFrame": 107,
+              "firstNormalizedTime": 0.03999999910593033,
+              "lastNormalizedTime": 0.9600001573562622,
+              "gameSeconds": 2.10833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "blocked-hit1",
+      "case": "5c10301c8b454ba498be7a83d9455942",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/7dd80f3f06f94c1cab860d1fba3d9703.json",
+        "sha256": "7378c2b8ea3cb2ac72a35a8e7844ed8f6934729a5bd2e0a70ba2aa55e558108d"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-5c10301c8b454ba498be7a83d9455942/journal.jsonl",
+        "sha256": "ffde643500bf293acc6dd28e49d6018c63fa22ece58ec96b454234450d4731d6"
+      },
+      "summary": {
+        "path": "art-experiments/copperveil-spider/live/blocked-hit1-summary.json",
+        "sha256": "10f63a4fbc65cdd8ab35f473df6e066609032b4fb2da17b513761e25dd2e6bfa"
+      },
+      "video": {
+        "path": "art-experiments/copperveil-spider/live/blocked-hit1.mp4",
+        "sha256": "6618cd72f5ce42236d1d533be63cfc57cbfdbc919d357a8a9324aeca8b9fa3fb"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/copperveil-spider/live/blocked-hit1-0030.png",
+          "sha256": "2f5f7f39e2f53712c6c104ad98a172b221960dc0ae0e6c80049e8061a30798f3"
+        }
+      ],
+      "hpBeforeAfter": [
+        63,
+        63
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "spider_idle"
+          ],
+          "sampleCount": 89,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 21,
+              "firstNormalizedTime": 26.269363403320312,
+              "lastNormalizedTime": 27.118635177612305,
+              "gameSeconds": 1.9250030517578125
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 66,
+              "firstNormalizedTime": 0.06985290348529816,
+              "lastNormalizedTime": 1.363970160484314,
+              "gameSeconds": 2.9333343505859375
+            },
+            {
+              "firstFrame": 86,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.06955704092979431,
+              "lastNormalizedTime": 1.4041154384613037,
+              "gameSeconds": 3.0250091552734375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 1632517995,
+          "clips": [
+            "spiderBlock"
+          ],
+          "sampleCount": 12,
+          "occurrences": [
+            {
+              "firstFrame": 22,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.14666667580604553,
+              "lastNormalizedTime": 0.9533332586288452,
+              "gameSeconds": 1.008331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "spider_jumpingAttack3"
+          ],
+          "sampleCount": 19,
+          "occurrences": [
+            {
+              "firstFrame": 67,
+              "lastFrame": 85,
+              "firstNormalizedTime": 0.05124968662858009,
+              "lastNormalizedTime": 0.9721797704696655,
+              "gameSeconds": 1.6500091552734375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "blocked-hit2",
+      "case": "87ecc7ab18dc403f80a3e24d8bc85106",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/474e9f77b49a43df918534d4003312a3.json",
+        "sha256": "9081b6ebe4980001de1cbb3554d0c54c2235797a6e12810edd2c3f59b4ce95a8"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-87ecc7ab18dc403f80a3e24d8bc85106/journal.jsonl",
+        "sha256": "7197619659092c48514499efb5798327122620e7e3b74cc0d27c9cbe3b120cb9"
+      },
+      "summary": {
+        "path": "art-experiments/copperveil-spider/live/blocked-hit2-summary.json",
+        "sha256": "e507ec220dab8257ada2d69238e1a592e69b371bbe3dab744c825eede3355b84"
+      },
+      "video": {
+        "path": "art-experiments/copperveil-spider/live/blocked-hit2.mp4",
+        "sha256": "e0c44759fb0eda0a384b8c8dc89042fef1861f84d3c8c5f6be2189b545481618"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/copperveil-spider/live/blocked-hit2-0030.png",
+          "sha256": "0974aa3712f7044681b9ced4352ad5f407cbe8f24d2c9f6d2af52b466b3e0887"
+        }
+      ],
+      "hpBeforeAfter": [
+        63,
+        63
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "spider_idle"
+          ],
+          "sampleCount": 83,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 21,
+              "firstNormalizedTime": 20.326818466186523,
+              "lastNormalizedTime": 21.176090240478516,
+              "gameSeconds": 1.92498779296875
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 66,
+              "firstNormalizedTime": 0.06985290348529816,
+              "lastNormalizedTime": 1.363970160484314,
+              "gameSeconds": 2.933319091796875
+            },
+            {
+              "firstFrame": 85,
+              "lastFrame": 112,
+              "firstNormalizedTime": 0.055081456899642944,
+              "lastNormalizedTime": 1.1469929218292236,
+              "gameSeconds": 2.475006103515625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 1632517995,
+          "clips": [
+            "spiderBlock"
+          ],
+          "sampleCount": 12,
+          "occurrences": [
+            {
+              "firstFrame": 22,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.14666667580604553,
+              "lastNormalizedTime": 0.9533332586288452,
+              "gameSeconds": 1.008331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "spider_attack2"
+          ],
+          "sampleCount": 18,
+          "occurrences": [
+            {
+              "firstFrame": 67,
+              "lastFrame": 84,
+              "firstNormalizedTime": 0.053658537566661835,
+              "lastNormalizedTime": 0.965853750705719,
+              "gameSeconds": 1.5583343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "spider_attack1"
+          ],
+          "sampleCount": 7,
+          "occurrences": [
+            {
+              "firstFrame": 113,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.03999999910593033,
+              "lastNormalizedTime": 0.2799999713897705,
+              "gameSeconds": 0.5500030517578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "a280b294f1624a048990d1674e1ab814",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/515903151dcc4351a787504ee1f7e36b.json",
+        "sha256": "2c61d77503ec0a3cf6bea8e7945e7cf1d3b21d5c5c51df5f58a8bcb3b1e10cef"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-a280b294f1624a048990d1674e1ab814/journal.jsonl",
+        "sha256": "351a222cda161a38d4bd291b957ea1cc94b963fef434a35ad1d9534d6bf97b1b"
+      },
+      "summary": {
+        "path": "art-experiments/copperveil-spider/live/nonlethal-hit-summary.json",
+        "sha256": "ef1e258e2a4539fb867408cfc23dbe31c8c8e3cb1aa609747791c8610cc9b089"
+      },
+      "video": {
+        "path": "art-experiments/copperveil-spider/live/nonlethal-hit.mp4",
+        "sha256": "0e63722d468a68f1f5d689e88c0a251af72cd2d7e32db36cc3f029617b73b27c"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/copperveil-spider/live/nonlethal-hit-0030.png",
+          "sha256": "8e54d5722085038eb598052bd8d872ec072dc4af5c44990b60d6531f59f85833"
+        }
+      ],
+      "hpBeforeAfter": [
+        63,
+        61
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "spider_idle"
+          ],
+          "sampleCount": 85,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 42.84605026245117,
+              "lastNormalizedTime": 43.89748001098633,
+              "gameSeconds": 2.383331298828125
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 66,
+              "firstNormalizedTime": 0.13504527509212494,
+              "lastNormalizedTime": 1.4291625022888184,
+              "gameSeconds": 2.933319091796875
+            },
+            {
+              "firstFrame": 85,
+              "lastFrame": 109,
+              "firstNormalizedTime": 0.055081456899642944,
+              "lastNormalizedTime": 1.0256694555282593,
+              "gameSeconds": 2.20001220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "spiderDamage"
+          ],
+          "sampleCount": 7,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.3245071768760681,
+              "lastNormalizedTime": 0.8984201550483704,
+              "gameSeconds": 0.54998779296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "spider_attack2"
+          ],
+          "sampleCount": 18,
+          "occurrences": [
+            {
+              "firstFrame": 67,
+              "lastFrame": 84,
+              "firstNormalizedTime": 0.053658537566661835,
+              "lastNormalizedTime": 0.965853750705719,
+              "gameSeconds": 1.558349609375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "spider_attack1"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 110,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.03999999910593033,
+              "lastNormalizedTime": 0.3999999463558197,
+              "gameSeconds": 0.824981689453125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "1a6f7a8f2cff4f49a7271c28378655a9",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/fcbfc1ba7ca047678e10d8a837526533.json",
+        "sha256": "50dba8e010c03688ea8f4e6a27ade286f512b65984f9302b8f581b3f8ac40bb9"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-1a6f7a8f2cff4f49a7271c28378655a9/journal.jsonl",
+        "sha256": "66b20dc5f3e621cbe24001073d6eb2566e3ce1c18dc418911b20d036394685b2"
+      },
+      "summary": {
+        "path": "art-experiments/copperveil-spider/live/kill-fixture-death-summary.json",
+        "sha256": "33cbfb5d431dba48a5aee99eee383043f2fc41bffe3c6121e338ff5f314ecfe3"
+      },
+      "video": {
+        "path": "art-experiments/copperveil-spider/live/kill-fixture-death.mp4",
+        "sha256": "66eff8bbc700185c42a6b65f8600617434782dc9536930d1e83b34a960618063"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/copperveil-spider/live/kill-fixture-death-0040.png",
+          "sha256": "bf41a3d3d1bc987aa1508cebb6b61a01408b55f1d90d3fb2c01ae0c510d12297"
+        },
+        {
+          "path": "art-experiments/copperveil-spider/live/kill-fixture-death-0060.png",
+          "sha256": "974c0aeb737df103e4c49e6081c5b9fb1590fe48a4fb094e95db9d4d9010b4c3"
+        }
+      ],
+      "hpBeforeAfter": [
+        61,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "spider_idle"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 30.507118225097656,
+              "lastNormalizedTime": 31.558597564697266,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "spiderDeathDirect"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.12222222983837128,
+              "lastNormalizedTime": 3.8703694343566895,
+              "gameSeconds": 8.433319091796875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Body, legs, copper joints and eyes readable under darker native light without emission issue. Raised attack remains onscreen with native effects. Hero obscures body in all three reviewed hit30 views. Upturned-leg death coherent at40/60.",
+    "limits": "Native darkening and hero/effect occlusion limit review. Scoped art approval does not establish unoccluded all-motion, culling or flawless art acceptance."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "afterCollect": {
+      "path": "scratch/copperveil-after-collect1.json",
+      "sha256": "6de568928d2a5b5bd106821c9045a091b40a1bb1d0f3e3f75f90d763a107d011"
+    },
+    "result": "one guarded Collect action; strict Ready level0 room2"
+  },
+  "historicalEvidencePreserved": "First two hits BLOCKED at63HP; third deals2. All attempts retained; prior diagnostic blocked-hit gap remains historical.",
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/copperveil-honeyback-20260906-115028/deployment.json",
+    "sha256": "ccffa4845f475464d21e6c2387cac96dd52a95a64a52cb1649f38b68ff4a55a7"
+  },
+  "binaryAndCatalogHashes": {
+    "model-test-profiles.json": "edbe3ef15861d3d526fa07872bfe5022e885ee67eca13005fb69b5c1adcde422",
+    "BepInEx/plugins/FTKModFramework_content/models/copperveil.glb": "a2f2d2a7f81fb93068f9ae2e628cf4bfb70dfeac8843831ca46fc5207145e804",
+    "BepInEx/plugins/FTKModFramework_content/models/copperveil_basecolor.png": "3ea691a26eecc62717c0597fac4b4c4a86b3cbb6391fce0861de07bef947f5fc",
+    "BepInEx/plugins/FTKModFramework_content/models/honeyback.glb": "df5e94d6fc9b6ba5e287a052f7481476a7adaf531a485175978adab04f68061e",
+    "BepInEx/plugins/FTKModFramework_content/models/honeyback_basecolor.png": "54eb2580b97f7a9e34054fa84a30d6a99c0a9e388e67f61cbff28512d44ffefb",
+    "BepInEx/plugins/FTKModFramework.dll": "bb8497a412721f102d914af55744d7952e955ba07b5c9443beb68a00713b7ef3",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "bfa5866ec261bce0adf508c5708864743a59dadb400526d65d45c2e5cd8b0404",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "329771384cd6d4ba5dfa68d4557e7675cf0145166fcffb60344c886940a517af",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65"
+  },
+  "deathMode": {
+    "nativeRagdoll": false,
+    "nativeRigidbodies": 0,
+    "animatorEnabledFrames": 120,
+    "clip": "spiderDeathDirect",
+    "occurrenceFrames": [
+      27,
+      119
+    ],
+    "normalizedTimeRange": [
+      0.12222222983837128,
+      3.8703694343566895
+    ],
+    "limits": "Early first-cycle interval missing; no ragdoll or full endpoints claim."
+  }
+}

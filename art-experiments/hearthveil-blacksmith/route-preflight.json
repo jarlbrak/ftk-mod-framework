@@ -1,0 +1,120 @@
+{
+  "status": "PASS_EXACT_PLAYER_SKINSET_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only player skinset/avatar route/profile/asset preflight. Class registration, native equipment branches, preview, runtime, visual, motion, and gameplay remain separate checks.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_player_hearthveil_blacksmith_female",
+      "baseClass": "blacksmith",
+      "defaultSkinType": "Female",
+      "skinset": "blacksmith_Female",
+      "avatar": {
+        "prefab": "Player_Blacksmith",
+        "celPathId": 137599,
+        "assetFile": "resources.assets"
+      },
+      "renderers": [
+        {
+          "rendererPath": "hairBottom",
+          "sourceRendererId": 121178,
+          "rendererName": "hairBottom",
+          "rigProfile": "957a9ec07c8372822081a8187e65ec74c7e1eb944b632b0a445a38a4de148d8b",
+          "jointCount": 6,
+          "glbFile": "hearthveil-hair-bottom.glb",
+          "textureFile": "hearthveil-palette.png"
+        },
+        {
+          "rendererPath": "hairTop",
+          "sourceRendererId": 121083,
+          "rendererName": "hairTop",
+          "rigProfile": "957a9ec07c8372822081a8187e65ec74c7e1eb944b632b0a445a38a4de148d8b",
+          "jointCount": 6,
+          "glbFile": "hearthveil-hair-top.glb",
+          "textureFile": "hearthveil-palette.png"
+        },
+        {
+          "rendererPath": "playerBlacksmith",
+          "sourceRendererId": 121067,
+          "rendererName": "playerBlacksmith",
+          "rigProfile": "3f3159e93040c69505050cf5e5f43f474927b9f6edf8ae35a6f9fcc3f7dab6a1",
+          "jointCount": 24,
+          "glbFile": "hearthveil-body.glb",
+          "textureFile": "hearthveil-palette.png"
+        }
+      ],
+      "apparel": [
+        {
+          "rendererPath": "armorBlacksmithF(Clone)",
+          "expectedNativeMeshName": "armorBlacksmith",
+          "glbFile": "hearthveil-default-armor.glb",
+          "textureFile": "hearthveil-palette.png",
+          "validation": "schema-and-asset-only; exact native equipment branch remains a live check"
+        },
+        {
+          "rendererPath": "armorGambesonF(Clone)",
+          "expectedNativeMeshName": "armorGambesonF",
+          "glbFile": "hearthveil-gambeson.glb",
+          "textureFile": "hearthveil-palette.png",
+          "validation": "schema-and-asset-only; exact native equipment branch remains a live check"
+        },
+        {
+          "rendererPath": "bootsBlacksmith(Clone)",
+          "expectedNativeMeshName": "bootsBlacksmith",
+          "glbFile": "hearthveil-boots.glb",
+          "textureFile": "hearthveil-palette.png",
+          "validation": "schema-and-asset-only; exact native equipment branch remains a live check"
+        }
+      ],
+      "declaredAssets": [
+        {
+          "file": "hearthveil-body.glb",
+          "sha256": "ddb8691011173d8de1a1e48260dd99b9b2d88f91ecabb207bc922286d439f634",
+          "bytes": 307792
+        },
+        {
+          "file": "hearthveil-boots.glb",
+          "sha256": "5b91bc4e437e5b238ca0b3eb8f1c1c83d21110cb4a89f86ed92bbed38e814d16",
+          "bytes": 60112
+        },
+        {
+          "file": "hearthveil-default-armor.glb",
+          "sha256": "d0bdb4ee5b1c4afae68d93345df7a9601fc1b628406733cec59ecea396214298",
+          "bytes": 170160
+        },
+        {
+          "file": "hearthveil-gambeson.glb",
+          "sha256": "704d3fc7b57eb94d9b4e522f9584f51078245f7ba5da2683a0fe0ce8363da207",
+          "bytes": 170980
+        },
+        {
+          "file": "hearthveil-hair-bottom.glb",
+          "sha256": "855233f93cd71ecf1173251723d76def70d3cf8ef33657b4f9003728ffd07973",
+          "bytes": 24948
+        },
+        {
+          "file": "hearthveil-hair-top.glb",
+          "sha256": "40f55b523dd9d2a5827b6e9bdced2dfb70a69faab0a86bd894462ed3c155dbae",
+          "bytes": 27036
+        },
+        {
+          "file": "hearthveil-palette.png",
+          "sha256": "ba99d7ab57a505286b323a7054a9376172b241fa3d51694a5f159c26d072e7fb",
+          "bytes": 5301
+        }
+      ]
+    }
+  ],
+  "rigClassification": {
+    "path": "scratch/rig-candidate-classification.json",
+    "sha256": "19efc5fd06ede8544a13fcefe1ee3a960ed9fddcc6decb295b586281cd2b7234",
+    "sourceAssetSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+    "skinsetDatabase": {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/sharedassets1.assets",
+      "sha256": "e38abff2efd7ca8ef8ede4b92754d6b3a06c6498a774ee55d0d1ddbffba4750f"
+    }
+  },
+  "profileDocument": {
+    "path": "art-experiments/hearthveil-blacksmith/runtime-profile.json",
+    "sha256": "f84a6656451fc37631e9e6c6eff786d79e2af6263059d07de44e93c8bb145333"
+  },
+  "assetDirectory": "art-experiments/hearthveil-blacksmith"
+}

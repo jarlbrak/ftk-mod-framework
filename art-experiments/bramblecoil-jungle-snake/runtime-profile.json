@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_bramblecoil_jungle_snake",
+      "baseEnemy": "snakeJungleC",
+      "displayName": "Bramblecoil Viper",
+      "combatProfile": "5f6d49d240b74c0ff2c31f8e8eafd627d6ace9f8cc14938641c5a5d99c828d7d",
+      "renderers": [
+        {
+          "rendererPath": "enJungleSnakeC",
+          "glbFile": "bramblecoil-jungle-snake.glb",
+          "textureFile": "bramblecoil-jungle-snake_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ],
+      "minimumBaseHealth": 64,
+      "visualScale": 1.0,
+      "fallOffPolicy": "preserve-custom-body",
+      "portraitMarkerPath": "Root_M/FrontRib_01/FrontRib_02/FrontRib_03/FrontRib_04/FrontRib_05/FrontRib_06/FrontRib_07/FrontRib_08/FrontRib_09/FrontRib_10/FrontRib_11/Head/PortraitCam"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "scope": "crowC exact39bone calibration, two separate native encounters",
+  "firstEncounter": {
+    "passCapture": "66a099d4cb854ef99fea50b2a3a9879b",
+    "reviewedPassFrames": [
+      0,
+      40
+    ],
+    "attackCapture": "231a3a6879ac4f739e143487696cf7e8",
+    "reviewedAttackFrames": [
+      30,
+      60
+    ],
+    "observedDamage": 8,
+    "observedHpAfterDamage": 50,
+    "laterEndpointHp": 0,
+    "removalCause": "Consistent with native flee; explicit runtime flee flag not captured",
+    "rawWrapperStopped": true,
+    "automaticReadyWithoutCollect": true
+  },
+  "secondEncounter": {
+    "explicitKillSingle": true,
+    "capture": "69794462552a4bd79980d5fbc107049b",
+    "reviewedFrames": [
+      35,
+      60
+    ],
+    "visual": "Coherent prone probe on floor, hero/feather FX partially occlude35",
+    "nativeRagdollFlags": [
+      false
+    ],
+    "animatorEnabledAllFrames": true,
+    "collectCount": 1,
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 3,
+      "buttonCount": 1
+    }
+  },
+  "limitations": [
+    "Calibration only, not authored creature appearance.",
+    "Selected frames and partial first-cycle starts, no full-controller coverage.",
+    "First endpointHP0 is not evidence of lethal attack.",
+    "Death verified in separate explicit fixture encounter, not first hit encounter."
+  ]
+}

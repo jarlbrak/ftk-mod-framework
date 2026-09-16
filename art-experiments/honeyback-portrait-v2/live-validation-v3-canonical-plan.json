@@ -1,0 +1,96 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/honeyback-portrait-v2/live-validation-v3-canonical",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-4b456fbcca2040658610e87f65f01f7e/case-result.json",
+  "visualReview": "scratch/model-route-07f911c982da0402-directenemy-root-review-reviewed.json",
+  "assetFiles": [
+    "art-experiments/honeyback-portrait-v2/honeyback_basecolor.png",
+    "art-experiments/honeyback-portrait-v2/honeyback_portrait_v2.glb"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/honeyback-portrait-v2/runtime-profile-encounter-camera.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-07f911c982da0402-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-97bcf7d128a948b3a80c8d9d052a80c5/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-97bcf7d128a948b3a80c8d9d052a80c5/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBear01",
+        "mesh": "ftkmf_glb_honeyback_portrait_v2.glb",
+        "boneSignature": "680e7f2f63871ffbaf517e4c184b9006078358c09f5427e99959079a867e4fd1"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBear01",
+        "mesh": "ftkmf_glb_honeyback_portrait_v2.glb",
+        "boneSignature": "680e7f2f63871ffbaf517e4c184b9006078358c09f5427e99959079a867e4fd1"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBear01",
+        "mesh": "ftkmf_glb_honeyback_portrait_v2.glb",
+        "boneSignature": "680e7f2f63871ffbaf517e4c184b9006078358c09f5427e99959079a867e4fd1"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3 canonical exact route",
+    "displayName": "Honeyback Bear portrait v2",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "bearB",
+    "nativeChassis": "bearB",
+    "rendererPaths": [
+      "enBear01"
+    ],
+    "sourceRendererIds": [
+      121467
+    ],
+    "binding": {
+      "rendererPath": "enBear01",
+      "mesh": "ftkmf_glb_honeyback_portrait_v2.glb",
+      "boneSignature": "680e7f2f63871ffbaf517e4c184b9006078358c09f5427e99959079a867e4fd1"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact directEnemy source bearB, CEL enBearB(Clone), motion renderer enBear01 and source renderer 121467 only. This archive grants no inheritance to bearA, bearC or another renderer topology.",
+      "The ordinary zero-focus attack used the native bluntSmithHammer without a skill cap or damage fixture and produced native Damaged for 8 HP, from 72 to 64. The disposable party maximum-HP fortification remained active for test survival and is not representative hero balance.",
+      "The explicit KillSingle fixture reduced HP from 64 to 0 with recorded native 1000 damage and a Death trigger. It is fixture death evidence, not ordinary lethal gameplay.",
+      "The source has m_DoRagdoll false and zero rigidbodies. The observed bear_deathHeavy collapse is native animation, not ragdoll evidence.",
+      "All three captures retain the requested 120 frames. The exact renderer remains active, enabled, reported visible and identity-stable through every retained frame. The sampled prone pose persists into the loot sequence, but the later panel occludes most of the target and does not establish exact collision, general corpse lifetime, cleanup causality or final disposal.",
+      "One guarded native Collect action succeeded and strict Ready succeeded at level 0, room 2, with one button.",
+      "Seventeen selected original PNGs were reviewed. Native effects, combat UI, foreground hero overlap, motion blur and the loot panel limit fine inspection in stated frames; the remaining 343 capture PNGs were preserved by hash but not individually reviewed.",
+      "The encounter-camera profile had separate scoped portrait acceptance before this route. This canonical route establishes exact full-body binding, motion and gameplay only; it does not broaden portrait acceptance to other cameras, resolutions or the encounter-row UI.",
+      "This isolated dungeon trial does not prove every bear animation, collision, culling boundaries, alternate materials, long-session resource lifetime, inheritance to another bear source or finished-art acceptance."
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/mossglass-reliquary/live-validation-v5",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-c680def8446e4d7cae5dcf44a2248e88/case-result.json",
+  "visualReview": "scratch/model-route-6d40f2e6eba19a6b-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/mossglass-reliquary/mossglass.glb",
+    "art-experiments/mossglass-reliquary/mossglass.slot0.png",
+    "art-experiments/mossglass-reliquary/mossglass.slot1.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/mossglass-reliquary/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-6d40f2e6eba19a6b-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-6075c3e987a94ab6aaae99c60201888a/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enJellyCube",
+        "mesh": "ftkmf_glb_mossglass.glb",
+        "boneSignature": "320e13b7f80ce3886d35d8718ec2f4b47f84df8210e0ca0ded4513d7c59e65eb"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enJellyCube",
+        "mesh": "ftkmf_glb_mossglass.glb",
+        "boneSignature": "320e13b7f80ce3886d35d8718ec2f4b47f84df8210e0ca0ded4513d7c59e65eb"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enJellyCube",
+        "mesh": "ftkmf_glb_mossglass.glb",
+        "boneSignature": "320e13b7f80ce3886d35d8718ec2f4b47f84df8210e0ca0ded4513d7c59e65eb"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "live-validation-v5",
+    "displayName": "Mossglass Reliquary",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "cubeA",
+    "nativeChassis": "cubeA",
+    "rendererPaths": [
+      "enJellyCube"
+    ],
+    "sourceRendererIds": [
+      121012
+    ],
+    "binding": {
+      "rendererPath": "enJellyCube",
+      "mesh": "ftkmf_glb_mossglass.glb",
+      "boneSignature": "320e13b7f80ce3886d35d8718ec2f4b47f84df8210e0ca0ded4513d7c59e65eb"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "This scope is the exact cubeA / enJellyCube / renderer 121012 source assignment only; Cube E, resource prefabs, sibling cube chassis, and topology peers receive no credit from this record.",
+      "The ordinary no-focus hit reduced health from 58 to 53; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Eighteen selected original PNGs were reviewed; the remaining 342 captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "The fixture drives native deathHeavy_jelly while the active renderer and enabled Animator retain m_DoRagdoll false; the authored geometry leaves view by the sampled early death frames, so this establishes animator-driven disappearance and loot handoff rather than a visible corpse, physics ragdoll, renderer teardown, floor contact, or later corpse lifetime.",
+      "Per-frame readback records fixed slot 0 and the native slot-1 _MainTex scroller advancing at rate (0, 0.2); selected stills establish two visible authored material regions but do not by themselves establish perceptually continuous scrolling, clone independence, or long-session material lifetime.",
+      "The foreground hero, bright impact flare, green particles, UI, and loot depth blur obscure causal hit and death frames; other native attacks, portrait, collision, extended culling, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

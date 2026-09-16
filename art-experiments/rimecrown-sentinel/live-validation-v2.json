@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "asset": "Rimecrown Sentinel",
+  "iteration": "scale0.75 correction; unchanged original geometry",
+  "status": "selected-frame camera fit correction PASS; HUD/effects limits",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "ed82ee6312284357aeb018b5c74a824e",
+    "case": "409df90238c14b3bbfea57147b907960",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_rimecrown",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_rimecrown",
+      "baseEnemy": "snowmanB",
+      "displayName": "Rimecrown Sentinel",
+      "combatProfile": "fe9f828784ae535bae62e5eca1ab1555c493414de30a1fb6e5c65089a52f9339",
+      "renderers": [
+        {
+          "rendererPath": "SnowMan_Geo/enSnowmanHat",
+          "glbFile": "rimecrown_hat.glb",
+          "textureFile": "rimecrown_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "SnowMan_Geo/enSnowmanHead",
+          "glbFile": "rimecrown_head.glb",
+          "textureFile": "rimecrown_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "SnowMan_Geo/enSnowmanBase",
+          "glbFile": "rimecrown_base.glb",
+          "textureFile": "rimecrown_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "SnowMan_Geo/enSnowmanScarf",
+          "glbFile": "rimecrown_scarf.glb",
+          "textureFile": "rimecrown_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "SnowMan_Geo/enSnowmanmiddleBody",
+          "glbFile": "rimecrown_body.glb",
+          "textureFile": "rimecrown_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64,
+      "visualScale": 0.75
+    },
+    "profileInputSha256": "f1e115ace2e91a7ad8641349cd5484987274831bfad1cf4e67356a9ad16197bc",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "assetHashes": {
+    "rimecrown_hat.glb": "2e06ab06acfbbc484665411afd6c9158689047799323f6503060af93b5e8ca88",
+    "rimecrown_basecolor.png": "837d136050c02830a0fc63f8604d9828513338a3d7589d048e09430ce3ccadda",
+    "rimecrown_head.glb": "4eaad129e9d60a86c388696cf2fc2a36c5ca71f5b78636a635dcb33f74fc36b9",
+    "rimecrown_base.glb": "ecb957dbd787399e52937af14f701ff4d45487e751ca93b5b2feb08deb98eab6",
+    "rimecrown_scarf.glb": "06b9a0febba05ab9648305927dd7fcf8723f61d656bc6519725b272092ec2b64",
+    "rimecrown_body.glb": "d668cc2919aae355c94be7e7b39de4e9f5d360283963fa56ecffa7f22a94c423"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-409df90238c14b3bbfea57147b907960/journal.jsonl",
+    "sha256": "3ce4ebbd8f33db2b684e9adaaab69f6da562ab1460abce03e4b935169459a6d5"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "6da0981e2f7546449d327533b582a838",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/2fcdd47b7e6c48faaa56a0a7344fb5db.json",
+        "sha256": "275eac076b811d6196b7950494f84291698a03a8d82f4341722fe2f3a1e4bfc1"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-6da0981e2f7546449d327533b582a838/journal.jsonl",
+        "sha256": "27ea85c07ade55b29c02e8e1b9464c56644b4ab8729495f00ca32bff5313adaf"
+      },
+      "summary": {
+        "path": "art-experiments/rimecrown-sentinel/live-v2/attack-summary.json",
+        "sha256": "6a583b9443295c8bbe41a6e0a34fab21f3a05f70d5dbce496a355806ac77f9a0"
+      },
+      "video": {
+        "path": "art-experiments/rimecrown-sentinel/live-v2/attack.mp4",
+        "sha256": "8cf65b1888a88721cae08c7a6e7a53a77fd3ac4855d3bd9e963e542c5e5182c5"
+      },
+      "reviewedFrames": [
+        0,
+        50,
+        95
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/rimecrown-sentinel/live-v2/attack-0000.png",
+          "sha256": "184050869e772be2dd8902f14f0cd94150e8a6e6eb12356c977ca1d19a9887fa"
+        },
+        {
+          "path": "art-experiments/rimecrown-sentinel/live-v2/attack-0050.png",
+          "sha256": "8afcde2de6ac0ea8b12e59821ddb1a95f7a923880f19207df756fb3703995b4b"
+        },
+        {
+          "path": "art-experiments/rimecrown-sentinel/live-v2/attack-0095.png",
+          "sha256": "17b847cfdf019fd336a869806c0756c4ad9c7d8d015bf56eec6ba802eb307145"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "snowman_idle"
+          ],
+          "sampleCount": 95,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 41,
+              "firstNormalizedTime": 6.778148651123047,
+              "lastNormalizedTime": 9.033150672912598,
+              "gameSeconds": 3.7583389282226562
+            },
+            {
+              "firstFrame": 67,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.36135783791542053,
+              "lastNormalizedTime": 3.22135853767395,
+              "gameSeconds": 4.76666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "snowman_attack2"
+          ],
+          "sampleCount": 25,
+          "occurrences": [
+            {
+              "firstFrame": 42,
+              "lastFrame": 66,
+              "firstNormalizedTime": 0.04608198255300522,
+              "lastNormalizedTime": 0.9627483487129211,
+              "gameSeconds": 2.1999969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "f251d443c40d49d8a175fd62866fc563",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/2b4d3575717d4a85a5a93e32909da178.json",
+        "sha256": "b624d7e800a8a1b651bed1edba1c6525984a2d3c28699c76f1d1a57102e12728"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-f251d443c40d49d8a175fd62866fc563/journal.jsonl",
+        "sha256": "20cac2fc686407e25c3fe002653fc811862cf792f44a2223c27da8e7bdc2fe92"
+      },
+      "summary": {
+        "path": "art-experiments/rimecrown-sentinel/live-v2/nonlethal-hit-summary.json",
+        "sha256": "7390a790aa809490c4bd7174d375d1d2d47ab0d60b6463ffdff89221ec91260a"
+      },
+      "video": {
+        "path": "art-experiments/rimecrown-sentinel/live-v2/nonlethal-hit.mp4",
+        "sha256": "1e139307d1871c8e7787e7972f9691ad8a109984d6fcdb0cb93bcb1bbcc0c85d"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/rimecrown-sentinel/live-v2/nonlethal-hit-0030.png",
+          "sha256": "e7a8e8f09d0c8432c5935f75c7b67e919928b3064db6db13841c1230b9193ca6"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        50
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "snowman_idle"
+          ],
+          "sampleCount": 83,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 21.37126922607422,
+              "lastNormalizedTime": 22.74627685546875,
+              "gameSeconds": 2.2916641235351562
+            },
+            {
+              "firstFrame": 36,
+              "lastFrame": 65,
+              "firstNormalizedTime": 0.14027215540409088,
+              "lastNormalizedTime": 1.7352715730667114,
+              "gameSeconds": 2.6583328247070312
+            },
+            {
+              "firstFrame": 93,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.40499943494796753,
+              "lastNormalizedTime": 1.8349987268447876,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "snowman_damage"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 35,
+              "firstNormalizedTime": 0.171875,
+              "lastNormalizedTime": 0.9453125,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "snowman_attack3"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 66,
+              "lastFrame": 92,
+              "firstNormalizedTime": 0.0,
+              "lastNormalizedTime": 0.9930552244186401,
+              "gameSeconds": 2.3833389282226562
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "3c7cb816f2f34b86a1fdd4e441b779ad",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/20b08538eac74cdea27901bcea4b6a2f.json",
+        "sha256": "81ae0720d5690b51f0fd44e81076a61c799ca93306d45fe25847ca124f6847da"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-3c7cb816f2f34b86a1fdd4e441b779ad/journal.jsonl",
+        "sha256": "86c643dc518baa025336dcbb287b0db84e3799a66dd0fabb53b068c0f6486791"
+      },
+      "summary": {
+        "path": "art-experiments/rimecrown-sentinel/live-v2/kill-fixture-death-summary.json",
+        "sha256": "13b6e8b1b35a8daa2ec81cace442c8a297b619a449677926e21136bf372cb4cb"
+      },
+      "video": {
+        "path": "art-experiments/rimecrown-sentinel/live-v2/kill-fixture-death.mp4",
+        "sha256": "2329180d6d0bd8a9f8f206db61112a5a460c7477db2feca685c613047e55deae"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/rimecrown-sentinel/live-v2/kill-fixture-death-0040.png",
+          "sha256": "c06571f9f1bb552e75e874005607549ec2363ff0c8b690c9aefbfc0b25d6182e"
+        },
+        {
+          "path": "art-experiments/rimecrown-sentinel/live-v2/kill-fixture-death-0060.png",
+          "sha256": "c088b32ca98ce93e4b059c181133df7806ca6296547a2c8d2d98b2ec23e3e189"
+        }
+      ],
+      "hpBeforeAfter": [
+        50,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "snowman_idle"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 17.57990074157715,
+              "lastNormalizedTime": 18.95490837097168,
+              "gameSeconds": 2.291656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "snowman_deathDirect"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10185185074806213,
+              "lastNormalizedTime": 4.8379621505737305,
+              "gameSeconds": 8.524993896484375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Idle crown clears HUD; attack crown onscreen at50 but overlaps native health banner/effects. Hit30 obscured by dust/hero. Native upperpart falloff and rootweighted base persist with no obvious new stretch in reviewed views.",
+    "limits": "Selected-frame fit correction only; HUD/effects occlusion remains. No broad animation/culling or flawless art acceptance."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "collect1": {
+      "path": "scratch/rimecrown-v2-collect1.json",
+      "sha256": "aa53d6d7fae542358c77e845d63332e18ea5d6dea7381c463e4dbb0dc779119a"
+    },
+    "collect2": {
+      "path": "scratch/rimecrown-v2-collect2.json",
+      "sha256": "ee02641190df6c68187b79cd2366fe427fc22c92fa9325790455f86ee7f32cc1"
+    },
+    "ready": {
+      "path": "scratch/rimecrown-v2-after-collect2.json",
+      "sha256": "e50eee5bff2ac05d3bf446f3b4d5d8d7d5795b3fd776576666297abd902e27b2"
+    },
+    "result": "two guarded Collect actions; strict Ready0/2"
+  },
+  "nativeBaseWeightEvidence": {
+    "path": "scratch/rimecrown-native-base-weights.json",
+    "sha256": "1430093633ad5ed6a5c8bc9ce14cc0f0908f19b378d8aa439ff67a08f1e5418b"
+  },
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/rime-briar-corrections-20260906-112343/deployment.json",
+    "sha256": "826527cbf8195f647f08e1f6d07235bf0a0dc2d6df1b294ae474835b433c7c54"
+  },
+  "binaryAndCatalogHashes": {
+    "BepInEx/plugins/FTKModFramework.dll": "bb8497a412721f102d914af55744d7952e955ba07b5c9443beb68a00713b7ef3",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "bfa5866ec261bce0adf508c5708864743a59dadb400526d65d45c2e5cd8b0404",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "329771384cd6d4ba5dfa68d4557e7675cf0145166fcffb60344c886940a517af",
+    "model-test-profiles.json": "f1e115ace2e91a7ad8641349cd5484987274831bfad1cf4e67356a9ad16197bc",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65"
+  },
+  "parentReview": {
+    "path": "scratch/rimecrown-v2-review.json",
+    "sha256": "5cb845c10f6c67143b6ad5388f3ee97e928f297add33444fd80c38ddb6544f5c"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/basilight-cockatrice/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-417e74fe1b6d465496ce0a2d6efe4d67/case-result.json",
+  "visualReview": "scratch/model-route-678c8066b33cf823-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/basilight-cockatrice/basilight.glb",
+    "art-experiments/basilight-cockatrice/basilight_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/basilight-cockatrice/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-678c8066b33cf823-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-33671e6380b84e3494ff6422856331b0/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enChicken",
+        "mesh": "ftkmf_glb_basilight.glb",
+        "boneSignature": "d67f423326819a6956e5a278559a0d620b1fd3517b52a59c94840fdf84bbcb69"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enChicken",
+        "mesh": "ftkmf_glb_basilight.glb",
+        "boneSignature": "d67f423326819a6956e5a278559a0d620b1fd3517b52a59c94840fdf84bbcb69"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enChicken",
+        "mesh": "ftkmf_glb_basilight.glb",
+        "boneSignature": "d67f423326819a6956e5a278559a0d620b1fd3517b52a59c94840fdf84bbcb69"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Basilight Cockatrice",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "cockatriceC",
+    "nativeChassis": "cockatriceC",
+    "rendererPaths": [
+      "enChicken"
+    ],
+    "sourceRendererIds": [
+      121484
+    ],
+    "binding": {
+      "rendererPath": "enChicken",
+      "mesh": "ftkmf_glb_basilight.glb",
+      "boneSignature": "d67f423326819a6956e5a278559a0d620b1fd3517b52a59c94840fdf84bbcb69"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native cockatriceC / enChicken / renderer 121484 source assignment only; no Cockatrice A controller, boss bind variant, resource rig, sibling chassis, or topology receives credit from this record.",
+      "The ordinary no-focus hit reduced health from 72 to 62; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Eighteen selected original PNGs were reviewed; the remaining 342 captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "The fixture drives the native Cockatrice_DeathHuge animation through an intact recoil, backward fall, and coherent prone custom-mesh corpse that remains sampled behind the loot overlay; native m_DoRagdoll remains false and this does not establish ordinary lethal behavior or later corpse lifetime.",
+      "The causal Damaged and Death impact frames are strongly occluded by the foreground hero and bright effects; recovery and the death fall remain readable, and no sampled neck gap, shoulder separation, detached wing, missing leg, tail break, floor clipping, or viewport clipping was observed.",
+      "Other native attacks, portrait, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

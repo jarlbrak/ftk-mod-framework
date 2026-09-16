@@ -1,0 +1,74 @@
+{
+  "status": "SOURCE_RECONCILED_ONLY_NO_LIVE_ACCEPTANCE",
+  "nativeRows": 7,
+  "nativeRenderers": [
+    121217,
+    121218,
+    121221,
+    121219,
+    121220
+  ],
+  "nativeCombatControllers": [
+    5983,
+    5982
+  ],
+  "nextDiagnostic": "deathknightA exact121217",
+  "sourcePinsCount": 15,
+  "artifactPinsCount": 16,
+  "sourceFindingsSha256": "c66ac6a154ceb90ab4c2bd6182b458ee10da5b9bdc08834b4cfc65bac3216c0c",
+  "losslessMappings": [
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/deathknight-native-topology-analysis/README.md",
+      "archive": "docs/evidence/deathknight-native-source-v1/README.md",
+      "sha256": "cc0fad21e0f2958ede92d06956544fd315f47a6ac5034dd40dfd9dc312e83c1d"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/deathknight-native-topology-analysis/findings.json",
+      "archive": "docs/evidence/deathknight-native-source-v1/findings.json",
+      "sha256": "c66ac6a154ceb90ab4c2bd6182b458ee10da5b9bdc08834b4cfc65bac3216c0c"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/deathknight-native-topology-analysis/source-pins.json",
+      "archive": "docs/evidence/deathknight-native-source-v1/source-pins.json",
+      "sha256": "84144d610af454b605460df1c0b8131e8b8352bd68589d117e62022713233352"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/deathknight-native-topology-analysis/artifact-pins.json",
+      "archive": "docs/evidence/deathknight-native-source-v1/artifact-pins.json",
+      "sha256": "7139f2fffd0c843aac3fb4845d872347ff2daf9ab36c0e19ff3f69573ff089d4"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/deathknight-native-topology-analysis/reconcile.py",
+      "archive": "docs/evidence/deathknight-native-source-v1/reconcile.py",
+      "sha256": "49c7cbfe0d1231905b96bcfeb5ad87a0f1b41d65c8a8bab5526c5f0e089f2040"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/deathknight-native-topology-analysis/finalize_findings.py",
+      "archive": "docs/evidence/deathknight-native-source-v1/finalize_findings.py",
+      "sha256": "77e9ebb2175e17c2185ab1e6a9226198433a8775423932c8255a70c3df7dc137"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/deathknight-root-source-review.json",
+      "archive": "docs/evidence/deathknight-native-source-v1/deathknight-root-source-review.json",
+      "sha256": "03ce4f0081d51f4ce9ec4877ac01aa972f0bc638ff9b99159cfc93c0a912a06c"
+    }
+  ],
+  "excludedLocalArtifacts": [
+    "AttackSchedule.cs",
+    "CharacterDummy.cs",
+    "CharacterEventListener.cs",
+    "EnemyDummy.cs",
+    "FTK_enemyCombat.cs",
+    "FTK_proficiencyTable.cs",
+    "Weapon.cs",
+    "extraction-output.txt",
+    "extraction-stderr.txt",
+    "finalization-output.txt",
+    "native-metadata.json"
+  ],
+  "limits": [
+    "No decompiled C#, native asset payload, raw native metadata or geometry is archived. Hash references remain available for local verification.",
+    "Source equality and risk classification only; no runtime acceptance, original model acceptance or live PASS count contribution.",
+    "Reproduction scripts expect ignored local source assets and scratch mapping."
+  ]
+}

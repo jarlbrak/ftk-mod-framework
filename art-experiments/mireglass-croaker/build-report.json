@@ -1,0 +1,41 @@
+{
+  "name": "Mireglass Croaker",
+  "status": "PASS_ORIGINAL_BIND_AUTHORED",
+  "artScope": "Original marsh-dragon geometry and palette; offline binary/bind validation only.",
+  "authoringNativeSurfaceRead": false,
+  "validationReadsNativeReference": true,
+  "allowedReferenceFields": [
+    "bone_names",
+    "bindposes"
+  ],
+  "target": {
+    "nativeEnemy": "acidBlobB",
+    "rendererPath": "enAcidMonster",
+    "sourceRendererId": 121345,
+    "controller": "AcidBlobController",
+    "controllerId": 5931,
+    "joints": 32
+  },
+  "reference": {
+    "path": "scratch/acidblob-b-reference-v1/reference.npz",
+    "sha256": "150613e163b727840722fcc4475dc3aea2fbe2f37501e2f949977281ff96df26"
+  },
+  "assets": {
+    "mireglass": {
+      "glbSha256": "821d317864ea8d6c68ee2d48bbc402a28c54082abbec982c5f8da5671f281565",
+      "vertices": 10386,
+      "triangles": 3462,
+      "paletteBones": 32,
+      "allPaletteBonesWeighted": true,
+      "maxBindRestError": 7.767770426880816e-08
+    },
+    "palette": {
+      "sha256": "9f4831a5241192064dc4dc68371743d0e392d723c10870d06c2f025ca41b71d4",
+      "bytes": 6315
+    }
+  },
+  "limits": [
+    "Offline bind validation does not establish runtime renderer selection, animation, materials, culling, portraits, or gameplay.",
+    "acidBlobA evidence does not establish acidBlobB binding or visual acceptance."
+  ]
+}

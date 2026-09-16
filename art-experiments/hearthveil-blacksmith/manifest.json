@@ -1,0 +1,115 @@
+{
+  "name": "Hearthveil Blacksmith",
+  "status": "LIVE_BINDING_COMBAT_EQUIPMENT_CLEANUP_AND_PROGRESSION_VALIDATED_PREVIEW_PENDING",
+  "artStatus": "Original low-poly forge guardian with a teal metal, copper, ember, and hooded-cloth visual language. Sampled in-game combat review is coherent; character-creation preview and final artistic approval remain pending.",
+  "nativeSurfaceCopied": false,
+  "target": {
+    "baseClass": "blacksmith",
+    "skinset": "blacksmith_Female",
+    "nativeAvatar": "Player_Blacksmith",
+    "celComponentPathId": "137599",
+    "overworldController": "playerOverworldController",
+    "overworldControllerId": 5981,
+    "combatController": "player_1H_Blunt_Combat",
+    "body": {
+      "rendererPath": "playerBlacksmith",
+      "rendererSourceId": 121067,
+      "paletteBones": 24
+    },
+    "hairTop": {
+      "rendererPath": "hairTop",
+      "rendererSourceId": 121083,
+      "paletteBones": 6
+    },
+    "hairBottom": {
+      "rendererPath": "hairBottom",
+      "rendererSourceId": 121178,
+      "representativeBindingSourceId": 121083,
+      "paletteBones": 6
+    },
+    "apparel": [
+      {
+        "rendererPath": "armorBlacksmithF(Clone)",
+        "expectedNativeMeshName": "armorBlacksmith",
+        "rendererSourceId": 121248,
+        "paletteBones": 19,
+        "profileAsset": "hearthveil-default-armor.glb"
+      },
+      {
+        "rendererPath": "bootsBlacksmith(Clone)",
+        "expectedNativeMeshName": "bootsBlacksmith",
+        "rendererSourceId": 121113,
+        "paletteBones": 10,
+        "profileAsset": "hearthveil-boots.glb"
+      },
+      {
+        "rendererPath": "armorGambesonF(Clone)",
+        "expectedNativeMeshName": "armorGambesonF",
+        "rendererSourceId": 121211,
+        "paletteBones": 28,
+        "profileAsset": "hearthveil-gambeson.glb"
+      }
+    ]
+  },
+  "profile": {
+    "key": "ftkmf_modeltest_player_hearthveil_blacksmith_female",
+    "document": "runtime-profile.json",
+    "startingArmor": "armorCloth1",
+    "defaultOutfit": [
+      "playerBlacksmith",
+      "hairTop",
+      "hairBottom",
+      "armorBlacksmithF(Clone)",
+      "bootsBlacksmith(Clone)"
+    ],
+    "equippedOutfit": [
+      "playerBlacksmith",
+      "hairTop",
+      "hairBottom",
+      "armorGambesonF(Clone)",
+      "bootsBlacksmith(Clone)"
+    ]
+  },
+  "authoringContract": {
+    "referenceLocalOnly": [
+      "scratch/skeleton-audit/121067/reference.npz",
+      "scratch/skeleton-audit/121083/reference.npz",
+      "scratch/all-raw-rig-audit/121248/reference.npz",
+      "scratch/all-raw-rig-audit/121113/reference.npz",
+      "scratch/all-raw-rig-audit/121211/reference.npz"
+    ],
+    "permittedReferenceInputs": [
+      "bone_names",
+      "bindposes"
+    ],
+    "forbiddenReferenceInputs": [
+      "native surfaces",
+      "native textures",
+      "native UVs",
+      "native weights",
+      "native animation samples"
+    ],
+    "proof": "original-geometry-proof.json"
+  },
+  "originalAssets": {
+    "hearthveil-body.glb": "ddb8691011173d8de1a1e48260dd99b9b2d88f91ecabb207bc922286d439f634",
+    "hearthveil-hair-top.glb": "40f55b523dd9d2a5827b6e9bdced2dfb70a69faab0a86bd894462ed3c155dbae",
+    "hearthveil-hair-bottom.glb": "855233f93cd71ecf1173251723d76def70d3cf8ef33657b4f9003728ffd07973",
+    "hearthveil-default-armor.glb": "d0bdb4ee5b1c4afae68d93345df7a9601fc1b628406733cec59ecea396214298",
+    "hearthveil-boots.glb": "5b91bc4e437e5b238ca0b3eb8f1c1c83d21110cb4a89f86ed92bbed38e814d16",
+    "hearthveil-gambeson.glb": "704d3fc7b57eb94d9b4e522f9584f51078245f7ba5da2683a0fe0ce8363da207",
+    "hearthveil-palette.png": "ba99d7ab57a505286b323a7054a9376172b241fa3d51694a5f159c26d072e7fb"
+  },
+  "checks": {
+    "binaryAndSkinContract": "PASS: six original GLBs validate against their exact target bind contract, including all palette bones with positive authored weight.",
+    "sourceProvenance": "PASS: deterministic rebuild with every NPZ read restricted to bone_names and bindposes reproduced all authored source JSON, piece manifests, and palette bytes.",
+    "studio": "PASS: Blender renders use only the authored source JSON and palette. Default and equipped apparel branches are reviewed separately.",
+    "liveBinding": "PASS WITH PREVIEW PENDING: class ID 113 deployed and both live overworld/combat owners carried the five expected custom renderer assignments under the default and Gambeson branches. The native character-creation preview owner was unavailable while the local UI was locked.",
+    "liveMotion": "PASS: fixed-step 120-frame native Gambeson attack and pass captures retained exact mesh identity. The attack observed enemy HP 72 to 62; the pass observed native damageLight_blunt1H responses and hero HP 970 to 913.",
+    "liveEquipment": "PASS: guarded native item59 Body/Backpack sequence 1/0 to 0/1 to 1/0 rebuilt both owners, selecting custom default armor then custom Gambeson while body, hair, and boots remained custom.",
+    "liveCleanup": "PASS FOR WATCHED RETIRED OWNERS: old leases 4 and 6 were absent and all 15 pinned assets for each were Unity-null after the successive native rebuilds.",
+    "liveProgression": "PASS: after the player pass, a guarded fixture victory entered normal native Loot and two guarded native Collect votes reached strict Ready at level 0, room 3.",
+    "livePreview": "PENDING: open the native character-creation UI on an unlocked local Mac and inspect the registered Blacksmith Female preview owner."
+  },
+  "limits": "This package has scoped live combat, equipment, cleanup, and native progression evidence, but does not yet have character-creation preview evidence or final artistic approval. Native backpack, helmet, shield, and hammer remain rigid MeshRenderer attachments outside this five-SMR package and may obscure parts of the silhouette. It does not claim other Blacksmith skinsets, weapons, apparel, player classes, culling, portraits, multiplayer, controller variants, player death, final-owner teardown, or final artistic approval."
+}

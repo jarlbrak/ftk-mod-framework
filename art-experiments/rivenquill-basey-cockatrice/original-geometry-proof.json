@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "scope": "Deterministic original-geometry rerun; it establishes byte-identical authored outputs, not studio or live acceptance.",
+  "method": "The authoring phase reads only ordered bone_names and inverse bind matrices; both resource references are checked for an exact shared palette before export.",
+  "references": [
+    {
+      "path": "scratch/basey-cockatrice-boss-reference-v1/reference.npz",
+      "sha256": "f4e29ed00ed5459aced738b0835cb12e113d99b13f34201ef10721562231c399"
+    },
+    {
+      "path": "scratch/basey-cockatrice-small-reference-v1/reference.npz",
+      "sha256": "f4e29ed00ed5459aced738b0835cb12e113d99b13f34201ef10721562231c399"
+    }
+  ],
+  "generatorSha256": "ea2df145c24da30562a8922b123be1427115c6677f25b03534dd81677f13244c",
+  "files": [
+    {
+      "file": "rivenquill.glb",
+      "sha256": "5accc076dfb5ef0e11b4193bada85ac6778961db767b24be0acb758fda411f1f",
+      "reproduced_identical": true
+    },
+    {
+      "file": "rivenquill-palette.png",
+      "sha256": "30db7fc5ef913c6329ad3d6f22faf149ef89f5d1256afee028e4d8ef91ebd47c",
+      "reproduced_identical": true
+    },
+    {
+      "file": "rivenquill.source.json",
+      "sha256": "1690d6b5ab44ec42e060f7e995ea67d1aa97e7bf49594a819eeb85d4453f16db",
+      "reproduced_identical": true
+    },
+    {
+      "file": "rivenquill.pieces.json",
+      "sha256": "827f43b373a6bb0051a01d104c11d6e6a5e62c83be910d2b421b4a447db3253d",
+      "reproduced_identical": true
+    }
+  ]
+}

@@ -1,0 +1,354 @@
+{
+  "schemaVersion": 1,
+  "asset": "Briarback Guardian",
+  "iteration": "explicit head portrait marker correction; unchanged geometry",
+  "status": "both native UI portraits face correctly; scoped body motion; partial death retained",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "ed82ee6312284357aeb018b5c74a824e",
+    "case": "90883feba34f40939260be19fcd3ec44",
+    "mode": "next-case",
+    "enemy": "ftkmf_modeltest_briarback",
+    "class": null,
+    "profile": {
+      "key": "ftkmf_modeltest_briarback",
+      "baseEnemy": "yetiBoss",
+      "resourcePrefab": "enyeti",
+      "displayName": "Briarback Guardian",
+      "combatProfile": "3f19ee4c9ca672b41fd1a7ba596834d812454428f8bc942b64c051fa37745414",
+      "renderers": [
+        {
+          "rendererPath": "Yeti",
+          "glbFile": "briarback.glb",
+          "textureFile": "briarback_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64,
+      "portraitMarkerPath": "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/EncounterCam"
+    },
+    "profileInputSha256": "f1e115ace2e91a7ad8641349cd5484987274831bfad1cf4e67356a9ad16197bc",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "assetHashes": {
+    "briarback.glb": "5d13253a33264433a0c4e75a609696b4601a83fd931caff7f82d6d159f21d0ca",
+    "briarback_basecolor.png": "f9a92bb2f716be581d099f4176149532cbea4a6024db840f4c756ae3cc28736b"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-90883feba34f40939260be19fcd3ec44/journal.jsonl",
+    "sha256": "215d990861a436c75967220c24cd78e980497f7614a19a0c3b61357be1395116"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "66bb5cd3a7584115894b0f9788fdc280",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/8fba145e156040aba8e6f549b8d1daa3.json",
+        "sha256": "12bcb0a8d905ed1a9f824d642942e23a2814a1c87c30f58ee61e212c1cece11f"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-66bb5cd3a7584115894b0f9788fdc280/journal.jsonl",
+        "sha256": "3d91a5134c57ed5e1df5956a30617c6a510b8958881bff6294445208be106990"
+      },
+      "summary": {
+        "path": "art-experiments/briarback-guardian/live-v2/attack-summary.json",
+        "sha256": "c114fc1eae1dda863fea905bcba60db12030ceffa814486f40608c46abac4f78"
+      },
+      "video": {
+        "path": "art-experiments/briarback-guardian/live-v2/attack.mp4",
+        "sha256": "c0e9027fe685d28087ebd4634dfbf3558caa42cc979b3584f776d55124870906"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/briarback-guardian/live-v2/attack-0000.png",
+          "sha256": "58a490f735521d3645edf998e0b1ea640d937dd4cc739c1c19f99dafad457ff7"
+        },
+        {
+          "path": "art-experiments/briarback-guardian/live-v2/attack-0050.png",
+          "sha256": "0b5dd30b3d0b75167f0cc5e22d4af828fe04c915049db11fa8aed66ea83f2486"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "requestedFrames": 120,
+      "captureReportedOk": true,
+      "captureError": null,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908355712890625,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_bruteUnarmed"
+          ],
+          "sampleCount": 96,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 48,
+              "firstNormalizedTime": 19.516324996948242,
+              "lastNormalizedTime": 21.716337203979492,
+              "gameSeconds": 4.4000244140625
+            },
+            {
+              "firstFrame": 73,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.07988013327121735,
+              "lastNormalizedTime": 2.188214063644409,
+              "gameSeconds": 4.2166748046875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "attackProf_bruteUnarmed"
+          ],
+          "sampleCount": 24,
+          "occurrences": [
+            {
+              "firstFrame": 49,
+              "lastFrame": 72,
+              "firstNormalizedTime": 0.05742961913347244,
+              "lastNormalizedTime": 0.9610011577606201,
+              "gameSeconds": 2.10833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "9dae5b6e4c9f41eeba42ebc17e914a24",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/4df0147eaa2149e590e1c409b1054238.json",
+        "sha256": "4d7a1544ff28cd021203c08368d5c1d9c8eb3c6bf3e391bd28be043772a4e823"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-9dae5b6e4c9f41eeba42ebc17e914a24/journal.jsonl",
+        "sha256": "3bf7d61b37fbeb2711c14026c9c4e216af43f4399d478b1661c27b4c9d40f34b"
+      },
+      "summary": {
+        "path": "art-experiments/briarback-guardian/live-v2/nonlethal-hit-summary.json",
+        "sha256": "f0021bc7bed4a794470e4c63d596acce0f2170d2119c88eb3d9285c8dc6e2608"
+      },
+      "video": {
+        "path": "art-experiments/briarback-guardian/live-v2/nonlethal-hit.mp4",
+        "sha256": "0087451094bc14b8a0e8b693f050f28a01fc43bf042d6b50c1c1d1e7294ee204"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/briarback-guardian/live-v2/nonlethal-hit-0030.png",
+          "sha256": "73d688741dc8a333e9ee74d7268b36984a652362191364bead96f5617e61e284"
+        }
+      ],
+      "hpBeforeAfter": [
+        153,
+        148
+      ],
+      "frameCount": 120,
+      "requestedFrames": 120,
+      "captureReportedOk": true,
+      "captureError": null,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_bruteUnarmed"
+          ],
+          "sampleCount": 81,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 13.265788078308105,
+              "lastNormalizedTime": 14.411627769470215,
+              "gameSeconds": 2.291656494140625
+            },
+            {
+              "firstFrame": 37,
+              "lastFrame": 67,
+              "firstNormalizedTime": 0.22854042053222656,
+              "lastNormalizedTime": 1.6035408973693848,
+              "gameSeconds": 2.75
+            },
+            {
+              "firstFrame": 96,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13452376425266266,
+              "lastNormalizedTime": 1.1886906623840332,
+              "gameSeconds": 2.10833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damageSmall_bruteUnarmed"
+          ],
+          "sampleCount": 11,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 36,
+              "firstNormalizedTime": 0.16418671607971191,
+              "lastNormalizedTime": 0.9499010443687439,
+              "gameSeconds": 0.916656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "attackCrit_bruteUnarmed"
+          ],
+          "sampleCount": 28,
+          "occurrences": [
+            {
+              "firstFrame": 68,
+              "lastFrame": 95,
+              "firstNormalizedTime": 0.07021079957485199,
+              "lastNormalizedTime": 0.9983360171318054,
+              "gameSeconds": 2.475006103515625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "2f00126014394b75bb79e73835b047a0",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/347fc4dc868744e19da7d2f19318fc56.json",
+        "sha256": "5aa39319e49f4377f947b0a45084ef36d5001a7e819edc38d140f1c1aaf6d87a"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-2f00126014394b75bb79e73835b047a0/journal.jsonl",
+        "sha256": "8af529438352d527fd9f330047c5cc1f0bc49502c60ee1a60a4fb92682703f43"
+      },
+      "summary": {
+        "path": "art-experiments/briarback-guardian/live-v2/kill-fixture-death-summary.json",
+        "sha256": "8ca68c7ecb2fc3814c1f8152828830713ae296be4dda18d32b82b8ff3c951aac"
+      },
+      "video": {
+        "path": "art-experiments/briarback-guardian/live-v2/kill-fixture-death.mp4",
+        "sha256": "dad2c0c08dc056e5e6091093a860efd3348c132b39ff1eca8c82d15ace4bf94b"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/briarback-guardian/live-v2/kill-fixture-death-0040.png",
+          "sha256": "d70e6b7a960c09b4f447a713d2e5d3f3909d446d3e551e035fcb8717c40b919c"
+        },
+        {
+          "path": "art-experiments/briarback-guardian/live-v2/kill-fixture-death-0060.png",
+          "sha256": "b0c8f37169d17bfeb2ce9ea19698b430d9fd86b98a37786e4712da71f7906ca4"
+        }
+      ],
+      "hpBeforeAfter": [
+        148,
+        0
+      ],
+      "frameCount": 95,
+      "requestedFrames": 120,
+      "captureReportedOk": false,
+      "captureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__112.MoveNext () [0x00000] in <filename unknown>:0 ",
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 8.616668701171875,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_bruteUnarmed"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 24.324472427368164,
+              "lastNormalizedTime": 25.516145706176758,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathHuge_bruteUnarmed"
+          ],
+          "sampleCount": 67,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 93,
+              "firstNormalizedTime": 0.16499999165534973,
+              "lastNormalizedTime": 0.16499999165534973,
+              "gameSeconds": 6.04998779296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Turn strip and enemy health panel portraits frame face at0/50. Body remains coherent in hit/collapse views.",
+    "limits": "Portrait correction passes selected nativeUI views. Death95/120RendererDestroyed remains a failed partial capture; full death and culling pending."
+  },
+  "timing": "Attack/hit120frames; death95retained of120requested with RendererDestroyed. Replays12fps with no inserted death frames; not real-time performance.",
+  "progress": {
+    "afterDeath": {
+      "path": "scratch/briarback-v2-after-death.json",
+      "sha256": "ea6bffcdd28a73c8b0e5378c31afbd61b83a82dffe539e5fa998cb66150f5eff"
+    },
+    "result": "automatic strict Ready0/3; no Collect"
+  },
+  "portraitSource": {
+    "path": "scratch/yeti-portrait-source-landmarks.json",
+    "sha256": "2af6cb013a246a9ca7a6239c1825136d5b4f0d86bda8f076b259db901b01931a"
+  },
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/rime-briar-corrections-20260906-112343/deployment.json",
+    "sha256": "826527cbf8195f647f08e1f6d07235bf0a0dc2d6df1b294ae474835b433c7c54"
+  },
+  "binaryAndCatalogHashes": {
+    "BepInEx/plugins/FTKModFramework.dll": "bb8497a412721f102d914af55744d7952e955ba07b5c9443beb68a00713b7ef3",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "bfa5866ec261bce0adf508c5708864743a59dadb400526d65d45c2e5cd8b0404",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "329771384cd6d4ba5dfa68d4557e7675cf0145166fcffb60344c886940a517af",
+    "model-test-profiles.json": "f1e115ace2e91a7ad8641349cd5484987274831bfad1cf4e67356a9ad16197bc",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65"
+  },
+  "portraitSelectionLog": {
+    "path": "scratch/briarback-v2-portrait-log.txt",
+    "sha256": "7193c49c7e4e2d7038bcbc1acd746d87520ba7eb8e94f8661472fe3cb063cee5"
+  },
+  "portraitMarkerPath": "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/EncounterCam"
+}

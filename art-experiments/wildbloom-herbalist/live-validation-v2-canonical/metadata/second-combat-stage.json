@@ -1,0 +1,268 @@
+{
+  "status": "binding_metadata_observed",
+  "enemy": "ftkmf_modeltest_cairnfire_trollb",
+  "companionEnemy": null,
+  "matches": [
+    {
+      "rendererPath": "enTroll01",
+      "glbFile": "cairnfire-trollb.glb",
+      "rendererInstanceId": -248582,
+      "ownerInstanceId": 369188,
+      "rendererKind": "SkinnedMeshRenderer",
+      "meshFilterInstanceId": null,
+      "materialInstanceId": -248964,
+      "boneSignature": "fb452d83882447420a1beecc09d88cbf4e12a775fda39d57944a486c9c3fe402"
+    }
+  ],
+  "finalState": {
+    "inSession": true,
+    "singlePlayer": true,
+    "day": 0,
+    "timeIndex": 0,
+    "round": 0,
+    "questId": -10,
+    "questObjectiveKey": "oneline0",
+    "questDestRealm": 1178465130,
+    "questComplete": false,
+    "questIsLast": true,
+    "currentTurnFid": {
+      "turnIndex": 0,
+      "photonId": 1
+    },
+    "party": [
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "name": "Player 1",
+        "classId": 114,
+        "hp": 999,
+        "maxHp": 999,
+        "focus": 4,
+        "maxFocus": 4,
+        "gold": 46,
+        "level": 1,
+        "xp": 38,
+        "actionPoints": 0,
+        "spentFocus": 0,
+        "realmId": 1178465130,
+        "hexBig": null,
+        "hexSmall": null,
+        "pos": {
+          "x": 113.99827575683594,
+          "y": 0,
+          "z": 82.47900390625
+        }
+      }
+    ],
+    "combat": {
+      "active": true,
+      "liveCombatants": 2,
+      "currentEnemyFid": {
+        "turnIndex": 0,
+        "photonId": -1
+      },
+      "whoseTurn": {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "isPlayer": true,
+        "source": "m_FightOrder[0]"
+      },
+      "heroTurnReady": true,
+      "readyParts": {
+        "initialized": true,
+        "fsmState": "Wait For Stance",
+        "actingFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        }
+      },
+      "enemies": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "name": "Cairnfire Troll B",
+          "type": "ftkmf_modeltest_cairnfire_trollb",
+          "hp": 72,
+          "hpMax": 72,
+          "alive": true
+        }
+      ],
+      "liveEnemies": 1,
+      "stuck": false,
+      "winningPlayerFid": {
+        "turnIndex": 0,
+        "photonId": 1
+      },
+      "fightOrder": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 0
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 0.5345687866210938
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 1.6393442153930664
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 2.708481788635254
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 3.278688430786133
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 4.882394790649414
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 4.918032646179199
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 6.557376861572266
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 7.056307792663574
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 8.196721076965332
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 9.230220794677734
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 9.836065292358398
+        }
+      ],
+      "abilities": [
+        {
+          "profId": 36,
+          "index": 0,
+          "label": "hammerSplash",
+          "name": "hammerSplash",
+          "buttonEnabled": true
+        }
+      ],
+      "driver": null
+    },
+    "dungeon": {
+      "inDungeon": true,
+      "inCombat": true,
+      "dungeonId": "FloodedCrypt",
+      "level": 0,
+      "room": 2,
+      "levelCount": 2,
+      "roomCount": 5,
+      "currentRoomType": "Enemy",
+      "encounterObjects": [
+        "ftkmf_modeltest_cairnfire_trollb"
+      ],
+      "inLastRoom": false,
+      "atLastLevel": false,
+      "cleared": false,
+      "deactivated": false,
+      "driver": null
+    },
+    "map": {
+      "realmId": 1178465130,
+      "tile": {
+        "big": 71,
+        "small": 17
+      },
+      "stageIndex": 0,
+      "hasPOI": true,
+      "poiType": "Dungeon",
+      "reachableTiles": [
+        {
+          "big": 71,
+          "small": 9
+        },
+        {
+          "big": 82,
+          "small": 2
+        },
+        {
+          "big": 83,
+          "small": 8
+        },
+        {
+          "big": 83,
+          "small": 13
+        }
+      ],
+      "objective": {
+        "big": 71,
+        "small": 17
+      }
+    },
+    "choices": [],
+    "signals": {
+      "inCombat": true,
+      "modalOpen": false,
+      "modalType": null,
+      "choiceOpen": false,
+      "allDead": false,
+      "victoryShowing": false,
+      "warnings": [],
+      "victoryArmed": false
+    },
+    "phase": "combat"
+  },
+  "partyFixture": null,
+  "heroDamageFixture": null,
+  "session": "c293b02ed0f34e589867d6aeeed747b2",
+  "journal": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-7a669b7973704b1ebb9286a4a8312708/journal.jsonl",
+  "limitations": "No appearance, motion, gameplay, material-quality or full asset-content acceptance.",
+  "storyBoundary": "Story during combat is never auto-operated; pending_story_message is not capture readiness."
+}

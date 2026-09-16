@@ -1,0 +1,37 @@
+{
+  "schema": "ftkmf.material-lifecycle-evidence.v1",
+  "evidence": {
+    "request": {
+      "path": "request.json",
+      "sha256": "7e9b99516d5c8ca9299b8bb3f690da6f78d5150eed87ad74cbce58ed428ac060"
+    },
+    "result": {
+      "path": "result.json",
+      "sha256": "2fcd8f81015dae984bf04e600ff7b8eddcb45485f0a8f29b8587e6f4e6b3e8c4"
+    },
+    "before-ready": {
+      "path": "before-ready.json",
+      "sha256": "5f4172ff317c47c59bbc6dd0bdfa0fde3188abb089989a95c9665318cf4019a1"
+    },
+    "after-ready": {
+      "path": "after-ready.json",
+      "sha256": "2ca80db8a549f2f3136ce87d5a26583c1457aab4f62399e8ef3cd203f91f92ab"
+    },
+    "deployment": {
+      "path": "deployment.json",
+      "sha256": "a560ff047f830906eb5380c59ce8c21299b6c8219d577b5d16bd8c842bc1abed"
+    },
+    "helper-review": {
+      "path": "helper-review.json",
+      "sha256": "7765e8b01c16d072beea6f78a416579019e7f49e3e9aaff1396151f7cdd06895"
+    },
+    "fixture-source": {
+      "path": "MaterialLifecycleFixture.cs",
+      "sha256": "8a3d7b43ededf321a0f8be413b0bdaf5cac3687a72512d85a7221246095dfb3e"
+    },
+    "timing-source": {
+      "path": "MaterialLifecycleTiming.cs",
+      "sha256": "b6741a8a46ceaa220f87cdbfd83038d1fd7724b75f72a29babf7a750df6bc765"
+    }
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "schema": "ftkmf.kraken-production-visual-review.v1",
+  "status": "appearance_motion_camera_culling_and_progression_reviewed_portrait_failed",
+  "route": {
+    "topologyGroup": "6a28ac3cf4523c24",
+    "sourceKind": "resource_prefab_override",
+    "nativeEnemy": "krakenHead",
+    "resourcePrefab": "enkrakenhead",
+    "registeredEnemy": "ftkmf_modeltest_gloamfin_kraken_legacy",
+    "rendererPath": "krakenHead",
+    "sourceRendererId": 121260
+  },
+  "session": "8c1d6e0c22874f95ac9553182e6c262b",
+  "case": {
+    "path": "scratch/mirewarden-game/model-test-output/case-1b583efeaae040949ec2399bc40e9768/case-result.json",
+    "sha256": "5bb3e408c0b7f6495bfc4a43252c19d05bad961f4838ced3c8d452f630b0c71a"
+  },
+  "binding": {
+    "ownerInstanceId": 369188,
+    "celInstanceId": -245150,
+    "rendererInstanceId": -245156,
+    "mesh": "ftkmf_glb_gloamfin.glb",
+    "boneSignature": "1aca5359fe1f4641bfe9a71da32efd52376197706959bb37ea3a01e7d533e776",
+    "material": "matKraken (Instance)",
+    "mainTexture": "ftkmf_gloamfin_basecolor.png",
+    "resourceLeaseId": 4,
+    "resourceLeaseApplied": true
+  },
+  "captures": [
+    {
+      "label": "idle-and-native-attack",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45.json",
+      "sha256": "a2f2e4017eda227ca1a19035f2005a3e7a14c1d04a392f2ef771da29ce3f88e2",
+      "frames": 120,
+      "complete": true,
+      "states": [
+        "krakenIdle",
+        "krakenAttack"
+      ],
+      "nativeAttackFrame": 3845,
+      "reviewedFrameIndices": [
+        0,
+        24,
+        44,
+        52,
+        64,
+        96,
+        116,
+        119
+      ]
+    },
+    {
+      "label": "ordinary-hit-and-recovery",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3.json",
+      "sha256": "c065aa5e4183699def9936c1562cdab76d7158878c028d0356d92ff604d6bdd7",
+      "frames": 120,
+      "complete": true,
+      "healthBefore": 324,
+      "healthAfter": 316,
+      "damage": 8,
+      "cheat": "None",
+      "focus": false,
+      "nativeResponse": "Damaged",
+      "nativeTriggerFrame": 4188,
+      "reviewedFrameIndices": [
+        0,
+        13,
+        23,
+        30,
+        45,
+        80,
+        119
+      ]
+    },
+    {
+      "label": "explicit-fixture-death",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df.json",
+      "sha256": "7f5e88b49924ad7a104b23cc597b8be9b0fd7aced276160f09fd35ce93f11a7d",
+      "frames": 91,
+      "complete": false,
+      "acceptedPrefix": true,
+      "termination": "renderer_destroyed",
+      "nativeTriggerFrame": 4635,
+      "animatorEnabledThroughSample": 89,
+      "rendererInactiveAtSample": 90,
+      "nativeRagdoll": false,
+      "rigidbodyCount": 0,
+      "reviewedFrameIndices": [
+        0,
+        23,
+        29,
+        36,
+        44,
+        89,
+        90
+      ]
+    }
+  ],
+  "review": {
+    "appearance": {
+      "status": "pass",
+      "finding": "The segmented teal and blue body, eyes, mouth, tongue and lateral limbs remain connected and readable in the reviewed idle, attack, hit and death-prefix frames. No exploded geometry or missing live body region is visible."
+    },
+    "idleMotion": {
+      "status": "pass",
+      "finding": "Samples 0 and 24 of the first capture and sample 0 of the hit capture show a coherent settled krakenIdle body under stable exact binding."
+    },
+    "attackMotion": {
+      "status": "pass",
+      "finding": "The first capture records native AttackProf and Attack entry at game frame 3845, samples krakenAttack from indices 44 through 116, and returns to idle by indices 117 through 119. Reviewed samples show the mouth opening, body lifting and limbs extending without separation."
+    },
+    "hitMotion": {
+      "status": "pass",
+      "finding": "The ordinary no-focus attack records HP 324 to 316 and native Damaged at game frame 4188. Reviewed samples 13, 23 and 30 retain the face and body through impact and damage response before recovery."
+    },
+    "deathMotion": {
+      "status": "pass_fixture_scope",
+      "finding": "The explicit KillSingle fixture enters native Death at game frame 4635. The body remains coherent at reviewed samples 23 and 29, then follows the native krakenDisappear handoff and is absent by sample 44. Renderer destruction ends the capture after sample 90."
+    },
+    "cameraFit": {
+      "status": "pass_with_limit",
+      "finding": "The combat camera keeps the readable face, mouth and lateral limbs in the viewport across the reviewed sequence. The raised attack pose reaches behind the top HUD and native effects or the hero obscure the lower center, so this is sampled combat-camera acceptance rather than an all-camera envelope."
+    },
+    "culling": {
+      "status": "pass_sampled_route",
+      "finding": "The exact renderer reports active, enabled and visible for all 120 idle/attack samples, all 120 ordinary-hit samples, and the first 90 death samples. It becomes inactive and invisible only at the recorded native death cleanup boundary, sample 90."
+    },
+    "progression": {
+      "status": "pass_fixture_scope",
+      "finding": "After the fixture death the encounter reaches strict native Ready at level 0, room 2 with one Ready button and no Collect action required. The separate production campaign remains the authority for ordinary lethal death, enemy victory and natural teardown."
+    },
+    "portrait": {
+      "status": "fail",
+      "finding": "Initiative entries for the Kraken are blank teal tiles throughout the retained game captures. The custom Gloamfin portrait is not visible in the turn-order row."
+    }
+  },
+  "selectedFrames": [
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 0,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0000.png",
+      "sha256": "370d1557cae671eea1165c8928330df2801782bd38d17bca9b2b2464003615ea"
+    },
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 24,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0024.png",
+      "sha256": "80baa66401c684088c04cf470fe11ab8252c94e1fb0c4961b1f65b19d4260241"
+    },
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 44,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0044.png",
+      "sha256": "952a1ee4e01eac20b8bc3af8ccd7e40e673da0a7db7d59fa1322a48d9aac37fe"
+    },
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 52,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0052.png",
+      "sha256": "f0310ebe9a2918217733efb2a81ad93f97f916f74d163c62653fcda416ee6b4a"
+    },
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 64,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0064.png",
+      "sha256": "f99216a6d746c81fc6e7f6af3b6daa16fd099828b8f23290c1d6af9aa8c79b9e"
+    },
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 96,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0096.png",
+      "sha256": "d9403ed3d49d74f5305172e129612f2de9d6622d929a115be64da0ff6ad79377"
+    },
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 116,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0116.png",
+      "sha256": "5cd70ad0563c876462fea05ac588ec552d1c757a023b6a45d7f7d1d4fc49da06"
+    },
+    {
+      "action": "pass",
+      "captureId": "e94582b1e0974b80a462cc8ef1567b45",
+      "index": 119,
+      "path": "scratch/mirewarden-game/model-test-output/e94582b1e0974b80a462cc8ef1567b45/0119.png",
+      "sha256": "507d99754ad320a269a2d4b40def17495d82c987eb82fdfde12c56ce84558ad4"
+    },
+    {
+      "action": "attack",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "index": 0,
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3/0000.png",
+      "sha256": "ddc1502f071ab70112d9c728c4ba8cf85de8fcb25b6a543e4830ecaca4f68213"
+    },
+    {
+      "action": "attack",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "index": 13,
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3/0013.png",
+      "sha256": "a789c5acfe551811c3caa4bd69dd78747033d79e160e0c63e10098f5dd66f4d9"
+    },
+    {
+      "action": "attack",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "index": 23,
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3/0023.png",
+      "sha256": "56ec8c57567c183da9795a50892c7aad5951c620854f02a2c0615711be648f92"
+    },
+    {
+      "action": "attack",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "index": 30,
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3/0030.png",
+      "sha256": "a606da4102c9ed412a437cc8b9ffeb1a504e52e774609ba77036257e79611e58"
+    },
+    {
+      "action": "attack",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "index": 45,
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3/0045.png",
+      "sha256": "bd9dac0d17d06f3a99291b9845773027c6665ef6d4cb297d909e08b2f409a846"
+    },
+    {
+      "action": "attack",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "index": 80,
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3/0080.png",
+      "sha256": "4bf8466ccd38ca99c76c6b4a53ea669c39de95f3d7f924b7decb80dc41771136"
+    },
+    {
+      "action": "attack",
+      "captureId": "e88c751b6eb64a3b8addbf30af2b29d3",
+      "index": 119,
+      "path": "scratch/mirewarden-game/model-test-output/e88c751b6eb64a3b8addbf30af2b29d3/0119.png",
+      "sha256": "c89553c53381c1a7b7bb3cf97be76bc1485104218cfdda71736772abbe192ea5"
+    },
+    {
+      "action": "kill-fixture",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "index": 0,
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df/0000.png",
+      "sha256": "2642824b1ada3c400f6889024d7f9ee66145329ca4b09eb3125e46adaeae3a72"
+    },
+    {
+      "action": "kill-fixture",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "index": 23,
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df/0023.png",
+      "sha256": "b48e613dec8c62bc3c6a938dd01cf73e54db7ed5f1fae5af734f560e0587c336"
+    },
+    {
+      "action": "kill-fixture",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "index": 29,
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df/0029.png",
+      "sha256": "6a79b55276502a3d47d933fbc96d5a6ab8f5afc97efa3aa90542ab511c8911ee"
+    },
+    {
+      "action": "kill-fixture",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "index": 36,
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df/0036.png",
+      "sha256": "23429a81873c0556f76579a6211944c331bc7f9e0bc38df477676ad51030f66f"
+    },
+    {
+      "action": "kill-fixture",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "index": 44,
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df/0044.png",
+      "sha256": "441f87455c20043e6780bd0f4205080f78c2a0877e0e4b63fbf717386a6da9de"
+    },
+    {
+      "action": "kill-fixture",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "index": 89,
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df/0089.png",
+      "sha256": "b8bbc49e1b3c154c40089cf6b1a543da7e968ea13ea806b168325e19b4e18809"
+    },
+    {
+      "action": "kill-fixture",
+      "captureId": "8f9c2e9fe287437d839944c0fbb030df",
+      "index": 90,
+      "path": "scratch/mirewarden-game/model-test-output/8f9c2e9fe287437d839944c0fbb030df/0090.png",
+      "sha256": "92a8ab729df2e5086739f228d0eca24b4dffb4322e0679bcfbf7f76d8769d7b9"
+    }
+  ],
+  "productionCampaign": {
+    "path": "docs/evidence/kraken-production-adapter-v1/validation.json",
+    "sha256": "6154ad173ef779a04c443ad0016093f28eb222d79614ea682efbe409ae4bcdd9",
+    "authority": "Ordinary non-cheat lethal death, native enemy victory and natural resource teardown."
+  },
+  "limits": [
+    "The 999-HP hero is a disposable survival fixture and is not representative balance.",
+    "KillSingle is an explicit fixture used only for visible native death and cleanup; the separate production campaign remains the ordinary-lethal authority.",
+    "The raised attack pose reaches behind the top HUD, and native effects plus the hero obscure portions of the model.",
+    "The sampled renderer-visibility record is not an all-camera or all-distance culling envelope.",
+    "The blank Kraken initiative tiles are a failed portrait gate and prevent canonical route acceptance.",
+    "Final art approval remains outside this evidence."
+  ]
+}

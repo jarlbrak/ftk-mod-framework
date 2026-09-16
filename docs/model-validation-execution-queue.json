@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 5,
+  "scope": "Operational mapping from unfinished source-specific validation routes to preflighted profile documents. A listed profile only identifies a static-passing candidate for a new isolated trial. It does not prove deployment, binding, motion, gameplay, visual quality, acceptance, or a match to an older archive revision.",
+  "inputs": [
+    {
+      "path": "docs/topology-coverage.json",
+      "sha256": "c68ca549f482e27d6b06765eda95c41047d2cc606c5d31e1feba0dbd74a46297"
+    },
+    {
+      "path": "docs/model-candidate-validation-coverage.json",
+      "sha256": "2a3065dac7b7fcb152bacdeafbf56d4abdf5c13dfa0b60707128203484c3f30a"
+    },
+    {
+      "path": "docs/model-package-readiness.json",
+      "sha256": "db970551f72ca4a64b4aebd9c701a5b184eafc1c73dd4532b65b21d70a082499"
+    }
+  ],
+  "summary": {
+    "backlogRoutes": 0,
+    "routesWithPreflightedProfileCandidates": 0,
+    "routesWithoutPreflightedProfileCandidates": 0,
+    "preflightedProfileCandidates": 0,
+    "selectedValidationTargetsWithoutPreflightedProfile": 0,
+    "routesWithProfileStagingCandidates": 0,
+    "routesRequiringProfileAuthoring": 0,
+    "routesRequiringAdapterOrRetargetDesign": 0,
+    "routesRequiringAdapterImplementation": 0,
+    "routesRequiringAdapterValidation": 0,
+    "routesRequiringAdapterVisualArchiveReview": 0
+  },
+  "routes": [],
+  "limits": [
+    "Profile matching starts from one route-specific target: the candidate ledger's priority archive assignment when present, otherwise a remaining exact topology representative.",
+    "A source-assignment match requires the exact direct-enemy or resource-prefab identity and renderer ID/path. A player match requires the exact named profile, skinset, renderer ID, and renderer path.",
+    "When more than one profile revision matches, choose and stage one explicitly; the queue never selects a revision or transfers live evidence between them.",
+    "A selected validation target without a preflighted profile is a planning gap, not evidence that the game route fails.",
+    "An adapter-or-retarget status is surfaced only from an explicit topology ownership finding. It is not inferred merely because a profile is absent.",
+    "A design-complete adapter status is surfaced only from a hash-pinned explicit adapter contract. It does not imply framework implementation or live validation.",
+    "Adapter campaign completion requires exact route identity, the production-observation evidence schema and status, and an integrity manifest that pins validation.json. The dedicated archive verifier remains authoritative for every contained artifact.",
+    "The candidate-coverage, validation-gate, archive-integrity, topology, and package-readiness ledgers remain the authority for their respective observations."
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "name": "Cairnfire Troll B",
+  "status": "FRESH_V2_PALETTE_CORRECTED_LIVE_BINDING_MOTION_GAMEPLAY_READY_OBSERVED_ART_UNAPPROVED",
+  "artStatus": "Original basalt, copper, and ember Troll. The corrected palette rendered coherently in sampled live combat, attack, and ragdoll frames; artistic acceptance remains pending.",
+  "nativeSurfaceCopied": false,
+  "target": {
+    "baseEnemy": "trollB",
+    "nativePrefab": "enTroll02",
+    "celComponentPathId": "137393",
+    "rendererPath": "enTroll01",
+    "rendererSourceId": 121256,
+    "rendererKind": "SkinnedMeshRenderer",
+    "paletteBones": 37,
+    "combatController": "trollController",
+    "combatControllerId": 6006,
+    "combatProfile": "ab549dcfcad738d283caac671d43a8b7053e64a95ae0805babf218599efe09a2"
+  },
+  "profile": {
+    "key": "ftkmf_modeltest_cairnfire_trollb",
+    "baseEnemy": "trollB",
+    "displayName": "Cairnfire Troll B",
+    "combatProfile": "ab549dcfcad738d283caac671d43a8b7053e64a95ae0805babf218599efe09a2",
+    "renderers": [
+      {
+        "rendererPath": "enTroll01",
+        "glbFile": "cairnfire-trollb.glb",
+        "textureFile": "cairnfire-trollb.png",
+        "disableNativeEmission": true
+      }
+    ],
+    "minimumBaseHealth": 64
+  },
+  "authoringContract": {
+    "referenceLocalOnly": "scratch/trollb-reference/reference.npz",
+    "referenceSha256": "b4527c688d9183e08c53c65db293061b873fec6d385185255f7c628977eb05fa",
+    "permittedReferenceInputs": [
+      "bone_names",
+      "bindposes"
+    ],
+    "forbiddenReferenceInputs": [
+      "native surfaces",
+      "native textures",
+      "native UVs",
+      "native weights",
+      "native animation samples"
+    ],
+    "proof": "original-geometry-proof.json"
+  },
+  "originalAssets": {
+    "cairnfire-trollb.glb": "719e7c836eaf9420ac59b9edcfaf5c1eeb6575b02827c5c4596e86bf1e21b03b",
+    "cairnfire-trollb.png": "3a2918930420914da3c80b2a2424fd7e1792659a5963142e5f241743a3066c2a"
+  },
+  "checks": {
+    "binaryAndSkinContract": "PASS: 9030 vertices, 3010 triangles, 37 bones, max bind/rest error 8.53e-08.",
+    "allPaletteBonesWeighted": "PASS: all 37 named palette bones have at least one positively weighted original vertex.",
+    "sourceProvenance": "PASS: deterministic rebuild with NPZ reads restricted to bone_names and bindposes reproduced source JSON, PNG, and piece manifest byte-for-byte.",
+    "studio": "Rendered with authored source JSON and palette only. It is a bind-pose presentation, not motion evidence.",
+    "liveBinding": "PASS in fresh V2: visible exact enTroll02(Clone)/enTroll01 SkinnedMeshRenderer, custom GLB, authored PNG, Root_M, and 37-bone signature.",
+    "liveMotion": "PASS in fresh V2: full 120-frame pass, ordinary-attack, and KillSingle windows. Sampled frames show native attack_troll and deathHeavy_troll with the custom surface intact.",
+    "liveGameplay": "PASS in fresh V2: observed ordinary same-target HP 72 to 62 and KillSingle fixture HP 62 to 0.",
+    "liveCleanup": "PASS in fresh V2: one native Collect click reached strict Ready 0/2."
+  },
+  "revisionHistory": [
+    {
+      "revision": "v1",
+      "result": "Technical binding, motion, gameplay, and cleanup signals passed, but visual review rejected the vertically inverted palette mapping. No art acceptance claim."
+    },
+    {
+      "revision": "v2",
+      "change": "Reversed authored PNG tile rows to account for the runtime V flip.",
+      "result": "Fresh isolated run e36135bb345f4697a89f917cc7033aca confirms the corrected palette, exact binding, sampled motion, ordinary hit, fixture death, and Ready progression. Art remains unapproved."
+    }
+  ],
+  "latestLiveEvidence": {
+    "catalogSha256": "32351b3c32bcb0dc6d0e84b81a89de319537578abf7a613f8cabe8f2d99f7a37",
+    "session": "e36135bb345f4697a89f917cc7033aca",
+    "stageCase": "case-36fcddc247d249c393d04d124c8f13d2",
+    "exerciseCase": "case-08a1f70c16854700baf33c46fe5c683b",
+    "coverageManifest": "scratch/coverage-batch-20260911-221638.json",
+    "revisionStage": "scratch/cairnfire-trollb-palette-v2-stage/receipt.json",
+    "revisionDeployment": "scratch/mirewarden-game/deployment-backups/cairnfire-trollb-palette-v2-20260911-221402/deployment.json"
+  },
+  "limits": "The profile uses the generic isolated-game transaction. The fresh run establishes exact binding, sampled motion, ordinary same-target HP change, fixture death, and Ready progression. It does not establish final art approval, all camera angles, all animation intervals, portraits, culling, campaign progression, or resource-disposal behavior."
+}

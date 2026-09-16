@@ -1,0 +1,450 @@
+{
+  "status": "PASS_PAIRED_EXPLICIT_FALLOFF_POLICY_FIXTURE",
+  "scope": "Fresh explicit KillSingle fixtures only. This proves the observed renderer/ragdoll handoff under the exact policy and a same-binary omitted-policy control. It is not ordinary lethal-damage, all-angle, portrait, corpse-quality, or native cleanup/Ready evidence.",
+  "rendererPath": "enJungleSnakeC",
+  "mesh": "ftkmf_glb_bramblecoil-jungle-snake.glb",
+  "sharedDeployment": {
+    "receipt": {
+      "path": "scratch/bramblecoil-policy-control-idle-gate-419/receipt.json",
+      "sha256": "2344cc882a764aa91d7a04eaa185867519c49bab6722c6c442f32dd567bcdc13",
+      "bytes": 4410
+    },
+    "catalog": {
+      "path": "scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "6ae146a0665a56aa1fed6ad3b9fc342c1a792eb2b8a9271995f64536c41f1164",
+      "bytes": 191522
+    },
+    "plugins": {
+      "FTKModFramework.dll": {
+        "path": "scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+        "sha256": "536a9c762be6555dacfe74619f5a455bb2d2e606ec9a746b27caa04c5cff87c2",
+        "bytes": 1981440
+      },
+      "FtkRuntimeModelTest.dll": {
+        "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "sha256": "e71ac974c347fae76bc9e6942842a769a1aed4d4ed362c70a660b4b27af2b84a",
+        "bytes": 406528
+      },
+      "FtkRuntimeModelTestContent.dll": {
+        "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTestContent.dll",
+        "sha256": "a485618bc181e39edd2f121afc8eb0d9b1117425014274c432a13126b67c1595",
+        "bytes": 34304
+      }
+    }
+  },
+  "opted": {
+    "summary": {
+      "source": "scratch/bramblecoil-falloff-opted-v2-20260911-183817.json",
+      "sha256": "189b38b60c27bf1937ae7ef90d3559390fc9f8f9007241898dc0d55a09fdd46e",
+      "bytes": 4917
+    },
+    "capture": {
+      "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9.json",
+      "sha256": "cc53dba6e35fccd25dbae987306faf6ccf3193c3f6f9e27e0f4e4c6b90d88c37",
+      "bytes": 7660812
+    },
+    "registration": {
+      "source": "scratch/mirewarden-game/model-test-registration.json",
+      "sha256": "5b95f83583ac330ac0e1c3c4fcd058bc184cf26707db2106cc41035ebb0840a3",
+      "bytes": 215136
+    },
+    "fixture": {
+      "source": "scratch/mirewarden-game/model-test-output/case-ed15667ef0d14135a5d2ee0fdd5f2794/result.json",
+      "sha256": "522d68e58ac3e439204d7e234da141cde6ef29390848d0cdffacce4ad5bec122",
+      "bytes": 1018
+    },
+    "session": "ffc687f51b21401caf59b83575901ac9",
+    "profile": "ftkmf_modeltest_bramblecoil_jungle_snake",
+    "policy": "preserve-custom-body",
+    "identity": {
+      "mesh": "ftkmf_glb_bramblecoil-jungle-snake.glb",
+      "ownerInstanceId": 369188,
+      "instanceId": -245292,
+      "boneSignature": "4535db0bcba0e3ef1ab9de51e4a8594296378992462eed739edb5a3a63399fe1"
+    },
+    "firstNativeDeathFrame": 27,
+    "firstNativeDeathGameSeconds": 2.4749984741210938,
+    "firstHiddenFrame": null,
+    "firstDynamicFrame": 0,
+    "checkpoints": [
+      {
+        "frame": 0,
+        "gameSeconds": 0.0,
+        "state": [
+          "Snake_Idle"
+        ],
+        "lastCombatTrigger": "Attack",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 25,
+        "gameSeconds": 2.2916641235351562,
+        "state": [
+          "Snake_Idle"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 26,
+        "gameSeconds": 2.383331298828125,
+        "state": [
+          "Snake_Idle"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 27,
+        "gameSeconds": 2.4749984741210938,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 28,
+        "gameSeconds": 2.5666656494140625,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 26
+      },
+      {
+        "frame": 30,
+        "gameSeconds": 2.75,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 26
+      },
+      {
+        "frame": 40,
+        "gameSeconds": 3.6666641235351562,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 26
+      },
+      {
+        "frame": 60,
+        "gameSeconds": 5.5,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 26
+      },
+      {
+        "frame": 119,
+        "gameSeconds": 10.908332824707031,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 26
+      }
+    ],
+    "screenshots": {
+      "0": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0000.png",
+        "sha256": "0fae45a0e3c193abae84d09e3add7e8d2ecaf74be84b68725c3b842948439afa",
+        "bytes": 1086645
+      },
+      "25": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0025.png",
+        "sha256": "b2dd86abeb256edef3e78b8a262c99f18cf6bcceb8cf9e59e27b261fd7d9781f",
+        "bytes": 1108891
+      },
+      "26": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0026.png",
+        "sha256": "58f489aa95e25bbc9394aed5e13908174025f5e7e83539fe44ca339cc558be71",
+        "bytes": 1104136
+      },
+      "27": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0027.png",
+        "sha256": "fd9366baddddf9ec81e8906adaf4d79d8d0684e5a34ab063e532d089490c83c6",
+        "bytes": 1096261
+      },
+      "28": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0028.png",
+        "sha256": "9c8d60f461073e8d948db8e28da722409c9aed516074ad7b49919e644abf1c27",
+        "bytes": 1096533
+      },
+      "30": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0030.png",
+        "sha256": "dca639a29004f86de535b84eaece1428e54e7b714762758a7f0d236183cbf99a",
+        "bytes": 1098216
+      },
+      "40": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0040.png",
+        "sha256": "e8726fad7366fe7809c435842a9a495a5ac3f3e9c629ec2ef1fdb6e0d7f1700c",
+        "bytes": 1107450
+      },
+      "60": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0060.png",
+        "sha256": "0087b8322de814f639400f441b0f7bc012c82efeb6e85290e5c58642c41f217e",
+        "bytes": 1101587
+      },
+      "119": {
+        "source": "scratch/mirewarden-game/model-test-output/5295dbb57c3748579daa61f85439b5c9/0119.png",
+        "sha256": "eb3c40134823b97ec3793b61c84bcac176fb2acae709c2f497fcc680e85e2480",
+        "bytes": 859963
+      }
+    }
+  },
+  "nativeControl": {
+    "summary": {
+      "source": "scratch/bramblecoil-falloff-native-control-v2-20260911-184006.json",
+      "sha256": "3820603d2d5caac6aadf6eb3859036ef9076a9108b1c171804c78c5773ef15d2",
+      "bytes": 4938
+    },
+    "capture": {
+      "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a.json",
+      "sha256": "dd5593c77ea88ea3972af487f8f6fd080a106cc5eacbf079e88d3311c93400ac",
+      "bytes": 6839529
+    },
+    "registration": {
+      "source": "scratch/mirewarden-game/model-test-registration.json",
+      "sha256": "5b95f83583ac330ac0e1c3c4fcd058bc184cf26707db2106cc41035ebb0840a3",
+      "bytes": 215136
+    },
+    "fixture": {
+      "source": "scratch/mirewarden-game/model-test-output/case-e89e5cf0ab4f473bbe0887c05923f758/result.json",
+      "sha256": "03611813f8d2f37c416e6aac7149ddf839cd5e37ddc59974381119f80768a16a",
+      "bytes": 1018
+    },
+    "session": "794de98b47924ae2912758ce566d32dd",
+    "profile": "ftkmf_modeltest_bramblecoil_jungle_snake_native_falloff_control",
+    "policy": null,
+    "identity": {
+      "mesh": "ftkmf_glb_bramblecoil-jungle-snake.glb",
+      "ownerInstanceId": 369188,
+      "instanceId": -245436,
+      "boneSignature": "4535db0bcba0e3ef1ab9de51e4a8594296378992462eed739edb5a3a63399fe1"
+    },
+    "firstNativeDeathFrame": 27,
+    "firstNativeDeathGameSeconds": 2.4749984741210938,
+    "firstHiddenFrame": 25,
+    "firstDynamicFrame": 0,
+    "checkpoints": [
+      {
+        "frame": 0,
+        "gameSeconds": 0.0,
+        "state": [
+          "Snake_Idle"
+        ],
+        "lastCombatTrigger": "AttackProf",
+        "active": true,
+        "visible": true,
+        "enabled": true,
+        "rigidbodyCount": 26,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 25,
+        "gameSeconds": 2.2916641235351562,
+        "state": [
+          "Snake_Idle"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 0
+      },
+      {
+        "frame": 26,
+        "gameSeconds": 2.383331298828125,
+        "state": [
+          "Snake_Idle"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 0
+      },
+      {
+        "frame": 27,
+        "gameSeconds": 2.4749984741210938,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 0
+      },
+      {
+        "frame": 28,
+        "gameSeconds": 2.5666656494140625,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 30,
+        "gameSeconds": 2.75,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 40,
+        "gameSeconds": 3.6666641235351562,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 60,
+        "gameSeconds": 5.5,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 13
+      },
+      {
+        "frame": 119,
+        "gameSeconds": 10.908332824707031,
+        "state": [
+          "Snake_DeathBig"
+        ],
+        "lastCombatTrigger": "Death",
+        "active": false,
+        "visible": false,
+        "enabled": true,
+        "rigidbodyCount": 13,
+        "dynamicBodies": 13
+      }
+    ],
+    "screenshots": {
+      "0": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0000.png",
+        "sha256": "75b59514f71b335286ff256fc1b622d8bf20c4c47daf6d6ca36e864276698d1e",
+        "bytes": 1095625
+      },
+      "25": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0025.png",
+        "sha256": "c1ff1bbf6d0e1aa7e2e5f3cde048eb83e33dcdd01a5e73670cbcfccac0175574",
+        "bytes": 1103087
+      },
+      "26": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0026.png",
+        "sha256": "b6f2b6ce59aec9788391971f069dee8e0e6455d800b9a4407bb2de2f59db8183",
+        "bytes": 1096351
+      },
+      "27": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0027.png",
+        "sha256": "0fe97e95c8ea6e3e4f5e160ed062d1a2922cc26a713d403e13d2f3cf2464f596",
+        "bytes": 1085731
+      },
+      "28": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0028.png",
+        "sha256": "069c320261f25954b234ae5d6cd9c1fce04c692b0340354c843c3a3277315ce8",
+        "bytes": 1081783
+      },
+      "30": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0030.png",
+        "sha256": "b8f20963d8cfada804c71da1cdf0d467a83ac6f11d05855e500a4b9d30f9d459",
+        "bytes": 1085241
+      },
+      "40": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0040.png",
+        "sha256": "9be323166d231eee2016d84276e5cdd878f208622676d30050fc38d8dbff0593",
+        "bytes": 1081999
+      },
+      "60": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0060.png",
+        "sha256": "bf1e5b9a53e0a9624d146aee0a9b3087675eec058a0f05e2826ced35aeb91160",
+        "bytes": 1068323
+      },
+      "119": {
+        "source": "scratch/mirewarden-game/model-test-output/68f8fbfd25184f01ab86660142f4d28a/0119.png",
+        "sha256": "50a42a35d8a720dc825928610c04d32e70d1fc31ae7d00f52905e7ca6f847aba",
+        "bytes": 849048
+      }
+    }
+  },
+  "observedDifference": {
+    "sameNativeDeathState": [
+      27,
+      27
+    ],
+    "opted": "The explicitly leased custom renderer stayed active, visible, and enabled from the first native Snake_Death frame through the final captured frame; its 26 native ragdoll bodies were dynamic by the next frame.",
+    "nativeControl": "With the policy omitted, the same custom renderer became inactive and invisible by capture frame 25; the native 13-piece fall-off body was dynamic by the next death frame."
+  },
+  "limitations": [
+    "KillSingle is an explicit fixture and does not demonstrate ordinary damage or ordinary lethal combat.",
+    "The final capture reaches the loot screen but this paired verifier does not submit native Collect votes or assert Ready progression.",
+    "Screenshot review samples selected frames; it does not prove every camera angle, material lifetime, or presentation quality."
+  ]
+}

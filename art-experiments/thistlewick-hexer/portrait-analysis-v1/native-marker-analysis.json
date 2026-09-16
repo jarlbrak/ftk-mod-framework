@@ -1,0 +1,73 @@
+{
+  "status": "NO_ALTERNATE_NATIVE_PORTRAIT_MARKER_IN_PINNED_PREFAB",
+  "nativeEnemy": "scourgeG",
+  "rendererId": 121222,
+  "hierarchyTransformsExamined": 54,
+  "markers": [
+    {
+      "path": "/enScourgeLeprechaun/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+      "transform_id": 67909,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 67909
+        },
+        {
+          "type": "Camera",
+          "id": 98712
+        }
+      ],
+      "localPosition": {
+        "x": -0.6537035703659058,
+        "y": 1.8827385902404785,
+        "z": 0.35000038146972656
+      },
+      "localRotation": {
+        "x": 0.5876557230949402,
+        "y": -0.4907362461090088,
+        "z": 0.47708675265312195,
+        "w": 0.43154028058052063
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    }
+  ],
+  "controllerPortraitNamedClips": [],
+  "source": [
+    {
+      "path": "scratch/scourge-leprechaun-topology-analysis/findings.json",
+      "sha256": "8f6cbdc49cd7cae5fa6bcbdf34511658d2e4eb7a077f95851da5c73cc55bd842"
+    },
+    {
+      "path": "scratch/scourge-leprechaun-topology-analysis/native-metadata.json",
+      "sha256": "9a486e9e85e705d8f130d4e00d122d052cb8ff843c88202f90482df184218eda"
+    },
+    {
+      "path": "scratch/OffscreenCamera.analysis.cs",
+      "sha256": "9ef768169d442c95a154b9a5186086e0279b57b89e5a0c82902d7fda9758ea5f"
+    },
+    {
+      "path": "scratch/uiActiveTime.portrait.cs",
+      "sha256": "f14f27af46cf4dab6b772405c1d25c9f32b447d1d46a6ef2472914152c01d324"
+    },
+    {
+      "path": "scratch/uiEnemyEncounterPortrait.analysis.cs",
+      "sha256": "e4640af532bfc7dde22390ab44a3fc0576a2f5f8a13724e364abd70d4dbc0ca3"
+    }
+  ],
+  "findings": [
+    "Only head-attached PortraitCam67909 exists in all54 recorded source transforms; no CameraRoot, EncounterCam or DeadCam alternate exists.",
+    "Both native enemy portrait callers request PortraitCam. OffscreenCamera.SetTargetPosition215\u2013279 finds named transform, repositions target using marker transform; missing marker falls back to target position forward3.",
+    "The marker is under Head_M, alongside retained Hair_M/enLuckysHat. Source does not supply an alternate tested view comparable to Honeyback EncounterCam."
+  ],
+  "recommendation": "Do not add a blanket camera override or substitute nonexistent EncounterCam. Capture actual offscreen target pose/camera and raw portrait pixels if further framing work is desired; use those for a separate original face variant or explicitly reviewed camera API, preserving current successful body assets.",
+  "limits": [
+    "Live root review establishes lower-face crop, not exact projection/culling cause.",
+    "Combat capture pose is not necessarily native portrait sampling pose.",
+    "No arbitrary camera offset or source-prefab mutation justified by this marker inventory."
+  ]
+}

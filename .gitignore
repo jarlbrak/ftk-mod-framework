@@ -32,6 +32,22 @@ backend.log
 # Local image-generation scratch output (e.g. nanobanana). Committed assets live under FTKModFramework/assets/.
 nanobanana-output/
 
+# Local model-campaign media. Canonical manifests and authored runtime assets
+# are committed explicitly; bulk captures and Blender work files stay outside
+# ordinary Git history.
+art-experiments/**/*.blend
+art-experiments/**/*.blend1
+art-experiments/**/*.mp4
+art-experiments/**/*.png
+art-experiments/**/*.gz
+art-experiments/**/*.jsonl
+art-experiments/**/*.log
+art-experiments/**/*.zip
+docs/evidence/**/*.mp4
+docs/evidence/**/*.png
+docs/evidence/**/*.gz
+docs/evidence/**/*.jsonl
+
 # Python bytecode cache (agent-harness MCP server)
 __pycache__/
 *.pyc

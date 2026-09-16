@@ -1,0 +1,9 @@
+# Sunspire Roc native row-portrait supplement V3
+
+This archive records fresh catalog-412 session `1ce25c30c43f41428094cefea08dae6b`. It first completed the same ordinary `rocA`/`enRoc01` body exercise used for V2: the authored Roc stayed on the exact profile, a normal no-focus native `Attack` reduced the target from 81 to 71 HP, the explicit `KillSingle` fixture captured 120 frames, and guarded native collection returned to strict Ready at level 0 room 2.
+
+At that strict boundary, a fresh constructed native `uiEnemyEncounterPortrait.Initialize` caller made one row preview. Immediately before the native snapshot render, the trace forwarded the exact custom row to a cloned `enRoc01` with 36 bones, mesh `ftkmf_glb_sunspire-roc.glb`, and texture `ftkmf_sunspire-roc_basecolor.png`; the native `PortraitCam` marker was selected. Native initialization returned a 328 by 280 PNG. The reviewed image in `selected/` shows a clear beak, eye, faceted head, and neck mantle. The temporary clone, UI texture, and recorded preview lease assets were confirmed released; the native camera/cache remains native-owned and was only observed.
+
+This is a constructed native UI caller, not an opened encounter menu or live combat HUD. It proves one exact native row-preview path and size, not every portrait layout, cache reuse path, or full art-direction acceptance. Whole-body animation and combat visibility remain in V1/V2. `metadata/` contains lossless non-payload records, `source-image-pins.json` pins every source PNG, and `archive.py` refuses to overwrite a completed result.
+
+The archived root `manifest.json` is explicitly a capture-time historical snapshot: finalizing this V3 validation updates that manifest's own live-evidence hash afterward. Its compressed source hash remains verifiable inside this archive, but it is not expected to equal the later current manifest.

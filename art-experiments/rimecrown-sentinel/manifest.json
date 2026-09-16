@@ -1,0 +1,338 @@
+{
+  "name": "Rimecrown Sentinel",
+  "native_chassis": "snowmanB",
+  "native_surface_copied": false,
+  "art_status": "Original multipart surface model; manual studio and live acceptance pending after regeneration",
+  "native_forward": "+UnityZ; front scarf and head surface protrusion verified before authoring",
+  "assignments": [
+    {
+      "renderer_path": "SnowMan_Geo/enSnowmanHat",
+      "reference_renderer": 121404,
+      "glb": "rimecrown_hat.glb",
+      "texture": "rimecrown_basecolor.png"
+    },
+    {
+      "renderer_path": "SnowMan_Geo/enSnowmanHead",
+      "reference_renderer": 121414,
+      "glb": "rimecrown_head.glb",
+      "texture": "rimecrown_basecolor.png"
+    },
+    {
+      "renderer_path": "SnowMan_Geo/enSnowmanBase",
+      "reference_renderer": 121556,
+      "glb": "rimecrown_base.glb",
+      "texture": "rimecrown_basecolor.png"
+    },
+    {
+      "renderer_path": "SnowMan_Geo/enSnowmanScarf",
+      "reference_renderer": 121638,
+      "glb": "rimecrown_scarf.glb",
+      "texture": "rimecrown_basecolor.png"
+    },
+    {
+      "renderer_path": "SnowMan_Geo/enSnowmanmiddleBody",
+      "reference_renderer": 121696,
+      "glb": "rimecrown_body.glb",
+      "texture": "rimecrown_basecolor.png"
+    }
+  ],
+  "weight_boundary": "Base Root_M; chest ChestBall; head HeadBall; crown Hat. No artificial connector across independent body sections; arms and scarf use local weighted native chains.",
+  "remaining": [
+    "Studio review",
+    "Live snowmanB exact five-renderer assignment",
+    "Native attacks/hit/death and culling/material review",
+    "snowmanA authored-model controller coverage"
+  ],
+  "parts": [
+    {
+      "name": "rimecrown_hat",
+      "vertices": 840,
+      "triangles": 280,
+      "palette_joints": 8,
+      "max_bind_rest_error": 0.0,
+      "blender_reopen_max_bind_rest_error": 0.0,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.5400000214576721,
+        2.497448205947876,
+        -0.22806981205940247
+      ],
+      "bind_bounds_max": [
+        0.5400000214576721,
+        3.4000000953674316,
+        0.7359232306480408
+      ],
+      "blender_roundtrip_glb_sha256": "9d0e1ad19270baddb58cf381002d17fd70dce88c0f5cf3c9c6fae55909b914a6"
+    },
+    {
+      "name": "rimecrown_head",
+      "vertices": 912,
+      "triangles": 304,
+      "palette_joints": 11,
+      "max_bind_rest_error": 0.0,
+      "blender_reopen_max_bind_rest_error": 0.0,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.49000000953674316,
+        1.906999945640564,
+        -0.2365071326494217
+      ],
+      "bind_bounds_max": [
+        0.49000000953674316,
+        2.5929999351501465,
+        0.820006251335144
+      ],
+      "blender_roundtrip_glb_sha256": "abe2a08734bcc247b7bd8f9e1445df09a7fd505aa524a65d8ef92704a8688339"
+    },
+    {
+      "name": "rimecrown_base",
+      "vertices": 648,
+      "triangles": 216,
+      "palette_joints": 16,
+      "max_bind_rest_error": 0.0,
+      "blender_reopen_max_bind_rest_error": 0.0,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.9100000262260437,
+        0.07500000298023224,
+        -0.7400000095367432
+      ],
+      "bind_bounds_max": [
+        0.9100000262260437,
+        1.2200000286102295,
+        0.7799999713897705
+      ],
+      "blender_roundtrip_glb_sha256": "74d41a8cc0ecce7281e0d1f8c2f4008f3479ce56e581dd256108b7935ba944bd"
+    },
+    {
+      "name": "rimecrown_scarf",
+      "vertices": 552,
+      "triangles": 184,
+      "palette_joints": 13,
+      "max_bind_rest_error": 5.337226127721806e-08,
+      "blender_reopen_max_bind_rest_error": 5.337226127721806e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.4300000071525574,
+        1.046746850013733,
+        -0.8359290361404419
+      ],
+      "bind_bounds_max": [
+        0.4300000071525574,
+        2.0298962593078613,
+        0.6849600076675415
+      ],
+      "blender_roundtrip_glb_sha256": "62813b61a8d4115d106829d445354602acba5d601b2b7106952fc85dcbaad2cb"
+    },
+    {
+      "name": "rimecrown_body",
+      "vertices": 2724,
+      "triangles": 908,
+      "palette_joints": 31,
+      "max_bind_rest_error": 4.946531007021804e-08,
+      "blender_reopen_max_bind_rest_error": 4.946531007021804e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.8575539588928223,
+        1.0485999584197998,
+        -0.4974859952926636
+      ],
+      "bind_bounds_max": [
+        1.8575539588928223,
+        1.8913999795913696,
+        0.44011902809143066
+      ],
+      "blender_roundtrip_glb_sha256": "92d48bd214518be1af69d4fa7753e247463757c9d21a03234a8e3ef55808822b"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121404,
+      "local_reference_path": "scratch/skeleton-audit/121404/reference.npz",
+      "sha256": "40fb06422d9be687ae975c7cfc0f020e638c6d9276b85181b8162ad11bc1bd7b"
+    },
+    {
+      "renderer_id": 121414,
+      "local_reference_path": "scratch/skeleton-audit/121414/reference.npz",
+      "sha256": "42bbfb708a694af9d14168c3e2052c4126dbcbd73125380cf39d991e7551ae8c"
+    },
+    {
+      "renderer_id": 121556,
+      "local_reference_path": "scratch/skeleton-audit/121556/reference.npz",
+      "sha256": "2142b4d9fc9fdd3760ae2a64cdc7fe724f3c16a787ad186c751f24a652bc3b39"
+    },
+    {
+      "renderer_id": 121638,
+      "local_reference_path": "scratch/skeleton-audit/121638/reference.npz",
+      "sha256": "e05517a80b4a8c75e9ad39dbcc5af62658860b985f65b4dc1f5431656c42219a"
+    },
+    {
+      "renderer_id": 121696,
+      "local_reference_path": "scratch/skeleton-audit/121696/reference.npz",
+      "sha256": "bd64b2d29b72d7238791b2cb20df39b626e465461633c403930318b14d1d44f2"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for all five parts",
+    "saved_blender_reopen_export": "pass for all five parts",
+    "native_bind_bounds": "all five original surfaces contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "6a3974e0c0b7d41e6602bf2b83474ea2a6bd54272c0afa4ea2cce709d15be241",
+      "bytes": 4160
+    },
+    "build_blender.py": {
+      "sha256": "0fca5e428a8c4fe8708ff5b0cb1631b50f695c5b56a916a119ea69e5d30f33e4",
+      "bytes": 5716
+    },
+    "build_geometry.py": {
+      "sha256": "45e2e45107b6467178c8de08b32c76a13e7ac7218505a53aaade56804964f924",
+      "bytes": 8840
+    },
+    "finalize_manifest.py": {
+      "sha256": "6a451d04d19e29d919cfefa0bb4f482764c46f6522d9af7bd94abb750b0ef58c",
+      "bytes": 2549
+    },
+    "hero.png": {
+      "sha256": "4a15b8e91c2d6abf9eaf6d4dfec963a4256ae9b0632db83492258262262b701a",
+      "bytes": 1058678
+    },
+    "inspect_materials.py": {
+      "sha256": "e3af71fbc844b4f246de0e8a8fb0b0b3e0cba33ce19338b2186c21573cf7d643",
+      "bytes": 1242
+    },
+    "native-material-metadata.json": {
+      "sha256": "2826d19cac3ecdcdfda6d91cb05d3f51a48aad80cab1220116e67b332cd01e6d",
+      "bytes": 17497
+    },
+    "rimecrown-studio.blend": {
+      "sha256": "b174504d8ae2025523c79563c8d4b49c40e41d91e90908de2891b4722fce52f5",
+      "bytes": 192465
+    },
+    "rimecrown_base.blend": {
+      "sha256": "b82fa490ba81db0ee40f64848efba8830cd038a1c2f67d6626ad15c7bab4f461",
+      "bytes": 116487
+    },
+    "rimecrown_base.glb": {
+      "sha256": "ecb957dbd787399e52937af14f701ff4d45487e751ca93b5b2feb08deb98eab6",
+      "bytes": 40444
+    },
+    "rimecrown_base.pieces.json": {
+      "sha256": "a817ce84d75508cbfc85d9a0053824c933b2020cda6b947147d3609ebf1da333",
+      "bytes": 276
+    },
+    "rimecrown_base.source.json": {
+      "sha256": "cae4d4542b2ebd41eefdc8ef391b3ee50d928489b07a5a43ae1dfe399599604a",
+      "bytes": 99230
+    },
+    "rimecrown_base.validation.json": {
+      "sha256": "06c0e41ef7db29100e8ad1ce6d6b5ecb2d0a33ec1e9fa6dc43021e28eca1a3a8",
+      "bytes": 777
+    },
+    "rimecrown_basecolor.png": {
+      "sha256": "837d136050c02830a0fc63f8604d9828513338a3d7589d048e09430ce3ccadda",
+      "bytes": 266
+    },
+    "rimecrown_body.blend": {
+      "sha256": "8e4478c9821ed5bf94c5fbdcf3eae90400e999377b2f2c603b9b1c0698db02b2",
+      "bytes": 153892
+    },
+    "rimecrown_body.glb": {
+      "sha256": "d668cc2919aae355c94be7e7b39de4e9f5d360283963fa56ecffa7f22a94c423",
+      "bytes": 162180
+    },
+    "rimecrown_body.pieces.json": {
+      "sha256": "be403b905b2a0c6a984af2184a7d387bf6d6446829d38c735031e0dd75cf4447",
+      "bytes": 1369
+    },
+    "rimecrown_body.source.json": {
+      "sha256": "620d9224d8dc78c5bc72e03c2d13dc79f3c1ca8cb590dc6a031a07a721438e76",
+      "bytes": 437607
+    },
+    "rimecrown_body.validation.json": {
+      "sha256": "4b787b9c7f0caf78344fc3e5d742be79b9f45cff4684e444169223daaa133efc",
+      "bytes": 797
+    },
+    "rimecrown_hat.blend": {
+      "sha256": "ade16a29075191b1d4b083551010e1cab646c7eeb5427e8ceab85ac13f7ad1ab",
+      "bytes": 110149
+    },
+    "rimecrown_hat.glb": {
+      "sha256": "2e06ab06acfbbc484665411afd6c9158689047799323f6503060af93b5e8ca88",
+      "bytes": 50872
+    },
+    "rimecrown_hat.pieces.json": {
+      "sha256": "4caf8182588c6be9ea58b808cdca11dc194dce34d237318a12ae122b66d41766",
+      "bytes": 454
+    },
+    "rimecrown_hat.source.json": {
+      "sha256": "afd97825fb57772efbf3b6d534dea9183097e883d5658f7e5352ebb04547e627",
+      "bytes": 124278
+    },
+    "rimecrown_hat.validation.json": {
+      "sha256": "80f0c160ebf4dd73b3b9611ea498f1005f96d58d74c93d93b74e902247b5545c",
+      "bytes": 772
+    },
+    "rimecrown_head.blend": {
+      "sha256": "78085fb2a7c295eb8a2c49d7b9f4293cba909a2e881d0119dd5371d6af43c00b",
+      "bytes": 115216
+    },
+    "rimecrown_head.glb": {
+      "sha256": "4eaad129e9d60a86c388696cf2fc2a36c5ca71f5b78636a635dcb33f74fc36b9",
+      "bytes": 55320
+    },
+    "rimecrown_head.pieces.json": {
+      "sha256": "aa34883c72ee82f88617e5d3188f5361e328e386aa307cbe25eab1c4d0a5049e",
+      "bytes": 792
+    },
+    "rimecrown_head.source.json": {
+      "sha256": "f6fd1979f626cc55dd816e767980091a1a99c437fa34e2732cb966bfbcb29f1e",
+      "bytes": 145326
+    },
+    "rimecrown_head.validation.json": {
+      "sha256": "10765af3b5664e513ef6bfb7387827393a19a4cc36b2976770404937c52c7d06",
+      "bytes": 792
+    },
+    "rimecrown_scarf.blend": {
+      "sha256": "13706885925ecf0c8f9826f22710e0337735f043450195060b70d1a90dcf0a0c",
+      "bytes": 114142
+    },
+    "rimecrown_scarf.glb": {
+      "sha256": "06b9a0febba05ab9648305927dd7fcf8723f61d656bc6519725b272092ec2b64",
+      "bytes": 34608
+    },
+    "rimecrown_scarf.pieces.json": {
+      "sha256": "995d96f9b1cbd7cfb35dea87b4d51957961f51f29e04e31037de265b64b81462",
+      "bytes": 272
+    },
+    "rimecrown_scarf.source.json": {
+      "sha256": "31ebd0dae4728dbaa67a3dba59239378a477cea19cf2a702406d2f88b1e11dc5",
+      "bytes": 86975
+    },
+    "rimecrown_scarf.validation.json": {
+      "sha256": "f6de725cdcbb543d81e3b952830d939b2b23e17ea4c4b6322e11d983506fe62a",
+      "bytes": 808
+    },
+    "runtime-profile.json": {
+      "sha256": "ab38c770f95e0d7c009681d3f8879843edf68476c1b62e8a1a6f6165ff4d9212",
+      "bytes": 1384
+    },
+    "side.png": {
+      "sha256": "fda95233e44085fdf8f513288ad1b01de6fdc9c8627e0f4d6f555550b6b9601e",
+      "bytes": 1065182
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/rimecrown-sentinel/live-validation-v1.json",
+    "sha256": "129f7c8c7b1b3105eab3f090cf8845fda6601a23d27ee680b835effbf8133300"
+  },
+  "live_v2": {
+    "path": "art-experiments/rimecrown-sentinel/live-validation-v2.json",
+    "sha256": "46876cc5b7ea170cc5ed186dc1105ad7061f96a6f123ac0294b28f874d8a6794"
+  }
+}

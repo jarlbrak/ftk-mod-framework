@@ -1,0 +1,89 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/saffronspine-puffer/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-5eb5142198b24cd085643eaa0641fa9f/case-result.json",
+  "visualReview": "scratch/model-route-2185298a0a369e67-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/saffronspine-puffer/saffronspine.glb",
+    "art-experiments/saffronspine-puffer/saffronspine_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/saffronspine-puffer/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-2185298a0a369e67-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-1409f2c8059446fc875e7482f7714327/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBlowFishA",
+        "mesh": "ftkmf_glb_saffronspine.glb",
+        "boneSignature": "8198a1e60d15c1dd19d32b83be60423c80eb129cbc9b48d273c450fac78f716c"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBlowFishA",
+        "mesh": "ftkmf_glb_saffronspine.glb",
+        "boneSignature": "8198a1e60d15c1dd19d32b83be60423c80eb129cbc9b48d273c450fac78f716c"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBlowFishA",
+        "mesh": "ftkmf_glb_saffronspine.glb",
+        "boneSignature": "8198a1e60d15c1dd19d32b83be60423c80eb129cbc9b48d273c450fac78f716c"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Saffronspine Puffer",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "pufferA",
+    "nativeChassis": "pufferA",
+    "rendererPaths": [
+      "enBlowFishA"
+    ],
+    "sourceRendererIds": [
+      121509
+    ],
+    "binding": {
+      "rendererPath": "enBlowFishA",
+      "mesh": "ftkmf_glb_saffronspine.glb",
+      "boneSignature": "8198a1e60d15c1dd19d32b83be60423c80eb129cbc9b48d273c450fac78f716c"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native pufferA / enBlowFishA / renderer 121509 source assignment only; no sibling renderer, chassis, or material route is credited by this record.",
+      "The ordinary no-focus hit reduced health from 58 to 48; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Eighteen selected original PNGs were reviewed; the remaining 342 captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "The native direct-death path hides enBlowFishA between reviewed frames 23 and 27 and replaces it with smoke and debris, so this archive accepts a clean hide-and-effect handoff without claiming a visible articulated corpse pose.",
+      "The causal Damaged and Death impact frames are strongly occluded by the foreground hero and bright effects; the visible target contour remains continuous, and no sampled tearing, missing surface, fin separation, or viewport clipping was observed.",
+      "Indirect death, other native attack variants, portrait, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

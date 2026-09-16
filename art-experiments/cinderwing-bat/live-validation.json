@@ -1,0 +1,730 @@
+{
+  "schemaVersion": 1,
+  "asset": "Cinderwing",
+  "artStatus": "prototype; not finished artistic acceptance",
+  "visualReview": {
+    "status": "partial manual review; further review pending",
+    "reviewedByParent": {
+      "attack": [
+        0,
+        10,
+        43,
+        50,
+        74
+      ],
+      "nonlethal-hit": [
+        25,
+        29,
+        32
+      ],
+      "lethal-death": [
+        26,
+        32,
+        60,
+        90
+      ]
+    },
+    "observations": "Parent reported no obvious exploded geometry and coherent wing folds in sampled frames. Small body limits readability, and hero occludes portions of death motion.",
+    "automaticQualityVerdict": null
+  },
+  "scope": {
+    "enemyId": "ftkmf_modeltest_cinderwing",
+    "nativeChassis": "batA",
+    "celRelativeRendererPath": "enBat01",
+    "nativeRendererReferenceId": 121104,
+    "allControllerVariantsValidated": false
+  },
+  "fixture": {
+    "disposableSave": true,
+    "heroMaxHp": 999,
+    "tutorialsQuiet": true,
+    "timingMode": "offline-fixed-step-gameplay",
+    "note": "Videos replay recorded screenshots at12fps. No duplicated frames are added to complete the failed death capture. These captures do not establish real-time rendering performance."
+  },
+  "assets": [
+    {
+      "path": "art-experiments/cinderwing-bat/cinderwing_rigged.glb",
+      "sha256": "9c0083c623129d073a69512accb409423c1fa6ab1c830729815bd4954d06deb5",
+      "bytes": 389044
+    },
+    {
+      "path": "art-experiments/cinderwing-bat/cinderwing_basecolor.png",
+      "sha256": "280feb8ae2f83da240e25fb0261b8c9ac0c38456a6a8746e56817d0a74df4040",
+      "bytes": 2055
+    }
+  ],
+  "installedBinariesAtPackaging": [
+    {
+      "path": "scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "df0cb43046a1281daf157a8f4cb3b78bfa06ad6aed932001d10553dd4745cca4",
+      "bytes": 1954816
+    },
+    {
+      "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "a21e2eb7550467209600a7d6e720e743b3d4b18d5781f6db004f1488dfca93c8",
+      "bytes": 56320
+    },
+    {
+      "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTestContent.dll",
+      "sha256": "d32d4035b8d8f211a6748444a3c1647a6d4109b665868c44922e14a6882d9c35",
+      "bytes": 18944
+    }
+  ],
+  "captures": [
+    {
+      "captureId": "4954debf49b84c9e9a20f6a47e900c02",
+      "captureSha256": "ec668643cd591874c9071f34eb67ffaab6089355b10423b84738f5c4175a5189",
+      "captureReportedOk": true,
+      "captureError": null,
+      "provenance": "observed-runtime",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_cinderwing_rigged.glb",
+          "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "batFlySlow"
+          ],
+          "sampleCount": 100,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 41,
+              "firstNormalizedTime": 42.69424819946289,
+              "lastNormalizedTime": 48.33177947998047,
+              "gameSeconds": 3.75830078125
+            },
+            {
+              "firstFrame": 56,
+              "lastFrame": 70,
+              "firstNormalizedTime": 0.4528806209564209,
+              "lastNormalizedTime": 2.3778810501098633,
+              "gameSeconds": 1.28338623046875
+            },
+            {
+              "firstFrame": 77,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.1467619240283966,
+              "lastNormalizedTime": 5.921760082244873,
+              "gameSeconds": 3.8499755859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "attackCrit_bat"
+          ],
+          "sampleCount": 14,
+          "occurrences": [
+            {
+              "firstFrame": 42,
+              "lastFrame": 55,
+              "firstNormalizedTime": 0.07840035110712051,
+              "lastNormalizedTime": 0.9950671195983887,
+              "gameSeconds": 1.19171142578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "batAttackProf"
+          ],
+          "sampleCount": 6,
+          "occurrences": [
+            {
+              "firstFrame": 71,
+              "lastFrame": 76,
+              "firstNormalizedTime": 0.16042909026145935,
+              "lastNormalizedTime": 0.9243177771568298,
+              "gameSeconds": 0.4583740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "name": "attack",
+      "rawCaptureLocalPath": "scratch/mirewarden-game/model-test-output/4954debf49b84c9e9a20f6a47e900c02.json",
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.9083251953125,
+            "value": true
+          },
+          "transitions": []
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 0,
+          "falseFrameCount": 120,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": false
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.9083251953125,
+            "value": false
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodies": []
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "stills": [
+        {
+          "frameIndex": 0,
+          "path": "art-experiments/cinderwing-bat/live/attack-0000.png",
+          "sha256": "efef6f0f02b93ceeb2e73cf2c282dd4b28dd0244c647f49e34229b452fbf090f",
+          "bytes": 1124110
+        },
+        {
+          "frameIndex": 10,
+          "path": "art-experiments/cinderwing-bat/live/attack-0010.png",
+          "sha256": "a32d7de5430d5baec72742313826f95f0a72f6d67780707d8d89467099fc7441",
+          "bytes": 1117068
+        },
+        {
+          "frameIndex": 43,
+          "path": "art-experiments/cinderwing-bat/live/attack-0043.png",
+          "sha256": "0ae192e352c6b23658118692201d53a800e8ab30676e911c102ea052eb027e73",
+          "bytes": 1110749
+        },
+        {
+          "frameIndex": 50,
+          "path": "art-experiments/cinderwing-bat/live/attack-0050.png",
+          "sha256": "d4db0a1573fa1db5b967b80cbcd3c5b692a19badaa05939824f09620c682ab1d",
+          "bytes": 1126883
+        },
+        {
+          "frameIndex": 74,
+          "path": "art-experiments/cinderwing-bat/live/attack-0074.png",
+          "sha256": "f1e54b87d13e08798e5472665e6df8c7e1cee068569498290372bbff40299ce7",
+          "bytes": 1131434
+        }
+      ],
+      "sourcePngDimensions": [
+        1280,
+        831
+      ],
+      "videoPadding": "Bottom black row only if source height odd; PNGs unchanged",
+      "video": {
+        "path": "art-experiments/cinderwing-bat/live/attack.mp4",
+        "sha256": "92b6918f9126e1d38a5c83fc55dcb77c463de98c17aa3e7d71ea22d60226622a",
+        "bytes": 3114844,
+        "frameCount": 120,
+        "fps": 12,
+        "durationSeconds": 10.0
+      }
+    },
+    {
+      "captureId": "99def3a5f4054868a1e17a9869a7ee2e",
+      "captureSha256": "49b683daa51e3720c6549e2a05370fbb9729edf5ada7712cafcf936a6898ec1a",
+      "captureReportedOk": true,
+      "captureError": null,
+      "provenance": "observed-runtime",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_cinderwing_rigged.glb",
+          "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "batFlySlow"
+          ],
+          "sampleCount": 98,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 51.241519927978516,
+              "lastNormalizedTime": 54.54153823852539,
+              "gameSeconds": 2.20001220703125
+            },
+            {
+              "firstFrame": 33,
+              "lastFrame": 65,
+              "firstNormalizedTime": 0.1634610891342163,
+              "lastNormalizedTime": 4.5634613037109375,
+              "gameSeconds": 2.933349609375
+            },
+            {
+              "firstFrame": 80,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.4528806209564209,
+              "lastNormalizedTime": 5.8153791427612305,
+              "gameSeconds": 3.57501220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "batTakeHit"
+          ],
+          "sampleCount": 8,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 32,
+              "firstNormalizedTime": 0.2042856514453888,
+              "lastNormalizedTime": 0.9192853569984436,
+              "gameSeconds": 0.6417236328125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "attackCrit_bat"
+          ],
+          "sampleCount": 14,
+          "occurrences": [
+            {
+              "firstFrame": 66,
+              "lastFrame": 79,
+              "firstNormalizedTime": 0.07840035110712051,
+              "lastNormalizedTime": 0.9950671195983887,
+              "gameSeconds": 1.191650390625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ],
+      "name": "nonlethal-hit",
+      "rawCaptureLocalPath": "scratch/mirewarden-game/model-test-output/99def3a5f4054868a1e17a9869a7ee2e.json",
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.9083251953125,
+            "value": true
+          },
+          "transitions": []
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 0,
+          "falseFrameCount": 120,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": false
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.9083251953125,
+            "value": false
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodies": []
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "stills": [
+        {
+          "frameIndex": 25,
+          "path": "art-experiments/cinderwing-bat/live/nonlethal-hit-0025.png",
+          "sha256": "5da4bc5b959d91d2aa3e37673dba305cf0ff0d2d3b3f3c68215c6255ddb2482f",
+          "bytes": 1128347
+        },
+        {
+          "frameIndex": 29,
+          "path": "art-experiments/cinderwing-bat/live/nonlethal-hit-0029.png",
+          "sha256": "98f1982886915a2054a6920fd3285d8b7edc16a7b17c004af06300e669420aea",
+          "bytes": 1098348
+        },
+        {
+          "frameIndex": 32,
+          "path": "art-experiments/cinderwing-bat/live/nonlethal-hit-0032.png",
+          "sha256": "3bfcd4edfa11ac0aa7e024a769ba4f41619830e1761306356762f8e1e78365a7",
+          "bytes": 1105338
+        }
+      ],
+      "sourcePngDimensions": [
+        1280,
+        831
+      ],
+      "videoPadding": "Bottom black row only if source height odd; PNGs unchanged",
+      "video": {
+        "path": "art-experiments/cinderwing-bat/live/nonlethal-hit.mp4",
+        "sha256": "149ed950200e4f5dae58bba91894076b2bf1977cc3c6d4f915ef729d6bfec307",
+        "bytes": 3113602,
+        "frameCount": 120,
+        "fps": 12,
+        "durationSeconds": 10.0
+      }
+    },
+    {
+      "captureId": "e3363bf8f232479d8585cb1a27495cfd",
+      "captureSha256": "c8e66d68dc66402cae60c6476dfb4826d099d3724fe08a32dced3c8118fb213e",
+      "captureReportedOk": false,
+      "captureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__57.MoveNext () [0x00000] in <filename unknown>:0 ",
+      "provenance": "observed-runtime",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 92,
+      "actualGameSeconds": 8.3416748046875,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_cinderwing_rigged.glb",
+          "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "batFlySlow"
+          ],
+          "sampleCount": 23,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 22,
+              "firstNormalizedTime": 56.15550231933594,
+              "lastNormalizedTime": 59.180519104003906,
+              "gameSeconds": 2.01666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "batDeath"
+          ],
+          "sampleCount": 68,
+          "occurrences": [
+            {
+              "firstFrame": 23,
+              "lastFrame": 90,
+              "firstNormalizedTime": 0.13750001788139343,
+              "lastNormalizedTime": 9.349993705749512,
+              "gameSeconds": 6.14166259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "name": "lethal-death",
+      "rawCaptureLocalPath": "scratch/mirewarden-game/model-test-output/e3363bf8f232479d8585cb1a27495cfd.json",
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 92,
+          "missingFrameCount": 0,
+          "trueFrameCount": 91,
+          "falseFrameCount": 1,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 91,
+            "gameSeconds": 8.3416748046875,
+            "value": false
+          },
+          "transitions": [
+            {
+              "fromFrame": 90,
+              "toFrame": 91,
+              "from": true,
+              "to": false,
+              "gameSeconds": 8.3416748046875
+            }
+          ]
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 92,
+          "missingFrameCount": 0,
+          "trueFrameCount": 0,
+          "falseFrameCount": 92,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": false
+          },
+          "lastSample": {
+            "frameIndex": 91,
+            "gameSeconds": 8.3416748046875,
+            "value": false
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 92,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodies": []
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "stills": [
+        {
+          "frameIndex": 26,
+          "path": "art-experiments/cinderwing-bat/live/lethal-death-0026.png",
+          "sha256": "58df4209b785f5a7ad15382e5aecee854f632f0ec1e5e5769b675bf237de4ec5",
+          "bytes": 1104415
+        },
+        {
+          "frameIndex": 32,
+          "path": "art-experiments/cinderwing-bat/live/lethal-death-0032.png",
+          "sha256": "00fd0fce7c108ac59d87f76cb74983ddf2d5ff6bbb1d6e4341cec321bef3f289",
+          "bytes": 1101693
+        },
+        {
+          "frameIndex": 60,
+          "path": "art-experiments/cinderwing-bat/live/lethal-death-0060.png",
+          "sha256": "89ec054dd84fdc43f4056dc41f902f0e6e5e04ca8b170f5b3bcf16ff2e7754aa",
+          "bytes": 1117487
+        },
+        {
+          "frameIndex": 90,
+          "path": "art-experiments/cinderwing-bat/live/lethal-death-0090.png",
+          "sha256": "d4b55871fffebb06b97bc80aba32cadd7115329fd95860cb93aa56d0b7d6170a",
+          "bytes": 1038938
+        }
+      ],
+      "sourcePngDimensions": [
+        1280,
+        831
+      ],
+      "videoPadding": "Bottom black row only if source height odd; PNGs unchanged",
+      "video": {
+        "path": "art-experiments/cinderwing-bat/live/lethal-death.mp4",
+        "sha256": "84497a997f85316aa215106676e53dfa5fa8c7c82626d1225b9db8c66a6e8821",
+        "bytes": 1847358,
+        "frameCount": 92,
+        "fps": 12,
+        "durationSeconds": 7.666666666666667
+      }
+    }
+  ],
+  "gameplayEvidence": {
+    "nonlethalHit": "Native committed Attack; displayed damage5, HP10 to5; batTakeHit sampled frames25\u201332, followed by retaliation attackCrit_bat.",
+    "lethalHit": "Native committed Attack; displayed damage10, HP5 to0; batDeath sampled frames23\u201390. No ragdoll flag or recorded rigidbodies.",
+    "deathCaptureTermination": "PARTIAL FAILED CAPTURE: captureReportedOk=false with Renderer destroyed during capture; exactly92frames,8.3416748046875game seconds. Disappearance is consistent with source-backed native cleanup and observed room advancement; no runtime callstack proves the exact cleanup branch.",
+    "postCombat": "Saved state records combat inactive, liveEnemies0, empty fightOrder, dungeon level0 room3, XP4 to7 and gold unchanged15. No loot collection action was recorded for this encounter.",
+    "ready": "Verified next native Ready slot at level0 room3; stage-next-enemy returned ok, VoteButton.OnLeftClick(Ready) returned clicked, subsequent native encounter loaded both plantA probe meshes. Same disposable save/session; inter-room progress, not campaign completion."
+  },
+  "missingChecks": [
+    "Full unoccluded silhouette and deformation review across camera angles remains pending.",
+    "batTakeHit begins at normalized0.2043; batAttackProf begins at0.1604; earliest intervals are absent.",
+    "batDeath begins at normalized0.1375, so the earliest portion of the first cycle is absent despite sampling beyond1.0.",
+    "Death capture terminated early with an error; no120frame success claim.",
+    "Full animation bounds/culling envelope and all controller variants are not validated."
+  ],
+  "sourceEvidence": [
+    {
+      "path": "scratch/cinderwing-after-death.json",
+      "sha256": "94fbef6e2d37c31d8548ab26e85436c7850113a9f2ebe5908c561876627117a9",
+      "bytes": 2720
+    },
+    {
+      "path": "scratch/cinderwing-after-hit.json",
+      "sha256": "87ca8ba43633edc012a0b6bc6a0b67768e4d942773af79a0960b6745370278ea",
+      "bytes": 4461
+    },
+    {
+      "path": "scratch/cinderwing-after-pass.json",
+      "sha256": "465cdc2913b77b9a4b8b7d7d6ca30694aba3dec52f79962c4e335053bbd55bcc",
+      "bytes": 4466
+    },
+    {
+      "path": "scratch/cinderwing-attack-capture.txt",
+      "sha256": "637a61bef6539e1f180e49cda4251b669c34fd7b15a39f3a142774c1d2585dfa",
+      "bytes": 32
+    },
+    {
+      "path": "scratch/cinderwing-attack-summary.json",
+      "sha256": "a3c229f4e25a48b216eb2fed53eaa705f17ae94b908d4bb2310a48b083edf2b7",
+      "bytes": 35247
+    },
+    {
+      "path": "scratch/cinderwing-death-action.json",
+      "sha256": "89b68866cd971e3d4f1cc0a07a09eb6b3624f12f47592ad27d028de12b0d81ac",
+      "bytes": 315
+    },
+    {
+      "path": "scratch/cinderwing-death-capture.txt",
+      "sha256": "64ce5d3063920fd588c40eacb777ffa14a56b7504c51cfa5af398d9297e02c23",
+      "bytes": 32
+    },
+    {
+      "path": "scratch/cinderwing-death-summary.json",
+      "sha256": "f9a90b7062e40a141882bfe4ac41a982486a84f5f57844861b1dcea12238c92f",
+      "bytes": 27568
+    },
+    {
+      "path": "scratch/cinderwing-hit-action.json",
+      "sha256": "aeb5ae2bc31914d2f4ba312a1cd502343223780c73c858a7821e4e5f7a4d2a39",
+      "bytes": 316
+    },
+    {
+      "path": "scratch/cinderwing-hit-capture.txt",
+      "sha256": "766cc04cd5b7460bcd403767a3e4b6b70ac792c193d79d87226eefe668ac921f",
+      "bytes": 32
+    },
+    {
+      "path": "scratch/cinderwing-hit-summary.json",
+      "sha256": "86fc10ffa40e340b8956f1e3b5b7f5ddbb714ac442c4ecae49948600fba58edd",
+      "bytes": 35243
+    },
+    {
+      "path": "scratch/cinderwing-inventory.json",
+      "sha256": "b81b72172ec4f27a4cac347ddac61011e8fbc64077b7325dad96956824bedbef",
+      "bytes": 79514
+    },
+    {
+      "path": "scratch/cinderwing-pass-action.json",
+      "sha256": "3f5d768b26b2fac6c4065e68eb300fcb273d663ab07a8cc14c7251ce17b4f0ee",
+      "bytes": 74
+    },
+    {
+      "path": "scratch/cinderwing-ready.json",
+      "sha256": "ab6ca2d86ab2f05cf4ca2f41adddcf00c139c5e5809c6703ffa16aa571e8a460",
+      "bytes": 446
+    },
+    {
+      "path": "scratch/cinderwing-stage.json",
+      "sha256": "0024c441af01d31e6b6b614e1bf1c39da1259d8f61892b807eb1a769c24fe3b2",
+      "bytes": 507
+    },
+    {
+      "path": "scratch/cinderwing-state.json",
+      "sha256": "f2838f46cef8f865fbe08fe430b8f748226d87f2963131d283e460247da9b509",
+      "bytes": 4467
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-ebd1347719be49aca145a2c861d545ef/journal.jsonl",
+      "sha256": "bfd915162c03dca5531eaa5ba9b8d39c65a3cd93c1a82cefe8e6f34fa73d06d2",
+      "bytes": 180795,
+      "relevantSequences": [
+        5,
+        7,
+        11,
+        49,
+        50
+      ]
+    }
+  ],
+  "sourceRetention": "Full capture JSON and extracted native reference data remain in ignored scratch; this record preserves derived evidence and hashes.",
+  "nativeRemovalSourceReview": {
+    "status": "expected-lifecycle-consistent; exact runtime branch unproven",
+    "reviewer": "game-decompile-analyst",
+    "chain": "EncounterSession.CleanupDioramaObjects calls enemy CombatFinished; CharacterDummy.AttemptCleanupAvatar(false) destroys CEL or queues it in Diorama.m_DioramaCleanup for dungeon encounters; native diorama cleanup destroys queued avatars.",
+    "sources": [
+      {
+        "localPath": "scratch/CharacterDummy.analysis.cs",
+        "line": 861
+      },
+      {
+        "localPath": "scratch/mirewarden-runtime-decompile/EncounterSession.cs",
+        "line": 475
+      }
+    ]
+  }
+}

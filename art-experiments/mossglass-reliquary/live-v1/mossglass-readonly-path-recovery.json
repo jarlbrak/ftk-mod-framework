@@ -1,0 +1,245 @@
+{
+  "reason": "Original wrapper terminated before any mutating request; corrected profile-relative renderer path enJellyCube",
+  "originalResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-06d6ac2a10e840c6aeac7596c9d49901/case-result.json",
+  "originalResultSha256": "b93cf283eea7b76352a3ee73cb2586f68a7cfde2ef59ce0c40712dbc8902ee94",
+  "retiredClaim": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/exercise-claim-c5bedda83553fc15b10a30533a005acbd1dcf01114d55b29ae7154bc4b8fe477.read-only-path-failure.json",
+  "claimSha256": "c2c0b7eb4c46a5c5bb4c53b46a6a5d2b59c37288ac714555099379920d461259",
+  "originalJournalSha256": "458234d3d96b70e1c9a6070a86f7edbfd67726453576d90deea30ff621f70dca",
+  "state": {
+    "inSession": true,
+    "singlePlayer": true,
+    "day": 0,
+    "timeIndex": 0,
+    "round": 0,
+    "questId": -10,
+    "questObjectiveKey": "oneline0",
+    "questDestRealm": 1178465130,
+    "questComplete": false,
+    "questIsLast": true,
+    "currentTurnFid": {
+      "turnIndex": 0,
+      "photonId": 1
+    },
+    "party": [
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "name": "Player 1",
+        "classId": 112,
+        "hp": 999,
+        "maxHp": 999,
+        "focus": 4,
+        "maxFocus": 4,
+        "gold": 11,
+        "level": 0,
+        "xp": 0,
+        "actionPoints": 0,
+        "spentFocus": 0,
+        "realmId": 1178465130,
+        "hexBig": null,
+        "hexSmall": null,
+        "pos": {
+          "x": 66.37767028808594,
+          "y": 0,
+          "z": 19.995590209960938
+        }
+      }
+    ],
+    "combat": {
+      "active": true,
+      "liveCombatants": 2,
+      "currentEnemyFid": {
+        "turnIndex": 0,
+        "photonId": -1
+      },
+      "whoseTurn": {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "isPlayer": true,
+        "source": "m_FightOrder[0]"
+      },
+      "heroTurnReady": true,
+      "readyParts": {
+        "initialized": true,
+        "fsmState": "Wait For Stance",
+        "actingFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        }
+      },
+      "enemies": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "name": "Mossglass Reliquary",
+          "type": "ftkmf_modeltest_mossglass",
+          "hp": 58,
+          "hpMax": 58,
+          "alive": true
+        }
+      ],
+      "liveEnemies": 1,
+      "stuck": false,
+      "winningPlayerFid": {
+        "turnIndex": 0,
+        "photonId": 0
+      },
+      "fightOrder": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 0
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 1.1384334564208984
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 1.6393442153930664
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 3.278688430786133
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 3.9162111282348633
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 4.918032646179199
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 6.557376861572266
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 6.693988800048828
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 8.196721076965332
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 9.471766471862793
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 9.836065292358398
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 11.475409507751465
+        }
+      ],
+      "abilities": [
+        {
+          "profId": 36,
+          "index": 0,
+          "label": "hammerSplash",
+          "name": "hammerSplash",
+          "buttonEnabled": true
+        }
+      ],
+      "driver": null
+    },
+    "dungeon": {
+      "inDungeon": true,
+      "inCombat": true,
+      "dungeonId": "FloodedCrypt",
+      "level": 0,
+      "room": 1,
+      "levelCount": 2,
+      "roomCount": 5,
+      "currentRoomType": "Enemy",
+      "encounterObjects": [
+        "ftkmf_modeltest_mossglass"
+      ],
+      "inLastRoom": false,
+      "atLastLevel": false,
+      "cleared": false,
+      "deactivated": false,
+      "driver": null
+    },
+    "map": {
+      "realmId": 1178465130,
+      "tile": {
+        "big": 33,
+        "small": 7
+      },
+      "stageIndex": 0,
+      "hasPOI": true,
+      "poiType": "Dungeon",
+      "reachableTiles": [
+        {
+          "big": 33,
+          "small": 6
+        },
+        {
+          "big": 33,
+          "small": 9
+        }
+      ],
+      "objective": {
+        "big": 33,
+        "small": 7
+      }
+    },
+    "choices": [],
+    "signals": {
+      "inCombat": true,
+      "modalOpen": false,
+      "modalType": null,
+      "choiceOpen": false,
+      "allDead": false,
+      "victoryShowing": false,
+      "warnings": [],
+      "victoryArmed": false
+    },
+    "phase": "combat"
+  }
+}

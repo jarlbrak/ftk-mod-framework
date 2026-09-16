@@ -1,0 +1,62 @@
+{
+  "status": "PASS_ORIGINAL_BIND_AUTHORED",
+  "model": "Tideglass Fishsmith",
+  "target": {
+    "baseClass": "blacksmith",
+    "skinset": "blacksmith_Fish",
+    "defaultSkinType": "Fish",
+    "bodyRendererPath": "playerFIsh",
+    "bodyRendererSourceId": 121366,
+    "hairTopRendererPath": "hairTop",
+    "hairTopRendererSourceId": 121490,
+    "hairBottomRendererPath": "hairBottom",
+    "hairBottomRendererSourceId": 121521
+  },
+  "authoringInputs": [
+    "bone_names",
+    "bindposes"
+  ],
+  "nativeSurfaceRead": false,
+  "references": {
+    "body": {
+      "path": "scratch/skeleton-audit/121366/reference.npz",
+      "sha256": "9640929d8289b4d194595abc2a44227057044f32c64c2cb62bc45c1030117fdb"
+    },
+    "hairTop": {
+      "path": "scratch/skeleton-audit/121490/reference.npz",
+      "sha256": "da75cc8c0d339dc69ae5ef1c16d08e3d55a2b4de24d8ac6c41d114a3b6db79f9"
+    },
+    "hairBottom": {
+      "path": "scratch/skeleton-audit/121521/reference.npz",
+      "sha256": "8b824b144df7e1b06ccd2d282705a4fff320d7aa189c89c711cca09d91fcf298"
+    }
+  },
+  "assets": {
+    "tideglass-body": {
+      "vertices": 5808,
+      "triangles": 1936,
+      "paletteBones": 25,
+      "weightedPaletteBones": 25,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "499e6aa71ff2469184c899cb03a93b2aac4bd0d5b5186197c61861389c1af941"
+    },
+    "tideglass-hair-top": {
+      "vertices": 636,
+      "triangles": 212,
+      "paletteBones": 6,
+      "weightedPaletteBones": 6,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "28f8dcfe9e24a3271b096fa59d037258ee03fd8c70c0cbca3c2f33fcad9bc1be"
+    },
+    "tideglass-hair-bottom": {
+      "vertices": 684,
+      "triangles": 228,
+      "paletteBones": 7,
+      "weightedPaletteBones": 7,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "f7a2a720035805d905c9cc1641b3aa9842c4ad4d1d58e340c2c1273da66d0654"
+    }
+  },
+  "paletteSha256": "1e70f760d752d9e2c4b304aba75abafedc16df70877013da4056077a63a70b83",
+  "artScope": "Original Tideglass Fishsmith V2: a compact dark tideglass fish visor beneath the native Blacksmith horn helm, tapered snout, brass eye slits and lantern core, scale pauldrons, forged gloves, and separately animated kelp-and-coral mantle."
+}

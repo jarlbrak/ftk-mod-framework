@@ -1,0 +1,38 @@
+{
+  "status": "PASS_CAPTURE_REVIEWED_WRAPPER_STOPPED_NO_HIT_OR_DEATH",
+  "reviewer": "Parent /root explicit task review",
+  "frames": [
+    0,
+    40,
+    80,
+    119
+  ],
+  "images": [
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0000.png",
+      "sha256": "14167e2d5048c0b733142523747d3af3f52af0f249066374a5da075cc49e4eb7"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0040.png",
+      "sha256": "cf3330e5204ae24407fad2b054e0cbc92f5b7f2236e5b9eaf4e77d984bbd9d47"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0080.png",
+      "sha256": "e8bd1e4b1727e800658e61b77ef550a02539f3bb5d5f1b51e465c867fb3fec96"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0119.png",
+      "sha256": "28dd6283e212c5fccdadbf5936cfa4130ce614bfbc61cee7d1959bed2e2b392c"
+    }
+  ],
+  "observations": [
+    "Native hat plus original36-joint probe and native attack effects visible in selected initial/action views.",
+    "Green flee indicators and later disappearance; enemy HP58\u21920 alone is not death proof.",
+    "Portrait dominated by retained native hat."
+  ],
+  "limits": [
+    "Pass-only calibration. No hit/death/loot action performed.",
+    "m_DidFlee not captured; theft/flee inference is source-consistent, not direct flag proof.",
+    "No global native Fergus haunt or finished creature acceptance."
+  ]
+}

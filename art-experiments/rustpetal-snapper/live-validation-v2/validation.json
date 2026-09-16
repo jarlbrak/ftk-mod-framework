@@ -1,0 +1,1086 @@
+{
+  "status": "reviewed_exact_source_pending_any_remaining_limits",
+  "revision": "V2",
+  "displayName": "Rustpetal Snapper",
+  "sourceKind": "native_enemy_row",
+  "nativeEnemy": "plantD",
+  "nativeChassis": "plantD",
+  "rendererPaths": [
+    "enJungleNibbler_C"
+  ],
+  "sourceRendererIds": [
+    121537
+  ],
+  "binding": {
+    "rendererPath": "enJungleNibbler_C",
+    "mesh": "ftkmf_glb_rustpetal.glb",
+    "boneSignature": "249fc7724b59d734e5bd0191e8c18c0276fd72f2c699e89c7b50e35e1b2c1810"
+  },
+  "ordinaryLethal": false,
+  "limits": [
+    "Exact directEnemy source plantD, CEL enPlantD(Clone), motion renderer enJungleNibbler_C, and source renderer 121537 only.",
+    "The ordinary zero-focus native Damaged and hit1 result reduced HP from 58 to 50. The explicit KillSingle fixture reduced HP from 50 to 0 for 1000 damage and is not ordinary lethal evidence.",
+    "The source has m_DoRagdoll false and zero rigidbodies. Death is the native animated death state and is not a ragdoll.",
+    "The death capture retains exact frames 0 through 93 of 120 and ends at the accepted renderer-destroyed boundary. It does not prove the full requested duration, cleanup causality, or later corpse lifetime.",
+    "No loot Collect action occurred. Strict Ready succeeded at level 0, room 2, with one button.",
+    "Twenty selected original PNGs were reviewed. Native effects, combat UI, foreground hero overlap, motion blur, and depth blur limit fine inspection in stated frames; the remaining 314 capture PNGs were preserved by hash but not individually reviewed.",
+    "Portrait framing, distant camera scales, alternate materials, culling boundaries, inheritance to other plant sources, and unrelated renderers remain outside this archive."
+  ],
+  "renderers": [
+    {
+      "rendererPath": "enJungleNibbler_C",
+      "mesh": "ftkmf_glb_rustpetal.glb",
+      "boneSignature": "249fc7724b59d734e5bd0191e8c18c0276fd72f2c699e89c7b50e35e1b2c1810"
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235426,
+        "alive": true,
+        "containerInstanceId": -237162,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237204,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237604,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235426,
+            "celInstanceId": -239030,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245752,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "ea71b19cb70a474e867ecc09da0531bf",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "ea71b19cb70a474e867ecc09da0531bf",
+    "id": "2dc59d3f5e764be68cc074781b6908aa",
+    "frame": 4353,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "profile": {
+    "key": "ftkmf_modeltest_rustpetal",
+    "baseEnemy": "plantD",
+    "displayName": "Rustpetal Snapper",
+    "combatProfile": "62b7f581729ea70227089502cce419ccaa2eaea6d2e66427474532b3d31a3997",
+    "renderers": [
+      {
+        "rendererPath": "enJungleNibbler_C",
+        "glbFile": "rustpetal.glb",
+        "textureFile": "rustpetal_basecolor.png",
+        "disableNativeEmission": true
+      }
+    ],
+    "minimumBaseHealth": 64,
+    "visualScale": 1.0
+  },
+  "ordinaryHit": {
+    "beforeHp": 58,
+    "afterHp": 50,
+    "focus": false
+  },
+  "explicitKillFixture": {
+    "action": "kill-fixture",
+    "accepted": true
+  },
+  "schema": "ftkmf.model-validation-archive.v1",
+  "session": "ea71b19cb70a474e867ecc09da0531bf",
+  "enemy": "ftkmf_modeltest_rustpetal",
+  "catalogSha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+  "assetHashes": {
+    "rustpetal.glb": "cc1b950c75830f00f2374948a21a97d70978964949a54db9f56c82913e072c3c",
+    "rustpetal_basecolor.png": "c385173b0c6bd32d712e462606fb218bb1ab3f09f0072bee33df63969196b8a4"
+  },
+  "captures": [
+    {
+      "action": "pass",
+      "caseAction": "pass",
+      "attempt": null,
+      "label": "idle-and-native-attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470.json",
+        "sha256": "255d9c44e3f71a19a25f518408ccd6b7353da956cc80a636dee831134d21e2b9",
+        "bytes": 5267886
+      },
+      "rawCaptureReportedOk": true,
+      "rawCaptureError": null,
+      "captureBoundary": {
+        "partial": false,
+        "completeCapture": true,
+        "allowRendererDestroyedPrefix": false,
+        "rawCaptureOk": true,
+        "rawCaptureError": null,
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 120,
+        "firstRetainedFrame": 3769,
+        "lastRetainedFrame": 3888,
+        "resultFrame": 3888,
+        "termination": null,
+        "allowDeathControllerTeardownPrefix": false,
+        "limitation": null
+      },
+      "frameCount": 120,
+      "width": 1280,
+      "height": 832,
+      "timingMode": "offline-fixed-step-gameplay",
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "pass",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245384,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 1.1467517614364624,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 3769,
+          "sample": {
+            "animatorInstanceId": -245384,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 1.1499096155166626,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0000.png",
+            "sha256": "896a1922a6df0d3c215ca2552e135faadd866d747397a6f144a2dccbd0ef7854",
+            "bytes": 1087811
+          }
+        },
+        "attack": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 3814,
+            "realtime": 72.6964111328125,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245386,
+            "targetRendererInstanceId": -245392,
+            "targetAnimatorInstanceId": -245384,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "attacker",
+            "actorInstanceId": 369188,
+            "actorFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "attackAnim": "AttackProf",
+            "override": "AttackProf",
+            "primary": {
+              "attackerFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "damage": 0,
+              "newHealth": 999,
+              "attackerHealthMod": 0,
+              "proficiencyId": 10,
+              "proficiencySuccess": true,
+              "attackResponse": "HarmlessAttack"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 58
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 3814,
+            "realtime": 72.70639038085938,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245386,
+            "targetRendererInstanceId": -245392,
+            "targetAnimatorInstanceId": -245384,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "AttackProf",
+            "forceAnim": false,
+            "preIssueLastTrigger": "Intro",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "AttackProf"
+          },
+          "sampleIndex": 45,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0045.png",
+            "sha256": "da140426f171e6fb86b1bf98fde68d002ebb25c085519e24e81ead73cae4c968",
+            "bytes": 1066374
+          }
+        },
+        "limitations": "Native action and trigger chronology select frames. Human review still judges pose, deformation, visibility and clip coverage."
+      },
+      "captureScope": "Settled idle and exact native enemy attack capture."
+    },
+    {
+      "action": "attack",
+      "caseAction": "attack",
+      "attempt": 1,
+      "label": "attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5.json",
+        "sha256": "15f8b39a66092e8623d1d9a65be5407a3957101042eaebadd642ab80694b2fba",
+        "bytes": 5271543
+      },
+      "rawCaptureReportedOk": true,
+      "rawCaptureError": null,
+      "captureBoundary": {
+        "partial": false,
+        "completeCapture": true,
+        "allowRendererDestroyedPrefix": false,
+        "rawCaptureOk": true,
+        "rawCaptureError": null,
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 120,
+        "firstRetainedFrame": 3996,
+        "lastRetainedFrame": 4115,
+        "resultFrame": 4115,
+        "termination": null,
+        "allowDeathControllerTeardownPrefix": false,
+        "limitation": null
+      },
+      "frameCount": 120,
+      "width": 1280,
+      "height": 832,
+      "timingMode": "offline-fixed-step-gameplay",
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "attack",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245384,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 2.4192073345184326,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 3996,
+          "sample": {
+            "animatorInstanceId": -245384,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 2.42223858833313,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0000.png",
+            "sha256": "bd0791f1f930c2341f831907326d0ff78555d98911698dfcdddcf5e7de38cd1f",
+            "bytes": 1123785
+          }
+        },
+        "hit": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 4009,
+            "realtime": 93.59880828857422,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245386,
+            "targetRendererInstanceId": -245392,
+            "targetAnimatorInstanceId": -245384,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "victim",
+            "actorInstanceId": 358974,
+            "actorFid": {
+              "photonId": 1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "None",
+            "primary": {
+              "attackerFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "damage": 8,
+              "newHealth": 50,
+              "attackerHealthMod": 0,
+              "proficiencyId": -1,
+              "proficiencySuccess": false,
+              "attackResponse": "Damaged"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 58
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 4019,
+            "realtime": 95.73162078857422,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245386,
+            "targetRendererInstanceId": -245392,
+            "targetAnimatorInstanceId": -245384,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "Damaged",
+            "forceAnim": false,
+            "preIssueLastTrigger": "AttackProf",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "Damaged"
+          },
+          "sampleIndex": 23,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0023.png",
+            "sha256": "5eae8196cf311e32d57e9feae04a565f73435a355689959287537aa1b5790705",
+            "bytes": 1145643
+          }
+        },
+        "limitations": "A nonlethal native damage response is proven. Human review still judges the retained hit pose and visual quality."
+      },
+      "captureScope": "Ordinary no-focus player attack capture; preserve its measured outcome separately."
+    },
+    {
+      "action": "kill-fixture",
+      "caseAction": "kill-fixture",
+      "attempt": null,
+      "label": "explicit-fixture-death",
+      "complete": false,
+      "termination": "renderer_destroyed",
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41.json",
+        "sha256": "858679ba940ef8a00b676e10f2f7342466fb23cd166d97deb01a6b054f3f9278",
+        "bytes": 4133455
+      },
+      "rawCaptureReportedOk": false,
+      "rawCaptureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__387.MoveNext () [0x00000] in <filename unknown>:0 ",
+      "captureBoundary": {
+        "partial": true,
+        "completeCapture": false,
+        "allowRendererDestroyedPrefix": true,
+        "rawCaptureOk": false,
+        "rawCaptureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__387.MoveNext () [0x00000] in <filename unknown>:0 ",
+        "requestedFrameCount": 120,
+        "retainedFrameCount": 94,
+        "firstRetainedFrame": 4206,
+        "lastRetainedFrame": 4299,
+        "resultFrame": 4300,
+        "termination": "renderer_destroyed",
+        "allowDeathControllerTeardownPrefix": true,
+        "limitation": "Failure category only; neither native cleanup causality nor full death-animation coverage is inferred."
+      },
+      "frameCount": 94,
+      "width": 1280,
+      "height": 832,
+      "timingMode": "offline-fixed-step-gameplay",
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "kill-fixture",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245384,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 1.1307634115219116,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 4206,
+          "sample": {
+            "animatorInstanceId": -245384,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 1.1338287591934204,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0000.png",
+            "sha256": "f48ed55ae552703237dfe2e6ab71d04289d7578f80ec21f26ae675d2ebd2eb56",
+            "bytes": 1094704
+          }
+        },
+        "death": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 4219,
+            "realtime": 121.47428894042969,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245386,
+            "targetRendererInstanceId": -245392,
+            "targetAnimatorInstanceId": -245384,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "victim",
+            "actorInstanceId": 358974,
+            "actorFid": {
+              "photonId": 1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "None",
+            "primary": {
+              "attackerFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "damage": 1000,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "proficiencyId": -1,
+              "proficiencySuccess": false,
+              "attackResponse": "Death"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 50
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 4229,
+            "realtime": 123.88540649414062,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245386,
+            "targetRendererInstanceId": -245392,
+            "targetAnimatorInstanceId": -245384,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "Death",
+            "forceAnim": false,
+            "preIssueLastTrigger": "AttackProf1",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "Death"
+          },
+          "sampleIndex": 23,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0023.png",
+            "sha256": "1aef3fe959d3999e807f31f12b82ced297e8ba341c8b7495d7ecbcfa61efd6f7",
+            "bytes": 1129022
+          }
+        },
+        "limitations": "This is an explicit KillSingle fixture on the native damage path, not ordinary lethal-damage proof. Human review still judges retained death frames and cleanup."
+      },
+      "captureScope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage."
+    }
+  ],
+  "rootVisualReview": "visual-review.json",
+  "rootVisualReviewPin": {
+    "path": "visual-review.json",
+    "sha256": "c29476ac27e8a1836034a4cba5b7e35b13e56945cacf5c55446cb15b1fbfbb5f",
+    "bytes": 11592
+  },
+  "visualReview": "reviewed_direct_plantd_binding_motion_gameplay_and_partial_animated_death_accepted_limited_art_pending",
+  "selectedPNGs": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0012.png",
+      "sha256": "b34efd04b68f12937c045b3c961eabe9d1b577ae4c27645403d82924045f1c2b",
+      "bytes": 1077949,
+      "action": "pass",
+      "index": 12,
+      "observation": "The exact custom pitcher plant is fully visible at native scale in settled idle. Its salmon and coral mouth, ivory teeth, paired crown spikes, curved dark stem, thorn-like fins, and green leaf base form one coherent silhouette. Native black skull effects occupy the hero side of the frame but do not cover the plant.",
+      "source": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0012.png",
+      "archive": "selected/pass-0012.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0045.png",
+      "sha256": "da140426f171e6fb86b1bf98fde68d002ebb25c085519e24e81ead73cae4c968",
+      "bytes": 1066374,
+      "action": "pass",
+      "index": 45,
+      "observation": "At the native idle-to-attack transition, the complete custom mouth, crown, stem, and leaf base remain joined and readable. The attack-slot UI overlaps the space above the plant and limits inspection of its highest crown tips.",
+      "source": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0045.png",
+      "archive": "selected/pass-0045.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0048.png",
+      "sha256": "e71ac5355f8f9cba28f312525af72d05f58d857eb080ac229b300114eddcbb62",
+      "bytes": 1082218,
+      "action": "pass",
+      "index": 48,
+      "observation": "The native attack3 opening raises and angles the custom head while the curved stem and leaf base follow the source rig. The authored mouth rim, teeth, crown spikes, and stem remain connected without a sampled gap or detached surface.",
+      "source": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0048.png",
+      "archive": "selected/pass-0048.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0052.png",
+      "sha256": "f599bc4e7b42c86f2913c8685969b25f8416a09dd72f1f30ac692824bde57973",
+      "bytes": 1081895,
+      "action": "pass",
+      "index": 52,
+      "observation": "During the native attack3 pose, the custom head thrusts toward the hero while its long stem bends coherently from the leaf base. Native foreground effects and the hero cover part of the contact area, so this frame proves the visible plant silhouette rather than fine collision clearance.",
+      "source": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0052.png",
+      "archive": "selected/pass-0052.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0056.png",
+      "sha256": "0b8dca3ba5be4e8ddbc68d1746fb46f800dd58a978ac18e32f2346cdf1fd8c41",
+      "bytes": 1052870,
+      "action": "pass",
+      "index": 56,
+      "observation": "The custom plant has recovered from attack3 with its full mouth, crown, stem, fins, and leaf base present. A large native black skull effect dominates the hero side and partly masks the lower attack path, but the target remains readable and coherent.",
+      "source": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470/0056.png",
+      "archive": "selected/pass-0056.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0006.png",
+      "sha256": "55873322ca187871664ea9d40c8888792bbdfff881ce74c3862484ea27c7c918",
+      "bytes": 1132320,
+      "action": "attack",
+      "attempt": 1,
+      "index": 6,
+      "observation": "The ordinary zero-focus player attack begins with the exact custom plant upright and intact at HP 58. Native black skull effects and the action panel occupy foreground space, while the complete plant silhouette remains visible.",
+      "source": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0006.png",
+      "archive": "selected/attack-0006.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0023.png",
+      "sha256": "5eae8196cf311e32d57e9feae04a565f73435a355689959287537aa1b5790705",
+      "bytes": 1145643,
+      "action": "attack",
+      "attempt": 1,
+      "index": 23,
+      "observation": "The causal native Damaged frame is heavily occluded by the foreground hero and bright impact sphere. The exposed crown and lower plant remain associated with the source position, but this exact frame cannot establish fine central-mouth or stem deformation.",
+      "source": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0023.png",
+      "archive": "selected/attack-0023.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0027.png",
+      "sha256": "817f76b91a7232284765f9d1fda522b8fd7970dba065d030db6d902b6cd9250a",
+      "bytes": 1100302,
+      "action": "attack",
+      "attempt": 1,
+      "index": 27,
+      "observation": "The native hit1 recoil is visible after the ordinary eight-point hit, with HP now 50. The custom head tilts left while the mouth rim, teeth, crown, stem, and leaf base bend as one connected model. The hero overlaps the lower center.",
+      "source": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0027.png",
+      "archive": "selected/attack-0027.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0032.png",
+      "sha256": "46f8bcebeab6c07ba6ccc6bd3112cd3729d4f6a7b3eb46c16e1f1bb13f994f8f",
+      "bytes": 1094314,
+      "action": "attack",
+      "attempt": 1,
+      "index": 32,
+      "observation": "After hit1, the custom plant recovers to its complete upright silhouette at HP 50. No sampled tooth, crown spike, stem section, fin, or leaf is missing or detached.",
+      "source": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0032.png",
+      "archive": "selected/attack-0032.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0075.png",
+      "sha256": "fc3140c2afeafaab45e490c44d498f0c633f1c8b8f29a4ad8ccf9d72841eb4bb",
+      "bytes": 1074834,
+      "action": "attack",
+      "attempt": 1,
+      "index": 75,
+      "observation": "During the later native attackProf1 state, the custom plant is upright with its head, stem, fins, and leaf base still joined. Native black skull effects cover portions of the hero side and limit contact-area inspection.",
+      "source": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0075.png",
+      "archive": "selected/attack-0075.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0097.png",
+      "sha256": "88a29a79dcbb4fc13e691697d98c6ec6d1dbbf691b62d72005da6dc9b134aa71",
+      "bytes": 1053875,
+      "action": "attack",
+      "attempt": 1,
+      "index": 97,
+      "observation": "The plant has returned to a coherent idle silhouette after its native attackProf1 resolves with a visible WHIFF result. The complete custom head, stem, and leaf base remain present; residual native effects stay in the foreground.",
+      "source": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5/0097.png",
+      "archive": "selected/attack-0097.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0000.png",
+      "sha256": "f48ed55ae552703237dfe2e6ab71d04289d7578f80ec21f26ae675d2ebd2eb56",
+      "bytes": 1094704,
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The explicit KillSingle fixture begins with the custom plant intact at HP 50. The action panel shows the normal hero's 81 percent per-slot accuracy. This fixture establishes a controlled Death trigger and is not ordinary lethal evidence.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0000.png",
+      "archive": "selected/kill-fixture-0000.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0023.png",
+      "sha256": "1aef3fe959d3999e807f31f12b82ced297e8ba341c8b7495d7ecbcfa61efd6f7",
+      "bytes": 1129022,
+      "action": "kill-fixture",
+      "index": 23,
+      "observation": "The causal native Death frame is heavily covered by the bright impact sphere, the foreground hero, and native effects. Visible plant portions remain at the target position, but the central authored geometry cannot be judged in this frame.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0023.png",
+      "archive": "selected/kill-fixture-0023.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0028.png",
+      "sha256": "5b570350a3a95625c7012fef8db06fe88f5ea7d0830e6cbc8fc972a697093126",
+      "bytes": 1083839,
+      "action": "kill-fixture",
+      "index": 28,
+      "observation": "The native animated death state has begun. The plant's mouth, crown, long stem, and leaf base remain connected while the body starts to fall beneath the 1000 damage label and overlapping native effects. The source has m_DoRagdoll false and zero rigidbodies, so this is animation evidence rather than ragdoll evidence.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0028.png",
+      "archive": "selected/kill-fixture-0028.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0035.png",
+      "sha256": "a7af623991ced26c39adf0990bf80fe42c24eff4615100595025596bb4a95ac9",
+      "bytes": 1106883,
+      "action": "kill-fixture",
+      "index": 35,
+      "observation": "The animated death bends the custom head and stem left while the crown spikes, mouth rim, teeth, fins, and leaf base remain visibly connected. Native smoke and the foreground hero limit inspection of the lowest stem section.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0035.png",
+      "archive": "selected/kill-fixture-0035.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0045.png",
+      "sha256": "c553084c904789c0346ee289ea71392dd88603fe0ec75fb25cec7f4508b6f16c",
+      "bytes": 1096515,
+      "action": "kill-fixture",
+      "index": 45,
+      "observation": "Later in the animated fall, motion blur produces an afterimage around the custom plant. The visible head, stem, crown, and leaves still form a coherent falling body, but the blur limits fine surface inspection.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0045.png",
+      "archive": "selected/kill-fixture-0045.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0055.png",
+      "sha256": "2d18ca9fc58cd53543e8d9a8891431d22dd815cfa1b83e0894ccadf77781380e",
+      "bytes": 1094707,
+      "action": "kill-fixture",
+      "index": 55,
+      "observation": "The animated plant has reached a coherent fallen pose. Its long stem and leaves extend across the floor while the mouth and head rest to the right, with no obvious sampled separation between the authored sections.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0055.png",
+      "archive": "selected/kill-fixture-0055.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0063.png",
+      "sha256": "9849bd7fae46b68b0c061f6ae3c9f2da89038216d585b8fd6ca742616464ccd8",
+      "bytes": 1060497,
+      "action": "kill-fixture",
+      "index": 63,
+      "observation": "The Victory handoff begins while the complete fallen plant remains visible behind the overlay. This sample proves the observed handoff pose only and does not establish later corpse lifetime.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0063.png",
+      "archive": "selected/kill-fixture-0063.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0090.png",
+      "sha256": "3155cb70cdd8530c7d6104a6e7e36321793e8703288620ad1d5f2439e9ef8b19",
+      "bytes": 980390,
+      "action": "kill-fixture",
+      "index": 90,
+      "observation": "A later pre-Ready sample still shows the fallen plant behind the player. Depth-of-field blur and foreground overlap prevent fine geometry inspection, so this frame supports only continued sampled visual presence.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0090.png",
+      "archive": "selected/kill-fixture-0090.png"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0093.png",
+      "sha256": "b6094801797541e85a47e542b14517709c82e97c2e639ef190525eed019b09c0",
+      "bytes": 984833,
+      "action": "kill-fixture",
+      "index": 93,
+      "observation": "The Ready panel is present and a faint fallen plant shape remains in the blurred background, but exact telemetry marks the selected renderer inactive, not visible, and its animator disabled in this frame. The capture then ends at the accepted renderer-destroyed boundary, so the background image cannot prove an active corpse or later lifetime.",
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41/0093.png",
+      "archive": "selected/kill-fixture-0093.png"
+    }
+  ],
+  "videos": [
+    {
+      "path": "pass.mp4",
+      "sha256": "49da41b918ef301b73804db93d5dd3c6faf966f70e3031530d0585878f83db3d",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative; raw capture metadata is the timing evidence.",
+      "action": "pass"
+    },
+    {
+      "path": "attack.mp4",
+      "sha256": "cd4cfad7e7deb62fc15aa859174035dc8df36b2fb3f9c6ebc65e2a366d4b817d",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative; raw capture metadata is the timing evidence.",
+      "action": "attack"
+    },
+    {
+      "path": "kill-fixture.mp4",
+      "sha256": "b75c712cfd4faa67ca0cbf3f58df079ba9df8d66869c9970aef0ad16402126f4",
+      "frames": 94,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative; raw capture metadata is the timing evidence.",
+      "action": "kill-fixture"
+    }
+  ],
+  "sourceImageCount": 335,
+  "captureImageCount": 334,
+  "sourceImagePins": "source-image-pins.json",
+  "captureImagePins": "capture-image-pins.json",
+  "assetPins": "asset-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/rustpetal-snapper/live-validation-v2-plan.json",
+      "sourceSha256": "2da414a535261b0408df38e049d5131b993112d908442542297480a04202d056",
+      "archive": "metadata/art-experiments/rustpetal-snapper/live-validation-v2-plan.json.gz",
+      "archiveSha256": "19159c274c64762228b02beb335de3df7adca27d997d9ac625f315fe7839afd7",
+      "encoding": "gzip-lossless",
+      "bytes": 4208
+    },
+    {
+      "source": "art-experiments/rustpetal-snapper/runtime-profile.json",
+      "sourceSha256": "bbad6aa03a999fedff8eceb273e396a83dc7803d8566fa1c6af0d64b2cc83c78",
+      "archive": "metadata/art-experiments/rustpetal-snapper/runtime-profile.json.gz",
+      "archiveSha256": "cca1eeebeea5a954b129815492599bfe182744bca9125e57957dd0980861af9c",
+      "encoding": "gzip-lossless",
+      "bytes": 539
+    },
+    {
+      "source": "art-experiments/rustpetal-snapper/rustpetal.glb",
+      "sourceSha256": "cc1b950c75830f00f2374948a21a97d70978964949a54db9f56c82913e072c3c",
+      "archive": "metadata/art-experiments/rustpetal-snapper/rustpetal.glb.gz",
+      "archiveSha256": "88a8bcba26bdcfe759fc2f0cd68265c0e8f21af5321e56e0d9e32b2ce101f6e1",
+      "encoding": "gzip-lossless",
+      "bytes": 277384
+    },
+    {
+      "source": "docs/model-validation-execution-queue.json",
+      "sourceSha256": "87dc99da5d987f714dda048bc4d969d4a7e4c6d69db5345c0fd3ce2bd745804b",
+      "archive": "metadata/docs/model-validation-execution-queue.json.gz",
+      "archiveSha256": "50bceed7d04f457a0f90a73b0e070bedb0cdfa47189bb67f3f0f63710c768512",
+      "encoding": "gzip-lossless",
+      "bytes": 113410
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41.json",
+      "sourceSha256": "858679ba940ef8a00b676e10f2f7342466fb23cd166d97deb01a6b054f3f9278",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/150d89731fdb486a82c6be0fa80e6f41.json.gz",
+      "archiveSha256": "78e9a7b452c01e40a9122ee50d0f98f9ca792995891b56e98249aa6d1465657b",
+      "encoding": "gzip-lossless",
+      "bytes": 4133455
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5.json",
+      "sourceSha256": "15f8b39a66092e8623d1d9a65be5407a3957101042eaebadd642ab80694b2fba",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/2079fb97ee2745c4a5d86ae712ca2fb5.json.gz",
+      "archiveSha256": "4d0f6971418e26c4328be7ad9911e68dc7e290ca26e53774237f5a5e1885a528",
+      "encoding": "gzip-lossless",
+      "bytes": 5271543
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470.json",
+      "sourceSha256": "255d9c44e3f71a19a25f518408ccd6b7353da956cc80a636dee831134d21e2b9",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/92459b99ea1c47759f292d5089f67470.json.gz",
+      "archiveSha256": "ddb0aff330afe670aca08c3533f928006a2600496c43e88caaf70fb106abc891",
+      "encoding": "gzip-lossless",
+      "bytes": 5267886
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-241b17cec05e44a09eace7bee30c3c9f/journal.jsonl",
+      "sourceSha256": "d65ce895f08092e1fe66089df5cfe5e427cec1e33177d8ba9a49d377f3cebb33",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-241b17cec05e44a09eace7bee30c3c9f/journal.jsonl.gz",
+      "archiveSha256": "92c5c264a758d393f594adba5fff350fb653873153e4c62f6066edd52c211802",
+      "encoding": "gzip-lossless",
+      "bytes": 775033
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-241b17cec05e44a09eace7bee30c3c9f/result.json",
+      "sourceSha256": "ab4e09067f6d45db5523f7ae6a27704d5089edbb7582fe80ebe6d17e0123c661",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-241b17cec05e44a09eace7bee30c3c9f/result.json.gz",
+      "archiveSha256": "51d7bb55d9642105e4d9666db42508473bf579eb9638185aabc5530337a6a247",
+      "encoding": "gzip-lossless",
+      "bytes": 7377
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-47ea895437b545ec9ead0121b090306e/journal.jsonl",
+      "sourceSha256": "b17a4b5d86dc24fb863fee04a8925dbc1741a07af0b7eb6a516b7d49065ff5cf",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-47ea895437b545ec9ead0121b090306e/journal.jsonl.gz",
+      "archiveSha256": "b076eb09ffe565ffba0aab335ee92aee1e30a53d5f9590b7a6bbf71a7974ab06",
+      "encoding": "gzip-lossless",
+      "bytes": 2965147
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-47ea895437b545ec9ead0121b090306e/result.json",
+      "sourceSha256": "8a3d190aac9bd758a82c45d34bf8d7032816b58e386cf46f1d648dfbb98531e6",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-47ea895437b545ec9ead0121b090306e/result.json.gz",
+      "archiveSha256": "d16f24aab2a45fcc8d11956ced7dcb98e906365b8dfe4f3b87261bca422adc68",
+      "encoding": "gzip-lossless",
+      "bytes": 1038
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-4db85886a8f44bebae1b35129e028105/case-result.json",
+      "sourceSha256": "496ac3717301c37794bf6884f6e124766ba51d81dc4a647989d13ec2df41fe44",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-4db85886a8f44bebae1b35129e028105/case-result.json.gz",
+      "archiveSha256": "9e347b342117c126e28c0464f15fc438493165471cd429eb93c4219dcf1145ec",
+      "encoding": "gzip-lossless",
+      "bytes": 345847
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-53bedbd1e46747bfa9cdaab34b94b4cb/journal.jsonl",
+      "sourceSha256": "aedc04409fee9867ec86547de151323d58f24dfe8a1fd2ca44f2edc0d4aae40f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-53bedbd1e46747bfa9cdaab34b94b4cb/journal.jsonl.gz",
+      "archiveSha256": "9da359bfc000f10fa253e42635a18a2be2ee90d053fca626ccdf419722e76ad1",
+      "encoding": "gzip-lossless",
+      "bytes": 2960948
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-53bedbd1e46747bfa9cdaab34b94b4cb/result.json",
+      "sourceSha256": "0eae811d8268f03381f5b181ff14012a594615b6615e960bde3c8bbc2d8e4d7f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-53bedbd1e46747bfa9cdaab34b94b4cb/result.json.gz",
+      "archiveSha256": "d5b1533a6f8b398ff01615768cf0c14c517a787221ea0ae1c5a267d37edfa665",
+      "encoding": "gzip-lossless",
+      "bytes": 780
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-844de02898c040adb3af965dbf10a3e8/journal.jsonl",
+      "sourceSha256": "d68b6534313c9f85df4de19f892609863bb68b9d635d8df334da18beffd1806a",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-844de02898c040adb3af965dbf10a3e8/journal.jsonl.gz",
+      "archiveSha256": "87dbba479eb9ad51fdc86fb12242a1e65fa51a19aa43bca75d3903c106723453",
+      "encoding": "gzip-lossless",
+      "bytes": 2374765
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-844de02898c040adb3af965dbf10a3e8/result.json",
+      "sourceSha256": "e7ef39060f96fe61058860532056b7c8bd240401ec0798d3d6332b85f27adf52",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-844de02898c040adb3af965dbf10a3e8/result.json.gz",
+      "archiveSha256": "065a8b44da4b3a4eb978962f9b3f8426e404052f138b6cd5bfb7e84ab05a293e",
+      "encoding": "gzip-lossless",
+      "bytes": 1115
+    },
+    {
+      "source": "scratch/model-route-b0b93182a11758ed-directenemy-root-review.json",
+      "sourceSha256": "c29476ac27e8a1836034a4cba5b7e35b13e56945cacf5c55446cb15b1fbfbb5f",
+      "archive": "metadata/scratch/model-route-b0b93182a11758ed-directenemy-root-review.json.gz",
+      "archiveSha256": "2fa7309478a7e1dfb124cd8ba6b6a33fbd354952aceb64d8fd8812b5a95e147e",
+      "encoding": "gzip-lossless",
+      "bytes": 11592
+    },
+    {
+      "source": "scratch/model-route-b0b93182a11758ed-directenemy-run.json",
+      "sourceSha256": "17a505cfe58208d784ef0a9c8be320c31ca02d11bb3ab876213def4783d3bb3f",
+      "archive": "metadata/scratch/model-route-b0b93182a11758ed-directenemy-run.json.gz",
+      "archiveSha256": "b3f289ba8bb1b97a67acf34c9c96e3b824cd195b84897284f81d0c000452de4e",
+      "encoding": "gzip-lossless",
+      "bytes": 67361
+    },
+    {
+      "source": "scratch/model-validation-stage-readiness.json",
+      "sourceSha256": "6af69cfcdcb1b4f1cd52cd5180656dbc9af3aefbe562ec49a1da975acc9ba711",
+      "archive": "metadata/scratch/model-validation-stage-readiness.json.gz",
+      "archiveSha256": "791967c82fbbbafcf43f9cc8af5d1961b644535d41e12dcfbef024fa9b0c671d",
+      "encoding": "gzip-lossless",
+      "bytes": 124976
+    },
+    {
+      "source": "tools/ai-model-pipeline/archive_model_validation_case.py",
+      "sourceSha256": "a3c9223e93c190cc9502b18a6a26b60e445363def56a17996a47fd8f14c6154c",
+      "archive": "metadata/tools/ai-model-pipeline/archive_model_validation_case.py.gz",
+      "archiveSha256": "88ab99aff20d07dc424f0bb8ebd603bcc605ad086e1e96f9c34b5f235d09f629",
+      "encoding": "gzip-lossless",
+      "bytes": 30096
+    }
+  ],
+  "archivePlan": {
+    "path": "art-experiments/rustpetal-snapper/live-validation-v2-plan.json",
+    "sha256": "2da414a535261b0408df38e049d5131b993112d908442542297480a04202d056",
+    "bytes": 4208
+  },
+  "caseResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-4db85886a8f44bebae1b35129e028105/case-result.json",
+    "sha256": "496ac3717301c37794bf6884f6e124766ba51d81dc4a647989d13ec2df41fe44",
+    "bytes": 345847
+  },
+  "visualReviewSource": {
+    "path": "scratch/model-route-b0b93182a11758ed-directenemy-root-review.json",
+    "sha256": "c29476ac27e8a1836034a4cba5b7e35b13e56945cacf5c55446cb15b1fbfbb5f",
+    "bytes": 11592
+  },
+  "runtimeProfile": {
+    "path": "art-experiments/rustpetal-snapper/runtime-profile.json",
+    "sha256": "bbad6aa03a999fedff8eceb273e396a83dc7803d8566fa1c6af0d64b2cc83c78",
+    "bytes": 539
+  },
+  "runnerRecord": {
+    "path": "scratch/model-route-b0b93182a11758ed-directenemy-run.json",
+    "sha256": "17a505cfe58208d784ef0a9c8be320c31ca02d11bb3ab876213def4783d3bb3f",
+    "bytes": 67361
+  },
+  "executionQueue": {
+    "path": "docs/model-validation-execution-queue.json",
+    "sha256": "87dc99da5d987f714dda048bc4d969d4a7e4c6d69db5345c0fd3ce2bd745804b",
+    "bytes": 113410
+  },
+  "stageReadiness": {
+    "path": "scratch/model-validation-stage-readiness.json",
+    "sha256": "6af69cfcdcb1b4f1cd52cd5180656dbc9af3aefbe562ec49a1da975acc9ba711",
+    "bytes": 124976
+  },
+  "stageBindingResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-241b17cec05e44a09eace7bee30c3c9f/result.json",
+    "sha256": "ab4e09067f6d45db5523f7ae6a27704d5089edbb7582fe80ebe6d17e0123c661",
+    "bytes": 7377
+  },
+  "stageBindingJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-241b17cec05e44a09eace7bee30c3c9f/journal.jsonl",
+    "sha256": "d65ce895f08092e1fe66089df5cfe5e427cec1e33177d8ba9a49d377f3cebb33",
+    "bytes": 775033
+  },
+  "profileDocumentSha256": "bbad6aa03a999fedff8eceb273e396a83dc7803d8566fa1c6af0d64b2cc83c78"
+}

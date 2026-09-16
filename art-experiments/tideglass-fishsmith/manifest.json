@@ -1,0 +1,76 @@
+{
+  "name": "Tideglass Fishsmith",
+  "status": "ORIGINAL_ART_CONTRACT_VALIDATED_NATIVE_PREVIEW_V1_ART_REVISION_V2_PENDING",
+  "artStatus": "Original low-poly Tideglass Fishsmith V2 uses a compact dark tideglass fish visor beneath the native Blacksmith horn helm, a tapered teal snout, brass eye slits, a restrained lantern core, scale pauldrons, and a separately animated kelp mantle. V1 native Party Select binding is archived; V2 native appearance and final art approval remain pending.",
+  "nativeSurfaceCopied": false,
+  "target": {
+    "baseClass": "blacksmith",
+    "skinset": "blacksmith_Fish",
+    "defaultSkinType": "Fish",
+    "nativeAvatar": "Player_FishPerson",
+    "celComponentPathId": "139636",
+    "body": {
+      "rendererPath": "playerFIsh",
+      "rendererSourceId": 121366,
+      "paletteBones": 25
+    },
+    "hairTop": {
+      "rendererPath": "hairTop",
+      "rendererSourceId": 121490,
+      "paletteBones": 6
+    },
+    "hairBottom": {
+      "rendererPath": "hairBottom",
+      "rendererSourceId": 121521,
+      "paletteBones": 7
+    }
+  },
+  "profile": {
+    "key": "ftkmf_modeltest_player_tideglass_fishsmith",
+    "document": "runtime-profile.json",
+    "requiredOutfit": [
+      "playerFIsh",
+      "hairTop",
+      "hairBottom"
+    ],
+    "conditionalApparel": "None declared. The Fish skin route uses class-specific native Blacksmith armor and boots; a fresh live inventory must establish exact assembled paths before any apparel assignment is authored."
+  },
+  "authoringContract": {
+    "referenceLocalOnly": [
+      "scratch/skeleton-audit/121366/reference.npz",
+      "scratch/skeleton-audit/121490/reference.npz",
+      "scratch/skeleton-audit/121521/reference.npz"
+    ],
+    "permittedReferenceInputs": [
+      "bone_names",
+      "bindposes"
+    ],
+    "forbiddenReferenceInputs": [
+      "native surfaces",
+      "native textures",
+      "native UVs",
+      "native weights",
+      "native animation samples"
+    ],
+    "proof": "original-geometry-proof.json"
+  },
+  "originalAssets": {
+    "tideglass-body.glb": "499e6aa71ff2469184c899cb03a93b2aac4bd0d5b5186197c61861389c1af941",
+    "tideglass-hair-top.glb": "28f8dcfe9e24a3271b096fa59d037258ee03fd8c70c0cbca3c2f33fcad9bc1be",
+    "tideglass-hair-bottom.glb": "f7a2a720035805d905c9cc1641b3aa9842c4ad4d1d58e340c2c1273da66d0654",
+    "tideglass-palette.png": "1e70f760d752d9e2c4b304aba75abafedc16df70877013da4056077a63a70b83"
+  },
+  "checks": {
+    "binaryAndSkinContract": "PASS: each original GLB validates against its exact Fish target bind contract, including positive authored weights for every palette bone.",
+    "sourceProvenance": "PASS: deterministic regeneration restricted to bone_names and bindposes reproduced every original source JSON, pieces manifest, and palette byte-for-byte.",
+    "studio": "V2 REVIEWED: authored-source Blender renders confirm a smaller dark visor, tapered teal snout, brass eye slits, and reduced highlight noise. Studio review does not substitute for native FTK appearance or final art approval.",
+    "profileRegistration": "OBSERVED V1: class 115 registered in the isolated player catalog. V2 is a pinned asset-only revision of the same exact profile and awaits a fresh isolated restart.",
+    "livePreview": "OBSERVED V1: visible native Party Select selection, exact custom body/mantle binding, and settled idle are preserved under live-validation-v1. V2 requires a fresh strict preview and visual review.",
+    "liveOverworldCombat": "PENDING: V1/V2 have not established native player overworld or combat behavior.",
+    "liveEquipmentLifetime": "PARTIALLY OBSERVED V1: default Fish preview has native Blacksmith armor, boots, helm, and backpack; no custom apparel path, gameplay equipment branch, or owner lifetime acceptance is claimed. Recheck V2 preview after restart."
+  },
+  "limits": "This package establishes original geometry, a binary skin contract, source-provenance proof, and V1 native Party Select body/mantle binding with one settled idle sample. V2 changes the authored visual treatment and must repeat native preview review. Neither version establishes overworld or combat behavior, gameplay, equipment compatibility, resource lifetime, culling, portrait behavior, player death, multiplayer, complete renderer visibility, or final art approval.",
+  "liveEvidence": {
+    "live-validation-v1/validation.json": "3700d4eef9013b9a229aefb584640a6215dc77cfd0f9a29a3dd0addc393c27ee"
+  }
+}

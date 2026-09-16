@@ -1,0 +1,61 @@
+{
+  "status": "PASS_ORIGINAL_BIND_AUTHORED",
+  "model": "Wildbloom Herbalist",
+  "target": {
+    "baseClass": "blacksmith",
+    "skinset": "herbalist_Female",
+    "bodyRendererPath": "player_Herbalist",
+    "bodyRendererSourceId": 121202,
+    "hairTopRendererPath": "hairTop",
+    "hairTopRendererSourceId": 121088,
+    "hairBottomRendererPath": "hairBottom",
+    "hairBottomRendererSourceId": 121003
+  },
+  "authoringInputs": [
+    "bone_names",
+    "bindposes"
+  ],
+  "nativeSurfaceRead": false,
+  "references": {
+    "body": {
+      "path": "scratch/skeleton-audit/121202/reference.npz",
+      "sha256": "922e155743c3c5c33e7bbcc015b93e52066694e0fc1aef173492c6e2fab79b46"
+    },
+    "hairTop": {
+      "path": "scratch/skeleton-audit/121088/reference.npz",
+      "sha256": "60cda6678c46fcc6ec7073065bd6bf34e8a0b561b868b6702b6aba67ba4b05e0"
+    },
+    "hairBottom": {
+      "path": "scratch/skeleton-audit/121003/reference.npz",
+      "sha256": "8b8509e38dc3a13986657048f057b227eb03dd5a0cad6314c22a1604cd7c203b"
+    }
+  },
+  "assets": {
+    "wildbloom-body": {
+      "vertices": 5280,
+      "triangles": 1760,
+      "paletteBones": 24,
+      "weightedPaletteBones": 24,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "e2ac7bb1bcb6668d1d210791f69519f70ae710a93a119dd1989f2be514f4f29b"
+    },
+    "wildbloom-hair-top": {
+      "vertices": 438,
+      "triangles": 146,
+      "paletteBones": 6,
+      "weightedPaletteBones": 6,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "ffc5cd75b06e36a77fae54462764e068ca8e741330d581788a775f0ec6f4dbbd"
+    },
+    "wildbloom-hair-bottom": {
+      "vertices": 498,
+      "triangles": 166,
+      "paletteBones": 7,
+      "weightedPaletteBones": 7,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "e1382cddc4bcb069856bc4aef41bb98dfe507e76a5e3d0ac528e5f3ea7db3e8e"
+    }
+  },
+  "paletteSha256": "a953dd503880c8a719a45b90cdf9004f3db715e740910022da0d7d10f4f3cbd7",
+  "artScope": "Original woodland healer: barkweave tunic, moss mantle, petal collar, blossom crown, and independently animated shoulder braids."
+}

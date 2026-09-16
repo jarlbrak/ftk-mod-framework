@@ -1,0 +1,1380 @@
+{
+  "ok": true,
+  "readOnly": true,
+  "inspectionToken": "7cd85f85f597429ba0b5cd56094da2c1",
+  "pins": {
+    "session": "e69928c5d0ab49df890edeef870d5feb",
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "menuInstanceId": 372762,
+    "createRootInstanceId": 368960,
+    "startButtonInstanceId": 361400,
+    "enterButtonInstanceId": 355450,
+    "persistentCallState": -1,
+    "localPhotonId": 1,
+    "fsmState": "Character Select Screen",
+    "gameDefinitionName": "LostCiv",
+    "gameDefinitionIdentityHash": 555450368,
+    "currentScreenInstanceId": 0,
+    "previews": [
+      {
+        "ownerInstanceId": -19122,
+        "classId": 113,
+        "skinType": 0,
+        "turnIndex": 0,
+        "active": true,
+        "avatarInstanceId": -290474,
+        "avatarActive": true,
+        "reciprocalPreviewReference": true,
+        "parentIsNativePedestal": true,
+        "classLabel": "Hearthveil Blacksmith",
+        "photonId": 1,
+        "ready": true,
+        "mode": "PlayerInfo",
+        "playerName": "Player 1",
+        "mainColorIndex": 16,
+        "skinColorIndex": 4,
+        "hairColorIndex": 1,
+        "armorId": -1,
+        "helmetId": -1,
+        "backpackId": -1
+      },
+      {
+        "ownerInstanceId": -20690,
+        "classId": 1,
+        "skinType": 0,
+        "turnIndex": 1,
+        "active": true,
+        "avatarInstanceId": -291226,
+        "avatarActive": true,
+        "reciprocalPreviewReference": true,
+        "parentIsNativePedestal": true,
+        "classLabel": "Hunter",
+        "photonId": 1,
+        "ready": true,
+        "mode": "PlayerInfo",
+        "playerName": "Player 2",
+        "mainColorIndex": 12,
+        "skinColorIndex": 4,
+        "hairColorIndex": 1,
+        "armorId": -1,
+        "helmetId": -1,
+        "backpackId": -1
+      },
+      {
+        "ownerInstanceId": -22232,
+        "classId": 2,
+        "skinType": 0,
+        "turnIndex": 2,
+        "active": true,
+        "avatarInstanceId": -291954,
+        "avatarActive": true,
+        "reciprocalPreviewReference": true,
+        "parentIsNativePedestal": true,
+        "classLabel": "Scholar",
+        "photonId": 1,
+        "ready": true,
+        "mode": "PlayerInfo",
+        "playerName": "Player 3",
+        "mainColorIndex": 7,
+        "skinColorIndex": 6,
+        "hairColorIndex": 8,
+        "armorId": -1,
+        "helmetId": -1,
+        "backpackId": -1
+      }
+    ],
+    "ownerInstanceId": -19122,
+    "targetClassId": 114,
+    "classKey": "ftkmf_modeltest_player_wildbloom_herbalist_female",
+    "direction": "right",
+    "nextClassId": 114,
+    "route": [
+      {
+        "index": 0,
+        "key": "blacksmith",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 1,
+        "key": "hunter",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 2,
+        "key": "scholar",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 3,
+        "key": "herbalist",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 4,
+        "key": "trapper",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 5,
+        "key": "minstrel",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 6,
+        "key": "busker",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 7,
+        "key": "woodcutter",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 8,
+        "key": "monk",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 9,
+        "key": "professor",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": false,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 10,
+        "key": "hobo",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 11,
+        "key": "gladiator",
+        "dlc": 2,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 12,
+        "key": "treasureHunter",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 13,
+        "key": "astronomer",
+        "dlc": 2,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 14,
+        "key": "ftkmf_thief",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 1
+      },
+      {
+        "index": 15,
+        "key": "ftkmf_innkeeper",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 16,
+        "key": "ftkmf_modeltest_player_astronomer_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 17,
+        "key": "ftkmf_modeltest_player_astronomer_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 18,
+        "key": "ftkmf_modeltest_player_astronomer_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 19,
+        "key": "ftkmf_modeltest_player_astronomer_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 20,
+        "key": "ftkmf_modeltest_player_astronomer_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 21,
+        "key": "ftkmf_modeltest_player_astronomer_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 22,
+        "key": "ftkmf_modeltest_player_astronomer_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 23,
+        "key": "ftkmf_modeltest_player_blacksmith_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 24,
+        "key": "ftkmf_modeltest_player_blacksmith_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 25,
+        "key": "ftkmf_modeltest_player_blacksmith_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 26,
+        "key": "ftkmf_modeltest_player_blacksmith_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 27,
+        "key": "ftkmf_modeltest_player_blacksmith_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 28,
+        "key": "ftkmf_modeltest_player_blacksmith_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 29,
+        "key": "ftkmf_modeltest_player_blacksmith_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 30,
+        "key": "ftkmf_modeltest_player_busker_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 31,
+        "key": "ftkmf_modeltest_player_busker_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 32,
+        "key": "ftkmf_modeltest_player_busker_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 33,
+        "key": "ftkmf_modeltest_player_busker_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 34,
+        "key": "ftkmf_modeltest_player_busker_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 35,
+        "key": "ftkmf_modeltest_player_busker_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 36,
+        "key": "ftkmf_modeltest_player_busker_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 37,
+        "key": "ftkmf_modeltest_player_gladiator_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 38,
+        "key": "ftkmf_modeltest_player_gladiator_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 39,
+        "key": "ftkmf_modeltest_player_gladiator_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 40,
+        "key": "ftkmf_modeltest_player_gladiator_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 41,
+        "key": "ftkmf_modeltest_player_gladiator_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 42,
+        "key": "ftkmf_modeltest_player_gladiator_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 43,
+        "key": "ftkmf_modeltest_player_gladiator_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 44,
+        "key": "ftkmf_modeltest_player_herbalist_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 45,
+        "key": "ftkmf_modeltest_player_herbalist_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 46,
+        "key": "ftkmf_modeltest_player_herbalist_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 47,
+        "key": "ftkmf_modeltest_player_herbalist_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 48,
+        "key": "ftkmf_modeltest_player_herbalist_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 49,
+        "key": "ftkmf_modeltest_player_herbalist_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 50,
+        "key": "ftkmf_modeltest_player_herbalist_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 51,
+        "key": "ftkmf_modeltest_player_hobo_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 52,
+        "key": "ftkmf_modeltest_player_hobo_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 53,
+        "key": "ftkmf_modeltest_player_hobo_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 54,
+        "key": "ftkmf_modeltest_player_hobo_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 55,
+        "key": "ftkmf_modeltest_player_hobo_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 56,
+        "key": "ftkmf_modeltest_player_hobo_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 57,
+        "key": "ftkmf_modeltest_player_hobo_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 58,
+        "key": "ftkmf_modeltest_player_hunter_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 59,
+        "key": "ftkmf_modeltest_player_hunter_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 60,
+        "key": "ftkmf_modeltest_player_hunter_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 61,
+        "key": "ftkmf_modeltest_player_hunter_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 62,
+        "key": "ftkmf_modeltest_player_hunter_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 63,
+        "key": "ftkmf_modeltest_player_hunter_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 64,
+        "key": "ftkmf_modeltest_player_hunter_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 65,
+        "key": "ftkmf_modeltest_player_minstrel_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 66,
+        "key": "ftkmf_modeltest_player_minstrel_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 67,
+        "key": "ftkmf_modeltest_player_minstrel_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 68,
+        "key": "ftkmf_modeltest_player_minstrel_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 69,
+        "key": "ftkmf_modeltest_player_minstrel_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 70,
+        "key": "ftkmf_modeltest_player_minstrel_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 71,
+        "key": "ftkmf_modeltest_player_minstrel_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 72,
+        "key": "ftkmf_modeltest_player_monk_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 73,
+        "key": "ftkmf_modeltest_player_monk_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 74,
+        "key": "ftkmf_modeltest_player_monk_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 75,
+        "key": "ftkmf_modeltest_player_monk_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 76,
+        "key": "ftkmf_modeltest_player_monk_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 77,
+        "key": "ftkmf_modeltest_player_monk_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 78,
+        "key": "ftkmf_modeltest_player_monk_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 79,
+        "key": "ftkmf_modeltest_player_professor_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 80,
+        "key": "ftkmf_modeltest_player_professor_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 81,
+        "key": "ftkmf_modeltest_player_professor_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 82,
+        "key": "ftkmf_modeltest_player_professor_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 83,
+        "key": "ftkmf_modeltest_player_professor_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 84,
+        "key": "ftkmf_modeltest_player_scholar_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 85,
+        "key": "ftkmf_modeltest_player_scholar_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 86,
+        "key": "ftkmf_modeltest_player_scholar_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 87,
+        "key": "ftkmf_modeltest_player_scholar_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 88,
+        "key": "ftkmf_modeltest_player_scholar_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 89,
+        "key": "ftkmf_modeltest_player_scholar_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 90,
+        "key": "ftkmf_modeltest_player_scholar_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 91,
+        "key": "ftkmf_modeltest_player_trapper_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 92,
+        "key": "ftkmf_modeltest_player_trapper_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 93,
+        "key": "ftkmf_modeltest_player_trapper_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 94,
+        "key": "ftkmf_modeltest_player_trapper_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 95,
+        "key": "ftkmf_modeltest_player_trapper_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 96,
+        "key": "ftkmf_modeltest_player_trapper_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 97,
+        "key": "ftkmf_modeltest_player_trapper_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 98,
+        "key": "ftkmf_modeltest_player_treasurehunter_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 99,
+        "key": "ftkmf_modeltest_player_treasurehunter_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 100,
+        "key": "ftkmf_modeltest_player_treasurehunter_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 101,
+        "key": "ftkmf_modeltest_player_treasurehunter_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 102,
+        "key": "ftkmf_modeltest_player_treasurehunter_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 103,
+        "key": "ftkmf_modeltest_player_treasurehunter_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 104,
+        "key": "ftkmf_modeltest_player_treasurehunter_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 105,
+        "key": "ftkmf_modeltest_player_woodcutter_cat",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 106,
+        "key": "ftkmf_modeltest_player_woodcutter_demon",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 107,
+        "key": "ftkmf_modeltest_player_woodcutter_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 108,
+        "key": "ftkmf_modeltest_player_woodcutter_fish",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 109,
+        "key": "ftkmf_modeltest_player_woodcutter_goblin",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 110,
+        "key": "ftkmf_modeltest_player_woodcutter_male",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 111,
+        "key": "ftkmf_modeltest_player_woodcutter_undead",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 112,
+        "key": "ftkmf_modeltest_player_blacksmith_female_apparel",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 113,
+        "key": "ftkmf_modeltest_player_hearthveil_blacksmith_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 114,
+        "key": "ftkmf_modeltest_player_wildbloom_herbalist_female",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 0
+      },
+      {
+        "index": 115,
+        "key": "ftkmf_modeltest_player_tideglass_fishsmith",
+        "dlc": -1,
+        "hasDlc": true,
+        "usable": true,
+        "revealed": true,
+        "unlocked": true,
+        "defaultSkin": 5
+      }
+    ],
+    "build": "Release",
+    "arrowInstanceId": -19532,
+    "arrowCallState": 2,
+    "arrowName": "classArrowNext",
+    "arrowCandidates": [
+      {
+        "index": 0,
+        "instanceId": -19494,
+        "name": "toggleClass",
+        "explicitDirectionalControl": false,
+        "matchingCallback": true,
+        "callbacks": [
+          {
+            "targetInstanceId": -19122,
+            "method": "OnClassClick"
+          }
+        ],
+        "persistentCount": 1,
+        "callState": 2,
+        "ownerChild": true,
+        "active": true,
+        "interactable": true,
+        "graphicActive": true,
+        "targetGraphicInstanceId": -19492,
+        "canvasInstanceId": 350570,
+        "canvasActive": true,
+        "graphicColorAlpha": 1.0,
+        "rendererAlpha": 1.0,
+        "alphaFactorsPositive": true,
+        "culled": false,
+        "alphaGroups": [
+          {
+            "instanceId": -19128,
+            "alpha": 1.0,
+            "ignoreParentGroups": false
+          }
+        ],
+        "visible": true,
+        "eligible": false,
+        "reasons": [
+          "not_explicit_directional_control"
+        ]
+      },
+      {
+        "index": 1,
+        "instanceId": -19532,
+        "name": "classArrowNext",
+        "explicitDirectionalControl": true,
+        "matchingCallback": true,
+        "callbacks": [
+          {
+            "targetInstanceId": -19122,
+            "method": "OnClassClick"
+          }
+        ],
+        "persistentCount": 1,
+        "callState": 2,
+        "ownerChild": true,
+        "active": true,
+        "interactable": true,
+        "graphicActive": true,
+        "targetGraphicInstanceId": -19530,
+        "canvasInstanceId": 350570,
+        "canvasActive": true,
+        "graphicColorAlpha": 1.0,
+        "rendererAlpha": 1.0,
+        "alphaFactorsPositive": true,
+        "culled": false,
+        "alphaGroups": [
+          {
+            "instanceId": -19128,
+            "alpha": 1.0,
+            "ignoreParentGroups": false
+          }
+        ],
+        "visible": true,
+        "eligible": true,
+        "reasons": []
+      },
+      {
+        "index": 2,
+        "instanceId": -19542,
+        "name": "classArrowPrevious",
+        "explicitDirectionalControl": false,
+        "matchingCallback": false,
+        "callbacks": [
+          {
+            "targetInstanceId": -19122,
+            "method": "OnClassClickLeft"
+          }
+        ],
+        "persistentCount": 1,
+        "callState": 2,
+        "ownerChild": true,
+        "active": true,
+        "interactable": true,
+        "graphicActive": true,
+        "targetGraphicInstanceId": -19540,
+        "canvasInstanceId": 350570,
+        "canvasActive": true,
+        "graphicColorAlpha": 1.0,
+        "rendererAlpha": 1.0,
+        "alphaFactorsPositive": true,
+        "culled": false,
+        "alphaGroups": [
+          {
+            "instanceId": -19128,
+            "alpha": 1.0,
+            "ignoreParentGroups": false
+          }
+        ],
+        "visible": true,
+        "eligible": false,
+        "reasons": [
+          "not_explicit_directional_control",
+          "callback_not_exact_single_owner_direction"
+        ]
+      }
+    ]
+  },
+  "reachedTarget": false,
+  "testFixtureMaxHpTarget": null,
+  "tutorialsQuiet": false,
+  "session": "e69928c5d0ab49df890edeef870d5feb",
+  "id": "43e081d86a4141e8811c572a268d190d",
+  "frame": 3821,
+  "savePath": "save-model-test-81fab5f083e30704"
+}

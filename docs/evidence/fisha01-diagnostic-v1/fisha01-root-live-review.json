@@ -1,0 +1,39 @@
+{
+  "session": "34c6aa4af2e24f4f9617879dfcd86301",
+  "status": "DIAGNOSTIC_SELECTED_POSES_AND_RAGDOLL_REVIEWED",
+  "reviewedFrames": {
+    "7409ce3080ac4b758be16fabb193f281": [
+      0,
+      50
+    ],
+    "9d6e711f026b4721b9dfe7fcbeb3b9fd": [
+      30
+    ],
+    "734f279931d34990a3e5274cd694cf1d": [
+      30
+    ],
+    "97dbabd8699744ef90820005d65cc27d": [
+      60
+    ]
+  },
+  "observations": [
+    "Upright bound biped in idle; native lunge toward hero with FX/hero overlap.",
+    "First attack DODGED at58HP; retained stopped wrapper.",
+    "Separate ordinary attack -8 HP58\u219250.",
+    "Explicit fixture death50\u21920; collapsed probe visible at60. Native11body ragdoll enabled26 together with Animator disable."
+  ],
+  "ragdollAnalysis": "scratch/fisha01-ragdoll-analysis.json",
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 3,
+    "buttonCount": 1
+  },
+  "collectCount": 2,
+  "limits": [
+    "Exact fishA01 unarmedcontroller only",
+    "Probe is diagnostic, no original appearance acceptance",
+    "Explicit death is not ordinary lethal",
+    "No floorcontact/IsSleeping/finalownerteardown proof"
+  ]
+}

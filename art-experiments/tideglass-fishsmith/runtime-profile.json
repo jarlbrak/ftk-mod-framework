@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_player_tideglass_fishsmith",
+      "baseClass": "blacksmith",
+      "displayName": "Tideglass Fishsmith",
+      "skinset": "blacksmith_Fish",
+      "defaultSkinType": "Fish",
+      "renderers": [
+        {
+          "rendererPath": "playerFIsh",
+          "glbFile": "tideglass-body.glb",
+          "textureFile": "tideglass-palette.png"
+        },
+        {
+          "rendererPath": "hairTop",
+          "glbFile": "tideglass-hair-top.glb",
+          "textureFile": "tideglass-palette.png"
+        },
+        {
+          "rendererPath": "hairBottom",
+          "glbFile": "tideglass-hair-bottom.glb",
+          "textureFile": "tideglass-palette.png"
+        }
+      ]
+    }
+  ]
+}

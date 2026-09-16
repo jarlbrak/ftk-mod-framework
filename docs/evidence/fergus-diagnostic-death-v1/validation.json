@@ -1,0 +1,180 @@
+{
+  "status": "EXPLICIT_DEATH_FIRST_DIAGNOSTIC_SELECTED_VIEWS_REVIEWED",
+  "nativeEnemy": "scourgeG",
+  "runtimeKey": "ftkmf_modeltest_probe_scourgeg",
+  "rendererId": 121222,
+  "controllerId": 5934,
+  "session": "1ae9d5a251334093965b5a952f4317c9",
+  "pins": {
+    "deployed-binaries": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "session": "1ae9d5a251334093965b5a952f4317c9",
+      "binaries": {
+        "framework": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+          "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+          "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+          "bytes": 1974272
+        },
+        "helper": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1",
+          "bytes": 304640
+        }
+      },
+      "measurement": "on_disk_binary_sha256",
+      "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+    },
+    "profile-assets": {
+      "probe_121222.glb": "d73e567db65806f1f0442740d8f506d7e1de39c543b841092e0113e113f38706",
+      "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+    },
+    "provenance": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "port": 8788,
+      "session": "1ae9d5a251334093965b5a952f4317c9",
+      "case": "658cd0d97d024bca8544d6c8321585d8",
+      "mode": "record-action",
+      "enemy": "ftkmf_modeltest_probe_scourgeg",
+      "class": null,
+      "profile": {
+        "key": "ftkmf_modeltest_probe_scourgeg",
+        "baseEnemy": "scourgeG",
+        "displayName": "Rig probe: scourgeG",
+        "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+        "renderers": [
+          {
+            "rendererPath": "enScourgeLeprechaun",
+            "glbFile": "probe_121222.glb",
+            "textureFile": "probe_palette.png"
+          }
+        ],
+        "minimumBaseHealth": 64
+      },
+      "profileInputSha256": "65227877f96d5faafe658be3316848e4d4d6f1d3b273e1593123a19f3dc705e8",
+      "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+    }
+  },
+  "rawCapture": {
+    "path": "scratch/mirewarden-game/model-test-output/9e85b32a18e64139a7886a1191c336f8.json",
+    "sha256": "80e9fdd448c2632d3ab13b2734ae67fc49c2c6840db6e5592e13ad5a0cb3895f"
+  },
+  "archivedRaw": {
+    "path": "docs/evidence/fergus-diagnostic-death-v1/death.json.gz",
+    "sha256": "827568836eab224c059083a5defca6686badc81106f4b3b081187ee63d7e1984"
+  },
+  "frames": 120,
+  "video": {
+    "path": "docs/evidence/fergus-diagnostic-death-v1/death.mp4",
+    "sha256": "f5429eb79a27a994b3d072a274ad2623b5a27a5f30de2f510a084f4a696569e4"
+  },
+  "videoMetadata": {
+    "width": 1280,
+    "height": 832,
+    "r_frame_rate": "12/1",
+    "nb_read_frames": "120"
+  },
+  "rootReview": {
+    "path": "docs/evidence/fergus-diagnostic-death-v1/fergus-death-root-review.json",
+    "sha256": "f2cfd4978b0be058aa7dae77ec20c136221707b038d0c07366eeeed30fa8ab88"
+  },
+  "action": {
+    "ok": true,
+    "error": null,
+    "result": {
+      "committed": "KillSingle",
+      "target": {
+        "turnIndex": 0,
+        "photonId": -1
+      },
+      "whoseTurnWas": "player",
+      "enemyHpBefore": 58,
+      "note": "turn committed; poll /state.combat (active flips false on resolve, or it becomes the enemy turn next)"
+    }
+  },
+  "deathClip": "deathHeavy_imp frames25\u2013119",
+  "ragdoll": {
+    "allNativeDoRagdollFalse": true,
+    "allAnimatorEnabled": true,
+    "bodyRagdollObserved": false,
+    "nativeWeaponKinematicBodyFrames": [
+      0,
+      24
+    ],
+    "zeroBodyCountFrames": [
+      25,
+      119
+    ]
+  },
+  "progression": {
+    "collectActions": 2,
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 3,
+      "buttonCount": 1
+    },
+    "evidence": "Two once-only native votes; gold18\u219234 observed between same-button submissions."
+  },
+  "evidence": [
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/capture-summary.json",
+      "sha256": "6713c9d55d4dca6f11efa342a05e3ae9ad0c52c1f8d16933253d42115bacbbfe"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/death-0030.png",
+      "sha256": "58eafcac6b921fa6fdb7869d30f77dd2961fdfdefff387fc651bdc1c41d63953"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/death-0060.png",
+      "sha256": "01534c522a48ba32e6d532c53d2c4f2ea86abdd066d6f720face1c0b27cdeeb4"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/death.json.gz",
+      "sha256": "827568836eab224c059083a5defca6686badc81106f4b3b081187ee63d7e1984"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/death.mp4",
+      "sha256": "f5429eb79a27a994b3d072a274ad2623b5a27a5f30de2f510a084f4a696569e4"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/fergus-death-collect-1.json",
+      "sha256": "82ab401da430c3eb13e37d50c92aa931b80da7644cbba1f4bd4466c51ee3bf22"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/fergus-death-collect-2.json",
+      "sha256": "f2b7cb42bef2057b2c418d4d97eaadd29eb60d984cd57f30795f4e2fe50513f1"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/fergus-death-final-ready.json",
+      "sha256": "ff5752558e55c75e042a53434b338c61108ca62bcf504945db2d29d4b31ab27c"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/fergus-death-progress-observation.json",
+      "sha256": "5194ed5dcda95b6f26af2d130b32fb8b2694004712ce0a7ab747223502a4a11f"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/fergus-death-root-review.json",
+      "sha256": "f2cfd4978b0be058aa7dae77ec20c136221707b038d0c07366eeeed30fa8ab88"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/journal.jsonl",
+      "sha256": "34b044f0dbb7997e349c28f1d608d7217bd2b6442df5c6f3b9e1e6f9591bd0e7"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/result.json",
+      "sha256": "e856eeb15bd39a34b2a8ab195d22ef934cb46a921028d1c870d0ac079cda265d"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-death-v1/source-image-pins.json",
+      "sha256": "e248c21244cc8d91d506c78ae6095e27f1ca6b27f91fa3e95d368a10c6dac479"
+    }
+  ],
+  "limits": [
+    "Explicit KillSingle58\u21920, not ordinary lethal damage.",
+    "Native hat/effects retained; selected probe corpse views only.",
+    "No normal-hit, whole-controller, original Thistlewick body or global Fergus haunt acceptance.",
+    "Prior pass-only theft/flee-consistent stopped wrapper remains separate."
+  ]
+}

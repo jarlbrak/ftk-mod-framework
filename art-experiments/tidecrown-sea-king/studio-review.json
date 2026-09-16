@@ -1,0 +1,22 @@
+{
+  "status": "ADVANCE_TO_EXACT_LIVE_TRIAL",
+  "reviewer": "parent visual review",
+  "inputs": {
+    "hero": "hero.png",
+    "side": "side.png",
+    "portrait": "portrait.png",
+    "scene": "tidecrown-sea-king-studio.blend"
+  },
+  "observations": [
+    "The reviewed bind-pose hero view reads as an original sea monarch: a broad abyssal robe, storm-teal torso, ornate breast relic, crown, ivory beard, cloak panels, long articulated arms, and individual gauntlet fingers form one clear silhouette.",
+    "The side review keeps crown, skull, beard, chest scales, pauldron, arm segments, fingers, rear mantle, and flared robe visibly connected. The crown now sits directly on the head rather than floating at the high zero-weight Hair_M landmark.",
+    "The portrait-scale studio view retains two bright sea-glass eyes, heavy brows, ivory beard, coral-and-gold crown, and a cyan crown seal. These high-contrast parts remain legible against the dark studio background.",
+    "No native trident, shield, tentacle, breakable prop, ragdoll object, native surface, or game texture appears in the authored export or studio scene."
+  ],
+  "limits": [
+    "This is a static offline bind-pose review under studio lighting, not an FTK combat camera, native material, animation, portrait, culling, ragdoll, lifecycle, or gameplay result.",
+    "The long arm/finger construction and rear mantle need native trident attacks, hit motion, death/ragdoll, and external accessory intersection review before animation-safe or finished-art claims.",
+    "The Sea King controller's prior diagnostic no-loss result is not a reason to infer successful ordinary damage for this original model."
+  ],
+  "decision": "The source is readable and materially distinct enough to justify one fresh exact seaKing/enSeaKing isolated live binding trial; it is not accepted finished art."
+}

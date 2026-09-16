@@ -1,0 +1,9 @@
+# Bronzehollow first live trial
+
+Catalog411/session0a532864d8004cdc85e1dba0b7e076d2: four complete120-frame recordings preserve native pass, two ordinary paid-focus attacks, and explicit KillSingle death. Both ordinary attacks show BLOCKED and enemyHP58 unchanged. Two native Collects lead to strict Ready0/2. This trial establishes no ordinary damaging hit or lethal-damage acceptance.
+
+The original authored body is visible under retained native helmet, shield and weapon; the original design does not replace those parts. Root selected reviews record connected body poses with substantial equipment/hero/FX occlusion. The live body appears substantially darker/reddish than the studio version. Existing emission readback rules out retained native body emission at that sample; metallic/color/lighting explanations remain uncertain. Offline native metallic-map point samples are metadata, not GPU-filtered appearance proof. No appearance fix or full art acceptance is inferred.
+
+Native ragdoll observations and selected corpse frames do not prove collision/sleeping, all animation clearances, accessory ownership or full resource lifetime. Explicit KillSingle is a fixture, not ordinary lethal damage. Paid-focus manual/CLI callback proof is separately archived at ../../../docs/evidence/native-paid-focus-v1 and does not make either blocked attack a successful hit.
+
+All480 source PNG hashes, root-selected originals, four120-frame presentation MP4s and lossless metadata/journals/request-result mappings are retained. Startup, stage, inventory/material observations and metadata-only material analysis are included. Native payload, DLLs and decompiled source are excluded. Frozen original art files/manifests remain unchanged; this new subdirectory is the live-trial supplement. archive.py verifies inputs offline and refuses an existing destination.

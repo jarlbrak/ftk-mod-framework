@@ -1,0 +1,98 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/ashfang-wolf/live-validation-v2-canonical",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-b172ddf2cd524b24a4146969dede7439/case-result.json",
+  "visualReview": "scratch/model-route-c3487d422b832d2e-directenemy-root-review-reviewed.json",
+  "assetFiles": [
+    "art-experiments/ashfang-wolf/ashfang_rigged.glb",
+    "art-experiments/ashfang-wolf/ashfang_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/ashfang-wolf/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-c3487d422b832d2e-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-86e43704c6084529a23a5763ff8b7432/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-86e43704c6084529a23a5763ff8b7432/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy proficiency attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "wolf01",
+        "mesh": "ftkmf_glb_ashfang_rigged.glb",
+        "boneSignature": "f21a098cec0440ada594ef83b366643542e21af11de197ce66878d49228082a6"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack, hit response and later native enemy attacks; preserve each measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "wolf01",
+        "mesh": "ftkmf_glb_ashfang_rigged.glb",
+        "boneSignature": "f21a098cec0440ada594ef83b366643542e21af11de197ce66878d49228082a6"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture and bounded ragdoll capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "wolf01",
+        "mesh": "ftkmf_glb_ashfang_rigged.glb",
+        "boneSignature": "f21a098cec0440ada594ef83b366643542e21af11de197ce66878d49228082a6"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V2 canonical exact route",
+    "displayName": "Ashfang",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "wolfA",
+    "nativeChassis": "wolfA",
+    "rendererPaths": [
+      "wolf01"
+    ],
+    "sourceRendererIds": [
+      121142
+    ],
+    "binding": {
+      "rendererPath": "wolf01",
+      "mesh": "ftkmf_glb_ashfang_rigged.glb",
+      "boneSignature": "f21a098cec0440ada594ef83b366643542e21af11de197ce66878d49228082a6"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact directEnemy source wolfA, CEL enWolfA(Clone), motion renderer wolf01 and source renderer 121142 only. This archive grants no inheritance to another wolf source or renderer topology.",
+      "The native pass action preserved enemy HP58 and hero HP995 while recording AttackProf, attackProf_wolf, zero damage and HarmlessAttack. This is sampled native gameplay under the survival fixture, not a balance claim.",
+      "The ordinary zero-focus attack used the native bluntSmithHammer without a skill cap or damage fixture and produced native Damaged for 8 HP, from 58 to 50, followed by damaged_wolf. The disposable party maximum-HP fortification remained active for test survival and is not representative hero balance.",
+      "Two later sampled native attack_wolf sequences recorded a zero-damage SteadFast response and a 4-damage response against the hero, whose HP changed from 995 to 991. These are sampled actions rather than exhaustive wolf animation coverage.",
+      "The explicit KillSingle fixture reduced Ashfang from 50 to 0 HP with recorded native 1000 damage and a Death trigger. It is fixture death evidence, not ordinary lethal gameplay.",
+      "The source has m_DoRagdoll true with 14 active rigid bodies. They remain kinematic through frame 26; at frame 27 the animator disables and all 14 bodies become dynamic. Measured motion is nonzero from frames 28 through 48 and zero from frame 49 through frame 119.",
+      "All three captures retain the requested 120 frames. The exact renderer remains active, enabled, reported visible and identity-stable through all 360 frames. The sampled settled pose persists behind the native loot sequence, but this boundary does not establish general corpse lifetime, cleanup causality or final disposal.",
+      "One guarded native Collect action succeeded and strict Ready succeeded at dungeon level 0, room 2, with one active Ready button.",
+      "Twenty-four selected original PNGs were reviewed. Native effects, combat UI, foreground hero overlap, fixed-camera perspective, loot UI and late depth blur limit fine inspection in stated frames; the remaining 336 capture PNGs are preserved by hash but were not individually reviewed.",
+      "The profile preserves native CEL scale 1.0. Its Standard matWolfA material uses the authored ashfang_basecolor.png main texture while retaining the native wolfA_e emission map and native emission color. This route does not establish a base-color-only material result, portrait pixels, other cameras, other resolutions or all-angle culling.",
+      "This isolated dungeon trial does not prove every wolf animation, collision, alternate materials, long-session resource lifetime, inheritance to another wolf source, full campaign progression or finished-art acceptance."
+    ]
+  }
+}

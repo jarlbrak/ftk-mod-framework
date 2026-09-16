@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 1,
+  "asset": "Mirewarden",
+  "iteration": "native-scale regression; unchanged geometry",
+  "status": "native-scale regression PASS in reviewed views; prototype art remains limited",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "5754790cd92e4557b28b6f728024815c",
+    "case": "4de5fce5c0a24cd9a61d30af923e1443",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_mirewarden",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_mirewarden",
+      "baseEnemy": "trollCaveA",
+      "displayName": "Mirewarden",
+      "combatProfile": "ab549dcfcad738d283caac671d43a8b7053e64a95ae0805babf218599efe09a2",
+      "renderers": [
+        {
+          "rendererPath": "enTroll01",
+          "glbFile": "mirewarden_rigged.glb",
+          "textureFile": "mirewarden_basecolor.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "6a0e012c9250ac234e3c0e1808a471c79caca807a34a70a1ffa45a6f1d73fd99",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "b4554004",
+  "helperVersionPrefix": "dd0da596",
+  "assetHashes": {
+    "mirewarden_rigged.glb": "fbedd32fa98c10c73ae1904cba7feadb54b114b1f4aeffbc8e38c59761f5614f",
+    "mirewarden_basecolor.png": "868ddff809ff8c15cd63389a6e5c87c132c9c252792a27933d9e371868e01c36"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-4de5fce5c0a24cd9a61d30af923e1443/journal.jsonl",
+    "sha256": "16ffec8668662f3f4b9d8ba0b14f8cfc9e1678a5337f5d5cad9c883ce21e3123"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "ea782edf492e4523ad7b74ac4cd2702b",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/83efdd48a1c040e983d75681b819a787.json",
+        "sha256": "61e50cd395c1956b6edb7b7cd8beb47c311b1aebb5a925f70ebb508bc52a608d"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-ea782edf492e4523ad7b74ac4cd2702b/journal.jsonl",
+        "sha256": "53ce88ce9d197e5b6c6cd9ab96a851d1c6c7426dfce03cfdba1af094408e58b4"
+      },
+      "summary": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/attack-summary.json",
+        "sha256": "10f140a590cf050542875a06489ff2723e23114366f8e520ef34378f8073bf1a"
+      },
+      "video": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/attack.mp4",
+        "sha256": "63303429e94f34d1a645b9d1a90b6163f580ce72c0ec91301dd093f298b73b73"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/mirewarden-ftk/live-native-scale/attack-0000.png",
+          "sha256": "276e9bcb9cc84f99fc523deee6bfcb1efc7c7fb512715262d972c0394da58598"
+        },
+        {
+          "path": "art-experiments/mirewarden-ftk/live-native-scale/attack-0050.png",
+          "sha256": "3d2bee44a3bd4a50fb9b2f454a01b926fee65a54de68a2e0051172d5cc7af42f"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_troll"
+          ],
+          "sampleCount": 97,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 50,
+              "firstNormalizedTime": 17.871681213378906,
+              "lastNormalizedTime": 20.163360595703125,
+              "gameSeconds": 4.583335876464844
+            },
+            {
+              "firstFrame": 74,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.15000008046627045,
+              "lastNormalizedTime": 2.21250057220459,
+              "gameSeconds": 4.125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_troll"
+          ],
+          "sampleCount": 23,
+          "occurrences": [
+            {
+              "firstFrame": 51,
+              "lastFrame": 73,
+              "firstNormalizedTime": 0.11785713583230972,
+              "lastNormalizedTime": 0.9821429252624512,
+              "gameSeconds": 2.01666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "player-apparel-attack",
+      "case": "fde3c0df05f449cc92c3a5ad47a8ff3c",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/065f0a33d752476899a70c318ad69bf7.json",
+        "sha256": "901be111434426cad063bf5a0a381951b7b68d1d3f1f0377ca9524a6146d6e71"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-fde3c0df05f449cc92c3a5ad47a8ff3c/journal.jsonl",
+        "sha256": "5b4e31bb7af2663099f8ef2715b427ee420566548c620f37fdb211ef77015245"
+      },
+      "summary": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/player-apparel-attack-summary.json",
+        "sha256": "2e52e0a87b4382d418de6c99a898086e56dc92615ed42ec0c642485fa793eda6"
+      },
+      "video": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/player-apparel-attack.mp4",
+        "sha256": "388aab255dc40f196284d2333bd93c6a12c7ed588832497d102f9f4571cce6ac"
+      },
+      "reviewedFrames": [
+        30,
+        78
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/mirewarden-ftk/live-native-scale/player-apparel-attack-0030.png",
+          "sha256": "a904e4d4ab9bd3f94549256d5d5a59a42288426adbab372fa5329d25467e8bf7"
+        },
+        {
+          "path": "art-experiments/mirewarden-ftk/live-native-scale/player-apparel-attack-0078.png",
+          "sha256": "ef3efb65d7b3afe9edcfd1909b938945d71fcdc96a524ca9ebaf6bf58877b310"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        50
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidel_blunt1H"
+          ],
+          "sampleCount": 85,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 15,
+              "firstNormalizedTime": 107.21163940429688,
+              "lastNormalizedTime": 108.0366439819336,
+              "gameSeconds": 1.375
+            },
+            {
+              "firstFrame": 40,
+              "lastFrame": 77,
+              "firstNormalizedTime": 0.10014678537845612,
+              "lastNormalizedTime": 2.135146141052246,
+              "gameSeconds": 3.39166259765625
+            },
+            {
+              "firstFrame": 89,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.1705974042415619,
+              "lastNormalizedTime": 1.820596694946289,
+              "gameSeconds": 2.75
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_blunt1H"
+          ],
+          "sampleCount": 24,
+          "occurrences": [
+            {
+              "firstFrame": 16,
+              "lastFrame": 39,
+              "firstNormalizedTime": 0.11343748867511749,
+              "lastNormalizedTime": 0.9831246137619019,
+              "gameSeconds": 2.10833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damageLight_blunt1H"
+          ],
+          "sampleCount": 11,
+          "occurrences": [
+            {
+              "firstFrame": 78,
+              "lastFrame": 88,
+              "firstNormalizedTime": 0.15966564416885376,
+              "lastNormalizedTime": 0.9453799724578857,
+              "gameSeconds": 0.916656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "9eea69af49e04e62b7e30ab6b6224143",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/7325adfbfc2e49c6b6b90d5d0accdfd8.json",
+        "sha256": "84d7798e02e570e8993eb7668739421ddba632b5cd27d17f1fdbdcfe5094d651"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-9eea69af49e04e62b7e30ab6b6224143/journal.jsonl",
+        "sha256": "d355d7bf5d6daddacbfb9d38a527610fd1b52450b18dcdb884b03b6831f8b975"
+      },
+      "summary": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/nonlethal-hit-summary.json",
+        "sha256": "36af3fe4eb64c83f48520722f6e2e042bceaac70c7b1c46568141d9f2799eb9f"
+      },
+      "video": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/nonlethal-hit.mp4",
+        "sha256": "c503d71bf169a32f5cca8cb422d81fc16590a2c0fa680f304fec90f9f615ae6d"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/mirewarden-ftk/live-native-scale/nonlethal-hit-0030.png",
+          "sha256": "3203c64a4ccf9771d88cd7edad08092aaea2bce7c38af4b944164e156871e5a9"
+        }
+      ],
+      "hpBeforeAfter": [
+        50,
+        42
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_troll"
+          ],
+          "sampleCount": 109,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 39.54678726196289,
+              "lastNormalizedTime": 40.692626953125,
+              "gameSeconds": 2.291656494140625
+            },
+            {
+              "firstFrame": 37,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.22854042053222656,
+              "lastNormalizedTime": 3.986875057220459,
+              "gameSeconds": 7.51666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damage_troll"
+          ],
+          "sampleCount": 11,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 36,
+              "firstNormalizedTime": 0.16418671607971191,
+              "lastNormalizedTime": 0.9499010443687439,
+              "gameSeconds": 0.916656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "29e92c4f5c144c2bb21f49d15091ae0e",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/88fbf8c16ab2432b9d8e5502563c4e9a.json",
+        "sha256": "e1ef1020f1097438554e041865b417563acb733f65ce1af40aed03efa024d291"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-29e92c4f5c144c2bb21f49d15091ae0e/journal.jsonl",
+        "sha256": "c462e5c0f1a10bdd4be9382dbf2c0d339892bdcad216a80415deb3ad819a7be1"
+      },
+      "summary": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/kill-fixture-death-summary.json",
+        "sha256": "9d7a8d84e47e6ecf808c70f5246b45352486640e88a8bf3b4a5188980b2047f5"
+      },
+      "video": {
+        "path": "art-experiments/mirewarden-ftk/live-native-scale/kill-fixture-death.mp4",
+        "sha256": "94a083876efa55e133a7e36a11269e001e36b55c43a88916a599025b88e0a7ca"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/mirewarden-ftk/live-native-scale/kill-fixture-death-0040.png",
+          "sha256": "b6144a46ea5cba08b0699b76e42a16655093974a9e46fe64152c3202e15936ec"
+        },
+        {
+          "path": "art-experiments/mirewarden-ftk/live-native-scale/kill-fixture-death-0060.png",
+          "sha256": "ba8dd39acda2e8831b309b71221e4d877b3a968c322214da2f00006ff31761f8"
+        }
+      ],
+      "hpBeforeAfter": [
+        42,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_troll"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 91.60491943359375,
+              "lastNormalizedTime": 92.79649353027344,
+              "gameSeconds": 2.38336181640625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathHeavy_troll"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.16499999165534973,
+              "lastNormalizedTime": 0.16499999165534973,
+              "gameSeconds": 8.43328857421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Rock body remains coherent at native scale0.95 in sampled attack/hit views. Ragdoll shows rock-segment gaps and separated limb chunks; this existing art limitation is not a new scale explosion.",
+    "limits": "Segment gaps and separated rock chunks remain visible. Native accessory and hero/effect occlusion, culling, full animation endpoints and all-controller variants remain limits."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "collect": {
+      "path": "scratch/mirewarden-scale-collect1.json",
+      "sha256": "3cb63156d18cc89bdaf121ea56767760880a4a11916521e8267d3eb998aa527a"
+    },
+    "secondCollect": {
+      "path": "scratch/mirewarden-scale-collect2.json",
+      "sha256": "ad1c3fae8fade6722aa85682ed591e46647a37a10ba431ed9867360ca8f28764"
+    },
+    "afterCollect": {
+      "path": "scratch/mirewarden-scale-ready.json",
+      "sha256": "22fe0f7d90e939c491f1ec720263b256aaef18f22ef9df96a6364d0a7c044d01"
+    },
+    "result": "two guarded Collect actions; strict Ready level0 room2"
+  },
+  "historicalEvidencePreserved": "live-validation.json retains prior framework prototype and native ragdoll evidence.",
+  "scale": {
+    "requestedFactor": 1,
+    "nativePrefabRootLocalScale": [
+      0.949999988079071,
+      0.949999988079071,
+      0.949999988079071
+    ],
+    "observedRendererWorldAxisLengths": [
+      0.9500001072883606,
+      0.949999988079071,
+      0.9500001072883606
+    ],
+    "inventory": {
+      "path": "scratch/mirewarden-game/model-test-output/06208c7e22bd423085ee185c173d8de6.json",
+      "sha256": "60299e2ffc3823c5bf8805c023f6480b61a0538558141b4863cf48545ab1d128"
+    },
+    "limit": "World axis lengths are distinct from a direct CEL local scale measurement."
+  },
+  "contentVersionPrefix": "c72c47",
+  "playerCatalogSha256": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65",
+  "initialApparelMotion": {
+    "case": "fde3c0df05f449cc92c3a5ad47a8ff3c",
+    "target": "armorGambesonF(Clone)",
+    "reviewedFrames": [
+      30,
+      78
+    ],
+    "observations": "Original foot/body markers remain; native backpack/helmet/weapon occlude the custom body.",
+    "limits": "No equipment-cycle or playercatalog97 decode claim yet; not original finished player art acceptance."
+  },
+  "deathRagdoll": {
+    "animatorFirstDisabledFrame": 28,
+    "nativeRagdollFlag": true,
+    "recordedNativeRigidbodies": 14,
+    "limits": "Rock-segment gaps and separated limb chunks visible; not flawless art."
+  }
+}

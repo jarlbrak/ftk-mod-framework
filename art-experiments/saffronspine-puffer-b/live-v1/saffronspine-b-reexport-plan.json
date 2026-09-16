@@ -1,0 +1,20 @@
+{
+  "status": "PLAN_ONLY_AFTER_PUFFER_A_LIVE_ACCEPTANCE",
+  "sourceFindings": {
+    "path": "scratch/puffer-b-native-topology-analysis/findings.json",
+    "sha256": "f1b4d3b37f5a17f436e818724f2eebd3b4b34269ffa8ae63b64493baff6d104b"
+  },
+  "currentFrozenA": "art-experiments/saffronspine-puffer/manifest.json",
+  "proposal": [
+    "Create a separately named B variant and output directory; never overwrite A files.",
+    "Parameterize explicit reference.npz, skeleton.json and output directory rather than mapping by bone names.",
+    "Pin renderer121388 and B exact bind fingerprint/controller profile; reject incompatible names or unsupported reference metadata.",
+    "Recompute binding-based landmarks and export all exact B IBMs. Fixed artist coordinates require an explicit reviewed fit strategy; changing inverse binds alone is not a valid retarget.",
+    "Run B-specific bind bounds, direct/reopen, eye seating, and all B captured poses; retain native scale/material/portrait constraints independently."
+  ],
+  "limits": [
+    "No authoring or re-export performed.",
+    "Same bone names and controller do not establish identical rest transforms.",
+    "A visual acceptance cannot be inherited by B."
+  ]
+}

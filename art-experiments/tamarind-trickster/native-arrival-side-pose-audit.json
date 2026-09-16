@@ -1,0 +1,73 @@
+{
+  "capture": "scratch/mirewarden-game/model-test-output/3dcae051935d428bb2a62178954f8a67.json",
+  "captureSha256": "dea1a8c33da5367de087b9255166256c6b46a126f1077aa3b5d149304e1dc6ad",
+  "sourceSha256": "daed05fa41a8236cba661d0655f4f81acd6b6ae6782ed8803ff679e4a675fb9f",
+  "frames": 120,
+  "sampledFrames": [
+    0,
+    15,
+    30,
+    95,
+    105,
+    119
+  ],
+  "maximumEdgeStretch": 2.999987133501071,
+  "worstEdge": {
+    "frame": 90,
+    "piece": "Soft shoulder R",
+    "triangle": 1386,
+    "vertexIndices": [
+      4159,
+      4160
+    ],
+    "restLength": 0.09152841951885214,
+    "posedLength": 0.2745840809062447,
+    "ratio": 2.999987133501071
+  },
+  "posedBoundsMin": [
+    -0.8880299440052744,
+    -0.08591722545465985,
+    -0.9413186929686782
+  ],
+  "posedBoundsMax": [
+    0.8326759361283032,
+    1.8352716459076999,
+    1.1245667197924796
+  ],
+  "nativeTravelBoundsMin": [
+    -0.8670915651858777,
+    -0.038854401861269205,
+    -0.6543027371168133
+  ],
+  "nativeTravelBoundsMax": [
+    0.7244780677107555,
+    2.4468953806161884,
+    6.233830413945617
+  ],
+  "glbSha256": "be02036b2bd96d2c10905ed808197aab1205ba636cb0a6931693886ca595c0a7",
+  "rootMotionRetained": false,
+  "viewDirection": [
+    1.0,
+    0.15,
+    -0.1
+  ],
+  "method": "Root_M-normalized sheet. Original source skinned with full captured bone matrices and native IBMs, Anatomy mode removes Root_M transform for deformation inspection; keep-root-motion mode retains renderer-local travel in the sheet. Travel bounds always retain renderer-local motion. Orthographic depth raster with fixed all-frame bounds. Mesh-space anatomy front+Z/upY.",
+  "captureReportedOk": true,
+  "captureError": null,
+  "hiddenFrames": [
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "materialMethod": "Per-triangle first-vertex nearest texel from original palette; no shader/light/weapon simulation.",
+  "scope": "Offline native pose study; no material/culling/portrait/whole-controller or live original-art acceptance."
+}

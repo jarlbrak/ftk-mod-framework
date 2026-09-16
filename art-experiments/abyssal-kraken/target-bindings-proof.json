@@ -1,0 +1,55 @@
+{
+  "status": "PASS_V3",
+  "assets": [
+    {
+      "asset": "abyssal-crown-kraken-head-v2",
+      "targetRendererId": 121035,
+      "nativeChassis": "krakenHead",
+      "rendererPath": "kraken2",
+      "boneCount": 7,
+      "weightedBoneCount": 7,
+      "allPaletteBonesWeighted": true,
+      "boneNamesSha256": "f38583f83c98e25910777722f07ccc7195b262e247dc721d23d2c8954a43b4d9",
+      "inverseBindMatricesSha256": "6942a923641a9658d7dcfb1228e972c6d3b88912a23d8b98219ec5c26656a22c",
+      "sourceSha256": "db0aeacc7274bc426d29361211bc537773efc31267bbf3a695d1af0e80eeef79",
+      "reference": {
+        "path": "scratch/skeleton-audit/121035/reference.npz",
+        "sha256": "01ac62514cf058febdf26c600d704d76e5963f9e103f9672a17c4373e97faa23"
+      }
+    },
+    {
+      "asset": "sargassum-kraken-tentacle-v2",
+      "targetRendererId": 121595,
+      "nativeChassis": "krakenTentacle",
+      "rendererPath": "krakenTentacle",
+      "boneCount": 20,
+      "weightedBoneCount": 20,
+      "allPaletteBonesWeighted": true,
+      "boneNamesSha256": "8a0af935710b3bbcb9955e895717b1527ae1aeafff4fadf6a82318a081b0478a",
+      "inverseBindMatricesSha256": "1cf101bb757437f6db6a684c2a08810f735c6211bb0c75c6ba2983fd499a1d86",
+      "sourceSha256": "a74e900b5c3a053ba9d7da37d9a6e79b93cac93afba8014543337aed618ec1bf",
+      "reference": {
+        "path": "scratch/skeleton-audit/121595/reference.npz",
+        "sha256": "16213c4541aa077a94b8223a2515031347e1d94858b6ba70f09325a79536b82c"
+      }
+    },
+    {
+      "asset": "royal-sargassum-seaking-tentacle-v3",
+      "targetRendererId": 121315,
+      "nativeChassis": "seaKingTentacleA/B",
+      "rendererPath": "KrakenGodTentacle",
+      "boneCount": 20,
+      "weightedBoneCount": 20,
+      "allPaletteBonesWeighted": true,
+      "boneNamesSha256": "8a0af935710b3bbcb9955e895717b1527ae1aeafff4fadf6a82318a081b0478a",
+      "inverseBindMatricesSha256": "55e2d094931e64020ef23e8c49ba5f6192f5d2eb680908f96ea75a45f40ccdd4",
+      "sourceSha256": "4703f1e9addf481252d09b0d0466a564370694898d4ec8aad712465d50773d01",
+      "reference": {
+        "path": "scratch/skeleton-audit/121315/reference.npz",
+        "sha256": "e6d8202eeca5a47caf510a6d02a4857df6302a81fda3fa784a27283983e27d4d"
+      }
+    }
+  ],
+  "authoringBoundary": "Each source weights every member of its exact palette. The two 20-bone assets share authored intent but retain distinct bind-profile exports.",
+  "scope": "Exact palette and bind identity only. It does not establish live renderer replacement, animation safety, portrait framing, material behavior, culling, death or gameplay."
+}

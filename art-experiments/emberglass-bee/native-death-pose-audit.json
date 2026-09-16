@@ -1,0 +1,49 @@
+{
+  "capture": "scratch/mirewarden-game/model-test-output/737dacf062de4524978da9c0fdafe220.json",
+  "captureSha256": "4d2cfe98c8bdb6ab21fc16550f913c88a82c78ea25f54194efd6d27892eb2a07",
+  "sourceSha256": "43f4173c331d521f284735956c31f39c40456ec044d37d73a869319e58d69e45",
+  "frames": 120,
+  "sampledFrames": [
+    0,
+    28,
+    40,
+    50,
+    80,
+    119
+  ],
+  "maximumEdgeStretch": 3.5079214058733448,
+  "worstEdge": {
+    "frame": 31,
+    "piece": "Amber segmented abdomen",
+    "triangle": 324,
+    "vertexIndices": [
+      973,
+      974
+    ],
+    "restLength": 0.01354702663277607,
+    "posedLength": 0.04752190471105147,
+    "ratio": 3.5079214058733448
+  },
+  "posedBoundsMin": [
+    -0.7213712953112326,
+    -0.6018321572184414,
+    -0.01581144705959751
+  ],
+  "posedBoundsMax": [
+    0.726091439417388,
+    0.38952119662966983,
+    1.1378298054716982
+  ],
+  "nativeTravelBoundsMin": [
+    -0.8078671530276432,
+    -0.5854674304957985,
+    -0.08087683623584013
+  ],
+  "nativeTravelBoundsMax": [
+    0.7259393201001798,
+    1.3719471442270699,
+    1.6635778626875621
+  ],
+  "method": "Original source skinned with full captured bone matrices and native IBMs, Root_M motion removed using captured Root_M inverse and rest Root_M for deformation inspection; travel bounds separately retain renderer-local motion. Orthographic depth raster with fixed all-frame bounds. Mesh-space anatomy front-Y/upZ.",
+  "scope": "Offline native pose study; no material/culling/portrait/whole-controller or live original-art acceptance."
+}

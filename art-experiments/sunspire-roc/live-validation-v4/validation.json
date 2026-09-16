@@ -1,0 +1,699 @@
+{
+  "schema": "ftkmf.model-validation.v3",
+  "revision": "sunspire-roc-live-validation-v4",
+  "status": "reviewed_exact_rocA_binding_appearance_idle_attack_hit_death_gameplay_and_row_portrait_observed",
+  "displayName": "Sunspire Roc",
+  "enemy": "ftkmf_modeltest_sunspire_roc",
+  "nativeChassis": "rocA",
+  "nativeEnemy": "rocA",
+  "sourceKind": "native_enemy_row",
+  "resourcePrefab": null,
+  "rendererPaths": [
+    "enRoc01"
+  ],
+  "sourceRendererIds": [
+    121238
+  ],
+  "sessions": [
+    "243d7c94fca146d7a68bf03af5ba5f7f",
+    "1ce25c30c43f41428094cefea08dae6b"
+  ],
+  "profile": {
+    "key": "ftkmf_modeltest_sunspire_roc",
+    "baseEnemy": "rocA",
+    "displayName": "Sunspire Roc",
+    "combatProfile": "3ac11623c5f15bc93636070acd1193874c2ff112dfbb766f120e0648d6ec282b",
+    "renderers": [
+      {
+        "rendererPath": "enRoc01",
+        "glbFile": "sunspire-roc.glb",
+        "textureFile": "sunspire-roc_basecolor.png",
+        "disableNativeEmission": true
+      }
+    ],
+    "minimumBaseHealth": 64,
+    "visualScale": 1.0,
+    "portraitMarkerPath": "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam"
+  },
+  "profileDocumentSha256": "49c7d8f7fbbbb63f5fc471b53d0bddcebaa8d1c69cb9a570d28bb2c12e9781f6",
+  "catalogSha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+  "historicalCatalogSha256": "f4584844c7a7b3b1bbefaf3a988c76f7147e860e62f142c635934a119769d2a2",
+  "assetHashes": {
+    "sunspire-roc.glb": "da6b90793027a3f33feae317da1efdc1982176e6cee6b704ab4a1b223d7c0c67",
+    "sunspire-roc_basecolor.png": "911b8202261edc17a1098677b63d69ba960b26a66d2cd5027281d03368762f83"
+  },
+  "binding": {
+    "nativeChassis": "rocA",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "rocA",
+    "resourcePrefab": null,
+    "ownerInstanceId": 369188,
+    "rendererPath": "enRoc01",
+    "rendererId": 121238,
+    "sourceRendererId": 121238,
+    "rendererKind": "SkinnedMeshRenderer",
+    "rendererInstanceId": -245150,
+    "mesh": "ftkmf_glb_sunspire-roc.glb",
+    "boneSignature": "5d3d131f0a7af9374d85c47b4895bf5df48c6a387141b0849c3d26e4400a910b",
+    "rootBone": "Root_M",
+    "nativeRootScale": 0.9,
+    "active": true,
+    "enabled": true,
+    "visibleAtInitialReview": true,
+    "m_DoRagdoll": false,
+    "rigidbodyCount": 0,
+    "material": {
+      "instanceId": -245442,
+      "name": "matRocA (Instance)",
+      "shader": "Standard",
+      "emissionKeyword": false,
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245444,
+        "name": "ftkmf_sunspire-roc_basecolor.png"
+      },
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null
+    }
+  },
+  "renderers": [
+    {
+      "nativeChassis": "rocA",
+      "sourceKind": "native_enemy_row",
+      "nativeEnemy": "rocA",
+      "resourcePrefab": null,
+      "ownerInstanceId": 369188,
+      "rendererPath": "enRoc01",
+      "rendererId": 121238,
+      "sourceRendererId": 121238,
+      "rendererKind": "SkinnedMeshRenderer",
+      "rendererInstanceId": -245150,
+      "mesh": "ftkmf_glb_sunspire-roc.glb",
+      "boneSignature": "5d3d131f0a7af9374d85c47b4895bf5df48c6a387141b0849c3d26e4400a910b",
+      "rootBone": "Root_M",
+      "nativeRootScale": 0.9,
+      "active": true,
+      "enabled": true,
+      "visibleAtInitialReview": true,
+      "m_DoRagdoll": false,
+      "rigidbodyCount": 0,
+      "material": {
+        "instanceId": -245442,
+        "name": "matRocA (Instance)",
+        "shader": "Standard",
+        "emissionKeyword": false,
+        "emissionColor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "_MainTexSupported": true,
+        "_MainTex": {
+          "instanceId": -245444,
+          "name": "ftkmf_sunspire-roc_basecolor.png"
+        },
+        "_EmissionMapSupported": true,
+        "_EmissionMap": null
+      }
+    }
+  ],
+  "captures": [
+    {
+      "action": "pass",
+      "label": "idle-and-native-attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/2e981e9be3394f819e8cf29bcf44ec61.json",
+        "sha256": "2928ce90b7e9a5345528af938741c45c7660c35e6ca0c1c38681f5c4c08683b3",
+        "bytes": 4504234
+      },
+      "frameCount": 120,
+      "sampledClips": [
+        "cidle_roc",
+        "attackProf_roc"
+      ],
+      "captureScope": "Settled idle, native attack proficiency motion, and return to idle on the exact custom renderer."
+    },
+    {
+      "action": "attack",
+      "label": "ordinary-nonlethal-hit-and-native-attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d.json",
+        "sha256": "c9e7cb6a95fda252a4f2e65bcdef4b9bb5ce6b0fd0945d914e0757ead25e0a4e",
+        "bytes": 4506028
+      },
+      "frameCount": 120,
+      "sampledClips": [
+        "cidle_roc",
+        "damageLight_roc",
+        "attackCrit_roc"
+      ],
+      "captureScope": "Ordinary no-focus player hit from 81 to 71, native light-damage response, recovery, later native critical attack, and return to idle."
+    },
+    {
+      "action": "kill-fixture",
+      "label": "kill-fixture-death",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/945adef83cf34b22bbf8f69ab5cbddb5.json",
+        "sha256": "911a9b52082aa6d7dc07d4d1dab05380872d3513d7253d8c7e98dd5c23a98bd7",
+        "bytes": 4497728
+      },
+      "frameCount": 120,
+      "sampledClips": [
+        "cidle_roc",
+        "deathHeavy_roc"
+      ],
+      "captureScope": "Explicit KillSingle transition from 71 to 0 and native animated heavy death across the complete capture."
+    }
+  ],
+  "ordinaryHit": {
+    "beforeHp": 81,
+    "afterHp": 71,
+    "focus": false,
+    "method": "Attack",
+    "status": "ordinary_no_focus_nonlethal_hit_with_damageLight_roc_observed",
+    "sourceCapture": "scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d.json"
+  },
+  "ordinaryLethal": false,
+  "explicitKillFixture": {
+    "beforeHp": 71,
+    "afterHp": 0,
+    "method": "KillSingle",
+    "deathCaptureComplete": true
+  },
+  "nativeCollects": 2,
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "portraitMarkerRegistration": "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+  "nativeRowPortraitFixture": {
+    "source": "scratch/mirewarden-game/model-test-output/a3d6778fbdd846958c2db0aecb29f53f.json",
+    "sourceSha256": "4d2574b94d948ce107dd460f363f9a512036b939eb1a0b5162768c5d3320447f",
+    "nativeMethod": "uiEnemyEncounterPortrait.Initialize",
+    "nativeInitializeInvoked": true,
+    "nativeInitializeReturned": true,
+    "capturePoint": "Immediately before native DoRender, after native pose sampling and marker placement",
+    "identityResolution": "exact_row_forwarded_to_native_source",
+    "markerArgument": "PortraitCam",
+    "targetBinding": {
+      "name": "enRocA(Clone)",
+      "nodeCount": 55,
+      "rendererPath": "enRoc01",
+      "boneCount": 36,
+      "meshName": "ftkmf_glb_sunspire-roc.glb",
+      "material": "matRocA",
+      "textureName": "ftkmf_sunspire-roc_basecolor.png"
+    },
+    "nativeDimensions": {
+      "rectWidth": 82.0,
+      "rectHeight": 70.0,
+      "aa": 4,
+      "anchorMin": [
+        0.5,
+        0.5
+      ],
+      "anchorMax": [
+        0.5,
+        0.5
+      ],
+      "sizeDelta": [
+        82.0,
+        70.0
+      ],
+      "derivation": "Native Initialize casts each RawImage rect dimension to int before multiplying AA. Equal anchors make this child rectangle independent of constructed parent size.",
+      "width": 328,
+      "height": 280,
+      "cameraKey": "Portrait,328,280",
+      "matchingCameraExists": false
+    },
+    "nativeCameraCache": {
+      "key": "Portrait,328,280",
+      "createdByNativeInitialize": true,
+      "cameraInstanceId": -248716,
+      "renderTextureInstanceId": -248748,
+      "entriesBefore": 3,
+      "entriesAfter": 4,
+      "existingEntriesUnchanged": true,
+      "targetAndTextureClear": true,
+      "ownership": "Persistent native cache and RenderTexture; observed only, never destroyed or claimed as preview-owned."
+    },
+    "sourceUnchanged": true,
+    "leaseObservation": {
+      "leaseId": 5,
+      "wasNew": true,
+      "leaseAbsent": true,
+      "allPinnedResourcesUnityNull": true,
+      "resources": [
+        {
+          "instanceId": -249006,
+          "name": "ftkmf_glb_sunspire-roc.glb",
+          "type": "UnityEngine.Mesh",
+          "unityNull": true
+        },
+        {
+          "instanceId": -249008,
+          "name": "matRocA",
+          "type": "UnityEngine.Material",
+          "unityNull": true
+        },
+        {
+          "instanceId": -249010,
+          "name": "ftkmf_sunspire-roc_basecolor.png",
+          "type": "UnityEngine.Texture2D",
+          "unityNull": true
+        }
+      ],
+      "scope": "Only exact newly-created row portrait lease assets; read-only refs, no lease retain/release/prune calls."
+    },
+    "cleanup": {
+      "ownedUiUnityNull": true,
+      "ownedTextureUnityNull": true,
+      "nativeCloneUnityNull": true,
+      "cloneCelInstanceId": -248756,
+      "unknownPartialCameraTarget": false,
+      "errors": [],
+      "complete": true
+    },
+    "png": {
+      "source": "scratch/mirewarden-game/model-test-output/a3d6778fbdd846958c2db0aecb29f53f.row-portrait.png",
+      "archive": "selected/native-row-portrait.png",
+      "sha256": "b7b93723f656f1422fafffae228732dedb45e9fa7f983873ff6b4c37ec7b5042",
+      "width": 328,
+      "height": 280
+    }
+  },
+  "priorArchives": [
+    {
+      "path": "art-experiments/sunspire-roc/live-validation-v2/validation.json",
+      "sha256": "6e61239c6d22ee301764fda70136f3e7098c31f2f250aa2a0e6db9e4e693067f",
+      "scope": "Separate fresh ordinary body, combat motion, fixture death, Collect, and Ready evidence."
+    },
+    {
+      "path": "art-experiments/sunspire-roc/live-validation-v3/validation.json",
+      "sha256": "487cc15f5db1d786efe3534106f692deda2a63e088e43a160f0c676242348a9d",
+      "scope": "Separate fresh constructed native row portrait and cleanup evidence."
+    }
+  ],
+  "catalogReconciliation": {
+    "path": "catalog-reconciliation.json",
+    "sha256": "ee01e730de8c0c8f318b2a9702909ffa274566b80be1c5a4ea192e4100c50ce1",
+    "bytes": 2079
+  },
+  "caseResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-ac099200b3214d8384ad1c981fff8c16/case-result.json",
+    "sha256": "163e14898fac6155e80990b646f0ab136c4e825c8c4c9c15a4d32ef0202736ec",
+    "bytes": 395127
+  },
+  "runtimeProfile": {
+    "path": "art-experiments/sunspire-roc/runtime-profile.json",
+    "sha256": "49c7d8f7fbbbb63f5fc471b53d0bddcebaa8d1c69cb9a570d28bb2c12e9781f6",
+    "bytes": 619
+  },
+  "visualReview": "reviewed_exact_source_with_scoped_limits",
+  "rootVisualReview": "visual-review.json",
+  "rootVisualReviewPin": {
+    "path": "visual-review.json",
+    "sha256": "7832d7aa2554170ae80e58ef32c892a8fa2c09e7e0811e1af394527c51004d74",
+    "bytes": 4463
+  },
+  "selectedPNGs": [
+    {
+      "action": "pass",
+      "index": 0,
+      "clip": "cidle_roc",
+      "source": "scratch/mirewarden-game/model-test-output/2e981e9be3394f819e8cf29bcf44ec61/0000.png",
+      "archive": "selected/pass-0000.png",
+      "sha256": "8bbcef3b139c674b707f536d90fd8cd807e05e0f6c1a9e6753ec1afa863cd9d6",
+      "observation": "The authored hooked beak, crown, chest, paired wings, legs, talons, and tail form one readable Roc silhouette in settled idle."
+    },
+    {
+      "action": "pass",
+      "index": 60,
+      "clip": "attackProf_roc",
+      "source": "scratch/mirewarden-game/model-test-output/2e981e9be3394f819e8cf29bcf44ec61/0060.png",
+      "archive": "selected/pass-0060.png",
+      "sha256": "07fc6d83cd14888a61e3be2f259783ff743ea2707972b9f6e62d3efaa1fa5ecc",
+      "observation": "The native airborne attack pose keeps the torso, wing roots, broad feathers, legs, and tail connected; the top of the head is cropped by the combat camera in this frame."
+    },
+    {
+      "action": "attack",
+      "index": 25,
+      "clip": "cidle_roc",
+      "source": "scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d/0025.png",
+      "archive": "selected/attack-0025.png",
+      "sha256": "6a60f9c6c8b1d8450d74192b77be2896b556ce2dc445fc23a62f3d22bedf6d45",
+      "observation": "The ordinary hit is visible as a 10-point health change at the transition into damageLight_roc. Impact effects partly cover the chest, while both wings and the body remain continuous."
+    },
+    {
+      "action": "attack",
+      "index": 80,
+      "clip": "attackCrit_roc",
+      "source": "scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d/0080.png",
+      "archive": "selected/attack-0080.png",
+      "sha256": "5048405bcc50fc6f1e3b1df3c489137deed71f7dd8ad2f7dc11b3314d773ed64",
+      "observation": "The later native critical attack pose keeps the beak, torso, wings, legs, talons, and tail attached while effects and combat UI obscure some surfaces."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 50,
+      "clip": "deathHeavy_roc",
+      "source": "scratch/mirewarden-game/model-test-output/945adef83cf34b22bbf8f69ab5cbddb5/0050.png",
+      "archive": "selected/kill-fixture-0050.png",
+      "sha256": "e7ed919150cbc300b4125403f95ccbb05d1ef23debacc922d5a85e1a29d6a210",
+      "observation": "The explicit fixture shows the authored Roc folded and lowered under deathHeavy_roc with both wings and the tail still visibly connected. This is animated death, not a body ragdoll."
+    },
+    {
+      "action": "native-row-portrait",
+      "index": 0,
+      "clip": "constructed native uiEnemyEncounterPortrait.Initialize fixture",
+      "source": "art-experiments/sunspire-roc/live-validation-v3/selected/native-row-portrait.png",
+      "archive": "selected/native-row-portrait.png",
+      "sha256": "b7b93723f656f1422fafffae228732dedb45e9fa7f983873ff6b4c37ec7b5042",
+      "observation": "The native row portrait is readable at 328 by 280 and clearly shows the authored beak, eye, crown, head, and neck mantle."
+    }
+  ],
+  "videos": [
+    {
+      "action": "native-idle-attack",
+      "path": "native-idle-attack.mp4",
+      "sha256": "545a17496b7ad7d8d33201e87288d16f33cab1f50223528d4680c8711d5d3113",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "path": "ordinary-nonlethal-hit.mp4",
+      "sha256": "b3fd7bec16adceb82a7c4d6bcf10c4cd3e383942d88b7ddf406d287516e5cf52",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "kill-fixture",
+      "path": "kill-fixture.mp4",
+      "sha256": "d79549d19d68a2e5bc5e4e2cee76b6d1b2ed3deddc36ffee7648ff120bab7746",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    }
+  ],
+  "sourceImageCount": 361,
+  "sourceImagePins": "source-image-pins.json",
+  "captureImageCount": 360,
+  "captureImagePins": "capture-image-pins.json",
+  "assetPins": "asset-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v2/README.md",
+      "sourceSha256": "e9cc84bd18082c27ec9dd8f9245ddbfc7615c93325ae3cea4d5bf7fe28376e44",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v2/README.md.gz",
+      "archiveSha256": "2269341fadb916350d01968e49a03673f7baae79f45392cb17f85a14ba4a2982",
+      "bytes": 1641,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v2/asset-pins.json",
+      "sourceSha256": "21add35cddf9c9500d22d9bc7bc0e71cffe76bbc55b9bded3fd5a7c8e7e11499",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v2/asset-pins.json.gz",
+      "archiveSha256": "d53824869dc484f3075c649439e9addb68b2fec8a4a3ddb91b79f92291ed045a",
+      "bytes": 193,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v2/metadata/scratch/mirewarden-game/model-test-profiles.json.gz",
+      "sourceSha256": "5fb1b87a1c6cb56f31eef33722a035b6e258952598965b555e3b1a550910552f",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v2/metadata/scratch/mirewarden-game/model-test-profiles.json.gz.gz",
+      "archiveSha256": "f956ec8924c23ceb4e5dc738a7158b8e050b826fa9932885ce73e55501af1dfa",
+      "bytes": 21733,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v2/source-image-pins.json",
+      "sourceSha256": "0e375b98f186b463220676cd379209e372a8e9d83ca8cc473a5cde3d855db5fd",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v2/source-image-pins.json.gz",
+      "archiveSha256": "240a515dcb7ee250b96555c58034bfccbf756bd6a024629155140e476be255de",
+      "bytes": 603,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v2/validation.json",
+      "sourceSha256": "6e61239c6d22ee301764fda70136f3e7098c31f2f250aa2a0e6db9e4e693067f",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v2/validation.json.gz",
+      "archiveSha256": "4028dccd47652e54efc14b3aaa427aa9fdf34bee4295569869f63bd88221d03c",
+      "bytes": 56756,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v3/README.md",
+      "sourceSha256": "edf1d3f2defa1c4d8a871f41f7ba5fbf396797ec5b02f2694d9cae8e95d3b9af",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v3/README.md.gz",
+      "archiveSha256": "0be1a284b402f0eb4dacde167de4f95f0a14346c6236e596098cfcd2e854de1a",
+      "bytes": 1873,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v3/asset-pins.json",
+      "sourceSha256": "21add35cddf9c9500d22d9bc7bc0e71cffe76bbc55b9bded3fd5a7c8e7e11499",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v3/asset-pins.json.gz",
+      "archiveSha256": "d53824869dc484f3075c649439e9addb68b2fec8a4a3ddb91b79f92291ed045a",
+      "bytes": 193,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v3/source-image-pins.json",
+      "sourceSha256": "6ede40f0dcc396d1a836ef648e7229a627a53320d524d442cf50286e0c946359",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v3/source-image-pins.json.gz",
+      "archiveSha256": "bcb81053aafd42921386e09ab3f61888a5686ed063f80b765efb626f72d18c05",
+      "bytes": 297,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v3/validation.json",
+      "sourceSha256": "487cc15f5db1d786efe3534106f692deda2a63e088e43a160f0c676242348a9d",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v3/validation.json.gz",
+      "archiveSha256": "987d3d172138de697f72ba556f6f541054e6d752b340eba9337c0a525b694b6e",
+      "bytes": 44699,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/live-validation-v4/archive.py",
+      "sourceSha256": "88fd2055c2999cab6813c78baeb479201a3761fcfe1985e4630590ad521591e3",
+      "archive": "metadata/art-experiments/sunspire-roc/live-validation-v4/archive.py.gz",
+      "archiveSha256": "5db52699c1658ec910c2a7bec8a470eceb0c1994aaab7d51ec97c3695a1dbc17",
+      "bytes": 22885,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/manifest.json",
+      "sourceSha256": "6388691c5cfd5c8a8a967a1ac1984da5ec895bae5ab685e001901d48b708dd5e",
+      "archive": "metadata/art-experiments/sunspire-roc/manifest.json.gz",
+      "archiveSha256": "52d96c7ada2c8a773765d6b550e2a211cb00c2a57ef54d534e301a2eff3699fc",
+      "bytes": 5054,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/runtime-profile.json",
+      "sourceSha256": "49c7d8f7fbbbb63f5fc471b53d0bddcebaa8d1c69cb9a570d28bb2c12e9781f6",
+      "archive": "metadata/art-experiments/sunspire-roc/runtime-profile.json.gz",
+      "archiveSha256": "cb886673c0c2849f03a8b772a2ccb840335c1e142f7639ae5deb33c226461a96",
+      "bytes": 619,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/sunspire-roc.glb",
+      "sourceSha256": "da6b90793027a3f33feae317da1efdc1982176e6cee6b704ab4a1b223d7c0c67",
+      "archive": "metadata/art-experiments/sunspire-roc/sunspire-roc.glb.gz",
+      "archiveSha256": "ec74e12e0ab4be2fabff87ae2c6a7700fcc08167140dc84a14346b015fdd35f7",
+      "bytes": 410056,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/sunspire-roc/sunspire-roc_basecolor.png",
+      "sourceSha256": "911b8202261edc17a1098677b63d69ba960b26a66d2cd5027281d03368762f83",
+      "archive": "metadata/art-experiments/sunspire-roc/sunspire-roc_basecolor.png.gz",
+      "archiveSha256": "67b3a1c66303ecee15e24ca6203273c45672938745a47f9c5ed2e864356c4878",
+      "bytes": 267,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/1a6a8aad908d4f0d92e37d48600bd078.json",
+      "sourceSha256": "988135322a34865741bac127564f1f3c0e934e2884f5a5d5e22da40ba1aa338f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/1a6a8aad908d4f0d92e37d48600bd078.json.gz",
+      "archiveSha256": "b213ca4b6418ba62937438206829e9a543f7285f54c14995e4d00d5061c0713f",
+      "bytes": 3032,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/2e981e9be3394f819e8cf29bcf44ec61.json",
+      "sourceSha256": "2928ce90b7e9a5345528af938741c45c7660c35e6ca0c1c38681f5c4c08683b3",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/2e981e9be3394f819e8cf29bcf44ec61.json.gz",
+      "archiveSha256": "19d10b8eb9606697776ffb4dbd2265d7bd7e70daf695a576b5302f9502f5e5eb",
+      "bytes": 4504234,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/945adef83cf34b22bbf8f69ab5cbddb5.json",
+      "sourceSha256": "911a9b52082aa6d7dc07d4d1dab05380872d3513d7253d8c7e98dd5c23a98bd7",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/945adef83cf34b22bbf8f69ab5cbddb5.json.gz",
+      "archiveSha256": "3ae0809fa62eb2095f41381a7408de7a8b469bb40e1f93d0022a0d19faaf46b5",
+      "bytes": 4497728,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d.json",
+      "sourceSha256": "c9e7cb6a95fda252a4f2e65bcdef4b9bb5ce6b0fd0945d914e0757ead25e0a4e",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d.json.gz",
+      "archiveSha256": "2dd16c0dfe3a4bb8ade30383c127b97ef6e1a5aed8f0c1f8e2a182383818a31f",
+      "bytes": 4506028,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/a3d6778fbdd846958c2db0aecb29f53f.json",
+      "sourceSha256": "4d2574b94d948ce107dd460f363f9a512036b939eb1a0b5162768c5d3320447f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/a3d6778fbdd846958c2db0aecb29f53f.json.gz",
+      "archiveSha256": "2769338a848775ca2107d61fb4d0676292f0387775f48e0ac3e5b4ab988782cc",
+      "bytes": 585613,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0e11cf8d2cac42938f0ff902f6d83590/journal.jsonl",
+      "sourceSha256": "6f35ae0c104fd6f3b3d825d2f6c3c0426dd6e59f888cefec415a8f240373852f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0e11cf8d2cac42938f0ff902f6d83590/journal.jsonl.gz",
+      "archiveSha256": "cce91d8ad7e89e65b2effcca5e0e9e2792245ba0977e299da07108d1c5f858f9",
+      "bytes": 2576024,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0e11cf8d2cac42938f0ff902f6d83590/result.json",
+      "sourceSha256": "0cf0a5d1711ca665de773b805b3da48d1e5d53eb7df93133defb9c178cf36406",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0e11cf8d2cac42938f0ff902f6d83590/result.json.gz",
+      "archiveSha256": "86199c5a3e0e078938be030f95799a66e423ac969ee9141a6684542c9d838581",
+      "bytes": 1018,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-6e15f88f3826403d926f7419ebb194aa/journal.jsonl",
+      "sourceSha256": "2b0a43daaef795daf94d629c579a33b7ac8cb2e80d56a9957149cbb202ac628d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-6e15f88f3826403d926f7419ebb194aa/journal.jsonl.gz",
+      "archiveSha256": "e27d9540d59d8e33cbcbf43ec3e50e0e4487902f6508f7971090eec5c95e6b0a",
+      "bytes": 2585167,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-6e15f88f3826403d926f7419ebb194aa/result.json",
+      "sourceSha256": "566fffe2e13bc1e2248a2d82ec66f6086f73d8f0a1ad59c429bb10e1a00f055d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-6e15f88f3826403d926f7419ebb194aa/result.json.gz",
+      "archiveSha256": "274df9ddb08d07f323e4476fc96430bb2570fb70f92f80aea0af6fe4568adfdc",
+      "bytes": 1008,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ac099200b3214d8384ad1c981fff8c16/case-result.json",
+      "sourceSha256": "163e14898fac6155e80990b646f0ab136c4e825c8c4c9c15a4d32ef0202736ec",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ac099200b3214d8384ad1c981fff8c16/case-result.json.gz",
+      "archiveSha256": "04b0d665273852a35d2ee197baae0670b42d596f2a788729e54b0825e197d604",
+      "bytes": 395127,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ac099200b3214d8384ad1c981fff8c16/journal.jsonl",
+      "sourceSha256": "8bc76a3cd38e8cdcaa71de6f879811a74af3ddf9b254ad909ad4bb1bc6c8b52f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ac099200b3214d8384ad1c981fff8c16/journal.jsonl.gz",
+      "archiveSha256": "43f4e8fa983b098b5af4acef020c2e8bdd0a557cf4ee07aaaa43ff9c2af5b9ad",
+      "bytes": 307203,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ba9ce11f91634687b51894df629bc70a/journal.jsonl",
+      "sourceSha256": "ebe55f3d0b9accc7d393b30d808f695525d8e5d7d03526f8c78303349d3fddf6",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ba9ce11f91634687b51894df629bc70a/journal.jsonl.gz",
+      "archiveSha256": "8a0ede5c41b55bb9b7c81f58f508e4e2416ac06e44a2bee551d66cd0b412a5fa",
+      "bytes": 2582756,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-ba9ce11f91634687b51894df629bc70a/result.json",
+      "sourceSha256": "a4fc66e71bb761d34356b22640c3dfd3eb320e411c4bc7694c32b832ad650b87",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-ba9ce11f91634687b51894df629bc70a/result.json.gz",
+      "archiveSha256": "44c5433655c7ca3e2993cdf5a7a246d661ad278c5acb8ce1d0024790834a2649",
+      "bytes": 750,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/new-run-session-243d7c94fca146d7a68bf03af5ba5f7f.json",
+      "sourceSha256": "491e2b62e5bae0734f3b62da282b269574d9ad4edb9c0e234a080eaf8a368e7b",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/new-run-session-243d7c94fca146d7a68bf03af5ba5f7f.json.gz",
+      "archiveSha256": "a1fcc79a425c94adef029a1dfe93bebdc5dc9f0e127499f5156089b1c2d7432f",
+      "bytes": 243,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-profiles.json",
+      "sourceSha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+      "archive": "metadata/scratch/mirewarden-game/model-test-profiles.json.gz",
+      "archiveSha256": "58b7d3bbc395887cdf860bc661ef76be7fad813751b1296923d4fc10d22cc516",
+      "bytes": 198229,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/sunspire-roc-root-portrait-review-v3.json",
+      "sourceSha256": "1c49526c324dcbe9c5c105202b3593a3e3e6fa72178f47947e75e81b18762f61",
+      "archive": "metadata/scratch/sunspire-roc-root-portrait-review-v3.json.gz",
+      "archiveSha256": "edbca84d50c03906f8922938f48569b3d3238be1110f2e9e08af97b71134e65e",
+      "bytes": 3399,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/sunspire-roc-v4-catalog-reconciliation.json",
+      "sourceSha256": "ee01e730de8c0c8f318b2a9702909ffa274566b80be1c5a4ea192e4100c50ce1",
+      "archive": "metadata/scratch/sunspire-roc-v4-catalog-reconciliation.json.gz",
+      "archiveSha256": "7f7762bc67ea4f292391d0f48e7e8209154c007f3c416c086626738a2b3dabc9",
+      "bytes": 2079,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/sunspire-roc-v4-root-visual-review.json",
+      "sourceSha256": "7832d7aa2554170ae80e58ef32c892a8fa2c09e7e0811e1af394527c51004d74",
+      "archive": "metadata/scratch/sunspire-roc-v4-root-visual-review.json.gz",
+      "archiveSha256": "4045651e6bcb25a51f5975554c2a7f280b6cc74920c4757e94064df56cd658ba",
+      "bytes": 4463,
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "workflow": {
+    "kind": "rearchive_complete_retained_combat_and_portrait_evidence",
+    "rule": "When retained trials preserve every required runtime observation but use an older archive schema, compare the selected historical catalog profile with the current profile and asset pins before reuse. Preserve all prior records, conduct a new root review of original pixels, and create a fresh immutable archive with standardized structured gates.",
+    "replayPolicy": "Do not replay a complete retained trial solely to repair archive metadata. Run again only for an unobserved evidence gate or a changed profile, asset, source renderer, motion renderer, or selected catalog profile."
+  },
+  "limits": [
+    "The ordinary no-focus native Attack records same-target HP 81 to 71 and damageLight_roc. The recorded action and numeric transition establish the scoped ordinary damage observation.",
+    "The explicit KillSingle fixture records HP 71 to 0 and deathHeavy_roc. Fixture death is not ordinary lethal-damage evidence.",
+    "The exact custom renderer reports m_DoRagdoll false and no rigidbodies across all 360 combat frames. Its death is animated, not a body ragdoll.",
+    "The retained V2 process supplies two guarded native Collects and strict Ready at level 0 room 2.",
+    "The retained V3 process supplies one constructed native uiEnemyEncounterPortrait.Initialize result and scoped cleanup evidence. It is not an opened encounter menu or a live combat HUD.",
+    "Combat UI, the hero, effects, camera crop, and the victory state obscure some surfaces. Full culling coverage, every animation interval, settled corpse state, precise visible corpse lifetime, final resource disposal, and finished art direction remain outside this archive.",
+    "This archive covers only rocA and enRoc01 renderer 121238. It does not establish rocB, rocJungleA, or another bird rig."
+  ]
+}

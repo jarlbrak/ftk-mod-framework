@@ -1,0 +1,37 @@
+{
+  "schema": "ftkmf.model-validation-catalog-reconciliation.v1",
+  "status": "retained_trial_selected_profile_matches_current_catalog_exactly",
+  "topologyGroup": "1329d6985dadecee",
+  "routeKind": "directEnemy",
+  "profileKey": "ftkmf_modeltest_belladusk",
+  "profileDocument": {
+    "path": "art-experiments/belladusk-pitcher/runtime-profile.json",
+    "sha256": "3ce70025a7ae787cc9b1253825ca02cb1e747696b2347f6cdf6626c001e6d703"
+  },
+  "retainedTrial": {
+    "path": "art-experiments/belladusk-pitcher/live-validation-v2/validation.json",
+    "sha256": "bd66b6c50f6aeb77961abfd86eb17d265a97a70ec03ce62acf0d49d7e8d943a5",
+    "session": "8e7350b348ba499993a11279be206fb2",
+    "historicalCatalogSha256": "f30d96713384e94e97ffca1dca4fc719374eac0e401a98e69ca95eacbb47cc12"
+  },
+  "currentCatalog": {
+    "path": "scratch/mirewarden-game/model-test-profiles.json",
+    "sha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144"
+  },
+  "matchingSemanticFields": {
+    "baseEnemy": "plantE",
+    "combatProfile": "30bf6f1223474a469aae2efa58b6eb7c1476b88984e95de5c8d24fc7b052f6e6",
+    "minimumBaseHealth": 64,
+    "rendererPath": "enJungleNibbler_A",
+    "glbFile": "belladusk.glb",
+    "glbSha256": "0678780baaf1f709bf43dabaca1fd30a469f8f443624a57bb9dbd506da064fd9",
+    "textureFile": "belladusk_basecolor.png",
+    "textureSha256": "51a84eb77be58235914d77b6030c5922d0de4baf3fe4ba2797d4b7a67e8ce493",
+    "visualScale": 1.0,
+    "disableNativeEmission": true,
+    "sourceRendererId": 121530,
+    "motionRendererPath": "enJungleNibbler_A"
+  },
+  "catalogDifference": "The overall catalog hash changed as unrelated profiles were added. The selected Belladusk profile object is byte-for-byte equivalent after canonical JSON serialization.",
+  "decision": "Preserve the complete retained trial and build a new immutable archive. A replay is not required because the selected profile, assets, source assignment, motion renderer, and required runtime observations are unchanged and fully retained."
+}

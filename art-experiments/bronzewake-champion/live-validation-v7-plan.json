@@ -1,0 +1,98 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/bronzewake-champion/live-validation-v7",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-3b1fa5ba60cf4356a360fa2a389fbaab/case-result.json",
+  "visualReview": "scratch/model-route-fb84ec3e6e18f459-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/bronzewake-champion/bronzewake_armor.glb",
+    "art-experiments/bronzewake-champion/bronzewake_basecolor.png",
+    "art-experiments/bronzewake-champion/bronzewake_body.glb",
+    "art-experiments/bronzewake-champion/bronzewake_boots.glb",
+    "art-experiments/bronzewake-champion/bronzewake_hair.glb"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/bronzewake-champion/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-fb84ec3e6e18f459-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-c9657c92c4a740c09a9a93323061f58d/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-c9657c92c4a740c09a9a93323061f58d/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "hairBottomBossGladiator",
+        "mesh": "ftkmf_glb_bronzewake_hair.glb",
+        "boneSignature": "8564fa4a8438235e6bdbd73077f284de0bed317efc657541c16ca4be91c4357d"
+      }
+    },
+    "attack": {
+      "label": "ordinary-hit-and-native-retaliation",
+      "scope": "Ordinary no-focus player attack, native heavy-hit response, recovery, and native critical retaliation capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "hairBottomBossGladiator",
+        "mesh": "ftkmf_glb_bronzewake_hair.glb",
+        "boneSignature": "8564fa4a8438235e6bdbd73077f284de0bed317efc657541c16ca4be91c4357d"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-ragdoll-death-prefix",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "hairBottomBossGladiator",
+        "mesh": "ftkmf_glb_bronzewake_hair.glb",
+        "boneSignature": "8564fa4a8438235e6bdbd73077f284de0bed317efc657541c16ca4be91c4357d"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V7",
+    "displayName": "Bronzewake Champion",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "bossGladiator",
+    "nativeChassis": "bossGladiator",
+    "rendererPaths": [
+      "hairBottomBossGladiator"
+    ],
+    "sourceRendererIds": [
+      121500
+    ],
+    "binding": {
+      "rendererPath": "hairBottomBossGladiator",
+      "mesh": "ftkmf_glb_bronzewake_hair.glb",
+      "boneSignature": "8564fa4a8438235e6bdbd73077f284de0bed317efc657541c16ca4be91c4357d"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native bossGladiator / hairBottomBossGladiator / renderer 121500 source assignment only; visible body, armor, boots, helmet, weapons, and other companion surfaces do not credit their sibling topology groups or renderer sources.",
+      "The ordinary no-focus hit reduced the same target from 11 HP to 1 HP; death used the separate explicit KillSingle fixture at 1 HP and is not ordinary lethal-damage evidence.",
+      "Twenty selected original PNGs were reviewed; the remaining 310 retained capture frames and generated videos are preserved evidence but were not individually reviewed.",
+      "The death capture retained 90 of 120 requested frames, then ended at a verified controller-unresolved boundary after a pinned native Death trigger; full-duration death and later corpse visibility are not claimed.",
+      "Structured capture records m_DoRagdoll true and 11 active rigid bodies becoming nonkinematic from retained death frame 28; the claim is limited to the sampled visible ragdoll prefix.",
+      "Native body, armor, boots, helmet, shield, weapon, combat UI, effects, foreground hero, depth blur, and camera motion limit fine hair inspection; no sampled tearing, renderer loss, viewport-edge clipping, floor fall-through, or hair separation was observed.",
+      "Strict Ready was observed at level 0 room 2 without a Collect action; broader campaign progression was not exercised.",
+      "Other proficiencies, DeathLight, portraits, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

@@ -1,0 +1,382 @@
+{
+  "ok": true,
+  "scope": "enemies",
+  "renderers": [
+    {
+      "instanceId": -245412,
+      "ownerKind": "enemies",
+      "ownerInstanceId": 369188,
+      "ownerRootName": "Enemy Dummy",
+      "enemyInstanceId": 369188,
+      "enemyRootName": "Enemy Dummy",
+      "celInstanceId": -245406,
+      "celRootName": "enCubeA(Clone)",
+      "celRelativeRendererPath": "enJellyCube",
+      "enemyRelativeRendererPath": "enCubeA(Clone)/enJellyCube",
+      "ownerRelativeRendererPath": "enCubeA(Clone)/enJellyCube",
+      "rendererPath": "enCubeA(Clone)/enJellyCube",
+      "mesh": "ftkmf_glb_cubea_material_layers_v1.glb",
+      "boneSignature": "320e13b7f80ce3886d35d8718ec2f4b47f84df8210e0ca0ded4513d7c59e65eb",
+      "isVisible": true,
+      "localBoundsCenter": [
+        -0.9238543510437012,
+        0.0704345703125,
+        -0.0799245834350586
+      ],
+      "localBoundsSize": [
+        1.3283019065856934,
+        0.7217685580253601,
+        0.6928860545158386
+      ],
+      "rootBone": "Root_M",
+      "enabled": true,
+      "active": true,
+      "boundsCenter": [
+        -1695.3226318359375,
+        9.284245491027832,
+        -15.230369567871094
+      ],
+      "boundsSize": [
+        0.7939453125,
+        1.4611320495605469,
+        0.7621746063232422
+      ],
+      "rendererLocalToWorld": [
+        1.100000023841858,
+        0.0,
+        0.0,
+        -1695.400146484375,
+        0.0,
+        1.100000023841858,
+        0.0,
+        8.26800537109375,
+        0.0,
+        0.0,
+        1.100000023841858,
+        -15.142452239990234,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "materials": [
+        {
+          "instanceId": -245598,
+          "name": "matBone (Instance)",
+          "shader": "Standard",
+          "emissionKeyword": true,
+          "emissionColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "_MainTexSupported": true,
+          "_MainTex": {
+            "instanceId": -245600,
+            "name": "ftkmf_cubea_material_layers_v1.slot0.png"
+          },
+          "_EmissionMapSupported": true,
+          "_EmissionMap": null
+        },
+        {
+          "instanceId": -245602,
+          "name": "matJellyCubeA (Instance)",
+          "shader": "Standard",
+          "emissionKeyword": true,
+          "emissionColor": [
+            0.18226096034049988,
+            0.2279411256313324,
+            0.0536331832408905,
+            0.15000000596046448
+          ],
+          "_MainTexSupported": true,
+          "_MainTex": {
+            "instanceId": -245604,
+            "name": "ftkmf_cubea_material_layers_v1.slot1.png"
+          },
+          "_EmissionMapSupported": true,
+          "_EmissionMap": null
+        }
+      ],
+      "bones": [
+        {
+          "name": "Root_M",
+          "localPosition": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "localRotation": [
+            0.0,
+            0.0,
+            -0.7071068286895752,
+            0.7071068286895752
+          ],
+          "localScale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "localToWorld": [
+            -1.3113022134803032e-07,
+            1.1000001430511475,
+            0.0,
+            -1695.400146484375,
+            -1.1000001430511475,
+            -1.3113022134803032e-07,
+            0.0,
+            8.26800537109375,
+            0.0,
+            0.0,
+            1.100000023841858,
+            -15.142452239990234,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "bindposeRowMajor": [
+            1.1102230246251565e-14,
+            -1.0,
+            0.0,
+            0.0,
+            1.0,
+            1.1102230246251565e-14,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "jellyCubeMid",
+          "localPosition": [
+            -1.0,
+            2.220446049250313e-16,
+            0.0
+          ],
+          "localRotation": [
+            0.010561936534941196,
+            -0.037519559264183044,
+            -0.013021917082369328,
+            0.9991552233695984
+          ],
+          "localScale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "localToWorld": [
+            -0.02949596755206585,
+            1.099381685256958,
+            -0.022141756489872932,
+            -1695.400146484375,
+            -1.0965300798416138,
+            -0.027752336114645004,
+            0.08277589827775955,
+            9.368005752563477,
+            0.08217071741819382,
+            0.024291500449180603,
+            1.096657633781433,
+            -15.142452239990234,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "bindposeRowMajor": [
+            1.1102230246251565e-14,
+            -1.0,
+            0.0,
+            1.0,
+            1.0,
+            1.1102230246251565e-14,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        },
+        {
+          "name": "jellyCubeTop",
+          "localPosition": [
+            -1.100000023841858,
+            2.4424907071149036e-16,
+            0.0
+          ],
+          "localRotation": [
+            0.042961493134498596,
+            0.010271197184920311,
+            0.7313526272773743,
+            0.6805675625801086
+          ],
+          "localScale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "localToWorld": [
+            1.0963531732559204,
+            -0.05303490161895752,
+            -0.07209230959415436,
+            -1695.36767578125,
+            0.0531112402677536,
+            1.0987170934677124,
+            -0.0005771857686340809,
+            10.574188232421875,
+            0.07203603535890579,
+            -0.002905558794736862,
+            1.0976349115371704,
+            -15.232839584350586,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "bindposeRowMajor": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            -2.1000001430511475,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "resourceLease": {
+        "available": true,
+        "present": true,
+        "leaseId": 4,
+        "acquired": true,
+        "applied": true,
+        "references": 1
+      },
+      "ragdoll": {
+        "m_DoRagdoll": false,
+        "animationRoot": "Root_M",
+        "rigidbodyCount": 0,
+        "truncated": false,
+        "rigidbodies": []
+      },
+      "animator": {
+        "name": "enCubeA(Clone)",
+        "instanceId": -245404,
+        "enabled": true,
+        "speed": 1.0,
+        "cullingMode": "CullUpdateTransforms",
+        "layers": [
+          {
+            "layer": 0,
+            "name": "Base Layer",
+            "stateHash": -1009909005,
+            "normalizedTime": 10.460919380187988,
+            "transition": false,
+            "playing": [
+              {
+                "name": "cidle_jelly",
+                "weight": 1.0,
+                "clipSeconds": 2.9000000953674316
+              }
+            ]
+          }
+        ],
+        "controller": "jellyCubeController",
+        "clips": [
+          {
+            "name": "cidle_jelly",
+            "seconds": 2.9000000953674316
+          },
+          {
+            "name": "taunt_jelly",
+            "seconds": 1.9666666984558105
+          },
+          {
+            "name": "wobble_jelly",
+            "seconds": 1.4666668176651
+          },
+          {
+            "name": "attack_jelly",
+            "seconds": 2.9000000953674316
+          },
+          {
+            "name": "taunt_jelly",
+            "seconds": 1.9666666984558105
+          },
+          {
+            "name": "taunt_jelly",
+            "seconds": 1.9666666984558105
+          },
+          {
+            "name": "wobble_jelly",
+            "seconds": 1.4666668176651
+          },
+          {
+            "name": "deathHeavy_jelly",
+            "seconds": 0.4333333671092987
+          },
+          {
+            "name": "AOE_jelly",
+            "seconds": 1.9666666984558105
+          },
+          {
+            "name": "stomp_jelly",
+            "seconds": 2.000000238418579
+          },
+          {
+            "name": "wobble_jelly",
+            "seconds": 1.4666668176651
+          },
+          {
+            "name": "wobble_jelly",
+            "seconds": 1.4666668176651
+          },
+          {
+            "name": "wobble_jelly",
+            "seconds": 1.4666668176651
+          },
+          {
+            "name": "cidle_jelly",
+            "seconds": 2.9000000953674316
+          },
+          {
+            "name": "taunt_jelly",
+            "seconds": 1.9666666984558105
+          },
+          {
+            "name": "deathLight_jelly",
+            "seconds": 0.8666666746139526
+          }
+        ]
+      }
+    }
+  ],
+  "testFixtureMaxHpTarget": 999,
+  "tutorialsQuiet": true,
+  "session": "0cf798022fc14b3ab8f54816b8d4d0b2",
+  "id": "51e3e4acea7a4a54b0dab126cda7c856",
+  "frame": 10160,
+  "savePath": "save-model-test-81fab5f083e30704"
+}

@@ -1,0 +1,3141 @@
+{
+  "status": "reviewed_resource_enbaseywolf_binding_appearance_idle_attack_hit_death_and_gameplay_observed",
+  "session": "6aedf9b7ab6e4c4292425002505d64e4",
+  "enemy": "ftkmf_modeltest_lichenfang_basey_wolf",
+  "displayName": "Lichenfang Prowler",
+  "nativeChassis": "wolfA",
+  "baseEnemy": "wolfA",
+  "resourcePrefab": "enbaseywolf",
+  "rendererPaths": [
+    "Wolfie"
+  ],
+  "profile": {
+    "key": "ftkmf_modeltest_lichenfang_basey_wolf",
+    "baseEnemy": "wolfA",
+    "resourcePrefab": "enbaseywolf",
+    "displayName": "Lichenfang Prowler",
+    "minimumBaseHealth": 64,
+    "combatProfile": "a875f1899d2c8e7deeac6283a727d13fbe5715dd5109f7719e87202a22cb566f",
+    "renderers": [
+      {
+        "rendererPath": "Wolfie",
+        "glbFile": "lichenfang.glb",
+        "textureFile": "lichenfang-palette.png",
+        "disableNativeEmission": true
+      }
+    ]
+  },
+  "profileSha256": "1cf98de1b4acac3830d23bdc889e341b6558abde568f1bc22202c7a5fe77f003",
+  "catalogSha256": "1cf98de1b4acac3830d23bdc889e341b6558abde568f1bc22202c7a5fe77f003",
+  "catalogSnapshot": {
+    "archive": "inputs/model-test-profiles.json.gz",
+    "archiveSha256": "bb3b9c7df15aa25c7daa0f34ad4b75fb456e50e479eceffd66d3f4948a1a3746",
+    "sourceSha256": "1cf98de1b4acac3830d23bdc889e341b6558abde568f1bc22202c7a5fe77f003",
+    "bytes": 197349,
+    "encoding": "gzip-lossless"
+  },
+  "registrationSnapshot": {
+    "archive": "inputs/model-test-registration.json.gz",
+    "archiveSha256": "f68b0fa72569d7811f96da5f493a7bf07944a3c9a979b31fb309e7050bde9577",
+    "sourceSha256": "8ef8667d0286b77100316b16ce25955b17d7e819e1234c78daa37fef55bc28a0",
+    "bytes": 220273,
+    "encoding": "gzip-lossless"
+  },
+  "assetHashes": {
+    "lichenfang.glb": "a53986fcd2ab4f65479cb1f39055163e5dea44381ecad2f84c2b94fa9f8d09b5",
+    "lichenfang-palette.png": "64a203e5f15eef9f39d83dabd70b18ae46ebdf81f2ee111cf95bcfe2b7c67445",
+    "lichenfang.source.json": "b341ab1b28034aab9bf752b3a4dcef374eef5f1b28273415d2dc169ea573f707",
+    "lichenfang.pieces.json": "ca312d441d2fa8c98dc1b75581e3cded59ab1ad6fce524d524fb73facfa498e8"
+  },
+  "binding": {
+    "nativeChassis": "wolfA",
+    "sourceKind": "resource_prefab",
+    "resourcePrefab": "enbaseywolf",
+    "rendererPath": "Wolfie",
+    "sourceRendererId": 120975,
+    "ownerInstanceId": 369188,
+    "rendererInstanceId": -245434,
+    "mesh": "lichenfang.glb",
+    "boneSignature": "cd213851cfdc658d2a6703c657bddcd6479843536c0fdb9572ac34245038ee97",
+    "catalogSha256": "1cf98de1b4acac3830d23bdc889e341b6558abde568f1bc22202c7a5fe77f003"
+  },
+  "renderers": [
+    {
+      "nativeChassis": "wolfA",
+      "sourceKind": "resource_prefab",
+      "resourcePrefab": "enbaseywolf",
+      "rendererPath": "Wolfie",
+      "sourceRendererId": 120975,
+      "ownerInstanceId": 369188,
+      "rendererInstanceId": -245434,
+      "mesh": "lichenfang.glb",
+      "boneSignature": "cd213851cfdc658d2a6703c657bddcd6479843536c0fdb9572ac34245038ee97",
+      "catalogSha256": "1cf98de1b4acac3830d23bdc889e341b6558abde568f1bc22202c7a5fe77f003"
+    }
+  ],
+  "captures": [
+    {
+      "label": "idle",
+      "action": "pass",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377.json",
+        "sha256": "917f471568809ca658f96911ffd84c1273b6c7de76dad48452a4dea999b9344f",
+        "bytes": 4166579
+      },
+      "summary": {
+        "path": "art-experiments/lichenfang-basey-wolf/live-validation-v1/capture-summaries/pass.json",
+        "sha256": "18e85502a6f593ee64de330fa67f455ce93d581271fc34ba592ad95ba9e33987",
+        "bytes": 34593
+      },
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_lichenfang.glb",
+          "cd213851cfdc658d2a6703c657bddcd6479843536c0fdb9572ac34245038ee97"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 96,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 43,
+              "firstNormalizedTime": 9.845821380615234,
+              "lastNormalizedTime": 13.866327285766602,
+              "gameSeconds": 3.9416656494140625
+            },
+            {
+              "firstFrame": 68,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.204879492521286,
+              "lastNormalizedTime": 4.973379135131836,
+              "gameSeconds": 4.674995422363281
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "attackProf_wolf"
+          ],
+          "sampleCount": 24,
+          "occurrences": [
+            {
+              "firstFrame": 44,
+              "lastFrame": 67,
+              "firstNormalizedTime": 0.07857142388820648,
+              "lastNormalizedTime": 0.9821429252624512,
+              "gameSeconds": 2.10833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ],
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.908332824707031,
+            "value": true
+          },
+          "transitions": []
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 0,
+          "falseFrameCount": 120,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": false
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.908332824707031,
+            "value": false
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodyCounts": [
+            {
+              "frameIndex": 0,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 1,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 2,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 3,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 4,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 5,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 6,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 7,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 8,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 9,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 10,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 11,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 12,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 13,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 14,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 15,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 16,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 17,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 18,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 19,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 20,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 21,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 22,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 23,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 24,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 25,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 26,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 27,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 28,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 29,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 30,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 31,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 32,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 33,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 34,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 35,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 36,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 37,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 38,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 39,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 40,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 41,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 42,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 43,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 44,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 45,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 46,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 47,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 48,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 49,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 50,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 51,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 52,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 53,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 54,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 55,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 56,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 57,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 58,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 59,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 60,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 61,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 62,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 63,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 64,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 65,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 66,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 67,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 68,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 69,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 70,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 71,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 72,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 73,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 74,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 75,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 76,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 77,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 78,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 79,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 80,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 81,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 82,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 83,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 84,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 85,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 86,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 87,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 88,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 89,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 90,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 91,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 92,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 93,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 94,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 95,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 96,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 97,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 98,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 99,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 100,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 101,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 102,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 103,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 104,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 105,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 106,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 107,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 108,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 109,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 110,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 111,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 112,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 113,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 114,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 115,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 116,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 117,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 118,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 119,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            }
+          ],
+          "bodies": []
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "pass",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245246,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 9.79196548461914,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 7394,
+          "sample": {
+            "animatorInstanceId": -245246,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 9.845821380615234,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377/0000.png",
+            "sha256": "d26ace3e2e1d2fecdc5ecbe4b224eb55ed6ce227bbd761e133dea716ac72ac1a",
+            "bytes": 1101885
+          }
+        },
+        "attack": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 7436,
+            "realtime": 178.24708557128906,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245248,
+            "targetRendererInstanceId": -245434,
+            "targetAnimatorInstanceId": -245246,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "attacker",
+            "actorInstanceId": 369188,
+            "actorFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "attackAnim": "AttackProf",
+            "override": "AttackProf",
+            "primary": {
+              "attackerFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "damage": 0,
+              "newHealth": 995,
+              "attackerHealthMod": 0,
+              "proficiencyId": 73,
+              "proficiencySuccess": false,
+              "attackResponse": "HarmlessAttack"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 58
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 7436,
+            "realtime": 178.25537109375,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245248,
+            "targetRendererInstanceId": -245434,
+            "targetAnimatorInstanceId": -245246,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "AttackProf",
+            "forceAnim": false,
+            "preIssueLastTrigger": "Attack",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "AttackProf"
+          },
+          "sampleIndex": 42,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377/0042.png",
+            "sha256": "0963d03d3002bc0dcd1eda18126109519dfc2cef8c039a32b8aa43950d02b0db",
+            "bytes": 1058658
+          }
+        },
+        "limitations": "Native action and trigger chronology select frames. Human review still judges pose, deformation, visibility and clip coverage."
+      },
+      "captureScope": "Idle observation and exact native enemy AttackProf trigger/capture."
+    },
+    {
+      "label": "nonlethal-hit",
+      "action": "attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0.json",
+        "sha256": "e00ae809f8ec7d5e6884fe62b53c28d5d565e42f5659bff75dfb7460e225eadf",
+        "bytes": 4167509
+      },
+      "summary": {
+        "path": "art-experiments/lichenfang-basey-wolf/live-validation-v1/capture-summaries/attack.json",
+        "sha256": "ac24179daaf642b071edfefe3452d664b412477d7cc3596569734b5b7d2dceda",
+        "bytes": 35673
+      },
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_lichenfang.glb",
+          "cd213851cfdc658d2a6703c657bddcd6479843536c0fdb9572ac34245038ee97"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 75,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 6.128050327301025,
+              "lastNormalizedTime": 8.372053146362305,
+              "gameSeconds": 2.1999969482421875
+            },
+            {
+              "firstFrame": 38,
+              "lastFrame": 67,
+              "firstNormalizedTime": 0.3416256308555603,
+              "lastNormalizedTime": 3.0531246662139893,
+              "gameSeconds": 2.6583328247070312
+            },
+            {
+              "firstFrame": 84,
+              "lastFrame": 102,
+              "firstNormalizedTime": 0.08281107246875763,
+              "lastNormalizedTime": 1.7658112049102783,
+              "gameSeconds": 1.6500015258789062
+            },
+            {
+              "firstFrame": 119,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.08281107246875763,
+              "lastNormalizedTime": 0.08281107246875763,
+              "gameSeconds": 0.0
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damaged_wolf"
+          ],
+          "sampleCount": 13,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 37,
+              "firstNormalizedTime": 0.10630067437887192,
+              "lastNormalizedTime": 0.9313008189201355,
+              "gameSeconds": 1.100006103515625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_wolf"
+          ],
+          "sampleCount": 32,
+          "occurrences": [
+            {
+              "firstFrame": 68,
+              "lastFrame": 83,
+              "firstNormalizedTime": 0.11148648709058762,
+              "lastNormalizedTime": 0.9476349353790283,
+              "gameSeconds": 1.375
+            },
+            {
+              "firstFrame": 103,
+              "lastFrame": 118,
+              "firstNormalizedTime": 0.11148648709058762,
+              "lastNormalizedTime": 0.9476349353790283,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.908332824707031,
+            "value": true
+          },
+          "transitions": []
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 0,
+          "falseFrameCount": 120,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": false
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.908332824707031,
+            "value": false
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodyCounts": [
+            {
+              "frameIndex": 0,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 1,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 2,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 3,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 4,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 5,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 6,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 7,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 8,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 9,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 10,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 11,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 12,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 13,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 14,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 15,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 16,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 17,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 18,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 19,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 20,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 21,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 22,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 23,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 24,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 25,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 26,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 27,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 28,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 29,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 30,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 31,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 32,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 33,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 34,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 35,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 36,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 37,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 38,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 39,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 40,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 41,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 42,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 43,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 44,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 45,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 46,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 47,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 48,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 49,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 50,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 51,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 52,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 53,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 54,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 55,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 56,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 57,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 58,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 59,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 60,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 61,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 62,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 63,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 64,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 65,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 66,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 67,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 68,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 69,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 70,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 71,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 72,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 73,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 74,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 75,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 76,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 77,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 78,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 79,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 80,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 81,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 82,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 83,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 84,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 85,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 86,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 87,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 88,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 89,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 90,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 91,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 92,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 93,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 94,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 95,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 96,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 97,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 98,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 99,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 100,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 101,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 102,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 103,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 104,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 105,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 106,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 107,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 108,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 109,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 110,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 111,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 112,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 113,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 114,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 115,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 116,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 117,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 118,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 119,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            }
+          ],
+          "bodies": []
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "attack",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245246,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 6.118240833282471,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 7608,
+          "sample": {
+            "animatorInstanceId": -245246,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 6.128050327301025,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0/0000.png",
+            "sha256": "3a17560e6d950a47d0a37806bbd2d7683a3ce2661a38549e53e8f1fa2f3e3f2c",
+            "bytes": 1103476
+          }
+        },
+        "hit": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 7621,
+            "realtime": 198.43679809570312,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245248,
+            "targetRendererInstanceId": -245434,
+            "targetAnimatorInstanceId": -245246,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "victim",
+            "actorInstanceId": 358974,
+            "actorFid": {
+              "photonId": 1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "None",
+            "primary": {
+              "attackerFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "damage": 10,
+              "newHealth": 48,
+              "attackerHealthMod": 0,
+              "proficiencyId": -1,
+              "proficiencySuccess": false,
+              "attackResponse": "Damaged"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 58
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 7631,
+            "realtime": 200.6027069091797,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245248,
+            "targetRendererInstanceId": -245434,
+            "targetAnimatorInstanceId": -245246,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "Damaged",
+            "forceAnim": false,
+            "preIssueLastTrigger": "AttackProf",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "Damaged"
+          },
+          "sampleIndex": 23,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0/0023.png",
+            "sha256": "e914278149f2df11999159510624d11c40c0ebadefd99fb110f6daa9888ed03e",
+            "bytes": 1132323
+          }
+        },
+        "limitations": "A nonlethal native damage response is proven. Human review still judges the retained hit pose and visual quality."
+      },
+      "captureScope": "Ordinary same-target nonlethal player hit and exact Damaged trigger/capture."
+    },
+    {
+      "label": "kill-fixture",
+      "action": "kill-fixture",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c.json",
+        "sha256": "b5984cfbe273def1f47e9fd8622f0c4df8ad53bb0709e80ee6995635be35cf61",
+        "bytes": 4156289
+      },
+      "summary": {
+        "path": "art-experiments/lichenfang-basey-wolf/live-validation-v1/capture-summaries/kill-fixture.json",
+        "sha256": "19c0017bb2195629fdfe3a49c4140472ceb0b496b6c6c8f172efcc145319df87",
+        "bytes": 34373
+      },
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_lichenfang.glb",
+          "cd213851cfdc658d2a6703c657bddcd6479843536c0fdb9572ac34245038ee97"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 2.4917168617248535,
+              "lastNormalizedTime": 4.829216480255127,
+              "gameSeconds": 2.2916717529296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathHeavy_wolf"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10999999940395355,
+              "lastNormalizedTime": 5.224997520446777,
+              "gameSeconds": 8.524993896484375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.908332824707031,
+            "value": true
+          },
+          "transitions": []
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 0,
+          "falseFrameCount": 120,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": false
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.908332824707031,
+            "value": false
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodyCounts": [
+            {
+              "frameIndex": 0,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 1,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 2,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 3,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 4,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 5,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 6,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 7,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 8,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 9,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 10,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 11,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 12,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 13,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 14,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 15,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 16,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 17,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 18,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 19,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 20,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 21,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 22,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 23,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 24,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 25,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 26,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 27,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 28,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 29,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 30,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 31,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 32,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 33,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 34,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 35,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 36,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 37,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 38,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 39,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 40,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 41,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 42,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 43,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 44,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 45,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 46,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 47,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 48,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 49,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 50,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 51,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 52,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 53,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 54,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 55,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 56,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 57,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 58,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 59,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 60,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 61,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 62,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 63,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 64,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 65,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 66,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 67,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 68,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 69,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 70,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 71,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 72,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 73,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 74,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 75,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 76,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 77,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 78,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 79,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 80,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 81,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 82,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 83,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 84,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 85,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 86,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 87,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 88,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 89,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 90,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 91,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 92,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 93,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 94,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 95,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 96,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 97,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 98,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 99,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 100,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 101,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 102,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 103,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 104,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 105,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 106,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 107,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 108,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 109,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 110,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 111,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 112,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 113,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 114,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 115,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 116,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 117,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 118,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            },
+            {
+              "frameIndex": 119,
+              "reportedTotal": 0,
+              "recordedCount": 0
+            }
+          ],
+          "bodies": []
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "kill-fixture",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245246,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 2.482215642929077,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 7935,
+          "sample": {
+            "animatorInstanceId": -245246,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 2.4917168617248535,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c/0000.png",
+            "sha256": "b0f5de4f4a3b805dc88e88a3f0383cf477c839bea3cf170118ba3462e95f0139",
+            "bytes": 1106671
+          }
+        },
+        "death": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 7948,
+            "realtime": 226.06112670898438,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245248,
+            "targetRendererInstanceId": -245434,
+            "targetAnimatorInstanceId": -245246,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "victim",
+            "actorInstanceId": 358974,
+            "actorFid": {
+              "photonId": 1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "None",
+            "primary": {
+              "attackerFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "damage": 1000,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "proficiencyId": -1,
+              "proficiencySuccess": false,
+              "attackResponse": "Death"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 48
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 7958,
+            "realtime": 228.16050720214844,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245248,
+            "targetRendererInstanceId": -245434,
+            "targetAnimatorInstanceId": -245246,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "Death",
+            "forceAnim": false,
+            "preIssueLastTrigger": "Attack",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "Death"
+          },
+          "sampleIndex": 23,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c/0023.png",
+            "sha256": "ab441994cf78eaf6a5a0d3e3680b28b18c13416eadf19d5f2e0271d0ca78460b",
+            "bytes": 1121044
+          }
+        },
+        "limitations": "This is an explicit KillSingle fixture on the native damage path, not ordinary lethal-damage proof. Human review still judges retained death frames and cleanup."
+      },
+      "captureScope": "Explicit KillSingle fixture and exact native Death trigger/capture; not ordinary lethal-damage evidence."
+    }
+  ],
+  "ordinaryHit": {
+    "action": "attack",
+    "cheat": "None",
+    "focus": false,
+    "beforeHp": 58,
+    "afterHp": 48,
+    "clip": "damaged_wolf",
+    "scope": "same-target observed nonlethal native damage"
+  },
+  "ordinaryLethal": false,
+  "explicitKillFixture": {
+    "action": "kill-fixture",
+    "accepted": true,
+    "clip": "deathHeavy_wolf",
+    "scope": "Explicit KillSingle fixture; never ordinary lethal-damage evidence."
+  },
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235426,
+        "alive": true,
+        "containerInstanceId": -237162,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237204,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237604,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235426,
+            "celInstanceId": -239030,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245568,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "6aedf9b7ab6e4c4292425002505d64e4",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "6aedf9b7ab6e4c4292425002505d64e4",
+    "id": "d6b8f03a6ce0464689a0e221bf1d4ef9",
+    "frame": 8355,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "visualReview": "reviewed_scoped_technical_motion_and_appearance",
+  "materialReview": {
+    "scope": "Native combat camera visual review of the configured Lichenfang palette.",
+    "result": "The dark spruce, slate, teal lichen, copper leaf accents, and amber eye palette are visibly distinct in the captured combat view. This is not a lighting sweep, shader-channel inspection, or final art-direction approval."
+  },
+  "selectedPNGs": [
+    {
+      "action": "idle",
+      "sourceAction": "pass",
+      "captureId": "8bb1736750d34c3b93eab11c2b420377",
+      "index": 12,
+      "clip": "cidle_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377/0012.png",
+      "archive": "selected/idle-0012.png",
+      "sha256": "3a6b9b3f04cbdec369825c948d4fd01a3dfbe869cbe6aaffdc55da78af45ce43",
+      "observation": "The complete authored lichen-armored wolf renders together in the native combat camera with a readable head, layered mane, legs, tail, and leaf accents."
+    },
+    {
+      "action": "idle",
+      "sourceAction": "pass",
+      "captureId": "8bb1736750d34c3b93eab11c2b420377",
+      "index": 24,
+      "clip": "cidle_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377/0024.png",
+      "archive": "selected/idle-0024.png",
+      "sha256": "5dd727d82c037d5477e19128895c9dbb377bf7a2f8dab8248065818788d2a4c4",
+      "observation": "A later idle sample retains the same connected silhouette; no detached authored piece is visible."
+    },
+    {
+      "action": "enemy-attack",
+      "sourceAction": "pass",
+      "captureId": "8bb1736750d34c3b93eab11c2b420377",
+      "index": 42,
+      "clip": "cidle_wolf -> attackProf_wolf transition",
+      "source": "scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377/0042.png",
+      "archive": "selected/enemy-attack-0042.png",
+      "sha256": "0963d03d3002bc0dcd1eda18126109519dfc2cef8c039a32b8aa43950d02b0db",
+      "observation": "The exact enemy AttackProf trigger is recorded at this sample; the visible body remains coherent as the native controller begins its attack transition."
+    },
+    {
+      "action": "enemy-attack",
+      "sourceAction": "pass",
+      "captureId": "8bb1736750d34c3b93eab11c2b420377",
+      "index": 48,
+      "clip": "attackProf_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377/0048.png",
+      "archive": "selected/enemy-attack-0048.png",
+      "sha256": "5da75c70fec9f65e4d4fa1096150e01a2b69624bf73ab79c91554d9bbd7b3c93",
+      "observation": "Native attack motion bends the bound creature forward while its legs, mane, tail, and lichen layers remain visibly joined."
+    },
+    {
+      "action": "enemy-attack",
+      "sourceAction": "pass",
+      "captureId": "8bb1736750d34c3b93eab11c2b420377",
+      "index": 60,
+      "clip": "attackProf_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377/0060.png",
+      "archive": "selected/enemy-attack-0060.png",
+      "sha256": "7128a803d88a72a911ae50fc56d40b11d6500cc521fda5c4ae0bdea71389a517",
+      "observation": "Later attack follow-through remains a readable wolf-like silhouette despite the native combat camera and effects."
+    },
+    {
+      "action": "nonlethal-hit",
+      "sourceAction": "attack",
+      "captureId": "dcc760b3479c464f8625d7f2e44c6ae0",
+      "index": 23,
+      "clip": "cidle_wolf -> damaged_wolf transition",
+      "source": "scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0/0023.png",
+      "archive": "selected/nonlethal-hit-0023.png",
+      "sha256": "e914278149f2df11999159510624d11c40c0ebadefd99fb110f6daa9888ed03e",
+      "observation": "The exact ordinary player damage trigger is recorded at this sample; the model stays visible through the initial native hit effect."
+    },
+    {
+      "action": "nonlethal-hit",
+      "sourceAction": "attack",
+      "captureId": "dcc760b3479c464f8625d7f2e44c6ae0",
+      "index": 28,
+      "clip": "damaged_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0/0028.png",
+      "archive": "selected/nonlethal-hit-0028.png",
+      "sha256": "e8edf83bd5108a268eabbf37522cd4a2a3e6e4298efd4ceb00dd70d560334571",
+      "observation": "The nonlethal damaged pose deforms the same full authored body without a lost renderer or detached limb."
+    },
+    {
+      "action": "nonlethal-hit",
+      "sourceAction": "attack",
+      "captureId": "dcc760b3479c464f8625d7f2e44c6ae0",
+      "index": 36,
+      "clip": "damaged_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0/0036.png",
+      "archive": "selected/nonlethal-hit-0036.png",
+      "sha256": "b4dfbad4e587a608323fc1d048c073eb256a271ef009392ef0e6ed3409b5d2e5",
+      "observation": "The end of the damaged response remains connected and visually legible before the later native enemy turn."
+    },
+    {
+      "action": "kill-fixture",
+      "sourceAction": "kill-fixture",
+      "captureId": "ee65ff2447744f30b5509562b014be4c",
+      "index": 23,
+      "clip": "cidle_wolf -> deathHeavy_wolf transition",
+      "source": "scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c/0023.png",
+      "archive": "selected/kill-fixture-0023.png",
+      "sha256": "ab441994cf78eaf6a5a0d3e3680b28b18c13416eadf19d5f2e0271d0ca78460b",
+      "observation": "The separate explicit fixture records the exact native Death trigger while the bound creature is still visible."
+    },
+    {
+      "action": "kill-fixture",
+      "sourceAction": "kill-fixture",
+      "captureId": "ee65ff2447744f30b5509562b014be4c",
+      "index": 30,
+      "clip": "deathHeavy_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c/0030.png",
+      "archive": "selected/kill-fixture-0030.png",
+      "sha256": "5b011a98d33d482dfbc671be29fb16fb0c9f5001a9e5dd7bea3040000f6ae043",
+      "observation": "The deathHeavy_wolf clip moves the full lichen-armored body into its native death pose without an obvious renderer loss."
+    },
+    {
+      "action": "kill-fixture",
+      "sourceAction": "kill-fixture",
+      "captureId": "ee65ff2447744f30b5509562b014be4c",
+      "index": 45,
+      "clip": "deathHeavy_wolf",
+      "source": "scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c/0045.png",
+      "archive": "selected/kill-fixture-0045.png",
+      "sha256": "40deb2b4c79bc5dcfcb97c0faa769acdb63cf2bf1397ae5c609663970c79b820",
+      "observation": "A later death clip sample shows the creature lying in a coherent defeated pose before the victory UI; this is not a ragdoll finding."
+    }
+  ],
+  "videos": [
+    {
+      "action": "pass",
+      "path": "pass.mp4",
+      "sha256": "c597a93138a75b7709853a8b37042a11ddf86a413fb6528e1bebef37684a49d0",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "attack",
+      "path": "attack.mp4",
+      "sha256": "c266586980bca0ecd381a891b20ff2fb0f9284073562d4f201f2537dc4c09454",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "kill-fixture",
+      "path": "kill-fixture.mp4",
+      "sha256": "c8effce1f65659145d455b422ad9370f7b0686d061226b597e45efee02959b76",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    }
+  ],
+  "sourceImageCount": 363,
+  "sourceImagePins": "source-image-pins.json",
+  "assetPins": "asset-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/README.md",
+      "sourceSha256": "ef2fb4c5c820d5a512f4fb2378c107b4d2323fc47cda69e0309a19ffbb8c78c7",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/README.md.gz",
+      "archiveSha256": "b269e3b36e22d8e4377f1c5a4da73562b23093a72c6ced392b0f0c9018742d18",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/build-report.json",
+      "sourceSha256": "1eae922651a71a9f2803ca0205c64acaea3c71d96a4d4565ba140322c4aa4fbe",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/build-report.json.gz",
+      "archiveSha256": "4c022505b2df7b30f34d2ec92e232dd5b3f3d5634100f1d8b10962b53d188a74",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/build_geometry.py",
+      "sourceSha256": "53823ba6fe1b52175a0d565c880502b1cc22fe233405efc00fb002b1fa85a811",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/build_geometry.py.gz",
+      "archiveSha256": "12437465301bcaae2b536c0bb85c083aa6183cb48bf55afbd74589236aa6fbb1",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/lichenfang.glb",
+      "sourceSha256": "a53986fcd2ab4f65479cb1f39055163e5dea44381ecad2f84c2b94fa9f8d09b5",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/lichenfang.glb.gz",
+      "archiveSha256": "906e0c264751429e94b9a186aeb315041ce65c19d084c18162df603feea2cb12",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/lichenfang.pieces.json",
+      "sourceSha256": "ca312d441d2fa8c98dc1b75581e3cded59ab1ad6fce524d524fb73facfa498e8",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/lichenfang.pieces.json.gz",
+      "archiveSha256": "44b3c831ef81aedbf9c5c46a562790193d1e39453d776a3e7515bb4f0881664b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/lichenfang.source.json",
+      "sourceSha256": "b341ab1b28034aab9bf752b3a4dcef374eef5f1b28273415d2dc169ea573f707",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/lichenfang.source.json.gz",
+      "archiveSha256": "f0c09488abb17e0780a0cb72358f67a06220ca55362b760b4541135db0ec996e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/manifest.json",
+      "sourceSha256": "68e6a5fc67004f6e0b7b5b748393e3b5eb5c22a120a550471e756b26b20b9d6b",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/manifest.json.gz",
+      "archiveSha256": "b76978f32a54d531c37620ea1b7ba9d6172af5953abe459a896613393dc5c0a5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/original-geometry-proof.json",
+      "sourceSha256": "9f99dc846574a334e19ff4fd489034693e20015bd5c1df9d98132dca0e936a11",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/original-geometry-proof.json.gz",
+      "archiveSha256": "7c109783300139e0dc9781d0c33af4feb0b9bb68ed41a3c87319e16394377f62",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/render_studio.py",
+      "sourceSha256": "4e090abcc8d462da4a51ff3317436e52b4ba9e4c819c9481627f2e563c4c921e",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/render_studio.py.gz",
+      "archiveSha256": "1fe55f0a60b10acbeeeb28166e10b05709f9afb06350d2ba361e496d89bad617",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/route-preflight-health64.json",
+      "sourceSha256": "3f7a11762b90b31344388a0a46a2835a75e1974d737bf59e6c8c7509b529d3d2",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/route-preflight-health64.json.gz",
+      "archiveSha256": "18c8ac1d6a2a2a38ab662915cee029522b40f89dffa15fdb74381db9a104aacc",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/runtime-profile.json",
+      "sourceSha256": "9bd4fcbd5341e2e1747e593a92781b61d235ab029803c4a072c99ed34435d39a",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/runtime-profile.json.gz",
+      "archiveSha256": "5d315c104058b2c3cc9adf1d0a7e7998746a2add2b479c95ed9e66e2b07a0fb5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/lichenfang-basey-wolf/verify_original_geometry.py",
+      "sourceSha256": "8746882bb95f85a149d73eb0ce18d234c64d154b7ad8d90857c2eb834a554da9",
+      "archive": "metadata/art-experiments/lichenfang-basey-wolf/verify_original_geometry.py.gz",
+      "archiveSha256": "a5d169b0b239348f10193112937dab1ade77e18155e09bf2c1cabecbe00abbb6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/lichenfang-root-visual-review-v1.json",
+      "sourceSha256": "4be434088104224b82e8b33bde8d0988d2af28e32a215b9f44cc7747181e21ff",
+      "archive": "metadata/scratch/lichenfang-root-visual-review-v1.json.gz",
+      "archiveSha256": "586d194b4013726f186c6130ed9e67f065cf0be9ff82571ee5cd927b7c2971fb",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377.json",
+      "sourceSha256": "917f471568809ca658f96911ffd84c1273b6c7de76dad48452a4dea999b9344f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/8bb1736750d34c3b93eab11c2b420377.json.gz",
+      "archiveSha256": "5713f55af13766231b1e24befb779e9c89e722af41180df0e26fbc0ae82e5ff9",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-098cb1031c3a4bd69a556a9d1e0728d9/journal.jsonl",
+      "sourceSha256": "d6ad1a540f879eddba7068b9db73577b987ad1db8d031ad51c101f8314a7513d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-098cb1031c3a4bd69a556a9d1e0728d9/journal.jsonl.gz",
+      "archiveSha256": "819573f1da062ca4b72d6d3166c97b51c3f958301522e8d1e7a2da4a53998114",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-098cb1031c3a4bd69a556a9d1e0728d9/result.json",
+      "sourceSha256": "2850348e8131bd5a5ed692a435fda39ebd64b1d8077041d66fd8e8304f72eade",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-098cb1031c3a4bd69a556a9d1e0728d9/result.json.gz",
+      "archiveSha256": "5c3c6e229b73a8b23e4c3dd3d8e2789c83faaa9e07b2bc756633097d48824787",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-49a1a5498c1141cfb762f2c30a6c2237/case-result.json",
+      "sourceSha256": "030ace8f3eebab3ff485a0685daee2960e829b032b7c50654f941b0f67e3fc07",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-49a1a5498c1141cfb762f2c30a6c2237/case-result.json.gz",
+      "archiveSha256": "be50ad8f9336d0a74f3a2791c840d40e55b699c21eaf3060178485486ec8ca40",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-49a1a5498c1141cfb762f2c30a6c2237/journal.jsonl",
+      "sourceSha256": "3230f1b635667cd87b57bebe96ce77918dcce8c070595e7559ea342e1e01ab7c",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-49a1a5498c1141cfb762f2c30a6c2237/journal.jsonl.gz",
+      "archiveSha256": "a78f14d6acb09b1edc7ef449262ac0170b247fc1efac8f12e1d3ccd85145af5f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-49a1a5498c1141cfb762f2c30a6c2237/selected-frames.html",
+      "sourceSha256": "6b49b5e034d62fa27c99cbd84a65bccea64975e6998cb86fa02ccd2ec3db807c",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-49a1a5498c1141cfb762f2c30a6c2237/selected-frames.html.gz",
+      "archiveSha256": "fdee19aef27492553ea314410e9064a0ddc8816b95293b4f09f00e2d24f444e2",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-9ef649da278e4b3d95f2ac835ef99d65/journal.jsonl",
+      "sourceSha256": "ffb42acffde1dffe5b40189ee3d64f56124887b31707224116c91afa49f951ca",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-9ef649da278e4b3d95f2ac835ef99d65/journal.jsonl.gz",
+      "archiveSha256": "d7a8959e7b9b1b53337afb091627cdfd1aabd39a06327f74edeeaa84b78d9c8d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-9ef649da278e4b3d95f2ac835ef99d65/result.json",
+      "sourceSha256": "1aa00dd62f9aadfca2a49a58e5aba127043a1de3b0b22962f3f5a43063accadd",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-9ef649da278e4b3d95f2ac835ef99d65/result.json.gz",
+      "archiveSha256": "989ed4b2a68c17df7a2ef9b7dc403ce712e9044ee818df6c83c42dd3875fff42",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-d7b45c9a680c4d5394acb5230772adab/result.json",
+      "sourceSha256": "5a5be529b1250301c69b66b34c8c2fba970c28f5e0411ae23851d62e2b104928",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-d7b45c9a680c4d5394acb5230772adab/result.json.gz",
+      "archiveSha256": "d1fc9021f83ce64ec77d7566e2a0fde79b72219393b36bdd35f008f59c2a65f1",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-d992295a6f43487881952b0050947b47/journal.jsonl",
+      "sourceSha256": "ff9b79b1942a1d2e2a9994d478a78cb649016a1d96edcf0c6ea664544f829c4f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-d992295a6f43487881952b0050947b47/journal.jsonl.gz",
+      "archiveSha256": "ffa61384b51a33edb30e5ac9abda76c95122ee9ad190982ea0769677fde1b31b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-d992295a6f43487881952b0050947b47/result.json",
+      "sourceSha256": "2e04f312846284fce4ea2aeadcaf5fe725dbca007fa023d787c1022836ae847d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-d992295a6f43487881952b0050947b47/result.json.gz",
+      "archiveSha256": "c33778c5264e74d7563564c07bc9617229bbfc6b1779bd83981e6aa11c35a62d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0.json",
+      "sourceSha256": "e00ae809f8ec7d5e6884fe62b53c28d5d565e42f5659bff75dfb7460e225eadf",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/dcc760b3479c464f8625d7f2e44c6ae0.json.gz",
+      "archiveSha256": "c998a41582ee42e0a0f8f86f3d2833c502d9966b4c8c91d823618abb8beca681",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c.json",
+      "sourceSha256": "b5984cfbe273def1f47e9fd8622f0c4df8ad53bb0709e80ee6995635be35cf61",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/ee65ff2447744f30b5509562b014be4c.json.gz",
+      "archiveSha256": "4b19f0024b484685a1817fecb3d4e7cc5a5d766f555c7b42b0feb5290f1f8ea8",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/new-run-session-6aedf9b7ab6e4c4292425002505d64e4.json",
+      "sourceSha256": "1d3aa0ab26c06e6511da85a1f979b92f055c071e5265aa3acfa52b618a8757ce",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/new-run-session-6aedf9b7ab6e4c4292425002505d64e4.json.gz",
+      "archiveSha256": "6cda6e93319fec72d64ac37e649851eaeab79a1a58ccb5105dd31a135ff386ca",
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "rootVisualReview": "scratch/lichenfang-root-visual-review-v1.json",
+  "setupBinding": {
+    "path": "scratch/mirewarden-game/model-test-output/case-d7b45c9a680c4d5394acb5230772adab/result.json",
+    "sha256": "5a5be529b1250301c69b66b34c8c2fba970c28f5e0411ae23851d62e2b104928",
+    "bytes": 5882
+  },
+  "caseResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-49a1a5498c1141cfb762f2c30a6c2237/case-result.json",
+    "sha256": "030ace8f3eebab3ff485a0685daee2960e829b032b7c50654f941b0f67e3fc07",
+    "bytes": 401115
+  },
+  "limits": [
+    "This review covers the exact enbaseywolf / wolfA / Wolfie source pair only; direct wolfA and other wolf-family resource prefabs require their own trials.",
+    "The native camera, foreground hero, and combat effects sometimes obscure close surface detail.",
+    "The ordinary hit is nonlethal; the separate explicit KillSingle transition is not ordinary lethal-damage acceptance.",
+    "The native death clip remains animator-driven and no rigidbodies were recorded, so this is not a ragdoll or settled-corpse review.",
+    "Culling envelope, portraits, long-session resource lifetime, other native ability variants, and final art-direction approval remain separate work."
+  ]
+}

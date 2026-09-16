@@ -1,0 +1,153 @@
+{
+  "schema": "ftkmf.original-organic-endpoint-study.v1",
+  "source_sha256": "a3ffbc2c986ed997919440eee8bc4f7bf02b19932c56db24d9993e69f5ab8fa6",
+  "reference_sha256": "7e6877d910263b8b39a95d72dd68a4e2644a0cc7499cb7186bde5b56086467de",
+  "inputs": [
+    {
+      "path": "scratch/kraken-skin-live-v2/appear.json",
+      "sha256": "c5bbdf393ce12a08da4539eb9518a125496190c5450e67f182b134c8fd48c759"
+    },
+    {
+      "path": "scratch/kraken-skin-live-v2/appear-repeat.json",
+      "sha256": "f1e2e443f9eda8b5e3bf1c3ac11ce3888e9e183cbfd753d3d754c4ba7c5d1a5d"
+    }
+  ],
+  "poses": 482,
+  "unique_steps": 241,
+  "weight_report": {
+    "vertices": 5640,
+    "multiboneVertices": 1128,
+    "multiboneFraction": 0.2,
+    "maximumInfluences": 2,
+    "maximumBlendVersusDominantRigidDifference": 0.4023086345779931,
+    "pieces": [
+      {
+        "name": "Continuous soft neck and mantle",
+        "vertices": 1056,
+        "multiboneVertices": 1056
+      },
+      {
+        "name": "Upper cephalopod muzzle",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Dark upper mouth",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Articulated lower jaw",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Lower mouth cushion",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Flexible dark throat",
+        "vertices": 216,
+        "multiboneVertices": 72
+      },
+      {
+        "name": "Upper copper beak",
+        "vertices": 144,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Lower copper beak",
+        "vertices": 144,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Eye mantle -1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Pale watchful eye -1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Deep pupil -1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Eye reflection -1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Curved facial feeler -1",
+        "vertices": 240,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Eye mantle 1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Pale watchful eye 1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Deep pupil 1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Eye reflection 1",
+        "vertices": 300,
+        "multiboneVertices": 0
+      },
+      {
+        "name": "Curved facial feeler 1",
+        "vertices": 240,
+        "multiboneVertices": 0
+      }
+    ]
+  },
+  "minimumPosedToRestTriangleAreaRatio": 0.8470643642668688,
+  "maximumPosedToRestEdgeLengthRatio": 2.113189201757822,
+  "originalPosedBoundsMin": [
+    -3.6454385283885107,
+    -5.9877104471129305,
+    -6.408862250579988
+  ],
+  "originalPosedBoundsMax": [
+    3.8741841641405435,
+    5.678290892596423,
+    1.0988624650446737
+  ],
+  "camera": {
+    "position": [
+      10.312609264685378,
+      2.5648199418909092,
+      20.0077477668087
+    ],
+    "lookAt": [
+      0.11437281787601639,
+      -0.15470977725825374,
+      -2.6549998927676572
+    ],
+    "up": [
+      -0.0446399574273889,
+      0.9940657186376879,
+      -0.09919990539419754
+    ],
+    "orthographic": true,
+    "orthographicSize": 7.0,
+    "nearClipPlane": 0.1,
+    "farClipPlane": 60.0,
+    "width": 512,
+    "height": 512
+  },
+  "frame_directory": "scratch/gloamfin-endpoint-poses",
+  "scope": "Offline original-only skin calculation from pinned owned endpoint output; not live BakeMesh comparison, visual acceptance, native effects, continuous-controller acceptance or production adapter."
+}

@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "asset": "Gloamcap Trickster",
+  "iteration": "first original resource Imp baseline",
+  "status": "scoped appearance and motion observed; occlusion limits",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "59a504bceafc4d3c99c206d07f0f8a59",
+    "case": "fe9eee47731541488e5959628a012035",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_gloamcap",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_gloamcap",
+      "baseEnemy": "impA",
+      "resourcePrefab": "enbaseyimp",
+      "displayName": "Gloamcap Trickster",
+      "combatProfile": "780022dbce47a2f317f9224e6f5949ad8efad7393113b46477726ab3ad63d5f0",
+      "renderers": [
+        {
+          "rendererPath": "enBaseyImp",
+          "glbFile": "gloamcap.glb",
+          "textureFile": "gloamcap_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "dee13c94363748e2144fbbe88b1ee784d1b5b26696b312def09862566f0d8168",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "bb8497",
+  "helperVersionPrefix": "bfa586",
+  "assetHashes": {
+    "gloamcap.glb": "efc35ca12e5d200b681b6e14800b71dbd0cb62fb4d53efe9bbb516f9cda9c13c",
+    "gloamcap_basecolor.png": "8c10afa1fe476009ed65b524f2367bb6bfdb35eb4a2d8a4f4c5d4e4f430543a6"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-fe9eee47731541488e5959628a012035/journal.jsonl",
+    "sha256": "e7439feb6aaae624c6ab77f26d202a1deddaae3ce97a010c5be494554cc847b7"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "ff03579ef7e549228984b221e9760117",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/77fe7cd82e4b4aa58abb5e8fc860c0f1.json",
+        "sha256": "0e6ad7cf8a68c24e50013e9688f7701ed1472257a2d46cf7e60e5a813df2309d"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-ff03579ef7e549228984b221e9760117/journal.jsonl",
+        "sha256": "c8e4491b722f5eb2583a9e862171d9c1fb128a2d19a352acdb4d93acec2d2647"
+      },
+      "summary": {
+        "path": "art-experiments/gloamcap-imp/live/attack-summary.json",
+        "sha256": "431f99b1769cd0449934c2dd4ecc416be54a45655b31bf3d5f46141c46428fd4"
+      },
+      "video": {
+        "path": "art-experiments/gloamcap-imp/live/attack.mp4",
+        "sha256": "9546de21134bacd399f707963230b5dd0e32df687150cefc06428d603e24fb15"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/gloamcap-imp/live/attack-0000.png",
+          "sha256": "dad20c47b93305f531c9227f4b1efbfa6dd9a5684fdf19c1596a4c786fb1f09a"
+        },
+        {
+          "path": "art-experiments/gloamcap-imp/live/attack-0050.png",
+          "sha256": "28ade1a0769e4cc3411d04b52342d53f5d125c37fcac3256cd51211a6ce11b43"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_impUnarmed"
+          ],
+          "sampleCount": 80,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 39,
+              "firstNormalizedTime": 35.187400817871094,
+              "lastNormalizedTime": 39.55686950683594,
+              "gameSeconds": 3.5749969482421875
+            },
+            {
+              "firstFrame": 60,
+              "lastFrame": 76,
+              "firstNormalizedTime": 0.12439610064029694,
+              "lastNormalizedTime": 1.9169889688491821,
+              "gameSeconds": 1.4666595458984375
+            },
+            {
+              "firstFrame": 97,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.12439610064029694,
+              "lastNormalizedTime": 2.5892107486724854,
+              "gameSeconds": 2.01666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_impUnarmed"
+          ],
+          "sampleCount": 40,
+          "occurrences": [
+            {
+              "firstFrame": 40,
+              "lastFrame": 59,
+              "firstNormalizedTime": 0.04726562276482582,
+              "lastNormalizedTime": 0.9453126788139343,
+              "gameSeconds": 1.741668701171875
+            },
+            {
+              "firstFrame": 77,
+              "lastFrame": 96,
+              "firstNormalizedTime": 0.04726562276482582,
+              "lastNormalizedTime": 0.9453126788139343,
+              "gameSeconds": 1.741668701171875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "dodged-hit",
+      "case": "756784a9750f4f0c92d551c11a2bdf6b",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/862578f389fa4504878efe81ad9b9cf2.json",
+        "sha256": "837baf51972f6ff2a6c078abfb53fcb64b3164a8f7d73afe4cd021c65ba80f10"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-756784a9750f4f0c92d551c11a2bdf6b/journal.jsonl",
+        "sha256": "8de0fd4ccc17fef33b6fa0aeee97d362b1204d22943bf38461708665aecd708b"
+      },
+      "summary": {
+        "path": "art-experiments/gloamcap-imp/live/dodged-hit-summary.json",
+        "sha256": "acbdc3c38887e4569feaa3f79a34667c7fbeacb9af9e5fbe067be979bab16e6c"
+      },
+      "video": {
+        "path": "art-experiments/gloamcap-imp/live/dodged-hit.mp4",
+        "sha256": "0253f34cc6de1bdeb4afe30dfc33752fbf7e448ab6fe50de794c661c40f9b06d"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/gloamcap-imp/live/dodged-hit-0030.png",
+          "sha256": "6b29739b6c1741342a7eba9e9ce706b512f6eca6881307025f92b47244a39ee4"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        58
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_impUnarmed"
+          ],
+          "sampleCount": 87,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 20,
+              "firstNormalizedTime": 53.3216552734375,
+              "lastNormalizedTime": 55.562408447265625,
+              "gameSeconds": 1.8333282470703125
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 63,
+              "firstNormalizedTime": 0.36061108112335205,
+              "lastNormalizedTime": 3.6096839904785156,
+              "gameSeconds": 2.6583404541015625
+            },
+            {
+              "firstFrame": 84,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.12439610064029694,
+              "lastNormalizedTime": 4.045691013336182,
+              "gameSeconds": 3.2083282470703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -478722116,
+          "clips": [
+            "dodge_imp"
+          ],
+          "sampleCount": 13,
+          "occurrences": [
+            {
+              "firstFrame": 21,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.11324850469827652,
+              "lastNormalizedTime": 0.9382486343383789,
+              "gameSeconds": 1.100006103515625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_impUnarmed"
+          ],
+          "sampleCount": 20,
+          "occurrences": [
+            {
+              "firstFrame": 64,
+              "lastFrame": 83,
+              "firstNormalizedTime": 0.04726562276482582,
+              "lastNormalizedTime": 0.9453126788139343,
+              "gameSeconds": 1.741668701171875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "168bb5e07947447ea92abddc9845730d",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/31ed604f7e4945df83c10637e48c0b5e.json",
+        "sha256": "1dbe835965c301b64d64ab2788e32a31bcdd62211434ee7158b7d2c921c5e997"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-168bb5e07947447ea92abddc9845730d/journal.jsonl",
+        "sha256": "3b8875e2fba19e827c03b5a53b9ddb6ea6fa40a1f47ba805319f75dc37ae6bac"
+      },
+      "summary": {
+        "path": "art-experiments/gloamcap-imp/live/nonlethal-hit-summary.json",
+        "sha256": "d5f0c8f626817e0fc4f4a86de5162c26e0c0a9ce441a62a878db723b6e83ba49"
+      },
+      "video": {
+        "path": "art-experiments/gloamcap-imp/live/nonlethal-hit.mp4",
+        "sha256": "1521d273aa3676e9346c9f4102a4233ec15f340eddaa9c36c22df2ac00a7a2c4"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/gloamcap-imp/live/nonlethal-hit-0030.png",
+          "sha256": "d672981836c6b4f712b02603cd2d115f4584520b3e60ff0172e985e3b96cb999"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        48
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_impUnarmed"
+          ],
+          "sampleCount": 66,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 79.98955535888672,
+              "lastNormalizedTime": 82.67845916748047,
+              "gameSeconds": 2.199981689453125
+            },
+            {
+              "firstFrame": 39,
+              "lastFrame": 63,
+              "firstNormalizedTime": 0.2429897040128708,
+              "lastNormalizedTime": 2.931878089904785,
+              "gameSeconds": 2.20001220703125
+            },
+            {
+              "firstFrame": 84,
+              "lastFrame": 98,
+              "firstNormalizedTime": 0.12439610064029694,
+              "lastNormalizedTime": 1.6929148435592651,
+              "gameSeconds": 1.283355712890625
+            },
+            {
+              "firstFrame": 119,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.12439610064029694,
+              "lastNormalizedTime": 0.12439610064029694,
+              "gameSeconds": 0.0
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damageHeavy_imp"
+          ],
+          "sampleCount": 14,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 38,
+              "firstNormalizedTime": 0.06875000149011612,
+              "lastNormalizedTime": 0.9625001549720764,
+              "gameSeconds": 1.191680908203125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_impUnarmed"
+          ],
+          "sampleCount": 40,
+          "occurrences": [
+            {
+              "firstFrame": 64,
+              "lastFrame": 83,
+              "firstNormalizedTime": 0.04726562276482582,
+              "lastNormalizedTime": 0.9453126788139343,
+              "gameSeconds": 1.741668701171875
+            },
+            {
+              "firstFrame": 99,
+              "lastFrame": 118,
+              "firstNormalizedTime": 0.04726562276482582,
+              "lastNormalizedTime": 0.9453126788139343,
+              "gameSeconds": 1.741668701171875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "a693ada1aafc4488994ec0a90f7358b8",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/d8bc58c3733743a497440eb969007180.json",
+        "sha256": "8e561cd89b87fa4b5229ff69f718cc2c1313c0654325e2c2302d39075370bd73"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-a693ada1aafc4488994ec0a90f7358b8/journal.jsonl",
+        "sha256": "0b37ba29283cd1e2180db335828088c30229a7d9d84bfeb15a21cba1ed6386c3"
+      },
+      "summary": {
+        "path": "art-experiments/gloamcap-imp/live/kill-fixture-death-summary.json",
+        "sha256": "626ea5c7a1de08a384a5eb4e00e54bd59779049d279c18dac2afade2ea70402b"
+      },
+      "video": {
+        "path": "art-experiments/gloamcap-imp/live/kill-fixture-death.mp4",
+        "sha256": "a44a8e785a566a3e29a721b937397b11ede24b6d092993c8738ea8d668539c60"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/gloamcap-imp/live/kill-fixture-death-0040.png",
+          "sha256": "fc79cfc92602dcc9090fd8ba85df84f26f3a6becb9d8bea8b4d9c3899181d06b"
+        },
+        {
+          "path": "art-experiments/gloamcap-imp/live/kill-fixture-death-0060.png",
+          "sha256": "1af9e110c913206a7d9448c64572642025e45dddf948de2f7108859d234a7623"
+        }
+      ],
+      "hpBeforeAfter": [
+        48,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_impUnarmed"
+          ],
+          "sampleCount": 25,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 67.71821594238281,
+              "lastNormalizedTime": 70.40711975097656,
+              "gameSeconds": 2.20001220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathHeavy_imp"
+          ],
+          "sampleCount": 95,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.055000003427267075,
+              "lastNormalizedTime": 0.055000003427267075,
+              "gameSeconds": 8.616668701171875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Small native Imp-size body and face portraits readable. Native grey darkens palette at50 but remains legible; no obvious deformation in selected views. Hero obscures lower body during successful hit30; native death collapse coherent.",
+    "limits": "Small size, native tint and hero/effect occlusion limit review. No unoccluded all-motion, culling or flawless art acceptance."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "afterCollect": {
+      "path": "scratch/gloamcap-after-collect2.json",
+      "sha256": "d4a99366fdf1e3060d4e3e74679fed293b67e9c0d0f71adc121137ced594c87c"
+    },
+    "result": "two guarded Collect actions; strict Ready level0 room2"
+  },
+  "historicalEvidencePreserved": "First hit dodged at58HP; second hit deals10. Both attempts retained.",
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/gloamcap-20260906-113303/deployment.json",
+    "sha256": "5928fd780eab0e065f86ffb131b7894fffd2f5839c0b17bd244c6f698fc28310"
+  },
+  "binaryAndCatalogHashes": {
+    "model-test-profiles.json": "dee13c94363748e2144fbbe88b1ee784d1b5b26696b312def09862566f0d8168",
+    "BepInEx/plugins/FTKModFramework_content/models/gloamcap.glb": "efc35ca12e5d200b681b6e14800b71dbd0cb62fb4d53efe9bbb516f9cda9c13c",
+    "BepInEx/plugins/FTKModFramework_content/models/gloamcap_basecolor.png": "8c10afa1fe476009ed65b524f2367bb6bfdb35eb4a2d8a4f4c5d4e4f430543a6",
+    "BepInEx/plugins/FTKModFramework.dll": "bb8497a412721f102d914af55744d7952e955ba07b5c9443beb68a00713b7ef3",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "bfa5866ec261bce0adf508c5708864743a59dadb400526d65d45c2e5cd8b0404",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "329771384cd6d4ba5dfa68d4557e7675cf0145166fcffb60344c886940a517af",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65"
+  },
+  "deathRagdoll": {
+    "nativeRagdoll": true,
+    "nativeRigidbodies": 11,
+    "animatorFirstDisabledFrame": 26,
+    "deathClip": "deathHeavy_imp",
+    "frozenNormalizedTime": 0.055000003427267075,
+    "interpretation": "Native ragdoll follows disabled Animator; a frozen clip clock is not failed death."
+  }
+}

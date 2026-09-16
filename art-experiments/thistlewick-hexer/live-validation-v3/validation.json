@@ -1,0 +1,853 @@
+{
+  "schema": "ftkmf.model-validation.v3",
+  "revision": "thistlewick-live-validation-v3",
+  "status": "reviewed_exact_scourgeG_binding_appearance_idle_attack_hit_death_gameplay_and_native_flee_observed",
+  "displayName": "Thistlewick Hexer",
+  "enemy": "ftkmf_modeltest_thistlewick",
+  "nativeChassis": "scourgeG",
+  "nativeEnemy": "scourgeG",
+  "sourceKind": "native_enemy_row",
+  "resourcePrefab": null,
+  "rendererPaths": [
+    "enScourgeLeprechaun"
+  ],
+  "sourceRendererIds": [
+    121222
+  ],
+  "sessions": [
+    "958c0fdda0ec45449333353a5edfda9a",
+    "621d536f4b7847b396d5334e2a05075d",
+    "b08849d8ad7f40abb065e15db17533a1",
+    "3c684b949c70443686cb1ff260a9475d",
+    "ee6c5699134d464db62f2b964bc0b030"
+  ],
+  "profile": {
+    "key": "ftkmf_modeltest_thistlewick",
+    "baseEnemy": "scourgeG",
+    "displayName": "Thistlewick Hexer",
+    "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+    "renderers": [
+      {
+        "rendererPath": "enScourgeLeprechaun",
+        "glbFile": "thistlewick.glb",
+        "textureFile": "thistlewick_basecolor.png",
+        "disableNativeEmission": false
+      }
+    ],
+    "minimumBaseHealth": 64,
+    "visualScale": 1.0
+  },
+  "profileDocumentSha256": "6deb00eb3998e4e731d1856fea630e98650306d2760c334e248d4fe9fefbaa98",
+  "catalogSha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+  "assetHashes": {
+    "thistlewick.glb": "c808bf91b52f9ffefae0d4b365f569bcc83bcbb3fd60317ed79e3bc47ad0165c",
+    "thistlewick_basecolor.png": "3ae7dd8434a28252dad251363051eaf0b031b0e0ca6b4268f8ff7e7e07adf476"
+  },
+  "binding": {
+    "nativeChassis": "scourgeG",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "scourgeG",
+    "resourcePrefab": null,
+    "ownerInstanceId": 369188,
+    "rendererPath": "enScourgeLeprechaun",
+    "rendererId": 121222,
+    "rendererKind": "SkinnedMeshRenderer",
+    "rendererInstanceId": -245426,
+    "mesh": "ftkmf_glb_thistlewick.glb",
+    "boneSignature": "ff578d822b39be20026a8ea349afc605024816801a454f5e4f79a52c3b03140a",
+    "visualScale": {
+      "requestedFactor": 1.0,
+      "nativePrefabRootLocalScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "expectedSpawnedCelRootLocalScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "actualSpawnedCelRootLocalScale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "tolerance": 0.0001,
+      "provenance": "registered public visualScale factor times read-only native prefab root local scale"
+    },
+    "material": {
+      "name": "matScourgeLeprechaun (Instance)",
+      "shader": "Standard",
+      "mainTexture": "ftkmf_thistlewick_basecolor.png",
+      "emissionKeyword": true,
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "emissionMap": null
+    }
+  },
+  "renderers": [
+    {
+      "nativeChassis": "scourgeG",
+      "sourceKind": "native_enemy_row",
+      "nativeEnemy": "scourgeG",
+      "resourcePrefab": null,
+      "ownerInstanceId": 369188,
+      "rendererPath": "enScourgeLeprechaun",
+      "rendererId": 121222,
+      "rendererKind": "SkinnedMeshRenderer",
+      "rendererInstanceId": -245426,
+      "mesh": "ftkmf_glb_thistlewick.glb",
+      "boneSignature": "ff578d822b39be20026a8ea349afc605024816801a454f5e4f79a52c3b03140a",
+      "visualScale": {
+        "requestedFactor": 1.0,
+        "nativePrefabRootLocalScale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "expectedSpawnedCelRootLocalScale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "actualSpawnedCelRootLocalScale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "tolerance": 0.0001,
+        "provenance": "registered public visualScale factor times read-only native prefab root local scale"
+      },
+      "material": {
+        "name": "matScourgeLeprechaun (Instance)",
+        "shader": "Standard",
+        "mainTexture": "ftkmf_thistlewick_basecolor.png",
+        "emissionKeyword": true,
+        "emissionColor": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "emissionMap": null
+      }
+    }
+  ],
+  "captures": [
+    {
+      "action": "pass",
+      "label": "idle-and-native-robbery-flee",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f.json",
+        "sha256": "aa4915e939c269933bfd864d93361464c88a5165375c25c0b9841d0d81bd2e2b",
+        "bytes": 4734306
+      },
+      "summary": {
+        "path": "scratch/thistlewick-v3-flee-summary.json",
+        "sha256": "d40f9593f5a538046707b3aac3e84505b045d85c258d9ba24ddc72b4e9f2b19b",
+        "bytes": 35334
+      },
+      "frameCount": 120,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_impUnarmed"
+          ],
+          "sampleCount": 72,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 45,
+              "firstNormalizedTime": 4.328688144683838,
+              "lastNormalizedTime": 8.91202163696289,
+              "gameSeconds": 4.125
+            },
+            {
+              "firstFrame": 65,
+              "lastFrame": 90,
+              "firstNormalizedTime": 0.2479628175497055,
+              "lastNormalizedTime": 2.7942593097686768,
+              "gameSeconds": 2.291667938232422
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "attackProf_leprechaun"
+          ],
+          "sampleCount": 19,
+          "occurrences": [
+            {
+              "firstFrame": 46,
+              "lastFrame": 64,
+              "firstNormalizedTime": 0.13534459471702576,
+              "lastNormalizedTime": 0.9861260652542114,
+              "gameSeconds": 1.6499977111816406
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_thistlewick.glb",
+          "ff578d822b39be20026a8ea349afc605024816801a454f5e4f79a52c3b03140a"
+        ]
+      ],
+      "causalMotion": {
+        "schema": "ftkmf.exercise-motion-evidence.v1",
+        "action": "pass",
+        "idle": {
+          "label": "idle",
+          "sampleIndex": 0,
+          "baseline": {
+            "animatorInstanceId": -245418,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 4.318612098693848,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "frame": 4395,
+          "sample": {
+            "animatorInstanceId": -245418,
+            "baseLayerIdle": true,
+            "baseLayerTransition": false,
+            "baseLayerStateHash": -1009909005,
+            "baseLayerNormalizedTime": 4.328688144683838,
+            "animatorEnabled": true,
+            "animatorActive": true
+          },
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0000.png",
+            "sha256": "a36dd7086b59ffe8279b5d58f63aa33da7dacf22c95135bc4b47162b6a994cdf",
+            "bytes": 1103325
+          }
+        },
+        "attack": {
+          "nativeAction": {
+            "nativeMethod": "CharacterDummy.PlayAttackSequence entry",
+            "frame": 4434,
+            "realtime": 75.39601135253906,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245420,
+            "targetRendererInstanceId": -245426,
+            "targetAnimatorInstanceId": -245418,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "role": "attacker",
+            "actorInstanceId": 369188,
+            "actorFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "attackAnim": "Attack",
+            "override": "AttackProf",
+            "primary": {
+              "attackerFid": {
+                "photonId": -1,
+                "turnIndex": 0
+              },
+              "victimFid": {
+                "photonId": 1,
+                "turnIndex": 0
+              },
+              "damage": 20,
+              "newHealth": 959,
+              "attackerHealthMod": 0,
+              "proficiencyId": 300,
+              "proficiencySuccess": true,
+              "attackResponse": "Damaged"
+            },
+            "secondary": null,
+            "tertiary": null,
+            "finalized": true,
+            "sequence": 0,
+            "exception": null,
+            "postTargetAlive": true,
+            "postTargetHealth": 58
+          },
+          "nativeTrigger": {
+            "nativeMethod": "CharacterEventListener.CombatTrigger entry",
+            "frame": 4434,
+            "realtime": 75.40457153320312,
+            "targetOwnerInstanceId": 369188,
+            "targetCelInstanceId": -245420,
+            "targetRendererInstanceId": -245426,
+            "targetAnimatorInstanceId": -245418,
+            "targetFid": {
+              "photonId": -1,
+              "turnIndex": 0
+            },
+            "trigger": "AttackProf",
+            "forceAnim": false,
+            "preIssueLastTrigger": "AttackCrit",
+            "finalized": true,
+            "sequence": 1,
+            "exception": null,
+            "postIssueLastTrigger": "AttackProf"
+          },
+          "sampleIndex": 39,
+          "image": {
+            "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0039.png",
+            "sha256": "6b2188e9a2a3589c0a03b99e6de1d10a6de6df6d785d2ef0e13afbeef6a9a1ca",
+            "bytes": 1137682
+          }
+        },
+        "limitations": "Native action and trigger chronology select frames. Human review still judges pose, deformation, visibility and clip coverage."
+      },
+      "captureScope": "Settled native idle, exact robbery attack, upright recovery and full-health flee removal. The removal is not death."
+    },
+    {
+      "action": "attack",
+      "label": "ordinary-nonlethal-hit-and-later-native-flee",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9.json",
+        "sha256": "6ba89c412512cabf8520352432245792ba6ac6d7417d27b2c6d89ed693030bf2",
+        "bytes": 4688673
+      },
+      "summary": {
+        "path": "scratch/thistlewick-v3-hit-summary.json",
+        "sha256": "ddc155d98352313deb3c4744c0c9ba0783c2237aa5e58ffc666df3c82f5892e6",
+        "bytes": 36016
+      },
+      "frameCount": 120,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_impUnarmed"
+          ],
+          "sampleCount": 88,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 22.93560791015625,
+              "lastNormalizedTime": 25.38006591796875,
+              "gameSeconds": 2.1999969482421875
+            },
+            {
+              "firstFrame": 32,
+              "lastFrame": 68,
+              "firstNormalizedTime": 0.3224162459373474,
+              "lastNormalizedTime": 3.989084243774414,
+              "gameSeconds": 3.2999954223632812
+            },
+            {
+              "firstFrame": 87,
+              "lastFrame": 112,
+              "firstNormalizedTime": 0.22317293286323547,
+              "lastNormalizedTime": 2.7694694995880127,
+              "gameSeconds": 2.2916641235351562
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damageHeavy_imp"
+          ],
+          "sampleCount": 7,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 31,
+              "firstNormalizedTime": 0.08843182027339935,
+              "lastNormalizedTime": 0.45968180894851685,
+              "gameSeconds": 0.5500030517578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "attackProf_leprechaun"
+          ],
+          "sampleCount": 18,
+          "occurrences": [
+            {
+              "firstFrame": 69,
+              "lastFrame": 86,
+              "firstNormalizedTime": 0.17110618948936462,
+              "lastNormalizedTime": 0.9746220111846924,
+              "gameSeconds": 1.5583343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_thistlewick.glb",
+          "ff578d822b39be20026a8ea349afc605024816801a454f5e4f79a52c3b03140a"
+        ]
+      ],
+      "captureScope": "Ordinary no-focus player hit 58 to 48 with damageHeavy_imp, recovery, then native robbery attack and full-health flee removal."
+    },
+    {
+      "label": "ordinary-hp-zero-attack",
+      "session": "3c684b949c70443686cb1ff260a9475d",
+      "captureId": "c1d0922edc9d49ed887f4e0ce299b3ac",
+      "frames": 120,
+      "rawSha256": "d452b9ce86e969921da5e38d7997538c89161b24cce9f552d7d08fd976901219",
+      "summarySha256": "533cc4a0f1d3e146394b61bb988ff8c71fff0b8b460c753916cb16f52fbe5a55",
+      "width": 1280,
+      "height": 832,
+      "requestedFps": 12.0,
+      "complete": true,
+      "termination": null,
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    },
+    {
+      "label": "kill-fixture",
+      "session": "ee6c5699134d464db62f2b964bc0b030",
+      "captureId": "d5aab07c799c4f0abc65cdab7ad7f53a",
+      "frames": 120,
+      "rawSha256": "78968680d663715428c2331520d98928b57bebe27530f38a95e8894b7987b99d",
+      "summarySha256": "2f8bcd6b6ad4a6b0f1c995697e79ae366e03db05d4f2c88228c74295ecdbe88c",
+      "width": 1280,
+      "height": 832,
+      "requestedFps": 12.0,
+      "complete": true,
+      "termination": null,
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    }
+  ],
+  "ordinaryHit": {
+    "beforeHp": 58,
+    "afterHp": 48,
+    "cheat": "None",
+    "focus": false,
+    "status": "ordinary_nonlethal_hit_with_damageHeavy_imp_observed",
+    "sourceCapture": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9.json"
+  },
+  "ordinaryLethal": true,
+  "ordinaryLethalAttack": {
+    "beforeHp": 58,
+    "afterHp": 0,
+    "cheat": "None",
+    "focus": false,
+    "status": "target_removed_or_zero_hp_after_action",
+    "boundary": "Same-target HP resolution only; no death animation inferred from ordinary capture."
+  },
+  "explicitKillFixture": true,
+  "nativeCollects": 2,
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1,
+    "encounterVoteType": "Ready",
+    "collectAvailable": false
+  },
+  "nativeSelfRemoval": {
+    "status": "robbery_flee_at_full_health_observed",
+    "action": "pass",
+    "targetHpBefore": 58,
+    "targetHpAfterNativeAction": 58,
+    "heroDamage": 20,
+    "heroGoldBefore": 11,
+    "heroGoldAfter": 0,
+    "rendererVisibleFrames": [
+      0,
+      90
+    ],
+    "rendererDisabledFrames": [
+      91,
+      119
+    ],
+    "classification": "native_flee_removal_not_death"
+  },
+  "priorArchive": {
+    "path": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json",
+    "sha256": "c0b501d128be15b1631b8b80eea7a83d9e413340f8c0167c78fad06560158721",
+    "scope": "Separate ordinary lethal attack, explicit animated death fixture, native loot and strict Ready evidence."
+  },
+  "runnerRecord": {
+    "path": "scratch/model-route-f50b09e31a8484cf-directenemy-run.json",
+    "sha256": "30a91e8cfbab9ddd815d03f80eb1730888a92c5b328ccff9a980857822b87f68",
+    "bytes": 58083
+  },
+  "caseResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-f9dfb7be518c43c9b3701731924cadda/case-result.json",
+    "sha256": "7c7d3585df1e81dd80641ebddf705313ccc8ab8f2de195423919bae278fb4329",
+    "bytes": 149853
+  },
+  "runtimeProfile": {
+    "path": "art-experiments/thistlewick-hexer/runtime-profile.json",
+    "sha256": "6deb00eb3998e4e731d1856fea630e98650306d2760c334e248d4fe9fefbaa98",
+    "bytes": 550
+  },
+  "visualReview": "reviewed_exact_source_with_scoped_limits",
+  "rootVisualReview": "visual-review.json",
+  "rootVisualReviewPin": {
+    "path": "visual-review.json",
+    "sha256": "40d4374dd7876cff4d45c36f982462c454587451c9d34c748ef5db2c28e48168",
+    "bytes": 6245
+  },
+  "selectedPNGs": [
+    {
+      "action": "native-flee",
+      "index": 0,
+      "clip": "cidle_impUnarmed",
+      "source": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0000.png",
+      "archive": "selected/native-flee-0000.png",
+      "sha256": "a36dd7086b59ffe8279b5d58f63aa33da7dacf22c95135bc4b47162b6a994cdf",
+      "observation": "The fresh exact-source opening frame shows the complete authored face, coat, hands and legs in native combat idle at HP 58. The retained native hat and knife remain attached."
+    },
+    {
+      "action": "native-flee",
+      "index": 46,
+      "clip": "attackProf_leprechaun",
+      "source": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0046.png",
+      "archive": "selected/native-flee-0046.png",
+      "sha256": "f7251759a3b7ec9534e94947f5a2de642e2addb0f463361b8372d2646e83edba",
+      "observation": "The native robbery proficiency lifts the intact authored body into its forward attack pose. A bright native effect and the foreground hero obscure some lower-body detail."
+    },
+    {
+      "action": "native-flee",
+      "index": 65,
+      "clip": "cidle_impUnarmed",
+      "source": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0065.png",
+      "archive": "selected/native-flee-0065.png",
+      "sha256": "276cba33d938479c33d5984c01a9ed2d9a93537fd585285ba7a2ed66fef194ec",
+      "observation": "After the proficiency, Thistlewick returns upright with the face, coat and limbs connected. The native result shows 20 hero damage and robbed gold while Thistlewick remains at HP 58."
+    },
+    {
+      "action": "native-flee",
+      "index": 80,
+      "clip": "cidle_impUnarmed",
+      "source": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0080.png",
+      "archive": "selected/native-flee-0080.png",
+      "sha256": "3d28fb48562060827c5cca10f86159d487635a8e7134f83c207b3366c10118bd",
+      "observation": "The authored body becomes uniformly translucent during the native flee transition while still at HP 58. This is removal behavior and is not a death pose."
+    },
+    {
+      "action": "native-flee",
+      "index": 100,
+      "clip": null,
+      "source": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0100.png",
+      "archive": "selected/native-flee-0100.png",
+      "sha256": "d8a0d3e9cf626140fb07e303f2cd0de2a63c12d34ed667520d2876a592717841",
+      "observation": "A native smoke cloud occupies the enemy slot after the full-health renderer is disabled. The encounter is ending through flee behavior; no death animation is claimed."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "index": 25,
+      "clip": "damageHeavy_imp",
+      "source": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9/0025.png",
+      "archive": "selected/ordinary-nonlethal-hit-0025.png",
+      "sha256": "6260a09196c923c68e757470e4c27cd65deb3ca85c0b5ee7d56fd043cecdae5a",
+      "observation": "The retained ordinary no-focus hit begins the native heavy-damage recoil. The original body remains connected, although the hero, weapon and damage text overlap it."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "index": 30,
+      "clip": "damageHeavy_imp",
+      "source": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9/0030.png",
+      "archive": "selected/ordinary-nonlethal-hit-0030.png",
+      "sha256": "04744d7197136f63ecb7f1cb7b853d8a5621bab03f3c13dcb602d4070a61de94",
+      "observation": "The later recoil frame shows the target at HP 48 after the ordinary 58 to 48 hit. The coat, face and limbs remain coherent behind strong hero occlusion."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "index": 80,
+      "clip": "attackProf_leprechaun",
+      "source": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9/0080.png",
+      "archive": "selected/ordinary-nonlethal-hit-0080.png",
+      "sha256": "ad571ed2995a8e86c18930fb30aef470e2fe57e7bfcece35cf77a24f04ccc300",
+      "observation": "The same nonlethal-hit process later captures the native robbery attack. The authored silhouette remains connected, with the foreground hero limiting fine review."
+    },
+    {
+      "action": "v2-pass",
+      "index": 12,
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/selected/pass-0012.png",
+      "archive": "selected/v2-pass-0012.png",
+      "sha256": "41ae72893cbe882565076b7000e67ec6dc80a7bf27e60666ad935b802a4deae9",
+      "observation": "Idle combat view: the moss-green coat, pale face, copper accents and long fingers stay connected and readable on the exact scourgeG combat chassis.",
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    },
+    {
+      "action": "v2-pass",
+      "index": 24,
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/selected/pass-0024.png",
+      "archive": "selected/v2-pass-0024.png",
+      "sha256": "0982e803ca49bd676ed6eacf8f6cd0a71aebfcb30e8fb8578b60f791ec43c9d4",
+      "observation": "Second staged view: the face, coat panels, hands and root legs remain aligned with no obvious renderer separation.",
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    },
+    {
+      "action": "v2-attack",
+      "index": 71,
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/selected/attack-0071.png",
+      "archive": "selected/v2-attack-0071.png",
+      "sha256": "9bde2e5c5d4c379c033456cfe3a42b0d2af07a15d5bdd193b3d2985f02093e08",
+      "observation": "Ordinary attack capture: the authored body remains intact under native targeting and leprechaun attack animation.",
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    },
+    {
+      "action": "v2-attack",
+      "index": 80,
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/selected/attack-0080.png",
+      "archive": "selected/v2-attack-0080.png",
+      "sha256": "3c8caf6722e0719c64fd21375909262e6d2b9a16a76a00ae11c27c94f152c417",
+      "observation": "Post-hit combat view: the coat, face and articulated fingers stay attached while native effects and foreground hero occlusion limit fine surface review.",
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    },
+    {
+      "action": "v2-kill-fixture",
+      "index": 0,
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/selected/kill-fixture-0000.png",
+      "archive": "selected/v2-kill-fixture-0000.png",
+      "sha256": "8229b2ce66a6bde4342b103162a00544fbf48ac75a4b53c4bedda44b99495ed8",
+      "observation": "Explicit KillSingle begins at HP 58 with the complete Thistlewick body visible behind native combat UI.",
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    },
+    {
+      "action": "v2-kill-fixture",
+      "index": 119,
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/selected/kill-fixture-0119.png",
+      "archive": "selected/v2-kill-fixture-0119.png",
+      "sha256": "8ece92fdb16640b068ac3b8151537627f1b606719e7481862413c5c825b53bb5",
+      "observation": "The complete 120-frame kill fixture reaches native deathHeavy_imp and the Victory loot surface; overlay and depth blur limit settled-body detail.",
+      "priorArchive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json"
+    }
+  ],
+  "videos": [
+    {
+      "action": "native-robbery-flee",
+      "path": "native-robbery-flee.mp4",
+      "sha256": "e37f7df2fb209ee9954c8010c4265bb7a7ff2003dee3435eaed2bf21e216f8eb",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "path": "ordinary-nonlethal-hit.mp4",
+      "sha256": "22dba0fb7fe58faa0f1cecb569f4ff980d69100709d5ee2a301fd36d8b215c01",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "ordinary-hp-zero-attack",
+      "path": "ordinary-lethal-attack.mp4",
+      "sha256": "30fd23fccf45b441c4f3cb129f0e645cb23fe16c7361823eb465f719fff2d105",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "kill-fixture",
+      "path": "kill-fixture.mp4",
+      "sha256": "dfec4a2d0a4a643be6c269f4ce875a606afcf35a96306413f8e352750d18f4c0",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    }
+  ],
+  "sourceImageCount": 246,
+  "sourceImagePins": "source-image-pins.json",
+  "captureImageCount": 240,
+  "captureImagePins": "capture-image-pins.json",
+  "assetPins": "asset-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/thistlewick-hexer/live-v1/case-f39d42b665384371bf1d3a04690f0c72/capture-summary.json",
+      "sourceSha256": "783a88cc831e2dcd45c6dec57322a70b704bdf70599dac3ba2809cdae3c716bd",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-v1/case-f39d42b665384371bf1d3a04690f0c72/capture-summary.json.gz",
+      "archiveSha256": "3ee9563d7a7e3623b11d9b76cb00879c94b8ab97ef5e709ff736a723308f07c3",
+      "bytes": 36015,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/live-v1/case-f39d42b665384371bf1d3a04690f0c72/result.json",
+      "sourceSha256": "8c6693796a5b83ab202bb123c8a07b353007693a8b4522fa31907f0e092ae128",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-v1/case-f39d42b665384371bf1d3a04690f0c72/result.json.gz",
+      "archiveSha256": "1914686431cf0d2f1078009a1c9bcfd00b99b9ea12af0daadf81a9f28aa81f44",
+      "bytes": 1008,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/live-v1/thistlewick-first-root-review.json",
+      "sourceSha256": "452539efab230dd9ceef363bc3359e59c0db50f2d121537943befbea28e6e2e4",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-v1/thistlewick-first-root-review.json.gz",
+      "archiveSha256": "af2fc14c47d31452c1fc8b908f9169cedf95ce80b59da74373c7ca49ab6e2a27",
+      "bytes": 996,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/README.md",
+      "sourceSha256": "3f1753ca34c4104a4c7e7f117ba846ae323b7cd46f383b90f347459824908454",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-validation-v2/README.md.gz",
+      "archiveSha256": "01e2d9fbf0db70c43cb9f6c081ffe280dc7dbfb925cc802ceeac8fefc3fb1341",
+      "bytes": 1703,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/asset-pins.json",
+      "sourceSha256": "5f5d60ae8062d54e6b29223fc14f377e75e59779d3e0b3836be5b825cb4e4e2c",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-validation-v2/asset-pins.json.gz",
+      "archiveSha256": "5282f71aa7de5a01be015d9381bd77f8ffa740d12354e47ad65cadfc9e9af170",
+      "bytes": 191,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/source-image-pins.json",
+      "sourceSha256": "7c4c1795e4cbb530cc1a134a45652ea307bbfec5738c83641a1882bc57d471fc",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-validation-v2/source-image-pins.json.gz",
+      "archiveSha256": "9aca9b861a8f59f7629fefa942bbb37bc01ab1818b732fde59214d47aad0e5cd",
+      "bytes": 58907,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json",
+      "sourceSha256": "c0b501d128be15b1631b8b80eea7a83d9e413340f8c0167c78fad06560158721",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-validation-v2/validation.json.gz",
+      "archiveSha256": "a28a28a486a3428005c6c748e0745f9673fd0a2c1c50007740e1e61c720c84f3",
+      "bytes": 129418,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/live-validation-v3/archive.py",
+      "sourceSha256": "a1a3a22a0ceee44d35477d1a1d92717ca9fe1f3e3e9f2ec7be1d53001d601ff6",
+      "archive": "metadata/art-experiments/thistlewick-hexer/live-validation-v3/archive.py.gz",
+      "archiveSha256": "0a1b13e0a3ba1770e2382ac46c97addeb3e78fc195f21f796080d283c2240c14",
+      "bytes": 20162,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/manifest.json",
+      "sourceSha256": "b6c7b68a8376c7ad4e98de6cb77618107abee2e7dbe3d91f8f26942e2b116d88",
+      "archive": "metadata/art-experiments/thistlewick-hexer/manifest.json.gz",
+      "archiveSha256": "db0c8d52673377e8d81e222e48635f7fa6bf996fbb7055b16ccc834c3c9a7531",
+      "bytes": 8471,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/runtime-profile.json",
+      "sourceSha256": "6deb00eb3998e4e731d1856fea630e98650306d2760c334e248d4fe9fefbaa98",
+      "archive": "metadata/art-experiments/thistlewick-hexer/runtime-profile.json.gz",
+      "archiveSha256": "727f15db80b49d3f99146a1f58e3858668d5cf395aeaa31e940615f28011c693",
+      "bytes": 550,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/thistlewick-hexer/thistlewick.glb",
+      "sourceSha256": "c808bf91b52f9ffefae0d4b365f569bcc83bcbb3fd60317ed79e3bc47ad0165c",
+      "archive": "metadata/art-experiments/thistlewick-hexer/thistlewick.glb.gz",
+      "archiveSha256": "7f16f8ace80f5c176802228a2aae418968b9e4e449d62a6fd0a93f198a870d90",
+      "bytes": 292132,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9.json",
+      "sourceSha256": "6ba89c412512cabf8520352432245792ba6ac6d7417d27b2c6d89ed693030bf2",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9.json.gz",
+      "archiveSha256": "36589844a158e47cfc326289edbf9b4e036ebcf96fd3782c043a089114eebea4",
+      "bytes": 4688673,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-f9dfb7be518c43c9b3701731924cadda/case-result.json",
+      "sourceSha256": "7c7d3585df1e81dd80641ebddf705313ccc8ab8f2de195423919bae278fb4329",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-f9dfb7be518c43c9b3701731924cadda/case-result.json.gz",
+      "archiveSha256": "46759a8e95207285103715a25971e9232c47bac357b86e477ff9d4a562a3cdb4",
+      "bytes": 149853,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-f9dfb7be518c43c9b3701731924cadda/journal.jsonl",
+      "sourceSha256": "7d4e9124abe7f380d2ef9786f4e7c4bd2060f10e85fd63b7653b48bbcf5cd653",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-f9dfb7be518c43c9b3701731924cadda/journal.jsonl.gz",
+      "archiveSha256": "99879db10c39f66f00afacd7a3abce273132045ee8abef456cf8f37510db2f28",
+      "bytes": 230341,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f.json",
+      "sourceSha256": "aa4915e939c269933bfd864d93361464c88a5165375c25c0b9841d0d81bd2e2b",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f.json.gz",
+      "archiveSha256": "d7c2aac5f6efab8d379ad9f12b003f1b299d9a185e83db01c5698600fd5e29d5",
+      "bytes": 4734306,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/model-route-f50b09e31a8484cf-directenemy-run.json",
+      "sourceSha256": "30a91e8cfbab9ddd815d03f80eb1730888a92c5b328ccff9a980857822b87f68",
+      "archive": "metadata/scratch/model-route-f50b09e31a8484cf-directenemy-run.json.gz",
+      "archiveSha256": "5d58a8384ccd1f33e174731ef54ad27c98c96346394f7fd8c75c32b443c656f9",
+      "bytes": 58083,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/thistlewick-v3-flee-summary.json",
+      "sourceSha256": "d40f9593f5a538046707b3aac3e84505b045d85c258d9ba24ddc72b4e9f2b19b",
+      "archive": "metadata/scratch/thistlewick-v3-flee-summary.json.gz",
+      "archiveSha256": "00b93d3af44e8dc50d2fb908e851657ae810ab62ab23cea88afaddcf9182da8a",
+      "bytes": 35334,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/thistlewick-v3-hit-summary.json",
+      "sourceSha256": "ddc155d98352313deb3c4744c0c9ba0783c2237aa5e58ffc666df3c82f5892e6",
+      "archive": "metadata/scratch/thistlewick-v3-hit-summary.json.gz",
+      "archiveSha256": "18f1061a45b21ad12f5abaa3325158bf6c93681e06a4e5508b0cee07c6aa7e3c",
+      "bytes": 36016,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/thistlewick-v3-root-visual-review.json",
+      "sourceSha256": "40d4374dd7876cff4d45c36f982462c454587451c9d34c748ef5db2c28e48168",
+      "archive": "metadata/scratch/thistlewick-v3-root-visual-review.json.gz",
+      "archiveSha256": "bae46da3d6e1e3b21aee949b7536735d1b8c89ecbc9fde97134ba3919cd12843",
+      "bytes": 6245,
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "workflow": {
+    "kind": "self_removing_enemy_multi_process",
+    "rule": "Record native robbery/flee separately. Capture an ordinary nonlethal hit before any pass that can remove the enemy. Keep explicit death fixture and loot/Ready progression in another fresh process.",
+    "replayPolicy": "Do not automatically retry a terminal self-removal action. Reuse the retained complete capture and start only a separately planned process for an unobserved gate."
+  },
+  "limits": [
+    "The fresh pass capture ends through the native robbery/flee proficiency at HP 58. This is removal behavior, not death.",
+    "The ordinary nonlethal hit capture records HP 58 to 48 and damageHeavy_imp. It later reaches the same native flee boundary and does not supply death evidence.",
+    "The prior V2 ordinary lethal HP 58 to 0 record remains separate from the explicit KillSingle deathHeavy_imp capture. Fixture death is not ordinary lethal-damage evidence.",
+    "The exact custom renderer uses m_DoRagdoll false. Its death is animated, not a body ragdoll.",
+    "Hero, weapon, UI and native effects obscure some selected surfaces. Native hat clearance, portraits, culling envelope, long-session resource lifetime, global Fergus haunt behavior and finished-art acceptance remain outside this archive."
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/abyssal-kraken/live-validation-head-v5-canonical",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-ed9b240cc61b49de973a0b08e1e6a032/case-result.json",
+  "visualReview": "scratch/model-route-e45711bff451ca73-directenemy-root-review-reviewed.json",
+  "assetFiles": [
+    "art-experiments/abyssal-kraken/abyssal-crown-kraken-eye-v4.glb",
+    "art-experiments/abyssal-kraken/abyssal-crown-kraken-eye-v4.png",
+    "art-experiments/abyssal-kraken/abyssal-crown-kraken-head-v2.glb",
+    "art-experiments/abyssal-kraken/abyssal-crown-kraken-head-v2.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/abyssal-kraken/runtime-profiles.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-e45711bff451ca73-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-17fb678ae1b4404faf5a3e34b6d100cf/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-17fb678ae1b4404faf5a3e34b6d100cf/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "kraken2",
+        "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+        "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "kraken2",
+        "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+        "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "kraken2",
+        "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+        "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V5 canonical exact Kraken Head route",
+    "displayName": "Abyssal Crown V4",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "krakenHead",
+    "nativeChassis": "krakenHead",
+    "rendererPaths": [
+      "kraken2"
+    ],
+    "sourceRendererIds": [
+      121035
+    ],
+    "binding": {
+      "rendererPath": "kraken2",
+      "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+      "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact directEnemy source krakenHead, CEL enKraken(Clone), motion renderer kraken2 and source renderer 121035 only. This archive grants no inheritance to another Kraken source or renderer topology.",
+      "The same-owner rigid companion Root_M/base/body/neck/eye/kraken2_eye is bound as a MeshRenderer with the authored eye asset. It is required profile context and receives no skinned topology or motion credit.",
+      "The native pass preserved enemy HP 324 and hero HP 999. Its sampled native AttackProf records the Kraken as both actor and victim with damage 0 and HarmlessAttack, so this archive makes no hero-damage or ordinary Kraken balance claim from that action.",
+      "The ordinary zero-focus native hammer attack reduced enemy HP from 324 to 316 with recorded damage 8, Damaged and krakenDamage. The disposable party maximum-HP fortification remained active for test survival and is not representative hero balance.",
+      "The explicit KillSingle fixture reduced enemy HP from 316 to 0 with recorded native 1000 damage and a Death trigger. It is fixture death evidence, not ordinary lethal gameplay.",
+      "The source has m_DoRagdoll false and zero rigidbodies. Death is animator-driven: krakenDisappear is observed from retained frames 29 through 89, followed by the same inactive and not-visible renderer at retained frame 90.",
+      "Pass and ordinary attack each retain all requested 120 frames. The death capture retains an accepted 91-frame prefix and terminates because the renderer is destroyed before the next requested sample. Exact identity is stable in all 331 retained frames; this boundary does not establish cleanup causality, corpse lifetime or final disposal.",
+      "Strict Ready succeeded at dungeon level 0, room 2, with one active Ready button. No Collect action was taken and this archive makes no Collect claim.",
+      "Thirty-one selected original PNGs were reviewed. Native effects, combat UI, foreground overlap, camera movement and the tall attack pose limit fine inspection in stated frames; the remaining 300 capture PNGs are preserved by hash but were not individually reviewed.",
+      "The profile preserves native CEL scale 1.0. The selected renderer uses a Standard matKraken material with the authored main texture, emission disabled, zero emission color and no emission map.",
+      "This isolated dungeon trial does not establish portrait pixels, other cameras, other resolutions, collision, all-angle culling, every Kraken animation, long-session resource lifetime, full campaign progression or finished-art acceptance."
+    ]
+  }
+}

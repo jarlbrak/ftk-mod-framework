@@ -1,0 +1,725 @@
+{
+  "status": "SOURCE_VERIFIED_CALIBRATION_PENDING",
+  "nativeEnemy": "scourgeG",
+  "nativeRole": "Fergus scourge row; not ordinary leprechaunA/B",
+  "calibrationProfile": {
+    "key": "ftkmf_modeltest_probe_scourgeg",
+    "baseEnemy": "scourgeG",
+    "displayName": "Rig probe: scourgeG",
+    "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+    "renderers": [
+      {
+        "rendererPath": "enScourgeLeprechaun",
+        "glbFile": "probe_121222.glb",
+        "textureFile": "probe_palette.png"
+      }
+    ],
+    "minimumBaseHealth": 64
+  },
+  "catalog": {
+    "path": "scratch/runtime-profile-398-mossglass-jade-v2/model-test-profiles.json",
+    "sha256": "ceebafb92fba85199b087e20e74b76b4cca3c49d6a3322536ccb248c950b68ae"
+  },
+  "mapping": {
+    "enemy_id": "scourgeG",
+    "enemy_level": 4,
+    "db_byte_offset": 40640,
+    "cel_path_id": 137378,
+    "prefab_name": "enScourgeLeprechaun",
+    "prefab_game_object_path_id": 21416,
+    "renderers": [
+      {
+        "renderer_path_id": 121222,
+        "validation": "discovery_only",
+        "errors": [],
+        "mesh_path_id": 2873,
+        "mesh_asset_file": "resources.assets",
+        "mesh_name": "enScourgeLeprechaun",
+        "renderer_name": "enScourgeLeprechaun",
+        "ancestor_names": [
+          "enScourgeLeprechaun",
+          "enScourgeLeprechaun"
+        ],
+        "joint_count": 36,
+        "bone_names": [
+          "Root_M",
+          "BackA_M",
+          "BackB_M",
+          "Chest_M",
+          "Scapula_R",
+          "Shoulder_R",
+          "Elbow_R",
+          "Wrist_R",
+          "MiddleFinger1_R",
+          "MiddleFinger2_R",
+          "MiddleFinger3_R",
+          "ThumbFinger1_R",
+          "ThumbFinger2_R",
+          "ThumbFinger3_R",
+          "Neck_M",
+          "Head_M",
+          "Hair_M",
+          "Scapula_L",
+          "Shoulder_L",
+          "Elbow_L",
+          "Wrist_L",
+          "MiddleFinger1_L",
+          "MiddleFinger2_L",
+          "MiddleFinger3_L",
+          "ThumbFinger1_L",
+          "ThumbFinger2_L",
+          "ThumbFinger3_L",
+          "Hip_R",
+          "Knee_R",
+          "Ankle_R",
+          "MiddleToe1_R",
+          "Hip_L",
+          "Knee_L",
+          "Ankle_L",
+          "MiddleToe1_L",
+          "MiddleToe2_L"
+        ],
+        "nearest_skinned_bone_parent_names": [
+          null,
+          "Root_M",
+          "BackA_M",
+          "BackB_M",
+          "Chest_M",
+          "Scapula_R",
+          "Shoulder_R",
+          "Elbow_R",
+          "Wrist_R",
+          "MiddleFinger1_R",
+          "MiddleFinger2_R",
+          "Wrist_R",
+          "ThumbFinger1_R",
+          "ThumbFinger2_R",
+          "Chest_M",
+          "Neck_M",
+          "Head_M",
+          "Chest_M",
+          "Scapula_L",
+          "Shoulder_L",
+          "Elbow_L",
+          "Wrist_L",
+          "MiddleFinger1_L",
+          "MiddleFinger2_L",
+          "Wrist_L",
+          "ThumbFinger1_L",
+          "ThumbFinger2_L",
+          "Root_M",
+          "Hip_R",
+          "Knee_R",
+          "Ankle_R",
+          "Root_M",
+          "Hip_L",
+          "Knee_L",
+          "Ankle_L",
+          "MiddleToe1_L"
+        ],
+        "duplicate_bone_names": [],
+        "unresolved_bone_count": 0,
+        "bindpose_count": 36,
+        "topology_fingerprint": "f50b09e31a8484cfa184f95d5b1fd7a2a02aed00dbf1b9770b2bd08de1f616f7",
+        "bindpose_fingerprint": "90a9fd4efda35b5441c9b682edfc0393474d0969349e920c1626f6b7952d1145",
+        "rig_profile_fingerprint": "6d75918725cc2d38ab98b3c3f49fc58117b3fb89e75f084c3d4a88aa0bd5b45d",
+        "animators": [
+          {
+            "animator_path_id": 116167,
+            "game_object": "enScourgeLeprechaun",
+            "controller_path_id": 5934,
+            "controller_asset_file": "resources.assets",
+            "controller_name": "LeprechaunController"
+          }
+        ],
+        "character_event_listeners": [
+          {
+            "component_path_id": 137378,
+            "game_object": "enScourgeLeprechaun"
+          }
+        ],
+        "classification": "character_renderer_candidate",
+        "combat_profile_fingerprint": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf"
+      }
+    ],
+    "validation": "serialized_mapping_not_runtime_validated",
+    "weapon_path_id": 136335,
+    "weapon_asset_file": "resources.assets",
+    "weapon_name": "scourgeG",
+    "weapon_animation_controller_candidates": [
+      {
+        "controller_path_id": 5934,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "LeprechaunController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 604
+      }
+    ],
+    "combat_controller_resolution": "verified_field_prefix",
+    "renderer_count": 1,
+    "classification": "skinned"
+  },
+  "sourceResourcesSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "sourceAssembly": {
+    "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+  },
+  "nativeCelScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+  },
+  "binding": {
+    "joints": 36,
+    "names": [
+      "Root_M",
+      "BackA_M",
+      "BackB_M",
+      "Chest_M",
+      "Scapula_R",
+      "Shoulder_R",
+      "Elbow_R",
+      "Wrist_R",
+      "MiddleFinger1_R",
+      "MiddleFinger2_R",
+      "MiddleFinger3_R",
+      "ThumbFinger1_R",
+      "ThumbFinger2_R",
+      "ThumbFinger3_R",
+      "Neck_M",
+      "Head_M",
+      "Hair_M",
+      "Scapula_L",
+      "Shoulder_L",
+      "Elbow_L",
+      "Wrist_L",
+      "MiddleFinger1_L",
+      "MiddleFinger2_L",
+      "MiddleFinger3_L",
+      "ThumbFinger1_L",
+      "ThumbFinger2_L",
+      "ThumbFinger3_L",
+      "Hip_R",
+      "Knee_R",
+      "Ankle_R",
+      "MiddleToe1_R",
+      "Hip_L",
+      "Knee_L",
+      "Ankle_L",
+      "MiddleToe1_L",
+      "MiddleToe2_L"
+    ],
+    "usedJointIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "unusedBoneNames": [
+      "Hair_M"
+    ],
+    "representative121222ExactNamesAndIBMs": true,
+    "bindposesSha256": "c20ac238246c5e7a2c6b34fb200ae2dd9e0cff05c2c2192884e6b0128beafb16",
+    "boundsMin": [
+      -1.080742597579956,
+      -0.0151433830649772,
+      -0.18134728830284697
+    ],
+    "boundsMax": [
+      1.0807473823445206,
+      1.5381977558135986,
+      0.37992557754612655
+    ],
+    "forward": "Anatomical toes/thumbs extend+Z; up+Y. Native head-attached PortraitCam retained; live facing still requires observation."
+  },
+  "materials": [
+    {
+      "id": 203,
+      "name": "matScourgeLeprechaun",
+      "colors": [
+        [
+          "_Color",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ],
+        [
+          "_EmissionColor",
+          {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.0
+          }
+        ],
+        [
+          "_EmissionColorUI",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ]
+      ],
+      "textures": [
+        [
+          "_BumpMap",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_DetailAlbedoMap",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_DetailMask",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_DetailNormalMap",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_EmissionMap",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_MainTex",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 2079
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_MetallicGlossMap",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_OcclusionMap",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ],
+        [
+          "_ParallaxMap",
+          {
+            "m_Texture": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_Scale": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "m_Offset": {
+              "x": 0.0,
+              "y": 0.0
+            }
+          }
+        ]
+      ],
+      "floats": [
+        [
+          "_BumpScale",
+          1.0
+        ],
+        [
+          "_Cutoff",
+          0.5
+        ],
+        [
+          "_DetailNormalMapScale",
+          1.0
+        ],
+        [
+          "_DstBlend",
+          0.0
+        ],
+        [
+          "_EmissionScaleUI",
+          0.0
+        ],
+        [
+          "_GlossMapScale",
+          1.0
+        ],
+        [
+          "_Glossiness",
+          0.05000000074505806
+        ],
+        [
+          "_GlossyReflections",
+          1.0
+        ],
+        [
+          "_Metallic",
+          0.0
+        ],
+        [
+          "_Mode",
+          0.0
+        ],
+        [
+          "_OcclusionStrength",
+          1.0
+        ],
+        [
+          "_Parallax",
+          0.019999999552965164
+        ],
+        [
+          "_SmoothnessTextureChannel",
+          0.0
+        ],
+        [
+          "_SpecularHighlights",
+          1.0
+        ],
+        [
+          "_SrcBlend",
+          1.0
+        ],
+        [
+          "_UVSec",
+          0.0
+        ],
+        [
+          "_ZWrite",
+          1.0
+        ]
+      ]
+    }
+  ],
+  "components": {
+    "Transform": 54,
+    "Animator": 1,
+    "MonoBehaviour": 1,
+    "SkinnedMeshRenderer": 1,
+    "BoxCollider": 4,
+    "SphereCollider": 1,
+    "Camera": 1,
+    "MeshFilter": 1,
+    "MeshRenderer": 1,
+    "CapsuleCollider": 8
+  },
+  "rigidAccessories": [
+    {
+      "path": "/enScourgeLeprechaun/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/Hair_M/enLuckysHat",
+      "transform_id": 72780,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 72780
+        },
+        {
+          "type": "MeshFilter",
+          "id": 104429
+        },
+        {
+          "type": "MeshRenderer",
+          "id": 101365
+        }
+      ],
+      "localPosition": {
+        "x": -0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localRotation": {
+        "x": 0.4999999403953552,
+        "y": -0.5000000596046448,
+        "z": -0.4999999403953552,
+        "w": -0.5000000596046448
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    }
+  ],
+  "portraitMarkers": [
+    {
+      "path": "/enScourgeLeprechaun/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+      "transform_id": 67909,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 67909
+        },
+        {
+          "type": "Camera",
+          "id": 98712
+        }
+      ],
+      "localPosition": {
+        "x": -0.6537035703659058,
+        "y": 1.8827385902404785,
+        "z": 0.35000038146972656
+      },
+      "localRotation": {
+        "x": 0.5876557230949402,
+        "y": -0.4907362461090088,
+        "z": 0.47708675265312195,
+        "w": 0.43154028058052063
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    }
+  ],
+  "deathClips": [
+    {
+      "id": 4885,
+      "name": "deathHeavy_imp",
+      "stopTime": 2.0,
+      "events": [
+        {
+          "time": 0.06849882751703262,
+          "functionName": "DropWeapon",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.15290567278862,
+          "functionName": "DeathFallOff",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.21005462110042572,
+          "functionName": "DropShield",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    },
+    {
+      "id": 4982,
+      "name": "deathLight_imp",
+      "stopTime": 1.533333420753479,
+      "events": [
+        {
+          "time": 0.7444350123405457,
+          "functionName": "DeathFallOff",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.8267212510108948,
+          "functionName": "DropShield",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.877724289894104,
+          "functionName": "DropWeapon",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ]
+    }
+  ],
+  "callbackBoundaries": [
+    "HauntManager.cs:ScourgeEnemyIdLookup maps Fergus to native scourgeG. A custom content clone has a distinct row ID; this is an ordinary controlled diagnostic encounter, not validation of global Fergus haunt progression.",
+    "One CEL only; zero native prefab Rigidbody/CharacterJoint/FallOffLimb/ScrollingUVs. Collider count is not proof of ragdoll; serialized CEL flags are not reconstructed by this UnityPy typetree.",
+    "DeathHeavy_imp event DeathFallOff at.15290567. Generic CEL DeathFallOff invokes optional root FallOffLimb, lights/emissive/detachables; source prefab has no FallOffLimb. DeathLight event.74443501 but generic handler returns early for DeathLight/DeathRevive. Actual animation/ragdoll/cleanup remains live pending.",
+    "Native enLuckysHat is a separate active rigid MeshRenderer under Hair_M. Body replacement leaves its geometry/material native. Do not author a second intersecting hat or claim fully replaced accessories.",
+    "Weapon sourced separately from native row; attack uses AttackSlideStart/Stop,Dodge,AttackHit and generic sound/camera events. No behavior suppression or callback changes proposed."
+  ],
+  "evidence": [
+    {
+      "path": "scratch/scourge-leprechaun-topology-analysis/native-metadata.json",
+      "sha256": "9a486e9e85e705d8f130d4e00d122d052cb8ff843c88202f90482df184218eda"
+    },
+    {
+      "path": "scratch/scourge-leprechaun-topology-analysis/HauntManager.cs",
+      "sha256": "007a7eccf7172dd7e44a22a060f7d6931a79a2a87dc464580aa72395574a6a86"
+    },
+    {
+      "path": "scratch/mirewarden-runtime-decompile/CharacterEventListener.cs",
+      "sha256": "b1c351a88947cefc9674dee9ac1e24f5278b825545b7ac5b8a92c0ff5cf3edb0"
+    },
+    {
+      "path": "scratch/EnemyDummy.analysis.cs",
+      "sha256": "3c94b4dabc926b9975e61d3ec6f0b1ed43d3ea1ac55ce78236a48cb9dd8f5d5e"
+    }
+  ],
+  "limits": [
+    "Source analysis only; no new topology coverage or native battle acceptance.",
+    "Native hat and weapon/effects remain outside original body replacement.",
+    "No exhaustive global ownership/callback graph or CEL serialized flag decode."
+  ]
+}

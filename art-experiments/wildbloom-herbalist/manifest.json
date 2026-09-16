@@ -1,0 +1,72 @@
+{
+  "name": "Wildbloom Herbalist",
+  "status": "LIVE_NATIVE_PREVIEW_AND_IDLE_OBSERVED",
+  "artStatus": "Original low-poly woodland figure with a moss-green petal shell, blossom crown, and shoulder braids. Native Party Select preview and a measured idle capture are recorded; final art approval remains pending.",
+  "nativeSurfaceCopied": false,
+  "target": {
+    "baseClass": "blacksmith",
+    "skinset": "herbalist_Female",
+    "nativeAvatar": "Player_Herbalist",
+    "celComponentPathId": "137648",
+    "body": {
+      "rendererPath": "player_Herbalist",
+      "rendererSourceId": 121202,
+      "paletteBones": 24
+    },
+    "hairTop": {
+      "rendererPath": "hairTop",
+      "rendererSourceId": 121088,
+      "paletteBones": 6
+    },
+    "hairBottom": {
+      "rendererPath": "hairBottom",
+      "rendererSourceId": 121003,
+      "paletteBones": 7
+    }
+  },
+  "profile": {
+    "key": "ftkmf_modeltest_player_wildbloom_herbalist_female",
+    "document": "runtime-profile.json",
+    "requiredOutfit": [
+      "player_Herbalist",
+      "hairTop",
+      "hairBottom"
+    ],
+    "conditionalApparel": "None declared. This first binding exercise deliberately avoids any equipment branch until a fresh live inventory establishes the exact assembled paths."
+  },
+  "authoringContract": {
+    "referenceLocalOnly": [
+      "scratch/skeleton-audit/121202/reference.npz",
+      "scratch/skeleton-audit/121088/reference.npz",
+      "scratch/skeleton-audit/121003/reference.npz"
+    ],
+    "permittedReferenceInputs": [
+      "bone_names",
+      "bindposes"
+    ],
+    "forbiddenReferenceInputs": [
+      "native surfaces",
+      "native textures",
+      "native UVs",
+      "native weights",
+      "native animation samples"
+    ],
+    "proof": "original-geometry-proof.json"
+  },
+  "originalAssets": {
+    "wildbloom-body.glb": "e2ac7bb1bcb6668d1d210791f69519f70ae710a93a119dd1989f2be514f4f29b",
+    "wildbloom-hair-top.glb": "ffc5cd75b06e36a77fae54462764e068ca8e741330d581788a775f0ec6f4dbbd",
+    "wildbloom-hair-bottom.glb": "e1382cddc4bcb069856bc4aef41bb98dfe507e76a5e3d0ac528e5f3ea7db3e8e",
+    "wildbloom-palette.png": "a953dd503880c8a719a45b90cdf9004f3db715e740910022da0d7d10f4f3cbd7"
+  },
+  "checks": {
+    "binaryAndSkinContract": "PASS: each original GLB validates against its exact target bind contract, including positive authored weights for every palette bone.",
+    "sourceProvenance": "PASS: deterministic regeneration restricted to bone_names and bindposes reproduced every original source JSON, pieces manifest, and palette byte-for-byte.",
+    "studio": "PASS: Blender renders use only authored source JSON and the authored palette.",
+    "profileRegistration": "PASS: fresh-process registration assigned class ID 114 to the exact profile and herbalist_Female skinset; the deployment and immutable live-validation-v1 archive pin the catalog and four original assets.",
+    "livePreview": "PASS LIMITED: a real Party Select selection was visibly Wildbloom Herbalist; the strict preview join records the native owner, reciprocal avatar, pedestal, exact skinset, and all three expected custom meshes.",
+    "liveOverworldCombat": "PENDING: record exact player mesh identity through native overworld idle, combat idle/attack/hit, and progression.",
+    "liveEquipmentLifetime": "PENDING: no apparel path is declared; establish an actual native equipment layout and owner lifetime before extending this package."
+  },
+  "limits": "This package establishes original geometry plus a real native Party Select preview and a fixed-step native idle capture for the exact 24/6/7-bone Herbalist Female assignments. It does not yet claim overworld or combat behavior, gameplay, equipment compatibility, resource lifetime, culling, portrait behavior, player death, multiplayer, or final art approval."
+}

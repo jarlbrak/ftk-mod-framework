@@ -1,0 +1,13 @@
+# Pre-position startup handoff wait
+
+Reviewed Python implementation, promoted after the capture owner released its source pins. The frozen candidate remains in scratch/entry-startup-wait-candidate. No game/helper/Core edits or actions were performed to produce or promote it.
+
+`wait_position_eligible` observes only the known HollowMire Visit (`ftkmf_hollowmire_arrive`) → Dungeon (`ftkmf_hollowmire_crypt`) handoff. It keeps the five existing entry IDs, story owner/Core scope and advancing native frames fixed; no entry ticket may already exist. Each observed current quest must have a nonzero signed ID and the helper's actual registered-reference proof. Quest instances cannot change ID within a definition; Q2→Q1 regression is refused.
+
+Q1 must remain the already-cleared quiet story and cannot receive another page submission. Q2 requires the exact native expected DungeonQuestDef. Any active Q2 message must identify that current quest. New actionable pages additionally require the exact destination and go through the unchanged Pages/story.submission machinery, including claim-before-submit and no retry. Unknown quest, foreign presenter, combat/dungeon, unsupported modal/choice, changed owner, and bounded timeout stop. No movement, discovery, dungeon entry, staging, start_run or generic dismissal happens in this wait.
+
+Only native `positionEligible:true` plus full guarded story completion permits the first existing entry-position. The existing position/discover/verify sequence and enter→stage adjacency remain unchanged. The same Pages tracker survives into position/discovery, preserving its previous submission history. Read-only waiting has its own existing wait_timeout budget; the later native discovery retains its existing budget.
+
+Tests: `cd tools/ai-model-pipeline/runtime-test && python3 -m unittest test_startup_wait test_entry_setup test_story_setup -q`. Thirty-two tests pass. Three JSON fixtures are lossless selected snapshots: original stopped journal109 sequence108 (Q1quiet), later root stopped-state entry (Q2actionable), successful continuationbb251 sequence83 (Q2eligible). They are replayed with mocked acknowledgments and an explicitly synthetic duplicate quiet observation; this is not a replay of every historical Q2 page or evidence of new native execution. Existing story tests cover page/phase/confirmation progression.
+
+Conservative destination boundary: quiet Q2 with destination=false remains read-only pending. An actionable Q2 page with destination=false stops as unsupported before any page submission; the preserved native Q2 has destination=true. This does not claim support for every hypothetical quest-initialization intermediate.

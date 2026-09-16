@@ -1,0 +1,100 @@
+{
+  "status": "PASS_ORIGINAL_BIND_AUTHORED",
+  "model": "Hearthveil Blacksmith",
+  "target": {
+    "baseClass": "blacksmith",
+    "skinset": "blacksmith_Female",
+    "bodyRendererPath": "playerBlacksmith",
+    "bodyRendererSourceId": 121067,
+    "hairTopRendererPath": "hairTop",
+    "hairBottomRendererPath": "hairBottom",
+    "hairTopRendererSourceId": 121083,
+    "hairBottomRendererSourceId": 121178,
+    "hairBottomRepresentativeBindingSourceId": 121083,
+    "defaultArmorRendererPath": "armorBlacksmithF(Clone)",
+    "defaultArmorRendererSourceId": 121248,
+    "bootsRendererPath": "bootsBlacksmith(Clone)",
+    "bootsRendererSourceId": 121113,
+    "gambesonRendererPath": "armorGambesonF(Clone)",
+    "gambesonRendererSourceId": 121211
+  },
+  "authoringInputs": [
+    "bone_names",
+    "bindposes"
+  ],
+  "nativeSurfaceRead": false,
+  "references": {
+    "body": {
+      "path": "scratch/skeleton-audit/121067/reference.npz",
+      "sha256": "ca33c512ec4b7c2f894b53203f813ab31b8c5fbab2903c342b5b40c0d70c3849"
+    },
+    "hair": {
+      "path": "scratch/skeleton-audit/121083/reference.npz",
+      "sha256": "fc03d9f092990f0babbdd0ec2a9d4aaf2dcc5264f5b9ceb362e0e670c74fb654"
+    },
+    "defaultArmor": {
+      "path": "scratch/all-raw-rig-audit/121248/reference.npz",
+      "sha256": "1a88ad8120c4b699d3a4bed2f861c15b5613cd1843944c3084ae5d8b401f0665"
+    },
+    "boots": {
+      "path": "scratch/all-raw-rig-audit/121113/reference.npz",
+      "sha256": "9ca5d5bd78550619473d3036c69ccfacd917eb96841915ea924202484cf2d23f"
+    },
+    "gambeson": {
+      "path": "scratch/all-raw-rig-audit/121211/reference.npz",
+      "sha256": "e0cbfb86e635be2fdbb26711bf05056c2f43a24aa9cd3610832e31e58b816264"
+    }
+  },
+  "assets": {
+    "hearthveil-body": {
+      "vertices": 5244,
+      "triangles": 1748,
+      "paletteBones": 24,
+      "weightedPaletteBones": 24,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "ddb8691011173d8de1a1e48260dd99b9b2d88f91ecabb207bc922286d439f634"
+    },
+    "hearthveil-hair-top": {
+      "vertices": 432,
+      "triangles": 144,
+      "paletteBones": 6,
+      "weightedPaletteBones": 6,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "40f55b523dd9d2a5827b6e9bdced2dfb70a69faab0a86bd894462ed3c155dbae"
+    },
+    "hearthveil-hair-bottom": {
+      "vertices": 396,
+      "triangles": 132,
+      "paletteBones": 6,
+      "weightedPaletteBones": 6,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "855233f93cd71ecf1173251723d76def70d3cf8ef33657b4f9003728ffd07973"
+    },
+    "hearthveil-default-armor": {
+      "vertices": 2880,
+      "triangles": 960,
+      "paletteBones": 19,
+      "weightedPaletteBones": 19,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "d0bdb4ee5b1c4afae68d93345df7a9601fc1b628406733cec59ecea396214298"
+    },
+    "hearthveil-boots": {
+      "vertices": 996,
+      "triangles": 332,
+      "paletteBones": 10,
+      "weightedPaletteBones": 10,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "5b91bc4e437e5b238ca0b3eb8f1c1c83d21110cb4a89f86ed92bbed38e814d16"
+    },
+    "hearthveil-gambeson": {
+      "vertices": 2880,
+      "triangles": 960,
+      "paletteBones": 28,
+      "weightedPaletteBones": 28,
+      "allPaletteBonesWeighted": true,
+      "glbSha256": "704d3fc7b57eb94d9b4e522f9584f51078245f7ba5da2683a0fe0ce8363da207"
+    }
+  },
+  "paletteSha256": "ba99d7ab57a505286b323a7054a9376172b241fa3d51694a5f159c26d072e7fb",
+  "artScope": "Original forge-hood, mask, apron, sleeve, glove, braid, default armor, boot, and gambeson design. Studio and live review remain separate gates."
+}

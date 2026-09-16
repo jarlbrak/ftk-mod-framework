@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "asset": "Honeyback",
+  "iteration": "portrait artv2 attempted correction; portrait readability stillfails",
+  "status": "scoped body motion observed; portrait readability FAIL pendingartcorrection",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "1ed421a57c3e483bafb6803d051d0ab1",
+    "case": "56fbba85a3a34cae99608c96bcbb65d0",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_honeyback_portrait_v2",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_honeyback_portrait_v2",
+      "baseEnemy": "bearB",
+      "displayName": "Honeyback Bear portrait v2",
+      "combatProfile": "a03f8882d4c799314d6fc4a476213e985e3b639399658e8c502737ff47cb609d",
+      "renderers": [
+        {
+          "rendererPath": "enBear01",
+          "glbFile": "honeyback_portrait_v2.glb",
+          "textureFile": "honeyback_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "14db20e390ce5383484f90427089c23c401db8cf3d0e044aec156e9ee27d1751",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "bb8497",
+  "helperVersionPrefix": "3ec432",
+  "assetHashes": {
+    "honeyback_portrait_v2.glb": "a4f05e00b9eb30cd980a8c53a6ca5d9dcac24087192b8afc1f26e26d4449c754",
+    "honeyback_basecolor.png": "54eb2580b97f7a9e34054fa84a30d6a99c0a9e388e67f61cbff28512d44ffefb"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-56fbba85a3a34cae99608c96bcbb65d0/journal.jsonl",
+    "sha256": "83d17b63ae1956a775ffbadc8cb9ca06bb70d2cc971930bb456fc1ef3620b634"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "658aa2d2d676473a8897145b15093f9d",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/164ec038e2f84af5986ae2812f5088a9.json",
+        "sha256": "d11ce781c9a86bd9f7a3b88702bd4b0120cd89fe214786798cf59742b26d34e7"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-658aa2d2d676473a8897145b15093f9d/journal.jsonl",
+        "sha256": "353f8d60c19a0fded0d7a875ce522a086fc5831c2c5922acd58ab106abae55f1"
+      },
+      "summary": {
+        "path": "art-experiments/honeyback-portrait-v2/live/attack-summary.json",
+        "sha256": "98e3005d8d6bc775b02e247f09b003c78ca67fc9317e7ca8b0ca7a87d54c09f7"
+      },
+      "video": {
+        "path": "art-experiments/honeyback-portrait-v2/live/attack.mp4",
+        "sha256": "9d3852f6e88697037d729a7528d86adf2cb911f17388595b10290748788a674d"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/honeyback-portrait-v2/live/attack-0000.png",
+          "sha256": "08dc2cb2701a9b26b4a61989059f865ee7a6a28412ad964e2c42f60a453f2edf"
+        },
+        {
+          "path": "art-experiments/honeyback-portrait-v2/live/attack-0050.png",
+          "sha256": "a67ea8fae8b82115f91ea29ce107c7299bdee4ee863ca567e9cf0f937461d89d"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "bear_idle"
+          ],
+          "sampleCount": 90,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 43,
+              "firstNormalizedTime": 9.783001899719238,
+              "lastNormalizedTime": 11.753846168518066,
+              "gameSeconds": 3.9416656494140625
+            },
+            {
+              "firstFrame": 60,
+              "lastFrame": 93,
+              "firstNormalizedTime": 0.05383582413196564,
+              "lastNormalizedTime": 1.5663362741470337,
+              "gameSeconds": 3.0250015258789062
+            },
+            {
+              "firstFrame": 108,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.077952079474926,
+              "lastNormalizedTime": 0.5821188688278198,
+              "gameSeconds": 1.008331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "bear_attackSwipe"
+          ],
+          "sampleCount": 16,
+          "occurrences": [
+            {
+              "firstFrame": 44,
+              "lastFrame": 59,
+              "firstNormalizedTime": 0.11250000447034836,
+              "lastNormalizedTime": 0.9562498331069946,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "bear_attackBite"
+          ],
+          "sampleCount": 14,
+          "occurrences": [
+            {
+              "firstFrame": 94,
+              "lastFrame": 107,
+              "firstNormalizedTime": 0.22500000894069672,
+              "lastNormalizedTime": 0.9562498331069946,
+              "gameSeconds": 1.1916656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "887743b8f4b44068b6e5bb6eb8cd3242",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/69a28b28b985428ba8b682156a9309c5.json",
+        "sha256": "1906ff0c08163c7974d7daac88740e2f5ebb778b1936c94b4e9ecf5f3d08ad04"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-887743b8f4b44068b6e5bb6eb8cd3242/journal.jsonl",
+        "sha256": "d9162fa829e29f9cf1dd8e415c85534abe8f036c986e0e213c674042753b1452"
+      },
+      "summary": {
+        "path": "art-experiments/honeyback-portrait-v2/live/nonlethal-hit-summary.json",
+        "sha256": "65eda90f8db788678b9faaf347b72aeb9736445892ed15c82dba7f9996e70415"
+      },
+      "video": {
+        "path": "art-experiments/honeyback-portrait-v2/live/nonlethal-hit.mp4",
+        "sha256": "969c1bcbf29d562b9efd14c6536fb47c0c78ac66a5257ac482000c68a1a8bcfd"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/honeyback-portrait-v2/live/nonlethal-hit-0030.png",
+          "sha256": "1bf0f9e9f59a0572c4d0f94e1fb83ec385938acd737e7f7543a5526f9fdddd4d"
+        }
+      ],
+      "hpBeforeAfter": [
+        72,
+        62
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "bear_idle"
+          ],
+          "sampleCount": 87,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 48.12908172607422,
+              "lastNormalizedTime": 49.27492141723633,
+              "gameSeconds": 2.2916717529296875
+            },
+            {
+              "firstFrame": 36,
+              "lastFrame": 69,
+              "firstNormalizedTime": 0.1734807938337326,
+              "lastNormalizedTime": 1.685981273651123,
+              "gameSeconds": 3.024993896484375
+            },
+            {
+              "firstFrame": 93,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.11269137263298035,
+              "lastNormalizedTime": 1.3043583631515503,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "bear_damage"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 35,
+              "firstNormalizedTime": 0.1993153691291809,
+              "lastNormalizedTime": 0.9272565841674805,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "bear_attackPound"
+          ],
+          "sampleCount": 23,
+          "occurrences": [
+            {
+              "firstFrame": 70,
+              "lastFrame": 92,
+              "firstNormalizedTime": 0.043421052396297455,
+              "lastNormalizedTime": 0.9986839890480042,
+              "gameSeconds": 2.01666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "98eba4debccc42dd975005fb3a4ffc07",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/01abe63ca3f440a29cef9b77f83fe284.json",
+        "sha256": "8035e07fbe77d57757c585c0a828f6877f2eda2179c210a7a05ad7e968ff45e0"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-98eba4debccc42dd975005fb3a4ffc07/journal.jsonl",
+        "sha256": "d262dbf4550aa5c6472fdcb7e1479bed9c9992659bbba93bde83004d079f6dc4"
+      },
+      "summary": {
+        "path": "art-experiments/honeyback-portrait-v2/live/kill-fixture-death-summary.json",
+        "sha256": "01ff824eb292fd3d1bf6ccd6bc13e873a44fd1f35fbdcade901c28e80dc3321d"
+      },
+      "video": {
+        "path": "art-experiments/honeyback-portrait-v2/live/kill-fixture-death.mp4",
+        "sha256": "96835a8ce775ff7ec50aea51f27a03d92a502c712c47c8423702fb1c70e1e845"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/honeyback-portrait-v2/live/kill-fixture-death-0040.png",
+          "sha256": "26a9514aaa129f959547f4e4a7849081fd139832cfdb612e3a00de1f56c3203a"
+        },
+        {
+          "path": "art-experiments/honeyback-portrait-v2/live/kill-fixture-death-0060.png",
+          "sha256": "84daea7da4e214ec2c8223085cd232b6451da58b7ff47119563d85cf96191bcf"
+        }
+      ],
+      "hpBeforeAfter": [
+        62,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "bear_idle"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 88.58293914794922,
+              "lastNormalizedTime": 89.7745132446289,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "bear_deathHeavy"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.20625001192092896,
+              "lastNormalizedTime": 6.531244277954102,
+              "gameSeconds": 8.433319091796875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Larger/moved eyes visible in combat but native portrait remains nose-dominated. Body/animatedcollapse coherent in selectedviews; hero obscures hit30.",
+    "limits": "Portrait readability failure is not established as rig/camera crop failure. Separate art correction pending; no full culling/allmotion or flawless art acceptance."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "afterCollect": {
+      "path": "scratch/honeyback-v2-after-collect2.json",
+      "sha256": "64a2da4b254c0890ad01863b2f047e150228fe031e28d396143fb42d633cc78c"
+    },
+    "result": "two guarded Collect actions; strict Ready level0 room2"
+  },
+  "historicalEvidencePreserved": "OriginalV1 andofflinevisibilityaudit retained; liveV2portraitstillfails.",
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/honeyback-v2-exact-slerp-20260906-122330/deployment.json",
+    "sha256": "e5a2f9579c20c4feffad0ec3d27cbae72fd388184b0e4f10ab42110f05d3c5ea"
+  },
+  "binaryAndCatalogHashes": {
+    "model-test-profiles.json": "14db20e390ce5383484f90427089c23c401db8cf3d0e044aec156e9ee27d1751",
+    "BepInEx/plugins/FTKModFramework_content/models/honeyback_portrait_v2.glb": "a4f05e00b9eb30cd980a8c53a6ca5d9dcac24087192b8afc1f26e26d4449c754",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "3ec43281cf3b49566f669a58f789b68701d66cc26eb8c05c25ae26a751aac394",
+    "BepInEx/plugins/FTKModFramework.dll": "bb8497a412721f102d914af55744d7952e955ba07b5c9443beb68a00713b7ef3",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "329771384cd6d4ba5dfa68d4557e7675cf0145166fcffb60344c886940a517af",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65"
+  },
+  "sourceDiagnosis": {
+    "path": "scratch/honeyback-portrait-source-diagnosis.md",
+    "sha256": "486212a7a0a8679a17ce34f0f3f74bc13b4b8f3a130fe9920591db1f29351c0c"
+  },
+  "diagnosticScope": {
+    "combatHUD": "Source creates fresh snapshots of dressed custom CEL; shared native-base cache reuse not demonstrated. Actualportrait telemetry pending.",
+    "encounterRowPreview": "Separate row-based preview may miss custom visual plan; separate investigation, not proven cause of reported combat portrait.",
+    "status": "Passive actual camera/pose/mesh/texture evidence under development; no fix yet"
+  }
+}

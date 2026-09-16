@@ -1,0 +1,357 @@
+{
+  "status": "CALIBRATION_SELECTED_POSES_REVIEWED_NATIVE_DEATH_DISABLE_SOURCE_CONSISTENT",
+  "nativeEnemy": "pufferA",
+  "rendererId": 121509,
+  "controllerId": 5999,
+  "session": "5abf7c7f19ce42f4a3add683145953a9",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "0c65f1275f3eae761ec87bae6240c91dcfa49a13e34c5fc08334b92a88bc6163",
+      "bytes": 308736
+    }
+  },
+  "assetHashes": {
+    "probe_121509.glb": "824107d5a888447b69675fc3f0d40bc6f3ba9c6373cfdc7ea1c8da65a95bff61",
+    "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+  },
+  "profileSha256": "4fb54ce0d4fc17d86491f02b9e1a0053f0fb43e8715634fe64b6dbf28b42de56",
+  "rawWrapperStatus": "needs_visual_review",
+  "captures": [
+    {
+      "label": "pass",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/e6816644ce3045e9b67c087cd8bdf807.json",
+        "sha256": "905d4dff60c9fc8d2a2f6551cd7103aaaa5ade14818f1bbcc3de2199573b9a45"
+      },
+      "raw": {
+        "path": "docs/evidence/puffera-diagnostic-v1/pass.json.gz",
+        "sha256": "d33c750ebb90de1a4bbebb8486d7f41c3c860414d15c057ac19d4a409b8f00b3"
+      },
+      "video": {
+        "path": "docs/evidence/puffera-diagnostic-v1/pass.mp4",
+        "sha256": "b2a7996db7c4a4a9eba811e0af79804c18e58dbd168a0936280c2617a73d8b7f"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": null
+    },
+    {
+      "label": "hit",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/bfd7bf821f604f9ba5b4e8488bc10c58.json",
+        "sha256": "f401e37b132aeffa03e3e422e93f2bf33d4771c787cbbec66efc4cae261e56bb"
+      },
+      "raw": {
+        "path": "docs/evidence/puffera-diagnostic-v1/hit.json.gz",
+        "sha256": "6cf72b763c93e65a712cac91cc3b95d8bc719edb7c5311195f9eae9cd17fa628"
+      },
+      "video": {
+        "path": "docs/evidence/puffera-diagnostic-v1/hit.mp4",
+        "sha256": "9f936a169204a7d874857439bea3c01bb3c73fa9d36faeddd2d04659f0cc06c7"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": null
+    },
+    {
+      "label": "death",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/522a98de26de4111a8c89b4585b5506c.json",
+        "sha256": "385a36923dae66c825e289f9f3176d5d301e0f9fd7682bb7ab98dc4f48608bd9"
+      },
+      "raw": {
+        "path": "docs/evidence/puffera-diagnostic-v1/death.json.gz",
+        "sha256": "49da36dbbfdbe5458297879e3c561f450931e62aa04444b835a4db4fb0c959e7"
+      },
+      "video": {
+        "path": "docs/evidence/puffera-diagnostic-v1/death.mp4",
+        "sha256": "68f1132db6c1de84f2de3fb6fb8ff756364df21423cccb49911621c476f28b63"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": 27
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235464,
+        "alive": true,
+        "containerInstanceId": -237200,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237242,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237642,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235464,
+            "celInstanceId": -239068,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245776,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "5abf7c7f19ce42f4a3add683145953a9",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "5abf7c7f19ce42f4a3add683145953a9",
+    "id": "96c074af33e94b53bf08cdcb1be41e41",
+    "frame": 12227,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "rootReview": {
+    "path": "docs/evidence/puffera-diagnostic-v1/puffer-root-review.json",
+    "sha256": "743270545e04a061f5fa2569f661ad4fd6b92331ed75541ff4b7ca9f33d8512f"
+  },
+  "limits": [
+    "Calibration only, not original Saffronspine or pufferB acceptance.",
+    "Direct death first disables renderer27; source DeathFade event consistent but actual CEL fade field not recorded.",
+    "Indirect death and final resource teardown untested.",
+    "Native emission washes pastel probe; future original palette opts out explicitly."
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-7d6021bba44e4bcea32360beaec44335/capture-summary.json",
+      "sha256": "c8a7e8deaf87f7503fa185d5614572b121f903297b6d30e6a9887aeee3f61501"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-7d6021bba44e4bcea32360beaec44335/journal.jsonl",
+      "sha256": "3f9d6177b6796823cbbfbc5c261543f362fc094754a90e3276cc1889b061b023"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-7d6021bba44e4bcea32360beaec44335/result.json",
+      "sha256": "964c3e3ef456e769eb55ecc129142476527e125981d2c344d38d7add60a4c0a8"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-80ebffb3545942189ff11d97ae9df2e1/capture-summary.json",
+      "sha256": "cdab489faeb62f73bc5a5db02dcdbbdaed463034bbd745f64d97f898c196dbda"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-80ebffb3545942189ff11d97ae9df2e1/journal.jsonl",
+      "sha256": "85ea32984d026b2f94a38666c2ba4591b639d4b562fe94de93e6670a5b8f69b1"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-80ebffb3545942189ff11d97ae9df2e1/result.json",
+      "sha256": "6251b78cbbc51cbdb228b573759ccfd7a420a33c42292c0f57da5e25ef905764"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-98806a3211ec4f099a85251bdf6b5e63/capture-summary.json",
+      "sha256": "6d58e49e8ba92399f36eb966616c0930a13b83db49d70ca309e51e482acefeb6"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-98806a3211ec4f099a85251bdf6b5e63/journal.jsonl",
+      "sha256": "debd4a474ff82c2b44d57a97232e0f9cb0c4f7ed089d2c43be960e76f3e08ed0"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-98806a3211ec4f099a85251bdf6b5e63/result.json",
+      "sha256": "cb29316df5f35603b47ffceef422179ea82e921949a08615de269441929b37c9"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/case-result.json",
+      "sha256": "b78198e520e50a63c77262072eae3da1c23d136a5934a5983e4f818773287b3f"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/composed-helper-startup-evidence.json",
+      "sha256": "2d23795c305e9bca055e53f4c9dc424d7e67c6895e870a84c3d88c595eb6cfc4"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/death-0060.png",
+      "sha256": "832b3de1a247ee0ea56a09c96f69f47164d6299e0eda57b156d671e0ccdc6361"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/death-source-image-pins.json",
+      "sha256": "a5e4e0b0f7cd58a71e481c4a01c3fa019bc5cb665a6eb74aa57685a967e604a1"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/death.json.gz",
+      "sha256": "49da36dbbfdbe5458297879e3c561f450931e62aa04444b835a4db4fb0c959e7"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/death.mp4",
+      "sha256": "68f1132db6c1de84f2de3fb6fb8ff756364df21423cccb49911621c476f28b63"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/hit-0030.png",
+      "sha256": "cef7ed1c60127095a8db1c1b20b5d84e8ab857762b6f42c9c3b43c5bb40cd5b6"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/hit-source-image-pins.json",
+      "sha256": "480f14d68caf0dff7fef22379b0ca667bc7039edee4e6be56a8a004fa496a8a9"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/hit.json.gz",
+      "sha256": "6cf72b763c93e65a712cac91cc3b95d8bc719edb7c5311195f9eae9cd17fa628"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/hit.mp4",
+      "sha256": "9f936a169204a7d874857439bea3c01bb3c73fa9d36faeddd2d04659f0cc06c7"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/journal.jsonl",
+      "sha256": "f634f428d02ea6a152a1dd83f349160ff0f242ac1e1b3ad9a4c468caf3331eeb"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/pass-0000.png",
+      "sha256": "f96768a5a5a43b45b001e4f84f594769bc09e482bcce96d331a707cd6e809bd0"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/pass-0060.png",
+      "sha256": "f620769e673090dce58c72c00a063103f710e2b3c12dbdcfbbc124c16e4ad2b8"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/pass-source-image-pins.json",
+      "sha256": "fbdb09ebed5019737a54619a498f9d2b5a02de07120425e446750e235f84d5b2"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/pass.json.gz",
+      "sha256": "d33c750ebb90de1a4bbebb8486d7f41c3c860414d15c057ac19d4a409b8f00b3"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/pass.mp4",
+      "sha256": "b2a7996db7c4a4a9eba811e0af79804c18e58dbd168a0936280c2617a73d8b7f"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/puffer-first-stage-result.txt",
+      "sha256": "4e13aa5670d7f694b055946303df4a176b0558351e6ac7c588eb113ec2112168"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/puffer-root-review.json",
+      "sha256": "743270545e04a061f5fa2569f661ad4fd6b92331ed75541ff4b7ca9f33d8512f"
+    },
+    {
+      "path": "docs/evidence/puffera-diagnostic-v1/selected-frames.html",
+      "sha256": "5ea772bc4ca4857e217f6b4f268133bbb64d9dc695f5aaa02408d3a7695d3135"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "status": "production_observation_campaign_satisfied",
+  "reportCount": 2,
+  "serializedStateCount": 15,
+  "requiredNaturalStates": [
+    "ATTACK",
+    "DAMAGED",
+    "DEATH",
+    "DEFEND",
+    "IDLE",
+    "VICTORY"
+  ],
+  "observedNaturalStates": [
+    "ATTACK",
+    "DAMAGED",
+    "DAMAGEDHEAVY",
+    "DEATH",
+    "DEFEND",
+    "IDLE",
+    "VICTORY"
+  ],
+  "requiredNaturalEdges": [
+    [
+      "ATTACK",
+      "IDLE"
+    ],
+    [
+      "DAMAGED",
+      "IDLE"
+    ],
+    [
+      "DEFEND",
+      "IDLE"
+    ],
+    [
+      "IDLE",
+      "ATTACK"
+    ],
+    [
+      "IDLE",
+      "DAMAGED"
+    ],
+    [
+      "IDLE",
+      "DEFEND"
+    ]
+  ],
+  "observedNaturalEdges": [
+    [
+      "ATTACK",
+      "IDLE"
+    ],
+    [
+      "DAMAGED",
+      "IDLE"
+    ],
+    [
+      "DAMAGEDHEAVY",
+      "IDLE"
+    ],
+    [
+      "DEFEND",
+      "IDLE"
+    ],
+    [
+      "IDLE",
+      "ATTACK"
+    ],
+    [
+      "IDLE",
+      "DAMAGED"
+    ],
+    [
+      "IDLE",
+      "DAMAGEDHEAVY"
+    ],
+    [
+      "IDLE",
+      "DEATH"
+    ],
+    [
+      "IDLE",
+      "DEFEND"
+    ],
+    [
+      "IDLE",
+      "VICTORY"
+    ]
+  ],
+  "unexercisedStructuralRoles": [
+    "ATTACKCRIT",
+    "ATTACKPROF",
+    "DAMAGED STUN",
+    "DEATHLIGHT",
+    "DODGE",
+    "INTRO",
+    "OverworldAppear",
+    "PASSIVE VICTORY"
+  ],
+  "nativeKrakenProficiencies": [
+    "enKrakenArmorUp",
+    "enKrakenConfuse",
+    "enKrakenInterrupt",
+    "enKrakenResistUp"
+  ],
+  "nativeKrakenFailedProficiencyAttempts": 2,
+  "unusedIncomingAttackCalculations": 1,
+  "limitations": "Observer evidence only. Visual, progression, endpoint composition, and immutable archive review remain separate gates."
+}

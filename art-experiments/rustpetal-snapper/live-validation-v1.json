@@ -1,0 +1,291 @@
+{
+  "model": "Rustpetal Snapper",
+  "status": "SELECTED_ORIGINAL_BODY_REVIEWED_PORTRAIT_CROWN_LIMITED",
+  "session": "8edda11d19e84464ba67eff550e52fb5",
+  "nativeEnemy": "plantD",
+  "frozenManifestSha256": "2351bb018bf6ca7147f0c19304c8c5b041df565a6da4f5964370dabda646423f",
+  "catalogSha256": "c70a92c1762e88cd13d8831e788094e869396b84c5cc480b608c9c8cb880d5b4",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "0c65f1275f3eae761ec87bae6240c91dcfa49a13e34c5fc08334b92a88bc6163",
+      "bytes": 308736
+    }
+  },
+  "assetHashes": {
+    "rustpetal.glb": "cc1b950c75830f00f2374948a21a97d70978964949a54db9f56c82913e072c3c",
+    "rustpetal_basecolor.png": "c385173b0c6bd32d712e462606fb218bb1ab3f09f0072bee33df63969196b8a4"
+  },
+  "review": {
+    "session": "8edda11d19e84464ba67eff550e52fb5",
+    "caseResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-df3c8d1d286e461ea1dcab4b51b4c523/case-result.json",
+    "status": "SELECTED_ORIGINAL_BODY_REVIEWED_PORTRAIT_CROWN_LIMITED",
+    "reviewedFrames": {
+      "pass": [
+        0,
+        50,
+        103
+      ],
+      "attack": [
+        30
+      ],
+      "kill-fixture": [
+        60
+      ]
+    },
+    "observations": [
+      "Idle0 broad mouth/crown/stalk connected; crown overlaps HUD near healthpanel.",
+      "Both portraits show mouth; tall crown tips are cropped, fullhead portrait acceptance limited.",
+      "Pass50 native light/roll icons obscure portions of body and mouth.",
+      "Hit30 normal -8 HP58\u219250; outer mouth tissue stays attached; hero obscures lower stalk.",
+      "Death60 connected collapsed body visible; numerical floor contact unproved.",
+      "Pass103 during positive attack1: upright angled mouth/crown remain connected, strong nativeFX masks lower stalk and roll icons overlap head."
+    ],
+    "limits": [
+      "ExactD only, noGinheritance",
+      "Selectedposes only; nativeFX/HUD/heroocclusion",
+      "Portrait crown framing limited",
+      "ExplicitKillSingle50\u21920, noordinarylethal/finalteardown proof"
+    ],
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "collectCount": 1,
+    "captures": [
+      {
+        "action": "pass",
+        "raw": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/a2fdfd8453cd4ed5b4bc4ea517d3a76e.json",
+          "sha256": "57e36620b73c6070bad6a7d6fba046f341ea321b6b3b0852242e09f0ade00621",
+          "bytes": 5207138
+        },
+        "frames": 120,
+        "clips": {
+          "idle": [
+            0,
+            119
+          ],
+          "attackProf1": [
+            47,
+            72
+          ],
+          "attack1": [
+            99,
+            108
+          ]
+        },
+        "rendererDisabledCount": 0,
+        "animatorDisabledCount": 0
+      },
+      {
+        "action": "attack",
+        "raw": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/9d9f62cfc4404844905348b6947bb0c1.json",
+          "sha256": "8e7c749b63dd55518f32d9dc1fb7d31c24c04f9a82684e9a0d4db6a356481bd5",
+          "bytes": 5202862
+        },
+        "frames": 120,
+        "clips": {
+          "idle": [
+            0,
+            119
+          ],
+          "hit1": [
+            27,
+            31
+          ],
+          "attack3": [
+            70,
+            79
+          ]
+        },
+        "rendererDisabledCount": 0,
+        "animatorDisabledCount": 0
+      },
+      {
+        "action": "kill-fixture",
+        "raw": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/0e200771af104925884b55894c87047b.json",
+          "sha256": "0520f282052c9c39f9227c83e380e7d64195450a9cbeefb2a4a4a83e3c3cdfc2",
+          "bytes": 5213776
+        },
+        "frames": 120,
+        "clips": {
+          "idle": [
+            0,
+            27
+          ],
+          "death": [
+            28,
+            119
+          ]
+        },
+        "rendererDisabledCount": 0,
+        "animatorDisabledCount": 0
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/case-result.json",
+      "sha256": "3b9df8362947cb8161c22fa214296dfd7f7223cbf4df842f05d85fe6d828df30",
+      "sourceSha256": "3b9df8362947cb8161c22fa214296dfd7f7223cbf4df842f05d85fe6d828df30",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/journal.jsonl.gz",
+      "sha256": "47e865f985287ed3cad6ccbe0c3afe263713126fc97dcb9fafe6f2b878dd793e",
+      "sourceSha256": "b732169973e02df2cf8480b419a07244ad7866d1baa486a29f36d458c3342b3e",
+      "compression": "gzip"
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/pass/raw.json.gz",
+      "sha256": "0526a4d3a67d0735e0d428c8191f41bd88ee3560aa75d708e9e8d4f5f2b14981",
+      "sourceSha256": "57e36620b73c6070bad6a7d6fba046f341ea321b6b3b0852242e09f0ade00621",
+      "compression": "gzip"
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/pass/journal.jsonl.gz",
+      "sha256": "2404f96b18c779029f21ebd62add4317881e9bdade3c3c71bf1f6446a24a0a8c",
+      "sourceSha256": "1907043f53c7697272f5228582a82d08e5c888c5dbfac5572a925d4285cec436",
+      "compression": "gzip"
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/pass/result.json",
+      "sha256": "9e5e2ee28e9afd7714ca8122dfc99c2d7a44b85877da2e46dd4633a74f5a0fdb",
+      "sourceSha256": "9e5e2ee28e9afd7714ca8122dfc99c2d7a44b85877da2e46dd4633a74f5a0fdb",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/pass/0000.png",
+      "sha256": "7d5a16c1629ae5f34315ed6ec86a64bd09cab5cef4430165014ca5df253b1eef",
+      "sourceSha256": "7d5a16c1629ae5f34315ed6ec86a64bd09cab5cef4430165014ca5df253b1eef",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/pass/0050.png",
+      "sha256": "82da231f6b5ad359e7ac844d456625469aa0821866b9bf85dc1d91eaadfff74c",
+      "sourceSha256": "82da231f6b5ad359e7ac844d456625469aa0821866b9bf85dc1d91eaadfff74c",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/pass/0103.png",
+      "sha256": "9bbe19053bfec42e632994e544c0c35c4168e4b050423e61cd9c658e2abdd267",
+      "sourceSha256": "9bbe19053bfec42e632994e544c0c35c4168e4b050423e61cd9c658e2abdd267",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/attack/raw.json.gz",
+      "sha256": "359e9ebc685c39cfce0300c415ff577f4187dba94439e2d9f2cf345f66b6d723",
+      "sourceSha256": "8e7c749b63dd55518f32d9dc1fb7d31c24c04f9a82684e9a0d4db6a356481bd5",
+      "compression": "gzip"
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/attack/journal.jsonl.gz",
+      "sha256": "d409989d70126915e2d2dcd5a34d34322311b2c993347b21e4750581a138a9bf",
+      "sourceSha256": "53e9cca12735d5ce075370efec91768f4c3731b15ee11eada523ec28b6562c1b",
+      "compression": "gzip"
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/attack/result.json",
+      "sha256": "ca0a2d1c8d620746b0e6bd4d6272f93f9dfd0873cb666f0500c2058549484830",
+      "sourceSha256": "ca0a2d1c8d620746b0e6bd4d6272f93f9dfd0873cb666f0500c2058549484830",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/attack/0030.png",
+      "sha256": "a580cb2eeb6ce1db8e5d36dc0b75a123b92f2f9be2e2369d8b07a0d8d24685ec",
+      "sourceSha256": "a580cb2eeb6ce1db8e5d36dc0b75a123b92f2f9be2e2369d8b07a0d8d24685ec",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/kill-fixture/raw.json.gz",
+      "sha256": "a14faeb68d0a2585e979ed4de32dc7c189ed93aeff3ea789e3efe881942d4308",
+      "sourceSha256": "0520f282052c9c39f9227c83e380e7d64195450a9cbeefb2a4a4a83e3c3cdfc2",
+      "compression": "gzip"
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/kill-fixture/journal.jsonl.gz",
+      "sha256": "83348635bb189d23560e3d4b4e68b7ad2791ef08e1210b2c415d8835c573b185",
+      "sourceSha256": "2e47fb0128408135748aef43888e0a4046d4cccdd716fb4fca0185e0fafb1d0a",
+      "compression": "gzip"
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/kill-fixture/result.json",
+      "sha256": "d1bc247dbfbd7024c7c868937fdda74e7573aaa5264096a787cf74c0bd2f74cf",
+      "sourceSha256": "d1bc247dbfbd7024c7c868937fdda74e7573aaa5264096a787cf74c0bd2f74cf",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/kill-fixture/0060.png",
+      "sha256": "635c921bd4d3d1146b0964aa887d63afc23d778c72865e47edc8515fdea0a4f3",
+      "sourceSha256": "635c921bd4d3d1146b0964aa887d63afc23d778c72865e47edc8515fdea0a4f3",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/root-live-review.json",
+      "sha256": "706982b771ab490fdbc22f409e53e56fc5f321c93c51eb5f1e2b08ee655a037e",
+      "sourceSha256": "706982b771ab490fdbc22f409e53e56fc5f321c93c51eb5f1e2b08ee655a037e",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/startup-evidence.json",
+      "sha256": "4102a1414be87820da63e7732caeb62598dc1c482e7e87003cf8d16b826e0eda",
+      "sourceSha256": "4102a1414be87820da63e7732caeb62598dc1c482e7e87003cf8d16b826e0eda",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/deployment-result.json",
+      "sha256": "63ba479cc993719273847d19fb61568adf2b3b87c4d16d85023b3b1544cc2c71",
+      "sourceSha256": "63ba479cc993719273847d19fb61568adf2b3b87c4d16d85023b3b1544cc2c71",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/live-inventory.json",
+      "sha256": "aa1e838853479598d689ece28e4b200cba9e834424336c20f8fd1505d48aa98e",
+      "sourceSha256": "aa1e838853479598d689ece28e4b200cba9e834424336c20f8fd1505d48aa98e",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/live-material-state.json",
+      "sha256": "f4fd31e391c7bb41bb7169def32bb6c883cc1c851b5758342b3e6985e01a4d32",
+      "sourceSha256": "f4fd31e391c7bb41bb7169def32bb6c883cc1c851b5758342b3e6985e01a4d32",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/root-offline-review.json",
+      "sha256": "a6ea12a42e17fa65ce1780b81e3b98b3a70a93c448b8fbc88d7267d5cde8222e",
+      "sourceSha256": "a6ea12a42e17fa65ce1780b81e3b98b3a70a93c448b8fbc88d7267d5cde8222e",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/root-glb-validation.json",
+      "sha256": "a0f8fbe009e035ba9094f0b118f256519e2a7392383f16fed6d5e77798e07ebb",
+      "sourceSha256": "a0f8fbe009e035ba9094f0b118f256519e2a7392383f16fed6d5e77798e07ebb",
+      "compression": null
+    },
+    {
+      "path": "art-experiments/rustpetal-snapper/live-v1/stage-result.json",
+      "sha256": "ce12a73292ac2514dfbffada757a95a8e2e629bd5bbbe812a6bcf8aa30b67db1",
+      "sourceSha256": "ce12a73292ac2514dfbffada757a95a8e2e629bd5bbbe812a6bcf8aa30b67db1",
+      "compression": null
+    }
+  ],
+  "limitations": [
+    "Raw captures and reviewed still images archived; video encoding remains pending.",
+    "Portrait crown tips cropped. Alternative marker trial pending.",
+    "No ordinary lethal or final owner resource disposal proof."
+  ],
+  "rendererId": 121537,
+  "controllerId": 5980
+}

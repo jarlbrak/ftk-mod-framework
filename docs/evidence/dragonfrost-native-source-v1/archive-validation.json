@@ -1,0 +1,34 @@
+{
+  "status": "VERIFIED_NATIVE_METADATA_SOURCE_ARCHIVE_NO_RUNTIME_ACCEPTANCE",
+  "nativeEnemy": "dragonFrost",
+  "nativeRendererId": 121561,
+  "sharedRigRepresentativeRendererId": 121525,
+  "sourcePinsVerified": 21,
+  "archivedFileSha256": {
+    "README.md": "c47b139d37a5e34fb01b0fb2e6520d29120da08e32d232c14c2616498da3e735",
+    "findings.json": "7a7989833d22ff655a84afbada66bae9aadd04dd3e1ba282e7192a798c775b68",
+    "source-pins.json": "82882033965856ed6c68e16bda509a7b039389a84b4295d5677eb55bc9489afe",
+    "artifact-pins.json": "e726c35be79536a427fc20b8c41f68736017a6aa82fc6eabda05853e24eff679",
+    "audit_source.py": "bdbfbbdfd9b841e3871d6574cd8667b304b47a761a38ae193a689770ba9d3af7",
+    "weapon_audit.py": "45c6d471233f8c21c21ad4f1e8f2b613c3e72a0210c30fa2e5965ade0cf510cb",
+    "finalize.py": "069e6d50747911bbc82060c47a5e4a8979e47d943c464c31373f44abafe74f82",
+    "details.py": "bbd4d6d92afbd31f98553f068a77b628e851682d77f80b926a19b4be788474d2",
+    "inspect_more.py": "8352b1a9a2134726aa4e6572487ad061d8db639210f1c7497c666beb777307d3"
+  },
+  "excludedFiles": [
+    "native-metadata.json",
+    "AttackSchedule.cs",
+    "AttackStart.cs",
+    "weapon-components.json",
+    "strings-138558.json",
+    "CharacterEventListener.cs",
+    "CombatAction.cs",
+    "details.json",
+    "EnemyDummy.cs",
+    "strings-136713.json"
+  ],
+  "exclusionScope": "Native assets, payload, decompiled C# and raw intermediate dumps stay local. Source hashes retained in source-pins and artifact-pins.",
+  "limitations": [
+    "Exact source reconciliation only, not live appearance or original model acceptance."
+  ]
+}

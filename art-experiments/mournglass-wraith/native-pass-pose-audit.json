@@ -1,0 +1,54 @@
+{
+  "capture": "scratch/mirewarden-game/model-test-output/38a4c40f81b64e4e913ce926e31891e9.json",
+  "captureSha256": "b3d4f645b4e5fe8c4b5e9f6bcb01bef0fcdd9e29e91bdc185ba21d9faed78e79",
+  "sourceSha256": "22564d4c70d25ce8dcbc8622af3c958368cbd8bc065fff686eaf5874d202769b",
+  "frames": 120,
+  "sampledFrames": [
+    0,
+    42,
+    48,
+    54,
+    60,
+    104
+  ],
+  "maximumEdgeStretch": 1.80145653989606,
+  "worstEdge": {
+    "frame": 45,
+    "piece": "Continuous shoulder drape R",
+    "triangle": 665,
+    "vertexIndices": [
+      1995,
+      1996
+    ],
+    "restLength": 0.047624067209087836,
+    "posedLength": 0.08579268733026078,
+    "ratio": 1.80145653989606
+  },
+  "posedBoundsMin": [
+    -1.1309810058826348,
+    0.6514234811977189,
+    -0.7941817651766573
+  ],
+  "posedBoundsMax": [
+    1.14644266474285,
+    2.067203738023491,
+    1.0210658675987474
+  ],
+  "nativeTravelBoundsMin": [
+    -1.1185287064540068,
+    0.6315562273461106,
+    -0.21237379792026884
+  ],
+  "nativeTravelBoundsMax": [
+    1.1110018453981312,
+    2.5115934825152535,
+    3.0306517174435643
+  ],
+  "glbSha256": "c1c04fbac1b7ca604f9091148d14b75f48b95b913327e2aeb7404b0986caa029",
+  "rootMotionRetained": false,
+  "method": "Root_M-normalized sheet. Original source skinned with full captured bone matrices and native IBMs, Anatomy mode removes Root_M transform for deformation inspection; keep-root-motion mode retains renderer-local travel in the sheet. Travel bounds always retain renderer-local motion. Orthographic depth raster with fixed all-frame bounds. Mesh-space anatomy front+Z/upY.",
+  "captureReportedOk": true,
+  "captureError": null,
+  "materialMethod": "Per-triangle first-vertex nearest texel from each original material slot; no UV-scroll/shader/light simulation.",
+  "scope": "Offline native pose study; no material/culling/portrait/whole-controller or live original-art acceptance."
+}

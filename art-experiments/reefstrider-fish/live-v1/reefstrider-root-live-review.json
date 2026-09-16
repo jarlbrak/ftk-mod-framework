@@ -1,0 +1,163 @@
+{
+  "status": "SELECTED_ORIGINAL_LIVE_BODY_REVIEWED_WITH_OCCLUSION_LIMITS",
+  "enemy": "ftkmf_modeltest_reefstrider",
+  "session": "86aa14f97fb84aa7bed96fe1416a705e",
+  "profileSha256": "b52196b3c1928f35c76188c17e8b135c5cdbbedfa1fa3ecbc6a484b29acc34d6",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "2c42e55ddcfcc01331aa66d45721ed404ac98608fe1ed3d4a7ca5a90b3e52186",
+      "bytes": 325632
+    }
+  },
+  "assetHashes": {
+    "reefstrider.glb": "a865a3f602edc56c1f9545bc78d4f4b446d891228c70731ae4fc849257a6451d",
+    "reefstrider_basecolor.png": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50"
+  },
+  "actions": [
+    {
+      "action": "pass",
+      "rawCapture": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/474fe7205dc04f6f96e34462832d5365.json",
+        "sha256": "ab9d6aa58e38756a9fe86c4577f44e63f77c7a2ddbae5cb2298ea816d076f461",
+        "bytes": 5187114
+      },
+      "frames": 120,
+      "positiveWeightClipSpans": {
+        "MerMan_BareHand_Idle_New": [
+          0,
+          119
+        ],
+        "MerMan_Barehanded_Attack2": [
+          40,
+          63
+        ],
+        "MerMan_Barehanded_Attack1 ": [
+          86,
+          107
+        ]
+      },
+      "hpOutcome": null,
+      "animatorDisabledFirstFrame": null
+    },
+    {
+      "action": "attack",
+      "rawCapture": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/e2dcf5b6ed344719ad97f6c1b33286de.json",
+        "sha256": "c23f5d8c84c3b33df024f468cb7477daf5bb18b028d134c163e89c720e7d896c",
+        "bytes": 5187776
+      },
+      "frames": 120,
+      "positiveWeightClipSpans": {
+        "MerMan_BareHand_Idle_New": [
+          0,
+          119
+        ],
+        "MerMan_BareHanded_HitSmall": [
+          27,
+          33
+        ],
+        "MerMan_Barehanded_Attack1 ": [
+          66,
+          87
+        ]
+      },
+      "hpOutcome": {
+        "status": "nonlethal_hp_loss",
+        "beforeHp": 58,
+        "afterHp": 48,
+        "nativeOutcome": null,
+        "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+      },
+      "animatorDisabledFirstFrame": null
+    },
+    {
+      "action": "kill-fixture",
+      "rawCapture": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/799388a7fbe841c7bf932a99464eac98.json",
+        "sha256": "6db814d34082f9e796bf88cb7a616602b9e3f50b6c758562df40d972d1e21b3d",
+        "bytes": 5221163
+      },
+      "frames": 120,
+      "positiveWeightClipSpans": {
+        "MerMan_BareHand_Idle_New": [
+          0,
+          24
+        ],
+        "MerMan_Barehanded_DeathDirect": [
+          25,
+          119
+        ]
+      },
+      "hpOutcome": null,
+      "animatorDisabledFirstFrame": 26
+    }
+  ],
+  "viewedImages": [
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/474fe7205dc04f6f96e34462832d5365/0000.png",
+      "sha256": "f59b720ad8dced39b6b0ffb45fa878f3d0d49e234166d1ebd055ca6e4614de71",
+      "index": 0,
+      "observed": "Idle: original sea-green/cream body and face readable; both HUD portraits contain face/crown."
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/474fe7205dc04f6f96e34462832d5365/0050.png",
+      "sha256": "8c92799081f4d2e02a37d8d6f7640b80ca10b2499bb62e86b67ec33f987a994b",
+      "index": 50,
+      "observed": "Attack2: raised flippers/shoulders and seated eyes visible; hero occludes lower torso/legs, bright FX behind."
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/474fe7205dc04f6f96e34462832d5365/0097.png",
+      "sha256": "0943e8803274b08ac8be6c98fddf21a0d896973741c6ce2bc1db53abad0421a8",
+      "index": 97,
+      "observed": "Attack1: strong FX and hero obscure nearly all model; no full-body acceptance from this frame."
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/474fe7205dc04f6f96e34462832d5365/0105.png",
+      "sha256": "c461f88700d0526d4e04561ba1a8b06201deb8f4718a67cfd660db4dd55f6381",
+      "index": 105,
+      "observed": "Late positive Attack1 span/recovery: face/belly/flippers/feet connected and readable, enemy back at distance."
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/e2dcf5b6ed344719ad97f6c1b33286de/0030.png",
+      "sha256": "a6ab6a69f966c7331f01fc2012bafd55d2aa4d54dfbbc2b01ed0ee78e69a6051",
+      "index": 30,
+      "observed": "Ordinary10damage58to48: HitSmall, visible head/shoulders/flippers attached; hero occludes lower body."
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/799388a7fbe841c7bf932a99464eac98/0060.png",
+      "sha256": "3930a61221bccad69686604713ab5bc30d38e73738f29798e8a2d19033b75964",
+      "index": 60,
+      "observed": "Visible collapsed original ragdoll; flippers/legs connected in viewed pose. No floor contact proof."
+    }
+  ],
+  "material": "Exact originalMainTex,emissionkeywordfalse/color0,ownedmesh/material/texture observed before exercise.",
+  "ragdoll": {
+    "animatorDisabledFirstFrame": 26,
+    "bodyCount": 11,
+    "allDynamicAt26": true,
+    "maxAdjacentPositionDeltaFrames60to119": 0.0,
+    "maxLinearSpeedFrames60to119": 0.0,
+    "limits": "Observed settling only, not IsSleeping or measured floor/collider fit."
+  },
+  "lootCollectCount": 1,
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "limitations": [
+    "NativeAttack1impact mostly occluded; selected visible poses only.",
+    "Explicit KillSingle48to0 fixture, not ordinary lethal attack.",
+    "No final native owner teardown or complete campaign.",
+    "No sibling fish controller/bind compatibility transferred."
+  ]
+}

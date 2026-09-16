@@ -1,0 +1,9 @@
+# CubeA two-slot calibration
+
+[Validation record](validation.json) preserves three complete 120-frame captures and their source hashes, videos, seven root-reviewed PNGs, action journals, deployment pins and the wrapper's original `needs_visual_review` status. Videos contain 120 frames at 12 fps; encoding pads odd dimensions without cropping. The original 72-vertex fixture manifest is unchanged. This is calibration geometry, not a finished creature.
+
+Both native material slots remained separately assigned and lease-owned in all recorded frames. Slot0's texture offset stayed zero; slot1 exactly matched the native scroller's private phase, including float32 per-frame recurrence. This establishes observed material identity and scrolling for this enemy; it does not establish final disposal or clone/grandclone independence.
+
+Root reviewed pass0/10/40/80, hit30 and death40/60. Distinct patterned jade and ivory/brown blocks and the portrait are readable in pass10. Hero occlusion hides the lower block in hit30; ordinary damage was8. Death uses explicit KillSingle. The blocks are not discernible in reviewed late death images although the renderer remains enabled; native green debris/ground effects remain.
+
+The [independent pose audit](cube-materials-death-pose-audit.json), reproduced by the archived [script](audit-cube-death-pose.py), applies original GLB weights and bindposes to captured bone matrices. Its world Y bounds move from8.544–10.043 at idle to5.548–6.626 at death30–119, below renderer origin8.268. This supports native downward death displacement rather than renderer hiding. Terrain height was not measured; this is analytical skin projection, not Unity BakeMesh or proof of burial. Death visibility and lifecycle acceptance remain pending. One native Collect reaches strict Ready0/2 as preserved in the raw case.

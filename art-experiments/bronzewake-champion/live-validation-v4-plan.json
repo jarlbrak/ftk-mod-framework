@@ -1,0 +1,92 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/bronzewake-champion/live-validation-v4",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-123d8d40d1034b3b84bfda5bf865db6f/case-result.json",
+  "visualReview": "scratch/model-route-11742c19aa67e6d0-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/bronzewake-champion/bronzewake_armor.glb",
+    "art-experiments/bronzewake-champion/bronzewake_basecolor.png",
+    "art-experiments/bronzewake-champion/bronzewake_body.glb",
+    "art-experiments/bronzewake-champion/bronzewake_boots.glb",
+    "art-experiments/bronzewake-champion/bronzewake_hair.glb"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/bronzewake-champion/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-11742c19aa67e6d0-directenemy-ragdollfix-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-4f1c564bb19e4e7e9624eb5a9c481aea/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "armorBossGladiator",
+        "mesh": "ftkmf_glb_bronzewake_armor.glb",
+        "boneSignature": "ea49e68f33a132d821b8f00fd60d358e4634b2360c05b9a4ccd776dbe59eab6f"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "armorBossGladiator",
+        "mesh": "ftkmf_glb_bronzewake_armor.glb",
+        "boneSignature": "ea49e68f33a132d821b8f00fd60d358e4634b2360c05b9a4ccd776dbe59eab6f"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "armorBossGladiator",
+        "mesh": "ftkmf_glb_bronzewake_armor.glb",
+        "boneSignature": "ea49e68f33a132d821b8f00fd60d358e4634b2360c05b9a4ccd776dbe59eab6f"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V4",
+    "displayName": "Bronzewake Champion",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "bossGladiator",
+    "nativeChassis": "bossGladiator",
+    "rendererPaths": [
+      "armorBossGladiator"
+    ],
+    "sourceRendererIds": [
+      121522
+    ],
+    "binding": {
+      "rendererPath": "armorBossGladiator",
+      "mesh": "ftkmf_glb_bronzewake_armor.glb",
+      "boneSignature": "ea49e68f33a132d821b8f00fd60d358e4634b2360c05b9a4ccd776dbe59eab6f"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native bossGladiator / armorBossGladiator / renderer 121522 source assignment only; no sibling topology or renderer source is credited by this record.",
+      "The ordinary no-focus hit reduced health from 11 to 1; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Twenty-one selected original PNGs were reviewed; the remaining 309 retained capture frames and generated videos are preserved evidence but were not individually reviewed.",
+      "The death capture retained 90 of 120 requested frames, then ended at a verified controller-unresolved boundary after the exact target had emitted a finalized native Death trigger; full-duration death and later controller state are not claimed.",
+      "Native helmet, shield, weapon, combat UI, effects, foreground hero, depth blur, and camera motion limit fine surface inspection; no sampled tearing, renderer loss, viewport-edge clipping, or multipart separation was observed.",
+      "Other proficiencies, DeathLight, portrait, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

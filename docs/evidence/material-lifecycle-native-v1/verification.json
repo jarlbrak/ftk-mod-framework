@@ -1,0 +1,67 @@
+{
+  "status": "owned_material_lifecycle_audit_pass",
+  "requestId": "d7f21ee0fd7a43d98a73c2be4ae6670e",
+  "session": "62ffa7254a5348b8b2107b86809aebbe",
+  "cases": [
+    {
+      "order": "descendants-first",
+      "frames": 22,
+      "owners": 4,
+      "distinctPrivateMaterialSets": 3,
+      "resources": 9,
+      "leaseId": 5,
+      "finalMeasuredLeaseAbsent": true,
+      "finalMeasuredResourcesUnityNull": true
+    },
+    {
+      "order": "source-first-grandclone-survives",
+      "frames": 22,
+      "owners": 4,
+      "distinctPrivateMaterialSets": 3,
+      "resources": 9,
+      "leaseId": 6,
+      "finalMeasuredLeaseAbsent": true,
+      "finalMeasuredResourcesUnityNull": true
+    }
+  ],
+  "rawPhaseChecks": 100,
+  "maximumPhaseError": 0.0,
+  "tolerance": 1e-05,
+  "runtimeAssertionBooleansUsedAsOracle": false,
+  "limits": "Owned original no-CEL hierarchy only; explicit owner setup is not public GLB binding. Raw Unity-null/lease absence are source-reviewed runtime measurements joined to independently reconstructed resource identities, not a second engine observation. Prefix rejection has only formatted runtime assertions and is not independently numerically verified. No never-active clone, failed Unity commit rollback, native avatar lifetime, gameplay, animation or art acceptance.",
+  "manifestSha256": "62a1a848ff5fda324fcdeedc0f5e47507ff5791199fb72523006cca8eae13db2",
+  "evidence": {
+    "request": {
+      "path": "request.json",
+      "sha256": "7e9b99516d5c8ca9299b8bb3f690da6f78d5150eed87ad74cbce58ed428ac060"
+    },
+    "result": {
+      "path": "result.json",
+      "sha256": "2fcd8f81015dae984bf04e600ff7b8eddcb45485f0a8f29b8587e6f4e6b3e8c4"
+    },
+    "before-ready": {
+      "path": "before-ready.json",
+      "sha256": "5f4172ff317c47c59bbc6dd0bdfa0fde3188abb089989a95c9665318cf4019a1"
+    },
+    "after-ready": {
+      "path": "after-ready.json",
+      "sha256": "2ca80db8a549f2f3136ce87d5a26583c1457aab4f62399e8ef3cd203f91f92ab"
+    },
+    "deployment": {
+      "path": "deployment.json",
+      "sha256": "a560ff047f830906eb5380c59ce8c21299b6c8219d577b5d16bd8c842bc1abed"
+    },
+    "helper-review": {
+      "path": "helper-review.json",
+      "sha256": "7765e8b01c16d072beea6f78a416579019e7f49e3e9aaff1396151f7cdd06895"
+    },
+    "fixture-source": {
+      "path": "MaterialLifecycleFixture.cs",
+      "sha256": "8a3d7b43ededf321a0f8be413b0bdaf5cac3687a72512d85a7221246095dfb3e"
+    },
+    "timing-source": {
+      "path": "MaterialLifecycleTiming.cs",
+      "sha256": "b6741a8a46ceaa220f87cdbfd83038d1fd7724b75f72a29babf7a750df6bc765"
+    }
+  }
+}

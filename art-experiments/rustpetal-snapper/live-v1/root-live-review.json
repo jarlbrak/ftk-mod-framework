@@ -1,0 +1,112 @@
+{
+  "session": "8edda11d19e84464ba67eff550e52fb5",
+  "caseResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-df3c8d1d286e461ea1dcab4b51b4c523/case-result.json",
+  "status": "SELECTED_ORIGINAL_BODY_REVIEWED_PORTRAIT_CROWN_LIMITED",
+  "reviewedFrames": {
+    "pass": [
+      0,
+      50,
+      103
+    ],
+    "attack": [
+      30
+    ],
+    "kill-fixture": [
+      60
+    ]
+  },
+  "observations": [
+    "Idle0 broad mouth/crown/stalk connected; crown overlaps HUD near healthpanel.",
+    "Both portraits show mouth; tall crown tips are cropped, fullhead portrait acceptance limited.",
+    "Pass50 native light/roll icons obscure portions of body and mouth.",
+    "Hit30 normal -8 HP58\u219250; outer mouth tissue stays attached; hero obscures lower stalk.",
+    "Death60 connected collapsed body visible; numerical floor contact unproved.",
+    "Pass103 during positive attack1: upright angled mouth/crown remain connected, strong nativeFX masks lower stalk and roll icons overlap head."
+  ],
+  "limits": [
+    "ExactD only, noGinheritance",
+    "Selectedposes only; nativeFX/HUD/heroocclusion",
+    "Portrait crown framing limited",
+    "ExplicitKillSingle50\u21920, noordinarylethal/finalteardown proof"
+  ],
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "collectCount": 1,
+  "captures": [
+    {
+      "action": "pass",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/a2fdfd8453cd4ed5b4bc4ea517d3a76e.json",
+        "sha256": "57e36620b73c6070bad6a7d6fba046f341ea321b6b3b0852242e09f0ade00621",
+        "bytes": 5207138
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "attackProf1": [
+          47,
+          72
+        ],
+        "attack1": [
+          99,
+          108
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    },
+    {
+      "action": "attack",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/9d9f62cfc4404844905348b6947bb0c1.json",
+        "sha256": "8e7c749b63dd55518f32d9dc1fb7d31c24c04f9a82684e9a0d4db6a356481bd5",
+        "bytes": 5202862
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "hit1": [
+          27,
+          31
+        ],
+        "attack3": [
+          70,
+          79
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    },
+    {
+      "action": "kill-fixture",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/0e200771af104925884b55894c87047b.json",
+        "sha256": "0520f282052c9c39f9227c83e380e7d64195450a9cbeefb2a4a4a83e3c3cdfc2",
+        "bytes": 5213776
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          27
+        ],
+        "death": [
+          28,
+          119
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "status": "ATTEMPTED_HIT_DODGED_THEN_FLEE_CONSISTENT_REMOVAL",
+  "nativeEnemy": "scourgeG",
+  "rendererId": 121222,
+  "controllerId": 5934,
+  "session": "86eb82f91dc44277b2d3ae675b216e76",
+  "rawCapture": {
+    "path": "scratch/mirewarden-game/model-test-output/8fd5813208864d7385026500a46296c9.json",
+    "sha256": "03ed70d802c871f02afe7f52f7da4aa9ee8efbcd2e4b57a1780f1fc4d3977187"
+  },
+  "archivedRaw": {
+    "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/dodge-flee.json.gz",
+    "sha256": "8c4659319389c92e7943119cda544b11c533bb6d84cb2330f02e6636c7798e74"
+  },
+  "frames": 120,
+  "video": {
+    "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/dodge-flee.mp4",
+    "sha256": "032819057efd73cee540d6efd96436fef3257315d741237ec022b23633a79869"
+  },
+  "videoMetadata": {
+    "width": 1280,
+    "height": 832,
+    "r_frame_rate": "12/1",
+    "nb_read_frames": "120"
+  },
+  "pins": {
+    "deployed-binaries": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "session": "86eb82f91dc44277b2d3ae675b216e76",
+      "binaries": {
+        "framework": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+          "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+          "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+          "bytes": 1974272
+        },
+        "helper": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1",
+          "bytes": 304640
+        }
+      },
+      "measurement": "on_disk_binary_sha256",
+      "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+    },
+    "profile-assets": {
+      "probe_121222.glb": "d73e567db65806f1f0442740d8f506d7e1de39c543b841092e0113e113f38706",
+      "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+    },
+    "provenance": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "port": 8788,
+      "session": "86eb82f91dc44277b2d3ae675b216e76",
+      "case": "c7e9a3d101ed41dba27c2b4b7c3833a2",
+      "mode": "record-action",
+      "enemy": "ftkmf_modeltest_probe_scourgeg",
+      "class": null,
+      "profile": {
+        "key": "ftkmf_modeltest_probe_scourgeg",
+        "baseEnemy": "scourgeG",
+        "displayName": "Rig probe: scourgeG",
+        "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+        "renderers": [
+          {
+            "rendererPath": "enScourgeLeprechaun",
+            "glbFile": "probe_121222.glb",
+            "textureFile": "probe_palette.png"
+          }
+        ],
+        "minimumBaseHealth": 64
+      },
+      "profileInputSha256": "65227877f96d5faafe658be3316848e4d4d6f1d3b273e1593123a19f3dc705e8",
+      "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+    }
+  },
+  "rawResult": {
+    "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/result.json",
+    "sha256": "b327cbde558eb3d731fdee8e7ddd5c079edfe05a9e580d79f3efa7fab6a6510e"
+  },
+  "observedClipRanges": {
+    "cidle_impUnarmed": [
+      0,
+      114
+    ],
+    "dodge_imp": [
+      21,
+      33
+    ],
+    "attackProf_leprechaun": [
+      71,
+      88
+    ]
+  },
+  "visualReview": {
+    "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/root-visual-review.json",
+    "sha256": "4d88fd5970a9933c3a4f43807466d29ae8cb32a73d1accd83a4fd13641180342"
+  },
+  "readiness": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "queuedRoom": {
+    "level": 0,
+    "room": 2,
+    "activeDungeonEncounterType": "Enemy",
+    "nextLevelGenerated": true,
+    "isAtLastLevel": false,
+    "isDungeonCleared": false,
+    "definitionLevelCount": 2,
+    "definitionRoomCount": 5,
+    "generatedRoomCount": 6,
+    "queuedSlotValid": true,
+    "withinDefinitionRoomBounds": true,
+    "queuedRoomType": "Enemy",
+    "queuedContext": -1,
+    "queuedObjects": [
+      "cubeA",
+      "1080276148"
+    ],
+    "slotAllowsEnemySubstitution": true,
+    "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+  },
+  "evidence": [
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/after-fixture.json",
+      "sha256": "a23ba0668ab25b76ff7f1c97b83101d2b24527d0010c1e2242787544ca39d841"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/capture-summary.json",
+      "sha256": "2d8295b1c0eca725245855bf2951e96883fd54721c4108924c66954144e395cc"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/dodge-flee-0030.png",
+      "sha256": "3797d2e70845221e29b7933e9c1811d69f6a3d7ef8378e39b4432b77c826b473"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/dodge-flee-0119.png",
+      "sha256": "05e7f7977713298a66ed3881ca65eb3777749dd585cbae8eee089662469c98ec"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/dodge-flee.json.gz",
+      "sha256": "8c4659319389c92e7943119cda544b11c533bb6d84cb2330f02e6636c7798e74"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/dodge-flee.mp4",
+      "sha256": "032819057efd73cee540d6efd96436fef3257315d741237ec022b23633a79869"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/journal.jsonl",
+      "sha256": "9887300dec9b12a4ebeb393374e18d6543623506904d2dedeed1cb410be57687"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/result.json",
+      "sha256": "b327cbde558eb3d731fdee8e7ddd5c079edfe05a9e580d79f3efa7fab6a6510e"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/root-visual-review.json",
+      "sha256": "4d88fd5970a9933c3a4f43807466d29ae8cb32a73d1accd83a4fd13641180342"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-dodge-flee-v1/source-image-pins.json",
+      "sha256": "4c48c422fef2d1b007bde5d943bfbe2bf9f3a9d4cec6648961c96ae69be39fee"
+    }
+  ],
+  "limits": [
+    "No successful hit or death demonstrated.",
+    "Flee flags not captured; later removal remains theft/flee-consistent.",
+    "Distinct fresh hit-first attempt; not merged with earlier pass or death-first case.",
+    "No original Thistlewick body or global native Fergus progression acceptance."
+  ]
+}

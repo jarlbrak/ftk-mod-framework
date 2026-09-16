@@ -1,0 +1,94 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/tideglass-crab/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-c7cb9dcb46ac4a98bccab0fd69154cdf/case-result.json",
+  "visualReview": "scratch/model-route-791b63f3064c2f62-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/tideglass-crab/tideglass.glb",
+    "art-experiments/tideglass-crab/tideglass_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/tideglass-crab/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-791b63f3064c2f62-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-fbf1efbc555e4c999ed5283be3746f9a/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-fbf1efbc555e4c999ed5283be3746f9a/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enCrabWizard",
+        "mesh": "ftkmf_glb_tideglass.glb",
+        "boneSignature": "e51916d0e0a577fa1442bdcf75dff8a51102a2eaf3d2edc36c11ddaf8c441e96"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enCrabWizard",
+        "mesh": "ftkmf_glb_tideglass.glb",
+        "boneSignature": "e51916d0e0a577fa1442bdcf75dff8a51102a2eaf3d2edc36c11ddaf8c441e96"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enCrabWizard",
+        "mesh": "ftkmf_glb_tideglass.glb",
+        "boneSignature": "e51916d0e0a577fa1442bdcf75dff8a51102a2eaf3d2edc36c11ddaf8c441e96"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Tideglass Crab",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "crabB",
+    "nativeChassis": "crabB",
+    "rendererPaths": [
+      "enCrabWizard"
+    ],
+    "sourceRendererIds": [
+      121411
+    ],
+    "binding": {
+      "rendererPath": "enCrabWizard",
+      "mesh": "ftkmf_glb_tideglass.glb",
+      "boneSignature": "e51916d0e0a577fa1442bdcf75dff8a51102a2eaf3d2edc36c11ddaf8c441e96"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native crabB / enCrabWizard / renderer 121411 source assignment only; no sibling route or topology receives credit.",
+      "The ordinary no-focus hit reduced the same target from 58 HP to 56 HP; death used the separate explicit KillSingle fixture at 56 HP and is not ordinary lethal-damage evidence.",
+      "Twenty-one selected original PNGs were reviewed; the remaining 339 retained capture frames and generated videos are preserved evidence but were not individually reviewed.",
+      "The fixture death completed all 120 requested frames through Crab_DeathDirect with m_DoRagdoll=false; this is animated death evidence, not ragdoll proof, and no corpse lifetime beyond the sampled window is claimed.",
+      "The exact renderer stayed active, enabled and visible in all 360 retained frames; native hat, combat UI, effects, foreground hero, loot overlay, depth blur and camera motion still limit fine inspection.",
+      "One native Collect reached strict Ready at level 0 room 2; broader campaign progression was not exercised.",
+      "Other proficiencies, Crab_DeathInDirect, portraits, collision, extended culling, long-session resource lifetime and final art-direction approval remain outside this archive."
+    ]
+  }
+}

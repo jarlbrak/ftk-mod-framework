@@ -1,0 +1,74 @@
+{
+  "schema": "ftkmf.original-multislot-calibration.v1",
+  "name": "CubeA material-layer calibration",
+  "status": "ORIGINAL_DIAGNOSTIC_OFFLINE_ONLY",
+  "geometryProvenance": "Two Blender primitive cubes, authored side lengths0.35/0.65 and Unity-space centers(0,.45,0)/(0,1.25,0); final source coordinates independently compared to these16 analytic corners. No native positions/triangles/textures copied.",
+  "geometryCheck": "PASS all72 flat vertices match original analytic cube corners;12 triangles per primitive",
+  "scope": "Tests genuine two-submesh routing, stationary checker slot0 and scrolling stripe slot1. Not a finished creature, nested anatomy, full3-bone deformation or live acceptance.",
+  "palette": [
+    "Root_M",
+    "jellyCubeMid",
+    "jellyCubeTop"
+  ],
+  "weightedBones": [
+    "jellyCubeMid",
+    "jellyCubeTop"
+  ],
+  "retainedUnweightedBones": [
+    "Root_M"
+  ],
+  "nativeRenderer": 121012,
+  "reference": "ignored scratch/cube-topology-analysis/reference-121012/reference.npz",
+  "referenceSha256": "b79182a1e22f6424fd3de3b8c388c3733936fc40b84d717830f9698256e79529",
+  "sourceResourcesSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "nativeScale": 1.100000023841858,
+  "visualScaleFactor": 1.0,
+  "nativeScrolling": {
+    "materialIndex": 1,
+    "uvAnimationRate": [
+      0,
+      0.20000000298023224
+    ],
+    "textureName": "_MainTex"
+  },
+  "materialPolicy": "Both slots preserve native emission/tint; native material0matBone1089,material1matJellyCubeA157. This calibration tests fidelity of native behavior; no original color-fidelity claim.",
+  "generators": {
+    "tools/ai-model-pipeline/multi-primitive-tests/create_cube_layer_fixture.py": "bf2998e92d9d78b98017d28a4e9a5b61b7b6c49a94470fc3f3455c3346829a71",
+    "tools/ai-model-pipeline/multi-primitive-tests/make_fixture_textures.py": "ca1cd2751fab881bd35cc00316a9be176b431bd48508173c96ef3fd264403ecf"
+  },
+  "assets": {
+    "cubea_material_layers_v1.blend": {
+      "sha256": "0ce8a80058fc2b796086c92143d4962a0931e2d943bf4fc5740ac85f129097a2",
+      "bytes": 97483
+    },
+    "cubea_material_layers_v1.validation.json": {
+      "sha256": "d26566ed2e793352803e7a48ec0b02684c0d096bf8b8a5a951c1af93e005a93d",
+      "bytes": 1225
+    },
+    "cubea_material_layers_v1.glb": {
+      "sha256": "070ebc92511bd6fb5f70bf0012f1f963aa5ed24dbfa438ddf12c906c398721a8",
+      "bytes": 6208
+    },
+    "cubea_material_layers_v1.source.json": {
+      "sha256": "87c2b13365cae38710993ccc550a617c872d6e920b1f6c09fd66f55ad7d882c3",
+      "bytes": 8902
+    },
+    "runtime-profile.json": {
+      "sha256": "57b7c5d0bf70ccd18609c3be836e7ed2279744d5543bebe3447a3bea2637ffde",
+      "bytes": 950
+    },
+    "cubea_material_layers_v1.slot0.png": {
+      "sha256": "cd79c9bda05c4dd70aa9de00c2e9b94d0bd2377c88f52162581b051d40e774a5",
+      "bytes": 415
+    },
+    "cubea_material_layers_v1.slot1.png": {
+      "sha256": "5dfc75ab538102bd168c9209c7a892a8fcdf9b28e2d949add7d414c3969f8021",
+      "bytes": 434
+    }
+  },
+  "remaining": [
+    "Owned live submesh/material/phase identity observation",
+    "Native disabled-renderer accumulation and source/clone/grandclone lifetime",
+    "Original authored creature and full blend-zone motion"
+  ]
+}

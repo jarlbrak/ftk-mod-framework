@@ -1,0 +1,42 @@
+{
+  "name": "Sablevine Serpent",
+  "status": "PASS_ORIGINAL_BIND_AUTHORED",
+  "artScope": "Original moss-and-ember serpent geometry and palette; offline binary/bind validation only.",
+  "authoringNativeSurfaceRead": false,
+  "validationReadsNativeReference": true,
+  "allowedReferenceFields": [
+    "bone_names",
+    "bindposes"
+  ],
+  "target": {
+    "resourcePrefab": "enbaseysnake",
+    "nativeEnemy": "snakeJungleA",
+    "rendererPath": "enSnake_Basey",
+    "sourceRendererId": 121488,
+    "controller": "snakeController",
+    "controllerId": 6002,
+    "joints": 44
+  },
+  "reference": {
+    "path": "scratch/basey-snake-reference-v1/reference.npz",
+    "sha256": "9e93be468775eadc2122ab3e80352b6c85ba9646964462f9204ca74eaaf35071"
+  },
+  "assets": {
+    "sablevine": {
+      "glbSha256": "4c030febb8adc4005a8802d25122446a8b825dd06b48e64eed674794e5a6b330",
+      "vertices": 7884,
+      "triangles": 2628,
+      "paletteBones": 44,
+      "allPaletteBonesWeighted": true,
+      "maxBindRestError": 5.2524413263199676e-08
+    },
+    "palette": {
+      "sha256": "8dc990355d08e085e32cbfc65d190aa5449bcbc899e75ae928bbbf1baf0edfbb",
+      "bytes": 12020
+    }
+  },
+  "limits": [
+    "Offline bind validation does not establish resource selection, runtime binding, animation, materials, culling, portraits or gameplay.",
+    "Direct snakeJungleA/C and other resource-prefab evidence cannot establish this distinct enbaseysnake source pair."
+  ]
+}

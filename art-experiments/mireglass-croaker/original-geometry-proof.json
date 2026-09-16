@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "scope": "Deterministic original-geometry rerun; it establishes byte-identical authored outputs, not studio or live acceptance.",
+  "method": "The authoring phase reads only ordered bone_names and inverse bind matrices; independent export validation separately reads the local reference without feeding it into geometry generation.",
+  "reference": {
+    "path": "scratch/acidblob-b-reference-v1/reference.npz",
+    "sha256": "150613e163b727840722fcc4475dc3aea2fbe2f37501e2f949977281ff96df26"
+  },
+  "generatorSha256": "6df9301558d9fcbc2cb35f941425b6efc150b76d0106f1cabc46a469e4460dfc",
+  "files": [
+    {
+      "file": "mireglass.glb",
+      "sha256": "821d317864ea8d6c68ee2d48bbc402a28c54082abbec982c5f8da5671f281565",
+      "reproduced_identical": true
+    },
+    {
+      "file": "mireglass-palette.png",
+      "sha256": "9f4831a5241192064dc4dc68371743d0e392d723c10870d06c2f025ca41b71d4",
+      "reproduced_identical": true
+    },
+    {
+      "file": "mireglass.source.json",
+      "sha256": "f0caca5a2118e8398f6abe2f53fd7001addcffb185e375442e762e4a3c8a1f6b",
+      "reproduced_identical": true
+    },
+    {
+      "file": "mireglass.pieces.json",
+      "sha256": "866e1a766e876e870af6cc2499d347e387039a89db9f60569854806c956e26a4",
+      "reproduced_identical": true
+    }
+  ]
+}

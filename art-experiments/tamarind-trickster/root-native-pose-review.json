@@ -1,0 +1,44 @@
+{
+  "status": "selected_offline_native_pose_fit_accepted_for_live_trial",
+  "geometrySha256": "be02036b2bd96d2c10905ed808197aab1205ba636cb0a6931693886ca595c0a7",
+  "sourceSha256": "daed05fa41a8236cba661d0655f4f81acd6b6ae6782ed8803ff679e4a675fb9f",
+  "actuallyViewed": [
+    {
+      "file": "hero.png",
+      "sha256": "ba48bdbde0d936e575dc8ecc4aa94e6fdc59ace47deed8208950ade9fbd31b54"
+    },
+    {
+      "file": "side.png",
+      "sha256": "4307b27e220108d8b1ec74d46f4e6cf2ec6e46585fc6a7d54e9e3dad5a8af9dc"
+    },
+    {
+      "file": "native-arrival-pose-study.png",
+      "sha256": "7b64440860300322c5b4abb3ae4f111a0a753987e2802caed6c164ca826e2efd"
+    },
+    {
+      "file": "native-arrival-side-pose-study.png",
+      "sha256": "2e4300b4d54a65f0763144b188e12b70db0fadd77026836c33e60166a7a808e4"
+    },
+    {
+      "file": "native-shoulder-worst-pose-study.png",
+      "sha256": "c8b3f2b04a7959a684a921f795b6e1f98d049af9531e21b5bc21199e150a7905"
+    }
+  ],
+  "findings": [
+    "Brown and cream monkey silhouette, seated eyes, articulated muzzle and hands remain legible in studio bind and selected native poses.",
+    "Raised and straightened shoulder connection removes the low pointed flap visible in the earlier pose study. Chest/scapula/shoulder weights are blended; original42bone palette and35positive bone set retained.",
+    "All120captured transforms evaluated numerically. Maximum edge stretch remains2.999987 at frame90, right shoulder, rest0.091528 to posed0.274584. This is retained as deformation evidence, not a universal passing threshold.",
+    "Tail curls during taunt and extends during attack in selected side views; pronounced lower jaw remains stylistic and needs live review.",
+    "Native body inactive108\u2013119; frame119 on study sheets is analytical only. Native weapon and FX are omitted from offline sheets."
+  ],
+  "limits": [
+    "Selected views only; no fullangle backface culling acceptance.",
+    "No original live body, portrait, material emission, weapon collision or final owner disposal acceptance.",
+    "Diagnostic capture timing is perturbed;120samples cover64.234680wall seconds and6.283203game seconds.",
+    "Current exact monkeyC first action self-removes. No ordinary hero hit or full visible death recording; no sibling-controller inheritance."
+  ],
+  "history": [
+    "offline-history/before-arrival-shoulder-fit",
+    "offline-history/arrival-shoulder-weights-only"
+  ]
+}

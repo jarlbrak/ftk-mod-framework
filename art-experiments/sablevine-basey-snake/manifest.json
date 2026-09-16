@@ -1,0 +1,49 @@
+{
+  "name": "Sablevine Serpent",
+  "status": "ORIGINAL_ART_LIVE_INTEGRATION_REVIEWED_CAMERA_FIT_ACCEPTED_LIMITED_ART_PENDING",
+  "nativeSurfaceCopied": false,
+  "target": {
+    "resourcePrefab": "enbaseysnake",
+    "nativeEnemy": "snakeJungleA",
+    "rendererPath": "enSnake_Basey",
+    "sourceRendererId": 121488,
+    "controller": "snakeController",
+    "controllerId": 6002,
+    "joints": 44
+  },
+  "originalAssets": {
+    "sablevine.glb": "4c030febb8adc4005a8802d25122446a8b825dd06b48e64eed674794e5a6b330",
+    "sablevine-palette.png": "8dc990355d08e085e32cbfc65d190aa5449bcbc899e75ae928bbbf1baf0edfbb",
+    "sablevine.source.json": "257fc3622900be5ea3251bbe175908f146d5cde27ca24dbad25b7db48bbdf644",
+    "sablevine.pieces.json": "7f1f04a1f050463a766acda121f61710fa8b0dc32cf00a885c0358d7f5c9acb0"
+  },
+  "buildReportSha256": "990980b13c72ee8d1fddba3a816a8e5b94f0f807c6a2af4f64f895a00f806fe7",
+  "limits": [
+    "V1 remains an immutable camera-fit rejection for the exact enbaseysnake / snakeJungleA / enSnake_Basey route; the V2 result does not rewrite that archive.",
+    "V2 changes only the fresh public visualScale profile factor to 0.55 and reuses the same original GLB and palette bytes. It accepts limited normal combat-camera fit together with its recorded binding, motion, ordinary nonlethal hit, fixture death, and Ready sequence.",
+    "The limited V2 result does not accept portraits, culling envelope, collision, long-session resource lifetime, every native ability variant, ordinary lethal damage, ragdoll behavior, or final art direction.",
+    "Direct snakeJungleA/C and other resource-prefab evidence cannot establish this distinct enbaseysnake source pair."
+  ],
+  "liveRevisions": [
+    {
+      "name": "V1",
+      "status": "reviewed_scoped_technical_motion_camera_fit_rejected",
+      "profile": "runtime-profile.json",
+      "validation": "live-validation-v1/validation.json",
+      "validationSha256": "4ee012c8047b1bb54e790a6f64f18c269e564d2d26322ecfb027f63a8c90cee8",
+      "result": "The same authored asset was technically bound and animated, but its upper silhouette was cropped by normal combat framing."
+    },
+    {
+      "name": "V2-scale055",
+      "status": "reviewed_scoped_technical_motion_camera_fit_accepted_limited_art_pending",
+      "profile": "runtime-profile-scale055.json",
+      "profileSha256": "96d14347c12b82c820339925205e8feb874cb499625d7ccdd6cad6aba51e1afb",
+      "revision": "profile-revision-scale055.json",
+      "routePreflight": "route-preflight-scale055.json",
+      "validation": "live-validation-v2-scale055/validation.json",
+      "visualScale": 0.55,
+      "result": "A fresh isolated trial proved the native profile factor, spawned CEL scale, binding, motion, ordinary nonlethal hit, fixture death, Ready recovery, and normal combat camera fit with identical original asset bytes.",
+      "validationSha256": "022411dc357e0b2e82dba0db4b5eeb6891cc05e03b195d439a28bb76613c4da5"
+    }
+  ]
+}

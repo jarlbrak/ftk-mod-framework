@@ -1,0 +1,25 @@
+{
+  "status": "bounded_live_trial_design_reviewed_not_frozen",
+  "reviewer": "ftk_architect",
+  "runtimeGlbSha256": "b03bc6738f652447ba9579cd1d3cdfcdc655eee20d5fd61c7f43461dbaeb0d36",
+  "offlineChecks": "Independent strict GLB validation and all 331 finite recorded-pose calculations verified; selected studio and pass images inspected.",
+  "trialHypothesis": {
+    "visualScale": 0.25,
+    "reason": "Authored bind wing width22.374 would become5.594 world units. This is a hypothesis, not evidence of camera fit.",
+    "disableNativeEmission": true,
+    "preserve": [
+      "GLB bind pose",
+      "native controller",
+      "native stats",
+      "native frost weapon effects"
+    ]
+  },
+  "remaining": [
+    "Freeze original source, GLB, PNG and explicit material/profile decision before deployment.",
+    "Inspect actual all-wingtip/horn/tail and hero visibility through idle, attack, hit and death.",
+    "Inspect both portraits separately; uniform scale may preserve marker-relative crop.",
+    "Wing culling and flat ivory lower jaw remain visual review concerns.",
+    "Native-scale natural-arena trial is separate from reduced-scale dungeon fixture."
+  ],
+  "noGameActions": true
+}

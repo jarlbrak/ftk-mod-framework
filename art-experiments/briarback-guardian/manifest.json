@@ -1,0 +1,128 @@
+{
+  "name": "Briarback Guardian",
+  "native_chassis": "yetiBoss",
+  "resource_prefab": "enyeti",
+  "reference_renderer": 120991,
+  "renderer_path": "Yeti",
+  "native_surface_copied": false,
+  "art_status": "Original multipart surface model; manual studio and live acceptance pending after regeneration",
+  "native_forward": "+UnityZ; native toe chain and weighted head forward envelope checked before authoring",
+  "rig_boundary": "Resource-only old Yeti120991, not modern enYeti121381. Full37-joint palette retained, unusedHair_M unweighted. Original local spine and limb blends.",
+  "remaining": [
+    "Studio review",
+    "Exact resource override live assignment",
+    "Native attacks/hit/ragdoll/material/culling/cleanup"
+  ],
+  "parts": [
+    {
+      "name": "briarback",
+      "vertices": 10380,
+      "triangles": 3460,
+      "palette_joints": 37,
+      "max_bind_rest_error": 5.6843266982298246e-08,
+      "blender_reopen_max_bind_rest_error": 5.6843266982298246e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -2.1256632804870605,
+        0.007247820496559143,
+        -0.31975576281547546
+      ],
+      "bind_bounds_max": [
+        2.1256632804870605,
+        3.3073999881744385,
+        0.7110000252723694
+      ],
+      "blender_roundtrip_glb_sha256": "69126e081bb16c7f2ab75f7b5bdaf6cea8287cf3e73cbcdfbd5eccec307484f9"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 120991,
+      "local_reference_path": "scratch/skeleton-audit/120991/reference.npz",
+      "sha256": "b522218db4cdebcdeb234da23a0f60d83fa252819ee36ad36d56655151d13208"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "60bda08f94c35a0c475a2902428c6e08a4e47957aa8a85afb64568d4d917b1b5",
+      "bytes": 3497
+    },
+    "briarback-studio.blend": {
+      "sha256": "9f64e67e893d744210064b25ef77a3c1f40314181291479d3f4361e9aca86586",
+      "bytes": 273497
+    },
+    "briarback.blend": {
+      "sha256": "324377864063de29e01e6e65312659178aa751e370095c71f564b638890a7070",
+      "bytes": 272699
+    },
+    "briarback.glb": {
+      "sha256": "5d13253a33264433a0c4e75a609696b4601a83fd931caff7f82d6d159f21d0ca",
+      "bytes": 606828
+    },
+    "briarback.pieces.json": {
+      "sha256": "cbc5c04c2d1b378b3ab23a01514f46bd5d06617ed5752794d2ab3bbe49d17f8d",
+      "bytes": 4186
+    },
+    "briarback.source.json": {
+      "sha256": "0804836a2891ecb4035c40396f41258982bba47dc4a1f3a6abd91ed06fd4db7f",
+      "bytes": 1632578
+    },
+    "briarback.validation.json": {
+      "sha256": "07dc1d167ba4454e25be7596ae8ae21bf3e5e308ae1a8f385c2cb29098da2f27",
+      "bytes": 796
+    },
+    "briarback_basecolor.png": {
+      "sha256": "f9a92bb2f716be581d099f4176149532cbea4a6024db840f4c756ae3cc28736b",
+      "bytes": 266
+    },
+    "build_blender.py": {
+      "sha256": "d864da5ada43404e08d2bc6fcaa92d141f15033a6843f4501c75353eb06ef02a",
+      "bytes": 5338
+    },
+    "build_geometry.py": {
+      "sha256": "f3ac9c559d3132ca756c462972a342a4455105587f59661986c1287d0ab3acbc",
+      "bytes": 8412
+    },
+    "finalize_manifest.py": {
+      "sha256": "1da0b3874b5d2731f5f74a55df8e2a56013bb9e56500c8a971a6a493f98c105e",
+      "bytes": 2413
+    },
+    "hero.png": {
+      "sha256": "dd18d62cd2c476ba2ef3f11cd24240b8b670dd0ae4b70ae19dc668911b74b05b",
+      "bytes": 1076050
+    },
+    "inspect_materials.py": {
+      "sha256": "513d18811e564366dc4588b33547dd0e9f02f7fa93a90bd6fe68dad8d93b1440",
+      "bytes": 1214
+    },
+    "native-material-metadata.json": {
+      "sha256": "bc4bd12fb03e293100b94dd1804c23cb494935e4e639dd5177f414136bc1e315",
+      "bytes": 2091
+    },
+    "runtime-profile.json": {
+      "sha256": "d4758b140b37965ea69b269b3215c78e122b52b603e5b6bc9ebe0c817588f37c",
+      "bytes": 538
+    },
+    "side.png": {
+      "sha256": "7eb4c94928880d45f07722a1ebe5d8c550bbee84fd3e43645f1808bce9cae2e1",
+      "bytes": 1047714
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/briarback-guardian/live-validation-v1.json",
+    "sha256": "8b7738d7443524c4059dffa05594c8b1c21aee638d7b41709afb35beb69fe9ae"
+  },
+  "live_v2": {
+    "path": "art-experiments/briarback-guardian/live-validation-v2.json",
+    "sha256": "386521ad8b77e137015cfb551a664715d3b412392b6dfaf508aa8ea9c0e2ebbc"
+  }
+}

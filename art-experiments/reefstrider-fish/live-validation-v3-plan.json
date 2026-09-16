@@ -1,0 +1,89 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/reefstrider-fish/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-88a5785bda30445bbf2f6b405adea034/case-result.json",
+  "visualReview": "scratch/model-route-5990c51ca004ebdb-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/reefstrider-fish/reefstrider.glb",
+    "art-experiments/reefstrider-fish/reefstrider_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/reefstrider-fish/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-5990c51ca004ebdb-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-c04bd1243f9d4d788ec8e824206657af/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enFishA",
+        "mesh": "ftkmf_glb_reefstrider.glb",
+        "boneSignature": "4670c40a093faef41fab67e69e846f992d7686b45f667a5a7a4ce42f050d8479"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enFishA",
+        "mesh": "ftkmf_glb_reefstrider.glb",
+        "boneSignature": "4670c40a093faef41fab67e69e846f992d7686b45f667a5a7a4ce42f050d8479"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enFishA",
+        "mesh": "ftkmf_glb_reefstrider.glb",
+        "boneSignature": "4670c40a093faef41fab67e69e846f992d7686b45f667a5a7a4ce42f050d8479"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Reefstrider",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "fishA01",
+    "nativeChassis": "fishA01",
+    "rendererPaths": [
+      "enFishA"
+    ],
+    "sourceRendererIds": [
+      121695
+    ],
+    "binding": {
+      "rendererPath": "enFishA",
+      "mesh": "ftkmf_glb_reefstrider.glb",
+      "boneSignature": "4670c40a093faef41fab67e69e846f992d7686b45f667a5a7a4ce42f050d8479"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native fishA01 / enFishA / renderer 121695 source assignment only; no fishA02, fishA03, sibling chassis, material route, or topology receives credit from this record.",
+      "The ordinary no-focus hit reduced health from 58 to 48; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Eighteen selected original PNGs were reviewed; the remaining 342 captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "The fixture drives the native Death animation through a connected launch and coherent ragdoll collapse, with the custom corpse still sampled behind the loot overlay; it does not establish ordinary lethal behavior or corpse lifetime after the sampled interval.",
+      "The causal Damaged and Death impact frames are strongly occluded by the foreground hero and bright effects; recovery and collapse remain readable, and no sampled separation, tearing, missing surface, floor clipping, or viewport clipping was observed.",
+      "Indirect death, other native attack variants, portrait, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "status": "SOURCE_REVIEWED_OFFLINE_CANDIDATE",
+  "coreSha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+  "contentSha256": "aba52487088a1cd05e960eb0a29b56273a231bfc5442afb0506586817a9b3265",
+  "sourceReview": "Architect reviewed API/loader/atomic ownership/scroll phase/grandclone provenance and shared content parser; runtime gates remain.",
+  "checks": {
+    "coreBuild": "PASS zero warnings/errors",
+    "contentBuild": "PASS zero warnings/errors; separate output, frozen329 standard output unchanged",
+    "transactionAndLeaseAssertions": 67,
+    "actualLoaderAssertions": 15,
+    "pythonFormatTests": 2,
+    "sharedSlotParserAssertions": 26,
+    "sharedSlotParserWith395LegacyCatalog": 447,
+    "originalBlenderFixture": "PASS72 vertices24triangles3 palette bones2 primitives; saved and reopened",
+    "portableOriginalProvenance": "PASS16 analytic corners,source/GLB arrays and fixture hashes",
+    "legacyBasilightWriterByteIdentical": "6efeaeff8c015cee0d80cfbdc06891186f5a574189b9c7a643fc5f6717be96d9",
+    "legacyBasilightReopenedByteIdentical": "736ec363aece02e9dbdb1101e4582f48955ca78fafe5f9fe2040ebe062d35ad7"
+  },
+  "contract": {
+    "primitives": "2..4 nonempty uint16 triangle sets, shared attributes/full exact skin",
+    "mapping": "Explicit primitive/native slot bijections; full native material-slot count",
+    "materialOwnership": "Per-slot private clones/textures in atomic lease; clone/grandclone private sets update serialized provenance; no unknown adoption",
+    "scrolling": "Exact successful owned ScrollingUVs only, existing private uvOffset/rate/index/property, native Time.deltaTime and disabled-renderer accumulation; no materials getter instancing on supported seam",
+    "legacy": "Existing constructors/default writer/bridge unchanged"
+  },
+  "fixtureManifestSha256": "0b992c52b53e47ecf5e302aa4ca27df74c5c49040db961c4ac32f427740bd480",
+  "sourceFiles": {
+    "FTKModFramework/Core/EnemyRendererMesh.cs": "6b699408134cf34be2511a7d00fa336212cead86a3960534b947bcc0b810ddd8",
+    "FTKModFramework/Core/RuntimeGltfMeshLoader.cs": "fbc4993749bba820f0a3d16a2b434fd99db075602103c933ae917e23f7df8759",
+    "FTKModFramework/Core/ExplicitEnemyMeshSwap.cs": "6bb86eed625300e12f374e5d6b1fb5dfe0a832190c5f9647d00e54184aa5165e",
+    "FTKModFramework/Core/ExplicitScrollingUvs.cs": "c40320ed672fc92bbdb1fea02dd4f7f428ea30a4017cf6de1006e8c10baa7587",
+    "tools/ai-model-pipeline/export_ftk_glb.py": "18aac26178b1d3688504d49243447a561245b08ed13e92250df46921fe16db59",
+    "tools/ai-model-pipeline/validate_glb.py": "30229a920a8170c47e8bfd78b3168cc8a6f6f07ab5ee2efb3d4fd038d43a0563",
+    "tools/ai-model-pipeline/export_blender_model.py": "68a99dd5d6c7307111d8e467951b6c45e1bb49f08e7ab122e16c19c680cb9551",
+    "tools/ai-model-pipeline/runtime-test-content/MaterialSlotFixture.cs": "99ff0368d05522b2d46b066583aff8ee3bdeac842c0e0937d8cd5f3b88bbf10b",
+    "tools/ai-model-pipeline/runtime-test-content/Plugin.cs": "a2558ba58893431fce24a1e391c98377c222f80bc65c93300da2c3e2c1230dbc",
+    "tools/ai-model-pipeline/runtime-test-content/profiles.schema.json": "bdb34d98daccee7a12e24a04975eb65ac0191f754512b43d31d29661c741dc0a",
+    "tools/ai-model-pipeline/multi-primitive-tests/create_cube_layer_fixture.py": "bf2998e92d9d78b98017d28a4e9a5b61b7b6c49a94470fc3f3455c3346829a71",
+    "tools/ai-model-pipeline/multi-primitive-tests/make_fixture_textures.py": "ca1cd2751fab881bd35cc00316a9be176b431bd48508173c96ef3fd264403ecf",
+    "tools/ai-model-pipeline/multi-primitive-tests/verify_cube_layer_fixture.py": "296a5e149c3e98be2ceadefa7eb2990b3c1f08f6cef6bc2a6773f1cf3e56b083"
+  },
+  "limitations": [
+    "Unity API stand-ins do not prove native material rendering/scheduling/instancing/lifetime.",
+    "No helper build, game call or deployment performed by this lane.",
+    "Actual cubeA2submesh/UVphase/portrait/attack/hit/death/loot progression remains pending.",
+    "Unknown/external material changes are not adopted; unrelated native getters are outside this seam.",
+    "Calibration geometry is not finished creature art."
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "name": "Resinmaw Bogling",
+  "native_chassis": "acidBlobA",
+  "reference_renderer": 121344,
+  "renderer_path": "enAcidMonster",
+  "native_surface_copied": false,
+  "art_status": "Original amber slug-toad surface model; manual studio and live acceptance pending after regeneration",
+  "native_forward": "+UnityZ from feet/fang endpoints and rear tail",
+  "rig_boundary": "Exact32-joint palette and IBMs. Main body, two legs, tail, two jaws, four articulated tusks, and head mass follow native weighted anatomy. Terminal joints retained without invented full-weight geometry.",
+  "remaining": [
+    "Studio review",
+    "Captured native pose checks",
+    "Authored live acceptance",
+    "Native brown chunk and puddle effects retained"
+  ],
+  "parts": [
+    {
+      "name": "resinmaw",
+      "vertices": 7104,
+      "triangles": 2368,
+      "palette_joints": 32,
+      "max_bind_rest_error": 7.63887513244299e-08,
+      "blender_reopen_max_bind_rest_error": 7.63887513244299e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.1100000143051147,
+        0.020232535898685455,
+        -2.6820552349090576
+      ],
+      "bind_bounds_max": [
+        1.1100000143051147,
+        3.2616000175476074,
+        1.1568838357925415
+      ],
+      "blender_roundtrip_glb_sha256": "da08eb621d87786b253e4b1950aa8b5522094ea1bbd1ca5665c1788f103aac4e"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121344,
+      "local_reference_path": "scratch/skeleton-audit/121344/reference.npz",
+      "sha256": "150613e163b727840722fcc4475dc3aea2fbe2f37501e2f949977281ff96df26"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "257405cdb23444fa0a4220159bf1b032fdf9a09dc16ae3f8e946d574dc9bdc75",
+      "bytes": 4560
+    },
+    "audit_native_poses.py": {
+      "sha256": "86f9d7c48b8ce2281141361ad5657f0871207600d8f83169c8130a1b5af89922",
+      "bytes": 3731
+    },
+    "build_blender.py": {
+      "sha256": "928c06d8aad9a8c19058d26b2202473df92767245650d6c763195f48c9fdc51b",
+      "bytes": 5384
+    },
+    "build_geometry.py": {
+      "sha256": "674cde2afbd88b5418e26d393ef9f1820b1a75b43852e1381a2d9325487254af",
+      "bytes": 7273
+    },
+    "finalize_manifest.py": {
+      "sha256": "262350d451add6f34bffe60546a0eccdc051e3ac0123a997b631cd66c9e79402",
+      "bytes": 2416
+    },
+    "hero.png": {
+      "sha256": "4b590f458a999dbadcb27888c38c6341df62ae6ed63e9eef6512422b663fea43",
+      "bytes": 1077552
+    },
+    "inspect_death_source.py": {
+      "sha256": "ef6ebf5a3aa82f4480c88421be12f25dea7af47196423aca7ebc11ae94a833d7",
+      "bytes": 2014
+    },
+    "inspect_materials.py": {
+      "sha256": "1d22498a3d10b2a8db44b8005670a6eff78fe953b38aa497ace111cfeeebe206",
+      "bytes": 1214
+    },
+    "native-binding-audit.json": {
+      "sha256": "94afcb6543ff6ba35a3348b860845e83033da939769b0ff26e479337208c7da4",
+      "bytes": 8146
+    },
+    "native-death-pose-audit.json": {
+      "sha256": "52bed4ed4daf53edb43dc5e8dd69f3d6f362455b4e600090f426a4a10a0f344a",
+      "bytes": 988
+    },
+    "native-death-pose-study.png": {
+      "sha256": "097beb3b48a06b8e4656979a5671ff2eaae3b4745496789d46013791103cb5cc",
+      "bytes": 18618
+    },
+    "native-death-source-metadata.json": {
+      "sha256": "deee36bb2609a7bd13144a1005a8c5580f1b55d92da5f526ccb45b1708eeaf84",
+      "bytes": 16470
+    },
+    "native-hit-pose-audit.json": {
+      "sha256": "31eff93d89e32b3c8754ec59f54490b7df0211821c4b9e582aae826dabebdbe2",
+      "bytes": 991
+    },
+    "native-hit-pose-study.png": {
+      "sha256": "9472888424270b60900c947fe7f7192ab74c5237112847209e4cae17a43073ba",
+      "bytes": 32119
+    },
+    "native-material-metadata.json": {
+      "sha256": "106795d421243d325506153110e716db1643a5adc3b8ac6eed57134a0a6eee5c",
+      "bytes": 2095
+    },
+    "native-pass-pose-audit.json": {
+      "sha256": "42e85b4acda1db80eaae1cad44dc3e0f0749185224f0d40623bf6b16323cf5d2",
+      "bytes": 988
+    },
+    "native-pass-pose-study.png": {
+      "sha256": "7f542320a36fd33542bcc59d6b0b1ca378841ce12089bde523f43693318f8556",
+      "bytes": 31143
+    },
+    "resinmaw-studio.blend": {
+      "sha256": "28f6f3467aef851a6c4e880c12ac77789f86861213e0d6a2b5b73b5a2cc47bda",
+      "bytes": 228226
+    },
+    "resinmaw.blend": {
+      "sha256": "64b3101a4a52b5a39239cafa888a5b190ed763ce77b06eddb7de702e6d20e4dd",
+      "bytes": 221815
+    },
+    "resinmaw.glb": {
+      "sha256": "39215580df941c13512cee4c67cbace577911a22043a531e81c11deb89d55921",
+      "bytes": 416252
+    },
+    "resinmaw.pieces.json": {
+      "sha256": "ba233de56905e0bd48e8557f308ded991fe9d699fc80b6008c3a16bdd4707b29",
+      "bytes": 2172
+    },
+    "resinmaw.source.json": {
+      "sha256": "ded08757bbd3b16a37e046ef74ca68ce354739815cb81434354f52f13b18c354",
+      "bytes": 1127564
+    },
+    "resinmaw.validation.json": {
+      "sha256": "91f86ceb8b5540f819917ae80f00e9e963019bd34e8451e1c69b260ed8fe87e1",
+      "bytes": 805
+    },
+    "resinmaw_basecolor.png": {
+      "sha256": "8f9a2d07cb13a48d7b0c9b99670c4cc5c7260397ec00a019c241a15cabdb92f3",
+      "bytes": 268
+    },
+    "runtime-profile.json": {
+      "sha256": "476e0870b3e7365fb6842a792a1ceb4950d240ef3b67c983c74129b49d59538b",
+      "bytes": 508
+    },
+    "side.png": {
+      "sha256": "69102db33234a1bb8aca6a7ed01ddede3107276689829b30dc29d00c0d27c733",
+      "bytes": 1091399
+    }
+  },
+  "live_v1": {
+    "status": "scoped_body_portrait_material_observed_death_visual_LIMITED_native_sink_matches",
+    "evidence": "live-validation.json",
+    "sha256": "741598e457e768162568d48350b2e6c569c15a75ce2dbc2a46a7fe8ed5683b08",
+    "scope": "Scoped evidence; original asset/source hashes preserved."
+  }
+}
