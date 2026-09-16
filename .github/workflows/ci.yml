@@ -42,10 +42,12 @@ jobs:
         run: bash launcher/unix/test-launch.sh
 
   guard:
-    name: No copyrighted game DLLs
+    name: Repository policy checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validate agent instruction graph
+        run: bash scripts/agent/check-instructions.sh
       - name: Fail if any copyrighted game assembly is tracked
         shell: bash
         run: |
