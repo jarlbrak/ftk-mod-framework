@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_player_blacksmith_female",
+      "baseClass": "blacksmith",
+      "displayName": "Player rig probe: blacksmith_Female",
+      "skinset": "blacksmith_Female",
+      "defaultSkinType": "Female",
+      "renderers": [
+        {
+          "rendererPath": "playerBlacksmith",
+          "glbFile": "probe_121067.glb",
+          "textureFile": "probe_palette.png"
+        },
+        {
+          "rendererPath": "hairTop",
+          "glbFile": "probe_121083.glb",
+          "textureFile": "probe_palette.png"
+        },
+        {
+          "rendererPath": "hairBottom",
+          "glbFile": "probe_121083.glb",
+          "textureFile": "probe_palette.png"
+        }
+      ],
+      "startingArmor": "armorCloth1"
+    }
+  ]
+}

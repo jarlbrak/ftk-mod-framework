@@ -368,7 +368,8 @@ namespace FTKModFramework
                 // unit scale, no width boost, no swamp aura, weapon shown). Core/EnemyVisualPatch renders the chassis
                 // mesh unchanged when proceduralBody is off and no mesh swap is requested, so this is the UNMODIFIED
                 // cave-troll. Mirrors the FTK_AGENT_BRIDGE env-gate idiom (Agent/AgentBridge.cs). When unset or != "1"
-                // the env read has NO effect: the else-branch below is the shipped procedural-golem wiring.
+                // the env read has NO effect. FTK_MIREWARDEN_BODY selects the authored-mesh test below; otherwise
+                // the else-branch is the shipped procedural-golem wiring.
                 if (Environment.GetEnvironmentVariable("FTK_BASELINE_STOCK_BODY") == "1")
                 {
                     // No glbMesh/glbTexture (default null) and no procedural golem => Core renders the stock chassis.
@@ -382,6 +383,23 @@ namespace FTKModFramework
                     visual.swampAura = false;                 // no aura
                     visual.proceduralBody = false;
                 }
+                else if (Environment.GetEnvironmentVariable("FTK_MIREWARDEN_BODY") == "1")
+                {
+                    // Authored-mesh test on the vanilla skeleton. Keep neutral transforms/material tint so the
+                    // combat capture judges the asset itself. Failed mesh loads retain the original chassis;
+                    // proceduralBody must stay off because it hides the chassis renderer after the mesh swap.
+                    visual.glbMesh = "mirewarden_rigged.glb";
+                    visual.glbTexture = "mirewarden_basecolor.png";
+                    visual.tint = UnityEngine.Color.white;
+                    visual.scale = 1f;
+                    visual.widthBoost = 1f;
+                    visual.applyWetSkin = false;
+                    visual.hunchDegrees = 0f;
+                    visual.hideWeapon = true;
+                    visual.addLantern = false;
+                    visual.swampAura = false;
+                    visual.proceduralBody = false;
+                }
                 else
                 {
                     // PROCEDURAL GOLEM BODY path (the shipped boss body): hide the troll chassis mesh and build the
@@ -391,6 +409,9 @@ namespace FTKModFramework
                     visual.glbTexture = null;                 // CLEARED: no baked basecolor either
                     visual.tint = BossTint;                   // mossy brown-green recolor of the golem material
                     visual.scale = BossBodyScale;             // hulking; the "tall" axis, also scales the whole golem
+                    // This shipped procedural silhouette was tuned against absolute CEL scale. Keep its legacy
+                    // dimensions; public visuals and neutral authored-mesh swaps use native-scale multipliers.
+                    visual.legacyAbsoluteScale = true;
                     visual.widthBoost = BossWidthBoost;       // broader-than-tall bog brute silhouette
                     visual.applyWetSkin = true;
                     visual.smoothness = BossSmoothness;
@@ -729,11 +750,10 @@ namespace FTKModFramework
                 // footprint (m_MarkerScale). Best-effort + guarded; visual is logged as part of the PASS line.
                 bool visualRegistered = false; bool visualScaleOk = false; bool markerOk = false;
                 EnemyVisualPatch.EnemyVisual reg = default(EnemyVisualPatch.EnemyVisual);
-                // The visual-gate baseline lever (FTK_BASELINE_STOCK_BODY==1, see BuildBoss) deliberately registers the
-                // STOCK chassis at unit scale, so the expected body scale is 1 in that mode and BossBodyScale otherwise.
-                // When the lever is off this is byte-identical to asserting BossBodyScale (the shipped self-test).
+                // Both visual-test levers use unit scale; the default shipped body uses BossBodyScale.
                 bool stockBodyBaseline = Environment.GetEnvironmentVariable("FTK_BASELINE_STOCK_BODY") == "1";
-                float expectedBodyScale = stockBodyBaseline ? 1f : BossBodyScale;
+                bool mirewardenBody = Environment.GetEnvironmentVariable("FTK_MIREWARDEN_BODY") == "1";
+                float expectedBodyScale = (stockBodyBaseline || mirewardenBody) ? 1f : BossBodyScale;
                 if (boss != null && boss.m_ID != null)
                 {
                     visualRegistered = EnemyVisualPatch.TryGet(boss.m_ID, out reg);

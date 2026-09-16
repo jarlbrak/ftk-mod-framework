@@ -90,7 +90,10 @@ namespace FTKModFramework.Agent
     {
         // Frame budgets (~60fps). Map generation is the long one (tuned up: it timed out before).
         private const int SettleWaitFrames = 900;   // ~15s  (start page / GameConfig screen to appear)
-        private const int MapWaitFrames = 1800;      // ~30s  (room-join routing + map generation)
+        // Cold disposable-copy launches can spend more than the normal room-join window in map generation
+        // after the 411-entry model catalog is registered. Keep this bounded, but give the first map a full
+        // minute before reporting a startup failure; warm runs still exit as soon as the readiness predicates hold.
+        private const int MapWaitFrames = 3600;      // ~60s  (room-join routing + cold map generation)
         private const int ReadyWaitFrames = 600;     // ~10s
         private const int IntroWaitFrames = 1800;    // ~30s  (fades + StartGame chain + EnterGame COW wait)
 

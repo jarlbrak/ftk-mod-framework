@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FTK isolated model test profiles v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "profiles"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 512,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "baseEnemy",
+          "displayName",
+          "combatProfile",
+          "renderers"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^ftkmf_modeltest_[a-z0-9_]{1,64}$"
+          },
+          "baseEnemy": {
+            "type": "string",
+            "minLength": 1
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "combatProfile": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "renderers": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 16,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "rendererPath",
+                "glbFile"
+              ],
+              "properties": {
+                "rendererPath": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "glbFile": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,119}\\.glb$"
+                },
+                "textureFile": {
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,119}\\.png$"
+                    }
+                  ]
+                },
+                "rendererKind": {
+                  "enum": [
+                    "SkinnedMeshRenderer",
+                    "MeshRenderer"
+                  ],
+                  "description": "Optional exact Unity target type. Omission preserves the skinned-renderer contract. MeshRenderer requires one MeshFilter and one native material slot."
+                },
+                "disableNativeEmission": {
+                  "type": "boolean",
+                  "description": "Optional per-renderer private material emission opt-out. Missing or false preserves native emission; true disables keyword and clears supported native emission color/map."
+                },
+                "materialSlots": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 4,
+                  "description": "Explicit bijections for primitive and native material slots; runtime requires full native slot coverage.",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "primitiveIndex",
+                      "nativeMaterialSlot"
+                    ],
+                    "properties": {
+                      "primitiveIndex": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 3
+                      },
+                      "nativeMaterialSlot": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 3
+                      },
+                      "textureFile": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-][A-Za-z0-9_.-]{0,119}\\.png$"
+                      },
+                      "disableNativeEmission": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "required": [
+                      "materialSlots"
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "textureFile"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "disableNativeEmission"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+                ,
+                {
+                  "if": {
+                    "properties": {
+                      "rendererKind": {
+                        "const": "MeshRenderer"
+                      }
+                    },
+                    "required": [
+                      "rendererKind"
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "required": [
+                        "materialSlots"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "resourcePrefab": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120,
+            "pattern": "^[A-Za-z0-9_-]{1,120}$",
+            "description": "Optional exact native Resources GameObject prefab path. Root CEL replaces only the custom clone enemy asset; base weapon/controller is preserved. Live compatibility remains unverified."
+          },
+          "minimumBaseHealth": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000,
+            "description": "Optional isolated test clone base-health floor. Math.Max preserves higher native base health. Native scaling can change actual combat HP; not a balance change or live health mutation."
+          },
+          "visualScale": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 4,
+            "description": "Optional finite public uniform scale factor applied to spawned clone by Content.SetEnemyVisual before mesh registration. Native root scale remains unchanged; actual spawned scale requires runtime measurement."
+          },
+          "portraitMarkerPath": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "^(?!\\.\\.?($|/))(?!.*(?:/\\.\\.?)(?:/|$))[^/\\\\\\u0000-\\u001f\\u007f-\\u009f]+(?:/[^/\\\\\\u0000-\\u001f\\u007f-\\u009f]+)*$",
+            "description": "Optional exact child marker for PortraitCam snapshots of this custom enemy only. Source and actual portrait clone must have a unique marker leaf name. Native fallback on capture validation failure; no body/combat-camera changes."
+          },
+          "fallOffPolicy": {
+            "const": "preserve-custom-body",
+            "description": "Optional explicit-plural policy. The framework suppresses native FallOffLimb only after a successful explicit mesh lease owns its exact renderer; omission preserves native fall-off."
+          },
+          "bindingKind": {
+            "const": "legacy-singular",
+            "description": "Opt-in singular public API route; renderers is expected observation metadata only."
+          },
+          "tint": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "bindingKind"
+              ]
+            },
+            "then": {
+              "required": [
+                "tint"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "resourcePrefab"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "portraitMarkerPath"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "fallOffPolicy"
+                    ]
+                  }
+                ]
+              },
+              "properties": {
+                "renderers": {
+                  "maxItems": 1,
+                  "items": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "disableNativeEmission"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "materialSlots"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "rendererKind"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "tint"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

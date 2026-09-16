@@ -153,6 +153,14 @@ namespace FTKModFramework
 
         private Harmony _harmony;
 
+        private void Update()
+        {
+            // Inactive cloned avatars may never receive OnDestroy. Prune their acquired model leases
+            // from this active plugin so custom resources still release after the last native owner dies.
+            EnemyMeshResources.PruneDestroyedOwners();
+            LegacyKrakenResourceAdapterLease.PruneDestroyedOwners();
+        }
+
         private void Awake()
         {
             Instance = this;

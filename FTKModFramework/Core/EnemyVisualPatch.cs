@@ -45,8 +45,9 @@ namespace FTKModFramework.Core
         {
             // ---- recolor + scale ----
             public Color tint;        // body albedo tint (multiplies _Color)
-            public float scale;       // overall body scale (the "tall" axis); 1 = unchanged
+            public float scale;       // multiplier of original CEL local scale; 1 = unchanged (unless legacyAbsoluteScale)
             public float widthBoost;  // extra x/z multiplier on top of scale (>1 = broader than tall)
+            public bool legacyAbsoluteScale; // internal compatibility for the bundled procedural boss only
 
             // ---- wet-bog skin (Standard shader) ----
             public bool  applyWetSkin;
@@ -110,7 +111,11 @@ namespace FTKModFramework.Core
             // the mod, byte-identical on every client), exactly like the rest of this struct: nothing networks or
             // persists. See Content.SetEnemyBodyMeshFromGlb / RuntimeGltfMeshLoader.
             public string glbMesh;           // .glb file name under FTKModFramework_content/models/ (null disables)
+            public EnemyRendererMesh[] rendererMeshes; // explicit all-or-nothing assignments, takes precedence
             public string glbTexture;        // optional .png file name under the same folder for the body _MainTex
+
+            // Defaults to PreserveNative so existing registrations retain native death behavior.
+            public EnemyFallOffPolicy fallOffPolicy;
         }
 
         // Name of the procedural lantern parent, used for the per-clone idempotency check.
@@ -214,6 +219,36 @@ namespace FTKModFramework.Core
             _visuals[enemyId] = v;
         }
 
+        internal static void RegisterRendererMeshSwaps(string enemyId, EnemyRendererMesh[] meshes)
+        {
+            EnemyVisual v;
+            if (!_visuals.TryGetValue(enemyId, out v))
+            {
+                v = default(EnemyVisual);
+                v.tint = Color.white;
+                v.scale = 1f;
+                v.widthBoost = 1f;
+            }
+            v.rendererMeshes = (EnemyRendererMesh[])meshes.Clone();
+            _visuals[enemyId] = v;
+        }
+
+        /// <summary>Register (or merge) the native FallOffLimb policy for future combat clones.</summary>
+        internal static void RegisterFallOffPolicy(string enemyId, EnemyFallOffPolicy policy)
+        {
+            if (string.IsNullOrEmpty(enemyId)) return;
+            EnemyVisual v;
+            if (!_visuals.TryGetValue(enemyId, out v))
+            {
+                v = default(EnemyVisual);
+                v.tint = Color.white;
+                v.scale = 1f;
+                v.widthBoost = 1f;
+            }
+            v.fallOffPolicy = policy;
+            _visuals[enemyId] = v;
+        }
+
         /// <summary>True if an enemy id has a registered visual override (used by self-tests).</summary>
         internal static bool TryGet(string enemyId, out EnemyVisual visual)
         {
@@ -237,15 +272,23 @@ namespace FTKModFramework.Core
                 CharacterEventListener cel = __instance.m_EventListener;
                 if (cel == null) return;
 
-                // NON-UNIFORM HULKING SCALE: broader than tall (a hunched bruiser). No _done guard: the clone is
-                // fresh every combat and must be re-scaled each spawn (per-spawn re-application is correct here).
-                float xz = v.scale * (v.widthBoost > 0f ? v.widthBoost : 1f);
-                cel.transform.localScale = new Vector3(xz, v.scale, xz);
+                // Explicit assignments preflight before any visual mutations. Failure leaves this clone intact.
+                bool explicitMeshes = v.rendererMeshes != null && v.rendererMeshes.Length > 0;
+                if (explicitMeshes && !ExplicitEnemyMeshSwap.Apply(ec.m_ID, cel, v.rendererMeshes, MaterialPreparation(v))) return;
+                if (explicitMeshes && v.fallOffPolicy == EnemyFallOffPolicy.PreserveCustomBody)
+                    EnemyFallOffMarker.Install(cel, v.fallOffPolicy);
+
+                // Preserve the native clone's scale (including non-uniform axes). Capture it once per CEL
+                // so neutral mesh swaps are neutral and repeated applications cannot compound the factor.
+                EnemyVisualScale bodyScale = cel.GetComponent<EnemyVisualScale>();
+                if (bodyScale == null) bodyScale = cel.gameObject.AddComponent<EnemyVisualScale>();
+                bodyScale.Apply(v.scale, v.widthBoost, v.legacyAbsoluteScale);
 
                 // PER-PART RECOLOR + WET-BOG SKIN on the BODY ONLY (the weapon renderers are skipped). Use
                 // GetComponentsInChildren (recursive) because the body's SkinnedMeshRenderer is usually nested deeper
-                // than CEL.m_Renderers (direct-children-only) sees. Operate on .materials (the instanced per-clone
-                // copies), so vanilla shared materials are untouched.
+                // than CEL.m_Renderers (direct-children-only) sees. Explicit material copies are leased
+                // before assignment, so vanilla/shared inherited materials remain untouched.
+                EnemyMeshResources meshResources = explicitMeshes ? cel.GetComponent<EnemyMeshResources>() : null;
                 Renderer[] renderers = cel.GetComponentsInChildren<Renderer>(true);
                 foreach (Renderer r in renderers)
                 {
@@ -259,23 +302,10 @@ namespace FTKModFramework.Core
                         continue; // never tint / re-skin the weapon
                     }
 
-                    Material[] mats = r.materials;
-                    foreach (Material m in mats)
-                    {
-                        if (m == null) continue;
+                    // Explicit target copies were already prepared atomically (or retained from a live clone).
+                    if (meshResources != null && meshResources.Owns(r)) continue;
+                    LegacyVisualResources.Materials(cel, r, delegate(Material m) { ApplyMaterial(v, m); });
 
-                        if (m.HasProperty("_Color")) m.SetColor("_Color", v.tint);
-                        else m.color = v.tint;
-
-                        // WET BOG SKIN: high smoothness + low metallic so the body reads waterlogged/slimy. Guarded
-                        // by HasProperty so a non-Standard material is left alone. (Emission stays OFF the body: the
-                        // game resets _EmissionColor to black on CEL-managed materials.)
-                        if (v.applyWetSkin)
-                        {
-                            if (m.HasProperty("_Glossiness")) m.SetFloat("_Glossiness", v.smoothness);
-                            if (m.HasProperty("_Metallic"))   m.SetFloat("_Metallic", v.metallic);
-                        }
-                    }
                 }
 
                 // MESH SWAP (best-effort, guarded): repoint the chassis body SkinnedMeshRenderer's sharedMesh to a
@@ -284,8 +314,8 @@ namespace FTKModFramework.Core
                 // (meshBundle/meshName). Applied to THIS fresh clone only; on any failure the original mesh (or the
                 // procedural golem, if also requested) is left intact. Per-clone re-application is correct (the clone
                 // is brand-new every combat), so there is no _done guard.
-                if (!string.IsNullOrEmpty(v.glbMesh) ||
-                    (!string.IsNullOrEmpty(v.meshBundle) && !string.IsNullOrEmpty(v.meshName)))
+                if (!explicitMeshes && (!string.IsNullOrEmpty(v.glbMesh) ||
+                    (!string.IsNullOrEmpty(v.meshBundle) && !string.IsNullOrEmpty(v.meshName))))
                 {
                     try { ApplyMeshSwap(ec.m_ID, cel, v); }
                     catch (Exception me) { Plugin.Log.LogWarning("[enemy-visual] mesh swap failed: " + me.Message); }
@@ -296,7 +326,7 @@ namespace FTKModFramework.Core
                 // animates with the existing bones. Built BEFORE the hunch so the torso/arm segments (children of
                 // Chest_M) inherit the hunch rotation; the lantern (on WEAPON_HOLDER_L) and aura (on Chest_M) still
                 // read on top of the golem because they attach to the same bones.
-                if (v.proceduralBody)
+                if (v.proceduralBody && !explicitMeshes)
                 {
                     try { BuildProceduralBody(cel, v); }
                     catch (Exception ge) { Plugin.Log.LogWarning("[enemy-visual] golem body failed: " + ge.Message); }
@@ -330,6 +360,30 @@ namespace FTKModFramework.Core
                 // Never throw into the spawn builder: a visual tweak must never break combat. Log and move on.
                 Plugin.Log.LogWarning("[enemy-visual] apply failed: " + e.Message);
             }
+        }
+
+        /// <summary>Apply only explicit meshes and their private material settings to an owned row-preview clone.</summary>
+        internal static void ApplyPortraitMeshes(string enemyId, CharacterEventListener clone)
+        {
+            EnemyVisual visual;
+            if (!_visuals.TryGetValue(enemyId, out visual) || visual.rendererMeshes == null || visual.rendererMeshes.Length == 0) return;
+            ExplicitEnemyMeshSwap.Apply(enemyId, clone, visual.rendererMeshes, MaterialPreparation(visual));
+        }
+
+        private static Action<Renderer, Material> MaterialPreparation(EnemyVisual visual)
+        {
+            return delegate(Renderer renderer, Material material)
+            { if (!IsWeaponRenderer(renderer)) ApplyMaterial(visual, material); };
+        }
+
+        private static void ApplyMaterial(EnemyVisual visual, Material material)
+        {
+            if (material == null) return;
+            if (material.HasProperty("_Color")) material.SetColor("_Color", visual.tint);
+            else material.color = visual.tint;
+            if (!visual.applyWetSkin) return;
+            if (material.HasProperty("_Glossiness")) material.SetFloat("_Glossiness", visual.smoothness);
+            if (material.HasProperty("_Metallic")) material.SetFloat("_Metallic", visual.metallic);
         }
 
         // ---- weapon classification --------------------------------------------------------------------------
@@ -937,63 +991,8 @@ namespace FTKModFramework.Core
                 Mesh gmesh = RuntimeGltfMeshLoader.LoadSkinnedGlb(v.glbMesh, smr.bones, origBind);
                 if (gmesh != null)
                 {
-                    smr.sharedMesh = gmesh;
-
-                    // FR-2 (spec #72): force the SkinnedMeshRenderer to rebind the skin to the NEW mesh's bindpose set.
-                    // A bare sharedMesh swap leaves the SMR's skin binding pointed at the previous mesh's bindposes, which
-                    // scatters the new vertices (the Phase 0 skip-skin discriminator isolated the shatter to this rebind).
-                    // The custom mesh carries its OWN bindposes (name-remapped to runtime order by the loader); we reuse the
-                    // SAME live bones in the SAME order, just reassigned (fresh array) so Unity re-establishes the binding.
-                    Transform[] liveBones = smr.bones;
-                    if (liveBones != null)
-                    {
-                        Transform[] rebind = new Transform[liveBones.Length];
-                        System.Array.Copy(liveBones, rebind, liveBones.Length);
-                        smr.bones = rebind;
-                    }
-
-                    // OPTIONAL TEXTURE: load a .png from FTKModFramework_content/models/<glbTexture> and push it into
-                    // the body material's _MainTex (same .materials loop as the bundle path). A miss is non-fatal.
-                    if (!string.IsNullOrEmpty(v.glbTexture))
-                    {
-                        try
-                        {
-                            string texPath = CustomModelLoader.ResolveModelPath(v.glbTexture);
-                            if (System.IO.File.Exists(texPath))
-                            {
-                                Texture2D tex = new Texture2D(2, 2);
-                                tex.LoadImage(System.IO.File.ReadAllBytes(texPath));
-
-                                Material[] gmats = smr.materials;
-                                for (int i = 0; i < gmats.Length; i++)
-                                {
-                                    Material m = gmats[i];
-                                    if (m == null) continue;
-                                    if (m.HasProperty("_MainTex")) m.SetTexture("_MainTex", tex);
-                                    else m.mainTexture = tex;
-                                    // Self-illuminate with the baked basecolor so the golem READS in the
-                                    // Flooded Crypt's dim cool light (which otherwise mutes the mossy texture
-                                    // to a dark purple). Subtle moss-grey emission, texture-modulated.
-                                    if (m.HasProperty("_EmissionColor"))
-                                    {
-                                        m.EnableKeyword("_EMISSION");
-                                        if (m.HasProperty("_EmissionMap")) m.SetTexture("_EmissionMap", tex);
-                                        m.SetColor("_EmissionColor", new Color(0.45f, 0.50f, 0.40f));
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                Plugin.Log.LogWarning("[enemy-visual] glb texture: not found at '" + texPath +
-                                    "' for '" + enemyId + "'; mesh applied without it.");
-                            }
-                        }
-                        catch (Exception te)
-                        {
-                            Plugin.Log.LogWarning("[enemy-visual] glb texture load failed for '" + enemyId + "': " +
-                                te.Message + "; mesh applied without it.");
-                        }
-                    }
+                    LegacyVisualResources.Mesh(cel, smr, gmesh);
+                    LegacyVisualResources.OptionalTexture(enemyId, cel, smr, v.glbTexture);
 
                     Plugin.Log.LogInfo("[enemy-visual] mesh swap: set body mesh from runtime glb '" + v.glbMesh +
                         "' (SMR via " + via + ")" + (string.IsNullOrEmpty(v.glbTexture) ? "" : " + texture '" +
@@ -1022,21 +1021,17 @@ namespace FTKModFramework.Core
             // own bindposes drive the skinning, so all vanilla animations continue to play on the new mesh.
             smr.sharedMesh = mesh;
 
-            // OPTIONAL TEXTURE: push a bundle-loaded Texture2D into the body material's _MainTex. Use .materials (the
-            // instanced per-clone copies) so the vanilla shared material is untouched.
+            // Optional bundle texture remains cached/shared; only explicit material copies are owned here.
             if (!string.IsNullOrEmpty(v.meshTextureName))
             {
                 Texture2D tex = CustomModelLoader.LoadTexture(v.meshBundle, v.meshTextureName);
                 if (tex != null)
                 {
-                    Material[] mats = smr.materials;
-                    for (int i = 0; i < mats.Length; i++)
+                    LegacyVisualResources.Materials(cel, smr, delegate(Material material)
                     {
-                        Material m = mats[i];
-                        if (m == null) continue;
-                        if (m.HasProperty("_MainTex")) m.SetTexture("_MainTex", tex);
-                        else m.mainTexture = tex;
-                    }
+                        if (material.HasProperty("_MainTex")) material.SetTexture("_MainTex", tex);
+                        else material.mainTexture = tex;
+                    });
                 }
                 // a texture miss is non-fatal: the mesh swap above already applied.
             }
