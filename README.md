@@ -108,6 +108,7 @@ docs/
   CUSTOM-MODELS.md         custom enemy models (runtime glTF + AssetBundle paths)
   MODEL-AUTHORING.md       repeatable original-model workflow and live checks
   MODEL-SKELETONS.md       discovery inventory and per-rig validation status
+  AI-NATIVE.md             generic-first agent instructions, adapters, and local context
   SCALE-BUDGET.md          the load-time / heap scale-budget gate
   PHASE0-TYPE-INVENTORY.md the full content-table inventory decompiled from the game
   ROADMAP.md               phased plan toward the five content goals + FTK2 ports

@@ -54,6 +54,12 @@ dotnet build -c Release -p:FtkManagedDir="C:\Program Files (x86)\Steam\steamapps
 
 The build references the game's own DLLs from your local install and publicizes `Assembly-CSharp` at compile time. Those DLLs are copyrighted and git-ignored. Never commit them. CI enforces this: a tracked `Assembly-CSharp*.dll`, `UnityEngine*.dll`, or `Newtonsoft.Json.dll` fails the build.
 
+## AI-assisted contributions
+
+[`AGENTS.md`](AGENTS.md) is the canonical instruction file for coding agents and other AI harnesses. It is designed to work from a clean clone without private tools or machine-specific context. Harness adapters, including Claude Code support, point back to the generic instructions instead of maintaining a second policy set.
+
+See [`docs/AI-NATIVE.md`](docs/AI-NATIVE.md) for the instruction hierarchy, reusable skills and roles, and the ignored `.local` files available for machine-specific setup. Run `bash scripts/agent/check-instructions.sh` after changing any agent instructions or adapters.
+
 ## Pull requests
 
 Before opening a pull request:

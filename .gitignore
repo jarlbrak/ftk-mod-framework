@@ -52,10 +52,18 @@ docs/evidence/**/*.jsonl
 __pycache__/
 *.pyc
 
-# Claude Code private tooling (local-only, never committed)
-AGENTS.md
+# Agent tooling. Public instructions and adapters are committed; machine-specific
+# paths, services, settings, worktrees, and memory stay local.
+AGENTS.local.md
+AGENTS.override.md
 CLAUDE.local.md
-.claude/
+.local/
+.codex/config.local.toml
+.claude/settings.local.json
+.claude/hookify.*.local.md
+.claude/hooks/local/
+.claude/worktrees/
+.claude/scheduled_tasks.lock
 
 # Release scratch (release.sh builds assets in a temp dir, but never commit a dist/)
 dist/
