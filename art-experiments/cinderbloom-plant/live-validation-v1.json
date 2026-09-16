@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 1,
+  "asset": "Cinderbloom",
+  "iteration": "v1",
+  "artStatus": "integrated_original_prototype_facing_review_failed",
+  "native_chassis": "plantA",
+  "enemy_id": "ftkmf_modeltest_cinderbloom",
+  "session": "6dd2bce53bfa4af2907d96d4ef59ba1a",
+  "catalog_sha256": "4b4513164a0a635bd9d83cdd2bbaddb2b11ca958b54d8f92d0ded581c47a2dc8",
+  "journal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-4293589eef3d4d1ab932b966a93ecc3f/journal.jsonl",
+    "sha256": "11d5bb053d273586fb02f97fa004f3fccecb17e4a444b6a240a3b29dd3cccc28"
+  },
+  "binding": {
+    "status": "binding_metadata_observed",
+    "enemy": "ftkmf_modeltest_cinderbloom",
+    "matches": [
+      {
+        "rendererPath": "enPlant01",
+        "glbFile": "cinderbloom_body.glb",
+        "rendererInstanceId": -245314,
+        "ownerInstanceId": 369188,
+        "boneSignature": "0e515f0853f8fff145982ba036d438588431e0b6046651a9b69a8199ddd569ad"
+      },
+      {
+        "rendererPath": "enPlant01Leaves",
+        "glbFile": "cinderbloom_leaves.glb",
+        "rendererInstanceId": -245320,
+        "ownerInstanceId": 369188,
+        "boneSignature": "5986c6bf9143cd84d7d81a10c360af1a16ebc5cfb2ce604d91ef010fb074438a"
+      }
+    ],
+    "session": "6dd2bce53bfa4af2907d96d4ef59ba1a",
+    "journal": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-4293589eef3d4d1ab932b966a93ecc3f/journal.jsonl",
+    "limitations": "No appearance, motion, gameplay, material-quality or full asset-content acceptance."
+  },
+  "runtime_asset_sha256": {
+    "cinderbloom_body.glb": "1910367e96892bbe5daf43e25b443c14bf6bcc0f112e770768c183b898ab0def",
+    "cinderbloom_basecolor.png": "166fa92ee471dac23b44bf9cd9c5d8932e1b9a873ace2bead60a11164786d402",
+    "cinderbloom_leaves.glb": "4955e07fa265ab1d297d54ffcc7abf9bb45ec6bb512381b532e68e9b79153f68"
+  },
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/originals377-20260906-025521/deployment.json",
+    "sha256": "57798807bee79fa60570066121094d78b7e855727770df72921aeb22c0832f54"
+  },
+  "captures": {
+    "attack": {
+      "captureId": "e3dddba43ed04c409479519f56631cc8",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_cinderbloom_body.glb",
+          "0e515f0853f8fff145982ba036d438588431e0b6046651a9b69a8199ddd569ad"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle"
+          ],
+          "sampleCount": 110,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 45,
+              "firstNormalizedTime": 5.854238986968994,
+              "lastNormalizedTime": 7.214118957519531,
+              "gameSeconds": 4.125
+            },
+            {
+              "firstFrame": 56,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.08891076594591141,
+              "lastNormalizedTime": 1.9927574396133423,
+              "gameSeconds": 5.775001525878906
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack1"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 46,
+              "lastFrame": 55,
+              "firstNormalizedTime": 0.1030302345752716,
+              "lastNormalizedTime": 0.9280294179916382,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "summary": {
+        "path": "art-experiments/cinderbloom-plant/live-v1/attack-summary.json",
+        "sha256": "557f913070cf5db2caf27d3a9be6ed1e9b10fb4cf692522bf825d1352650cf7c"
+      },
+      "sourceCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/e3dddba43ed04c409479519f56631cc8.json",
+        "sha256": "83fa67720992ee2e601095cd729817a45ba45c01b31c7967eb56088a0eee43dc"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-fbcdfcd3417648348329958e5c5ec06f/journal.jsonl",
+        "sha256": "94e84ee0c54c7b780d8fb235b470c236e24555505e8a395cd70fb9a19cb4409c"
+      },
+      "result": {
+        "path": "scratch/mirewarden-game/model-test-output/case-fbcdfcd3417648348329958e5c5ec06f/result.json",
+        "sha256": "12d971cfd00e64717885288121d099631f23514722f739fcd1dc8610e402a574"
+      },
+      "video": {
+        "path": "art-experiments/cinderbloom-plant/live-v1/attack.mp4",
+        "sha256": "09925d3b949c4e21d370160276d1ad2ad7e340069bd9ed36d74cef42466fef5f",
+        "metadata": {
+          "width": 1280,
+          "height": 832,
+          "r_frame_rate": "12/1",
+          "nb_read_frames": "120"
+        }
+      }
+    },
+    "nonlethal-hit": {
+      "captureId": "d1f5263265084ceabfe179a66baa0bee",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_cinderbloom_leaves.glb",
+          "5986c6bf9143cd84d7d81a10c360af1a16ebc5cfb2ce604d91ef010fb074438a"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle"
+          ],
+          "sampleCount": 89,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 7.471863746643066,
+              "lastNormalizedTime": 8.22735595703125,
+              "gameSeconds": 2.2916641235351562
+            },
+            {
+              "firstFrame": 31,
+              "lastFrame": 69,
+              "firstNormalizedTime": 0.06581345200538635,
+              "lastNormalizedTime": 1.214165210723877,
+              "gameSeconds": 3.4833297729492188
+            },
+            {
+              "firstFrame": 96,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10439518839120865,
+              "lastNormalizedTime": 0.7994500994682312,
+              "gameSeconds": 2.10833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "hit1"
+          ],
+          "sampleCount": 5,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 30,
+              "firstNormalizedTime": 0.4124998450279236,
+              "lastNormalizedTime": 0.9624995589256287,
+              "gameSeconds": 0.366668701171875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 2088794288,
+          "clips": [
+            "attackProf1"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 70,
+              "lastFrame": 95,
+              "firstNormalizedTime": 0.06111110374331474,
+              "lastNormalizedTime": 0.8249998092651367,
+              "gameSeconds": 2.2916641235351562
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "summary": {
+        "path": "art-experiments/cinderbloom-plant/live-v1/nonlethal-hit-summary.json",
+        "sha256": "3cce96481c83050e3ce7ff0bb2d5184aaf867d1ebc9514f09fd152640bb9545e"
+      },
+      "sourceCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/d1f5263265084ceabfe179a66baa0bee.json",
+        "sha256": "ddf616514bf8a6fed47ace44f0cc24f7f3018bb60622fe30b265b515142fd5b7"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-585ec567ac144c3491c477d577537b09/journal.jsonl",
+        "sha256": "5d7ec27b78da0138470e297806f26d212cf63b2913497c05cb44483a57b10c2f"
+      },
+      "result": {
+        "path": "scratch/mirewarden-game/model-test-output/case-585ec567ac144c3491c477d577537b09/result.json",
+        "sha256": "1d752ab848c66d1c5f685b7070c2efb3b1ad6d93daf96a74dc029610f23682dc"
+      },
+      "video": {
+        "path": "art-experiments/cinderbloom-plant/live-v1/nonlethal-hit.mp4",
+        "sha256": "e83562b504cc4a9de2d296c6cb0aa4430bb8d0923d30e4fb008d54a475a2e5c9",
+        "metadata": {
+          "width": 1280,
+          "height": 832,
+          "r_frame_rate": "12/1",
+          "nb_read_frames": "120"
+        }
+      }
+    },
+    "kill-fixture-death": {
+      "captureId": "a2850c34827643ce89b698b1695471f0",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_cinderbloom_body.glb",
+          "0e515f0853f8fff145982ba036d438588431e0b6046651a9b69a8199ddd569ad"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "idle"
+          ],
+          "sampleCount": 28,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 27,
+              "firstNormalizedTime": 10.054198265075684,
+              "lastNormalizedTime": 10.870139122009277,
+              "gameSeconds": 2.475006103515625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "death"
+          ],
+          "sampleCount": 92,
+          "occurrences": [
+            {
+              "firstFrame": 28,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.125,
+              "lastNormalizedTime": 2.96875,
+              "gameSeconds": 8.3416748046875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "summary": {
+        "path": "art-experiments/cinderbloom-plant/live-v1/kill-fixture-death-summary.json",
+        "sha256": "5c07947b5cccd4228b4d9df0c55c1df61955d12359d63db8382da12038b0eb42"
+      },
+      "sourceCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/a2850c34827643ce89b698b1695471f0.json",
+        "sha256": "f27b5e1ae641d08251b84359266071c34cd83a0930580046308ec0a138a90fa2"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-3251e916dea244fb94975c16dc9a26dd/journal.jsonl",
+        "sha256": "d0da41ec11389c728691c4bb2dee26cd69749eb48aa384902e3d14af4b4807f8"
+      },
+      "result": {
+        "path": "scratch/mirewarden-game/model-test-output/case-3251e916dea244fb94975c16dc9a26dd/result.json",
+        "sha256": "52a1a66d1e342ccd6ed7f953135031c482564d43fd83d9e502d4587989dd38e3"
+      },
+      "video": {
+        "path": "art-experiments/cinderbloom-plant/live-v1/kill-fixture-death.mp4",
+        "sha256": "5d3153ae401cf252e7f32323cd665fe8e92ecd5ed769a3ef7eeab22f50b6c4d4",
+        "metadata": {
+          "width": 1280,
+          "height": 832,
+          "r_frame_rate": "12/1",
+          "nb_read_frames": "120"
+        }
+      }
+    }
+  },
+  "gameplay": {
+    "ordinary_attack_hp": [
+      58,
+      48
+    ],
+    "actual_damage": 10,
+    "explicit_KillSingle_fixture_hp": [
+      48,
+      0
+    ],
+    "loot": "One guarded Collect (Golden Root visually reported by parent) then strict Ready level0 room2. Action result alone does not identify loot."
+  },
+  "visualReview": {
+    "status": "facing_failed_corrected_retest_pending",
+    "reviewer": "Parent viewed listed frames; model pipeline inspected exact authored anatomy and native facing.",
+    "observations": "Coherent flower/petal opening, stem flex, hit bend and collapse. Native effects partly occlude motion; small teeth/mouth details unreadable at normal camera.",
+    "confirmed_authoring_error": "Authored mouth/teeth/throat face mesh-local minusZ while native head/jaw forward is plusZ; captured skin transforms keep the face away. This is an anatomy-facing error, not merely camera placement.",
+    "limits": "Original prototype integrated, but no final artistic acceptance. Correct face/jaw geometry and repeat native review; do not infer full animation/culling or other-controller coverage.",
+    "reviewed_frames": [
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/attack-0000.png",
+        "sha256": "28746ef4f134c109b78ee9d6ca8afd7dad42fc82a4ac3fd62f66cfbe17b85eb3"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/attack-0048.png",
+        "sha256": "ae89a515889451d0c7903ee8c7222dc3175d28f542ce960dc5a0150e9b8231bc"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/attack-0055.png",
+        "sha256": "d9b34badd69ba143a123dbfca95c4a665d542cc82410e942952fe61030e07802"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/attack-0065.png",
+        "sha256": "7f75008db87c4f39f056a07c4a45faa6862407e3458eab9e0dea771e9f5fc6fd"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/nonlethal-hit-0028.png",
+        "sha256": "6e5d59379314e39ecbb9807c8e9dfa4377d1f492ed5b7820ea0a32d5ef9e25c3"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/nonlethal-hit-0080.png",
+        "sha256": "68a1e554a69c17f97288ebd3b0414a1c4390fa2e1e2eda88e64becf130dd8f38"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/kill-fixture-death-0040.png",
+        "sha256": "e0f711615d3265e95a57331cc5697daa364244e74864d6b626b341945c5dee59"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/kill-fixture-death-0060.png",
+        "sha256": "374970f889b65f283eaeb36da40927c4516de9b35ecbea0543daae6b9e81d353"
+      },
+      {
+        "path": "art-experiments/cinderbloom-plant/live-v1/kill-fixture-death-0100.png",
+        "sha256": "fc6ed535a5d888afd12b00cfac0a85d7259904902df734a9497414a23c1a9f69"
+      }
+    ]
+  },
+  "fixture": {
+    "heroMaxHp": 999,
+    "minimumBaseHealth": 64,
+    "tutorialsQuiet": true,
+    "videoReplay": "120 recorded screenshots at12fps =>10-second encoded replay; measured game progression is about10.9083 seconds, not real-time performance proof."
+  },
+  "sourceEvidence": [
+    {
+      "path": "scratch/cinderbloom-collect1.json",
+      "sha256": "3f052acfe8f4fa86692c000a97d0d69a3f99e6e9ec1b2090358a73adb539cac9"
+    },
+    {
+      "path": "scratch/cinderbloom-loot-fixture.json",
+      "sha256": "42c67548bd9f7f54e3e20011cb7a98d2bef26b7e8580ff7b6bab619f025a8e71"
+    },
+    {
+      "path": "scratch/cinderbloom-postcollect1.json",
+      "sha256": "88ec10d9079c2809c0fafbca7744e81e39439d87cfdacf11b868868159b10e6d"
+    },
+    {
+      "path": "scratch/cinderbloom-ready-fixture.json",
+      "sha256": "00e58405e333618b66f77deef15da9705e1f0dc5ca56d054870a7c91ab92e5cd"
+    }
+  ],
+  "sourceRetention": "Original v1 GLB/PNG hashes come from immutable stage journal, independent of corrected source assets. Studio/source rebuilds do not replace this historical live verdict."
+}

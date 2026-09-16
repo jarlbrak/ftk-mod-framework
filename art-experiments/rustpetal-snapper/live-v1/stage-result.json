@@ -1,0 +1,258 @@
+{
+  "status": "binding_metadata_observed",
+  "enemy": "ftkmf_modeltest_rustpetal",
+  "matches": [
+    {
+      "rendererPath": "enJungleNibbler_C",
+      "glbFile": "rustpetal.glb",
+      "rendererInstanceId": -245408,
+      "ownerInstanceId": 369188,
+      "boneSignature": "249fc7724b59d734e5bd0191e8c18c0276fd72f2c699e89c7b50e35e1b2c1810"
+    }
+  ],
+  "finalState": {
+    "inSession": true,
+    "singlePlayer": true,
+    "day": 0,
+    "timeIndex": 0,
+    "round": 0,
+    "questId": -10,
+    "questObjectiveKey": "oneline0",
+    "questDestRealm": 1178465130,
+    "questComplete": false,
+    "questIsLast": true,
+    "currentTurnFid": {
+      "turnIndex": 0,
+      "photonId": 1
+    },
+    "party": [
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "name": "Player 1",
+        "classId": 112,
+        "hp": 999,
+        "maxHp": 999,
+        "focus": 4,
+        "maxFocus": 4,
+        "gold": 11,
+        "level": 0,
+        "xp": 0,
+        "actionPoints": 0,
+        "spentFocus": 0,
+        "realmId": 1178465130,
+        "hexBig": null,
+        "hexSmall": null,
+        "pos": {
+          "x": 139.97032165527344,
+          "y": 0,
+          "z": 92.47543334960938
+        }
+      }
+    ],
+    "combat": {
+      "active": true,
+      "liveCombatants": 2,
+      "currentEnemyFid": {
+        "turnIndex": 0,
+        "photonId": -1
+      },
+      "whoseTurn": {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "isPlayer": true,
+        "source": "m_FightOrder[0]"
+      },
+      "heroTurnReady": true,
+      "readyParts": {
+        "initialized": true,
+        "fsmState": "Wait For Stance",
+        "actingFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        }
+      },
+      "enemies": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "name": "Rustpetal Snapper",
+          "type": "ftkmf_modeltest_rustpetal",
+          "hp": 58,
+          "hpMax": 58,
+          "alive": true
+        }
+      ],
+      "liveEnemies": 1,
+      "stuck": false,
+      "winningPlayerFid": {
+        "turnIndex": 0,
+        "photonId": 0
+      },
+      "fightOrder": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 0
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 0.0847938060760498
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 1.6393442153930664
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 1.808931827545166
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 3.278688430786133
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 3.533069610595703
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 4.918032646179199
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 5.257207870483398
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 6.557376861572266
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 6.981346130371094
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "tta": 8.196721076965332
+        },
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "tta": 8.705484390258789
+        }
+      ],
+      "abilities": [
+        {
+          "profId": 36,
+          "index": 0,
+          "label": "hammerSplash",
+          "name": "hammerSplash",
+          "buttonEnabled": true
+        }
+      ],
+      "driver": null
+    },
+    "dungeon": {
+      "inDungeon": true,
+      "inCombat": true,
+      "dungeonId": "FloodedCrypt",
+      "level": 0,
+      "room": 1,
+      "levelCount": 2,
+      "roomCount": 5,
+      "currentRoomType": "Enemy",
+      "encounterObjects": [
+        "ftkmf_modeltest_rustpetal"
+      ],
+      "inLastRoom": false,
+      "atLastLevel": false,
+      "cleared": false,
+      "deactivated": false,
+      "driver": null
+    },
+    "map": {
+      "realmId": 1178465130,
+      "tile": {
+        "big": 106,
+        "small": 18
+      },
+      "stageIndex": 0,
+      "hasPOI": true,
+      "poiType": "Dungeon",
+      "reachableTiles": [
+        {
+          "big": 106,
+          "small": 1
+        },
+        {
+          "big": 106,
+          "small": 14
+        },
+        {
+          "big": 105,
+          "small": 15
+        }
+      ],
+      "objective": {
+        "big": 106,
+        "small": 18
+      }
+    },
+    "choices": [],
+    "signals": {
+      "inCombat": true,
+      "modalOpen": false,
+      "modalType": null,
+      "choiceOpen": false,
+      "allDead": false,
+      "victoryShowing": false,
+      "warnings": [],
+      "victoryArmed": false
+    },
+    "phase": "combat"
+  },
+  "session": "8edda11d19e84464ba67eff550e52fb5",
+  "journal": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-1d1d5175f1a1483eaca4d3261090ad32/journal.jsonl",
+  "limitations": "No appearance, motion, gameplay, material-quality or full asset-content acceptance.",
+  "storyBoundary": "Story during combat is never auto-operated; pending_story_message is not capture readiness."
+}

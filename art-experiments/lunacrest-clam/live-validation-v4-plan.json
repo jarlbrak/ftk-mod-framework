@@ -1,0 +1,89 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/lunacrest-clam/live-validation-v4",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-76b0688d8f5847199348cfe2b3dd088b/case-result.json",
+  "visualReview": "scratch/model-route-0db0dbdf202b8e11-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/lunacrest-clam/lunacrest.glb",
+    "art-experiments/lunacrest-clam/lunacrest_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/lunacrest-clam/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-0db0dbdf202b8e11-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-bfe5123be5104542a5d0606493c3c033/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enClam",
+        "mesh": "ftkmf_glb_lunacrest.glb",
+        "boneSignature": "53cb593a6091824fe4eb312ccacf4f08c45c4ca97b50a4957d862bc13777f0bf"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enClam",
+        "mesh": "ftkmf_glb_lunacrest.glb",
+        "boneSignature": "53cb593a6091824fe4eb312ccacf4f08c45c4ca97b50a4957d862bc13777f0bf"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enClam",
+        "mesh": "ftkmf_glb_lunacrest.glb",
+        "boneSignature": "53cb593a6091824fe4eb312ccacf4f08c45c4ca97b50a4957d862bc13777f0bf"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V4",
+    "displayName": "Lunacrest Clam",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "clamA",
+    "nativeChassis": "clamA",
+    "rendererPaths": [
+      "enClam"
+    ],
+    "sourceRendererIds": [
+      121306
+    ],
+    "binding": {
+      "rendererPath": "enClam",
+      "mesh": "ftkmf_glb_lunacrest.glb",
+      "boneSignature": "53cb593a6091824fe4eb312ccacf4f08c45c4ca97b50a4957d862bc13777f0bf"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native clamA / enClam / renderer 121306 source assignment only; no sibling renderer, chassis, or material route is credited by this record.",
+      "The ordinary no-focus hit reduced health from 58 to 50; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Twenty-six selected original PNGs were reviewed; the remaining captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "The native DeathFallOff path deactivated enClam at reviewed frame 24 before Clam_DeathDirect became visually available, so this archive accepts a clean hide-and-debris handoff without claiming a visible articulated corpse pose.",
+      "The closest native attacks pass behind the top HUD and bright effects or the foreground hero limit fine surface inspection; no viewport-edge clipping, hinge separation, tearing, or renderer loss was observed in the reviewed frames.",
+      "DeathLight, DeathRevive, portrait, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

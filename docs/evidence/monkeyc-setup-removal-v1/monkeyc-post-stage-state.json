@@ -1,0 +1,199 @@
+{
+  "inSession": true,
+  "singlePlayer": true,
+  "day": 0,
+  "timeIndex": 0,
+  "round": 0,
+  "questId": -10,
+  "questObjectiveKey": "oneline0",
+  "questDestRealm": 1178465130,
+  "questComplete": false,
+  "questIsLast": true,
+  "currentTurnFid": {
+    "turnIndex": 0,
+    "photonId": 1
+  },
+  "party": [
+    {
+      "fid": {
+        "turnIndex": 0,
+        "photonId": 1
+      },
+      "name": "Player 1",
+      "classId": 112,
+      "hp": 976,
+      "maxHp": 999,
+      "focus": 4,
+      "maxFocus": 4,
+      "gold": 18,
+      "level": 2,
+      "xp": 83,
+      "actionPoints": 0,
+      "spentFocus": 0,
+      "realmId": 1178465130,
+      "hexBig": null,
+      "hexSmall": null,
+      "pos": {
+        "x": 83.69369506835938,
+        "y": 0,
+        "z": 74.98140716552734
+      }
+    }
+  ],
+  "combat": {
+    "active": true,
+    "liveCombatants": 1,
+    "currentEnemyFid": {
+      "turnIndex": 0,
+      "photonId": -1
+    },
+    "whoseTurn": {
+      "fid": {
+        "turnIndex": 0,
+        "photonId": 1
+      },
+      "isPlayer": true,
+      "source": "m_FightOrder[0]"
+    },
+    "heroTurnReady": false,
+    "readyParts": {
+      "initialized": false,
+      "fsmState": "",
+      "actingFid": {
+        "turnIndex": 0,
+        "photonId": 1
+      }
+    },
+    "enemies": [
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": -1
+        },
+        "name": "Rig probe: monkeyC",
+        "type": "ftkmf_modeltest_probe_monkeyc",
+        "hp": 0,
+        "hpMax": 58,
+        "alive": false
+      }
+    ],
+    "liveEnemies": 0,
+    "stuck": false,
+    "winningPlayerFid": {
+      "turnIndex": 0,
+      "photonId": 1
+    },
+    "fightOrder": [
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "tta": 0.12419271469116211
+      },
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "tta": 1.7635369300842285
+      },
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "tta": 3.402881145477295
+      },
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "tta": 5.042225360870361
+      },
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "tta": 6.681569576263428
+      },
+      {
+        "fid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "tta": 8.320913314819336
+      }
+    ],
+    "abilities": [
+      {
+        "profId": 36,
+        "index": 0,
+        "label": "hammerSplash",
+        "name": "hammerSplash",
+        "buttonEnabled": false
+      }
+    ],
+    "driver": null
+  },
+  "dungeon": {
+    "inDungeon": true,
+    "inCombat": true,
+    "dungeonId": "FloodedCrypt",
+    "level": 0,
+    "room": 2,
+    "levelCount": 2,
+    "roomCount": 5,
+    "currentRoomType": "Enemy",
+    "encounterObjects": [
+      "ftkmf_modeltest_probe_monkeyc"
+    ],
+    "inLastRoom": false,
+    "atLastLevel": false,
+    "cleared": false,
+    "deactivated": false,
+    "driver": null
+  },
+  "map": {
+    "realmId": 1178465130,
+    "tile": {
+      "big": 48,
+      "small": 10
+    },
+    "stageIndex": 0,
+    "hasPOI": true,
+    "poiType": "Dungeon",
+    "reachableTiles": [
+      {
+        "big": 48,
+        "small": 8
+      },
+      {
+        "big": 48,
+        "small": 11
+      },
+      {
+        "big": 48,
+        "small": 13
+      }
+    ],
+    "objective": {
+      "big": 48,
+      "small": 10
+    }
+  },
+  "choices": [],
+  "signals": {
+    "inCombat": true,
+    "modalOpen": false,
+    "modalType": null,
+    "choiceOpen": false,
+    "allDead": false,
+    "victoryShowing": false,
+    "warnings": [],
+    "victoryArmed": false
+  },
+  "phase": "combat"
+}

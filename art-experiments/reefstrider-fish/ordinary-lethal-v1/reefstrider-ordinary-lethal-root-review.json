@@ -1,0 +1,39 @@
+{
+  "status": "ORDINARY_LETHAL_ATTACK_NATIVE_RAGDOLL_OBSERVED_SELECTED_VISUALS",
+  "session": "7c51a58e8aff493096bdba5f783af3ab",
+  "captureId": "ee514dddf26e4387b31edba2d9096948",
+  "rawSha256": "9b94c85db25445d0455a32ca36d9ff9d8d4c156b38c3cc8dbb4f42e55fb3182f",
+  "attack": "cheat None focus false exact target FID; journal retained",
+  "beforeHp": 7,
+  "afterHp": 0,
+  "onScreenDamage": 8,
+  "animatorFirstDisabledFrame": 26,
+  "all11FirstDynamicFrame": 26,
+  "tailFrames": [
+    60,
+    119
+  ],
+  "tailMaxSpeed": 0.0,
+  "selectedImages": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/ee514dddf26e4387b31edba2d9096948/0030.png",
+      "sha256": "21e9b21e618b4be6996b34f434f89159a660e3437c9d90964f5a0eb119fd45cc",
+      "index": 30,
+      "actualImageViewed": true,
+      "verdict": "Visible -8 damage and collapsing limbs; hero overlaps most torso, not full-body quality evidence."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/ee514dddf26e4387b31edba2d9096948/0060.png",
+      "sha256": "fcd9e994e1e1b8d364a5c10a8c696714abb0f64100d01cce92d42538ce197950",
+      "index": 60,
+      "actualImageViewed": true,
+      "verdict": "Collapsed body visible with connected head, torso, outstretched flippers and legs; no obvious separated authored pieces in this view, some self-occlusion."
+    }
+  ],
+  "limits": [
+    "Native fixed-step isolated test with base-health/party fixtures; not stock campaign balance.",
+    "Selected images only; native collision geometry fit, floor contact and full-owner resource teardown not established.",
+    "Recorded low velocity is not Unity IsSleeping.",
+    "Loot progression pending at creation of this review."
+  ]
+}

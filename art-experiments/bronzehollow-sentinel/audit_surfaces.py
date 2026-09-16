@@ -1,0 +1,7 @@
+"""Independent closed-piece orientation and native bind bounds comparison."""
+import json,numpy as np
+from pathlib import Path
+O=Path(__file__).resolve().parent;R=O.parent.parent;d=json.loads((O/'bronzehollow.source.json').read_text());p=np.array(d['positions']);parts=json.loads((O/'bronzehollow.pieces.json').read_text());rows=[]
+for q in parts:
+ v=p[q['vertex_start']:q['vertex_start']+q['vertex_count']].reshape(-1,3,3);volume=float(np.einsum('ij,ij->i',v[:,0],np.cross(v[:,1],v[:,2])).sum()/6);assert volume>0,q;rows.append(dict(piece=q['name'],signedVolume=volume))
+ref=np.load(R/'scratch/skeleton-audit/121217/reference.npz');used=sorted(set(j for js,ws in zip(d['joints'],d['weights'])for j,w in zip(js,ws)if w>0));r=dict(status='PASS_CLOSED_ORIGINAL_PIECES_OUTWARD_BIND_BOUNDS_RECORDED',pieceVolumes=rows,boundsMin=p.min(0).tolist(),boundsMax=p.max(0).tolist(),nativeBoundsMin=ref['positions'].min(0).tolist(),nativeBoundsMax=ref['positions'].max(0).tolist(),boneCount=len(d['bone_names']),weightedBones=[d['bone_names'][i]for i in used],unweightedBones=[n for i,n in enumerate(d['bone_names'])if i not in used],method='Positive signed volume for each capped piece, separate from normal agreement. Pieces intentionally overlap; not a watertight-union or collision claim. Bind bounds may exceed native surface slightly; native animation bounds are not changed.');(O/'surface-bounds-audit.json').write_text(json.dumps(r,indent=2)+'\n')

@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "method": "Reran the deterministic original generator while every NPZ reference was restricted to bone_names and bindposes. Runtime export is deliberately outside this source-provenance check.",
+  "files": [
+    {
+      "file": "tideglass-palette.png",
+      "sha256": "1e70f760d752d9e2c4b304aba75abafedc16df70877013da4056077a63a70b83",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tideglass-body.source.json",
+      "sha256": "5e60d966d5d0d8b737baa6b9c154a4eba9f9c1c0803beb2f64b41cd3ece405bc",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tideglass-body.pieces.json",
+      "sha256": "85180b94bdc975e66d5147ef65cedbf42bd2b1b9eca237a50a1a4e4d92de50bf",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tideglass-hair-top.source.json",
+      "sha256": "6e6d5dfb49ffaec53f66d5a223a0a299cb042d5e76e21f021ba4715309041d5d",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tideglass-hair-top.pieces.json",
+      "sha256": "ae87ec6fe6bd3117f2a7569b8520912f5727382939c56f1e9e35acb4c050aba5",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tideglass-hair-bottom.source.json",
+      "sha256": "12b55136456e80979d0e1060928513eaee51c80a7ce540064d82f2c8a9385142",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tideglass-hair-bottom.pieces.json",
+      "sha256": "342ddbfc66d35777f20e7cb945284751f5899eae3c6146d1000b9612096b5151",
+      "reproduced_identical": true
+    }
+  ],
+  "generatorSha256": "1eaa7712d27956221a7d17f334eb4058ceafeb041b02d68b9d9cd94959d60563",
+  "references": {
+    "body": "9640929d8289b4d194595abc2a44227057044f32c64c2cb62bc45c1030117fdb",
+    "hairTop": "da75cc8c0d339dc69ae5ef1c16d08e3d55a2b4de24d8ac6c41d114a3b6db79f9",
+    "hairBottom": "8b824b144df7e1b06ccd2d282705a4fff320d7aa189c89c711cca09d91fcf298"
+  },
+  "scope": "Original-provenance proof only. Binary contract validation, exact player binding, preview, motion, equipment assembly, gameplay, and art approval remain separate gates."
+}

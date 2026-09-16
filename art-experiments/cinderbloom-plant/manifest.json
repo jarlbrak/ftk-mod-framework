@@ -1,0 +1,233 @@
+{
+  "name": "Cinderbloom",
+  "art_status": "Version2 facing fix passed live; integrated usable original prototype, final polish and broader coverage pending",
+  "native_chassis": "plantA",
+  "assignments": [
+    {
+      "renderer_path": "enPlant01",
+      "reference_renderer": 120953,
+      "glb": "cinderbloom_body.glb",
+      "texture": "cinderbloom_basecolor.png"
+    },
+    {
+      "renderer_path": "enPlant01Leaves",
+      "reference_renderer": 121072,
+      "glb": "cinderbloom_leaves.glb",
+      "texture": "cinderbloom_basecolor.png"
+    }
+  ],
+  "native_surface_copied": false,
+  "weight_rationale": "Stem rings interpolate adjacent native chain joints; paired mantle rings follow corresponding petal-chain joints; head details and jaw cup rigid to native Head/Jaw; root and separate stem leaves use their actual native root/leaf bones. No nearest-native-surface transfer.",
+  "remaining": [
+    "Studio appearance review",
+    "Live idle/attack/hit/death and all requested renderer identities",
+    "Full native animation envelope/culling review"
+  ],
+  "live_v1": {
+    "status": "integrated_original_prototype_facing_review_failed",
+    "evidence": "live-validation-v1.json",
+    "archive": "live-v1/",
+    "finding": "Mouth/teeth/throat face mesh-local minusZ while native head/jaw forward is plusZ; correction and live retest pending.",
+    "scope": "Original v1 stage asset hashes are preserved in evidence independently of subsequent source rebuilds."
+  },
+  "art_version": 2,
+  "orientation": "Face and jaw point +UnityZ; v1 erroneously faced -UnityZ. Full rig and rear petal-chain fitting unchanged.",
+  "parts": [
+    {
+      "name": "cinderbloom_body",
+      "vertices": 5568,
+      "triangles": 1856,
+      "palette_joints": 45,
+      "max_bind_rest_error": 2.498001805406602e-16,
+      "blender_reopen_max_bind_rest_error": 2.498001805406602e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.5709826946258545,
+        -0.062199998646974564,
+        -0.6603698134422302
+      ],
+      "bind_bounds_max": [
+        0.5697526931762695,
+        1.464862585067749,
+        0.5580921769142151
+      ],
+      "blender_roundtrip_glb_sha256": "915fc6ae5f2b9fcd1153d6076d32f3d93f7d2a81b35440375de4840bda8e2601"
+    },
+    {
+      "name": "cinderbloom_leaves",
+      "vertices": 504,
+      "triangles": 168,
+      "palette_joints": 16,
+      "max_bind_rest_error": 9.71445146547012e-17,
+      "blender_reopen_max_bind_rest_error": 9.71445146547012e-17,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.28105562925338745,
+        0.43152621388435364,
+        -0.0898820236325264
+      ],
+      "bind_bounds_max": [
+        0.22749313712120056,
+        0.7042460441589355,
+        0.31602099537849426
+      ],
+      "blender_roundtrip_glb_sha256": "584ce8a7e8e7e310846e0ebc7a42277285312af0f5a1b8e08999e97931644ba2"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 120953,
+      "local_reference_path": "scratch/skeleton-audit/120953/reference.npz",
+      "sha256": "d99405c76ea80e9daaa08eba08754308deecb941cac33e8ef158ff87d2da9ad3"
+    },
+    {
+      "renderer_id": 121072,
+      "local_reference_path": "scratch/skeleton-audit/121072/reference.npz",
+      "sha256": "f4c17519f369a1fdd45cc19d8f01c9a69d2503df2507284ee64f15eb767a6055"
+    }
+  ],
+  "turntable": {
+    "frames": 48,
+    "fps": 12,
+    "seconds": 4,
+    "resolution": [
+      720,
+      720
+    ],
+    "scope": "Studio camera orbit of bind-pose art, not animated gameplay"
+  },
+  "checks": {
+    "independent_export": "pass for both parts",
+    "saved_blender_reopen_export": "pass for both parts",
+    "native_bind_bounds": "both original surfaces contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "Parent reviewed v2hero: readable teeth/throat/front crown and coherent silhouette. Studio-only approval for these hashes.",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "be11e72809e2f157e2dd8564558323fdaef6dfcb809148f9c2aa33fc2b6ee9ee",
+      "bytes": 8482
+    },
+    "build_blender.py": {
+      "sha256": "371cf94393e8e66b943fc67d1f4c19074cd356d2fbb967683f7150119947c0fc",
+      "bytes": 6043
+    },
+    "build_geometry.py": {
+      "sha256": "0b76b335f522cac25f84e5375d86c1bd18a88d0a47720396cca9a03a2d3c1f04",
+      "bytes": 8357
+    },
+    "cinderbloom-studio.blend": {
+      "sha256": "fda69aef8019e2bf1baa4623f5dfb1fa0a9d41802fe63ade45da446d7e73f577",
+      "bytes": 235290
+    },
+    "cinderbloom-studio.blend1": {
+      "sha256": "df4181caa0e1e69ff07e392a36bec353f64420593293e4f98cbed7d781e6239f",
+      "bytes": 235248
+    },
+    "cinderbloom_basecolor.png": {
+      "sha256": "166fa92ee471dac23b44bf9cd9c5d8932e1b9a873ace2bead60a11164786d402",
+      "bytes": 265
+    },
+    "cinderbloom_body.blend": {
+      "sha256": "fc89cc65eccfa092114e389e5c83cdd68dcf09b2d388bec6cccb5fce8a70038f",
+      "bytes": 222554
+    },
+    "cinderbloom_body.blend1": {
+      "sha256": "877236bd820a35159d2e60203df24e8eb2f676bb379c57a3e69ef2054b9c8a2c",
+      "bytes": 222563
+    },
+    "cinderbloom_body.glb": {
+      "sha256": "ab9cec051208a0dd9527ae70ee596504e6dd46dc827473c512b93deae02c4d46",
+      "bytes": 328376
+    },
+    "cinderbloom_body.pieces.json": {
+      "sha256": "b3f84275a32a7b9f0dc17af2937c9c9000107cda6bee62880471c67b5c85dcd0",
+      "bytes": 2267
+    },
+    "cinderbloom_body.source.json": {
+      "sha256": "886ce0eb62ad5ab3c65efda7ac05623d77c6aab82133c74ed8dfc631c318272b",
+      "bytes": 941211
+    },
+    "cinderbloom_body.validation.json": {
+      "sha256": "ee25986ea26a2af7a4f3828d1dcb935d5f3790e528bbee349fa7d3a70d78c643",
+      "bytes": 801
+    },
+    "cinderbloom_leaves.blend": {
+      "sha256": "f6342bdd2c3fc2bed9bd4f51798fc611fe087663b556284277990be06adf70b7",
+      "bytes": 116927
+    },
+    "cinderbloom_leaves.blend1": {
+      "sha256": "df124bc58c59b51fe0dd1adddbd828cbe5cfecb0efc8dd9bc70252e142118ad1",
+      "bytes": 116925
+    },
+    "cinderbloom_leaves.glb": {
+      "sha256": "4955e07fa265ab1d297d54ffcc7abf9bb45ec6bb512381b532e68e9b79153f68",
+      "bytes": 32080
+    },
+    "cinderbloom_leaves.pieces.json": {
+      "sha256": "669f494a591a781bd015ed4bb8dce32b63fdd0de71d72dba33356231dace4bcf",
+      "bytes": 369
+    },
+    "cinderbloom_leaves.source.json": {
+      "sha256": "63f154c7616fa9e8715916c8a2f24b6c879204e5f672caf5c60fe9faa2e7206b",
+      "bytes": 88315
+    },
+    "cinderbloom_leaves.validation.json": {
+      "sha256": "77afe924d038ee9ade9ed1ca421f4cf5cd66a63158ac47b3b9ffb9f398fdcc16",
+      "bytes": 801
+    },
+    "finalize_manifest.py": {
+      "sha256": "9b63add5b2a9de1c15c8c5475a4afc2382881fc50a18141d3a8b9e59298b15f6",
+      "bytes": 2888
+    },
+    "hero.png": {
+      "sha256": "cf00483ba918fdeaaa8367b21b6b8783b82162d5dc9b2bc162033f8f80e9fb49",
+      "bytes": 1102602
+    },
+    "live-validation-v1.json": {
+      "sha256": "961063e0b592ec5b2b6bfbb10870aecb325ceba2bf7a96bbd399f43955de8a80",
+      "bytes": 15276
+    },
+    "runtime-profile.json": {
+      "sha256": "b831591ab51c4527d36aede17d025cdb80bc1155b1541d43d001b3c43fbe89d1",
+      "bytes": 604
+    },
+    "side.png": {
+      "sha256": "fc3d9559d1377d28110e7bd4e4689b601eb0dc4d12ac1ac320cee9094ae02872",
+      "bytes": 1097383
+    },
+    "turntable.mp4": {
+      "sha256": "4fd1290f8e7e63bdb0514e0a09635f42766b3c12ace32f06eabe3c1996cb3148",
+      "bytes": 574799
+    }
+  },
+  "facing_correction": {
+    "version": 2,
+    "native_front": "+UnityZ",
+    "previous_error": "v1 mouth/jaw -UnityZ opposite native face",
+    "changed": "Central crown, mouth details and jaw surfaces only; studio camera now views nativefront",
+    "preserved": "All vertex joint indices/weights, full palettes/IBMs, stem/root geometry, paired rearpetalchains+veins, leafGLB and palette",
+    "archive": "scratch/cinderbloom-v1-before-facing-fix",
+    "change_audit": {
+      "path": "scratch/cinderbloom-v2-change-audit.json",
+      "sha256": "e7873180f5bb8c21a44d40b8041f0699fb733f47050b1b1921f2164b72127272"
+    },
+    "live_v2": "pending; do not inherit v1 gameplay/visual acceptance"
+  },
+  "live_v2": {
+    "status": "facing_fix_pass_live_integrated_usable_prototype_final_polish_pending",
+    "evidence": "live-validation-v2.json",
+    "media": "live-v2/",
+    "bodySha256": "ab9cec051208a0dd9527ae70ee596504e6dd46dc827473c512b93deae02c4d46",
+    "scope": "Targeted facing fix passed live on plantA; small-detail polish, occlusion, full culling and all variants remain pending. V1 evidence unchanged."
+  },
+  "live_native_scale": {
+    "status": "native_scale_regression_pass_for_reviewed_cinderbloom_prototype",
+    "assetVersion": "v2_unchanged",
+    "evidence": "live-validation-native-scale.json",
+    "media": "live-native-scale/",
+    "scope": "Native1.6 scale reviewed on corrected Core; no geometry revision or full culling/variant acceptance."
+  }
+}

@@ -1,0 +1,294 @@
+{
+  "name": "Mossglass Reliquary",
+  "status": "ORIGINAL_OFFLINE_READY_LIVE_PENDING",
+  "nativeEnemy": "cubeA",
+  "nativeRendererId": 121012,
+  "rendererPath": "enJellyCube",
+  "nativeCelScale": [
+    1.1,
+    1.1,
+    1.1
+  ],
+  "visualScaleFactor": 1.0,
+  "boneNames": [
+    "Root_M",
+    "jellyCubeMid",
+    "jellyCubeTop"
+  ],
+  "sourceResourcesSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "sourceAnalysis": {
+    "file": "scratch/cube-topology-analysis/findings.json",
+    "sha256": "da7f8c2dbc65d4d2a4a105a2b0f2d23f23d74af851cf4d6e71a617ad924b9819",
+    "bytes": 130748
+  },
+  "runtimeProfile": {
+    "file": "runtime-profile.json",
+    "sha256": "a40a8c9c316c63e5d2ce60ab2ea70987b448ae4742779a3f546708ea9052b3b7",
+    "bytes": 882
+  },
+  "geometry": {
+    "names": [
+      "Root_M",
+      "jellyCubeMid",
+      "jellyCubeTop"
+    ],
+    "vertexCount": 2556,
+    "triangleCount": 852,
+    "primitiveTriangles": [
+      620,
+      232
+    ],
+    "softVertices": 1956,
+    "boundsMin": [
+      -0.97,
+      0.03,
+      -0.97
+    ],
+    "boundsMax": [
+      0.97,
+      2.07,
+      0.9877034415708494
+    ],
+    "nativeBoundsMin": [
+      -1.0349624156951904,
+      -0.20045699321988097,
+      -1.0256561960118618
+    ],
+    "nativeBoundsMax": [
+      1.0470059621777006,
+      2.0926432609558105,
+      1.0628503977411117
+    ],
+    "nativeBoundsContained": true,
+    "geometry": "Original analytic rings/tubes/ellipsoids; no native surface copied"
+  },
+  "originalProvenance": {
+    "file": "original-geometry-proof.json",
+    "sha256": "9f23ec623a40f525b1bb682884dd46b2d7a53ccc784709f31d6069b1f577fe29",
+    "bytes": 1252
+  },
+  "visualReview": {
+    "file": "root-offline-visual-review.json",
+    "sha256": "9ce98def74bdb6bda355dcdb3c6ce8667fc162502ac89c315e5ff9c758c41930",
+    "bytes": 801
+  },
+  "history": {
+    "status": "RECONSTRUCTED_REJECTED_PRIOR_STATE",
+    "image": {
+      "file": "offline-history/rib-seat-failure-death.png",
+      "sha256": "89443bd52d77ab9a42cf55856b8d449669e9c0df2fc54461ed1bfac351597d8d",
+      "bytes": 38572
+    },
+    "audit": {
+      "file": "offline-history/rib-seat-failure-death-audit.json",
+      "sha256": "09d744b3483ff2bd337864433183c35ff02f75f1d80652107c5123e3b23a9e77",
+      "bytes": 1521
+    },
+    "description": "Prior rib constants reconstructed deterministically after active outputs regenerated; not an untouched original image file. Earlier seats lay behind jamb and visibly separated under death bend."
+  },
+  "assets": [
+    {
+      "file": "mossglass.glb",
+      "sha256": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+      "bytes": 150316
+    },
+    {
+      "file": "mossglass.slot0.png",
+      "sha256": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+      "bytes": 562
+    },
+    {
+      "file": "mossglass.slot1.png",
+      "sha256": "3258757324a7156128f446cddc7b66ffedf320463edd3d503c1179489509b059",
+      "bytes": 2198
+    }
+  ],
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "791b717e606b1486ab600b133cc627429c05a111e82f63752717172c6312633f",
+      "bytes": 4773
+    },
+    {
+      "file": "audit_native_poses.py",
+      "sha256": "60095e1fa354e93378aa0a24ce9582e24cb82caf28e48dc696ca8a57a18f7a7d",
+      "bytes": 4964
+    },
+    {
+      "file": "binding-audit.json",
+      "sha256": "4f63209a87f658c84dc50541564ad291c86a59d43d7ecf77547ad71ade5d6cdb",
+      "bytes": 630
+    },
+    {
+      "file": "build_blender.py",
+      "sha256": "0e7c96aa2d4626d7bddb56c59c849f1388e7811cb89310a8db7820a099fdc182",
+      "bytes": 5576
+    },
+    {
+      "file": "build_geometry.py",
+      "sha256": "8d33d8a0069b651773b85139daaf8fcf7642fc5efe641131bba4276a784e38c5",
+      "bytes": 7471
+    },
+    {
+      "file": "finalize_manifest.py",
+      "sha256": "08f6c370a20a2698b3e3dda3938d890e851acceecc6c66ba1c53df5710e2edf2",
+      "bytes": 3158
+    },
+    {
+      "file": "hero.png",
+      "sha256": "63befb09ce769defc70a93b0760d144def1ebb910e01a14089aac5f7bb214974",
+      "bytes": 1077326
+    },
+    {
+      "file": "mossglass-reopened.glb",
+      "sha256": "bffbd9eff80ce18879654fcb2856817c92222464404871f374171539de25dcd9",
+      "bytes": 150316
+    },
+    {
+      "file": "mossglass-reopened.slot0.png",
+      "sha256": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+      "bytes": 562
+    },
+    {
+      "file": "mossglass-reopened.slot1.png",
+      "sha256": "3258757324a7156128f446cddc7b66ffedf320463edd3d503c1179489509b059",
+      "bytes": 2198
+    },
+    {
+      "file": "mossglass-reopened.source.json",
+      "sha256": "2b1788995f115def5dba84ab678d4733d376b7f3db2dd531222067ca09a26def",
+      "bytes": 517776
+    },
+    {
+      "file": "mossglass-reopened.validation.json",
+      "sha256": "8b593ee8a6df12c02bfc4c1e9c5b6f2689fe632d3102230968b45f6db4b76b69",
+      "bytes": 873
+    },
+    {
+      "file": "mossglass-studio.blend",
+      "sha256": "a6c9a19a8120f0550f4a2bb1bea664a1aa13746642df859638526c5a52af1546",
+      "bytes": 131079
+    },
+    {
+      "file": "mossglass.blend",
+      "sha256": "850f39436ea18feb2417159340ab186a3fc84cd158cd962b519c256b9b058036",
+      "bytes": 128148
+    },
+    {
+      "file": "mossglass.glb",
+      "sha256": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+      "bytes": 150316
+    },
+    {
+      "file": "mossglass.pieces.json",
+      "sha256": "ac2b1039fc80c3b300c95def7ebb1f2da1db41e7bbbd856bd0281eef39be0b24",
+      "bytes": 1373
+    },
+    {
+      "file": "mossglass.slot0.png",
+      "sha256": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+      "bytes": 562
+    },
+    {
+      "file": "mossglass.slot1.png",
+      "sha256": "3258757324a7156128f446cddc7b66ffedf320463edd3d503c1179489509b059",
+      "bytes": 2198
+    },
+    {
+      "file": "mossglass.source.json",
+      "sha256": "740a941c45d3362b0479608e4d2b5e79798801d4e3a0969894894a73e027cbf9",
+      "bytes": 467368
+    },
+    {
+      "file": "mossglass.validation.json",
+      "sha256": "ddea712cec11f440d460ee527ed2a5acc828c2a49864f4da62b417bbd86b20d6",
+      "bytes": 864
+    },
+    {
+      "file": "native-death-junction-pose-audit.json",
+      "sha256": "5febe5c12d762a0ef546e0e4d3d9ae67318c41ccc0da7aac177100121c87aa04",
+      "bytes": 1705
+    },
+    {
+      "file": "native-death-junction-pose-study.png",
+      "sha256": "a78e9a876f3c09610d0657aa2347140c1f50681a987a9a62e3c0a013eca30a79",
+      "bytes": 40037
+    },
+    {
+      "file": "native-death-pose-audit.json",
+      "sha256": "467badd5f227a98d2b882d5dc8ef0d5a78d86f59fc03dc328615d5292ace326c",
+      "bytes": 1521
+    },
+    {
+      "file": "native-death-pose-study.png",
+      "sha256": "395b4e3bf2f10360239e0c2bd5da87d7a3bf2804470077e6d2bbd98e3cb09c99",
+      "bytes": 38812
+    },
+    {
+      "file": "native-death-travel-pose-audit.json",
+      "sha256": "99b082c2d2026767d301023e6e5c4fed4a95aa91d4cedaee56fafc8d50863f8a",
+      "bytes": 1726
+    },
+    {
+      "file": "native-death-travel-pose-study.png",
+      "sha256": "31ccad2384d81a68e63e8549b7e85eadcb131e9d5481c1e149505a506e33479b",
+      "bytes": 28166
+    },
+    {
+      "file": "native-hit-pose-audit.json",
+      "sha256": "229b283984059cc94bdf1ff523ad68bae8b1a9ef063b97e1561e9589b0e74f68",
+      "bytes": 1713
+    },
+    {
+      "file": "native-hit-pose-study.png",
+      "sha256": "72b3d5e6769b6464c768625f8e3fd2e6854d2b597328901704db1531c7782785",
+      "bytes": 50539
+    },
+    {
+      "file": "native-pass-pose-audit.json",
+      "sha256": "bb1fba8f58999688cbdfd778cf82d20a0bd3e0924b0ce6b3ebd4b546c204c2a5",
+      "bytes": 1714
+    },
+    {
+      "file": "native-pass-pose-study.png",
+      "sha256": "1e51faa95b38b08c336e5b711696969897ced234f164b639b8f05af65ac34dc3",
+      "bytes": 45677
+    },
+    {
+      "file": "original-geometry-proof.json",
+      "sha256": "9f23ec623a40f525b1bb682884dd46b2d7a53ccc784709f31d6069b1f577fe29",
+      "bytes": 1252
+    },
+    {
+      "file": "root-corrected-pose-review.json",
+      "sha256": "87851f02257fbdbe5c954b623083318bef979825ba62a237e5d59b0c5fa812ee",
+      "bytes": 1729
+    },
+    {
+      "file": "root-offline-visual-review.json",
+      "sha256": "9ce98def74bdb6bda355dcdb3c6ce8667fc162502ac89c315e5ff9c758c41930",
+      "bytes": 801
+    },
+    {
+      "file": "runtime-profile.json",
+      "sha256": "a40a8c9c316c63e5d2ce60ab2ea70987b448ae4742779a3f546708ea9052b3b7",
+      "bytes": 882
+    },
+    {
+      "file": "side.png",
+      "sha256": "9d7e49020bd4b4a6f87eb74c73704ea95e4889cb335f8c3a400c74bc7b195988",
+      "bytes": 1022010
+    },
+    {
+      "file": "verify_original_geometry.py",
+      "sha256": "a46cabbd9a74fecbd1549ae3b260777f728574f0941f416e8e380e2f2631e3bb",
+      "bytes": 2387
+    }
+  ],
+  "limits": [
+    "Bind-bounds containment is not animation/culling proof.",
+    "Native shell material UV scroll retained but original combat-scale visibility pending.",
+    "Death projection supports downward displacement; no terrain-height/BakeMesh/corpse-visibility claim.",
+    "No live original model, material cleanup, clone independence or finished-art acceptance."
+  ]
+}

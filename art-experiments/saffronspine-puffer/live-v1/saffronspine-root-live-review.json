@@ -1,0 +1,40 @@
+{
+  "session": "19e39acaf4fe49c2b463cd069902e926",
+  "case": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-f8429f93414740938073683ae2fd3f1e/case-result.json",
+  "reviewedPngs": {
+    "pass": [
+      53,
+      101
+    ],
+    "attack": [
+      0,
+      30,
+      60,
+      101,
+      119
+    ],
+    "kill-fixture": [
+      60
+    ]
+  },
+  "verdict": "Original saffron and umber body, cream underside, blue fins, coral lips and eyes are readable. Both portraits clearly show the face. Eyes remain visible at the measured maximum extents in pass frame53 and attack frame119; fin roots and body remain connected. Native effects blur the attack frame60 view.",
+  "hit": "Normal10,HP58to48,BlowFish_HitSmall28\u201337.",
+  "death": "Explicit KillSingle from48 to0 HP. BlowFish_DeathDirect appears at27 through119; renderer disables at27. This is consistent with native fade behavior; the actual CEL fade field was not observed.",
+  "materialReadback": "scratch/saffronspine-live-material-state.json; emissionkeywordfalse/RGBzero,originaltextureassigned.",
+  "extentAudit": "scratch/saffronspine-live-extent-review.json",
+  "progression": {
+    "collects": 2,
+    "ready": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    }
+  },
+  "limits": [
+    "Exact pufferA only; pufferB remains separate.",
+    "Indirect death and ordinary lethal damage untested.",
+    "No final owned-resource teardown proof.",
+    "Selected visual review; not every captured pose individually reviewed."
+  ]
+}

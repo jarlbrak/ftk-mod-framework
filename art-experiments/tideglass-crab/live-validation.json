@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "asset": "Tideglass",
+  "iteration": "first original crabB baseline with retained native wizard hat",
+  "status": "scoped body and portrait appearance observed; native hat and FX limits",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "0b8becf223394f3386b42a7b92b22de4",
+    "case": "42129e2b57ea41d5b819f2cda98e1f09",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_tideglass",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_tideglass",
+      "baseEnemy": "crabB",
+      "displayName": "Tideglass Crab",
+      "combatProfile": "482b8f324233045b4effc0527f997283b7620993d2a4a90fccbf264a24d5c85a",
+      "renderers": [
+        {
+          "rendererPath": "enCrabWizard",
+          "glbFile": "tideglass.glb",
+          "textureFile": "tideglass_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "101f0fcddbcf1d20ec988a32b7a2b3c3cec4c253a64658d3e8f900eec7b171b8",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "bb8497",
+  "helperVersionPrefix": "63256ae",
+  "assetHashes": {
+    "tideglass.glb": "03dd99236525cf3e8b6cad11b318ea7677f42a63214eb78c83f247e7a6b65e4f",
+    "tideglass_basecolor.png": "0520848de6b09dddbfb16366d15eb4d65cdab8c85a000fa7de093980adbea84d"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-42129e2b57ea41d5b819f2cda98e1f09/journal.jsonl",
+    "sha256": "c94c5a64c0188470b6d8ee5936823e2e0fee766a7f97e4ebc2bcbf2c8be2cb20"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "ad6fb10770ca4d5ebcff265bb77c2896",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/24d8eec9172243228f056106dfff965b.json",
+        "sha256": "37c4fc863e0b023f22d9da17c41e2af7779d19bff2841ce0fb3616307d17dd7f"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-ad6fb10770ca4d5ebcff265bb77c2896/journal.jsonl",
+        "sha256": "a3de01d5ba1be992511a71831e585fd8a8b803a048293ccc3c49b8859843cb6a"
+      },
+      "summary": {
+        "path": "art-experiments/tideglass-crab/live/attack-summary.json",
+        "sha256": "efa5af6ee998f8341cbb9a0a897187b52091b62a8279af1d247ee8350aa371f9"
+      },
+      "video": {
+        "path": "art-experiments/tideglass-crab/live/attack.mp4",
+        "sha256": "676a65e694b96b61f38504f98376d42e1a71438b39efedf3ff277a66d55d2e6d"
+      },
+      "reviewedFrames": [
+        0,
+        50,
+        70
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/tideglass-crab/live/attack-0000.png",
+          "sha256": "0e86053d882a0fbd1df341692da9fae6b35240a5d197b84ad679c30ffb70c8b6"
+        },
+        {
+          "path": "art-experiments/tideglass-crab/live/attack-0050.png",
+          "sha256": "4536d3ee41068f4485c7f0eb9ca29652a8255a1e7041ac43ff4a5e9acff9e45a"
+        },
+        {
+          "path": "art-experiments/tideglass-crab/live/attack-0070.png",
+          "sha256": "fbc847ef7c6100e3e90ff8c5b85280e43904c891f7cceb671fc6c3c4a513229c"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "Crab_Idle"
+          ],
+          "sampleCount": 103,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 40,
+              "firstNormalizedTime": 22.380226135253906,
+              "lastNormalizedTime": 24.580238342285156,
+              "gameSeconds": 3.666656494140625
+            },
+            {
+              "firstFrame": 58,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13635574281215668,
+              "lastNormalizedTime": 3.491356611251831,
+              "gameSeconds": 5.5916595458984375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "Crab_Attack2"
+          ],
+          "sampleCount": 17,
+          "occurrences": [
+            {
+              "firstFrame": 41,
+              "lastFrame": 57,
+              "firstNormalizedTime": 0.11023351550102234,
+              "lastNormalizedTime": 0.9563875198364258,
+              "gameSeconds": 1.4666595458984375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "3a133012d8fa4921bcf26c0c1da111ff",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/81986a611e01408f83094dcd76fa4d32.json",
+        "sha256": "b81c1e645ef205d7b8d05d5857ed73cc121aeefbf4d7bd4710b11dba56d3b0ab"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-3a133012d8fa4921bcf26c0c1da111ff/journal.jsonl",
+        "sha256": "12362cc59d949e0049907ed45e8479835b82f8f49c82168fec3cbb46321d893b"
+      },
+      "summary": {
+        "path": "art-experiments/tideglass-crab/live/nonlethal-hit-summary.json",
+        "sha256": "8e187fbbc84c75f323ed9cffd77967b6665c04579523a2645c18aba98b8fcaa8"
+      },
+      "video": {
+        "path": "art-experiments/tideglass-crab/live/nonlethal-hit.mp4",
+        "sha256": "d528551c8cdcb654ab26c327e7444ebf31b3f5dacb5eeaf8a933b027002bb1ec"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/tideglass-crab/live/nonlethal-hit-0030.png",
+          "sha256": "957cff340b0ecad21e665d169adfbe116f3d13d8c607ab89f7f829a1cb3565a9"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        56
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "Crab_Idle"
+          ],
+          "sampleCount": 95,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 36.596683502197266,
+              "lastNormalizedTime": 37.9716911315918,
+              "gameSeconds": 2.2916717529296875
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 64,
+              "firstNormalizedTime": 0.08034324645996094,
+              "lastNormalizedTime": 1.7303426265716553,
+              "gameSeconds": 2.75
+            },
+            {
+              "firstFrame": 82,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13635574281215668,
+              "lastNormalizedTime": 2.1713550090789795,
+              "gameSeconds": 3.39166259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "Crab_Hit"
+          ],
+          "sampleCount": 8,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.1964285671710968,
+              "lastNormalizedTime": 0.8839284777641296,
+              "gameSeconds": 0.6416778564453125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "Crab_Attack2"
+          ],
+          "sampleCount": 17,
+          "occurrences": [
+            {
+              "firstFrame": 65,
+              "lastFrame": 81,
+              "firstNormalizedTime": 0.11023351550102234,
+              "lastNormalizedTime": 0.9563875198364258,
+              "gameSeconds": 1.4666595458984375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "3ab1c2b25b9e4dde8cdae5c79ba0c713",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/4d137848766349b6ae00ffe53b41a86c.json",
+        "sha256": "1bd7a026731f001681734066cba29d7a28df208c01fc842629e08ae4b1974933"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-3ab1c2b25b9e4dde8cdae5c79ba0c713/journal.jsonl",
+        "sha256": "dd6ed6e625798162fab0e0ebdb857dd10b9371cb3bd2c1388d86165ada924037"
+      },
+      "summary": {
+        "path": "art-experiments/tideglass-crab/live/kill-fixture-death-summary.json",
+        "sha256": "3986a2e916a3fe25e46629465a64af63fe73844458f45b2037d47c4d5848e7d7"
+      },
+      "video": {
+        "path": "art-experiments/tideglass-crab/live/kill-fixture-death.mp4",
+        "sha256": "2235bea689fe4f1565531774bcc201fa4b6dcf0f4373e7a13a2fec1e8c57301c"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/tideglass-crab/live/kill-fixture-death-0040.png",
+          "sha256": "023f5517aa0a14c779c540d185598b610b95dac6017c354e41a667452bcf3ce5"
+        },
+        {
+          "path": "art-experiments/tideglass-crab/live/kill-fixture-death-0060.png",
+          "sha256": "95f834ed58d9c6b62c076f554833807d57a9ba980eb4e99958c9d4d4b017c046"
+        }
+      ],
+      "hpBeforeAfter": [
+        56,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908355712890625,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "Crab_Idle"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 39.83154296875,
+              "lastNormalizedTime": 41.26155090332031,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "Crab_DeathDirect"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13199998438358307,
+              "lastNormalizedTime": 4.179996967315674,
+              "gameSeconds": 8.433349609375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Idle body/pincers readable. Native purple wizard hat remains in body and portrait, absent in studio. Attack50 hidden by effects;70 motionblur/return. Hit30 hero/effect obscured. Native collapse coherent at40/60 with hat hiding part of body.",
+    "limits": "Retained native hat, effects and motion blur limit visible deformation. No unoccluded full-motion or culling/art-perfection acceptance."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "afterCollect": {
+      "path": "scratch/tideglass-after-collect2.json",
+      "sha256": "22de72bfde94a7fa1cc18851a43f7574fcf8b2c390472b5823f8e9203b8b7fca"
+    },
+    "result": "two guarded Collect actions; strict Ready level0 room2"
+  },
+  "historicalEvidencePreserved": "Native wizard hat retained, original asset parts distinct from native accessory.",
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/tideglass-endpoints-20260906-120710/deployment.json",
+    "sha256": "dec348d98a86d48df8d7100d47ddb5b91bde4143692d05b63dbd49c6d9c2edc7"
+  },
+  "binaryAndCatalogHashes": {
+    "model-test-profiles.json": "101f0fcddbcf1d20ec988a32b7a2b3c3cec4c253a64658d3e8f900eec7b171b8",
+    "BepInEx/plugins/FTKModFramework_content/models/tideglass.glb": "03dd99236525cf3e8b6cad11b318ea7677f42a63214eb78c83f247e7a6b65e4f",
+    "BepInEx/plugins/FTKModFramework_content/models/tideglass_basecolor.png": "0520848de6b09dddbfb16366d15eb4d65cdab8c85a000fa7de093980adbea84d",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "63256ae05fdf47cb11744e30e3df6f4152661aecc351ef7a030c18f1beb52b67",
+    "BepInEx/plugins/FTKModFramework.dll": "bb8497a412721f102d914af55744d7952e955ba07b5c9443beb68a00713b7ef3",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "329771384cd6d4ba5dfa68d4557e7675cf0145166fcffb60344c886940a517af",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65"
+  },
+  "materialValidation": {
+    "evidence": {
+      "path": "scratch/tideglass-material-inventory.json",
+      "sha256": "4fd4ef4035c610afb3c997fdb27dcbed3d97e8af661697c9722843559d016e8f"
+    },
+    "status": "private matLoot emission off,RGBblack,mapnull, original texture retained"
+  },
+  "deathMode": {
+    "clip": "Crab_DeathDirect",
+    "nativeRagdoll": false,
+    "recordedRigidbodyCounts": [
+      0,
+      1
+    ],
+    "limits": "Observed rigidbody count change does not establish ragdoll mode or exact accessory ownership."
+  }
+}

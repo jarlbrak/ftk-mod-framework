@@ -1,0 +1,535 @@
+{
+  "status": "fresh_native_scale_single_renderer_complete_hit_and_kill_ready_observed",
+  "session": "b3478c0c658f47c6a3ba82b94b9a6f2a",
+  "enemy": "ftkmf_modeltest_cinderwing",
+  "displayName": "Cinderwing",
+  "nativeChassis": "batA",
+  "frameworkSha256": "9e533f894a2a6efa43125e89869ecbdca668eaa53a8cf44c3e6bbb632b4c4708",
+  "profileInputSha256": "6a0e012c9250ac234e3c0e1808a471c79caca807a34a70a1ffa45a6f1d73fd99",
+  "assetHashes": {
+    "build_model.py": "412f34cf56463b3f9ac6072d37622a423f88773202ec604c8cf17417536db562",
+    "skin_model.py": "929f56ea3199b6d95fdee8282d5753d3203291d98347b99e291906bbcedd20ba",
+    "source_mesh.json": "93c67ee1eae8f9fef980391d7ae3c35662277cd027712d684b39a9d38099b2b0",
+    "cinderwing_rigged.glb": "9c0083c623129d073a69512accb409423c1fa6ab1c830729815bd4954d06deb5",
+    "cinderwing_basecolor.png": "280feb8ae2f83da240e25fb0261b8c9ac0c38456a6a8746e56817d0a74df4040"
+  },
+  "binding": {
+    "nativeChassis": "batA",
+    "ownerInstanceId": 369188,
+    "visualScale": 1.0,
+    "capturedNativeRootScale": 0.78,
+    "renderers": [
+      {
+        "rendererPath": "enBat01",
+        "glbFile": "cinderwing_rigged.glb",
+        "rendererInstanceId": -245120,
+        "ownerInstanceId": 369188,
+        "boneSignature": "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+      }
+    ]
+  },
+  "captures": [
+    {
+      "label": "pass",
+      "captureId": "17eff3318a484ae096bf3015d5555717",
+      "case": "scratch/mirewarden-game/model-test-output/case-047f588a5e194fe5804fb46ad0eaad33",
+      "frames": 120,
+      "rawSha256": "ed3d11f29be460994580853656151a7a99338efb42aab28d6f6e0b55bcf6dc40",
+      "summarySha256": "d60f39db147df58b9d4f840a704c1003ea0331aa2c1cc20a9e6553466ae6c23a",
+      "width": 1280,
+      "height": 832,
+      "requestedFps": 12.0,
+      "complete": true,
+      "termination": null,
+      "captureReportedOk": true,
+      "captureError": null,
+      "actualGameSeconds": 10.908340454101562
+    },
+    {
+      "label": "nonlethal-hit",
+      "captureId": "3dc33ff3fa944f179c221ce2d6a6c72e",
+      "case": "scratch/mirewarden-game/model-test-output/case-19f768fcbb514f9cade77100cc0e5930",
+      "frames": 120,
+      "rawSha256": "c55646baf4268074b8b0f1927aed9e340ab77e2986ada0f71a2a97e72a7720d0",
+      "summarySha256": "49f6fe16b08aeb2661ad0eead14633dce1e7d4386473d5784c04c082ac33cc19",
+      "width": 1280,
+      "height": 832,
+      "requestedFps": 12.0,
+      "complete": true,
+      "termination": null,
+      "captureReportedOk": true,
+      "captureError": null,
+      "actualGameSeconds": 10.9083251953125
+    },
+    {
+      "label": "kill-fixture",
+      "captureId": "6b42328aebe14025989e2ff5dd37de7f",
+      "case": "scratch/mirewarden-game/model-test-output/case-9d8a1ea0451d4ffdb7d30cb05fc2a840",
+      "frames": 120,
+      "rawSha256": "00a96efc1a894f31a6e5a3ff955b4c1da3ccc7f051d6504dc31f47b6d6765069",
+      "summarySha256": "12de5ad59267110852b7b602148b0c9481d85f9eaa5a377d4a0cf10ff10a7019",
+      "width": 1280,
+      "height": 832,
+      "requestedFps": 12.0,
+      "complete": true,
+      "termination": null,
+      "captureReportedOk": true,
+      "captureError": null,
+      "actualGameSeconds": 10.9083251953125
+    }
+  ],
+  "ordinaryAttack": {
+    "beforeHp": 58,
+    "afterHp": 50,
+    "cheat": "None",
+    "focus": false
+  },
+  "ordinaryLethal": false,
+  "explicitKillFixture": {
+    "beforeHp": 50,
+    "afterHp": 0,
+    "method": "KillSingle",
+    "actionCommitted": "KillSingle",
+    "deathCaptureComplete": true,
+    "deathFrameCount": 120,
+    "termination": null
+  },
+  "nativeCollects": 1,
+  "finalReady": {
+    "ok": true,
+    "buttonCount": 1,
+    "level": 0,
+    "room": 2,
+    "collectAvailable": false
+  },
+  "readyResult": {
+    "path": "scratch/mirewarden-game/model-test-output/b20bed517872445a958a5bf8d088a2d6.json",
+    "sha256": "d708ec281b5fb7dd8244876d149e5a994563be074e9ea32993256e345d1047d7",
+    "result": {
+      "ok": true,
+      "status": "clicked",
+      "heroInstanceId": -235480,
+      "method": "VoteButton.OnLeftClick(Ready)",
+      "note": "Native Ready vote submitted; poll the normal encounter flow. No raw FSM or acknowledgment was sent.",
+      "testFixtureMaxHpTarget": 999,
+      "tutorialsQuiet": true,
+      "session": "b3478c0c658f47c6a3ba82b94b9a6f2a",
+      "id": "b20bed517872445a958a5bf8d088a2d6",
+      "frame": 61965,
+      "savePath": "save-model-test-81fab5f083e30704"
+    }
+  },
+  "afterReadyState": {
+    "path": "scratch/mirewarden-game/model-test-output/4de8881585d84d3889eecf710e59b856.json",
+    "level": 0,
+    "room": 3,
+    "queuedRoomType": "Trap1",
+    "queuedObjects": [
+      "trap"
+    ],
+    "strictReady": true
+  },
+  "materialReview": {
+    "renderer": "enBat01",
+    "note": "Native-scale inventory recorded; authored texture and scale are preserved in the source validation supplement."
+  },
+  "historicalEvidence": "art-experiments/cinderwing-bat/live-validation.json",
+  "scale": {
+    "requestedFactor": 1.0,
+    "nativePrefabRootLocalScale": [
+      0.7799999713897705,
+      0.7799999713897705,
+      0.7799999713897705
+    ],
+    "observedRendererWorldAxisLengths": [
+      0.7800000033748864,
+      0.7799999713897705,
+      0.7800000033748864
+    ]
+  },
+  "progression": "The native-scale process bound the exact enBat01 mesh, completed pass/nonlethal-hit/KillSingle captures, preserved HP 58 to 50 ordinary damage, accepted one native Collect into strict Ready at level 0 room 2 and recorded the guarded Ready continuation boundary.",
+  "selectedPNGs": [
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/attack-0000.png",
+      "archive": "selected/pass-0000.png",
+      "sha256": "f7486ea0e7f037141cda6083416a0847bead4e103e55f1b65666b76b95260735",
+      "action": "pass",
+      "index": 0,
+      "observation": "Fresh native-scale bat bind is readable and onscreen in the dungeon arena."
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/attack-0050.png",
+      "archive": "selected/pass-0050.png",
+      "sha256": "f965b7cd0a33328dbb7457bd7b066de1020ad1a5ee7ee63c787abdf9e12855b0",
+      "action": "pass",
+      "index": 50,
+      "observation": "Native flight/attack staging preserves coherent wing folds at captured scale 0.78."
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit-0030.png",
+      "archive": "selected/nonlethal-hit-0030.png",
+      "sha256": "8e9ef04dcbe5471b9a2a69db36d8077cffb2ccf5b644e957206f18aeccb7fa64",
+      "action": "nonlethal-hit",
+      "index": 30,
+      "observation": "Ordinary native hit resolves HP 58 to 50 while the custom bat remains bound."
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death-0040.png",
+      "archive": "selected/kill-fixture-0040.png",
+      "sha256": "b5881161ab817435000b56bbf15628186ca45136e6f76235b5162a927baaf4f6",
+      "action": "kill-fixture",
+      "index": 40,
+      "observation": "Explicit KillSingle shows the bat in the native batDeath transition."
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death-0060.png",
+      "archive": "selected/kill-fixture-0060.png",
+      "sha256": "823186ce88361b1c99def4caeb2c41d95f67ff3de5bd2ffe6d698e94d69f3e7a",
+      "action": "kill-fixture",
+      "index": 60,
+      "observation": "The fixture death settles with wings intact in the reviewed native-scale view."
+    }
+  ],
+  "videos": [
+    {
+      "label": "pass",
+      "captureId": "17eff3318a484ae096bf3015d5555717",
+      "path": "pass.mp4",
+      "sha256": "9ce731d588376d7859e32218d638a8098c67a2c53a6cd3f89f66b231ce4a47e8",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing"
+    },
+    {
+      "label": "nonlethal-hit",
+      "captureId": "3dc33ff3fa944f179c221ce2d6a6c72e",
+      "path": "nonlethal-hit.mp4",
+      "sha256": "7f1bbb58a6a4ddd7b8c010744ce3945a0612bb854423a8091c1ac4292d98d669",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing"
+    },
+    {
+      "label": "kill-fixture",
+      "captureId": "6b42328aebe14025989e2ff5dd37de7f",
+      "path": "kill-fixture.mp4",
+      "sha256": "5375a8bd7e454fe9417e94cec94ecb6be233eaa6ee974346e44ea1b6ff9ec5ed",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing"
+    }
+  ],
+  "sourceImageCount": 380,
+  "sourceImagePins": "source-image-pins.json",
+  "assetPins": "asset-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/cinderwing-bat/README.md",
+      "sourceSha256": "5b10120bb33db50633184e06b290140f002dc1f5ebefb5d827d21735dfe0f32a",
+      "archive": "metadata/art-experiments/cinderwing-bat/README.md.gz",
+      "archiveSha256": "e769e95c2452bda11e073489005ed0f0adecd35d6a86f63e3a45ec38f1eb47f3",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/build_model.py",
+      "sourceSha256": "412f34cf56463b3f9ac6072d37622a423f88773202ec604c8cf17417536db562",
+      "archive": "metadata/art-experiments/cinderwing-bat/build_model.py.gz",
+      "archiveSha256": "8b186d5c99de73e429dc5707c013fe721c97dfe3482db745d3eb21f60fc1043d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/cinderwing-bind.blend",
+      "sourceSha256": "b2b06dd3030431fe948bca14e6d91876f612c4bda763f3d3af8f75994c4ff0a4",
+      "archive": "metadata/art-experiments/cinderwing-bat/cinderwing-bind.blend.gz",
+      "archiveSha256": "8f67ea8f86651f89bb4b215f1f135b71d991c743751eed467201b51d3140b659",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/cinderwing_rigged.glb",
+      "sourceSha256": "9c0083c623129d073a69512accb409423c1fa6ab1c830729815bd4954d06deb5",
+      "archive": "metadata/art-experiments/cinderwing-bat/cinderwing_rigged.glb.gz",
+      "archiveSha256": "e3872217f147a9b657be4f4a9f393f578b437d39032a6fcf762f7e2fb6276d11",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live/attack.mp4",
+      "sourceSha256": "92b6918f9126e1d38a5c83fc55dcb77c463de98c17aa3e7d71ea22d60226622a",
+      "archive": "metadata/art-experiments/cinderwing-bat/live/attack.mp4.gz",
+      "archiveSha256": "b6ad697879563ca2510f6592516783f19c911c08396aad166fcd19b2425d6354",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live/lethal-death.mp4",
+      "sourceSha256": "84497a997f85316aa215106676e53dfa5fa8c7c82626d1225b9db8c66a6e8821",
+      "archive": "metadata/art-experiments/cinderwing-bat/live/lethal-death.mp4.gz",
+      "archiveSha256": "9b2dfd7b8feb14e75bb96c878f20f76753f0ab29269e94bc14e61175a1f14d52",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live/nonlethal-hit.mp4",
+      "sourceSha256": "149ed950200e4f5dae58bba91894076b2bf1977cc3c6d4f915ef729d6bfec307",
+      "archive": "metadata/art-experiments/cinderwing-bat/live/nonlethal-hit.mp4.gz",
+      "archiveSha256": "5a9184c4781f027a699709cc576cf9a8b68f139c732be6c8a24ef4e84cefb9e9",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/attack-summary.json",
+      "sourceSha256": "d60f39db147df58b9d4f840a704c1003ea0331aa2c1cc20a9e6553466ae6c23a",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-native-scale/attack-summary.json.gz",
+      "archiveSha256": "4c732b9e2936fbb7f24ddf91c285537bf1207231fe272ab524901da3a4f199c9",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/attack.mp4",
+      "sourceSha256": "d6c3b4cc48e0f7477847a09fd59ea8b4de903a2ce986161b063b8917300fd24a",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-native-scale/attack.mp4.gz",
+      "archiveSha256": "6a576fbd6a2bbba0e5b51a377d95e8ff8a20dac82b44234e4997a80330e17aa3",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death-summary.json",
+      "sourceSha256": "12de5ad59267110852b7b602148b0c9481d85f9eaa5a377d4a0cf10ff10a7019",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death-summary.json.gz",
+      "archiveSha256": "aedf6d2bc056dcf6f83c24d46969928314ae1164f91dc07c81ee9534c9efa97f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death.mp4",
+      "sourceSha256": "53f304017b1c993718f9acacda06e31c2cbe7f1c70f64c1336c4fae15fe3108c",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death.mp4.gz",
+      "archiveSha256": "92d80b119071a64074515b178ec172015e2e731a4ab7ff8647bb3b311b53b3d4",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit-summary.json",
+      "sourceSha256": "49f6fe16b08aeb2661ad0eead14633dce1e7d4386473d5784c04c082ac33cc19",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit-summary.json.gz",
+      "archiveSha256": "cf0a8dc884e45d2a8c465d596ed72be66af9c749decd8e6b7c514ba5e3a371cb",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit.mp4",
+      "sourceSha256": "65584c6e0d34db6b49e1322044b4849cdd085d0d01e5df5b145c023d3541eb7e",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit.mp4.gz",
+      "archiveSha256": "d8debb16ab7dbae43a9e962c2a24a25b79d21eb6b959440f9665b0883914853d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-validation-native-scale.json",
+      "sourceSha256": "a0666dab69d0b26bc6bc62735ba818f199357ed17aaa268db1f531fd8d4e1936",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-validation-native-scale.json.gz",
+      "archiveSha256": "6e8d12656aef602fe367d097b5e6390ff7d1e5e1c5cd385ef05ebfbb00f05eea",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/live-validation.json",
+      "sourceSha256": "81aa3e67b03ff171085c003305c986b457666d6bbe2eae82edf8dae94977d378",
+      "archive": "metadata/art-experiments/cinderwing-bat/live-validation.json.gz",
+      "archiveSha256": "014c6bfba55718934b8cd8f97dc8a24c18044262734c7639e400645a5b7c7d0a",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/manifest.json",
+      "sourceSha256": "a01a58c6d5da1739834d94b92368a3a28bc9dd8eb51a57e58784f132b8b71075",
+      "archive": "metadata/art-experiments/cinderwing-bat/manifest.json.gz",
+      "archiveSha256": "f2b41ada1f80d831f8181d19fa4d6211a7c4cff80c2160129ecadc4220301b07",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/skin_model.py",
+      "sourceSha256": "929f56ea3199b6d95fdee8282d5753d3203291d98347b99e291906bbcedd20ba",
+      "archive": "metadata/art-experiments/cinderwing-bat/skin_model.py.gz",
+      "archiveSha256": "0dc135677512abcd9ee7b22383cbd7615d2a87d9a8e543c733156594d3afd386",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/source_mesh.json",
+      "sourceSha256": "93c67ee1eae8f9fef980391d7ae3c35662277cd027712d684b39a9d38099b2b0",
+      "archive": "metadata/art-experiments/cinderwing-bat/source_mesh.json.gz",
+      "archiveSha256": "22a4ec12bec569f4176eea7f1de94564f5328f26e52fd56ec790c135667a7057",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/source_unskinned.json",
+      "sourceSha256": "508fdc428d98e51699a2879a7003ec3e4942ee6c1f41080fbfff2f9356ed071e",
+      "archive": "metadata/art-experiments/cinderwing-bat/source_unskinned.json.gz",
+      "archiveSha256": "31061652e80da0a035248228574d762bb93b069090e5420a0bb606556baf9f15",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/cinderwing-bat/validation.txt",
+      "sourceSha256": "2578b30ebe34922ea5414b53732e9fd7a217a2029db1f600b71d85f7c7aeb9e7",
+      "archive": "metadata/art-experiments/cinderwing-bat/validation.txt.gz",
+      "archiveSha256": "cb67f9b1c1c67dbaebe9e3edfbb7f16c9370f6b355ad15bdfa0fd3a60ce41038",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/cinderwing-scale-after-collect1.json",
+      "sourceSha256": "0d0014c05eea645e8807852845561b95e282bbaee8544711bb1967ebec34694c",
+      "archive": "metadata/scratch/cinderwing-scale-after-collect1.json.gz",
+      "archiveSha256": "169251851b48b8d15a021d03acd2572da44489b4c15da785fe80a2f50f5ca74c",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/cinderwing-scale-collect1.json",
+      "sourceSha256": "44484b2befe13873a0fcf9c6be760681ad361d49905970954067343e4f68e246",
+      "archive": "metadata/scratch/cinderwing-scale-collect1.json.gz",
+      "archiveSha256": "f7ab9da0fda61f1306ec78b9ff4c63dce6c843a5a45ca304514fcc63dbeaccde",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/cinderwing-v2-root-visual-review.json",
+      "sourceSha256": "66bbca7460666e684fd43d4173335e9255a86fcfd812c9c7c24b735a088b2cbc",
+      "archive": "metadata/scratch/cinderwing-v2-root-visual-review.json.gz",
+      "archiveSha256": "2095e70efccb95c1d7a00ad9a1973cd7d35c9696d941c1950858bd9d7b84886e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/cinderwing-v2-standalone-case.json",
+      "sourceSha256": "5356c776e82b5848b07b100eff8f491d3ce339f0179ec3aa53bec638bd35e999",
+      "archive": "metadata/scratch/cinderwing-v2-standalone-case.json.gz",
+      "archiveSha256": "f76630153ac38a43a1c4d847c138c6247a654a4c19b8f81f23942d1e7484dfb9",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/17eff3318a484ae096bf3015d5555717.json",
+      "sourceSha256": "ed3d11f29be460994580853656151a7a99338efb42aab28d6f6e0b55bcf6dc40",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/17eff3318a484ae096bf3015d5555717.json.gz",
+      "archiveSha256": "73480fce77f5d8df414b099c76920377447dbbb44475e55e4a2ba42da1b694fc",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/35edd41d27604f6bbed3a3c0062fb9ca.json",
+      "sourceSha256": "846525749083f544a27cd0aaa11cc536fd35838e85ec9055a32ce991398eb02a",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/35edd41d27604f6bbed3a3c0062fb9ca.json.gz",
+      "archiveSha256": "b09fba477d2529125ab49792afa16eb285489bf34da25bcdd5e4a99230ac74a5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/3dc33ff3fa944f179c221ce2d6a6c72e.json",
+      "sourceSha256": "c55646baf4268074b8b0f1927aed9e340ab77e2986ada0f71a2a97e72a7720d0",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/3dc33ff3fa944f179c221ce2d6a6c72e.json.gz",
+      "archiveSha256": "88b1543bbb91af4a325bef54b8d52c8c4257fcb2a3fb28423dff34cb70955ea3",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/4de8881585d84d3889eecf710e59b856.json",
+      "sourceSha256": "735ade01e6d82d8ba3e34a3a49eda1ab630f57a76b7fc38a0ca6d3c5a34bbee8",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/4de8881585d84d3889eecf710e59b856.json.gz",
+      "archiveSha256": "fc1908157a25dae6bab8a5f68082e09d14a4ae8187d0a838a59a9c6989b0915f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/6b42328aebe14025989e2ff5dd37de7f.json",
+      "sourceSha256": "00a96efc1a894f31a6e5a3ff955b4c1da3ccc7f051d6504dc31f47b6d6765069",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/6b42328aebe14025989e2ff5dd37de7f.json.gz",
+      "archiveSha256": "3124345fe28379d219879b8ab8a496f59e4e4fbf9fa94706fb06170d8ed2f195",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/9baaacfbdca244c79d17fa7341dc7b69.json",
+      "sourceSha256": "9cf1ac58fcbfa319c3a80f2b79b44e230f8a2f5bd3c47015cd864a922f242b90",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/9baaacfbdca244c79d17fa7341dc7b69.json.gz",
+      "archiveSha256": "89ed7624260e523ac9267034eeb2b7318db6208b73ff1f6cc7b9e6151ef7acc6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/b20bed517872445a958a5bf8d088a2d6.json",
+      "sourceSha256": "d708ec281b5fb7dd8244876d149e5a994563be074e9ea32993256e345d1047d7",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/b20bed517872445a958a5bf8d088a2d6.json.gz",
+      "archiveSha256": "95c6afe6c9aab48a7771e1c757c91c1da5c4f929e9ac2d1b47adfe3079351a9d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/b73cc208beb94c7fb74c1cb709ac93dc.json",
+      "sourceSha256": "8356f7113e52054ee036652090538e0afbabcd7514567bd830f1271f80dcd66d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/b73cc208beb94c7fb74c1cb709ac93dc.json.gz",
+      "archiveSha256": "2d84f1e8bf382ad03af78b34d342b202dba1c40b0b4ab8c3e016ac945dd504fc",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-047f588a5e194fe5804fb46ad0eaad33/capture-summary.json",
+      "sourceSha256": "d60f39db147df58b9d4f840a704c1003ea0331aa2c1cc20a9e6553466ae6c23a",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-047f588a5e194fe5804fb46ad0eaad33/capture-summary.json.gz",
+      "archiveSha256": "4c732b9e2936fbb7f24ddf91c285537bf1207231fe272ab524901da3a4f199c9",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-047f588a5e194fe5804fb46ad0eaad33/journal.jsonl",
+      "sourceSha256": "ff84b27218373e938d4f85becb1c76e811dab7920e98294840d8eda0a4f113ee",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-047f588a5e194fe5804fb46ad0eaad33/journal.jsonl.gz",
+      "archiveSha256": "8c5e96e167d18f0819a2953ee0367d9f9464b93fe89491212f71626941b9c7ab",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-19f768fcbb514f9cade77100cc0e5930/capture-summary.json",
+      "sourceSha256": "49f6fe16b08aeb2661ad0eead14633dce1e7d4386473d5784c04c082ac33cc19",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-19f768fcbb514f9cade77100cc0e5930/capture-summary.json.gz",
+      "archiveSha256": "cf0a8dc884e45d2a8c465d596ed72be66af9c749decd8e6b7c514ba5e3a371cb",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-19f768fcbb514f9cade77100cc0e5930/journal.jsonl",
+      "sourceSha256": "1adda599af8a834368b8f73da9376f820a4c5c5ec2ba59552370f973732704fb",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-19f768fcbb514f9cade77100cc0e5930/journal.jsonl.gz",
+      "archiveSha256": "d3ab1ea81c7ac8d065a57c5a1d188e64ae822f484c89c4d5e7ceb73cac99fb3d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-64d1ffeb67064c24a23e03c4bf69f694/result.json",
+      "sourceSha256": "0487d2acaee8df56d00e101017b37a132d8629d604ac7576eff8d85b74e506a6",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-64d1ffeb67064c24a23e03c4bf69f694/result.json.gz",
+      "archiveSha256": "efba7425ade326818da89e5399a784aa48df908f103c95cdf16068a47ca55ff6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-9d8a1ea0451d4ffdb7d30cb05fc2a840/capture-summary.json",
+      "sourceSha256": "12de5ad59267110852b7b602148b0c9481d85f9eaa5a377d4a0cf10ff10a7019",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-9d8a1ea0451d4ffdb7d30cb05fc2a840/capture-summary.json.gz",
+      "archiveSha256": "aedf6d2bc056dcf6f83c24d46969928314ae1164f91dc07c81ee9534c9efa97f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-9d8a1ea0451d4ffdb7d30cb05fc2a840/journal.jsonl",
+      "sourceSha256": "628850b7bb19a4a2717656d6f76158609e6240434e692903118c6a76cb97f233",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-9d8a1ea0451d4ffdb7d30cb05fc2a840/journal.jsonl.gz",
+      "archiveSha256": "4db698254dab773b816f07d50555ad083c51e2c545a4668436977c5389fabfd2",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/e85500d6d8b4444f8fc8bd37713cdac2.json",
+      "sourceSha256": "23eb2466521bcb57519c56908d5a69f9cc130f66de386f49bed0c890aa331c66",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/e85500d6d8b4444f8fc8bd37713cdac2.json.gz",
+      "archiveSha256": "741e1eb75c3aa8967bde126e781a2056620a256881b10a4bb531cff74a170960",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/new-run-session-b3478c0c658f47c6a3ba82b94b9a6f2a.json",
+      "sourceSha256": "91a9da100d8f7794c7fd91b700a2c126c23155dc29113cd046f5d29901156f5b",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/new-run-session-b3478c0c658f47c6a3ba82b94b9a6f2a.json.gz",
+      "archiveSha256": "246c338b7ffbb9c5ca846b7b5cc8304cb2c5786309e720edabbfa65d708d041a",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-profiles.json",
+      "sourceSha256": "f30d96713384e94e97ffca1dca4fc719374eac0e401a98e69ca95eacbb47cc12",
+      "archive": "metadata/scratch/mirewarden-game/model-test-profiles.json.gz",
+      "archiveSha256": "14f217857188e061cab892acdbdeaa168d16c6359ec72c643885e230e450d2cb",
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "standaloneCase": "scratch/cinderwing-v2-standalone-case.json",
+  "rootVisualReview": "scratch/cinderwing-v2-root-visual-review.json",
+  "limits": [
+    "Prototype art and small body; selected views only",
+    "Earlier old-framework lethal death capture remains a separate 92-frame renderer-destroyed historical record",
+    "KillSingle is an explicit fixture, not ordinary lethal damage",
+    "Earliest hit/proficiency/death intervals, full culling and other controller variants remain open"
+  ]
+}

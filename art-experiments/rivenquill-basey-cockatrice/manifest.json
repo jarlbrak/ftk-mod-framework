@@ -1,0 +1,34 @@
+{
+  "name": "Rivenquill Cockatrice",
+  "status": "ORIGINAL_ART_ALL_RESOURCE_ROUTES_LIVE_VALIDATED_LIMITED_ART_PENDING",
+  "nativeSurfaceCopied": false,
+  "routes": [
+    {
+      "resourcePrefab": "enbaseycockatriceboss",
+      "nativeEnemy": "bossCockatrice",
+      "rendererPath": "enBaseyCockatrice",
+      "sourceRendererId": 121693,
+      "controller": "cockatriceController",
+      "controllerId": 5949
+    },
+    {
+      "resourcePrefab": "enbaseycockatricesmall",
+      "nativeEnemy": "cockatriceC",
+      "rendererPath": "enBaseyCockatrice",
+      "sourceRendererId": 121694,
+      "controller": "cockatriceController",
+      "controllerId": 5949
+    }
+  ],
+  "originalAssets": {
+    "rivenquill.glb": "5accc076dfb5ef0e11b4193bada85ac6778961db767b24be0acb758fda411f1f",
+    "rivenquill-palette.png": "30db7fc5ef913c6329ad3d6f22faf149ef89f5d1256afee028e4d8ef91ebd47c",
+    "rivenquill.source.json": "1690d6b5ab44ec42e060f7e995ea67d1aa97e7bf49594a819eeb85d4453f16db",
+    "rivenquill.pieces.json": "827f43b373a6bb0051a01d104c11d6e6a5e62c83be910d2b421b4a447db3253d"
+  },
+  "buildReportSha256": "c86592072c15422b35102f8ef8da0f74b75ebcb29eaa8649a48a2bc762a2e23a",
+  "limits": [
+    "Offline bind validation does not establish resource selection, runtime binding, animation, material response, culling, portraits or gameplay.",
+    "The two resource profiles share only checked bind data and asset bytes; each has its own archived native controller/source-pair trial and retains its own acceptance scope."
+  ]
+}

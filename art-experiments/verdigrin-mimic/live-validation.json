@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "asset": "Verdigrin Coffer",
+  "iteration": "first original mimicA live baseline",
+  "status": "scoped body, portrait and material appearance pass; visibility limits remain",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "6876a942efea46b2a73c0df3e0e77b0c",
+    "case": "72966f7529864072ad7814ddfe5c0f52",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_verdigrin",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_verdigrin",
+      "baseEnemy": "mimicA",
+      "displayName": "Verdigrin Coffer",
+      "combatProfile": "a78ca2526fd86c3dcd283858b58448b98081356e758ddbe3e2081eba1ebc7ebe",
+      "renderers": [
+        {
+          "rendererPath": "mimic01",
+          "glbFile": "verdigrin.glb",
+          "textureFile": "verdigrin_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "508d2316a358b05070ca22cfe0b3dc59c4583eb545f7b7516b9a97ee6e8d7314",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "bb8497",
+  "helperVersionPrefix": "81b507",
+  "assetHashes": {
+    "verdigrin.glb": "97838ca8be15265f429d24a33e021b55b45faf6472e05137481d303a3d30c0bb",
+    "verdigrin_basecolor.png": "24b8512b9a647ef97362793f47eb8d0f1fcae5398401a22d11721c5e4986de2e"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-72966f7529864072ad7814ddfe5c0f52/journal.jsonl",
+    "sha256": "f060a9462f1f0f2a200e368c20cf6ea089d37280e2c6aa52cd988165ea1601cf"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "f12c043fdf4c460589ca68c3133efe30",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/2fe4739f48954888a73de98d9ddf42ce.json",
+        "sha256": "12dcf2c4c65f5e7a60085821d2dbb04c870a921f187a6a0ae27b9a66b8ae0cd5"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-f12c043fdf4c460589ca68c3133efe30/journal.jsonl",
+        "sha256": "9ad6b8e8285ad649bcc7ae5ee3ba3eea8a478c6aa2ef68dc3fb5cc099001548f"
+      },
+      "summary": {
+        "path": "art-experiments/verdigrin-mimic/live/attack-summary.json",
+        "sha256": "8ac89ddcb28586fa48c4983107664b574ee785072bd6c354219b31c0de462e7d"
+      },
+      "video": {
+        "path": "art-experiments/verdigrin-mimic/live/attack.mp4",
+        "sha256": "178a421b1222a43828d914e42b64b521fcd5a7111a6e8f3a4c23cfc84e5ef4d3"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/verdigrin-mimic/live/attack-0000.png",
+          "sha256": "47ddeeddc4f1418ebd996c2416e2d6739f099ec2dfa4e05ebf7d1e7c35a7985e"
+        },
+        {
+          "path": "art-experiments/verdigrin-mimic/live/attack-0050.png",
+          "sha256": "3eaa923daf87e71e99bde744ed8239fc93f85ac14da7e74c63108589d56b3b53"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_mimic"
+          ],
+          "sampleCount": 102,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 47,
+              "firstNormalizedTime": 19.072769165039062,
+              "lastNormalizedTime": 21.65778350830078,
+              "gameSeconds": 4.3083343505859375
+            },
+            {
+              "firstFrame": 66,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.08455999195575714,
+              "lastNormalizedTime": 2.9995603561401367,
+              "gameSeconds": 4.85833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_mimic"
+          ],
+          "sampleCount": 18,
+          "occurrences": [
+            {
+              "firstFrame": 48,
+              "lastFrame": 65,
+              "firstNormalizedTime": 0.14179687201976776,
+              "lastNormalizedTime": 0.9453126788139343,
+              "gameSeconds": 1.5583343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "d199b208d66b49d49b4916781555346e",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/e4179027d4f1470b90c6b6a1ddf9b687.json",
+        "sha256": "be3e639bd1a1824a5999af841e9802b14a886a94dba9ead45c92637f5970d2d7"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-d199b208d66b49d49b4916781555346e/journal.jsonl",
+        "sha256": "f0acf1b1d567c093818fe664239848bde8a9ded4687a9d07d829dd91a158a09f"
+      },
+      "summary": {
+        "path": "art-experiments/verdigrin-mimic/live/nonlethal-hit-summary.json",
+        "sha256": "733b41024e941bf2374dacbe112fc3bdbc5089dbecb7d618a700cdd6918daa05"
+      },
+      "video": {
+        "path": "art-experiments/verdigrin-mimic/live/nonlethal-hit.mp4",
+        "sha256": "6cce347527a9643a5ee715e22ab69401c5e9176adec8a3ee832cd0965e3b2e5b"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/verdigrin-mimic/live/nonlethal-hit-0030.png",
+          "sha256": "a5468ba23bf88285f63dbd14781a9a9f07622c6f64c81b9ed34aa850be789b0b"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        52
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_mimic"
+          ],
+          "sampleCount": 99,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 18.031347274780273,
+              "lastNormalizedTime": 19.461355209350586,
+              "gameSeconds": 2.383331298828125
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 71,
+              "firstNormalizedTime": 0.20188382267951965,
+              "lastNormalizedTime": 2.2368831634521484,
+              "gameSeconds": 3.39166259765625
+            },
+            {
+              "firstFrame": 86,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.1650000661611557,
+              "lastNormalizedTime": 1.9799991846084595,
+              "gameSeconds": 3.0250015258789062
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damageSmall_mimic"
+          ],
+          "sampleCount": 7,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.3831181526184082,
+              "lastNormalizedTime": 0.9942291975021362,
+              "gameSeconds": 0.5500030517578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 2088794288,
+          "clips": [
+            "chompAOE_mimic"
+          ],
+          "sampleCount": 14,
+          "occurrences": [
+            {
+              "firstFrame": 72,
+              "lastFrame": 85,
+              "firstNormalizedTime": 0.17934781312942505,
+              "lastNormalizedTime": 0.9565218091011047,
+              "gameSeconds": 1.1916656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "bcdb6b97e1fe486c83e1a578d13d95f1",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/58303062d03b4468bb61e73aa32b57e8.json",
+        "sha256": "ea553141cd9dfe2a50ed2880d613175cfab7349d2535c8b7c144537150fad402"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-bcdb6b97e1fe486c83e1a578d13d95f1/journal.jsonl",
+        "sha256": "27444ad715cc4f22dac0b34b2945a048fd1bde39c91e2ce34c4177ef35c3d064"
+      },
+      "summary": {
+        "path": "art-experiments/verdigrin-mimic/live/kill-fixture-death-summary.json",
+        "sha256": "bb17941df5a1c5b2bab89492a1f79356dce210ae965729ba6d1de84f0d05f70e"
+      },
+      "video": {
+        "path": "art-experiments/verdigrin-mimic/live/kill-fixture-death.mp4",
+        "sha256": "288f349658e6ecebd1c59d3744c108c72158bf1f6a05004bd87b23c20ef09dbe"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/verdigrin-mimic/live/kill-fixture-death-0040.png",
+          "sha256": "150b9a9c58c32b1dce7a07b80ce4c6c00b24e57ac70b6f885ecc4198d5c09c74"
+        },
+        {
+          "path": "art-experiments/verdigrin-mimic/live/kill-fixture-death-0060.png",
+          "sha256": "63ff967a35c5c44afe2ffee969589e35fc9055e8fa144ead03a865973c80d289"
+        }
+      ],
+      "hpBeforeAfter": [
+        52,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_mimic"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 19.403059005737305,
+              "lastNormalizedTime": 20.778066635131836,
+              "gameSeconds": 2.2916717529296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathHeavy_mimic"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.1979999989271164,
+              "lastNormalizedTime": 9.404998779296875,
+              "gameSeconds": 8.525009155273438
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Readable idle chest, teeth and native attack in frames0/50; both HUD portraits readable. Hit30 hero occludes part of model but lid/tongue remain coherent. Closed chest death coherent at40/60.",
+    "limits": "Selected views only; hero/effect occlusion and clipped first death interval do not establish full motion/culling acceptance."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "afterCollect": {
+      "path": "scratch/verdigrin-ready.json",
+      "sha256": "84a5ddfd4d54822cc1a1de1d9ade648fd92361c6d668a11b44cc9d113e82f678"
+    },
+    "result": "two guarded Collect actions; strict Ready level0 room2"
+  },
+  "materialInventory": {
+    "path": "scratch/verdigrin-material-inventory.json",
+    "sha256": "cf7193bdc7f1115b7243ba407fefcf9b235dc2d54f4e6944f7abe8753f28810b"
+  },
+  "materialResult": "Private MatLoot native emission disabled, color black, map null, original texture observed.",
+  "refusedInitialPass": {
+    "journal": {
+      "path": "scratch/mirewarden-game/model-test-output/case-470aaf3a4ec649b69450d776d9c95737/journal.jsonl",
+      "sha256": "2dcf1eb9cf1c7d321f8cc969231d36c4d0f27223b67c0aefcef528e7159f7dde"
+    },
+    "result": {
+      "path": "scratch/mirewarden-game/model-test-output/case-470aaf3a4ec649b69450d776d9c95737/result.json",
+      "sha256": "ef4269428d62f862f95f72e7e6d84fb4be494fbec7d9c42bbe329fb08fe8daa1"
+    },
+    "scope": "Wrong expected profile hash refused before action; subsequent pass2 is a distinct successful request."
+  },
+  "deathTelemetry": "Animator enabled all120 samples, native ragdoll flag false, zero recorded rigidbodies. deathHeavy_mimic frames26..119 begins normalized0.198; partial initial clip interval remains."
+}

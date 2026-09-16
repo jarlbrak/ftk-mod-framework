@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "scope": "Read-only staging readiness for profile revisions selected by the validation execution queue. It compares exact profile JSON and ordinary declared asset hashes with one isolated game copy. It is not staging, deployment, runtime, motion, gameplay, or art evidence.",
+  "queue": {
+    "schemaVersion": 5,
+    "input": {
+      "path": "docs/model-validation-execution-queue.json",
+      "sha256": "2472ab9fd733e3242b6095724ca5076d51e0fcc554ad777281e39033b971f18d"
+    }
+  },
+  "profileSelections": {
+    "schemaVersion": 1,
+    "selectedRoutes": 0,
+    "input": {
+      "path": "docs/model-validation-profile-selections.json",
+      "sha256": "23c2765523629bf756fa8a154654cc2412a60094bbf78d2cda638cbe7dddfc22"
+    }
+  },
+  "isolatedGameRoot": "scratch/mirewarden-game",
+  "catalogInputs": [
+    {
+      "kind": "enemy",
+      "path": "scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+      "profileCount": 429
+    },
+    {
+      "kind": "player",
+      "path": "scratch/mirewarden-game/model-test-player-profiles.json",
+      "sha256": "915ac5717f740834e52c2f29728cd737ea85de97d52469bd01135882ad7ee905",
+      "profileCount": 100
+    }
+  ],
+  "modelDirectory": "scratch/mirewarden-game/BepInEx/plugins/FTKModFramework_content/models",
+  "summary": {
+    "uniqueQueuedProfileRevisions": 0,
+    "readyWithoutCatalogOrAssetStage": 0,
+    "appendOrAssetStageAvailable": 0,
+    "explicitIsolatedMigrationRequired": 0,
+    "profileKeyVariantConflicts": 0,
+    "assetNameVariantConflicts": 0,
+    "routesWithStageReadyRevision": 0,
+    "stageReadyRoutesWithSelectedRevision": 0,
+    "routesWithAppendOrAssetStageAvailable": 0,
+    "routesRequiringExplicitIsolatedMigration": 0,
+    "routesRequiringAdapterOrRetargetDesign": 0,
+    "routesRequiringAdapterImplementation": 0,
+    "routesRequiringAdapterValidation": 0,
+    "routesRequiringAdapterVisualArchiveReview": 0
+  },
+  "revisions": [],
+  "routeChoices": [],
+  "conflicts": {
+    "profileKeyVariants": [],
+    "assetNameVariants": []
+  },
+  "limits": [
+    "A matching profile and asset row only means no catalog or asset copy is presently needed for this isolated game root.",
+    "A profile or asset migration must remain an explicit isolated staging operation with its own pinned before-and-after receipt.",
+    "Multiple historical documents for one profile key are listed as alternatives. This audit does not choose a revision or merge them.",
+    "A stage-ready route may still require a fresh isolated launch, manual visual review, and a new archive before it can receive live credit.",
+    "Never use this report to claim that an asset is bound, animated, accepted, or covered by a historical archive."
+  ]
+}

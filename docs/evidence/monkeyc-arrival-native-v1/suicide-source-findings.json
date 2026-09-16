@@ -1,0 +1,484 @@
+{
+  "status": "NATIVE_SUICIDE_PROFICIENCY_SOURCE_VERIFIED_RUNTIME_ATTRIBUTION_INFERRED",
+  "nativeEnemy": "monkeyC",
+  "weapon": {
+    "id": 136752,
+    "name": "monkeyBarrelCurse",
+    "serializedProficiencyEffects": "[{\"Key\":{\"m_ID\":\"enSuicideCurse\"},\"Value\":0}]",
+    "controller": 5979
+  },
+  "proficiency": {
+    "file": "sharedassets1.assets",
+    "dbId": 4891,
+    "rowOffset": 117536,
+    "bytesHex": "0e000000656e53756963696465437572736500000e0000005354525f70726f6643757273656400000000000000000000b6b5353fdcdada3e0000803f0000803f00000000530a000000000000000000000000000000000000040000000100000000000000000000000000803f000000000200000001000000010000000000000000000000000000000100000000000000000000000000803f000000000000000001000000ffffffff0d000000000000000000000000000000060000000000003f000000000313000000000000000000000c000000656e576174657253746f726d0b0000005354",
+    "decodedFieldPrefix": {
+      "m_ID": "enSuicideCurse",
+      "m_DisplayName": "STR_profCursed",
+      "m_DisplayTitle": "",
+      "m_CheckID": 0,
+      "m_WeaponSizeOverride": {
+        "offset": 117624,
+        "value": 4
+      },
+      "m_DirectionOverride": {
+        "offset": 117628,
+        "value": 1
+      },
+      "m_Quickness": {
+        "offset": 117632,
+        "value": 0.0
+      },
+      "m_RepeatCount": {
+        "offset": 117636,
+        "value": 0
+      },
+      "m_ChanceToAffect": {
+        "offset": 117640,
+        "value": 1.0
+      },
+      "m_DamagePerAttack": {
+        "offset": 117644,
+        "value": 0
+      },
+      "m_BoatDamage": {
+        "offset": 117648,
+        "value": 2
+      },
+      "m_FullSlots": {
+        "offset": 117652,
+        "value": 1
+      },
+      "m_Target": {
+        "offset": 117656,
+        "value": 1
+      },
+      "m_AlwaysHitFx": {
+        "offset": 117660,
+        "value": 0
+      },
+      "m_TargetFriendly": {
+        "offset": 117664,
+        "value": 0
+      },
+      "m_Harmless": {
+        "offset": 117668,
+        "value": 0
+      },
+      "m_Suicide": {
+        "offset": 117672,
+        "value": 1
+      },
+      "m_GunShot": {
+        "offset": 117676,
+        "value": 0
+      },
+      "m_ChaosOption": {
+        "offset": 117680,
+        "value": 0
+      }
+    }
+  },
+  "sourceMechanism": [
+    "CharacterDummy.PlayAttackSequence uses FTK_proficiencyTable.m_Suicide: attacker enemy m_PostAttackHealthMod = currentHealth.",
+    "PostAttackHealthModSequence applies positive mod via EnemyDummy.TakeSecondaryDamage, removing full remaining health.",
+    "At main victim effect handling, suicide proficiency hides every direct attacker CEL child before subsequent native completion.",
+    "Existing PM_Attack clip invokes native PlayWeaponAnimation and AttackHit; do not duplicate these callbacks."
+  ],
+  "observations": [
+    {
+      "sequence": 18,
+      "utc": "2026-09-08T03:29:55.353403+00:00",
+      "combat": {
+        "active": true,
+        "liveCombatants": 1,
+        "currentEnemyFid": {
+          "turnIndex": 0,
+          "photonId": -1
+        },
+        "whoseTurn": null,
+        "heroTurnReady": false,
+        "readyParts": {
+          "initialized": false,
+          "fsmState": null,
+          "actingFid": null
+        },
+        "enemies": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "name": "Rig probe: monkeyC",
+            "type": "ftkmf_modeltest_probe_monkeyc",
+            "hp": 58,
+            "hpMax": 58,
+            "alive": true
+          }
+        ],
+        "liveEnemies": 1,
+        "stuck": false,
+        "winningPlayerFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "fightOrder": [],
+        "abilities": [
+          {
+            "profId": 36,
+            "index": 0,
+            "label": "hammerSplash",
+            "name": "hammerSplash",
+            "buttonEnabled": false
+          }
+        ],
+        "driver": null
+      },
+      "party": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "name": "Player 1",
+          "classId": 112,
+          "hp": 999,
+          "maxHp": 999,
+          "focus": 4,
+          "maxFocus": 4,
+          "gold": 18,
+          "level": 0,
+          "xp": 8,
+          "actionPoints": 0,
+          "spentFocus": 0,
+          "realmId": 1178465130,
+          "hexBig": null,
+          "hexSmall": null,
+          "pos": {
+            "x": 83.69369506835938,
+            "y": 0,
+            "z": 74.98140716552734
+          }
+        }
+      ]
+    },
+    {
+      "sequence": 36,
+      "utc": "2026-09-08T03:29:58.447313+00:00",
+      "combat": {
+        "active": true,
+        "liveCombatants": 2,
+        "currentEnemyFid": {
+          "turnIndex": 0,
+          "photonId": -1
+        },
+        "whoseTurn": {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "isPlayer": false,
+          "source": "m_FightOrder[0]"
+        },
+        "heroTurnReady": false,
+        "readyParts": {
+          "initialized": false,
+          "fsmState": null,
+          "actingFid": {
+            "turnIndex": 0,
+            "photonId": -1
+          }
+        },
+        "enemies": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "name": "Rig probe: monkeyC",
+            "type": "ftkmf_modeltest_probe_monkeyc",
+            "hp": 58,
+            "hpMax": 58,
+            "alive": true
+          }
+        ],
+        "liveEnemies": 1,
+        "stuck": false,
+        "winningPlayerFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "fightOrder": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "tta": 0
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 0.12419271469116211
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "tta": 1.5151515007019043
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 1.7635369300842285
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "tta": 3.0303030014038086
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 3.402881145477295
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "tta": 4.545454502105713
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 5.042225360870361
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "tta": 6.060606002807617
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 6.681569576263428
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "tta": 7.5757575035095215
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 8.320913314819336
+          }
+        ],
+        "abilities": [
+          {
+            "profId": 36,
+            "index": 0,
+            "label": "hammerSplash",
+            "name": "hammerSplash",
+            "buttonEnabled": false
+          }
+        ],
+        "driver": null
+      },
+      "party": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "name": "Player 1",
+          "classId": 112,
+          "hp": 999,
+          "maxHp": 999,
+          "focus": 4,
+          "maxFocus": 4,
+          "gold": 18,
+          "level": 0,
+          "xp": 8,
+          "actionPoints": 0,
+          "spentFocus": 0,
+          "realmId": 1178465130,
+          "hexBig": null,
+          "hexSmall": null,
+          "pos": {
+            "x": 83.69369506835938,
+            "y": 0,
+            "z": 74.98140716552734
+          }
+        }
+      ]
+    },
+    {
+      "sequence": 52,
+      "utc": "2026-09-08T03:30:01.219831+00:00",
+      "combat": {
+        "active": true,
+        "liveCombatants": 1,
+        "currentEnemyFid": {
+          "turnIndex": 0,
+          "photonId": -1
+        },
+        "whoseTurn": {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "isPlayer": true,
+          "source": "m_FightOrder[0]"
+        },
+        "heroTurnReady": false,
+        "readyParts": {
+          "initialized": false,
+          "fsmState": "Waiting For Turn",
+          "actingFid": {
+            "turnIndex": 0,
+            "photonId": 1
+          }
+        },
+        "enemies": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "name": "Rig probe: monkeyC",
+            "type": "ftkmf_modeltest_probe_monkeyc",
+            "hp": 0,
+            "hpMax": 58,
+            "alive": false
+          }
+        ],
+        "liveEnemies": 0,
+        "stuck": false,
+        "winningPlayerFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "fightOrder": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 0.12419271469116211
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 1.7635369300842285
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 3.402881145477295
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 5.042225360870361
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 6.681569576263428
+          },
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "tta": 8.320913314819336
+          }
+        ],
+        "abilities": [
+          {
+            "profId": 36,
+            "index": 0,
+            "label": "hammerSplash",
+            "name": "hammerSplash",
+            "buttonEnabled": false
+          }
+        ],
+        "driver": null
+      },
+      "party": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "name": "Player 1",
+          "classId": 112,
+          "hp": 953,
+          "maxHp": 999,
+          "focus": 4,
+          "maxFocus": 4,
+          "gold": 18,
+          "level": 0,
+          "xp": 8,
+          "actionPoints": 0,
+          "spentFocus": 0,
+          "realmId": 1178465130,
+          "hexBig": null,
+          "hexSmall": null,
+          "pos": {
+            "x": 83.69369506835938,
+            "y": 0,
+            "z": 74.98140716552734
+          }
+        }
+      ]
+    }
+  ],
+  "journalTerminalKind": "stopped",
+  "heroReadyEver": false,
+  "helperOps": [
+    "stage-next-enemy",
+    "fortify-party",
+    "ready"
+  ],
+  "bridgeActions": [],
+  "interpretation": "Native authored self-sacrifice after first enemy attack is supported by sole weapon proficiency and exact suicide flag. /state does not expose actual attack proficiency/callback so exact execution remains inferred, not directly captured. No ordinary hero lethal or art failure.",
+  "nextFaithfulGate": "Prearm passive actual native spawn/first-action capture before Ready/start, including exact EnemyDummy attackInfo proficiency and PostAttackHealthMod, CEL child active flags, raw animation/HP and sourcepin joins. Capture must start before first heroReady; generic recorder cannot. No artificial enemyAI/initiative/weapon mutation. Separate ordinaryhit/explicitdeath only if a naturally hero-first turn exists; do not rerun uncertain actions.",
+  "pins": {
+    "scratch/mirewarden-game/model-test-output/case-9dbe52a72c17493c9041fc867cd4b1e5/journal.jsonl": "1e98ffc50aca03df28da1499a2c4368e7d1a4565f2a0848a44c0080383007b80",
+    "scratch/monkey-c-removal-analysis/Weapon.cs": "a69e9b54e1b131210f85e8b1d327b0caa8f8cdd09f9a9d7de3f05fbacfd8f7d4",
+    "scratch/monkey-c-removal-analysis/FTK_proficiencyTable.cs": "ec50f19d8fea0d335853dda2fa9f7e6c910188dc278818eb164167da54a76bce",
+    "scratch/monkey-c-removal-analysis/prof-row-bytes.json": "b086f4e2e4afcd4dd6ccb235f5115fb6521ebf865145e54553bffbbaf071c345",
+    "scratch/CharacterDummy.analysis.cs": "021f547bdc111a679b759f80c58eacdeef63311b4fb44a4a1f1925ebb7c58c6d",
+    "scratch/monkey-c-native-topology-analysis/findings.json": "1dc4f52eaaac66c3f8f3aa7ec8eee31abdbb16190e125b519b955566495901dc"
+  }
+}

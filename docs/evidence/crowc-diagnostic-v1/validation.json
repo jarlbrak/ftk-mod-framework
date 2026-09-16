@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "name": "crowC39-bone diagnostic, separate encounters",
+  "native_chassis": "crowC",
+  "renderer_paths": [
+    "enCrow"
+  ],
+  "native_renderer_id": 120964,
+  "status": "SCOPED_TWO_ENCOUNTER_DIAGNOSTIC_WITH_FIRST_WRAPPER_STOP_PRESERVED",
+  "provenance": {
+    "profile": {
+      "key": "ftkmf_modeltest_probe_crowc",
+      "baseEnemy": "crowC",
+      "displayName": "Rig probe: crowC",
+      "combatProfile": "b896515d0e2b5954af56c20be69f400685d49f9a16d5309b7e4265cadb64d25c",
+      "renderers": [
+        {
+          "rendererPath": "enCrow",
+          "glbFile": "probe_120960.glb",
+          "textureFile": "probe_palette.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    }
+  },
+  "session": "b5a47adc0e444701b9a02e9f49187976",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "cdbbe7ece2b53e443c1c9c4fad8607379f1c94f1b263592815252e26ac0f4b4a",
+      "bytes": 1967616
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "8d9c58439aba919b6489faef9fc89cb6326331f2c39079cd4b36ed06fe81dc87",
+      "bytes": 229376
+    }
+  },
+  "catalogSha256": "9b4fc3a8603c76583bf4ffa18ba22022d4f4d91b34e15f4cf70d2a7556e454aa",
+  "assetHashes": {
+    "probe_120960.glb": "f58d7f302ec9fbe3ed43a2b7390e1a000a3c2ecc906ca86e2654ea2b64bdac34",
+    "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+  },
+  "firstWrapper": {
+    "path": "docs/evidence/crowc-diagnostic-v1/first-wrapper-stopped.json",
+    "sha256": "0abee9f5ff4c1a9df6301b6a521bb7abe3ce90f272f8eaf4f726904f2070e25b"
+  },
+  "rootReview": {
+    "path": "docs/evidence/crowc-diagnostic-v1/root-review.json",
+    "sha256": "813df3e16dc06cdaa83292b84b4dce750154342eefc14fb7403319751abd134e"
+  },
+  "captures": [
+    {
+      "kind": "first-pass",
+      "frames": 120,
+      "rawCaptureOk": true,
+      "raw": {
+        "path": "scratch/mirewarden-game/model-test-output/66a099d4cb854ef99fea50b2a3a9879b.json",
+        "sha256": "5da49beef68d376e3534e6b7cf00bd5b88e2b98b303dc9090d1b37f40c6d78a2"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/crowc-diagnostic-v1/first-pass.capture.json.gz",
+        "sha256": "0e1c9d349f2f8381437e34d054c391d0dee42433a7c55d4e409c56ac1434d4bc"
+      },
+      "summary": {
+        "path": "docs/evidence/crowc-diagnostic-v1/first-pass-summary.json",
+        "sha256": "34f9d115ad503fc6dca85862f399a633f6762941f2d43427317c7fdb8551ef74"
+      },
+      "video": {
+        "path": "docs/evidence/crowc-diagnostic-v1/first-pass.mp4",
+        "sha256": "8c8fb4f2eded3824cb4ff13da22de5fb3a931fd0212f7784fc42c9b6d6191cd9"
+      },
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-1308cd2561a64efa908243f886dd5f1a/journal.jsonl",
+        "sha256": "f920e2b86e0bcf91cc127ec043b2515b97ba59ad0c3c16a8e7d4b861e67cf3fa"
+      },
+      "reviewedFrames": [
+        0,
+        40
+      ]
+    },
+    {
+      "kind": "first-hit",
+      "frames": 120,
+      "rawCaptureOk": true,
+      "raw": {
+        "path": "scratch/mirewarden-game/model-test-output/231a3a6879ac4f739e143487696cf7e8.json",
+        "sha256": "086d69874c3d9ccdee06e57699a9a54bfb487d52451aaf816242e090ce3d511d"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/crowc-diagnostic-v1/first-hit.capture.json.gz",
+        "sha256": "9a88b177847af76548bddaef033b90279b0477a329e3c1c06e2bbc350719c1fb"
+      },
+      "summary": {
+        "path": "docs/evidence/crowc-diagnostic-v1/first-hit-summary.json",
+        "sha256": "09cb22c333819fade02749fe3dfea374e777715dbfabdaaa74d9bf5ff98b9b9e"
+      },
+      "video": {
+        "path": "docs/evidence/crowc-diagnostic-v1/first-hit.mp4",
+        "sha256": "45d724798ffe40f424329564302d69512a2746ef6e90201185c5756999020154"
+      },
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-edd63bc7001d4e5b85126f6069b525d6/journal.jsonl",
+        "sha256": "5ea5050cf0ea7f546a539eb602b4f40a3c794136739609db1f11e23b32205e64"
+      },
+      "reviewedFrames": [
+        30,
+        60
+      ]
+    },
+    {
+      "kind": "second-death",
+      "frames": 120,
+      "rawCaptureOk": true,
+      "raw": {
+        "path": "scratch/mirewarden-game/model-test-output/69794462552a4bd79980d5fbc107049b.json",
+        "sha256": "79525051bf281bf05faa18c10e6c8b0fdfe5213bc69a104b94341f9e35dd2366"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/crowc-diagnostic-v1/second-death.capture.json.gz",
+        "sha256": "dfca37e6c1a120dde860d41b3515352ea48489a52bc62547ff92c12252a1d053"
+      },
+      "summary": {
+        "path": "docs/evidence/crowc-diagnostic-v1/second-death-summary.json",
+        "sha256": "c35040e70e28875953f4c069e1afef2a1770b116186be12e71a3e2a7e99223fd"
+      },
+      "video": {
+        "path": "docs/evidence/crowc-diagnostic-v1/second-death.mp4",
+        "sha256": "9083a44c1567b089862d76ec481608f43b0dfa524e018b7fe7ad8b934bf88a13"
+      },
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-a2eff66520734c8c96981ef4c19c7504/journal.jsonl",
+        "sha256": "d73b319f95e78cf6477af1c7cc1dbbe02437011cc88397b5aab733ae4d5e78c2"
+      },
+      "reviewedFrames": [
+        35,
+        60
+      ]
+    }
+  ],
+  "firstEncounter": {
+    "observedNonlethalDamage": 8,
+    "observedHpAfterDamage": 50,
+    "laterEndpointHp": 0,
+    "wrapperClassificationPreserved": {
+      "status": "unexpected_lethal_attack",
+      "beforeHp": 58,
+      "afterHp": 0,
+      "nativeOutcome": null,
+      "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+    },
+    "wrapperError": "Target no longer alive before next action",
+    "interpretation": "Reviewed frame30 showsHP50/-8 and60HP50. Later endpoint0 is not proof of lethal attack; removal is source-flee-consistent but runtime flee flag not recorded.",
+    "automaticReadyWithoutCollect": {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-after-removal-fixture.json",
+      "sha256": "df0d57107bf23c4523ba12bc9f01ea84552352fb111e9c66e5c69663fc69d941"
+    }
+  },
+  "secondEncounter": {
+    "trigger": "Separate explicit KillSingle fixture",
+    "deathAnimatorEnabledAll120": true,
+    "nativeDoRagdollFalseAll120": true,
+    "collectCount": 1,
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 3,
+      "buttonCount": 1
+    }
+  },
+  "sourceFindings": {
+    "path": "scratch/crow-topology-analysis/findings.json",
+    "sha256": "6d31968f261f929f8f9e11666313d04ece631ce5232d665c3c1e5aa3fb992df2"
+  },
+  "evidence": [
+    {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-after-removal-fixture.json",
+      "sha256": "df0d57107bf23c4523ba12bc9f01ea84552352fb111e9c66e5c69663fc69d941"
+    },
+    {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-death-fixture.json",
+      "sha256": "825e55e50c6fc03b56377dbd5270495d322dd0e7eed4a4535df11aa113447a9b"
+    },
+    {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-death-collect-1.json",
+      "sha256": "067c36946800532db0987e7b6648fcebbf0766b017483785869557a44b1b7028"
+    },
+    {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-death-ready.json",
+      "sha256": "b5fafbb23a7c72a7ed4eee9cbe3047c8468a436b50e57b16cc20efb66a6c79fa"
+    },
+    {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-startup-evidence.json",
+      "sha256": "1ebb87fa12d9feb6de8c7d4c7501559af9a8f9d330d07ca782bb95f866db6f3f"
+    },
+    {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-stage-result.txt",
+      "sha256": "5725cb4ebf91ad05c72284b36cd04c6d33991092039e13a753b6ad164beaaf9d"
+    },
+    {
+      "path": "docs/evidence/crowc-diagnostic-v1/crow-death-stage-result.txt",
+      "sha256": "c8ac721b380a315c2accd540fc144b85a00d1e5a2a25111709189352e4d3168d"
+    }
+  ],
+  "limits": [
+    "Calibration only, not authored creature appearance.",
+    "Selected frames and partial first-cycle starts, no full-controller coverage.",
+    "First endpointHP0 is not evidence of lethal attack.",
+    "Death verified in separate explicit fixture encounter, not first hit encounter.",
+    "All three raw captures themselves completed120; wrapper stop is not a failed raw capture.",
+    "Native flee interpretation remains unconfirmed without a captured flee flag.",
+    "No authored crow art or all-row/controller acceptance."
+  ]
+}

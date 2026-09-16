@@ -1,0 +1,187 @@
+{
+  "name": "Gloamfin Kraken",
+  "native_chassis": "resource enkrakenhead; owned endpoint fixture only",
+  "reference_renderer": 121260,
+  "renderer_path": "krakenHead",
+  "native_surface_copied": false,
+  "art_status": "Original Kraken head blockout; manual studio and live acceptance pending after regeneration",
+  "native_forward": "+UnityZ face from native jaw/front landmarks",
+  "rig_boundary": "Exact joint1/neck/head/topHead/jaw palette and IBMs. Continuous mantle has graded two-bone rings; jaw separate. Short facial feelers rigidly follow head, not tentacle simulation.",
+  "remaining": [
+    "Studio blockout review",
+    "Owned endpoint deformation and transition review",
+    "Future separate reviewed fixture asset variant",
+    "Other controller scenarios and production adapter"
+  ],
+  "parts": [
+    {
+      "name": "gloamfin",
+      "vertices": 5640,
+      "triangles": 1880,
+      "palette_joints": 5,
+      "max_bind_rest_error": 1.2101507085304775e-07,
+      "blender_reopen_max_bind_rest_error": 1.2101507085304775e-07,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -3.637211561203003,
+        -5.414122581481934,
+        -4.843072891235352
+      ],
+      "bind_bounds_max": [
+        3.637211561203003,
+        3.873076915740967,
+        1.524626612663269
+      ],
+      "blender_roundtrip_glb_sha256": "1bf18b1f02e753c05d81fea7e947f5c1fd909986b777901509200a392b184c00"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121260,
+      "local_reference_path": "scratch/skeleton-audit/121260/reference.npz",
+      "sha256": "7e6877d910263b8b39a95d72dd68a4e2644a0cc7499cb7186bde5b56086467de"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "3bec53ec92996f9a249eef788c64ed7115ceb6b6fb112fdb933adeec46dd528f",
+      "bytes": 6477
+    },
+    "audit_endpoint_poses.py": {
+      "sha256": "3bc3a17f580f7ca588e99b85210f325907480d810de74565706d815884c00024",
+      "bytes": 5309
+    },
+    "build_blender.py": {
+      "sha256": "dae988ed4705c040b783f03d055471f6bb91dc1c7a6b5d82e7d4aa4febd63228",
+      "bytes": 5370
+    },
+    "build_fixture_manifest.py": {
+      "sha256": "a5c1330c1853e27c336477fd4dfd1e1af8d658e5707193a5d94ec82755d79fc0",
+      "bytes": 3428
+    },
+    "build_geometry.py": {
+      "sha256": "bf4f69ed036eb84c78260af4c7399dca803f05779a1f61c86726e23e18835cba",
+      "bytes": 7011
+    },
+    "check_depth_render.py": {
+      "sha256": "fb4984fe56838d94ac0ce394ec4eb221d52c44cc8630cec7df4ca54c9504bba1",
+      "bytes": 2301
+    },
+    "endpoint-contact-sheet.png": {
+      "sha256": "b42b9e23a1f83c2965b3c11652f7cfe11abf59c7a2ee99b6365a66133ad1be3f",
+      "bytes": 84427
+    },
+    "endpoint-depth-000.png": {
+      "sha256": "14fc5da08b73925305dec98e9c1a9e0ed773765a840d13dcbe9c7e93bf12191a",
+      "bytes": 8121
+    },
+    "endpoint-depth-040.png": {
+      "sha256": "3e48f70d0fc4f3628ba8e2b141050949c234565147cd18edf2e370334267f2aa",
+      "bytes": 8372
+    },
+    "endpoint-depth-041.png": {
+      "sha256": "0b4f3f6cb1ce85a3209352cdb6a002566ee51234a101db6a47d828efdc9ccefe",
+      "bytes": 8249
+    },
+    "endpoint-depth-112.png": {
+      "sha256": "5cb5532556308414f46e03397052c4fa2c4ad8177977865a5b4b190648427981",
+      "bytes": 8211
+    },
+    "endpoint-depth-comparison.png": {
+      "sha256": "8b20dca67dc74de96cf5f27f503a3989a3457284b065afc5ad06da5b4757b679",
+      "bytes": 27125
+    },
+    "endpoint-pose-audit.json": {
+      "sha256": "bd032113ec80ae8ff9f1293a1ece5ea4e94794645faf2b1193f5e7aa01745f38",
+      "bytes": 3905
+    },
+    "endpoint-study.mp4": {
+      "sha256": "8a2f0276c321d17058b2a133168346296dd20d733408b2a26480d460792b0c0b",
+      "bytes": 143145
+    },
+    "finalize_manifest.py": {
+      "sha256": "a968fc2c0d565ce177a79120ed76a6359f37928d5f0c58252d695ea2dabb8b56",
+      "bytes": 2407
+    },
+    "gloamfin-kraken-blockout-v1.manifest.json": {
+      "sha256": "8ae418087754cb73da2e73d42ad31802565a36adb6849d720b226e3b121db84e",
+      "bytes": 8855
+    },
+    "gloamfin-studio.blend": {
+      "sha256": "51ac7105f6dcfcc7428a4160a76268c0145c0785140913082d2392717582fd75",
+      "bytes": 174898
+    },
+    "gloamfin.blend": {
+      "sha256": "f5b7edcb3d531ec87ed517a92069954a8b7f6720fe75c7daffe641388fc7dda9",
+      "bytes": 172446
+    },
+    "gloamfin.glb": {
+      "sha256": "d4be118d44d63f48a12e9c5fbde9dcac5d4b9cc73787182be41ec39030e7dc00",
+      "bytes": 329020
+    },
+    "gloamfin.pieces.json": {
+      "sha256": "62af3467b6dcb28ffa7e39891db048153f926bf6f0c1af97d5a3639ba159ce71",
+      "bytes": 1682
+    },
+    "gloamfin.source.json": {
+      "sha256": "a3ffbc2c986ed997919440eee8bc4f7bf02b19932c56db24d9993e69f5ab8fa6",
+      "bytes": 873118
+    },
+    "gloamfin.validation.json": {
+      "sha256": "87c97a7a120af34df86ab731ad4992f0bcb020b247892ecb4b8fd25e76868400",
+      "bytes": 781
+    },
+    "gloamfin_basecolor.png": {
+      "sha256": "44ae801b21329874afa84c98ffcc455e529c25ef61da0f0420a3536b4c0a8d9a",
+      "bytes": 267
+    },
+    "hero.png": {
+      "sha256": "1cdc45c6353cf4d552bc7800c2e10df1238cac92f0dfb320fb1e4116961b4da6",
+      "bytes": 1046926
+    },
+    "inspect_materials.py": {
+      "sha256": "401b29f07c04890e1482ef0fc89f88205b603ff46bbd11d9a7515dfd17ddf2b2",
+      "bytes": 1214
+    },
+    "live-validation-appearance-v1.json": {
+      "sha256": "a78679265634476ac7c3d6d94b785a76505f0fa40ead597890291a2c1e141724",
+      "bytes": 16380
+    },
+    "native-material-metadata.json": {
+      "sha256": "b68e4a16f67effa2b09ff7d14b4d9c3843c8de4253dc28dc01825a6538a24704",
+      "bytes": 2371
+    },
+    "original-geometry-proof.json": {
+      "sha256": "fdaa6f4321ae3036751cb1627d8e885e6a3cc6c19b9af6230d41e46326bd7fde",
+      "bytes": 1084
+    },
+    "side.png": {
+      "sha256": "61dcff8289af85d117919b40497c0616e5a9352b736679ab495469927861eb0f",
+      "bytes": 1036875
+    },
+    "verify_original_geometry.py": {
+      "sha256": "d77979ef700e23e76b1b5dca8e78009373b3e5224dc07c8ed194a3582bf09cb6",
+      "bytes": 2331
+    }
+  },
+  "live_appearance_v1": {
+    "status": "NUMERICAL_PASS_SEPARATE_SELECTED_APPEARANCE_BLOCKOUT_VISUAL_PASS",
+    "evidence": "live-validation-appearance-v1.json",
+    "sha256": "a78679265634476ac7c3d6d94b785a76505f0fa40ead597890291a2c1e141724",
+    "scope": "Constructed origin-isolated owned skin fixture using original full soft weights/IBMs. Four BakeMesh samples and12PNG per run,241endpoint samples. No game encounter replacement.",
+    "nextGates": [
+      "Review continuous appearance transitions if continuous quality is required.",
+      "Run the same original weighted mesh through damage, heavy damage, death, DeathLight and standalone attack in a separately reviewed fixture extension.",
+      "Production live adapter, game encounter fit/materials/portrait/progression and finished-art polish remain unverified."
+    ]
+  }
+}

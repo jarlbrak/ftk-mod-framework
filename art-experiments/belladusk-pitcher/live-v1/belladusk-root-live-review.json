@@ -1,0 +1,107 @@
+{
+  "session": "34c6aa4af2e24f4f9617879dfcd86301",
+  "caseResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-0180764afb7046e6a1c75c2769a54088/case-result.json",
+  "status": "SELECTED_ORIGINAL_APPEARANCE_AND_MOTION_REVIEWED",
+  "reviewedFrames": {
+    "pass": [
+      0,
+      50,
+      101
+    ],
+    "attack": [
+      30
+    ],
+    "kill-fixture": [
+      60
+    ]
+  },
+  "observations": [
+    "Idle0 distinct violet mouth/teal stalk visible; both portrait surfaces show open mouth.",
+    "Pass50 native proficiency light obscures lower stalk; mouth remains attached.",
+    "Pass101 low attack lunge shows mouth/stalk connected, strong nativeFX obscures some tissue.",
+    "Hit30 normal -8 HP58\u219250, purple sleeve attached while mouth recoils; hero partially occludes lower body.",
+    "Death60 connected collapsed stalk/leaves/mouth visible on floor; numerical floor contact not established."
+  ],
+  "limits": [
+    "Selected images only, nativeFX and hero occlusion recorded",
+    "Explicit KillSingle50\u21920, not ordinary lethal damage",
+    "Final owned resource teardown unverified",
+    "Exact plantE profile only"
+  ],
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "collectCount": 1,
+  "captures": [
+    {
+      "action": "pass",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/9911f95cb1c24a3ebca1ff6512602e2a.json",
+        "sha256": "751227d61f1fc08c74a74348dc9080bd8ca8704563b02f72f611f545c2f59af1",
+        "bytes": 4524951
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "attackProf1": [
+          44,
+          69
+        ],
+        "attack1": [
+          96,
+          105
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    },
+    {
+      "action": "attack",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/cfb118f74b79450f9f2872a834efd7f1.json",
+        "sha256": "50b2ce8c1d0928bb4eff23d1d31d7b424ff3ee5b2cc83b1773849bee7d5e73b3",
+        "bytes": 4520637
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "hit1": [
+          27,
+          31
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    },
+    {
+      "action": "kill-fixture",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/10cf608d190244c09fca6407b4a1df6e.json",
+        "sha256": "8b1a9cb543ef1ec9d216b1d85ff689dddda188e06a240ac94cd8b819d98f9c92",
+        "bytes": 4533491
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          26
+        ],
+        "death": [
+          27,
+          119
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    }
+  ]
+}

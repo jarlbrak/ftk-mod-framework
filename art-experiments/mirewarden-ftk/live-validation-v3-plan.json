@@ -1,0 +1,96 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/mirewarden-ftk/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-947768b0af074005b439dcb2750f7139/case-result.json",
+  "visualReview": "scratch/model-route-db2a524a5bc700ea-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/mirewarden-ftk/mirewarden_rigged.glb",
+    "art-experiments/mirewarden-ftk/mirewarden_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/mirewarden-ftk/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-db2a524a5bc700ea-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-9110154fa9be4a9890fbc9440cca4161/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-9110154fa9be4a9890fbc9440cca4161/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-proficiency-attack",
+      "scope": "Settled troll idle and exact native enemy proficiency attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enTroll01",
+        "mesh": "ftkmf_glb_mirewarden_rigged.glb",
+        "boneSignature": "fb452d83882447420a1beecc09d88cbf4e12a775fda39d57944a486c9c3fe402"
+      }
+    },
+    "attack": {
+      "label": "ordinary-hit-and-native-retaliation",
+      "scope": "Ordinary no-focus player attack, native troll damage response, recovery, and exact native enemy counterattack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enTroll01",
+        "mesh": "ftkmf_glb_mirewarden_rigged.glb",
+        "boneSignature": "fb452d83882447420a1beecc09d88cbf4e12a775fda39d57944a486c9c3fe402"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-physical-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enTroll01",
+        "mesh": "ftkmf_glb_mirewarden_rigged.glb",
+        "boneSignature": "fb452d83882447420a1beecc09d88cbf4e12a775fda39d57944a486c9c3fe402"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Mirewarden",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "trollCaveA",
+    "nativeChassis": "trollCaveA",
+    "rendererPaths": [
+      "enTroll01"
+    ],
+    "sourceRendererIds": [
+      121153
+    ],
+    "binding": {
+      "rendererPath": "enTroll01",
+      "mesh": "ftkmf_glb_mirewarden_rigged.glb",
+      "boneSignature": "fb452d83882447420a1beecc09d88cbf4e12a775fda39d57944a486c9c3fe402"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native trollCaveA / enTroll01 / renderer 121153 source assignment only; sibling troll rows, renderer sources, and the separate Gloamcap resource-prefab route do not receive credit.",
+      "The ordinary no-focus hit reduced the same target from 58 HP to 48 HP; death used the separate explicit KillSingle fixture at 48 HP and is not ordinary lethal-damage evidence.",
+      "Twenty-eight selected original PNGs were reviewed; the remaining 332 retained capture frames and generated videos are preserved evidence but were not individually reviewed.",
+      "The fixture death completed all 120 requested frames through deathHeavy_troll with m_DoRagdoll true; 11 surviving native rigidbodies become nonkinematic from retained frame 28. The physical corpse is visible through retained frame 119, and no later lifetime is claimed.",
+      "The exact renderer stayed active, enabled, visible, and identity-stable in all 360 retained frames; native combat UI, bright effects, foreground hero overlap, loot overlay, depth blur, and camera motion limit fine inspection.",
+      "One guarded native Collect action reached strict Ready at level 0 room 2; broader campaign progression was not exercised.",
+      "The native Standard material retains emission keyword state, white emission color, and trollCave_e, so the pale authored base color appears warmer in game than its source texture.",
+      "Intentional gaps between authored rock masses remain a scoped prototype-art limitation; no sampled tearing, renderer loss, viewport-edge clipping, floor fall-through, or unintended animated-section detachment was observed.",
+      "Other troll controller clips and proficiencies, sibling sources, portraits, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

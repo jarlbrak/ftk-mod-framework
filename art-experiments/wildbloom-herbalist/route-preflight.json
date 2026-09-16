@@ -1,0 +1,83 @@
+{
+  "status": "PASS_EXACT_PLAYER_SKINSET_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only player skinset/avatar route/profile/asset preflight. Class registration, native equipment branches, preview, runtime, visual, motion, and gameplay remain separate checks.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_player_wildbloom_herbalist_female",
+      "baseClass": "blacksmith",
+      "defaultSkinType": "Female",
+      "skinset": "herbalist_Female",
+      "avatar": {
+        "prefab": "Player_Herbalist",
+        "celPathId": 137648,
+        "assetFile": "resources.assets"
+      },
+      "renderers": [
+        {
+          "rendererPath": "hairBottom",
+          "sourceRendererId": 121003,
+          "rendererName": "hairBottom",
+          "rigProfile": "20ebda8db014fe2ca8a54a61e939ce19fbb933aa0447783abbda73aaa1e7b470",
+          "jointCount": 7,
+          "glbFile": "wildbloom-hair-bottom.glb",
+          "textureFile": "wildbloom-palette.png"
+        },
+        {
+          "rendererPath": "hairTop",
+          "sourceRendererId": 121088,
+          "rendererName": "hairTop",
+          "rigProfile": "ac1431f9a6bf4baa69242a38519677175b7089e2ac238db81c4b57b3f37daa23",
+          "jointCount": 6,
+          "glbFile": "wildbloom-hair-top.glb",
+          "textureFile": "wildbloom-palette.png"
+        },
+        {
+          "rendererPath": "player_Herbalist",
+          "sourceRendererId": 121202,
+          "rendererName": "player_Herbalist",
+          "rigProfile": "2448bdb320005b26723250108165c550ccc04659db22b82012036f06c66e7a6b",
+          "jointCount": 24,
+          "glbFile": "wildbloom-body.glb",
+          "textureFile": "wildbloom-palette.png"
+        }
+      ],
+      "apparel": [],
+      "declaredAssets": [
+        {
+          "file": "wildbloom-body.glb",
+          "sha256": "e2ac7bb1bcb6668d1d210791f69519f70ae710a93a119dd1989f2be514f4f29b",
+          "bytes": 309884
+        },
+        {
+          "file": "wildbloom-hair-bottom.glb",
+          "sha256": "e1382cddc4bcb069856bc4aef41bb98dfe507e76a5e3d0ac528e5f3ea7db3e8e",
+          "bytes": 30956
+        },
+        {
+          "file": "wildbloom-hair-top.glb",
+          "sha256": "ffc5cd75b06e36a77fae54462764e068ca8e741330d581788a775f0ec6f4dbbd",
+          "bytes": 27384
+        },
+        {
+          "file": "wildbloom-palette.png",
+          "sha256": "a953dd503880c8a719a45b90cdf9004f3db715e740910022da0d7d10f4f3cbd7",
+          "bytes": 3948
+        }
+      ]
+    }
+  ],
+  "rigClassification": {
+    "path": "scratch/rig-candidate-classification.json",
+    "sha256": "19efc5fd06ede8544a13fcefe1ee3a960ed9fddcc6decb295b586281cd2b7234",
+    "sourceAssetSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+    "skinsetDatabase": {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/sharedassets1.assets",
+      "sha256": "e38abff2efd7ca8ef8ede4b92754d6b3a06c6498a774ee55d0d1ddbffba4750f"
+    }
+  },
+  "profileDocument": {
+    "path": "art-experiments/wildbloom-herbalist/runtime-profile.json",
+    "sha256": "d754c85c0f03cd1b11e2b70f8da9d6d13c63b85b86ea4bc368ed53e6a5027a80"
+  },
+  "assetDirectory": "art-experiments/wildbloom-herbalist"
+}

@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "asset": "Lunacrest Clam",
+  "iteration": "V1 scale factor1 native camera fit trial",
+  "status": "attack_camera_fit_FAILED_native_direct_death_hide_expected",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "e9894ffd96a14974aaddde05e454e0c9",
+    "case": "27d7f8b121f74604b3a30bab6a01440e",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_lunacrest",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_lunacrest",
+      "baseEnemy": "clamA",
+      "displayName": "Lunacrest Clam",
+      "combatProfile": "ce0fd44a5e4585fa0dd1aa2265314c969e665e6492cd59552636bb05f53a67e9",
+      "renderers": [
+        {
+          "rendererPath": "enClam",
+          "glbFile": "lunacrest.glb",
+          "textureFile": "lunacrest_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "e995b9b232328131fbba231d948818716ea4fbf5ad489a28d4044c8187fa53b4",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "bb8497",
+  "helperVersionPrefix": "0c80",
+  "assetHashes": {
+    "lunacrest.glb": "87dac6fd6f2db497db0f3b5e188d9026fd9889c27a0cf8cc3e06bd3d88f557a3",
+    "lunacrest_basecolor.png": "172b6ca47d3a62d40ebaed71b62dac09968623199ef3e2cf85aef20843298080"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-27d7f8b121f74604b3a30bab6a01440e/journal.jsonl",
+    "sha256": "50ddd7d06980e35b1dff0015bb50ab7bc06ec59267b896bcd0300ad8b1b1f64c"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "7dc5295192e54f53b155a0ddb5c340bf",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/33d7b11188ef4bd9afb365ff55fbe612.json",
+        "sha256": "11c143e37f78ff732ff6724fbcb084f197c216aa79f2a3d4be2ede2ea13f20ad"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-7dc5295192e54f53b155a0ddb5c340bf/journal.jsonl",
+        "sha256": "0d67b5e4f2c86bd52bb9534711dadfdcd1de11104d94d33929e0e10497712621"
+      },
+      "summary": {
+        "path": "art-experiments/lunacrest-clam/live-v1/attack-summary.json",
+        "sha256": "0e96287c1d0cd62a766dee5e528350ab2a504b662f86083a7908a66b0c245ce7"
+      },
+      "video": {
+        "path": "art-experiments/lunacrest-clam/live-v1/attack.mp4",
+        "sha256": "b157d07cbe264a0ce28d44d03111afad8dfdbd26bd3ca46139faa418bb0e1e6d"
+      },
+      "reviewedFrames": [
+        0,
+        40,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/lunacrest-clam/live-v1/attack-0000.png",
+          "sha256": "c99d7af06bbb71605b2a35877fd52f5eba67a5a2dc192c02d39c2d8de7f92946"
+        },
+        {
+          "path": "art-experiments/lunacrest-clam/live-v1/attack-0040.png",
+          "sha256": "90dd540d52961d27351bebb12b04782e975458470969f3d6380e0987c98ef233"
+        },
+        {
+          "path": "art-experiments/lunacrest-clam/live-v1/attack-0050.png",
+          "sha256": "bacf941acdf7c820e202164fd94afd0a4a8b371390f9a677d388647c0a7af40e"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "Clam_CombatIdle"
+          ],
+          "sampleCount": 110,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 40,
+              "firstNormalizedTime": 13.155667304992676,
+              "lastNormalizedTime": 15.355679512023926,
+              "gameSeconds": 3.6666717529296875
+            },
+            {
+              "firstFrame": 51,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.1127750426530838,
+              "lastNormalizedTime": 3.852776527404785,
+              "gameSeconds": 6.233329772949219
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "Clam_Attack1"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 41,
+              "lastFrame": 50,
+              "firstNormalizedTime": 0.171875,
+              "lastNormalizedTime": 0.9453125,
+              "gameSeconds": 0.8250045776367188
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "d5b24e873e4948888b6c71ade13c52ab",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/df23e1f05baa4d19a5c9822cf7e3a00e.json",
+        "sha256": "24cd89c61fab3893b90a132a966b065d3b0184ff0234ede3283a54198a8165ca"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-d5b24e873e4948888b6c71ade13c52ab/journal.jsonl",
+        "sha256": "6e19fbc7865e03bd882bdec4b2de4268777899c5caeec735137213acfebfb8e7"
+      },
+      "summary": {
+        "path": "art-experiments/lunacrest-clam/live-v1/nonlethal-hit-summary.json",
+        "sha256": "b42404e95c556e30ff780e0658da5a955b1268245118c77b03711e9038f8b7d0"
+      },
+      "video": {
+        "path": "art-experiments/lunacrest-clam/live-v1/nonlethal-hit.mp4",
+        "sha256": "b85f3e3d1a459a2bf99b06dab0a60b8f725be484e16da0d5192aba2cf07a1064"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/lunacrest-clam/live-v1/nonlethal-hit-0030.png",
+          "sha256": "b7c90820691127b10194570feabd1da9e1c1993e1108119e5b40b511f3a871fd"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        48
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "Clam_CombatIdle"
+          ],
+          "sampleCount": 89,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 23.318574905395508,
+              "lastNormalizedTime": 24.69358253479004,
+              "gameSeconds": 2.2916641235351562
+            },
+            {
+              "firstFrame": 35,
+              "lastFrame": 67,
+              "firstNormalizedTime": 0.20055553317070007,
+              "lastNormalizedTime": 1.9605547189712524,
+              "gameSeconds": 2.9333343505859375
+            },
+            {
+              "firstFrame": 86,
+              "lastFrame": 115,
+              "firstNormalizedTime": 0.19999969005584717,
+              "lastNormalizedTime": 1.7949990034103394,
+              "gameSeconds": 2.6583328247070312
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "Clam_Damaged"
+          ],
+          "sampleCount": 9,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 34,
+              "firstNormalizedTime": 0.1964285671710968,
+              "lastNormalizedTime": 0.9821427464485168,
+              "gameSeconds": 0.7333297729492188
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "Clam_Attack2"
+          ],
+          "sampleCount": 18,
+          "occurrences": [
+            {
+              "firstFrame": 68,
+              "lastFrame": 85,
+              "firstNormalizedTime": 0.10185185074806213,
+              "lastNormalizedTime": 0.9675923585891724,
+              "gameSeconds": 1.5583343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "Clam_Attack1"
+          ],
+          "sampleCount": 4,
+          "occurrences": [
+            {
+              "firstFrame": 116,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.171875,
+              "lastNormalizedTime": 0.4296875,
+              "gameSeconds": 0.27500152587890625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "f9fdad26b8484311a0973295035ba96c",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/19a2f7db8469442682337a8fade58c8c.json",
+        "sha256": "fc8b9ae48089d23899e44efffcdc07f447201041070825e1488996c81d76b3a6"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-f9fdad26b8484311a0973295035ba96c/journal.jsonl",
+        "sha256": "0d3e9f4bc120f8c05a6b468e6f0c094e360fd3753f34ed65eb7eed43adb4a6df"
+      },
+      "summary": {
+        "path": "art-experiments/lunacrest-clam/live-v1/kill-fixture-death-summary.json",
+        "sha256": "5c99a949c1247da8181b532b3b262eed01ac7b3065c52df4932e7ba447513f01"
+      },
+      "video": {
+        "path": "art-experiments/lunacrest-clam/live-v1/kill-fixture-death.mp4",
+        "sha256": "0eb7069825146400ee183583669ca7ad6882697ee0defc6cd63d5a93d02fdf14"
+      },
+      "reviewedFrames": [
+        24,
+        25
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/lunacrest-clam/live-v1/kill-fixture-death-0024.png",
+          "sha256": "a787e8c78e07b66802f2634fb84f703350afdc6e3bb8c5b8f3128e22dc721ed6"
+        },
+        {
+          "path": "art-experiments/lunacrest-clam/live-v1/kill-fixture-death-0025.png",
+          "sha256": "f3ebb938bf2e3364596dd2ecd80a0da8d5300ded248150e7d5ad96941320e10f"
+        }
+      ],
+      "hpBeforeAfter": [
+        48,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "Clam_CombatIdle"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 48.46742630004883,
+              "lastNormalizedTime": 49.84243392944336,
+              "gameSeconds": 2.2916717529296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "Clam_DeathDirect"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.1145833283662796,
+              "lastNormalizedTime": 5.44270658493042,
+              "gameSeconds": 8.524993896484375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Idle0 and return50 show readable body, hinge and portraits. Top shell clips outside camera at attack40: fit FAIL. Hit30 hero-occluded. Death24 shows body with effects; frame25 onward renderer inactive, matching native DeathFallOff.",
+    "limits": "No final art acceptance; attack camera fit failed. Only pre-hide death motion assessable; DeathLight/Revive remain untested."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "afterCollect": {
+      "path": "scratch/lunacrest-ready.json",
+      "sha256": "e653219b05c7bda8a738d992d059080ac46df02d3992f9a706220bc5baed86fa"
+    },
+    "result": "one guarded Collect action; strict Ready level0 room2"
+  },
+  "deathSourceEvidence": [
+    {
+      "path": "scratch/clam-death-source-findings.md",
+      "sha256": "85380c35e0c31cd2991a94e616cf0f1244dafccd16d7e5b5d68ae18fa07c22f3"
+    },
+    {
+      "path": "scratch/clam-death-source.json",
+      "sha256": "e221a6512b37c577042bb4a824a0c849ead7410626fb4883bf0ea4a579b67c76"
+    }
+  ],
+  "deathInterpretation": "Native early whole-mesh hide, no configured rigid corpse replacement; not a demonstrated custom binding/culling failure or missing corpse part.",
+  "nextTrial": {
+    "requestedScaleFactor": 0.8,
+    "stagingReceipt": {
+      "path": "scratch/runtime-profile-389-lunacrest-fitted-v2/receipt.json",
+      "sha256": "8ba8dd9243a4f67c42841b022d0e1a851c268499f3a6c4652521f2ffcae75dc8"
+    },
+    "status": "staged_only_live_fit_pending",
+    "geometryChanged": false
+  }
+}

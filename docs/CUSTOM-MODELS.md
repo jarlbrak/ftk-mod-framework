@@ -1,13 +1,13 @@
-# Custom Enemy Models (AssetBundle)
+# Custom Enemy Models
 
-This is the production path for giving a modded enemy a true artist-authored 3D model. It is the
-counterpart to the framework's autonomous procedural body (`ProceduralCreature` / the bog-golem in
-`EnemyVisualPatch`), which you use when no artist asset is available.
+Replace an enemy's appearance with original geometry while retaining its existing
+skeleton, or supply a bespoke prefab. For repeatable authoring and live checks,
+use [the authoring workflow](MODEL-AUTHORING.md) and
+[the skeleton validation register](MODEL-SKELETONS.md).
 
-A custom model is **visual-only**. The mesh, prefab, material, and texture never cross the network and are
-never written into a save. The only shared state is the enemy's deterministic enum-int identity (from
-`IdAllocator`). So a model is co-op- and save-safe on exactly one condition: **the AssetBundle ships inside
-the mod and is byte-identical on every client**. No per-machine paths, no streaming, no downloading.
+Model assets are loaded locally rather than streamed through the network. Ship
+identical assets with the mod on every client; matching assets alone do not
+prove co-op compatibility of the surrounding enemy or adventure logic.
 
 There are three paths. Pick based on the rig you have and whether you can run a Unity editor.
 
@@ -50,20 +50,21 @@ this shape, so whatever tooling you use must write to the contract below. The `.
 
 ### Author the mesh (editor-free pipeline)
 
-The reference pipeline runs end to end on macOS/Linux with Blender + a Python venv, no Unity.
-(The scripts are not yet shipped in this repo; that is tracked as issue #98 under epic #65. Until
-then, the steps below describe what any equivalent tooling must do.)
+The executable pipeline is available in
+[`tools/ai-model-pipeline`](../tools/ai-model-pipeline/README.md).
+It uses Blender and Python without a Unity editor. Extract the chosen chassis
+into ignored local scratch, author original geometry in its native bind pose,
+then export and validate against that reference. Keep presentation poses
+separate from the mesh used with native inverse bind matrices.
 
-1. Extract the vanilla creature's skinned mesh, skeleton (37 bones for the cave troll), and bind
-   poses from the game's `resources.assets`. UnityPy reads these without a Unity editor; never
-   redistribute the extracted assets themselves.
-2. Decimate your AI/source mesh in headless Blender (geometry only) to a Unity-1.0 budget (`< 65k` verts).
-3. Rig and export with numpy, all in Unity coordinates: align the mesh into the vanilla creature's
-   mesh-local space, transfer skin weights from the vanilla mesh by nearest surface, optionally weld +
-   smooth + pose the arms, and write the rigged `.glb` keyed by the vanilla bone names. Two useful
-   variants: weighting everything to a single bone gives a stable prop that cannot deform-spike (good
-   for a stone golem with mismatched proportions), and a small arm rotation drops the T-pose arms to
-   the sides.
+The [authoring workflow](MODEL-AUTHORING.md) covers concept development, rigid
+versus blended weights, coordinate conversion, UVs, renderer selection, and
+live testing. The [skeleton register](MODEL-SKELETONS.md) distinguishes rigs
+that have been discovered from those with actual model/animation evidence. For
+exact multipart assignments and native death hand-offs, use the
+[renderer API](MODEL-RENDERER-API.md): an opt-in `FallOffLimb` policy applies
+only to an explicit leased renderer and needs a same-binary omitted-policy
+control alongside the normal-death fixture.
 
 ### Wire it up
 
@@ -73,11 +74,18 @@ Content.SetEnemyBodyMeshFromGlb(enemy, "mudwretch_rigged.glb", "mudwretch_baseco
 ```
 
 The texture is loaded from the `.png` via `Texture2D.LoadImage` and pushed into the body material's
-`_MainTex` (and a subtle `_EmissionColor` so it reads in dim dioramas). The loader **never throws**: any
-parse/decode/bone-name miss is logged and the original (or procedural) body is kept.
+`_MainTex` (with texture-driven emission to brighten dim dioramas).
+Load failures are logged and may retain a fallback body. Inspect the loader log
+for the intended mesh and zero unintended dropped joint slots; fallback rendering
+is not a successful custom-model test. Existing `proceduralBody` settings can
+hide the skinned renderer even after a successful swap.
 
-> Shipped demo: the Flooded Crypt boss "Mudwretch Foreman" (`RealmBossAdventure`) renders an AI-generated
-> mossy bog-golem this way, with the procedural golem, recolor, and lantern stood down. Verified in-game.
+> Current authored example: Mirewarden replaces the Flooded Crypt boss body
+> when `FTK_MIREWARDEN_BODY=1` and `FTK_BASELINE_STOCK_BODY` is unset. Its mesh,
+> idle articulation, portrait, and one normal combat exchange were observed
+> in-game. Captured standard attack, hit, ragdoll, and completed combat now have
+> evidence; other state variants and artistic refinement remain pending. The default
+> sample configuration in this checkout still uses the procedural body.
 
 ---
 
@@ -89,10 +97,9 @@ Reskin an existing creature by replacing only its body mesh, while reusing its s
 ### Author the mesh
 
 1. Model your new creature.
-2. Skin it to the **exact** vanilla skeleton of the enemy you are reskinning: identical bone names,
-   hierarchy, and bind poses. For the cave troll (`trollCaveA`) that rig is, in order:
-   `Root_M`, `BackA_M`, `BackB_M`, `Chest_M`, `Neck_M`, `Head_M`, `Shoulder_L/R`, `Elbow_L/R`,
-   `Wrist_L/R`, `Hip_L/R`, `Knee_L/R`, `Ankle_L/R`, plus `WEAPON_HOLDER_L/R`.
+2. Skin it to the **exact** vanilla skeleton of the enemy you are reskinning:
+   matching bone names, hierarchy, and bind poses. Extract the actual renderer's
+   bone array; a shortened list of major joints is not sufficient.
    If your bone names or bind poses differ, the vanilla animation clips will deform your mesh wrongly.
 3. Export the mesh.
 
@@ -153,7 +160,7 @@ enemy's original body is left intact.
 
 ---
 
-## Hard requirements (both paths)
+## AssetBundle requirements (Paths A and B)
 
 - **Unity version:** the AssetBundle MUST be built with **Unity 2017.2.2p2**, the game's exact engine
   version. A bundle built with any other version will not load.

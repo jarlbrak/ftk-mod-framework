@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "scope": "Deterministic original-geometry rerun; it establishes byte-identical authored outputs, not studio or live acceptance.",
+  "method": "The authoring phase reads only ordered bone_names and inverse bind matrices; independent export validation separately reads the local reference without feeding it into geometry generation.",
+  "reference": {
+    "path": "scratch/basey-snake-reference-v1/reference.npz",
+    "sha256": "9e93be468775eadc2122ab3e80352b6c85ba9646964462f9204ca74eaaf35071"
+  },
+  "generatorSha256": "4685ed0c3547b7815807ce1dfbf1ed01e8f746f135f139202e40a111492519f0",
+  "files": [
+    {
+      "file": "sablevine.glb",
+      "sha256": "4c030febb8adc4005a8802d25122446a8b825dd06b48e64eed674794e5a6b330",
+      "reproduced_identical": true
+    },
+    {
+      "file": "sablevine-palette.png",
+      "sha256": "8dc990355d08e085e32cbfc65d190aa5449bcbc899e75ae928bbbf1baf0edfbb",
+      "reproduced_identical": true
+    },
+    {
+      "file": "sablevine.source.json",
+      "sha256": "257fc3622900be5ea3251bbe175908f146d5cde27ca24dbad25b7db48bbdf644",
+      "reproduced_identical": true
+    },
+    {
+      "file": "sablevine.pieces.json",
+      "sha256": "7f1f04a1f050463a766acda121f61710fa8b0dc32cf00a885c0358d7f5c9acb0",
+      "reproduced_identical": true
+    }
+  ]
+}

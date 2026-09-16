@@ -1,0 +1,2075 @@
+{
+  "observations": [
+    {
+      "state": {
+        "inSession": true,
+        "singlePlayer": true,
+        "day": 0,
+        "timeIndex": 0,
+        "round": 0,
+        "questId": -10,
+        "questObjectiveKey": "oneline0",
+        "questDestRealm": 1178465130,
+        "questComplete": false,
+        "questIsLast": true,
+        "currentTurnFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "party": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "name": "Player 1",
+            "classId": 112,
+            "hp": 989,
+            "maxHp": 999,
+            "focus": 4,
+            "maxFocus": 4,
+            "gold": 0,
+            "level": 0,
+            "xp": 12,
+            "actionPoints": 0,
+            "spentFocus": 0,
+            "realmId": 1178465130,
+            "hexBig": null,
+            "hexSmall": null,
+            "pos": {
+              "x": 158.72999572753906,
+              "y": 0,
+              "z": 144.96401977539062
+            }
+          }
+        ],
+        "combat": {
+          "active": true,
+          "liveCombatants": 1,
+          "currentEnemyFid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "whoseTurn": {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "isPlayer": true,
+            "source": "m_FightOrder[0]"
+          },
+          "heroTurnReady": false,
+          "readyParts": {
+            "initialized": false,
+            "fsmState": "",
+            "actingFid": {
+              "turnIndex": 0,
+              "photonId": 1
+            }
+          },
+          "enemies": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": -1
+              },
+              "name": "Thistlewick Hexer",
+              "type": "ftkmf_modeltest_thistlewick",
+              "hp": 0,
+              "hpMax": 58,
+              "alive": false
+            }
+          ],
+          "liveEnemies": 0,
+          "stuck": false,
+          "winningPlayerFid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "fightOrder": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 0
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 1.6393440961837769
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 3.2786881923675537
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 4.918032646179199
+            }
+          ],
+          "abilities": [
+            {
+              "profId": 36,
+              "index": 0,
+              "label": "hammerSplash",
+              "name": "hammerSplash",
+              "buttonEnabled": false
+            }
+          ],
+          "driver": null
+        },
+        "dungeon": {
+          "inDungeon": true,
+          "inCombat": true,
+          "dungeonId": "FloodedCrypt",
+          "level": 0,
+          "room": 2,
+          "levelCount": 2,
+          "roomCount": 5,
+          "currentRoomType": "Enemy",
+          "encounterObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "inLastRoom": false,
+          "atLastLevel": false,
+          "cleared": false,
+          "deactivated": false,
+          "driver": null
+        },
+        "map": {
+          "realmId": 1178465130,
+          "tile": {
+            "big": 120,
+            "small": 15
+          },
+          "stageIndex": 0,
+          "hasPOI": true,
+          "poiType": "Dungeon",
+          "reachableTiles": [
+            {
+              "big": 120,
+              "small": 5
+            },
+            {
+              "big": 120,
+              "small": 14
+            }
+          ],
+          "objective": {
+            "big": 120,
+            "small": 15
+          }
+        },
+        "choices": [],
+        "signals": {
+          "inCombat": true,
+          "modalOpen": false,
+          "modalType": null,
+          "choiceOpen": false,
+          "allDead": false,
+          "victoryShowing": false,
+          "warnings": [],
+          "victoryArmed": false
+        },
+        "phase": "combat"
+      },
+      "fixture": {
+        "ok": true,
+        "provenance": "read-only fixture readiness snapshot",
+        "strictReady": {
+          "ok": false,
+          "reason": "Actual combat is active."
+        },
+        "strictLootCollect": {
+          "ok": true,
+          "buttonCount": 1
+        },
+        "voteSurfaces": [
+          {
+            "heroInstanceId": -235504,
+            "alive": true,
+            "containerInstanceId": -237240,
+            "containerActive": true,
+            "voteType": "Loot",
+            "buttons": [
+              {
+                "option": "Collect",
+                "instanceId": -237282,
+                "active": true,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": true,
+                "item": "None",
+                "belongsToHero": true
+              },
+              {
+                "option": "Ready",
+                "instanceId": -237682,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              }
+            ]
+          }
+        ],
+        "playerScopes": [
+          {
+            "scope": "player-overworld",
+            "avatars": [
+              {
+                "ownerInstanceId": -235504,
+                "celInstanceId": -239108,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-combat",
+            "avatars": [
+              {
+                "ownerInstanceId": 358974,
+                "celInstanceId": -249132,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-preview",
+            "avatars": []
+          }
+        ],
+        "identity": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "rootName": "mirewarden-game",
+          "session": "621d536f4b7847b396d5334e2a05075d",
+          "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+        },
+        "sessions": {
+          "esInCombat": true,
+          "mcInCombat": true,
+          "mcEncounterType": "Enemy",
+          "esVoteType": "Loot",
+          "mcVoteType": "Loot",
+          "fightOrderCount": 4,
+          "esFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Wait for Battle to End"
+          },
+          "voteFsm": {
+            "present": true,
+            "enabled": false,
+            "state": ""
+          },
+          "lootFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Show Collect Button 2"
+          }
+        },
+        "dungeon": {
+          "level": 0,
+          "room": 2,
+          "activeDungeonEncounterType": "Enemy",
+          "nextLevelGenerated": true,
+          "isAtLastLevel": false,
+          "isDungeonCleared": false,
+          "definitionLevelCount": 2,
+          "definitionRoomCount": 5,
+          "generatedRoomCount": 6,
+          "queuedSlotValid": true,
+          "withinDefinitionRoomBounds": true,
+          "queuedRoomType": "Enemy",
+          "queuedContext": -1,
+          "queuedObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "slotAllowsEnemySubstitution": true,
+          "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+        },
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "14a756ebd8944c98903219ceab70e282",
+        "frame": 21930,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    },
+    {
+      "state": {
+        "inSession": true,
+        "singlePlayer": true,
+        "day": 0,
+        "timeIndex": 0,
+        "round": 0,
+        "questId": -10,
+        "questObjectiveKey": "oneline0",
+        "questDestRealm": 1178465130,
+        "questComplete": false,
+        "questIsLast": true,
+        "currentTurnFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "party": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "name": "Player 1",
+            "classId": 112,
+            "hp": 989,
+            "maxHp": 999,
+            "focus": 4,
+            "maxFocus": 4,
+            "gold": 16,
+            "level": 0,
+            "xp": 12,
+            "actionPoints": 0,
+            "spentFocus": 0,
+            "realmId": 1178465130,
+            "hexBig": null,
+            "hexSmall": null,
+            "pos": {
+              "x": 158.72999572753906,
+              "y": 0,
+              "z": 144.96401977539062
+            }
+          }
+        ],
+        "combat": {
+          "active": true,
+          "liveCombatants": 1,
+          "currentEnemyFid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "whoseTurn": {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "isPlayer": true,
+            "source": "m_FightOrder[0]"
+          },
+          "heroTurnReady": false,
+          "readyParts": {
+            "initialized": false,
+            "fsmState": "",
+            "actingFid": {
+              "turnIndex": 0,
+              "photonId": 1
+            }
+          },
+          "enemies": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": -1
+              },
+              "name": "Thistlewick Hexer",
+              "type": "ftkmf_modeltest_thistlewick",
+              "hp": 0,
+              "hpMax": 58,
+              "alive": false
+            }
+          ],
+          "liveEnemies": 0,
+          "stuck": false,
+          "winningPlayerFid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "fightOrder": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 0
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 1.6393440961837769
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 3.2786881923675537
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 4.918032646179199
+            }
+          ],
+          "abilities": [
+            {
+              "profId": 36,
+              "index": 0,
+              "label": "hammerSplash",
+              "name": "hammerSplash",
+              "buttonEnabled": false
+            }
+          ],
+          "driver": null
+        },
+        "dungeon": {
+          "inDungeon": true,
+          "inCombat": true,
+          "dungeonId": "FloodedCrypt",
+          "level": 0,
+          "room": 2,
+          "levelCount": 2,
+          "roomCount": 5,
+          "currentRoomType": "Enemy",
+          "encounterObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "inLastRoom": false,
+          "atLastLevel": false,
+          "cleared": false,
+          "deactivated": false,
+          "driver": null
+        },
+        "map": {
+          "realmId": 1178465130,
+          "tile": {
+            "big": 120,
+            "small": 15
+          },
+          "stageIndex": 0,
+          "hasPOI": true,
+          "poiType": "Dungeon",
+          "reachableTiles": [
+            {
+              "big": 120,
+              "small": 5
+            },
+            {
+              "big": 120,
+              "small": 14
+            }
+          ],
+          "objective": {
+            "big": 120,
+            "small": 15
+          }
+        },
+        "choices": [],
+        "signals": {
+          "inCombat": true,
+          "modalOpen": false,
+          "modalType": null,
+          "choiceOpen": false,
+          "allDead": false,
+          "victoryShowing": false,
+          "warnings": [],
+          "victoryArmed": false
+        },
+        "phase": "combat"
+      },
+      "fixture": {
+        "ok": true,
+        "provenance": "read-only fixture readiness snapshot",
+        "strictReady": {
+          "ok": false,
+          "reason": "Actual combat is active."
+        },
+        "strictLootCollect": {
+          "ok": true,
+          "buttonCount": 1
+        },
+        "voteSurfaces": [
+          {
+            "heroInstanceId": -235504,
+            "alive": true,
+            "containerInstanceId": -237240,
+            "containerActive": true,
+            "voteType": "Loot",
+            "buttons": [
+              {
+                "option": "Collect",
+                "instanceId": -237282,
+                "active": true,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": true,
+                "item": "None",
+                "belongsToHero": true
+              },
+              {
+                "option": "Ready",
+                "instanceId": -237682,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              }
+            ]
+          }
+        ],
+        "playerScopes": [
+          {
+            "scope": "player-overworld",
+            "avatars": [
+              {
+                "ownerInstanceId": -235504,
+                "celInstanceId": -239108,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-combat",
+            "avatars": [
+              {
+                "ownerInstanceId": 358974,
+                "celInstanceId": -249132,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-preview",
+            "avatars": []
+          }
+        ],
+        "identity": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "rootName": "mirewarden-game",
+          "session": "621d536f4b7847b396d5334e2a05075d",
+          "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+        },
+        "sessions": {
+          "esInCombat": true,
+          "mcInCombat": true,
+          "mcEncounterType": "Enemy",
+          "esVoteType": "Loot",
+          "mcVoteType": "Loot",
+          "fightOrderCount": 4,
+          "esFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Wait for Battle to End"
+          },
+          "voteFsm": {
+            "present": true,
+            "enabled": false,
+            "state": ""
+          },
+          "lootFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Show Collect Button 2"
+          }
+        },
+        "dungeon": {
+          "level": 0,
+          "room": 2,
+          "activeDungeonEncounterType": "Enemy",
+          "nextLevelGenerated": true,
+          "isAtLastLevel": false,
+          "isDungeonCleared": false,
+          "definitionLevelCount": 2,
+          "definitionRoomCount": 5,
+          "generatedRoomCount": 6,
+          "queuedSlotValid": true,
+          "withinDefinitionRoomBounds": true,
+          "queuedRoomType": "Enemy",
+          "queuedContext": -1,
+          "queuedObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "slotAllowsEnemySubstitution": true,
+          "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+        },
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "7d271a6721324aa8a5a9220b5ed8b1db",
+        "frame": 21966,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    },
+    {
+      "state": {
+        "inSession": true,
+        "singlePlayer": true,
+        "day": 0,
+        "timeIndex": 0,
+        "round": 0,
+        "questId": -10,
+        "questObjectiveKey": "oneline0",
+        "questDestRealm": 1178465130,
+        "questComplete": false,
+        "questIsLast": true,
+        "currentTurnFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "party": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "name": "Player 1",
+            "classId": 112,
+            "hp": 989,
+            "maxHp": 999,
+            "focus": 4,
+            "maxFocus": 4,
+            "gold": 16,
+            "level": 0,
+            "xp": 12,
+            "actionPoints": 0,
+            "spentFocus": 0,
+            "realmId": 1178465130,
+            "hexBig": null,
+            "hexSmall": null,
+            "pos": {
+              "x": 158.72999572753906,
+              "y": 0,
+              "z": 144.96401977539062
+            }
+          }
+        ],
+        "combat": {
+          "active": true,
+          "liveCombatants": 1,
+          "currentEnemyFid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "whoseTurn": {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "isPlayer": true,
+            "source": "m_FightOrder[0]"
+          },
+          "heroTurnReady": false,
+          "readyParts": {
+            "initialized": false,
+            "fsmState": "",
+            "actingFid": {
+              "turnIndex": 0,
+              "photonId": 1
+            }
+          },
+          "enemies": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": -1
+              },
+              "name": "Thistlewick Hexer",
+              "type": "ftkmf_modeltest_thistlewick",
+              "hp": 0,
+              "hpMax": 58,
+              "alive": false
+            }
+          ],
+          "liveEnemies": 0,
+          "stuck": false,
+          "winningPlayerFid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "fightOrder": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 0
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 1.6393440961837769
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 3.2786881923675537
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 4.918032646179199
+            }
+          ],
+          "abilities": [
+            {
+              "profId": 36,
+              "index": 0,
+              "label": "hammerSplash",
+              "name": "hammerSplash",
+              "buttonEnabled": false
+            }
+          ],
+          "driver": null
+        },
+        "dungeon": {
+          "inDungeon": true,
+          "inCombat": true,
+          "dungeonId": "FloodedCrypt",
+          "level": 0,
+          "room": 2,
+          "levelCount": 2,
+          "roomCount": 5,
+          "currentRoomType": "Enemy",
+          "encounterObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "inLastRoom": false,
+          "atLastLevel": false,
+          "cleared": false,
+          "deactivated": false,
+          "driver": null
+        },
+        "map": {
+          "realmId": 1178465130,
+          "tile": {
+            "big": 120,
+            "small": 15
+          },
+          "stageIndex": 0,
+          "hasPOI": true,
+          "poiType": "Dungeon",
+          "reachableTiles": [
+            {
+              "big": 120,
+              "small": 5
+            },
+            {
+              "big": 120,
+              "small": 14
+            }
+          ],
+          "objective": {
+            "big": 120,
+            "small": 15
+          }
+        },
+        "choices": [],
+        "signals": {
+          "inCombat": true,
+          "modalOpen": false,
+          "modalType": null,
+          "choiceOpen": false,
+          "allDead": false,
+          "victoryShowing": false,
+          "warnings": [],
+          "victoryArmed": false
+        },
+        "phase": "combat"
+      },
+      "fixture": {
+        "ok": true,
+        "provenance": "read-only fixture readiness snapshot",
+        "strictReady": {
+          "ok": false,
+          "reason": "Actual combat is active."
+        },
+        "strictLootCollect": {
+          "ok": false,
+          "reason": "No active, interactable native Collect button in a current Loot container."
+        },
+        "voteSurfaces": [
+          {
+            "heroInstanceId": -235504,
+            "alive": true,
+            "containerInstanceId": -237240,
+            "containerActive": true,
+            "voteType": "None",
+            "buttons": [
+              {
+                "option": "Collect",
+                "instanceId": -237282,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              },
+              {
+                "option": "Ready",
+                "instanceId": -237682,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              }
+            ]
+          }
+        ],
+        "playerScopes": [
+          {
+            "scope": "player-overworld",
+            "avatars": [
+              {
+                "ownerInstanceId": -235504,
+                "celInstanceId": -239108,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-combat",
+            "avatars": [
+              {
+                "ownerInstanceId": 358974,
+                "celInstanceId": -249132,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-preview",
+            "avatars": []
+          }
+        ],
+        "identity": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "rootName": "mirewarden-game",
+          "session": "621d536f4b7847b396d5334e2a05075d",
+          "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+        },
+        "sessions": {
+          "esInCombat": true,
+          "mcInCombat": true,
+          "mcEncounterType": "Enemy",
+          "esVoteType": "Loot",
+          "mcVoteType": "Loot",
+          "fightOrderCount": 4,
+          "esFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Return To Overworld 2"
+          },
+          "voteFsm": {
+            "present": true,
+            "enabled": false,
+            "state": ""
+          },
+          "lootFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Wait for initialize"
+          }
+        },
+        "dungeon": {
+          "level": 0,
+          "room": 2,
+          "activeDungeonEncounterType": "Enemy",
+          "nextLevelGenerated": true,
+          "isAtLastLevel": false,
+          "isDungeonCleared": false,
+          "definitionLevelCount": 2,
+          "definitionRoomCount": 5,
+          "generatedRoomCount": 6,
+          "queuedSlotValid": true,
+          "withinDefinitionRoomBounds": true,
+          "queuedRoomType": "Enemy",
+          "queuedContext": -1,
+          "queuedObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "slotAllowsEnemySubstitution": true,
+          "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+        },
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "a306097304f749a19e9e995eefa0ac60",
+        "frame": 22000,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    },
+    {
+      "state": {
+        "inSession": true,
+        "singlePlayer": true,
+        "day": 0,
+        "timeIndex": 0,
+        "round": 0,
+        "questId": -10,
+        "questObjectiveKey": "oneline0",
+        "questDestRealm": 1178465130,
+        "questComplete": false,
+        "questIsLast": true,
+        "currentTurnFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "party": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "name": "Player 1",
+            "classId": 112,
+            "hp": 989,
+            "maxHp": 999,
+            "focus": 4,
+            "maxFocus": 4,
+            "gold": 16,
+            "level": 0,
+            "xp": 12,
+            "actionPoints": 0,
+            "spentFocus": 0,
+            "realmId": 1178465130,
+            "hexBig": null,
+            "hexSmall": null,
+            "pos": {
+              "x": 158.72999572753906,
+              "y": 0,
+              "z": 144.96401977539062
+            }
+          }
+        ],
+        "combat": {
+          "active": true,
+          "liveCombatants": 1,
+          "currentEnemyFid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "whoseTurn": {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "isPlayer": true,
+            "source": "m_FightOrder[0]"
+          },
+          "heroTurnReady": false,
+          "readyParts": {
+            "initialized": false,
+            "fsmState": "",
+            "actingFid": {
+              "turnIndex": 0,
+              "photonId": 1
+            }
+          },
+          "enemies": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": -1
+              },
+              "name": "Thistlewick Hexer",
+              "type": "ftkmf_modeltest_thistlewick",
+              "hp": 0,
+              "hpMax": 58,
+              "alive": false
+            }
+          ],
+          "liveEnemies": 0,
+          "stuck": false,
+          "winningPlayerFid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "fightOrder": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 0
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 1.6393440961837769
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 3.2786881923675537
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 4.918032646179199
+            }
+          ],
+          "abilities": [
+            {
+              "profId": 36,
+              "index": 0,
+              "label": "hammerSplash",
+              "name": "hammerSplash",
+              "buttonEnabled": false
+            }
+          ],
+          "driver": null
+        },
+        "dungeon": {
+          "inDungeon": true,
+          "inCombat": true,
+          "dungeonId": "FloodedCrypt",
+          "level": 0,
+          "room": 2,
+          "levelCount": 2,
+          "roomCount": 5,
+          "currentRoomType": "Enemy",
+          "encounterObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "inLastRoom": false,
+          "atLastLevel": false,
+          "cleared": false,
+          "deactivated": false,
+          "driver": null
+        },
+        "map": {
+          "realmId": 1178465130,
+          "tile": {
+            "big": 120,
+            "small": 15
+          },
+          "stageIndex": 0,
+          "hasPOI": true,
+          "poiType": "Dungeon",
+          "reachableTiles": [
+            {
+              "big": 120,
+              "small": 5
+            },
+            {
+              "big": 120,
+              "small": 14
+            }
+          ],
+          "objective": {
+            "big": 120,
+            "small": 15
+          }
+        },
+        "choices": [],
+        "signals": {
+          "inCombat": true,
+          "modalOpen": false,
+          "modalType": null,
+          "choiceOpen": false,
+          "allDead": false,
+          "victoryShowing": false,
+          "warnings": [],
+          "victoryArmed": false
+        },
+        "phase": "combat"
+      },
+      "fixture": {
+        "ok": true,
+        "provenance": "read-only fixture readiness snapshot",
+        "strictReady": {
+          "ok": false,
+          "reason": "Actual combat is active."
+        },
+        "strictLootCollect": {
+          "ok": false,
+          "reason": "No active, interactable native Collect button in a current Loot container."
+        },
+        "voteSurfaces": [
+          {
+            "heroInstanceId": -235504,
+            "alive": true,
+            "containerInstanceId": -237240,
+            "containerActive": true,
+            "voteType": "None",
+            "buttons": [
+              {
+                "option": "Collect",
+                "instanceId": -237282,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              },
+              {
+                "option": "Ready",
+                "instanceId": -237682,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              }
+            ]
+          }
+        ],
+        "playerScopes": [
+          {
+            "scope": "player-overworld",
+            "avatars": [
+              {
+                "ownerInstanceId": -235504,
+                "celInstanceId": -239108,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-combat",
+            "avatars": [
+              {
+                "ownerInstanceId": 358974,
+                "celInstanceId": -249132,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-preview",
+            "avatars": []
+          }
+        ],
+        "identity": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "rootName": "mirewarden-game",
+          "session": "621d536f4b7847b396d5334e2a05075d",
+          "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+        },
+        "sessions": {
+          "esInCombat": true,
+          "mcInCombat": true,
+          "mcEncounterType": "Enemy",
+          "esVoteType": "Loot",
+          "mcVoteType": "Loot",
+          "fightOrderCount": 4,
+          "esFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Return To Overworld 2"
+          },
+          "voteFsm": {
+            "present": true,
+            "enabled": false,
+            "state": ""
+          },
+          "lootFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Wait for initialize"
+          }
+        },
+        "dungeon": {
+          "level": 0,
+          "room": 2,
+          "activeDungeonEncounterType": "Enemy",
+          "nextLevelGenerated": true,
+          "isAtLastLevel": false,
+          "isDungeonCleared": false,
+          "definitionLevelCount": 2,
+          "definitionRoomCount": 5,
+          "generatedRoomCount": 6,
+          "queuedSlotValid": true,
+          "withinDefinitionRoomBounds": true,
+          "queuedRoomType": "Enemy",
+          "queuedContext": -1,
+          "queuedObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "slotAllowsEnemySubstitution": true,
+          "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+        },
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "bea2d004fb74419ea294f45a650376c3",
+        "frame": 22095,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    },
+    {
+      "state": {
+        "inSession": true,
+        "singlePlayer": true,
+        "day": 0,
+        "timeIndex": 0,
+        "round": 0,
+        "questId": -10,
+        "questObjectiveKey": "oneline0",
+        "questDestRealm": 1178465130,
+        "questComplete": false,
+        "questIsLast": true,
+        "currentTurnFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "party": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "name": "Player 1",
+            "classId": 112,
+            "hp": 989,
+            "maxHp": 999,
+            "focus": 4,
+            "maxFocus": 4,
+            "gold": 16,
+            "level": 0,
+            "xp": 12,
+            "actionPoints": 0,
+            "spentFocus": 0,
+            "realmId": 1178465130,
+            "hexBig": null,
+            "hexSmall": null,
+            "pos": {
+              "x": 158.72999572753906,
+              "y": 0,
+              "z": 144.96401977539062
+            }
+          }
+        ],
+        "combat": {
+          "active": true,
+          "liveCombatants": 1,
+          "currentEnemyFid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "whoseTurn": {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "isPlayer": true,
+            "source": "m_FightOrder[0]"
+          },
+          "heroTurnReady": false,
+          "readyParts": {
+            "initialized": false,
+            "fsmState": "",
+            "actingFid": {
+              "turnIndex": 0,
+              "photonId": 1
+            }
+          },
+          "enemies": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": -1
+              },
+              "name": "Thistlewick Hexer",
+              "type": "ftkmf_modeltest_thistlewick",
+              "hp": 0,
+              "hpMax": 58,
+              "alive": false
+            }
+          ],
+          "liveEnemies": 0,
+          "stuck": false,
+          "winningPlayerFid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "fightOrder": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 0
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 1.6393440961837769
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 3.2786881923675537
+            },
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": 1
+              },
+              "tta": 4.918032646179199
+            }
+          ],
+          "abilities": [
+            {
+              "profId": 36,
+              "index": 0,
+              "label": "hammerSplash",
+              "name": "hammerSplash",
+              "buttonEnabled": false
+            }
+          ],
+          "driver": null
+        },
+        "dungeon": {
+          "inDungeon": true,
+          "inCombat": true,
+          "dungeonId": "FloodedCrypt",
+          "level": 0,
+          "room": 2,
+          "levelCount": 2,
+          "roomCount": 5,
+          "currentRoomType": "Enemy",
+          "encounterObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "inLastRoom": false,
+          "atLastLevel": false,
+          "cleared": false,
+          "deactivated": false,
+          "driver": null
+        },
+        "map": {
+          "realmId": 1178465130,
+          "tile": {
+            "big": 120,
+            "small": 15
+          },
+          "stageIndex": 0,
+          "hasPOI": true,
+          "poiType": "Dungeon",
+          "reachableTiles": [
+            {
+              "big": 120,
+              "small": 5
+            },
+            {
+              "big": 120,
+              "small": 14
+            }
+          ],
+          "objective": {
+            "big": 120,
+            "small": 15
+          }
+        },
+        "choices": [],
+        "signals": {
+          "inCombat": true,
+          "modalOpen": false,
+          "modalType": null,
+          "choiceOpen": false,
+          "allDead": false,
+          "victoryShowing": false,
+          "warnings": [],
+          "victoryArmed": false
+        },
+        "phase": "combat"
+      },
+      "fixture": {
+        "ok": true,
+        "provenance": "read-only fixture readiness snapshot",
+        "strictReady": {
+          "ok": false,
+          "reason": "Actual combat is active."
+        },
+        "strictLootCollect": {
+          "ok": false,
+          "reason": "No active, interactable native Collect button in a current Loot container."
+        },
+        "voteSurfaces": [
+          {
+            "heroInstanceId": -235504,
+            "alive": true,
+            "containerInstanceId": -237240,
+            "containerActive": true,
+            "voteType": "None",
+            "buttons": [
+              {
+                "option": "Collect",
+                "instanceId": -237282,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              },
+              {
+                "option": "Ready",
+                "instanceId": -237682,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              }
+            ]
+          }
+        ],
+        "playerScopes": [
+          {
+            "scope": "player-overworld",
+            "avatars": [
+              {
+                "ownerInstanceId": -235504,
+                "celInstanceId": -239108,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-combat",
+            "avatars": [
+              {
+                "ownerInstanceId": 358974,
+                "celInstanceId": -249132,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-preview",
+            "avatars": []
+          }
+        ],
+        "identity": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "rootName": "mirewarden-game",
+          "session": "621d536f4b7847b396d5334e2a05075d",
+          "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+        },
+        "sessions": {
+          "esInCombat": true,
+          "mcInCombat": true,
+          "mcEncounterType": "Enemy",
+          "esVoteType": "Loot",
+          "mcVoteType": "Loot",
+          "fightOrderCount": 4,
+          "esFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Return To Overworld 2"
+          },
+          "voteFsm": {
+            "present": true,
+            "enabled": false,
+            "state": ""
+          },
+          "lootFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Wait for initialize"
+          }
+        },
+        "dungeon": {
+          "level": 0,
+          "room": 2,
+          "activeDungeonEncounterType": "Enemy",
+          "nextLevelGenerated": true,
+          "isAtLastLevel": false,
+          "isDungeonCleared": false,
+          "definitionLevelCount": 2,
+          "definitionRoomCount": 5,
+          "generatedRoomCount": 6,
+          "queuedSlotValid": true,
+          "withinDefinitionRoomBounds": true,
+          "queuedRoomType": "Enemy",
+          "queuedContext": -1,
+          "queuedObjects": [
+            "ftkmf_modeltest_thistlewick"
+          ],
+          "slotAllowsEnemySubstitution": true,
+          "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+        },
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "2f64662028314499bc4fb2e114089a50",
+        "frame": 22181,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    },
+    {
+      "state": {
+        "inSession": true,
+        "singlePlayer": true,
+        "day": 0,
+        "timeIndex": 0,
+        "round": 0,
+        "questId": -10,
+        "questObjectiveKey": "oneline0",
+        "questDestRealm": 1178465130,
+        "questComplete": false,
+        "questIsLast": true,
+        "currentTurnFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "party": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "name": "Player 1",
+            "classId": 112,
+            "hp": 989,
+            "maxHp": 999,
+            "focus": 4,
+            "maxFocus": 4,
+            "gold": 16,
+            "level": 0,
+            "xp": 12,
+            "actionPoints": 0,
+            "spentFocus": 0,
+            "realmId": 1178465130,
+            "hexBig": null,
+            "hexSmall": null,
+            "pos": {
+              "x": 158.72999572753906,
+              "y": 0,
+              "z": 144.96401977539062
+            }
+          }
+        ],
+        "combat": {
+          "active": false,
+          "liveCombatants": 1,
+          "currentEnemyFid": {
+            "turnIndex": 0,
+            "photonId": -1
+          },
+          "whoseTurn": null,
+          "heroTurnReady": false,
+          "readyParts": {
+            "initialized": false,
+            "fsmState": "",
+            "actingFid": null
+          },
+          "enemies": [
+            {
+              "fid": {
+                "turnIndex": 0,
+                "photonId": -1
+              },
+              "name": "Thistlewick Hexer",
+              "type": "ftkmf_modeltest_thistlewick",
+              "hp": 0,
+              "hpMax": 58,
+              "alive": false
+            }
+          ],
+          "liveEnemies": 0,
+          "stuck": false,
+          "winningPlayerFid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "fightOrder": [],
+          "abilities": [
+            {
+              "profId": 36,
+              "index": 0,
+              "label": "hammerSplash",
+              "name": "hammerSplash",
+              "buttonEnabled": false
+            }
+          ],
+          "driver": null
+        },
+        "dungeon": {
+          "inDungeon": true,
+          "inCombat": false,
+          "dungeonId": "FloodedCrypt",
+          "level": 0,
+          "room": 3,
+          "levelCount": 2,
+          "roomCount": 5,
+          "currentRoomType": "Trap1",
+          "encounterObjects": [
+            "trap"
+          ],
+          "inLastRoom": false,
+          "atLastLevel": false,
+          "cleared": false,
+          "deactivated": false,
+          "driver": null
+        },
+        "map": {
+          "realmId": 1178465130,
+          "tile": {
+            "big": 120,
+            "small": 15
+          },
+          "stageIndex": 0,
+          "hasPOI": true,
+          "poiType": "Dungeon",
+          "reachableTiles": [
+            {
+              "big": 120,
+              "small": 5
+            },
+            {
+              "big": 120,
+              "small": 14
+            }
+          ],
+          "objective": {
+            "big": 120,
+            "small": 15
+          }
+        },
+        "choices": [],
+        "signals": {
+          "inCombat": false,
+          "modalOpen": false,
+          "modalType": null,
+          "choiceOpen": false,
+          "allDead": false,
+          "victoryShowing": false,
+          "warnings": [],
+          "victoryArmed": false
+        },
+        "phase": "overworld"
+      },
+      "fixture": {
+        "ok": true,
+        "provenance": "read-only fixture readiness snapshot",
+        "strictReady": {
+          "ok": true,
+          "level": 0,
+          "room": 3,
+          "buttonCount": 1
+        },
+        "strictLootCollect": {
+          "ok": false,
+          "reason": "Both current encounter vote types must be Loot."
+        },
+        "voteSurfaces": [
+          {
+            "heroInstanceId": -235504,
+            "alive": true,
+            "containerInstanceId": -237240,
+            "containerActive": true,
+            "voteType": "Ready",
+            "buttons": [
+              {
+                "option": "Collect",
+                "instanceId": -237282,
+                "active": false,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": false,
+                "item": "None",
+                "belongsToHero": true
+              },
+              {
+                "option": "Ready",
+                "instanceId": -237682,
+                "active": true,
+                "enabled": true,
+                "interactable": true,
+                "focusing": false,
+                "usable": true,
+                "item": "None",
+                "belongsToHero": true
+              }
+            ]
+          }
+        ],
+        "playerScopes": [
+          {
+            "scope": "player-overworld",
+            "avatars": [
+              {
+                "ownerInstanceId": -235504,
+                "celInstanceId": -239108,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-combat",
+            "avatars": [
+              {
+                "ownerInstanceId": 358974,
+                "celInstanceId": -249132,
+                "ownerActive": true,
+                "avatarActive": true,
+                "renderers": 5,
+                "usableRenderers": 5
+              }
+            ]
+          },
+          {
+            "scope": "player-preview",
+            "avatars": []
+          }
+        ],
+        "identity": {
+          "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+          "rootName": "mirewarden-game",
+          "session": "621d536f4b7847b396d5334e2a05075d",
+          "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+        },
+        "sessions": {
+          "esInCombat": false,
+          "mcInCombat": true,
+          "mcEncounterType": "Ready",
+          "esVoteType": "Ready",
+          "mcVoteType": "Ready",
+          "fightOrderCount": 0,
+          "esFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Wait for Battle to End"
+          },
+          "voteFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Show Vote Buttons"
+          },
+          "lootFsm": {
+            "present": true,
+            "enabled": true,
+            "state": "Wait for initialize"
+          }
+        },
+        "dungeon": {
+          "level": 0,
+          "room": 3,
+          "activeDungeonEncounterType": "Enemy",
+          "nextLevelGenerated": true,
+          "isAtLastLevel": false,
+          "isDungeonCleared": false,
+          "definitionLevelCount": 2,
+          "definitionRoomCount": 5,
+          "generatedRoomCount": 6,
+          "queuedSlotValid": true,
+          "withinDefinitionRoomBounds": true,
+          "queuedRoomType": "Trap1",
+          "queuedContext": -1,
+          "queuedObjects": [
+            "trap"
+          ],
+          "slotAllowsEnemySubstitution": false,
+          "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+        },
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "5292944cb4df47a3a63ddf3b1ef197fd",
+        "frame": 22265,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    }
+  ],
+  "collects": [
+    {
+      "before": {
+        "heroInstanceId": -235504,
+        "buttonInstanceId": -237282,
+        "item": "None"
+      },
+      "fingerprint": {
+        "collect": {
+          "heroInstanceId": -235504,
+          "buttonInstanceId": -237282,
+          "item": "None"
+        },
+        "rewards": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "gold": 0,
+            "xp": 12,
+            "level": 0
+          }
+        ]
+      },
+      "intent": "one native Collect",
+      "result": {
+        "ok": true,
+        "status": "clicked",
+        "heroInstanceId": -235504,
+        "buttonInstanceId": -237282,
+        "item": "None",
+        "method": "VoteButton.OnLeftClick(Collect)",
+        "note": "One native current Loot vote submitted; observe fixture-state again before any further collection.",
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "75a9642b56824dbb8776d40e943a6f81",
+        "frame": 21956,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    },
+    {
+      "before": {
+        "heroInstanceId": -235504,
+        "buttonInstanceId": -237282,
+        "item": "None"
+      },
+      "fingerprint": {
+        "collect": {
+          "heroInstanceId": -235504,
+          "buttonInstanceId": -237282,
+          "item": "None"
+        },
+        "rewards": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": 1
+            },
+            "gold": 16,
+            "xp": 12,
+            "level": 0
+          }
+        ]
+      },
+      "intent": "one native Collect",
+      "result": {
+        "ok": true,
+        "status": "clicked",
+        "heroInstanceId": -235504,
+        "buttonInstanceId": -237282,
+        "item": "None",
+        "method": "VoteButton.OnLeftClick(Collect)",
+        "note": "One native current Loot vote submitted; observe fixture-state again before any further collection.",
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "621d536f4b7847b396d5334e2a05075d",
+        "id": "0575842d3c704427951623478610d153",
+        "frame": 21991,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 3,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235504,
+        "alive": true,
+        "containerInstanceId": -237240,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237282,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237682,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235504,
+            "celInstanceId": -239108,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -249132,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "621d536f4b7847b396d5334e2a05075d",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 3,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Trap1",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "trap"
+      ],
+      "slotAllowsEnemySubstitution": false,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "621d536f4b7847b396d5334e2a05075d",
+    "id": "5292944cb4df47a3a63ddf3b1ef197fd",
+    "frame": 22265,
+    "savePath": "save-model-test-81fab5f083e30704"
+  }
+}

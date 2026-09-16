@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "enemy": "ftkmf_modeltest_mirewarden",
+  "native_template": "trollCaveA",
+  "renderer_path": "enTroll01",
+  "model_sha256": "fbedd32fa98c10c73ae1904cba7feadb54b114b1f4aeffbc8e38c59761f5614f",
+  "framework_sha256": "df0cb43046a1281daf157a8f4cb3b78bfa06ad6aed932001d10553dd4745cca4",
+  "controller": "trollController",
+  "matched_joints": 37,
+  "dropped_joint_slots": 0,
+  "fixture": {
+    "isolation": "disposable single-player game",
+    "hero_max_hp": 999,
+    "ordinary_tutorials_suppressed_for_session": true,
+    "capture": "offline fixed-step native gameplay",
+    "death_trigger": "native CheatKillSingle through real damage/death path"
+  },
+  "checks": {
+    "export": "pass",
+    "explicit_production_spawn": "pass",
+    "appearance": "pass for captured poses",
+    "idle": "pass for observed continuous cycles",
+    "hit": "pass for damage_troll response",
+    "attack": "pass for captured attack_troll retaliation",
+    "death": "pass for observed native ragdoll collapse and settling",
+    "combat_completion": "pass: loot collected and native next-room Ready preparation reached"
+  },
+  "captures": {
+    "combat": {
+      "id": "67c7dcfea9ae416ba0640dd33416f8a4",
+      "sha256": "b8bd29ad67a65d773b76d303bbbc9b8ce053c818aa75b67775c558993755c6c2",
+      "frame_count": 80,
+      "paused_frames": 0,
+      "game_seconds": 10.86248779296875,
+      "provenance": "observed-runtime"
+    },
+    "second_hit": {
+      "id": "ab56b0b2f5554fca99c9e4155df498f4",
+      "sha256": "e58082897a54eeae312464031a7cb8107f57953fd185c1600c2e8fd4a96ae32d",
+      "frame_count": 120,
+      "paused_frames": 0,
+      "game_seconds": 10.908355712890625,
+      "provenance": "observed-runtime"
+    },
+    "death": {
+      "id": "0a9cba3642c0435489e5f188214cbf7a",
+      "sha256": "c80c6993349725f096d5e31d4858a1729574d31adc919a500d8c0bc3d769f577",
+      "frame_count": 120,
+      "paused_frames": 0,
+      "game_seconds": 10.9083251953125,
+      "provenance": "observed-runtime"
+    }
+  },
+  "rigid_geometry_check": {
+    "scope": "Mirewarden rigid triangle edge-length stability across captured death poses, relative to initial live pose",
+    "frames": 120,
+    "min_ratio": 0.9999995841510104,
+    "max_ratio": 1.0000008470268027,
+    "nonfinite": 0,
+    "not_measured": "Gaps between separately articulated stone pieces and artistic acceptance"
+  },
+  "remaining": [
+    "Other attack/proficiency/critical state variants and extreme poses are not exhaustively reviewed.",
+    "Ragdoll visibly separates articulated stone pieces; this is a technical deformation check, not final art approval.",
+    "Other cave-troll variants and complete campaign progression are not covered.",
+    "The older first paused capture is excluded from acceptance."
+  ]
+}

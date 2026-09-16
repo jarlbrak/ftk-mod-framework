@@ -1,0 +1,90 @@
+{
+  "schema": "ftkmf.root-visual-review.v1",
+  "reviewStatus": "reviewed_exact_source_with_scoped_limits",
+  "session": "e087741594c041d29c7a5f19adf364ce",
+  "binding": {
+    "nativeChassis": "mimicA",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "mimicA",
+    "resourcePrefab": null,
+    "rendererPath": "mimic01",
+    "sourceRendererId": 121192,
+    "rendererInstanceId": -245498,
+    "ownerInstanceId": 369188,
+    "mesh": "ftkmf_glb_verdigrin.glb",
+    "boneSignature": "7e11ccbe7c3c9a43758519923854adc1952724a0b1763ab6235e1796beaa76ba",
+    "visualScale": 1.0
+  },
+  "frames": [
+    {
+      "action": "pass",
+      "index": 0,
+      "clip": "cidle_mimic",
+      "path": "scratch/mirewarden-game/model-test-output/5bdba3f63d8a43058a6d5482a496a4f7/0000.png",
+      "sha256": "d28847da4ede141d42bf55c04236e90b2e248b85b097260d1d5895624ae906be",
+      "observation": "The complete authored chest, brass borders, teal panels, ivory teeth and wine tongue are readable in native combat idle at HP 58. The lid and lower body remain connected."
+    },
+    {
+      "action": "pass",
+      "index": 54,
+      "clip": "attack_mimic",
+      "path": "scratch/mirewarden-game/model-test-output/5bdba3f63d8a43058a6d5482a496a4f7/0054.png",
+      "sha256": "3a057053a6908386c841db2d41ba7a904a48d47a2af685b3b7744343ef3e090a",
+      "observation": "The native mimic attack carries the open authored chest forward with the lid, teeth and lower coffer still aligned. The foreground hero hides part of the tongue and lower body."
+    },
+    {
+      "action": "pass",
+      "index": 70,
+      "clip": "cidle_mimic",
+      "path": "scratch/mirewarden-game/model-test-output/5bdba3f63d8a43058a6d5482a496a4f7/0070.png",
+      "sha256": "eec5b6f9cc2696283ec9043d1bf48fa2e739868f86913f0472851cf36fd4c803",
+      "observation": "After dealing 14 hero damage, the authored model returns to a readable upright idle with the lid, tongue and lower panels coherent."
+    },
+    {
+      "action": "attack",
+      "index": 29,
+      "clip": "damageSmall_mimic",
+      "path": "scratch/mirewarden-game/model-test-output/dcb3c5ee706542eabc281ea038076ec9/0029.png",
+      "sha256": "c846a666b87f3fa715476bae3c432a1b9a2749e2e6736e8c8d16f33a7d0b379e",
+      "observation": "The ordinary no-focus hit resolves HP 58 to 52 during the native small-damage recoil. The authored lid and lower body remain attached behind strong hero and damage-effect occlusion."
+    },
+    {
+      "action": "attack",
+      "index": 79,
+      "clip": "chompAOE_mimic",
+      "path": "scratch/mirewarden-game/model-test-output/dcb3c5ee706542eabc281ea038076ec9/0079.png",
+      "sha256": "063d04f4d8fa71baf505cc23baf800c6f7d9e58f8a36c1163926ef276e798fd9",
+      "observation": "The later native proficiency opens and tilts the coffer while the teeth, tongue, lid and base remain visually coherent."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 35,
+      "clip": "deathHeavy_mimic",
+      "path": "scratch/mirewarden-game/model-test-output/ce92a8d913eb472eb212e5a85e7cc301/0035.png",
+      "sha256": "2919b72a7e437659dab51fc71e8b1a5f3e0513f7eafca9fc4065e150f4b98c2e",
+      "observation": "The explicit KillSingle fixture reaches the native heavy-death animation as a closed coffer. The hero partly blocks the body, but the authored lid and base remain aligned."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 119,
+      "clip": "deathHeavy_mimic",
+      "path": "scratch/mirewarden-game/model-test-output/ce92a8d913eb472eb212e5a85e7cc301/0119.png",
+      "sha256": "a12f08b43c7039179f5e68d291d55c296928c16d757d1103e504094103d9a033",
+      "observation": "The complete capture reaches the native Victory and item-choice surface with the closed coffer visible behind depth blur. This establishes the transition, not a precise corpse-lifetime interval."
+    }
+  ],
+  "conclusions": {
+    "appearance": "The authored coffer is recognizable and coherent at native scale through the reviewed idle, attack, hit, proficiency and death frames.",
+    "idle": "The complete pass capture contains cidle_mimic before and after the native attack with no visible part separation.",
+    "attack": "The complete pass capture contains attack_mimic and a causal native attack that deals 14 hero damage.",
+    "hit": "The complete ordinary no-focus attack capture contains damageSmall_mimic and records the same target at HP 58 to 52.",
+    "death": "The complete explicit KillSingle fixture contains deathHeavy_mimic. The renderer reports m_DoRagdoll false, so this is animated death rather than a body ragdoll.",
+    "progression": "The fresh process reaches native Loot after the fixture death. The prior V3 process separately supplies two guarded Collects, strict Ready and the next enemy room."
+  },
+  "limits": [
+    "The explicit KillSingle fixture is not ordinary lethal-damage evidence.",
+    "Hero, weapon, UI, depth blur and native effects obscure parts of several reviewed frames.",
+    "The selected frames do not prove every hinge or tongue interval, floor collision, sleeping, full culling, portrait or resource lifetime, final disposal, or finished-art acceptance.",
+    "The Victory frame does not establish a precise visible corpse lifetime."
+  ]
+}

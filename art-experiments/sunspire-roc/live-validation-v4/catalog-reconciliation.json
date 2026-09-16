@@ -1,0 +1,38 @@
+{
+  "schema": "ftkmf.model-validation-catalog-reconciliation.v1",
+  "status": "retained_trial_selected_profile_matches_current_catalog_exactly",
+  "topologyGroup": "0f29e98795c302a5",
+  "routeKind": "directEnemy",
+  "profileKey": "ftkmf_modeltest_sunspire_roc",
+  "profileDocument": {
+    "path": "art-experiments/sunspire-roc/runtime-profile.json",
+    "sha256": "49c7d8f7fbbbb63f5fc471b53d0bddcebaa8d1c69cb9a570d28bb2c12e9781f6"
+  },
+  "retainedTrial": {
+    "path": "art-experiments/sunspire-roc/live-validation-v2/validation.json",
+    "sha256": "6e61239c6d22ee301764fda70136f3e7098c31f2f250aa2a0e6db9e4e693067f",
+    "session": "243d7c94fca146d7a68bf03af5ba5f7f",
+    "historicalCatalogSha256": "f4584844c7a7b3b1bbefaf3a988c76f7147e860e62f142c635934a119769d2a2"
+  },
+  "currentCatalog": {
+    "path": "scratch/mirewarden-game/model-test-profiles.json",
+    "sha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144"
+  },
+  "matchingSemanticFields": {
+    "baseEnemy": "rocA",
+    "combatProfile": "3ac11623c5f15bc93636070acd1193874c2ff112dfbb766f120e0648d6ec282b",
+    "minimumBaseHealth": 64,
+    "portraitMarkerPath": "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+    "rendererPath": "enRoc01",
+    "glbFile": "sunspire-roc.glb",
+    "glbSha256": "da6b90793027a3f33feae317da1efdc1982176e6cee6b704ab4a1b223d7c0c67",
+    "textureFile": "sunspire-roc_basecolor.png",
+    "textureSha256": "911b8202261edc17a1098677b63d69ba960b26a66d2cd5027281d03368762f83",
+    "visualScale": 1.0,
+    "disableNativeEmission": true,
+    "sourceRendererId": 121238,
+    "motionRendererPath": "enRoc01"
+  },
+  "catalogDifference": "The overall catalog hash changed as unrelated profiles were added. The selected Sunspire Roc profile object is byte-for-byte equivalent after canonical JSON serialization.",
+  "decision": "Preserve the complete retained trial and build a new immutable archive. A replay is not required because the selected profile, assets, source assignment, motion renderer, and required runtime observations are unchanged and fully retained."
+}

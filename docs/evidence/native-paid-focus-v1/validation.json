@@ -1,0 +1,402 @@
+{
+  "status": "VERIFIED_TWO_NATIVE_PAID_FOCUS_COMPLETIONS_ONE_MANUAL_ONE_CLI",
+  "session": "0a532864d8004cdc85e1dba0b7e076d2",
+  "observations": [
+    {
+      "route": "manual",
+      "turn": 6,
+      "submissionId": "5444fbc7a468444ca40e0d43d468be8e",
+      "availableBefore": 4,
+      "availableAfter": 3,
+      "spentBefore": 0,
+      "spentAfter": 1,
+      "frames": [
+        19333,
+        19370,
+        19381,
+        19381,
+        20830
+      ],
+      "singleCallback": true,
+      "finalAnimationCount": 0
+    },
+    {
+      "route": "cli",
+      "turn": 9,
+      "submissionId": "1005bd7b4c5743f9b94e7f85c6e0e195",
+      "availableBefore": 3,
+      "availableAfter": 2,
+      "spentBefore": 0,
+      "spentAfter": 1,
+      "frames": [
+        44168,
+        44177,
+        44188,
+        44188,
+        44191
+      ],
+      "singleCallback": true,
+      "finalAnimationCount": 0
+    }
+  ],
+  "cliCommands": [
+    "paid-focus-state",
+    "paid-focus-submit",
+    "paid-focus-state"
+  ],
+  "limits": [
+    "One manual turn6 and one CLI turn9; no broad weapon/class coverage.",
+    "Measured native callback evidence with source joins, not a second engine observation.",
+    "Blocked ordinary attack request cheat=None/focus=false is separate; no damage acceptance.",
+    "No live interruption/duplicate/uncertain-path acceptance."
+  ],
+  "damageAcceptance": false,
+  "enemyCoverageAdded": false,
+  "losslessMappings": [
+    {
+      "source": "scratch/bronzehollow-411-deployment-result.json",
+      "sourceSha256": "6aee8271c9c27c66c1d836262ffe460014c34547388cc020acda54f84858e5f0",
+      "archive": "metadata/scratch/bronzehollow-411-deployment-result.json.gz",
+      "archiveSha256": "4d252602c95ccae0df6b4f1d08400a29d5baf70809f5855b82d18506f6bf1612",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bronzehollow-411-first-startup.json",
+      "sourceSha256": "f917214d369f96b9f90c0c1ee16c16be3354356c0a79ff411b6be0f00a5faa43",
+      "archive": "metadata/scratch/bronzehollow-411-first-startup.json.gz",
+      "archiveSha256": "fb09cf60896cde5a9f38e362b0422d5b4354924ec92f1f6a71a9429ac7a21a90",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bronzehollow-after-first-paid-attack.json",
+      "sourceSha256": "c67cc8d6e4ea129a06998a8303f752d180f8039af93ef21839073b648e1fd469",
+      "archive": "metadata/scratch/bronzehollow-after-first-paid-attack.json.gz",
+      "archiveSha256": "4145552ca8c2836980ca92f83326992ce9dd197c9251709b6ae0a96b8ab37643",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bronzehollow-native-paid-focus-architect-review.json",
+      "sourceSha256": "80970d1b48fcad78019eb41e5a9206bf29c292f6be2f39a933c85f10d5d407d9",
+      "archive": "metadata/scratch/bronzehollow-native-paid-focus-architect-review.json.gz",
+      "archiveSha256": "be2715cdbcbae5da26c30aa338390de5ea99f36dd159de2fca4bf2be290bccc6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bronzehollow-native-paid-focus-first-completion.json",
+      "sourceSha256": "d2b2a8766ebeb78d00372d617d2f66c838fb17895e7ecaa9bfcdd2b99c9a5b3c",
+      "archive": "metadata/scratch/bronzehollow-native-paid-focus-first-completion.json.gz",
+      "archiveSha256": "057e8d813e08341a5de5890a5c17e138b87b0eb045a6db74c1c3be310ee11c01",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bronzehollow-native-paid-focus-first-submission.json",
+      "sourceSha256": "6f7e38cfe5ffc5fb4af632505cb59ce4142af82cc5443d28367ab4157e40d4e5",
+      "archive": "metadata/scratch/bronzehollow-native-paid-focus-first-submission.json.gz",
+      "archiveSha256": "15b31cf643998a70b464454a1a95c5037fdf6ef18ceaf19e07776da693a58f5a",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/bronzehollow-root-first-paid-attack-review.json",
+      "sourceSha256": "c8797f753f8267900a16d3e9d3e21af604a4321ebd6b796b215e1a3fd54a580a",
+      "archive": "metadata/scratch/bronzehollow-root-first-paid-attack-review.json.gz",
+      "archiveSha256": "3885ff1b083c2dcde85b99693e6ea5fca721f2ffda1da2fd6b1aa3450edca6e7",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/candidate-paid-focus-helper-d1c9dc83/receipt.json",
+      "sourceSha256": "60af5fdc3e754d0811dbbdd1ff5ed425c98851b61702b4fb665cfd3d358b6bea",
+      "archive": "metadata/scratch/candidate-paid-focus-helper-d1c9dc83/receipt.json.gz",
+      "archiveSha256": "75b7c7b961e52ff9f0741e91d45c63c5c95ff8333f130f20442752f5e1252846",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/candidate-paid-focus-helper-d1c9dc83/review-approval.json",
+      "sourceSha256": "6dc7fb8205433a35e6d639d4a39216e1800c9d65afa2c1d27158d528092514e7",
+      "archive": "metadata/scratch/candidate-paid-focus-helper-d1c9dc83/review-approval.json.gz",
+      "archiveSha256": "1b3889013e5bb694ed52089f690886a441974ec4b64422991943448d4d160122",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/deployment-backups/bronzehollow-411-20260908-000341/deployment.json",
+      "sourceSha256": "1a7d005eeaf98d5fed31a2a93ab7f9fd98579a2750f2910c6c77aa82fb47796f",
+      "archive": "metadata/scratch/mirewarden-game/deployment-backups/bronzehollow-411-20260908-000341/deployment.json.gz",
+      "archiveSha256": "dd9dea90c444b9194f6b0a887b64a725675904b222f1ed7025504536c4dead3c",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/1005bd7b4c5743f9b94e7f85c6e0e195.json",
+      "sourceSha256": "2ac9cb419b36e1cdb5b120e2dc924cc8ba799542af4d7ed8fedaf86ade5dae55",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/1005bd7b4c5743f9b94e7f85c6e0e195.json.gz",
+      "archiveSha256": "ccd46176780d4ddbb9b4273e0af33573d53b77f60343e4084f7b548f7cbd490d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/5444fbc7a468444ca40e0d43d468be8e.json",
+      "sourceSha256": "d4e63e3be1f847587d8ea76033c71ec143828ad28f874fe064acc8e758255682",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/5444fbc7a468444ca40e0d43d468be8e.json.gz",
+      "archiveSha256": "800bcd7e3b04c1470c24ffb96bc462690fb3ef70c6e3c3068f5dd4681a1a3323",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/7d0568bde630411a956f86fb2909df00.json",
+      "sourceSha256": "1cfb82b7307abaa822a8a7294d8aac5ff6225009c44a304f283423f5c4a5f660",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/7d0568bde630411a956f86fb2909df00.json.gz",
+      "archiveSha256": "ade8a3761dea71547c77ac04dfec474807b4da5762653c3bbf07c2cee814a1f0",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/933fdbfb5261419d9fe5992bda90a321.json",
+      "sourceSha256": "bd7e2116fcfaf8bbba70d4355b342b236a69f727ebe60e70dab03b9328e5b0d6",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/933fdbfb5261419d9fe5992bda90a321.json.gz",
+      "archiveSha256": "0871caebc433b26e53771001ef9168de9ef8aa3ee2e5d20a038752051e138997",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/a37b33d48cb5447180969d3a865d7574.json",
+      "sourceSha256": "851cfe94b6aec02207e0a560d95673b2bef992559fb422404c01e856a9dbb0f7",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/a37b33d48cb5447180969d3a865d7574.json.gz",
+      "archiveSha256": "8007acfe5b2c4153602fdaa06441050e41a9b8df6fe66dc998f415983096764b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/b46b8fdc6a654f0ab47e6926cc790984.json",
+      "sourceSha256": "cbaf3f908cb3ee5e09e058a81b10e9c18ad742e3eae6daf4987d88fae520ad8f",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/b46b8fdc6a654f0ab47e6926cc790984.json.gz",
+      "archiveSha256": "e675cd262afb66c89f114edc4cbab4c771360b658663db6ae622c998f5a137ba",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/capture-summary.json",
+      "sourceSha256": "f2f2c5aef2e2ad45b63662ad422fb9ceb43ba3d2b6533ad0de5c38fcab302f2d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/capture-summary.json.gz",
+      "archiveSha256": "da6fd9c5b2897fbdfcf1ed612bb4b3facc71f141b7db0eadec540da0248a0704",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/journal.jsonl",
+      "sourceSha256": "89023619a511a88896d5815294b3fd4ae6cbb872eb40debf522b7a1e38fd0bae",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/journal.jsonl.gz",
+      "archiveSha256": "4e4d61cad7819012c7ce4629d798b6b1d67e9b4ed214019f639f9932fda4acc6",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/result.json",
+      "sourceSha256": "7c4f77e69f22e37167944e3771bbf416822a4c1149f69e8d77fd6eb05e9ea688",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/result.json.gz",
+      "archiveSha256": "c9c07115b50b2ede4abfb9d5eae663ecd1f632469f5b4415367bd80b1b3e3bb5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/d073885a53a74dd8a52cedd150588281.json",
+      "sourceSha256": "d30dcd1e15be9ffede2d6a317b9542ee0395d4cfcaf4edd8057db8aa61c9f317",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/d073885a53a74dd8a52cedd150588281.json.gz",
+      "archiveSha256": "b8c881688563be754864d8da531cb8b9be7cc5ab07f0b87dd919b9a283f3d186",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/1005bd7b4c5743f9b94e7f85c6e0e195-request.json",
+      "sourceSha256": "4af5e443b807844a97e9dd5d9f15493011211824e00836d7c2f1173eadb0f2b6",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/1005bd7b4c5743f9b94e7f85c6e0e195-request.json.gz",
+      "archiveSha256": "5b648539d8e3ba1cba72d1cb06bdc0bcb2c72f36a9bae79aca0411d4c46afa89",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/7d0568bde630411a956f86fb2909df00-request.json",
+      "sourceSha256": "aa7719e87fb76a137d4238261e87950ca802e6642e23bfba27042d5e9b347bee",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/7d0568bde630411a956f86fb2909df00-request.json.gz",
+      "archiveSha256": "3b43fa8cb0707b03f3c07bec9f44218593a5df9c14c957f9ead513f2bc79f351",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/b46b8fdc6a654f0ab47e6926cc790984-request.json",
+      "sourceSha256": "5125134e56cb143c7ea1f28de1e842e704c6a1f684bc1279971a0edb7a36317a",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/b46b8fdc6a654f0ab47e6926cc790984-request.json.gz",
+      "archiveSha256": "45df60588b3dde7af260892448f882979bf50838b12eb6e15cde877e0d8641f8",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/journal.jsonl",
+      "sourceSha256": "4b6f8076ad69f8a473db54f08bd18468d78fbdac1357cb415a94734f2d9a9291",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/journal.jsonl.gz",
+      "archiveSha256": "f2adaa503bfc4cc807148743c1999e4c29d50be38b2a7ead1fa22cb24bd1750f",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/paid-focus-case-result.json",
+      "sourceSha256": "19f07c78a98d8476db489e25b96ddb6af30c5cc2a0fbc9302a51a28bffc7e674",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/paid-focus-case-result.json.gz",
+      "archiveSha256": "4c770101a32d3a1a585acdacc47995a12c59a3ede553f7ef84d4bc475d7edf67",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/paid-focus-claim-167c8df54dcaf40166c75a640f392b302925a99317ed82054185c65aa5d41667.json",
+      "sourceSha256": "5e9f5f279703977ad8f3f09a074bd37835e8e590f39cc26d6dd0cf9a7fef5eeb",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/paid-focus-claim-167c8df54dcaf40166c75a640f392b302925a99317ed82054185c65aa5d41667.json.gz",
+      "archiveSha256": "c42d6daca94bb7b52e5f751be89bb808ee61ef313c19a6b1ca40b99979f91954",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/paid-focus-runner-source-94623cc6/receipt.json",
+      "sourceSha256": "67753c652605ec147d9a7b77cbd63240e982bd3f1fa7e0ddfd54567c30b67cb1",
+      "archive": "metadata/scratch/paid-focus-runner-source-94623cc6/receipt.json.gz",
+      "archiveSha256": "3cd86a6bda94602002aa5959a35fdb3c45e2ea6cb3d4158fd235e171af1fbcb0",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/runtime-profile-411-bronzehollow/model-test-profiles.json",
+      "sourceSha256": "f30d96713384e94e97ffca1dca4fc719374eac0e401a98e69ca95eacbb47cc12",
+      "archive": "metadata/scratch/runtime-profile-411-bronzehollow/model-test-profiles.json.gz",
+      "archiveSha256": "14f217857188e061cab892acdbdeaa168d16c6359ec72c643885e230e450d2cb",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/runtime-profile-411-bronzehollow/receipt.json",
+      "sourceSha256": "f8b7d223d0fd4de158a1fa4b95d4f1f7578c580919b5931cb1dcff7485810a2e",
+      "archive": "metadata/scratch/runtime-profile-411-bronzehollow/receipt.json.gz",
+      "archiveSha256": "756f7da6636e8175863a2212fca808b93fd83971222aba14c61158996014e0ee",
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "cliSource": [
+    {
+      "source": "scratch/paid-focus-runner-candidate/paid_focus_case.py",
+      "archive": "cli/reviewed-candidate/paid_focus_case.py",
+      "sha256": "94623cc68b58e257c9ef9b6be8a83713f2cba8520d3ddfab6be07dc4209400dc"
+    },
+    {
+      "source": "scratch/paid-focus-runner-candidate/test_paid_focus_case.py",
+      "archive": "cli/reviewed-candidate/test_paid_focus_case.py",
+      "sha256": "a12d61cefc83163e0021d7b70c91023013c802c50e71f021ac324156eccbc2b2"
+    },
+    {
+      "source": "scratch/paid-focus-runner-candidate/PAID-FOCUS-CASE.md",
+      "archive": "cli/reviewed-candidate/PAID-FOCUS-CASE.md",
+      "sha256": "3cebaa1aaf0ab197b4616071a936e581d691307e437faf682fe0fe166d5e31c2"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/paid_focus_case.py",
+      "archive": "cli/promoted/paid_focus_case.py",
+      "sha256": "94623cc68b58e257c9ef9b6be8a83713f2cba8520d3ddfab6be07dc4209400dc"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/test_paid_focus_case.py",
+      "archive": "cli/promoted/test_paid_focus_case.py",
+      "sha256": "a12d61cefc83163e0021d7b70c91023013c802c50e71f021ac324156eccbc2b2"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/PAID-FOCUS-CASE.md",
+      "archive": "cli/promoted/PAID-FOCUS-CASE.md",
+      "sha256": "909061a0b4f7d00e8bbc9551fdf739a540c6ddc453b6ec66bd5f471a35b0b513"
+    }
+  ],
+  "ownedHelperSourceFiles": 49,
+  "excludedPayloadHashReferences": {
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/paid-focus-runner-candidate/paid_focus_case.py": "94623cc68b58e257c9ef9b6be8a83713f2cba8520d3ddfab6be07dc4209400dc",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/CharacterOverworld.analysis.cs": "0cea454e06bbed94ef5ddb56284048c1ad3a157defa588dcae9cb609000e1dc2",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/amberwake-ordinary-damage-analysis/CharacterStats.cs": "363a3de1a5de66e1a8ec9d050a0d9b1d5de2aa016bbd69edacb3f45914be3a30",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/amberwake-ordinary-damage-analysis/FTKInput.cs": "a1b792bba10777b46944ed65fe395e9d9a9a6c756854ee5c9bde24a5a04a762f",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/amberwake-ordinary-damage-analysis/uiBattleButton.cs": "2f139fb119718a2b8c01e7fc55eb6387ee36516e3793d769222f1ce6d7fe67c7",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-runtime-decompile/EncounterSession.cs": "e55763e6b781a3bf38e7e922d189d487fff4d120e24e1646c3af8c9e39ddd7fd",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/native-paid-focus-analysis/plan.md": "da13e10f7e96d79a4ae3b8aa9ebed2292b8be2a3f85d98e86bcbd139e0ab6e2d",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/native-paid-focus-analysis/source-pins.json": "c23c26dbf9cb7bc78aa32d07a906d0d94353e8682bac0a2e6b71d223de585310",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/native-paid-focus-analysis/uiPlayerMainHud.cs": "3182ea108827ce1003bbcb368f52dfa3dd1ad88c45d1858893bd4fdea88c5826",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/native-trap-traversal-analysis/EncounterSessionMC.cs": "0e72919d65645bf7d0a6b1cdc3e1a1c0f188e197896a1234e85ca6a2c2e47af8",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/uiBattleStanceButtons.analysis.cs": "e3ee4f6a9d6df7c5fcd28615428a835a8fe3abe6b156f4ab3090d0585d52eb0e",
+    "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/candidate-paid-focus-helper-d1c9dc83/FtkRuntimeModelTest.dll": "d1c9dc83e1011e9194f3e03bb229b9fcbaa8596a951c51a28f4834cdb5aa93c5"
+  },
+  "selectedBlockedAttack": {
+    "source": "scratch/mirewarden-game/model-test-output/a37b33d48cb5447180969d3a865d7574/0030.png",
+    "archive": "selected-blocked-attack.png",
+    "sha256": "01ef74aa8a97c4632e203f1184948339a81b1aca6fff44253c61971dc269933e",
+    "review": "metadata/scratch/bronzehollow-root-first-paid-attack-review.json.gz"
+  },
+  "artifactSha256": {
+    "README.md": "7d7272dbc5dc9c4506050d4a0b6791b37571be22f8d43971ffef28751a1f60f4",
+    "archive.py": "2a25070ea6b6210921d1842d4bc86fff12bf6864827083657819fe30c71def87",
+    "cli/promoted/PAID-FOCUS-CASE.md": "909061a0b4f7d00e8bbc9551fdf739a540c6ddc453b6ec66bd5f471a35b0b513",
+    "cli/promoted/paid_focus_case.py": "94623cc68b58e257c9ef9b6be8a83713f2cba8520d3ddfab6be07dc4209400dc",
+    "cli/promoted/test_paid_focus_case.py": "a12d61cefc83163e0021d7b70c91023013c802c50e71f021ac324156eccbc2b2",
+    "cli/reviewed-candidate/PAID-FOCUS-CASE.md": "3cebaa1aaf0ab197b4616071a936e581d691307e437faf682fe0fe166d5e31c2",
+    "cli/reviewed-candidate/paid_focus_case.py": "94623cc68b58e257c9ef9b6be8a83713f2cba8520d3ddfab6be07dc4209400dc",
+    "cli/reviewed-candidate/test_paid_focus_case.py": "a12d61cefc83163e0021d7b70c91023013c802c50e71f021ac324156eccbc2b2",
+    "metadata/scratch/bronzehollow-411-deployment-result.json.gz": "4d252602c95ccae0df6b4f1d08400a29d5baf70809f5855b82d18506f6bf1612",
+    "metadata/scratch/bronzehollow-411-first-startup.json.gz": "fb09cf60896cde5a9f38e362b0422d5b4354924ec92f1f6a71a9429ac7a21a90",
+    "metadata/scratch/bronzehollow-after-first-paid-attack.json.gz": "4145552ca8c2836980ca92f83326992ce9dd197c9251709b6ae0a96b8ab37643",
+    "metadata/scratch/bronzehollow-native-paid-focus-architect-review.json.gz": "be2715cdbcbae5da26c30aa338390de5ea99f36dd159de2fca4bf2be290bccc6",
+    "metadata/scratch/bronzehollow-native-paid-focus-first-completion.json.gz": "057e8d813e08341a5de5890a5c17e138b87b0eb045a6db74c1c3be310ee11c01",
+    "metadata/scratch/bronzehollow-native-paid-focus-first-submission.json.gz": "15b31cf643998a70b464454a1a95c5037fdf6ef18ceaf19e07776da693a58f5a",
+    "metadata/scratch/bronzehollow-root-first-paid-attack-review.json.gz": "3885ff1b083c2dcde85b99693e6ea5fca721f2ffda1da2fd6b1aa3450edca6e7",
+    "metadata/scratch/candidate-paid-focus-helper-d1c9dc83/receipt.json.gz": "75b7c7b961e52ff9f0741e91d45c63c5c95ff8333f130f20442752f5e1252846",
+    "metadata/scratch/candidate-paid-focus-helper-d1c9dc83/review-approval.json.gz": "1b3889013e5bb694ed52089f690886a441974ec4b64422991943448d4d160122",
+    "metadata/scratch/mirewarden-game/deployment-backups/bronzehollow-411-20260908-000341/deployment.json.gz": "dd9dea90c444b9194f6b0a887b64a725675904b222f1ed7025504536c4dead3c",
+    "metadata/scratch/mirewarden-game/model-test-output/1005bd7b4c5743f9b94e7f85c6e0e195.json.gz": "ccd46176780d4ddbb9b4273e0af33573d53b77f60343e4084f7b548f7cbd490d",
+    "metadata/scratch/mirewarden-game/model-test-output/5444fbc7a468444ca40e0d43d468be8e.json.gz": "800bcd7e3b04c1470c24ffb96bc462690fb3ef70c6e3c3068f5dd4681a1a3323",
+    "metadata/scratch/mirewarden-game/model-test-output/7d0568bde630411a956f86fb2909df00.json.gz": "ade8a3761dea71547c77ac04dfec474807b4da5762653c3bbf07c2cee814a1f0",
+    "metadata/scratch/mirewarden-game/model-test-output/933fdbfb5261419d9fe5992bda90a321.json.gz": "0871caebc433b26e53771001ef9168de9ef8aa3ee2e5d20a038752051e138997",
+    "metadata/scratch/mirewarden-game/model-test-output/a37b33d48cb5447180969d3a865d7574.json.gz": "8007acfe5b2c4153602fdaa06441050e41a9b8df6fe66dc998f415983096764b",
+    "metadata/scratch/mirewarden-game/model-test-output/b46b8fdc6a654f0ab47e6926cc790984.json.gz": "e675cd262afb66c89f114edc4cbab4c771360b658663db6ae622c998f5a137ba",
+    "metadata/scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/capture-summary.json.gz": "da6fd9c5b2897fbdfcf1ed612bb4b3facc71f141b7db0eadec540da0248a0704",
+    "metadata/scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/journal.jsonl.gz": "4e4d61cad7819012c7ce4629d798b6b1d67e9b4ed214019f639f9932fda4acc6",
+    "metadata/scratch/mirewarden-game/model-test-output/case-0368a18a625d4335a860bca71037e4a1/result.json.gz": "c9c07115b50b2ede4abfb9d5eae663ecd1f632469f5b4415367bd80b1b3e3bb5",
+    "metadata/scratch/mirewarden-game/model-test-output/d073885a53a74dd8a52cedd150588281.json.gz": "b8c881688563be754864d8da531cb8b9be7cc5ab07f0b87dd919b9a283f3d186",
+    "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/1005bd7b4c5743f9b94e7f85c6e0e195-request.json.gz": "5b648539d8e3ba1cba72d1cb06bdc0bcb2c72f36a9bae79aca0411d4c46afa89",
+    "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/7d0568bde630411a956f86fb2909df00-request.json.gz": "3b43fa8cb0707b03f3c07bec9f44218593a5df9c14c957f9ead513f2bc79f351",
+    "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/b46b8fdc6a654f0ab47e6926cc790984-request.json.gz": "45df60588b3dde7af260892448f882979bf50838b12eb6e15cde877e0d8641f8",
+    "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/journal.jsonl.gz": "f2adaa503bfc4cc807148743c1999e4c29d50be38b2a7ead1fa22cb24bd1750f",
+    "metadata/scratch/mirewarden-game/model-test-output/paid-focus-case-ff19b69da69b4c629cae430d4bdf631e/paid-focus-case-result.json.gz": "4c770101a32d3a1a585acdacc47995a12c59a3ede553f7ef84d4bc475d7edf67",
+    "metadata/scratch/mirewarden-game/model-test-output/paid-focus-claim-167c8df54dcaf40166c75a640f392b302925a99317ed82054185c65aa5d41667.json.gz": "c42d6daca94bb7b52e5f751be89bb808ee61ef313c19a6b1ca40b99979f91954",
+    "metadata/scratch/paid-focus-runner-source-94623cc6/receipt.json.gz": "3cd86a6bda94602002aa5959a35fdb3c45e2ea6cb3d4158fd235e171af1fbcb0",
+    "metadata/scratch/runtime-profile-411-bronzehollow/model-test-profiles.json.gz": "14f217857188e061cab892acdbdeaa168d16c6359ec72c643885e230e450d2cb",
+    "metadata/scratch/runtime-profile-411-bronzehollow/receipt.json.gz": "756f7da6636e8175863a2212fca808b93fd83971222aba14c61158996014e0ee",
+    "owned-helper-source/PAID-FOCUS.md": "b607fd932bbcb72efdab56eb1c10c1d308097ead8f0fd7f79966389d39a2820d",
+    "owned-helper-source/runtime-test/AvatarInventory.cs": "79155dc975cbfc1f8eab2ab5c1c68a9c5983df5eaacc7d7b12ceee9a7f2cbca9",
+    "owned-helper-source/runtime-test/CatalogPreflight.cs": "bc6bdab85d8846fc5369b02c88fbf9d83c9f0846a1f39769fc28fa2bb38ed90c",
+    "owned-helper-source/runtime-test/EnemyArrivalPolicy.cs": "4c19c78d929d1d3bdce98178d66dfac74e617b98271f3f9979af560ed6c6f1b4",
+    "owned-helper-source/runtime-test/EnemyLifetimePolicy.cs": "ccec264dba7cc92a047640b18c52411789a3dbfdebdd727085893770b76b1ed3",
+    "owned-helper-source/runtime-test/EnemyLifetimeWatch.cs": "8c0291a362d0a06a04c86da136d399f6610acda0b8f850c7752f692c22e52e58",
+    "owned-helper-source/runtime-test/EnemySpawnCapture.cs": "da8cd9518c637249bf4589eb5b7332788e724c22ac28bf2d67f7204147f555a6",
+    "owned-helper-source/runtime-test/EntryPreparation.cs": "b86beebf04fb26c9c855779434b801f5b93c57490ce9ff3bffae4fb070644f6d",
+    "owned-helper-source/runtime-test/EntryPreparationPolicy.cs": "e7cd1761b895f5ea9f4ea5a64d52036cb22a45af89889be7ed3ae8a549ddc6af",
+    "owned-helper-source/runtime-test/EquipmentFixture.cs": "e8415cd04c8a0c29a1225c59c121a6660aebb778d54fc5babe78b5b55fa94ed5",
+    "owned-helper-source/runtime-test/FixtureState.cs": "5b28950b7352131139dbe9f7e6fc11d7527cb7fe1ceb22dd45d577af86918fe0",
+    "owned-helper-source/runtime-test/KrakenControllerFixture.cs": "5168bce0d527f49e0a668a8c00d3a0d664156bf7eb072d1d696572c5abde1c8a",
+    "owned-helper-source/runtime-test/KrakenEndpointFixture.cs": "07f345d490d14711e943758ad48828827e80b52796748c51d847a9d7c667590e",
+    "owned-helper-source/runtime-test/KrakenEndpointRotation.cs": "e8f103ee61ab4d6f0629eface10bc17e79dd72c50f0b2dbbdfaa3f89b10b7057",
+    "owned-helper-source/runtime-test/KrakenModernMixerFixture.cs": "19d78d4050ade10f2093c9f1a3c38972dc60314407c2e2114638efca5d74834c",
+    "owned-helper-source/runtime-test/KrakenOldAdapterFixture.cs": "509d9d4ca183e481ad6d94c04dc6b2abe60eb6446ad94549591f369dcfdded02",
+    "owned-helper-source/runtime-test/KrakenSampleFixture.cs": "b983d66c8c96e4231d5d9921916b0720cbdc7791f5a8730238e44f782c700f96",
+    "owned-helper-source/runtime-test/KrakenSkinCapturePlan.cs": "e453356e9fbdc58bc67443d69c1a777600dd059fdd07baf5db1a6d9bb867e9aa",
+    "owned-helper-source/runtime-test/KrakenSkinProbe.cs": "7c69a583e97d48c91e2c95cef7ac32bdf352e21540a421caf98a7a3fadf97f41",
+    "owned-helper-source/runtime-test/LeaseObservationPin.cs": "f0aba39869046df53a27e1933a400e686ce41d4c938ebb56748ada60cc7018a1",
+    "owned-helper-source/runtime-test/LeaseTest.cs": "dca76339380537630d2bebfa8cb2a074e0cc4d9ac7e50cd342b638909362fd80",
+    "owned-helper-source/runtime-test/LeaseWatch.cs": "66f164baa5849d713cd1f98cf4a834c32f310ee3e88b5a19ddd5fe3c26b121e2",
+    "owned-helper-source/runtime-test/MaterialLifecycleFixture.cs": "8a3d7b43ededf321a0f8be413b0bdaf5cac3687a72512d85a7221246095dfb3e",
+    "owned-helper-source/runtime-test/MaterialLifecycleTiming.cs": "b6741a8a46ceaa220f87cdbfd83038d1fd7724b75f72a29babf7a750df6bc765",
+    "owned-helper-source/runtime-test/MaterialObservation.cs": "c31f195ebf5659d51eae871c478d50d2e001f9776c64e47702cf37abe8a62314",
+    "owned-helper-source/runtime-test/NativeRowPortraitFixture.cs": "842e0479c89f26d45d9d8ceb5734cd1b7cca1a7f923549210572e5681a5455af",
+    "owned-helper-source/runtime-test/PaidFocusFixture.cs": "fd0142b5e1120d00a800a830d471e57e82657ead3319c438f7cc8c7df24885d0",
+    "owned-helper-source/runtime-test/PaidFocusPolicy.cs": "684e5f68597dff702df5b6af929fac4ec2c6681479b40e95404cdbc6f90e4528",
+    "owned-helper-source/runtime-test/PlayerPreviewObservation.cs": "30552294ab7ad4a4d8ec389cb424408bfd569da5d22b628d93e0e020004832d7",
+    "owned-helper-source/runtime-test/Plugin.cs": "6896c5dc22cbee0af51da970122b3f29f5dcd8fd7dc70778aa431c999d730f02",
+    "owned-helper-source/runtime-test/PortraitFinalization.cs": "45399dfe48c19f80a784fea38144b748f7ed4eed01210f84a24f92d6dec26d4e",
+    "owned-helper-source/runtime-test/PortraitTextureCapture.cs": "52b19c20f1bb083a90df64070c39cdc2c3e3fb499e12284f3869362a362a4c7c",
+    "owned-helper-source/runtime-test/PortraitTrace.cs": "480fb9ab069108f7bb891a8ffaa2550f9a3891f0b1a528ede355adc106d7a7cc",
+    "owned-helper-source/runtime-test/PortraitTraceState.cs": "6e9a2762d359c77313dee274a8f4a50e105c37c320ef36a7ef1ad94543ce13cc",
+    "owned-helper-source/runtime-test/ReadyFixture.cs": "bc951bfa1600aacbf2de53a70aac3932a25c392124361d8bd59a733420682809",
+    "owned-helper-source/runtime-test/RowPortraitOwnership.cs": "72e01eb491118af176546d735c5b9a9b74053af9efd1aca3005685bf0a42efac",
+    "owned-helper-source/runtime-test/RuntimeModelTest.csproj": "409b2d6083d97f29a7d0d0fd10d9d589ae378c46d254b609ea1a730d7cc31ae0",
+    "owned-helper-source/runtime-test/ScaleFixture.cs": "e820a759191ceacbd9bcfd3e583e37fa6fd5877d9be03fb1431aa1ff694228eb",
+    "owned-helper-source/runtime-test/StorySetup.cs": "96b66bdd00469128e51c59da4648c5f19bd8613933543735c5dcc17975f5456b",
+    "owned-helper-source/runtime-test/StorySubmissionPolicy.cs": "20c130099a3eabb8ab5670fef87412eff7c8cc2c5808dcbc96abc6d676f576f5",
+    "owned-helper-source/runtime-test/TrapFixture.cs": "a4eeb12e954da07cf361fbe6a691c71bebf3591f2b62fa75a87b40fd44182294",
+    "owned-helper-source/runtime-test/TrapSubmissionPolicy.cs": "120bc1141b99f0b2658f5a7a7334bac006f7fc150fa79b85d039634cf0e71b90",
+    "owned-helper-source/runtime-test-content/MaterialSlotFixture.cs": "99ff0368d05522b2d46b066583aff8ee3bdeac842c0e0937d8cd5f3b88bbf10b",
+    "owned-helper-source/runtime-test-content/PortraitMarkerFixture.cs": "1a7bf51575d15c04c9f0225e5b9c6c3916956a9bb3bf3b6606deaa150f38f08c",
+    "owned-helper-source/runtime-test-content/RendererEmissionFixture.cs": "993b7d87f35d92a1b2c8b9e4cbfafd4c1c2da2230fea79d54974e44acdfe1b24",
+    "owned-helper-source/runtime-test-content/VisualScaleFixture.cs": "6d0e78fcae468259296b8e82621af20499b736d44c8271686a317a1877aadeb4",
+    "owned-helper-source/shared-source-baseline.json": "ed55d218399935b6d916635209a97d76e341000bf7d98ad36f572003ef67f949",
+    "owned-helper-source/tests/PaidFocusTests.csproj": "255718e5efdcfb813f429796f81d0515fd4cf0c25e09ed42b3a92c5d2885f8cb",
+    "owned-helper-source/tests/Program.cs": "4f0b7f7180bf97c90e069afdc9ad8fe0ecf5980891c64ff05d5efe600430303f",
+    "selected-blocked-attack.png": "01ef74aa8a97c4632e203f1184948339a81b1aca6fff44253c61971dc269933e"
+  }
+}

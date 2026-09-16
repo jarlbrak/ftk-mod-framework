@@ -1,0 +1,422 @@
+{
+  "schema": "kraken-modern-input-mixer-live-evidence-v1",
+  "mode": "fixed-four-raw-v1",
+  "session": "1ae9d5a251334093965b5a952f4317c9",
+  "status": "ALL_FIVE_SCENARIOS_NUMERICAL_MATCH",
+  "runs": [
+    {
+      "scenario": "appear",
+      "status": "modern_input_mixer_match",
+      "maximumError": 1.73639996958741e-06,
+      "tolerance": 1e-05,
+      "numericChecks": 185426,
+      "failedMainFrames": 0,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 138,
+      "appearanceExcludedFrames": 103,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/appear/first.json.gz",
+            "sha256": "0c4dc5562703ba42a2373c93085af8c30b6f969ec6fb73ee7c7ca5e2b12f84dd"
+          },
+          "decompressedSha256": "0495d58857984b36e130af0f7f63cfd98744408c6e3966e1fe2b068185c80905"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/appear/repeat.json.gz",
+            "sha256": "04a7e0130c63f53bd90307bdf575a8e8cc07b67d4099c91679d55daea037afab"
+          },
+          "decompressedSha256": "bfb2a92edc59f141a00ac9354883838a57dd9ea20dfb9c3e17ccc7a1a9d12723"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-fixed-four-input-v1/appear/verification.json",
+        "sha256": "132e4919bccd3efc7b1e0896e27c513ae42a17b2b9583d981c1fbe61efaf25a9"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "damaged",
+      "status": "modern_input_mixer_match",
+      "maximumError": 2.2172048872448613e-06,
+      "tolerance": 1e-05,
+      "numericChecks": 191550,
+      "failedMainFrames": 0,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/first.json.gz",
+            "sha256": "56d4c12568946cd20c74f628c5bbdf1e7df2afbc40a7f0fe5218c2fc93bd577d"
+          },
+          "decompressedSha256": "9bccff7cc2f5a606a1cca9de8dbb6f7820e3cd3c3bf6152a3459a726e75e2c8c"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/repeat.json.gz",
+            "sha256": "9149f7ea95f5f2390ee118b397d901bf420f8b29aeb92558099c7902ac7735b7"
+          },
+          "decompressedSha256": "cf2e1dd090e9d7ed8ea56b0cec234aff5c37f389f2942ec04948b012829d2d80"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/verification.json",
+        "sha256": "bf92e9db0da0970abe8586f0475056f7a61849de09b227dbca1fb07be830357d"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "damaged-heavy",
+      "status": "modern_input_mixer_match",
+      "maximumError": 2.783289961172386e-06,
+      "tolerance": 1e-05,
+      "numericChecks": 191840,
+      "failedMainFrames": 0,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/first.json.gz",
+            "sha256": "0d971c208f38e06648156824956302911a575b782d4ab3b8cea96f47b3b0d812"
+          },
+          "decompressedSha256": "d9ed2ff15c1694e72aea8d4f49d7712bf6d94340770ed8c60eee8191b364ebaa"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/repeat.json.gz",
+            "sha256": "636b160c201e1c17e54f7802d1a607be991712b91776378afbbc20b80acabd3f"
+          },
+          "decompressedSha256": "f3b1781822c63e631bf5329a66ce1bd45e6b229427715203c2b474ddcc9d6d32"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/verification.json",
+        "sha256": "5e33e7f4cd3a0442d613123450c203e561e577694106e814481ff75b4fbf2d93"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "death",
+      "status": "modern_input_mixer_match",
+      "maximumError": 1.532813988625037e-06,
+      "tolerance": 1e-05,
+      "numericChecks": 191248,
+      "failedMainFrames": 0,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/death/first.json.gz",
+            "sha256": "9a06d5a2d917919ce8d740a99f9cafd3ffd43d07a5c80a61048c73ba74c6cbb5"
+          },
+          "decompressedSha256": "37e8ed64d5ba91d6484b82b318250c8586291740e0a89f30585b2e1bebe30402"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/death/repeat.json.gz",
+            "sha256": "d57d0b1cacbccd088ff386efc99a61d7826f7cca23b60c3585d618fe333a6b34"
+          },
+          "decompressedSha256": "356f4752a3e90eb96cdc4ec91361fb0bce7c980b074965085084f052e3445c79"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-fixed-four-input-v1/death/verification.json",
+        "sha256": "0666310a55335fa29ed6995863d6479beae446e0a80498d019ed25a92062becd"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "death-light",
+      "status": "modern_input_mixer_match",
+      "maximumError": 1.532813988625037e-06,
+      "tolerance": 1e-05,
+      "numericChecks": 191248,
+      "failedMainFrames": 0,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/first.json.gz",
+            "sha256": "18fc5a3017c4213c02c68950150e6c046130063266ac0b70d908c7107a0fae94"
+          },
+          "decompressedSha256": "8369addd40a2206caad18319c61c5438f5040c97fa156ca055fbbf8771b1f389"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/repeat.json.gz",
+            "sha256": "bae00a2ba6a68bd167c1ae17c3cc7ee09b91aca801f73e0941ef67074c41e731"
+          },
+          "decompressedSha256": "ee2d44fe6ff5e409dc1212d79facf745724194eb144cf4cf2c5c39fb001f6eb3"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/verification.json",
+        "sha256": "7548d0c4c5d0435215ee7ddca169ffcab1fc893fa77490334dc1eda707a0cc78"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/KRAKEN-MODERN-MIXER.md",
+      "sha256": "5d09e2acb4a16ea456dbec2b199aef8bba6bcf2f5d72bc61504faf072f50b100"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/KrakenControllerFixture.cs",
+      "sha256": "d059cdcde0dd015c9fab6ca2b4ad4f889b63ef3faa202e292af25de897e7bf42"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/KrakenModernMixerFixture.cs",
+      "sha256": "2af80918fd2f8e4f068bc7a5447b89bcc5de5a148d2a3697ef3b59bdc5576c55"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/README.md",
+      "sha256": "3e5da8661eadab8616327cc5c8863a64c31f48f39a71f7644411401d0bc41ced"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/after-ready.json",
+      "sha256": "80ac20049d6c598238a1fafa3d552295b6ab6b84947a2f680e5033124706ea86"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/before-ready.json",
+      "sha256": "8dc14653a4615d4da97fb5bd04d67adc8b1ea94e11ea8fc473230b0e14fcdb24"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/deployment.json",
+      "sha256": "617372ff603445b100bf6da2c2c0b1985d7a962763c4d73e7f271f4f6394f708"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/first-request.json",
+      "sha256": "c72a88204e2829f2655b033141f5973f12e774c03477f3fc5a2424286d81a08b"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/first.json.gz",
+      "sha256": "0c4dc5562703ba42a2373c93085af8c30b6f969ec6fb73ee7c7ca5e2b12f84dd"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/manifest.json",
+      "sha256": "78a643255b5095a4ac4f338b3b23fe5c61db403e7f22034948e023f3ffb989e5"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/repeat-request.json",
+      "sha256": "0ad1bd5bff922298e07ae0010e98e63ea008f10aefc811ed3c54b536254e2113"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/repeat.json.gz",
+      "sha256": "04a7e0130c63f53bd90307bdf575a8e8cc07b67d4099c91679d55daea037afab"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/appear/verification.json",
+      "sha256": "132e4919bccd3efc7b1e0896e27c513ae42a17b2b9583d981c1fbe61efaf25a9"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/after-ready.json",
+      "sha256": "00fceace9e5366c6a7462b46870ae91d3010047c3b2b52a22c6c3d71e275f042"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/before-ready.json",
+      "sha256": "46898e9c7ea7a650929d33303c3932bd784cf054353dfb0d696125e4291e417c"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/deployment.json",
+      "sha256": "617372ff603445b100bf6da2c2c0b1985d7a962763c4d73e7f271f4f6394f708"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/first-request.json",
+      "sha256": "40b0b02462086672861fbeaeb0c942874e4c613242222ccd942e8360a3f7e157"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/first.json.gz",
+      "sha256": "56d4c12568946cd20c74f628c5bbdf1e7df2afbc40a7f0fe5218c2fc93bd577d"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/manifest.json",
+      "sha256": "5beb089f756b4088ec32cfe49e3481f762a63889cd55a40c20f0ecf42f69452e"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/repeat-request.json",
+      "sha256": "a990fea38d28a727fafda46f1adcccf960cc27d8f4fba25b0155613c3edc7e84"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/repeat.json.gz",
+      "sha256": "9149f7ea95f5f2390ee118b397d901bf420f8b29aeb92558099c7902ac7735b7"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged/verification.json",
+      "sha256": "bf92e9db0da0970abe8586f0475056f7a61849de09b227dbca1fb07be830357d"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/after-ready.json",
+      "sha256": "f49a7aa1c26b3074a58089c90d27523a78138e045405888aa5db6676088c6eaf"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/before-ready.json",
+      "sha256": "51d90365ecfba2b269cf57d3c70a818846852c0cf46dcbca3e790ee4375daf34"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/deployment.json",
+      "sha256": "617372ff603445b100bf6da2c2c0b1985d7a962763c4d73e7f271f4f6394f708"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/first-request.json",
+      "sha256": "0b54c6160e56d1027e8084e50bfa0de75d189bf4fbeb79285d7d5a2a829cad6c"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/first.json.gz",
+      "sha256": "0d971c208f38e06648156824956302911a575b782d4ab3b8cea96f47b3b0d812"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/manifest.json",
+      "sha256": "2d098e55fc6575c6540329bdc41439a60ed07049b030f5f749d7a97b9b79f928"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/repeat-request.json",
+      "sha256": "d3f97d287ad73fd191def258a83901002231f5abae81392ac853e7ecb5116336"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/repeat.json.gz",
+      "sha256": "636b160c201e1c17e54f7802d1a607be991712b91776378afbbc20b80acabd3f"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/damaged-heavy/verification.json",
+      "sha256": "5e33e7f4cd3a0442d613123450c203e561e577694106e814481ff75b4fbf2d93"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/after-ready.json",
+      "sha256": "f5aeb5cd29927b38cee9f12368e4cd5e6de51a858fd3a2b451b89ef84a60629c"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/before-ready.json",
+      "sha256": "137b1b6e46d4b22989502d2d0985db1f1939b5ecb9430971d17bd14f3fdff577"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/deployment.json",
+      "sha256": "617372ff603445b100bf6da2c2c0b1985d7a962763c4d73e7f271f4f6394f708"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/first-request.json",
+      "sha256": "099524f1be0c501958d79659ac7dc7e226856341af6557fbfebed481bba08301"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/first.json.gz",
+      "sha256": "9a06d5a2d917919ce8d740a99f9cafd3ffd43d07a5c80a61048c73ba74c6cbb5"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/manifest.json",
+      "sha256": "e8eb4c7d1c86fc8642875db753e78dbfc8630fa1d570a6a9206cf1dc647df721"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/repeat-request.json",
+      "sha256": "5b64820245b0f1fdb13f6a02224c26c3b7097dbace83b406e9344ab5433c5999"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/repeat.json.gz",
+      "sha256": "d57d0b1cacbccd088ff386efc99a61d7826f7cca23b60c3585d618fe333a6b34"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death/verification.json",
+      "sha256": "0666310a55335fa29ed6995863d6479beae446e0a80498d019ed25a92062becd"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/after-ready.json",
+      "sha256": "d0efcbe6168353c0113f6912e526904108b5524eae298c4379d8735c22e37db2"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/before-ready.json",
+      "sha256": "6a60734c6449b807de89671da86453a169243bbaa52fd00cab00c8465e745a0a"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/deployment.json",
+      "sha256": "617372ff603445b100bf6da2c2c0b1985d7a962763c4d73e7f271f4f6394f708"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/first-request.json",
+      "sha256": "7064e135d7a5303ae8fd88f51303a9c04792563e78ee0a5a22feaafb348ba432"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/first.json.gz",
+      "sha256": "18fc5a3017c4213c02c68950150e6c046130063266ac0b70d908c7107a0fae94"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/manifest.json",
+      "sha256": "706f980f432622ba0e5f90bdcd438a07bf8fd96467461e9bf0fa5c8218401032"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/repeat-request.json",
+      "sha256": "3c42f04d54291dea614a4281f2ab8871625baf455ba7fbed40a38bc4a0e60317"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/repeat.json.gz",
+      "sha256": "bae00a2ba6a68bd167c1ae17c3cc7ee09b91aca801f73e0941ef67074c41e731"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/death-light/verification.json",
+      "sha256": "7548d0c4c5d0435215ee7ddca169ffcab1fc893fa77490334dc1eda707a0cc78"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/helper-receipt.json",
+      "sha256": "de6d445b29a26d907367558d84e46addbd812525d846b2c4f3f00f48a559b4a1"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/run_kraken_fixed_four_pair.py",
+      "sha256": "d65932a5fe0611d949af0a9d36d4d59f7a37c76078b5974f96df55f708073907"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/test_verify_kraken_modern_mixer.py",
+      "sha256": "4c1dbd1b539768f74fb07e188ebaff485276fd4e80d8208d1c04a065307efdb6"
+    },
+    {
+      "path": "docs/evidence/kraken-fixed-four-input-v1/verify_kraken_modern_mixer.py",
+      "sha256": "ca04c2cb936760314130d9220e96b386aff7dad4dcf7391e62c2c51c3bdd02ff"
+    }
+  ],
+  "limits": [
+    "No production adapter, gameplay or original-skin acceptance.",
+    "Fixed graph validates these observed inputs; runtime synchronization and production adapter lifetime remain separate gates.",
+    "Source/native files remain local and require the exact pinned game build."
+  ]
+}

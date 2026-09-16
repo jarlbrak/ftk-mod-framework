@@ -1,0 +1,143 @@
+{
+  "name": "Tideglass Crab",
+  "native_chassis": "crabB",
+  "reference_renderer": 121411,
+  "renderer_path": "enCrabWizard",
+  "native_surface_copied": false,
+  "art_status": "Original articulated crab surface; exact crabB / enCrabWizard / 121411 source has scoped canonical V3 live evidence; broader motion and final art acceptance remain",
+  "native_forward": "+UnityZ from claw/pincer chains; tail extends rear -Z",
+  "rig_boundary": "Exact63-joint palette and inverse binds. Six walking-leg chains, two articulated claw arms, independent upper/lower pincer surfaces; no bridge across claw opening.",
+  "live_baseline": "Exact Crab B binding and behavior are preserved in historical V1/V2 records and canonical exact-source V3 evidence",
+  "remaining": [
+    "Studio review",
+    "Other proficiencies and Crab_DeathInDirect",
+    "Portraits, collision, extended culling, long-session resource lifetime, full campaign completion and final art acceptance"
+  ],
+  "parts": [
+    {
+      "name": "tideglass",
+      "vertices": 5364,
+      "triangles": 1788,
+      "palette_joints": 63,
+      "max_bind_rest_error": 6.661338147750939e-16,
+      "blender_reopen_max_bind_rest_error": 6.661338147750939e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.0304512977600098,
+        0.024740811437368393,
+        -0.7538433074951172
+      ],
+      "bind_bounds_max": [
+        1.0305503606796265,
+        1.2124664783477783,
+        1.8731590509414673
+      ],
+      "blender_roundtrip_glb_sha256": "0635aafdd32f319c58129836b92a4b8d3b347b56d320004dc8f91c090d7aa030"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121411,
+      "local_reference_path": "scratch/skeleton-audit/121411/reference.npz",
+      "sha256": "19b270339aaf8f9069009056c6868fd85e3a34fa097b70731022c46df4623050"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "canonical V3 exact crabB / enCrabWizard / renderer 121411 binding observed",
+    "live_animation": "canonical V3 samples Crab_Idle, Crab_Attack1, Crab_Hit, Crab_Attack2, recovery and complete animated Crab_DeathDirect",
+    "live_material_and_culling": "V3 material readback confirms authored base texture with emission disabled; extended culling and final art remain open"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "089a0abcc645e2d340071aa77e944dbe665ecb0ab9c9f3847dfdbf2791141d7f",
+      "bytes": 8765
+    },
+    "build_blender.py": {
+      "sha256": "16267f34c82cd0316c1eaeb68a2c38baddfe147ec82dc96446c15d98ddf4c170",
+      "bytes": 5387
+    },
+    "build_geometry.py": {
+      "sha256": "278c123af84a9ec26ea83608a94acf3fe56dc67a12d6004820b756859a9853fc",
+      "bytes": 7882
+    },
+    "finalize_manifest.py": {
+      "sha256": "426cd75a6ff5ec3ade2e1e45dc7e81afd7dfd807774dce1082cb5708a9d7ab78",
+      "bytes": 2413
+    },
+    "hero.png": {
+      "sha256": "3c7e55ecbb49191774b51e259c54d6768e7e0a5c7b22f2a863f70222413f3640",
+      "bytes": 1099436
+    },
+    "inspect_materials.py": {
+      "sha256": "78ce7e4b6ea2782f2dc41572a5985b9da79e6eb28622eb736f4b030709ae7f52",
+      "bytes": 1214
+    },
+    "native-material-metadata.json": {
+      "sha256": "9886a6867165511ad055a0c6af4fde910ae33831be5ac224cb18c3f292a06de9",
+      "bytes": 2429
+    },
+    "runtime-profile.json": {
+      "sha256": "5daad5fb795d554898eca6153243246fc42b62579308ed2a4a9f5e95586dd7a7",
+      "bytes": 504
+    },
+    "side.png": {
+      "sha256": "3e7e00a0020ba19c436da1da7298f3bd49bdafd3b5febb2082d923d80823ceb6",
+      "bytes": 1078604
+    },
+    "tideglass-studio.blend": {
+      "sha256": "32399ee82083020b044fca915bcc7ec0797f896aaa06590851f2d24133b06a53",
+      "bytes": 232229
+    },
+    "tideglass.blend": {
+      "sha256": "f8f8b49dc487d022a0b5960a943f71c10b050a2b104aa9f5721e34778e9e89a8",
+      "bytes": 229609
+    },
+    "tideglass.glb": {
+      "sha256": "03dd99236525cf3e8b6cad11b318ea7677f42a63214eb78c83f247e7a6b65e4f",
+      "bytes": 318172
+    },
+    "tideglass.pieces.json": {
+      "sha256": "9403a99ba83857e76f49db7814a30bd71b07f81535f90d30c6e428fffd7cd16b",
+      "bytes": 3000
+    },
+    "tideglass.source.json": {
+      "sha256": "5138c5c1a39a2ee16f85c55d63cc7a2ae1b5928561e4bb2117feb66d80397ae4",
+      "bytes": 882920
+    },
+    "tideglass.validation.json": {
+      "sha256": "892362d558d1121915c9ea793e78cd067197fad2460536cf1e42f1b50d417a19",
+      "bytes": 791
+    },
+    "tideglass_basecolor.png": {
+      "sha256": "0520848de6b09dddbfb16366d15eb4d65cdab8c85a000fa7de093980adbea84d",
+      "bytes": 265
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/tideglass-crab/live-validation.json",
+    "sha256": "2ca093feb47e8b679c73f7e44a255d3c5da0b2c2018157e071691e4d4fdcb580"
+  },
+  "live_v2": {
+    "path": "art-experiments/tideglass-crab/live-validation-v2/validation.json",
+    "sha256": "5d1b65316b9e86e7f17304ff75cc5087dd14986d3c53511bdea472b325af392d",
+    "status": "fresh exact-source trial with limited selected-frame review",
+    "session": "0b328315443b47e4bc9515cfa4808a65",
+    "ordinary_attack": "HP 58 to 56 with no focus",
+    "kill_fixture": "complete 120-frame explicit KillSingle capture with m_DoRagdoll=false",
+    "strict_ready": "level 0 room 2"
+  },
+  "live_v3": {
+    "path": "art-experiments/tideglass-crab/live-validation-v3/validation.json",
+    "sha256": "756bf7813f46297206fe5d684d528d9913bc64f31cf80dd3e9ea571756816cff",
+    "status": "canonical exact crabB source with scoped reviewed live evidence",
+    "session": "a7ecd64edd784ef28493feee9ed55a57",
+    "ordinary_attack": "HP 58 to 56 with no focus",
+    "kill_fixture": "complete 120-frame explicit KillSingle capture through animated Crab_DeathDirect with m_DoRagdoll=false",
+    "native_collects": 1,
+    "strict_ready": "level 0 room 2"
+  }
+}

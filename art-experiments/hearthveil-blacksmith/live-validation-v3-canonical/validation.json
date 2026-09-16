@@ -1,0 +1,249 @@
+{
+  "schema": "ftkmf.player-canonical-route.v1",
+  "status": "canonical_native_player_route_reviewed",
+  "revision": "V3 canonical",
+  "displayName": "Hearthveil Blacksmith",
+  "session": "d34d1cdb635240aaaeb42b49329cbab2",
+  "scope": "Exact blacksmith_Female player body and six-bone hair topology route. Ordinary combat authority is retained from verified V1; current V3 adds same-session native preview idle and explicit native-state death fixtures for both exact renderers.",
+  "profile": {
+    "key": "ftkmf_modeltest_player_hearthveil_blacksmith_female",
+    "baseClass": "blacksmith",
+    "displayName": "Hearthveil Blacksmith",
+    "skinset": "blacksmith_Female",
+    "defaultSkinType": "Female",
+    "renderers": [
+      {
+        "rendererPath": "playerBlacksmith",
+        "glbFile": "hearthveil-body.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "hairTop",
+        "glbFile": "hearthveil-hair-top.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "hairBottom",
+        "glbFile": "hearthveil-hair-bottom.glb",
+        "textureFile": "hearthveil-palette.png"
+      }
+    ],
+    "startingArmor": "armorCloth1",
+    "apparel": [
+      {
+        "rendererPath": "armorBlacksmithF(Clone)",
+        "expectedNativeMeshName": "armorBlacksmith",
+        "glbFile": "hearthveil-default-armor.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "bootsBlacksmith(Clone)",
+        "expectedNativeMeshName": "bootsBlacksmith",
+        "glbFile": "hearthveil-boots.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "armorGambesonF(Clone)",
+        "expectedNativeMeshName": "armorGambesonF",
+        "glbFile": "hearthveil-gambeson.glb",
+        "textureFile": "hearthveil-palette.png"
+      }
+    ]
+  },
+  "binding": {
+    "ownerKind": "player-preview",
+    "ownerInstanceId": -234506,
+    "celInstanceId": -236190,
+    "rendererPath": "playerBlacksmith",
+    "mesh": "ftkmf_glb_hearthveil-body.glb",
+    "boneSignature": "c5145eb658efedf4e2e984e600fb9bb3d39843332ada65f8defe30ffcb306b93"
+  },
+  "renderers": [
+    {
+      "topologyGroup": "85c742f628ea6d37",
+      "sourceRendererId": 121067,
+      "rendererPath": "playerBlacksmith",
+      "ownerInstanceId": -234506,
+      "celInstanceId": -236190,
+      "rendererId": -236208,
+      "mesh": "ftkmf_glb_hearthveil-body.glb",
+      "boneSignature": "c5145eb658efedf4e2e984e600fb9bb3d39843332ada65f8defe30ffcb306b93",
+      "visible": true
+    },
+    {
+      "topologyGroup": "4082b6c4e777f922",
+      "sourceRendererId": 121083,
+      "rendererPath": "hairBottom",
+      "ownerInstanceId": -234506,
+      "celInstanceId": -236190,
+      "rendererId": -236196,
+      "mesh": "ftkmf_glb_hearthveil-hair-bottom.glb",
+      "boneSignature": "9253fc539e70c4093f788df51a5def2849357a36dbb58d1d72d05455675a2953",
+      "visible": true
+    }
+  ],
+  "avatarOwners": {
+    "preview": {
+      "status": "observed_actual_native_player_preview",
+      "observedAvatars": 1,
+      "ownerInstanceId": -234506,
+      "celInstanceId": -236190,
+      "nativeMenuMembership": true,
+      "reciprocalPreviewReference": true,
+      "parentIsNativePedestal": true
+    }
+  },
+  "captures": [
+    {
+      "label": "native-preview-idle-body",
+      "complete": true,
+      "termination": "complete_24_fixed_step_frames",
+      "clips": [
+        "standardIdle_handsDown"
+      ],
+      "scope": "player-preview",
+      "rendererPath": "playerBlacksmith",
+      "mesh": "ftkmf_glb_hearthveil-body.glb",
+      "raw": "metadata/idle-body.json.gz"
+    },
+    {
+      "label": "native-preview-idle-hair",
+      "complete": true,
+      "termination": "complete_24_fixed_step_frames",
+      "clips": [
+        "standardIdle_handsDown"
+      ],
+      "scope": "player-preview",
+      "rendererPath": "hairBottom",
+      "mesh": "ftkmf_glb_hearthveil-hair-bottom.glb",
+      "raw": "metadata/idle-hair.json.gz"
+    },
+    {
+      "label": "native-player-attack",
+      "complete": true,
+      "termination": "complete_120_fixed_step_frames",
+      "clips": [
+        "attack_blunt1H"
+      ],
+      "scope": "player-combat",
+      "rendererPath": "armorGambesonF(Clone)",
+      "evidence": "metadata/prior-v1-validation.json#/captures/0"
+    },
+    {
+      "label": "native-player-hit",
+      "complete": true,
+      "termination": "complete_120_fixed_step_frames",
+      "clips": [
+        "damageLight_blunt1H"
+      ],
+      "scope": "player-combat",
+      "rendererPath": "armorGambesonF(Clone)",
+      "evidence": "metadata/prior-v1-validation.json#/captures/1"
+    },
+    {
+      "label": "native-preview-death-fixture-body",
+      "complete": true,
+      "termination": "complete_24_fixed_step_frames",
+      "clips": [
+        "death_overworld"
+      ],
+      "scope": "player-preview",
+      "rendererPath": "playerBlacksmith",
+      "mesh": "ftkmf_glb_hearthveil-body.glb",
+      "provenance": "native-state-playback",
+      "raw": "metadata/death-body.json.gz"
+    },
+    {
+      "label": "native-preview-death-fixture-hair",
+      "complete": true,
+      "termination": "complete_24_fixed_step_frames",
+      "clips": [
+        "death_overworld"
+      ],
+      "scope": "player-preview",
+      "rendererPath": "hairBottom",
+      "mesh": "ftkmf_glb_hearthveil-hair-bottom.glb",
+      "provenance": "native-state-playback",
+      "raw": "metadata/death-hair.json.gz"
+    }
+  ],
+  "explicitDeathFixture": {
+    "method": "Animator.Play Death on actual game-owned native preview owner",
+    "provenance": "native-state-playback",
+    "ordinaryPlayerDeath": false,
+    "boundary": "Motion and visible deformation fixture only. It does not claim ordinary combat killed the hero, corpse lifetime, or cleanup."
+  },
+  "gameplay": {
+    "ordinaryAttack": {
+      "enemyHp": [
+        72,
+        62
+      ],
+      "source": "metadata/prior-v1-validation.json#/gameplay/ordinaryAttack"
+    },
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 3,
+      "source": "metadata/prior-v1-validation.json#/gameplay/finalReady"
+    }
+  },
+  "equipment": {
+    "status": "native_apparel_rebuild_and_exact_custom_identity_observed",
+    "source": "metadata/prior-v1-validation.json#/equipment"
+  },
+  "lifecycle": {
+    "status": "prior_owner_leases_retired_and_resources_unity_null",
+    "source": "metadata/prior-v1-validation.json#/equipment"
+  },
+  "visualReview": {
+    "status": "reviewed_current_native_preview_idle_and_death_fixture",
+    "observed": "Full-resolution current frames show a coherent armored Hearthveil Blacksmith in native Party Select idle and a readable kneeling death pose. Body, lower hair, Gambeson, boots, native shield, helmet and backpack remain assembled without exploded geometry or clipping.",
+    "boundary": "Sampled native preview review only. Combat appearance remains supported by V1. No ordinary player death, corpse lifetime, multiplayer, or every camera/culling claim."
+  },
+  "selectedFrames": [
+    {
+      "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/selected/idle-body-0012.png",
+      "sha256": "90f6ebc8f595853c671edcbab051a9ece7e873b9294eeb254153adc33e26e6d5",
+      "label": "idle-body",
+      "index": 12
+    },
+    {
+      "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/selected/idle-hair-0012.png",
+      "sha256": "36853227b19546a68a125de92fe662e6b9b5145f23de891c6b84665e9783c19c",
+      "label": "idle-hair",
+      "index": 12
+    },
+    {
+      "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/selected/death-body-0012.png",
+      "sha256": "3ea8f8aed8d0b6efec623f06e7394428d6047bee5d5aa92d08778327a1ea72ff",
+      "label": "death-body",
+      "index": 12
+    },
+    {
+      "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/selected/death-hair-0012.png",
+      "sha256": "fbd31cf39fc209696a8c009826bd376abcb875e3bbd6ec215306f5fccb413622",
+      "label": "death-hair",
+      "index": 12
+    }
+  ],
+  "priorEvidence": {
+    "v1": {
+      "validation": "metadata/prior-v1-validation.json",
+      "sha256": "39e2ba03aa772b728ca745df7f0e8fb1a33d3e60640045cbcb03e20bd1d9a3ba",
+      "integrity": "metadata/prior-v1-integrity.json",
+      "integritySha256": "57683a9c6e69db7d828674c4d67828fdcfafc06045f6b5728703146e3cd97cb2"
+    },
+    "v2": {
+      "validation": "metadata/prior-v2-validation.json",
+      "sha256": "44c7953e52a2228a621935ebf77c147c9c73053afae37e000428276b90e6d5cc",
+      "integrity": "metadata/prior-v2-integrity.json",
+      "integritySha256": "cac9b1e0749c24525559698596587f714229488171bfd1d97dfda5b502c03573"
+    }
+  },
+  "limitations": [
+    "Death is explicit native-state playback on a real preview owner, not ordinary lethal gameplay.",
+    "V1 ordinary combat uses the Gambeson renderer as the selected capture identity while exact body and hair bindings are retained through the same owner.",
+    "No claim of every player skinset, multiplayer layout, portrait behavior, corpse lifetime, or final-owner cleanup beyond the measured V1 lease retirement."
+  ]
+}

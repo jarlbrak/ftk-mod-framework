@@ -1,0 +1,493 @@
+{
+  "model": "Reefstrider",
+  "status": "ORIGINAL_OFFLINE_PACKAGE_REVIEWED_LIVE_PENDING",
+  "nativeEnemy": "fishA01",
+  "rendererId": 121695,
+  "nativeCelScale": {
+    "x": 1.0,
+    "y": 1.0,
+    "z": 1.0
+  },
+  "visualScaleFactor": 1.0,
+  "sourceFindings": {
+    "path": "scratch/fish-a01-native-topology-analysis/findings.json",
+    "sha256": "66af7b180ef012bdeb472edd4969cc887da21fe99ab3e1f9443afe9fd6d107d1",
+    "bytes": 168684
+  },
+  "assets": [
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider.glb",
+      "sha256": "a865a3f602edc56c1f9545bc78d4f4b446d891228c70731ae4fc849257a6451d",
+      "bytes": 264100
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider_basecolor.png",
+      "sha256": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50",
+      "bytes": 268
+    }
+  ],
+  "files": [
+    {
+      "path": "art-experiments/reefstrider-fish/README.md",
+      "sha256": "10231c2f4395ec69c32bd80e35200a4d2b58590a5a75922cb9409800b9382eca",
+      "bytes": 3762
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/audit_native_poses.py",
+      "sha256": "2040f11d4e1c46b88f36eb77accd4cdec7561c1d51e27fe2c8b77eda935a81a0",
+      "bytes": 4968
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/audit_surfaces.py",
+      "sha256": "f9585647c03e67a75735be1335853059641fd0a74d071f2daf771518377ca2ed",
+      "bytes": 1576
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/build_blender.py",
+      "sha256": "15c5d1ed042fa06d87456692bf22c94664c766a2c1916db6206f22ac676e192d",
+      "bytes": 5366
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/build_geometry.py",
+      "sha256": "bcde2fb1d4c54ac8dd8eb67185b08327a5c04590b51ae5811e1d2e4706e66fad",
+      "bytes": 6246
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/candidate-manifest.json",
+      "sha256": "0562cebc47a93dff037f02c3358d82adf2e1cfdcf934a814e8db2e1863411943",
+      "bytes": 4462
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/eye-head-attachment-audit.json",
+      "sha256": "f0300f456a523e05d5cd14570e15196bcf82cc88d70773ce6966018648b9fcf1",
+      "bytes": 513
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/finalize_manifest.py",
+      "sha256": "5ee7c354b4c1a45ad5691b9c5deaf87b010e1e5be62d76bcb7495d5e2f441584",
+      "bytes": 3212
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/hero.png",
+      "sha256": "fc69b4f8743f6d5a5441ebd16600a5ba71cfcd678839a92196705f16c3309b59",
+      "bytes": 1010871
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-death-pose-audit.json",
+      "sha256": "d6b059f3a0a787f0f9d1a3d81660a074ef64c637641d3b8f093002d929194e19",
+      "bytes": 1709
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-death-pose-study.png",
+      "sha256": "26c19e69b1065bea5e63220bdf50ed2cd48eddf22218e3ad29e2aac94ca694b0",
+      "bytes": 27442
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-dodge-pose-audit.json",
+      "sha256": "2d65e5aa77451caf4b77b6f6da417456665e7cf3963931b071df792630c9ff3e",
+      "bytes": 1700
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-dodge-pose-study.png",
+      "sha256": "290633b40864420b11399ca7010d42795887c2c57a9a8d483c1a91d94072f68b",
+      "bytes": 38114
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-hit-pose-audit.json",
+      "sha256": "f30d52e1c1e191d8cbb5eecd058e523c2571a8991801dfd5acaca756572843a8",
+      "bytes": 1705
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-hit-pose-study.png",
+      "sha256": "dc8ee5fcf7429eaf021cc219f28295af59bed8b7b98f040585ccc460377fc03d",
+      "bytes": 35129
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-pass-pose-audit.json",
+      "sha256": "42ec3d11898a3fcefff32f0bfd89c3c5909b5a1d7df3acb4c2849ee64c858407",
+      "bytes": 1706
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-pass-pose-study.png",
+      "sha256": "dc88e4f53379977c164c191f37be9516ba79b460a0eb2e5666e4c3e9ac333178",
+      "bytes": 35389
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-ragdoll-transition-pose-audit.json",
+      "sha256": "94958634b7fadde7fa0e0fdf024c0eeed62a011f985b79af48276ddb3d375b02",
+      "bytes": 1709
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/native-ragdoll-transition-pose-study.png",
+      "sha256": "164df8b2f05b01d5f0b48094ba5af32763fcaa17df865139930ce7792de67f03",
+      "bytes": 31877
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/README.md",
+      "sha256": "0a9403a16808d94624b45fa6a924089bc8a58bc825b7c6696431e354edc5dad1",
+      "bytes": 1913
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/audit_native_poses.py",
+      "sha256": "2040f11d4e1c46b88f36eb77accd4cdec7561c1d51e27fe2c8b77eda935a81a0",
+      "bytes": 4968
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/audit_surfaces.py",
+      "sha256": "f9585647c03e67a75735be1335853059641fd0a74d071f2daf771518377ca2ed",
+      "bytes": 1576
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/build_blender.py",
+      "sha256": "15c5d1ed042fa06d87456692bf22c94664c766a2c1916db6206f22ac676e192d",
+      "bytes": 5366
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/build_geometry.py",
+      "sha256": "bcde2fb1d4c54ac8dd8eb67185b08327a5c04590b51ae5811e1d2e4706e66fad",
+      "bytes": 6246
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/candidate-manifest.json",
+      "sha256": "0562cebc47a93dff037f02c3358d82adf2e1cfdcf934a814e8db2e1863411943",
+      "bytes": 4462
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/hero.png",
+      "sha256": "fc69b4f8743f6d5a5441ebd16600a5ba71cfcd678839a92196705f16c3309b59",
+      "bytes": 1010871
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/native-dodge-pose-audit.json",
+      "sha256": "2d65e5aa77451caf4b77b6f6da417456665e7cf3963931b071df792630c9ff3e",
+      "bytes": 1700
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/native-dodge-pose-study.png",
+      "sha256": "290633b40864420b11399ca7010d42795887c2c57a9a8d483c1a91d94072f68b",
+      "bytes": 38114
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/native-pass-pose-audit.json",
+      "sha256": "42ec3d11898a3fcefff32f0bfd89c3c5909b5a1d7df3acb4c2849ee64c858407",
+      "bytes": 1706
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/native-pass-pose-study.png",
+      "sha256": "dc88e4f53379977c164c191f37be9516ba79b460a0eb2e5666e4c3e9ac333178",
+      "bytes": 35389
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/original-geometry-proof.json",
+      "sha256": "f7f1f3e0bb6ca4456fd660cb3d9a8bbe80eb29b145130ad44cea6663da52e5fe",
+      "bytes": 1093
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider-reopened.glb",
+      "sha256": "abc877769f604a951b2d8c80dbeec8486a5f57b09765acc548477d8e51523426",
+      "bytes": 264100
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider-reopened.png",
+      "sha256": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50",
+      "bytes": 268
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider-reopened.source.json",
+      "sha256": "cb30a45d19e7cd062fcea41b4f906be1398da6ae9ca10bab10edb6e9a862fbde",
+      "bytes": 758327
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider-reopened.validation.json",
+      "sha256": "ebc7c5f6d56d73a7662286daa6e308aa92efb185900003a7cfdc0f758a7d9472",
+      "bytes": 1189
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider-studio.blend",
+      "sha256": "7d6623c6b2fe9db297aa6a82931fc757308361c9f3988f08e66f3282d94286fd",
+      "bytes": 187359
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider.blend",
+      "sha256": "ff6a18a42fe2e50fb7a566989b55c0507afc2b170ae9f1e8cc710a6c9e0b82c8",
+      "bytes": 185305
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider.glb",
+      "sha256": "a865a3f602edc56c1f9545bc78d4f4b446d891228c70731ae4fc849257a6451d",
+      "bytes": 264100
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider.pieces.json",
+      "sha256": "b8c27566918829ebd5c5c7de76697e6d81bd64ea230534602073e8519abee7e2",
+      "bytes": 2154
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider.source.json",
+      "sha256": "74b1cb0d173d24ac9bc81d38d97b94a8a3ae401cf41bbca51931a5843df8fa7e",
+      "bytes": 726928
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider.validation.json",
+      "sha256": "f38a094649a88d904bd0344f101b8b1ca1ffb5043b654f2cae6035339277f439",
+      "bytes": 859
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reefstrider_basecolor.png",
+      "sha256": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50",
+      "bytes": 268
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/reopened-validation.json",
+      "sha256": "ce0c81e790173c1b6c54498b413bdc901896d11df23e5e4671c60aa696eda430",
+      "bytes": 868
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/side.png",
+      "sha256": "9ab71be90056688b7911c187a13ed1e446ff1016ad9e217feb9b1b1dbe22679c",
+      "bytes": 996958
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/surface-bounds-audit.json",
+      "sha256": "958c472eb96e6052c30bc2bb180480e696dd11de04c8be7d48e27afa918ed9f6",
+      "bytes": 3572
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/before-ragdoll-fit/verify_original_geometry.py",
+      "sha256": "8728869b3fc5b0b3ace145ad3a9f43f4b2db875bc2258be37ca07e87ad404938",
+      "bytes": 2343
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/audit_native_poses.py",
+      "sha256": "2040f11d4e1c46b88f36eb77accd4cdec7561c1d51e27fe2c8b77eda935a81a0",
+      "bytes": 4968
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/audit_surfaces.py",
+      "sha256": "f9585647c03e67a75735be1335853059641fd0a74d071f2daf771518377ca2ed",
+      "bytes": 1576
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/build_blender.py",
+      "sha256": "15c5d1ed042fa06d87456692bf22c94664c766a2c1916db6206f22ac676e192d",
+      "bytes": 5366
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/build_geometry.py",
+      "sha256": "776cacaa74449056ae214c1b0e9bd2749b78873d8c446a996181efea9baf56f8",
+      "bytes": 6350
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/hero.png",
+      "sha256": "ef1618bc4c8e996e37d4d716b35f898dab0e2a73caffcf326ed4270581cf5ab3",
+      "bytes": 1013286
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/native-dodge-pose-audit.json",
+      "sha256": "f046513a79ea237d51e44331a0871ab5c2696ab33fb0f71a6c9c25d0f18aca5d",
+      "bytes": 1700
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/native-dodge-pose-study.png",
+      "sha256": "2e926453ea39d7e9c37da4eed7df49c8b35dcb6cebbe3732a83701183b98af40",
+      "bytes": 38900
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/native-pass-pose-audit.json",
+      "sha256": "5b2031caea406d73d87c3a95f53e23731fc7de9add047d930cbc63b3fd4cbeac",
+      "bytes": 1706
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/native-pass-pose-study.png",
+      "sha256": "f8d58be8c2c93c09f2774a6d1c4d7071034f093908362661b843ada7b3a12092",
+      "bytes": 36972
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/original-geometry-proof.json",
+      "sha256": "f4f4bfba4f29888c02bd82e87df2d89b38c743644fef97852789e24d375214f9",
+      "bytes": 1093
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider-reopened.glb",
+      "sha256": "c384592bd7f13101f0ebceed3b783635280982d80ab4c7683e372a94241dcc17",
+      "bytes": 281500
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider-reopened.png",
+      "sha256": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50",
+      "bytes": 268
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider-reopened.source.json",
+      "sha256": "91a6fb5f2572af2bf40d8773c32b1746b40056e3a29e59cbc4016108c12c6bc8",
+      "bytes": 819872
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider-reopened.validation.json",
+      "sha256": "f50229d814ba60dec7c0b5cd04cdea562aac6853637e17116642293a965477f8",
+      "bytes": 1189
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider-studio.blend",
+      "sha256": "62dd6c72206399b2f5da9369e08521cf47c54d8c922deb4bfc4196af99b219f9",
+      "bytes": 192116
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider.blend",
+      "sha256": "80177fe0c5eee19c123eb4c589e87905a3e450795ec3c50d2532bbc78a7c9e7a",
+      "bytes": 188832
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider.glb",
+      "sha256": "df603890e4c38b978f777913865572e273ece420ef8e423a99267561e9720547",
+      "bytes": 281500
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider.pieces.json",
+      "sha256": "4eb720ded700ffe2bfea7aa30b94eaf3d8fb9cf6f50ced709a3af90fbf6ff516",
+      "bytes": 2248
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider.source.json",
+      "sha256": "9f4f85e6049012a26d8f7b99340d17f72b34b1de442f23d3307efc644db2f52b",
+      "bytes": 770287
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider.validation.json",
+      "sha256": "4c121c7ace12897db7b1480e4e5db264dd43466c58ba0d86c4193efb23ecaf46",
+      "bytes": 859
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reefstrider_basecolor.png",
+      "sha256": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50",
+      "bytes": 268
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/reopened-validation.json",
+      "sha256": "2e09e99c8fe455aa870451ff0301b446a95dbc6405ce92498bf3b3023ea81249",
+      "bytes": 868
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/side.png",
+      "sha256": "aca5b4f77288aa46d8651d9026d102a03cc2d2d17aaf0c504f745060ed7a1378",
+      "bytes": 997344
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/surface-bounds-audit.json",
+      "sha256": "ea7fdd767d694c6a79825c69ff53281e19dbc7b885b208e73eb7dad5673acca6",
+      "bytes": 3666
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/offline-history/initial-bind/verify_original_geometry.py",
+      "sha256": "8728869b3fc5b0b3ace145ad3a9f43f4b2db875bc2258be37ca07e87ad404938",
+      "bytes": 2343
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/original-geometry-proof.json",
+      "sha256": "f7f1f3e0bb6ca4456fd660cb3d9a8bbe80eb29b145130ad44cea6663da52e5fe",
+      "bytes": 1093
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider-reopened.glb",
+      "sha256": "abc877769f604a951b2d8c80dbeec8486a5f57b09765acc548477d8e51523426",
+      "bytes": 264100
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider-reopened.png",
+      "sha256": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50",
+      "bytes": 268
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider-reopened.source.json",
+      "sha256": "cb30a45d19e7cd062fcea41b4f906be1398da6ae9ca10bab10edb6e9a862fbde",
+      "bytes": 758327
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider-reopened.validation.json",
+      "sha256": "ebc7c5f6d56d73a7662286daa6e308aa92efb185900003a7cfdc0f758a7d9472",
+      "bytes": 1189
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider-studio.blend",
+      "sha256": "7d6623c6b2fe9db297aa6a82931fc757308361c9f3988f08e66f3282d94286fd",
+      "bytes": 187359
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider.blend",
+      "sha256": "ff6a18a42fe2e50fb7a566989b55c0507afc2b170ae9f1e8cc710a6c9e0b82c8",
+      "bytes": 185305
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider.glb",
+      "sha256": "a865a3f602edc56c1f9545bc78d4f4b446d891228c70731ae4fc849257a6451d",
+      "bytes": 264100
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider.pieces.json",
+      "sha256": "b8c27566918829ebd5c5c7de76697e6d81bd64ea230534602073e8519abee7e2",
+      "bytes": 2154
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider.source.json",
+      "sha256": "74b1cb0d173d24ac9bc81d38d97b94a8a3ae401cf41bbca51931a5843df8fa7e",
+      "bytes": 726928
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider.validation.json",
+      "sha256": "f38a094649a88d904bd0344f101b8b1ca1ffb5043b654f2cae6035339277f439",
+      "bytes": 859
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reefstrider_basecolor.png",
+      "sha256": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50",
+      "bytes": 268
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/reopened-validation.json",
+      "sha256": "ce0c81e790173c1b6c54498b413bdc901896d11df23e5e4671c60aa696eda430",
+      "bytes": 868
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/root-glb-validation.json",
+      "sha256": "eb821754c6b7fd1dc6d10c8812d2cdebbb352fe0324b5db67e42de14ab8d792e",
+      "bytes": 815
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/root-offline-review.json",
+      "sha256": "0e71eddd316a26ef7768a647d6754cc76d2501c2d80133f5cc8f6daeb5716af7",
+      "bytes": 1414
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/runtime-profile.json",
+      "sha256": "fc34893caf100dd9fd427774d0af8fb0f206990c4f7c7dabb4cc839533284547",
+      "bytes": 530
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/side.png",
+      "sha256": "9ab71be90056688b7911c187a13ed1e446ff1016ad9e217feb9b1b1dbe22679c",
+      "bytes": 996958
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/surface-bounds-audit.json",
+      "sha256": "958c472eb96e6052c30bc2bb180480e696dd11de04c8be7d48e27afa918ed9f6",
+      "bytes": 3572
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/verify_original_geometry.py",
+      "sha256": "8728869b3fc5b0b3ace145ad3a9f43f4b2db875bc2258be37ca07e87ad404938",
+      "bytes": 2343
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/weight-proof.json",
+      "sha256": "12f8b61664ad4d61efe6c63cfb08f3ccfd669dae3071a413e0510777cb7cade0",
+      "bytes": 916
+    }
+  ],
+  "limits": [
+    "Initial bind and pre-ragdoll candidates preserved; unchanged final geometry fitted across 480 fishA01 pass, dodge, confirmed-hit and death poses.",
+    "Each original closed piece has positive volume; overlapping assembled surfaces are not a globally watertight union.",
+    "Pass/dodge/hit normalize Root_M; death and ragdoll transition retain renderer-local travel. Native ragdoll bodies/colliders remain unchanged; original visual surface does not establish collision-fit or floor contact.",
+    "Native1 root scale retained via visual factor1, emission opt-out requires live material readback.",
+    "Exact fishA01 only; no A02/A03 inheritance. No live original appearance, portrait, ordinarylethal or final teardown acceptance."
+  ]
+}

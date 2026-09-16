@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "scope": "Deterministic original-geometry rerun; it establishes byte-identical authored outputs, not studio or live acceptance.",
+  "method": "The authoring phase reads only ordered bone_names and inverse bind matrices; independent export validation separately reads the local reference without feeding it into geometry generation.",
+  "reference": {
+    "path": "scratch/basey-wolf-reference-v1/reference.npz",
+    "sha256": "2acee740166d02288fe4195066f25bc39da69928b5e7ff7a45c89288769b2248"
+  },
+  "generatorSha256": "53823ba6fe1b52175a0d565c880502b1cc22fe233405efc00fb002b1fa85a811",
+  "files": [
+    {
+      "file": "lichenfang.glb",
+      "sha256": "a53986fcd2ab4f65479cb1f39055163e5dea44381ecad2f84c2b94fa9f8d09b5",
+      "reproduced_identical": true
+    },
+    {
+      "file": "lichenfang-palette.png",
+      "sha256": "64a203e5f15eef9f39d83dabd70b18ae46ebdf81f2ee111cf95bcfe2b7c67445",
+      "reproduced_identical": true
+    },
+    {
+      "file": "lichenfang.source.json",
+      "sha256": "b341ab1b28034aab9bf752b3a4dcef374eef5f1b28273415d2dc169ea573f707",
+      "reproduced_identical": true
+    },
+    {
+      "file": "lichenfang.pieces.json",
+      "sha256": "ca312d441d2fa8c98dc1b75581e3cded59ab1ad6fce524d524fb73facfa498e8",
+      "reproduced_identical": true
+    }
+  ]
+}

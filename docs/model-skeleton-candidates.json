@@ -1,0 +1,1809 @@
+{
+  "source_sha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "scope": "All SkinnedMeshRenderer objects serialized directly in this resources.assets; candidate character families identified by ancestor CharacterEventListener component. Includes player/NPC/portrait variants, not an enemy DB mapping.",
+  "grouping": "Bone-name and nearest included ancestor topology, insensitive to bone order. Bind pose fingerprint is a separate exact per-name comparison; topology equality does not establish compatible rig, scale, rest pose, or controller.",
+  "limitations": [
+    "No runtime spawn/animation validation performed for inventory.",
+    "No external asset files, bundles, rigid MeshRenderers, or separately mounted weapons inventoried.",
+    "No claim candidate families are complete enemy families.",
+    "Path IDs and source hash are install-specific.",
+    "Meshes/animations/bind pose data not exported.",
+    "CharacterEventListener includes player, NPC, enemy and portrait content. Enemy DB row-to-prefab/controller association is not yet resolved.",
+    "Prefab controller association is serialized ancestry only; game can override controller at combat spawn. enTroll01 renderer 121152 ancestors have Enemy_Controller whereas live cave troll uses trollController.",
+    "Multipart creatures and accessories appear as multiple renderer topology groups; renderer topology group count is not creature-family count.",
+    "Topology fingerprints compare nearest included bone ancestors and can merge vastly different proportions; a 37-joint topology spans troll, humanoid enemies and players."
+  ],
+  "summary": {
+    "skinned_renderer_count": 750,
+    "character_renderer_candidate_count": 467,
+    "candidate_topology_family_count": 49,
+    "controller_topology_group_count": 87
+  },
+  "candidate_families": [
+    {
+      "topology_fingerprint": "82d606d9b5a0d2e1",
+      "joint_count": 32,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121344,
+        121345
+      ],
+      "mesh_names": [
+        "enAcidMonster"
+      ],
+      "controller_names": [
+        "AcidBlobController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enAcidMonster/enAcidMonster",
+        "enAcidMonsterB/enAcidMonster"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "0db0dbdf202b8e11",
+      "joint_count": 7,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121306,
+        121517
+      ],
+      "mesh_names": [
+        "enClam"
+      ],
+      "controller_names": [
+        "ClamController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enClamA/enClam",
+        "enClamB/enClam"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "db2a524a5bc700ea",
+      "joint_count": 37,
+      "renderer_count": 228,
+      "renderer_path_ids": [
+        120950,
+        120951,
+        120952,
+        120956,
+        120958,
+        120959,
+        120969,
+        120970,
+        120971,
+        120979,
+        120980,
+        120981,
+        120988,
+        120991,
+        120994,
+        120995,
+        120996,
+        120997,
+        120998,
+        121005,
+        121006,
+        121007,
+        121022,
+        121023,
+        121024,
+        121028,
+        121029,
+        121030,
+        121034,
+        121037,
+        121039,
+        121040,
+        121043,
+        121045,
+        121046,
+        121047,
+        121048,
+        121049,
+        121050,
+        121052,
+        121055,
+        121069,
+        121075,
+        121076,
+        121077,
+        121078,
+        121080,
+        121081,
+        121082,
+        121085,
+        121089,
+        121091,
+        121092,
+        121093,
+        121095,
+        121096,
+        121097,
+        121098,
+        121099,
+        121100,
+        121102,
+        121109,
+        121112,
+        121114,
+        121117,
+        121126,
+        121127,
+        121128,
+        121129,
+        121130,
+        121131,
+        121138,
+        121139,
+        121146,
+        121147,
+        121148,
+        121149,
+        121150,
+        121152,
+        121153,
+        121154,
+        121156,
+        121160,
+        121161,
+        121162,
+        121163,
+        121164,
+        121165,
+        121166,
+        121167,
+        121169,
+        121172,
+        121180,
+        121181,
+        121187,
+        121188,
+        121189,
+        121193,
+        121195,
+        121200,
+        121201,
+        121203,
+        121205,
+        121208,
+        121209,
+        121214,
+        121215,
+        121227,
+        121228,
+        121229,
+        121230,
+        121234,
+        121235,
+        121246,
+        121250,
+        121251,
+        121252,
+        121253,
+        121254,
+        121255,
+        121256,
+        121257,
+        121258,
+        121259,
+        121262,
+        121266,
+        121270,
+        121273,
+        121280,
+        121285,
+        121299,
+        121304,
+        121310,
+        121313,
+        121318,
+        121321,
+        121325,
+        121332,
+        121333,
+        121337,
+        121338,
+        121340,
+        121350,
+        121352,
+        121353,
+        121355,
+        121358,
+        121360,
+        121374,
+        121377,
+        121381,
+        121382,
+        121383,
+        121385,
+        121390,
+        121399,
+        121402,
+        121406,
+        121412,
+        121417,
+        121418,
+        121422,
+        121423,
+        121427,
+        121429,
+        121430,
+        121431,
+        121432,
+        121434,
+        121436,
+        121445,
+        121451,
+        121459,
+        121462,
+        121466,
+        121469,
+        121470,
+        121471,
+        121473,
+        121482,
+        121487,
+        121491,
+        121493,
+        121494,
+        121498,
+        121503,
+        121506,
+        121507,
+        121514,
+        121516,
+        121519,
+        121520,
+        121523,
+        121526,
+        121535,
+        121544,
+        121547,
+        121549,
+        121551,
+        121565,
+        121576,
+        121585,
+        121586,
+        121589,
+        121590,
+        121591,
+        121593,
+        121600,
+        121601,
+        121608,
+        121614,
+        121627,
+        121642,
+        121643,
+        121650,
+        121651,
+        121653,
+        121655,
+        121657,
+        121666,
+        121667,
+        121669,
+        121672,
+        121674,
+        121675,
+        121683,
+        121684,
+        121689
+      ],
+      "mesh_names": [
+        "BanditWarrior",
+        "Basey",
+        "Yeti",
+        "bandit01",
+        "bandit02",
+        "bearman",
+        "beastman01",
+        "beastman02",
+        "bisontaur",
+        "boggling",
+        "cultist2",
+        "cultist2B",
+        "cultist3",
+        "cultistC",
+        "cultistC2",
+        "cultistC3",
+        "cultistFinalBoss",
+        "demon",
+        "enAncientDruid",
+        "enAncientDruid_B",
+        "enAncientWarriorA",
+        "enAncientWarriorA_B",
+        "enAncientWarriorB",
+        "enAncientWarriorB_B",
+        "enAssassinB",
+        "enAtztecGolem_Fire",
+        "enAtztecGolem_Frost",
+        "enAtztecGolem_Lightning",
+        "enAtztecGolem_Water",
+        "enBanditB01",
+        "enBanditB02",
+        "enBanditE",
+        "enBanditF",
+        "enBard",
+        "enBaseyBrute",
+        "enBaseyFat",
+        "enBaseyImp",
+        "enBisonUndead",
+        "enColdCorpse",
+        "enDesertBanditA",
+        "enDesertBanditB",
+        "enDesertBanditC",
+        "enDisciple",
+        "enDrownedSailor",
+        "enDruid",
+        "enDrunkPirateD",
+        "enDrunkPirateE",
+        "enDryCorpse01",
+        "enFoxFighter",
+        "enFoxShaman",
+        "enFrozenBanditA",
+        "enFrozenBanditB",
+        "enGhoul",
+        "enGoblinA",
+        "enGoblinArcher",
+        "enGoblinAssassin",
+        "enGoblinGrunt",
+        "enGoblinSnowA",
+        "enGoblinWiz",
+        "enHobGoblinA",
+        "enHobGoblinB",
+        "enImp",
+        "enImp02",
+        "enJungleCorpseA",
+        "enJungleCorpseB",
+        "enJungleDruid",
+        "enJungleDruid_B",
+        "enJungleElder",
+        "enJungleKoboldA",
+        "enJungleKoboldC",
+        "enJungleKoboltB",
+        "enJungleSkelly",
+        "enJungleTroll",
+        "enJungleWarriorA",
+        "enJungleWarriorA_B",
+        "enJungleWarriorB",
+        "enJungleWarriorB_B",
+        "enKoboldA",
+        "enKoboldB",
+        "enLichA",
+        "enMinionHangman",
+        "enOgre",
+        "enOgre_Armored",
+        "enOwlBear",
+        "enPirate01",
+        "enPirate02",
+        "enPirateC02",
+        "enPirateC03",
+        "enPirateD01",
+        "enPirtaeSkellyBoner",
+        "enScourgeBanditKing",
+        "enScourgeFraybee",
+        "enScourgeSiren",
+        "enScourgeVolcanoWizard",
+        "enScourgeWitchdoctor",
+        "enShaarkBruteA",
+        "enShaarkBruteB",
+        "enSnowBeastManB",
+        "enSnowBeastManC",
+        "enSnowGoblinA",
+        "enSnowGoblinB",
+        "enSnowGoblinC",
+        "enSnowGoblinD",
+        "enSnowGoblinE",
+        "enThief01",
+        "enTroll01",
+        "enVampireA",
+        "enVampireB",
+        "enVexor",
+        "enWitchC",
+        "enWraith",
+        "enYeti",
+        "en_SnowBeastA",
+        "ghost1",
+        "goblinHotDogVendor",
+        "hag01",
+        "hag02",
+        "hag03",
+        "hairTop",
+        "impWizard01",
+        "leprechaun",
+        "mindMelter",
+        "mummy",
+        "mummy02",
+        "mysticCat",
+        "player_Goblin",
+        "ratThief",
+        "rockman01",
+        "scourgeAssassin",
+        "scourgeDemis",
+        "scourgeHangman",
+        "scourgeJester",
+        "scourgeTime",
+        "skelly01naked",
+        "skelly02warrior",
+        "skelly03fighter",
+        "skelly04archer",
+        "skelly07mage",
+        "skellyMage02",
+        "swampMonster",
+        "triclops",
+        "triclopsBaby",
+        "wildMage02",
+        "wildmage01",
+        "witch01"
+      ],
+      "controller_names": [
+        "Enemy_Controller",
+        "LeprechaunController",
+        "bruteTPoseOnly",
+        "bruteUnarmedController",
+        "dualWeaponBruteController",
+        "fatGuyDualWeaponController",
+        "fatGuyShieldController",
+        "ghostController",
+        "ghoulController",
+        "giantController",
+        "goblinHotdogVendor",
+        "hagController",
+        "hotdogVendorOverworld",
+        "impUnarmedController",
+        "impWizardController",
+        "luteEnemyController",
+        "monkUpsidedown",
+        "playerOverworldController",
+        "player_1H_Bladed_Combat",
+        "player_1H_Blunt_Combat",
+        "player_1H_Magic_Combat",
+        "player_1H_Spear_Combat",
+        "player_1H_Wand_Combat",
+        "player_2H_Blunt_Combat",
+        "player_2H_Bow_Combat",
+        "player_2H_Dual_Combat",
+        "player_2H_Magic_Combat",
+        "player_2H_Spear_Combat",
+        "player_unarmed_Combat",
+        "timeScourgeController",
+        "trollController",
+        "wraithController",
+        "zombieController"
+      ],
+      "bindpose_variant_count": 91,
+      "example_ancestor_paths": [
+        "enCultistA/cultist2",
+        "enCultistB/cultist2",
+        "enCultist_temp/cultist2"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "f50b09e31a8484cf",
+      "joint_count": 36,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121222
+      ],
+      "mesh_names": [
+        "enScourgeLeprechaun"
+      ],
+      "controller_names": [
+        "LeprechaunController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enScourgeLeprechaun/enScourgeLeprechaun"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "896faa557db56261",
+      "joint_count": 53,
+      "renderer_count": 4,
+      "renderer_path_ids": [
+        121104,
+        121105,
+        121106,
+        121437
+      ],
+      "mesh_names": [
+        "enBat01",
+        "enJungleBat"
+      ],
+      "controller_names": [
+        "batController"
+      ],
+      "bindpose_variant_count": 2,
+      "example_ancestor_paths": [
+        "enBat01/enBat01",
+        "enBat02/enBat01",
+        "enBat03/enBat01"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "07f911c982da0402",
+      "joint_count": 38,
+      "renderer_count": 3,
+      "renderer_path_ids": [
+        121467,
+        121486,
+        121534
+      ],
+      "mesh_names": [
+        "enBear01",
+        "enBear02",
+        "enBear03"
+      ],
+      "controller_names": [
+        "bearController"
+      ],
+      "bindpose_variant_count": 3,
+      "example_ancestor_paths": [
+        "enBearB/enBear01",
+        "enBearC/enBear03",
+        "enBearA/enBear02"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "6fdb7ff148451731",
+      "joint_count": 47,
+      "renderer_count": 8,
+      "renderer_path_ids": [
+        121062,
+        121101,
+        121206,
+        121226,
+        121389,
+        121481,
+        121518,
+        121569
+      ],
+      "mesh_names": [
+        "Monster Bee",
+        "enMosquito_01",
+        "enMosquito_02",
+        "enScarabA",
+        "enScarabB",
+        "enSwampFly01"
+      ],
+      "controller_names": [
+        "beeController"
+      ],
+      "bindpose_variant_count": 6,
+      "example_ancestor_paths": [
+        "enBee_01/Monster Bee",
+        "enSwampFly01/enSwampFly01",
+        "enBee_03/Monster Bee"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "ba17c1398db51453",
+      "joint_count": 39,
+      "renderer_count": 13,
+      "renderer_path_ids": [
+        120960,
+        120961,
+        120962,
+        120963,
+        120964,
+        120965,
+        120999,
+        121179,
+        121294,
+        121339,
+        121346,
+        121369,
+        121670
+      ],
+      "mesh_names": [
+        "enCrow",
+        "enJungleBird_A",
+        "enJungleBird_B",
+        "enParrotA",
+        "enParrotB",
+        "enSeagull",
+        "enSeagull2"
+      ],
+      "controller_names": [
+        "birdController"
+      ],
+      "bindpose_variant_count": 6,
+      "example_ancestor_paths": [
+        "enBaseyBird/enBaseyBird",
+        "enBirdA/enCrow",
+        "enCrowA/enCrow"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "b4ccd4e96e3a224b",
+      "joint_count": 20,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121483
+      ],
+      "mesh_names": [
+        "ChaosSkullBottom"
+      ],
+      "controller_names": [
+        "chaosSkullController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enChaosSkull/ChaosSkullBottom"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "8f027145e71c9525",
+      "joint_count": 22,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121577
+      ],
+      "mesh_names": [
+        "ChaosSkullTop"
+      ],
+      "controller_names": [
+        "chaosSkullController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enChaosSkull/ChaosSkullTop"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "678c8066b33cf823",
+      "joint_count": 50,
+      "renderer_count": 6,
+      "renderer_path_ids": [
+        121328,
+        121484,
+        121540,
+        121554,
+        121693,
+        121694
+      ],
+      "mesh_names": [
+        "enBaseyCockatrice",
+        "enChicken",
+        "enCockatrice"
+      ],
+      "controller_names": [
+        "chickenController",
+        "cockatriceController"
+      ],
+      "bindpose_variant_count": 3,
+      "example_ancestor_paths": [
+        "enCockatriceA_minion/enChicken",
+        "enCockatriceC/enChicken",
+        "enCockatriceB_boss/enChicken"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "791b63f3064c2f62",
+      "joint_count": 63,
+      "renderer_count": 3,
+      "renderer_path_ids": [
+        121411,
+        121579,
+        121635
+      ],
+      "mesh_names": [
+        "CrabGeo",
+        "enCrabWizard"
+      ],
+      "controller_names": [
+        "crabController"
+      ],
+      "bindpose_variant_count": 2,
+      "example_ancestor_paths": [
+        "enCrabB/enCrabWizard",
+        "enCrabA/CrabGeo",
+        "enCrabC/CrabGeo"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "c01698c74bd54910",
+      "joint_count": 70,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121525,
+        121561
+      ],
+      "mesh_names": [
+        "enDragon"
+      ],
+      "controller_names": [
+        "dragonController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "baseFrostbitePeak/targets/enemy_target/enDragon/enDragon",
+        "enDragon/enDragon"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "c3683bc2e807b15a",
+      "joint_count": 66,
+      "renderer_count": 3,
+      "renderer_path_ids": [
+        121395,
+        121396,
+        121397
+      ],
+      "mesh_names": [
+        "enFairy01"
+      ],
+      "controller_names": [
+        "fairyController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enFairy/enFairy01",
+        "enFairyB/enFairy01",
+        "enFairyC/enFairy01"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "5990c51ca004ebdb",
+      "joint_count": 34,
+      "renderer_count": 12,
+      "renderer_path_ids": [
+        121286,
+        121298,
+        121479,
+        121543,
+        121594,
+        121620,
+        121628,
+        121649,
+        121680,
+        121685,
+        121686,
+        121695
+      ],
+      "mesh_names": [
+        "",
+        "enFishA",
+        "enFishB",
+        "enFishC",
+        "enFishD",
+        "enFishD01",
+        "enFishD02",
+        "enFishE",
+        "enFishF",
+        "enFishG",
+        "enFishH"
+      ],
+      "controller_names": [
+        "fishSpearController",
+        "fishStaffController",
+        "fishUnarmedController"
+      ],
+      "bindpose_variant_count": 10,
+      "example_ancestor_paths": [
+        "enFishA02/enFishB",
+        "enFishB01/enFishH",
+        "enFishD02/enFishD02"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "73739eaf6fd8f0e4",
+      "joint_count": 2,
+      "renderer_count": 3,
+      "renderer_path_ids": [
+        121031,
+        121121,
+        121210
+      ],
+      "mesh_names": [
+        "EyeBody",
+        "EyeEye",
+        "enWisp"
+      ],
+      "controller_names": [
+        "floatingEyeController"
+      ],
+      "bindpose_variant_count": 3,
+      "example_ancestor_paths": [
+        "enFloatingEye/EyeBody",
+        "enWisp/enWisp",
+        "enFloatingEye/EyeBody/EyeEye"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "d1de8c46112a77d8",
+      "joint_count": 31,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121008
+      ],
+      "mesh_names": [
+        "enChaosBeast"
+      ],
+      "controller_names": [
+        "ghostController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enChaosBeast/enChaosBeast"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "6d40f2e6eba19a6b",
+      "joint_count": 3,
+      "renderer_count": 8,
+      "renderer_path_ids": [
+        121011,
+        121012,
+        121013,
+        121014,
+        121015,
+        121016,
+        121017,
+        121496
+      ],
+      "mesh_names": [
+        "enIceCube",
+        "enJellyCube"
+      ],
+      "controller_names": [
+        "jellyCubeController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enBaseyCube/enJellyCube",
+        "enCubeA/enJellyCube",
+        "enCubeB/enJellyCube"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "6a28ac3cf4523c24",
+      "joint_count": 5,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121260
+      ],
+      "mesh_names": [
+        "krakenHead"
+      ],
+      "controller_names": [
+        "krakenHeadController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enKrakenHead/krakenHead"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "e45711bff451ca73",
+      "joint_count": 7,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121035
+      ],
+      "mesh_names": [
+        "kraken2"
+      ],
+      "controller_names": [
+        "krakenHeadController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enKraken/kraken2"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "aae2ba644a16c223",
+      "joint_count": 20,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121315,
+        121595
+      ],
+      "mesh_names": [
+        "KrakenGodTentacle",
+        "krakenTentacle"
+      ],
+      "controller_names": [
+        "krakenTentacleController"
+      ],
+      "bindpose_variant_count": 2,
+      "example_ancestor_paths": [
+        "enSeaKingTentacle/KrakenGodTentacle",
+        "enKrakenTentacleNew/krakenTentacle"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "cace272650590c4f",
+      "joint_count": 9,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121192
+      ],
+      "mesh_names": [
+        "mimic01"
+      ],
+      "controller_names": [
+        "mimicController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enMimicA/mimic01"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "81f02cdbf3eefcb9",
+      "joint_count": 42,
+      "renderer_count": 4,
+      "renderer_path_ids": [
+        121301,
+        121302,
+        121441,
+        121679
+      ],
+      "mesh_names": [
+        "enMonkeyA",
+        "enMonkeyBasey",
+        "enMonkeyDiseased"
+      ],
+      "controller_names": [
+        "monkeyController"
+      ],
+      "bindpose_variant_count": 3,
+      "example_ancestor_paths": [
+        "enBaseyMonkey/enMonkeyBasey",
+        "enMonkeyPlain/enMonkeyBasey",
+        "enMonkeyDiseased/enMonkeyDiseased"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "730458bde8737934",
+      "joint_count": 16,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121072,
+        121073
+      ],
+      "mesh_names": [
+        "enPlant01Leaves"
+      ],
+      "controller_names": [
+        "plantController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enPlantA/enPlant01Leaves",
+        "enPlantC/enPlant01Leaves"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "1329d6985dadecee",
+      "joint_count": 37,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121530
+      ],
+      "mesh_names": [
+        "enJungleNibbler_A"
+      ],
+      "controller_names": [
+        "plantController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enPlantE/enJungleNibbler_A"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "b0b93182a11758ed",
+      "joint_count": 43,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121537,
+        121584
+      ],
+      "mesh_names": [
+        "enJungleNibbler_B",
+        "enJungleNibbler_C"
+      ],
+      "controller_names": [
+        "plantController"
+      ],
+      "bindpose_variant_count": 2,
+      "example_ancestor_paths": [
+        "enPlantD/enJungleNibbler_C",
+        "enPlantG/enJungleNibbler_B"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "e879df15fd3c4d59",
+      "joint_count": 45,
+      "renderer_count": 4,
+      "renderer_path_ids": [
+        120953,
+        120954,
+        121243,
+        121460
+      ],
+      "mesh_names": [
+        "enJungleNibbler_D",
+        "enPlant01",
+        "enPlant02"
+      ],
+      "controller_names": [
+        "plantController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enPlantA/enPlant01",
+        "enPlantC/enPlant01",
+        "enPlantB/enPlant02"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "4082b6c4e777f922",
+      "joint_count": 6,
+      "renderer_count": 42,
+      "renderer_path_ids": [
+        120955,
+        120982,
+        121054,
+        121057,
+        121058,
+        121063,
+        121066,
+        121068,
+        121083,
+        121088,
+        121111,
+        121115,
+        121116,
+        121118,
+        121157,
+        121159,
+        121170,
+        121178,
+        121198,
+        121329,
+        121335,
+        121347,
+        121368,
+        121407,
+        121456,
+        121461,
+        121465,
+        121485,
+        121489,
+        121490,
+        121527,
+        121532,
+        121560,
+        121587,
+        121592,
+        121605,
+        121610,
+        121623,
+        121646,
+        121668,
+        121681,
+        121682
+      ],
+      "mesh_names": [
+        "hairBottom",
+        "hairTop"
+      ],
+      "controller_names": [
+        "playerOverworldController"
+      ],
+      "bindpose_variant_count": 18,
+      "example_ancestor_paths": [
+        "Player_Busker/hairTop",
+        "Player_Monk/hairTop",
+        "Player_Hunter/hairBottom"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "45c7a9b9fb730195",
+      "joint_count": 7,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121003,
+        121521
+      ],
+      "mesh_names": [
+        "hairBottom"
+      ],
+      "controller_names": [
+        "playerOverworldController"
+      ],
+      "bindpose_variant_count": 2,
+      "example_ancestor_paths": [
+        "Player_Herbalist/hairBottom",
+        "Player_FishPerson/hairBottom"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "85c742f628ea6d37",
+      "joint_count": 24,
+      "renderer_count": 18,
+      "renderer_path_ids": [
+        120985,
+        120989,
+        121067,
+        121071,
+        121140,
+        121190,
+        121202,
+        121247,
+        121276,
+        121378,
+        121428,
+        121435,
+        121457,
+        121504,
+        121528,
+        121558,
+        121636,
+        121687
+      ],
+      "mesh_names": [
+        "playerBlacksmith",
+        "playerFrostMonk",
+        "playerFrostMonkF",
+        "playerHerbalistM",
+        "playerMonk",
+        "playerScholar",
+        "player_Busker",
+        "player_Herbalist",
+        "player_HoboF",
+        "player_Hunter",
+        "player_MinstrelM",
+        "player_Trapper",
+        "player_TrapperM",
+        "player_TreasureHunterF",
+        "player_TreasureHunterM",
+        "player_UndeadSkin",
+        "player_Woodcutter",
+        "player_WoodcutterF"
+      ],
+      "controller_names": [
+        "playerOverworldController"
+      ],
+      "bindpose_variant_count": 15,
+      "example_ancestor_paths": [
+        "Player_Scholar/playerScholar",
+        "Player_Monk/playerMonk",
+        "Player_Blacksmith/playerBlacksmith"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "94dbc18f21284ec2",
+      "joint_count": 34,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121018
+      ],
+      "mesh_names": [
+        ""
+      ],
+      "controller_names": [
+        "playerOverworldController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "Player_Mayor/Player_Mayor"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "853432a7c217ff04",
+      "joint_count": 36,
+      "renderer_count": 5,
+      "renderer_path_ids": [
+        121217,
+        121218,
+        121219,
+        121220,
+        121221
+      ],
+      "mesh_names": [
+        "deathKnight"
+      ],
+      "controller_names": [
+        "playerOverworldController",
+        "player_1H_Blunt_Combat"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enDeathKnightA/deathKnight",
+        "enDeathKnightB/deathKnight",
+        "enDeathKnightD/deathKnight"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "fb84ec3e6e18f459",
+      "joint_count": 8,
+      "renderer_count": 18,
+      "renderer_path_ids": [
+        121269,
+        121274,
+        121278,
+        121309,
+        121317,
+        121341,
+        121384,
+        121408,
+        121433,
+        121444,
+        121495,
+        121500,
+        121501,
+        121546,
+        121615,
+        121624,
+        121637,
+        121663
+      ],
+      "mesh_names": [
+        "hairBottom",
+        "hairBottomBossGladiator",
+        "hairTop"
+      ],
+      "controller_names": [
+        "playerOverworldController",
+        "player_2H_Dual_Combat"
+      ],
+      "bindpose_variant_count": 9,
+      "example_ancestor_paths": [
+        "Player_MinstrelM/hairBottom",
+        "Player_BlacksmithMale/hairBottom",
+        "Player_HunterF/hairTop"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "73ef97795cc54f57",
+      "joint_count": 25,
+      "renderer_count": 17,
+      "renderer_path_ids": [
+        120974,
+        121242,
+        121272,
+        121366,
+        121400,
+        121454,
+        121468,
+        121499,
+        121508,
+        121513,
+        121542,
+        121555,
+        121562,
+        121619,
+        121631,
+        121660,
+        121662
+      ],
+      "mesh_names": [
+        "enBossGladiator",
+        "playerAstronomerF",
+        "playerAstronomerM",
+        "playerCat",
+        "playerDevil",
+        "playerDevilF",
+        "playerFIsh",
+        "playerGladiator",
+        "playerGladiatorM",
+        "playerProfessor",
+        "playerScholarF",
+        "playerUndeadSkin",
+        "player_BlacksmithM",
+        "player_BuskerF",
+        "player_Hobo",
+        "player_HunterF",
+        "player_Minstrel"
+      ],
+      "controller_names": [
+        "playerOverworldController",
+        "player_2H_Dual_Combat"
+      ],
+      "bindpose_variant_count": 14,
+      "example_ancestor_paths": [
+        "Player_Minstrel/player_Minstrel",
+        "Player_Professor/playerProfessor",
+        "enBossGladiator/enBossGladiator"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "b65252b48fd9609d",
+      "joint_count": 11,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121661
+      ],
+      "mesh_names": [
+        "bootsBossGladiator"
+      ],
+      "controller_names": [
+        "player_2H_Dual_Combat"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enBossGladiator/bootsBossGladiator"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "11742c19aa67e6d0",
+      "joint_count": 26,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121522
+      ],
+      "mesh_names": [
+        "armorBossGladiator"
+      ],
+      "controller_names": [
+        "player_2H_Dual_Combat"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enBossGladiator/armorBossGladiator"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "2185298a0a369e67",
+      "joint_count": 30,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121388,
+        121509
+      ],
+      "mesh_names": [
+        "enBlowFishA"
+      ],
+      "controller_names": [
+        "pufferController"
+      ],
+      "bindpose_variant_count": 2,
+      "example_ancestor_paths": [
+        "enPufferFishB/enBlowFishA",
+        "enPufferFishA/enBlowFishA"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "0f29e98795c302a5",
+      "joint_count": 36,
+      "renderer_count": 3,
+      "renderer_path_ids": [
+        121238,
+        121239,
+        121240
+      ],
+      "mesh_names": [
+        "enRoc01"
+      ],
+      "controller_names": [
+        "rocController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enRocA/enRoc01",
+        "enRocB/enRoc01",
+        "enRocC/enRoc01"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "1eda40629ee9aac9",
+      "joint_count": 60,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121357
+      ],
+      "mesh_names": [
+        "enSeaKing"
+      ],
+      "controller_names": [
+        "seaKingOverworldController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSeaKing/enSeaKing"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "7b140c07befa33fd",
+      "joint_count": 44,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121424
+      ],
+      "mesh_names": [
+        "enJungleSnakeC"
+      ],
+      "controller_names": [
+        "snakeController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSnakeJungleC/enJungleSnakeC"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "7313dc39dab041dd",
+      "joint_count": 44,
+      "renderer_count": 1,
+      "renderer_path_ids": [
+        121488
+      ],
+      "mesh_names": [
+        "enSnake_Basey"
+      ],
+      "controller_names": [
+        "snakeController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enBaseySnake/enSnake_Basey"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "80d61d495b6a93be",
+      "joint_count": 46,
+      "renderer_count": 5,
+      "renderer_path_ids": [
+        121365,
+        121370,
+        121447,
+        121552,
+        121567
+      ],
+      "mesh_names": [
+        "enBananaSnake",
+        "enDesertSnakeA",
+        "enDesertSnakeB",
+        "enJungleSnakeA",
+        "enJungleSnakeB"
+      ],
+      "controller_names": [
+        "snakeController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSnakeJungleB/enJungleSnakeB",
+        "enBananaSnake/enBananaSnake",
+        "enSnakeDesertB/enDesertSnakeB"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "963e53f60643b796",
+      "joint_count": 8,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121404,
+        121405
+      ],
+      "mesh_names": [
+        "enSnowmanHat"
+      ],
+      "controller_names": [
+        "snowManController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSnowmanA/SnowMan_Geo/enSnowmanHat",
+        "enSnowmanB/SnowMan_Geo/enSnowmanHat"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "02a6f31412bd52ab",
+      "joint_count": 11,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121414,
+        121415
+      ],
+      "mesh_names": [
+        "enSnowmanHead"
+      ],
+      "controller_names": [
+        "snowManController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSnowmanA/SnowMan_Geo/enSnowmanHead",
+        "enSnowmanB/SnowMan_Geo/enSnowmanHead"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "1322fec3354db550",
+      "joint_count": 13,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121638,
+        121639
+      ],
+      "mesh_names": [
+        "enSnowmanScarf"
+      ],
+      "controller_names": [
+        "snowManController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSnowmanA/SnowMan_Geo/enSnowmanScarf",
+        "enSnowmanB/SnowMan_Geo/enSnowmanScarf"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "8c73c366b064726a",
+      "joint_count": 16,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121556,
+        121557
+      ],
+      "mesh_names": [
+        "enSnowmanBase"
+      ],
+      "controller_names": [
+        "snowManController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSnowmanA/SnowMan_Geo/enSnowmanBase",
+        "enSnowmanB/SnowMan_Geo/enSnowmanBase"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "a158ab62f9dd430f",
+      "joint_count": 31,
+      "renderer_count": 2,
+      "renderer_path_ids": [
+        121696,
+        121697
+      ],
+      "mesh_names": [
+        "enSnowmanmiddleBody"
+      ],
+      "controller_names": [
+        "snowManController"
+      ],
+      "bindpose_variant_count": 1,
+      "example_ancestor_paths": [
+        "enSnowmanA/SnowMan_Geo/enSnowmanmiddleBody",
+        "enSnowmanB/SnowMan_Geo/enSnowmanmiddleBody"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "23c62612fd16b533",
+      "joint_count": 65,
+      "renderer_count": 6,
+      "renderer_path_ids": [
+        121386,
+        121452,
+        121453,
+        121550,
+        121580,
+        121604
+      ],
+      "mesh_names": [
+        "enJugnleSpider_B",
+        "enJungleSpider_A",
+        "enSpiderA",
+        "enSpiderB",
+        "enSpiderC"
+      ],
+      "controller_names": [
+        "spiderController"
+      ],
+      "bindpose_variant_count": 3,
+      "example_ancestor_paths": [
+        "enSpiderB/enSpiderB",
+        "enBaseySpider/enSpiderA",
+        "enSpiderA/enSpiderA"
+      ],
+      "validation": "unvalidated_family_candidate"
+    },
+    {
+      "topology_fingerprint": "c3487d422b832d2e",
+      "joint_count": 33,
+      "renderer_count": 14,
+      "renderer_path_ids": [
+        120975,
+        121142,
+        121143,
+        121144,
+        121145,
+        121191,
+        121303,
+        121319,
+        121320,
+        121531,
+        121568,
+        121571,
+        121572,
+        121603
+      ],
+      "mesh_names": [
+        "Wolfie",
+        "chaosWolf",
+        "enArmoredWolf",
+        "enHellHoundA",
+        "enHellHoundB",
+        "enJaguar",
+        "enPanther",
+        "enRoger",
+        "wolf01"
+      ],
+      "controller_names": [
+        "wolfController"
+      ],
+      "bindpose_variant_count": 7,
+      "example_ancestor_paths": [
+        "enBaseyWolf/Wolfie",
+        "enWolfA/wolf01",
+        "enWolfB/wolf01"
+      ],
+      "validation": "unvalidated_family_candidate"
+    }
+  ],
+  "source_file": "resources.assets",
+  "observed_date": "2026-09-06",
+  "status": "discovery_only",
+  "resource_prefab_followup": {
+    "renderer_id": 121260,
+    "resourcePrefab": "enkrakenhead",
+    "resource_game_object_id": 8268,
+    "resource_cel_id": 135962,
+    "renderer_path": "krakenHead",
+    "rig_profile_fingerprint": "e9671ea7f203dd5647a498596e506cb168121540cdffae3b1d86bd7cdd2aa54b",
+    "status": "resource_load_path_verified_adapter_production_observation_satisfied_visual_archive_review_required",
+    "adapter_contract": {
+      "path": "docs/evidence/kraken-production-adapter-design-v1/contract.json",
+      "sha256": "725d1732cb8cf538f91f92a3867087b8ed78ef4c9e5589e9b9bbe48cc2f1af87",
+      "status": "implementation_complete_validation_pending"
+    },
+    "native_row_distinction": "Native krakenHead enemy row references a different enKraken prefab via CEL136951, not this enkrakenhead resource variant.",
+    "palette_bone_count": 5,
+    "palette_path_root": "Root_M/joint1",
+    "clip_binding_summary": [
+      {
+        "clip": "krakenAttack",
+        "bound_palette_bones": 0,
+        "binds_common_Root_M_ancestor": true
+      },
+      {
+        "clip": "krakenIdle",
+        "bound_palette_bones": 0,
+        "binds_common_Root_M_ancestor": true
+      },
+      {
+        "clip": "krakenDamage",
+        "bound_palette_bones": 0,
+        "binds_common_Root_M_ancestor": true
+      },
+      {
+        "clip": "krakenDisappear",
+        "bound_palette_bones": 0,
+        "binds_common_Root_M_ancestor": true
+      },
+      {
+        "clip": "kraken_appear",
+        "bound_palette_bones": 4,
+        "binds_common_Root_M_ancestor": true
+      }
+    ],
+    "interpretation": "Native kraken_appear binds four palette bones. Attack/idle/damage/disappear bind zero candidate palette bones, but all bind the common Root_M ancestor. The exact hierarchy adapter is implemented and its production observation campaign verifies exact-route native behavior, ordinary lethal gameplay, and two-owner teardown. Root-reviewed appearance, continuous motion, camera, culling, portrait, progression, endpoint composition, and a canonical route archive remain required.",
+    "limits": [
+      "Binding presence alone does not prove nonconstant curves or quality.",
+      "Exact palette paths tested; controller can still move an ancestor shared by all bones.",
+      "Scanned AnimationClip objects serialized in resources.assets only.",
+      "Not proven unused or motionless. Native root curves may move the whole rig; nonconstant motion is not established here.",
+      "Not an ordinary native combat template compatible with articulated main attack/idle/damage/disappear clips; deliberate retarget or hierarchy adapter needed for that behavior.",
+    "The verified production observation campaign does not establish final visual quality, camera fit, culling, portrait behavior, progression, endpoint composition, or canonical route coverage.",
+      "Nine other resource groups remain independently subject to runtime/live checks; no nine-case pass or overall completion inferred."
+    ],
+    "evidence": [
+      {
+        "path": "scratch/kraken-binding-analysis.json",
+        "sha256": "fb539b90202f41f04362f8e9135b4994e7c0b35d2b26dc1d5620c7aadaa6ce16"
+      },
+      {
+        "path": "scratch/resource-enemy-base-preflight.json",
+        "sha256": "9bd8792896468be5e771e4857b0262c7e4ee9cb664d69ba2c444698ba7441296"
+      },
+      {
+        "path": "scratch/unresolved-resource-paths.json",
+        "sha256": "a0df4b303de99f9fbb0a5cd3e92f8473d77d831c01826e5bd11b3d798f73e10f"
+      }
+    ]
+  },
+  "excluded_tentacle_palette_followup": {
+    "classification": "strict_rejection_retained_explicit_adapter_required",
+    "paletteEvidence": {
+      "path": "scratch/tentacle-invalid-palette-analysis.json",
+      "sha256": "1b7eee821e54584ee99db0580eaeb39e8de6b05e2383819efc62ef19e9ff93c4"
+    },
+    "restEvidence": {
+      "path": "scratch/tentacle-rest-comparison.json",
+      "sha256": "ca09097da75413e3fa9334a4f36fdcde02898834132444c99481eac125a70f63"
+    },
+    "excludedDioramaRendererIds": [
+      121042,
+      121196,
+      121232,
+      121267
+    ],
+    "nativePaletteBones": 19,
+    "meshInverseBindMatrices": 20,
+    "positiveWeightIndex19VertexCount": 779,
+    "nativeVertexCount": 6842,
+    "extraMatrixUnused": false,
+    "proposedRootMInsertionMaxAbsRestError": 5.285922599938484,
+    "modernAlternative": {
+      "rendererId": 121595,
+      "bones": 20,
+      "maxAbsRestError": 2.602894495495889e-06,
+      "nativeEnemies": [
+        "krakenTentacle",
+        "krakenTentacleMirror"
+      ],
+      "status": "native valid chassis alternative; no new live validation claimed"
+    },
+    "remainingEmptyRenderers": [
+      121018,
+      121680
+    ],
+    "limits": "Old Dio variants are non-CEL; live ownership remains unknown. Do not trim the used matrix or insert Root_M blindly. Deliberate adapter and ownership verification required. No extracted native geometry added to public docs."
+  }
+}

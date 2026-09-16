@@ -1,0 +1,170 @@
+{
+  "schema": "ftkmf.model-root-visual-review-template.v1",
+  "session": "4049537c607648bfbf525e75570102ed",
+  "reviewStatus": "reviewed_direct_bossgladiator_armor_binding_motion_gameplay_observed_ragdoll_prefix_accepted_limited_art_pending",
+  "binding": {
+    "rendererPath": "armorBossGladiator",
+    "mesh": "ftkmf_glb_bronzewake_armor.glb",
+    "boneSignature": "ea49e68f33a132d821b8f00fd60d358e4634b2360c05b9a4ccd776dbe59eab6f"
+  },
+  "frames": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/95f5e5fdc7a14785b7b1e45356301865/0000.png",
+      "sha256": "071260a1e662675e31fec500e8461bde749ec69294852f34779b888c610e24ab",
+      "action": "pass",
+      "index": 0,
+      "observation": "The native enemy turn begins with all four authored body, hair, armor, and boots surfaces visible as one compact champion. The helmet, shield, and weapon remain native attachments, and the selected armor renderer is centered inside the viewport."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/95f5e5fdc7a14785b7b1e45356301865/0045.png",
+      "sha256": "1aa78b3a265ec29c6c08e212ef8f4a070f5854a5211c30fc644f5c6109cd035b",
+      "action": "pass",
+      "index": 45,
+      "observation": "The exact native AttackProf trigger has begun. Bronzewake advances with the four-part silhouette intact; the armor plates, limbs, boots, hair, and native accessories remain aligned before impact."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/95f5e5fdc7a14785b7b1e45356301865/0055.png",
+      "sha256": "7219c49c9593d22c080c00b874160069f71746f86199d183dda34f2daf8e6013",
+      "action": "pass",
+      "index": 55,
+      "observation": "A bright native impact effect covers much of both combatants. The visible outer silhouette remains continuous, but the effect prevents fine inspection of armor joints in this frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/95f5e5fdc7a14785b7b1e45356301865/0065.png",
+      "sha256": "524b19db8d7c249fe22d69b5a040a0a40fcf317121dab59ecdd6e5e3de0e6f87",
+      "action": "pass",
+      "index": 65,
+      "observation": "At close range after impact, the armor, body, hair, and boots still move together without a separated plate, inverted limb, or vertex burst. The foreground hero and status text limit the view of the lower torso."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/95f5e5fdc7a14785b7b1e45356301865/0075.png",
+      "sha256": "3eb2d7312355168b2bd3c546eb07423ced7a3dff174fbc5bdaf76c66bf3e0208",
+      "action": "pass",
+      "index": 75,
+      "observation": "Bronzewake has returned to the enemy slot after the attack. The authored parts recover to the same readable stance with no persistent offset or missing renderer."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/95f5e5fdc7a14785b7b1e45356301865/0119.png",
+      "sha256": "b0104fdfcc85eb80b0ff3e9d00b36bed948cacb7eb362c5bbe8845f04f13a21f",
+      "action": "pass",
+      "index": 119,
+      "observation": "The final complete pass frame retains the same coherent enemy silhouette at 11 HP. This confirms recovery within the sampled action window, not every proficiency or extended-session culling behavior."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/bd6bc1bc894d4d65ad17e0815cee0c0a/0000.png",
+      "sha256": "cc6f499f843bdd4a983528ca16bf985b65a3780c28f4ceb54f70c748d4d15bf2",
+      "action": "attack",
+      "index": 0,
+      "attempt": 1,
+      "observation": "The ordinary no-focus player-attack capture begins with the exact four-part target intact at 11 HP. The body and equipment silhouette are visible before damage."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/bd6bc1bc894d4d65ad17e0815cee0c0a/0023.png",
+      "sha256": "8ce666f2df148510087373a5ba8267a288958d1bc446a4cf21228b45414bb05a",
+      "action": "attack",
+      "index": 23,
+      "attempt": 1,
+      "observation": "The native DamagedHeavy response begins under a bright impact effect. The target remains visible behind the hero, but the effect and foreground overlap restrict detailed joint inspection."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/bd6bc1bc894d4d65ad17e0815cee0c0a/0030.png",
+      "sha256": "2c890fa98cb3015113ee744f1104baf7eaa328b70471cad99dd6c53cd1412a5d",
+      "action": "attack",
+      "index": 30,
+      "attempt": 1,
+      "observation": "During the heavy-hit recoil, the helmeted head, torso armor, arms, legs, and boots remain aligned. Native damage presentation is still resolving, so the displayed intermediate health is not used as the final HP measurement."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/bd6bc1bc894d4d65ad17e0815cee0c0a/0040.png",
+      "sha256": "f7115c0bd5251a7c31c1bc0ad97e781da551a879f049ccad38fa4168f19236e5",
+      "action": "attack",
+      "index": 40,
+      "attempt": 1,
+      "observation": "The later recoil pose keeps the authored plates and skinned limbs connected while the enemy returns toward its slot. No sampled tearing or disappearing part is visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/bd6bc1bc894d4d65ad17e0815cee0c0a/0050.png",
+      "sha256": "36e891946cf32b0877046980c5b603add3474a5fef42a973211ec29d705ebd95",
+      "action": "attack",
+      "index": 50,
+      "attempt": 1,
+      "observation": "Bronzewake has recovered to a stable stance at the measured final 1 HP. The complete multipart model remains present after the ordinary 11 to 1 damage outcome."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/bd6bc1bc894d4d65ad17e0815cee0c0a/0119.png",
+      "sha256": "e7377fd8c70de2b5d5a6b2ea99c83cfaeb9954a135d0f244fd7bf9f828019374",
+      "action": "attack",
+      "index": 119,
+      "attempt": 1,
+      "observation": "A later native retaliation pose remains coherent at close range. The bright effect behind the enemy limits fine surface review, while the visible arms, torso, boots, hair, and attachments stay aligned."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0000.png",
+      "sha256": "ff777b16d95cd461b3b39eca82a80210b9e6586425d2f5f1a77fe66c460d29e9",
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The explicit fixture-death capture begins with the exact target intact at 1 HP. This establishes the pre-death appearance before the separate KillSingle action."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0023.png",
+      "sha256": "90e22af5b6187310d0059bd092122906262c40e8885c4aa1be820d12091591e7",
+      "action": "kill-fixture",
+      "index": 23,
+      "observation": "The native Death trigger begins behind the expanding impact flash. The target is still present and the authored upper silhouette is visible, although the effect prevents a fine deformation verdict."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0030.png",
+      "sha256": "a00d6ac205551621126d186dbb4aa9e155061878b351af83d44732108d229c9c",
+      "action": "kill-fixture",
+      "index": 30,
+      "observation": "The 1000-damage fixture impact leaves the champion upright at the start of the native death response. Armor, body, hair, boots, and native equipment remain attached."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0040.png",
+      "sha256": "8d9d4899d10933caaa616328eaeef365997918b6a7a4443bc0b8778483f7b624",
+      "action": "kill-fixture",
+      "index": 40,
+      "observation": "The native 2HandWield_Death motion bends the champion backward and downward. The multipart authored surfaces follow the pose without a visible detached section or exploded vertices."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0050.png",
+      "sha256": "0b102a15114b8dbda67ad624e6e49a51bf7ceea13df254b0f3c7ac88345dd2ed",
+      "action": "kill-fixture",
+      "index": 50,
+      "observation": "The death animation reaches a low kneeling pose. The armor bands, torso, limbs, hair, and boots remain continuous, while the native shield and weapon lie beside the body."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0060.png",
+      "sha256": "11db6c73eed6e28e4b591a1b4c82da81695ff1b7d295ca12907dceede8230dce",
+      "action": "kill-fixture",
+      "index": 60,
+      "observation": "The body remains in its low death pose as the encounter UI changes. The exact authored silhouette is still visible and stable; camera movement begins to reduce detail."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0070.png",
+      "sha256": "1cbdf67442d305a051093a6bf1261b4b1e64424ffddcfe3bed1645c8ab02d026",
+      "action": "kill-fixture",
+      "index": 70,
+      "observation": "The camera continues its native victory transition while the ragdoll remains visible. No new mesh separation, collapse through the floor, or viewport-edge clipping appears in this sampled frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0080.png",
+      "sha256": "1ad0e01926f7fb6ae98ad85778c37ca0dc6207c2205acd77a8c6fa9014c2d4db",
+      "action": "kill-fixture",
+      "index": 80,
+      "observation": "The complete corpse silhouette remains visible behind the hero late in the retained prefix. Depth blur limits fine material review, but the body and authored equipment surfaces remain recognizable."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/67f06c7c197e47e39ed5174fb40aadfb/0089.png",
+      "sha256": "ae2ecd1bbe5d7e5f29618dc2aa421e5093ca507e0cb90efcef8f8ddf992e212e",
+      "action": "kill-fixture",
+      "index": 89,
+      "observation": "The last retained frame before controller teardown still shows the settled low corpse pose with the multipart model intact. The following uncaptured boundary is accepted only as controller loss after a pinned native Death event, so no later-frame or full-duration claim is made."
+    }
+  ],
+  "requirements": [
+    "All 21 referenced original PNGs were inspected at original resolution before this reviewed status was assigned.",
+    "Observations describe only the exact sampled frame and retain native UI, effects, occlusion, and camera limitations.",
+    "The 90-frame death prefix is explicitly incomplete and does not claim the requested 120-frame duration or ordinary lethal gameplay."
+  ]
+}

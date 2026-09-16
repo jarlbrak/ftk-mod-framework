@@ -1,0 +1,603 @@
+{
+  "status": "ONE_NATIVE_PROCEED_REACHED_EXPECTED_READY",
+  "session": "5856168eea154be3adecc2a5d1cb2330",
+  "option": "Proceed",
+  "trap": "axesPoison",
+  "beforeSlot": [
+    0,
+    3
+  ],
+  "afterSlot": [
+    0,
+    4
+  ],
+  "heroInstanceId": -235442,
+  "nativeSubmissions": 1,
+  "initialHealth": 959,
+  "laterHealth": 956,
+  "healthBoundary": "Endpoint difference only; no exact damage-source or trap-roll inference.",
+  "resultStatus": "native_ready_observed",
+  "errors": [],
+  "limits": [
+    "One native Proceed trial; Disarm remains untested.",
+    "Final fixture exposes hero/session/level/room but no independent final dungeon instance ID.",
+    "Reef resource disposal already occurred before trap; this trial is not required proof of disposal.",
+    "Initial local Ready guard incorrectly expected Trap rather than actual Trap1 and stopped before any Ready mutation; preserved."
+  ],
+  "losslessMappings": [
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/trap-case-result.json",
+      "sourceSha256": "d3d48b8c51a0c7827e507e09c8b898a8e55582ac46f985b8e203090d355c169b",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/000-trap-case-result.json.gz",
+        "sha256": "547fbee5c5bd092172738669b0564d34b24adbd590f2d2c225befecef72f25ef"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/journal.jsonl",
+      "sourceSha256": "e1a9d9444566f7fc0ac4afe12f829fc495e99ac0c9b5da3803bc8da3d9a85396",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/001-journal.jsonl.gz",
+        "sha256": "9a063bdd9585a43989be9175ae6966486b8bb8ed0e20fdb723c205ffcba3e870"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/legacy-trap-ready-guard-stopped.json",
+      "sourceSha256": "68c48c59c7ed92465e3218020c868f197735808b19629cbd2792abff0d251186",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/002-legacy-trap-ready-guard-stopped.json.gz",
+        "sha256": "6af9cfa1e7e0ff9e1d48936d72c721f5321d6cbb52580f820706c589802b3c48"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/legacy-trap-ready-v1.json",
+      "sourceSha256": "77007d7d03f2e87e84fcc3742ccf9542b54935f3de1564aa7f700d61a51d1405",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/003-legacy-trap-ready-v1.json.gz",
+        "sha256": "4e790e400553ca60a47e76aed7d91861756f15cce4d2b0e63a506b91a0884df8"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/legacy-native-trap-before-runner.json",
+      "sourceSha256": "ad646fe2be5b591d0111a333f192de569db198ee32ad7ca973687c47bac1ee6f",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/004-legacy-native-trap-before-runner.json.gz",
+        "sha256": "ec01965239e9019deba41560b6a0ddbb910d3e18fc9fc3327e961fcfdd43a7d7"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/legacy-post-trap-observation.json",
+      "sourceSha256": "2ff6c21c1d2935ea9e8b1baf0436aa3baa0eb001949ff466146d24e3df51dfce",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/005-legacy-post-trap-observation.json.gz",
+        "sha256": "af8902052686435c8d82f8fb8d750112981cb9c6a9fb401f9b8482e207274476"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/tools/ai-model-pipeline/runtime-test/trap_case.py",
+      "sourceSha256": "3f7c32e07ea68ce1f0bc95c02aea557b275c5f41b6a7862d81f2fef4e2b77d75",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/006-trap_case.py.gz",
+        "sha256": "37a313ce9ea5b727ac1b50549bb961d5c4ae1fab46843758952d51fe87242931"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/tools/ai-model-pipeline/runtime-test/TRAP-CASE.md",
+      "sourceSha256": "4d000826c187b1ee1421eb77143fd3cef3b471618ab74c14be73864270a077aa",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/007-TRAP-CASE.md.gz",
+        "sha256": "32c976ffaa975c403b20572ae4812ca1340aca238f11505c5ce32bdec558373d"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/4ec65032847a4458b37c700d07940c9f-request.json",
+      "sourceSha256": "75186b0f96f78ae1776a1e6bb22af46c25354e9d60eb3ab6ec4d03cb30336a3e",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/008-4ec65032847a4458b37c700d07940c9f-request.json.gz",
+        "sha256": "81a8b5cda629bc4621967b7df0529b82b32a1726b9f6dfe86f50778c640152e5"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/4ec65032847a4458b37c700d07940c9f.json",
+      "sourceSha256": "4b3955ed4e76ab41da0ec5a66fd78df0a89bfdf5d84a513a25a49d77790e8846",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/009-4ec65032847a4458b37c700d07940c9f.json.gz",
+        "sha256": "303ee930306446bc160ac112e2987319b7e4a2d7672a3cec2a95ae685234f1b7"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/72c9ea6556a441d1b0a502789c74c8eb-request.json",
+      "sourceSha256": "227f75ae1936a13f20047e10f275a40fe932b3b12af3066cd0d5621347425670",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/010-72c9ea6556a441d1b0a502789c74c8eb-request.json.gz",
+        "sha256": "35a34efb5c3964df315d4bf9b5b7e388849778b4d6159210d88828d2a201993e"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/72c9ea6556a441d1b0a502789c74c8eb.json",
+      "sourceSha256": "7d65ea9de468933838706efe396f95a0f7e5fae4dd03391e7ae3b21f47f2cbb1",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/011-72c9ea6556a441d1b0a502789c74c8eb.json.gz",
+        "sha256": "5f5ef4c3ca962ec594ef7085f333b758d8c5deecebc0ec89caff3ee6ce0be46c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/7e2eedd9609a4724bb0e68ec6c2f0a8a-request.json",
+      "sourceSha256": "4c735f0a1fe6372af9a3f92e1e5b760eed5f9cb6cfbb57bf9eb2534f1a1a8952",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/012-7e2eedd9609a4724bb0e68ec6c2f0a8a-request.json.gz",
+        "sha256": "a1526cfdf4163b562e34d8e8f36972a133cd49b1b292cd33e10bf0d76227c28c"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/7e2eedd9609a4724bb0e68ec6c2f0a8a.json",
+      "sourceSha256": "bcffed72430d90eba6f6698d8038035794da7c99834765a6ffd7ec9a0b66ef38",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/013-7e2eedd9609a4724bb0e68ec6c2f0a8a.json.gz",
+        "sha256": "ede27079ba0e1570691207382fb502659a2e60b2b9cf6c2b249d252a3a9bb172"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/069f614aa1434722a58f20e4add46ad1-request.json",
+      "sourceSha256": "f21fc06f15c2d7be7a1b49b4d39d3952f645d41f04e5c4d920e826b49b952e53",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/014-069f614aa1434722a58f20e4add46ad1-request.json.gz",
+        "sha256": "e8658ca9dd01352e784ab61258a5115a910b6194a74160ee75daa0c17a89dd37"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/069f614aa1434722a58f20e4add46ad1.json",
+      "sourceSha256": "4b8220e2f1bab4842d02414606451a727d26d216e17a71d36a415ba3417ec165",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/015-069f614aa1434722a58f20e4add46ad1.json.gz",
+        "sha256": "24afd15488408d4aaa4fc635fd56e6c4a5acfcd8e5d2e981337dd0f8bb39d69f"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/2a669c91c01447128f9391c0d9fe8938-request.json",
+      "sourceSha256": "56905c9f41b3fae977ae102086c7a606a53f08ced995df305369c14b91d80e85",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/016-2a669c91c01447128f9391c0d9fe8938-request.json.gz",
+        "sha256": "e8c779044ebeb6aab77a3aff57e91168c1b04cc2884a43643ef242a2c8d311b5"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/2a669c91c01447128f9391c0d9fe8938.json",
+      "sourceSha256": "acee74a78c16ff06423ede42dacebcdb97d1aa7231feec20340cdf2d138eb2e1",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/017-2a669c91c01447128f9391c0d9fe8938.json.gz",
+        "sha256": "55d6059caa1aee5c8651882e6e53156df7f8be6f71214a29bab5209a2b052daf"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/533c6a9a35dd41cdb653963ee65a9691-request.json",
+      "sourceSha256": "8cbb516387e7e0409704663e9bbacbc9b9717c3206f7aaf95d4da06d774f8ef1",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/018-533c6a9a35dd41cdb653963ee65a9691-request.json.gz",
+        "sha256": "7f6eac36337171a40f072259b43524a521448ae96dec45d85c573207cf4564fb"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/533c6a9a35dd41cdb653963ee65a9691.json",
+      "sourceSha256": "8d05659edae4cd77ff74a5e0f3d18285043448c05adad538de1befac7ac59109",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/019-533c6a9a35dd41cdb653963ee65a9691.json.gz",
+        "sha256": "53206c13bc772754a4e944b8ef49889f9782f936b0daa02a1cfdfb17850f7b45"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/31f864a39ecd4db2bb02e734b543361d-request.json",
+      "sourceSha256": "4215c190cd7f819e85c3c259420a204cc144e37ed454cca57d7d524298200f6e",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/020-31f864a39ecd4db2bb02e734b543361d-request.json.gz",
+        "sha256": "1b77f7ad3632cb885064234cbf7eae2b4c1ef34cdf16f7b18897fc1e39032f32"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/31f864a39ecd4db2bb02e734b543361d.json",
+      "sourceSha256": "485d3f877435e94975627e3d0a34205aa2362c0b0efcabc188985c9df9171410",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/021-31f864a39ecd4db2bb02e734b543361d.json.gz",
+        "sha256": "0b6e7f51ebb017d4d273f88434646d99a4067412d365d50d7a2138e01586aa8a"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/5596f3f7024444338411dd6654fffd83-request.json",
+      "sourceSha256": "384b483483bb3fe4470ee9fd45252214e374cb77cf418521dd6f0b40e7727656",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/022-5596f3f7024444338411dd6654fffd83-request.json.gz",
+        "sha256": "ebc1870b04bd2391f1be05d8f85e1cddd0054f6c78e8ce56a97f8db70440ebe3"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/5596f3f7024444338411dd6654fffd83.json",
+      "sourceSha256": "a5047d9fed4720488f75ff60e2dbaf99c735e7ba95b3cde508e2b3731fc7e389",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/023-5596f3f7024444338411dd6654fffd83.json.gz",
+        "sha256": "c11d70d3384ad72a3ea1e36c56374cf3d788ad65d8ba47bf7c1f76b73ac06b51"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/d14c9fe3a87d46e38a9af4d8d1aafae5-request.json",
+      "sourceSha256": "36405f7bd255a9950fcb9c781c1f7efd4165ee93c971868927240cfa7aa6108b",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/024-d14c9fe3a87d46e38a9af4d8d1aafae5-request.json.gz",
+        "sha256": "3d3c79b8519d48edd8c350624ef5267c837a42d310459eb2884c236bfeac69b5"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d14c9fe3a87d46e38a9af4d8d1aafae5.json",
+      "sourceSha256": "a50e6a4705db2cec1e2afb9a34f3931c788b61d43671835441d094180e1016d4",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/025-d14c9fe3a87d46e38a9af4d8d1aafae5.json.gz",
+        "sha256": "d306711f53ff8407d612a4e42534abe63c539f1d8da5e2b9abd61a346d230630"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/838bdb642f0846afb0b494bc3cdf00eb-request.json",
+      "sourceSha256": "bfd4b257d41fd528a62e53b27703475df613b5cb06abd75e70fb33f6a2dee915",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/026-838bdb642f0846afb0b494bc3cdf00eb-request.json.gz",
+        "sha256": "9e019faaf9de9157ea7db1c65b8dc0b0145775aa70584fb386db0f7b2c0b5945"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/838bdb642f0846afb0b494bc3cdf00eb.json",
+      "sourceSha256": "f628c2172667979ab70c30aaf7005439750091c516fb91e0b452c7481e22d591",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/027-838bdb642f0846afb0b494bc3cdf00eb.json.gz",
+        "sha256": "b0bb2ee386d2c3ec715cbdb969c91573c0680f62ac38d7fff055f65502713b59"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/ee71432605c6441fb737e49987eaed38-request.json",
+      "sourceSha256": "c5f9ac45a273c93c3606940bf7352c97048e9a5355e1b4471b7f8838f3bf568c",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/028-ee71432605c6441fb737e49987eaed38-request.json.gz",
+        "sha256": "26cc65e162c0b48a1caa331b23868036da63e17fc26419890f2d0ea88e688e46"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/ee71432605c6441fb737e49987eaed38.json",
+      "sourceSha256": "4a13d6ea516b41c2db1e43936bb389885621fc6b55deef94ef21576cb817e559",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/029-ee71432605c6441fb737e49987eaed38.json.gz",
+        "sha256": "4f0e402dba1ce096796ac76cdb2066d96cb8d85548acf9ed5c4fd83f829f0ddd"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/11248e40e08d470f8ebbc818bf5f592a-request.json",
+      "sourceSha256": "c538fd5b9d33f77286ec4068e1e4cda6ae83f6d2773e686900a39f49889c66d3",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/030-11248e40e08d470f8ebbc818bf5f592a-request.json.gz",
+        "sha256": "4bd99f0537cd7c8ccc8f6e1a091484d450534aea83fa0c2535e20e6acdc726a4"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/11248e40e08d470f8ebbc818bf5f592a.json",
+      "sourceSha256": "e3ee41d8e5d7c375c4cdcebb1b330e5cc9b25d13a8312dd07533f3e857f111af",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/031-11248e40e08d470f8ebbc818bf5f592a.json.gz",
+        "sha256": "ea932956be33366a3391d6d3e3207e7d9dc1d576071b347b99ca93be27ecf961"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/c9ee93764308426083a06d715d144a6f-request.json",
+      "sourceSha256": "a6db23f89d49ee52369f99d1ad3baf41c452edbe6ff305ad9c338854f503416d",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/032-c9ee93764308426083a06d715d144a6f-request.json.gz",
+        "sha256": "8fa6ff813e720356fcb64bc3d83e32ac688ccf87eb5a5bd682ed78dd2b5d098a"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/c9ee93764308426083a06d715d144a6f.json",
+      "sourceSha256": "84353a9131e326701289a885f95365a9278b6a1aaaf4d1188d7c1476f1053dd9",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/033-c9ee93764308426083a06d715d144a6f.json.gz",
+        "sha256": "f065a54f06f66c2bac46f0b6b376d58230283259b66a788e686f4009a64b5c0f"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/25599f48b478430db46a3234349b0630-request.json",
+      "sourceSha256": "97075a5bb7a8c3513eec1525e95044ba3e80a12f5148628cdb5b64ef4ad75fb3",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/034-25599f48b478430db46a3234349b0630-request.json.gz",
+        "sha256": "03a71c16e107fd20023d26daea006fccdbf5cbd12a6edf46ee094d00c585f6d6"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/25599f48b478430db46a3234349b0630.json",
+      "sourceSha256": "a9a8abc038a1781afa7abbf3e9f22c6c10d8968ef825a92563b5fbcc190d66d2",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/035-25599f48b478430db46a3234349b0630.json.gz",
+        "sha256": "9bf11917f731fe26fa0a821edd0d6eac26b0f15947a8edae1443c1c09ad9abab"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/c9bd5e1a98724303819a7dfb75fca75a-request.json",
+      "sourceSha256": "d3e04bbcd979689d063569caf7e09b2ee5482d5237ac9a149433e5b18a8a2e64",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/036-c9bd5e1a98724303819a7dfb75fca75a-request.json.gz",
+        "sha256": "ad7f5036421ee0a54f7ceb4b8cd623a33a7fe26824a4c7c000358dc92ad40a00"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/c9bd5e1a98724303819a7dfb75fca75a.json",
+      "sourceSha256": "488aeaa77067612c18172b20ca9ad99be836889a42b9b01e15eeeaada54ef3e8",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/037-c9bd5e1a98724303819a7dfb75fca75a.json.gz",
+        "sha256": "077c40a3b03c32b363faf12f8f1f947355ffdfda43a7eee9e83fdaf649fa2cfe"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/32d13a74520a4238b638b56f887b4adb-request.json",
+      "sourceSha256": "253194994e7d9d6a8b7e375032575ebd92afad4e29b57730bb7e1b4854b981e4",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/038-32d13a74520a4238b638b56f887b4adb-request.json.gz",
+        "sha256": "c93c2bd8a2906639557aa14a96635987d00ec77b0712ff1fd4372f66d8a7caac"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/32d13a74520a4238b638b56f887b4adb.json",
+      "sourceSha256": "3878b121aca20a64c9741cdcbd5f589b1182cf37040c4ef5e2cd6a53c52bcc0b",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/039-32d13a74520a4238b638b56f887b4adb.json.gz",
+        "sha256": "6272bb404d1252bcb3222725b10f8c695fa5702d77ff2cb4f584a91318f62954"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/845c0d28ef9f46a2a1184b55458ac6bd-request.json",
+      "sourceSha256": "7bf3f61a88ebcc57559286bbe8fd16298f1429dc468407babb37f27b7c844abf",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/040-845c0d28ef9f46a2a1184b55458ac6bd-request.json.gz",
+        "sha256": "d41f2e7a7f9e79aa4b032ece66d648669f1cb0a7e1771cc0a7aab148c1fb6397"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/845c0d28ef9f46a2a1184b55458ac6bd.json",
+      "sourceSha256": "60f1e436bc22dc12b678c24048c05a1bf2253e24c3afda1dbdda91143b9a40bd",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/041-845c0d28ef9f46a2a1184b55458ac6bd.json.gz",
+        "sha256": "e6d1e52256d257c9b40c41685d69ba65ad1261ffc12576144cdc794c4db32476"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/trap-case-40819728ce794cfdac919bcd33cdff9e/8cfc54f576324410a8b6e346c5a47557-request.json",
+      "sourceSha256": "24568bb06e5e00af38e6f76c229d3d6f79fb055faf3bbbfc3e112d367ac85b0d",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/042-8cfc54f576324410a8b6e346c5a47557-request.json.gz",
+        "sha256": "8551bbd1d0657271e9b92daa71a164417f80842054d8791fb2e37218779487df"
+      },
+      "compression": "gzip-lossless"
+    },
+    {
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/8cfc54f576324410a8b6e346c5a47557.json",
+      "sourceSha256": "92cad15dc653520187bb5f4ea4444f51fada325c6f3faa5803d465eacdce635e",
+      "archive": {
+        "path": "docs/evidence/native-trap-runner-v1/043-8cfc54f576324410a8b6e346c5a47557.json.gz",
+        "sha256": "49ad07ef2b7a91bb16499f5d1efb3f1699a5ffc03bf03c9b5674d4663f84c43c"
+      },
+      "compression": "gzip-lossless"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/native-trap-runner-v1/000-trap-case-result.json.gz",
+      "sha256": "547fbee5c5bd092172738669b0564d34b24adbd590f2d2c225befecef72f25ef"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/001-journal.jsonl.gz",
+      "sha256": "9a063bdd9585a43989be9175ae6966486b8bb8ed0e20fdb723c205ffcba3e870"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/002-legacy-trap-ready-guard-stopped.json.gz",
+      "sha256": "6af9cfa1e7e0ff9e1d48936d72c721f5321d6cbb52580f820706c589802b3c48"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/003-legacy-trap-ready-v1.json.gz",
+      "sha256": "4e790e400553ca60a47e76aed7d91861756f15cce4d2b0e63a506b91a0884df8"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/004-legacy-native-trap-before-runner.json.gz",
+      "sha256": "ec01965239e9019deba41560b6a0ddbb910d3e18fc9fc3327e961fcfdd43a7d7"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/005-legacy-post-trap-observation.json.gz",
+      "sha256": "af8902052686435c8d82f8fb8d750112981cb9c6a9fb401f9b8482e207274476"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/006-trap_case.py.gz",
+      "sha256": "37a313ce9ea5b727ac1b50549bb961d5c4ae1fab46843758952d51fe87242931"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/007-TRAP-CASE.md.gz",
+      "sha256": "32c976ffaa975c403b20572ae4812ca1340aca238f11505c5ce32bdec558373d"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/008-4ec65032847a4458b37c700d07940c9f-request.json.gz",
+      "sha256": "81a8b5cda629bc4621967b7df0529b82b32a1726b9f6dfe86f50778c640152e5"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/009-4ec65032847a4458b37c700d07940c9f.json.gz",
+      "sha256": "303ee930306446bc160ac112e2987319b7e4a2d7672a3cec2a95ae685234f1b7"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/010-72c9ea6556a441d1b0a502789c74c8eb-request.json.gz",
+      "sha256": "35a34efb5c3964df315d4bf9b5b7e388849778b4d6159210d88828d2a201993e"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/011-72c9ea6556a441d1b0a502789c74c8eb.json.gz",
+      "sha256": "5f5ef4c3ca962ec594ef7085f333b758d8c5deecebc0ec89caff3ee6ce0be46c"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/012-7e2eedd9609a4724bb0e68ec6c2f0a8a-request.json.gz",
+      "sha256": "a1526cfdf4163b562e34d8e8f36972a133cd49b1b292cd33e10bf0d76227c28c"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/013-7e2eedd9609a4724bb0e68ec6c2f0a8a.json.gz",
+      "sha256": "ede27079ba0e1570691207382fb502659a2e60b2b9cf6c2b249d252a3a9bb172"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/014-069f614aa1434722a58f20e4add46ad1-request.json.gz",
+      "sha256": "e8658ca9dd01352e784ab61258a5115a910b6194a74160ee75daa0c17a89dd37"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/015-069f614aa1434722a58f20e4add46ad1.json.gz",
+      "sha256": "24afd15488408d4aaa4fc635fd56e6c4a5acfcd8e5d2e981337dd0f8bb39d69f"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/016-2a669c91c01447128f9391c0d9fe8938-request.json.gz",
+      "sha256": "e8c779044ebeb6aab77a3aff57e91168c1b04cc2884a43643ef242a2c8d311b5"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/017-2a669c91c01447128f9391c0d9fe8938.json.gz",
+      "sha256": "55d6059caa1aee5c8651882e6e53156df7f8be6f71214a29bab5209a2b052daf"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/018-533c6a9a35dd41cdb653963ee65a9691-request.json.gz",
+      "sha256": "7f6eac36337171a40f072259b43524a521448ae96dec45d85c573207cf4564fb"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/019-533c6a9a35dd41cdb653963ee65a9691.json.gz",
+      "sha256": "53206c13bc772754a4e944b8ef49889f9782f936b0daa02a1cfdfb17850f7b45"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/020-31f864a39ecd4db2bb02e734b543361d-request.json.gz",
+      "sha256": "1b77f7ad3632cb885064234cbf7eae2b4c1ef34cdf16f7b18897fc1e39032f32"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/021-31f864a39ecd4db2bb02e734b543361d.json.gz",
+      "sha256": "0b6e7f51ebb017d4d273f88434646d99a4067412d365d50d7a2138e01586aa8a"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/022-5596f3f7024444338411dd6654fffd83-request.json.gz",
+      "sha256": "ebc1870b04bd2391f1be05d8f85e1cddd0054f6c78e8ce56a97f8db70440ebe3"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/023-5596f3f7024444338411dd6654fffd83.json.gz",
+      "sha256": "c11d70d3384ad72a3ea1e36c56374cf3d788ad65d8ba47bf7c1f76b73ac06b51"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/024-d14c9fe3a87d46e38a9af4d8d1aafae5-request.json.gz",
+      "sha256": "3d3c79b8519d48edd8c350624ef5267c837a42d310459eb2884c236bfeac69b5"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/025-d14c9fe3a87d46e38a9af4d8d1aafae5.json.gz",
+      "sha256": "d306711f53ff8407d612a4e42534abe63c539f1d8da5e2b9abd61a346d230630"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/026-838bdb642f0846afb0b494bc3cdf00eb-request.json.gz",
+      "sha256": "9e019faaf9de9157ea7db1c65b8dc0b0145775aa70584fb386db0f7b2c0b5945"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/027-838bdb642f0846afb0b494bc3cdf00eb.json.gz",
+      "sha256": "b0bb2ee386d2c3ec715cbdb969c91573c0680f62ac38d7fff055f65502713b59"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/028-ee71432605c6441fb737e49987eaed38-request.json.gz",
+      "sha256": "26cc65e162c0b48a1caa331b23868036da63e17fc26419890f2d0ea88e688e46"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/029-ee71432605c6441fb737e49987eaed38.json.gz",
+      "sha256": "4f0e402dba1ce096796ac76cdb2066d96cb8d85548acf9ed5c4fd83f829f0ddd"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/030-11248e40e08d470f8ebbc818bf5f592a-request.json.gz",
+      "sha256": "4bd99f0537cd7c8ccc8f6e1a091484d450534aea83fa0c2535e20e6acdc726a4"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/031-11248e40e08d470f8ebbc818bf5f592a.json.gz",
+      "sha256": "ea932956be33366a3391d6d3e3207e7d9dc1d576071b347b99ca93be27ecf961"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/032-c9ee93764308426083a06d715d144a6f-request.json.gz",
+      "sha256": "8fa6ff813e720356fcb64bc3d83e32ac688ccf87eb5a5bd682ed78dd2b5d098a"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/033-c9ee93764308426083a06d715d144a6f.json.gz",
+      "sha256": "f065a54f06f66c2bac46f0b6b376d58230283259b66a788e686f4009a64b5c0f"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/034-25599f48b478430db46a3234349b0630-request.json.gz",
+      "sha256": "03a71c16e107fd20023d26daea006fccdbf5cbd12a6edf46ee094d00c585f6d6"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/035-25599f48b478430db46a3234349b0630.json.gz",
+      "sha256": "9bf11917f731fe26fa0a821edd0d6eac26b0f15947a8edae1443c1c09ad9abab"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/036-c9bd5e1a98724303819a7dfb75fca75a-request.json.gz",
+      "sha256": "ad7f5036421ee0a54f7ceb4b8cd623a33a7fe26824a4c7c000358dc92ad40a00"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/037-c9bd5e1a98724303819a7dfb75fca75a.json.gz",
+      "sha256": "077c40a3b03c32b363faf12f8f1f947355ffdfda43a7eee9e83fdaf649fa2cfe"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/038-32d13a74520a4238b638b56f887b4adb-request.json.gz",
+      "sha256": "c93c2bd8a2906639557aa14a96635987d00ec77b0712ff1fd4372f66d8a7caac"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/039-32d13a74520a4238b638b56f887b4adb.json.gz",
+      "sha256": "6272bb404d1252bcb3222725b10f8c695fa5702d77ff2cb4f584a91318f62954"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/040-845c0d28ef9f46a2a1184b55458ac6bd-request.json.gz",
+      "sha256": "d41f2e7a7f9e79aa4b032ece66d648669f1cb0a7e1771cc0a7aab148c1fb6397"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/041-845c0d28ef9f46a2a1184b55458ac6bd.json.gz",
+      "sha256": "e6d1e52256d257c9b40c41685d69ba65ad1261ffc12576144cdc794c4db32476"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/042-8cfc54f576324410a8b6e346c5a47557-request.json.gz",
+      "sha256": "8551bbd1d0657271e9b92daa71a164417f80842054d8791fb2e37218779487df"
+    },
+    {
+      "path": "docs/evidence/native-trap-runner-v1/043-8cfc54f576324410a8b6e346c5a47557.json.gz",
+      "sha256": "49ad07ef2b7a91bb16499f5d1efb3f1699a5ffc03bf03c9b5674d4663f84c43c"
+    }
+  ]
+}

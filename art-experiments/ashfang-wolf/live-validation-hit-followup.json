@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "asset": "Ashfang",
+  "iteration": "nonlethal hit gap followup; unchanged geometry",
+  "status": "nonlethal native hit observed; visible deformation limited by hero occlusion",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "b3322a5d049e4638acecf30928de8d06",
+    "case": "cf3231a54a034b9daa698198ff407a3d",
+    "mode": "next-case",
+    "enemy": "ftkmf_modeltest_ashfang",
+    "class": null,
+    "profile": {
+      "key": "ftkmf_modeltest_ashfang",
+      "baseEnemy": "wolfA",
+      "displayName": "Ashfang",
+      "combatProfile": "272f9d27d8096f2d242c075c1b43e0983619bda200e576ff2059c4df829515dd",
+      "renderers": [
+        {
+          "rendererPath": "wolf01",
+          "glbFile": "ashfang_rigged.glb",
+          "textureFile": "ashfang_basecolor.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "c0107c64d4e1779b8e9336bb030fc479941ed71d14c0fa6ef32ef7b441ae24ef",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "900f",
+  "helperVersionPrefix": "434",
+  "assetHashes": {
+    "ashfang_rigged.glb": "6b490f9240f2e61cae99232805cdac5c447409cadc568cd0e41190d4481d3eae",
+    "ashfang_basecolor.png": "e05aa782e3821cdef8ed72ffe382acef6bd9760030636e944ed4c4de604e0aab"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-cf3231a54a034b9daa698198ff407a3d/journal.jsonl",
+    "sha256": "5447ffce5a430a136fb4205d17ac1400fcf90fe0c9b814485d59d54f257cd5ca"
+  },
+  "captures": [
+    {
+      "kind": "nonlethal-hit",
+      "case": "a89e8cd887284aee869d72e6fd313982",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/3aa64986af2d4147af4b3c7faa87ae54.json",
+        "sha256": "6421ad8fa54ac611dbd4b47035346e028e1f623dc54727561cbd399489454ddb"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-a89e8cd887284aee869d72e6fd313982/journal.jsonl",
+        "sha256": "c309778432f3a4528121d798a484de0e02b2f65175172019ca167c26f6c94103"
+      },
+      "summary": {
+        "path": "art-experiments/ashfang-wolf/live-hit-followup/nonlethal-hit-summary.json",
+        "sha256": "d09c615907058eeb2d9443fc9ba9e53e53e5c8382d684137f7876ab7792380cd"
+      },
+      "video": {
+        "path": "art-experiments/ashfang-wolf/live-hit-followup/nonlethal-hit.mp4",
+        "sha256": "471887ba221bfae5cb6aa0a1fb53afa1394ef79fa1f465bf65d2d0a731e70b20"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/ashfang-wolf/live-hit-followup/nonlethal-hit-0030.png",
+          "sha256": "26356d797a238bf82cddb6211ea80d75ff834dad00c08e056e0aea6ae5abcc1f"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        50
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 91,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 47.30219650268555,
+              "lastNormalizedTime": 49.5461540222168,
+              "gameSeconds": 2.199981689453125
+            },
+            {
+              "firstFrame": 38,
+              "lastFrame": 67,
+              "firstNormalizedTime": 0.3416256308555603,
+              "lastNormalizedTime": 3.0531246662139893,
+              "gameSeconds": 2.6583251953125
+            },
+            {
+              "firstFrame": 84,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.08281107246875763,
+              "lastNormalizedTime": 3.3553097248077393,
+              "gameSeconds": 3.208343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "damaged_wolf"
+          ],
+          "sampleCount": 13,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 37,
+              "firstNormalizedTime": 0.10630067437887192,
+              "lastNormalizedTime": 0.9313008189201355,
+              "gameSeconds": 1.100006103515625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_wolf"
+          ],
+          "sampleCount": 16,
+          "occurrences": [
+            {
+              "firstFrame": 68,
+              "lastFrame": 83,
+              "firstNormalizedTime": 0.11148648709058762,
+              "lastNormalizedTime": 0.9476349353790283,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "d14284f9decd4ff6a51f5c23b7c87170",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/e3537eb804794b79859e5a54788427ec.json",
+        "sha256": "66ac1e4ad0a5d723fc4a1de43a48ed13c993e8e15545e9288769c909a683b245"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-d14284f9decd4ff6a51f5c23b7c87170/journal.jsonl",
+        "sha256": "5a2738dcd5a8bee38b558633532289afb4c9d02f2e48e0415e2d777e3ab41863"
+      },
+      "summary": {
+        "path": "art-experiments/ashfang-wolf/live-hit-followup/kill-fixture-death-summary.json",
+        "sha256": "be4d203613850a0951e9e27841a269d4b14b52dddfcae4cb9ec989dc95f4d96c"
+      },
+      "video": {
+        "path": "art-experiments/ashfang-wolf/live-hit-followup/kill-fixture-death.mp4",
+        "sha256": "74951af3baf621028bb99e20d9e743116522007313cf941a524ea6d578ae3319"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/ashfang-wolf/live-hit-followup/kill-fixture-death-0040.png",
+          "sha256": "b9e48f87da3bdc10f44defe467be6eb6b7f235682d01790050c7709a1f980b0a"
+        },
+        {
+          "path": "art-experiments/ashfang-wolf/live-hit-followup/kill-fixture-death-0060.png",
+          "sha256": "7c2cea9696078b71626c4084673ec98aedfc83b0810526e5d5719b28392c3f64"
+        }
+      ],
+      "hpBeforeAfter": [
+        50,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 88.16055297851562,
+              "lastNormalizedTime": 90.49800872802734,
+              "gameSeconds": 2.291656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathHeavy_wolf"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10999999940395355,
+              "lastNormalizedTime": 0.10999999940395355,
+              "gameSeconds": 8.524993896484375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Ordinary hit deals8 damage but reviewed30 is mostly hero-occluded. Wolf rolls/collapses at death40/60; thin legs and fins remain existing art limitations.",
+    "limits": "No full-body hit deformation claim from occluded view. Thin legs/fins, culling and all-controller variants remain art/coverage limitations."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "afterCollect": {
+      "path": "scratch/ashfang-followup-after-collect1.json",
+      "sha256": "a64438ac9df792809a981e774c56b8b9f1a6d30e708a4d592600a8467d299ffa"
+    },
+    "result": "one guarded Collect; strict Ready level0 room3"
+  },
+  "historicalEvidencePreserved": "Prior Ashfang original evidence remains unchanged."
+}

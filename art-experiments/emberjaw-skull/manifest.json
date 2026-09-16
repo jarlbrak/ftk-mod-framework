@@ -1,0 +1,177 @@
+{
+  "name": "Emberjaw",
+  "native_chassis": "skullA",
+  "art_status": "Studio-reviewed original multipart prototype; live acceptance pending",
+  "native_surface_copied": false,
+  "assignments": [
+    {
+      "renderer_path": "ChaosSkullBottom",
+      "reference_renderer": 121483,
+      "glb": "emberjaw_bottom.glb",
+      "texture": "emberjaw_basecolor.png"
+    },
+    {
+      "renderer_path": "ChaosSkullTop",
+      "reference_renderer": 121577,
+      "glb": "emberjaw_top.glb",
+      "texture": "emberjaw_basecolor.png"
+    }
+  ],
+  "weight_rationale": "Cranium/horns rigid to Root_M; original socket rim vertices use native eye landmark joints, cavity/iris their eye root; upper arch/teeth use upper lip bones; jaw sides interpolate Jaw_Bone and corresponding lower lip, chin uses M_LowerLip. No nearest-surface weight transfer.",
+  "remaining": [
+    "Studio review",
+    "Live exact two-renderer binding",
+    "Native idle/attack/hit/death and animated culling/material review"
+  ],
+  "parts": [
+    {
+      "name": "emberjaw_top",
+      "vertices": 5127,
+      "triangles": 1709,
+      "palette_joints": 22,
+      "max_bind_rest_error": 0.0,
+      "blender_reopen_max_bind_rest_error": 0.0,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.7970994710922241,
+        1.082589030265808,
+        -0.6791656017303467
+      ],
+      "bind_bounds_max": [
+        0.7970994710922241,
+        3.1047370433807373,
+        1.0549999475479126
+      ],
+      "blender_roundtrip_glb_sha256": "d12af39ee0aacc6a324da6c388bba31a60f910230d4e85c90c56fd213457cbd2"
+    },
+    {
+      "name": "emberjaw_bottom",
+      "vertices": 1044,
+      "triangles": 348,
+      "palette_joints": 20,
+      "max_bind_rest_error": 3.695665640179868e-08,
+      "blender_reopen_max_bind_rest_error": 3.695665640179868e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.654072642326355,
+        0.5799999833106995,
+        0.11535245925188065
+      ],
+      "bind_bounds_max": [
+        0.654072642326355,
+        1.4964685440063477,
+        0.9120000004768372
+      ],
+      "blender_roundtrip_glb_sha256": "616af4562676e0b5e61a03df89a2f71693d979d0cd7974083e0e5f9c1c281e24"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121577,
+      "local_reference_path": "scratch/skeleton-audit/121577/reference.npz",
+      "sha256": "12b42e4bc00adcabdb177a295b00ad6d8749032bd90d23d037c4bfe677f6f4e2"
+    },
+    {
+      "renderer_id": 121483,
+      "local_reference_path": "scratch/skeleton-audit/121483/reference.npz",
+      "sha256": "bddfd04f788386ccad948cc6ede2035d34b29c96a7c9a9ab60974534de5fc30d"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for both parts",
+    "saved_blender_reopen_export": "pass for both parts",
+    "native_bind_bounds": "both original surfaces contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "Parent reviewed hero: recognizable stylized skull, clear independent jaw/eye sockets, readable ivory/obsidian contrast. Oversized cartoonish brow retained for prototype FTK tone. Studio-only approval for these hashes; native combat untested.",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "60f71b2c7f604d201ebdc1de06412feeb194f5debbd12009171083c1617e14aa",
+      "bytes": 4605
+    },
+    "build_blender.py": {
+      "sha256": "1ed18dd29007c3d084202936cec902ed819062d56698035793c07fa5dacdafd4",
+      "bytes": 5556
+    },
+    "build_geometry.py": {
+      "sha256": "b1243098ecc20212b2ae3a42155d1f8b97533d72ef90804e2753ab1018253160",
+      "bytes": 9332
+    },
+    "emberjaw-studio.blend": {
+      "sha256": "31f4fb8372d20fb46f921a808686fec1e2b1ed87c023f22003ebc749c4cf9353",
+      "bytes": 192782
+    },
+    "emberjaw_basecolor.png": {
+      "sha256": "eb5d336e08ea85c8b5b759fa1bd02c7104ac16ef097fcfb4a027e1951fbae188",
+      "bytes": 265
+    },
+    "emberjaw_bottom.blend": {
+      "sha256": "d88ddf55b7730c73e06650f3fd7aba94ed108e7fe6b58de72a6d3dd3fd6b4f24",
+      "bytes": 122321
+    },
+    "emberjaw_bottom.glb": {
+      "sha256": "5b871353ea35c091b7eef4450232d59d5bfc4e1a2fe9b65e823349e6a936d438",
+      "bytes": 63760
+    },
+    "emberjaw_bottom.pieces.json": {
+      "sha256": "8913be9a2852770f0f19ec7943eaebff8586ef19436b478a6e949fd78436c605",
+      "bytes": 995
+    },
+    "emberjaw_bottom.source.json": {
+      "sha256": "45b00f160c974733b6b21938af86b9c4acf306d60ac2f033b0d8545e94a837dc",
+      "bytes": 170445
+    },
+    "emberjaw_bottom.validation.json": {
+      "sha256": "3df63f5f860e0a306da5813203c3037b412caf89a2cde9a10953cca502c2c5e1",
+      "bytes": 788
+    },
+    "emberjaw_top.blend": {
+      "sha256": "1b0a3d258587e7ab44229e55ba707f72a8615781f7e4f4fcaf9d6fe43f9f680b",
+      "bytes": 176561
+    },
+    "emberjaw_top.glb": {
+      "sha256": "5ad303859323c0a918505ea7e071593a6a336bf50fb0f89f48a99c6f0a58d880",
+      "bytes": 300756
+    },
+    "emberjaw_top.pieces.json": {
+      "sha256": "a2c387a464e6f61af0d345dd9870c4911f0fd9fa7dcb0fb3f227f7dcde7e995b",
+      "bytes": 2999
+    },
+    "emberjaw_top.source.json": {
+      "sha256": "f798cc7449ed3783cd65f2baff692ee342bd450f67b5d2377b600f529d040654",
+      "bytes": 791654
+    },
+    "emberjaw_top.validation.json": {
+      "sha256": "6eb4de771922a97d4e6e642cc96c08c2a72ed8c7f8c69f7fd0e403af294e674f",
+      "bytes": 771
+    },
+    "finalize_manifest.py": {
+      "sha256": "e87948d166d3a3ad128f488fc9483b228c76f6777107498197039e59605fe20f",
+      "bytes": 2447
+    },
+    "hero.png": {
+      "sha256": "f983248220c0521a0f122c2ffa38624e895c31bea20f34f534f7e45093c72a78",
+      "bytes": 1075448
+    },
+    "runtime-profile.json": {
+      "sha256": "383c2914e6d908dd1a8b0be028294b02afe1bbae71b2bd6b134a4f55f529eb03",
+      "bytes": 590
+    },
+    "side.png": {
+      "sha256": "567d486def7ecd5689b68b395adf6b7554fe7841d4c5d700d69d6d243a2c4957",
+      "bytes": 1060337
+    }
+  },
+  "live_v1": {
+    "status": "integrated_usable_original_prototype_observed_final_polish_pending",
+    "evidence": "live-validation.json",
+    "media": "live/",
+    "scope": "Original parts integrated in native combat; final color/effect readability, culling, and full visible death review pending."
+  },
+  "live_native_scale": {
+    "path": "art-experiments/emberjaw-skull/live-validation-native-scale.json",
+    "sha256": "268c403f31e7f1fa57f34947b46fc9bd727747fd9844f3c84c27ac2a448b0c0b"
+  }
+}

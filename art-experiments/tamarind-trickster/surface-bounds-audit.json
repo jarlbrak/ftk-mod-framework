@@ -1,0 +1,186 @@
+{
+  "status": "PASS_ORIGINAL_CLOSED_PIECES_OUTWARD_AND_BIND_BOUNDS",
+  "pieceVolumes": [
+    {
+      "piece": "Continuous brown torso",
+      "signedVolume": 0.06042627440819807
+    },
+    {
+      "piece": "Rounded monkey skull",
+      "signedVolume": 0.024435587765171077
+    },
+    {
+      "piece": "Cream upper muzzle",
+      "signedVolume": 0.0061209278717868415
+    },
+    {
+      "piece": "Articulated lower jaw",
+      "signedVolume": 0.003282214041470216
+    },
+    {
+      "piece": "Dark nose",
+      "signedVolume": 0.0003426204222912839
+    },
+    {
+      "piece": "Dark seated eye -1",
+      "signedVolume": 0.00017960728689914014
+    },
+    {
+      "piece": "Small eye glint -1",
+      "signedVolume": 2.047817956428393e-06
+    },
+    {
+      "piece": "Rounded ear -1",
+      "signedVolume": 0.000812168014552396
+    },
+    {
+      "piece": "Ear inset -1",
+      "signedVolume": 8.428818708690404e-05
+    },
+    {
+      "piece": "Swept brow -1",
+      "signedVolume": 0.00019445396262280027
+    },
+    {
+      "piece": "Dark seated eye 1",
+      "signedVolume": 0.00017960728689913664
+    },
+    {
+      "piece": "Small eye glint 1",
+      "signedVolume": 2.0478179564413004e-06
+    },
+    {
+      "piece": "Rounded ear 1",
+      "signedVolume": 0.0008121680145523957
+    },
+    {
+      "piece": "Ear inset 1",
+      "signedVolume": 8.42881870868982e-05
+    },
+    {
+      "piece": "Swept brow 1",
+      "signedVolume": 0.00014552721020887844
+    },
+    {
+      "piece": "Articulated tapered tail",
+      "signedVolume": 0.008683540448098284
+    },
+    {
+      "piece": "Soft shoulder R",
+      "signedVolume": 0.007407171321307834
+    },
+    {
+      "piece": "Long forelimb R",
+      "signedVolume": 0.012337180929326957
+    },
+    {
+      "piece": "Broad hand fingers R",
+      "signedVolume": 0.0025247326885087912
+    },
+    {
+      "piece": "Articulated thumb R",
+      "signedVolume": 0.0006583451770618987
+    },
+    {
+      "piece": "Haunch and shin R",
+      "signedVolume": 0.007531210098464386
+    },
+    {
+      "piece": "Long gripping foot R",
+      "signedVolume": 0.0017945542036630943
+    },
+    {
+      "piece": "Soft shoulder L",
+      "signedVolume": 0.007407170571178089
+    },
+    {
+      "piece": "Long forelimb L",
+      "signedVolume": 0.012337180568935728
+    },
+    {
+      "piece": "Broad hand fingers L",
+      "signedVolume": 0.002524613304168155
+    },
+    {
+      "piece": "Articulated thumb L",
+      "signedVolume": 0.0006591864249495512
+    },
+    {
+      "piece": "Haunch and shin L",
+      "signedVolume": 0.007531210419481325
+    },
+    {
+      "piece": "Long gripping foot L",
+      "signedVolume": 0.0017945540519904608
+    }
+  ],
+  "nativeBoundsContained": true,
+  "boundsMin": [
+    -1.1442379944798737,
+    0.005094514556463689,
+    -0.9905891132354744
+  ],
+  "boundsMax": [
+    1.1442380059114874,
+    1.3963,
+    0.38238486503774005
+  ],
+  "nativeBoundsMin": [
+    -1.1526097059249878,
+    -0.00029606022241424057,
+    -1.0207372996048023
+  ],
+  "nativeBoundsMax": [
+    1.1526063015798034,
+    1.419490933418274,
+    0.40638902141144384
+  ],
+  "boneCount": 42,
+  "weightedBones": [
+    "Root_M",
+    "Tail1",
+    "Tail2",
+    "Tail3",
+    "Tail4",
+    "joint7",
+    "BackA_M",
+    "BackB_M",
+    "Chest_M",
+    "Scapula_R",
+    "Shoulder_R",
+    "Elbow_R",
+    "Wrist_R",
+    "MiddleFinger1_R",
+    "MiddleFinger2_R",
+    "ThumbFinger1_R",
+    "Neck_M",
+    "Head_M",
+    "Jaw",
+    "joint2",
+    "Scapula_L",
+    "Shoulder_L",
+    "Elbow_L",
+    "Wrist_L",
+    "MiddleFinger1_L",
+    "MiddleFinger2_L",
+    "ThumbFinger1_L",
+    "Hip_R",
+    "Knee_R",
+    "Ankle_R",
+    "MiddleToe1_R",
+    "Hip_L",
+    "Knee_L",
+    "Ankle_L",
+    "MiddleToe1_L"
+  ],
+  "unweightedBones": [
+    "MiddleFinger3_R",
+    "ThumbFinger2_R",
+    "Hair_M",
+    "MiddleFinger3_L",
+    "ThumbFinger2_L",
+    "MiddleToe2_R",
+    "MiddleToe2_L"
+  ],
+  "method": "Each authored tube/ellipsoid is a capped closed piece. Positive signed volume checked separately from triangle-normal agreement. Separate pieces intentionally overlap at joints; this is not a watertight-union claim."
+}

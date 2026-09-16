@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "nativeChassis": "seaKing",
+  "targetRendererId": 121357,
+  "rendererPath": "enSeaKing",
+  "boneCount": 60,
+  "boneNamesSha256": "d7452ee52aacbfe203a21f2001538e3feea9220c2e9a2668cd7776835d4913ad",
+  "inverseBindMatricesSha256": "ed19d8e000904d566296e6b9b52a89bf61d30477855f9b7a575c78571ec9f976",
+  "sourceSha256": "aff23c4895e2fc8f51b8a6404d4887e977c6d60bc6fec56f43fd7161bc086db8",
+  "reference": {
+    "path": "scratch/skeleton-audit/121357/reference.npz",
+    "sha256": "93350a25f1a51c1315933f0fc75bfcd887691a62bb34a9b1ca13cbddb298d5b2"
+  },
+  "bindingLandmarks": {
+    "Root_M": [
+      -3.280066880614731e-25,
+      0.0601530596613884,
+      -1.6016795535977217e-39
+    ],
+    "Chest_M": [
+      -2.2012450528541628e-23,
+      4.0906662940979,
+      0.041123561561107635
+    ],
+    "Neck_M": [
+      -1.1340791104881495e-23,
+      6.892679328604905,
+      -0.4895481544307591
+    ],
+    "Head_M": [
+      4.186582051114478e-23,
+      7.57376766204834,
+      -0.32358142733573914
+    ],
+    "Hair_M": [
+      4.0200882041806296e-23,
+      9.203104019165039,
+      0.1523996740579605
+    ],
+    "Wrist_R": [
+      6.409623928108334,
+      6.246489726401645,
+      -0.4504760611647034
+    ],
+    "Wrist_L": [
+      -6.409623922490562,
+      6.246489734408959,
+      -0.4504760002643481
+    ],
+    "Hip_R": [
+      1.1058063507080078,
+      -0.005195577535955502,
+      0.0015761070522820665
+    ],
+    "Hip_L": [
+      -1.1058063507080078,
+      -0.005195577545254343,
+      0.0015761071428215697
+    ]
+  },
+  "authoringBoundary": "The tall Hair_M bind landmark is retained in the palette but deliberately carries no Tidecrown surface. The visible crown is head-bound because Hair_M is a zero-native-surface-weight palette entry above the skull.",
+  "scope": "Exact palette and bind identity for seaKing/enSeaKing. It does not establish source-surface similarity, animation safety, portrait framing, material behavior, or live art acceptance."
+}

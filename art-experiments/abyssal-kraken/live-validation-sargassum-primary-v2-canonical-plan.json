@@ -1,0 +1,97 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/abyssal-kraken/live-validation-sargassum-primary-v2-canonical",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-de6dafc0ad114694a6dcb287692f08a8/case-result.json",
+  "visualReview": "scratch/model-route-aae2ba644a16c223-directenemy-root-review-reviewed.json",
+  "assetFiles": [
+    "art-experiments/abyssal-kraken/sargassum-kraken-tentacle-v2.glb",
+    "art-experiments/abyssal-kraken/sargassum-kraken-tentacle-v2.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/abyssal-kraken/runtime-profiles.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-aae2ba644a16c223-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-41ae60832119455196717a299d3a85d4/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-41ae60832119455196717a299d3a85d4/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "krakenTentacle",
+        "mesh": "ftkmf_glb_sargassum-kraken-tentacle-v2.glb",
+        "boneSignature": "01c1b372052d71050f30a65512c4578a217e10ea3a9e777e7a985a0314ed78bd"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "krakenTentacle",
+        "mesh": "ftkmf_glb_sargassum-kraken-tentacle-v2.glb",
+        "boneSignature": "01c1b372052d71050f30a65512c4578a217e10ea3a9e777e7a985a0314ed78bd"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "krakenTentacle",
+        "mesh": "ftkmf_glb_sargassum-kraken-tentacle-v2.glb",
+        "boneSignature": "01c1b372052d71050f30a65512c4578a217e10ea3a9e777e7a985a0314ed78bd"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V2 canonical exact primary route",
+    "displayName": "Sargassum Lash V2",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "krakenTentacle",
+    "nativeChassis": "krakenTentacle",
+    "rendererPaths": [
+      "krakenTentacle"
+    ],
+    "sourceRendererIds": [
+      121595
+    ],
+    "binding": {
+      "rendererPath": "krakenTentacle",
+      "mesh": "ftkmf_glb_sargassum-kraken-tentacle-v2.glb",
+      "boneSignature": "01c1b372052d71050f30a65512c4578a217e10ea3a9e777e7a985a0314ed78bd"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact directEnemy source krakenTentacle, CEL enKrakenTentacleNew(Clone), motion renderer krakenTentacle and source renderer 121595 only. This archive grants no inheritance to krakenTentacleMirror, a Sea King tentacle, krakenHead or another renderer topology.",
+      "The ordinary zero-focus attack used the native bluntSmithHammer without a skill cap or damage fixture and produced native Damaged for 8 HP, from 162 to 154. The disposable party maximum-HP fortification remained active for test survival and is not representative hero balance.",
+      "The native pass action records AttackCrit and Tentacle_Attack2_M on the exact enemy renderer while hero HP changes from 999 to 989. This is sampled native enemy gameplay under the survival fixture, not a balance claim.",
+      "The explicit KillSingle fixture reduced enemy HP from 154 to 0 with recorded native 1000 damage and a Death trigger. It is fixture death evidence, not ordinary lethal gameplay.",
+      "The source has m_DoRagdoll false with zero rigidbodies. Death is animator-driven: Tentacle_Death is observed from retained frames 30 through 89, followed by an inactive, not-visible renderer and disabled animator at retained frame 90.",
+      "Pass and ordinary attack each retain all requested 120 frames. The death capture retains an accepted 91-frame prefix and terminates because the renderer is destroyed before the next requested sample. Exact identity is stable in all 331 retained frames; this boundary does not establish full death duration, cleanup causality, corpse lifetime or final disposal.",
+      "Strict Ready succeeded at dungeon level 0, room 2, with one active Ready button. No Collect action was taken and this archive makes no Collect claim.",
+      "Seventeen selected original PNGs were reviewed. Native effects, combat UI, foreground overlap and fixed-camera cropping limit fine inspection in stated frames; the remaining 314 capture PNGs are preserved by hash but were not individually reviewed.",
+      "The profile preserves native CEL scale 1.0 and a Standard matKraken1 material using the authored texture with emission disabled and no emission map. This route does not establish portrait pixels, other cameras, other resolutions, collision or all-angle culling.",
+      "This isolated dungeon trial does not prove every Kraken animation, alternate materials, long-session resource lifetime, inheritance to another Kraken source, full campaign progression or finished-art acceptance."
+    ]
+  }
+}

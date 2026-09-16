@@ -1,0 +1,158 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/bronzehollow-sentinel/live-validation-v4",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-f95cd7dd641e4f6ab678e26f9d4a1d1b/case-result.json",
+  "visualReview": "scratch/model-route-853432a7c217ff04-directenemy-native-cap-root-review.json",
+  "assetFiles": [
+    "art-experiments/bronzehollow-sentinel/bronzehollow.glb",
+    "art-experiments/bronzehollow-sentinel/bronzehollow_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/bronzehollow-sentinel/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-853432a7c217ff04-directenemy-native-cap-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-818e9f53f4b6406da1f0ceaa30cc8f16/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-818e9f53f4b6406da1f0ceaa30cc8f16/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-1": {
+      "label": "attack-attempt-1",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-2": {
+      "label": "attack-attempt-2",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-3": {
+      "label": "attack-attempt-3",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-4": {
+      "label": "attack-attempt-4",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-5": {
+      "label": "attack-attempt-5",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-6": {
+      "label": "attack-attempt-6",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-7": {
+      "label": "attack-attempt-7",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "attack-attempt-8": {
+      "label": "attack-attempt-8",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "deathKnight",
+        "mesh": "ftkmf_glb_bronzehollow.glb",
+        "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V4",
+    "displayName": "Bronzehollow Sentinel",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "deathknightA",
+    "nativeChassis": "deathknightA",
+    "rendererPaths": [
+      "deathKnight"
+    ],
+    "sourceRendererIds": [
+      121217
+    ],
+    "binding": {
+      "rendererPath": "deathKnight",
+      "mesh": "ftkmf_glb_bronzehollow.glb",
+      "boneSignature": "1232b1668353c19f70fb07532f302a9ea056f88a6a5c91afc43920b7fbeff383"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native deathknightA / deathKnight / renderer 121217 body assignment only; no sibling Death Knight, resource rig, alternate renderer, or topology receives credit from this record.",
+      "The custom GLB replaces the deathKnight body renderer. The horned helmet, shield, and mace visible in combat are retained native equipment and are not original Bronzehollow geometry.",
+      "The first seven ordinary zero-focus attempts preserved HP 45 and returned native Block with damage 0; attempt 8 returned native Damaged with damage 1 and reduced HP from 45 to 44. The disposable fixture capped only the equipped bluntSmithHammer Toughness attack skill at the native 0.95 cap, so the observed combat balance is not representative.",
+      "Death used the explicit KillSingle fixture for 988 damage from HP 44 to 0 and is not ordinary lethal-damage evidence.",
+      "The native death path enabled the source ragdoll: eleven retained rigidbodies became dynamic after the Death trigger, and reviewed samples show a coherent prone custom body. This establishes only the sampled fixture handoff and retained capture interval.",
+      "Nineteen selected original PNGs were reviewed; the remaining 1,181 captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "Native equipment, effects, slot icons, the foreground hero, and the loot panel obscure portions of the attack, hit, and death sequences. No reviewed frame showed a detached authored body surface, missing limb, residual stretch, obvious body-floor penetration, or viewport clipping outside the native attack travel above the camera.",
+      "Other native attacks, detailed accessory clearance, portrait, collision, extended culling, physics sleeping, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

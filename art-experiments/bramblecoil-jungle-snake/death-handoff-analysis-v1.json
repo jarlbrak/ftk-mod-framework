@@ -1,0 +1,77 @@
+{
+  "status": "SOURCE_AND_LIVE_RECONCILED",
+  "subject": "Bramblecoil Viper / snakeJungleC normal-death native handoff",
+  "sourceAsset": {
+    "resourcesAssetsSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+    "prefab": "enSnakeJungleC",
+    "cel": "enSnakeJungleC",
+    "renderer": "enJungleSnakeC",
+    "rendererId": 121424,
+    "controller": "snakeController",
+    "fallOffComponentId": 139161
+  },
+  "normalDeath": {
+    "entry": "CharacterEventListener.CombatTrigger(Death)",
+    "clip": "Snake_DeathBig",
+    "result": "FallOffLimb swaps slot 0 to matCutOutInvisible, activates/reparents 13 quetzalPiece fragments, and deactivates enJungleSnakeC.",
+    "customBodyResult": "The framework-owned Bramblecoil renderer is the child target and becomes inactive. Native fragment meshes are not copied into the original asset."
+  },
+  "rawAnimatorPlayback": {
+    "state": "Base Layer.DEATHLIGHT",
+    "clip": "Snake_Death",
+    "event": "DeathFallOff",
+    "eventSeconds": 0.09893538802862167,
+    "whatWasTested": "RuntimeModelTest.play calls Animator.Play only; it does not call CharacterEventListener.CombatTrigger.",
+    "whatTheCaptureProves": "With a stale/non-DeathLight trigger marker, Snake_Death dispatches DeathFallOff and executes the exact FallOffLimb handoff.",
+    "notEstablished": "This capture is not a genuine CombatTrigger(DeathLight) result and makes no DeathLight gameplay or ordinary-lethal claim.",
+    "semanticDeathLightSourceFinding": "CharacterEventListener.DeathFallOff returns when its last trigger is DeathLight or DeathRevive. A genuine DeathLight trigger must be captured through that path."
+  },
+  "liveEvidence": {
+    "normalKillSingleFixture": {
+      "path": "scratch/bramblecoil-death-fixture-v1-20260911-173037.json",
+      "sha256": "2c9ad59410a40a3630b3437aca2a2aa4c842d8e8c77874103318b3fa61b6743e",
+      "bytes": 1862
+    },
+    "rawStatePlaybackSummary": {
+      "path": "scratch/bramblecoil-deathlight-playback-v1-20260911-173830.json",
+      "sha256": "ba6f9d156a9404662bf4ab687bf27c8a0c4a10b2ab2df88ab6c8f5cd7d1e0b28",
+      "bytes": 78556
+    },
+    "rawStatePlayback": {
+      "path": "scratch/mirewarden-game/model-test-output/e50efb99cc9a4588824fd759ed2f63a4.json",
+      "sha256": "fff7658e56871c4236014b508a763da8fa61acaff4a1f286dbc68adc9276dddb",
+      "bytes": 6837016
+    },
+    "rawStateTiming": [
+      {
+        "sample": 0,
+        "gameSeconds": 0.0,
+        "customRendererActive": true,
+        "material": "matMasterJungle (Instance)"
+      },
+      {
+        "sample": 1,
+        "gameSeconds": 0.091667,
+        "customRendererActive": true,
+        "material": "matMasterJungle (Instance)"
+      },
+      {
+        "sample": 2,
+        "gameSeconds": 0.183334,
+        "customRendererActive": false,
+        "rendererEnabled": true,
+        "material": "matCutOutInvisible"
+      }
+    ]
+  },
+  "frameworkRequirement": {
+    "policy": "preserve-custom-body",
+    "scope": "Opt-in only. It must intercept FallOffLimb.FallOff only after a verified framework-owned custom-mesh lease on the exact target renderer.",
+    "nonGoals": [
+      "Do not change unopted/native enemies.",
+      "Do not restore fragments after the handoff.",
+      "Do not treat raw Animator.Play as semantic DeathLight.",
+      "Do not claim real normal combat/lethal validation from KillSingle."
+    ]
+  }
+}

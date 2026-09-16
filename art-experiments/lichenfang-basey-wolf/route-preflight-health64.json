@@ -1,0 +1,49 @@
+{
+  "status": "PASS_EXACT_RESOURCE_PREFAB_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only resource-prefab route/profile/asset preflight. No stage, deployment, runtime, visual, motion, or gameplay claim.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_lichenfang_basey_wolf",
+      "baseEnemy": "wolfA",
+      "resourcePrefab": "enbaseywolf",
+      "gameObjectId": 19201,
+      "celIds": [
+        137372
+      ],
+      "renderer": {
+        "rendererPath": "Wolfie",
+        "sourceRendererId": 120975,
+        "rigProfile": "16b3e8a9d586ccc3e2c11f1a106a90c2c0a6a008af7661d5cb18f468cbe1ad3a"
+      },
+      "controller": {
+        "controller_path_id": 6007,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "wolfController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 584
+      },
+      "combatProfile": "a875f1899d2c8e7deeac6283a727d13fbe5715dd5109f7719e87202a22cb566f",
+      "declaredAssets": [
+        {
+          "file": "lichenfang-palette.png",
+          "sha256": "64a203e5f15eef9f39d83dabd70b18ae46ebdf81f2ee111cf95bcfe2b7c67445",
+          "bytes": 12357
+        },
+        {
+          "file": "lichenfang.glb",
+          "sha256": "a53986fcd2ab4f65479cb1f39055163e5dea44381ecad2f84c2b94fa9f8d09b5",
+          "bytes": 499584
+        }
+      ]
+    }
+  ],
+  "resourcePreflight": {
+    "path": "scratch/resource-enemy-base-preflight.json",
+    "sha256": "9bd8792896468be5e771e4857b0262c7e4ee9cb664d69ba2c444698ba7441296"
+  },
+  "profileDocument": {
+    "path": "art-experiments/lichenfang-basey-wolf/runtime-profile.json",
+    "sha256": "9bd4fcbd5341e2e1747e593a92781b61d235ab029803c4a072c99ed34435d39a"
+  },
+  "assetDirectory": "art-experiments/lichenfang-basey-wolf"
+}

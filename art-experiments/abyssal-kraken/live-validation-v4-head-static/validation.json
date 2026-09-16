@@ -1,0 +1,478 @@
+{
+  "status": "fresh_v4_modern_kraken_head_and_static_eye_exact_binding_motion_gameplay_ready_observed_practical_static_art_unapproved",
+  "scope": "One fresh V4 Kraken-head trial. It validates the exact skinned head plus rigid eye renderer assignment, material state, sampled parent motion, ordinary hit, explicit fixture-death prefix, and Ready progression. It is not a finished-art approval.",
+  "native_chassis": "krakenHead",
+  "enemy_id": "krakenHead",
+  "renderer_paths": [
+    "kraken2",
+    "Root_M/base/body/neck/eye/kraken2_eye"
+  ],
+  "source_renderer_ids": [
+    121035,
+    101310
+  ],
+  "provenance": {
+    "profile": {
+      "key": "ftkmf_modeltest_abyssal_crown_kraken_head",
+      "baseEnemy": "krakenHead",
+      "displayName": "Abyssal Crown V4",
+      "combatProfile": "cec974e3be711225508204ce60ba00ebc9f5cc604ea7d5a573e1a3269bc9038d",
+      "renderers": [
+        {
+          "rendererPath": "kraken2",
+          "glbFile": "abyssal-crown-kraken-head-v2.glb",
+          "textureFile": "abyssal-crown-kraken-head-v2.png",
+          "disableNativeEmission": true
+        },
+        {
+          "rendererPath": "Root_M/base/body/neck/eye/kraken2_eye",
+          "rendererKind": "MeshRenderer",
+          "glbFile": "abyssal-crown-kraken-eye-v4.glb",
+          "textureFile": "abyssal-crown-kraken-eye-v4.png",
+          "disableNativeEmission": true
+        }
+      ]
+    },
+    "catalog": {
+      "path": "scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "51f22c64607feebb3241961023b7c642c3e30f30b3b7f5478794da399253df79"
+    },
+    "stageReceipt": {
+      "path": "scratch/runtime-profile-423-abyssal-kraken-v4-head-compact-eye/receipt.json",
+      "sha256": "9d4f3bb6421333b6b864f7b1a7f032e2f18b2394889a302e3c0f03f0e1540035"
+    },
+    "deploymentReceipt": {
+      "path": "scratch/mirewarden-game/deployment-backups/abyssal-kraken-v4-head-compact-eye-20260911-205050/deployment.json",
+      "sha256": "3fd729124c9650c9774af2ec452d13571c132f794e4690138be0090115b5cb43"
+    },
+    "restoreAfterProbe": {
+      "stageReceipt": {
+        "path": "scratch/abyssal-kraken-v4-restore-from-probe-stage-20260911-211800/receipt.json",
+        "sha256": "bfccc4896dbb0284714d36068f23b145216ed804b38d4ec9018c4c33a4caa96e"
+      },
+      "deploymentReceipt": {
+        "path": "scratch/mirewarden-game/deployment-backups/abyssal-kraken-v4-restore-from-probe-20260911-211940/deployment.json",
+        "sha256": "297a74087c7fdedf56b49f0d9ba23582f79fb0ceec76f1ebb26337f73db85802"
+      },
+      "catalogOnly": true,
+      "assetChanges": {}
+    }
+  },
+  "session": "4bda953c836d442f999f53e7f30f9c30",
+  "case": {
+    "path": "scratch/mirewarden-game/model-test-output/case-29704ec7260e4ac0bf05270822394e06/case-result.json",
+    "sha256": "9a95396c24b6a14189df2fedda9b38ec9ce3002ab777c59a56005884f1b7cfba",
+    "status": "needs_visual_review"
+  },
+  "stageCase": {
+    "path": "scratch/mirewarden-game/model-test-output/case-5271c04723e0432e9a00a50883372b0f/result.json",
+    "sha256": "25810a284f1215df68f8b0523e87a889bb4280b1bafd10e0b82879e2562464ab",
+    "status": "binding_metadata_observed"
+  },
+  "bindings": {
+    "skinnedHead": {
+      "rendererKind": "SkinnedMeshRenderer",
+      "celRelativeRendererPath": "kraken2",
+      "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+      "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201",
+      "controller": "krakenHeadController",
+      "material": {
+        "name": "matKraken (Instance)",
+        "shader": "Standard",
+        "emissionKeyword": false,
+        "emissionColor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "mainTexture": {
+          "instanceId": -245614,
+          "name": "ftkmf_abyssal-crown-kraken-head-v2.png"
+        },
+        "emissionMap": null
+      }
+    },
+    "staticEye": {
+      "rendererKind": "MeshRenderer",
+      "celRelativeRendererPath": "Root_M/base/body/neck/eye/kraken2_eye",
+      "mesh": "ftkmf_static_glb_abyssal-crown-kraken-eye-v4.glb",
+      "requiredMeshFilterCount": 1,
+      "material": {
+        "name": "matKraken",
+        "shader": "Standard",
+        "emissionKeyword": false,
+        "emissionColor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "mainTexture": {
+          "instanceId": -245620,
+          "name": "ftkmf_abyssal-crown-kraken-eye-v4.png"
+        },
+        "emissionMap": null
+      },
+      "inventoryRecords": [
+        {
+          "source": "scratch/mirewarden-game/model-test-output/4f131f5db9044e19999b2f13d3019943.json",
+          "sha256": "7287de622c997595ea04edd7acf10f561752af9eff87d9236afe41ed9622715d",
+          "frame": 3659,
+          "head": {
+            "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+            "rendererKind": "SkinnedMeshRenderer",
+            "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+          },
+          "static": {
+            "mesh": "ftkmf_static_glb_abyssal-crown-kraken-eye-v4.glb",
+            "rendererKind": "MeshRenderer",
+            "meshFilterCount": 1,
+            "lastCombatTrigger": "Intro",
+            "boundsSize": [
+              0.7461806535720825,
+              1.6926430463790894,
+              1.506980061531067
+            ],
+            "material": {
+              "name": "matKraken",
+              "shader": "Standard",
+              "emissionKeyword": false,
+              "emissionColor": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "mainTexture": {
+                "instanceId": -245620,
+                "name": "ftkmf_abyssal-crown-kraken-eye-v4.png"
+              },
+              "emissionMap": null
+            },
+            "lease": {
+              "available": true,
+              "present": true,
+              "leaseId": 4,
+              "acquired": true,
+              "applied": true,
+              "references": 1
+            }
+          }
+        },
+        {
+          "source": "scratch/mirewarden-game/model-test-output/73948e9172554c7094127010425cb611.json",
+          "sha256": "191b9a5ba9e72563c357779abfe80e61cd4558a478e1d98f1ee40985b8bbd163",
+          "frame": 3766,
+          "head": {
+            "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+            "rendererKind": "SkinnedMeshRenderer",
+            "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+          },
+          "static": {
+            "mesh": "ftkmf_static_glb_abyssal-crown-kraken-eye-v4.glb",
+            "rendererKind": "MeshRenderer",
+            "meshFilterCount": 1,
+            "lastCombatTrigger": "Intro",
+            "boundsSize": [
+              0.7461806535720825,
+              1.6926430463790894,
+              1.506980061531067
+            ],
+            "material": {
+              "name": "matKraken",
+              "shader": "Standard",
+              "emissionKeyword": false,
+              "emissionColor": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "mainTexture": {
+                "instanceId": -245620,
+                "name": "ftkmf_abyssal-crown-kraken-eye-v4.png"
+              },
+              "emissionMap": null
+            },
+            "lease": {
+              "available": true,
+              "present": true,
+              "leaseId": 4,
+              "acquired": true,
+              "applied": true,
+              "references": 1
+            }
+          }
+        },
+        {
+          "source": "scratch/mirewarden-game/model-test-output/dceef6f03033412dbb01a898757d9ce5.json",
+          "sha256": "1b0d930520f5b52a222e3826198389c7f06c23f793af8b6fd60af157c4ebe3cb",
+          "frame": 4447,
+          "head": {
+            "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+            "rendererKind": "SkinnedMeshRenderer",
+            "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+          },
+          "static": {
+            "mesh": "ftkmf_static_glb_abyssal-crown-kraken-eye-v4.glb",
+            "rendererKind": "MeshRenderer",
+            "meshFilterCount": 1,
+            "lastCombatTrigger": "Attack",
+            "boundsSize": [
+              0.772007942199707,
+              1.6926430463790894,
+              1.5195997953414917
+            ],
+            "material": {
+              "name": "matKraken",
+              "shader": "Standard",
+              "emissionKeyword": false,
+              "emissionColor": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "mainTexture": {
+                "instanceId": -245620,
+                "name": "ftkmf_abyssal-crown-kraken-eye-v4.png"
+              },
+              "emissionMap": null
+            },
+            "lease": {
+              "available": true,
+              "present": true,
+              "leaseId": 4,
+              "acquired": true,
+              "applied": true,
+              "references": 1
+            }
+          }
+        },
+        {
+          "source": "scratch/mirewarden-game/model-test-output/1dbe21e6438541c39a78a6591068b03d.json",
+          "sha256": "6ad8c466719d3b94268337d896e0820a5d31b14e985c4c5fa94066f4515c4731",
+          "frame": 4883,
+          "head": {
+            "mesh": "ftkmf_glb_abyssal-crown-kraken-head-v2.glb",
+            "rendererKind": "SkinnedMeshRenderer",
+            "boneSignature": "35674ecb6b315d65a7e6f8f987d1ad921d80930a81001d3eb648db6004a8d201"
+          },
+          "static": {
+            "mesh": "ftkmf_static_glb_abyssal-crown-kraken-eye-v4.glb",
+            "rendererKind": "MeshRenderer",
+            "meshFilterCount": 1,
+            "lastCombatTrigger": "Attack",
+            "boundsSize": [
+              0.772007942199707,
+              1.6926430463790894,
+              1.5195997953414917
+            ],
+            "material": {
+              "name": "matKraken",
+              "shader": "Standard",
+              "emissionKeyword": false,
+              "emissionColor": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "mainTexture": {
+                "instanceId": -245620,
+                "name": "ftkmf_abyssal-crown-kraken-eye-v4.png"
+              },
+              "emissionMap": null
+            },
+            "lease": {
+              "available": true,
+              "present": true,
+              "leaseId": 4,
+              "acquired": true,
+              "applied": true,
+              "references": 1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "captures": [
+    {
+      "label": "pass",
+      "captureId": "94075877300e4af6a99169b04d82819d",
+      "rawCapture": {
+        "source": "scratch/mirewarden-game/model-test-output/94075877300e4af6a99169b04d82819d.json",
+        "sha256": "7100cdd328702c1c4f06b187294c6cc8292e99475a6b6564d2674b4df0dc65e3"
+      },
+      "frames": 120,
+      "complete": true,
+      "rawCaptureOk": true,
+      "termination": null,
+      "limitation": null,
+      "dimensions": {
+        "width": 1280,
+        "height": 832,
+        "requestedFps": 12.0
+      },
+      "enemyHpBefore": 324,
+      "enemyHpAfter": 324
+    },
+    {
+      "label": "attack",
+      "captureId": "ff05579df41e40508e3f0b0241591527",
+      "rawCapture": {
+        "source": "scratch/mirewarden-game/model-test-output/ff05579df41e40508e3f0b0241591527.json",
+        "sha256": "1e4188115605bc4cade0fe6684a96ba00be91921b9b6f542cdb7153266a8bfeb"
+      },
+      "frames": 120,
+      "complete": true,
+      "rawCaptureOk": true,
+      "termination": null,
+      "limitation": null,
+      "dimensions": {
+        "width": 1280,
+        "height": 832,
+        "requestedFps": 12.0
+      },
+      "enemyHpBefore": 324,
+      "enemyHpAfter": 316
+    },
+    {
+      "label": "kill-fixture",
+      "captureId": "b90112f87df3455383b4b038431d6ed3",
+      "rawCapture": {
+        "source": "scratch/mirewarden-game/model-test-output/b90112f87df3455383b4b038431d6ed3.json",
+        "sha256": "4fb854003bb4d6c6138190730a21099f3432d8050b9374e870ceaf89e8f0f494"
+      },
+      "frames": 85,
+      "complete": false,
+      "rawCaptureOk": false,
+      "termination": "renderer_destroyed",
+      "limitation": "Failure category only; neither native cleanup causality nor full death-animation coverage is inferred.",
+      "dimensions": {
+        "width": 1280,
+        "height": 832,
+        "requestedFps": 12.0
+      },
+      "enemyHpBefore": 316,
+      "enemyHpAfter": 0
+    }
+  ],
+  "ordinaryAttack": [
+    {
+      "attempt": 1,
+      "status": "nonlethal_hp_loss",
+      "beforeHp": 324,
+      "afterHp": 316,
+      "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+    }
+  ],
+  "ready": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "assets": {
+    "abyssal-crown-kraken-head-v2.glb": "33d24c5c0b393ab3e4df44a2ae2f704bc691eff17c528d5e30ea5e1ab47e3719",
+    "abyssal-crown-kraken-head-v2.png": "d4ac6a37fb7158e4b915164417cd4f90f3cd71163c787185db6b267563cbf7e9",
+    "abyssal-crown-kraken-eye-v4.glb": "be73a29ad59cd7bbca7a0724656f4c735847f839ca8d53f2600fab675e508c9b",
+    "abyssal-crown-kraken-eye-v4.png": "b4cd950d22611517451a882fdc6afd4218477d3f70a1d7953b9e57b110952611"
+  },
+  "selectedFrames": [
+    {
+      "source": "scratch/mirewarden-game/model-test-output/94075877300e4af6a99169b04d82819d/0012.png",
+      "archive": "selected/pass-0012.png",
+      "sha256": "0d6c3cbefe290d0ccd9ce0fdb441e10b006bfd97942db8b327634a7db1ecd50e",
+      "action": "pass",
+      "index": 12,
+      "observation": "Idle/pass sample. The V4 eye is a small teal form under the authored head, replacing the earlier oversized native pink-orange static surface."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/94075877300e4af6a99169b04d82819d/0024.png",
+      "archive": "selected/pass-0024.png",
+      "sha256": "761c2837c06867e6f1acd72ed83ec0a17c05e36cce3578e5f22dfbd56ba97d4a",
+      "action": "pass",
+      "index": 24,
+      "observation": "Second idle/pass sample. It confirms the sampled camera read only; it does not accept all camera angles or animation intervals."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/ff05579df41e40508e3f0b0241591527/0006.png",
+      "archive": "selected/attack-0006.png",
+      "sha256": "413a024e003d8601f90633cc52e556b798bad437d2530bd3d8c6eddfa73e0665",
+      "action": "attack",
+      "index": 6,
+      "observation": "Ordinary no-focus attack sample from the accepted 324 to 316 HP capture."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/ff05579df41e40508e3f0b0241591527/0012.png",
+      "archive": "selected/attack-0012.png",
+      "sha256": "0be57eeab345f3b3b47851d3b334e50ef3c1376a8c16e688c46c1f05f06e9540",
+      "action": "attack",
+      "index": 12,
+      "observation": "Second ordinary attack sample. The linked skinned head is the motion source; the static eye has separate inventory evidence."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/b90112f87df3455383b4b038431d6ed3/0000.png",
+      "archive": "selected/kill-fixture-0000.png",
+      "sha256": "7a12b1cc2841f85ba946dd7892185f9d2947ec591ea0e16fdfaeaacf06f696b3",
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "First frame of the explicit KillSingle fixture prefix, not ordinary lethal damage."
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/b90112f87df3455383b4b038431d6ed3/0084.png",
+      "archive": "selected/kill-fixture-0084.png",
+      "sha256": "b1af39547c0b1b4137ed57448652d8b24733a50f7868b6276dde75c6e31e9b6e",
+      "action": "kill-fixture",
+      "index": 84,
+      "observation": "Last retained frame before native renderer destruction stopped the capture."
+    }
+  ],
+  "videos": [
+    {
+      "label": "pass",
+      "path": "video/pass.mp4",
+      "sha256": "4afa2cfba6427049486df3f5b1ecb39f1896f2a76fce90e879f479d050f16085",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "label": "attack",
+      "path": "video/attack.mp4",
+      "sha256": "c2a3f48001dd075d08afab3a5fb5938a439d2a897c9748d797ea550488204a21",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "label": "kill-fixture",
+      "path": "video/kill-fixture.mp4",
+      "sha256": "7a8bf32e60e879ff5a343cab3720e43923700e28e4a792cd4a806be7d423c856",
+      "frames": 85,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    }
+  ],
+  "visualReview": {
+    "status": "practical_static_replacement_unapproved_art",
+    "observed": "The original V4 static mesh removes the large native pink-orange foreground dome that remained after the skinned head swap. At the sampled combat camera it reads as a small dark teal lower-eye form under the authored head.",
+    "notAccepted": "The eye does not yet read as a fully integrated final character feature. The sampled views do not establish all animation intervals, camera angles, culling, or general art approval.",
+    "placementFinding": "The later original marker probe found that offsets deeper into the skinned head are occluded; the safe visible region is near the static child pivot. The probe is preserved separately and does not upgrade this art verdict."
+  },
+  "limitations": [
+    "KillSingle is an explicit fixture death, not normal lethal damage.",
+    "The kill capture stops after 85 retained frames because the renderer is destroyed; it is a death prefix only.",
+    "The linked skinned renderer supplies motion capture. Static inventory confirms the rigid target under sampled Intro and Attack states, not all animation or culling behavior.",
+    "No portrait, full resource-disposal, all-camera, or final-art acceptance is claimed."
+  ]
+}

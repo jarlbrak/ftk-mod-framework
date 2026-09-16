@@ -1,0 +1,95 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/vesper-eye/live-validation-v4",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-3fd48ee1fc6648a1bea21100b1fc9712/case-result.json",
+  "visualReview": "scratch/model-route-73739eaf6fd8f0e4-directenemy-root-review-v4.json",
+  "assetFiles": [
+    "art-experiments/vesper-eye/vesper_basecolor.png",
+    "art-experiments/vesper-eye/vesper_body.glb",
+    "art-experiments/vesper-eye/vesper_eye.glb"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/vesper-eye/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-73739eaf6fd8f0e4-directenemy-run-v4-material-verified.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "EyeBody",
+        "mesh": "ftkmf_glb_vesper_body.glb",
+        "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "EyeBody",
+        "mesh": "ftkmf_glb_vesper_body.glb",
+        "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "EyeBody",
+        "mesh": "ftkmf_glb_vesper_body.glb",
+        "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V4 exact-source corrected-material multipart",
+    "displayName": "Vesper Eye",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "beholderA",
+    "nativeChassis": "beholderA",
+    "rendererPaths": [
+      "EyeBody",
+      "EyeBody/EyeEye"
+    ],
+    "sourceRendererIds": [
+      121031,
+      121210
+    ],
+    "binding": {
+      "rendererPath": "EyeBody",
+      "mesh": "ftkmf_glb_vesper_body.glb",
+      "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "KillSingle is an explicit fixture death, not ordinary lethal damage.",
+      "The custom renderers become inactive at sample 26 before eye_death begins at sample 30, so the capture establishes the Death trigger, controller state, cleanup, and Victory progression without visible custom death deformation, corpse, ragdoll, floor contact, or corpse lifetime.",
+      "Native effects, the foreground hero, UI, and the Victory surface limit fine surface and hidden-side review.",
+      "One isolated session does not establish every controller clip, extended culling, portraits, resource lifetime, unperturbed performance, indirect death, natural-arena behavior, or finished-art acceptance.",
+      "Presentation videos replay fixed-frame captures and are not real-time performance evidence."
+    ]
+  }
+}

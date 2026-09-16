@@ -1,0 +1,104 @@
+{
+  "session": "d19a563dd2ab48948fa23342bd31fbfd",
+  "caseResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-0c3c701847fe4de199694b69c541785b/case-result.json",
+  "status": "DIAGNOSTIC_ONLY_SELECTED_FRAMES_REVIEWED",
+  "reviewedFrames": {
+    "pass": [
+      0,
+      50
+    ],
+    "attack": [
+      30
+    ],
+    "kill-fixture": [
+      60
+    ]
+  },
+  "observations": [
+    "Pass0 upright bound calibration skeleton; pass50 native attack3 and roll UI, upper probe partly overlapped by icons.",
+    "Hit30 normal -3 with HP55; hero partially occludes probe.",
+    "Death60 collapsed probe visible along floor. Floor contact not numerically established."
+  ],
+  "limits": [
+    "Exact plantD only, no plantG live inheritance",
+    "Thirteen native-unweighted bones are diagnostic only",
+    "No original art or final teardown acceptance",
+    "Explicit fixture death not ordinary lethal damage"
+  ],
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 3,
+    "buttonCount": 1
+  },
+  "collectCount": 1,
+  "captures": [
+    {
+      "action": "pass",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/898ec5cbd59c41b09ca2ac6b2c0604b6.json",
+        "sha256": "7c67171dcc8d64e99e09b57d44f94062b2f7f00f3fc6684893a473260bdba9bb",
+        "bytes": 5204216
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "attack3": [
+          46,
+          55
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    },
+    {
+      "action": "attack",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/daf3c52ae08f4194b7226c01831ec142.json",
+        "sha256": "57a3a38ef6f4ebd4fddbacbacf57fe4d9ddf0c183ba6147267b14dcd37ce6b43",
+        "bytes": 5202649
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "hit1": [
+          27,
+          31
+        ],
+        "attack1": [
+          70,
+          79
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    },
+    {
+      "action": "kill-fixture",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/dd0a0b8c581648e399f756363fd407d4.json",
+        "sha256": "a747808ae6f47ad7779d0935ea75206fe2ac37a288cc22ffd27c850d4e72dd44",
+        "bytes": 5213487
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          27
+        ],
+        "death": [
+          28,
+          119
+        ]
+      },
+      "rendererDisabledCount": 0,
+      "animatorDisabledCount": 0
+    }
+  ]
+}

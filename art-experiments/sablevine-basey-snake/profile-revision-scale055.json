@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "status": "REVIEWED_SCOPED_TECHNICAL_MOTION_CAMERA_FIT_ACCEPTED_LIMITED_ART_PENDING",
+  "revision": "Sablevine V2 camera-fit scale 0.55",
+  "priorV1": {
+    "profilePath": "art-experiments/sablevine-basey-snake/runtime-profile.json",
+    "profileSha256": "4e4d61b19b8ce5c1bcd308d0ae4c40f49cfe73311ed188484bc453a560fb8fd6",
+    "archiveValidationPath": "art-experiments/sablevine-basey-snake/live-validation-v1/validation.json",
+    "archiveValidationSha256": "4ee012c8047b1bb54e790a6f64f18c269e564d2d26322ecfb027f63a8c90cee8",
+    "result": "exact resource binding and native motion observed; native combat-camera fit rejected because the upper silhouette is cropped"
+  },
+  "candidate": {
+    "profilePath": "art-experiments/sablevine-basey-snake/runtime-profile-scale055.json",
+    "profileSha256": "96d14347c12b82c820339925205e8feb874cb499625d7ccdd6cad6aba51e1afb",
+    "key": "ftkmf_modeltest_sablevine_basey_snake_fit055",
+    "resourcePrefab": "enbaseysnake",
+    "baseEnemy": "snakeJungleA",
+    "rendererPath": "enSnake_Basey",
+    "requestedPublicVisualScaleFactor": 0.55,
+    "minimumBaseHealth": 64
+  },
+  "change": {
+    "kind": "public_clone_scale_only",
+    "description": "Registers Content.SetEnemyVisual before the explicit GLB assignment so the spawned CEL root uses the public factor against its captured native local-scale baseline.",
+    "assetBytesReused": {
+      "sablevine.glb": "4c030febb8adc4005a8802d25122446a8b825dd06b48e64eed674794e5a6b330",
+      "sablevine-palette.png": "8dc990355d08e085e32cbfc65d190aa5449bcbc899e75ae928bbbf1baf0edfbb"
+    },
+    "doesNotChange": [
+      "original GLB bytes",
+      "palette bytes",
+      "renderer path",
+      "resource prefab",
+      "native controller",
+      "bindposes",
+      "weights",
+      "minimum health fixture",
+      "the immutable V1 archive"
+    ]
+  },
+  "acceptancePlan": [
+    "Run a fresh exact resource-route preflight for this distinct profile document.",
+    "Stage a new isolated catalog entry and verify it changes only the catalog while reusing pinned assets.",
+    "Restart the isolated game and require registration to report the requested factor and native prefab root baseline.",
+    "Require the runtime runner to observe the expected spawned CEL root scale before combat actions and preserve the scale across all capture frames.",
+    "Review native idle, attack, ordinary hit and fixture death frames for camera fit separately from technical binding and motion."
+  ],
+  "limits": "V2 accepts only scoped normal combat-camera fit and its exact technical/gameplay record. It does not accept portraits, culling, collision, long-session lifetime, all ability variants, ordinary lethal damage, ragdoll behavior, or final art direction. V1 remains immutable rejected evidence.",
+  "outcome": {
+    "session": "9c79f4374ece4e66b9a6ebbd3d411518",
+    "case": "scratch/mirewarden-game/model-test-output/case-bbc04cf0107648aca221feaee611e43d/case-result.json",
+    "caseSha256": "2b586c4124aefe95a73f996299d1667feb7abe07755b2f2916d6f9940015faf7",
+    "rootVisualReview": "scratch/sablevine-root-visual-review-v2-scale055.json",
+    "rootVisualReviewSha256": "ef6eebc527d055cfcaaa27c96132a23a190830ca601606966ad7d5360ed2ad60",
+    "result": "Fresh V2 registration, binding, all capture-frame scale observations, native motion, ordinary nonlethal hit, fixture death, strict Ready recovery, and scoped combat-camera review accept the scale-only profile correction as a limited-art result.",
+    "cameraFit": "accepted only for the exact isolated route and reviewed normal combat frames; broader art and runtime gates remain open",
+    "archiveValidation": {
+      "path": "art-experiments/sablevine-basey-snake/live-validation-v2-scale055/validation.json",
+      "sha256": "022411dc357e0b2e82dba0db4b5eeb6891cc05e03b195d439a28bb76613c4da5"
+    }
+  }
+}

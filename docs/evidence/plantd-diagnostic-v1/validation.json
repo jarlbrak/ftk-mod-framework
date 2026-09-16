@@ -1,0 +1,562 @@
+{
+  "status": "DIAGNOSTIC_SELECTED_FRAMES_REVIEWED_NOT_ORIGINAL_ART",
+  "nativeEnemy": "plantD",
+  "rendererId": 121537,
+  "controllerId": 5980,
+  "rigProfile": "843e81ef611bfb44c7d98c18d4d95dc6cc823836dabd0ba6d4ac2bf735d97c0b",
+  "combatProfile": "62b7f581729ea70227089502cce419ccaa2eaea6d2e66427474532b3d31a3997",
+  "session": "d19a563dd2ab48948fa23342bd31fbfd",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "0c65f1275f3eae761ec87bae6240c91dcfa49a13e34c5fc08334b92a88bc6163",
+      "bytes": 308736
+    }
+  },
+  "assetHashes": {
+    "probe_121537.glb": "dfc94777a399959f707aff1adcad604d0fa1eb8c81fdfa7e5f22fb6dc9147a23",
+    "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+  },
+  "profileSha256": "d7739964810c4fff42165db1a72c1e1a67711df1419ee2752a8cbe995730da58",
+  "rawWrapperStatus": "needs_visual_review",
+  "captures": [
+    {
+      "action": "pass",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass.json.gz",
+        "sha256": "1e276088d9f7168d23ee38a118e9bc6c8d8bef30547aab94e644d17b0eeb8a36"
+      },
+      "video": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass.mp4",
+        "sha256": "85c113e043c6c518b1859a4db635a258d3185bca9cba47b11c11a01eb71cbf46"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "sourceImagePins": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass-source-image-pins.json",
+        "sha256": "9cba78e2e27fb15fd49cb5fdd1f75555008c8477166a323953cd861a86dcd76b"
+      },
+      "frames": 120,
+      "rendererDisabledFrames": 0,
+      "animatorDisabledFrames": 0
+    },
+    {
+      "action": "attack",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/attack.json.gz",
+        "sha256": "ed0270b338908a04fd839ea2428d5ad4800856f53c2b471032141b6d0b2fbdff"
+      },
+      "video": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/attack.mp4",
+        "sha256": "0e2cc970a46efbf53742cc7b91744921ea9d91608b3c68a382b8d18227dc1f37"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "sourceImagePins": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/attack-source-image-pins.json",
+        "sha256": "d5145decab8a757c2ddb5510aee24274566324793c3cf80a489fe51086ac1cdd"
+      },
+      "frames": 120,
+      "rendererDisabledFrames": 0,
+      "animatorDisabledFrames": 0
+    },
+    {
+      "action": "kill-fixture",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/kill-fixture.json.gz",
+        "sha256": "a0bf08dae3b950cf4fd8065e5d9dd832abcb673b3d976aa681a385d12cc97ff0"
+      },
+      "video": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/kill-fixture.mp4",
+        "sha256": "fbfe8e62f546031ed86af0da5e24b5fb3704a5d12bf57356f7900ab305fda203"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "sourceImagePins": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/kill-fixture-source-image-pins.json",
+        "sha256": "2ab05cff4513e31dd744424f2a7d130abfaf382e845e0bfd0b22e8f51a1b08b0"
+      },
+      "frames": 120,
+      "rendererDisabledFrames": 0,
+      "animatorDisabledFrames": 0
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 3,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235510,
+        "alive": true,
+        "containerInstanceId": -237246,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237288,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237688,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235510,
+            "celInstanceId": -239114,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -249512,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "d19a563dd2ab48948fa23342bd31fbfd",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 3,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Trap1",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "trap"
+      ],
+      "slotAllowsEnemySubstitution": false,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "d19a563dd2ab48948fa23342bd31fbfd",
+    "id": "ca4528e82f0246b5a9a68f363eb4286b",
+    "frame": 47844,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "rootReview": {
+    "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/plantd-root-review.json",
+    "sha256": "5fdbbfa44febae9ad928089d38d50084892ca7be8361650ddb6b49319f085923"
+  },
+  "limits": [
+    "Calibration geometry only, not original plant appearance or final-art acceptance.",
+    "Thirteen native-zero-weight palette bones remain diagnostic; no plantE/G or other exact-rig coverage inferred.",
+    "Only four explicitly root-reviewed PNGs; videos are lossy12fps review derivatives, not proof every frame was viewed.",
+    "Native attack3 damage58->55; death55->0 is explicit fixture trigger, not ordinary lethal damage.",
+    "No final resource teardown or numerical floor-contact acceptance. Native assets/meshes/DLLs/decompiled sources are external pins only."
+  ],
+  "losslessMappings": [
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-0c3c701847fe4de199694b69c541785b/journal.jsonl",
+      "archivePath": "case/journal.jsonl",
+      "sha256": "9268022effe4ce3cb1563d3042eb9a412e67fbb8ad6b3fe4a453f1d474f99ec1",
+      "archiveSha256": "9268022effe4ce3cb1563d3042eb9a412e67fbb8ad6b3fe4a453f1d474f99ec1",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-0c3c701847fe4de199694b69c541785b/case-result.json",
+      "archivePath": "case/case-result.json",
+      "sha256": "43fb988e7f57930c22839432c3f540a8714113f398513a4512263b203d750087",
+      "archiveSha256": "43fb988e7f57930c22839432c3f540a8714113f398513a4512263b203d750087",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-0c3c701847fe4de199694b69c541785b/selected-frames.html",
+      "archivePath": "case/selected-frames.html",
+      "sha256": "21b79a49347e6c0afaffe13b05eb70a59e872f3c28ad76b593babffa016c1885",
+      "archiveSha256": "21b79a49347e6c0afaffe13b05eb70a59e872f3c28ad76b593babffa016c1885",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-7d548b658213485183c9697847321fec/capture-summary.json",
+      "archivePath": "case-7d548b658213485183c9697847321fec/capture-summary.json",
+      "sha256": "3c9b276a58ec1274d83349d87b88e44e8ef453656732089c0a7430d07b3fff1b",
+      "archiveSha256": "3c9b276a58ec1274d83349d87b88e44e8ef453656732089c0a7430d07b3fff1b",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-7d548b658213485183c9697847321fec/result.json",
+      "archivePath": "case-7d548b658213485183c9697847321fec/result.json",
+      "sha256": "6f1417b62d4c6097b3726de56e85cf514d56cbe710c8dfeb973f2cf93c2e2b6b",
+      "archiveSha256": "6f1417b62d4c6097b3726de56e85cf514d56cbe710c8dfeb973f2cf93c2e2b6b",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-7d548b658213485183c9697847321fec/journal.jsonl",
+      "archivePath": "case-7d548b658213485183c9697847321fec/journal.jsonl",
+      "sha256": "e201065c0b131298457647e7e52969ac7292a216450fb63ad3e70f3fe3dc46ce",
+      "archiveSha256": "e201065c0b131298457647e7e52969ac7292a216450fb63ad3e70f3fe3dc46ce",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/898ec5cbd59c41b09ca2ac6b2c0604b6.json",
+      "archivePath": "pass.json.gz",
+      "sha256": "7c67171dcc8d64e99e09b57d44f94062b2f7f00f3fc6684893a473260bdba9bb",
+      "archiveSha256": "1e276088d9f7168d23ee38a118e9bc6c8d8bef30547aab94e644d17b0eeb8a36",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/898ec5cbd59c41b09ca2ac6b2c0604b6/0000.png",
+      "archivePath": "pass-0000.png",
+      "sha256": "4447e74e5bca7ad51d54f6676a74e6c534cc651bd770f5ff49bf1f3c43fa29cc",
+      "archiveSha256": "4447e74e5bca7ad51d54f6676a74e6c534cc651bd770f5ff49bf1f3c43fa29cc",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/898ec5cbd59c41b09ca2ac6b2c0604b6/0050.png",
+      "archivePath": "pass-0050.png",
+      "sha256": "596b74374a898c474c3c0ea358e73d9816c1e8396d05df69329b2b26e66e0eab",
+      "archiveSha256": "596b74374a898c474c3c0ea358e73d9816c1e8396d05df69329b2b26e66e0eab",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-647fa6da68534ec6a829fe65def7cd97/capture-summary.json",
+      "archivePath": "case-647fa6da68534ec6a829fe65def7cd97/capture-summary.json",
+      "sha256": "ca6f7654ca971e94d9b82cd07c2e4fcd515480b67eb4dc879d8c22cdba3be2aa",
+      "archiveSha256": "ca6f7654ca971e94d9b82cd07c2e4fcd515480b67eb4dc879d8c22cdba3be2aa",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-647fa6da68534ec6a829fe65def7cd97/result.json",
+      "archivePath": "case-647fa6da68534ec6a829fe65def7cd97/result.json",
+      "sha256": "5f7e154a3c2b97d7fde6261a09ca82d3bd61fdb08e686069663419581beac0cb",
+      "archiveSha256": "5f7e154a3c2b97d7fde6261a09ca82d3bd61fdb08e686069663419581beac0cb",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-647fa6da68534ec6a829fe65def7cd97/journal.jsonl",
+      "archivePath": "case-647fa6da68534ec6a829fe65def7cd97/journal.jsonl",
+      "sha256": "7c89c09c08e408396c88c5e3a57c85aaef1ceb82e9619b3dd1d8769c3f734528",
+      "archiveSha256": "7c89c09c08e408396c88c5e3a57c85aaef1ceb82e9619b3dd1d8769c3f734528",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/daf3c52ae08f4194b7226c01831ec142.json",
+      "archivePath": "attack.json.gz",
+      "sha256": "57a3a38ef6f4ebd4fddbacbacf57fe4d9ddf0c183ba6147267b14dcd37ce6b43",
+      "archiveSha256": "ed0270b338908a04fd839ea2428d5ad4800856f53c2b471032141b6d0b2fbdff",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/daf3c52ae08f4194b7226c01831ec142/0030.png",
+      "archivePath": "attack-0030.png",
+      "sha256": "389b71a5dab58b51b10e6f8128bd05d33390baca8b8419c53accaa16ac896641",
+      "archiveSha256": "389b71a5dab58b51b10e6f8128bd05d33390baca8b8419c53accaa16ac896641",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-3b367cbb08ed4b3ebe8797f4810ea8e6/capture-summary.json",
+      "archivePath": "case-3b367cbb08ed4b3ebe8797f4810ea8e6/capture-summary.json",
+      "sha256": "1eff1a34380627907c02d9b9f4a63e2498a3e6af4225919b72eef8b70b8d94c0",
+      "archiveSha256": "1eff1a34380627907c02d9b9f4a63e2498a3e6af4225919b72eef8b70b8d94c0",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-3b367cbb08ed4b3ebe8797f4810ea8e6/result.json",
+      "archivePath": "case-3b367cbb08ed4b3ebe8797f4810ea8e6/result.json",
+      "sha256": "31d07431a5b2b758e27e01155a8a19b342b94d5f528ef70cb092ade754b72a47",
+      "archiveSha256": "31d07431a5b2b758e27e01155a8a19b342b94d5f528ef70cb092ade754b72a47",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-3b367cbb08ed4b3ebe8797f4810ea8e6/journal.jsonl",
+      "archivePath": "case-3b367cbb08ed4b3ebe8797f4810ea8e6/journal.jsonl",
+      "sha256": "988ed2164605142d984f0887a2cb939a6bcb5f6946311c6a79e6efa369ee4a8a",
+      "archiveSha256": "988ed2164605142d984f0887a2cb939a6bcb5f6946311c6a79e6efa369ee4a8a",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/dd0a0b8c581648e399f756363fd407d4.json",
+      "archivePath": "kill-fixture.json.gz",
+      "sha256": "a747808ae6f47ad7779d0935ea75206fe2ac37a288cc22ffd27c850d4e72dd44",
+      "archiveSha256": "a0bf08dae3b950cf4fd8065e5d9dd832abcb673b3d976aa681a385d12cc97ff0",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/dd0a0b8c581648e399f756363fd407d4/0060.png",
+      "archivePath": "kill-fixture-0060.png",
+      "sha256": "2825414e707ab68393bb831800d17d0cbcaccfb104b3324661e5fe66f674b520",
+      "archiveSha256": "2825414e707ab68393bb831800d17d0cbcaccfb104b3324661e5fe66f674b520",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plantd-root-review.json",
+      "archivePath": "plantd-root-review.json",
+      "sha256": "5fdbbfa44febae9ad928089d38d50084892ca7be8361650ddb6b49319f085923",
+      "archiveSha256": "5fdbbfa44febae9ad928089d38d50084892ca7be8361650ddb6b49319f085923",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plantd-first-exercise-result.txt",
+      "archivePath": "plantd-first-exercise-result.txt",
+      "sha256": "f7be023b49cd698e75c2ae8d22aac17463210eb7e95461c9f2f8d38b992c8b80",
+      "archiveSha256": "f7be023b49cd698e75c2ae8d22aac17463210eb7e95461c9f2f8d38b992c8b80",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/saffronspine-b-startup-evidence.json",
+      "archivePath": "saffronspine-b-startup-evidence.json",
+      "sha256": "1d5c06028333c425b6a19681dd010ca6033cbae57bbb1c2e3795d9334f25bc69",
+      "archiveSha256": "1d5c06028333c425b6a19681dd010ca6033cbae57bbb1c2e3795d9334f25bc69",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/saffronspine-b-deployment-result.json",
+      "archivePath": "saffronspine-b-deployment-result.json",
+      "sha256": "0bd4fdb819f787f6004ef9679da75d7af22d827227c9ab2e3ea84df83b5f791f",
+      "archiveSha256": "0bd4fdb819f787f6004ef9679da75d7af22d827227c9ab2e3ea84df83b5f791f",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-d-native-topology-analysis/findings.json",
+      "archivePath": "source-findings.json",
+      "sha256": "5032f92785a0c055e35880aa14924f39be307038641544333e620fdb0beb7c84",
+      "archiveSha256": "5032f92785a0c055e35880aa14924f39be307038641544333e620fdb0beb7c84",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-d-native-topology-analysis/probe-validation.json",
+      "archivePath": "probe-validation.json",
+      "sha256": "71dda10ebc02879ecfacb80d880d9f271bdfd83cbce79107036c77a819c624f0",
+      "archiveSha256": "71dda10ebc02879ecfacb80d880d9f271bdfd83cbce79107036c77a819c624f0",
+      "compression": null
+    },
+    {
+      "originalPath": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/archive-plantd.py",
+      "archivePath": "archive-script.py",
+      "sha256": "42ceee192dd9d9e912d03a2607dfe033da98dc389534724f0f135e2f86f6eafd",
+      "archiveSha256": "42ceee192dd9d9e912d03a2607dfe033da98dc389534724f0f135e2f86f6eafd",
+      "compression": null
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/archive-script.py",
+      "sha256": "42ceee192dd9d9e912d03a2607dfe033da98dc389534724f0f135e2f86f6eafd"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/attack-0030.png",
+      "sha256": "389b71a5dab58b51b10e6f8128bd05d33390baca8b8419c53accaa16ac896641"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/attack-source-image-pins.json",
+      "sha256": "d5145decab8a757c2ddb5510aee24274566324793c3cf80a489fe51086ac1cdd"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/attack.json.gz",
+      "sha256": "ed0270b338908a04fd839ea2428d5ad4800856f53c2b471032141b6d0b2fbdff"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/attack.mp4",
+      "sha256": "0e2cc970a46efbf53742cc7b91744921ea9d91608b3c68a382b8d18227dc1f37"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case/case-result.json",
+      "sha256": "43fb988e7f57930c22839432c3f540a8714113f398513a4512263b203d750087"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case/journal.jsonl",
+      "sha256": "9268022effe4ce3cb1563d3042eb9a412e67fbb8ad6b3fe4a453f1d474f99ec1"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case/selected-frames.html",
+      "sha256": "21b79a49347e6c0afaffe13b05eb70a59e872f3c28ad76b593babffa016c1885"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-3b367cbb08ed4b3ebe8797f4810ea8e6/capture-summary.json",
+      "sha256": "1eff1a34380627907c02d9b9f4a63e2498a3e6af4225919b72eef8b70b8d94c0"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-3b367cbb08ed4b3ebe8797f4810ea8e6/journal.jsonl",
+      "sha256": "988ed2164605142d984f0887a2cb939a6bcb5f6946311c6a79e6efa369ee4a8a"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-3b367cbb08ed4b3ebe8797f4810ea8e6/result.json",
+      "sha256": "31d07431a5b2b758e27e01155a8a19b342b94d5f528ef70cb092ade754b72a47"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-647fa6da68534ec6a829fe65def7cd97/capture-summary.json",
+      "sha256": "ca6f7654ca971e94d9b82cd07c2e4fcd515480b67eb4dc879d8c22cdba3be2aa"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-647fa6da68534ec6a829fe65def7cd97/journal.jsonl",
+      "sha256": "7c89c09c08e408396c88c5e3a57c85aaef1ceb82e9619b3dd1d8769c3f734528"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-647fa6da68534ec6a829fe65def7cd97/result.json",
+      "sha256": "5f7e154a3c2b97d7fde6261a09ca82d3bd61fdb08e686069663419581beac0cb"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-7d548b658213485183c9697847321fec/capture-summary.json",
+      "sha256": "3c9b276a58ec1274d83349d87b88e44e8ef453656732089c0a7430d07b3fff1b"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-7d548b658213485183c9697847321fec/journal.jsonl",
+      "sha256": "e201065c0b131298457647e7e52969ac7292a216450fb63ad3e70f3fe3dc46ce"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/case-7d548b658213485183c9697847321fec/result.json",
+      "sha256": "6f1417b62d4c6097b3726de56e85cf514d56cbe710c8dfeb973f2cf93c2e2b6b"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/kill-fixture-0060.png",
+      "sha256": "2825414e707ab68393bb831800d17d0cbcaccfb104b3324661e5fe66f674b520"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/kill-fixture-source-image-pins.json",
+      "sha256": "2ab05cff4513e31dd744424f2a7d130abfaf382e845e0bfd0b22e8f51a1b08b0"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/kill-fixture.json.gz",
+      "sha256": "a0bf08dae3b950cf4fd8065e5d9dd832abcb673b3d976aa681a385d12cc97ff0"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/kill-fixture.mp4",
+      "sha256": "fbfe8e62f546031ed86af0da5e24b5fb3704a5d12bf57356f7900ab305fda203"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass-0000.png",
+      "sha256": "4447e74e5bca7ad51d54f6676a74e6c534cc651bd770f5ff49bf1f3c43fa29cc"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass-0050.png",
+      "sha256": "596b74374a898c474c3c0ea358e73d9816c1e8396d05df69329b2b26e66e0eab"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass-source-image-pins.json",
+      "sha256": "9cba78e2e27fb15fd49cb5fdd1f75555008c8477166a323953cd861a86dcd76b"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass.json.gz",
+      "sha256": "1e276088d9f7168d23ee38a118e9bc6c8d8bef30547aab94e644d17b0eeb8a36"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/pass.mp4",
+      "sha256": "85c113e043c6c518b1859a4db635a258d3185bca9cba47b11c11a01eb71cbf46"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/plantd-first-exercise-result.txt",
+      "sha256": "f7be023b49cd698e75c2ae8d22aac17463210eb7e95461c9f2f8d38b992c8b80"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/plantd-root-review.json",
+      "sha256": "5fdbbfa44febae9ad928089d38d50084892ca7be8361650ddb6b49319f085923"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/probe-validation.json",
+      "sha256": "71dda10ebc02879ecfacb80d880d9f271bdfd83cbce79107036c77a819c624f0"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/saffronspine-b-deployment-result.json",
+      "sha256": "0bd4fdb819f787f6004ef9679da75d7af22d827227c9ab2e3ea84df83b5f791f"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/saffronspine-b-startup-evidence.json",
+      "sha256": "1d5c06028333c425b6a19681dd010ca6033cbae57bbb1c2e3795d9334f25bc69"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/evidence/plantd-diagnostic-v1/source-findings.json",
+      "sha256": "5032f92785a0c055e35880aa14924f39be307038641544333e620fdb0beb7c84"
+    }
+  ]
+}

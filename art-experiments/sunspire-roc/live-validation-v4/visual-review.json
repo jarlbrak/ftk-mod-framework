@@ -1,0 +1,78 @@
+{
+  "schema": "ftkmf.root-visual-review.v1",
+  "reviewStatus": "reviewed_exact_source_with_scoped_limits",
+  "session": "243d7c94fca146d7a68bf03af5ba5f7f",
+  "portraitSession": "1ce25c30c43f41428094cefea08dae6b",
+  "profile": "ftkmf_modeltest_sunspire_roc",
+  "nativeChassis": "rocA",
+  "rendererPath": "enRoc01",
+  "binding": {
+    "rendererInstanceId": -245150,
+    "ownerInstanceId": 369188,
+    "mesh": "ftkmf_glb_sunspire-roc.glb",
+    "boneSignature": "5d3d131f0a7af9374d85c47b4895bf5df48c6a387141b0849c3d26e4400a910b",
+    "rootBone": "Root_M",
+    "nativeRootScale": 0.9,
+    "m_DoRagdoll": false
+  },
+  "frames": [
+    {
+      "action": "pass",
+      "index": 0,
+      "clip": "cidle_roc",
+      "path": "scratch/mirewarden-game/model-test-output/2e981e9be3394f819e8cf29bcf44ec61/0000.png",
+      "sha256": "8bbcef3b139c674b707f536d90fd8cd807e05e0f6c1a9e6753ec1afa863cd9d6",
+      "observation": "The authored hooked beak, crown, chest, paired wings, legs, talons, and tail form one readable Roc silhouette in settled idle."
+    },
+    {
+      "action": "pass",
+      "index": 60,
+      "clip": "attackProf_roc",
+      "path": "scratch/mirewarden-game/model-test-output/2e981e9be3394f819e8cf29bcf44ec61/0060.png",
+      "sha256": "07fc6d83cd14888a61e3be2f259783ff743ea2707972b9f6e62d3efaa1fa5ecc",
+      "observation": "The native airborne attack pose keeps the torso, wing roots, broad feathers, legs, and tail connected; the top of the head is cropped by the combat camera in this frame."
+    },
+    {
+      "action": "attack",
+      "index": 25,
+      "clip": "cidle_roc",
+      "path": "scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d/0025.png",
+      "sha256": "6a60f9c6c8b1d8450d74192b77be2896b556ce2dc445fc23a62f3d22bedf6d45",
+      "observation": "The ordinary hit is visible as a 10-point health change at the transition into damageLight_roc. Impact effects partly cover the chest, while both wings and the body remain continuous."
+    },
+    {
+      "action": "attack",
+      "index": 80,
+      "clip": "attackCrit_roc",
+      "path": "scratch/mirewarden-game/model-test-output/a06e31fb6f854959b3e400d57f8c137d/0080.png",
+      "sha256": "5048405bcc50fc6f1e3b1df3c489137deed71f7dd8ad2f7dc11b3314d773ed64",
+      "observation": "The later native critical attack pose keeps the beak, torso, wings, legs, talons, and tail attached while effects and combat UI obscure some surfaces."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 50,
+      "clip": "deathHeavy_roc",
+      "path": "scratch/mirewarden-game/model-test-output/945adef83cf34b22bbf8f69ab5cbddb5/0050.png",
+      "sha256": "e7ed919150cbc300b4125403f95ccbb05d1ef23debacc922d5a85e1a29d6a210",
+      "observation": "The explicit fixture shows the authored Roc folded and lowered under deathHeavy_roc with both wings and the tail still visibly connected. This is animated death, not a body ragdoll."
+    },
+    {
+      "action": "native-row-portrait",
+      "index": 0,
+      "clip": "constructed native uiEnemyEncounterPortrait.Initialize fixture",
+      "path": "art-experiments/sunspire-roc/live-validation-v3/selected/native-row-portrait.png",
+      "sha256": "b7b93723f656f1422fafffae228732dedb45e9fa7f983873ff6b4c37ec7b5042",
+      "observation": "The native row portrait is readable at 328 by 280 and clearly shows the authored beak, eye, crown, head, and neck mantle."
+    }
+  ],
+  "conclusion": "The reviewed exact-source originals show a coherent authored Roc through idle, native attacks, ordinary hit response, animated fixture death, and the constructed native row portrait.",
+  "limits": [
+    "Six selected originals were reviewed rather than every rendered pose or camera angle.",
+    "Combat UI, the hero, hit flashes, depth effects, and the victory state obscure some surfaces.",
+    "The explicit KillSingle fixture is not ordinary lethal-damage evidence.",
+    "m_DoRagdoll is false across all retained combat capture frames, so the recorded death is animated rather than a body ragdoll.",
+    "The retained frames do not establish a settled corpse, precise visible corpse lifetime, final resource disposal, full culling coverage, or finished art direction.",
+    "The portrait evidence is one constructed native row caller at one resolution. It is not an opened encounter menu or live combat HUD.",
+    "This review covers only rocA and enRoc01 renderer 121238. It does not establish rocB, rocJungleA, or another bird rig."
+  ]
+}

@@ -1,0 +1,390 @@
+{
+  "status": "SELECTED_ORIGINAL_APPEARANCE_AND_MOTION_REVIEWED",
+  "nativeEnemy": "plantE",
+  "rendererId": 121530,
+  "controllerId": 5980,
+  "session": "34c6aa4af2e24f4f9617879dfcd86301",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "0c65f1275f3eae761ec87bae6240c91dcfa49a13e34c5fc08334b92a88bc6163",
+      "bytes": 308736
+    }
+  },
+  "assetHashes": {
+    "belladusk.glb": "0678780baaf1f709bf43dabaca1fd30a469f8f443624a57bb9dbd506da064fd9",
+    "belladusk_basecolor.png": "51a84eb77be58235914d77b6030c5922d0de4baf3fe4ba2797d4b7a67e8ce493"
+  },
+  "profileSha256": "7bdc94b7a7730b30fa9168df996e821a4a6bbc95bded20e6d4f1fc856e6ca686",
+  "rawWrapperStatus": "needs_visual_review",
+  "captures": [
+    {
+      "label": "pass",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/9911f95cb1c24a3ebca1ff6512602e2a.json",
+        "sha256": "751227d61f1fc08c74a74348dc9080bd8ca8704563b02f72f611f545c2f59af1"
+      },
+      "raw": {
+        "path": "art-experiments/belladusk-pitcher/live-v1/pass.json.gz",
+        "sha256": "3ce8fca165b49f370d2ceb325b315a23298b3846ac7de85b8320c1e9fbbb57b7"
+      },
+      "video": {
+        "path": "art-experiments/belladusk-pitcher/live-v1/pass.mp4",
+        "sha256": "66d71348c3dd3779bc512bce15db1fbe80e2f51e1eab2f93803d6f518f4463f7"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": null
+    },
+    {
+      "label": "attack",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/cfb118f74b79450f9f2872a834efd7f1.json",
+        "sha256": "50b2ce8c1d0928bb4eff23d1d31d7b424ff3ee5b2cc83b1773849bee7d5e73b3"
+      },
+      "raw": {
+        "path": "art-experiments/belladusk-pitcher/live-v1/attack.json.gz",
+        "sha256": "0e3372823f254eb88347edbd3e8ab56984df8baef5bee193676f171aec823a54"
+      },
+      "video": {
+        "path": "art-experiments/belladusk-pitcher/live-v1/attack.mp4",
+        "sha256": "29fe89bce491ca0d371adea82dca3d11b64fa3b96d70b75b07357ab7dcad4450"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": null
+    },
+    {
+      "label": "kill-fixture",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/10cf608d190244c09fca6407b4a1df6e.json",
+        "sha256": "8b1a9cb543ef1ec9d216b1d85ff689dddda188e06a240ac94cd8b819d98f9c92"
+      },
+      "raw": {
+        "path": "art-experiments/belladusk-pitcher/live-v1/kill-fixture.json.gz",
+        "sha256": "c3c441fd18b56b56ff2d18e34398127c66498acb01612cc19ddc7a52b0d005b5"
+      },
+      "video": {
+        "path": "art-experiments/belladusk-pitcher/live-v1/kill-fixture.mp4",
+        "sha256": "22a02ed56b411296aee18e2cadeb66fc2c3b9f6c28f6107285c1b817d12f6bf4"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": null
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235430,
+        "alive": true,
+        "containerInstanceId": -237166,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237208,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237608,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235430,
+            "celInstanceId": -239034,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245596,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "34c6aa4af2e24f4f9617879dfcd86301",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "34c6aa4af2e24f4f9617879dfcd86301",
+    "id": "5ed789f937f34fbc8c238ec429844ff7",
+    "frame": 10490,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "rootReview": {
+    "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-root-live-review.json",
+    "sha256": "9a27ad57caf9c78f3cf35f3afb28b654f3b5a1d38fac0e492017552c49488d85"
+  },
+  "limits": [
+    "Selected images only, nativeFX and hero occlusion recorded",
+    "Explicit KillSingle50\u21920, not ordinary lethal damage",
+    "Final owned resource teardown unverified",
+    "Exact plantE profile only",
+    "Visible collapsed death; numerical floor contact not established."
+  ],
+  "evidence": [
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/attack-0030.png",
+      "sha256": "9b0d16a6150619f1ca2735b2e47c85304278211e0d63be917c2c148df3c124fe"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/attack-source-image-pins.json",
+      "sha256": "60c0fbe4f3062423171df3665546a320b38792f484f9123aa5e9deea3f89491c"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/attack.json.gz",
+      "sha256": "0e3372823f254eb88347edbd3e8ab56984df8baef5bee193676f171aec823a54"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/attack.mp4",
+      "sha256": "29fe89bce491ca0d371adea82dca3d11b64fa3b96d70b75b07357ab7dcad4450"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-deployment-result.json",
+      "sha256": "529f83c7c3e7862b8aa7515f9def74775d425a465f6745be49986d4e49a13bf9"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-first-exercise-result.txt",
+      "sha256": "0ed3373797251cce9f32718119428a59752d4a1a74671312aaf9f3b991c9b466"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-first-stage-result.txt",
+      "sha256": "86378313db36ff2dd5e6aa2b44e23534f31caca705631e3892076461c8c085ba"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-live-inventory.json",
+      "sha256": "70e8a32afea1671412dda8e46f57ce0b74946b867a2d5e6d66c32d28f752d2e6"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-live-material-state.json",
+      "sha256": "40b30456970511d3c2c2ae7cd63297197cfda47fdd204d0f01f553acfea77099"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-root-glb-validation.json",
+      "sha256": "4c7f7f58b53e177443bfec438bb3dea9babfc38c14ffb4ba391be2e5c24521fe"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-root-live-review.json",
+      "sha256": "9a27ad57caf9c78f3cf35f3afb28b654f3b5a1d38fac0e492017552c49488d85"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-root-mouth-review-v1.json",
+      "sha256": "2b8b2c889090ec5f232535ceb996c3421ed6061b3850feac98ecf22118105515"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-root-offline-review.json",
+      "sha256": "c707785ae196b4afa7cb81b0dfb3937cb924bb3c93000d769f228f500cbd4aa2"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/belladusk-startup-evidence.json",
+      "sha256": "5681641d3a052bf9bb22900195ed971161b7b1ee96c65f0edd4cc624199832f2"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-080c6c1a141443b38702bd1a175e7752/capture-summary.json",
+      "sha256": "07a686b397f9283efaaaac368543403d76a44f3413548357057176c55cabae1c"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-080c6c1a141443b38702bd1a175e7752/journal.jsonl",
+      "sha256": "3d07639bb833ea5019dae91775946f2fad52deb167c2b9185d27ca805b022d63"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-080c6c1a141443b38702bd1a175e7752/result.json",
+      "sha256": "2a1848582803b75a9ba5998b465a7b0427c69ddd0cff8dc17221b1b8bd3ca81a"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-a512b450d72d47d9be3bc856aeb29d2c/capture-summary.json",
+      "sha256": "bb1ca6cd66799e7e0c608f48a329b0280b520449a35222e7688512040edbd588"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-a512b450d72d47d9be3bc856aeb29d2c/journal.jsonl",
+      "sha256": "c5b2a1977401cce6e460670dedbc29cf676b1c996d3ec69c434bb698912f6493"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-a512b450d72d47d9be3bc856aeb29d2c/result.json",
+      "sha256": "30edb96796f340ee19cd1e8317df6a262790b4707bceb3c5906357c0a9e0418a"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-cabdbf9358104107a7f864023308a61f/capture-summary.json",
+      "sha256": "1a5f92827dc5ef6ea05a9b953ce6a042eae6bf1313909abd0b43b285127d82a7"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-cabdbf9358104107a7f864023308a61f/journal.jsonl",
+      "sha256": "254bee8ee20784e550516b27f62f64ea5a7bbe57ee28e6fe418d54f41a66c5f7"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-cabdbf9358104107a7f864023308a61f/result.json",
+      "sha256": "043fe64402c5ba92ff1eb4efe10665865f5664018d678fae3054655d34bb0254"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/case-result.json",
+      "sha256": "0c4d4bc6860bb60b6a082871aa86a0e7ef1ec7f71f76ac1f830003aba1eed2e3"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/journal.jsonl",
+      "sha256": "68412f4b711dd27866b2b849961dcdcff9964c0b8e2684c77177094af76be788"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/kill-fixture-0060.png",
+      "sha256": "4b107dd3d4a9eca8334d2bad3071c4e80dff0d1139ef7af7de136a9e941ffc36"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/kill-fixture-source-image-pins.json",
+      "sha256": "ec26425b550799dcc7c2d73a6444c81c49ff6cd59bbccc5da13ca80c807b4a99"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/kill-fixture.json.gz",
+      "sha256": "c3c441fd18b56b56ff2d18e34398127c66498acb01612cc19ddc7a52b0d005b5"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/kill-fixture.mp4",
+      "sha256": "22a02ed56b411296aee18e2cadeb66fc2c3b9f6c28f6107285c1b817d12f6bf4"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/pass-0000.png",
+      "sha256": "48fd733550b8e24116dda17059a5c66d03b921701cccc511f1e5522c44bcf5aa"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/pass-0050.png",
+      "sha256": "7b00db1600ae46645957e2f372db38fa3678966f18145ce3b3a000b4ac952c32"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/pass-0101.png",
+      "sha256": "c6efae60f9ea9eccbd9ef0375b3b9d2dda4804ecb77d962c9300a225d117b707"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/pass-source-image-pins.json",
+      "sha256": "c4ef0f71a6e3af3d7781c494f0b0a47adbcc6435668082c241c16f34a1fd058f"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/pass.json.gz",
+      "sha256": "3ce8fca165b49f370d2ceb325b315a23298b3846ac7de85b8320c1e9fbbb57b7"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/pass.mp4",
+      "sha256": "66d71348c3dd3779bc512bce15db1fbe80e2f51e1eab2f93803d6f518f4463f7"
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-v1/selected-frames.html",
+      "sha256": "19f65985b205a51ca43bf908d68b35ea36860c804cbbab8fdb54b55d95004bb3"
+    }
+  ]
+}

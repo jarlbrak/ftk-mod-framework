@@ -1,0 +1,58 @@
+{
+  "scope": "Exact fairyA calibration probe, not original creature art",
+  "wrapperResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-9fa034b1acf246eaa5b8b8dc144aaf01/case-result.json",
+  "reviewed": {
+    "pass": {
+      "capture": "7e8d970fd9cf49f597b1a17805d326f1",
+      "frames": [
+        0,
+        48
+      ]
+    },
+    "hit": {
+      "capture": "984eb2ce426948d1a10ecc5ca2bb82cc",
+      "frames": [
+        30
+      ]
+    },
+    "death": {
+      "capture": "4e53e1e68fac461d975a2586140792b1",
+      "frames": [
+        40,
+        60
+      ]
+    }
+  },
+  "visualVerdict": "coherent selected diagnostic poses",
+  "observations": [
+    "Upright articulated probe follows native fairy poses.",
+    "Native pink spell burst partly obscures attack48; hero partly obscures hit30.",
+    "Death40/60 shows prone probe on floor with nativeFX near40."
+  ],
+  "normalHit": {
+    "status": "nonlethal_hp_loss",
+    "beforeHp": 58,
+    "afterHp": 55,
+    "nativeOutcome": null,
+    "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+  },
+  "deathAudit": {
+    "nativeDoRagdollFalseAll120": true,
+    "animatorEnabledAll120": true,
+    "inactiveWeaponBreakRigidbodiesPerFrame": 2,
+    "bodyRagdollClaim": false
+  },
+  "collectCount": 1,
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 3,
+    "buttonCount": 1
+  },
+  "limitations": [
+    "Calibration geometry only, no original art acceptance.",
+    "Five selected frames, not full motion/camera coverage.",
+    "Explicit KillSingle death fixture; normal damage only on nonlethalhit.",
+    "fairy_die sampled start.141 misses beginning of firstcycle; no nearcomplete claim."
+  ]
+}

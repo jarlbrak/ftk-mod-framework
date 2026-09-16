@@ -1,0 +1,1769 @@
+{
+  "status": "SOURCE VERIFIED; no topology live baseline indexed at this investigation",
+  "topology": "6fdb7ff148451731439b8bc3fcf976156d8bc7247f5732a4653e95866d27aefa",
+  "sourceAssetsSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "assemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "recommendation": {
+    "enemy": "beeA",
+    "reason": "Ordinary authored level0 row, single exact renderer, existing strict runtime diagnostic profile; no resource override or adapter.",
+    "runtimeProfile": {
+      "key": "ftkmf_modeltest_probe_beea",
+      "baseEnemy": "beeA",
+      "displayName": "Rig probe: beeA",
+      "combatProfile": "a34dceed30a67f62df142e0b62554fda51eb4be683804b903119503d90c0e73a",
+      "renderers": [
+        {
+          "rendererPath": "Monster Bee",
+          "glbFile": "probe_121062.glb",
+          "textureFile": "probe_palette.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    }
+  },
+  "nativeEnemyCases": [
+    {
+      "enemy": "beeA",
+      "nativeLevel": 0,
+      "prefab": "enBee_01",
+      "cel": 135002,
+      "renderer": 121062,
+      "rendererPath": "Monster Bee",
+      "rigProfile": "a249aaf4d33d38e8bbc4ff4cd351bdfe8d8f04418f05ee60b0b81a70a5374da1",
+      "bindProfile": "20af047ca6da688deecfec7e73bc2cf2b0595a6cd62f29acde41636fb733dcfe",
+      "combatProfile": "a34dceed30a67f62df142e0b62554fda51eb4be683804b903119503d90c0e73a",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 608
+        }
+      ]
+    },
+    {
+      "enemy": "beeB",
+      "nativeLevel": 3,
+      "prefab": "enBee_02",
+      "cel": 137014,
+      "renderer": 121226,
+      "rendererPath": "Monster Bee",
+      "rigProfile": "a249aaf4d33d38e8bbc4ff4cd351bdfe8d8f04418f05ee60b0b81a70a5374da1",
+      "bindProfile": "20af047ca6da688deecfec7e73bc2cf2b0595a6cd62f29acde41636fb733dcfe",
+      "combatProfile": "a34dceed30a67f62df142e0b62554fda51eb4be683804b903119503d90c0e73a",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 596
+        }
+      ]
+    },
+    {
+      "enemy": "dragonflyA",
+      "nativeLevel": 2,
+      "prefab": "enSwampFly01",
+      "cel": 137245,
+      "renderer": 121101,
+      "rendererPath": "enSwampFly01",
+      "rigProfile": "0d8639c809a5c5234891f9312bfa3c6c2a6930027cc9b6b57ccb334a91b1f1e5",
+      "bindProfile": "81a014e1d1852c6b160b57fd559c7d37c386a79f4e028627086064a44fd2bfdf",
+      "combatProfile": "a579132d1fa693f33aa682a7ba7ac1a493ea6bbd1e90b53d569632326bec032a",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 524
+        }
+      ]
+    },
+    {
+      "enemy": "dragonflyB",
+      "nativeLevel": 4,
+      "prefab": "enSwampFly01",
+      "cel": 137245,
+      "renderer": 121101,
+      "rendererPath": "enSwampFly01",
+      "rigProfile": "0d8639c809a5c5234891f9312bfa3c6c2a6930027cc9b6b57ccb334a91b1f1e5",
+      "bindProfile": "81a014e1d1852c6b160b57fd559c7d37c386a79f4e028627086064a44fd2bfdf",
+      "combatProfile": "a579132d1fa693f33aa682a7ba7ac1a493ea6bbd1e90b53d569632326bec032a",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 524
+        }
+      ]
+    },
+    {
+      "enemy": "mosquitoA",
+      "nativeLevel": 2,
+      "prefab": "enMosquito_01",
+      "cel": 137946,
+      "renderer": 121569,
+      "rendererPath": "enMosquito_01",
+      "rigProfile": "985c9b53754a7d6f326e902718aef92c2fe085559ec4bae390bf055ade0531c9",
+      "bindProfile": "ea06f60ce7c52d1832f8ad6485ba2fb8ca48d902e8d49108fe50f09808331496",
+      "combatProfile": "6f724218c06a77d042e6303c75176ed2900029e4b9536e7e732e73a21ea9d18b",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 600
+        }
+      ]
+    },
+    {
+      "enemy": "scarabA",
+      "nativeLevel": 4,
+      "prefab": "enScarabB",
+      "cel": 140339,
+      "renderer": 121518,
+      "rendererPath": "enScarabB",
+      "rigProfile": "022e0862837e641c793aab7e05a93fa77efc2664572fe98ff3ed77c761e9aa1f",
+      "bindProfile": "50e2363731680515fd6316d92aa4601f2e11ebb1b3bd2fc2ade9939282745caf",
+      "combatProfile": "772631a5578e62ab962b219d9e388e66c1732b2e625d6e2cfd1fbe3b794692f8",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 584
+        }
+      ]
+    },
+    {
+      "enemy": "scarabB",
+      "nativeLevel": 6,
+      "prefab": "enScarabA",
+      "cel": 138966,
+      "renderer": 121389,
+      "rendererPath": "enScarabA",
+      "rigProfile": "3a1c03ad7ac39c5e06210e4ac3ae4d1291690bb862d9d1be49efacf5a9f72768",
+      "bindProfile": "0c57f9fba469604745dbc810eaa666c3a7a734168fd70be8d683983c57e04d79",
+      "combatProfile": "32e1f69869568b1b9228fdef4dc6a4f35f8804e3ec963344f2ccaeacb8c2b755",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 584
+        }
+      ]
+    },
+    {
+      "enemy": "mosquitoB",
+      "nativeLevel": 6,
+      "prefab": "enMosquito_02",
+      "cel": 140043,
+      "renderer": 121481,
+      "rendererPath": "enMosquito_02",
+      "rigProfile": "2c9a3f213a6df073e4ec337a9fb4071c03b4dc6ddb744d126cbf8c4f2917b96a",
+      "bindProfile": "e504c2ed3c5602afcbe0a052b667b5c4b0dbbb6177dfb9eceb10da28a266e134",
+      "combatProfile": "e77b5b60acd988145c92f9300f55a85f3954e2d4bdf9182343a7d1d74f8575c3",
+      "weaponController": [
+        {
+          "controller_path_id": 5942,
+          "controller_asset_file": "resources.assets",
+          "controller_name": "beeController",
+          "weapon_holder_name": "WEAPON_HOLDER",
+          "serialized_pointer_offset": 600
+        }
+      ]
+    }
+  ],
+  "exactCombatPairCount": 6,
+  "selectedNativeRootTransform": {
+    "path": "/enBee_01",
+    "transform_id": 59545,
+    "active": true,
+    "components": [
+      {
+        "type": "Transform",
+        "id": 59545
+      },
+      {
+        "type": "Animator",
+        "id": 115939
+      },
+      {
+        "type": "MonoBehaviour",
+        "id": 135002,
+        "script": "CharacterEventListener"
+      }
+    ],
+    "localPosition": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "localRotation": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    },
+    "localScale": {
+      "x": 1.25,
+      "y": 1.25,
+      "z": 1.25
+    }
+  },
+  "selectedMaterials": [
+    {
+      "id": 60,
+      "name": "matBee",
+      "keywords": "_EMISSION",
+      "colors": [
+        [
+          "_Color",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ],
+        [
+          "_EmissionColor",
+          {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.0
+          }
+        ],
+        [
+          "_EmissionColorUI",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ]
+      ]
+    },
+    {
+      "id": 63,
+      "name": "matBeeGlow",
+      "keywords": "_EMISSION",
+      "colors": [
+        [
+          "_Color",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ],
+        [
+          "_EmissionColor",
+          {
+            "r": 2.0,
+            "g": 2.0,
+            "b": 2.0,
+            "a": 2.0
+          }
+        ],
+        [
+          "_EmissionColorUI",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ]
+      ]
+    }
+  ],
+  "materialBoundary": "First slot matBee60 has white tint and zero emission; second matBeeGlow63 has emission2,2,2. One-primitive custom assignment uses first native material only. This is not a promise to preserve native multi-material glow.",
+  "markers": [
+    {
+      "path": "/enBee_01/Root_M/RigNeck/RigHead/PortraitCam",
+      "transform_id": 63769,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 63769
+        },
+        {
+          "type": "Camera",
+          "id": 98551
+        }
+      ],
+      "localPosition": {
+        "x": -1.4700000286102295,
+        "y": -0.6499999761581421,
+        "z": 1.0800000429153442
+      },
+      "localRotation": {
+        "x": -0.8583941459655762,
+        "y": -0.18802997469902039,
+        "z": -0.46623414754867554,
+        "w": 0.10212790966033936
+      },
+      "localScale": {
+        "x": 0.7407407164573669,
+        "y": 0.7407404184341431,
+        "z": 0.7407404184341431
+      },
+      "leafCount": 1
+    },
+    {
+      "path": "/enBee_01/CameraRoot/EncounterCam",
+      "transform_id": 74538,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 74538
+        },
+        {
+          "type": "Camera",
+          "id": 98460
+        }
+      ],
+      "localPosition": {
+        "x": 2.868000030517578,
+        "y": 1.2680000066757202,
+        "z": 5.976098537445068
+      },
+      "localRotation": {
+        "x": 0.0,
+        "y": -0.9743700623512268,
+        "z": 0.0,
+        "w": 0.22495104372501373
+      },
+      "localScale": {
+        "x": 1.0000001192092896,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "leafCount": 1
+    }
+  ],
+  "controller": {
+    "asset_file": "resources.assets",
+    "path_id": 5942,
+    "name": "beeController",
+    "type": "AnimatorController",
+    "states": [
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.IDLE",
+        "short_name": "IDLE",
+        "full_path_hash": -1009909005,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.INTRO",
+        "short_name": "INTRO",
+        "full_path_hash": 1746749458,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.DEFEND",
+        "short_name": "DEFEND",
+        "full_path_hash": 1632517995,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.ATTACK",
+        "short_name": "ATTACK",
+        "full_path_hash": -1274329858,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.VICTORY",
+        "short_name": "VICTORY",
+        "full_path_hash": -1607934524,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.PASSIVE VICTORY",
+        "short_name": "PASSIVE VICTORY",
+        "full_path_hash": -1687097015,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.DAMAGEDHEAVY",
+        "short_name": "DAMAGEDHEAVY",
+        "full_path_hash": -1321389798,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.DEATH",
+        "short_name": "DEATH",
+        "full_path_hash": -1788913636,
+        "loop": false
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.ATTACKCRIT",
+        "short_name": "ATTACKCRIT",
+        "full_path_hash": -1263380122,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.ATTACKPROF",
+        "short_name": "ATTACKPROF",
+        "full_path_hash": 1409120217,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.DODGE",
+        "short_name": "DODGE",
+        "full_path_hash": -478722116,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.DAMAGED",
+        "short_name": "DAMAGED",
+        "full_path_hash": 207319669,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.DAMAGED STUN",
+        "short_name": "DAMAGED STUN",
+        "full_path_hash": -551636406,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.OverworldAppear",
+        "short_name": "OverworldAppear",
+        "full_path_hash": -865941836,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.VICTORYIDLE",
+        "short_name": "VICTORYIDLE",
+        "full_path_hash": 491031249,
+        "loop": true
+      },
+      {
+        "state_machine_index": 0,
+        "full_path": "Base Layer.DEATHLIGHT",
+        "short_name": "DEATHLIGHT",
+        "full_path_hash": 1546769499,
+        "loop": false
+      }
+    ],
+    "validation": "serialized_metadata_not_animation_tested"
+  },
+  "clips": [
+    {
+      "id": 4889,
+      "name": "BeeIdle",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_MED",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.07557354867458344,
+          "functionName": "Foley",
+          "data": "PLAY_VO_TAUNT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 4889,
+      "name": "BeeIdle",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_MED",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.07557354867458344,
+          "functionName": "Foley",
+          "data": "PLAY_VO_TAUNT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 5276,
+      "name": "BeeDefend",
+      "events": [],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 5212,
+      "name": "attack2_bee",
+      "events": [
+        {
+          "time": 0.148853600025177,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.24691826105117798,
+          "functionName": "AttackSlideStart",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 1.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.39685750007629395,
+          "functionName": "Dodge",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5058728456497192,
+          "functionName": "StartWeaponTrail",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6825253367424011,
+          "functionName": "StopWeaponTrail",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6906185150146484,
+          "functionName": "AttackSlideStop",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6979184150695801,
+          "functionName": "AttackHit",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.8811482191085815,
+          "functionName": "AttackSlideStart",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": -1.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.1571861505508423,
+          "functionName": "AttackSlideStop",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.1666667461395264
+    },
+    {
+      "id": 4889,
+      "name": "BeeIdle",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_MED",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.07557354867458344,
+          "functionName": "Foley",
+          "data": "PLAY_VO_TAUNT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 4889,
+      "name": "BeeIdle",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_MED",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.07557354867458344,
+          "functionName": "Foley",
+          "data": "PLAY_VO_TAUNT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 5295,
+      "name": "BeeTakeDamage",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 0.8333333730697632
+    },
+    {
+      "id": 4894,
+      "name": "BeeDie",
+      "events": [
+        {
+          "time": 0.018462006002664566,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.05324074253439903,
+          "functionName": "DeathFallOff",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.7877867817878723,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_BODYFALL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.6666667461395264
+    },
+    {
+      "id": 5263,
+      "name": "beeStingerAttack",
+      "events": [
+        {
+          "time": 0.008238338865339756,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.10124713182449341,
+          "functionName": "AttackSlideStart",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 1.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.3412754237651825,
+          "functionName": "Dodge",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.35713091492652893,
+          "functionName": "StartWeaponTrail",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5693052411079407,
+          "functionName": "AttackSlideStop",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.592685341835022,
+          "functionName": "StopWeaponTrail",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6219103932380676,
+          "functionName": "AttackHit",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.8420290350914001,
+          "functionName": "AttackSlideStart",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": -1.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.1176328659057617,
+          "functionName": "AttackSlideStop",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.1666667461395264
+    },
+    {
+      "id": 5263,
+      "name": "beeStingerAttack",
+      "events": [
+        {
+          "time": 0.008238338865339756,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.10124713182449341,
+          "functionName": "AttackSlideStart",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 1.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.3412754237651825,
+          "functionName": "Dodge",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.35713091492652893,
+          "functionName": "StartWeaponTrail",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.5693052411079407,
+          "functionName": "AttackSlideStop",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.592685341835022,
+          "functionName": "StopWeaponTrail",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.6219103932380676,
+          "functionName": "AttackHit",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.8420290350914001,
+          "functionName": "AttackSlideStart",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": -1.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 1.1176328659057617,
+          "functionName": "AttackSlideStop",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.1666667461395264
+    },
+    {
+      "id": 5132,
+      "name": "dodge_bee",
+      "events": [
+        {
+          "time": 0.001349527738057077,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 5295,
+      "name": "BeeTakeDamage",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 0.8333333730697632
+    },
+    {
+      "id": 5295,
+      "name": "BeeTakeDamage",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 0.8333333730697632
+    },
+    {
+      "id": 4889,
+      "name": "BeeIdle",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_MED",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.07557354867458344,
+          "functionName": "Foley",
+          "data": "PLAY_VO_TAUNT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 4889,
+      "name": "BeeIdle",
+      "events": [
+        {
+          "time": 0.0,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_MED",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.07557354867458344,
+          "functionName": "Foley",
+          "data": "PLAY_VO_TAUNT",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.3333333730697632
+    },
+    {
+      "id": 4894,
+      "name": "BeeDie",
+      "events": [
+        {
+          "time": 0.018462006002664566,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_SM",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.05324074253439903,
+          "functionName": "DeathFallOff",
+          "data": "",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        },
+        {
+          "time": 0.7877867817878723,
+          "functionName": "Foley",
+          "data": "PLAY_FLY_MV_HUM_BODYFALL",
+          "objectReferenceParameter": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "floatParameter": 0.0,
+          "intParameter": 0,
+          "messageOptions": 0
+        }
+      ],
+      "stopTime": 1.6666667461395264
+    }
+  ],
+  "death": {
+    "rigidbodies": 16,
+    "characterJoints": 15,
+    "FallOffLimb": false,
+    "additionalMeshRenderers": 0,
+    "sourcePath": "CharacterEventListener resolves Root_M; OnEnable finds CharacterJoints and sets m_DoRagdoll. CharacterDummy entering Base Layer.DEATH in ordinary enemy encounter calls CheckRagdollDeathSound -> DoRagDoll, non-kinematic bodies and disabled Animator. BeeDie DeathFallOff event exists at0.0532407425, but no FallOffLimb is attached; no corpse-replacement renderer found.",
+    "limitations": "Exact live death timing/FX, physics settling and alternate DEATHLIGHT route remain untested."
+  },
+  "binding": {
+    "referencePath": "scratch/skeleton-audit/121062/reference.npz",
+    "referenceSha256": "e1acdfc401082fa78429dedce4e5d1192e477d2c825357f0aae2678dd00b10a4",
+    "nativeBoundsMin": [
+      -0.7106248140335083,
+      -0.7098223995032805,
+      -0.02707606867538981
+    ],
+    "nativeBoundsMax": [
+      0.7106248140335083,
+      0.3034753440200777,
+      0.7043356190668579
+    ],
+    "boneUsage": [
+      {
+        "index": 0,
+        "name": "Root_M",
+        "positiveVertexCount": 477,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          9.261842410703724e-09,
+          -0.13549505683519,
+          0.4317958274639836
+        ]
+      },
+      {
+        "index": 1,
+        "name": "RigTail1",
+        "positiveVertexCount": 249,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          4.454469987275941e-09,
+          -0.025512994533345906,
+          0.4111988818198987
+        ]
+      },
+      {
+        "index": 2,
+        "name": "RigHead",
+        "positiveVertexCount": 312,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          1.4680822459422783e-07,
+          -0.3210287454987921,
+          0.3746938929180301
+        ]
+      },
+      {
+        "index": 3,
+        "name": "RigNeck",
+        "positiveVertexCount": 0,
+        "maximumWeight": 0.0,
+        "restJointCenter": [
+          9.280253094192384e-09,
+          -0.13407285837446917,
+          0.4324335083522221
+        ]
+      },
+      {
+        "index": 4,
+        "name": "RigTail2",
+        "positiveVertexCount": 275,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -1.5624864768218225e-09,
+          0.11213546554862389,
+          0.3194432147666079
+        ]
+      },
+      {
+        "index": 5,
+        "name": "RigTail3",
+        "positiveVertexCount": 314,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -3.3992011437293596e-09,
+          0.15415256244812178,
+          0.16338354039554603
+        ]
+      },
+      {
+        "index": 6,
+        "name": "RigTail4",
+        "positiveVertexCount": 243,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          2.0142571307694814e-10,
+          0.07178063102537582,
+          0.0568296581795937
+        ]
+      },
+      {
+        "index": 7,
+        "name": "RigRFrontArm1",
+        "positiveVertexCount": 48,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224878245609776,
+          -0.17542374741592953,
+          0.3479163153685156
+        ]
+      },
+      {
+        "index": 8,
+        "name": "RigRMouth",
+        "positiveVertexCount": 64,
+        "maximumWeight": 0.5483870967741935,
+        "restJointCenter": [
+          0.035829519319993175,
+          -0.38299617059782787,
+          0.31411023183809433
+        ]
+      },
+      {
+        "index": 9,
+        "name": "RigRBackArm1",
+        "positiveVertexCount": 71,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224875517028146,
+          -0.06814535209861552,
+          0.3590367910042827
+        ]
+      },
+      {
+        "index": 10,
+        "name": "RigRBackArm2",
+        "positiveVertexCount": 64,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224873300516373,
+          -0.058977428879431616,
+          0.27406233484980574
+        ]
+      },
+      {
+        "index": 11,
+        "name": "RigRwing1",
+        "positiveVertexCount": 75,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.09805857071579908,
+          -0.1785918402980261,
+          0.5269126050528902
+        ]
+      },
+      {
+        "index": 12,
+        "name": "RigRFeeler1",
+        "positiveVertexCount": 23,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.043827464485433225,
+          -0.3289065738225474,
+          0.4498155087518412
+        ]
+      },
+      {
+        "index": 13,
+        "name": "RigRMidArm1",
+        "positiveVertexCount": 75,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224875937565457,
+          -0.12238965886095762,
+          0.3479163162569422
+        ]
+      },
+      {
+        "index": 14,
+        "name": "RigRMidArm3",
+        "positiveVertexCount": 105,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224875225641701,
+          -0.18658000260053284,
+          0.21185222779842838
+        ]
+      },
+      {
+        "index": 15,
+        "name": "RigRBackArm3",
+        "positiveVertexCount": 110,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224874374601557,
+          -0.0923201582674845,
+          0.2010503481979661
+        ]
+      },
+      {
+        "index": 16,
+        "name": "RigRFrontArm3",
+        "positiveVertexCount": 111,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224872753635988,
+          -0.32990283725292313,
+          0.228369659250193
+        ]
+      },
+      {
+        "index": 17,
+        "name": "RigRMidArm2",
+        "positiveVertexCount": 66,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.0822487374097591,
+          -0.13667351832371027,
+          0.27116472474199915
+        ]
+      },
+      {
+        "index": 18,
+        "name": "RigRFrontArm2",
+        "positiveVertexCount": 67,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.08224876937928179,
+          -0.22344768490468941,
+          0.26775893965135444
+        ]
+      },
+      {
+        "index": 19,
+        "name": "RigLBackArm1",
+        "positiveVertexCount": 71,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.08224875022544138,
+          -0.06814537541129959,
+          0.35903680019016826
+        ]
+      },
+      {
+        "index": 20,
+        "name": "RigLMidArm1",
+        "positiveVertexCount": 75,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.08224875785824343,
+          -0.1223896670648597,
+          0.34791639741529734
+        ]
+      },
+      {
+        "index": 21,
+        "name": "RigLFrontArm1",
+        "positiveVertexCount": 71,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.08224876714921135,
+          -0.17542377370822168,
+          0.3479163603826878
+        ]
+      },
+      {
+        "index": 22,
+        "name": "RigLBackArm2",
+        "positiveVertexCount": 64,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.08224875494125578,
+          -0.05897743122175319,
+          0.2740623616284268
+        ]
+      },
+      {
+        "index": 23,
+        "name": "RigLFeeler1",
+        "positiveVertexCount": 23,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.04382714435658816,
+          -0.32890661421051076,
+          0.4498155129916794
+        ]
+      },
+      {
+        "index": 24,
+        "name": "RigLwing1",
+        "positiveVertexCount": 73,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.09805865092034297,
+          -0.17859181543379204,
+          0.5269127046531847
+        ]
+      },
+      {
+        "index": 25,
+        "name": "RigLMouth",
+        "positiveVertexCount": 220,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.03582922981335947,
+          -0.38299614012176847,
+          0.3141102286957104
+        ]
+      },
+      {
+        "index": 26,
+        "name": "RigLMidArm2",
+        "positiveVertexCount": 65,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.08224876111819397,
+          -0.1366735894834229,
+          0.27116481016583144
+        ]
+      },
+      {
+        "index": 27,
+        "name": "RigLFrontArm2",
+        "positiveVertexCount": 67,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.08224875277602972,
+          -0.22344772631132861,
+          0.2677589613006862
+        ]
+      },
+      {
+        "index": 28,
+        "name": "RigLMidArm3",
+        "positiveVertexCount": 104,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.0822488068655932,
+          -0.1865800460416327,
+          0.2118522740360018
+        ]
+      },
+      {
+        "index": 29,
+        "name": "RigLBackArm3",
+        "positiveVertexCount": 111,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.08224878735211891,
+          -0.09232019715652262,
+          0.20105035084947073
+        ]
+      },
+      {
+        "index": 30,
+        "name": "RigLFrontArm3",
+        "positiveVertexCount": 125,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.0822488028413695,
+          -0.32990290429475666,
+          0.22836971258489253
+        ]
+      },
+      {
+        "index": 31,
+        "name": "RigRFeeler2",
+        "positiveVertexCount": 103,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.04382747144512021,
+          -0.3498149944142293,
+          0.553974137230814
+        ]
+      },
+      {
+        "index": 32,
+        "name": "RigRFeeler3",
+        "positiveVertexCount": 38,
+        "maximumWeight": 0.5161290322580645,
+        "restJointCenter": [
+          0.043827469398978934,
+          -0.43307159711598603,
+          0.5655554195148851
+        ]
+      },
+      {
+        "index": 33,
+        "name": "RigRFeeler4",
+        "positiveVertexCount": 166,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.0438274730397479,
+          -0.5144739677200201,
+          0.5162500651199468
+        ]
+      },
+      {
+        "index": 34,
+        "name": "RigRFeelerMain",
+        "positiveVertexCount": 0,
+        "maximumWeight": 0.0,
+        "restJointCenter": [
+          0.043827477991106145,
+          -0.5584020748183119,
+          0.465932751994989
+        ]
+      },
+      {
+        "index": 35,
+        "name": "RigLFeelerMain",
+        "positiveVertexCount": 0,
+        "maximumWeight": 0.0,
+        "restJointCenter": [
+          -0.04382711763196154,
+          -0.5584021649838021,
+          0.46593272984929535
+        ]
+      },
+      {
+        "index": 36,
+        "name": "RigLFeeler2",
+        "positiveVertexCount": 103,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.04382713179946766,
+          -0.3498149341503231,
+          0.553974127192192
+        ]
+      },
+      {
+        "index": 37,
+        "name": "RigLFeeler3",
+        "positiveVertexCount": 72,
+        "maximumWeight": 0.5161290322580645,
+        "restJointCenter": [
+          -0.04382713355751383,
+          -0.4330715989007029,
+          0.5655553036723204
+        ]
+      },
+      {
+        "index": 38,
+        "name": "RigLFeeler4",
+        "positiveVertexCount": 166,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.04382711827405622,
+          -0.5144739568184012,
+          0.5162501081802026
+        ]
+      },
+      {
+        "index": 39,
+        "name": "RigRwing4",
+        "positiveVertexCount": 58,
+        "maximumWeight": 0.8709677419354839,
+        "restJointCenter": [
+          0.4095379456813651,
+          -0.037429037455880027,
+          0.614734880187401
+        ]
+      },
+      {
+        "index": 40,
+        "name": "RigRwing5",
+        "positiveVertexCount": 87,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          0.5557723440451865,
+          0.0288445586267128,
+          0.6559660681739685
+        ]
+      },
+      {
+        "index": 41,
+        "name": "RigRwing2",
+        "positiveVertexCount": 30,
+        "maximumWeight": 0.5161290322580645,
+        "restJointCenter": [
+          0.20334731874407286,
+          -0.1308748433254947,
+          0.5565989794038877
+        ]
+      },
+      {
+        "index": 42,
+        "name": "RigRwing3",
+        "positiveVertexCount": 33,
+        "maximumWeight": 0.5161290322580645,
+        "restJointCenter": [
+          0.3071738310956965,
+          -0.08382056693312477,
+          0.5858731667582804
+        ]
+      },
+      {
+        "index": 43,
+        "name": "RigLwing4",
+        "positiveVertexCount": 69,
+        "maximumWeight": 0.8709677419354839,
+        "restJointCenter": [
+          -0.4051507376107683,
+          -0.039417274393987525,
+          0.6134983715804553
+        ]
+      },
+      {
+        "index": 44,
+        "name": "RigLwing5",
+        "positiveVertexCount": 80,
+        "maximumWeight": 1.0,
+        "restJointCenter": [
+          -0.5513850792063829,
+          0.02685631542032457,
+          0.6547296571914308
+        ]
+      },
+      {
+        "index": 45,
+        "name": "RigLwing3",
+        "positiveVertexCount": 28,
+        "maximumWeight": 0.5161290322580645,
+        "restJointCenter": [
+          -0.30424910706636726,
+          -0.08514602675511476,
+          0.5850488184756181
+        ]
+      },
+      {
+        "index": 46,
+        "name": "RigLwing2",
+        "positiveVertexCount": 24,
+        "maximumWeight": 0.5161290322580645,
+        "restJointCenter": [
+          -0.203347336627194,
+          -0.13087481712366175,
+          0.5565992491143836
+        ]
+      }
+    ]
+  },
+  "evidenceHashes": {
+    "scratch/enemy-rig-mapping-reproducible.json": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52",
+    "scratch/runtime-profile-390-resinmaw-v1/model-test-profiles.json": "bd0e0c88aa2c5e0a2a4dad17c9a9f664829d4a12e060f04dcf2cea645a7dc10f",
+    "scratch/bee-topology-analysis/native-metadata.json": "334a4ae778b7008e07ce5011006eb5718fbca3549cea014202d1eca1aca4fc86",
+    "scratch/bee-topology-analysis/audit_bee_source.py": "5d1dc91dbe10f98babb331e312bcb32fab6f87d290021f1abc086c007b371039",
+    "scratch/bee-topology-analysis/FallOffLimb.cs": "732a35609c2a8e292b5ef646271f1d15046872e7672a9089de0cfc84d453db27",
+    "scratch/CharacterEventListener.analysis.cs": "b1c351a88947cefc9674dee9ac1e24f5278b825545b7ac5b8a92c0ff5cf3edb0",
+    "scratch/CharacterDummy.analysis.cs": "021f547bdc111a679b759f80c58eacdeef63311b4fb44a4a1f1925ebb7c58c6d",
+    "scratch/bee-topology-analysis/findings.md": "9c1195b3a9be05e593af2c3b55edda51e90a6ef41328bb3ae76d1cff0c9d99c8"
+  },
+  "limitations": [
+    "Shared topology does not establish identical palette order, bind matrices, surface or runtime acceptance.",
+    "Eight authored ordinary rows resolve to six exact rig/controller pairs; an additional enBee_03 renderer shares bee binding but is not an authored row in this mapping.",
+    "Only selected beeA source metadata was deeply audited; other exact pairs need their own runtime checks."
+  ],
+  "selectedRendererTransform": {
+    "path": "/enBee_01/Monster Bee",
+    "transform_id": 62079,
+    "active": true,
+    "components": [
+      {
+        "type": "Transform",
+        "id": 62079
+      },
+      {
+        "type": "SkinnedMeshRenderer",
+        "id": 121062
+      }
+    ],
+    "localPosition": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "localRotation": {
+      "x": -0.7071068286895752,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 0.7071067094802856
+    },
+    "localScale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0
+    }
+  }
+}

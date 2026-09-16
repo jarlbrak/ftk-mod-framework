@@ -1,0 +1,128 @@
+{
+  "name": "Abyssal Kraken original profile family",
+  "nativeSurfaceCopied": false,
+  "authoringInputs": "bone_names and inverse bind matrices only",
+  "assets": [
+    {
+      "asset": "abyssal-crown-kraken-head-v2",
+      "referenceRenderer": 121035,
+      "nativeChassis": "krakenHead",
+      "rendererPath": "kraken2",
+      "boneCount": 7,
+      "directValidation": {
+        "file": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/abyssal-kraken/abyssal-crown-kraken-head-v2.glb",
+        "vertices": 4002,
+        "triangles": 1334,
+        "bones": 7,
+        "primitives": 1,
+        "triangles_per_primitive": [
+          1334
+        ],
+        "bounds_min": [
+          -2.0481162071228027,
+          -6.015871524810791,
+          -5.570064544677734
+        ],
+        "bounds_max": [
+          2.059999942779541,
+          2.3791725635528564,
+          0.7363384366035461
+        ],
+        "max_bind_rest_error": 9.48185885363273e-08,
+        "source_normal_agreement": {
+          "positive_fraction": 1.0,
+          "median_signed_dot": 0.04006858170032501,
+          "informative_triangles": 1334
+        },
+        "reference_normal_agreement": {
+          "positive_fraction": 1.0,
+          "median_signed_dot": 0.15413264238873117,
+          "informative_triangles": 2468
+        },
+        "status": "PASS (binary and skin contract; live animation still requires in-game check)"
+      },
+      "artScope": "Original seven-bone modern Kraken head V2, generated only from palette names and inverse bind matrices after the V1 live silhouette rejection."
+    },
+    {
+      "asset": "sargassum-kraken-tentacle-v2",
+      "referenceRenderer": 121595,
+      "nativeChassis": "krakenTentacle",
+      "rendererPath": "krakenTentacle",
+      "boneCount": 20,
+      "directValidation": {
+        "file": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/abyssal-kraken/sargassum-kraken-tentacle-v2.glb",
+        "vertices": 7860,
+        "triangles": 2620,
+        "bones": 20,
+        "primitives": 1,
+        "triangles_per_primitive": [
+          2620
+        ],
+        "bounds_min": [
+          -1.2677009105682373,
+          -0.7595999836921692,
+          -0.6529409289360046
+        ],
+        "bounds_max": [
+          1.2677009105682373,
+          18.66387367248535,
+          0.7701215147972107
+        ],
+        "max_bind_rest_error": 3.552713678800501e-15,
+        "source_normal_agreement": {
+          "positive_fraction": 1.0,
+          "median_signed_dot": 0.046818025410175323,
+          "informative_triangles": 2620
+        },
+        "reference_normal_agreement": {
+          "positive_fraction": 1.0,
+          "median_signed_dot": 0.01696231637836759,
+          "informative_triangles": 2991
+        },
+        "status": "PASS (binary and skin contract; live animation still requires in-game check)"
+      },
+      "artScope": "Original articulated 20-bone tendril, generated only from palette names and inverse bind matrices."
+    },
+    {
+      "asset": "royal-sargassum-seaking-tentacle-v3",
+      "referenceRenderer": 121315,
+      "nativeChassis": "seaKingTentacleA/B",
+      "rendererPath": "KrakenGodTentacle",
+      "boneCount": 20,
+      "directValidation": {
+        "file": "/Users/tbrack/Documents/Projects/Gaming/FTK/art-experiments/abyssal-kraken/royal-sargassum-seaking-tentacle-v3.glb",
+        "vertices": 7860,
+        "triangles": 2620,
+        "bones": 20,
+        "primitives": 1,
+        "triangles_per_primitive": [
+          2620
+        ],
+        "bounds_min": [
+          -0.9688016772270203,
+          -0.7595999836921692,
+          -0.646718442440033
+        ],
+        "bounds_max": [
+          0.9688016772270203,
+          18.66387367248535,
+          0.646718442440033
+        ],
+        "max_bind_rest_error": 3.552713678800501e-15,
+        "source_normal_agreement": {
+          "positive_fraction": 1.0,
+          "median_signed_dot": 0.035702820867300034,
+          "informative_triangles": 2620
+        },
+        "reference_normal_agreement": {
+          "positive_fraction": 1.0,
+          "median_signed_dot": 0.019456074644344575,
+          "informative_triangles": 3303
+        },
+        "status": "PASS (binary and skin contract; live animation still requires in-game check)"
+      },
+      "artScope": "Original articulated 20-bone tendril, generated only from palette names and inverse bind matrices."
+    }
+  ],
+  "limits": "Offline binary validation only. Live binding, appearance, controller motion, gameplay, portrait, culling, material lifetime, death and native progression require separate evidence."
+}

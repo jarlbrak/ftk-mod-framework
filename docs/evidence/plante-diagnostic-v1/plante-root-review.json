@@ -1,0 +1,104 @@
+{
+  "session": "19e39acaf4fe49c2b463cd069902e926",
+  "caseResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-d5bdffaa692f4429989df94a42b72ba3/case-result.json",
+  "status": "DIAGNOSTIC_SELECTED_FRAMES_REVIEWED_NOT_ORIGINAL_ART",
+  "actions": [
+    {
+      "action": "pass",
+      "capture": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/aa18e86601ff463a8f36dedb2484c387.json",
+        "sha256": "e73c83b1bacff86d2880d54ba3ecc7dde36b4231d3bbafb0d4752581bdc804d3",
+        "bytes": 4521893
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "attack1": [
+          46,
+          55
+        ]
+      },
+      "rendererDisabledFrames": 0,
+      "animatorDisabledFrames": 0
+    },
+    {
+      "action": "attack",
+      "capture": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/deb4313a15ba41268c7566a0a7bd15fd.json",
+        "sha256": "987abdaa2dd0b53d3fac32f3827803a0ad838c762a23458e840157291dc80941",
+        "bytes": 4520358
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          119
+        ],
+        "hit1": [
+          27,
+          31
+        ],
+        "attack1": [
+          81,
+          90
+        ]
+      },
+      "rendererDisabledFrames": 0,
+      "animatorDisabledFrames": 0
+    },
+    {
+      "action": "kill-fixture",
+      "capture": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/f22759271ed143e0a45dcef65b387202.json",
+        "sha256": "609492a21a113232d388b88bc61044768cb5641f93519a105e67f184b4079b3a",
+        "bytes": 4532612
+      },
+      "frames": 120,
+      "clips": {
+        "idle": [
+          0,
+          27
+        ],
+        "death": [
+          28,
+          119
+        ]
+      },
+      "rendererDisabledFrames": 0,
+      "animatorDisabledFrames": 0
+    }
+  ],
+  "reviewedFrames": {
+    "pass": [
+      0,
+      50,
+      60
+    ],
+    "attack": [
+      30
+    ],
+    "kill-fixture": [
+      60
+    ]
+  },
+  "observations": [
+    "Pass60 shows upright articulated probe and native hero damage -19.",
+    "Attack30 shows -8 and enemy HP50; hero partially occludes probe.",
+    "Death60 shows probe collapsed along floor, still visible. Floor contact is not numerically proven.",
+    "Pass0 shows the bound upright calibration skeleton. Pass50 lies in positively weighted attack1 frames and shows bent stalk with native attack roll UI."
+  ],
+  "limitations": [
+    "Diagnostic geometry only, including eight bones with no native mesh weight.",
+    "No original plant appearance or final resource teardown acceptance.",
+    "Explicit fixture death is not ordinary lethal damage."
+  ],
+  "finalReady": {
+    "level": 0,
+    "room": 3,
+    "strictReady": true,
+    "collectCount": 1
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "status": "STATIC_REVIEW_ACCEPTED_FOR_LIVE_VALIDATION_ONLY",
+  "model": "Duneshade Asp",
+  "reviewedArtifacts": [
+    "hero.png",
+    "side.png",
+    "portrait.png",
+    "duneshade-desert-asp.glb",
+    "duneshade-desert-asp-reopened.glb",
+    "duneshade-desert-asp.validation.json",
+    "reopened-validation.json",
+    "original-geometry-proof.json",
+    "target-binding-proof.json"
+  ],
+  "staticObservations": [
+    "The studio views show a coherent original desert asp silhouette with a continuous articulated body, sunspines, sunshield hoods, distinct head, eyes, jaw, forked tongue, and tail bells.",
+    "The direct and Blender-reopened exports both retain all 46 exact Desert A palette joints and pass their inverse-bind contracts.",
+    "The source-proven geometry proof limits native input to palette names and inverse bind matrices; it does not use a native surface guide.",
+    "The longer tongue visibly uses the Desert-only Tongue_08 and Tongue_End joints, preventing accidental 44-bone Jungle interchangeability."
+  ],
+  "decision": "Proceed to isolated live binding and animation validation.",
+  "notEstablished": [
+    "Native animation deformation, action timing, ordinary hit damage, portrait framing, camera fit, culling, material behavior, ragdoll, cleanup, loot, resource release, and final art acceptance."
+  ]
+}

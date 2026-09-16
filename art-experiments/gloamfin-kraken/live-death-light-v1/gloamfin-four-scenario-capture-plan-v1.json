@@ -1,0 +1,254 @@
+{
+  "schema": "ftkmf.gloamfin.capture-plan.v1",
+  "variant": "gloamfin-v1",
+  "sourceResourcesSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "assetManifest": {
+    "file": "gloamfin-kraken-blockout-v1.manifest.json",
+    "sha256": "8ae418087754cb73da2e73d42ad31802565a36adb6849d720b226e3b121db84e"
+  },
+  "glb": {
+    "file": "gloamfin.glb",
+    "sha256": "d4be118d44d63f48a12e9c5fbde9dcac5d4b9cc73787182be41ec39030e7dc00",
+    "bytes": 329020
+  },
+  "png": {
+    "file": "gloamfin_basecolor.png",
+    "sha256": "44ae801b21329874afa84c98ffcc455e529c25ef61da0f0420a3536b4c0a8d9a",
+    "bytes": 267
+  },
+  "scenarios": [
+    {
+      "scenario": "damaged",
+      "imageSteps": [
+        0,
+        16,
+        40,
+        57,
+        58,
+        80,
+        109,
+        146,
+        147,
+        159,
+        160,
+        240
+      ],
+      "bakeSteps": [
+        0,
+        40,
+        109,
+        160
+      ],
+      "camera": {
+        "position": [
+          10.312609264685378,
+          2.5648199418909092,
+          20.0077477668087
+        ],
+        "lookAt": [
+          0.11437281787601639,
+          -0.15470977725825374,
+          -2.6549998927676572
+        ],
+        "up": [
+          -0.0446399574273889,
+          0.9940657186376879,
+          -0.09919990539419754
+        ],
+        "orthographic": true,
+        "orthographicSize": 7.0,
+        "nearClipPlane": 0.1,
+        "farClipPlane": 60.0,
+        "width": 512,
+        "height": 512
+      },
+      "sourceReports": [
+        {
+          "file": "damaged.json",
+          "path": "scratch/kraken-endpoint-live-v1/damaged.json",
+          "sha256": "a8f030fb191124b1049e7723dbb725ee14d70aac32c48e071223bbb7798c50e5"
+        },
+        {
+          "file": "damaged-repeat.json",
+          "path": "scratch/kraken-endpoint-live-v1/damaged-repeat.json",
+          "sha256": "c568ce74a26c6381dc0fed1c0e55d9dae513d88a3968dd4390f43957c34a358a"
+        }
+      ]
+    },
+    {
+      "scenario": "damaged-heavy",
+      "imageSteps": [
+        0,
+        16,
+        40,
+        80,
+        94,
+        95,
+        104,
+        110,
+        111,
+        115,
+        116,
+        240
+      ],
+      "bakeSteps": [
+        0,
+        80,
+        104,
+        116
+      ],
+      "camera": {
+        "position": [
+          10.312609264685378,
+          2.5648199418909092,
+          20.0077477668087
+        ],
+        "lookAt": [
+          0.11437281787601639,
+          -0.15470977725825374,
+          -2.6549998927676572
+        ],
+        "up": [
+          -0.0446399574273889,
+          0.9940657186376879,
+          -0.09919990539419754
+        ],
+        "orthographic": true,
+        "orthographicSize": 7.0,
+        "nearClipPlane": 0.1,
+        "farClipPlane": 60.0,
+        "width": 512,
+        "height": 512
+      },
+      "sourceReports": [
+        {
+          "file": "damaged-heavy.json",
+          "path": "scratch/kraken-endpoint-live-v1/damaged-heavy.json",
+          "sha256": "e710ad04a647147b74c37c1731b7b30a26028be447b827ba97d7bd77aea5b58f"
+        },
+        {
+          "file": "damaged-heavy-repeat.json",
+          "path": "scratch/kraken-endpoint-live-v1/damaged-heavy-repeat.json",
+          "sha256": "b049e3fff68baaf14fad614a2ffa38aca2ba62df27b3221f7fac8f2a3910b16b"
+        }
+      ]
+    },
+    {
+      "scenario": "death",
+      "imageSteps": [
+        0,
+        16,
+        28,
+        40,
+        41,
+        80,
+        120,
+        160,
+        191,
+        210,
+        230,
+        240
+      ],
+      "bakeSteps": [
+        0,
+        28,
+        191,
+        240
+      ],
+      "camera": {
+        "position": [
+          10.121141698380734,
+          -2.7587796468101358,
+          21.6131184935478
+        ],
+        "lookAt": [
+          -0.07709474842862553,
+          -5.478309365959299,
+          -1.0496291660285562
+        ],
+        "up": [
+          -0.0446399574273889,
+          0.9940657186376879,
+          -0.09919990539419754
+        ],
+        "orthographic": true,
+        "orthographicSize": 10.9,
+        "nearClipPlane": 0.1,
+        "farClipPlane": 60.0,
+        "width": 512,
+        "height": 512
+      },
+      "sourceReports": [
+        {
+          "file": "death.json",
+          "path": "scratch/kraken-endpoint-live-v1/death.json",
+          "sha256": "189ff690b774ad692820314233340e319643427506651b1afbafd4c1e8fe7aed"
+        },
+        {
+          "file": "death-repeat.json",
+          "path": "scratch/kraken-endpoint-live-v1/death-repeat.json",
+          "sha256": "65bd99c072805007ba51743a2ef530d450dc39aada93865b5edf5f5f6a843444"
+        }
+      ]
+    },
+    {
+      "scenario": "death-light",
+      "imageSteps": [
+        0,
+        16,
+        28,
+        40,
+        41,
+        80,
+        120,
+        160,
+        191,
+        210,
+        230,
+        240
+      ],
+      "bakeSteps": [
+        0,
+        28,
+        191,
+        240
+      ],
+      "camera": {
+        "position": [
+          10.121141698380734,
+          -2.7587796468101358,
+          21.6131184935478
+        ],
+        "lookAt": [
+          -0.07709474842862553,
+          -5.478309365959299,
+          -1.0496291660285562
+        ],
+        "up": [
+          -0.0446399574273889,
+          0.9940657186376879,
+          -0.09919990539419754
+        ],
+        "orthographic": true,
+        "orthographicSize": 10.9,
+        "nearClipPlane": 0.1,
+        "farClipPlane": 60.0,
+        "width": 512,
+        "height": 512
+      },
+      "sourceReports": [
+        {
+          "file": "death-light.json",
+          "path": "scratch/kraken-endpoint-live-v1/death-light.json",
+          "sha256": "d923456204ab56ee55c0d47865b2cb47d59953c9632862042c5ec0e57cf13637"
+        },
+        {
+          "file": "death-light-repeat.json",
+          "path": "scratch/kraken-endpoint-live-v1/death-light-repeat.json",
+          "sha256": "f63d4866d89d66a5609c13bcff842963d9e3b644749d349cb31f56c75500a726"
+        }
+      ]
+    }
+  ],
+  "scope": "Fixed diagnostic cameras for four owned endpoint scenarios; not game camera fit. Original appearance contract and asset bytes unchanged."
+}

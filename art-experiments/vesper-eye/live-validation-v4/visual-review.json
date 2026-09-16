@@ -1,0 +1,216 @@
+{
+  "schema": "ftkmf.model-root-visual-review-template.v1",
+  "session": "ca692eff36494692b938a76bff8ee9c3",
+  "reviewStatus": "reviewed_exact_beholdera_multipart_binding_material_idle_attack_hit_cleanup_and_gameplay_accepted_visible_death_deformation_limited",
+  "binding": {
+    "rendererPath": "EyeBody",
+    "mesh": "ftkmf_glb_vesper_body.glb",
+    "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4"
+  },
+  "multipartBinding": {
+    "ownerInstanceId": 369188,
+    "visualScale": 1.0,
+    "renderers": [
+      {
+        "rendererPath": "EyeBody",
+        "sourceRendererId": 121031,
+        "mesh": "ftkmf_glb_vesper_body.glb",
+        "boneSignature": "6113b410f08e5347c87be366fb7943914ca6e2c2ecd7a4b4e9b79debb5dbfce4",
+        "materialInstanceId": -245534
+      },
+      {
+        "rendererPath": "EyeBody/EyeEye",
+        "sourceRendererId": 121210,
+        "mesh": "ftkmf_glb_vesper_eye.glb",
+        "boneSignature": "1f0bd03a7c428aa626d87896b1e1aa9fe6802b771fb4a71ecd138632c031099d",
+        "materialInstanceId": -245540
+      }
+    ]
+  },
+  "materialReview": {
+    "evidence": {
+      "path": "scratch/mirewarden-game/model-test-output/case-cd801e163d9d43e2940acfcea3f17e6e/journal.jsonl",
+      "sha256": "65d2b7fb44b33c502555c9fee10252c9f05b141e105436bd9f06ff3189d204c4",
+      "bytes": 826470,
+      "inventorySequence": 311
+    },
+    "body": {
+      "name": "matFloatingEye (Instance)",
+      "mainTexture": "ftkmf_vesper_basecolor.png",
+      "emissionKeyword": false,
+      "emissionColor": [0.0, 0.0, 0.0, 1.0],
+      "emissionMap": null
+    },
+    "eye": {
+      "name": "matFloatingEye",
+      "mainTexture": "ftkmf_vesper_basecolor.png",
+      "emissionKeyword": false,
+      "emissionColor": [0.0, 0.0, 0.0, 1.0],
+      "emissionMap": null
+    }
+  },
+  "motionReview": {
+    "pass": "eye_idle samples 0-44, eye_attack1 samples 45-64, eye_idle samples 65-87, eye_attack2 samples 88-112, then eye_idle samples 113-119.",
+    "ordinaryHit": "HP 135 to 125 with no focus. Damaged is issued at sample 23, eye_damage is sampled 33-39, recovery idle is sampled 40-68, and eye_attack1 is sampled 69-88.",
+    "fixtureDeath": "Explicit KillSingle only, HP 125 to 0. Death is issued at sample 23. The renderer is visible through sample 25 and inactive from sample 26; eye_death is sampled from 30 while inactive. m_DoRagdoll remains false with zero rigid bodies.",
+    "gameplay": "One guarded native Collect reaches strict Ready at level 0 room 2."
+  },
+  "frames": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0000.png",
+      "sha256": "5425180356757e2b3c11c3289ee42a87b18d581a398b34f2576aa5ed56d4a3ca",
+      "bytes": 1114407,
+      "action": "pass",
+      "index": 0,
+      "observation": "The corrected multipart Vesper Eye is fully visible at native scale. The faceted dark body, ivory lid armor, copper seams, amber iris, and black vertical pupil read as one centered enemy before native motion."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0024.png",
+      "sha256": "7d0d093a05b24a0a40bee0971b2addfa8a7e322bf0299ac192961e96545dda09",
+      "bytes": 1112784,
+      "action": "pass",
+      "index": 24,
+      "observation": "A clean eye_idle view shows the separate eye seated inside the body plates. The pupil remains black and the iris readable without the yellow wash from inherited native emission."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0045.png",
+      "sha256": "20eeb8e893b1f940dfb34889f13113ea0d0e7f30ef6d1807ee2978005249aee0",
+      "bytes": 1067670,
+      "action": "pass",
+      "index": 45,
+      "observation": "The first eye_attack1 sample moves the multipart eye toward the hero while the body plates, iris, and pupil remain assembled. A native light effect obscures only the area beneath the model."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0069.png",
+      "sha256": "21955da3b93d479085f37e785ef0fd83aa616105e4f27987ea57533fdf7f4447",
+      "bytes": 1060659,
+      "action": "pass",
+      "index": 69,
+      "observation": "After eye_attack1, the enemy has returned to its combat position with the eye still seated and the authored silhouette intact. Native haze and the stunned hero do not cover the target."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0094.png",
+      "sha256": "0336fa807a19b0bc8a27554ee1d6ccaf7231909062c3acff835820d1c37f0ee1",
+      "bytes": 1138769,
+      "action": "pass",
+      "index": 94,
+      "observation": "During eye_attack2 the native radiance and status icons partly cover the front, but the outer body, amber iris, and dark pupil remain aligned with no sampled separation or inversion."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/505e1823e020454183b863608ded5b23/0119.png",
+      "sha256": "b35f81f79e118c55ba2c80965ff2d0a5d46f13dac82ba879a797b19d2cd1e38e",
+      "bytes": 1041043,
+      "action": "pass",
+      "index": 119,
+      "observation": "The final pass sample returns to a clear eye_idle presentation. Both custom parts retain the corrected colors and a coherent native-scale fit after both attack variants."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0000.png",
+      "sha256": "f58b29e5603e2c940f10c1d26d068cd22c2ec59b8900e5b0bfbb7cc17968031f",
+      "bytes": 1107692,
+      "action": "attack",
+      "attempt": 1,
+      "index": 0,
+      "observation": "The ordinary no-focus attempt starts with the corrected body and eye fully visible at HP 135. This is the visual baseline and does not by itself establish damage."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0023.png",
+      "sha256": "c53d62aca0cfd52d372ddac5f3d6175da7005609b7324c36c267798f6e2dfbaa",
+      "bytes": 1156037,
+      "action": "attack",
+      "attempt": 1,
+      "index": 23,
+      "observation": "At the causal native Damaged trigger, the hero and bright impact effect cover much of the eye. The visible lid and iris remain aligned, but this frame cannot support a fine deformation judgment."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0033.png",
+      "sha256": "8ab174bfdc1e2b59b24e581fb6bb47a06c60c98a2f9b858bd1dbc991b43c4882",
+      "bytes": 1104158,
+      "action": "attack",
+      "attempt": 1,
+      "index": 33,
+      "observation": "The opening eye_damage sample visibly narrows and shifts the eye behind the foreground hero while retaining a continuous lid, iris, and black pupil. The hero limits review of the lower body."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0036.png",
+      "sha256": "dd723eb5b61f969faa6c43f78b52948973962a21b237333db14db917ea896306",
+      "bytes": 1120833,
+      "action": "attack",
+      "attempt": 1,
+      "index": 36,
+      "observation": "Mid-recoil, the pupil and iris remain seated within the ivory plates as the eye changes pose. No sampled multipart tear, inversion, or missing surface is visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0039.png",
+      "sha256": "afc3fec45c81af80bbb0d5bdead958a3a0c95b5834f896e90f3c33d8a577798e",
+      "bytes": 1136424,
+      "action": "attack",
+      "attempt": 1,
+      "index": 39,
+      "observation": "The final sampled eye_damage pose shows the HP 135 to 125 result and an intact eye after the hero clears more of the target. The lower edge remains partly occluded."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/94a26b95ac8146bab04ecd54b940cbc0/0069.png",
+      "sha256": "298846745e37ae408db0dd3532909959ea4431b0eae9761fdea95111d769b37b",
+      "bytes": 1083954,
+      "action": "attack",
+      "attempt": 1,
+      "index": 69,
+      "observation": "The subsequent eye_attack1 counterattack begins with the corrected pupil still dark and both custom parts coherent above the native light effect."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0000.png",
+      "sha256": "b027f306bea16982a6f68c46f8aea20111568b23050981a1a51faaec0f82e4b3",
+      "bytes": 1130503,
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The explicit KillSingle fixture begins with the intact corrected Vesper Eye at HP 125. This baseline is fixture evidence and does not establish ordinary lethal damage."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0022.png",
+      "sha256": "b51e43db3b9572a564f860656fb2e8223bf023674a65358e8494aba688055567",
+      "bytes": 1124960,
+      "action": "kill-fixture",
+      "index": 22,
+      "observation": "Immediately before the Death trigger, the custom eye is still visible and assembled behind the approaching hero. Foreground occlusion prevents review of its center."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0023.png",
+      "sha256": "0620b800e1a7675db89be80d654e44105c2d09a4c73e90bfb8e1e91f4fe8532a",
+      "bytes": 1141208,
+      "action": "kill-fixture",
+      "index": 23,
+      "observation": "At the causal native Death trigger, the impact radiance and hero cover most of the target. The body rim remains identifiable, but this frame does not establish death deformation."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0025.png",
+      "sha256": "3318e581decbf076e145feba5f56baf710695456a295e8dff37b738c6521b0a8",
+      "bytes": 1117588,
+      "action": "kill-fixture",
+      "index": 25,
+      "observation": "This is the final active-renderer sample. Purple native particles obscure much of the eye, but the dark body, ivory rim, amber iris, and pupil remain present and aligned behind the effect."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0026.png",
+      "sha256": "78c7977551f9755808805f2b121435284494c384e6d4fcf63a28fe3f687e424f",
+      "bytes": 1109612,
+      "action": "kill-fixture",
+      "index": 26,
+      "observation": "The first inactive-renderer sample contains only native particles at the enemy position. The custom mesh is no longer visible, four samples before eye_death begins, so no visible death-pose or corpse claim is made."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a711f94dd0914f308cdbf369e4f3d7c7/0119.png",
+      "sha256": "bf7b72ca28626ea6093171610d7ba384158424e195b019d9a6c7282353c53f74",
+      "bytes": 859933,
+      "action": "kill-fixture",
+      "index": 119,
+      "observation": "The native Victory and loot surface confirms encounter cleanup after the explicit fixture. No custom corpse is visible, and no corpse deformation, floor contact, or lifetime is inferred."
+    }
+  ],
+  "requirements": [
+    "All 18 referenced original PNGs were inspected at exact source resolution.",
+    "Every selected hash, action, attempt, and frame index was verified against the fresh case.",
+    "The reviewed scope accepts exact multipart binding, corrected material appearance, idle, both sampled attacks, ordinary hit recoil, cleanup, and gameplay only.",
+    "Fixture death is not ordinary lethal evidence, and the inactive renderer prevents visible custom death-deformation or corpse acceptance."
+  ]
+}

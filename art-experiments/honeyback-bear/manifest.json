@@ -1,0 +1,125 @@
+{
+  "name": "Honeyback Bear",
+  "native_chassis": "bearB",
+  "reference_renderer": 121467,
+  "renderer_path": "enBear01",
+  "native_surface_copied": false,
+  "art_status": "Original multipart surface model; manual studio and live acceptance pending after regeneration",
+  "native_forward": "+UnityZ from head/jaw/toe positions; tail at rear -Z",
+  "rig_boundary": "Exact38-joint palette and inverse binds; original spine/limb blends and independently articulated jaw",
+  "live_baseline": "No indexed bear live baseline located at authoring; native diagnostic pending separately",
+  "remaining": [
+    "Studio review",
+    "Native bearB baseline",
+    "Exact authored live assignment",
+    "Native attacks/hit/death/material/culling/cleanup"
+  ],
+  "parts": [
+    {
+      "name": "honeyback",
+      "vertices": 8352,
+      "triangles": 2784,
+      "palette_joints": 38,
+      "max_bind_rest_error": 1.0047287446468545e-08,
+      "blender_reopen_max_bind_rest_error": 1.0047287446468545e-08,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.8014059066772461,
+        -0.005498058162629604,
+        -0.8759799599647522
+      ],
+      "bind_bounds_max": [
+        0.8014058470726013,
+        2.3499693870544434,
+        2.85357403755188
+      ],
+      "blender_roundtrip_glb_sha256": "7d7132e42b5887ddd3c67716268e030a3588715a86222cab14ae9a98135786d4"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121467,
+      "local_reference_path": "scratch/skeleton-audit/121467/reference.npz",
+      "sha256": "7b02d3f8c47bf5624e189ae23078f768abdfc867a54d79abb0a0df0838a91ff9"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "pending manual review after regeneration",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "2d4a75a446bf650b3559b36bb6aa33b69d60395096379f08f9842b69879d368a",
+      "bytes": 3536
+    },
+    "build_blender.py": {
+      "sha256": "276498fc24b37b2eeb1325f1dcf604e6ace422b109493487c7fd511c88b77aef",
+      "bytes": 5390
+    },
+    "build_geometry.py": {
+      "sha256": "a63fa5eb73bda34052475656e1d2e4041a4c7098588553c6c1aabe2bb3fd41da",
+      "bytes": 7708
+    },
+    "finalize_manifest.py": {
+      "sha256": "1e2e4d12834d8956556021c81405984dc79a47abe3774c8719a4e35f99543323",
+      "bytes": 2413
+    },
+    "hero.png": {
+      "sha256": "1685580730af768a3f5e372dc92b5e3d7018e418d0c04b7b2d0d434acb8a35ef",
+      "bytes": 1083891
+    },
+    "honeyback-studio.blend": {
+      "sha256": "06405cc964aa60a37be7fd8d1e9e9d3c9ffb68fcfae0b243994297917ebdde84",
+      "bytes": 246654
+    },
+    "honeyback.blend": {
+      "sha256": "663d8280bd2b311775265b85c4010801cc489aec501b4caa1094a768c1ea6363",
+      "bytes": 243191
+    },
+    "honeyback.glb": {
+      "sha256": "df5e94d6fc9b6ba5e287a052f7481476a7adaf531a485175978adab04f68061e",
+      "bytes": 489232
+    },
+    "honeyback.pieces.json": {
+      "sha256": "34b06ca4530e25eb1471ebada3329154a0cddb815c77921fb3511f9d7ee07307",
+      "bytes": 3856
+    },
+    "honeyback.source.json": {
+      "sha256": "57257b68f0ca2d7c24eb44c36d0b8741d14ee568777d04268d47deaa9b9b305f",
+      "bytes": 1312794
+    },
+    "honeyback.validation.json": {
+      "sha256": "51ae01d820d38ca49ce840afdc66c2e38739da2739a814dd9506033dac1b3d43",
+      "bytes": 790
+    },
+    "honeyback_basecolor.png": {
+      "sha256": "54eb2580b97f7a9e34054fa84a30d6a99c0a9e388e67f61cbff28512d44ffefb",
+      "bytes": 258
+    },
+    "inspect_materials.py": {
+      "sha256": "21f5f2e87ad5786488d16961c8fe22f20acf82429d5952073152f7ba558a45bd",
+      "bytes": 1214
+    },
+    "native-material-metadata.json": {
+      "sha256": "e0213460e6e70aed810c52b5946ace110d9c5f63c0ed80744a98865c5f00d56e",
+      "bytes": 2087
+    },
+    "runtime-profile.json": {
+      "sha256": "045b843280d56c0c44c5c15facdab446b39b1603c7ccf1932eadcae08eaff60a",
+      "bytes": 501
+    },
+    "side.png": {
+      "sha256": "3b157fe6798c14cdbe5d6989cdbc63388701dae0962427775eddd61d32a2f4fb",
+      "bytes": 1076812
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/honeyback-bear/live-validation-v1.json",
+    "sha256": "873e820608ea826d0474d3d6a09c82ae9b64e1f830e01b1d105a90ce258d4240"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "initialResult": {
+    "status": "stopped",
+    "error": "HTTP Error 500: Internal Server Error",
+    "note": "No automatic retry; inspect game state before another action.",
+    "journal": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-5087a0a7bed941ac9631bd3e4526c050/journal.jsonl"
+  },
+  "resumeResult": {
+    "status": "binding_metadata_observed",
+    "enemy": "ftkmf_modeltest_resinmaw",
+    "matches": [
+      {
+        "rendererPath": "enAcidMonster",
+        "glbFile": "resinmaw.glb",
+        "rendererInstanceId": -245554,
+        "ownerInstanceId": 369188,
+        "boneSignature": "89a2d7ea5814ccbc8dc9f58fc04a9e963c93265b6cdb636719ab098d8f56b7dc"
+      }
+    ],
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+    "journal": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-89e755f6b384430c87b0c0beca6c7bd6/journal.jsonl",
+    "limitations": "Continuation from verified accepted start; no repeated start action or appearance/art acceptance."
+  },
+  "startupEvidence": {
+    "observedUtc": "2026-09-06T21:06:52.331474+00:00",
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+    "profilesRegistered": 391,
+    "selfTestPass": 512,
+    "selfTestFail": 0,
+    "deploymentReceipt": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/deployment-backups/rowportrait-resinmaw-20260906-140234/deployment.json",
+    "catalogSha256": "281576929e0e7996efc46163c24978b6c2598e2b5f41aff920e01c18d5f8864c",
+    "resinmawStartup": "Successful start_run dispatched once; runner stopped at read-only busy timeout; later living party observed without repeating start_run.",
+    "observation": "scratch/resinmaw-stage-recheck3.json"
+  },
+  "resumeClaim": {
+    "originSha256": "85c0487180b078a071b60e53ba2781249361327e6f04d88a7d6a126770a7633d",
+    "continuationJournal": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-89e755f6b384430c87b0c0beca6c7bd6/journal.jsonl",
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e"
+  },
+  "journalAudit": [
+    {
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-5087a0a7bed941ac9631bd3e4526c050/journal.jsonl",
+        "sha256": "85c0487180b078a071b60e53ba2781249361327e6f04d88a7d6a126770a7633d"
+      },
+      "startRunRequestCount": 1,
+      "startRunRequests": [
+        {
+          "sequence": 9,
+          "utc": "2026-09-06T21:03:37.662488+00:00",
+          "monotonic": 148366.966241833,
+          "kind": "http-request",
+          "data": {
+            "id": "4f9ec12402254ded94246d6cfcaee4f9",
+            "path": "/action",
+            "payload": {
+              "action": "start_run",
+              "args": {
+                "adventure": "HollowMire",
+                "party": 1,
+                "class": "ftkmf_modeltest_player_blacksmith_female_apparel"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-89e755f6b384430c87b0c0beca6c7bd6/journal.jsonl",
+        "sha256": "b0a38c90318aca7e67662e81dd1c26afea4fb9a4781b2587bd04442f7dbfbaad"
+      },
+      "startRunRequestCount": 0,
+      "startRunRequests": []
+    }
+  ]
+}

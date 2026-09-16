@@ -1,0 +1,95 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/amberwake-dragon/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-d14f909bdab94c038dcb8dc1dfa2404e/case-result.json",
+  "visualReview": "scratch/model-route-c01698c74bd54910-directenemy-native-damage-v2-root-review-reviewed.json",
+  "assetFiles": [
+    "art-experiments/amberwake-dragon/amberwake.glb",
+    "art-experiments/amberwake-dragon/amberwake_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/amberwake-dragon/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-c01698c74bd54910-directenemy-native-damage-v2-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-6f9cdf98a9744e1aa34713bff68e97ed/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-6f9cdf98a9744e1aa34713bff68e97ed/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enDragon",
+        "mesh": "ftkmf_glb_amberwake.glb",
+        "boneSignature": "6feca8281743bdf8caae8649d3f237cec6c56413032b20c607995b21201d230a"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enDragon",
+        "mesh": "ftkmf_glb_amberwake.glb",
+        "boneSignature": "6feca8281743bdf8caae8649d3f237cec6c56413032b20c607995b21201d230a"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enDragon",
+        "mesh": "ftkmf_glb_amberwake.glb",
+        "boneSignature": "6feca8281743bdf8caae8649d3f237cec6c56413032b20c607995b21201d230a"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Amberwake Dragon",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "dragonFrost",
+    "nativeChassis": "dragonFrost",
+    "rendererPaths": [
+      "enDragon"
+    ],
+    "sourceRendererIds": [
+      121561
+    ],
+    "binding": {
+      "rendererPath": "enDragon",
+      "mesh": "ftkmf_glb_amberwake.glb",
+      "boneSignature": "6feca8281743bdf8caae8649d3f237cec6c56413032b20c607995b21201d230a"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact directEnemy source dragonFrost, CEL enDragon(Clone), motion renderer enDragon, source renderer 121561, and recorded visual scale 0.25 only.",
+      "The ordinary zero-focus attack used an explicit disposable hero fixture: the native skill was capped at 0.95 and native weapon maximum damage rose from 10 to 30. It produced native Damaged for 11 HP, from 675 to 664, then restored the exact hero, weapon, controller, physical augmentation, and native maximum damage baseline at between-room Ready. This proves the model response and route, not representative combat balance or a guaranteed hit.",
+      "The explicit KillSingle fixture reduced HP from 664 to 0 with a recorded native 988 damage response and Death trigger. It is fixture death evidence, not ordinary lethal gameplay.",
+      "The source has m_DoRagdoll false and zero rigidbodies. The observed falling and fallen poses are native animated death and are not ragdoll evidence.",
+      "The death capture retains exact frames 0 through 90 of 120 and ends at the accepted renderer-destroyed boundary. It does not prove the full requested duration, cleanup causality, an active corpse at Ready, or later corpse lifetime.",
+      "No loot Collect action occurred. Strict Ready succeeded at level 0, room 2, with one button.",
+      "Twenty-three selected original PNGs were reviewed. Native effects, combat UI, foreground hero overlap, motion blur, and depth blur limit fine inspection in stated frames; the remaining 308 capture PNGs were preserved by hash but not individually reviewed.",
+      "This isolated dungeon trial does not prove a natural dragon boss spawn, campaign placement, portrait framing, distant camera scale, culling boundaries, alternate materials, inheritance to another dragon source, or finished-art acceptance."
+    ]
+  }
+}

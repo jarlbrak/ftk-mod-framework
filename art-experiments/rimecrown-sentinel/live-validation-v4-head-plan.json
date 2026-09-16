@@ -1,0 +1,99 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/rimecrown-sentinel/live-validation-v4-head",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-26dfaab555f04c2d99489175c62883db/case-result.json",
+  "visualReview": "scratch/model-route-02a6f31412bd52ab-directenemy-root-review-reviewed.json",
+  "assetFiles": [
+    "art-experiments/rimecrown-sentinel/rimecrown_hat.glb",
+    "art-experiments/rimecrown-sentinel/rimecrown_head.glb",
+    "art-experiments/rimecrown-sentinel/rimecrown_base.glb",
+    "art-experiments/rimecrown-sentinel/rimecrown_scarf.glb",
+    "art-experiments/rimecrown-sentinel/rimecrown_body.glb",
+    "art-experiments/rimecrown-sentinel/rimecrown_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/rimecrown-sentinel/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-02a6f31412bd52ab-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-8b7840521fad40ef80b8fde7954cbe1e/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-8b7840521fad40ef80b8fde7954cbe1e/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native snowman attack capture with the selected head renderer observed.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "SnowMan_Geo/enSnowmanHead",
+        "mesh": "ftkmf_glb_rimecrown_head.glb",
+        "boneSignature": "b9e5f8bb4ae8bb81bb7363fcdadd24d5d81f633395ae1ea15124c6949f2f9fd3"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary zero-focus player attack and native head-renderer damage response.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "SnowMan_Geo/enSnowmanHead",
+        "mesh": "ftkmf_glb_rimecrown_head.glb",
+        "boneSignature": "b9e5f8bb4ae8bb81bb7363fcdadd24d5d81f633395ae1ea15124c6949f2f9fd3"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture and native animated snowman death capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "SnowMan_Geo/enSnowmanHead",
+        "mesh": "ftkmf_glb_rimecrown_head.glb",
+        "boneSignature": "b9e5f8bb4ae8bb81bb7363fcdadd24d5d81f633395ae1ea15124c6949f2f9fd3"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V4 head",
+    "displayName": "Rimecrown Sentinel head",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "snowmanB",
+    "nativeChassis": "snowmanB",
+    "rendererPaths": [
+      "SnowMan_Geo/enSnowmanHead"
+    ],
+    "sourceRendererIds": [
+      121415
+    ],
+    "binding": {
+      "rendererPath": "SnowMan_Geo/enSnowmanHead",
+      "mesh": "ftkmf_glb_rimecrown_head.glb",
+      "boneSignature": "b9e5f8bb4ae8bb81bb7363fcdadd24d5d81f633395ae1ea15124c6949f2f9fd3"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact directEnemy source snowmanB, CEL enSnowmanB(Clone), motion renderer SnowMan_Geo/enSnowmanHead and source renderer 121415 only. The same runtime profile binds four companion custom renderers, but this archive grants canonical route credit only to the selected head renderer.",
+      "The ordinary zero-focus attack used the native bluntSmithHammer at its unmodified 10 physical damage and 0.81 per-slot accuracy. It produced native Damaged for 13 HP, from 58 to 45, without the skill-cap or damage fixture. The disposable party maximum-HP fortification remained active for test survival and is not representative hero balance.",
+      "The explicit KillSingle fixture reduced HP from 45 to 0 with recorded native 1000 damage and a Death trigger. It is fixture death evidence, not ordinary lethal gameplay.",
+      "The source has m_DoRagdoll false and zero rigidbodies. The observed stacked-part separation and falloff are native snowman_damage and snowman_deathDirect animation, not ragdoll evidence.",
+      "All three captures retain the requested 120 frames. The exact head renderer remains active, enabled, reported visible and identity-stable through every retained frame, but smoke, airborne travel, camera framing and the loot overlay prevent clear head-surface inspection in several later frames. This does not establish a readable corpse, later corpse lifetime, cleanup causality or final disposal.",
+      "Two guarded native Collect actions succeeded and strict Ready succeeded at level 0, room 2, with one button.",
+      "Seventeen selected original PNGs were reviewed. Native effects, combat UI, foreground hero overlap, smoke, motion blur and the loot panel limit fine inspection in stated frames; the remaining 343 capture PNGs were preserved by hash but not individually reviewed.",
+      "This isolated dungeon trial does not prove every snowman animation, collision, culling boundaries, portrait framing, alternate materials, long-session resource lifetime, inheritance to another snowman source, the four companion renderer topologies or finished-art acceptance."
+    ]
+  }
+}

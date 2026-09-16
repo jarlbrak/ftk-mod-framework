@@ -1,0 +1,28 @@
+{
+  "name": "Mireglass Croaker",
+  "status": "ORIGINAL_ART_LIVE_INTEGRATION_REVIEWED_LIMITED_FINAL_ART_PENDING",
+  "nativeSurfaceCopied": false,
+  "target": {
+    "nativeEnemy": "acidBlobB",
+    "rendererPath": "enAcidMonster",
+    "sourceRendererId": 121345,
+    "controller": "AcidBlobController",
+    "controllerId": 5931,
+    "joints": 32
+  },
+  "originalAssets": {
+    "mireglass.glb": "821d317864ea8d6c68ee2d48bbc402a28c54082abbec982c5f8da5671f281565",
+    "mireglass-palette.png": "9f4831a5241192064dc4dc68371743d0e392d723c10870d06c2f025ca41b71d4",
+    "mireglass.source.json": "f0caca5a2118e8398f6abe2f53fd7001addcffb185e375442e762e4a3c8a1f6b",
+    "mireglass.pieces.json": "866e1a766e876e870af6cc2499d347e387039a89db9f60569854806c956e26a4"
+  },
+  "buildReportSha256": "d4df7a60f05398779b1897471f965174a69c0be028e9aa4be8f852f90ac7551a",
+  "liveValidation": {
+    "path": "live-validation-v1/validation.json",
+    "scope": "Exact acidBlobB/enAcidMonster binding, selected appearance, idle, native attacks, ordinary nonlethal hit, explicit death fixture, and strict Ready evidence."
+  },
+  "limits": [
+    "Offline bind validation does not establish runtime renderer selection, animation, materials, culling, portraits, or gameplay.",
+    "acidBlobA evidence does not establish acidBlobB binding or visual acceptance."
+  ]
+}

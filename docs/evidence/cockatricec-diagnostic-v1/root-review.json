@@ -1,0 +1,57 @@
+{
+  "scope": "Exact native cockatriceC renderer121484/controller5949 diagnostic, not resource121693 or originalart",
+  "caseResult": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-5f75a7d9e4d746ed95293d0721b59731/case-result.json",
+  "reviewed": {
+    "pass": {
+      "capture": "d381624e053e40738b404eb1bddd6559",
+      "frames": [
+        40,
+        80
+      ],
+      "observations": "Coherent articulated probe and nativeattack movement; heavycamera motionblur at80"
+    },
+    "attack": {
+      "capture": "abbd367333e341478f033709069ea2ee",
+      "frames": [
+        0,
+        40
+      ],
+      "observations": "Upright coherent probe, visibleHP72to67/-5 by40, nativefeatherFX"
+    },
+    "death": {
+      "capture": "c60e92c48dcb48e68af9dbd81440195f",
+      "frames": [
+        40,
+        60
+      ],
+      "observations": "Probe collapsedprone acrossfloor, nativefeathers andpinkglowremain"
+    }
+  },
+  "normalHit": {
+    "status": "nonlethal_hp_loss",
+    "beforeHp": 72,
+    "afterHp": 67,
+    "nativeOutcome": null,
+    "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+  },
+  "deathFlags": {
+    "allAnimatorEnabled": true,
+    "nativeDoRagdollValues": [
+      false
+    ]
+  },
+  "collectCount": 2,
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 3,
+    "buttonCount": 1
+  },
+  "verdict": "SELECTED_DIAGNOSTIC_POSES_COHERENT",
+  "limitations": [
+    "Calibrationgeometry only, notoriginalcreature.",
+    "Sixselectedframes, partialclipcoverage andnativeFX/motionblur.",
+    "Nativebrightmaterial requiresseparateoriginalartdecision.",
+    "Explicitfixturedeath, notordinarylethaldamage."
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "status": "observed_native_scroll_and_ownership_membership",
+  "runs": [
+    {
+      "action": "pass",
+      "captureId": "941e01ba1ff64687a4589e3ad63d6472",
+      "sha256": "2f85f913978d4699a8104beb8083b3766153bec1cca96decdc2fa6640ac4eb46",
+      "frames": 120,
+      "slotMaterialIds": [
+        -245598,
+        -245602
+      ],
+      "leaseId": 4,
+      "allMaterialsAndTexturesOwned": true,
+      "slot0OffsetConstantZero": true,
+      "slot1MatchesExactScrollerPhaseAllFrames": true,
+      "firstPhase": [
+        0.0,
+        12.56675910949707
+      ],
+      "lastPhase": [
+        0.0,
+        14.748437881469727
+      ],
+      "maximumFloat32RecurrenceError": 0,
+      "submeshIndexCounts": [
+        36,
+        36
+      ],
+      "rendererEnabledFrames": 120
+    },
+    {
+      "action": "hit",
+      "captureId": "6933d3ba40d84c31871be2ce96e5d36a",
+      "sha256": "10c07222938e51dd71c60bb8eaddf908fed41182cf4aa0a3803580df3f85e8f8",
+      "frames": 120,
+      "slotMaterialIds": [
+        -245598,
+        -245602
+      ],
+      "leaseId": 4,
+      "allMaterialsAndTexturesOwned": true,
+      "slot0OffsetConstantZero": true,
+      "slot1MatchesExactScrollerPhaseAllFrames": true,
+      "firstPhase": [
+        0.0,
+        14.912577629089355
+      ],
+      "lastPhase": [
+        0.0,
+        17.094255447387695
+      ],
+      "maximumFloat32RecurrenceError": 0,
+      "submeshIndexCounts": [
+        36,
+        36
+      ],
+      "rendererEnabledFrames": 120
+    },
+    {
+      "action": "death",
+      "captureId": "cd585a4165c8428fac8bfba859d509f6",
+      "sha256": "9419dafeb00ad418534bbaa6fc5405b19aafb4ce5e17e37eb513e37867dd7305",
+      "frames": 120,
+      "slotMaterialIds": [
+        -245598,
+        -245602
+      ],
+      "leaseId": 4,
+      "allMaterialsAndTexturesOwned": true,
+      "slot0OffsetConstantZero": true,
+      "slot1MatchesExactScrollerPhaseAllFrames": true,
+      "firstPhase": [
+        0.0,
+        17.258527755737305
+      ],
+      "lastPhase": [
+        0.0,
+        19.44020652770996
+      ],
+      "maximumFloat32RecurrenceError": 0,
+      "submeshIndexCounts": [
+        36,
+        36
+      ],
+      "rendererEnabledFrames": 120
+    }
+  ],
+  "limits": [
+    "Membership/identity in this live enemy only, not final disposal or clone/grandclone independence.",
+    "Phase recurrence uses end-of-frame observed deltaTime; no tolerance relaxation.",
+    "Two-block calibration, not finished creature."
+  ]
+}

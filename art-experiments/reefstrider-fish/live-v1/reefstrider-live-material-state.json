@@ -1,0 +1,99 @@
+{
+  "samplePhase": "main-thread-command",
+  "provenance": "read-only existing live enemy shared-material and lease observation",
+  "frame": 13931,
+  "gameTime": 129.75701904296875,
+  "realtime": 146.38319396972656,
+  "deltaTime": 0.009196030907332897,
+  "enemy": "ftkmf_modeltest_reefstrider",
+  "ownerInstanceId": 369188,
+  "celInstanceId": -245398,
+  "rendererInstanceId": -245404,
+  "celRelativeRendererPath": "enFishA",
+  "rendererEnabled": true,
+  "rendererActive": true,
+  "slots": [
+    {
+      "instanceId": -245720,
+      "name": "matLoot (Instance)",
+      "type": "UnityEngine.Material",
+      "inCurrentLeaseResources": true,
+      "slot": 0,
+      "shader": "Standard",
+      "emissionKeyword": false,
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245722,
+        "name": "ftkmf_reefstrider_basecolor.png",
+        "type": "UnityEngine.Texture2D",
+        "inCurrentLeaseResources": true,
+        "width": 384,
+        "height": 32,
+        "wrapMode": "Repeat",
+        "filterMode": "Bilinear"
+      },
+      "_MainTexOffset": [
+        0.0,
+        0.0
+      ],
+      "_MainTexScale": [
+        1.0,
+        1.0
+      ],
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null,
+      "_EmissionMapOffset": [
+        0.0,
+        0.0
+      ],
+      "_EmissionMapScale": [
+        1.0,
+        1.0
+      ],
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "scrollers": [],
+  "lease": {
+    "available": true,
+    "present": true,
+    "leaseId": 4,
+    "acquired": true,
+    "applied": true,
+    "references": 1
+  },
+  "leaseResourceInstanceIds": [
+    -245718,
+    -245720,
+    -245722
+  ],
+  "boundary": "Current fields/resources only; no lease retention, pruning, material getter cloning or native clone creation. UV displacement and owner independence require multiple matched observations. Multiple native scrollers can write the same property; raw observed phase is not presumed equal to the final material offset.",
+  "geometry": {
+    "meshInstanceId": -245718,
+    "mesh": "ftkmf_glb_reefstrider.glb",
+    "vertices": 4476,
+    "submeshCount": 1,
+    "submeshes": [
+      {
+        "nativeMaterialSlot": 0,
+        "indices": 4476,
+        "triangles": 1492,
+        "indexInt32LittleEndianSha256": "36e0e5442c0fe19323834cc4e1e9af755672aa6965bf2c80f52fed5119da23c7"
+      }
+    ],
+    "uv0Count": 4476,
+    "uv0Float32LittleEndianSha256": "9a11f0f6cd318ae730344374701271e12b45e6e3a78ba6504c09f8967b47f6b1",
+    "inCurrentLeaseResources": true
+  },
+  "ok": true,
+  "testFixtureMaxHpTarget": 999,
+  "tutorialsQuiet": true,
+  "session": "86aa14f97fb84aa7bed96fe1416a705e",
+  "id": "d796f88e59be49748702e50e4310316c",
+  "savePath": "save-model-test-81fab5f083e30704"
+}

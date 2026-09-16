@@ -1,0 +1,212 @@
+{
+  "status": "PASS_EXACT_DIRECT_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only direct-enemy route/profile/asset preflight. A rigid MeshRenderer row is only a pinned one-filter/one-material identity prerequisite; no stage, deployment, runtime, visual, motion, or gameplay claim.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_abyssal_crown_kraken_head",
+      "baseEnemy": "krakenHead",
+      "prefab": "enKraken",
+      "controllerCandidates": [
+        {
+          "id": 5973,
+          "name": "krakenHeadController"
+        }
+      ],
+      "renderers": [
+        {
+          "rendererPath": "Root_M/base/body/neck/eye/kraken2_eye",
+          "sourceRendererId": 101310,
+          "rendererKind": "MeshRenderer",
+          "meshFilterCount": 1,
+          "nativeMaterialSlotCount": 1
+        },
+        {
+          "rendererPath": "kraken2",
+          "sourceRendererId": 121035,
+          "rendererKind": "SkinnedMeshRenderer",
+          "rigProfile": "28e6019d0af8b4efdf75bf3d756d13529ed2af65ae3246b6a0d3ea18da339bde",
+          "combatProfile": "cec974e3be711225508204ce60ba00ebc9f5cc604ea7d5a573e1a3269bc9038d",
+          "controllerIds": [
+            5973
+          ]
+        }
+      ],
+      "declaredAssets": [
+        {
+          "file": "abyssal-crown-kraken-eye-v4.glb",
+          "sha256": "be73a29ad59cd7bbca7a0724656f4c735847f839ca8d53f2600fab675e508c9b",
+          "bytes": 104660
+        },
+        {
+          "file": "abyssal-crown-kraken-eye-v4.png",
+          "sha256": "b4cd950d22611517451a882fdc6afd4218477d3f70a1d7953b9e57b110952611",
+          "bytes": 34254
+        },
+        {
+          "file": "abyssal-crown-kraken-head-v2.glb",
+          "sha256": "33d24c5c0b393ab3e4df44a2ae2f704bc691eff17c528d5e30ea5e1ab47e3719",
+          "bytes": 234180
+        },
+        {
+          "file": "abyssal-crown-kraken-head-v2.png",
+          "sha256": "d4ac6a37fb7158e4b915164417cd4f90f3cd71163c787185db6b267563cbf7e9",
+          "bytes": 135629
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_sargassum_kraken_tentacle",
+      "baseEnemy": "krakenTentacle",
+      "prefab": "enKrakenTentacleNew",
+      "controllerCandidates": [
+        {
+          "id": 5974,
+          "name": "krakenTentacleController"
+        }
+      ],
+      "renderers": [
+        {
+          "rendererPath": "krakenTentacle",
+          "sourceRendererId": 121595,
+          "rendererKind": "SkinnedMeshRenderer",
+          "rigProfile": "113117bfa34966bdc105923ec8f97ff946a69c2ab9c3dd84021ab889e5d0856a",
+          "combatProfile": "c415ffbaa3d1977a40283b36d0b9bea4fbd2295df45de7b16daa9a7cdb668386",
+          "controllerIds": [
+            5974
+          ]
+        }
+      ],
+      "declaredAssets": [
+        {
+          "file": "sargassum-kraken-tentacle-v2.glb",
+          "sha256": "6815b322fd2b3e22d067f3822aaf1ed90a9de4949f3d55093f9d95e4ab8084d7",
+          "bytes": 459152
+        },
+        {
+          "file": "sargassum-kraken-tentacle-v2.png",
+          "sha256": "93f244d48f6dd53e3b6ff7ed8d4ec10deb8fdddb6b3ed3618bb0d17d2ad12639",
+          "bytes": 151873
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_sargassum_kraken_tentacle_mirror",
+      "baseEnemy": "krakenTentacleMirror",
+      "prefab": "enKrakenTentacleNew",
+      "controllerCandidates": [
+        {
+          "id": 5975,
+          "name": "krakenTentacleControllerMirrored"
+        }
+      ],
+      "renderers": [
+        {
+          "rendererPath": "krakenTentacle",
+          "sourceRendererId": 121595,
+          "rendererKind": "SkinnedMeshRenderer",
+          "rigProfile": "113117bfa34966bdc105923ec8f97ff946a69c2ab9c3dd84021ab889e5d0856a",
+          "combatProfile": "fa962d81c18292667cd1fee784ca2336f1a9308e3cf0db645dc6979324c246bf",
+          "controllerIds": [
+            5974
+          ]
+        }
+      ],
+      "declaredAssets": [
+        {
+          "file": "sargassum-kraken-tentacle-v2.glb",
+          "sha256": "6815b322fd2b3e22d067f3822aaf1ed90a9de4949f3d55093f9d95e4ab8084d7",
+          "bytes": 459152
+        },
+        {
+          "file": "sargassum-kraken-tentacle-v2.png",
+          "sha256": "93f244d48f6dd53e3b6ff7ed8d4ec10deb8fdddb6b3ed3618bb0d17d2ad12639",
+          "bytes": 151873
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_royal_sargassum_seaking_tentacle_a",
+      "baseEnemy": "seaKingTentacleA",
+      "prefab": "enSeaKingTentacle",
+      "controllerCandidates": [
+        {
+          "id": 5974,
+          "name": "krakenTentacleController"
+        }
+      ],
+      "renderers": [
+        {
+          "rendererPath": "KrakenGodTentacle",
+          "sourceRendererId": 121315,
+          "rendererKind": "SkinnedMeshRenderer",
+          "rigProfile": "a279375b70571c59c11caa126050ee65c8f6e254034572aaca4b569e45d93e5c",
+          "combatProfile": "aa8798555a9876e579fda1faf71871097edfc3a90ba0e62d674a68940830cbdb",
+          "controllerIds": [
+            5974
+          ]
+        }
+      ],
+      "declaredAssets": [
+        {
+          "file": "royal-sargassum-seaking-tentacle-v3.glb",
+          "sha256": "86b8429ffefff238109147ec6964a348ce10e4e74bf0b78d5608dec1da65f618",
+          "bytes": 459148
+        },
+        {
+          "file": "royal-sargassum-seaking-tentacle-v3.png",
+          "sha256": "a4733c49a7f2d93ee2cfdbc3435742ae330bf44283aa81a035c8d057f813e47f",
+          "bytes": 88389
+        }
+      ]
+    },
+    {
+      "key": "ftkmf_modeltest_royal_sargassum_seaking_tentacle_b",
+      "baseEnemy": "seaKingTentacleB",
+      "prefab": "enSeaKingTentacle",
+      "controllerCandidates": [
+        {
+          "id": 5975,
+          "name": "krakenTentacleControllerMirrored"
+        }
+      ],
+      "renderers": [
+        {
+          "rendererPath": "KrakenGodTentacle",
+          "sourceRendererId": 121315,
+          "rendererKind": "SkinnedMeshRenderer",
+          "rigProfile": "a279375b70571c59c11caa126050ee65c8f6e254034572aaca4b569e45d93e5c",
+          "combatProfile": "cee96fb0824c1d84efa9c6db52e917494dac3f6e321878c55294b7a2fe6f24de",
+          "controllerIds": [
+            5974
+          ]
+        }
+      ],
+      "declaredAssets": [
+        {
+          "file": "royal-sargassum-seaking-tentacle-v3.glb",
+          "sha256": "86b8429ffefff238109147ec6964a348ce10e4e74bf0b78d5608dec1da65f618",
+          "bytes": 459148
+        },
+        {
+          "file": "royal-sargassum-seaking-tentacle-v3.png",
+          "sha256": "a4733c49a7f2d93ee2cfdbc3435742ae330bf44283aa81a035c8d057f813e47f",
+          "bytes": 88389
+        }
+      ]
+    }
+  ],
+  "mapping": {
+    "path": "scratch/enemy-rig-mapping-reproducible.json",
+    "sha256": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52",
+    "sourceAssetSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117"
+  },
+  "profileDocument": {
+    "path": "art-experiments/abyssal-kraken/runtime-profiles.json",
+    "sha256": "aa81242e03bbd00a0ce9f0683b6c7cb57a0205fe1701f2e28f2e5f3572e46d80"
+  },
+  "assetDirectory": "art-experiments/abyssal-kraken",
+  "staticRendererInventory": {
+    "path": "scratch/static-renderer-inventory.json",
+    "sha256": "7051f2ec7f9142c04facf7d29bfa2049f93cb2a2734a4547ad8e3ed4a82d9928"
+  }
+}

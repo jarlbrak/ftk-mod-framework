@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "method": "Reran the exact authoring generator with output redirected and native NPZ reads limited to bone_names and bindposes. Writer and validator were stubbed only for this source-generation proof.",
+  "binding_keys_accessed": [
+    "bindposes",
+    "bone_names"
+  ],
+  "files": [
+    {
+      "file": "tidecrown-sea-king.source.json",
+      "sha256": "aff23c4895e2fc8f51b8a6404d4887e977c6d60bc6fec56f43fd7161bc086db8",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tidecrown-sea-king_basecolor.png",
+      "sha256": "c6cc839f767abbd5cad59865888acc38187ea3b0804822321f916c6a6001664b",
+      "reproduced_identical": true
+    },
+    {
+      "file": "tidecrown-sea-king.pieces.json",
+      "sha256": "db526c880f121179b8e17cf607d21d72af5e5a47418616aff3be143062ed0d46",
+      "reproduced_identical": true
+    }
+  ],
+  "generator_sha256": "29aef8bc2d28eeee388c436a09a2e432ee1f98d71aacc3aa18438412b59fcac3",
+  "scope": "Original-provenance proof only. Real FTK GLB validation, Blender round trip, native animation, portrait, and live art remain separate gates."
+}

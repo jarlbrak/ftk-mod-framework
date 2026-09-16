@@ -1,0 +1,639 @@
+{
+  "status": "FIRST_FRESH_TRIAL_MECHANICS_OBSERVED_SECOND_FRESH_PENDING",
+  "session": "86aa14f97fb84aa7bed96fe1416a705e",
+  "helperSha256": "2c42e55ddcfcc01331aa66d45721ed404ac98608fe1ed3d4a7ca5a90b3e52186",
+  "positionSubmissions": 1,
+  "discoverySubmissions": 1,
+  "storySubmissionsBeforePosition": 9,
+  "storySubmissionsDuringPreparation": 0,
+  "initialQuestPages": [
+    {
+      "questId": -1,
+      "page": 0,
+      "surface": "portrait",
+      "sequence": 46
+    },
+    {
+      "questId": -1,
+      "page": 1,
+      "surface": "portrait",
+      "sequence": 56
+    },
+    {
+      "questId": -1,
+      "page": 2,
+      "surface": "portrait",
+      "sequence": 69
+    },
+    {
+      "questId": -1,
+      "page": 3,
+      "surface": "questConfirm",
+      "sequence": 79
+    },
+    {
+      "questId": -10,
+      "page": 0,
+      "surface": "portrait",
+      "sequence": 98
+    },
+    {
+      "questId": -10,
+      "page": 1,
+      "surface": "portrait",
+      "sequence": 108
+    },
+    {
+      "questId": -10,
+      "page": 2,
+      "surface": "portrait",
+      "sequence": 118
+    },
+    {
+      "questId": -10,
+      "page": 3,
+      "surface": "portrait",
+      "sequence": 134
+    },
+    {
+      "questId": -10,
+      "page": 4,
+      "surface": "questConfirm",
+      "sequence": 147
+    }
+  ],
+  "callbackCount": 1,
+  "continuation": {
+    "present": true,
+    "id": 96,
+    "callerId": 1,
+    "waitCount": 0,
+    "waitClients": "Self",
+    "local": true
+  },
+  "ownContinuationStillRegistered": true,
+  "quietObservedMonotonicSeconds": 2.4699855420039967,
+  "freshVerifyFrame": 8345,
+  "priorPreparationFrame": 8344,
+  "expectedQuestDefinition": "ftkmf_hollowmire_crypt",
+  "targetHexInstanceId": -125522,
+  "movementState": "Tracking",
+  "enterThenStageWithoutInterveningOperation": true,
+  "postStageStateObservations": 39,
+  "postStageStoryObserved": false,
+  "finalStageStatus": "binding_metadata_observed",
+  "limits": [
+    "Initial clear_intro had already consumed both quest story chains before positioning; this trial does NOT reproduce or prove repair of delayed discovery-phase story generation.",
+    "Second fresh-process trial required; naturally occurring discovery-phase story progression remains unobserved.",
+    "Native local continuation registration remains after consumption; not unregistered by observer.",
+    "No model art, combat lifecycle or gameplay quality acceptance from startup metadata.",
+    "No native DLL, assets or decompiled source content included; receipt retains external source hash provenance."
+  ],
+  "losslessMappings": [
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/case-2b546a4d9e7f42e3b3552156a5933c9b/journal.jsonl",
+      "archivePath": "journal.jsonl.gz",
+      "sourceSha256": "326360c4e8a69e78007794dbbb4f572124d6ac598e28a6589462fcbfee79ca68",
+      "archiveSha256": "bdf05ca8480cae48ea4cb502aada8d05328b4b32e9c75d597560be18b12c9680",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/reefstrider-entry-prepared-first-stage-result.txt",
+      "archivePath": "stage-result.json.gz",
+      "sourceSha256": "96d8a4853aa4c4a61d13ffe125cbe6e7c330134837487eeaaeed798e2cbd63ba",
+      "archiveSha256": "066422e82508043b3fe401a4b0460407aa37820566d344e6f158a2ec5f36a2da",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/entry-preparation-first-startup.json",
+      "archivePath": "startup.json.gz",
+      "sourceSha256": "f3372e4ecf1510f318bd57fc8455b622048d5cb6389d1d04686522eba9cb07a2",
+      "archiveSha256": "1181e5bc23dcdf04b5c48a883a7d9fc1f707278426696f6224f32fbf0f7cba54",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/entry-preparation-deployment-result.json",
+      "archivePath": "deployment.json.gz",
+      "sourceSha256": "f392c6884d7d88ce01b6a74af96d1b9c933a0a8e3195f7f16e87819ddcc34994",
+      "archiveSha256": "77f34fda31ce8bed31d6e6441845a6b5462d8bc877fee5bc8c901b6c70901b9f",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/candidate-entry-preparation-helper-2c42e55d/receipt.json",
+      "archivePath": "helper-review-receipt.json.gz",
+      "sourceSha256": "613e1ccd27ec70f880fdeb1a7a889ad42776d333c16f372699cf41a2fbc93aea",
+      "archiveSha256": "f44726108b4a3f2d69391bf5d63efbafe6aba246cff8d94abfdd4b716b5c93f4",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/b77a1d1bb6c8444384304729bb4bba6c.json",
+      "archivePath": "helper-results/b77a1d1bb6c8444384304729bb4bba6c.json.gz",
+      "sourceSha256": "338aeb4508d54e7a2e166a85b346526f08ed67a444993ff164c4dd4efff57b49",
+      "archiveSha256": "b8437db86866da481be467ecadeba06e8928742463566ea439e9c9940b78ad47",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/2c30d4150da9452fa3bfe7c0d7caeb50.json",
+      "archivePath": "helper-results/2c30d4150da9452fa3bfe7c0d7caeb50.json.gz",
+      "sourceSha256": "9e53a269a1eed8a91327eb1c44704527414e8d1c22cfaf97c8889086696305ad",
+      "archiveSha256": "6e5a449b2551d91b382ab83c80333465fabd4d247360bee2184f352788c9f5f2",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/c25948bff5724b5daf5dea7dffb16c71.json",
+      "archivePath": "helper-results/c25948bff5724b5daf5dea7dffb16c71.json.gz",
+      "sourceSha256": "47391f63ed872295977de3ef186d0b3f4e461d72495ca679fa5281c96ac5dc4f",
+      "archiveSha256": "89da6a508a88ee5c1ea002f4c80dde1f5524e82182b042d7958b42cff177d2eb",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/484caecc08bd4ee3a9ad9c2f8e58e826.json",
+      "archivePath": "helper-results/484caecc08bd4ee3a9ad9c2f8e58e826.json.gz",
+      "sourceSha256": "430bc58fc31fd3da17524ebb42812f8876a98ae5607b1b836fd38cac386dc06c",
+      "archiveSha256": "03c2817bb7932997441b19afdc1d68834475043ec47f8648f9696e6bd0a6c05d",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/8ed41ba10c7c44da89c42bb299819e0a.json",
+      "archivePath": "helper-results/8ed41ba10c7c44da89c42bb299819e0a.json.gz",
+      "sourceSha256": "62b398b10fd4c3d1e3b076587ebfdec8a04f793da88f5effa36e1e32263c8aa2",
+      "archiveSha256": "b2975da71ae4782d2723e5eba0fc444036eb63a893e34f011201a15904bacff1",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/16300924f3f94d0dbd00cfaf7d92099f.json",
+      "archivePath": "helper-results/16300924f3f94d0dbd00cfaf7d92099f.json.gz",
+      "sourceSha256": "3eb0f4c7c29db7c720c6ddc9c7808e26a156bacaee363493475845f66a9693db",
+      "archiveSha256": "1e2c3096e9e9ffabdacc23669dfdc1e0ea53d9ddc548d18ebb9c69af5f1f7370",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/7a5fba2ae7cb4dccaee449b81ad87f76.json",
+      "archivePath": "helper-results/7a5fba2ae7cb4dccaee449b81ad87f76.json.gz",
+      "sourceSha256": "3ed1e4c0286786dbaff11af9e948a882234d8ce431ca5413334277c32eef4a87",
+      "archiveSha256": "25ec783c5f1f19a22496073c34f59e6860fe7ec06bb6957df67153f65c671680",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/04d5208fcee34461a8511586706662fd.json",
+      "archivePath": "helper-results/04d5208fcee34461a8511586706662fd.json.gz",
+      "sourceSha256": "d68e64b3b06456e7b237e1d52a804f6fc478a9814e92cba39c7f7a0c0b9e5a20",
+      "archiveSha256": "b59431d33787304eb4a1c013a8f68dc74c26c663d7c5a105ec5621bcfe8ea9d8",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/83a0958e70e641ffa3acd1e20878abf2.json",
+      "archivePath": "helper-results/83a0958e70e641ffa3acd1e20878abf2.json.gz",
+      "sourceSha256": "e6caf4b136650643cc7fdb7e2a9e5f6803287b1bcdffad7f23ccad8dff3dd5a6",
+      "archiveSha256": "8acc73664af572ea8856996fd2ff00678a3189d430f79fbb95f64d364055d568",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/b6c1ba37f18c41798fc8569d1a64a186.json",
+      "archivePath": "helper-results/b6c1ba37f18c41798fc8569d1a64a186.json.gz",
+      "sourceSha256": "88846a585e760b7b6c7ed464f6f8bb616627b10344121f2d234bb345a57d0d2e",
+      "archiveSha256": "1c95277d3e942f6758043521b6d3b344a42de3af62758658bd4fe4f8ff5713ef",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/28ebf7ad91154ccc9ffdfe400e8425c6.json",
+      "archivePath": "helper-results/28ebf7ad91154ccc9ffdfe400e8425c6.json.gz",
+      "sourceSha256": "0892b0e2ab43d8d360ae201eb98609afd92058ded5b84ae0ed717cf90fe081ae",
+      "archiveSha256": "e9904a9b6f235752c5a0f04eaa7be11d102a3a6eeb31dad2e6408686440dbab5",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/71eda66ccaa04f5bac95f1c3b26ceb1c.json",
+      "archivePath": "helper-results/71eda66ccaa04f5bac95f1c3b26ceb1c.json.gz",
+      "sourceSha256": "008a3a87cf9873df2d471275bc3f07ee1cec859427bf9623df0dc0a861762c52",
+      "archiveSha256": "44a9619c4c9fc9b1ee97fcc760807dd56f84ac99a4ae90e333a8ca0744feabe1",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/35fecd190c744390abcb3289ef5e54b7.json",
+      "archivePath": "helper-results/35fecd190c744390abcb3289ef5e54b7.json.gz",
+      "sourceSha256": "52d1512cd3d31fd253ada6fb701ecc18717259d90b878ab353de326dc8979906",
+      "archiveSha256": "8ad3e73a77606fab5602d5f485df4411755ceaf7c8883d07e787911688a1790b",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/efdee0762d94452d8f6d59835594a107.json",
+      "archivePath": "helper-results/efdee0762d94452d8f6d59835594a107.json.gz",
+      "sourceSha256": "91e8613d08a09bad035fd3d325aa87de5a5a5dcf77fd8833001b4a276fe2e7ba",
+      "archiveSha256": "264d6e33718ffff7013119bd18b2251b9c11d83478b008a6269308dd3a8bb4a8",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/f67ee0fbdc904a37bab98c570cdec2bf.json",
+      "archivePath": "helper-results/f67ee0fbdc904a37bab98c570cdec2bf.json.gz",
+      "sourceSha256": "4c38b51580cbbd441f2e4ed5510cd94adba9e5e45775595699a8319c8df47f6a",
+      "archiveSha256": "ebff7878de84b9a8c6decd70e537e543ca5f6933a8b48a021518cf69e4d67862",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/bd6fc10d397a4599b10353a1d897b5c2.json",
+      "archivePath": "helper-results/bd6fc10d397a4599b10353a1d897b5c2.json.gz",
+      "sourceSha256": "d859887208b7ca07ba8fe79b84a4ffeec75f1433d10eb27e6b64e1888130f81e",
+      "archiveSha256": "1d35f9d96d7e14d4b5c8f07306d8c0ad08b7eb4a8f2078ba757cdbe4154c8c78",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/25a5cf5c027848d7935fee9fb880dd16.json",
+      "archivePath": "helper-results/25a5cf5c027848d7935fee9fb880dd16.json.gz",
+      "sourceSha256": "b299f2704fda42dfe304721942fff16f5cf9d875eaaf690e5ab11f7f42b13ed2",
+      "archiveSha256": "5ce1af07db2cff7cd9c8c65d2d1080eca8daf1a7e3c636bd8bb335c84ae5e579",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/1fd1479e30994ec68d50c553f88d172e.json",
+      "archivePath": "helper-results/1fd1479e30994ec68d50c553f88d172e.json.gz",
+      "sourceSha256": "bb65dad8790ae61bae68b88350c9aecfec14ef7a157a9aee76b2e53ef76fe0d5",
+      "archiveSha256": "d77c6024fe2eba94949e57f6895f776b0a726da6b9c9761f9993c956d360fd7f",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/56397a6f80c64fe7a280bbf2b773ebd2.json",
+      "archivePath": "helper-results/56397a6f80c64fe7a280bbf2b773ebd2.json.gz",
+      "sourceSha256": "ae4c153852da8d1dba7d59f488e130fe76632bec97caa1b4a6ed7fda288ff21e",
+      "archiveSha256": "7be08a6c6d40f1019060083d9a258a50452ace3e2b95acd80b477edd3e9d3010",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/476712bd8bf44bfdb34b48dcd1ef98bf.json",
+      "archivePath": "helper-results/476712bd8bf44bfdb34b48dcd1ef98bf.json.gz",
+      "sourceSha256": "1c2828c8a253901b32f0c6cb9b8bf9da897f228f15d025b0ef727a47b6f9e111",
+      "archiveSha256": "1c6c3f4f8a1e4e84aa0528d1ef40bfb14150a23f7bd5900071c5c7c96e3b40d7",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/3da0b396da1e40fd9c1fa76cc6698edf.json",
+      "archivePath": "helper-results/3da0b396da1e40fd9c1fa76cc6698edf.json.gz",
+      "sourceSha256": "3ece1d7edd24a85196ae5044547ef69a76772ed59beed4e7a0dc2b1279935ab5",
+      "archiveSha256": "0edb0640c45dcb34beae51088481a8f23563bd17b55483b2550dcd21adf23a4a",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/c1101b26ae8140fd92459a07ed0ca19a.json",
+      "archivePath": "helper-results/c1101b26ae8140fd92459a07ed0ca19a.json.gz",
+      "sourceSha256": "aaadc4b772ab3e28c23e47c31aa0380d2e0279fbdb3b4a0f8dfb6ea3a2705732",
+      "archiveSha256": "94cfed0b48153f6b32d2e09cc5309755f2f4a3ddf2f53370001654d145551bb7",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/fda478fdf84841c3a8a8aeca6efd9eb0.json",
+      "archivePath": "helper-results/fda478fdf84841c3a8a8aeca6efd9eb0.json.gz",
+      "sourceSha256": "8e1012c5c11a6924987826d601c435e3208dabfcca8ceab5cb95fb86313c43bd",
+      "archiveSha256": "8d0804c51edb7e8d3471fa9dab78f7633aa7692479720ac4c513bfd4ac497b48",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/bdfa8234afa44b21b766d6d30ee5e6d2.json",
+      "archivePath": "helper-results/bdfa8234afa44b21b766d6d30ee5e6d2.json.gz",
+      "sourceSha256": "4e665b990dc1e1c0d6d82a53b7fb5919e125862297de554c5848553e30ad2dd5",
+      "archiveSha256": "5d5230b1f17891d80329a5c3376b5140c7331c0b96ce63f5dffa8c8b0cc7afbb",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/479d1272a3e640a2a700a41788f60736.json",
+      "archivePath": "helper-results/479d1272a3e640a2a700a41788f60736.json.gz",
+      "sourceSha256": "378320e09fee8bdda9e3ecde6763d1dd00f32c824efc3b6507759c46525a9c02",
+      "archiveSha256": "e710032eb5c1a45343528bb3a57dfddd9e01aeb35b8849757be31a93e796f9ab",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/cd6a9ab68c5f412787ebf8c22d842891.json",
+      "archivePath": "helper-results/cd6a9ab68c5f412787ebf8c22d842891.json.gz",
+      "sourceSha256": "23fa8ca904d3d52d8a12c14502ab22c9296fe2425442757283c584c94fe8f634",
+      "archiveSha256": "f110fbceb4d11dc8d49ed0f1d1d5bc5313a7a5cc31eaf5438cf0d7aa5aa77d1b",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/194f510943694e21b103e272f72c876c.json",
+      "archivePath": "helper-results/194f510943694e21b103e272f72c876c.json.gz",
+      "sourceSha256": "1f7ba0d2e03414aff320c7722a6298e082781a0ca1485f8ea51a2e2664628db2",
+      "archiveSha256": "14183b983a7a77df0cbf53b06e7639e3efd0bf1e21f313277e1dca16276646a1",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/163c34c4a4cc4ddc8c8720f39ca2dc45.json",
+      "archivePath": "helper-results/163c34c4a4cc4ddc8c8720f39ca2dc45.json.gz",
+      "sourceSha256": "0aed95357966bc4904a929de1d873c88604d6ba0edfa4859fb1e3b94451be4d4",
+      "archiveSha256": "f8e77645efbc8bc03392d4432378c00db0130d8ade5909d39014b969bdf57444",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/6e299a19a1fd419a99799ab089d434a2.json",
+      "archivePath": "helper-results/6e299a19a1fd419a99799ab089d434a2.json.gz",
+      "sourceSha256": "c8c14d795f1eee533534696a9b4e73b05ab769dbba2c0940d72e1412b9d02892",
+      "archiveSha256": "0ef11c0cd054f702b98e091d8fb99faa773fbad121682f8d8906c0094422a613",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/6a139eaf54d9400b99d8e02aa815ca21.json",
+      "archivePath": "helper-results/6a139eaf54d9400b99d8e02aa815ca21.json.gz",
+      "sourceSha256": "ec18637fbd4fbc8896ccb1b8cf4921cf548a32dd218aa26fab8f10fe9c16a519",
+      "archiveSha256": "f41a28147ea991907f033e814a6903df5d5ac47ef2a08484e11d7471063d15a7",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/80b3dd8b09f94b7bb84d8e0be7569197.json",
+      "archivePath": "helper-results/80b3dd8b09f94b7bb84d8e0be7569197.json.gz",
+      "sourceSha256": "77a5989f6d877d75e5ace8cea66d88ecbe2e260bcde18602d808dbe87b5e04c4",
+      "archiveSha256": "e63e5e1cbe3096f82b7a9fd468d2f98ca872d7261bb52c10cc71352610e0ef9c",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/5dc55c5739a1488fbe7443ce010ccbe5.json",
+      "archivePath": "helper-results/5dc55c5739a1488fbe7443ce010ccbe5.json.gz",
+      "sourceSha256": "280b98cf994873197c712a52ef18c253f284edb7e1506c5102af688a17678403",
+      "archiveSha256": "39e28aa392d5cfda46de7f8a926dfc2441c2577b70c0272b3840a92416bab9b7",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/73914e2287a446568efe7b064a02cb97.json",
+      "archivePath": "helper-results/73914e2287a446568efe7b064a02cb97.json.gz",
+      "sourceSha256": "fe0b698507f653ab2d5611e8e1b453894b9e0b7215516ce71828d273b7d2854b",
+      "archiveSha256": "1c193f0d9acda2b5ba68c8d2c2827dc0a520b62d31f1ce7a832a82ac35052526",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/ca0b9050afd94af2b5bc57ba6df818ff.json",
+      "archivePath": "helper-results/ca0b9050afd94af2b5bc57ba6df818ff.json.gz",
+      "sourceSha256": "cd9526ac47c521cd76b5903c4e0830b82f642b6872b306f77c7383810397e5c3",
+      "archiveSha256": "96f9c106498d98d6ec26781c84053941b66ec7bc5cb3111ec673ab9af1fe45d0",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/804c1e17f9904561be6b389c24939c97.json",
+      "archivePath": "helper-results/804c1e17f9904561be6b389c24939c97.json.gz",
+      "sourceSha256": "8df7b56d337bc1adb53fcacbd33a7b07946750ccc32cf52d9a8ca329897f516e",
+      "archiveSha256": "89748090da6c784669d6aa099cb3eb887bf93ccde5b12b03af0d40a7c7a57884",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/67484e084c0440f493701ea1421538d6.json",
+      "archivePath": "helper-results/67484e084c0440f493701ea1421538d6.json.gz",
+      "sourceSha256": "1219a1466bf301daca2c0060fc85b9572c70f8481d05cf25383c6e9ac2369537",
+      "archiveSha256": "f2b2029e2e17d9e3beda24241b552214d27e12db97113bea7520377a70babac8",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/e5f4a19f8a0342b7a1c3086ff7110628.json",
+      "archivePath": "helper-results/e5f4a19f8a0342b7a1c3086ff7110628.json.gz",
+      "sourceSha256": "1b8ead3fdf19def17aefdca5f6e46549621642a3a9662b5d77bdb6d690edb9bc",
+      "archiveSha256": "4020cdd40863499643282e8d4fed72ed01c039e966da0872f9e811a8f5824b5d",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/7e505fe0b51744cba0bbcd381aefcae5.json",
+      "archivePath": "helper-results/7e505fe0b51744cba0bbcd381aefcae5.json.gz",
+      "sourceSha256": "905a71233ff8a348df37919de8c94f5d4599110bc472e386f7f505f45d06ffde",
+      "archiveSha256": "16585f1c2faf46da7b3084cb838c6dad14d492e5e79906e494eda727c1ce1bac",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/380823a63df94d11a20e5c8cac17427c.json",
+      "archivePath": "helper-results/380823a63df94d11a20e5c8cac17427c.json.gz",
+      "sourceSha256": "8183eec1a7066cfaaab887aa3d18a939d3832daf2bece80544a03302bf43878b",
+      "archiveSha256": "fc6a8d7c7a0864e68aafbcff9efefffa5f64115400576db6f6f90f4447f54f06",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/cfd574190b314e219a32589c72b29abb.json",
+      "archivePath": "helper-results/cfd574190b314e219a32589c72b29abb.json.gz",
+      "sourceSha256": "7aef94569882f565fa0366df04cdef05219d722c87f19f3c0e97f1dec3de3ac0",
+      "archiveSha256": "a139192cdbb32f3723cb5e9fdc1eaeadcb285685b1a4c07f931a0e7f35b76df7",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/c82dfd603df14679a48785e2a2308d63.json",
+      "archivePath": "helper-results/c82dfd603df14679a48785e2a2308d63.json.gz",
+      "sourceSha256": "e15b54378ed4e04842e98eff2437b6d16c0be17cc47bc9b50fe60625737b504e",
+      "archiveSha256": "08d9b775b9d09460639ad2175659b4b3b7aa96dd56231ee64877b9598a87ab34",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/4898d06374b34113b7fc934c7fa9ba97.json",
+      "archivePath": "helper-results/4898d06374b34113b7fc934c7fa9ba97.json.gz",
+      "sourceSha256": "33505383af45c7517a46652368236e9cce4197d11806c392b06605d1433ddb79",
+      "archiveSha256": "53fb9882a4419b95f11870a969d6861dc8f88b9c19fac2a5e5d431243df013fb",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/083c3189b9d74c19a5a8b5499d352938.json",
+      "archivePath": "helper-results/083c3189b9d74c19a5a8b5499d352938.json.gz",
+      "sourceSha256": "73bb92fb43d5d18f226182b0702aebc786ce8886f22484cae4ffb5e14d7f8d25",
+      "archiveSha256": "ad89aa33db82407c4bcac8f72d0ab3dd5768e31f0dcc81b6931a68c7092ac4bc",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/227ca4fdd05a417a8c17e713dc06806c.json",
+      "archivePath": "helper-results/227ca4fdd05a417a8c17e713dc06806c.json.gz",
+      "sourceSha256": "d886dfd31645abec4239f0a336d8ae7f6ea1b253a4e9e295eb7bbe26d870cd20",
+      "archiveSha256": "2912c14d674233793c17bd605cdb3bd1d50062a3428a1f84214eefd1e34991f7",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/94e4f4a26df04b778ed578ac661e9f6e.json",
+      "archivePath": "helper-results/94e4f4a26df04b778ed578ac661e9f6e.json.gz",
+      "sourceSha256": "21e79de537ba3935c112ed0fabfebad93ad9288de463ff10bbfd142bcd2156fc",
+      "archiveSha256": "65b5fac7b9466c16d00e05882765f2dfae0c90c82e8954d57201fcf05ff56a9f",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/aedd91e8bceb459eaacd5b77d2c043d3.json",
+      "archivePath": "helper-results/aedd91e8bceb459eaacd5b77d2c043d3.json.gz",
+      "sourceSha256": "e0bd326ff8d90b8e84a70488d86c3d0a531b2efebf4f022396d9bb09aaf906fc",
+      "archiveSha256": "6a142d17394ef4d45f37b671648a057820dafc23c2a3fec72cce37ecfa9d53f3",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/ea5a1be262c9444283094b906874c6e8.json",
+      "archivePath": "helper-results/ea5a1be262c9444283094b906874c6e8.json.gz",
+      "sourceSha256": "dce8d718239a39c48bf8e73891e2d8c8339d050029ba6fb7210d02bae7a7f065",
+      "archiveSha256": "7894cc1248e661be855ee62dc802611e1eee924ee6aa1e6233280a753d169e57",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/66ffc9d899f842e8a521a2c55c3f0542.json",
+      "archivePath": "helper-results/66ffc9d899f842e8a521a2c55c3f0542.json.gz",
+      "sourceSha256": "ec93bf9a1e923a7d5e85d22bcc337d7da3f647290428bc82635c1dd8bc99dfc4",
+      "archiveSha256": "ddd867da715c549e3016a818aadbe4785ec55a46aec8adfc0070c5c70a9e9797",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/ed2d616209f8400da49c70d5df4eab7c.json",
+      "archivePath": "helper-results/ed2d616209f8400da49c70d5df4eab7c.json.gz",
+      "sourceSha256": "9814154e8023457f19b029f9d6ce1b31fea0079476d216407032897e9bc6034a",
+      "archiveSha256": "a4fa99ae02715305297463ce988d0133be205fa5caee3f52af3717ca17609ddb",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/29fc3dee512444d6bea292b00d941a80.json",
+      "archivePath": "helper-results/29fc3dee512444d6bea292b00d941a80.json.gz",
+      "sourceSha256": "3ebf39b2e57c0dedae4f65beb4c357f2c7b861fe6aa2b0affd545134b9963270",
+      "archiveSha256": "057b7a7f5bc04be1ccd72de14c77a15ce169cddc598ed20e84e8b51c1e7fb454",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/21ab665437bd4f8c9e374a0cfa1ec2e7.json",
+      "archivePath": "helper-results/21ab665437bd4f8c9e374a0cfa1ec2e7.json.gz",
+      "sourceSha256": "05c5225b730b7d65a85ce90a98bfb7e022e453fba2fe65d9ca3b9546fe8a36e4",
+      "archiveSha256": "33b229af53dca6cdf76ae8ad609e88d7d3c4c249fb36639b5cc6a59deddd8c22",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/1ddfed1a525b4e0c8b5d111b19c74f96.json",
+      "archivePath": "helper-results/1ddfed1a525b4e0c8b5d111b19c74f96.json.gz",
+      "sourceSha256": "ad138c8ca39956e3e5b8afa1d19fa74b84770d20ec68ccf86e3fb2536c0eccc0",
+      "archiveSha256": "b9e61000df96b39ce7203d049966f34745ffa3878e257c3f14899e412cbdd362",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/d6f1379d1a4f4797a6f94149ff19a685.json",
+      "archivePath": "helper-results/d6f1379d1a4f4797a6f94149ff19a685.json.gz",
+      "sourceSha256": "32afce27febf5a1155fbadd3a36e12ad067dac7fd8d05a3094376051cb080b43",
+      "archiveSha256": "96b2934f640e44d47559c0af5a0a9f92b288f2ba4ae23f77df8d66dc6d604002",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/436cf6bbbf224406b2df0af5e14f9aef.json",
+      "archivePath": "helper-results/436cf6bbbf224406b2df0af5e14f9aef.json.gz",
+      "sourceSha256": "3e73dcbebf9338a58e650901a63e691395805301d22f7a35fe47d09970a67fce",
+      "archiveSha256": "23627b8e5676043c143fa050b25a435cd84e607c4bb08d1b2a1b3183673b23b3",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/48b52f541de14228814c20177eacc381.json",
+      "archivePath": "helper-results/48b52f541de14228814c20177eacc381.json.gz",
+      "sourceSha256": "a46c87f9acc37063bd563f07b351dd99146cb5f67e6b2588bc7ce95b39e14bb5",
+      "archiveSha256": "dbe58ba950a013e238fbfa44bcb15a396b400a7cec009ac71275c600a5ff2c25",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "scratch/mirewarden-game/model-test-output/a22d5d589aee43739b4d93cb17cc63ec.json",
+      "archivePath": "helper-results/a22d5d589aee43739b4d93cb17cc63ec.json.gz",
+      "sourceSha256": "0791321f4c2028aa1fe3271302afc09a49420b0177d4c791cdd965c4a44fc96c",
+      "archiveSha256": "78d0aec3f821e8652f6311957a5affae3df23edc94f53b616e11a635a09c4513",
+      "compression": "gzip"
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/EntryPreparation.cs",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/EntryPreparation.cs",
+      "sourceSha256": "b86beebf04fb26c9c855779434b801f5b93c57490ce9ff3bffae4fb070644f6d",
+      "archiveSha256": "b86beebf04fb26c9c855779434b801f5b93c57490ce9ff3bffae4fb070644f6d",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/EntryPreparationPolicy.cs",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/EntryPreparationPolicy.cs",
+      "sourceSha256": "e7cd1761b895f5ea9f4ea5a64d52036cb22a45af89889be7ed3ae8a549ddc6af",
+      "archiveSha256": "e7cd1761b895f5ea9f4ea5a64d52036cb22a45af89889be7ed3ae8a549ddc6af",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/Plugin.cs",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/Plugin.cs",
+      "sourceSha256": "f7dafcaf1ac4e634fecea0bfd4e27f8adf6226afea953c7dfcb5df6f26b32308",
+      "archiveSha256": "f7dafcaf1ac4e634fecea0bfd4e27f8adf6226afea953c7dfcb5df6f26b32308",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/RuntimeModelTest.csproj",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/RuntimeModelTest.csproj",
+      "sourceSha256": "409b2d6083d97f29a7d0d0fd10d9d589ae378c46d254b609ea1a730d7cc31ae0",
+      "archiveSha256": "409b2d6083d97f29a7d0d0fd10d9d589ae378c46d254b609ea1a730d7cc31ae0",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/StorySetup.cs",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/StorySetup.cs",
+      "sourceSha256": "96b66bdd00469128e51c59da4648c5f19bd8613933543735c5dcc17975f5456b",
+      "archiveSha256": "96b66bdd00469128e51c59da4648c5f19bd8613933543735c5dcc17975f5456b",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/StorySubmissionPolicy.cs",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/StorySubmissionPolicy.cs",
+      "sourceSha256": "20c130099a3eabb8ab5670fef87412eff7c8cc2c5808dcbc96abc6d676f576f5",
+      "archiveSha256": "20c130099a3eabb8ab5670fef87412eff7c8cc2c5808dcbc96abc6d676f576f5",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/ENTRY-PREPARATION.md",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/ENTRY-PREPARATION.md",
+      "sourceSha256": "cec971d7508be8af076531f274b5e1ae28aa2d1041177b4eaaf45ba8b23f068c",
+      "archiveSha256": "cec971d7508be8af076531f274b5e1ae28aa2d1041177b4eaaf45ba8b23f068c",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/entry_setup.py",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/entry_setup.py",
+      "sourceSha256": "e991faa55fa1a69aaf1b2379076606cdfe9b5aea1e5bd080d9ed3efc4f59060e",
+      "archiveSha256": "e991faa55fa1a69aaf1b2379076606cdfe9b5aea1e5bd080d9ed3efc4f59060e",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/test_entry_setup.py",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/test_entry_setup.py",
+      "sourceSha256": "953abe9e7147715227629d5ab8edd856e6cacd88265701b43cbc091c3e27d28b",
+      "archiveSha256": "953abe9e7147715227629d5ab8edd856e6cacd88265701b43cbc091c3e27d28b",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/run_case.py",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/run_case.py",
+      "sourceSha256": "cfce2cd07bc45b56b076520aa9a6735f026c0ae43e4bd941506d2e0a0d6560e3",
+      "archiveSha256": "cfce2cd07bc45b56b076520aa9a6735f026c0ae43e4bd941506d2e0a0d6560e3",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/resume_after_start.py",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/resume_after_start.py",
+      "sourceSha256": "b97e3b6c5e7c39cce04eb193057994a84fdb3d6e169407a5422e0ee2fcef082c",
+      "archiveSha256": "b97e3b6c5e7c39cce04eb193057994a84fdb3d6e169407a5422e0ee2fcef082c",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/runtime-test/story_setup.py",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/runtime-test/story_setup.py",
+      "sourceSha256": "df7c17870466dcb1b32119df676cd3268bb8334726eb971b0100df21bea44d6f",
+      "archiveSha256": "df7c17870466dcb1b32119df676cd3268bb8334726eb971b0100df21bea44d6f",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/entry-preparation-tests/Program.cs",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/entry-preparation-tests/Program.cs",
+      "sourceSha256": "160f846c48b758f23b2d39e47b98aef80190090393f9a2f456b77979a2fcceb8",
+      "archiveSha256": "160f846c48b758f23b2d39e47b98aef80190090393f9a2f456b77979a2fcceb8",
+      "compression": null
+    },
+    {
+      "originalPath": "tools/ai-model-pipeline/entry-preparation-tests/EntryPreparationTests.csproj",
+      "archivePath": "reviewed-source/tools/ai-model-pipeline/entry-preparation-tests/EntryPreparationTests.csproj",
+      "sourceSha256": "28e26e2c83bba31d996860967bb9a0e1f7195c5a0b92a45adf8f3538c6d0cd85",
+      "archiveSha256": "28e26e2c83bba31d996860967bb9a0e1f7195c5a0b92a45adf8f3538c6d0cd85",
+      "compression": null
+    }
+  ],
+  "startupSelfTests": {
+    "pass": 526,
+    "fail": 0
+  },
+  "deployedBinaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "2c42e55ddcfcc01331aa66d45721ed404ac98608fe1ed3d4a7ca5a90b3e52186",
+      "bytes": 325632
+    }
+  },
+  "deploymentReceiptHashMatched": true,
+  "startupSessionIdentityMatched": true
+}

@@ -1,0 +1,21 @@
+{
+  "status": "ADVANCE_TO_EXACT_LIVE_TRIAL_WITH_DEATH_BOUNDARY",
+  "reviewer": "parent visual review",
+  "inputs": {
+    "hero": "hero.png",
+    "side": "side.png",
+    "portrait": "portrait.png",
+    "scene": "bramblecoil-jungle-snake-studio.blend"
+  },
+  "observations": [
+    "The bind-pose hero and side views read as one original articulated jungle viper: a long tapered body, bright bramble thorns, alternating gold scale bands, and a broad paired rainleaf hood create a clear silhouette from tail to skull.",
+    "The portrait view keeps two pale luminous eyes, ivory jaw detail, hood panels, a central crown thorn, cheek thorns, and the orchid tongue visually distinct from the body; these are authored geometry tied to native head, jaw, tongue, and joint13 palette entries.",
+    "Every visible surface in the rendered scenes comes from the original source GLB and its palette texture. The studio scenes contain no native body surface, native fall-off piece, native camera, native material, or game texture."
+  ],
+  "limits": [
+    "This is a static offline bind-pose review under studio lighting, not an FTK combat camera, native material, animation, portrait, culling, ragdoll, lifecycle, or gameplay result.",
+    "The separate BackRib, FrontRib, head, jaw, and seven-bone tongue construction needs native idle, bite, venom, hit, DeathLight, and ordinary Death review before animation-safe or finished-art claims.",
+    "Jungle C normal Death is source-proven to hide enJungleSnakeC and activate 13 native quetzalPiece fall-off fragments. This review does not accept their visual relationship to Bramblecoil or claim a normal-death custom-body result."
+  ],
+  "decision": "The source is readable and materially distinct enough to justify one fresh exact snakeJungleC/enJungleSnakeC isolated binding trial. The normal-death fall-off path stays a separately recorded integration boundary."
+}

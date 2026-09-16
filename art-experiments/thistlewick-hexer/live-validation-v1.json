@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "status": "ORIGINAL_BODY_BINDING_NORMAL_HIT_SELECTED_VIEWS_REVIEWED_FLEE_NOT_DEATH",
+  "model": "Thistlewick Hexer",
+  "nativeEnemy": "scourgeG",
+  "rendererId": 121222,
+  "session": "621d536f4b7847b396d5334e2a05075d",
+  "frozenAuthoringManifest": {
+    "path": "art-experiments/thistlewick-hexer/manifest.json",
+    "sha256": "5f18bef829e11607edb5fbfa6217de535604c87e14d0cbef6d9af3eab383ded0"
+  },
+  "source": {
+    "path": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9.json",
+    "sha256": "6ba89c412512cabf8520352432245792ba6ac6d7417d27b2c6d89ed693030bf2"
+  },
+  "raw": {
+    "path": "art-experiments/thistlewick-hexer/live-v1/normal-hit-attack-flee.json.gz",
+    "sha256": "36589844a158e47cfc326289edbf9b4e036ebcf96fd3782c043a089114eebea4"
+  },
+  "frames": 120,
+  "video": {
+    "path": "art-experiments/thistlewick-hexer/live-v1/normal-hit-attack-flee.mp4",
+    "sha256": "22dba0fb7fe58faa0f1cecb569f4ff980d69100709d5ee2a301fd36d8b215c01"
+  },
+  "videoMetadata": {
+    "width": 1280,
+    "height": 832,
+    "r_frame_rate": "12/1",
+    "nb_read_frames": "120"
+  },
+  "pins": {
+    "deployed-binaries": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "session": "621d536f4b7847b396d5334e2a05075d",
+      "binaries": {
+        "framework": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+          "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+          "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+          "bytes": 1974272
+        },
+        "helper": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+          "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1",
+          "bytes": 304640
+        }
+      },
+      "measurement": "on_disk_binary_sha256",
+      "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+    },
+    "profile-assets": {
+      "thistlewick.glb": "c808bf91b52f9ffefae0d4b365f569bcc83bcbb3fd60317ed79e3bc47ad0165c",
+      "thistlewick_basecolor.png": "3ae7dd8434a28252dad251363051eaf0b031b0e0ca6b4268f8ff7e7e07adf476"
+    },
+    "provenance": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "port": 8788,
+      "session": "621d536f4b7847b396d5334e2a05075d",
+      "case": "f39d42b665384371bf1d3a04690f0c72",
+      "mode": "record-action",
+      "enemy": "ftkmf_modeltest_thistlewick",
+      "class": null,
+      "profile": {
+        "key": "ftkmf_modeltest_thistlewick",
+        "baseEnemy": "scourgeG",
+        "displayName": "Thistlewick Hexer",
+        "combatProfile": "7b38982bd4cc216ce1f587e9235d4fb740c40c26a3bb2e73f7ad30c5a71beccf",
+        "renderers": [
+          {
+            "rendererPath": "enScourgeLeprechaun",
+            "glbFile": "thistlewick.glb",
+            "textureFile": "thistlewick_basecolor.png",
+            "disableNativeEmission": false
+          }
+        ],
+        "minimumBaseHealth": 64,
+        "visualScale": 1.0
+      },
+      "profileInputSha256": "4fb54ce0d4fc17d86491f02b9e1a0053f0fb43e8715634fe64b6dbf28b42de56",
+      "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+    }
+  },
+  "clips": {
+    "cidle_impUnarmed": {
+      "first": 0,
+      "last": 112,
+      "positiveFrameCount": 88
+    },
+    "damageHeavy_imp": {
+      "first": 25,
+      "last": 31,
+      "positiveFrameCount": 7
+    },
+    "attackProf_leprechaun": {
+      "first": 69,
+      "last": 86,
+      "positiveFrameCount": 18
+    }
+  },
+  "rootReview": {
+    "path": "art-experiments/thistlewick-hexer/live-v1/thistlewick-first-root-review.json",
+    "sha256": "452539efab230dd9ceef363bc3359e59c0db50f2d121537943befbea28e6e2e4"
+  },
+  "limits": [
+    "Native hat remains connected; lower face cropped in both portraits.",
+    "Normal10 hit58\u219248 and later native attack are partly hero-occluded.",
+    "Later HP0/removal is flee-consistent, no Death clip; not lethal acceptance.",
+    "Separate original death and global Fergus progression are not established by this record."
+  ],
+  "evidence": [
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/case-f39d42b665384371bf1d3a04690f0c72/capture-summary.json",
+      "sha256": "783a88cc831e2dcd45c6dec57322a70b704bdf70599dac3ba2809cdae3c716bd"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/case-f39d42b665384371bf1d3a04690f0c72/journal.jsonl",
+      "sha256": "f41f1d4c8dbe66605dbfe620990016dfd84cd460077d385c940ae712fbd1bfdb"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/case-f39d42b665384371bf1d3a04690f0c72/result.json",
+      "sha256": "8c6693796a5b83ab202bb123c8a07b353007693a8b4522fa31907f0e092ae128"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/normal-hit-attack-flee-0000.png",
+      "sha256": "2d13e1d9a276bfbf6b244dfc303c45160c286f1618079d89c3570a42eb569bc0"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/normal-hit-attack-flee-0030.png",
+      "sha256": "04744d7197136f63ecb7f1cb7b853d8a5621bab03f3c13dcb602d4070a61de94"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/normal-hit-attack-flee-0080.png",
+      "sha256": "ad571ed2995a8e86c18930fb30aef470e2fe57e7bfcece35cf77a24f04ccc300"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/normal-hit-attack-flee.json.gz",
+      "sha256": "36589844a158e47cfc326289edbf9b4e036ebcf96fd3782c043a089114eebea4"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/normal-hit-attack-flee.mp4",
+      "sha256": "22dba0fb7fe58faa0f1cecb569f4ff980d69100709d5ee2a301fd36d8b215c01"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/source-image-pins.json",
+      "sha256": "56259d4eba462c08646e74edff7107f914259ce2d49bbc86b3ba1b978a96c61e"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/thistlewick-deployment-result.json",
+      "sha256": "b4f21a51f1f0f25ae7242464b4ad9e354aa3e1196a6e4756cea5d83e4829a50b"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/thistlewick-first-after-fixture.json",
+      "sha256": "3a2f0f337889b617758b80ba81dbd27682c4bab6da8121f2d930d1a23b5a198f"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/thistlewick-first-root-review.json",
+      "sha256": "452539efab230dd9ceef363bc3359e59c0db50f2d121537943befbea28e6e2e4"
+    },
+    {
+      "path": "art-experiments/thistlewick-hexer/live-v1/thistlewick-startup-evidence.json",
+      "sha256": "4410a8b27cf53fce18fb332834d933a6b3c49278c3021fc43a545eb048316fe2"
+    }
+  ]
+}

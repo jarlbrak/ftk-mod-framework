@@ -1,0 +1,54 @@
+{
+  "status": "PASS_OFFLINE_ROUNDTRIP_AND_CAPTURE_BINDING",
+  "primaryGlbSha256": "8d13200e7dee5ab2e50096fb9da90c9f27ffed012ff8fac2cfc5522ff169132c",
+  "blenderReopenedGlbSha256": "068e597bb3c759badcfe6119b201ef929318258680a2f78432f8c02c81262d0e",
+  "checks": {
+    "positions": {
+      "maximumAbsoluteDifference": 5.940577540997083e-08,
+      "tolerance": 1e-06
+    },
+    "normals": {
+      "maximumAbsoluteDifference": 6.287528958637267e-05,
+      "tolerance": 0.0001
+    },
+    "uvs": {
+      "maximumAbsoluteDifference": 9.934107481068821e-09,
+      "tolerance": 1e-06
+    },
+    "joints": {
+      "maximumAbsoluteDifference": 0.0,
+      "tolerance": 0
+    },
+    "weights": {
+      "maximumAbsoluteDifference": 0.0,
+      "tolerance": 0
+    },
+    "triangles": {
+      "maximumAbsoluteDifference": 0.0,
+      "tolerance": 0
+    }
+  },
+  "captures": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/cc28a1e0350e48a3bc927d1894bea810.json",
+      "sha256": "1266af335ebc56790474366a9bee620d1db1cce8a5da0543f84857c8fe98b363",
+      "frames": 120,
+      "allOrdered36BonesMatch": true
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/79e0edfed0c049eebd4788919e9770d6.json",
+      "sha256": "5a31fb566416ecd63a4057e0de9719aba738212f3728ce95c81a3c8cd12ecbf0",
+      "frames": 120,
+      "allOrdered36BonesMatch": true
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3c32bd1578be482c87d3353aabdd5938.json",
+      "sha256": "d6268c7cdac6bae3d203aec6fb515b7cbf64e544d3873adef3e434887fae438f",
+      "frames": 120,
+      "allOrdered36BonesMatch": true
+    }
+  ],
+  "vertices": 12348,
+  "triangles": 4116,
+  "scope": "Original geometry and reopened Blender exporter agree within stated float tolerances. Native capture bone names checked for all360frames. No live original appearance acceptance."
+}

@@ -1,0 +1,174 @@
+{
+  "samplePhase": "main-thread-command",
+  "provenance": "read-only existing live enemy shared-material and lease observation",
+  "frame": 12023,
+  "gameTime": 112.37773895263672,
+  "realtime": 126.21961212158203,
+  "deltaTime": 0.00923012476414442,
+  "enemy": "ftkmf_modeltest_cubea_materialslots",
+  "ownerInstanceId": 369188,
+  "celInstanceId": -245406,
+  "rendererInstanceId": -245412,
+  "celRelativeRendererPath": "enJellyCube",
+  "rendererEnabled": true,
+  "rendererActive": true,
+  "slots": [
+    {
+      "instanceId": -245598,
+      "name": "matBone (Instance)",
+      "type": "UnityEngine.Material",
+      "inCurrentLeaseResources": true,
+      "slot": 0,
+      "shader": "Standard",
+      "emissionKeyword": true,
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245600,
+        "name": "ftkmf_cubea_material_layers_v1.slot0.png",
+        "type": "UnityEngine.Texture2D",
+        "inCurrentLeaseResources": true,
+        "width": 128,
+        "height": 128,
+        "wrapMode": "Repeat",
+        "filterMode": "Bilinear"
+      },
+      "_MainTexOffset": [
+        0.0,
+        0.0
+      ],
+      "_MainTexScale": [
+        1.0,
+        1.0
+      ],
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null,
+      "_EmissionMapOffset": [
+        0.0,
+        0.0
+      ],
+      "_EmissionMapScale": [
+        1.0,
+        1.0
+      ],
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "instanceId": -245602,
+      "name": "matJellyCubeA (Instance)",
+      "type": "UnityEngine.Material",
+      "inCurrentLeaseResources": true,
+      "slot": 1,
+      "shader": "Standard",
+      "emissionKeyword": true,
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245604,
+        "name": "ftkmf_cubea_material_layers_v1.slot1.png",
+        "type": "UnityEngine.Texture2D",
+        "inCurrentLeaseResources": true,
+        "width": 128,
+        "height": 128,
+        "wrapMode": "Repeat",
+        "filterMode": "Bilinear"
+      },
+      "_MainTexOffset": [
+        0.0,
+        9.856086730957031
+      ],
+      "_MainTexScale": [
+        2.0,
+        2.0
+      ],
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null,
+      "_EmissionMapOffset": [
+        0.0,
+        0.0
+      ],
+      "_EmissionMapScale": [
+        2.0,
+        2.0
+      ],
+      "emissionColor": [
+        0.18226096034049988,
+        0.2279411256313324,
+        0.0536331832408905,
+        0.15000000596046448
+      ]
+    }
+  ],
+  "scrollers": [
+    {
+      "instanceId": -245414,
+      "enabled": true,
+      "active": true,
+      "materialIndex": 1,
+      "textureName": "_MainTex",
+      "rate": [
+        0.0,
+        0.20000000298023224
+      ],
+      "phase": [
+        0.0,
+        9.856086730957031
+      ],
+      "rendererInstanceId": -245412,
+      "targetMaterialInstanceId": -245602,
+      "propertySupported": true,
+      "currentPropertyOffset": [
+        0.0,
+        9.856086730957031
+      ]
+    }
+  ],
+  "lease": {
+    "available": true,
+    "present": true,
+    "leaseId": 4,
+    "acquired": true,
+    "applied": true,
+    "references": 1
+  },
+  "leaseResourceInstanceIds": [
+    -245596,
+    -245598,
+    -245600,
+    -245602,
+    -245604
+  ],
+  "boundary": "Current fields/resources only; no lease retention, pruning, material getter cloning or native clone creation. UV displacement and owner independence require multiple matched observations. Multiple native scrollers can write the same property; raw observed phase is not presumed equal to the final material offset.",
+  "geometry": {
+    "meshInstanceId": -245596,
+    "mesh": "ftkmf_glb_cubea_material_layers_v1.glb",
+    "vertices": 72,
+    "submeshCount": 2,
+    "submeshes": [
+      {
+        "nativeMaterialSlot": 0,
+        "indices": 36,
+        "triangles": 12,
+        "indexInt32LittleEndianSha256": "44e5f14bc176ba6aa948af11a83772328b3298a0a937c9cc7c01560940074811"
+      },
+      {
+        "nativeMaterialSlot": 1,
+        "indices": 36,
+        "triangles": 12,
+        "indexInt32LittleEndianSha256": "b6fa5749a4b81e11509f2319714631dba7dade0ac0e217ec24a3af56073ec623"
+      }
+    ],
+    "uv0Count": 72,
+    "uv0Float32LittleEndianSha256": "29879d14488f7a8da63c35f65ee5964ce854e02a02f285e261e91db85ca97743",
+    "inCurrentLeaseResources": true
+  },
+  "ok": true,
+  "testFixtureMaxHpTarget": 999,
+  "tutorialsQuiet": true,
+  "session": "0cf798022fc14b3ab8f54816b8d4d0b2",
+  "id": "a8019ce24ca443be87710cd9fb200e46",
+  "savePath": "save-model-test-81fab5f083e30704"
+}

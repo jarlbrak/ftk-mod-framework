@@ -1,0 +1,35 @@
+{
+  "schema": "ftkmf.root-death-review.v1",
+  "capture": {
+    "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/9e85b32a18e64139a7886a1191c336f8.json",
+    "sha256": "80e9fdd448c2632d3ab13b2734ae67fc49c2c6840db6e5592e13ad5a0cb3895f",
+    "frames": 120
+  },
+  "clips": {
+    "cidle_impUnarmed": {
+      "first": 0,
+      "last": 24,
+      "positiveFrames": 25
+    },
+    "deathHeavy_imp": {
+      "first": 25,
+      "last": 119,
+      "positiveFrames": 95
+    }
+  },
+  "animatorEnabledFrames": 120,
+  "rendererEnabledFrames": 120,
+  "reviewedPngs": [
+    30,
+    60
+  ],
+  "visualVerdict": "Frame30 probe and native hat visible behind partly occluding hero; frame60 collapsed probe and retained hat visible on floor behind hero. Calibration appearance only.",
+  "action": "explicit KillSingle, not ordinary lethal damage",
+  "progression": "two once-only native Collect calls, reward increase18to34 between calls; strictReady0/3 restored, queuedTrap1 noteligible",
+  "remaining": [
+    "original body live appearance and hat clearance",
+    "ordinary hit",
+    "ordinary lethal damage",
+    "global native Fergus progression"
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "schema": "ftkmf.kraken-production-adapter-contract.v1",
+  "status": "implementation_complete_validation_pending",
+  "route": {
+    "topologyGroup": "6a28ac3cf4523c24",
+    "routeKind": "resourcePrefab",
+    "nativeEnemy": "krakenHead",
+    "resourcePrefab": "enkrakenhead",
+    "rendererPath": "krakenHead",
+    "sourceRendererId": 121260,
+    "genericProfileAllowed": false
+  },
+  "authority": {
+    "assemblyCSharpSha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "resourcesAssetsSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+    "controllerName": "krakenHeadController",
+    "controllerSourceId": 5973,
+    "nativeControllerAssignment": "CharacterEventListener.HookupWeaponForBattle assigns m_Weapon.m_AnimationController to the real CEL Animator"
+  },
+  "oldPalette": [
+    "Root_M/joint1",
+    "Root_M/joint1/neck",
+    "Root_M/joint1/neck/head",
+    "Root_M/joint1/neck/head/topHead",
+    "Root_M/joint1/neck/jaw"
+  ],
+  "modernDrivers": [
+    "Root_M/base/body",
+    "Root_M/base/body/neck",
+    "Root_M/base/body/neck/head",
+    "Root_M/base/body/neck/head/topHead"
+  ],
+  "mapping": {
+    "Root_M/joint1": "Root_M/base/body",
+    "Root_M/joint1/neck": "Root_M/base/body/neck",
+    "Root_M/joint1/neck/head": "Root_M/base/body/neck/head",
+    "Root_M/joint1/neck/head/topHead": "Root_M/base/body/neck/head/topHead"
+  },
+  "runtimeDesign": {
+    "gameplayAuthority": "The real CharacterEventListener, weapon controller, Animator state clocks, transitions, callbacks, victim context, and weapon effects remain authoritative.",
+    "sampler": "A separate owned controller-free playable graph samples modern transforms with events disabled. It never attaches attack StateMachineBehaviours or forwards events.",
+    "endpointEquation": "desiredOldModel = modernAnimatedModel * inverse(modernRestModel) * oldRestModel",
+    "localEquation": "desiredOldLocal = inverse(actualDesiredParentModel) * desiredOldModel",
+    "jawPolicy": "Preserve the old jaw animation when its native appearance clip is authoritative. Main-state sampling alone keeps the jaw at its old rest local transform.",
+    "transitionPolicy": "Sample current and next native state roles independently, preserve their observed clocks and raw weights, and blend mapped old endpoints. Appearance and main endpoints require separate contributors and an explicit measured blend policy.",
+    "updateOrder": "Snapshot every source transform after native animation evaluation, compute and validate every output before writing, then commit the old-palette locals in hierarchy order.",
+    "rollback": "Any identity, topology, matrix, decomposition, reconstruction, or readback failure restores every saved target local and disables the adapter for that owner."
+  },
+  "numericAndIdentityGuards": {
+    "maximumMatrixError": 0.00001,
+    "finite": true,
+    "positiveDeterminant": true,
+    "nonsingularScale": true,
+    "shearRejected": true,
+    "sharedRootReadOnly": true,
+    "paletteOrderImmutable": true,
+    "inverseBindBytesImmutable": true,
+    "sourceSnapshotsBeforeWrites": true,
+    "targetIdentityAndParentChecksEachUpdate": true
+  },
+  "lifecycle": {
+    "owner": "One adapter lease per exact real CEL and renderer pair.",
+    "cleanup": "Dispose the owned playable graph before destroying its sampler hierarchy, release owned meshes and materials through existing visual ownership, and remove update registration exactly once.",
+    "clonePolicy": "No evidence transfers between native avatar clones. Every clone needs independent source, target, controller, and lifetime validation."
+  },
+  "acceptanceGates": [
+    {
+      "name": "owned_matrix_mechanics",
+      "status": "fixture_proven",
+      "requirement": "Neutral recovery, articulated reconstruction, repeat stability, rollback, finite TRS rejection, identity checks, and cleanup pass at tolerance 1e-5."
+    },
+    {
+      "name": "serialized_controller_inventory",
+      "status": "static_proven",
+      "requirement": "Controller 5973 resolves exactly the 15 named roles, their clip, loop, speed, length, and serialized transition contracts. LegacyKrakenResourceAdapter.StateContracts equals this inventory. This static gate grants no live-reachability credit."
+    },
+    {
+      "name": "native_reachable_production_behavior",
+      "status": "production_observation_satisfied",
+      "requirement": "On the exact registered enkrakenhead route, naturally observe IDLE, ATTACK, DEFEND, and DAMAGED with IDLE to ATTACK to IDLE, IDLE to DEFEND to IDLE, and IDLE to DAMAGED to IDLE. Additional structurally certified states receive no reachability credit without source and exact-route evidence. The observer must not drive Animator APIs, install a fake CEL, or alter weapon authority."
+    },
+    {
+      "name": "native_attack_authority",
+      "status": "production_observation_satisfied",
+      "requirement": "Every credited Kraken proficiency attack has attackAnim AttackProf and override Attack, then effective variant, CombatTrigger, and controller state Attack, Attack, and ATTACK. Preserve exactly-once native callbacks, victim response, weapon animation, damage, exit, and post-idle behavior, with at least one successful window for enKrakenResistUp, enKrakenInterrupt, enKrakenConfuse, and enKrakenArmorUp."
+    },
+    {
+      "name": "appearance_and_main_composition",
+      "status": "pending",
+      "requirement": "Appearance, main-state, current-state, and next-state contributors are sampled at native clocks and reproduce accepted old-palette output without discontinuity."
+    },
+    {
+      "name": "production_route_binding",
+      "status": "production_observation_satisfied",
+      "requirement": "The exact enkrakenhead resource prefab, renderer 121260, real CEL, weapon controller, and original Gloamfin assets bind in an isolated live encounter."
+    },
+    {
+      "name": "visual_motion_and_gameplay",
+      "status": "gameplay_satisfied_visual_and_progression_pending",
+      "requirement": "Root review accepts appearance, idle, attacks, ordinary hit, ordinary non-cheat lethal death, transitions, camera fit, culling, portrait behavior, and gameplay progression. A KillSingle fixture may prove the native death and cleanup path but cannot satisfy ordinary lethal gameplay."
+    },
+    {
+      "name": "resource_lifetime",
+      "status": "two_owner_natural_teardown_satisfied",
+      "requirement": "Native owner and clone lifetimes dispose adapter graphs, sampler objects, meshes, materials, and textures exactly once without leaks or early release."
+    },
+    {
+      "name": "immutable_archive",
+      "status": "production_observation_archive_verified_canonical_route_archive_pending",
+      "requirement": "A fresh route-specific archive pins source assets, controller and catalog identity, all retained captures, manual review, progression, and known limits."
+    }
+  ],
+  "acceptanceCampaign": {
+    "freshOwnerRequiredPerRun": true,
+    "runs": [
+      {
+        "role": "native-combat-death",
+        "expectedTerminal": "DEATH",
+        "requirements": "Observe the required natural active-state edges and all four successful Kraken proficiency windows, then finish with one ordinary non-consumable StartEngageAttack whose captured cheatType is None, native RespondToHit at zero health, CombatTrigger Death, no terminal return, and complete teardown."
+      },
+      {
+        "role": "enemy-victory-terminal",
+        "expectedTerminal": "VICTORY",
+        "requirements": "Observe CombatCycleEnd with no alive player, at least one alive enemy, and no destroyed boat, followed by native StartEndCombatSequence with playEnemyVictory true, CombatTrigger Victory, no terminal return, and complete teardown."
+      }
+    ],
+    "structuralOnlyWithoutFutureExactRouteEvidence": [
+      "ATTACKCRIT",
+      "ATTACKPROF",
+      "PASSIVE VICTORY",
+      "DEATHLIGHT",
+      "OverworldAppear"
+    ],
+    "sourceReachableBeforeObserverArm": [
+      "INTRO"
+    ]
+  },
+  "implementationBoundary": {
+    "currentPublicApiImplementsAdapter": false,
+    "dedicatedInternalAdapterImplemented": true,
+    "dedicatedInternalAdapterSource": "FTKModFramework/Core/LegacyKrakenResourceAdapter.cs",
+    "offlineReviewStatus": "approved_no_actionable_core_findings",
+    "setEnemyBodyMeshesFromGlbScope": "mesh replacement only",
+    "setEnemyBodyFromBundleScope": "CharacterEventListener template replacement only",
+    "requiredNextStep": "Complete root appearance, continuous-motion, camera, culling, portrait, progression, endpoint-composition, and canonical route archive review before this route may receive canonical coverage credit."
+  },
+  "evidencePins": {
+    "decompiledCharacterEventListenerSha256": "b1c351a88947cefc9674dee9ac1e24f5278b825545b7ac5b8a92c0ff5cf3edb0",
+    "productionStateCoverageReadmeSha256": "b51f24cf04a4314def6ed90c17b5425b16f8540bd2bc44b1573aacc734e98cd8",
+    "productionCampaignValidationSha256": "6154ad173ef779a04c443ad0016093f28eb222d79614ea682efbe409ae4bcdd9",
+    "productionCampaignIntegritySha256": "021cafff589f10b4c45c0cce3e2181a2d33d5d98267e3aab0a2ca987d3b6cecd",
+    "offlineAdapterAuditSha256": "0ae960fd0a36f00ddc6cca6e7322b144ccedb41bf158931a0ea45ab78353a9bb",
+    "ownedUnityAdapterFixtureSha256": "509d9d4ca183e481ad6d94c04dc6b2abe60eb6446ad94549591f369dcfdded02",
+    "dedicatedInternalAdapterSourceSha256": "e3bbb1c76734814a19b0db50f3b01743eac6874e674c725b4ce7ff99ecbef78b",
+    "dedicatedInternalAdapterTestSha256": "7c5fbec363e892692f8d98a397944bcadca22ba658e6d32e9b7de93eb81c36a3"
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "status": "SELECTED_ORIGINAL_LIVE_BODY_REVIEWED_WITH_OCCLUSION_LIMITS",
+  "nativeEnemy": "fishA01",
+  "rendererId": 121695,
+  "controllerId": 5958,
+  "session": "86aa14f97fb84aa7bed96fe1416a705e",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "2c42e55ddcfcc01331aa66d45721ed404ac98608fe1ed3d4a7ca5a90b3e52186",
+      "bytes": 325632
+    }
+  },
+  "assetHashes": {
+    "reefstrider.glb": "a865a3f602edc56c1f9545bc78d4f4b446d891228c70731ae4fc849257a6451d",
+    "reefstrider_basecolor.png": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50"
+  },
+  "profileSha256": "b52196b3c1928f35c76188c17e8b135c5cdbbedfa1fa3ecbc6a484b29acc34d6",
+  "frozenAuthoringManifestSha256": "453e4e01e71f205dd40e2cdf8c4230a35cb5e5a185b56e49eafc264e986481b2",
+  "rawWrapperStatus": "needs_visual_review",
+  "captures": [
+    {
+      "label": "pass",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/474fe7205dc04f6f96e34462832d5365.json",
+        "sha256": "ab9d6aa58e38756a9fe86c4577f44e63f77c7a2ddbae5cb2298ea816d076f461"
+      },
+      "raw": {
+        "path": "art-experiments/reefstrider-fish/live-v1/pass.json.gz",
+        "sha256": "76d70421d11157e715b5d3b8cc2ada0c64063f2008a980103f38e93d9aa0abbb"
+      },
+      "decompressedSha256": "ab9d6aa58e38756a9fe86c4577f44e63f77c7a2ddbae5cb2298ea816d076f461",
+      "video": {
+        "path": "art-experiments/reefstrider-fish/live-v1/pass.mp4",
+        "sha256": "b1eadeff312751aa0f1d00c91365a8f898bf4671e05158b2dfd6a86817783dec"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120
+    },
+    {
+      "label": "attack",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/e2dcf5b6ed344719ad97f6c1b33286de.json",
+        "sha256": "c23f5d8c84c3b33df024f468cb7477daf5bb18b028d134c163e89c720e7d896c"
+      },
+      "raw": {
+        "path": "art-experiments/reefstrider-fish/live-v1/attack.json.gz",
+        "sha256": "37ee21a87f25d127a6b6182cba82dcd86682c929159194e91ab6e037a7642a3c"
+      },
+      "decompressedSha256": "c23f5d8c84c3b33df024f468cb7477daf5bb18b028d134c163e89c720e7d896c",
+      "video": {
+        "path": "art-experiments/reefstrider-fish/live-v1/attack.mp4",
+        "sha256": "24dd7e0e29e71f52734c57dc335167b9ffd759e7d3d578d1ace7b23aa7501063"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120
+    },
+    {
+      "label": "kill-fixture",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/799388a7fbe841c7bf932a99464eac98.json",
+        "sha256": "6db814d34082f9e796bf88cb7a616602b9e3f50b6c758562df40d972d1e21b3d"
+      },
+      "raw": {
+        "path": "art-experiments/reefstrider-fish/live-v1/kill-fixture.json.gz",
+        "sha256": "f322c0b8bd8a919a13c8507cffc9093a6af6992295ed3e5b80703c2a70322292"
+      },
+      "decompressedSha256": "6db814d34082f9e796bf88cb7a616602b9e3f50b6c758562df40d972d1e21b3d",
+      "video": {
+        "path": "art-experiments/reefstrider-fish/live-v1/kill-fixture.mp4",
+        "sha256": "f4819dec4add6938e1bad7a1d1528744caafce0ac414d3293be050d749a641bd"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235466,
+        "alive": true,
+        "containerInstanceId": -237202,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237244,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237644,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235466,
+            "celInstanceId": -239070,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245774,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "86aa14f97fb84aa7bed96fe1416a705e",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "86aa14f97fb84aa7bed96fe1416a705e",
+    "id": "0e2912be824643f1bd3a20c2980e8680",
+    "frame": 14882,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "rootReview": {
+    "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-root-live-review.json",
+    "sha256": "95dcab126e9ab9de5807d5e40373bff2c3eb5a311ab6aaec69da845263091668"
+  },
+  "ragdoll": {
+    "animatorDisabledFirstFrame": 26,
+    "bodyCount": 11,
+    "allDynamicAt26": true,
+    "maxAdjacentPositionDeltaFrames60to119": 0.0,
+    "maxLinearSpeedFrames60to119": 0.0,
+    "limits": "Observed settling only, not IsSleeping or measured floor/collider fit."
+  },
+  "earlierSetupFailure": {
+    "status": "stopped",
+    "evidence": {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-first-stage-result.txt",
+      "sha256": "4fd959b24bf1b1a247ae25197ab3d5d31a79463d83fdb4bd70524609b87efbd1"
+    },
+    "scope": "Late StoryQuestMessage prevented capture readiness before combat actions. Not an art failure or live pass."
+  },
+  "limits": [
+    "NativeAttack1impact mostly occluded; selected visible poses only.",
+    "Explicit KillSingle48to0 fixture, not ordinary lethal attack.",
+    "No final native owner teardown or complete campaign.",
+    "No sibling fish controller/bind compatibility transferred.",
+    "Observed settling is not IsSleeping, floor contact or original collider fit.",
+    "Six selected frames reviewed; effects and hero obscure portions."
+  ],
+  "evidence": [
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/attack-0030.png",
+      "sha256": "a6ab6a69f966c7331f01fc2012bafd55d2aa4d54dfbbc2b01ed0ee78e69a6051"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/attack-source-image-pins.json",
+      "sha256": "e81f20c215cabbce98edcaab2f38b4ffa239bc5a4e5db63450797813cf7134df"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/attack.json.gz",
+      "sha256": "37ee21a87f25d127a6b6182cba82dcd86682c929159194e91ab6e037a7642a3c"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/attack.mp4",
+      "sha256": "24dd7e0e29e71f52734c57dc335167b9ffd759e7d3d578d1ace7b23aa7501063"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-5f6f8ca5579e48ebb49393ecc7ee40d7/capture-summary.json",
+      "sha256": "566785a1d99efa1f981c4a4969d6f373b161619aab557b02d32282c686c6bd39"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-5f6f8ca5579e48ebb49393ecc7ee40d7/journal.jsonl",
+      "sha256": "23261b5dfce722d5447f1bbded5b585875fdde61571c3bcf9b56b02d944b03e4"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-5f6f8ca5579e48ebb49393ecc7ee40d7/result.json",
+      "sha256": "4356aedde6ea5ad0afe2be0b592de1209fcb93553f3681bfae96abcdf1263eed"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-92132e763bb04a72a8596513fc0bf0dc/capture-summary.json",
+      "sha256": "e75dc08f1fe3237f76f52d4ccd97c8473db452a673740882c8c0fb83fadbbeb3"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-92132e763bb04a72a8596513fc0bf0dc/journal.jsonl",
+      "sha256": "25db260eab08826388374ddc6f2023bc78c1911e7efc6e5b418447a6ca02b414"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-92132e763bb04a72a8596513fc0bf0dc/result.json",
+      "sha256": "c3d9e747c3cba294dc8c18927bc8174d14cb979408d945c92ad9d34147331bb3"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-d74c56cf35cd489db5bf3cf4230f159e/capture-summary.json",
+      "sha256": "4b36608a623a4af095c3c31e7d5a2bf609b262e41ee080be27720bbf27332835"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-d74c56cf35cd489db5bf3cf4230f159e/journal.jsonl",
+      "sha256": "a4bf72f15dd4b3605a815b7121329ef0bd75e5013c543192fa3d43fbe833d482"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-d74c56cf35cd489db5bf3cf4230f159e/result.json",
+      "sha256": "c4e3de896813ebfa4476de373df0b85e6a08b591765bebe0c49a453ad639c94b"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/case-result.json",
+      "sha256": "4a4b576b5962546c6867c54b7fdebf1ca9a97d1f897f5bfb8e77fb198aedade4"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/earlier-setup-stopped/journal.jsonl",
+      "sha256": "a3b1346d86451f1bc4c8720c6fa70ea69b1ac088b930535750c4f640bdd4acdf"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/entry-preparation-deployment-result.json",
+      "sha256": "f392c6884d7d88ce01b6a74af96d1b9c933a0a8e3195f7f16e87819ddcc34994"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/entry-preparation-first-startup.json",
+      "sha256": "f3372e4ecf1510f318bd57fc8455b622048d5cb6389d1d04686522eba9cb07a2"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/journal.jsonl",
+      "sha256": "fa10b0e3079bc795a801cea4423e001942aa05af81aaa74f79c2a4eb4d47624c"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/kill-fixture-0060.png",
+      "sha256": "3930a61221bccad69686604713ab5bc30d38e73738f29798e8a2d19033b75964"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/kill-fixture-source-image-pins.json",
+      "sha256": "39547df09527d501274bdefc923b77fa5dcbdb771480f6345c2ff596249e7434"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/kill-fixture.json.gz",
+      "sha256": "f322c0b8bd8a919a13c8507cffc9093a6af6992295ed3e5b80703c2a70322292"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/kill-fixture.mp4",
+      "sha256": "f4819dec4add6938e1bad7a1d1528744caafce0ac414d3293be050d749a641bd"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/pass-0000.png",
+      "sha256": "f59b720ad8dced39b6b0ffb45fa878f3d0d49e234166d1ebd055ca6e4614de71"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/pass-0050.png",
+      "sha256": "8c92799081f4d2e02a37d8d6f7640b80ca10b2499bb62e86b67ec33f987a994b"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/pass-0097.png",
+      "sha256": "0943e8803274b08ac8be6c98fddf21a0d896973741c6ce2bc1db53abad0421a8"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/pass-0105.png",
+      "sha256": "c461f88700d0526d4e04561ba1a8b06201deb8f4718a67cfd660db4dd55f6381"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/pass-source-image-pins.json",
+      "sha256": "25d2ab21ac255e82ee1d9b46d31edcf3a3e558650626caa33dc04d873286aa83"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/pass.json.gz",
+      "sha256": "76d70421d11157e715b5d3b8cc2ada0c64063f2008a980103f38e93d9aa0abbb"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/pass.mp4",
+      "sha256": "b1eadeff312751aa0f1d00c91365a8f898bf4671e05158b2dfd6a86817783dec"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-deployment-result.json",
+      "sha256": "4490c289cde2e2946888000c7946d778542754200b9767dc3b8fd90cd581d1a1"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-entry-prepared-first-stage-result.txt",
+      "sha256": "96d8a4853aa4c4a61d13ffe125cbe6e7c330134837487eeaaeed798e2cbd63ba"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-first-exercise-result.txt",
+      "sha256": "17bba6003ae20ae0e916c0a0c615b81d3fe2964dc2306a7c728dfecdefc65b77"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-first-stage-result.txt",
+      "sha256": "4fd959b24bf1b1a247ae25197ab3d5d31a79463d83fdb4bd70524609b87efbd1"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-live-inventory.json",
+      "sha256": "43cabba3bbc4e1b65a9e873065dac88136cf3f14775b01735eb79f8ea2baf4c4"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-live-material-state.json",
+      "sha256": "6aec41f8579bf8d71d645d4ce03f199b53320ea444f1fa2dd81c41390b4d3c3a"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-resume-story-tests.txt",
+      "sha256": "baf4ba437ea743305764d4bcedbd27b2b6826a046d43f8483ff0e51ddeed4790"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-root-glb-validation.json",
+      "sha256": "eb821754c6b7fd1dc6d10c8812d2cdebbb352fe0324b5db67e42de14ab8d792e"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-root-live-review.json",
+      "sha256": "95dcab126e9ab9de5807d5e40373bff2c3eb5a311ab6aaec69da845263091668"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-root-offline-review.json",
+      "sha256": "0e71eddd316a26ef7768a647d6754cc76d2501c2d80133f5cc8f6daeb5716af7"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-startup-evidence.json",
+      "sha256": "5127bdbb234bc5615246782e107b0bfd0d3bed539f7717256a3f7b2c540176a3"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-stop-process.json",
+      "sha256": "bb1372e4b8248995aa66ddc8f1eadc40ad7ecd6478f6f63c9bf4a4e06ec51a0c"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-stopped-story-state.json",
+      "sha256": "d7731f62b2a20841ebbcc4ae292dc92a663c090d32628f9000d5e38a57201a1a"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/reefstrider-story-boundary-tests.txt",
+      "sha256": "dfcda3fc0898f4f8286b6da487d349a077728b529b6fe8c880d5529ba8989eb1"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/selected-frames.html",
+      "sha256": "e089d48ecc7db7cecbda985f184c2d4b3f83c40c2cd3cdf986ef768f80d85ddb"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/successful-stage/journal.jsonl",
+      "sha256": "326360c4e8a69e78007794dbbb4f572124d6ac598e28a6589462fcbfee79ca68"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/successful-stage/result.json",
+      "sha256": "96d8a4853aa4c4a61d13ffe125cbe6e7c330134837487eeaaeed798e2cbd63ba"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/independent-ragdoll-audit.json",
+      "sha256": "c7f6eae2453171ea842883c4166258e3434b9292048b1adf47e477c31ba59ca3"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/live-v1/README.md",
+      "sha256": "a7f8d9cdd1941edbfe4efa0455d8e33c84c0d5de9fb2269916244c50eb3e1c6d"
+    }
+  ]
+}

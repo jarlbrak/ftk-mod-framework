@@ -1,0 +1,60 @@
+{
+  "capture": "scratch/mirewarden-game/model-test-output/ff6c9c97e2ed40d4921f0b1117761de6.json",
+  "captureSha256": "d0575a849e9ac7b6ccadae2b09308a2b810b5a7e919a779d78cfd4b088bc5fe0",
+  "sourceSha256": "cb2c38832585064b186035eacd373fd0be837b3ed3f8c380cae296920bf52a14",
+  "frames": 120,
+  "sampledFrames": [
+    0,
+    29,
+    33,
+    65,
+    80,
+    95
+  ],
+  "maximumEdgeStretch": 2.09279654692419,
+  "worstEdge": {
+    "frame": 75,
+    "piece": "Continuous slate body and neck",
+    "triangle": 152,
+    "vertexIndices": [
+      457,
+      458
+    ],
+    "restLength": 0.6120801396834669,
+    "posedLength": 1.2809592027704353,
+    "ratio": 2.09279654692419
+  },
+  "posedBoundsMin": [
+    -10.294824008322255,
+    -2.654706181709626,
+    -10.144366054796526
+  ],
+  "posedBoundsMax": [
+    9.521563892948908,
+    8.61353366397395,
+    4.121384130238788
+  ],
+  "nativeTravelBoundsMin": [
+    -10.28018238864019,
+    -0.09432557935266851,
+    -9.871565873653147
+  ],
+  "nativeTravelBoundsMax": [
+    9.541041961462165,
+    9.972800744282473,
+    10.62339059017432
+  ],
+  "glbSha256": "b03bc6738f652447ba9579cd1d3cdfcdc655eee20d5fd61c7f43461dbaeb0d36",
+  "rootMotionRetained": false,
+  "viewDirection": [
+    0.7,
+    0.8,
+    1.0
+  ],
+  "method": "Root_M-normalized sheet. Original source skinned with full captured bone matrices and native IBMs, Anatomy mode removes Root_M transform for deformation inspection; keep-root-motion mode retains renderer-local travel in the sheet. Travel bounds always retain renderer-local motion. Orthographic depth raster with fixed all-frame bounds. Mesh-space anatomy front+Z/upY.",
+  "captureReportedOk": true,
+  "captureError": null,
+  "hiddenFrames": [],
+  "materialMethod": "Per-triangle first-vertex nearest texel from original palette; no shader/light/weapon simulation.",
+  "scope": "Offline native pose study; no material/culling/portrait/whole-controller or live original-art acceptance."
+}

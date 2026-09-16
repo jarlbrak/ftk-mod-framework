@@ -1,0 +1,88 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/cinderbloom-plant/live-validation-v4-leaves",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-a2bc5ec6ecd249cea6be76f8261013b5/case-result.json",
+  "visualReview": "scratch/model-route-730458bde8737934-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/cinderbloom-plant/cinderbloom_basecolor.png",
+    "art-experiments/cinderbloom-plant/cinderbloom_body.glb",
+    "art-experiments/cinderbloom-plant/cinderbloom_leaves.glb"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/cinderbloom-plant/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-730458bde8737934-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-b3695dc652e1435fb0e0edeca1ac5c41/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enPlant01Leaves",
+        "mesh": "ftkmf_glb_cinderbloom_leaves.glb",
+        "boneSignature": "5986c6bf9143cd84d7d81a10c360af1a16ebc5cfb2ce604d91ef010fb074438a"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enPlant01Leaves",
+        "mesh": "ftkmf_glb_cinderbloom_leaves.glb",
+        "boneSignature": "5986c6bf9143cd84d7d81a10c360af1a16ebc5cfb2ce604d91ef010fb074438a"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enPlant01Leaves",
+        "mesh": "ftkmf_glb_cinderbloom_leaves.glb",
+        "boneSignature": "5986c6bf9143cd84d7d81a10c360af1a16ebc5cfb2ce604d91ef010fb074438a"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V4-leaves",
+    "displayName": "Cinderbloom",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "plantA",
+    "nativeChassis": "plantA",
+    "rendererPaths": [
+      "enPlant01Leaves"
+    ],
+    "sourceRendererIds": [
+      121072
+    ],
+    "binding": {
+      "rendererPath": "enPlant01Leaves",
+      "mesh": "ftkmf_glb_cinderbloom_leaves.glb",
+      "boneSignature": "5986c6bf9143cd84d7d81a10c360af1a16ebc5cfb2ce604d91ef010fb074438a"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native plantA / enPlant01Leaves / renderer 121072 source assignment only; the enPlant01 body renderer requires its own exact route archive.",
+      "The ordinary no-focus hit reduced health from 18 to 8; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Sixteen selected original PNGs were reviewed; the remaining captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "Portrait, collision, extended culling, long-session resource lifetime, other native ability variants, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

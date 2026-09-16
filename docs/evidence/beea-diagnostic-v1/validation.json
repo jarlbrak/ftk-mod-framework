@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "name": "beeA 47-bone diagnostic",
+  "native_chassis": "beeA",
+  "renderer_paths": [
+    "Monster Bee"
+  ],
+  "native_renderer_id": 121062,
+  "status": "SCOPED_DIAGNOSTIC_MECHANICS_PASS",
+  "session": "a80cf1b5dae844758c989a4456a681e8",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "a80cf1b5dae844758c989a4456a681e8",
+    "case": "1c466380bcc449beb09e595a6ec9bd5d",
+    "mode": "record-action",
+    "enemy": "ftkmf_modeltest_probe_beea",
+    "class": null,
+    "profile": {
+      "key": "ftkmf_modeltest_probe_beea",
+      "baseEnemy": "beeA",
+      "displayName": "Rig probe: beeA",
+      "combatProfile": "a34dceed30a67f62df142e0b62554fda51eb4be683804b903119503d90c0e73a",
+      "renderers": [
+        {
+          "rendererPath": "Monster Bee",
+          "glbFile": "probe_121062.glb",
+          "textureFile": "probe_palette.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "281576929e0e7996efc46163c24978b6c2598e2b5f41aff920e01c18d5f8864c",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "framework_sha256": "cdbbe7ece2b53e443c1c9c4fad8607379f1c94f1b263592815252e26ac0f4b4a",
+  "helper_sha256": "a8fc4fb60ce89544bd3357403e473530cc556c47816de0873d4e38df368e80ea",
+  "catalog_sha256": "281576929e0e7996efc46163c24978b6c2598e2b5f41aff920e01c18d5f8864c",
+  "captures": [
+    {
+      "kind": "pass",
+      "id": "0fdf41fda962456da96f27fee54b6466",
+      "frameCount": 120,
+      "captureReportedOk": true,
+      "raw": {
+        "path": "scratch/mirewarden-game/model-test-output/0fdf41fda962456da96f27fee54b6466.json",
+        "sha256": "e9991853e0f64eb800764117e14c8b5764bc91c3c753a6e1c538ad2b481f9680"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/beea-diagnostic-v1/pass.capture.json.gz",
+        "sha256": "2642532bd4b33618c310044ab33c8e144387cea367d9a218b0f3e28b1abc8c15"
+      },
+      "summary": {
+        "path": "docs/evidence/beea-diagnostic-v1/pass-summary.json",
+        "sha256": "d0e4bb90b170bb2ce4495e564bca0e995ebef34e681f42f4ab94e59a73f9f493"
+      },
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-1c466380bcc449beb09e595a6ec9bd5d/journal.jsonl",
+        "sha256": "2e04fef3fc2ea0e9545845a021aaf81ddaf57f47c66065637826973d630b46cd"
+      },
+      "video": {
+        "path": "docs/evidence/beea-diagnostic-v1/pass.mp4",
+        "sha256": "e3a3d8347d65ef276c427b5c287820d1f3c4267a24a331af9d2eac6b71a77645"
+      },
+      "reviewedFrames": [
+        0,
+        40,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "docs/evidence/beea-diagnostic-v1/pass-0000.png",
+          "sha256": "808c7fcbf1e1aae033e7840215a4f83c3bfe484d0d34a26040bab08a3587fe65"
+        },
+        {
+          "path": "docs/evidence/beea-diagnostic-v1/pass-0040.png",
+          "sha256": "683c0695ce895f9151cc078a795fa0c58be0482ac477940c82a984b15b7fb290"
+        },
+        {
+          "path": "docs/evidence/beea-diagnostic-v1/pass-0050.png",
+          "sha256": "d4762570324fee74c174b94e2aaa18b74aaea023db22cd933dcba1802620838c"
+        }
+      ],
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "BeeIdle"
+          ],
+          "sampleCount": 110,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 44,
+              "firstNormalizedTime": 36.78038787841797,
+              "lastNormalizedTime": 39.805320739746094,
+              "gameSeconds": 4.033332824707031
+            },
+            {
+              "firstFrame": 55,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.06948547810316086,
+              "lastNormalizedTime": 4.469482898712158,
+              "gameSeconds": 5.866668701171875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack2_bee"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 45,
+              "lastFrame": 54,
+              "firstNormalizedTime": 0.23571427166461945,
+              "lastNormalizedTime": 0.9428572058677673,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "hit",
+      "id": "3b84adbf86024705b35121e98c8e7730",
+      "frameCount": 120,
+      "captureReportedOk": true,
+      "raw": {
+        "path": "scratch/mirewarden-game/model-test-output/3b84adbf86024705b35121e98c8e7730.json",
+        "sha256": "a6befc3b627fe839c0bed4c960dd4f71e12c81562f9c25b8656271c04b81386c"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/beea-diagnostic-v1/hit.capture.json.gz",
+        "sha256": "9f1cf95f5fe5f4b88bfaa65cc72977556875820a9831a1f90a103e0131decc40"
+      },
+      "summary": {
+        "path": "docs/evidence/beea-diagnostic-v1/hit-summary.json",
+        "sha256": "13887157f1a9b1587b246e2fad881855d9044023bcabe26ba313fcad4eb0130a"
+      },
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-d6539b4f53534846a27471535947f7d7/journal.jsonl",
+        "sha256": "ff78f854b0f885c87e9cdcb9c928eac1396e772f0520c1a5e11aab145aaaef43"
+      },
+      "video": {
+        "path": "docs/evidence/beea-diagnostic-v1/hit.mp4",
+        "sha256": "7dd09363c410e669bb4a2e95dd32142b28f141ef9d0cd913ace1c7eae9bdf616"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "docs/evidence/beea-diagnostic-v1/hit-0030.png",
+          "sha256": "725482ba771c9a001cd725bcbf7aa8880d6036f903347ee2d4382a6f4781443b"
+        }
+      ],
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "BeeIdle"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 16.432558059692383,
+              "lastNormalizedTime": 18.220067977905273,
+              "gameSeconds": 2.383331298828125
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 68,
+              "firstNormalizedTime": 0.12500005960464478,
+              "lastNormalizedTime": 2.4624998569488525,
+              "gameSeconds": 3.1166534423828125
+            },
+            {
+              "firstFrame": 79,
+              "lastFrame": 107,
+              "firstNormalizedTime": 0.06948547810316086,
+              "lastNormalizedTime": 1.9944859743118286,
+              "gameSeconds": 2.5666656494140625
+            },
+            {
+              "firstFrame": 118,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10625007748603821,
+              "lastNormalizedTime": 0.17500007152557373,
+              "gameSeconds": 0.0916595458984375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "BeeTakeDamage"
+          ],
+          "sampleCount": 7,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.32999998331069946,
+              "lastNormalizedTime": 0.9900000691413879,
+              "gameSeconds": 0.5500030517578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack2_bee"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 69,
+              "lastFrame": 78,
+              "firstNormalizedTime": 0.23571427166461945,
+              "lastNormalizedTime": 0.9428572058677673,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "beeStingerAttack"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 108,
+              "lastFrame": 117,
+              "firstNormalizedTime": 0.23571427166461945,
+              "lastNormalizedTime": 0.9428572058677673,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "death",
+      "id": "737dacf062de4524978da9c0fdafe220",
+      "frameCount": 120,
+      "captureReportedOk": true,
+      "raw": {
+        "path": "scratch/mirewarden-game/model-test-output/737dacf062de4524978da9c0fdafe220.json",
+        "sha256": "4d2cfe98c8bdb6ab21fc16550f913c88a82c78ea25f54194efd6d27892eb2a07"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/beea-diagnostic-v1/death.capture.json.gz",
+        "sha256": "6eebc081e2adbe97d77f59eea881e5efc9d94545ebb0e3957581eba811d08a55"
+      },
+      "summary": {
+        "path": "docs/evidence/beea-diagnostic-v1/death-summary.json",
+        "sha256": "6663d99e33e54a8fb521152e659c05d06b97ed657134c59aebb06d17e4d8832e"
+      },
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-b5c3edc77ace4dadba1dc124638b27bc/journal.jsonl",
+        "sha256": "000916f41aa034c6434242d8b09d550fa45c5ccc7be49c322cbad61c867417ff"
+      },
+      "video": {
+        "path": "docs/evidence/beea-diagnostic-v1/death.mp4",
+        "sha256": "373ece7233f20e1890fb22a95526594714505d86f64f4c872882568480ad63bd"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "docs/evidence/beea-diagnostic-v1/death-0040.png",
+          "sha256": "4a2bb0e0792a2c8476bbd44c6af536871518d0ab9c1cc3a0ad455ce499e4ad8b"
+        },
+        {
+          "path": "docs/evidence/beea-diagnostic-v1/death-0060.png",
+          "sha256": "4d0c54a8bede62437837443d533dd55ecc1461676328eda1bf1c6ebca3a05864"
+        }
+      ],
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "BeeIdle"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 39.845237731933594,
+              "lastNormalizedTime": 41.56394958496094,
+              "gameSeconds": 2.2916717529296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "BeeDie"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13199999928474426,
+              "lastNormalizedTime": 0.13199999928474426,
+              "gameSeconds": 8.524993896484375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "normalHit": {
+    "damage": 8,
+    "hpBefore": 58,
+    "hpAfter": 50
+  },
+  "death": {
+    "trigger": "Explicit kill fixture; not ordinary lethal damage",
+    "hpBefore": 50,
+    "hpAfter": 0,
+    "ragdoll": {
+      "path": "docs/evidence/beea-diagnostic-v1/ragdoll-audit.json",
+      "sha256": "cd480de715d6e5f6c83e07e6ef054b954b9d651aa94f6d44b32611593ca7d1e8"
+    }
+  },
+  "visualReview": [
+    "Calibration probe binding/hover/attack coherent; nativeattackFX occludesframe50.",
+    "Normalhit58to50for8damage, probe responds visibly.",
+    "Native16bodyragdoll beginsafter25/before40, Animatoroff; maxspeed1.369at40,0at60/119, corpse settledin40/60images; full120capture.",
+    "OneguardedCollectreturnsstrictReady0room2."
+  ],
+  "progress": {
+    "evidence": {
+      "path": "docs/evidence/beea-diagnostic-v1/ready.json",
+      "sha256": "0bcc994042e4db66cae2d253a98c55a0276d28993634c5ce4939a8fc4a535ae3"
+    },
+    "result": "One guarded Collect, strict Ready level0 room2"
+  },
+  "sourceFindings": {
+    "path": "docs/evidence/beea-diagnostic-v1/source-findings.json",
+    "sha256": "feda8b3a85b404c01a52e8c1082d258a97e54780222a3e7d2a93c5f4c24fb155"
+  },
+  "startup": {
+    "path": "docs/evidence/beea-diagnostic-v1/startup.json",
+    "sha256": "6df52306cbc43ad936f2d4a1c267e4a99aa1a4eb1e983099aefa974eb9c557cb"
+  },
+  "limits": [
+    "Original calibrationgeometry only, notfinishedbeeart.",
+    "ExactbeeA binding/controller only, no acceptanceofall6same-topologypairs.",
+    "Explicitkillfixture, notordinarylethaldamageorDeathLight.",
+    "Zero velocity does not prove the unrecorded Unity IsSleeping state.",
+    "FX occludes pass frame50; selected screenshots do not establish all views/culling.",
+    "Emberglass original-art live acceptance remains separate."
+  ],
+  "media": "MP4 preserves all120 images at12fps; capture JSON gzip preserves all120 telemetry frames byte-exactly."
+}

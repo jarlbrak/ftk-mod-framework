@@ -1,0 +1,422 @@
+{
+  "schema": "kraken-modern-input-mixer-live-evidence-v1",
+  "mode": "two-clip-raw-v1",
+  "session": "9f0ae43125194a17809ae5144a76a953",
+  "status": "ALL_FIVE_SCENARIOS_NUMERICAL_MISMATCH",
+  "runs": [
+    {
+      "scenario": "appear",
+      "status": "modern_input_mixer_mismatch",
+      "maximumError": 0.2537049912564092,
+      "tolerance": 1e-05,
+      "numericChecks": 185426,
+      "failedMainFrames": 121,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 138,
+      "appearanceExcludedFrames": 103,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/first.json.gz",
+            "sha256": "02bbd069a330a0fc0a1759923130b6f2de9167035a84cabe0e737f12c81ddf10"
+          },
+          "decompressedSha256": "a53a4384d4c9510b4f58434d6501901b242647c0ace01b0f91ff9cfcb1b00f9a"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/repeat.json.gz",
+            "sha256": "3c8869c7b94ce2fc96835c2a9423e0eecd40afb092824a56c88007b67587e738"
+          },
+          "decompressedSha256": "a40bfab9821a3ba8326dcb69f442bdbf7e0e3db8e68ac625cd5c10b7b22a6f1e"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/verification.json",
+        "sha256": "1ae24fea2e1011b3ccfa1cd01ebf56ad902c9ad01f060436520b78539165490a"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "damaged",
+      "status": "modern_input_mixer_mismatch",
+      "maximumError": 0.487808804655975,
+      "tolerance": 1e-05,
+      "numericChecks": 191550,
+      "failedMainFrames": 224,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/first.json.gz",
+            "sha256": "33f93daab7b3dece41c2fdb7ad0e0f9a9d719a0ec53e72624695b4ef0c9a4206"
+          },
+          "decompressedSha256": "be69ef1327bbe0c1eb0dadf9028919165b127aadb5de3ed2b5131b073498bb46"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/repeat.json.gz",
+            "sha256": "d3ed0966eb15043dde7fd33c63072134bd2a32b12597a9d4a690fb0652230c19"
+          },
+          "decompressedSha256": "aa520ce8aa6c6699804bdba13f5d3b1f86d53fbfddf34aeb83a1932da838df09"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/verification.json",
+        "sha256": "0a17f116642524e9a66d53bce78d47e4e2f4600a1e79279da40cd8b2731854f9"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "damaged-heavy",
+      "status": "modern_input_mixer_mismatch",
+      "maximumError": 0.477210320343163,
+      "tolerance": 1e-05,
+      "numericChecks": 191840,
+      "failedMainFrames": 224,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/first.json.gz",
+            "sha256": "82fdcb91232b8296b329eccb42e577d5d71cc9390a79f082451e64fc198d7eff"
+          },
+          "decompressedSha256": "bb314c365198a90fca4bac03891e9c6682a2163ee3153c4af2ae28547b108564"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/repeat.json.gz",
+            "sha256": "76f29c6e831a007ce2da6a7d350fee1dcd2d88f86f165e3b2e684332491e5d05"
+          },
+          "decompressedSha256": "73533eb89f77851f04d0fa65bd0efa138816f3854b8894fbb10890a24a82a659"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/verification.json",
+        "sha256": "708cc6e4a0f3e72ba6e068646f318372101d7c29e61a064e15d99e2b2bbec3b3"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "death",
+      "status": "modern_input_mixer_mismatch",
+      "maximumError": 10.081906942761524,
+      "tolerance": 1e-05,
+      "numericChecks": 191248,
+      "failedMainFrames": 224,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/death/first.json.gz",
+            "sha256": "740ed6cbf4174ce425f3a2aae8a0754ce3e35889d01e2cbb016cf08361b31c93"
+          },
+          "decompressedSha256": "aab80f82675941ff013f7e3429ebd0d578496f1296bd633f70ef8c3167180a30"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/death/repeat.json.gz",
+            "sha256": "6394ceafeed1bfa5d5b5390fa527a10565d869d7d663a3b5143687ebc66a5108"
+          },
+          "decompressedSha256": "56345a8a0c9e59459eeac5dee7e28d96ffb1d95ee2242fd8b5de37cdfc7e60fe"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-modern-input-mixer-v1/death/verification.json",
+        "sha256": "a0a1c60ba3ed2df72495536fa378d9b28afbb27ec227656c422d8e9be18bc599"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    {
+      "scenario": "death-light",
+      "status": "modern_input_mixer_mismatch",
+      "maximumError": 10.081906942761524,
+      "tolerance": 1e-05,
+      "numericChecks": 191248,
+      "failedMainFrames": 224,
+      "failedWithinFrameRepeats": 0,
+      "eligibleFrameCount": 241,
+      "appearanceExcludedFrames": 0,
+      "raw": [
+        {
+          "label": "first",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/first.json.gz",
+            "sha256": "b5b241604ea27828ae28809d793ba8611ad049c2b5cdb9f2d2fcdf74c863206a"
+          },
+          "decompressedSha256": "f3bf67ae509c3d8d6efd2279df8cea51b895a415d9ad319e9fd83c74125bd26e"
+        },
+        {
+          "label": "repeat",
+          "archive": {
+            "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/repeat.json.gz",
+            "sha256": "cd808e36a1289174440659a1179e57b706fd217a484b0abe642eaaf6cc828a09"
+          },
+          "decompressedSha256": "ab5d40192c2046b206d5d69e48d4460644299fe8e65f7dab27eb90ebf20ee08b"
+        }
+      ],
+      "verification": {
+        "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/verification.json",
+        "sha256": "d22b7205a87ffe1756223186eb92bf24c8f978b522c4e3a49f4b278da0f1c0d9"
+      },
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/KRAKEN-MODERN-MIXER.md",
+      "sha256": "d9b5810e3734572c23e2b4c3f166ffc982d3801adabfd64044fade4d2e73f3b5"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/KrakenControllerFixture.cs",
+      "sha256": "14d16289499300b91d7d5ffc92474d3b72063976eeb9bb00c5675a41fabffacc"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/KrakenModernMixerFixture.cs",
+      "sha256": "8e074a234b8c0d6d3f12222a828bb66177b4cc539e34324eb285eec1fb8e4ed9"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/README.md",
+      "sha256": "e1c1a507d6dbb5c284a6491c6308ffe9c9e0a10f414aaa4f9056a449fa514b18"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/after-ready.json",
+      "sha256": "7279e3f4b8a18901598d43f98b81539721820bc209bad40215cacdd2bb782fc0"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/before-ready.json",
+      "sha256": "7a23469988ff1d61f3ca846e4841a55f519ed231d77c2a5affaf6fcefa1029d7"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/deployment.json",
+      "sha256": "1ded9423aecd41aed6a389f64811ad7b1008782a15949aae5be4d08146ffa3cd"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/first-request.json",
+      "sha256": "f1bf7ab7bedc28ac8e18d59e6887f2820c8721ec57a9756d927cf0712eb09588"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/first.json.gz",
+      "sha256": "02bbd069a330a0fc0a1759923130b6f2de9167035a84cabe0e737f12c81ddf10"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/manifest.json",
+      "sha256": "786a2709b77bdb64a7f1dfd09d57a69d21b019fc236969fa7ae3c4fc27793025"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/repeat-request.json",
+      "sha256": "842a153a2bab5ab5ef3c68f8177d0dbd0348dfa2943e10dbaf3728eb82e78a49"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/repeat.json.gz",
+      "sha256": "3c8869c7b94ce2fc96835c2a9423e0eecd40afb092824a56c88007b67587e738"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/appear/verification.json",
+      "sha256": "1ae24fea2e1011b3ccfa1cd01ebf56ad902c9ad01f060436520b78539165490a"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/after-ready.json",
+      "sha256": "50b06fe676c2b7a6d8d3ee8a174b80117ee203748b00984354a8bb4256e5dc3b"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/before-ready.json",
+      "sha256": "581bdba7390721770e63ea0eee97cb78a6aa11cc15cb13a63ab04d316fbe6848"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/deployment.json",
+      "sha256": "1ded9423aecd41aed6a389f64811ad7b1008782a15949aae5be4d08146ffa3cd"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/first-request.json",
+      "sha256": "3e04aab8848fc6db1e78020a9e61622bc4cff0bf291bc6373655575fbac15f93"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/first.json.gz",
+      "sha256": "33f93daab7b3dece41c2fdb7ad0e0f9a9d719a0ec53e72624695b4ef0c9a4206"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/manifest.json",
+      "sha256": "c1d1389de6acd62ed4df5880b82b8eb0fc677a5577dd1e9b443aa62dfc00fb4e"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/repeat-request.json",
+      "sha256": "8585c038657003975290da5c52bb57a05f95999640b8f281e6fbc079162bc8c5"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/repeat.json.gz",
+      "sha256": "d3ed0966eb15043dde7fd33c63072134bd2a32b12597a9d4a690fb0652230c19"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged/verification.json",
+      "sha256": "0a17f116642524e9a66d53bce78d47e4e2f4600a1e79279da40cd8b2731854f9"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/after-ready.json",
+      "sha256": "25e2abc136ba6010cff897ff82411abdd7c789862d846ea5d2592a56f8508006"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/before-ready.json",
+      "sha256": "794d60943742cac64db6ccbb5fc0ae8a19078022d2c6c186462cb8640d28fc10"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/deployment.json",
+      "sha256": "1ded9423aecd41aed6a389f64811ad7b1008782a15949aae5be4d08146ffa3cd"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/first-request.json",
+      "sha256": "485cec0ba8fba93da2e615c7f39c929137fce07b8072123a7f815474ddb3e986"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/first.json.gz",
+      "sha256": "82fdcb91232b8296b329eccb42e577d5d71cc9390a79f082451e64fc198d7eff"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/manifest.json",
+      "sha256": "ce257d5f32250ab40fc9adf86f475d6e18f55432cfa34d2a9ac82cf045dae3c3"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/repeat-request.json",
+      "sha256": "77af343a39a0176b0a99174436d77712454eab7327923f713fede909973abb81"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/repeat.json.gz",
+      "sha256": "76f29c6e831a007ce2da6a7d350fee1dcd2d88f86f165e3b2e684332491e5d05"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/damaged-heavy/verification.json",
+      "sha256": "708cc6e4a0f3e72ba6e068646f318372101d7c29e61a064e15d99e2b2bbec3b3"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/after-ready.json",
+      "sha256": "d136a225e3cfbb290027ba95aaa455fea05cdc4b710257b27407071a081d9362"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/before-ready.json",
+      "sha256": "ab55dd0b24d3bbaeff3c7d99d7a39b050c43335423c5367f6aa25d1e9a6fa130"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/deployment.json",
+      "sha256": "1ded9423aecd41aed6a389f64811ad7b1008782a15949aae5be4d08146ffa3cd"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/first-request.json",
+      "sha256": "495642afd355da50f36ec8e8e77b47a49ec7eba5b394e7dace1b588e49bf225a"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/first.json.gz",
+      "sha256": "740ed6cbf4174ce425f3a2aae8a0754ce3e35889d01e2cbb016cf08361b31c93"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/manifest.json",
+      "sha256": "ed6fe8a4852a8849e6d4612af7c436649b116fb0241de68385dc997c4b4faa73"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/repeat-request.json",
+      "sha256": "4e46efb93a6cc25e9248a5cf2ada4ed31ec308c0c39c4f1a23f9997b1819bb58"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/repeat.json.gz",
+      "sha256": "6394ceafeed1bfa5d5b5390fa527a10565d869d7d663a3b5143687ebc66a5108"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death/verification.json",
+      "sha256": "a0a1c60ba3ed2df72495536fa378d9b28afbb27ec227656c422d8e9be18bc599"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/after-ready.json",
+      "sha256": "8aeaaae7996fa864d17a66aed62dc102e39fc21199366bfc92abacad35486a91"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/before-ready.json",
+      "sha256": "2367e137be5ad0e75e94101bed63c8a8f89869ca87b41a3c67c18796b4ddf01b"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/deployment.json",
+      "sha256": "1ded9423aecd41aed6a389f64811ad7b1008782a15949aae5be4d08146ffa3cd"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/first-request.json",
+      "sha256": "ffce4ba313e9a2a6a04d92c3e5631bdd71c0fdaf3acd8bec30c4e6252056b701"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/first.json.gz",
+      "sha256": "b5b241604ea27828ae28809d793ba8611ad049c2b5cdb9f2d2fcdf74c863206a"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/manifest.json",
+      "sha256": "87827444eda00344a054992ce8b23df02e6a171abb7b10e626d294908dde353b"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/repeat-request.json",
+      "sha256": "8d4d152afeca3c176130f22cfb6765703e9245d04d7eba9d1ecded4b35b8b3d8"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/repeat.json.gz",
+      "sha256": "cd808e36a1289174440659a1179e57b706fd217a484b0abe642eaaf6cc828a09"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/death-light/verification.json",
+      "sha256": "d22b7205a87ffe1756223186eb92bf24c8f978b522c4e3a49f4b278da0f1c0d9"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/helper-receipt.json",
+      "sha256": "3d170054f1ee6ecfa2b4df9e9ee5d02c865c19448fd0db22213cbc6617cd7a5c"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/run_kraken_modern_mixer_pair.py",
+      "sha256": "a54850cb6f2cbb45574e95dbbf12178c626882c2097afa5507bed9715d445e69"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/test_verify_kraken_modern_mixer.py",
+      "sha256": "abf397dbbbe15ab566addd4f633dba1f7521c9fed6c05330630c8ef69f7cdde4"
+    },
+    {
+      "path": "docs/evidence/kraken-modern-input-mixer-v1/verify_kraken_modern_mixer.py",
+      "sha256": "b24a727dcc8725bc193a755110a940dcfba3850f918a2ab9936f0806711db59b"
+    }
+  ],
+  "limits": [
+    "No production adapter, gameplay or original-skin acceptance.",
+    "Binding-cache explanation is an unconfirmed hypothesis; separate fixed-graph experiment required.",
+    "Source/native files remain local and require the exact pinned game build."
+  ]
+}

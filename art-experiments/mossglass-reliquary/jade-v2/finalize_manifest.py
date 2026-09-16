@@ -1,0 +1,10 @@
+import json,hashlib
+from pathlib import Path
+O=Path(__file__).resolve().parent;B=O.parent
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();ev=lambda p:dict(file=str(p.relative_to(O)) if p.is_relative_to(O) else '../'+p.name,sha256=sha(p),bytes=p.stat().st_size)
+assert sha(B/'manifest.json')=='84133583d7b6b9d398973c7a02271774c66b2c11f9bb79db6052af74090a0f88'
+assert sha(B/'mossglass.glb')=='86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1'
+assert sha(B/'mossglass.slot0.png')=='59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269'
+v=json.loads((O/'reopened-validation.json').read_text());assert v['primitives']==2 and v['bones']==3 and v['source_normal_agreement']['positive_fraction']==1 and v['max_bind_rest_error']<1e-5
+r=dict(model='Mossglass Reliquary',variant='jade-v2',status='TEXTURE_ONLY_OFFLINE_APPROVED_LIVE_PENDING',nativeEnemy='cubeA',rendererPath='enJellyCube',nativeCelScale=1.1,visualScaleFactor=1,change='Only runtime slot1 PNG replaced with original periodic whole-image jade texture.',unchanged=['GLB positions/normals/indices/UVs/weights/full3jointpalette/IBMs','slot0 PNG','Native slot1 scale2/rate.2/phase/emission','Core and owned-material semantics'],assets=[ev(B/'mossglass.glb'),ev(B/'mossglass.slot0.png'),ev(O/'mossglass_jade_v2.slot1.png')],priorManifest=ev(B/'manifest.json'),priorLiveFailure=ev(B/'live-validation-v1.json'),runtimeProfile=ev(O/'runtime-profile.json'),rootReview=dict(status='SELECTED_STUDIO_DIRECTION_APPROVED_FOR_LIVE',image=ev(O/'hero-native-scale2.png'),finding='Root viewed jade shell through repeated bands, ivory cage and amber core remain distinct.',scope='Offline native-tiling studio only; live appearance remains pending.'),files=[ev(p) for p in sorted(O.iterdir()) if p.is_file() and p.name!='manifest.json'],limits=['Actual combat color/scroll readability and portrait require live verification.','V1 death visibility and lifecycle remain limited.','Reopened artifact validates scene; runtime intentionally reuses frozen original GLB.'])
+(O/'manifest.json').write_text(json.dumps(r,indent=2)+'\n');print(ev(O/'manifest.json'))

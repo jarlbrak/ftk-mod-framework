@@ -1,0 +1,73 @@
+{
+  "status": "SELECTED_ORIGINAL_NATIVE_POSES_REVIEWED_FOR_LIVE_TRIAL",
+  "originalGlbSha256": "c1c04fbac1b7ca604f9091148d14b75f48b95b913327e2aeb7404b0986caa029",
+  "sheets": [
+    {
+      "path": "art-experiments/mournglass-wraith/native-pass-pose-study.png",
+      "sha256": "f8788ce3e989b4633e79931ca56668dafda53d9ae30b2a1cda8bf28deba8c39c",
+      "audit": "art-experiments/mournglass-wraith/native-pass-pose-audit.json",
+      "auditSha256": "0055e0d742d75d4802eb1d4bc2b412002fa130c7e590bccaa6bdfa073a2c8e62",
+      "actualImageViewed": true,
+      "sampledFrames": [
+        0,
+        42,
+        48,
+        54,
+        60,
+        104
+      ]
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/native-hit-pose-study.png",
+      "sha256": "5207e9556758206c963026b63f172f059c2cc1adcb1f2ca00c9d54da08c0a220",
+      "audit": "art-experiments/mournglass-wraith/native-hit-pose-audit.json",
+      "auditSha256": "f1a0288b042c5a68c42936a87e3a91d2a16d2100f1b73c26860a3df252c57bd2",
+      "actualImageViewed": true,
+      "sampledFrames": [
+        0,
+        28,
+        30,
+        34,
+        36,
+        80
+      ]
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/native-death-prefix-pose-study.png",
+      "sha256": "379dc4368a0c58332150e085b13f47039230da13fc2b48bc3269acf1307fde03",
+      "audit": "art-experiments/mournglass-wraith/native-death-prefix-pose-audit.json",
+      "auditSha256": "4d0a55b7a278f00faec6b79b5f7d230e7ebe6b0d0cb7da44da4befb496aa4a46",
+      "actualImageViewed": true,
+      "sampledFrames": [
+        0,
+        25,
+        27,
+        28,
+        29,
+        60
+      ]
+    },
+    {
+      "path": "art-experiments/mournglass-wraith/native-shoulder-worst-pose-study.png",
+      "sha256": "1db2a104ec67003432bfd5a544be37d33ce58d702a1b1e2ef59742f938d4f693",
+      "audit": "art-experiments/mournglass-wraith/native-shoulder-worst-pose-audit.json",
+      "auditSha256": "7e47508c55dee41d9e44131048ecfe0b27bc4ef2acf372106a8bc6d8d147959e",
+      "actualImageViewed": true,
+      "sampledFrames": [
+        42,
+        44,
+        45,
+        46,
+        48,
+        50
+      ]
+    }
+  ],
+  "verdict": "Continuous mantle, shoulder drapes, sleeves, hands and mask remain connected in reviewed projections, including maximum recorded shoulder stretch at pass45. Suitable for a controlled live original trial; no live material/FX/portrait verdict.",
+  "limits": [
+    "331 unique recorded native frames:120pass+120hit+91partialdeath, not complete death recording.",
+    "Death renderer was hidden from29; sheet deliberately visualizes retained bone poses and labels hidden frames.",
+    "Two original texture slots sampled as per-triangle colors; no actual scroller/shader/native-emission or live FX simulation.",
+    "Native local bounds retained; no independent culling/floor/contact/whole-lifetime proof."
+  ]
+}

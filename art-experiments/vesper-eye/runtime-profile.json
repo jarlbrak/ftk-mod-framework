@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_vesper_eye",
+      "baseEnemy": "beholderA",
+      "displayName": "Vesper Eye",
+      "combatProfile": "2614f9be5c3a8448ca923c624c35c8d8569dc042e9a65ef0338ed276c7eea7da",
+      "renderers": [
+        {
+          "rendererPath": "EyeBody",
+          "glbFile": "vesper_body.glb",
+          "textureFile": "vesper_basecolor.png",
+          "disableNativeEmission": true
+        },
+        {
+          "rendererPath": "EyeBody/EyeEye",
+          "glbFile": "vesper_eye.glb",
+          "textureFile": "vesper_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ]
+    }
+  ]
+}

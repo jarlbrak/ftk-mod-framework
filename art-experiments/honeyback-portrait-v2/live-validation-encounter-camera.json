@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "asset": "Honeyback portrait v2 unchanged geometry",
+  "iteration": "Separate native EncounterCam profile",
+  "status": "scoped_combat_portrait_camera_PASS",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+    "case": "8f0f417c84284e3eadad4fdc7398ad9c",
+    "mode": "next-case",
+    "enemy": "ftkmf_modeltest_honeyback_encounter_camera",
+    "class": null,
+    "profile": {
+      "key": "ftkmf_modeltest_honeyback_encounter_camera",
+      "baseEnemy": "bearB",
+      "displayName": "Honeyback camera test",
+      "combatProfile": "a03f8882d4c799314d6fc4a476213e985e3b639399658e8c502737ff47cb609d",
+      "renderers": [
+        {
+          "rendererPath": "enBear01",
+          "glbFile": "honeyback_portrait_v2.glb",
+          "textureFile": "honeyback_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64,
+      "portraitMarkerPath": "CameraRoot/EncounterCam"
+    },
+    "profileInputSha256": "281576929e0e7996efc46163c24978b6c2598e2b5f41aff920e01c18d5f8864c",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "assetHashes": {
+    "honeyback_portrait_v2.glb": "a4f05e00b9eb30cd980a8c53a6ca5d9dcac24087192b8afc1f26e26d4449c754",
+    "honeyback_basecolor.png": "54eb2580b97f7a9e34054fa84a30d6a99c0a9e388e67f61cbff28512d44ffefb"
+  },
+  "binaries": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+    "binaries": {
+      "framework": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+        "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+        "sha256": "cdbbe7ece2b53e443c1c9c4fad8607379f1c94f1b263592815252e26ac0f4b4a",
+        "bytes": 1967616
+      },
+      "helper": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "sha256": "4cc840dfdb3bc101292e4f13124233e936137fc79f92cc0c1bb3748b27164910",
+        "bytes": 221184
+      }
+    },
+    "measurement": "on_disk_binary_sha256",
+    "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+  },
+  "marker": "CameraRoot/EncounterCam",
+  "rawPortrait": {
+    "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/native-portrait.png",
+    "sha256": "bf380f07ece87427d366aaa9454724f3f15ecd2c9230f9d2b677e4613967984b"
+  },
+  "rootVisualReview": {
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+    "scope": "alternate native marker combat portrait acceptance only",
+    "status": "scoped_visual_pass",
+    "marker": "CameraRoot/EncounterCam",
+    "trace": "scratch/honeyback-encounter-live-trace.json",
+    "rawPixels": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/17d96c3ca21b4ce59bdf4436b6b4cc4b.portrait.png",
+      "sha256": "bf380f07ece87427d366aaa9454724f3f15ecd2c9230f9d2b677e4613967984b",
+      "bytes": 19862
+    },
+    "matchingActiveRawImages": 7,
+    "capture": "b9b93ef036fa4df3b31876ac062327cc",
+    "reviewedFrames": [
+      0,
+      40
+    ],
+    "observations": [
+      "Whole bear and face visible in raw native204x172 portrait.",
+      "Both turnstrip and mainhealth portrait recognizable in actual1280x832game capture; face smaller than originalnosecloseup, no promiseoflargeeyedetail.",
+      "Nativeattack body unchanged/coherent in reviewedframes."
+    ],
+    "limitations": [
+      "Camera-only profile with samev2GLB/PNG; oldbodyhit/deathevidence separate.",
+      "No native encounter-row preview acceptance; helper firstattempt rejected beforeInitialize due wrong204x172 assumption.",
+      "No allresolutions/variants/fullcampaign acceptance."
+    ],
+    "readbackReportSha256": "447f475dffc74e9698dcbc3c3090f901e068445578c1a1e67339df09bc3b288e"
+  },
+  "passCapture": {
+    "path": "scratch/mirewarden-game/model-test-output/b9b93ef036fa4df3b31876ac062327cc.json",
+    "sha256": "17dd2d58febb13cd5450db56e6bddabe75ef2485779df23f1681c89d74380393"
+  },
+  "passJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-f5a8ae791ae946fb962c681ee8131136/journal.jsonl",
+    "sha256": "37051a6ff4e21b6370b12eead8117a29f42c6eba697a1387216015b8276a6116"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-8f0f417c84284e3eadad4fdc7398ad9c/journal.jsonl",
+    "sha256": "114c1032d19304527af840d7a62cdfc64f3e73aec5ff352211f964e554c24f42"
+  },
+  "cleanupDeath": {
+    "summary": {
+      "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/cleanup-death-summary.json",
+      "sha256": "68df6940fc546bb63e3b236a907a13b694a387d529b32f56bbed1bd20519e070"
+    },
+    "journal": {
+      "path": "scratch/mirewarden-game/model-test-output/case-affd17dab8054d58baa86cc77834b834/journal.jsonl",
+      "sha256": "8df1e2054f8a6911e39093d336c33fccc5a989344f16997e08c09b797c42e5a9"
+    },
+    "scope": "Cleanup-only120-frame capture; no new death-art verdict."
+  },
+  "progress": "Two guarded Collect actions then strict Ready level0 room3; watch stopped.",
+  "evidence": [
+    {
+      "path": "scratch/honeyback-encounter-live-visual-review.json",
+      "sha256": "ba15f034a74a4225a1c77e6c4a31bbb27a9aab24d98fd7c78647730df4ed16c9"
+    },
+    {
+      "path": "scratch/honeyback-encounter-live-trace.json",
+      "sha256": "459ae3140b88799b3751eb0a633003469e3acec5161b7666d78e5f66ba4c1e9e"
+    },
+    {
+      "path": "scratch/honeyback-encounter-live-pixels-result.json",
+      "sha256": "447f475dffc74e9698dcbc3c3090f901e068445578c1a1e67339df09bc3b288e"
+    },
+    {
+      "path": "scratch/honeyback-encounter-live-arm.json",
+      "sha256": "24cf70e466d9b8cc3545600cc0f17616ef8356f32b44db8c55e30cc2c0c40893"
+    },
+    {
+      "path": "scratch/honeyback-encounter-live-stop.json",
+      "sha256": "e46654f6d60f3c999f187b14c8851878976f900bfaabdcd8e499cc9705fbfcea"
+    },
+    {
+      "path": "scratch/honeyback-encounter-live-collect1.json",
+      "sha256": "b35f8cbd12b894d5ca056a8b78b269e4e9f20bef4656730a7546e3be40e23fde"
+    },
+    {
+      "path": "scratch/honeyback-encounter-live-collect2.json",
+      "sha256": "af5cd2691f01ff93ac931143f251e91106dd926b929c7d8bf22e5e9ce2ed30b5"
+    },
+    {
+      "path": "scratch/honeyback-encounter-live-ready.json",
+      "sha256": "720b3d0cc123c8b80eff4211584ee8d246621d3d1ac530fa126419214f958dbe"
+    }
+  ],
+  "previousFailure": {
+    "evidence": {
+      "path": "art-experiments/honeyback-portrait-v2/live-validation.json",
+      "sha256": "05b9bb2c1d7ee0407a79dd2f43fdf85ef0422c799362721a0cb9d47b5227c2dc"
+    },
+    "scope": "Preserved v2 default PortraitCam nose-dominance failure. This camera-only trial does not rewrite it."
+  },
+  "limits": [
+    "Camera-only profile with samev2GLB/PNG; oldbodyhit/deathevidence separate.",
+    "No native encounter-row preview acceptance; helper firstattempt rejected beforeInitialize due wrong204x172 assumption.",
+    "No allresolutions/variants/fullcampaign acceptance."
+  ],
+  "media": [
+    {
+      "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/cleanup-death-summary.json",
+      "sha256": "68df6940fc546bb63e3b236a907a13b694a387d529b32f56bbed1bd20519e070"
+    },
+    {
+      "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/native-portrait.png",
+      "sha256": "bf380f07ece87427d366aaa9454724f3f15ecd2c9230f9d2b677e4613967984b"
+    },
+    {
+      "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/pass-0000.png",
+      "sha256": "7d7478f3dcf5f1207010e3d36dbcb246f47a9aed5bd09441abc576b9a8a09db5"
+    },
+    {
+      "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/pass-0040.png",
+      "sha256": "105a2594aa0d1c26ad4273b5440be989f81442a52ce04259ee440a0ba54c53c0"
+    },
+    {
+      "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/pass-summary.json",
+      "sha256": "cf606f3828da3f77319b7361dda304c9532cc7de26a0cbdc78e5ac4eea57afc3"
+    },
+    {
+      "path": "art-experiments/honeyback-portrait-v2/live-encounter-camera/pass.mp4",
+      "sha256": "e64e1aa583d4d16daa59ebfa7ba6972219a97bc0413f37e4f7239ae31a234319"
+    }
+  ],
+  "testedReusableProfile": {
+    "path": "art-experiments/honeyback-portrait-v2/runtime-profile-encounter-camera.json",
+    "sha256": "506cb64d9b51c084afb5654c27d58b0a0e051663cbcc1d386ac8d1fc142b46e7"
+  }
+}

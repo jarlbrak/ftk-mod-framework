@@ -1,0 +1,68 @@
+{
+  "capture": "scratch/mirewarden-game/model-test-output/3dcae051935d428bb2a62178954f8a67.json",
+  "captureSha256": "dea1a8c33da5367de087b9255166256c6b46a126f1077aa3b5d149304e1dc6ad",
+  "sourceSha256": "af5b6e089a6f26d4d782d5c03331380fd5e4573320eee73bdc1652bdf5114e14",
+  "frames": 120,
+  "sampledFrames": [
+    0,
+    15,
+    30,
+    95,
+    105,
+    119
+  ],
+  "maximumEdgeStretch": 3.452137104746361,
+  "worstEdge": {
+    "frame": 95,
+    "piece": "Soft shoulder L",
+    "triangle": 1698,
+    "vertexIndices": [
+      5095,
+      5096
+    ],
+    "restLength": 0.05469751788680163,
+    "posedLength": 0.18882333103455567,
+    "ratio": 3.452137104746361
+  },
+  "posedBoundsMin": [
+    -0.8880299440052744,
+    -0.08591722545465985,
+    -0.9413186929686782
+  ],
+  "posedBoundsMax": [
+    0.8326759361283032,
+    1.8352716459076999,
+    1.1245667197924796
+  ],
+  "nativeTravelBoundsMin": [
+    -0.8670915651858777,
+    -0.038854401861269205,
+    -0.6543027371168133
+  ],
+  "nativeTravelBoundsMax": [
+    0.7244780677107555,
+    2.4468953806161884,
+    6.233830413945617
+  ],
+  "glbSha256": "19165a3c087eb6438ffe91e4623b123ae7f4337f353caa585bb7a5adf92acdde",
+  "rootMotionRetained": false,
+  "method": "Root_M-normalized sheet. Original source skinned with full captured bone matrices and native IBMs, Anatomy mode removes Root_M transform for deformation inspection; keep-root-motion mode retains renderer-local travel in the sheet. Travel bounds always retain renderer-local motion. Orthographic depth raster with fixed all-frame bounds. Mesh-space anatomy front+Z/upY.",
+  "captureReportedOk": true,
+  "captureError": null,
+  "hiddenFrames": [
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119
+  ],
+  "materialMethod": "Per-triangle first-vertex nearest texel from original palette; no shader/light/weapon simulation.",
+  "scope": "Offline native pose study; no material/culling/portrait/whole-controller or live original-art acceptance."
+}

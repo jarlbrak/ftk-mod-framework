@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_player_wildbloom_herbalist_female",
+      "baseClass": "blacksmith",
+      "displayName": "Wildbloom Herbalist",
+      "skinset": "herbalist_Female",
+      "defaultSkinType": "Female",
+      "renderers": [
+        {
+          "rendererPath": "player_Herbalist",
+          "glbFile": "wildbloom-body.glb",
+          "textureFile": "wildbloom-palette.png"
+        },
+        {
+          "rendererPath": "hairTop",
+          "glbFile": "wildbloom-hair-top.glb",
+          "textureFile": "wildbloom-palette.png"
+        },
+        {
+          "rendererPath": "hairBottom",
+          "glbFile": "wildbloom-hair-bottom.glb",
+          "textureFile": "wildbloom-palette.png"
+        }
+      ]
+    }
+  ]
+}

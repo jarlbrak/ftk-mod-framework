@@ -1,0 +1,262 @@
+{
+  "schema": "ftkmf.player-canonical-route.v1",
+  "status": "canonical_native_player_route_reviewed",
+  "revision": "V2 canonical",
+  "displayName": "Wildbloom Herbalist",
+  "sessions": {
+    "preview": "e69928c5d0ab49df890edeef870d5feb",
+    "combat": "c293b02ed0f34e589867d6aeeed747b2"
+  },
+  "scope": "Exact herbalist_Female body, upper-hair and seven-bone lower-hair player route through native Party Select, overworld, ordinary combat, progression and one combat-avatar rebuild.",
+  "profile": {
+    "key": "ftkmf_modeltest_player_wildbloom_herbalist_female",
+    "baseClass": "blacksmith",
+    "displayName": "Wildbloom Herbalist",
+    "skinset": "herbalist_Female",
+    "defaultSkinType": "Female",
+    "renderers": [
+      {
+        "rendererPath": "player_Herbalist",
+        "glbFile": "wildbloom-body.glb",
+        "textureFile": "wildbloom-palette.png"
+      },
+      {
+        "rendererPath": "hairTop",
+        "glbFile": "wildbloom-hair-top.glb",
+        "textureFile": "wildbloom-palette.png"
+      },
+      {
+        "rendererPath": "hairBottom",
+        "glbFile": "wildbloom-hair-bottom.glb",
+        "textureFile": "wildbloom-palette.png"
+      }
+    ]
+  },
+  "topologyGroup": "45c7a9b9fb730195",
+  "renderers": [
+    {
+      "part": "body",
+      "path": "player_Herbalist",
+      "mesh": "ftkmf_glb_wildbloom-body.glb",
+      "signature": "33ef1d59071b4cb809e65f6c63ea4d925e2f7dc75a0703033e7e8177f9137149"
+    },
+    {
+      "part": "hair-top",
+      "path": "hairTop",
+      "mesh": "ftkmf_glb_wildbloom-hair-top.glb",
+      "signature": "77a9c31c091976a8004ebf40f7871623675169fc43de518ac46423bb472e98df"
+    },
+    {
+      "part": "hair-bottom",
+      "path": "hairBottom",
+      "mesh": "ftkmf_glb_wildbloom-hair-bottom.glb",
+      "signature": "ccd5b08dc89616e5470ca4195938ebc3378daeb653d2e8b2cce2f93b3c3bdc2c"
+    }
+  ],
+  "avatarOwners": {
+    "preview": {
+      "status": "observed_actual_native_player_preview",
+      "observedAvatars": 1,
+      "ownerInstanceId": -19122,
+      "celInstanceId": -292682,
+      "nativeMenuMembership": true,
+      "reciprocalPreviewReference": true,
+      "parentIsNativePedestal": true
+    },
+    "overworld": {
+      "heroInstanceId": -235140,
+      "celInstanceId": -238744,
+      "leaseId": 3
+    },
+    "combatFirst": {
+      "ownerInstanceId": 358974,
+      "celInstanceId": -245318,
+      "leaseId": 3
+    },
+    "combatSecond": {
+      "ownerInstanceId": 358974,
+      "celInstanceId": -249004,
+      "leaseId": 3
+    }
+  },
+  "captures": [
+    {
+      "label": "native-preview-idle-body",
+      "scope": "player-preview",
+      "rendererPath": "player_Herbalist",
+      "mesh": "ftkmf_glb_wildbloom-body.glb",
+      "raw": "metadata/idle-body.json.gz"
+    },
+    {
+      "label": "native-preview-idle-hair-top",
+      "scope": "player-preview",
+      "rendererPath": "hairTop",
+      "mesh": "ftkmf_glb_wildbloom-hair-top.glb",
+      "raw": "metadata/idle-hair-top.json.gz"
+    },
+    {
+      "label": "native-preview-idle-hair-bottom",
+      "scope": "player-preview",
+      "rendererPath": "hairBottom",
+      "mesh": "ftkmf_glb_wildbloom-hair-bottom.glb",
+      "raw": "metadata/idle-hair-bottom.json.gz"
+    },
+    {
+      "label": "native-preview-death-fixture-body",
+      "scope": "player-preview",
+      "rendererPath": "player_Herbalist",
+      "mesh": "ftkmf_glb_wildbloom-body.glb",
+      "provenance": "native-state-playback",
+      "raw": "metadata/death-body.json.gz"
+    },
+    {
+      "label": "native-preview-death-fixture-hair-top",
+      "scope": "player-preview",
+      "rendererPath": "hairTop",
+      "mesh": "ftkmf_glb_wildbloom-hair-top.glb",
+      "provenance": "native-state-playback",
+      "raw": "metadata/death-hair-top.json.gz"
+    },
+    {
+      "label": "native-preview-death-fixture-hair-bottom",
+      "scope": "player-preview",
+      "rendererPath": "hairBottom",
+      "mesh": "ftkmf_glb_wildbloom-hair-bottom.glb",
+      "provenance": "native-state-playback",
+      "raw": "metadata/death-hair-bottom.json.gz"
+    },
+    {
+      "label": "native-player-attack-and-hit",
+      "scope": "player-combat",
+      "rendererPath": "player_Herbalist",
+      "mesh": "ftkmf_glb_wildbloom-body.glb",
+      "raw": "metadata/combat-body.json.gz",
+      "clips": [
+        "attack_blunt1H",
+        "damageLight_blunt1H"
+      ]
+    }
+  ],
+  "gameplay": {
+    "ordinaryAttack": {
+      "enemyHp": [
+        72,
+        62
+      ],
+      "clip": "attack_blunt1H",
+      "source": "metadata/combat-action-journal.jsonl"
+    },
+    "ordinaryHit": {
+      "heroHp": [
+        999,
+        962
+      ],
+      "clip": "damageLight_blunt1H",
+      "source": "metadata/combat-action-journal.jsonl"
+    },
+    "finalReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "progression": {
+      "afterFirstVictory": {
+        "level": 1,
+        "xp": 38,
+        "gold": 46
+      },
+      "strictReady": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    }
+  },
+  "explicitDeathFixture": {
+    "method": "Animator.Play Death on actual game-owned preview owner",
+    "provenance": "native-state-playback",
+    "ordinaryPlayerDeath": false,
+    "boundary": "Motion and deformation fixture only; no ordinary lethal, corpse lifetime or cleanup claim."
+  },
+  "equipment": {
+    "status": "native_default_outfit_observed_no_custom_apparel_declared",
+    "customApparelApplicable": false,
+    "nativeVisible": [
+      "armorHerbalist(Clone)",
+      "bootsHerbalist(Clone)",
+      "helmHerbalist(Clone)",
+      "backpackHerbalist(Clone)"
+    ]
+  },
+  "lifecycle": {
+    "status": "preview_to_overworld_to_combat_and_combat_rebuild_observed",
+    "firstCombatCelInstanceId": -245318,
+    "secondCombatCelInstanceId": -249004,
+    "sharedLeaseId": 3,
+    "references": 2,
+    "boundary": "The first combat owner disappeared and a second native combat CEL retained the exact three meshes. Final owner teardown and Unity-null resources were not measured for this route."
+  },
+  "visualReview": {
+    "status": "reviewed_native_preview_idle_death_and_combat_samples",
+    "observed": "Selected full-resolution frames show a coherent green petal-crowned Wildbloom Herbalist in Party Select, a readable native death pose, an ordinary hammer attack and an ordinary hit response without exploded geometry.",
+    "boundary": "Sampled cameras only; no multiplayer, every equipment combination, corpse lifetime or final-owner cleanup claim."
+  },
+  "selectedFrames": [
+    {
+      "label": "idle-body",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/idle-body.png",
+      "sha256": "2f7c78e2833bdaf66823dba834e23a83353fd4ba4f95342ebe24867f7ae60bfa"
+    },
+    {
+      "label": "idle-hair-top",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/idle-hair-top.png",
+      "sha256": "3173051c83b1a6bac6a5342d1efbe6bceb37b0ed89f230e6f77a164473d95d0d"
+    },
+    {
+      "label": "idle-hair-bottom",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/idle-hair-bottom.png",
+      "sha256": "a26cdcb7f60ea0e7e258fcdd5e47944e08a9f04cb7d526210af88c82ad062f5a"
+    },
+    {
+      "label": "death-body",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/death-body.png",
+      "sha256": "ea1a0f63a7033e02ba292ae46519d043de6e907f77fb917b0a65a360c46ca23c"
+    },
+    {
+      "label": "death-hair-top",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/death-hair-top.png",
+      "sha256": "3eb5c73f158a5438aa8c2649a139441a1405eab57f52160c2ccae8519272edea"
+    },
+    {
+      "label": "death-hair-bottom",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/death-hair-bottom.png",
+      "sha256": "63725116baec849f46f25ffa3f247f4aadd9cf20644b737d19eda3c43db939b5"
+    },
+    {
+      "label": "attack-body",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/attack-body.png",
+      "sha256": "4d4602e30821c5e62a3015ee957a9d5c54076d5dff0e7b9a0b633b1af041d726"
+    },
+    {
+      "label": "hit-body",
+      "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/selected/hit-body.png",
+      "sha256": "56f6c1a0ab33e492cbbc6f719e865d96ccc064de08966af0d7d5fdb5f291d783"
+    }
+  ],
+  "priorEvidence": {
+    "v1": {
+      "validation": "metadata/prior-v1-validation.json",
+      "sha256": "edbded84fade96f5928f922539a5fac53a5991401c23c49337fac95b3795614b",
+      "integrity": "metadata/prior-v1-integrity.json",
+      "integritySha256": "aa3a96ff3fb884e9c38cc1911ca76d900323f8486edb93d9ae64301faa986774"
+    }
+  },
+  "limitations": [
+    "Death is explicit native-state playback on a real preview owner, not ordinary lethal gameplay.",
+    "The kill action is an explicit fixture used only to reach native loot and Ready progression.",
+    "No custom apparel is declared; native Herbalist clothing remains game-owned.",
+    "Final owner teardown, corpse lifetime, portraits and multiplayer remain outside this route's claims."
+  ]
+}

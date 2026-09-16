@@ -1,0 +1,204 @@
+{
+  "name": "Duskquill Raven",
+  "native_chassis": "crowC",
+  "reference_renderer": 120964,
+  "reference_binding_representative": 120960,
+  "renderer_path": "enCrow",
+  "native_surface_copied": false,
+  "art_status": "Original raven; scoped exact-source live binding, motion, gameplay, and sampled art accepted; final art approval pending",
+  "native_forward": "Up+Y/front+Z, source camera/anatomy checked",
+  "remaining": [
+    "Sibling bird rows and other controller clips",
+    "Portrait, collision, extended culling, and long-session resource lifetime",
+    "Ordinary lethal damage, lifetime beyond the sampled death window, and final art approval"
+  ],
+  "parts": [
+    {
+      "name": "duskquill",
+      "vertices": 7572,
+      "triangles": 2524,
+      "palette_joints": 39,
+      "max_bind_rest_error": 2.220446049250313e-16,
+      "blender_reopen_max_bind_rest_error": 2.220446049250313e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.7271368503570557,
+        0.8913795948028564,
+        -0.8740736842155457
+      ],
+      "bind_bounds_max": [
+        1.7270394563674927,
+        1.4662599563598633,
+        1.2735828161239624
+      ],
+      "blender_roundtrip_glb_sha256": "742f5dda8ce0ee26471acc85aae6fe1a01e8961e4be7855088e85e0c97178291"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 120964,
+      "local_reference_path": "scratch/crow-topology-analysis/reference-120964/reference.npz",
+      "sha256": "4936bd8277e0fbc833597ce4bc14b9c9b5c33b95d6faa33dd5cf4a265de0771d"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "parent approved for live test; studio-review.json pins exact reviewed images",
+    "live_binding": "pass for exact crowC / enCrow / renderer 120964 in canonical V3",
+    "live_animation": "sampled BirdFlySlow, birdAttack2, BirdDamage, recovery, and animator-driven BirdDeath accepted in canonical V3",
+    "live_material_and_culling": "exact material readback recorded in canonical V3; extended culling remains pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "ece1bc7e8190caed7f2ea7670b8975ab3fc5e4c1e8eed34cbfac940760720766",
+      "bytes": 8593
+    },
+    "audit_native_poses.py": {
+      "sha256": "2fe7ea641d0b80b385a39191ea1007313a780353bcfd9ae02777401e4a33d54f",
+      "bytes": 4487
+    },
+    "build_blender.py": {
+      "sha256": "ffe41034d4c343a60d39b5a1b5a94638adb1ce5f45491a480c8d949122542a5b",
+      "bytes": 5379
+    },
+    "build_geometry.py": {
+      "sha256": "7d75cf89eacb2eee8f58c833765d5464475bf41bd90c925915f07b202eca66df",
+      "bytes": 7016
+    },
+    "duskquill-studio.blend": {
+      "sha256": "7033436c7fc9b0493b128cf14b0305548c3c2c922f9189996a55ecb2ddcdda1f",
+      "bytes": 238680
+    },
+    "duskquill.blend": {
+      "sha256": "4f0235ef79ed0572181bc8511ada83b8d1593afb52d2f28a325cf6a6b8a84728",
+      "bytes": 235672
+    },
+    "duskquill.glb": {
+      "sha256": "6deaad9c9cb69d18daee583ad2719e2765a5683dd4c28d7ebceb5ae3ae2398a2",
+      "bytes": 444136
+    },
+    "duskquill.pieces.json": {
+      "sha256": "0569414ca895718188804e892cc35c6f12048d1a657eff9ad89c39a104bdcc3b",
+      "bytes": 3897
+    },
+    "duskquill.source.json": {
+      "sha256": "c278e331f157df02ef1cc9c91fdb1641d28cdc227027bbb363582bfb9fe2f5d6",
+      "bytes": 1251726
+    },
+    "duskquill.validation.json": {
+      "sha256": "c1043fe4e58045f0dade428a24b206b3205b0b3bca86f792dca946f74b06b9cb",
+      "bytes": 790
+    },
+    "duskquill_basecolor.png": {
+      "sha256": "ea9122bac7c4cc3476d8340a3663a87022e6b37b821530a201f2a8f63fd8f1bc",
+      "bytes": 263
+    },
+    "finalize_manifest.py": {
+      "sha256": "aa6ac3f07f2df408abc65ce43590656c506d22be65a308a03a6322659df86a9c",
+      "bytes": 2929
+    },
+    "hero.png": {
+      "sha256": "0ccb307b3bbf82dcf6368d332b2f8d81e48cf661589e269c883ae06ecf8d0792",
+      "bytes": 997053
+    },
+    "inspect_materials.py": {
+      "sha256": "47dd01f1260474303ca811aea7df27910393a43ce24928168471d271d3ea1c10",
+      "bytes": 1214
+    },
+    "native-death-pose-audit.json": {
+      "sha256": "5c7c34fb15855e8e4bf3aeddd6e5f1cdd7e930657972ff6cf4da1761e8e22e40",
+      "bytes": 1525
+    },
+    "native-death-pose-study.png": {
+      "sha256": "90d0b3cfe4cd841680b9254a97211abb0657ddabde3c1de20335b1c68184e937",
+      "bytes": 27537
+    },
+    "native-hit-pose-audit.json": {
+      "sha256": "99e0a5730f9ccae4ef9e69d32f8fa598d432dd0d16730254e658ebb8539fefe0",
+      "bytes": 1526
+    },
+    "native-hit-pose-study.png": {
+      "sha256": "6e1a305eb82dcc3e734cc8bd4520b4882c5f459b92cd6311f826bb79977de956",
+      "bytes": 29800
+    },
+    "native-material-metadata.json": {
+      "sha256": "736d2fc8a4151d05dc848c69e0e32824ff6ed522dd87a0d029e5c599ca9b8cfe",
+      "bytes": 2369
+    },
+    "native-pass-pose-audit.json": {
+      "sha256": "67255d29ef6d5dcf884a579fe91abdb84fc5e6c997e75acb2b91caa65246f203",
+      "bytes": 1522
+    },
+    "native-pass-pose-study.png": {
+      "sha256": "d88a1bec586fe647bd4dae880b798ae6b26133787beaa66af04d0a2274c0160c",
+      "bytes": 35421
+    },
+    "original-geometry-proof.json": {
+      "sha256": "a92f02b20a91e8ed1f7eb6b898fa1523b3f7a228d75c5bfe1d814319dfb5a50b",
+      "bytes": 1087
+    },
+    "runtime-profile.json": {
+      "sha256": "c3bc603958d0d4d22701629cc8174cda5117750de5694cd869642e30a01e7f93",
+      "bytes": 526
+    },
+    "side.png": {
+      "sha256": "56684c2ae155d1dbf4f5d2cbc6fb7e7e32092d031ef128eed238c393ed89f749",
+      "bytes": 976483
+    },
+    "studio-review.json": {
+      "sha256": "a852ff4379f1c6a977079a3d64664474e80d4ac2f7db64dd9bd6bfe82d53c3c9",
+      "bytes": 595
+    },
+    "target-binding-proof.json": {
+      "sha256": "8fdc53d98ea4ea8c97b01b4e6669dea946148de3fecf78b3d9b21eaaccf28800",
+      "bytes": 1364
+    },
+    "verify_original_geometry.py": {
+      "sha256": "b84070f5514655814c34dcbf4b2ee919e427ed79f6bd365f6cfed5fc6c6fa251",
+      "bytes": 2335
+    },
+    "verify_target_binding.py": {
+      "sha256": "73a31ece1703e99ac68aabd9bf03dddc3d3e311a011cd8fb500d5869f24b3545",
+      "bytes": 1572
+    }
+  },
+  "live_v1": {
+    "status": "SCOPED_ORIGINAL_FLIGHT_HIT_DEATH_AND_PROGRESSION_REVIEW",
+    "evidence": "live-validation.json",
+    "sha256": "b20452fa393f67a692493c6c7f3c8a85425b27ed4a8e3d08781ff1ec878b004f",
+    "scope": [
+      "Selected camera views only, dark body contrast and native blur/occlusion limit detail.",
+      "Explicit KillSingle death fixture, not an ordinary lethal hit or every death variant.",
+      "No independent runtime material-property capture in this trial.",
+      "Exact crowC original only; other bird rows/materials/controllers are not accepted.",
+      "Earlier setup failures and native crow removal/flee-consistent diagnostic remain separate."
+    ]
+  },
+  "live_v2": {
+    "status": "FRESH_CATALOG_411_EXACT_BINDING_MOTION_AND_COMPLETE_FIXTURE_DEATH",
+    "evidence": "live-validation-v2/validation.json",
+    "sha256": "c145a901ae6acb65a00917f132bbe95ba12f1cc993aac5e569eb3b527816e416",
+    "bytes": 65429,
+    "scope": [
+      "Exact crowC / enCrow / renderer 120964 only.",
+      "Ordinary no-focus HP 58 to 53 and separate explicit KillSingle death.",
+      "Direct Ready exposed no usable Collect action.",
+      "Small scale, effects, overlay, culling, portrait, resource lifetime, and final art review remain limited."
+    ]
+  },
+  "live_v3": {
+    "status": "REVIEWED_EXACT_SOURCE_PENDING_ANY_REMAINING_LIMITS",
+    "evidence": "live-validation-v3/validation.json",
+    "sha256": "0585f45b4cb49bd32654f76e9ea3ccaacfc715a3132f48c5817e0f80a2c7bdb7",
+    "bytes": 49444,
+    "scope": [
+      "Exact crowC / enCrow / renderer 120964 only; no sibling topology credit.",
+      "Three complete 120-frame captures, ordinary no-focus HP 58 to 50, separate animated KillSingle death, two Collects, and strict Ready 0/2.",
+      "m_DoRagdoll=false and zero rigid bodies; no ragdoll or ordinary lethal claim.",
+      "Twenty exact originals reviewed; small scale, native effects, foreground overlap, loot overlay, depth blur, and camera motion limit fine inspection.",
+      "A first stochastic escape run is preserved as rejected boundary evidence and does not receive canonical coverage."
+    ]
+  }
+}

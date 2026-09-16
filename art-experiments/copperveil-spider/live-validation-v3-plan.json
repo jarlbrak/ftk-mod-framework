@@ -1,0 +1,89 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/copperveil-spider/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-d37e75ea9a9544c0b60b083a583e1811/case-result.json",
+  "visualReview": "scratch/model-route-23c62612fd16b533-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/copperveil-spider/copperveil.glb",
+    "art-experiments/copperveil-spider/copperveil_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/copperveil-spider/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-23c62612fd16b533-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-34898eb553dc46149902d1d1068d8ed5/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSpiderB",
+        "mesh": "ftkmf_glb_copperveil.glb",
+        "boneSignature": "5ecc6ff62492505b0f95f19ce57e5f5b2fa6e04b01dc0156c56c0c6e78cbfb6e"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSpiderB",
+        "mesh": "ftkmf_glb_copperveil.glb",
+        "boneSignature": "5ecc6ff62492505b0f95f19ce57e5f5b2fa6e04b01dc0156c56c0c6e78cbfb6e"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSpiderB",
+        "mesh": "ftkmf_glb_copperveil.glb",
+        "boneSignature": "5ecc6ff62492505b0f95f19ce57e5f5b2fa6e04b01dc0156c56c0c6e78cbfb6e"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Copperveil Weaver",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "spiderB",
+    "nativeChassis": "spiderB",
+    "rendererPaths": [
+      "enSpiderB"
+    ],
+    "sourceRendererIds": [
+      121386
+    ],
+    "binding": {
+      "rendererPath": "enSpiderB",
+      "mesh": "ftkmf_glb_copperveil.glb",
+      "boneSignature": "5ecc6ff62492505b0f95f19ce57e5f5b2fa6e04b01dc0156c56c0c6e78cbfb6e"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native spiderB / enSpiderB / renderer 121386 source assignment only; no Spider A renderer, sibling chassis, material route, or topology receives credit from this record.",
+      "The ordinary no-focus hit reduced health from 63 to 59; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Eighteen selected original PNGs were reviewed; the remaining 342 captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "The fixture drives the native Death animation into an intact airborne pose and a coherent collapsed custom-mesh corpse that remains sampled behind the loot overlay; it does not establish ordinary lethal behavior or corpse lifetime after the sampled interval.",
+      "The causal Damaged and Death impact frames are strongly occluded by the foreground hero and bright effects; recovery, airborne death, collapse, and final corpse frames remain readable, and no sampled tearing, detached leg segment, missing surface, floor clipping, or viewport clipping was observed.",
+      "Indirect death, other native attack variants, portrait, collision, extended culling, long-session resource lifetime, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

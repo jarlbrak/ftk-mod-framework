@@ -1,0 +1,165 @@
+{
+  "model": "Mossglass Reliquary",
+  "variant": "jade-v2",
+  "status": "TEXTURE_ONLY_OFFLINE_APPROVED_LIVE_PENDING",
+  "nativeEnemy": "cubeA",
+  "rendererPath": "enJellyCube",
+  "nativeCelScale": 1.1,
+  "visualScaleFactor": 1,
+  "change": "Only runtime slot1 PNG replaced with original periodic whole-image jade texture.",
+  "unchanged": [
+    "GLB positions/normals/indices/UVs/weights/full3jointpalette/IBMs",
+    "slot0 PNG",
+    "Native slot1 scale2/rate.2/phase/emission",
+    "Core and owned-material semantics"
+  ],
+  "assets": [
+    {
+      "file": "../mossglass.glb",
+      "sha256": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+      "bytes": 150316
+    },
+    {
+      "file": "../mossglass.slot0.png",
+      "sha256": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+      "bytes": 562
+    },
+    {
+      "file": "mossglass_jade_v2.slot1.png",
+      "sha256": "eca1a54cb6a8ddf637c2883d275b8ac04b0369d55403db0a50320bc99ec1ff85",
+      "bytes": 11177
+    }
+  ],
+  "priorManifest": {
+    "file": "../manifest.json",
+    "sha256": "84133583d7b6b9d398973c7a02271774c66b2c11f9bb79db6052af74090a0f88",
+    "bytes": 9105
+  },
+  "priorLiveFailure": {
+    "file": "../live-validation-v1.json",
+    "sha256": "f3e26f7c6164c0d351f05fdfa71f8f35ffa5257eeb6f9a237d0d1c71025a867c",
+    "bytes": 19472
+  },
+  "runtimeProfile": {
+    "file": "runtime-profile.json",
+    "sha256": "71ae8105b555c198b08d54c649a28df74664ae6c540846f52642a1a78a71f529",
+    "bytes": 898
+  },
+  "rootReview": {
+    "status": "SELECTED_STUDIO_DIRECTION_APPROVED_FOR_LIVE",
+    "image": {
+      "file": "hero-native-scale2.png",
+      "sha256": "5a1ca80d703369c4963b6ed5ee1d9f6f934b55f4837e8c5c9e9cd4a992c44342",
+      "bytes": 1075977
+    },
+    "finding": "Root viewed jade shell through repeated bands, ivory cage and amber core remain distinct.",
+    "scope": "Offline native-tiling studio only; live appearance remains pending."
+  },
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "9cea35fea53374fa7c626de284d54959b2351d82c3643dbeb14af5ecc6ff5475",
+      "bytes": 2447
+    },
+    {
+      "file": "build_studio.py",
+      "sha256": "8d9ce54911528544fc8578774a843fced5579fd61e0ab1639aaf0d149acbb9a4",
+      "bytes": 1487
+    },
+    {
+      "file": "build_texture.py",
+      "sha256": "bfb63a324ea5664ca85e43ef775fb9809b37e4fbb644d8491452cf008e0f0db0",
+      "bytes": 1276
+    },
+    {
+      "file": "check_reopened.py",
+      "sha256": "93906a8b8588ff579e07ddc9f2bb6ed78c0fde1edc2792757a9a38f6f19707ff",
+      "bytes": 403
+    },
+    {
+      "file": "diagnose_v1_tiling.py",
+      "sha256": "d6e835fedbc1068411d8a399506a56b3e23cf22b2c608de6a0e000df58ff618e",
+      "bytes": 2073
+    },
+    {
+      "file": "finalize_manifest.py",
+      "sha256": "2080f1fdf5e45be15f7b7ce87d04b767d188d380337f9a6905693d57466c7fc6",
+      "bytes": 2125
+    },
+    {
+      "file": "hero-native-scale2.png",
+      "sha256": "5a1ca80d703369c4963b6ed5ee1d9f6f934b55f4837e8c5c9e9cd4a992c44342",
+      "bytes": 1075977
+    },
+    {
+      "file": "mossglass-jade-v2-reopened.glb",
+      "sha256": "bffbd9eff80ce18879654fcb2856817c92222464404871f374171539de25dcd9",
+      "bytes": 150316
+    },
+    {
+      "file": "mossglass-jade-v2-reopened.slot0.png",
+      "sha256": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+      "bytes": 562
+    },
+    {
+      "file": "mossglass-jade-v2-reopened.slot1.png",
+      "sha256": "eca1a54cb6a8ddf637c2883d275b8ac04b0369d55403db0a50320bc99ec1ff85",
+      "bytes": 11177
+    },
+    {
+      "file": "mossglass-jade-v2-reopened.source.json",
+      "sha256": "2b1788995f115def5dba84ab678d4733d376b7f3db2dd531222067ca09a26def",
+      "bytes": 517776
+    },
+    {
+      "file": "mossglass-jade-v2-reopened.validation.json",
+      "sha256": "0bd09bb6c63ddd1bd30c9bd2b405bb65118eadaeaa5cb14a283a77b7d6050b3e",
+      "bytes": 1267
+    },
+    {
+      "file": "mossglass-jade-v2-studio.blend",
+      "sha256": "07d5739c79a179471f15917af539de12836d3f936d01a034323232b7ac39944f",
+      "bytes": 140509
+    },
+    {
+      "file": "mossglass-jade-v2.blend",
+      "sha256": "950691306d65992b82464b2ab0f88dc9556b520cacb3a96287a98ac0ae413e2b",
+      "bytes": 136548
+    },
+    {
+      "file": "mossglass_jade_v2.slot1.png",
+      "sha256": "eca1a54cb6a8ddf637c2883d275b8ac04b0369d55403db0a50320bc99ec1ff85",
+      "bytes": 11177
+    },
+    {
+      "file": "reopened-validation.json",
+      "sha256": "e41c9ef1d764e0850aadfc70ab7cd34b9d11d89d6535c33a5cd7cf33495302b4",
+      "bytes": 845
+    },
+    {
+      "file": "runtime-profile.json",
+      "sha256": "71ae8105b555c198b08d54c649a28df74664ae6c540846f52642a1a78a71f529",
+      "bytes": 898
+    },
+    {
+      "file": "side-native-scale2.png",
+      "sha256": "6a95b447e0658a6347685296dba5755b9af803e68503f306ba073a6afbdf5183",
+      "bytes": 1026160
+    },
+    {
+      "file": "texture-audit.json",
+      "sha256": "c2ec20a903d15d7d61c7ee05b46cb21cc7a2b67e05e527d0d55f982bf1b2b646",
+      "bytes": 614
+    },
+    {
+      "file": "v1-tiling-diagnosis.json",
+      "sha256": "29a6e03be5568d521f3f617f43b29476f728f7a13dcbd08f1823d6e8def58855",
+      "bytes": 2622
+    }
+  ],
+  "limits": [
+    "Actual combat color/scroll readability and portrait require live verification.",
+    "V1 death visibility and lifecycle remain limited.",
+    "Reopened artifact validates scene; runtime intentionally reuses frozen original GLB."
+  ]
+}

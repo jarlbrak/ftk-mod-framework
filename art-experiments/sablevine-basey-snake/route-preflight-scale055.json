@@ -1,0 +1,49 @@
+{
+  "status": "PASS_EXACT_RESOURCE_PREFAB_ROUTE_STATIC_PREFLIGHT",
+  "scope": "Read-only resource-prefab route/profile/asset preflight. No stage, deployment, runtime, visual, motion, or gameplay claim.",
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_sablevine_basey_snake_fit055",
+      "baseEnemy": "snakeJungleA",
+      "resourcePrefab": "enbaseysnake",
+      "gameObjectId": 47960,
+      "celIds": [
+        139865
+      ],
+      "renderer": {
+        "rendererPath": "enSnake_Basey",
+        "sourceRendererId": 121488,
+        "rigProfile": "09971dcb3e6e932452d674055dc8383198719478bea1b8115513fd87101569f4"
+      },
+      "controller": {
+        "controller_path_id": 6002,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "snakeController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 664
+      },
+      "combatProfile": "372a8c83d1aaaa77eabd843bf619a3972af833c1c84bde20178462d7806cc261",
+      "declaredAssets": [
+        {
+          "file": "sablevine-palette.png",
+          "sha256": "8dc990355d08e085e32cbfc65d190aa5449bcbc899e75ae928bbbf1baf0edfbb",
+          "bytes": 12020
+        },
+        {
+          "file": "sablevine.glb",
+          "sha256": "4c030febb8adc4005a8802d25122446a8b825dd06b48e64eed674794e5a6b330",
+          "bytes": 462652
+        }
+      ]
+    }
+  ],
+  "resourcePreflight": {
+    "path": "scratch/resource-enemy-base-preflight.json",
+    "sha256": "9bd8792896468be5e771e4857b0262c7e4ee9cb664d69ba2c444698ba7441296"
+  },
+  "profileDocument": {
+    "path": "art-experiments/sablevine-basey-snake/runtime-profile-scale055.json",
+    "sha256": "96d14347c12b82c820339925205e8feb874cb499625d7ccdd6cad6aba51e1afb"
+  },
+  "assetDirectory": "art-experiments/sablevine-basey-snake"
+}

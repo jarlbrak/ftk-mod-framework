@@ -1,0 +1,73 @@
+{
+  "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+  "stoppedPid": 53830,
+  "reason": "Reviewed additive lifecycle helper b9fc preserving c87 contracts; unchanged Core/content and texture-only Mossglass jade profile398",
+  "helperReview": {
+    "status": "architect_approved_owned_trial_live_gate_pending",
+    "sha256": "b9fc9374607ba550937aa872d6538e960c49cc929a409dc7b1b1e72e8e5f0272",
+    "artifact": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/candidate-material-lifecycle-helper-b9fc9374/FtkRuntimeModelTest.dll",
+    "bytes": 303104,
+    "sourcePins": {
+      "runtime-test/MaterialLifecycleFixture.cs": "8a3d7b43ededf321a0f8be413b0bdaf5cac3687a72512d85a7221246095dfb3e",
+      "runtime-test/MaterialLifecycleTiming.cs": "b6741a8a46ceaa220f87cdbfd83038d1fd7724b75f72a29babf7a750df6bc765",
+      "runtime-test/Plugin.cs": "1e7b38a447c3518416dabd4da1e09df937e017ffd0e98c0206285d6535b623ae",
+      "runtime-test/command.py": "7f6e388a1ac19dea24fcb1bd8772133d2cdfc0155acea42d1937953f702d68ee",
+      "runtime-test/MATERIAL-LIFECYCLE.md": "3fffe60b14905504e63aca2c98ca55fb09068702cd82afe6cf3f7257f8871fea",
+      "material-lifecycle-tests/Program.cs": "c859fd54bd2842ac139a2811955b60a9f7bfd7e0a85d714a55bd110bf521c13c",
+      "material-lifecycle-tests/MaterialLifecycleTests.csproj": "9540f30ab46d24eb1c0dca05fec8c7f0b847c73edb1e4e57cef5e42784f2bd9b"
+    },
+    "includedApprovedMixer": "c87a894ef225e7e89f7809984c68bacb17bffbabeefc4615d4c3b90f3df3793f source unchanged",
+    "tests": {
+      "linkedTimingAssertions": 17,
+      "runtimePython": 115
+    },
+    "build": "Release net35 helper only; 0 warnings/errors",
+    "deployed": false,
+    "review": "ftk_architect verified source pins, 17 linked timing tests PASS; no source blockers"
+  },
+  "stageReceiptSha256": "9e062bba632f55067adbb578d8158dff4632561cb2753eba20d3f36e31ec0067",
+  "old": {
+    "model-test-profiles.json": "733776f5e28cb86c873da51d81292707a1c942361dfcee3b01b1751a184696dc",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65",
+    "BepInEx/plugins/FTKModFramework.dll": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "c87a894ef225e7e89f7809984c68bacb17bffbabeefc4615d4c3b90f3df3793f",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "aba52487088a1cd05e960eb0a29b56273a231bfc5442afb0506586817a9b3265",
+    "BepInEx/plugins/FTKModFramework_content/models/duskquill.glb": "6deaad9c9cb69d18daee583ad2719e2765a5683dd4c28d7ebceb5ae3ae2398a2",
+    "BepInEx/plugins/FTKModFramework_content/models/duskquill_basecolor.png": "ea9122bac7c4cc3476d8340a3663a87022e6b37b821530a201f2a8f63fd8f1bc",
+    "BepInEx/plugins/FTKModFramework_content/models/gloamfin-four-scenario-capture-plan-v1.json": "1229bb59766cc1b5e47bdcb21448d85adeb07290df0c8c60dd1b450b07dbe21b",
+    "BepInEx/plugins/FTKModFramework_content/models/basilight.glb": "6efeaeff8c015cee0d80cfbdc06891186f5a574189b9c7a643fc5f6717be96d9",
+    "BepInEx/plugins/FTKModFramework_content/models/basilight_basecolor.png": "c5e582e1032be9e1eb7ed6cea803f9671bde351f43201aa733ee5f0a32fde263",
+    "BepInEx/plugins/FTKModFramework_content/models/cubea_material_layers_v1.glb": "070ebc92511bd6fb5f70bf0012f1f963aa5ed24dbfa438ddf12c906c398721a8",
+    "BepInEx/plugins/FTKModFramework_content/models/cubea_material_layers_v1.slot0.png": "cd79c9bda05c4dd70aa9de00c2e9b94d0bd2377c88f52162581b051d40e774a5",
+    "BepInEx/plugins/FTKModFramework_content/models/cubea_material_layers_v1.slot1.png": "5dfc75ab538102bd168c9209c7a892a8fcdf9b28e2d949add7d414c3969f8021",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass.glb": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass.slot0.png": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass.slot1.png": "3258757324a7156128f446cddc7b66ffedf320463edd3d503c1179489509b059",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass_jade_v2.slot1.png": null,
+    "model-test-session.json": "10c533b7bf605eef5c094e4aa987a7c267ed2dd945bb502d218f27d4558b85e1",
+    "model-test-registration.json": "c4396195ca43df970378cf4f7d74d405f7dc87368c8314ed68ad12175f013b7a",
+    "model-test-player-registration.json": "2dd8486d72caabff4d28067a14f2b3cdc68f876df2bd5743375e6f257180d457",
+    "BepInEx/LogOutput.log": "5612924018f16ada363ce1a969c85e0b7c7b063bc420fa3887706d031e7ebce1",
+    "player-test.log": "440f65d3578b0cd1ca44af248371ae5505c93561d2f00fd2c2e8293cd572823b",
+    "launch-test.log": "ff47f453e101249d5b20d1ef5b54e9fca4c7a1970eef683e76f057181e897205"
+  },
+  "new": {
+    "model-test-profiles.json": "ceebafb92fba85199b087e20e74b76b4cca3c49d6a3322536ccb248c950b68ae",
+    "model-test-player-profiles.json": "c108d2674e04ef27366cd2683c22b20d0b6b0129c29bd5d80687ae411503ea65",
+    "BepInEx/plugins/FTKModFramework.dll": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+    "BepInEx/plugins/FtkRuntimeModelTest.dll": "b9fc9374607ba550937aa872d6538e960c49cc929a409dc7b1b1e72e8e5f0272",
+    "BepInEx/plugins/FtkRuntimeModelTestContent.dll": "aba52487088a1cd05e960eb0a29b56273a231bfc5442afb0506586817a9b3265",
+    "BepInEx/plugins/FTKModFramework_content/models/duskquill.glb": "6deaad9c9cb69d18daee583ad2719e2765a5683dd4c28d7ebceb5ae3ae2398a2",
+    "BepInEx/plugins/FTKModFramework_content/models/duskquill_basecolor.png": "ea9122bac7c4cc3476d8340a3663a87022e6b37b821530a201f2a8f63fd8f1bc",
+    "BepInEx/plugins/FTKModFramework_content/models/gloamfin-four-scenario-capture-plan-v1.json": "1229bb59766cc1b5e47bdcb21448d85adeb07290df0c8c60dd1b450b07dbe21b",
+    "BepInEx/plugins/FTKModFramework_content/models/basilight.glb": "6efeaeff8c015cee0d80cfbdc06891186f5a574189b9c7a643fc5f6717be96d9",
+    "BepInEx/plugins/FTKModFramework_content/models/basilight_basecolor.png": "c5e582e1032be9e1eb7ed6cea803f9671bde351f43201aa733ee5f0a32fde263",
+    "BepInEx/plugins/FTKModFramework_content/models/cubea_material_layers_v1.glb": "070ebc92511bd6fb5f70bf0012f1f963aa5ed24dbfa438ddf12c906c398721a8",
+    "BepInEx/plugins/FTKModFramework_content/models/cubea_material_layers_v1.slot0.png": "cd79c9bda05c4dd70aa9de00c2e9b94d0bd2377c88f52162581b051d40e774a5",
+    "BepInEx/plugins/FTKModFramework_content/models/cubea_material_layers_v1.slot1.png": "5dfc75ab538102bd168c9209c7a892a8fcdf9b28e2d949add7d414c3969f8021",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass.glb": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass.slot0.png": "59aa10898b65f87ceb85389e7154bbac83e67d2c464911442ad2ae9ec12a6269",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass.slot1.png": "3258757324a7156128f446cddc7b66ffedf320463edd3d503c1179489509b059",
+    "BepInEx/plugins/FTKModFramework_content/models/mossglass_jade_v2.slot1.png": "eca1a54cb6a8ddf637c2883d275b8ac04b0369d55403db0a50320bc99ec1ff85"
+  }
+}

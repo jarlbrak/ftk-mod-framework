@@ -1,0 +1,94 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/cinderwing-bat/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-568c5bf7a73a490bb941f890f7a9bae5/case-result.json",
+  "visualReview": "scratch/model-route-896faa557db56261-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/cinderwing-bat/cinderwing_rigged.glb",
+    "art-experiments/cinderwing-bat/cinderwing_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/cinderwing-bat/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-896faa557db56261-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-e7f32ac455e043a0848a7ba7b29f3cac/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-e7f32ac455e043a0848a7ba7b29f3cac/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attacks",
+      "scope": "Settled idle and exact native enemy AttackProf and AttackCrit capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBat01",
+        "mesh": "ftkmf_glb_cinderwing_rigged.glb",
+        "boneSignature": "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+      }
+    },
+    "attack": {
+      "label": "ordinary-hit-and-native-retaliation",
+      "scope": "Ordinary no-focus player attack, hit response, recovery, and a later exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBat01",
+        "mesh": "ftkmf_glb_cinderwing_rigged.glb",
+        "boneSignature": "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-animated-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBat01",
+        "mesh": "ftkmf_glb_cinderwing_rigged.glb",
+        "boneSignature": "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Cinderwing",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "batA",
+    "nativeChassis": "batA",
+    "rendererPaths": [
+      "enBat01"
+    ],
+    "sourceRendererIds": [
+      121104
+    ],
+    "binding": {
+      "rendererPath": "enBat01",
+      "mesh": "ftkmf_glb_cinderwing_rigged.glb",
+      "boneSignature": "b679ad6b7c78ab349179c3f7babca9077c01d1bb300ff9f047433f44d7236c16"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native batA / enBat01 / renderer 121104 source assignment only; no sibling source route or topology receives credit.",
+      "The ordinary no-focus hit reduced the same target from 58 HP to 48 HP; death used the separate explicit KillSingle fixture at 48 HP and is not ordinary lethal-damage evidence.",
+      "Twenty-two selected original PNGs were reviewed; the remaining 338 retained capture frames and generated videos are preserved evidence but were not individually reviewed.",
+      "The fixture death completed all 120 requested frames through batDeath with m_DoRagdoll=false and zero rigid bodies; this is animated death evidence, not ragdoll proof, and no corpse lifetime beyond the sampled window is claimed.",
+      "The exact renderer stayed active, enabled and visible in all 360 retained frames; native combat UI, bright attack effects, foreground hero overlap, loot overlay, depth blur and camera motion limit fine inspection.",
+      "One native Collect reached strict Ready at level 0 room 2; broader campaign progression was not exercised.",
+      "Other controller clips, sibling bat sources, portraits, collision, extended culling, long-session resource lifetime and final art-direction approval remain outside this archive."
+    ]
+  }
+}

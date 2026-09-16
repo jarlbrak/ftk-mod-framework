@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "asset": "Cinderwing",
+  "iteration": "native-scale regression; unchanged geometry",
+  "status": "native-scale regression PASS in reviewed views; prototype art remains limited",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "b3478c0c658f47c6a3ba82b94b9a6f2a",
+    "case": "64d1ffeb67064c24a23e03c4bf69f694",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_cinderwing",
+    "class": "ftkmf_modeltest_player_blacksmith_female",
+    "profile": {
+      "key": "ftkmf_modeltest_cinderwing",
+      "baseEnemy": "batA",
+      "displayName": "Cinderwing",
+      "combatProfile": "cde5b6f7bf74a33423b7a090c747211510ed4abe43e5ff491cfdff8bf4d58704",
+      "renderers": [
+        {
+          "rendererPath": "enBat01",
+          "glbFile": "cinderwing_rigged.glb",
+          "textureFile": "cinderwing_basecolor.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "6a0e012c9250ac234e3c0e1808a471c79caca807a34a70a1ffa45a6f1d73fd99",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkSha256": "9e533f894a2a6efa43125e89869ecbdca668eaa53a8cf44c3e6bbb632b4c4708",
+  "helperVersionPrefix": "5ec62a33",
+  "assetHashes": {
+    "cinderwing_rigged.glb": "9c0083c623129d073a69512accb409423c1fa6ab1c830729815bd4954d06deb5",
+    "cinderwing_basecolor.png": "280feb8ae2f83da240e25fb0261b8c9ac0c38456a6a8746e56817d0a74df4040"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-64d1ffeb67064c24a23e03c4bf69f694/journal.jsonl",
+    "sha256": "1947fb3728b6836b6efdc856912d496263c846f0af94d1e9fb87646c636342cd"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "047f588a5e194fe5804fb46ad0eaad33",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/17eff3318a484ae096bf3015d5555717.json",
+        "sha256": "ed3d11f29be460994580853656151a7a99338efb42aab28d6f6e0b55bcf6dc40"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-047f588a5e194fe5804fb46ad0eaad33/journal.jsonl",
+        "sha256": "ff84b27218373e938d4f85becb1c76e811dab7920e98294840d8eda0a4f113ee"
+      },
+      "summary": {
+        "path": "art-experiments/cinderwing-bat/live-native-scale/attack-summary.json",
+        "sha256": "d60f39db147df58b9d4f840a704c1003ea0331aa2c1cc20a9e6553466ae6c23a"
+      },
+      "video": {
+        "path": "art-experiments/cinderwing-bat/live-native-scale/attack.mp4",
+        "sha256": "d6c3b4cc48e0f7477847a09fd59ea8b4de903a2ce986161b063b8917300fd24a"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/cinderwing-bat/live-native-scale/attack-0000.png",
+          "sha256": "f7486ea0e7f037141cda6083416a0847bead4e103e55f1b65666b76b95260735"
+        },
+        {
+          "path": "art-experiments/cinderwing-bat/live-native-scale/attack-0050.png",
+          "sha256": "f965b7cd0a33328dbb7457bd7b066de1020ad1a5ee7ee63c787abdf9e12855b0"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908340454101562,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "batFlySlow"
+          ],
+          "sampleCount": 100,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 39,
+              "firstNormalizedTime": 128.54017639160156,
+              "lastNormalizedTime": 133.90255737304688,
+              "gameSeconds": 3.57501220703125
+            },
+            {
+              "firstFrame": 46,
+              "lastFrame": 68,
+              "firstNormalizedTime": 0.1467619240283966,
+              "lastNormalizedTime": 3.171762466430664,
+              "gameSeconds": 2.01666259765625
+            },
+            {
+              "firstFrame": 83,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.4528806209564209,
+              "lastNormalizedTime": 5.40287971496582,
+              "gameSeconds": 3.3000030517578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "batAttackProf"
+          ],
+          "sampleCount": 6,
+          "occurrences": [
+            {
+              "firstFrame": 40,
+              "lastFrame": 45,
+              "firstNormalizedTime": 0.16042909026145935,
+              "lastNormalizedTime": 0.9243177771568298,
+              "gameSeconds": 0.4583282470703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "attackCrit_bat"
+          ],
+          "sampleCount": 14,
+          "occurrences": [
+            {
+              "firstFrame": 69,
+              "lastFrame": 82,
+              "firstNormalizedTime": 0.07840035110712051,
+              "lastNormalizedTime": 0.9950671195983887,
+              "gameSeconds": 1.1916656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "19f768fcbb514f9cade77100cc0e5930",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/3dc33ff3fa944f179c221ce2d6a6c72e.json",
+        "sha256": "c55646baf4268074b8b0f1927aed9e340ab77e2986ada0f71a2a97e72a7720d0"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-19f768fcbb514f9cade77100cc0e5930/journal.jsonl",
+        "sha256": "1adda599af8a834368b8f73da9376f820a4c5c5ec2ba59552370f973732704fb"
+      },
+      "summary": {
+        "path": "art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit-summary.json",
+        "sha256": "49f6fe16b08aeb2661ad0eead14633dce1e7d4386473d5784c04c082ac33cc19"
+      },
+      "video": {
+        "path": "art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit.mp4",
+        "sha256": "65584c6e0d34db6b49e1322044b4849cdd085d0d01e5df5b145c023d3541eb7e"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/cinderwing-bat/live-native-scale/nonlethal-hit-0030.png",
+          "sha256": "8e9ef04dcbe5471b9a2a69db36d8077cffb2ccf5b644e957206f18aeccb7fa64"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        50
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "batFlySlow"
+          ],
+          "sampleCount": 98,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 128.94705200195312,
+              "lastNormalizedTime": 132.24697875976562,
+              "gameSeconds": 2.1999969482421875
+            },
+            {
+              "firstFrame": 33,
+              "lastFrame": 65,
+              "firstNormalizedTime": 0.1634610891342163,
+              "lastNormalizedTime": 4.5634613037109375,
+              "gameSeconds": 2.9333343505859375
+            },
+            {
+              "firstFrame": 80,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.4528806209564209,
+              "lastNormalizedTime": 5.8153791427612305,
+              "gameSeconds": 3.5749969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "batTakeHit"
+          ],
+          "sampleCount": 8,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 32,
+              "firstNormalizedTime": 0.2042856514453888,
+              "lastNormalizedTime": 0.9192853569984436,
+              "gameSeconds": 0.6416778564453125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "attackCrit_bat"
+          ],
+          "sampleCount": 14,
+          "occurrences": [
+            {
+              "firstFrame": 66,
+              "lastFrame": 79,
+              "firstNormalizedTime": 0.07840035110712051,
+              "lastNormalizedTime": 0.9950671195983887,
+              "gameSeconds": 1.1916656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "9d8a1ea0451d4ffdb7d30cb05fc2a840",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/6b42328aebe14025989e2ff5dd37de7f.json",
+        "sha256": "00a96efc1a894f31a6e5a3ff955b4c1da3ccc7f051d6504dc31f47b6d6765069"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-9d8a1ea0451d4ffdb7d30cb05fc2a840/journal.jsonl",
+        "sha256": "628850b7bb19a4a2717656d6f76158609e6240434e692903118c6a76cb97f233"
+      },
+      "summary": {
+        "path": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death-summary.json",
+        "sha256": "12de5ad59267110852b7b602148b0c9481d85f9eaa5a377d4a0cf10ff10a7019"
+      },
+      "video": {
+        "path": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death.mp4",
+        "sha256": "53f304017b1c993718f9acacda06e31c2cbe7f1c70f64c1336c4fae15fe3108c"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death-0040.png",
+          "sha256": "b5881161ab817435000b56bbf15628186ca45136e6f76235b5162a927baaf4f6"
+        },
+        {
+          "path": "art-experiments/cinderwing-bat/live-native-scale/kill-fixture-death-0060.png",
+          "sha256": "823186ce88361b1c99def4caeb2c41d95f67ff3de5bd2ffe6d698e94d69f3e7a"
+        }
+      ],
+      "hpBeforeAfter": [
+        50,
+        0
+      ],
+      "frameCount": 120,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "batFlySlow"
+          ],
+          "sampleCount": 24,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 23,
+              "firstNormalizedTime": 104.32776641845703,
+              "lastNormalizedTime": 107.49019622802734,
+              "gameSeconds": 2.10833740234375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "batDeath"
+          ],
+          "sampleCount": 96,
+          "occurrences": [
+            {
+              "firstFrame": 24,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13750001788139343,
+              "lastNormalizedTime": 13.19998836517334,
+              "gameSeconds": 8.70831298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Small bat remains readable and onscreen in sampled views. Native effects obscure parts of attack; hero partially obscures hit. Death settles with wings intact.",
+    "limits": "Small body/details, occlusion, complete animation endpoints and culling/all-controller variants remain unverified."
+  },
+  "timing": "Offline fixed-step gameplay. Videos replay120 screenshots at12fps; not real-time performance evidence.",
+  "progress": {
+    "collect": {
+      "path": "scratch/cinderwing-scale-collect1.json",
+      "sha256": "44484b2befe13873a0fcf9c6be760681ad361d49905970954067343e4f68e246"
+    },
+    "afterCollect": {
+      "path": "scratch/cinderwing-scale-after-collect1.json",
+      "sha256": "0d0014c05eea645e8807852845561b95e282bbaee8544711bb1967ebec34694c"
+    },
+    "result": "one guarded Collect; strict Ready level0 room2"
+  },
+  "historicalEvidencePreserved": "live-validation.json retains old-framework partial92-frame death.",
+  "scale": {
+    "requestedFactor": 1,
+    "nativePrefabRootLocalScale": [
+      0.7799999713897705,
+      0.7799999713897705,
+      0.7799999713897705
+    ],
+    "observedRendererWorldAxisLengths": [
+      0.7800000033748864,
+      0.7799999713897705,
+      0.7800000033748864
+    ],
+    "inventory": {
+      "path": "scratch/mirewarden-game/model-test-output/b73cc208beb94c7fb74c1cb709ac93dc.json",
+      "sha256": "8356f7113e52054ee036652090538e0afbabcd7514567bd830f1271f80dcd66d"
+    },
+    "limit": "World axis measurement is distinct from a directly recorded CEL local scale."
+  }
+}

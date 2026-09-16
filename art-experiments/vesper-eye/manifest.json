@@ -1,0 +1,183 @@
+{
+  "name": "Vesper Eye",
+  "native_chassis": "beholderA",
+  "art_status": "Original multipart model with canonical V4 exact-source binding, scoped motion, corrected-material and gameplay acceptance; remaining limits explicit",
+  "native_surface_copied": false,
+  "assignments": [
+    {
+      "renderer_path": "EyeBody",
+      "reference_renderer": 121031,
+      "glb": "vesper_body.glb",
+      "texture": "vesper_basecolor.png"
+    },
+    {
+      "renderer_path": "EyeBody/EyeEye",
+      "reference_renderer": 121210,
+      "glb": "vesper_eye.glb",
+      "texture": "vesper_basecolor.png"
+    }
+  ],
+  "native_forward": "+UnityZ, verified from native separate eye front extent and body rear extent before authoring",
+  "weight_rationale": "Original orb, ivory lid plates and copper ridges are rigid to body Root_M; entire separate globe/iris/pupil is rigid to its actual eyeball bone. Each renderer retains its own complete native two-bone palette and exact inverse binds; no native surface or weight values copied.",
+  "remaining": [
+    "Visible custom death deformation and ordinary lethal damage",
+    "Other controller clips, portrait, extended culling, collision, resource lifetime, natural-arena behavior, unperturbed performance and finished-art approval"
+  ],
+  "parts": [
+    {
+      "name": "vesper_body",
+      "vertices": 1716,
+      "triangles": 572,
+      "palette_joints": 2,
+      "max_bind_rest_error": 2.220446049250313e-16,
+      "blender_reopen_max_bind_rest_error": 2.220446049250313e-16,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -1.059999942779541,
+        0.7400000095367432,
+        -1.2999999523162842
+      ],
+      "bind_bounds_max": [
+        1.059999942779541,
+        2.8799052238464355,
+        0.746999979019165
+      ],
+      "blender_roundtrip_glb_sha256": "a3edb6cb1d8fc68fb5910f2966091719e480c6a8761358dc29097699b02a0761"
+    },
+    {
+      "name": "vesper_eye",
+      "vertices": 1488,
+      "triangles": 496,
+      "palette_joints": 2,
+      "max_bind_rest_error": 1.52098811273042e-48,
+      "blender_reopen_max_bind_rest_error": 1.52098811273042e-48,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.7599999904632568,
+        1.1238000392913818,
+        0.02104569785296917
+      ],
+      "bind_bounds_max": [
+        0.7599999904632568,
+        2.4762001037597656,
+        0.9591679573059082
+      ],
+      "blender_roundtrip_glb_sha256": "20c197055263dd8a3dd68827f925c7cf4a0409e2707aefb322a5c3405f5c4730"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121031,
+      "local_reference_path": "scratch/skeleton-audit/121031/reference.npz",
+      "sha256": "412b6ee5a0ec6c20b9286e0027ee5b0be8a0e37f3964ce6288a775425ccc7ebc"
+    },
+    {
+      "renderer_id": 121210,
+      "local_reference_path": "scratch/skeleton-audit/121210/reference.npz",
+      "sha256": "18306d4fd9a29a99a5382647de3f790b0c357af70cb2f29e6963ec471eaa7e9e"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for both parts",
+    "saved_blender_reopen_export": "pass for both parts",
+    "native_bind_bounds": "both original surfaces contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "Parent reviewed hero: orb/eyelid/pupil silhouette reads clearly; approved for live testing only",
+    "live_binding": "pass for exact beholderA EyeBody and EyeBody/EyeEye source assignment in canonical V4",
+    "live_animation": "scoped V4 pass for sampled idle, eye_attack1, eye_attack2, eye_damage and inactive-renderer fixture cleanup; visible custom death deformation remains unverified",
+    "live_material_and_culling": "both private materials pass corrected texture and emission readback in V4; extended culling remains pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "e2394d5ad27c476efc27baa05d9ca8e2c56472c3c68a99a0b5103fbaee05ed92",
+      "bytes": 8456
+    },
+    "build_blender.py": {
+      "sha256": "191dc8694113ea924bd231fabafb4df30e6e38b1c105e42d4cde3685bac5baf5",
+      "bytes": 5544
+    },
+    "build_geometry.py": {
+      "sha256": "a8ed36df945ce369c1faa3d2871b0cb37d6ce885cfae41a81756b1371a42bad1",
+      "bytes": 7463
+    },
+    "finalize_manifest.py": {
+      "sha256": "8ead65b1a9d7f23705a76620cda64b88e464054cfd51e5d3e64e6c336574d4d0",
+      "bytes": 2437
+    },
+    "hero.png": {
+      "sha256": "f23655f93eaa6fa8250dd879b9230fe03f1186d95067720e9bd32c51f2116d35",
+      "bytes": 1044598
+    },
+    "runtime-profile.json": {
+      "sha256": "29fff38a9fb57f571fe197d53f981b7fc036591a0735b6891f1ed8fb279c9f8d",
+      "bytes": 661
+    },
+    "side.png": {
+      "sha256": "71308d295915238eff69113110057536f1f4be81eeccdabc628f8b7aef6ae0b9",
+      "bytes": 1038590
+    },
+    "vesper-studio.blend": {
+      "sha256": "c1d7dfdbf2844c404c70a6f0382b0fec1a9e88a1679cd29f0c34fd3fe292bf74",
+      "bytes": 126105
+    },
+    "vesper_basecolor.png": {
+      "sha256": "e5f165bafbe3110bcb71e8cbd8d365758691e39f9343a90d209e4442632b5e38",
+      "bytes": 261
+    },
+    "vesper_body.blend": {
+      "sha256": "f7cf4ab612923994e4c3c0f72c38d41af67edddf1a010e4cf3199f1741ced342",
+      "bytes": 113825
+    },
+    "vesper_body.glb": {
+      "sha256": "a8d9ea5c8265510372a84ae5b84b8b6ae5087e07db26308e146af0666c28cde0",
+      "bytes": 101176
+    },
+    "vesper_body.pieces.json": {
+      "sha256": "e7b598c252a60c5e4c9e6fb9b120db9eaa2cdbbbe8b706631616dd024bc2e521",
+      "bytes": 761
+    },
+    "vesper_body.source.json": {
+      "sha256": "8ec9bf447b76a0c7bc7516d218ac73c06e83783a76bf8329422e9dce6cea62a9",
+      "bytes": 276085
+    },
+    "vesper_body.validation.json": {
+      "sha256": "908f7f8d0e576acc1b0f492c2913390009732dc7f27900a49823bf094a57c6c3",
+      "bytes": 778
+    },
+    "vesper_eye.blend": {
+      "sha256": "22019c50cd99b54b6df7f00c6c3099b7e9ef2a9b928004a088dcd2cb25f93c07",
+      "bytes": 111139
+    },
+    "vesper_eye.glb": {
+      "sha256": "0afcd61cde59791bc05912b67588f45f528f176fc31a58d761dc58708ca2066b",
+      "bytes": 87956
+    },
+    "vesper_eye.pieces.json": {
+      "sha256": "f63092712a78080236b933a35b8ab5744b5f61207b175bfb5a5b8f6653a1a913",
+      "bytes": 898
+    },
+    "vesper_eye.source.json": {
+      "sha256": "f85380e300c833e99555c52123a9fb48f2dd40acb9f8efb6acf71d6c3dbe64d3",
+      "bytes": 228784
+    },
+    "vesper_eye.validation.json": {
+      "sha256": "7ba720d04a35d6ed2f97220eef317b3d56fcae279750bfa907462298fab748f9",
+      "bytes": 778
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/vesper-eye/live-validation-v1.json",
+    "sha256": "09ad710652ba53adef05518d1cd16ff31e98b17aed84bda4244c829c6671562d"
+  },
+  "live_v2": {
+    "path": "art-experiments/vesper-eye/live-validation-v2.json",
+    "sha256": "f1b1c06433625ba1486f3f5efe6b21b1f5352d093b828361d40336fef2f25aff"
+  },
+  "live_v3": {
+    "path": "art-experiments/vesper-eye/live-validation-v3/validation.json",
+    "sha256": "4e70e6b6c86984c121caf4a739ef3ad156f7248b73fe06a61606022212b1188d"
+  },
+  "live_v4": {
+    "path": "art-experiments/vesper-eye/live-validation-v4/validation.json",
+    "sha256": "dfa8b431f21d5969da9356114b0967b16cbe26a91d1d4615fd1695c7f1db7872"
+  }
+}

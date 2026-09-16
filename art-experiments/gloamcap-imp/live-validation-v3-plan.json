@@ -1,0 +1,115 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/gloamcap-imp/live-validation-v3",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-fcbabe4751ac4c3dab804be72ef82ac7/case-result.json",
+  "visualReview": "scratch/model-route-db2a524a5bc700ea-resourceprefab-root-review.json",
+  "assetFiles": [
+    "art-experiments/gloamcap-imp/gloamcap.glb",
+    "art-experiments/gloamcap-imp/gloamcap_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/gloamcap-imp/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-db2a524a5bc700ea-resourceprefab-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-e29cc0fb17ce4d439746b851bc280872/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-e29cc0fb17ce4d439746b851bc280872/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-two-native-attacks",
+      "scope": "Settled Imp idle and two exact native enemy attack captures.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBaseyImp",
+        "mesh": "ftkmf_glb_gloamcap.glb",
+        "boneSignature": "455829c18e8514b56ff76611cb48b0962646dadc987d56f39aa8c889f8af3e70"
+      }
+    },
+    "attack-attempt-1": {
+      "label": "ordinary-dodge-trial-1-and-native-counterattack",
+      "scope": "First ordinary no-focus player attack trial, native Imp dodge, and exact native enemy counterattack; preserve its zero-loss outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBaseyImp",
+        "mesh": "ftkmf_glb_gloamcap.glb",
+        "boneSignature": "455829c18e8514b56ff76611cb48b0962646dadc987d56f39aa8c889f8af3e70"
+      }
+    },
+    "attack-attempt-2": {
+      "label": "ordinary-dodge-trial-2-and-two-native-counterattacks",
+      "scope": "Second ordinary no-focus player attack trial, native Imp dodge, and two exact native enemy counterattacks; preserve its zero-loss outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBaseyImp",
+        "mesh": "ftkmf_glb_gloamcap.glb",
+        "boneSignature": "455829c18e8514b56ff76611cb48b0962646dadc987d56f39aa8c889f8af3e70"
+      }
+    },
+    "attack-attempt-3": {
+      "label": "ordinary-hit-heavy-damage-recovery-and-native-counterattack",
+      "scope": "Third ordinary no-focus player attack trial, successful nonlethal hit, native heavy-damage response, recovery, and exact native enemy counterattack.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBaseyImp",
+        "mesh": "ftkmf_glb_gloamcap.glb",
+        "boneSignature": "455829c18e8514b56ff76611cb48b0962646dadc987d56f39aa8c889f8af3e70"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-physical-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enBaseyImp",
+        "mesh": "ftkmf_glb_gloamcap.glb",
+        "boneSignature": "455829c18e8514b56ff76611cb48b0962646dadc987d56f39aa8c889f8af3e70"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3",
+    "displayName": "Gloamcap Trickster",
+    "sourceKind": "resource_prefab_override",
+    "nativeEnemy": "impA",
+    "nativeChassis": "impA",
+    "resourcePrefab": "enbaseyimp",
+    "rendererPaths": [
+      "enBaseyImp"
+    ],
+    "sourceRendererIds": [
+      121117
+    ],
+    "binding": {
+      "rendererPath": "enBaseyImp",
+      "mesh": "ftkmf_glb_gloamcap.glb",
+      "boneSignature": "455829c18e8514b56ff76611cb48b0962646dadc987d56f39aa8c889f8af3e70"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact impA / resource prefab enbaseyimp / enBaseyImp / renderer 121117 assignment only; sibling Imp rows, direct enemy routes, and the Mirewarden troll route do not receive credit.",
+      "The first two ordinary no-focus attempts left target health at 58 and visibly exercised dodge_imp; the third reduced the same target from 58 HP to 48 HP and supplies the required nonlethal hit and damageHeavy_imp recovery evidence.",
+      "Death reduced health from 48 to 0 through the separate explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Twenty-nine selected original PNGs were reviewed across all five accepted captures; the remaining 571 retained capture frames and generated videos are pinned evidence but were not individually reviewed.",
+      "The fixture drives deathHeavy_imp with m_DoRagdoll true; all 11 recorded rigidbodies become nonkinematic at frame 26, the physical body reaches the floor by frame 45, and remains partly visible through frame 119. This establishes only the sampled fixture window, not later corpse lifetime.",
+      "The exact renderer stayed active, enabled, visible, and identity-stable in all 600 retained frames; native combat UI, the foreground hero, bright effects, particles, loot overlay, depth blur, and camera motion limit fine inspection.",
+      "One guarded native Collect action reached strict Ready at level 0 room 2; broader campaign progression was not exercised.",
+      "The native grey50 Standard material uses the authored base-color texture with emission disabled, zero emission color, and no emission map; alternate shaders, clone independence, and long-session material lifetime remain outside this archive.",
+      "Other Imp controller clips and proficiencies, sibling sources, portraits, collision, extended culling, full campaign completion, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

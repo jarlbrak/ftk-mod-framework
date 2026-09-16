@@ -1,0 +1,88 @@
+{
+  "status": "SETUP_STOPPED_BEFORE_COMBAT",
+  "session": "dffaaf037f494dce9430a2bf6f1351e4",
+  "enemy": "ftkmf_modeltest_reefstrider",
+  "catalogSha256": "b52196b3c1928f35c76188c17e8b135c5cdbbedfa1fa3ecbc6a484b29acc34d6",
+  "causeObserved": "StoryQuestMessage present after FloodedCrypt entry; zero combatants; exact-enemy readiness wait timed out.",
+  "freshObservation": {
+    "phase": "modal",
+    "combat": {
+      "active": false,
+      "liveCombatants": 0,
+      "currentEnemyFid": {
+        "turnIndex": 0,
+        "photonId": 0
+      },
+      "whoseTurn": null,
+      "heroTurnReady": false,
+      "readyParts": {
+        "initialized": false,
+        "fsmState": "",
+        "actingFid": null
+      },
+      "enemies": [],
+      "liveEnemies": 0,
+      "stuck": false,
+      "winningPlayerFid": {
+        "turnIndex": 0,
+        "photonId": 0
+      },
+      "fightOrder": [],
+      "abilities": [],
+      "driver": null
+    },
+    "signals": {
+      "inCombat": false,
+      "modalOpen": true,
+      "modalType": "StoryQuestMessage",
+      "choiceOpen": false,
+      "allDead": false,
+      "victoryShowing": false,
+      "warnings": [],
+      "victoryArmed": false
+    }
+  },
+  "disposition": "No action retried, no story callbacks forced in dungeon. Source sequencing audit pending.",
+  "limits": [
+    "No live binding, appearance, animation, death or gameplay acceptance for original Reefstrider.",
+    "This is a setup failure, not an observed model defect."
+  ],
+  "files": [
+    {
+      "source": "scratch/reefstrider-first-stage-result.txt",
+      "path": "reefstrider-first-stage-result.txt.gz",
+      "sourceSha256": "4fd959b24bf1b1a247ae25197ab3d5d31a79463d83fdb4bd70524609b87efbd1",
+      "sha256": "092a91c163f8c10fdc6c7c0795928290352a5c844831048195d22145f47d05ed"
+    },
+    {
+      "source": "scratch/reefstrider-stopped-story-state.json",
+      "path": "reefstrider-stopped-story-state.json.gz",
+      "sourceSha256": "d7731f62b2a20841ebbcc4ae292dc92a663c090d32628f9000d5e38a57201a1a",
+      "sha256": "13d7259662e879019f3e739b279bcc53f7410ba1bde0a07c903966fc0326239f"
+    },
+    {
+      "source": "scratch/reefstrider-startup-evidence.json",
+      "path": "reefstrider-startup-evidence.json.gz",
+      "sourceSha256": "5127bdbb234bc5615246782e107b0bfd0d3bed539f7717256a3f7b2c540176a3",
+      "sha256": "04ff57f3e4c770da3abf4dfa01c56c3f8743c5e6f13bc9982b5169d59f94a340"
+    },
+    {
+      "source": "scratch/reefstrider-deployment-result.json",
+      "path": "reefstrider-deployment-result.json.gz",
+      "sourceSha256": "4490c289cde2e2946888000c7946d778542754200b9767dc3b8fd90cd581d1a1",
+      "sha256": "224cd0c82220b87ab42139e2e25e3d6f1607ea9b96bc397e172ed70495d44a5e"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-session.json",
+      "path": "model-test-session.json.gz",
+      "sourceSha256": "2389619bde58b2a618d0108af2964a413f39f0833c2ecce010729bb84a40be23",
+      "sha256": "2aeafd5f466c56d1bab9e48efc64a374539fac7a3af49d0b575324dcd6ccb777"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-272d16f72153450db398aa3dcf353130/journal.jsonl",
+      "path": "journal.jsonl.gz",
+      "sourceSha256": "a3b1346d86451f1bc4c8720c6fa70ea69b1ac088b930535750c4f640bdd4acdf",
+      "sha256": "a716fa374e94b199a04c694648db4ec612299222e01e40288854b0f824eceb27"
+    }
+  ]
+}

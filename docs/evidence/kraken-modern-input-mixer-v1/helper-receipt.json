@@ -1,0 +1,22 @@
+{
+  "status": "architect_approved_owned_trial_live_gate_pending",
+  "artifact": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/candidate-modern-mixer-helper-c87a894e/FtkRuntimeModelTest.dll",
+  "sha256": "c87a894ef225e7e89f7809984c68bacb17bffbabeefc4615d4c3b90f3df3793f",
+  "bytes": 281600,
+  "sourcePins": {
+    "tools/ai-model-pipeline/runtime-test/KrakenModernMixerFixture.cs": "8e074a234b8c0d6d3f12222a828bb66177b4cc539e34324eb285eec1fb8e4ed9",
+    "tools/ai-model-pipeline/runtime-test/KrakenControllerFixture.cs": "14d16289499300b91d7d5ffc92474d3b72063976eeb9bb00c5675a41fabffacc",
+    "tools/ai-model-pipeline/verify_kraken_modern_mixer.py": "b24a727dcc8725bc193a755110a940dcfba3850f918a2ab9936f0806711db59b",
+    "tools/ai-model-pipeline/test_verify_kraken_modern_mixer.py": "abf397dbbbe15ab566addd4f633dba1f7521c9fed6c05330630c8ef69f7cdde4",
+    "tools/ai-model-pipeline/runtime-test/KRAKEN-MODERN-MIXER.md": "d9b5810e3734572c23e2b4c3f166ffc982d3801adabfd64044fade4d2e73f3b5"
+  },
+  "build": "Release net35, 0 warnings / 0 errors; helper only",
+  "tests": {
+    "runtimePython": 115,
+    "focusedMixer": 10,
+    "krakenVerifierRegression": 66
+  },
+  "deployed": false,
+  "boundary": "Owned input experiment only; numerical native equivalence not observed.",
+  "review": "ftk_architect: no source blockers; independently 10 tests PASS; shipped Newtonsoft float/double round-trip confirmed"
+}

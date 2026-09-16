@@ -1,0 +1,8 @@
+"""Independent orientation of closed original pieces and native bind-bounds containment."""
+import json,numpy as np
+from pathlib import Path
+O=Path(__file__).resolve().parent;R=O.parent.parent;d=json.loads((O/'rustpetal.source.json').read_text());p=np.array(d['positions']);parts=json.loads((O/'rustpetal.pieces.json').read_text());rows=[]
+for q in parts:
+ if q.get('openSurface'):continue
+ v=p[q['vertex_start']:q['vertex_start']+q['vertex_count']].reshape(-1,3,3);volume=float(np.einsum('ij,ij->i',v[:,0],np.cross(v[:,1],v[:,2])).sum()/6);assert volume>0,q;rows.append(dict(piece=q['name'],signedVolume=volume))
+ref=np.load(R/'scratch/plant-d-native-topology-analysis/reference-121537/reference.npz');assert (p.min(0)>=ref['positions'].min(0)).all() and(p.max(0)<=ref['positions'].max(0)).all();used=sorted(set(j for js,ws in zip(d['joints'],d['weights'])for j,w in zip(js,ws)if w>0));r=dict(status='PASS_ORIGINAL_CLOSED_PIECES_OUTWARD_AND_BIND_BOUNDS',pieceVolumes=rows,nativeBoundsContained=True,boundsMin=p.min(0).tolist(),boundsMax=p.max(0).tolist(),nativeBoundsMin=ref['positions'].min(0).tolist(),nativeBoundsMax=ref['positions'].max(0).tolist(),boneCount=len(d['bone_names']),weightedBones=[d['bone_names'][i]for i in used],unweightedBones=[n for i,n in enumerate(d['bone_names'])if i not in used],method='Each authored tube/ellipsoid is a capped closed piece. Positive signed volume checked separately from triangle-normal agreement. Separate pieces intentionally overlap at joints; this is not a watertight-union claim.');(O/'surface-bounds-audit.json').write_text(json.dumps(r,indent=2)+'\n')

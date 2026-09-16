@@ -1,0 +1,126 @@
+{
+  "schema": "ftkmf.kraken-production-adapter-evidence.v1",
+  "status": "production_observation_campaign_satisfied",
+  "route": {
+    "topologyGroup": "6a28ac3cf4523c24",
+    "sourceKind": "resource_prefab_override",
+    "nativeEnemy": "krakenHead",
+    "resourcePrefab": "enkrakenhead",
+    "registeredEnemy": "ftkmf_modeltest_gloamfin_kraken_legacy",
+    "rendererPath": "krakenHead",
+    "sourceRendererId": 121260
+  },
+  "campaign": {
+    "path": "campaign.json",
+    "sha256": "c154a54ca7a1612b79dde02e2ab86936b6b119f1c14d0aceed9f39e159888da5"
+  },
+  "deploymentReceipt": {
+    "path": "deployment.json",
+    "sha256": "a236281fba143cee1ee9f9e79931681d1b9ee0eaf25fe27092acae10a91efd55"
+  },
+  "verification": {
+    "path": "verification.json",
+    "sha256": "db95ec3ef9045f83ce266c1286e0a0728ddd5b275a4c4d114d143c2d882a0318"
+  },
+  "reports": [
+    {
+      "campaignRun": "native-combat-death",
+      "path": "native-combat-death.json.gz",
+      "sha256": "a89ba0e063b5dc3ec7ca79baddf89f00af42d1e4bda786a2d91350f7deface01",
+      "sourceSha256": "fc54fe608d465d233947d70ecf42185f678fb8e9682b566d852b0e09d6899097",
+      "sourceBytes": 11261040,
+      "encoding": "gzip-mtime-zero"
+    },
+    {
+      "campaignRun": "enemy-victory-terminal",
+      "path": "enemy-victory-terminal.json.gz",
+      "sha256": "422bdd2726c5d8249a34827879aa199bf5f9498a5f17f701c2f5406da080fc1f",
+      "sourceSha256": "1644f398e79828881e358b20f33d5c0493482b107b64dcc06e2ec4772f634090",
+      "sourceBytes": 822319,
+      "encoding": "gzip-mtime-zero"
+    }
+  ],
+  "sessions": [
+    "9f69423c0ada46f6820d320343b384e1",
+    "47bf1934e3724bb1b2c6ffdd894b7dc7"
+  ],
+  "observed": {
+    "naturalStates": [
+      "ATTACK",
+      "DAMAGED",
+      "DAMAGEDHEAVY",
+      "DEATH",
+      "DEFEND",
+      "IDLE",
+      "VICTORY"
+    ],
+    "naturalEdges": [
+      [
+        "ATTACK",
+        "IDLE"
+      ],
+      [
+        "DAMAGED",
+        "IDLE"
+      ],
+      [
+        "DAMAGEDHEAVY",
+        "IDLE"
+      ],
+      [
+        "DEFEND",
+        "IDLE"
+      ],
+      [
+        "IDLE",
+        "ATTACK"
+      ],
+      [
+        "IDLE",
+        "DAMAGED"
+      ],
+      [
+        "IDLE",
+        "DAMAGEDHEAVY"
+      ],
+      [
+        "IDLE",
+        "DEATH"
+      ],
+      [
+        "IDLE",
+        "DEFEND"
+      ],
+      [
+        "IDLE",
+        "VICTORY"
+      ]
+    ],
+    "successfulProficiencies": [
+      "enKrakenArmorUp",
+      "enKrakenConfuse",
+      "enKrakenInterrupt",
+      "enKrakenResistUp"
+    ],
+    "failedProficiencyAttempts": 2,
+    "unusedIncomingAttackCalculations": 1,
+    "naturalDeath": true,
+    "naturalEnemyVictory": true,
+    "naturalResourceTeardownInBothRuns": true
+  },
+  "supplementalVisual": {
+    "observation": {
+      "path": "supplemental-visual-observation.json",
+      "sha256": "41745b372ba8d6fa27f5300693aae670a14b3bc8aa519c218791cd0936e19eee"
+    },
+    "image": {
+      "path": "gloamfin-live-screenshot.png",
+      "sha256": "5f0478e9fd02be57f30f7c351b93a6c6d2e9cc1ff888596e86efb5a039d627d7"
+    }
+  },
+  "limits": [
+    "The production observer proves exact-route native behavior and teardown, not final art quality.",
+    "The supplemental image is a Discord screenshot composite and cannot prove temporal motion, culling, or portrait behavior.",
+    "Canonical candidate coverage still requires a reviewed route archive with explicit appearance, camera, portrait, and progression conclusions."
+  ]
+}

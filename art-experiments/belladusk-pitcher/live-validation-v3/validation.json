@@ -1,0 +1,568 @@
+{
+  "schema": "ftkmf.model-validation.v3",
+  "revision": "belladusk-pitcher-live-validation-v3",
+  "status": "reviewed_exact_plantE_binding_appearance_idle_attack_hit_death_and_gameplay_observed",
+  "displayName": "Belladusk Pitcher",
+  "enemy": "ftkmf_modeltest_belladusk",
+  "nativeChassis": "plantE",
+  "nativeEnemy": "plantE",
+  "sourceKind": "native_enemy_row",
+  "resourcePrefab": null,
+  "rendererPaths": [
+    "enJungleNibbler_A"
+  ],
+  "sourceRendererIds": [
+    121530
+  ],
+  "sessions": [
+    "8e7350b348ba499993a11279be206fb2"
+  ],
+  "profile": {
+    "key": "ftkmf_modeltest_belladusk",
+    "baseEnemy": "plantE",
+    "displayName": "Belladusk Pitcher",
+    "combatProfile": "30bf6f1223474a469aae2efa58b6eb7c1476b88984e95de5c8d24fc7b052f6e6",
+    "renderers": [
+      {
+        "rendererPath": "enJungleNibbler_A",
+        "glbFile": "belladusk.glb",
+        "textureFile": "belladusk_basecolor.png",
+        "disableNativeEmission": true
+      }
+    ],
+    "minimumBaseHealth": 64,
+    "visualScale": 1.0
+  },
+  "profileDocumentSha256": "3ce70025a7ae787cc9b1253825ca02cb1e747696b2347f6cdf6626c001e6d703",
+  "catalogSha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+  "historicalCatalogSha256": "f30d96713384e94e97ffca1dca4fc719374eac0e401a98e69ca95eacbb47cc12",
+  "assetHashes": {
+    "belladusk.glb": "0678780baaf1f709bf43dabaca1fd30a469f8f443624a57bb9dbd506da064fd9",
+    "belladusk_basecolor.png": "51a84eb77be58235914d77b6030c5922d0de4baf3fe4ba2797d4b7a67e8ce493"
+  },
+  "binding": {
+    "nativeChassis": "plantE",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "plantE",
+    "resourcePrefab": null,
+    "ownerInstanceId": 369188,
+    "rendererPath": "enJungleNibbler_A",
+    "rendererId": 121530,
+    "sourceRendererId": 121530,
+    "rendererKind": "SkinnedMeshRenderer",
+    "rendererInstanceId": -245294,
+    "mesh": "ftkmf_glb_belladusk.glb",
+    "boneSignature": "d5f27b166e2e9db8c2f9fc8aa2d17742ec00ec6fbec1c951901c1118896d1904",
+    "rootBone": "Root_M",
+    "nativeRootScale": 1.2,
+    "active": true,
+    "enabled": true,
+    "visibleAtInitialReview": true,
+    "m_DoRagdoll": false,
+    "rigidbodyCount": 0,
+    "material": {
+      "instanceId": -245592,
+      "name": "matMasterJungle (Instance)",
+      "shader": "Standard",
+      "emissionKeyword": false,
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245594,
+        "name": "ftkmf_belladusk_basecolor.png"
+      },
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null
+    }
+  },
+  "renderers": [
+    {
+      "nativeChassis": "plantE",
+      "sourceKind": "native_enemy_row",
+      "nativeEnemy": "plantE",
+      "resourcePrefab": null,
+      "ownerInstanceId": 369188,
+      "rendererPath": "enJungleNibbler_A",
+      "rendererId": 121530,
+      "sourceRendererId": 121530,
+      "rendererKind": "SkinnedMeshRenderer",
+      "rendererInstanceId": -245294,
+      "mesh": "ftkmf_glb_belladusk.glb",
+      "boneSignature": "d5f27b166e2e9db8c2f9fc8aa2d17742ec00ec6fbec1c951901c1118896d1904",
+      "rootBone": "Root_M",
+      "nativeRootScale": 1.2,
+      "active": true,
+      "enabled": true,
+      "visibleAtInitialReview": true,
+      "m_DoRagdoll": false,
+      "rigidbodyCount": 0,
+      "material": {
+        "instanceId": -245592,
+        "name": "matMasterJungle (Instance)",
+        "shader": "Standard",
+        "emissionKeyword": false,
+        "emissionColor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "_MainTexSupported": true,
+        "_MainTex": {
+          "instanceId": -245594,
+          "name": "ftkmf_belladusk_basecolor.png"
+        },
+        "_EmissionMapSupported": true,
+        "_EmissionMap": null
+      }
+    }
+  ],
+  "captures": [
+    {
+      "action": "pass",
+      "label": "idle-and-native-attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/3371de9b584e4709a17733ab3608980e.json",
+        "sha256": "93c2d90ecd5ebb25f5f2c1c461cb67a2ffc1c5d95dd5fddfa6063e1afa1199b0",
+        "bytes": 4522686
+      },
+      "frameCount": 120,
+      "sampledClips": [
+        "idle",
+        "attack1"
+      ],
+      "captureScope": "Settled idle, native attack1 motion, and return to idle on the exact custom renderer."
+    },
+    {
+      "action": "attack",
+      "label": "ordinary-nonlethal-hit-and-native-attack",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004.json",
+        "sha256": "07fff146b69e8db6323e54b8f17ea7275129772c7c0f0a287f941fc480fb685a",
+        "bytes": 4521255
+      },
+      "frameCount": 120,
+      "sampledClips": [
+        "idle",
+        "hit1",
+        "attack1"
+      ],
+      "captureScope": "Ordinary player hit from 58 to 50 with no focus spent, native hit1 response, recovery, later native attack1, and return to idle."
+    },
+    {
+      "action": "kill-fixture",
+      "label": "kill-fixture-death",
+      "complete": true,
+      "termination": null,
+      "rawCapture": {
+        "path": "scratch/mirewarden-game/model-test-output/2ecb49d3e5734818be633d31dae0af24.json",
+        "sha256": "5972a48b6d9a80d0cd7f9e237736432697554ec4687283ba200c563273a60a4d",
+        "bytes": 4533289
+      },
+      "frameCount": 120,
+      "sampledClips": [
+        "idle",
+        "death"
+      ],
+      "captureScope": "Explicit KillSingle transition from 50 to 0 and native animated death across the complete capture."
+    }
+  ],
+  "ordinaryHit": {
+    "beforeHp": 58,
+    "afterHp": 50,
+    "focus": false,
+    "focusSpent": 0,
+    "method": "Attack",
+    "status": "ordinary_nonlethal_hit_with_hit1_observed",
+    "sourceCapture": "scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004.json"
+  },
+  "ordinaryLethal": false,
+  "explicitKillFixture": {
+    "beforeHp": 50,
+    "afterHp": 0,
+    "method": "KillSingle",
+    "deathCaptureComplete": true
+  },
+  "nativeCollects": 1,
+  "finalReady": {
+    "ok": true,
+    "level": 0,
+    "room": 2,
+    "buttonCount": 1
+  },
+  "priorArchives": [
+    {
+      "path": "art-experiments/belladusk-pitcher/live-validation-v1.json",
+      "sha256": "95dae5b7286f86a6a08af2cb8cd9e738b5febde5b65d626a2f7fef08195e24a3",
+      "scope": "Historical selected-view binding, appearance, motion, fixture death, and progression evidence."
+    },
+    {
+      "path": "art-experiments/belladusk-pitcher/live-validation-v2/validation.json",
+      "sha256": "bd66b6c50f6aeb77961abfd86eb17d265a97a70ec03ce62acf0d49d7e8d943a5",
+      "scope": "Fresh ordinary body, combat motion, fixture death, Collect, and Ready evidence retained under an older structured schema."
+    }
+  ],
+  "catalogReconciliation": {
+    "path": "catalog-reconciliation.json",
+    "sha256": "5cf443ce0943a994da73796f696934371ffb4860d1cf968b201d8193aa33dfd2",
+    "bytes": 2013
+  },
+  "caseResult": {
+    "path": "scratch/mirewarden-game/model-test-output/case-80c6539234ca4a8b9bbfe64831b0d5a6/case-result.json",
+    "sha256": "1c2cf0775debe611ad57c3e8be244cfde5190d1ea33cf7abb1678016ea4bf9fc",
+    "bytes": 376681
+  },
+  "runtimeProfile": {
+    "path": "art-experiments/belladusk-pitcher/runtime-profile.json",
+    "sha256": "3ce70025a7ae787cc9b1253825ca02cb1e747696b2347f6cdf6626c001e6d703",
+    "bytes": 539
+  },
+  "visualReview": "reviewed_exact_source_with_scoped_limits",
+  "rootVisualReview": "visual-review.json",
+  "rootVisualReviewPin": {
+    "path": "visual-review.json",
+    "sha256": "45bb1f392b4c272c9370c02e0d1c16b526d8caba5c4ec61abfd040d8ada1cdaf",
+    "bytes": 4145
+  },
+  "selectedPNGs": [
+    {
+      "action": "pass",
+      "index": 12,
+      "clip": "idle",
+      "source": "scratch/mirewarden-game/model-test-output/3371de9b584e4709a17733ab3608980e/0012.png",
+      "archive": "selected/pass-0012.png",
+      "sha256": "75934387a1fe879c5aeec6ec29852df606d69e27632995690928b92a1fdb33e8",
+      "observation": "The curved stalk, four root leaves, plum hood, scalloped lip, teeth, and warm throat form one readable pitcher-plant silhouette in settled idle."
+    },
+    {
+      "action": "pass",
+      "index": 50,
+      "clip": "attack1",
+      "source": "scratch/mirewarden-game/model-test-output/3371de9b584e4709a17733ab3608980e/0050.png",
+      "archive": "selected/pass-0050.png",
+      "sha256": "9bf6c28e2373bcd2d5d4dbbae9b987b8825f4518b5e35ef0cbe130ea04d15dce",
+      "observation": "The native lunge bends the stalk while the hood, mouth, and root leaves remain visibly connected; the attack flash obscures part of the lower plant."
+    },
+    {
+      "action": "attack",
+      "index": 28,
+      "clip": "hit1",
+      "source": "scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004/0028.png",
+      "archive": "selected/attack-0028.png",
+      "sha256": "8e2f75611703db70f2091bb59c9a21283e053ac040abd64231c11a6f99f45189",
+      "observation": "The ordinary 58 to 50 hit is visible during hit1. The pitcher head recoils behind the hero and damage UI while remaining joined to the stalk."
+    },
+    {
+      "action": "attack",
+      "index": 85,
+      "clip": "attack1",
+      "source": "scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004/0085.png",
+      "archive": "selected/attack-0085.png",
+      "sha256": "f5da6fe0c77b6403e4bcc77f05222d6e912a99fc5703b09e25c0cdf4d90417ee",
+      "observation": "A later native attack1 pose again keeps the hood, mouth, stalk, and leaf base continuous, with the attack flash covering some lower surfaces."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 40,
+      "clip": "death",
+      "source": "scratch/mirewarden-game/model-test-output/2ecb49d3e5734818be633d31dae0af24/0040.png",
+      "archive": "selected/kill-fixture-0040.png",
+      "sha256": "702bb6b4d992f556771870cbdd4340cd20221c28b123c3ac1844d766c4c81f5e",
+      "observation": "The explicit fixture shows the authored pitcher bent during native death with the hood, stalk, and leaves still visibly connected."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 60,
+      "clip": "death",
+      "source": "scratch/mirewarden-game/model-test-output/2ecb49d3e5734818be633d31dae0af24/0060.png",
+      "archive": "selected/kill-fixture-0060.png",
+      "sha256": "a871370464f3d4e4d4d132a9149c9cf3cf7362847a915a64acb49b77f088117f",
+      "observation": "The later death pose places the joined pitcher body low across the floor. This selected view does not establish collision, physics sleeping, or corpse lifetime."
+    }
+  ],
+  "videos": [
+    {
+      "action": "native-idle-attack",
+      "path": "native-idle-attack.mp4",
+      "sha256": "be783f7257c8d8ac8ad8369c93371740d4e0c9ce9de5a0374094ed23c20aa02a",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "path": "ordinary-nonlethal-hit.mp4",
+      "sha256": "4116bf324bef70ee60ec3a1ed61ad700eca6a6b914dc1771efe690c8180c82b4",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    },
+    {
+      "action": "kill-fixture",
+      "path": "kill-fixture.mp4",
+      "sha256": "95a90432c12e6b85cae76c7f2c406e871bc2eede1446d6f147dd931ba101286b",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative, not unperturbed timing."
+    }
+  ],
+  "sourceImageCount": 360,
+  "sourceImagePins": "source-image-pins.json",
+  "captureImageCount": 360,
+  "captureImagePins": "capture-image-pins.json",
+  "assetPins": "asset-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/belladusk-pitcher/belladusk.glb",
+      "sourceSha256": "0678780baaf1f709bf43dabaca1fd30a469f8f443624a57bb9dbd506da064fd9",
+      "archive": "metadata/art-experiments/belladusk-pitcher/belladusk.glb.gz",
+      "archiveSha256": "21e6c0dac8af71c46e27a58ef9227a5adb0e3725d9eceeeeb0185e6f9611433b",
+      "bytes": 251088,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/belladusk_basecolor.png",
+      "sourceSha256": "51a84eb77be58235914d77b6030c5922d0de4baf3fe4ba2797d4b7a67e8ce493",
+      "archive": "metadata/art-experiments/belladusk-pitcher/belladusk_basecolor.png.gz",
+      "archiveSha256": "7d1f75b2f9593a06a34a2841a8e26cf7f09bb4c7edb2e482960f959d1de97627",
+      "bytes": 271,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/live-validation-v1.json",
+      "sourceSha256": "95dae5b7286f86a6a08af2cb8cd9e738b5febde5b65d626a2f7fef08195e24a3",
+      "archive": "metadata/art-experiments/belladusk-pitcher/live-validation-v1.json.gz",
+      "archiveSha256": "7738ab2587cc032df437b40313b1c0a56b107c6700500bf74576cdcf0aad0d80",
+      "bytes": 14717,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/live-validation-v2/README.md",
+      "sourceSha256": "02c3022d10c6a2af91fd51f26a10de85f9f564ae1ac823adc35947a57a1fd2ca",
+      "archive": "metadata/art-experiments/belladusk-pitcher/live-validation-v2/README.md.gz",
+      "archiveSha256": "5a6e2da7f623cbac40caa2f49d1640f843d16b1422d66755020f85346b5a2b52",
+      "bytes": 1610,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/live-validation-v2/archive.py",
+      "sourceSha256": "ecc4bdcb077890101b46043facb56bb24873213ca08728a3e527f5e16b608690",
+      "archive": "metadata/art-experiments/belladusk-pitcher/live-validation-v2/archive.py.gz",
+      "archiveSha256": "610d1abf4cefc27c3c9e0e1bce73bb6a51037a9bd01d165cf17bedd6cc5a87d5",
+      "bytes": 8316,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/live-validation-v2/metadata/scratch/mirewarden-game/model-test-profiles.json.gz",
+      "sourceSha256": "14f217857188e061cab892acdbdeaa168d16c6359ec72c643885e230e450d2cb",
+      "archive": "metadata/art-experiments/belladusk-pitcher/live-validation-v2/metadata/scratch/mirewarden-game/model-test-profiles.json.gz.gz",
+      "archiveSha256": "4f2ba76a2745e2726b59628ce2cba455d7e0989cd987d38d13d7dca12ecba801",
+      "bytes": 21637,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/live-validation-v2/source-image-pins.json",
+      "sourceSha256": "1ea824789e385fc30754058acfd59bd65814b47d14ea49577360984748ddc6d4",
+      "archive": "metadata/art-experiments/belladusk-pitcher/live-validation-v2/source-image-pins.json.gz",
+      "archiveSha256": "26eff06b4bd727f4d184d46e3059fc3e20798f7bdb578e1b94cd585a1ba45b80",
+      "bytes": 56523,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/live-validation-v2/validation.json",
+      "sourceSha256": "bd66b6c50f6aeb77961abfd86eb17d265a97a70ec03ce62acf0d49d7e8d943a5",
+      "archive": "metadata/art-experiments/belladusk-pitcher/live-validation-v2/validation.json.gz",
+      "archiveSha256": "8f4c4334d6ad6dcfe96cc88c0c43087525de76e565ac4b8d1a40332e39d98aea",
+      "bytes": 18210,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/live-validation-v3/archive.py",
+      "sourceSha256": "185e610e4781dc100c970b9d02e4cb3d698f4335519b8cff5d56c301b4749c9f",
+      "archive": "metadata/art-experiments/belladusk-pitcher/live-validation-v3/archive.py.gz",
+      "archiveSha256": "048f24f69411bb8ccf3f5f61df9782497ab54369da8efe7142cc79dc3872ea96",
+      "bytes": 21768,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/manifest.json",
+      "sourceSha256": "d03166edf9bd9fecc3acd600d77c3c5a2fec6809672216e89d6c93c07e57b0fb",
+      "archive": "metadata/art-experiments/belladusk-pitcher/manifest.json.gz",
+      "archiveSha256": "1c706f30636da537f8c8336387fc0785fe90f1bd4309ce14b7682d5826548d76",
+      "bytes": 21610,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/belladusk-pitcher/runtime-profile.json",
+      "sourceSha256": "3ce70025a7ae787cc9b1253825ca02cb1e747696b2347f6cdf6626c001e6d703",
+      "archive": "metadata/art-experiments/belladusk-pitcher/runtime-profile.json.gz",
+      "archiveSha256": "c8dd4345cb9c1b2154c1e4fd62f59a7d4353e58e4d7677c37af40a954d18c3ea",
+      "bytes": 539,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/belladusk-root-visual-review.json",
+      "sourceSha256": "9762897d7e3366490f08ec32c0ed02252640fd36e82ae9dbfbe3bb09a498d1a3",
+      "archive": "metadata/scratch/belladusk-root-visual-review.json.gz",
+      "archiveSha256": "417763248f9a656e049a15b60b3095c8d73ff4ffb259d2f4eba16ad21abc2a86",
+      "bytes": 4245,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/belladusk-v3-catalog-reconciliation.json",
+      "sourceSha256": "5cf443ce0943a994da73796f696934371ffb4860d1cf968b201d8193aa33dfd2",
+      "archive": "metadata/scratch/belladusk-v3-catalog-reconciliation.json.gz",
+      "archiveSha256": "cd9bdb6112fcdcdd276256a701d281be56b54fc810f17459bb00a182011183b7",
+      "bytes": 2013,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/belladusk-v3-root-visual-review.json",
+      "sourceSha256": "45bb1f392b4c272c9370c02e0d1c16b526d8caba5c4ec61abfd040d8ada1cdaf",
+      "archive": "metadata/scratch/belladusk-v3-root-visual-review.json.gz",
+      "archiveSha256": "f39504acf606baa81c42939c57cda852bb7f4a29fdeec5403a50b24e016ba4b2",
+      "bytes": 4145,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/2ecb49d3e5734818be633d31dae0af24.json",
+      "sourceSha256": "5972a48b6d9a80d0cd7f9e237736432697554ec4687283ba200c563273a60a4d",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/2ecb49d3e5734818be633d31dae0af24.json.gz",
+      "archiveSha256": "af5f047ab2a179792794b3f0fac6012db823a34bf056d14885c77319fce1a457",
+      "bytes": 4533289,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/3371de9b584e4709a17733ab3608980e.json",
+      "sourceSha256": "93c2d90ecd5ebb25f5f2c1c461cb67a2ffc1c5d95dd5fddfa6063e1afa1199b0",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/3371de9b584e4709a17733ab3608980e.json.gz",
+      "archiveSha256": "6868d875308394866b975a3569b39144b5affc1d5c489bf046168caeb9341986",
+      "bytes": 4522686,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004.json",
+      "sourceSha256": "07fff146b69e8db6323e54b8f17ea7275129772c7c0f0a287f941fc480fb685a",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004.json.gz",
+      "archiveSha256": "68286c4fee66b5a740f40d4f944f6dc3b1b61b3e18923a3b6a8a38834a98f85f",
+      "bytes": 4521255,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-4490adace410440d8a3dbbb7b664d973/journal.jsonl",
+      "sourceSha256": "a268c81536be3245c0e5e97ecd14629eb7ec86977e357e870274c86289703039",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-4490adace410440d8a3dbbb7b664d973/journal.jsonl.gz",
+      "archiveSha256": "76e9d99e538b423bee1aee55dace3cf04760ca061854e3ef619207a2ba2d2772",
+      "bytes": 2549620,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-4490adace410440d8a3dbbb7b664d973/result.json",
+      "sourceSha256": "1638b39552aefea2a6441e69e427c2b679c7a52b4a6ebaba1294a337255a0ddf",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-4490adace410440d8a3dbbb7b664d973/result.json.gz",
+      "archiveSha256": "3e62788c25c104db47ac67dba735f02d3fdda37c02364ab8c32974fa4c41bd31",
+      "bytes": 1008,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-80c6539234ca4a8b9bbfe64831b0d5a6/case-result.json",
+      "sourceSha256": "1c2cf0775debe611ad57c3e8be244cfde5190d1ea33cf7abb1678016ea4bf9fc",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-80c6539234ca4a8b9bbfe64831b0d5a6/case-result.json.gz",
+      "archiveSha256": "bad38f283b6137c22ab1725846ca50135308dd5c857c0124e8d9894af2771c2f",
+      "bytes": 376681,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-80c6539234ca4a8b9bbfe64831b0d5a6/journal.jsonl",
+      "sourceSha256": "2c333c49f791e01833c067a1a88e75175f6e11c3821ded375227183a174488a2",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-80c6539234ca4a8b9bbfe64831b0d5a6/journal.jsonl.gz",
+      "archiveSha256": "3b7a8533701169a6e67a28b1150f0e12d03f8f77875f202611bd584719220af3",
+      "bytes": 282203,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-aae0e8d8fa1e4b1c99ae7e9fd58b5754/journal.jsonl",
+      "sourceSha256": "c5398a0111d4346f7694059aecb2a958fb523f3b6a195bb1b844e256fbf422ec",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-aae0e8d8fa1e4b1c99ae7e9fd58b5754/journal.jsonl.gz",
+      "archiveSha256": "d8ca0aba5272f1ffa0abf3885c04e6f146b999e8377d686e8526c110816c7a2a",
+      "bytes": 2557092,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-aae0e8d8fa1e4b1c99ae7e9fd58b5754/result.json",
+      "sourceSha256": "60ac7a52a700c04ea0e0010562bdefb21bc5c5067199c203fd956878fe988c5c",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-aae0e8d8fa1e4b1c99ae7e9fd58b5754/result.json.gz",
+      "archiveSha256": "ab9106308f2740add530d8aa67260178ebcf66595ffc117b33e8133c26f13c51",
+      "bytes": 1018,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-dd75465ec55141ea88d2d63264315789/journal.jsonl",
+      "sourceSha256": "00ee0bd619deec09342e9ad94099e8ef098e386e575b5d4660313271644eade9",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-dd75465ec55141ea88d2d63264315789/journal.jsonl.gz",
+      "archiveSha256": "0e8bfa2ae4755991606c841074c5c8c654662d7f18f68bd5ce3879db9c1adb84",
+      "bytes": 2550220,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/case-dd75465ec55141ea88d2d63264315789/result.json",
+      "sourceSha256": "701177c4a09fcb6490b9489de7342e21c6aea97f6cfb02e9ab15e4d045852778",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/case-dd75465ec55141ea88d2d63264315789/result.json.gz",
+      "archiveSha256": "6454a0055124ad5940c3211277a553b59e45dbbe6a2dc800b49339690ff75193",
+      "bytes": 750,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/exercise-claim-dbbbe9689a23e1bd08cbc5fbba3c1fbe79b0ea110ceb500c12270fadc7924a23.json",
+      "sourceSha256": "a265ab5122d89890d045fa9cf11e231611173942f1e8f903b4d9726ae278e902",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/exercise-claim-dbbbe9689a23e1bd08cbc5fbba3c1fbe79b0ea110ceb500c12270fadc7924a23.json.gz",
+      "archiveSha256": "5122f5dd61bfe049da4339beccc35d889777cacc443976cad6c9bbb91c7c3179",
+      "bytes": 547,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/new-run-session-8e7350b348ba499993a11279be206fb2.json",
+      "sourceSha256": "ab48bd989f10c5a54466698a17b54555a62b6c705a7fe86632ab5d96ce7bf22e",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/new-run-session-8e7350b348ba499993a11279be206fb2.json.gz",
+      "archiveSha256": "46e511721d048829ebe4f633ba30d983f41da60c904e6c18cb61f77e3cf2eb61",
+      "bytes": 243,
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-profiles.json",
+      "sourceSha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144",
+      "archive": "metadata/scratch/mirewarden-game/model-test-profiles.json.gz",
+      "archiveSha256": "58b7d3bbc395887cdf860bc661ef76be7fad813751b1296923d4fc10d22cc516",
+      "bytes": 198229,
+      "encoding": "gzip-lossless"
+    }
+  ],
+  "workflow": {
+    "kind": "rearchive_complete_retained_combat_evidence",
+    "rule": "When retained trials preserve every required runtime observation but use an older archive schema, compare the selected historical catalog profile with the current profile and asset pins before reuse. Preserve all prior records, review original pixels against exact animator intervals, and create a fresh immutable archive with standardized structured gates.",
+    "replayPolicy": "Do not replay a complete retained trial solely to repair archive metadata. Run again only for an unobserved evidence gate or a changed profile, asset, source renderer, motion renderer, or selected catalog profile."
+  },
+  "limits": [
+    "The ordinary native Attack records same-target HP 58 to 50 with no focus spent and hit1. The recorded action and numeric transition establish the scoped ordinary damage observation.",
+    "The explicit KillSingle fixture records HP 50 to 0 and death. Fixture death is not ordinary lethal-damage evidence.",
+    "The exact custom renderer reports m_DoRagdoll false and no rigidbodies across all 360 frames. Its death is animated, not a body ragdoll.",
+    "The retained process supplies one guarded native Collect and strict Ready at level 0 room 2.",
+    "Combat UI, the hero, effects, depth blur, and victory progression obscure some surfaces. Full culling coverage, every animation interval, collision, physics sleeping, settled corpse state, precise visible corpse lifetime, portrait behavior, final resource disposal, and finished art direction remain outside this archive.",
+    "This archive covers only plantE and enJungleNibbler_A renderer 121530. It does not establish another plant rig."
+  ]
+}

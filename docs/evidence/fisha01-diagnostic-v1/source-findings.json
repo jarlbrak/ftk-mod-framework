@@ -1,0 +1,5468 @@
+{
+  "status": "EXACT_FISHA01_NATIVE_SOURCE_AND_PROBE_VERIFIED_LIVE_PENDING",
+  "sources": [
+    {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/resources.assets",
+      "sha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117"
+    },
+    {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll",
+      "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/docs/model-topology-coverage-plan.json",
+      "sha256": "a5d7de57fb1fdeccb09f39e426276472f036282ca8b7a1a87e45415171eaefe8"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/enemy-rig-mapping-reproducible.json",
+      "sha256": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "7bdc94b7a7730b30fa9168df996e821a4a6bbc95bded20e6d4f1fc856e6ca686"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a01-native-topology-analysis/audit_source.py",
+      "sha256": "2c0084fe40cfaadbbba614590fdab987629a42bd5fa164d900ccfd629a114849"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a01-native-topology-analysis/native-metadata.json",
+      "sha256": "536dc1c4dc6ff9bf543797f39dd5240c21d4a39a0a1ca984710d71fb74018a44"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a01-native-topology-analysis/physics-fields.json",
+      "sha256": "4221639d13e26da60250468fda464a8c593fea48945e190cde1395a430684a7d"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a01-native-topology-analysis/reference-121695/reference.npz",
+      "sha256": "16c16605b1f4fc135f48a212f0cc3a25c5303001b8d5d6f0c5eb218eeec79724"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a01-native-topology-analysis/probe-validation.json",
+      "sha256": "9a1812381fd82f45faef87fb378ad09ddf15151f9ba298841ce81ed504060670"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a01-native-topology-analysis/CharacterEventListener.cs",
+      "sha256": "b1c351a88947cefc9674dee9ac1e24f5278b825545b7ac5b8a92c0ff5cf3edb0"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a01-native-topology-analysis/EnemyDummy.cs",
+      "sha256": "3c94b4dabc926b9975e61d3ec6f0b1ed43d3ea1ac55ce78236a48cb9dd8f5d5e"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework_content/models/probe_121695.glb",
+      "sha256": "2b3aca1eb0524854faaae1ae3ac453bf3c81bb7cb6afcf02127f6ba43897d3e6"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework_content/models/probe_palette.png",
+      "sha256": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+    }
+  ],
+  "profile": {
+    "key": "ftkmf_modeltest_probe_fisha01",
+    "baseEnemy": "fishA01",
+    "displayName": "Rig probe: fishA01",
+    "combatProfile": "746deb43cc057df260abe66bad848ded92c511f22d0b0ef05162c1f7287674fc",
+    "renderers": [
+      {
+        "rendererPath": "enFishA",
+        "glbFile": "probe_121695.glb",
+        "textureFile": "probe_palette.png"
+      }
+    ],
+    "minimumBaseHealth": 64
+  },
+  "nativeRow": {
+    "enemy_id": "fishA01",
+    "enemy_level": 2,
+    "db_byte_offset": 91824,
+    "cel_path_id": 138253,
+    "prefab_name": "enFishA01",
+    "prefab_game_object_path_id": 35240,
+    "renderers": [
+      {
+        "renderer_path_id": 121695,
+        "validation": "discovery_only",
+        "errors": [],
+        "mesh_path_id": 2257,
+        "mesh_asset_file": "resources.assets",
+        "mesh_name": "enFishA",
+        "renderer_name": "enFishA",
+        "ancestor_names": [
+          "enFishA",
+          "enFishA01"
+        ],
+        "joint_count": 34,
+        "bone_names": [
+          "Root_M",
+          "BackA_M",
+          "BackB_M",
+          "Chest_M",
+          "Scapula_R",
+          "Shoulder_R",
+          "Elbow_R",
+          "Wrist_R",
+          "MiddleFinger1_R",
+          "MiddleFinger2_R",
+          "MiddleFinger3_R",
+          "MiddleFinger4_R",
+          "Neck_M",
+          "Head_M",
+          "Hair_M",
+          "Nose_M",
+          "Scapula_L",
+          "Shoulder_L",
+          "Elbow_L",
+          "Wrist_L",
+          "MiddleFinger1_L",
+          "MiddleFinger2_L",
+          "MiddleFinger3_L",
+          "MiddleFinger4_L",
+          "Hip_R",
+          "Knee_R",
+          "Ankle_R",
+          "MiddleToe1_R",
+          "MiddleToe2_R",
+          "Hip_L",
+          "Knee_L",
+          "Ankle_L",
+          "MiddleToe1_L",
+          "MiddleToe2_L"
+        ],
+        "nearest_skinned_bone_parent_names": [
+          null,
+          "Root_M",
+          "BackA_M",
+          "BackB_M",
+          "Chest_M",
+          "Scapula_R",
+          "Shoulder_R",
+          "Elbow_R",
+          "Wrist_R",
+          "MiddleFinger1_R",
+          "MiddleFinger2_R",
+          "MiddleFinger3_R",
+          "Chest_M",
+          "Neck_M",
+          "Head_M",
+          "Head_M",
+          "Chest_M",
+          "Scapula_L",
+          "Shoulder_L",
+          "Elbow_L",
+          "Wrist_L",
+          "MiddleFinger1_L",
+          "MiddleFinger2_L",
+          "MiddleFinger3_L",
+          "Root_M",
+          "Hip_R",
+          "Knee_R",
+          "Ankle_R",
+          "MiddleToe1_R",
+          "Root_M",
+          "Hip_L",
+          "Knee_L",
+          "Ankle_L",
+          "MiddleToe1_L"
+        ],
+        "duplicate_bone_names": [],
+        "unresolved_bone_count": 0,
+        "bindpose_count": 34,
+        "topology_fingerprint": "5990c51ca004ebdbe2cab2443f6fb747ee0c38ecd47536bb086c8bd0319be258",
+        "bindpose_fingerprint": "911da2b73b98e4dd8a9039b4055f75fdead77974d799eb61fc4e40bc1471dccd",
+        "rig_profile_fingerprint": "2cb4d06da0ad32dba308fc1f7fe7900993c51486a9cb37576d854b1615c5a080",
+        "animators": [
+          {
+            "animator_path_id": 116789,
+            "game_object": "enFishA01",
+            "controller_path_id": 5958,
+            "controller_asset_file": "resources.assets",
+            "controller_name": "fishUnarmedController"
+          }
+        ],
+        "character_event_listeners": [
+          {
+            "component_path_id": 138253,
+            "game_object": "enFishA01"
+          }
+        ],
+        "classification": "character_renderer_candidate",
+        "combat_profile_fingerprint": "746deb43cc057df260abe66bad848ded92c511f22d0b0ef05162c1f7287674fc"
+      }
+    ],
+    "validation": "serialized_mapping_not_runtime_validated",
+    "weapon_path_id": 136717,
+    "weapon_asset_file": "resources.assets",
+    "weapon_name": "fishA01_unarmed",
+    "weapon_animation_controller_candidates": [
+      {
+        "controller_path_id": 5958,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "fishUnarmedController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 584
+      }
+    ],
+    "combat_controller_resolution": "verified_field_prefix",
+    "renderer_count": 1,
+    "classification": "skinned"
+  },
+  "root": {
+    "path": "/enFishA01",
+    "transform_id": 92432,
+    "active": true,
+    "components": [
+      {
+        "type": "Transform",
+        "id": 92432
+      },
+      {
+        "type": "Animator",
+        "id": 116789
+      },
+      {
+        "type": "MonoBehaviour",
+        "id": 138253,
+        "script": "CharacterEventListener"
+      }
+    ],
+    "localPosition": {
+      "x": 18.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "localRotation": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    },
+    "localScale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0
+    }
+  },
+  "componentCounts": {
+    "Transform": 52,
+    "Animator": 1,
+    "MonoBehaviour": 1,
+    "SkinnedMeshRenderer": 1,
+    "BoxCollider": 2,
+    "Rigidbody": 11,
+    "CharacterJoint": 10,
+    "SphereCollider": 1,
+    "Camera": 2,
+    "CapsuleCollider": 8
+  },
+  "materials": [
+    {
+      "id": 1056,
+      "name": "matLoot",
+      "keywords": "_EMISSION _METALLICGLOSSMAP",
+      "colors": [
+        [
+          "_Color",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ],
+        [
+          "_EmissionColor",
+          {
+            "r": 1.399999976158142,
+            "g": 1.399999976158142,
+            "b": 1.399999976158142,
+            "a": 1.0
+          }
+        ],
+        [
+          "_EmissionColorUI",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ]
+      ]
+    }
+  ],
+  "markers": [
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+      "transform_id": 76368,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 76368
+        },
+        {
+          "type": "Camera",
+          "id": 99034
+        }
+      ],
+      "localPosition": {
+        "x": -0.18000000715255737,
+        "y": 2.309999942779541,
+        "z": 0.6700000166893005
+      },
+      "localRotation": {
+        "x": -0.5847387909889221,
+        "y": 0.5539565086364746,
+        "z": -0.4394684433937073,
+        "w": -0.3975931406021118
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/CameraRoot/EncounterCam",
+      "transform_id": 89711,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 89711
+        },
+        {
+          "type": "Camera",
+          "id": 99306
+        }
+      ],
+      "localPosition": {
+        "x": -2.450000286102295,
+        "y": 1.7610000371932983,
+        "z": 4.243525505065918
+      },
+      "localRotation": {
+        "x": 0.0,
+        "y": -0.9659258723258972,
+        "z": 0.0,
+        "w": -0.2588190734386444
+      },
+      "localScale": {
+        "x": 0.9999996423721313,
+        "y": 1.0,
+        "z": 0.9999996423721313
+      }
+    }
+  ],
+  "attachmentTransforms": [
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/TARGET_TOPHEAD",
+      "transform_id": 97637,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 97637
+        }
+      ],
+      "localPosition": {
+        "x": -0.30140721797943115,
+        "y": -0.10100667178630829,
+        "z": -0.0
+      },
+      "localRotation": {
+        "x": -0.5747830271720886,
+        "y": 0.411855012178421,
+        "z": 0.5747830271720886,
+        "w": 0.411855012178421
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/Shoulder_L/Elbow_L/Wrist_L/WEAPON_HOLDER_L",
+      "transform_id": 80231,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 80231
+        }
+      ],
+      "localPosition": {
+        "x": 0.14100000262260437,
+        "y": 0.07400000095367432,
+        "z": 0.029999999329447746
+      },
+      "localRotation": {
+        "x": -4.693865207627823e-07,
+        "y": 0.7071069478988647,
+        "z": -0.7071066498756409,
+        "w": 2.4184961944229144e-07
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/Shoulder_L/Elbow_L/Wrist_L/TARGET_LHAND",
+      "transform_id": 92446,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 92446
+        }
+      ],
+      "localPosition": {
+        "x": 0.14746876060962677,
+        "y": 0.024753136560320854,
+        "z": 0.042990341782569885
+      },
+      "localRotation": {
+        "x": 2.9802322387695312e-08,
+        "y": -5.960464477539063e-08,
+        "z": 1.0,
+        "w": -5.960464477539063e-08
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/Shoulder_L/Elbow_L/SHIELD_HOLDER",
+      "transform_id": 97598,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 97598
+        }
+      ],
+      "localPosition": {
+        "x": 0.2590000033378601,
+        "y": -0.05700000002980232,
+        "z": 0.01899999938905239
+      },
+      "localRotation": {
+        "x": -0.7274734377861023,
+        "y": -0.039433665573596954,
+        "z": -0.0072841159999370575,
+        "w": -0.684963047504425
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/Shoulder_R/Elbow_R/Wrist_R/WEAPON_HOLDER",
+      "transform_id": 83017,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 83017
+        }
+      ],
+      "localPosition": {
+        "x": -0.19200000166893005,
+        "y": -0.050999999046325684,
+        "z": -0.052000001072883606
+      },
+      "localRotation": {
+        "x": -0.7071069478988647,
+        "y": 8.137205753655508e-08,
+        "z": -1.2793819337275636e-07,
+        "w": 0.7071067094802856
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/Shoulder_R/Elbow_R/Wrist_R/BOW_PULL_HOLDER",
+      "transform_id": 84510,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 84510
+        }
+      ],
+      "localPosition": {
+        "x": -0.24300000071525574,
+        "y": -0.004000000189989805,
+        "z": -0.020999999716877937
+      },
+      "localRotation": {
+        "x": -4.855660336033907e-07,
+        "y": -0.7071071267127991,
+        "z": 0.7071064710617065,
+        "w": 3.36554478508333e-07
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/Shoulder_R/Elbow_R/Wrist_R/TARGET_RHAND",
+      "transform_id": 84001,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 84001
+        }
+      ],
+      "localPosition": {
+        "x": -0.24199999868869781,
+        "y": -0.02500000037252903,
+        "z": -0.02800000086426735
+      },
+      "localRotation": {
+        "x": 2.9802322387695312e-08,
+        "y": -1.0,
+        "z": -5.960464477539063e-08,
+        "w": 0.0
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/ARROW_HOLDER",
+      "transform_id": 75441,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 75441
+        }
+      ],
+      "localPosition": {
+        "x": -0.15399999916553497,
+        "y": -0.020999999716877937,
+        "z": 0.14800000190734863
+      },
+      "localRotation": {
+        "x": -0.5,
+        "y": 0.5,
+        "z": 0.5,
+        "w": 0.5
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/TARGET_CHEST",
+      "transform_id": 78339,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 78339
+        }
+      ],
+      "localPosition": {
+        "x": -0.028999999165534973,
+        "y": -0.0010000000474974513,
+        "z": -0.0
+      },
+      "localRotation": {
+        "x": -0.5,
+        "y": 0.5,
+        "z": 0.5,
+        "w": 0.5
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/ARROW_HOLDER 1",
+      "transform_id": 92401,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 92401
+        }
+      ],
+      "localPosition": {
+        "x": 0.14900000393390656,
+        "y": -0.020999999716877937,
+        "z": -0.08500000089406967
+      },
+      "localRotation": {
+        "x": -0.5,
+        "y": 0.5,
+        "z": 0.5,
+        "w": 0.5
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/BackA_M/BackB_M/Chest_M/ARROW_HOLDER 2",
+      "transform_id": 84799,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 84799
+        }
+      ],
+      "localPosition": {
+        "x": 0.39800000190734863,
+        "y": -0.020999999716877937,
+        "z": 0.1899999976158142
+      },
+      "localRotation": {
+        "x": -0.5,
+        "y": 0.5,
+        "z": 0.5,
+        "w": 0.5
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/Hip_L/Knee_L/Ankle_L/TARGET_LFOOT",
+      "transform_id": 85663,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 85663
+        }
+      ],
+      "localPosition": {
+        "x": 0.1633703112602234,
+        "y": 0.032999999821186066,
+        "z": 0.1120000034570694
+      },
+      "localRotation": {
+        "x": -0.49991655349731445,
+        "y": 0.49991655349731445,
+        "z": 0.5000834465026855,
+        "w": 0.5000834465026855
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enFishA01/Root_M/Hip_R/Knee_R/Ankle_R/TARGET_RFOOT",
+      "transform_id": 98148,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 98148
+        }
+      ],
+      "localPosition": {
+        "x": -0.16337043046951294,
+        "y": -0.032999999821186066,
+        "z": 0.02500000037252903
+      },
+      "localRotation": {
+        "x": 0.5000834465026855,
+        "y": 0.5000834465026855,
+        "z": -0.49991655349731445,
+        "w": 0.49991655349731445
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    }
+  ],
+  "controller": {
+    "id": 5958,
+    "name": "fishUnarmedController",
+    "clips": [
+      {
+        "id": 5244,
+        "name": "MerMan_BareHand_Idle_New",
+        "events": [],
+        "stopTime": 17.5
+      },
+      {
+        "id": 5184,
+        "name": "MerMan_Barehanded_Taunt",
+        "events": [
+          {
+            "time": 0.4958164691925049,
+            "functionName": "Foley",
+            "data": "fishUnarmedController | -313456752",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.519568145275116,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.680213689804077,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.933333396911621
+      },
+      {
+        "id": 5123,
+        "name": "MerMan_Barehanded_Block",
+        "events": [
+          {
+            "time": 0.12820513546466827,
+            "functionName": "Foley",
+            "data": "fishUnarmedController | 1652396328",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.4183535575866699,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.802431583404541,
+            "functionName": "Foley",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0915231704711914,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.3333333730697632
+      },
+      {
+        "id": 4858,
+        "name": "MerMan_Barehanded_Attack1 ",
+        "events": [
+          {
+            "time": 0.1690860241651535,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.17206478118896484,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_JUMP",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.29136303067207336,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.38313090801239014,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6077957153320312,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.720719575881958,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0261569023132324,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0373655557632446,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.101344108581543,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8462365865707397,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8643871545791626,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.1313090324401855,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_LAND",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.143279552459717,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.266666889190674
+      },
+      {
+        "id": 5184,
+        "name": "MerMan_Barehanded_Taunt",
+        "events": [
+          {
+            "time": 0.4958164691925049,
+            "functionName": "Foley",
+            "data": "fishUnarmedController | -313456752",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.519568145275116,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.680213689804077,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.933333396911621
+      },
+      {
+        "id": 5184,
+        "name": "MerMan_Barehanded_Taunt",
+        "events": [
+          {
+            "time": 0.4958164691925049,
+            "functionName": "Foley",
+            "data": "fishUnarmedController | -313456752",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.519568145275116,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.680213689804077,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.933333396911621
+      },
+      {
+        "id": 5247,
+        "name": "MerMan_Barehanded_HitBig",
+        "events": [
+          {
+            "time": 0.1144399493932724,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.1358974426984787,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5060391426086426,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.342881202697754,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.5091768503189087,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_SCUFF",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.7666667699813843
+      },
+      {
+        "id": 5328,
+        "name": "MerMan_Barehanded_DeathDirect",
+        "events": [
+          {
+            "time": 0.02024291455745697,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DEATH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.06598114967346191,
+            "functionName": "CameraShake",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.2083333283662796,
+            "functionName": "DropShield",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.3886217772960663,
+            "functionName": "DropWeapon",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.47275635600090027,
+            "functionName": "DeathFallOff",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5229418873786926,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_BODYFALL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.6666667461395264
+      },
+      {
+        "id": 5273,
+        "name": "MerMan_Barehanded_Attack2",
+        "events": [
+          {
+            "time": 0.17435897886753082,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.20564517378807068,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.38083669543266296,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_RUN",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7134952545166016,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_RUN",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7357527017593384,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0255060195922852,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_RUN",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.1379032135009766,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.2567204236984253,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.2686909437179565,
+            "functionName": "Foley",
+            "data": "A_PLAY_FLY_MV_SLAP",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.6197030544281006,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8370968103408813,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8674763441085815,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_JUMP",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.1615591049194336,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.1634278297424316,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_LAND",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.266666889190674
+      },
+      {
+        "id": 4858,
+        "name": "MerMan_Barehanded_Attack1 ",
+        "events": [
+          {
+            "time": 0.1690860241651535,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.17206478118896484,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_JUMP",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.29136303067207336,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.38313090801239014,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6077957153320312,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.720719575881958,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0261569023132324,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0373655557632446,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.101344108581543,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8462365865707397,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8643871545791626,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.1313090324401855,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_LAND",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.143279552459717,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.266666889190674
+      },
+      {
+        "id": 5065,
+        "name": "MerMan_Barehanded_Dodge",
+        "events": [
+          {
+            "time": 0.1487179547548294,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_JUMP",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.42658567428588867,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.7435221672058105,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8002698421478271,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_SCUFF",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.933333396911621
+      },
+      {
+        "id": 5014,
+        "name": "MerMan_BareHanded_HitSmall",
+        "events": [
+          {
+            "time": 0.10674764215946198,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.447773277759552,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 0.9333333969116211
+      },
+      {
+        "id": 5247,
+        "name": "MerMan_Barehanded_HitBig",
+        "events": [
+          {
+            "time": 0.1144399493932724,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.1358974426984787,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5060391426086426,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.342881202697754,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.5091768503189087,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_SCUFF",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.7666667699813843
+      },
+      {
+        "id": 5244,
+        "name": "MerMan_BareHand_Idle_New",
+        "events": [],
+        "stopTime": 17.5
+      },
+      {
+        "id": 5184,
+        "name": "MerMan_Barehanded_Taunt",
+        "events": [
+          {
+            "time": 0.4958164691925049,
+            "functionName": "Foley",
+            "data": "fishUnarmedController | -313456752",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.519568145275116,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.680213689804077,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.933333396911621
+      },
+      {
+        "id": 4825,
+        "name": "MerMan_Barehanded_DeathInDirect",
+        "events": [
+          {
+            "time": 0.428475022315979,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DEATH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6209935545921326,
+            "functionName": "DropWeapon",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.758293867111206,
+            "functionName": "DropShield",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.9143049120903015,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_BODYFALL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.9455127120018005,
+            "functionName": "DeathFallOff",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.6666667461395264
+      },
+      {
+        "id": 5273,
+        "name": "MerMan_Barehanded_Attack2",
+        "events": [
+          {
+            "time": 0.17435897886753082,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.20564517378807068,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.38083669543266296,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_RUN",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7134952545166016,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_RUN",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7357527017593384,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0255060195922852,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_RUN",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.1379032135009766,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.2567204236984253,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.2686909437179565,
+            "functionName": "Foley",
+            "data": "A_PLAY_FLY_MV_SLAP",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.6197030544281006,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8370968103408813,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.8674763441085815,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_JUMP",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.1615591049194336,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.1634278297424316,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_LAND",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.266666889190674
+      },
+      {
+        "id": 5184,
+        "name": "MerMan_Barehanded_Taunt",
+        "events": [
+          {
+            "time": 0.4958164691925049,
+            "functionName": "Foley",
+            "data": "fishUnarmedController | -313456752",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.519568145275116,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.680213689804077,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_FS_HUM_WALK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.933333396911621
+      }
+    ]
+  },
+  "probeValidation": {
+    "file": "scratch/mirewarden-game/BepInEx/plugins/FTKModFramework_content/models/probe_121695.glb",
+    "vertices": 3192,
+    "triangles": 1064,
+    "bones": 34,
+    "primitives": 1,
+    "triangles_per_primitive": [
+      1064
+    ],
+    "bounds_min": [
+      -1.7532668113708496,
+      -0.10972756147384644,
+      -0.1332540363073349
+    ],
+    "bounds_max": [
+      1.7532668113708496,
+      2.520052433013916,
+      0.7518259286880493
+    ],
+    "max_bind_rest_error": 4.440892098500626e-16,
+    "source_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.013947620987892151,
+      "informative_triangles": 1064
+    },
+    "reference_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.0012815785776366137,
+      "informative_triangles": 5412
+    },
+    "status": "PASS (binary and skin contract; live animation still requires in-game check)",
+    "exact34NamesOrderAndIBMs": true,
+    "glbSha256": "2b3aca1eb0524854faaae1ae3ac453bf3c81bb7cb6afcf02127f6ba43897d3e6",
+    "nativeZeroWeightBones": [
+      "MiddleFinger4_R",
+      "MiddleFinger4_L"
+    ]
+  },
+  "otherControllerVariants": [
+    {
+      "enemy": "fishA02",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a02-native-topology-analysis/native-metadata.json",
+        "sha256": "dd083534bfc929d9a93f4781a0dc1d2972474c3262b56710fcd2e6b76e321860"
+      },
+      "nativeRow": {
+        "enemy_id": "fishA02",
+        "enemy_level": 2,
+        "db_byte_offset": 102512,
+        "cel_path_id": 140132,
+        "prefab_name": "enFishA02",
+        "prefab_game_object_path_id": 47228,
+        "renderers": [
+          {
+            "renderer_path_id": 121286,
+            "validation": "discovery_only",
+            "errors": [],
+            "mesh_path_id": 3267,
+            "mesh_asset_file": "resources.assets",
+            "mesh_name": "enFishB",
+            "renderer_name": "enFishB",
+            "ancestor_names": [
+              "enFishB",
+              "enFishA02"
+            ],
+            "joint_count": 34,
+            "bone_names": [
+              "Root_M",
+              "BackA_M",
+              "BackB_M",
+              "Chest_M",
+              "Scapula_R",
+              "Shoulder_R",
+              "Elbow_R",
+              "Wrist_R",
+              "MiddleFinger1_R",
+              "MiddleFinger2_R",
+              "MiddleFinger3_R",
+              "MiddleFinger4_R",
+              "Neck_M",
+              "Head_M",
+              "Hair_M",
+              "Nose_M",
+              "Scapula_L",
+              "Shoulder_L",
+              "Elbow_L",
+              "Wrist_L",
+              "MiddleFinger1_L",
+              "MiddleFinger2_L",
+              "MiddleFinger3_L",
+              "MiddleFinger4_L",
+              "Hip_R",
+              "Knee_R",
+              "Ankle_R",
+              "MiddleToe1_R",
+              "MiddleToe2_R",
+              "Hip_L",
+              "Knee_L",
+              "Ankle_L",
+              "MiddleToe1_L",
+              "MiddleToe2_L"
+            ],
+            "nearest_skinned_bone_parent_names": [
+              null,
+              "Root_M",
+              "BackA_M",
+              "BackB_M",
+              "Chest_M",
+              "Scapula_R",
+              "Shoulder_R",
+              "Elbow_R",
+              "Wrist_R",
+              "MiddleFinger1_R",
+              "MiddleFinger2_R",
+              "MiddleFinger3_R",
+              "Chest_M",
+              "Neck_M",
+              "Head_M",
+              "Head_M",
+              "Chest_M",
+              "Scapula_L",
+              "Shoulder_L",
+              "Elbow_L",
+              "Wrist_L",
+              "MiddleFinger1_L",
+              "MiddleFinger2_L",
+              "MiddleFinger3_L",
+              "Root_M",
+              "Hip_R",
+              "Knee_R",
+              "Ankle_R",
+              "MiddleToe1_R",
+              "Root_M",
+              "Hip_L",
+              "Knee_L",
+              "Ankle_L",
+              "MiddleToe1_L"
+            ],
+            "duplicate_bone_names": [],
+            "unresolved_bone_count": 0,
+            "bindpose_count": 34,
+            "topology_fingerprint": "5990c51ca004ebdbe2cab2443f6fb747ee0c38ecd47536bb086c8bd0319be258",
+            "bindpose_fingerprint": "51ace1f1302d4ac6abbf5fdf12dcdcad3e8eef3c3a921968790e132503b3ac67",
+            "rig_profile_fingerprint": "afd00eb7422e091b54478dcfd8e23906d36f027782e249e0b65123634652874f",
+            "animators": [
+              {
+                "animator_path_id": 116531,
+                "game_object": "enFishA02",
+                "controller_path_id": 5956,
+                "controller_asset_file": "resources.assets",
+                "controller_name": "fishSpearController"
+              }
+            ],
+            "character_event_listeners": [
+              {
+                "component_path_id": 140132,
+                "game_object": "enFishA02"
+              }
+            ],
+            "classification": "character_renderer_candidate",
+            "combat_profile_fingerprint": "9065cad931701e00e45592036a91423fbe72c780fff7383817ca98c770bc2b62"
+          }
+        ],
+        "validation": "serialized_mapping_not_runtime_validated",
+        "weapon_path_id": 137703,
+        "weapon_asset_file": "resources.assets",
+        "weapon_name": "fishA02_spear",
+        "weapon_animation_controller_candidates": [
+          {
+            "controller_path_id": 5956,
+            "controller_asset_file": "resources.assets",
+            "controller_name": "fishSpearController",
+            "weapon_holder_name": "WEAPON_HOLDER",
+            "serialized_pointer_offset": 544
+          }
+        ],
+        "combat_controller_resolution": "verified_field_prefix",
+        "renderer_count": 1,
+        "classification": "skinned"
+      },
+      "root": {
+        "path": "/enFishA02",
+        "transform_id": 81872,
+        "active": true,
+        "components": [
+          {
+            "type": "Transform",
+            "id": 81872
+          },
+          {
+            "type": "Animator",
+            "id": 116531
+          },
+          {
+            "type": "MonoBehaviour",
+            "id": 140132,
+            "script": "CharacterEventListener"
+          }
+        ],
+        "localPosition": {
+          "x": 30.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "localRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "componentCounts": {
+        "Transform": 52,
+        "Animator": 1,
+        "MonoBehaviour": 1,
+        "SkinnedMeshRenderer": 1,
+        "BoxCollider": 2,
+        "Rigidbody": 11,
+        "CharacterJoint": 10,
+        "SphereCollider": 1,
+        "Camera": 2,
+        "CapsuleCollider": 8
+      },
+      "materials": [
+        {
+          "id": 1056,
+          "name": "matLoot",
+          "keywords": "_EMISSION _METALLICGLOSSMAP",
+          "colors": [
+            [
+              "_Color",
+              {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              }
+            ],
+            [
+              "_EmissionColor",
+              {
+                "r": 1.399999976158142,
+                "g": 1.399999976158142,
+                "b": 1.399999976158142,
+                "a": 1.0
+              }
+            ],
+            [
+              "_EmissionColorUI",
+              {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              }
+            ]
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "path": "/enFishA02/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+          "transform_id": 95504,
+          "active": true,
+          "components": [
+            {
+              "type": "Transform",
+              "id": 95504
+            },
+            {
+              "type": "Camera",
+              "id": 99001
+            }
+          ],
+          "localPosition": {
+            "x": -0.2199999988079071,
+            "y": 2.359999895095825,
+            "z": 0.6800000071525574
+          },
+          "localRotation": {
+            "x": -0.5847387909889221,
+            "y": 0.5539565086364746,
+            "z": -0.4394684433937073,
+            "w": -0.3975931406021118
+          },
+          "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          }
+        },
+        {
+          "path": "/enFishA02/CameraRoot/EncounterCam",
+          "transform_id": 86107,
+          "active": true,
+          "components": [
+            {
+              "type": "Transform",
+              "id": 86107
+            },
+            {
+              "type": "Camera",
+              "id": 99224
+            }
+          ],
+          "localPosition": {
+            "x": -2.450000286102295,
+            "y": 1.7610000371932983,
+            "z": 4.243525505065918
+          },
+          "localRotation": {
+            "x": 0.0,
+            "y": -0.9659258723258972,
+            "z": 0.0,
+            "w": -0.2588190734386444
+          },
+          "localScale": {
+            "x": 0.9999996423721313,
+            "y": 1.0,
+            "z": 0.9999996423721313
+          }
+        }
+      ],
+      "controller": {
+        "id": 5956,
+        "name": "fishSpearController",
+        "clips": [
+          {
+            "id": 4846,
+            "name": "MerMan_Soldier_Idle",
+            "events": [],
+            "stopTime": 13.333333969116211
+          },
+          {
+            "id": 5068,
+            "name": "MerMan_Soldier_Taunt",
+            "events": [
+              {
+                "time": 0.1002928763628006,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_MED",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1512145698070526,
+                "functionName": "Foley",
+                "data": "PLAY_VO_TAUNT",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.8000000715255737
+          },
+          {
+            "id": 5269,
+            "name": "MerMan_Soldier_Block",
+            "events": [
+              {
+                "time": 0.2132253646850586,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.23892930150032043,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_MED",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.43454790115356445,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8515519499778748,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.0998650789260864,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.3333333730697632
+          },
+          {
+            "id": 5028,
+            "name": "MerMan_Soldier_Attack1",
+            "events": [
+              {
+                "time": 0.06693657487630844,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.18607167899608612,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.27854251861572266,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.49230772256851196,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.6317782402038574,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8183536529541016,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.0330108404159546,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.1055331230163574,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.1121028661727905,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.472604751586914,
+                "functionName": "Foley",
+                "data": "PLAY_VO_TAUNT",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.713590383529663,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.7684211730957031,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.0035159587860107,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.06854510307312,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_LAND",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 2.133333444595337
+          },
+          {
+            "id": 5068,
+            "name": "MerMan_Soldier_Taunt",
+            "events": [
+              {
+                "time": 0.1002928763628006,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_MED",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1512145698070526,
+                "functionName": "Foley",
+                "data": "PLAY_VO_TAUNT",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.8000000715255737
+          },
+          {
+            "id": 5068,
+            "name": "MerMan_Soldier_Taunt",
+            "events": [
+              {
+                "time": 0.1002928763628006,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_MED",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1512145698070526,
+                "functionName": "Foley",
+                "data": "PLAY_VO_TAUNT",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.8000000715255737
+          },
+          {
+            "id": 5267,
+            "name": "MerMan_Soldier_HitBig",
+            "events": [
+              {
+                "time": 0.04736842215061188,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.13684210181236267,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.4912280738353729,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.3385965824127197,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.4684211015701294,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.7333334684371948
+          },
+          {
+            "id": 4875,
+            "name": "MerMan_Soldier_DeathDirect",
+            "events": [
+              {
+                "time": 0.025303643196821213,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DEATH",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.08422206342220306,
+                "functionName": "DeathFallOff",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.09083119034767151,
+                "functionName": "CameraShake",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.11071181297302246,
+                "functionName": "DropWeapon",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1372140794992447,
+                "functionName": "DropShield",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.5043859481811523,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_BODYFALL",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.6666667461395264
+          },
+          {
+            "id": 4961,
+            "name": "MerMan_Soldier_Attack2",
+            "events": [
+              {
+                "time": 0.06882590800523758,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1217038556933403,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.18016193807125092,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.20445343852043152,
+                "functionName": "Foley",
+                "data": "PLAY_SFX_COM_TWIRL_WHOOSH",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.3562752902507782,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.409736305475235,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.670040488243103,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8722109794616699,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9046652913093567,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9129554629325867,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5465587377548218,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5821501016616821,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.8562753200531006,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_LAND",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.8864097595214844,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 2.0
+          },
+          {
+            "id": 5028,
+            "name": "MerMan_Soldier_Attack1",
+            "events": [
+              {
+                "time": 0.06693657487630844,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.18607167899608612,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.27854251861572266,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.49230772256851196,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.6317782402038574,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8183536529541016,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.0330108404159546,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.1055331230163574,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.1121028661727905,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.472604751586914,
+                "functionName": "Foley",
+                "data": "PLAY_VO_TAUNT",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.713590383529663,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.7684211730957031,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.0035159587860107,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.06854510307312,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_LAND",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 2.133333444595337
+          },
+          {
+            "id": 5186,
+            "name": "MerMan_Soldier_Dodge",
+            "events": [
+              {
+                "time": 0.13117408752441406,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1949392706155777,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.3570720851421356,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_LAND",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5813764333724976,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.6870445013046265,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.8000000715255737
+          },
+          {
+            "id": 5345,
+            "name": "MerMan_Soldier_HitSmall",
+            "events": [
+              {
+                "time": 0.042307693511247635,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.668016254901886,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.100000023841858
+          },
+          {
+            "id": 5345,
+            "name": "MerMan_Soldier_HitSmall",
+            "events": [
+              {
+                "time": 0.042307693511247635,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.668016254901886,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.100000023841858
+          },
+          {
+            "id": 4846,
+            "name": "MerMan_Soldier_Idle",
+            "events": [],
+            "stopTime": 13.333333969116211
+          },
+          {
+            "id": 5068,
+            "name": "MerMan_Soldier_Taunt",
+            "events": [
+              {
+                "time": 0.1002928763628006,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_MED",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1512145698070526,
+                "functionName": "Foley",
+                "data": "PLAY_VO_TAUNT",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.8000000715255737
+          },
+          {
+            "id": 4876,
+            "name": "MerMan_Soldier_DeathInDirect",
+            "events": [
+              {
+                "time": 0.552226722240448,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DEATH",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8022279143333435,
+                "functionName": "DeathFallOff",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9233590364456177,
+                "functionName": "DropWeapon",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9496625661849976,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_BODYFALL",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.0912424325942993,
+                "functionName": "DropShield",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 2.066666841506958
+          },
+          {
+            "id": 4961,
+            "name": "MerMan_Soldier_Attack2",
+            "events": [
+              {
+                "time": 0.06882590800523758,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1217038556933403,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.18016193807125092,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.20445343852043152,
+                "functionName": "Foley",
+                "data": "PLAY_SFX_COM_TWIRL_WHOOSH",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.3562752902507782,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.409736305475235,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.670040488243103,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8722109794616699,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9046652913093567,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9129554629325867,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5465587377548218,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5821501016616821,
+                "functionName": "AttackSlideStart",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.8562753200531006,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_LAND",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.8864097595214844,
+                "functionName": "AttackSlideStop",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": -1.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 2.0
+          },
+          {
+            "id": 5068,
+            "name": "MerMan_Soldier_Taunt",
+            "events": [
+              {
+                "time": 0.1002928763628006,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_MED",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1512145698070526,
+                "functionName": "Foley",
+                "data": "PLAY_VO_TAUNT",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.8000000715255737
+          }
+        ]
+      }
+    },
+    {
+      "enemy": "fishA03",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/fish-a03-native-topology-analysis/native-metadata.json",
+        "sha256": "ba9308fdaa5f07d0c82db8b89d61a21b8f62f113c9922f16c663fb4d1ba6a25e"
+      },
+      "nativeRow": {
+        "enemy_id": "fishA03",
+        "enemy_level": 2,
+        "db_byte_offset": 102900,
+        "cel_path_id": 138386,
+        "prefab_name": "enFishA03",
+        "prefab_game_object_path_id": 30612,
+        "renderers": [
+          {
+            "renderer_path_id": 121594,
+            "validation": "discovery_only",
+            "errors": [],
+            "mesh_path_id": 3646,
+            "mesh_asset_file": "resources.assets",
+            "mesh_name": "enFishC",
+            "renderer_name": "enFishC",
+            "ancestor_names": [
+              "enFishC",
+              "enFishA03"
+            ],
+            "joint_count": 34,
+            "bone_names": [
+              "Root_M",
+              "BackA_M",
+              "BackB_M",
+              "Chest_M",
+              "Scapula_R",
+              "Shoulder_R",
+              "Elbow_R",
+              "Wrist_R",
+              "MiddleFinger1_R",
+              "MiddleFinger2_R",
+              "MiddleFinger3_R",
+              "MiddleFinger4_R",
+              "Neck_M",
+              "Head_M",
+              "Hair_M",
+              "Nose_M",
+              "Scapula_L",
+              "Shoulder_L",
+              "Elbow_L",
+              "Wrist_L",
+              "MiddleFinger1_L",
+              "MiddleFinger2_L",
+              "MiddleFinger3_L",
+              "MiddleFinger4_L",
+              "Hip_R",
+              "Knee_R",
+              "Ankle_R",
+              "MiddleToe1_R",
+              "MiddleToe2_R",
+              "Hip_L",
+              "Knee_L",
+              "Ankle_L",
+              "MiddleToe1_L",
+              "MiddleToe2_L"
+            ],
+            "nearest_skinned_bone_parent_names": [
+              null,
+              "Root_M",
+              "BackA_M",
+              "BackB_M",
+              "Chest_M",
+              "Scapula_R",
+              "Shoulder_R",
+              "Elbow_R",
+              "Wrist_R",
+              "MiddleFinger1_R",
+              "MiddleFinger2_R",
+              "MiddleFinger3_R",
+              "Chest_M",
+              "Neck_M",
+              "Head_M",
+              "Head_M",
+              "Chest_M",
+              "Scapula_L",
+              "Shoulder_L",
+              "Elbow_L",
+              "Wrist_L",
+              "MiddleFinger1_L",
+              "MiddleFinger2_L",
+              "MiddleFinger3_L",
+              "Root_M",
+              "Hip_R",
+              "Knee_R",
+              "Ankle_R",
+              "MiddleToe1_R",
+              "Root_M",
+              "Hip_L",
+              "Knee_L",
+              "Ankle_L",
+              "MiddleToe1_L"
+            ],
+            "duplicate_bone_names": [],
+            "unresolved_bone_count": 0,
+            "bindpose_count": 34,
+            "topology_fingerprint": "5990c51ca004ebdbe2cab2443f6fb747ee0c38ecd47536bb086c8bd0319be258",
+            "bindpose_fingerprint": "51ace1f1302d4ac6abbf5fdf12dcdcad3e8eef3c3a921968790e132503b3ac67",
+            "rig_profile_fingerprint": "afd00eb7422e091b54478dcfd8e23906d36f027782e249e0b65123634652874f",
+            "animators": [
+              {
+                "animator_path_id": 116841,
+                "game_object": "enFishA03",
+                "controller_path_id": 5957,
+                "controller_asset_file": "resources.assets",
+                "controller_name": "fishStaffController"
+              }
+            ],
+            "character_event_listeners": [
+              {
+                "component_path_id": 138386,
+                "game_object": "enFishA03"
+              }
+            ],
+            "classification": "character_renderer_candidate",
+            "combat_profile_fingerprint": "ded645ccdb3e4a60afca6c5366a1f2102808b7cbd7e3232f57747ead771bc73a"
+          }
+        ],
+        "validation": "serialized_mapping_not_runtime_validated",
+        "weapon_path_id": 134933,
+        "weapon_asset_file": "resources.assets",
+        "weapon_name": "fishA03_staff",
+        "weapon_animation_controller_candidates": [
+          {
+            "controller_path_id": 5957,
+            "controller_asset_file": "resources.assets",
+            "controller_name": "fishStaffController",
+            "weapon_holder_name": "WEAPON_HOLDER",
+            "serialized_pointer_offset": 644
+          }
+        ],
+        "combat_controller_resolution": "verified_field_prefix",
+        "renderer_count": 1,
+        "classification": "skinned"
+      },
+      "root": {
+        "path": "/enFishA03",
+        "transform_id": 91439,
+        "active": true,
+        "components": [
+          {
+            "type": "Transform",
+            "id": 91439
+          },
+          {
+            "type": "Animator",
+            "id": 116841
+          },
+          {
+            "type": "MonoBehaviour",
+            "id": 138386,
+            "script": "CharacterEventListener"
+          }
+        ],
+        "localPosition": {
+          "x": 3.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "localRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "localScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "componentCounts": {
+        "Transform": 52,
+        "Animator": 1,
+        "MonoBehaviour": 1,
+        "SkinnedMeshRenderer": 1,
+        "BoxCollider": 2,
+        "Rigidbody": 11,
+        "CharacterJoint": 10,
+        "SphereCollider": 1,
+        "Camera": 2,
+        "CapsuleCollider": 8
+      },
+      "materials": [
+        {
+          "id": 1056,
+          "name": "matLoot",
+          "keywords": "_EMISSION _METALLICGLOSSMAP",
+          "colors": [
+            [
+              "_Color",
+              {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              }
+            ],
+            [
+              "_EmissionColor",
+              {
+                "r": 1.399999976158142,
+                "g": 1.399999976158142,
+                "b": 1.399999976158142,
+                "a": 1.0
+              }
+            ],
+            [
+              "_EmissionColorUI",
+              {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+              }
+            ]
+          ]
+        }
+      ],
+      "markers": [
+        {
+          "path": "/enFishA03/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+          "transform_id": 95856,
+          "active": true,
+          "components": [
+            {
+              "type": "Transform",
+              "id": 95856
+            },
+            {
+              "type": "Camera",
+              "id": 98943
+            }
+          ],
+          "localPosition": {
+            "x": -0.22100000083446503,
+            "y": 2.369999885559082,
+            "z": 1.5
+          },
+          "localRotation": {
+            "x": -0.6349385380744934,
+            "y": 0.6103655695915222,
+            "z": -0.3570074737071991,
+            "w": -0.3112116754055023
+          },
+          "localScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          }
+        },
+        {
+          "path": "/enFishA03/CameraRoot/EncounterCam",
+          "transform_id": 84155,
+          "active": true,
+          "components": [
+            {
+              "type": "Transform",
+              "id": 84155
+            },
+            {
+              "type": "Camera",
+              "id": 98966
+            }
+          ],
+          "localPosition": {
+            "x": -2.450000286102295,
+            "y": 1.7610000371932983,
+            "z": 4.243525505065918
+          },
+          "localRotation": {
+            "x": 0.0,
+            "y": -0.9659258723258972,
+            "z": 0.0,
+            "w": -0.2588190734386444
+          },
+          "localScale": {
+            "x": 0.9999996423721313,
+            "y": 1.0,
+            "z": 0.9999996423721313
+          }
+        }
+      ],
+      "controller": {
+        "id": 5957,
+        "name": "fishStaffController",
+        "clips": [
+          {
+            "id": 4866,
+            "name": "MerMan_Mage_Idle",
+            "events": [],
+            "stopTime": 4.958333492279053
+          },
+          {
+            "id": 4818,
+            "name": "MerMan_Mage_Taunt",
+            "events": [
+              {
+                "time": 0.2857624590396881,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.311740905046463,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.43838560581207275,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8507928848266602,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.2047486305236816,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5911774635314941,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.932144045829773,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.3120782375335693,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.7699015140533447,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 3.2083334922790527
+          },
+          {
+            "id": 5412,
+            "name": "MerMan_Mage_Block",
+            "events": [
+              {
+                "time": 0.22712551057338715,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.6315789818763733,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.0894737243652344,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.2000000476837158
+          },
+          {
+            "id": 5430,
+            "name": "MerMan_Mage_Attack1",
+            "events": [
+              {
+                "time": 0.20040486752986908,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.4082321226596832,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.7170699238777161,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.7992610931396484,
+                "functionName": "PlayAttackFX",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.7747766971588135,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 3.091430902481079,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 3.6666669845581055
+          },
+          {
+            "id": 4818,
+            "name": "MerMan_Mage_Taunt",
+            "events": [
+              {
+                "time": 0.2857624590396881,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.311740905046463,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.43838560581207275,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8507928848266602,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.2047486305236816,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5911774635314941,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.932144045829773,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.3120782375335693,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.7699015140533447,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 3.2083334922790527
+          },
+          {
+            "id": 4818,
+            "name": "MerMan_Mage_Taunt",
+            "events": [
+              {
+                "time": 0.2857624590396881,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.311740905046463,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.43838560581207275,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8507928848266602,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.2047486305236816,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5911774635314941,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.932144045829773,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.3120782375335693,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.7699015140533447,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 3.2083334922790527
+          },
+          {
+            "id": 5229,
+            "name": "MerMan_Mage_HitBig",
+            "events": [
+              {
+                "time": 0.01771255023777485,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.23026317358016968,
+                "functionName": "Foley",
+                "data": "fishStaffController | 389972281",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.5760078430175781,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.3579227924346924,
+                "functionName": "Foley",
+                "data": "fishStaffController | 389972281",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.6167880296707153,
+                "functionName": "Foley",
+                "data": "fishStaffController | 389972281",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.75
+          },
+          {
+            "id": 5338,
+            "name": "MerMan_Mage_DeathDirect",
+            "events": [
+              {
+                "time": 0.011808366514742374,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DEATH",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.0680871307849884,
+                "functionName": "DeathFallOff",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.07883461564779282,
+                "functionName": "CameraShake",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.09825541824102402,
+                "functionName": "DropWeapon",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.11361280828714371,
+                "functionName": "DropShield",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.5178812742233276,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_BODYFALL",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.6666667461395264
+          },
+          {
+            "id": 5187,
+            "name": "MerMan_Mage_Attack2",
+            "events": [
+              {
+                "time": 0.5422513484954834,
+                "functionName": "PlayWeaponAnimation",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8762677907943726,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9243737459182739,
+                "functionName": "PlayAttackFX",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9284750819206238,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.2496626377105713,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_LAND",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.2820513248443604,
+                "functionName": "Foley",
+                "data": "PLAY_WEP_STAFF_GROUND_IMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.932594656944275,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 2.6666667461395264
+          },
+          {
+            "id": 4948,
+            "name": "MerMan_Mage_Attack3",
+            "events": [
+              {
+                "time": 0.24048583209514618,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.3619433343410492,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.5124939680099487,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.5160243511199951,
+                "functionName": "PlayWeaponAnimation",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.6738916635513306,
+                "functionName": "PlayAttackFX",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.7700405120849609,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.0275304317474365,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.258299708366394,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.4963563680648804,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.7281948328018188,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.7829960584640503,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.166801691055298,
+                "functionName": "Foley",
+                "data": "PLAY_WEP_STAFF_GROUND_IMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.186032295227051,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 2.4000000953674316
+          },
+          {
+            "id": 5186,
+            "name": "MerMan_Soldier_Dodge",
+            "events": [
+              {
+                "time": 0.13117408752441406,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.1949392706155777,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.3570720851421356,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_LAND",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5813764333724976,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.6870445013046265,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.8000000715255737
+          },
+          {
+            "id": 5476,
+            "name": "MerMan_Mage_HitSmall",
+            "events": [
+              {
+                "time": 0.017543861642479897,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.6179056167602539,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.0833333730697632
+          },
+          {
+            "id": 5476,
+            "name": "MerMan_Mage_HitSmall",
+            "events": [
+              {
+                "time": 0.017543861642479897,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DAMAGE",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.6179056167602539,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_WALK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.0833333730697632
+          },
+          {
+            "id": 4866,
+            "name": "MerMan_Mage_Idle",
+            "events": [],
+            "stopTime": 4.958333492279053
+          },
+          {
+            "id": 4818,
+            "name": "MerMan_Mage_Taunt",
+            "events": [
+              {
+                "time": 0.2857624590396881,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.311740905046463,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.43838560581207275,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8507928848266602,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.2047486305236816,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5911774635314941,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.932144045829773,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.3120782375335693,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.7699015140533447,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 3.2083334922790527
+          },
+          {
+            "id": 4778,
+            "name": "MerMan_Mage_DeathInDirect",
+            "events": [
+              {
+                "time": 0.0354251004755497,
+                "functionName": "Foley",
+                "data": "PLAY_VO_DEATH",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8453524708747864,
+                "functionName": "DeathFallOff",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9174679517745972,
+                "functionName": "DropWeapon ",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9227395057678223,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_MV_HUM_BODYFALL",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.9935897588729858,
+                "functionName": "DropShield",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 1.6666667461395264
+          },
+          {
+            "id": 5430,
+            "name": "MerMan_Mage_Attack1",
+            "events": [
+              {
+                "time": 0.20040486752986908,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.4082321226596832,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.7170699238777161,
+                "functionName": "Dodge",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.7992610931396484,
+                "functionName": "PlayAttackFX",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.7747766971588135,
+                "functionName": "AttackHit",
+                "data": "",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 3.091430902481079,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_SCUFF",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 3.6666669845581055
+          },
+          {
+            "id": 4997,
+            "name": "portrait",
+            "events": [],
+            "stopTime": 0.1666666865348816
+          },
+          {
+            "id": 4818,
+            "name": "MerMan_Mage_Taunt",
+            "events": [
+              {
+                "time": 0.2857624590396881,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_JUMP",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.311740905046463,
+                "functionName": "Foley",
+                "data": "PLAY_VO_ATTACK",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.43838560581207275,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 0.8507928848266602,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.2047486305236816,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.5911774635314941,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 1.932144045829773,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.3120782375335693,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              },
+              {
+                "time": 2.7699015140533447,
+                "functionName": "Foley",
+                "data": "PLAY_FLY_FS_HUM_RUN",
+                "objectReferenceParameter": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "floatParameter": 0.0,
+                "intParameter": 0,
+                "messageOptions": 0
+              }
+            ],
+            "stopTime": 3.2083334922790527
+          }
+        ]
+      }
+    }
+  ],
+  "allRemainingExactPairs": [
+    {
+      "nativeEnemy": "fishA01",
+      "resourcePrefab": null,
+      "rendererPath": "enFishA",
+      "sourceRendererId": 121695,
+      "rigProfile": "2cb4d06da0ad32dba308fc1f7fe7900993c51486a9cb37576d854b1615c5a080",
+      "controllerId": 5958,
+      "controllerName": "fishUnarmedController",
+      "combatProfile": "746deb43cc057df260abe66bad848ded92c511f22d0b0ef05162c1f7287674fc",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishB02",
+      "resourcePrefab": null,
+      "rendererPath": "enFishD",
+      "sourceRendererId": 121620,
+      "rigProfile": "074b976f36e394e0a18219c15239b2b5316aad5891c4dc6e5a007cb90d761919",
+      "controllerId": 5956,
+      "controllerName": "fishSpearController",
+      "combatProfile": "4991e58dadadf354941355fb3b3829ac9278efbccd4c2c68a3187f3ef2c9bf68",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishB03",
+      "resourcePrefab": null,
+      "rendererPath": "enFishE",
+      "sourceRendererId": 121686,
+      "rigProfile": "d97cd2a32c77d27954acc2b93c121f14a9de14d2c197d523b06acce6c77c4228",
+      "controllerId": 5957,
+      "controllerName": "fishStaffController",
+      "combatProfile": "da6e6e8f7e017e896df0afb7409c6fc3f3ce64ea8c81c76468de7264f3642651",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishC01",
+      "resourcePrefab": null,
+      "rendererPath": "enFishF",
+      "sourceRendererId": 121649,
+      "rigProfile": "b2caebaf9152614c03e0e9ac826e2301c82b236653c9fa0ef17580de4abfca50",
+      "controllerId": 5956,
+      "controllerName": "fishSpearController",
+      "combatProfile": "3e76274d164aba932fadfdbddff57b619e606b4cb3996e4cdf0d29f47ac528c4",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishC02",
+      "resourcePrefab": null,
+      "rendererPath": "enFishG",
+      "sourceRendererId": 121628,
+      "rigProfile": "83d0e8a5ffc53075f038ec6ac794f3b867fd6cbab6aea2ffb8e4bd0d8ff0054a",
+      "controllerId": 5957,
+      "controllerName": "fishStaffController",
+      "combatProfile": "880581afd7108092bdf836778172e29b0326f7bc14e5898d6930fbb00cc21e6e",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishD01",
+      "resourcePrefab": null,
+      "rendererPath": "enFishD01",
+      "sourceRendererId": 121543,
+      "rigProfile": "92c1fc28d0f475fa16873cebd71208f6ed4eab46a8799cc14f4ccf3b8509966e",
+      "controllerId": 5956,
+      "controllerName": "fishSpearController",
+      "combatProfile": "3e0aa909da4f6adf02b685c7c3f548ea3c73acbba14a49d2672bdc79d842f2bb",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishD02",
+      "resourcePrefab": null,
+      "rendererPath": "enFishD02",
+      "sourceRendererId": 121479,
+      "rigProfile": "b4f9a5974fd39db350a89055c0ed2d010ac31a965a7d680cfda70adbeb40bdb7",
+      "controllerId": 5957,
+      "controllerName": "fishStaffController",
+      "combatProfile": "d2d998ccc2a1e4d6154c468182497723c2d8e9c4d8668daedfca91caa883a864",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishB01",
+      "resourcePrefab": null,
+      "rendererPath": "enFishH",
+      "sourceRendererId": 121298,
+      "rigProfile": "b0ea0430754ef32ddb77ae8b3041b0f46f28ebc80c832745a7b93f7e69192172",
+      "controllerId": 5958,
+      "controllerName": "fishUnarmedController",
+      "combatProfile": "36e5bca7811548f5b291e19aca1d54d33a1b3a3787c5aa4a5dc63ad5475dffa4",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishA02",
+      "resourcePrefab": null,
+      "rendererPath": "enFishB",
+      "sourceRendererId": 121286,
+      "rigProfile": "afd00eb7422e091b54478dcfd8e23906d36f027782e249e0b65123634652874f",
+      "controllerId": 5956,
+      "controllerName": "fishSpearController",
+      "combatProfile": "9065cad931701e00e45592036a91423fbe72c780fff7383817ca98c770bc2b62",
+      "family": "5990c51ca004ebdb"
+    },
+    {
+      "nativeEnemy": "fishA03",
+      "resourcePrefab": null,
+      "rendererPath": "enFishC",
+      "sourceRendererId": 121594,
+      "rigProfile": "afd00eb7422e091b54478dcfd8e23906d36f027782e249e0b65123634652874f",
+      "controllerId": 5957,
+      "controllerName": "fishStaffController",
+      "combatProfile": "ded645ccdb3e4a60afca6c5366a1f2102808b7cbd7e3232f57747ead771bc73a",
+      "family": "5990c51ca004ebdb"
+    }
+  ],
+  "behavior": {
+    "ownership": "Native EnemyDummy clones exactenemyCEL, parents toactualdummy, resets localposition/rotation; nativeunitScale remains. SourceprefabX18 is removed by combatinit. Nativeactualweapon assignment remains, no ownedfixture/runtime game actions used for audit.",
+    "ragdoll": "Actualnative subtree11Rigidbodies10CharacterJoints,2Box+1Sphere+8Capsulecolliders. CEL.OnEnable checks joints under m_AnimRoot, sets m_DoRagdoll and bodieskinematic; CheckRagdollDeathSound calls DoRagDoll ifenabled, makes nonArrow/nonDetachable rigidbodies dynamic and disablesAnimator. Capture must preserve nativeAnimatoroff/physics ifobserved, notlabel it loaderfailure. m_AnimRoot serializedpointer not decoded by generictypetree, so runtime activation still measured separately. No FallOffLimb orotherMonoBehaviour in source subtree.",
+    "death": "Barehanded direct5328 length1.666667 includes CameraShake.065981, DropShield.208333, DropWeapon.388622, DeathFallOff.472756. Indirect4825 same length includes DropWeapon.620994, DropShield.758294,FallOff.945513. No DeathFade event. Native ragdoll event/sound handling can differ from animationonly clip playback.",
+    "attack": "BarehandedAttack1 clip4858 name has trailing space, length2.266667; Dodge.607796, AttackHit1.101344 plusnativeAttackSlideStart/Stop. Attack2clip5273 Dodge.735753/hit1.256720 plusSlideevents. NativeCEL resolves actualvictim/damage; preserve events androotmovement.",
+    "material": "One native matLoot1056 white main, _EMISSION1.4 and _METALLICGLOSSMAP, noUVscroller/materialscripts. Shader/material flaginheritance is distinct from authoredoriginal appearance.",
+    "portrait": "Head PortraitCam76368 and CameraRoot/EncounterCam89711 exactpose recorded; liveframing/art remain separate.",
+    "topology": "34palette jointswithexactprobeallIBMs,2nativezero-weightbones MiddleFinger4_R/L. Group12renderers but10nativeexactbind/controllerpairs, nonecoveredby this sourceaudit. A02/A03 sharecatalogbindfingerprint but use5956Spear vs5957Staff; differentclips/events despite common topology. A01 uses5958Unarmed. Eachrequires ownexactlive trial."
+  },
+  "limits": [
+    "Sourceonly, no game/deployment/framework edits.",
+    "Native extractedgeometry/physics/decompiledsources stayignoredscratch.",
+    "A02/A03 nativehierarchy/controller metadata directlyread but notlivevalidated; otherfishvariants mapped from pinnedcatalog only.",
+    "Animator/ragdoll dynamicpose/culling/lifetime mayend capture; preserve incomplete evidence and require sourceconsistent classification, no inventedfullsequence acceptance.",
+    "GenericCELtypetree hidescustomserializedfields; do not assume allflags/detachables acrossvariants equal.",
+    "Currentprobe calibration not originalart or finalresource teardown."
+  ]
+}

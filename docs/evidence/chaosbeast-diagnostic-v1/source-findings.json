@@ -1,0 +1,1782 @@
+{
+  "status": "EXACT_SOURCE_AUDIT_TWO_MATERIAL_NATIVE_SEMANTICS_REQUIRED",
+  "mapping": {
+    "enemy_id": "chaosBeast",
+    "enemy_level": 0,
+    "db_byte_offset": 52896,
+    "cel_path_id": 135754,
+    "prefab_name": "enChaosBeast",
+    "prefab_game_object_path_id": 27050,
+    "renderers": [
+      {
+        "renderer_path_id": 121008,
+        "validation": "discovery_only",
+        "errors": [],
+        "mesh_path_id": 3093,
+        "mesh_asset_file": "resources.assets",
+        "mesh_name": "enChaosBeast",
+        "renderer_name": "enChaosBeast",
+        "ancestor_names": [
+          "enChaosBeast",
+          "enChaosBeast"
+        ],
+        "joint_count": 31,
+        "bone_names": [
+          "Root_M",
+          "BackA_M",
+          "BackB_M",
+          "Chest_M",
+          "Scapula_R",
+          "Shoulder_R",
+          "Elbow_R",
+          "Wrist_R",
+          "MiddleFinger1_R",
+          "MiddleFinger2_R",
+          "MiddleFinger3_R",
+          "ThumbFinger1_R",
+          "ThumbFinger2_R",
+          "ThumbFinger3_R",
+          "Neck_M",
+          "Head_M",
+          "Hair_M",
+          "Scapula_L",
+          "Shoulder_L",
+          "Elbow_L",
+          "Wrist_L",
+          "MiddleFinger1_L",
+          "MiddleFinger2_L",
+          "MiddleFinger3_L",
+          "ThumbFinger1_L",
+          "ThumbFinger2_L",
+          "ThumbFinger3_L",
+          "Hip_R",
+          "Knee_R",
+          "Hip_L",
+          "Knee_L"
+        ],
+        "nearest_skinned_bone_parent_names": [
+          null,
+          "Root_M",
+          "BackA_M",
+          "BackB_M",
+          "Chest_M",
+          "Scapula_R",
+          "Shoulder_R",
+          "Elbow_R",
+          "Wrist_R",
+          "MiddleFinger1_R",
+          "MiddleFinger2_R",
+          "Wrist_R",
+          "ThumbFinger1_R",
+          "ThumbFinger2_R",
+          "Chest_M",
+          "Neck_M",
+          "Head_M",
+          "Chest_M",
+          "Scapula_L",
+          "Shoulder_L",
+          "Elbow_L",
+          "Wrist_L",
+          "MiddleFinger1_L",
+          "MiddleFinger2_L",
+          "Wrist_L",
+          "ThumbFinger1_L",
+          "ThumbFinger2_L",
+          "Root_M",
+          "Hip_R",
+          "Root_M",
+          "Hip_L"
+        ],
+        "duplicate_bone_names": [],
+        "unresolved_bone_count": 0,
+        "bindpose_count": 31,
+        "topology_fingerprint": "d1de8c46112a77d88d2e92655819b58044093f5bc5726156b54dbbb7c46a7d39",
+        "bindpose_fingerprint": "1f587cf6af10fef7f58ea25de09b09454256ebdb24c22a2924cfccb69f75444e",
+        "rig_profile_fingerprint": "f8480a2d2d6a276730a02dca4d86b93484137a0a7ae861123ad26a9e947809c2",
+        "animators": [
+          {
+            "animator_path_id": 116314,
+            "game_object": "enChaosBeast",
+            "controller_path_id": 5960,
+            "controller_asset_file": "resources.assets",
+            "controller_name": "ghostController"
+          }
+        ],
+        "character_event_listeners": [
+          {
+            "component_path_id": 135754,
+            "game_object": "enChaosBeast"
+          }
+        ],
+        "classification": "character_renderer_candidate",
+        "combat_profile_fingerprint": "1d2808cbd2bc1cb6f31a3d51b0787cb854efdf316b9ba44fb3b7825899d35d78"
+      }
+    ],
+    "validation": "serialized_mapping_not_runtime_validated",
+    "weapon_path_id": 136690,
+    "weapon_asset_file": "resources.assets",
+    "weapon_name": "chaosBeast",
+    "weapon_animation_controller_candidates": [
+      {
+        "controller_path_id": 5960,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "ghostController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 520
+      }
+    ],
+    "combat_controller_resolution": "verified_field_prefix",
+    "renderer_count": 1,
+    "classification": "skinned"
+  },
+  "legacyProbeProfile": {
+    "key": "ftkmf_modeltest_probe_chaosbeast",
+    "baseEnemy": "chaosBeast",
+    "displayName": "Rig probe: chaosBeast",
+    "combatProfile": "1d2808cbd2bc1cb6f31a3d51b0787cb854efdf316b9ba44fb3b7825899d35d78",
+    "renderers": [
+      {
+        "rendererPath": "enChaosBeast",
+        "glbFile": "probe_121008.glb",
+        "textureFile": "probe_palette.png"
+      }
+    ],
+    "minimumBaseHealth": 64
+  },
+  "probeValidation": {
+    "file": "scratch/runtime-profile-405-reefstrider/models/probe_121008.glb",
+    "vertices": 2904,
+    "triangles": 968,
+    "bones": 31,
+    "primitives": 1,
+    "triangles_per_primitive": [
+      968
+    ],
+    "bounds_min": [
+      -1.3150627613067627,
+      0.4493173658847809,
+      -0.05426687002182007
+    ],
+    "bounds_max": [
+      1.3150626420974731,
+      2.354909896850586,
+      0.3403623402118683
+    ],
+    "max_bind_rest_error": 4.440892098500626e-16,
+    "source_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.004702513571828604,
+      "informative_triangles": 968
+    },
+    "reference_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.003293315937181838,
+      "informative_triangles": 1400
+    },
+    "status": "PASS (binary and skin contract; live animation still requires in-game check)"
+  },
+  "sourceAssetsSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "root": {
+    "path": "/enChaosBeast",
+    "transform_id": 70870,
+    "active": true,
+    "components": [
+      {
+        "type": "Transform",
+        "id": 70870
+      },
+      {
+        "type": "Animator",
+        "id": 116314
+      },
+      {
+        "type": "MonoBehaviour",
+        "id": 135754,
+        "script": "CharacterEventListener"
+      }
+    ],
+    "localPosition": {
+      "x": 158.96383666992188,
+      "y": 11.573827743530273,
+      "z": 23.19536590576172
+    },
+    "localRotation": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    },
+    "localScale": {
+      "x": 1.5,
+      "y": 1.5,
+      "z": 1.5
+    }
+  },
+  "nativeScale": 1.5,
+  "nativeMeshId": 3093,
+  "nativeSubmeshIndexCounts": [
+    4014,
+    186
+  ],
+  "nativeMaterialCount": 2,
+  "scrolling": {
+    "component": 135814,
+    "rawBytes": 56,
+    "rawHex": "00000000ea4000000000000001000000010000000201000000000000000000000000000000000000000000bf080000005f4d61696e546578",
+    "materialIndex": 0,
+    "uvAnimationRate": [
+      0.0,
+      -0.5
+    ],
+    "textureNameLength": 8,
+    "textureName": "_MainTex"
+  },
+  "materials": [
+    {
+      "id": 71,
+      "name": "matChaosBeast",
+      "shaderId": 4633,
+      "savedProperties": {
+        "m_TexEnvs": [
+          [
+            "_BumpMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 2104
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_DetailAlbedoMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_DetailMask",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_DetailNormalMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_EmissionMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 1747
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_MainTex",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 1747
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_MetallicGlossMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_OcclusionMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_ParallaxMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ]
+        ],
+        "m_Floats": [
+          [
+            "_BumpScale",
+            2.0
+          ],
+          [
+            "_Cutoff",
+            0.5
+          ],
+          [
+            "_DetailNormalMapScale",
+            1.0
+          ],
+          [
+            "_DstBlend",
+            0.0
+          ],
+          [
+            "_GlossMapScale",
+            1.0
+          ],
+          [
+            "_Glossiness",
+            0.6549999713897705
+          ],
+          [
+            "_GlossyReflections",
+            1.0
+          ],
+          [
+            "_Metallic",
+            1.0
+          ],
+          [
+            "_Mode",
+            0.0
+          ],
+          [
+            "_OcclusionStrength",
+            1.0
+          ],
+          [
+            "_Parallax",
+            0.019999999552965164
+          ],
+          [
+            "_SmoothnessTextureChannel",
+            0.0
+          ],
+          [
+            "_SpecularHighlights",
+            1.0
+          ],
+          [
+            "_SrcBlend",
+            1.0
+          ],
+          [
+            "_UVSec",
+            0.0
+          ],
+          [
+            "_ZWrite",
+            1.0
+          ]
+        ],
+        "m_Colors": [
+          [
+            "_Color",
+            {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 1.0
+            }
+          ],
+          [
+            "_EmissionColor",
+            {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 1.0
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "id": 70,
+      "name": "matCHaosBeastFace",
+      "shaderId": 4633,
+      "savedProperties": {
+        "m_TexEnvs": [
+          [
+            "_BumpMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_DetailAlbedoMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_DetailMask",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_DetailNormalMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_EmissionMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 1890
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_MainTex",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 1745
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_MetallicGlossMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_OcclusionMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ],
+          [
+            "_ParallaxMap",
+            {
+              "m_Texture": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              },
+              "m_Scale": {
+                "x": 1.0,
+                "y": 1.0
+              },
+              "m_Offset": {
+                "x": 0.0,
+                "y": 0.0
+              }
+            }
+          ]
+        ],
+        "m_Floats": [
+          [
+            "_BumpScale",
+            1.0
+          ],
+          [
+            "_Cutoff",
+            0.5
+          ],
+          [
+            "_DetailNormalMapScale",
+            1.0
+          ],
+          [
+            "_DstBlend",
+            0.0
+          ],
+          [
+            "_GlossMapScale",
+            1.0
+          ],
+          [
+            "_Glossiness",
+            0.0
+          ],
+          [
+            "_GlossyReflections",
+            1.0
+          ],
+          [
+            "_Metallic",
+            0.0
+          ],
+          [
+            "_Mode",
+            0.0
+          ],
+          [
+            "_OcclusionStrength",
+            1.0
+          ],
+          [
+            "_Parallax",
+            0.019999999552965164
+          ],
+          [
+            "_SmoothnessTextureChannel",
+            0.0
+          ],
+          [
+            "_SpecularHighlights",
+            1.0
+          ],
+          [
+            "_SrcBlend",
+            1.0
+          ],
+          [
+            "_UVSec",
+            0.0
+          ],
+          [
+            "_ZWrite",
+            1.0
+          ]
+        ],
+        "m_Colors": [
+          [
+            "_Color",
+            {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 1.0
+            }
+          ],
+          [
+            "_EmissionColor",
+            {
+              "r": 1.0,
+              "g": 1.0,
+              "b": 1.0,
+              "a": 1.0
+            }
+          ]
+        ]
+      }
+    }
+  ],
+  "markers": [
+    {
+      "path": "/enChaosBeast/Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam",
+      "transform_id": 60003,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 60003
+        },
+        {
+          "type": "Camera",
+          "id": 98392
+        }
+      ],
+      "localPosition": {
+        "x": -0.5,
+        "y": 1.309999942779541,
+        "z": 0.00999959371984005
+      },
+      "localRotation": {
+        "x": -0.5747830271720886,
+        "y": 0.411855012178421,
+        "z": -0.5747830271720886,
+        "w": -0.411855012178421
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enChaosBeast/CameraRoot/EncounterCam",
+      "transform_id": 73733,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 73733
+        },
+        {
+          "type": "Camera",
+          "id": 98410
+        }
+      ],
+      "localPosition": {
+        "x": 0.019999999552965164,
+        "y": 1.2599999904632568,
+        "z": 3.8399999141693115
+      },
+      "localRotation": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0,
+        "w": -1.6292068494294654e-07
+      },
+      "localScale": {
+        "x": 0.9999996423721313,
+        "y": 1.0,
+        "z": 0.9999996423721313
+      }
+    }
+  ],
+  "controller": {
+    "id": 5960,
+    "name": "ghostController",
+    "clips": [
+      {
+        "id": 4831,
+        "name": "cidle_ghost",
+        "events": [],
+        "stopTime": 2.0
+      },
+      {
+        "id": 4900,
+        "name": "ghostTaunt",
+        "events": [
+          {
+            "time": 0.35648590326309204,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_SLOW_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6936572790145874,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 4884,
+        "name": "block_ghost",
+        "events": [
+          {
+            "time": 0.08313090354204178,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.09256228059530258,
+            "functionName": "Foley",
+            "data": "PLAY_WEP_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.24099405109882355,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_TWIRL_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 0.9333333969116211
+      },
+      {
+        "id": 4871,
+        "name": "attack_ghost",
+        "events": [
+          {
+            "time": 0.03228747844696045,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_FAST_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.10148662328720093,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.100000023841858,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.11066126823425293,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.18134474754333496,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.19967542588710785,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.4965760111808777,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.529086709022522,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.840865135192871,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_FAST_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.0724778175354004,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.100000023841858,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.613074779510498,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 5305,
+        "name": "tauntTemp_ghost",
+        "events": [
+          {
+            "time": 0.05943938344717026,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_TWIRL_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.0836707204580307,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6180837154388428,
+            "functionName": "Foley",
+            "data": "PLAY_VO_SPECIAL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.9946019649505615,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 5305,
+        "name": "tauntTemp_ghost",
+        "events": [
+          {
+            "time": 0.05943938344717026,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_TWIRL_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.0836707204580307,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6180837154388428,
+            "functionName": "Foley",
+            "data": "PLAY_VO_SPECIAL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.9946019649505615,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 5349,
+        "name": "damageHeavy_ghost",
+        "events": [
+          {
+            "time": 0.038259107619524,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.2665776312351227,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.2805667817592621,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_FAST_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.4000000953674316
+      },
+      {
+        "id": 4959,
+        "name": "death_ghost",
+        "events": [
+          {
+            "time": 0.036437246948480606,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.056680161505937576,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DEATH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5691056847572327,
+            "functionName": "DropWeapon",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7767614722251892,
+            "functionName": "DeathFade",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.0
+      },
+      {
+        "id": 5277,
+        "name": "attackCrit_ghost",
+        "events": [
+          {
+            "time": 0.01620527170598507,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_FAST_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.06207827478647232,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.11458811163902283,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 1.100000023841858,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.1994488537311554,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.31848853826522827,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.4940931499004364,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5210963487625122,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.724696397781372,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.0800483226776123,
+            "functionName": "AttackSlideStart",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": -1.100000023841858,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.608536958694458,
+            "functionName": "AttackSlideStop",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 5428,
+        "name": "attackProf_ghost",
+        "events": [
+          {
+            "time": 0.024179376661777496,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_TWIRL_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.06207827478647232,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6180837154388428,
+            "functionName": "Foley",
+            "data": "PLAY_VO_SPECIAL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7961828708648682,
+            "functionName": "PlayWeaponAnimation",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.0761806964874268,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.5761322975158691,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 5109,
+        "name": "dodge_ghost",
+        "events": [
+          {
+            "time": 0.011808366514742374,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_SLOW_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.08434547483921051,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.3765181303024292,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.6666667461395264
+      },
+      {
+        "id": 5183,
+        "name": "damageSmall_ghost",
+        "events": [
+          {
+            "time": 0.028238866478204727,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.2805667817592621,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 0.9000000357627869
+      },
+      {
+        "id": 5349,
+        "name": "damageHeavy_ghost",
+        "events": [
+          {
+            "time": 0.038259107619524,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.2665776312351227,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.2805667817592621,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_FAST_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.4000000953674316
+      },
+      {
+        "id": 4831,
+        "name": "cidle_ghost",
+        "events": [],
+        "stopTime": 2.0
+      },
+      {
+        "id": 4900,
+        "name": "ghostTaunt",
+        "events": [
+          {
+            "time": 0.35648590326309204,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_SLOW_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6936572790145874,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 4959,
+        "name": "death_ghost",
+        "events": [
+          {
+            "time": 0.036437246948480606,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.056680161505937576,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DEATH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5691056847572327,
+            "functionName": "DropWeapon",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7767614722251892,
+            "functionName": "DeathFade",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.0
+      },
+      {
+        "id": 4997,
+        "name": "portrait",
+        "events": [],
+        "stopTime": 0.1666666865348816
+      },
+      {
+        "id": 4900,
+        "name": "ghostTaunt",
+        "events": [
+          {
+            "time": 0.35648590326309204,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_SLOW_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6936572790145874,
+            "functionName": "Foley",
+            "data": "PLAY_VO_TAUNT",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.6666667461395264
+      },
+      {
+        "id": 5291,
+        "name": "ghost_special2",
+        "events": [
+          {
+            "time": 0.06600876897573471,
+            "functionName": "Foley",
+            "data": "PLAY_VO_SPECIAL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.08313090354204178,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.09256228059530258,
+            "functionName": "Foley",
+            "data": "PLAY_WEP_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.24099405109882355,
+            "functionName": "Foley",
+            "data": "PLAY_SFX_COM_TWIRL_WHOOSH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.38837718963623047,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5096490979194641,
+            "functionName": "PlayWeaponAnimation",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7752193212509155,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 0.9333333969116211
+      }
+    ]
+  },
+  "paletteCount": 31,
+  "nativePositiveWeightBones": 28,
+  "nativeZeroWeightBones": [
+    "MiddleFinger3_R",
+    "Hair_M",
+    "MiddleFinger3_L"
+  ],
+  "effects": "8 native particle systems/renderers, Light117139 with FlickerLight135762. No Rigidbody/CharacterJoint/colliders or rigid MeshRenderer in complete source CEL subtree. Runtime weapon/effects separate.",
+  "forward": "Unity +Z face/front; source mesh bounds x[-1.20377,1.20379], y[.69751,2.07804], z[-.16051,.29835]. Native lower geometry absence does not prove fading or live pose. Root source translation is authoring placement, not live combat position.",
+  "lifecycle": "ghostController5960 both death entries use4959 death_ghost duration2,DropWeapon.569106,DeathFade.776761. CEL.DeathFade only acts when m_FadeMaterials nonnull, then disables active SMR and direct child GOs. No ragdoll source physics present. Native full controller state/SMB coverage and actual fade flags not inferred from clip list.",
+  "materialContract": "Native slot0 matChaosBeast71 opaque metallic1/gloss.655/bump2/emission1 scrolls_MainTex at(0,-.5); slot1 face70 opaque metallic0/gloss0/emission1. Two real authored primitives/materialSlots preserve native slots; do not duplicate triangles. Existing oneprimitive probe validates skin only and replaces2native slots with1; index0 remains in bounds but face material separation lost and native getter cloning notcovered by explicit-multislot provenance. Do not label legacyprobe faithfulmaterial/lifetime acceptance.",
+  "pins": {
+    "scratch/chaos-beast-native-topology-analysis/native-metadata.json": "7a93a2c4f826fc15fbf359ff60f2a08fcd81de38e586519358a84d0681e406be",
+    "scratch/chaos-beast-native-topology-analysis/scroller-serialized.json": "79e7164329e290b61e9b388f44e2c145456c7319407fb97d20f3482334a62bd2",
+    "scratch/chaos-beast-native-topology-analysis/material-details.json": "a73645a9fb64b4a08e5e2db50f1d96d56deb5172b614dd072bf774ec1eef21d6",
+    "scratch/chaos-beast-native-topology-analysis/reference-121008/reference.npz": "eb3f432e22fef1125c4f6f5c4565d4e9de73fbcf9fd9aff32a59de64ee1f6c51",
+    "scratch/chaos-beast-native-topology-analysis/reference-121008/skeleton.json": "cbbd85115bdc551b9beaf737b37c988e36d13c50c93f693c2ca256ec0be7e2b5",
+    "scratch/chaos-beast-native-topology-analysis/FlickerLight.cs": "629edbcee790e6094ff63dc03111bec78458c9d82bce883aa6f48b59a5132e14",
+    "scratch/cube-topology-analysis/ScrollingUVs.cs": "1d5a28043f64f4a4b457832852b25f8513f189f128da5f4d03db5abce86fb9d6",
+    "scratch/CharacterEventListener.analysis.cs": "b1c351a88947cefc9674dee9ac1e24f5278b825545b7ac5b8a92c0ff5cf3edb0",
+    "scratch/enemy-rig-mapping-reproducible.json": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52"
+  }
+}

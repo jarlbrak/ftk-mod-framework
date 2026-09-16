@@ -1,0 +1,23 @@
+{
+  "status": "architect_approved_owned_trial_live_gate_pending",
+  "sha256": "43529c758f91e89ab0ab10d83b00499d725f33709e903b3cf81c101d1b727ee1",
+  "artifact": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/candidate-fixed-four-helper-43529c75/FtkRuntimeModelTest.dll",
+  "bytes": 304640,
+  "sourcePins": {
+    "runtime-test/KrakenModernMixerFixture.cs": "2af80918fd2f8e4f068bc7a5447b89bcc5de5a148d2a3697ef3b59bdc5576c55",
+    "runtime-test/KrakenControllerFixture.cs": "d059cdcde0dd015c9fab6ca2b4ad4f889b63ef3faa202e292af25de897e7bf42",
+    "verify_kraken_modern_mixer.py": "ca04c2cb936760314130d9220e96b386aff7dad4dcf7391e62c2c51c3bdd02ff",
+    "test_verify_kraken_modern_mixer.py": "4c1dbd1b539768f74fb07e188ebaff485276fd4e80d8208d1c04a065307efdb6",
+    "runtime-test/KRAKEN-MODERN-MIXER.md": "5d09e2acb4a16ea456dbec2b199aef8bba6bcf2f5d72bc61504faf072f50b100"
+  },
+  "includesApprovedLifecycle": "b9fc9374607ba550937aa872d6538e960c49cc929a409dc7b1b1e72e8e5f0272 source unchanged",
+  "preservedDynamicMixer": "c87a894ef225e7e89f7809984c68bacb17bffbabeefc4615d4c3b90f3df3793f artifact and raw reports unchanged",
+  "tests": {
+    "mixerPython": 15,
+    "runtimePython": 115,
+    "krakenVerifierRegression": 71
+  },
+  "build": "Release net35 helper only; 0 warnings/errors",
+  "deployed": false,
+  "review": "ftk_architect: source pins match, lifecycle unchanged, independently 15 focused tests PASS; fixed binding A/B only, no live numerical equivalence claim"
+}

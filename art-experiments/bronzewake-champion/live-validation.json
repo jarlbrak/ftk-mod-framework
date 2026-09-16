@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "asset": "Bronzewake Champion",
+  "iteration": "first original four-part native baseline",
+  "status": "scoped fit and motion observed; partial death failure retained",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "b3322a5d049e4638acecf30928de8d06",
+    "case": "3eaca28122ca453fa1facb294d16e9dd",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_bronzewake",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_bronzewake",
+      "baseEnemy": "bossGladiator",
+      "displayName": "Bronzewake Champion",
+      "combatProfile": "7f7365cb5d2d058174dd525d21aaffa65e684b616d0ce4ee05b43e6824c8957f",
+      "renderers": [
+        {
+          "rendererPath": "enBossGladiator",
+          "glbFile": "bronzewake_body.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "hairBottomBossGladiator",
+          "glbFile": "bronzewake_hair.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "armorBossGladiator",
+          "glbFile": "bronzewake_armor.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "bootsBossGladiator",
+          "glbFile": "bronzewake_boots.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "c0107c64d4e1779b8e9336bb030fc479941ed71d14c0fa6ef32ef7b441ae24ef",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "frameworkVersionPrefix": "900f",
+  "helperVersionPrefix": "434",
+  "assetHashes": {
+    "bronzewake_body.glb": "f102309727fb90db311bd63df17790751807e153090d31858867160851bd705c",
+    "bronzewake_basecolor.png": "7e52ed6e45ac5a0bf07a72b3e1ce278fac7357f88c4554522f65245b7abb3996",
+    "bronzewake_hair.glb": "4f63a0cfad3895e6c8a1a40afe7db48cf9e28af64292a9ab85f3bf6abdc9e2fd",
+    "bronzewake_armor.glb": "741af2298aa0066423bf52110cbfee05644958b6a4d0c712b91cf60801bb2dd8",
+    "bronzewake_boots.glb": "99fe78bb8a077ed417f62caba208c63dd6b01e335980d29da849b2ee503bfecd"
+  },
+  "stageJournal": {
+    "path": "scratch/mirewarden-game/model-test-output/case-3eaca28122ca453fa1facb294d16e9dd/journal.jsonl",
+    "sha256": "dad6f05deb03f032102ca7ed4c1909b39f86146a4baad65e2a5019ee432ae297"
+  },
+  "captures": [
+    {
+      "kind": "attack",
+      "case": "8d44f03c637342a2a7cdeabac1007dcd",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/b4594215c43f43e9ac48a519ce0cf321.json",
+        "sha256": "992e409818d2be43b2ed60489e4cc9b66742f39e5fd3ca66ff99ab695e0d7116"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-8d44f03c637342a2a7cdeabac1007dcd/journal.jsonl",
+        "sha256": "13760f970d9ee1c7e28980d12567c973ba98e372cbf03149434e69825ec9abdc"
+      },
+      "summary": {
+        "path": "art-experiments/bronzewake-champion/live/attack-summary.json",
+        "sha256": "ec83881a3bcb563e78ace2820f5b877e45401cdfc823794a949e0642de80ed46"
+      },
+      "video": {
+        "path": "art-experiments/bronzewake-champion/live/attack.mp4",
+        "sha256": "0b34f4215698011449abf271e167fe12d01e20107f9b2385c994512b4249778d"
+      },
+      "reviewedFrames": [
+        0,
+        50
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/bronzewake-champion/live/attack-0000.png",
+          "sha256": "da19dde4e6d900b09ac944685619df7097b5ffdf06a5d2b4dc245918f9fe4f92"
+        },
+        {
+          "path": "art-experiments/bronzewake-champion/live/attack-0050.png",
+          "sha256": "2c85ec1f1b2dc77121757cd5c5c7686c678c41abdd5bb72e3dc1d19bf772ba00"
+        }
+      ],
+      "hpBeforeAfter": null,
+      "frameCount": 120,
+      "requestedFrames": 120,
+      "captureReportedOk": true,
+      "captureError": null,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.908332824707031,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "2HandWield_CombatIdle"
+          ],
+          "sampleCount": 73,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 46,
+              "firstNormalizedTime": 24.3662166595459,
+              "lastNormalizedTime": 26.47456169128418,
+              "gameSeconds": 4.216667175292969
+            },
+            {
+              "firstFrame": 69,
+              "lastFrame": 94,
+              "firstNormalizedTime": 0.12499994039535522,
+              "lastNormalizedTime": 1.2708336114883423,
+              "gameSeconds": 2.2916717529296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "1HandStab"
+          ],
+          "sampleCount": 22,
+          "occurrences": [
+            {
+              "firstFrame": 47,
+              "lastFrame": 68,
+              "firstNormalizedTime": 0.08461538702249527,
+              "lastNormalizedTime": 0.9730768203735352,
+              "gameSeconds": 1.9250030517578125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "2HandWield_BasicAttack"
+          ],
+          "sampleCount": 25,
+          "occurrences": [
+            {
+              "firstFrame": 95,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10312500596046448,
+              "lastNormalizedTime": 0.9281252026557922,
+              "gameSeconds": 2.1999969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "nonlethal-hit",
+      "case": "b49b1dad81ab48edadd8acca5dec6f00",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/5c249bded8fd4880aacd221328aa1efb.json",
+        "sha256": "5b7674d88cdf47d90fff76927c3f9e5cbbe30793a6bb09e41636993c3095ac88"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-b49b1dad81ab48edadd8acca5dec6f00/journal.jsonl",
+        "sha256": "38810ddd979ac594f1d0a8e93703fe2bf7dddeddc569f369308aefea9e864e56"
+      },
+      "summary": {
+        "path": "art-experiments/bronzewake-champion/live/nonlethal-hit-summary.json",
+        "sha256": "ef8351e9ae05ca457af1f18b6f04d4111ca87084d2aa59275c9be0f5df99da8c"
+      },
+      "video": {
+        "path": "art-experiments/bronzewake-champion/live/nonlethal-hit.mp4",
+        "sha256": "0e2c785d2a4e2829264a910fa16193329fc561de59419f8c00257fa23289e9bb"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/bronzewake-champion/live/nonlethal-hit-0030.png",
+          "sha256": "1d0886c2cbd714d68e838bc13061ded6ea688f4d2826fcea62f505a4538fe3ae"
+        }
+      ],
+      "hpBeforeAfter": [
+        58,
+        48
+      ],
+      "frameCount": 120,
+      "requestedFrames": 120,
+      "captureReportedOk": true,
+      "captureError": null,
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 10.9083251953125,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "2HandWield_CombatIdle"
+          ],
+          "sampleCount": 85,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 27,
+              "firstNormalizedTime": 11.895010948181152,
+              "lastNormalizedTime": 13.13251781463623,
+              "gameSeconds": 2.4749984741210938
+            },
+            {
+              "firstFrame": 37,
+              "lastFrame": 72,
+              "firstNormalizedTime": 0.07083338499069214,
+              "lastNormalizedTime": 1.675000548362732,
+              "gameSeconds": 3.2083282470703125
+            },
+            {
+              "firstFrame": 99,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13542848825454712,
+              "lastNormalizedTime": 1.0520954132080078,
+              "gameSeconds": 1.8333282470703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "2HandWield_HitSmall"
+          ],
+          "sampleCount": 9,
+          "occurrences": [
+            {
+              "firstFrame": 28,
+              "lastFrame": 36,
+              "firstNormalizedTime": 0.3142856955528259,
+              "lastNormalizedTime": 0.9428572058677673,
+              "gameSeconds": 0.7333297729492188
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1263380122,
+          "clips": [
+            "2HandWield_CriticalAttack"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 73,
+              "lastFrame": 98,
+              "firstNormalizedTime": 0.13750000298023224,
+              "lastNormalizedTime": 0.9968752264976501,
+              "gameSeconds": 2.2916717529296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "kill-fixture-death",
+      "case": "659739598cec4c3ebaa63f795ebc7ff8",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/8e6e4cb181544dd69d20210c42ac9076.json",
+        "sha256": "63e373db9358b70eff52a82522e8d56c357a7ce20f20d31a4f0ab405073dd569"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-659739598cec4c3ebaa63f795ebc7ff8/journal.jsonl",
+        "sha256": "988e0d1abe170e21c634f8e0901dead736149851153af7864ac39b160950131f"
+      },
+      "summary": {
+        "path": "art-experiments/bronzewake-champion/live/kill-fixture-death-summary.json",
+        "sha256": "2ac1e1ce6ae01ab3cd13c3eb755112d8fe61dae08d7bca3d04dc612415c04b43"
+      },
+      "video": {
+        "path": "art-experiments/bronzewake-champion/live/kill-fixture-death.mp4",
+        "sha256": "fcd1630bf5090266ceaaa13e0660759cada009404aed10b5024cd53539b7d612"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "reviewedImages": [
+        {
+          "path": "art-experiments/bronzewake-champion/live/kill-fixture-death-0040.png",
+          "sha256": "afc1253f4e0f7fb47f41ae876c83cf16fdd25d1a507b668d5d2058a57aa8eb34"
+        },
+        {
+          "path": "art-experiments/bronzewake-champion/live/kill-fixture-death-0060.png",
+          "sha256": "33aa027bbbcaa6a3022f0d89f30ffd6ba940a68ddb45611e6f4b78bb627cdb97"
+        }
+      ],
+      "hpBeforeAfter": [
+        48,
+        0
+      ],
+      "frameCount": 91,
+      "requestedFrames": 120,
+      "captureReportedOk": false,
+      "captureError": "System.InvalidOperationException: Renderer destroyed during capture.\n  at RuntimeModelTest+<Capture>d__103.MoveNext () [0x00000] in <filename unknown>:0 ",
+      "pausedFrameCount": 0,
+      "actualGameSeconds": 8.25,
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "2HandWield_CombatIdle"
+          ],
+          "sampleCount": 27,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 21.259958267211914,
+              "lastNormalizedTime": 22.451631546020508,
+              "gameSeconds": 2.383331298828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "2HandWield_Death"
+          ],
+          "sampleCount": 63,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 89,
+              "firstNormalizedTime": 0.18333332240581512,
+              "lastNormalizedTime": 0.18333332240581512,
+              "gameSeconds": 5.6833343505859375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "visualReview": {
+    "reviewer": "parent live review",
+    "observations": "Armor and body articulate and fit; native helmet and weapons remain. Native color/environment darkens palette but remains readable. No obvious intersection or stretching in selected views.",
+    "limits": "Reviewed fit and motion only. Death fails after91/120 frames with RendererDestroyed; no full death, broad culling or flawless art claim."
+  },
+  "timing": "Offline fixed-step gameplay: attack/hit120frames each, death91 retainedframes of120 requested. Videos replay at12fps, no padded/duplicated death frames. Not real-time performance.",
+  "progress": {
+    "afterDeath": {
+      "path": "scratch/bronzewake-after-death.json",
+      "sha256": "cd970ab6e80465437706f25eb839b02b3c201de3da82d04ceb41fe2ad085ca0b"
+    },
+    "result": "automatic strict Ready0/2; no Collect"
+  },
+  "materialSource": {
+    "path": "scratch/bronzewake-material-inventory.json",
+    "sha256": "2f9464a2f11f1069222fca8f4044cda3486bb2e281d8df0cc1d679d0425edf27"
+  },
+  "deathRagdoll": {
+    "nativeRagdoll": true,
+    "finalNativeRigidbodyCount": 11,
+    "status": "RendererDestroyed partial91/120; no full death or cleanup causality proof"
+  },
+  "bootsEmissionValidation": {
+    "evidence": {
+      "path": "scratch/bronzewake-material-inventory.json",
+      "sha256": "2f9464a2f11f1069222fca8f4044cda3486bb2e281d8df0cc1d679d0425edf27"
+    },
+    "status": "actual boots emission keywordfalse,RGBblack,mapnull"
+  }
+}

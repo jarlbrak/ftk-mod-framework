@@ -22,7 +22,7 @@
 | Playable classes | Working and verified (the bundled **Thief**: custom stats, a dagger, abilities, and a Focus-guaranteeable Steal) |
 | Enemies | Working and verified (the bundled **Cutpurse**: custom stats, a gold-stealing Pilfer ability, custom loot, real spawns) |
 | Passive class traits | Working and verified (the bundled **Innkeeper**: class-innate passives via `Content.AddPassive`) |
-| Custom enemy models | Working and verified (editor-free runtime glTF mesh swap + AssetBundle paths; see [`docs/CUSTOM-MODELS.md`](docs/CUSTOM-MODELS.md)) |
+| Custom enemy models | Runtime mesh injection demonstrated; per-rig motion validation tracked separately (see [`docs/CUSTOM-MODELS.md`](docs/CUSTOM-MODELS.md)) |
 | Adventures & campaigns | Working and verified solo (cloned adventures, plus the bundled **The Hollow Mire**: a bespoke realm, boss, and questline played to victory; see [`docs/ADVENTURES.md`](docs/ADVENTURES.md)); co-op verification pending |
 
 "Verified in-game" means the content has been loaded into a running game with `SELF-TEST PASS` confirmed in `BepInEx/LogOutput.log`, not just compiled. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
@@ -77,6 +77,8 @@ docs/
   ADVENTURES.md            how FTK models adventures + how the framework adds them
   CAMPAIGNS.md             data-authored questlines (branching, flags, custom objective verbs)
   CUSTOM-MODELS.md         custom enemy models (runtime glTF + AssetBundle paths)
+  MODEL-AUTHORING.md       repeatable original-model workflow and live checks
+  MODEL-SKELETONS.md       discovery inventory and per-rig validation status
   SCALE-BUDGET.md          the load-time / heap scale-budget gate
   PHASE0-TYPE-INVENTORY.md the full content-table inventory decompiled from the game
   ROADMAP.md               phased plan toward the five content goals + FTK2 ports

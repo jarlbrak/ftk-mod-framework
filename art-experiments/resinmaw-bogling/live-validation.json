@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "asset": "Resinmaw Bogling",
+  "iteration": "V1 original live trial",
+  "status": "scoped_body_portrait_material_observed_death_visual_LIMITED_native_sink_matches",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+    "case": "89e755f6b384430c87b0c0beca6c7bd6",
+    "mode": "resume-after-start",
+    "enemy": "ftkmf_modeltest_resinmaw",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_resinmaw",
+      "baseEnemy": "acidBlobA",
+      "displayName": "Resinmaw Bogling",
+      "combatProfile": "28b118c92eeeb3b809e7a8d5762fbc483c1af5c68159a0f69a3f22d476ba5836",
+      "renderers": [
+        {
+          "rendererPath": "enAcidMonster",
+          "glbFile": "resinmaw.glb",
+          "textureFile": "resinmaw_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ],
+      "minimumBaseHealth": 64
+    },
+    "profileInputSha256": "281576929e0e7996efc46163c24978b6c2598e2b5f41aff920e01c18d5f8864c",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "assetHashes": {
+    "resinmaw.glb": "39215580df941c13512cee4c67cbace577911a22043a531e81c11deb89d55921",
+    "resinmaw_basecolor.png": "8f9a2d07cb13a48d7b0c9b99670c4cc5c7260397ec00a019c241a15cabdb92f3"
+  },
+  "binaries": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+    "binaries": {
+      "framework": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+        "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+        "sha256": "cdbbe7ece2b53e443c1c9c4fad8607379f1c94f1b263592815252e26ac0f4b4a",
+        "bytes": 1967616
+      },
+      "helper": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "sha256": "4cc840dfdb3bc101292e4f13124233e936137fc79f92cc0c1bb3748b27164910",
+        "bytes": 221184
+      }
+    },
+    "measurement": "on_disk_binary_sha256",
+    "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+  },
+  "session": "a2fece2012cf4fd98bd09bf975cefe1e",
+  "catalogSha256": "281576929e0e7996efc46163c24978b6c2598e2b5f41aff920e01c18d5f8864c",
+  "captures": [
+    {
+      "kind": "pass",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/524a38ef6384401887cff40287781cc0.json",
+        "sha256": "b8cf9c9bab565c76b453d4148398f769373749eb06f0d6f7b6b7124c03424fb4"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-5bf90983471942e1924e438ef74d1bfe/journal.jsonl",
+        "sha256": "4641134017b6f5b21dd7663aeae74aaf6b561eeb6aaf5a0d58acfe9e5c78c8c5"
+      },
+      "summary": {
+        "path": "art-experiments/resinmaw-bogling/live-v1/pass-summary.json",
+        "sha256": "88b387770c4995f2dff60e5de2c68f5b58b0b250fa1f3a902e89f7c4ea521d50"
+      },
+      "video": {
+        "path": "art-experiments/resinmaw-bogling/live-v1/pass.mp4",
+        "sha256": "2a308174b217e9b8d7b0bd0af4d3bce0e07cbe9e81236d6d1d2d5cabb529b1a4"
+      },
+      "frames": 120,
+      "reviewedFrames": [
+        0,
+        40,
+        50
+      ],
+      "actualGameSeconds": 10.9083251953125
+    },
+    {
+      "kind": "hit",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/3ec55da0f0304752b1a8a0d6403e760a.json",
+        "sha256": "05564fc3c68f7c83a08265f21ea7b99fcdb19825dd9c64253cf9bc5c7f0219d2"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-6a21e0cf6bc343e993dd9ab3d98e9cee/journal.jsonl",
+        "sha256": "58baffc10f2947b9858a456bcf453938233ef861670327517e72faaab0bb8fd9"
+      },
+      "summary": {
+        "path": "art-experiments/resinmaw-bogling/live-v1/hit-summary.json",
+        "sha256": "9b24aabd0aab799aa4ebb0cabd2f78b94eed15dd41f37704309263e8b2b5b905"
+      },
+      "video": {
+        "path": "art-experiments/resinmaw-bogling/live-v1/hit.mp4",
+        "sha256": "d408a16e1c6612271869813373920929c7c8c3e62999934b3cea1f6e1cfd599d"
+      },
+      "frames": 120,
+      "reviewedFrames": [
+        30
+      ],
+      "actualGameSeconds": 10.9083251953125
+    },
+    {
+      "kind": "death",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/4fd09711d0e14e77a8c25ae2b097525e.json",
+        "sha256": "7792ec4f1b15ed39c953e35cef8d70988fc97783f71fcf71a53daee8b3727e7e"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-c83cef3ad55643e783803dcfb63095e6/journal.jsonl",
+        "sha256": "1e24adaa510547a5250edf136ee051caa0fc24f5ae80f0eb0fd331fdb20f926c"
+      },
+      "summary": {
+        "path": "art-experiments/resinmaw-bogling/live-v1/death-summary.json",
+        "sha256": "2142ee8354a2b66bca51e86233d8749515f00fd03218664d43c1efd96060534d"
+      },
+      "video": {
+        "path": "art-experiments/resinmaw-bogling/live-v1/death.mp4",
+        "sha256": "83118abd2f3ef9f730ec25bc03a32f2062b9bdbc1b7d37e0809306574e5176ab"
+      },
+      "frames": 120,
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "actualGameSeconds": 10.9083251953125
+    }
+  ],
+  "deathMotionAudit": {
+    "path": "art-experiments/resinmaw-bogling/live-v1/death-motion-audit.json",
+    "sha256": "4ad40ef1ab51570f5cb606a080fbd5ee52aad59ea0a7597ac04db47d82878ee9"
+  },
+  "observations": [
+    "Idle and both HUD portraits readable; coherent native attack crouch with original body.",
+    "Normal hit81to76 for5damage; native stretch, HUD/hero occlusion.",
+    "Explicit killfixture76to0; at40 customsurfacecontracts to bright narrow form amid native chunks, at60 body absent and nativebrownchunks/puddle remain. Need raw active/scale audit before final death verdict.",
+    "MaterialownPNG, emissionfalse/black/null verified in resinmaw-material-inventory.json.",
+    "Two guardedCollects returnstrictReady0room2 resinmaw-ready.json."
+  ],
+  "checks": {
+    "idle_attack": "Root-reviewed0/40/50 readable and coherent; sparse frame scope.",
+    "hit": "Ordinary5damage81to76, reviewed frame30; hero/HUD occlusion.",
+    "death": "Explicit kill fixture76to0. Root-reviewed40/60 is visually limited. All32native poses match baseline in renderer-local coordinates; no unique shrink/hide bug established.",
+    "materials": "Own PNG, emission disabled/black/null observed.",
+    "progress": "Two guarded Collect actions return strict Ready level0 room2.",
+    "startRecovery": "Initial accepted start followed by read-only busy HTTP500; once-only claimed resume in same process; no repeated start."
+  },
+  "evidence": [
+    {
+      "path": "scratch/resinmaw-stage-result.json",
+      "sha256": "8257340ad9d9183647a73fce61c5f7b1fd56ec0e0bbe7a836f9958973a6f2c5c"
+    },
+    {
+      "path": "scratch/resinmaw-resumed-stage-result.json",
+      "sha256": "823e41d1f6964270fa5e61a033e32e26353454bb21e9be05b3837c8081dee263"
+    },
+    {
+      "path": "scratch/resinmaw-stage-recheck3.json",
+      "sha256": "6aa6e5eb2dcb3e27b6f0c92bbc3373dfb2c99ed9942e06ae29c2a20ecf1bfc43"
+    },
+    {
+      "path": "scratch/rowportrait-resinmaw-startup-evidence.json",
+      "sha256": "4f0fe5f09433ebd60d322d2cef9efee5535f183396c9b021c71e7f9f26843fcd"
+    },
+    {
+      "path": "scratch/resinmaw-root-visual-review.json",
+      "sha256": "73f30024f5471e520fe0f68ddec694aa8a53d39d77f4020735926185c67401ce"
+    },
+    {
+      "path": "scratch/resinmaw-material-inventory.json",
+      "sha256": "957a06d4e705c497c6fb4392de11e65b565c11a678f8d3a3890711ef72358578"
+    },
+    {
+      "path": "scratch/resinmaw-collect1.json",
+      "sha256": "2159106f7588c5aa3452f8a3b3d0e37a1c6399b8dcb15512199e694f363cc680"
+    },
+    {
+      "path": "scratch/resinmaw-collect2.json",
+      "sha256": "db674d6edd28e1fbb7ac1ea70f8e9e07002f36be7efa0f36c10afb993fc67ab3"
+    },
+    {
+      "path": "scratch/resinmaw-ready.json",
+      "sha256": "2379c921c2965f0f1cdd1c963811eabdd79cfc7ee00e4f1ee8372679e6c79970"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-5087a0a7bed941ac9631bd3e4526c050/journal.jsonl",
+      "sha256": "85c0487180b078a071b60e53ba2781249361327e6f04d88a7d6a126770a7633d"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-89e755f6b384430c87b0c0beca6c7bd6/journal.jsonl",
+      "sha256": "b0a38c90318aca7e67662e81dd1c26afea4fb9a4781b2587bd04442f7dbfbaad"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-5087a0a7bed941ac9631bd3e4526c050/resume-after-start.claim.json",
+      "sha256": "7650c3f7c9b468b7eb5e8dbc8f08a81b36ea86a61213e4d5da31795d5a9a1891"
+    }
+  ],
+  "limitations": [
+    "No full controller or topology acceptance.",
+    "Native brown chunks and puddle are unchanged game effects, not original art.",
+    "A successful capture and matching native motion do not prove all death surfaces readable.",
+    "Portrait encounter-row API coverage is separate."
+  ],
+  "media": [
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/death-0040.png",
+      "sha256": "f412e690fc30f83b7ce31a8dd157db909be42d1c6c7b87f743f3f979643b4086"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/death-0060.png",
+      "sha256": "7f4d0f30a4fe4bacc84716713dbec0cc82433920979235764e7c8491e60b8bb0"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/death-motion-audit.json",
+      "sha256": "4ad40ef1ab51570f5cb606a080fbd5ee52aad59ea0a7597ac04db47d82878ee9"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/death-summary.json",
+      "sha256": "2142ee8354a2b66bca51e86233d8749515f00fd03218664d43c1efd96060534d"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/death.mp4",
+      "sha256": "83118abd2f3ef9f730ec25bc03a32f2062b9bdbc1b7d37e0809306574e5176ab"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/hit-0030.png",
+      "sha256": "ba569da45a591d208ea7a77f1372952c05b6dc9be86c4a3eb5d958b4b127c29f"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/hit-summary.json",
+      "sha256": "9b24aabd0aab799aa4ebb0cabd2f78b94eed15dd41f37704309263e8b2b5b905"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/hit.mp4",
+      "sha256": "d408a16e1c6612271869813373920929c7c8c3e62999934b3cea1f6e1cfd599d"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/pass-0000.png",
+      "sha256": "601834e26d59fd7609b7c0cd2cd1e876356486e95ae2951f8393664096a19fcf"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/pass-0040.png",
+      "sha256": "ea6aba4232e902788d8f30cc9d10c855b1e4e0c32af85db77dd40fa92dbd4b02"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/pass-0050.png",
+      "sha256": "e3163c69cca5f152536e1f2061ccf9392ef56027019c936735926cc1e152195a"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/pass-summary.json",
+      "sha256": "88b387770c4995f2dff60e5de2c68f5b58b0b250fa1f3a902e89f7c4ea521d50"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/pass.mp4",
+      "sha256": "2a308174b217e9b8d7b0bd0af4d3bce0e07cbe9e81236d6d1d2d5cabb529b1a4"
+    },
+    {
+      "path": "art-experiments/resinmaw-bogling/live-v1/startup-history.json",
+      "sha256": "bae102a1b8e01d9df69f74d6e507a8a3a36de80b38f0e860e7efa639caff24eb"
+    }
+  ],
+  "startupHistory": {
+    "path": "art-experiments/resinmaw-bogling/live-v1/startup-history.json",
+    "sha256": "bae102a1b8e01d9df69f74d6e507a8a3a36de80b38f0e860e7efa639caff24eb"
+  }
+}

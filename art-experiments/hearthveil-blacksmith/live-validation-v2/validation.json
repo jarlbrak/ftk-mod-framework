@@ -1,0 +1,246 @@
+{
+  "status": "supplemental_native_character_creation_preview_and_idle_observed",
+  "scope": "Fresh isolated Party Select supplement for the original six-mesh Hearthveil Blacksmith. The game, through its actual Create Game callback, created the room, map, character-create UI, pedestal, and preview avatar. This archive records the selected native preview and an exact body idle capture. It supplements V1 rather than transferring combat, equipment, teardown, or final-art claims into this session.",
+  "profile": {
+    "key": "ftkmf_modeltest_player_hearthveil_blacksmith_female",
+    "baseClass": "blacksmith",
+    "displayName": "Hearthveil Blacksmith",
+    "skinset": "blacksmith_Female",
+    "defaultSkinType": "Female",
+    "renderers": [
+      {
+        "rendererPath": "playerBlacksmith",
+        "glbFile": "hearthveil-body.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "hairTop",
+        "glbFile": "hearthveil-hair-top.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "hairBottom",
+        "glbFile": "hearthveil-hair-bottom.glb",
+        "textureFile": "hearthveil-palette.png"
+      }
+    ],
+    "startingArmor": "armorCloth1",
+    "apparel": [
+      {
+        "rendererPath": "armorBlacksmithF(Clone)",
+        "expectedNativeMeshName": "armorBlacksmith",
+        "glbFile": "hearthveil-default-armor.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "bootsBlacksmith(Clone)",
+        "expectedNativeMeshName": "bootsBlacksmith",
+        "glbFile": "hearthveil-boots.glb",
+        "textureFile": "hearthveil-palette.png"
+      },
+      {
+        "rendererPath": "armorGambesonF(Clone)",
+        "expectedNativeMeshName": "armorGambesonF",
+        "glbFile": "hearthveil-gambeson.glb",
+        "textureFile": "hearthveil-palette.png"
+      }
+    ]
+  },
+  "session": "67ca8d0d0a704d68a0559a0aa19ac3c4",
+  "identity": {
+    "classId": 113,
+    "skinset": "blacksmith_Female",
+    "playerCatalogSha256": "2cb8a092702691735ae2b2900acf4ba37f6050e559048e4f7a10ff91eba7472c",
+    "ownerInstanceId": -18954,
+    "celInstanceId": -250908
+  },
+  "provenance": {
+    "stage": {
+      "source": "scratch/hearthveil-blacksmith-stage/receipt.json",
+      "sha256": "039ff68b1b84f4768f4ec4ab11c9e4c6bd657f6b4c9e6fe6f13770945f57557c"
+    },
+    "deployment": {
+      "source": "scratch/mirewarden-game/deployment-backups/hearthveil-blacksmith-20260911-225349/deployment.json",
+      "sha256": "364c745755c305a4b18eff772cb5001ca2b80acd91607c1583e39ce4872c079a"
+    },
+    "playerRegistration": {
+      "source": "scratch/mirewarden-game/model-test-player-registration.json",
+      "sha256": "b2b32298a9a309793d11bf01607cad58f66d9f886c039034b492e176268ff0d3"
+    },
+    "nativeCreateHelperDeployment": {
+      "source": "scratch/mirewarden-game/deployment-backups/native-create-character-screen-helper-20260912-072751/deployment.json",
+      "sha256": "3eaad69e3f0eda93c060c682498c0f488c297bf3576710f9febd2ad4ca29c6ad"
+    },
+    "priorV1": {
+      "validation": {
+        "source": "art-experiments/hearthveil-blacksmith/live-validation-v1/validation.json",
+        "sha256": "39e2ba03aa772b728ca745df7f0e8fb1a33d3e60640045cbcb03e20bd1d9a3ba"
+      },
+      "integrity": {
+        "source": "art-experiments/hearthveil-blacksmith/live-validation-v1/integrity.json",
+        "sha256": "57683a9c6e69db7d828674c4d67828fdcfafc06045f6b5728703146e3cd97cb2"
+      }
+    },
+    "gameAssets": {
+      "hearthveil-body.glb": "ddb8691011173d8de1a1e48260dd99b9b2d88f91ecabb207bc922286d439f634",
+      "hearthveil-hair-top.glb": "40f55b523dd9d2a5827b6e9bdced2dfb70a69faab0a86bd894462ed3c155dbae",
+      "hearthveil-hair-bottom.glb": "855233f93cd71ecf1173251723d76def70d3cf8ef33657b4f9003728ffd07973",
+      "hearthveil-default-armor.glb": "d0bdb4ee5b1c4afae68d93345df7a9601fc1b628406733cec59ecea396214298",
+      "hearthveil-boots.glb": "5b91bc4e437e5b238ca0b3eb8f1c1c83d21110cb4a89f86ed92bbed38e814d16",
+      "hearthveil-gambeson.glb": "704d3fc7b57eb94d9b4e522f9584f51078245f7ba5da2683a0fe0ce8363da207",
+      "hearthveil-palette.png": "ba99d7ab57a505286b323a7054a9376172b241fa3d51694a5f159c26d072e7fb"
+    }
+  },
+  "binding": {
+    "ownerKind": "player-preview",
+    "ownerInstanceId": -18954,
+    "celInstanceId": -250908,
+    "rendererPath": "playerBlacksmith",
+    "mesh": "ftkmf_glb_hearthveil-body.glb",
+    "boneSignature": "c5145eb658efedf4e2e984e600fb9bb3d39843332ada65f8defe30ffcb306b93",
+    "state": {
+      "source": "scratch/mirewarden-game/model-test-output/b9505173816147e7852e77993bbf1010.json",
+      "sha256": "f4550ddd595e454542b45145090e32853ea5d5f295b922a7182d8087bc830f2b"
+    },
+    "inventory": {
+      "source": "scratch/mirewarden-game/model-test-output/401767d3da1342818673e81bf3fa1376.json",
+      "sha256": "476eb2e569266c46414b6584937887aef4f722b9f93e6c6e1b8c0095bea59f93"
+    }
+  },
+  "avatarOwners": {
+    "preview": {
+      "status": "observed_actual_native_player_preview",
+      "observedAvatars": 1,
+      "ownerInstanceId": -18954,
+      "celInstanceId": -250908,
+      "classId": 113,
+      "classLabel": "Hearthveil Blacksmith",
+      "nativeMenuMembership": true,
+      "reciprocalPreviewReference": true,
+      "parentIsNativePedestal": true,
+      "leaseId": 2,
+      "leaseReferences": 1,
+      "visibleSkinnedRenderers": 4,
+      "source": {
+        "source": "scratch/mirewarden-game/model-test-output/b9505173816147e7852e77993bbf1010.json",
+        "sha256": "f4550ddd595e454542b45145090e32853ea5d5f295b922a7182d8087bc830f2b"
+      }
+    }
+  },
+  "nativeCreate": {
+    "status": "native_create_game_reached_actual_character_create",
+    "method": "StartGameFE.GameConfig.OnStartGame",
+    "mapReady": true,
+    "characterCreateRootActive": true,
+    "waitedFrames": 531,
+    "source": {
+      "source": "scratch/mirewarden-game/model-test-output/2772ec7b729a469baf623ebbca179805.json",
+      "sha256": "96387141b1b19a2d523f32962ec095399daa79bfab786d765f063d0de6b9190d"
+    }
+  },
+  "renderers": [
+    {
+      "celRelativeRendererPath": "hairBottom",
+      "mesh": "ftkmf_glb_hearthveil-hair-bottom.glb",
+      "instanceId": -250914,
+      "boneSignature": "9253fc539e70c4093f788df51a5def2849357a36dbb58d1d72d05455675a2953",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "hairTop",
+      "mesh": "ftkmf_glb_hearthveil-hair-top.glb",
+      "instanceId": -250920,
+      "boneSignature": "9253fc539e70c4093f788df51a5def2849357a36dbb58d1d72d05455675a2953",
+      "active": false,
+      "enabled": true,
+      "isVisible": false
+    },
+    {
+      "celRelativeRendererPath": "playerBlacksmith",
+      "mesh": "ftkmf_glb_hearthveil-body.glb",
+      "instanceId": -250926,
+      "boneSignature": "c5145eb658efedf4e2e984e600fb9bb3d39843332ada65f8defe30ffcb306b93",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "armorBlacksmithF(Clone)",
+      "mesh": "ftkmf_glb_hearthveil-default-armor.glb",
+      "instanceId": -251406,
+      "boneSignature": "be050b7115d9cb806c7908a58f1b9b7f868fa6e44e1445d1246fbbec49da7c63",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "bootsBlacksmith(Clone)",
+      "mesh": "ftkmf_glb_hearthveil-boots.glb",
+      "instanceId": -251574,
+      "boneSignature": "ba827c95275d5d0acdd49504e0d471c9cc4315849a2f6d020cf8d14750c45f71",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    }
+  ],
+  "captures": [
+    {
+      "label": "native-preview-idle",
+      "complete": true,
+      "termination": "complete_24_fixed_step_frames",
+      "capture": {
+        "source": "scratch/mirewarden-game/model-test-output/55d8b24604964d6bab4f7306114525e3.json",
+        "sha256": "0c0b2f54046267dfe02fd94bbf6310810611a9b9b8ef28eb5e68a62c875dcd5c"
+      },
+      "frameCount": 24,
+      "scope": "player-preview",
+      "rendererPath": "playerBlacksmith",
+      "mesh": "ftkmf_glb_hearthveil-body.glb",
+      "boneSignature": "c5145eb658efedf4e2e984e600fb9bb3d39843332ada65f8defe30ffcb306b93",
+      "state": "standardIdle_handsDown",
+      "clips": [
+        "standardIdle_handsDown"
+      ],
+      "timingMode": "offline-fixed-step-gameplay",
+      "actualGameSeconds": 1.916015625,
+      "summary": {
+        "source": "scratch/hearthveil-preview-idle-capture-summary.json",
+        "sha256": "153f8db7477b2e588ecb9cafffd3aa845fc77804bea859d748257e5b6a60cb5a"
+      }
+    }
+  ],
+  "selectedFrames": [
+    {
+      "label": "native-preview-idle",
+      "source": "scratch/mirewarden-game/model-test-output/55d8b24604964d6bab4f7306114525e3/0012.png",
+      "archive": "selected/native-preview-idle.png",
+      "sha256": "19064684b3a5f024e017a57b55a4f05f7f625b4b38bca72e297ca055592fc55e",
+      "observation": "Hearthveil Blacksmith on the game-owned Party Select pedestal during the measured native idle capture."
+    }
+  ],
+  "videos": [
+    {
+      "label": "native-preview-idle",
+      "path": "video/native-preview-idle.mp4",
+      "sha256": "b6c8365962bf97a81d227c269e188b2c3667f89fd05a8eac52b4220f263d9953",
+      "frames": 24,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and source-image hashes preserve the measured timing record."
+    }
+  ],
+  "visualReview": {
+    "status": "sampled_native_character_creation_preview_reviewed_final_art_unapproved",
+    "observed": "The captured game-owned Party Select screen labels Player 1 as Hearthveil Blacksmith. The custom body, active lower hair, default armor, and boots are visibly assembled on the native pedestal alongside the game-owned helmet and backpack; the preview remains present while the sampled native idle state advances.",
+    "notAccepted": "This sampled preview does not establish every camera, culling condition, alternate apparel branch, player death, final-owner teardown, portrait, multiplayer layout, or a final-art verdict."
+  },
+  "limitations": [
+    "The actual Create Game callback was invoked only after normal visible navigation reached the enabled offline Create Game screen; this helper did not construct a preview avatar or select a class.",
+    "The 24-frame idle capture uses fixed simulation steps. Its measured game time establishes the recorded idle interval, not real-time rendering performance or full loop coverage.",
+    "V1 remains the separate evidence source for combat attack, incoming damage, item59 apparel rebuilds, lease disposal, and Loot-to-Ready progression.",
+    "The selected default preview outfit does not prove the equipped Gambeson branch, another skinset, another controller, or another player class."
+  ]
+}

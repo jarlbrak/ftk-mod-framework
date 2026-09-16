@@ -1,0 +1,211 @@
+{
+  "status": "native_character_creation_preview_and_idle_observed",
+  "scope": "Fresh isolated Party Select evidence for the original three-mesh Wildbloom Herbalist. The game created its own room, map, character-create UI, pedestal, and preview owner through the real Create Game callback. A visible native Party Select selection then chose Wildbloom; this archive records that strict preview join and its settled body idle capture. It makes no broader player lifecycle or final-art claim.",
+  "profile": {
+    "key": "ftkmf_modeltest_player_wildbloom_herbalist_female",
+    "baseClass": "blacksmith",
+    "displayName": "Wildbloom Herbalist",
+    "skinset": "herbalist_Female",
+    "defaultSkinType": "Female",
+    "renderers": [
+      {
+        "rendererPath": "player_Herbalist",
+        "glbFile": "wildbloom-body.glb",
+        "textureFile": "wildbloom-palette.png"
+      },
+      {
+        "rendererPath": "hairTop",
+        "glbFile": "wildbloom-hair-top.glb",
+        "textureFile": "wildbloom-palette.png"
+      },
+      {
+        "rendererPath": "hairBottom",
+        "glbFile": "wildbloom-hair-bottom.glb",
+        "textureFile": "wildbloom-palette.png"
+      }
+    ]
+  },
+  "session": "4cae860e36f640099f5a2dbf161fc7db",
+  "identity": {
+    "classId": 114,
+    "skinset": "herbalist_Female",
+    "playerCatalogSha256": "eb04ac829876fd3bbe94de0e4d4f8e393c4714605301a684d95b8e48e17e1c99",
+    "ownerInstanceId": -19002,
+    "celInstanceId": -262668
+  },
+  "provenance": {
+    "stage": {
+      "source": "scratch/wildbloom-herbalist-stage/receipt.json",
+      "sha256": "4a125059befec16c0ab0621d423062d688c76057bb899b671d4142c0f7a660bf"
+    },
+    "deployment": {
+      "source": "scratch/mirewarden-game/deployment-backups/wildbloom-herbalist-20260912-070230/deployment.json",
+      "sha256": "891365ea50fa80a244919a7bff1c0b0802d6d041b0b34123f7c160d4c0749c45"
+    },
+    "playerRegistration": {
+      "source": "scratch/mirewarden-game/model-test-player-registration.json",
+      "sha256": "80f7b717dfabfd8151f3bff94e7f2feab93ced6ac49abf89a64261b334720e01"
+    },
+    "gameAssets": {
+      "wildbloom-body.glb": "e2ac7bb1bcb6668d1d210791f69519f70ae710a93a119dd1989f2be514f4f29b",
+      "wildbloom-hair-top.glb": "ffc5cd75b06e36a77fae54462764e068ca8e741330d581788a775f0ec6f4dbbd",
+      "wildbloom-hair-bottom.glb": "e1382cddc4bcb069856bc4aef41bb98dfe507e76a5e3d0ac528e5f3ea7db3e8e",
+      "wildbloom-palette.png": "a953dd503880c8a719a45b90cdf9004f3db715e740910022da0d7d10f4f3cbd7"
+    }
+  },
+  "nativeCreateInitial": {
+    "status": "native_create_game_reached_actual_character_create",
+    "method": "StartGameFE.GameConfig.OnStartGame",
+    "mapReady": true,
+    "characterCreateRootActive": true,
+    "waitedFrames": 521,
+    "initialPlayerOneClassLabel": "Hearthveil Blacksmith",
+    "initialPlayerOneOwnerInstanceId": -19002,
+    "source": {
+      "source": "scratch/mirewarden-game/model-test-output/7b31120ffb2143c686fc682cbb4a56c9.json",
+      "sha256": "98b0518677e3f0c1d903e52caeb279431f50db742ea47d31c1a704040d45b702"
+    },
+    "interpretation": "This source proves the real Create Game route created the native Party Select owner. The later strict preview state and visible capture establish Wildbloom's actual selection."
+  },
+  "binding": {
+    "ownerKind": "player-preview",
+    "ownerInstanceId": -19002,
+    "celInstanceId": -262668,
+    "rendererPath": "player_Herbalist",
+    "mesh": "ftkmf_glb_wildbloom-body.glb",
+    "boneSignature": "33ef1d59071b4cb809e65f6c63ea4d925e2f7dc75a0703033e7e8177f9137149",
+    "state": {
+      "source": "scratch/mirewarden-game/model-test-output/30fdc6b162294458b35866533046d4e2.json",
+      "sha256": "b393d3c5399ac46c8af6b630f8ddad3da04e3c8222ac42755086698adc6f7ff0"
+    },
+    "inventory": {
+      "source": "scratch/mirewarden-game/model-test-output/60bef7c1b9834412a5ac80c5cb0323c8.json",
+      "sha256": "23360f421f322c6e8c0600eafb5e706c9479eb38458b1489f162dec2ff441b91"
+    }
+  },
+  "avatarOwners": {
+    "preview": {
+      "status": "observed_actual_native_player_preview",
+      "observedAvatars": 1,
+      "ownerInstanceId": -19002,
+      "celInstanceId": -262668,
+      "classId": 114,
+      "classLabel": "Wildbloom Herbalist",
+      "nativeMenuMembership": true,
+      "reciprocalPreviewReference": true,
+      "parentIsNativePedestal": true,
+      "leaseId": 18,
+      "leaseReferences": 1,
+      "visibleSkinnedRenderers": 5,
+      "source": {
+        "source": "scratch/mirewarden-game/model-test-output/30fdc6b162294458b35866533046d4e2.json",
+        "sha256": "b393d3c5399ac46c8af6b630f8ddad3da04e3c8222ac42755086698adc6f7ff0"
+      }
+    }
+  },
+  "renderers": [
+    {
+      "celRelativeRendererPath": "hairBottom",
+      "mesh": "ftkmf_glb_wildbloom-hair-bottom.glb",
+      "instanceId": -262674,
+      "boneSignature": "ccd5b08dc89616e5470ca4195938ebc3378daeb653d2e8b2cce2f93b3c3bdc2c",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "hairTop",
+      "mesh": "ftkmf_glb_wildbloom-hair-top.glb",
+      "instanceId": -262680,
+      "boneSignature": "77a9c31c091976a8004ebf40f7871623675169fc43de518ac46423bb472e98df",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "player_Herbalist",
+      "mesh": "ftkmf_glb_wildbloom-body.glb",
+      "instanceId": -262686,
+      "boneSignature": "33ef1d59071b4cb809e65f6c63ea4d925e2f7dc75a0703033e7e8177f9137149",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "armorHerbalist(Clone)",
+      "mesh": "armorHerbalist",
+      "instanceId": -263112,
+      "boneSignature": "3f52d00856e854d99e6e8f7e8756ad3dbb463cb96315dfd378f9e103ea63b0ea",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "bootsHerbalist(Clone)",
+      "mesh": "bootsHerbalist",
+      "instanceId": -263130,
+      "boneSignature": "29fc71947fbcc0a3ecd553caad89945be46166af1c68cfa2c34d231fd5408967",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    }
+  ],
+  "captures": [
+    {
+      "label": "native-preview-idle",
+      "complete": true,
+      "termination": "complete_24_fixed_step_frames",
+      "capture": {
+        "source": "scratch/mirewarden-game/model-test-output/f361cc19fdcd47fabd4e37e3ca7c216a.json",
+        "sha256": "e9fdf78985c58a17c6a967cffd7350a9f13efeefac87dcd593cfc08e0c5aabbd"
+      },
+      "frameCount": 24,
+      "scope": "player-preview",
+      "rendererPath": "player_Herbalist",
+      "mesh": "ftkmf_glb_wildbloom-body.glb",
+      "boneSignature": "33ef1d59071b4cb809e65f6c63ea4d925e2f7dc75a0703033e7e8177f9137149",
+      "state": "standardIdle_handsDown",
+      "clips": [
+        "standardIdle_handsDown"
+      ],
+      "timingMode": "offline-fixed-step-gameplay",
+      "actualGameSeconds": 1.9166259765625,
+      "summary": {
+        "source": "scratch/wildbloom-preview-idle-settled-capture-summary.json",
+        "sha256": "de96c27983beaa002737450beab85589c8585be83a22c42c5ecd4e173b6cbded"
+      }
+    }
+  ],
+  "selectedFrames": [
+    {
+      "label": "native-preview-idle",
+      "source": "scratch/mirewarden-game/model-test-output/f361cc19fdcd47fabd4e37e3ca7c216a/0012.png",
+      "archive": "selected/native-preview-idle.png",
+      "sha256": "2e57186e75cf769ad8343016d8e035d1dd19219937f8a2cc97ee97d445249187",
+      "observation": "Wildbloom Herbalist on the game-owned Player 1 Party Select pedestal during the measured native idle capture."
+    }
+  ],
+  "videos": [
+    {
+      "label": "native-preview-idle",
+      "path": "video/native-preview-idle.mp4",
+      "sha256": "db98963ba5d0757ac5c9041bca347ce10480793b308c7a244f9f2a65e4481458",
+      "frames": 24,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and source-image hashes preserve the measured timing record."
+    }
+  ],
+  "visualReview": {
+    "status": "sampled_native_character_creation_preview_reviewed_final_art_unapproved",
+    "observed": "The captured game-owned Party Select screen labels Player 1 as Wildbloom Herbalist and shows a complete green, petal-crowned woodland figure. The custom body, crown, and lower hair remain visible while the sampled native idle advances; native Herbalist armor and boots are also present.",
+    "notAccepted": "This sampled preview does not establish every camera, culling condition, overworld or combat animation, equipment branch, player death, final-owner teardown, portrait behavior, multiplayer layout, or a final-art verdict."
+  },
+  "limitations": [
+    "The actual Create Game callback was invoked only after normal visible navigation reached the enabled offline Create Game screen; the helper did not construct a preview avatar or select a class.",
+    "Wildbloom was selected through the visible native Party Select UI after that initial screen was created. The strict state and selected capture prove the resulting class; the initial helper result intentionally records its pre-selection default.",
+    "The 24-frame idle capture uses fixed simulation steps. Its measured game time establishes the recorded idle interval, not real-time rendering performance or full loop coverage.",
+    "No conditional apparel assignment is declared for this profile. Native Herbalist armor and boots visible in this default preview do not establish a custom apparel path."
+  ]
+}

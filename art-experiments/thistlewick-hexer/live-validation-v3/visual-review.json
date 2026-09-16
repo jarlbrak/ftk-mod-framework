@@ -1,0 +1,118 @@
+{
+  "schema": "ftkmf.root-selected-frame-review.v1",
+  "reviewStatus": "reviewed_exact_source_with_scoped_limits",
+  "asset": "Thistlewick Hexer",
+  "topologyGroup": "f50b09e31a8484cf",
+  "exactSource": {
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "scourgeG",
+    "resourcePrefab": null,
+    "rendererPath": "enScourgeLeprechaun",
+    "sourceRendererId": 121222
+  },
+  "scope": "Exact original Thistlewick mesh in the retained ordinary nonlethal hit capture and the fresh native robbery/flee capture. Existing V2 review supplies the separate ordinary-lethal, explicit death fixture, loot and Ready views.",
+  "sessions": [
+    "958c0fdda0ec45449333353a5edfda9a",
+    "621d536f4b7847b396d5334e2a05075d"
+  ],
+  "binding": {
+    "nativeChassis": "scourgeG",
+    "ownerInstanceId": 369188,
+    "rendererPath": "enScourgeLeprechaun",
+    "rendererId": 121222,
+    "capturedInstanceIds": [
+      -245426,
+      -245450
+    ],
+    "mesh": "ftkmf_glb_thistlewick.glb",
+    "boneSignature": "ff578d822b39be20026a8ea349afc605024816801a454f5e4f79a52c3b03140a",
+    "visualScale": 1.0
+  },
+  "materialReview": {
+    "name": "matScourgeLeprechaun (Instance)",
+    "shader": "Standard",
+    "mainTexture": "ftkmf_thistlewick_basecolor.png",
+    "emissionKeyword": true,
+    "emissionColor": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "emissionMap": null
+  },
+  "priorReview": {
+    "archive": "art-experiments/thistlewick-hexer/live-validation-v2/validation.json",
+    "sha256": "c0b501d128be15b1631b8b80eea7a83d9e413340f8c0167c78fad06560158721",
+    "selectedFrameCount": 6,
+    "scope": "Exact binding, ordinary lethal appearance, explicit death fixture, loot and Ready views. The native pass removal is not death."
+  },
+  "frames": [
+    {
+      "action": "native-flee",
+      "index": 0,
+      "clip": "cidle_impUnarmed",
+      "path": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0000.png",
+      "sha256": "a36dd7086b59ffe8279b5d58f63aa33da7dacf22c95135bc4b47162b6a994cdf",
+      "observation": "The fresh exact-source opening frame shows the complete authored face, coat, hands and legs in native combat idle at HP 58. The retained native hat and knife remain attached."
+    },
+    {
+      "action": "native-flee",
+      "index": 46,
+      "clip": "attackProf_leprechaun",
+      "path": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0046.png",
+      "sha256": "f7251759a3b7ec9534e94947f5a2de642e2addb0f463361b8372d2646e83edba",
+      "observation": "The native robbery proficiency lifts the intact authored body into its forward attack pose. A bright native effect and the foreground hero obscure some lower-body detail."
+    },
+    {
+      "action": "native-flee",
+      "index": 65,
+      "clip": "cidle_impUnarmed",
+      "path": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0065.png",
+      "sha256": "276cba33d938479c33d5984c01a9ed2d9a93537fd585285ba7a2ed66fef194ec",
+      "observation": "After the proficiency, Thistlewick returns upright with the face, coat and limbs connected. The native result shows 20 hero damage and robbed gold while Thistlewick remains at HP 58."
+    },
+    {
+      "action": "native-flee",
+      "index": 80,
+      "clip": "cidle_impUnarmed",
+      "path": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0080.png",
+      "sha256": "3d28fb48562060827c5cca10f86159d487635a8e7134f83c207b3366c10118bd",
+      "observation": "The authored body becomes uniformly translucent during the native flee transition while still at HP 58. This is removal behavior and is not a death pose."
+    },
+    {
+      "action": "native-flee",
+      "index": 100,
+      "clip": null,
+      "path": "scratch/mirewarden-game/model-test-output/d93d421c906e4d74b4f3c7d20eb2f30f/0100.png",
+      "sha256": "d8a0d3e9cf626140fb07e303f2cd0de2a63c12d34ed667520d2876a592717841",
+      "observation": "A native smoke cloud occupies the enemy slot after the full-health renderer is disabled. The encounter is ending through flee behavior; no death animation is claimed."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "index": 25,
+      "clip": "damageHeavy_imp",
+      "path": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9/0025.png",
+      "sha256": "6260a09196c923c68e757470e4c27cd65deb3ca85c0b5ee7d56fd043cecdae5a",
+      "observation": "The retained ordinary no-focus hit begins the native heavy-damage recoil. The original body remains connected, although the hero, weapon and damage text overlap it."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "index": 30,
+      "clip": "damageHeavy_imp",
+      "path": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9/0030.png",
+      "sha256": "04744d7197136f63ecb7f1cb7b853d8a5621bab03f3c13dcb602d4070a61de94",
+      "observation": "The later recoil frame shows the target at HP 48 after the ordinary 58 to 48 hit. The coat, face and limbs remain coherent behind strong hero occlusion."
+    },
+    {
+      "action": "ordinary-nonlethal-hit",
+      "index": 80,
+      "clip": "attackProf_leprechaun",
+      "path": "scratch/mirewarden-game/model-test-output/037e0c63a28a4f8eb16b0a149b00eaf9/0080.png",
+      "sha256": "ad571ed2995a8e86c18930fb30aef470e2fe57e7bfcece35cf77a24f04ccc300",
+      "observation": "The same nonlethal-hit process later captures the native robbery attack. The authored silhouette remains connected, with the foreground hero limiting fine review."
+    }
+  ],
+  "conclusion": "The exact custom renderer is coherent in native idle, ordinary nonlethal heavy-damage recoil, native robbery attack, recovery and the full-health flee transition. The renderer identity and 36-bone signature stay unchanged while present. Native flee is not death; V2 separately supplies explicit animated death evidence.",
+  "limits": "Selected original frames only. Hero, weapon, damage text and proficiency effects obscure some surfaces. The full-health disappearance is native flee behavior, not death. Native hat clearance, portraits, culling envelope, long-session resource lifetime, global Fergus haunt behavior and finished-art acceptance remain outside this review."
+}

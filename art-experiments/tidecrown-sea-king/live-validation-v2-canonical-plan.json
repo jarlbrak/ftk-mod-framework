@@ -1,0 +1,108 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/tidecrown-sea-king/live-validation-v2-canonical",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-02e709b8d963477cb2b3762985bf1f56/case-result.json",
+  "visualReview": "scratch/model-route-1eda40629ee9aac9-directenemy-cap-v1-root-review.json",
+  "assetFiles": [
+    "art-experiments/tidecrown-sea-king/tidecrown-sea-king.glb",
+    "art-experiments/tidecrown-sea-king/tidecrown-sea-king_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/tidecrown-sea-king/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-1eda40629ee9aac9-directenemy-cap-run-v1.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-eb4a7543af664a2ba9ca510599a325ac/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-eb4a7543af664a2ba9ca510599a325ac/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSeaKing",
+        "mesh": "ftkmf_glb_tidecrown-sea-king.glb",
+        "boneSignature": "4fd853bf7fe19398edeb4cb997a0aba409d3299091249c72a2d17ee01ca0ae6a"
+      }
+    },
+    "attack-attempt-1": {
+      "label": "attack-attempt-1",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSeaKing",
+        "mesh": "ftkmf_glb_tidecrown-sea-king.glb",
+        "boneSignature": "4fd853bf7fe19398edeb4cb997a0aba409d3299091249c72a2d17ee01ca0ae6a"
+      }
+    },
+    "attack-attempt-2": {
+      "label": "attack-attempt-2",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSeaKing",
+        "mesh": "ftkmf_glb_tidecrown-sea-king.glb",
+        "boneSignature": "4fd853bf7fe19398edeb4cb997a0aba409d3299091249c72a2d17ee01ca0ae6a"
+      }
+    },
+    "attack-attempt-3": {
+      "label": "attack-attempt-3",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSeaKing",
+        "mesh": "ftkmf_glb_tidecrown-sea-king.glb",
+        "boneSignature": "4fd853bf7fe19398edeb4cb997a0aba409d3299091249c72a2d17ee01ca0ae6a"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enSeaKing",
+        "mesh": "ftkmf_glb_tidecrown-sea-king.glb",
+        "boneSignature": "4fd853bf7fe19398edeb4cb997a0aba409d3299091249c72a2d17ee01ca0ae6a"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V2",
+    "displayName": "Tidecrown Sovereign",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "seaKing",
+    "nativeChassis": "seaKing",
+    "rendererPaths": [
+      "enSeaKing"
+    ],
+    "sourceRendererIds": [
+      121357
+    ],
+    "binding": {
+      "rendererPath": "enSeaKing",
+      "mesh": "ftkmf_glb_tidecrown-sea-king.glb",
+      "boneSignature": "4fd853bf7fe19398edeb4cb997a0aba409d3299091249c72a2d17ee01ca0ae6a"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "The native skill-cap fixture changes only the disposable hero equipped-weapon skill augmentation; balance is unrepresentative and the ordinary 720 to 719 hit is not ordinary lethal behavior.",
+      "KillSingle is an explicit fixture death and does not establish ordinary lethal damage, cleanup causality, final disposal, or general corpse lifetime.",
+      "The giant encounter camera crops the head and crown; hero, UI, smoke, lightning, impact effects, and depth blur limit the robe, limbs, portrait, culling, collision, material lifetime, external props, tentacles, and finished-art conclusions."
+    ]
+  }
+}

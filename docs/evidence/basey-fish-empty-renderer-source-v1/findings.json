@@ -1,0 +1,198 @@
+{
+  "status": "resolved_resource_empty_renderer_no_native_row_or_skinset",
+  "rendererId": 121680,
+  "rendererPath": "enFishA",
+  "celId": 140194,
+  "rootGameObjectId": 39967,
+  "root": {
+    "path": "/enBaseyFish",
+    "transform_id": 82944,
+    "active": true,
+    "components": [
+      {
+        "type": "Transform",
+        "id": 82944
+      },
+      {
+        "type": "Animator",
+        "id": 116923
+      },
+      {
+        "type": "MonoBehaviour",
+        "id": 140194,
+        "script": "CharacterEventListener"
+      }
+    ],
+    "localPosition": {
+      "x": 14.883935928344727,
+      "y": 0.8551075458526611,
+      "z": -2.743163585662842
+    },
+    "localRotation": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    },
+    "localScale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0
+    }
+  },
+  "resource": {
+    "rootGameObjectId": 39967,
+    "matches": [
+      {
+        "resource": "enbaseyfish",
+        "pointer": {
+          "m_FileID": 4,
+          "m_PathID": 39967
+        },
+        "targetId": 39967,
+        "targetType": "GameObject"
+      }
+    ],
+    "sourceSha256": "b5c4c33b18b6098cf27d2ad70d5ded1654e571a068f4d52c1b8782ca3372226a"
+  },
+  "meshPointer": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "boneReferenceCount": 34,
+  "materials": [
+    {
+      "id": 1076,
+      "name": "grey50",
+      "keywords": "",
+      "colors": [
+        [
+          "_Color",
+          {
+            "r": 0.5,
+            "g": 0.5,
+            "b": 0.5,
+            "a": 1.0
+          }
+        ],
+        [
+          "_EmissionColor",
+          {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.0
+          }
+        ],
+        [
+          "_EmissionColorUI",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ]
+      ]
+    }
+  ],
+  "controller": {
+    "id": 5958,
+    "name": "fishUnarmedController"
+  },
+  "classification": {
+    "renderer_path_id": 121680,
+    "renderer_name": "enFishA",
+    "ancestor_names": [
+      "enFishA",
+      "enBaseyFish"
+    ],
+    "rig_profile_fingerprint": null,
+    "joint_count": 34,
+    "skinset_avatar_references": [],
+    "enemy_db_referenced": false,
+    "rig_profile_used_by_enemy": false,
+    "ancestor_component_evidence": [
+      {
+        "component_class": "CharacterEventListener",
+        "ancestor_game_object": "enBaseyFish",
+        "component_path_id": 140194
+      }
+    ],
+    "positive_role": "empty_renderer_no_mesh",
+    "integration_path": "no source mesh to replace; inspect owner and intended populated renderer"
+  },
+  "nativeEnemyRowsAudited": {
+    "serialized_array_count": 372,
+    "recognized_enemy_rows": 363,
+    "null_enemy_asset_row_count": 9,
+    "unresolved_enemy_rows": 0,
+    "distinct_cel_prefabs": 308,
+    "distinct_skinned_renderer_ids": 323,
+    "distinct_rig_profiles": 162,
+    "distinct_rig_and_weapon_controller_profiles": 222,
+    "distinct_combat_controllers": 66,
+    "multipart_enemy_row_count": 7,
+    "unmapped_renderers": 427,
+    "unmapped_character_renderer_candidates": 144
+  },
+  "matchingEnemyRows": [],
+  "nativeSkinsetRowsAudited": 96,
+  "matchingSkinsets": [],
+  "strictReplacement": "Unsupported by current exact renderer replacement: ExplicitEnemyMeshSwap rejects target.sharedMesh==null before decode. No native vertices/indices/IBMs or bind fingerprint exist for this renderer; 34 live bone pointers and grey50 material do not supply a source mesh baseline.",
+  "entryRoute": "No current native enemy DB row or skinset m_Avatar points to CEL140194. ResourceManager contains enbaseyfish; a resource handle alone is not an observed gameplay route. Normal FTKHub.GetEnemyPrefab resolves row.m_EnemyAsset. A new registered row referencing this resource would still encounter the missing-mesh rejection. Empty-rig authoring would need a separate reviewed explicit baseline/IBMs/material contract.",
+  "limits": [
+    "Fresh native metadata and both native enemy DB copies reconciled; 96 skinset rows re-parsed.",
+    "No proof of historical obsolescence or universal absence of indirect/dynamic resource loads.",
+    "Do not equate this missing-mesh resource with fishA01/A02/A03 despite controller/bone-count similarity; no bind equality can be established.",
+    "No game operation or native geometry extraction; this is ownership classification only."
+  ],
+  "sourceAssetsSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+  "assemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "sourcePins": [
+    {
+      "path": "scratch/renderer-121680-ownership-analysis/audit_source.py",
+      "sha256": "a310a0c5802c99290e6dd948f93dc36d5d786302ba84d97242bc8a7c5f527497"
+    },
+    {
+      "path": "scratch/renderer-121680-ownership-analysis/resource_audit.py",
+      "sha256": "756e4e45bd7b4fe49403afed63ee67ced5201b38f7094bc44b242648881c511e"
+    },
+    {
+      "path": "scratch/renderer-121680-ownership-analysis/native-metadata.json",
+      "sha256": "e0e0d4b216861e8b720c6f952725f181f26553cb232d3700166c04bd1c269653"
+    },
+    {
+      "path": "scratch/renderer-121680-ownership-analysis/renderer-fields.json",
+      "sha256": "6f7eae71fe851f141680c6f0d42028de620cc68136f8d1561984c6c526b9f7dd"
+    },
+    {
+      "path": "scratch/renderer-121680-ownership-analysis/resource-reference.json",
+      "sha256": "8446c5b0c0e59a053ac45942af7959b20fe59303f860b80b553629641f341be2"
+    },
+    {
+      "path": "scratch/renderer-121680-ownership-analysis/reclassified.json",
+      "sha256": "76d84376fbe4c915d57af2200c8fa8d32ba794ad106dd7fbe6bce373167b2a50"
+    },
+    {
+      "path": "scratch/renderer-121680-ownership-analysis/enemy-mapping.json",
+      "sha256": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52"
+    },
+    {
+      "path": "tools/ai-model-pipeline/classify_rig_candidates.py",
+      "sha256": "1c628c9812356598ad3f13e4ca0a768c5e72c07c57e234ed863e660966262b6a"
+    },
+    {
+      "path": "tools/ai-model-pipeline/map_enemy_rigs.py",
+      "sha256": "2c0e86771ef4edbe09432789c227fb28068e7ce575019b2f016927dae3f4e27d"
+    },
+    {
+      "path": "FTKModFramework/Core/ExplicitEnemyMeshSwap.cs",
+      "sha256": "a92e7255fd60a0949c4483bf9213875b3fcdd9ddd905a1cec4e887f5afcc1791"
+    },
+    {
+      "path": "scratch/FTKHub.analysis.cs",
+      "sha256": "4fc9bc3886c11a16e0b48a94fb6b6e310544c29049ac6b42d83d25de197c9358"
+    }
+  ]
+}

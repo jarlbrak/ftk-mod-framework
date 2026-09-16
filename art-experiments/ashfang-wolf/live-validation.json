@@ -1,0 +1,1109 @@
+{
+  "schemaVersion": 1,
+  "asset": "Ashfang",
+  "artStatus": "prototype; not finished artistic acceptance",
+  "visualReview": {
+    "status": "partial manual review; further review pending",
+    "reviewedByParent": {
+      "attack": [
+        43,
+        50,
+        57
+      ],
+      "lethal-ragdoll": [
+        32,
+        55,
+        119
+      ]
+    },
+    "architectReview": "17 sampled frames; no obvious catastrophic deformation reported. Visibility is partly occluded. Thin pole-like legs, spike-like tail, and armor-like orange fins remain art issues.",
+    "automaticQualityVerdict": null
+  },
+  "scope": {
+    "enemyId": "ftkmf_modeltest_ashfang",
+    "nativeChassis": "wolfA",
+    "celRelativeRendererPath": "wolf01",
+    "nativeRendererReferenceId": 121142,
+    "allControllerVariantsValidated": false
+  },
+  "fixture": {
+    "disposableSave": true,
+    "heroMaxHp": 999,
+    "tutorialsQuiet": true,
+    "timingMode": "offline-fixed-step-gameplay",
+    "videoFps": 12,
+    "sourcePngHeight": 831,
+    "videoPadding": "One black bottom row; source PNGs unchanged",
+    "videoWidth": 1280,
+    "videoHeight": 832,
+    "videoDurationSeconds": 10,
+    "note": "Offline replay of 120 fixed-step screenshots; approximately 10.908 game seconds. Does not establish real-time rendering performance."
+  },
+  "assets": [
+    {
+      "path": "art-experiments/ashfang-wolf/ashfang_rigged.glb",
+      "sha256": "6b490f9240f2e61cae99232805cdac5c447409cadc568cd0e41190d4481d3eae",
+      "bytes": 559092
+    },
+    {
+      "path": "art-experiments/ashfang-wolf/ashfang_basecolor.png",
+      "sha256": "e05aa782e3821cdef8ed72ffe382acef6bd9760030636e944ed4c4de604e0aab",
+      "bytes": 2045
+    }
+  ],
+  "installedBinariesAtPackaging": [
+    {
+      "path": "scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "df0cb43046a1281daf157a8f4cb3b78bfa06ad6aed932001d10553dd4745cca4",
+      "bytes": 1954816
+    },
+    {
+      "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "a21e2eb7550467209600a7d6e720e743b3d4b18d5781f6db004f1488dfca93c8",
+      "bytes": 56320
+    },
+    {
+      "path": "scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTestContent.dll",
+      "sha256": "d32d4035b8d8f211a6748444a3c1647a6d4109b665868c44922e14a6882d9c35",
+      "bytes": 18944
+    }
+  ],
+  "captures": [
+    {
+      "captureId": "dc3d77b3e473458db0453b2eb3cfbaa3",
+      "captureSha256": "5d37b3a8140eeafa839a3f44298ee503357a1166c3d09b7adea88c333022ee29",
+      "provenance": "observed-runtime",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_ashfang_rigged.glb",
+          "f21a098cec0440ada594ef83b366643542e21af11de197ce66878d49228082a6"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 104,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 42,
+              "firstNormalizedTime": 422.1719665527344,
+              "lastNormalizedTime": 426.0992126464844,
+              "gameSeconds": 3.85003662109375
+            },
+            {
+              "firstFrame": 59,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.08281107246875763,
+              "lastNormalizedTime": 5.692811489105225,
+              "gameSeconds": 5.5
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_wolf"
+          ],
+          "sampleCount": 16,
+          "occurrences": [
+            {
+              "firstFrame": 43,
+              "lastFrame": 58,
+              "firstNormalizedTime": 0.11148648709058762,
+              "lastNormalizedTime": 0.9476349353790283,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "name": "attack",
+      "rawCaptureLocalPath": "scratch/mirewarden-game/model-test-output/dc3d77b3e473458db0453b2eb3cfbaa3.json",
+      "stills": [
+        {
+          "frameIndex": 0,
+          "path": "art-experiments/ashfang-wolf/live/attack-0000.png",
+          "sha256": "dff0a7cd51fe865e64d43278208bb0b5dc32b0826c658793c1e60644becb1d2f",
+          "bytes": 1118035
+        },
+        {
+          "frameIndex": 43,
+          "path": "art-experiments/ashfang-wolf/live/attack-0043.png",
+          "sha256": "34a36f491b88447fa79ebbc26d79473a184fbc7bd5dddc5000e4894d19c752e1",
+          "bytes": 1114870
+        },
+        {
+          "frameIndex": 50,
+          "path": "art-experiments/ashfang-wolf/live/attack-0050.png",
+          "sha256": "e6fe5dc6306b26e6f1be981aaa5873d2b6ce86b5bfa75eb045b15ad0abd632e1",
+          "bytes": 1149363
+        },
+        {
+          "frameIndex": 57,
+          "path": "art-experiments/ashfang-wolf/live/attack-0057.png",
+          "sha256": "1d607ba1b6637fecadfbdd1e0fd26d7b928cbef1eb9b12b77910cde053e48408",
+          "bytes": 1109199
+        }
+      ],
+      "video": {
+        "path": "art-experiments/ashfang-wolf/live/attack.mp4",
+        "sha256": "6698102d319d85ecc54a9927d113162efabb5dcbc80544217f1b5187cbef021b",
+        "bytes": 2873025
+      }
+    },
+    {
+      "captureId": "f83fc9bdc0124af28e3b09a912f7c4a6",
+      "captureSha256": "56e2d375fd292326ce0dea7589af7c8105fa249689ebc33cc8e0379a325d1e73",
+      "provenance": "observed-runtime",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_ashfang_rigged.glb",
+          "f21a098cec0440ada594ef83b366643542e21af11de197ce66878d49228082a6"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 70,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 18,
+              "firstNormalizedTime": 40.12065887451172,
+              "lastNormalizedTime": 41.803627014160156,
+              "gameSeconds": 1.6500244140625
+            },
+            {
+              "firstFrame": 38,
+              "lastFrame": 65,
+              "firstNormalizedTime": 0.4274277985095978,
+              "lastNormalizedTime": 2.9519269466400146,
+              "gameSeconds": 2.47503662109375
+            },
+            {
+              "firstFrame": 82,
+              "lastFrame": 104,
+              "firstNormalizedTime": 0.08281107246875763,
+              "lastNormalizedTime": 2.1398110389709473,
+              "gameSeconds": 2.01666259765625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -478722116,
+          "clips": [
+            "dodge_wolf"
+          ],
+          "sampleCount": 19,
+          "occurrences": [
+            {
+              "firstFrame": 19,
+              "lastFrame": 37,
+              "firstNormalizedTime": 0.05092592537403107,
+              "lastNormalizedTime": 0.9675923585891724,
+              "gameSeconds": 1.64996337890625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack_wolf"
+          ],
+          "sampleCount": 16,
+          "occurrences": [
+            {
+              "firstFrame": 66,
+              "lastFrame": 81,
+              "firstNormalizedTime": 0.11148648709058762,
+              "lastNormalizedTime": 0.9476349353790283,
+              "gameSeconds": 1.375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "attackProf_wolf"
+          ],
+          "sampleCount": 15,
+          "occurrences": [
+            {
+              "firstFrame": 105,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.07857142388820648,
+              "lastNormalizedTime": 0.6285714507102966,
+              "gameSeconds": 1.2833251953125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "name": "dodge-attacks",
+      "rawCaptureLocalPath": "scratch/mirewarden-game/model-test-output/f83fc9bdc0124af28e3b09a912f7c4a6.json",
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.9083251953125,
+            "value": true
+          },
+          "transitions": []
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.9083251953125,
+            "value": true
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodies": [
+            {
+              "instanceId": -245950,
+              "paths": [
+                "Root_M/Tail0_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245928,
+              "paths": [
+                "Root_M/Rump_R/backHip_R/backKnee_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245918,
+              "paths": [
+                "Root_M/Rump_R/backHip_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245892,
+              "paths": [
+                "Root_M/Rump_L/backHip_L/backKnee_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245882,
+              "paths": [
+                "Root_M/Rump_L/backHip_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245848,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/frontHip_R/frontKnee_R/frontAnkle_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245838,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/frontHip_R/frontKnee_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245828,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/frontHip_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245802,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/frontHip_L/frontKnee_L/frontAnkle_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245792,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/frontHip_L/frontKnee_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245782,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/frontHip_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245734,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245720,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            },
+            {
+              "instanceId": -245702,
+              "paths": [
+                "Root_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 0,
+              "consecutiveDynamicPositionPairs": 0,
+              "movingPositionPairCount": 0,
+              "sampledWorldPositionPathLength": null,
+              "maxRecordedLinearSpeed": null,
+              "maxRecordedAngularSpeed": null,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 0,
+              "trailingLowVelocityFirstFrame": null,
+              "trailingLowVelocityGameSeconds": null
+            }
+          ]
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "stills": [
+        {
+          "frameIndex": 19,
+          "path": "art-experiments/ashfang-wolf/live/dodge-attacks-0019.png",
+          "sha256": "7010d9f9d9983f6eebc09cdb1fdccfa3cc435ef40ed7b42d1b6c3a30a42ccda8",
+          "bytes": 1119867
+        },
+        {
+          "frameIndex": 28,
+          "path": "art-experiments/ashfang-wolf/live/dodge-attacks-0028.png",
+          "sha256": "c20e078df07caeb8575beec16d478ae2fee1c2021f9e4dbbb094dcf39c9748cb",
+          "bytes": 1110827
+        },
+        {
+          "frameIndex": 37,
+          "path": "art-experiments/ashfang-wolf/live/dodge-attacks-0037.png",
+          "sha256": "97c61a4686e5310403ddc3a436ae1c1423dee36093e698cba6c006dc2ddfdf18",
+          "bytes": 1116029
+        }
+      ],
+      "video": {
+        "path": "art-experiments/ashfang-wolf/live/dodge-attacks.mp4",
+        "sha256": "cf5d3056cc39c37c7f1afe99473b99c30e497f618435a08bf0d321dd4a90881c",
+        "bytes": 2432514
+      }
+    },
+    {
+      "captureId": "8fd4e182e1be4e87a616f6a571f20ea8",
+      "captureSha256": "8940fb65cb7e853ab8449ec138a402e77bd78c28d4e49cd78a543d3fd2408b3e",
+      "provenance": "observed-runtime",
+      "timingMode": "offline-fixed-step-gameplay",
+      "frameCount": 120,
+      "actualGameSeconds": 10.90838623046875,
+      "meshIdentityStable": true,
+      "meshSignatures": [
+        [
+          "ftkmf_glb_ashfang_rigged.glb",
+          "f21a098cec0440ada594ef83b366643542e21af11de197ce66878d49228082a6"
+        ]
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "cidle_wolf"
+          ],
+          "sampleCount": 25,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 24,
+              "firstNormalizedTime": 39.52165222167969,
+              "lastNormalizedTime": 41.76560974121094,
+              "gameSeconds": 2.20001220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "deathHeavy_wolf"
+          ],
+          "sampleCount": 95,
+          "occurrences": [
+            {
+              "firstFrame": 25,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10999999940395355,
+              "lastNormalizedTime": 0.10999999940395355,
+              "gameSeconds": 8.61669921875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ],
+      "name": "lethal-ragdoll",
+      "rawCaptureLocalPath": "scratch/mirewarden-game/model-test-output/8fd4e182e1be4e87a616f6a571f20ea8.json",
+      "ragdollEvidence": {
+        "animatorEnabled": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 26,
+          "falseFrameCount": 94,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.90838623046875,
+            "value": false
+          },
+          "transitions": [
+            {
+              "fromFrame": 25,
+              "toFrame": 26,
+              "from": true,
+              "to": false,
+              "gameSeconds": 2.38336181640625
+            }
+          ]
+        },
+        "nativeRagdollFlag": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "trueFrameCount": 120,
+          "falseFrameCount": 0,
+          "firstSample": {
+            "frameIndex": 0,
+            "gameSeconds": 0.0,
+            "value": true
+          },
+          "lastSample": {
+            "frameIndex": 119,
+            "gameSeconds": 10.90838623046875,
+            "value": true
+          },
+          "transitions": []
+        },
+        "rigidbodies": {
+          "status": "recorded",
+          "recordedFrameCount": 120,
+          "missingFrameCount": 0,
+          "truncatedFrames": [],
+          "bodies": [
+            {
+              "instanceId": -245950,
+              "paths": [
+                "Root_M/Tail0_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 2.3834697064919843,
+              "maxRecordedLinearSpeed": 2.451194092824388,
+              "maxRecordedAngularSpeed": 21.986613560665273,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245928,
+              "paths": [
+                "Root_M/Rump_R/backHip_R/backKnee_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 1.3636479028166855,
+              "maxRecordedLinearSpeed": 1.5150297222432851,
+              "maxRecordedAngularSpeed": 15.093382190597096,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245918,
+              "paths": [
+                "Root_M/Rump_R/backHip_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 1.9539964365899656,
+              "maxRecordedLinearSpeed": 2.7116059862405515,
+              "maxRecordedAngularSpeed": 5.0138713785081075,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245892,
+              "paths": [
+                "Root_M/Rump_L/backHip_L/backKnee_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 1.4279867319703217,
+              "maxRecordedLinearSpeed": 1.9714296480479039,
+              "maxRecordedAngularSpeed": 9.378121918201458,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245882,
+              "paths": [
+                "Root_M/Rump_L/backHip_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 2.4453355485327086,
+              "maxRecordedLinearSpeed": 2.9840039800871017,
+              "maxRecordedAngularSpeed": 5.674159577375127,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 74,
+              "trailingLowVelocityFirstFrame": 46,
+              "trailingLowVelocityGameSeconds": 6.69171142578125
+            },
+            {
+              "instanceId": -245848,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/frontHip_R/frontKnee_R/frontAnkle_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 3.018684266713408,
+              "maxRecordedLinearSpeed": 4.654679730548453,
+              "maxRecordedAngularSpeed": 15.515246422894496,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245838,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/frontHip_R/frontKnee_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 2.879042443904645,
+              "maxRecordedLinearSpeed": 3.4031076538236067,
+              "maxRecordedAngularSpeed": 8.3426375165444,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245828,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_R/frontHip_R"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 3.0215306708867624,
+              "maxRecordedLinearSpeed": 3.4739801512285253,
+              "maxRecordedAngularSpeed": 8.739765421272526,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245802,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/frontHip_L/frontKnee_L/frontAnkle_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 3.7585379401529844,
+              "maxRecordedLinearSpeed": 4.803317841639973,
+              "maxRecordedAngularSpeed": 25.9141010269538,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245792,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/frontHip_L/frontKnee_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 3.3920149366217287,
+              "maxRecordedLinearSpeed": 5.231258297391174,
+              "maxRecordedAngularSpeed": 17.99004545807838,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245782,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Scapula_L/frontHip_L"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 3.446592680824362,
+              "maxRecordedLinearSpeed": 4.664618669625817,
+              "maxRecordedAngularSpeed": 10.537152845134706,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245734,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 4.680608740645845,
+              "maxRecordedLinearSpeed": 5.656763068461482,
+              "maxRecordedAngularSpeed": 13.366704953057019,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245720,
+              "paths": [
+                "Root_M/BackA_M/BackB_M/Chest_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 3.6470468327597962,
+              "maxRecordedLinearSpeed": 5.60236321076374,
+              "maxRecordedAngularSpeed": 3.89430289156122,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            },
+            {
+              "instanceId": -245702,
+              "paths": [
+                "Root_M"
+              ],
+              "recordedSampleCount": 120,
+              "activeNonKinematicSampleCount": 94,
+              "consecutiveDynamicPositionPairs": 93,
+              "movingPositionPairCount": 21,
+              "sampledWorldPositionPathLength": 2.329143013216667,
+              "maxRecordedLinearSpeed": 3.73274619231014,
+              "maxRecordedAngularSpeed": 3.0337526472561493,
+              "lastRecordedLinearSpeed": 0.0,
+              "lastRecordedAngularSpeed": 0.0,
+              "trailingLowVelocitySamples": 73,
+              "trailingLowVelocityFirstFrame": 47,
+              "trailingLowVelocityGameSeconds": 6.60003662109375
+            }
+          ]
+        },
+        "lowVelocityThresholds": {
+          "linearGameUnitsPerSecond": 0.01,
+          "angularRadiansPerSecond": 0.01
+        },
+        "interpretation": "Evidence only. A low-velocity tail describes recorded samples, not a successful death or visual settling verdict.",
+        "limitations": [
+          "m_DoRagdoll records native configuration, not proof that physics took over.",
+          "Renderer.enabled is not Animator.enabled. Missing flags are not inferred from clip progress.",
+          "Body motion uses active nonkinematic samples, positive game-time steps and consecutive frame observations only.",
+          "World-space body movement can include parent motion; sampled path length omits between-frame movement.",
+          "A quiet tail requires both recorded linear and angular velocities; truncated/missing bodies prevent whole-ragdoll conclusions."
+        ]
+      },
+      "stills": [
+        {
+          "frameIndex": 32,
+          "path": "art-experiments/ashfang-wolf/live/lethal-ragdoll-0032.png",
+          "sha256": "2100c1ec10731135b2d74ddfd9bb8f17df495d63f3c61202f8bb35986f80b318",
+          "bytes": 1100342
+        },
+        {
+          "frameIndex": 55,
+          "path": "art-experiments/ashfang-wolf/live/lethal-ragdoll-0055.png",
+          "sha256": "da186e4b1cdfcc2d15cfe0d85ca78329e75fb365bda5835f4b39058c2a7314c3",
+          "bytes": 1114734
+        },
+        {
+          "frameIndex": 119,
+          "path": "art-experiments/ashfang-wolf/live/lethal-ragdoll-0119.png",
+          "sha256": "fd3206135457e49e6b563e45cd27e9c74d8c328ec5b90fd8fb829660b514d048",
+          "bytes": 931155
+        }
+      ],
+      "video": {
+        "path": "art-experiments/ashfang-wolf/live/lethal-ragdoll.mp4",
+        "sha256": "ab1a6ba0b8828b49d4b9de06e11eefddc611b16acc1344e8105d6b41d2306a24",
+        "bytes": 2067191
+      }
+    }
+  ],
+  "gameplayEvidence": {
+    "lethalAttack": "Native committed Attack; displayed damage 10; enemy HP 8 to 0; 14 rigidbodies move after Animator disables at frame26 and have a low-velocity tail.",
+    "loot": "Parent confirmed native CollectCoins and Godsbeard loot. Post-loot state independently records gold11 to15, XP0 to4, combat inactive and room1 to2.",
+    "ready": "Verified native Ready slot at dungeon level0 room2; subsequent VoteButton.OnLeftClick(Ready) returned clicked. Same disposable save/session; next enemy staging was Cinderwing. This demonstrates inter-room progress, not campaign completion."
+  },
+  "missingChecks": [
+    "Nonlethal received-hit reaction was not captured.",
+    "attackProf_wolf is partial (normalized time approximately0.079 to0.629).",
+    "Normal attack capture omits the earliest normalized-time interval.",
+    "Full unoccluded silhouette and deformation review across camera angles remains pending.",
+    "Full animation bounds/culling envelope and all controller variants are not validated."
+  ],
+  "sourceEvidence": [
+    {
+      "path": "scratch/ashfang-after-hit.json",
+      "sha256": "96ceba8c7a232d285bb2367877b52a08f60200ba3eef975bfdaccb469fbcbd3c",
+      "bytes": 4448
+    },
+    {
+      "path": "scratch/ashfang-after-hit2.json",
+      "sha256": "e66423e6b5037120b8a1d49ab0d41ab84a5d40d784c061d872f80f16473eb45c",
+      "bytes": 3666
+    },
+    {
+      "path": "scratch/ashfang-after-loot-state.json",
+      "sha256": "29f9e546b385b78d0101f13bc57769bfa62f20bdf7b1c8800fe6cf0fdadbfbdd",
+      "bytes": 2734
+    },
+    {
+      "path": "scratch/ashfang-attack-capture.txt",
+      "sha256": "d2771faec865211e0c1f7272c71848075e20f61894d41d0b842444e86b37289e",
+      "bytes": 32
+    },
+    {
+      "path": "scratch/ashfang-attack-summary.json",
+      "sha256": "a646a16ca6f7fdf7bb065f2afbc4903d04bdec25cf3299c7f1eb04999e17725f",
+      "bytes": 19663
+    },
+    {
+      "path": "scratch/ashfang-before-hit.json",
+      "sha256": "58c0f5e3e4b83d39f09a7a56acd94d532a92f2894466f4e55dd34b835a948558",
+      "bytes": 4453
+    },
+    {
+      "path": "scratch/ashfang-death-summary.json",
+      "sha256": "88cea484e3c5a48d9faf1c5cb85aef9758fc1d913a34db125b1ecf7ed8e9cb9f",
+      "bytes": 45032
+    },
+    {
+      "path": "scratch/ashfang-hit-action.json",
+      "sha256": "6f5a0ed1f231045915ec280e47392fbd4c89866b5f6692c81ecbd43fc8ae3a9f",
+      "bytes": 315
+    },
+    {
+      "path": "scratch/ashfang-hit-capture.txt",
+      "sha256": "0bb7975c6d0d89b4617945cc52d756291b4c35ec5d3b61e6b60f48c3d88280dd",
+      "bytes": 32
+    },
+    {
+      "path": "scratch/ashfang-hit-summary.json",
+      "sha256": "661d984b71547b7e5e981d751cb6424aa1e022b5c34d0600e8bf0ed18cb84872",
+      "bytes": 45410
+    },
+    {
+      "path": "scratch/ashfang-hit2-action.json",
+      "sha256": "6f5a0ed1f231045915ec280e47392fbd4c89866b5f6692c81ecbd43fc8ae3a9f",
+      "bytes": 315
+    },
+    {
+      "path": "scratch/ashfang-hit2-capture.txt",
+      "sha256": "a4c31755d8e1b9590606cbcdc9d2418d932e3e480ddfe98426a59bf5b7e65102",
+      "bytes": 32
+    },
+    {
+      "path": "scratch/ashfang-inventory.json",
+      "sha256": "df173c60e9bd5139482db58a29e137d6df8ee2659f53c6b07f1be5b20a334b5e",
+      "bytes": 61675
+    },
+    {
+      "path": "scratch/ashfang-pass-action.json",
+      "sha256": "3f5d768b26b2fac6c4065e68eb300fcb273d663ab07a8cc14c7251ce17b4f0ee",
+      "bytes": 74
+    },
+    {
+      "path": "scratch/ashfang-pass-capture.txt",
+      "sha256": "b7e950ac929f059676a0795541fb0b2c750dedcb9d11595a61de029e74807c7f",
+      "bytes": 32
+    },
+    {
+      "path": "scratch/ashfang-staged.json",
+      "sha256": "bdf7bad3801316dcf3c8905a2555994f03f8a5bdd8a38bb02452d32aaf3b7858",
+      "bytes": 492
+    },
+    {
+      "path": "scratch/cinderwing-stage.json",
+      "sha256": "0024c441af01d31e6b6b614e1bf1c39da1259d8f61892b807eb1a769c24fe3b2",
+      "bytes": 507
+    },
+    {
+      "path": "scratch/cinderwing-ready.json",
+      "sha256": "ab6ca2d86ab2f05cf4ca2f41adddcf00c139c5e5809c6703ffa16aa571e8a460",
+      "bytes": 446
+    }
+  ],
+  "sourceRetention": "Full capture JSON and extracted native reference data remain in ignored scratch; this record preserves derived evidence and hashes."
+}

@@ -1,0 +1,19 @@
+{
+  "status": "ADVANCE_TO_EXACT_LIVE_TRIAL",
+  "reviewer": "parent visual review",
+  "inputs": {
+    "hero": "hero.png",
+    "side": "side.png",
+    "scene": "sunspire-roc-studio.blend"
+  },
+  "observations": [
+    "The reviewed bind-pose hero view reads as a large eagle: dark body, copper breast, sun-gold crown, ivory hooked beak, talons, paired extended wings, and a broad tail are all visible.",
+    "The reviewed side view keeps the head, beak, eye, folded wing volumes, legs, talons, and separate tail plumes visibly connected; no detached source part or inverted open flight sheet was seen in the static source pose.",
+    "The expanded-wing presentation intentionally exaggerates the Roc silhouette. The off-center studio camera favors the head and near wing, so live gameplay remains the test of combat readability."
+  ],
+  "limits": [
+    "This is a static offline source review under studio lighting, not an FTK camera, material, animation, portrait, culling, or lifecycle result.",
+    "The wing panels and primary feathers need exact attack/death motion review before they can be called animation-safe."
+  ],
+  "decision": "The source has enough readable, original structure to justify a fresh isolated native binding trial; it is not accepted finished art."
+}

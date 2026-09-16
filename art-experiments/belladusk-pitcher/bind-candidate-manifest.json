@@ -1,0 +1,125 @@
+{
+  "status": "INITIAL_BIND_POSE_SURFACE_MOTION_FIT_PENDING_NOT_FROZEN",
+  "model": "Belladusk Pitcher",
+  "nativeEnemy": "plantE",
+  "rendererId": 121530,
+  "nativeScale": 1.2,
+  "bones": 37,
+  "weightedBones": 29,
+  "sourceFindings": {
+    "path": "scratch/plant-e-native-topology-analysis/findings.json",
+    "sha256": "e9535913ad4ea162ef596e603e5be0381e008801f2079ae20527a48bdf2fdf50"
+  },
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "88eb6c1694f2f45ed02fe35222b88906b8375a260bed0dd5734f4bea70dd2240",
+      "bytes": 1968
+    },
+    {
+      "file": "audit_surfaces.py",
+      "sha256": "f87c070a370349698afd406255fd4badb8408b2281954cee239342dd63457c4f",
+      "bytes": 1571
+    },
+    {
+      "file": "belladusk-reopened.glb",
+      "sha256": "0a65537aeb0445cb075534a0c31c9507c09c6389714168dccb460baacd828642",
+      "bytes": 230900
+    },
+    {
+      "file": "belladusk-reopened.png",
+      "sha256": "51a84eb77be58235914d77b6030c5922d0de4baf3fe4ba2797d4b7a67e8ce493",
+      "bytes": 271
+    },
+    {
+      "file": "belladusk-reopened.source.json",
+      "sha256": "a0f13c9d5b8d222105863f7d80dbba8d32d3897d75db9f2f99058170d26f22e7",
+      "bytes": 673759
+    },
+    {
+      "file": "belladusk-reopened.validation.json",
+      "sha256": "d3940f38db361439ada63c0c24604d22e90cd019e7931b95800853398da5dd77",
+      "bytes": 1188
+    },
+    {
+      "file": "belladusk-studio.blend",
+      "sha256": "378864c5b00464b7e706fa98889be108b3f1e8086129527da9131cb5314913f4",
+      "bytes": 187163
+    },
+    {
+      "file": "belladusk.blend",
+      "sha256": "894115c5304725e580aae81a005426d4d9f5f5263851d514eab4f41ada4d95dc",
+      "bytes": 184348
+    },
+    {
+      "file": "belladusk.glb",
+      "sha256": "f272f1b7dcb36eac0444927c25262b8001f58ea2eba79b04593d0e6788c56159",
+      "bytes": 230900
+    },
+    {
+      "file": "belladusk.pieces.json",
+      "sha256": "0621a65945b86b8756f3790e57da77e524763e73db5a883fe7052922a23b06ad",
+      "bytes": 1765
+    },
+    {
+      "file": "belladusk.source.json",
+      "sha256": "df550c2ac5092cf829be0d3110a099dca1d495ca9592427f62ddfbfbf8a45f63",
+      "bytes": 645516
+    },
+    {
+      "file": "belladusk.validation.json",
+      "sha256": "4b7240c71cdfbf88e84e1cd9bda5d0050838739a1ca6252ea591c9d89f4e4b25",
+      "bytes": 860
+    },
+    {
+      "file": "belladusk_basecolor.png",
+      "sha256": "51a84eb77be58235914d77b6030c5922d0de4baf3fe4ba2797d4b7a67e8ce493",
+      "bytes": 271
+    },
+    {
+      "file": "build_blender.py",
+      "sha256": "e42b26e0b1a644211f1e20d06649b0af6295eb4b6b8bb0a92618ce8157c8b3b3",
+      "bytes": 5364
+    },
+    {
+      "file": "build_geometry.py",
+      "sha256": "2b5a76469c31f7c3406e42d4ee8a11772d379c85a88b09f0c97f4547806061e9",
+      "bytes": 6228
+    },
+    {
+      "file": "hero.png",
+      "sha256": "b445c13633921aed7480dd1cd5b931f85176cb610016a053401c3f0c342c97ee",
+      "bytes": 1014855
+    },
+    {
+      "file": "original-geometry-proof.json",
+      "sha256": "f5ce06e8c6c7e8f93131d1835f50029f3f22eba1434777950f237a82a5a1b29c",
+      "bytes": 1087
+    },
+    {
+      "file": "reopened-validation.json",
+      "sha256": "a5a3721a5eaa3581a4e97645f6a166c763c4c34bb9a10618d85e39e18138fe78",
+      "bytes": 868
+    },
+    {
+      "file": "side.png",
+      "sha256": "2c305eb66f85339a6bed94e4a51229c7dfa5abe32c75b9296cd4a889b9bb996a",
+      "bytes": 1012271
+    },
+    {
+      "file": "surface-bounds-audit.json",
+      "sha256": "70c438e22c1459810e4b01f49f58d1ce09d2c2e67934ddf24a6fc95d2a2575c1",
+      "bytes": 3181
+    },
+    {
+      "file": "verify_original_geometry.py",
+      "sha256": "6cfef19745e80086990bff1ee964d1cf9afa1ee64b5545198d9bd94e7497f499",
+      "bytes": 2335
+    }
+  ],
+  "limits": [
+    "No captured-pose fit, runtime profile, catalog staging or live acceptance yet.",
+    "Native eight unused joints retained but not weighted.",
+    "Mouth rim/corner overlap needs motion review."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": "ftkmf.runner-reconciliation.v1",
+  "status": "semantic_trial_identity_matches_current_campaign_snapshot_fields_only_changed",
+  "topologyGroup": "cace272650590c4f",
+  "routeKind": "directEnemy",
+  "runnerRecord": {
+    "path": "scratch/model-route-cace272650590c4f-directenemy-run.json",
+    "sha256": "dff677bdc146187375b799f62524f516abcb3d115d9e094a44d0b3f53dd8722c"
+  },
+  "currentCampaign": {
+    "path": "scratch/model-validation-campaign.json",
+    "sha256": "d79357287ed38cdd8e501b208e13643b78b5bce087553a2ab93679f67d43146b"
+  },
+  "matchingSemanticFields": {
+    "profile": {
+      "key": "ftkmf_modeltest_verdigrin",
+      "documentPath": "art-experiments/verdigrin-mimic/runtime-profile.json",
+      "documentSha256": "aa4e78bee58cc87c70c30292dc7e3ac4c1b7ffc604168ab36b127ef41b93a5d4"
+    },
+    "catalog": {
+      "path": "scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "6c6c04041425c0e7fd7f983d3e96c0ab35ade5e7dbf11754b5052eba1dd2f144"
+    },
+    "assets": {
+      "verdigrin.glb": "97838ca8be15265f429d24a33e021b55b45faf6472e05137481d303a3d30c0bb",
+      "verdigrin_basecolor.png": "24b8512b9a647ef97362793f47eb8d0f1fcae5398401a22d11721c5e4986de2e"
+    },
+    "sourceAssignment": {
+      "sourceKind": "native_enemy_row",
+      "nativeEnemy": "mimicA",
+      "resourcePrefab": null,
+      "rendererPath": "mimic01",
+      "sourceRendererId": 121192
+    },
+    "motionRendererPath": "mimic01"
+  },
+  "snapshotOnlyMismatches": {
+    "queue": {
+      "runnerSha256": "8ba8f70c568c65111e9e4f11bd425ac1c512ce6c5b51f7dcc53c6df36c3ea27c",
+      "currentSha256": "95b95e6f01d53f0b7d06aecd5ca57af0af7c9329958477430255ce6957c59808"
+    },
+    "stageReadiness": {
+      "runnerSha256": "6e5040591a5c1daa67eaaa4cf980397360a49fa58fbc6dd9962ee19d90b7538a",
+      "currentSha256": "fa7f52b21cf1fd76c7cfdaf091d602ea6d645731dc0730a491e186b228134671"
+    }
+  },
+  "decision": "Preserve and inspect the immutable live record. The changed queue and stage hashes reflect later campaign bookkeeping and do not change the tested profile, catalog, assets, source renderer, or motion renderer.",
+  "limits": [
+    "This reconciliation proves trial identity continuity only.",
+    "It does not itself supply visual review, motion acceptance, archive integrity, or canonical route credit."
+  ]
+}

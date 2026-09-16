@@ -1,0 +1,385 @@
+{
+  "status": "ORIGINAL_A_SELECTED_BODY_PORTRAIT_HIT_VIEWS_REVIEWED_NATIVE_DEATH_DISABLE",
+  "nativeEnemy": "pufferA",
+  "rendererId": 121509,
+  "controllerId": 5999,
+  "session": "19e39acaf4fe49c2b463cd069902e926",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "0c65f1275f3eae761ec87bae6240c91dcfa49a13e34c5fc08334b92a88bc6163",
+      "bytes": 308736
+    }
+  },
+  "assetHashes": {
+    "saffronspine.glb": "4fef121365de9b8191b485b4385619c0ced8c29570ed24132bb9caf306458b64",
+    "saffronspine_basecolor.png": "b375d6f2ee1794f07e3eb14cb8b231b797b935edeb828d249e0cb644803c8931"
+  },
+  "profileSha256": "cd6540fda71602e53af46b1b1c196d499f70ca574e160c032d20933abf945ff5",
+  "rawWrapperStatus": "needs_visual_review",
+  "captures": [
+    {
+      "label": "pass",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/c347ee91620445fa809c80edf7faf9f3.json",
+        "sha256": "d6d6e66c98f3a700e73713164dd343cd6c676ce93899bdd30d4895f6aca87c28"
+      },
+      "raw": {
+        "path": "art-experiments/saffronspine-puffer/live-v1/pass.json.gz",
+        "sha256": "299c1e7c1a568a3cd38e569f40b5e9f974fc1e7da63d0c38564719bfbdf23d97"
+      },
+      "video": {
+        "path": "art-experiments/saffronspine-puffer/live-v1/pass.mp4",
+        "sha256": "1b860c6f561fa71816ce7bbf80ce8afe3c8fd636b883db9cb7d7fc01c9927469"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": null
+    },
+    {
+      "label": "attack",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/ea0db91d153a42aaad9ce41093dc4e19.json",
+        "sha256": "ce39416969282475b43d8dd4ba2f78d4f6bc3717fe88384a1455da4e3741ed16"
+      },
+      "raw": {
+        "path": "art-experiments/saffronspine-puffer/live-v1/attack.json.gz",
+        "sha256": "120290dab2e8f3dd4e85122a2cb71faa35decd8ba4fc3885bfad7168225c4b1e"
+      },
+      "video": {
+        "path": "art-experiments/saffronspine-puffer/live-v1/attack.mp4",
+        "sha256": "60f481e20fa34a6dfdaa271dae7bf8d7cc21b6ca279a0fc0885b4df2820e1c16"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": null
+    },
+    {
+      "label": "kill-fixture",
+      "source": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/20dcff39b1ea4d7892f43c89ac9620bc.json",
+        "sha256": "7e417893e7d518f8520256b9a09ac3a5e7e8c196cfeb87d731defb40440b7c73"
+      },
+      "raw": {
+        "path": "art-experiments/saffronspine-puffer/live-v1/kill-fixture.json.gz",
+        "sha256": "88b6bf564c555a5bf68502dd1125c7932449b009c5578cced1084a62b7941a1a"
+      },
+      "video": {
+        "path": "art-experiments/saffronspine-puffer/live-v1/kill-fixture.mp4",
+        "sha256": "cc5a829f04e1f00edaafb7e47448318f221c3d23871401c3ca772e4c1ab7fc99"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "frames": 120,
+      "firstRendererDisabled": 27
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235494,
+        "alive": true,
+        "containerInstanceId": -237230,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237272,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237672,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235494,
+            "celInstanceId": -239098,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245756,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "19e39acaf4fe49c2b463cd069902e926",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "19e39acaf4fe49c2b463cd069902e926",
+    "id": "25f3312753644a968923951241dc9666",
+    "frame": 17820,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "rootReview": {
+    "path": "art-experiments/saffronspine-puffer/live-v1/saffronspine-root-live-review.json",
+    "sha256": "c8ac2f9d4aedc3e49d180ef0a444650c88439b35a4637719d5ce3eac76544af5"
+  },
+  "limits": [
+    "Exact original PufferA only, not B; selected images, not every frame individually.",
+    "Direct death first disables renderer27; source DeathFade event consistent but actual CEL fade field not recorded.",
+    "Indirect death and final resource teardown untested.",
+    "Actual material readback confirms emission opt-out and original texture; ordinary lethal untested."
+  ],
+  "evidence": [
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack-0000.png",
+      "sha256": "c8c37f59f843544b1353160efaf00f9b3ab702ba56cbfa9b7b5cdbd66b537513"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack-0030.png",
+      "sha256": "144673d67ba34eacac6d6b1a14d793febd887f7297bb6cfe05997ec81327ebf3"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack-0060.png",
+      "sha256": "7bda2f15b4311dbc58e6955fb618d0b13fdd59c783835112249f2f0b616c9816"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack-0101.png",
+      "sha256": "9a676224cfc494731ce8d2dcb0f81d68e22063f41217a938635d73033324dfe6"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack-0119.png",
+      "sha256": "2d34bc01ea49e7e88600281ac406fc4a49ff3e1e3225e32b14bf35236087e7ed"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack-source-image-pins.json",
+      "sha256": "bb1c2b5740047c5840b562d195977a952da3ee37de0deabd5ae74d49e49f6802"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack.json.gz",
+      "sha256": "120290dab2e8f3dd4e85122a2cb71faa35decd8ba4fc3885bfad7168225c4b1e"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/attack.mp4",
+      "sha256": "60f481e20fa34a6dfdaa271dae7bf8d7cc21b6ca279a0fc0885b4df2820e1c16"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-0ae5fb753cb0450abe06f771bcf22a4d/capture-summary.json",
+      "sha256": "e7298cdb37862a2ace654023405e5ae6de3a6f84ea3bb13455cc9549a33871cd"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-0ae5fb753cb0450abe06f771bcf22a4d/journal.jsonl",
+      "sha256": "fdca95f0c167473c624daf3359d1fd623617d2a658a2965b74653e2d7385615e"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-0ae5fb753cb0450abe06f771bcf22a4d/result.json",
+      "sha256": "a04f25f44c0f708afd663e2d6deb0269e85fe48b05dcee687d21c9d200b71646"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-52a55bc096444d95bd0d1d29b605e9dd/capture-summary.json",
+      "sha256": "cdf121614124d06001be631e8e5366f5676d3dc6a7dc49cb639e43d7e81fa0a6"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-52a55bc096444d95bd0d1d29b605e9dd/journal.jsonl",
+      "sha256": "6916978ddd025ce543346f436ab421d8806412247c904e41ac9c12fafd2952fc"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-52a55bc096444d95bd0d1d29b605e9dd/result.json",
+      "sha256": "02f52ec01fe4d0ce29e053394d71d44e8d1ea76d8c0919cae6d40c0d9bcece56"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-bc5d7fcf45884502adc0f5aca53dccda/capture-summary.json",
+      "sha256": "5aaee18aea95372bc6ad012556f5c0a5f63b9c6ad5ebb80d3de2cde8674f2991"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-bc5d7fcf45884502adc0f5aca53dccda/journal.jsonl",
+      "sha256": "bf968725446b9129a1d25071ff89459b2a5a381bf8262a0fc3c35ba311ef0017"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-bc5d7fcf45884502adc0f5aca53dccda/result.json",
+      "sha256": "da646a653e935701fcacf414a3be3709a671b83ad5dd1bb963b06f3ae94ee894"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/case-result.json",
+      "sha256": "21bce5aecdc03ff06440bf55af84623e9cddac263a66bf5e8ef556317f35d001"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/journal.jsonl",
+      "sha256": "934e0502bdcffdb2f2117e875496c9ee08668cf5f06bd30fb6569b044fe47330"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/kill-fixture-0060.png",
+      "sha256": "66296d4cd29b1f7ef07accbbedc4de3ca8dede78164079b96838c8f8eb1ba3d0"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/kill-fixture-source-image-pins.json",
+      "sha256": "b5fface86b9b9b9c04d8f5995f3763661ab6535c81173092cac13cf2664ade24"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/kill-fixture.json.gz",
+      "sha256": "88b6bf564c555a5bf68502dd1125c7932449b009c5578cced1084a62b7941a1a"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/kill-fixture.mp4",
+      "sha256": "cc5a829f04e1f00edaafb7e47448318f221c3d23871401c3ca772e4c1ab7fc99"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/pass-0053.png",
+      "sha256": "2d43c5ca1bb36c5073e6d78d28ec9f4bbe8cb3a90fb7adfe8fa0aad623e96e86"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/pass-0101.png",
+      "sha256": "45874665f15cccec4e1cd80c6186c8664ec83b690fafe58adbc4ee54605eae6e"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/pass-source-image-pins.json",
+      "sha256": "18d94d7f48a8abf5feca66733d1060953b403e608d5ce760657f134bfbd27553"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/pass.json.gz",
+      "sha256": "299c1e7c1a568a3cd38e569f40b5e9f974fc1e7da63d0c38564719bfbdf23d97"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/pass.mp4",
+      "sha256": "1b860c6f561fa71816ce7bbf80ce8afe3c8fd636b883db9cb7d7fc01c9927469"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/saffronspine-deployment-result.json",
+      "sha256": "74ea15db5c16a5f17026f6a09464c696448219a7391004fb4b8663f0b88a08c3"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/saffronspine-live-extent-review.json",
+      "sha256": "c69caeef2b083acaa3b379cdd7d51b9b8f9d85211783a34c9106bca5fecb4ec7"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/saffronspine-live-inventory.json",
+      "sha256": "5739e122ea020b5eb48cb3094dd866d570ddacc58b9d6e6a92e38f893b5c12cd"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/saffronspine-live-material-state.json",
+      "sha256": "eb7194dd250510ef31a2b9784006a4b98b3b1d2e279256d5078e6806363388b0"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/saffronspine-root-live-review.json",
+      "sha256": "c8ac2f9d4aedc3e49d180ef0a444650c88439b35a4637719d5ce3eac76544af5"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/saffronspine-startup-evidence.json",
+      "sha256": "0fd92853a886685f6c7f994bd36a56634c6872ad250e9aa780d98721739cb74b"
+    },
+    {
+      "path": "art-experiments/saffronspine-puffer/live-v1/selected-frames.html",
+      "sha256": "42e1a540d69de303f181d48a178cc5e9a84c3da92118384d6e1aa710ac1d93cb"
+    }
+  ]
+}

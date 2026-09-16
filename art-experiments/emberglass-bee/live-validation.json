@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 1,
+  "asset": "Emberglass Bee",
+  "iteration": "V1 native-scale original live trial",
+  "status": "SCOPED_ORIGINAL_BODY_PORTRAIT_HIT_RAGDOLL_REVIEW",
+  "provenance": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "port": 8788,
+    "session": "5d8860c3aa834e8286ad4d97dedea7c4",
+    "case": "473b3e7524694e59adc08870f2b4c14a",
+    "mode": "new-run",
+    "enemy": "ftkmf_modeltest_emberglass",
+    "class": "ftkmf_modeltest_player_blacksmith_female_apparel",
+    "profile": {
+      "key": "ftkmf_modeltest_emberglass",
+      "baseEnemy": "beeA",
+      "displayName": "Emberglass Bee",
+      "combatProfile": "a34dceed30a67f62df142e0b62554fda51eb4be683804b903119503d90c0e73a",
+      "renderers": [
+        {
+          "rendererPath": "Monster Bee",
+          "glbFile": "emberglass.glb",
+          "textureFile": "emberglass_basecolor.png",
+          "disableNativeEmission": false
+        }
+      ],
+      "minimumBaseHealth": 64,
+      "visualScale": 1.0
+    },
+    "profileInputSha256": "9b4fc3a8603c76583bf4ffa18ba22022d4f4d91b34e15f4cf70d2a7556e454aa",
+    "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+  },
+  "assetHashes": {
+    "emberglass.glb": "5f2011656fb41a5161a3e554c0ceff9143f52cade0218ead976b626d83e0ccd3",
+    "emberglass_basecolor.png": "fb2cff39e8ee324f628d750e8cf9c4ab1cf558627a311576f38a99abab39826e"
+  },
+  "binaries": {
+    "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+    "session": "5d8860c3aa834e8286ad4d97dedea7c4",
+    "binaries": {
+      "framework": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+        "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+        "sha256": "cdbbe7ece2b53e443c1c9c4fad8607379f1c94f1b263592815252e26ac0f4b4a",
+        "bytes": 1967616
+      },
+      "helper": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+        "sha256": "8d9c58439aba919b6489faef9fc89cb6326331f2c39079cd4b36ed06fe81dc87",
+        "bytes": 229376
+      }
+    },
+    "measurement": "on_disk_binary_sha256",
+    "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+  },
+  "session": "5d8860c3aa834e8286ad4d97dedea7c4",
+  "catalogSha256": "9b4fc3a8603c76583bf4ffa18ba22022d4f4d91b34e15f4cf70d2a7556e454aa",
+  "captures": [
+    {
+      "kind": "pass",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/fde51f10731743b691e8b1543c138334.json",
+        "sha256": "cb1244599d144ee2c0b027a990d20ea85da947c8790f4254afbbf5b56cad9a21"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-7db3ff629e7741f3ac103f414576d396/journal.jsonl",
+        "sha256": "aa064f53c10e2be30f4844182dd672be67386594cd23c6b47c9bd89761ae52ed"
+      },
+      "summary": {
+        "path": "art-experiments/emberglass-bee/live-v1/pass-summary.json",
+        "sha256": "4c8a746c116a1da4c049df43c89eb90de003987672608032b4203f7086601c24"
+      },
+      "video": {
+        "path": "art-experiments/emberglass-bee/live-v1/pass.mp4",
+        "sha256": "97fed6281bb58d8d313980824cfe12f510e9376649eb71bc0b4b6a66a7617b08"
+      },
+      "frames": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "reviewedFrames": [
+        0,
+        40
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "BeeIdle"
+          ],
+          "sampleCount": 110,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 44,
+              "firstNormalizedTime": 62.872581481933594,
+              "lastNormalizedTime": 65.89751434326172,
+              "gameSeconds": 4.0333251953125
+            },
+            {
+              "firstFrame": 55,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.06948547810316086,
+              "lastNormalizedTime": 4.469482898712158,
+              "gameSeconds": 5.8666534423828125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack2_bee"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 45,
+              "lastFrame": 54,
+              "firstNormalizedTime": 0.23571427166461945,
+              "lastNormalizedTime": 0.9428572058677673,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "hit",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/2740f697a56a4f1b9f70e816522ff060.json",
+        "sha256": "0bd1e760805c6037def0999f30d61930f53f7c3538992f391733d35b71306911"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-48e937b93aff41c88873de338b1515b4/journal.jsonl",
+        "sha256": "514fb0ea60adbb2aa601e3ead4841a324dd475384fa83d66cb7f4631468ffee3"
+      },
+      "summary": {
+        "path": "art-experiments/emberglass-bee/live-v1/hit-summary.json",
+        "sha256": "3154219c3afdb2b20edd654855507b1352b44a4278ffeb65552c51cce0a75e28"
+      },
+      "video": {
+        "path": "art-experiments/emberglass-bee/live-v1/hit.mp4",
+        "sha256": "99d4f63d42b178e9e890fe7c8da240bc7d9d351858ef325abe92334d2ec8f31f"
+      },
+      "frames": 120,
+      "actualGameSeconds": 10.908340454101562,
+      "reviewedFrames": [
+        30
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "BeeIdle"
+          ],
+          "sampleCount": 93,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 26,
+              "firstNormalizedTime": 28.655872344970703,
+              "lastNormalizedTime": 30.443382263183594,
+              "gameSeconds": 2.383331298828125
+            },
+            {
+              "firstFrame": 34,
+              "lastFrame": 68,
+              "firstNormalizedTime": 0.12500005960464478,
+              "lastNormalizedTime": 2.4624998569488525,
+              "gameSeconds": 3.116668701171875
+            },
+            {
+              "firstFrame": 79,
+              "lastFrame": 99,
+              "firstNormalizedTime": 0.06948547810316086,
+              "lastNormalizedTime": 1.4444857835769653,
+              "gameSeconds": 1.8333282470703125
+            },
+            {
+              "firstFrame": 110,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.10625007748603821,
+              "lastNormalizedTime": 0.7250001430511475,
+              "gameSeconds": 0.82501220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": true
+        },
+        {
+          "layer": 0,
+          "stateHash": 207319669,
+          "clips": [
+            "BeeTakeDamage"
+          ],
+          "sampleCount": 7,
+          "occurrences": [
+            {
+              "firstFrame": 27,
+              "lastFrame": 33,
+              "firstNormalizedTime": 0.32999998331069946,
+              "lastNormalizedTime": 0.9900000691413879,
+              "gameSeconds": 0.54998779296875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1274329858,
+          "clips": [
+            "attack2_bee"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 69,
+              "lastFrame": 78,
+              "firstNormalizedTime": 0.23571427166461945,
+              "lastNormalizedTime": 0.9428572058677673,
+              "gameSeconds": 0.82501220703125
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": 1409120217,
+          "clips": [
+            "beeStingerAttack"
+          ],
+          "sampleCount": 10,
+          "occurrences": [
+            {
+              "firstFrame": 100,
+              "lastFrame": 109,
+              "firstNormalizedTime": 0.23571427166461945,
+              "lastNormalizedTime": 0.9428572058677673,
+              "gameSeconds": 0.8249969482421875
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    },
+    {
+      "kind": "death",
+      "capture": {
+        "path": "scratch/mirewarden-game/model-test-output/bef7c0f2ad434266928b1d7d261b58db.json",
+        "sha256": "fe72b821013b3a9def5cd6e1edada4b322f557d22a3a2adb2537770f9bfa382d"
+      },
+      "journal": {
+        "path": "scratch/mirewarden-game/model-test-output/case-e9b20bf8298041b8a9f7dedf90ea6793/journal.jsonl",
+        "sha256": "ecbd328960fc42aeba90f12a88eaf4499890b1a2724b4fcb3e57b85dc9975eec"
+      },
+      "summary": {
+        "path": "art-experiments/emberglass-bee/live-v1/death-summary.json",
+        "sha256": "33bb1dba43ed28895ea693d3fc38b692ebb0a2a2a3e73010eff8631c7b321e73"
+      },
+      "video": {
+        "path": "art-experiments/emberglass-bee/live-v1/death.mp4",
+        "sha256": "0d8be1c4410254b4b9d440b469197540fc459c5c10fa3851a8e82c97aa9a4465"
+      },
+      "frames": 120,
+      "actualGameSeconds": 10.9083251953125,
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "states": [
+        {
+          "layer": 0,
+          "stateHash": -1009909005,
+          "clips": [
+            "BeeIdle"
+          ],
+          "sampleCount": 26,
+          "occurrences": [
+            {
+              "firstFrame": 0,
+              "lastFrame": 25,
+              "firstNormalizedTime": 164.9989471435547,
+              "lastNormalizedTime": 166.7178497314453,
+              "gameSeconds": 2.291656494140625
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        },
+        {
+          "layer": 0,
+          "stateHash": -1788913636,
+          "clips": [
+            "BeeDie"
+          ],
+          "sampleCount": 94,
+          "occurrences": [
+            {
+              "firstFrame": 26,
+              "lastFrame": 119,
+              "firstNormalizedTime": 0.13199999928474426,
+              "lastNormalizedTime": 0.13199999928474426,
+              "gameSeconds": 8.524993896484375
+            }
+          ],
+          "nearCompleteFirstCycleObserved": false
+        }
+      ]
+    }
+  ],
+  "rootReview": {
+    "path": "art-experiments/emberglass-bee/live-v1/root-review.json",
+    "sha256": "db6ff45c3061bffefb74e302b6c6e107e415fe6efeb01274967e0ae723aa9be8"
+  },
+  "ragdollAudit": {
+    "path": "art-experiments/emberglass-bee/live-v1/ragdoll-audit.json",
+    "sha256": "43ccc58dfe53d1288e8db9faf2ddebb7824cf756fe7f1575caca402416609191"
+  },
+  "materialInventory": {
+    "path": "art-experiments/emberglass-bee/live-v1/material-inventory.json",
+    "sha256": "92e73af70ff433be676c18d4fd1a8e4d7d51a2cb14f86f241f3a0887f41fd9d6"
+  },
+  "normalHit": {
+    "damage": 10,
+    "hpBefore": 58,
+    "hpAfter": 48
+  },
+  "progress": {
+    "evidence": {
+      "path": "art-experiments/emberglass-bee/live-v1/ready.json",
+      "sha256": "f9c6e31bd85de6d9a4116c811e6c49eff6386caf1f915d6a45e6f05db1e706b0"
+    },
+    "level": 0,
+    "room": 2,
+    "actions": [
+      {
+        "path": "scratch/emberglass-after-death-fixture.json",
+        "sha256": "821fda673ae4a6e205b2892c160c4ade7dd0119a4521f70fedda3b16cc534cbb"
+      },
+      {
+        "path": "scratch/emberglass-collect-1.json",
+        "sha256": "ab8c17b8c3c5dc21a15ec73e836d1752ed94140294841601f95b1c63dae127ca"
+      }
+    ],
+    "note": "One native Collect; first immediate Ready query was transitional false, later strict Ready0/2 verified."
+  },
+  "stage": {
+    "path": "scratch/mirewarden-game/model-test-output/case-473b3e7524694e59adc08870f2b4c14a/journal.jsonl",
+    "sha256": "7474e493cec81db9f0386c90a10c77cc5f1cbf926d161907a6ee4e921b5a1900"
+  },
+  "deployment": {
+    "path": "scratch/mirewarden-game/deployment-backups/emberglass-gloamfin-20260906-144556/deployment.json",
+    "sha256": "72f58302a60967fd374b172dde23e8c81be17238f723d43d713ae9856ed0a6de"
+  },
+  "limitations": [
+    "Exact beeA original only, not the other bind/controller pairs in its topology.",
+    "Selected frames only; attack blur and small silhouette limit fine detail.",
+    "Some hit/attack clips are partial first-cycle samples;120 frames do not mean every clip or view covered.",
+    "Native effects retained, not original authored VFX.",
+    "Explicit kill fixture, not ordinary lethal damage, DeathLight or all camera/culling states.",
+    "IsSleeping not recorded; zero velocities are settling evidence."
+  ],
+  "media": [
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/death-0040.png",
+      "sha256": "c87367035d644ba50533d13fbb1dbe124a5b9e3c1b4ecbfda60f6c958f4e3665"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/death-0060.png",
+      "sha256": "fa680858b27d87ae36c877cf8282f4d9b62e442abf72890fd657986864d79751"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/death-summary.json",
+      "sha256": "33bb1dba43ed28895ea693d3fc38b692ebb0a2a2a3e73010eff8631c7b321e73"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/death.mp4",
+      "sha256": "0d8be1c4410254b4b9d440b469197540fc459c5c10fa3851a8e82c97aa9a4465"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/hit-0030.png",
+      "sha256": "229b74fc4066924a2d8799f32df8b30aa4a46136a9c81c724d6c8faa81216bc6"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/hit-summary.json",
+      "sha256": "3154219c3afdb2b20edd654855507b1352b44a4278ffeb65552c51cce0a75e28"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/hit.mp4",
+      "sha256": "99d4f63d42b178e9e890fe7c8da240bc7d9d351858ef325abe92334d2ec8f31f"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/material-inventory.json",
+      "sha256": "92e73af70ff433be676c18d4fd1a8e4d7d51a2cb14f86f241f3a0887f41fd9d6"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/pass-0000.png",
+      "sha256": "008d8dbf1bcb24a23ba18f72b40344d4d3c5301fec67a31a6cd79fdcd69ed7e9"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/pass-0040.png",
+      "sha256": "f53428a0441a142eb1d73f2a3e8abedbddfe531c45ba8a9123b0ba28951efbd5"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/pass-summary.json",
+      "sha256": "4c8a746c116a1da4c049df43c89eb90de003987672608032b4203f7086601c24"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/pass.mp4",
+      "sha256": "97fed6281bb58d8d313980824cfe12f510e9376649eb71bc0b4b6a66a7617b08"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/ragdoll-audit.json",
+      "sha256": "43ccc58dfe53d1288e8db9faf2ddebb7824cf756fe7f1575caca402416609191"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/ready.json",
+      "sha256": "f9c6e31bd85de6d9a4116c811e6c49eff6386caf1f915d6a45e6f05db1e706b0"
+    },
+    {
+      "path": "art-experiments/emberglass-bee/live-v1/root-review.json",
+      "sha256": "db6ff45c3061bffefb74e302b6c6e107e415fe6efeb01274967e0ae723aa9be8"
+    }
+  ],
+  "checks": {
+    "appearance": "Parent selected-pose body, portraits, hit and death PASS; root-review.json contains exact scope.",
+    "material": "Stage runtime matBee Standard, own authored palette texture, emission keyword true with zero emission color and no map. Second native material not retained.",
+    "ragdoll": "Animator off and16dynamic bodies at27; frame60 visually near settled but nonzero velocities; both velocities zero at63/119.",
+    "controllerCoverage": "BeeTakeDamage, attack2_bee and beeStingerAttack include partial first cycles. Not all animations or continuous surface visibility."
+  }
+}

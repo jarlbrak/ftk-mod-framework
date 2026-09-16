@@ -1,0 +1,41 @@
+{
+  "status": "SELECTED_DODGE_AND_HIT_POSES_REVIEWED_NOT_LETHAL_OR_FULL_MOTION_ACCEPTANCE",
+  "views": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d3695b29a7c34163ab59e52fee175048/0023.png",
+      "sha256": "4053e8126f3fab53912782386e539fe7f44b5394cdbf49167a2c28a17e5ae167",
+      "captureId": "d3695b29a7c34163ab59e52fee175048",
+      "index": 23,
+      "actualImageViewed": true,
+      "verdict": "Early native dodge: connected face, head, shoulders and arms; hero occludes lower torso/legs."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d3695b29a7c34163ab59e52fee175048/0030.png",
+      "sha256": "1f6b5531e0cb8bbc09a2bb31718ccf177f83c359f9451bed57bc81532c598c02",
+      "captureId": "d3695b29a7c34163ab59e52fee175048",
+      "index": 30,
+      "actualImageViewed": true,
+      "verdict": "Native DODGED text and HP33; visible head/torso/leftmost leg connected, near lower body occluded by hero."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/d3695b29a7c34163ab59e52fee175048/0040.png",
+      "sha256": "cf3acdd5c17acc62fa74e7d9e0597e243f49d0ffc160d674a3ed545a6d212bcf",
+      "captureId": "d3695b29a7c34163ab59e52fee175048",
+      "index": 40,
+      "actualImageViewed": true,
+      "verdict": "Late positive dodge: full visible body, both arms, hips, legs and web feet remain connected; no hero overlap on body. DODGED text above head; portrait faces readable."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/83d1f03346f44c9fb5ce82e2bd26c316/0030.png",
+      "sha256": "ef0f8822ab03c39a806b8d4a7913d05f1df3bf9640433c814beba1d1c9847dd0",
+      "captureId": "83d1f03346f44c9fb5ce82e2bd26c316",
+      "index": 30,
+      "actualImageViewed": true,
+      "verdict": "Native -8 and HP25, visible head/flippers/upper torso connected; hero occludes lower body. Both portrait faces readable."
+    }
+  ],
+  "limits": [
+    "Four selected images only; no full clip visual acceptance.",
+    "Attempt4 retained as dodge33 to33, attempt5 ordinary damage33 to25."
+  ]
+}

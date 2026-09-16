@@ -1,0 +1,503 @@
+{
+  "status": "fresh_v4_catalog_sargassum_lash_v2_exact_primary_and_mirrored_bindings_motion_gameplay_ready_observed_art_unapproved",
+  "scope": "Two fresh isolated V2 Kraken-tentacle trials against the current catalog. Each exact native chassis is tested separately for source binding, its controller, sampled motion, one ordinary hit, fixture-death prefix, and Ready progression. This is not final-art approval.",
+  "renderer_paths": [
+    "krakenTentacle"
+  ],
+  "source_renderer_ids": [
+    121595
+  ],
+  "provenance": {
+    "catalog": {
+      "path": "scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "51f22c64607feebb3241961023b7c642c3e30f30b3b7f5478794da399253df79"
+    },
+    "initialV2StageReceipt": {
+      "path": "scratch/runtime-profile-418-abyssal-kraken-v2/receipt.json",
+      "sha256": "23e972f4d24e24a0c27d0f014690d2435356bfce6a738abc19e926717b98416e"
+    },
+    "initialV2DeploymentReceipt": {
+      "path": "scratch/mirewarden-game/deployment-backups/abyssal-kraken-v2-20260911-194317/deployment.json",
+      "sha256": "16096239e003a5873605cdd5c5e9286bf0f45c25ab0d36688478bb7466c6492e"
+    },
+    "currentGameAssets": {
+      "sargassum-kraken-tentacle-v2.glb": "6815b322fd2b3e22d067f3822aaf1ed90a9de4949f3d55093f9d95e4ab8084d7",
+      "sargassum-kraken-tentacle-v2.png": "93f244d48f6dd53e3b6ff7ed8d4ec10deb8fdddb6b3ed3618bb0d17d2ad12639"
+    }
+  },
+  "trials": {
+    "primary": {
+      "nativeChassis": "krakenTentacle",
+      "enemy": "ftkmf_modeltest_sargassum_kraken_tentacle",
+      "profile": {
+        "key": "ftkmf_modeltest_sargassum_kraken_tentacle",
+        "baseEnemy": "krakenTentacle",
+        "displayName": "Sargassum Lash V2",
+        "combatProfile": "c415ffbaa3d1977a40283b36d0b9bea4fbd2295df45de7b16daa9a7cdb668386",
+        "renderers": [
+          {
+            "rendererPath": "krakenTentacle",
+            "glbFile": "sargassum-kraken-tentacle-v2.glb",
+            "textureFile": "sargassum-kraken-tentacle-v2.png"
+          }
+        ]
+      },
+      "session": "85a00fa867f5444484e9588353a866f1",
+      "case": {
+        "path": "scratch/mirewarden-game/model-test-output/case-928f9307866843bda5491dd90e09e097/case-result.json",
+        "sha256": "d27691aad1d59950b4d7e2a952d7a9b35df91c0cd4d772d0f4eb913f43597722",
+        "status": "needs_visual_review"
+      },
+      "stageCase": {
+        "path": "scratch/mirewarden-game/model-test-output/case-a584863a0aff41ba966caf615abe5b1b/result.json",
+        "sha256": "199097f9b20cb32ae0ff14141bb8475c05521e948eb488b6fb283ed06e56762e",
+        "status": "binding_metadata_observed"
+      },
+      "coverageManifest": {
+        "path": "scratch/coverage-batch-20260911-213630.json",
+        "sha256": "3b42fb69e2158ec3954b5dc929a277725105e95219baf5a89843be99428db1aa"
+      },
+      "binding": {
+        "rendererKind": "SkinnedMeshRenderer",
+        "celRelativeRendererPath": "krakenTentacle",
+        "mesh": "ftkmf_glb_sargassum-kraken-tentacle-v2.glb",
+        "boneSignature": "01c1b372052d71050f30a65512c4578a217e10ea3a9e777e7a985a0314ed78bd",
+        "controller": "krakenTentacleController",
+        "material": {
+          "name": "matKraken1 (Instance)",
+          "shader": "Standard",
+          "emissionKeyword": false,
+          "emissionColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mainTexture": {
+            "instanceId": -245594,
+            "name": "ftkmf_sargassum-kraken-tentacle-v2.png"
+          },
+          "emissionMap": null
+        },
+        "lease": {
+          "available": true,
+          "present": true,
+          "leaseId": 4,
+          "acquired": true,
+          "applied": true,
+          "references": 1
+        }
+      },
+      "captures": [
+        {
+          "label": "pass",
+          "captureId": "29540ab4b4c7443bb59543803262ece6",
+          "rawCapture": {
+            "source": "scratch/mirewarden-game/model-test-output/29540ab4b4c7443bb59543803262ece6.json",
+            "sha256": "06dfe9513c84e71249720307215e811497d8f52263ab4603d683014ca10e6e9a"
+          },
+          "frames": 120,
+          "complete": true,
+          "rawCaptureOk": true,
+          "termination": null,
+          "limitation": null,
+          "dimensions": {
+            "width": 1280,
+            "height": 832,
+            "requestedFps": 12.0
+          },
+          "enemyHpBefore": 162,
+          "enemyHpAfter": 162
+        },
+        {
+          "label": "attack",
+          "captureId": "ac26f799a5104076b8af19c2954e7ed2",
+          "rawCapture": {
+            "source": "scratch/mirewarden-game/model-test-output/ac26f799a5104076b8af19c2954e7ed2.json",
+            "sha256": "d8c6f4ab1255821ac637e45effadb73b4d892393e1c8f1c11ca0f531e3972c2a"
+          },
+          "frames": 120,
+          "complete": true,
+          "rawCaptureOk": true,
+          "termination": null,
+          "limitation": null,
+          "dimensions": {
+            "width": 1280,
+            "height": 832,
+            "requestedFps": 12.0
+          },
+          "enemyHpBefore": 162,
+          "enemyHpAfter": 154
+        },
+        {
+          "label": "kill-fixture",
+          "captureId": "e51f0b046db44db4abd2ab3763b15664",
+          "rawCapture": {
+            "source": "scratch/mirewarden-game/model-test-output/e51f0b046db44db4abd2ab3763b15664.json",
+            "sha256": "25a9d0bd1153548e64349066bb4ff3da29c3f52dc7912e9d3234f79436f66715"
+          },
+          "frames": 91,
+          "complete": false,
+          "rawCaptureOk": false,
+          "termination": "renderer_destroyed",
+          "limitation": "Failure category only; neither native cleanup causality nor full death-animation coverage is inferred.",
+          "dimensions": {
+            "width": 1280,
+            "height": 832,
+            "requestedFps": 12.0
+          },
+          "enemyHpBefore": 154,
+          "enemyHpAfter": 0
+        }
+      ],
+      "ordinaryAttack": [
+        {
+          "attempt": 1,
+          "status": "nonlethal_hp_loss",
+          "beforeHp": 162,
+          "afterHp": 154,
+          "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+        }
+      ],
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    },
+    "mirror": {
+      "nativeChassis": "krakenTentacleMirror",
+      "enemy": "ftkmf_modeltest_sargassum_kraken_tentacle_mirror",
+      "profile": {
+        "key": "ftkmf_modeltest_sargassum_kraken_tentacle_mirror",
+        "baseEnemy": "krakenTentacleMirror",
+        "displayName": "Sargassum Lash V2, Mirrored",
+        "combatProfile": "fa962d81c18292667cd1fee784ca2336f1a9308e3cf0db645dc6979324c246bf",
+        "renderers": [
+          {
+            "rendererPath": "krakenTentacle",
+            "glbFile": "sargassum-kraken-tentacle-v2.glb",
+            "textureFile": "sargassum-kraken-tentacle-v2.png"
+          }
+        ]
+      },
+      "session": "3cff64dbfc4343d0a06534ee937a0078",
+      "case": {
+        "path": "scratch/mirewarden-game/model-test-output/case-87312325b15348e2a01e29037343c87b/case-result.json",
+        "sha256": "f311c9e15a8bcca5058a3e82b6134b94b9a988e97008b299a2fac036a033b761",
+        "status": "needs_visual_review"
+      },
+      "stageCase": {
+        "path": "scratch/mirewarden-game/model-test-output/case-eb667e4a4ca34c88984e90c6cc54e0f1/result.json",
+        "sha256": "3f88883efb6d7eeff9a596e8c84e4fde8990c2b96f9352ffcd81e1f5e5fa71aa",
+        "status": "binding_metadata_observed"
+      },
+      "coverageManifest": {
+        "path": "scratch/coverage-batch-20260911-213903.json",
+        "sha256": "a39ebb1c733a0f7a8466bd0b37ac7e608665d61a0980ea4cc66f50e711e218e3"
+      },
+      "binding": {
+        "rendererKind": "SkinnedMeshRenderer",
+        "celRelativeRendererPath": "krakenTentacle",
+        "mesh": "ftkmf_glb_sargassum-kraken-tentacle-v2.glb",
+        "boneSignature": "01c1b372052d71050f30a65512c4578a217e10ea3a9e777e7a985a0314ed78bd",
+        "controller": "krakenTentacleControllerMirrored",
+        "material": {
+          "name": "matKraken1 (Instance)",
+          "shader": "Standard",
+          "emissionKeyword": false,
+          "emissionColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mainTexture": {
+            "instanceId": -245566,
+            "name": "ftkmf_sargassum-kraken-tentacle-v2.png"
+          },
+          "emissionMap": null
+        },
+        "lease": {
+          "available": true,
+          "present": true,
+          "leaseId": 4,
+          "acquired": true,
+          "applied": true,
+          "references": 1
+        }
+      },
+      "captures": [
+        {
+          "label": "pass",
+          "captureId": "65d07b3792724b5c918631d7e79a043a",
+          "rawCapture": {
+            "source": "scratch/mirewarden-game/model-test-output/65d07b3792724b5c918631d7e79a043a.json",
+            "sha256": "600778fcb5c6bd1ad9c6a3d3d4336090bdb6df47eb6294464441d86102111e43"
+          },
+          "frames": 120,
+          "complete": true,
+          "rawCaptureOk": true,
+          "termination": null,
+          "limitation": null,
+          "dimensions": {
+            "width": 1280,
+            "height": 832,
+            "requestedFps": 12.0
+          },
+          "enemyHpBefore": 162,
+          "enemyHpAfter": 162
+        },
+        {
+          "label": "attack",
+          "captureId": "b2362430199745dbb150a48f1115798b",
+          "rawCapture": {
+            "source": "scratch/mirewarden-game/model-test-output/b2362430199745dbb150a48f1115798b.json",
+            "sha256": "d6e119bf0a2a48b7bc554dd9b07b69997cca609fdbb191a098fd9c37c9b265e5"
+          },
+          "frames": 120,
+          "complete": true,
+          "rawCaptureOk": true,
+          "termination": null,
+          "limitation": null,
+          "dimensions": {
+            "width": 1280,
+            "height": 832,
+            "requestedFps": 12.0
+          },
+          "enemyHpBefore": 162,
+          "enemyHpAfter": 152
+        },
+        {
+          "label": "kill-fixture",
+          "captureId": "fa96977f33e8478ca76a91ba1ac1d8ac",
+          "rawCapture": {
+            "source": "scratch/mirewarden-game/model-test-output/fa96977f33e8478ca76a91ba1ac1d8ac.json",
+            "sha256": "83d3831a807a30c82828f879cac38edc59cda003ffc4f517ca82e1418c447501"
+          },
+          "frames": 91,
+          "complete": false,
+          "rawCaptureOk": false,
+          "termination": "renderer_destroyed",
+          "limitation": "Failure category only; neither native cleanup causality nor full death-animation coverage is inferred.",
+          "dimensions": {
+            "width": 1280,
+            "height": 832,
+            "requestedFps": 12.0
+          },
+          "enemyHpBefore": 152,
+          "enemyHpAfter": 0
+        }
+      ],
+      "ordinaryAttack": [
+        {
+          "attempt": 1,
+          "status": "nonlethal_hp_loss",
+          "beforeHp": 162,
+          "afterHp": 152,
+          "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+        }
+      ],
+      "ready": {
+        "ok": true,
+        "level": 0,
+        "room": 2,
+        "buttonCount": 1
+      }
+    }
+  },
+  "assets": {
+    "sargassum-kraken-tentacle-v2.glb": "6815b322fd2b3e22d067f3822aaf1ed90a9de4949f3d55093f9d95e4ab8084d7",
+    "sargassum-kraken-tentacle-v2.png": "93f244d48f6dd53e3b6ff7ed8d4ec10deb8fdddb6b3ed3618bb0d17d2ad12639"
+  },
+  "selectedFrames": [
+    {
+      "trial": "primary",
+      "source": "scratch/mirewarden-game/model-test-output/29540ab4b4c7443bb59543803262ece6/0012.png",
+      "archive": "selected/primary-pass-0012.png",
+      "sha256": "7d6839c8f1e7df722996890ba3c879da25a3bec0f5c3f76822928da32b0825d0",
+      "action": "pass",
+      "index": 12,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "primary",
+      "source": "scratch/mirewarden-game/model-test-output/29540ab4b4c7443bb59543803262ece6/0024.png",
+      "archive": "selected/primary-pass-0024.png",
+      "sha256": "a3848c80c5f51fc5969af939ec4f1a8b13e838cb27c3e3512487e4c136798f2f",
+      "action": "pass",
+      "index": 24,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "primary",
+      "source": "scratch/mirewarden-game/model-test-output/ac26f799a5104076b8af19c2954e7ed2/0006.png",
+      "archive": "selected/primary-attack-0006.png",
+      "sha256": "ea3111b58b67d95ce1b1dc1bc592903bf4bb2b1d688f086d81e2f13199e97a9c",
+      "action": "attack",
+      "index": 6,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "primary",
+      "source": "scratch/mirewarden-game/model-test-output/ac26f799a5104076b8af19c2954e7ed2/0012.png",
+      "archive": "selected/primary-attack-0012.png",
+      "sha256": "764d7b8e3ad59b96eb672c408a178790954d521b176b9a0388f94eb0d025f13c",
+      "action": "attack",
+      "index": 12,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "primary",
+      "source": "scratch/mirewarden-game/model-test-output/e51f0b046db44db4abd2ab3763b15664/0000.png",
+      "archive": "selected/primary-kill-fixture-0000.png",
+      "sha256": "3119fb3be7accda7709e8d82411eeb4f836bc6a4b570936411f12db54ed7d976",
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "primary",
+      "source": "scratch/mirewarden-game/model-test-output/e51f0b046db44db4abd2ab3763b15664/0090.png",
+      "archive": "selected/primary-kill-fixture-0090.png",
+      "sha256": "09597a87479ed6c8e245314ae23620f77e9d80badc00101bfa4d82f19e849872",
+      "action": "kill-fixture",
+      "index": 90,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "mirror",
+      "source": "scratch/mirewarden-game/model-test-output/65d07b3792724b5c918631d7e79a043a/0012.png",
+      "archive": "selected/mirror-pass-0012.png",
+      "sha256": "66af9b855ed7b802149e959ebcf7b6e5f4517b02980a185c93f283dfb24f7bdf",
+      "action": "pass",
+      "index": 12,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "mirror",
+      "source": "scratch/mirewarden-game/model-test-output/65d07b3792724b5c918631d7e79a043a/0024.png",
+      "archive": "selected/mirror-pass-0024.png",
+      "sha256": "8c7692c006de27c2d89c08dca6f97b73a80326fc576bcf71df1ab97c499e26c9",
+      "action": "pass",
+      "index": 24,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "mirror",
+      "source": "scratch/mirewarden-game/model-test-output/b2362430199745dbb150a48f1115798b/0006.png",
+      "archive": "selected/mirror-attack-0006.png",
+      "sha256": "b5bcf2802d371d966cfe33cbcb18ce5266ba46bc7c1ef2fc286fb9339bbe584e",
+      "action": "attack",
+      "index": 6,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "mirror",
+      "source": "scratch/mirewarden-game/model-test-output/b2362430199745dbb150a48f1115798b/0012.png",
+      "archive": "selected/mirror-attack-0012.png",
+      "sha256": "47b6be71c811daada368bb6211400c183ce491fbe359e101e9cd66770ca1a72a",
+      "action": "attack",
+      "index": 12,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "mirror",
+      "source": "scratch/mirewarden-game/model-test-output/fa96977f33e8478ca76a91ba1ac1d8ac/0000.png",
+      "archive": "selected/mirror-kill-fixture-0000.png",
+      "sha256": "de28a5a72832d6efbbba5a0823f27e1b4fd1fc77b9b6f6bb158d6ad5e8505002",
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    },
+    {
+      "trial": "mirror",
+      "source": "scratch/mirewarden-game/model-test-output/fa96977f33e8478ca76a91ba1ac1d8ac/0090.png",
+      "archive": "selected/mirror-kill-fixture-0090.png",
+      "sha256": "eb31cd98272e7080f1f83ab44e2b62dd17b9a9acd1798ce6d0ccf586f664d64f",
+      "action": "kill-fixture",
+      "index": 90,
+      "observation": "Sampled original V2 tentacle render. It is visual evidence for this frame only and does not grant an all-camera or final-art verdict."
+    }
+  ],
+  "videos": [
+    {
+      "trial": "primary",
+      "label": "pass",
+      "path": "video/primary-pass.mp4",
+      "sha256": "ea5108d79bf473f91628bc967ef051524408b93451e28315ec14739259f64fc1",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "trial": "primary",
+      "label": "attack",
+      "path": "video/primary-attack.mp4",
+      "sha256": "97230ffa12feb71589f3a2c1b5d23d45bd16f603efa39580cf19f86f513de340",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "trial": "primary",
+      "label": "kill-fixture",
+      "path": "video/primary-kill-fixture.mp4",
+      "sha256": "a8189da70d561eb8a216e13f594973c792e7f8a201d70556044664b1dd32e3bd",
+      "frames": 91,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "trial": "mirror",
+      "label": "pass",
+      "path": "video/mirror-pass.mp4",
+      "sha256": "88e0247ee9fd16125f81d111088eeda83de586520c5364e0635b6c6203ea4223",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "trial": "mirror",
+      "label": "attack",
+      "path": "video/mirror-attack.mp4",
+      "sha256": "c27a34a79704a6b5a5cfe7ae3cd47a46f7cfd761c4f78e5b5d4658fe62e5e958",
+      "frames": 120,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    },
+    {
+      "trial": "mirror",
+      "label": "kill-fixture",
+      "path": "video/mirror-kill-fixture.mp4",
+      "sha256": "06dcfa85fb13269bb1cc1882fb77532bbd17f2af92b8d50b7e0a3dc466bd3cf8",
+      "frames": 91,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and PNG hashes preserve the evidence timing record."
+    }
+  ],
+  "visualReview": {
+    "status": "rendered_in_live_combat_art_unapproved",
+    "observed": "Both exact controller rows render the original V2 model in the live isolated combat camera and retain separate sampled frame evidence.",
+    "notAccepted": "The captures do not establish all camera angles, animation intervals, culling behavior, portrait framing, or final aesthetic approval."
+  },
+  "limitations": [
+    "Each ordinary attack records same-target HP only; no block, dodge, hit animation, or damage source is inferred.",
+    "KillSingle is an explicit fixture, not normal lethal gameplay. Each death capture stops after 91 retained frames because the renderer is destroyed.",
+    "The two controllers are independently observed but share one source renderer identity and one authored V2 asset pair.",
+    "No portrait, full resource-disposal, all-camera, all-animation, culling, or final-art acceptance is claimed."
+  ]
+}

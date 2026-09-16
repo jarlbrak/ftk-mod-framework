@@ -1,0 +1,156 @@
+{
+  "schema": "ftkmf.model-root-visual-review-template.v1",
+  "session": "572176f3391e44e192e7112d6ed3b5ee",
+  "reviewStatus": "reviewed_direct_planta_body_binding_motion_gameplay_observed_camera_fit_accepted_limited_art_pending",
+  "binding": {
+    "rendererPath": "enPlant01",
+    "mesh": "ftkmf_glb_cinderbloom_body.glb",
+    "boneSignature": "0e515f0853f8fff145982ba036d438588431e0b6046651a9b69a8199ddd569ad"
+  },
+  "frames": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2494fe68765a4b9a9a8439ec05c5bf5c/0012.png",
+      "sha256": "deb885fabcfdc609ef72b5398b9c39e5c7ec1fbe795301f816319bfa06f0cbd4",
+      "action": "pass",
+      "index": 12,
+      "observation": "The complete authored body is visible in settled native idle at the normal combat camera. The mouth faces the player, the stem and crown form one coherent silhouette, and no bind collapse, clipping at the frame edge, or missing body section is visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2494fe68765a4b9a9a8439ec05c5bf5c/0024.png",
+      "sha256": "dc6091a2e5d2a8879d8877b32fe55db8fc90c53e2f8fbb89520f540947438058",
+      "action": "pass",
+      "index": 24,
+      "observation": "A later native idle sample retains the complete crown, mouth, teeth, stem, and root assembly. This supports the sampled idle presentation only, not every idle interval or long-session culling."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/5ab86cc507694fb3a069af0814e86053/0006.png",
+      "sha256": "e2f2bfe208c868597f8d3c894f20f02f59b0481f7ecad0c0c59cb753e839383b",
+      "action": "attack",
+      "index": 6,
+      "observation": "The ordinary player-attack capture begins with the complete target visible and the body mesh coherent. Native targeting UI is present, but it does not obscure the target silhouette.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/5ab86cc507694fb3a069af0814e86053/0012.png",
+      "sha256": "e1b5172d79ecfc8862876e95922757e8177176a8a4749d0d523973f8215ffb30",
+      "action": "attack",
+      "index": 12,
+      "observation": "Immediately before impact, the authored body remains stable and readable. This frame establishes the intact pre-hit state and does not by itself establish the later Damaged deformation.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/de1ff01ffa8b4d3fbee0eeeff2facc33/0000.png",
+      "sha256": "f5a6692142864e31d79afb57698ef72f221b815aa8151b87ab523079bec95eab",
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The explicit fixture-death capture begins with the exact body intact at 10 HP. The full plant remains inside normal combat framing before the separate KillSingle action."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/de1ff01ffa8b4d3fbee0eeeff2facc33/0119.png",
+      "sha256": "98dfcdc03d8c8f41bd4ef6358370c2002b0d124d706f6a7eeb5544a16482808e",
+      "action": "kill-fixture",
+      "index": 119,
+      "observation": "The last retained frame shows the coherent collapsed body behind the native loot UI. The archive preserves progression handoff, while the UI blur prevents detailed surface review in this frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2494fe68765a4b9a9a8439ec05c5bf5c/0000.png",
+      "sha256": "899c79db491a8f4f262053d42311746b008133e60edd746d67ce96881406bd5b",
+      "action": "pass",
+      "index": 0,
+      "observation": "The event capture starts from enabled settled native idle. The complete Cinderbloom body fits the camera, with its corrected forward-facing mouth, teeth, stem, and root leaves visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2494fe68765a4b9a9a8439ec05c5bf5c/0045.png",
+      "sha256": "af68c2f00d5a7aa721c020106a1158bc72c066b6c607f342cddc3e5e4595121a",
+      "action": "pass",
+      "index": 45,
+      "observation": "The exact native Attack trigger frame keeps the whole body visible as the camera moves to the side. The mouth, crown, stem, and base remain connected without sampled shearing or bounds loss."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2494fe68765a4b9a9a8439ec05c5bf5c/0055.png",
+      "sha256": "782ae83ae25fa34c6a4598f4f55c25866aad97519c911b6362c35c3ffcb51d3c",
+      "action": "pass",
+      "index": 55,
+      "observation": "During the native attack sequence, the body remains upright and readable while the hero receives damage. No detached petal, jaw, stem, or base geometry is visible in this sampled frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2494fe68765a4b9a9a8439ec05c5bf5c/0060.png",
+      "sha256": "de7a1548eb336344b11d5c3806d46c8c9f1f18bd4d1e881ba1be61a485af0e04",
+      "action": "pass",
+      "index": 60,
+      "observation": "The later attack interval retains the complete authored body and normal material colors. Native hero motion occupies the foreground, but the target itself remains uncropped and coherent."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/2494fe68765a4b9a9a8439ec05c5bf5c/0070.png",
+      "sha256": "dfc38f6e6776be2c2e65f7c94ff44ba1c56dbabe0d61d707179e39e6e781e7d4",
+      "action": "pass",
+      "index": 70,
+      "observation": "The attack exit contains native motion blur, but the entire mouth, stem, and base remain visible through the transition. This sampled frame shows no renderer disappearance or camera-edge clipping."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/5ab86cc507694fb3a069af0814e86053/0023.png",
+      "sha256": "caae2da552c37d6c60d8de81a8d0d2b177ad34a2572c96d60ff8f1a9c9b90437",
+      "action": "attack",
+      "index": 23,
+      "observation": "The ordinary 8-damage impact is strongly occluded by the native hit flash and foreground hero. The visible crown and stem remain connected, but this exact frame is limited evidence for surface deformation.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/5ab86cc507694fb3a069af0814e86053/0027.png",
+      "sha256": "99183f489d5b76b964c2e5e556770359672bfbcc2ed92d30f39eb8f2350df92a",
+      "action": "attack",
+      "index": 27,
+      "observation": "The native Damaged response bends the crown and stem sharply behind the hero. The visible body remains continuous with no exploded vertices or detached mouth section despite the close-camera overlap.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/5ab86cc507694fb3a069af0814e86053/0030.png",
+      "sha256": "2fb83de6746b3db066012a6e4ade78ca233f5f9623c78c267739659bb4ee1a77",
+      "action": "attack",
+      "index": 30,
+      "observation": "A later Damaged frame retains the deeply bent but connected crown, mouth, and stem. Hero overlap limits the lower-body view, so this sample supports coherent recoil rather than an unobstructed full-surface verdict.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/5ab86cc507694fb3a069af0814e86053/0040.png",
+      "sha256": "bbe9397f50a89386e9945a152da2f8719e67bf4103d2a795891d14c606f961f7",
+      "action": "attack",
+      "index": 40,
+      "observation": "The body has recovered to its readable native stance after the ordinary hit. The complete silhouette is visible again with stable material colors and no residual separation.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/de1ff01ffa8b4d3fbee0eeeff2facc33/0030.png",
+      "sha256": "6fd4ef88685f9144b493abc167bda40f4cfd830f3a5a2abac7ebb24901d3e3c1",
+      "action": "kill-fixture",
+      "index": 30,
+      "observation": "Early native Death motion pitches the crown forward after the explicit fixture hit. The mouth, jaw, and upper stem remain a continuous authored body, with foreground overlap noted."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/de1ff01ffa8b4d3fbee0eeeff2facc33/0040.png",
+      "sha256": "70229b936f7fe0451cc6742626d30022f60c8aefea10bb456f22e12c8bf3162a",
+      "action": "kill-fixture",
+      "index": 40,
+      "observation": "The deep collapse bends the stem and crown toward the floor while the body remains connected and inside the combat frame. No sampled culling pop or detached jaw is visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/de1ff01ffa8b4d3fbee0eeeff2facc33/0050.png",
+      "sha256": "ba971e2af08a80e3a08eb4b336d1e72e9cb1ad4768ee82936dc5992de85480a5",
+      "action": "kill-fixture",
+      "index": 50,
+      "observation": "The collapsed body is fully visible on the floor with its crown, teeth, stem, and base still coherent. This is sampled fixture-death appearance, not ordinary lethal or ragdoll evidence."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/de1ff01ffa8b4d3fbee0eeeff2facc33/0060.png",
+      "sha256": "2257904a0da6cd5a9c0085a60742a9250b703eb3063546c21fd7a4ce56292a03",
+      "action": "kill-fixture",
+      "index": 60,
+      "observation": "The later settled corpse retains the same coherent low-poly body and remains within native framing as progression begins. No renderer disappearance is visible before the loot presentation."
+    }
+  ],
+  "requirements": [
+    "Inspect each referenced original PNG before changing reviewStatus to a reviewed value.",
+    "Replace every pending observation with the exact observed result and state its limits.",
+    "Add selected source PNGs only when their hash, action, and frame index are verified from the fresh case."
+  ]
+}

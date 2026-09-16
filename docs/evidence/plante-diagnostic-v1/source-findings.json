@@ -1,0 +1,1430 @@
+{
+  "status": "EXACT_NATIVE_PLANTE_SOURCE_AND_EXISTING_PROBE_VERIFIED",
+  "sources": [
+    {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/resources.assets",
+      "sha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117"
+    },
+    {
+      "path": "/Users/tbrack/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll",
+      "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-profiles.json",
+      "sha256": "cd6540fda71602e53af46b1b1c196d499f70ca574e160c032d20933abf945ff5"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/enemy-rig-mapping-reproducible.json",
+      "sha256": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-e-native-topology-analysis/audit_source.py",
+      "sha256": "4096cb61e48067b53d176fd6c17916488018cff76ab9263431af46a85dacfd12"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-e-native-topology-analysis/native-metadata.json",
+      "sha256": "53f9f6fdfa5b763819dee0ef9d72da180277e0bde64273acbcf13683b41dee1e"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-e-native-topology-analysis/reference-121530/reference.npz",
+      "sha256": "ae657d858f54ad81e345523dab772bdc70bb8e53cd4c7b250016a60b52b8ad31"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-e-native-topology-analysis/probe-validation.json",
+      "sha256": "b16e4d43abd723ff3e1403f510f6f4aff5fe399ae36283cb4b0db0afb043ffd7"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-e-native-topology-analysis/CharacterEventListener.cs",
+      "sha256": "b1c351a88947cefc9674dee9ac1e24f5278b825545b7ac5b8a92c0ff5cf3edb0"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/plant-e-native-topology-analysis/EnemyDummy.cs",
+      "sha256": "3c94b4dabc926b9975e61d3ec6f0b1ed43d3ea1ac55ce78236a48cb9dd8f5d5e"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework_content/models/probe_121530.glb",
+      "sha256": "05ecbbcde1208b4d18003b136b56453d48bc58540163bdbeef56a8df72a66779"
+    },
+    {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework_content/models/probe_palette.png",
+      "sha256": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+    }
+  ],
+  "profile": {
+    "key": "ftkmf_modeltest_probe_plante",
+    "baseEnemy": "plantE",
+    "displayName": "Rig probe: plantE",
+    "combatProfile": "30bf6f1223474a469aae2efa58b6eb7c1476b88984e95de5c8d24fc7b052f6e6",
+    "renderers": [
+      {
+        "rendererPath": "enJungleNibbler_A",
+        "glbFile": "probe_121530.glb",
+        "textureFile": "probe_palette.png"
+      }
+    ],
+    "minimumBaseHealth": 64
+  },
+  "nativeRow": {
+    "enemy_id": "plantE",
+    "enemy_level": 4,
+    "db_byte_offset": 18960,
+    "cel_path_id": 138985,
+    "prefab_name": "enPlantE",
+    "prefab_game_object_path_id": 51021,
+    "renderers": [
+      {
+        "renderer_path_id": 121530,
+        "validation": "discovery_only",
+        "errors": [],
+        "mesh_path_id": 2775,
+        "mesh_asset_file": "resources.assets",
+        "mesh_name": "enJungleNibbler_A",
+        "renderer_name": "enJungleNibbler_A",
+        "ancestor_names": [
+          "enJungleNibbler_A",
+          "enPlantE"
+        ],
+        "joint_count": 37,
+        "bone_names": [
+          "Root_M",
+          "Bone002",
+          "Bone003",
+          "Bone004",
+          "Bone005",
+          "Bone006",
+          "Bone007",
+          "Bone008",
+          "Bone009",
+          "Bone010",
+          "Bone011",
+          "Bone012",
+          "Bone013",
+          "Bone014",
+          "Head",
+          "Bone018",
+          "Bone019",
+          "Bone018(mirrored)",
+          "Bone019(mirrored)",
+          "Bone016",
+          "Jaw",
+          "Vine1",
+          "Vine2",
+          "Leaf1",
+          "Leaf2",
+          "Leaf3",
+          "Leaf4",
+          "Leaf5",
+          "Leaf6",
+          "Bone035",
+          "Bone036",
+          "Bone035(mirrored)",
+          "Bone036(mirrored)",
+          "Bone037(mirrored)",
+          "Bone038(mirrored)",
+          "Bone037",
+          "Bone038"
+        ],
+        "nearest_skinned_bone_parent_names": [
+          null,
+          "Root_M",
+          "Bone002",
+          "Bone003",
+          "Bone004",
+          "Bone005",
+          "Bone006",
+          "Bone007",
+          "Bone008",
+          "Bone009",
+          "Bone010",
+          "Bone011",
+          "Bone012",
+          "Bone013",
+          "Bone014",
+          "Head",
+          "Bone018",
+          "Head",
+          "Bone018(mirrored)",
+          "Head",
+          "Bone016",
+          "Bone010",
+          "Vine1",
+          "Vine2",
+          "Vine2",
+          "Bone010",
+          "Bone009",
+          "Bone007",
+          "Bone006",
+          "Root_M",
+          "Bone035",
+          "Root_M",
+          "Bone035(mirrored)",
+          "Root_M",
+          "Bone037(mirrored)",
+          "Root_M",
+          "Bone037"
+        ],
+        "duplicate_bone_names": [],
+        "unresolved_bone_count": 0,
+        "bindpose_count": 37,
+        "topology_fingerprint": "1329d6985dadecee39f821cbb306d3423bad98b56283ca54f72e399d15c44ecb",
+        "bindpose_fingerprint": "fca89329eb0b27623be4be689510044afe651d169023e3f179e276189ac679bc",
+        "rig_profile_fingerprint": "49294438bb2419f05a6af33199c6a99c988a9b58ad8ea393f42513dbd72f9d2c",
+        "animators": [
+          {
+            "animator_path_id": 116516,
+            "game_object": "enPlantE",
+            "controller_path_id": 5980,
+            "controller_asset_file": "resources.assets",
+            "controller_name": "plantController"
+          }
+        ],
+        "character_event_listeners": [
+          {
+            "component_path_id": 138985,
+            "game_object": "enPlantE"
+          }
+        ],
+        "classification": "character_renderer_candidate",
+        "combat_profile_fingerprint": "30bf6f1223474a469aae2efa58b6eb7c1476b88984e95de5c8d24fc7b052f6e6"
+      }
+    ],
+    "validation": "serialized_mapping_not_runtime_validated",
+    "weapon_path_id": 136773,
+    "weapon_asset_file": "resources.assets",
+    "weapon_name": "plantE",
+    "weapon_animation_controller_candidates": [
+      {
+        "controller_path_id": 5980,
+        "controller_asset_file": "resources.assets",
+        "controller_name": "plantController",
+        "weapon_holder_name": "WEAPON_HOLDER",
+        "serialized_pointer_offset": 584
+      }
+    ],
+    "combat_controller_resolution": "verified_field_prefix",
+    "renderer_count": 1,
+    "classification": "skinned"
+  },
+  "nativeScale": {
+    "x": 1.2000000476837158,
+    "y": 1.2000000476837158,
+    "z": 1.2000000476837158
+  },
+  "componentCounts": {
+    "Transform": 54,
+    "Animator": 1,
+    "MonoBehaviour": 1,
+    "SkinnedMeshRenderer": 1,
+    "Camera": 2
+  },
+  "materials": [
+    {
+      "id": 169,
+      "name": "matMasterJungle",
+      "keywords": "_EMISSION _METALLICGLOSSMAP",
+      "colors": [
+        [
+          "_Color",
+          {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0,
+            "a": 1.0
+          }
+        ],
+        [
+          "_EmissionColor",
+          {
+            "r": 1.6460000276565552,
+            "g": 1.6460000276565552,
+            "b": 1.6460000276565552,
+            "a": 1.0
+          }
+        ]
+      ]
+    }
+  ],
+  "markers": [
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009/Bone010/Bone011/Bone012/Bone013/Bone014/Head/PortraitCam",
+      "transform_id": 90485,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 90485
+        },
+        {
+          "type": "Camera",
+          "id": 98766
+        }
+      ],
+      "localPosition": {
+        "x": -2.119999885559082,
+        "y": 0.6299999952316284,
+        "z": -1.340000033378601
+      },
+      "localRotation": {
+        "x": 0.08777375519275665,
+        "y": 0.46914830803871155,
+        "z": -0.16160205006599426,
+        "w": 0.8637595176696777
+      },
+      "localScale": {
+        "x": 0.4999999701976776,
+        "y": 0.49999988079071045,
+        "z": 0.4999999403953552
+      }
+    },
+    {
+      "path": "/enPlantE/CameraRoot/EncounterCam",
+      "transform_id": 95394,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 95394
+        },
+        {
+          "type": "Camera",
+          "id": 99221
+        }
+      ],
+      "localPosition": {
+        "x": 1.190000057220459,
+        "y": 1.6799999475479126,
+        "z": 7.130000114440918
+      },
+      "localRotation": {
+        "x": 0.0,
+        "y": -0.9961947202682495,
+        "z": 0.0,
+        "w": 0.08715556561946869
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    }
+  ],
+  "attachmentTransforms": [
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009/Bone010/Bone011/Bone012/Bone013/Bone014/Head/Bone016/Jaw/WEAPON_HOLDER",
+      "transform_id": 82362,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 82362
+        }
+      ],
+      "localPosition": {
+        "x": -0.2290000021457672,
+        "y": 0.08100000023841858,
+        "z": -0.0
+      },
+      "localRotation": {
+        "x": -0.22567950189113617,
+        "y": -0.6110469102859497,
+        "z": -0.35898157954216003,
+        "w": 0.6684479713439941
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009/Bone010/Bone011/Bone012/Bone013/Bone014/Head/Bone016/Jaw/WEAPON_HOLDER_L",
+      "transform_id": 97681,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 97681
+        }
+      ],
+      "localPosition": {
+        "x": -0.2290000021457672,
+        "y": 0.08100000023841858,
+        "z": -0.0
+      },
+      "localRotation": {
+        "x": -0.22567950189113617,
+        "y": -0.6110469102859497,
+        "z": -0.35898157954216003,
+        "w": 0.6684479713439941
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009/Bone010/Bone011/Bone012/Bone013/Bone014/Head/TARGET_TOPHEAD",
+      "transform_id": 91546,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 91546
+        }
+      ],
+      "localPosition": {
+        "x": 0.07688852399587631,
+        "y": -0.5932309031486511,
+        "z": -0.45022669434547424
+      },
+      "localRotation": {
+        "x": 0.1500718891620636,
+        "y": -0.5500184297561646,
+        "z": 0.6861801743507385,
+        "w": 0.4517909586429596
+      },
+      "localScale": {
+        "x": 0.5000001788139343,
+        "y": 0.5000000596046448,
+        "z": 0.5000002384185791
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009/Bone010/Bone011/Bone012/Bone013/Bone014/Head/ARROW_HOLDER 1",
+      "transform_id": 95210,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 95210
+        }
+      ],
+      "localPosition": {
+        "x": -0.43199998140335083,
+        "y": 0.04000003635883331,
+        "z": -0.12300003319978714
+      },
+      "localRotation": {
+        "x": -0.1300373375415802,
+        "y": -0.6950469613075256,
+        "z": -0.13003747165203094,
+        "w": 0.6950470209121704
+      },
+      "localScale": {
+        "x": 0.5,
+        "y": 0.49999988079071045,
+        "z": 0.4999999403953552
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/Bone007/Bone008/Bone009/Bone010/Bone011/Bone012/Bone013/Bone014/Head/ARROW_HOLDER",
+      "transform_id": 95437,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 95437
+        }
+      ],
+      "localPosition": {
+        "x": -0.19999995827674866,
+        "y": -0.1109999269247055,
+        "z": 0.05499995872378349
+      },
+      "localRotation": {
+        "x": -0.1300373375415802,
+        "y": -0.6950469613075256,
+        "z": -0.13003747165203094,
+        "w": 0.6950470209121704
+      },
+      "localScale": {
+        "x": 0.5,
+        "y": 0.49999988079071045,
+        "z": 0.4999999403953552
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/TARGET_CHEST",
+      "transform_id": 92326,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 92326
+        }
+      ],
+      "localPosition": {
+        "x": -0.09000000357627869,
+        "y": 0.10300000011920929,
+        "z": -0.02199999988079071
+      },
+      "localRotation": {
+        "x": 0.5227144956588745,
+        "y": -0.4282955229282379,
+        "z": 0.7140657901763916,
+        "w": 0.18287305533885956
+      },
+      "localScale": {
+        "x": 0.5,
+        "y": 0.4999999403953552,
+        "z": 0.5000000596046448
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/Bone002/Bone003/Bone004/Bone005/Bone006/ARROW_HOLDER 2",
+      "transform_id": 87844,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 87844
+        }
+      ],
+      "localPosition": {
+        "x": 0.028999999165534973,
+        "y": 0.08900000154972076,
+        "z": -0.006000000052154064
+      },
+      "localRotation": {
+        "x": 0.5227146148681641,
+        "y": -0.4282954931259155,
+        "z": 0.7140657901763916,
+        "w": 0.18287301063537598
+      },
+      "localScale": {
+        "x": 0.5,
+        "y": 0.5000000596046448,
+        "z": 0.5000001788139343
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/TARGET_LHAND",
+      "transform_id": 88986,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 88986
+        }
+      ],
+      "localPosition": {
+        "x": -0.3149999976158142,
+        "y": 0.024000000208616257,
+        "z": 0.017999999225139618
+      },
+      "localRotation": {
+        "x": 0.2629850208759308,
+        "y": -0.6563831567764282,
+        "z": 0.2629849910736084,
+        "w": 0.656383216381073
+      },
+      "localScale": {
+        "x": 0.4999999701976776,
+        "y": 0.5,
+        "z": 0.5
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/SHIELD_HOLDER",
+      "transform_id": 81526,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 81526
+        }
+      ],
+      "localPosition": {
+        "x": -0.3149999976158142,
+        "y": 0.024000000208616257,
+        "z": 0.017999999225139618
+      },
+      "localRotation": {
+        "x": -0.6642128825187683,
+        "y": 0.3037416934967041,
+        "z": 0.618285059928894,
+        "w": 0.2903202176094055
+      },
+      "localScale": {
+        "x": 0.49999991059303284,
+        "y": 0.49999988079071045,
+        "z": 0.49999991059303284
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/TARGET_RHAND",
+      "transform_id": 89034,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 89034
+        }
+      ],
+      "localPosition": {
+        "x": -0.3149999976158142,
+        "y": 0.024000000208616257,
+        "z": 0.017999999225139618
+      },
+      "localRotation": {
+        "x": 0.26298514008522034,
+        "y": -0.6563832759857178,
+        "z": 0.2629849314689636,
+        "w": 0.6563830971717834
+      },
+      "localScale": {
+        "x": 0.4999999403953552,
+        "y": 0.5,
+        "z": 0.4999999403953552
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/TARGET_LFOOT",
+      "transform_id": 86602,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 86602
+        }
+      ],
+      "localPosition": {
+        "x": -0.36299997568130493,
+        "y": -0.06599999964237213,
+        "z": 0.09199998527765274
+      },
+      "localRotation": {
+        "x": 0.26298508048057556,
+        "y": -0.6563832759857178,
+        "z": 0.26298487186431885,
+        "w": 0.6563830971717834
+      },
+      "localScale": {
+        "x": 0.5000000596046448,
+        "y": 0.5,
+        "z": 0.5000000596046448
+      }
+    },
+    {
+      "path": "/enPlantE/Root_M/TARGET_RFOOT",
+      "transform_id": 76760,
+      "active": true,
+      "components": [
+        {
+          "type": "Transform",
+          "id": 76760
+        }
+      ],
+      "localPosition": {
+        "x": -0.3569999933242798,
+        "y": -0.0729999989271164,
+        "z": -0.14100000262260437
+      },
+      "localRotation": {
+        "x": 0.2629849910736084,
+        "y": -0.6563831567764282,
+        "z": 0.2629850208759308,
+        "w": 0.656383216381073
+      },
+      "localScale": {
+        "x": 0.5,
+        "y": 0.5000000596046448,
+        "z": 0.5000001192092896
+      }
+    }
+  ],
+  "controller": {
+    "id": 5980,
+    "name": "plantController",
+    "clips": [
+      {
+        "id": 5493,
+        "name": "idle",
+        "events": [],
+        "stopTime": 3.0333337783813477
+      },
+      {
+        "id": 5067,
+        "name": "appear",
+        "events": [
+          {
+            "time": 0.06828609853982925,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.37571659684181213,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.8573387265205383,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.4666668176651
+      },
+      {
+        "id": 5504,
+        "name": "roar",
+        "events": [
+          {
+            "time": 0.504051685333252,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 3.000000476837158
+      },
+      {
+        "id": 5511,
+        "name": "attack1",
+        "events": [
+          {
+            "time": 0.10121457278728485,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.1302170753479004,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.48409077525138855,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5626039505004883,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.0000009536743164
+      },
+      {
+        "id": 5504,
+        "name": "roar",
+        "events": [
+          {
+            "time": 0.504051685333252,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 3.000000476837158
+      },
+      {
+        "id": 5504,
+        "name": "roar",
+        "events": [
+          {
+            "time": 0.504051685333252,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 3.000000476837158
+      },
+      {
+        "id": 5525,
+        "name": "hit1",
+        "events": [
+          {
+            "time": 0.0006747638690285385,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.008771929889917374,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 0.6666669845581055
+      },
+      {
+        "id": 5533,
+        "name": "death",
+        "events": [
+          {
+            "time": 0.0,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.561133623123169,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DEATH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.9802969694137573,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.0129432678222656,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_BODYFALL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.933333396911621
+      },
+      {
+        "id": 5516,
+        "name": "attack2",
+        "events": [
+          {
+            "time": 0.04042430222034454,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.10851383209228516,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.537562370300293,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.0
+      },
+      {
+        "id": 5520,
+        "name": "attack3",
+        "events": [
+          {
+            "time": 0.18623481690883636,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.43405723571777344,
+            "functionName": "PlayWeaponAnimation",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.5072271227836609,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.7345571517944336,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.0000009536743164
+      },
+      {
+        "id": 5537,
+        "name": "disappear",
+        "events": [
+          {
+            "time": 0.0,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.5000009536743164
+      },
+      {
+        "id": 5525,
+        "name": "hit1",
+        "events": [
+          {
+            "time": 0.0006747638690285385,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.008771929889917374,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 0.6666669845581055
+      },
+      {
+        "id": 5525,
+        "name": "hit1",
+        "events": [
+          {
+            "time": 0.0006747638690285385,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_SM",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.008771929889917374,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DAMAGE",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 0.6666669845581055
+      },
+      {
+        "id": 5067,
+        "name": "appear",
+        "events": [
+          {
+            "time": 0.06828609853982925,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.37571659684181213,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.8573387265205383,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.4666668176651
+      },
+      {
+        "id": 5493,
+        "name": "idle",
+        "events": [],
+        "stopTime": 3.0333337783813477
+      },
+      {
+        "id": 5533,
+        "name": "death",
+        "events": [
+          {
+            "time": 0.0,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.561133623123169,
+            "functionName": "Foley",
+            "data": "PLAY_VO_DEATH",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.9802969694137573,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.0129432678222656,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_BODYFALL",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 2.933333396911621
+      },
+      {
+        "id": 5067,
+        "name": "appear",
+        "events": [
+          {
+            "time": 0.06828609853982925,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.37571659684181213,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.8573387265205383,
+            "functionName": "Foley",
+            "data": "PLAY_FLY_MV_HUM_MED",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 1.4666668176651
+      },
+      {
+        "id": 5504,
+        "name": "roar",
+        "events": [
+          {
+            "time": 0.504051685333252,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 3.000000476837158
+      },
+      {
+        "id": 5539,
+        "name": "bindpose",
+        "events": [],
+        "stopTime": 1.0
+      },
+      {
+        "id": 5540,
+        "name": "attackProf1",
+        "events": [
+          {
+            "time": 0.5009489059448242,
+            "functionName": "Foley",
+            "data": "PLAY_VO_ATTACK",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.6944971084594727,
+            "functionName": "Foley",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 0.784256100654602,
+            "functionName": "PlayAttackFX",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.198390007019043,
+            "functionName": "CameraShake",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 5,
+            "messageOptions": 0
+          },
+          {
+            "time": 1.3889942169189453,
+            "functionName": "Dodge",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          },
+          {
+            "time": 2.004899024963379,
+            "functionName": "AttackHit",
+            "data": "",
+            "objectReferenceParameter": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "floatParameter": 0.0,
+            "intParameter": 0,
+            "messageOptions": 0
+          }
+        ],
+        "stopTime": 3.000000476837158
+      }
+    ]
+  },
+  "probeValidation": {
+    "file": "scratch/mirewarden-game/BepInEx/plugins/FTKModFramework_content/models/probe_121530.glb",
+    "vertices": 3480,
+    "triangles": 1160,
+    "bones": 37,
+    "primitives": 1,
+    "triangles_per_primitive": [
+      1160
+    ],
+    "bounds_min": [
+      -0.4660416841506958,
+      -0.11554019898176193,
+      -0.3501793146133423
+    ],
+    "bounds_max": [
+      0.4601341784000397,
+      1.4133648872375488,
+      0.4126027226448059
+    ],
+    "max_bind_rest_error": 4.440892098500626e-16,
+    "source_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.003564639948308468,
+      "informative_triangles": 1160
+    },
+    "reference_normal_agreement": {
+      "positive_fraction": 1.0,
+      "median_signed_dot": 0.005934092765960975,
+      "informative_triangles": 1612
+    },
+    "status": "PASS (binary and skin contract; live animation still requires in-game check)",
+    "exactAll37BoneNamesOrder": true,
+    "exactAll37InverseBindMatrices": true,
+    "glbSha256": "05ecbbcde1208b4d18003b136b56453d48bc58540163bdbeef56a8df72a66779",
+    "positiveWeightVertexCounts": {
+      "Root_M": 56,
+      "Bone002": 139,
+      "Bone003": 221,
+      "Bone004": 323,
+      "Bone005": 386,
+      "Bone006": 495,
+      "Bone007": 497,
+      "Bone008": 513,
+      "Bone009": 404,
+      "Bone010": 261,
+      "Bone011": 235,
+      "Bone012": 182,
+      "Bone013": 210,
+      "Bone014": 280,
+      "Head": 916,
+      "Bone018": 4,
+      "Bone019": 4,
+      "Bone018(mirrored)": 0,
+      "Bone019(mirrored)": 0,
+      "Bone016": 170,
+      "Jaw": 718,
+      "Vine1": 4,
+      "Vine2": 0,
+      "Leaf1": 0,
+      "Leaf2": 0,
+      "Leaf3": 0,
+      "Leaf4": 0,
+      "Leaf5": 0,
+      "Leaf6": 2,
+      "Bone035": 735,
+      "Bone036": 644,
+      "Bone035(mirrored)": 672,
+      "Bone036(mirrored)": 592,
+      "Bone037(mirrored)": 643,
+      "Bone038(mirrored)": 666,
+      "Bone037": 654,
+      "Bone038": 595
+    }
+  },
+  "nearbyVariants": [
+    {
+      "enemy": "plantD",
+      "renderers": [
+        {
+          "id": 121537,
+          "bones": 43,
+          "rig": "843e81ef611bfb44c7d98c18d4d95dc6cc823836dabd0ba6d4ac2bf735d97c0b"
+        }
+      ]
+    },
+    {
+      "enemy": "plantG",
+      "renderers": [
+        {
+          "id": 121584,
+          "bones": 43,
+          "rig": "982a5a4edf54b7141eeecd2224572077546046e71f28ecb5a1214470aabd6e77"
+        }
+      ]
+    }
+  ],
+  "behavior": {
+    "nativeInitialization": "EnemyDummy.InitEnemyDummyForCombat clones exact GetEnemyPrefab, parents clone, resets LOCAL position/rotation, preserves native scale1.2; retrieves holders, assigns actual plantE weapon and controller, prepares native death fade. Source prefab X=-10.23 is not retained by combat clone.",
+    "nativeAttack": "Attack1 hit0.562604; Attack2 hit0.537562; Attack3 PlayWeaponAnimation0.434057, Dodge0.507227, hit0.734557. AttackProf1 length3: PlayAttackFX0.784256, CameraShake1.19839, Dodge1.388994, hit2.004899. CEL AttackHit/Dodge resolve real EncounterSession victim; PlayAttackFX resolves current/other victims. Preserve native event authority.",
+    "death": "Controller death5533 length2.933333 has only four Foley events, no Fade/FallOff/Drop; separate disappear5537 length1.500001 only Foley. No source Rigidbody/joint/FallOffLimb/extra MonoBehaviour/rigid mesh. This is serialized source evidence, not proof all native cleanup/gameplay branches are inert.",
+    "material": "Single matMasterJungle169 whitemain with _EMISSION1.646 and _METALLICGLOSSMAP. No material scripts/scroller. Record native emission independently of original-art color.",
+    "palette": "Full37 native order and allIBMs required. Eight native-zero-weight bones are preserved; visible probe markers/connectors on those joints are not native tissue or artistic anatomical constraints. Full54transform hierarchy remains controller authority.",
+    "portrait": "Native Head/PortraitCam90485 has .5localScale and angled pose; EncounterCam95394 has position1.19,1.68,7.13 and10-degree yaw. Exact fullpaths and TRS in metadata; live HUD/row framing not inferred."
+  },
+  "limits": [
+    "Source and extracted reference only; no game calls/deployment/framework edits.",
+    "Native extracted geometry and decompiled source stay ignored scratch.",
+    "CEL generic typetree omits custom serialized fields; fade/emissive/detachable flags not assumed from plantD/G or generic component count.",
+    "plantD/G43-bone profiles and prior original plant models do not establish exactE37bone acceptance."
+  ]
+}

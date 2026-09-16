@@ -1,0 +1,268 @@
+{
+  "schema": "ftkmf.model-root-visual-review-template.v1",
+  "session": "9ade31aadf9d4c96860bd9dd755323e9",
+  "reviewStatus": "reviewed_direct_skulla_chaosskullbottom_binding_motion_gameplay_observed_camera_fit_accepted_limited_art_pending",
+  "binding": {
+    "rendererPath": "ChaosSkullBottom",
+    "mesh": "ftkmf_glb_emberjaw_bottom.glb",
+    "boneSignature": "68ca14bd21428d7421aec38e3c89c94195458104a3167e3b79033e09080b4bb4"
+  },
+  "frames": [
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0012.png",
+      "sha256": "b1dab8c616818fb4c4f08be01e51ec6002d6ecb9c107573c9a5e99b44d5002c1",
+      "action": "pass",
+      "index": 12,
+      "observation": "A settled idle sample shows the authored lower jaw aligned beneath the upper skull at the normal combat camera. Its chin, side plates, and lower teeth form a coherent closed-mouth silhouette without a visible gap or culling loss."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0024.png",
+      "sha256": "d8205ad86758a77cacefe2abe6920ddeb5898bc9c43e6d3ee49d1a43312d578e",
+      "action": "pass",
+      "index": 24,
+      "observation": "A later idle sample retains the same jaw alignment and readable teeth. This supports the sampled idle presentation only, not every idle loop or long-session culling behavior."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0006.png",
+      "sha256": "8f30dda9d2875bc0dabcc5019be98f18103e124c35c4e2abf7e7f2904ce6d8da",
+      "action": "attack",
+      "index": 6,
+      "observation": "The ordinary player-attack capture begins with the exact bottom renderer visible, closed, and aligned to the upper cranium. Native targeting UI does not cover the target silhouette.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0012.png",
+      "sha256": "af941f16a8c95c70891df54dcbd78eed2d5f7bed3d4aebd19d22a30d780b1ba7",
+      "action": "attack",
+      "index": 12,
+      "observation": "Immediately before the ordinary hit, the lower jaw remains stable and connected beneath the upper skull. This frame establishes the intact pre-hit state and does not by itself establish the later Damaged response.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0000.png",
+      "sha256": "12aa72310d96166905e41c995f91d5c6fb78bdae978202dc857b0231469f9368",
+      "action": "kill-fixture",
+      "index": 0,
+      "observation": "The explicit fixture-death capture begins with the exact lower-jaw renderer intact at 61 HP. The full two-renderer skull remains in normal framing before the separate lethal fixture action."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0119.png",
+      "sha256": "5d7e767bf1e45a7bb90ae0295ec136a9ca388a6be7172783885ca50086163c00",
+      "action": "kill-fixture",
+      "index": 119,
+      "observation": "The last retained frame shows successful native victory and loot presentation after the skull renderers were deactivated during the Death effect. The jaw is no longer visible, so this frame supports progression handoff rather than surface review."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0000.png",
+      "sha256": "01b7772e99be8055dac32b20ea68ee867bba811b052192ce39b2d238fde23905",
+      "action": "pass",
+      "index": 0,
+      "observation": "The capture opens in settled idle with the lower jaw centered beneath the cranium. The mandibular sides, chin, and lower teeth are fully visible, correctly oriented toward the player, and aligned with the separate top renderer."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0036.png",
+      "sha256": "b0dbb684e4c17d974dc542d794a77fbee292b53c437a70c2e4de2896d8d0b8d1",
+      "action": "pass",
+      "index": 36,
+      "observation": "The first native attack begins with strong camera and subject motion blur. Through the blur, the jaw remains attached beneath the upper skull; this frame is motion evidence rather than a detailed surface verdict."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0042.png",
+      "sha256": "23777c3e602a58a90c962dacf6f210897d49d6e6872be582d704e312b53ff7b8",
+      "action": "pass",
+      "index": 42,
+      "observation": "During the forward lunge, the bottom renderer follows the skull pose and remains aligned along the mouth seam. The complete jaw stays inside the frame with no sampled vertex explosion or renderer loss."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0048.png",
+      "sha256": "37e121dc8443e24807ad97443b647c5d130a24cd706a270aac075c68ce022cde",
+      "action": "pass",
+      "index": 48,
+      "observation": "At the closest sampled attack pose, the jaw remains coherent despite foreground overlap with the hero and native hit effects. Occlusion limits detailed inspection of the center teeth in this frame."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0054.png",
+      "sha256": "e1b3f6774ebdcb3c8f1f7ad8e6e1c2a65e0f273cc791148dd240bceb4e0ebed0",
+      "action": "pass",
+      "index": 54,
+      "observation": "The first attack recovery exposes the full jaw again. Its lower teeth and side plates retain their intended shape and return to clean alignment beneath the cranium."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0060.png",
+      "sha256": "afb149062587900fabcad598c6ccb45feab09681f57b7a1c66feb6af9afbaabf",
+      "action": "pass",
+      "index": 60,
+      "observation": "The skull completes recovery with the jaw closed in the original readable silhouette. No residual offset, detached tooth row, or material discontinuity remains after the lunge."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0066.png",
+      "sha256": "a09145c9216c1748ec3a098e1bc319aeeed7d9d1d57cd42fb5d44ee9172b7665",
+      "action": "pass",
+      "index": 66,
+      "observation": "The second native ability begins from a stable closed-jaw pose. The exact bottom renderer remains visible and correctly seated before the mouth-opening motion."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0072.png",
+      "sha256": "784224f9d565d8d364948c7bf6e49c141f6d60d9b1b31682d5b37f1d4cf6719a",
+      "action": "pass",
+      "index": 72,
+      "observation": "The native AttackProf pose starts opening the jaw while preserving its hinge alignment. The chin and lower teeth remain a continuous authored unit beneath the tilted cranium."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0078.png",
+      "sha256": "ce2abc28c596a47a0b2619864a9eea24d67581687a14f4b9065719f3cb08cdd3",
+      "action": "pass",
+      "index": 78,
+      "observation": "At the widest reviewed mouth pose, the lower jaw rotates well below the upper teeth while remaining attached at both sides. The open mouth is readable and shows no shearing, flipped faces, or detached geometry."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/8a82ffb8c7b14c9d9e65e739b71125d1/0084.png",
+      "sha256": "abad8780536aad68af93907a845eb1387f7185397c138b615e5ae12c95545452",
+      "action": "pass",
+      "index": 84,
+      "observation": "The jaw remains widely articulated during the native ability effect. Bright foreground particles limit color review, but the lower silhouette remains intact and aligned."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0018.png",
+      "sha256": "ffd5bd3d1ac384b5cdafbf3a88347d2288631c0ed4cc67149713b82d181fe4a5",
+      "action": "attack",
+      "index": 18,
+      "observation": "As the hero closes on the target, the exact lower jaw remains fully visible and aligned. Its chin, side plates, and teeth keep their shape before impact.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0024.png",
+      "sha256": "d74084e1bb883bff48aec31fbf9762c4210ec4298478fd87d581ec46c4157068",
+      "action": "attack",
+      "index": 24,
+      "observation": "The ordinary 8-damage impact is partly obscured by the hero and native hit flash. The visible lower jaw remains coherent, but the close overlap limits detailed surface evidence.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0030.png",
+      "sha256": "22babc5ec8fe7d33a922672cf2cf353c1df7f9597c928e862b1e20f2c84acf82",
+      "action": "attack",
+      "index": 30,
+      "observation": "The native Damaged response opens and displaces the jaw behind the hero while retaining a continuous chin and tooth row. No exploded vertices, inverted section, or culling pop is visible in the sampled recoil.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0036.png",
+      "sha256": "9c9874dea2366534248cd39662897baeb6b312090b1eed09ecf4e6e62cd59426",
+      "action": "attack",
+      "index": 36,
+      "observation": "The target has recovered from the ordinary hit and the jaw again forms a clean closed-mouth silhouette at 61 HP. No residual offset or deformation remains.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0054.png",
+      "sha256": "e54a6bebd7fe944c734323e4fd301cde58a703cb75e7b7b8420c5cb1629b2c90",
+      "action": "attack",
+      "index": 54,
+      "observation": "The native counterattack begins with expected camera blur while the jaw remains attached and recognizable beneath the cranium.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0060.png",
+      "sha256": "c2ed1421a63d6bde03121ab67b597984f71f91e922e0c54683900c6af4ea085d",
+      "action": "attack",
+      "index": 60,
+      "observation": "The jaw follows the advancing skull during the AttackCrit sequence. Motion blur limits tooth detail but does not hide the multipart alignment.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0066.png",
+      "sha256": "0e211193a46e838b515bc65dcffbecba2241639479d2a9a2d8f417c518df1f02",
+      "action": "attack",
+      "index": 66,
+      "observation": "The lower renderer remains cleanly aligned as the skull reaches the forward ability pose. The jaw is fully inside the combat frame with no clipping at the camera edge.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0072.png",
+      "sha256": "211733b8ac6acbf0616bc727c23c5a4dfde428a1b9bbe25cfb61b437e1f90931",
+      "action": "attack",
+      "index": 72,
+      "observation": "The counterattack articulation separates the upper and lower tooth rows into a readable open mouth while the jaw remains correctly hinged and coherent.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0084.png",
+      "sha256": "bded88a83e3d0320c3a69b9ee691a9fe875d6299a97fb113c1bd719e2c23aec6",
+      "action": "attack",
+      "index": 84,
+      "observation": "After the counterattack impact, the jaw has returned toward its closed position and remains aligned. Native effects occupy the foreground but do not obscure the target mouth.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0096.png",
+      "sha256": "9d96be2b5854ea5721980cd5cfec6222fd0707e024fe14d85c73a303cc6f4cbf",
+      "action": "attack",
+      "index": 96,
+      "observation": "A bright native status effect covers much of the hero while the jaw remains visible behind it in stable alignment. This frame supports continuity but provides limited material review.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/3eb0a19fc8a2419f88d69c3ec5900aee/0108.png",
+      "sha256": "df677fbb1874436f5212a2ebd56e2cdde18ed51cb53c43b02e43b662fb91650a",
+      "action": "attack",
+      "index": 108,
+      "observation": "The camera returns from the counterattack with expected motion blur. The jaw remains present and recognizable through the transition without a sampled disappearance.",
+      "attempt": 1
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0012.png",
+      "sha256": "0970de22c2e91c3decb4bb993f27d98882b2f3d7fdca0d9cd709ecad73ee4ea3",
+      "action": "kill-fixture",
+      "index": 12,
+      "observation": "Immediately before the explicit lethal fixture attack, the lower jaw remains intact, closed, and aligned beneath the cranium at 61 HP."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0018.png",
+      "sha256": "f7d46fa07b005518a1a135916ce3ebe7a06567b91b3794b95e2c99bcce7ad2c7",
+      "action": "kill-fixture",
+      "index": 18,
+      "observation": "The hero approaches for the fixture attack while the exact jaw remains fully visible, coherent, and aligned with the upper section."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0022.png",
+      "sha256": "2d5c9355a62190a2612b4324fc6a3d81fb2929bb187eaa7a7f32f7c599c0e575",
+      "action": "kill-fixture",
+      "index": 22,
+      "observation": "Just before the native Death trigger, the hero overlaps the mouth area. The visible jaw edges remain connected, with foreground occlusion limiting the center-tooth view."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0024.png",
+      "sha256": "6ca86c7fe69f193b9f6acf658031f935422477c1e407b7c4a090537adfcb2695",
+      "action": "kill-fixture",
+      "index": 24,
+      "observation": "The explicit 1000-damage impact shows the jaw behind the native flash and hero. The renderer is still present at the start of the Death effect, though the flash prevents detailed surface inspection."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0026.png",
+      "sha256": "bb9b382d04391f034532abe7d0ae717b50436be90d61f133978fe917a90557c6",
+      "action": "kill-fixture",
+      "index": 26,
+      "observation": "The native Death effect has deactivated the jaw renderer and replaced the skull with the expected purple burst. This route demonstrates a clean destruction handoff rather than an articulated corpse pose."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0028.png",
+      "sha256": "96266d46ddf122470cd3f048d7b0af3586092f7f6af2fe7d5abecd48112f679f",
+      "action": "kill-fixture",
+      "index": 28,
+      "observation": "The jaw remains absent as the native destruction particles dissipate. No detached authored geometry or frozen jaw remnant is visible."
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/a64fd563f11a41d6967137896c249047/0030.png",
+      "sha256": "54436e2833c4f77c22b2d96fce852b82b4ee828239f0efb49c677024ebed18c9",
+      "action": "kill-fixture",
+      "index": 30,
+      "observation": "The destruction effect continues with the jaw cleanly removed from the battlefield. This supports expected renderer deactivation and does not claim visible jaw motion after deactivation."
+    }
+  ],
+  "requirements": [
+    "Inspect each referenced original PNG before changing reviewStatus to a reviewed value.",
+    "Replace every pending observation with the exact observed result and state its limits.",
+    "Add selected source PNGs only when their hash, action, and frame index are verified from the fresh case."
+  ]
+}

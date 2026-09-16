@@ -1,0 +1,99 @@
+{
+  "samplePhase": "main-thread-command",
+  "provenance": "read-only existing live enemy shared-material and lease observation",
+  "frame": 10811,
+  "gameTime": 104.48998260498047,
+  "realtime": 115.0743408203125,
+  "deltaTime": 0.009246647357940674,
+  "enemy": "ftkmf_modeltest_rustpetal",
+  "ownerInstanceId": 369188,
+  "celInstanceId": -245402,
+  "rendererInstanceId": -245408,
+  "celRelativeRendererPath": "enJungleNibbler_C",
+  "rendererEnabled": true,
+  "rendererActive": true,
+  "slots": [
+    {
+      "instanceId": -245714,
+      "name": "matMasterJungle (Instance)",
+      "type": "UnityEngine.Material",
+      "inCurrentLeaseResources": true,
+      "slot": 0,
+      "shader": "Standard",
+      "emissionKeyword": false,
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245716,
+        "name": "ftkmf_rustpetal_basecolor.png",
+        "type": "UnityEngine.Texture2D",
+        "inCurrentLeaseResources": true,
+        "width": 384,
+        "height": 32,
+        "wrapMode": "Repeat",
+        "filterMode": "Bilinear"
+      },
+      "_MainTexOffset": [
+        0.0,
+        0.0
+      ],
+      "_MainTexScale": [
+        1.0,
+        1.0
+      ],
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null,
+      "_EmissionMapOffset": [
+        0.0,
+        0.0
+      ],
+      "_EmissionMapScale": [
+        1.0,
+        1.0
+      ],
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "scrollers": [],
+  "lease": {
+    "available": true,
+    "present": true,
+    "leaseId": 4,
+    "acquired": true,
+    "applied": true,
+    "references": 1
+  },
+  "leaseResourceInstanceIds": [
+    -245712,
+    -245714,
+    -245716
+  ],
+  "boundary": "Current fields/resources only; no lease retention, pruning, material getter cloning or native clone creation. UV displacement and owner independence require multiple matched observations. Multiple native scrollers can write the same property; raw observed phase is not presumed equal to the final material offset.",
+  "geometry": {
+    "meshInstanceId": -245712,
+    "mesh": "ftkmf_glb_rustpetal.glb",
+    "vertices": 4692,
+    "submeshCount": 1,
+    "submeshes": [
+      {
+        "nativeMaterialSlot": 0,
+        "indices": 4692,
+        "triangles": 1564,
+        "indexInt32LittleEndianSha256": "b6c64eb8ba6704c65be456e5d6f7636d24277e18390d3d6a4d5d49f01b27b0a5"
+      }
+    ],
+    "uv0Count": 4692,
+    "uv0Float32LittleEndianSha256": "646c863d44c0a228e107707bdb2196449cb19b1b17b911a28ba0c54a0043b499",
+    "inCurrentLeaseResources": true
+  },
+  "ok": true,
+  "testFixtureMaxHpTarget": 999,
+  "tutorialsQuiet": true,
+  "session": "8edda11d19e84464ba67eff550e52fb5",
+  "id": "206a2f28891a4374b49bfdc4412b4581",
+  "savePath": "save-model-test-81fab5f083e30704"
+}

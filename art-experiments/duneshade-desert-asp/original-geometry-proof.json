@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "method": "Reran the exact authoring generator with output redirected and native NPZ reads limited to bone_names and bindposes. Writer and validator were stubbed only for this source-generation proof.",
+  "binding_keys_accessed": [
+    "bindposes",
+    "bone_names"
+  ],
+  "files": [
+    {
+      "file": "duneshade-desert-asp.source.json",
+      "sha256": "e986061ddace3d27f601e334699ff46d5351a9e546a66f05e0c5bb33274b0ae6",
+      "reproduced_identical": true
+    },
+    {
+      "file": "duneshade-desert-asp_basecolor.png",
+      "sha256": "17a3497535587f2379d9e3b2c8b9dc8fe07b427ee05abbc5638828ef7e6151ff",
+      "reproduced_identical": true
+    },
+    {
+      "file": "duneshade-desert-asp.pieces.json",
+      "sha256": "192a3436a8fc07a1121121abef3d9afd4d77508140bdad3f56dec690ad60bd9a",
+      "reproduced_identical": true
+    }
+  ],
+  "generator_sha256": "8e590f13e76b5b40db80a316cf23752349e6d35be8bbf80786478122a45e21b9",
+  "scope": "Original-provenance proof only. Real FTK GLB validation, Blender round trip, native animation, portrait, and live art remain separate gates."
+}

@@ -1,0 +1,8 @@
+"""Check representative binding against exact target; record scalar bounds, not native surfaces."""
+from pathlib import Path
+import json,hashlib
+import numpy as np
+OUT=Path(__file__).resolve().parent;ROOT=OUT.parent.parent
+paths=[ROOT/'scratch/cockatrice-native-topology-analysis/reference-121484/reference.npz',ROOT/'scratch/skeleton-audit/121328/reference.npz'];a,b=[np.load(p)for p in paths];s=OUT/'basilight.source.json';d=json.loads(s.read_text());p=np.asarray(d['positions']);assert np.array_equal(a['bone_names'],b['bone_names'])and np.array_equal(a['bindposes'],b['bindposes']);assert (p.min(0)>=a['positions'].min(0)).all()and(p.max(0)<=a['positions'].max(0)).all();head=np.linalg.inv(a['bindposes'])[a['bone_names'].tolist().index('Head_M')];cam=head@[-4.150000095367432,.7900000214576721,1.5700000524520874,1]
+r=dict(targetRenderer=121484,representativeRenderer=121328,paletteByteEqual=True,inverseBindsByteEqual=True,sourceSha256=hashlib.sha256(s.read_bytes()).hexdigest(),references=[dict(path=str(p.relative_to(ROOT)),sha256=hashlib.sha256(p.read_bytes()).hexdigest())for p in paths],targetNativeBoundsMin=a['positions'].min(0).tolist(),targetNativeBoundsMax=a['positions'].max(0).tolist(),originalBoundsMin=p.min(0).tolist(),originalBoundsMax=p.max(0).tolist(),nativePortraitMarkerInBindMesh=cam[:3].tolist(),headInBindMesh=head[:3,3].tolist(),scope='Exact binding metadata/scalar bounds and source marker direction only; not native surface copying, animation-envelope or actual posed portrait proof.')
+(OUT/'target-binding-proof.json').write_text(json.dumps(r,indent=2)+'\n');print('PASS')

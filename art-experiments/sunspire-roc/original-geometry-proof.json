@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "method": "Reran the exact authoring generator with output redirected and native NPZ reads limited to bone_names and bindposes. Export/validator were stubbed only for this source-generation proof.",
+  "binding_keys_accessed": [
+    "bindposes",
+    "bone_names"
+  ],
+  "files": [
+    {
+      "file": "sunspire-roc.source.json",
+      "sha256": "7d7ddc720a613680a3cbfca1e3e88ce8e3ff5bff2747b545984a1bff9ea9865c",
+      "reproduced_identical": true
+    },
+    {
+      "file": "sunspire-roc_basecolor.png",
+      "sha256": "911b8202261edc17a1098677b63d69ba960b26a66d2cd5027281d03368762f83",
+      "reproduced_identical": true
+    },
+    {
+      "file": "sunspire-roc.pieces.json",
+      "sha256": "eb4d4498994f4555503fd2763c3789074c25663bbb6e0133e313de8683019e1f",
+      "reproduced_identical": true
+    }
+  ],
+  "generator_sha256": "91a36e0d9c75505edffb50606f6fea70213cd5e42084202d45fb3e3ce0dd0121",
+  "scope": "Original-provenance proof only. The real GLB validation, Blender round trip, and live animation remain separate gates."
+}

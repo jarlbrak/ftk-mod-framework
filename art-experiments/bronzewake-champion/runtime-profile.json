@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "key": "ftkmf_modeltest_bronzewake",
+      "baseEnemy": "bossGladiator",
+      "displayName": "Bronzewake Champion",
+      "combatProfile": "7f7365cb5d2d058174dd525d21aaffa65e684b616d0ce4ee05b43e6824c8957f",
+      "renderers": [
+        {
+          "rendererPath": "enBossGladiator",
+          "glbFile": "bronzewake_body.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "hairBottomBossGladiator",
+          "glbFile": "bronzewake_hair.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "armorBossGladiator",
+          "glbFile": "bronzewake_armor.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": false
+        },
+        {
+          "rendererPath": "bootsBossGladiator",
+          "glbFile": "bronzewake_boots.glb",
+          "textureFile": "bronzewake_basecolor.png",
+          "disableNativeEmission": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "name": "fairyA66-bone diagnostic",
+  "native_chassis": "fairyA",
+  "renderer_paths": [
+    "enFairy01"
+  ],
+  "native_renderer_id": 121395,
+  "status": "SCOPED_DIAGNOSTIC_MECHANICS_AND_SELECTED_POSE_EVIDENCE",
+  "provenance": {
+    "profile": {
+      "key": "ftkmf_modeltest_probe_fairya",
+      "baseEnemy": "fairyA",
+      "displayName": "Rig probe: fairyA",
+      "combatProfile": "b63a0354dfdcab92ca25e71ac4960e0bb459863e30677d401965b5db00716ab7",
+      "renderers": [
+        {
+          "rendererPath": "enFairy01",
+          "glbFile": "probe_121395.glb",
+          "textureFile": "probe_palette.png"
+        }
+      ],
+      "minimumBaseHealth": 64
+    }
+  },
+  "session": "5d8860c3aa834e8286ad4d97dedea7c4",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "cdbbe7ece2b53e443c1c9c4fad8607379f1c94f1b263592815252e26ac0f4b4a",
+      "bytes": 1967616
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "8d9c58439aba919b6489faef9fc89cb6326331f2c39079cd4b36ed06fe81dc87",
+      "bytes": 229376
+    }
+  },
+  "catalogSha256": "9b4fc3a8603c76583bf4ffa18ba22022d4f4d91b34e15f4cf70d2a7556e454aa",
+  "assetHashes": {
+    "probe_121395.glb": "a32075d1e552d36e29684cf37ea8a2d0e0e021675a49a4113ae8e345c85b9725",
+    "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+  },
+  "wrapperOriginal": {
+    "path": "docs/evidence/fairya-diagnostic-v1/wrapper-result.json",
+    "sha256": "b0d72b74795ed65810fd68447764a70e7aa3a2c0239eb4f5d9759412b8012c8c"
+  },
+  "wrapperStatusPreserved": "needs_visual_review",
+  "rootReview": {
+    "path": "docs/evidence/fairya-diagnostic-v1/root-review.json",
+    "sha256": "29adee3c82094adb7f6a5bc5e157adae666c4ea51a88374c97d852920020aefc"
+  },
+  "captures": [
+    {
+      "kind": "pass",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/7e8d970fd9cf49f597b1a17805d326f1.json",
+        "sha256": "c6f46c5ba945b94fa2333dcddc808406e01b7e9982fb441cf1a3bb7c0c30b102"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/fairya-diagnostic-v1/pass.capture.json.gz",
+        "sha256": "2cad32d542554503883648967f60feba42558816f6228bfe1ed236998b0121cb"
+      },
+      "summary": {
+        "path": "docs/evidence/fairya-diagnostic-v1/pass-summary.json",
+        "sha256": "dc5cf5def36c0b3c085858eab539861aabbe6d60c45a998333ca92ec07676375"
+      },
+      "video": {
+        "path": "docs/evidence/fairya-diagnostic-v1/pass.mp4",
+        "sha256": "7766175ae316bddedc6cc7c17db2be88fdad1ac3644f3ac52cf69553225a9452"
+      },
+      "frames": 120,
+      "reviewedFrames": [
+        0,
+        48
+      ],
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-93825eb0d3c541e5bdfad828b6a73847/journal.jsonl",
+        "sha256": "138c79a753943248d3c9cf506b6e624f3957391d5d74845cccd506739d46f722",
+        "bytes": 4580541
+      }
+    },
+    {
+      "kind": "hit",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/984eb2ce426948d1a10ecc5ca2bb82cc.json",
+        "sha256": "2396fa8233fde9bb1310fca05c4acd8212b9fa896c2c1251e01dd75b405a27d7"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/fairya-diagnostic-v1/hit.capture.json.gz",
+        "sha256": "d42a797a2c3167760ae5f2973ce765f2b758e41f71752a9157b67c29c553ee7a"
+      },
+      "summary": {
+        "path": "docs/evidence/fairya-diagnostic-v1/hit-summary.json",
+        "sha256": "4639171cb9d29405ed463a062fa5601123de182bcf5be937d2e691d5848d31db"
+      },
+      "video": {
+        "path": "docs/evidence/fairya-diagnostic-v1/hit.mp4",
+        "sha256": "c328f58cb2a149faeb240e50972e2486c883991d9d069966182db96498fb8ac9"
+      },
+      "frames": 120,
+      "reviewedFrames": [
+        30
+      ],
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-77337eaa9e344749b5c8ae11cc4c7e17/journal.jsonl",
+        "sha256": "5a05ab48309f10732df1af8b9baf7b4abfdff1acaf0a35057d27de269a267867",
+        "bytes": 4583500
+      }
+    },
+    {
+      "kind": "death",
+      "raw": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/4e53e1e68fac461d975a2586140792b1.json",
+        "sha256": "af7421fb27416a1e1843b30f1a40be702fb30f817d377591a080f428bb859225"
+      },
+      "archivedRaw": {
+        "path": "docs/evidence/fairya-diagnostic-v1/death.capture.json.gz",
+        "sha256": "7386f44a1e36af8ff5e60537cfd70f0a8600f2b573af8da6e872ec6e5fc41156"
+      },
+      "summary": {
+        "path": "docs/evidence/fairya-diagnostic-v1/death-summary.json",
+        "sha256": "0a7e292ce6418ebfea0fa6915ab436ba0f29621fa95320a4188ad633c97e08d0"
+      },
+      "video": {
+        "path": "docs/evidence/fairya-diagnostic-v1/death.mp4",
+        "sha256": "cc3d2723514f93cd62180150fe83d475dcec4c37015cf37b58f336602ad3aeb5"
+      },
+      "frames": 120,
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "journal": {
+        "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-37a9368787034edbb7e105037b5f596c/journal.jsonl",
+        "sha256": "70afb390056e98644083ce0d64a8978d1919beaef6204d52457c78a9a7ca4b17",
+        "bytes": 4540275
+      }
+    }
+  ],
+  "deathAudit": {
+    "nativeDoRagdollFalseAll120": true,
+    "animatorEnabledAll120": true,
+    "inactiveWeaponBreakRigidbodiesPerFrame": 2,
+    "bodyRagdollClaim": false
+  },
+  "normalHit": {
+    "status": "nonlethal_hp_loss",
+    "beforeHp": 58,
+    "afterHp": 55,
+    "nativeOutcome": null,
+    "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+  },
+  "collectCount": 1,
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 3,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235482,
+        "alive": true,
+        "containerInstanceId": -237218,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237260,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237660,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235482,
+            "celInstanceId": -239086,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -251176,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "5d8860c3aa834e8286ad4d97dedea7c4",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 3,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Trap1",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "trap"
+      ],
+      "slotAllowsEnemySubstitution": false,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "5d8860c3aa834e8286ad4d97dedea7c4",
+    "id": "6b749c5950184c95bbb092e9f8864638",
+    "frame": 47613,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "sourceFindings": {
+    "path": "scratch/fairy-topology-analysis/findings.json",
+    "sha256": "169deebc17d03437c16e87e4e4165c149d3f363c5ec8948bb322df867a599397"
+  },
+  "limitations": [
+    "Calibration geometry only, no original art acceptance.",
+    "Five selected frames, not full motion/camera coverage.",
+    "Explicit KillSingle death fixture; normal damage only on nonlethalhit.",
+    "fairy_die sampled start.141 misses beginning of firstcycle; no nearcomplete claim.",
+    "Source body has zero rigidbodies; runtime two inactive weaponBreak bodies are equipment, not native bodyragdoll.",
+    "Same exact bind/controller acrossfairyA/B/C/Fountain does not verify everyrow."
+  ]
+}

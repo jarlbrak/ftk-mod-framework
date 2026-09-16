@@ -1,0 +1,76 @@
+{
+  "status": "FROZEN_ORIGINAL_CANDIDATE_WITH_SCOPED_LIVE_EVIDENCE",
+  "name": "Sunspire Roc",
+  "nativeEnemy": "rocA",
+  "referenceRendererId": 121238,
+  "rendererPath": "enRoc01",
+  "boneCount": 36,
+  "nativeSurfaceCopied": false,
+  "authoringInputs": "bone_names and inverse bind matrices only; proof restricts the generator to those keys.",
+  "profile": {
+    "key": "ftkmf_modeltest_sunspire_roc",
+    "baseEnemy": "rocA",
+    "displayName": "Sunspire Roc",
+    "combatProfile": "3ac11623c5f15bc93636070acd1193874c2ff112dfbb766f120e0648d6ec282b",
+    "renderers": [
+      {
+        "rendererPath": "enRoc01",
+        "glbFile": "sunspire-roc.glb",
+        "textureFile": "sunspire-roc_basecolor.png",
+        "disableNativeEmission": true
+      }
+    ],
+    "minimumBaseHealth": 64,
+    "visualScale": 1.0,
+    "portraitMarkerPath": "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/PortraitCam"
+  },
+  "originalAssets": {
+    "sunspire-roc.glb": "da6b90793027a3f33feae317da1efdc1982176e6cee6b704ab4a1b223d7c0c67",
+    "sunspire-roc_basecolor.png": "911b8202261edc17a1098677b63d69ba960b26a66d2cd5027281d03368762f83"
+  },
+  "files": {
+    "README.md": "0dd7ae666684dcfcf79d3e2c201f103466f268566d04c998c199e4092e8820c1",
+    "build_geometry.py": "91a36e0d9c75505edffb50606f6fea70213cd5e42084202d45fb3e3ce0dd0121",
+    "build_blender.py": "718eb472195dda920b2ac4ac7899e98982a6e144531eec2b960d9f863d51e472",
+    "verify_original_geometry.py": "5b4a8b255cb83f7cd61357903e6d11ef20cc74a258ea03a649699c12777d5ebd",
+    "verify_target_binding.py": "2825bf04f49be91e41970f2674214fcc0b48343cac439b9c87aad4992b0a4cbe",
+    "finalize_manifest.py": "c92bb0d08e3468ec4ec61455138e40bdaf1f3d348f25d150677056e5cf161f9e",
+    "stage_runtime_profile.py": "bde434064276f72de8fcaad0841f6fd8772daa85ed11fdb5b9f9a1147a083d51",
+    "write_live_review_v1.py": "7d7199cf0d562ac04a78ebadbf3a4e326f42faf929d4e31e2d9f429c55d60132",
+    "write_live_review_v2.py": "78ef14443b2a22f8e4e192eaf4f3c248fd508bb85a8e5288030cdc934920b7ab",
+    "write_live_review_v3.py": "c7d318636a66ba8e44cb17aadce4aba2ba03cda61e420cfee0e248eead6af1a9",
+    "live-validation-v1/archive.py": "3bcfd5a2e44309258c5ab0b3301959677f9dc1425ccdc48bd1f5e6c7ba5cb236",
+    "live-validation-v2/archive.py": "eff3ef377e8ce70984d56c2ea3d0113393d6a2bd779d9a30c2eab19a112a3c9d",
+    "live-validation-v3/archive.py": "659600d210e9aeb5a8028b8afd049e84c3a888dc80ed289db103c5dc27168bb9",
+    "live-validation-v4/archive.py": "88fd2055c2999cab6813c78baeb479201a3761fcfe1985e4630590ad521591e3",
+    "runtime-profile.json": "49c7d8f7fbbbb63f5fc471b53d0bddcebaa8d1c69cb9a570d28bb2c12e9781f6",
+    "studio-review.json": "c1d109f8d0fbddb898ebec200e1ea64fd0422981a29ae08a7420ecf9451013f7",
+    "hero.png": "2a079c92c56acbb1655852d0555221520595556225722b2d966de7fc823c1124",
+    "side.png": "cb2359c017b32b9b03d265ab3e580514db7963c1c422446d3755fec644c501d3",
+    "sunspire-roc.blend": "62aa2b2aafb29f8521d789aeb63978cab73e17d3e44f4817f7791712022da73a",
+    "sunspire-roc-studio.blend": "dace254bc3017790485556200c5c7de9b22bbe8df15bfca69b956b1d9d9edd27",
+    "sunspire-roc.glb": "da6b90793027a3f33feae317da1efdc1982176e6cee6b704ab4a1b223d7c0c67",
+    "sunspire-roc.source.json": "7d7ddc720a613680a3cbfca1e3e88ce8e3ff5bff2747b545984a1bff9ea9865c",
+    "sunspire-roc.pieces.json": "eb4d4498994f4555503fd2763c3789074c25663bbb6e0133e313de8683019e1f",
+    "sunspire-roc.validation.json": "4dc98689b8ed1824a709f4129f14c6bf3f2b53589cb0f0873b8b7cd8b394e6df",
+    "sunspire-roc_basecolor.png": "911b8202261edc17a1098677b63d69ba960b26a66d2cd5027281d03368762f83",
+    "sunspire-roc-reopened.glb": "971977efb31cf5caa6a1ab4b4c129e25ad598dc7f657d460607d4a2d51210654",
+    "sunspire-roc-reopened.png": "911b8202261edc17a1098677b63d69ba960b26a66d2cd5027281d03368762f83",
+    "sunspire-roc-reopened.source.json": "95da230d67399d03125c8771116ebfc6c220e131791d76ab981a67e3f60ed9ac",
+    "sunspire-roc-reopened.validation.json": "1a03fa1042e4780856ef608717e0c032a4556799b5d9e1040ac262faf3bf675b",
+    "reopened-validation.json": "9f686f1f34283f1007670e9f9289f5244dde101d5f334019f45bcb18c8d2c2a4",
+    "original-geometry-proof.json": "35d4f342d97867e63382261e9472d0e7738a1603e7961748130f70cf324f999e",
+    "target-binding-proof.json": "86e2c509e03d3a741ef6d9f8e73952a366fac1191c655c5895d8a944578a13ce"
+  },
+  "liveEvidence": {
+    "live-validation-v1/validation.json": "65b2d35a0a45ed4bec5ee5497bea1637caf878f3bd0b698dabbc37f621b8c9f3",
+    "live-validation-v2/validation.json": "6e61239c6d22ee301764fda70136f3e7098c31f2f250aa2a0e6db9e4e693067f",
+    "live-validation-v3/validation.json": "487cc15f5db1d786efe3534106f692deda2a63e088e43a160f0c676242348a9d",
+    "live-validation-v4/validation.json": "3551ffd010c88dd9754521b7e087626f5dc5581348c377cc3f2b87352246f65a"
+  },
+  "limits": [
+    "Static studio render and binary checks do not prove native animation, portrait framing, camera fit, culling, material lifetime, or gameplay; named live evidence has its own bounded claims.",
+    "The root native visual scale must be observed in the exact live clone before changing public visualScale; the archived rocA run preserves that observation at 0.9.",
+    "This profile is only rocA/enRoc01. It does not establish rocB, jungle Roc, or other bird-rig compatibility."
+  ]
+}

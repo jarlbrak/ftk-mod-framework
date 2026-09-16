@@ -1,0 +1,99 @@
+{
+  "samplePhase": "main-thread-command",
+  "provenance": "read-only existing live enemy shared-material and lease observation",
+  "frame": 16065,
+  "gameTime": 160.6717529296875,
+  "realtime": 167.5306854248047,
+  "deltaTime": 0.052800003439188004,
+  "enemy": "ftkmf_modeltest_saffronspine",
+  "ownerInstanceId": 369188,
+  "celInstanceId": -245416,
+  "rendererInstanceId": -245422,
+  "celRelativeRendererPath": "enBlowFishA",
+  "rendererEnabled": true,
+  "rendererActive": true,
+  "slots": [
+    {
+      "instanceId": -245700,
+      "name": "matLoot (Instance)",
+      "type": "UnityEngine.Material",
+      "inCurrentLeaseResources": true,
+      "slot": 0,
+      "shader": "Standard",
+      "emissionKeyword": false,
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245702,
+        "name": "ftkmf_saffronspine_basecolor.png",
+        "type": "UnityEngine.Texture2D",
+        "inCurrentLeaseResources": true,
+        "width": 384,
+        "height": 32,
+        "wrapMode": "Repeat",
+        "filterMode": "Bilinear"
+      },
+      "_MainTexOffset": [
+        0.0,
+        0.0
+      ],
+      "_MainTexScale": [
+        1.0,
+        1.0
+      ],
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null,
+      "_EmissionMapOffset": [
+        0.0,
+        0.0
+      ],
+      "_EmissionMapScale": [
+        1.0,
+        1.0
+      ],
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "scrollers": [],
+  "lease": {
+    "available": true,
+    "present": true,
+    "leaseId": 4,
+    "acquired": true,
+    "applied": true,
+    "references": 1
+  },
+  "leaseResourceInstanceIds": [
+    -245698,
+    -245700,
+    -245702
+  ],
+  "boundary": "Current fields/resources only; no lease retention, pruning, material getter cloning or native clone creation. UV displacement and owner independence require multiple matched observations. Multiple native scrollers can write the same property; raw observed phase is not presumed equal to the final material offset.",
+  "geometry": {
+    "meshInstanceId": -245698,
+    "mesh": "ftkmf_glb_saffronspine.glb",
+    "vertices": 5004,
+    "submeshCount": 1,
+    "submeshes": [
+      {
+        "nativeMaterialSlot": 0,
+        "indices": 5004,
+        "triangles": 1668,
+        "indexInt32LittleEndianSha256": "ef4e859ba6a729f2034f4ee62c10d9dd8f7a1ded405bbbabed20906ae5951fa7"
+      }
+    ],
+    "uv0Count": 5004,
+    "uv0Float32LittleEndianSha256": "69f0253aa91f289328266a02574bce6dac7a641b0c5028dbabd86ffc511e75af",
+    "inCurrentLeaseResources": true
+  },
+  "ok": true,
+  "testFixtureMaxHpTarget": 999,
+  "tutorialsQuiet": true,
+  "session": "19e39acaf4fe49c2b463cd069902e926",
+  "id": "9aa4cded26d04bae8cb2b757c0723de9",
+  "savePath": "save-model-test-81fab5f083e30704"
+}

@@ -1,0 +1,99 @@
+{
+  "samplePhase": "main-thread-command",
+  "provenance": "read-only existing live enemy shared-material and lease observation",
+  "frame": 9510,
+  "gameTime": 89.9190444946289,
+  "realtime": 101.43866729736328,
+  "deltaTime": 0.009490812197327614,
+  "enemy": "ftkmf_modeltest_belladusk",
+  "ownerInstanceId": 369188,
+  "celInstanceId": -245224,
+  "rendererInstanceId": -245230,
+  "celRelativeRendererPath": "enJungleNibbler_A",
+  "rendererEnabled": true,
+  "rendererActive": true,
+  "slots": [
+    {
+      "instanceId": -245528,
+      "name": "matMasterJungle (Instance)",
+      "type": "UnityEngine.Material",
+      "inCurrentLeaseResources": true,
+      "slot": 0,
+      "shader": "Standard",
+      "emissionKeyword": false,
+      "_MainTexSupported": true,
+      "_MainTex": {
+        "instanceId": -245530,
+        "name": "ftkmf_belladusk_basecolor.png",
+        "type": "UnityEngine.Texture2D",
+        "inCurrentLeaseResources": true,
+        "width": 384,
+        "height": 32,
+        "wrapMode": "Repeat",
+        "filterMode": "Bilinear"
+      },
+      "_MainTexOffset": [
+        0.0,
+        0.0
+      ],
+      "_MainTexScale": [
+        1.0,
+        1.0
+      ],
+      "_EmissionMapSupported": true,
+      "_EmissionMap": null,
+      "_EmissionMapOffset": [
+        0.0,
+        0.0
+      ],
+      "_EmissionMapScale": [
+        1.0,
+        1.0
+      ],
+      "emissionColor": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "scrollers": [],
+  "lease": {
+    "available": true,
+    "present": true,
+    "leaseId": 4,
+    "acquired": true,
+    "applied": true,
+    "references": 1
+  },
+  "leaseResourceInstanceIds": [
+    -245526,
+    -245528,
+    -245530
+  ],
+  "boundary": "Current fields/resources only; no lease retention, pruning, material getter cloning or native clone creation. UV displacement and owner independence require multiple matched observations. Multiple native scrollers can write the same property; raw observed phase is not presumed equal to the final material offset.",
+  "geometry": {
+    "meshInstanceId": -245526,
+    "mesh": "ftkmf_glb_belladusk.glb",
+    "vertices": 4248,
+    "submeshCount": 1,
+    "submeshes": [
+      {
+        "nativeMaterialSlot": 0,
+        "indices": 4248,
+        "triangles": 1416,
+        "indexInt32LittleEndianSha256": "d573930cc690192f56dd0b90b98c5dd5576c5754f7fb1fb2bc73b76a2605d9d1"
+      }
+    ],
+    "uv0Count": 4248,
+    "uv0Float32LittleEndianSha256": "75e9a86c29cb997b6041eb7088808af091096c63de1ebe4b836dc32087ca18ad",
+    "inCurrentLeaseResources": true
+  },
+  "ok": true,
+  "testFixtureMaxHpTarget": 999,
+  "tutorialsQuiet": true,
+  "session": "34c6aa4af2e24f4f9617879dfcd86301",
+  "id": "5a1c646ce8ba4a558c7f923e58622f09",
+  "savePath": "save-model-test-81fab5f083e30704"
+}

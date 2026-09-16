@@ -1,0 +1,23 @@
+{
+  "status": "architect_approved_owned_trial_live_gate_pending",
+  "sha256": "b9fc9374607ba550937aa872d6538e960c49cc929a409dc7b1b1e72e8e5f0272",
+  "artifact": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/candidate-material-lifecycle-helper-b9fc9374/FtkRuntimeModelTest.dll",
+  "bytes": 303104,
+  "sourcePins": {
+    "runtime-test/MaterialLifecycleFixture.cs": "8a3d7b43ededf321a0f8be413b0bdaf5cac3687a72512d85a7221246095dfb3e",
+    "runtime-test/MaterialLifecycleTiming.cs": "b6741a8a46ceaa220f87cdbfd83038d1fd7724b75f72a29babf7a750df6bc765",
+    "runtime-test/Plugin.cs": "1e7b38a447c3518416dabd4da1e09df937e017ffd0e98c0206285d6535b623ae",
+    "runtime-test/command.py": "7f6e388a1ac19dea24fcb1bd8772133d2cdfc0155acea42d1937953f702d68ee",
+    "runtime-test/MATERIAL-LIFECYCLE.md": "3fffe60b14905504e63aca2c98ca55fb09068702cd82afe6cf3f7257f8871fea",
+    "material-lifecycle-tests/Program.cs": "c859fd54bd2842ac139a2811955b60a9f7bfd7e0a85d714a55bd110bf521c13c",
+    "material-lifecycle-tests/MaterialLifecycleTests.csproj": "9540f30ab46d24eb1c0dca05fec8c7f0b847c73edb1e4e57cef5e42784f2bd9b"
+  },
+  "includedApprovedMixer": "c87a894ef225e7e89f7809984c68bacb17bffbabeefc4615d4c3b90f3df3793f source unchanged",
+  "tests": {
+    "linkedTimingAssertions": 17,
+    "runtimePython": 115
+  },
+  "build": "Release net35 helper only; 0 warnings/errors",
+  "deployed": false,
+  "review": "ftk_architect verified source pins, 17 linked timing tests PASS; no source blockers"
+}

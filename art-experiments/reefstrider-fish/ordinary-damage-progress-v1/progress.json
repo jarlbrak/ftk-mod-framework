@@ -1,0 +1,395 @@
+{
+  "status": "INCOMPLETE_ORDINARY_DAMAGE_SEQUENCE_NO_LETHAL_VERDICT",
+  "preservedPriorLiveValidation": {
+    "path": "art-experiments/reefstrider-fish/live-validation-v1.json",
+    "sha256": "1a995110c5a4d3a4004f3dd0c0ff0b7401635b234d33850284f330b853e62d8b"
+  },
+  "completedCaptures": [
+    {
+      "label": "hit1",
+      "status": "COMPLETED_CAPTURE_NOT_FINAL_ACCEPTANCE",
+      "action": "attack",
+      "hpBeforeSubmission": 58,
+      "frames": 120,
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/12baa8bb9c574c599e37b5237200a386.json",
+      "sourceSha256": "b0865ea9b332b5ab80bb7d6b08a8ecb74759c8d4fd8cc24c212f2c2832b13684",
+      "rawArchive": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit1/capture.json.gz",
+      "rawArchiveSha256": "85427bf652633599a7353624183530557c54593ad45d182a848e60bc6c40a6f5",
+      "decompressedSha256": "b0865ea9b332b5ab80bb7d6b08a8ecb74759c8d4fd8cc24c212f2c2832b13684",
+      "journalPins": [
+        {
+          "sequence": 1,
+          "utc": "2026-09-08T03:42:54.928837+00:00",
+          "monotonic": 258723.89834975,
+          "kind": "deployed-binaries",
+          "data": {
+            "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+            "session": "7c51a58e8aff493096bdba5f783af3ab",
+            "binaries": {
+              "framework": {
+                "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+                "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+                "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+                "bytes": 1974272
+              },
+              "helper": {
+                "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+                "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+                "sha256": "2c42e55ddcfcc01331aa66d45721ed404ac98608fe1ed3d4a7ca5a90b3e52186",
+                "bytes": 325632
+              }
+            },
+            "measurement": "on_disk_binary_sha256",
+            "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+          }
+        },
+        {
+          "sequence": 3,
+          "utc": "2026-09-08T03:42:54.931581+00:00",
+          "monotonic": 258723.900895708,
+          "kind": "profile-assets",
+          "data": {
+            "reefstrider.glb": "a865a3f602edc56c1f9545bc78d4f4b446d891228c70731ae4fc849257a6451d",
+            "reefstrider_basecolor.png": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50"
+          }
+        },
+        {
+          "sequence": 4,
+          "utc": "2026-09-08T03:42:54.931776+00:00",
+          "monotonic": 258723.901089416,
+          "kind": "provenance",
+          "data": {
+            "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+            "port": 8788,
+            "session": "7c51a58e8aff493096bdba5f783af3ab",
+            "case": "7e6ec72a1b5740969a729d30c45aa9da",
+            "mode": "record-action",
+            "enemy": "ftkmf_modeltest_reefstrider",
+            "class": null,
+            "profile": {
+              "key": "ftkmf_modeltest_reefstrider",
+              "baseEnemy": "fishA01",
+              "displayName": "Reefstrider",
+              "combatProfile": "746deb43cc057df260abe66bad848ded92c511f22d0b0ef05162c1f7287674fc",
+              "renderers": [
+                {
+                  "rendererPath": "enFishA",
+                  "glbFile": "reefstrider.glb",
+                  "textureFile": "reefstrider_basecolor.png",
+                  "disableNativeEmission": true
+                }
+              ],
+              "minimumBaseHealth": 64,
+              "visualScale": 1.0
+            },
+            "profileInputSha256": "b52196b3c1928f35c76188c17e8b135c5cdbbedfa1fa3ecbc6a484b29acc34d6",
+            "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+          }
+        }
+      ]
+    },
+    {
+      "label": "hit2",
+      "status": "COMPLETED_CAPTURE_NOT_FINAL_ACCEPTANCE",
+      "action": "attack",
+      "hpBeforeSubmission": 48,
+      "frames": 120,
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/53940a18fb2c40979fbe7b4bc69370b0.json",
+      "sourceSha256": "a7554568870890d843495aa76364bb2a25b1a8e955c06f217166008104070e63",
+      "rawArchive": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/capture.json.gz",
+      "rawArchiveSha256": "da20e358d672c358682d0aa0819832b547e32cd2b8cc9eae12afbe37789b45fc",
+      "decompressedSha256": "a7554568870890d843495aa76364bb2a25b1a8e955c06f217166008104070e63",
+      "journalPins": [
+        {
+          "sequence": 1,
+          "utc": "2026-09-08T03:50:22.129469+00:00",
+          "monotonic": 259171.096605375,
+          "kind": "deployed-binaries",
+          "data": {
+            "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+            "session": "7c51a58e8aff493096bdba5f783af3ab",
+            "binaries": {
+              "framework": {
+                "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+                "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+                "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+                "bytes": 1974272
+              },
+              "helper": {
+                "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+                "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+                "sha256": "2c42e55ddcfcc01331aa66d45721ed404ac98608fe1ed3d4a7ca5a90b3e52186",
+                "bytes": 325632
+              }
+            },
+            "measurement": "on_disk_binary_sha256",
+            "boundary": "Measured isolated DLL files before case operations; does not prove loaded process memory identity."
+          }
+        },
+        {
+          "sequence": 3,
+          "utc": "2026-09-08T03:50:22.132382+00:00",
+          "monotonic": 259171.0993955,
+          "kind": "profile-assets",
+          "data": {
+            "reefstrider.glb": "a865a3f602edc56c1f9545bc78d4f4b446d891228c70731ae4fc849257a6451d",
+            "reefstrider_basecolor.png": "09c706dc70696ffd7ddba05305205c8db1660969e0da59d3e335a34ecbf75b50"
+          }
+        },
+        {
+          "sequence": 4,
+          "utc": "2026-09-08T03:50:22.132556+00:00",
+          "monotonic": 259171.099569208,
+          "kind": "provenance",
+          "data": {
+            "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+            "port": 8788,
+            "session": "7c51a58e8aff493096bdba5f783af3ab",
+            "case": "9d2b38f285cd49319e45cf66dfe95c1f",
+            "mode": "record-action",
+            "enemy": "ftkmf_modeltest_reefstrider",
+            "class": null,
+            "profile": {
+              "key": "ftkmf_modeltest_reefstrider",
+              "baseEnemy": "fishA01",
+              "displayName": "Reefstrider",
+              "combatProfile": "746deb43cc057df260abe66bad848ded92c511f22d0b0ef05162c1f7287674fc",
+              "renderers": [
+                {
+                  "rendererPath": "enFishA",
+                  "glbFile": "reefstrider.glb",
+                  "textureFile": "reefstrider_basecolor.png",
+                  "disableNativeEmission": true
+                }
+              ],
+              "minimumBaseHealth": 64,
+              "visualScale": 1.0
+            },
+            "profileInputSha256": "b52196b3c1928f35c76188c17e8b135c5cdbbedfa1fa3ecbc6a484b29acc34d6",
+            "portOwnership": "explicit operator-selected bridge port; bridge has no root/session identity endpoint"
+          }
+        }
+      ],
+      "rootViewedImage": {
+        "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/0030.png",
+        "sha256": "a67977d8c927674964dc53685a8dd5730816ef23245d1267bd6170ccf86bb002",
+        "observation": "Connected head/flippers/upper torso; hero occludes lower body. Visible -5 and HP43, both portrait faces readable.",
+        "scope": "Root selected-image review, not final sequence acceptance."
+      }
+    },
+    {
+      "label": "hit3",
+      "status": "COMPLETED_CAPTURE_NO_NEW_VISUAL_VERDICT",
+      "action": "attack",
+      "hpBeforeSubmission": 43,
+      "observedHpAfter": 33,
+      "aliveAfter": true,
+      "frames": 120,
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/5ec80d5816eb4523ac26c2824aa773c1.json",
+      "sourceSha256": "e82eb02723069824d59be9ed10eb9d45f078bcd3e44ae5daa2576c539379d4b2",
+      "rawArchive": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/capture.json.gz",
+      "rawArchiveSha256": "65aa5e227902b9db528176354510df9f785eda9b13edc63325a1a72b0f57b64d",
+      "decompressedSha256": "e82eb02723069824d59be9ed10eb9d45f078bcd3e44ae5daa2576c539379d4b2",
+      "afterStateEvidence": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/reefstrider-after-normal-hit3.json"
+    },
+    {
+      "label": "hit4-dodge",
+      "status": "DODGED_NO_DAMAGE",
+      "action": "attack",
+      "hpBeforeSubmission": 33,
+      "observedHpAfter": 33,
+      "nativeDodgeReportedSpan": [
+        22,
+        41
+      ],
+      "frames": 120,
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/d3695b29a7c34163ab59e52fee175048.json",
+      "sourceSha256": "357b4fbad8cc2325e1afa4e9affa9ed7368c11026a8ce6549923bd5fadd3df67",
+      "rawArchive": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/capture.json.gz",
+      "rawArchiveSha256": "931ff62d7e87f7e1dddd9fd243bf9ba4ffe85ad386593e2fb620591c3583e77d",
+      "decompressedSha256": "357b4fbad8cc2325e1afa4e9affa9ed7368c11026a8ce6549923bd5fadd3df67",
+      "rootViewedImage": {
+        "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/0030.png",
+        "sha256": "1f6b5531e0cb8bbc09a2bb31718ccf177f83c359f9451bed57bc81532c598c02",
+        "observation": "DODGED visible, connected head/torso/leftmost visible leg. Hero hides near-side lower body; both portraits readable.",
+        "scope": "Selected-image dodge review, not damage acceptance."
+      }
+    },
+    {
+      "label": "hit5",
+      "status": "COMPLETED_ORDINARY_DAMAGE_SELECTED_FRAME_REVIEW",
+      "action": "attack",
+      "hpBeforeSubmission": 33,
+      "observedHpAfter": 25,
+      "frames": 120,
+      "source": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/83d1f03346f44c9fb5ce82e2bd26c316.json",
+      "sourceSha256": "ab9f38584ce46f8f22d2dbc521a616b26d8338a0d24379572741255e99500450",
+      "rawArchive": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit5/capture.json.gz",
+      "rawArchiveSha256": "6b4de92d479e2f8b204479a86e642e7e024f6000d21f29652e19b888b1b87025",
+      "decompressedSha256": "ab9f38584ce46f8f22d2dbc521a616b26d8338a0d24379572741255e99500450"
+    }
+  ],
+  "limits": [
+    "Only terminal attempts1 through5 archived; fourth is dodge/noHP loss.",
+    "Four newly pinned selected images do not establish full-motion acceptance.",
+    "No active sixth capture read; no ordinary lethal or final death verdict."
+  ],
+  "files": [
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit1/capture-summary.json",
+      "sha256": "f28c85a1215c6854cdec612d4b97fa8c733726ac2907a6ee182bbbe920153338"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit1/capture.json.gz",
+      "sha256": "85427bf652633599a7353624183530557c54593ad45d182a848e60bc6c40a6f5"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit1/journal.jsonl",
+      "sha256": "0f73d63215cc552ef765bd56c86331d46647fc97ed51c79877e652964c5b22ed"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit1/result.json",
+      "sha256": "f3b7ab99a4f744f623fb4780a9bf720952d399a2eba94da6579b5af28d54f54b"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit1/source-pointer.txt",
+      "sha256": "f8aab9339ae12a59c6953edec543d8a5c0e3edc31467a3ede69563a0148420b9"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/0030.png",
+      "sha256": "a67977d8c927674964dc53685a8dd5730816ef23245d1267bd6170ccf86bb002"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/capture-summary.json",
+      "sha256": "80df999c937b97b469248e9afdfd0aa31caa72091ade0f173a2ac94d1eaf7bc3"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/capture.json.gz",
+      "sha256": "da20e358d672c358682d0aa0819832b547e32cd2b8cc9eae12afbe37789b45fc"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/journal.jsonl",
+      "sha256": "152a1f7b9ad6e1bc5afcec6ade3c72da9eb5864a13f19217975ab1f05864db70"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/result.json",
+      "sha256": "046a88caa23cb23a8d4eba63808eafd88f8b9938a82828c5eb904a365fc26025"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit2/source-pointer.txt",
+      "sha256": "d58ca08f7dce8ced9bcf97b2e48f29ba3f257c6201aafd9e0c1d06a8992b2974"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/capture-summary.json",
+      "sha256": "156135312ab7612744d4079bf07ebf6a4183d9c639d76d9c5c5146b8cd1fb98e"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/capture.json.gz",
+      "sha256": "65aa5e227902b9db528176354510df9f785eda9b13edc63325a1a72b0f57b64d"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/journal.jsonl",
+      "sha256": "8f3f4689da01570117261c27612ead42213507531c3d7c29b11bb562d61155e7"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/reefstrider-after-normal-hit3.json",
+      "sha256": "41f96832ed7ade7ce0a606e426b972fa638948806914ac1fa65d892e15a9ef25"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/reefstrider-normal-hit3-result.txt",
+      "sha256": "dc876ab4da401f3da3cbca6302507988385d95d2894fb8cb745caa872a2c320e"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit3/result.json",
+      "sha256": "285c623efc9014dcc6941f7dddfce968794be7f712ae25ea0f4871153f5a6546"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/0030.png",
+      "sha256": "1f6b5531e0cb8bbc09a2bb31718ccf177f83c359f9451bed57bc81532c598c02"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/capture-summary.json",
+      "sha256": "84bdb4d2cb948936164cbfea68d9fe13231b4e893cd9f6967bab19547942b122"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/capture.json.gz",
+      "sha256": "931ff62d7e87f7e1dddd9fd243bf9ba4ffe85ad386593e2fb620591c3583e77d"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/journal.jsonl",
+      "sha256": "06b94a84e02ed1fed59cc0f9136bab36b5e66584c45d50ee7100e7ad3aefb710"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/reefstrider-after-normal-hit4.json",
+      "sha256": "cc5bd532cfc7465abd679ab75648842cc85c2b7dbd607676a21d67c0cd27485b"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/reefstrider-normal-hit4-result.txt",
+      "sha256": "a9016f2446eef773ff2760358d9cf90a7d7a6719b37358590374be34aa76a210"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit4-dodge/result.json",
+      "sha256": "9a026df5fde04c97aedc35d9452830639d74cb7268da8d749f75ce6c4dc4ff6d"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit5/capture-summary.json",
+      "sha256": "2e649e670dab46b395dd3af5d2fffe79931f367b6425bb3c7dfb711919580dd4"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit5/capture.json.gz",
+      "sha256": "6b4de92d479e2f8b204479a86e642e7e024f6000d21f29652e19b888b1b87025"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit5/journal.jsonl",
+      "sha256": "a7d729428ffa545ec910665e918fe2f5414eac81f3df209807790e8ead360282"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit5/reefstrider-after-normal-hit5.json",
+      "sha256": "0415a9fec631f6ffb8930017333f3b6cbab1f216008dafec13bbf67aec5a3d11"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit5/reefstrider-normal-hit5-result.txt",
+      "sha256": "ba7a39e94d4b33f37c6c3bcb7477dd7528c31da8aa6a3a21871633e4c8f13c2c"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/hit5/result.json",
+      "sha256": "1cfd2cac46a1532cb3edb84d9b2ada5c29f2adecbfb414f9fa1cb5c693930234"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/progress-through-hit2.json",
+      "sha256": "54955dce69f5866f998d50717b8920e06194790524e3e40db1c2be7712073d54"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/progress-through-hit3.json",
+      "sha256": "fe4d95cfe0d982d57cf6e21563f01c5394871d15cd7e0a62eb918b536932df3c"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/progress-through-hit4.json",
+      "sha256": "1c96e7de239379361277176ee048226d34ce164a55b15f301dea08d8b5ea950f"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/reefstrider-ordinary-root-selected-review.json",
+      "sha256": "3fade3d18a0e677f9cdf13d9c6bd333550a3824fab4c6318b5bf2858e4238647"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/review-83d1f03346f44c9fb5ce82e2bd26c316-0030.png",
+      "sha256": "ef0f8822ab03c39a806b8d4a7913d05f1df3bf9640433c814beba1d1c9847dd0"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/review-d3695b29a7c34163ab59e52fee175048-0023.png",
+      "sha256": "4053e8126f3fab53912782386e539fe7f44b5394cdbf49167a2c28a17e5ae167"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/review-d3695b29a7c34163ab59e52fee175048-0030.png",
+      "sha256": "1f6b5531e0cb8bbc09a2bb31718ccf177f83c359f9451bed57bc81532c598c02"
+    },
+    {
+      "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/review-d3695b29a7c34163ab59e52fee175048-0040.png",
+      "sha256": "cf3acdd5c17acc62fa74e7d9e0597e243f49d0ffc160d674a3ed545a6d212bcf"
+    }
+  ],
+  "selectedReview": {
+    "path": "art-experiments/reefstrider-fish/ordinary-damage-progress-v1/reefstrider-ordinary-root-selected-review.json",
+    "sha256": "3fade3d18a0e677f9cdf13d9c6bd333550a3824fab4c6318b5bf2858e4238647"
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "nativeEnemy": "scourgeG",
+  "nativeRole": "Fergus scourge; synthetic cloned-row diagnostic",
+  "rendererId": 121222,
+  "rendererPath": "enScourgeLeprechaun",
+  "controllerId": 5934,
+  "controllerName": "LeprechaunController",
+  "boneCount": 36,
+  "runtimeKey": "ftkmf_modeltest_probe_scourgeg",
+  "session": "62ffa7254a5348b8b2107b86809aebbe",
+  "status": "stopped",
+  "error": "Target no longer alive before next action",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "b9fc9374607ba550937aa872d6538e960c49cc929a409dc7b1b1e72e8e5f0272",
+      "bytes": 303104
+    }
+  },
+  "catalogSha256": "ceebafb92fba85199b087e20e74b76b4cca3c49d6a3322536ccb248c950b68ae",
+  "assetHashes": {
+    "probe_121222.glb": "d73e567db65806f1f0442740d8f506d7e1de39c543b841092e0113e113f38706",
+    "probe_palette.png": "5088ed5fcedf49d8c71546e03537c4cb6de4af26efcd026d04693a5b591ae1d1"
+  },
+  "case": {
+    "source": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-73363834413240e0821e087fd3f583c5/case-result.json",
+      "sha256": "2010a318f0a063293d3663c64e4f6b0ffd19c30136c654ef512f1941296b800f"
+    },
+    "archive": {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/case-result.json.gz",
+      "sha256": "bbd174739280d86eaa4a667e01aa0b79bfa06a8e43f479a7d799557d103cbbae"
+    }
+  },
+  "capture": {
+    "source": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/0623259fbd5749c89e24d41c02bdc5e8.json",
+      "sha256": "21a060f0d2dce9884d2c3d367ec5f6fe9a5ceaa174bc3e9503e54102f81e29da"
+    },
+    "archive": {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass.json.gz",
+      "sha256": "c01b650a429f2c49ef44f2cbd7364db7fd0f76b284bf9a85a5b14049e99b61fb"
+    }
+  },
+  "captureFrames": 120,
+  "video": {
+    "path": "docs/evidence/fergus-diagnostic-pass-v1/pass.mp4",
+    "sha256": "dddfe983fe1d0eedfcee13dc653b82b59fc7e3ccfa1e0f5ac524b9c6ed0163d8"
+  },
+  "videoMetadata": {
+    "width": 1280,
+    "height": 832,
+    "r_frame_rate": "12/1",
+    "nb_read_frames": "120"
+  },
+  "visualReview": {
+    "path": "docs/evidence/fergus-diagnostic-pass-v1/root-visual-review.json",
+    "sha256": "785b18ca360e1d6c3f187751e856605699a6e7271dff08ba385d0fb948a7b877"
+  },
+  "observedClipRanges": {
+    "cidle_impUnarmed": {
+      "first": 0,
+      "last": 86,
+      "sampledFrames": 68
+    },
+    "attackProf_leprechaun": {
+      "first": 42,
+      "last": 60,
+      "sampledFrames": 19
+    }
+  },
+  "noObservedDeathClip": true,
+  "heroBefore": {
+    "fid": {
+      "turnIndex": 0,
+      "photonId": 1
+    },
+    "name": "Player 1",
+    "classId": 112,
+    "hp": 988,
+    "maxHp": 999,
+    "focus": 4,
+    "maxFocus": 4,
+    "gold": 18,
+    "level": 0,
+    "xp": 9,
+    "actionPoints": 0,
+    "spentFocus": 0,
+    "realmId": 1178465130,
+    "hexBig": null,
+    "hexSmall": null,
+    "pos": {
+      "x": 113.99699401855469,
+      "y": 0,
+      "z": 42.49049377441406
+    }
+  },
+  "heroAfter": {
+    "fid": {
+      "turnIndex": 0,
+      "photonId": 1
+    },
+    "name": "Player 1",
+    "classId": 112,
+    "hp": 968,
+    "maxHp": 999,
+    "focus": 4,
+    "maxFocus": 4,
+    "gold": 0,
+    "level": 0,
+    "xp": 9,
+    "actionPoints": 0,
+    "spentFocus": 0,
+    "realmId": 1178465130,
+    "hexBig": null,
+    "hexSmall": null,
+    "pos": {
+      "x": 113.99699401855469,
+      "y": 0,
+      "z": 42.49049377441406
+    }
+  },
+  "enemyHpBefore": 58,
+  "enemyHpAfter": 0,
+  "classification": "Source-consistent theft then flee/removal; exact flee flags unmeasured, not death.",
+  "actions": [
+    "pass"
+  ],
+  "hitDeathLootActions": 0,
+  "automaticReady": {
+    "ok": true,
+    "level": 0,
+    "room": 3,
+    "buttonCount": 1
+  },
+  "queuedRoom": {
+    "level": 0,
+    "room": 3,
+    "activeDungeonEncounterType": "Enemy",
+    "nextLevelGenerated": true,
+    "isAtLastLevel": false,
+    "isDungeonCleared": false,
+    "definitionLevelCount": 2,
+    "definitionRoomCount": 5,
+    "generatedRoomCount": 6,
+    "queuedSlotValid": true,
+    "withinDefinitionRoomBounds": true,
+    "queuedRoomType": "Trap1",
+    "queuedContext": -1,
+    "queuedObjects": [
+      "trap"
+    ],
+    "slotAllowsEnemySubstitution": false,
+    "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+  },
+  "evidence": [
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/README.md",
+      "sha256": "0d3eb2a8d018e27a4ac433a522417d3dfb45de293176f6c0b96c9a63a1e6beb8"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/after-pass-fixture.json",
+      "sha256": "d71e3a7cc4b2bce2bdc6f14395868ae58e383335d36164c0d6f83e4040a3c13a"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/case-result.json.gz",
+      "sha256": "bbd174739280d86eaa4a667e01aa0b79bfa06a8e43f479a7d799557d103cbbae"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/exercise-claim.json",
+      "sha256": "c185f8f0eec3c0fa7ec3b656f76ffa453d1a38da9651e2c33d7620d3343d4572"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/exercise-journal.jsonl",
+      "sha256": "a45ecd0bd73656005b3fce0afc9a56d49611cb39aab0c721866b32c3beb51417"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/native-metadata.json",
+      "sha256": "9a486e9e85e705d8f130d4e00d122d052cb8ff843c88202f90482df184218eda"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/original-result-pointer.txt",
+      "sha256": "0f76e99cd14c245a0c9bec38643ccd86a9d9df08320b6e7a6e0cc179e245402d"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0000.png",
+      "sha256": "14167e2d5048c0b733142523747d3af3f52af0f249066374a5da075cc49e4eb7"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0040.png",
+      "sha256": "cf3330e5204ae24407fad2b054e0cbc92f5b7f2236e5b9eaf4e77d984bbd9d47"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0080.png",
+      "sha256": "e8bd1e4b1727e800658e61b77ef550a02539f3bb5d5f1b51e465c867fb3fec96"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-0119.png",
+      "sha256": "28dd6283e212c5fccdadbf5936cfa4130ce614bfbc61cee7d1959bed2e2b392c"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-journal.jsonl",
+      "sha256": "935800df41758a01f5a1ba8e9dee1949fce20edbd17e83b5980a3e909692347e"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass-result.json",
+      "sha256": "37a4a2a87761cb741e7d40e1a75587bb1dbeee3adfab39f44c44d38ceef29f54"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass.json.gz",
+      "sha256": "c01b650a429f2c49ef44f2cbd7364db7fd0f76b284bf9a85a5b14049e99b61fb"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/pass.mp4",
+      "sha256": "dddfe983fe1d0eedfcee13dc653b82b59fc7e3ccfa1e0f5ac524b9c6ed0163d8"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/root-visual-review.json",
+      "sha256": "785b18ca360e1d6c3f187751e856605699a6e7271dff08ba385d0fb948a7b877"
+    },
+    {
+      "path": "docs/evidence/fergus-diagnostic-pass-v1/source-findings.json",
+      "sha256": "8f6cbdc49cd7cae5fa6bcbdf34511658d2e4eb7a077f95851da5c73cc55bd842"
+    }
+  ],
+  "limits": [
+    "Pass-only calibration. No hit/death/loot action performed.",
+    "m_DidFlee not captured; theft/flee inference is source-consistent, not direct flag proof.",
+    "No global native Fergus haunt or finished creature acceptance."
+  ]
+}

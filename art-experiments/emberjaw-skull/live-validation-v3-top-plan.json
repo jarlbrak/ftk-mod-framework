@@ -1,0 +1,89 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/emberjaw-skull/live-validation-v3-top",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-ad6e5f6d399f41d08421c2ecbe1b6b1d/case-result.json",
+  "visualReview": "scratch/model-route-8f027145e71c9525-directenemy-root-review.json",
+  "assetFiles": [
+    "art-experiments/emberjaw-skull/emberjaw_basecolor.png",
+    "art-experiments/emberjaw-skull/emberjaw_bottom.glb",
+    "art-experiments/emberjaw-skull/emberjaw_top.glb"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/emberjaw-skull/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-8f027145e71c9525-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-e7a35bd2f23c449983f9f6bb248ee34e/result.json",
+      "pinAs": "stageBindingResult"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "ChaosSkullTop",
+        "mesh": "ftkmf_glb_emberjaw_top.glb",
+        "boneSignature": "ceefd5e5f8af79aea68956212570ab8131db6694a32ce054b4b47e8ef543f30b"
+      }
+    },
+    "attack": {
+      "label": "attack",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "ChaosSkullTop",
+        "mesh": "ftkmf_glb_emberjaw_top.glb",
+        "boneSignature": "ceefd5e5f8af79aea68956212570ab8131db6694a32ce054b4b47e8ef543f30b"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "ChaosSkullTop",
+        "mesh": "ftkmf_glb_emberjaw_top.glb",
+        "boneSignature": "ceefd5e5f8af79aea68956212570ab8131db6694a32ce054b4b47e8ef543f30b"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V3-top",
+    "displayName": "Emberjaw",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "skullA",
+    "nativeChassis": "skullA",
+    "rendererPaths": [
+      "ChaosSkullTop"
+    ],
+    "sourceRendererIds": [
+      121577
+    ],
+    "binding": {
+      "rendererPath": "ChaosSkullTop",
+      "mesh": "ftkmf_glb_emberjaw_top.glb",
+      "boneSignature": "ceefd5e5f8af79aea68956212570ab8131db6694a32ce054b4b47e8ef543f30b"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact native skullA / ChaosSkullTop / renderer 121577 source assignment only; ChaosSkullBottom is a separate topology route and is not credited by this record.",
+      "The ordinary no-focus hit reduced health from 69 to 61; death used the explicit KillSingle fixture and is not ordinary lethal-damage evidence.",
+      "Thirty selected original PNGs were reviewed; the remaining captured frames and generated videos are retained evidence but were not individually reviewed.",
+      "The native Death effect deactivated the skull renderer between selected frames 24 and 26 and replaced it with a particle burst, so this archive accepts a clean destruction handoff without claiming a visible articulated corpse pose.",
+      "Portrait, collision, extended culling, long-session resource lifetime, other native ability variants, and final art-direction approval remain outside this archive."
+    ]
+  }
+}

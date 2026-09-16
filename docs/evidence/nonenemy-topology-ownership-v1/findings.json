@@ -1,0 +1,495 @@
+{
+  "version": 1,
+  "status": "resolved_ownership_routes_not_acceptance",
+  "scope": "Ownership classification for candidate topology groups that have no direct serialized FTK_enemyCombat renderer row. It separates ResourceManager-prefab overrides, native player skinset avatars, unbound player_monk resources, and the empty Mayor placeholder. It does not make a live, visual, motion, gameplay, or all-variant acceptance claim.",
+  "sourceAssets": {
+    "resourcesAssetsSha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117",
+    "assemblyCSharpSha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "sharedassets1Sha256": "e38abff2efd7ca8ef8ede4b92754d6b3a06c6498a774ee55d0d1ddbffba4750f"
+  },
+  "inputs": {
+    "docs/model-skeleton-candidates.json": {
+      "path": "docs/model-skeleton-candidates.json",
+      "sha256": "32c7b6bbbd125793c319379e1c3f2953929930f37b3f538c58b841e52a48fcb4"
+    },
+    "scratch/enemy-rig-mapping-reproducible.json": {
+      "path": "scratch/enemy-rig-mapping-reproducible.json",
+      "sha256": "2a0178d295b750c73a076a7ef3b4cfc12c7f0304ce9452747342c5624e630e52"
+    },
+    "scratch/rig-candidate-classification.json": {
+      "path": "scratch/rig-candidate-classification.json",
+      "sha256": "19efc5fd06ede8544a13fcefe1ee3a960ed9fddcc6decb295b586281cd2b7234"
+    },
+    "scratch/unresolved-resource-paths.json": {
+      "path": "scratch/unresolved-resource-paths.json",
+      "sha256": "a0df4b303de99f9fbb0a5cd3e92f8473d77d831c01826e5bd11b3d798f73e10f"
+    },
+    "scratch/resource-enemy-base-preflight.json": {
+      "path": "scratch/resource-enemy-base-preflight.json",
+      "sha256": "9bd8792896468be5e771e4857b0262c7e4ee9cb664d69ba2c444698ba7441296"
+    },
+    "docs/evidence/player-mayor-empty-renderer-source-v1/findings.json": {
+      "path": "docs/evidence/player-mayor-empty-renderer-source-v1/findings.json",
+      "sha256": "17ae3f7fcb11dda40544a063e9295ef53602f1ff864084c50698a31d83ed74c2"
+    },
+    "docs/model-runtime-validation.json": {
+      "path": "docs/model-runtime-validation.json",
+      "sha256": "4acafc7c0058c423dbe72dda1f414a2068a2dea998bbd144ab8c938bf07269fb"
+    },
+    "art-experiments/wildbloom-herbalist/runtime-profile.json": {
+      "path": "art-experiments/wildbloom-herbalist/runtime-profile.json",
+      "sha256": "d754c85c0f03cd1b11e2b70f8da9d6d13c63b85b86ea4bc368ed53e6a5027a80"
+    },
+    "art-experiments/wildbloom-herbalist/manifest.json": {
+      "path": "art-experiments/wildbloom-herbalist/manifest.json",
+      "sha256": "85921cc11a2ee443d8664234a8583137e522302e5a1fbe5d30d219690be194b3"
+    },
+    "art-experiments/tideglass-fishsmith/runtime-profile.json": {
+      "path": "art-experiments/tideglass-fishsmith/runtime-profile.json",
+      "sha256": "f687ec7b1acbb4b3d14d394927ceb322057597fa35cb4b9e10d0064b85475c36"
+    },
+    "art-experiments/tideglass-fishsmith/manifest.json": {
+      "path": "art-experiments/tideglass-fishsmith/manifest.json",
+      "sha256": "092e4f002e25fee2afc2b880b9ed2aea0da7eb18d34b97321ef5d385b28a3d95"
+    },
+    "art-experiments/tideglass-fishsmith/live-validation-v1/validation.json": {
+      "path": "art-experiments/tideglass-fishsmith/live-validation-v1/validation.json",
+      "sha256": "3700d4eef9013b9a229aefb584640a6215dc77cfd0f9a29a3dd0addc393c27ee"
+    },
+    "art-experiments/tideglass-fishsmith/live-validation-v1/integrity.json": {
+      "path": "art-experiments/tideglass-fishsmith/live-validation-v1/integrity.json",
+      "sha256": "233aea0003ae550ea2db321506dc9be0c3543e4a0c4f3a55093e319690b74e83"
+    }
+  },
+  "classifications": [
+    {
+      "topologyGroup": "6a28ac3cf4523c24",
+      "category": "resource_prefab_variant",
+      "status": "resolved_resource_prefab_not_native_enemy_row_controller_incompatible",
+      "summary": "Resources enkrakenhead is a five-bone enKrakenHead prefab route, distinct from the seven-bone direct krakenHead enemy row.",
+      "sourceRendererIds": [
+        121260
+      ],
+      "resource": {
+        "loadPath": "enkrakenhead",
+        "gameObjectId": 8268,
+        "celId": 135962,
+        "rendererId": 121260,
+        "rendererPath": "krakenHead",
+        "controllerId": 5973,
+        "controllerName": "krakenHeadController"
+      },
+      "directEnemyContrast": {
+        "baseEnemy": "krakenHead",
+        "celId": 136951,
+        "prefab": "enKraken",
+        "rendererId": 121035,
+        "rendererPath": "kraken2",
+        "topologyGroup": "e45711bff451ca73",
+        "controllerId": 5973
+      },
+      "adapterContract": {
+        "path": "docs/evidence/kraken-production-adapter-design-v1/contract.json",
+        "sha256": "725d1732cb8cf538f91f92a3867087b8ed78ef4c9e5589e9b9bbe48cc2f1af87",
+        "status": "implementation_complete_validation_pending"
+      },
+      "remainingChecks": [
+        "Retain raw inventory and the source-specific incompatibility preflight.",
+        "Do not borrow direct krakenHead evidence or classify this resource override as a native enemy-row pair.",
+        "Complete root appearance, continuous-motion, camera, culling, portrait, progression, endpoint-composition, and canonical route archive review."
+      ]
+    },
+    {
+      "topologyGroup": "4082b6c4e777f922",
+      "category": "player_avatar_plus_unbound_resource",
+      "status": "resolved_player_skinset_avatars_plus_unbound_player_monk_resource",
+      "summary": "Forty source placements belong to FTK_skinset avatar prefabs; two Player_Monk hair renderers are a ResourceManager-only player_monk hierarchy without a skinset route.",
+      "sourceRendererIds": [
+        120955,
+        120982,
+        121054,
+        121057,
+        121058,
+        121063,
+        121066,
+        121068,
+        121083,
+        121088,
+        121111,
+        121115,
+        121116,
+        121118,
+        121157,
+        121159,
+        121170,
+        121178,
+        121198,
+        121329,
+        121335,
+        121347,
+        121368,
+        121407,
+        121456,
+        121461,
+        121465,
+        121485,
+        121489,
+        121490,
+        121527,
+        121532,
+        121560,
+        121587,
+        121592,
+        121605,
+        121610,
+        121623,
+        121646,
+        121668,
+        121681,
+        121682
+      ],
+      "skinsetRendererIds": [
+        120955,
+        121054,
+        121057,
+        121058,
+        121063,
+        121066,
+        121068,
+        121083,
+        121088,
+        121111,
+        121116,
+        121118,
+        121157,
+        121159,
+        121170,
+        121178,
+        121198,
+        121329,
+        121335,
+        121347,
+        121368,
+        121407,
+        121456,
+        121461,
+        121465,
+        121485,
+        121489,
+        121490,
+        121527,
+        121532,
+        121560,
+        121587,
+        121592,
+        121605,
+        121610,
+        121623,
+        121646,
+        121668,
+        121681,
+        121682
+      ],
+      "unboundResourceRenderers": [
+        {
+          "loadPath": "player_monk",
+          "gameObjectId": 13270,
+          "celId": 134990,
+          "rendererIds": [
+            120982,
+            121115
+          ]
+        }
+      ],
+      "profileKeys": [
+        "ftkmf_modeltest_player_hearthveil_blacksmith_female"
+      ],
+      "rendererPaths": [
+        "hairTop",
+        "hairBottom"
+      ],
+      "remainingChecks": [
+        "The exact blacksmith_Female six-bone hair route has a canonical representative. Other supported skinsets remain separate source contracts.",
+        "Treat player_monk as a separate unsupported resource classification; it is not a native skinset or enemy route."
+      ],
+      "liveEvidence": [
+        {
+          "name": "Hearthveil Blacksmith canonical player route",
+          "status": "canonical_native_player_route_reviewed",
+          "archive": {
+            "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/validation.json",
+            "sha256": "4dabfcba0190c1d738bd349be70589e6d281e7713f2eb3c85d70e152bcacdb0d"
+          },
+          "integrity": {
+            "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/integrity.json",
+            "sha256": "27dae5dccbbf17702363d5017ae45a0d07125b1eec9c65c333b3601a7a1d0c97"
+          },
+          "scope": "Exact blacksmith_Female hairBottom six-bone topology contract with preview idle, ordinary combat attack and hit, strict Ready progression, and explicit preview death motion fixture."
+        }
+      ]
+    },
+    {
+      "topologyGroup": "45c7a9b9fb730195",
+      "category": "player_avatar",
+      "status": "resolved_player_skinset_avatars_not_enemy_rows",
+      "summary": "Two seven-bone hair renderers are native Player_Herbalist and Player_FishPerson skinset-avatar members, never enemy rows. Wildbloom Herbalist now has a canonical native player route; Tideglass Fishsmith remains a separate exact Party Select preview route. Evidence does not transfer between them.",
+      "sourceRendererIds": [
+        121003,
+        121521
+      ],
+      "skinsetOwners": [
+        {
+          "celId": 137648,
+          "rendererId": 121003,
+          "skinsets": [
+            "herbalist_Female"
+          ]
+        },
+        {
+          "celId": 139636,
+          "rendererId": 121521,
+          "skinsets": [
+            "astronomer_Fish",
+            "blacksmith_Fish",
+            "busker_Fish",
+            "gladiator_Fish",
+            "herbalist_Fish",
+            "hobo_Fish",
+            "hunter_Fish",
+            "minstrel_Fish",
+            "monk_Fish",
+            "scholar_Fish",
+            "trapper_Fish",
+            "treasureHunter_Fish",
+            "woodcutter_Fish"
+          ]
+        }
+      ],
+      "profileKeys": [
+        "ftkmf_modeltest_player_wildbloom_herbalist_female",
+        "ftkmf_modeltest_player_tideglass_fishsmith"
+      ],
+      "rendererPaths": [
+        "hairBottom"
+      ],
+      "remainingChecks": [],
+      "liveEvidence": [
+        {
+          "name": "Wildbloom Herbalist canonical player route",
+          "status": "canonical_native_player_route_reviewed",
+          "archive": {
+            "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/validation.json",
+            "sha256": "af389c98ce05b646927bb2c702a3c4281cf39a53ace454aecdcb130ae98670a7"
+          },
+          "integrity": {
+            "path": "art-experiments/wildbloom-herbalist/live-validation-v2-canonical/integrity.json",
+            "sha256": "090b896cf098354eb33c72f054b30fd0d3846967b5bd9ef6c764d38bebf582d4"
+          },
+          "scope": "Exact herbalist_Female body, upper-hair, and seven-bone lower-hair route through native Party Select, overworld, ordinary combat, progression, and one combat-avatar rebuild."
+        },
+        {
+          "name": "Wildbloom Herbalist",
+          "status": "native_character_creation_preview_and_idle_observed",
+          "archive": {
+            "path": "art-experiments/wildbloom-herbalist/live-validation-v1/validation.json",
+            "sha256": "edbded84fade96f5928f922539a5fac53a5991401c23c49337fac95b3795614b"
+          },
+          "integrity": {
+            "path": "art-experiments/wildbloom-herbalist/live-validation-v1/integrity.json",
+            "sha256": "aa3a96ff3fb884e9c38cc1911ca76d900323f8486edb93d9ae64301faa986774"
+          },
+          "scope": "Exact herbalist_Female Party Select preview and fixed-step body idle only."
+        },
+        {
+          "name": "Tideglass Fishsmith",
+          "status": "native_character_creation_preview_and_idle_observed_art_revision_pending",
+          "archive": {
+            "path": "art-experiments/tideglass-fishsmith/live-validation-v1/validation.json",
+            "sha256": "3700d4eef9013b9a229aefb584640a6215dc77cfd0f9a29a3dd0addc393c27ee"
+          },
+          "integrity": {
+            "path": "art-experiments/tideglass-fishsmith/live-validation-v1/integrity.json",
+            "sha256": "233aea0003ae550ea2db321506dc9be0c3543e4a0c4f3a55093e319690b74e83"
+          },
+          "scope": "Exact blacksmith_Fish Party Select preview and fixed-step playerFIsh idle only; body and hairBottom were visible while hairTop was bound but inactive."
+        }
+      ],
+      "preparedOriginalProfiles": [
+        {
+          "name": "Wildbloom Herbalist",
+          "status": "native_preview_and_idle_observed_limited",
+          "profile": {
+            "path": "art-experiments/wildbloom-herbalist/runtime-profile.json",
+            "sha256": "d754c85c0f03cd1b11e2b70f8da9d6d13c63b85b86ea4bc368ed53e6a5027a80"
+          },
+          "manifest": {
+            "path": "art-experiments/wildbloom-herbalist/manifest.json",
+            "sha256": "85921cc11a2ee443d8664234a8583137e522302e5a1fbe5d30d219690be194b3"
+          }
+        },
+        {
+          "name": "Tideglass Fishsmith",
+          "status": "native_preview_and_idle_observed_art_revision_pending",
+          "profile": {
+            "path": "art-experiments/tideglass-fishsmith/runtime-profile.json",
+            "sha256": "f687ec7b1acbb4b3d14d394927ceb322057597fa35cb4b9e10d0064b85475c36"
+          },
+          "manifest": {
+            "path": "art-experiments/tideglass-fishsmith/manifest.json",
+            "sha256": "092e4f002e25fee2afc2b880b9ed2aea0da7eb18d34b97321ef5d385b28a3d95"
+          }
+        }
+      ]
+    },
+    {
+      "topologyGroup": "85c742f628ea6d37",
+      "category": "player_avatar_plus_unbound_resource",
+      "status": "resolved_player_skinset_avatars_plus_unbound_player_monk_resource",
+      "summary": "Seventeen source placements belong to FTK_skinset avatar prefabs; Player_Monk body 120989 is a ResourceManager-only player_monk hierarchy without a skinset route.",
+      "sourceRendererIds": [
+        120985,
+        120989,
+        121067,
+        121071,
+        121140,
+        121190,
+        121202,
+        121247,
+        121276,
+        121378,
+        121428,
+        121435,
+        121457,
+        121504,
+        121528,
+        121558,
+        121636,
+        121687
+      ],
+      "skinsetRendererIds": [
+        120985,
+        121067,
+        121071,
+        121140,
+        121190,
+        121202,
+        121247,
+        121276,
+        121378,
+        121428,
+        121435,
+        121457,
+        121504,
+        121528,
+        121558,
+        121636,
+        121687
+      ],
+      "unboundResourceRenderers": [
+        {
+          "loadPath": "player_monk",
+          "gameObjectId": 13270,
+          "celId": 134990,
+          "rendererIds": [
+            120989
+          ]
+        }
+      ],
+      "profileKeys": [
+        "ftkmf_modeltest_player_hearthveil_blacksmith_female"
+      ],
+      "rendererPaths": [
+        "playerBlacksmith"
+      ],
+      "remainingChecks": [
+        "The exact blacksmith_Female body route has a canonical representative. Other supported body layouts remain separate source contracts.",
+        "Treat player_monk as a separate unsupported resource classification; it is not a native skinset or enemy route."
+      ],
+      "liveEvidence": [
+        {
+          "name": "Hearthveil Blacksmith canonical player route",
+          "status": "canonical_native_player_route_reviewed",
+          "archive": {
+            "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/validation.json",
+            "sha256": "4dabfcba0190c1d738bd349be70589e6d281e7713f2eb3c85d70e152bcacdb0d"
+          },
+          "integrity": {
+            "path": "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical/integrity.json",
+            "sha256": "27dae5dccbbf17702363d5017ae45a0d07125b1eec9c65c333b3601a7a1d0c97"
+          },
+          "scope": "Exact blacksmith_Female playerBlacksmith 24-bone topology contract with preview idle, ordinary combat attack and hit, strict Ready progression, and explicit preview death motion fixture."
+        }
+      ]
+    },
+    {
+      "topologyGroup": "94dbc18f21284ec2",
+      "category": "unsupported_empty",
+      "status": "unsupported_empty_renderer_no_strict_swap_profile",
+      "summary": "Resources player_mayor has a 34-bone renderer reference but no mesh, bind pose, material, native skinset, or current strict replacement path.",
+      "sourceRendererIds": [
+        121018
+      ],
+      "resource": {
+        "loadPath": "player_mayor",
+        "gameObjectId": 10680,
+        "celId": 134799,
+        "rendererId": 121018
+      },
+      "evidence": "docs/evidence/player-mayor-empty-renderer-source-v1/findings.json",
+      "remainingChecks": [
+        "Retain raw topology inventory but exclude this empty renderer from usable strict-swap profiles.",
+        "Supporting it would require a reviewed custom avatar/skinset construction feature and an authored binding baseline; do not borrow another 34-bone rig."
+      ]
+    },
+    {
+      "topologyGroup": "7313dc39dab041dd",
+      "category": "resource_prefab_variant",
+      "status": "resolved_resource_prefab_not_native_enemy_row_separate_diagnostic_evidence",
+      "summary": "Resources enbaseysnake is a 44-bone enBaseySnake override, distinct from the 46-bone direct snakeJungleA enemy prefab.",
+      "sourceRendererIds": [
+        121488
+      ],
+      "resource": {
+        "loadPath": "enbaseysnake",
+        "gameObjectId": 47960,
+        "celId": 139865,
+        "rendererId": 121488,
+        "rendererPath": "enSnake_Basey",
+        "controllerId": 6002,
+        "controllerName": "snakeController"
+      },
+      "directEnemyContrast": {
+        "baseEnemy": "snakeJungleA",
+        "celId": 139855,
+        "prefab": "enSnakeJungleA",
+        "rendererId": 121567,
+        "rendererPath": "enJungleSnakeA",
+        "topologyGroup": "80d61d495b6a93be"
+      },
+      "separateDiagnosticIndexPointer": "/calibration_probes/8",
+      "remainingChecks": [
+        "Keep the existing resource-prefab diagnostic evidence with its exact scope.",
+        "Do not count it as direct snakeJungleA enemy coverage or transfer it to the 46-bone direct topology."
+      ]
+    }
+  ],
+  "limits": [
+    "The classification is scoped to this pinned native build.",
+    "A ResourceManager path proves a loadable resource, not native combat use or finished-model compatibility.",
+    "A player skinset route remains a separate player validation surface per class/skinset/apparel/controller.",
+    "Mayor historical obsolescence or global nonuse is not established."
+  ],
+  "runtimeIndexRevalidation": {
+    "previousSha256": "2ea94975d7128b79997295e343fd8fe44761e44bc3b90778d7ebcb983ede78e7",
+    "currentSha256": "fd1713a740b3d394cf220e2302f1dc9dbe0533f3a576fa696ee696ef3edca2ed",
+    "scope": "The indexed Mirewarden trollCaveA / enTroll01 / renderer 121153 record and Gloamcap impA / resource prefab enbaseyimp / enBaseyImp / renderer 121117 record resolve outside these six non-enemy ownership classifications and supply separate canonical direct-enemy and resource-prefab routes for topology db2a524a5bc700ea. Neither record transfers credit to the other route or to sibling sources. The indexed Verdigrin mimicA / mimic01 / renderer 121192, Thistlewick scourgeG / enScourgeLeprechaun / renderer 121222, Duskquill crowC / enCrow / renderer 120964, all four Bronzewake bossGladiator parts, Cinderwing batA / enBat01, Tideglass crabB / enCrabWizard, Vesper Eye beholderA multipart, Emberglass beeA / Monster Bee, Mossglass cubeA / enJellyCube, Reefstrider fishA01 / enFishA, Basilight cockatriceC / enChicken, Copperveil spiderB / enSpiderB, Saffronspine pufferA / enBlowFishA, Lunacrest clamA / enClam, Sunspire rocA / enRoc01, Belladusk plantE / enJungleNibbler_A, Bronzehollow deathknightA / deathKnight, and Rustpetal plantD / enJungleNibbler_C direct-enemy records remain outside these classifications. Existing enbaseysnake evidence remains the separately classified resource-prefab route; source renderer IDs, player skinset ownership, and the unsupported empty Mayor placeholder were rechecked unchanged.",
+    "checkedClassifications": [
+      "6a28ac3cf4523c24",
+      "4082b6c4e777f922",
+      "45c7a9b9fb730195",
+      "85c742f628ea6d37",
+      "94dbc18f21284ec2",
+      "7313dc39dab041dd"
+    ]
+  }
+}

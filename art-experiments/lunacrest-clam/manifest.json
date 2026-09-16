@@ -1,0 +1,154 @@
+{
+  "name": "Lunacrest Clam",
+  "native_chassis": "clamA",
+  "reference_renderer": 121306,
+  "renderer_path": "enClam",
+  "native_surface_copied": false,
+  "art_status": "Original surface model, studio approved; authored live acceptance pending",
+  "native_forward": "+UnityZ opening, native upper shell upright at rear Z~-1.016; tongue rises Y in bind pose",
+  "rig_boundary": "Exact7-joint palette/IBMs. LowerbowlRoot_M, uppershellClamShell_Joint, mantle/pearlTongue1-3. Minor-influence native joint4/joint6 remain in palette but unweighted by this original surface. Independent overlapping hinge surfaces; no cross-part bridge.",
+  "remaining": [
+    "Studio review",
+    "Exact authored assignment",
+    "Native shell/tongue attacks/hit/death/material/culling/cleanup"
+  ],
+  "parts": [
+    {
+      "name": "lunacrest",
+      "vertices": 4080,
+      "triangles": 1360,
+      "palette_joints": 7,
+      "max_bind_rest_error": 0.0,
+      "blender_reopen_max_bind_rest_error": 0.0,
+      "normal_agreement": 1.0,
+      "bind_bounds_min": [
+        -0.9300000071525574,
+        0.07500000298023224,
+        -1.404486894607544
+      ],
+      "bind_bounds_max": [
+        0.9300000071525574,
+        2.4069600105285645,
+        0.6499999761581421
+      ],
+      "blender_roundtrip_glb_sha256": "025e367e64a76b7ab41fd6c32a89e2ebe40fbd391a55e3cacca35b78ee2b45bb"
+    }
+  ],
+  "references": [
+    {
+      "renderer_id": 121306,
+      "local_reference_path": "scratch/skeleton-audit/121306/reference.npz",
+      "sha256": "ea7a2ef2da0e37614ba9d28271eb450769d318812bac457b838e8295357a9f6c"
+    }
+  ],
+  "checks": {
+    "independent_export": "pass for the part",
+    "saved_blender_reopen_export": "pass for the part",
+    "native_bind_bounds": "the original surface contained in corresponding native rest surface bounds; not animated-envelope proof",
+    "studio_review": "Corrected hinge side and native-pose study reviewed by parent; approved for live original test",
+    "live_binding": "pending",
+    "live_animation": "pending",
+    "live_material_and_culling": "pending"
+  },
+  "assets": {
+    "README.md": {
+      "sha256": "e2763d02c8dc59a305b4bae82d225aef4ec00d44534e9fe49cb015f6773a429e",
+      "bytes": 3180
+    },
+    "audit_native_poses.py": {
+      "sha256": "8ea95118084cee600e9c62839abb16b6782de963cb61e20c1e0c632a4eb18e1d",
+      "bytes": 2565
+    },
+    "build_blender.py": {
+      "sha256": "6f0d4be87744bba15a5a52be12f031df5bef00cd82fc89893077cb6237ee34f3",
+      "bytes": 5387
+    },
+    "build_geometry.py": {
+      "sha256": "7c5af3d9975934e00fd1a69b4c4fe3e931aafb95084a3bd7911155d77d82b6ad",
+      "bytes": 9032
+    },
+    "finalize_manifest.py": {
+      "sha256": "174f7e7c0740ed56403b925010bd7dd6505c7a8727ee492725a93feeece2a1d9",
+      "bytes": 2415
+    },
+    "hero.png": {
+      "sha256": "136385734505b5428b4479ded68f36e48c07be17fb2d7987523894e1ecac9247",
+      "bytes": 1065546
+    },
+    "inspect_death_source.py": {
+      "sha256": "8d18308047e4a9eff8f6a24b11954b70f66849fe6cb0c430600c08abd491ecb7",
+      "bytes": 2014
+    },
+    "inspect_materials.py": {
+      "sha256": "e48f0e19dea7e33afa28e529208086a87153b446eef37a937f4c2eaccb80826a",
+      "bytes": 1214
+    },
+    "lunacrest-studio.blend": {
+      "sha256": "16fad63aaf11367f3c2c2da9e5aa0fdf913d62c8633aba3fab06ed0e0ca15109",
+      "bytes": 154289
+    },
+    "lunacrest.blend": {
+      "sha256": "4d82f80a9382def26e2e37cd3ca2c17a796a10c6e99e0c34eb4f71f90e9e1e55",
+      "bytes": 152161
+    },
+    "lunacrest.glb": {
+      "sha256": "87dac6fd6f2db497db0f3b5e188d9026fd9889c27a0cf8cc3e06bd3d88f557a3",
+      "bytes": 238732
+    },
+    "lunacrest.pieces.json": {
+      "sha256": "044abfde332121a88a6e8ba683b4c862d2a86f89ced117c13a05a6c9f2688f23",
+      "bytes": 1226
+    },
+    "lunacrest.source.json": {
+      "sha256": "e21516120d0d774f66d4bcd287259d1ad24970b953a851d9542f0de5d00361fd",
+      "bytes": 668570
+    },
+    "lunacrest.validation.json": {
+      "sha256": "c6298726090397d1beb4bb1cfa4f55d5358d9acfffb496f2251744d0786b2a85",
+      "bytes": 767
+    },
+    "lunacrest_basecolor.png": {
+      "sha256": "172b6ca47d3a62d40ebaed71b62dac09968623199ef3e2cf85aef20843298080",
+      "bytes": 267
+    },
+    "native-death-source-metadata.json": {
+      "sha256": "14343ad0b2344ba7c0a9126976281f1370f2b405b45f610831b711e553e3eb4a",
+      "bytes": 9093
+    },
+    "native-material-metadata.json": {
+      "sha256": "3f0b5a1dc2ed2adb5cc364555ece3283066f666d10a7244f0c7f2f55244ffdf9",
+      "bytes": 2386
+    },
+    "native-pose-audit.json": {
+      "sha256": "e252e210edb36613a5cea78fec5be5dfceb82277c911f8b340c0ae752ec2a193",
+      "bytes": 795
+    },
+    "native-pose-study.png": {
+      "sha256": "4c20d229112aec34ff4928e5199711fc7927f09b3a72835922cc2fe15469645b",
+      "bytes": 21191
+    },
+    "runtime-profile.json": {
+      "sha256": "0dd4b487e1e10561d8b5b76ddafe9b83d387ed833afbcde3a48a7c5088277b9a",
+      "bytes": 499
+    },
+    "side.png": {
+      "sha256": "5e23b38ca83433d6ae5154a6b49f913083993f9198a48e9ad9bbba0e1a6a623e",
+      "bytes": 1056414
+    }
+  },
+  "native_death_boundary": {
+    "finding": "DeathDirect invokes DeathFallOff and hides the entire enClam object. No replacement corpse part; DeathLight and DeathRevive skip this event and remain untested.",
+    "source_evidence": {
+      "scratch/clam-death-source-findings.md": "85380c35e0c31cd2991a94e616cf0f1244dafccd16d7e5b5d68ae18fa07c22f3",
+      "scratch/clam-death-source.json": "e221a6512b37c577042bb4a824a0c849ead7410626fb4883bf0ea4a579b67c76"
+    }
+  },
+  "live_v1": {
+    "path": "art-experiments/lunacrest-clam/live-validation-v1.json",
+    "sha256": "cf33bdffc861d51de0078a7c2b17bebe1a4a98307af07e78efe470da86a51d86"
+  },
+  "live_v2": {
+    "path": "art-experiments/lunacrest-clam/live-validation-v2.json",
+    "sha256": "90e51d93a1a56f0a377b9a320e9ad42c2bfdefd70f96cf53ed7dc99b44b70b70"
+  }
+}

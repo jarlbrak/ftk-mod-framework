@@ -1,0 +1,37 @@
+{
+  "status": "PROCESS_ABSENCE_VERIFIED_AFTER_SIGTERM",
+  "session": "dffaaf037f494dce9430a2bf6f1351e4",
+  "pid": 75987,
+  "command": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/FTK.app/Contents/MacOS/FTK -screen-width 1280 -screen-height 832 -screen-fullscreen 0 -logFile /Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/player-test.log",
+  "reason": "Preserved terminal setup failure with no combatants; awaiting reviewed replacement helper.",
+  "backup": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/deployment-backups/reefstrider-stopped-20260907-200648",
+  "files": [
+    {
+      "path": "BepInEx/LogOutput.log",
+      "sha256": "846b789435f26f29006620c0281d4fbd1ef0c5d3e7a9f14ca5a1d10785965b5f"
+    },
+    {
+      "path": "player-test.log",
+      "sha256": "eaf57e245cdda643124c62941dbadf8ac3fa7739bbc21921ec92e0ba28a59af0"
+    },
+    {
+      "path": "launch-test.log",
+      "sha256": "9a5d871d9d7afa118c5644f41fdaccb223b32ca1afde7d8d1d08e6f7e6f3883d"
+    },
+    {
+      "path": "model-test-session.json",
+      "sha256": "2389619bde58b2a618d0108af2964a413f39f0833c2ecce010729bb84a40be23"
+    }
+  ],
+  "processObservation": {
+    "command": [
+      "ps",
+      "-p",
+      "75987",
+      "-o",
+      "pid=,command="
+    ],
+    "exitCode": 1,
+    "stdout": ""
+  }
+}

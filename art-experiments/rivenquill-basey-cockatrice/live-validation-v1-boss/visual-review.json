@@ -1,0 +1,336 @@
+{
+  "schema": "ftkmf.root-visual-review.v1",
+  "reviewStatus": "reviewed_resource_enbaseycockatriceboss_binding_motion_gameplay_observed_camera_fit_accepted_limited_art_pending",
+  "session": "9927e419cda1403481d25b8db1a4be04",
+  "scope": "One fresh isolated bossCockatrice / enbaseycockatriceboss / enBaseyCockatrice source pair only.",
+  "binding": {
+    "nativeChassis": "bossCockatrice",
+    "resourcePrefab": "enbaseycockatriceboss",
+    "rendererPath": "enBaseyCockatrice",
+    "sourceRendererId": 121693,
+    "runtimeOwnerInstanceId": 369188,
+    "runtimeRendererInstanceId": -245816,
+    "runtimeCelRootName": "enBaseyCockatriceBoss(Clone)",
+    "rendererKind": "SkinnedMeshRenderer",
+    "mesh": "rivenquill.glb",
+    "runtimeMesh": "ftkmf_glb_rivenquill.glb",
+    "boneSignature": "c591e94b65dd3510b8677818f6c7cdc307a1339e20b36fa7ceb911d0cfbaddef",
+    "observedCelRootLocalScale": [
+      0.8999999761581421,
+      0.8999999761581421,
+      0.8999999761581421
+    ],
+    "catalogSha256": "dc191b0a778cd7d1a07a5641daa4e7cf57d0a6c05c6b361a92a1e2f1fbb2f1af",
+    "material": {
+      "shader": "Standard",
+      "mainTexture": "ftkmf_rivenquill-palette.png",
+      "emissionKeyword": false,
+      "emissionMap": null
+    }
+  },
+  "frames": [
+    {
+      "category": "idle",
+      "action": "pass",
+      "captureId": "e7f12c6eb71840e5b415aecc31c59ebd",
+      "index": 0,
+      "path": "scratch/mirewarden-game/model-test-output/e7f12c6eb71840e5b415aecc31c59ebd/0000.png",
+      "sha256": "62cace6768646902d1ba1bf780169373611e9c11dd11aee73516855b7c93b9be",
+      "observation": "Normal combat-camera idle: complete cobalt, jade, and copper silhouette is readable."
+    },
+    {
+      "category": "idle",
+      "action": "pass",
+      "captureId": "e7f12c6eb71840e5b415aecc31c59ebd",
+      "index": 12,
+      "path": "scratch/mirewarden-game/model-test-output/e7f12c6eb71840e5b415aecc31c59ebd/0012.png",
+      "sha256": "73c146bc7825b82001ac3adb6c0f648ad09a039016994bba3977114436633d55",
+      "observation": "Idle continuation: wings, legs, head, and plume tail remain attached and readable."
+    },
+    {
+      "category": "native-attack",
+      "action": "pass",
+      "captureId": "e7f12c6eb71840e5b415aecc31c59ebd",
+      "index": 36,
+      "path": "scratch/mirewarden-game/model-test-output/e7f12c6eb71840e5b415aecc31c59ebd/0036.png",
+      "sha256": "1ec69316944dced991d082740b68d5c97c2597bbc88f5783c819e944600536c1",
+      "observation": "Native enemy attack traversal: fast motion has normal capture blur, with no detached mesh pieces."
+    },
+    {
+      "category": "native-attack",
+      "action": "pass",
+      "captureId": "e7f12c6eb71840e5b415aecc31c59ebd",
+      "index": 42,
+      "path": "scratch/mirewarden-game/model-test-output/e7f12c6eb71840e5b415aecc31c59ebd/0042.png",
+      "sha256": "b6d01eafd505f24fd7931e4a3324ee465d362b41117138b3227be91ec53870dc",
+      "observation": "Native enemy attack trajectory: articulated body remains coherent through the lunge."
+    },
+    {
+      "category": "native-attack",
+      "action": "pass",
+      "captureId": "e7f12c6eb71840e5b415aecc31c59ebd",
+      "index": 48,
+      "path": "scratch/mirewarden-game/model-test-output/e7f12c6eb71840e5b415aecc31c59ebd/0048.png",
+      "sha256": "6dcb9cb70713ead6cb0a83210ed1e1c97b937febdd667110b57f8d0b114efdef",
+      "observation": "Attack recovery: visible body returns as one coherent bound model."
+    },
+    {
+      "category": "ordinary-hit",
+      "action": "attack",
+      "captureId": "764a7b7f15dc4ee19aafe7cca7f18bd7",
+      "index": 0,
+      "path": "scratch/mirewarden-game/model-test-output/764a7b7f15dc4ee19aafe7cca7f18bd7/0000.png",
+      "sha256": "0a863bdda51a48e261fb01a062a0cb5a91b825f757d9af05e22fa3bd379d2547",
+      "observation": "Pre-hit ordinary combat frame with the exact bound runtime model visible."
+    },
+    {
+      "category": "ordinary-hit",
+      "action": "attack",
+      "captureId": "764a7b7f15dc4ee19aafe7cca7f18bd7",
+      "index": 13,
+      "path": "scratch/mirewarden-game/model-test-output/764a7b7f15dc4ee19aafe7cca7f18bd7/0013.png",
+      "sha256": "49e20fb0447b6482369fd1a87734864f18d3588bfc9c5456531f8a70b8e47066",
+      "observation": "Observed same-target Damaged response after the ordinary no-focus player hit."
+    },
+    {
+      "category": "ordinary-hit",
+      "action": "attack",
+      "captureId": "764a7b7f15dc4ee19aafe7cca7f18bd7",
+      "index": 23,
+      "path": "scratch/mirewarden-game/model-test-output/764a7b7f15dc4ee19aafe7cca7f18bd7/0023.png",
+      "sha256": "ddbedcb1666db8b0cafd7453e4af46f3b0de8d6189be3b43af941290aa167193",
+      "observation": "Damaged trigger sample: hit effect overlays the model, while the body remains coherent."
+    },
+    {
+      "category": "ordinary-hit",
+      "action": "attack",
+      "captureId": "764a7b7f15dc4ee19aafe7cca7f18bd7",
+      "index": 30,
+      "path": "scratch/mirewarden-game/model-test-output/764a7b7f15dc4ee19aafe7cca7f18bd7/0030.png",
+      "sha256": "91a34260ed1b2b3e3db04c0790d0220616b79e36d2f30baebf841879008bc1f6",
+      "observation": "Post-hit continuation: bound form remains visually coherent after HP loss."
+    },
+    {
+      "category": "fixture-death",
+      "action": "kill-fixture",
+      "captureId": "bf9aa4eb6c484dccafbe400ca6a26763",
+      "index": 0,
+      "path": "scratch/mirewarden-game/model-test-output/bf9aa4eb6c484dccafbe400ca6a26763/0000.png",
+      "sha256": "54a996eea07bf2b649323a7c92f228e81cc3ed78532f35041be2e5df72cf933f",
+      "observation": "Pre-fixture-death combat frame with the exact bound runtime model visible."
+    },
+    {
+      "category": "fixture-death",
+      "action": "kill-fixture",
+      "captureId": "bf9aa4eb6c484dccafbe400ca6a26763",
+      "index": 23,
+      "path": "scratch/mirewarden-game/model-test-output/bf9aa4eb6c484dccafbe400ca6a26763/0023.png",
+      "sha256": "01af97b9fad3af3fa54cefb9551967e43230181bef9d15020b839cc97a9f433d",
+      "observation": "Native Death trigger sample from the explicit KillSingle fixture."
+    },
+    {
+      "category": "fixture-death",
+      "action": "kill-fixture",
+      "captureId": "bf9aa4eb6c484dccafbe400ca6a26763",
+      "index": 30,
+      "path": "scratch/mirewarden-game/model-test-output/bf9aa4eb6c484dccafbe400ca6a26763/0030.png",
+      "sha256": "2ad687dc040e31d7cd26925d9ff728734c11c28e91b1568b5bc786cf91e65f93",
+      "observation": "Collapse progression: legs, torso, wings, and tail remain joined."
+    },
+    {
+      "category": "fixture-death",
+      "action": "kill-fixture",
+      "captureId": "bf9aa4eb6c484dccafbe400ca6a26763",
+      "index": 40,
+      "path": "scratch/mirewarden-game/model-test-output/bf9aa4eb6c484dccafbe400ca6a26763/0040.png",
+      "sha256": "5c4923a998395b8f65260d4fcfe43be052e755e9146dfda13ed544a0ad4f87c3",
+      "observation": "Defeated body remains coherent during native cleanup progression."
+    },
+    {
+      "category": "fixture-death",
+      "action": "kill-fixture",
+      "captureId": "bf9aa4eb6c484dccafbe400ca6a26763",
+      "index": 60,
+      "path": "scratch/mirewarden-game/model-test-output/bf9aa4eb6c484dccafbe400ca6a26763/0060.png",
+      "sha256": "b8bd3546ebac8aa2155a60cd8dc039b3afbe9e422af1fcfebeadcc695eae840f",
+      "observation": "Late collapse/cleanup progression before renderer destruction ends the capture."
+    },
+    {
+      "category": "ready-transition",
+      "action": "kill-fixture",
+      "captureId": "bf9aa4eb6c484dccafbe400ca6a26763",
+      "index": 90,
+      "path": "scratch/mirewarden-game/model-test-output/bf9aa4eb6c484dccafbe400ca6a26763/0090.png",
+      "sha256": "9a2c9829c592fbd0e33105738d7e4429067484dfeeebd14734ead8af5ac47e34",
+      "observation": "Post-removal progression frame; the renderer is no longer active and strict Ready follows."
+    }
+  ],
+  "cameraFit": {
+    "accepted": true,
+    "scope": "Selected original 1280x832 normal-combat capture frames across idle, native attack, ordinary hit, and fixture death.",
+    "observation": "The complete bird-dragon silhouette remains readable in the normal combat camera without detached geometry or catastrophic stretching in the reviewed frames."
+  },
+  "materialReview": {
+    "acceptedLimited": true,
+    "scope": "Selected normal-combat capture frames and runtime material metadata only.",
+    "observation": "The reviewed cobalt, jade, and copper palette is readable; runtime metadata records Standard shader, the authored palette as _MainTex, and disabled native emission."
+  },
+  "ordinaryHit": {
+    "action": "attack",
+    "cheat": "None",
+    "focus": false,
+    "beforeHp": 540,
+    "afterHp": 539,
+    "nativeTrigger": "Damaged",
+    "scope": "same-target observed nonlethal native damage"
+  },
+  "ordinaryLethal": false,
+  "explicitKillFixture": {
+    "action": "kill-fixture",
+    "accepted": true,
+    "nativeTrigger": "Death",
+    "captureTermination": "renderer_destroyed_after_91_retained_frames",
+    "scope": "Explicit KillSingle fixture on the native damage path; not ordinary lethal-damage proof."
+  },
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235700,
+        "alive": true,
+        "containerInstanceId": -237436,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237478,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237878,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235700,
+            "celInstanceId": -239304,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -249326,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "9927e419cda1403481d25b8db1a4be04",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "9927e419cda1403481d25b8db1a4be04",
+    "id": "35b5809d8a784ebda0a235e32079d6aa",
+    "frame": 6946,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "limits": [
+    "Selected original frames were reviewed; this is not exhaustive review of every captured frame or ability variant.",
+    "The death capture intentionally ends when native cleanup destroys the renderer after 91 retained frames; it is recorded as an expected partial capture, not a complete 120-frame death capture.",
+    "This evidence does not establish portraits, culling, collision, long-session resource lifetime, every ability variant, normal lethal damage, ragdoll behavior, or final art direction.",
+    "This boss source pair does not transfer to cockatriceC / enbaseycockatricesmall or any direct Cockatrice renderer row."
+  ]
+}

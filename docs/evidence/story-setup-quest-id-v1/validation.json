@@ -1,0 +1,28 @@
+{
+  "status": "guarded_setup_stopped_no_story_submission",
+  "case": "bef8ab8d77f741198681b4ea3115fcd8",
+  "session": "12a1a9c86c66436f9c629e4469fa2f6d",
+  "helperSha256": "12b729d314448462516992b75a5f38e0d59e1128e3a4082f319db3f40513550d",
+  "catalogSha256": "16e623a7e2d026f5b045bc4b8421354aeffba920e085145db35f2ec5992a4567",
+  "nativeObservations": 331,
+  "storySubmissions": 0,
+  "lastStory": {
+    "questId": -1,
+    "messageId": 1,
+    "pageIndex": 0,
+    "pageCount": 3,
+    "phase": "DeliverStartQuestMsgPartClosed",
+    "outsideCombat": true,
+    "outsideDungeon": true,
+    "actionableSurface": null
+  },
+  "stop": {
+    "status": "stopped",
+    "error": "Native story setup did not complete within budget; no action retried",
+    "note": "No automatic retry; inspect game state before another action."
+  },
+  "sourceFinding": "GameLogic._assignQuestID negates definition-backed quest IDs. Native -1 is valid; present object plus exact existing table/reference join must distinguish it from absence.",
+  "requiredFollowup": "Reviewed signed-ID identity correction and fresh live setup; no successful story progression or Duskquill combat claimed.",
+  "journalSha256": "600b3508e46e3a34773d84b33f70ca9c1a6949b7cce48ae7e6a1673d22965513",
+  "gameLogicSourceSha256": "6fec0ed20d02119f1849929ce064503f049243539b97920e68d65672c0459ba0"
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "ftkmf.root-visual-review.v1",
+  "reviewStatus": "reviewed_exact_source_with_scoped_limits",
+  "session": "8e7350b348ba499993a11279be206fb2",
+  "profile": "ftkmf_modeltest_belladusk",
+  "nativeChassis": "plantE",
+  "rendererPath": "enJungleNibbler_A",
+  "binding": {
+    "rendererInstanceId": -245294,
+    "ownerInstanceId": 369188,
+    "mesh": "ftkmf_glb_belladusk.glb",
+    "boneSignature": "d5f27b166e2e9db8c2f9fc8aa2d17742ec00ec6fbec1c951901c1118896d1904",
+    "rootBone": "Root_M",
+    "nativeRootScale": 1.2,
+    "m_DoRagdoll": false
+  },
+  "frames": [
+    {
+      "action": "pass",
+      "index": 12,
+      "clip": "idle",
+      "path": "scratch/mirewarden-game/model-test-output/3371de9b584e4709a17733ab3608980e/0012.png",
+      "sha256": "75934387a1fe879c5aeec6ec29852df606d69e27632995690928b92a1fdb33e8",
+      "observation": "The curved stalk, four root leaves, plum hood, scalloped lip, teeth, and warm throat form one readable pitcher-plant silhouette in settled idle."
+    },
+    {
+      "action": "pass",
+      "index": 50,
+      "clip": "attack1",
+      "path": "scratch/mirewarden-game/model-test-output/3371de9b584e4709a17733ab3608980e/0050.png",
+      "sha256": "9bf6c28e2373bcd2d5d4dbbae9b987b8825f4518b5e35ef0cbe130ea04d15dce",
+      "observation": "The native lunge bends the stalk while the hood, mouth, and root leaves remain visibly connected; the attack flash obscures part of the lower plant."
+    },
+    {
+      "action": "attack",
+      "index": 28,
+      "clip": "hit1",
+      "path": "scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004/0028.png",
+      "sha256": "8e2f75611703db70f2091bb59c9a21283e053ac040abd64231c11a6f99f45189",
+      "observation": "The ordinary 58 to 50 hit is visible during hit1. The pitcher head recoils behind the hero and damage UI while remaining joined to the stalk."
+    },
+    {
+      "action": "attack",
+      "index": 85,
+      "clip": "attack1",
+      "path": "scratch/mirewarden-game/model-test-output/3881e9e1ae1244318d9bfde95bf84004/0085.png",
+      "sha256": "f5da6fe0c77b6403e4bcc77f05222d6e912a99fc5703b09e25c0cdf4d90417ee",
+      "observation": "A later native attack1 pose again keeps the hood, mouth, stalk, and leaf base continuous, with the attack flash covering some lower surfaces."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 40,
+      "clip": "death",
+      "path": "scratch/mirewarden-game/model-test-output/2ecb49d3e5734818be633d31dae0af24/0040.png",
+      "sha256": "702bb6b4d992f556771870cbdd4340cd20221c28b123c3ac1844d766c4c81f5e",
+      "observation": "The explicit fixture shows the authored pitcher bent during native death with the hood, stalk, and leaves still visibly connected."
+    },
+    {
+      "action": "kill-fixture",
+      "index": 60,
+      "clip": "death",
+      "path": "scratch/mirewarden-game/model-test-output/2ecb49d3e5734818be633d31dae0af24/0060.png",
+      "sha256": "a871370464f3d4e4d4d132a9149c9cf3cf7362847a915a64acb49b77f088117f",
+      "observation": "The later death pose places the joined pitcher body low across the floor. This selected view does not establish collision, physics sleeping, or corpse lifetime."
+    }
+  ],
+  "conclusion": "The reviewed exact-source originals show a coherent authored Belladusk Pitcher through settled idle, two native attack moments, ordinary hit response, and animated fixture death.",
+  "limits": [
+    "Six selected originals were reviewed rather than every rendered pose or camera angle.",
+    "Combat UI, the hero, hit flashes, depth effects, and victory progression obscure some surfaces.",
+    "The explicit KillSingle fixture is not ordinary lethal-damage evidence.",
+    "m_DoRagdoll is false across all retained capture frames, so the recorded death is animated rather than a body ragdoll.",
+    "The retained frames do not establish collision, physics sleeping, a settled corpse, precise visible corpse lifetime, portrait behavior, final resource disposal, full culling coverage, or finished art direction.",
+    "This review covers only plantE and enJungleNibbler_A renderer 121530. It does not establish another plant rig."
+  ]
+}

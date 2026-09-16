@@ -1,0 +1,56 @@
+{
+  "name": "Cinderwing",
+  "chassis": "batA",
+  "renderer_path_id": 121104,
+  "cel_relative_renderer_path": "enBat01",
+  "joint_count": 53,
+  "vertices": 6600,
+  "triangles": 2200,
+  "authorship": "Original volumes and solid scalloped membrane geometry; native reference used only locally for rig fitting and weight transfer.",
+  "checks": {
+    "export": "pass",
+    "binding": "observed: exact enBat01 renderer and custom mesh identity",
+    "appearance": "canonical V3 exact-source review accepts 22 original frames with small-scale, hero, UI, effect, loot-overlay and depth-blur limits",
+    "idle": "canonical V3 records complete batFlySlow intervals on the exact renderer",
+    "attack": "canonical V3 records native batAttackProf and attackCrit_bat plus recovery in complete captures",
+    "hit": "canonical V3 ordinary no-focus same-target HP58 to48 with batTakeHit and recovery",
+    "death": "canonical V3 separate KillSingle fixture completes120 frames through animated batDeath with m_DoRagdoll=false and zero rigid bodies; not ordinary lethal or ragdoll evidence",
+    "gameplay": "canonical V3 records one native Collect and strict Ready at level0 room2"
+  },
+  "assets": {
+    "build_model.py": "412f34cf56463b3f9ac6072d37622a423f88773202ec604c8cf17417536db562",
+    "skin_model.py": "929f56ea3199b6d95fdee8282d5753d3203291d98347b99e291906bbcedd20ba",
+    "source_mesh.json": "93c67ee1eae8f9fef980391d7ae3c35662277cd027712d684b39a9d38099b2b0",
+    "cinderwing_rigged.glb": "9c0083c623129d073a69512accb409423c1fa6ab1c830729815bd4954d06deb5",
+    "cinderwing_basecolor.png": "280feb8ae2f83da240e25fb0261b8c9ac0c38456a6a8746e56817d0a74df4040",
+    "README.md": "06bb9fd3624d207f0584a1b07194d63b21e73b587431bb956853bfbc0b8f8fc5"
+  },
+  "live_evidence": "live-validation.json",
+  "live_native_scale": {
+    "path": "art-experiments/cinderwing-bat/live-validation-native-scale.json",
+    "sha256": "a0666dab69d0b26bc6bc62735ba818f199357ed17aaa268db1f531fd8d4e1936"
+  },
+  "live_v2": {
+    "path": "art-experiments/cinderwing-bat/live-validation-v2/validation.json",
+    "status": "fresh_native_scale_single_renderer_complete_hit_and_kill_ready_observed",
+    "session": "b3478c0c658f47c6a3ba82b94b9a6f2a",
+    "ordinary_attack": "HP58 to50 with cheat=None",
+    "kill_fixture": "HP50 to0 via KillSingle; complete120-frame capture",
+    "native_collects": 1,
+    "strict_ready": "level0 room2",
+    "historical_partial_death": "live-validation.json retains the earlier92-frame renderer-destroyed capture"
+  },
+  "live_v3": {
+    "path": "art-experiments/cinderwing-bat/live-validation-v3/validation.json",
+    "sha256": "4ed62c4df792a692393c0f5b20dba5e27642c02db032b950a43c8387ac1d14e9",
+    "bytes": 47601,
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "session": "ea0b19dbfc254df580c87e250e66e6e7",
+    "exact_source": "batA / enBat01 / renderer 121104",
+    "ordinary_attack": "HP58 to48 with no focus",
+    "kill_fixture": "separate KillSingle at HP48; complete120-frame animated batDeath with m_DoRagdoll=false and zero rigid bodies",
+    "native_collects": 1,
+    "strict_ready": "level0 room2",
+    "reviewed_original_pngs": 22
+  }
+}

@@ -1,0 +1,599 @@
+{
+  "status": "native_character_creation_preview_and_idle_observed_art_revision_pending",
+  "scope": "Fresh isolated Party Select evidence for the original three-mesh Tideglass Fishsmith. The game created its own room, map, character-create UI, pedestal, and preview owner through the real Create Game callback. A visible native Party Select selection then chose Tideglass; this archive records that strict preview join and its selected settled body idle capture. It makes no broader player lifecycle, full renderer-visibility, or final-art claim.",
+  "profile": {
+    "key": "ftkmf_modeltest_player_tideglass_fishsmith",
+    "baseClass": "blacksmith",
+    "displayName": "Tideglass Fishsmith",
+    "skinset": "blacksmith_Fish",
+    "defaultSkinType": "Fish",
+    "renderers": [
+      {
+        "rendererPath": "playerFIsh",
+        "glbFile": "tideglass-body.glb",
+        "textureFile": "tideglass-palette.png"
+      },
+      {
+        "rendererPath": "hairTop",
+        "glbFile": "tideglass-hair-top.glb",
+        "textureFile": "tideglass-palette.png"
+      },
+      {
+        "rendererPath": "hairBottom",
+        "glbFile": "tideglass-hair-bottom.glb",
+        "textureFile": "tideglass-palette.png"
+      }
+    ]
+  },
+  "session": "5f5b8369e48441c29f9243c60ac7f264",
+  "identity": {
+    "classId": 115,
+    "skinset": "blacksmith_Fish",
+    "playerCatalogSha256": "915ac5717f740834e52c2f29728cd737ea85de97d52469bd01135882ad7ee905",
+    "ownerInstanceId": -18966,
+    "celInstanceId": -293128
+  },
+  "provenance": {
+    "stage": {
+      "source": "scratch/tideglass-fishsmith-stage-v1/receipt.json",
+      "sha256": "79ec40bb9b565d42a6005c267eadc0cb8d283f179be55b2c52c571aa97d7129f"
+    },
+    "deployment": {
+      "source": "scratch/mirewarden-game/deployment-backups/tideglass-fishsmith-20260912-074324/deployment.json",
+      "sha256": "4b3f79463601562e297565644bc9c4be4ede88e5cdda9cfe1bce50fdf543b910"
+    },
+    "playerRegistration": {
+      "source": "scratch/mirewarden-game/model-test-player-registration.json",
+      "sha256": "a49e5f80197b39d83a24f35ac22462a30d3cfa24b9a34f5729244b78ae6d38ae"
+    },
+    "fishRouteProof": {
+      "source": "scratch/player-fishperson-route.json",
+      "sha256": "15b71e9a6a0b33ce58b6f1b0f198a040cb462dd812983c2a1964066d71cad356"
+    },
+    "gameAssets": {
+      "tideglass-body.glb": "dc701b4939c06c9e101c62a1df75d088ac4f1f1f9788c67c57affc93e6665161",
+      "tideglass-hair-top.glb": "639b3cd6e462b0c61c5c9886698603b11911b447cdab6ccfdafbf236a63def91",
+      "tideglass-hair-bottom.glb": "ed4fc9b3fe5e42fbf361ba9540202d65770efd3828cd27c4b2a52d5710940260",
+      "tideglass-palette.png": "1e70f760d752d9e2c4b304aba75abafedc16df70877013da4056077a63a70b83"
+    }
+  },
+  "nativeCreateInitial": {
+    "status": "native_create_game_reached_actual_character_create",
+    "method": "StartGameFE.GameConfig.OnStartGame",
+    "mapReady": true,
+    "characterCreateRootActive": true,
+    "waitedFrames": 533,
+    "initialPlayerOneClassLabel": "Hearthveil Blacksmith",
+    "initialPlayerOneOwnerInstanceId": -18966,
+    "source": {
+      "source": "scratch/mirewarden-game/model-test-output/a0275ed63f5549f89d23e2e1104f3fb3.json",
+      "sha256": "ab9e5fc5536cae73c7a840b72c048775d4d3edf00a695bc278f05a8f9fe35c34"
+    },
+    "interpretation": "This source proves the real Create Game route created the native Party Select owner. The later strict preview state and visible capture establish Tideglass's actual selection."
+  },
+  "binding": {
+    "ownerKind": "player-preview",
+    "ownerInstanceId": -18966,
+    "celInstanceId": -293128,
+    "rendererPath": "playerFIsh",
+    "mesh": "ftkmf_glb_tideglass-body.glb",
+    "boneSignature": "a1a4221b983f030e292771fbc23bae5e34f687c0864c6bff793ea510816eb584",
+    "state": {
+      "source": "scratch/mirewarden-game/model-test-output/3e26d17cb8cb421cb1f52a7019d4dacd.json",
+      "sha256": "af12e7fdbbfc96092afd998d3034a5c3312b7b655058f700050e4dc52891d25b"
+    },
+    "inventory": {
+      "source": "scratch/mirewarden-game/model-test-output/feb81ddb1e1a48ee80f431e35e7ed221.json",
+      "sha256": "b5c686e29bfa7755c211c45419c331dde5002dd4b07a98141baf5cbacf381039"
+    }
+  },
+  "avatarOwners": {
+    "preview": {
+      "status": "observed_actual_native_player_preview",
+      "observedAvatars": 1,
+      "ownerInstanceId": -18966,
+      "celInstanceId": -293128,
+      "classId": 115,
+      "classLabel": "Tideglass Fishsmith",
+      "nativeMenuMembership": true,
+      "reciprocalPreviewReference": true,
+      "parentIsNativePedestal": true,
+      "leaseId": 4,
+      "leaseReferences": 1,
+      "visibleSkinnedRenderers": 4,
+      "source": {
+        "source": "scratch/mirewarden-game/model-test-output/3e26d17cb8cb421cb1f52a7019d4dacd.json",
+        "sha256": "af12e7fdbbfc96092afd998d3034a5c3312b7b655058f700050e4dc52891d25b"
+      }
+    }
+  },
+  "renderers": [
+    {
+      "celRelativeRendererPath": "hairBottom",
+      "mesh": "ftkmf_glb_tideglass-hair-bottom.glb",
+      "instanceId": -293134,
+      "boneSignature": "9f535310e8440cfa84bcc07943d872eaf25bd11cc05405df3ca7ac8a4e51095d",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "hairTop",
+      "mesh": "ftkmf_glb_tideglass-hair-top.glb",
+      "instanceId": -293140,
+      "boneSignature": "a0ecfddb9f378463f1e47401ada4f6d3832c4dea5367995ae5cce83312d93ada",
+      "active": false,
+      "enabled": true,
+      "isVisible": false
+    },
+    {
+      "celRelativeRendererPath": "playerFIsh",
+      "mesh": "ftkmf_glb_tideglass-body.glb",
+      "instanceId": -293146,
+      "boneSignature": "a1a4221b983f030e292771fbc23bae5e34f687c0864c6bff793ea510816eb584",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "armorBlacksmithF(Clone)",
+      "mesh": "armorBlacksmith",
+      "instanceId": -293628,
+      "boneSignature": "be050b7115d9cb806c7908a58f1b9b7f868fa6e44e1445d1246fbbec49da7c63",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "bootsBlacksmith(Clone)",
+      "mesh": "bootsBlacksmith",
+      "instanceId": -293796,
+      "boneSignature": "ba827c95275d5d0acdd49504e0d471c9cc4315849a2f6d020cf8d14750c45f71",
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    }
+  ],
+  "assembledNativeAccessories": [
+    {
+      "celRelativeRendererPath": "armorBlacksmithF(Clone)",
+      "mesh": "armorBlacksmith",
+      "instanceId": -293628,
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "bootsBlacksmith(Clone)",
+      "mesh": "bootsBlacksmith",
+      "instanceId": -293796,
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "Root_M/BackA_M/BackB_M/Chest_M/Neck_M/Head_M/Hair_M/helmBlacksmith(Clone)",
+      "mesh": "smithHelm",
+      "instanceId": -293806,
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    },
+    {
+      "celRelativeRendererPath": "Root_M/BackA_M/BackB_M/Chest_M/backpackSmith(Clone)",
+      "mesh": "backpack_smith",
+      "instanceId": -293816,
+      "active": true,
+      "enabled": true,
+      "isVisible": true
+    }
+  ],
+  "preliminaryCapture": {
+    "label": "pre-settle-preview-idle",
+    "selectedForIdleReview": false,
+    "status": "completed_24_fixed_steps_not_selected_for_idle_review",
+    "reason": "Layer 0 remained in standarIdle_Extra04 for frames 0 through 22 and entered standardIdle_handsDown only at frame 23; the later settled capture was used for idle review.",
+    "capture": {
+      "source": "scratch/mirewarden-game/model-test-output/fbf82d8eb3f448edbc7c8bc2af66c79e.json",
+      "sha256": "44f68dc6b5c187427f4ba27662b3d751f5c25e4d4fe31cd22440ec0bd4a31049"
+    },
+    "frameCount": 24,
+    "timingMode": "offline-fixed-step-gameplay",
+    "actualGameSeconds": 1.91668701171875,
+    "summary": {
+      "source": "scratch/tideglass-preview-idle-settled-capture-summary.json",
+      "sha256": "09c2236a8c83bf1857438b5c5a86f09b89c2dab72a4f6202467c637e8001670a"
+    }
+  },
+  "captures": [
+    {
+      "label": "native-preview-idle",
+      "complete": true,
+      "termination": "complete_24_fixed_step_frames",
+      "capture": {
+        "source": "scratch/mirewarden-game/model-test-output/5601324818a749a58d1849fec99f9295.json",
+        "sha256": "ba9ebfb59447220cb03a95d53be68d2522bf4889bea78aa45bad6f6127f67b90"
+      },
+      "frameCount": 24,
+      "scope": "player-preview",
+      "rendererPath": "playerFIsh",
+      "mesh": "ftkmf_glb_tideglass-body.glb",
+      "boneSignature": "a1a4221b983f030e292771fbc23bae5e34f687c0864c6bff793ea510816eb584",
+      "state": "standardIdle_handsDown",
+      "clips": [
+        "standardIdle_handsDown"
+      ],
+      "timingMode": "offline-fixed-step-gameplay",
+      "actualGameSeconds": 1.91668701171875,
+      "summary": {
+        "source": "scratch/tideglass-preview-idle-settled-capture-v2-summary.json",
+        "sha256": "9efb293800249d2ae27798f9b41b6e37eef13cff05f5cb72679888479a47fc94"
+      }
+    }
+  ],
+  "selectedFrames": [
+    {
+      "label": "native-preview-idle",
+      "source": "scratch/mirewarden-game/model-test-output/5601324818a749a58d1849fec99f9295/0012.png",
+      "archive": "selected/native-preview-idle.png",
+      "sha256": "ff9f0fc9b9ff6529c8092fa016590ece4770bc601c8e445ff929d09bf18e85ee",
+      "observation": "Tideglass Fishsmith on the game-owned Player 1 Party Select pedestal during the selected settled native idle capture."
+    }
+  ],
+  "videos": [
+    {
+      "label": "native-preview-idle",
+      "path": "video/native-preview-idle.mp4",
+      "sha256": "fd87ef4ec55535e6b54abbe336a8e63e683c8963ffe4945c61369240a44d2cea",
+      "frames": 24,
+      "width": 1280,
+      "height": 832,
+      "playbackFps": 12,
+      "timing": "Presentation derivative. Raw capture metadata and source-image hashes preserve the measured timing record."
+    }
+  ],
+  "visualReview": {
+    "status": "sampled_native_character_creation_preview_reviewed_art_revision_pending",
+    "observed": "The captured game-owned Party Select screen labels Player 1 as Tideglass Fishsmith. The custom playerFIsh body and hairBottom mantle are visible throughout the selected settled native idle, while native Blacksmith armor, boots, helm, and backpack remain assembled. hairTop is bound to its exact six-bone renderer but that renderer is inactive in this default native Fish preview. The silhouette is readable, but the pale snout and eye treatment reads too much like a mask and is not accepted as finished art.",
+    "notAccepted": "This sampled preview does not establish finished art, every camera or culling condition, overworld or combat animation, equipment branch, player death, final-owner teardown, portrait behavior, multiplayer layout, or a complete renderer-visibility guarantee."
+  },
+  "limitations": [
+    "The actual Create Game callback was invoked only after normal visible navigation reached the enabled offline Create Game screen; the helper did not construct a preview avatar or select a class.",
+    "Tideglass was selected through the visible native Party Select UI after that initial screen was created. The strict state and selected capture prove the resulting class; the initial helper result intentionally records its pre-selection default.",
+    "The 24-frame idle capture uses fixed simulation steps. Its measured game time establishes the recorded idle interval, not real-time rendering performance or full loop coverage.",
+    "No conditional apparel assignment is declared for this profile. Native Blacksmith armor, boots, helm, and backpack visible in this default Fish preview do not establish a custom apparel path.",
+    "The root authoring assets are expected to change for V2. This archive holds V1 source bytes and source-image copies so later art changes cannot alter this evidence."
+  ],
+  "sourceImagePins": "source-image-pins.json",
+  "losslessMappings": [
+    {
+      "source": "art-experiments/tideglass-fishsmith/README.md",
+      "sourceSha256": "978696f8d7f99d5d323d4263b1b7bc10393d5046b2e15549b264a55ea11b8588",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/README.md.gz",
+      "archiveSha256": "ec19906d037606fb6307175a98b0af93a0d23d3d71b49b77e48ec222430eadce",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/build-report.json",
+      "sourceSha256": "087e4b66a7d63a4603880e4ebbd121b33b977ba8793919bec16b458a8407da1b",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/build-report.json.gz",
+      "archiveSha256": "f3314df4dc9ee6269a93244f7fbd3975abe612f81b92aaabd0316ed4cce4df73",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/build_geometry.py",
+      "sourceSha256": "e05d2a95109e6f363d2cda3ef2ff5028874d7fdc02f2d6b122c659a0d4cdae5f",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/build_geometry.py.gz",
+      "archiveSha256": "b57436ad9e59d94ba334395ce3f38cc0c1b13517536076edd1435860143380bb",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/live-validation-v1/README.md",
+      "sourceSha256": "acadfc413539e7ff2c79738ee49ef8516b4004ee31b3b559bc41278b849573d1",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/live-validation-v1/README.md.gz",
+      "archiveSha256": "358e493e6d5008051dd105a79ae515d45ae8e5d395c9e9e1604b99d5a1348abf",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/live-validation-v1/archive.py",
+      "sourceSha256": "dcd4fa831c5a08bf8af483dc5455d6ca6c976fdce024eb719d3bd1aec04baa57",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/live-validation-v1/archive.py.gz",
+      "archiveSha256": "0c04297f22e81f843d94bcd4b5d0a272e343a556c98104f96c9498238c9aa318",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/live-validation-v1/verify.py",
+      "sourceSha256": "9c39f04b15f0bec087a5036e18a39017b34ca379c727ff916d71e21740dabcab",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/live-validation-v1/verify.py.gz",
+      "archiveSha256": "8572578d4ba5f9abfbbbbe4e3000b8603d290466e7c6afaf4ea20e755fe03594",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/manifest.json",
+      "sourceSha256": "fcdc615ce7d33651f36626f41cd900a1d92335133c7f7a89ffb965aa8d79f65b",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/manifest.json.gz",
+      "archiveSha256": "716f9ec80c57a73cdddcb04cf08e5bad8dc8c978207b988fa8eedb11a7768aba",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/original-geometry-proof.json",
+      "sourceSha256": "d8a3fdc065e885c5c58c2b7e989b6c036ff7bf1fdc64b9709e9f84084d968505",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/original-geometry-proof.json.gz",
+      "archiveSha256": "aa614553409949d807fb53ccf7c467b12be791f4b3c7a1074d8a81bfe1e37786",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/render_studio.py",
+      "sourceSha256": "4996ba6d7c9d361dad792d2f771cf854b423690976ee6633364fabda277795b3",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/render_studio.py.gz",
+      "archiveSha256": "242c0f61245072c0d0f434d0f451d6141745c53d7bb67400f42d5ab0a413c1d9",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/runtime-profile.json",
+      "sourceSha256": "f687ec7b1acbb4b3d14d394927ceb322057597fa35cb4b9e10d0064b85475c36",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/runtime-profile.json.gz",
+      "archiveSha256": "024006d1cad720e117a9848d9c39f2d39e3cc98d8fcd8557dd0bc0df762b0a49",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-body.glb",
+      "sourceSha256": "dc701b4939c06c9e101c62a1df75d088ac4f1f1f9788c67c57affc93e6665161",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-body.glb.gz",
+      "archiveSha256": "1f0a4fc533fea676b784f21c040463d1af8eb4bbcf50fbbbfac327c3727ca01e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-body.pieces.json",
+      "sourceSha256": "28a74f479f0db422e02c4b93cf2e4e4b1e5b7a42e9a1d8ba2931d199013f315d",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-body.pieces.json.gz",
+      "archiveSha256": "73a31ea05ff0f68ce0036ef4d6427415e20ade397effa1ad06371f7c0e39a8cc",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-body.source.json",
+      "sourceSha256": "7c3b8d5cc786837ffa83a975a6a015505c433208a0d838b0b6af3ffd8fdfb099",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-body.source.json.gz",
+      "archiveSha256": "e8dbbc3958a77867fbc57bc7aa844c1dcf93c167f7e60da3b883026901085358",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-body.validation.json",
+      "sourceSha256": "082d10ae09874f897cd569d685aea2e3e19d9210a1f4ff28ea69cce2d41b0af9",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-body.validation.json.gz",
+      "archiveSha256": "ae2c10250f0e804d5d98bad6fe67bc00615b9229f27a4b8df28f6915634b1ca5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-bottom.glb",
+      "sourceSha256": "ed4fc9b3fe5e42fbf361ba9540202d65770efd3828cd27c4b2a52d5710940260",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-bottom.glb.gz",
+      "archiveSha256": "6dd9d2600cc958fae24f77d503f946a2154b21b054041ad1e59c9a2aaf2c45f4",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-bottom.pieces.json",
+      "sourceSha256": "342ddbfc66d35777f20e7cb945284751f5899eae3c6146d1000b9612096b5151",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-bottom.pieces.json.gz",
+      "archiveSha256": "8c84376a0cc6c4e400fcfc9d81f0e7d73c85da79c5fbb6638c8219533c0b9412",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-bottom.source.json",
+      "sourceSha256": "df0ba1f71f17fcb13d1399b457c2f06d382433da7cf5554fab9d1a82c988b4b2",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-bottom.source.json.gz",
+      "archiveSha256": "38574556e21dd0304eca7f771bcb7454833950b881942589821bcd8cb65a9c35",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-bottom.validation.json",
+      "sourceSha256": "b3c95dd956977e3eb6a78d490d09d97a928f4867642cb4e44b1310e54dc74fbd",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-bottom.validation.json.gz",
+      "archiveSha256": "8db978354046adc779ec1bccbc8a86e869638df4541a3724217ea7722dc35180",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-top.glb",
+      "sourceSha256": "639b3cd6e462b0c61c5c9886698603b11911b447cdab6ccfdafbf236a63def91",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-top.glb.gz",
+      "archiveSha256": "fbbd3b58da408fed409689475a79ed884393e98b9f986e61fafb75a7fc17cf82",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-top.pieces.json",
+      "sourceSha256": "ae87ec6fe6bd3117f2a7569b8520912f5727382939c56f1e9e35acb4c050aba5",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-top.pieces.json.gz",
+      "archiveSha256": "f6493a18c6936916cc70d0b41d250fa21ba66f833fba486d9b2d4fc307c7a3dd",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-top.source.json",
+      "sourceSha256": "36aed1496e4fbc8634f93a317f01ad6581629d92e7a39c98261bc9fc8b72bd18",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-top.source.json.gz",
+      "archiveSha256": "e2d6ef09083ddcbb3a6639ceff6160e18ffe8fcbca53cea781e8189854478a7e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/tideglass-hair-top.validation.json",
+      "sourceSha256": "a11f6c0aad7b9edc971558f8b9d063b1a3206bf6f9b35b26acb13c70f7c5bf5e",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/tideglass-hair-top.validation.json.gz",
+      "archiveSha256": "231c74cb2b606a6a108d1303a88b59aff76da6652af7b5820aaad6c6539f9ee1",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "art-experiments/tideglass-fishsmith/verify_original_geometry.py",
+      "sourceSha256": "9fec52fb9fa78fd355eee520ead52f4368241405f2313c538ea0b510b1a9fab7",
+      "archive": "metadata/art-experiments/tideglass-fishsmith/verify_original_geometry.py.gz",
+      "archiveSha256": "7d28d7bc3ab4684787753b876712a2ba36f3358985890bbd352dccb6ab78d834",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/deployment-backups/tideglass-fishsmith-20260912-074324/deployment.json",
+      "sourceSha256": "4b3f79463601562e297565644bc9c4be4ede88e5cdda9cfe1bce50fdf543b910",
+      "archive": "metadata/scratch/mirewarden-game/deployment-backups/tideglass-fishsmith-20260912-074324/deployment.json.gz",
+      "archiveSha256": "5237030b132f24dfb4211c8f35a6c108397bfe7ce8edbe4f80e16799caa3ea27",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/3e26d17cb8cb421cb1f52a7019d4dacd.json",
+      "sourceSha256": "af12e7fdbbfc96092afd998d3034a5c3312b7b655058f700050e4dc52891d25b",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/3e26d17cb8cb421cb1f52a7019d4dacd.json.gz",
+      "archiveSha256": "456260070d212521d212fbdecd96c57b708910a3f8f92a71c477f12c6c8f3894",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/5601324818a749a58d1849fec99f9295.json",
+      "sourceSha256": "ba9ebfb59447220cb03a95d53be68d2522bf4889bea78aa45bad6f6127f67b90",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/5601324818a749a58d1849fec99f9295.json.gz",
+      "archiveSha256": "772891069eaf38e5c9ba7a99caea369c56ce71d86e405229f60a4ef9de819720",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/a0275ed63f5549f89d23e2e1104f3fb3.json",
+      "sourceSha256": "ab9e5fc5536cae73c7a840b72c048775d4d3edf00a695bc278f05a8f9fe35c34",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/a0275ed63f5549f89d23e2e1104f3fb3.json.gz",
+      "archiveSha256": "b2c9b5686d593f4ad8022e1e50ba9ec1f0d30269f01ef77bf2cf30544fb74103",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/fbf82d8eb3f448edbc7c8bc2af66c79e.json",
+      "sourceSha256": "44f68dc6b5c187427f4ba27662b3d751f5c25e4d4fe31cd22440ec0bd4a31049",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/fbf82d8eb3f448edbc7c8bc2af66c79e.json.gz",
+      "archiveSha256": "12a7d9928da1a59a36e2b54474ebdc3977faa8cf56c9ea8a21dd72b510513c83",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-output/feb81ddb1e1a48ee80f431e35e7ed221.json",
+      "sourceSha256": "b5c686e29bfa7755c211c45419c331dde5002dd4b07a98141baf5cbacf381039",
+      "archive": "metadata/scratch/mirewarden-game/model-test-output/feb81ddb1e1a48ee80f431e35e7ed221.json.gz",
+      "archiveSha256": "2b39a36d7a34943bb28a20f6dd85fbc9ba5a892c03a136f374306ebe96b625a5",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-player-profiles.json",
+      "sourceSha256": "915ac5717f740834e52c2f29728cd737ea85de97d52469bd01135882ad7ee905",
+      "archive": "metadata/scratch/mirewarden-game/model-test-player-profiles.json.gz",
+      "archiveSha256": "31b237072ff6ccaa4018b9b1030ca5c310ff2d471f7f11713c1742ffd9a536ee",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/mirewarden-game/model-test-player-registration.json",
+      "sourceSha256": "a49e5f80197b39d83a24f35ac22462a30d3cfa24b9a34f5729244b78ae6d38ae",
+      "archive": "metadata/scratch/mirewarden-game/model-test-player-registration.json.gz",
+      "archiveSha256": "9d0a9e7540d29342b0588a8bb2150bb44aad6d76c5ef06886da0180daea5a867",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/player-fishperson-route.json",
+      "sourceSha256": "15b71e9a6a0b33ce58b6f1b0f198a040cb462dd812983c2a1964066d71cad356",
+      "archive": "metadata/scratch/player-fishperson-route.json.gz",
+      "archiveSha256": "8d2411215e4ce7598c0171dc8c3b762055200c07a97bc8760bd4a68f70962049",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/tideglass-fishsmith-stage-v1/receipt.json",
+      "sourceSha256": "79ec40bb9b565d42a6005c267eadc0cb8d283f179be55b2c52c571aa97d7129f",
+      "archive": "metadata/scratch/tideglass-fishsmith-stage-v1/receipt.json.gz",
+      "archiveSha256": "a5dcfda21c3d7665da7a4f78a2cca18d27a43e12f33eacdb108b95c8d8392a25",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/tideglass-preview-idle-settled-capture-request.json",
+      "sourceSha256": "a4b7f8b8622787dff27ec40b707e168772709534d2d22a3649724c2e512e620c",
+      "archive": "metadata/scratch/tideglass-preview-idle-settled-capture-request.json.gz",
+      "archiveSha256": "be6c7adaed070ccf677be0733a4afd97ef87c0ac4dc572f3a874d73cc8d8988d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/tideglass-preview-idle-settled-capture-summary.json",
+      "sourceSha256": "09c2236a8c83bf1857438b5c5a86f09b89c2dab72a4f6202467c637e8001670a",
+      "archive": "metadata/scratch/tideglass-preview-idle-settled-capture-summary.json.gz",
+      "archiveSha256": "1f0ba14129c959da84192a4d767a202f641e487719e42fc4a0b272be07951288",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/tideglass-preview-idle-settled-capture-v2-summary.json",
+      "sourceSha256": "9efb293800249d2ae27798f9b41b6e37eef13cff05f5cb72679888479a47fc94",
+      "archive": "metadata/scratch/tideglass-preview-idle-settled-capture-v2-summary.json.gz",
+      "archiveSha256": "1df75e8fb29ea56d3212409bc52edbfa22c280e751a31383f99ea2dd00add82d",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/tideglass-preview-inventory-request.json",
+      "sourceSha256": "ac1c7e46a4a246f948919fa3d19988c43fd8ecff31bad3ec8a80bced09a390ff",
+      "archive": "metadata/scratch/tideglass-preview-inventory-request.json.gz",
+      "archiveSha256": "56553b5aa909df624b5aa67c3efdb2a5b5582350f649382380f8387dea77deac",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "scratch/tideglass-preview-state-request.json",
+      "sourceSha256": "30f5d74491793938d09d9de49cc2f4f0ed8dad5bf0fe2d43fb9db2862418689a",
+      "archive": "metadata/scratch/tideglass-preview-state-request.json.gz",
+      "archiveSha256": "a2660a9c4e25700864f9c149025f229a79821315aba3e1252b04ec82ff2e2245",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "skills/ftk-custom-models/SKILL.md",
+      "sourceSha256": "07e9855f2450b5d091217eb83c759e59ad2fba933b63906f2d7c86fa77933986",
+      "archive": "metadata/skills/ftk-custom-models/SKILL.md.gz",
+      "archiveSha256": "9016f001afb94b4a2ccb9f0132a2b2040d15b58956ef318ef4d402c7fd94fd42",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/deploy_custom_model_stage.py",
+      "sourceSha256": "21639a26061694ea8112bec069c605f2fd61911a260971cda59f4d3df3e07b24",
+      "archive": "metadata/tools/ai-model-pipeline/deploy_custom_model_stage.py.gz",
+      "archiveSha256": "ba687e6b1ea0ec549a5338615a694f34ac7bb1bbe653693a1e51efb6944aaf01",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/AvatarInventory.cs",
+      "sourceSha256": "95e9964ec376c16d7d698d82921815d9c0882413e0d27641054f959502f9ab25",
+      "archive": "metadata/tools/ai-model-pipeline/runtime-test/AvatarInventory.cs.gz",
+      "archiveSha256": "41fe72bac0cde59fba796b4fa198e4dcd486dce1aa93f5b00ee2b308539ceefd",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/NativeCreateCharacterScreen.cs",
+      "sourceSha256": "817a73924b64d6ecf1fa5b89f7105894ae67c0d180e50d92d80480f88d6a27e2",
+      "archive": "metadata/tools/ai-model-pipeline/runtime-test/NativeCreateCharacterScreen.cs.gz",
+      "archiveSha256": "e7b151b4f1346e039a616fb329220a72d00fc0a0011191195ec0ca1ace47671e",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/PlayerPreviewObservation.cs",
+      "sourceSha256": "30552294ab7ad4a4d8ec389cb424408bfd569da5d22b628d93e0e020004832d7",
+      "archive": "metadata/tools/ai-model-pipeline/runtime-test/PlayerPreviewObservation.cs.gz",
+      "archiveSha256": "eba47a6aeba4d932dffbb548415371da8558608e0ae7593245403bda1e35551a",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/README.md",
+      "sourceSha256": "36964268bee588717963f2e896d9d40b8244cf185936f8d890a9b7d57b45e5c3",
+      "archive": "metadata/tools/ai-model-pipeline/runtime-test/README.md.gz",
+      "archiveSha256": "12590e229b06693725d3f9ee061319dbdc79cf06e7c7c45d0cb7bf6b1130ce41",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/runtime-test/command.py",
+      "sourceSha256": "b18e592804d6dc6fcb183f8d2821b11240ef483787f7a41f5e09b832b03347d9",
+      "archive": "metadata/tools/ai-model-pipeline/runtime-test/command.py.gz",
+      "archiveSha256": "3c2b3d672a9f014f21b191fe255ac5de04be0971afb275ea66f1cbed4314ef4b",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/stage_custom_model_profile.py",
+      "sourceSha256": "17db181a23db29e2b733780f71830cc037308f76930fc436a06c24258faee258",
+      "archive": "metadata/tools/ai-model-pipeline/stage_custom_model_profile.py.gz",
+      "archiveSha256": "c9cf7e18109db9f78da25a8e84050d34236bebd522df6fae7151594bc73ee412",
+      "encoding": "gzip-lossless"
+    },
+    {
+      "source": "tools/ai-model-pipeline/summarize_capture.py",
+      "sourceSha256": "f4dca6033860ab2786ff23a9d3036322167f62a68c989cd180362815fc675048",
+      "archive": "metadata/tools/ai-model-pipeline/summarize_capture.py.gz",
+      "archiveSha256": "a35bbdc0f80982abcfe4517da5f1df42d092beecf55619ca7cdf07e95cd924db",
+      "encoding": "gzip-lossless"
+    }
+  ]
+}

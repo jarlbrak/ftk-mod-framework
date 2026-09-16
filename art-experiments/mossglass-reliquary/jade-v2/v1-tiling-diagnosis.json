@@ -1,0 +1,109 @@
+{
+  "status": "CONFIRMED_V1_ATLAS_TILING_COLOR_DEFECT",
+  "captureSha256": "c269a3d4d079f9375014be8e2f34af96ee5ce7e3f8627d5f17dee2706df75a37",
+  "v1GlbSha256": "86e3857cfb8008eb75aba19738f84491748b323d2f157b8ec448d47ce9ed18c1",
+  "v1SourceSha256": "740a941c45d3362b0479608e4d2b5e79798801d4e3a0969894894a73e027cbf9",
+  "v1TextureSha256": "3258757324a7156128f446cddc7b66ffedf320463edd3d503c1179489509b059",
+  "observedNativeScale": [
+    2.0,
+    2.0
+  ],
+  "observedFilter": "Bilinear",
+  "samples": [
+    {
+      "originalU": 0.5416666865348816,
+      "nativeWrappedU": 0.08333337306976318,
+      "bilinearColumns": [
+        31,
+        32
+      ],
+      "atlasSwatches": [
+        0,
+        1
+      ],
+      "bilinearRGB": [
+        132.00323486328125,
+        133.50282287597656,
+        112.50233459472656
+      ]
+    },
+    {
+      "originalU": 0.625,
+      "nativeWrappedU": 0.25,
+      "bilinearColumns": [
+        95,
+        96
+      ],
+      "atlasSwatches": [
+        2,
+        3
+      ],
+      "bilinearRGB": [
+        203.5,
+        170.0,
+        100.0
+      ]
+    },
+    {
+      "originalU": 0.7083333134651184,
+      "nativeWrappedU": 0.4166666269302368,
+      "bilinearColumns": [
+        159,
+        160
+      ],
+      "atlasSwatches": [
+        4,
+        5
+      ],
+      "bilinearRGB": [
+        185.00173950195312,
+        138.5017547607422,
+        70.00082397460938
+      ]
+    },
+    {
+      "originalU": 0.7916666865348816,
+      "nativeWrappedU": 0.5833333730697632,
+      "bilinearColumns": [
+        223,
+        224
+      ],
+      "atlasSwatches": [
+        6,
+        7
+      ],
+      "bilinearRGB": [
+        35.0003662109375,
+        68.50071716308594,
+        53.50050354003906
+      ]
+    },
+    {
+      "originalU": 0.875,
+      "nativeWrappedU": 0.75,
+      "bilinearColumns": [
+        287,
+        288
+      ],
+      "atlasSwatches": [
+        8,
+        9
+      ],
+      "bilinearRGB": [
+        100.5,
+        159.5,
+        120.0
+      ]
+    }
+  ],
+  "conclusion": "Shell UVs intended for jade atlas swatches sample mixed ivory/amber/brown boundaries after native2x U tiling. This explains vertical warm bands independently of native lighting, which still changes perceived color.",
+  "correction": "Replace only slot1 PNG with whole-image seamless jade texture. Preserve GLB/UVs/native material scale and scroll, slot0 texture and full skin.",
+  "reviewedCaptureFrames": [
+    0,
+    40
+  ],
+  "limits": [
+    "Texture sampling model uses recorded native scale/Repeat/Bilinear, not full Unity shader rendering.",
+    "No original death visibility/lifecycle acceptance."
+  ]
+}

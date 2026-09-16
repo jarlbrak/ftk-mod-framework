@@ -1,0 +1,616 @@
+{
+  "schema": "ftkmf.cube-multislot-calibration.v1",
+  "status": "LIVE_TWO_SLOT_SCROLL_OBSERVED_SELECTED_VISUALS_LIMITED",
+  "nativeEnemy": "cubeA",
+  "runtimeKey": "ftkmf_modeltest_cubea_materialslots",
+  "rendererPath": "enJellyCube",
+  "session": "0cf798022fc14b3ab8f54816b8d4d0b2",
+  "binaryPins": {
+    "framework": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FTKModFramework.dll",
+      "relativePath": "BepInEx/plugins/FTKModFramework.dll",
+      "sha256": "19ece392cf3d58fe43b6178733a9a5ecd85c51943f9cd1769060b88fb572b735",
+      "bytes": 1974272
+    },
+    "helper": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "relativePath": "BepInEx/plugins/FtkRuntimeModelTest.dll",
+      "sha256": "2dc6f7b14f6dec3e32b6c9353374b2d105b63a27999cb8331713c7d54f9c6885",
+      "bytes": 269824
+    }
+  },
+  "profileSha256": "cc6b381a8b8c0984c5a14e72c397735a38b267d7f62380cfa09a617301dd412f",
+  "assetHashes": {
+    "cubea_material_layers_v1.glb": "070ebc92511bd6fb5f70bf0012f1f963aa5ed24dbfa438ddf12c906c398721a8",
+    "cubea_material_layers_v1.slot0.png": "cd79c9bda05c4dd70aa9de00c2e9b94d0bd2377c88f52162581b051d40e774a5",
+    "cubea_material_layers_v1.slot1.png": "5dfc75ab538102bd168c9209c7a892a8fcdf9b28e2d949add7d414c3969f8021"
+  },
+  "originalFixtureManifest": {
+    "path": "tools/ai-model-pipeline/multi-primitive-tests/cube-fixture/manifest.json",
+    "sha256": "0b992c52b53e47ecf5e302aa4ca27df74c5c49040db961c4ac32f427740bd480"
+  },
+  "case": {
+    "original": {
+      "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/case-264ad0e9a3ab40c2ba0b4d3ca17dd44c/case-result.json",
+      "sha256": "9ac0b38c9f1c3c26ade1c4a9adecab4aae9aead97f6882a328d7961ea4f1611e"
+    },
+    "archive": {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/case-result.json.gz",
+      "sha256": "7fdf8423da69c7ff5ec8f9b79d4338ac735844c873c98bcd0717ab32f49956c3"
+    }
+  },
+  "originalWrapperStatus": "needs_visual_review",
+  "runs": [
+    {
+      "action": "pass",
+      "raw": {
+        "original": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/941e01ba1ff64687a4589e3ad63d6472.json",
+          "sha256": "2f85f913978d4699a8104beb8083b3766153bec1cca96decdc2fa6640ac4eb46"
+        },
+        "archive": {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/pass.json.gz",
+          "sha256": "7e8eff4f30992d08166686826f3a93cb53f18a59055dad89b2c523f4694c3634"
+        }
+      },
+      "video": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/pass.mp4",
+        "sha256": "8aec69b4d89cb18b39023645d7bb94d90a947896aa22f01d851459afd94a08f6"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "reviewedFrames": [
+        0,
+        10,
+        40,
+        80
+      ],
+      "images": [
+        {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0000.png",
+          "sha256": "1626e2d9a3fd7720e156443cf02cf079df802f438b41615c5a38779c8756e82b"
+        },
+        {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0010.png",
+          "sha256": "ac49890977df60967ac666d720404d808800cab86867014e0aedf7a0d1f8e86b"
+        },
+        {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0040.png",
+          "sha256": "0a4096a85d8f091b36e96d4ec21196cf84a30336242615e9a7d5184446f64049"
+        },
+        {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0080.png",
+          "sha256": "c9040da390695fbbbd34976727fd64ca7c0426667410bb99f47f4896a6780d66"
+        }
+      ],
+      "journal": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/pass-journal.jsonl",
+        "sha256": "8f9a02d775ae9cc131e62a42eb5fb14dbe1d363df38e9fcf7df42e31ebe92a7d"
+      },
+      "actionResult": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/pass-result.json",
+        "sha256": "3f13fd2ad3b099c118f040c56da21a810f42f79ca5838801d5028b375b14e921"
+      },
+      "timedAudit": {
+        "action": "pass",
+        "captureId": "941e01ba1ff64687a4589e3ad63d6472",
+        "sha256": "2f85f913978d4699a8104beb8083b3766153bec1cca96decdc2fa6640ac4eb46",
+        "frames": 120,
+        "slotMaterialIds": [
+          -245598,
+          -245602
+        ],
+        "leaseId": 4,
+        "allMaterialsAndTexturesOwned": true,
+        "slot0OffsetConstantZero": true,
+        "slot1MatchesExactScrollerPhaseAllFrames": true,
+        "firstPhase": [
+          0.0,
+          12.56675910949707
+        ],
+        "lastPhase": [
+          0.0,
+          14.748437881469727
+        ],
+        "maximumFloat32RecurrenceError": 0,
+        "submeshIndexCounts": [
+          36,
+          36
+        ],
+        "rendererEnabledFrames": 120
+      }
+    },
+    {
+      "action": "hit",
+      "raw": {
+        "original": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/6933d3ba40d84c31871be2ce96e5d36a.json",
+          "sha256": "10c07222938e51dd71c60bb8eaddf908fed41182cf4aa0a3803580df3f85e8f8"
+        },
+        "archive": {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/hit.json.gz",
+          "sha256": "4975b6ab550197f8959ff1f82a63ce2a3ba1653bf65c811b7a3719bf026544f7"
+        }
+      },
+      "video": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/hit.mp4",
+        "sha256": "d7b4eed9fb315f6997f6db26e3149207e42233e093298de7711b8f4b5177f0ea"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "reviewedFrames": [
+        30
+      ],
+      "images": [
+        {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/hit-0030.png",
+          "sha256": "5d195a8642619e50eec8a3d90faa2dc183162184affb71bc1f984eaffe2f6d4b"
+        }
+      ],
+      "journal": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/hit-journal.jsonl",
+        "sha256": "5586e8e5e40a1a9abacf116e29aeef636653d4c1d9b726c81545cc482425e29a"
+      },
+      "actionResult": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/hit-result.json",
+        "sha256": "d480640257d5d8ebee656dd455e74a099dbbff829b0c1d66ea81f1fd90e63a11"
+      },
+      "timedAudit": {
+        "action": "hit",
+        "captureId": "6933d3ba40d84c31871be2ce96e5d36a",
+        "sha256": "10c07222938e51dd71c60bb8eaddf908fed41182cf4aa0a3803580df3f85e8f8",
+        "frames": 120,
+        "slotMaterialIds": [
+          -245598,
+          -245602
+        ],
+        "leaseId": 4,
+        "allMaterialsAndTexturesOwned": true,
+        "slot0OffsetConstantZero": true,
+        "slot1MatchesExactScrollerPhaseAllFrames": true,
+        "firstPhase": [
+          0.0,
+          14.912577629089355
+        ],
+        "lastPhase": [
+          0.0,
+          17.094255447387695
+        ],
+        "maximumFloat32RecurrenceError": 0,
+        "submeshIndexCounts": [
+          36,
+          36
+        ],
+        "rendererEnabledFrames": 120
+      }
+    },
+    {
+      "action": "death",
+      "raw": {
+        "original": {
+          "path": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game/model-test-output/cd585a4165c8428fac8bfba859d509f6.json",
+          "sha256": "9419dafeb00ad418534bbaa6fc5405b19aafb4ce5e17e37eb513e37867dd7305"
+        },
+        "archive": {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/death.json.gz",
+          "sha256": "1e8c5f7c858b740d2b781097dfc10c67df7795d80f837f9c8321783dde1c8155"
+        }
+      },
+      "video": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/death.mp4",
+        "sha256": "72beb2c16088e8906617250041070210fe834dcba297b3f46eaecd5eab6cdb32"
+      },
+      "videoMetadata": {
+        "width": 1280,
+        "height": 832,
+        "r_frame_rate": "12/1",
+        "nb_read_frames": "120"
+      },
+      "reviewedFrames": [
+        40,
+        60
+      ],
+      "images": [
+        {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/death-0040.png",
+          "sha256": "0e8e79b8899ed614f8d91eb20e56886780c9cdb530d5aceb531c7b9509c2d37d"
+        },
+        {
+          "path": "docs/evidence/cubea-multislot-calibration-v1/death-0060.png",
+          "sha256": "d6b6acbef957729b21805edd0cf034ee366181f54f627c06cebc7eaf5c950b74"
+        }
+      ],
+      "journal": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/death-journal.jsonl",
+        "sha256": "38014cbb1f484ec2639bc1a884e929e34972d1ddd7ebb396be549d94c5b62647"
+      },
+      "actionResult": {
+        "path": "docs/evidence/cubea-multislot-calibration-v1/death-result.json",
+        "sha256": "b09ffa8844a1ff49f547bab62222e82b2c2879d43ecf98c1b5ec356f9c422a35"
+      },
+      "timedAudit": {
+        "action": "death",
+        "captureId": "cd585a4165c8428fac8bfba859d509f6",
+        "sha256": "9419dafeb00ad418534bbaa6fc5405b19aafb4ce5e17e37eb513e37867dd7305",
+        "frames": 120,
+        "slotMaterialIds": [
+          -245598,
+          -245602
+        ],
+        "leaseId": 4,
+        "allMaterialsAndTexturesOwned": true,
+        "slot0OffsetConstantZero": true,
+        "slot1MatchesExactScrollerPhaseAllFrames": true,
+        "firstPhase": [
+          0.0,
+          17.258527755737305
+        ],
+        "lastPhase": [
+          0.0,
+          19.44020652770996
+        ],
+        "maximumFloat32RecurrenceError": 0,
+        "submeshIndexCounts": [
+          36,
+          36
+        ],
+        "rendererEnabledFrames": 120
+      }
+    }
+  ],
+  "normalHit": {
+    "status": "nonlethal_hp_loss",
+    "beforeHp": 58,
+    "afterHp": 50,
+    "nativeOutcome": null,
+    "boundary": "Observed same-target HP only; no inferred block, dodge, hit animation, or damage source."
+  },
+  "deathAction": "explicit KillSingle fixture; not ordinary lethal damage",
+  "collects": [
+    {
+      "before": {
+        "heroInstanceId": -235432,
+        "buttonInstanceId": -237210,
+        "item": "None"
+      },
+      "result": {
+        "ok": true,
+        "status": "clicked",
+        "heroInstanceId": -235432,
+        "buttonInstanceId": -237210,
+        "item": "None",
+        "method": "VoteButton.OnLeftClick(Collect)",
+        "note": "One native current Loot vote submitted; observe fixture-state again before any further collection.",
+        "testFixtureMaxHpTarget": 999,
+        "tutorialsQuiet": true,
+        "session": "0cf798022fc14b3ab8f54816b8d4d0b2",
+        "id": "498a564749864a3eb636a427ebe13d98",
+        "frame": 13923,
+        "savePath": "save-model-test-81fab5f083e30704"
+      }
+    }
+  ],
+  "finalReady": {
+    "ok": true,
+    "provenance": "read-only fixture readiness snapshot",
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 1
+    },
+    "strictLootCollect": {
+      "ok": false,
+      "reason": "Both current encounter vote types must be Loot."
+    },
+    "voteSurfaces": [
+      {
+        "heroInstanceId": -235432,
+        "alive": true,
+        "containerInstanceId": -237168,
+        "containerActive": true,
+        "voteType": "Ready",
+        "buttons": [
+          {
+            "option": "Collect",
+            "instanceId": -237210,
+            "active": false,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": false,
+            "item": "None",
+            "belongsToHero": true
+          },
+          {
+            "option": "Ready",
+            "instanceId": -237610,
+            "active": true,
+            "enabled": true,
+            "interactable": true,
+            "focusing": false,
+            "usable": true,
+            "item": "None",
+            "belongsToHero": true
+          }
+        ]
+      }
+    ],
+    "playerScopes": [
+      {
+        "scope": "player-overworld",
+        "avatars": [
+          {
+            "ownerInstanceId": -235432,
+            "celInstanceId": -239036,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-combat",
+        "avatars": [
+          {
+            "ownerInstanceId": 358974,
+            "celInstanceId": -245678,
+            "ownerActive": true,
+            "avatarActive": true,
+            "renderers": 5,
+            "usableRenderers": 5
+          }
+        ]
+      },
+      {
+        "scope": "player-preview",
+        "avatars": []
+      }
+    ],
+    "identity": {
+      "root": "/Users/tbrack/Documents/Projects/Gaming/FTK/scratch/mirewarden-game",
+      "rootName": "mirewarden-game",
+      "session": "0cf798022fc14b3ab8f54816b8d4d0b2",
+      "isolatedSavePath": "/Users/tbrack/Library/Application Support/IronOak Games/FTK/save-model-test-81fab5f083e30704"
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": true,
+      "isAtLastLevel": false,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 2,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 6,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "cubeA",
+        "1080276148"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    },
+    "testFixtureMaxHpTarget": 999,
+    "tutorialsQuiet": true,
+    "session": "0cf798022fc14b3ab8f54816b8d4d0b2",
+    "id": "1c353570dbb5496f93ab9fdf5698ec4b",
+    "frame": 14104,
+    "savePath": "save-model-test-81fab5f083e30704"
+  },
+  "visualReview": {
+    "path": "docs/evidence/cubea-multislot-calibration-v1/root-visual-review.json",
+    "sha256": "d427e4a8c1cb93e9001e853750cc17f6aff27b5080379bad622785efbc15f82b"
+  },
+  "scope": [
+    "Original two-block calibration, not finished enemy art.",
+    "No renderer-hiding diagnosis, death visibility acceptance, final resource disposal or clone/grandclone independence claim."
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/README.md",
+      "sha256": "b5ef6d9fe8d3668b1f11efae1d22d04dde24f0909edeed0ff192bc2b46b35346"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/audit-cube-death-pose.py",
+      "sha256": "6b9347a49313d657c0484e8cbd21b67db37477f8adf85ccd1dcf2c8590302860"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/case-result.json.gz",
+      "sha256": "7fdf8423da69c7ff5ec8f9b79d4338ac735844c873c98bcd0717ab32f49956c3"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/cube-materials-before.json",
+      "sha256": "902f029a4ad64eca8e0d44f444ab0c197df76e182eab4282e2a2255dcaa316b6"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/cube-materials-death-pose-audit.json",
+      "sha256": "958181e67c4dbbf6ccb269728ff40946cfb0e2443d97df8ef3c0877e1b65a1bf"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/cube-materials-inventory.json",
+      "sha256": "637c31309f22a1ef417783747caf3e9c2dafe6d0b8f7c44d019f6b12df257c0d"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/cube-materials-startup-evidence.json",
+      "sha256": "1af4981decb50e1163fe00bce420f1aed347fdb68875e96dc32a6f8ddfe0a768"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/cube-materials-startup-state.json",
+      "sha256": "2d94cd5f63cc29af6b18b1845e988cc00e7491880367cff4861ed243b28688d7"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/cube-materials-timed-audit.json",
+      "sha256": "193c98c50de542aafeea1228ad9372a4ba8b0442e8e8a02d7c558051ff3db099"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death-0040.png",
+      "sha256": "0e8e79b8899ed614f8d91eb20e56886780c9cdb530d5aceb531c7b9509c2d37d"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death-0060.png",
+      "sha256": "d6b6acbef957729b21805edd0cf034ee366181f54f627c06cebc7eaf5c950b74"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death-journal.jsonl",
+      "sha256": "38014cbb1f484ec2639bc1a884e929e34972d1ddd7ebb396be549d94c5b62647"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death-result.json",
+      "sha256": "b09ffa8844a1ff49f547bab62222e82b2c2879d43ecf98c1b5ec356f9c422a35"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death-scroll-verification.json",
+      "sha256": "59edfdd70eb7969cd60c904bb6bc3f0cfebc75d97b51dbdfeaed20178396daca"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death.json.gz",
+      "sha256": "1e8c5f7c858b740d2b781097dfc10c67df7795d80f837f9c8321783dde1c8155"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death.mp4",
+      "sha256": "72beb2c16088e8906617250041070210fe834dcba297b3f46eaecd5eab6cdb32"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/deployment-pointer.txt",
+      "sha256": "c05b3be7950c56ad57d4f8e71f74b7e06cdd957e7afd08972b350da51c869aff"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/deployment.json",
+      "sha256": "8d1864cb95e7e24a24d10bf30f76d7d32916abecdc8ce6549c01376db401a154"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/exercise-claim.json",
+      "sha256": "1250b6d85a1ffb51e880780ae63adf50dd5daa0b45cb138da8acaba7902d6eeb"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/exercise-journal.jsonl",
+      "sha256": "08481f26f3d1cf0f50db0ef38d95b40e54c38fc09bba9594862acdb6415ada27"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/hit-0030.png",
+      "sha256": "5d195a8642619e50eec8a3d90faa2dc183162184affb71bc1f984eaffe2f6d4b"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/hit-journal.jsonl",
+      "sha256": "5586e8e5e40a1a9abacf116e29aeef636653d4c1d9b726c81545cc482425e29a"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/hit-result.json",
+      "sha256": "d480640257d5d8ebee656dd455e74a099dbbff829b0c1d66ea81f1fd90e63a11"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/hit-scroll-verification.json",
+      "sha256": "505036cd55fa2064aa65e051f29c052b1b8becdc6fba828df3789ee7d183ea48"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/hit.json.gz",
+      "sha256": "4975b6ab550197f8959ff1f82a63ce2a3ba1653bf65c811b7a3719bf026544f7"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/hit.mp4",
+      "sha256": "d7b4eed9fb315f6997f6db26e3149207e42233e093298de7711b8f4b5177f0ea"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0000.png",
+      "sha256": "1626e2d9a3fd7720e156443cf02cf079df802f438b41615c5a38779c8756e82b"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0010.png",
+      "sha256": "ac49890977df60967ac666d720404d808800cab86867014e0aedf7a0d1f8e86b"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0040.png",
+      "sha256": "0a4096a85d8f091b36e96d4ec21196cf84a30336242615e9a7d5184446f64049"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-0080.png",
+      "sha256": "c9040da390695fbbbd34976727fd64ca7c0426667410bb99f47f4896a6780d66"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-journal.jsonl",
+      "sha256": "8f9a02d775ae9cc131e62a42eb5fb14dbe1d363df38e9fcf7df42e31ebe92a7d"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-result.json",
+      "sha256": "3f13fd2ad3b099c118f040c56da21a810f42f79ca5838801d5028b375b14e921"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-scroll-verification.json",
+      "sha256": "2042a173864dac42dbff89a4b7003b52f3bb712e9387c9dd6e79608c391b4d87"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass.json.gz",
+      "sha256": "7e8eff4f30992d08166686826f3a93cb53f18a59055dad89b2c523f4694c3634"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass.mp4",
+      "sha256": "8aec69b4d89cb18b39023645d7bb94d90a947896aa22f01d851459afd94a08f6"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/root-visual-review.json",
+      "sha256": "d427e4a8c1cb93e9001e853750cc17f6aff27b5080379bad622785efbc15f82b"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/test_verify_material_scroll.py",
+      "sha256": "d5e1f8a7a4ac70afedbc171fe934b9877134df27bdf17b0f40f0fec4c20d0dfc"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/verify_material_scroll.py",
+      "sha256": "601414a6202e135391f185da98c8d1bbb9641eddf11e41824d4341ae8aca3113"
+    }
+  ],
+  "deathPoseAudit": {
+    "path": "docs/evidence/cubea-multislot-calibration-v1/cube-materials-death-pose-audit.json",
+    "sha256": "958181e67c4dbbf6ccb269728ff40946cfb0e2443d97df8ef3c0877e1b65a1bf"
+  },
+  "independentScrollVerification": [
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/pass-scroll-verification.json",
+      "sha256": "2042a173864dac42dbff89a4b7003b52f3bb712e9387c9dd6e79608c391b4d87"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/hit-scroll-verification.json",
+      "sha256": "505036cd55fa2064aa65e051f29c052b1b8becdc6fba828df3789ee7d183ea48"
+    },
+    {
+      "path": "docs/evidence/cubea-multislot-calibration-v1/death-scroll-verification.json",
+      "sha256": "59edfdd70eb7969cd60c904bb6bc3f0cfebc75d97b51dbdfeaed20178396daca"
+    }
+  ]
+}

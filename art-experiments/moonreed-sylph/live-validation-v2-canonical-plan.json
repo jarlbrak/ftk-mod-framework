@@ -1,0 +1,107 @@
+{
+  "schema": "ftkmf.model-validation-archive-plan.v1",
+  "output": "art-experiments/moonreed-sylph/live-validation-v2-canonical",
+  "caseResult": "scratch/mirewarden-game/model-test-output/case-90192a6f30f8498784e17c983baa6de1/case-result.json",
+  "visualReview": "scratch/model-route-c3683bc2e807b15a-directenemy-root-review-reviewed.json",
+  "assetFiles": [
+    "art-experiments/moonreed-sylph/moonreed.glb",
+    "art-experiments/moonreed-sylph/moonreed_basecolor.png"
+  ],
+  "metadata": [
+    {
+      "path": "art-experiments/moonreed-sylph/runtime-profile.json",
+      "pinAs": "runtimeProfile"
+    },
+    {
+      "path": "scratch/model-route-c3683bc2e807b15a-directenemy-run.json",
+      "pinAs": "runnerRecord"
+    },
+    {
+      "path": "docs/model-validation-execution-queue.json",
+      "pinAs": "executionQueue"
+    },
+    {
+      "path": "scratch/model-validation-stage-readiness.json",
+      "pinAs": "stageReadiness"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-3e0d6783632d46e18f21688b1d8c514e/result.json",
+      "pinAs": "stageBindingResult"
+    },
+    {
+      "path": "scratch/mirewarden-game/model-test-output/case-3e0d6783632d46e18f21688b1d8c514e/journal.jsonl",
+      "pinAs": "stageBindingJournal"
+    }
+  ],
+  "captures": {
+    "pass": {
+      "label": "idle-and-native-attack",
+      "scope": "Settled idle and exact native enemy attack capture.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enFairy01",
+        "mesh": "ftkmf_glb_moonreed.glb",
+        "boneSignature": "81c4105f144d33460cbc6c25586870c23a8df7398bc26d567845104d7b6498c7"
+      }
+    },
+    "attack-attempt-1": {
+      "label": "attack-attempt-1",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enFairy01",
+        "mesh": "ftkmf_glb_moonreed.glb",
+        "boneSignature": "81c4105f144d33460cbc6c25586870c23a8df7398bc26d567845104d7b6498c7"
+      }
+    },
+    "attack-attempt-2": {
+      "label": "attack-attempt-2",
+      "scope": "Ordinary no-focus player attack capture; preserve its measured outcome separately.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enFairy01",
+        "mesh": "ftkmf_glb_moonreed.glb",
+        "boneSignature": "81c4105f144d33460cbc6c25586870c23a8df7398bc26d567845104d7b6498c7"
+      }
+    },
+    "kill-fixture": {
+      "label": "explicit-fixture-death",
+      "scope": "Explicit KillSingle fixture capture only; it is not ordinary lethal damage.",
+      "frameIdentity": {
+        "celRelativeRendererPath": "enFairy01",
+        "mesh": "ftkmf_glb_moonreed.glb",
+        "boneSignature": "81c4105f144d33460cbc6c25586870c23a8df7398bc26d567845104d7b6498c7"
+      }
+    }
+  },
+  "validation": {
+    "status": "reviewed_exact_source_pending_any_remaining_limits",
+    "revision": "V2 canonical exact route",
+    "displayName": "Moonreed Sylph",
+    "sourceKind": "native_enemy_row",
+    "nativeEnemy": "fairyA",
+    "nativeChassis": "fairyA",
+    "rendererPaths": [
+      "enFairy01"
+    ],
+    "sourceRendererIds": [
+      121395
+    ],
+    "binding": {
+      "rendererPath": "enFairy01",
+      "mesh": "ftkmf_glb_moonreed.glb",
+      "boneSignature": "81c4105f144d33460cbc6c25586870c23a8df7398bc26d567845104d7b6498c7"
+    },
+    "ordinaryLethal": false,
+    "limits": [
+      "Exact directEnemy source fairyA, CEL enFairy(Clone), motion renderer enFairy01 and source renderer 121395 only. This archive grants no inheritance to another fairy source or renderer topology.",
+      "The native pass action preserved enemy HP58 and reduced hero HP from 995 to 991 while recording AttackProf, fairy_attackProf, damage 4 and Damaged. This is sampled native gameplay under the survival fixture, not a balance claim.",
+      "The first ordinary zero-focus attack used the native bluntSmithHammer without a skill cap or damage fixture and produced native Dodge with enemy HP unchanged at 58, followed by fairy_dodge. Two later fairy_attackProf sequences each dealt 4 damage to the hero, changing hero HP from 991 to 983.",
+      "The second ordinary zero-focus native hammer attack reduced Moonreed from 58 to 55 HP with recorded damage 3, a Damaged response and fairy_damaged. A later fairy_attackProf recorded zero damage and native Dodge against the hero.",
+      "The explicit KillSingle fixture reduced Moonreed from 55 to 0 HP with recorded native 1000 damage and a Death trigger. It is fixture death evidence, not ordinary lethal gameplay.",
+      "The source has m_DoRagdoll false. The animator remains enabled while fairy_die persists from frame 26 through frame 119. The two recorded nonkinematic rigid bodies are inactive break props and receive no ragdoll credit.",
+      "All four captures retain the requested 120 frames. The exact renderer remains active, enabled, reported visible and identity-stable through all 480 frames. The sampled animated death remains present through frame 119, but this boundary does not establish general corpse lifetime, cleanup causality or final disposal.",
+      "One guarded native Collect action succeeded and strict Ready succeeded at dungeon level 0, room 2, with one active Ready button.",
+      "Thirty selected original PNGs were reviewed. Native effects, foreground hero overlap, the small native presentation, fixed-camera perspective, loot UI and late depth blur limit fine inspection in stated frames; the remaining 450 capture PNGs are preserved by hash but were not individually reviewed.",
+      "The profile preserves native CEL scale 1.0. Its Standard matFairyA material uses the authored moonreed_basecolor.png main texture with emission disabled, zero emission color and no emission map. This route does not establish portrait pixels, other cameras, other resolutions or all-angle culling.",
+      "This isolated dungeon trial does not prove every fairy animation, collision, alternate materials, long-session resource lifetime, inheritance to another fairy source, full campaign progression or finished-art acceptance."
+    ]
+  }
+}

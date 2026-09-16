@@ -36,7 +36,7 @@ FTK2 ports are the active fronts.)
    map-sync mechanism and a host/client mod-set parity check are open (Adventures Slice D2).
 2. Status-effect duration encoding (likely on the `FTK_hitEffect` prefab): needs a trace (spec #85).
 3. Custom 3D models for playable classes (skinsets) may need IronOak's rig/avatar conventions;
-   the enemy-model path is solved.
+   enemy mesh injection is demonstrated; [per-skeleton animation validation](MODEL-SKELETONS.md) remains incremental.
 
 Architecture, the capability matrix, and the FTK2-ports backlog are tracked as epics and specs in
 [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues).
