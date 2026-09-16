@@ -909,7 +909,8 @@ namespace FTKModFramework.Core.UI
             if (pages.Count > 0)
             {
                 _page = Math.Min(_page, pages.Count - 1);
-                TextLine(pages[_page], 22, 210);
+                // 210 was short of a full eight-line page and truncated it. Size to the content.
+                TextLine(pages[_page], 22, PageHeight(pages, 22));
                 PageButtons(pages.Count);
             }
             if (pendingCount > 0)
