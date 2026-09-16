@@ -81,7 +81,7 @@ for name in "${skill_names[@]}"; do
   [[ "$(wc -l < ".claude/skills/$name/SKILL.md")" -le 15 ]] || report_failure "Claude skill adapter is no longer thin: $name"
 done
 
-local_paths=(AGENTS.local.md AGENTS.override.md CLAUDE.local.md .local .claude/settings.local.json .codex/config.local.toml)
+local_paths=(AGENTS.local.md AGENTS.override.md CLAUDE.local.md .local/agents/.ignore-probe .claude/settings.local.json .codex/config.local.toml)
 for path in "${local_paths[@]}"; do
   if ! git check-ignore -q "$path"; then
     report_failure "documented local path is not ignored: $path"
