@@ -58,7 +58,11 @@ The build references the game's own DLLs from your local install and publicizes 
 
 [`AGENTS.md`](AGENTS.md) is the canonical instruction file for coding agents and other AI harnesses. It is designed to work from a clean clone without private tools or machine-specific context. Harness adapters, including Claude Code support, point back to the generic instructions instead of maintaining a second policy set.
 
-See [`docs/AI-NATIVE.md`](docs/AI-NATIVE.md) for the instruction hierarchy, reusable skills and roles, and the ignored `.local` files available for machine-specific setup. Run `bash scripts/agent/check-instructions.sh` after changing any agent instructions or adapters.
+See [`docs/AI-NATIVE.md`](docs/AI-NATIVE.md) for the instruction hierarchy, reusable skills and roles, and the ignored `.local` files available for machine-specific setup. Run `bash scripts/agent/check-instructions.sh` after changing any agent instructions or adapters; CI runs it too.
+
+Every top-level tree that carries work an agent may edit has its own `AGENTS.md` stating what differs there. Read the nearest one before editing.
+
+`.claude/settings.json` is committed shared configuration: the hooks and permission rules everyone gets from a clean clone. The hook scripts it runs live in `scripts/agent/hooks/`, so they are ordinary readable project tooling. Personal overrides, account routing, and machine-specific scripts belong in the ignored `.claude/settings.local.json` and `.claude/hooks/`, which are never committed.
 
 ## Pull requests
 

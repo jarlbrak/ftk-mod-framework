@@ -88,6 +88,19 @@ git diff --check
 Use `.agents/skills/verify-change/SKILL.md` to choose the required subset. Live-game validation
 uses `.agents/skills/ingame-smoke/SKILL.md` and requires an explicitly configured local setup.
 
+## Change delivery
+
+- Branch from `master` as `<topic-area>/<short-slug>`, for example `docs/audit-followups`.
+- Write commit subjects in the imperative and under about 72 characters. Explain in the body what
+  the change makes true and what evidence supports it, not what files moved.
+- Keep one coherent change per commit. Do not mix a refactor with the behavior change it enables.
+- Pull request bodies state the verification actually run and name every gate still outstanding.
+  `CONTRIBUTING.md` holds the full checklist and the pull-request template walks through it.
+- Never add generated-by boilerplate to a pull request body or an issue. A `Co-Authored-By:`
+  trailer on a commit follows the existing convention in this repository's history.
+- Never commit a game assembly, decompiled source, a save, a log, a credential, or a local overlay
+  file. Confirm the staged set before every commit.
+
 ## Specialist routing
 
 Use a specialist role when the task matches and the harness supports delegation. Otherwise read

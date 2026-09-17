@@ -60,14 +60,17 @@ CLAUDE.local.md
 .local/
 .codex/config.local.toml
 .claude/settings.local.json
-.claude/settings.json
 .claude/hookify.*.local.md
 .claude/hooks/
-.claude/hooks/local/
 .claude/plans/
 .claude/agents/knowledge-curator.md
 .claude/worktrees/
 .claude/scheduled_tasks.lock
+
+# Shared project settings (.claude/settings.json) ARE committed: they are the
+# team contract for hooks and permissions. Personal overrides belong in the
+# ignored .claude/settings.local.json. Hook scripts that every contributor
+# should get live in scripts/agent/hooks/, not in the ignored .claude/hooks/.
 
 # Release scratch (release.sh builds assets in a temp dir, but never commit a dist/)
 dist/

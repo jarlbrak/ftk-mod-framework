@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(dotnet format:*)",
+      "Bash(go test:*)",
+      "Bash(go vet:*)",
+      "Bash(shellcheck:*)",
+      "Bash(bash scripts/agent/check-instructions.sh)",
+      "Bash(bash tests/installer/test-install.sh)"
+    ],
+    "deny": [
+      "Read(./**/*.pfx)",
+      "Read(./**/*.pem)",
+      "Read(./**/.env)",
+      "Read(./**/.env.*)",
+      "Read(./.local/**)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/scripts/agent/hooks/session-context.sh\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/scripts/agent/hooks/format-changed-cs.sh\"",
+            "timeout": 60,
+            "statusMessage": "Formatting changed C# files"
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/scripts/agent/hooks/check-instruction-graph.sh\"",
+            "timeout": 30,
+            "statusMessage": "Validating the agent instruction graph"
+          }
+        ]
+      }
+    ]
+  }
+}
