@@ -85,6 +85,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Lint the shell scripts
         if: runner.os == 'Linux'
-        run: shellcheck -s bash install.sh deploy.sh release.sh tests/installer/test-install.sh launcher/build.sh launcher/unix/*.sh launcher/unix/setup.command
+        run: shellcheck -s bash install.sh deploy.sh release.sh tests/installer/test-install.sh launcher/build.sh launcher/unix/*.sh launcher/unix/setup.command scripts/agent/check-instructions.sh scripts/agent/hooks/*.sh
       - name: Installer test suite (mock Steam layouts, real BepInEx archives)
         run: bash tests/installer/test-install.sh
