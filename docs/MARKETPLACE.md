@@ -2,7 +2,9 @@
 
 The title-screen Mods panel is the entry point for free community content. Discover lists curated packages; Installed distinguishes managed downloads, bundled content and manually installed mods. The catalog starts empty. Test fixtures and the interface preview's concept listings are not downloadable community mods.
 
-The interface puts gameplay descriptions and the next available action first. Mod cards distinguish what is enabled now from changes waiting for a restart. Package metadata, dependency details and recovery tools are available from secondary views. Required components stay separate from the gameplay list.
+The interface puts gameplay descriptions and the next available action first. Mod cards distinguish what is enabled now from changes waiting for a restart. Package metadata and dependency details are available from secondary views. Required components stay separate from the gameplay list, under Components in Installed. Settings & Help is reachable from the footer of every view, including while an operation is running, and holds marketplace and registration status, the next-launch review, restore and the mod-list export.
+
+Back is contextual. It leaves an open requirements page, gallery or release review first, then returns to the view and mod selection it came from, and closes the panel from a tab with nothing behind it. Returning to a view already behind you unwinds to it instead of stacking another copy, so Back always reaches the title screen in a bounded number of presses.
 
 Players review the complete package/dependency plan before preparing a change. Prepared content applies on the next game launch, including launches from the original Steam entry. Installing, updating, disabling and removing managed packages never changes registrations inside the running game. Updates are explicit; cancellation leaves the active content unchanged. Rollback selects the retained previous generation for a subsequent launch.
 

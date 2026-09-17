@@ -83,6 +83,7 @@ internal static class Program
         CompatibilityChecks.Run(root);
         MarketplaceChecks.Run(root);
         FrameworkUpdateChecks.Run(root);
+        NavigationChecks.Run();
         Console.WriteLine("Fixtures retained at " + root);
     }
 }

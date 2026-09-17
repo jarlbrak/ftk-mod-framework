@@ -17,6 +17,9 @@ namespace FTKModFramework.Core.UI
         private Transform _container;
         private Transform _rootContent;
         private string _view = "installed";
+        private readonly ModsPanelNavigation _navigation = new ModsPanelNavigation();
+        // Enabled-control count captured with a restored frame. Zero means "no restore in flight".
+        private int _restoreFocusCount;
         private string _search = "";
         private string _message = "";
         private int _page;
@@ -206,14 +209,100 @@ namespace FTKModFramework.Core.UI
 
         private void Navigate(string view)
         {
+            ModsPanelNavigation.Frame restored;
+            if (!_navigation.Enter(view, Capture(), out restored))
+            {
+                // Already here. Re-selecting a tab is a request to start the view over, not history.
+                ResetViewState(view);
+                Refresh();
+                return;
+            }
+            // Every exit from a confirmation drops its plan, including a return to an ancestor.
+            if (_view == "confirm") ClearPlan();
+            if (restored != null) { Apply(restored); Refresh(); return; }
             _view = view;
+            ResetViewState(view);
+            _focusIndex = ModsPanelNavigation.DefaultFocus(view);
+            Refresh();
+        }
+
+        /// <summary>Back is contextual: it leaves an in-view mode before it leaves the view.
+        /// The footer label and the controller cancel button both read this, so they cannot diverge.</summary>
+        private int BackKind()
+        {
+            // Both branches guard on the state that makes the mode visible, so Back never spends a
+            // press on a mode the view is no longer rendering.
+            if (_view == "updates" && _frameworkRelease != null && (_updateReview || _expandedNotes)) return 0;
+            // Guard on a live selection: browsing filters clear the selection without clearing the
+            // mode, and an unguarded check would spend a Back press with nothing on screen to leave.
+            if ((_showAdvanced || _showGallery) && (_entry != null || _package != null)) return 1;
+            return 2;
+        }
+
+        private void GoBack()
+        {
+            int kind = BackKind();
+            if (kind == 0)
+            {
+                if (_updateReview) _updateReview = false; else _expandedNotes = false;
+                Refresh();
+                return;
+            }
+            if (kind == 1)
+            {
+                _showAdvanced = false; _showGallery = false; _imagePage = 0;
+                Refresh();
+                return;
+            }
+            if (_view == "confirm") ClearPlan();
+            ModsPanelNavigation.Frame parent = _navigation.Back();
+            if (parent == null) { FTKInput.Instance.Close(this); return; }
+            Apply(parent);
+            Refresh();
+        }
+
+        private ModsPanelNavigation.Frame Capture()
+        {
+            return new ModsPanelNavigation.Frame { View = _view, Page = _page, DetailPage = _detailPage,
+                Focus = _focusIndex, FocusCount = _controls.Count, ImagePage = _imagePage,
+                Entry = _entry, Package = _package, Advanced = _showAdvanced, Gallery = _showGallery };
+        }
+
+        private void Apply(ModsPanelNavigation.Frame frame)
+        {
+            _view = frame.View;
+            _page = frame.Page;
+            _detailPage = frame.DetailPage;
+            _entry = frame.Entry;
+            _package = frame.Package;
+            _showAdvanced = frame.Advanced;
+            _showGallery = frame.Gallery;
+            _imagePage = frame.ImagePage;
+            _expandedNotes = false; _updateReview = false;
+            _focusIndex = frame.Focus;
+            _restoreFocusCount = frame.FocusCount;
+            _message = "";
+        }
+
+        private void ResetViewState(string view)
+        {
             _page = 0;
             _detailPage = 0;
             _showAdvanced = false; _showGallery = false; _imagePage = 0;
-            _focusIndex = view == "updates" ? 2 : view == "installed" ? 1 : 0;
+            _expandedNotes = false; _updateReview = false;
             _message = "";
-            if (view == "installed" || view == "discover" || view == "components") { _entry = null; _package = null; }
-            Refresh();
+            _restoreFocusCount = 0;
+            if (ModsPanelNavigation.IsBrowse(view)) { _entry = null; _package = null; }
+        }
+
+        /// <summary>A prepared plan belongs to the operation the player was reviewing. Drop it the
+        /// moment they leave, so no later confirmation can submit another operation's revision.</summary>
+        private void ClearPlan()
+        {
+            _plan = null;
+            _planSelection = null;
+            _planIntent = null;
+            _confirmOperation = null;
         }
 
         // Click and helper callbacks only request a render. FTKInputFocus continues using its
@@ -259,7 +348,7 @@ namespace FTKModFramework.Core.UI
             TextLine("For The King / Mods", 38, 58).color = Gold;
             Rule();
             AddTabs();
-            if (_view == "installed" || _view == "components" || _view == "discover")
+            if (ModsPanelNavigation.IsBrowse(_view))
             {
                 Transform left;
                 Transform right;
@@ -279,12 +368,17 @@ namespace FTKModFramework.Core.UI
             else if (_view == "confirm") Confirmation();
             else if (_view == "search") Search();
             else if (_view == "maintenance") Maintenance();
-            else if (_view == "tools") Tools();
+            else if (_view == "settings") SettingsAndHelp();
             AddFooter();
             if (gameObject.activeInHierarchy)
             {
                 UpdateSelectables();
                 SetupNavigation();
+                if (_restoreFocusCount > 0)
+                {
+                    _focusIndex = ModsPanelNavigation.ResolveFocus(_focusIndex, _restoreFocusCount, _controls.Count, ModsPanelNavigation.DefaultFocus(_view));
+                    _restoreFocusCount = 0;
+                }
                 if (_controls.Count > 0) FTKInput.SetSelected(_controls[Math.Min(_focusIndex, _controls.Count - 1)]);
             }
         }
@@ -294,7 +388,7 @@ namespace FTKModFramework.Core.UI
             TextLine(components ? "Required components" : "Your installed mods", 25, 42);
             TextLine(components ? "Supporting content used by your community mods." : "Choose a mod to see what it adds.", 23, 42);
             if (MarketplaceRuntime.RegistrationNotice != null)
-                TextLine("Some content did not load correctly. Open Tools for the error and recovery options.", 22, 76).color = Gold;
+                TextLine("Some content did not load correctly. Open Settings & Help for the error and recovery options.", 22, 76).color = Gold;
             List<ModEntry> entries = new List<ModEntry>();
             foreach (ModEntry candidate in ModRegistry.Entries)
             {
@@ -394,6 +488,8 @@ namespace FTKModFramework.Core.UI
                 Spacer(24);
                 TextLine(PanelBusy ? "Opening the community catalog..." : "The catalog is unavailable right now", 30, 86);
                 TextLine(PanelBusy ? "Your installed mods stay available while we check." : "Try Refresh when you are online. You can keep playing with everything in Installed.", 24, 104);
+                if (!PanelBusy && !string.IsNullOrEmpty(MarketplaceRuntime.Notice))
+                    TextLine(Short(MarketplaceRuntime.Notice, 240), 22, 110).color = Gold;
                 return;
             }
             TextLine(catalog.Status == "offline" ? "Offline / saved catalog from " + FriendlyAge(catalog.CatalogAgeSeconds) + " ago" : "Free mods, reviewed before publication", 20, 36);
@@ -431,6 +527,10 @@ namespace FTKModFramework.Core.UI
 
         private void LoadCatalog()
         {
+            // MarketplaceRuntime.Start refuses a second operation and never calls back, so returning
+            // here keeps a repeated Browse or Refresh from clearing the player's selection for nothing.
+            // PanelBusy is deliberately stricter than MarketplaceRuntime.Busy: it also covers updates.
+            if (PanelBusy) return;
             _package = null; _entry = null; _detailPage = 0; _showAdvanced = false; _showGallery = false; _imagePage = 0;
             MarketplaceRuntime.Start("catalog", null, false, delegate(MarketplaceResult result) { _message = result.Message ?? result.Status; Refresh(); });
             Refresh();
@@ -462,7 +562,6 @@ namespace FTKModFramework.Core.UI
                 AddScreenshot(previews[_imagePage]);
                 TextLine(bundled ? (_imagePage == 0 ? "The Hollow Mire / adventure artwork" : "Reeve Maddow / character portrait") : "Preview supplied by the mod author", 22, 48);
                 if (previews.Count > 1) ActionButton("Next preview (" + (_imagePage + 1) + " of " + previews.Count + ")", delegate { _imagePage = (_imagePage + 1) % previews.Count; Refresh(); });
-                LinkButton("Back to overview", delegate { _showGallery = false; Refresh(); });
                 return;
             }
             if (_showAdvanced)
@@ -532,7 +631,12 @@ namespace FTKModFramework.Core.UI
                 blocks.Add("What changes\n" + Join(p.ContentChanges) + "\nChangelog\n" + Declared(p.Changelog));
                 StringBuilder dependencies = new StringBuilder("Required components\n");
                 if (p.Dependencies == null || p.Dependencies.Length == 0) dependencies.Append("None declared.");
-                else foreach (PackageSelection dependency in p.Dependencies) dependencies.Append(dependency.PackageId).Append(" ").Append(dependency.Version).Append("\n");
+                else
+                {
+                    dependencies.Append("Installed with this mod and reviewed alongside your mod changes.\n");
+                    foreach (PackageSelection dependency in p.Dependencies)
+                        dependencies.Append(DependencyName(dependency)).Append(" / v").Append(dependency.Version).Append("\n");
+                }
                 blocks.Add(dependencies.ToString());
                 blocks.Add("Source: " + Declared(p.SourceUrl) + "\nSupport: " + Declared(p.SupportUrl) + "\nScreenshots: " + Join(p.Screenshots) + "\nArtifact SHA-256: " + Declared(p.Sha256) + "\nA checksum verifies bytes, not author trust or runtime safety.");
             }
@@ -549,7 +653,18 @@ namespace FTKModFramework.Core.UI
             if (total > 1) ActionButton("Next detail / screenshot (" + (_detailPage + 1) + " of " + total + ")", delegate { _detailPage = (_detailPage + 1) % total; Refresh(); });
             if (_package != null && MarketplaceRuntime.FindManaged(_package.ModGuid) != null)
                 LinkButton("Remove this community mod...", delegate { ReviewSelection(_package, true, false); }, !PanelBusy);
-            LinkButton("Back to overview", delegate { _showAdvanced = false; _showGallery = false; _imagePage = 0; Refresh(); });
+        }
+
+        /// <summary>Names a required component from a descriptor that declares the exact version.
+        /// Falls back to the package id rather than inventing a name for an unknown dependency.</summary>
+        private static string DependencyName(PackageSelection dependency)
+        {
+            PackageDescriptor selected = DesiredPackage(dependency.PackageId);
+            if (selected != null && selected.Version == dependency.Version && !string.IsNullOrEmpty(selected.Name)) return selected.Name;
+            if (MarketplaceRuntime.Catalog != null && MarketplaceRuntime.Catalog.Packages != null)
+                foreach (PackageDescriptor candidate in MarketplaceRuntime.Catalog.Packages)
+                    if (candidate.PackageId == dependency.PackageId && candidate.Version == dependency.Version && !string.IsNullOrEmpty(candidate.Name)) return candidate.Name;
+            return dependency.PackageId;
         }
 
         private void PackageActions(PackageDescriptor package)
@@ -624,7 +739,9 @@ namespace FTKModFramework.Core.UI
             return values;
         }
 
-        private static List<string> TextPages(List<string> blocks)
+        /// <summary>Pages a set of text blocks. linesPerPage must match the height the caller gives
+        /// the page, because Text truncates rather than scrolls.</summary>
+        private static List<string> TextPages(List<string> blocks, int linesPerPage = 8)
         {
             List<string> pages = new List<string>();
             foreach (string block in blocks)
@@ -644,7 +761,7 @@ namespace FTKModFramework.Core.UI
                         }
                         page.Append(rest.Substring(0, length)).Append("\n");
                         rest = rest.Substring(length).TrimStart();
-                        if (++lines == 8) { pages.Add(page.ToString()); page.Length = 0; lines = 0; }
+                        if (++lines == linesPerPage) { pages.Add(page.ToString()); page.Length = 0; lines = 0; }
                     } while (rest.Length > 0);
                 }
                 if (page.Length > 0) pages.Add(page.ToString());
@@ -736,6 +853,12 @@ namespace FTKModFramework.Core.UI
         private void Confirmation()
         {
             TextLine("Review your changes", 36, 56);
+            if (string.IsNullOrEmpty(_confirmOperation) || (_confirmOperation == "prepare" && (_plan == null || _planSelection == null)))
+            {
+                // Defensive: a review without its plan must never offer to submit a stale revision.
+                TextLine("This review is no longer current. Open the mod again and choose the change you want to make.", 25, 120);
+                return;
+            }
             TextLine("Nothing changes in your current adventure. These choices apply when you next launch the game.", 25, 68);
             if (_confirmOperation == "prepare")
             {
@@ -786,7 +909,8 @@ namespace FTKModFramework.Core.UI
             if (pages.Count > 0)
             {
                 _page = Math.Min(_page, pages.Count - 1);
-                TextLine(pages[_page], 22, 210);
+                // 210 was short of a full eight-line page and truncated it. Size to the content.
+                TextLine(pages[_page], 22, PageHeight(pages, 22));
                 PageButtons(pages.Count);
             }
             if (pendingCount > 0)
@@ -800,23 +924,54 @@ namespace FTKModFramework.Core.UI
             bool preferences = false;
             foreach (ModEntry entry in ModRegistry.Entries) if (!entry.IsManaged && entry.PendingEnabled.HasValue) preferences = true;
             if (preferences) TextLine("Undo included or manual mod changes in Installed.", 22, 32);
-            LinkButton("Tools and recovery", delegate { Navigate("tools"); });
         }
 
-        private void Tools()
+        private void SettingsAndHelp()
         {
-            TextLine("Tools and recovery", 36, 56);
-            List<string> pages = TextPages(new List<string> { MarketplaceRuntime.RegistrationNotice ?? "Installed content is selected for this launch. Changes never unload it mid-game.", MarketplaceRuntime.Notice ?? "No marketplace status to report.", _message });
+            TextLine("Settings & Help", 36, 56);
+            List<string> blocks = new List<string>();
+            // The newest result first, so an export path or a failed operation is the page you land on.
+            if (_message.Length > 0) blocks.Add(_message);
+            blocks.Add(MarketplaceRuntime.RegistrationNotice != null
+                ? MarketplaceRuntime.RegistrationNotice + "\nBepInEx/LogOutput.log names the content that failed. Turn that mod off in Installed, or restore your previous community mods below."
+                : "Installed content is selected for this launch. Changes never unload it mid-game.");
+            blocks.Add(MarketplaceRuntime.Notice ?? "No marketplace status to report.");
+            // Cap a status page at six lines; the rest goes on the next page, and PageHeight sizes
+            // the box to whichever page is tallest.
+            List<string> pages = TextPages(blocks, 6);
             _detailPage = Math.Min(_detailPage, pages.Count - 1);
-            TextLine(pages[_detailPage], 23, 225);
+            TextLine(pages[_detailPage], 23, PageHeight(pages, 23));
             if (pages.Count > 1) ActionButton("Next status detail (" + (_detailPage + 1) + " of " + pages.Count + ")", delegate { _detailPage = (_detailPage + 1) % pages.Count; Refresh(); });
             ActionButton("Review next-launch changes", delegate { Navigate("maintenance"); });
-            ActionButton("Restore the previous community mod set...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !PanelBusy);
-            ActionButton("Export community mod list", delegate {
-                MarketplaceRuntime.Start("export", null, false, delegate(MarketplaceResult result) { _message = result.Ok ? "Exported: " + result.ExportPath + ". Manual mods are not fully fingerprinted; this is not a co-op compatibility guarantee." : result.Message; Refresh(); });
+            ActionButton("Restore previous mods...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !PanelBusy);
+            TextLine(MarketplaceRuntime.PreviousAvailable
+                ? "Restores your previous community mod selection on the next launch. Included mods, manual mods and saves are unchanged. You review the change first."
+                : "No previous community mod selection is saved yet. Restore becomes available once you replace an active selection.", 23, 62);
+            ActionButton("Export mod list", delegate {
+                MarketplaceRuntime.Start("export", null, false, delegate(MarketplaceResult result) {
+                    _message = result.Ok ? "Mod list saved to: " + result.ExportPath : "Could not export the mod list: " + Declared(result.Message ?? result.Status);
+                    _detailPage = 0;
+                    Refresh();
+                });
                 Refresh();
             }, !PanelBusy);
-            TextLine("Need to repair marketplace access? Use Install / Repair in the launcher. Your manually installed files are not removed.", 23, 76);
+            TextLine("Saves a list of your community mods to share when you ask for help. Manual mods are not fully fingerprinted, so it does not prove save or co-op compatibility.", 23, 62);
+            TextLine("Required components used by community mods are listed under Components in Installed. To repair marketplace access, use Install / Repair in the launcher; your manually installed files are not removed.", 23, 76);
+        }
+
+        /// <summary>Height for a paged text block, sized to the tallest page so the controls below
+        /// it do not move as pages turn and no page reserves space it does not use. TextPages ends
+        /// every line with a newline, so a page renders one more line than it has separators.</summary>
+        private static float PageHeight(List<string> pages, int size)
+        {
+            int longest = 0;
+            foreach (string page in pages)
+            {
+                int lines = 0;
+                foreach (char c in page) if (c == '\n') lines++;
+                if (lines > longest) longest = lines;
+            }
+            return (longest + 1) * (size + 5);
         }
 
         private void Search()
@@ -847,13 +1002,13 @@ namespace FTKModFramework.Core.UI
         {
             Transform row = HorizontalRow("Tabs", 50);
             _container = row;
-            Button browse = ActionButton("Browse", delegate { Navigate("discover"); if (MarketplaceRuntime.Catalog == null) LoadCatalog(); }, true, 48);
+            Button browse = ActionButton("Browse", delegate { Navigate("discover"); if (MarketplaceRuntime.Catalog == null && !PanelBusy) LoadCatalog(); }, true, 48);
             SetWidth(browse.gameObject, 160);
             if (_view == "discover") Border(browse.gameObject, Gold, 2);
             Button installed = ActionButton("Installed", delegate { Navigate("installed"); }, true, 48);
             SetWidth(installed.gameObject, 170);
             if (_view == "installed") Border(installed.gameObject, Gold, 2);
-            Button updates = ActionButton("Updates", delegate { Navigate("updates"); if (FrameworkUpdateRuntime.State == null) LoadUpdates("refresh"); }, true, 48);
+            Button updates = ActionButton("Updates", delegate { Navigate("updates"); if (FrameworkUpdateRuntime.State == null && !PanelBusy) LoadUpdates("refresh"); }, true, 48);
             SetWidth(updates.gameObject, 170);
             if (_view == "updates") Border(updates.gameObject, Gold, 2);
             if (PendingCount() > 0)
@@ -868,6 +1023,16 @@ namespace FTKModFramework.Core.UI
         private void AddFooter()
         {
             _container = _rootContent;
+            // Browse and Updates fill the body with a fixed-height column pair. The stacked views
+            // size to their content, so absorb the remainder here and keep the footer at the
+            // bottom edge instead of floating wherever the content happens to end.
+            if (!ModsPanelNavigation.IsBrowse(_view) && _view != "updates")
+            {
+                GameObject fill = NewChild("Footer fill", _container);
+                LayoutElement grow = fill.AddComponent<LayoutElement>();
+                grow.minHeight = grow.preferredHeight = 0;
+                grow.flexibleHeight = 1;
+            }
             Rule();
             Transform row = HorizontalRow("Footer", 60);
             _container = row;
@@ -881,25 +1046,32 @@ namespace FTKModFramework.Core.UI
                 Button cancel = LinkButton("Cancel operation", delegate { if (FrameworkUpdateRuntime.Busy) FrameworkUpdateRuntime.Cancel(); else MarketplaceRuntime.CancelRunning(); Refresh(); });
                 SetWidth(cancel.gameObject, 200);
             }
+            else if (_view == "installed")
+            {
+                Button components = LinkButton("Components", delegate { Navigate("components"); });
+                SetWidth(components.gameObject, 200);
+            }
+            // Reserve the slot so starting or finishing an operation never slides Settings or Back
+            // under the pointer, and never adds a controller stop that does nothing.
+            else FooterSlot(200);
+            if (_view == "settings") FooterSlot(205);
             else
             {
-                if (_view != "tools")
-                {
-                    Button tools = LinkButton("Tools", delegate { Navigate("tools"); });
-                    SetWidth(tools.gameObject, 90);
-                }
-                if (_view == "installed")
-                {
-                    Button components = LinkButton("Components", delegate { Navigate("components"); });
-                    SetWidth(components.gameObject, 175);
-                }
+                Button settings = LinkButton("Settings & Help", delegate { Navigate("settings"); });
+                SetWidth(settings.gameObject, 205);
             }
-            Button back = LinkButton(_view == "installed" || _view == "discover" ? "Back to title" : "Back", delegate {
-                if (_view == "installed" || _view == "discover") FTKInput.Instance.Close(this); else Navigate("installed");
-            });
-            SetWidth(back.gameObject, 155);
+            int kind = BackKind();
+            Button back = LinkButton(kind == 0 ? "Back to versions" : kind == 1 ? "Back to overview" : _navigation.CanGoBack ? "Back" : "Back to title", GoBack);
+            SetWidth(back.gameObject, 200);
             m_ButtonOnCancel = back;
             _container = _rootContent;
+        }
+
+        private void FooterSlot(float width)
+        {
+            GameObject slot = NewChild("Footer slot", _container);
+            Height(slot, 38);
+            SetWidth(slot, width);
         }
 
         private static int PendingCount()
