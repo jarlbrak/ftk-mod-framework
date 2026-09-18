@@ -35,17 +35,17 @@ The live records below preserve the exact five-renderer assignment. V4 grants ca
 ## First live run: camera-fit failure
 
 [V1 evidence](live-validation-v1.json) archives all five exact assignments and
-three complete120-frame, unpaused captures. Parent reviewed pass0/50, hit30
+three complete 120-frame, unpaused captures. Parent reviewed pass0/50, hit30
 and death40/60. The crown overlaps HUD at idle and upper body/head rise above
 the screen during native attack while the base stays. This is a fit failure;
-a separate scale0.75 catalog is prepared but its live fit remains untested.
+a separate scale 0.75 catalog is prepared but its live fit remains untested.
 
 - [Attack](live-v1/attack.mp4)
-- [Ordinary hit](live-v1/nonlethal-hit.mp4),58 to48, normal10 damage.
+- [Ordinary hit](live-v1/nonlethal-hit.mp4),58 to48, normal 10 damage.
 - [Kill-fixture death](live-v1/kill-fixture-death.mp4),48 to0.
 
 During snowman_deathDirect upper parts fall while the base remains anchored.
-Native base renderer121556 has all7683 vertices100% weighted to Root_M;
+Native base renderer 121556 has all7683 vertices100% weighted to Root_M;
 source weight and clip-binding evidence is hashed separately. Separation alone
 is not a weighting or binding bug, and no artificial connector is added. Two
 guarded Collect actions reach Ready0/2. Videos replay12fps, not real-time
@@ -56,9 +56,9 @@ performance; full visibility, corrected fit and final art remain pending.
 [V2 archive](live-validation-v2.json) preserves the same geometry under the
 exact corrected deployment hashes. Idle crown clears HUD and the attack crown
 is onscreen at previously cropped frame50. Native health-banner/effect overlap
-remains. Normal8 damage58 to50 is captured but dust/hero obscure frame30.
+remains. Normal 8 damage 58 to50 is captured but dust/hero obscure frame30.
 Death50 to0 retains native upper-part falloff and anchored rootweighted base,
-without obvious new stretch in reviewed40/60. All three captures complete120
+without obvious new stretch in reviewed 40/60. All three captures complete 120
 unpaused frames; two Collect actions reach Ready0/2. This is selected-frame
 fit correction, not full visibility or culling acceptance. V1 failure remains.
 

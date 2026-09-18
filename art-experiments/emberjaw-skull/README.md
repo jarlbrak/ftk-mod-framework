@@ -116,15 +116,15 @@ The evidence preserves original stage asset hashes independently of source edits
 
 [Native-scale evidence](live-validation-native-scale.json) preserves the original
 asset hashes under framework9e533f89, sessionb3478c0c658f47c6a3ba82b94b9a6f2a.
-Neutral factor1 preserves native scale0.75; both renderer world axes measure0.75.
+Neutral factor 1 preserves native scale 0.75; both renderer world axes measure0.75.
 The front face and independently moving jaw remain coherent at this size in
 reviewed views. This is a scoped fit regression pass with prototype art limits.
 
 - [Attack](live-native-scale/attack.mp4), top renderer, reviewed frames0/50.
-- [Ordinary hit](live-native-scale/nonlethal-hit.mp4), bottom renderer, HP69 to64, frame30.
-- [Kill-fixture death](live-native-scale/kill-fixture-death.mp4), HP64 to0, frames30/60.
+- [Ordinary hit](live-native-scale/nonlethal-hit.mp4), bottom renderer, HP 69 to64, frame30.
+- [Kill-fixture death](live-native-scale/kill-fixture-death.mp4), HP 64 to0, frames30/60.
 
-All three captures completed120 unpaused frames. Death is already hidden by
+All three captures completed 120 unpaused frames. Death is already hidden by
 native effects at the reviewed frames, so complete visible death deformation
 is not established. Two guarded Collect actions reached strict Ready0/3.
 Videos replay120 captured frames at12fps; no real-time performance inference.

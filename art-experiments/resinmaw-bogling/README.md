@@ -1,6 +1,6 @@
 # Resinmaw Bogling
 
-An original amber slug-toad for `acidBlobA`, exact renderer121344 at CEL-relative `enAcidMonster`. The silhouette combines a broad resin tail, folded haunches, moss-colored brows, golden eyes, and four articulated ivory tusks. The two jaws move independently. An overlapping jaw-pivot throat closes the neck connection without a rigid bridge between the jaws.
+An original amber slug-toad for `acidBlobA`, exact renderer 121344 at CEL-relative `enAcidMonster`. The silhouette combines a broad resin tail, folded haunches, moss-colored brows, golden eyes, and four articulated ivory tusks. The two jaws move independently. An overlapping jaw-pivot throat closes the neck connection without a rigid bridge between the jaws.
 
 `build_geometry.py` creates every surface and palette pixel from original parametric forms. Native data supplies only the exact32-joint palette, inverse bind matrices, joint landmarks, usage metadata, and fitting bounds. `native-binding-audit.json` records positive native influence counts, including minor terminal weights. The four fang endpoints joint25/31/28/34 have zero positive weights; they remain in the palette without added diagnostic geometry. Rear tail and front-facing feet/fangs establish Unity +Z as front.
 
@@ -27,7 +27,7 @@ Pose studies additionally require the indicated local captures. Rebuilding reset
 
 ## First live trial
 
-[Live archive](live-validation.json): three120-frame captures; reviewed idle/attack and both HUD portraits are readable, own palette/emission settings verified, and ordinary5damage81→76 observed. Explicit kill fixture76→0 and two guarded Collect actions returned strict Ready0/2. The initial accepted start followed by a read-only busy500 and a once-only resume are preserved; journal inspection confirms one initial start request and none during resume.
+[Live archive](live-validation.json): three 120-frame captures; reviewed idle/attack and both HUD portraits are readable, own palette/emission settings verified, and ordinary 5 damage 81→76 observed. Explicit kill fixture76→0 and two guarded Collect actions returned strict Ready0/2. The initial accepted start followed by a read-only busy500 and a once-only resume are preserved; journal inspection confirms one initial start request and none during resume.
 
 Death art remains visually limited. All120 samples retain an active/enabled renderer and unit bone scales. Comparing frames28–119 against native AcidBlobA at identical death phases gives maximum renderer-local bone-matrix difference1.43e-7 across all32 bones. Hips moves backward/downward, consistent with the native sink and occlusion; the narrow visible form at40 is not evidence of scale collapse. Native chunks/puddle remain at60. Matching motion does not establish readability of all death surfaces or a whole-sequence artistic PASS.
 

@@ -2,7 +2,7 @@
 
 A broad copper seedpod mouth with two split upper leaf blades, a pale biting rim, deep-blue throat and paired olive side leaves. The flattened head and tall split foliage distinguish this candidate from Belladusk's round purple pitcher. Native behavior remains unchanged; the design adds no mechanics or copied native surface.
 
-Exact plantD selection: renderer121537 enJungleNibbler_C, CEL138791 enPlantD,43-bone palette. Preserve native1.7 root scale through visual factor1. The30 native-positive bones are used;13 native-zero-weight bones are retained unused. In particular Leaf5 is positive here, unlike plantE. Additional crown bones and mirrored chains are not invented animation targets.
+Exact plantD selection: renderer 121537 enJungleNibbler_C, CEL138791 enPlantD,43-bone palette. Preserve native1.7 root scale through visual factor 1. The30 native-positive bones are used;13 native-zero-weight bones are retained unused. In particular Leaf5 is positive here, unlike plantE. Additional crown bones and mirrored chains are not invented animation targets.
 
 Belladusk's original surface functions are useful authoring code, but its37-bone asset is not a compatible replacement. This generator reads the separately verified D bind reference and exports all43 exact IBMs. The distinct wider head uses continuous Head/Jaw outer tissue and an intentionally open inner mouth funnel. Positive-volume checks apply only to closed pieces, not the open sleeve/interior. Native bind-bounds, source-only regeneration and direct/reopened binary checks pass for this initial candidate.
 
@@ -18,7 +18,7 @@ Pass maximum edge is Leaf5 at52, .105541 to.191122 (1.81088×); hit maximum is l
 
 ## Frozen offline package
 
-manifest.json pins the original generator, editable scene, direct and reopened exports, scoped surface checks, all native pose studies and preserved initial state. runtime-profile.json selects plantD only, native1.7 scale via factor1, and explicit emission opt-out. The offline package does not claim material, portrait, indirect/ordinary lethal death or final resource teardown.
+manifest.json pins the original generator, editable scene, direct and reopened exports, scoped surface checks, all native pose studies and preserved initial state. runtime-profile.json selects plantD only, native1.7 scale via factor 1, and explicit emission opt-out. The offline package does not claim material, portrait, indirect/ordinary lethal death or final resource teardown.
 
 ## Live validation history
 

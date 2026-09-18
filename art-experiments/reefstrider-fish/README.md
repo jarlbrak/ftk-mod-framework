@@ -2,7 +2,7 @@
 
 A turquoise fish biped with a cream belly, rounded fish muzzle, dark lateral eyes, deep-blue gill panels, restrained coral crown and broad articulated flipper hands/webbed feet. The design uses original closed low-poly surfaces rather than armor or human clothing. Native unarmed attacks, effects and ragdoll remain unchanged.
 
-Exact fishA01 renderer121695 enFishA uses34 native palette entries and unarmed controller5958. The32 native-positive joints are weighted; MiddleFinger4_L/R remain unused but retained. Native scale1 is preserved. No fishA02/A03 controller inheritance is claimed. The runtime profile explicitly disables native matLoot emission for the intended palette; fresh live readback is recorded in the V2 supplement below.
+Exact fishA01 renderer 121695 enFishA uses34 native palette entries and unarmed controller5958. The32 native-positive joints are weighted; MiddleFinger4_L/R remain unused but retained. Native scale 1 is preserved. No fishA02/A03 controller inheritance is claimed. The runtime profile explicitly disables native matLoot emission for the intended palette; fresh live readback is recorded in the V2 supplement below.
 
 The generator reads only native bone names and bind matrices for landmarks; independent regeneration reproduces original source/palette/pieces exactly. Native geometry remains ignored. Direct/reopened exports, closed-piece positive volume and native bind bounds are checked. The initial intersecting belly badge is preserved in offline-history/initial-bind; the current cream belly is coloring on the continuous torso surface.
 
@@ -20,13 +20,13 @@ Native diagnostic observations report all11 bodies dynamic and Animator off at26
 
 ## Reviewed offline package
 
-Root reviewed all five pose sheets, with shoulders/hips/long legs attached and eyes seated where the face is visible. manifest.json freezes the exact original source, editable/reopened scenes,480 unique captured poses plus the dedicated ragdoll-transition view, attachment checks and preserved earlier candidates. The native11-body ragdoll/colliders are retained; rendered geometry fitting is not an original collision-model or contact proof. Exact fishA01 only, with native scale1×factor1 and explicit emission opt-out. No A02/A03 acceptance.
+Root reviewed all five pose sheets, with shoulders/hips/long legs attached and eyes seated where the face is visible. manifest.json freezes the exact original source, editable/reopened scenes,480 unique captured poses plus the dedicated ragdoll-transition view, attachment checks and preserved earlier candidates. The native11-body ragdoll/colliders are retained; rendered geometry fitting is not an original collision-model or contact proof. Exact fishA01 only, with native scale 1×factor 1 and explicit emission opt-out. No A02/A03 acceptance.
 
 ## Fresh live validation V2
 
-The fresh catalog-411 run in session `b5ec7aa40751424d8e428ade47ea8ec5` bound `reefstrider.glb` to `enFishA` under one `fishA01` owner (renderer121695, owner369188, bone signature `4670c40a093faef41fab67e69e846f992d7686b45f667a5a7a4ce42f050d8479`). The runtime readback saw `matLoot (Instance)` with the authored `ftkmf_reefstrider_basecolor.png`, Standard shading, black emission and no emission map.
+The fresh catalog-411 run in session `b5ec7aa40751424d8e428ade47ea8ec5` bound `reefstrider.glb` to `enFishA` under one `fishA01` owner (renderer 121695, owner369188, bone signature `4670c40a093faef41fab67e69e846f992d7686b45f667a5a7a4ce42f050d8479`). The runtime readback saw `matLoot (Instance)` with the authored `ftkmf_reefstrider_basecolor.png`, Standard shading, black emission and no emission map.
 
-Pass, ordinary attack and explicit `KillSingle` fixture captures completed 120 frames each. The ordinary attack reduced the same target from HP58 to48 with `cheat=None` and no focus. Selected idle, attack and death-prefix frames show the fish body, cream belly, crown, flippers and webbed feet remaining connected in combat staging; the native UI, foreground hero and victory depth blur limit fine deformation and settled-ragdoll review. Two guarded native Collect calls were accepted and strict native Ready was observed at level0 room2.
+Pass, ordinary attack and explicit `KillSingle` fixture captures completed 120 frames each. The ordinary attack reduced the same target from HP 58 to48 with `cheat=None` and no focus. Selected idle, attack and death-prefix frames show the fish body, cream belly, crown, flippers and webbed feet remaining connected in combat staging; the native UI, foreground hero and victory depth blur limit fine deformation and settled-ragdoll review. Two guarded native Collect calls were accepted and strict native Ready was observed at level0 room2.
 
 The reproducible archive is [live-validation-v2](live-validation-v2/), with validation SHA256 `7e7174a268a0995d1ac29a88ab4fbd6ce8afa69e5b1bd7ea344f41983d6896f2`. It contains 370 source-image pins, 230 gzip-lossless metadata mappings, six selected originals and three 120-frame presentation videos. `archive.py` refuses overwrite unless `FTK_ARCHIVE_REBUILD=1`; native payloads and DLLs are excluded.
 

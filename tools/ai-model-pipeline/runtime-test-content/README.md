@@ -346,7 +346,7 @@ loaded-profile equality checks continue to reject mid-session catalog edits.
 
 ## Optional public visual scale factor
 
-`visualScale` is an optional finite number from0.1 through4. Startup validates
+`visualScale` is an optional finite number from0.1 through 4. Startup validates
 all profiles before registering any clones; strings, booleans, null, NaN,
 infinities and out-of-range numbers are refused. Omission preserves the existing
 registration behavior. For a supplied value, registration calls
@@ -385,7 +385,7 @@ death and an unopted native control separately.
 `scratch/runtime-profile-378-fitted-v1` preserves all377 prior profiles and adds
 `ftkmf_modeltest_resource_enbaseycockatriceboss_fitted`, base `cockatriceC`,
 resource `enbaseycockatriceboss`, exact renderer `enBaseyCockatrice`, unchanged
-original probe121693, health floor64 and visual factor0.55. Its `combatProfile`
+original probe121693, health floor64 and visual factor 0.55. Its `combatProfile`
 is taken from the exact current native `cockatriceC` profile, not copied from
 the boss baseline. The provenance records that derivation and the resource
 controller identity separately. The existing boss-key baseline remains intact.

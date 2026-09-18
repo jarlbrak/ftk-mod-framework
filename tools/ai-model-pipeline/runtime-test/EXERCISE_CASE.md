@@ -102,7 +102,7 @@ partial capture boundaries, changed pins/owners, unknown modals, missing PNGs an
 short-prefix selection. These tests do not operate the game.
 
 Measured isolated trial: Fairy A case `9fa034b1acf246eaa5b8b8dc144aaf01`
-completed pass, one ordinary attack (target HP58→55), and explicit KillSingle
+completed pass, one ordinary attack (target HP 58→55), and explicit KillSingle
 fixture, with all three raw captures retaining120 frames. One native Collect
 returned to strict Ready at level0/room3. The immutable result is under
 `scratch/mirewarden-game/model-test-output/case-9fa034b1acf246eaa5b8b8dc144aaf01/`.

@@ -53,7 +53,7 @@ For Intro, verification requires all361 frames, pure target, entry and exit with
 same-clip/different-clock roles at positive weights, and subsequent pure IDLE on
 both native surfaces. Each bank's unused clocks and weights must stay zero and all
 node mappings remain stable. Whole-controller main comparisons and repeat checks
-retain1e-5. Positive appearance contribution is excluded from main equivalence;
+retain 1e-5. Positive appearance contribution is excluded from main equivalence;
 zero-weight appearance boundaries remain included.
 
 All five existing first/repeat scenarios must be recertified with this expanded

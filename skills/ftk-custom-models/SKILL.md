@@ -157,7 +157,7 @@ references of its own, so never resolve them against the adapter's directory.
    ordinary native 1-damage hit, XP-backed level 0→2 progression, and restoration
    to the correct level-adjusted maximum of 12.
 
-   Fixed runtime captures write120 full-size PNGs and can take several minutes
+   Fixed runtime captures write 120 full-size PNGs and can take several minutes
    of wall time while visibly slowing the isolated game. Keep the one issued
    capture running under the 360-second default (or a bounded explicit budget);
    a slow capture never authorizes another action, capture, or retry.

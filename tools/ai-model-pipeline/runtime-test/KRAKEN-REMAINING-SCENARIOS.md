@@ -30,7 +30,7 @@ rechecked at consumption. Appearance rejects a companion plan; the old marker
 variant does not gain nonappearance support. The companion fixes12 PNG/4 Bake
 steps per scenario: heavy includes its short pure-damage95..110 window, and death
 includes late motion at191. Death cameras are fixed diagnostic framing fitted
-to both full241-frame trajectories, not the real gameplay camera.
+to both full 241-frame trajectories, not the real gameplay camera.
 
 The existing `verify_kraken_skin_probe.py` evidence manifest accepts one extra
 `evidence.capturePlan` pin (`path` and `sha256`) for these four cases. It joins

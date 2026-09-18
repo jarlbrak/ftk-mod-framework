@@ -168,7 +168,7 @@ small-detail polish, hero/effect occlusion, full culling and other variants rema
 outside acceptance.
 
 Attack, ordinary hit (58 to48 HP), and explicit KillSingle death (48 to0 HP)
-each recorded120 unpaused frames over about10.9083 game seconds. One guarded
+each recorded 120 unpaused frames over about 10.9083 game seconds. One guarded
 Collect reached strict Ready0/2. Body telemetry covers attack/death and leaf
 telemetry covers hit; do not infer complete per-renderer animation coverage.
 
@@ -185,7 +185,7 @@ The v1 facing failure and its immutable artifacts remain in `live-v1/`.
 
 The same v2 body/leaf/texture hashes passed a native-scale regression in session
 `61d9e44ebed54190ae8b9e4e8b503d6f`, corrected framework `9e533...`. Neutral
-factor1 retained native scale1.6. Reviewed front, stem and mouth remained readable
+factor 1 retained native scale 1.6. Reviewed front, stem and mouth remained readable
 without frame escape, and recoil/collapse were coherent. This is a regression
 pass for this prototype, not a v3 geometry revision or full culling/variant pass.
 The previous v2 old-framework evidence remains separate.
