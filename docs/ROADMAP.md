@@ -14,7 +14,7 @@ FTK2 ports are the active fronts.)
 | **3. Enemies** ✅ | Goal 4 | `Content.AddEnemy`/`AttachEnemyProficiencies` over `FTK_enemyCombatDB`; `GameCache.Enemies.NeedsRebuild` spawn injection (no selection patch); `FTK_enemyCombat.GetEnum` + enemy-name patches; `m_ChanceToProf` AI; master-guarded ability behaviour | done: the **Cutpurse** (custom stats, a gold-stealing Pilfer, custom loot; spawns + fights + drops in real combat) |
 | **5. Adventures** 🟡 | Goal 5 (hardest) | `Content.AddEncounter` (inject `FTK_miniEncounterDB` rows) + `Adventures.AddFromTemplate` (clone a `.ftk2` `GameDefinition` at runtime, whitelist via `IsValidSaveFileName` patch); `AddCampaignFromTemplate` (branching questlines, flags, custom verbs; `docs/CAMPAIGNS.md`); `CanUseClass` char-create guard | D1 done (solo, verified): cloned **"Smuggler's Run"** plays; the bespoke realm + boss **"The Hollow Mire"** plays to victory (driven by the agent harness). D2 next: 2-client co-op parity + save round-trip |
 | **6. FTK2 ports** 🟡 | Inspiration | FTK2 passives/status-effects/summons as data-driven traits (Groups A→C); recreate art originally | in progress: passive traits shipped (`Content.AddPassive`, trigger patches, the **Innkeeper** sample); combat status effects next (spec #85, epic #77) |
-| **Custom 3D models** 🟡 | (cross-cutting) | Enemy model pipeline (runtime glTF + Unity 2017.2.2 AssetBundles, `docs/CUSTOM-MODELS.md`); skinset pipeline for classes | enemy path shipped + verified (the Hollow Mire boss renders a custom glTF body); class/skinset pipeline still open (epic #65) |
+| **Custom 3D models** 🟡 | (cross-cutting) | Editor-free GLB authoring; strict enemy, resource-prefab, and player-skinset renderer APIs; route-specific live validation (`docs/CUSTOM-MODELS.md`) | pipeline shipped; all 48 supported topology groups have canonical route representatives, while per-model art approval and broader state, equipment, lifecycle, and co-op validation remain incremental |
 
 ### Cross-cutting (touches every phase)
 - **Determinism / saves / co-op:** synthetic ids stable across machines (`IdAllocator`); set
@@ -35,8 +35,10 @@ FTK2 ports are the active fronts.)
 1. 2-client co-op for custom adventures/campaigns is designed-for but unverified: the overworld
    map-sync mechanism and a host/client mod-set parity check are open (Adventures Slice D2).
 2. Status-effect duration encoding (likely on the `FTK_hitEffect` prefab): needs a trace (spec #85).
-3. Custom 3D models for playable classes (skinsets) may need IronOak's rig/avatar conventions;
-   enemy mesh injection is demonstrated; [per-skeleton animation validation](MODEL-SKELETONS.md) remains incremental.
+3. Custom 3D model support is route-specific. Documented player skinsets and enemy/resource routes
+   have strict APIs and canonical representatives, but one result does not transfer to another
+   skinset, renderer path, controller, equipment combination, or authored model. See the
+   [skeleton and route register](MODEL-SKELETONS.md).
 
 Architecture, the capability matrix, and the FTK2-ports backlog are tracked as epics and specs in
 [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues).

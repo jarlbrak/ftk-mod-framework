@@ -1,8 +1,9 @@
-# Enemy skeleton discovery and validation register
+# Model skeleton and route validation register
 
 The export tools are reusable across compatible skinned meshes. Compatibility
 and visual quality must be established per chassis/profile. This register
-tracks that work; it is not a list of universally supported enemy rigs.
+tracks enemy, resource-prefab, and player routes; it is not a claim that every
+native rig, controller, equipment combination, or authored model is universally supported.
 
 Use `tools/ai-model-pipeline/plan_model_authoring_kit.py` with an exact topology
 group and route kind to resolve the current native renderer IDs, bind and rig

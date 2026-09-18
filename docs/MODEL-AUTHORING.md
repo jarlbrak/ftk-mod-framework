@@ -1,4 +1,8 @@
-# Authoring and validating an FTK enemy model
+# Authoring and validating an FTK model
+
+This workflow covers direct enemy rows, resource-prefab overrides, and player
+skinsets. Evidence is specific to the exact source, renderer path, and integration
+route; a shared skeleton does not transfer validation between them.
 
 This workflow turns original art into a replacement mesh that uses an existing
 FTK enemy's animations. Start with a single chassis and a single finished

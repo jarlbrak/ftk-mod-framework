@@ -42,8 +42,8 @@ The panel shows your running version and saved preference. Selecting a version d
 replace files while the game is running; the launcher applies the choice on the next Play.
 Switching automatic channels never downgrades a newer installation. Pinning an older version
 is an explicit choice. Compatibility is checked before installation, including installed and
-pending marketplace mods; manual mods cannot be verified completely. An unsupported target
-is deferred, with the working installation retained.
+pending marketplace mods and configured manual content manifests. Arbitrary BepInEx plugins remain
+outside this policy. An unsupported target is deferred, with the working installation retained.
 
 Versions and patch notes come from the official GitHub repository. Cached information remains
 readable offline and is marked with its refresh time. A pinned version stays pinned; an

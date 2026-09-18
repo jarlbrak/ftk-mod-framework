@@ -1,9 +1,12 @@
-# Custom Enemy Models
+# Custom models
 
-Replace an enemy's appearance with original geometry while retaining its existing
-skeleton, or supply a bespoke prefab. For repeatable authoring and live checks,
-use [the authoring workflow](MODEL-AUTHORING.md) and
-[the skeleton validation register](MODEL-SKELETONS.md).
+Replace an enemy or player class appearance with original geometry while retaining
+its native skeleton and animations. Enemy integrations can also supply a bespoke
+prefab. For repeatable authoring and live checks, use
+[the authoring workflow](MODEL-AUTHORING.md) and
+[the skeleton and route register](MODEL-SKELETONS.md). Player body, hair, and
+conditional-apparel assignments use the strict [player renderer API](MODEL-PLAYER-API.md);
+the paths below describe enemy integrations.
 
 Model assets are loaded locally rather than streamed through the network. Ship
 identical assets with the mod on every client; matching assets alone do not
