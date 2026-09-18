@@ -100,6 +100,9 @@ install.sh                 the player installer (macOS + Linux): BepInEx + plugi
 deploy.sh                  developer build-and-install through install.sh (self-tests on)
 release.sh                 maintainer: publish a GitHub release the installer downloads from
 tests/installer/           the installer's test suite (mock Steam layouts; runs in CI)
+AGENTS.md                  canonical instructions for coding agents (nested files per subtree)
+.agents/                   portable agent skills and specialist role contracts
+scripts/agent/             instruction-graph validation and the shared agent hooks
 docs/
   INSTALL.md               player install guide: what the installer does per platform, troubleshooting
   WRITING-CONTENT.md       modder API guide (items, abilities, classes, enemies, encounters)
