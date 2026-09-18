@@ -101,8 +101,10 @@ DB-driven, so your class appears automatically, but mind these:
   one stat block is correct on all difficulties; don't try to tune per difficulty.
 - **Availability:** keep `m_DLC = FTK_dlc.ID.None` and `m_Release = true`; add no lore-unlock entry and
   the class is unlocked + visible by default.
-- **Model/portrait:** reuse an existing `m_Skinsets` (cloned). Custom voxel models need a
-  Unity 2017.2.2 AssetBundle and aren't wrapped by the framework yet.
+- **Model/portrait:** reusing the cloned `m_Skinsets` remains the simplest path. For original
+  editor-free GLB body, hair, and conditional-apparel assignments, use
+  `Content.SetClassBodyMeshesFromGlb` and follow the strict path, bind, equipment, and lifecycle
+  requirements in [`MODEL-PLAYER-API.md`](MODEL-PLAYER-API.md).
 - **Name & flavor:** the display name is the 4th `AddClass` arg; set the description with
   `Localization.SetClassFlavor(id, "...")`.
 
@@ -246,15 +248,50 @@ Content.AddEncounter("com.you.mymod", "mymod_cache", FTK_miniEncounter.ID.Treasu
 Co-op is Photon and has **no asset streaming**: every player must have the same mods installed.
 Synthetic IDs are deterministic precisely so host/client agree on what each id means.
 
-## 10. The in-game Mods menu: toggling, saves, and co-op
+## 10. Data-authored mods
 
-The title screen has a **Mods** button (added by `Core/UI/ModsButtonPatch.cs`) that opens a panel
-listing every installed mod: the bundled sample content plus each discovered data mod. Each row has
-an on/off toggle. Toggling persists immediately (data mods to `PlayerPrefs`, the bundled demo to the
-`EnableSampleContent` config entry) and takes effect on the **next launch**: the framework injects all
-content once during `TableManager.Initialize`, so there is no live un-injection. This is spec #14.
+A content mod can be a folder under `<game>/BepInEx/plugins/` with no compiled DLL. Give it a
+`manifest.json` and one or more other `.json` files containing `entries` arrays. The loader
+registers entries in a deterministic ordinal `(modGuid, id)` order rather than filename order, so
+every co-op client mints positional IDs identically. Cross-file references resolve in a later
+phase, so a class can point at a weapon declared in another file whichever one is read first.
+Supported kinds are items, weapons, proficiencies, classes, enemies, and encounters. The checked-in
+[`SampleData/com.ftkmf.sampledata`](../FTKModFramework/SampleData/com.ftkmf.sampledata) folder is
+the canonical working example; its intentionally broken and validation-only files demonstrate
+fault isolation and should not be copied into a real package.
 
-Two hazards are **documented but not enforced** in this slice:
+At minimum, a manifest declares stable identity, the mod's own numeric version, and the earliest
+framework release on which the author confirmed it works:
+
+```json
+{
+  "modGuid": "com.example.wayfarer",
+  "name": "Wayfarer",
+  "version": "1.0.0",
+  "frameworkVersion": "0.1.3"
+}
+```
+
+`version` and `frameworkVersion` are separate. A missing, invalid, older, or different-major
+framework declaration leaves the mod visible but blocks its content and declared behavior DLL.
+Read [`MOD-VERSIONING.md`](MOD-VERSIONING.md) before publishing. Marketplace packages add the
+reviewed descriptor, immutable archive, and validation requirements in
+[`MARKETPLACE.md`](MARKETPLACE.md).
+
+Each content entry supplies `kind`, a stable local `id`, an existing `template`, a display name,
+and kind-specific `fields`. References to another entry in the same mod use that local string ID.
+Unknown kinds and templates are rejected; invalid files and entries are isolated so valid files
+can still load. Start from the sample files rather than guessing serialized game field names.
+
+## 11. The in-game Mods browser: changes, saves, and co-op
+
+The title screen's **Mods** panel separates Discover, Installed, and Updates. Installed includes
+bundled, marketplace-managed, and manually installed content. Enable or package changes are
+prepared safely and take effect on restart because content registration happens once during
+startup. The panel also explains compatibility blocks and supports recovery for managed installs.
+See [`MARKETPLACE.md`](MARKETPLACE.md) for the player and package-author contract.
+
+Two hazards remain important:
 
 - **Disabling a mod can break a save that references its content.** A save stores entities by their id.
   The sharpest case is a playable class: classes register at `id == array index` (see §8), so a saved
@@ -266,19 +303,24 @@ Two hazards are **documented but not enforced** in this slice:
   recover that save.
 
 - **Co-op requires every player to enable the identical mod set.** Co-op is Photon with no asset
-  streaming (see §9): each client resolves ids locally, so all players already need the same mods
-  installed. The toggles are per machine (`PlayerPrefs` / local config), so two players can have the
-  same mods installed but different mods enabled, which desyncs exactly as a missing mod would. This
-  slice does **not** enforce a matching enabled set across clients. A host/client mod-set compatibility
-  check is a separate roadmap item (the cross-cutting "Determinism / saves / co-op" line in
-  [`ROADMAP.md`](ROADMAP.md)). Until it exists, agree on the enabled set with the other players before
-  starting a co-op run.
+  streaming (see §9): each client resolves IDs and assets locally. Framework-version preflight and
+  package hashes do not prove that two players have the same complete installation. Agree on the
+  enabled set with the other players before starting a co-op run.
 
-## 11. Content tables
+## 12. Public capability map
 
 The full inventory of the 57 `FTK_*DB` tables (items, weapons, proficiencies, hit effects,
 classes, skinsets, enemies, realms, encounters, quests, ...) is in
-[`PHASE0-TYPE-INVENTORY.md`](PHASE0-TYPE-INVENTORY.md). Helpers exist for items, weapons,
-proficiencies, classes, enemies (`Content.AddEnemy`), overworld encounters (`Content.AddEncounter`),
-and whole adventures (`Adventures.AddFromTemplate`). For any other table you can register directly
-with `ContentRegistry.Register(db, guid, id, template, configure)`.
+[`PHASE0-TYPE-INVENTORY.md`](PHASE0-TYPE-INVENTORY.md).
+
+| Capability | Public entry point | Guide |
+|---|---|---|
+| Items, weapons, proficiencies, classes, enemies, encounters | `Content.Add*`, `Content.Attach*` | This guide |
+| Class-innate passive traits | `Content.AddPassive` | This guide and the bundled Innkeeper |
+| Adventures, campaigns, quests, NPCs, end-game art | `Adventures.*`, `CampaignBuilder`, `QuestBuilder` | [`ADVENTURES.md`](ADVENTURES.md), [`CAMPAIGNS.md`](CAMPAIGNS.md) |
+| Enemy visuals, meshes, materials, portraits, fall-off | `Content.SetEnemy*` | [`CUSTOM-MODELS.md`](CUSTOM-MODELS.md), [`MODEL-RENDERER-API.md`](MODEL-RENDERER-API.md) |
+| Player body, hair, and conditional apparel | `Content.SetClassBodyMeshesFromGlb` | [`MODEL-PLAYER-API.md`](MODEL-PLAYER-API.md) |
+
+For an unwrapped table, framework contributors can register through `ContentRegistry`; mod authors
+should prefer the public `Content.*` and adventure APIs so validation and compatibility behavior
+remain centralized.

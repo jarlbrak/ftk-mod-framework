@@ -129,9 +129,9 @@ Existing portrait textures are not refreshed by registration. Verify newly
 captured turn-order and enemy-panel portraits separately; registration and source
 marker validation do not prove final framing or custom mesh visibility.
 
-## Explicit native material slots (offline candidate; live validation pending)
+## Explicit native material slots
 
-For a renderer whose native behavior depends on multiple material slots, use a real2–4-primitive GLB and explicit slot descriptors. Existing `EnemyRendererMesh` constructors still select one primitive and one material. The named factory avoids ambiguous legacy null-texture constructor calls:
+For a renderer whose native behavior depends on multiple material slots, use a real two-to-four-primitive GLB and explicit slot descriptors. Existing `EnemyRendererMesh` constructors still select one primitive and one material. The named factory avoids ambiguous legacy null-texture constructor calls:
 
 ```csharp
 EnemyRendererMesh.WithNativeMaterialSlots("enJellyCube", "original_cube.glb", new[]
@@ -145,4 +145,4 @@ Each descriptor specifies primitive index, native material slot, optional author
 
 CubeA's native ScrollingUVs materialIndex1 requires the two-slot form. On a successful opted-in renderer, an exact compatibility prefix retains the native component, existing private uvOffset, rate, property and index. It accumulates `uvAnimationRate * Time.deltaTime` on every native component invocation even while Renderer.enabled is false, then writes only when enabled. It uses tracked private sharedMaterials rather than invoking `.materials` and creating untracked copies. Unsupported/nonowned components execute their original method; failed transactions remove the opt-in. An unexpected changed material set is not adopted and is logged before returning to native behavior without first advancing phase.
 
-Cloned avatars initially retain the shared resource lease; the first enabled scrolling write privately clones their verified assigned material set once. All allocations join the lease before assignment, with rollback on failure. The source and clone therefore do not cross-write UV phase. Disabled renderer phase accumulation does not force allocation. Newly allocated per-owner materials remain owned until the last lease owner releases; this is bounded shared-lease lifetime, not immediate per-owner disposal. Never-active owner pruning remains necessary. Native Unity scheduling, destruction orders, material property readback and actual cubeA rendering are still live gates; offline stand-ins are not a live PASS.
+Cloned avatars initially retain the shared resource lease; the first enabled scrolling write privately clones their verified assigned material set once. All allocations join the lease before assignment, with rollback on failure. The source and clone therefore do not cross-write UV phase. Disabled renderer phase accumulation does not force allocation. Newly allocated per-owner materials remain owned until the last lease owner releases; this is bounded shared-lease lifetime, not immediate per-owner disposal. Never-active owner pruning remains necessary. The canonical [Mossglass Cube A archive](../art-experiments/mossglass-reliquary/live-validation-v5/README.md) records the exact two-slot assignment, per-frame scroll readback, native motion, ordinary damage, death fixture, and Ready progression. Its stated limits still apply; one live route does not prove every multi-slot renderer or lifecycle order.

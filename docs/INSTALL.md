@@ -1,8 +1,8 @@
-# Installing mods for For The King (macOS, SteamOS, Bazzite, Linux)
+# Installing mods for For The King
 
-One command sets up everything: it finds your Steam copy of For The King, installs the BepInEx mod
-loader that matches your build, installs the FTK Mod Framework, and sets the Steam launch option
-that turns the loader on. No mod manager, no manual file copying, no editing Steam settings.
+The branded launcher is the recommended setup on macOS, Linux, and Windows. A standalone terminal
+installer is also available for manual macOS and Linux installations. Both install the matching
+BepInEx loader and FTK Mod Framework without redistributing the game.
 
 ## Recommended: Steam launcher
 

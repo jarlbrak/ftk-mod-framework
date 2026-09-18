@@ -22,7 +22,7 @@
 | Playable classes | Working and verified (the bundled **Thief**: custom stats, a dagger, abilities, and a Focus-guaranteeable Steal) |
 | Enemies | Working and verified (the bundled **Cutpurse**: custom stats, a gold-stealing Pilfer ability, custom loot, real spawns) |
 | Passive class traits | Working and verified (the bundled **Innkeeper**: class-innate passives via `Content.AddPassive`) |
-| Custom enemy models | Runtime mesh injection demonstrated; per-rig motion validation tracked separately (see [`docs/CUSTOM-MODELS.md`](docs/CUSTOM-MODELS.md)) |
+| Custom enemy and player models | Editor-free GLB authoring, strict transactional renderer replacement, and route-specific live validation are available. The catalog covers all 48 supported topology groups; see [`docs/CUSTOM-MODELS.md`](docs/CUSTOM-MODELS.md). |
 | Adventures & campaigns | Working and verified solo (cloned adventures, plus the bundled **The Hollow Mire**: a bespoke realm, boss, and questline played to victory; see [`docs/ADVENTURES.md`](docs/ADVENTURES.md)); co-op verification pending |
 
 "Verified in-game" means the content has been loaded into a running game with `SELF-TEST PASS` confirmed in `BepInEx/LogOutput.log`, not just compiled. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
@@ -53,7 +53,7 @@ by default, so use the launcher archive for this early-access preview.
 ## Three ways to get involved
 
 - **Play** (above), and drop other content mods into `<game>/BepInEx/plugins/`.
-- **Use the framework** (make your own mod): add content through the public `Content.*` API. Start with [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md). The bundled `Content/ThiefClass.cs` and `Content/CutpurseEnemy.cs` are working references.
+- **Use the framework** (make your own mod): add content through the public `Content.*` API. Start with [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md), and declare the author-confirmed framework minimum described in [`docs/MOD-VERSIONING.md`](docs/MOD-VERSIONING.md). The bundled `Content/ThiefClass.cs` and `Content/CutpurseEnemy.cs` are working references.
 - **Contribute to the framework** (work on the engine and content pipeline): see [`CONTRIBUTING.md`](CONTRIBUTING.md). Work is scoped as epics, specs, and work-items in [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues); every change is verified in-game before it counts as done.
 
 Questions and ideas are welcome in [Discussions](https://github.com/jarlbrak/ftk-mod-framework/discussions).
@@ -86,8 +86,9 @@ FTKModFramework/
     EnumPatches.cs         GetEnum prefixes (items / proficiencies / classes) for custom IDs
     Localization.cs        custom names, flavor text, and tooltip text
     Adventures.cs          adventure cloning/registration; CampaignBuilder/QuestBuilder for questlines
-    Data/                  data-authored JSON mods (manifest.json + content.json discovery and loading)
-    UI/                    the in-game Mods menu (per-mod on/off toggles)
+    Data/                  data-authored JSON mods (manifest plus deterministic content-file loading)
+    Marketplace/           catalog, package, release-note, and framework-update runtime
+    UI/                    the in-game Mods browser, installed-mod controls, and updates panel
   Content/                 bundled sample content, all working references:
     ThiefClass.cs          the Thief: a full custom class (stats, dagger, abilities, Steal)
     CutpurseEnemy.cs       the Cutpurse: a full custom enemy (stats, Pilfer, loot, real spawns)
@@ -96,6 +97,8 @@ FTKModFramework/
   Agent/                   opt-in test bridge (env-gated, loopback-only, single-player; see harness/)
 FTKPerfProbe/              standalone perf-probe plugin (+ FTKPerfProbe.Tests)
 harness/                   MCP server that lets an agent drive the game to verify content
+launcher/                  branded cross-platform launcher, updater helper, and packaging tools
+marketplace/               reviewed community catalog and validation fixtures
 install.sh                 the player installer (macOS + Linux): BepInEx + plugin + Steam launch option
 deploy.sh                  developer build-and-install through install.sh (self-tests on)
 release.sh                 maintainer: publish a GitHub release the installer downloads from
@@ -110,8 +113,12 @@ docs/
   CAMPAIGNS.md             data-authored questlines (branching, flags, custom objective verbs)
   CUSTOM-MODELS.md         custom enemy models (runtime glTF + AssetBundle paths)
   MODEL-AUTHORING.md       repeatable original-model workflow and live checks
+  MODEL-PLAYER-API.md      strict player body, hair, and conditional-apparel assignments
+  MODEL-RENDERER-API.md    strict enemy renderer, material, scale, portrait, and fall-off APIs
   MODEL-SKELETONS.md       discovery inventory and per-rig validation status
   AI-NATIVE.md             generic-first agent instructions, adapters, and local context
+  MARKETPLACE.md           player and package-author marketplace guide
+  MOD-VERSIONING.md        manifest compatibility and framework-update policy
   SCALE-BUDGET.md          the load-time / heap scale-budget gate
   PHASE0-TYPE-INVENTORY.md the full content-table inventory decompiled from the game
   ROADMAP.md               phased plan toward the five content goals + FTK2 ports
@@ -140,10 +147,10 @@ are git-ignored (they're copyrighted; reference them from the install).
 
 ## Install & run
 
-Players: use the one-line installer above (it handles BepInEx, the plugin, and Steam's launch
-option on macOS and Linux; [`docs/INSTALL.md`](docs/INSTALL.md) has the per-platform details and
-troubleshooting). On Windows, install the **BepInExPack for For The King** (Thunderstore / r2modman)
-and copy `FTKModFramework.dll` into `<game>/BepInEx/plugins/`.
+Players: use the launcher archive described in [Play with mods](#play-with-mods-macos-linux-windows-preview).
+It handles first-time framework and loader setup on all three platforms. The standalone terminal
+installer remains available for manual macOS and Linux setup; [`docs/INSTALL.md`](docs/INSTALL.md)
+has the platform details, removal steps, and troubleshooting.
 
 Developers: `./deploy.sh` builds the framework and installs your build into your Steam copy through
 the same installer, with the load-time self-tests switched on (`Diagnostics/RunSelfTests`). Launch,
@@ -190,8 +197,10 @@ behind the `Demo / EnableSampleContent` config (set it false to use the framewor
 dependency for other mods).
 
 Content can also be authored as **pure data**, no C# required: a mod folder with a `manifest.json`
-and `content.json` is discovered and loaded at startup, and the title screen's **Mods** menu toggles
-each mod on or off (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §10).
+and one or more content JSON files is discovered and loaded at startup, and the title screen's
+**Mods** panel manages each mod (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §10).
+Every manifest must declare its own release `version` and an author-confirmed `frameworkVersion`;
+missing, invalid, older, or different-major declarations remain visible but do not load.
 
 ## The five goals: where each stands
 
@@ -203,14 +212,28 @@ each mod on or off (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §1
 | New **enemies** | `FTK_enemyCombatDB`, `GameCache.Enemies` | ✅ working + verified (`Content.AddEnemy`; the **Cutpurse**) |
 | New adventures | `GameDefinition` (`.ftk2`), `FTK_realmDB`, `FTK_miniEncounterDB` | ✅ working + verified solo (`Adventures.AddFromTemplate`; a bespoke realm + boss; co-op verification pending) |
 
+## Community marketplace
+
+The title-screen Mods panel includes Discover and Installed views for curated free content, with
+changes applied on restart. The initial production catalog is intentionally empty until reviewed
+packages are published. See [the marketplace guide](docs/MARKETPLACE.md) for installation, author
+submissions, recovery, and current validation limits.
+
+## Documentation
+
+- Players: [launcher setup](launcher/README.md), [manual installation](docs/INSTALL.md),
+  [marketplace](docs/MARKETPLACE.md), and [release notes](docs/releases/).
+- Mod authors: [writing content](docs/WRITING-CONTENT.md), [mod versioning](docs/MOD-VERSIONING.md),
+  [adventures](docs/ADVENTURES.md), [campaigns](docs/CAMPAIGNS.md), and
+  [custom models](docs/CUSTOM-MODELS.md).
+- Model authors: [authoring workflow](docs/MODEL-AUTHORING.md),
+  [enemy renderer API](docs/MODEL-RENDERER-API.md), [player renderer API](docs/MODEL-PLAYER-API.md),
+  and [skeleton and route register](docs/MODEL-SKELETONS.md).
+- Contributors: [contribution guide](CONTRIBUTING.md), [roadmap](docs/ROADMAP.md), and
+  [release process](docs/RELEASING.md).
+
 ## Credits / prior art this builds on
 
 - **FTKAPI** (Amadare / ftk-modding) and **FTKModLib** (lulzsun): the existing FTK modding APIs.
 - **CommunityDLC** (Theta_Hat_Society / Dehydrated-Mud): the worked example of a custom class.
 - Decompilation via **ILSpy**; loader **BepInEx**; patching **HarmonyX**.
-
-## Community marketplace
-
-The title-screen Mods panel includes Discover and Installed views for curated free content, with changes applied on restart. The initial catalog is empty until reviewed packages are published. See [the marketplace guide](docs/MARKETPLACE.md) for installation, author submissions and current validation limits.
-
-See [mod versioning](docs/MOD-VERSIONING.md) for manifest framework requirements and major-version compatibility.
