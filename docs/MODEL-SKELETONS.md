@@ -42,7 +42,7 @@ catalogs. It lists all original assets and live acceptance work still required.
 | [Duneshade Asp / snakeDesertA](../art-experiments/duneshade-desert-asp/README.md) | Exact original 46-bone mesh at `enDesertSnakeA`, renderer 121552; native root scale 0.65 preserved at public factor 1.0 | Canonical [V2](../art-experiments/duneshade-desert-asp/live-validation-v2-canonical/README.md) preserves three complete 120-frame captures through settled `Snake_Idle`, native `Snake_BiteAttack`, ordinary HP 58→48 with `Snake_HitSmall`, recovery, and explicit-fixture `Snake_DeathBig`; at frame 28 the animator disables and all 13 bodies become dynamic, settling by frame 50; one guarded Collect reaches strict Ready 0/2; 17 originals are reviewed | Exact `snakeDesertA` source only; fixture death is not ordinary lethal evidence; native effects/hero/loot UI limit fine review; collision, general corpse lifetime, cleanup, portraits, culling, sibling sources, resource lifetime, every animation and finished-art acceptance remain open |
 | [Sargassum Lash V2 / krakenTentacle](../art-experiments/abyssal-kraken/README.md) | Exact original 20-bone mesh at `krakenTentacle`, renderer 121595; native root scale 1.0 preserved | Canonical [primary V2](../art-experiments/abyssal-kraken/live-validation-sargassum-primary-v2-canonical/README.md) preserves complete 120-frame Pass and ordinary Attack captures plus an accepted 91-frame death prefix through settled `Tentacle_Idle_M`, native `Tentacle_Attack2_M`, ordinary HP 162→154 with `Tentacle_Damaged_M`, later `Tentacle_AttackGrab_Mirrored` and `Tentacle_Attack1_M`, and explicit-fixture `Tentacle_Death`; strict Ready is observed at 0/2 without Collect; 17 originals are reviewed | Exact primary `krakenTentacle` source only; fixture death is not ordinary lethal evidence; `m_DoRagdoll=false` means animated death; the renderer-destroyed boundary leaves full death duration and cleanup unproven; the tall body, broad attacks, effects and hero exceed or obscure the fixed camera; mirror controller, portraits, collision, culling, resource lifetime, every interval and finished-art acceptance remain open |
 | [Abyssal Crown V4 / krakenHead](../art-experiments/abyssal-kraken/README.md) | Exact original seven-bone skinned head at `kraken2`, renderer 121035, plus required same-owner rigid `Root_M/base/body/neck/eye/kraken2_eye`; native root scale 1.0 preserved | Canonical [head V5](../art-experiments/abyssal-kraken/live-validation-head-v5-canonical/README.md) preserves complete 120-frame Pass and ordinary Attack captures plus an accepted 91-frame death prefix through settled `krakenIdle`, native `krakenAttack`, ordinary HP 324→316 with `krakenDamage`, recovery and explicit-fixture `krakenDisappear`; strict Ready is observed at 0/2 without Collect; 31 originals are reviewed | Exact `krakenHead / kraken2 / 121035` motion topology only; the rigid eye is structural profile context without skinned motion credit; fixture death is not ordinary lethal evidence; the pass records a nonstandard zero-damage self-targeted action; `m_DoRagdoll=false` means animated disappearance; the renderer-destroyed boundary leaves cleanup causality and final disposal unproven; effects, hero overlap, tall-pose crop, portraits, collision, culling, resource lifetime, every interval and finished-art acceptance remain open |
-| [Mournglass Wraith / chaosBeast](../art-experiments/mournglass-wraith/README.md) | Exact original two-material mesh at `enChaosBeast`, renderer 121008; 31-bone ghost palette; native CEL scale 1.5 preserved | Canonical [V2](../art-experiments/mournglass-wraith/live-validation-v2-canonical/README.md) preserves complete 120-frame Pass and ordinary Attack captures plus an accepted 94-frame death prefix through settled `cidle_ghost`, native `attackProf_ghost`, immediate ordinary HP 58→53 with `damageSmall_ghost`, recovery, later native attacks and the opening of explicit-fixture `death_ghost`; strict Ready is observed at 0/2 without Collect; 30 originals are reviewed | Exact `chaosBeast / enChaosBeast / 121008` source only; a later Ready poll sees HP45 after uncaptured intervening events and is not attributed to the 5-damage hit; fixture death is not ordinary lethal evidence; `m_DoRagdoll=false` means animated disappearance; the renderer is visible only through death frame19 and the destruction boundary leaves full visible death, cleanup and final disposal unproven; effects, hero overlap, portraits, collision, culling, resource lifetime, every interval and finished-art acceptance remain open |
+| [Mournglass Wraith / chaosBeast](../art-experiments/mournglass-wraith/README.md) | Exact original two-material mesh at `enChaosBeast`, renderer 121008; 31-bone ghost palette; native CEL scale 1.5 preserved | Canonical [V2](../art-experiments/mournglass-wraith/live-validation-v2-canonical/README.md) preserves complete 120-frame Pass and ordinary Attack captures plus an accepted 94-frame death prefix through settled `cidle_ghost`, native `attackProf_ghost`, immediate ordinary HP 58→53 with `damageSmall_ghost`, recovery, later native attacks and the opening of explicit-fixture `death_ghost`; strict Ready is observed at 0/2 without Collect; 30 originals are reviewed | Exact `chaosBeast / enChaosBeast / 121008` source only; a later Ready poll sees HP 45 after uncaptured intervening events and is not attributed to the 5-damage hit; fixture death is not ordinary lethal evidence; `m_DoRagdoll=false` means animated disappearance; the renderer is visible only through death frame19 and the destruction boundary leaves full visible death, cleanup and final disposal unproven; effects, hero overlap, portraits, collision, culling, resource lifetime, every interval and finished-art acceptance remain open |
 | [Bronzehollow / deathknightA](../art-experiments/bronzehollow-sentinel/README.md) | Exact original body at `deathKnight`, reference renderer 121217; 36 matched bones; native helmet, shield and weapon retained separately; one owner at visual scale 1.0 and captured native CEL scale 1.2 | Canonical V4 preserves ten complete 120-frame captures with exact identity in all 1,200 frames: settled idle, native `AttackProf`, native shield `Block`, ordinary `Damaged` recoil, later native attack, and explicit-fixture `deathHeavy_blunt1H` into a coherent ragdoll; seven zero-focus attacks return native Block at HP 45→45 before attempt 8 returns native Damaged for HP 45→44; two guarded Collects reach strict Ready 0/2; nineteen originals and ten videos are archived | The disposable party fixture caps only the equipped hammer's Toughness skill at native 0.95, so balance is unrepresentative; explicit `KillSingle` 44→0 is a fixture, not ordinary lethal evidence; helmet, shield and mace are native equipment and receive no original-art credit; detailed equipment clearance, other attacks, collision/culling, physics sleeping, portraits, resource lifetime, final disposal, sibling sources and finished-art approval remain open |
 | [Bronzewake / bossGladiator](../art-experiments/bronzewake-champion/README.md) | Exact authored multipart body, hair, armor and boots at `enBossGladiator`/`hairBottomBossGladiator`/`armorBossGladiator`/`bootsBossGladiator` (121272/121500/121522/121661); one owner at visual scale 1.0; captured native CEL scale 1.1. Canonical V4 credits armor 121522, V5 credits body 121272, V6 credits boots 121661, and V7 credits hair 121500 | All four exact renderer topologies now have their own canonical source archive. V4 records complete pass and ordinary HP 11→1 hit captures for armor; V5 records HP 11→6 for body; V6 records HP 11→1 `DamagedHeavy` for boots; V7 records HP 11→1 `DamagedHeavy` for hair. Each archive retains 90/120 explicit `KillSingle` frames before the verified controller-unresolved boundary and reaches strict Ready 0/2. V7 preserves 20 reviewed originals and an actual `m_DoRagdoll=true` transition with all 11 surviving bodies nonkinematic from frame 28 | Fixture death is not ordinary lethal evidence, and each partial prefix leaves full duration, later corpse lifetime and cleanup causality unproven. Other proficiencies, `DeathLight`, native accessories, UI/effects, depth blur, culling, portraits, collision, resource lifetime, full campaign behavior and final art review remain open |
 | [Rustpetal / plantD](../art-experiments/rustpetal-snapper/README.md) | Exact original mesh at `enJungleNibbler_C`, renderer 121537; 43-bone plantD palette and exact binding signature; one owner at visual scale 1.0 with native CEL scale 1.7 | Canonical [V2](../art-experiments/rustpetal-snapper/live-validation-v2/README.md) preserves complete idle/native `attack3` and ordinary HP 58→50 `hit1` captures, a later native `attackProf1`, and 94 exact explicit-fixture `death` frames through a coherent fall and source cleanup boundary; strict Ready succeeds at level 0 room 2 without Collect; 20 reviewed originals and three videos are archived | Exact plantD source only; fixture death is not ordinary lethal evidence; `m_DoRagdoll=false` and zero rigidbodies establish animated death rather than ragdoll; renderer destruction leaves full death duration, cleanup causality and later corpse lifetime unproven; effects/UI/hero/blur, culling, collision, portraits, resource lifetime, sibling sources and finished-art acceptance remain open |
@@ -189,7 +189,7 @@ pins and the stopped prefixes so a later run can resume from the same boundary.
 | hag A | `hag01` / 121109 | Pass, ordinary Attack 58→50, explicit `KillSingle`, native Ready 0/3 | Exact 37-joint binding diagnostic complete; other hag/controller rows remain separate claims |
 | bearman A | `bearman` / 121195 | Pass, ordinary Attack 58→50, explicit `KillSingle`, native Ready 0/2 | Exact 37-joint dual-weapon binding diagnostic complete; other bear/controller rows remain separate claims |
 | bandit A | `bandit02` / 121005 | Pass, ordinary Attack 58→50, explicit `KillSingle`, two native Collects, strict Ready 0/2 | Exact 37-joint bow-controller binding diagnostic complete; other 37-joint rows remain separate claims |
-| thief A | `enThief01` / 120997 | Pass capture; native controller reduced HP58→0 before a hero attack | Exact 37-joint bladed-controller binding captured at a self-termination boundary; no ordinary damage, fixture death, loot or Ready acceptance |
+| thief A | `enThief01` / 120997 | Pass capture; native controller reduced HP 58→0 before a hero attack | Exact 37-joint bladed-controller binding captured at a self-termination boundary; no ordinary damage, fixture death, loot or Ready acceptance |
 | hag B | `hag02` / 120995 | Pass, ordinary Attack 58→48, explicit `KillSingle`, two native Collects, strict Ready 0/2 | Exact 37-joint hag-controller binding diagnostic complete; hag A and other 37-joint rows remain separate claims |
 | skelly B | `skelly04archer` / 121169 | Pass, ordinary Attack 58→55, explicit `KillSingle`, two native Collects, strict Ready 0/2 | Exact 37-joint bow-controller binding diagnostic complete; skelly A and other 37-joint rows remain separate claims |
 | witch A | `witch01` / 121039 | Pass, ordinary Attack 58→48, explicit `KillSingle`, two native Collects, strict Ready 0/2 | Exact 37-joint magic-controller binding diagnostic complete; other magic-controller and 37-joint rows remain separate claims |
@@ -252,7 +252,7 @@ pins and the stopped prefixes so a later run can resume from the same boundary.
 | cultist boss 2 | `cultist3` / 121092 | Pass, ordinary Attack 81→76, explicit `KillSingle`, two native Collects, strict Ready at room 2 | Exact 37-joint magic-controller binding diagnostic complete; cultist boss 1 and other magic rows remain separate claims |
 | bard A | `enBard` / 121163 | Pass, ordinary Attack 58→53, explicit `KillSingle`, two native Collects, strict Ready at room 2 | Exact 37-joint lute-controller binding diagnostic complete; other lute and 37-joint rows remain separate claims |
 | pirate A | `enPirate02` / 120970 | Pass, ordinary Attack 58→50, explicit `KillSingle`, one native Collect, strict Ready at room 2 | Exact 37-joint rapier-controller binding diagnostic complete; pirate B and other 37-joint rows remain separate claims |
-| pirate B | `enPirate01` / 121205 | Pass capture; native Attack reduced HP58→0 before the fixture | Exact 37-joint bladed-controller binding captured at a target-removal boundary; no ordinary nonlethal damage, fixture death, loot or Ready acceptance |
+| pirate B | `enPirate01` / 121205 | Pass capture; native Attack reduced HP 58→0 before the fixture | Exact 37-joint bladed-controller binding captured at a target-removal boundary; no ordinary nonlethal damage, fixture death, loot or Ready acceptance |
 | mage imp A | `impWizard01` / 121149 | Pass, bounded native attacks, accepted ordinary Attack 58→48 on attempt 3 after two 58→58 outcomes, explicit `KillSingle`, one native Collect, strict Ready at room 2 | Exact 37-joint magic-controller binding diagnostic complete; earlier no-loss outcomes are preserved and no cause is inferred |
 | minion scourge B | `BanditWarrior` / 121201 | Pass, ordinary Attack 58→53, explicit `KillSingle`, strict Ready at room 2; no usable native Collect button | Exact 37-joint bladed-controller binding diagnostic complete; shared renderer evidence does not transfer across source/controller rows |
 | minion scourge F | `enMinionHangman` / 121321 | Pass, ordinary Attack 58→48, explicit `KillSingle`, strict Ready at room 2; no usable native Collect button | Exact 37-joint ghost-controller binding diagnostic complete; other ghost and 37-joint rows remain separate claims |
@@ -385,7 +385,7 @@ repeats the exact crowC `enCrow` binding in session
 owner `369188` at public visual-scale factor 1.0 (captured native CEL scale
 0.9); selected idle and attack views retain the connected wings, head and beak.
 Ordinary damage is58 to53 with `cheat=None` and no focus. The explicit
-`KillSingle` fixture completes120 frames, reaches strict Ready at level0 room2,
+`KillSingle` fixture completes 120 frames, reaches strict Ready at level0 room2,
 and exposes a direct Ready vote with no Collect action. The small/dark airborne
 silhouette, native UI/effects and victory overlay limit fine feather/eye detail,
 complete death deformation, culling, portraits, resource lifetime and finished-
@@ -414,7 +414,7 @@ binding failure and does not replace the successful fresh process.
 ## Sunspire Roc live trials
 
 [Sunspire Roc](../art-experiments/sunspire-roc/README.md) is an original closed-
-panel, articulated-wing model for the exact `rocA` `enRoc01` renderer121238.
+panel, articulated-wing model for the exact `rocA` `enRoc01` renderer 121238.
 Its source generator reads only bone names and inverse bind matrices; the
 separate proof reruns it while rejecting native surface reads. The model uses
 the native 36-bone palette, including the full scapula-to-fingertip wing chains,
@@ -423,11 +423,11 @@ leg/talon chains, jaw, central tail, and side-tail chains.
 The canonical [V4 exact-source archive](../art-experiments/sunspire-roc/live-validation-v4/README.md)
 preserves the fresh [V2 ordinary archive](../art-experiments/sunspire-roc/live-validation-v2/validation.json).
 That session records the original `ftkmf_glb_sunspire-roc.glb` under owner369188 with its
-expected bone signature and native0.9 scale. Pass, ordinary `Attack` HP81→71,
+expected bone signature and native0.9 scale. Pass, ordinary `Attack` HP 81→71,
 and explicit `KillSingle` each retain 120 frames; nine reviewed stills show the
 head, beak, torso, wings, talons, and tail remaining connected. Two guarded
 native Collect actions then reach strict Ready0/2. The separate [V1 archive](../art-experiments/sunspire-roc/live-validation-v1/validation.json)
-preserves a fresh `Attack(focus)` HP81→71 session without relabeling it as
+preserves a fresh `Attack(focus)` HP 81→71 session without relabeling it as
 ordinary evidence. Native UI/effects and victory overlay limit fine detail;
 [V3](../art-experiments/sunspire-roc/live-validation-v3/validation.json) adds
 one fresh constructed native `uiEnemyEncounterPortrait.Initialize` row-preview
@@ -450,7 +450,7 @@ remain separate checks.
 ## Tidecrown Sea King live trial
 
 [Tidecrown Sovereign](../art-experiments/tidecrown-sea-king/README.md) is an
-original 60-bone sea monarch for the exact `seaKing` `enSeaKing` renderer121357.
+original 60-bone sea monarch for the exact `seaKing` `enSeaKing` renderer 121357.
 Its generator consumes only the extracted palette names and inverse bind
 matrices, and its proof reruns with native input restricted to those two keys.
 The body deliberately omits the game-owned trident, shield, breakable props,
@@ -465,7 +465,7 @@ retry records a same-target HP change from720 to719 on attempt four. Its first
 three focus attempts and a separate fresh eight-attempt ordinary no-focus run
 are preserved as `no_hp_loss_unclassified`, so the focus result does not get
 relabeled as ordinary evidence or a combat-cause explanation. The explicit
-`KillSingle` fixture retains91 frames: recorded ragdoll bodies become dynamic
+`KillSingle` fixture retains 91 frames: recorded ragdoll bodies become dynamic
 at frame28, and the custom renderer is inactive/invisible in the final retained
 frame. The guarded sequence observes strict Ready0/2 without a Collect
 submission. Eight reviewed stills and two presentation videos establish sampled
@@ -500,17 +500,17 @@ repeats the exact cockatriceC `enChicken` binding in session
 owner `369188` at public visual-scale factor 1.0 (captured native CEL scale
 0.55); selected idle and attack views retain the jade body, crest, beak, wings,
 legs and claws. Ordinary damage is72 to62 with `cheat=None` and no focus. The
-explicit `KillSingle` fixture completes120 frames, one guarded native Collect is
+explicit `KillSingle` fixture completes 120 frames, one guarded native Collect is
 accepted, and strict Ready is observed at level0 room2. Native UI/effects and
 the victory loot surface limit fine crest/feather detail, complete death
 deformation, culling, portraits, resource lifetime and finished-art acceptance.
 
 The canonical [Basilight V3 exact-source supplement](../art-experiments/basilight-cockatrice/live-validation-v3/validation.json)
 pins a fresh queue-route run to exact `cockatriceC / enChicken / 121484`, owner
-369188, native scale0.55, and the expected50-bone signature. Three complete
+369188, native scale 0.55, and the expected 50-bone signature. Three complete
 120-frame captures preserve the hooked beak, crest, jade body, wing panels,
 long legs, claws, and curled tail through idle, native `AttackProf1` and
-`AttackProf`, an ordinary HP72 to62 `Damaged`/`Cockatrice_HitSmall` response and
+`AttackProf`, an ordinary HP 72 to62 `Damaged`/`Cockatrice_HitSmall` response and
 recovery, and the explicit-fixture `Death`/`Cockatrice_DeathHuge` recoil,
 backward fall, and coherent prone finish. Eighteen reviewed original PNGs show
 the custom renderer still visible behind the sampled loot handoff. The Animator
@@ -544,9 +544,9 @@ scrolling, rollback and live checks. This is source evidence, not live acceptanc
 The canonical [Mossglass V5 exact-source supplement](../art-experiments/mossglass-reliquary/live-validation-v5/validation.json)
 closes the Cube A representative with fresh runtime evidence. One owner binds
 the exact two-primitive custom mesh to `cubeA / enJellyCube / 121012` at native
-scale1.1 and the expected three-bone signature. Three complete120-frame captures
+scale 1.1 and the expected three-bone signature. Three complete 120-frame captures
 preserve idle, native `AttackCrit`/`AOE_jelly` compression and recovery, an
-ordinary HP58 to53 `Damaged`/`wobble_jelly` response and recovery, and the
+ordinary HP 58 to53 `Damaged`/`wobble_jelly` response and recovery, and the
 explicit-fixture `Death`/`deathHeavy_jelly` disappearance. Two guarded Collects
 reach strict Ready0/2. Per-frame readback keeps authored slot0 fixed and advances
 the native slot1 `_MainTex` scroller at rate `(0,0.2)` while both material
@@ -570,7 +570,7 @@ constructed-fixture checks for appearance, damaged, damaged-heavy, death and
 death-light, with sparse visual reviews and no gameplay acceptance.
 
 The Kraken resource variant has a verified exact load basename
-`enkrakenhead` (GameObject8268, CEL135962, renderer121260 at `krakenHead`). It is
+`enkrakenhead` (GameObject8268, CEL135962, renderer 121260 at `krakenHead`). It is
 separate from the native enemy row `krakenHead`, which references the different
 `enKraken` prefab through CEL136951. Resource registration does not establish
 native combat use or artistic compatibility.
@@ -601,7 +601,7 @@ The [canonical Gloamfin V2 archive](../art-experiments/gloamfin-kraken/live-vali
 now closes the exact `krakenHead / enkrakenhead / krakenHead / 121260` route.
 It reconciles the two-owner production campaign with fresh reviewed combat
 captures and a native portrait follow-up. The visual run preserves exact
-binding through idle, native attack, ordinary HP324 to316 damage and recovery,
+binding through idle, native attack, ordinary HP 324 to316 damage and recovery,
 and an explicit fixture-death prefix through renderer cleanup. Strict Ready is
 observed at level0 room2. The production campaign separately proves ordinary
 lethal death, enemy victory and natural teardown.
@@ -611,7 +611,7 @@ The pre-fix initiative portrait was a blank teal tile. Framework
 now measures the owned posed mesh against the native 204x172 render target and
 scales only the disposable portrait clone when translation cannot satisfy the
 native 20-degree, 0.3-to-30 frustum. The accepted exact-route capture uses scale
-0.8447812795639038, keeps the source at scale1.0, shows the complete readable
+0.8447812795639038, keeps the source at scale 1.0, shows the complete readable
 face and upper body, and is referenced by six active initiative images. The
 fallback is exact-resource and ownership guarded; explicit portrait markers
 retain priority. Other projections, all-camera culling, a persistent corpse,
@@ -691,11 +691,11 @@ publish only descriptive metadata and original art.
 ## Resource brute diagnostic evidence
 
 `enbaseybrute` has a recorded native resource-fixture run on the `cragHulk`
-base: renderer121234 at exact CEL path `enBaseyBrute`, session
-`033a44209e08452aba8858dcd3eda29c`, health64 catalog `903d46b8...`.
+base: renderer 121234 at exact CEL path `enBaseyBrute`, session
+`033a44209e08452aba8858dcd3eda29c`, health 64 catalog `903d46b8...`.
 Stage case `b0d9357fa5774b7ebf898be11c641636` established the original probe
 binding. Native Pass, ordinary Attack (58 to56 HP), and explicit KillSingle
-fixture (56 to0 HP) each recorded120 unpaused frames over about10.9083 seconds.
+fixture (56 to0 HP) each recorded 120 unpaused frames over about 10.9083 seconds.
 Death switched Animator off at frame28 with11 native rigidbodies and the native
 ragdoll flag true. Frozen `deathHuge_bruteUnarmed` normalized0.165 after that
 handoff is not failed death; per-body physics measurements are retained in
@@ -712,11 +712,11 @@ scope limits; this single case does not validate the remaining resource groups.
 
 `enarmoredwolf` on native `wolfA` bound original probe121531 at exact CEL path
 `enArmoredWolf`, stage `1e06f4a672804a218a8e642d8e1bd3ec`, in session
-`033a44209e08452aba8858dcd3eda29c` with the same health64 catalog `903d46b8...`.
+`033a44209e08452aba8858dcd3eda29c` with the same health 64 catalog `903d46b8...`.
 Pass sampled `attack_wolf` frames44..59; ordinary Attack reduced58 to47 HP,
 with `damaged_wolf` frames25..37 and `attackProf_wolf` frames68..91. The explicit
-KillSingle fixture reduced47 to0 HP. All three captures recorded120 unpaused
-frames over about10.9083 seconds. Animator disabled at death frame27 with
+KillSingle fixture reduced47 to0 HP. All three captures recorded 120 unpaused
+frames over about 10.9083 seconds. Animator disabled at death frame27 with
 14 native rigidbodies; `deathHeavy_wolf` freezes at normalized0.11 after the
 physics handoff, which does not establish failed death.
 
@@ -732,10 +732,10 @@ and the diagnostic-only limits.
 
 `engoblinsnowa` on native `snowGoblinA` bound original probe121459 at exact CEL
 path `enGoblinSnowA`, stage `712817733d554e14ad407dc261211e1d`, session
-`033a44209e08452aba8858dcd3eda29c`, health64 catalog `903d46b8...`.
+`033a44209e08452aba8858dcd3eda29c`, health 64 catalog `903d46b8...`.
 Pass sampled `attack_blunt1H` frames45..68; ordinary Attack reduced58 to54 HP
 with `damageLight` frames26..36. Explicit KillSingle reduced54 to0 HP. Each
-capture recorded120 unpaused frames over about10.9083 seconds. Animator disabled
+capture recorded 120 unpaused frames over about 10.9083 seconds. Animator disabled
 at death frame27 with15 native rigidbodies; `deathHeavy_blunt1H` stays at
 normalized0.119565 after physics handoff, which does not establish failed death.
 
@@ -788,7 +788,7 @@ remain separate from the preserved v1 facing failure and original hashes.
 helper/sampler, not the subsequently planned sampler revision. Pass sampled
 `FatGuyAxeShield_Attack2` frames49..77. Ordinary critical Attack reduced90 to87
 HP, with HitSmall frames25..33 and Attack1 frames73..100. Explicit KillSingle
-reduced87 to0 HP. All three captures recorded120 unpaused frames over about
+reduced87 to0 HP. All three captures recorded 120 unpaused frames over about
 10.9083 seconds. Animator disabled at death frame27 with15 native rigidbodies;
 DeathDirect normalized0.11 freezes after physics handoff, not failed death.
 
@@ -822,7 +822,7 @@ evidence are in [the runtime index](model-runtime-validation.json).
 Pass recorded two `attack_impUnarmed` cycles at frames40..59 and75..94.
 Ordinary Attack reduced58 to47 HP with `damageHeavy_imp` frames25..38 and a
 subsequent attack. Explicit KillSingle reduced47 to0 HP. Each capture recorded
-120 unpaused frames over about10.9082 seconds. Animator disabled at death
+120 unpaused frames over about 10.9082 seconds. Animator disabled at death
 frame25 with11 native rigidbodies; frozen `deathHeavy_imp` normalized0.055
 reflects native physics handoff rather than failed death.
 
@@ -836,16 +836,16 @@ metrics. Existing Yeti and Kraken findings retain their separate scope.
 
 ## Cockatrice boss resource baseline: fit failed
 
-Unfitted `enbaseycockatriceboss` on `bossCockatrice`, renderer121693, was recorded
+Unfitted `enbaseycockatriceboss` on `bossCockatrice`, renderer 121693, was recorded
 in session `4fac21c62c7c4624a648ec782d88c34d`, old `df0cb...` framework and377
 catalog. Stage `c10cea2a60d34b408ab95b7c932ff82e` verified binding, but the upper
 body was hugely offscreen during Pass: baseline fit failed. Two ordinary attacks
 were blocked for zero damage and left540HP unchanged; neither proves a received
-hit. Pass and both blocked attacks each recorded120 unpaused frames.
+hit. Pass and both blocked attacks each recorded 120 unpaused frames.
 
 KillSingle death capture stopped after91 frames (8.25 game seconds) with
 `Renderer destroyed during capture`. It remains partial. `deathHuge` sampled
-frames27..89; reviewed40/60 showed coherent prone collapse in visible regions
+frames27..89; reviewed 40/60 showed coherent prone collapse in visible regions
 with hero/effect occlusion. Ready0/2 followed automatically without Collect.
 The separately prepared fitted profile is not tested by this baseline. Exact
 hashes, partial result and size diagnosis remain in the
@@ -854,16 +854,16 @@ hashes, partial result and size diagnosis remain in the
 ## Fitted cockatrice resource diagnostic
 
 The separate fitted profile uses native `cockatriceC`, resource
-`enbaseycockatriceboss`, factor0.55 and the unchanged probe121693. In session
+`enbaseycockatriceboss`, factor 0.55 and the unchanged probe121693. In session
 `61d9e44ebed54190ae8b9e4e8b503d6f`, corrected framework `9e533...` and378 catalog,
 stage `803ecc60c0f44731b3b52f4f923e88b4` bound the intended renderer. Measured
 renderer world-matrix axis norms were approximately0.495, agreeing with native
-0.9 times factor0.55. This is not a direct CEL baseline/reapplication audit.
+0.9 times factor 0.55. This is not a direct CEL baseline/reapplication audit.
 
 Whole-body fit improved in reviewed views, with remaining hero/effect occlusion.
 The first ordinary attack was dodged at72HP; the second dealt10 (72 to62) with
 HitSmall frames26..33. KillSingle reduced62 to0, with DeathHuge frames27..119
-and coherent prone collapse in reviewed40/60. All four captures completed120
+and coherent prone collapse in reviewed 40/60. All four captures completed 120
 unpaused frames. Two guarded Collect actions reached strict Ready0/2. The
 [runtime index](model-runtime-validation.json) preserves seven reviewed-frame
 hashes and exact source evidence separately from the failed boss baseline.
@@ -874,12 +874,12 @@ This is fitted calibration evidence, with final art/culling/variant checks pendi
 The source scale audit predicts changes from old neutral absolute1: Mirewarden
 0.95, Cinderwing0.78, Cinderbloom1.6, and Emberjaw0.75. These four originals need
 new-framework size/readability/camera checks, especially Cinderbloom's60% increase.
-Ashfang's native scale1 predicts no change from this fix alone. Source values do
+Ashfang's native scale 1 predicts no change from this fix alone. Source values do
 not transfer historical visual acceptance to the corrected framework. The
 runtime index links the hashed metadata audit and pending classifications.
 
 Cinderbloom's pending native-scale regression is now resolved for its unchanged
-v2 prototype: corrected Core preserves1.6 native scale and reviewed front/mouth,
+v2 prototype: corrected Core preserves 1.6 native scale and reviewed front/mouth,
 recoil and collapse remain readable/coherent without frame escape. This updates
 only Cinderbloom's regression status. The named-original scale rechecks are now
 recorded for Mirewarden, Cinderwing and Emberjaw; broad culling/variant checks
@@ -887,8 +887,8 @@ remain separate. Exact old/new framework capture evidence is preserved in each
 model's `live-native-scale` archive.
 
 Cinderwing's unchanged original bat model also passed the new-framework native
-scale0.78 regression in sampled attack/hit/death views: [V2 evidence](../art-experiments/cinderwing-bat/live-validation-v2/README.md).
-All three captures completed120 unpaused frames; small details and occlusion
+scale 0.78 regression in sampled attack/hit/death views: [V2 evidence](../art-experiments/cinderwing-bat/live-validation-v2/README.md).
+All three captures completed 120 unpaused frames; small details and occlusion
 remain limitations. Emberjaw's separate size recheck is also preserved in its
 native-scale evidence.
 
@@ -911,7 +911,7 @@ metadata audit, see [raw profile inventory](../tools/ai-model-pipeline/RAW_PROFI
 
 Emberjaw's unchanged original skull also passed its native0.75 size recheck:
 [evidence](../art-experiments/emberjaw-skull/live-validation-native-scale.json).
-Face/jaw coherence and nonlethal hit were reviewed; all three captures completed120
+Face/jaw coherence and nonlethal hit were reviewed; all three captures completed 120
 unpaused frames. Native effects hide the reviewed death body, preserving the
 earlier visibility limitation. Mirewarden0.95 also has the scoped recheck
 recorded below; none of these passes establishes broad culling or all variants.
@@ -923,7 +923,7 @@ The four excluded non-CEL diorama tentacles121042/121196/121232/121267 have
 on779 of6842 native vertices, so its matrix is not unused. Inserting Root_M
 blindly still gives maximum absolute rest-matrix error5.2859226. Keep strict
 rejection; an explicit adapter and verification of their unknown live ownership
-are required. The modern20-bone renderer121595 used by native krakenTentacle
+are required. The modern20-bone renderer 121595 used by native krakenTentacle
 and krakenTentacleMirror has rest error2.6029e-6 and provides a valid native
 chassis alternative, without adding any live acceptance. Renderers121018 and
 121680 remain excluded for missing mesh pointers. Source hashes and bounded
@@ -957,7 +957,7 @@ all384-profile live coverage.
 Mirewarden's unchanged original passes its reviewed native0.95 size regression
 and now has a canonical [V3 exact-source archive](../art-experiments/mirewarden-ftk/live-validation-v3/README.md)
 for `trollCaveA / enTroll01 / renderer 121153`. Three complete 120-frame
-captures preserve settled idle, native proficiency attack, ordinary HP58→48
+captures preserve settled idle, native proficiency attack, ordinary HP 58→48
 with hit recovery, native counterattack, and the separate explicit-fixture
 physical death. All 11 surviving bodies become nonkinematic from frame28, one
 guarded Collect reaches strict Ready0/2, and 28 original PNGs were reviewed.
@@ -989,8 +989,8 @@ remain separate.
 
 SnowmanB now has a separate five-part markers-only live diagnostic in
 session906ee3d8aef644929b629dcf0b13286f. The runner verifies all five assignments;
-four middle-body-target captures complete120 unpaused frames. The first attack
-is dodged at58HP, the second deals10 (58 to48), and the kill fixture reaches0
+four middle-body-target captures complete 120 unpaused frames. The first attack
+is dodged at58HP, the second deals10 (58 to48), and the kill fixture reaches 0
 with animated snowman_deathDirect, no rigidbodies and no ragdoll flag. Reviewed
 markers move without earlier connector stretch; upper orange markers fade and
 lower magenta markers remain visible at frame60 amid native effects. One
@@ -999,8 +999,8 @@ visibility and culling acceptance pending; source hashes remain in the runtime
 index and earlier Snowman iterations are preserved.
 
 BossGladiator has a four-SMR native diagnostic in session906ee3d8aef644929b629dcf0b13286f.
-Pass and ordinary11-damage hit (58 to47) complete120 unpaused frames. The kill
-fixture (47 to0) retains only91/120 frames over8.25 game seconds before
+Pass and ordinary 11-damage hit (58 to47) complete 120 unpaused frames. The kill
+fixture (47 to0) retains only91/120 frames over 8.25 game seconds before
 RendererDestroyed; this remains a failed partial capture. Animator disables
 at28, the Death clip freezes at0.1833333, and recorded rigidbody totals shift
 from15 to11 during native ragdoll. Reviewed calibration fits, crouches and
@@ -1011,14 +1011,14 @@ acceptance; hashed journals and retained screenshots are in the runtime index.
 Vesper Eye, an original two-part beholderA model, binds and animates in its
 first live run but fails material review: inherited material117 emission washes
 the black pupil yellow. [V1 evidence](../art-experiments/vesper-eye/live-validation-v1.json)
-preserves three complete120-frame captures and the135 to127 ordinary hit.
+preserves three complete 120-frame captures and the135 to127 ordinary hit.
 Native effects hide reviewed death geometry. An explicit per-renderer emission
 opt-out and corrected rerun remain pending; no finished-art acceptance.
 
 Vesper Eye's same-geometry emission correction now passes scoped live material
 and motion review: [V2 archive](../art-experiments/vesper-eye/live-validation-v2.json).
 Both materials disable inherited emission; black pupil and amber iris are
-readable in idle. Three120-frame captures preserve normal10 damage and death,
+readable in idle. Three 120-frame captures preserve normal 10 damage and death,
 but native attack/death effects still obstruct full visible deformation. V1
 material failure remains historical; no broad culling/all-animation acceptance.
 
@@ -1028,7 +1028,7 @@ repeats the exact two-renderer Beholder A binding in session
 active on owner `369188` with separate observed bone signatures; both
 replacement materials report emission disabled, black emission RGB and no
 emission map. Ordinary damage is135 to125 with `cheat=None` and no focus;
-explicit `KillSingle` completes120 frames, one native Collect is accepted, and
+explicit `KillSingle` completes 120 frames, one native Collect is accepted, and
 strict Ready is observed at level0 room2. Native UI/effects and the victory
 surface still limit fine eye-tracking, complete deformation, culling-envelope,
 portrait/resource lifetime and finished-art acceptance.
@@ -1058,8 +1058,8 @@ The fresh [Cinderbloom V3 supplement](../art-experiments/cinderbloom-plant/live-
 repeats the corrected multipart plantA binding in session
 `832c6a68d7084c4e967a53274884d574`. Body and leaves are both active on owner
 `369188` with separate observed bone signatures at public visual-scale factor
-1.0 (captured native CEL scale1.6). Ordinary damage is58 to50 with
-`cheat=None` and no focus; explicit KillSingle completes120 frames, one native
+1.0 (captured native CEL scale 1.6). Ordinary damage is58 to50 with
+`cheat=None` and no focus; explicit KillSingle completes 120 frames, one native
 Collect is accepted, and strict Ready is observed at level0 room2. Native
 UI/effects and the victory item surface limit fine teeth, jaw,
 leaf-intersection, full deformation, culling-envelope, portrait/resource
@@ -1069,8 +1069,8 @@ The fresh [Emberjaw V2 supplement](../art-experiments/emberjaw-skull/live-valida
 repeats the multipart skullA binding in session
 `2be3d41ce2c24361900069460e222deb`. Jaw and cranium are both active on owner
 `369188` with separate observed bone signatures at public visual-scale factor
-1.0 (captured native CEL scale0.75). Ordinary damage is69 to59 with
-`cheat=None` and no focus; explicit KillSingle completes120 frames, two native
+1.0 (captured native CEL scale 0.75). Ordinary damage is69 to59 with
+`cheat=None` and no focus; explicit KillSingle completes 120 frames, two native
 Collect actions are accepted, and strict Ready is observed at level0 room2.
 Inherited `chaosBeastBody` emission and purple effects change the live palette;
 targeting UI and the victory surface limit complete jaw/death deformation,
@@ -1129,7 +1129,7 @@ repeats the exact acidBlobA `enAcidMonster` binding in session
 owner `369188` at public visual-scale factor 1.0 (captured native CEL scale
 basis 0.75/0.8/0.8); selected idle and attack views retain the body, eyes,
 overlapping jaws and tusks. Ordinary damage is81 to73 with `cheat=None` and no
-focus. The explicit `KillSingle` fixture completes120 frames, reaches strict
+focus. The explicit `KillSingle` fixture completes 120 frames, reaches strict
 Ready at level0 room2, and exposes a direct Ready vote with no Collect action.
 The renderer stays active through the last recorded frame, but victory UI
 limits fine corpse and settled-ragdoll review; native effects and the overlay
@@ -1150,14 +1150,14 @@ docs/model-runtime-validation.json; aggregate Ready/pin receipt is separate.
 Bronzewake Champion's original four-part bossGladiator model has scoped live
 fit/motion evidence: [archive](../art-experiments/bronzewake-champion/live-validation.json).
 Armor/body remain readable under native darkening and retained helmet/weapons;
-actual boots emission is disabled. Attack/hit complete120 frames, while death
-retains91/120 before RendererDestroyed and progresses automatically to Ready0/2.
+actual boots emission is disabled. Attack/hit complete 120 frames, while death
+retains 91/120 before RendererDestroyed and progresses automatically to Ready0/2.
 The partial death remains a capture failure, not full animation acceptance.
 
 The fresh [Bronzewake V2 supplement](../art-experiments/bronzewake-champion/live-validation-v2/validation.json)
 repeats all four bossGladiator renderer bindings in session
 `9df826f02881492aa5be8b9098937942`. Body, hair, armor and boots are active on
-owner `369188` at public visual-scale factor 1.0 (captured native CEL scale1.1)
+owner `369188` at public visual-scale factor 1.0 (captured native CEL scale 1.1)
 and remain coherent with the retained helmet and weapon/shield accessories in
 selected idle and attack views. Ordinary damage is58 to48 with `cheat=None` and
 no focus; explicit `KillSingle` reaches strict Ready at level0 room2, but the
@@ -1260,10 +1260,10 @@ documented effect, hero, UI and blur limits. One Collect reaches strict Ready
 0/2. This exact route does not transfer art or runtime credit to the other
 wolf-controller assignments below.
 
-The remaining wolf-controller assignments now have [exact calibration evidence](evidence/unresolved-enemy-probes-v1/README.md): `hellhoundA`/`enHellHoundB` records ordinary HP81→71, `pantherA`/`enPanther` records99→89, and `jaguarA`/`enJaguar` requires a bounded retry after72→72 before recording72→62. Each has fixture death and strict Ready. `chaosHound`/`chaosWolf` has exact binding/pass evidence but eight bounded attacks all remain HP180→180, so no damage, fixture or Ready claim is made. These synthetic probes do not transfer Ashfang's original-art acceptance.
+The remaining wolf-controller assignments now have [exact calibration evidence](evidence/unresolved-enemy-probes-v1/README.md): `hellhoundA`/`enHellHoundB` records ordinary HP 81→71, `pantherA`/`enPanther` records 99→89, and `jaguarA`/`enJaguar` requires a bounded retry after72→72 before recording72→62. Each has fixture death and strict Ready. `chaosHound`/`chaosWolf` has exact binding/pass evidence but eight bounded attacks all remain HP 180→180, so no damage, fixture or Ready claim is made. These synthetic probes do not transfer Ashfang's original-art acceptance.
 
 Rimecrown's completed V1 baseline preserves the camera-fit failure despite
-three complete120-frame captures: [archive](../art-experiments/rimecrown-sentinel/live-validation-v1.json).
+three complete 120-frame captures: [archive](../art-experiments/rimecrown-sentinel/live-validation-v1.json).
 Ordinary hit58 to48 and native death48 to0 are observed; upper parts fall while
 the base stays anchored. Native base121556 weights all7683 vertices toRoot_M,
 so separation alone does not imply a binding/weight bug. Two Collect actions
@@ -1272,7 +1272,7 @@ reach Ready0/2. The prepared0.75 scale correction still needs live validation.
 Briarback Guardian has scoped original body-motion evidence on old resource
 Yeti120991, but its first portrait frames chest pads and fails review:
 [V1 archive](../art-experiments/briarback-guardian/live-validation-v1.json).
-Pass/hit complete120 frames; death retains95/120 before RendererDestroyed,
+Pass/hit complete 120 frames; death retains 95/120 before RendererDestroyed,
 then automatically reaches Ready0/3. Fixed PortraitCam and head-attached
 EncounterCam are distinct native landmarks. An explicit selector rerun is
 pending; no portrait or complete-art acceptance follows from coherent body motion.
@@ -1283,7 +1283,7 @@ Five owned Kraken controller scenarios (appear, damaged, damaged-heavy, death,
 death-light) and their241-frame repeats independently match. These native graph
 observations do not validate an old-rig blending adapter. In fact, the proposed
 Dj * inverse(DsRoot) * OjNative policy fails the required pure-main endpoint
-by up to6.817214574, despite matching pure appearance within2.98023e-7. The
+by up to6.817214574, despite matching pure appearance within 2.98023e-7. The
 modern and old immutable root frames differ; changing tolerance cannot repair
 that algebra. The proposal was only audited offline, never assigned to Unity.
 Hashed numerical findings are retained in the runtime evidence index; a new
@@ -1381,10 +1381,10 @@ The canonical [Rimecrown V8 middle-body archive](../art-experiments/rimecrown-se
 isolates topology `a158ab62f9dd430f`, exact renderer
 `SnowMan_Geo/enSnowmanmiddleBody` 121697 and the same `snowmanB` source at
 observed native CEL scale 1.0. All three captures retain 120 frames. The
-ordinary zero-focus native hammer attack records `Damaged`, 8 damage and HP58
+ordinary zero-focus native hammer attack records `Damaged`, 8 damage and HP 58
 to50 without a skill cap or damage fixture; the minimum enemy health and party
 HP fixtures make balance unrepresentative. Explicit `KillSingle` records 1000
-damage and HP50 to0, so death remains fixture evidence. The faceted torso,
+damage and HP 50 to0, so death remains fixture evidence. The faceted torso,
 articulated arms and crystal hands remain coherent in idle and
 `snowman_attack1`, separate without a long deformation during
 `snowman_damage`, recover, and pose through later `snowman_attack3` and
@@ -1399,15 +1399,15 @@ five Rimecrown renderer topologies.
 
 Gloamcap Trickster now has scoped original resource-Imp appearance/motion
 evidence: [archive](../art-experiments/gloamcap-imp/live-validation.json).
-Four120-frame captures preserve the first dodged hit, successful normal10
-damage58 to48, and native11-body ragdoll death. Small body/portraits remain
+Four120-frame captures preserve the first dodged hit, successful normal 10
+damage 58 to48, and native11-body ragdoll death. Small body/portraits remain
 readable under native darkening, with hero occlusion explicit. Two Collect
 actions reach Ready0/2; no unoccluded all-motion or culling acceptance.
 
 The fresh [Gloamcap V2 supplement](../art-experiments/gloamcap-imp/live-validation-v2/README.md)
 repeats the exact impA assignment in catalog-411 session `f83c72d3f15f4be7a96cd409c9acc91e`:
-`enBaseyImp`, stable renderer121117, owner369188 and captured native CEL scale1.0.
-Pass, ordinary attack HP58 to48 and explicit `KillSingle` each have complete
+`enBaseyImp`, stable renderer 121117, owner369188 and captured native CEL scale 1.0.
+Pass, ordinary attack HP 58 to48 and explicit `KillSingle` each have complete
 120-frame captures; two guarded Collect calls reach strict Ready0/2. The
 successful damage proof uses three independent `record_case.py` actions after
 one fresh staging claim; conservative exercise runs that stopped on random
@@ -1430,17 +1430,17 @@ motions. The fixture does not establish ordinary lethal behavior or later corpse
 lifetime, and this resource archive gives no credit to direct enemy rows, sibling
 Imp sources or the Mirewarden troll route in the same topology group.
 
-SpiderB's65-bone marker/connector diagnostic now has three120-frame captures
+SpiderB's65-bone marker/connector diagnostic now has three 120-frame captures
 in session59a504bc. Reviewed attack shows no obvious stretching, with overlapping
 legs/effects. The attempted hit is BLOCKED and leaves63HP unchanged: successful
 nonlethal damage remains pending. Kill63 to0 uses spiderDeathDirect with zero
-rigidbodies and no ragdoll flag; upturned legs are visible in reviewed40/60.
+rigidbodies and no ragdoll flag; upturned legs are visible in reviewed 40/60.
 One Collect reaches Ready0/3. This is diagnostic evidence only; Copperveil's
 original mesh still requires its separate live test and no art acceptance is inferred.
 
 Copperveil Weaver's original spiderB model now has scoped art/motion evidence:
 [archive](../art-experiments/copperveil-spider/live-validation.json). Five full
-120-frame captures preserve two blocks at63HP and the third normal2 hit63 to61.
+120-frame captures preserve two blocks at63HP and the third normal 2 hit63 to61.
 Hit views remain hero-occluded. Death uses native animated spiderDeathDirect,
 with no rigidbodies/ragdoll, and one Collect reaches Ready0/2. This original's
 successful damage does not rewrite the separate diagnostic probe's blocked hit.
@@ -1448,7 +1448,7 @@ successful damage does not rewrite the separate diagnostic probe's blocked hit.
 The fresh [Copperveil V2 supplement](../art-experiments/copperveil-spider/live-validation-v2/validation.json)
 repeats the exact Spider B binding in session115d691f and records two settled idle
 views, two poison-attack views, and the fixture loot endpoint. Ordinary damage is
-63 to61 with cheatNone and no focus; explicit KillSingle completes120 frames, one
+63 to61 with cheatNone and no focus; explicit KillSingle completes 120 frames, one
 native Collect is accepted, and strict Ready is observed at level0 room2. The
 fixture death remains separate from ordinary lethal damage, and hero/effect
 occlusion, floor collision, full culling, portrait/resource lifetime and
@@ -1465,11 +1465,11 @@ visible behind the sampled loot panel. The causal impact frames remain
 hero/effect occluded, and the fixture does not establish ordinary lethal damage,
 indirect death, later corpse lifetime, sibling spider coverage, or final art.
 
-The two remaining 65-joint spider-controller rows now have [exact calibration evidence](evidence/unresolved-enemy-probes-v1/README.md): `spiderA`/`enSpiderA` records ordinary HP58→50 and `spiderJungleA`/`enJungleSpider_A` records58→48. Both have fixture death and strict Ready. They remain synthetic probes; Copperveil's Spider B original art does not transfer.
+The two remaining 65-joint spider-controller rows now have [exact calibration evidence](evidence/unresolved-enemy-probes-v1/README.md): `spiderA`/`enSpiderA` records ordinary HP 58→50 and `spiderJungleA`/`enJungleSpider_A` records 58→48. Both have fixture death and strict Ready. They remain synthetic probes; Copperveil's Spider B original art does not transfer.
 
 Honeyback's bearB original has scoped body-motion evidence but fails portrait
 readability: [V1 archive](../art-experiments/honeyback-bear/live-validation-v1.json).
-Three120-frame captures establish normal12 damage72 to60 and animated death
+Three 120-frame captures establish normal 12 damage 72 to60 and animated death
 without ragdoll/rigidbodies; one Collect reaches Ready0/3. Native portrait view
 from below exposes muzzle/nose obstruction of an eye and small eye readability.
 An art revision is pending; this is not established as a rig or camera-crop
@@ -1477,14 +1477,14 @@ failure and does not justify an EncounterCam swap.
 
 Tideglass crabB now has scoped live original body/portrait evidence with a
 retained native purple wizard hat: [archive](../art-experiments/tideglass-crab/live-validation.json).
-Three120-frame captures preserve normal2 damage58 to56 and native animated
+Three 120-frame captures preserve normal 2 damage 58 to56 and native animated
 death with ragdollfalse. Actual inherited emission is disabled; native hat,
 FX and motionblur limit visibility. Two Collect actions reach Ready0/2.
 
 The fresh [Tideglass V2 supplement](../art-experiments/tideglass-crab/live-validation-v2/validation.json)
 repeats the exact Crab B binding in session0b328315 and records two settled idle
 views, two ordinary-attack views and the fixture loot endpoint. Ordinary damage
-is58 to56 with cheatNone and no focus; explicit KillSingle completes120 frames,
+is58 to56 with cheatNone and no focus; explicit KillSingle completes 120 frames,
 two native Collects are accepted, and strict Ready is observed at level0 room2.
 The fixture death remains separate from ordinary lethal damage, and hero/UI/effect
 occlusion, the retained native hat, floor collision, full culling,
@@ -1508,7 +1508,7 @@ Mossglass Cube A's corrected caps-v3 [fresh supplement](../art-experiments/mossg
 binds both authored primitives through the exact three-joint `enJellyCube`
 renderer in session022120d5. The jade shell and ivory/amber interior remain
 distinct in selected idle and attack views; ordinary damage is58 to50 with
-cheatNone and no focus, explicit KillSingle completes120 frames, one native
+cheatNone and no focus, explicit KillSingle completes 120 frames, one native
 Collect is accepted, and strict Ready is observed at level0 room2. The archive
 preserves the corrected cap lineage and material-slot mapping, while inherited
 emission, native effects, scroll phase, full culling, floor contact,
@@ -1538,7 +1538,7 @@ this owned-fixture numerical exercise. Hashes are in the runtime evidence index.
 
 Honeyback's separate portrait-v2 art improves combat eye visibility but still
 fails native portrait readability: [archive](../art-experiments/honeyback-portrait-v2/live-validation.json).
-Three120-frame body captures and normal10 damage72 to62 do not change that
+Three 120-frame body captures and normal 10 damage 72 to62 do not change that
 failure. Source review does not demonstrate a shared-cache cause; the separate
 encounter-row preview gap remains a distinct investigation. Actual portrait
 pose/camera/mesh telemetry is pending, with no fix claimed.
@@ -1580,11 +1580,11 @@ readability. One complete record is not a fix or encounter-row preview
 coverage, and no named portrait clips does not establish absence of native pose
 sampling.
 
-ClamA now has an exact enClam diagnostic baseline: three120-frame unpaused captures, normal damage58→48, then48→0 and one Collect to Ready0/2. The all-palette probe has an intentional long tip-bone connector. Hero/effects obscure attack/hit, and the renderer becomes inactive by death frame28 despite continuing Clam_DeathDirect telemetry. The later source audit resolves this as native early whole-mesh hide: DeathFallOff invokes FallOffLimb and deactivates enClam, with no configured rigid corpse replacement. It is not a demonstrated custom binding/culling failure or missing corpse part. Only pre-hide visible motion is assessable; DeathLight/DeathRevive remain untested. No original-art acceptance is claimed. Exact source and capture hashes are in the runtime index.
+ClamA now has an exact enClam diagnostic baseline: three 120-frame unpaused captures, normal damage 58→48, then48→0 and one Collect to Ready0/2. The all-palette probe has an intentional long tip-bone connector. Hero/effects obscure attack/hit, and the renderer becomes inactive by death frame28 despite continuing Clam_DeathDirect telemetry. The later source audit resolves this as native early whole-mesh hide: DeathFallOff invokes FallOffLimb and deactivates enClam, with no configured rigid corpse replacement. It is not a demonstrated custom binding/culling failure or missing corpse part. Only pre-hide visible motion is assessable; DeathLight/DeathRevive remain untested. No original-art acceptance is claimed. Exact source and capture hashes are in the runtime index.
 
-AcidBlobA exact enAcidMonster121344 diagnostic now has three120-frame unpaused captures: native attack, normal damage81→73, and73→0. Reviewed probe contraction/downward scatter retains native brown chunks and puddle effects, which are not authored model parts. HUD/hero/effects obscure selected areas; no original-art acceptance. Two Collect actions reach Ready0/3 with queued Trap1. Exact hashes are indexed.
+AcidBlobA exact enAcidMonster121344 diagnostic now has three 120-frame unpaused captures: native attack, normal damage 81→73, and73→0. Reviewed probe contraction/downward scatter retains native brown chunks and puddle effects, which are not authored model parts. HUD/hero/effects obscure selected areas; no original-art acceptance. Two Collect actions reach Ready0/3 with queued Trap1. Exact hashes are indexed.
 
-Lunacrest original clamA V1 has three120-sample captures, normal damage58→48 and native direct death48→0, followed by Ready0/2. Idle/return body and portraits are readable, but attack40 clips the top shell: camera fit FAIL at factor1. Frame25 native DeathFallOff hides the whole renderer as expected. [V1 archive](../art-experiments/lunacrest-clam/live-validation-v1.json) preserves these separate results; unchanged geometry at0.80 is staged but untested.
+Lunacrest original clamA V1 has three 120-sample captures, normal damage 58→48 and native direct death48→0, followed by Ready0/2. Idle/return body and portraits are readable, but attack40 clips the top shell: camera fit FAIL at factor 1. Frame25 native DeathFallOff hides the whole renderer as expected. [V1 archive](../art-experiments/lunacrest-clam/live-validation-v1.json) preserves these separate results; unchanged geometry at0.80 is staged but untested.
 
 Kraken original-skin V1 raw helper/repeat calls passed241 samples each with12 PNG and4 BakeMesh observations, but the full independent verifier rejected camera consistency: discrepancy2.98514e-5 exceeds unchanged1e-5 tolerance. Separate BakeMesh diagnosis max7.62718e-6 does not establish full acceptance. The origin-centered helper is deployed; a fresh pair remains pending. Exact raw requests, manifests, diagnosis, cleanup and Ready0/3 are indexed.
 
@@ -1594,20 +1594,20 @@ Honeyback’s corrected guarded readback now returns actual native204x172 portra
 
 Kraken owned five-marker skin V2 now passes the unchanged independent verifier: maximum BakeMesh error3.85966420e-7 and endpoint error2.36390344e-6, tolerance1e-5; repeat PNG hashes are identical. Parent separately inspected12 sparse steps0/16/28/40/41/80/104/105/112/119/120/240: all five markers visible, coherent positions, no observed clipping. This is calibration-marker acceptance only, not continuous transitions, organic skin, finished art, other scenarios or a production adapter. V1 camera-precision rejection remains preserved; raw verifier and later visual-review files are separately hashed.
 
-Lunacrest factor0.80 retest corrects the observed attack40 screen crop with unchanged geometry; healthbar overlap remains. Three120-frame captures include blocked native attack animation, normal damage58→47 and death47→0. Raw renderer active becomes false at25, matching native early hide; effects obscure much of pre-hide death24. One Collect reached Ready0/3. [V2 archive](../art-experiments/lunacrest-clam/live-validation-v2.json) preserves V1 fit failure and initial HTTP500 read refusal separately. No all-variant/full-campaign acceptance.
+Lunacrest factor 0.80 retest corrects the observed attack40 screen crop with unchanged geometry; healthbar overlap remains. Three 120-frame captures include blocked native attack animation, normal damage 58→47 and death47→0. Raw renderer active becomes false at25, matching native early hide; effects obscure much of pre-hide death24. One Collect reached Ready0/3. [V2 archive](../art-experiments/lunacrest-clam/live-validation-v2.json) preserves V1 fit failure and initial HTTP500 read refusal separately. No all-variant/full-campaign acceptance.
 
 The fresh [Lunacrest V3 supplement](../art-experiments/lunacrest-clam/live-validation-v3/validation.json)
 repeats the exact clamA `enClam` binding in session
 `67212ee1c3ee4c80918e8dfffc0bae43`. The seven-joint authored clam is active on
-owner `369188` at public visual-scale factor 1.0 (captured native CEL scale0.8);
+owner `369188` at public visual-scale factor 1.0 (captured native CEL scale 0.8);
 selected idle and attack views retain the opened shell, lower bowl and hinge
 body. Ordinary damage is58 to50 with `cheat=None` and no focus. The explicit
-`KillSingle` fixture completes120 frames, one guarded native Collect is accepted,
+`KillSingle` fixture completes 120 frames, one guarded native Collect is accepted,
 and strict Ready is observed at level0 room2. Native hide behavior, UI/effects
 and the victory loot surface limit full death deformation, culling, portraits,
 resource lifetime and finished-art acceptance.
 
-Resinmaw acidBlobA now has three120-frame original-model captures with readable sampled body/portraits, normal5damage81→76 and material verification. Death visibility is limited: all32 renderer-local bone matrices match the native diagnostic at aligned death phases within1.43e-7, with active renderer/unit bone scales and native backward/downward sinking. Native chunks/puddle remain; this is not whole-death art acceptance. Startup busy500/once-only resume and Ready0/2 are preserved in the [archive](../art-experiments/resinmaw-bogling/live-validation.json).
+Resinmaw acidBlobA now has three 120-frame original-model captures with readable sampled body/portraits, normal 5 damage 81→76 and material verification. Death visibility is limited: all32 renderer-local bone matrices match the native diagnostic at aligned death phases within 1.43e-7, with active renderer/unit bone scales and native backward/downward sinking. Native chunks/puddle remain; this is not whole-death art acceptance. Startup busy500/once-only resume and Ready0/2 are preserved in the [archive](../art-experiments/resinmaw-bogling/live-validation.json).
 
 Honeyback's separate `CameraRoot/EncounterCam` profile now has scoped actual raw-pixel and HUD portrait acceptance using unchanged v2geometry. Earlier PortraitCam failure is preserved; the smaller whole-bear view is not all-resolution or encounter-row coverage. Cleanup-only death and Ready0/3 accompany the [camera archive](../art-experiments/honeyback-portrait-v2/live-validation-encounter-camera.json). A separate native row-preview helper attempt rejected its incorrect204x172 assumption before Initialize; it provides no Core live PASS.
 
@@ -1615,7 +1615,7 @@ The 47-bone bee topology has exact calibration evidence for six of eight native 
 
 The later [native encounter-row preview V2 evidence](evidence/native-row-preview-v2/validation.json) is separate from the preserved pre-invocation dimension rejection and Honeyback's combat-portrait camera check; consult its own case limits.
 
-Emberglass Bee now has its own [native-scale original live archive](../art-experiments/emberglass-bee/live-validation.json): three120-frame captures, readable sampled insect/portraits, ordinary10damage58→48 and selected-pose corpse appearance acceptance. Animator disables and16 bodies become dynamic at27; small motion remains at60, zero velocities at63/119. One Collect reaches Ready0/2. This original art acceptance remains scoped to beeA; the five exact follow-up bindings have calibration evidence only, and every clip, all-view culling and finished-art review remain explicit.
+Emberglass Bee now has its own [native-scale original live archive](../art-experiments/emberglass-bee/live-validation.json): three 120-frame captures, readable sampled insect/portraits, ordinary 10 damage 58→48 and selected-pose corpse appearance acceptance. Animator disables and16 bodies become dynamic at27; small motion remains at60, zero velocities at63/119. One Collect reaches Ready0/2. This original art acceptance remains scoped to beeA; the five exact follow-up bindings have calibration evidence only, and every clip, all-view culling and finished-art review remain explicit.
 
 The newer [canonical Emberglass V4 archive](../art-experiments/emberglass-bee/live-validation-v4/README.md)
 repeats exact `beeA / Monster Bee / renderer 121062` through the execution-queue
@@ -1626,46 +1626,46 @@ sample. Its canonical credit remains one exact route; beeB and dragonflyB still
 need their own representatives, and no family-wide art or gameplay acceptance
 transfers from beeA.
 
-The separate [Gloamfin organic blockout appearance fixture](../art-experiments/gloamfin-kraken/live-validation-appearance-v1.json) passes full-weight numerical checks (BakeMesh7.48e−7, endpoint2.36e−6, tolerance1e−5) with identical repeat images and unchanged Ready0/2. Parent reviewed12 sparse appearance images, including connected open-mouth40/41. This is constructed-fixture blockout deformation/fit only; it is excluded from enemy topology acceptance. Marker V1 rejection remains preserved; other scenarios, continuous transitions, final art and the production adapter are pending.
+The separate [Gloamfin organic blockout appearance fixture](../art-experiments/gloamfin-kraken/live-validation-appearance-v1.json) passes full-weight numerical checks (BakeMesh7.48e−7, endpoint2.36e−6, tolerance1e−5) with identical repeat images and unchanged Ready0/2. Parent reviewed 12 sparse appearance images, including connected open-mouth40/41. This is constructed-fixture blockout deformation/fit only; it is excluded from enemy topology acceptance. Marker V1 rejection remains preserved; other scenarios, continuous transitions, final art and the production adapter are pending.
 
-The66-bone fairyA diagnostic now has [three complete120-frame captures](evidence/fairya-diagnostic-v1/validation.json), observed HP58→55 and selected prone death poses. Native m_DoRagdoll stays false and Animator stays enabled; two inactive weapon Break rigidbodies are not body ragdoll. One Collect reaches Ready0/3. Pink spell/hero/green effect occlusion and a first death sample at normalized.141 limit visual/cycle coverage; no original Moonreed or all-row acceptance follows from these calibration results.
+The66-bone fairyA diagnostic now has [three complete 120-frame captures](evidence/fairya-diagnostic-v1/validation.json), observed HP 58→55 and selected prone death poses. Native m_DoRagdoll stays false and Animator stays enabled; two inactive weapon Break rigidbodies are not body ragdoll. One Collect reaches Ready0/3. Pink spell/hero/green effect occlusion and a first death sample at normalized.141 limit visual/cycle coverage; no original Moonreed or all-row acceptance follows from these calibration results.
 
-CrowC's [two-encounter diagnostic archive](evidence/crowc-diagnostic-v1/validation.json) preserves the first wrapper stop after later endpointHP0. Reviewed hit30/60 proves nonlethal8damage58→50; later removal is flee-consistent but its runtime flag was not recorded, and Ready0/2 followed without Collect. A separate explicit KillSingle encounter records120-frame animated BirdDeath, no body ragdoll, selected prone poses and one Collect→Ready0/3. All three raw captures completed120; the wrapper failure was not relabeled as a successful lethal hit.
+CrowC's [two-encounter diagnostic archive](evidence/crowc-diagnostic-v1/validation.json) preserves the first wrapper stop after later endpointHP0. Reviewed hit30/60 proves nonlethal 8 damage 58→50; later removal is flee-consistent but its runtime flag was not recorded, and Ready0/2 followed without Collect. A separate explicit KillSingle encounter records 120-frame animated BirdDeath, no body ragdoll, selected prone poses and one Collect→Ready0/3. All three raw captures completed 120; the wrapper failure was not relabeled as a successful lethal hit.
 
 The other five 39-joint `birdController` pairs now have [exact calibration evidence](evidence/unresolved-enemy-probes-v1/README.md): `seagullA`/`enSeagull` (ordinary HP 58→48), `seagullB`/`enSeagull2` (bounded retry, then 58→50), `parrotA`/`enParrotA` (58→45), `birdJungleA`/`enJungleBird_A` (58→48) and `birdJungleB`/`enJungleBird_B` (58→50). Each has complete pass, fixture death and strict Ready evidence. These rows remain synthetic calibration probes; Duskquill’s original art and crowC evidence do not transfer across the bird topology.
 
-Moonreed's [original fairyA live archive](../art-experiments/moonreed-sylph/live-validation.json) contains four120-frame captures and six reviewed images: attached body/four wings and readable portraits, a visibly DODGED first attempt preserved as a stopped wrapper, later normal5damage58→53, and selected coherent prone death poses. Animated death keeps Animator enabled/m_DoRagdoll false. One Collect reaches Ready0/2. NativeFX and warm lighting limit appearance judgments; postReady inventory had no matching renderer, so runtime material-property verification is not claimed.
+Moonreed's [original fairyA live archive](../art-experiments/moonreed-sylph/live-validation.json) contains four120-frame captures and six reviewed images: attached body/four wings and readable portraits, a visibly DODGED first attempt preserved as a stopped wrapper, later normal 5 damage 58→53, and selected coherent prone death poses. Animated death keeps Animator enabled/m_DoRagdoll false. One Collect reaches Ready0/2. NativeFX and warm lighting limit appearance judgments; postReady inventory had no matching renderer, so runtime material-property verification is not claimed.
 
-The newer [Moonreed V2 canonical archive](../art-experiments/moonreed-sylph/live-validation-v2-canonical/validation.json) pins the current exact `fairyA / enFairy01 / 121395` queue route and source assets. Four complete 120-frame captures preserve exact binding through idle, native proficiency attacks, a native dodge, ordinary HP58→55 `fairy_damaged`, recovery and animated fixture death. Thirty reviewed originals show a coherent four-wing body; Standard `matFairyA (Instance)` uses the authored main texture with emission disabled. `m_DoRagdoll=false`, the animator remains enabled through `fairy_die` frame119, and two inactive break props receive no ragdoll credit. One Collect reaches strict Ready0/2. Fixture death, small scale, native effects and UI, general corpse lifetime, cleanup, portraits, collision, broader culling, sibling sources, resource lifetime, every animation and final art approval remain outside this exact-source result.
+The newer [Moonreed V2 canonical archive](../art-experiments/moonreed-sylph/live-validation-v2-canonical/validation.json) pins the current exact `fairyA / enFairy01 / 121395` queue route and source assets. Four complete 120-frame captures preserve exact binding through idle, native proficiency attacks, a native dodge, ordinary HP 58→55 `fairy_damaged`, recovery and animated fixture death. Thirty reviewed originals show a coherent four-wing body; Standard `matFairyA (Instance)` uses the authored main texture with emission disabled. `m_DoRagdoll=false`, the animator remains enabled through `fairy_die` frame119, and two inactive break props receive no ragdoll credit. One Collect reaches strict Ready0/2. Fixture death, small scale, native effects and UI, general corpse lifetime, cleanup, portraits, collision, broader culling, sibling sources, resource lifetime, every animation and final art approval remain outside this exact-source result.
 
-Native Cockatrice C now has [bounded diagnostic evidence](evidence/cockatricec-diagnostic-v1/validation.json): exact121484/enChicken, controller5949, three120-frame captures, normal5 damage and explicit fixture death, Animator enabled/no native ragdoll, two collects to Ready0/3. Selected calibration poses only; native A controller5948 and resource121693 remain separate.
+Native Cockatrice C now has [bounded diagnostic evidence](evidence/cockatricec-diagnostic-v1/validation.json): exact121484/enChicken, controller5949, three 120-frame captures, normal 5 damage and explicit fixture death, Animator enabled/no native ragdoll, two collects to Ready0/3. Selected calibration poses only; native A controller5948 and resource121693 remain separate.
 
-Reefstrider now has [exact fishA01 original live evidence](../art-experiments/reefstrider-fish/live-validation-v1.json): three120-frame captures, normal10damage and a separate explicit death fixture, plus native11-body settling and guarded Ready progression. Six reviewed frames support visible body/portrait coherence with substantial hero/FX occlusion. Ordinary lethal damage, original collision fit and final teardown remain untested. The earlier story-related setup stop is preserved separately and is not a model failure. No sibling fish coverage transfers.
+Reefstrider now has [exact fishA01 original live evidence](../art-experiments/reefstrider-fish/live-validation-v1.json): three 120-frame captures, normal 10 damage and a separate explicit death fixture, plus native11-body settling and guarded Ready progression. Six reviewed frames support visible body/portrait coherence with substantial hero/FX occlusion. Ordinary lethal damage, original collision fit and final teardown remain untested. The earlier story-related setup stop is preserved separately and is not a model failure. No sibling fish coverage transfers.
 
 Exact monkeyC has historical [stopped pre-heroReady setup evidence](evidence/monkeyc-setup-removal-v1/validation.json), not captured motion: native58HP-to-removal was consistent with its verified suicide proficiency, but that stopped record did not observe attack attribution. The later Tamarind V2 passive-arrival archive supplies the canonical exact-source result. Retain native AI and weapon; the stopped setup record alone grants no original-art or calibration acceptance.
 
 A separate [Reefstrider ordinary-lethal follow-up](../art-experiments/reefstrider-fish/live-validation-ordinary-lethal-v1.json) now records eight ordinary attempts, retaining one dodge, and final7→0 damage with cheatNone. Selected collapse/corpse views and native11-body settling were reviewed; two guarded Collect submissions reached Ready0/2. This supersedes only the earlier ordinary-lethal gap, not collision-fit or final-owner teardown limits. Earlier explicit-death evidence is preserved unchanged.
 
-The fresh [Reefstrider V2 supplement](../art-experiments/reefstrider-fish/live-validation-v2/validation.json) repeats the exact fishA01 assignment from a clean catalog-411 run: `enFishA` renderer121695, owner369188, public scale1.0 and captured native CEL scale1.0. Pass, ordinary attack HP58→48 and explicit `KillSingle` each have complete120-frame captures; selected body/attack/loot views show the authored turquoise fish, cream belly, crown, flippers and webbed feet remaining connected, with two guarded native Collect calls and strict Ready0/2. The archive preserves 370 source-image pins, 230 gzip-lossless mappings and three videos. Fixture death, foreground hero/UI/effect occlusion, victory depth blur, culling, collision/sleeping, portraits, resource lifetime and finished-art acceptance remain bounded; no sibling fish coverage transfers.
+The fresh [Reefstrider V2 supplement](../art-experiments/reefstrider-fish/live-validation-v2/validation.json) repeats the exact fishA01 assignment from a clean catalog-411 run: `enFishA` renderer 121695, owner369188, public scale 1.0 and captured native CEL scale 1.0. Pass, ordinary attack HP 58→48 and explicit `KillSingle` each have complete 120-frame captures; selected body/attack/loot views show the authored turquoise fish, cream belly, crown, flippers and webbed feet remaining connected, with two guarded native Collect calls and strict Ready0/2. The archive preserves 370 source-image pins, 230 gzip-lossless mappings and three videos. Fixture death, foreground hero/UI/effect occlusion, victory depth blur, culling, collision/sleeping, portraits, resource lifetime and finished-art acceptance remain bounded; no sibling fish coverage transfers.
 
-The canonical [Reefstrider V3 supplement](../art-experiments/reefstrider-fish/live-validation-v3/validation.json) pins a fresh queue-route run to exact `fishA01 / enFishA / 121695`, owner369188, native scale1.0, and the expected34-bone signature. Three complete120-frame captures preserve the authored head, face, belly, flipper arms, long legs, and webbed feet through idle, native `AttackCrit`, an ordinary HP58→48 `Damaged` response and recovery, and native `Death` launch and ragdoll collapse. Eighteen reviewed original PNGs show a coherent custom corpse still sampled behind the loot panel. The archive independently verifies19 metadata mappings,361 source-image pins,360 capture-image pins, two assets,18 selected originals, the root review, and three videos. The explicit fixture is not ordinary lethal evidence; impact occlusion, later corpse lifetime, indirect death, other native attacks, portrait, collision, extended culling, long-session lifetime, campaign completion, final art approval, and fishA02/A03 remain outside this exact-source result.
+The canonical [Reefstrider V3 supplement](../art-experiments/reefstrider-fish/live-validation-v3/validation.json) pins a fresh queue-route run to exact `fishA01 / enFishA / 121695`, owner369188, native scale 1.0, and the expected 34-bone signature. Three complete 120-frame captures preserve the authored head, face, belly, flipper arms, long legs, and webbed feet through idle, native `AttackCrit`, an ordinary HP 58→48 `Damaged` response and recovery, and native `Death` launch and ragdoll collapse. Eighteen reviewed original PNGs show a coherent custom corpse still sampled behind the loot panel. The archive independently verifies19 metadata mappings,361 source-image pins,360 capture-image pins, two assets,18 selected originals, the root review, and three videos. The explicit fixture is not ordinary lethal evidence; impact occlusion, later corpse lifetime, indirect death, other native attacks, portrait, collision, extended culling, long-session lifetime, campaign completion, final art approval, and fishA02/A03 remain outside this exact-source result.
 
 Mournglass Wraith now has a [canonical current-profile archive](../art-experiments/mournglass-wraith/live-validation-v2-canonical/validation.json)
 for exact `chaosBeast / enChaosBeast / 121008`. The two authored material slots
 retain their scrolling-cloth and fixed mask/hands partition with emission disabled.
-Two complete120-frame captures and one accepted94-frame death prefix preserve
-`cidle_ghost`, native `attackProf_ghost`, an immediate ordinary5-damage HP58→53
+Two complete 120-frame captures and one accepted94-frame death prefix preserve
+`cidle_ghost`, native `attackProf_ghost`, an immediate ordinary 5-damage HP 58→53
 `damageSmall_ghost` response and recovery, repeated native attacks, and the opening
-of animator-driven `death_ghost`. A later Ready poll found HP45 after additional
+of animator-driven `death_ghost`. A later Ready poll found HP 45 after additional
 combat turns; the archive preserves that state without attributing its extra8 loss
 to the captured action. The renderer becomes inactive after death frame19 and is
 destroyed after frame93, so full visible death, cleanup causality and final disposal
 remain unproven. Thirty originals were reviewed, and strict Ready0/2 followed
 without Collect. The earlier V1 evidence remains historical.
 
-The exact monkeyC 42-bone renderer121301 now has a [native arrival diagnostic](evidence/monkeyc-arrival-native-v1/validation.json).
+The exact monkeyC 42-bone renderer 121301 now has a [native arrival diagnostic](evidence/monkeyc-arrival-native-v1/validation.json).
 The prearmed observer recorded the actual enSuicideCurse544 attack and synchronous
-secondary damage58to0. Body inactivity starts at sample108; hidden DeathIndirect
+secondary damage 58to0. Body inactivity starts at sample108; hidden DeathIndirect
 samples117to119 do not establish visible death. Initial enDiseaseHit AttackInfo
 was stale prior state. The120samples span64.23468wall seconds and6.283203game
 seconds, so this is not unperturbed timing evidence. Two guarded native Collect
@@ -1673,26 +1673,26 @@ actions reached Ready0/3 with the next Trap1 unchanged. Selected distant or
 FX-obscured calibration views do not accept the original Tamarind model.
 The earlier setup-removal failure remains preserved separately.
 
-The exact dragonFrost renderer121561, with verified shared rig representative121525,
+The exact dragonFrost renderer 121561, with verified shared rig representative121525,
 has [diagnostic evidence with cropping limitations](evidence/dragonfrost-diagnostic-v1/validation.json).
 Its native boss row disables dungeon spawning; this remains an isolated dungeon
-fixture. Native scale1 and frost effects severely crop body, wings and portraits,
+fixture. Native scale 1 and frost effects severely crop body, wings and portraits,
 so the diagnostic does not accept original art.
 
 The canonical [Amberwake V3 supplement](../art-experiments/amberwake-dragon/live-validation-v3/validation.json)
 binds the original mesh to that exact `enDragon` renderer under one native owner
-at deliberate visual scale0.25. Its complete pass and ordinary-hit captures each
-retain120frames through settled idle, native `AttackProf`, recovery, native
+at deliberate visual scale 0.25. Its complete pass and ordinary-hit captures each
+retain 120 frames through settled idle, native `AttackProf`, recovery, native
 `Damaged` and a later enemy action. Twenty-three reviewed originals show the
 slate body, ivory horns, cyan accents, four legs, tail and amber wings remaining
 coherent in those sampled motions.
 
 The ordinary zero-focus strike used an explicit disposable hero fixture: native
 attack skill was capped at0.95 and native weapon maximum damage rose from10to30.
-It reduced HP675to664 for native `Damaged`, then the runner restored the exact
+It reduced HP 675to664 for native `Damaged`, then the runner restored the exact
 physical-augmentation and maximum-damage baseline at between-room Ready. This
 establishes a repeatable ordinary-hit response, not representative balance or a
-guaranteed hit. The separate explicit `KillSingle` records988damage and retains
+guaranteed hit. The separate explicit `KillSingle` records 988 damage and retains
 frames0through90 before renderer destruction. The source has `m_DoRagdoll=false`
 and zero rigidbodies, so the reviewed fall and fallen pose are animated death,
 not ragdoll evidence. Frame90 marks the exact renderer inactive and not visible;
@@ -1705,9 +1705,9 @@ The historical [Tamarind V1 archive](../art-experiments/tamarind-trickster/live-
 is preserved as a separate earlier native-arrival record and is not merged with
 the fresh run. The canonical [Tamarind V2 supplement](../art-experiments/tamarind-trickster/live-validation-v2/validation.json)
 pins the exact `monkeyC / enMonkeyBasey / 121301` route, current source assets,
-42-bone signature and visual scale1.0. Its complete 120-sample passive-arrival
+42-bone signature and visual scale 1.0. Its complete 120-sample passive-arrival
 capture records settled idle at samples40/60, native `PlayAttackSequence` entry
-for `enSuicideCurse` at game frame29945, secondary damage at frame29972, HP58to0,
+for `enSuicideCurse` at game frame29945, secondary damage at frame29972, HP 58to0,
 and renderer inactivity from sample108. Strict native Ready0/2 was observed
 immediately before the single armed arrival and Ready submission.
 
@@ -1725,14 +1725,14 @@ finished-art acceptance remain open.
 Deathknight is now [source reconciled](evidence/deathknight-native-source-v1/archive-validation.json)
 across seven native rows, five exact renderers121217/121218/121221/121219/121220
 and two combat controllers5983(blunt)/5982(bladed). All five share the same ordered
-36bones, inverse bind matrices and mesh2385; schedules, materials, native scale,
+36 bones, inverse bind matrices and mesh2385; schedules, materials, native scale,
 rigid helmet/shield and effects remain distinct. A/B/C, Dboss and harazuelMinionB
 use the blunt controller; Eboss/EbossEasy use bladed. Boss/minion schedules shuffle,
 so serialized first items are not actual first-action evidence. No reviewed weapon
 proficiency sets m_Suicide, but external removal paths remain possible.
 
 The [exact deathknightA diagnostic](evidence/deathknighta-diagnostic-v1/README.md)
-now records renderer121217 through 120-frame pass, blocked-attack and explicit
+now records renderer 121217 through 120-frame pass, blocked-attack and explicit
 death-fixture captures. Runtime HP was58; the source base field is50, and the
 scaling cause was not measured here. The ordinary strike left HP unchanged and
 showed BLOCKED. Native daze and the transition to disabled-Animator ragdoll were
@@ -1743,13 +1743,13 @@ or acceptance of sibling renderers/controllers. The native staircase's later
 [preparation vote](evidence/native-stair-preparation-v1/README.md) reached floor1
 through a separate observed menu, without substituting the Stair room.
 
-The remaining 36-joint Eboss row now has [exact calibration evidence](evidence/unresolved-enemy-probes-v1/README.md): `deathknightEboss`/`deathKnight`/121220 binds cleanly and records eight bounded native attacks at HP158→158. No ordinary damage, fixture death, loot or Ready claim is made; the deathknightA original-art and blunt-controller evidence does not transfer to this distinct bladed controller row.
+The remaining 36-joint Eboss row now has [exact calibration evidence](evidence/unresolved-enemy-probes-v1/README.md): `deathknightEboss`/`deathKnight`/121220 binds cleanly and records eight bounded native attacks at HP 158→158. No ordinary damage, fixture death, loot or Ready claim is made; the deathknightA original-art and blunt-controller evidence does not transfer to this distinct bladed controller row.
 
 The canonical [Honeyback V3 archive](../art-experiments/honeyback-portrait-v2/live-validation-v3-canonical/validation.json)
 now closes the exact `bearB / enBear01 / 121467` route with the unchanged
 portrait-v2 GLB and texture. Three complete 120-frame captures preserve the
 38-joint `Root_M` binding through `bear_idle`, `bear_attackBite`, an ordinary
-HP72 to64 `Damaged` response and recovery, later `bear_attackSwipe` and
+HP 72 to64 `Damaged` response and recovery, later `bear_attackSwipe` and
 `bear_attackPound`, and explicit-fixture `bear_deathHeavy`. Seventeen reviewed
 original PNGs show a coherent dark-brown and golden bear through the sampled
 motions and a readable prone pose. The exact renderer is active, enabled,
@@ -1765,7 +1765,7 @@ The canonical [Duneshade V2 archive](../art-experiments/duneshade-desert-asp/liv
 closes the exact `snakeDesertA / enDesertSnakeA / 121552` route with the original
 Duneshade GLB and texture. Three complete 120-frame captures preserve the
 46-joint `Root_M` binding through `Snake_Idle`, `Snake_BiteAttack`, an ordinary
-HP58 to48 `Damaged` response with `Snake_HitSmall`, recovery, a later bite, and
+HP 58 to48 `Damaged` response with `Snake_HitSmall`, recovery, a later bite, and
 the separate explicit-fixture death. The source has `m_DoRagdoll=true`: all 13
 bodies remain kinematic through frame 27, the animator disables and all become
 dynamic at frame 28, motion begins at frame 29, and measured motion is zero from
@@ -1780,9 +1780,9 @@ The canonical [Sargassum primary V2 archive](../art-experiments/abyssal-kraken/l
 closes the representative `krakenTentacle / krakenTentacle / 121595` topology
 route with the unchanged original V2 GLB and texture. Two complete 120-frame
 captures preserve the 20-joint `Root_M` binding through `Tentacle_Idle_M`,
-native `Tentacle_Attack2_M`, an ordinary HP162 to154 `Damaged` response with
+native `Tentacle_Attack2_M`, an ordinary HP 162 to154 `Damaged` response with
 `Tentacle_Damaged_M`, recovery, `Tentacle_AttackGrab_Mirrored`, and
-`Tentacle_Attack1_M`. The separate explicit KillSingle fixture records HP154
+`Tentacle_Attack1_M`. The separate explicit KillSingle fixture records HP 154
 to0, 1000 damage, and `Tentacle_Death`. The source has `m_DoRagdoll=false` and
 zero rigidbodies, so the withdrawal is animated. Its accepted 91-frame prefix
 keeps exact identity through frame 90, when the renderer becomes inactive and

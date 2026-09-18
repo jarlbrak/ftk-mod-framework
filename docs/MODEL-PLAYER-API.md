@@ -105,7 +105,7 @@ skinsets remain pending.
 session `4fac21c62c7c4624a648ec782d88c34d`, before the new scale/framework/helper
 versions. The recorder joined actual hero-235442 to the equipment-owner combat
 CEL and verified the registered Blacksmith Female profile with starting armor59.
-It captured stable `probe_121067` identity for120 unpaused frames over10.908325
+It captured stable `probe_121067` identity for120 unpaused frames over 10.908325
 seconds. `attack_blunt1H` sampled frames16..39 (normalized0.113..0.983), while
 the enemy dodged and stayed at58HP. Player `damageLight_blunt1H` sampled76..86
 and111..119; this is actual player motion evidence, not successful enemy damage.

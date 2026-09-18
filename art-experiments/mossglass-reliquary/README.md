@@ -1,6 +1,6 @@
 # Mossglass Reliquary
 
-Original rounded jade gel shell with an open ivory seed cage and faceted amber core, authored for native `cubeA` / `enJellyCube` renderer121012. Front is +Z, up +Y. The native CEL scale1.1 is preserved by profile factor1. Side views deliberately emphasize the opaque shell rather than a readable face.
+Original rounded jade gel shell with an open ivory seed cage and faceted amber core, authored for native `cubeA` / `enJellyCube` renderer 121012. Front is +Z, up +Y. The native CEL scale 1.1 is preserved by profile factor 1. Side views deliberately emphasize the opaque shell rather than a readable face.
 
 Two genuine GLB primitives share the exact three-joint native palette and inverse binds. Primitive0 maps explicitly to native material slot0: fixed ivory/amber interior UVs. Primitive1 maps to native slot1: opaque jade shell with vertically repeating vein bands. The original native `ScrollingUVs` component retains its rate(0,0.2), `_MainTex`, phase and slot1 mapping through the reviewed owned-material compatibility seam. Both native shaders are opaque; the authored opening exposes the interior without transparency. Both slots initially retain native emission. Actual original-model color and scrolling readability at combat scale remain live gates.
 
@@ -25,7 +25,7 @@ scratch/model-venv/bin/python art-experiments/mossglass-reliquary/audit_native_p
 scratch/model-venv/bin/python art-experiments/mossglass-reliquary/finalize_manifest.py
 ```
 
-Root reviewed hero/side and corrected selected native death-junction/hit/travel views and approved offline direction for live testing. No live original acceptance, finished-art completeness, material cleanup, clone independence or whole-controller coverage is claimed. Minimum health64 is a test fixture setting. Use the multi-slot Core/content versions together; the legacy single-primitive API cannot express this model.
+Root reviewed hero/side and corrected selected native death-junction/hit/travel views and approved offline direction for live testing. No live original acceptance, finished-art completeness, material cleanup, clone independence or whole-controller coverage is claimed. Minimum health 64 is a test fixture setting. Use the multi-slot Core/content versions together; the legacy single-primitive API cannot express this model.
 
 ## Canonical exact-source validation V5
 

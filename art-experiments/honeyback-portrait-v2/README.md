@@ -28,11 +28,11 @@ in session1ed421a57c3e483bafb6803d051d0ab1. Larger/moved eyes are visible in
 reviewed combat0/50, but the native portrait remains nose-dominated. The offline
 visibility improvement therefore does not establish live portrait acceptance.
 
-- [Attack](live/attack.mp4), reviewed0/50.
-- [Normal10 hit](live/nonlethal-hit.mp4),72 to62, reviewed30 with hero occlusion.
-- [Kill-fixture death](live/kill-fixture-death.mp4),62 to0, reviewed40/60 coherent native animated collapse.
+- [Attack](live/attack.mp4), reviewed 0/50.
+- [Normal 10 hit](live/nonlethal-hit.mp4),72 to62, reviewed 30 with hero occlusion.
+- [Kill-fixture death](live/kill-fixture-death.mp4),62 to0, reviewed 40/60 coherent native animated collapse.
 
-All three captures complete120 unpaused frames; two Collect actions reach
+All three captures complete 120 unpaused frames; two Collect actions reach
 Ready0/2. Source review shows combat HUD snapshots the dressed custom CEL
 fresh; no shared cache cause is demonstrated. A separate row-based encounter
 preview may miss the custom visual plan, but is not established as this combat

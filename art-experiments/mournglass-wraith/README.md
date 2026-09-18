@@ -1,6 +1,6 @@
 # Mournglass Wraith
 
-Original model for exact chaosBeast renderer121008/enChaosBeast, CEL135754 and actual controller5960 ghostController. A narrow ivory mask sits inside a blue-green hood. Tapered sleeves connect to ivory hands, and one continuous mantle surface runs from chest through waist to a narrow hem. Its lower rings blend the native hip/knee influences. The canonical live trial now verifies the exact original binding, two material slots, settled idle, native attack, ordinary hit response, animated disappearance boundary and strict Ready progression.
+Original model for exact chaosBeast renderer 121008/enChaosBeast, CEL135754 and actual controller5960 ghostController. A narrow ivory mask sits inside a blue-green hood. Tapered sleeves connect to ivory hands, and one continuous mantle surface runs from chest through waist to a narrow hem. Its lower rings blend the native hip/knee influences. The canonical live trial now verifies the exact original binding, two material slots, settled idle, native attack, ordinary hit response, animated disappearance boundary and strict Ready progression.
 
 The editable Blender scene and original generator retain all31 palette entries and exact bind matrices. The28 native-positive bones are weighted; MiddleFinger3_R/L and Hair_M remain unused but retained. Original generation reads only binding landmarks, never native surface vertices or triangles. Direct and saved/reopened exports, normalized weights, native bind bounds, positive closed-piece volume and independent regeneration pass. Separate pieces overlap; this is not a watertight union or collision-fit proof.
 
@@ -10,7 +10,7 @@ The current GLB contains two disjoint primitive groups:588 scrolling-cloth trian
 
 Pinned source findings identify native material71 matChaosBeast on slot0 and70 matCHaosBeastFace on slot1. ScrollingUVs135814 updates slot0/_MainTex at rate(0,-.5). The current [runtime profile](runtime-profile.json) preserves this two-slot route through the reviewed multi-slot API and passes static direct-route preflight. Authoring does not bake scrolling into animation. Source materials differ in metallic/gloss properties and both have emission; the profile opts out of both inherited emissions. The canonical trial reads both Standard material instances using the authored slot textures with emission disabled, zero emission color and no emission map.
 
-Native scale1.5 must remain through visual factor1. Preserve the eight native particle systems and FlickerLight/Light. Source has no rigidbodies or colliders, and the live renderer reports `m_DoRagdoll=false` with zero rigidbodies. Native death clip4959 calls conditional DeathFade around.776761s. The canonical trial observes `death_ghost` begin at retained frame18, with the renderer active and visible through frame19 and inactive, disabled and not visible from frame20. A visible corpse is not expected from those observations. Native particles and their materials remain unchanged.
+Native scale 1.5 must remain through visual factor 1. Preserve the eight native particle systems and FlickerLight/Light. Source has no rigidbodies or colliders, and the live renderer reports `m_DoRagdoll=false` with zero rigidbodies. Native death clip4959 calls conditional DeathFade around.776761s. The canonical trial observes `death_ghost` begin at retained frame18, with the renderer active and visible through frame19 and inactive, disabled and not visible from frame20. A visible corpse is not expected from those observations. Native particles and their materials remain unchanged.
 
 ## Canonical live validation
 
@@ -22,14 +22,14 @@ review and all source, capture and asset mappings intact.
 
 The pass capture preserves `cidle_ghost`, native `attackProf_ghost` and return
 to idle. Its recorded native action deals 18 hero damage. The ordinary
-zero-focus player action records `Damaged`, damage5 and new enemy HP53 from58,
-then `damageSmall_ghost` and idle recovery. A later Ready-state poll finds HP45
+zero-focus player action records `Damaged`, damage 5 and new enemy HP 53 from58,
+then `damageSmall_ghost` and idle recovery. A later Ready-state poll finds HP 45
 after additional combat turns. No retained causal event explains that extra
 eight-point loss, so the archive preserves it as a later net state without
 attributing it to the ordinary hit.
 
-The separate `KillSingle` fixture reduces the later HP45 state to0 for recorded
-damage1000 and `Death`. This is fixture death evidence, not ordinary lethal
+The separate `KillSingle` fixture reduces the later HP 45 state to0 for recorded
+damage 1000 and `Death`. This is fixture death evidence, not ordinary lethal
 gameplay. The accepted 94-frame prefix ends at renderer destruction. It proves
 the visible opening of animator-driven `death_ghost` and the inactive boundary,
 but not a fully visible death clip, cleanup causality, later corpse lifetime or

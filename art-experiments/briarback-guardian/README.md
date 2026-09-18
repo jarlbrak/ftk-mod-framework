@@ -32,7 +32,7 @@ chest pads. Source landmarks distinguish the old fixed PortraitCam from the
 head-attached EncounterCam; an explicit selector and corrected rerun are pending.
 
 - [Attack](live-v1/attack.mp4),120 frames.
-- [Ordinary hit](live-v1/nonlethal-hit.mp4),153 to148, normal5 damage,120 frames.
+- [Ordinary hit](live-v1/nonlethal-hit.mp4),153 to148, normal 5 damage,120 frames.
 - [Kill-fixture death](live-v1/kill-fixture-death.mp4),148 to0.
 
 Death remains a failed95/120-frame capture ending RendererDestroyed, with
@@ -45,9 +45,9 @@ and complete art acceptance remain pending despite the scoped body results.
 
 [V2 archive](live-validation-v2.json) pins the corrected deployment and preserved
 selection log. Turn-strip and enemy-health-panel portraits both frame the face
-at reviewed0/50 using exact Head_M/EncounterCam selection. Geometry is unchanged
-from V1. Normal5 damage153 to148 and body collapse remain coherent in reviewed
-views. Attack/hit complete120 frames; death148 to0 still fails after95/120
+at reviewed 0/50 using exact Head_M/EncounterCam selection. Geometry is unchanged
+from V1. Normal 5 damage 153 to148 and body collapse remain coherent in reviewed
+views. Attack/hit complete 120 frames; death148 to0 still fails after95/120
 frames with RendererDestroyed. Automatic Ready0/3 follows without Collect.
 This fixes the selected UI portrait views, without claiming full death/culling
 acceptance. The V1 chest-framing failure remains archived.

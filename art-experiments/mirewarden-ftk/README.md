@@ -101,7 +101,7 @@ the matching opt-in framework build is required separately.
 
 [Native-scale evidence](live-validation-native-scale.json) records unchanged
 Mirewarden geometry under frameworkb4554004 in session5754790cd92e4557b28b6f728024815c.
-Neutral factor1 preserves native0.95; inventory renderer world axes measure0.95.
+Neutral factor 1 preserves native0.95; inventory renderer world axes measure0.95.
 The rock body remains coherent in reviewed attack/hit views. Ragdoll shows
 rock-segment gaps and separated limb chunks, an existing art limitation rather
 than a new scale explosion. This scoped size regression passes, not flawless
@@ -109,11 +109,11 @@ art, complete animation or culling/variant acceptance.
 
 - [Attack](live-native-scale/attack.mp4), reviewed frames0/50.
 - [First player apparel attack](live-native-scale/player-apparel-attack.mp4),
-  Gambeson target, ordinary8 damage58 to50, reviewed30/78.
-- [Enemy hit](live-native-scale/nonlethal-hit.mp4), ordinary8 damage50 to42, frame30.
+  Gambeson target, ordinary 8 damage 58 to50, reviewed 30/78.
+- [Enemy hit](live-native-scale/nonlethal-hit.mp4), ordinary 8 damage 50 to42, frame30.
 - [Kill-fixture death](live-native-scale/kill-fixture-death.mp4),42 to0, frames40/60.
 
-All four captures completed120 unpaused frames over about10.908 game seconds.
+All four captures completed 120 unpaused frames over about 10.908 game seconds.
 Death disables Animator at frame28 with14 native rigidbodies. Two guarded
 Collect actions reach strict Ready0/2. Videos replay12fps and establish no
 real-time performance claim. The apparel capture preserves custom foot/body
@@ -121,15 +121,15 @@ markers but native backpack, helmet and weapon occlude them; equipment-cycle
 and full playercatalog validation remain separate pending tests.
 
 The [repeatable V2 archive](live-validation-v2/README.md) pins this native-scale
-run as one catalog process with complete pass, ordinary HP50→42 hit and
-`KillSingle` HP42→0 captures, native ragdoll telemetry, two guarded Collects and
+run as one catalog process with complete pass, ordinary HP 50→42 hit and
+`KillSingle` HP 42→0 captures, native ragdoll telemetry, two guarded Collects and
 the strict Ready boundary. Rock-segment gaps remain an art limitation; the
 fixture death is not ordinary lethal acceptance.
 
 The canonical [V3 exact-source archive](live-validation-v3/README.md) repeats
 the current direct-enemy route for exact `trollCaveA / enTroll01 / renderer
 121153`. Three complete 120-frame captures retain the exact renderer through
-`cidle_troll`, `attackProf_troll`, ordinary HP58→48 plus `damage_troll`
+`cidle_troll`, `attackProf_troll`, ordinary HP 58→48 plus `damage_troll`
 recovery, `attack_troll`, and the separate explicit-fixture
 `deathHeavy_troll`. All 360 retained frames keep the renderer active, enabled,
 visible, and identity-stable. The fixture records `m_DoRagdoll=true`, 11

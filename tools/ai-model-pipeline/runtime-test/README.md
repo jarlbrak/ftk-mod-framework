@@ -865,12 +865,12 @@ full-cycle coverage. Reviewed markers were nearly subpixel and attack effects
 occluded them. Visual acceptance remains pending until marker sizing and a new
 review resolve those limits; see the same validation index for immutable hashes.
 
-A subsequent Snowman iteration used five weighted probes at radius scale6 with
+A subsequent Snowman iteration used five weighted probes at radius scale 6 with
 `connections=none` in session `432473c3a0f24b169472a2272e01e70c`
 (`case-6169026607ae4aac8b616c7eb9c529ed`). Reviewed frames show the green connector
 absent and separate point markers following the separating parts. Native Pass,
 ordinary Attack (23 to15 HP), and explicit `KillSingle` (15 to0 HP) each recorded
-120 unpaused frames over about10.9083 game seconds. Two guarded Collect actions
+120 unpaused frames over about 10.9083 game seconds. Two guarded Collect actions
 then reached strict Ready at level0/room2. Source analysis traced the previous
 long edge to a generated fully weighted connector exaggerating native part
 separation. The validation index preserves both earlier iterations, the new
@@ -1151,7 +1151,7 @@ after state, action uncertainty, capture ID/path, immutable final result and
 output directory. Even on an action timeout it waits for the existing capture
 without retrying the action. Missing/paused/changed/partial captures fail the
 run and retain available evidence. Success requires 120 present PNGs, stable
-renderer/CEL/mesh/bone identities, fixed-step12 and at least9 sampled game
+renderer/CEL/mesh/bone identities, fixed-step12 and at least 9 sampled game
 seconds. It means action/frame recording completed, never visual acceptance.
 A late capture after timeout remains inspectable at its journaled result path.
 
@@ -1486,7 +1486,7 @@ all-player, final-owner teardown, preview, death, or art acceptance result.
 `record_case.py` has now completed live Pass, ordinary Attack (135 to127 HP), and
 explicit kill-fixture (127 to0 HP) captures for the larger Beholder diagnostic
 markers in session `432473c3a0f24b169472a2272e01e70c`. Each journal returned
-`recorded_action_and_frames`, with120 unpaused frames and about10.9083 measured
+`recorded_action_and_frames`, with120 unpaused frames and about 10.9083 measured
 game seconds. The weighted markers used explicit radius0.2; body and eye bound
 at their expected CEL paths. Reviewed idle/hit views show the two larger markers,
 but attack glow and death effects occlude them. One guarded Collect then reached
@@ -1498,7 +1498,7 @@ frame hashes, and current CLI source hashes (not execution-time attestations).
 A subsequent two-renderer `skullA` diagnostic in the same session used stage case
 `3d509ec8d42344d18ad8f452bbb66b9a`. Pass sampled `ChaosSkullBottom`; ordinary Attack
 (69 to62 HP) and explicit KillSingle (62 to0 HP) sampled `ChaosSkullTop`.
-All three captures recorded120 unpaused frames and about10.908 game seconds.
+All three captures recorded 120 unpaused frames and about 10.908 game seconds.
 Reviewed regions showed visible purple calibration geometry with native effects,
 without obvious catastrophic deformation; death faded inside purple effects.
 Damage/death starts were clipped (first sampled normalized0.4442/0.1375), so this
@@ -1515,7 +1515,7 @@ spawn checks were pending when that preparation record was written.
 `0c008ef0af42429e94a9bac2af3e069a`. It shares PlantA's recorded rig/controller
 fingerprint and body/leaves rig IDs, so it adds a testcase rather than a unique
 combat-profile group. Pass, ordinary Attack (25 to14 HP), and KillSingle fixture
-(14 to0 HP) each recorded120 unpaused frames over about10.9083 game seconds.
+(14 to0 HP) each recorded 120 unpaused frames over about 10.9083 game seconds.
 Reviewed calibration bends/collapses showed no obvious explosive deformation in
 visible areas, with small features, effects and hero occlusion limiting review.
 Hit/death beginnings were clipped (normalized0.4125/0.125). One guarded Collect
@@ -1528,7 +1528,7 @@ The first resource-prefab fixture, `enbaseysnake` on the `snakeJungleA` base,
 has now run live in session `6b86eff0890f479f90b9134814cc0ae8`, stage case
 `5b6e1a005bd442c7b66fa96ca686d8e5`. Exact path `enSnake_Basey` used probe121488.
 Pass, ordinary Attack (27 to19 HP), and explicit KillSingle (19 to0 HP) each
-recorded120 unpaused frames over about10.908 seconds. Reviewed views show the
+recorded 120 unpaused frames over about 10.908 seconds. Reviewed views show the
 probe upright/coiled, biting and collapsing into a coil, with some head clipping
 and label/hero occlusion. Animator disabled at frame28 of death and13 native
 rigidbodies moved and settled. Frozen `Snake_DeathBig` normalized1.65 after that
@@ -1538,7 +1538,7 @@ diagnostic resource case, not finished art or all nine candidates accepted.
 The375-entry catalog is deployed, but its full decode run was still pending at
 this update; no375-pass claim follows from the single live case.
 
-The expanded decoder subsequently completed375/375 entries with zero errors in
+The expanded decoder subsequently completed 375/375 entries with zero errors in
 command `2773ae950a954b48996582a9ecdf2221`, session
 `6b86eff0890f479f90b9134814cc0ae8`, against catalog hash `729365f5...`.
 It decoded390 renderer assignments spanning171 native bone signatures, including
@@ -1560,33 +1560,33 @@ requested minimum alongside actual enemy HP before capture/action; its result
 also includes minimumBaseHealth (null when absent). Preserve this journal with
 capture files so boosted enemies cannot be mistaken for vanilla balance tests.
 
-The next resource case `enbaseywolf` used native `wolfA` health8, catalog
+The next resource case `enbaseywolf` used native `wolfA` health 8, catalog
 `729365f5...`, stage `970eb94463794925a09f7d3ef7953794`, in the same session.
 `Wolfie` bound probe120975. Pass sampled `attackProf_wolf`; ordinary Attack dealt
 10 damage and killed it (8 to0 HP), sampling `deathHeavy_wolf`. Both captures
-recorded120 unpaused frames over about10.908 seconds. Animator stayed enabled
+recorded 120 unpaused frames over about 10.908 seconds. Animator stayed enabled
 throughout death, unlike the separately observed Ashfang ragdoll. Reviewed
 calibration was visible and folded in death, but corpse markers appeared above
 the floor, so ground contact/artwork fit is not accepted. Nonlethal hit evidence
 remains pending. Two guarded Collect actions reached strict Ready at level0/room3.
-The separately prepared health64 catalog was not deployed for this baseline and
+The separately prepared health 64 catalog was not deployed for this baseline and
 does not retroactively change its health or evidence.
 
-The health64 catalog (`903d46b8...`) subsequently ran in session
+The health 64 catalog (`903d46b8...`) subsequently ran in session
 `033a44209e08452aba8858dcd3eda29c`. All375 registered custom enemy base values
 matched `max(native,64)`;150 native values above64 remained unchanged. Startup
 also registered96 player fixtures, which is registration evidence only. For
-resource `enbaseywolf`, native base9 became custom base64 and native combat HP58.
+resource `enbaseywolf`, native base9 became custom base64 and native combat HP 58.
 The recorded critical ordinary hit dealt13 (58 to45), sampling `damaged_wolf`
 and `attack_wolf`; explicit KillSingle then reduced45 to0. Both captures had120
-unpaused frames over about10.9083 seconds. Two guarded Collect actions reached
+unpaused frames over about 10.9083 seconds. Two guarded Collect actions reached
 strict Ready at level0/room2. Heavy hero occlusion and apparent corpse ground
 fit still limit visual acceptance. Source reconstruction of the prior baseline
 rules out missing probe foot extent, but terrain height was not recorded, so
 ground contact remains unaccepted. Both health iterations and that analysis are
 hashed separately in the index.
 
-The health catalog decoder `3b11077c433a4b38892abfb7ccac0b71` completed375/375
+The health catalog decoder `3b11077c433a4b38892abfb7ccac0b71` completed 375/375
 with zero errors. This confirms decode/base-fixture checks for the new catalog,
 not additional live rig or art coverage. The earlier `729365f5...` decode result
 remains preserved with its original input hash.
@@ -1647,7 +1647,7 @@ lack of deployment or infer this test covers every non-enemy room type.
 
 `kraken-sample-fixture` takes one explicit clip (`krakenAttack`, `krakenIdle`,
 `krakenDamage`, `krakenDisappear`, or `kraken_appear`) and `times`, an array of
-1..32 finite seconds within that native clip's length (maximum60 seconds).
+1..32 finite seconds within that native clip's length (maximum 60 seconds).
 For example, start with `{"clip":"krakenAttack","times":[0]}` to record
 identity/length before selecting additional times. Save that JSON to an ignored
 scratch file and invoke against the already-running owned copy:
@@ -1665,7 +1665,7 @@ concurrently.
 
 The helper resolves modern native `krakenHead`'s prefab and weapon controller,
 and old Resources `enkrakenhead`. It creates two **transform-only** temporary
-hierarchies using new inactive GameObjects (maximum256 transforms each). It
+hierarchies using new inactive GameObjects (maximum 256 transforms each). It
 copies exact local TRS, never instantiates native objects or copies CEL, Animator,
 renderer, collider, FX or gameplay components. After construction and component
 checks, the two transform-only roots are activated for sampling. Before EVERY sample it restores
@@ -1954,7 +1954,7 @@ six invalid requests are refused; Ready remains0/2. Four independent modern
 reference bridges from session575479 to245a805 match exactly (maximumerror0).
 Their success does not turn the failed adapter into a pass. Source precision
 analysis records old prefab rootZ132.8200073 with float32 spacing1.5258789e-5;
-neutral world-roundtrip/readback error is about7.4e-6/7.9e-6. A local-chain
+neutral world-roundtrip/readback error is about 7.4e-6/7.9e-6. A local-chain
 readback correction at unchanged1e-5 tolerance awaits reviewed fresh live
 validation. No adapter, appearance or crossfade acceptance is implied.
 
@@ -2000,7 +2000,7 @@ Five owned Kraken controller scenarios (appear, damaged, damaged-heavy, death,
 death-light) and their241-frame repeats independently match. These native graph
 observations do not validate an old-rig blending adapter. In fact, the proposed
 Dj * inverse(DsRoot) * OjNative policy fails the required pure-main endpoint
-by up to6.817214574, despite matching pure appearance within2.98023e-7. The
+by up to6.817214574, despite matching pure appearance within 2.98023e-7. The
 modern and old immutable root frames differ; changing tolerance cannot repair
 that algebra. The proposal was only audited offline, never assigned to Unity.
 Hashed numerical findings are retained in the runtime evidence index; a new

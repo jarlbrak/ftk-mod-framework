@@ -39,11 +39,11 @@ Parent reviewed the pinned hero, side, pass and death sheets and approved this v
 
 ## Native live V1
 
-[Live archive](live-validation.json) records three complete120-frame captures on the exact native-scale beeA profile. Parent reviewed pass0/40, hit30 and death40/60: coherent amber insect, attached wings/legs, readable portraits, ordinary10damage58→48, and a corpse remaining together as it falls and lies on the floor. The silhouette is small/dark; native motion blur and green effects obscure some detail.
+[Live archive](live-validation.json) records three complete 120-frame captures on the exact native-scale beeA profile. Parent reviewed pass0/40, hit30 and death40/60: coherent amber insect, attached wings/legs, readable portraits, ordinary 10 damage 58→48, and a corpse remaining together as it falls and lies on the floor. The silhouette is small/dark; native motion blur and green effects obscure some detail.
 
 Death was an explicit kill fixture. Animator turns off and all16 bodies become dynamic at27. Frame60 looks near settled but still has nonzero recorded linear/angular velocity; both are zero at63 and119. IsSleeping was not recorded. One guarded Collect reaches strict Ready0/2 after an initial transitional query. The runtime first native Standard material uses the authored palette with zero emission; no second native glow slot is retained.
 
-This is selected-pose body/portrait/hit/death appearance acceptance, not every clip, view, culling condition or bee-family variant. Some hit/attack clips have only partial first-cycle samples. Five PNGs and three120-frame MP4s are retained in `live-v1`; native effects remain game-owned. The source geometry and runtime profile were not changed for this test.
+This is selected-pose body/portrait/hit/death appearance acceptance, not every clip, view, culling condition or bee-family variant. Some hit/attack clips have only partial first-cycle samples. Five PNGs and three 120-frame MP4s are retained in `live-v1`; native effects remain game-owned. The source geometry and runtime profile were not changed for this test.
 
 ## Native live V2
 

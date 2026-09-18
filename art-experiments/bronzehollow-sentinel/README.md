@@ -1,12 +1,12 @@
 # Bronzehollow Sentinel
 
-Original articulated dark stone and bronze guardian body for exact deathknightA, renderer121217 (`deathKnight`),36 ordered bones, native blunt controller5983. Broad separated bronze ribs, bracers and greaves surround faceted stone cores. Small jade sternum seal adds a readable accent. All geometry and palette are original parametric surfaces; the generator accesses native bone names and inverse binds only.
+Original articulated dark stone and bronze guardian body for exact deathknightA, renderer 121217 (`deathKnight`),36 ordered bones, native blunt controller5983. Broad separated bronze ribs, bracers and greaves surround faceted stone cores. Small jade sternum seal adds a readable accent. All geometry and palette are original parametric surfaces; the generator accesses native bone names and inverse binds only.
 
 This is a body replacement. The native rigid horned helmet, shield and weapon remain native and are not included in the original assets or studio renders. The compact head core is deliberately hidden beneath the helmet; this is not a custom head or custom portrait silhouette. Reviewed V4 combat frames show the custom body moving coherently beneath that equipment, while detailed clearance across every clip remains untested.
 
 Primary candidate is `bronzehollow.glb` with `bronzehollow_basecolor.png`. `bronzehollow.blend` is the editable armature scene. It is reopened and exported through the repository FTK Blender exporter to `bronzehollow-reopened.glb`; the separate roundtrip audit compares the exact candidate and reopened export. The studio scene is presentation only and contains no native geometry.
 
-The trial uses plural renderer assignment on `deathKnight`, factor1 preserving native CEL scale1.2, with `disableNativeEmission:true` on the body material. Native equipment emission remains unchanged. Fresh V4 inventory reports the authored body texture on `matDeathKnight (Instance)` using Standard with emission disabled, black emission color and no emission map. No AI, controller or weapon behavior changes are part of the model profile.
+The trial uses plural renderer assignment on `deathKnight`, factor 1 preserving native CEL scale 1.2, with `disableNativeEmission:true` on the body material. Native equipment emission remains unchanged. Fresh V4 inventory reports the authored body texture on `matDeathKnight (Instance)` using Standard with emission disabled, black emission color and no emission map. No AI, controller or weapon behavior changes are part of the model profile.
 
 [runtime-profile.json](runtime-profile.json) records that exact current
 `deathknightA` route and passes static direct-route preflight. It is a repeatable

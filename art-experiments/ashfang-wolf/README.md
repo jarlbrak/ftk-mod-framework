@@ -113,10 +113,10 @@ Full culling-envelope checks and other controller variants remain unverified.
 
 [Followup evidence](live-validation-hit-followup.json) records framework900f/
 helper434, sessionb3322a5d049e4638acecf30928de8d06. The ordinary attack now
-establishes nonlethal8 damage (58 to50) with damaged_wolf and attack/idle
+establishes nonlethal 8 damage (58 to50) with damaged_wolf and attack/idle
 telemetry. Reviewed frame30 is mostly hero-occluded, so this does not prove
-full-body visible hit deformation. The kill fixture50 to0 completes120 frames;
-reviewed40/60 show rolling/collapse with the existing thin-leg/fin art limits.
+full-body visible hit deformation. The kill fixture50 to0 completes 120 frames;
+reviewed 40/60 show rolling/collapse with the existing thin-leg/fin art limits.
 
 - [Nonlethal hit](live-hit-followup/nonlethal-hit.mp4)
 - [Kill-fixture death](live-hit-followup/kill-fixture-death.mp4)

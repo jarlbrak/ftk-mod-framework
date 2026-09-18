@@ -88,7 +88,7 @@ Register the tint/scale first, then explicit GLB assignments so the mesh registr
 merges them into the visual settings.
 
 For the fitted old cockatrice example, native root scale `(0.9,0.9,0.9)` times
-factor0.55 predicts spawned local scale `(0.495,0.495,0.495)`. This is a source
+factor 0.55 predicts spawned local scale `(0.495,0.495,0.495)`. This is a source
 contract calculation, **pending live measurement and visual fitting review**.
 Record requested factor, native prefab root local scale, and observed spawned CEL
 local scale separately. World size also depends on parent transforms, original

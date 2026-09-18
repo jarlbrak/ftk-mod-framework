@@ -36,10 +36,10 @@ unoccluded body deformation, all-motion or culling acceptance.
 - [Attack](live/attack.mp4)
 - [Blocked hit1](live/blocked-hit1.mp4),63HP unchanged.
 - [Blocked hit2](live/blocked-hit2.mp4),63HP unchanged.
-- [Successful normal2 hit](live/nonlethal-hit.mp4),63 to61.
+- [Successful normal 2 hit](live/nonlethal-hit.mp4),63 to61.
 - [Kill-fixture death](live/kill-fixture-death.mp4),61 to0.
 
-All five captures complete120 unpaused frames. Upturned legs follow native
+All five captures complete 120 unpaused frames. Upturned legs follow native
 spiderDeathDirect, with Animator enabled throughout, zero rigidbodies and no
 ragdoll flag. Its first sampled normalized time0.1222 leaves the early endpoint
 unseen. One Collect reaches Ready0/2. Replays are12fps, not real-time

@@ -52,7 +52,7 @@ partial results successful or silently skip a difficult case.
 Each scenario folder contains first/repeat raw reports and requests, readiness
 observations, the six-pin `kraken-modern-input-mixer-v1` manifest, and full verifier
 output. A complete suite writes `suite-result.json`. This is owned input-source
-recertification only: no endpoint/skin, attack callbacks, complete15-state support,
+recertification only: no endpoint/skin, attack callbacks, complete 15-state support,
 real-avatar lifecycle or production adapter acceptance follows.
 
 Offline tests use temporary files and simulated helper results. They verify exact

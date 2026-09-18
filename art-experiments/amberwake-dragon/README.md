@@ -2,7 +2,7 @@
 
 Original slate-and-amber dragon in progress for the exact dragonFrost rig. Four articulated legs, swept ivory horns, warm eyes and amber wing membranes follow original authored surfaces. Only native bone names and inverse-bind landmarks supply geometry placement; no native surface is copied.
 
-The profile filename probe_121525.glb represents a shared rig. Actual dragonFrost renderer121561 has the same mesh, ordered70bones and exact inverse binds according to the pinned [native source analysis](../../docs/evidence/dragonfrost-native-source-v1/README.md). The native boss is excluded from dungeon spawning; the isolated dungeon diagnostic is a deliberate fixture and does not prove natural placement. Native weapons, effects, controller, physics and AI remain unchanged.
+The profile filename probe_121525.glb represents a shared rig. Actual dragonFrost renderer 121561 has the same mesh, ordered 70 bones and exact inverse binds according to the pinned [native source analysis](../../docs/evidence/dragonfrost-native-source-v1/README.md). The native boss is excluded from dungeon spawning; the isolated dungeon diagnostic is a deliberate fixture and does not prove natural placement. Native weapons, effects, controller, physics and AI remain unchanged.
 
 Status: frozen original with scoped V3 live evidence, not finished-art or full-game acceptance. The current original mesh has 9,084 vertices and 3,028 triangles. Binding validation, binding-only regeneration, positive closed-piece volumes, native bind-bound containment and an independent Blender round-trip have passed their respective offline checks.
 

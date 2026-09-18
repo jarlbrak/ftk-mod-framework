@@ -35,10 +35,10 @@ blocks one eye center, and the other eye is small. No EncounterCam swap is
 justified. Separate eye/muzzle art correction is pending, not yet fixed.
 
 - [Attack](live-v1/attack.mp4)
-- [Ordinary normal12 hit](live-v1/nonlethal-hit.mp4),72 to60.
+- [Ordinary normal 12 hit](live-v1/nonlethal-hit.mp4),72 to60.
 - [Kill-fixture death](live-v1/kill-fixture-death.mp4),60 to0.
 
-All three captures complete120 unpaused frames. Native splayed death has no
+All three captures complete 120 unpaused frames. Native splayed death has no
 ragdoll flag or rigidbodies and no obvious new stretch in selected views. One
 Collect reaches Ready0/3. Videos replay12fps, not real-time performance. Body
 results do not establish portrait approval, unoccluded all-motion or culling.

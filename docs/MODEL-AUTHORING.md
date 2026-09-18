@@ -592,7 +592,7 @@ not turn one facing fix into full culling, animation or artistic acceptance.
 ### Measure scale at the native and spawned roots
 
 The corrected public visual scale is a per-axis multiplier of the native CEL
-baseline: factor1 leaves native scale unchanged, and repeated application does
+baseline: factor 1 leaves native scale unchanged, and repeated application does
 not compound it. Record the requested factor, native prefab root local scale and
 actual spawned CEL local scale as distinct values. Sablevine V2 establishes the
 full record: factor `0.55`, native root `[1,1,1]`, and live spawned CEL root
@@ -615,7 +615,7 @@ When a portrait fails, inspect actual native pixels before changing geometry. Ho
 ### Preserve native theft and flee behavior during tests
 
 A pass can let a theft/flee enemy leave before the planned hit or death action.
-Preserve that removal and the stopped exercise: HP0, `alive:false` or disappearance
+Preserve that removal and the stopped exercise: HP 0, `alive:false` or disappearance
 alone do not establish death. Check intermediate health/gold changes, observed
 clips and native indicators; if flee flags were not recorded, say
 "source-consistent theft/flee" rather than claiming direct flag proof. The

@@ -1,6 +1,6 @@
 # Gloamfin Kraken blockout
 
-Original five-bone cephalopod head for the old resource `enkrakenhead`, renderer121260 at `krakenHead`. It began as a deformation blockout for the owned endpoint fixture and now has an exact production adapter plus a canonical route archive. It remains separate from the modern Kraken and is not finished creature art.
+Original five-bone cephalopod head for the old resource `enkrakenhead`, renderer 121260 at `krakenHead`. It began as a deformation blockout for the owned endpoint fixture and now has an exact production adapter plus a canonical route archive. It remains separate from the modern Kraken and is not finished creature art.
 
 ## Generic integration boundary
 
@@ -45,7 +45,7 @@ All five original palette names and native inverse binds remain exact. No native
 
 `gloamfin.blend` is editable, with the original mesh tagged for the FTK bridge. `build_blender.py` saves and reopens it before exporting and independently validating the saved scene. `gloamfin-studio.blend`, hero and side are studio presentations. The direct and saved-reopened exports pass, with bind vertices inside native reference bounds; this does not prove live culling or animation-envelope fit.
 
-`audit_endpoint_poses.py` applies complete original weights to pinned output matrices from both241-step appearance runs in `scratch/kraken-skin-live-v2`. It does not resample or change the endpoint policy. It records all482 pose bounds, triangle area/edge ratios, soft-versus-rigid displacement and a fixed front three-quarter camera in old prefab-root coordinates. The full241-step depth-buffered movie is `endpoint-study.mp4`; the contact sheet selects the fixture's12 image steps. This is offline skinning, not a live BakeMesh comparison or an artistic quality verdict.
+`audit_endpoint_poses.py` applies complete original weights to pinned output matrices from both241-step appearance runs in `scratch/kraken-skin-live-v2`. It does not resample or change the endpoint policy. It records all482 pose bounds, triangle area/edge ratios, soft-versus-rigid displacement and a fixed front three-quarter camera in old prefab-root coordinates. The full 241-step depth-buffered movie is `endpoint-study.mp4`; the contact sheet selects the fixture's12 image steps. This is offline skinning, not a live BakeMesh comparison or an artistic quality verdict.
 
 The initial quick painter render produced false jagged mouth edges. Independent depth rendering removed those artifacts but exposed an actual teal neck region between the separate mouth pads. An original blended black throat now fills that visual gap. `endpoint-depth-comparison.png` shows steps0/40/41/112 after correction. These checks omit Unity materials, lighting and backface-culling behavior; those remain live gates.
 
