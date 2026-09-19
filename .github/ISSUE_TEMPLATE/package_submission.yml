@@ -1,0 +1,168 @@
+name: Marketplace package submission
+description: Submit a content package for marketplace review and publication
+title: "Package: "
+labels: ["marketplace"]
+assignees: ["jarlbrak"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every field below maps to a maintainer approval requirement in the marketplace guide (`docs/MARKETPLACE.md`).
+        V1 accepts supported JSON content and approved PNG or JPEG images only. A validator pass verifies bytes; it is not game-test evidence.
+        Do not attach the game's `Assembly-CSharp.dll` or any other game assembly.
+  - type: input
+    id: package_id
+    attributes:
+      label: Package ID
+      description: Permanent catalog packageId. It never changes across versions.
+    validations:
+      required: true
+  - type: input
+    id: mod_guid
+    attributes:
+      label: Mod GUID
+      description: Stable manifest modGuid. Must match the descriptor and the archive's manifest.json.
+    validations:
+      required: true
+  - type: input
+    id: name_author
+    attributes:
+      label: Package name and author attribution
+      description: Display name and the author credited in the descriptor.
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: SPDX identifier or a link to the license text distributed with the package.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Semantic version
+      description: This submission's version, for example 1.0.0. Corrections require a new version.
+    validations:
+      required: true
+  - type: input
+    id: framework_version
+    attributes:
+      label: Author-confirmed framework version
+      description: The minimum framework version you tested against. The same-major frameworkRange is derived from it, for example 0.1.2 gives `>=0.1.2 <1.0.0`.
+    validations:
+      required: true
+  - type: input
+    id: framework_range
+    attributes:
+      label: Framework range
+      description: The derived frameworkRange as it appears in the descriptor.
+    validations:
+      required: true
+  - type: textarea
+    id: game_builds
+    attributes:
+      label: Tested game fingerprints and platforms
+      description: One line per tested build. The fingerprint is the SHA-256 of the installed Assembly-CSharp.dll; the platform is macos, linux or windows. Each line needs game-test evidence below.
+      placeholder: |
+        windows  <sha256 of Assembly-CSharp.dll>
+        macos    <sha256 of Assembly-CSharp.dll>
+    validations:
+      required: true
+  - type: input
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Exact packageId and version pairs, or "none".
+    validations:
+      required: true
+  - type: input
+    id: category
+    attributes:
+      label: Category and classification
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description, content changes and requirements
+      description: What the package adds or changes for players, and anything a player must have or know before installing.
+    validations:
+      required: true
+  - type: textarea
+    id: changelog
+    attributes:
+      label: Changelog
+      description: Changes in this version.
+    validations:
+      required: true
+  - type: input
+    id: links
+    attributes:
+      label: Source and support links
+    validations:
+      required: true
+  - type: input
+    id: release_url
+    attributes:
+      label: Release archive URL
+      description: The packageUrl of the archive as a repository release asset.
+    validations:
+      required: true
+  - type: input
+    id: sha256
+    attributes:
+      label: Archive SHA-256
+    validations:
+      required: true
+  - type: input
+    id: sizes
+    attributes:
+      label: Compressed size, expanded size and file count
+      description: Bytes, matching compressedSize, expandedSize and fileCount in the descriptor.
+      placeholder: "compressed 12345, expanded 67890, files 4"
+    validations:
+      required: true
+  - type: textarea
+    id: file_inventory
+    attributes:
+      label: File inventory
+      description: Every path in the archive. manifest.json and content JSON sit at the root; images are package asset files.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: content_evidence
+    attributes:
+      label: Screenshots or other content evidence
+      description: Up to three PNG or JPEG previews hosted as release assets (at most 2 MiB, 4096 px per side, 8,388,608 px total), or other evidence of what the content looks like in play. Credit image creators and confirm you hold distribution rights.
+    validations:
+      required: true
+  - type: textarea
+    id: game_test_evidence
+    attributes:
+      label: Game-test evidence per build
+      description: For each fingerprint and platform above, describe the actual game launch in which the content registered and its behavior was visible. Attach logs or screenshots. A validator pass does not count.
+    validations:
+      required: true
+  - type: textarea
+    id: validator_output
+    attributes:
+      label: Validator output
+      description: Output of `ftkmf-launcher-helper marketplace-validate --descriptor package.json --archive package.zip`.
+      render: text
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Package contents checklist
+      options:
+        - label: The archive contains only supported JSON files and PNG or JPEG images. No DLLs, plugins, native libraries, scripts or campaign files.
+          required: true
+        - label: The archive has no unsafe paths, links or unsupported JSON fields.
+          required: true
+        - label: Descriptor identity, manifest identity, framework compatibility, file inventory and hashes are consistent.
+          required: true
+        - label: No game assembly or decompiled game source is attached to this issue or included in the archive.
+          required: true

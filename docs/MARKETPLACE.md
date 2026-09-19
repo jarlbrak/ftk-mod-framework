@@ -20,7 +20,7 @@ A trusted local DLL can still be installed by itself. Installed content remains 
 
 V1 accepts supported JSON content and approved image assets. It does not distribute behavior DLLs, arbitrary BepInEx plugins, native libraries, scripts or campaign files. JSON content still requires review and game testing; file hashes verify bytes, not author trust or gameplay correctness.
 
-Submit proposed packages through the repository's GitHub review workflow. A maintainer must check:
+Submit proposed packages through the repository's GitHub review workflow using the [package submission issue template](../.github/ISSUE_TEMPLATE/package_submission.yml). Each template field corresponds to one of these maintainer checks:
 
 1. Permanent package ID and mod GUID, semantic version, license and author attribution.
 2. Description, content changes, category, requirements, changelog, source/support links and screenshots or other content evidence.
