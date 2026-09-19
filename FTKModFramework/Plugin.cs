@@ -386,6 +386,7 @@ namespace FTKModFramework
                 Run("sample weapon/ability", SampleContent.Register);
                 Run("thief class", ThiefClass.Register);
                 Run("innkeeper class", InnkeeperClass.Register);
+                Run("hoarfrost maul status effects", HoarfrostMaul.Register); // after the Innkeeper: it extends that kit
                 Run("cutpurse enemy", CutpurseEnemy.Register);
                 Run("sample encounter + adventure", AdventureContent.Register);
             }
