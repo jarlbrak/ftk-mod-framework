@@ -483,6 +483,15 @@ namespace FTKModFramework.Core.UI
             }
             _container = browse;
             MarketplaceResult catalog = MarketplaceRuntime.Catalog;
+            if (MarketplaceRuntime.CatalogUnsupported && !PanelBusy)
+            {
+                Spacer(24);
+                TextLine("The catalog needs a matching framework and helper", 30, 86);
+                TextLine("Update or repair the framework and helper together from the launcher, then try Refresh. You can keep playing with everything in Installed.", 24, 104);
+                if (!string.IsNullOrEmpty(MarketplaceRuntime.Notice))
+                    TextLine(Short(MarketplaceRuntime.Notice, 240), 22, 110).color = Gold;
+                return;
+            }
             if (catalog == null || catalog.Status == "unavailable")
             {
                 Spacer(24);

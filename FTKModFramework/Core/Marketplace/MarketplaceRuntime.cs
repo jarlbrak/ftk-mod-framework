@@ -25,6 +25,9 @@ namespace FTKModFramework.Core.Marketplace
         internal static ManagedSnapshot Active { get; private set; }
         internal static ManagedSnapshot Pending { get; private set; }
         internal static MarketplaceResult Catalog { get; private set; }
+        // True after the helper reported an unsupported catalog schema or returned a result this
+        // framework cannot read. Cleared by the next catalog result that is stored.
+        internal static bool CatalogUnsupported { get; private set; }
         internal static bool PreviousAvailable { get; private set; }
         internal static string Notice = "Marketplace has not been opened.";
         internal static string RegistrationNotice;
@@ -216,8 +219,13 @@ namespace FTKModFramework.Core.Marketplace
                     Pending = result.Pending;
                     PreviousAvailable = result.PreviousAvailable;
                     // Never replace Active after startup, even if a concurrent process activated another set.
-                    if (result.Packages != null && (result.Status == "online" || result.Status == "offline" || result.Status == "empty" || result.Status == "unavailable")) Catalog = result;
+                    if (result.Packages != null && (result.Status == "online" || result.Status == "offline" || result.Status == "empty" || result.Status == "unavailable"))
+                    {
+                        Catalog = result;
+                        CatalogUnsupported = false;
+                    }
                 }
+                else if (result.Status == "unsupported") CatalogUnsupported = true;
             }
             catch (Exception e)
             {
@@ -228,7 +236,9 @@ namespace FTKModFramework.Core.Marketplace
                     return;
                 }
                 try { ReconcilePending(); } catch (Exception stateError) { Plugin.Log.LogWarning("Marketplace reconciliation: " + stateError.Message); }
-                result = new MarketplaceResult { SchemaVersion = 1, Status = "error", Message = e.Message };
+                bool unsupported = e is MarketplaceProtocolException;
+                if (unsupported) CatalogUnsupported = true;
+                result = new MarketplaceResult { SchemaVersion = 1, Status = unsupported ? "unsupported" : "error", Message = e.Message };
             }
             finally
             {

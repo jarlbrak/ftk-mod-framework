@@ -5,6 +5,13 @@ using FTKModFramework.Core.Data;
 
 namespace FTKModFramework.Core.Marketplace
 {
+    // A helper result the framework cannot read. Distinct from other IO failures so the panel can
+    // tell the player to update or repair the framework and helper together instead of retrying.
+    internal sealed class MarketplaceProtocolException : IOException
+    {
+        internal MarketplaceProtocolException(string message) : base(message) { }
+    }
+
     // Pure protocol/path checks shared with the Unity-free tests.
     internal static class MarketplaceProtocol
     {
@@ -25,7 +32,7 @@ namespace FTKModFramework.Core.Marketplace
             if (!file.Exists) throw new IOException("The marketplace helper returned no result. Use Install / Repair in the launcher.");
             if (file.Length > MaxResultBytes) throw new IOException("Marketplace result exceeds the 2 MiB limit.");
             MarketplaceResult result = JsonContentParser.Deserialize<MarketplaceResult>(File.ReadAllText(path));
-            if (result == null || result.SchemaVersion != 1) throw new IOException("Unsupported marketplace protocol. Update or repair the framework and helper together.");
+            if (result == null || result.SchemaVersion != 1) throw new MarketplaceProtocolException("Unsupported marketplace protocol. Update or repair the framework and helper together.");
             if (operationId != null && result.OperationId != operationId) throw new IOException("Marketplace result belongs to a different operation.");
             return result;
         }
