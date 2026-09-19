@@ -194,6 +194,53 @@ func TestMarketplaceDependencyGuards(t *testing.T) {
 		t.Fatal("accepted revoked package")
 	}
 }
+func TestMarketplaceRevokedActivePackageIsKept(t *testing.T) {
+	r, p, _ := marketFixture(t)
+	if _, e := marketRun("prepare", r); e != nil {
+		t.Fatal(e)
+	}
+	if _, e := marketRun("activate", r); e != nil {
+		t.Fatal(e)
+	}
+	revoked := p
+	revoked.Revoked = true
+	other := p
+	other.PackageID = "community.other"
+	other.ModGUID = "com.community.other"
+	other.Name = "Other equipment"
+	r.localCatalog = &marketCatalog{SchemaVersion: 1, Packages: []marketPackage{revoked, other}}
+	r.Selection = []marketSelection{{revoked.PackageID, revoked.Version, true}, {other.PackageID, other.Version, true}}
+	r.DryRun = true
+	plan, e := marketRun("prepare", r)
+	if e != nil || len(plan.Plan) != 2 {
+		t.Fatalf("prepare with kept revoked package: %+v %v", plan, e)
+	}
+	for _, entry := range plan.Plan {
+		switch entry.PackageID {
+		case other.PackageID:
+			if entry.Action != "install" || entry.Notice != "" {
+				t.Fatalf("unrelated install: %+v", entry)
+			}
+		case revoked.PackageID:
+			if entry.Action != "keep" || entry.Notice == "" {
+				t.Fatalf("kept revoked package lacks notice: %+v", entry)
+			}
+		}
+	}
+	r.Selection[0].Enabled = false
+	if _, e = marketRun("prepare", r); e == nil {
+		t.Fatal("toggled revoked package")
+	}
+	r.Selection = []marketSelection{{other.PackageID, other.Version, true}}
+	if plan, e = marketRun("prepare", r); e != nil || len(plan.Plan) != 2 {
+		t.Fatalf("removal alongside install: %+v %v", plan, e)
+	}
+	fresh, _, _ := marketFixture(t)
+	fresh.localCatalog = &marketCatalog{SchemaVersion: 1, Packages: []marketPackage{revoked}}
+	if _, e = marketRun("prepare", fresh); e == nil {
+		t.Fatal("installed revoked package")
+	}
+}
 func TestMarketplaceLockAndAtomicState(t *testing.T) {
 	root := t.TempDir()
 	lock := filepath.Join(root, "lock")
