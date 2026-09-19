@@ -179,3 +179,28 @@ If you have no artist asset, the framework can build a runtime low-poly mossy bo
 meshes parented to the vanilla skeleton (`ProceduralCreature` / `BossProceduralBody` in
 `EnemyVisualPatch`). It animates with the skeleton and is deterministic (index-hash derived, no `Random`).
 Use it as a placeholder or for a stylized creature, then switch to a real mesh via Path A when ready.
+
+## Model path decision record
+
+Epic [#65](https://github.com/jarlbrak/ftk-mod-framework/issues/65) required approaches A (AssetBundle),
+B (runtime GLB) and C (procedural on skeleton) to be compared with a recorded rationale. The spike findings
+document is gone from master, so the decision is recorded here.
+
+- **B, runtime GLB, is the primary path.** `Core/RuntimeGltfMeshLoader` plus `tools/ai-model-pipeline`
+  is the shipped editor-free pipeline. Spec [#104](https://github.com/jarlbrak/ftk-mod-framework/issues/104)
+  (PR #105) delivered it with canonical route representatives for all 48 supported topology groups
+  ([coverage](MODEL-CANDIDATE-VALIDATION-COVERAGE.md)) and the per-archive evidence in the
+  [validation ledger](MODEL-VALIDATION-GATES.md). Spike [#72](https://github.com/jarlbrak/ftk-mod-framework/issues/72)
+  had earlier concluded B was robust for reconstruction, but its AI-generated Mudwretch mesh never reached
+  the visual gate; the current evidence rests on the #104 authored models, not on that spike.
+- **C, the procedural body, is what the sample boss ships by default.** `FTKModFramework/Content/RealmBossAdventure.cs`
+  builds the Mudwretch Foreman as the procedural golem on the troll skeleton because the spike-era GLB rendered
+  as a noisy blob in-game. The authored Mirewarden GLB body is an opt-in test lever (`FTK_MIREWARDEN_BODY=1`),
+  not the default, so the sample does not by itself demonstrate path B.
+- **A, an AssetBundle built in Unity 2017.2.2p2, is a documented fallback.** `Content.SetEnemyBodyMesh` and
+  `Content.SetEnemyBodyFromBundle` exist, but no live-game evidence for a bundle body is on master, and the
+  editor requirement keeps it out of the primary path.
+
+The rationale otherwise survives only in the #65 thread: the [spike verdict](https://github.com/jarlbrak/ftk-mod-framework/issues/65#issuecomment-4773945147),
+the [pause note](https://github.com/jarlbrak/ftk-mod-framework/issues/65#issuecomment-5155826144) and the
+[closing validate-epic pass](https://github.com/jarlbrak/ftk-mod-framework/issues/65#issuecomment-5745924813).
