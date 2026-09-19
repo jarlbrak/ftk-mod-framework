@@ -14,16 +14,21 @@ namespace FTKModFramework
     /// adds a Harmony patch, subclasses ProficiencyBase, or writes a vanilla global such as
     /// GameFlow.m_FrozenDmgPercent (the Frozen magnitude is inherited from vanilla, not configured).
     ///
-    /// Phase 1 (this file): Rimefall Strike, a damaging hit that leaves the struck enemy Frozen (a clone of
-    /// the player blunt Category.Ice row). While Frozen, DamageCalculator._calcDamage multiplies the
-    /// enemy's incoming damage by the vanilla m_FrozenDmgPercent and the enemy HUD shows the vanilla
-    /// frozen icon. A frozen ENEMY still acts: CharacterDummy.CanUseAbility is only consulted on the
-    /// player side (ability trigger, Distract, Encourage), never by EnemyDummy.
+    /// Phase 1: Rimefall Strike, a damaging hit that leaves the struck enemy Frozen (a clone of the player
+    /// blunt Category.Ice row). While Frozen, DamageCalculator._calcDamage multiplies the enemy's incoming
+    /// damage by the vanilla m_FrozenDmgPercent and the enemy HUD shows the vanilla frozen icon. A frozen
+    /// ENEMY still acts: CharacterDummy.CanUseAbility is only consulted on the player side (ability
+    /// trigger, Distract, Encourage), never by EnemyDummy.
+    ///
+    /// Phase 2: Warding Roar, a SELF-applied taunt (a clone of the Category.Taunt row) that makes enemies
+    /// target the wielder. Two separate actions, never one combined action: they need opposite
+    /// m_TargetFriendly values and so cannot coexist in one row.
     /// </summary>
     internal static class HoarfrostMaul
     {
         private const string WeaponKey = "ftkmf_hoarfrostmaul";
         private const string FrozenKey = "ftkmf_rimefallstrike";
+        private const string RoarKey = "ftkmf_wardingroar";
 
         /// <summary>
         /// Frozen duration in ticks (ProficiencyRecord.m_Count). Each tick is 1 / m_Quickness seconds of
@@ -32,6 +37,16 @@ namespace FTKModFramework
         /// self-test logs which mode the clone inherited rather than asserting it.
         /// </summary>
         private const int FrozenTicks = 3;
+
+        /// <summary>
+        /// Warding Roar duration in ticks. Deliberately SHORT: while any hero is Taunting, vanilla does three
+        /// things, not one. EncounterSessionMC.StartNextCombatRound2 forces taunting heroes into the enemy
+        /// target list (the redirect we want), EnemyDummy zeroes every enemy's chance to use a proficiency
+        /// (EncounterSession.AnyPlayersTaunting), and the same check blocks enemy fleeing. The last two are
+        /// PARTY-WIDE and materially stronger than a bare redirect, so 2 ticks is a conservative opening
+        /// number, open for a game-designer pass once the live observations are in.
+        /// </summary>
+        private const int RoarTicks = 2;
 
         public static void Register()
         {
@@ -65,7 +80,41 @@ namespace FTKModFramework
             Localization.SetProficiencyDescription(FrozenKey,
                 "A crushing blow that leaves the target Frozen for a short time. Frozen enemies take extra damage from every hit.");
 
-            // 2) The carrier weapon: a clone of the vanilla War Hammer (a plain physical blunt two-hander with
+            // 2) The Warding Roar status: a clone of the vanilla `taunt` row (Category.Taunt), applied to the
+            //    WIELDER. Vanilla applies taunt from the taunt button (CharacterOverworld.CanTaunt, gated by
+            //    CharacterSkills.m_Taunt, which we never read or write); our application path is a weapon
+            //    action, so every field that path reads is set EXPLICITLY rather than inherited:
+            //    - m_TargetFriendly = true: DamageCalculator.StartEngageAttack reassigns the damaged dummy to
+            //      the attacker. This is the mechanism that makes any self-buff possible. It also zeroes the
+            //      evade rating, so a hero cannot dodge his own roar.
+            //    - m_Target = TargetType.None: a single self target, not PickFriendly / OthersFriendly.
+            //    - m_Harmless = true: zeroes the damage modifier (the wielder takes ZERO damage) and exempts the
+            //      action from the "zero received damage cancels the proficiency" rule in DummyDamageInfo.
+            //      NOT m_IgnoresArmor: that chip technique is for HOSTILE procs; on a friendly-targeted row it
+            //      would force the hero's own armor to zero and deal him unmitigated self-damage.
+            //    - m_FullSlots = false: with true, an imperfect roll clears m_ProfSuccess AND (because the row
+            //      is friendly-targeted) collapses the target, so the roar would fizzle on anything but a
+            //      perfect roll. The roar is a buff, so any landed roll applies it.
+            //    Never apply a Category.Taunt row to an ENEMY: ProficiencyTaunt.AddToDummy and End dereference
+            //    m_CharacterOverworld, which is null on an EnemyDummy. The self-target field set above is what
+            //    keeps it on the hero.
+            Content.AddProficiency(Plugin.Guid, RoarKey, FTK_proficiencyTable.ID.taunt, "Warding Roar",
+                p =>
+                {
+                    p.m_RepeatCount = RoarTicks;                // DURATION (see RoarTicks for why it is short)
+                    p.m_TargetFriendly = true;                  // self: the damaged dummy becomes the attacker
+                    p.m_Target = CharacterDummy.TargetType.None; // one target (the wielder), no friendly pick
+                    p.m_Harmless = true;                        // zero damage, and exempt from the zero-damage cancel
+                    p.m_FullSlots = false;                      // any landed roll applies; no perfect-roll gate
+                    p.m_ChanceToAffect = 1f;                    // no hidden second roll
+                });
+            // Category.Taunt has no entry in GetCategoryDescription, so without this the tooltip effect line
+            // would be a placeholder. No status ICON exists for Taunt either; the feedback surfaces are the
+            // vanilla STR_HudTaunt float text and the AddToDummy combat-log line.
+            Localization.SetProficiencyDescription(RoarKey,
+                "A bellowing challenge. Enemies turn their attacks on the wielder for a short time.");
+
+            // 3) The carrier weapon: a clone of the vanilla War Hammer (a plain physical blunt two-hander with
             //    no elemental action of its own, so the maul's status actions are the ones we attach, not
             //    something inherited from the template's prefab).
             FTK_weaponStats2 maul = Content.AddWeapon(Plugin.Guid, WeaponKey, FTK_itembase.ID.bluntWarHammer, "Hoarfrost Maul",
@@ -77,8 +126,8 @@ namespace FTKModFramework
                     w.m_Dropable = true;
                 });
 
-            // 3) Attach the status action (one private prefab copy; the vanilla War Hammer is untouched).
-            Content.AttachProficiencies(maul, FrozenKey);
+            // 4) Attach both status actions (one private prefab copy; the vanilla War Hammer is untouched).
+            Content.AttachProficiencies(maul, FrozenKey, RoarKey);
 
             GiveToInnkeeper();
             VerifyHoarfrostMaul();
@@ -145,24 +194,60 @@ namespace FTKModFramework
                     " fullSlots=" + (frozen != null && frozen.m_FullSlots) +
                     " targetFriendly=" + (frozen != null && frozen.m_TargetFriendly) + ".");
 
-            // --- check 2: GetEnum(id) round-trips to the synthetic id. A row that fails this is cached under
-            //     ID.None by ProficiencyManager and silently never applies (regression guard for
+            // --- check 2: Warding Roar row registered, Category.Taunt via GetCategory(), duration set, and the
+            //     three self-target fields. These are asserted explicitly because the template's vanilla
+            //     application path (the taunt button) never reads them, so a wrong inherited value would only
+            //     show up as self-damage or an auto-cancelled action in combat.
+            int roarId = profs.GetIntFromID(RoarKey);
+            FTK_proficiencyTable roar = roarId >= 0 ? profs.GetEntry((FTK_proficiencyTable.ID)roarId) : null;
+            bool roarOk = roar != null &&
+                roar.GetCategory() == ProficiencyBase.Category.Taunt &&
+                roar.m_RepeatCount == RoarTicks &&
+                roar.m_TargetFriendly &&
+                roar.m_Target == CharacterDummy.TargetType.None &&
+                roar.m_Harmless &&
+                !roar.m_FullSlots &&
+                roar.GetLocalizedDisplayName() == "Warding Roar";
+            if (roarOk)
+                Plugin.Log.LogInfo("SELF-TEST PASS: Warding Roar status row (self-target field set) [id=" + roarId +
+                    ", category=" + roar.GetCategory() + ", repeatCount=" + roar.m_RepeatCount +
+                    ", targetFriendly=" + roar.m_TargetFriendly + ", target=" + roar.m_Target +
+                    ", harmless=" + roar.m_Harmless + ", fullSlots=" + roar.m_FullSlots +
+                    ", ignoresArmor=" + roar.m_IgnoresArmor + " | inherited: quickness=" + roar.m_Quickness +
+                    ", endOnTurn=" + (roar.m_ProficiencyPrefab != null && roar.m_ProficiencyPrefab.m_IsEndOnTurn) + "].");
+            else
+                Plugin.Log.LogError("SELF-TEST FAIL: Warding Roar status row; id=" + roarId +
+                    " row=" + (roar == null ? "null" : "ok") +
+                    " category=" + (roar == null ? "n/a" : roar.GetCategory().ToString()) +
+                    " repeatCount=" + (roar == null ? -1 : roar.m_RepeatCount) +
+                    " targetFriendly=" + (roar != null && roar.m_TargetFriendly) +
+                    " target=" + (roar == null ? "n/a" : roar.m_Target.ToString()) +
+                    " harmless=" + (roar != null && roar.m_Harmless) +
+                    " fullSlots=" + (roar != null && roar.m_FullSlots) + ".");
+
+            // --- check 3: GetEnum(id) round-trips to the synthetic id for BOTH rows. A row that fails this is
+            //     cached under ID.None by ProficiencyManager and silently never applies (regression guard for
             //     ProficiencyGetEnum_Patch).
             FTK_proficiencyTable.ID frozenEnum = FTK_proficiencyTable.GetEnum(FrozenKey);
-            bool enumOk = frozenId >= 0 && frozenEnum == (FTK_proficiencyTable.ID)frozenId &&
-                frozenEnum != FTK_proficiencyTable.ID.None;
+            FTK_proficiencyTable.ID roarEnum = FTK_proficiencyTable.GetEnum(RoarKey);
+            bool enumOk =
+                frozenId >= 0 && frozenEnum == (FTK_proficiencyTable.ID)frozenId && frozenEnum != FTK_proficiencyTable.ID.None &&
+                roarId >= 0 && roarEnum == (FTK_proficiencyTable.ID)roarId && roarEnum != FTK_proficiencyTable.ID.None;
             if (enumOk)
-                Plugin.Log.LogInfo("SELF-TEST PASS: status GetEnum round-trip [" + FrozenKey + " -> " + (int)frozenEnum + "].");
+                Plugin.Log.LogInfo("SELF-TEST PASS: status GetEnum round-trip [" + FrozenKey + " -> " + (int)frozenEnum +
+                    ", " + RoarKey + " -> " + (int)roarEnum + "].");
             else
                 Plugin.Log.LogError("SELF-TEST FAIL: status GetEnum round-trip; " + FrozenKey + " -> " + (int)frozenEnum +
-                    " (expected " + frozenId + ").");
+                    " (expected " + frozenId + "), " + RoarKey + " -> " + (int)roarEnum + " (expected " + roarId + ").");
 
-            // --- check 3: the maul is registered and its prefab exposes the status action through the game's
+            // --- check 4: the maul is registered and its prefab exposes BOTH status actions through the game's
             //     own instantiate path (uiWeaponDetail.GetWeaponProfIDs: Instantiate, GetComponentInChildren
-            //     WITHOUT includeInactive).
+            //     WITHOUT includeInactive). The total action count is logged for the live "exactly two
+            //     actions" check, since the template prefab's own action list is not readable offline.
             FTK_weaponStats2 maul = Content.Db<FTK_weaponStats2DB>().GetEntryByStringID(WeaponKey);
             int actionCount = -1;
             bool hasFrozen = false;
+            bool hasRoar = false;
             if (maul != null && maul.m_Prefab != null)
             {
                 GameObject inst = UnityEngine.Object.Instantiate(maul.m_Prefab);
@@ -172,17 +257,18 @@ namespace FTKModFramework
                     System.Collections.Generic.List<FTK_proficiencyTable.ID> ids = w.GetProficiencyIDs();
                     actionCount = ids.Count;
                     hasFrozen = ids.Contains((FTK_proficiencyTable.ID)frozenId);
+                    hasRoar = ids.Contains((FTK_proficiencyTable.ID)roarId);
                 }
                 UnityEngine.Object.Destroy(inst);
             }
-            bool maulOk = maul != null && maul.GetLocalizedName() == "Hoarfrost Maul" && hasFrozen;
+            bool maulOk = maul != null && maul.GetLocalizedName() == "Hoarfrost Maul" && hasFrozen && hasRoar;
             if (maulOk)
-                Plugin.Log.LogInfo("SELF-TEST PASS: Hoarfrost Maul registered with Rimefall Strike attached [" +
+                Plugin.Log.LogInfo("SELF-TEST PASS: Hoarfrost Maul registered with Rimefall Strike + Warding Roar attached [" +
                     actionCount + " combat actions on the prefab, maxdmg=" + maul._maxdmg + "].");
             else
                 Plugin.Log.LogError("SELF-TEST FAIL: Hoarfrost Maul; row=" + (maul == null ? "null" : "ok") +
                     " prefab=" + (maul != null && maul.m_Prefab != null ? "ok" : "null") +
-                    " hasRimefallStrike=" + hasFrozen + " actions=" + actionCount + ".");
+                    " hasRimefallStrike=" + hasFrozen + " hasWardingRoar=" + hasRoar + " actions=" + actionCount + ".");
         }
     }
 }
