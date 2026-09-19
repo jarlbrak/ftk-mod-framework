@@ -13,7 +13,7 @@ FTK2 ports are the active fronts.)
 | **4. Classes** ✅ | Goal 1 | `Content.AddClass` (id == array index); reused skinset; character skills; class-name + flavor patches; custom `ProficiencyBase` behaviours | done: the **Thief** (stats, dagger, Backstab/Sinister Strike/Eviscerate, Focus-guaranteeable Steal) |
 | **3. Enemies** ✅ | Goal 4 | `Content.AddEnemy`/`AttachEnemyProficiencies` over `FTK_enemyCombatDB`; `GameCache.Enemies.NeedsRebuild` spawn injection (no selection patch); `FTK_enemyCombat.GetEnum` + enemy-name patches; `m_ChanceToProf` AI; master-guarded ability behaviour | done: the **Cutpurse** (custom stats, a gold-stealing Pilfer, custom loot; spawns + fights + drops in real combat) |
 | **5. Adventures** 🟡 | Goal 5 (hardest) | `Content.AddEncounter` (inject `FTK_miniEncounterDB` rows) + `Adventures.AddFromTemplate` (clone a `.ftk2` `GameDefinition` at runtime, whitelist via `IsValidSaveFileName` patch); `AddCampaignFromTemplate` (branching questlines, flags, custom verbs; `docs/CAMPAIGNS.md`); `CanUseClass` char-create guard | D1 done (solo, verified): cloned **"Smuggler's Run"** plays; the bespoke realm + boss **"The Hollow Mire"** plays to victory (driven by the agent harness). D2 next: 2-client co-op parity + save round-trip |
-| **6. FTK2 ports** 🟡 | Inspiration | FTK2 passives/status-effects/summons as data-driven traits (Groups A→C); recreate art originally | in progress: passive traits shipped (`Content.AddPassive`, trigger patches, the **Innkeeper** sample); combat status effects next (spec #85, epic #77) |
+| **6. FTK2 ports** 🟡 | Inspiration | FTK2 passives/status-effects/summons as data-driven traits (Groups A→C); recreate art originally | in progress: passive traits shipped (`Content.AddPassive`, trigger patches, the **Innkeeper** sample); combat status effects shipped as a clone-and-register recipe with no new API (the **Hoarfrost Maul**: Frozen and Warding Roar, spec #85), pending live verification; summons next (epic #77) |
 | **Custom 3D models** 🟡 | (cross-cutting) | Editor-free GLB authoring; strict enemy, resource-prefab, and player-skinset renderer APIs; route-specific live validation (`docs/CUSTOM-MODELS.md`) | pipeline shipped; all 48 supported topology groups have canonical route representatives, while per-model art approval and broader state, equipment, lifecycle, and co-op validation remain incremental |
 
 ### Cross-cutting (touches every phase)
@@ -28,14 +28,17 @@ FTK2 ports are the active fronts.)
 - **Difficulty applies a flat `m_StatBonus` to every class equally** (Low/Apprentice +5, Medium 0, High/Master 0):
   there is no per-class per-difficulty table, so one stat block per class is correct everywhere.
 - **Custom combat behaviour** = subclass `ProficiencyBase`, override `AddToDummy`, set it as the row's
-  `m_ProficiencyPrefab`. 0-damage hits are auto-cancelled unless `m_Harmless` (which then ignores the roll); to make
-  the *roll* the gate, use a tiny `m_IgnoresArmor` chip instead.
+  `m_ProficiencyPrefab`. 0-damage hits are auto-cancelled unless `m_Harmless`; whether the slot roll gates the effect
+  is the separate `m_FullSlots` field (true requires a perfect roll). To make the *roll* the gate on a hostile effect,
+  use a tiny `m_IgnoresArmor` chip; on a self-targeted (`m_TargetFriendly`) row use `m_Harmless`, never the chip.
+- **Combat statuses need no new code**: duration is `FTK_proficiencyTable.m_RepeatCount` on the row, ticked by
+  `CharacterDummy.UpdateProficiency`, refreshed (not stacked) by Category. Clone a vanilla status row through
+  `Content.AddProficiency` (`docs/WRITING-CONTENT.md` §5.1).
 
 ### Remaining risks
 1. 2-client co-op for custom adventures/campaigns is designed-for but unverified: the overworld
    map-sync mechanism and a host/client mod-set parity check are open (Adventures Slice D2).
-2. Status-effect duration encoding (likely on the `FTK_hitEffect` prefab): needs a trace (spec #85).
-3. Custom 3D model support is route-specific. Documented player skinsets and enemy/resource routes
+2. Custom 3D model support is route-specific. Documented player skinsets and enemy/resource routes
    have strict APIs and canonical representatives, but one result does not transfer to another
    skinset, renderer path, controller, equipment combination, or authored model. See the
    [skeleton and route register](MODEL-SKELETONS.md).
