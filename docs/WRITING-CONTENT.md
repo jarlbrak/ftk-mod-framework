@@ -178,12 +178,19 @@ var maul = Content.AddWeapon("com.you.mymod", "mymod_maul", FTK_itembase.ID.blun
 Content.AttachProficiencies(maul, "mymod_frostbite", "mymod_challenge"); // two rows, never one
 ```
 
+An `AddWeapon` clone carries the template's own action list: the maul above exposes the War
+Hammer's `bluntShockwaveSplash` and `bluntStun` alongside the two attached rows (four actions in
+combat). Pick a template whose actions you want, or accept them.
+
 **The row fields that drive a status** (all on `FTK_proficiencyTable`, all settable in the lambda):
 
 - `m_RepeatCount`: duration in ticks. `ProficiencyBase.AddToDummy` builds no record at all when it is
   0, so a status row must set it above 0.
 - `m_Quickness`: tick interval, used as `1f / m_Quickness` seconds of combat time (higher is faster).
   Ignored when the shared prefab flags `m_IsEndOnTurn`, in which case the record counts turns instead.
+  So whether `m_RepeatCount` means turns or real-time ticks depends on the prefab you inherit, which
+  the bundled self-test logs: the vanilla Ice prefab is timed (`endOnTurn=false`, quickness 0.4, so 3
+  ticks is about 7.5 seconds) and the Taunt prefab is end-on-turn (2 ticks is two turns).
 - `m_DamagePerAttack`: damage dealt on every tick (`ApplyDamage`), 0 for a pure modifier.
 - `m_CustomValue`: the per-status magnitude read by categories that have one (Armor, Attack, Evade,
   Resist, Time, LifeDrain, ...). It is NOT the Frozen multiplier: Frozen's magnitude is the vanilla

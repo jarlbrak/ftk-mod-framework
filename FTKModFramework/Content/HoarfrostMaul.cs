@@ -62,7 +62,9 @@ namespace FTKModFramework
             //    not in Assembly-CSharp, so the inherited m_Target / m_DamagePerAttack / m_Quickness are logged
             //    by VerifyHoarfrostMaul for the live pass rather than asserted here. In particular m_Quickness
             //    (the tick cadence, 1 / m_Quickness seconds per tick) is deliberately INHERITED from the
-            //    template and not set below; only the tick COUNT is ours. Enemy en* ice rows are
+            //    template and not set below; only the tick COUNT is ours. The live pass confirmed the clone
+            //    inherits endOnTurn=false with quickness 0.4, so Frozen is a TIMED status and FrozenTicks=3 is
+            //    roughly 7.5 seconds of real combat time, not three turns. Enemy en* ice rows are
             //    not valid templates: they carry enemy tendency weights and enemy-keyed animation triggers.
             Content.AddProficiency(Plugin.Guid, FrozenKey, FTK_proficiencyTable.ID.bluntIceReg, "Rimefall Strike",
                 p =>
@@ -117,8 +119,9 @@ namespace FTKModFramework
                 "A bellowing challenge. Enemies turn their attacks on the wielder for a short time.");
 
             // 3) The carrier weapon: a clone of the vanilla War Hammer (a plain physical blunt two-hander with
-            //    no elemental action of its own, so the maul's status actions are the ones we attach, not
-            //    something inherited from the template's prefab).
+            //    no elemental action of its own). A weapon clone shares the template prefab's action list, so
+            //    the War Hammer's own bluntShockwaveSplash and bluntStun stay on the maul and it exposes FOUR
+            //    actions in combat: those two plus the two status rows attached below (confirmed live).
             FTK_weaponStats2 maul = Content.AddWeapon(Plugin.Guid, WeaponKey, FTK_itembase.ID.bluntWarHammer, "Hoarfrost Maul",
                 w =>
                 {
