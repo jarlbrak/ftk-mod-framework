@@ -89,6 +89,7 @@ type marketRequest struct {
 	deadline         time.Time
 	gameFingerprint  string
 	localCatalog     *marketCatalog
+	active           *marketSnapshot
 	cachedOnly       bool
 	SchemaVersion    int                    `json:"schemaVersion"`
 	OperationID      string                 `json:"operationId"`
@@ -115,6 +116,7 @@ type marketPlan struct {
 	FromVersion string `json:"fromVersion"`
 	ToVersion   string `json:"toVersion"`
 	Dependency  bool   `json:"dependency"`
+	Notice      string `json:"notice,omitempty"`
 }
 type marketResult struct {
 	PlanRevision      string          `json:"planRevision,omitempty"`
@@ -332,6 +334,7 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 		marketCatalogStatus(&out, cat, offline)
 	case "prepare":
 		r.cachedOnly = true
+		r.active = out.Active
 		cat, _, e := marketGetCatalog(r)
 		if e != nil {
 			return out, e
@@ -708,6 +711,12 @@ func marketResolve(c marketCatalog, r marketRequest) ([]marketPackage, error) {
 	for _, p := range c.Packages {
 		index[p.PackageID+"@"+p.Version] = p
 	}
+	active := map[string]marketPackage{}
+	if r.active != nil {
+		for _, p := range r.active.Packages {
+			active[p.PackageID+"@"+p.Version] = p
+		}
+	}
 	chosen := map[string]marketPackage{}
 	visiting := map[string]bool{}
 	var visit func(string, string, bool) error
@@ -734,7 +743,13 @@ func marketResolve(c marketCatalog, r marketRequest) ([]marketPackage, error) {
 		if !ok {
 			return errors.New("missing exact package " + id + "@" + v)
 		}
-		if why := marketCompatibility(p, r); why != "" {
+		// A revoked package that is already active at this exact version may stay
+		// installed; revocation only blocks new installs, updates, and new dependencies.
+		check := p
+		if _, kept := active[id+"@"+v]; kept && p.Revoked {
+			check.Revoked = false
+		}
+		if why := marketCompatibility(check, r); why != "" {
 			return errors.New(p.Name + ": " + why)
 		}
 		visiting[id] = true
@@ -759,6 +774,9 @@ func marketResolve(c marketCatalog, r marketRequest) ([]marketPackage, error) {
 	var expanded, compressed int64
 	files := 0
 	for _, p := range chosen {
+		if p.Revoked && active[p.PackageID+"@"+p.Version].Enabled != p.Enabled {
+			return nil, errors.New(p.Name + ": This package was revoked; the installed copy can only be kept as is or removed.")
+		}
 		out = append(out, p)
 		expanded += p.ExpandedSize
 		compressed += p.CompressedSize
@@ -796,11 +814,15 @@ func marketMakePlan(active *marketSnapshot, selected []marketPackage, explicit [
 				}
 			}
 		}
-		out = append(out, marketPlan{action, p.PackageID, p.Name, o.Version, p.Version, !direct[p.PackageID]})
+		notice := ""
+		if p.Revoked {
+			notice = "This package was revoked upstream. The installed copy is kept until you remove it."
+		}
+		out = append(out, marketPlan{action, p.PackageID, p.Name, o.Version, p.Version, !direct[p.PackageID], notice})
 		delete(old, p.PackageID)
 	}
 	for _, p := range old {
-		out = append(out, marketPlan{"remove", p.PackageID, p.Name, p.Version, "", false})
+		out = append(out, marketPlan{"remove", p.PackageID, p.Name, p.Version, "", false, ""})
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i].PackageID < out[j].PackageID })
 	return out
