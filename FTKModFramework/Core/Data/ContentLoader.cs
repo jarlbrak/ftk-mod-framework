@@ -67,14 +67,7 @@ namespace FTKModFramework.Core.Data
 
             // Read persisted enabled states before any external code can execute.
             foreach (DiscoveredMod mod in mods)
-            {
-                Marketplace.PackageDescriptor package = Marketplace.MarketplaceRuntime.FindManaged(mod.Manifest.ModGuid);
-                if (package != null && managed != null && mod.Manifest.FolderPath.StartsWith(managed.ContentRoot + System.IO.Path.DirectorySeparatorChar, StringComparison.Ordinal))
-                    ModRegistry.RegisterManaged(mod.Manifest, package);
-                else
-                    ModRegistry.Register(mod.Manifest.ModGuid, mod.Manifest.Name, false, mod.Manifest.Version, true,
-                        mod.Manifest.Description, mod.Manifest.Author, mod.Manifest.FrameworkVersion, true);
-            }
+                ModRegistry.RegisterDiscovered(mod.Manifest, managed, Marketplace.MarketplaceRuntime.FindManaged(mod.Manifest.ModGuid));
 
             // SINGLE behaviour-DLL pre-pass (FR-7): load + reflect + register every mod's behaviorDll behaviours
             // BEFORE any content-registration phase. This is the sequencing invariant the Phase-2 WireBehavior
