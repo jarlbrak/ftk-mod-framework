@@ -926,7 +926,7 @@ namespace FTKModFramework.Core.UI
             {
                 TextLine("Start a new run after changing class mods. Existing saves may need their original mod set.", 22, 40);
                 PrimaryButton("Quit and apply on next launch", delegate { Application.Quit(); }, !PanelBusy);
-
+                TextLine("Then start the game again from Steam or the launcher to load these changes.", 22, 32);
             }
             if (MarketplaceRuntime.Pending != null)
                 LinkButton("Discard community download changes...", delegate { _confirmOperation = "cancel"; Navigate("confirm"); }, !PanelBusy);
