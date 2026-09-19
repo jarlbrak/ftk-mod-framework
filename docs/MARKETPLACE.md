@@ -53,3 +53,15 @@ Do not manually edit activation records or remove generations while the game run
 Helper unit tests run without game files on macOS, Linux and Windows CI. Installer fixtures exercise release hashes and platform helper placement without launching Steam. Game runtime validation still requires an installed copy of For The King; cross-compilation and PowerShell tests on macOS are not Windows/Proton gameplay evidence.
 
 The local package in `marketplace/fixtures` exists only for integration tests. Keep it out of the production catalog.
+
+### Mods panel at 1280x800 and controller navigation
+
+Live evidence for the panel's layout and controller focus comes from driving the Mods panel through the `marketplace_ui` agent bridge (`FTK_AGENT_BRIDGE=1`) in a real game launch on macOS at 1280x800, reading each text element's preferred height against its rect and checking the `clipped` flag. It is not a screenshot diff and does not cover other resolutions or Windows/Proton.
+
+| Date | Views checked | Result | Record |
+|---|---|---|---|
+| 2026-09-16 | Requirements page, preview gallery, Settings & Help status pane, stacked views with the footer | Zero clipped text; footer anchored at the panel edge in stacked views and unmoved in column views; controller focus restored to the control Back came from | commit `cc135c04` |
+| 2026-09-16 | Next-launch review pane with a real pending change | Nothing clipped; pane reports rect 54 for 48 of content | commit `30dcd993` |
+| 2026-09-19 | Installed, the next-launch review view, Discover with the real catalog fetched through the installed helper (post-merge pass of PR #118) | Zero clipped text across the views inspected; the Quit guidance line measured preferred height 24 in a 32 rect | PR #118, last comment |
+
+An eight-line review page was not reproduced live because the test installation carried a single mod. Controller coverage is limited to Back's focus restoration; full pad traversal of every view is not recorded.
