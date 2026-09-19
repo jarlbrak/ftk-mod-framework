@@ -6,8 +6,11 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"image"
 	"image/png"
+	"io"
+	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -673,5 +676,283 @@ func TestMarketplaceInstalledScreenshotCache(t *testing.T) {
 	}
 	if len(active.Active.Packages[0].ScreenshotPaths) != 1 || active.Active.Packages[0].ScreenshotPaths[0] != cache {
 		t.Fatal("installed snapshot lost offline gallery", active.Active.Packages)
+	}
+}
+
+type marketRoundTrip func(*http.Request) (*http.Response, error)
+
+func (f marketRoundTrip) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
+
+// The helper builds its clients on the default transport, so swapping it serves
+// canned catalog and release responses without network access or a listener.
+func marketServe(t *testing.T, handler func(*http.Request) (*http.Response, error)) {
+	t.Helper()
+	prior := http.DefaultTransport
+	http.DefaultTransport = marketRoundTrip(handler)
+	t.Cleanup(func() { http.DefaultTransport = prior })
+}
+func marketResponse(req *http.Request, status int, body []byte, location string) *http.Response {
+	resp := &http.Response{StatusCode: status, Status: http.StatusText(status), Header: http.Header{}, Body: io.NopCloser(bytes.NewReader(body)), ContentLength: int64(len(body)), Request: req}
+	if location != "" {
+		resp.Header.Set("Location", location)
+	}
+	return resp
+}
+func TestMarketplacePublishedVersionHashChange(t *testing.T) {
+	r, p, _ := marketFixture(t)
+	cat := *r.localCatalog
+	r.localCatalog = nil
+	r.deadline = time.Now().Add(15 * time.Second)
+	cache := filepath.Join(r.StateRoot, "catalog.json")
+	if e := marketWrite(cache, cat); e != nil {
+		t.Fatal(e)
+	}
+	published := cat
+	published.Packages = []marketPackage{p}
+	published.Packages[0].SHA256 = strings.Repeat("b", 64)
+	served, _ := json.Marshal(published)
+	marketServe(t, func(req *http.Request) (*http.Response, error) {
+		if req.URL.String() != marketCatalogURL {
+			t.Fatal("unexpected request", req.URL)
+		}
+		return marketResponse(req, 200, served, ""), nil
+	})
+	if _, _, e := marketGetCatalog(r); e == nil || !strings.Contains(e.Error(), "published version changed hash") {
+		t.Fatal("republished bytes for an existing version accepted", e)
+	}
+	var kept marketCatalog
+	if e := marketRead(cache, &kept, marketLimit); e != nil || kept.Packages[0].SHA256 != p.SHA256 {
+		t.Fatal("rejected catalog replaced the cached one", kept, e)
+	}
+	published.Packages[0].Version = "1.0.1"
+	served, _ = json.Marshal(published)
+	got, offline, e := marketGetCatalog(r)
+	if e != nil || offline || len(got.Packages) != 1 || got.Packages[0].Version != "1.0.1" {
+		t.Fatal("new version with new bytes rejected", got, offline, e)
+	}
+	if e := marketRead(cache, &kept, marketLimit); e != nil || kept.Packages[0].SHA256 != strings.Repeat("b", 64) {
+		t.Fatal("accepted catalog not cached", kept, e)
+	}
+}
+func TestMarketplaceCatalogIdentityGuards(t *testing.T) {
+	_, p, _ := marketFixture(t)
+	remapped := p
+	remapped.Version = "1.1.0"
+	remapped.ModGUID = "com.community.other"
+	if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{p, remapped}}); e == nil || !strings.Contains(e.Error(), "identity changed GUID") {
+		t.Fatal("package ID remapped to another GUID accepted", e)
+	}
+	shared := p
+	shared.PackageID = "community.alias"
+	if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{p, shared}}); e == nil || !strings.Contains(e.Error(), "multiple IDs map to one GUID") {
+		t.Fatal("two package IDs sharing one GUID accepted", e)
+	}
+	newer := p
+	newer.Version = "1.1.0"
+	if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{p, newer}}); e != nil {
+		t.Fatal("stable identity across versions rejected", e)
+	}
+}
+func TestMarketplaceArtifactDownloadHashMismatch(t *testing.T) {
+	r, p, b := marketFixture(t)
+	cache := filepath.Join(r.StateRoot, "artifacts", p.SHA256+".zip")
+	os.Remove(cache)
+	r.deadline = time.Now().Add(15 * time.Second)
+	tampered := append([]byte{}, b...)
+	tampered[len(tampered)-1] ^= 0xff
+	body := tampered
+	marketServe(t, func(req *http.Request) (*http.Response, error) {
+		if req.URL.String() != p.URL {
+			t.Fatal("unexpected request", req.URL)
+		}
+		return marketResponse(req, 200, body, ""), nil
+	})
+	if _, e := marketArtifact(r, p); e == nil || !strings.Contains(e.Error(), "SHA-256 mismatch") {
+		t.Fatal("tampered download accepted", e)
+	}
+	if _, e := os.Stat(cache); e == nil {
+		t.Fatal("mismatched download was cached")
+	}
+	body = b
+	if got, e := marketArtifact(r, p); e != nil || !bytes.Equal(got, b) {
+		t.Fatal("matching download rejected", e)
+	}
+	if cached, e := os.ReadFile(cache); e != nil || !bytes.Equal(cached, b) {
+		t.Fatal("verified download not cached", e)
+	}
+	os.WriteFile(cache, tampered, 0600)
+	body = nil
+	if _, e := marketArtifact(r, p); e == nil || !strings.Contains(e.Error(), "SHA-256 mismatch") {
+		t.Fatal("corrupted cache accepted", e)
+	}
+}
+func TestMarketplaceRedirectHostRestriction(t *testing.T) {
+	_, p, b := marketFixture(t)
+	for _, target := range []string{"https://evil.test/asset.zip", "http://github.com/jarlbrak/ftk-mod-framework/releases/download/test/test.zip", "https://user@objects.githubusercontent.com/asset.zip"} {
+		t.Run(target, func(t *testing.T) {
+			marketServe(t, func(req *http.Request) (*http.Response, error) {
+				if req.URL.String() == p.URL {
+					return marketResponse(req, 302, nil, target), nil
+				}
+				return marketResponse(req, 200, b, ""), nil
+			})
+			if _, e := marketDownload(p.URL, archiveLimit, 5*time.Second); e == nil || !strings.Contains(e.Error(), "redirect left approved HTTPS hosts") {
+				t.Fatal("redirect off approved hosts followed", e)
+			}
+		})
+	}
+	marketServe(t, func(req *http.Request) (*http.Response, error) {
+		if req.URL.String() == p.URL {
+			return marketResponse(req, 302, nil, "https://objects.githubusercontent.com/asset.zip"), nil
+		}
+		return marketResponse(req, 200, b, ""), nil
+	})
+	if got, e := marketDownload(p.URL, archiveLimit, 5*time.Second); e != nil || !bytes.Equal(got, b) {
+		t.Fatal("redirect to approved release host rejected", e)
+	}
+	marketServe(t, func(req *http.Request) (*http.Response, error) {
+		return marketResponse(req, 302, nil, "https://objects.githubusercontent.com/"+marketToken()), nil
+	})
+	if _, e := marketDownload(p.URL, archiveLimit, 5*time.Second); e == nil || !strings.Contains(e.Error(), "too many redirects") {
+		t.Fatal("unbounded redirect chain followed", e)
+	}
+}
+
+type marketRawEntry struct {
+	name string
+	size uint64
+	data string
+}
+
+// Entries are written in order so a test can control which one trips a limit.
+func marketRawZip(t *testing.T, entries []marketRawEntry) []byte {
+	t.Helper()
+	var b bytes.Buffer
+	z := zip.NewWriter(&b)
+	for _, entry := range entries {
+		// CreateRaw trusts the header, so an entry can claim a huge expansion
+		// without the test materializing hundreds of megabytes.
+		w, e := z.CreateRaw(&zip.FileHeader{Name: entry.name, Method: zip.Store, UncompressedSize64: entry.size, CompressedSize64: entry.size})
+		if e != nil {
+			t.Fatal(e)
+		}
+		w.Write([]byte(entry.data))
+	}
+	if e := z.Close(); e != nil {
+		t.Fatal(e)
+	}
+	return b.Bytes()
+}
+func TestMarketplacePackageLimits(t *testing.T) {
+	_, p, _ := marketFixture(t)
+	descriptor := map[string]func(*marketPackage){
+		"compressed": func(x *marketPackage) { x.CompressedSize = archiveLimit + 1 },
+		"expanded":   func(x *marketPackage) { x.ExpandedSize = expandedLimit + 1 },
+		"files":      func(x *marketPackage) { x.FileCount = 5001 },
+	}
+	for name, mutate := range descriptor {
+		t.Run("descriptor/"+name, func(t *testing.T) {
+			over := p
+			mutate(&over)
+			if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{over}}); e == nil || !strings.Contains(e.Error(), "descriptor exceeds package limits") {
+				t.Fatal("oversized descriptor accepted", e)
+			}
+		})
+	}
+	edge := p
+	edge.CompressedSize, edge.ExpandedSize, edge.FileCount = archiveLimit, expandedLimit, 5000
+	if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{edge}}); e != nil {
+		t.Fatal("descriptor at the limits rejected", e)
+	}
+	manifest := `{"modGuid":"com.community.test","name":"Test","version":"1.0.0","frameworkVersion":"0.1.0"}`
+	many := map[string]string{"manifest.json": manifest}
+	for i := 0; i < 5000; i++ {
+		many[fmt.Sprintf("f%d.json", i)] = `{"entries":[]}`
+	}
+	if _, e := marketExtract(marketZip(t, many), p, ""); e == nil || !strings.Contains(e.Error(), "archive file count exceeded") {
+		t.Fatal("archive with more than 5,000 entries accepted", e)
+	}
+	if _, e := marketExtract(marketRawZip(t, []marketRawEntry{{"manifest.json", expandedLimit + 1, ""}}), p, ""); e == nil || !strings.Contains(e.Error(), "expanded file limit exceeded") {
+		t.Fatal("single file over 250 MiB accepted", e)
+	}
+	// The first entry is a real, valid content file; the second claims exactly
+	// the per-file limit, so only the running total crosses 250 MiB.
+	small := `{"entries":[]}`
+	if _, e := marketExtract(marketRawZip(t, []marketRawEntry{{"items.json", uint64(len(small)), small}, {"manifest.json", expandedLimit, ""}}), p, ""); e == nil || !strings.Contains(e.Error(), "expanded archive limit exceeded") {
+		t.Fatal("archive expanding past 250 MiB in total accepted", e)
+	}
+	r, a, _ := marketFixture(t)
+	a.CompressedSize, a.ExpandedSize, a.FileCount = 60<<20, 130<<20, 2600
+	b := a
+	b.PackageID = "community.second"
+	b.ModGUID = "com.community.second"
+	r.Selection = []marketSelection{{a.PackageID, a.Version, true}, {b.PackageID, b.Version, true}}
+	if _, e := marketResolve(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{a, b}}, r); e == nil || !strings.Contains(e.Error(), "complete generation exceeds size or file limits") {
+		t.Fatal("generation whose packages sum past the limits accepted", e)
+	}
+	r.Selection = r.Selection[:1]
+	if _, e := marketResolve(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{a, b}}, r); e != nil {
+		t.Fatal("single package within the limits rejected", e)
+	}
+}
+func TestMarketplaceDeveloperFixtureDependency(t *testing.T) {
+	r, p, _ := marketFixture(t)
+	fixture := p
+	fixture.PackageID = "ftkmf.sampledata"
+	fixture.ModGUID = "com.ftkmf.sampledata"
+	fixture.Classification = "dependency"
+	p.Dependencies = []marketDependency{{fixture.PackageID, fixture.Version}}
+	r.localCatalog = &marketCatalog{SchemaVersion: 1, Packages: []marketPackage{p, fixture}}
+	if _, e := marketRun("prepare", r); e == nil || !strings.Contains(e.Error(), "developer fixture excluded") {
+		t.Fatal("catalog offering a developer fixture as a dependency accepted", e)
+	}
+	var state marketState
+	if marketRead(filepath.Join(r.StateRoot, "state.json"), &state, marketLimit) == nil && state.Pending != "" {
+		t.Fatal("rejected preparation left a pending generation")
+	}
+	// A lock that was tampered with after preparation must fail the same policy at activation.
+	clean, _, _ := marketFixture(t)
+	prepared, e := marketRun("prepare", clean)
+	if e != nil {
+		t.Fatal(e)
+	}
+	lockPath := filepath.Join(clean.StateRoot, "generations", prepared.Pending.GenerationID, "lock.json")
+	var lock marketLock
+	if e := marketRead(lockPath, &lock, marketLimit); e != nil {
+		t.Fatal(e)
+	}
+	lock.Packages[0].Dependencies = []marketDependency{{fixture.PackageID, fixture.Version}}
+	lock.Packages = append(lock.Packages, fixture)
+	marketWrite(lockPath, lock)
+	if e := marketValidateGeneration(context.Background(), clean, prepared.Pending.GenerationID); e == nil || !strings.Contains(e.Error(), "developer fixture excluded") {
+		t.Fatal("locked dependency carrying a developer fixture GUID activated", e)
+	}
+}
+func TestMarketplaceExportPayload(t *testing.T) {
+	r, p, _ := marketFixture(t)
+	marketRun("prepare", r)
+	if out, e := marketRun("activate", r); e != nil || !out.OK {
+		t.Fatal(out, e)
+	}
+	out, e := marketRun("export", r)
+	if e != nil || out.ExportPath == "" {
+		t.Fatal(out, e)
+	}
+	var export struct {
+		SchemaVersion    int             `json:"schemaVersion"`
+		FrameworkVersion string          `json:"frameworkVersion"`
+		Partial          bool            `json:"partial"`
+		Notice           string          `json:"notice"`
+		Active           *marketSnapshot `json:"active"`
+		Settings         interface{}     `json:"settings"`
+	}
+	if e := marketRead(out.ExportPath, &export, marketLimit); e != nil {
+		t.Fatal(e)
+	}
+	if !export.Partial || !strings.Contains(export.Notice, "Manual mods") || export.SchemaVersion != 1 || export.FrameworkVersion != r.FrameworkVersion {
+		t.Fatalf("export does not declare itself partial: %+v", export)
+	}
+	if export.Active == nil || len(export.Active.Packages) != 1 || export.Active.Packages[0].SHA256 != p.SHA256 || export.Active.Packages[0].Version != p.Version {
+		t.Fatalf("export lacks exact version and hash: %+v", export.Active)
 	}
 }

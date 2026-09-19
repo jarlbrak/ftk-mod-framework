@@ -121,6 +121,22 @@ namespace FTKModFramework.Core.Data
             return entry;
         }
 
+        /// <summary>
+        /// Registration path selection for a discovered mod. Only a folder inside the active generation's
+        /// content root whose GUID the generation lock lists takes the managed path (enabled state from the
+        /// lock, toggles routed through the marketplace). A manual copy of the same GUID, a managed-root folder
+        /// the lock does not know, or discovery without an active generation all take the manual path. The
+        /// separator suffix keeps a sibling directory sharing the root's prefix from counting as managed.
+        /// </summary>
+        internal static ModEntry RegisterDiscovered(ModManifest manifest, Marketplace.ManagedSnapshot managed, Marketplace.PackageDescriptor package)
+        {
+            if (package != null && managed != null &&
+                manifest.FolderPath.StartsWith(managed.ContentRoot + System.IO.Path.DirectorySeparatorChar, System.StringComparison.Ordinal))
+                return RegisterManaged(manifest, package);
+            return Register(manifest.ModGuid, manifest.Name, false, manifest.Version, true,
+                manifest.Description, manifest.Author, manifest.FrameworkVersion, true);
+        }
+
         internal static ModEntry RegisterManaged(ModManifest manifest, Marketplace.PackageDescriptor package)
         {
             ModEntry existing;
