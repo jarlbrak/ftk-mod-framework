@@ -1478,12 +1478,18 @@ namespace FTKModFramework.Agent
                 new[] { itemId.GetType() }, new object[] { itemId });
             if (itemBase == null)
                 return Fail("equip_item: no FTK_itembase row for '" + itemName + "'");
-            if (!ToBool(SafeField(itemBase, "m_Equippable")))
-                return Fail("equip_item: '" + itemName + "' is not equippable");
+            // m_Equippable, m_IsWeapon, m_IsShield and m_Beltable are PROPERTIES on FTK_itembase computed from
+            // the m_ObjectType FIELD (a field read returns null and reads as "not equippable"). Read the getter,
+            // and fall back to the getter's own rule: armor/boots/helmet/necklace/shield/trinket/weapon.
+            object objectType = SafeField(itemBase, "m_ObjectType");
+            string objectTypeName = objectType == null ? null : objectType.ToString();
+            object equippable = SafeProp(itemBase, "m_Equippable");
+            bool isEquippable = equippable is bool ? (bool)equippable : IsEquippableObjectType(objectTypeName);
+            if (!isEquippable)
+                return Fail("equip_item: '" + itemName + "' is not equippable (m_ObjectType=" + objectTypeName + ")");
 
             // The slot EquipItem targets for this m_ObjectType (same mapping as CharacterOverworld.EquipItem).
-            object objectType = SafeField(itemBase, "m_ObjectType");
-            string slotName = SlotForObjectType(objectType == null ? null : objectType.ToString());
+            string slotName = SlotForObjectType(objectTypeName);
             object slot = slotName == null ? null : ResolveNestedEnum("PlayerInventory+ContainerID", slotName);
             if (slot == null)
                 return Fail("equip_item: no equip slot for object type '" + objectType + "'");
@@ -1522,6 +1528,24 @@ namespace FTKModFramework.Agent
             res["hero"] = TurnIndexOf(cow);
             if (previous != null) res["previous"] = previous;
             return Ok(res);
+        }
+
+        // FTK_itembase.m_Equippable getter, verbatim: true for these seven ObjectType members only.
+        private static bool IsEquippableObjectType(string objectType)
+        {
+            switch (objectType)
+            {
+                case "armor":
+                case "boots":
+                case "helmet":
+                case "necklace":
+                case "shield":
+                case "trinket":
+                case "weapon":
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         // The ContainerID CharacterOverworld.EquipItem/AddAndEquipItem/UnequipItemRPC map each equippable
