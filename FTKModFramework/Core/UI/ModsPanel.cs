@@ -883,7 +883,10 @@ namespace FTKModFramework.Core.UI
                 review.Add(desired.ToString());
                 StringBuilder delta = new StringBuilder("Changes from this launch:\n");
                 foreach (MarketplacePlanEntry entry in entries)
+                {
                     delta.Append(entry.Action).Append(": ").Append(entry.Name ?? entry.PackageId).Append(" ").Append(entry.FromVersion).Append(" -> ").Append(entry.ToVersion).Append(entry.Dependency ? " (required component)" : "").Append("\n");
+                    if (!string.IsNullOrEmpty(entry.Notice)) delta.Append("  Note: ").Append(entry.Notice).Append("\n");
+                }
                 if (entries.Count == 0) delta.Append("Current community selection unchanged; queued choices cleared.");
                 review.Add(delta.ToString());
                 List<string> pages = TextPages(new List<string> { string.Join("\n", review.ToArray()) });

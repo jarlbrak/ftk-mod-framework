@@ -53,6 +53,8 @@ namespace FTKModFramework.Core.Marketplace
         [JsonProperty("fromVersion")] public string FromVersion;
         [JsonProperty("toVersion")] public string ToVersion;
         [JsonProperty("dependency")] public bool Dependency;
+        // Optional helper explanation for this entry, for example a revoked package kept at its active version.
+        [JsonProperty("notice")] public string Notice;
     }
     internal sealed class MarketplaceResult
     {

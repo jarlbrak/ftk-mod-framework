@@ -30,6 +30,8 @@ internal static class MarketplaceChecks
         Reject(delegate { MarketplaceProtocol.ReadResult(result, null); }, "unsupported helper result schema rejected");
         File.WriteAllText(result, "{\"schemaVersion\":1,\"operationId\":\"other\"}");
         Reject(delegate { MarketplaceProtocol.ReadResult(result, "expected"); }, "cross-operation result rejected");
+        File.WriteAllText(result, "{\"schemaVersion\":1,\"ok\":true,\"plan\":[{\"action\":\"keep\",\"packageId\":\"fixture\",\"notice\":\"This package was revoked upstream. The installed copy is kept until you remove it.\"}]}");
+        Check(MarketplaceProtocol.ReadResult(result, null).Plan[0].Notice == "This package was revoked upstream. The installed copy is kept until you remove it.", "helper plan entry notice is deserialized");
         File.WriteAllText(result, new string(' ', MarketplaceProtocol.MaxResultBytes + 1));
         Reject(delegate { MarketplaceProtocol.ReadResult(result, null); }, "oversized helper result rejected");
         Reject(delegate { MarketplaceProtocol.ValidateSnapshot(stateRoot, new ManagedSnapshot { GenerationId = "../escape", ContentRoot = fixture }); }, "generation traversal rejected");
