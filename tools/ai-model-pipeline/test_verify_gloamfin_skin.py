@@ -1,9 +1,14 @@
 """Actual original asset plus independent weighted-point/negative checks; no Unity calls."""
+from local_inputs import require_local_inputs, require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy", "PIL")
 import copy,json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 import test_verify_kraken_skin_probe as original_tests
 from verify_kraken_skin_probe import original_glb,validate_organic,variant_contract,skin_vertices,inspect_capture,inspect_run,GLOAMFIN_HASH,GLOAMFIN_FILE,TOL,digest
+
+OLD_PROBE='scratch/kraken-owned-skin-probe-v1/kraken-owned-skin-probe-v1.glb'
 
 class GloamfinTests(unittest.TestCase):
     @classmethod
@@ -23,7 +28,9 @@ class GloamfinTests(unittest.TestCase):
         self.assertEqual(digest(self.root/GLOAMFIN_FILE),GLOAMFIN_HASH)
         self.assertEqual(digest(self.root/'gloamfin.glb'),self.asset['glb']['sha256'])
         self.assertEqual(len(self.geometry[0]),5640)
-        old=original_glb(Path(__file__).resolve().parents[2]/'scratch/kraken-owned-skin-probe-v1/kraken-owned-skin-probe-v1.glb')
+        # The committed asset checks above always run; only the old-bind comparison needs the local probe.
+        require_local_inputs(OLD_PROBE)
+        old=original_glb(Path(__file__).resolve().parents[2]/OLD_PROBE)
         np.testing.assert_array_equal(old[3],self.geometry[3])
     def test_soft_vertex_obeys_two_independently_translated_endpoints(self):
         pos,j,w,b=self.geometry;i=int(np.flatnonzero(np.sum(w>0,axis=1)==2)[0]);rest=np.linalg.inv(b.astype(float));moved=rest.copy()

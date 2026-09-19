@@ -7,9 +7,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import verify_kraken_visual_review as verifier
+from local_inputs import evidence_paths, skip_without_local_inputs
+
+
+requires_raw_captures = skip_without_local_inputs(*evidence_paths(verifier.DEFAULT_REVIEW))
 
 
 class KrakenVisualReviewTests(unittest.TestCase):
+    @requires_raw_captures
     def test_current_review_and_raw_artifacts(self):
         result = verifier.verify()
         self.assertTrue(result["ok"])
@@ -17,6 +22,7 @@ class KrakenVisualReviewTests(unittest.TestCase):
         self.assertEqual(result["selectedFrameCount"], 22)
         self.assertEqual(result["portrait"], "fail")
 
+    @requires_raw_captures
     def test_rejects_changed_capture_hash(self):
         data = json.loads(verifier.DEFAULT_REVIEW.read_text())
         changed = copy.deepcopy(data)

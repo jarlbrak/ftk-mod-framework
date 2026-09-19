@@ -1,4 +1,7 @@
 """Synthetic cross-process bridge rejection tests, not live evidence."""
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy")
 import copy
 import json
 import tempfile

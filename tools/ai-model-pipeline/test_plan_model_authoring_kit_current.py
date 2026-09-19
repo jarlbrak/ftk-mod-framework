@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "tools/ai-model-pipeline"))
 import validate_custom_model_profile_route as direct_preflight
 import validate_player_model_profile_route as player_preflight
 import validate_resource_model_profile_route as resource_preflight
+from local_inputs import require_local_inputs
 
 SCRIPT = ROOT / "tools/ai-model-pipeline/plan_model_authoring_kit.py"
 SPEC = importlib.util.spec_from_file_location("plan_model_authoring_kit", SCRIPT)
@@ -24,18 +25,33 @@ sys.modules[SPEC.name] = authoring
 SPEC.loader.exec_module(authoring)
 
 
+LOCAL_INPUTS = (
+    "scratch/model-validation-stage-readiness.json",
+    "scratch/mirewarden-game",
+    "scratch/skeleton-inventory-reproducible.json",
+    "scratch/blender-all-rigs/bridge-audit.json",
+    "scratch/blender-apparel-rigs-v1/bridge-audit.json",
+)
+
+
 class CurrentModelAuthoringKitTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.context = authoring.load_context(
-            ROOT,
-            ROOT / "docs/model-validation-execution-queue.json",
-            ROOT / "scratch/model-validation-stage-readiness.json",
-            ROOT / "scratch/mirewarden-game",
-            ROOT / "scratch/skeleton-inventory-reproducible.json",
-            ROOT / "scratch/blender-all-rigs/bridge-audit.json",
-            [ROOT / "scratch/blender-apparel-rigs-v1/bridge-audit.json"],
-        )
+    _context: dict | None = None
+
+    @property
+    def context(self) -> dict:
+        # Loaded lazily so the output-path test still runs on a clone without scratch data.
+        require_local_inputs(*LOCAL_INPUTS)
+        if type(self)._context is None:
+            type(self)._context = authoring.load_context(
+                ROOT,
+                ROOT / "docs/model-validation-execution-queue.json",
+                ROOT / "scratch/model-validation-stage-readiness.json",
+                ROOT / "scratch/mirewarden-game",
+                ROOT / "scratch/skeleton-inventory-reproducible.json",
+                ROOT / "scratch/blender-all-rigs/bridge-audit.json",
+                [ROOT / "scratch/blender-apparel-rigs-v1/bridge-audit.json"],
+            )
+        return type(self)._context
 
     def test_output_is_confined_to_direct_scratch_json(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -84,6 +100,12 @@ class CurrentModelAuthoringKitTests(unittest.TestCase):
         self.assertEqual(catalog["summary"]["allVerifiedRigBridgeProfiles"], 0)
 
     def test_every_stageable_route_has_a_schema_valid_integration_starter(self) -> None:
+        require_local_inputs(
+            "scratch/enemy-rig-mapping-reproducible.json",
+            "scratch/static-renderer-inventory.json",
+            "scratch/resource-enemy-base-preflight.json",
+            "scratch/rig-candidate-classification.json",
+        )
         enemy_schema = json.loads((ROOT / "tools/ai-model-pipeline/runtime-test-content/profiles.schema.json").read_text())
         player_schema = json.loads((ROOT / "tools/ai-model-pipeline/runtime-test-content/player-profiles.schema.json").read_text())
         enemy_mapping = json.loads((ROOT / "scratch/enemy-rig-mapping-reproducible.json").read_text())

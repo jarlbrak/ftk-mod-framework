@@ -4,12 +4,14 @@ import tempfile
 import unittest
 
 import verify_kraken_production_archive as archive
+from local_inputs import integrity_files, skip_without_local_inputs
 
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "docs/evidence/kraken-production-adapter-v1"
 
 
+@skip_without_local_inputs(*integrity_files(SOURCE))
 class KrakenProductionArchiveTests(unittest.TestCase):
     def test_committed_archive_reproduces_the_verified_campaign(self) -> None:
         result = archive.verify_archive(SOURCE)

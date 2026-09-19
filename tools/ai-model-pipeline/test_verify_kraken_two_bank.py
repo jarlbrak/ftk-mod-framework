@@ -1,4 +1,7 @@
 """Synthetic duplicate clocks and corruption checks, not a Unity graph simulation."""
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy")
 import copy,unittest
 import numpy as np
 from test_verify_kraken_modern_mixer import fixed_fixture

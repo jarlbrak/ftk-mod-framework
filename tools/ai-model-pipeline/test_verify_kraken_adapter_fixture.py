@@ -1,4 +1,7 @@
 """Synthetic contract tests, not Unity runtime evidence."""
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy")
 import copy
 import unittest
 from unittest.mock import patch

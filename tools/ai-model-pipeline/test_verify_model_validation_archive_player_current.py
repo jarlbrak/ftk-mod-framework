@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 
 import verify_model_validation_archive as verifier
+from local_inputs import lossless_archive_files, skip_without_local_inputs
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -14,6 +15,7 @@ PLAYER_ARCHIVES = (
 )
 
 
+@skip_without_local_inputs(*(path for archive in PLAYER_ARCHIVES for path in lossless_archive_files(archive)))
 class CurrentPlayerArchiveTests(unittest.TestCase):
     def test_representative_player_archives_have_intact_artifact_evidence(self) -> None:
         for relative in PLAYER_ARCHIVES:

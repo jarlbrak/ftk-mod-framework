@@ -8,8 +8,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import verify_hearthveil_canonical_archive as verifier
+from local_inputs import integrity_files, skip_without_local_inputs
 
 
+@skip_without_local_inputs(*integrity_files(verifier.DEFAULT))
 class HearthveilCanonicalArchiveTests(unittest.TestCase):
     def copy_archive(self, directory: str) -> Path:
         candidate = Path(directory) / "archive"

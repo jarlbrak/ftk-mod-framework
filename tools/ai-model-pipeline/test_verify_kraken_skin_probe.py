@@ -1,4 +1,7 @@
 """Original-only skin algebra/negative tests; not Unity rendering acceptance."""
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy", "PIL")
 import copy
 import unittest
 import json
@@ -7,8 +10,13 @@ from PIL import Image
 from pathlib import Path
 import numpy as np
 from verify_kraken_skin_probe import original_glb,skin_vertices,inspect_capture,inspect_run,BONES,TOL,IMAGE_STEPS,BAKE_STEPS,MANIFEST_HASH,digest,fixed_camera
+from local_inputs import skip_without_local_inputs
 
 
+@skip_without_local_inputs(
+    'scratch/kraken-owned-skin-probe-v1/kraken-owned-skin-probe-v1.glb',
+    'scratch/kraken-owned-skin-probe-v1/manifest.json',
+)
 class OriginalSkinTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

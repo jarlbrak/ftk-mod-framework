@@ -3,14 +3,18 @@ import json
 import unittest
 from pathlib import Path
 
+from local_inputs import skip_without_local_inputs
+
 
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACT = ROOT / "docs/evidence/kraken-production-adapter-design-v1/contract.json"
 QUEUE = ROOT / "docs/model-validation-execution-queue.json"
 PACKAGE = ROOT / "art-experiments/gloamfin-kraken"
+DECOMPILED_LISTENER = ROOT / "scratch/CharacterEventListener.analysis.cs"
 
 
 class KrakenProductionAdapterContractCurrentTests(unittest.TestCase):
+    @skip_without_local_inputs(DECOMPILED_LISTENER)
     def test_contract_and_supporting_evidence_hashes_are_current(self):
         contract = json.loads(CONTRACT.read_text())
         contract_sha = hashlib.sha256(CONTRACT.read_bytes()).hexdigest()
@@ -23,7 +27,7 @@ class KrakenProductionAdapterContractCurrentTests(unittest.TestCase):
         )
         self.assertEqual(kraken["adapterContract"]["sha256"], contract_sha)
         evidence = {
-            "decompiledCharacterEventListenerSha256": ROOT / "scratch/CharacterEventListener.analysis.cs",
+            "decompiledCharacterEventListenerSha256": DECOMPILED_LISTENER,
             "productionStateCoverageReadmeSha256": ROOT / "docs/evidence/kraken-production-state-coverage-v1/README.md",
             "offlineAdapterAuditSha256": ROOT / "tools/ai-model-pipeline/audit_kraken_adapter.py",
             "ownedUnityAdapterFixtureSha256": ROOT / "tools/ai-model-pipeline/runtime-test/KrakenOldAdapterFixture.cs",

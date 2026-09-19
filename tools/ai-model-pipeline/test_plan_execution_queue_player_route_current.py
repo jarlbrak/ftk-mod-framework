@@ -16,6 +16,7 @@ GAME = ROOT / "scratch/mirewarden-game"
 
 sys.path.insert(0, str(ROOT / "tools/ai-model-pipeline/runtime-test"))
 import plan_execution_queue_player_route as player_planner
+from local_inputs import skip_without_local_inputs
 
 
 class CurrentPlayerQueuePlanTests(unittest.TestCase):
@@ -32,6 +33,7 @@ class CurrentPlayerQueuePlanTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "directly under"):
                 player_planner.plan_output(root, Path("scratch/nested/player-plan.json"))
 
+    @skip_without_local_inputs(STAGE, GAME)
     def test_every_stage_ready_player_route_has_a_current_preview_plan(self) -> None:
         queue = json.loads(QUEUE.read_text())
         stage = json.loads(STAGE.read_text())

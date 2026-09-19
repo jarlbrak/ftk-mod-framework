@@ -7,12 +7,15 @@ from pathlib import Path
 import unittest
 
 import audit_model_validation_archive_integrity as auditor
+from local_inputs import integrity_files, skip_without_local_inputs
 
 
 ROOT = Path(__file__).resolve().parents[2]
+HEARTHVEIL_CANONICAL = "art-experiments/hearthveil-blacksmith/live-validation-v3-canonical"
 
 
 class CurrentArchiveIntegrityAuditTests(unittest.TestCase):
+    @skip_without_local_inputs(*integrity_files(HEARTHVEIL_CANONICAL))
     def test_hearthveil_canonical_archive_is_verified(self) -> None:
         report = auditor.build_report(ROOT, ROOT / "art-experiments")
         record = next(row for row in report["records"] if row["archive"].endswith(

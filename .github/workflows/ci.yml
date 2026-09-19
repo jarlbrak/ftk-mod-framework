@@ -73,6 +73,13 @@ jobs:
         run: dotnet run --project FTKModFramework/Tests/PlayerMods/PlayerMods.csproj -c Release
       - name: Run the game-free unit tests
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install model pipeline dependencies
+        run: python3 -m pip install -r tools/ai-model-pipeline/requirements.txt
+      - name: Model pipeline tests (local-only tests skip without extracted game data)
+        run: python3 -m unittest discover -s tools/ai-model-pipeline -p 'test_*.py'
 
   installer:
     name: Installer (${{ matrix.os }})

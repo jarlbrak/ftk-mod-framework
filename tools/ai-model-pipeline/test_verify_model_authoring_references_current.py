@@ -5,10 +5,16 @@ from pathlib import Path
 import subprocess
 import unittest
 
+from local_inputs import skip_without_local_inputs
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
+@skip_without_local_inputs(
+    "scratch/model-venv/bin/python",
+    "scratch/model-authoring-kit-catalog-v53.json",
+)
 class CurrentModelAuthoringReferenceTests(unittest.TestCase):
     def test_every_catalog_reference_matches_current_native_decode(self) -> None:
         result = subprocess.run(
