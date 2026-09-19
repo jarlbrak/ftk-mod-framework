@@ -127,16 +127,146 @@ public class MyZap : ProficiencyBase
 ```
 
 Gotchas (learned the hard way building the Thief's Steal):
-- A **0-damage** proficiency is auto-cancelled unless flagged `m_Harmless`, but `m_Harmless` then
-  makes it ignore the slot roll. To make the **roll itself the gate** (so spending Focus guarantees
-  it), give it a tiny chip of damage with **`m_IgnoresArmor = true`** (else armor reduces the chip to
-  0 and re-blocks it).
+- A **0-damage** proficiency is auto-cancelled unless flagged `m_Harmless`. Whether the slot roll
+  gates the effect is a *different* field, `m_FullSlots` (true means a perfect roll is required; the
+  two only correlate in vanilla rows). For a HOSTILE effect where you want the **roll itself to be the
+  gate** (so spending Focus guarantees it), give it a tiny chip of damage with **`m_IgnoresArmor =
+  true`** (else armor reduces the chip to 0 and re-blocks it). Never use that chip on a
+  friendly-targeted row; see §5.1.
 - `m_SlotOverride = 1` makes it a single roll; `m_PerSlotSkillRoll` lowers the per-slot accuracy;
   `m_ChanceToAffect` is a separate flat apply-chance.
 - For steal-category HUD, set `_dummy.m_DamageInfo.m_ProfHasAmount = true` on success (else the game
   shows "Nothing To Steal").
 
 See `Content/ThiefStealProficiency.cs` for the full worked example.
+
+### 5.1 Status effects: clone a status row (no subclass needed)
+
+A combat status (Frozen, Bleeding, Taunting, Shocked, ...) IS a proficiency row in this engine. Its
+duration, tick cadence, magnitude, proc chance, refresh semantics, immunity check, HUD icon, and
+combat-log line all come from the vanilla `FTK_proficiencyTable` row plus the shared `ProficiencyBase`
+prefab it points at. So a custom status is `Content.AddProficiency` with a vanilla status row as the
+template and a few fields set in the configure lambda. No `ProficiencyBase` subclass, no Harmony patch,
+no new API. The bundled `Content/HoarfrostMaul.cs` is the worked example: **Rimefall Strike** (a clone
+of the player blunt `Category.Ice` row `bluntIceReg`, an enemy combat-math modifier) and **Warding
+Roar** (a clone of the `Category.Taunt` row `taunt`, a self-applied targeting redirect), both carried
+by one weapon.
+
+```csharp
+// An enemy status: any landed damaging hit leaves the target Frozen for 3 ticks.
+Content.AddProficiency("com.you.mymod", "mymod_frostbite", FTK_proficiencyTable.ID.bluntIceReg, "Frostbite",
+    p =>
+    {
+        p.m_RepeatCount = 3;        // DURATION in ticks
+        p.m_FullSlots = false;      // any landed hit, not only a perfect roll (state this deliberately)
+        p.m_ChanceToAffect = 1f;    // proc chance
+    });
+
+// A self-applied status: the wielder becomes the enemies' target for 2 ticks.
+Content.AddProficiency("com.you.mymod", "mymod_challenge", FTK_proficiencyTable.ID.taunt, "Challenge",
+    p =>
+    {
+        p.m_RepeatCount = 2;
+        p.m_TargetFriendly = true;                   // the damaged dummy becomes the attacker (self)
+        p.m_Target = CharacterDummy.TargetType.None; // one target, no friendly pick
+        p.m_Harmless = true;                         // zero damage, exempt from the zero-damage cancel
+        p.m_FullSlots = false;
+        p.m_ChanceToAffect = 1f;
+    });
+Localization.SetProficiencyDescription("mymod_challenge", "Enemies turn their attacks on you.");
+var maul = Content.AddWeapon("com.you.mymod", "mymod_maul", FTK_itembase.ID.bluntWarHammer, "Rime Maul");
+Content.AttachProficiencies(maul, "mymod_frostbite", "mymod_challenge"); // two rows, never one
+```
+
+An `AddWeapon` clone carries the template's own action list: the maul above exposes the War
+Hammer's `bluntShockwaveSplash` and `bluntStun` alongside the two attached rows (four actions in
+combat). Pick a template whose actions you want, or accept them.
+
+**The row fields that drive a status** (all on `FTK_proficiencyTable`, all settable in the lambda):
+
+- `m_RepeatCount`: duration in ticks. `ProficiencyBase.AddToDummy` builds no record at all when it is
+  0, so a status row must set it above 0.
+- `m_Quickness`: tick interval, used as `1f / m_Quickness` seconds of combat time (higher is faster).
+  Ignored when the shared prefab flags `m_IsEndOnTurn`, in which case the record counts turns instead.
+  So whether `m_RepeatCount` means turns or real-time ticks depends on the prefab you inherit, which
+  the bundled self-test logs: the vanilla Ice prefab is timed (`endOnTurn=false`, quickness 0.4, so 3
+  ticks is about 7.5 seconds) and the Taunt prefab is end-on-turn (2 ticks is two turns).
+- `m_DamagePerAttack`: damage dealt on every tick (`ApplyDamage`), 0 for a pure modifier.
+- `m_CustomValue`: the per-status magnitude read by categories that have one (Armor, Attack, Evade,
+  Resist, Time, LifeDrain, ...). It is NOT the Frozen multiplier: Frozen's magnitude is the vanilla
+  global `GameFlow.m_FrozenDmgPercent`, which is read by every ice effect and by the battle-button
+  damage preview. Never write it; tuning it to balance one status would silently rebalance vanilla.
+- `m_ChanceToAffect`: proc chance in 0..1, rolled once on the acting side inside `DummyDamageInfo` and
+  then Photon-serialized, so co-op determinism is inherited. Do not add a master-client guard.
+- `m_FullSlots`: when true, `m_ProfSuccess` requires a PERFECT slot roll and a landed-but-imperfect
+  swing applies nothing. Set it deliberately and write your test criterion against the value.
+
+**Refresh, not stack.** `CharacterDummy.m_SufferingProficiencies` is a dictionary keyed by
+`ProficiencyBase.Category`, and `AddToDummy` writes the new record into that slot unconditionally.
+Re-applying the same row (or any row of the same Category) resets the duration to full; magnitudes
+never stack. `ShouldOverwrite` exists as a virtual but has no call site in the shipped assembly: it is
+dead code, do not rely on it. One latent consequence: when a second Ice row replaces the first, the
+replaced instance's `End` is never called, so its follow FX and freeze SFX loop are not stopped. Watch
+for a stuck visual when a vanilla ice effect and a custom one meet on the same target.
+
+**What lives on the shared prefab is read-only to you.** `m_Category` and `m_IsEndOnTurn` sit on
+`m_ProficiencyPrefab`, a `ProficiencyBase` instance SHARED by every vanilla row that uses it (the
+clone copies the reference, not the object). Mutating them would alter every vanilla row using that
+prefab. The only no-new-code lever is pointing `m_ProficiencyPrefab` at a *different* vanilla prefab
+that already has the combination you want.
+
+**Icons are hardcoded, so reuse an existing Category.** `uiEachEnemyHud.RefreshStatusHudIcons` and
+`uiPlayerMainHudStatus.SetStatusIcons` toggle one hand-placed object per status off a hardcoded
+`CharacterDummy` property; there is no map to extend. Categories with an icon: on enemies, Ice
+(Frozen), Fire (Burning), Lightning (Shocked), Stunned, Bleed, Scare, Death (DeathMark), Water (Wet),
+Reflect, Protect, and the armor/resist/evade/speed/attack up-and-down modifiers; on players, the same
+set plus Confuse, Acid, Entangle, Shield, and ResistDeath. `Taunt` has no icon on either side: its only
+feedback is the vanilla `STR_HudTaunt` float text and the combat-log line.
+
+**Registering a brand-new Category is not viable without engine work.** It has no icon, matches no
+immunity check (`CharacterStats.HasImmunity` and the enemy `m_Immune*` flags are per-Category), has no
+`CharacterDummy` convenience property (`Frozen`, `Taunting`, ...) for the engine to branch on, and the
+ability tooltip shows the raw placeholder `GetCategoryDescription #YourCategory#`.
+
+**The Poison exception.** `ProficiencyPoison.AddToDummy` never calls the base: it goes through
+`CharacterStats.SetPoison` and bypasses the `m_RepeatCount` record system entirely. A poison row is an
+invalid template for any duration-driven status.
+
+**The self-target recipe.** `m_TargetFriendly = true` makes `DamageCalculator.StartEngageAttack`
+reassign the damaged dummy to the attacker (and zero the evade rating, so a hero cannot dodge his own
+buff). Pair it with `m_Harmless = true`, which zeroes the damage modifier and exempts the action from
+the zero-damage auto-cancel. Never pair it with the `m_IgnoresArmor` chip from §5: on a
+friendly-targeted row that forces the hero's OWN armor to zero and deals him unmitigated self-damage.
+
+**Two gates, two fields.** `m_Harmless` exempts a zero-damage action from the auto-cancel.
+`m_FullSlots` is what governs the perfect-roll requirement. They correlate in vanilla rows but are
+independent; set both on purpose.
+
+**Timing.** `ProficiencyManager.Start` builds its id-to-instance cache ONCE per combat scene from the
+table as it stands, with no rebuild API. Register status rows from the `TableManager.Initialize` hook
+(§2); a row registered after the first combat scene has loaded never applies. A row whose
+`FTK_proficiencyTable.GetEnum(m_ID)` does not round-trip is cached under `ID.None` and silently never
+applies either; the framework's `GetEnum` patch covers registered ids, and the bundled self-test asserts
+the round-trip as a regression guard.
+
+**Never apply a `Category.Taunt` row to an enemy.** `ProficiencyTaunt.AddToDummy` and `End` both
+dereference `m_CharacterOverworld`, which is null on an `EnemyDummy`: a NullReferenceException inside
+combat resolution and again on expiry. The self-target field set is what keeps it on the hero.
+
+**When your path differs from the template's, set every field it reads.** The vanilla `taunt` row is
+applied from the taunt button, which never reads `m_TargetFriendly`, `m_Target`, `m_Harmless`, or
+`m_FullSlots`. A weapon action reads all four. Inherited values on a path the template never exercised
+are the fields most likely to be silently wrong, so set them explicitly and assert them in a self-test.
+
+**Name-based engine branches.** `DummyDamageInfo` sets `m_IsAOE` by testing whether the proficiency
+id's `ToString()` contains `"Aoe"`. A synthetic id stringifies to its integer, so a custom status is
+always treated as non-AoE. Correct for single-target statuses; a future AoE status would silently lose
+that branch.
+
+Scope note for Frozen: `CharacterDummy.CanUseAbility` reads `Frozen`, but its only callers are
+player-side (the ability trigger, `CanDistract`, `CanEncourage`). A frozen ENEMY still acts and still
+uses its proficiencies; freezing it yields the incoming-damage multiplier and the HUD icon. Wet
+overrides ALL immunity (`IsImmune` returns false first), so an immunity test needs a dry enemy.
 
 ## 6. Enemies
 
@@ -316,6 +446,7 @@ classes, skinsets, enemies, realms, encounters, quests, ...) is in
 | Capability | Public entry point | Guide |
 |---|---|---|
 | Items, weapons, proficiencies, classes, enemies, encounters | `Content.Add*`, `Content.Attach*` | This guide |
+| Combat status effects (duration, refresh, targeting, icons) | `Content.AddProficiency` with a vanilla status row as the template | §5.1 and the bundled Hoarfrost Maul |
 | Class-innate passive traits | `Content.AddPassive` | This guide and the bundled Innkeeper |
 | Adventures, campaigns, quests, NPCs, end-game art | `Adventures.*`, `CampaignBuilder`, `QuestBuilder` | [`ADVENTURES.md`](ADVENTURES.md), [`CAMPAIGNS.md`](CAMPAIGNS.md) |
 | Enemy visuals, meshes, materials, portraits, fall-off | `Content.SetEnemy*` | [`CUSTOM-MODELS.md`](CUSTOM-MODELS.md), [`MODEL-RENDERER-API.md`](MODEL-RENDERER-API.md) |
