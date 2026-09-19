@@ -64,6 +64,14 @@ Grouped by phase. All are fully defensive (a missing precondition returns
 - **Combat**: `set_target {enemyFid}`, `choose_ability {profId}`, `set_focus {n}`,
   `attack`, `resolve_turn {attackerFid?,targetFid?,profId?,hit?}`, `combat_turn`,
   `force_win` / `win_combat` / `auto_combat` / `auto_combat_turn`, `combat_status`.
+- **Inventory**: `use_item {item}` (use a consumable from the acting hero's pack in
+  combat, through the item's own `CanUse` and `OnUse`), `equip_item {item, hero?}`
+  (equip an item from a hero's Backpack through `CharacterOverworld.ForceEquip`,
+  the backpack-menu Equip path; `item` is a vanilla `FTK_itembase.ID` name or a
+  framework registry id such as `ftkmf_hoarfrostmaul`, `hero` is a party
+  turnIndex and defaults to the acting hero; returns `{equipped, item, hero,
+  previous?}`. It does not spend a combat turn, so treat an in-combat equip as a
+  fixture step).
 - **Dungeon**: `enter_dungeon {dungeon?}`, `dungeon_encounter` (start the current
   room's fight via `MiniHexDungeon.Encounter`), `cleared_room` (advance the room
   pointer), `force_clear` (deactivate a cleared dungeon), `dungeon_scroll_complete`
