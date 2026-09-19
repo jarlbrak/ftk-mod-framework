@@ -81,6 +81,7 @@ namespace FTKModFramework.Agent
                     case "resolve_turn": return ResolveTurn(args);
                     case "end_turn": return EndTurn(args);
                     case "use_item": return UseItem(args);
+                    case "equip_item": return EquipItem(args);
                     case "select_choice": return SelectChoice(args);
                     case "advance": return Advance(args);
                     case "dismiss_message": return DismissMessage(args);
@@ -1413,6 +1414,196 @@ namespace FTKModFramework.Agent
                 new[] { cowType, containerId.GetType() }, new object[] { cow, containerId });
 
             return Ok(Result("used", itemName));
+        }
+
+        /// <summary>
+        /// EQUIP a named item that sits in a hero's Backpack, via the REAL backpack-menu equip path.
+        /// Decompile anchor (Assembly-CSharp): uiPopupMenu.ActionEquip is
+        ///   if (PlayerInventory.CanForceEquip(id)) cow.ForceEquip(id); else cow.EquipItem(id);
+        /// and the UI only offers that button when itemInfo.m_Equippable and the caller controls the hero
+        /// (m_CanControl == cow.IsOwner || cow.m_WaitForRespawn; uiItemMenu.ShowPlayerInventory adds a
+        /// single-player short-circuit). CanForceEquip is a constant true. CharacterOverworld.ForceEquip
+        /// switches on itemBase.m_ObjectType: for a weapon it UnequipItem(RightHand.GetOne(), toBackpack)
+        /// when the hand is occupied, likewise LeftHand for a two-hander, then EquipItem(id, _isWeaponSwap),
+        /// which checks m_Equippable + the slot container's CanAdd (ItemContainerWeaponHand: m_IsWeapon and
+        /// the hand(s) empty) and only then RPCs EquipItemRPC (remove from Backpack, add to the slot, apply
+        /// modifiers, refresh the avatar/dummy weapon). A refused CanAdd is silent, so the result is
+        /// confirmed here by re-reading the slot. There is no in-combat guard on this path; the combat
+        /// battle-stance "equip weapon" choice (uiChooseRewardMenu ChooseType.EquipItemCombat) calls the
+        /// same ForceEquip(id, _isWeaponSwap: true) and _isWeaponSwap only selects the audio event.
+        /// Unlike that choice this action does NOT spend the hero's combat turn, so an in-combat equip is a
+        /// fixture step, not gameplay evidence.
+        /// args: {"item":"hoarfrostMaul" | "ftkmf_hoarfrostmaul", "hero"?: turnIndex}. `item` is a vanilla
+        /// FTK_itembase.ID member name or a framework registry string id (resolved through the patched
+        /// FTK_weaponStats2DB / FTK_itemsDB GetIntFromID). Default hero: the acting combat hero, otherwise
+        /// the current overworld hero (DungeonOps.ActingCow). Fails clearly when the item is unknown, not in
+        /// the hero's Backpack, not equippable, or the game's own CanAdd guard refuses.
+        /// Returns {equipped, item, hero, previous?} where previous is the item displaced from the slot.
+        /// </summary>
+        private static object EquipItem(IDictionary<string, object> args)
+        {
+            string itemName = GetString(args, "item");
+            if (string.IsNullOrEmpty(itemName))
+                return Fail("equip_item: missing 'item'");
+
+            object cow;
+            int? hero = GetInt(args, "hero");
+            if (hero.HasValue)
+            {
+                cow = CowByTurnIndex(hero.Value);
+                if (cow == null)
+                    return Fail("equip_item: no party hero with turnIndex " + hero.Value);
+            }
+            else
+            {
+                cow = DungeonOps.ActingCow();
+                if (cow == null)
+                    return Fail("equip_item: no acting hero (enemy turn, or no resolvable hero)");
+            }
+
+            object itemId = ResolveItemId(itemName);
+            if (itemId == null)
+                return Fail("equip_item: unknown item '" + itemName + "'");
+
+            object inv = SafeField(cow, "m_PlayerInventory");
+            object backpack = ResolveNestedEnum("PlayerInventory+ContainerID", "Backpack");
+            if (inv == null || backpack == null)
+                return Fail("equip_item: PlayerInventory/ContainerID.Backpack unresolved");
+            if (ContainerCount(inv, backpack, itemId) <= 0)
+                return Fail("equip_item: hero does not hold '" + itemName + "' in the Backpack");
+
+            // FTK_itembase.GetItemBase(id): the row ForceEquip switches on. A null row would NRE inside the
+            // game, so it is refused here instead.
+            object itemBase = CallStatic("GridEditor.FTK_itembase", "GetItemBase",
+                new[] { itemId.GetType() }, new object[] { itemId });
+            if (itemBase == null)
+                return Fail("equip_item: no FTK_itembase row for '" + itemName + "'");
+            if (!ToBool(SafeField(itemBase, "m_Equippable")))
+                return Fail("equip_item: '" + itemName + "' is not equippable");
+
+            // The slot EquipItem targets for this m_ObjectType (same mapping as CharacterOverworld.EquipItem).
+            object objectType = SafeField(itemBase, "m_ObjectType");
+            string slotName = SlotForObjectType(objectType == null ? null : objectType.ToString());
+            object slot = slotName == null ? null : ResolveNestedEnum("PlayerInventory+ContainerID", slotName);
+            if (slot == null)
+                return Fail("equip_item: no equip slot for object type '" + objectType + "'");
+            if (ContainerCount(inv, slot, itemId) > 0)
+                return Fail("equip_item: '" + itemName + "' is already equipped");
+
+            // What ForceEquip will displace (weapons and shields also clear the other hand; only the target
+            // slot's occupant is reported).
+            string previous = null;
+            object slotContainer = SafeInvokeArgs(inv, "Get", new[] { slot.GetType() }, new object[] { slot });
+            object empty = SafeInvoke(slotContainer, "IsEmpty");
+            if (empty is bool && !(bool)empty)
+            {
+                object prev = SafeInvoke(slotContainer, "GetOne");
+                if (prev != null) previous = prev.ToString();
+            }
+
+            object stats = SafeField(cow, "m_CharacterStats");
+            bool inCombat = stats != null && ToBool(SafeField(stats, "m_IsInCombat"));
+
+            // The same fork uiPopupMenu.ActionEquip takes. CanForceEquip is static on PlayerInventory.
+            object canForce = CallStatic("PlayerInventory", "CanForceEquip",
+                new[] { itemId.GetType() }, new object[] { itemId });
+            if (canForce is bool && (bool)canForce)
+                SafeInvokeArgs(cow, "ForceEquip", new[] { itemId.GetType(), typeof(bool) }, new object[] { itemId, inCombat });
+            else
+                SafeInvokeArgs(cow, "EquipItem", new[] { itemId.GetType(), typeof(bool) }, new object[] { itemId, inCombat });
+
+            // EquipItem silently skips the RPC when the slot's CanAdd refuses, so confirm from the container.
+            if (ContainerCount(inv, slot, itemId) <= 0)
+                return Fail("equip_item: game refused to equip '" + itemName + "' (slot " + slotName + " CanAdd=false)");
+
+            Dictionary<string, object> res = new Dictionary<string, object>();
+            res["equipped"] = true;
+            res["item"] = itemName;
+            res["hero"] = TurnIndexOf(cow);
+            if (previous != null) res["previous"] = previous;
+            return Ok(res);
+        }
+
+        // The ContainerID CharacterOverworld.EquipItem/AddAndEquipItem/UnequipItemRPC map each equippable
+        // FTK_itembase.ObjectType to (every other equippable type falls through to Trinket).
+        private static string SlotForObjectType(string objectType)
+        {
+            switch (objectType)
+            {
+                case null: return null;
+                case "helmet": return "Head";
+                case "boots": return "Foot";
+                case "armor": return "Body";
+                case "necklace": return "Neck";
+                case "shield": return "LeftHand";
+                case "weapon": return "RightHand";
+                default: return "Trinket";
+            }
+        }
+
+        // PlayerInventory.GetItemCount(ContainerID, FTK_itembase.ID); 0 when unreadable.
+        private static int ContainerCount(object inv, object containerId, object itemId)
+        {
+            object count = SafeInvokeArgs(inv, "GetItemCount",
+                new[] { containerId.GetType(), itemId.GetType() }, new object[] { containerId, itemId });
+            int? n = ToInt(count);
+            return n.HasValue ? n.Value : 0;
+        }
+
+        // Resolve an item name to an FTK_itembase.ID: a vanilla enum member first, then a framework registry
+        // string id through the DBs' GetIntFromID (patched by DbLookupPatcher to yield the synthetic int for a
+        // custom row; the vanilla body Enum.Parses and returns -1 for anything else). Null when unresolved.
+        private static object ResolveItemId(string itemName)
+        {
+            object itemId = ResolveNestedEnum("GridEditor.FTK_itembase+ID", itemName);
+            if (itemId == null) itemId = ResolveNestedEnum("FTK_itembase+ID", itemName);
+            if (itemId != null) return itemId;
+
+            Type idType = AccessTools.TypeByName("GridEditor.FTK_itembase+ID");
+            if (idType == null) idType = AccessTools.TypeByName("FTK_itembase+ID");
+            if (idType == null) return null;
+
+            string[] dbs = { "GridEditor.FTK_weaponStats2DB", "GridEditor.FTK_itemsDB" };
+            for (int i = 0; i < dbs.Length; i++)
+            {
+                object db = CallStatic(dbs[i], "GetDB", Type.EmptyTypes, null);
+                object res = SafeInvokeArgs(db, "GetIntFromID", new[] { typeof(string) }, new object[] { itemName });
+                int? n = ToInt(res);
+                if (n.HasValue && n.Value >= 0)
+                {
+                    try { return Enum.ToObject(idType, n.Value); } catch { return null; }
+                }
+            }
+            return null;
+        }
+
+        // Party hero by FTKPlayerID.m_TurnIndex, from FTKHub.m_CharacterOverworlds. Null when absent.
+        private static object CowByTurnIndex(int turnIndex)
+        {
+            object hub = StaticInstance("FTKHub");
+            IEnumerable cows = SafeField(hub, "m_CharacterOverworlds") as IEnumerable;
+            if (cows == null) return null;
+            foreach (object cow in cows)
+            {
+                int? ti = TurnIndexOf(cow);
+                if (ti.HasValue && ti.Value == turnIndex) return cow;
+            }
+            return null;
+        }
+
+        private static int? TurnIndexOf(object cow)
+        {
+            return ToInt(SafeField(SafeField(cow, "m_FTKPlayerID"), "m_TurnIndex"));
+        }
+
+        // Invoke a public static method by type name; null on any miss or throw.
+        private static object CallStatic(string typeName, string method, Type[] sig, object[] args)
+        {
+            Type t = AccessTools.TypeByName(typeName);
+            if (t == null) return null;
+            MethodInfo mi = t.GetMethod(method, BindingFlags.Public | BindingFlags.Static, null, sig, null);
+            if (mi == null) return null;
+            try { return mi.Invoke(null, args); } catch { return null; }
         }
 
         // Find which of the hero's consumable-holding containers (Backpack, then Belt) holds the item, returning
