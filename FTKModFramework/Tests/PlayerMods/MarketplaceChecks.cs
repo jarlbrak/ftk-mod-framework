@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using System.Threading;
 using Newtonsoft.Json;
 using FTKModFramework.Core.Data;
 using FTKModFramework.Core.Marketplace;
@@ -29,6 +30,8 @@ internal static class MarketplaceChecks
         Reject(delegate { MarketplaceProtocol.ReadResult(result, null); }, "unsupported helper result schema rejected");
         File.WriteAllText(result, "{\"schemaVersion\":1,\"operationId\":\"other\"}");
         Reject(delegate { MarketplaceProtocol.ReadResult(result, "expected"); }, "cross-operation result rejected");
+        File.WriteAllText(result, "{\"schemaVersion\":1,\"ok\":true,\"plan\":[{\"action\":\"keep\",\"packageId\":\"fixture\",\"notice\":\"This package was revoked upstream. The installed copy is kept until you remove it.\"}]}");
+        Check(MarketplaceProtocol.ReadResult(result, null).Plan[0].Notice == "This package was revoked upstream. The installed copy is kept until you remove it.", "helper plan entry notice is deserialized");
         File.WriteAllText(result, new string(' ', MarketplaceProtocol.MaxResultBytes + 1));
         Reject(delegate { MarketplaceProtocol.ReadResult(result, null); }, "oversized helper result rejected");
         Reject(delegate { MarketplaceProtocol.ValidateSnapshot(stateRoot, new ManagedSnapshot { GenerationId = "../escape", ContentRoot = fixture }); }, "generation traversal rejected");
@@ -57,8 +60,37 @@ internal static class MarketplaceChecks
         Check(MarketplaceRuntime.Pending.GenerationId == second && MarketplaceRuntime.Active.GenerationId == first, "cancel reconciles committed pending state without replacing current-session active set");
         RunRecoveryProcess(Path.Combine(fixture, "recovery-valid"), false);
         RunRecoveryProcess(Path.Combine(fixture, "recovery-invalid"), true);
+        // Both mismatch paths must surface as the distinct Discover state, and a readable catalog must clear it.
+        InstallHelper(helper, "{\"schemaVersion\":1,\"operationId\":\"OPERATION\",\"ok\":false,\"status\":\"unsupported\",\"message\":\"unsupported catalog schema 2\",\"packages\":[]}");
+        RunCatalog();
+        Check(MarketplaceRuntime.CatalogUnsupported && MarketplaceRuntime.Catalog == null, "helper unsupported status marks the catalog unsupported without storing it");
+        InstallHelper(helper, "{\"schemaVersion\":1,\"operationId\":\"OPERATION\",\"ok\":true,\"status\":\"empty\",\"packages\":[]}");
+        RunCatalog();
+        Check(!MarketplaceRuntime.CatalogUnsupported && MarketplaceRuntime.Catalog != null && MarketplaceRuntime.Catalog.Status == "empty", "readable catalog clears the unsupported state");
+        InstallHelper(helper, "{\"schemaVersion\":2,\"operationId\":\"OPERATION\",\"ok\":true,\"status\":\"online\",\"packages\":[]}");
+        RunCatalog();
+        Check(MarketplaceRuntime.CatalogUnsupported && MarketplaceRuntime.Notice.Contains("Update or repair the framework and helper together"), "helper protocol mismatch marks the catalog unsupported with repair guidance");
         File.AppendAllText(helper, "# changed bytes\n");
         Reject(delegate { MarketplaceProtocol.VerifyHelper(helper); }, "modified helper checksum rejected before launch");
+    }
+    private static void RunCatalog()
+    {
+        MarketplaceResult completed = null;
+        Check(MarketplaceRuntime.Start("catalog", null, false, delegate(MarketplaceResult result) { completed = result; }), "catalog request starts against the fixture helper");
+        Stopwatch wait = Stopwatch.StartNew();
+        while (MarketplaceRuntime.Busy && wait.ElapsedMilliseconds < 10000) { MarketplaceRuntime.Poll(); Thread.Sleep(20); }
+        if (completed == null) throw new Exception("Catalog fixture did not complete");
+    }
+    private static void InstallHelper(string helper, string payload)
+    {
+        string responseTemplate = Path.Combine(Path.GetDirectoryName(helper), "response.json");
+        File.WriteAllText(responseTemplate, payload);
+        string script = "#!/bin/sh\n" +
+            "op=$(sed -n 's/.*\"operationId\":\"\\([^\"]*\\)\".*/\\1/p' \"$4\")\n" +
+            "sed \"s/OPERATION/$op/\" " + ShellQuote(responseTemplate) + " > \"$6\"\n";
+        File.WriteAllText(helper, script);
+        File.SetUnixFileMode(helper, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
+        File.WriteAllText(Path.Combine(Path.GetDirectoryName(helper), "helper.json"), JsonConvert.SerializeObject(new { schemaVersion = 1, protocolVersion = 1, sha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(helper))).ToLowerInvariant() }));
     }
     private static void RunRecoveryProcess(string root, bool invalid)
     {

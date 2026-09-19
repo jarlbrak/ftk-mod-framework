@@ -483,6 +483,15 @@ namespace FTKModFramework.Core.UI
             }
             _container = browse;
             MarketplaceResult catalog = MarketplaceRuntime.Catalog;
+            if (MarketplaceRuntime.CatalogUnsupported && !PanelBusy)
+            {
+                Spacer(24);
+                TextLine("The catalog needs a matching framework and helper", 30, 86);
+                TextLine("Update or repair the framework and helper together from the launcher, then try Refresh. You can keep playing with everything in Installed.", 24, 104);
+                if (!string.IsNullOrEmpty(MarketplaceRuntime.Notice))
+                    TextLine(Short(MarketplaceRuntime.Notice, 240), 22, 110).color = Gold;
+                return;
+            }
             if (catalog == null || catalog.Status == "unavailable")
             {
                 Spacer(24);
@@ -874,7 +883,10 @@ namespace FTKModFramework.Core.UI
                 review.Add(desired.ToString());
                 StringBuilder delta = new StringBuilder("Changes from this launch:\n");
                 foreach (MarketplacePlanEntry entry in entries)
+                {
                     delta.Append(entry.Action).Append(": ").Append(entry.Name ?? entry.PackageId).Append(" ").Append(entry.FromVersion).Append(" -> ").Append(entry.ToVersion).Append(entry.Dependency ? " (required component)" : "").Append("\n");
+                    if (!string.IsNullOrEmpty(entry.Notice)) delta.Append("  Note: ").Append(entry.Notice).Append("\n");
+                }
                 if (entries.Count == 0) delta.Append("Current community selection unchanged; queued choices cleared.");
                 review.Add(delta.ToString());
                 List<string> pages = TextPages(new List<string> { string.Join("\n", review.ToArray()) });
@@ -917,7 +929,7 @@ namespace FTKModFramework.Core.UI
             {
                 TextLine("Start a new run after changing class mods. Existing saves may need their original mod set.", 22, 40);
                 PrimaryButton("Quit and apply on next launch", delegate { Application.Quit(); }, !PanelBusy);
-
+                TextLine("Then start the game again from Steam or the launcher to load these changes.", 22, 32);
             }
             if (MarketplaceRuntime.Pending != null)
                 LinkButton("Discard community download changes...", delegate { _confirmOperation = "cancel"; Navigate("confirm"); }, !PanelBusy);
