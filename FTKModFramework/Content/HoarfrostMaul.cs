@@ -60,7 +60,9 @@ namespace FTKModFramework
             //    than a single-target maul swing needs. "Reg" is the regular single-target ice swing, so it is
             //    the row with the fewest inherited side effects. Row VALUES live in the serialized DB asset,
             //    not in Assembly-CSharp, so the inherited m_Target / m_DamagePerAttack / m_Quickness are logged
-            //    by VerifyHoarfrostMaul for the live pass rather than asserted here. Enemy en* ice rows are
+            //    by VerifyHoarfrostMaul for the live pass rather than asserted here. In particular m_Quickness
+            //    (the tick cadence, 1 / m_Quickness seconds per tick) is deliberately INHERITED from the
+            //    template and not set below; only the tick COUNT is ours. Enemy en* ice rows are
             //    not valid templates: they carry enemy tendency weights and enemy-keyed animation triggers.
             Content.AddProficiency(Plugin.Guid, FrozenKey, FTK_proficiencyTable.ID.bluntIceReg, "Rimefall Strike",
                 p =>

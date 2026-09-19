@@ -174,6 +174,7 @@ Content.AddProficiency("com.you.mymod", "mymod_challenge", FTK_proficiencyTable.
         p.m_ChanceToAffect = 1f;
     });
 Localization.SetProficiencyDescription("mymod_challenge", "Enemies turn their attacks on you.");
+var maul = Content.AddWeapon("com.you.mymod", "mymod_maul", FTK_itembase.ID.bluntWarHammer, "Rime Maul");
 Content.AttachProficiencies(maul, "mymod_frostbite", "mymod_challenge"); // two rows, never one
 ```
 
