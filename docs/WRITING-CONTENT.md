@@ -108,7 +108,98 @@ DB-driven, so your class appears automatically, but mind these:
 - **Name & flavor:** the display name is the 4th `AddClass` arg; set the description with
   `Localization.SetClassFlavor(id, "...")`.
 
-## 5. Custom combat behaviour (a `ProficiencyBase` subclass)
+## 5. Passive class traits (`Content.AddPassive`)
+
+A passive is a class-innate trait that fires deterministically at one closed trigger moment. Unlike
+the other `Add*` helpers it writes no `FTK_*DB` row and mints no synthetic id: it binds behaviour
+to a class you have already registered. The smallest complete example is the bundled Innkeeper
+([`Content/InnkeeperClass.cs`](../FTKModFramework/Content/InnkeeperClass.cs)), trimmed here:
+
+```csharp
+using FTKModFramework.Core;
+using GridEditor;
+
+// 1) The class first: a passive binds to a registered row, so AddClass must run before AddPassive.
+FTK_playerGameStart innkeeper = Content.AddClass(
+    "com.you.mymod", "mymod_innkeeper", FTK_playerGameStart.ID.blacksmith, "Innkeeper",
+    c =>
+    {
+        c._vitality += 0.10f; c._fortitude += 0.08f;   // built like a barrel
+        c._quickness -= 0.12f; c._talent -= 0.10f;     // paid for in speed and finesse
+        // Take a private copy before touching a flag: the clone is shallow and the
+        // inherited CharacterSkills object is still the LIVE Blacksmith's (see §4).
+        c.m_CharacterSkills = new CharacterSkills(c.m_CharacterSkills);
+        c.m_CharacterSkills.m_SteadFast = false;
+    });
+
+// 2) The passives. The returned def's Key is modGuid + ":" + passiveId; that string is the
+//    trait's stable identity in logs and in co-op, so pick the id once and keep it.
+PassiveTraitDef ironBelly = Content.AddPassive(
+    "com.you.mymod", "iron_belly", innkeeper, PassiveTrigger.ConsumableDebuff, "Iron Belly");
+PassiveTraitDef roundOnTheHouse = Content.AddPassive(
+    "com.you.mymod", "round_on_the_house", innkeeper, PassiveTrigger.ConsumableBuff, "Round on the House");
+
+// 3) Feedback text the trigger patches read back: Key + ":hud" is the floating combat popup,
+//    Key + ":log" is the combat-log line. Derive them from def.Key so they can never drift.
+if (ironBelly != null)
+{
+    Localization.SetName(ironBelly.Key + ":hud", "Iron Belly!");
+    Localization.SetName(ironBelly.Key + ":log", "The Innkeeper's cast-iron stomach shrugs it off.");
+}
+```
+
+`AddPassive(modGuid, passiveId, classRow, trigger, displayName)` returns the registered
+`PassiveTraitDef` (`Key`, `ClassId`, `Trigger`, `DisplayName`), or `null` when `classRow` is null or
+not yet registered in the class DB (logged as an error, registry untouched). The display name is
+registered through the normal `Localization` path under `Key`.
+
+### The trigger vocabulary
+
+`PassiveTrigger` is a closed set. There is no way to add a trigger from a mod; a new moment needs a
+framework change in `Core/`.
+
+| Trigger | Fires when | What the framework does |
+|---|---|---|
+| `IncomingAttack` | The owner is about to take a main-target hit | Zeroes the first qualifying hit each combat (once per fight, per character), then shows the `:hud` / `:log` feedback on the impact frame. The decision runs on the master only and the negated result travels to clients in the normal damage payload. |
+| `ConsumableDebuff` | A consumable would apply a debuff to the owner | Strips the drink's downside (for example rum's `enConfuse`) and shows the feedback; the buffs still apply. |
+| `ConsumableBuff` | The owner drinks a personal consumable | Shares the beneficial effects with the rest of the party. Orbs already target the party and are left alone; the shared copy carries buffs only, never the downside. |
+
+### The no-probability rule
+
+`PassiveTraitDef` has no chance field, and there is no percent parameter on `AddPassive`. A
+passive either fires at its trigger or it is not bound; the once-per-combat gate on `IncomingAttack`
+is the only limiter. This is deliberate: a probabilistic passive would need a shared roll to keep
+host and clients agreeing (see §10), and vanilla already owns the random-negate lane with
+Steadfast and shields. If a design needs a chance, model it as a vanilla `CharacterSkills` flag or a
+proficiency `m_ChanceToAffect`, not as a passive.
+
+### Gotchas
+
+- **Register the class first.** `AddPassive` resolves `classRow` against the live class DB, so a
+  row that has not gone through `AddClass` (or a `null` from a failed `AddClass`) returns `null`.
+  Check the return before using `def.Key`.
+- **Re-registration is first-wins.** Calling `AddPassive` again with the same `(modGuid, passiveId)`
+  returns the existing def and logs a warning; a different trigger or name on the second call is
+  ignored, never merged.
+- **Inherited vanilla skills still fire.** A cloned class keeps its template's `CharacterSkills`;
+  the Innkeeper clears `m_SteadFast` on a private copy because Steadfast would randomly pre-empt
+  its own defence. Decide which vanilla flags your passive competes with and copy the skills
+  object before you change them.
+- **Missing feedback text falls back, loudly.** If `Key + ":hud"` or `Key + ":log"` is not
+  registered the patch shows `DisplayName + "!"` and logs a warning each time. Set both.
+- **Feedback is master-gated; outcomes are not.** In co-op the effect (negate, strip, share) is
+  identical on every client because it rides the shared damage or buff payload; only the popup
+  and log line are emitted by the master. Never add client-local randomness on top (see §10).
+- **Self-test line to look for.** The framework's own startup probe emits
+  `SELF-TEST PASS: AddPassive registry (bind, idempotent, reject)` in `BepInEx/LogOutput.log`;
+  the Innkeeper adds `SELF-TEST PASS: Innkeeper passives bound (...)`. Mirror that idiom in your
+  own mod: assert `def.Key`, `def.Trigger`, and `Localization.TryGetName(def.Key, ...)` at load.
+
+Passives are class-scoped. A trait that should belong to a quest reward, an NPC, or a campaign
+state is a different tool: see [`CAMPAIGNS.md`](CAMPAIGNS.md) for flags and quest logic, and
+[`ADVENTURES.md`](ADVENTURES.md) for encounter-level effects.
+
+## 6. Custom combat behaviour (a `ProficiencyBase` subclass)
 
 Cloning a proficiency reuses an existing effect. For *new* behaviour, subclass `ProficiencyBase`,
 override `AddToDummy`, and set an instance as the row's `m_ProficiencyPrefab` (the game
@@ -132,7 +223,7 @@ Gotchas (learned the hard way building the Thief's Steal):
   two only correlate in vanilla rows). For a HOSTILE effect where you want the **roll itself to be the
   gate** (so spending Focus guarantees it), give it a tiny chip of damage with **`m_IgnoresArmor =
   true`** (else armor reduces the chip to 0 and re-blocks it). Never use that chip on a
-  friendly-targeted row; see §5.1.
+  friendly-targeted row; see §6.1.
 - `m_SlotOverride = 1` makes it a single roll; `m_PerSlotSkillRoll` lowers the per-slot accuracy;
   `m_ChanceToAffect` is a separate flat apply-chance.
 - For steal-category HUD, set `_dummy.m_DamageInfo.m_ProfHasAmount = true` on success (else the game
@@ -140,7 +231,7 @@ Gotchas (learned the hard way building the Thief's Steal):
 
 See `Content/ThiefStealProficiency.cs` for the full worked example.
 
-### 5.1 Status effects: clone a status row (no subclass needed)
+### 6.1 Status effects: clone a status row (no subclass needed)
 
 A combat status (Frozen, Bleeding, Taunting, Shocked, ...) IS a proficiency row in this engine. Its
 duration, tick cadence, magnitude, proc chance, refresh semantics, immunity check, HUD icon, and
@@ -235,7 +326,7 @@ invalid template for any duration-driven status.
 **The self-target recipe.** `m_TargetFriendly = true` makes `DamageCalculator.StartEngageAttack`
 reassign the damaged dummy to the attacker (and zero the evade rating, so a hero cannot dodge his own
 buff). Pair it with `m_Harmless = true`, which zeroes the damage modifier and exempts the action from
-the zero-damage auto-cancel. Never pair it with the `m_IgnoresArmor` chip from §5: on a
+the zero-damage auto-cancel. Never pair it with the `m_IgnoresArmor` chip from §6: on a
 friendly-targeted row that forces the hero's OWN armor to zero and deals him unmitigated self-damage.
 
 **Two gates, two fields.** `m_Harmless` exempts a zero-damage action from the auto-cancel.
@@ -268,7 +359,7 @@ player-side (the ability trigger, `CanDistract`, `CanEncourage`). A frozen ENEMY
 uses its proficiencies; freezing it yields the incoming-damage multiplier and the HUD icon. Wet
 overrides ALL immunity (`IsImmune` returns false first), so an immunity test needs a dry enemy.
 
-## 6. Enemies
+## 7. Enemies
 
 `Content.AddEnemy` clones an existing enemy's `FTK_enemyCombat` row (so you inherit a valid 3D body,
 weapon, and animations) and registers it with a high-band synthetic id. Unlike classes, enemies are
@@ -306,7 +397,7 @@ Things that matter:
   and fights for free. `m_ArchType` is only a *stat* archetype, not the model.
 - **Abilities:** `AttachEnemyProficiencies` instantiates a private copy of `m_WeaponAsset`, adds your
   proficiency, strips any `AttackSchedule` (so the RNG attack path can pick it), and `SaveState()`s it.
-  Set `m_ChanceToProf > 0` so the AI actually fires it. A custom `ProficiencyBase` behaviour (§5) works
+  Set `m_ChanceToProf > 0` so the AI actually fires it. A custom `ProficiencyBase` behaviour (§6) works
   when the enemy is the attacker; guard any shared-state mutation (gold, etc.) with
   `PhotonNetwork.isMasterClient` so co-op applies it once.
 - **Spawn gating:** `m_EnemyLevel` (which bucket), `m_Rarity` (draw weight), `m_SpawnDay/Night/Land/Water/Dungeon`,
@@ -320,7 +411,7 @@ Cutpurse, so you can verify a custom enemy fights and drops loot without waiting
 
 See `Content/CutpurseEnemy.cs` (+ `Content/CutpurseStealProficiency.cs`) for the full worked example.
 
-## 7. New adventures & encounters
+## 8. New adventures & encounters
 
 > Design reference + the full how-it-works: [`ADVENTURES.md`](ADVENTURES.md).
 
@@ -359,7 +450,7 @@ Content.AddEncounter("com.you.mymod", "mymod_cache", FTK_miniEncounter.ID.Treasu
 > out-of-range class id in the party lobby falls back to a default class (the game's own intent) instead
 > of throwing and breaking the character-create screen.
 
-## 8. How it works (why it's safe)
+## 9. How it works (why it's safe)
 
 - **IDs**: the `FTK_*.ID` enums are compile-time fixed. `IdAllocator` mints a deterministic
   synthetic int per `(modGuid, contentKey)` in a high band (`0x40000000+`), identical on every
@@ -373,12 +464,12 @@ Content.AddEncounter("com.you.mymod", "mymod_cache", FTK_miniEncounter.ID.Treasu
   `id >= 100000 -> weapon DB` rule.
 - **Save-safety**: the framework sets `FullSerializer.fsConfig.SerializeEnumsAsInteger = true`.
 
-## 9. Multiplayer
+## 10. Multiplayer
 
 Co-op is Photon and has **no asset streaming**: every player must have the same mods installed.
 Synthetic IDs are deterministic precisely so host/client agree on what each id means.
 
-## 10. Data-authored mods
+## 11. Data-authored mods
 
 A content mod can be a folder under `<game>/BepInEx/plugins/` with no compiled DLL. Give it a
 `manifest.json` and one or more other `.json` files containing `entries` arrays. The loader
@@ -408,12 +499,99 @@ Read [`MOD-VERSIONING.md`](MOD-VERSIONING.md) before publishing. Marketplace pac
 reviewed descriptor, immutable archive, and validation requirements in
 [`MARKETPLACE.md`](MARKETPLACE.md).
 
-Each content entry supplies `kind`, a stable local `id`, an existing `template`, a display name,
-and kind-specific `fields`. References to another entry in the same mod use that local string ID.
-Unknown kinds and templates are rejected; invalid files and entries are isolated so valid files
-can still load. Start from the sample files rather than guessing serialized game field names.
+Optional manifest fields are `description`, `author`, `developmentOnly` (hides the mod from
+release-build players; the bundled samples set it), and `behaviorDll` (see below).
 
-## 11. The in-game Mods browser: changes, saves, and co-op
+### Content entries
+
+Every other `.json` file in the folder is a content file: an object with an `entries` array. The
+smallest complete entry is a weapon (from the sample's `z_shadowfang_weapon.json`):
+
+```json
+{
+  "entries": [
+    {
+      "kind": "weapon",
+      "id": "wayfarer_shadowfang",
+      "template": "bladeDagger",
+      "displayName": "Shadowfang",
+      "fields": { "damage": 8, "damageGain": 0.6, "slots": 3, "rarity": "rare", "goldValue": 120 },
+      "proficiencies": [ "wayfarer_backstab" ]
+    }
+  ]
+}
+```
+
+| Key | Required | Meaning |
+|---|---|---|
+| `kind` | yes | `item`, `weapon`, `proficiency`, `class`, `enemy`, or `encounter` |
+| `id` | yes | Stable local id, unique within the mod; the synthetic id is minted from `(modGuid, id)` |
+| `template` | yes | The vanilla enum member to clone, for example `bladeDagger` or `treasureHunter` |
+| `displayName` | yes | Registered through the same `Localization` path as `Content.Add*` |
+| `fields` | no | Member overrides applied to the cloned row (see the next subsection) |
+| `proficiencies` | no | Weapon only: local ids of proficiency entries to attach (same as `Content.AttachProficiencies`) |
+| `flavor` | no | Class only: the class-select flavor text |
+| `description` | no | Proficiency only: the tooltip description |
+| `behavior`, `behaviorCategory` | no | Proficiency only: a behaviour name and its category from a behaviour DLL (see below) |
+
+References to another entry in the same mod use that local string id wherever a content-id field is
+expected (`startWeapon`, `startItems`, `proficiencies`). Cross-file references resolve after every
+file has been read, so declaration order does not matter. A vanilla enum member name is also
+accepted in those fields (`"armorMagicLeather"`); a raw integer in the custom id band is not.
+
+### Field aliases and overrides
+
+`fields` is applied by the override engine to the cloned row. Each key is either the raw serialized
+field name of the game type (`_maxdmg`, `m_Release`) or a friendly alias curated per kind, resolved
+case-insensitively before the lookup, so `damage` and `_maxdmg` write the same member:
+
+- **weapon** and **item**: `rarity`, `goldValue`, `minLevel`, `maxLevel`, `dropable`, `townMarket`,
+  `dlc`; weapons add `damage`, `damageType`, `skill`, `slots`, `damageGain`.
+- **proficiency**: `damage` (multiplier), `ignoresArmor`, `chanceToAffect`, `slots`.
+- **class**: `strength`, `intelligence`, `awareness`, `talent`, `speed`, `vitality`,
+  `startingGold`, `focus`, `primaryStat`, `startWeapon`, `startItems`, `skills`, `dlc`.
+
+Scalars are coerced to the member type (`"rare"` to `FTK_itemRarityLevel.ID.rare`, `0.6` to a
+float). `skills` on a class takes an object of `CharacterSkills` flags (`"m_Sneak": true`) and is
+written to a private copy, so a data mod cannot leak a flag into the vanilla template. An unknown
+key is a warning and is skipped; a value that cannot be coerced is an error for that entry only.
+
+### Validation output
+
+Every load ends with one summary line in `BepInEx/LogOutput.log`, followed by one line per problem:
+
+```
+Data content load complete: 7/12 entries registered, 4 error(s), 2 warning(s), 31 ms.
+Data warning: [com.ftkmf.sampledata] weapon 'sampledata_unknown_field': unknown field 'thisFieldDoesNotExist'
+Data error: [com.ftkmf.sampledata] duplicate id 'sampledata_backstab' (second skipped)
+```
+
+Errors (duplicate id, unknown kind or template, coercion failure, dangling reference, malformed
+file) drop the offending entry or file; everything else in the mod still registers. The sample's
+`_validation_seed.json` and `broken.json` trip every category on purpose so you can see each
+message once. A mod blocked by its `frameworkVersion` logs `Blocked mod '<guid>': <reason>` and
+registers nothing.
+
+### Behaviour DLLs
+
+A data mod can ship compiled combat logic without becoming a BepInEx plugin. Declare
+`"behaviorDll": "MyBehaviors.dll"` in the manifest and place the DLL in the mod folder. Inside it,
+mark each `ProficiencyBase` subclass with `[ContentBehavior("Steal")]` from
+`FTKModFramework.Behaviors`; that attribute is the only framework type the DLL needs to reference.
+The framework keys the type as `modGuid:Name`, and a proficiency entry binds it with
+`"behavior": "Steal"` plus a `behaviorCategory`. The checked-in
+[`SampleData/com.ftkmf.samplebehaviormod`](../FTKModFramework/SampleData/com.ftkmf.samplebehaviormod)
+is the working reference; `com.ftkmf.brokendll` and `com.ftkmf.danglingbehavior` next to it show
+how a bad DLL or a missing behaviour name is isolated.
+
+The whole external-DLL pass is gated by the `[Data] EnableBehaviorLoading` config entry (default
+on, inert when no manifest declares a `behaviorDll`). With it off, entries that name a behaviour
+register as plain data and log a skip. Behaviour kinds are closed: `proficiency` is wired into the
+proficiency row, and `questlogic` (a `QuestLogicBase` subclass for custom objective verbs) is
+consumed by the campaign engine described in [`CAMPAIGNS.md`](CAMPAIGNS.md), not by a proficiency
+row. Encounter-level content authored in code is covered in [`ADVENTURES.md`](ADVENTURES.md).
+
+## 12. The in-game Mods browser: changes, saves, and co-op
 
 The title screen's **Mods** panel separates Discover, Installed, and Updates. Installed includes
 bundled, marketplace-managed, and manually installed content. Enable or package changes are
@@ -424,7 +602,7 @@ See [`MARKETPLACE.md`](MARKETPLACE.md) for the player and package-author contrac
 Two hazards remain important:
 
 - **Disabling a mod can break a save that references its content.** A save stores entities by their id.
-  The sharpest case is a playable class: classes register at `id == array index` (see §8), so a saved
+  The sharpest case is a playable class: classes register at `id == array index` (see §9), so a saved
   party member of a custom class is stored by that index. Turn the class's mod off and relaunch, and
   that index now resolves to a different class or to nothing, which can fail to load or corrupt the
   save. The same applies to any saved item, weapon, or in-progress encounter whose synthetic id is no
@@ -433,11 +611,11 @@ Two hazards remain important:
   recover that save.
 
 - **Co-op requires every player to enable the identical mod set.** Co-op is Photon with no asset
-  streaming (see §9): each client resolves IDs and assets locally. Framework-version preflight and
+  streaming (see §10): each client resolves IDs and assets locally. Framework-version preflight and
   package hashes do not prove that two players have the same complete installation. Agree on the
   enabled set with the other players before starting a co-op run.
 
-## 12. Public capability map
+## 13. Public capability map
 
 The full inventory of the 57 `FTK_*DB` tables (items, weapons, proficiencies, hit effects,
 classes, skinsets, enemies, realms, encounters, quests, ...) is in
@@ -445,9 +623,10 @@ classes, skinsets, enemies, realms, encounters, quests, ...) is in
 
 | Capability | Public entry point | Guide |
 |---|---|---|
-| Items, weapons, proficiencies, classes, enemies, encounters | `Content.Add*`, `Content.Attach*` | This guide |
-| Combat status effects (duration, refresh, targeting, icons) | `Content.AddProficiency` with a vanilla status row as the template | §5.1 and the bundled Hoarfrost Maul |
-| Class-innate passive traits | `Content.AddPassive` | This guide and the bundled Innkeeper |
+| Items, weapons, proficiencies, classes, enemies, encounters | `Content.Add*`, `Content.Attach*` | §3, §4, §7, §8 |
+| Combat status effects (duration, refresh, targeting, icons) | `Content.AddProficiency` with a vanilla status row as the template | §6.1 and the bundled Hoarfrost Maul |
+| Class-innate passive traits (`PassiveTrigger` closed set, no probability) | `Content.AddPassive` | §5 and the bundled Innkeeper |
+| Data-authored JSON mods, field aliases, behaviour DLLs | `manifest.json` + content `.json` (`Core/Data`) | §11 and `SampleData/com.ftkmf.sampledata` |
 | Adventures, campaigns, quests, NPCs, end-game art | `Adventures.*`, `CampaignBuilder`, `QuestBuilder` | [`ADVENTURES.md`](ADVENTURES.md), [`CAMPAIGNS.md`](CAMPAIGNS.md) |
 | Enemy visuals, meshes, materials, portraits, fall-off | `Content.SetEnemy*` | [`CUSTOM-MODELS.md`](CUSTOM-MODELS.md), [`MODEL-RENDERER-API.md`](MODEL-RENDERER-API.md) |
 | Player body, hair, and conditional apparel | `Content.SetClassBodyMeshesFromGlb` | [`MODEL-PLAYER-API.md`](MODEL-PLAYER-API.md) |

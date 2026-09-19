@@ -198,7 +198,7 @@ dependency for other mods).
 
 Content can also be authored as **pure data**, no C# required: a mod folder with a `manifest.json`
 and one or more content JSON files is discovered and loaded at startup, and the title screen's
-**Mods** panel manages each mod (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §10).
+**Mods** panel manages each mod (see [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md) §12).
 Every manifest must declare its own release `version` and an author-confirmed `frameworkVersion`;
 missing, invalid, older, or different-major declarations remain visible but do not load.
 
