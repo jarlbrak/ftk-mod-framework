@@ -4,7 +4,7 @@ from pathlib import Path
 import unittest
 
 import verify_model_validation_archive as verifier
-from local_inputs import lossless_archive_files, skip_without_local_inputs
+from local_inputs import lossless_archive_files, skip_without_local_evidence
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -18,7 +18,7 @@ CANONICAL_ARCHIVES = (
 )
 
 
-@skip_without_local_inputs(*(path for archive in CANONICAL_ARCHIVES for path in lossless_archive_files(archive)))
+@skip_without_local_evidence(*(path for archive in CANONICAL_ARCHIVES for path in lossless_archive_files(archive)))
 class CurrentCanonicalArchiveTests(unittest.TestCase):
     def test_current_canonical_archives_have_intact_artifact_evidence(self) -> None:
         for relative in CANONICAL_ARCHIVES:

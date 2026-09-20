@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 from pathlib import Path
 from typing import Any, Callable, Iterable
 import unittest
@@ -60,6 +61,28 @@ def skip_without_local_inputs(*paths: Path | str) -> Callable[[Any], Any]:
     if missing:
         return unittest.skip(skip_reason(missing))
     return lambda target: target
+
+
+LOCAL_EVIDENCE_ENV = "FTKMF_PIPELINE_LOCAL_EVIDENCE"
+
+
+def local_evidence_enabled() -> bool:
+    return os.environ.get(LOCAL_EVIDENCE_ENV, "") == "1"
+
+
+def skip_without_local_evidence(*paths: Path | str) -> Callable[[Any], Any]:
+    """Gate a test that pins machine-local artifacts (built DLL hashes, capture media).
+
+    Presence alone is not enough: CI builds the framework, so a freshly built
+    DLL exists there with a different hash than the pinned evidence. The test
+    runs only when the operator opts in with FTKMF_PIPELINE_LOCAL_EVIDENCE=1
+    and every pinned path is present.
+    """
+    if not local_evidence_enabled():
+        return unittest.skip(
+            f"local-only evidence test: set {LOCAL_EVIDENCE_ENV}=1 on a machine that holds "
+            "the pinned build outputs and capture media")
+    return skip_without_local_inputs(*paths)
 
 
 def require_python_modules(*names: str) -> None:

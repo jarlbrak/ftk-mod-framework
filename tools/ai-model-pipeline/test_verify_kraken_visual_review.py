@@ -7,10 +7,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import verify_kraken_visual_review as verifier
-from local_inputs import evidence_paths, skip_without_local_inputs
+from local_inputs import evidence_paths, skip_without_local_evidence
 
 
-requires_raw_captures = skip_without_local_inputs(*evidence_paths(verifier.DEFAULT_REVIEW))
+requires_raw_captures = skip_without_local_evidence(*evidence_paths(verifier.DEFAULT_REVIEW))
 
 
 class KrakenVisualReviewTests(unittest.TestCase):

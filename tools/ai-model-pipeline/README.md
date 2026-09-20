@@ -117,8 +117,20 @@ The suite must finish with `OK` on a clean clone. Tests are in two groups:
   path, so a skip is expected on a clean clone and a failure is a real
   regression. The helpers live in `local_inputs.py`; a new test that reads a
   gitignored input must use them rather than fail with `FileNotFoundError`.
+- **Local evidence tests** are the subset of local-only tests that pin exact
+  hashes of machine-local artifacts: the built framework DLL, the runtime
+  helper DLL, and capture media. Presence is not enough for these, because CI
+  builds a fresh DLL whose hash differs from the pinned evidence. They run only
+  when `FTKMF_PIPELINE_LOCAL_EVIDENCE=1` is set and every pinned path exists,
+  and skip with a reason that says so otherwise:
 
-Local-only tests and the inputs each one needs:
+  ```sh
+  FTKMF_PIPELINE_LOCAL_EVIDENCE=1 python3 -m unittest discover \
+    -s tools/ai-model-pipeline -p 'test_*.py'
+  ```
+
+Local-only tests and the inputs each one needs. Rows marked "evidence" also
+require `FTKMF_PIPELINE_LOCAL_EVIDENCE=1`:
 
 | Test module | Required local inputs |
 |---|---|
@@ -127,11 +139,11 @@ Local-only tests and the inputs each one needs:
 | `test_scaffold_model_package_current.py`, `test_verify_model_authoring_references_current.py` | The pinned authoring catalogs `scratch/model-authoring-kit-catalog-v54.json` and `-v53.json` (`plan_model_authoring_kit.py --all-routes`) plus the `scratch/model-venv` interpreter from the setup section |
 | `test_kraken_production_adapter_contract_current.py` (evidence hash test) | `scratch/CharacterEventListener.analysis.cs`, the local decompile pinned by the adapter contract |
 | `test_verify_kraken_skin_probe.py`, `test_verify_kraken_companion_skin.py` | `scratch/kraken-owned-skin-probe-v1/` (GLB and manifest) and `scratch/gloamfin-four-scenario-plan-v1/` from the Kraken skin-probe campaign |
-| `test_verify_hearthveil_canonical_archive.py`, `test_verify_kraken_canonical_archive.py`, `test_verify_wildbloom_canonical_archive.py` (current-archive test), `test_audit_model_validation_archive_integrity_current.py` (Hearthveil test) | Every file pinned by the archive's `integrity.json` under `art-experiments/*/live-validation-*-canonical/`, including the gitignored `.png`, `.gz`, and `.jsonl` captures |
-| `test_verify_model_validation_archive_current.py`, `test_verify_model_validation_archive_player_current.py` | The lossless `metadata/*.gz` files named by each indexed archive's `validation.json` under `art-experiments/` |
-| `test_verify_kraken_production_archive.py` | The compressed reports and screenshot pinned by `docs/evidence/kraken-production-adapter-v1/integrity.json` |
-| `test_verify_kraken_portrait_followup.py` | The built `FTKModFramework/bin/Release/net35/FTKModFramework.dll`, the runtime helper DLL, and the `scratch/kraken-portrait-followup-v2` captures pinned by `docs/evidence/kraken-portrait-followup-v1/validation.json` |
-| `test_verify_kraken_visual_review.py` (raw-capture tests) | The `scratch/mirewarden-game/model-test-output/` captures pinned by `docs/evidence/kraken-production-visual-v1/review.json` |
+| `test_verify_hearthveil_canonical_archive.py`, `test_verify_kraken_canonical_archive.py`, `test_verify_wildbloom_canonical_archive.py` (current-archive test), `test_audit_model_validation_archive_integrity_current.py` (Hearthveil test) (evidence) | Every file pinned by the archive's `integrity.json` under `art-experiments/*/live-validation-*-canonical/`, including the gitignored `.png`, `.gz`, and `.jsonl` captures |
+| `test_verify_model_validation_archive_current.py`, `test_verify_model_validation_archive_player_current.py` (evidence) | The lossless `metadata/*.gz` files named by each indexed archive's `validation.json` under `art-experiments/` |
+| `test_verify_kraken_production_archive.py` (evidence) | The compressed reports and screenshot pinned by `docs/evidence/kraken-production-adapter-v1/integrity.json` |
+| `test_verify_kraken_portrait_followup.py` (evidence) | The built `FTKModFramework/bin/Release/net35/FTKModFramework.dll`, the runtime helper DLL, and the `scratch/kraken-portrait-followup-v2` captures pinned by `docs/evidence/kraken-portrait-followup-v1/validation.json` |
+| `test_verify_kraken_visual_review.py` (raw-capture tests) (evidence) | The `scratch/mirewarden-game/model-test-output/` captures pinned by `docs/evidence/kraken-production-visual-v1/review.json` |
 | `test_multi_primitive_glb.py` (byte-regression test) | `scratch/skeleton-audit/121328/reference.npz` from a pre-change extraction |
 
 Extracted game data and live captures are never committed. A local-only test
