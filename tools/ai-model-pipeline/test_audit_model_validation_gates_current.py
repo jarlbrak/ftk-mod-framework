@@ -7,11 +7,17 @@ from pathlib import Path
 import unittest
 
 import audit_model_validation_gates as gates
+from local_inputs import skip_without_local_inputs
 
 
 ROOT = Path(__file__).resolve().parents[2]
+LOCAL_INPUTS = (
+    "scratch/enemy-rig-mapping-reproducible.json",
+    "scratch/resource-enemy-base-preflight.json",
+)
 
 
+@skip_without_local_inputs(*LOCAL_INPUTS)
 class CurrentValidationGateLedgerTests(unittest.TestCase):
     def test_generated_json_matches_current_inputs(self) -> None:
         report = gates.audit(

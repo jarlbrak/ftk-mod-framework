@@ -8,8 +8,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import verify_kraken_canonical_archive as verifier
+from local_inputs import integrity_files, skip_without_local_evidence
 
 
+@skip_without_local_evidence(*integrity_files(verifier.DEFAULT))
 class KrakenCanonicalArchiveTests(unittest.TestCase):
     def test_current_archive(self):
         result = verifier.verify()

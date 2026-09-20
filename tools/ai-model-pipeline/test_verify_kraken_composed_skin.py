@@ -1,4 +1,7 @@
 """Composed-arm routing/identity checks; full geometry math remains in original skin tests."""
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy")
 import copy,unittest
 from unittest.mock import patch
 from verify_kraken_composed_skin import inspect_composed,COMPOSED

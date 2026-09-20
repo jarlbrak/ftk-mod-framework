@@ -1,4 +1,7 @@
 """Nonconstant synthetic report corruption tests; no Unity mixer simulation claim."""
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy")
 import copy,json,tempfile,unittest
 from pathlib import Path
 import numpy as np

@@ -1,8 +1,13 @@
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy", "PIL")
 import copy,json,tempfile,unittest
 from pathlib import Path
 import numpy as np
 from verify_kraken_skin_probe import *
 import test_verify_gloamfin_skin as organic_tests
+from local_inputs import skip_without_local_inputs
+@skip_without_local_inputs('scratch/gloamfin-four-scenario-plan-v1/'+CAPTURE_PLAN_FILE)
 class CompanionTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):

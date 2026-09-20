@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import struct
 import tempfile
 import unittest
@@ -174,6 +175,8 @@ class ArchivePlayerModelValidationTests(unittest.TestCase):
                 archiver.build_archive(fixture.plan_path, workspace_root=fixture.root, render_videos=False)
             self.assertFalse((fixture.root / "art-experiments/player-example/live-validation-v1").exists())
 
+    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"),
+                         "ffmpeg and ffprobe are required to render the presentation video")
     def test_renders_a_verified_presentation_video_when_enabled(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             fixture = PlayerArchivePlanFixture(Path(temporary))

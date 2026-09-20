@@ -7,6 +7,7 @@ from pathlib import Path
 import unittest
 
 import audit_topology_coverage as audit
+from local_inputs import skip_without_local_inputs
 
 ROOT = Path(__file__).resolve().parents[2]
 CANDIDATES = ROOT / 'docs/model-skeleton-candidates.json'
@@ -27,6 +28,7 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+@skip_without_local_inputs(MAPPING, RIGS, RESOURCE_PATHS, RESOURCES, CATALOG)
 class CurrentTopologyOwnershipTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

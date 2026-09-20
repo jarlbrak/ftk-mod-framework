@@ -1,4 +1,7 @@
 """Nonconstant composed-policy corruption tests. Synthetic poses are not Unity evidence."""
+from local_inputs import require_python_modules
+# audit_kraken_adapter imports UnityPy at module level; skip instead of failing to import.
+require_python_modules("UnityPy", "numpy", "scipy")
 import copy,unittest
 import numpy as np
 from audit_kraken_adapter import MAPPING,models

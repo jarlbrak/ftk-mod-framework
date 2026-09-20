@@ -4,6 +4,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from local_inputs import integrity_files, skip_without_local_evidence
+
 
 HERE = Path(__file__).resolve().parent
 SPEC = importlib.util.spec_from_file_location("verify_wildbloom", HERE / "verify_wildbloom_canonical_archive.py")
@@ -12,6 +14,7 @@ SPEC.loader.exec_module(MODULE)
 
 
 class WildbloomCanonicalArchiveTests(unittest.TestCase):
+    @skip_without_local_evidence(*integrity_files(MODULE.DEFAULT))
     def test_current_archive(self):
         result = MODULE.verify()
         self.assertTrue(result["ok"])

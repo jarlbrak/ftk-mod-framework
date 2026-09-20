@@ -7,6 +7,8 @@ import sys
 import tempfile
 import unittest
 
+from local_inputs import require_local_inputs
+
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "tools/ai-model-pipeline/plan_model_validation_campaign.py"
@@ -17,15 +19,27 @@ sys.modules[SPEC.name] = campaign
 SPEC.loader.exec_module(campaign)
 
 
+LOCAL_INPUTS = (
+    "scratch/model-validation-stage-readiness.json",
+    "scratch/mirewarden-game",
+)
+
+
 class CurrentModelValidationCampaignTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.report = campaign.build_campaign(
-            ROOT,
-            ROOT / "docs/model-validation-execution-queue.json",
-            ROOT / "scratch/model-validation-stage-readiness.json",
-            ROOT / "scratch/mirewarden-game",
-        )
+    _report: dict | None = None
+
+    @property
+    def report(self) -> dict:
+        # Built lazily so the synthetic-root tests still run on a clone without scratch data.
+        require_local_inputs(*LOCAL_INPUTS)
+        if type(self)._report is None:
+            type(self)._report = campaign.build_campaign(
+                ROOT,
+                ROOT / "docs/model-validation-execution-queue.json",
+                ROOT / "scratch/model-validation-stage-readiness.json",
+                ROOT / "scratch/mirewarden-game",
+            )
+        return type(self)._report
 
     def test_every_backlog_route_has_one_exact_next_step(self) -> None:
         summary = self.report["summary"]

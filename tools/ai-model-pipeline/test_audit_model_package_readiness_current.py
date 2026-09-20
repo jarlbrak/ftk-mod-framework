@@ -6,11 +6,19 @@ from pathlib import Path
 import unittest
 
 import audit_model_package_readiness as readiness
+from local_inputs import skip_without_local_inputs
 
 
 ROOT = Path(__file__).resolve().parents[2]
+LOCAL_INPUTS = (
+    "scratch/enemy-rig-mapping-reproducible.json",
+    "scratch/resource-enemy-base-preflight.json",
+    "scratch/rig-candidate-classification.json",
+    "scratch/static-renderer-inventory.json",
+)
 
 
+@skip_without_local_inputs(*LOCAL_INPUTS)
 class CurrentPackageReadinessTests(unittest.TestCase):
     def report(self) -> dict:
         mapping = ROOT / "scratch/enemy-rig-mapping-reproducible.json"

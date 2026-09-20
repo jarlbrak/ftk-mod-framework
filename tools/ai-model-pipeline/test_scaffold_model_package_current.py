@@ -7,6 +7,8 @@ import sys
 import tempfile
 import unittest
 
+from local_inputs import require_local_inputs
+
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "tools/ai-model-pipeline/scaffold_model_package.py"
@@ -18,10 +20,16 @@ SPEC.loader.exec_module(scaffold)
 
 
 class CurrentModelPackageScaffoldTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.catalog_path = ROOT / "scratch/model-authoring-kit-catalog-v54.json"
-        cls.catalog = json.loads(cls.catalog_path.read_text())
+    catalog_path = ROOT / "scratch/model-authoring-kit-catalog-v54.json"
+    _catalog: dict | None = None
+
+    @property
+    def catalog(self) -> dict:
+        # Read lazily so the syntax-only tests still run on a clone without scratch data.
+        require_local_inputs(self.catalog_path)
+        if type(self)._catalog is None:
+            type(self)._catalog = json.loads(self.catalog_path.read_text())
+        return type(self)._catalog
 
     def test_current_catalog_builds_complete_player_package_metadata(self) -> None:
         route = scaffold.select_route(self.catalog, "45c7a9b9fb730195", "playerSkinset")

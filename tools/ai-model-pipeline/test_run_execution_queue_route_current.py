@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 TOOL_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(TOOL_DIR / "runtime-test"))
 import run_execution_queue_route as runner
+from local_inputs import skip_without_local_inputs
 
 
 QUEUE_PATH = ROOT / "docs/model-validation-execution-queue.json"
@@ -17,6 +18,7 @@ STAGE_PATH = ROOT / "scratch/model-validation-stage-readiness.json"
 GAME = ROOT / "scratch/mirewarden-game"
 
 
+@skip_without_local_inputs(STAGE_PATH, GAME)
 class CurrentExecutionQueueRouteRunnerTests(unittest.TestCase):
     def test_every_stage_ready_route_has_one_pinned_selected_revision(self) -> None:
         stage = json.loads(STAGE_PATH.read_text())
