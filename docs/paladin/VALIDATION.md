@@ -253,5 +253,7 @@ alone. This procedure establishes package handling, not gameplay or save behavio
 
 The [first supplemental front-view capture](novice-combat-studio-framing.json)
 completed 100 frames but clipped during the bent attack pose. Native screen
-frames are retained. A camera-framing correction builds and passes boundary
-checks; a fresh live trial is required before chest clearance can be accepted.
+frames are retained. The [corrected native male attack trial](novice-combat-studio-fixed.json)
+completes 100 paired frames, with no camera clipping in reviewed bent, recovery
+and victory poses. The shield hides part of the wind-up; female two-handed
+and broader motion acceptance remain open.

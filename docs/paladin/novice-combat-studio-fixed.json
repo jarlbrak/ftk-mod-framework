@@ -1,0 +1,65 @@
+{
+  "schema": "ftkmf.paladin-combat-studio-fixed.v1",
+  "status": "bounded-male-one-handed-preview-reviewed",
+  "session": "495cfe2f14864f59b0d8444ad5583c96",
+  "captureId": "1fb84b3200ea4d52b962399b29f207ad",
+  "captureReceiptSha256": "ba69c25f48c9ddc432081218436ab231743b4a6a210be2e9d85b3ed7c0729e77",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "41897eaf3f7e8635e9df6fa727cb8fc5e409a4f3505c43020c43af26257073bc",
+  "armorSha256": "18a848e5d6c9998e951fb8c898f2fab17c0b0e621d2ddb0296afceb15eab1501",
+  "ownerInstanceId": 368986,
+  "celInstanceId": -328802,
+  "frames": 100,
+  "timingMode": "offline-fixed-step-gameplay",
+  "lastGameSeconds": 10.8900146484375,
+  "reviewedFrames": [
+    {
+      "index": 36,
+      "studioSha256": "ff9acbacb159a9e44da53cd63746fc068d4d26c81074e990832cd4bc65356548",
+      "screenSha256": "510d09b104fd981d8ff51ca50da9bdba6cbd45f3d8e9bef5083273add4c173fc",
+      "normalizedTime": 0.22687500715255737,
+      "clip": "attack_blunt1H"
+    },
+    {
+      "index": 42,
+      "studioSha256": "0564d2afb4f432aec0f6eac9a5de8d21e38cc989ea0d6effd38ec52331ec955e",
+      "screenSha256": "8f52f007d3e0ac0b6c7a8e18a6f5dfc9c9fb1f0ac52b1bbcdd1dde1db802e8dc",
+      "normalizedTime": 0.4991249442100525,
+      "clip": "attack_blunt1H"
+    },
+    {
+      "index": 50,
+      "studioSha256": "0138bdc9001518ba48d1d4bee49801eb7a8c6a8245bb6c95ac8b7f798c4fea21",
+      "screenSha256": "028d557d0f85ffb151870d700e25a1c768eabd30772f46d95f98bbd767e35810",
+      "normalizedTime": 0.8621248602867126,
+      "clip": "attack_blunt1H"
+    },
+    {
+      "index": 75,
+      "studioSha256": "bb571db5fae374272b7f88d48cb6ca836f2e8f47aa5b2dfba462fe39621ab51f",
+      "screenSha256": "b31f3d146751529d501e1406c7310affeeb19df950f9af9b708ccc33d938cd1b",
+      "normalizedTime": 0.6083154082298279,
+      "clip": "blunt1H_victory"
+    }
+  ],
+  "action": "Native Ready, Hunter and female Paladin passes, then one male no-focus Smash. Target HP changes from 8 to 0.",
+  "captureChecks": {
+    "allStudioPngHashesMatch": true,
+    "normalScreensRetained": true,
+    "fixedFacingEveryFrame": true,
+    "nondecreasingSpan": true,
+    "layersRestoredEveryFrame": true
+  },
+  "observations": [
+    "Attack clip sampled at frames 34 through 53, normalized progress 0.136125 through 0.998250.",
+    "Reviewed bent attack frame 42 no longer clips the studio camera through the avatar.",
+    "Visible breastplate and sleeves remain attached in sampled bent, recovery and victory poses.",
+    "Shield occludes much of the wind-up chest; this angle cannot establish its hidden clearance."
+  ],
+  "limitations": [
+    "Selected frame review only; not every pose or all-race fit acceptance.",
+    "No female two-handed, received-damage or death capture in this run.",
+    "Supplemental studio lights and fixed-step timing are not normal gameplay presentation or performance.",
+    "No user art approval, full current archive game installation, acquisition or online claim."
+  ]
+}

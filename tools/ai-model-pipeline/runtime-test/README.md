@@ -532,11 +532,13 @@ A preview still requires the existing single-player guard to succeed.
   lighting, bone-based framing, restored renderer layers and temporary resources.
   It does not move the native camera or change equipment, pose or gameplay.
   Added rendering cost can slow capture; inspect sampled clip progress rather
-  than treating requested duration as coverage. Live combat validation of this
-  corrected framing remains pending. The first live supplement clipped during
-  a bent attack pose; the correction keeps the initial horizontal facing, world
-  up and a nondecreasing framing span. The failed trial is retained in
+  than treating requested duration as coverage. The first live supplement clipped
+  during a bent attack pose; the correction keeps the initial horizontal facing,
+  world up and a nondecreasing framing span. The failed trial is retained in
   [the Paladin framing receipt](../../../docs/paladin/novice-combat-studio-framing.json).
+  A [fresh native male attack capture](../../../docs/paladin/novice-combat-studio-fixed.json)
+  verifies corrected framing in sampled poses; shield occlusion and untested
+  characters or clips remain separate visual limits.
 
   Enemy-only `motionObservation:true` is available for an ordinary `capture`,
   never `play`. It requires the selected live custom skinned renderer's exact
