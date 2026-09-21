@@ -35,6 +35,14 @@ def main():
             entry=by_id['paladin_'+family+'_'+tier]
             assert (entry['fields']['minlevel'],entry['fields']['maxlevel'])==[(0,1),(2,3),(4,6),(7,13)][min(index,3)]
             assert entry['fields']['dropable'] and entry['fields']['townmarket']
+            # Every progression option must remain configured for acquisition,
+            # including players without DLC. Live stock selection is a separate gate.
+            assert entry['fields']['dlc']=='None',entry['id']
+            assert entry['fields']['_shopStock']==1,entry['id']
+            assert entry['fields']['m_DungeonMerchant'] is True,entry['id']
+            assert entry['fields']['m_NightMarket'] is True,entry['id']
+            assert entry['fields']['goldvalue']==[12,70,200,360][min(index,3)],entry['id']
+            assert entry['fields']['rarity']==('common' if index<2 else 'rare'),entry['id']
             # Native LootAccept treats this as a lore identifier, not a boolean.
             assert entry['fields']['m_CollectLoreItemUnlock']=='',entry['id']
             if family.startswith('hammer'):assert entry['fields']['skill']=='vitality'
