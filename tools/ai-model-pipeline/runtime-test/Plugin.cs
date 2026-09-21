@@ -144,7 +144,8 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             // This diagnostic intentionally runs before the normal game-state
             // guard so it can report why the native Create Game route is not
             // currently eligible.  It only reads the native menu graph.
-            if (op == "native-create-character-preflight") Finish(id, NativeCreateCharacterPreflight(command));
+            if (op == "native-title-new-game") Finish(id, NativeTitleNewGame(command));
+            else if (op == "native-create-character-preflight") Finish(id, NativeCreateCharacterPreflight(command));
             else if (op == "native-create-character-input-state") Finish(id, NativeCreateCharacterInputState(command));
             else
             {

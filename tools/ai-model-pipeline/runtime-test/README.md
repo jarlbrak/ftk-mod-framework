@@ -2423,6 +2423,25 @@ captures as the authority for behavior, ordinary lethal, victory and teardown.
 
 ### Native Party Select Start
 
+### Native title New Game
+
+`native-title-new-game` makes the title-to-configuration transition repeatable
+when an isolated run needs a fresh native campaign. First send `action:
+"inspect"`. The read-only response lists the exact active buttons whose sole
+persistent callback targets `StartGameFE.MainScreen.OnNewGame`. Select the
+native `ButtonRoot/New/playButton` by its returned `buttonInstanceId`, then
+inspect again with that ID. Submit the returned `inspectionToken` and same
+button ID with `action: "submit"`.
+
+The route requires the active native `MainScreen`, its input focus, the current
+`uiStartGame`, and a live configuration object. It consumes one process-local
+claim before calling `MainScreen.OnNewGame`; a changed screen, menu or selected
+button rejects the request. A framework-added title control can share the same
+callback, so callback identity alone is deliberately insufficient. Submission
+only establishes the native `Game Config` transition. Use
+`native-create-character-screen` afterward to verify the Create Game gate and
+invoke that separate native callback.
+
 `native-party-class` performs one native class-arrow step. Send `action: "inspect"`,
 the exact `ownerInstanceId`, registered `classKey`, `targetClassId` (Wildbloom: 114),
 and `direction: "left"` or `"right"`. Submit the same fields with the returned
