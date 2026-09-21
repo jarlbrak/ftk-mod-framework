@@ -6,8 +6,9 @@ portrait experiments are archived in ignored scratch and are not runtime assets.
 
 There are 24 runtime models: female and male armor, shared boots and a rigid helmet
 for each of Novice, Oathkeeper, Highward, Mercy, Censure and Verdict. Novice uses
-fitted red plate, warm gold edging and small layered pauldrons inspired by the
-broad visual language of classic Lightforge. Later sets retain their own colors
+a bent iron breastplate over a slate padded tunic, single compact shoulder caps,
+brown leather boots and an unadorned open-face cap. Gold borders and order seals
+are reserved for later progression. Later sets retain their own colors
 and ornaments with a fitted faceted chest and defined waist. All surfaces,
 textures and symbols are original; no native surface geometry is read or copied.
 
@@ -57,3 +58,18 @@ above a dark sole. Shallow transverse seams imply layered articulation without
 intersecting closed plate caps, and narrow side piping replaces the bright gold
 toe cap. Lower-leg armor stays inside the boot shell. Native fit remains a separate
 check after this revision.
+
+## Plain Novice revision
+
+Novice now uses a fitted dark gambeson with a shallow iron chest sheet, narrow
+leather straps, a belt buckle, small shoulder caps and a simple open-face cap.
+The torso extends to the neckline instead of relying on a projecting breastplate
+to cover a gap. Leather boots use horizontal shoe sections for flat soles and
+rounded toes. There are no gold borders, order seals or layered shoulder ornaments.
+Oathkeeper retains its previous helmet; later sets retain their geometry and palette.
+
+The [native fitted preview receipt](../../docs/paladin/novice-fitted-preview.json)
+records Female/Male three-quarter views. The earlier flat-plate and recolored-boot
+attempts were rejected. This replacement is a review candidate: offline geometry,
+binding and package checks pass, but user approval, movement and nonhuman fit
+remain open. Previous Novice screenshots do not establish the new revision's fit.

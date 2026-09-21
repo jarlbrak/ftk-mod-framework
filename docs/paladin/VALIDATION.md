@@ -8,8 +8,12 @@ cleared spent rescue usage during native revival. The fix is built in framework
 with 133 pure-rule and 21 installed-metadata checks passing. Its [native spent-charge revival and Guard-recast regression passed](guardian-revival-live.json). See [verified native callers and live gates](guardian-revival-native.json)
 and [earlier lifecycle observations](guard-lifecycle-observations.json).
 
-The current unpublished package SHA-256 is
-`92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295`.
+The current unpublished art candidate SHA-256 is
+`176253bec3e40dbe383ff3bf22223e977fbe5298454a88d4e4e72674884417f1`.
+It revises Novice armor, boots, helmet and their display assets. The prior
+`92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295`
+package retains its historical gameplay and lifecycle evidence; those receipts
+do not validate the revised art bytes.
 It contains **137 runtime files: 135 original equipment assets, manifest and
 content**, with one class, two Censure actions and 36 gear entries. It corrects
 all 36 equipment `m_CollectLoreItemUnlock` values to empty strings. The earlier
@@ -29,7 +33,10 @@ See the [native appearance contract](native-appearance-contract.json).
 The [native character preview receipt](native-character-armor-preview.json) and
 [third armor revision](armor-revision3-review.json) cover the six sets on actual
 Female and Male avatars, including front and three-quarter views in revision 3.
-The slimmer novice silhouette and shaped toes/soles supersede earlier art. A
+Novice revision 3 and the first plain revision were subsequently rejected.
+The [fitted Novice candidate](novice-fitted-preview.json) now records native
+Female/Male three-quarter previews with a smaller chest plate, dark cloth and
+new leather boots. User approval, motion and nonhuman fit remain open. A
 [Mercy race preview](native-race-preview.json) covers front views on Female, Male,
 Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes.
 These are pose/fit observations, not full animation or all-set nonhuman fit
@@ -67,7 +74,7 @@ The class is `paladin`; actions are `paladin_censure_fracture` and
 
 | Set | Acquisition levels | Current visual evidence |
 | --- | --- | --- |
-| novice | 0-1 | Native Female/Male front and three-quarter revision-3 previews |
+| novice | 0-1 | Fitted candidate: native Female/Male three-quarter previews; approval and motion pending |
 | oathkeeper | 2-3 | Native Female/Male front and three-quarter revision-3 previews |
 | highward | 4-6 | Native Female/Male front and three-quarter revision-3 previews |
 | mercy | 7-13 | Same previews; seven native appearances in a separate front-view trial |

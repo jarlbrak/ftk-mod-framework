@@ -140,66 +140,117 @@ def helmet(endgame):
 
 
 def novice_front_plate(s,center,width):
-    # Two original shallow closed plates form a narrow gold edge around a red V.
-    outline=[(-width,.22),(-width,-.07),(-width*.22,-.275),(width*.22,-.275),(width,-.07),(width,.22)]
-    for scale,color,depth in [(1.0,4,0),(.89,6,.015)]:
-        front=[center+np.array([x*scale,y*scale,.028+depth]) for x,y in outline]
-        back=[center+np.array([x*scale,y*scale,-.015+depth]) for x,y in outline]
-        begin=len(s.data["positions"])
-        for i in range(1,len(front)-1):
-            s.triangle([front[0],front[i],front[i+1]],["Chest_M"]*3,color)
-            s.triangle([back[0],back[i+1],back[i]],["Chest_M"]*3,color)
-        for i in range(len(front)):
-            j=(i+1)%len(front)
-            s.triangle([front[i],back[i],back[j]],["Chest_M"]*3,color)
-            s.triangle([front[i],back[j],front[j]],["Chest_M"]*3,color)
-        s.pieces.append({"name":"Novice edged red breastplate "+str(color),"vertex_start":begin,"vertex_count":len(s.data["positions"])-begin})
+    """Closed bent sheet with a shallow ridge, clipped armholes and a fitted waist."""
+    # Each row is a measured design cross-section, not a shield-shaped flat polygon.
+    rows=[(.15,.76,.010),(.075,1.0,.030),(-.10,.88,.025),(-.205,.66,.005)]
+    grid=[]
+    for y,reach,depth in rows:
+        grid.append([center+np.array([x*width*reach,y,depth-.070*abs(x)]) for x in [-1,-.52,0,.52,1]])
+    begin=len(s.data["positions"])
+    for r in range(3):
+        for c in range(4):
+            q=[grid[r][c],grid[r+1][c],grid[r+1][c+1],grid[r][c+1]]
+            s.triangle([q[0],q[1],q[2]],["Chest_M"]*3,1)
+            s.triangle([q[0],q[2],q[3]],["Chest_M"]*3,1)
+            q=[v-np.array([0,0,.018]) for v in q]
+            s.triangle([q[2],q[1],q[0]],["Chest_M"]*3,1)
+            s.triangle([q[3],q[2],q[0]],["Chest_M"]*3,1)
+    edge=grid[0]+[grid[r][-1] for r in range(1,4)]+list(reversed(grid[-1][:-1]))+[grid[r][0] for r in [2,1]]
+    for i,v in enumerate(edge):
+        w=edge[(i+1)%len(edge)];back=np.array([0,0,-.018])
+        s.triangle([v,w,w+back],["Chest_M"]*3,1)
+        s.triangle([v,w+back,v+back],["Chest_M"]*3,1)
+    s.pieces.append({"name":"Novice bent iron breastplate","vertex_start":begin,"vertex_count":len(s.data["positions"])-begin})
+    for sign in [-1,1]:
+        s.ellipsoid("Novice strap rivet",center+np.array([sign*width*.62,.105,.010]),(.012,.012,.007),"Chest_M",2,sides=6)
 
 
 def novice_armor(s,male):
-    """Close-fitted red plate with small angular layered shoulders."""
-    B=s.B; width=.35 if male else .315
+    """Plain iron breastplate over leather and cloth with small shoulder caps."""
+    B=s.B; width=.315 if male else .30
     spine=["Root_M","BackA_M","BackB_M","Chest_M"]
-    s.tube("Novice fitted red cuirass",[B[b] for b in spine],[width*.73,width*.81,width,width],[.205,.21,.23,.23],spine,6,sides=8)
-    s.tube("Novice narrow waist edging",[offset(B["Root_M"],y=.075),offset(B["Root_M"],y=.12)],[width*.78]*2,[.219]*2,["Root_M"]*2,4)
+    s.tube("Novice fitted gambeson",[B[b] for b in spine]+[offset(B["Chest_M"],y=.21),offset(B["Neck_M"],y=-.025)],
+           [width*.79,width*.86,width,width,width*.86,.145],
+           [.175,.18,.195,.195,.165,.12],spine+["Chest_M","Neck_M"],0,sides=12)
+    s.tube("Novice leather belt",[offset(B["Root_M"],y=.075),offset(B["Root_M"],y=.135)],[width*.78]*2,[.19]*2,["Root_M"]*2,11)
     chest=B["Chest_M"]
-    novice_front_plate(s,offset(chest,z=.237),width*.84)
-    emblem(s,offset(chest,y=.04,z=.298),"Chest_M",.075)
-    for sign in [-1,1]:
-        s.tube("Novice angular gold rib edging",[offset(chest,x=sign*width*.82,y=.10,z=.145),offset(chest,x=sign*width*.73,y=-.17,z=.162),offset(chest,x=sign*width*.32,y=-.33,z=.20)],[.025,.028,.019],[.025,.025,.018],["Chest_M","Chest_M","BackB_M"],4,sides=4)
-    s.tube("Novice slim gorget",[offset(chest,y=.15),offset(B["Neck_M"],y=-.025)],[.225,.145],[.19,.133],["Chest_M","Neck_M"],4,sides=8)
-    emblem(s,offset(B["Root_M"],y=.11,z=.244),"Root_M",.055)
+    novice_front_plate(s,offset(chest,y=.095,z=.208),width*.81)
+    s.ellipsoid("Novice iron belt buckle",offset(B["Root_M"],y=.105,z=.202),(.040,.031,.012),"Root_M",1,sides=4)
     for side,sign in [("R",1),("L",-1)]:
-        s.tube("Novice wrapped rib plate "+side,[offset(chest,x=sign*width*.82,y=.15,z=.09),offset(chest,x=sign*width*.79,y=-.07,z=.10),offset(chest,x=sign*width*.58,y=-.25,z=.13)],[.058,.060,.04],[.123,.11,.07],["Chest_M","Chest_M","BackB_M"],4,sides=6)
+        s.tube("Novice leather shoulder strap "+side,[offset(chest,x=sign*.15,y=.255,z=.12),offset(chest,x=sign*.15,y=.205,z=.211)],[.028,.028],[.013,.013],["Chest_M"]*2,11,sides=4)
         scap,shoulder,elbow,wrist=[f"{x}_{side}" for x in ["Scapula","Shoulder","Elbow","Wrist"]]
-        s.tube("Novice mail shoulder "+side,[B[scap],B[shoulder]],[.155,.17],[.145,.16],[scap,shoulder],1)
-        # Two thin faceted lamellae have a modest outward flare instead of spherical pads.
-        for layer in range(2):
+        s.tube("Novice mail shoulder "+side,[B[scap],B[shoulder]],[.155,.17],[.145,.16],[scap,shoulder],0)
+        # One compact iron cap covers each shoulder without ornamental edging.
+        for layer in range(1):
             center=offset(B[shoulder],x=sign*layer*.065,y=.085-layer*.065)
-            s.tube("Novice pauldron gold edge "+side+str(layer),[offset(center,y=-.047),offset(center,y=-.012),offset(center,y=.026)],[.205-layer*.018,.191-layer*.015,.147-layer*.01],[.204,.185,.15],[shoulder]*3,4,sides=8)
-            s.tube("Novice pauldron red lamella "+side+str(layer),[offset(center,y=-.028),offset(center,y=.005),offset(center,y=.037)],[.188-layer*.018,.176-layer*.015,.135-layer*.01],[.183,.17,.135],[shoulder]*3,6,sides=8)
-        s.tube("Novice articulated sleeves "+side,[B[shoulder],B[elbow],B[wrist]],[.15,.118,.103],[.145,.115,.10],[shoulder,elbow,wrist],1)
-        s.ellipsoid("Novice angular elbow "+side,offset(B[elbow],z=.042),(.115,.12,.073),elbow,2,sides=4)
-        s.tube("Novice wrist band "+side,[offset(B[wrist],y=-.015),offset(B[wrist],y=.024)],[.112]*2,[.111]*2,[wrist]*2,4,sides=8)
+            s.tube("Novice plain shoulder cap "+side+str(layer),[offset(center,y=-.028),offset(center,y=.005),offset(center,y=.037)],[.173,.163,.125],[.169,.154,.123],[shoulder]*3,1,sides=8)
+        s.tube("Novice articulated sleeves "+side,[B[shoulder],B[elbow],B[wrist]],[.15,.145,.12],[.145,.14,.118],[shoulder,elbow,wrist],0)
+        s.tube("Novice wrist band "+side,[offset(B[wrist],y=-.015),offset(B[wrist],y=.024)],[.127]*2,[.125]*2,[wrist]*2,11,sides=8)
         hip,knee,ankle=[f"{x}_{side}" for x in ["Hip","Knee","Ankle"]]
-        s.tube("Novice mail leggings "+side,[B[hip],B[knee],B[ankle]],[.155,.103,.079],[.145,.097,.074],[hip,knee,ankle],1)
-        s.tube("Novice narrow split apron "+side,[offset(B[hip],x=-sign*.025,z=.17),offset(B[knee],x=-sign*.025,y=.20,z=.15)],[.10,.105],[.018,.018],[hip,knee],6,sides=4)
-        s.tube("Novice apron hem "+side,[offset(B[knee],x=-sign*.025,y=.20,z=.15),offset(B[knee],x=-sign*.025,y=.175,z=.15)],[.107]*2,[.019]*2,[knee]*2,4,sides=4)
-        s.tube("Novice knee articulation "+side,[offset(B[knee],y=.045),offset(B[knee],y=-.04)],[.115,.11],[.112,.105],[knee]*2,1,sides=8)
+        s.tube("Novice mail leggings "+side,[B[hip],B[knee],B[ankle]],[.155,.103,.079],[.145,.097,.074],[hip,knee,ankle],0)
+        s.tube("Novice narrow split apron "+side,[offset(B[hip],x=-sign*.025,z=.17),offset(B[knee],x=-sign*.025,y=.20,z=.15)],[.10,.105],[.018,.018],[hip,knee],0,sides=4)
+        s.tube("Novice knee articulation "+side,[offset(B[knee],y=.045),offset(B[knee],y=-.04)],[.115,.11],[.112,.105],[knee]*2,0,sides=8)
         thumb=f"ThumbFinger1_{side}"
         if thumb in B:s.ellipsoid("Novice thumb guard "+side,B[thumb],(.032,.034,.041),thumb,1,sides=6)
         for toe in ["MiddleToe1","MiddleToe2"]:
             bone=f"{toe}_{side}"
-            if bone in B:s.tube("Novice toe articulation "+bone,[offset(B[bone],z=-.035),offset(B[bone],z=.045)],[.10,.096],[.028,.026],[bone]*2,1,sides=8)
-    if "Head_M" in B:s.ellipsoid("Novice rear collar",offset(B["Head_M"],y=-.08,z=-.14),(.09,.035,.022),"Head_M",6,sides=6)
+            if bone in B:s.tube("Novice toe articulation "+bone,[offset(B[bone],z=-.035),offset(B[bone],z=.045)],[.070,.060],[.018,.015],[bone]*2,11,sides=8)
+    if "Head_M" in B:s.ellipsoid("Novice rear collar",offset(B["Head_M"],y=-.08,z=-.14),(.09,.035,.022),"Head_M",11,sides=6)
+
+
 
 
 
 def novice_boots(s):
-    boots(s,False,"novice")
+    """Soft leather shafts and round toes, without plate armor ornament."""
+    B=s.B
+    for side in ["R","L"]:
+        hip,knee,ankle,toe,tip=[f"{p}_{side}" for p in ["Hip","Knee","Ankle","MiddleToe1","MiddleToe2"]]
+        s.tube("Novice trouser leg "+side,[B[hip],B[knee],B[ankle]],[.105,.090,.075],[.095,.085,.07],[hip,knee,ankle],0,sides=8)
+        top=offset(B[knee],y=-.10)
+        s.tube("Novice leather boot shaft "+side,[top,offset(B[ankle],y=.16),B[ankle]],[.14,.13,.125],[.14,.13,.12],[knee,ankle,ankle],11,sides=8)
+        s.tube("Novice folded boot cuff "+side,[offset(top,y=.025),offset(top,y=-.035)],[.15,.148],[.15,.145],[knee]*2,11,sides=8)
+        floor=B[toe][1]-.045
+        # Fixed horizontal sections keep the sole level instead of twisting a tube along the instep.
+        sections=[(B[ankle][2]-.082,.105,.122,ankle),
+                  (B[ankle][2]+.015,.125,.165,ankle),
+                  (B[toe][2]+.025,.13,.115,toe),
+                  (B[tip][2]+.038,.105,.075,tip),
+                  (B[tip][2]+.065,.071,.054,tip)]
+        rings=[]
+        for z,w,h,bone in sections:
+            ring=[(-w*.78,.016),(-w,.036),(-w*.88,h*.78),(-w*.48,h),
+                  (w*.48,h),(w*.88,h*.78),(w,.036),(w*.78,.016)]
+            rings.append([np.array([B[ankle][0]+x,floor+y,z]) for x,y in ring])
+        begin=len(s.data["positions"])
+        for row in range(len(rings)-1):
+            for j in range(8):
+                k=(j+1)%8;bone=sections[row][3];next_bone=sections[row+1][3]
+                s.triangle([rings[row][j],rings[row+1][j],rings[row+1][k]],[bone,next_bone,next_bone],11)
+                s.triangle([rings[row][j],rings[row+1][k],rings[row][k]],[bone,next_bone,bone],11)
+        for row,reverse in [(0,False),(len(rings)-1,True)]:
+            for j in range(1,7):
+                tri=[rings[row][0],rings[row][j],rings[row][j+1]]
+                if reverse:tri.reverse()
+                s.triangle(tri,[sections[row][3]]*3,11)
+        s.pieces.append({"name":"Novice shaped leather shoe "+side,"vertex_start":begin,"vertex_count":len(s.data["positions"])-begin})
+        # Low dark sole follows the same outline and carries toe weighting.
+        centers=[np.array([B[ankle][0],floor+.012,z]) for z,_,_,_ in sections]
+        s.tube("Novice flat welt sole "+side,centers,[w for _,w,_,_ in sections],[.013]*len(sections),[b for _,_,_,b in sections],0,sides=8)
 
 
 def novice_helmet():
+    s=Surface(["Head_M"],np.zeros((1,3)))
+    # Compact open face: leather sides and a plain iron cap, without crest or seal.
+    for sign in [-1,1]:
+        s.tube("Novice cloth cheek",[np.array([sign*.22,.16,-.045]),np.array([sign*.23,.21,-.055]),np.array([sign*.18,.36,-.045])],[.028,.035,.030],[.105,.13,.13],["Head_M"]*3,1,sides=6)
+    s.tube("Novice close rear hood",[np.array([0,.15,-.19]),np.array([0,.23,-.19]),np.array([0,.39,-.075])],[.185,.202,.155],[.038,.047,.09],["Head_M"]*3,1,sides=8)
+    s.ellipsoid("Novice plain iron cap",np.array([0,.365,-.05]),(.204,.075,.178),"Head_M",1,sides=8)
+    s.tube("Novice plain iron brow",[np.array([-.20,.315,.14]),np.array([0,.35,.19]),np.array([.20,.315,.14])],[.023]*3,[.024]*3,["Head_M"]*3,1,sides=6)
+    return s
+
+
+def oathkeeper_helmet():
     s=Surface(["Head_M"],np.zeros((1,3)))
     # Compact open face: red cloth sides, steel crown, a low gold brow and original seal.
     for sign in [-1,1]:
@@ -289,7 +340,7 @@ def main():
             binding_key="boots" if part=="boots" else sex+"-armor"
             binding=None
             if part=="helmet":
-                s=novice_helmet() if variant in ["novice","oathkeeper"] else helmet(endgame)
+                s=novice_helmet() if variant=="novice" else (oathkeeper_helmet() if variant=="oathkeeper" else helmet(endgame))
                 if variant=="oathkeeper":
                     for uv in s.data["uvs"]:
                         if int(uv[0]*len(PALETTE))==6:uv[0]=(5+.5)/len(PALETTE)
