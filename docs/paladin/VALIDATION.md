@@ -9,13 +9,17 @@ with 133 pure-rule and 21 installed-metadata checks passing. Its [native spent-c
 and [earlier lifecycle observations](guard-lifecycle-observations.json).
 
 The current unpublished art candidate SHA-256 is
-`85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`.
-The latest revision removes optional Novice wrist and thumb guards;
-[seven native appearance previews](novice-bare-wrist-fit.json) record the fit.
-It revises Novice armor, boots, helmet and their display assets. The prior
-`92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295`
-package retains its historical gameplay and lifecycle evidence; those receipts
-do not validate the revised art bytes.
+`314e20a1e5709cac4e037c25c0aeab76e225420bc150df51eac109622b004d96`.
+It replaces the Novice chest sheet and separate apron with a fitted leather jack
+and continuous short hem, and rebuilds the helmet as one rounded shell. Its
+[offline review](novice-tailored-candidate.json) records geometry and package
+checks only. Native fit, motion and user approval remain open.
+
+The preceding `85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`
+archive retains its [seven appearance previews](novice-bare-wrist-fit.json),
+managed resume and CLI lifecycle evidence. Those observations do not validate
+the new art. The older `92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295`
+archive retains its historical gameplay and lifecycle evidence.
 It contains **137 runtime files: 135 original equipment assets, manifest and
 content**, with one class, two Censure actions and 36 gear entries. It corrects
 all 36 equipment `m_CollectLoreItemUnlock` values to empty strings. The earlier
@@ -36,7 +40,7 @@ The [native character preview receipt](native-character-armor-preview.json) and
 [third armor revision](armor-revision3-review.json) cover the six sets on actual
 Female and Male avatars, including front and three-quarter views in revision 3.
 Novice revision 3 and the first plain revision were subsequently rejected.
-The [fitted Novice candidate](novice-fitted-preview.json) now records native
+The earlier [fitted Novice candidate](novice-fitted-preview.json) records native
 Female/Male three-quarter previews with a smaller chest plate, dark cloth and
 new leather boots. The [seven-appearance Novice trial](novice-race-preview.json) records front
 views and restoration, with sleeve intersections and a Demon brow fit concern
@@ -61,8 +65,8 @@ outcomes and controlled loot are identified separately from ordinary acquisition
 | Boundary | Evidence and scope | Remaining boundary |
 | --- | --- | --- |
 | Source and export | [Equipment manifest](../../art-experiments/paladin-equipment/manifest.json), [delivery validation](../../art-experiments/paladin-equipment/delivery-validation.json), [package provenance](../../marketplace/packages/paladin-assets.provenance.json), and [native field audit](field-type-audit.json) | Rerun relevant checks after source/asset changes; offline checks do not prove live fit |
-| Current archive in game | [85ec managed installation and resume](current-archive-resume.json): exact 137-file installation, 39/39 registration without errors or warnings, native Resume to Oarton and all five Novice pieces retained | Town avatar studio render was blank with disabled body/armor and is rejected as visual evidence. No public download, disabled-save, combat or new save-write claim |
-| Current package lifecycle | [85ec lifecycle](package-lifecycle-bare-wrists.json): real helper install/activate, disable, enable, remove and rollback; exact 137-file bytes checked in every retained state; managed-set JSON export | Export is not a ZIP exporter. No public catalog download, disabled-save loading or online claim |
+| Prior 85ec archive in game | [85ec managed installation and resume](current-archive-resume.json): exact 137-file installation, 39/39 registration without errors or warnings, native Resume to Oarton and all five Novice pieces retained | Town avatar studio render was blank with disabled body/armor and is rejected as visual evidence. No public download, disabled-save, combat or new save-write claim |
+| Prior 85ec package lifecycle | [85ec lifecycle](package-lifecycle-bare-wrists.json): real helper install/activate, disable, enable, remove and rollback; exact 137-file bytes checked in every retained state; managed-set JSON export | Export is not a ZIP exporter. No public catalog download, disabled-save loading or online claim |
 | Production startup and new game | [Production new-game receipt](production-new-game-observation.json): 39/39 registrations, five novice pieces equipped in their native slots, no all-gear grants | Earlier unexplained configuration crash remains in that receipt; final framework changes need proportional startup checks |
 | Enabled save/resume | Same [production receipt](production-new-game-observation.json): matching starting equipment after same-process save/resume and application restart. [Collected loot receipt](custom-loot-collection.json): collected count retained after same-process resume | Disabled-package recovery, every appearance and full-campaign saves are not established |
 | Acquisition and world return | [Native shop purchase](native-shop-purchase.json): one ordinary starter great-hammer purchase. [Current one-handed purchase](native-hammer-purchase-current.json): native spare-boots sale funds an 11-gold Novice Hammer purchase, with matching stock and backpack deltas. [Current shield purchase](native-shield-purchase-current.json): 11 gold spent, one stock removed and one Novice Aegis added to the backpack. [Existing native stock](acquisition-stock-live.json): five families selected into shops. [Corrected custom loot](custom-loot-collection.json): one controlled Novice Helm append, native Collect adds exactly one and returns to world | Armor, boots and helmet purchases remain unobserved. Existing stock alone does not prove purchase; controlled loot does not prove random-drop distribution. Current hammer and shield purchase persistence remains untested |
@@ -86,7 +90,7 @@ The class is `paladin`; actions are `paladin_censure_fracture` and
 
 | Set | Acquisition levels | Current visual evidence |
 | --- | --- | --- |
-| novice | 0-1 | Fitted candidate: native Female/Male three-quarter previews; approval and motion pending |
+| novice | 0-1 | Tailored candidate: offline garment and helmet review only; native fit, motion and approval pending |
 | oathkeeper | 2-3 | Native Female/Male front and three-quarter revision-3 previews |
 | highward | 4-6 | Native Female/Male front and three-quarter revision-3 previews |
 | mercy | 7-13 | Same previews; seven native appearances in a separate front-view trial |

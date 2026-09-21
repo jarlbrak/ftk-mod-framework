@@ -1,12 +1,27 @@
 # Novice visual redesign
 
+## Current plain starter candidate
+
+The latest user feedback rejects the ornate early-level look and the subsequent
+blocky modeling. The current original candidate uses a fitted leather jack over
+short slate sleeves, a continuous vented hem, simple iron shoulder caps, brown
+boots and one rounded iron skullcap. The torso narrows toward the belt; the belt
+clears the garment instead of intersecting its facets. There is no chest emblem,
+gold armor trim or separate hanging breastplate. Native bodies, faces and race
+choices are retained. Weapons retain their existing designs.
+
+The [candidate receipt](novice-tailored-candidate.json) pins offline checks. Native
+fit and motion, including nonhuman appearances, and user approval remain open.
+
+## Historical Lightforge direction
+
 The user rejected the first novice set as too bulky and selected Classic WoW's
 [Lightforge 3D viewer](https://www.wowhead.com/classic/transmog-set=595/lightforge-armor#modelviewer)
 as the leading visual reference. The
 [Lawbringer viewer](https://www.wowhead.com/classic/transmog-set=575/lawbringer-armor#modelviewer)
 was also reviewed. This supersedes the novice set's earlier blue/steel direction.
 
-The new original design uses a fitted crimson breastplate, restrained warm gold
+The earlier original design used a fitted crimson breastplate, restrained warm gold
 trim, a defined waist, small layered shoulder plates, slim greaves and an
 open-face red cap with a modest gold brow. The order keeps its own split-diamond
 seal. Armor follows the body instead of adding thick volumes at every joint.

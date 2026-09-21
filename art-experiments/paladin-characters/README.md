@@ -6,8 +6,8 @@ portrait experiments are archived in ignored scratch and are not runtime assets.
 
 There are 24 runtime models: female and male armor, shared boots and a rigid helmet
 for each of Novice, Oathkeeper, Highward, Mercy, Censure and Verdict. Novice uses
-a bent iron breastplate over a slate padded tunic, single compact shoulder caps,
-brown leather boots and an unadorned open-face cap. Gold borders and order seals
+a fitted leather jack over short slate sleeves, single compact shoulder caps,
+brown leather boots and a continuous open-face iron skullcap. Gold borders and order seals
 are reserved for later progression. Later sets retain their own colors
 and ornaments with a fitted faceted chest and defined waist. All surfaces,
 textures and symbols are original; no native surface geometry is read or copied.
@@ -82,3 +82,14 @@ The subsequent geometry removes optional wrist and thumb guards, leaving native
 hands and forearms exposed. The [new seven-appearance preview](../../docs/paladin/novice-bare-wrist-fit.json)
 confirms the floating wrist rings are absent in sampled views. Combat chest
 clearance and final art acceptance remain open.
+
+## Tailored Novice candidate
+
+The latest unapproved candidate replaces the separate chest sheet with a fitted
+leather jack, center closure detail and a continuous short hem with a front vent.
+The iron helmet is now one connected rounded shell with a narrow lower edge.
+Native bodies and appearance choices are unchanged. Boots and later sets retain
+their geometry. Earlier preview and attack receipts describe earlier Novice assets
+and do not validate this candidate. Offline binding, deterministic rebuild and
+helmet mount checks pass. Native fit, motion and visual review are pending because
+the local preview could not be reached while the workstation was locked.

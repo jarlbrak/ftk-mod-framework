@@ -1,0 +1,34 @@
+{
+  "schema": "ftkmf.paladin-novice-tailored-candidate.v1",
+  "status": "offline-candidate-native-review-pending",
+  "archiveSha256": "314e20a1e5709cac4e037c25c0aeab76e225420bc150df51eac109622b004d96",
+  "fileCount": 137,
+  "models": {
+    "paladin-male-novice-armor.glb": "ef29a8091ab5b82428e6ddb8bab563d2424c687a74b8ac140757c78d92ba9f52",
+    "paladin-female-novice-armor.glb": "abc93ea95cc3b8f6bb2c8f4f63b337ae9cba60bb9385c690fe3011ee35e88341",
+    "paladin-novice-helmet.glb": "d7bb1bb33e90ba56e29cb10dfd780c0b38c8c87dd5539fbe621c0cb538461963"
+  },
+  "checks": [
+    "24 model binary/source and binding checks pass",
+    "73-file deterministic binding-only rebuild passes",
+    "Six-helmet mount transform check passes",
+    "12 original loot-display GLBs pass",
+    "30 fragments and 37 icon delivery checks pass",
+    "39-row source package provenance and references pass",
+    "Launcher helper descriptor and archive validation passes"
+  ],
+  "offlineVisualReview": {
+    "torso": "Abdomen taper and belt clearance corrected after inspecting the original-source Blender render. Continuous short hem replaces the separate apron boards.",
+    "helmet": "Connected rounded open-face shell replaces separate brow and cheek volumes.",
+    "imageSha256": {
+      "armor": "f9d8a68613463e15916139163be2afa836eef978b5e368fa6dd841d2513bf96a",
+      "helmet": "93459fc2d39bd935b955fddb5682fd02fb2b6f5ee663cc712e20717d864f0e15"
+    }
+  },
+  "limitations": [
+    "Offline images show original equipment in bind pose without native bodies. They do not establish native fit.",
+    "Native preview was unavailable while the workstation was locked. No motion or nonhuman fit claim.",
+    "User has not approved this art.",
+    "No publication or production catalog modification. Previous archive evidence applies only to its pinned bytes."
+  ]
+}
