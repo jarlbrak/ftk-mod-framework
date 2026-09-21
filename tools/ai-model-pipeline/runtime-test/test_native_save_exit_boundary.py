@@ -23,15 +23,15 @@ class NativeSaveExitBoundaryTests(unittest.TestCase):
         for required in (
             'menu = uiOptionsMenu.Instance', 'menu.m_Showing',
             '!GameLogic.Instance.IsSinglePlayer()', 'EncounterSession.Instance.m_IsInCombat',
-            'menu.GetType().GetField("m_SaveExit", Members)',
+            'menu.GetType().GetField("m_SaveGameButton", Members)',
             'NativeSaveExitControlActive(control)',
-            'menu.GetType().GetMethod("OnSaveExit", Members, null, Type.EmptyTypes, null)',
-            'callback.DeclaringType != menu.GetType()',
+            'control.onClick.GetPersistentEventCount() != 1',
+            'control.onClick.GetPersistentTarget(0)',
         ):
             self.assertIn(required, SOURCE)
 
     def test_can_invoke_only_the_verified_button_once(self):
-        self.assertEqual(len(re.findall(r'callback\.Invoke\s*\(', CODE)), 1)
+        self.assertEqual(len(re.findall(r'control\.onClick\.Invoke\s*\(', CODE)), 1)
         for forbidden in ('SaveAndQuit', 'SendEvent', 'File.', 'Directory.'):
             self.assertNotRegex(CODE, r'\b' + forbidden + r'\s*\(')
         self.assertIn('nativeSaveExitConsumed = true;', SOURCE)

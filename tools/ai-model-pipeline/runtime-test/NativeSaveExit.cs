@@ -12,13 +12,14 @@ public sealed partial class RuntimeModelTest
     bool nativeSaveExitConsumed;
     string nativeSaveExitToken;
     uiOptionsMenu nativeSaveExitMenu;
-    UnityEngine.Object nativeSaveExitControl;
-    System.Reflection.MethodInfo nativeSaveExitCallback;
+    Button nativeSaveExitControl;
+    UnityEngine.Object nativeSaveExitCallbackTarget;
+    string nativeSaveExitCallbackMethod;
 
-    static UnityEngine.Object NativeSaveExitControl(uiOptionsMenu menu)
+    static Button NativeSaveExitControl(uiOptionsMenu menu)
     {
-        System.Reflection.FieldInfo field = menu.GetType().GetField("m_SaveExit", Members);
-        return field == null ? null : field.GetValue(menu) as UnityEngine.Object;
+        System.Reflection.FieldInfo field = menu.GetType().GetField("m_SaveGameButton", Members);
+        return field == null ? null : field.GetValue(menu) as Button;
     }
 
     static bool NativeSaveExitControlActive(UnityEngine.Object control)
@@ -76,26 +77,30 @@ public sealed partial class RuntimeModelTest
             {"showing", menu.m_Showing}, {"saveFields", fields}, {"saveCallbacks", callbacks}};
     }
 
-    JObject InspectNativeSaveExit(out uiOptionsMenu menu, out List<UnityEngine.Object> candidates, out System.Reflection.MethodInfo callback)
+    JObject InspectNativeSaveExit(out uiOptionsMenu menu, out List<Button> candidates, out UnityEngine.Object callbackTarget, out string callbackMethod)
     {
         RequireSinglePlayer();
         menu = uiOptionsMenu.Instance;
-        candidates = new List<UnityEngine.Object>();
-        callback = null;
+        candidates = new List<Button>();
+        callbackTarget = null;
+        callbackMethod = null;
         if (menu == null || !SceneOwner(menu) || !menu.gameObject.activeInHierarchy || !menu.m_Showing
             || FTKHub.Instance == null || GameLogic.Instance == null || !GameLogic.Instance.IsSinglePlayer()
             || EncounterSession.Instance == null || EncounterSession.Instance.m_IsInCombat)
             throw new InvalidOperationException("Visible native Options Menu outside combat is required.");
-        UnityEngine.Object control = NativeSaveExitControl(menu);
-        callback = menu.GetType().GetMethod("OnSaveExit", Members, null, Type.EmptyTypes, null);
-        if (control == null || !NativeSaveExitControlActive(control)
-            || callback == null || callback.DeclaringType != menu.GetType())
+        Button control = NativeSaveExitControl(menu);
+        if (control == null || !NativeSaveExitControlActive(control) || !control.IsInteractable()
+            || control.onClick.GetPersistentEventCount() != 1)
             throw new InvalidOperationException("Exact visible native Save/Exit UI control and callback are required.");
+        callbackTarget = control.onClick.GetPersistentTarget(0) as UnityEngine.Object;
+        callbackMethod = control.onClick.GetPersistentMethodName(0);
+        if (callbackTarget == null || string.IsNullOrEmpty(callbackMethod))
+            throw new InvalidOperationException("Exact visible native Save/Exit UI callback is required.");
         candidates.Add(control);
         JArray observed = new JArray { new JObject {
             {"buttonInstanceId", control.GetInstanceID()},
             {"controlType", control.GetType().FullName},
-            {"name", control.name}, {"callback", callback.Name}
+            {"name", control.name}, {"callbackTargetType", callbackTarget.GetType().FullName}, {"callback", callbackMethod}
         }};
         return new JObject {
             {"menuInstanceId", menu.GetInstanceID()},
@@ -113,30 +118,32 @@ public sealed partial class RuntimeModelTest
         if (action != "inspect" && action != "submit") throw new ArgumentException("Use inspect or submit.");
         if (nativeSaveExitConsumed) throw new InvalidOperationException("Native Save/Exit already consumed for this process.");
         uiOptionsMenu menu;
-        List<UnityEngine.Object> candidates;
-        System.Reflection.MethodInfo callback;
-        JObject current = InspectNativeSaveExit(out menu, out candidates, out callback);
-        UnityEngine.Object control = candidates[0];
+        List<Button> candidates;
+        UnityEngine.Object callbackTarget;
+        string callbackMethod;
+        JObject current = InspectNativeSaveExit(out menu, out candidates, out callbackTarget, out callbackMethod);
+        Button control = candidates[0];
         if (action == "inspect")
         {
             nativeSaveExitToken = Guid.NewGuid().ToString("N");
             nativeSaveExitMenu = menu;
             nativeSaveExitControl = control;
-            nativeSaveExitCallback = callback;
+            nativeSaveExitCallbackTarget = callbackTarget;
+            nativeSaveExitCallbackMethod = callbackMethod;
             current["inspectionToken"] = nativeSaveExitToken;
             current["selectedButtonInstanceId"] = control.GetInstanceID();
             return new JObject { {"ok", true}, {"readOnly", true}, {"status", "native_save_exit_eligible"}, {"pins", current} };
         }
-        if (nativeSaveExitMenu != menu || nativeSaveExitControl != control || nativeSaveExitCallback != callback
+        if (nativeSaveExitMenu != menu || nativeSaveExitControl != control || nativeSaveExitCallbackTarget != callbackTarget || nativeSaveExitCallbackMethod != callbackMethod
             || Str(command, "inspectionToken") != nativeSaveExitToken
             || Int(command, "buttonInstanceId", 0) != control.GetInstanceID()
             || !candidates.Contains(control))
             throw new InvalidOperationException("Exact inspected native Save/Exit control changed.");
         nativeSaveExitConsumed = true;
-        callback.Invoke(menu, null);
+        control.onClick.Invoke();
         return new JObject {
             {"ok", true}, {"status", "native_save_exit_submitted"},
-            {"callback", "uiOptionsMenu.OnSaveExit for the inspected m_SaveExit control"},
+            {"callback", callbackTarget.GetType().FullName + "." + callbackMethod + " for the inspected m_SaveGameButton control"},
             {"buttonInstanceId", control.GetInstanceID()}, {"menuInstanceId", menu.GetInstanceID()},
             {"scope", "One exact native Save/Exit UI callback. Save completion and process exit must be observed separately."}
         };
