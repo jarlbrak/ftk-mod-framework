@@ -249,11 +249,12 @@ python3 marketplace/packages/verify_paladin_lifecycle.py \
   --game-assembly PATH_TO_ISOLATED_ASSEMBLY
 ```
 
-The [current lifecycle receipt](package-lifecycle-bare-wrists.json) pins package and
-helper identities. The verifier checks exact archive bytes and absence of extra
-files in every retained state, empty removal, and a matching exported active set.
-Retain exact inventory and request/results, not console success
-alone. This procedure establishes package handling, not gameplay or save behavior.
+The [current lifecycle receipt](package-lifecycle-tailored-current.json) pins the
+61fa archive and helper identities. The verifier checks exact archive bytes and
+absence of extra files in every retained state, empty removal, and a matching
+exported active set. Retain exact inventory and request/results, not console
+success alone. This procedure establishes package handling, not gameplay or save
+behavior.
 
 ### Apparel replacement resource lifetime
 
