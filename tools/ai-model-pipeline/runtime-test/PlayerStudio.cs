@@ -81,6 +81,9 @@ public sealed partial class RuntimeModelTest
         if(File.Exists(path))throw new InvalidOperationException("Studio output already exists");
         Dictionary<GameObject,int> layers=new Dictionary<GameObject,int>();
         foreach(Renderer renderer in renderers)if(renderer!=null && !layers.ContainsKey(renderer.gameObject))layers.Add(renderer.gameObject,renderer.gameObject.layer);
+        Dictionary<SkinnedMeshRenderer,bool> offscreenUpdates=new Dictionary<SkinnedMeshRenderer,bool>();
+        foreach(SkinnedMeshRenderer renderer in avatar.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+            if(renderer!=null){offscreenUpdates.Add(renderer,renderer.updateWhenOffscreen);renderer.updateWhenOffscreen=true;}
         GameObject cameraObject=null,keyObject=null,fillObject=null;RenderTexture target=null;Texture2D image=null;
         RenderTexture prior=RenderTexture.active;byte[] png=null;
         try
@@ -105,6 +108,7 @@ public sealed partial class RuntimeModelTest
         finally
         {
             foreach(KeyValuePair<GameObject,int> part in layers)if(part.Key!=null)part.Key.layer=part.Value;
+            foreach(KeyValuePair<SkinnedMeshRenderer,bool> entry in offscreenUpdates)if(entry.Key!=null)entry.Key.updateWhenOffscreen=entry.Value;
             RenderTexture.active=prior;
             if(cameraObject!=null)UnityEngine.Object.DestroyImmediate(cameraObject);
             if(keyObject!=null)UnityEngine.Object.DestroyImmediate(keyObject);

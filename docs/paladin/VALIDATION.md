@@ -35,7 +35,12 @@ The [current package-start receipt](final-package-start.json) activates the
 06a6 archive through the marketplace helper in a task-owned game copy, reaches
 native Party Select with Paladin selected, and invokes the native Start callback.
 It does not establish the current starting inventory because the campaign prologue
-held the fresh run before the world-ready observation.
+held the fresh run before the world-ready observation. The subsequent [current
+package world-start receipt](final-package-world-start.json) continues that same
+active candidate through native prologue completion and reads the actual world
+Paladin inventory: Novice shield, one-handed hammer, helmet, armor and boots are
+equipped in their intended slots. It does not accept motion, save/reload,
+ordinary acquisition, other appearances, online co-op or public publication.
 
 ## Current character and art scope
 
