@@ -578,6 +578,12 @@ A preview still requires the existing single-player guard to succeed.
   creating fake dummies. Use normal `dungeon_encounter` if native flow has not
   already started. It is disposable test setup, not production content authoring;
   use a fresh test encounter for each chassis and never force an early ack.
+  Optional `followingCombat:true` requires `regenerate:true` and stages the same
+  verified enemy rows in the immediately following existing room as well. Both
+  slots are checked before assignment; stairs, exits, cleared slots and indices
+  beyond the dungeon definition are rejected. The selected room remains the first
+  one. This explicit two-fight fixture supports native victory/Ready/reused-dummy
+  lifecycle trials; it does not advance a room, click Ready or start combat.
 
 - `stage-next-enemy`: `{"enemy":"wolfA","level":0,"room":2}` replaces only
   the **current** generated room during native Ready preparation. Both supplied

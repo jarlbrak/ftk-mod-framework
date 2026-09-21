@@ -811,6 +811,8 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(dungeon==null)throw new InvalidOperationException("Enter a disposable dungeon first.");
         MiniHexDungeon nativeDungeon=(MiniHexDungeon)dungeon;
         bool regenerate=command["regenerate"]!=null && (bool)command["regenerate"];
+        bool followingCombat=command["followingCombat"]!=null && (bool)command["followingCombat"];
+        if(followingCombat && !regenerate)throw new ArgumentException("Following combat staging requires a fresh generated fixture.");
         FTKRandom random=nativeDungeon.m_DungeonRandom ?? new FTKRandom();
         // Generate/preflight locally before changing the selected room. This whole method
         // runs in one Update, so camera/FSM callbacks cannot interleave with selection.
@@ -821,13 +823,28 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(levels==null || !levels.Contains(level))throw new ArgumentException("Explicit existing generated level required.");
         IList rooms=levels[level]as IList;
         if(rooms==null || room<0 || room>=rooms.Count)throw new ArgumentException("Explicit valid room index required.");
+        if(followingCombat)
+        {
+            // Preflight both slots before assigning either; preserve native exits and stairs.
+            int definitionRooms=nativeDungeon.GetRoomCount(level);
+            if(room+1>=rooms.Count || room+1>=definitionRooms)throw new ArgumentException("Two existing nonterminal room slots required.");
+            for(int index=room;index<=room+1;index++)
+            {
+                MiniHexDungeon.RoomInfo slot=rooms[index]as MiniHexDungeon.RoomInfo;
+                if(slot==null || slot.m_Type==MiniHexDungeon.EncounterType.Stair
+                    || slot.m_Type==MiniHexDungeon.EncounterType.ExitRoom
+                    || slot.m_Type==MiniHexDungeon.EncounterType.Cleared)
+                    throw new ArgumentException("Following combat staging cannot replace a transition or terminal room.");
+            }
+        }
         string[] enemies=companionId==null?new[]{verifiedId}:new[]{verifiedId,companionId};
         MiniHexDungeon.RoomInfo replacement=new MiniHexDungeon.RoomInfo(MiniHexDungeon.EncounterType.Enemy,null,enemies,-1);
         rooms[room]=replacement;
+        if(followingCombat)rooms[room+1]=new MiniHexDungeon.RoomInfo(MiniHexDungeon.EncounterType.Enemy,null,(string[])enemies.Clone(),-1);
         if(regenerate){nativeDungeon.m_DungeonRandom=random;nativeDungeon.m_DungeonEncounters=generated;}
         nativeDungeon.m_Level=level;nativeDungeon.m_RoomIndex=room;
         return new JObject{{"ok",true},{"enemy",verifiedId},{"companionEnemy",companionId},{"enemies",new JArray(enemies)},
-            {"level",level},{"room",room},{"regenerated",regenerate},
+            {"level",level},{"room",room},{"regenerated",regenerate},{"followingCombat",followingCombat},
             {"note","Disposable generated-room substitution, native enemy assets; invoke normal dungeon_encounter only if native flow has not started. No forced acknowledgment."}};
     }
     JObject SelectRoom(string enemy)

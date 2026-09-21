@@ -42,10 +42,11 @@ Balance and unobserved appearance/motion combinations remain beta limitations.
 Representative Mercy equipment motion has been observed on native male and female
 bodies; untested set/race combinations remain outside that evidence.
 [Same-session ordinary combat recharge](next-combat-live.json) passed after a
-spent rescue and native victory. Dungeon reuse, incapacity recovery, resource
-retirement, final equipment-motion acceptance, release packaging and marketplace
-download validation remain delivery
-work, not completed results. Do not describe this draft as a released beta.
+spent rescue and native victory. [Dungeon reused-dummy recharge](dungeon-recharge-live.json)
+and [body/foot resource retirement](apparel-retirement-live.json) also passed their
+bounded live trials. Incapacity recovery, separate rigid-instance retirement,
+final equipment-motion acceptance and marketplace download validation remain
+delivery work, not completed results. Do not describe this draft as a released beta.
 
 ## Maintainer publication candidate
 
