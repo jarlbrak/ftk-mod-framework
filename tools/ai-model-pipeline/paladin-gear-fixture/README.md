@@ -12,7 +12,7 @@ python3 tools/ai-model-pipeline/paladin-gear-fixture/build.py \
 
 Existing output is refused. Choose a new scratch directory for another run. The
 output contains `package/`, an external `receipt.json`, and a NEVER-PUBLISH notice.
-The current source contains 149 original GLB/PNG assets. Only the package's
+The current source contains 135 original GLB/PNG assets. Only the package's
 `content.json` differs from the production source; all current
 original GLB/PNG assets and the manifest are copied byte-for-byte. The receipt
 records every source and copied file hash and the exact content delta.
