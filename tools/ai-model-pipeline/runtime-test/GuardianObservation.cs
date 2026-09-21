@@ -84,6 +84,14 @@ public sealed partial class RuntimeModelTest
             {"side",side},{"alive",dummy.m_IsAlive},{"fled",dummy.m_DidFlee},
             {"hp",dummy.GetCurrentHealth()},{"maxHp",maxHp},{"armorMod",dummy.ArmorMod},
             {"sufferingCategories",categories},
+            {"enemyAttackSelection",enemy==null || enemy.m_EnemyCombat==null?null:new JObject{
+                {"scope","Observed selection inputs only; no attack selected or RNG consumed."},
+                {"rowId",enemy.m_EnemyCombat.m_ID},
+                {"chanceToProf",enemy.m_EnemyCombat.m_ChanceToProf},
+                {"useFirstProfAsRegular",enemy.m_EnemyCombat.m_UseFirstProfAsReg},
+                {"proficiencyCooldown",enemy.m_ProfCoolDown},
+                {"hasAttackSchedule",enemy.m_AttackSchedule!=null},
+                {"scheduleIndex",enemy.m_AttackScheduleIndex}}},
             {"storedCombat",new JObject{
                 {"scope","Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution."},
                 {"attackInfo",GuardianStoredDamage(dummy.m_AttackInfo)},

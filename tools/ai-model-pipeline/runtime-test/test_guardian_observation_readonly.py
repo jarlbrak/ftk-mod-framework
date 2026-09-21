@@ -12,7 +12,9 @@ class GuardianObservationBoundary(unittest.TestCase):
         for name in ('SetValue', 'Instantiate', 'Destroy', 'SetActive', 'SendEvent',
                      'ApplyGuard', 'TryGuard', 'BeginTurn', 'ExpireGuard', 'ResetGuardian',
                      'TryResolveAttackDamage', 'ResolveFocusedHitHealing', 'StartCoroutine',
-                     'UpdateProficiency', 'ClearEndOnTurnProficiency', 'AddToDummy', 'End'):
+                     'UpdateProficiency', 'ClearEndOnTurnProficiency', 'AddToDummy', 'End',
+                     'SetAttackDecision', 'GetRNGAttackDecision', 'GetScheduleAttackDecision',
+                     'GetNextAttackScheduleItem', 'ToggleProfCoolDown'):
             self.assertNotRegex(CODE, r'\b' + name + r'\s*\(')
         self.assertNotRegex(CODE, r'\bm_\w+\s*=(?!=)')
 

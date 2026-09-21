@@ -87,3 +87,12 @@ history or proof that a future hit occurred. For Verdict, compare before/after H
 and count native `takes secondary damage` log events; for Ward compare native
 proficiency flags and category presence across active and inactive Guard trials.
 No native method that applies effects or damage is invoked by these snapshots.
+
+Enemy entries also expose `enemyAttackSelection`: row ID, proficiency probability,
+use-first-proficiency flag, cooldown, and schedule presence/index. Player entries
+have a null value. These are current inputs, not a prediction or selected attack.
+The observer does not advance the schedule, consume RNG, or toggle cooldown.
+Installed `EnemyDummy` selection code gives schedules precedence over random
+selection. A cooldown suppresses random proficiency selection only when normal
+attack weight is positive; the use-first flag can still substitute a proficiency
+for the normal attack. Check these fields before planning a single-target fixture.
