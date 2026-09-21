@@ -152,6 +152,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             RequireSinglePlayer();
             if (op == "enemy-arrival-arm") Finish(id, ArmSpawnCapture(command));
             else if (op == "native-party-start") Finish(id, NativePartyStart(command));
+            else if (op == "native-resume-party-start") Finish(id, NativeResumePartyStart(command));
             else if (op == "native-party-class") Finish(id, NativePartyClass(command));
             else if(op == "enemy-arrival-state"){CatalogKeys(command,"id","session","op");SpawnPins(true);Finish(id,SpawnCaptureView());}
             else if(op == "enemy-arrival-clear"){CatalogKeys(command,"id","session","op");Finish(id,ClearSpawnCapture());}

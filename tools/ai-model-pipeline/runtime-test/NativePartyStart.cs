@@ -13,14 +13,14 @@ public sealed partial class RuntimeModelTest
     uiStartGame partyStartMenu;
     object partyStartDefinition;
 
-    JObject InspectNativePartyStart(out uiStartGame menu, bool forClassSelection = false)
+    JObject InspectNativePartyStart(out uiStartGame menu, bool forClassSelection = false, bool requireResume = false)
     {
         RequireSinglePlayer();
         menu = uiStartGame.Instance;
         GameLogic logic = GameLogic.Instance;
         if (menu == null || !SceneOwner(menu) || !menu.gameObject.activeInHierarchy
             || logic == null || !logic.IsSinglePlayer() || !NativeCreatePhotonOfflineMode()
-            || !menu.IsMasterClient || menu.m_UseOnlineSinglePlayer || menu.m_IsResuming
+            || !menu.IsMasterClient || menu.m_UseOnlineSinglePlayer || menu.m_IsResuming != requireResume
             || menu.m_GameStarted || menu.m_FahrulEntered
             || !object.Equals(NativeCreateField(menu, "m_MapReady"), true)
             || !NativeCreateMapReady() || logic.GetGameDef() == null)
@@ -139,5 +139,31 @@ public sealed partial class RuntimeModelTest
             {"observedCharacterCreateRootActive", menu != null && NativeCreateRootActive(menu)},
             {"completionClaimed", false},
         };
+    }
+
+    JObject NativeResumePartyStart(JObject command)
+    {
+        CatalogKeys(command, "id", "session", "op", "action", "inspectionToken");
+        CatalogNoLinks(root);
+        string action = Str(command, "action");
+        if (action != "inspect" && action != "submit") throw new ArgumentException("Use inspect or submit.");
+        if (partyStartClaim.Consumed) throw new InvalidOperationException("Party Start already consumed; observe native state separately.");
+        uiStartGame menu;
+        JObject current = InspectNativePartyStart(out menu, false, true);
+        if (action == "inspect")
+        {
+            partyStartToken = Guid.NewGuid().ToString("N"); partyStartPins = current;
+            partyStartMenu = menu; partyStartDefinition = GameLogic.Instance.GetGameDef();
+            return new JObject {{"ok", true}, {"readOnly", true}, {"status", "native_resume_party_start_eligible"},
+                {"inspectionToken", partyStartToken}, {"pins", current}};
+        }
+        if (partyStartMenu != menu || !object.ReferenceEquals(partyStartDefinition, GameLogic.Instance.GetGameDef()))
+            throw new InvalidOperationException("Native resumed Party Select owner or adventure changed.");
+        string error = null;
+        try { partyStartClaim.Submit(partyStartToken, Str(command, "inspectionToken"), partyStartPins, current, delegate { menu.EnterFahrul(); }); }
+        catch (Exception ex) { error = ex.ToString(); }
+        return new JObject {{"ok", error == null}, {"status", error == null ? "native_resume_party_start_submitted" : "native_resume_party_start_failed"},
+            {"callbackAttempted", partyStartClaim.Consumed}, {"callback", "uiStartGame.EnterFahrul"}, {"pins", current},
+            {"error", error == null ? new JValue((object)null) : new JValue(error)}, {"completionClaimed", false}};
     }
 }
