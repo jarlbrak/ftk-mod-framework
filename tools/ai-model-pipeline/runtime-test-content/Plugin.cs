@@ -18,6 +18,7 @@ public sealed partial class RuntimeModelTestContent : BaseUnityPlugin
     string root;
     JArray profiles;
     bool attempted;
+    bool packageOnly;
     string reportPath;
     readonly string runId = Guid.NewGuid().ToString("N");
 
@@ -44,8 +45,11 @@ public sealed partial class RuntimeModelTestContent : BaseUnityPlugin
             if (doc["version"] == null || doc["version"].Type != JTokenType.Integer || (int)doc["version"] != 1)
                 throw new InvalidOperationException("Profile version must be integer 1.");
             profiles = doc["profiles"] as JArray;
-            if (profiles == null || profiles.Count < 1 || profiles.Count > 512)
-                throw new InvalidOperationException("Expected 1..512 profiles.");
+            packageOnly = Environment.GetEnvironmentVariable("FTK_MODEL_TEST_PACKAGE_ONLY") == "1";
+            if (profiles == null || profiles.Count > 512 || (packageOnly ? profiles.Count != 0 : profiles.Count < 1))
+                throw new InvalidOperationException(packageOnly ? "Package-only mode requires an explicitly empty profile list." : "Expected 1..512 profiles.");
+            if (packageOnly && File.Exists(Path.Combine(root, "model-test-player-profiles.json")))
+                throw new InvalidOperationException("Package-only mode refuses a player fixture catalog.");
             ValidateProfiles();
             LoadPlayerProfiles();
             instance = this;
@@ -361,7 +365,7 @@ public sealed partial class RuntimeModelTestContent : BaseUnityPlugin
     {
         try { File.WriteAllText(reportPath, new JObject {
             { "version", 1 }, { "run", runId }, { "updatedUtc", DateTime.UtcNow.ToString("o") },
-            { "status", status }, { "requested", profiles == null ? 0 : profiles.Count },
+            { "status", status }, { "mode", packageOnly ? "package-only" : "model-profiles" }, { "requested", profiles == null ? 0 : profiles.Count },
             { "registered", registered }, { "error", error }
         }.ToString()); }
         catch (Exception e) { Logger.LogError("MODEL CONTENT report write failed: " + e.Message); }

@@ -58,6 +58,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         File.WriteAllText(Path.Combine(root,"model-test-session.json"),new JObject{{"session",sessionId},
             {"contentRegistrationRun",contentRegistrationRun},{"savePath",isolatedSavePath}}.ToString());
         Application.runInBackground = true;
+        ArmCombatEntryTrace();
         enabled = true;
         Logger.LogInfo("MODEL TEST ACTIVE: root=" + root + "; saveNamespace=" + saveNamespace
             + "; command=model-test-command.json; PlayerPrefs are not modified by this plugin.");
@@ -117,6 +118,10 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
     }
     void Update()
     {
+        GuardianFixtureTick();
+        NativeCombatFocusTick();
+        NativeFightTraceTick();
+        CustomLootTick();
         EnemyLifetimeTick();
         SpawnCaptureTick();
         KrakenProductionAdapterTick();
@@ -192,6 +197,15 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "unequip-body") Finish(id,ChangeBodyEquipment(command,false));
             else if(op == "trap-state") Finish(id,TrapState(command));
             else if(op == "trap-submit") Finish(id,TrapSubmit(command));
+            else if(op == "town-stock-state") Finish(id,TownStockObservation(command));
+            else if(op == "guardian-damage-fixture") Finish(id,GuardianDamageFixture(command));
+            else if(op == "native-combat-focus") Finish(id,NativeCombatFocus(command));
+            else if(op == "native-fight-trace") Finish(id,NativeFightTrace(command));
+            else if(op == "preview-race") Finish(id,PreviewRaceFixture(command));
+            else if(op == "custom-loot-fixture") Finish(id,CustomLootFixture(command));
+            else if(op == "player-studio") Finish(id,PlayerStudio(command));
+            else if(op == "world-input-state") Finish(id,WorldInputObservation(command));
+            else if(op == "guardian-state") Finish(id,GuardianObservation(command));
             else if(op == "fixture-state") Finish(id,FixtureState());
             else if(op == "collect-loot") Finish(id,CollectLoot(command));
             else if(op == "fortify-party") Finish(id,FortifyParty(command));
@@ -752,7 +766,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(quietTutorial!=null){quietTutorial.m_IsPromptTutorial=previousTutorialPrompt;quietTutorial.m_IsShowTutorial=previousTutorialShow;}
         quietTutorial=null;
     }
-    void OnDestroy(){enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();if(entryTicket!=null)entryTicket.valid=false;krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
+    void OnDestroy(){CustomLootRemoveHook();PreviewRaceCleanup();NativeFightDisarm();GuardianFixtureRemoveHooks();if(combatEntryObserver==this)combatEntryObserver=null;enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();if(entryTicket!=null)entryTicket.valid=false;krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
     JObject QuietTutorials(JObject command)
     {
         FTKTutorial tutorial=FTKTutorial.Instance;if(tutorial==null)throw new InvalidOperationException("Tutorial manager unavailable.");

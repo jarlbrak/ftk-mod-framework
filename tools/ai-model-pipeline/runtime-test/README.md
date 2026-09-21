@@ -60,6 +60,25 @@ across scene transitions. It does not modify PlayerPrefs, but the game can still
 read/write shared PlayerPrefs. Use a disposable run, and never load a real save.
 Runtime results report the namespace; actual save behavior needs live verification.
 
+## Validate a separately installed content package
+
+For package gameplay tests that must not register unrelated model fixture content,
+set `FTK_MODEL_TEST_PACKAGE_ONLY=1` and supply `model-test-profiles.json` with exactly
+`{"version":1,"profiles":[]}`. The content plugin records `mode: package-only`;
+nonempty fixture lists are rejected in this mode. This retains the isolated save
+namespace and general diagnostic operations. An existing player fixture catalog
+is also rejected, so it cannot silently add unrelated classes. This mode
+does not create an enemy/player
+profile or satisfy any profile-specific model validation gate. Normal model tests
+still require their nonempty validated catalogs.
+
+In package-only mode, `player-preview-state` accepts an exact registered custom
+`classKey` and native `skinset`, without `catalogSha256`. It observes an existing
+native Party Select avatar and its renderer/resource state; it never creates a
+fixture class. The result labels its selection source as the registered class
+database and sets `assetManifestCompared: false`. This is runtime inspection,
+not comparison against a fixture asset manifest.
+
 ## Run one pinned execution-queue route
 
 For a direct-enemy or resource-prefab route already marked
@@ -645,6 +664,7 @@ A preview still requires the existing single-player guard to succeed.
   the normal single-player command guard so unavailable game logic can be
   reported instead of rejected without context.
 
+- `native-create-character-input-state` also reports the current native action names, positive key slots and modifier flags without remapping; this binding snapshot remains available outside Party Select.
 - `native-create-character-input-state`: `{}` is a synchronous, read-only
   Party Select focus diagnostic. On the actual native character-create screen,
   it records FTKInput's current focus and selected selectable, the character
@@ -2436,3 +2456,162 @@ Offline checks:
 dotnet run --project tools/ai-model-pipeline/party-start-tests -p:TestGameRoot="$PWD/scratch/mirewarden-game"
 python3 -m unittest discover -s tools/ai-model-pipeline/runtime-test -p 'test_native*boundary.py'
 ```
+
+For one guarded native combat Focus input without attacking, see
+[NATIVE-COMBAT-FOCUS.md](NATIVE-COMBAT-FOCUS.md). This isolated helper fixture
+observes the native animation debit and never retries uncertain completion.
+
+### Read-only world input gates
+
+`world-input-state` accepts only the normal `id`, `session`, and `op` envelope.
+It snapshots the current hero and party ownership, turn, HP, action points,
+respawn and hex state; movement FSM and tracked hero; native input focus and
+Quick Use focus; current controller identity; end-turn availability, modal,
+chat and console gates; and encounter state and retained diorama.
+
+It reads the native `m_HexLand` property, including its last-hex fallback.
+Missing objects are null; a section that throws reports `available: false` and
+its error instead of inventing a gate value. The operation does not poll input
+buttons, change focus, send events, advance turns, or write game/save state.
+Compare snapshots before combat and after native death/revive and return to
+the world. These observations identify gate differences; they do not establish
+a cause or repair an inert UI. Live verification requires the updated helper
+in an explicitly configured isolated game copy.
+
+The same snapshot includes `titleScreens`: actual scene `MainScreen` instances
+(including inactive ones), their instance IDs, current-focus identity, selectable
+parent, and recursively located `ModsButton` cells. Cells report activation,
+local position, RectTransform bounds, descendant text and button availability.
+Resource prefab assets are excluded using scene validity. This distinguishes a
+button injected into another menu instance from a hidden or misplaced live cell.
+
+`creationScreens` reports scene character-creation instances, numeric class/turn
+IDs, saved instantiation-array length and element type names (at most 64), and
+only saved numeric turn/class values. It also reports native class-table, UI
+creation-target, camera player-target, and color-palette lengths plus palette
+indices. It never emits serialized character names or complete saved values.
+This helps locate an initialization index mismatch without retrying `Awake` or
+changing the failed screen.
+
+Encounter diagnostics include separate client/master encounter types, master
+started/combat flags and encounter index, combatant/client identities, and the
+native acknowledgement waiter ID, continuation method name, delay and remaining
+client IDs. Identity and waiter lists are capped at 64 entries. Current-world POI
+and master POI identity/type are reported separately. Reading these values does
+not call the waiter's continuation or acknowledge any client.
+
+### Native fight entry trace
+
+`native-fight-trace` accepts `action: arm`, `inspect`, or `disarm`. Arm installs
+five read-only callback entry prefixes for `uiEnemyPoiMenu.UseFightButton`,
+`uiLocationMenuEntry.OnClick`,
+`MiniHexInfo.OnFight`, `GameFlow.LocalInitCombatSession`, and
+`EncounterSessionMC.InitiateEncounterSessionRPC`. They expire after 60 real-time
+seconds and are removed on expiry, disarm, or helper destruction. No finalizers
+are installed. A sixth prefix observes only `ContinueFSM.Continue` calls whose
+argument is `menuFight`. It records the continuation's ID, caller, wait state,
+locality, target FSM name/state, stored event and delegate method identities; it
+never calls a delegate or continuation. Changed continuation state is sampled
+on later helper frames. Intermediate transitions within one frame may be missed.
+A seventh prefix observes `Fsm.Event(string)` only for `menuFight` on the exact
+continuation FSM reference. Its snapshot reports owner enablement, active object
+path, native FSM active/started/finished flags, event routing target, active-state
+transitions and global transitions (at most 64 each). This proves entry into that
+FSM's event method, not successful event processing or a completed transition.
+An active trace cannot be rearmed without disarming it first.
+
+Inspect returns up to 64 entry records, a dropped count, and up to 32 currently
+visible location-menu entries with resolved handler names and persistent button
+callbacks (up to 16 per button). Runtime-only UnityEvent listeners are not exposed
+by that native public API. Session payloads and character names are not captured.
+No callback is invoked, acknowledgement sent, or focus/game state changed. Use
+native UI to click Fight after arming. Entry records show methods reached, not
+successful completion; instrumentation can change runtime timing. Compare with
+`world-input-state` master/client diagnostics and an uninstrumented run.
+
+### Actual native player studio image
+
+`player-studio` renders an existing active avatar synchronously, without creating
+or equipping a character. Supply `source: preview` or `world`, exact
+`ownerInstanceId` and `celInstanceId` from the observer, and `view: front`,
+`three-quarter`, or `back`. World capture requires an owned noncombat hero.
+The isolated-root and single-player helper guards remain mandatory.
+
+Output is `model-test-output/<command-id>.png` at 768 by 1024 pixels, with a
+neutral opaque background. Framing uses live bone transforms, never native
+mesh vertices or bounds. The camera preserves the current native pose. Studio
+lights supplement existing ambient lighting. Renderer GameObject layers change
+only for the synchronous render and are restored in `finally`; temporary cameras,
+lights, textures and render targets are released there on success or failure.
+No native camera, material, mesh, equipment, animation, or gameplay state is edited.
+
+The receipt pins owner/avatar, equipment, session and binary identities and image
+hash. Review framing visually before assembling a lineup. This is a presentation
+capture of actual native character geometry, not a native geometry export or a
+new gameplay/animation acceptance result. Equipment staging remains a separate
+native action; this operation never grants items or changes outfits.
+
+### Native preview race fit fixture
+
+`preview-race` accepts `action: inspect`, `apply`, or `restore`, with exact active
+`ownerInstanceId` and numeric `classId`. Apply also requires numeric `skinType`
+(0 Female, 1 Male, 2 Undead, 3 Cat, 4 Demon, 5 Fish, 6 Goblin). Inspect reports
+native skinset names, support and unlock availability. Apply accepts only a real
+supported skinset but does not require its lore unlock in this isolated fixture.
+It never changes unlocks or preferences.
+
+Only one preview fixture can be active. The helper retains the original race and
+inventory reference, assigns the preview skin type, and invokes only native
+`SetClass(currentClass)` to rebuild the avatar. Class, inventory contents/reference,
+outfit and colors must remain unchanged. Failure attempts restoration through the
+same native rebuild; it does not repair inventory or retry a game action.
+
+After apply or restore, inspect on a later frame. `studioReady` requires the old
+avatar to have been destroyed and its replacement to be active and reciprocal.
+`player-studio` enforces this gate. Restore before leaving the preview; once settled,
+inspect clears the fixture. Helper destruction attempts restoration if the same
+preview/class still exists. Never start or save a run with a staged fixture.
+Race-fit captures are visual evidence only, not lore-unlock or gameplay acceptance.
+
+Post-loot diagnostics include master loot-collection/vote and client reward/teardown
+FSM activation, active/global transitions, and existing integer/boolean variables
+(up to 64 each). The snapshot also reads the master completion continuation and
+`IsInvoking` for `ShowNextXPGold` and `ReturnToOverworld`; it never invokes them.
+A retained acknowledgement with an empty wait list can be historical after its
+completion, so it is not evidence that the corresponding reward phase is blocked.
+Use the live loot FSM state to locate the current phase.
+
+### Controlled native custom loot collection
+
+`custom-loot-fixture` accepts `action: arm`, `inspect`, or `disarm`. Arm once per
+helper process during active native enemy combat before the first attack; the claim remains spent after abort
+or disarm. It expires after 600 real-time seconds. The fixture pins the existing
+master/client encounter objects, exact native `lootDropItems` ArrayList and current
+enemy-combat diorama. Only a successful native `FillLootDropList` call
+for that exact enemy-victory context can consume it.
+
+A single postfix appends the registered `paladin_helmet_novice` string once after
+native loot generation. The item must still be the same registered row, with an
+empty lore-unlock string. Existing loot and gold/XP are unchanged. The hook is
+removed before append and on expiry/disarm/helper destruction. No database row,
+inventory or save is edited, and no vote/Collect callback is invoked.
+
+Inspect reports the resolved item ID, original loot list/count, appended token,
+resulting count, and native gold/XP. `appended` is fixture setup success only.
+Record inventory before and after clicking the ordinary native Collect button,
+confirm exactly one additional item and no native exception, then finish the
+encounter naturally. This proves controlled custom-item collection, not natural
+random drop frequency. Never automatically retry an uncertain fixture result.
+
+### Read-only encounter location inventory
+
+`world-input-state.encounterPois` reports existing native Enemy and Dungeon POI
+categories, with each object's instance/type, native ID, tile parent/index,
+active/deactivated/locked/hidden flags. Each category is capped at 1024 entries
+and reports its native count and truncation flag. Missing world data returns null.
+The observer checks the native category dictionary before `GetPOIList`, because
+that native method would otherwise create an empty list for a missing category.
+It does not generate encounters, reveal tiles, unlock POIs, or move the party.
+Enemy combat level is not inferred from dungeon progress or display names.
+These are test-only location observations, not evidence of encounter difficulty
+or normal discovery and travel.
