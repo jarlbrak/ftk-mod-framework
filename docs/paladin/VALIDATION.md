@@ -257,3 +257,8 @@ frames are retained. The [corrected native male attack trial](novice-combat-stud
 completes 100 paired frames, with no camera clipping in reviewed bent, recovery
 and victory poses. The shield hides part of the wind-up; female two-handed
 and broader motion acceptance remain open.
+
+The [female two-handed front capture](novice-female-studio-windup.json) records
+only the beginning of the wind-up. The attack started at frame 93 of 100; strike
+and recovery are absent. Visible breastplate and sleeves remain attached in
+reviewed frames, but this does not close the full two-handed motion gate.

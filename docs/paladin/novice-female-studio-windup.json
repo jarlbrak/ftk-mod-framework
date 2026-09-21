@@ -1,0 +1,49 @@
+{
+  "schema": "ftkmf.paladin-female-studio-windup.v1",
+  "status": "partial-attack-interval",
+  "session": "e910d23f3a3b4509b4eed8e314e651de",
+  "captureId": "4fa83f75ac604a54af30b0a958beb02f",
+  "captureReceiptSha256": "d010d706ce909aaa23907103c3eb7fc90c4c77251dcdbd62fc40e16b4f37003f",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "41897eaf3f7e8635e9df6fa727cb8fc5e409a4f3505c43020c43af26257073bc",
+  "armorSha256": "72f22854b3c71bc204dfcc702721623799100ef15bc4a6f46d49f5577e9644e9",
+  "ownerInstanceId": 364424,
+  "celInstanceId": -329578,
+  "frames": 100,
+  "timingMode": "offline-fixed-step-gameplay",
+  "lastGameSeconds": 10.889999389648438,
+  "reviewedFrames": [
+    {
+      "index": 93,
+      "studioSha256": "fcc68c0a038bd25a0170634f2b421593bb69d495666db2a5a8ed1a82a8b2c4a3",
+      "screenSha256": "36e525582fa96f39624c03b63d7196960ffeb9da93f3eb662cf9c6a7f07a3589",
+      "normalizedTime": 0.09075000137090683,
+      "clip": "attackProf_blunt2H"
+    },
+    {
+      "index": 96,
+      "studioSha256": "ff79f9f2fcd4455329d396d9a0e1bae984da98a0d4fde23cb8cf21405b5f62b4",
+      "screenSha256": "beac4a66283c0523e452190c522e4cdb1124d042aacc86ebd9f09b931db48a13",
+      "normalizedTime": 0.22687500715255737,
+      "clip": "attackProf_blunt2H"
+    },
+    {
+      "index": 99,
+      "studioSha256": "6c0669e92df818edc5bd592545b44501109613a9f6adf6ce43406970c43e6c7b",
+      "screenSha256": "f20799e304de5fc7431497e7e26c2e3c686fa4fd3928a0928eecb7c06f74b8e6",
+      "normalizedTime": 0.36299997568130493,
+      "clip": "attackProf_blunt2H"
+    }
+  ],
+  "equipmentFixture": "Owned Novice two-handed hammer equipped through native equip_item before Ready; this does not establish acquisition.",
+  "action": "Native Ready, Hunter pass, one native keyboard no-focus Crush.",
+  "observations": [
+    "Attack starts at frame 93; capture ends at frame 99, normalized progress 0.090750 through 0.363000.",
+    "Breastplate and sleeves remain attached in the reviewed wind-up frames.",
+    "Framing remains outside the avatar in these sampled views."
+  ],
+  "limitations": [
+    "Strike and recovery are absent; this is not a complete two-handed motion check.",
+    "No received-damage or death capture, user art approval, all-race motion or online claim."
+  ]
+}
