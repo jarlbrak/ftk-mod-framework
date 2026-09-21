@@ -41,8 +41,10 @@ may require right-click > Open, and Steam artwork may need a Steam restart.
 Balance and unobserved appearance/motion combinations remain beta limitations.
 Representative Mercy equipment motion has been observed on native male and female
 bodies; untested set/race combinations remain outside that evidence.
-Final equipment-motion acceptance, same-process subsequent-combat lifecycle
-checks, release packaging and marketplace download validation remain delivery
+[Same-session ordinary combat recharge](next-combat-live.json) passed after a
+spent rescue and native victory. Dungeon reuse, incapacity recovery, resource
+retirement, final equipment-motion acceptance, release packaging and marketplace
+download validation remain delivery
 work, not completed results. Do not describe this draft as a released beta.
 
 ## Maintainer publication candidate
