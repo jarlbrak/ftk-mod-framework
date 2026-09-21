@@ -1,0 +1,141 @@
+{
+  "schema": "ftkmf.paladin-ward-native-candidates.v1",
+  "status": "native-source-and-metadata-verified-live-tests-separate",
+  "inputs": [
+    {
+      "name": "Managed/Assembly-CSharp.dll",
+      "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+    },
+    {
+      "name": "sharedassets1.assets",
+      "sha256": "e38abff2efd7ca8ef8ede4b92754d6b3a06c6498a774ee55d0d1ddbffba4750f"
+    },
+    {
+      "name": "resources.assets",
+      "sha256": "e33be4e6a3add9c15bc1d778f8b2162c8d9835f62b2764b75b30d49deb036117"
+    },
+    {
+      "name": "globalgamemanagers.assets",
+      "sha256": "21dc4b9559c66feb428b6337d230ff63c928d38937500329e5535146cb7ce9ed"
+    }
+  ],
+  "method": "Read native enemy rows, follow weapon references to serialized proficiency dictionaries, then resolve proficiency rows and prefab categories. No native source, bytes, or geometry reproduced.",
+  "anchors": {
+    "enemyDatabase": {
+      "asset": "sharedassets1.assets",
+      "componentPathId": 5124,
+      "type": "GridEditor.FTK_enemyCombatDB"
+    },
+    "proficiencyDatabase": {
+      "asset": "sharedassets1.assets",
+      "componentPathId": 4891,
+      "type": "GridEditor.FTK_proficiencyTableDB"
+    }
+  },
+  "candidates": [
+    {
+      "category": "Poison",
+      "enemyId": "snakeDesertB",
+      "weaponAsset": "resources.assets",
+      "weaponPathId": 136787,
+      "proficiencyId": "enBitePoisonReg",
+      "prefabPathId": 5193,
+      "prefabType": "ProficiencyPoison",
+      "target": "single enemy",
+      "harmless": false,
+      "alternative": {
+        "proficiencyId": "enPoisonGroup3",
+        "target": "group",
+        "harmless": true
+      }
+    },
+    {
+      "category": "Stunned",
+      "enemyId": "trollA",
+      "weaponAsset": "resources.assets",
+      "weaponPathId": 136886,
+      "proficiencyId": "enStun",
+      "prefabPathId": 4483,
+      "prefabType": "ProficiencyStunned",
+      "target": "single enemy",
+      "harmless": false
+    },
+    {
+      "category": "Dazed",
+      "enemyId": "trollA",
+      "weaponAsset": "resources.assets",
+      "weaponPathId": 136886,
+      "proficiencyId": "enTrollReg",
+      "prefabPathId": 4482,
+      "prefabType": "ProficiencyStunned",
+      "target": "single enemy",
+      "harmless": false
+    },
+    {
+      "category": "Curse",
+      "enemyId": "hagC",
+      "weaponAsset": "resources.assets",
+      "weaponPathId": 135785,
+      "proficiencyId": "enCurseGroup",
+      "prefabPathId": 4867,
+      "prefabType": "ProficiencyCurse",
+      "target": "group",
+      "harmless": true
+    }
+  ],
+  "commonCandidateProperties": {
+    "prefabAsset": "sharedassets1.assets",
+    "targetFriendly": false,
+    "fullSlots": true,
+    "chanceToAffect": 1
+  },
+  "semantics": [
+    "DamageCalculator.StartEngageAttack sets proficiency success independently of damage; these full-slot skills require complete slot success in ordinary non-cheat attacks.",
+    "DummyDamageInfo copies m_ProfSuccess, queries native immunity and effect applicability, and clears applicability for nonimmune damaging attacks that deal zero damage. Harmless actions can apply effects without HP damage.",
+    "Dodge clears m_ProfAffect and m_ProfImmune. Natural immunity can also yield no effect.",
+    "Guardian Ward changes eligible m_ProfAffect from true to false and sets m_ProfImmune true before native effect application. A final immune flag alone does not identify its cause."
+  ],
+  "falsePositiveCautions": [
+    "Observe the affected victim, attack proficiency and success, active Guard and Ward equipment, original applicability, and resulting effect state. Absence of a status alone is insufficient.",
+    "CharacterStats.HasImmunity includes personal and party immunities. Wet suppresses native immunity. Snapshot these without changing them.",
+    "Never invoke ProficiencyBase.IsIgnore as a diagnostic: it consumes Unity random state.",
+    "ProficiencyStunned.AddToDummy declines a new Stunned or Dazed record when Stunned, Dazed, or Entangle is already present.",
+    "Poison and Curse are stored in character stats, not the timed suffering-proficiency dictionary. Existing poison at the stage cap or duplicate curses can conceal an application.",
+    "An inactive or expired Guard control and a non-Guardian control remain necessary for attribution.",
+    "Enemy skill choice is not guaranteed: trollA has chanceToProf approximately 0.3 and two configured skills.",
+    "witchA proficiency enWitchStun resolves prefab5538 ProficiencyEntangle, so its name does not establish a Ward-covered stun."
+  ],
+  "readOnlyObservation": {
+    "statsPath": "CharacterDummy.m_CharacterOverworld.m_CharacterStats",
+    "fields": [
+      {
+        "name": "m_PoisonLvl",
+        "type": "public int"
+      },
+      {
+        "name": "m_ActiveCurses",
+        "type": "public List<CharacterStats.CurseType>"
+      },
+      {
+        "name": "m_PermaCurses",
+        "type": "public List<CharacterStats.CurseType>"
+      }
+    ],
+    "properties": [
+      "CharacterStats.IsPoisoned",
+      "CharacterStats.IsCursed",
+      "CharacterDummy.Wet"
+    ],
+    "safeQueries": [
+      "CharacterStats.HasImmunity(ProficiencyBase.Category)",
+      "CharacterStats.GetAllActiveImmunities()"
+    ],
+    "timedEffects": "Read CharacterDummy.m_SufferingProficiencies keys Stunned, Dazed, and Entangle plus their record counts/timers.",
+    "constraints": "Copy bounded primitive/enum snapshots only; do not call setters, IsIgnore, random-curse selection, attack methods, or UI callbacks."
+  },
+  "limits": [
+    "Candidate membership and native mechanics are source evidence, not completed Ward validation.",
+    "World locations are deliberately omitted because they belong to a transient fixture save.",
+    "No online peer agreement or complete four-category live coverage is claimed."
+  ]
+}

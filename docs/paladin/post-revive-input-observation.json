@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-20",
+  "session": "613fb876e4094e2a9d60a1cce5e5c97b",
+  "frameworkSha256": "2b574262ed689c3a365859cb29ca7a50c05b5137caf823c9482b4cb0400ce091",
+  "helperSha256": "07b8d02a1f892bcdc6da6f263a57f6165e1d9a78393d463177c79cd1d5a3d3f0",
+  "status": "fixture-entry divergence identified; native entry validation pending",
+  "sequence": [
+    "Controlled spent-rescue native death of current overworld Hunter",
+    "Native Revive restored12HP",
+    "Native attacks completed encounter and gold collected",
+    "Fixture equipped Mercy gear on Hunter in overworld",
+    "Inventory and EndTurn keyboard inputs did not open UI or advance turn; Escape Options remained functional"
+  ],
+  "observations": [
+    "World visible, combat inactive, currentHunter actionPoints0",
+    "Read-only input observer currentFocus absent",
+    "No exception found in current logs"
+  ],
+  "limits": [
+    "Native movement into an encounter and native Fight must verify normal return before claiming lifecycle completion.",
+    "No production focus recovery patch is justified by this fixture-only reproduction."
+  ],
+  "control": {
+    "session": "c3a639c597804fbe8a751faf656790aa",
+    "frameworkSha256": "0c1d9f4f1cf7e5b5377f307067933af414f21092facaaeffebb6f2188c760478",
+    "result": "Reproduced after ordinary attacks and victory without Guard, death, revival or forced damage. Movement stayed Tracking, current hero owned the turn with 5 AP and EndTurn enabled, but world input focus was absent.",
+    "sourceFinding": "Bridge StartCombatSession supplies a no-op continuation and bypasses native MiniHexInfo.OnFight location shutdown. Native FightFinished resumes the location continuation, which restores movement input focus.",
+    "observerLimitation": "Installed helper returned valid read-only data without the top-level ok envelope, so command exit status was 1. This observation is not a passing command result."
+  }
+}

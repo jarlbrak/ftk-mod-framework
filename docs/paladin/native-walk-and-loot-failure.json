@@ -1,0 +1,18 @@
+{
+  "schema": "ftkmf.paladin-native-walk-loot.v1",
+  "session": "af02f941e51847dcb5ecd29f74756238",
+  "packageSha256": "43ad600ec7ca782444adca9ca209595d707f4f083dbb39357a84f09fc0db8291",
+  "helperSha256": "50563a971827ed530a0fac936c2c56c6388c9eb516f2f1edcef61a0b3ade7fed",
+  "status": "native-entry-and-drop-observed-collection-failed",
+  "observations": [
+    "Explicit fixture placement adjacent to enemy at13,5, followed by native keyboard movement onto13,2.",
+    "Native encounterMenu/Show Menu continuation includes menuFight ->Fight. Native Fight entered combat with all three heroes.",
+    "Native unfocused hammer attack reduced Beastman Warrior from9HP to0; victory loot included5gold and a Novice Helm.",
+    "Collecting helm displayed item receipt but stalled master lootDrop at Accept1. Native player log reports False lore lookup and repeated LootAccept exceptions.",
+    "No successful collection/lifecycle acceptance. Repeated native action could add duplicate items before the exception; process stopped without saving."
+  ],
+  "cause": "All36 authored equipment rows supplied boolean false for native string m_CollectLoreItemUnlock; loader converted it to False. Native LootAccept expects empty string or valid lore ID.",
+  "correction": "All36 fields now empty strings; package structural validator asserts this invariant.",
+  "fixedCandidateSha256": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295",
+  "remaining": "Repeat native collection and return to world from pre-combat protected save. No production FSM event rename."
+}

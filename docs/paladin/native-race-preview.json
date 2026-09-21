@@ -1,0 +1,127 @@
+{
+  "schema": "ftkmf.paladin-native-race-preview.v1",
+  "status": "seven-native-appearances-mercy-front-rendered-and-restored",
+  "frameworkSha256": "a1faf7907de8acfea9ec1dcb14371761386f689f92888ef314891eec3689b00e",
+  "helperSha256": "2f0b527493fa4ea27738a65c02ba9aac63561d5171d6ea2bb20a0b371d2c0d9c",
+  "sourcePackageSha256": "1a075a77b579bd5c2b6efe8809419c3b52fcb6d671193af531ce9eb839e3b474",
+  "session": "d7c8da1aabf94aa28d6ff216a4c63db3",
+  "method": "Temporary isolated native preview skin selection and SetClass rebuild with existing resumed Mercy inventory. No unlock purchase, preference write, inventory mutation or game start. Rendered exact rebuilt native CEL after prior avatar retired.",
+  "appearances": [
+    {
+      "race": "female",
+      "skinType": 0,
+      "celInstanceId": -271558,
+      "imageSha256": "e937925ea03ff61281fa3dd1d622afcf57d9296cd357ac5b860caa62f7305b60",
+      "layersRestored": true
+    },
+    {
+      "race": "male",
+      "skinType": 1,
+      "celInstanceId": -272444,
+      "imageSha256": "7cf9cf9f5f003767d11cf550cd350b6e373c7bfb567e02fa84e04796d36fdecc",
+      "layersRestored": true
+    },
+    {
+      "race": "undead",
+      "skinType": 2,
+      "celInstanceId": -273334,
+      "imageSha256": "11b86ee36bccbd046538b292017874b9fb4109e6e34d943ac762005e0c03bfb0",
+      "layersRestored": true
+    },
+    {
+      "race": "cat",
+      "skinType": 3,
+      "celInstanceId": -274200,
+      "imageSha256": "5c81b6479bba033bf9803eb0c06c353c43d24e11ccde236c26fbb7b14221bd59",
+      "layersRestored": true
+    },
+    {
+      "race": "demon",
+      "skinType": 4,
+      "celInstanceId": -275082,
+      "imageSha256": "8c104af70050a6a7d1c591559e3458ff2ab979d2369e42d27042e1d1811cffa7",
+      "layersRestored": true
+    },
+    {
+      "race": "fish",
+      "skinType": 5,
+      "celInstanceId": -275974,
+      "imageSha256": "110b21f1b7cb919f7d738d8ad01bc71b6cb9b452b89a821f15c42e6cf5d9ad5d",
+      "layersRestored": true
+    },
+    {
+      "race": "goblin",
+      "skinType": 6,
+      "celInstanceId": -276866,
+      "imageSha256": "108fc49450d67a1edd57fc5dbf406b13f159425d468156887ef25d67b3f26ddd",
+      "layersRestored": true
+    }
+  ],
+  "nativeAvailability": [
+    {
+      "skinType": 0,
+      "name": "Female",
+      "skinset": "blacksmith_Female",
+      "supported": true,
+      "nativeUnlocked": true
+    },
+    {
+      "skinType": 1,
+      "name": "Male",
+      "skinset": "blacksmith_Male",
+      "supported": true,
+      "nativeUnlocked": true
+    },
+    {
+      "skinType": 2,
+      "name": "Undead",
+      "skinset": "blacksmith_Undead",
+      "supported": true,
+      "nativeUnlocked": true
+    },
+    {
+      "skinType": 3,
+      "name": "Cat",
+      "skinset": "blacksmith_Cat",
+      "supported": true,
+      "nativeUnlocked": true
+    },
+    {
+      "skinType": 4,
+      "name": "Demon",
+      "skinset": "blacksmith_Demon",
+      "supported": true,
+      "nativeUnlocked": false
+    },
+    {
+      "skinType": 5,
+      "name": "Fish",
+      "skinset": "blacksmith_Fish",
+      "supported": true,
+      "nativeUnlocked": true
+    },
+    {
+      "skinType": 6,
+      "name": "Goblin",
+      "skinset": "blacksmith_Goblin",
+      "supported": true,
+      "nativeUnlocked": false
+    }
+  ],
+  "restoration": {
+    "originalSkinType": 1,
+    "restoredSkinType": 1,
+    "fixtureActive": false,
+    "studioReady": true
+  },
+  "observations": [
+    "All seven native heads/faces appear under the custom Mercy helmet.",
+    "The same custom armor, boots, hammer and shield are visible on every appearance.",
+    "No obvious face occlusion or missing gear in these front captures."
+  ],
+  "limitations": [
+    "Mercy front-view presentation only; not all-set, all-angle or combat motion coverage.",
+    "Race application was an explicit temporary fixture, not a normal UI race-selection claim.",
+    "Normal native unlock checks remain unchanged; this local profile reported all seven unlocked."
+  ]
+}

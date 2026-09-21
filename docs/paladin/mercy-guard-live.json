@@ -1,0 +1,382 @@
+{
+  "session": "ead6a254b2814a7bb264e5841a2e89ca",
+  "frameworkSha256": "45beee438fe95dd7237a2a5e2a9ca290f0cc5bfdca8e2828d953f717e63ad120",
+  "helperSha256": "8f6f76efdc0b903f70e4ecd4488ddfcd807de17487f56297346164f6bfb353f4",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "schema": "ftkmf.paladin-mercy-guard-live.v1",
+  "status": "bounded-native-healing-deltas-pass",
+  "method": "Retrospective comparison of read-only snapshots and native combat events from the Censure trial. Fixture-owned equipment; normal Guard actions; no HP forcing in either interval.",
+  "intervals": [
+    {
+      "before": {
+        "requestId": "d927f5f676484dac96db1ad0cf3b32aa",
+        "frame": 69936,
+        "sourceSha256": "f24165569477c23f34b7d96ff5719fa7eb249c09fa7baed1ce07fc83b24ad7d4",
+        "heroes": [
+          {
+            "identity": "0:1",
+            "hp": 11,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1466315293,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1191317998,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "1:1",
+            "hp": 10,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1608024128,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1473502429,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "2:1",
+            "hp": 10,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": []
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1412115398,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "after": {
+        "requestId": "f378e352e91f4f818ef38065b796b856",
+        "frame": 77683,
+        "sourceSha256": "800ddba82092012f34b83f583a538db87a1b70eefe5eb9e6c018280fb6c87ac9",
+        "heroes": [
+          {
+            "identity": "0:1",
+            "hp": 13,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1466315293,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1191317998,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "1:1",
+            "hp": 10,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1608024128,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1473502429,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "2:1",
+            "hp": 10,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": []
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1412115398,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "target": "0:1",
+      "healedHp": 2,
+      "guardingHero": "1:1",
+      "mercyShieldItemId": 1608024128,
+      "events": [
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) suffering from: Lightning, ",
+            "Player 3 Dummy(Player 3) is deciding",
+            "Player 3 Dummy(Player 3) bypasses slot roll",
+            "[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with 1412115398(1398377095), expected result: HarmlessAttack",
+            "Player 3 Dummy(Player 3) attempting ItemAttack",
+            "Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)",
+            "[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 9
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) suffering from: Lightning, ",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 1 Dummy(Player 1) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 1 Dummy(Player 1)",
+            "[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 10
+        }
+      ]
+    },
+    {
+      "before": {
+        "requestId": "f98b5f81dc8c430584f3633dd136d951",
+        "frame": 128114,
+        "sourceSha256": "659ad7cbe741de99f8589dae967bc3a04397d0f7ca19056634609113bbb6cf02",
+        "heroes": [
+          {
+            "identity": "0:1",
+            "hp": 16,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1466315293,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1191317998,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "1:1",
+            "hp": 19,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1608024128,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1473502429,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "2:1",
+            "hp": 3,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": []
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1412115398,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "after": {
+        "requestId": "8b6963df59ec4c40873198c68ac2932e",
+        "frame": 136088,
+        "sourceSha256": "a1948983e494321947dd2024c6838c7240acad4ad4413f854e07ee5e67776000",
+        "heroes": [
+          {
+            "identity": "0:1",
+            "hp": 16,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1466315293,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1191317998,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "1:1",
+            "hp": 19,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": [
+                  {
+                    "itemId": 1608024128,
+                    "count": 1
+                  }
+                ]
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1473502429,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "identity": "2:1",
+            "hp": 6,
+            "hands": [
+              {
+                "slot": "LeftHand",
+                "items": []
+              },
+              {
+                "slot": "RightHand",
+                "items": [
+                  {
+                    "itemId": 1412115398,
+                    "count": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "target": "2:1",
+      "healedHp": 3,
+      "guardingHero": "1:1",
+      "mercyShieldItemId": 1608024128,
+      "events": [
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) is deciding",
+            "Player 3 Dummy(Player 3) bypasses slot roll",
+            "[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 2 Dummy(Player 2) with 1412115398(1398377095), expected result: HarmlessAttack",
+            "Player 3 Dummy(Player 3) attempting ItemAttack",
+            "Player 3 Dummy(Player 3) guards Player 2 Dummy(Player 2)",
+            "[RespondToHit] Player 2 Dummy(Player 2) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 22
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 23
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Snapshots establish the observed positive healing deltas, not an exhaustive percentage or rounding proof.",
+    "Deficit cap, full-health behavior, non-Guardian control and Mercy focused-hit bonuses remain separate live gates.",
+    "No acquisition, balance or online co-op acceptance."
+  ]
+}

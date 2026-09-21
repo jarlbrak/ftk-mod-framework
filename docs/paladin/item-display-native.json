@@ -1,0 +1,64 @@
+{
+  "date": "2026-09-20",
+  "session": "5330925667004250bcc637c3e815e3a5",
+  "frameworkSha256": "5cab861eebfbb47a11d8ec945e3c16312dbfa173f2eef92efd061de42c88bed9",
+  "packageSha256": "3d5af26767da49956b8f69f06dad04e65d4d00a7ef285ae897804316ff169cb9",
+  "method": "Native market and owned inventory navigation through keyboard UI; direct screen observation.",
+  "passed": [
+    "Novice Aegis original shield model centered within card; -2 Speed and Paladin-only Guard restores 2% ally max HP text fit.",
+    "Novice Plate original rigid armor display centered; +2 Armor and +1 Resistance.",
+    "Novice Sabatons original rigid boots display centered; +1 Armor.",
+    "Novice Hammer original one-handed display fits.",
+    "Novice Helm original display fits; +1 Armor and +1 Resistance.",
+    "No modifier-name lookup exception during these card views."
+  ],
+  "failed": [
+    "Novice Great Hammer original head cropped at top-right; display-only fitting required.",
+    "Class rules overflow horizontally in native class panel; separate formatting fix awaiting live check."
+  ],
+  "limits": [
+    "Other tiers and multi-perk text not yet visually accepted.",
+    "No retained standalone screenshot files; observations use live UI."
+  ],
+  "subsequentCandidate": {
+    "session": "d2f49dfb2360433dbffbc2e66dbfa0ed",
+    "frameworkSha256": "2b574262ed689c3a365859cb29ca7a50c05b5137caf823c9482b4cb0400ce091",
+    "packageSha256": "d005020ea8e9095c2395f5e81f130812ae7c3a4809532ac3523973f384cbf8d5",
+    "classPanel": "All six short rule lines and native starting equipment fit inside normal Paladin class panel. Reopened twice without vertical drift. Other classes do not gain these rules.",
+    "itemCards": [
+      "Novice Great Hammer original fitted display fully inside card, head and handle visible.",
+      "Novice Aegis original display and Guard heals 2% ally max HP (min 1) text fit both main and equipped comparison cards."
+    ]
+  },
+  "endgameCandidate": {
+    "session": "c3a639c597804fbe8a751faf656790aa",
+    "frameworkSha256": "0c1d9f4f1cf7e5b5377f307067933af414f21092facaaeffebb6f2188c760478",
+    "fixtureArchiveSha256": "6e9c8b91af6cbaceec7c230051f74378c7035c5fd887ee2a5be4e2f117f1e57f",
+    "passed": [
+      "Mercy, Censure and Verdict one-handed hammer, plate, helm and boots original displays fit inside native inventory cards.",
+      "Mercy Great Hammer fitted display and +4% focused-hit healing text fit.",
+      "Mercy +2% focused-hit healing text fit on one-handed weapon.",
+      "Mercy 8% Guard healing, Censure four-status ward and Verdict four-damage retaliation descriptions fit both item and equipped comparison panels."
+    ],
+    "failed": [
+      "All three endgame shield outer upper corners clip the old display bounds; separate fitted shield candidate awaits deployment."
+    ],
+    "limits": [
+      "Fixture inventory and equipping, not ordinary acquisition.",
+      "No standalone screenshot artifacts claimed."
+    ]
+  },
+  "shieldFitCandidate": {
+    "session": "a74aa7f3e6e8435f912d1ec7fc848c1d",
+    "frameworkSha256": "2fcf2132f72cf54bfa3abc40cbdeb6c83194d7422e2d338eacf85a849d06eb4b",
+    "fixtureArchiveSha256": "e6455b4e7b462bc7ce0503b903c39b56833a5fd5dfacfe24e17c2d70a4be4e05",
+    "passed": [
+      "Mercy, Censure and Verdict shield models fully fit native inventory item cards, including upper corners and top ornament.",
+      "Guard healing, four-status ward and four-damage retaliation descriptions fit both main and equipped comparison cards."
+    ],
+    "limits": [
+      "Owned inventory fixture, not acquisition.",
+      "Direct live UI observation; no standalone screenshot artifact."
+    ]
+  }
+}

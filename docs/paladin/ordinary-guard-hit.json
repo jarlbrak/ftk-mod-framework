@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-20",
+  "session": "737da248e8474d1090a345c1015e9872",
+  "frameworkSha256": "0eaff569bbcd3a7ba0af5ef87cae6f648dab8289ec878a407f939c4f437d85ba",
+  "fixtureArchiveSha256": "68ec199429ea18918845066b33e78a7557378c749edf24c41f09af01c3298964",
+  "status": "ordinary-enemy-hit-observed",
+  "victim": "0:1",
+  "activeGuardiansBeforeEnemyTurn": [
+    "1:1",
+    "2:1"
+  ],
+  "hpBefore": 37,
+  "hpAfter": 35,
+  "nativeAttack": "beastmanA_spear(None)",
+  "combatLog": "Guard protected Player 1 Dummy(Player 1)",
+  "method": "Both Paladins cast Guard through native keyboard UI. Hunter passed; native enemy targeting, roll and direct hit proceeded without damage-fixture replacement.",
+  "limits": [
+    "Two active guards before the enemy turn and a single protection log do not independently prove the numerical reduction or deterministic rescue selection. Controlled fixtures cover exact damage separately.",
+    "All-gear starting inventory, equipment changes and encounter placement were isolated fixtures.",
+    "The first guardian protection expired at its subsequent turn before the after snapshot."
+  ]
+}

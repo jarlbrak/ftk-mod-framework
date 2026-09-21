@@ -1,0 +1,382 @@
+{
+  "status": "bounded-native-pipeline-fixtures-passed",
+  "date": "2026-09-20",
+  "environment": "Original For The King; Unity 2017.2.2p2; isolated macOS single-player",
+  "frameworkSha256": "ff280c030c7c9e1550be4d6521f819565779b8054056b6d67b412ab9ce4c4bb2",
+  "helperSha256": "9e8aa21beaa9ef6d93d2052dabfcb83a833ab85491b3de8da8d7f10322b504c6",
+  "session": "f1a2914d8452494ba64ab937f25cd7aa",
+  "route": "Guard cast through native UI, then one-shot test helper retargeted a native enemy turn and substituted one committed direct outcome. Production Guard prefix and native hit/HP pipeline performed the observed transformation.",
+  "cases": [
+    {
+      "case": "odd-direct-damage-reduction",
+      "receipt": "9b779a2051534358b67eb5dd710ea7ba",
+      "status": "passed",
+      "sourceArtifact": "scratch/paladin-bison-reduction-result.txt",
+      "events": [
+        {
+          "phase": "armed",
+          "frame": 29014,
+          "data": {
+            "hp": 36,
+            "damage": 9,
+            "expectedHp": 31,
+            "rescueAvailable": true
+          }
+        },
+        {
+          "phase": "retarget",
+          "frame": 30142,
+          "data": {
+            "originalVictim": "0:1"
+          }
+        },
+        {
+          "phase": "commit-shape",
+          "frame": 30320,
+          "data": {
+            "pinnedVictimMatches": true,
+            "main": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 22,
+              "health": 14,
+              "response": "DamagedHeavy",
+              "proficiency": "enBisonReg",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary1": null,
+            "secondary2": null,
+            "aoeTargets": 0
+          }
+        },
+        {
+          "phase": "commit",
+          "frame": 30320,
+          "data": {
+            "original": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 22,
+              "health": 14,
+              "response": "DamagedHeavy",
+              "proficiency": "enBisonReg",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "replacement": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 9,
+              "health": 27,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        },
+        {
+          "phase": "production-transformed",
+          "frame": 30320,
+          "data": {
+            "attacker": "0:-1",
+            "victim": "1:1",
+            "damage": 5,
+            "health": 31,
+            "response": "Damaged",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        },
+        {
+          "phase": "native-hit",
+          "frame": 30539,
+          "data": {
+            "passed": true,
+            "hp": 31,
+            "alive": true,
+            "rescueAvailable": true,
+            "outcome": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 5,
+              "health": 31,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "active-guard-lethal-rescue",
+      "receipt": "fd222dc4e3734ab78672ec66f037c6fb",
+      "status": "passed",
+      "sourceArtifact": "scratch/paladin-bison-rescue-second-result.txt",
+      "events": [
+        {
+          "phase": "armed",
+          "frame": 37208,
+          "data": {
+            "hp": 31,
+            "damage": 62,
+            "expectedHp": 1,
+            "rescueAvailable": true
+          }
+        },
+        {
+          "phase": "retarget",
+          "frame": 37759,
+          "data": {
+            "originalVictim": "0:1"
+          }
+        },
+        {
+          "phase": "commit-shape",
+          "frame": 37940,
+          "data": {
+            "pinnedVictimMatches": true,
+            "main": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 22,
+              "health": 9,
+              "response": "DamagedHeavy",
+              "proficiency": "enBisonReg",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary1": null,
+            "secondary2": null,
+            "aoeTargets": 0
+          }
+        },
+        {
+          "phase": "commit",
+          "frame": 37940,
+          "data": {
+            "original": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 22,
+              "health": 9,
+              "response": "DamagedHeavy",
+              "proficiency": "enBisonReg",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "replacement": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 62,
+              "health": 0,
+              "response": "Death",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        },
+        {
+          "phase": "production-transformed",
+          "frame": 37940,
+          "data": {
+            "attacker": "0:-1",
+            "victim": "1:1",
+            "damage": 30,
+            "health": 1,
+            "response": "DamagedHeavy",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        },
+        {
+          "phase": "native-hit",
+          "frame": 38159,
+          "data": {
+            "passed": true,
+            "hp": 1,
+            "alive": true,
+            "rescueAvailable": false,
+            "outcome": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 30,
+              "health": 1,
+              "response": "DamagedHeavy",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "safeguardCases": [
+    {
+      "case": "bison-group-debuff-rejected",
+      "receipt": "5a67362116bb485fad0fb27fb96e389a",
+      "status": "aborted",
+      "sourceArtifact": "scratch/paladin-bison-rescue-result.txt",
+      "events": [
+        {
+          "phase": "armed",
+          "frame": 33931,
+          "data": {
+            "hp": 31,
+            "damage": 62,
+            "expectedHp": 1,
+            "rescueAvailable": true
+          }
+        },
+        {
+          "phase": "retarget",
+          "frame": 34482,
+          "data": {
+            "originalVictim": "1:1"
+          }
+        },
+        {
+          "phase": "commit-shape",
+          "frame": 34636,
+          "data": {
+            "pinnedVictimMatches": true,
+            "main": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 0,
+              "health": 31,
+              "response": "HarmlessAttack",
+              "proficiency": "enAttackDownGroup",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary1": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 0,
+              "health": 31,
+              "response": "HarmlessAttack",
+              "proficiency": "enAttackDownGroup",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary2": null,
+            "aoeTargets": 1
+          }
+        },
+        {
+          "phase": "aborted",
+          "frame": 34636,
+          "data": {
+            "reason": "Native secondary damage outcome is present",
+            "previousStage": "targeted"
+          }
+        }
+      ]
+    },
+    {
+      "case": "warlock-splash-rejected",
+      "receipt": "04489367d98347e18a41308f0a5e0102",
+      "status": "aborted",
+      "sourceArtifact": "scratch/paladin-duration-reduction-result.txt",
+      "events": [
+        {
+          "phase": "armed",
+          "frame": 13832,
+          "data": {
+            "hp": 36,
+            "damage": 9,
+            "expectedHp": 31,
+            "rescueAvailable": true
+          }
+        },
+        {
+          "phase": "retarget",
+          "frame": 15930,
+          "data": {
+            "originalVictim": "1:1"
+          }
+        },
+        {
+          "phase": "commit-shape",
+          "frame": 16085,
+          "data": {
+            "pinnedVictimMatches": true,
+            "main": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 0,
+              "health": 36,
+              "response": "Dodge",
+              "proficiency": "magicSplash",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary1": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 2,
+              "health": 31,
+              "response": "Damaged",
+              "proficiency": "magicSplash",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary2": {
+              "attacker": "0:-1",
+              "victim": "2:1",
+              "damage": 2,
+              "health": 14,
+              "response": "Damaged",
+              "proficiency": "magicSplash",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "aoeTargets": 2
+          }
+        },
+        {
+          "phase": "aborted",
+          "frame": 16085,
+          "data": {
+            "reason": "Native secondary damage outcome is present",
+            "previousStage": "targeted"
+          }
+        }
+      ]
+    }
+  ],
+  "nativeUiObservations": [
+    "Hunter health was visibly 31 after reduction and 1 after rescue.",
+    "A Scholar killed by a natural 22-damage hit before Guard was excluded from the living ally selector. This was not an active-Guard rescue failure."
+  ],
+  "limitations": [
+    "The fixture replaced damage calculation and targeting; it is not ordinary RNG, armor, dodge or AI evidence.",
+    "Transient helper hooks were active during these hits; no combat-entry trace or clone-finalizer bypass is claimed.",
+    "Rescue changed from available to spent. A subsequent lethal hit with the spent charge was not tested.",
+    "No co-op, multiple-guardian, incapacitation, healing, equipment-benefit or full-save coverage is established.",
+    "Screenshots were observed by the live operator; this receipt does not embed or assert a public screenshot artifact."
+  ]
+}

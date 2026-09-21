@@ -1,0 +1,31 @@
+{
+  "schema": "ftkmf.paladin-publication-candidate.v1",
+  "status": "local-metadata-and-archive-validation-pass-not-published",
+  "proposedTag": "paladin-v0.1.0-beta",
+  "frameworkReleaseRequired": "v0.1.4",
+  "helperSha256": "702d29fb02a2b7431cd183e0fb6d0e37eaf687e4b2ff60b9161c944f81e8c8b9",
+  "files": {
+    "catalog-candidate.json": "4d5749f58913aba94a106a8c7ae1da8e3ba50d9e353a756025984b3b14b3143a",
+    "paladin-0.1.0.descriptor.json": "4deb11e71c2cc430044bf13dcd039a4f55bf6c28b9172c962fae79ed46a7956f",
+    "paladin-beta-0.1.0-92dd4d19d8ef.zip": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295"
+  },
+  "checks": [
+    {
+      "operation": "marketplace-validate",
+      "exitCode": 0,
+      "stdout": "Package descriptor and archive validation passed. Game review remains required.\n",
+      "stderr": ""
+    },
+    {
+      "operation": "marketplace-catalog-validate",
+      "exitCode": 0,
+      "stdout": "Catalog validation passed. Release and game review remain required.\n",
+      "stderr": ""
+    }
+  ],
+  "limits": [
+    "No tag, upload, catalog mutation or HTTP download performed.",
+    "The original previously built scratch/paladin-package-helper rejected displayModels; this receipt uses a helper rebuilt from current source.",
+    "Native visual/lifecycle and clean source release gates remain as recorded in VALIDATION.md."
+  ]
+}

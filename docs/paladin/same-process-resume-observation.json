@@ -1,0 +1,48 @@
+{
+  "date": "2026-09-20",
+  "session": "7ea3a4b7dd2c4dc69586547930c722e5",
+  "frameworkSha256": "2fcf2132f72cf54bfa3abc40cbdeb6c83194d7422e2d338eacf85a849d06eb4b",
+  "helperSha256": "8cbbeea36ab2bd072dd929a4c2b2024903e19fc80dcdb91fbd9835f3231ee0b8",
+  "packageSha256": "952635aa8c56e181c3d79ea44cf3a168d8ce5c3235b877241327289e08d3d4df",
+  "status": "observed failure corrected in subsequent pinned candidate",
+  "sequence": [
+    "Managed package enabled after native off/on cycle across process restarts.",
+    "Fresh-process Resume and Start succeeds, Paladin/Hunter/Scholar visible in party and overworld.",
+    "Native Exit without save returns to title.",
+    "Same-process Resume fails to initialize Paladin preview, leaving Nameless."
+  ],
+  "observations": {
+    "firstResumeClassArrayLength": 15,
+    "secondResumeClassArrayLength": 14,
+    "savedPaladinClassId": 14,
+    "otherClassIds": [
+      1,
+      2
+    ],
+    "savedInstantiationLength": 15,
+    "creationTargetCount": 3,
+    "paletteIndicesWithinBounds": true
+  },
+  "sourceFinding": "Native uiQuickPlayerCreate.Awake directly indexes FTK_playerGameStartDB.m_Array by saved class ID. Paladin index14 is outside recreated native array length14.",
+  "limits": [
+    "A fresh-process Resume pass does not accept repeated Resume within one process.",
+    "No save loaded while package disabled."
+  ],
+  "correctedCandidate": {
+    "session": "12e2e8209bc844689e67592dc456cbbc",
+    "frameworkSha256": "950820a36d9dfc38fd82400ab4ea4cb8eee5fd8a8b0f9474973ffe4af29013ca",
+    "helperSha256": "8cbbeea36ab2bd072dd929a4c2b2024903e19fc80dcdb91fbd9835f3231ee0b8",
+    "packageSha256": "952635aa8c56e181c3d79ea44cf3a168d8ce5c3235b877241327289e08d3d4df",
+    "passed": [
+      "Native Resume, Start, Exit without save, Resume, Start completed within one process.",
+      "Class array retains 15 rows and saved Paladin index14; Paladin, Hunter and Scholar previews initialize.",
+      "Original Paladin body and novice equipment visible in second preview and inventory.",
+      "All three heroes retained identical slot/item/count inventories across the two starts.",
+      "Native inventory opens after second Start; original Novice Great Hammer display and card metadata render."
+    ],
+    "limits": [
+      "One native same-process reload of this enabled managed save.",
+      "No disabled-save load, online or exhaustive resource lifetime claim."
+    ]
+  }
+}

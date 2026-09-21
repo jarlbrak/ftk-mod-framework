@@ -1,0 +1,111 @@
+{
+  "status": "passed",
+  "archiveSha256": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295",
+  "descriptorSha256": "5aeea750e13ace15613676ffd2d60c8179e4b47232c550cb2f324836e51ac447",
+  "fileCount": 137,
+  "helperSha256": "702d29fb02a2b7431cd183e0fb6d0e37eaf687e4b2ff60b9161c944f81e8c8b9",
+  "initialGeneration": "716357418ef39f38fb8da2664e908595",
+  "scope": "Real helper CLI against a new isolated scratch state and local unpublished archive. No game, UI, saves, existing managed state or online compatibility exercised.",
+  "checks": [
+    {
+      "step": "installed",
+      "enabled": true,
+      "fileCount": 137,
+      "exactArchiveBytes": true
+    },
+    {
+      "step": "disabled",
+      "enabled": false,
+      "fileCount": 137,
+      "exactArchiveBytes": true
+    },
+    {
+      "step": "enabled",
+      "enabled": true,
+      "fileCount": 137,
+      "exactArchiveBytes": true
+    },
+    {
+      "step": "removed",
+      "packageCount": 0,
+      "fileCount": 0
+    },
+    {
+      "step": "rollback",
+      "enabled": true,
+      "fileCount": 137,
+      "exactArchiveBytes": true
+    }
+  ],
+  "export": {
+    "kind": "partial managed-set JSON manifest",
+    "exactActiveSnapshot": true,
+    "artifactBytesPreserved": true,
+    "manifestSha256": "936c887a81dedccf6ea8fd16ba759e4b542f04c86c8a873ee6f9243d5290de53",
+    "packageZipExportSupported": false
+  },
+  "steps": [
+    {
+      "step": "01-prepare-install",
+      "resultSha256": "0fafde0272a39b3a7f20ec9db35d69cfb4905cca3c8e684b775652774a3e6f9c"
+    },
+    {
+      "step": "02-activate",
+      "resultSha256": "024c2d47d2ed6f68acafcc7969fb47a3f13bea43fc70772a18d7d96edd0e52c0"
+    },
+    {
+      "step": "03-disabled-plan",
+      "resultSha256": "9f381a2829382e48eaf6c8da71711faefecb59070174015846bb4d9c58bedafc"
+    },
+    {
+      "step": "03-disabled",
+      "resultSha256": "91053fa7befeddae1a729f085c828c7fb03ada1fd63e287aa084182df8ba3d24"
+    },
+    {
+      "step": "04-activate-disabled",
+      "resultSha256": "2fb7323611427099ec510636845b4bc743843c15dc2860c9fe72cd03354cabd3"
+    },
+    {
+      "step": "05-enabled-plan",
+      "resultSha256": "01fa7421d126705385e1688206a40bf3bd958b403a832a93b60b0adefe1dcac5"
+    },
+    {
+      "step": "05-enabled",
+      "resultSha256": "290b6e63fb73c80043daf72576c430f735e4d40e3af61c7034378f42fe60550e"
+    },
+    {
+      "step": "06-activate-enabled",
+      "resultSha256": "6f16604821bb4043577a43f80793153485fe0e4076c0bd7bb99d0463f115b4eb"
+    },
+    {
+      "step": "07-removed-plan",
+      "resultSha256": "79abe55cf70d59b5bef93734a32733600eacdf10b60c31bbd21b29b20ecb7af7"
+    },
+    {
+      "step": "07-removed",
+      "resultSha256": "c98598ce83c2d553d777273a62ac099a5ab2f3de9c49a2977cfa1de53e65a98a"
+    },
+    {
+      "step": "08-activate-removed",
+      "resultSha256": "2be5629d069e633279799016a92a575a96accd31e6de19d4f4ca5ab6729e8c1d"
+    },
+    {
+      "step": "09-rollback",
+      "resultSha256": "f8010bed6a510146d1b6cb28a1ce047fe6a5338cceda1a76269d60d3605b0a24"
+    },
+    {
+      "step": "10-activate-rollback",
+      "resultSha256": "547b2949bc61c01850eb2e2325f92d46650faeccfea29084c1fd858dde09e6f8"
+    },
+    {
+      "step": "11-export",
+      "resultSha256": "9368c05995287829ed3f80ab1157738942991540c975548f22596bc8da0924df"
+    }
+  ],
+  "reproducibility": {
+    "status": "pass",
+    "independentBuildByteIdentical": true,
+    "sha256": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295",
+    "validator": "39 unique rows; complete six-family progression; original asset hashes, renderer paths and references validated; real helper accepted descriptor/archive."
+  }
+}

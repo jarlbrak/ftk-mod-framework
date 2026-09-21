@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-20",
+  "session": "04b0468ea6ca4714a70ceea4e0c0921e",
+  "frameworkSha256": "ff280c030c7c9e1550be4d6521f819565779b8054056b6d67b412ab9ce4c4bb2",
+  "packageSha256": "fcbb1348d002420b18eb87bdc37fa65c6038366643d7bfc3ef6908a4f8ad8ed3",
+  "status": "native-shop-purchase-and-equip-passed",
+  "item": "paladin_hammer_2h_novice",
+  "buyerClass": "hunter",
+  "buyerTurnIndex": 1,
+  "town": "Imp's Corridor",
+  "goldBefore": 17,
+  "goldAfter": 2,
+  "nativePriceObserved": 15,
+  "stockBefore": 1,
+  "stockAfter": 0,
+  "rightHandBefore": [
+    {
+      "item": 100013,
+      "name": "bowHunting",
+      "count": 1
+    }
+  ],
+  "rightHandAfter": [
+    {
+      "item": 1474146225,
+      "name": "1474146225",
+      "count": 1
+    }
+  ],
+  "method": "Native town Market, selected Novice Great Hammer, Buy & Equip through keyboard UI. Read-only snapshots verify inventory, stock and gold.",
+  "limits": [
+    "Party placement used the isolated snap_party fixture, followed by a native turn change. Travel progression is not proven.",
+    "No shop generation, stock refresh, item grant or gold injection was used for this purchase.",
+    "Native large item-card art still showed the template image; this is an open presentation bug, not an original-art pass.",
+    "Other progression tiers and random drops not proven by this purchase."
+  ]
+}

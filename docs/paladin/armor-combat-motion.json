@@ -1,0 +1,899 @@
+{
+  "schema": "ftkmf.paladin-armor-combat-motion.v1",
+  "status": "representative-mercy-native-attacks-reviewed",
+  "session": "c53d7b31a22a4ff6b5e63e8659f2fe5d",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "scope": "Current revision3 Mercy armor and boots on native male and female Paladins in one single-player Lightning Crag encounter.",
+  "setup": [
+    "Resumed protected fixture save and entered encounter by native walking and Fight.",
+    "Fixture-owned gear establishes visual coverage only.",
+    "Female equipped Mercy two-handed hammer through equip_item fixture action. The open turn retained its old attack selection, so Guard was used and the following native turn refreshed the weapon attack selection.",
+    "Captures observed normal Return-key attack commits. No Animator.Play, damage fixture, forced death trigger or kill cheat was used.",
+    "Fixed-step capture changes simulation pacing; this does not establish realtime performance."
+  ],
+  "captures": [
+    {
+      "case": "male-one-handed",
+      "requestId": "3d5625116bc84c548dd28a316ef73adf",
+      "captureReceiptSha256": "fdbfddf98bf93f69c61afebae6c0f9ebabbd86b952c2887817ec105bdc5f551f",
+      "ownerInstanceId": 368986,
+      "celInstanceId": -298866,
+      "mesh": "ftkmf_glb_package-model:c3b3f4d9faca26f89c9d76203a39fb20378e2850498169f0d104e73efdded548",
+      "boneSignature": "1dee1009d5d500bdf4a90f9c29ac41b4594804f063041e0615998bb844d04b17",
+      "ok": true,
+      "frameCount": 100,
+      "timingMode": "offline-fixed-step-gameplay",
+      "elapsedRecordedGameSeconds": 10.889984130859375,
+      "elapsedRecordedRealtimeSeconds": 20.18829345703125,
+      "clips": {
+        "cidel_blunt1H": [
+          {
+            "frameIndex": 0,
+            "normalizedTime": 7.7060675621032715
+          },
+          {
+            "frameIndex": 1,
+            "normalizedTime": 7.772067546844482
+          },
+          {
+            "frameIndex": 2,
+            "normalizedTime": 7.838067531585693
+          },
+          {
+            "frameIndex": 3,
+            "normalizedTime": 7.904067516326904
+          },
+          {
+            "frameIndex": 4,
+            "normalizedTime": 7.970067501068115
+          },
+          {
+            "frameIndex": 5,
+            "normalizedTime": 8.036067962646484
+          },
+          {
+            "frameIndex": 6,
+            "normalizedTime": 8.102067947387695
+          },
+          {
+            "frameIndex": 7,
+            "normalizedTime": 8.168067932128906
+          },
+          {
+            "frameIndex": 8,
+            "normalizedTime": 8.234067916870117
+          },
+          {
+            "frameIndex": 9,
+            "normalizedTime": 8.300067901611328
+          },
+          {
+            "frameIndex": 10,
+            "normalizedTime": 8.366067886352539
+          },
+          {
+            "frameIndex": 11,
+            "normalizedTime": 8.43206787109375
+          },
+          {
+            "frameIndex": 12,
+            "normalizedTime": 8.498067855834961
+          },
+          {
+            "frameIndex": 13,
+            "normalizedTime": 8.564067840576172
+          },
+          {
+            "frameIndex": 14,
+            "normalizedTime": 8.630067825317383
+          },
+          {
+            "frameIndex": 15,
+            "normalizedTime": 8.696067810058594
+          },
+          {
+            "frameIndex": 16,
+            "normalizedTime": 8.762067794799805
+          },
+          {
+            "frameIndex": 17,
+            "normalizedTime": 8.828067779541016
+          },
+          {
+            "frameIndex": 18,
+            "normalizedTime": 8.894067764282227
+          },
+          {
+            "frameIndex": 19,
+            "normalizedTime": 8.960067749023438
+          },
+          {
+            "frameIndex": 20,
+            "normalizedTime": 9.026067733764648
+          },
+          {
+            "frameIndex": 21,
+            "normalizedTime": 9.09206771850586
+          },
+          {
+            "frameIndex": 22,
+            "normalizedTime": 9.15806770324707
+          },
+          {
+            "frameIndex": 23,
+            "normalizedTime": 9.224067687988281
+          },
+          {
+            "frameIndex": 24,
+            "normalizedTime": 9.290067672729492
+          },
+          {
+            "frameIndex": 25,
+            "normalizedTime": 9.356067657470703
+          },
+          {
+            "frameIndex": 26,
+            "normalizedTime": 9.422067642211914
+          },
+          {
+            "frameIndex": 27,
+            "normalizedTime": 9.488067626953125
+          },
+          {
+            "frameIndex": 28,
+            "normalizedTime": 9.554067611694336
+          },
+          {
+            "frameIndex": 29,
+            "normalizedTime": 9.620067596435547
+          },
+          {
+            "frameIndex": 30,
+            "normalizedTime": 9.686067581176758
+          },
+          {
+            "frameIndex": 31,
+            "normalizedTime": 9.752067565917969
+          },
+          {
+            "frameIndex": 32,
+            "normalizedTime": 9.81806755065918
+          },
+          {
+            "frameIndex": 33,
+            "normalizedTime": 9.88406753540039
+          },
+          {
+            "frameIndex": 34,
+            "normalizedTime": 9.950067520141602
+          },
+          {
+            "frameIndex": 35,
+            "normalizedTime": 10.016067504882812
+          },
+          {
+            "frameIndex": 36,
+            "normalizedTime": 10.082067489624023
+          },
+          {
+            "frameIndex": 37,
+            "normalizedTime": 10.148067474365234
+          },
+          {
+            "frameIndex": 38,
+            "normalizedTime": 10.214067459106445
+          },
+          {
+            "frameIndex": 39,
+            "normalizedTime": 10.280067443847656
+          },
+          {
+            "frameIndex": 40,
+            "normalizedTime": 10.346067428588867
+          },
+          {
+            "frameIndex": 41,
+            "normalizedTime": 10.412067413330078
+          },
+          {
+            "frameIndex": 42,
+            "normalizedTime": 10.478067398071289
+          },
+          {
+            "frameIndex": 43,
+            "normalizedTime": 10.5440673828125
+          },
+          {
+            "frameIndex": 44,
+            "normalizedTime": 10.610067367553711
+          },
+          {
+            "frameIndex": 45,
+            "normalizedTime": 10.676067352294922
+          },
+          {
+            "frameIndex": 46,
+            "normalizedTime": 10.742067337036133
+          },
+          {
+            "frameIndex": 47,
+            "normalizedTime": 10.808067321777344
+          },
+          {
+            "frameIndex": 48,
+            "normalizedTime": 10.874067306518555
+          },
+          {
+            "frameIndex": 49,
+            "normalizedTime": 10.940067291259766
+          },
+          {
+            "frameIndex": 50,
+            "normalizedTime": 11.006067276000977
+          },
+          {
+            "frameIndex": 51,
+            "normalizedTime": 11.072067260742188
+          },
+          {
+            "frameIndex": 52,
+            "normalizedTime": 11.138067245483398
+          },
+          {
+            "frameIndex": 53,
+            "normalizedTime": 11.20406723022461
+          },
+          {
+            "frameIndex": 54,
+            "normalizedTime": 11.27006721496582
+          },
+          {
+            "frameIndex": 55,
+            "normalizedTime": 11.336067199707031
+          },
+          {
+            "frameIndex": 56,
+            "normalizedTime": 11.402067184448242
+          },
+          {
+            "frameIndex": 57,
+            "normalizedTime": 11.468067169189453
+          },
+          {
+            "frameIndex": 58,
+            "normalizedTime": 11.534067153930664
+          },
+          {
+            "frameIndex": 59,
+            "normalizedTime": 11.600067138671875
+          },
+          {
+            "frameIndex": 60,
+            "normalizedTime": 11.666067123413086
+          },
+          {
+            "frameIndex": 61,
+            "normalizedTime": 11.732067108154297
+          },
+          {
+            "frameIndex": 82,
+            "normalizedTime": 0.13314709067344666
+          },
+          {
+            "frameIndex": 83,
+            "normalizedTime": 0.1991470903158188
+          },
+          {
+            "frameIndex": 94,
+            "normalizedTime": 0.18159747123718262
+          },
+          {
+            "frameIndex": 95,
+            "normalizedTime": 0.24759747087955475
+          },
+          {
+            "frameIndex": 96,
+            "normalizedTime": 0.3135974705219269
+          },
+          {
+            "frameIndex": 97,
+            "normalizedTime": 0.3795974850654602
+          },
+          {
+            "frameIndex": 98,
+            "normalizedTime": 0.44559746980667114
+          },
+          {
+            "frameIndex": 99,
+            "normalizedTime": 0.5115974545478821
+          }
+        ],
+        "attack_blunt1H": [
+          {
+            "frameIndex": 62,
+            "normalizedTime": 0.13612499833106995
+          },
+          {
+            "frameIndex": 63,
+            "normalizedTime": 0.18150000274181366
+          },
+          {
+            "frameIndex": 64,
+            "normalizedTime": 0.22687500715255737
+          },
+          {
+            "frameIndex": 65,
+            "normalizedTime": 0.2722499966621399
+          },
+          {
+            "frameIndex": 66,
+            "normalizedTime": 0.3176249861717224
+          },
+          {
+            "frameIndex": 67,
+            "normalizedTime": 0.36299997568130493
+          },
+          {
+            "frameIndex": 68,
+            "normalizedTime": 0.40837496519088745
+          },
+          {
+            "frameIndex": 69,
+            "normalizedTime": 0.45374995470046997
+          },
+          {
+            "frameIndex": 70,
+            "normalizedTime": 0.4991249442100525
+          },
+          {
+            "frameIndex": 71,
+            "normalizedTime": 0.544499933719635
+          },
+          {
+            "frameIndex": 72,
+            "normalizedTime": 0.5898749232292175
+          },
+          {
+            "frameIndex": 73,
+            "normalizedTime": 0.6352499127388
+          },
+          {
+            "frameIndex": 74,
+            "normalizedTime": 0.6806249022483826
+          },
+          {
+            "frameIndex": 75,
+            "normalizedTime": 0.7259998917579651
+          },
+          {
+            "frameIndex": 76,
+            "normalizedTime": 0.7713748812675476
+          },
+          {
+            "frameIndex": 77,
+            "normalizedTime": 0.8167498707771301
+          },
+          {
+            "frameIndex": 78,
+            "normalizedTime": 0.8621248602867126
+          },
+          {
+            "frameIndex": 79,
+            "normalizedTime": 0.9074998497962952
+          },
+          {
+            "frameIndex": 80,
+            "normalizedTime": 0.9528748393058777
+          },
+          {
+            "frameIndex": 81,
+            "normalizedTime": 0.9982498288154602
+          }
+        ],
+        "damageLight_blunt1H": [
+          {
+            "frameIndex": 84,
+            "normalizedTime": 0.09680850803852081
+          },
+          {
+            "frameIndex": 85,
+            "normalizedTime": 0.19109421968460083
+          },
+          {
+            "frameIndex": 86,
+            "normalizedTime": 0.28537994623184204
+          },
+          {
+            "frameIndex": 87,
+            "normalizedTime": 0.37966567277908325
+          },
+          {
+            "frameIndex": 88,
+            "normalizedTime": 0.47395139932632446
+          },
+          {
+            "frameIndex": 89,
+            "normalizedTime": 0.5682371258735657
+          },
+          {
+            "frameIndex": 90,
+            "normalizedTime": 0.6625228524208069
+          },
+          {
+            "frameIndex": 91,
+            "normalizedTime": 0.7568085789680481
+          },
+          {
+            "frameIndex": 92,
+            "normalizedTime": 0.8510943055152893
+          },
+          {
+            "frameIndex": 93,
+            "normalizedTime": 0.9453800320625305
+          }
+        ]
+      },
+      "reviewedImages": [
+        {
+          "frameIndex": 65,
+          "sha256": "93e16fef92bfc7532258fcc2a9083b320e4e49b488b12007d0e7720708cd0f3a"
+        },
+        {
+          "frameIndex": 71,
+          "sha256": "70b3fdfcd633e5a93ea3cf26954007a20ee10358681a14afd18c7429142b8b97"
+        },
+        {
+          "frameIndex": 88,
+          "sha256": "04a6959acaf1d76068a5057285897c5901320a8eb32b7cc7027336bc32bfb9a3"
+        }
+      ]
+    },
+    {
+      "case": "female-two-handed",
+      "requestId": "bb1992781a63431a813686c20e2fecc5",
+      "captureReceiptSha256": "1cc82ad69014be07f714464683b8f4db577fec364ff3a1d2d7b172d7de9c339e",
+      "ownerInstanceId": 364424,
+      "celInstanceId": -299344,
+      "mesh": "ftkmf_glb_package-model:a73ce7379345904b8f173b47e775b362a6744e801b8b71cb8f87c2a287692567",
+      "boneSignature": "be050b7115d9cb806c7908a58f1b9b7f868fa6e44e1445d1246fbbec49da7c63",
+      "ok": true,
+      "frameCount": 100,
+      "timingMode": "offline-fixed-step-gameplay",
+      "elapsedRecordedGameSeconds": 10.889984130859375,
+      "elapsedRecordedRealtimeSeconds": 20.227264404296875,
+      "clips": {
+        "cidle_blunt2H": [
+          {
+            "frameIndex": 0,
+            "normalizedTime": 50.22847366333008
+          },
+          {
+            "frameIndex": 1,
+            "normalizedTime": 50.29447555541992
+          },
+          {
+            "frameIndex": 2,
+            "normalizedTime": 50.360477447509766
+          },
+          {
+            "frameIndex": 3,
+            "normalizedTime": 50.42647933959961
+          },
+          {
+            "frameIndex": 4,
+            "normalizedTime": 50.49248123168945
+          },
+          {
+            "frameIndex": 5,
+            "normalizedTime": 50.5584831237793
+          },
+          {
+            "frameIndex": 6,
+            "normalizedTime": 50.62448501586914
+          },
+          {
+            "frameIndex": 7,
+            "normalizedTime": 50.690486907958984
+          },
+          {
+            "frameIndex": 8,
+            "normalizedTime": 50.75648880004883
+          },
+          {
+            "frameIndex": 9,
+            "normalizedTime": 50.82249069213867
+          },
+          {
+            "frameIndex": 10,
+            "normalizedTime": 50.888492584228516
+          },
+          {
+            "frameIndex": 11,
+            "normalizedTime": 50.95449447631836
+          },
+          {
+            "frameIndex": 12,
+            "normalizedTime": 51.0204963684082
+          },
+          {
+            "frameIndex": 13,
+            "normalizedTime": 51.08649826049805
+          },
+          {
+            "frameIndex": 14,
+            "normalizedTime": 51.15250015258789
+          },
+          {
+            "frameIndex": 15,
+            "normalizedTime": 51.218502044677734
+          },
+          {
+            "frameIndex": 16,
+            "normalizedTime": 51.28450393676758
+          },
+          {
+            "frameIndex": 17,
+            "normalizedTime": 51.35050582885742
+          },
+          {
+            "frameIndex": 18,
+            "normalizedTime": 51.416507720947266
+          },
+          {
+            "frameIndex": 19,
+            "normalizedTime": 51.48250961303711
+          },
+          {
+            "frameIndex": 20,
+            "normalizedTime": 51.54851150512695
+          },
+          {
+            "frameIndex": 21,
+            "normalizedTime": 51.6145133972168
+          },
+          {
+            "frameIndex": 22,
+            "normalizedTime": 51.68051528930664
+          },
+          {
+            "frameIndex": 23,
+            "normalizedTime": 51.746517181396484
+          },
+          {
+            "frameIndex": 24,
+            "normalizedTime": 51.81251907348633
+          },
+          {
+            "frameIndex": 25,
+            "normalizedTime": 51.87852096557617
+          },
+          {
+            "frameIndex": 26,
+            "normalizedTime": 51.944522857666016
+          },
+          {
+            "frameIndex": 27,
+            "normalizedTime": 52.01052474975586
+          },
+          {
+            "frameIndex": 28,
+            "normalizedTime": 52.0765266418457
+          },
+          {
+            "frameIndex": 29,
+            "normalizedTime": 52.14252853393555
+          },
+          {
+            "frameIndex": 30,
+            "normalizedTime": 52.20853042602539
+          },
+          {
+            "frameIndex": 31,
+            "normalizedTime": 52.274532318115234
+          },
+          {
+            "frameIndex": 32,
+            "normalizedTime": 52.34053421020508
+          },
+          {
+            "frameIndex": 33,
+            "normalizedTime": 52.40653610229492
+          },
+          {
+            "frameIndex": 34,
+            "normalizedTime": 52.472537994384766
+          },
+          {
+            "frameIndex": 35,
+            "normalizedTime": 52.53853988647461
+          },
+          {
+            "frameIndex": 36,
+            "normalizedTime": 52.60454177856445
+          },
+          {
+            "frameIndex": 37,
+            "normalizedTime": 52.6705436706543
+          },
+          {
+            "frameIndex": 38,
+            "normalizedTime": 52.73654556274414
+          },
+          {
+            "frameIndex": 39,
+            "normalizedTime": 52.802547454833984
+          },
+          {
+            "frameIndex": 40,
+            "normalizedTime": 52.86854934692383
+          },
+          {
+            "frameIndex": 41,
+            "normalizedTime": 52.93455123901367
+          },
+          {
+            "frameIndex": 42,
+            "normalizedTime": 53.000553131103516
+          },
+          {
+            "frameIndex": 43,
+            "normalizedTime": 53.06655502319336
+          },
+          {
+            "frameIndex": 44,
+            "normalizedTime": 53.1325569152832
+          },
+          {
+            "frameIndex": 45,
+            "normalizedTime": 53.19855880737305
+          },
+          {
+            "frameIndex": 46,
+            "normalizedTime": 53.26456069946289
+          },
+          {
+            "frameIndex": 47,
+            "normalizedTime": 53.330562591552734
+          },
+          {
+            "frameIndex": 68,
+            "normalizedTime": 0.10751834511756897
+          },
+          {
+            "frameIndex": 69,
+            "normalizedTime": 0.1735183447599411
+          },
+          {
+            "frameIndex": 70,
+            "normalizedTime": 0.23951834440231323
+          }
+        ],
+        "attackProf_blunt2H": [
+          {
+            "frameIndex": 48,
+            "normalizedTime": 0.09075000137090683
+          },
+          {
+            "frameIndex": 49,
+            "normalizedTime": 0.13612499833106995
+          },
+          {
+            "frameIndex": 50,
+            "normalizedTime": 0.18150000274181366
+          },
+          {
+            "frameIndex": 51,
+            "normalizedTime": 0.22687500715255737
+          },
+          {
+            "frameIndex": 52,
+            "normalizedTime": 0.2722499966621399
+          },
+          {
+            "frameIndex": 53,
+            "normalizedTime": 0.3176249861717224
+          },
+          {
+            "frameIndex": 54,
+            "normalizedTime": 0.36299997568130493
+          },
+          {
+            "frameIndex": 55,
+            "normalizedTime": 0.40837496519088745
+          },
+          {
+            "frameIndex": 56,
+            "normalizedTime": 0.45374995470046997
+          },
+          {
+            "frameIndex": 57,
+            "normalizedTime": 0.4991249442100525
+          },
+          {
+            "frameIndex": 58,
+            "normalizedTime": 0.544499933719635
+          },
+          {
+            "frameIndex": 59,
+            "normalizedTime": 0.5898749232292175
+          },
+          {
+            "frameIndex": 60,
+            "normalizedTime": 0.6352499127388
+          },
+          {
+            "frameIndex": 61,
+            "normalizedTime": 0.6806249022483826
+          },
+          {
+            "frameIndex": 62,
+            "normalizedTime": 0.7259998917579651
+          },
+          {
+            "frameIndex": 63,
+            "normalizedTime": 0.7713748812675476
+          },
+          {
+            "frameIndex": 64,
+            "normalizedTime": 0.8167498707771301
+          },
+          {
+            "frameIndex": 65,
+            "normalizedTime": 0.8621248602867126
+          },
+          {
+            "frameIndex": 66,
+            "normalizedTime": 0.9074998497962952
+          },
+          {
+            "frameIndex": 67,
+            "normalizedTime": 0.9528748393058777
+          }
+        ],
+        "deathLight_blunt2H": [
+          {
+            "frameIndex": 71,
+            "normalizedTime": 0.14347825944423676
+          },
+          {
+            "frameIndex": 72,
+            "normalizedTime": 0.21521738171577454
+          },
+          {
+            "frameIndex": 73,
+            "normalizedTime": 0.2869565188884735
+          },
+          {
+            "frameIndex": 74,
+            "normalizedTime": 0.3586956560611725
+          },
+          {
+            "frameIndex": 75,
+            "normalizedTime": 0.43043479323387146
+          },
+          {
+            "frameIndex": 76,
+            "normalizedTime": 0.502173900604248
+          },
+          {
+            "frameIndex": 77,
+            "normalizedTime": 0.573913037776947
+          },
+          {
+            "frameIndex": 78,
+            "normalizedTime": 0.645652174949646
+          },
+          {
+            "frameIndex": 79,
+            "normalizedTime": 0.717391312122345
+          },
+          {
+            "frameIndex": 80,
+            "normalizedTime": 0.789130449295044
+          },
+          {
+            "frameIndex": 81,
+            "normalizedTime": 0.8608695864677429
+          },
+          {
+            "frameIndex": 82,
+            "normalizedTime": 0.9326087236404419
+          },
+          {
+            "frameIndex": 83,
+            "normalizedTime": 1.004347801208496
+          },
+          {
+            "frameIndex": 84,
+            "normalizedTime": 1.0760868787765503
+          },
+          {
+            "frameIndex": 85,
+            "normalizedTime": 1.1478259563446045
+          },
+          {
+            "frameIndex": 86,
+            "normalizedTime": 1.2195650339126587
+          },
+          {
+            "frameIndex": 87,
+            "normalizedTime": 1.291304111480713
+          },
+          {
+            "frameIndex": 88,
+            "normalizedTime": 1.363043189048767
+          },
+          {
+            "frameIndex": 89,
+            "normalizedTime": 1.4347822666168213
+          },
+          {
+            "frameIndex": 90,
+            "normalizedTime": 1.5065213441848755
+          },
+          {
+            "frameIndex": 91,
+            "normalizedTime": 1.5782604217529297
+          },
+          {
+            "frameIndex": 92,
+            "normalizedTime": 1.6499994993209839
+          },
+          {
+            "frameIndex": 93,
+            "normalizedTime": 1.721738576889038
+          },
+          {
+            "frameIndex": 94,
+            "normalizedTime": 1.7934776544570923
+          },
+          {
+            "frameIndex": 95,
+            "normalizedTime": 1.8652167320251465
+          },
+          {
+            "frameIndex": 96,
+            "normalizedTime": 1.9369558095932007
+          },
+          {
+            "frameIndex": 97,
+            "normalizedTime": 2.008694887161255
+          },
+          {
+            "frameIndex": 98,
+            "normalizedTime": 2.0804340839385986
+          },
+          {
+            "frameIndex": 99,
+            "normalizedTime": 2.1521732807159424
+          }
+        ]
+      },
+      "reviewedImages": [
+        {
+          "frameIndex": 52,
+          "sha256": "3443163cb441a88752accef72df2c99cdb91b3d5b76bc55fe6165ddc58bbfd42"
+        },
+        {
+          "frameIndex": 59,
+          "sha256": "f4dc63a2c9d9784e79b5e96d03d4c8f699b10d494eff15d24a2670e1105f166e"
+        },
+        {
+          "frameIndex": 80,
+          "sha256": "62f99270132633351a64d80143dcfe681ff7643fe6877acb05ae8e97b7ccce86"
+        }
+      ]
+    }
+  ],
+  "visualObservations": [
+    "Reviewed male wind-up, contact and damage-reaction frames and female two-handed wind-up, contact and death frames.",
+    "Visible greaves, ankle and foot volumes remain attached during these sampled poses; no detached toe plates or exploding armor mesh seen.",
+    "Native body, hair and backpack remain present. Back/side combat camera and other avatars obscure portions of the armor, especially during the male damage reaction."
+  ],
+  "limits": [
+    "Representative Mercy set only, not all sets, races, views or animation combinations.",
+    "Death clip presence and one reviewed death pose do not establish complete death/physics lifecycle coverage.",
+    "No claim of online behavior, acquisition, next-combat rescue reset, resource retirement or final user art acceptance."
+  ]
+}

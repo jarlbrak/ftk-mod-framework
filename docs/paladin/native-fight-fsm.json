@@ -1,0 +1,223 @@
+{
+  "schema": "ftkmf.paladin-native-fight-fsm.v1",
+  "status": "event-delivered-with-no-matching-transition",
+  "session": "3f952f3709ed4ca5b288ba9e01065e2b",
+  "helperSha256": "50563a971827ed530a0fac936c2c56c6388c9eb516f2f1edcef61a0b3ade7fed",
+  "packageSha256": "43ad600ec7ca782444adca9ca209595d707f4f083dbb39357a84f09fc0db8291",
+  "records": [
+    {
+      "frame": 10029,
+      "realtime": 96.34197998046875,
+      "method": "uiEnemyPoiMenu.UseFightButton",
+      "instanceId": 374222,
+      "menuContinuation": {
+        "id": 16,
+        "callerId": 1,
+        "waitCount": 0,
+        "waitClients": "None",
+        "isLocal": true,
+        "localPhotonId": 1,
+        "fsmName": "poiSwitch",
+        "fsmState": "Menu Wait",
+        "fsm": {
+          "name": "poiSwitch",
+          "state": "Menu Wait",
+          "initialized": true,
+          "started": true,
+          "active": true,
+          "finished": false,
+          "ownerEnabled": true,
+          "ownerId": 371960,
+          "gameObjectPath": "Movement",
+          "activeSelf": true,
+          "activeInHierarchy": true,
+          "eventTarget": "Self",
+          "eventTargetFsmName": null,
+          "activeTransitions": [
+            {
+              "event": "continueMove",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "retreat",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "finishedPOI",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "reviveFinished",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "fight",
+              "targetState": "Check Post Encounter"
+            }
+          ],
+          "globalTransitions": []
+        },
+        "storedArgumentType": "System.String",
+        "storedEvent": "",
+        "completeDelegate": null,
+        "completeDelegate1": null
+      },
+      "entry": null
+    },
+    {
+      "frame": 10029,
+      "realtime": 96.35477447509766,
+      "phase": "menuFight-before-continue",
+      "continuation": {
+        "id": 16,
+        "callerId": 1,
+        "waitCount": 0,
+        "waitClients": "None",
+        "isLocal": true,
+        "localPhotonId": 1,
+        "fsmName": "poiSwitch",
+        "fsmState": "Menu Wait",
+        "fsm": {
+          "name": "poiSwitch",
+          "state": "Menu Wait",
+          "initialized": true,
+          "started": true,
+          "active": true,
+          "finished": false,
+          "ownerEnabled": true,
+          "ownerId": 371960,
+          "gameObjectPath": "Movement",
+          "activeSelf": true,
+          "activeInHierarchy": true,
+          "eventTarget": "Self",
+          "eventTargetFsmName": null,
+          "activeTransitions": [
+            {
+              "event": "continueMove",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "retreat",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "finishedPOI",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "reviveFinished",
+              "targetState": "Check Post Encounter"
+            },
+            {
+              "event": "fight",
+              "targetState": "Check Post Encounter"
+            }
+          ],
+          "globalTransitions": []
+        },
+        "storedArgumentType": "System.String",
+        "storedEvent": "",
+        "completeDelegate": null,
+        "completeDelegate1": null
+      }
+    },
+    {
+      "frame": 10029,
+      "realtime": 96.35514068603516,
+      "phase": "pinned-fsm-event-entry",
+      "event": "menuFight",
+      "fsm": {
+        "name": "poiSwitch",
+        "state": "Menu Wait",
+        "initialized": true,
+        "started": true,
+        "active": true,
+        "finished": false,
+        "ownerEnabled": true,
+        "ownerId": 371960,
+        "gameObjectPath": "Movement",
+        "activeSelf": true,
+        "activeInHierarchy": true,
+        "eventTarget": "Self",
+        "eventTargetFsmName": null,
+        "activeTransitions": [
+          {
+            "event": "continueMove",
+            "targetState": "Check Post Encounter"
+          },
+          {
+            "event": "retreat",
+            "targetState": "Check Post Encounter"
+          },
+          {
+            "event": "finishedPOI",
+            "targetState": "Check Post Encounter"
+          },
+          {
+            "event": "reviveFinished",
+            "targetState": "Check Post Encounter"
+          },
+          {
+            "event": "fight",
+            "targetState": "Check Post Encounter"
+          }
+        ],
+        "globalTransitions": []
+      }
+    }
+  ],
+  "after": {
+    "id": 16,
+    "callerId": 1,
+    "waitCount": 0,
+    "waitClients": "None",
+    "isLocal": true,
+    "localPhotonId": 1,
+    "fsmName": "poiSwitch",
+    "fsmState": "Menu Wait",
+    "fsm": {
+      "name": "poiSwitch",
+      "state": "Menu Wait",
+      "initialized": true,
+      "started": true,
+      "active": true,
+      "finished": false,
+      "ownerEnabled": true,
+      "ownerId": 371960,
+      "gameObjectPath": "Movement",
+      "activeSelf": true,
+      "activeInHierarchy": true,
+      "eventTarget": "Self",
+      "eventTargetFsmName": null,
+      "activeTransitions": [
+        {
+          "event": "continueMove",
+          "targetState": "Check Post Encounter"
+        },
+        {
+          "event": "retreat",
+          "targetState": "Check Post Encounter"
+        },
+        {
+          "event": "finishedPOI",
+          "targetState": "Check Post Encounter"
+        },
+        {
+          "event": "reviveFinished",
+          "targetState": "Check Post Encounter"
+        },
+        {
+          "event": "fight",
+          "targetState": "Check Post Encounter"
+        }
+      ],
+      "globalTransitions": []
+    },
+    "storedArgumentType": "System.String",
+    "storedEvent": "",
+    "completeDelegate": null,
+    "completeDelegate1": null
+  },
+  "interpretation": "menuFight is delivered to active Movement/poiSwitch Menu Wait. It has a fight transition but no menuFight or global transition. Native event routing provenance remains under investigation; no production fix inferred.",
+  "scope": "Native UI on isolated resumed gear fixture. Passive observation only. No combat acceptance."
+}

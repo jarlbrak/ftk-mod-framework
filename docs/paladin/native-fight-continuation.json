@@ -1,0 +1,65 @@
+{
+  "schema": "ftkmf.paladin-native-fight-continuation.v1",
+  "status": "native-fight-callback-observed-combat-not-started",
+  "session": "ee7906afe1bd4caaaadb3b87ae5f3b8a",
+  "helperSha256": "0b8f94d7f6fe801ac4b124fc1c0396f3c7f938598dae3adf59a4c8c8400b1ad0",
+  "packageSha256": "43ad600ec7ca782444adca9ca209595d707f4f083dbb39357a84f09fc0db8291",
+  "records": [
+    {
+      "frame": 13108,
+      "realtime": 119.37733459472656,
+      "method": "uiEnemyPoiMenu.UseFightButton",
+      "instanceId": 374222,
+      "menuContinuation": {
+        "id": 16,
+        "callerId": 1,
+        "waitCount": 0,
+        "waitClients": "None",
+        "isLocal": true,
+        "localPhotonId": 1,
+        "fsmName": "poiSwitch",
+        "fsmState": "Menu Wait",
+        "storedArgumentType": "System.String",
+        "storedEvent": "",
+        "completeDelegate": null,
+        "completeDelegate1": null
+      },
+      "entry": null
+    },
+    {
+      "frame": 13108,
+      "realtime": 119.38697052001953,
+      "phase": "menuFight-before-continue",
+      "continuation": {
+        "id": 16,
+        "callerId": 1,
+        "waitCount": 0,
+        "waitClients": "None",
+        "isLocal": true,
+        "localPhotonId": 1,
+        "fsmName": "poiSwitch",
+        "fsmState": "Menu Wait",
+        "storedArgumentType": "System.String",
+        "storedEvent": "",
+        "completeDelegate": null,
+        "completeDelegate1": null
+      }
+    }
+  ],
+  "after": {
+    "id": 16,
+    "callerId": 1,
+    "waitCount": 0,
+    "waitClients": "None",
+    "isLocal": true,
+    "localPhotonId": 1,
+    "fsmName": "poiSwitch",
+    "fsmState": "Menu Wait",
+    "storedArgumentType": "System.String",
+    "storedEvent": "",
+    "completeDelegate": null,
+    "completeDelegate1": null
+  },
+  "interpretation": "Native Fight button and Continue(object) were reached. WaitClients.None with waitCount0 is eligible for native FSM dispatch. The observed FSM remained poiSwitch/Menu Wait. Event delivery and active transition require further observation. No combat or motion acceptance.",
+  "scope": "Protected isolated single-player gear save resumed through native UI. Passive instrumentation; no forced state transitions."
+}

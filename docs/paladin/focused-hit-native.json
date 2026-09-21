@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-20",
+  "session": "1baae3b14eb5407b9627f3ab02ebea53",
+  "frameworkSha256": "b732904df01857bdfd1e3fa9dcfccbb9f16598dcdc8b51a877ba16f9856bf18a",
+  "helperSha256": "b688ddd77ab7117c53732288dacb2c25e4385e39e39527bddc32dbe72b6afcf7",
+  "packageSha256": "acfef478645cca597fd123854538a1cb0c1983b4d911e78891cd6b3e597d7e8d",
+  "status": "passed",
+  "guardian": "0:1",
+  "chosenAlly": "2:1",
+  "focusBefore": 4,
+  "focusAfterNativeSpend": 3,
+  "spentFocusAfterNativeSpend": 1,
+  "allyHpBeforeAttack": 9,
+  "allyHpAfterAttack": 11,
+  "protectionExpiredBeforeAttack": true,
+  "designationPersisted": true,
+  "attack": "Native Smash hit killed Beastman Warlock; keyboard Return dispatched attack after native Focus callback completed.",
+  "method": "Guard selected through native keyboard UI. Isolated native-combat-focus fixture invoked selected attack button OnRightClick once; native animation debited Focus. Attack outcome and healing were not forced.",
+  "limits": [
+    "Focus input was fixture-assisted, not mouse coverage.",
+    "One successful single-target hit and one chosen ally. Miss, multi-target and co-op coverage are separate.",
+    "Party placement used the isolated encounter fixture."
+  ]
+}

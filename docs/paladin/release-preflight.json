@@ -1,0 +1,31 @@
+{
+  "schema": "ftkmf.paladin-release-preflight.v1",
+  "status": "additional-release-checks-pass-not-release-approval",
+  "checks": [
+    {
+      "command": "bash tests/installer/test-install.sh",
+      "exitCode": 0,
+      "result": "29 passed, 0 failed; Darwin fixture mode"
+    },
+    {
+      "command": "bash launcher/unix/test-launch.sh",
+      "exitCode": 0,
+      "result": "8 launcher and recovery scenarios passed"
+    },
+    {
+      "command": "python3 launcher/tools/test-release-manifest.py",
+      "exitCode": 0,
+      "result": "4 tests passed"
+    }
+  ],
+  "sourceHashes": {
+    "tests/installer/test-install.sh": "1c692018269f61496e5b665d8d80740a6e369bf09e20902a15d5f0f43170ceb2",
+    "launcher/unix/test-launch.sh": "dbf66f196c6b111d022bd666cf106ac33b8e09ae241434f2a14f1659c07a6d77",
+    "launcher/tools/test-release-manifest.py": "60ffbd183b515afd9b7b6a6e2971b7779cd3007f54a62967c891bc4fee14f2e4"
+  },
+  "limits": [
+    "Fixture checks do not establish native Linux/Windows gameplay.",
+    "No release tag, published artifacts or marketplace catalog mutation.",
+    "Release dry-run requires reviewed committed clean source; current task changes remain uncommitted."
+  ]
+}

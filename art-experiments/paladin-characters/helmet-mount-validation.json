@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "observationSha256": "892d265d451daa3ec14be3eb0f52671b8a4846e85a1b21e6d337a1af9a840f27",
+  "formula": "inverse(nativeMountEulerMatrix) * HairInverseBind * Translate(HeadBindOrigin)",
+  "nativeMountEuler": [
+    -90,
+    90,
+    0
+  ],
+  "authorToRuntime": [
+    [
+      1.0,
+      6.123232939436859e-17,
+      -6.123234262925839e-17,
+      -2.036405714696604e-17
+    ],
+    [
+      -6.123234262925839e-17,
+      1.0,
+      -1.649460017461024e-07,
+      -0.503531107256897
+    ],
+    [
+      6.123232939436859e-17,
+      1.649460017461024e-07,
+      1.0,
+      -0.1709621975108565
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "assets": [
+    {
+      "key": "paladin-novice-helmet",
+      "maxCorrectedWorldError": 1.635879291798849e-05,
+      "maxPriorWorldError": 0.5317639374933526
+    },
+    {
+      "key": "paladin-oathkeeper-helmet",
+      "maxCorrectedWorldError": 1.635879291798849e-05,
+      "maxPriorWorldError": 0.5317639374933526
+    },
+    {
+      "key": "paladin-highward-helmet",
+      "maxCorrectedWorldError": 1.6374089530551998e-05,
+      "maxPriorWorldError": 0.5317639474724776
+    },
+    {
+      "key": "paladin-mercy-helmet",
+      "maxCorrectedWorldError": 1.6375217716108794e-05,
+      "maxPriorWorldError": 0.5317639474724776
+    },
+    {
+      "key": "paladin-censure-helmet",
+      "maxCorrectedWorldError": 1.6375217716108794e-05,
+      "maxPriorWorldError": 0.5317639474724776
+    },
+    {
+      "key": "paladin-verdict-helmet",
+      "maxCorrectedWorldError": 1.6375217716108794e-05,
+      "maxPriorWorldError": 0.5317639474724776
+    }
+  ],
+  "scope": "Permitted binding/transform metadata only. Corrected original vertices reproduce intended Head-centered world placement in the captured female pose. No native surface, bounds or animation curves read. Male shares rest correction within 1e-6. Fresh live rendering and other classes remain unverified."
+}

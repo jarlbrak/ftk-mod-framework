@@ -1,0 +1,39 @@
+{
+  "schema": "ftkmf.paladin-gear-perk-review.v1",
+  "status": "implementation-reviewed-live-gates-open",
+  "packageSha256": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295",
+  "verification": "Guardian123 pure checks plus20 installed-metadata checks passed during review.",
+  "findings": [
+    "Declared Guard healing, Mercy focused-heal bonuses, Censure ward categories and Verdict4 retaliation are wired, strongest bonus per category, guardian-class restricted.",
+    "Guard remains50percent.",
+    "Retaliation excludes zero incoming damage; tooltip now explicitly requires a damaging direct attack from an enemy.",
+    "Censure timed Armor application and expiry passed for both weapons in censure-live.json; serialized lifetime metadata is pinned in censure-native-lifetime.json."
+  ],
+  "liveGates": [
+    "Censure exact slot-roll damage and partial-slot application behavior; both variants native armor delta and timed expiry now passed in censure-live.json.",
+    "Ward group Poison protection observed in ward-live.json. Other categories and expiry controls remain untested natively; source candidates in ward-native-candidates.json.",
+    "Verdict single-target positive and remaining boundaries. Native two-target attack caused one4HP retaliation; unguarded non-Guardian wearer control passed in verdict-live.json.",
+    "Mercy two-handed12percent focused healing passed in mercy-focused-live.json; Guard healing deltas passed in mercy-guard-live.json. One-handed and deficit-cap boundaries remain untested natively."
+  ],
+  "limits": [
+    "Code wiring and pure tests do not establish actual native perk behavior."
+  ],
+  "tooltipCorrection": {
+    "status": "passed-native-main-and-equipped-card-fit",
+    "session": "c4852eb03cac4b6ea0cd032522dc59d9",
+    "frameworkSha256": "45beee438fe95dd7237a2a5e2a9ca290f0cc5bfdca8e2828d953f717e63ad120",
+    "helperSha256": "a2e84f8fc0cf795fa6f427ac68d16b382193600e767b20b917bdc4332a00a15f",
+    "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+    "change": "Clarify positive-damage requirement without changing combat behavior.",
+    "observations": [
+      "Native Verdict Aegis card and equipped comparison both show complete four-line class/retaliation text without clipping.",
+      "Native shield display fits card bounds.",
+      "Censure Hammer equipped successfully and native weapon card lists Smash, Shockwave and Censure.",
+      "Censure Great Hammer equipped successfully on second Paladin through existing native equipment route."
+    ],
+    "limits": [
+      "Fixture-owned items; not acquisition or combat evidence.",
+      "Direct live UI inspection; no standalone screenshot artifact."
+    ]
+  }
+}

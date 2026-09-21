@@ -1,0 +1,23 @@
+{
+  "schema": "ftkmf.paladin-native-appearance-contract.v1",
+  "status": "source-and-native-flow-verified-fit-incomplete",
+  "contentSha256": "e581ed8fb676280a7052503412dca30aa74833cf7fd2e72c7b2a120a2f2c80e6",
+  "template": "blacksmith",
+  "inheritedSkinsets": [
+    "blacksmith_Female",
+    "blacksmith_Male",
+    "blacksmith_Undead",
+    "blacksmith_Cat",
+    "blacksmith_Demon",
+    "blacksmith_Fish",
+    "blacksmith_Goblin"
+  ],
+  "selection": "Native uiQuickPlayerCreate.OnSkinClick/OnSkinLeft uses FTK_playerGameStart.GetNextValidSkinType/GetPrevValidSkinType and FTK_loreExtraUnlockDB.IsSkinUnlocked. The custom class inherits the full template array and normal lore unlock checks.",
+  "bodyOwnership": "Native FTK_skinset.m_Avatar supplies body, face and hair. The package declares no class playerModels. Custom armor and boots use item-bound apparel; helmets, hammers and shields use item-bound instance replacements.",
+  "nonhumanSex": "Native nonhuman entries are individual SkinType values. Native Female/Male values select those garment branches; nonhuman entries use the class m_IsMale fallback. No invented sex-by-race combinations.",
+  "remaining": [
+    "Verify nonhuman gear fit and native customization navigation in the isolated game.",
+    "No unlock purchase or PlayerPrefs modification is authorized by the visual fixture."
+  ],
+  "starterFlow": "CharacterStats.StateDataDeserializeDone calls GetStartItemsGoldXP for a fresh character; native ownership adds and equips the starting weapon and each eligible m_StartItems entry. Fresh uiQuickPlayerCreate preview does not populate startitems and therefore displays native class clothing. This source evidence is not a fresh-game slot observation."
+}
