@@ -61,7 +61,7 @@ outcomes and controlled loot are identified separately from ordinary acquisition
 | Boundary | Evidence and scope | Remaining boundary |
 | --- | --- | --- |
 | Source and export | [Equipment manifest](../../art-experiments/paladin-equipment/manifest.json), [delivery validation](../../art-experiments/paladin-equipment/delivery-validation.json), [package provenance](../../marketplace/packages/paladin-assets.provenance.json), and [native field audit](field-type-audit.json) | Rerun relevant checks after source/asset changes; offline checks do not prove live fit |
-| Prior a2dc package lifecycle | [a2dc lifecycle](package-lifecycle-novice.json): real helper install/activate, disable, enable, remove and rollback; exact 137-file bytes checked in every retained state; managed-set JSON export | Export is not a ZIP exporter. No public catalog download, disabled-save loading or online claim |
+| Current package lifecycle | [85ec lifecycle](package-lifecycle-bare-wrists.json): real helper install/activate, disable, enable, remove and rollback; exact 137-file bytes checked in every retained state; managed-set JSON export | Export is not a ZIP exporter. No public catalog download, disabled-save loading or online claim |
 | Production startup and new game | [Production new-game receipt](production-new-game-observation.json): 39/39 registrations, five novice pieces equipped in their native slots, no all-gear grants | Earlier unexplained configuration crash remains in that receipt; final framework changes need proportional startup checks |
 | Enabled save/resume | Same [production receipt](production-new-game-observation.json): matching starting equipment after same-process save/resume and application restart. [Collected loot receipt](custom-loot-collection.json): collected count retained after same-process resume | Disabled-package recovery, every appearance and full-campaign saves are not established |
 | Acquisition and world return | [Native shop purchase](native-shop-purchase.json): one ordinary starter great-hammer purchase. [Current one-handed purchase](native-hammer-purchase-current.json): native spare-boots sale funds an 11-gold Novice Hammer purchase, with matching stock and backpack deltas. [Current shield purchase](native-shield-purchase-current.json): 11 gold spent, one stock removed and one Novice Aegis added to the backpack. [Existing native stock](acquisition-stock-live.json): five families selected into shops. [Corrected custom loot](custom-loot-collection.json): one controlled Novice Helm append, native Collect adds exactly one and returns to world | Armor, boots and helmet purchases remain unobserved. Existing stock alone does not prove purchase; controlled loot does not prove random-drop distribution. Current hammer and shield purchase persistence remains untested |
@@ -232,8 +232,10 @@ python3 marketplace/packages/verify_paladin_lifecycle.py \
   --game-assembly PATH_TO_ISOLATED_ASSEMBLY
 ```
 
-The [prior a2dc lifecycle receipt](package-lifecycle-novice.json) pins package and
-helper identities. Retain exact inventory and request/results, not console success
+The [current lifecycle receipt](package-lifecycle-bare-wrists.json) pins package and
+helper identities. The verifier checks exact archive bytes and absence of extra
+files in every retained state, empty removal, and a matching exported active set.
+Retain exact inventory and request/results, not console success
 alone. This procedure establishes package handling, not gameplay or save behavior.
 
 ### Apparel replacement resource lifetime
