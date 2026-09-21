@@ -29,10 +29,11 @@ and package artifacts have been published and verified.
 Local macOS evidence covers class creation, starting equipment, selected shop
 purchases, controlled loot collection, Guard and rescue, Censure application/expiry,
 representative Ward and Verdict effects, and enhanced Mercy healing. Native death,
-revival and Guard recast preserve spent rescue. Save/resume and restart evidence is
-pinned to an earlier archive; the current art archive has only reached native world
-start and retains an open save/reload gate. Fixture-assisted outcomes and ordinary
-gameplay are distinguished in the [acceptance record](VALIDATION.md).
+revival and Guard recast preserve spent rescue. The user manually completed the
+current art candidate's native Save and Exit flow and confirmed a fresh resume
+with Paladin starter equipment retained. This user-operated evidence has no
+automation receipt. Fixture-assisted outcomes and ordinary gameplay are
+distinguished in the [acceptance record](VALIDATION.md).
 
 Online co-op is explicitly unverified. Production promotion waits for community
 host/client and multiple-Paladin confirmation. Linux, Windows and Proton gameplay
@@ -56,9 +57,9 @@ delivery work, not completed results. Do not describe this draft as a released b
 The [local publication-candidate receipt](publication-candidate.json) pins the
 reviewable descriptor, catalog candidate and unchanged package archive. The
 proposed package tag is `paladin-v0.1.0-beta`, separate from framework `v0.1.4`.
-Both remain unpublished. Its archive is
-`paladin-beta-0.1.0-92dd4d19d8ef.zip`; changing its filename did not change its
-SHA-256 or contents. The candidate advertises only the verified macOS game
+Both remain unpublished. The current unpublished local archive is
+`paladin-local-beta-0.1.0-06a6356760be.zip`, SHA-256
+`06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db`. The candidate advertises only the verified macOS game
 fingerprint and retains explicit online and other-platform limitations.
 
 After remaining local gates and source review, commit the reviewed source and
