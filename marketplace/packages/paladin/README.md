@@ -33,8 +33,9 @@ trial](../../../docs/paladin/production-new-game-observation.json) for archive
 `92dd4d19d8ef` confirms all five Novice pieces equipped and persisted across
 save/resume and restart. The current art archive is separately covered by the
 [current world-start receipt](../../../docs/paladin/current-package-world-start-2026-09-21.json):
-it equips the same five slots after native startup, while its save/reload gate
-remains open. All-race gear fit is a live acceptance gate.
+it equips the same five slots after native startup, with the user separately confirming the current candidate
+through native Save and Exit followed by a fresh resume with its starter equipment
+retained. This is user-operated validation without an automation receipt. All-race gear fit is a live acceptance gate.
 
 The 135 referenced GLB/PNG assets are traced by
 [the external provenance receipt](../paladin-assets.provenance.json).
