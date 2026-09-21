@@ -255,10 +255,14 @@ The [first supplemental front-view capture](novice-combat-studio-framing.json)
 completed 100 frames but clipped during the bent attack pose. Native screen
 frames are retained. The [corrected native male attack trial](novice-combat-studio-fixed.json)
 completes 100 paired frames, with no camera clipping in reviewed bent, recovery
-and victory poses. The shield hides part of the wind-up; female two-handed
-and broader motion acceptance remain open.
+and victory poses. The shield hides part of the wind-up; broader motion
+acceptance remains open.
 
 The [female two-handed front capture](novice-female-studio-windup.json) records
 only the beginning of the wind-up. The attack started at frame 93 of 100; strike
 and recovery are absent. Visible breastplate and sleeves remain attached in
-reviewed frames, but this does not close the full two-handed motion gate.
+reviewed frames. The [subsequent synchronized native attack](novice-female-studio-attack.json)
+records wind-up, strike, recovery and victory within 100 paired frames. Reviewed
+armor remains attached without obvious chest intersections. Raised weapon tips
+are not always framed; received-hit, death, all-race motion and final art review
+remain separate gates.

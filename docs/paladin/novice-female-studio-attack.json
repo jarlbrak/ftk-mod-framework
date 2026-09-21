@@ -1,0 +1,73 @@
+{
+  "schema": "ftkmf.paladin-female-studio-attack.v1",
+  "status": "bounded-female-two-handed-attack-reviewed",
+  "session": "1d881d839f2946cf8d6649cc9d0e4b57",
+  "captureId": "38f31647cd3742da887d0faf0f2994f7",
+  "captureReceiptSha256": "5b9ff189b43e495a24ed3af92ee547586448a6c06bb6a68f912a2352e9b0f070",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "41897eaf3f7e8635e9df6fa727cb8fc5e409a4f3505c43020c43af26257073bc",
+  "armorSha256": "72f22854b3c71bc204dfcc702721623799100ef15bc4a6f46d49f5577e9644e9",
+  "ownerInstanceId": 364424,
+  "celInstanceId": -329498,
+  "frames": 100,
+  "timingMode": "offline-fixed-step-gameplay",
+  "lastGameSeconds": 10.889999389648438,
+  "reviewedFrames": [
+    {
+      "index": 18,
+      "studioSha256": "73b9aa178d062aec5ee91e8082e5b109bd3c0fd08d237a6078aa71aae128bd29",
+      "screenSha256": "f71b101a3443d2fdbdedb05a6eb3ac9315a8df12bdb2e3f1c4a310e9d6d18369",
+      "normalizedTime": 0.22687500715255737,
+      "clip": "attackProf_blunt2H"
+    },
+    {
+      "index": 23,
+      "studioSha256": "2e0cb707b2dafdc827e0943ac9b76ac5d8db7274ecbfb29604256ceda2938122",
+      "screenSha256": "91994fd689d5ab6bcba8f47f09da6d85b58eb5fec3d7b3bad9da34e641d24aa8",
+      "normalizedTime": 0.45374995470046997,
+      "clip": "attackProf_blunt2H"
+    },
+    {
+      "index": 28,
+      "studioSha256": "3e6610bd257f76eb44c5bd1f3b88a81a043cb2b96e3b58aea945686e5f36bec0",
+      "screenSha256": "dc16af1d1b8ef40aafafff767613b15f217ab0f9d5d15b994e74659a54db441b",
+      "normalizedTime": 0.6806249022483826,
+      "clip": "attackProf_blunt2H"
+    },
+    {
+      "index": 33,
+      "studioSha256": "f037f8b2d8f6ff3eb1987388e67b576dd5706e15070ba59834b872e4c842c0ed",
+      "screenSha256": "c5422a2221261fbfdf22f25ab2bc3eb01985b625575f09a948aeef5963843d54",
+      "normalizedTime": 0.9074998497962952,
+      "clip": "attackProf_blunt2H"
+    },
+    {
+      "index": 60,
+      "studioSha256": "3f3eb438e64d93498f3436282040c9b413636ac78270efd13ee1df95bd5ab56c",
+      "screenSha256": "40732084bdfdb8fb951b3a89f3fd3970b20cbfc452b47c25c4040bb3ec6e321e",
+      "normalizedTime": 0.5716787576675415,
+      "clip": "victory_blunt2H"
+    }
+  ],
+  "trialReceipts": {
+    "before.json": "31d8f3d466ba4096badbde7586f45a6bbad4394688db09f643a04a0c6720e8c0",
+    "at-submit.json": "31d8f3d466ba4096badbde7586f45a6bbad4394688db09f643a04a0c6720e8c0",
+    "attack-intent.json": "303a203a41b635d1edb6b562818496093e4c8ebd10eaefc5b7367ef56d0460e1",
+    "attack-response.json": "c44422a181e721072ff356ce6d774a4cc8cba59007e78ed768fbf1b3859084b4",
+    "after.json": "0832dac00f73cea6795a416da01302656346b270b86ae83cc1a5c86c06ff35a1"
+  },
+  "equipmentFixture": "Owned Novice two-handed hammer equipped through native equip_item before Ready; no acquisition claim.",
+  "action": "Native Ready and Hunter pass, then existing bridge attack invokes the native primary Attack once after the first paired capture frame. No damage, focus, RNG or animation outcome fixture.",
+  "observations": [
+    "Native attackProf_blunt2H sampled at frames 15 through 34, normalized progress 0.090750 through 0.952875, followed by idle and victory.",
+    "Reviewed wind-up, overhead strike, recovery and victory show attached breastplate, sleeves, waist and boots without obvious chest intersections.",
+    "All 100 studio image hashes match; corresponding native screen frames retained.",
+    "Camera no longer clips through the avatar in reviewed poses."
+  ],
+  "limitations": [
+    "Selected frame review, not every pose or all-race motion acceptance.",
+    "Raised hammer extends beyond the studio image in some overhead and victory poses; no complete weapon-framing claim.",
+    "No received-damage or death capture, user art approval, full current archive game deployment or online claim.",
+    "Fixed-step timing and supplemental studio lights are explicitly observational."
+  ]
+}
