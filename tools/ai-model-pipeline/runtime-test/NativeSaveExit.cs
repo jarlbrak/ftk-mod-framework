@@ -18,8 +18,10 @@ public sealed partial class RuntimeModelTest
 
     static Button NativeSaveExitControl(uiOptionsMenu menu)
     {
-        System.Reflection.FieldInfo field = menu.GetType().GetField("m_SaveGameButton", Members);
-        return field == null ? null : field.GetValue(menu) as Button;
+        System.Reflection.FieldInfo saveOptions = menu.GetType().GetField("m_SaveOptions", Members);
+        object panel = saveOptions == null ? null : saveOptions.GetValue(menu);
+        System.Reflection.FieldInfo exit = panel == null ? null : panel.GetType().GetField("m_SaveExit", Members);
+        return exit == null ? null : exit.GetValue(panel) as Button;
     }
 
     static bool NativeSaveExitControlActive(UnityEngine.Object control)

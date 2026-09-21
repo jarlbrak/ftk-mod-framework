@@ -23,7 +23,8 @@ class NativeSaveExitBoundaryTests(unittest.TestCase):
         for required in (
             'menu = uiOptionsMenu.Instance', 'menu.m_Showing',
             '!GameLogic.Instance.IsSinglePlayer()', 'EncounterSession.Instance.m_IsInCombat',
-            'menu.GetType().GetField("m_SaveGameButton", Members)',
+            'menu.GetType().GetField("m_SaveOptions", Members)',
+            'panel.GetType().GetField("m_SaveExit", Members)',
             'NativeSaveExitControlActive(control)',
             'control.onClick.GetPersistentEventCount() != 1',
             'control.onClick.GetPersistentTarget(0)',
