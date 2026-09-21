@@ -14,7 +14,7 @@ namespace FTKModFramework.Core
     /// Cloning a template means the new entry inherits a valid icon / prefab / animation set, so it
     /// is immediately usable in-game; you then override only the fields you care about.
     /// </summary>
-    public static class Content
+    public static partial class Content
     {
         /// <summary>
         /// Fetch a DB and make sure its int-&gt;row index is built. At TableManager.Initialize time the

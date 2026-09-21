@@ -41,6 +41,7 @@ namespace FTKModFramework.Core
         /// </summary>
         internal static string ResolveModelPath(string fileName)
         {
+            if (PackageModelPaths.IsPackagePath(fileName)) return PackageModelPaths.Resolve(fileName);
             string pluginDir = Path.GetDirectoryName(typeof(Plugin).Assembly.Location);
             return Path.Combine(Path.Combine(Path.Combine(pluginDir, ContentFolder), ModelsSubFolder), fileName);
         }

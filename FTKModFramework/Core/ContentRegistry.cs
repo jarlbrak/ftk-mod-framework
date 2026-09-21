@@ -33,6 +33,23 @@ namespace FTKModFramework.Core
         // Only ContentLoader uses this; hand-written content keeps the immediate-MakeIndex path.
         // The content load and all hand-written registration run on the Unity main thread.
         private static HashSet<GEDataArrayBase> _batchDirty;
+        private static readonly Dictionary<Type, RegisteredRowRestoration> RetainedRows =
+            new Dictionary<Type, RegisteredRowRestoration>();
+
+        // Native title recreation instantiates fresh vanilla DB components. Keep authored rows,
+        // not the destroyed components, so capabilities that refer to these rows remain valid.
+        internal static void RestoreRegisteredRows(TableManager manager)
+        {
+            foreach (KeyValuePair<Type, RegisteredRowRestoration> entry in RetainedRows)
+            {
+                GEDataArrayBase db = manager.Get(entry.Key);
+                if (db == null) throw new InvalidOperationException("Missing recreated content table " + entry.Key.Name);
+                Array current = (Array)Reflect.GetField(db, "m_Array");
+                Array restored = entry.Value.Restore(current);
+                if (!object.ReferenceEquals(current, restored)) Reflect.SetField(db, "m_Array", restored);
+                Reflect.Invoke(db, "MakeIndex");
+            }
+        }
 
         /// <summary>
         /// Enter batch mode: subsequent <see cref="Register"/> calls DEFER their per-DB MakeIndex and
@@ -106,6 +123,14 @@ namespace FTKModFramework.Core
             // to one MakeIndex per DB at EndBatch; otherwise reindex immediately (hand-written content).
             if (_batchDirty != null) _batchDirty.Add(db);
             else Reflect.Invoke(db, "MakeIndex");
+
+            RegisteredRowRestoration retained;
+            if (!RetainedRows.TryGetValue(dbType, out retained))
+            {
+                retained = new RegisteredRowRestoration();
+                RetainedRows.Add(dbType, retained);
+            }
+            retained.Record(arr.Length - 1, row);
 
             Plugin.Log.LogInfo(
                 "Registered '" + id + "' in " + dbType.Name + " (synthetic id " + synthetic + ").");

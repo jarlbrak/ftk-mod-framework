@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>Major</RollForward>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/GuardianCombatState.cs" Link="GuardianCombatState.cs" />
+    <Compile Include="../../Core/GuardianEquipmentBonuses.cs" Link="GuardianEquipmentBonuses.cs" />
+    <Compile Include="../../Core/GuardianEquipmentDescription.cs" Link="GuardianEquipmentDescription.cs" />
+    <Compile Include="../../Core/GuardianClassLayout.cs" Link="GuardianClassLayout.cs" />
+    <Compile Include="../../Core/GuardianFocusedHit.cs" Link="GuardianFocusedHit.cs" />
+  </ItemGroup>
+</Project>

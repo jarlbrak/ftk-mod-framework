@@ -31,7 +31,7 @@ All required body/hair paths must still exist. A conditional path is skipped onl
 
 Absent variants produce an explicit skipped-assignment diagnostic. An absent alternative alone does not indicate an unstyled outfit: equipping one variant normally removes another. Only inspecting actual active renderers that were not selected for custom replacement establishes native fallback. Such native equipment stays in place and may be unstyled; a conditional registration does not establish a fully custom outfit. Runtime support still requires default outfit, equipped and unequipped rebuilds, deliberate native-identity mismatch rejection, and lease cleanup checks on the new framework version.
 
-`CharacterDummy.CreateAvatar(bool)` clones the completed overworld avatar and selects the weapon's native combat controller. Custom meshes and materials are shared across that native clone operation. The resource owner serializes a lease ID and renderer references so Unity remaps renderer references into the clone. A process-local reference count retains the custom assets until the last acquired avatar owner is destroyed. `Awake` and an idempotent finalizer on the combat creation method retain cloned leases. The finalizer also covers an exception after the native clone was assigned, including inactive clones whose `Awake` has not run, and returns the original exception unchanged. Unity 2017 may omit `OnDestroy` on a clone that was never active. The active framework plugin therefore prunes destroyed owner components each frame; normal release removes its owner record, so pruning cannot release it twice. This covers an explicitly retained inactive clone destroyed without activation. Missing leases are logged; the owner never adopts original game assets as a recovery shortcut.
+`CharacterDummy.CreateAvatar(bool)` clones the completed overworld avatar and selects the weapon's native combat controller. Custom meshes and materials are shared across that native clone operation. The resource owner serializes a lease ID and renderer references so Unity remaps renderer references into the clone. A process-local reference count retains the custom assets until the last acquired avatar owner is destroyed. `Awake` retains active cloned leases. A narrow transpiler also retains the complete clone hierarchy immediately after the native `Instantiate` result is assigned to `m_EventListener`, before `SetVisible` and later initialization. This covers inactive body and equipment owners whose `Awake` has not run, including when later native initialization throws. Retention is idempotent and never replaces the native exception. The insertion requires the exact unique native clone/assignment pattern; it does not wrap combat creation in a Harmony finalizer. Unity 2017 may omit `OnDestroy` on a clone that was never active. The active framework plugin therefore prunes destroyed owner components each frame; normal release removes its owner record, so pruning cannot release it twice. This covers an explicitly retained inactive clone destroyed without activation. Missing leases are logged; the owner never adopts original game assets as a recovery shortcut.
 
 This path preserves the native animation controller and the native animated renderer bounds. It does not retarget rigs, prove bounds for oversized models, or claim compatibility with all equipment and weapon controllers.
 
@@ -272,3 +272,35 @@ player layout. The generated [validation
 evidence ledger](MODEL-VALIDATION-GATES.md) retains the two supplements as
 separate entries so the preview does not transfer coverage to a different
 skinset or profile.
+
+## Custom class backpacks
+
+`Content.SetClassBackpackMeshesFromGlb(classRow, skinset, meshes)` registers
+`PlayerRendererMesh` assignments for rigid renderers relative to the native
+backpack root. Use `"."` for its root renderer. The exact registered custom class
+row and one of its declared skinsets are required. Vanilla classes are unchanged.
+In a data package, use an optional `backpack` array alongside `body` and `apparel`
+in each `playerModels` entry, with the same `path`, `model`, and `texture` fields.
+
+The native `CharacterEventListener.UpdateBackpack` creates and parents a fresh
+backpack before the framework applies its transaction. Assignments preserve that
+native transform, animation attachment, and detach behavior. A separate lease on
+the backpack root owns its replacement mesh and material; avatar cloning retains
+child leases, and replacing or destroying a backpack releases its own resources.
+An absent native backpack is left absent. Invalid renderer assignments preserve
+the native instance. This route does not change native prefab assets or inventory.
+
+The Paladin reliquary backpack has offline registration, transaction, asset, and
+package validation. Its native fit, motion, rebuild, clone, and death-detachment
+coverage require explicit live observations; a successful build does not prove them.
+
+### Authored equipment palette and native customization
+
+For explicit player, apparel, backpack, and item/display model assignments, a
+provided replacement texture preserves its authored main palette. A private
+material inherited from a native `_main` slot gets a neutral color multiplier
+and remains neutral when native avatar tinting runs again or clones the avatar.
+Skin and hair slots still accept the native skin/hair customization colors.
+Assignments without a replacement texture retain native main-color tinting.
+Enemy renderer assignments keep their existing material behavior. No shared
+native material is modified.

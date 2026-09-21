@@ -96,6 +96,6 @@ namespace FTKModFramework.Core
             return items.Length>0;
         }
         public static string RelativePath(Transform root,Transform child){return child.path;}
-        public static bool Apply(string id,CharacterEventListener avatar,EnemyRendererMesh[] items){calls++;last=items;return result;}
+        public static bool Apply(string id,CharacterEventListener avatar,EnemyRendererMesh[] items, object prepareMaterial=null, bool preserveAuthoredMainPalette=false){calls++;last=items;return result;}
     }
 }

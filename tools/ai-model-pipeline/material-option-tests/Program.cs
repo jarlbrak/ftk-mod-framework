@@ -13,6 +13,7 @@ namespace UnityEngine
     }
     public sealed class Material
     {
+        public string name;
         public readonly HashSet<string> properties=new HashSet<string>();
         public readonly HashSet<string> keywords=new HashSet<string>();
         public readonly Dictionary<string,object> textures=new Dictionary<string,object>();

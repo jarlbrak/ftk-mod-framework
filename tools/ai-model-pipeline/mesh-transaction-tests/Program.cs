@@ -33,7 +33,7 @@ namespace UnityEngine
     public class Transform:Component {public Transform parent;public List<Transform> children=new List<Transform>();public int pose=73;}
     public struct Matrix4x4 {public int value;}
     public struct Bounds {public int value;}
-    public struct Color {public float r,g,b,a;public Color(float r,float g,float b){this.r=r;this.g=g;this.b=b;a=1;}public Color(float value){r=g=b=value;a=1;}public static Color black=>new Color(0);}
+    public struct Color {public float r,g,b,a;public Color(float r,float g,float b,float a){this.r=r;this.g=g;this.b=b;this.a=a;}public Color(float r,float g,float b){this.r=r;this.g=g;this.b=b;a=1;}public Color(float value){r=g=b=value;a=1;}public static Color black=>new Color(0);}
     public class Material:Object
     {
         public Dictionary<string,Vector2> offsets=new Dictionary<string,Vector2>();public Color color; public bool emission=true;public Dictionary<string,Object> textures=new Dictionary<string,Object>();
@@ -48,6 +48,7 @@ namespace UnityEngine
     }
     public class Renderer:Component
     {
+        public int materialReads; public Material[] materials {get {materialReads++;return sharedMaterials;}}
         Material[] mats;public bool failOnce;public int failCount;public int assignThenFailCount;public bool enabled=true;
         public Material[] sharedMaterials {get=>mats;set {if(assignThenFailCount>0){assignThenFailCount--;if(assignThenFailCount==1)mats=value;throw new Exception("injected live-assigned setter failure");}if(failCount>0){failCount--;throw new Exception("injected repeated material setter failure");}if(failOnce){failOnce=false;throw new Exception("injected renderer commit failure");}mats=value;}}
     }
@@ -58,7 +59,11 @@ namespace UnityEngine
     public enum TextureFormat{RGBA32}
     public class Texture2D:Object {public static bool loadResult=true; public Texture2D(int w,int h){}public Texture2D(int w,int h,TextureFormat f,bool m){}public bool LoadImage(byte[] bytes)=>loadResult;}
 }
-public class CharacterEventListener:Component{}
+public class CharacterEventListener:Component{public CharacterOverworld m_CharacterOverworld=new CharacterOverworld(); public QuickCreate m_uiQuickPlayerCreate=new QuickCreate();}
+public class CharacterOverworld {public CharacterStats m_CharacterStats=new CharacterStats();}
+public class CharacterStats {public Color m_ColorMain=new Color(.8f),m_ColorSkin=new Color(.6f),m_ColorHair=new Color(.4f);}
+public class QuickCreate {public Image m_ImageColorMain=new Image(),m_ImageColorSkin=new Image(),m_ImageColorHair=new Image();}
+public class Image {public Color color=new Color(.2f);}
 public class ScrollingUVs:MonoBehaviour {public int materialIndex;public Vector2 uvAnimationRate=new Vector2(1,0);public string textureName="_MainTex";private Vector2 uvOffset=new Vector2(0,0);}
 namespace HarmonyLib {public class HarmonyPatch:Attribute{public HarmonyPatch(Type type,string method){}}}
 namespace FTKModFramework.Core
@@ -225,7 +230,7 @@ static class Program
     {
         cel=Avatar(out renderer,out var other);renderer.sharedMaterials=(Material[])sourceRenderer.sharedMaterials.Clone();scroller=renderer.gameObject.AddComponent<ScrollingUVs>();scroller.materialIndex=1;
         var owner=SerializedClone(source,cel);owner.SetTargets(new Renderer[]{renderer});
-        foreach(var pair in new[]{new KeyValuePair<string,object>("_scrollRenderers",new Renderer[]{renderer}),new KeyValuePair<string,object>("_scrollMaterials",Field(source,"_scrollMaterials")),new KeyValuePair<string,object>("_scrollCounts",Field(source,"_scrollCounts")),new KeyValuePair<string,object>("_scrollers",new ScrollingUVs[]{scroller})})typeof(EnemyMeshResources).GetField(pair.Key,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(owner,pair.Value);
+        foreach(var pair in new[]{new KeyValuePair<string,object>("_scrollRenderers",new Renderer[]{renderer}),new KeyValuePair<string,object>("_scrollMaterials",(Material[])sourceRenderer.sharedMaterials.Clone()),new KeyValuePair<string,object>("_scrollCounts",new int[]{sourceRenderer.sharedMaterials.Length}),new KeyValuePair<string,object>("_scrollers",new ScrollingUVs[]{scroller})})typeof(EnemyMeshResources).GetField(pair.Key,BindingFlags.Instance|BindingFlags.NonPublic).SetValue(owner,pair.Value);
         return owner;
     }
     static void LegacyScrollingChecks()
@@ -269,8 +274,109 @@ static class Program
         Check(!ExplicitEnemyMeshSwap.Apply("ambiguous-static-type",cel,new[]{EnemyRendererMesh.ForStaticRenderer("rigid","rigid.glb")}),"Static descriptor rejects a transform that also has a skinned renderer");
         Check(filter.sharedMesh.name=="native static","Ambiguous static target keeps native mesh");CheckNewAssetsDestroyed(start);
     }
+    static void TintChecks()
+    {
+        var cel=Avatar(out var a,out var b);
+        Check(PlayerTintPatch.Prefix(cel)&&a.materialReads==0,"Vanilla avatar stays entirely native");
+        a.sharedMaterials[0].name="armor_main";a.sharedMaterials[1].name="face_skin";
+        var native=a.sharedMaterials[0];
+        Check(ExplicitEnemyMeshSwap.Apply("tint",cel,new[]{new EnemyRendererMesh("a","a.glb")}),"Tint fixture swaps non-scrolling target");
+        var owner=cel.GetComponent<EnemyMeshResources>();var source=a.sharedMaterials[0];
+        int start=UObject.created.Count;
+        Check(!PlayerTintPatch.Prefix(cel)&&a.materialReads==0&&b.materialReads==1,"Only unmanaged renderer uses native getter");
+        Check(source.color.r==.8f&&native.color.r==.25f&&UObject.created.Count==start,"Tint source reuses owned materials and preserves native assets");
+        var clone=ScrollClone(owner,a,out var cloneCel,out var ca,out var sc);sc.materialIndex=0;
+        cloneCel.m_CharacterOverworld.m_CharacterStats.m_ColorMain=new Color(.1f);
+        Check(!PlayerTintPatch.Prefix(cloneCel)&&ca.sharedMaterials[0]!=source&&source.color.r==.8f&&ca.sharedMaterials[0].color.r==.1f,"Clone tint isolates source materials");
+        var failed=ScrollClone(owner,a,out var failedCel,out var failedRenderer,out var failedScroller);
+        failedRenderer.failOnce=true;start=UObject.created.Count;
+        Check(!PlayerTintPatch.Prefix(failedCel)&&failedRenderer.materialReads==0&&failedRenderer.sharedMaterials[0]==source,"Failed tint privatization restores source reference without implicit fallback");
+        CheckNewAssetsDestroyed(start);failed.Release();
+        var privateMat=ca.sharedMaterials[0];start=UObject.created.Count;
+        PlayerTintPatch.Prefix(cloneCel);
+        Check(UObject.created.Count==start&&ca.materialReads==0,"Repeated tint neither allocates nor invokes implicit getter");
+        Check(!ExplicitScrollingUvs.Prefix(sc)&&ca.sharedMaterials[0]==privateMat,"Scrolling reuses tint private set");
+        ca.sharedMaterials=new[]{new Material{name="unknown_main"},new Material{name="unknown_skin"}};
+        PlayerTintPatch.Prefix(cloneCel);
+        Check(ca.materialReads==0&&ca.sharedMaterials[0].color.r==0,"Unknown references skipped without adoption");
+        owner.Release();Check(!source.destroyed&&!privateMat.destroyed,"Clone retains tinted resources after source release");
+        clone.Release();Check(source.destroyed&&privateMat.destroyed&&!native.destroyed,"Last release destroys tracked tint copies only");
+        cel=Avatar(out a,out b);a.sharedMaterials[0].name="item_hair";
+        Check(ExplicitEnemyMeshSwap.ApplyToObject("item",a.gameObject,new[]{new EnemyRendererMesh(".","a.glb")}),"Child item owns its own lease without a body lease");
+        cel.m_CharacterOverworld=null;
+        Check(!PlayerTintPatch.Prefix(cel)&&a.materialReads==0&&a.sharedMaterials[0].color.r==.2f,"Preview colors reach child item owner before body application");
+        a.GetComponent<EnemyMeshResources>().Release();
+    }
+    static void AuthoredPaletteChecks()
+    {
+        string file="palette-test-"+Guid.NewGuid().ToString("N")+".png";
+        System.IO.File.WriteAllBytes(file,new byte[]{1});
+        try
+        {
+            var cel=Avatar(out var a,out var b);a.sharedMaterials[0].name="armor_main";
+            var native=a.sharedMaterials[0];
+            Check(ExplicitEnemyMeshSwap.Apply("player",cel,new[]{new EnemyRendererMesh("a","a.glb",file)},null,true),"Player palette transaction succeeds");
+            var material=a.sharedMaterials[0];var owner=cel.GetComponent<EnemyMeshResources>();
+            Check(material.color.r==1f&&ExplicitMaterialOptions.HasAuthoredMainPalette(material)&&native.color.r==.25f,"Authored main palette clears inherited tint only on owned material");
+            PlayerTintPatch.Prefix(cel);
+            Check(material.color.r==1f&&a.materialReads==0,"Later native main tint cannot recolor authored palette");
+            var clone=ScrollClone(owner,a,out var cloneCel,out var ca,out var sc);
+            cloneCel.m_CharacterOverworld.m_CharacterStats.m_ColorMain=new Color(.1f);
+            PlayerTintPatch.Prefix(cloneCel);
+            Check(ca.sharedMaterials[0].color.r==1f&&ExplicitMaterialOptions.HasAuthoredMainPalette(ca.sharedMaterials[0]),"Clone privatization preserves authored palette marker");
+            owner.Release();clone.Release();Check(material.destroyed&&!native.destroyed,"Authored palette keeps original lease lifetime");
+            cel=Avatar(out a,out b);a.sharedMaterials[0].name="skin_skin";
+            Check(ExplicitEnemyMeshSwap.Apply("player-skin",cel,new[]{new EnemyRendererMesh("a","a.glb",file)},null,true),"Textured skin transaction succeeds");
+            PlayerTintPatch.Prefix(cel);Check(a.sharedMaterials[0].color.r==.6f&&!ExplicitMaterialOptions.HasAuthoredMainPalette(a.sharedMaterials[0]),"Authored skin still accepts skin customization");
+            cel.GetComponent<EnemyMeshResources>().Release();
+            cel=Avatar(out a,out b);a.sharedMaterials[0].name="hair_hair";
+            ExplicitEnemyMeshSwap.Apply("player-hair",cel,new[]{new EnemyRendererMesh("a","a.glb",file)},null,true);
+            PlayerTintPatch.Prefix(cel);Check(a.sharedMaterials[0].color.r==.4f,"Authored hair still accepts hair customization");
+            cel.GetComponent<EnemyMeshResources>().Release();
+            cel=Avatar(out a,out b);a.sharedMaterials[0].name="armor_main";
+            ExplicitEnemyMeshSwap.Apply("untextured",cel,new[]{new EnemyRendererMesh("a","a.glb")},null,true);
+            PlayerTintPatch.Prefix(cel);Check(a.sharedMaterials[0].color.r==.8f,"Untextured player replacement retains main customization");
+            cel.GetComponent<EnemyMeshResources>().Release();
+            cel=Avatar(out a,out b);a.sharedMaterials[0].name="enemy_main";
+            ExplicitEnemyMeshSwap.Apply("enemy",cel,new[]{new EnemyRendererMesh("a","a.glb",file)});
+            Check(a.sharedMaterials[0].color.r==.25f&&!ExplicitMaterialOptions.HasAuthoredMainPalette(a.sharedMaterials[0]),"Enemy texture defaults retain native tint");
+            cel.GetComponent<EnemyMeshResources>().Release();
+        }
+        finally{System.IO.File.Delete(file);}
+    }
+    static void EquipmentLeaseChecks()
+    {
+        var source=Avatar(out var unusedA,out var unusedB);
+        var piece=StaticPart(source.gameObject,"piece",out var filter);
+        var native=filter.sharedMesh;
+        Check(ExplicitEnemyMeshSwap.ApplyToObject("item",source.gameObject,new[]{EnemyRendererMesh.ForStaticRenderer("piece","piece.glb")}),"Equipment root transaction applies");
+        var owner=source.GetComponent<EnemyMeshResources>();var mesh=filter.sharedMesh;var material=piece.sharedMaterials[0];
+        var avatar=new GameObject("combat avatar");var equipment=new GameObject("inactive equipment");
+        equipment.transform.parent=avatar.transform;avatar.transform.children.Add(equipment.transform);
+        var cloneCel=equipment.AddComponent<CharacterEventListener>();var copy=SerializedClone(owner,cloneCel);
+        Check(avatar.GetComponent<EnemyMeshResources>()==null,"Combat avatar itself need not own an item lease");
+        EnemyMeshResources.RetainHierarchy(avatar);EnemyMeshResources.RetainHierarchy(avatar);
+        owner.Release();
+        Check(!mesh.destroyed&&!material.destroyed,"Inactive child lease survives source destruction without Awake");
+        copy.Release();Check(mesh.destroyed&&material.destroyed&&!native.destroyed,"Hierarchy retention is idempotent and final child releases only custom assets");
+
+        source=Avatar(out unusedA,out unusedB);piece=StaticPart(source.gameObject,"piece",out filter);
+        var other=StaticPart(source.gameObject,"other",out var otherFilter);var foreign=StaticPart(source.gameObject,"foreign",out var foreignFilter);
+        Check(ExplicitEnemyMeshSwap.ApplyToObject("broken item",source.gameObject,new[]{EnemyRendererMesh.ForStaticRenderer("piece","piece.glb"),EnemyRendererMesh.ForStaticRenderer("other","other.glb")}),"Fragment transaction applies");
+        owner=source.GetComponent<EnemyMeshResources>();mesh=filter.sharedMesh;var secondMesh=otherFilter.sharedMesh;
+        Check(!owner.RetainForDetachedRenderer(foreign)&&foreign.GetComponent<EnemyMeshResources>()==null,"Unowned native fragment is never adopted");
+        Check(owner.RetainForDetachedRenderer(piece)&&owner.RetainForDetachedRenderer(other),"Every detachable renderer acquires a lease reference");
+        Check(owner.RetainForDetachedRenderer(piece)&&piece.GetComponents<EnemyMeshResources>().Length==1,"Repeated break retention is idempotent");
+        piece.transform.parent=null;other.transform.parent=null;
+        owner.Release();Check(!mesh.destroyed&&!secondMesh.destroyed,"Detached fragments survive weapon root destruction");
+        piece.GetComponent<EnemyMeshResources>().Release();Check(!mesh.destroyed&&!secondMesh.destroyed,"Remaining fragment holds the shared resource set");
+        other.GetComponent<EnemyMeshResources>().Release();Check(mesh.destroyed&&secondMesh.destroyed&&!foreignFilter.sharedMesh.destroyed,"Final fragment releases set without destroying unrelated native resources");
+    }
     static void Main()
     {
+        TintChecks();
+        AuthoredPaletteChecks();
+        EquipmentLeaseChecks();
         var cel=Avatar(out var a,out var b);var am=a.sharedMesh;var bm=b.sharedMesh;var ab=a.bones;var bb=b.bones;var amat=a.sharedMaterials;var bmat=b.sharedMaterials;
         int start=UObject.created.Count;
         Check(!ExplicitEnemyMeshSwap.Apply("row",cel,Plan(),(r,m)=>{m.color=new Color(.8f);if(r==b)throw new Exception("material preparation failed");}),"Material preparation rejects whole set");

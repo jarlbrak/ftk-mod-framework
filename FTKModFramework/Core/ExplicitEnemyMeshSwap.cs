@@ -102,14 +102,21 @@ namespace FTKModFramework.Core
         }
 
         internal static bool Apply(string enemyId, CharacterEventListener cel, EnemyRendererMesh[] assignments,
-            Action<Renderer, Material> prepareMaterial = null)
+            Action<Renderer, Material> prepareMaterial = null, bool preserveAuthoredMainPalette = false)
         {
+            return ApplyToObject(enemyId, cel == null ? null : cel.gameObject, assignments, prepareMaterial, preserveAuthoredMainPalette);
+        }
+
+        internal static bool ApplyToObject(string identity, GameObject root, EnemyRendererMesh[] assignments,
+            Action<Renderer, Material> prepareMaterial = null, bool preserveAuthoredMainPalette = false)
+        {
+            string enemyId = identity;
             string error;
             if (!ValidateAssignments(assignments, out error))
             { Plugin.Log.LogWarning("[enemy-visual] explicit meshes rejected: " + error); return false; }
-            if (cel == null) return false;
+            if (root == null) return false;
             // Do not allocate or rebind twice on the same spawned clone.
-            EnemyMeshResources existing = cel.GetComponent<EnemyMeshResources>();
+            EnemyMeshResources existing = root.GetComponent<EnemyMeshResources>();
             if (existing != null && (!existing.VisualResourcesOnly || !existing.ValidLease()))
                 return !existing.VisualResourcesOnly && existing.Applied && existing.EnsureRetained();
             List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
@@ -119,13 +126,13 @@ namespace FTKModFramework.Core
             int attempted = 0;
             try
             {
-                Transform[] transforms = cel.GetComponentsInChildren<Transform>(true);
+                Transform[] transforms = root.GetComponentsInChildren<Transform>(true);
                 foreach (EnemyRendererMesh assignment in assignments)
                 {
                     Transform target = null;
                     int pathMatches = 0;
                     foreach (Transform candidate in transforms)
-                        if (RelativePath(cel.transform, candidate) == assignment.RendererPath)
+                        if (RelativePath(root.transform, candidate) == assignment.RendererPath)
                         { target = candidate; pathMatches++; }
                     if (pathMatches != 1)
                         throw new InvalidOperationException("renderer path '" + assignment.RendererPath + "' matched " + pathMatches + " transforms");
@@ -201,6 +208,7 @@ namespace FTKModFramework.Core
                         texture.name = "ftkmf_" + textureName;
                         if (!material.HasProperty("_MainTex")) throw new InvalidOperationException("target shader lacks _MainTex");
                         material.SetTexture("_MainTex", texture);
+                        if (preserveAuthoredMainPalette) ExplicitMaterialOptions.PreserveMainPalette(material);
                     }
                     if (p.skinnedRenderer != null)
                     {
@@ -223,7 +231,7 @@ namespace FTKModFramework.Core
                     prepared.Add(p);
                 }
                 // No renderer state has changed above. Own resources before beginning the commit.
-                lifetime = existing ?? cel.gameObject.AddComponent<EnemyMeshResources>();
+                lifetime = existing ?? root.AddComponent<EnemyMeshResources>();
                 List<Renderer> targets = new List<Renderer>();
                 foreach (Prepared p in prepared) targets.Add(p.renderer);
                 batch = lifetime.Append(owned.ToArray(), targets.ToArray(), existing == null);
@@ -242,8 +250,8 @@ namespace FTKModFramework.Core
                     if (p.materials != null) p.renderer.sharedMaterials = p.materials;
                 }
                 foreach (Prepared p in prepared)
-                    if (p.scrollers != null && p.scrollers.Length > 0)
-                        lifetime.AddScrollingTarget(p.renderer, p.materials, p.scrollers);
+                    if (p.materials != null)
+                        lifetime.AddScrollingTarget(p.renderer, p.materials, p.scrollers ?? new ScrollingUVs[0]);
                 lifetime.Applied = true;
                 lifetime.VisualResourcesOnly = false;
                 Plugin.Log.LogInfo("[enemy-visual] explicit mesh swap applied " + prepared.Count + " renderers for '" + enemyId + "'.");
@@ -418,6 +426,10 @@ namespace FTKModFramework.Core
         }
 
         internal Material[] ScrollingMaterials(Renderer renderer, bool makePrivate)
+        { return PrivateMaterials(renderer, makePrivate); }
+
+        // Tint and scrolling share provenance so either path privatizes a clone only once.
+        internal Material[] PrivateMaterials(Renderer renderer, bool makePrivate)
         {
             if (!Applied || !EnsureRetained() || !Owns(renderer)) return null;
             if (_privateScrolling == null) _privateScrolling = new Dictionary<Renderer, Material[]>();
@@ -523,6 +535,30 @@ namespace FTKModFramework.Core
             _acquired = true;
             return true;
         }
+
+        internal static void RetainHierarchy(GameObject root)
+        {
+            if (root == null) return;
+            foreach (EnemyMeshResources owner in root.GetComponentsInChildren<EnemyMeshResources>(true))
+                owner.EnsureRetained();
+        }
+
+        // Native weapon break recursively detaches individual renderer transforms. They can outlive
+        // the weapon root, so acquire an additional reference before that ownership boundary splits.
+        internal bool RetainForDetachedRenderer(Renderer renderer)
+        {
+            if (renderer == null || !Owns(renderer) || !EnsureRetained()) return false;
+            if (renderer.gameObject == gameObject) return true;
+            EnemyMeshResources fragment = renderer.GetComponent<EnemyMeshResources>();
+            if (fragment != null) return fragment._leaseId == _leaseId && fragment.EnsureRetained();
+            fragment = renderer.gameObject.AddComponent<EnemyMeshResources>();
+            fragment._leaseId = _leaseId;
+            fragment._targets = new Renderer[] { renderer };
+            fragment.Applied = Applied;
+            fragment.VisualResourcesOnly = VisualResourcesOnly;
+            return fragment.EnsureRetained();
+        }
+
         internal void Release()
         {
             Applied = false;

@@ -49,6 +49,51 @@ namespace FTKModFramework.Core.Data
         /// a proficiency. An unknown name leaves the instance's default category untouched and warns.
         /// </summary>
         [JsonProperty("behaviorCategory")] public string BehaviorCategory;
+        [JsonProperty("guardian")] public bool Guardian;
+        [JsonProperty("guardianBonuses")] public GuardianBonusEntry GuardianBonuses;
+        [JsonProperty("icon")] public string Icon;
+        [JsonProperty("apparelModels")] public ApparelModelEntry ApparelModels;
+        [JsonProperty("modifiers")] public ItemModifierEntry Modifiers;
+        [JsonProperty("itemModels")] public ModelRendererEntry[] ItemModels;
+        [JsonProperty("displayModels")] public ModelRendererEntry[] DisplayModels;
+        [JsonProperty("playerModels")] public PlayerModelEntry[] PlayerModels;
 #pragma warning restore CS0649
+    }
+    // Populated by JSON reflection.
+#pragma warning disable CS0649
+    internal sealed class GuardianBonusEntry
+    {
+        [JsonProperty("guardHealPercent")] public int GuardHealPercent;
+        [JsonProperty("focusHealBonusPercent")] public int FocusHealBonusPercent;
+        [JsonProperty("retaliationDamage")] public int RetaliationDamage;
+        [JsonProperty("wardDebuffs")] public bool WardDebuffs;
+    }
+    internal sealed class ApparelModelEntry
+    {
+        [JsonProperty("femaleBinding")] public string FemaleBinding;
+        [JsonProperty("maleBinding")] public string MaleBinding;
+        [JsonProperty("renderers")] public ModelRendererEntry[] Renderers;
+    }
+    internal sealed class ItemModifierEntry
+    {
+        [JsonProperty("armor")] public int Armor;
+        [JsonProperty("resistance")] public int Resistance;
+        [JsonProperty("vitality")] public float Vitality;
+        [JsonProperty("speed")] public float Speed;
+        [JsonProperty("reflect")] public int Reflect;
+    }
+    internal sealed class ModelRendererEntry
+    {
+        [JsonProperty("path")] public string Path;
+        [JsonProperty("model")] public string Model;
+        [JsonProperty("texture")] public string Texture;
+        [JsonProperty("nativeMesh")] public string NativeMesh;
+    }
+    internal sealed class PlayerModelEntry
+    {
+        [JsonProperty("skinset")] public string Skinset;
+        [JsonProperty("body")] public ModelRendererEntry[] Body;
+        [JsonProperty("apparel")] public ModelRendererEntry[] Apparel;
+        [JsonProperty("backpack")] public ModelRendererEntry[] Backpack;
     }
 }

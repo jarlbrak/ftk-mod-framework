@@ -33,8 +33,8 @@ namespace FTKModFramework.Core.UI
     /// OpenModsPanel, so only our handler runs.
     ///
     /// IDEMPOTENCY: MainScreen has no Unity lifecycle methods; OnSetFocus fires on EVERY return to the
-    /// title screen. A static _done guard plus a recursive name check (the clone is nested, so a shallow
-    /// Find would miss it) prevent a duplicate button.
+    /// title screen. A recursive name check on the current screen (the clone is nested, so a shallow
+    /// Find would miss it) prevents duplicates even when the title scene is recreated.
     ///
     /// Registration is automatic: Plugin.Awake calls _harmony.PatchAll(), which discovers this
     /// [HarmonyPatch] class (same as Plugin.cs's TableManager_Initialize_Patch).
@@ -45,27 +45,18 @@ namespace FTKModFramework.Core.UI
         // GameObject name of the injected button. Doubles as the duplicate-prevention key.
         private const string ModsButtonName = "ModsButton";
 
-        // _done short-circuits after a successful inject. The recursive name check is the authoritative
-        // duplicate guard (it survives even if _done were reset, e.g. on a domain reload).
-        private static bool _done;
-
         private static void Postfix(StartGameFE.MainScreen __instance)
         {
-            if (_done) return;
             if (__instance == null) return;
 
             // m_SelectableParent (inherited from FTKInputFocus, public Transform) roots the menu subtree the
             // nav auto-scan walks (GetComponentsInChildren<FTKSelectable>). No parent => nothing to clone and
-            // no nav; bail without arming _done so a later, fully-built show can retry.
+            // no nav; bail so a later, fully-built show can retry.
             Transform menuParent = __instance.m_SelectableParent;
             if (menuParent == null) return;
 
             // Duplicate guard, recursive: the clone is nested below menuParent, so a shallow Find would miss it.
-            if (FindDeep(menuParent, ModsButtonName) != null)
-            {
-                _done = true;
-                return;
-            }
+            if (FindDeep(menuParent, ModsButtonName) != null) return;
 
             GameObject clone = null;
             try
@@ -126,7 +117,6 @@ namespace FTKModFramework.Core.UI
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(OpenModsPanel);
 
-                _done = true;
                 Plugin.Log.LogInfo("Mods button added to the title screen (cloned cell '" +
                     cellToClone.name + "', placed in grid, click -> Mods panel).");
             }

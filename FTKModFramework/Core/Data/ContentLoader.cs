@@ -109,6 +109,11 @@ namespace FTKModFramework.Core.Data
 
             // Stop AFTER EndBatch so the gated load time INCLUDES the (now single) index build: the
             // scale-budget gate must measure the real end-to-end cost, not a load minus its reindex.
+
+            // Capability registration validates exact live rows through indexed DB lookups.
+            // EndBatch must publish those indexes before this phase. Guardian/modifier capabilities
+            // may register their own rows, which are indexed immediately outside the base-row batch.
+            foreach (Cached c in cached) ApplyCapabilities(c, report);
             sw.Stop();
 
             EmitParitySelfTest(cached);
@@ -358,6 +363,128 @@ namespace FTKModFramework.Core.Data
             WireBehavior(c, report);
             AttachProficiencies(c, report);
             ApplyLocalization(c);
+        }
+
+        private static void ApplyCapabilities(Cached c, ValidationReport report)
+        {
+            try
+            {
+                if (c.Entry.Guardian && (c.Kind != "class" || !Content.AddGuardian((FTK_playerGameStart)c.Row)))
+                    throw new ArgumentException("guardian requires a registered custom class");
+                if (c.Entry.GuardianBonuses != null)
+                {
+                    if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("guardianBonuses requires equipment");
+                    GuardianBonusEntry b = c.Entry.GuardianBonuses;
+                    if (!Content.SetGuardianEquipment((FTK_itembase)c.Row, new GuardianEquipmentBonuses(b.GuardHealPercent,
+                        b.FocusHealBonusPercent, b.RetaliationDamage, b.WardDebuffs))) throw new ArgumentException("guardian bonus registration rejected");
+                }
+                if (!string.IsNullOrEmpty(c.Entry.Icon))
+                {
+                    UnityEngine.Sprite icon = PackageIcons.Load(Asset(c, c.Entry.Icon));
+                    if (c.Kind == "item" || c.Kind == "weapon")
+                    {
+                        FTK_itembase item = (FTK_itembase)c.Row;
+                        item.m_Icon = icon; item.m_IconNonClickable = icon;
+                    }
+                    else if (c.Kind == "proficiency") ((FTK_proficiencyTable)c.Row).m_BattleButton = icon;
+                    else if (c.Kind == "class" && c.Entry.Guardian)
+                        Content.Db<FTK_proficiencyTableDB>().GetEntry(GuardianRuntime.ActionId).m_BattleButton = icon;
+                    else throw new ArgumentException("icon requires equipment, a proficiency or guardian class");
+                }
+                if (c.Entry.ApparelModels != null)
+                {
+                    if (c.Kind != "item") throw new ArgumentException("apparelModels requires an item");
+                    ApparelModelEntry a = c.Entry.ApparelModels;
+                    FTK_skinset.ID female, male;
+                    if (!TryParseEnum(a.FemaleBinding, out female) || !TryParseEnum(a.MaleBinding, out male) || a.Renderers == null)
+                        throw new ArgumentException("invalid apparel binding");
+                    PlayerApparelMesh[] meshes = new PlayerApparelMesh[a.Renderers.Length];
+                    for (int i = 0; i < meshes.Length; i++)
+                    {
+                        ModelRendererEntry r = a.Renderers[i];
+                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model), Asset(c, r.Texture));
+                    }
+                    if (!Content.SetItemApparelMeshesFromGlb((FTK_items)c.Row, female, male, meshes)) throw new ArgumentException("item apparel registration rejected");
+                }
+                if (c.Entry.Modifiers != null)
+                {
+                    if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("modifiers requires equipment");
+                    ItemModifierEntry m = c.Entry.Modifiers;
+                    if (m.Armor < 0 || m.Armor > 100 || m.Resistance < 0 || m.Resistance > 100 || m.Reflect < 0 || m.Reflect > 100 ||
+                        float.IsNaN(m.Vitality) || float.IsInfinity(m.Vitality) || Math.Abs(m.Vitality) > 1 ||
+                        float.IsNaN(m.Speed) || float.IsInfinity(m.Speed) || Math.Abs(m.Speed) > 1)
+                        throw new ArgumentException("item modifier outside supported range");
+                    if (Content.SetItemModifiers(c.ModGuid, (FTK_itembase)c.Row, delegate(FTK_characterModifier modifier)
+                    {
+                        modifier.m_ModDefensePhysical = m.Armor; modifier.m_ModDefenseMagic = m.Resistance;
+                        modifier.m_ModVitality = m.Vitality; modifier.m_ModQuickness = m.Speed; modifier.m_ReflectDamage = m.Reflect;
+                    }) == null) throw new ArgumentException("item modifier registration rejected");
+                }
+                if (c.Entry.ItemModels != null)
+                {
+                    if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("itemModels requires equipment");
+                    ItemRendererMesh[] meshes = new ItemRendererMesh[c.Entry.ItemModels.Length];
+                    for (int i = 0; i < meshes.Length; i++)
+                    {
+                        ModelRendererEntry entry = c.Entry.ItemModels[i];
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                    }
+                    if (!Content.SetItemMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("item model registration rejected");
+                }
+                if (c.Entry.DisplayModels != null)
+                {
+                    if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("displayModels requires equipment");
+                    ItemRendererMesh[] meshes = new ItemRendererMesh[c.Entry.DisplayModels.Length];
+                    for (int i = 0; i < meshes.Length; i++)
+                    {
+                        ModelRendererEntry entry = c.Entry.DisplayModels[i];
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                    }
+                    if (!Content.SetItemDisplayMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("display model registration rejected");
+                }
+                if (c.Entry.PlayerModels != null)
+                {
+                    if (c.Kind != "class") throw new ArgumentException("playerModels requires a class");
+                    foreach (PlayerModelEntry model in c.Entry.PlayerModels)
+                    {
+                        FTK_skinset.ID skinset;
+                        if (model == null || !TryParseEnum(model.Skinset, out skinset) || model.Body == null)
+                            throw new ArgumentException("invalid player model skinset or body");
+                        PlayerRendererMesh[] body = new PlayerRendererMesh[model.Body.Length];
+                        for (int i = 0; i < body.Length; i++)
+                        {
+                            ModelRendererEntry entry = model.Body[i];
+                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                        }
+                        PlayerApparelMesh[] apparel = new PlayerApparelMesh[model.Apparel == null ? 0 : model.Apparel.Length];
+                        for (int i = 0; i < apparel.Length; i++)
+                        {
+                            ModelRendererEntry entry = model.Apparel[i];
+                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model), Asset(c, entry.Texture));
+                        }
+                        if (!Content.SetClassBodyMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, body, apparel))
+                            throw new ArgumentException("player model registration rejected");
+                        if (model.Backpack != null)
+                        {
+                            PlayerRendererMesh[] backpack = new PlayerRendererMesh[model.Backpack.Length];
+                            for (int i = 0; i < backpack.Length; i++)
+                            {
+                                ModelRendererEntry entry = model.Backpack[i];
+                                backpack[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                            }
+                            if (!Content.SetClassBackpackMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, backpack))
+                                throw new ArgumentException("player backpack registration rejected");
+                        }
+                    }
+                }
+            }
+            catch (Exception e) { report.Error(c.Context + ": capability registration failed: " + e.Message); }
+        }
+
+        private static string Asset(Cached c, string relativePath)
+        {
+            if (string.IsNullOrEmpty(relativePath)) throw new ArgumentException("model and original texture paths are required");
+            return PackageModelPaths.Register(c.ModGuid, c.PackageRoot, relativePath);
         }
 
         /// <summary>
@@ -867,10 +994,12 @@ namespace FTKModFramework.Core.Data
             public readonly ContentEntry Entry;
             public readonly Dictionary<string, object> ReferenceFields;
             public readonly string Context;
+            public readonly string PackageRoot;
 
             private Cached(PendingEntry pe, string kind, object row, Dictionary<string, object> referenceFields)
             {
                 ModGuid = pe.ModGuid;
+                PackageRoot = System.IO.Path.GetDirectoryName(pe.SourcePath);
                 Id = pe.Entry.Id;
                 Kind = kind;
                 Row = row;

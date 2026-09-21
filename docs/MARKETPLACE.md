@@ -18,7 +18,7 @@ A trusted local DLL can still be installed by itself. Installed content remains 
 
 ## Content submission
 
-V1 accepts supported JSON content and approved image assets. It does not distribute behavior DLLs, arbitrary BepInEx plugins, native libraries, scripts or campaign files. JSON content still requires review and game testing; file hashes verify bytes, not author trust or gameplay correctness.
+V1 accepts supported JSON content and approved image assets. The development version for framework 0.1.4 also accepts bounded GLB models and typed Guardian/equipment declarations; see [the capability contract](GUARDIAN-AND-EQUIPMENT.md). It does not distribute behavior DLLs, arbitrary BepInEx plugins, native libraries, scripts or campaign files. JSON content still requires review and game testing; file hashes verify bytes, not author trust or gameplay correctness.
 
 Submit proposed packages through the repository's GitHub review workflow using the [package submission issue template](../.github/ISSUE_TEMPLATE/package_submission.yml). Each template field corresponds to one of these maintainer checks:
 

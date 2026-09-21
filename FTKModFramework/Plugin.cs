@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "0.1.3";
+        public const string Version = "0.1.4";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -357,9 +357,15 @@ namespace FTKModFramework
     {
         private static bool _done;
 
-        private static void Postfix()
+        private static void Postfix(TableManager __instance)
         {
-            if (_done) return; // Initialize can be reached more than once; only seed content once.
+            if (_done)
+            {
+                // Native title recreation replaces every table component with vanilla rows.
+                // Restore the authored objects without repeating discovery or capability setup.
+                Run("restore registered content", () => ContentRegistry.RestoreRegisteredRows(__instance));
+                return;
+            }
             _done = true;
 
             Core.Marketplace.MarketplaceRuntime.InitializeBeforeDiscovery();
