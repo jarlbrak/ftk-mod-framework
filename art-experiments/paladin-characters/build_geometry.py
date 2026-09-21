@@ -263,8 +263,8 @@ def novice_helmet():
         ring=[]
         for j in range(n):
             angle=2*np.pi*j/n;x,z=np.cos(angle),np.sin(angle)
-            base=.285+.07*max(z,0)-.11*max(-z,0)
-            y=base*(1-row/4)+.285*(row/4)+height
+            base=.275+.025*max(z,0)-.10*max(-z,0)
+            y=base*(1-row/4)+.260*(row/4)+height
             ring.append(np.array([x*.237*radius,y,z*.205*radius-.045]))
         rings.append(ring)
     start=len(s.data["positions"])
@@ -273,7 +273,7 @@ def novice_helmet():
             k=(j+1)%n
             s.triangle([rings[row][j],rings[row+1][j],rings[row+1][k]],["Head_M"]*3,1)
             s.triangle([rings[row][j],rings[row+1][k],rings[row][k]],["Head_M"]*3,1)
-    apex=np.array([0,.512,-.045])
+    apex=np.array([0,.487,-.045])
     for j in range(n):
         k=(j+1)%n
         s.triangle([rings[-1][j],apex,rings[-1][k]],["Head_M"]*3,1)

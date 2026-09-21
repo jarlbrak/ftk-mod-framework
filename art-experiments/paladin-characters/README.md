@@ -93,3 +93,8 @@ their geometry. Earlier preview and attack receipts describe earlier Novice asse
 and do not validate this candidate. Offline binding, deterministic rebuild and
 helmet mount checks pass. Native fit, motion and visual review are pending because
 the local preview could not be reached while the workstation was locked.
+
+The [native follow-up](../../docs/paladin/novice-tailored-native-preview.json)
+records seven appearance previews after lowering the helmet crown and front
+opening. The original preview selection was restored. These static fit samples
+do not establish combat movement or user approval.
