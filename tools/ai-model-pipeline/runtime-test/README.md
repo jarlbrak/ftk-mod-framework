@@ -2692,3 +2692,15 @@ turn progression, or online validation.
 Petrify is intentionally rejected: its native application requires surviving
 hit context and starts a visual coroutine. Synchronous add/remove does not
 establish that lifecycle and could interfere with its delayed visual work.
+
+### Native Options Menu Save/Exit
+
+`native-save-exit` accepts `action: inspect` or `submit`. It is available only in
+an isolated, single-player overworld session with the native Options Menu visibly
+open and no combat. Inspection resolves the menu's serialized `m_SaveExit`
+control, checks that the control is active and interactable, and resolves the
+menu's zero-argument `OnSaveExit` UI callback. Submit requires the exact
+inspection token and button instance ID, then invokes that callback once. The
+helper never calls `SaveAndQuit`, writes save data, edits inventory, or chooses
+an action by text or screen coordinates. Observe process exit and a fresh native
+Resume separately before claiming save persistence.
