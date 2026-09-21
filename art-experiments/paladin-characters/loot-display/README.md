@@ -7,7 +7,10 @@ shoulder armor and original emblems; limb pieces are excluded. Boot displays
 retain the paired original plated boots. No native surface geometry is inspected
 or copied.
 
-The generator records exact source/piece hashes and selected pieces. Each mesh is
+The generator records exact source/piece hashes and selected pieces. It preserves
+the authored triangle indices, including reversed winding on mirrored rear
+panels, instead of inferring triangle order from sequential vertex attributes.
+Each mesh is
 centered using its own authored bounds and uniformly scaled to unit height,
 positive Y up and positive Z front. Normals and UVs remain those of the original
 surfaces. The existing `paladin-character-palette.png` supplies the texture.
@@ -33,9 +36,12 @@ blender -b -t 2 --python art-experiments/paladin-characters/loot-display/render.
 ```
 
 A separate re-export reproduced all 36 source, piece and GLB hashes. Validation
-independently decodes each static GLB and checks original source equality, finite
-positions, valid indices/UVs, normalized normals, winding and positive-volume
-closed pieces. The ignored studio lineup was visually reviewed. These checks do
+independently decodes each static GLB and checks display-source equality, exact
+projection from the selected wearable source pieces, finite positions, valid
+indices/UVs, normalized normals and source triangle winding. It checks positive
+volume only for pieces whose welded triangle edges form a closed surface.
+Open cloth necklines and fitted toe/instep shells retain their original surfaces
+and are reported separately. The ignored studio lineup was visually reviewed. These checks do
 not establish live shop rendering, wearer appearance or normal acquisition.
 
 Equipped rigid and loot clone roots are different. All 36 equipment rows use

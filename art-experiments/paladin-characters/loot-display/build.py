@@ -18,14 +18,21 @@ def build(output):
    key='paladin-'+tier+'-'+family+'-display'
    original='paladin-male-'+tier+'-armor' if family=='armor' else 'paladin-'+tier+'-boots'
    source_path=OUT.parent/(original+'.source.json');pieces_path=OUT.parent/(original+'.pieces.json')
-   source=json.loads(source_path.read_text());pieces=json.loads(pieces_path.read_text())
+   source=json.loads(source_path.read_text());pieces=json.loads(pieces_path.read_text());source_triangles=np.array(source['triangles'])
    selected=[p for p in pieces if family=='boots' or not p['name'].startswith(EXCLUDED)]
    data={k:[] for k in ['positions','normals','uvs','triangles']};outpieces=[]
    for piece in selected:
     start=piece['vertex_start'];end=start+piece['vertex_count'];base=len(data['positions'])
     for attribute in ['positions','normals','uvs']:data[attribute].extend(source[attribute][start:end])
-    data['triangles'].extend([[base+i,base+i+1,base+i+2] for i in range(0,piece['vertex_count'],3)])
-    outpieces.append({'name':piece['name'],'vertex_start':base,'vertex_count':piece['vertex_count']})
+    inside=(source_triangles>=start)&(source_triangles<end)
+    assert not (inside.any(axis=1)&~inside.all(axis=1)).any(),piece['name']
+    triangles=source_triangles[inside.all(axis=1)]
+    triangle_start=len(data['triangles'])
+    # Mirrored authored panels can reverse indices without rearranging vertex attributes.
+    data['triangles'].extend((triangles-start+base).tolist())
+    outpieces.append({'name':piece['name'],'vertex_start':base,'vertex_count':piece['vertex_count'],
+                      'source_vertex_start':start,'source_vertex_count':piece['vertex_count'],
+                      'triangle_start':triangle_start,'triangle_count':len(triangles)})
    points=np.array(data['positions']);center=(points.min(axis=0)+points.max(axis=0))/2
    scale=1.0/(points[:,1].max()-points[:,1].min())
    data['positions']=((points-center)*scale).tolist()
