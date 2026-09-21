@@ -1,0 +1,92 @@
+{
+  "schema": "ftkmf.paladin-tailored-received-hit.v1",
+  "status": "fixture-assisted-native-reaction-reviewed",
+  "session": "be47702dcc6849c79d78efa9fe1f163c",
+  "captureId": "5c19bf95bce84325b9171ae411af6f1a",
+  "captureReceiptSha256": "5afe60d712497727bb6281abb48e02e3b767b0417daa873e515f3ab167d32774",
+  "fixtureReceiptSha256": "c92dcbebfac883c533b5a1887cef93b34a1c84243cb19c0b050db49cb04ebd90",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "41897eaf3f7e8635e9df6fa727cb8fc5e409a4f3505c43020c43af26257073bc",
+  "modelSha256": {
+    "paladin-female-novice-armor.glb": "abc93ea95cc3b8f6bb2c8f4f63b337ae9cba60bb9385c690fe3011ee35e88341",
+    "paladin-novice-helmet.glb": "8348466c0424d38c0dc8e11bfe2dd48e19f66b8bcd6a0b347366504b11476df2",
+    "paladin-novice-boots.glb": "2b42ca9217b2dfd46bfe859cea8c20ce026dad9ddf4a4dbbea62c0c9fbc66fb2"
+  },
+  "health": {
+    "before": 39,
+    "after": 34
+  },
+  "fixture": {
+    "case": "reduction",
+    "originalTarget": "0:1",
+    "forcedTarget": "2:1",
+    "originalCalculatedDamage": 3,
+    "replacementDamage": 9,
+    "guardTransformedDamage": 5,
+    "status": "passed"
+  },
+  "motion": {
+    "trigger": "Damaged",
+    "triggerFirstFrame": 57,
+    "clip": "damageLight_blunt1H",
+    "firstClipFrame": 58,
+    "lastClipFrame": 67,
+    "normalizedRange": [
+      0.09680850803852081,
+      0.9453800320625305
+    ],
+    "frames": 100,
+    "timingMode": "offline-fixed-step-gameplay"
+  },
+  "reviewedFrames": [
+    {
+      "index": 58,
+      "studioSha256": "7f03d2679774b26b4b61789ec30d3c3cd6e47eab649747547c2ba9ec2fc9a03a",
+      "clip": "damageLight_blunt1H",
+      "normalizedTime": 0.09680850803852081,
+      "trigger": "Damaged"
+    },
+    {
+      "index": 62,
+      "studioSha256": "b214fd7bb065fb0c6d5483686e10e4c8890655c789bdbbd21dd9868a40ccd4a4",
+      "clip": "damageLight_blunt1H",
+      "normalizedTime": 0.47395139932632446,
+      "trigger": "Damaged"
+    },
+    {
+      "index": 67,
+      "studioSha256": "997f3733fd53a4c84b642d775357ad4f56c293695013db9975e5a9eedfcdf55a",
+      "clip": "damageLight_blunt1H",
+      "normalizedTime": 0.9453800320625305,
+      "trigger": "Damaged"
+    },
+    {
+      "index": 80,
+      "studioSha256": "83a69896f9c71e7333e25e77b5524c196fb8c195299209df31f3f61a255d22df",
+      "clip": "cidel_blunt1H",
+      "normalizedTime": 0.9735973477363586,
+      "trigger": "Damaged"
+    }
+  ],
+  "earlierAttempt": {
+    "captureId": "c650cbb63efe4dd98fc0322dcf02f13b",
+    "captureReceiptSha256": "32c6891a18ceca042a6b0073db936ce14c2bbc75beadb1ad2a0b072a9ef348fa",
+    "result": "No party HP loss. Stored native enemy attack identifies a Block against female Paladin. Male capture remained idle; not received-hit evidence."
+  },
+  "setupNotes": [
+    "Male Paladin selected Guard and designated female Paladin through native ally chooser.",
+    "Bridge select_choice returned an invocation exception. Read-only state showed chooser still open and no Guard. Native UI confirmed the visible Player 3 selection. This failed bridge action is retained.",
+    "Existing guarded reduction fixture pins encounter and actors, redirects one enemy attack and supplies a nine-damage outcome.",
+    "Hunter passed once after paired capture began. Native attack playback and RespondToHit produced the measured reaction."
+  ],
+  "observations": [
+    "Reviewed recoil and return to stance show attached torso, sleeves, belt and hem.",
+    "Shield obscures part of the chest in the initial recoil frame.",
+    "No Animator.Play or forced animation trigger was used."
+  ],
+  "limitations": [
+    "Controlled target and damage; not ordinary RNG, damage calculation or encounter balance evidence.",
+    "One female one-handed reaction, selected frames only. Death, other controllers/appearances and user art approval remain open.",
+    "No save write, acquisition, complete current archive installation or online claim."
+  ]
+}

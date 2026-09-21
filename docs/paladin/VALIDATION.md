@@ -16,8 +16,10 @@ and continuous short hem, and rebuilds the helmet as one rounded shell. Its
 checks only. The [native follow-up](novice-tailored-native-preview.json) lowers
 the helmet and records seven static appearance previews. A [female two-handed
 attack capture](novice-tailored-female-attack.json) reviews wind-up, strike, recovery
-and victory with current meshes. Received-hit, death, broader fit and user
-approval remain open.
+and victory with current meshes. A [controlled received-hit capture](novice-tailored-received-hit.json)
+records 39 to 34 HP, native Damaged and one-handed recoil/recovery. The fixture
+redirects the enemy and supplies damage, so it is not ordinary combat evidence.
+Death, broader fit and user approval remain open.
 
 The preceding `85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`
 archive retains its [seven appearance previews](novice-bare-wrist-fit.json),
