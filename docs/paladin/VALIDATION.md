@@ -56,9 +56,11 @@ capture](novice-combat-motion.json) records a native one-handed swing and a
 no-HP-loss response animation; its separate female two-handed trial records a
 native critical swing. Both are mostly viewed from behind. A
 [Mercy race preview](native-race-preview.json) covers front views on Female, Male,
-Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes.
-These are pose/fit observations, not full animation or all-set nonhuman fit
-acceptance. Final art approval remains separate. See [redesign notes](NOVICE-REDESIGN.md).
+Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes. The
+current [Verdict race-fit receipt](verdict-race-fit-current.json) covers the same
+seven native appearances at a three-quarter angle with the final Verdict exports.
+These are pose/fit observations, not full animation, package-equipment or all-set
+nonhuman acceptance. Final art approval remains separate. See [redesign notes](NOVICE-REDESIGN.md).
 
 ## Current evidence matrix
 
