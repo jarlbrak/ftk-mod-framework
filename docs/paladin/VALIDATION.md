@@ -215,3 +215,7 @@ python3 marketplace/packages/verify_paladin_lifecycle.py \
 The [current lifecycle receipt](package-lifecycle-loot-fix.json) pins package and
 helper identities. Retain exact inventory and request/results, not console success
 alone. This procedure establishes package handling, not gameplay or save behavior.
+
+### Apparel replacement resource lifetime
+
+[Live apparel retirement](apparel-retirement-live.json) observes replacement on one native Male avatar in the overworld and again with its combat clone present. The old body/foot lease disappears and all six pinned Unity resources become null after each replacement. Combat entry retains the new lease with two references; replacing it updates both avatars while the other two heroes retain their leases. Equipment changes use the bridge and already-owned fixture gear. This does not validate ordinary combat equip cost or separate weapon, shield, and helmet resource retirement.

@@ -1066,15 +1066,20 @@ animated, textured, or visually accepted models.
 ## Observe native equipment resource disposal
 
 Before a native equipment transfer, issue `lease-watch` with the exact
-`heroInstanceId` from fresh equipment inventory. This requires strict Ready
-and an owned real overworld avatar with an acquired model lease. It copies
+`heroInstanceId` from fresh equipment inventory. This requires both encounter
+sessions outside combat, and strict Ready when a dungeon is entered, plus an
+owned active real overworld avatar with an acquired model lease. Outside a
+dungeon, the observer can arm on the live overworld avatar. It copies
 only managed references to that lease's existing Mesh/Material/Texture assets,
 plus scalar names/types/instance IDs. It does not retain the avatar, instantiate
 anything, increment the production lease, or change cleanup behavior. At most
 8 distinct leases and 256 resource references can be tracked; duplicate arms
 are rejected. Root, single-player and command-session guards remain mandatory.
 
-Then issue one separately guarded `equip-body` or `unequip-body`. Wait for
+Then perform a native inventory equipment change, or issue one separately
+guarded `equip-body` or `unequip-body` in strict Ready. Their mutation guards
+are unchanged. The avatar-root lease covers custom Body/Foot apparel; separate
+weapon, shield and helmet instance leases are outside this observation. Wait for
 native delayed destruction and call read-only `lease-watch-state`. Each watch
 reports old lease presence/refcount and the Unity-null status of every pinned
 resource. `observed-disposed` requires BOTH old lease absence AND all pinned
