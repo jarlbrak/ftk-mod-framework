@@ -1,6 +1,6 @@
 {
   "schema": "ftkmf.paladin-novice-motion.v1",
-  "status": "bounded-male-one-handed-native-motion",
+  "status": "bounded-male-one-handed-and-female-two-handed-native-motion",
   "session": "809a30e8c4814b2dab119c81095faec8",
   "assets": {
     "paladin-female-novice-armor.glb": "0e996a677a5555d2dec13a61a52be7fc97fccdcf3bc80c2f6133207179f4c3bc",
@@ -192,11 +192,132 @@
   ],
   "limitations": [
     "Native camera mostly shows the rear and the backpack occludes the torso; chest clearance is not established.",
-    "Only male one-handed action, one reaction pose and a bounded fixed-step capture.",
-    "No female/two-handed/hero-death motion or positive received-HP-loss claim.",
+    "Separate male one-handed and female two-handed actions plus one male reaction pose in bounded fixed-step captures.",
+    "No hero-death motion or positive received-HP-loss claim.",
     "Existing dungeon and gear are fixtures; ordinary campaign acquisition is not demonstrated.",
     "No final art approval, full package acceptance, real-time performance or online claim."
   ],
   "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
-  "helperSha256": "02ac427bdf49283896d60cbdc167d5bae7ed7a7585d4dda0e2c970170b7f2c04"
+  "helperSha256": "02ac427bdf49283896d60cbdc167d5bae7ed7a7585d4dda0e2c970170b7f2c04",
+  "femaleTwoHanded": {
+    "session": "4a02c7ea522d4ab8a7b34f9b95cb7f32",
+    "requestId": "44c8575137524ea9982d08639235afd6",
+    "receiptSha256": "7fcd1a91494cb47c7436eddf00c36e9d56469bba9669ea0e5044fe0a37a77dc0",
+    "ownerInstanceId": 364424,
+    "celInstanceId": -329462,
+    "mesh": "ftkmf_glb_package-model:2cf498edc17d3634c663b09ef479a9a082e42e39d5b67b0dd6f103683455f093",
+    "frameCount": 100,
+    "timingMode": "offline-fixed-step-gameplay",
+    "elapsedGameSeconds": 10.889999389648438,
+    "clip": "attackProf_blunt2H",
+    "clipFrames": [
+      {
+        "frameIndex": 39,
+        "normalizedTime": 0.09075000137090683
+      },
+      {
+        "frameIndex": 40,
+        "normalizedTime": 0.13612499833106995
+      },
+      {
+        "frameIndex": 41,
+        "normalizedTime": 0.18150000274181366
+      },
+      {
+        "frameIndex": 42,
+        "normalizedTime": 0.22687500715255737
+      },
+      {
+        "frameIndex": 43,
+        "normalizedTime": 0.2722499966621399
+      },
+      {
+        "frameIndex": 44,
+        "normalizedTime": 0.3176249861717224
+      },
+      {
+        "frameIndex": 45,
+        "normalizedTime": 0.36299997568130493
+      },
+      {
+        "frameIndex": 46,
+        "normalizedTime": 0.40837496519088745
+      },
+      {
+        "frameIndex": 47,
+        "normalizedTime": 0.45374995470046997
+      },
+      {
+        "frameIndex": 48,
+        "normalizedTime": 0.4991249442100525
+      },
+      {
+        "frameIndex": 49,
+        "normalizedTime": 0.544499933719635
+      },
+      {
+        "frameIndex": 50,
+        "normalizedTime": 0.5898749232292175
+      },
+      {
+        "frameIndex": 51,
+        "normalizedTime": 0.6352499127388
+      },
+      {
+        "frameIndex": 52,
+        "normalizedTime": 0.6806249022483826
+      },
+      {
+        "frameIndex": 53,
+        "normalizedTime": 0.7259998917579651
+      },
+      {
+        "frameIndex": 54,
+        "normalizedTime": 0.7713748812675476
+      },
+      {
+        "frameIndex": 55,
+        "normalizedTime": 0.8167498707771301
+      },
+      {
+        "frameIndex": 56,
+        "normalizedTime": 0.8621248602867126
+      },
+      {
+        "frameIndex": 57,
+        "normalizedTime": 0.9074998497962952
+      },
+      {
+        "frameIndex": 58,
+        "normalizedTime": 0.9528748393058777
+      }
+    ],
+    "reviewedFrames": [
+      {
+        "index": 42,
+        "imageSha256": "8146f4d724b3a985eb6575cd01507078b3883f4a935ff34b07c3224e658b221e"
+      },
+      {
+        "index": 49,
+        "imageSha256": "4f3cd9bc34a13b25c60b97d3021a6a4e634cb72b5a5887d4e8c100ac0892f1d1"
+      },
+      {
+        "index": 56,
+        "imageSha256": "1a7b12a590ea98c7f6c5e734284b69a54996a8deb781f18b65d27151c2ee66f6"
+      }
+    ],
+    "setup": [
+      "Resumed the protected dungeon fixture in a fresh process.",
+      "Equipped fixture-owned Novice two-handed hammer before native Ready; the native equip route removed the shield.",
+      "Hunter passed, then Female committed the selected Crush through Return. No focus spending, animation playback, supplied damage or kill fixture."
+    ],
+    "observations": [
+      "Native attack produced a 19-damage critical hit, taking Timberwolf from 8 to 0 HP.",
+      "Visible armor, sleeves and boots remained attached in the reviewed frames."
+    ],
+    "limits": [
+      "Rear camera and backpack obscure the chest, and impact effects obscure part of the swing.",
+      "No positive received damage, hero death, all-race animation or final art approval."
+    ]
+  }
 }

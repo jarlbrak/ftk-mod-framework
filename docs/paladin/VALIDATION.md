@@ -43,7 +43,8 @@ checks seven angled previews: those sleeve intersections are absent in the sampl
 poses and the raised Demon brow clears the forehead. Loose Undead wrist wraps,
 user approval and broader movement coverage remain open. A [male Novice combat
 capture](novice-combat-motion.json) records a native one-handed swing and a
-no-HP-loss response animation, mostly viewed from behind. A
+no-HP-loss response animation; its separate female two-handed trial records a
+native critical swing. Both are mostly viewed from behind. A
 [Mercy race preview](native-race-preview.json) covers front views on Female, Male,
 Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes.
 These are pose/fit observations, not full animation or all-set nonhuman fit
