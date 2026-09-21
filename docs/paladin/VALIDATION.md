@@ -41,8 +41,10 @@ held the fresh run before the world-ready observation. The subsequent [current
 package world-start receipt](final-package-world-start.json) continues that same
 active candidate through native prologue completion and reads the actual world
 Paladin inventory: Novice shield, one-handed hammer, helmet, armor and boots are
-equipped in their intended slots. It does not accept motion, save/reload,
-ordinary acquisition, other appearances, online co-op or public publication.
+equipped in their intended slots. A separate [current-helper world-start
+receipt](current-package-world-start-2026-09-21.json) repeats that native route
+with the current helper. Neither receipt accepts motion, save/reload, ordinary
+acquisition, other appearances, online co-op or public publication.
 
 ## Current character and art scope
 

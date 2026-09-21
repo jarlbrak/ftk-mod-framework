@@ -1,0 +1,54 @@
+{
+  "schema": "ftkmf.paladin-current-package-world-start.v1",
+  "observedAt": "2026-09-21",
+  "candidateArchiveSha256": "06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db",
+  "runtime": {
+    "frameworkSha256": "ce008349d5071bc64326a4e5899e3e594e8b0c2e23955160fd130c13ab0cdd49",
+    "helperSha256": "65e3e3fdb73b05d0373c9caffcbf626dbdc791102e6ac0c447a951471610dcc8",
+    "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+  },
+  "environment": {
+    "root": "scratch/paladin-game",
+    "mode": "task-owned isolated macOS copy, package-only mode",
+    "session": "bdffd81f57b64d0a9475e1397bd64297",
+    "savePath": "save-model-test-96beb4ee2018bc76"
+  },
+  "nativeRoute": {
+    "gameDefinition": "LostCiv",
+    "mode": "single-player",
+    "paladinClassId": 14,
+    "title": "The genuine New button was selected from the native title screen and its OnNewGame callback reached Game Config.",
+    "characterCreation": "Native GameConfig.OnStartGame reached character creation, where Paladin classId 14 was present.",
+    "partyStart": "Native uiStartGame.EnterFahrul was submitted once and GameStarted was observed true.",
+    "prologue": "Four identity-pinned native FTKClickAnywhere callbacks completed the initial StoryQuestMessage setup before the overworld read."
+  },
+  "worldObservation": {
+    "paladinHeroInstanceId": -560252,
+    "outsideCombat": true,
+    "inSession": true,
+    "inputMode": "InGameMovement",
+    "slots": {
+      "LeftHand": { "itemId": 1255876506, "contentId": "paladin_shield_novice" },
+      "RightHand": { "itemId": 1223789468, "contentId": "paladin_hammer_1h_novice" },
+      "Head": { "itemId": 1498997754, "contentId": "paladin_helmet_novice" },
+      "Body": { "itemId": 1166925164, "contentId": "paladin_armor_novice" },
+      "Foot": { "itemId": 1280940834, "contentId": "paladin_boots_novice" }
+    },
+    "avatarLease": { "acquired": true, "applied": true, "references": 1 }
+  },
+  "evidence": {
+    "titleInspect": "scratch/paladin-current-save/title-inspect-after-return.txt",
+    "characterCreation": "scratch/paladin-current-save/create-character.txt",
+    "partyStart": "scratch/paladin-current-save/party-submit.txt",
+    "storyStates": [
+      "scratch/paladin-current-save/story-state-1.txt",
+      "scratch/paladin-current-save/story-state-2.txt",
+      "scratch/paladin-current-save/story-state-3.txt",
+      "scratch/paladin-current-save/story-state-5.txt",
+      "scratch/paladin-current-save/story-state-6.txt"
+    ],
+    "equipment": "scratch/paladin-current-save/equipment-inventory-before-save.txt",
+    "worldInput": "scratch/paladin-current-save/world-input-before-save.txt"
+  },
+  "scope": "This proves the exact current local archive starts a native single-player Paladin and equips the five intended Novice items after native title, party and prologue flow. It does not prove save/reload, ordinary acquisition, all appearances, animation, later equipment tiers, online co-op, or public publication. The native Options Menu was opened, but this automation surface could not activate Save/Exit; no save transition is claimed."
+}
