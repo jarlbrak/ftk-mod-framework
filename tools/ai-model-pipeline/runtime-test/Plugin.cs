@@ -198,6 +198,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "trap-state") Finish(id,TrapState(command));
             else if(op == "trap-submit") Finish(id,TrapSubmit(command));
             else if(op == "town-stock-state") Finish(id,TownStockObservation(command));
+            else if(op == "dungeon-map-state") Finish(id,DungeonMapObservation(command));
             else if(op == "guardian-damage-fixture") Finish(id,GuardianDamageFixture(command));
             else if(op == "native-combat-focus") Finish(id,NativeCombatFocus(command));
             else if(op == "native-fight-trace") Finish(id,NativeFightTrace(command));

@@ -11,7 +11,7 @@ OPS = ('hero-damage-fixture', 'material-lifecycle-fixture', 'native-row-portrait
 
 OPS += ('native-party-start', 'native-party-class', 'guardian-state', 'guardian-damage-fixture')
 
-OPS += ('town-stock-state',)
+OPS += ('town-stock-state', 'dungeon-map-state')
 OPS += ('native-combat-focus',)
 OPS += ('world-input-state',)
 OPS += ('player-studio',)

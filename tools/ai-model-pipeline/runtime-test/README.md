@@ -2620,3 +2620,11 @@ It does not generate encounters, reveal tiles, unlock POIs, or move the party.
 Enemy combat level is not inferred from dungeon progress or display names.
 These are test-only location observations, not evidence of encounter difficulty
 or normal discovery and travel.
+
+### Locate existing dungeon fixtures
+
+`dungeon-map-state` is a read-only, single-player, outside-combat observation of
+existing Dungeon POIs. It reports native dungeon IDs, instance IDs, lock and
+deactivation flags, and hex coordinates. Use a fresh result to select an existing
+location for a separately authorized entry trial. The operation does not generate
+POIs, unlock them, move a hero, enter a dungeon, or change rooms.
