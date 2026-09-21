@@ -19,7 +19,9 @@ attack capture](novice-tailored-female-attack.json) reviews wind-up, strike, rec
 and victory with current meshes. A [controlled received-hit capture](novice-tailored-received-hit.json)
 records 39 to 34 HP, native Damaged and one-handed recoil/recovery. The fixture
 redirects the enemy and supplies damage, so it is not ordinary combat evidence.
-Death, broader fit and user approval remain open.
+[Death attempts](novice-tailored-death-attempt.json) retained a safely rejected
+multi-target fixture and a later dodge against another hero; neither establishes
+death motion. Death, broader fit and user approval remain open.
 
 The preceding `85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`
 archive retains its [seven appearance previews](novice-bare-wrist-fit.json),
