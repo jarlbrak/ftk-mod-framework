@@ -2,29 +2,21 @@
 
 This guide records bounded evidence against the [design](DESIGN.md) and
 [39-entry source package](../../marketplace/packages/paladin/content.json).
-**Beta delivery is not yet accepted.** The previously tested Guardian integration
+**Beta delivery remains an unpublished local candidate.** The previously tested Guardian integration
 cleared spent rescue usage during native revival. The fix is built in framework
 `dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e`,
 with 133 pure-rule and 21 installed-metadata checks passing. Its [native spent-charge revival and Guard-recast regression passed](guardian-revival-live.json). See [verified native callers and live gates](guardian-revival-native.json)
 and [earlier lifecycle observations](guard-lifecycle-observations.json).
 
 The current unpublished art candidate SHA-256 is
-`61fa7dbb3167a6dc463c91ff4e278fe09317d03d544189aa4c77768da357215d`.
-It replaces the Novice chest sheet and separate apron with a fitted leather jack
-and continuous short hem, and rebuilds the helmet as one rounded shell. Its
-[offline review](novice-tailored-candidate.json) records geometry and package
-checks only. The [native follow-up](novice-tailored-native-preview.json) lowers
-the helmet and records seven static appearance previews. A [female two-handed
-attack capture](novice-tailored-female-attack.json) reviews wind-up, strike, recovery
-and victory with current meshes. A [controlled received-hit capture](novice-tailored-received-hit.json)
-records 39 to 34 HP, native Damaged and one-handed recoil/recovery. The fixture
-redirects the enemy and supplies damage, so it is not ordinary combat evidence.
-[Death attempts](novice-tailored-death-attempt.json) retained a safely rejected
-multi-target fixture and a later dodge against another hero; neither establishes
-death motion. A later [native death observation](novice-tailored-native-death-observation.json)
-records the equipped female Paladin at HP 0 after a naturally selected wolf bite
-and an on-screen fall. It has no paired per-frame studio capture, so full death-motion
-fit, broader fit and user approval remain open.
+`06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db`.
+It contains the accepted six-tier armor revision: a fitted, plain Novice leather
+jack and travel helm, increasingly articulated guardian armor, and distinct Mercy,
+Censure and Verdict endgame sets. Source geometry, six helmet mounts and the
+12 derived armor/boot card meshes passed their current deterministic validation.
+The source exports were checked on native Female and Male Party Select avatars
+using an isolated visual-fit fixture. Those visual checks do not prove current
+package equipment, motion, all-race fit or ordinary acquisition.
 
 The preceding `85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`
 archive retains its [seven appearance previews](novice-bare-wrist-fit.json),
@@ -48,9 +40,10 @@ custom-body, custom-backpack and portrait work is not a current acceptance gate.
 See the [native appearance contract](native-appearance-contract.json).
 
 The [native character preview receipt](native-character-armor-preview.json) and
-[third armor revision](armor-revision3-review.json) cover the six sets on actual
-Female and Male avatars, including front and three-quarter views in revision 3.
-Novice revision 3 and the first plain revision were subsequently rejected.
+[third armor revision](armor-revision3-review.json) are historical Female/Male
+previews for the preceding geometry and must not be used to accept the current
+six-tier revision. Novice revision 3 and the first plain revision were subsequently
+rejected.
 The earlier [fitted Novice candidate](novice-fitted-preview.json) records native
 Female/Male three-quarter previews with a smaller chest plate, dark cloth and
 new leather boots. The [seven-appearance Novice trial](novice-race-preview.json) records front
@@ -89,7 +82,7 @@ outcomes and controlled loot are identified separately from ordinary acquisition
 | Censure | [Both weapon effects](censure-live.json) apply armor -4/-6 and expire; [native lifetime](censure-native-lifetime.json) establishes timed combat expiry | Slot/damage variants and equipment changes remain separate checks; not target-turn expiry |
 | Ward | [Representative native group Poison](ward-live.json): protected Paladins reject effect, unguarded non-Guardian wearing same shield receives it | No live proof of all four categories or damaging Poison bite; no pre-transform outcome or poison-counter snapshot, individual immunity not separately queried |
 | Verdict | [Native retaliation](verdict-live.json): one 4-damage retaliation for a two-target attack and unguarded control | Not every outcome/target combination; stronger weapon damage remains a separate comparison |
-| Current art and resources | Native previews/races above; framework renderer transaction and lease checks below | [Mercy motion](armor-combat-motion.json) and [apparel retirement](apparel-retirement-live.json) passed within their scope; separate rigid-instance disposal and final visual acceptance remain open |
+| Current art and resources | Current source, mount and card-display checks passed; isolated Female/Male Party Select visual-fit observations cover the current six tiers | Current package equipment, all-race fit, motion, rigid-instance disposal and final visual acceptance remain open |
 | Marketplace UI | [Managed UI](managed-ui-native.json), [title recreation](mods-title-recreation-native.json), [same-process resume](same-process-resume-observation.json) establish their pinned revisions | Earlier package bytes; current CLI lifecycle is separate. No public download claim |
 | Online and platforms | Unverified | Explicit beta disclosure; production requires community host/client evidence. macOS trials do not establish other platforms |
 
