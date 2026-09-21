@@ -214,6 +214,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "fortify-party") Finish(id,FortifyParty(command));
             else if(op == "return-to-title") Finish(id,ReturnToTitle());
             else if(op == "native-save-exit") Finish(id,NativeSaveExit(command));
+            else if(op == "native-save-exit-state") Finish(id,NativeSaveExitState(command));
             else if(op == "quiet-tutorials") Finish(id,QuietTutorials(command));
             else if(op == "material-state") Finish(id,ObserveMaterialState(command));
             else if (op == "reload") Finish(id, Reload(command));

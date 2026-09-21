@@ -29,6 +29,53 @@ public sealed partial class RuntimeModelTest
         return gameObject != null && gameObject.activeInHierarchy;
     }
 
+    // Read-only field and callback metadata for a visibly open native menu. This
+    // exists so an unfamiliar shipped control shape can be anchored before the
+    // mutating route is expanded. It neither invokes a callback nor writes data.
+    JObject NativeSaveExitState(JObject command)
+    {
+        CatalogKeys(command, "id", "session", "op");
+        CatalogNoLinks(root);
+        RequireSinglePlayer();
+        uiOptionsMenu menu = uiOptionsMenu.Instance;
+        if (menu == null || !SceneOwner(menu) || !menu.gameObject.activeInHierarchy || !menu.m_Showing)
+            throw new InvalidOperationException("Visible native Options Menu is required.");
+        JArray fields = new JArray();
+        System.Reflection.BindingFlags declared = System.Reflection.BindingFlags.Instance |
+            System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic |
+            System.Reflection.BindingFlags.DeclaredOnly;
+        for (Type type = menu.GetType(); type != null; type = type.BaseType)
+        {
+            foreach (System.Reflection.FieldInfo field in type.GetFields(declared))
+            {
+                if (field.Name.IndexOf("save", StringComparison.OrdinalIgnoreCase) < 0) continue;
+                object value = field.GetValue(menu);
+                UnityEngine.Object unity = value as UnityEngine.Object;
+                Component component = unity as Component;
+                GameObject gameObject = unity as GameObject;
+                if (component != null) gameObject = component.gameObject;
+                fields.Add(new JObject {
+                    {"declaringType", type.FullName}, {"name", field.Name}, {"fieldType", field.FieldType.FullName},
+                    {"valueType", value == null ? null : value.GetType().FullName},
+                    {"isUnityObject", unity != null}, {"instanceId", unity == null ? 0 : unity.GetInstanceID()},
+                    {"activeInHierarchy", gameObject != null && gameObject.activeInHierarchy}
+                });
+            }
+        }
+        JArray callbacks = new JArray();
+        for (Type type = menu.GetType(); type != null; type = type.BaseType)
+        {
+            foreach (System.Reflection.MethodInfo method in type.GetMethods(declared))
+            {
+                if (method.Name.IndexOf("save", StringComparison.OrdinalIgnoreCase) >= 0 && method.GetParameters().Length == 0)
+                    callbacks.Add(new JObject {{"declaringType", type.FullName}, {"name", method.Name}});
+            }
+        }
+        return new JObject {{"ok", true}, {"readOnly", true}, {"status", "native_save_exit_metadata"},
+            {"menuType", menu.GetType().FullName}, {"menuInstanceId", menu.GetInstanceID()},
+            {"showing", menu.m_Showing}, {"saveFields", fields}, {"saveCallbacks", callbacks}};
+    }
+
     JObject InspectNativeSaveExit(out uiOptionsMenu menu, out List<UnityEngine.Object> candidates, out System.Reflection.MethodInfo callback)
     {
         RequireSinglePlayer();

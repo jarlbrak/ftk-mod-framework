@@ -13,7 +13,9 @@ COMMAND = (ROOT / 'command.py').read_text()
 class NativeSaveExitBoundaryTests(unittest.TestCase):
     def test_command_is_whitelisted_and_requires_inspection(self):
         self.assertIn("'native-save-exit'", COMMAND)
+        self.assertIn("'native-save-exit-state'", COMMAND)
         self.assertIn('op == "native-save-exit"', PLUGIN)
+        self.assertIn('op == "native-save-exit-state"', PLUGIN)
         self.assertIn('CatalogKeys(command, "id", "session", "op", "action", "inspectionToken", "buttonInstanceId")', SOURCE)
         self.assertIn('if (action != "inspect" && action != "submit")', SOURCE)
 
@@ -35,6 +37,14 @@ class NativeSaveExitBoundaryTests(unittest.TestCase):
         self.assertIn('nativeSaveExitConsumed = true;', SOURCE)
         self.assertIn('Str(command, "inspectionToken") != nativeSaveExitToken', SOURCE)
         self.assertIn('Int(command, "buttonInstanceId", 0) != control.GetInstanceID()', SOURCE)
+
+    def test_metadata_route_is_read_only(self):
+        start = SOURCE.index('JObject NativeSaveExitState')
+        end = SOURCE.index('JObject InspectNativeSaveExit', start)
+        metadata = SOURCE[start:end]
+        self.assertIn('"readOnly", true', metadata)
+        self.assertIn('"native_save_exit_metadata"', metadata)
+        self.assertNotIn('.Invoke(', metadata)
 
 
 if __name__ == '__main__':
