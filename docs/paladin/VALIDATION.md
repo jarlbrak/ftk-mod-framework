@@ -31,6 +31,12 @@ Each receipt pins its own framework, helper, package or fixture bytes. A later
 framework fix needs its own proportional evidence; no receipt approves untested
 bytes or release publication.
 
+The [current package-start receipt](final-package-start.json) activates the
+06a6 archive through the marketplace helper in a task-owned game copy, reaches
+native Party Select with Paladin selected, and invokes the native Start callback.
+It does not establish the current starting inventory because the campaign prologue
+held the fresh run before the world-ready observation.
+
 ## Current character and art scope
 
 The user's revised scope preserves native FTK bodies, faces and hair, all seven

@@ -1,0 +1,25 @@
+{
+  "schema": "ftkmf.paladin-final-package-start.v1",
+  "candidateArchiveSha256": "06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db",
+  "runtime": {
+    "frameworkSha256": "ce008349d5071bc64326a4e5899e3e594e8b0c2e23955160fd130c13ab0cdd49",
+    "helperSha256": "a69bc7032577fdb79da932b135ad22f7d7fa83e01e2deebdd34e41c94204b482",
+    "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+  },
+  "packageActivation": {
+    "generationId": "832f997b12bcd341a4ef41b4e1356b81",
+    "enabled": true,
+    "packageId": "ftkmf.paladin"
+  },
+  "nativeCreateGame": {
+    "gameDefinition": "LostCiv",
+    "singlePlayer": true,
+    "candidates": [
+      { "classId": 14, "classLabel": "Paladin", "skinType": 1, "turnIndex": 0 },
+      { "classId": 1, "classLabel": "Hunter", "skinType": 0, "turnIndex": 1 },
+      { "classId": 2, "classLabel": "Scholar", "skinType": 0, "turnIndex": 2 }
+    ],
+    "partyStart": "Native uiStartGame.EnterFahrul callback submitted once and observedGameStarted was true."
+  },
+  "scope": "Task-owned isolated macOS copy under runtime-test package-only mode. This validates active package loading, native class preview and native start callback only. The Party Select preview intentionally has no starting equipment. The prologue blocked world-ready inventory observation, so this does not validate current starting equipment, save behavior, acquisition, motion, or online co-op."
+}
