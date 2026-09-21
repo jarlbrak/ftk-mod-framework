@@ -26,12 +26,13 @@ and package artifacts have been published and verified.
 
 ## Validation and limits
 
-Local macOS evidence covers class creation, starting equipment, enabled saves
-and restart, shop purchase, controlled loot collection, Guard and rescue,
-Censure application/expiry, representative Ward and Verdict effects, and enhanced
-Mercy healing. Native death, revival and Guard recast preserve spent rescue.
-Fixture-assisted outcomes and ordinary gameplay are distinguished in the
-[acceptance record](VALIDATION.md).
+Local macOS evidence covers class creation, starting equipment, selected shop
+purchases, controlled loot collection, Guard and rescue, Censure application/expiry,
+representative Ward and Verdict effects, and enhanced Mercy healing. Native death,
+revival and Guard recast preserve spent rescue. Save/resume and restart evidence is
+pinned to an earlier archive; the current art archive has only reached native world
+start and retains an open save/reload gate. Fixture-assisted outcomes and ordinary
+gameplay are distinguished in the [acceptance record](VALIDATION.md).
 
 Online co-op is explicitly unverified. Production promotion waits for community
 host/client and multiple-Paladin confirmation. Linux, Windows and Proton gameplay

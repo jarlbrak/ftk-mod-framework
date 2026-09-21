@@ -28,8 +28,13 @@ Six armor sets provide body, foot and head items, with native female/male garmen
 bindings. The class starts with a novice hammer, shield and full novice armor
 set. Native fresh-game initialization adds and equips eligible starting items;
 fresh Party Select uses an empty preview inventory and therefore shows native
-class clothing until the game starts. The [production fresh-game trial](../../../docs/paladin/production-new-game-observation.json) confirms all five novice pieces equip in their intended slots and persist across save/resume and restart.
-All-race gear fit is a live acceptance gate.
+class clothing until the game starts. The [historical production fresh-game
+trial](../../../docs/paladin/production-new-game-observation.json) for archive
+`92dd4d19d8ef` confirms all five Novice pieces equipped and persisted across
+save/resume and restart. The current art archive is separately covered by the
+[current world-start receipt](../../../docs/paladin/current-package-world-start-2026-09-21.json):
+it equips the same five slots after native startup, while its save/reload gate
+remains open. All-race gear fit is a live acceptance gate.
 
 The 135 referenced GLB/PNG assets are traced by
 [the external provenance receipt](../paladin-assets.provenance.json).
