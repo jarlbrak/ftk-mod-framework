@@ -48,7 +48,7 @@ public sealed partial class RuntimeModelTest
         return result;
     }
 
-    JObject RenderPlayerStudioAvatar(CharacterEventListener avatar,string path,string view)
+    JObject RenderPlayerStudioAvatar(CharacterEventListener avatar,string path,string view,Vector3? fixedForward=null,float minimumSpan=0f)
     {
         RequireSinglePlayer();CatalogNoLinks(root);CatalogNoLinks(output);
         if(view!="front" && view!="three-quarter" && view!="back")throw new ArgumentException("Invalid studio view");
@@ -57,7 +57,7 @@ public sealed partial class RuntimeModelTest
         Renderer[] renderers=avatar.GetComponentsInChildren<Renderer>(true);
         if(renderers.Length==0 || renderers.Length>128)throw new InvalidOperationException("Avatar renderer count outside studio limit");
         // Frame only from permitted live bone transforms, never native vertices or mesh bounds.
-        Vector3 up=avatar.transform.up.normalized;float low=float.MaxValue,high=float.MinValue;int bones=0;
+        Vector3 up=fixedForward.HasValue?Vector3.up:avatar.transform.up.normalized;float low=float.MaxValue,high=float.MinValue;int bones=0;
         foreach(SkinnedMeshRenderer renderer in avatar.GetComponentsInChildren<SkinnedMeshRenderer>(true))
             if(renderer.bones!=null)foreach(Transform bone in renderer.bones)
             {
@@ -68,6 +68,8 @@ public sealed partial class RuntimeModelTest
         float span=high-low;
         if(bones==0 || float.IsNaN(span) || float.IsInfinity(span) || span<.05f || span>100f)
             throw new InvalidOperationException("Usable native bone framing unavailable");
+        float centerHeight=low+span*.5f;
+        span=Math.Max(span,minimumSpan);
         int layer=-1;Renderer[] sceneRenderers=UnityEngine.Object.FindObjectsOfType<Renderer>();
         for(int candidate=31;candidate>=8;candidate--)
         {
@@ -84,9 +86,9 @@ public sealed partial class RuntimeModelTest
         try
         {
             foreach(GameObject part in layers.Keys)part.layer=layer;
-            Vector3 center=avatar.transform.position+up*(low+span*.5f);
+            Vector3 center=avatar.transform.position+up*centerHeight;
             float yaw=view=="back"?180f:view=="three-quarter"?25f:0f;
-            Vector3 direction=Quaternion.AngleAxis(yaw,up)*avatar.transform.forward.normalized;
+            Vector3 direction=Quaternion.AngleAxis(yaw,up)*(fixedForward.HasValue?fixedForward.Value:avatar.transform.forward.normalized);
             cameraObject=new GameObject("FTK test player studio camera");Camera camera=cameraObject.AddComponent<Camera>();camera.enabled=false;
             camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.13f,.15f,.18f,1f);
             camera.cullingMask=1<<layer;camera.orthographic=true;camera.orthographicSize=span*.85f;
@@ -113,7 +115,7 @@ public sealed partial class RuntimeModelTest
         File.WriteAllBytes(path,png);
         return new JObject{{"ok",true},{"png",path},{"sha256",CatalogHash(path)},{"view",view},
             {"coreIdentity",PreviewCoreIdentity()},{"helperIdentity",ScaleIdentity(typeof(RuntimeModelTest).Assembly)},
-            {"width",768},{"height",1024},{"layersRestored",true},
+            {"width",768},{"height",1024},{"framingSpan",span},{"fixedFacing",fixedForward.HasValue},{"layersRestored",true},
             {"scope","Synchronous render of existing native avatar and current pose; bone-based framing, no native geometry export. Studio lights add to existing ambient lighting. Presentation image, not gameplay acceptance."}};
     }
 }

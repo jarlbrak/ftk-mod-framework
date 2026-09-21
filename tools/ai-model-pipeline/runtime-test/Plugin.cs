@@ -567,6 +567,13 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         {
             AvatarOwner captureOwner=FindOwner(renderer,null);
             int capturedOwnerId=captureOwner.owner.GetInstanceID(),capturedCelId=captureOwner.cel.GetInstanceID();
+            Vector3 studioForward=Vector3.zero;float studioMinimumSpan=0f;
+            if(studioView!=null)
+            {
+                studioForward=Vector3.ProjectOnPlane(captureOwner.cel.transform.forward,Vector3.up);
+                if(studioForward.sqrMagnitude<.01f)throw new InvalidOperationException("Usable combat studio facing unavailable.");
+                studioForward.Normalize();
+            }
             if(fixedStep)Time.captureFramerate=(int)fps;
             string directory=Path.Combine(output,id);Directory.CreateDirectory(directory);
             JArray frames=new JArray();if(arrivalObservation)spawnCapture.partialFrames=frames;float started=Time.realtimeSinceStartup,gameStarted=Time.time,unscaledStarted=Time.unscaledTime;
@@ -615,7 +622,8 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                     {
                         if(currentOwner.scope!="player-combat")throw new InvalidOperationException("Studio capture owner left combat scope.");
                         pose["studio"]=RenderPlayerStudioAvatar(currentOwner.cel,
-                            Path.Combine(directory,index.ToString("D4")+"-studio.png"),studioView);
+                            Path.Combine(directory,index.ToString("D4")+"-studio.png"),studioView,studioForward,studioMinimumSpan);
+                        studioMinimumSpan=Math.Max(studioMinimumSpan,(float)pose["studio"]["framingSpan"]);
                     }
                     frames.Add(pose);
                     if(arrivalObservation && spawnCapture.firstPngFrame<0)spawnCapture.firstPngFrame=Time.frameCount;

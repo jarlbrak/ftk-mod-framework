@@ -245,3 +245,10 @@ alone. This procedure establishes package handling, not gameplay or save behavio
 [Dungeon recharge](dungeon-recharge-live.json) passes with the same native Paladin dummy retained between two staged wolf fights. Rescue is spent at the first victory and ready before Guard in the next combat; designation and active protection are cleared. The native reward/Ready transitions are exercised, with the two-room layout and lethal outcome explicitly identified as fixtures.
 
 [Incapacity fixture](incapacity-live.json) observes native stun cancelling active Guard and native effect removal restoring eligibility without restoring Guard, while retaining designation and ready rescue. Petrification did not apply in the direct fixture because native surviving-hit context was absent; it remains a live gate. The synchronous helper now rejects that unsupported path.
+
+### Novice combat studio framing
+
+The [first supplemental front-view capture](novice-combat-studio-framing.json)
+completed 100 frames but clipped during the bent attack pose. Native screen
+frames are retained. A camera-framing correction builds and passes boundary
+checks; a fresh live trial is required before chest clearance can be accepted.
