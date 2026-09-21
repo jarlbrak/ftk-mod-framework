@@ -1,0 +1,154 @@
+{
+  "schema": "ftkmf.paladin-framework-release-dry-run.v1",
+  "status": "clean-source-release-dry-run-pass-not-published",
+  "sourceCommit": "064ff0142ae5878242d295f2ad180ee5385f4c63",
+  "command": "bash release.sh v0.1.4 --dry-run",
+  "exitCode": 0,
+  "logSha256": "222c10c3183a719a754d1fc27cf797da4c1d614266c484df179e32b829199290",
+  "artifacts": {
+    "update.json": {
+      "sha256": "704307e851ba8eb67faabcc67890937b5e7f9b8f66d188f126bb18f2a9896eaa",
+      "bytes": 978
+    },
+    "FTKModFramework.dll": {
+      "sha256": "1c04bd0097347c27eca52b90dbef93d14d7c061462349c3ae0bce6fcfadd1626",
+      "bytes": 2193920
+    },
+    "install.sh": {
+      "sha256": "15048a8cffc69bfa0976a6e17e567429f9bd6fb2c99d34c1fc9878282f4b1e80",
+      "bytes": 47428
+    },
+    "install.ps1": {
+      "sha256": "ffb7768546f666c9652891b447de79c796edbe5320a03fe27d27ac68595e5cbb",
+      "bytes": 12253
+    },
+    "ftkmf-helper-linux-amd64": {
+      "sha256": "8529c5a88609a6854faf06e05e32eaa8c39aa1e1daaa080584214fa96d7f3b43",
+      "bytes": 7807136
+    },
+    "ftkmf-helper-linux-arm64": {
+      "sha256": "978417636b80a97de6ebf17da802505e9c449d086a32a276a2c6386f9f999eaf",
+      "bytes": 7209120
+    },
+    "ftkmf-helper-macos-universal": {
+      "sha256": "7c8af21e7e9a612055b9ca7da0e90c4408e048a69fea9b04d5b37c2d7b635c29",
+      "bytes": 15441888
+    },
+    "ftkmf-helper-windows-amd64.exe": {
+      "sha256": "b9966b94ae2dd811e3a0633004406570220a010cfc37825ba6c10bfea59f71bb",
+      "bytes": 8049152
+    },
+    "FTKModdedLauncher-macos-universal.zip": {
+      "sha256": "75c45215463081597f943721cc0d55781190ca4b567b21d119a416cb0296a1bb",
+      "bytes": 8762851
+    },
+    "FTKModdedLauncher-windows-x64.zip": {
+      "sha256": "a8b07fbe558c7a4063d16867998d9e639cb4ac205033a4d5f20b722ce60ae24d",
+      "bytes": 5537042
+    },
+    "FTKModdedLauncher-linux-amd64.tar.gz": {
+      "sha256": "e7e41f06501feb8a76f8f400755aceffca6a1203e46e8894c87abca72e174687",
+      "bytes": 8788806
+    },
+    "FTKModdedLauncher-linux-arm64.tar.gz": {
+      "sha256": "da4be2807dafa05383b4ff12eced315f0d4bb1e02bb6a79f75ef78ef9ebf0b0e",
+      "bytes": 8451548
+    }
+  },
+  "archiveInventories": {
+    "FTKModdedLauncher-macos-universal.zip": [
+      "README.md",
+      "Add to Steam.command",
+      "For The King Modded.app/",
+      "For The King Modded.app/Contents/",
+      "For The King Modded.app/Contents/MacOS/",
+      "For The King Modded.app/Contents/MacOS/For The King Modded",
+      "For The King Modded.app/Contents/Resources/",
+      "For The King Modded.app/Contents/Resources/launch.sh",
+      "For The King Modded.app/Contents/Resources/icon.icns",
+      "For The King Modded.app/Contents/Resources/install.sh",
+      "For The King Modded.app/Contents/Resources/README.md",
+      "For The King Modded.app/Contents/Resources/FTKModFramework.dll",
+      "For The King Modded.app/Contents/Resources/setup.command",
+      "For The King Modded.app/Contents/Resources/ftkmf-launcher-helper",
+      "For The King Modded.app/Contents/Resources/bundle-manifest.json",
+      "For The King Modded.app/Contents/Resources/assets/",
+      "For The King Modded.app/Contents/Resources/assets/steam/",
+      "For The King Modded.app/Contents/Resources/assets/steam/icon.png",
+      "For The King Modded.app/Contents/Resources/assets/steam/hero.png",
+      "For The King Modded.app/Contents/Resources/assets/steam/capsule.png",
+      "For The King Modded.app/Contents/Resources/assets/steam/header.png",
+      "For The King Modded.app/Contents/Resources/assets/steam/logo.png",
+      "For The King Modded.app/Contents/Info.plist",
+      "Restore bundled.command"
+    ],
+    "FTKModdedLauncher-windows-x64.zip": [
+      "For The King Modded/",
+      "For The King Modded/FtkModdedLauncher.exe",
+      "For The King Modded/README.md",
+      "For The King Modded/install.ps1",
+      "For The King Modded/FTKModFramework.dll",
+      "For The King Modded/ftkmf-launcher-helper.exe",
+      "For The King Modded/bundle-manifest.json",
+      "For The King Modded/assets/",
+      "For The King Modded/assets/steam/",
+      "For The King Modded/assets/steam/icon.png",
+      "For The King Modded/assets/steam/hero.png",
+      "For The King Modded/assets/steam/capsule.png",
+      "For The King Modded/assets/steam/header.png",
+      "For The King Modded/assets/steam/logo.png",
+      "For The King Modded/FtkModdedLauncher.exe.config"
+    ],
+    "FTKModdedLauncher-linux-amd64.tar.gz": [
+      "For The King Modded",
+      "For The King Modded/Restore bundled.sh",
+      "For The King Modded/launch.sh",
+      "For The King Modded/Add to Steam.sh",
+      "For The King Modded/For The King Modded.sh",
+      "For The King Modded/install.sh",
+      "For The King Modded/README.md",
+      "For The King Modded/FTKModFramework.dll",
+      "For The King Modded/ftkmf-launcher-helper.exe",
+      "For The King Modded/setup.command",
+      "For The King Modded/ftkmf-launcher-helper",
+      "For The King Modded/bundle-manifest.json",
+      "For The King Modded/assets",
+      "For The King Modded/assets/steam",
+      "For The King Modded/assets/steam/icon.png",
+      "For The King Modded/assets/steam/hero.png",
+      "For The King Modded/assets/steam/capsule.png",
+      "For The King Modded/assets/steam/header.png",
+      "For The King Modded/assets/steam/logo.png"
+    ],
+    "FTKModdedLauncher-linux-arm64.tar.gz": [
+      "For The King Modded",
+      "For The King Modded/Restore bundled.sh",
+      "For The King Modded/launch.sh",
+      "For The King Modded/Add to Steam.sh",
+      "For The King Modded/For The King Modded.sh",
+      "For The King Modded/install.sh",
+      "For The King Modded/README.md",
+      "For The King Modded/FTKModFramework.dll",
+      "For The King Modded/ftkmf-launcher-helper.exe",
+      "For The King Modded/setup.command",
+      "For The King Modded/ftkmf-launcher-helper",
+      "For The King Modded/bundle-manifest.json",
+      "For The King Modded/assets",
+      "For The King Modded/assets/steam",
+      "For The King Modded/assets/steam/icon.png",
+      "For The King Modded/assets/steam/hero.png",
+      "For The King Modded/assets/steam/capsule.png",
+      "For The King Modded/assets/steam/header.png",
+      "For The King Modded/assets/steam/logo.png"
+    ]
+  },
+  "checks": [
+    "Every SHA256SUMS entry matches its staged artifact.",
+    "No game DLL, PDB, save, log, decompiled path or private overlay name in launcher archives."
+  ],
+  "limits": [
+    "New framework artifact hash differs from the earlier native-tested build; final exact-artifact isolated smoke remains required.",
+    "Cross-platform packaging is not Windows/Linux/Proton gameplay evidence.",
+    "No tags, upload, publication or catalog changes performed."
+  ]
+}
