@@ -29,4 +29,16 @@ class PlayerStudioBoundary(unittest.TestCase):
         self.assertIn('target.Release()',cleanup)
         self.assertIn('camera.enabled=false',CODE)
         self.assertIn('camera.cullingMask=1<<layer',CODE)
+    def test_combat_supplement_does_not_replace_native_capture(self):
+        capture=(ROOT/'Plugin.cs').read_text()
+        self.assertIn('op!="capture" || Scope(command)!="player-combat"',capture)
+        self.assertIn('if(currentOwner.scope!="player-combat")',capture)
+        self.assertIn('currentOwner.owner.GetInstanceID()!=capturedOwnerId',capture)
+        self.assertIn('currentOwner.cel.GetInstanceID()!=capturedCelId',capture)
+        self.assertIn('screen.ReadPixels(',capture)
+        self.assertIn('index.ToString("D4")+"-studio.png"',capture)
+        self.assertLess(capture.index('JObject pose=Snapshot(renderer,false)'),
+                        capture.index('pose["studio"]=RenderPlayerStudioAvatar'))
+        self.assertIn('if(studioView!=null)captureResult["studioView"]=studioView;',capture)
+
 if __name__=='__main__':unittest.main()

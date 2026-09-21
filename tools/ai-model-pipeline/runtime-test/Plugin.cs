@@ -226,6 +226,10 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                 bool fixedStep=command["fixedStep"]!=null && (bool)command["fixedStep"];
                 if(maxWidth<320 || maxWidth>3840)throw new ArgumentException("maxWidth must be between 320 and 3840.");
                 if(fixedStep && fps!=(float)(int)fps)throw new ArgumentException("fixedStep requires integer fps.");
+                string studioView=Str(command,"studioView");
+                if(studioView!=null && (op!="capture" || Scope(command)!="player-combat" ||
+                    (studioView!="front" && studioView!="three-quarter" && studioView!="back")))
+                    throw new ArgumentException("studioView requires a player-combat observation capture and front, three-quarter or back view.");
                 bool materialObservation=false;
                 if(command["materialObservation"]!=null)
                 {if(command["materialObservation"].Type!=JTokenType.Boolean)throw new ArgumentException("materialObservation must be boolean.");materialObservation=(bool)command["materialObservation"];}
@@ -243,7 +247,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                     if(motionObservation)motion=ArmCombatMotionObservation(renderer,"ordinary-bridge-action");
                     busy = true;
                     StartCoroutine(Capture(id, renderer, seconds, fps, maxWidth, fixedStep,
-                        op == "play" ? "native-state-playback" : "observed-runtime",materialObservation,false,null,motion));
+                        op == "play" ? "native-state-playback" : "observed-runtime",materialObservation,false,null,motion,studioView));
                 }
                 catch
                 {
@@ -555,7 +559,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         animator.Play(hash,layer,0f);
         Logger.LogInfo("MODEL TEST PLAYBACK: "+state+"; native controller state, not a normal combat action; animation events remain active.");
     }
-    IEnumerator Capture(string id,SkinnedMeshRenderer renderer,float seconds,float fps,int maxWidth,bool fixedStep,string provenance,bool materialObservation=false,bool arrivalObservation=false,JObject combatTrigger=null,CombatMotionArm motion=null)
+    IEnumerator Capture(string id,SkinnedMeshRenderer renderer,float seconds,float fps,int maxWidth,bool fixedStep,string provenance,bool materialObservation=false,bool arrivalObservation=false,JObject combatTrigger=null,CombatMotionArm motion=null,string studioView=null)
     {
         int previousCaptureFramerate=Time.captureFramerate;
         Texture2D screen=null,image=null;RenderTexture downsample=null;
@@ -607,6 +611,12 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                     }
                     finally {RenderTexture.active=previousActive;}
                     File.WriteAllBytes(Path.Combine(directory,index.ToString("D4")+".png"),image.EncodeToPNG());
+                    if(studioView!=null)
+                    {
+                        if(currentOwner.scope!="player-combat")throw new InvalidOperationException("Studio capture owner left combat scope.");
+                        pose["studio"]=RenderPlayerStudioAvatar(currentOwner.cel,
+                            Path.Combine(directory,index.ToString("D4")+"-studio.png"),studioView);
+                    }
                     frames.Add(pose);
                     if(arrivalObservation && spawnCapture.firstPngFrame<0)spawnCapture.firstPngFrame=Time.frameCount;
                 }catch(Exception ex){error=ex.ToString();}
@@ -619,6 +629,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                 {"scope",captureOwner.scope},{"ownerInstanceId",capturedOwnerId},{"celInstanceId",capturedCelId},
                 {"previousCaptureFramerate",previousCaptureFramerate},{"requestedSeconds",seconds},{"requestedFps",fps},
                 {"width",width},{"height",height},{"frames",frames}};
+            if(studioView!=null)captureResult["studioView"]=studioView;
             if(materialObservation)captureResult["materialObservation"]=true;
             if(arrivalObservation){spawnCapture.status="capture-finished";spawnCapture.terminal=true;if(error!=null && spawnCapture.error==null)spawnCapture.error=error;captureResult["arrivalObservation"]=true;captureResult["arrival"]=SpawnCaptureView();}
             if(combatTrigger!=null)captureResult["combatTrigger"]=combatTrigger.DeepClone();

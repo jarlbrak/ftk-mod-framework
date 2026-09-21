@@ -523,6 +523,18 @@ A preview still requires the existing single-player guard to succeed.
   movement; a frozen normalized time does not by itself prove failed death motion.
   PNG readback/encoding happens after pose/time sampling for that frame.
 
+  Player-combat observation captures may also set `studioView` to `front`,
+  `three-quarter`, or `back`. This is rejected for `play` and other scopes.
+  Each frame retains its ordinary screen PNG and pose record, then renders a
+  separate `NNNN-studio.png` of the same pinned avatar without advancing a frame.
+  The frame's `studio` receipt includes its image hash and helper/framework pins.
+  This uses the synchronous player studio renderer described below: supplemental
+  lighting, bone-based framing, restored renderer layers and temporary resources.
+  It does not move the native camera or change equipment, pose or gameplay.
+  Added rendering cost can slow capture; inspect sampled clip progress rather
+  than treating requested duration as coverage. Live combat validation of this
+  optional supplement remains pending.
+
   Enemy-only `motionObservation:true` is available for an ordinary `capture`,
   never `play`. It requires the selected live custom skinned renderer's exact
   enemy/CEL identity, that renderer's association with the CEL's native Animator,

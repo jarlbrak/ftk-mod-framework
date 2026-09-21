@@ -41,6 +41,19 @@ public sealed partial class RuntimeModelTest
         else throw new ArgumentException("source must be preview or world");
         if(avatar==null || avatar.GetInstanceID()!=celId || !SceneOwner(avatar) || !avatar.gameObject.activeInHierarchy)
             throw new InvalidOperationException("Exact active native avatar unavailable");
+        string path=Path.Combine(output,Token(Str(command,"id"))+".png");
+        JObject result=RenderPlayerStudioAvatar(avatar,path,view);
+        result["source"]=source;result["ownerInstanceId"]=ownerId;result["celInstanceId"]=celId;
+        result["equipment"]=equipment;
+        return result;
+    }
+
+    JObject RenderPlayerStudioAvatar(CharacterEventListener avatar,string path,string view)
+    {
+        RequireSinglePlayer();CatalogNoLinks(root);CatalogNoLinks(output);
+        if(view!="front" && view!="three-quarter" && view!="back")throw new ArgumentException("Invalid studio view");
+        if(avatar==null || !SceneOwner(avatar) || !avatar.gameObject.activeInHierarchy)
+            throw new InvalidOperationException("Active native avatar required for studio render");
         Renderer[] renderers=avatar.GetComponentsInChildren<Renderer>(true);
         if(renderers.Length==0 || renderers.Length>128)throw new InvalidOperationException("Avatar renderer count outside studio limit");
         // Frame only from permitted live bone transforms, never native vertices or mesh bounds.
@@ -63,9 +76,7 @@ public sealed partial class RuntimeModelTest
             if(!used){layer=candidate;break;}
         }
         if(layer<0)throw new InvalidOperationException("No unused render layer available");
-        string path=Path.Combine(output,Token(Str(command,"id"))+".png");
         if(File.Exists(path))throw new InvalidOperationException("Studio output already exists");
-        JObject core=PreviewCoreIdentity(),helper=ScaleIdentity(typeof(RuntimeModelTest).Assembly);
         Dictionary<GameObject,int> layers=new Dictionary<GameObject,int>();
         foreach(Renderer renderer in renderers)if(renderer!=null && !layers.ContainsKey(renderer.gameObject))layers.Add(renderer.gameObject,renderer.gameObject.layer);
         GameObject cameraObject=null,keyObject=null,fillObject=null;RenderTexture target=null;Texture2D image=null;
@@ -100,8 +111,8 @@ public sealed partial class RuntimeModelTest
             if(image!=null)UnityEngine.Object.DestroyImmediate(image);
         }
         File.WriteAllBytes(path,png);
-        return new JObject{{"ok",true},{"png",path},{"sha256",CatalogHash(path)},{"source",source},{"view",view},
-            {"ownerInstanceId",ownerId},{"celInstanceId",celId},{"equipment",equipment},{"coreIdentity",core},{"helperIdentity",helper},
+        return new JObject{{"ok",true},{"png",path},{"sha256",CatalogHash(path)},{"view",view},
+            {"coreIdentity",PreviewCoreIdentity()},{"helperIdentity",ScaleIdentity(typeof(RuntimeModelTest).Assembly)},
             {"width",768},{"height",1024},{"layersRestored",true},
             {"scope","Synchronous render of existing native avatar and current pose; bone-based framing, no native geometry export. Studio lights add to existing ambient lighting. Presentation image, not gameplay acceptance."}};
     }
