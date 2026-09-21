@@ -9,7 +9,7 @@ with 133 pure-rule and 21 installed-metadata checks passing. Its [native spent-c
 and [earlier lifecycle observations](guard-lifecycle-observations.json).
 
 The current unpublished art candidate SHA-256 is
-`176253bec3e40dbe383ff3bf22223e977fbe5298454a88d4e4e72674884417f1`.
+`a2dc95504eb4641a230dacc0ce99e8f5df67f313c53206f690143066ae397af7`.
 It revises Novice armor, boots, helmet and their display assets. The prior
 `92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295`
 package retains its historical gameplay and lifecycle evidence; those receipts
@@ -38,7 +38,10 @@ The [fitted Novice candidate](novice-fitted-preview.json) now records native
 Female/Male three-quarter previews with a smaller chest plate, dark cloth and
 new leather boots. The [seven-appearance Novice trial](novice-race-preview.json) records front
 views and restoration, with sleeve intersections and a Demon brow fit concern
-still open. User approval and motion remain open. A
+recorded in that earlier revision. The [short-sleeve follow-up](novice-sleeve-fit.json)
+checks seven angled previews: those sleeve intersections are absent in the sampled
+poses and the raised Demon brow clears the forehead. Loose Undead wrist wraps,
+user approval and motion remain open. A
 [Mercy race preview](native-race-preview.json) covers front views on Female, Male,
 Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes.
 These are pose/fit observations, not full animation or all-set nonhuman fit

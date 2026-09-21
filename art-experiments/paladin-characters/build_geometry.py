@@ -184,8 +184,16 @@ def novice_armor(s,male):
         for layer in range(1):
             center=offset(B[shoulder],x=sign*layer*.065,y=.085-layer*.065)
             s.tube("Novice plain shoulder cap "+side+str(layer),[offset(center,y=-.028),offset(center,y=.005),offset(center,y=.037)],[.173,.163,.125],[.169,.154,.123],[shoulder]*3,1,sides=8)
-        s.tube("Novice articulated sleeves "+side,[B[shoulder],B[elbow],B[wrist]],[.15,.145,.12],[.145,.14,.118],[shoulder,elbow,wrist],0)
-        s.tube("Novice wrist band "+side,[offset(B[wrist],y=-.015),offset(B[wrist],y=.024)],[.127]*2,[.125]*2,[wrist]*2,11,sides=8)
+        sleeve_end=B[shoulder]+(B[elbow]-B[shoulder])*.76
+        sleeve_mid=B[shoulder]+(B[elbow]-B[shoulder])*.46
+        s.tube("Novice short padded sleeve "+side,[B[shoulder],sleeve_mid,sleeve_end],
+               [.155,.165,.16],[.15,.16,.155],[shoulder,shoulder,{shoulder:.8,elbow:.2}],0,sides=10)
+        direction=(B[elbow]-B[shoulder]);direction/=np.linalg.norm(direction)
+        s.tube("Novice rolled sleeve hem "+side,[sleeve_end-direction*.025,sleeve_end+direction*.015],
+               [.172]*2,[.166]*2,[{shoulder:.8,elbow:.2}]*2,1,sides=10)
+        forearm=(B[wrist]-B[elbow]);forearm/=np.linalg.norm(forearm)
+        s.tube("Novice leather wrist wrap "+side,[B[wrist]-forearm*.045,B[wrist]+forearm*.018],
+               [.125,.12],[.12,.116],[wrist]*2,11,sides=10)
         hip,knee,ankle=[f"{x}_{side}" for x in ["Hip","Knee","Ankle"]]
         s.tube("Novice mail leggings "+side,[B[hip],B[knee],B[ankle]],[.155,.103,.079],[.145,.097,.074],[hip,knee,ankle],0)
         s.tube("Novice narrow split apron "+side,[offset(B[hip],x=-sign*.025,z=.17),offset(B[knee],x=-sign*.025,y=.20,z=.15)],[.10,.105],[.018,.018],[hip,knee],0,sides=4)
@@ -247,6 +255,7 @@ def novice_helmet():
     s.tube("Novice close rear hood",[np.array([0,.15,-.19]),np.array([0,.23,-.19]),np.array([0,.39,-.075])],[.185,.202,.155],[.038,.047,.09],["Head_M"]*3,1,sides=8)
     s.ellipsoid("Novice plain iron cap",np.array([0,.365,-.05]),(.204,.075,.178),"Head_M",1,sides=8)
     s.tube("Novice plain iron brow",[np.array([-.20,.315,.14]),np.array([0,.35,.19]),np.array([.20,.315,.14])],[.023]*3,[.024]*3,["Head_M"]*3,1,sides=6)
+    for point in s.data["positions"]:point[1]+=.025
     return s
 
 

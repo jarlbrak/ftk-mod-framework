@@ -73,3 +73,9 @@ records Female/Male three-quarter views. The earlier flat-plate and recolored-bo
 attempts were rejected. This replacement is a review candidate: offline geometry,
 binding and package checks pass, but user approval, movement and nonhuman fit
 remain open. Previous Novice screenshots do not establish the new revision's fit.
+
+Short sleeves now end above the elbow, retaining native forearms and race details.
+The helmet sits slightly higher to clear the Demon forehead. The
+[seven-appearance angled check](../../docs/paladin/novice-sleeve-fit.json) records
+the current candidate. Wrist wraps still appear loose on Undead; sampled preview
+fit does not establish combat movement or final art approval.
