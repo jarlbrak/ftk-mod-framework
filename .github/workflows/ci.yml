@@ -71,6 +71,13 @@ jobs:
           dotnet-version: '10.0.x'
       - name: Player mod discovery and enable-state checks
         run: dotnet run --project FTKModFramework/Tests/PlayerMods/PlayerMods.csproj -c Release
+      - name: Guardian and equipment capability checks (no game required)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for project in GuardianCombat GuardianClassUi PackageModels ItemApparel RegisteredRows CombatAvatarLease ModsButton; do
+            dotnet run --project "FTKModFramework/Tests/$project/$project.csproj" -c Release
+          done
       - name: Run the game-free unit tests
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
       - uses: actions/setup-python@v5
