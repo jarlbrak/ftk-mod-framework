@@ -47,7 +47,7 @@ outcomes and controlled loot are identified separately from ordinary acquisition
 | Current package lifecycle | [92dd lifecycle](package-lifecycle-loot-fix.json): real helper install/activate, exact 137-file bytes, disable, enable, remove and rollback; managed-set export | Export is not a ZIP exporter. No public catalog download, disabled-save loading or online claim |
 | Production startup and new game | [Production new-game receipt](production-new-game-observation.json): 39/39 registrations, five novice pieces equipped in their native slots, no all-gear grants | Earlier unexplained configuration crash remains in that receipt; final framework changes need proportional startup checks |
 | Enabled save/resume | Same [production receipt](production-new-game-observation.json): matching starting equipment after same-process save/resume and application restart. [Collected loot receipt](custom-loot-collection.json): collected count retained after same-process resume | Disabled-package recovery, every appearance and full-campaign saves are not established |
-| Acquisition and world return | [Native shop purchase](native-shop-purchase.json): one ordinary starter great-hammer purchase. [Corrected custom loot](custom-loot-collection.json): one controlled Novice Helm append, native Collect adds exactly one and returns to world | Controlled append does not prove random-drop distribution or ordinary acquisition of every family |
+| Acquisition and world return | [Native shop purchase](native-shop-purchase.json): one ordinary starter great-hammer purchase. [Existing native stock](acquisition-stock-live.json): five other families selected into shops, with Oarton hammer/shield prices observed. [Corrected custom loot](custom-loot-collection.json): one controlled Novice Helm append, native Collect adds exactly one and returns to world | Existing stock and listed prices do not prove purchase. Controlled append does not prove random-drop distribution or ordinary acquisition of every family |
 | Guard and rescue | [Native outcome fixtures](guardian-native-fixtures.json): 9 damage becomes 5, lethal hit leaves 1 HP. [Multi-Guardian fixtures](multi-guardian-native-fixtures.json): no reduction stacking, one ordinal-first charge, later lethal death after charge spent. [Ordinary hit](ordinary-guard-hit.json) confirms unforced protected-hit route | Outcome fixtures bypass native damage calculation. [Revival charge preservation](guardian-revival-live.json) passed after native Revive and Guard recast; online unverified |
 | Guard lifecycle | [Lifecycle observations](guard-lifecycle-observations.json): switching, next-turn expiry with retained designation, death disables protection, revival does not restore active Guard | Spent-charge revival passed in the linked regression; [Same-process ordinary next-combat recharge](next-combat-live.json) passed; [Dungeon reused-dummy recharge](dungeon-recharge-live.json) passed; [Native stun apply/remove](incapacity-live.json) passed; natural timed recovery and petrification remain separate |
 | Base focused healing | [Focused hit](focused-hit-native.json): native Focus debit and attack, chosen ally 9 to 11 HP after Guard expiry | Miss/dodge, absorbed-hit, multi-target deduplication and caps are not all proven live |
@@ -136,7 +136,10 @@ set/race or lifecycle acceptance.
   and verify final-owner disposal without manually invoking cleanup. A Ready
   state or disappearance alone is not disposal evidence.
 - [ ] Observe a normal level-appropriate shop or loot acquisition for each family;
-  distinguish this from a forced inventory fixture. Save/load the actual equipped
+  for shops, record campaign-stage item level and shop object-type pool, not just
+  hero level. The [native selection audit](acquisition-native.json) explains the
+  inclusive level filter and limited shuffled selection from eligible items.
+  Distinguish this from a forced inventory fixture. Save/load the actual equipped
   custom items and both class appearances. Confirm no stale combat protection
   enters the next encounter; record package disable/re-enable limitations.
 
