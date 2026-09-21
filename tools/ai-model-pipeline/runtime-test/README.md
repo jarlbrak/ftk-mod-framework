@@ -2634,3 +2634,23 @@ existing Dungeon POIs. It reports native dungeon IDs, instance IDs, lock and
 deactivation flags, and hex coordinates. Use a fresh result to select an existing
 location for a separately authorized entry trial. The operation does not generate
 POIs, unlock them, move a hero, enter a dungeon, or change rooms.
+
+### Guardian incapacity and recovery fixture
+
+`guardian-incapacity-fixture` accepts exact `encounterInstanceId`,
+`guardianInstanceId`, and `category` (`Stunned`). It requires an
+owned, actively guarding Paladin without existing timed proficiency effects,
+a single-player combat at a stable native hero stance, and no active lethal-hit
+fixture. Each guardian/category can be attempted once per encounter.
+
+The fixture resolves and validates the native `enStun` effect,
+then invokes `AddProfToDummy` and snapshots Guard eligibility. In `finally` it
+removes only that category through `RemoveSpecificProficiency`, then snapshots
+recovery. Passing requires incapacitation to clear active Guard and recovery to
+leave it inactive, preserving designation and rescue availability. The helper
+only queries Guardian state; production patches perform any expiration. This is
+explicit status setup/removal, not an enemy attack, natural effect duration,
+turn progression, or online validation.
+Petrify is intentionally rejected: its native application requires surviving
+hit context and starts a visual coroutine. Synchronous add/remove does not
+establish that lifecycle and could interfere with its delayed visual work.

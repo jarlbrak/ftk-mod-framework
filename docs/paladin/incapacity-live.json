@@ -1,0 +1,110 @@
+{
+  "schema": "ftkmf.paladin-incapacity-live.v1",
+  "status": "native-stun-apply-remove-passed-petrify-not-applied",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "testedHelperSha256": "f7cac2360f783540dd3519ae69eed8a9efb170c9d9496db421ebe29c825e4107",
+  "stun": {
+    "ok": true,
+    "status": "passed",
+    "category": "Stunned",
+    "proficiency": "enStun",
+    "encounterInstanceId": 358098,
+    "before": {
+      "identity": "2:1",
+      "dummyInstanceId": 364424,
+      "hp": 39,
+      "stunned": false,
+      "petrified": false,
+      "canAct": true,
+      "active": true,
+      "designatedAlly": "0:1",
+      "rescueAvailable": true
+    },
+    "applied": {
+      "identity": "2:1",
+      "dummyInstanceId": 364424,
+      "hp": 39,
+      "stunned": true,
+      "petrified": false,
+      "canAct": false,
+      "active": false,
+      "designatedAlly": "0:1",
+      "rescueAvailable": true
+    },
+    "recovered": {
+      "identity": "2:1",
+      "dummyInstanceId": 364424,
+      "hp": 39,
+      "stunned": false,
+      "petrified": false,
+      "canAct": true,
+      "active": false,
+      "designatedAlly": "0:1",
+      "rescueAvailable": true
+    },
+    "scope": "Explicit native AddProfToDummy/RemoveSpecificProficiency fixture. No enemy attack, natural duration, turn progression or online claim. Guardian state is queried only, never set by this helper.",
+    "testFixtureMaxHpTarget": null,
+    "tutorialsQuiet": false,
+    "session": "74f3068056f6481a8b502d3d60f5ae82",
+    "id": "301e1709744749009c55749c64a56e1d",
+    "frame": 29586
+  },
+  "petrifyAttempt": {
+    "ok": false,
+    "status": "failed",
+    "category": "Petrify",
+    "proficiency": "enPetrifyOnly",
+    "encounterInstanceId": 358098,
+    "before": {
+      "identity": "1:1",
+      "dummyInstanceId": 368986,
+      "hp": 39,
+      "stunned": false,
+      "petrified": false,
+      "canAct": true,
+      "active": true,
+      "designatedAlly": "0:1",
+      "rescueAvailable": true
+    },
+    "applied": {
+      "identity": "1:1",
+      "dummyInstanceId": 368986,
+      "hp": 39,
+      "stunned": false,
+      "petrified": false,
+      "canAct": true,
+      "active": true,
+      "designatedAlly": "0:1",
+      "rescueAvailable": true
+    },
+    "recovered": {
+      "identity": "1:1",
+      "dummyInstanceId": 368986,
+      "hp": 39,
+      "stunned": false,
+      "petrified": false,
+      "canAct": true,
+      "active": true,
+      "designatedAlly": "0:1",
+      "rescueAvailable": true
+    },
+    "scope": "Explicit native AddProfToDummy/RemoveSpecificProficiency fixture. No enemy attack, natural duration, turn progression or online claim. Guardian state is queried only, never set by this helper.",
+    "testFixtureMaxHpTarget": null,
+    "tutorialsQuiet": false,
+    "session": "74f3068056f6481a8b502d3d60f5ae82",
+    "id": "1b6992951b914a6d957411e6e4a237a8",
+    "frame": 35158
+  },
+  "nativeFindings": {
+    "assemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "stun": "CharacterDummy.Stunned includes Stunned and Dazed. AddProfToDummy applies the native effect; its framework postfix expires ineligible Guard. RemoveSpecificProficiency removes the record and calls End.",
+    "petrify": "ProficiencyPetrify.AddToDummy requires m_DamageInfo.m_NewHealth > 0 before adding its record, then starts a visual freeze coroutine. End creates a replacement avatar. Direct synchronous add/remove without surviving hit context does not test it."
+  },
+  "sourceFollowup": "Removed Petrify from this synchronous helper; unsupported categories now reject before mutation. Stun application/removal remains unchanged.",
+  "limits": [
+    "Explicit native proficiency fixture; does not establish an enemy stun hit or natural timed recovery.",
+    "Ready rescue availability is preserved; no spent-charge incapacity assertion.",
+    "Petrification remains unverified live. Its failed attempt did not enter Petrified state and does not establish a production defect.",
+    "Single-player macOS only."
+  ]
+}
