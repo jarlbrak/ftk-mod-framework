@@ -98,3 +98,12 @@ The [native follow-up](../../docs/paladin/novice-tailored-native-preview.json)
 records seven appearance previews after lowering the helmet crown and front
 opening. The original preview selection was restored. These static fit samples
 do not establish combat movement or user approval.
+
+## Slim starter candidate
+
+The current unapproved source replaces the heavy rounded chest and flared apron
+with a close leather jerkin, short straight hem, small matching sleeves and
+slim travel boots. It also reduces the simple iron cap. The generated source,
+display models and icons pass their offline checks. A native Party Select review
+was performed in the isolated fixture, but this candidate has not been copied
+into the marketplace package and has no user art approval.

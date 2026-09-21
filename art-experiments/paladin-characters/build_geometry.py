@@ -140,16 +140,16 @@ def helmet(endgame):
 
 
 def novice_tunic_hem(s,width):
-    """Continuous tailored skirt with a folded edge and blended hip attachment."""
+    """Short, close leather hem that reads as a workman's jerkin, not an apron."""
     center=s.B["Root_M"]
     rings=[];skins=[];n=16
-    for row,(y,w,d) in enumerate([(.09,width*.81,.174),(-.09,width*.86,.18),(-.25,width*.93,.188)]):
+    for row,(y,w,d) in enumerate([(.08,width*.73,.130),(-.055,width*.75,.136),(-.165,width*.78,.142)]):
         ring=[];weights=[]
         for j in range(n):
             angle=2*np.pi*j/n
             x,z=np.cos(angle),np.sin(angle)
-            # The raised middle hem reads as a walking vent, not two rigid boards.
-            vent=.085*max(0,1-abs(x)*4) if z>0 and row==2 else 0
+            # A shallow walking vent avoids a continuous rigid skirt silhouette.
+            vent=.035*max(0,1-abs(x)*4) if z>0 and row==2 else 0
             ring.append(center+np.array([x*w,y+vent,z*d]))
             hip="Hip_R" if x>=0 else "Hip_L"
             weights.append("Root_M" if row==0 else {"Root_M":.55 if row==1 else .20,hip:.45 if row==1 else .80})
@@ -173,13 +173,13 @@ def novice_tunic_hem(s,width):
 
 
 def novice_armor(s,male):
-    """Tailored leather jack over short slate sleeves, with a continuous vented hem."""
-    B=s.B; width=.315 if male else .30
+    """Plain close leather jerkin with simple sleeves for the first Paladin tier."""
+    B=s.B; width=.270 if male else .250
     spine=["Root_M","BackA_M","BackB_M","Chest_M"]
     s.tube("Novice fitted gambeson",[B[b] for b in spine]+[offset(B["Chest_M"],y=.21),offset(B["Neck_M"],y=-.025)],
-           [width*.78,width*.80,width*.86,width*.94,width*.94,.145],
-           [.158,.162,.170,.179,.158,.12],spine+["Chest_M","Neck_M"],11,sides=12)
-    s.tube("Novice leather belt",[offset(B["Root_M"],y=.075),offset(B["Root_M"],y=.135)],[width*.87]*2,[.190]*2,["Root_M"]*2,0,sides=16)
+           [width*.78,width*.80,width*.85,width*.91,width*.91,.130],
+           [.122,.126,.133,.140,.126,.105],spine+["Chest_M","Neck_M"],11,sides=12)
+    s.tube("Novice leather belt",[offset(B["Root_M"],y=.075),offset(B["Root_M"],y=.118)],[width*.73]*2,[.140]*2,["Root_M"]*2,0,sides=14)
     chest=B["Chest_M"]
     # A shallow center opening and paired stitches give the jack construction
     # detail without a floating plate or ornamental heraldry.
@@ -189,27 +189,16 @@ def novice_armor(s,male):
         s.tube("Novice leather jack stitch",[offset(chest,x=-.022,y=y,z=.183-y*.08),offset(chest,x=.022,y=y-.013,z=.183-y*.08)],
                [.003]*2,[.003]*2,["Chest_M"]*2,3,sides=4,axis=(0,1,0))
     novice_tunic_hem(s,width)
-    s.ellipsoid("Novice iron belt buckle",offset(B["Root_M"],y=.105,z=.202),(.040,.031,.012),"Root_M",1,sides=4)
+    s.ellipsoid("Novice iron belt buckle",offset(B["Root_M"],y=.098,z=.150),(.030,.024,.009),"Root_M",1,sides=4)
     for side,sign in [("R",1),("L",-1)]:
         scap,shoulder,elbow,wrist=[f"{x}_{side}" for x in ["Scapula","Shoulder","Elbow","Wrist"]]
-        s.tube("Novice mail shoulder "+side,[B[scap],B[shoulder]],[.155,.17],[.145,.16],[scap,shoulder],0)
-        # One compact iron cap covers each shoulder without ornamental edging.
-        for layer in range(1):
-            center=offset(B[shoulder],x=sign*layer*.065,y=.085-layer*.065)
-            s.tube("Novice plain shoulder cap "+side+str(layer),[offset(center,y=-.028),offset(center,y=.005),offset(center,y=.037)],[.173,.163,.125],[.169,.154,.123],[shoulder]*3,1,sides=8)
-        sleeve_end=B[shoulder]+(B[elbow]-B[shoulder])*.76
-        sleeve_mid=B[shoulder]+(B[elbow]-B[shoulder])*.46
+        sleeve_end=B[shoulder]+(B[elbow]-B[shoulder])*.64
+        sleeve_mid=B[shoulder]+(B[elbow]-B[shoulder])*.38
         s.tube("Novice short padded sleeve "+side,[B[shoulder],sleeve_mid,sleeve_end],
-               [.155,.165,.16],[.15,.16,.155],[shoulder,shoulder,{shoulder:.8,elbow:.2}],0,sides=10)
+               [.108,.114,.109],[.104,.110,.105],[shoulder,shoulder,{shoulder:.8,elbow:.2}],11,sides=10)
         direction=(B[elbow]-B[shoulder]);direction/=np.linalg.norm(direction)
         s.tube("Novice rolled sleeve hem "+side,[sleeve_end-direction*.025,sleeve_end+direction*.015],
-               [.172]*2,[.166]*2,[{shoulder:.8,elbow:.2}]*2,1,sides=10)
-        hip,knee,ankle=[f"{x}_{side}" for x in ["Hip","Knee","Ankle"]]
-        s.tube("Novice mail leggings "+side,[B[hip],B[knee],B[ankle]],[.155,.103,.079],[.145,.097,.074],[hip,knee,ankle],0)
-        s.tube("Novice knee articulation "+side,[offset(B[knee],y=.045),offset(B[knee],y=-.04)],[.115,.11],[.112,.105],[knee]*2,0,sides=8)
-        for toe in ["MiddleToe1","MiddleToe2"]:
-            bone=f"{toe}_{side}"
-            if bone in B:s.tube("Novice toe articulation "+bone,[offset(B[bone],z=-.035),offset(B[bone],z=.045)],[.070,.060],[.018,.015],[bone]*2,11,sides=8)
+               [.116]*2,[.112]*2,[{shoulder:.8,elbow:.2}]*2,11,sides=10)
     if "Head_M" in B:s.ellipsoid("Novice rear collar",offset(B["Head_M"],y=-.08,z=-.14),(.09,.035,.022),"Head_M",11,sides=6)
 
 
@@ -217,21 +206,21 @@ def novice_armor(s,male):
 
 
 def novice_boots(s):
-    """Soft leather shafts and round toes, without plate armor ornament."""
+    """Slim travel boots with a low welt and no plate silhouette."""
     B=s.B
     for side in ["R","L"]:
         hip,knee,ankle,toe,tip=[f"{p}_{side}" for p in ["Hip","Knee","Ankle","MiddleToe1","MiddleToe2"]]
-        s.tube("Novice trouser leg "+side,[B[hip],B[knee],B[ankle]],[.105,.090,.075],[.095,.085,.07],[hip,knee,ankle],0,sides=8)
-        top=offset(B[knee],y=-.10)
-        s.tube("Novice leather boot shaft "+side,[top,offset(B[ankle],y=.16),B[ankle]],[.14,.13,.125],[.14,.13,.12],[knee,ankle,ankle],11,sides=8)
-        s.tube("Novice folded boot cuff "+side,[offset(top,y=.025),offset(top,y=-.035)],[.15,.148],[.15,.145],[knee]*2,11,sides=8)
+        s.tube("Novice trouser leg "+side,[B[hip],B[knee],B[ankle]],[.092,.078,.064],[.086,.074,.060],[hip,knee,ankle],0,sides=8)
+        top=offset(B[knee],y=-.13)
+        s.tube("Novice leather boot shaft "+side,[top,offset(B[ankle],y=.13),B[ankle]],[.112,.105,.102],[.110,.102,.098],[knee,ankle,ankle],11,sides=8)
+        s.tube("Novice folded boot cuff "+side,[offset(top,y=.018),offset(top,y=-.022)],[.118,.115],[.115,.112],[knee]*2,11,sides=8)
         floor=B[toe][1]-.045
         # Fixed horizontal sections keep the sole level instead of twisting a tube along the instep.
-        sections=[(B[ankle][2]-.082,.105,.122,ankle),
-                  (B[ankle][2]+.015,.125,.165,ankle),
-                  (B[toe][2]+.025,.13,.115,toe),
-                  (B[tip][2]+.038,.105,.075,tip),
-                  (B[tip][2]+.065,.071,.054,tip)]
+        sections=[(B[ankle][2]-.072,.088,.102,ankle),
+                  (B[ankle][2]+.012,.105,.137,ankle),
+                  (B[toe][2]+.020,.108,.094,toe),
+                  (B[tip][2]+.030,.087,.065,tip),
+                  (B[tip][2]+.052,.060,.047,tip)]
         rings=[]
         for z,w,h,bone in sections:
             ring=[(-w*.78,.016),(-w,.036),(-w*.88,h*.78),(-w*.48,h),
@@ -265,7 +254,7 @@ def novice_helmet():
             angle=2*np.pi*j/n;x,z=np.cos(angle),np.sin(angle)
             base=.275+.025*max(z,0)-.10*max(-z,0)
             y=base*(1-row/4)+.260*(row/4)+height
-            ring.append(np.array([x*.237*radius,y,z*.205*radius-.045]))
+            ring.append(np.array([x*.214*radius,y,z*.184*radius-.040]))
         rings.append(ring)
     start=len(s.data["positions"])
     for row in range(3):
@@ -273,7 +262,7 @@ def novice_helmet():
             k=(j+1)%n
             s.triangle([rings[row][j],rings[row+1][j],rings[row+1][k]],["Head_M"]*3,1)
             s.triangle([rings[row][j],rings[row+1][k],rings[row][k]],["Head_M"]*3,1)
-    apex=np.array([0,.487,-.045])
+    apex=np.array([0,.462,-.040])
     for j in range(n):
         k=(j+1)%n
         s.triangle([rings[-1][j],apex,rings[-1][k]],["Head_M"]*3,1)

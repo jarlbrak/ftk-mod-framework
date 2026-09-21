@@ -48,8 +48,12 @@ def main():
             assert (weights>=0).all() and np.allclose(weights.sum(axis=1),1,atol=1e-6)
             assert (joints < len(names)).all(),(key,"joint outside binding palette")
             unused={name for index,name in enumerate(names) if index not in set(joints[weights>0].tolist())}
-            # Novice leaves hands exposed while retaining the exact native binding palette.
-            expected_unused=({"Wrist_R","Wrist_L","ThumbFinger1_R","ThumbFinger1_L"}&set(names)
+            # The plain Novice jerkin deliberately leaves native hands, shoulder seams,
+            # and the lower-leg palette to the native body and separate boot model.
+            expected_unused=({"Scapula_R","Scapula_L","Wrist_R","Wrist_L",
+                              "ThumbFinger1_R","ThumbFinger1_L","Knee_R","Knee_L",
+                              "Ankle_R","Ankle_L","MiddleToe1_R","MiddleToe2_R",
+                              "MiddleToe1_L","MiddleToe2_L"}&set(names)
                              if item["part"]=="armor" and item["outfit"]=="novice" else set())
             assert unused==expected_unused,(key,"unexpected unweighted bones",unused)
         else:assert "skins" not in gltf
