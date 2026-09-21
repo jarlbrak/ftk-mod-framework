@@ -64,6 +64,17 @@ public sealed partial class RuntimeModelTest
                 {"count",entry.Value.m_Count}});
         }
         EnemyDummy enemy=dummy as EnemyDummy;
+        JArray schedule=new JArray();
+        JArray weaponProficiencies=new JArray();
+        if(enemy!=null)
+        {
+            if(enemy.m_AttackScheduleList!=null)
+                foreach(AttackSchedule.AttackType attack in enemy.m_AttackScheduleList)
+                    schedule.Add(new JObject{{"type",attack.ToString()},{"proficiencyIndex",(int)attack}});
+            if(enemy.m_EventListener!=null && enemy.m_EventListener.m_Weapon!=null)
+                foreach(FTK_proficiencyTable.ID proficiency in enemy.m_EventListener.m_Weapon.GetProficiencyIDs())
+                    weaponProficiencies.Add(new JObject{{"id",(int)proficiency},{"name",proficiency.ToString()}});
+        }
         CharacterStats stats=dummy.m_CharacterOverworld==null?null:dummy.m_CharacterOverworld.m_CharacterStats;
         JToken maxHp=enemy!=null && enemy.m_EnemyCombat!=null?new JValue(enemy.m_EnemyCombat.GetHealthTotal()):
             stats!=null?new JValue(stats.MaxHealth):new JValue((object)null);
@@ -91,7 +102,9 @@ public sealed partial class RuntimeModelTest
                 {"useFirstProfAsRegular",enemy.m_EnemyCombat.m_UseFirstProfAsReg},
                 {"proficiencyCooldown",enemy.m_ProfCoolDown},
                 {"hasAttackSchedule",enemy.m_AttackSchedule!=null},
-                {"scheduleIndex",enemy.m_AttackScheduleIndex}}},
+                {"scheduleIndex",enemy.m_AttackScheduleIndex},
+                {"schedule",schedule},{"weaponProficiencies",weaponProficiencies},
+                {"shuffleSchedule",enemy.m_AttackSchedule!=null && enemy.m_AttackSchedule.m_Shuffle}}},
             {"storedCombat",new JObject{
                 {"scope","Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution."},
                 {"attackInfo",GuardianStoredDamage(dummy.m_AttackInfo)},

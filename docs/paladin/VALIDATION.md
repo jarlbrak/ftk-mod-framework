@@ -21,7 +21,10 @@ records 39 to 34 HP, native Damaged and one-handed recoil/recovery. The fixture
 redirects the enemy and supplies damage, so it is not ordinary combat evidence.
 [Death attempts](novice-tailored-death-attempt.json) retained a safely rejected
 multi-target fixture and a later dodge against another hero; neither establishes
-death motion. Death, broader fit and user approval remain open.
+death motion. A later [native death observation](novice-tailored-native-death-observation.json)
+records the equipped female Paladin at HP 0 after a naturally selected wolf bite
+and an on-screen fall. It has no paired per-frame studio capture, so full death-motion
+fit, broader fit and user approval remain open.
 
 The preceding `85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`
 archive retains its [seven appearance previews](novice-bare-wrist-fit.json),

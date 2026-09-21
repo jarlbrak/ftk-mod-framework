@@ -28,6 +28,10 @@ class GuardianObservationBoundary(unittest.TestCase):
         self.assertIn('{"armorEffectPresent",present}', SOURCE)
         self.assertIn('{"fid",GuardianObservedFid(dummy.FID)}', SOURCE)
         self.assertIn('{"armorDummies",armorDummies}', SOURCE)
+        for member in ('m_AttackScheduleList', 'm_Weapon', 'GetProficiencyIDs',
+                       'm_AttackScheduleIndex', 'm_Shuffle', 'm_ProfCoolDown'):
+            self.assertIn(member, SOURCE)
+        self.assertIn('Observed selection inputs only; no attack selected or RNG consumed.', SOURCE)
 
     def test_stored_damage_and_ward_state_are_read_only_snapshots(self):
         for member in ('m_AttackInfo', 'm_DamageInfo', 'm_PostAttackHealthMod',

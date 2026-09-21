@@ -89,7 +89,8 @@ proficiency flags and category presence across active and inactive Guard trials.
 No native method that applies effects or damage is invoked by these snapshots.
 
 Enemy entries also expose `enemyAttackSelection`: row ID, proficiency probability,
-use-first-proficiency flag, cooldown, and schedule presence/index. Player entries
+use-first-proficiency flag, cooldown, schedule presence/index, the current
+schedule order, weapon proficiency IDs, and schedule shuffle flag. Player entries
 have a null value. These are current inputs, not a prediction or selected attack.
 The observer does not advance the schedule, consume RNG, or toggle cooldown.
 Installed `EnemyDummy` selection code gives schedules precedence over random
