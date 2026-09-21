@@ -1,0 +1,40 @@
+{
+  "schema": "ftkmf.paladin-current-package-world-start.v2",
+  "observedAt": "2026-09-21",
+  "candidateArchiveSha256": "06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db",
+  "runtime": {
+    "frameworkSha256": "5ee7ba66afa24d278ab8f9d2c580c6d71cdfed7ad75b16b43c6350f387db44e7",
+    "helperSha256": "f61588391913b910c4de8f915947cdee53a97ceef2caa348005454684ee6293a",
+    "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+  },
+  "environment": {
+    "root": "scratch/paladin-game",
+    "mode": "task-owned isolated macOS copy, package-only mode",
+    "session": "4916abfcee144969941f40365fdfbb8a",
+    "savePath": "save-model-test-96beb4ee2018bc76",
+    "deployment": "paladin-current-rebuilt-20260921-145239"
+  },
+  "nativeRoute": {
+    "gameDefinition": "LostCiv",
+    "mode": "single-player",
+    "paladinClassId": 14,
+    "title": "The inspected native ButtonRoot/New/playButton was selected before one MainScreen.OnNewGame callback.",
+    "characterCreation": "Native GameConfig.OnStartGame reached character creation with a Paladin classId 14 preview.",
+    "partyStart": "The inspected native Start control dispatched uiStartGame.EnterFahrul once and GameStarted was observed true.",
+    "prologue": "The intro was continued with native UI input. Two identity-pinned native StoryQuestMessage callbacks completed the initial story setup."
+  },
+  "worldObservation": {
+    "paladinHeroInstanceId": -561124,
+    "outsideCombat": true,
+    "inputMode": "InGameMovement",
+    "slots": {
+      "LeftHand": { "itemId": 1255876506, "contentId": "paladin_shield_novice" },
+      "RightHand": { "itemId": 1223789468, "contentId": "paladin_hammer_1h_novice" },
+      "Head": { "itemId": 1498997754, "contentId": "paladin_helmet_novice" },
+      "Body": { "itemId": 1166925164, "contentId": "paladin_armor_novice" },
+      "Foot": { "itemId": 1280940834, "contentId": "paladin_boots_novice" }
+    },
+    "avatarLease": { "acquired": true, "applied": true, "references": 1 }
+  },
+  "scope": "This replaces the current-helper world-start runtime identities with freshly built framework and helper binaries. It proves the exact current local archive starts a native single-player Paladin and equips its five intended Novice items after native title, party and prologue flow. It does not prove save/reload, ordinary acquisition, all appearances, animation, later equipment tiers, online co-op, or public publication."
+}
