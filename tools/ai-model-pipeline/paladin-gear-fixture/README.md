@@ -20,8 +20,9 @@ records every source and copied file hash and the exact content delta.
 ## Explicit fixture delta
 
 - Existing class `paladin`: replace only `fields.startitems` with all 36 equipment
-  keys, each appearing once. Preserve its original starting weapon, stats,
-  Guardian capability and original male/female model declarations.
+  keys, each appearing once. Preserve its original starting weapon, stats and
+  Guardian capability. Paladin retains native FTK bodies, faces and hair; this
+  fixture supplies only the original equipment assets.
 - Add `paladin_gear_fixture_hunter`: `kind: class`, `template: hunter`, display name
   `Gear Fixture Hunter`, `guardian: false`, and fields `dlc: None` plus the same
   36 `startitems`. The native Hunter appearance and starting weapon remain

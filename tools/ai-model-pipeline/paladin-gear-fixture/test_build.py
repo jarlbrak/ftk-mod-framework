@@ -17,6 +17,7 @@ class FixtureBoundaries(unittest.TestCase):
         self.assertEqual(original, before)
         self.assertEqual(len(gear), 36)
         self.assertEqual(len(actual['entries']), 40)
+        self.assertNotIn('playerModels', next(row for row in actual['entries'] if row['id'] == 'paladin'))
         expected = copy.deepcopy(original)
         next(row for row in expected['entries'] if row['id'] == 'paladin')['fields']['startitems'] = gear
         self.assertEqual(actual['entries'][:-1], expected['entries'])

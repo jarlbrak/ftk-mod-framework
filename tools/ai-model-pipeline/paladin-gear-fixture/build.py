@@ -23,6 +23,9 @@ def fixture_content(source):
     assert len(gear) == len(set(gear)) == 36
     assert len(rows) == 39 and not any(row['id'] == HUNTER for row in rows)
     paladin = next(row for row in rows if row['id'] == 'paladin')
+    # The production Paladin deliberately uses native FTK bodies, faces and hair.
+    # This visual/equipment fixture must never revive the superseded body override route.
+    assert 'playerModels' not in paladin
     previous = copy.deepcopy(paladin['fields']['startitems'])
     paladin['fields']['startitems'] = gear[:]
     rows.append({'kind': 'class', 'id': HUNTER, 'template': 'hunter',
