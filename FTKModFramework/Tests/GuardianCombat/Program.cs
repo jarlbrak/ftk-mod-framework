@@ -184,6 +184,35 @@ internal static class Program
         Check(blockedHeal == 8, "armor absorbed landed hit heals eight percent");
         Check(blockedState.ResolveFocusedHitHealing("g", "blocked-attack", "ally", 28, 100, true, true,
             GuardianFocusedHit.Landed(0, CharacterDummy.AttackResponse.MagicBlock)) == 0, "second absorbed splash impact cannot repeat healing");
+        // One committed splash attack can contain misses, dodges, and absorbed hits.
+        // Each guardian gets one heal, even after active protection expires.
+        foreach (int bonus in new[] { 2, 4 })
+        {
+            var splash = new GuardianCombatState();
+            splash.TryGuard("first", "ally", true, true);
+            splash.TryGuard("second", "ally", true, true);
+            splash.ExpireGuard("first");
+            string attack = "mercy-splash";
+            Check(splash.ResolveFocusedHitHealing("first", attack, "ally", 30, 39, true,
+                GuardianFocusedHit.EligibleAttempt(1, 0, false, false),
+                GuardianFocusedHit.Landed(0, CharacterDummy.AttackResponse.Block), bonus) == 0,
+                "Mercy zero-slot Block cannot heal");
+            Check(splash.ResolveFocusedHitHealing("first", attack, "ally", 30, 39, true, true,
+                GuardianFocusedHit.Landed(0, CharacterDummy.AttackResponse.Dodge), bonus) == 0,
+                "Mercy dodged splash target cannot heal or consume later hit");
+            int expected = bonus == 2 ? 3 : 4;
+            int healed = splash.ResolveFocusedHitHealing("first", attack, "ally", 30, 39, true,
+                GuardianFocusedHit.EligibleAttempt(3, 1, false, false),
+                GuardianFocusedHit.Landed(0, CharacterDummy.AttackResponse.MagicBlock), bonus);
+            Check(healed == expected, "Mercy later absorbed hit heals after Guard expiry without multiplying Focus");
+            Check(splash.ResolveFocusedHitHealing("first", attack, "ally", 30 + healed, 39, true, true,
+                GuardianFocusedHit.Landed(10, CharacterDummy.AttackResponse.Damaged), bonus) == 0,
+                "Mercy later damaging splash target cannot repeat healing");
+            Check(splash.ResolveFocusedHitHealing("second", attack, "ally", 38, 39, true, true, true, bonus) == 1,
+                "second guardian has independent capped healing for same attack identity");
+            Check(splash.ResolveFocusedHitHealing("second", attack, "ally", 30, 39, true, true, true, bonus) == 0,
+                "capped Mercy healing consumes the attack opportunity");
+        }
         Console.WriteLine("PASS GuardianCombat: " + checks + " checks");
         if (args.Length == 2 && args[0] == "--assembly") NativeSignatures.Verify(args[1]);
         else if (args.Length != 0) throw new Exception("Usage: GuardianCombat [--assembly PATH]");
