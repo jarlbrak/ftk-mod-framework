@@ -15,8 +15,10 @@ jack and travel helm, increasingly articulated guardian armor, and distinct Merc
 Censure and Verdict endgame sets. Source geometry, six helmet mounts and the
 12 derived armor/boot card meshes passed their current deterministic validation.
 The source exports were checked on native Female and Male Party Select avatars
-using an isolated visual-fit fixture. Those visual checks do not prove current
-package equipment, motion, all-race fit or ordinary acquisition.
+using an isolated visual-fit fixture. A later [current-asset combat smoke receipt](novice-combat-studio-current.json)
+now records the equipped current Novice pieces on native Male and Female combat
+avatars. These bounded visual checks do not prove motion, all-race fit, ordinary
+acquisition or final art approval.
 
 The preceding `85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`
 archive retains its [seven appearance previews](novice-bare-wrist-fit.json),
@@ -71,7 +73,9 @@ Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes. T
 current [Verdict race-fit receipt](verdict-race-fit-current.json) covers the same
 seven native appearances at a three-quarter angle with the final Verdict exports.
 These are pose/fit observations, not full animation, package-equipment or all-set
-nonhuman acceptance. Final art approval remains separate. See [redesign notes](NOVICE-REDESIGN.md).
+nonhuman acceptance. The later [current Novice combat smoke](novice-combat-studio-current.json)
+adds Male front and back plus Female front views with the current package assets.
+Final art approval remains separate. See [redesign notes](NOVICE-REDESIGN.md).
 
 ## Current evidence matrix
 
@@ -95,7 +99,7 @@ outcomes and controlled loot are identified separately from ordinary acquisition
 | Censure | [Both weapon effects](censure-live.json) apply armor -4/-6 and expire; [native lifetime](censure-native-lifetime.json) establishes timed combat expiry | Slot/damage variants and equipment changes remain separate checks; not target-turn expiry |
 | Ward | [Representative native group Poison](ward-live.json): protected Paladins reject effect, unguarded non-Guardian wearing same shield receives it | No live proof of all four categories or damaging Poison bite; no pre-transform outcome or poison-counter snapshot, individual immunity not separately queried |
 | Verdict | [Native retaliation](verdict-live.json): one 4-damage retaliation for a two-target attack and unguarded control | Not every outcome/target combination; stronger weapon damage remains a separate comparison |
-| Current art and resources | Current source, mount and card-display checks passed; isolated Female/Male Party Select visual-fit observations cover the current six tiers | Current package equipment, all-race fit, motion, rigid-instance disposal and final visual acceptance remain open |
+| Current art and resources | Current source, mount and card-display checks passed; [current Novice combat smoke](novice-combat-studio-current.json) verifies equipped Male/Female current assets in native combat | All-race fit, current motion, other sets, rigid-instance disposal and final visual acceptance remain open |
 | Marketplace UI | [Managed UI](managed-ui-native.json), [title recreation](mods-title-recreation-native.json), [same-process resume](same-process-resume-observation.json) establish their pinned revisions | Earlier package bytes; current CLI lifecycle is separate. No public download claim |
 | Online and platforms | Unverified | Explicit beta disclosure; production requires community host/client evidence. macOS trials do not establish other platforms |
 
@@ -107,7 +111,7 @@ The class is `paladin`; actions are `paladin_censure_fracture` and
 
 | Set | Acquisition levels | Current visual evidence |
 | --- | --- | --- |
-| novice | 0-1 | Tailored candidate: male/female front and angled previews, seven appearance angled checks; motion and approval pending |
+| novice | 0-1 | Current package: Male front/back and Female front in native combat; prior seven-appearance angled checks; motion and approval pending |
 | oathkeeper | 2-3 | Native Female/Male front and three-quarter revision-3 previews |
 | highward | 4-6 | Native Female/Male front and three-quarter revision-3 previews |
 | mercy | 7-13 | Same previews; seven native appearances in a separate front-view trial |
@@ -273,6 +277,10 @@ behavior.
 [Incapacity fixture](incapacity-live.json) observes native stun cancelling active Guard and native effect removal restoring eligibility without restoring Guard, while retaining designation and ready rescue. Petrification did not apply in the direct fixture because native surviving-hit context was absent; it remains a live gate. The synchronous helper now rejects that unsupported path.
 
 ### Novice combat studio framing
+
+The [current-asset combat smoke receipt](novice-combat-studio-current.json) records the
+actual equipped Male and Female Novice pieces in a native combat session, with
+front and back views. It is a one-frame visual smoke test, not motion or approval.
 
 The [first supplemental front-view capture](novice-combat-studio-framing.json)
 completed 100 frames but clipped during the bent attack pose. Native screen
