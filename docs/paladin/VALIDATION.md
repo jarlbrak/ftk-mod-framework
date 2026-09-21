@@ -14,8 +14,10 @@ It replaces the Novice chest sheet and separate apron with a fitted leather jack
 and continuous short hem, and rebuilds the helmet as one rounded shell. Its
 [offline review](novice-tailored-candidate.json) records geometry and package
 checks only. The [native follow-up](novice-tailored-native-preview.json) lowers
-the helmet and records seven static appearance previews. Motion, broader fit and
-user approval remain open.
+the helmet and records seven static appearance previews. A [female two-handed
+attack capture](novice-tailored-female-attack.json) reviews wind-up, strike, recovery
+and victory with current meshes. Received-hit, death, broader fit and user
+approval remain open.
 
 The preceding `85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a`
 archive retains its [seven appearance previews](novice-bare-wrist-fit.json),

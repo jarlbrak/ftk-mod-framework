@@ -1,0 +1,68 @@
+{
+  "schema": "ftkmf.paladin-tailored-female-attack.v1",
+  "status": "bounded-female-two-handed-motion-reviewed",
+  "session": "c7410d7278b645c28ed7f41f0bbeb75f",
+  "captureId": "a989ab4535b047dcb82b00629f94f4d2",
+  "captureReceiptSha256": "d551280a2ec7f0419dfb88d19f030617d15d3c34435e6da90f1d927e4745e6fb",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "41897eaf3f7e8635e9df6fa727cb8fc5e409a4f3505c43020c43af26257073bc",
+  "modelSha256": {
+    "paladin-female-novice-armor.glb": "abc93ea95cc3b8f6bb2c8f4f63b337ae9cba60bb9385c690fe3011ee35e88341",
+    "paladin-novice-helmet.glb": "8348466c0424d38c0dc8e11bfe2dd48e19f66b8bcd6a0b347366504b11476df2",
+    "paladin-novice-boots.glb": "2b42ca9217b2dfd46bfe859cea8c20ce026dad9ddf4a4dbbea62c0c9fbc66fb2"
+  },
+  "frames": 100,
+  "timingMode": "offline-fixed-step-gameplay",
+  "reviewedFrames": [
+    {
+      "index": 15,
+      "studioSha256": "daf72c82dec340daf3a2de46d283de400c97966cc0386a4f910c6f40298840a4",
+      "clip": "attackProf_blunt2H",
+      "normalizedTime": 0.13612499833106995
+    },
+    {
+      "index": 20,
+      "studioSha256": "8d6b91e109755119239138f9f18f78f85561dbce928d6904a0d1b0b09b9d1ced",
+      "clip": "attackProf_blunt2H",
+      "normalizedTime": 0.36299997568130493
+    },
+    {
+      "index": 25,
+      "studioSha256": "3890a383f688b0487d3e1057e5f499cc4520dd8491f22d9b7389230fc152ceba",
+      "clip": "attackProf_blunt2H",
+      "normalizedTime": 0.5898749232292175
+    },
+    {
+      "index": 32,
+      "studioSha256": "44677956fa429a9b0893dff6810a20c3f55db70f0dca9553f66146ab512a1159",
+      "clip": "attackProf_blunt2H",
+      "normalizedTime": 0.9074998497962952
+    },
+    {
+      "index": 60,
+      "studioSha256": "9a4a1bf52971bd4cb84dd53d3e44583e38eb2ec886b50ed9a71f2804d73da997",
+      "clip": "victory_blunt2H",
+      "normalizedTime": 0.6156787872314453
+    }
+  ],
+  "action": "Owned two-handed Novice hammer equipped before native Ready. Hunter passed. One primary attack submitted through native Attack after capture began. No damage, RNG, Focus or animation outcome fixture.",
+  "observations": [
+    "attackProf_blunt2H spans frames 14 through 33, normalized progress 0.090750 through 0.952875, followed by idle and victory.",
+    "Reviewed wind-up, strike, recovery and victory show attached torso, sleeves, belt and hem without obvious chest intersection.",
+    "All 100 paired studio frames validated against their hashes. Native screen frames retained.",
+    "Timberwolf HP changes from 8 to 0 after the single native attack."
+  ],
+  "limitations": [
+    "Selected frames, one female two-handed controller only. Not every pose or appearance.",
+    "Raised hammer extends beyond the frame during victory.",
+    "No received-hit or death coverage, all-set acceptance, user art approval or online claim.",
+    "Isolated all-gear inventory fixture and staged mesh bytes; not normal acquisition or complete archive deployment."
+  ],
+  "trialReceipts": {
+    "before.json": "5825b797e5b4bd1c034cee0784d9510d418b3f4ef48631c0f41320c173155c04",
+    "at-submit.json": "5825b797e5b4bd1c034cee0784d9510d418b3f4ef48631c0f41320c173155c04",
+    "attack-intent.json": "0325c02c492efb7ee5b97076f05678c71e86f2d5b24e66cd38b2c73f847ed41c",
+    "attack-response.json": "c44422a181e721072ff356ce6d774a4cc8cba59007e78ed768fbf1b3859084b4",
+    "after.json": "22eb70a47507e61f5fcc45cb566302456fd959c536c9dc9966c5303c92508a97"
+  }
+}
