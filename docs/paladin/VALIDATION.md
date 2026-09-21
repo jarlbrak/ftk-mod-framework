@@ -36,7 +36,9 @@ Female and Male avatars, including front and three-quarter views in revision 3.
 Novice revision 3 and the first plain revision were subsequently rejected.
 The [fitted Novice candidate](novice-fitted-preview.json) now records native
 Female/Male three-quarter previews with a smaller chest plate, dark cloth and
-new leather boots. User approval, motion and nonhuman fit remain open. A
+new leather boots. The [seven-appearance Novice trial](novice-race-preview.json) records front
+views and restoration, with sleeve intersections and a Demon brow fit concern
+still open. User approval and motion remain open. A
 [Mercy race preview](native-race-preview.json) covers front views on Female, Male,
 Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes.
 These are pose/fit observations, not full animation or all-set nonhuman fit
