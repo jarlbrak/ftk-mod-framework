@@ -1,0 +1,67 @@
+{
+  "schema": "ftkmf.paladin-art-acceptance-audit.v1",
+  "date": "2026-09-21",
+  "status": "visual-direction-supported-live-coverage-incomplete",
+  "candidateArchiveSha256": "06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db",
+  "reviewedImages": [
+    {
+      "subject": "weapons-and-shields",
+      "localEvidence": "art-experiments/paladin-equipment/paladin-equipment-lineup.png",
+      "sha256": "873b1fa62de6ad8fd07c188f35c70b45ef36f760148b5ed023be82e40143c3d6",
+      "scope": "Offline 18-model study"
+    },
+    {
+      "subject": "novice",
+      "localEvidence": "scratch/paladin-novice-astra-art-review-20260921/novice-paladin-astra-native-review-board.png",
+      "sha256": "c90c8be3d23db0b9e5d0ee3cc01fe4f678f3fc410ae31e22e2da0c453b72cbcd",
+      "scope": "Native Female/Male static preview board"
+    },
+    {
+      "subject": "oathkeeper",
+      "localEvidence": "scratch/paladin-oathkeeper-astra-review-v2-20260921/oathkeeper-native-review-board.png",
+      "sha256": "58bf0826d8b25bcd9706f3ca17a36e79fba1d3e6c75dd91645d19238eb4f1690",
+      "scope": "Native Female/Male static preview board"
+    },
+    {
+      "subject": "highward",
+      "localEvidence": "scratch/paladin-highward-astra-review-20260921/highward-offline-review-board.png",
+      "sha256": "3ce1d694acced42fd97d5e8c2a768da5da67dbdaf1f3736dac41a8de441a5f70",
+      "scope": "Offline original equipment in bind pose"
+    },
+    {
+      "subject": "mercy",
+      "localEvidence": "scratch/paladin-mercy-astra-review-20260921/mercy-offline-review-board.png",
+      "sha256": "0a67d8dfad1e82273bc055cabe904022160017937e004c0aa1512dfce7372dd5",
+      "scope": "Offline original equipment in bind pose"
+    },
+    {
+      "subject": "censure",
+      "localEvidence": "scratch/paladin-censure-astra-review-20260921/censure-offline-review-board.png",
+      "sha256": "b8b042a5c244b25c89697ea84a091081617c79c2387ea0a06173b3d54d37e016",
+      "scope": "Offline original equipment in bind pose"
+    },
+    {
+      "subject": "verdict",
+      "localEvidence": "scratch/paladin-verdict-race-fit-20260921/verdict-race-fit-board.png",
+      "sha256": "aef3e994cf1947cb345c8180c9d49605adc1b205fa36c4da39851a639758d0c1",
+      "scope": "Native seven-appearance static visual fixture"
+    }
+  ],
+  "currentManifests": {
+    "art-experiments/paladin-characters/manifest.json": "345766a1b9c6db7527d82aeeb48ee1d55f024f65ce31867c12af9a2f932c8846",
+    "art-experiments/paladin-equipment/manifest.json": "3f088f154656d31471bb520a369d77bb23c0e0502381160afd1e6133a19d7d62",
+    "marketplace/packages/paladin-assets.provenance.json": "fa46e0692a5159ed140a6b864daf9aa08f1b2e7ea7297da898228cb5e0089cb2"
+  },
+  "checks": [
+    "18 original equipment GLBs and source manifests pass",
+    "24 apparel and helmet exports pass binary and binding checks",
+    "39-row package validator passes original asset hashes and references",
+    "Mercy, Censure and Verdict final source-review geometry pins match all current corresponding source, piece and GLB files"
+  ],
+  "limitations": [
+    "No new game session or motion capture was performed by this audit.",
+    "Native preview boards are bounded static observations and may use temporary starter-slot mappings.",
+    "Earlier native appearance and combat-motion receipts cannot establish coverage for replaced meshes.",
+    "This audit recommends retaining the art direction; it does not manufacture final user approval or all-race/all-animation acceptance."
+  ]
+}

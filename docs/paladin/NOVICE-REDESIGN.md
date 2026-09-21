@@ -54,5 +54,5 @@ The novice two-handed mesh follows Verigan's waisted silver barrel and paired
 gold bands. The one-handed mesh follows Ironfoe's rectangular steel frame,
 recessed bronze field and angular gold rune. Grip stations remain compatible
 with the existing mounts. Crimson grips coordinate with the selected Lightforge
-armor. The Mercy and Verdict source generators now use Sulfuras's red/gold spiked head and Menethil's
-split hooked steel head around luminous blue wells. These later revisions also require fresh offline and native validation.
+armor. The Mercy and Verdict source generators now use Menethil's split hooked steel
+head around luminous blue wells and Sulfuras's red/gold spiked head, respectively. These later revisions also require fresh offline and native validation.

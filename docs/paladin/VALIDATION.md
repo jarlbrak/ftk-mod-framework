@@ -10,7 +10,7 @@ and [earlier lifecycle observations](guard-lifecycle-observations.json).
 
 The current unpublished art candidate SHA-256 is
 `06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db`.
-It contains the accepted six-tier armor revision: a fitted, plain Novice leather
+It contains the current six-tier armor revision: a fitted, plain Novice leather
 jack and travel helm, increasingly articulated guardian armor, and distinct Mercy,
 Censure and Verdict endgame sets. Source geometry, six helmet mounts and the
 12 derived armor/boot card meshes passed their current deterministic validation.
