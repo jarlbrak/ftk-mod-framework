@@ -41,7 +41,9 @@ views and restoration, with sleeve intersections and a Demon brow fit concern
 recorded in that earlier revision. The [short-sleeve follow-up](novice-sleeve-fit.json)
 checks seven angled previews: those sleeve intersections are absent in the sampled
 poses and the raised Demon brow clears the forehead. Loose Undead wrist wraps,
-user approval and motion remain open. A
+user approval and broader movement coverage remain open. A [male Novice combat
+capture](novice-combat-motion.json) records a native one-handed swing and a
+no-HP-loss response animation, mostly viewed from behind. A
 [Mercy race preview](native-race-preview.json) covers front views on Female, Male,
 Undead, Cat, Demon, Fish and Goblin and restoration without inventory changes.
 These are pose/fit observations, not full animation or all-set nonhuman fit
