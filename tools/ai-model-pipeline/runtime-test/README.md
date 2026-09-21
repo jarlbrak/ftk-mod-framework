@@ -47,7 +47,9 @@ symlinked path. Do not manually replace a helper in a live process.
 
 Launch the copy with `FTK_MODEL_TEST=1`, `FTK_MODEL_TEST_ROOT` equal to its exact
 absolute directory, `FTK_AGENT_BRIDGE=1`, and a dedicated
-`FTK_AGENT_BRIDGE_PORT`. Preserve any required content opt-in such as
+`FTK_AGENT_BRIDGE_PORT`. On macOS, change into the isolated copy before invoking
+`./run_bepinex.sh`: the Apple-Silicon launcher can otherwise resolve `libdoorstop.dylib`
+relative to the caller directory after `arch` starts the game. Preserve any required content opt-in such as
 `FTK_MIREWARDEN_BODY=1`; otherwise a default procedural body can conceal the
 custom model. The directory must be directly beneath `scratch`, and may not be
 a symlink. Check framework, helper, and content-plugin hashes and the `MODEL TEST ACTIVE` log.
