@@ -191,15 +191,10 @@ def novice_armor(s,male):
         direction=(B[elbow]-B[shoulder]);direction/=np.linalg.norm(direction)
         s.tube("Novice rolled sleeve hem "+side,[sleeve_end-direction*.025,sleeve_end+direction*.015],
                [.172]*2,[.166]*2,[{shoulder:.8,elbow:.2}]*2,1,sides=10)
-        forearm=(B[wrist]-B[elbow]);forearm/=np.linalg.norm(forearm)
-        s.tube("Novice leather wrist wrap "+side,[B[wrist]-forearm*.045,B[wrist]+forearm*.018],
-               [.125,.12],[.12,.116],[wrist]*2,11,sides=10)
         hip,knee,ankle=[f"{x}_{side}" for x in ["Hip","Knee","Ankle"]]
         s.tube("Novice mail leggings "+side,[B[hip],B[knee],B[ankle]],[.155,.103,.079],[.145,.097,.074],[hip,knee,ankle],0)
         s.tube("Novice narrow split apron "+side,[offset(B[hip],x=-sign*.025,z=.17),offset(B[knee],x=-sign*.025,y=.20,z=.15)],[.10,.105],[.018,.018],[hip,knee],0,sides=4)
         s.tube("Novice knee articulation "+side,[offset(B[knee],y=.045),offset(B[knee],y=-.04)],[.115,.11],[.112,.105],[knee]*2,0,sides=8)
-        thumb=f"ThumbFinger1_{side}"
-        if thumb in B:s.ellipsoid("Novice thumb guard "+side,B[thumb],(.032,.034,.041),thumb,1,sides=6)
         for toe in ["MiddleToe1","MiddleToe2"]:
             bone=f"{toe}_{side}"
             if bone in B:s.tube("Novice toe articulation "+bone,[offset(B[bone],z=-.035),offset(B[bone],z=.045)],[.070,.060],[.018,.015],[bone]*2,11,sides=8)

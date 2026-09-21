@@ -46,7 +46,12 @@ def main():
             joints=read(attrs["JOINTS_0"]);weights=read(attrs["WEIGHTS_0"])
             assert np.allclose(weights,source["weights"],atol=1e-6) and np.array_equal(joints,source["joints"])
             assert (weights>=0).all() and np.allclose(weights.sum(axis=1),1,atol=1e-6)
-            assert set(joints[weights>0].tolist())==set(range(len(names))),(key,"unweighted bone")
+            assert (joints < len(names)).all(),(key,"joint outside binding palette")
+            unused={name for index,name in enumerate(names) if index not in set(joints[weights>0].tolist())}
+            # Novice leaves hands exposed while retaining the exact native binding palette.
+            expected_unused=({"Wrist_R","Wrist_L","ThumbFinger1_R","ThumbFinger1_L"}&set(names)
+                             if item["part"]=="armor" and item["outfit"]=="novice" else set())
+            assert unused==expected_unused,(key,"unexpected unweighted bones",unused)
         else:assert "skins" not in gltf
         results.append({"key":key,"status":"PASS","triangles":len(tri),"vertices":len(pos),"exactBinding":item["part"]!="helmet"})
     (OUT/"validation.json").write_text(json.dumps({"status":"PASS","scope":"Offline binary, original geometry and exact binding metadata only. Native assembly, placement, motion, appearance and lifetime remain unverified.","assets":results},indent=2)+"\n")

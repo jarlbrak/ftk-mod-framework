@@ -77,5 +77,8 @@ remain open. Previous Novice screenshots do not establish the new revision's fit
 Short sleeves now end above the elbow, retaining native forearms and race details.
 The helmet sits slightly higher to clear the Demon forehead. The
 [seven-appearance angled check](../../docs/paladin/novice-sleeve-fit.json) records
-the current candidate. Wrist wraps still appear loose on Undead; sampled preview
-fit does not establish combat movement or final art approval.
+the preceding candidate. Its fixed-size wrist wraps appeared loose on Undead.
+The subsequent geometry removes optional wrist and thumb guards, leaving native
+hands and forearms exposed. The [new seven-appearance preview](../../docs/paladin/novice-bare-wrist-fit.json)
+confirms the floating wrist rings are absent in sampled views. Combat chest
+clearance and final art acceptance remain open.
