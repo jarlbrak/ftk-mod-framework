@@ -22,6 +22,7 @@ class NativeSaveExitBoundaryTests(unittest.TestCase):
             'menu = uiOptionsMenu.Instance', 'menu.m_Showing',
             '!GameLogic.Instance.IsSinglePlayer()', 'EncounterSession.Instance.m_IsInCombat',
             'menu.GetType().GetField("m_SaveExit", Members)',
+            'NativeSaveExitControlActive(control)',
             'menu.GetType().GetMethod("OnSaveExit", Members, null, Type.EmptyTypes, null)',
             'callback.DeclaringType != menu.GetType()',
         ):
@@ -33,7 +34,7 @@ class NativeSaveExitBoundaryTests(unittest.TestCase):
             self.assertNotRegex(CODE, r'\b' + forbidden + r'\s*\(')
         self.assertIn('nativeSaveExitConsumed = true;', SOURCE)
         self.assertIn('Str(command, "inspectionToken") != nativeSaveExitToken', SOURCE)
-        self.assertIn('Int(command, "buttonInstanceId", 0) != button.GetInstanceID()', SOURCE)
+        self.assertIn('Int(command, "buttonInstanceId", 0) != control.GetInstanceID()', SOURCE)
 
 
 if __name__ == '__main__':
