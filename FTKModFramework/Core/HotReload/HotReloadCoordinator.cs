@@ -215,7 +215,7 @@ namespace FTKModFramework.Core.HotReload
             bool paladin = target.Packages.Count == 1 && target.Packages[0].Enabled;
             int count = 0;
             foreach (Dictionary<string, int> table in ContentRegistry.CustomIds.Values) count += table.Count;
-            if (count != (paladin ? 64 : 0)) throw new InvalidOperationException("Unexpected registered row count: " + count);
+            if (count != (paladin ? 92 : 0)) throw new InvalidOperationException("Unexpected registered row count: " + count);
             FTK_playerGameStartDB classes = TableManager.Instance.Get<FTK_playerGameStartDB>();
             for (int i = 0; i < classes.m_Array.Length; i++)
                 if ((int)FTK_playerGameStart.GetEnum(classes.m_Array[i].m_ID) != i)

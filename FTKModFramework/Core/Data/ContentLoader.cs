@@ -206,7 +206,8 @@ namespace FTKModFramework.Core.Data
                             kind == "proficiency" ? entry.Template == "musicArmorDown" :
                             kind == "weapon" ? entry.Template == "bluntSmithHammer" || entry.Template == "bluntWarHammer" :
                             kind == "item" && (entry.Template == "shieldblacksmith" || entry.Template == "armorHeavy1" ||
-                                entry.Template == "bootsHeavy3" || entry.Template == "helmetHeavy1");
+                                entry.Template == "bootsHeavy3" || entry.Template == "helmetHeavy1" ||
+                                entry.Template == "trinketDefense1" || entry.Template == "amuletVitality1");
                         if (!supportedTemplate) report.Error("Unsupported hot activation template: " + entry.Template);
                         if (string.IsNullOrEmpty(entry.Id) || !ids.Add(entry.Id) ||
                             (kind == "class" ? entry.Id != "paladin" : !entry.Id.StartsWith("paladin_", StringComparison.Ordinal)) ||
@@ -216,7 +217,7 @@ namespace FTKModFramework.Core.Data
                     }
                 }
                 string[] kinds = { "class", "proficiency", "weapon", "item" };
-                int[] required = { 1, 2, 12, 24 };
+                int[] required = { 1, 2, 14, 37 };
                 for (int i = 0; i < kinds.Length; i++)
                 {
                     int actual;
