@@ -54,7 +54,19 @@ namespace FTKModFramework.Core.Data
         /// <summary>Entry point called from the TableManager.Initialize postfix (after sample content).</summary>
         public static LoadResult Load(string contentRoot)
         {
-            if (!Marketplace.MarketplaceRuntime.CanDiscover)
+            return LoadInternal(contentRoot, Marketplace.MarketplaceRuntime.Active, false);
+        }
+
+        // Publication is intentionally side-effecting. The hot-reload coordinator must hold its
+        // quiescent lock and restore the complete definition/resource snapshot on any exception.
+        internal static LoadResult LoadCandidate(string contentRoot, Marketplace.ManagedSnapshot target)
+        {
+            return LoadInternal(contentRoot, target, true);
+        }
+
+        private static LoadResult LoadInternal(string contentRoot, Marketplace.ManagedSnapshot managed, bool strict)
+        {
+            if (!strict && !Marketplace.MarketplaceRuntime.CanDiscover)
             {
                 Plugin.Log.LogError("Data discovery skipped: activation helper is still running. Quit and repair the framework.");
                 return new LoadResult(0, 0, 0);
@@ -62,18 +74,26 @@ namespace FTKModFramework.Core.Data
             Stopwatch sw = Stopwatch.StartNew();
             ValidationReport report = new ValidationReport();
 
-            Marketplace.ManagedSnapshot managed = Marketplace.MarketplaceRuntime.Active;
             List<DiscoveredMod> mods = ModDiscovery.DiscoverAll(contentRoot, managed == null ? null : managed.ContentRoot, report);
+
+            if (strict) ValidateCandidateDiscovery(managed, mods, report);
 
             // Read persisted enabled states before any external code can execute.
             foreach (DiscoveredMod mod in mods)
-                ModRegistry.RegisterDiscovered(mod.Manifest, managed, Marketplace.MarketplaceRuntime.FindManaged(mod.Manifest.ModGuid));
+                ModRegistry.RegisterDiscovered(mod.Manifest, managed, FindManaged(managed, mod.Manifest.ModGuid));
 
             // SINGLE behaviour-DLL pre-pass (FR-7): load + reflect + register every mod's behaviorDll behaviours
             // BEFORE any content-registration phase. This is the sequencing invariant the Phase-2 WireBehavior
             // step (#31) depends on: a content entry's behavior:"name" can only resolve modGuid:name once the
             // pre-pass has registered it, so the resolution can never run ahead of registration.
-            BehaviorLoader.LoadAll(mods, report);
+            if (strict)
+            {
+                foreach (DiscoveredMod mod in mods)
+                    if (mod.BehaviorDllPath != null || !string.IsNullOrEmpty(mod.Manifest.BehaviorDll))
+                        report.Error("Behavior DLLs cannot participate in hot activation: " + mod.Manifest.ModGuid);
+                RequireComplete(report);
+            }
+            else BehaviorLoader.LoadAll(mods, report);
 
             List<PendingEntry> pending = CollectEntries(mods, report);
 
@@ -81,6 +101,18 @@ namespace FTKModFramework.Core.Data
             // load-order contract positional content depends on (a class registers at id == array index),
             // and it is also the determinism contract for the synthetic-id band (FR-1/FR-3/FR-8).
             pending.Sort(CompareEntries);
+            if (strict)
+            {
+                foreach (PendingEntry entry in pending)
+                {
+                    string kind = (entry.Entry.Kind ?? "").ToLowerInvariant();
+                    if (entry.ModGuid != "com.ftkmf.paladin" ||
+                        (kind != "class" && kind != "item" && kind != "weapon" && kind != "proficiency") ||
+                        !string.IsNullOrEmpty(entry.Entry.Behavior) || entry.Entry.PlayerModels != null)
+                        report.Error("Unsupported hot activation entry: " + entry.ModGuid + "/" + entry.Entry.Id);
+                }
+                RequireComplete(report);
+            }
 
             // Batch index rebuilds across BOTH phases: ContentRegistry.Register defers each DB's
             // MakeIndex while batching, so registering N rows into one DB costs ONE reindex at
@@ -98,7 +130,6 @@ namespace FTKModFramework.Core.Data
                     Cached c = RegisterPhase1(pe, seenIds, report);
                     if (c != null) cached.Add(c);
                 }
-
                 // --- Phase 2: resolve cross-file references, attach proficiencies, set localization ---
                 foreach (Cached c in cached) ResolvePhase2(c, report);
             }
@@ -113,9 +144,16 @@ namespace FTKModFramework.Core.Data
             // Capability registration validates exact live rows through indexed DB lookups.
             // EndBatch must publish those indexes before this phase. Guardian/modifier capabilities
             // may register their own rows, which are indexed immediately outside the base-row batch.
-            foreach (Cached c in cached) ApplyCapabilities(c, report);
+            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles = VerifiedFiles(managed);
+            foreach (Cached c in cached) ApplyCapabilities(c, report, verifiedFiles);
             sw.Stop();
 
+            if (strict)
+            {
+                RequireComplete(report);
+                if (cached.Count != pending.Count) throw new InvalidOperationException("Incomplete hot activation registration.");
+                return new LoadResult(cached.Count, pending.Count, sw.ElapsedMilliseconds);
+            }
             EmitParitySelfTest(cached);
             EmitBehaviorSelfTest(cached);
             EmitBehaviorDllSelfTest(cached);
@@ -125,6 +163,98 @@ namespace FTKModFramework.Core.Data
 
             // Return the SAME measured values the summary just logged: no second Stopwatch, no re-count.
             return new LoadResult(cached.Count, pending.Count, sw.ElapsedMilliseconds);
+        }
+
+        private static void ValidateCandidateDiscovery(Marketplace.ManagedSnapshot managed,
+            List<DiscoveredMod> mods, ValidationReport report)
+        {
+            if (managed != null && (string.IsNullOrEmpty(managed.ContentRoot) ||
+                !System.IO.Directory.Exists(managed.ContentRoot))) report.Error("Candidate content directory is missing.");
+            int expected = managed == null || managed.Packages == null ? 0 : managed.Packages.Count;
+            if (mods.Count != expected) report.Error("Candidate discovery does not match its package lock.");
+            HashSet<string> ids = new HashSet<string>(StringComparer.Ordinal);
+            foreach (DiscoveredMod mod in mods)
+            {
+                Marketplace.PackageDescriptor package = FindManaged(managed, mod.Manifest.ModGuid);
+                if (mod.Manifest.ModGuid != "com.ftkmf.paladin" || package == null ||
+                    managed == null || !mod.Manifest.FolderPath.StartsWith(managed.ContentRoot +
+                        System.IO.Path.DirectorySeparatorChar, StringComparison.Ordinal) ||
+                    mod.Manifest.Version != package.Version || mod.Manifest.CompatibilityReason != null ||
+                    !string.IsNullOrEmpty(mod.Manifest.BehaviorDll))
+                    report.Error("Candidate contains an unsupported or mismatched package: " + mod.Manifest.ModGuid);
+                Dictionary<string, int> counts = new Dictionary<string, int>(StringComparer.Ordinal);
+                // Inspect disabled packages too. Enablement must not hide unsupported capabilities.
+                foreach (string path in mod.ContentFilePaths)
+                {
+                    ContentFile file = ParseCandidateFile(path, report);
+                    if (file == null || file.Entries == null) { report.Error("Candidate content file has no entries."); continue; }
+                    foreach (ContentEntry entry in file.Entries)
+                    {
+                        if (entry == null) { report.Error("Null candidate entry."); continue; }
+                        string kind = (entry.Kind ?? "").ToLowerInvariant();
+                        int priorCount;
+                        counts.TryGetValue(kind, out priorCount);
+                        counts[kind] = priorCount + 1;
+                        Type tableType = kind == "class" ? typeof(FTK_playerGameStartDB) :
+                            kind == "item" ? typeof(FTK_itemsDB) : kind == "weapon" ? typeof(FTK_weaponStats2DB) :
+                            kind == "proficiency" ? typeof(FTK_proficiencyTableDB) : null;
+                        if (tableType != null && !string.IsNullOrEmpty(entry.Id))
+                            foreach (object native in (Array)Reflect.GetField(TableManager.Instance.Get(tableType), "m_Array"))
+                                if (string.Equals((string)Reflect.GetField(native, "m_ID"), entry.Id, StringComparison.OrdinalIgnoreCase))
+                                    report.Error("Candidate shadows a baseline row: " + entry.Id);
+                        bool supportedTemplate = kind == "class" ? entry.Template == "blacksmith" :
+                            kind == "proficiency" ? entry.Template == "musicArmorDown" :
+                            kind == "weapon" ? entry.Template == "bluntSmithHammer" || entry.Template == "bluntWarHammer" :
+                            kind == "item" && (entry.Template == "shieldblacksmith" || entry.Template == "armorHeavy1" ||
+                                entry.Template == "bootsHeavy3" || entry.Template == "helmetHeavy1");
+                        if (!supportedTemplate) report.Error("Unsupported hot activation template: " + entry.Template);
+                        if (string.IsNullOrEmpty(entry.Id) || !ids.Add(entry.Id) ||
+                            (kind == "class" ? entry.Id != "paladin" : !entry.Id.StartsWith("paladin_", StringComparison.Ordinal)) ||
+                            (kind != "class" && kind != "item" && kind != "weapon" && kind != "proficiency") ||
+                            !string.IsNullOrEmpty(entry.Behavior) || entry.PlayerModels != null)
+                            report.Error("Unsupported or duplicate candidate entry: " + entry.Id);
+                    }
+                }
+                string[] kinds = { "class", "proficiency", "weapon", "item" };
+                int[] required = { 1, 2, 12, 24 };
+                for (int i = 0; i < kinds.Length; i++)
+                {
+                    int actual;
+                    if (!counts.TryGetValue(kinds[i], out actual) || actual != required[i])
+                        report.Error("Paladin requires exactly " + required[i] + " " + kinds[i] + " entries.");
+                }
+            }
+            RequireComplete(report);
+        }
+
+        private static ContentFile ParseCandidateFile(string path, ValidationReport report)
+        {
+            try
+            {
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<ContentFile>(System.IO.File.ReadAllText(path),
+                    new Newtonsoft.Json.JsonSerializerSettings { MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Error });
+            }
+            catch (Exception error)
+            {
+                report.Error("Candidate content rejected: " + path + ": " + error.Message);
+                return null;
+            }
+        }
+
+        private static Marketplace.PackageDescriptor FindManaged(Marketplace.ManagedSnapshot managed, string guid)
+        {
+            if (managed != null && managed.Packages != null)
+                foreach (Marketplace.PackageDescriptor package in managed.Packages)
+                    if (package.ModGuid == guid) return package;
+            return null;
+        }
+
+        private static void RequireComplete(ValidationReport report)
+        {
+            // Existing startup tolerates partial rows and dropped fields. Hot activation cannot.
+            if (report.Errors.Count != 0 || report.Warnings.Count != 0)
+                throw new InvalidOperationException("Hot activation validation failed: " +
+                    string.Join("; ", report.Errors.ToArray()) + "; " + string.Join("; ", report.Warnings.ToArray()));
         }
 
         /// <summary>
@@ -365,7 +495,8 @@ namespace FTKModFramework.Core.Data
             ApplyLocalization(c);
         }
 
-        private static void ApplyCapabilities(Cached c, ValidationReport report)
+        private static void ApplyCapabilities(Cached c, ValidationReport report,
+            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles)
         {
             try
             {
@@ -383,7 +514,7 @@ namespace FTKModFramework.Core.Data
                 }
                 if (!string.IsNullOrEmpty(c.Entry.Icon))
                 {
-                    UnityEngine.Sprite icon = PackageIcons.Load(Asset(c, c.Entry.Icon));
+                    UnityEngine.Sprite icon = PackageIcons.Load(Asset(c, c.Entry.Icon, verifiedFiles));
                     if (c.Kind == "item" || c.Kind == "weapon")
                     {
                         FTK_itembase item = (FTK_itembase)c.Row;
@@ -405,7 +536,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry r = a.Renderers[i];
-                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model), Asset(c, r.Texture));
+                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model, verifiedFiles), Asset(c, r.Texture, verifiedFiles));
                     }
                     if (!Content.SetItemApparelMeshesFromGlb((FTK_items)c.Row, female, male, meshes)) throw new ArgumentException("item apparel registration rejected");
                 }
@@ -430,7 +561,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.ItemModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                     }
                     if (!Content.SetItemMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("item model registration rejected");
                 }
@@ -441,7 +572,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.DisplayModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                     }
                     if (!Content.SetItemDisplayMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("display model registration rejected");
                 }
@@ -457,13 +588,13 @@ namespace FTKModFramework.Core.Data
                         for (int i = 0; i < body.Length; i++)
                         {
                             ModelRendererEntry entry = model.Body[i];
-                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                         }
                         PlayerApparelMesh[] apparel = new PlayerApparelMesh[model.Apparel == null ? 0 : model.Apparel.Length];
                         for (int i = 0; i < apparel.Length; i++)
                         {
                             ModelRendererEntry entry = model.Apparel[i];
-                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model), Asset(c, entry.Texture));
+                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                         }
                         if (!Content.SetClassBodyMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, body, apparel))
                             throw new ArgumentException("player model registration rejected");
@@ -473,7 +604,7 @@ namespace FTKModFramework.Core.Data
                             for (int i = 0; i < backpack.Length; i++)
                             {
                                 ModelRendererEntry entry = model.Backpack[i];
-                                backpack[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model), Asset(c, entry.Texture));
+                                backpack[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                             }
                             if (!Content.SetClassBackpackMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, backpack))
                                 throw new ArgumentException("player backpack registration rejected");
@@ -484,10 +615,33 @@ namespace FTKModFramework.Core.Data
             catch (Exception e) { report.Error(c.Context + ": capability registration failed: " + e.Message); }
         }
 
-        private static string Asset(Cached c, string relativePath)
+        private static string Asset(Cached c, string relativePath,
+            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles)
         {
             if (string.IsNullOrEmpty(relativePath)) throw new ArgumentException("model and original texture paths are required");
+            Marketplace.MarketplaceGenerationFile file;
+            if (verifiedFiles != null)
+            {
+                if (!verifiedFiles.TryGetValue(c.ModGuid + "\n" + relativePath, out file))
+                    throw new ArgumentException("Managed asset is absent from the verified generation lock.");
+                return PackageModelPaths.RegisterVerified(c.ModGuid, c.PackageRoot, relativePath, file.Sha256, file.Size);
+            }
             return PackageModelPaths.Register(c.ModGuid, c.PackageRoot, relativePath);
+        }
+
+        private static Dictionary<string, Marketplace.MarketplaceGenerationFile> VerifiedFiles(Marketplace.ManagedSnapshot managed)
+        {
+            if (managed == null || !managed.FilesVerified) return null;
+            Dictionary<string, Marketplace.MarketplaceGenerationFile> result =
+                new Dictionary<string, Marketplace.MarketplaceGenerationFile>(StringComparer.Ordinal);
+            foreach (Marketplace.PackageDescriptor package in managed.Packages)
+            {
+                string prefix = package.PackageId + "/";
+                foreach (Marketplace.MarketplaceGenerationFile file in managed.Files)
+                    if (file != null && file.Path != null && file.Path.StartsWith(prefix, StringComparison.Ordinal))
+                        result[package.ModGuid + "\n" + file.Path.Substring(prefix.Length)] = file;
+            }
+            return result;
         }
 
         /// <summary>

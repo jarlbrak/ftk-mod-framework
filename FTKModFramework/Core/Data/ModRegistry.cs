@@ -89,6 +89,20 @@ namespace FTKModFramework.Core.Data
         private static readonly Dictionary<string, ModEntry> _byKey =
             new Dictionary<string, ModEntry>(System.StringComparer.Ordinal);
 
+        internal sealed class Snapshot
+        {
+            private readonly ModEntry[] entries;
+            internal Snapshot() { entries = _entries.ToArray(); }
+            internal void Restore()
+            {
+                _entries.Clear();
+                _byKey.Clear();
+                foreach (ModEntry entry in entries) { _entries.Add(entry); _byKey.Add(entry.Key, entry); }
+            }
+        }
+
+        internal static Snapshot Capture() { return new Snapshot(); }
+
         /// <summary>All registered mods including disabled ones, in registration order (demo first). Read-only.</summary>
         public static ReadOnlyCollection<ModEntry> Entries
         {

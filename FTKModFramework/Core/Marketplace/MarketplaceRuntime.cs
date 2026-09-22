@@ -17,6 +17,7 @@ namespace FTKModFramework.Core.Marketplace
         internal Stopwatch Clock;
         internal int TimeoutMs;
         internal bool CannotStop;
+        internal bool DeferCompletion;
         internal Action<MarketplaceResult> Complete;
     }
 
@@ -33,8 +34,18 @@ namespace FTKModFramework.Core.Marketplace
         internal static string RegistrationNotice;
         internal static bool Busy { get { return _operation != null; } }
         private static MarketplaceOperation _operation;
+        // Hot-reload completion rebuilds game tables and native caches. Do not return from that
+        // work through Process polling on the same Mono update stack: the shipped runtime has
+        // faulted there after the callback completed. The coordinator dispatches it at the start
+        // of the following Unity update, after Poll has fully unwound.
+        private static Action<MarketplaceResult> _deferredHotReloadComplete;
+        private static MarketplaceResult _deferredHotReloadResult;
+        internal static Func<bool> MutationsBlocked;
         private static bool _initialized;
         internal static bool CanDiscover = true;
+        internal static string LeaseFailure;
+        internal static bool BootstrapVerified;
+        internal static bool EnsureEmptyGeneration;
         private static Dictionary<string, object> _activeSettings;
         private sealed class StartupJob
         {
@@ -91,6 +102,7 @@ namespace FTKModFramework.Core.Marketplace
                 }
                 if (finished && job.Result != null && job.Result.Ok)
                 {
+                    BootstrapVerified = true;
                     Active = job.Result.Active;
                     Pending = job.Result.Pending;
                     PreviousAvailable = job.Result.PreviousAvailable;
@@ -120,6 +132,8 @@ namespace FTKModFramework.Core.Marketplace
         {
             try
             {
+                try { MarketplaceRuntimeLease.Acquire(StateRoot); }
+                catch (Exception leaseError) { CanDiscover = false; LeaseFailure = leaseError.Message; throw; }
                 // Capture before invoking activate. Worker never mutates the process's Active snapshot.
                 try
                 {
@@ -144,6 +158,8 @@ namespace FTKModFramework.Core.Marketplace
                 if (!result.Ok) throw new IOException(result.Message ?? "Managed activation failed.");
                 MarketplaceProtocol.ValidateSnapshot(StateRoot, result.Active);
                 MarketplaceProtocol.ValidateSnapshot(StateRoot, result.Pending);
+                result.Active = MarketplaceProtocol.ReadVerifiedGeneration(StateRoot, result.Active);
+                result.Pending = MarketplaceProtocol.ReadVerifiedGeneration(StateRoot, result.Pending);
                 if (job.Prior != null && job.Prior.Active != null && result.Active == null)
                     throw new IOException("Activation returned no active generation despite a previously selected generation.");
                 lock (job.Sync) { if (!job.Cancelled) { job.Result = result; job.Error = null; } }
@@ -183,7 +199,7 @@ namespace FTKModFramework.Core.Marketplace
 
         internal static bool Start(string operation, List<PackageSelection> selection, bool dryRun, Action<MarketplaceResult> complete, string expectedRevision = null)
         {
-            if (Busy) return false;
+            if (LeaseFailure != null || (_initialized && !MarketplaceRuntimeLease.Acquired) || Busy || (MutationsBlocked != null && MutationsBlocked())) return false;
             try
             {
                 _operation = Launch(operation, selection, dryRun, operation == "catalog" ? 17000 : 125000, complete, null, expectedRevision);
@@ -249,11 +265,70 @@ namespace FTKModFramework.Core.Marketplace
                     Notice = result.Message ?? (result.Ok ? "Ready. Changes apply on next launch." : "Marketplace operation failed.");
                 }
             }
-            if (result != null && operation.Complete != null) operation.Complete(result);
+            if (result != null && operation.Complete != null)
+            {
+                if (operation.DeferCompletion)
+                {
+                    if (_deferredHotReloadComplete != null)
+                        throw new InvalidOperationException("A hot-reload completion is already awaiting dispatch.");
+                    _deferredHotReloadComplete = operation.Complete;
+                    _deferredHotReloadResult = result;
+                }
+                else operation.Complete(result);
+            }
+        }
+
+        // Called before HotReloadCoordinator.Tick. Clear first because a completion may begin
+        // the next helper operation synchronously.
+        internal static void DispatchHotReloadCompletion()
+        {
+            Action<MarketplaceResult> complete = _deferredHotReloadComplete;
+            MarketplaceResult result = _deferredHotReloadResult;
+            _deferredHotReloadComplete = null;
+            _deferredHotReloadResult = null;
+            if (complete != null) complete(result);
+        }
+
+        internal static void RefreshPendingForHotReload() { ReconcilePending(); }
+
+        internal static bool StartHotReload(string operation, string current, string pending, Action<MarketplaceResult> complete)
+        {
+            if (LeaseFailure != null || !MarketplaceRuntimeLease.Acquired || Busy) return false;
+            try
+            {
+                _operation = Launch(operation, null, false, 17000, complete, null, null, current, pending);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Notice = e.Message;
+                return false;
+            }
+        }
+
+        internal static bool RestoreSavedSet(string fingerprint, string expectedCurrent, string expectedPending, Action<MarketplaceResult> complete)
+        {
+            if (LeaseFailure != null || !MarketplaceRuntimeLease.Acquired || Busy || (MutationsBlocked != null && MutationsBlocked())) return false;
+            try
+            {
+                _operation = Launch("restore-save-set", null, false, 17000, complete, null, null, expectedCurrent, expectedPending, fingerprint);
+                Notice = "Preparing saved mod set...";
+                return true;
+            }
+            catch (Exception error) { Notice = error.Message; return false; }
+        }
+
+        internal static void PublishHotReload(ManagedSnapshot snapshot)
+        {
+            Active = snapshot;
+            ReconcilePending();
+            RegistrationNotice = null;
         }
 
         internal static void CancelRunning()
         {
+            // Hot activation must reconcile the durable commit even if a UI cancellation races it.
+            if (MutationsBlocked != null && MutationsBlocked()) return;
             MarketplaceOperation operation = _operation;
             if (operation == null) return;
             try
@@ -301,15 +376,20 @@ namespace FTKModFramework.Core.Marketplace
         }
 
         private static MarketplaceOperation Launch(string operation, List<PackageSelection> selection, bool dryRun,
-            int timeoutMs, Action<MarketplaceResult> complete, StartupJob startup, string expectedRevision)
+            int timeoutMs, Action<MarketplaceResult> complete, StartupJob startup, string expectedRevision, string expectedCurrent = null, string expectedPending = null, string saveFingerprint = null)
         {
-            if (operation != "catalog" && operation != "prepare" && operation != "activate" && operation != "cancel" && operation != "rollback" && operation != "export")
+            if (operation != "catalog" && operation != "prepare" && operation != "activate" && operation != "cancel" && operation != "rollback" && operation != "export" && operation != "hot-validate" && operation != "hot-commit" && operation != "collect" && operation != "restore-save-set")
                 throw new ArgumentException("Unsupported marketplace operation.");
             Stopwatch clock = Stopwatch.StartNew();
             MarketplaceProtocol.VerifyHelper(HelperPath);
             MarketplaceRequest request = new MarketplaceRequest();
             request.OperationId = Guid.NewGuid().ToString("N");
             request.StateRoot = StateRoot;
+            request.EnsureEmptyGeneration = EnsureEmptyGeneration;
+            request.SaveFingerprint = saveFingerprint;
+            // Tests preserve historical generations as evidence. Normal installs bound
+            // preparation growth; the launcher collects unused generations while offline.
+            request.MaxGenerationBytes = Environment.GetEnvironmentVariable("FTK_MODEL_TEST") == "1" ? 0 : 8L * 1024 * 1024 * 1024;
             request.FrameworkVersion = Plugin.Version;
             request.GameAssemblyPath = typeof(GridEditor.TableManager).Assembly.Location;
             request.Platform = Environment.OSVersion.Platform == PlatformID.Win32NT ? "windows" :
@@ -320,6 +400,8 @@ namespace FTKModFramework.Core.Marketplace
             request.Selection = selection;
             request.DryRun = dryRun;
             request.ExpectedRevision = expectedRevision;
+            request.ExpectedCurrent = expectedCurrent;
+            request.ExpectedPending = expectedPending;
             request.Settings = _activeSettings;
             string operations = Path.Combine(StateRoot, "operations");
             Directory.CreateDirectory(operations);
@@ -329,7 +411,8 @@ namespace FTKModFramework.Core.Marketplace
             ProcessStartInfo start = new ProcessStartInfo(HelperPath, "marketplace " + operation + " --request " + Quote(requestPath) + " --result " + Quote(resultPath));
             start.UseShellExecute = false;
             start.CreateNoWindow = true;
-            MarketplaceOperation running = new MarketplaceOperation { Id = request.OperationId, ResultPath = resultPath, Clock = clock, TimeoutMs = timeoutMs, Complete = complete };
+            MarketplaceOperation running = new MarketplaceOperation { Id = request.OperationId, ResultPath = resultPath, Clock = clock, TimeoutMs = timeoutMs, Complete = complete,
+                DeferCompletion = operation == "hot-validate" || operation == "hot-commit" };
             if (startup == null) running.Process = Process.Start(start);
             else lock (startup.Sync)
             {

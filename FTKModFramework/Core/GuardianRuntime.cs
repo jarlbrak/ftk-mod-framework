@@ -7,15 +7,15 @@ namespace FTKModFramework.Core
     internal static partial class GuardianRuntime
     {
         internal const string ActionKey = "ftkmf_guard_ally";
-        private static readonly HashSet<int> Classes = new HashSet<int>();
-        internal static readonly GuardianCombatState State = new GuardianCombatState();
+        private static HashSet<int> Classes = new HashSet<int>();
+        internal static GuardianCombatState State = new GuardianCombatState();
         internal static FTK_proficiencyTable.ID ActionId = FTK_proficiencyTable.ID.None;
         internal static bool Enabled { get { return Classes.Count > 0; } }
         private static long attackSerial;
         private static long turnSerial;
         private static readonly GuardianEquipmentBonuses NoBonuses = new GuardianEquipmentBonuses();
-        private static readonly Dictionary<int, GuardianEquipmentBonuses> Equipment = new Dictionary<int, GuardianEquipmentBonuses>();
-        private static readonly Dictionary<string, GuardianEquipmentBonuses> AttackEquipment =
+        private static Dictionary<int, GuardianEquipmentBonuses> Equipment = new Dictionary<int, GuardianEquipmentBonuses>();
+        private static Dictionary<string, GuardianEquipmentBonuses> AttackEquipment =
             new Dictionary<string, GuardianEquipmentBonuses>(StringComparer.Ordinal);
         private static readonly PlayerInventory.ContainerID[] EquipmentSlots = new PlayerInventory.ContainerID[]
         {
@@ -32,8 +32,41 @@ namespace FTKModFramework.Core
             internal readonly HashSet<string> Victims = new HashSet<string>(StringComparer.Ordinal);
         }
 
-        private static readonly Dictionary<string, Healing> PendingHealing = new Dictionary<string, Healing>(StringComparer.Ordinal);
-        private static readonly Dictionary<string, string> PendingFeedback = new Dictionary<string, string>(StringComparer.Ordinal);
+        private static Dictionary<string, Healing> PendingHealing = new Dictionary<string, Healing>(StringComparer.Ordinal);
+        private static Dictionary<string, string> PendingFeedback = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        internal static int ReloadClassCount { get { return Classes.Count; } }
+        internal static int ReloadEquipmentCount { get { return Equipment.Count; } }
+        internal static bool ReloadTransientStateEmpty
+        {
+            get { return attackSerial == 0 && turnSerial == 0 && PendingHealing.Count == 0 &&
+                PendingFeedback.Count == 0 && AttackEquipment.Count == 0 && State.ReloadIsEmpty; }
+        }
+
+        internal static Action SuspendForReload()
+        {
+            HashSet<int> classes = Classes;
+            GuardianCombatState state = State;
+            FTK_proficiencyTable.ID action = ActionId;
+            Dictionary<int, GuardianEquipmentBonuses> equipment = Equipment;
+            Dictionary<string, GuardianEquipmentBonuses> attackEquipment = AttackEquipment;
+            Dictionary<string, Healing> healing = PendingHealing;
+            Dictionary<string, string> feedback = PendingFeedback;
+            long attacks = attackSerial, turns = turnSerial;
+            Classes = new HashSet<int>(); State = new GuardianCombatState();
+            ActionId = FTK_proficiencyTable.ID.None;
+            Equipment = new Dictionary<int, GuardianEquipmentBonuses>();
+            AttackEquipment = new Dictionary<string, GuardianEquipmentBonuses>(StringComparer.Ordinal);
+            PendingHealing = new Dictionary<string, Healing>(StringComparer.Ordinal);
+            PendingFeedback = new Dictionary<string, string>(StringComparer.Ordinal);
+            attackSerial = turnSerial = 0;
+            return delegate
+            {
+                Classes = classes; State = state; ActionId = action; Equipment = equipment;
+                AttackEquipment = attackEquipment; PendingHealing = healing; PendingFeedback = feedback;
+                attackSerial = attacks; turnSerial = turns;
+            };
+        }
 
         internal static void RegisterEquipment(int itemId, GuardianEquipmentBonuses bonuses)
         {

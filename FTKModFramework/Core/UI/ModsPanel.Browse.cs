@@ -75,6 +75,7 @@ namespace FTKModFramework.Core.UI
                 else Navigate("maintenance");
             }, true, 37);
             SetWidth(status.gameObject, utilityWidth);
+            status.interactable = !HotReload.HotReloadCoordinator.Busy;
             foreach (Text caption in utility.GetComponentsInChildren<Text>()) caption.fontSize = 20;
             _container = utility.parent;
             _container = HorizontalRow("Back and management", 37);

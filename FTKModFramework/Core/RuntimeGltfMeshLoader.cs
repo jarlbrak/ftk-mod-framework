@@ -384,6 +384,65 @@ namespace FTKModFramework.Core
             }
         }
 
+        // The activation gate uses the same strict decoders as mesh construction, without
+        // allocating a Mesh or touching a native renderer. Skin checks require real target data.
+        internal static void Preflight(string glbFileName, Transform[] bones, Matrix4x4[] bindposes)
+        {
+            string[] names = null;
+            if (bones != null)
+            {
+                names = new string[bones.Length];
+                for (int i = 0; i < names.Length; i++) names[i] = bones[i] == null ? null : bones[i].name;
+            }
+            PreflightResolved(CustomModelLoader.ResolveModelPath(glbFileName), names,
+                bindposes == null ? null : (Matrix4x4[])bindposes.Clone());
+        }
+
+        // Worker-safe: callers resolve and verify immutable package paths and copy native
+        // palettes on the main thread. This decoder reads only files and value-type arrays.
+        internal static void PreflightResolved(string path, string[] bones, Matrix4x4[] bindposes)
+        {
+            if (new FileInfo(path).Length > 64 * 1024 * 1024) throw new FormatException("GLB exceeds preflight size limit.");
+            string json; byte[] bin;
+            if (!SplitGlb(File.ReadAllBytes(path), out json, out bin)) throw new FormatException("Invalid GLB container: " + path);
+            JObj root = JsonParser.Parse(json) as JObj;
+            if (root == null) throw new FormatException("Invalid GLB JSON root.");
+            GltfDoc doc = new GltfDoc(root, bin);
+            int pos, norm, uv, indices, joints, weights;
+            if (bones == null)
+            {
+                if (!doc.ReadStaticPrimitive(out pos, out norm, out uv, out indices))
+                    throw new FormatException("Missing static GLB primitive.");
+                doc.ValidateStrictStaticPrimitive(pos, norm, uv, indices);
+                ValidateStrictStaticMesh(doc.ReadVec3(pos), norm < 0 ? null : doc.ReadVec3(norm),
+                    uv < 0 ? null : doc.ReadVec2(uv), doc.ReadScalarIndices(indices));
+                return;
+            }
+            if (bones.Length == 0 || bindposes == null || bones.Length != bindposes.Length)
+                throw new FormatException("Native garment lacks a complete bound skeleton for preflight.");
+            if (!doc.ReadPrimitive(out pos, out norm, out uv, out joints, out weights, out indices))
+                throw new FormatException("Missing skinned GLB primitive.");
+            doc.ValidateStrictPrimitive(pos, norm, uv, joints, weights, indices);
+            string[] names = doc.ReadSkinJointNames();
+            if (names == null || names.Length == 0) throw new FormatException("Missing GLB skin joints.");
+            Dictionary<string, int> runtime = new Dictionary<string, int>(StringComparer.Ordinal);
+            for (int i = 0; i < bones.Length; i++)
+            {
+                if (string.IsNullOrEmpty(bones[i]) || runtime.ContainsKey(bones[i]))
+                    throw new FormatException("Native garment has missing or duplicate bones.");
+                runtime.Add(bones[i], i);
+            }
+            int[] remap = new int[names.Length];
+            for (int i = 0; i < names.Length; i++)
+            {
+                int target;
+                remap[i] = names[i] != null && runtime.TryGetValue(names[i], out target) ? target : -1;
+            }
+            ValidateStrictSkin(doc.ReadVec3(pos), norm < 0 ? null : doc.ReadVec3(norm),
+                uv < 0 ? null : doc.ReadVec2(uv), doc.ReadScalarIndices(indices), doc.ReadVec4U16(joints),
+                doc.ReadVec4F32(weights), names, remap, doc.ReadInverseBindMatrices(), bindposes);
+        }
+
         private static bool Finite(float value) { return !float.IsNaN(value) && !float.IsInfinity(value); }
 
         private static void ValidateStrictStaticMesh(Vector3[] positions, Vector3[] normals, Vector2[] uvs,

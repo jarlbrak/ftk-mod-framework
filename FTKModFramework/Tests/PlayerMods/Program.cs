@@ -29,6 +29,7 @@ internal static class Program
             MarketplaceChecks.RecoveryProcess(args[1], args[2] == "invalid");
             return;
         }
+        HotReloadContentChecks.Run();
         ModManifest legacy = JsonContentParser.Deserialize<ModManifest>("{\"modGuid\":\"thirdparty.legacy\",\"name\":\"Legacy mod\",\"version\":\"1.0.0\"}");
         Assert(legacy.Validate(new ValidationReport()) && !legacy.IsDevelopmentOnly && legacy.Description == null,
             "legacy identity remains valid but framework compatibility is unverified");

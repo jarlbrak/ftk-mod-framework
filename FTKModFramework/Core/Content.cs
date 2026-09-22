@@ -93,6 +93,7 @@ namespace FTKModFramework.Core
             }
 
             GameObject copy = UnityEngine.Object.Instantiate(src);
+            HotReload.PaladinResourceState.Own(copy);
             UnityEngine.Object.DontDestroyOnLoad(copy);
             copy.name = src.name + "_ftkmf";
             // Keep it ACTIVE but park it far off-screen: the game re-Instantiates this prefab and reads
@@ -104,16 +105,24 @@ namespace FTKModFramework.Core
             if (w == null)
             {
                 Plugin.Log.LogWarning("AttachProficiencies: no Weapon component on prefab of '" + weapon.m_ID + "'.");
-                UnityEngine.Object.Destroy(copy);
+                HotReload.PaladinResourceState.DestroyTracked(copy);
                 return false;
             }
 
-            int count = AddProfsToWeapon(w, proficiencyIds);
-
-            weapon.m_Prefab = copy;
-            Plugin.Log.LogInfo("AttachProficiencies: added " + proficiencyIds.Length + " to '" + weapon.m_ID +
-                "' (now " + count + " actions).");
-            return true;
+            try
+            {
+                int count = AddProfsToWeapon(w, proficiencyIds);
+                weapon.m_Prefab = copy;
+                Plugin.Log.LogInfo("AttachProficiencies: added " + proficiencyIds.Length + " to '" + weapon.m_ID +
+                    "' (now " + count + " actions).");
+                return true;
+            }
+            catch
+            {
+                weapon.m_Prefab = src;
+                HotReload.PaladinResourceState.DestroyTracked(copy);
+                throw;
+            }
         }
 
         /// <summary>

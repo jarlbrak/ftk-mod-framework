@@ -24,7 +24,17 @@ internal static class MarketplaceChecks
         File.WriteAllText(Path.Combine(stateRoot, "state.json"), JsonConvert.SerializeObject(new MarketplaceStateRecord { SchemaVersion = 1, Current = first }));
         // Intentionally stale convenience projection must never override authoritative state.json.
         File.WriteAllText(Path.Combine(stateRoot, "runtime-state.json"), "{\"schemaVersion\":1,\"ok\":true,\"active\":null}");
-        Check(MarketplaceProtocol.ReadState(stateRoot).Active.GenerationId == first, "fallback reads authoritative pointer rather than stale runtime projection");
+        ManagedSnapshot diskActive = MarketplaceProtocol.ReadState(stateRoot).Active;
+        Check(diskActive.GenerationId == first, "fallback reads authoritative pointer rather than stale runtime projection");
+        Check(!diskActive.FilesVerified && MarketplaceProtocol.ReadVerifiedGeneration(stateRoot, diskActive).FilesVerified,
+            "only helper-validated generation reads authorize lock-file hashes");
+        string invalidFiles = "55555555555555555555555555555555";
+        string invalidRoot = Path.Combine(stateRoot, "generations/" + invalidFiles);
+        Directory.CreateDirectory(Path.Combine(invalidRoot, "content"));
+        File.WriteAllText(Path.Combine(invalidRoot, "lock.json"), JsonConvert.SerializeObject(new MarketplaceGenerationLock { SchemaVersion = 1,
+            Packages = new List<PackageDescriptor>(), Files = new List<MarketplaceGenerationFile> {
+                new MarketplaceGenerationFile { Path = "../escape.glb", Sha256 = new string('a', 64), Size = 1 } } }));
+        Reject(delegate { MarketplaceProtocol.ReadGeneration(stateRoot, invalidFiles); }, "unsafe generation file records are rejected before trust");
         string result = Path.Combine(fixture, "result.json");
         File.WriteAllText(result, "{\"schemaVersion\":2}");
         Reject(delegate { MarketplaceProtocol.ReadResult(result, null); }, "unsupported helper result schema rejected");
@@ -58,6 +68,8 @@ internal static class MarketplaceChecks
         File.WriteAllText(Path.Combine(stateRoot, "state.json"), JsonConvert.SerializeObject(new MarketplaceStateRecord { SchemaVersion = 1, Current = first, Pending = second }));
         MarketplaceRuntime.CancelRunning();
         Check(MarketplaceRuntime.Pending.GenerationId == second && MarketplaceRuntime.Active.GenerationId == first, "cancel reconciles committed pending state without replacing current-session active set");
+        Check(!MarketplaceRuntime.Busy, "normal cancellation still reaps the helper and clears the operation");
+        HotReloadCancellationChecks.Run();
         RunRecoveryProcess(Path.Combine(fixture, "recovery-valid"), false);
         RunRecoveryProcess(Path.Combine(fixture, "recovery-invalid"), true);
         // Both mismatch paths must surface as the distinct Discover state, and a readable catalog must clear it.

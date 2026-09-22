@@ -191,6 +191,13 @@ func prepareLaunchModeReset(game, bundle string, launch, installMissing, repairO
 		}
 		return "For The King is already running; framework files were left unchanged.", nil
 	}
+	// Runtime ownership and the transaction lock protect live references. Cleanup is
+	// optional maintenance; a malformed retention record must preserve files, not
+	// prevent the verified-install fallback from launching.
+	marketRoot := filepath.Join(game, "BepInEx", "ftkmf", "marketplace")
+	if _, statErr := os.Stat(filepath.Join(marketRoot, "state.json")); statErr == nil {
+		_, _ = marketRun("collect", marketRequest{SchemaVersion: 1, OperationID: marketToken(), StateRoot: marketRoot})
+	}
 	if e = updateRecover(game); e != nil {
 		return "", fmt.Errorf("framework update recovery failed; do not launch until repaired: %w", e)
 	}

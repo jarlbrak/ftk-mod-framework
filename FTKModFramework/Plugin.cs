@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "1.0.0";
+        public const string Version = "0.1.4";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -29,6 +29,7 @@ namespace FTKModFramework
         /// added to the Blacksmith's starting kit). Off = the framework only powers other mods.
         /// </summary>
         public static ConfigEntry<bool> EnableSampleContent;
+        internal static ConfigEntry<bool> EnableTitleScreenActivation;
 
         /// <summary>
         /// DEBUG verification aid: replace every overworld LAND enemy the game spawns with the custom
@@ -206,6 +207,8 @@ namespace FTKModFramework
             // Inactive cloned avatars may never receive OnDestroy. Prune their acquired model leases
             // from this active plugin so custom resources still release after the last native owner dies.
             EnemyMeshResources.PruneDestroyedOwners();
+            Core.Marketplace.MarketplaceRuntime.DispatchHotReloadCompletion();
+            Core.HotReload.HotReloadCoordinator.Tick();
             LegacyKrakenResourceAdapterLease.PruneDestroyedOwners();
         }
 
@@ -214,7 +217,9 @@ namespace FTKModFramework
             Instance = this;
             Log = Logger;
 
-            EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", false,
+            EnableTitleScreenActivation = Config.Bind("Marketplace", "EnableTitleScreenActivation", false,
+                "Allow supported packages to activate before the first adventure. Uses separate compatible adventure saves; multiplayer is unavailable in this mode. Unsupported installations retain next-launch activation.");
+            EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
                 "Enable the FTK Adventure Pack: Thief and Innkeeper classes, the Cutpurse enemy, equipment, and adventures. " +
                 "Set false if you only want the framework as a dependency for other content mods.");
 
@@ -368,7 +373,21 @@ namespace FTKModFramework
             }
             _done = true;
 
+            try { Core.Marketplace.MarketplaceRuntimeLease.Acquire(Core.Marketplace.MarketplaceRuntime.StateRoot); }
+            catch (Exception error)
+            {
+                Core.Marketplace.MarketplaceRuntime.LeaseFailure = error.Message;
+                Core.Marketplace.MarketplaceRuntime.CanDiscover = false;
+                Plugin.Log.LogError("Marketplace ownership unavailable: " + error.Message);
+                return;
+            }
+            Core.HotReload.ClassPreferences.RecoverPending(Core.Marketplace.MarketplaceRuntime.StateRoot);
+            if (Core.HotReload.ClassPreferences.RecoveryFaulted) return;
+            Core.Marketplace.MarketplaceRuntime.EnsureEmptyGeneration = Core.HotReload.HotReloadBoundary.Requested;
             Core.Marketplace.MarketplaceRuntime.InitializeBeforeDiscovery();
+            Core.HotReload.HotReloadBoundary.Initialize();
+            Core.HotReload.HotReloadCoordinator.CaptureBaseline(__instance);
+            if (Core.HotReload.HotReloadBoundary.Enabled && Core.HotReload.HotReloadCoordinator.Faulted) return;
 
             // Register the bundled-demo row UNCONDITIONALLY, before its gate is read. EnableSampleContent.Value
             // backs the row's Enabled state (so a disabled demo stays listed and re-enableable); registration
@@ -489,7 +508,7 @@ namespace FTKModFramework
 
         private static LoadResult LoadDataContent()
         {
-            return ContentLoader.Load(Plugin.DataContentRootPath);
+            return Core.HotReload.HotReloadBoundary.Enabled ? Core.HotReload.HotReloadCoordinator.LoadInitial() : ContentLoader.Load(Plugin.DataContentRootPath);
         }
 
         private static void Run(string what, Action register)

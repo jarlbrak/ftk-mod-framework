@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using FTKModFramework.Core.Data;
@@ -63,16 +64,48 @@ namespace FTKModFramework.Core.Marketplace
             return result;
         }
 
-        private static ManagedSnapshot ReadGeneration(string root, string id)
+        internal static ManagedSnapshot ReadGeneration(string root, string id)
         {
             if (string.IsNullOrEmpty(id)) return null;
             if (!IsIdentifier(id)) throw new IOException("Invalid managed generation pointer.");
             string directory = Path.Combine(Path.Combine(root, "generations"), id);
             MarketplaceGenerationLock record = ReadBounded<MarketplaceGenerationLock>(Path.Combine(directory, "lock.json"));
             if (record == null || record.SchemaVersion != 1) throw new IOException("Unsupported generation lock schema.");
-            ManagedSnapshot snapshot = new ManagedSnapshot { GenerationId = id, ContentRoot = Path.GetFullPath(Path.Combine(directory, "content")), Packages = record.Packages };
+            ManagedSnapshot snapshot = new ManagedSnapshot { GenerationId = id, ContentRoot = Path.GetFullPath(Path.Combine(directory, "content")),
+                Packages = record.Packages, Files = record.Files ?? new System.Collections.Generic.List<MarketplaceGenerationFile>() };
             ValidateSnapshot(root, snapshot);
+            ValidateGenerationFiles(snapshot);
             return snapshot;
+        }
+
+        internal static ManagedSnapshot ReadVerifiedGeneration(string root, ManagedSnapshot returned)
+        {
+            if (returned == null) return null;
+            ManagedSnapshot snapshot = ReadGeneration(root, returned.GenerationId);
+            snapshot.FilesVerified = true;
+            return snapshot;
+        }
+
+        private static void ValidateGenerationFiles(ManagedSnapshot snapshot)
+        {
+            HashSet<string> seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            string root = snapshot.ContentRoot.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar) + Path.DirectorySeparatorChar;
+            foreach (MarketplaceGenerationFile file in snapshot.Files)
+            {
+                if (file == null || string.IsNullOrEmpty(file.Path) || Path.IsPathRooted(file.Path) ||
+                    file.Path.IndexOf('\\') >= 0 || file.Path.IndexOf(':') >= 0 || file.Size < 0 ||
+                    string.IsNullOrEmpty(file.Sha256) || file.Sha256.Length != 64 || !seen.Add(file.Path))
+                    throw new IOException("Invalid managed generation file record.");
+                foreach (string part in file.Path.Split('/'))
+                    if (part.Length == 0 || part == "." || part == "..")
+                        throw new IOException("Invalid managed generation file path.");
+                foreach (char c in file.Sha256)
+                    if (!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')))
+                        throw new IOException("Invalid managed generation file hash.");
+                string full = Path.GetFullPath(Path.Combine(snapshot.ContentRoot, file.Path.Replace('/', Path.DirectorySeparatorChar)));
+                if (!full.StartsWith(root, StringComparison.Ordinal))
+                    throw new IOException("Managed generation file escapes its content root.");
+            }
         }
 
         private static T ReadBounded<T>(string path)
