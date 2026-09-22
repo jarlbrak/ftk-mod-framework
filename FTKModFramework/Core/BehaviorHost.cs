@@ -43,11 +43,22 @@ namespace FTKModFramework.Core
             }
 
             GameObject host = new GameObject(gameObjectName);
+            HotReload.PaladinResourceState.Own(host);
             UnityEngine.Object.DontDestroyOnLoad(host);
             host.transform.position = ParkPosition; // park off-screen, stays active
 
             // AddComponent(Type) (not the generic overload) because the type is dynamic at registration time.
-            return host.AddComponent(behaviorType) as ProficiencyBase;
+            try
+            {
+                ProficiencyBase behavior = host.AddComponent(behaviorType) as ProficiencyBase;
+                if (behavior == null) HotReload.PaladinResourceState.DestroyTracked(host);
+                return behavior;
+            }
+            catch
+            {
+                HotReload.PaladinResourceState.DestroyTracked(host);
+                throw;
+            }
         }
     }
 }

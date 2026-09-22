@@ -14,6 +14,18 @@ namespace FTKModFramework.Core.UI
     internal sealed partial class ModsPanel : uiScreen
     {
         private static ModsPanel _instance;
+        private StartGameFE.MainScreen _openingTitle;
+        internal static bool HasTitleOwner(StartGameFE.MainScreen title)
+        {
+            return _instance != null && _instance._openingTitle == title &&
+                _instance.gameObject.activeInHierarchy && _instance.m_HasInputFocus &&
+                uiScreen.gCurrent == _instance && FTKInput.Instance != null &&
+                FTKInput.Instance.m_CurrentInputFocus == _instance;
+        }
+        internal static bool IsCurrentFocus(FTKInputFocus focus)
+        {
+            return _instance != null && focus == _instance && _instance.gameObject.activeInHierarchy;
+        }
         private Transform _container;
         private Transform _rootContent;
         private string _view = "installed";
@@ -35,6 +47,7 @@ namespace FTKModFramework.Core.UI
         private string _confirmOperation;
         private string _planIntent;
         private bool _wasBusy;
+        private string _lastHotNotice;
         private bool _refreshPending;
         private int _renderCount;
         private readonly List<Texture2D> _previewTextures = new List<Texture2D>();
@@ -48,7 +61,7 @@ namespace FTKModFramework.Core.UI
         private static readonly Color MutedInk = new Color(0.84f, 0.82f, 0.76f, 1f);
         private static readonly Color Gold = new Color(0.91f, 0.83f, 0.65f, 1f);
         private static readonly Color WarmBorder = new Color(0.78f, 0.75f, 0.68f, 1f);
-        private static bool PanelBusy { get { return MarketplaceRuntime.Busy || FrameworkUpdateRuntime.Busy; } }
+        private static bool PanelBusy { get { return MarketplaceRuntime.Busy || FrameworkUpdateRuntime.Busy || HotReload.HotReloadCoordinator.Busy; } }
         private const string Alphabet = " abcdefghijklmnopqrstuvwxyz0123456789-";
         private static readonly string[] Categories = { "All", "items", "weapons", "proficiencies", "classes", "enemies", "encounters" };
 
@@ -130,9 +143,13 @@ namespace FTKModFramework.Core.UI
 
         public static void Open()
         {
+            if (HotReload.HotReloadBoundary.NavigationLocked) return;
+            if (_instance != null && uiScreen.gCurrent == _instance && _instance.gameObject.activeInHierarchy) return;
+            StartGameFE.MainScreen openingTitle = uiScreen.gCurrent as StartGameFE.MainScreen;
             CaptureNativeSkin();
             if (_instance == null) _instance = Build();
             else _instance.Render();
+            _instance._openingTitle = openingTitle;
             FTKInput.Instance.SetFocus(_instance, null, true, null, false);
             _instance.UpdateSelectables();
             _instance.SetupNavigation();
@@ -187,6 +204,20 @@ namespace FTKModFramework.Core.UI
             }
         }
 
+        internal static void InvalidateForHotReload()
+        {
+            if (_instance == null) return;
+            _instance._entry = null; _instance._package = null;
+            _instance.ClearPlan();
+            ModsPanelNavigation.Frame discarded;
+            _instance._navigation.Enter("installed", null, out discarded);
+            _instance._view = "maintenance";
+            _instance.ResetViewState("maintenance");
+            foreach (Button button in _instance.GetComponentsInChildren<Button>(true)) button.interactable = false;
+            _instance.ReleasePreviews();
+            _instance.Refresh();
+        }
+
         internal void ReleasePreviews()
         {
             foreach (Texture2D texture in _previewTextures) UnityEngine.Object.Destroy(texture);
@@ -197,6 +228,8 @@ namespace FTKModFramework.Core.UI
         {
             MarketplaceRuntime.Poll();
             FrameworkUpdateRuntime.Poll();
+            string hotNotice = HotReload.HotReloadCoordinator.Notice;
+            if (_lastHotNotice != hotNotice) { _lastHotNotice = hotNotice; Refresh(); }
             bool busy = PanelBusy;
             if (_wasBusy != busy) { _wasBusy = busy; Refresh(); }
             if (_view == "search" && Input.inputString.Length > 0)
@@ -212,6 +245,7 @@ namespace FTKModFramework.Core.UI
 
         private void Navigate(string view)
         {
+            if (HotReload.HotReloadBoundary.NavigationLocked) return;
             ModsPanelNavigation.Frame restored;
             if (!_navigation.Enter(view, Capture(), out restored))
             {
@@ -244,6 +278,7 @@ namespace FTKModFramework.Core.UI
 
         private void GoBack()
         {
+            if (HotReload.HotReloadBoundary.NavigationLocked) return;
             int kind = BackKind();
             if (kind == 0)
             {
@@ -321,6 +356,7 @@ namespace FTKModFramework.Core.UI
             {
                 Plugin.Log.LogError("Mods panel render failed in " + _view + ": " + e);
                 _refreshPending = false;
+                if (HotReload.HotReloadBoundary.NavigationLocked) return;
                 // Release the modal on a UI failure so the player can reopen it from the title.
                 try { FTKInput.Instance.Close(this); }
                 catch (Exception closeError) { Plugin.Log.LogWarning("Mods panel focus cleanup: " + closeError.Message); }
@@ -366,6 +402,8 @@ namespace FTKModFramework.Core.UI
                 else if (_view == "search") Search();
                 else if (_view == "maintenance") Maintenance();
                 else if (_view == "settings") SettingsAndHelp();
+                else if (_view == "saved-sets") SavedSets();
+                else if (_view == "saved-set-review") SavedSetReview();
                 AddFooter();
             }
             if (gameObject.activeInHierarchy)
@@ -674,6 +712,7 @@ namespace FTKModFramework.Core.UI
 
         private void PackageActions(PackageDescriptor package)
         {
+            bool titleActivation = HotReload.HotReloadBoundary.Enabled && HotReload.HotReloadBoundary.SealReason == null && !HotReload.HotReloadCoordinator.Faulted && package.ModGuid == "com.ftkmf.paladin";
             string reason = ModFrameworkCompatibility.Reason(package.FrameworkVersion, Plugin.Version);
             string installedReason = ModRegistry.CompatibilityReasonFor(package.ModGuid, package.Version);
             if (installedReason != null) reason = installedReason;
@@ -687,9 +726,11 @@ namespace FTKModFramework.Core.UI
             bool queued = MarketplaceRuntime.Pending != null && (active == null ? desired != null : desired == null || desired.Version != active.Version || desired.Enabled != active.Enabled);
             if (queued)
             {
-                string state = active == null ? "Ready to install when you restart" : desired == null ? "Will be removed after restart" : desired.Version != active.Version ? "Update ready for next launch" : "Now: " + OnOff(active.Enabled) + " / After restart: " + OnOff(desired.Enabled);
+                string state = titleActivation
+                    ? (active == null ? "Install prepared; review and apply from the initial title" : desired == null ? "Removal prepared; review and apply from the initial title" : desired.Version != active.Version ? "Update prepared; review and apply from the initial title" : "Now: " + OnOff(active.Enabled) + " / Prepared: " + OnOff(desired.Enabled))
+                    : (active == null ? "Ready to install when you restart" : desired == null ? "Will be removed after restart" : desired.Version != active.Version ? "Update ready for next launch" : "Now: " + OnOff(active.Enabled) + " / After restart: " + OnOff(desired.Enabled));
                 TextLine(state, 22, 44).color = Gold;
-                PrimaryButton("Review next-launch changes", delegate { Navigate("maintenance"); });
+                PrimaryButton(titleActivation ? "Review prepared changes" : "Review next-launch changes", delegate { Navigate("maintenance"); });
                 LinkButton(active == null ? "Cancel this install" : "Undo this mod's change", delegate {
                     if (active == null) ReviewSelection(package, true, false);
                     else ReviewSelection(active, false, active.Enabled);
@@ -698,10 +739,11 @@ namespace FTKModFramework.Core.UI
             }
             if (package.Revoked) TextLine("This mod is no longer offered in the catalog. An installed copy stays until you choose to remove it.", 22, 76).color = Gold;
             else if (active == null && !package.Compatible) TextLine(Short(package.CompatibilityReason, 125), 22, 76).color = Gold;
-            else TextLine(active != null ? (active.Enabled ? "On for this adventure" : "Currently turned off") : "Free / Changes apply after restart", 22, 38);
+            else TextLine(active != null ? (active.Enabled ? "On for this adventure" : "Currently turned off") : titleActivation ? "Free / Prepare, then apply from the initial title" : "Free / Changes apply after restart", 22, 38);
             if (active == null || active.Version != package.Version)
                 PrimaryButton(active == null ? "Install..." : "Update to " + package.Version + "...", delegate { ReviewSelection(package, false, true); }, package.Compatible && !package.Revoked && !PanelBusy);
-            else PrimaryButton(active.Enabled ? "Turn off after restart..." : "Turn on after restart...", delegate { ReviewSelection(active, false, !active.Enabled); }, !PanelBusy);
+            else PrimaryButton(titleActivation
+                ? (active.Enabled ? "Turn off..." : "Turn on...") : (active.Enabled ? "Turn off after restart..." : "Turn on after restart..."), delegate { ReviewSelection(active, false, !active.Enabled); }, !PanelBusy);
         }
 
         private static string Bullets(string[] values)
@@ -826,7 +868,10 @@ namespace FTKModFramework.Core.UI
             List<PackageSelection> selection = MarketplaceRuntime.DesiredSelection();
             selection.RemoveAll(delegate(PackageSelection item) { return item.PackageId == package.PackageId; });
             if (!remove) selection.Add(new PackageSelection { PackageId = package.PackageId, Version = package.Version, Enabled = enabled });
-            _planIntent = remove ? "Remove " + package.Name + " from your next-launch selection." : "Set " + package.Name + " to " + OnOff(enabled) + " for your next launch.";
+            bool titleActivation = HotReload.HotReloadBoundary.Enabled && HotReload.HotReloadBoundary.SealReason == null && !HotReload.HotReloadCoordinator.Faulted && package.ModGuid == "com.ftkmf.paladin";
+            _planIntent = titleActivation
+                ? (remove ? "Prepare removal of " + package.Name + "." : "Prepare " + package.Name + " set to " + OnOff(enabled) + ".")
+                : (remove ? "Remove " + package.Name + " from your next-launch selection." : "Set " + package.Name + " to " + OnOff(enabled) + " for your next launch.");
             if (remove && MarketplaceRuntime.FindManaged(package.ModGuid) == null) _planIntent = "Cancel the queued install of " + package.Name + ".";
             _planSelection = selection;
             _confirmOperation = "prepare";
@@ -846,13 +891,16 @@ namespace FTKModFramework.Core.UI
                 TextLine("This review is no longer current. Open the mod again and choose the change you want to make.", 25, 120);
                 return;
             }
-            TextLine("Nothing changes in your current adventure. These choices apply when you next launch the game.", 25, 68);
+            bool titleActivation = HotReload.HotReloadBoundary.Enabled && HotReload.HotReloadBoundary.SealReason == null && !HotReload.HotReloadCoordinator.Faulted && _confirmOperation == "prepare";
+            if (_plan != null && _plan.Packages != null)
+                foreach (PackageDescriptor package in _plan.Packages) if (package.ModGuid != "com.ftkmf.paladin") titleActivation = false;
+            TextLine(titleActivation ? "Prepare these changes first, then explicitly apply them from the initial title. Preparing alone does not change your running mods." : "Nothing changes in your current adventure. These choices apply when you next launch the game.", 25, 68);
             if (_confirmOperation == "prepare")
             {
                 List<MarketplacePlanEntry> entries = _plan == null || _plan.Plan == null ? new List<MarketplacePlanEntry>() : _plan.Plan;
                 List<string> review = new List<string>();
                 review.Add(_planIntent ?? "Review your next-launch selection.");
-                StringBuilder desired = new StringBuilder("Community mods next launch:\n");
+                StringBuilder desired = new StringBuilder(titleActivation ? "Prepared community mods:\n" : "Community mods next launch:\n");
                 if (_plan == null || _plan.Packages == null || _plan.Packages.Count == 0) desired.Append("None. Included and manually installed mods keep their saved settings.");
                 else foreach (PackageDescriptor item in _plan.Packages)
                 {
@@ -874,7 +922,7 @@ namespace FTKModFramework.Core.UI
             }
             else TextLine(_confirmOperation == "rollback" ? "Restore the previous community mod set on your next launch. Saves are not rolled back, and current content stays loaded." : "Discard prepared community downloads and keep the current community selection. Included and manual mod toggles are unchanged.", 25, 170);
             TextLine("Existing saves may require their original mod set. Start a new run after changing class mods. No saves are modified, migrated, deleted or automatically backed up.", 24, 106);
-            PrimaryButton(_confirmOperation == "prepare" ? "Save for next launch" : _confirmOperation == "rollback" ? "Restore on next launch" : "Discard community changes", delegate {
+            PrimaryButton(_confirmOperation == "prepare" ? (titleActivation ? "Prepare changes" : "Save for next launch") : _confirmOperation == "rollback" ? "Restore on next launch" : "Discard community changes", delegate {
                 MarketplaceRuntime.Start(_confirmOperation, _confirmOperation == "prepare" ? _planSelection : null, false, delegate(MarketplaceResult result) { Navigate("maintenance"); _message = result.Ok && PendingCount() == 0 ? "Your selection is saved. No gameplay changes will apply." : result.Message ?? result.Status; Refresh(); }, _confirmOperation == "prepare" && _plan != null ? _plan.PlanRevision : null);
                 Refresh();
             }, !PanelBusy);
@@ -882,10 +930,26 @@ namespace FTKModFramework.Core.UI
 
         private void Maintenance()
         {
-            TextLine("Your next launch", 36, 54);
+            if (HotReload.HotReloadBoundary.Enabled)
+            {
+                TextLine("Title-screen activation", 30, 44);
+                TextLine(HotReload.HotReloadCoordinator.Notice, 22, 75);
+                if (HotReload.HotReloadCoordinator.Faulted)
+                    PrimaryButton("Quit game to recover", delegate { Application.Quit(); }, true, true);
+                string blocked = HotReload.HotReloadCoordinator.UnavailableReason();
+                if (blocked != null) TextLine(blocked, 20, 60);
+                PrimaryButton("Apply prepared mods now", delegate {
+                    HotReload.HotReloadCoordinator.ApplyPending(delegate { Refresh(); }); Refresh();
+                }, blocked == null && MarketplaceRuntime.Pending != null);
+            }
+            bool titleActivation = HotReload.HotReloadBoundary.Enabled && HotReload.HotReloadBoundary.SealReason == null && !HotReload.HotReloadCoordinator.Faulted;
+            if (MarketplaceRuntime.Pending != null)
+                foreach (PackageDescriptor package in MarketplaceRuntime.Pending.Packages) if (package.ModGuid != "com.ftkmf.paladin") titleActivation = false;
+            TextLine(titleActivation ? "Prepared changes" : "Your next launch", 36, 54);
             int pendingCount = PendingCount();
             TextLine(pendingCount == 0 ? (MarketplaceRuntime.Pending == null ? "There are no changes waiting to apply." : "Your selection is saved. No gameplay changes will apply.") : pendingCount + " change(s) are saved. Your current adventure has not changed.", 25, 48);
             List<string> lines = ModsPanelNextLaunch.Lines(MarketplaceRuntime.Active, MarketplaceRuntime.Pending, ModRegistry.Entries);
+            if (titleActivation && lines.Count > 0) lines[0] = "Community mods after you apply:";
             List<string> pages = TextPages(new List<string> { string.Join("\n", lines.ToArray()) });
             if (pages.Count > 0)
             {
@@ -917,13 +981,23 @@ namespace FTKModFramework.Core.UI
                 ? MarketplaceRuntime.RegistrationNotice + "\nBepInEx/LogOutput.log names the content that failed. Turn that mod off in Installed, or restore your previous community mods below."
                 : "Installed content is selected for this launch. Changes never unload it mid-game.");
             blocks.Add(MarketplaceRuntime.Notice ?? "No marketplace status to report.");
+            if (HotReload.ClassPreferences.RecoveryFaulted) blocks.Add(HotReload.ClassPreferences.RecoveryNotice);
+            if (MarketplaceRuntime.LeaseFailure != null) blocks.Add(MarketplaceRuntime.LeaseFailure);
+            blocks.Add(HotReload.HotReloadBoundary.Enabled
+                ? "Title-screen activation is on. Apply supported packages before starting an adventure. Each exact mod set has its own save library. Multiplayer is unavailable in this mode."
+                : "Title-screen activation is off for this session. " + (HotReload.HotReloadBoundary.EligibilityNotice ?? "Enable it below for your next launch."));
             // Cap a status page at six lines; the rest goes on the next page, and PageHeight sizes
             // the box to whichever page is tallest.
             List<string> pages = TextPages(blocks, 6);
             _detailPage = Math.Min(_detailPage, pages.Count - 1);
             TextLine(pages[_detailPage], 23, PageHeight(pages, 23));
             if (pages.Count > 1) ActionButton("Next status detail (" + (_detailPage + 1) + " of " + pages.Count + ")", delegate { _detailPage = (_detailPage + 1) % pages.Count; Refresh(); });
-            ActionButton("Review next-launch changes", delegate { Navigate("maintenance"); });
+            ActionButton("Title-screen activation next launch: " + (Plugin.EnableTitleScreenActivation.Value ? "On" : "Off"), delegate {
+                Plugin.EnableTitleScreenActivation.Value = !Plugin.EnableTitleScreenActivation.Value;
+                Plugin.Instance.Config.Save(); Refresh();
+            }, !PanelBusy);
+            ActionButton("Review prepared changes", delegate { Navigate("maintenance"); });
+            ActionButton("Saved mod sets", delegate { Navigate("saved-sets"); }, !PanelBusy);
             ActionButton("Restore previous mods...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !PanelBusy);
             TextLine(MarketplaceRuntime.PreviousAvailable
                 ? "Restores your previous community mod selection on the next launch. Included mods, manual mods and saves are unchanged. You review the change first."
@@ -1017,7 +1091,15 @@ namespace FTKModFramework.Core.UI
             Rule();
             Transform row = HorizontalRow("Footer", 60);
             _container = row;
-            string notice = PanelBusy ? "Working... Your current mods stay unchanged." : PendingCount() > 0 ? "Changes are saved for next launch." : MarketplaceRuntime.Pending != null ? "Your selection is saved. No gameplay changes will apply." : "Your installed mods stay unchanged until you restart.";
+            bool titleActivation = HotReload.HotReloadBoundary.Enabled && HotReload.HotReloadBoundary.SealReason == null && !HotReload.HotReloadCoordinator.Faulted;
+            if (MarketplaceRuntime.Pending != null)
+                foreach (PackageDescriptor package in MarketplaceRuntime.Pending.Packages) if (package.ModGuid != "com.ftkmf.paladin") titleActivation = false;
+            if (_view == "details" && _entry != null && !_entry.IsManaged) titleActivation = false;
+            if (MarketplaceRuntime.Pending == null)
+                foreach (ModEntry entry in ModRegistry.Entries) if (!entry.IsManaged && entry.PendingEnabled.HasValue) titleActivation = false;
+            string notice = PanelBusy ? "Working... Your current mods stay unchanged."
+                : titleActivation ? (MarketplaceRuntime.Pending != null ? "Community changes are prepared. Review, then apply from the initial title." : "Prepare supported community changes, then apply from the initial title.")
+                : PendingCount() > 0 ? "Changes are saved for next launch." : MarketplaceRuntime.Pending != null ? "Your selection is saved. No gameplay changes will apply." : "Your installed mods stay unchanged until you restart.";
             if (_view == "updates") notice = Short(FrameworkUpdateRuntime.Notice, 120);
             else if (_message.Length > 0) notice = Short(_message, 120);
             Text status = TextLine(notice, 21, 58);
@@ -1025,6 +1107,7 @@ namespace FTKModFramework.Core.UI
             if (PanelBusy)
             {
                 Button cancel = LinkButton("Cancel operation", delegate { if (FrameworkUpdateRuntime.Busy) FrameworkUpdateRuntime.Cancel(); else MarketplaceRuntime.CancelRunning(); Refresh(); });
+                cancel.interactable = !HotReload.HotReloadCoordinator.Busy;
                 SetWidth(cancel.gameObject, 200);
             }
             else if (_view == "installed")
@@ -1043,6 +1126,7 @@ namespace FTKModFramework.Core.UI
             }
             int kind = BackKind();
             Button back = LinkButton(kind == 0 ? "Back to versions" : kind == 1 ? "Back to overview" : _navigation.CanGoBack ? "Back" : "Back to title", GoBack);
+            back.interactable = !HotReload.HotReloadBoundary.NavigationLocked;
             SetWidth(back.gameObject, 200);
             m_ButtonOnCancel = back;
             _container = _rootContent;
@@ -1170,9 +1254,9 @@ namespace FTKModFramework.Core.UI
             Height(go, 1);
         }
         private void Spacer(float height) { Height(NewChild("Space", _container), height); }
-        private Button PrimaryButton(string title, Action action, bool enabled = true)
+        private Button PrimaryButton(string title, Action action, bool enabled = true, bool allowDuringActivation = false)
         {
-            Button button = ActionButton(title, action, enabled, 54);
+            Button button = ActionButton(title, action, enabled, 54, allowDuringActivation);
             button.GetComponent<Image>().color = new Color(0.95f, 0.87f, 0.67f, 1f);
             button.GetComponentInChildren<Text>().alignment = TextAnchor.MiddleCenter;
             Border(button.gameObject, Gold, 1);
@@ -1249,7 +1333,7 @@ namespace FTKModFramework.Core.UI
             return go.transform;
         }
 
-        private Button ActionButton(string caption, Action action, bool enabled = true, float height = 45f)
+        private Button ActionButton(string caption, Action action, bool enabled = true, float height = 45f, bool allowDuringActivation = false)
         {
             GameObject go = NewChild("Action", _container);
             Image image = go.AddComponent<Image>();
@@ -1257,6 +1341,7 @@ namespace FTKModFramework.Core.UI
             Border(go, WarmBorder, 1);
             Button button = go.AddComponent<Button>();
             button.targetGraphic = image;
+            enabled = enabled && (allowDuringActivation || !HotReload.HotReloadBoundary.NavigationLocked);
             button.interactable = enabled;
             ColorBlock colors = button.colors;
             colors.highlightedColor = new Color(0.97f, 0.88f, 0.66f, 1f);
@@ -1268,6 +1353,7 @@ namespace FTKModFramework.Core.UI
             int index = _controls.Count;
             if (enabled) _controls.Add(selectable);
             button.onClick.AddListener(delegate {
+                if (!enabled || (!allowDuringActivation && HotReload.HotReloadBoundary.NavigationLocked)) return;
                 _focusIndex = index;
                 try { action(); }
                 catch (Exception e) { _message = e.Message; Plugin.Log.LogError("Mods panel: " + e); Refresh(); }

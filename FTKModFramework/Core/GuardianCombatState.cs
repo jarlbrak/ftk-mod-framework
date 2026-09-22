@@ -179,6 +179,8 @@ namespace FTKModFramework.Core
             return GuardianEquipmentBonuses.HealAmount(currentHealth, maxHealth, 8 + bonusPercent);
         }
 
+        internal bool ReloadIsEmpty { get { return guardians.Count == 0 && attacks.Count == 0; } }
+
         internal void ResetEncounter()
         {
             guardians.Clear();

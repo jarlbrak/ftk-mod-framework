@@ -84,25 +84,36 @@ type marketSelection struct {
 	Version   string `json:"version"`
 	Enabled   bool   `json:"enabled"`
 }
+type marketHotIntent struct {
+	SchemaVersion int    `json:"schemaVersion"`
+	Current       string `json:"current"`
+	Target        string `json:"target"`
+}
+
 type marketRequest struct {
-	ExpectedRevision string `json:"expectedRevision,omitempty"`
-	deadline         time.Time
-	gameFingerprint  string
-	localCatalog     *marketCatalog
-	active           *marketSnapshot
-	cachedOnly       bool
-	SchemaVersion    int                    `json:"schemaVersion"`
-	OperationID      string                 `json:"operationId"`
-	StateRoot        string                 `json:"stateRoot"`
-	FrameworkVersion string                 `json:"frameworkVersion"`
-	GameAssemblyPath string                 `json:"gameAssemblyPath"`
-	Platform         string                 `json:"platform"`
-	ManualRoots      []string               `json:"manualRoots"`
-	ManualGUIDs      []string               `json:"manualGuids"`
-	BundledGUIDs     []string               `json:"bundledGuids"`
-	Selection        []marketSelection      `json:"selection"`
-	DryRun           bool                   `json:"dryRun"`
-	Settings         map[string]interface{} `json:"settings"`
+	SaveFingerprint       string `json:"saveFingerprint,omitempty"`
+	EnsureEmptyGeneration bool   `json:"ensureEmptyGeneration,omitempty"`
+	MaxGenerationBytes    int64  `json:"maxGenerationBytes,omitempty"`
+	ExpectedRevision      string `json:"expectedRevision,omitempty"`
+	ExpectedCurrent       string `json:"expectedCurrent,omitempty"`
+	ExpectedPending       string `json:"expectedPending,omitempty"`
+	deadline              time.Time
+	gameFingerprint       string
+	localCatalog          *marketCatalog
+	active                *marketSnapshot
+	cachedOnly            bool
+	SchemaVersion         int                    `json:"schemaVersion"`
+	OperationID           string                 `json:"operationId"`
+	StateRoot             string                 `json:"stateRoot"`
+	FrameworkVersion      string                 `json:"frameworkVersion"`
+	GameAssemblyPath      string                 `json:"gameAssemblyPath"`
+	Platform              string                 `json:"platform"`
+	ManualRoots           []string               `json:"manualRoots"`
+	ManualGUIDs           []string               `json:"manualGuids"`
+	BundledGUIDs          []string               `json:"bundledGuids"`
+	Selection             []marketSelection      `json:"selection"`
+	DryRun                bool                   `json:"dryRun"`
+	Settings              map[string]interface{} `json:"settings"`
 }
 type marketSnapshot struct {
 	GenerationID string          `json:"generationId"`
@@ -272,18 +283,25 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 	if r.SchemaVersion != 1 || !marketHex.MatchString(r.OperationID) || !filepath.IsAbs(r.StateRoot) {
 		return out, errors.New("unsupported request schema, operation ID or state root")
 	}
-	if op == "catalog" || op == "prepare" || op == "activate" {
+	if op == "catalog" || op == "prepare" || op == "activate" || op == "hot-validate" || op == "hot-commit" || op == "restore-save-set" {
 		r.gameFingerprint, _ = marketHashFile(r.GameAssemblyPath)
 	}
 	if op == "protocol" {
 		out.ProtocolVersion = 1
 		return out, nil
 	}
-	if !contains([]string{"catalog", "status", "prepare", "activate", "cancel", "rollback", "export"}, op) {
+	if !contains([]string{"catalog", "status", "prepare", "activate", "cancel", "rollback", "export", "hot-validate", "hot-commit", "collect", "restore-save-set"}, op) {
 		return out, errors.New("unknown marketplace operation")
 	}
 	if e := os.MkdirAll(r.StateRoot, 0700); e != nil {
 		return out, e
+	}
+	if op == "collect" {
+		releaseRuntime, err := marketAcquire(filepath.Join(r.StateRoot, "runtime.lock"))
+		if err != nil {
+			return out, errors.New("close the game before collecting marketplace generations")
+		}
+		defer releaseRuntime()
 	}
 	unlock, e := marketAcquire(filepath.Join(r.StateRoot, "transaction.lock"))
 	if e != nil {
@@ -326,6 +344,12 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 	}
 	out.PreviousAvailable = state.Previous != ""
 	switch op {
+	case "collect":
+		removed, err := marketCollect(r.StateRoot, state)
+		if err != nil {
+			return out, err
+		}
+		out.Message = fmt.Sprintf("Removed %d unused marketplace generations.", removed)
 	case "catalog":
 		cat, offline, e := marketGetCatalog(r)
 		if e != nil {
@@ -375,6 +399,11 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 		if r.localCatalog == nil && r.ExpectedRevision != out.PlanRevision {
 			return out, errors.New("The mod plan changed or was not confirmed. Review the plan again before preparing.")
 		}
+		if r.MaxGenerationBytes != 0 {
+			if e := marketGenerationBudget(r.StateRoot, selected, r.MaxGenerationBytes); e != nil {
+				return out, e
+			}
+		}
 		id := marketToken()
 		dir := filepath.Join(r.StateRoot, "generations", id)
 		if e = os.MkdirAll(filepath.Join(dir, "content"), 0700); e != nil {
@@ -411,7 +440,94 @@ func marketRun(op string, r marketRequest) (marketResult, error) {
 		}
 		out.Pending, _ = snapshot(id)
 		out.Message = "Changes prepared for next launch. Existing saves can depend on the current mod set; start a new run."
+	case "restore-save-set":
+		if state.Current != r.ExpectedCurrent || state.Pending != r.ExpectedPending {
+			return out, errors.New("prepared selection changed; review the saved mod set again")
+		}
+		id, err := marketRestoreSaveSet(r)
+		if err != nil {
+			return out, err
+		}
+		state.Pending = id
+		state.OperationID = r.OperationID
+		if e = marketWrite(filepath.Join(r.StateRoot, "state.json"), state); e != nil {
+			return out, e
+		}
+		out.Pending, e = snapshot(id)
+		if e != nil {
+			return out, e
+		}
+		out.Message = "Saved mod set prepared. Apply it before resuming its adventures."
+	case "hot-validate", "hot-commit":
+		if state.Current != r.ExpectedCurrent || state.Pending != r.ExpectedPending || state.Pending == "" {
+			return out, errors.New("hot activation selection changed; runtime must retain or restore its previous set")
+		}
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		if e = marketValidateGeneration(ctx, r, state.Pending); e != nil {
+			return out, e
+		}
+		if op == "hot-validate" {
+			intent := marketHotIntent{SchemaVersion: 1, Current: state.Current, Target: state.Pending}
+			if e = marketWrite(filepath.Join(r.StateRoot, "hot-activation.json"), intent); e != nil {
+				return out, e
+			}
+			out.Message = "Candidate validated; runtime activation has not committed."
+			break
+		}
+		var intent marketHotIntent
+		if e = marketRead(filepath.Join(r.StateRoot, "hot-activation.json"), &intent, marketLimit); e != nil {
+			return out, e
+		}
+		if intent.SchemaVersion != 1 || intent.Current != state.Current || intent.Target != state.Pending {
+			return out, errors.New("hot activation intent does not match the verified candidate")
+		}
+		state.Previous = state.Current
+		if state.Previous == "" {
+			state.Previous, e = marketEmptyGeneration(r)
+			if e != nil {
+				return out, e
+			}
+		}
+		state.Current = state.Pending
+		state.Pending = ""
+		state.OperationID = r.OperationID
+		if e = marketWrite(filepath.Join(r.StateRoot, "state.json"), state); e != nil {
+			return out, e
+		}
+		out.Active, _ = snapshot(state.Current)
+		out.Pending = nil
+		out.PreviousAvailable = true
+		out.Message = "Verified runtime generation committed."
 	case "activate":
+		if r.EnsureEmptyGeneration && state.Current == "" && state.Pending == "" {
+			state.Current, e = marketEmptyGeneration(r)
+			if e != nil {
+				return out, e
+			}
+			state.OperationID = r.OperationID
+			if e = marketWrite(filepath.Join(r.StateRoot, "state.json"), state); e != nil {
+				return out, e
+			}
+			out.Active, e = snapshot(state.Current)
+			if e != nil {
+				return out, e
+			}
+		}
+		// state.Current is the durable decision, including a lost commit acknowledgement.
+		var hot marketHotIntent
+		hotErr := marketRead(filepath.Join(r.StateRoot, "hot-activation.json"), &hot, marketLimit)
+		if hotErr == nil {
+			if hot.SchemaVersion != 1 {
+				return out, errors.New("unsupported hot activation recovery record")
+			}
+			if state.Pending == hot.Target && state.Current != hot.Target {
+				out.Message = "Interrupted hot activation quarantined. Previous generation retained; prepare a new selection to retry."
+				break
+			}
+		} else if !os.IsNotExist(hotErr) {
+			return out, hotErr
+		}
 		if state.Pending != "" {
 			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
