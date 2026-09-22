@@ -1,7 +1,27 @@
-# Paladin local beta acceptance
+# Paladin validation and historical acceptance
 
-This guide records bounded evidence against the [design](DESIGN.md) and
-[39-entry source package](../../marketplace/packages/paladin/content.json).
+## Current verification entry points
+
+The current unpublished source package contains **54 content entries and 51
+equipment items**, including three artifacts and twelve new accessories. See
+[accessory validation](ACCESSORY-VALIDATION.md) for the new offline-only candidate,
+[legendary validation](LEGENDARY-VALIDATION.md) for the previous live-tested bytes, and
+[Launch 1.0.0](LAUNCH-1.0.0.md) for release gates.
+
+The [equipment inventory](EQUIPMENT.md) includes twelve newly authored
+accessories and original display art. Their native behavior and appearance
+have not been tested. [Gap plan](GAPS.md) owns their closure
+sequence; [Native baseline](NATIVE-BASELINE.md) records read-only game findings.
+Documentation and arithmetic review do not establish gameplay acceptance.
+
+## Historical beta evidence
+
+The records below describe earlier candidates and their exact recorded bytes.
+References to "current" within these historical records mean current at the
+record's creation, not acceptance of the latest package or proposed accessories.
+
+This guide originally recorded bounded evidence against the [design](DESIGN.md)
+and the then-39-entry source package.
 **Beta delivery remains an unpublished local candidate.** The previously tested Guardian integration
 cleared spent rescue usage during native revival. The fix is built in framework
 `dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e`,

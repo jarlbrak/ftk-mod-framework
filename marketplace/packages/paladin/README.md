@@ -21,8 +21,11 @@ platforms and artifact hashes are not repeated in prose.
 
 ## Current content state
 
-The source package declares one class, 39 equipment items and two Censure
-proficiencies. All equipment has new models and icons. Character bodies, faces,
+The source package declares one class, 51 equipment items and two Censure
+proficiencies. All equipment has new models and icons. The twelve newest items
+are six trinkets and six necklaces using native accessory slots; their stats and
+source art have offline checks only. [Accessory validation](../../../docs/paladin/ACCESSORY-VALIDATION.md)
+records the explicit pause before in-game testing. Character bodies, faces,
 hair and backpacks remain native FTK assets. The cloned Blacksmith appearance
 list is inherited unchanged: Female, Male, Undead, Cat, Demon, Fish and Goblin,
 with normal native unlock checks. Nonhuman races are individual appearance
@@ -59,7 +62,7 @@ Three Artifact items extend the late-game selection: The Last Vigil, Kingsfall
 and The Last Bastion. They use item tiers 4-6 and can enter shared drops, night
 markets and dungeon merchants without requiring a Paladin. They do not enter
 ordinary town stock or starting inventories. Their Guardian perks preserve
-Guard's 50% reduction. See the [legendary equipment design](../../../docs/paladin/LEGENDARY-CONCEPTS.md)
+Guard's 50% reduction. See the [legendary equipment design](../../../docs/paladin/ARTIFACTS.md)
 for exact triggers and the remaining implementation and validation status.
 
 | Equipment | Declared prototype behavior |

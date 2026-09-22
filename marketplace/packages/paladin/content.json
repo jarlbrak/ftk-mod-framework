@@ -2042,6 +2042,372 @@
           "texture": "assets/paladin-legendary-palette.png"
         }
       ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_novice",
+      "template": "trinketDefense1",
+      "displayName": "Tin Oath Token",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 8,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "vitality": 0.01
+      },
+      "icon": "assets/paladin-trinket-novice-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-novice.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_oathkeeper",
+      "template": "trinketDefense1",
+      "displayName": "Keeper's Seal",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 35,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "vitality": 0.02
+      },
+      "icon": "assets/paladin-trinket-oathkeeper-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-oathkeeper.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_highward",
+      "template": "trinketDefense1",
+      "displayName": "Watchtower Reliquary",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 110,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "vitality": 0.02,
+        "resistance": 1
+      },
+      "icon": "assets/paladin-trinket-highward-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-highward.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_mercy",
+      "template": "trinketDefense1",
+      "displayName": "Lantern of Mercy",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 3
+      },
+      "icon": "assets/paladin-trinket-mercy-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-mercy.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_censure",
+      "template": "trinketDefense1",
+      "displayName": "Seal of Censure",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "speed": 0.02,
+        "armor": 1
+      },
+      "icon": "assets/paladin-trinket-censure-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-censure.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_verdict",
+      "template": "trinketDefense1",
+      "displayName": "Scales of Verdict",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 2
+      },
+      "icon": "assets/paladin-trinket-verdict-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-verdict.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_novice",
+      "template": "amuletVitality1",
+      "displayName": "Pilgrim's Pendant",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 8,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 1
+      },
+      "icon": "assets/paladin-necklace-novice-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-novice.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_oathkeeper",
+      "template": "amuletVitality1",
+      "displayName": "Oath Chain",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 35,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 1,
+        "vitality": 0.01
+      },
+      "icon": "assets/paladin-necklace-oathkeeper-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-oathkeeper.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_highward",
+      "template": "amuletVitality1",
+      "displayName": "Highward Gorget",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 110,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 2
+      },
+      "icon": "assets/paladin-necklace-highward-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-highward.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_mercy",
+      "template": "amuletVitality1",
+      "displayName": "Mercy Locket",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 2,
+        "speed": 0.01
+      },
+      "icon": "assets/paladin-necklace-mercy-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-mercy.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_censure",
+      "template": "amuletVitality1",
+      "displayName": "Censure Medallion",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "speed": 0.02
+      },
+      "icon": "assets/paladin-necklace-censure-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-censure.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_verdict",
+      "template": "amuletVitality1",
+      "displayName": "Judge's Collar",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 3
+      },
+      "icon": "assets/paladin-necklace-verdict-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-verdict.glb",
+          "texture": "assets/paladin-accessory-palette.png"
+        }
+      ]
     }
   ]
 }

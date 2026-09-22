@@ -2,7 +2,7 @@
 
 Status: partial candidate validation, 2026-09-22. This is not launch acceptance.
 The approved mechanics and tuning are described in
-[Legendary equipment concepts](LEGENDARY-CONCEPTS.md). General release gates
+[Legendary equipment concepts](ARTIFACTS.md). General release gates
 remain in [Launch 1.0.0](LAUNCH-1.0.0.md).
 
 ## Candidate scope and identities

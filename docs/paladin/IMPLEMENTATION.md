@@ -3,6 +3,15 @@
 Tracking epic: [#138](https://github.com/jarlbrak/ftk-mod-framework/issues/138).
 The [design contract](DESIGN.md) records the agreed player behavior.
 
+## Accessory completion plan
+
+The [equipment inventory](EQUIPMENT.md) records 51 authored items, including
+six new trinkets plus six new necklaces. [Gap plan](GAPS.md) orders data, original art,
+native verification and final package work. The new source candidate contains 54 entries;
+[accessory validation](ACCESSORY-VALIDATION.md) records offline checks and the
+explicit pause before live testing. [Native baseline](NATIVE-BASELINE.md)
+verifies the two equipment slots and existing modifier/display capabilities.
+
 ## Delivery boundary
 
 One data-driven marketplace package owns the Paladin class and its equipment.

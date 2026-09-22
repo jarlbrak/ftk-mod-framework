@@ -20,8 +20,8 @@ def fixture_content(source):
     result = copy.deepcopy(source)
     rows = result['entries']
     gear = sorted(row['id'] for row in rows if row['kind'] in ('weapon', 'item'))
-    assert len(gear) == len(set(gear)) == 39
-    assert len(rows) == 42 and not any(row['id'] == HUNTER for row in rows)
+    assert len(gear) == len(set(gear)) == 51
+    assert len(rows) == 54 and not any(row['id'] == HUNTER for row in rows)
     paladin = next(row for row in rows if row['id'] == 'paladin')
     # The production Paladin deliberately uses native FTK bodies, faces and hair.
     # This visual/equipment fixture must never revive the superseded body override route.
@@ -64,7 +64,7 @@ def build(output):
                                 {'addedClass': HUNTER, 'template': 'hunter', 'guardian': False, 'startitems': gear}],
                'rowCount': len(content['entries']), 'packageModGuidPreserved': 'com.ftkmf.paladin'}
     (output / 'receipt.json').write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\n')
-    (output / 'NEVER-PUBLISH.txt').write_text('TEST FIXTURE ONLY. All 39 gear items are starting inventory grants. Use only as the sole Paladin package in an isolated new-save trial. Never publish or install alongside the production package.\n')
+    (output / 'NEVER-PUBLISH.txt').write_text('TEST FIXTURE ONLY. All 51 gear items are starting inventory grants. Use only as the sole Paladin package in an isolated new-save trial. Never publish or install alongside the production package.\n')
     print(json.dumps({'package': str(package.relative_to(ROOT)), 'receipt': str((output / 'receipt.json').relative_to(ROOT)),
                       'rows': len(content['entries']), 'unchangedAssets': len(paths)-2,
                       'contentSha256': copied_hashes['content.json']}, indent=2))

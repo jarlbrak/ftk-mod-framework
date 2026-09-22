@@ -15,10 +15,15 @@ class FixtureBoundaries(unittest.TestCase):
         before = copy.deepcopy(original)
         actual, gear, old = builder.fixture_content(original)
         self.assertEqual(original, before)
-        self.assertEqual(len(gear), 39)
-        self.assertEqual(len(actual['entries']), 43)
+        self.assertEqual(len(gear), 51)
+        self.assertEqual(len(actual['entries']), 55)
         self.assertTrue({'paladin_hammer_1h_last_vigil', 'paladin_hammer_2h_kingsfall',
                          'paladin_shield_last_bastion'}.issubset(gear))
+        accessories = {f'paladin_{slot}_{family}'
+                       for slot in ('trinket', 'necklace')
+                       for family in ('novice', 'oathkeeper', 'highward', 'mercy', 'censure', 'verdict')}
+        self.assertTrue(accessories.issubset(gear))
+        self.assertTrue(accessories.isdisjoint(old))
         self.assertNotIn('playerModels', next(row for row in actual['entries'] if row['id'] == 'paladin'))
         expected = copy.deepcopy(original)
         next(row for row in expected['entries'] if row['id'] == 'paladin')['fields']['startitems'] = gear

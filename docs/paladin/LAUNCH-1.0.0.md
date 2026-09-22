@@ -6,6 +6,12 @@ builds; they do not prove the final release bytes.
 
 ## Required work
 
+- [ ] Close the [accessory gap plan](GAPS.md): six trinkets and six necklaces,
+  original display art/icons, acquisition, equip/remove and persistence checks.
+  The [source inventory](EQUIPMENT.md) now contains 51 equipment items / 54 entries;
+  [offline accessory checks](ACCESSORY-VALIDATION.md) do not replace live testing.
+  The previous native registration remains 39 equipment items / 42 entries.
+
 - [x] Native Create Game-style mod selector with a large banner and concise metadata.
   Observed in the normal Steam installation in windowed mode. The UI borrows
   native visual assets onto its own objects and preserves reviewed mod actions.
