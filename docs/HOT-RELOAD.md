@@ -1,6 +1,6 @@
 # Title-screen mod activation
 
-Status: production hardening and final live acceptance are complete for the restricted first version. This work remains in a separate worktree and is not merged or published.
+Status: production hardening and final live acceptance are complete for the restricted first version. This work remains on a separate branch and is not merged or released.
 
 ## Supported first version
 
