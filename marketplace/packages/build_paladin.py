@@ -59,15 +59,15 @@ def main():
     immutable(archive_path,payload)
     descriptor={
         'packageId':'ftkmf.paladin','modGuid':manifest['modGuid'],'name':manifest['name']+' (LOCAL DRAFT)',
-        'author':manifest['author'],'description':'Unpublished local beta candidate. Original Paladin and equipment. Native gameplay review and online co-op remain unverified.',
+        'author':manifest['author'],'description':manifest['description']+' Local unpublished beta candidate.',
         'category':'classes','version':manifest['version'],'license':'MIT','frameworkVersion':manifest['frameworkVersion'],
         'frameworkRange':'>='+manifest['frameworkVersion']+' <'+str(int(manifest['frameworkVersion'].split('.')[0])+1)+'.0.0',
         'gameFingerprints':[digest(args.game_assembly.read_bytes())],'platforms':[args.platform],'dependencies':[],
         'classification':'gameplay','packageUrl':'https://github.com/jarlbrak/ftk-mod-framework/releases/download/LOCAL-DRAFT-NOT-PUBLISHED/'+stem+'.zip',
         'sha256':sha,'compressedSize':len(payload),'expandedSize':sum(len(data) for data in files.values()),'fileCount':len(files),
         'requirements':['Local unpublished framework 0.1.4 capability build.','Local candidate only; no production catalog entry or published download exists.','Online co-op unverified.'],
-        'contentChanges':['Adds the Paladin protector class.','Adds 36 unrestricted original equipment items and two Censure actions.'],
-        'changelog':'Local beta candidate; not approved for release.','sourceUrl':'https://github.com/jarlbrak/ftk-mod-framework',
+        'contentChanges':['Adds the Paladin protector class and Guard action.','Adds 36 original hammers, shields and armor pieces across six progression sets.','Adds Divine Intervention and two Censure weapon actions.'],
+        'changelog':'Initial local beta candidate; not approved for release.','sourceUrl':'https://github.com/jarlbrak/ftk-mod-framework',
         'supportUrl':'https://github.com/jarlbrak/ftk-mod-framework/issues/138','screenshots':[]}
     descriptor_bytes=(json.dumps(descriptor,indent=2,sort_keys=True)+'\n').encode()
     immutable(descriptor_path,descriptor_bytes)
