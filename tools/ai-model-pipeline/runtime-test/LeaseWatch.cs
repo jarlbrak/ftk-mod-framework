@@ -29,11 +29,17 @@ public sealed partial class RuntimeModelTest
     }
     JObject WatchLease(JObject command)
     {
-        RequireReadyPreparation();int heroId=Int(command,"heroInstanceId",0);
+        CatalogKeys(command,"id","session","op","heroInstanceId");
+        CatalogNoLinks(root);RequireSinglePlayer();RequireOutsideCombat();
+        object flow=Instance(typeof(GameFlow));
+        if(flow==null)throw new InvalidOperationException("Live game flow required.");
+        // Dungeon observations retain the strict Ready boundary; world observation is read-only.
+        if(typeof(GameFlow).GetField("m_DungeonEntered",Members).GetValue(flow)!=null)RequireReadyPreparation();
+        int heroId=LeaseObservationPin.ExactId(command,"heroInstanceId",true);
         if(heroId==0)throw new ArgumentException("Exact current heroInstanceId required.");
         CharacterOverworld cow=null;
         foreach(CharacterOverworld candidate in FTKHub.Instance.m_CharacterOverworlds)
-            if(candidate!=null && candidate.GetInstanceID()==heroId)cow=candidate;
+            if(candidate!=null && candidate.GetInstanceID()==heroId){if(cow!=null)throw new InvalidOperationException("Ambiguous hero.");cow=candidate;}
         if(cow==null || cow.m_Avatar==null)throw new InvalidOperationException("Owned real overworld avatar required.");
         return WatchAvatarLease(command,cow.m_Avatar,heroId,"player-overworld",heroId,0,null);
     }

@@ -50,7 +50,7 @@ namespace FTKModFramework.Agent
 
         private static bool _running;
         private static string _lastError;       // null on success; the "at clear_dungeon.<step>" terminus otherwise
-        private static string _dungeonKey;      // adventure-relative dungeon id name (e.g. "FloodedCrypt")
+        private static string _dungeonKey;      // adventure-relative dungeon id name (e.g. "Cave")
         private static bool _enterFirst;
 
         public static bool IsRunning { get { return _running; } }
@@ -58,7 +58,7 @@ namespace FTKModFramework.Agent
 
         /// <summary>
         /// Arm the clear coroutine on the BridgeHost (must be called on the main thread). Idempotent: returns
-        /// false if already running. <paramref name="dungeonKey"/> defaults to "FloodedCrypt".
+        /// false if already running. <paramref name="dungeonKey"/> defaults to "Cave".
         /// <paramref name="enterFirst"/> runs the enter sequence before traversal when not already in a dungeon.
         /// </summary>
         public static bool Arm(string dungeonKey, bool enterFirst)
@@ -70,7 +70,7 @@ namespace FTKModFramework.Agent
                 Plugin.Log.LogError("[agent] dungeon clear failed at arm: no BridgeHost (no session host)");
                 return false;
             }
-            _dungeonKey = string.IsNullOrEmpty(dungeonKey) ? "FloodedCrypt" : dungeonKey;
+            _dungeonKey = string.IsNullOrEmpty(dungeonKey) ? "Cave" : dungeonKey;
             _enterFirst = enterFirst;
             _lastError = null;
             _running = true;

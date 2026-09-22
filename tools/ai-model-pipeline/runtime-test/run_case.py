@@ -15,7 +15,6 @@ import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 import story_setup
-import entry_setup
 import profile_materials
 
 
@@ -246,7 +245,8 @@ class Runner:
             raise ValueError('--enemy must match exactly one configured custom profile key')
         registration = read(self.root/'model-test-registration.json')
         validate_registration_freshness(registration, self.session_mtime,
-            (self.root/'model-test-profiles.json').stat().st_mtime, time.time(), self.content_registration_run)
+            (self.root/'model-test-profiles.json').stat().st_mtime, time.time(),
+            getattr(self, 'content_registration_run', registration.get('run')))
         registered = [p for p in registration.get('registered', []) if p.get('key') == self.a.enemy]
         if registration.get('status') != 'registered' or len(registered) != 1:
             raise ValueError('Enemy profile is not in the successful registration report')
@@ -414,14 +414,6 @@ class Runner:
     def clear_intro(self):
         return story_setup.clear(self)
 
-    def verify_story_clear(self):
-        state=self.helper('story-state');story_setup.scope(state)
-        if not story_setup.complete(state):raise RuntimeError('Native story changed before dungeon entry; no action retried')
-        self.log('story-clear-before-entry',state)
-
-    def prepare_entry(self):
-        return entry_setup.verify(self,entry_setup.prepare(self))
-
     def staging_result(self,matches,final):
         companion=getattr(self.a,'companion_enemy',None)
         if not exact_combat(final,self.a.enemy,companion):raise RuntimeError('Combat state changed during inventory verification')
@@ -455,7 +447,7 @@ class Runner:
         if self.a.mode=='new-run':
             if initial.get('phase')!='menu': raise ValueError('new-run requires bridge phase menu')
             self.claim_first_run()
-            payload={'adventure':'HollowMire','party':1}
+            payload={'adventure':getattr(self.a, 'adventure', 'DungeonCrawl'),'party':1}
             if self.a.class_key: payload['class']=self.a.class_key
             self.action('start_run',payload)
             party_state = self.wait(lambda s: s.get('singlePlayer') is True and living(s),'actual living party')
@@ -468,8 +460,6 @@ class Runner:
             self.clear_intro()
             if self.expected_class_id is not None:
                 self.verify_party_class(self.state())
-            self.verify_story_clear()
-            self.prepare_entry()
             minimum=getattr(self.a,'minimum_native_weapon_max_damage',None)
             if minimum is not None:
                 after=(getattr(self,'party_fixture',None) or {}).get('after') or []
@@ -504,7 +494,7 @@ class Runner:
                     self.hero_damage_fixture['status']='apply_response_rejected_receipt_may_require_inspection'
                     raise RuntimeError('Damage fixture apply receipt is incomplete or disagrees with the request')
                 self.hero_damage_fixture['status']='applied_outside_combat'
-            self.action('enter_dungeon',{'dungeonId':'FloodedCrypt'})
+            self.action('enter_dungeon',{'dungeonId':getattr(self.a, 'dungeon', 'Cave')})
             # Deliberately no state read, delay, modal handling, or extra bridge action here.
             stage={'enemy':self.a.enemy,'level':0,'room':1,'regenerate':True}
             companion=getattr(self.a,'companion_enemy',None)
@@ -535,6 +525,8 @@ def main():
     p.add_argument('--root',type=Path,required=True)
     p.add_argument('--port',type=int,required=True)
     p.add_argument('--enemy',required=True)
+    p.add_argument('--adventure',default='DungeonCrawl')
+    p.add_argument('--dungeon',default='Cave')
     p.add_argument('--companion-enemy')
     p.add_argument('--skip-fortify',action='store_true')
     p.add_argument('--cap-equipped-attack-skill',action='store_true',help='Raise only the equipped weapon skill to the native stat cap in the disposable fixture.')

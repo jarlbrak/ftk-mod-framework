@@ -1,0 +1,132 @@
+{
+  "schema": "ftkmf.paladin-native-armor-studio.v1",
+  "status": "native-human-front-studio-captures-reviewed",
+  "packageSha256": "1a075a77b579bd5c2b6efe8809419c3b52fcb6d671193af531ce9eb839e3b474",
+  "fixtureContentSha256": "6b67d0f785c51fccc41e2a03f9529eba98055fb32ef873ccccb006d0815aa04e",
+  "frameworkSha256": "a1faf7907de8acfea9ec1dcb14371761386f689f92888ef314891eec3689b00e",
+  "helperSha256": "3c9aaa51e3cd1d8b0bcde0494e7f399ce289f2638127c0801c7468946343aa38",
+  "session": "9c48c221d30448668b1135c4f7defed8",
+  "method": "Equipped already-owned fixture gear through native inventory, then rendered the existing world avatar with a temporary isolated camera. Native bodies, faces and hair are retained; no native mesh export. Temporary renderer layers and render target restored after every image.",
+  "observations": [
+    "All six armor sets rendered on native Female and Male Paladin avatars.",
+    "Authored main-palette colors remain visible instead of inheriting character clothing tint.",
+    "Later sets have fitted faceted chest plates rather than the prior round breastplate.",
+    "Native human faces, hair and backpacks remain visible."
+  ],
+  "captures": [
+    {
+      "set": "novice",
+      "appearance": "male",
+      "view": "front",
+      "imageSha256": "c05842c0e57a2f1ad5662900ffb26a724ec376783ed7c2a5843ecee2b0b931cf",
+      "ownerInstanceId": -276976,
+      "celInstanceId": -294006,
+      "layersRestored": true
+    },
+    {
+      "set": "novice",
+      "appearance": "female",
+      "view": "front",
+      "imageSha256": "151d22735119404f415a240d9d14bd5f8bbc5a12a63e0b4fb9c06362578cf5c1",
+      "ownerInstanceId": -281894,
+      "celInstanceId": -302138,
+      "layersRestored": true
+    },
+    {
+      "set": "oathkeeper",
+      "appearance": "male",
+      "view": "front",
+      "imageSha256": "7f296b1530ae5b9d9f806b8cbb8545087b4a76ebace95a45ccdad88e1cc60cd6",
+      "ownerInstanceId": -276976,
+      "celInstanceId": -310356,
+      "layersRestored": true
+    },
+    {
+      "set": "oathkeeper",
+      "appearance": "female",
+      "view": "front",
+      "imageSha256": "3ab7c08eabbc4f18616040946943625452c9ee764f548bbad74b7f6465f4d905",
+      "ownerInstanceId": -281894,
+      "celInstanceId": -318488,
+      "layersRestored": true
+    },
+    {
+      "set": "highward",
+      "appearance": "male",
+      "view": "front",
+      "imageSha256": "0580e7df62a5b83f99626d7c5f8627aeb3414ec4715a86dcb24b7a5460d76f5d",
+      "ownerInstanceId": -276976,
+      "celInstanceId": -326706,
+      "layersRestored": true
+    },
+    {
+      "set": "highward",
+      "appearance": "female",
+      "view": "front",
+      "imageSha256": "d975da410ad38ffb1186b8ef33463392741e86ee9fac174b83a4cd1d10286ea3",
+      "ownerInstanceId": -281894,
+      "celInstanceId": -334838,
+      "layersRestored": true
+    },
+    {
+      "set": "mercy",
+      "appearance": "male",
+      "view": "front",
+      "imageSha256": "31f28c202eda0db0d86ede03d10478c8e9640436dafc5659b5bbfe3e443ad511",
+      "ownerInstanceId": -276976,
+      "celInstanceId": -343056,
+      "layersRestored": true
+    },
+    {
+      "set": "mercy",
+      "appearance": "female",
+      "view": "front",
+      "imageSha256": "925cf8c11d691602c9eefd636dcc3cb2d43068fc3f4425944f36dba18290b11a",
+      "ownerInstanceId": -281894,
+      "celInstanceId": -351188,
+      "layersRestored": true
+    },
+    {
+      "set": "censure",
+      "appearance": "male",
+      "view": "front",
+      "imageSha256": "2b981a41f1c5090599e1a4f6a1d0c050e4f4b9f6d5da57ad6ebd5ebf4dd126fa",
+      "ownerInstanceId": -276976,
+      "celInstanceId": -359406,
+      "layersRestored": true
+    },
+    {
+      "set": "censure",
+      "appearance": "female",
+      "view": "front",
+      "imageSha256": "61cca9e648e1f49b6087ca453dd48ac4b25248b245dfcd11d1fd21183dfb1eca",
+      "ownerInstanceId": -281894,
+      "celInstanceId": -367538,
+      "layersRestored": true
+    },
+    {
+      "set": "verdict",
+      "appearance": "male",
+      "view": "front",
+      "imageSha256": "3ba77a29ab475e3f8f18d46af764bba513dfe3e08bf0610fe3c4ce46e227df0f",
+      "ownerInstanceId": -276976,
+      "celInstanceId": -375756,
+      "layersRestored": true
+    },
+    {
+      "set": "verdict",
+      "appearance": "female",
+      "view": "front",
+      "imageSha256": "83dc9152145e5752505558be4393ef4fb41abf937d7f9cd4082507e7e0cac542",
+      "ownerInstanceId": -281894,
+      "celInstanceId": -383888,
+      "layersRestored": true
+    }
+  ],
+  "limitations": [
+    "Presentation renders of current native world pose, not combat animation evidence.",
+    "Starting inventory and equipment changes were explicit fixtures; no acquisition claim.",
+    "Five nonhuman appearances remain to be checked.",
+    "No broad clipping, all-angle, final resource-disposal or online compatibility claim."
+  ]
+}

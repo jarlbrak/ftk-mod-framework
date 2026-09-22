@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-20",
+  "session": "1dd755b91aac4a88b50878c3386cb994",
+  "frameworkSha256": "a7a589598530279d24061acb998ab5114d343ebd291c328d1ccde5482c9835d2",
+  "packageSha256": "acfef478645cca597fd123854538a1cb0c1983b4d911e78891cd6b3e597d7e8d",
+  "status": "failed",
+  "trigger": "Select Novice Aegis in native town market",
+  "observed": "Large card remains white; CharacterSkills.GetModDisplay throws after a null custom modifier lookup.",
+  "rootCause": "Native FTK_characterModifier.GetEnum(string) does not resolve registered custom row names. DB.Get(string) therefore resolves None and returns null despite successful integer registration.",
+  "limits": [
+    "Failure occurs before card rendering; original display geometry has not been accepted.",
+    "Existing native item cards continued to display."
+  ]
+}

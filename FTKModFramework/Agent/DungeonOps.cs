@@ -38,7 +38,7 @@ namespace FTKModFramework.Agent
         /// </summary>
         public static object EnterDungeon(string dungeonKey)
         {
-            string key = string.IsNullOrEmpty(dungeonKey) ? "FloodedCrypt" : dungeonKey;
+            string key = string.IsNullOrEmpty(dungeonKey) ? "Cave" : dungeonKey;
 
             // STEP 2 already-in gate (idempotency).
             if (InDungeon() || EnteredDungeon() != null)
@@ -706,7 +706,7 @@ namespace FTKModFramework.Agent
         public static object DungeonDebugAction()
         {
             object entered = EnteredDungeon();
-            object located = LocateDungeon("FloodedCrypt");
+            object located = LocateDungeon("Cave");
             Dictionary<string, object> r = new Dictionary<string, object>();
             r["entered"] = DumpDungeon(entered);
             r["located"] = DumpDungeon(located);

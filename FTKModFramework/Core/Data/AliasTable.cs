@@ -53,6 +53,10 @@ namespace FTKModFramework.Core.Data
                 { "dropable", "m_Dropable" },      // FTK_itembase.m_Dropable    (bool)
                 { "townmarket", "m_TownMarket" },  // FTK_itembase.m_TownMarket  (bool)
                 { "dlc", "m_DLC" },                // FTK_itembase.m_DLC         (FTK_dlc.ID)
+                { "nightmarket", "m_NightMarket" },
+                { "dungeonmerchant", "m_DungeonMerchant" },
+                { "shopstock", "_shopStock" },
+                { "loreunlock", "m_CollectLoreItemUnlock" },
             };
 
             // --- weapon (FTK_weaponStats2 : FTK_itembase) ---
@@ -74,6 +78,9 @@ namespace FTKModFramework.Core.Data
                 { "ignoresarmor", "m_IgnoresArmor" }, // FTK_proficiencyTable.m_IgnoresArmor   (bool)
                 { "chancetoaffect", "m_ChanceToAffect" }, // FTK_proficiencyTable.m_ChanceToAffect (float)
                 { "slots", "m_SlotOverride" },     // FTK_proficiencyTable.m_SlotOverride   (int)
+                { "fullslots", "m_FullSlots" },
+                { "customvalue", "m_CustomValue" },
+                { "repeatcount", "m_RepeatCount" },
             };
 
             // --- class stat block (FTK_playerGameStart). No luck field; rarity is item-only. ---
@@ -91,6 +98,7 @@ namespace FTKModFramework.Core.Data
                 { "startweapon", "m_StartWeapon" }, // m_StartWeapon (FTK_itembase.ID)
                 { "startitems", "m_StartItems" },  // m_StartItems  (FTK_itembase.ID[])
                 { "skills", "m_CharacterSkills" }, // m_CharacterSkills (CharacterSkills)
+                { "skinsets", "m_Skinsets" },
                 { "dlc", "m_DLC" },                // m_DLC (FTK_dlc.ID)
             };
 

@@ -1,0 +1,1260 @@
+{
+  "schema": "ftkmf.paladin-next-combat-live.v1",
+  "status": "same-session-ordinary-combat-rescue-recharge-pass",
+  "session": "7bb6aab98f5343f8b913ba55ebf2509a",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "05d5879b411c4fbca92e43384fc974258b01ce99135ff977317f2270d064d96c",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "sequence": [
+    "Fixture snap to adjacent King Cobra hex followed by native world turn, walk and Fight.",
+    "Female Paladin 2:1 Guards Hunter 0:1. First one-shot rescue fixture rejects native group Poison outcome before substitution.",
+    "Recast Guard; second one-shot fixture substitutes lethal damage on the next eligible native single-target hit. Hunter survives at 1 HP and Paladin 2:1 rescue is spent.",
+    "Ordinary punches and hammer attacks defeat King Cobra. Hunter uses owned Godsbeard normally before the final attack. No kill cheat or forced victory used.",
+    "Native Collect accepts gold reward and returns to overworld.",
+    "Fixture snap to adjacent Lightning Crag hex, native end turn, walk and Fight in the same process/session.",
+    "Read-only observation before Guard shows Paladin 2:1 rescue restored, with storedActive false and designatedAlly null. Both Paladins have no stale Guard.",
+    "Owned isolated game stopped after observation. Native end-turn setup autosaved the isolated campaign; no real saves touched."
+  ],
+  "snapshots": [
+    {
+      "label": "paladin-next-initial",
+      "rawSha256": "4e589d2a23ee881a7e847271b97ecd57435daa9305605c2071151b5cb110e7f4",
+      "frame": 14437,
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -279694,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 37,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1223789468,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1223789468,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -285130,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -290048,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        }
+      ],
+      "combatLog": "[{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\"],\"m_LogIndex\":0}]"
+    },
+    {
+      "label": "paladin-next-guarded",
+      "rawSha256": "4fb6a303aa0c6820728e7aec78e803d78731f9ca9dd66e1d7b2ab00436f95a43",
+      "frame": 25763,
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -279694,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 37,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1223789468,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1223789468,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": [
+            "2:1"
+          ]
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -285130,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -290048,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "0:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 1. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": []
+        }
+      ],
+      "combatLog": "[{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Damaged\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Damaged)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof0)\"],\"m_LogIndex\":0},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(enBitePoisonReg), expected result: Dodge\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (Dodge)\"],\"m_LogIndex\":1},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) bypasses slot roll\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with unarmed(1398377095), expected result: HarmlessAttack\",\"Player 3 Dummy(Player 3) attempting ItemAttack\",\"Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)\"],\"m_LogIndex\":2},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\"],\"m_LogIndex\":3}]"
+    },
+    {
+      "label": "paladin-next-retry-guarded",
+      "rawSha256": "77ee5799b4f2ddcc40296fd88c058ebd8321c032bf996f23546c42bec928d313",
+      "frame": 42926,
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -279694,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 37,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1223789468,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1223789468,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": [
+            "2:1"
+          ]
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -285130,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -290048,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "0:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 1. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": []
+        }
+      ],
+      "combatLog": "[{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Damaged\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Damaged)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof0)\"],\"m_LogIndex\":0},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(enBitePoisonReg), expected result: Dodge\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (Dodge)\"],\"m_LogIndex\":1},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) bypasses slot roll\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with unarmed(1398377095), expected result: HarmlessAttack\",\"Player 3 Dummy(Player 3) attempting ItemAttack\",\"Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)\"],\"m_LogIndex\":2},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\",\"Player 2 Dummy(Player 2) bypasses slot roll\",\"[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack\",\"Player 2 Dummy(Player 2) attempting ItemAttack\",\"Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\"],\"m_LogIndex\":3},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Dodge\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Dodge)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof1)\"],\"m_LogIndex\":4},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(enPoisonGroup3), expected result: Dodge\",\"[RespondToHit] Player 2 Dummy(Player 2) hit (Dodge)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (Dodge)\"],\"m_LogIndex\":5},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) bypasses slot roll\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with unarmed(1398377095), expected result: HarmlessAttack\",\"Player 3 Dummy(Player 3) attempting ItemAttack\",\"Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)\"],\"m_LogIndex\":6},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\"],\"m_LogIndex\":7}]"
+    },
+    {
+      "label": "paladin-next-after-rescue",
+      "rawSha256": "7149d238cdfdfb475649195990fa89d1990c195c23973e1dfcccb2fd6fa941c3",
+      "frame": 48558,
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -279694,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 1,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1223789468,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1223789468,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -285130,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -290048,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "0:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": false,
+          "status": "Chosen ally: Player 1. Protection: inactive. Divine Intervention: spent this combat.",
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ],
+      "combatLog": "[{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Damaged\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Damaged)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof0)\"],\"m_LogIndex\":0},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(enBitePoisonReg), expected result: Dodge\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (Dodge)\"],\"m_LogIndex\":1},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) bypasses slot roll\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with unarmed(1398377095), expected result: HarmlessAttack\",\"Player 3 Dummy(Player 3) attempting ItemAttack\",\"Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)\"],\"m_LogIndex\":2},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\",\"Player 2 Dummy(Player 2) bypasses slot roll\",\"[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack\",\"Player 2 Dummy(Player 2) attempting ItemAttack\",\"Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\"],\"m_LogIndex\":3},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Dodge\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Dodge)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof1)\"],\"m_LogIndex\":4},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(enPoisonGroup3), expected result: Dodge\",\"[RespondToHit] Player 2 Dummy(Player 2) hit (Dodge)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (Dodge)\"],\"m_LogIndex\":5},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) bypasses slot roll\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with unarmed(1398377095), expected result: HarmlessAttack\",\"Player 3 Dummy(Player 3) attempting ItemAttack\",\"Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)\"],\"m_LogIndex\":6},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\",\"Player 2 Dummy(Player 2) bypasses slot roll\",\"[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack\",\"Player 2 Dummy(Player 2) attempting ItemAttack\",\"Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\"],\"m_LogIndex\":7},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Damaged\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Damaged)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof2)\"],\"m_LogIndex\":8},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(None), expected result: DamagedHeavy\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (DamagedHeavy)\",\"Divine Intervention protected Player 1 Dummy(Player 1)\"],\"m_LogIndex\":9},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\"],\"m_LogIndex\":10}]"
+    },
+    {
+      "label": "paladin-next-victory",
+      "rawSha256": "80b1749371a093bf383b0351a0126bbdf7453a04dff92522773592f971d351b7",
+      "frame": 60814,
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -279694,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 16,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1223789468,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1223789468,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -285130,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -290048,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "0:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": false,
+          "status": "Chosen ally: Player 1. Protection: inactive. Divine Intervention: spent this combat.",
+          "activeGuardians": []
+        }
+      ],
+      "combatLog": "[{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Damaged\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Damaged)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof0)\"],\"m_LogIndex\":0},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(enBitePoisonReg), expected result: Dodge\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (Dodge)\"],\"m_LogIndex\":1},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) bypasses slot roll\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with unarmed(1398377095), expected result: HarmlessAttack\",\"Player 3 Dummy(Player 3) attempting ItemAttack\",\"Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)\"],\"m_LogIndex\":2},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\",\"Player 2 Dummy(Player 2) bypasses slot roll\",\"[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack\",\"Player 2 Dummy(Player 2) attempting ItemAttack\",\"Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\"],\"m_LogIndex\":3},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Dodge\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Dodge)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof1)\"],\"m_LogIndex\":4},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(enPoisonGroup3), expected result: Dodge\",\"[RespondToHit] Player 2 Dummy(Player 2) hit (Dodge)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (Dodge)\"],\"m_LogIndex\":5},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) bypasses slot roll\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 1 Dummy(Player 1) with unarmed(1398377095), expected result: HarmlessAttack\",\"Player 3 Dummy(Player 3) attempting ItemAttack\",\"Player 3 Dummy(Player 3) guards Player 1 Dummy(Player 1)\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)\"],\"m_LogIndex\":6},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\",\"Player 2 Dummy(Player 2) bypasses slot roll\",\"[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack\",\"Player 2 Dummy(Player 2) attempting ItemAttack\",\"Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)\",\"[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)\"],\"m_LogIndex\":7},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Damaged\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Damaged)\",\"Enemy Dummy(snakeDesertB) is attempting scheduled attack(Prof2)\"],\"m_LogIndex\":8},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Enemy Dummy(snakeDesertB) engages attack\",\"Enemy Dummy(snakeDesertB) rolls slots (attack)\",\"[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 1 Dummy(Player 1) with snakeDesertB(None), expected result: DamagedHeavy\",\"[RespondToHit] Player 1 Dummy(Player 1) hit (DamagedHeavy)\",\"Divine Intervention protected Player 1 Dummy(Player 1)\"],\"m_LogIndex\":9},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 3 Dummy(Player 3) engages attack\",\"Player 3 Dummy(Player 3) is deciding\",\"Player 3 Dummy(Player 3) rolls slots (attack)\",\"Player 3 Dummy(Player 3) is attempting normal attack\",\"[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Enemy Dummy(snakeDesertB) with unarmed(None), expected result: Damaged\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Damaged)\"],\"m_LogIndex\":10},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 2 Dummy(Player 2) engages attack\",\"Player 2 Dummy(Player 2) is deciding\",\"Player 2 Dummy(Player 2) rolls slots (attack)\",\"Player 2 Dummy(Player 2) is attempting normal attack\",\"[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Enemy Dummy(snakeDesertB) with 1473502429(None), expected result: DamagedHeavy\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (DamagedHeavy)\"],\"m_LogIndex\":11},{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\",\"Player 1 Dummy(Player 1) is going to use herbGodsbeard1\",\"Player 1 Dummy(Player 1) finished using herbGodsbeard1\",\"Player 1 Dummy(Player 1) rolls slots (attack)\",\"Player 1 Dummy(Player 1) is attempting normal attack\",\"[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(snakeDesertB) with 1223789468(None), expected result: Death\",\"[RespondToHit] Enemy Dummy(snakeDesertB) hit (Death)\"],\"m_LogIndex\":12}]"
+    },
+    {
+      "label": "paladin-next-second-combat",
+      "rawSha256": "85c3806626fb31b73f60403aaded3410c1b93a260391a09134867217b8938956",
+      "frame": 68246,
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -279694,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 16,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1223789468,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1223789468,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -285130,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -290048,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        }
+      ],
+      "combatLog": "[{\"m_LogGroup\":\"Combat\",\"m_LogEntryEvents\":[\"Player 1 Dummy(Player 1) engages attack\",\"Player 1 Dummy(Player 1) is deciding\"],\"m_LogIndex\":0}]"
+    }
+  ],
+  "fixtureResults": [
+    {
+      "rawSha256": "8508333df546ba833085bd77b8e02dd70c5fead509b92eff90018d90c0f89f76",
+      "result": {
+        "ok": true,
+        "session": "7bb6aab98f5343f8b913ba55ebf2509a",
+        "status": "aborted",
+        "receipt": "5c31341a496e4ec0a19564921953f4ca",
+        "events": [
+          {
+            "phase": "armed",
+            "frame": 29322,
+            "data": {
+              "enemyId": 369188,
+              "victimId": 358974,
+              "guardians": [
+                {
+                  "identity": "2:1",
+                  "instanceId": 364424,
+                  "rescueAvailable": true
+                }
+              ],
+              "guardianId": 364424,
+              "rescueAvailable": true,
+              "hp": 37,
+              "damage": 74,
+              "expectedHp": 1,
+              "expectedAlive": true,
+              "case": "rescue"
+            }
+          },
+          {
+            "phase": "retarget",
+            "frame": 35610,
+            "data": {
+              "originalVictim": "2:1"
+            }
+          },
+          {
+            "phase": "commit-shape",
+            "frame": 35734,
+            "data": {
+              "pinnedVictimMatches": true,
+              "main": {
+                "attacker": "0:-1",
+                "victim": "0:1",
+                "damage": 0,
+                "health": 37,
+                "response": "Dodge",
+                "proficiency": "enPoisonGroup3",
+                "crit": 0,
+                "attackerHealthMod": 0,
+                "aoe": false
+              },
+              "secondary1": {
+                "attacker": "0:-1",
+                "victim": "1:1",
+                "damage": 0,
+                "health": 39,
+                "response": "Dodge",
+                "proficiency": "enPoisonGroup3",
+                "crit": 0,
+                "attackerHealthMod": 0,
+                "aoe": false
+              },
+              "secondary2": {
+                "attacker": "0:-1",
+                "victim": "2:1",
+                "damage": 0,
+                "health": 39,
+                "response": "HarmlessAttack",
+                "proficiency": "enPoisonGroup3",
+                "crit": 0,
+                "attackerHealthMod": 0,
+                "aoe": false
+              },
+              "aoeTargets": 2
+            }
+          },
+          {
+            "phase": "aborted",
+            "frame": 35734,
+            "data": {
+              "reason": "Native secondary damage outcome is present",
+              "previousStage": "targeted"
+            }
+          }
+        ],
+        "scope": "One-shot fixture outcome through native enemy turn/playback. Not ordinary RNG, damage calculation or co-op evidence.",
+        "testFixtureMaxHpTarget": null,
+        "tutorialsQuiet": false,
+        "id": "f691ccbb23ce42afa651e539e3deb102",
+        "frame": 36810
+      }
+    },
+    {
+      "rawSha256": "8b6ce7e9f23957524e3df57dc2d16de048e447fa854b8f985e9e9710ad1d9ff8",
+      "result": {
+        "ok": true,
+        "session": "7bb6aab98f5343f8b913ba55ebf2509a",
+        "status": "passed",
+        "receipt": "dc009bcdca8e4a68a9f732393a7787a6",
+        "events": [
+          {
+            "phase": "armed",
+            "frame": 42950,
+            "data": {
+              "enemyId": 369188,
+              "victimId": 358974,
+              "guardians": [
+                {
+                  "identity": "2:1",
+                  "instanceId": 364424,
+                  "rescueAvailable": true
+                }
+              ],
+              "guardianId": 364424,
+              "rescueAvailable": true,
+              "hp": 37,
+              "damage": 74,
+              "expectedHp": 1,
+              "expectedAlive": true,
+              "case": "rescue"
+            }
+          },
+          {
+            "phase": "retarget",
+            "frame": 47347,
+            "data": {
+              "originalVictim": "1:1"
+            }
+          },
+          {
+            "phase": "commit-shape",
+            "frame": 47476,
+            "data": {
+              "pinnedVictimMatches": true,
+              "main": {
+                "attacker": "0:-1",
+                "victim": "0:1",
+                "damage": 17,
+                "health": 20,
+                "response": "Damaged",
+                "proficiency": "enBiteReg",
+                "crit": 0,
+                "attackerHealthMod": 0,
+                "aoe": false
+              },
+              "secondary1": null,
+              "secondary2": null,
+              "aoeTargets": 0
+            }
+          },
+          {
+            "phase": "commit",
+            "frame": 47476,
+            "data": {
+              "original": {
+                "attacker": "0:-1",
+                "victim": "0:1",
+                "damage": 17,
+                "health": 20,
+                "response": "Damaged",
+                "proficiency": "enBiteReg",
+                "crit": 0,
+                "attackerHealthMod": 0,
+                "aoe": false
+              },
+              "replacement": {
+                "attacker": "0:-1",
+                "victim": "0:1",
+                "damage": 74,
+                "health": 0,
+                "response": "Death",
+                "proficiency": "None",
+                "crit": 0,
+                "attackerHealthMod": 0,
+                "aoe": false
+              }
+            }
+          },
+          {
+            "phase": "production-transformed",
+            "frame": 47476,
+            "data": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 36,
+              "health": 1,
+              "response": "DamagedHeavy",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          },
+          {
+            "phase": "native-hit",
+            "frame": 47695,
+            "data": {
+              "passed": true,
+              "hp": 1,
+              "alive": true,
+              "guardians": [
+                {
+                  "identity": "2:1",
+                  "instanceId": 364424,
+                  "rescueAvailable": false
+                }
+              ],
+              "rescueAvailable": false,
+              "outcome": {
+                "attacker": "0:-1",
+                "victim": "0:1",
+                "damage": 36,
+                "health": 1,
+                "response": "DamagedHeavy",
+                "proficiency": "None",
+                "crit": 0,
+                "attackerHealthMod": 0,
+                "aoe": false
+              }
+            }
+          }
+        ],
+        "scope": "One-shot fixture outcome through native enemy turn/playback. Not ordinary RNG, damage calculation or co-op evidence.",
+        "testFixtureMaxHpTarget": null,
+        "tutorialsQuiet": false,
+        "id": "0a4870b0fea542638d69c34dcab35c4e",
+        "frame": 48533
+      }
+    }
+  ],
+  "worldReturn": {
+    "sha256": "60767b0d9bcf5d9bb107cc42a0de3016b6da7210f1696ef1e1b8eca7e7440822",
+    "state": {
+      "inSession": true,
+      "singlePlayer": true,
+      "day": 0,
+      "timeIndex": 1,
+      "round": 1,
+      "questId": -1,
+      "questObjectiveKey": "oneline0",
+      "questDestRealm": 1,
+      "questComplete": false,
+      "questIsLast": false,
+      "currentTurnFid": {
+        "turnIndex": 2,
+        "photonId": 1
+      },
+      "party": [
+        {
+          "fid": {
+            "turnIndex": 0,
+            "photonId": 1
+          },
+          "name": "Player 1",
+          "classId": 15,
+          "hp": 16,
+          "maxHp": 37,
+          "focus": 4,
+          "maxFocus": 4,
+          "gold": 31,
+          "level": 0,
+          "xp": 16,
+          "actionPoints": 0,
+          "spentFocus": 0,
+          "realmId": 3,
+          "hexBig": null,
+          "hexSmall": null,
+          "pos": {
+            "x": 151.02398681640625,
+            "y": 0,
+            "z": 94.42701721191406
+          }
+        },
+        {
+          "fid": {
+            "turnIndex": 1,
+            "photonId": 1
+          },
+          "name": "Player 2",
+          "classId": 14,
+          "hp": 39,
+          "maxHp": 39,
+          "focus": 4,
+          "maxFocus": 4,
+          "gold": 8,
+          "level": 0,
+          "xp": 16,
+          "actionPoints": 0,
+          "spentFocus": 0,
+          "realmId": 3,
+          "hexBig": null,
+          "hexSmall": null,
+          "pos": {
+            "x": 149.11874389648438,
+            "y": 0,
+            "z": 95.52702331542969
+          }
+        },
+        {
+          "fid": {
+            "turnIndex": 2,
+            "photonId": 1
+          },
+          "name": "Player 3",
+          "classId": 14,
+          "hp": 39,
+          "maxHp": 39,
+          "focus": 4,
+          "maxFocus": 4,
+          "gold": 12,
+          "level": 0,
+          "xp": 16,
+          "actionPoints": 4,
+          "spentFocus": 0,
+          "realmId": 3,
+          "hexBig": null,
+          "hexSmall": null,
+          "pos": {
+            "x": 148.62803649902344,
+            "y": 0,
+            "z": 92.47711181640625
+          }
+        }
+      ],
+      "combat": {
+        "active": false,
+        "liveCombatants": 3,
+        "currentEnemyFid": {
+          "turnIndex": 0,
+          "photonId": -1
+        },
+        "whoseTurn": null,
+        "heroTurnReady": false,
+        "readyParts": {
+          "initialized": false,
+          "fsmState": "",
+          "actingFid": null
+        },
+        "enemies": [
+          {
+            "fid": {
+              "turnIndex": 0,
+              "photonId": -1
+            },
+            "name": "King Cobra",
+            "type": "snakeDesertB",
+            "hp": 0,
+            "hpMax": 58,
+            "alive": false
+          }
+        ],
+        "liveEnemies": 0,
+        "stuck": false,
+        "winningPlayerFid": {
+          "turnIndex": 0,
+          "photonId": 1
+        },
+        "fightOrder": [],
+        "abilities": [
+          {
+            "profId": 36,
+            "index": 0,
+            "label": "hammerSplash",
+            "name": "hammerSplash",
+            "buttonEnabled": false
+          }
+        ],
+        "driver": null
+      },
+      "dungeon": {
+        "inDungeon": false,
+        "inCombat": false,
+        "dungeonId": null,
+        "level": null,
+        "room": null,
+        "levelCount": null,
+        "roomCount": null,
+        "currentRoomType": null,
+        "encounterObjects": null,
+        "inLastRoom": null,
+        "atLastLevel": null,
+        "cleared": null,
+        "deactivated": null,
+        "driver": null
+      },
+      "map": {
+        "realmId": 3,
+        "tile": {
+          "big": 18,
+          "small": 5
+        },
+        "stageIndex": 2,
+        "hasPOI": false,
+        "poiType": null,
+        "reachableTiles": [
+          {
+            "big": 18,
+            "small": 12
+          },
+          {
+            "big": 12,
+            "small": 6
+          },
+          {
+            "big": 12,
+            "small": 13
+          }
+        ],
+        "objective": {
+          "big": 0,
+          "small": 18
+        }
+      },
+      "choices": [],
+      "signals": {
+        "inCombat": false,
+        "modalOpen": false,
+        "modalType": null,
+        "choiceOpen": false,
+        "allDead": false,
+        "victoryShowing": false,
+        "warnings": [],
+        "victoryArmed": false
+      },
+      "phase": "overworld"
+    }
+  },
+  "limits": [
+    "Ordinary world encounters only; not dungeon retained-dummy transitions.",
+    "Rescue lethal input is fixture-assisted, not evidence of the native damage formula.",
+    "Read-only rescue availability was observed in the second fight; the renewed charge was not consumed again.",
+    "No online, incapacitation-recovery or renderer-retirement claim."
+  ]
+}

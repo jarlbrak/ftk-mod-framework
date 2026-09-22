@@ -1,0 +1,67 @@
+{
+  "schema": "ftkmf.paladin-custom-loot-collection.v1",
+  "status": "controlled-native-custom-collection-and-world-return-passed",
+  "session": "fd5a45facfcb426a898ad58dd1a417d8",
+  "packageSha256": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295",
+  "frameworkSha256": "a1faf7907de8acfea9ec1dcb14371761386f689f92888ef314891eec3689b00e",
+  "helperSha256": "e4e9365d37e604c0d7580704fc8970c36ec352ff1e91dc27bfaeaa1f978c8db8",
+  "fixture": {
+    "token": "d3b5baa88b414eb1b0307cc72ae7d54e",
+    "status": "appended",
+    "itemId": 1498997754,
+    "before": [
+      "_gold_5"
+    ],
+    "beforeCount": 1,
+    "afterCount": 2,
+    "appendedToken": "paladin_helmet_novice"
+  },
+  "fixtureDisarmed": true,
+  "collection": "VoteButton.OnLeftClick(Collect)",
+  "counts": {
+    "before": {
+      "-271536": 1,
+      "-276972": 1,
+      "-281890": 1
+    },
+    "after": {
+      "-271536": 2,
+      "-276972": 1,
+      "-281890": 1
+    },
+    "return": {
+      "-271536": 2,
+      "-276972": 1,
+      "-281890": 1
+    }
+  },
+  "worldReturn": {
+    "movement": "Tracking",
+    "combat": false,
+    "movementFocus": true,
+    "actionPoints": 3
+  },
+  "logReview": "No LootAccept exception or False lore lookup. Two startup AkInitializer.OnApplicationFocus exceptions occurred before gameplay.",
+  "limitations": [
+    "Controlled one-item append proves collection and cleanup, not random-drop distribution.",
+    "Native random drop eligibility was observed in prior failing run; only this corrected controlled run proves exact-once collection.",
+    "Single-player isolated fixture; online remains unverified."
+  ],
+  "saveResume": {
+    "method": "Native Options Save/Exit, Save and Exit, title Resume, native party Start in same process.",
+    "countsByNativeIdentity": {
+      "return": {
+        "0:1": 2,
+        "1:1": 1,
+        "2:1": 1
+      },
+      "resume": {
+        "0:1": 2,
+        "1:1": 1,
+        "2:1": 1
+      }
+    },
+    "status": "passed",
+    "scope": "Same-process native Save/Exit and Resume, not process-restart or disabled-package loading."
+  }
+}

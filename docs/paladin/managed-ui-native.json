@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-20",
+  "status": "passed",
+  "scope": "Isolated native Mods Installed UI disable/re-enable across three real process startups. Local unpublished catalog and archive were prepared in advance.",
+  "frameworkSha256": "2fcf2132f72cf54bfa3abc40cbdeb6c83194d7422e2d338eacf85a849d06eb4b",
+  "runtimeHelperSha256": "8cbbeea36ab2bd072dd929a4c2b2024903e19fc80dcdb91fbd9835f3231ee0b8",
+  "marketplaceHelperSha256": "702d29fb02a2b7431cd183e0fb6d0e37eaf687e4b2ff60b9161c944f81e8c8b9",
+  "packageSha256": "952635aa8c56e181c3d79ea44cf3a168d8ce5c3235b877241327289e08d3d4df",
+  "steps": [
+    {
+      "phase": "enabled",
+      "generation": "f97d7e78cdb6d8b1dd5991eb6422dd34",
+      "registered": 39,
+      "declaredEntries": 39,
+      "errors": 0,
+      "warnings": 0,
+      "packageEnabled": true,
+      "sourceLogSha256": "77486a090c5df579b085793a37f415cbca87e05e631bce610640143951f614cb"
+    },
+    {
+      "phase": "disabled",
+      "generation": "b02c8157836c37ad9b329092b2bdc64c",
+      "registered": 0,
+      "declaredEntries": 0,
+      "errors": 0,
+      "warnings": 0,
+      "packageEnabled": false,
+      "sourceLogSha256": "a59a7a85da398c175eff9cdcac27ed95d7d009eb67acb39c31479dd4c501b725"
+    },
+    {
+      "phase": "reenabled",
+      "generation": "bff5091318a94830180666ae64e32226",
+      "registered": 39,
+      "declaredEntries": 39,
+      "errors": 0,
+      "warnings": 0,
+      "packageEnabled": true,
+      "sourceLogSha256": "311010fb2e316faa6c0c5a84f5837e245ad87ca634e07fdc38a8da450c01e69d"
+    }
+  ],
+  "nativeUiObservations": [
+    "Initial Installed view showed one Paladin community package ON.",
+    "Native Turn Off After Restart, review OFF, Save Next Launch and Quit Apply prepared the disabled generation.",
+    "Second startup showed Currently turned off; native Turn On After Restart, review, Save Next Launch and Quit prepared re-enable.",
+    "Third startup Installed view showed exactly one Paladin community package ON, with On for this adventure and Turn off after restart controls."
+  ],
+  "stateEvidence": {
+    "disable-pending-state.json": "cba2b4cca24877e820653d045c7525667bf2681719c384181a0aff44a5e05b3c",
+    "disabled-state.json": "d4e4f813860ffcd78d369c771fb522b18b5a995626bac888fc7436c38cb586b7",
+    "enable-pending-state.json": "0a494613481a1689f847b642d383fc12dec350707db48bbd1babd2a2486cf666",
+    "reenabled-state.json": "4321640270cb21fc765580bb5bf3bdec0c81c7d6b2446e447af44aa1514b1bfa"
+  },
+  "limits": [
+    "Local catalog seeded from the exact unpublished descriptor; no Browse, network download or publication tested.",
+    "Re-enabled registration and ON visual confirmation passed; subsequent Resume is not asserted here.",
+    "No save opened while disabled; this does not establish disabled-package save compatibility.",
+    "Direct UI observations reported by trial operator; no standalone screenshot artifact claimed."
+  ]
+}

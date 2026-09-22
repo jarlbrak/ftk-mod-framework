@@ -1,0 +1,329 @@
+{
+  "schema": "ftkmf.paladin-censure-live.v1",
+  "status": "both-variants-native-application-and-expiry-pass",
+  "session": "ead6a254b2814a7bb264e5841a2e89ca",
+  "frameworkSha256": "45beee438fe95dd7237a2a5e2a9ca290f0cc5bfdca8e2828d953f717e63ad120",
+  "helperSha256": "8f6f76efdc0b903f70e4ecd4488ddfcd807de17487f56297346164f6bfb353f4",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "method": "Fixture-owned equipment; party placed adjacent to native Lightning Crag, normal end-turn refresh and keyboard walk/Fight. Existing bridge calls native AttackProficiency button callback to commit Censure. Other turns use normal attacks and Guard. No damage, armor or timer forcing.",
+  "observations": [
+    "Enemy started with 72 HP and armor modifier zero.",
+    "Two-handed native Censure hit reduced HP to 60 and applied custom proficiency 1176730471 with value -6, count 1, full timer 3.3333332538604736, endOnTurn false.",
+    "Observed remaining timer decreased across ordinary native turns.",
+    "Armor effect removed and modifier restored to zero while same target remained alive at 50 HP."
+  ],
+  "snapshots": [
+    {
+      "requestId": "e6ea4bd9544e422e936aaa6e3898adac",
+      "frame": 22175,
+      "sourceSha256": "9ba65518dd5a75a31fc77b739c60e994d7be9602585e448ec6578bb70bdd71c5",
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 72,
+        "armorMod": 0,
+        "tauntArmor": 0,
+        "armorEffectPresent": false,
+        "armorEffect": null
+      }
+    },
+    {
+      "requestId": "74d2091e4cbc4cc38bb48486e8003c8c",
+      "frame": 37410,
+      "sourceSha256": "cc8b11c69f8762d508c2ac48b007ffaa866ce27c761ca3c671ebe0101c4f257a",
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 60,
+        "armorMod": -6,
+        "tauntArmor": 0,
+        "armorEffectPresent": true,
+        "armorEffect": {
+          "count": 1,
+          "time": 3.2844929695129395,
+          "fullTime": 3.3333332538604736,
+          "proficiencyInstanceId": -17114,
+          "proficiencyId": 1176730471,
+          "customValue": -6.0,
+          "endOnTurn": false
+        }
+      }
+    },
+    {
+      "requestId": "a607cd6b17ed4302b5315ad5dacdb2bc",
+      "frame": 43733,
+      "sourceSha256": "d464f9eb770d0dada601877701f6a72c1af078cedd9159219ecc127b54baf93e",
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 60,
+        "armorMod": -6,
+        "tauntArmor": 0,
+        "armorEffectPresent": true,
+        "armorEffect": {
+          "count": 1,
+          "time": 3.1476564407348633,
+          "fullTime": 3.3333332538604736,
+          "proficiencyInstanceId": -17114,
+          "proficiencyId": 1176730471,
+          "customValue": -6.0,
+          "endOnTurn": false
+        }
+      }
+    },
+    {
+      "requestId": "539a8436a82c4c4d885e2304f0485d8e",
+      "frame": 53572,
+      "sourceSha256": "facac079585e15f400f0dceb0ab0b669f97bf351142d6d939ff3505af6a23a37",
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 60,
+        "armorMod": -6,
+        "tauntArmor": 0,
+        "armorEffectPresent": true,
+        "armorEffect": {
+          "count": 1,
+          "time": 1.7948715686798096,
+          "fullTime": 3.3333332538604736,
+          "proficiencyInstanceId": -17114,
+          "proficiencyId": 1176730471,
+          "customValue": -6.0,
+          "endOnTurn": false
+        }
+      }
+    },
+    {
+      "requestId": "022de2b3c3234a1e974e9b33ea7664b3",
+      "frame": 63583,
+      "sourceSha256": "bd3bf6da116bcec7724beefb4437a1aacaf1ff307d82ecc918bac1f7b2154d5e",
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 60,
+        "armorMod": -6,
+        "tauntArmor": 0,
+        "armorEffectPresent": true,
+        "armorEffect": {
+          "count": 1,
+          "time": 1.1680907011032104,
+          "fullTime": 3.3333332538604736,
+          "proficiencyInstanceId": -17114,
+          "proficiencyId": 1176730471,
+          "customValue": -6.0,
+          "endOnTurn": false
+        }
+      }
+    },
+    {
+      "requestId": "d927f5f676484dac96db1ad0cf3b32aa",
+      "frame": 69936,
+      "sourceSha256": "f24165569477c23f34b7d96ff5719fa7eb249c09fa7baed1ce07fc83b24ad7d4",
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 50,
+        "armorMod": -6,
+        "tauntArmor": 0,
+        "armorEffectPresent": true,
+        "armorEffect": {
+          "count": 1,
+          "time": 0.2564105987548828,
+          "fullTime": 3.3333332538604736,
+          "proficiencyInstanceId": -17114,
+          "proficiencyId": 1176730471,
+          "customValue": -6.0,
+          "endOnTurn": false
+        }
+      }
+    },
+    {
+      "requestId": "f378e352e91f4f818ef38065b796b856",
+      "frame": 77683,
+      "sourceSha256": "800ddba82092012f34b83f583a538db87a1b70eefe5eb9e6c018280fb6c87ac9",
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 50,
+        "armorMod": 0,
+        "tauntArmor": 0,
+        "armorEffectPresent": false,
+        "armorEffect": null
+      }
+    }
+  ],
+  "limits": [
+    "No exact slot-roll damage formula acceptance claimed from the 12 HP delta alone.",
+    "No ordinary acquisition, balance or online proof.",
+    "Fixture world placement and all-gear inventory are explicit test setup."
+  ],
+  "oneHanded": {
+    "observations": [
+      "Same native enemy, ArmorMod zero before application.",
+      "Native one-handed Censure callback commits custom proficiency 1572329033: HP37 ->31, ArmorMod -4, count1, full timer3.3333332538604736, endOnTurn false.",
+      "Normal attacks, Guard actions, native Godsbeard use and revivals advance combat without replacing the Armor effect.",
+      "Effect removes while target alive at7HP; ArmorMod returns0."
+    ],
+    "snapshots": [
+      {
+        "requestId": "d87af49533d54ba2b55c54e010c92f46",
+        "frame": 93519,
+        "sourceSha256": "a5ce73845ea636fe876f371a560c0d5029890d6825e472381647e55aa9a9b377",
+        "enemy": {
+          "dummyInstanceId": 369188,
+          "fid": "FTKPlayerID",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 37,
+          "armorMod": 0,
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        }
+      },
+      {
+        "requestId": "c4e4bd5a21da41f0897caffb92d0b0a3",
+        "frame": 109863,
+        "sourceSha256": "91633e2af1ac878e73e5205481f6cd7401e73bb587754028901a6659c3f93641",
+        "enemy": {
+          "dummyInstanceId": 369188,
+          "fid": "FTKPlayerID",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 31,
+          "armorMod": -4,
+          "tauntArmor": 0,
+          "armorEffectPresent": true,
+          "armorEffect": {
+            "count": 1,
+            "time": 2.275132179260254,
+            "fullTime": 3.3333332538604736,
+            "proficiencyInstanceId": -17120,
+            "proficiencyId": 1572329033,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        }
+      },
+      {
+        "requestId": "9708a0b639fe4d50aa77c69cf0e77d5e",
+        "frame": 115311,
+        "sourceSha256": "3ea8292bc38b464b8cc12dc71c4a53207962047b99891bf49559056e29260da0",
+        "enemy": {
+          "dummyInstanceId": 369188,
+          "fid": "FTKPlayerID",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 31,
+          "armorMod": -4,
+          "tauntArmor": 0,
+          "armorEffectPresent": true,
+          "armorEffect": {
+            "count": 1,
+            "time": 2.2752320766448975,
+            "fullTime": 3.3333332538604736,
+            "proficiencyInstanceId": -17120,
+            "proficiencyId": 1572329033,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        }
+      },
+      {
+        "requestId": "0321a652414d44cd8c26e2a303cc1f4e",
+        "frame": 124067,
+        "sourceSha256": "80f6da4946bce742eeff213a37f0aceebd1baa1074cad632bbc68e1febb4f81d",
+        "enemy": {
+          "dummyInstanceId": 369188,
+          "fid": "FTKPlayerID",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 31,
+          "armorMod": -4,
+          "tauntArmor": 0,
+          "armorEffectPresent": true,
+          "armorEffect": {
+            "count": 1,
+            "time": 1.0405638217926025,
+            "fullTime": 3.3333332538604736,
+            "proficiencyInstanceId": -17120,
+            "proficiencyId": 1572329033,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        }
+      },
+      {
+        "requestId": "f98b5f81dc8c430584f3633dd136d951",
+        "frame": 128114,
+        "sourceSha256": "659ad7cbe741de99f8589dae967bc3a04397d0f7ca19056634609113bbb6cf02",
+        "enemy": {
+          "dummyInstanceId": 369188,
+          "fid": "FTKPlayerID",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 7,
+          "armorMod": -4,
+          "tauntArmor": 0,
+          "armorEffectPresent": true,
+          "armorEffect": {
+            "count": 1,
+            "time": 0.7367706298828125,
+            "fullTime": 3.3333332538604736,
+            "proficiencyInstanceId": -17120,
+            "proficiencyId": 1572329033,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        }
+      },
+      {
+        "requestId": "8b6963df59ec4c40873198c68ac2932e",
+        "frame": 136088,
+        "sourceSha256": "a1948983e494321947dd2024c6838c7240acad4ad4413f854e07ee5e67776000",
+        "enemy": {
+          "dummyInstanceId": 369188,
+          "fid": "FTKPlayerID",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 7,
+          "armorMod": 0,
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        }
+      }
+    ],
+    "limits": [
+      "Snapshots do not isolate individual random slot results.",
+      "Native revival produced a small timer adjustment; no monotonicity across that operation is claimed."
+    ]
+  }
+}

@@ -71,20 +71,31 @@ namespace FTKModFramework.Core
             foreach (string path in skipped)
                 Plugin.Log.LogInfo("[player-mesh] conditional apparel path not present for '" + identity + "': '" + path +
                     "'; assignment skipped.");
-            return ExplicitEnemyMeshSwap.Apply(identity, avatar, resolved);
+            return ExplicitEnemyMeshSwap.Apply(identity, avatar, resolved, null, true);
         }
 
         internal bool TryResolve(Transform root, out EnemyRendererMesh[] resolved, out string[] skipped, out string error)
+        {
+            return TryResolve(root, new EnemyRendererMesh[0], out resolved, out skipped, out error);
+        }
+
+        // Equipped garments replace class-default conditional apparel, never required body parts.
+        internal bool TryResolve(Transform root, EnemyRendererMesh[] equipment, out EnemyRendererMesh[] resolved,
+            out string[] skipped, out string error)
         {
             resolved = null;
             skipped = null;
             error = null;
             if (root == null) { error = "assembled avatar root is required"; return false; }
+            HashSet<string> replaced = new HashSet<string>(StringComparer.Ordinal);
+            foreach (EnemyRendererMesh item in equipment) replaced.Add(item.RendererPath);
             Transform[] targets = root.GetComponentsInChildren<Transform>(true);
             List<EnemyRendererMesh> assignments = new List<EnemyRendererMesh>();
             List<string> absent = new List<string>();
             foreach (EnemyRendererMesh item in _required)
             {
+                if (replaced.Contains(item.RendererPath))
+                { error = "item apparel cannot replace required body path '" + item.RendererPath + "'"; return false; }
                 SkinnedMeshRenderer renderer;
                 bool missing;
                 if (!ResolveTarget(root, targets, item.RendererPath, false, out renderer, out missing, out error)) return false;
@@ -92,6 +103,7 @@ namespace FTKModFramework.Core
             }
             foreach (PlayerApparelMesh item in _apparel)
             {
+                if (replaced.Contains(item.RendererPath)) continue;
                 SkinnedMeshRenderer renderer;
                 bool missing;
                 if (!ResolveTarget(root, targets, item.RendererPath, true, out renderer, out missing, out error)) return false;
@@ -104,6 +116,7 @@ namespace FTKModFramework.Core
                 }
                 assignments.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName));
             }
+            assignments.AddRange(equipment);
             resolved = assignments.ToArray();
             skipped = absent.ToArray();
             return true;

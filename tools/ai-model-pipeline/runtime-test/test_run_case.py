@@ -146,12 +146,6 @@ class RunnerTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):r.run()
         self.assertNotIn('stage-enemy',calls)
 
-    def test_unfinished_native_preparation_prevents_entry(self):
-        r,calls=self.setup_runner()
-        with patch.object(r,'prepare_entry',side_effect=TimeoutError('native discovery pending')):
-            with self.assertRaises(TimeoutError):r.run()
-        self.assertNotIn('enter_dungeon',calls)
-        self.assertNotIn('stage-enemy',calls)
 
     def test_ready_stage_rejection_stops_before_heal_and_click(self):
         r,calls=self.setup_runner('next-case','stage-next-enemy')

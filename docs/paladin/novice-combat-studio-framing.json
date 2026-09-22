@@ -1,0 +1,57 @@
+{
+  "schema": "ftkmf.paladin-combat-studio-trial.v1",
+  "status": "capture-complete-visual-framing-failed",
+  "session": "d893a896f72c4b89a6e42332d474e0d7",
+  "captureId": "60a531f358b14adbacd4a9944610b890",
+  "captureReceiptSha256": "d045da64096ec98482c2c62e6d919fd2886bb8ffcf2a1cd9b187c0261a604671",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "be083bbf5935e0c86c946bec0d030433557ecb8a813f12d9f7e9bfb561e34afa",
+  "armorSha256": "18a848e5d6c9998e951fb8c898f2fab17c0b0e621d2ddb0296afceb15eab1501",
+  "ownerInstanceId": 368986,
+  "celInstanceId": -328742,
+  "frames": 100,
+  "timingMode": "offline-fixed-step-gameplay",
+  "lastGameSeconds": 10.889999389648438,
+  "reviewedFrames": [
+    {
+      "index": 34,
+      "studioSha256": "d5a9c42a4901098b89adb20fff99b1a4d44dad65c1c479814d474753c7cd8a90",
+      "screenSha256": "cae539f56d65a12c7fffdfbaef9af8d33641c768ed648189db63fadc6323bc34",
+      "normalizedTime": 0.22687500715255737,
+      "clip": "attack_blunt1H"
+    },
+    {
+      "index": 40,
+      "studioSha256": "49a7f368b4f50568cdc5c450fb34ff8ff1c9e562a20b4512f76086fe35602c5a",
+      "screenSha256": "5e8f3ef29899d104f0758bd782dce80fe3e2e6d303694665d6302219fd329de7",
+      "normalizedTime": 0.4991249442100525,
+      "clip": "attack_blunt1H"
+    },
+    {
+      "index": 48,
+      "studioSha256": "a03d77d3c686684de050c0da5eed073513a91f99c26103b15dcf8b443b876735",
+      "screenSha256": "9aa3a241c6fb586afdf7b0b6e6f766cd87ba8a59f9e910070c088d6c4f76b738",
+      "normalizedTime": 0.8621248602867126,
+      "clip": "attack_blunt1H"
+    },
+    {
+      "index": 73,
+      "studioSha256": "d260a68fdf093368a762d85923f927069286b9d8daca5d0b63161e90d0bd79bf",
+      "screenSha256": "86232817a7758b07d138cec8da8af7c4a9bcfbbf6b53715dc41b90073c7af57d",
+      "normalizedTime": 0.6083154082298279,
+      "clip": "blunt1H_victory"
+    }
+  ],
+  "action": "One native no-focus Smash after Hunter pass; standard screenshot shows 10 damage and target HP changes from 8 to 0.",
+  "findings": [
+    "Attack clip sampled at frames 32 through 51, normalized progress 0.136125 through 0.998250.",
+    "Native screen frame 40 retains the visible character, while its supplemental studio image clips through the model.",
+    "Recovery frame 48 and victory frame 73 expose the breastplate; these selected views do not prove strike-wide chest clearance."
+  ],
+  "correction": "Capture studio now retains initial horizontal facing, uses world up and never shrinks below previously observed framing span. Builds and boundary checks pass; corrected live trial pending.",
+  "limitations": [
+    "Failed framing is retained and is not armor acceptance.",
+    "No received-damage, death, female two-handed, all-race motion or online claim.",
+    "Protected process stopped without saving."
+  ]
+}

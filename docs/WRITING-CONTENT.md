@@ -39,6 +39,9 @@ static class Register
 
 ## 3. The API (`FTKModFramework.Core.Content`)
 
+For the development Guardian kit, custom equipment modifiers and item-scoped
+original models, see [Guardian classes and original equipment](GUARDIAN-AND-EQUIPMENT.md).
+
 Every helper clones an existing entry (so you inherit a valid icon/prefab/animations), lets you
 tweak fields, and registers a display name. Pass YOUR plugin GUID so IDs never clash between mods.
 

@@ -1,0 +1,278 @@
+{
+  "session": "ead6a254b2814a7bb264e5841a2e89ca",
+  "frameworkSha256": "45beee438fe95dd7237a2a5e2a9ca290f0cc5bfdca8e2828d953f717e63ad120",
+  "helperSha256": "8f6f76efdc0b903f70e4ecd4488ddfcd807de17487f56297346164f6bfb353f4",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "schema": "ftkmf.paladin-guard-lifecycle-observations.v1",
+  "status": "bounded-switch-expiry-death-and-revival-observed",
+  "snapshots": [
+    {
+      "label": "2h-expired",
+      "requestId": "f378e352e91f4f818ef38065b796b856",
+      "frame": 77683,
+      "sourceSha256": "800ddba82092012f34b83f583a538db87a1b70eefe5eb9e6c018280fb6c87ac9",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "hp": 13,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "activeGuardians": [
+            "1:1",
+            "2:1"
+          ]
+        },
+        {
+          "identity": "1:1",
+          "hp": 10,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "0:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "hp": 10,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "0:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        }
+      ]
+    },
+    {
+      "label": "1h-before",
+      "requestId": "d87af49533d54ba2b55c54e010c92f46",
+      "frame": 93519,
+      "sourceSha256": "a5ce73845ea636fe876f371a560c0d5029890d6825e472381647e55aa9a9b377",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "hp": 22,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "activeGuardians": [
+            "1:1"
+          ]
+        },
+        {
+          "identity": "1:1",
+          "hp": 10,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "0:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "hp": 0,
+          "alive": false,
+          "canAct": false,
+          "designatedAlly": "0:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        }
+      ]
+    },
+    {
+      "label": "1h-applied",
+      "requestId": "c4e4bd5a21da41f0897caffb92d0b0a3",
+      "frame": 109863,
+      "sourceSha256": "91633e2af1ac878e73e5205481f6cd7401e73bb587754028901a6659c3f93641",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "hp": 22,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "hp": 19,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "0:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "hp": 0,
+          "alive": false,
+          "canAct": false,
+          "designatedAlly": "1:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        }
+      ]
+    },
+    {
+      "label": "1h-timer-a",
+      "requestId": "9708a0b639fe4d50aa77c69cf0e77d5e",
+      "frame": 115311,
+      "sourceSha256": "3ea8292bc38b464b8cc12dc71c4a53207962047b99891bf49559056e29260da0",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "hp": 22,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "hp": 19,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "0:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "hp": 13,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        }
+      ]
+    },
+    {
+      "label": "1h-timer-b",
+      "requestId": "0321a652414d44cd8c26e2a303cc1f4e",
+      "frame": 124067,
+      "sourceSha256": "80f6da4946bce742eeff213a37f0aceebd1baa1074cad632bbc68e1febb4f81d",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "hp": 22,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "hp": 19,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "activeGuardians": [
+            "2:1"
+          ]
+        },
+        {
+          "identity": "2:1",
+          "hp": 3,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "1:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ]
+    },
+    {
+      "label": "1h-timer-c",
+      "requestId": "f98b5f81dc8c430584f3633dd136d951",
+      "frame": 128114,
+      "sourceSha256": "659ad7cbe741de99f8589dae967bc3a04397d0f7ca19056634609113bbb6cf02",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "hp": 16,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "hp": 19,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "hp": 3,
+          "alive": true,
+          "canAct": true,
+          "designatedAlly": "1:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ]
+    }
+  ],
+  "observations": [
+    "Paladin2:1 guarded Hunter, died during native combat, and had no effective protection while dead.",
+    "Paladin2:1 later guarded Paladin1:1, died again, and native revival restored13HP without active protection; designation was cleared by current actor reset hook.",
+    "Paladin1:1 changed designation from Hunter to Paladin2:1, with new target active and Hunter no longer protected by that guardian.",
+    "Next Paladin2:1 turn cleared active Guard while retaining its designation."
+  ],
+  "limits": [
+    "No spent rescue before these revivals, so these snapshots do not establish charge preservation.",
+    "Current ResetForCombat integration also clears spent rescue; native source confirms revival invokes it. Fix and regression validation required before beta delivery.",
+    "No Stun/Petrified recovery or same-process new-encounter charge reset claim from this sequence."
+  ]
+}

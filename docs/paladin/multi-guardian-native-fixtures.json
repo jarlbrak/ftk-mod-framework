@@ -1,0 +1,416 @@
+{
+  "date": "2026-09-20",
+  "session": "613fb876e4094e2a9d60a1cce5e5c97b",
+  "frameworkSha256": "2b574262ed689c3a365859cb29ca7a50c05b5137caf823c9482b4cb0400ce091",
+  "helperSha256": "07b8d02a1f892bcdc6da6f263a57f6165e1d9a78393d463177c79cd1d5a3d3f0",
+  "fixtureArchiveSha256": "6e9c8b91af6cbaceec7c230051f74378c7035c5fd887ee2a5be4e2f117f1e57f",
+  "method": "Native UI Guard casts, then one-shot native enemy outcome fixtures. No HP or rescue state writes. Guardian input list for multi-rescue intentionally reversed; stable identity selected first guardian.",
+  "cases": [
+    {
+      "status": "passed",
+      "receipt": "b168328750e348cca4215a9c494b7f56",
+      "events": [
+        {
+          "phase": "armed",
+          "frame": 38855,
+          "data": {
+            "enemyId": 369188,
+            "victimId": 358974,
+            "guardians": [
+              {
+                "identity": "1:1",
+                "instanceId": 368986,
+                "rescueAvailable": true
+              },
+              {
+                "identity": "2:1",
+                "instanceId": 364424,
+                "rescueAvailable": true
+              }
+            ],
+            "guardianId": null,
+            "rescueAvailable": null,
+            "hp": 37,
+            "damage": 9,
+            "expectedHp": 32,
+            "expectedAlive": true,
+            "case": "nonstack"
+          }
+        },
+        {
+          "phase": "retarget",
+          "frame": 40162,
+          "data": {
+            "originalVictim": "2:1"
+          }
+        },
+        {
+          "phase": "commit-shape",
+          "frame": 40343,
+          "data": {
+            "pinnedVictimMatches": true,
+            "main": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 4,
+              "health": 33,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary1": null,
+            "secondary2": null,
+            "aoeTargets": 0
+          }
+        },
+        {
+          "phase": "commit",
+          "frame": 40343,
+          "data": {
+            "original": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 4,
+              "health": 33,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "replacement": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 9,
+              "health": 28,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        },
+        {
+          "phase": "production-transformed",
+          "frame": 40343,
+          "data": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 5,
+            "health": 32,
+            "response": "Damaged",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        },
+        {
+          "phase": "native-hit",
+          "frame": 40562,
+          "data": {
+            "passed": true,
+            "hp": 32,
+            "alive": true,
+            "guardians": [
+              {
+                "identity": "1:1",
+                "instanceId": 368986,
+                "rescueAvailable": true
+              },
+              {
+                "identity": "2:1",
+                "instanceId": 364424,
+                "rescueAvailable": true
+              }
+            ],
+            "rescueAvailable": null,
+            "outcome": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 5,
+              "health": 32,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "receipt": "5477d04846eb462caf365b0b868dc988",
+      "events": [
+        {
+          "phase": "armed",
+          "frame": 49456,
+          "data": {
+            "enemyId": 369188,
+            "victimId": 358974,
+            "guardians": [
+              {
+                "identity": "1:1",
+                "instanceId": 368986,
+                "rescueAvailable": true
+              },
+              {
+                "identity": "2:1",
+                "instanceId": 364424,
+                "rescueAvailable": true
+              }
+            ],
+            "guardianId": null,
+            "rescueAvailable": null,
+            "hp": 34,
+            "damage": 68,
+            "expectedHp": 1,
+            "expectedAlive": true,
+            "case": "multi-rescue"
+          }
+        },
+        {
+          "phase": "retarget",
+          "frame": 50737,
+          "data": {
+            "originalVictim": "1:1"
+          }
+        },
+        {
+          "phase": "commit-shape",
+          "frame": 50920,
+          "data": {
+            "pinnedVictimMatches": true,
+            "main": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 2,
+              "health": 32,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary1": null,
+            "secondary2": null,
+            "aoeTargets": 0
+          }
+        },
+        {
+          "phase": "commit",
+          "frame": 50920,
+          "data": {
+            "original": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 2,
+              "health": 32,
+              "response": "Damaged",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "replacement": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 68,
+              "health": 0,
+              "response": "Death",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        },
+        {
+          "phase": "production-transformed",
+          "frame": 50920,
+          "data": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 33,
+            "health": 1,
+            "response": "DamagedHeavy",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        },
+        {
+          "phase": "native-hit",
+          "frame": 51139,
+          "data": {
+            "passed": true,
+            "hp": 1,
+            "alive": true,
+            "guardians": [
+              {
+                "identity": "1:1",
+                "instanceId": 368986,
+                "rescueAvailable": false
+              },
+              {
+                "identity": "2:1",
+                "instanceId": 364424,
+                "rescueAvailable": true
+              }
+            ],
+            "rescueAvailable": null,
+            "outcome": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 33,
+              "health": 1,
+              "response": "DamagedHeavy",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "status": "passed",
+      "receipt": "00a57a280dff4822be61032b3c928227",
+      "events": [
+        {
+          "phase": "armed",
+          "frame": 88548,
+          "data": {
+            "enemyId": 369188,
+            "victimId": 358974,
+            "guardians": [
+              {
+                "identity": "1:1",
+                "instanceId": 368986,
+                "rescueAvailable": false
+              }
+            ],
+            "guardianId": 368986,
+            "rescueAvailable": false,
+            "hp": 2,
+            "damage": 4,
+            "expectedHp": 0,
+            "expectedAlive": false,
+            "case": "spent-rescue"
+          }
+        },
+        {
+          "phase": "retarget",
+          "frame": 89899,
+          "data": {
+            "originalVictim": "1:1"
+          }
+        },
+        {
+          "phase": "commit-shape",
+          "frame": 90080,
+          "data": {
+            "pinnedVictimMatches": true,
+            "main": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 4,
+              "health": 0,
+              "response": "Death",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "secondary1": null,
+            "secondary2": null,
+            "aoeTargets": 0
+          }
+        },
+        {
+          "phase": "commit",
+          "frame": 90080,
+          "data": {
+            "original": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 4,
+              "health": 0,
+              "response": "Death",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            },
+            "replacement": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 4,
+              "health": 0,
+              "response": "Death",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        },
+        {
+          "phase": "production-transformed",
+          "frame": 90080,
+          "data": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 2,
+            "health": 0,
+            "response": "Death",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        },
+        {
+          "phase": "native-hit",
+          "frame": 90299,
+          "data": {
+            "passed": true,
+            "hp": 0,
+            "alive": false,
+            "guardians": [
+              {
+                "identity": "1:1",
+                "instanceId": 368986,
+                "rescueAvailable": false
+              }
+            ],
+            "rescueAvailable": false,
+            "outcome": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 2,
+              "health": 0,
+              "response": "Death",
+              "proficiency": "None",
+              "crit": 0,
+              "attackerHealthMod": 0,
+              "aoe": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Controlled damage and retargeting through native playback; not ordinary RNG, targeting or co-op evidence.",
+    "Spent-rescue intentionally produced native death of the Hunter in the isolated unsaved encounter.",
+    "Gear inventory and equipment operations were explicit fixtures."
+  ]
+}

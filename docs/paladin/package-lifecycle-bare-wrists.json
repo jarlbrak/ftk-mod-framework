@@ -1,0 +1,98 @@
+{
+  "archiveSha256": "85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a",
+  "byteVerification": [
+    {
+      "enabled": true,
+      "exactArchiveFiles": 137,
+      "step": "02-activate"
+    },
+    {
+      "enabled": false,
+      "exactArchiveFiles": 137,
+      "step": "04-activate-disabled"
+    },
+    {
+      "enabled": true,
+      "exactArchiveFiles": 137,
+      "step": "06-activate-enabled"
+    },
+    {
+      "enabled": true,
+      "exactArchiveFiles": 137,
+      "step": "10-activate-rollback"
+    }
+  ],
+  "export": {
+    "activeSetMatches": true,
+    "format": "Managed-set JSON manifest, not a package ZIP",
+    "sha256": "da0d184bf01bad2811e19a265d4c6c173237cbb2043c48bc8acab092b46030d9"
+  },
+  "fileCount": 137,
+  "helperSha256": "702d29fb02a2b7431cd183e0fb6d0e37eaf687e4b2ff60b9161c944f81e8c8b9",
+  "removedContentEmpty": true,
+  "scope": "Real helper CLI lifecycle in isolated scratch state; no game, UI, save or online proof.",
+  "status": "passed",
+  "steps": [
+    {
+      "resultSha256": "2ea755a6b0c830160c4358959c5d32c654e7c3e305b64f13c33fb05cd8f8e17b",
+      "step": "01-prepare-install"
+    },
+    {
+      "resultSha256": "82990d3d71c20cdff4ed64c8f4e9683d741acc37931684b45dd6724fa43f2661",
+      "step": "02-activate"
+    },
+    {
+      "resultSha256": "8aad87bb4c56c2a0f416db167468edd2cee4d1b7acd074669ba0a8c0bc5cf706",
+      "step": "03-disable-plan"
+    },
+    {
+      "resultSha256": "0981169d9b2b652553b0f5733a5a248c248ebb3681e105d9cf3bdbe7a41cea15",
+      "step": "03-disable"
+    },
+    {
+      "resultSha256": "1226638453ccac0ac21dd68bb6b4411f3562a1141fd27262355b05c1c68f0cab",
+      "step": "04-activate-disabled"
+    },
+    {
+      "resultSha256": "0a7edff06b418ccfb11cc246207ed2998c8aa38f9c7c06cffd1724081fe7e903",
+      "step": "05-enable-plan"
+    },
+    {
+      "resultSha256": "40436e97aea7cd2ef16cae30c79b36d5816fe206b458c484d4c2cdfe66f25268",
+      "step": "05-enable"
+    },
+    {
+      "resultSha256": "5d530df330f824736947e9c0e661dcc519d96a56ae8dc531f9565119d7a16ec8",
+      "step": "06-activate-enabled"
+    },
+    {
+      "resultSha256": "aa2e46593e13f7380c87ff904e8c3503f9d6cd2ec33fff02bb7d84f5dbf4b3b8",
+      "step": "07-remove-plan"
+    },
+    {
+      "resultSha256": "d61c76b29bbeb519380fc884a6a123cef712b77d789b37254e030369eca66969",
+      "step": "07-remove"
+    },
+    {
+      "resultSha256": "74045d594ca0c4a4c1b9c93467c446979e92ff077e04d24cceae4741bc9e38b9",
+      "step": "08-activate-removed"
+    },
+    {
+      "resultSha256": "67b8c0bdbdbffaa8b104276cc8fe0a068ca1427a043c4738dff6491bb13d2abc",
+      "step": "09-rollback"
+    },
+    {
+      "resultSha256": "81a68dccb8c580f7d1a18a1631b19ae0f0933d76907a31c8fd7e1a1d23a2c71b",
+      "step": "10-activate-rollback"
+    },
+    {
+      "resultSha256": "aad93ad513bd0b150e706d06c08b190ade4c55dfde36d10728611ca2ef6b89b7",
+      "step": "11-export"
+    }
+  ],
+  "limitations": [
+    "No game or save compatibility validation.",
+    "No public HTTP catalog download.",
+    "No art approval or online co-op validation."
+  ]
+}

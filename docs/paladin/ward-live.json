@@ -1,0 +1,917 @@
+{
+  "frameworkSha256": "45beee438fe95dd7237a2a5e2a9ca290f0cc5bfdca8e2828d953f717e63ad120",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "helperSha256": "05d5879b411c4fbca92e43384fc974258b01ce99135ff977317f2270d064d96c",
+  "session": "7dcc553bee0b4b1b8c6b2858fde6300c",
+  "schema": "ftkmf.paladin-ward-live.v1",
+  "status": "bounded-native-group-poison-protection-observed",
+  "snapshots": [
+    {
+      "requestId": "4de3622ad36344029d84b51e883226fa",
+      "frame": 22688,
+      "sourceSha256": "030cb7b6f02051ce1883bda8903ee10c73a1c5b9e418e610e44bb8a3f9729098",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -274858,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 37,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1191317998,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1191317998,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -280294,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -285212,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": []
+        }
+      ],
+      "dummies": [
+        {
+          "dummyInstanceId": 358974,
+          "fid": "0:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 37,
+          "maxHp": 37,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": null,
+            "damageInfo": {
+              "attacker": "0:0",
+              "victim": "0:0",
+              "damage": 0,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "None",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 368986,
+          "fid": "1:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 39,
+          "maxHp": 39,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": null,
+            "damageInfo": {
+              "attacker": "0:0",
+              "victim": "0:0",
+              "damage": 0,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "None",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 364424,
+          "fid": "2:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 39,
+          "maxHp": 39,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": null,
+            "damageInfo": {
+              "attacker": "0:0",
+              "victim": "0:0",
+              "damage": 0,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "None",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 369188,
+          "fid": "0:-1",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 58,
+          "maxHp": 58,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": null,
+            "damageInfo": {
+              "attacker": "0:0",
+              "victim": "0:0",
+              "damage": 0,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "None",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        }
+      ]
+    },
+    {
+      "requestId": "2e56596f7058465a93d9f04b04e9f799",
+      "frame": 36108,
+      "sourceSha256": "992d12cd1afce08e46d972a78e5449ef8c8ccb30f9ec55987c1c25c3dcd717ec",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -274858,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 37,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1191317998,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1191317998,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -280294,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": [
+            "2:1"
+          ]
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -285212,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "1:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 2. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ],
+      "dummies": [
+        {
+          "dummyInstanceId": 358974,
+          "fid": "0:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 37,
+          "maxHp": 37,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "0:1",
+              "victim": "0:-1",
+              "damage": 9,
+              "newHealth": 49,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "Damaged",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "damageInfo": {
+              "attacker": "0:0",
+              "victim": "0:0",
+              "damage": 0,
+              "newHealth": 0,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "None",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 368986,
+          "fid": "1:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 39,
+          "maxHp": 39,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "1:1",
+              "victim": "2:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 1398377095,
+              "profSuccess": true,
+              "profAffect": true,
+              "profImmune": false
+            },
+            "damageInfo": {
+              "attacker": "2:1",
+              "victim": "1:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 1398377095,
+              "profSuccess": true,
+              "profAffect": true,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 364424,
+          "fid": "2:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 39,
+          "maxHp": 39,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "2:1",
+              "victim": "1:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 1398377095,
+              "profSuccess": true,
+              "profAffect": true,
+              "profImmune": false
+            },
+            "damageInfo": {
+              "attacker": "1:1",
+              "victim": "2:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 1398377095,
+              "profSuccess": true,
+              "profAffect": true,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 369188,
+          "fid": "0:-1",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 49,
+          "maxHp": 58,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "0:-1",
+              "victim": "2:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "Dodge",
+              "proficiencyId": 658,
+              "profSuccess": true,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "damageInfo": {
+              "attacker": "0:1",
+              "victim": "0:-1",
+              "damage": 9,
+              "newHealth": 49,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "Damaged",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        }
+      ]
+    },
+    {
+      "requestId": "33f27920f24d4e15aa5fab18adfdb96e",
+      "frame": 47897,
+      "sourceSha256": "e17c140b8c99a78dedcd961241493e0a0404ac9f27d064f82fb952d730d0a08a",
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -274858,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 37,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1223789468,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1223789468,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -280294,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": [
+            "2:1"
+          ]
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -285212,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 30,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 100023,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1382228015,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": []
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "1:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 2. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": []
+        }
+      ],
+      "dummies": [
+        {
+          "dummyInstanceId": 358974,
+          "fid": "0:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 37,
+          "maxHp": 37,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "0:1",
+              "victim": "0:-1",
+              "damage": 10,
+              "newHealth": 20,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "Damaged",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "damageInfo": {
+              "attacker": "0:-1",
+              "victim": "0:1",
+              "damage": 0,
+              "newHealth": 37,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 620,
+              "profSuccess": true,
+              "profAffect": true,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 368986,
+          "fid": "1:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 39,
+          "maxHp": 39,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "1:1",
+              "victim": "2:1",
+              "damage": 0,
+              "newHealth": 30,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 1398377095,
+              "profSuccess": true,
+              "profAffect": true,
+              "profImmune": false
+            },
+            "damageInfo": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 620,
+              "profSuccess": true,
+              "profAffect": false,
+              "profImmune": true
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 364424,
+          "fid": "2:1",
+          "side": "player",
+          "alive": true,
+          "fled": false,
+          "hp": 30,
+          "maxHp": 39,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "2:1",
+              "victim": "1:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 1398377095,
+              "profSuccess": true,
+              "profAffect": true,
+              "profImmune": false
+            },
+            "damageInfo": {
+              "attacker": "0:-1",
+              "victim": "2:1",
+              "damage": 0,
+              "newHealth": 30,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 620,
+              "profSuccess": true,
+              "profAffect": false,
+              "profImmune": true
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        },
+        {
+          "dummyInstanceId": 369188,
+          "fid": "0:-1",
+          "side": "enemy",
+          "alive": true,
+          "fled": false,
+          "hp": 20,
+          "maxHp": 58,
+          "armorMod": 0,
+          "sufferingCategories": [],
+          "storedCombat": {
+            "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+            "attackInfo": {
+              "attacker": "0:-1",
+              "victim": "1:1",
+              "damage": 0,
+              "newHealth": 39,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "HarmlessAttack",
+              "proficiencyId": 620,
+              "profSuccess": true,
+              "profAffect": false,
+              "profImmune": true
+            },
+            "damageInfo": {
+              "attacker": "0:1",
+              "victim": "0:-1",
+              "damage": 10,
+              "newHealth": 20,
+              "attackerHealthMod": 0,
+              "aoe": false,
+              "response": "Damaged",
+              "proficiencyId": -1,
+              "profSuccess": false,
+              "profAffect": false,
+              "profImmune": false
+            },
+            "postAttackHealthMod": 0
+          },
+          "tauntArmor": 0,
+          "armorEffectPresent": false,
+          "armorEffect": null
+        }
+      ]
+    }
+  ],
+  "nativeEvent": {
+    "m_LogGroup": "Combat",
+    "m_LogEntryEvents": [
+      "Enemy Dummy(snakeDesertB) engages attack",
+      "Enemy Dummy(snakeDesertB) rolls slots (attack)",
+      "[PlayAttackSequence] Enemy Dummy(snakeDesertB) attacking Player 2 Dummy(Player 2) with snakeDesertB(enPoisonGroup3), expected result: HarmlessAttack",
+      "[RespondToHit] Player 1 Dummy(Player 1) hit (HarmlessAttack)",
+      "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)",
+      "[RespondToHit] Player 2 Dummy(Player 2) hit (HarmlessAttack)"
+    ],
+    "m_LogIndex": 9
+  },
+  "method": "Fixture-owned Censure shields on all three heroes. Party placed adjacent to native King Cobra, native end-turn and keyboard walk/Fight. Two Paladins cast reciprocal Guard through native target UI. No enemy outcome or proficiency forcing.",
+  "observations": [
+    "Native enPoisonGroup3 (620) succeeded on all three heroes. Both protected Paladins had affect=false/immune=true; unguarded Hunter wearing same shield had affect=true/immune=false.",
+    "Direct native UI observation showed Poison indicator only on Hunter after this action. No standalone screenshot artifact retained."
+  ],
+  "limits": [
+    "Representative group Poison result only; not live proof of all four Ward categories or damaging Poison bite.",
+    "No pre-transform DDI hook or direct poison-counter snapshot. Native flags, source mapping and visible status support this bounded result; individual immunity was not separately queried.",
+    "No online or ordinary acquisition proof."
+  ]
+}

@@ -153,7 +153,7 @@ namespace FTKModFramework.Agent
             root["choices"] = choices;
 
             // --- selectable adventures (menu only) ---------------------------------------------------
-            // Surface the injected adventures so the agent loop can see the framework's D1 ("HollowMire")
+            // Surface injected adventures so the agent loop can observe registered content
             // as a pickable start_run option and confirm the current selection. STRICTLY READ-ONLY: this is
             // an observation, so it must never force the cache to build (that is the list_adventures action's
             // job). GetPreviewNamesIfBuilt returns null until something else builds the cache.

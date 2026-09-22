@@ -1,0 +1,22 @@
+{
+  "schema": "ftkmf.paladin-acquisition-native.v1",
+  "status": "native-shop-selection-inspected-live-family-acquisition-open",
+  "assemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "anchors": {
+    "TownManager._fillMarketLists": "Builds market pools from cached items in ShopType.All object types. Excludes adventure DontDropItems and items failing IsItemUnlocked, then applies town, dungeon and night market flags.",
+    "TownManager.GetFilteredMarketAllItems": "Combines requested market pools, excludes FilterEndDungeon items when applicable, and keeps inclusive MinLevel to MaxLevel bounds.",
+    "TownManager.CreateNewShopInventoryForPOI": "Uses GameDefinition.GetGameStage().GetItemLevel(), not buyer level. After mandatory items, filters each shop pool by ObjectType and absence from existing stock, shuffles candidates and takes up to that shop's quantity. This method does not weight candidates by rarity.",
+    "TownManager._registerShopItem": "Reads native item or weapon row stock, applies any market quantity override, and populates both stock containers.",
+    "GridEditor.FTK_itemsDB.IsItemUnlocked": "A matching item-category lore entry requires purchase. With no matching lore entry, returns true."
+  },
+  "validationConsequences": [
+    "Record campaign-stage item level and actual shop category when testing progression. Hero level alone does not establish shop eligibility.",
+    "Observe cached pool membership and native generated stock separately; eligibility does not guarantee selection into a particular shop.",
+    "Do not regenerate stock or append items when claiming ordinary acquisition.",
+    "The package's empty collection-lore field addresses collection behavior; it is not the market's lore-unlock check."
+  ],
+  "limits": [
+    "Native source inspection only. Does not establish current runtime cache membership, purchases for every equipment family, random drops or balance.",
+    "The source package validator checks declared fields, not the complete native selection path."
+  ]
+}

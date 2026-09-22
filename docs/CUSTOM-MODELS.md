@@ -72,8 +72,8 @@ control alongside the normal-death fixture.
 ### Wire it up
 
 ```csharp
-// editor-free; ship mudwretch_rigged.glb + mudwretch_basecolor.png at FTKModFramework_content/models/
-Content.SetEnemyBodyMeshFromGlb(enemy, "mudwretch_rigged.glb", "mudwretch_basecolor.png");
+// editor-free; ship my_enemy_rigged.glb + my_enemy_basecolor.png at FTKModFramework_content/models/
+Content.SetEnemyBodyMeshFromGlb(enemy, "my_enemy_rigged.glb", "my_enemy_basecolor.png");
 ```
 
 The texture is loaded from the `.png` via `Texture2D.LoadImage` and pushed into the body material's
@@ -82,13 +82,6 @@ Load failures are logged and may retain a fallback body. Inspect the loader log
 for the intended mesh and zero unintended dropped joint slots; fallback rendering
 is not a successful custom-model test. Existing `proceduralBody` settings can
 hide the skinned renderer even after a successful swap.
-
-> Current authored example: Mirewarden replaces the Flooded Crypt boss body
-> when `FTK_MIREWARDEN_BODY=1` and `FTK_BASELINE_STOCK_BODY` is unset. Its mesh,
-> idle articulation, portrait, and one normal combat exchange were observed
-> in-game. Captured standard attack, hit, ragdoll, and completed combat now have
-> evidence; other state variants and artistic refinement remain pending. The default
-> sample configuration in this checkout still uses the procedural body.
 
 ---
 
@@ -191,12 +184,10 @@ document is gone from master, so the decision is recorded here.
   (PR #105) delivered it with canonical route representatives for all 48 supported topology groups
   ([coverage](MODEL-CANDIDATE-VALIDATION-COVERAGE.md)) and the per-archive evidence in the
   [validation ledger](MODEL-VALIDATION-GATES.md). Spike [#72](https://github.com/jarlbrak/ftk-mod-framework/issues/72)
-  had earlier concluded B was robust for reconstruction, but its AI-generated Mudwretch mesh never reached
+  had earlier concluded B was robust for reconstruction, but an early generated mesh never reached
   the visual gate; the current evidence rests on the #104 authored models, not on that spike.
-- **C, the procedural body, is what the sample boss ships by default.** `FTKModFramework/Content/RealmBossAdventure.cs`
-  builds the Mudwretch Foreman as the procedural golem on the troll skeleton because the spike-era GLB rendered
-  as a noisy blob in-game. The authored Mirewarden GLB body is an opt-in test lever (`FTK_MIREWARDEN_BODY=1`),
-  not the default, so the sample does not by itself demonstrate path B.
+- **C, procedural geometry on a native skeleton, remains a documented fallback.** It is useful for
+prototypes, but it is not bundled content and does not establish runtime-GLB evidence.
 - **A, an AssetBundle built in Unity 2017.2.2p2, is a documented fallback.** `Content.SetEnemyBodyMesh` and
   `Content.SetEnemyBodyFromBundle` exist, but no live-game evidence for a bundle body is on master, and the
   editor requirement keeps it out of the primary path.

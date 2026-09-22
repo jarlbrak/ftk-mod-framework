@@ -1,0 +1,151 @@
+{
+  "schema": "ftkmf.paladin-production-start.v1",
+  "packageSha256": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295",
+  "frameworkSha256": "a1faf7907de8acfea9ec1dcb14371761386f689f92888ef314891eec3689b00e",
+  "helperSha256": "e4e9365d37e604c0d7580704fc8970c36ec352ff1e91dc27bfaeaa1f978c8db8",
+  "status": "bounded-pass-native-new-game-save-resume-and-process-restart",
+  "priorAttempt": {
+    "schema": "ftkmf.paladin-production-start.v1",
+    "status": "incomplete-native-process-crash-at-game-config",
+    "packageSha256": "92dd4d19d8efbcaa177423182c9d4ac9476b2f79f35ac6d98c4779b294c24295",
+    "frameworkSha256": "a1faf7907de8acfea9ec1dcb14371761386f689f92888ef314891eec3689b00e",
+    "helperSha256": "e4e9365d37e604c0d7580704fc8970c36ec352ff1e91dc27bfaeaa1f978c8db8",
+    "observations": [
+      "Managed production archive startup registered39/39 rows withoutcontenterrors.",
+      "Native NewGame configuration opened with ForTheKing/Apprentice/SoloAdventure.",
+      "Process exited134 while navigatingGameConfig; playerlogendsunhandledNULL/nativeMonoUpdate stack.",
+      "No freshparty or startingequipment acceptance.",
+      "Prior isolatedsave and managedstate preserved beforetrial."
+    ],
+    "limits": [
+      "Crash cause not established; do not infer Paladin causality or claim new-game pass.",
+      "UI handle reopened an unconfigured app afteroriginalprocess crash; replacement was stopped without gameplay or save actions."
+    ]
+  },
+  "session": "56369ef57e0f42da83052ccd0d664bdc",
+  "inventoryRequestId": "8cc8d355384e423dbb048b8c254188be",
+  "worldRequestId": "3713a805c4d04c53b1006f393874cb18",
+  "route": [
+    "Native New Game",
+    "For the King / Apprentice / Solo Adventure",
+    "Native Create Game",
+    "Party Select: Paladin, Hunter, Scholar",
+    "Native Start",
+    "Native intro Continue",
+    "Read-only equipment observation during opening world dialogue"
+  ],
+  "heroIdentity": "0:1",
+  "equipment": {
+    "LeftHand": [
+      {
+        "canonicalId": "paladin_shield_novice",
+        "count": 1
+      }
+    ],
+    "RightHand": [
+      {
+        "canonicalId": "paladin_hammer_1h_novice",
+        "count": 1
+      }
+    ],
+    "Head": [
+      {
+        "canonicalId": "paladin_helmet_novice",
+        "count": 1
+      }
+    ],
+    "Body": [
+      {
+        "canonicalId": "paladin_armor_novice",
+        "count": 1
+      }
+    ],
+    "Foot": [
+      {
+        "canonicalId": "paladin_boots_novice",
+        "count": 1
+      }
+    ],
+    "Trinket": [],
+    "Belt": [],
+    "Backpack": [
+      {
+        "canonicalId": "herbGodsbeard1",
+        "count": 1
+      },
+      {
+        "canonicalId": "herbFocus1",
+        "count": 1
+      },
+      {
+        "canonicalId": "conTinderbox",
+        "count": 1
+      },
+      {
+        "canonicalId": "bootsBeginner",
+        "count": 1
+      },
+      {
+        "canonicalId": "townTeleport",
+        "count": 1
+      }
+    ],
+    "Neck": []
+  },
+  "observations": [
+    "Production 39-row package, no all-gear fixture or item grant command.",
+    "All five novice starting equipment pieces are present once in their native equipment slots.",
+    "Native world party has three living heroes; Paladin HP 38.",
+    "Custom equipment renderer lease reports applied."
+  ],
+  "limits": [
+    "Native movement focus returned after resume; actual movement and combat are outside this receipt.",
+    "Earlier configuration crash remains unexplained; successful retry does not erase that failure.",
+    "Does not establish all races, animation coverage, or online co-op."
+  ],
+  "saveResume": {
+    "status": "pass-same-process-native-save-exit-resume",
+    "inventoryRequestId": "d7f1c88b63464c10adc4578233d97e75",
+    "worldRequestId": "7412386ef93e496193ecdbd5009ead8b",
+    "route": [
+      "Complete native opening dialogue",
+      "First Paladin turn",
+      "Options / Save Exit / Save and Exit",
+      "Title Resume",
+      "Party Select Start"
+    ],
+    "allStartingSlotsAndCountsUnchanged": true,
+    "heroIdentity": "0:1",
+    "hp": 38,
+    "actionPoints": 4,
+    "nativeMovementFocus": true,
+    "rendererLease": {
+      "available": true,
+      "present": true,
+      "leaseId": 16,
+      "acquired": true,
+      "applied": true,
+      "references": 1
+    },
+    "limits": [
+      "Same-process resume only; full application restart and disabled-package recovery remain separate gates."
+    ]
+  },
+  "applicationRestart": {
+    "status": "pass-native-resume-after-process-restart",
+    "session": "7a9a674105d745aea3f7edd6d726d8e5",
+    "inventoryRequestId": "8515b42e70014225adcac09755f52e3b",
+    "worldRequestId": "01fc963aeaf44a7fa445d810585521c2",
+    "allStartingSlotsAndCountsUnchanged": true,
+    "heroIdentity": "0:1",
+    "hp": 38,
+    "actionPoints": 4,
+    "nativeMovementFocus": true,
+    "rendererLeaseApplied": true,
+    "startup": "39/39 production entries registered, zero content errors or warnings",
+    "limits": [
+      "Single-player isolated save only.",
+      "Does not establish disabled-package recovery or online co-op."
+    ]
+  }
+}

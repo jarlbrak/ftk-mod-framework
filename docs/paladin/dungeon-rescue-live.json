@@ -1,0 +1,241 @@
+{
+  "schema": "ftkmf.paladin-dungeon-rescue-live.v1",
+  "status": "rescue-consumption-passed-next-combat-recharge-not-yet-observed",
+  "session": "13c1a480d62848ca885e638a59ed8f58",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "4843ecadd070cfe97f4c53b2aecb6b80a2cd45925cbbe8af9f9a5279e9d5761c",
+  "setup": "Fresh native Lost Civilization run in the isolated all-gear fixture. Three heroes snapped to an existing unlocked Crypt before native entry. Room 0:1 staged with one native King Cobra.",
+  "rescue": {
+    "status": "passed",
+    "events": [
+      {
+        "phase": "armed",
+        "frame": 71624,
+        "data": {
+          "enemyId": 445738,
+          "victimId": 435524,
+          "guardians": [
+            {
+              "identity": "1:1",
+              "instanceId": 445536,
+              "rescueAvailable": true
+            }
+          ],
+          "guardianId": 445536,
+          "rescueAvailable": true,
+          "hp": 38,
+          "damage": 76,
+          "expectedHp": 1,
+          "expectedAlive": true,
+          "case": "rescue"
+        }
+      },
+      {
+        "phase": "retarget",
+        "frame": 73845,
+        "data": {
+          "originalVictim": "0:1"
+        }
+      },
+      {
+        "phase": "commit-shape",
+        "frame": 73962,
+        "data": {
+          "pinnedVictimMatches": true,
+          "main": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "health": 38,
+            "response": "HarmlessAttack",
+            "proficiency": "enSnakeEntangle",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          },
+          "secondary1": null,
+          "secondary2": null,
+          "aoeTargets": 0
+        }
+      },
+      {
+        "phase": "commit",
+        "frame": 73962,
+        "data": {
+          "original": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "health": 38,
+            "response": "HarmlessAttack",
+            "proficiency": "enSnakeEntangle",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          },
+          "replacement": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 76,
+            "health": 0,
+            "response": "Death",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        }
+      },
+      {
+        "phase": "production-transformed",
+        "frame": 73962,
+        "data": {
+          "attacker": "0:-1",
+          "victim": "0:1",
+          "damage": 37,
+          "health": 1,
+          "response": "DamagedHeavy",
+          "proficiency": "None",
+          "crit": 0,
+          "attackerHealthMod": 0,
+          "aoe": false
+        }
+      },
+      {
+        "phase": "native-hit",
+        "frame": 74166,
+        "data": {
+          "passed": true,
+          "hp": 1,
+          "alive": true,
+          "guardians": [
+            {
+              "identity": "1:1",
+              "instanceId": 445536,
+              "rescueAvailable": false
+            }
+          ],
+          "rescueAvailable": false,
+          "outcome": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 37,
+            "health": 1,
+            "response": "DamagedHeavy",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        }
+      }
+    ],
+    "scope": "One-shot fixture outcome through native enemy turn/playback. Not ordinary RNG, damage calculation or co-op evidence."
+  },
+  "spentGuardian": {
+    "identity": "1:1",
+    "dummyInstanceId": 445536,
+    "heroInstanceId": -596718,
+    "classId": 14,
+    "classKey": "paladin",
+    "hp": 39,
+    "focusPoints": 4,
+    "spentFocus": 0,
+    "weaponItemId": 1223789468,
+    "hands": [
+      {
+        "slot": "LeftHand",
+        "items": [
+          {
+            "itemId": 1382228015,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "slot": "RightHand",
+        "items": [
+          {
+            "itemId": 1223789468,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "guardian": true,
+    "canAct": true,
+    "alive": true,
+    "stunned": false,
+    "petrified": false,
+    "fled": false,
+    "designatedAlly": "0:1",
+    "storedActive": false,
+    "effectiveActive": false,
+    "rescueAvailable": false,
+    "status": "Chosen ally: Player 1. Protection: inactive. Divine Intervention: spent this combat.",
+    "activeGuardians": []
+  },
+  "postVictory": {
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 3
+    },
+    "sessions": {
+      "esInCombat": false,
+      "mcInCombat": true,
+      "mcEncounterType": "Ready",
+      "esVoteType": "Ready",
+      "mcVoteType": "Ready",
+      "fightOrderCount": 0,
+      "esFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for Battle to End"
+      },
+      "voteFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Show Vote Buttons"
+      },
+      "lootFsm": {
+        "present": true,
+        "enabled": true,
+        "state": "Wait for initialize"
+      }
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": false,
+      "isAtLastLevel": true,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 1,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 5,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Trap3",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "trap"
+      ],
+      "slotAllowsEnemySubstitution": false,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    }
+  },
+  "observations": [
+    "Native Guard selected Hunter. First lethal fixture aborted on secondary poison outcomes without damage replacement; second eligible native action consumed rescue and left Hunter at 1 HP.",
+    "Normal native abilities defeated the Cobra. Hunter subsequently died and was revived through the native post-combat prompt before Ready.",
+    "The next generated room is Trap3. A native Ready vote advanced into it. Next-combat recharge is still unobserved; no recharge pass is claimed."
+  ],
+  "rawEvidenceSha256": {
+    "paladin-dungeon-rescue-result.txt": "316759faba5f11675c8334e5b58d6c3a6e0494063f64afa8723e4ebf1e36734b",
+    "paladin-dungeon-rescue-result-2.txt": "00b225b8de929eb1bd67cb6e3beec6475f8694e411236e52aaac7e2ea80f5fc4",
+    "paladin-dungeon-spent.txt": "26a9a676ff70e53c00eb0336b7f60067154cd8d18fa927fc6b2dd9e578536647",
+    "paladin-dungeon-normal-attacks.json": "5ac3c418c2a7c921e89671277db0aff2b76e88950baac14b8952acf406b62cd0",
+    "paladin-dungeon-ready-state.txt": "e3b39a9740ed6bbc2b6d50cf89201bc92f20a7f4d47f314593e120f684d1a10e"
+  }
+}

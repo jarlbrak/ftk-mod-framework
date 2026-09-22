@@ -1,0 +1,64 @@
+{
+  "schema": "ftkmf.paladin-current-novice-combat-studio.v1",
+  "status": "bounded-current-asset-combat-smoke",
+  "observedAt": "2026-09-21",
+  "session": "a56c4b6f7d1249dea6650bad0f141258",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "frameworkSha256": "ce008349d5071bc64326a4e5899e3e594e8b0c2e23955160fd130c13ab0cdd49",
+  "helperSha256": "65e3e3fdb73b05d0373c9caffcbf626dbdc791102e6ac0c447a951471610dcc8",
+  "nativeCombatEntry": {
+    "route": "single-player bridge engage with party:true",
+    "result": "engaged true; partyMoved 3; partySkipped 0",
+    "state": "active true; heroTurnReady true"
+  },
+  "equipment": {
+    "set": "novice",
+    "equippedSlots": ["one-handed hammer", "shield", "helmet", "armor", "boots"],
+    "maleArmorAssetSha256": "5cd8480451aaf7e678de57dca4311e83be8c6ca9a89a87448ba151a0ff61609d",
+    "femaleArmorAssetSha256": "c9fd2d727a549ff29083365aa2e2e814b04d279999095f4fa91ee45b39720592"
+  },
+  "captures": [
+    {
+      "appearance": "Male",
+      "owner": "Player 2 Dummy",
+      "ownerInstanceId": 368986,
+      "captureId": "55408d80abc54885a56087f76c99b9a9",
+      "view": "front",
+      "rendererPath": "Avatar/armorBlacksmithM(Clone)",
+      "mesh": "ftkmf_glb_package-model:758c69421946c47a588fff3f3041a4ef02eecde26c137b752a3ac562eebfaf92",
+      "studioPngSha256": "dd95c7bdccb722798ddda8eda14b9c72fb2117863dfdee75d44da8b912b9bc96",
+      "fixedFacing": true,
+      "layersRestored": true
+    },
+    {
+      "appearance": "Female",
+      "owner": "Player 3 Dummy",
+      "ownerInstanceId": 364424,
+      "captureId": "8a926835c0e042519ccb88a1f931bed5",
+      "view": "front",
+      "rendererPath": "Avatar/armorBlacksmithF(Clone)",
+      "mesh": "ftkmf_glb_package-model:b819b11e7ddca9cd98dca2aa8355f31f49e1ad203c705fe1554f6488eeea8daa",
+      "studioPngSha256": "636796a46b1e8e58a2a6cb14b9b5b6d0d7f4debd174da23279a19a7238499f4b",
+      "fixedFacing": true,
+      "layersRestored": true
+    },
+    {
+      "appearance": "Male",
+      "owner": "Player 2 Dummy",
+      "ownerInstanceId": 368986,
+      "captureId": "d50cf8b7d982429fb1dca1ab254706ce",
+      "view": "back",
+      "rendererPath": "Avatar/armorBlacksmithM(Clone)",
+      "mesh": "ftkmf_glb_package-model:758c69421946c47a588fff3f3041a4ef02eecde26c137b752a3ac562eebfaf92",
+      "studioPngSha256": "77392546437a3814ebfcee9dda167f637bfc816e9037324d90ead75008f6ee3f",
+      "fixedFacing": true,
+      "layersRestored": true
+    }
+  ],
+  "limitations": [
+    "One observation frame per capture, with no current-asset motion or hit coverage.",
+    "The supplemental studio image presents the existing native combat avatar and pose. It is not normal gameplay framing or performance evidence.",
+    "Only Male and Female Novice equipment is covered. Other appearances, sets, rigid-instance cleanup and final art approval remain open.",
+    "The fixture grants equipment for observation and does not prove normal acquisition, save behavior, online co-op or public release."
+  ]
+}

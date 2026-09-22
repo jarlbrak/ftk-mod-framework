@@ -392,6 +392,9 @@ namespace FTKModFramework.Core.UI
             List<ModEntry> entries = new List<ModEntry>();
             foreach (ModEntry candidate in ModRegistry.Entries)
             {
+                // Once the optional included demo is off, keep Installed focused on content
+                // that this player actually has selected. A pending toggle remains visible.
+                if (candidate.IsBundledDemo && !candidate.Enabled && !candidate.PendingEnabled.HasValue) continue;
                 PackageDescriptor managed = candidate.IsManaged ? MarketplaceRuntime.FindManaged(candidate.Key) : null;
                 bool component = managed != null && (managed.Classification == "dependency" || managed.Classification == "component");
                 if (component == components) entries.Add(candidate);
@@ -569,7 +572,7 @@ namespace FTKModFramework.Core.UI
             {
                 _imagePage = Math.Min(_imagePage, previews.Count - 1);
                 AddScreenshot(previews[_imagePage]);
-                TextLine(bundled ? (_imagePage == 0 ? "The Hollow Mire / adventure artwork" : "Reeve Maddow / character portrait") : "Preview supplied by the mod author", 22, 48);
+                TextLine("Preview supplied by the mod author", 22, 48);
                 if (previews.Count > 1) ActionButton("Next preview (" + (_imagePage + 1) + " of " + previews.Count + ")", delegate { _imagePage = (_imagePage + 1) % previews.Count; Refresh(); });
                 return;
             }
@@ -585,7 +588,7 @@ namespace FTKModFramework.Core.UI
                 AddPreviewImage(hero.transform, previews[0]);
                 Button gallery = LinkButton("View " + (bundled ? "artwork" : "previews") + " (" + previews.Count + ")", delegate { _showGallery = true; _imagePage = 0; Refresh(); });
                 gallery.GetComponent<LayoutElement>().minHeight = gallery.GetComponent<LayoutElement>().preferredHeight = 32;
-                TextLine(bundled ? "• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run and The Hollow Mire." : Short(_package != null ? _package.Description : _entry.Description, 90), 22, bundled ? 78 : 52);
+                TextLine(bundled ? "• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run." : Short(_package != null ? _package.Description : _entry.Description, 90), 22, bundled ? 78 : 52);
             }
             else if (bundled)
             {
@@ -593,7 +596,7 @@ namespace FTKModFramework.Core.UI
                 TextLine("The playable content included with the framework, together in one optional pack.", 24, 60);
                 Spacer(4);
                 TextLine("What it adds", 28, 36).color = Gold;
-                TextLine("• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run and The Hollow Mire.", 24, 115);
+                TextLine("• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run.", 24, 115);
             }
             else
             {
@@ -635,31 +638,31 @@ namespace FTKModFramework.Core.UI
             else
             {
                 PackageDescriptor p = _package;
-                blocks.Add(Declared(p.Description) + "\nAuthor: " + Declared(p.Author) + "\nVersion: " + Declared(p.Version) + " / License: " + Declared(p.License) + "\nCategory: " + Declared(p.Category));
-                blocks.Add("Compatibility\n" + CompatibilityText(p) + "\nRequirements\n" + Join(p.Requirements) + "\nFramework: " + Declared(p.FrameworkVersion) + "\nPlatforms: " + Join(p.Platforms));
-                blocks.Add("What changes\n" + Join(p.ContentChanges) + "\nChangelog\n" + Declared(p.Changelog));
-                StringBuilder dependencies = new StringBuilder("Required components\n");
-                if (p.Dependencies == null || p.Dependencies.Length == 0) dependencies.Append("None declared.");
+                blocks.Add("About\n" + Declared(p.Description) + "\nBy " + Declared(p.Author) + "\nVersion " + Declared(p.Version) + " / " + Declared(p.License));
+                blocks.Add("What it adds\n" + Join(p.ContentChanges) + "\nLatest change\n" + Declared(p.Changelog));
+                StringBuilder requirements = new StringBuilder("Compatibility\n");
+                requirements.Append(CompatibilityText(p)).Append("\nFramework: ").Append(Declared(p.FrameworkVersion))
+                    .Append(" / ").Append(Join(p.Platforms)).Append("\n");
+                if (p.Requirements != null && p.Requirements.Length > 0)
+                    requirements.Append(Join(p.Requirements)).Append("\n");
+                if (p.Dependencies == null || p.Dependencies.Length == 0) requirements.Append("No extra components.");
                 else
                 {
-                    dependencies.Append("Installed with this mod and reviewed alongside your mod changes.\n");
+                    requirements.Append("Required components:\n");
                     foreach (PackageSelection dependency in p.Dependencies)
-                        dependencies.Append(DependencyName(dependency)).Append(" / v").Append(dependency.Version).Append("\n");
+                        requirements.Append(DependencyName(dependency)).Append(" / v").Append(dependency.Version).Append("\n");
                 }
-                blocks.Add(dependencies.ToString());
-                blocks.Add("Source: " + Declared(p.SourceUrl) + "\nSupport: " + Declared(p.SupportUrl) + "\nScreenshots: " + Join(p.Screenshots) + "\nArtifact SHA-256: " + Declared(p.Sha256) + "\nA checksum verifies bytes, not author trust or runtime safety.");
+                blocks.Add(requirements.ToString());
             }
-            if (_entry != null && !_entry.IsBundledDemo)
+            if (_package == null && _entry != null && !_entry.IsBundledDemo)
                 blocks.Add("Declared framework: " + Declared(_entry.FrameworkVersion) + "\n" +
                     (_entry.CompatibilityReason ?? "Meets the declared minimum within the same framework major. This is not a save or co-op guarantee."));
-            List<string> pages = TextPages(blocks);
-            List<string> screenshots = new List<string>();
-            if (_package != null && _package.ScreenshotPaths != null) foreach (string path in _package.ScreenshotPaths)
-                if (MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) screenshots.Add(path);
-            int total = pages.Count + screenshots.Count;
-            _detailPage = Math.Min(_detailPage, total - 1);
-            if (_detailPage < pages.Count) TextLine(pages[_detailPage], 24, 280); else AddScreenshot(screenshots[_detailPage - pages.Count]);
-            if (total > 1) ActionButton("Next detail / screenshot (" + (_detailPage + 1) + " of " + total + ")", delegate { _detailPage = (_detailPage + 1) % total; Refresh(); });
+            List<string> pages = TextPages(blocks, 10);
+            _detailPage = Math.Min(_detailPage, pages.Count - 1);
+            TextLine(pages[_detailPage], 22, 280);
+            if (pages.Count > 1) ActionButton("Next detail (" + (_detailPage + 1) + " of " + pages.Count + ")", delegate { _detailPage = (_detailPage + 1) % pages.Count; Refresh(); });
+            if (_package != null && PreviewPaths(_package, false).Count > 0)
+                LinkButton("View previews", delegate { _showAdvanced = false; _showGallery = true; _imagePage = 0; Refresh(); });
             if (_package != null && MarketplaceRuntime.FindManaged(_package.ModGuid) != null)
                 LinkButton("Remove this community mod...", delegate { ReviewSelection(_package, true, false); }, !PanelBusy);
         }
@@ -781,12 +784,7 @@ namespace FTKModFramework.Core.UI
         private static List<string> PreviewPaths(PackageDescriptor package, bool bundled)
         {
             List<string> paths = new List<string>();
-            if (bundled)
-            {
-                paths.Add("embedded:FTKModFramework.assets.adventures.hollowmire.EndGameImage.png");
-                paths.Add("embedded:FTKModFramework.assets.npcs.reeve_maddow.portrait.png");
-            }
-            else if (package != null && package.ScreenshotPaths != null)
+            if (package != null && package.ScreenshotPaths != null)
                 foreach (string path in package.ScreenshotPaths)
                     if (paths.Count < 3 && MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) paths.Add(path);
             return paths;
@@ -798,21 +796,8 @@ namespace FTKModFramework.Core.UI
             try
             {
                 byte[] bytes;
-                if (path == "embedded:FTKModFramework.assets.adventures.hollowmire.EndGameImage.png" || path == "embedded:FTKModFramework.assets.npcs.reeve_maddow.portrait.png")
-                {
-                    using (Stream stream = typeof(Plugin).Assembly.GetManifestResourceStream(path.Substring(9)))
-                    {
-                        if (stream == null || stream.Length > 8 * 1024 * 1024) throw new IOException("Bundled preview unavailable.");
-                        bytes = new byte[(int)stream.Length];
-                        int read = 0;
-                        while (read < bytes.Length) { int n = stream.Read(bytes, read, bytes.Length - read); if (n == 0) throw new EndOfStreamException(); read += n; }
-                    }
-                }
-                else
-                {
-                    if (!MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) throw new IOException("Preview path is not approved.");
-                    bytes = File.ReadAllBytes(path);
-                }
+                if (!MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) throw new IOException("Preview path is not approved.");
+                bytes = File.ReadAllBytes(path);
                 texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);
                 if (!ImageConversion.LoadImage(texture, bytes)) throw new IOException("Preview image could not be decoded.");
                 _previewTextures.Add(texture);

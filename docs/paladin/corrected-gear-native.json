@@ -1,0 +1,527 @@
+{
+  "schema": "ftkmf.paladin-corrected-native-gear.v1",
+  "status": "all36-items-equipped-and-original-mesh-identities-confirmed-on-three-fixture-heroes",
+  "session": "737da248e8474d1090a345c1015e9872",
+  "frameworkSha256": "0eaff569bbcd3a7ba0af5ef87cae6f648dab8289ec878a407f939c4f437d85ba",
+  "helperSha256": "b688ddd77ab7117c53732288dacb2c25e4385e39e39527bddc32dbe72b6afcf7",
+  "fixtureArchiveSha256": "68ec199429ea18918845066b33e78a7557378c749edf24c41f09af01c3298964",
+  "fixtureContentSha256": "97b5289def18ac2552da12291c4028ceba44e5bdee1aa0070e224e2767698c1e",
+  "fixtureReceiptSha256": "d780a8f35fdbbdc1cec737ad8a943a18b711d1812f70e9b2350feeb5ed12b594",
+  "summarySha256": "666d7c53a6b43980fe383042861ce32ee9f69ac3cdee14d25f884c217f08e91d",
+  "identityVerification": "Native equipped slot integers matched the registered package IDs using IdAllocator FNV-1a and ContentRegistry table-name prefix. All36 IDs are unique; actual slot and original renderer declarations both matched for every case.",
+  "heroCoverage": [
+    {
+      "identity": "0:1",
+      "class": "paladin_gear_fixture_hunter",
+      "observedBody": "native Hunter male",
+      "equipmentItemCount": 36
+    },
+    {
+      "identity": "1:1",
+      "class": "paladin",
+      "observedBody": "original Paladin male",
+      "equipmentItemCount": 36
+    },
+    {
+      "identity": "2:1",
+      "class": "paladin",
+      "observedBody": "original Paladin female",
+      "equipmentItemCount": 36
+    }
+  ],
+  "equipmentIds": {
+    "paladin_hammer_1h_novice": 1223789468,
+    "paladin_hammer_2h_novice": 1474146225,
+    "paladin_shield_novice": 1255876506,
+    "paladin_hammer_1h_oathkeeper": 1312223844,
+    "paladin_hammer_2h_oathkeeper": 1433775021,
+    "paladin_shield_oathkeeper": 1521037494,
+    "paladin_hammer_1h_highward": 1271713424,
+    "paladin_hammer_2h_highward": 1348121597,
+    "paladin_shield_highward": 1202904570,
+    "paladin_hammer_1h_mercy": 1191317998,
+    "paladin_hammer_2h_mercy": 1589784233,
+    "paladin_shield_mercy": 1608024128,
+    "paladin_hammer_1h_censure": 1473502429,
+    "paladin_hammer_2h_censure": 1412115398,
+    "paladin_shield_censure": 1382228015,
+    "paladin_hammer_1h_verdict": 1359484399,
+    "paladin_hammer_2h_verdict": 1468100788,
+    "paladin_shield_verdict": 1466315293,
+    "paladin_armor_novice": 1166925164,
+    "paladin_boots_novice": 1280940834,
+    "paladin_helmet_novice": 1498997754,
+    "paladin_armor_oathkeeper": 1162159092,
+    "paladin_boots_oathkeeper": 1153145278,
+    "paladin_helmet_oathkeeper": 1217624086,
+    "paladin_armor_highward": 1394617536,
+    "paladin_boots_highward": 1323075746,
+    "paladin_helmet_highward": 1103010906,
+    "paladin_armor_mercy": 1455154366,
+    "paladin_boots_mercy": 1482739400,
+    "paladin_helmet_mercy": 1451429408,
+    "paladin_armor_censure": 1500262413,
+    "paladin_boots_censure": 1596511143,
+    "paladin_helmet_censure": 1537094159,
+    "paladin_armor_verdict": 1086169375,
+    "paladin_boots_verdict": 1346732725,
+    "paladin_helmet_verdict": 1155250429
+  },
+  "cases": [
+    {
+      "set": "censure",
+      "loadout": "1h",
+      "frames": {
+        "renderers": 30167,
+        "guardian": 30142,
+        "equipment": 30119
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-censure-1h-renderers.txt": "3328ba814aa7f6ed07a5ac381c46aca4e755fea6f6100dff96c1333f2e3a702d",
+        "corrected-gear-censure-1h-guardian-state.txt": "01ef7796133b338c32152c9f536e8bd822269f00cfdf8885ac5fc62a639e749f",
+        "corrected-gear-censure-1h-equipment-inventory.txt": "73e1449b38e63e641e18d20cbfec605ef7052ccc6a50de4e7c6c7a1e85d3ce61"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "censure",
+      "loadout": "2h",
+      "frames": {
+        "renderers": 31734,
+        "guardian": 31709,
+        "equipment": 31685
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-censure-2h-renderers.txt": "a2ef99282827af66478afb909635568a42dc12c73c4e9ac7f497ecc7f54fd276",
+        "corrected-gear-censure-2h-guardian-state.txt": "978b3670c0d4e251ca718dc79b3cb3903ed78b81e7e5e728b3d71d0142d6c757",
+        "corrected-gear-censure-2h-equipment-inventory.txt": "e73091a0d28b055a9c275679d03c13863e637cf5e6fb72c63954bfa624aba15c"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "highward",
+      "loadout": "1h",
+      "frames": {
+        "renderers": 22269,
+        "guardian": 22245,
+        "equipment": 22221
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-highward-1h-renderers.txt": "d7e085b4a8c1bc479942c7ff61d186ee4aee348b45b15a87cd66fe56277720a8",
+        "corrected-gear-highward-1h-guardian-state.txt": "4e035840610650c5738f132cd8c928b2c779c0fbe1a5dd29ecec68f9ec968873",
+        "corrected-gear-highward-1h-equipment-inventory.txt": "6589c50474de760753ee4ebb1a37c7964245304cf6113f8a88035daa7584a4dc"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "highward",
+      "loadout": "2h",
+      "frames": {
+        "renderers": 25539,
+        "guardian": 25489,
+        "equipment": 25465
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-highward-2h-renderers.txt": "66cd75361e4d7a06854e385cbcdeedf14ed64c9cfc634b88aceb2ad60bd37093",
+        "corrected-gear-highward-2h-guardian-state.txt": "dd7f6a3c2aa8c3607da27eb521340582b71ccd7c3628a46db60e29bd0fa61e99",
+        "corrected-gear-highward-2h-equipment-inventory.txt": "bde7ab7ed8a6ff71a1fd28346a0cc4281eb27af5e3c43a8421c9aee4489f6991"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "mercy",
+      "loadout": "1h",
+      "frames": {
+        "renderers": 27177,
+        "guardian": 27153,
+        "equipment": 27107
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-mercy-1h-renderers.txt": "7d1fa6bd0644f89ea031fbe7542013141e763671d6907a136323d237cd3d953f",
+        "corrected-gear-mercy-1h-guardian-state.txt": "e2614367bcd3d1e2c1db59a32698f508bf70cea2c134d6c10b52c813e4b50e72",
+        "corrected-gear-mercy-1h-equipment-inventory.txt": "69514491c4f8e58dc82837d806a098918728da963c4becd6b50642343e55456f"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "mercy",
+      "loadout": "2h",
+      "frames": {
+        "renderers": 28567,
+        "guardian": 28542,
+        "equipment": 28518
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-mercy-2h-renderers.txt": "c4e3ac310b2fa3aff233254b390462a894b9b9ff9c9d022df234062897ca78f7",
+        "corrected-gear-mercy-2h-guardian-state.txt": "7a3e860a554b2326bc3427b20a1e7f02cfa5a84ed92ad7a6233b3f0866905f88",
+        "corrected-gear-mercy-2h-equipment-inventory.txt": "4f7ba571c19a3da0b2dd7835766fbb501ca44f9b4062d2098580cd8fb24f8f24"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "novice",
+      "loadout": "1h",
+      "frames": {
+        "renderers": 19240,
+        "guardian": 19216,
+        "equipment": 19191
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-novice-1h-renderers.txt": "524b16091d728f4d745b4bf19a9b45c95d1a18940d501050ba744b918030b6c7",
+        "corrected-gear-novice-1h-guardian-state.txt": "92229cb3092ac6151ddee0f1dbe61bfc95ca8e2eecf69c35363c19f3a0a11385",
+        "corrected-gear-novice-1h-equipment-inventory.txt": "284be1d0c6c4b7ce48c7786b4990e3a37f98d05d7dcccfe0922fe6746abf3608"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "novice",
+      "loadout": "2h",
+      "frames": {
+        "renderers": 20472,
+        "guardian": 20448,
+        "equipment": 20424
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-novice-2h-renderers.txt": "a0d30c062e7c355134acbf37c6302c9ab02e052f42ab1333d8a4cfe75530ef5d",
+        "corrected-gear-novice-2h-guardian-state.txt": "2730ebc4557594777756d27ebcd4376d604622f286f203e44796eea63b5711d3",
+        "corrected-gear-novice-2h-equipment-inventory.txt": "815d78928e051e6484606654178f77ac552a420d4678571a21e271696d66c352"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "oathkeeper",
+      "loadout": "1h",
+      "frames": {
+        "renderers": 15894,
+        "guardian": 15873,
+        "equipment": 15825
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-oathkeeper-1h-renderers.txt": "99fdcfa483bde4a97d75f0331433a0059cf686be8150f57ea0f38805038a3edc",
+        "corrected-gear-oathkeeper-1h-guardian-state.txt": "89bd13c5cbd7950f406c4ad6577e3f02f3d80f9a102ec98702dc016ccb5bd2ba",
+        "corrected-gear-oathkeeper-1h-equipment-inventory.txt": "a8d4ef49c54eddc8fce977603aa12fc8b2604223cc8a21195461e524caac49e3"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "oathkeeper",
+      "loadout": "2h",
+      "frames": {
+        "renderers": 17784,
+        "guardian": 17761,
+        "equipment": 17740
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-oathkeeper-2h-renderers.txt": "177cc0fdceb187be7d89ba4cf381f7dd916b4ac657e19cfdcc8e97c063c83599",
+        "corrected-gear-oathkeeper-2h-guardian-state.txt": "53597f7f80a2f0fc75712d39f85b9d3f38e23bf5985cc59c0cf5c012ffb1cf16",
+        "corrected-gear-oathkeeper-2h-equipment-inventory.txt": "4a868f0373f78f9039d78c5b7b7c866de52a1ed4d2fb153134612129451b5a85"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "verdict",
+      "loadout": "1h",
+      "frames": {
+        "renderers": 33731,
+        "guardian": 33707,
+        "equipment": 33682
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-verdict-1h-renderers.txt": "64da64539b7d5700554ed85bcf8f1bbfc6a36f1659c6750c74878329eb575252",
+        "corrected-gear-verdict-1h-guardian-state.txt": "4a2b69807fde9aa51464b0c16924eff509d981d770f2ec9c2c2dec14d8d8ed8c",
+        "corrected-gear-verdict-1h-equipment-inventory.txt": "800f95bb25b7bf1c755a68f815f4503e6550886b5f7baade9ab3714a09aae025"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    },
+    {
+      "set": "verdict",
+      "loadout": "2h",
+      "frames": {
+        "renderers": 35366,
+        "guardian": 35317,
+        "equipment": 35292
+      },
+      "sourceSnapshotHashes": {
+        "corrected-gear-verdict-2h-renderers.txt": "2810657df6688ad0446859df8bf80bf91a0fc91f97e6504491f801e6d7144cfa",
+        "corrected-gear-verdict-2h-guardian-state.txt": "f8429df87d29d32ac2bf7d40bdcce59e50b944c31bcc0e6a0dd0a518617a58a6",
+        "corrected-gear-verdict-2h-equipment-inventory.txt": "5d6bd9e1d48ec8d4ac65349e1f1586de308774eb93f0fb5a802cc19716e60872"
+      },
+      "heroes": [
+        {
+          "hero": "0:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": false
+        },
+        {
+          "hero": "2:1",
+          "armorVariant": "female",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        },
+        {
+          "hero": "1:1",
+          "armorVariant": "male",
+          "nativeSlotsMatchExpectedIds": true,
+          "expectedEquippedOriginalMeshesActive": true,
+          "originalPaladinBodyHairAndBackpack": true
+        }
+      ]
+    }
+  ],
+  "unresolvedNativePaladinMeshRenderers": [],
+  "visualObservation": "Trial operator observed all12 combat-idle loadouts without obvious detachment. Views were predominantly from behind; no durable screenshot artifact asserted.",
+  "limits": [
+    "All36 items were granted at creation by the explicit gear fixture, not acquired normally.",
+    "In-combat fixture equipping bypassed ordinary equipment action costs.",
+    "Both Paladin body variants match their armor variants; Hunter establishes one male non-Paladin wearer only.",
+    "Known inactive hair and break parts are assigned original meshes; inactive assignment is not visible animation or break evidence.",
+    "No full animation, all-angle fit, clipping/culling completeness, death/drop behavior, disposal, other classes or online claim.",
+    "This v4 fixture predates the dedicated fitted2H card meshes; equipped-model coverage does not validate later loot-card framing.",
+    "Initial novice1H request failed its owned-backpack precondition before mutation; it is not counted. Oathkeeper then novice succeeded and supplied the accepted snapshots."
+  ]
+}

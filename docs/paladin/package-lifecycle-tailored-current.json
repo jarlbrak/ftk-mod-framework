@@ -1,0 +1,94 @@
+{
+  "archiveSha256": "06a6356760be8b167948751013efa497ebdeb3a9e5bfd33417f68b35f329c3db",
+  "byteVerification": [
+    {
+      "enabled": true,
+      "exactArchiveFiles": 137,
+      "step": "02-activate"
+    },
+    {
+      "enabled": false,
+      "exactArchiveFiles": 137,
+      "step": "04-activate-disabled"
+    },
+    {
+      "enabled": true,
+      "exactArchiveFiles": 137,
+      "step": "06-activate-enabled"
+    },
+    {
+      "enabled": true,
+      "exactArchiveFiles": 137,
+      "step": "10-activate-rollback"
+    }
+  ],
+  "export": {
+    "activeSetMatches": true,
+    "format": "Managed-set JSON manifest, not a package ZIP",
+    "sha256": "a21a05aef6888dc6b157777fc6f2e4c4205bbaaf47a03c16b6caacd24a371abd"
+  },
+  "fileCount": 137,
+  "helperSha256": "846a64c1c26d1efe74df8347b4787efb464f9f56faaadc72433c62302acd6262",
+  "initialGeneration": "5d438dc30de56ecefff4e43b5c9f712a",
+  "removedContentEmpty": true,
+  "scope": "Real helper CLI lifecycle in isolated scratch state; no game, UI, save or online proof.",
+  "status": "passed",
+  "steps": [
+    {
+      "resultSha256": "3b3e17e3875458c4bd65e349833a19ce895bbd8670336cf87aed0544445a04dc",
+      "step": "01-prepare-install"
+    },
+    {
+      "resultSha256": "abb608073804f97cde7f517276fd1b56883c6420cc728fcf28f9bc8595ade3f1",
+      "step": "02-activate"
+    },
+    {
+      "resultSha256": "bf083a80b1fadfb49c87f7e658e4a2a3b4abce6835aafec7c0ea6c1e2477001e",
+      "step": "03-disable-plan"
+    },
+    {
+      "resultSha256": "a0c809c888c650425b9ee6de9356236829b6b6d662b25cecb0cf32d1783adf2f",
+      "step": "03-disable"
+    },
+    {
+      "resultSha256": "ae36b44087fbb0ebbafa8d9ee0e461ba7b3398a88e3935754a854195c3ce23ca",
+      "step": "04-activate-disabled"
+    },
+    {
+      "resultSha256": "9bf289f1cfcbaeead858e7be144950c1762b257b9fc12466df1e46673f4ace90",
+      "step": "05-enable-plan"
+    },
+    {
+      "resultSha256": "607ba545b66b50eb220d6f88c96f9aac35560ed247699e02595ec2bf94bc6d88",
+      "step": "05-enable"
+    },
+    {
+      "resultSha256": "5dc01abafd235a532b4a8cb3dc9d81914f333dbec6066d087c4023fad2874105",
+      "step": "06-activate-enabled"
+    },
+    {
+      "resultSha256": "2f7860d1522133ee8c1b8766207b8a6bec057690568095efcb9dbc78392ca95b",
+      "step": "07-remove-plan"
+    },
+    {
+      "resultSha256": "f3d620c6303406e6fe4eebad461b05b9302ecf99502690b802607a59e026b155",
+      "step": "07-remove"
+    },
+    {
+      "resultSha256": "0567a8b3e8f848bf88b45302fbf20d67514c311676f71c7b641fe7828f1aacad",
+      "step": "08-activate-removed"
+    },
+    {
+      "resultSha256": "a01fb70e896cff0ea0498ea784fdbf51ffe567740f64f46171458786b3b64c84",
+      "step": "09-rollback"
+    },
+    {
+      "resultSha256": "cf5c16ce885659998ef0d4e9e58b26ecc2bab8e9b96dcbe19c037a7d3ec5038d",
+      "step": "10-activate-rollback"
+    },
+    {
+      "resultSha256": "1ae3a0b5973c7def2cf8cd4990b5310b56f3d66a4c08fcd119bd78eb8864f629",
+      "step": "11-export"
+    }
+  ]
+}

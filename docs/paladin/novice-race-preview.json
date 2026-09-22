@@ -1,0 +1,100 @@
+{
+  "schema": "ftkmf.paladin-novice-race-preview.v1",
+  "status": "seven-appearance-preview-observed-fit-issues-open",
+  "session": "47f42423e0294fad80a1697d001aaf5f",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "02ac427bdf49283896d60cbdc167d5bae7ed7a7585d4dda0e2c970170b7f2c04",
+  "assets": {
+    "paladin-female-novice-armor.glb": "cfc4b0c460a318bbf3219b194848f66161471d6ed57edce104b5a35914b56552",
+    "paladin-male-novice-armor.glb": "d37645c28533d8dde88197d54ba7d2f11e8384364fdf1dfc56b8e6b58d4fb44f",
+    "paladin-novice-boots.glb": "2b42ca9217b2dfd46bfe859cea8c20ce026dad9ddf4a4dbbea62c0c9fbc66fb2",
+    "paladin-novice-helmet.glb": "bd455ad95fe45f3e2c1929d03c4caf787e14bf3be081214b0091d533724f39c3"
+  },
+  "captures": [
+    {
+      "appearance": "female",
+      "skinType": 0,
+      "imageSha256": "40650b0cf7008e731f25ddf41e3d13597049784bf036d3578ad604550d8374ff",
+      "receiptSha256": "8dd867062d611c2ffc0271b3f413d9980eb8c26cc0dc4005f6af53df2a433515",
+      "nativeSkinset": "blacksmith_Female",
+      "ownerInstanceId": -302720,
+      "celInstanceId": -308646
+    },
+    {
+      "appearance": "male",
+      "skinType": 1,
+      "imageSha256": "12b867bc5b5c7656608ddec0acfd82f65f9b9e58d1332c509ee663c7e03fe3b6",
+      "receiptSha256": "504d5bd5f899fdf13c71bd5586187823ae1aaa4fec16989fbfe329c4dfa4f57d",
+      "nativeSkinset": "blacksmith_Male",
+      "ownerInstanceId": -302720,
+      "celInstanceId": -309532
+    },
+    {
+      "appearance": "undead",
+      "skinType": 2,
+      "imageSha256": "db2d5875a0883b481f6ff482435e86e897d08950da1dbb2405d20968d6c986d9",
+      "receiptSha256": "a8b5b6d90f443b6e1683885d413544db3ebf98aacdd41dca810e340a186c1ed7",
+      "nativeSkinset": "blacksmith_Undead",
+      "ownerInstanceId": -302720,
+      "celInstanceId": -310422
+    },
+    {
+      "appearance": "cat",
+      "skinType": 3,
+      "imageSha256": "79dab1f03cac104cefb0327680d6f18c23ed9d48398934eee44e1185e6351981",
+      "receiptSha256": "59dde07c361ccf04d6d1c69f24d8b7fb75f6cc282a40847b29dda1e0dc01116e",
+      "nativeSkinset": "blacksmith_Cat",
+      "ownerInstanceId": -302720,
+      "celInstanceId": -311288
+    },
+    {
+      "appearance": "demon",
+      "skinType": 4,
+      "imageSha256": "2d6feb567052887aa7569b261f611a4d16f80e2a5db447fe16cd990453257649",
+      "receiptSha256": "823c76a48fe8242aba07efd54073d2cd4099122f5acd22e579a83c00cf42ceb0",
+      "nativeSkinset": "blacksmith_Demon",
+      "ownerInstanceId": -302720,
+      "celInstanceId": -312170
+    },
+    {
+      "appearance": "fish",
+      "skinType": 5,
+      "imageSha256": "b8ba18c6ce615831f1c9ce1d799fb30d4b6c493ec908b7284441d57470bff20a",
+      "receiptSha256": "560c7aeab1d2516240e3fdbbc2714f0223c42d2434c8f83617477c14bcf6de95",
+      "nativeSkinset": "blacksmith_Fish",
+      "ownerInstanceId": -302720,
+      "celInstanceId": -313062
+    },
+    {
+      "appearance": "goblin",
+      "skinType": 6,
+      "imageSha256": "923e893943864fe02d0668bc62e94fcee399b8bda07ffad13a5bba163a4c05e6",
+      "receiptSha256": "e8861396f1f7f4d1545c557a713ccfed499ad42cbc171564585a8055ceae6ba9",
+      "nativeSkinset": "blacksmith_Goblin",
+      "ownerInstanceId": -302720,
+      "celInstanceId": -313954
+    }
+  ],
+  "restoration": {
+    "receiptSha256": "1b54b913e9cc333de14d4594bee03c0a2449577bd664b81c7a1e4be41c7f0a19",
+    "skinType": 1,
+    "fixtureActive": false,
+    "studioReady": true
+  },
+  "observations": [
+    "Seven native appearance entries render the Novice equipment in the sampled front pose.",
+    "Native faces and race details remain game-owned.",
+    "Boot shafts and shaped feet are visible on all seven appearances."
+  ],
+  "openFitIssues": [
+    "Native forearm geometry protrudes through the long sleeves, most visibly on Demon.",
+    "Minor exposed skin at sleeve/torso boundaries on Female and Cat needs further fitting.",
+    "Demon forehead/brow intersection needs side-view assessment."
+  ],
+  "limitations": [
+    "Race selection was an isolated fixture, including locked Demon and Goblin; unlock state was not modified.",
+    "Fixture restored before process termination. No game was started or saved with the race override.",
+    "Supplemental studio lighting and one front pose per appearance.",
+    "Not motion, all-outfit fit, user art approval, ordinary acquisition or online evidence."
+  ]
+}

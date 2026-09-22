@@ -14,7 +14,7 @@ namespace FTKModFramework.Core
     /// Cloning a template means the new entry inherits a valid icon / prefab / animation set, so it
     /// is immediately usable in-game; you then override only the fields you care about.
     /// </summary>
-    public static class Content
+    public static partial class Content
     {
         /// <summary>
         /// Fetch a DB and make sure its int-&gt;row index is built. At TableManager.Initialize time the
@@ -414,13 +414,12 @@ namespace FTKModFramework.Core
         /// (lantern, light) lives on the per-combat clone, never networks, and is never serialized; emission is put
         /// only on OUR objects (the game resets _EmissionColor to black on CEL-managed body materials).
         ///
-        /// The aesthetic values live as tunable constants in the caller (RealmBossAdventure.cs); this overload just
-        /// carries the populated <see cref="EnemyVisualPatch.EnemyVisual"/> into the Core visual registry.
+        /// This overload carries the populated <see cref="EnemyVisualPatch.EnemyVisual"/> into the Core visual registry.
         /// </summary>
         /// <param name="enemy">The registered enemy row whose spawned body to dress.</param>
         /// <param name="visual">The fully-populated visual override.</param>
         /// <remarks>Internal (not the public single-arg overload): the rich options struct is Core engine plumbing,
-        /// consumed in-assembly by the bundled content (RealmBossAdventure). External modders use the public
+        /// available to in-assembly content. External modders use the public
         /// tint+scale overload above; this richer one stays internal so the struct can stay an engine type.</remarks>
         internal static void SetEnemyVisual(FTK_enemyCombat enemy, EnemyVisualPatch.EnemyVisual visual)
         {

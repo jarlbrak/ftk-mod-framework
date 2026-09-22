@@ -47,6 +47,13 @@ class NativeCreateCharacterInputStateBoundaryTests(unittest.TestCase):
         ):
             self.assertNotIn(forbidden, SOURCE)
 
+    def test_binding_snapshot_does_not_remap_keys(self):
+        for required in ('GetField("m_ActionKeys", Members)', 'binding.m_PosKeys',
+                         'binding.m_PosMods', '"actionBindings"', 'actions.Sort(StringComparer.Ordinal)'):
+            self.assertIn(required, SOURCE)
+        for forbidden in ('SetValue(', 'SaveBindings(', 'ResetBindings(', 'SetKey('):
+            self.assertNotIn(forbidden, SOURCE)
+
     def test_claim_probe_accepts_the_live_property_without_a_static_enum_member_reference(self):
         self.assertIn('property.GetValue(owner, null)', SOURCE)
         self.assertNotIn('device.m_Type', SOURCE)

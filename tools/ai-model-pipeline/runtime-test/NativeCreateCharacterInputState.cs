@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 
@@ -150,6 +151,33 @@ public sealed partial class RuntimeModelTest
         bool actualPartySelect = menuPresent && createUiListPresent && createUiCount > 0 && rootActive && hasLiveCandidate;
         FTKInputFocus currentFocus = input == null ? null : input.m_CurrentInputFocus;
         FTKSelectable currentSelected = input == null ? null : FTKInput.GetSelectable();
+        JArray actionBindings = new JArray();
+        bool bindingsAvailable = false;
+        if (input != null)
+        {
+            FieldInfo actionField = typeof(FTKInput).GetField("m_ActionKeys", Members);
+            Dictionary<string, FTKInput.RemapKeyInfo> bindings = actionField == null ? null :
+                actionField.GetValue(input) as Dictionary<string, FTKInput.RemapKeyInfo>;
+            bindingsAvailable = bindings != null;
+            if (bindings != null)
+            {
+                List<string> actions = new List<string>(bindings.Keys);
+                actions.Sort(StringComparer.Ordinal);
+                foreach (string action in actions)
+                {
+                    FTKInput.RemapKeyInfo binding = bindings[action];
+                    JArray keys = new JArray();
+                    if (binding != null && binding.m_PosKeys != null)
+                        for (int index = 0; index < binding.m_PosKeys.Length; index++)
+                            keys.Add(new JObject {
+                                {"index", index}, {"key", binding.m_PosKeys[index].ToString()},
+                                {"keyCode", (int)binding.m_PosKeys[index]},
+                                {"modifiers", binding.m_PosMods != null && index < binding.m_PosMods.Length ? binding.m_PosMods[index].ToString() : null},
+                            });
+                    actionBindings.Add(new JObject {{"action", action}, {"positiveBindings", keys}});
+                }
+            }
+        }
         return new JObject {
             {"ok", true},
             {"status", actualPartySelect ? "observed_actual_native_party_select" : "unavailable_native_party_select"},
@@ -160,6 +188,8 @@ public sealed partial class RuntimeModelTest
             {"createUiCount", createUiListPresent ? new JValue(createUiCount) : new JValue((object)null)},
             {"input", new JObject {
                 {"present", input != null},
+                {"bindingsAvailable", bindingsAvailable},
+                {"actionBindings", actionBindings},
                 {"instanceId", input == null ? 0 : input.GetInstanceID()},
                 {"currentFocus", NativeCreateInputFocusState(currentFocus)},
                 {"currentSelected", NativeCreateSelectableState(currentSelected)},

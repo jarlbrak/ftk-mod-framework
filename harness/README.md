@@ -153,89 +153,12 @@ project-scoped MCP server. To verify the four tools loaded:
 claude mcp list
 ```
 
-## The loop: launch and run the D1 verification scenario
+## The loop: launch and inspect a local verification scenario
 
-D1 is the bespoke custom realm + boss adventure ("Hollow Mire") used to prove
-the harness. Build, deploy, launch with the bridge enabled, then drive a
-playthrough to victory.
-
-### 0. Build and deploy the framework DLL
-
-```bash
-./deploy.sh
-# = dotnet build -c Release, then install.sh --framework <the build> --dev
-#   (installs BepInEx if missing, the DLL, the Steam launch option, and turns on the self-tests)
-```
-
-### 1. Launch For The King with the bridge enabled
-
-Launch the game with env `FTK_AGENT_BRIDGE=1` so the in-game bridge starts
-(e.g. from a shell that has the env set, or via Steam launch options). Confirm
-in `BepInEx/LogOutput.log`:
-
-```
-FTKAgentBridge listening on http://127.0.0.1:8777/
-```
-
-With the env unset, no listener/thread/GameObject is created and shipped
-behavior is byte-identical.
-
-### 2. Start the MCP server / open the Claude session
-
-Start Claude Code in the repo so it picks up `.mcp.json`. The agent then runs an
-observe-decide-act loop using the four tools. A representative scenario:
-
-1. **Liveness**: `ftk_wait_for("health")` until `/health` is ok.
-2. **Oracle short-circuit** (no gameplay needed): grep
-   `BepInEx/LogOutput.log` for `SELF-TEST PASS [realm-boss]` and assert no
-   `SELF-TEST FAIL`. This proves D1 content registered.
-3. **At menu**: `ftk_observe()` -> expect `phase==menu`, `inSession==false`.
-4. **Start the run**: select the D1 custom adventure and start a single-player
-   run (`ftk_act("start_run", {...})`, or drive the start menu via
-   `ftk_act("select_choice", {index})` over `choices[]`). Assert
-   `singlePlayer==true` before any further action; the bridge rejects acts
-   otherwise.
-5. **Overworld**: `ftk_wait_for("phase==overworld", 120)`. `ftk_observe()` ->
-   confirm `party[0].realmId == map.realmId ==` the D1 Hollow Mire realm id
-   (cross-check the realm name in the snapshot). `currentTurnFid` is the
-   **overworld** turn holder; note it for navigation only. It is *not* the combat
-   attacker: in a fight those two diverge (see step 8).
-6. **Navigate to the boss tile**: read `map.neighbors` and the party hex, then
-   `ftk_act("move_to", {big,small})` toward the boss POI (or
-   `ftk_act("snap_to", {big,small})` for deterministic placement). After each
-   move, `ftk_wait_for("phase==overworld")` to let the per-hex FSM settle.
-7. **Combat**: on reaching the boss tile combat fires.
-   `ftk_wait_for("phase==combat", 60)`. `ftk_observe()` -> assert `enemies[]`
-   contains the D1 boss, `fightOrder` non-empty, `abilities[]` listed.
-8. **Combat loop** until `combat.liveEnemies==0`: act only while
-   `combat.whoseTurn.isPlayer==true`. Take `attackerFid` from
-   **`combat.whoseTurn.fid`, copied verbatim, both `turnIndex` AND `photonId`**.
-   Never use `currentTurnFid` (that is the overworld fid, which stays pinned to
-   slot 0 for the whole fight) and never hand-build `{turnIndex: n}` alone: the
-   bridge defaults a missing `photonId` to 0, while local heroes carry 1, so the
-   guard rejects it. Then `ftk_act("set_target", {enemyFid})` and a deterministic
-   kill via `ftk_act("resolve_turn", {attackerFid, targetFid, hit:1.0})` (or
-   `choose_ability`/`attack`). A mismatch returns
-   `{acted:false, waiting:"not_attacker_turn", activeFid:{...}}`, where
-   `activeFid` is the fid the bridge actually observed: copy that one. For enemy
-   turns, just re-observe; the engine resolves them.
-   `ftk_wait_for("phase==combat OR phase==overworld")`.
-9. **Victory**: the boss quest is the last quest of the last stage, so its
-   completion arms victory. `ftk_wait_for("signals.modalOpen==true OR phase==victory")`,
-   then `ftk_act("advance")` / `ftk_act("select_choice", {index})` to clear the
-   end-game modal.
-10. **Assert victory**: `ftk_observe()` -> `phase==victory` AND
-    `signals.victoryArmed==true` AND `questComplete==true`. `ftk_screenshot()`
-    to capture the victory screen. **PASS** = `SELF-TEST PASS [realm-boss]`
-    present AND `phase==victory` reached by direct-call play.
-
-> Note (current D1 design): the boss is no longer an overworld set-piece, it is
-> the culmination of the Flooded Crypt. So steps 6-8 are not overworld navigation
-> to a boss tile but `enter_dungeon` -> (`dungeon_regen`) -> per-room
-> `dungeon_encounter` + `dungeon_scroll_complete` + `force_win`, and step 9 is
-> `quest_advance` to the clear-crypt quest then `force_victory` / `show_endgame`.
-> See "In-dungeon combat and true-victory (verified findings)" above for the
-> reliable sequence and the enemy-first-turn limitation.
+Build and deploy the framework to an authorized isolated test copy, launch with
+`FTK_AGENT_BRIDGE=1`, then use the bridge to inspect a selected single-player run.
+Choose the registered content and checks for the feature under test; the harness does
+not treat a previously bundled adventure as a default scenario.
 
 ## Safety
 

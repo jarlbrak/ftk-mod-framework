@@ -58,6 +58,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         File.WriteAllText(Path.Combine(root,"model-test-session.json"),new JObject{{"session",sessionId},
             {"contentRegistrationRun",contentRegistrationRun},{"savePath",isolatedSavePath}}.ToString());
         Application.runInBackground = true;
+        ArmCombatEntryTrace();
         enabled = true;
         Logger.LogInfo("MODEL TEST ACTIVE: root=" + root + "; saveNamespace=" + saveNamespace
             + "; command=model-test-command.json; PlayerPrefs are not modified by this plugin.");
@@ -117,6 +118,10 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
     }
     void Update()
     {
+        GuardianFixtureTick();
+        NativeCombatFocusTick();
+        NativeFightTraceTick();
+        CustomLootTick();
         EnemyLifetimeTick();
         SpawnCaptureTick();
         KrakenProductionAdapterTick();
@@ -139,13 +144,15 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             // This diagnostic intentionally runs before the normal game-state
             // guard so it can report why the native Create Game route is not
             // currently eligible.  It only reads the native menu graph.
-            if (op == "native-create-character-preflight") Finish(id, NativeCreateCharacterPreflight(command));
+            if (op == "native-title-new-game") Finish(id, NativeTitleNewGame(command));
+            else if (op == "native-create-character-preflight") Finish(id, NativeCreateCharacterPreflight(command));
             else if (op == "native-create-character-input-state") Finish(id, NativeCreateCharacterInputState(command));
             else
             {
             RequireSinglePlayer();
             if (op == "enemy-arrival-arm") Finish(id, ArmSpawnCapture(command));
             else if (op == "native-party-start") Finish(id, NativePartyStart(command));
+            else if (op == "native-resume-party-start") Finish(id, NativeResumePartyStart(command));
             else if (op == "native-party-class") Finish(id, NativePartyClass(command));
             else if(op == "enemy-arrival-state"){CatalogKeys(command,"id","session","op");SpawnPins(true);Finish(id,SpawnCaptureView());}
             else if(op == "enemy-arrival-clear"){CatalogKeys(command,"id","session","op");Finish(id,ClearSpawnCapture());}
@@ -175,9 +182,6 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "enemy-lifetime-watch") Finish(id,ArmEnemyLifetime(command));
             else if(op == "enemy-lifetime-state"){CatalogKeys(command,"id","session","op");Finish(id,EnemyLifetimeState());}
             else if(op == "enemy-lifetime-clear"){CatalogKeys(command,"id","session","op");Finish(id,ClearEnemyLifetime());}
-            else if(op == "entry-preparation-state") Finish(id,EntryPreparationState(command));
-            else if(op == "entry-position") Finish(id,EntryPosition(command));
-            else if(op == "entry-discover") Finish(id,EntryDiscover(command));
             else if(op == "story-state") Finish(id,StorySetupState(command));
             else if(op == "story-submit") Finish(id,SubmitStorySetup(command));
             else if(op == "native-create-character-screen") StartNativeCreateCharacterScreen(id,command);
@@ -192,10 +196,23 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "unequip-body") Finish(id,ChangeBodyEquipment(command,false));
             else if(op == "trap-state") Finish(id,TrapState(command));
             else if(op == "trap-submit") Finish(id,TrapSubmit(command));
+            else if(op == "town-stock-state") Finish(id,TownStockObservation(command));
+            else if(op == "dungeon-map-state") Finish(id,DungeonMapObservation(command));
+            else if(op == "guardian-damage-fixture") Finish(id,GuardianDamageFixture(command));
+            else if(op == "native-combat-focus") Finish(id,NativeCombatFocus(command));
+            else if(op == "native-fight-trace") Finish(id,NativeFightTrace(command));
+            else if(op == "preview-race") Finish(id,PreviewRaceFixture(command));
+            else if(op == "custom-loot-fixture") Finish(id,CustomLootFixture(command));
+            else if(op == "player-studio") Finish(id,PlayerStudio(command));
+            else if(op == "world-input-state") Finish(id,WorldInputObservation(command));
+            else if(op == "guardian-state") Finish(id,GuardianObservation(command));
+            else if(op == "guardian-incapacity-fixture") Finish(id,GuardianIncapacityFixture(command));
             else if(op == "fixture-state") Finish(id,FixtureState());
             else if(op == "collect-loot") Finish(id,CollectLoot(command));
             else if(op == "fortify-party") Finish(id,FortifyParty(command));
             else if(op == "return-to-title") Finish(id,ReturnToTitle());
+            else if(op == "native-save-exit") Finish(id,NativeSaveExit(command));
+            else if(op == "native-save-exit-state") Finish(id,NativeSaveExitState(command));
             else if(op == "quiet-tutorials") Finish(id,QuietTutorials(command));
             else if(op == "material-state") Finish(id,ObserveMaterialState(command));
             else if (op == "reload") Finish(id, Reload(command));
@@ -210,6 +227,10 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                 bool fixedStep=command["fixedStep"]!=null && (bool)command["fixedStep"];
                 if(maxWidth<320 || maxWidth>3840)throw new ArgumentException("maxWidth must be between 320 and 3840.");
                 if(fixedStep && fps!=(float)(int)fps)throw new ArgumentException("fixedStep requires integer fps.");
+                string studioView=Str(command,"studioView");
+                if(studioView!=null && (op!="capture" || Scope(command)!="player-combat" ||
+                    (studioView!="front" && studioView!="three-quarter" && studioView!="back")))
+                    throw new ArgumentException("studioView requires a player-combat observation capture and front, three-quarter or back view.");
                 bool materialObservation=false;
                 if(command["materialObservation"]!=null)
                 {if(command["materialObservation"].Type!=JTokenType.Boolean)throw new ArgumentException("materialObservation must be boolean.");materialObservation=(bool)command["materialObservation"];}
@@ -227,7 +248,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                     if(motionObservation)motion=ArmCombatMotionObservation(renderer,"ordinary-bridge-action");
                     busy = true;
                     StartCoroutine(Capture(id, renderer, seconds, fps, maxWidth, fixedStep,
-                        op == "play" ? "native-state-playback" : "observed-runtime",materialObservation,false,null,motion));
+                        op == "play" ? "native-state-playback" : "observed-runtime",materialObservation,false,null,motion,studioView));
                 }
                 catch
                 {
@@ -539,7 +560,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         animator.Play(hash,layer,0f);
         Logger.LogInfo("MODEL TEST PLAYBACK: "+state+"; native controller state, not a normal combat action; animation events remain active.");
     }
-    IEnumerator Capture(string id,SkinnedMeshRenderer renderer,float seconds,float fps,int maxWidth,bool fixedStep,string provenance,bool materialObservation=false,bool arrivalObservation=false,JObject combatTrigger=null,CombatMotionArm motion=null)
+    IEnumerator Capture(string id,SkinnedMeshRenderer renderer,float seconds,float fps,int maxWidth,bool fixedStep,string provenance,bool materialObservation=false,bool arrivalObservation=false,JObject combatTrigger=null,CombatMotionArm motion=null,string studioView=null)
     {
         int previousCaptureFramerate=Time.captureFramerate;
         Texture2D screen=null,image=null;RenderTexture downsample=null;
@@ -547,6 +568,13 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         {
             AvatarOwner captureOwner=FindOwner(renderer,null);
             int capturedOwnerId=captureOwner.owner.GetInstanceID(),capturedCelId=captureOwner.cel.GetInstanceID();
+            Vector3 studioForward=Vector3.zero;float studioMinimumSpan=0f;
+            if(studioView!=null)
+            {
+                studioForward=Vector3.ProjectOnPlane(captureOwner.cel.transform.forward,Vector3.up);
+                if(studioForward.sqrMagnitude<.01f)throw new InvalidOperationException("Usable combat studio facing unavailable.");
+                studioForward.Normalize();
+            }
             if(fixedStep)Time.captureFramerate=(int)fps;
             string directory=Path.Combine(output,id);Directory.CreateDirectory(directory);
             JArray frames=new JArray();if(arrivalObservation)spawnCapture.partialFrames=frames;float started=Time.realtimeSinceStartup,gameStarted=Time.time,unscaledStarted=Time.unscaledTime;
@@ -591,6 +619,13 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                     }
                     finally {RenderTexture.active=previousActive;}
                     File.WriteAllBytes(Path.Combine(directory,index.ToString("D4")+".png"),image.EncodeToPNG());
+                    if(studioView!=null)
+                    {
+                        if(currentOwner.scope!="player-combat")throw new InvalidOperationException("Studio capture owner left combat scope.");
+                        pose["studio"]=RenderPlayerStudioAvatar(currentOwner.cel,
+                            Path.Combine(directory,index.ToString("D4")+"-studio.png"),studioView,studioForward,studioMinimumSpan);
+                        studioMinimumSpan=Math.Max(studioMinimumSpan,(float)pose["studio"]["framingSpan"]);
+                    }
                     frames.Add(pose);
                     if(arrivalObservation && spawnCapture.firstPngFrame<0)spawnCapture.firstPngFrame=Time.frameCount;
                 }catch(Exception ex){error=ex.ToString();}
@@ -603,6 +638,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
                 {"scope",captureOwner.scope},{"ownerInstanceId",capturedOwnerId},{"celInstanceId",capturedCelId},
                 {"previousCaptureFramerate",previousCaptureFramerate},{"requestedSeconds",seconds},{"requestedFps",fps},
                 {"width",width},{"height",height},{"frames",frames}};
+            if(studioView!=null)captureResult["studioView"]=studioView;
             if(materialObservation)captureResult["materialObservation"]=true;
             if(arrivalObservation){spawnCapture.status="capture-finished";spawnCapture.terminal=true;if(error!=null && spawnCapture.error==null)spawnCapture.error=error;captureResult["arrivalObservation"]=true;captureResult["arrival"]=SpawnCaptureView();}
             if(combatTrigger!=null)captureResult["combatTrigger"]=combatTrigger.DeepClone();
@@ -752,7 +788,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(quietTutorial!=null){quietTutorial.m_IsPromptTutorial=previousTutorialPrompt;quietTutorial.m_IsShowTutorial=previousTutorialShow;}
         quietTutorial=null;
     }
-    void OnDestroy(){enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();if(entryTicket!=null)entryTicket.valid=false;krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
+    void OnDestroy(){CustomLootRemoveHook();PreviewRaceCleanup();NativeFightDisarm();GuardianFixtureRemoveHooks();if(combatEntryObserver==this)combatEntryObserver=null;enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
     JObject QuietTutorials(JObject command)
     {
         FTKTutorial tutorial=FTKTutorial.Instance;if(tutorial==null)throw new InvalidOperationException("Tutorial manager unavailable.");
@@ -796,6 +832,8 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(dungeon==null)throw new InvalidOperationException("Enter a disposable dungeon first.");
         MiniHexDungeon nativeDungeon=(MiniHexDungeon)dungeon;
         bool regenerate=command["regenerate"]!=null && (bool)command["regenerate"];
+        bool followingCombat=command["followingCombat"]!=null && (bool)command["followingCombat"];
+        if(followingCombat && !regenerate)throw new ArgumentException("Following combat staging requires a fresh generated fixture.");
         FTKRandom random=nativeDungeon.m_DungeonRandom ?? new FTKRandom();
         // Generate/preflight locally before changing the selected room. This whole method
         // runs in one Update, so camera/FSM callbacks cannot interleave with selection.
@@ -806,13 +844,28 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(levels==null || !levels.Contains(level))throw new ArgumentException("Explicit existing generated level required.");
         IList rooms=levels[level]as IList;
         if(rooms==null || room<0 || room>=rooms.Count)throw new ArgumentException("Explicit valid room index required.");
+        if(followingCombat)
+        {
+            // Preflight both slots before assigning either; preserve native exits and stairs.
+            int definitionRooms=nativeDungeon.GetRoomCount(level);
+            if(room+1>=rooms.Count || room+1>=definitionRooms)throw new ArgumentException("Two existing nonterminal room slots required.");
+            for(int index=room;index<=room+1;index++)
+            {
+                MiniHexDungeon.RoomInfo slot=rooms[index]as MiniHexDungeon.RoomInfo;
+                if(slot==null || slot.m_Type==MiniHexDungeon.EncounterType.Stair
+                    || slot.m_Type==MiniHexDungeon.EncounterType.ExitRoom
+                    || slot.m_Type==MiniHexDungeon.EncounterType.Cleared)
+                    throw new ArgumentException("Following combat staging cannot replace a transition or terminal room.");
+            }
+        }
         string[] enemies=companionId==null?new[]{verifiedId}:new[]{verifiedId,companionId};
         MiniHexDungeon.RoomInfo replacement=new MiniHexDungeon.RoomInfo(MiniHexDungeon.EncounterType.Enemy,null,enemies,-1);
         rooms[room]=replacement;
+        if(followingCombat)rooms[room+1]=new MiniHexDungeon.RoomInfo(MiniHexDungeon.EncounterType.Enemy,null,(string[])enemies.Clone(),-1);
         if(regenerate){nativeDungeon.m_DungeonRandom=random;nativeDungeon.m_DungeonEncounters=generated;}
         nativeDungeon.m_Level=level;nativeDungeon.m_RoomIndex=room;
         return new JObject{{"ok",true},{"enemy",verifiedId},{"companionEnemy",companionId},{"enemies",new JArray(enemies)},
-            {"level",level},{"room",room},{"regenerated",regenerate},
+            {"level",level},{"room",room},{"regenerated",regenerate},{"followingCombat",followingCombat},
             {"note","Disposable generated-room substitution, native enemy assets; invoke normal dungeon_encounter only if native flow has not started. No forced acknowledgment."}};
     }
     JObject SelectRoom(string enemy)

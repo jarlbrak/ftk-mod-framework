@@ -1,0 +1,57 @@
+{
+  "schema": "ftkmf.paladin-guardian-revival-native.v1",
+  "status": "native-callers-verified-fixed-charge-live-proof-pending",
+  "input": {
+    "name": "Assembly-CSharp.dll",
+    "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+  },
+  "requirement": "One rescue charge per guardian per individual combat. Revival in that combat must not refresh the charge. A subsequent dungeon combat is a new combat for this rule.",
+  "verifiedCallPaths": [
+    {
+      "purpose": "Combat revival",
+      "chain": [
+        "CharacterOverworld.RespawnSequence",
+        "CharacterOverworld.WaitResurrectAnim",
+        "CharacterDummy.ResetForCombat"
+      ],
+      "conditions": "For Combat resurrection with an active animator, the coroutine waits for IDLE or Idle, completes revive movement, calls ResetForCombat, then continues the native continuation."
+    },
+    {
+      "purpose": "Initial combat setup",
+      "chain": [
+        "EncounterSession.InitPlayerDummiesForCombat(bool)",
+        "CharacterDummy.InitDummyForCombat(bool,bool)",
+        "CharacterDummy.ResetForCombat"
+      ],
+      "conditions": "Initializes each participating player dummy for combat."
+    },
+    {
+      "purpose": "Subsequent combat with reused player dummies",
+      "chain": [
+        "EncounterSession.ResetPlayerDummiesForNextEncounter()",
+        "CharacterDummy.InitDummyForCombat(bool,bool)",
+        "CharacterDummy.ResetForCombat"
+      ],
+      "conditions": "Rebuilds player dummy maps and initializes retained non-fled participants for the next encounter, including dungeon reuse."
+    }
+  ],
+  "findings": [
+    "ResetForCombat restores native actor flags and is shared by revival and combat initialization; it is not an exclusive new-combat boundary.",
+    "Resetting Guardian rescue usage from every ResetForCombat call permits an already-spent rescue charge to refresh on revival.",
+    "InitDummyForCombat distinguishes the verified initial/next-combat initialization paths from revival, matching the per-individual-combat requirement.",
+    "CharacterDummy.CombatFinished is an individual actor lifecycle method and is also called by Disconnect; it must not globally recharge other guardians in ongoing combat.",
+    "EncounterSession.OnEncounterSessionEnd clears client combat and vote state at session teardown. Session teardown alone is insufficient to define per-individual-combat recharge across intermediate dungeon battles."
+  ],
+  "implementationConsequence": "Separate actor reset from combat initialization. Revival may expire active protection but must retain spent rescue usage; initial and subsequent individual combat initialization may reset that guardian's combat state.",
+  "liveGates": [
+    "Spend rescue, kill and revive the same guardian in the same combat, and verify a later lethal hit receives no second rescue.",
+    "Verify a new ordinary combat restores one rescue charge.",
+    "Verify a subsequent dungeon combat restores one rescue charge while retaining the intended native dummy lifecycle.",
+    "Verify all peers agree; source inspection does not establish online behavior."
+  ],
+  "limits": [
+    "Read-only inspection of installed managed methods and their call sites; no native source copied.",
+    "This receipt proves the problematic hook is reached during revival, not that the revised framework has passed live regression tests."
+  ],
+  "prefixIdentityPrecondition": "Verified CharacterOverworld.Awake calls Initialize to assign m_FTKPlayerID before SetCharacterOverworld binds the native dummy. Fresh and next-encounter setup use this bound dummy; InitDummyForCombat does not initialize owner or FID."
+}

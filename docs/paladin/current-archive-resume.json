@@ -1,0 +1,50 @@
+{
+  "schema": "ftkmf.paladin-current-archive-resume.v1",
+  "status": "managed-archive-registration-and-equipment-resume-pass",
+  "archiveSha256": "85ec06effd5adf8bc794cecc5ee2eb09f4c728bb9cf8bc6aa97b689449dfdd6a",
+  "frameworkSha256": "b4fbc2a209ab17136ea610f33370db0a8c7ae1d3b44280683f8aefaf4e1f29d8",
+  "helperSha256": "e4e9365d37e604c0d7580704fc8970c36ec352ff1e91dc27bfaeaa1f978c8db8",
+  "session": "e14154bc11504b85bdb872a1c83d8c23",
+  "exactInstalledFiles": 137,
+  "registeredRows": 39,
+  "registrationErrors": 0,
+  "registrationWarnings": 0,
+  "equipment": {
+    "LeftHand": 1255876506,
+    "RightHand": 1223789468,
+    "Head": 1498997754,
+    "Body": 1166925164,
+    "Foot": 1280940834
+  },
+  "armorRenderer": {
+    "mesh": "ftkmf_glb_package-model:41e884cef22dcb33839e62791f891d6c10a55eb4d242bbf7a9659edda2011fc9",
+    "enabled": false,
+    "lease": {
+      "available": true,
+      "present": true,
+      "leaseId": 12,
+      "acquired": true,
+      "applied": true,
+      "references": 1
+    }
+  },
+  "resume": "Native Resume and Party Select Start reach Oarton overworld with all five Novice items retained.",
+  "visualAttempt": {
+    "result": "blank image, rejected as visual evidence",
+    "imageSha256": "eef40dae418c7e69eb86496f1f01d64d66a528dee7e9e8c8b6ffe395d96237dc",
+    "explanation": "Read-only renderer inventory reports native body, hair and armor disabled at town. No forced visibility change was made."
+  },
+  "evidenceSha256": {
+    "prepare": "03f19ce2af6f7ac6e0acbe047f990c5b7f3af3be1cd16571fe299c0c6bce81ee",
+    "activate": "c791e940398267a07b6b6643c7d372649f54f8fb2868db1b10b75bdb866ca8b7",
+    "equipment": "fcdca77246fa34504ed1c43494de56c82b7e6ec45674646340fe056988578ced",
+    "rendererInventory": "9f1f5502d2d953d031a2ac55689da4152d462e235ce0bfa6a07aefa7cc01aaf3",
+    "studio": "ff21dd0295f585926ea5b2d17776357d9af6b086a78e308090b9fdc651d03ae7"
+  },
+  "limitations": [
+    "Local helper fixture staging, not a public catalog or HTTP download.",
+    "Broad state read timed out during loading; native UI and narrow equipment/renderer observers establish the retained scope.",
+    "No save write/restart, disabled-save compatibility, new purchase, combat, current-world visual approval or online claim.",
+    "Owned process stopped after read-only observations."
+  ]
+}

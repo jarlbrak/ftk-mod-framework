@@ -47,7 +47,7 @@ namespace FTKModFramework.Core
                 if (fresh) owner = cel.gameObject.AddComponent<EnemyMeshResources>();
                 batch = owner.Append(added.ToArray(), new Renderer[] { renderer }, fresh);
                 attempted = true; renderer.sharedMaterials = copies;
-                if (supported && scrollers.Length > 0) owner.AddScrollingTarget(renderer, copies, scrollers);
+                owner.AddScrollingTarget(renderer, copies, supported ? scrollers : new ScrollingUVs[0]);
                 if (!owner.Applied) owner.VisualResourcesOnly = true;
                 owner.Applied = true;
             }

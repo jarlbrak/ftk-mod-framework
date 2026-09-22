@@ -1,0 +1,417 @@
+{
+  "schema": "ftkmf.paladin-dungeon-recharge-live.v1",
+  "status": "same-session-reused-dummy-next-combat-recharge-pass",
+  "session": "ba7d2cc2f5ea4eceab9fecc20b044872",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "24042825f3c3386f0363ef782673c014207ad0bba93dba1e80a79d99b55f1dc4",
+  "fixture": "Fresh single-player Lost Civilization run with all-gear inventory; three heroes co-located at an existing Crypt. Explicit followingCombat fixture stages wolfA into existing nonterminal rooms 1 and 2 at level 0.",
+  "rescue": {
+    "status": "passed",
+    "events": [
+      {
+        "phase": "armed",
+        "frame": 36004,
+        "data": {
+          "enemyId": 369188,
+          "victimId": 358974,
+          "guardians": [
+            {
+              "identity": "2:1",
+              "instanceId": 364424,
+              "rescueAvailable": true
+            }
+          ],
+          "guardianId": 364424,
+          "rescueAvailable": true,
+          "hp": 38,
+          "damage": 76,
+          "expectedHp": 1,
+          "expectedAlive": true,
+          "case": "rescue"
+        }
+      },
+      {
+        "phase": "retarget",
+        "frame": 40348,
+        "data": {
+          "originalVictim": "0:1"
+        }
+      },
+      {
+        "phase": "commit-shape",
+        "frame": 40501,
+        "data": {
+          "pinnedVictimMatches": true,
+          "main": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "health": 38,
+            "response": "Block",
+            "proficiency": "enBiteReg",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          },
+          "secondary1": null,
+          "secondary2": null,
+          "aoeTargets": 0
+        }
+      },
+      {
+        "phase": "commit",
+        "frame": 40501,
+        "data": {
+          "original": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "health": 38,
+            "response": "Block",
+            "proficiency": "enBiteReg",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          },
+          "replacement": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 76,
+            "health": 0,
+            "response": "Death",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        }
+      },
+      {
+        "phase": "production-transformed",
+        "frame": 40501,
+        "data": {
+          "attacker": "0:-1",
+          "victim": "0:1",
+          "damage": 37,
+          "health": 1,
+          "response": "DamagedHeavy",
+          "proficiency": "None",
+          "crit": 0,
+          "attackerHealthMod": 0,
+          "aoe": false
+        }
+      },
+      {
+        "phase": "native-hit",
+        "frame": 40713,
+        "data": {
+          "passed": true,
+          "hp": 1,
+          "alive": true,
+          "guardians": [
+            {
+              "identity": "2:1",
+              "instanceId": 364424,
+              "rescueAvailable": false
+            }
+          ],
+          "rescueAvailable": false,
+          "outcome": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 37,
+            "health": 1,
+            "response": "DamagedHeavy",
+            "proficiency": "None",
+            "crit": 0,
+            "attackerHealthMod": 0,
+            "aoe": false
+          }
+        }
+      }
+    ],
+    "scope": "One-shot fixture outcome through native enemy turn/playback. Not ordinary RNG, damage calculation or co-op evidence."
+  },
+  "guardianAfterRescue": {
+    "identity": "2:1",
+    "dummyInstanceId": 364424,
+    "heroInstanceId": -302534,
+    "classId": 14,
+    "classKey": "paladin",
+    "hp": 39,
+    "focusPoints": 4,
+    "spentFocus": 0,
+    "weaponItemId": 1223789468,
+    "hands": [
+      {
+        "slot": "LeftHand",
+        "items": [
+          {
+            "itemId": 1382228015,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "slot": "RightHand",
+        "items": [
+          {
+            "itemId": 1223789468,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "guardian": true,
+    "canAct": true,
+    "alive": true,
+    "stunned": false,
+    "petrified": false,
+    "fled": false,
+    "designatedAlly": "0:1",
+    "storedActive": false,
+    "effectiveActive": false,
+    "rescueAvailable": false,
+    "status": "Chosen ally: Player 1. Protection: inactive. Divine Intervention: spent this combat.",
+    "activeGuardians": []
+  },
+  "guardianAtVictory": {
+    "identity": "2:1",
+    "dummyInstanceId": 364424,
+    "heroInstanceId": -302534,
+    "classId": 14,
+    "classKey": "paladin",
+    "hp": 39,
+    "focusPoints": 4,
+    "spentFocus": 0,
+    "weaponItemId": 1223789468,
+    "hands": [
+      {
+        "slot": "LeftHand",
+        "items": [
+          {
+            "itemId": 1382228015,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "slot": "RightHand",
+        "items": [
+          {
+            "itemId": 1223789468,
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "guardian": true,
+    "canAct": true,
+    "alive": true,
+    "stunned": false,
+    "petrified": false,
+    "fled": false,
+    "designatedAlly": "0:1",
+    "storedActive": false,
+    "effectiveActive": false,
+    "rescueAvailable": false,
+    "status": "Chosen ally: Player 1. Protection: inactive. Divine Intervention: spent this combat.",
+    "activeGuardians": []
+  },
+  "nativeReady": {
+    "strictReady": {
+      "ok": true,
+      "level": 0,
+      "room": 2,
+      "buttonCount": 3
+    },
+    "dungeon": {
+      "level": 0,
+      "room": 2,
+      "activeDungeonEncounterType": "Enemy",
+      "nextLevelGenerated": false,
+      "isAtLastLevel": true,
+      "isDungeonCleared": false,
+      "definitionLevelCount": 1,
+      "definitionRoomCount": 5,
+      "generatedRoomCount": 5,
+      "queuedSlotValid": true,
+      "withinDefinitionRoomBounds": true,
+      "queuedRoomType": "Enemy",
+      "queuedContext": -1,
+      "queuedObjects": [
+        "wolfA"
+      ],
+      "slotAllowsEnemySubstitution": true,
+      "note": "Slot eligibility only; stage-next-enemy also requires strict native Ready. Appended staircase is outside definition room bounds."
+    }
+  },
+  "secondCombat": {
+    "dungeon": {
+      "inDungeon": true,
+      "inCombat": true,
+      "dungeonId": "Crypt",
+      "level": 0,
+      "room": 2,
+      "levelCount": 1,
+      "roomCount": 5,
+      "currentRoomType": "Enemy",
+      "encounterObjects": [
+        "wolfA"
+      ],
+      "inLastRoom": false,
+      "atLastLevel": true,
+      "cleared": false,
+      "deactivated": false,
+      "driver": null
+    },
+    "heroes": [
+      {
+        "identity": "0:1",
+        "dummyInstanceId": 358974,
+        "heroInstanceId": -291928,
+        "classId": 15,
+        "classKey": "paladin_gear_fixture_hunter",
+        "hp": 1,
+        "focusPoints": 3,
+        "spentFocus": 0,
+        "weaponItemId": 100013,
+        "hands": [
+          {
+            "slot": "LeftHand",
+            "items": []
+          },
+          {
+            "slot": "RightHand",
+            "items": [
+              {
+                "itemId": 100013,
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "guardian": false,
+        "canAct": true,
+        "alive": true,
+        "stunned": false,
+        "petrified": false,
+        "fled": false,
+        "designatedAlly": null,
+        "storedActive": false,
+        "effectiveActive": false,
+        "rescueAvailable": null,
+        "status": "",
+        "activeGuardians": []
+      },
+      {
+        "identity": "1:1",
+        "dummyInstanceId": 368986,
+        "heroInstanceId": -297616,
+        "classId": 14,
+        "classKey": "paladin",
+        "hp": 39,
+        "focusPoints": 3,
+        "spentFocus": 0,
+        "weaponItemId": 1223789468,
+        "hands": [
+          {
+            "slot": "LeftHand",
+            "items": [
+              {
+                "itemId": 1382228015,
+                "count": 1
+              }
+            ]
+          },
+          {
+            "slot": "RightHand",
+            "items": [
+              {
+                "itemId": 1223789468,
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "guardian": true,
+        "canAct": true,
+        "alive": true,
+        "stunned": false,
+        "petrified": false,
+        "fled": false,
+        "designatedAlly": null,
+        "storedActive": false,
+        "effectiveActive": false,
+        "rescueAvailable": true,
+        "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+        "activeGuardians": []
+      },
+      {
+        "identity": "2:1",
+        "dummyInstanceId": 364424,
+        "heroInstanceId": -302534,
+        "classId": 14,
+        "classKey": "paladin",
+        "hp": 39,
+        "focusPoints": 4,
+        "spentFocus": 0,
+        "weaponItemId": 1223789468,
+        "hands": [
+          {
+            "slot": "LeftHand",
+            "items": [
+              {
+                "itemId": 1382228015,
+                "count": 1
+              }
+            ]
+          },
+          {
+            "slot": "RightHand",
+            "items": [
+              {
+                "itemId": 1223789468,
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "guardian": true,
+        "canAct": true,
+        "alive": true,
+        "stunned": false,
+        "petrified": false,
+        "fled": false,
+        "designatedAlly": null,
+        "storedActive": false,
+        "effectiveActive": false,
+        "rescueAvailable": true,
+        "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+        "activeGuardians": []
+      }
+    ],
+    "encounterInstanceId": 358098
+  },
+  "observations": [
+    "Native Guard selected Hunter. The bounded lethal-hit fixture left him at 1 HP and consumed female Paladin rescue.",
+    "Two ordinary native hammer attacks defeated the first wolf. Native Collect accepted gold and Hags Bane; native Ready advanced to room 2.",
+    "Female Paladin dummy instance 364424 is retained across rooms, with rescue false at first victory and true before any Guard in the next fight.",
+    "Both Paladins have inactive Guard and null designated allies on second combat entry."
+  ],
+  "limits": [
+    "Enemy layout and lethal damage are explicit fixtures, not ordinary acquisition or damage calculation.",
+    "Only charge restoration is observed in the second combat; a second rescue consumption is not claimed.",
+    "Single-player macOS only; online co-op remains unverified."
+  ],
+  "rawEvidenceSha256": {
+    "paladin-two-room-stage-result.txt": "da462a1126aedf9ba03e76ed024cd21b7f2ab96f7a09d8f0f645232692da3ac1",
+    "paladin-two-room-rescue-complete.txt": "480dc36fbdfa78e3780610352c1780f81ec0f959081d5ee1e7f3340f82ab16c3",
+    "paladin-two-room-spent.txt": "e5b13405d7b8cc887006c0c948fa2d2ccd3a7553a09c66b292c2eae86fba14c4",
+    "paladin-two-room-victory-guardian.txt": "8959307a667c93a0dc8d46e8ceef64bb65f7bdbe2a0cd6a9039c9004fbbf1f2c",
+    "paladin-two-room-ready-3.txt": "0f9d48a9b03cd7555dcf6a81cb24c1bfbc8a544899e2a23bf13ff1d04504419d",
+    "paladin-two-room-ready-click.txt": "d551795b14d2c14301bff1b79a3f3d0c18c467510af21ed7ec3ca0d0cc59b5d0",
+    "paladin-two-room-second-combat.txt": "1caf536e40ddeb50b38b8dd3e3a9fc1d845b9d450752394c5bf4544987211bdc",
+    "paladin-two-room-second-state.json": "b9255d6703bd1f81d64bcc169b26f78af03e00954cf84d08a2c2f0914acaadf8"
+  }
+}

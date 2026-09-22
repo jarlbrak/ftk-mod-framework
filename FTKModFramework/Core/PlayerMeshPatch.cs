@@ -56,15 +56,29 @@ namespace FTKModFramework.Core
         internal static void Apply(FTK_playerGameStart classRow, FTK_skinset skinset, CharacterEventListener avatar)
         {
             if (classRow == null || skinset == null || avatar == null) return;
+            EnemyMeshResources existing = avatar.GetComponent<EnemyMeshResources>();
+            if (existing != null && (!existing.VisualResourcesOnly || !existing.ValidLease()))
+            {
+                if (!existing.VisualResourcesOnly && existing.Applied) existing.EnsureRetained();
+                return;
+            }
+            PlayerMeshPlan plan = null;
             int classId;
-            if (!ContentRegistry.TryGetSyntheticId(classRow.m_ID, out classId, typeof(FTK_playerGameStartDB))) return;
-            if (!object.ReferenceEquals(Content.Db<FTK_playerGameStartDB>().GetEntryByInt(classId), classRow)) return;
             Dictionary<int, PlayerMeshPlan> skins;
-            if (!Registrations.TryGetValue(classId, out skins)) return;
-            int skinId = Content.Db<FTK_skinsetDB>().GetIntFromID(skinset.m_ID);
-            PlayerMeshPlan assignments;
-            if (!skins.TryGetValue(skinId, out assignments)) return;
-            bool applied = assignments.Apply("player:" + classRow.m_ID + ":" + skinset.m_ID, avatar);
+            if (ContentRegistry.TryGetSyntheticId(classRow.m_ID, out classId, typeof(FTK_playerGameStartDB)) &&
+                object.ReferenceEquals(Content.Db<FTK_playerGameStartDB>().GetEntryByInt(classId), classRow) &&
+                Registrations.TryGetValue(classId, out skins))
+                skins.TryGetValue(Content.Db<FTK_skinsetDB>().GetIntFromID(skinset.m_ID), out plan);
+            EnemyRendererMesh[] resolved = ItemApparelRegistry.Resolve(avatar);
+            string[] skipped;
+            string error;
+            if (plan != null && !plan.TryResolve(avatar.transform, resolved, out resolved, out skipped, out error))
+            {
+                Plugin.Log.LogError("[player-mesh] class outfit rejected: " + error);
+                return;
+            }
+            if (resolved.Length == 0) return;
+            bool applied = ExplicitEnemyMeshSwap.Apply("player:" + classRow.m_ID, avatar, resolved, null, true);
             Plugin.Log.LogInfo("[player-mesh] " + (applied ? "applied" : "rejected") + " class '" +
                 classRow.m_ID + "', skinset '" + skinset.m_ID + "'.");
         }
@@ -97,24 +111,4 @@ namespace FTKModFramework.Core
         }
     }
 
-    [HarmonyPatch(typeof(CharacterDummy), "CreateAvatar", new Type[] { typeof(bool) })]
-    internal static class PlayerCombatMeshLeasePatch
-    {
-        // Runs on success and on a native exception after Instantiate assigned m_EventListener. Retain any
-        // cloned resource lease immediately, even for inactive clones whose Awake has not run. Never swallow
-        // the native exception. Awake and this finalizer can both run without acquiring a second reference.
-        private static Exception Finalizer(CharacterDummy __instance, Exception __exception)
-        {
-            try
-            {
-                if (__instance != null && __instance.m_CharacterOverworld != null && __instance.m_EventListener != null)
-                {
-                    EnemyMeshResources owner = __instance.m_EventListener.GetComponent<EnemyMeshResources>();
-                    if (owner != null) owner.EnsureRetained();
-                }
-            }
-            catch (Exception e) { Plugin.Log.LogWarning("[player-mesh] combat lease hook: " + e.Message); }
-            return __exception;
-        }
-    }
 }

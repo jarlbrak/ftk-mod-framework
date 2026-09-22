@@ -1,0 +1,826 @@
+{
+  "schema": "ftkmf.paladin-offline-verification.v1",
+  "scope": "Game-free checks only. No native gameplay, online, visual acceptance, deployment or release claim.",
+  "startedUtc": "2026-09-21T00:31:43.291892+00:00",
+  "frameworkBefore": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "checks": [
+    {
+      "name": "framework",
+      "command": [
+        "dotnet",
+        "build",
+        "FTKModFramework/FTKModFramework.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "6f4acaa226a3b55d67820aa8e1015deafcb063afddd3ffbd1b641dccea1a12d8",
+      "outputTail": "  Determining projects to restore...\n  All projects are up-to-date for restore.\n  FTKModFramework -> <repository>/FTKModFramework/bin/Release/net35/FTKModFramework.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.47\n"
+    },
+    {
+      "name": "GuardianCombat",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/GuardianCombat/GuardianCombat.csproj",
+        "-c",
+        "Release",
+        "--",
+        "--assembly",
+        "scratch/paladin-game/PaladinTest.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "f0b9cb6feab47711c6693477fbc047d644185be51144965fafd840ab01bd1931",
+      "outputTail": "PASS GuardianCombat: 133 checks\nPASS GuardianCombat: 21 native method/parameter metadata checks\n"
+    },
+    {
+      "name": "PlayerMods",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/PlayerMods/PlayerMods.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "64898a5fa137df6ec0f990f83f4c62a87ff96da0a5544e5132aff36d771e2d55",
+      "outputTail": "ASS: unavailable automatic target does not promise installation\nPASS: pin identity rejects traversal and ambiguous version tags\nPASS: framework update response requires supported schema\nPASS: framework update response is bound to its request\nPASS: release tag/version mismatch is rejected\nPASS: framework preference selection starts through the verified helper\nPASS: fixture commits preference before cancellation\nPASS: cancel reaps helper and reloads the actual saved preference\nPASS: reviewed pin identity can be sent to the helper\nPASS: pin request carries the exact reviewed release identity\nPASS: in-game preference workflow never installs a framework DLL\nPASS: navigation / the three tabs are navigation roots\nPASS: navigation / required components is a browse view reached from Installed, not a root\nPASS: navigation / browse views clear the mod selection on entry\nPASS: navigation / a confirmation is never restorable\nPASS: navigation / Components pushes Installed as its parent\nPASS: navigation / Back from Components restores Installed and its page\nPASS: navigation / settings stacks on components\nPASS: navigation / a tab root discards history\nPASS: navigation / Back from a root with no history closes the panel\nPASS: navigation / re-entering the current view resets it without stacking\nPASS: navigation / returning to an ancestor restores its frame and unwinds the stack above it\nPASS: navigation / the ancestor's own parent is still intact\nPASS: navigation / confirm stacks on the view that opened it\nPASS: navigation / confirming returns to the existing maintenance frame instead of duplicating it\nPASS: navigation / one Back after confirming leaves the panel on Installed\nPASS: navigation / a confirmation is dropped from history when it is left\nPASS: navigation / an adversarial click loop keeps the stack bounded (depth 3 of 5 distinct views)\nPASS: navigation / Back always reaches the panel exit in a bounded number of presses (4)\nPASS: navigation / focus is restored when the control count is unchanged\nPASS: navigation / a changed control count falls back to the view default\nPASS: navigation / an out-of-range focus falls back to the view default\nPASS: navigation / an empty view asks for the first control\nPASS: navigation / a fallback beyond the rebuilt view is clamped to the first control\nPASS: navigation / each view keeps its default controller focus\nFixtures retained at <temporary-fixture>\n"
+    },
+    {
+      "name": "PackageModels",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/PackageModels/PackageModels.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "0d5909bbd74784557352726dddbca33534f77c62d9b61aadf42b79bdd27f5227",
+      "outputTail": "PASS: 18 package model path checks\n"
+    },
+    {
+      "name": "ItemApparel",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/ItemApparel/ItemApparel.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "8f0e31d789899b1b25eca529cd4cfb5b021d27c50f6c4edcdfc00a16300df4b7",
+      "outputTail": "PASS 38 item apparel registration/merge assertions (Unity and DB stand-ins; no live proof)\n"
+    },
+    {
+      "name": "RegisteredRows",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/RegisteredRows/RegisteredRows.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "48791f7a1d60aa5ac75a228b5b633cc9e74ce96f2e1e20e027d28f1638dec17a",
+      "outputTail": "16 registered-row lifecycle checks passed\n"
+    },
+    {
+      "name": "CombatAvatarLease",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/CombatAvatarLease/CombatAvatarLease.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "0275e4f53961548df6eeb3bbb22d426cdfe7b73fafa7ae08ee61c258738d4e21",
+      "outputTail": "PASS 10 executable combat clone IL checks (Unity stand-ins; no live proof)\n"
+    },
+    {
+      "name": "GuardianClassUi",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/GuardianClassUi/GuardianClassUi.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "8390a3683febcabe0d3b90856403a93e927ae82c17b18545ecabdfb9dcb30823",
+      "outputTail": "PASS 10 actual class UI layout lifecycle checks (Unity stand-ins; no live fit proof)\n"
+    },
+    {
+      "name": "ModsButton",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "FTKModFramework/Tests/ModsButton/ModsButton.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "0224bb418a4bfc80a5dee77dac59fe8fb934914fc9cd1151a4f32f942e707df4",
+      "outputTail": "6 Mods button lifecycle checks passed\n"
+    },
+    {
+      "name": "mesh-transaction-tests",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tools/ai-model-pipeline/mesh-transaction-tests/MeshTransactionTests.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "247631fb423eb0101fc01248bd93aa4527c89b916c32570a5b2d350448d7629a",
+      "outputTail": "PASS 188 actual transaction/lease assertions (Unity boundary stand-ins; no live proof).\n"
+    },
+    {
+      "name": "material-option-tests",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tools/ai-model-pipeline/material-option-tests/MaterialOptionTests.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 1,
+      "logSha256": "3e3eb434795bddf33476f7d8ad833c51f2c94e2a50ee4c72d3acfad92d0a5be7",
+      "outputTail": "<repository>/tools/ai-model-pipeline/material-option-tests/Program.cs(4,7): error CS0246: The type or namespace name 'Newtonsoft' could not be found (are you missing a using directive or an assembly reference?) [<repository>/tools/ai-model-pipeline/material-option-tests/MaterialOptionTests.csproj]\n<repository>/tools/ai-model-pipeline/runtime-test-content/RendererEmissionFixture.cs(2,7): error CS0246: The type or namespace name 'Newtonsoft' could not be found (are you missing a using directive or an assembly reference?) [<repository>/tools/ai-model-pipeline/material-option-tests/MaterialOptionTests.csproj]\n<repository>/tools/ai-model-pipeline/runtime-test-content/RendererEmissionFixture.cs(7,31): error CS0246: The type or namespace name 'JToken' could not be found (are you missing a using directive or an assembly reference?) [<repository>/tools/ai-model-pipeline/material-option-tests/MaterialOptionTests.csproj]\n\nThe build failed. Fix the build errors and run again.\n"
+    },
+    {
+      "name": "player-plan-tests",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tools/ai-model-pipeline/player-plan-tests/PlayerMeshPlanTests.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "dd3770c02e01d7ac3e31e8d3e9a0d82ae59ab9ff980920bd46f26392cba71df5",
+      "outputTail": "PASS: 39 player plan assertions (Unity/strict transaction/lease stand-ins; no live gate).\n"
+    },
+    {
+      "name": "material-lifecycle-tests",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tools/ai-model-pipeline/material-lifecycle-tests/MaterialLifecycleTests.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "9bb8bf96b3e41157f6e451574993bf0b9a531fef9df6258b06439e1a785c234b",
+      "outputTail": "17 linked timing assertions PASS; no Unity scheduling or resource lifetime claim.\n"
+    },
+    {
+      "name": "guardian-damage-fixture-tests",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tools/ai-model-pipeline/guardian-damage-fixture-tests/GuardianDamageFixtureTests.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "556684fe532cb84a6e641cd2f8ad6bd87fe37bed7541790c3a34b42ce1430dc2",
+      "outputTail": "PASS 66 linked one-shot Guardian fixture policy checks\n"
+    },
+    {
+      "name": "combat-entry-trace-tests",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tools/ai-model-pipeline/combat-entry-trace-tests/CombatEntryTraceTests.csproj",
+        "-c",
+        "Release"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "6cd600a37cfdde40460cce8608eeeddcd462d149374d1552cb94f4be4bc3da7d",
+      "outputTail": "PASS 15 linked trace selector checks\n"
+    },
+    {
+      "name": "go-helper",
+      "command": [
+        "go",
+        "test",
+        "./..."
+      ],
+      "cwd": "launcher/helper",
+      "exitCode": 0,
+      "logSha256": "466438386a684540733940f2fb920087803e14b1004d9d1990127c066ef6cdbc",
+      "outputTail": "ok  \tftkmf/launcher-helper\t4.334s\n"
+    },
+    {
+      "name": "art-experiments_paladin-equipment_validate.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "art-experiments/paladin-equipment/validate.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "ad87ba8bb15035804bac102ad59f216ed883b18b1385618a14c9b7fb0de00fdf",
+      "outputTail": "PASS: 18 original static GLBs and all source/manifests\n"
+    },
+    {
+      "name": "art-experiments_paladin-characters_validate.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "art-experiments/paladin-characters/validate.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "a8e9672b460635b61352b918f782389a1e0d321024f68e4645034a0bfccd3482",
+      "outputTail": "PASS: 18 skinned apparel assets and six rigid helmets across six equipment sets\n"
+    },
+    {
+      "name": "art-experiments_paladin-characters_loot-display_validate.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "art-experiments/paladin-characters/loot-display/validate.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "ab33ea6d569b9415300ef4a4095842b06cafd2214916427caa47345054cfe9f2",
+      "outputTail": "PASS: 12 original static loot display GLBs\n"
+    },
+    {
+      "name": "art-experiments_paladin-equipment_loot-display_validate.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "art-experiments/paladin-equipment/loot-display/validate.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "8d9385906b66cd59c91b9a95ac8487c3ac84943cde7d62138f47b1a1d70941dd",
+      "outputTail": "PASS: 6 original static loot display GLBs\n"
+    },
+    {
+      "name": "art-experiments_paladin-equipment_shield-display_validate.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "art-experiments/paladin-equipment/shield-display/validate.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "8d9385906b66cd59c91b9a95ac8487c3ac84943cde7d62138f47b1a1d70941dd",
+      "outputTail": "PASS: 6 original static loot display GLBs\n"
+    },
+    {
+      "name": "art-experiments_paladin-equipment_validate_delivery.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "art-experiments/paladin-equipment/validate_delivery.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "360838445ceb5daa0a5a3fa6973b33161f65f3bbf56740b2c8bc79000cf19217",
+      "outputTail": "PASS: 30 original fragments, 37 transparent icons, delivery hashes\n"
+    },
+    {
+      "name": "marketplace_packages_validate_paladin.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "marketplace/packages/validate_paladin.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "bbda4f43c90d101549723b408e079aee0e622508091270a8f010b0d5f059c3b8",
+      "outputTail": "PASS: 39 unique rows, complete six-family progression, original asset hashes, renderer paths and references. No live-game claims.\n"
+    },
+    {
+      "name": "tools_ai-model-pipeline_paladin-gear-fixture_test_build.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "tools/ai-model-pipeline/paladin-gear-fixture/test_build.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "fe008aab760eb03ccac7578e2b84665b1b50b0d7f855b17a0c7a8d039435b658",
+      "outputTail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "tools_ai-model-pipeline_paladin-gear-evidence_test_summarize.py",
+      "command": [
+        "scratch/paladin-venv/bin/python",
+        "tools/ai-model-pipeline/paladin-gear-evidence/test_summarize.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "0d5f19ead2bf9676d74342ac6c647b4bf2294bed713605930a76f4b7d5b1c878",
+      "outputTail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.009s\n\nOK\n"
+    },
+    {
+      "name": "test_guardian_damage_fixture_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_guardian_damage_fixture_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "d03ce458f2a6cd2b4f27522f3aacad03ce1872c028853507c3ad02ca621bdcad",
+      "outputTail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "test_verify_material_scroll",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_verify_material_scroll.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068",
+      "outputTail": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_state_busy_retry",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_state_busy_retry.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "65378dcad145da2497120819bebfc3c46534dce9714ce064b3d809a56654aca2",
+      "outputTail": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "name": "test_exercise_case",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_exercise_case.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "3edad3839612dc18fa98cb89efc46b8a785659ecac6452512f27dfde2877c9f0",
+      "outputTail": ".....................................\n----------------------------------------------------------------------\nRan 37 tests in 0.091s\n\nOK\n"
+    },
+    {
+      "name": "test_town_stock_observation_readonly",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_town_stock_observation_readonly.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "fe008aab760eb03ccac7578e2b84665b1b50b0d7f855b17a0c7a8d039435b658",
+      "outputTail": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_paid_focus_case",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_paid_focus_case.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "c3572e95a0ba574cbaeac2921c7e7c3a55f1a19b3ab7037197d945482194b7a9",
+      "outputTail": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.230s\n\nOK\n"
+    },
+    {
+      "name": "test_entry_setup",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_entry_setup.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068",
+      "outputTail": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_run_case",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_run_case.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "ed03620e7de8ea3fc7e5162d1f7b30809711d8c4847b98865753576d74e6a616",
+      "outputTail": "................................\n----------------------------------------------------------------------\nRan 32 tests in 0.008s\n\nOK\n"
+    },
+    {
+      "name": "test_profile_materials",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_profile_materials.py"
+      ],
+      "cwd": ".",
+      "exitCode": 1,
+      "logSha256": "4b5ce77fef56ae618bf8eda8de25e5692007be7e71588d60c33dc6b2343a1e65",
+      "outputTail": "....E..\n======================================================================\nERROR: test_runner_pins_changed_secondary_texture_before_operation (__main__.Tests.test_runner_pins_changed_secondary_texture_before_operation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<repository>/tools/ai-model-pipeline/runtime-test/test_profile_materials.py\", line 43, in test_runner_pins_changed_secondary_texture_before_operation\n    Runner.profile_preflight(r)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"<repository>/tools/ai-model-pipeline/runtime-test/run_case.py\", line 249, in profile_preflight\n    (self.root/'model-test-profiles.json').stat().st_mtime, time.time(), self.content_registration_run)\n                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Runner' object has no attribute 'content_registration_run'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.002s\n\nFAILED (errors=1)\n"
+    },
+    {
+      "name": "test_run_kraken_bank_suite",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_run_kraken_bank_suite.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "6bbebe1ad96eb5f292fac5606d8de50501b1719be4d19fd361a70738944d7e7c",
+      "outputTail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.045s\n\nOK\n"
+    },
+    {
+      "name": "test_world_input_observation_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_world_input_observation_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "55df81c03b1fc09a739803668e8b10b1a1cd87ac7e716666dddb1c968f87bb76",
+      "outputTail": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "name": "test_motion_evidence",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_motion_evidence.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "a60e0d2d66e445b0734c0563e528ca7eae6f1b838b35a48522a62ef5a010522e",
+      "outputTail": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "name": "test_native_party_start_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_native_party_start_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "e6ec182765cd965f2837d8eeaef5a64af48a104f245cd1a0b7281559194c57c1",
+      "outputTail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "name": "test_portrait_texture_readonly",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_portrait_texture_readonly.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "199ba496f288116d36c62f29346d4fbf0bd75745a1c893abfcbdaa4c6d5b1033",
+      "outputTail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "test_preview_race_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_preview_race_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0",
+      "outputTail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_story_setup",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_story_setup.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "b986091cdd4d7aeb1185de9a51d74065913d71702d10fa5dada3e4c584a2ddd7",
+      "outputTail": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_record_player_case",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_record_player_case.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068",
+      "outputTail": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_native_create_character_input_state_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_native_create_character_input_state_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "888a0c0ed615e57d32cf72be501b0c355f33b8613c81dfdaa99db33d7959487e",
+      "outputTail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "name": "test_native_combat_focus_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_native_combat_focus_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "33060fd73862c5e1af97335504d5b45211fce6d229657f556d8deceeadc52ce4",
+      "outputTail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "name": "test_resume_after_start",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_resume_after_start.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "3af354abd6afd2f4f662a367159a8b8107385935ded6c8a2b929734becedb43c",
+      "outputTail": "............\n----------------------------------------------------------------------\nRan 12 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "test_run_kraken_production_campaign",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_run_kraken_production_campaign.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "120fcf1e1b1ef6883b716f1b33b4fbea79c7089f1d1ff950e98c9608d82abb42",
+      "outputTail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.008s\n\nOK\n"
+    },
+    {
+      "name": "test_record_case",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_record_case.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "f0c79ce6dc83e2fb10ea0f89a87b9acd70f8b8d0c1da65db952928491752af3f",
+      "outputTail": "................\n----------------------------------------------------------------------\nRan 16 tests in 0.036s\n\nOK\n"
+    },
+    {
+      "name": "test_arrival_case",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_arrival_case.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "33060fd73862c5e1af97335504d5b45211fce6d229657f556d8deceeadc52ce4",
+      "outputTail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "name": "test_combat_entry_trace_readonly",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_combat_entry_trace_readonly.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "d03ce458f2a6cd2b4f27522f3aacad03ce1872c028853507c3ad02ca621bdcad",
+      "outputTail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "test_native_create_character_screen_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_native_create_character_screen_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "6273232de4d3ef7acd4ecafa5c86beeeb974f56586b21089a2990b3f72facbe6",
+      "outputTail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_custom_loot_fixture_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_custom_loot_fixture_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0",
+      "outputTail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_native_party_class_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_native_party_class_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "dcd2147edfda2291b456dfb6d9f3021f0fed07760d5a1c8869fc5446f30e28fe",
+      "outputTail": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "name": "test_player_studio_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_player_studio_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "33060fd73862c5e1af97335504d5b45211fce6d229657f556d8deceeadc52ce4",
+      "outputTail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+    },
+    {
+      "name": "test_native_fight_trace_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_native_fight_trace_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "d03ce458f2a6cd2b4f27522f3aacad03ce1872c028853507c3ad02ca621bdcad",
+      "outputTail": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "name": "test_startup_wait",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_startup_wait.py"
+      ],
+      "cwd": ".",
+      "exitCode": 1,
+      "logSha256": "ed17f8c25321cce7ed67ec2efdc35cd95bf95905b415fc77b3ac36ef27312950",
+      "outputTail": "ion_stops_before_page)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<repository>/tools/ai-model-pipeline/runtime-test/test_startup_wait.py\", line 58, in test_actionable_unknown_destination_stops_before_page\n    self.assertEqual([op for op,args in runner.calls],['entry-preparation-state'])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: ['entry-preparation-state', 'story-submit'] != ['entry-preparation-state']\n\nFirst list contains 1 additional elements.\nFirst extra element 1:\n'story-submit'\n\n- ['entry-preparation-state', 'story-submit']\n?                           ----------------\n\n+ ['entry-preparation-state']\n\n======================================================================\nFAIL: test_visit_page_not_replayed (__main__.Tests.test_visit_page_not_replayed)\n----------------------------------------------------------------------\nRuntimeError: Unknown native story message\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<repository>/tools/ai-model-pipeline/runtime-test/test_startup_wait.py\", line 72, in test_visit_page_not_replayed\n    with self.assertRaisesRegex(RuntimeError,'Visit story reopened'):self.run_wait(runner)\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"Visit story reopened\" does not match \"Unknown native story message\"\n\n======================================================================\nFAIL: test_wrong_presenter_quest_no_submission (__main__.Tests.test_wrong_presenter_quest_no_submission)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<repository>/tools/ai-model-pipeline/runtime-test/test_startup_wait.py\", line 36, in test_wrong_presenter_quest_no_submission\n    self.assertEqual([op for op,args in runner.calls],['entry-preparation-state'])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: ['entry-preparation-state', 'story-submit'] != ['entry-preparation-state']\n\nFirst list contains 1 additional elements.\nFirst extra element 1:\n'story-submit'\n\n- ['entry-preparation-state', 'story-submit']\n?                           ----------------\n\n+ ['entry-preparation-state']\n\n----------------------------------------------------------------------\nRan 11 tests in 0.003s\n\nFAILED (failures=3)\n"
+    },
+    {
+      "name": "test_native_row_portrait_boundary",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_native_row_portrait_boundary.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0",
+      "outputTail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "test_guardian_observation_readonly",
+      "command": [
+        "python3",
+        "tools/ai-model-pipeline/runtime-test/test_guardian_observation_readonly.py"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "feabb4add9e2ca3374e538560634d1ec97dc4f4ce89aab12f3d726e36ea9b2f6",
+      "outputTail": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "outputTail": ""
+    },
+    {
+      "name": "material-option-tests-corrected-configuration",
+      "command": [
+        "dotnet",
+        "run",
+        "--project",
+        "tools/ai-model-pipeline/material-option-tests/MaterialOptionTests.csproj",
+        "-c",
+        "Release",
+        "-p:TestGameRoot=<repository>/scratch/paladin-final-offline-checks/reference-root"
+      ],
+      "cwd": ".",
+      "exitCode": 0,
+      "logSha256": "bf325914d7d028b46905ac93872b21972a968cf608b72f2c9d1fb1d797bc51ec",
+      "outputTail": "PASS 21 material-option assertions (Unity stand-ins; no runtime evidence).\n"
+    }
+  ],
+  "frameworkAfter": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "frameworkUnchanged": true,
+  "finishedUtc": "2026-09-21T00:32:13.683829+00:00",
+  "status": "failed-checks",
+  "configurationCorrection": "Initial material-option run omitted required TestGameRoot. Corrected run references isolated game through scratch-only FTK.app symlink; no game files changed.",
+  "unresolvedFailures": [
+    "test_profile_materials",
+    "test_startup_wait"
+  ],
+  "limits": [
+    "These runtime tooling suites also fail unchanged tracked sources; no fix attempted in this verification-only task.",
+    "No tests here prove native gameplay, co-op, art acceptance or release readiness."
+  ],
+  "sourceHashes": {
+    "FTKModFramework/Core/GuardianEquipmentUiPatch.cs": "5951d74ef5670000d4177cf28265b445fdcc60ec30ff7d6bff51d1ce2275db03",
+    "FTKModFramework/Core/GuardianEquipmentDescription.cs": "90b586f7bb4d781e81e5e56ee1a3f359df5fb5647399c9bcbd303687ae956622",
+    "FTKModFramework/Core/GuardianClassInfoPatch.cs": "97319c33cd65138ae5bcc20bad48b4f70ec69ed3d937f95365ddc5810876b4d9",
+    "FTKModFramework/Core/GuardianEquipmentBonuses.cs": "e3857d7c6d30e31d5f7487319d6cd8c9b82e15e14c763c0bd6f3969ed76d3269",
+    "FTKModFramework/Core/GuardianRuntime.cs": "f81fb29a6755d359199473019ac604f014d41ead746343388726121990972d9e",
+    "FTKModFramework/Core/GuardianPatches.cs": "563b01c6089092cf5d9efea75a431e8f877bb13f47a8e0ab7847a8dec13017b6",
+    "FTKModFramework/Core/GuardianCombatState.cs": "abd0e2f9e5ab3dbe0b0e44b208cd569f48e255d3fd60a6a41f4f799ef35bcfc0",
+    "FTKModFramework/Core/GuardianClassLayout.cs": "d8aa7bb01be6db5f4e62149866934f4b62bb2ec8cf2f3d2ad49074bb4b86cefa",
+    "FTKModFramework/Core/GuardianFocusedHit.cs": "dd739251354d747e4c0bacf3ffae06b258a31ab48af35b457541d5163d1821cb",
+    "tools/ai-model-pipeline/runtime-test/GuardianDamageFixturePolicy.cs": "0905dc9125c4760d7b3aab46c6c00f86803944f49835f4a760f109b2f86519ee",
+    "tools/ai-model-pipeline/runtime-test/GuardianObservation.cs": "54eecd210284ab8c7ddc16a584ebbe3e46bc1874aed4ce2516580c9e6d562549",
+    "tools/ai-model-pipeline/runtime-test/GuardianDamageFixture.cs": "9ca80460e67830f053f3f1db0bf8029642a6f658a223c0b77f5a91a71b364edc",
+    "tools/ai-model-pipeline/runtime-test/run_case.py": "3f0e7be3b7042fc6b316c3a5d632ac742836e629b0b2c86b2eac3cb5081fc85f",
+    "tools/ai-model-pipeline/runtime-test/test_profile_materials.py": "a1b9f8c0612a177c3fad84b3a6510e666b3d395da685522661b611dc6a1be11d",
+    "tools/ai-model-pipeline/runtime-test/test_startup_wait.py": "7f7b56a748ff2f2dc917bec35127e0387aa7ec4ef497c0ca87bb0e97a2730dec",
+    "marketplace/packages/paladin/content.json": "dee1c82389ecc8578d28caf4430277b3247c67d125e05e56c3cde5d2a6c2a84a"
+  },
+  "trackedFailureSourcesUnmodified": true,
+  "headBaseline": {
+    "head": "9e9e7c2bdb58ba7bdb252808841ef181acfbefa3",
+    "method": "Extract tracked runtime-test subtree from git archive HEAD into isolated scratch; execute the two tests there. No worktree files copied or changed.",
+    "timeUtc": "2026-09-21T00:34:19.162948+00:00",
+    "checks": [
+      {
+        "test": "test_profile_materials.py",
+        "exitCode": 1,
+        "output": "....E..\n======================================================================\nERROR: test_runner_pins_changed_secondary_texture_before_operation (__main__.Tests.test_runner_pins_changed_secondary_texture_before_operation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<HEAD-baseline>/tools/ai-model-pipeline/runtime-test/test_profile_materials.py\", line 43, in test_runner_pins_changed_secondary_texture_before_operation\n    Runner.profile_preflight(r)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"<HEAD-baseline>/tools/ai-model-pipeline/runtime-test/run_case.py\", line 249, in profile_preflight\n    (self.root/'model-test-profiles.json').stat().st_mtime, time.time(), self.content_registration_run)\n                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Runner' object has no attribute 'content_registration_run'\n\n----------------------------------------------------------------------\nRan 7 tests in 0.003s\n\nFAILED (errors=1)\n"
+      },
+      {
+        "test": "test_startup_wait.py",
+        "exitCode": 1,
+        "output": "F........FF\n======================================================================\nFAIL: test_actionable_unknown_destination_stops_before_page (__main__.Tests.test_actionable_unknown_destination_stops_before_page)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<HEAD-baseline>/tools/ai-model-pipeline/runtime-test/test_startup_wait.py\", line 58, in test_actionable_unknown_destination_stops_before_page\n    self.assertEqual([op for op,args in runner.calls],['entry-preparation-state'])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: ['entry-preparation-state', 'story-submit'] != ['entry-preparation-state']\n\nFirst list contains 1 additional elements.\nFirst extra element 1:\n'story-submit'\n\n- ['entry-preparation-state', 'story-submit']\n?                           ----------------\n\n+ ['entry-preparation-state']\n\n======================================================================\nFAIL: test_visit_page_not_replayed (__main__.Tests.test_visit_page_not_replayed)\n----------------------------------------------------------------------\nRuntimeError: Unknown native story message\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<HEAD-baseline>/tools/ai-model-pipeline/runtime-test/test_startup_wait.py\", line 72, in test_visit_page_not_replayed\n    with self.assertRaisesRegex(RuntimeError,'Visit story reopened'):self.run_wait(runner)\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"Visit story reopened\" does not match \"Unknown native story message\"\n\n======================================================================\nFAIL: test_wrong_presenter_quest_no_submission (__main__.Tests.test_wrong_presenter_quest_no_submission)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<HEAD-baseline>/tools/ai-model-pipeline/runtime-test/test_startup_wait.py\", line 36, in test_wrong_presenter_quest_no_submission\n    self.assertEqual([op for op,args in runner.calls],['entry-preparation-state'])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: ['entry-preparation-state', 'story-submit'] != ['entry-preparation-state']\n\nFirst list contains 1 additional elements.\nFirst extra element 1:\n'story-submit'\n\n- ['entry-preparation-state', 'story-submit']\n?                           ----------------\n\n+ ['entry-preparation-state']\n\n----------------------------------------------------------------------\nRan 11 tests in 0.003s\n\nFAILED (failures=3)\n"
+      }
+    ],
+    "implicatedFiles": [
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/test_profile_materials.py",
+        "headSha256": "a1b9f8c0612a177c3fad84b3a6510e666b3d395da685522661b611dc6a1be11d",
+        "worktreeSha256": "a1b9f8c0612a177c3fad84b3a6510e666b3d395da685522661b611dc6a1be11d",
+        "identical": true
+      },
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/test_startup_wait.py",
+        "headSha256": "7f7b56a748ff2f2dc917bec35127e0387aa7ec4ef497c0ca87bb0e97a2730dec",
+        "worktreeSha256": "7f7b56a748ff2f2dc917bec35127e0387aa7ec4ef497c0ca87bb0e97a2730dec",
+        "identical": true
+      },
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/run_case.py",
+        "headSha256": "3f0e7be3b7042fc6b316c3a5d632ac742836e629b0b2c86b2eac3cb5081fc85f",
+        "worktreeSha256": "3f0e7be3b7042fc6b316c3a5d632ac742836e629b0b2c86b2eac3cb5081fc85f",
+        "identical": true
+      },
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/profile_materials.py",
+        "headSha256": "6cfa651a44b4b37261c7fb4265201c2cdcd43b97f714c6bd69a73d827b49d854",
+        "worktreeSha256": "6cfa651a44b4b37261c7fb4265201c2cdcd43b97f714c6bd69a73d827b49d854",
+        "identical": true
+      },
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/entry_setup.py",
+        "headSha256": "017ae934b47c4c0bc64e85fe6a156548b447989b31745da882ab7551c3bc13c4",
+        "worktreeSha256": "017ae934b47c4c0bc64e85fe6a156548b447989b31745da882ab7551c3bc13c4",
+        "identical": true
+      },
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/story_setup.py",
+        "headSha256": "f4a82aa11c4ae71675492edbb1693d1d5d16c4b60050634067a9bde2b4ced271",
+        "worktreeSha256": "f4a82aa11c4ae71675492edbb1693d1d5d16c4b60050634067a9bde2b4ced271",
+        "identical": true
+      },
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/test_entry_setup.py",
+        "headSha256": "6bd5a2113f024f67355abccb0e7866c6b8134e8fae78dd4cfd22bd52c3c9543c",
+        "worktreeSha256": "6bd5a2113f024f67355abccb0e7866c6b8134e8fae78dd4cfd22bd52c3c9543c",
+        "identical": true
+      },
+      {
+        "path": "tools/ai-model-pipeline/runtime-test/test_story_setup.py",
+        "headSha256": "933364b04bd739076830b455869dad14b96d335708c34c4d00aee4e1e285e8fd",
+        "worktreeSha256": "933364b04bd739076830b455869dad14b96d335708c34c4d00aee4e1e285e8fd",
+        "identical": true
+      }
+    ],
+    "conclusion": "Both failures reproduce from HEAD in isolated scratch. Implicated test and imported helper files are byte-identical to HEAD. They are pre-existing tooling issues outside current Paladin changes; no fix made."
+  }
+}

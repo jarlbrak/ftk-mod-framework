@@ -1,0 +1,36 @@
+{
+  "schema": "ftkmf.paladin-tailored-death-attempt.v1",
+  "status": "death-not-observed",
+  "session": "c716acbdc98443ed86347d9614a37aac",
+  "setup": [
+    "Controlled rescue hit leaves female Paladin at 1 HP and spends male guardian rescue.",
+    "Native Guard recast heals the ally to 2 HP. Initial setup assertion expected 1 HP and stopped before a second fixture was armed; fresh observed HP used for the new fixture."
+  ],
+  "attempts": [
+    {
+      "captureId": "0cd7541eb7754e398bc34245343ca338",
+      "fixture": "spent-rescue",
+      "expectedHp": 2,
+      "result": "aborted before damage replacement",
+      "reason": "Native enDrainfocusAOE includes two additional targets. Single-target fixture rejected the outcome.",
+      "hpAfter": 2,
+      "captureReceiptSha256": "adba3fac69e4566d8adc85540dec6725e01b8f6954908c24ed7815fd0bf05198",
+      "fixtureReceiptSha256": "0703a14a3b3bf157a2e15a4a600583d68141d831ce6032832a0d15581df61877"
+    },
+    {
+      "captureId": "bfcbdb1831004b6ca4d3dca118e3fee1",
+      "fixture": "No damage fixture for this enemy turn; preceding HP setup remains fixture-assisted.",
+      "result": "Wolf bite targeted Hunter and was dodged. Female armor capture remained idle.",
+      "hpAfter": 2,
+      "captureReceiptSha256": "a8a1cedb2d9445974fade03bbdbbb93af2c99b846008a28f2fe085f09437c047"
+    }
+  ],
+  "rescueReceiptSha256": "32123267cdf7e358b6f83ad4e916f4ca051b5cd9c631d95b630253e073c192ec",
+  "finalStateReceiptSha256": "6d1527c44998b6019c5aace2827168d49761185ba5b2b12bb47078668a0f9bab",
+  "limitations": [
+    "Neither capture is death evidence. No new art acceptance claimed.",
+    "No animation state or death trigger was forced.",
+    "Native choice of a multi-target howl makes this wolf an unreliable source for the single-target death fixture.",
+    "No save written. Owned isolated process stopped after observation."
+  ]
+}

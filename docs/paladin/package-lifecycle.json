@@ -1,0 +1,66 @@
+{
+  "archiveSha256": "6ba4064e2cc54280a30723da3e0aee77836e099cdec92e13c2f8d3f27a3d438f",
+  "fileCount": 137,
+  "helperSha256": "05cfbfeef0f8257ac1db786502146295e377d9729c32d7d13178319be8ee213f",
+  "initialGeneration": "01b57f0ad7dd4847120c7b2c89743d28",
+  "scope": "Real helper CLI lifecycle in isolated scratch state; no game, UI, save or online proof.",
+  "status": "passed",
+  "steps": [
+    {
+      "resultSha256": "8f35e7c883f32267449a939e66c1dc48dcc12f8f3139382d77e6ef9aebd8ce6e",
+      "step": "01-prepare-install"
+    },
+    {
+      "resultSha256": "c175302ee66896fdf6f85bc19fe547bcb928bd1b9a95ddb6bf64266171cb08e4",
+      "step": "02-activate"
+    },
+    {
+      "resultSha256": "57ecb4326a1614e16f7d08bfbb73e513746a99779b977ce16d0208f3d20a6fab",
+      "step": "03-disable-plan"
+    },
+    {
+      "resultSha256": "676fc11f7dc8e8aab574fa9af392e4bf03bcd572f63dd24be8ca816632defe3f",
+      "step": "03-disable"
+    },
+    {
+      "resultSha256": "b87b347ee9edeb91c7f1128519fe05de03b1ccf6fde03ab521b7348c1feaeeb7",
+      "step": "04-activate-disabled"
+    },
+    {
+      "resultSha256": "21ceb3c0c9dae5f5d45d958cc553781420539af7ec2e4870d2bf3a74ecb39535",
+      "step": "05-enable-plan"
+    },
+    {
+      "resultSha256": "69fed5384a941d379e1088ed8f742e25b67990b4b5eb8a47cdd4d945ffa0779a",
+      "step": "05-enable"
+    },
+    {
+      "resultSha256": "60eb4223b8e0c989523827604a9a996c422db86304cee0c2f1b76d1661766190",
+      "step": "06-activate-enabled"
+    },
+    {
+      "resultSha256": "56e9296e1fae6581d4a538407aa1f68cd10ddc52003603e0edd473db4b6713a1",
+      "step": "07-remove-plan"
+    },
+    {
+      "resultSha256": "6651d8f7c519be88d43d779e8027c65b2b579b0c8497d42349c283e099f94c0e",
+      "step": "07-remove"
+    },
+    {
+      "resultSha256": "ca478c5fa47f1facd4b6a6d825a6f8c4d3cef3ad69819867f51204a326af8e61",
+      "step": "08-activate-removed"
+    },
+    {
+      "resultSha256": "7dbc3db5075439320b7a1031bc24ec2a4e500d9d66ffd38aec76245638f6451b",
+      "step": "09-rollback"
+    },
+    {
+      "resultSha256": "01e6841fc126262b3934ae9c03189a031ba73940521ea8aa2da9ebe0678d8184",
+      "step": "10-activate-rollback"
+    },
+    {
+      "resultSha256": "fa837c40ba450768f81b319069b18d039c21063d0bb513539a498bde7cba6169",
+      "step": "11-export"
+    }
+  ]
+}

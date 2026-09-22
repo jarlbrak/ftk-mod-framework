@@ -1,0 +1,114 @@
+{
+  "schema": "ftkmf.paladin-censure-native-lifetime.v1",
+  "status": "native-source-and-serialized-metadata-verified-live-expiry-open",
+  "inputs": [
+    {
+      "name": "Assembly-CSharp.dll",
+      "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+    },
+    {
+      "name": "sharedassets1.assets",
+      "sha256": "e38abff2efd7ca8ef8ede4b92754d6b3a06c6498a774ee55d0d1ddbffba4750f"
+    },
+    {
+      "name": "globalgamemanagers.assets",
+      "sha256": "21dc4b9559c66feb428b6337d230ff63c928d38937500329e5535146cb7ce9ed"
+    },
+    {
+      "path": "marketplace/packages/paladin/content.json",
+      "sha256": "dee1c82389ecc8578d28caf4430277b3247c67d125e05e56c3cde5d2a6c2a84a"
+    }
+  ],
+  "method": "Read installed managed declarations and bounded proficiency component metadata. Decode serialized field alignment against those declarations; verify complete component consumption and resolve the script reference. No native source, bytes, or geometry included in this receipt.",
+  "observations": {
+    "nativeTemplate": "musicArmorDown",
+    "prefabComponent": {
+      "asset": "sharedassets1.assets",
+      "pathId": 4570,
+      "gameObjectName": "Armor",
+      "scriptAsset": "globalgamemanagers.assets",
+      "scriptPathId": 2316,
+      "scriptClass": "ProficiencyArmor",
+      "scriptAssembly": "Assembly-CSharp.dll",
+      "category": "Armor",
+      "subcategory": "None",
+      "isEndOnTurn": false,
+      "fullInspectorOverrideKeys": [
+        "m_Category",
+        "m_SubCategory"
+      ]
+    },
+    "inheritedTiming": {
+      "quickness": 0.30000001192092896,
+      "repeatCount": 1
+    },
+    "variants": [
+      {
+        "id": "paladin_censure_fracture_1h",
+        "armorModifier": -4,
+        "slots": 3
+      },
+      {
+        "id": "paladin_censure_fracture",
+        "armorModifier": -6,
+        "slots": 4
+      }
+    ],
+    "commonAuthoredFields": {
+      "damageMultiplier": 0.75,
+      "fullSlots": false,
+      "chanceToAffect": 1,
+      "repeatCount": 1
+    },
+    "nativeMembers": [
+      "ProficiencyBase.Init",
+      "ProficiencyBase.AddToDummy",
+      "CharacterDummy.ArmorMod",
+      "CharacterDummy.UpdateProficiency",
+      "CharacterDummy.ClearEndOnTurnProficiency",
+      "EncounterSession.UpdateTime_CR",
+      "EncounterSessionMC.CallUpdateTime"
+    ]
+  },
+  "sourceBackedConclusions": [
+    "ProficiencyArmor inherits the base effect behavior. Init obtains the custom armor value from the registered proficiency row.",
+    "AddToDummy initializes the Armor record count to one and its remaining/full time to reciprocal quickness because the prefab is not end-on-turn.",
+    "The initial duration is approximately 3.333333 combat timeline units. It is neither wall-clock seconds nor a fixed number of character turns.",
+    "Native synchronized combat-time advancement calls UpdateProficiency, which subtracts elapsed time. At nonpositive remaining time, the count reaches zero, the Armor record is removed, and End runs.",
+    "ClearEndOnTurnProficiency does not remove this effect merely because a turn ends.",
+    "ArmorMod includes the active effect custom value plus any taunt armor. Other effects and baseline armor must be accounted for when measuring effective armor."
+  ],
+  "liveObservationPlan": {
+    "mode": "Read-only snapshots while ordinary native actions advance combat; no timer, effect, or armor mutation.",
+    "identity": "Pin the living target dummy instance and FID, plus the observed custom proficiency ID.",
+    "fields": [
+      "CharacterDummy.m_SufferingProficiencies[ProficiencyBase.Category.Armor] presence",
+      "ProficiencyRecord.m_Count",
+      "ProficiencyRecord.m_Time",
+      "ProficiencyRecord.m_FullTime",
+      "ProficiencyRecord.m_Proficiency.m_ProficiencyID",
+      "ProficiencyRecord.m_Proficiency.m_CustomValue",
+      "ProficiencyRecord.m_Proficiency.m_IsEndOnTurn",
+      "CharacterDummy.ArmorMod"
+    ],
+    "checkpoints": [
+      "Before Censure: record baseline ArmorMod and any existing Armor-category effect.",
+      "Immediately after a successful native Censure hit: verify the expected custom ID, modifier, count one, and initial remaining/full time.",
+      "After subsequent ordinary native combat advancement: observe remaining time decrease, then effect removal and baseline ArmorMod restoration."
+    ],
+    "limits": [
+      "Use a target that survives until expiry and has no intervening replacement Armor effect, cleanse, taunt change, or combat teardown.",
+      "If adding a passive UpdateProficiency observer, record before/after state and elapsed argument only; do not invoke the method to accelerate expiry."
+    ]
+  },
+  "liveGates": [
+    "Native action selection and effect application for both weapon variants.",
+    "Actual armor delta and timed expiry for both variants.",
+    "Native damage and partial-slot application behavior.",
+    "Online peer agreement remains unverified."
+  ],
+  "limits": [
+    "This receipt establishes native metadata and source behavior, not a completed live Censure test.",
+    "Existing gear-perk-review.json lifetime uncertainty is superseded only at the source-evidence level."
+  ]
+}

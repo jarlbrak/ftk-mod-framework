@@ -1,0 +1,60 @@
+{
+  "status": "replacement-passed-two-untraced-paladin-encounters",
+  "date": "2026-09-20",
+  "game": "For The King original; Unity 2017.2.2p2; macOS single-player isolated copies",
+  "cases": [
+    {
+      "case": "current-paladin-no-trace",
+      "frameworkSha256": "baa095a5ca312b08186a027dd4eb9e4e3a35e6b557d94e206336a4fbbfefe492",
+      "helperSha256": "f463612a51022dff5c2b5b07b95426beb8aed427bdb808076be4b07de044843a",
+      "session": "743dd777cf5145cd81dd4c0348d0c362",
+      "result": "stalled",
+      "observation": "One registered player dummy, zero enemies, encounter initialization incomplete."
+    },
+    {
+      "case": "current-paladin-full-entry-trace",
+      "frameworkSha256": "db84a03bef0fed083d955972f8fc10424071a536640629c78370c6e35117938c",
+      "helperSha256": "8eff8622574ac82e909b2f859ed4d0aaba9ace3f4988a4f51ad2b8cd273fc34a",
+      "session": "07e812b692e546c78608ab30632230ad",
+      "result": "combat-completed",
+      "observation": "All three player initialization calls returned; actual and cached Animator identities matched. Native attacks, Guard selection, loot, return to map and Save and Exit completed. Trace changes method detours, so this does not establish an uninstrumented pass."
+    },
+    {
+      "case": "clean-master-no-paladin-no-trace",
+      "masterCommit": "dc21de4e91e463ab8da6e118cd97ad8848072c2e",
+      "frameworkSha256": "62b5270715c9a23e155741bbe86916833631ab7a1af43179a3784fc9386f5089",
+      "session": "89246327637c44619d9f52dc0afc660b",
+      "result": "combat-entry-pass",
+      "observation": "Five combatants, two enemies, native turn sequence and battle UI observed."
+    },
+    {
+      "case": "current-no-paladin-exact-lease-finalizer-skip",
+      "frameworkSha256": "baa095a5ca312b08186a027dd4eb9e4e3a35e6b557d94e206336a4fbbfefe492",
+      "helperSha256": "baefa6880ddfbf965a5b03f2233b639abc532b341643dd62b88fdd197b3d20dd",
+      "session": "5742f30fe7ca4aabb7faa88f60cd99f2",
+      "result": "combat-entry-pass",
+      "observation": "Only PlayerCombatMeshLeasePatch.Finalizer removed from CharacterDummy.CreateAvatar. Patch receipt verified no remaining patches on that method. Six combatants, three enemies and hero stance readiness observed."
+    },
+    {
+      "case": "retention-transpiler-paladin-no-trace-no-skip",
+      "frameworkSha256": "ff280c030c7c9e1550be4d6521f819565779b8054056b6d67b412ab9ce4c4bb2",
+      "helperSha256": "f463612a51022dff5c2b5b07b95426beb8aed427bdb808076be4b07de044843a",
+      "result": "combat-completed",
+      "observation": "Same saved world and encounter location as the prior untraced stall. All three heroes and the enemy initialized, native battle UI rendered, and hero turns progressed. Both diagnostic trace and skip options were explicitly disabled. Native attacks, victory, loot, return to map and Save and Exit completed. Shared source mesh lease references reduced from 2 during combat to 1 on return to map."
+    },
+    {
+      "case": "retention-transpiler-second-paladin-entry-no-trace-no-skip",
+      "frameworkSha256": "ff280c030c7c9e1550be4d6521f819565779b8054056b6d67b412ab9ce4c4bb2",
+      "helperSha256": "805d4ec7a95575bf99433bbfbaa39de9f7d26c4afacc55c85b03656c4db208c6",
+      "session": "e5c19519129443edbc0f53dd77a31cb3",
+      "result": "combat-completed",
+      "observation": "Three heroes and Timberwolf initialized with entry diagnostics disabled. Native attacks, victory and loot completed. A later one-shot damage fixture aborted before substitution due to its incorrect RepeatCount eligibility check; that attempt is not reduction or rescue proof."
+    }
+  ],
+  "interpretation": "Replacing the finalizer with retention immediately after the exact native clone assignment passed two Paladin combat entries without entry tracing. The first completed fight released its combat mesh lease reference on return to the map. Executable IL tests separately cover inactive clones and later native exceptions. Broad equipment and lifecycle acceptance remains outstanding.",
+  "limits": [
+    "Encounter placement used the single-player engage fixture.",
+    "Co-op, host migration and other platforms not tested.",
+    "Original crash and both stalled runs retained as failures."
+  ]
+}

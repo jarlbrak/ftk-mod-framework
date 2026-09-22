@@ -910,7 +910,7 @@ func marketExtract(b []byte, p marketPackage, dest string) ([]marketFile, error)
 			return nil, errors.New("expanded archive limit exceeded")
 		}
 		ext := strings.ToLower(path.Ext(name))
-		if ext != ".json" && ext != ".png" && ext != ".jpg" && ext != ".jpeg" {
+		if ext != ".json" && ext != ".png" && ext != ".jpg" && ext != ".jpeg" && ext != ".glb" {
 			return nil, errors.New("unsupported archive file: " + name)
 		}
 		rd, e := f.Open()
@@ -948,6 +948,13 @@ func marketExtract(b []byte, p marketPackage, dest string) ([]marketFile, error)
 					return nil, fmt.Errorf("%s: %w", name, e)
 				}
 			}
+		} else if ext == ".glb" {
+			if !strings.HasPrefix(name, "assets/") || path.Ext(name) != ".glb" {
+				return nil, errors.New("models must use lowercase .glb inside assets/")
+			}
+			if e = marketModel(raw); e != nil {
+				return nil, fmt.Errorf("%s: %w", name, e)
+			}
 		} else {
 			if !strings.HasPrefix(name, "assets/") {
 				return nil, errors.New("images must be inside assets/")
@@ -977,6 +984,9 @@ func marketExtract(b []byte, p marketPackage, dest string) ([]marketFile, error)
 	}
 	if !manifest || total != p.ExpandedSize || count != p.FileCount {
 		return nil, errors.New("manifest missing or descriptor expanded size/file count mismatch")
+	}
+	if e = marketModelReferences(data); e != nil {
+		return nil, e
 	}
 	files := []marketFile{}
 	for name, raw := range data {
@@ -1020,14 +1030,22 @@ func marketManifest(b []byte, p marketPackage) error {
 func marketContent(b []byte) error {
 	var c struct {
 		Entries []struct {
-			Kind          string                 `json:"kind"`
-			ID            string                 `json:"id"`
-			Template      string                 `json:"template"`
-			DisplayName   string                 `json:"displayName"`
-			Fields        map[string]interface{} `json:"fields"`
-			Proficiencies []string               `json:"proficiencies"`
-			Flavor        string                 `json:"flavor"`
-			Description   string                 `json:"description"`
+			Kind            string                 `json:"kind"`
+			ID              string                 `json:"id"`
+			Template        string                 `json:"template"`
+			DisplayName     string                 `json:"displayName"`
+			Fields          map[string]interface{} `json:"fields"`
+			Proficiencies   []string               `json:"proficiencies"`
+			Flavor          string                 `json:"flavor"`
+			Description     string                 `json:"description"`
+			Guardian        bool                   `json:"guardian,omitempty"`
+			GuardianBonuses *marketGuardianBonuses `json:"guardianBonuses,omitempty"`
+			Icon            string                 `json:"icon,omitempty"`
+			ApparelModels   *marketApparelModel    `json:"apparelModels,omitempty"`
+			Modifiers       *marketItemModifiers   `json:"modifiers,omitempty"`
+			ItemModels      []marketModelRenderer  `json:"itemModels,omitempty"`
+			DisplayModels   []marketModelRenderer  `json:"displayModels,omitempty"`
+			PlayerModels    []marketPlayerModel    `json:"playerModels,omitempty"`
 		} `json:"entries"`
 	}
 	if e := marketJSON(b, &c); e != nil {
@@ -1040,6 +1058,74 @@ func marketContent(b []byte) error {
 	for _, entry := range c.Entries {
 		if !contains([]string{"item", "weapon", "proficiency", "class", "enemy", "encounter"}, entry.Kind) || entry.ID == "" || entry.Template == "" {
 			return errors.New("unsupported kind or missing identity/template")
+		}
+		if entry.GuardianBonuses != nil {
+			b := entry.GuardianBonuses
+			if entry.Kind != "item" && entry.Kind != "weapon" || b.GuardHealPercent < 0 || b.GuardHealPercent > 20 || b.FocusHealBonusPercent < 0 || b.FocusHealBonusPercent > 20 || b.RetaliationDamage < 0 || b.RetaliationDamage > 20 {
+				return errors.New("invalid guardian equipment bonus")
+			}
+		}
+		if entry.Icon != "" && (!marketSafePath(entry.Icon) || !strings.HasPrefix(entry.Icon, "assets/") || path.Ext(entry.Icon) != ".png" || entry.Kind != "item" && entry.Kind != "weapon" && entry.Kind != "proficiency" && !(entry.Kind == "class" && entry.Guardian)) {
+			return errors.New("invalid original icon declaration")
+		}
+		if entry.ApparelModels != nil {
+			a := entry.ApparelModels
+			if entry.Kind != "item" || a.FemaleBinding == "" || a.MaleBinding == "" {
+				return errors.New("invalid apparel item binding")
+			}
+			if e := marketModelRenderers(a.Renderers, true); e != nil {
+				return e
+			}
+		}
+		if entry.Modifiers != nil {
+			m := entry.Modifiers
+			if entry.Kind != "item" && entry.Kind != "weapon" || m.Armor < 0 || m.Armor > 100 || m.Resistance < 0 || m.Resistance > 100 || m.Reflect < 0 || m.Reflect > 100 || m.Vitality < -1 || m.Vitality > 1 || m.Speed < -1 || m.Speed > 1 {
+				return errors.New("invalid item modifiers")
+			}
+		}
+		if entry.Guardian && entry.Kind != "class" {
+			return errors.New("guardian requires a class")
+		}
+		if entry.ItemModels != nil {
+			if entry.Kind != "item" && entry.Kind != "weapon" {
+				return errors.New("itemModels requires equipment")
+			}
+			if e := marketModelRenderers(entry.ItemModels, false); e != nil {
+				return e
+			}
+		}
+		if entry.DisplayModels != nil {
+			if entry.Kind != "item" && entry.Kind != "weapon" {
+				return errors.New("displayModels requires equipment")
+			}
+			if e := marketModelRenderers(entry.DisplayModels, false); e != nil {
+				return e
+			}
+		}
+		if entry.PlayerModels != nil {
+			if entry.Kind != "class" || len(entry.PlayerModels) == 0 || len(entry.PlayerModels) > 16 {
+				return errors.New("invalid playerModels class declaration")
+			}
+			skins := map[string]bool{}
+			for _, model := range entry.PlayerModels {
+				if model.Skinset == "" || skins[model.Skinset] {
+					return errors.New("invalid or duplicate model skinset")
+				}
+				skins[model.Skinset] = true
+				if e := marketModelRenderers(model.Body, false); e != nil {
+					return e
+				}
+				if model.Backpack != nil {
+					if e := marketModelRenderers(model.Backpack, false); e != nil {
+						return e
+					}
+				}
+				if model.Apparel != nil {
+					if e := marketModelRenderers(model.Apparel, true); e != nil {
+						return e
+					}
+				}
+			}
 		}
 		key := entry.ID
 		if seen[key] {
@@ -1354,15 +1440,15 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 		}
 	}
 	if kind == "item" || kind == "weapon" {
-		add("rarity=m_ItemRarity goldvalue=_goldValue minlevel=m_MinLevel maxlevel=m_MaxLevel dropable=m_Dropable townmarket=m_TownMarket dlc=m_DLC")
+		add("rarity=m_ItemRarity goldvalue=_goldValue minlevel=m_MinLevel maxlevel=m_MaxLevel dropable=m_Dropable townmarket=m_TownMarket dlc=m_DLC nightmarket=m_NightMarket dungeonmerchant=m_DungeonMerchant shopstock=_shopStock loreunlock=m_CollectLoreItemUnlock")
 	}
 	switch kind {
 	case "weapon":
 		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain")
 	case "proficiency":
-		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride")
+		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride fullslots=m_FullSlots customvalue=m_CustomValue repeatcount=m_RepeatCount")
 	case "class":
-		add("strength=_toughness intelligence=_fortitude awareness=_awareness talent=_talent speed=_quickness vitality=_vitality startinggold=_startinggold focus=_basefocus primarystat=m_PrimaryWeaponStat startweapon=m_StartWeapon startitems=m_StartItems dlc=m_DLC")
+		add("strength=_toughness intelligence=_fortitude awareness=_awareness talent=_talent speed=_quickness vitality=_vitality startinggold=_startinggold focus=_basefocus primarystat=m_PrimaryWeaponStat startweapon=m_StartWeapon startitems=m_StartItems dlc=m_DLC skinsets=m_Skinsets skills=m_CharacterSkills")
 	}
 	resolved := map[string]bool{}
 	for key, value := range fields {
@@ -1385,9 +1471,19 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 		resolved[target] = true
 		switch v := value.(type) {
 		case map[string]interface{}:
-			return errors.New("nested objects are not supported in marketplace fields")
+			if target != "m_CharacterSkills" {
+				return errors.New("nested objects are not supported in marketplace fields")
+			}
+			for flag, enabled := range v {
+				if flag != "m_SteadFast" {
+					return errors.New("unsupported marketplace class skill flag")
+				}
+				if _, ok := enabled.(bool); !ok {
+					return errors.New("class skill flags must be boolean")
+				}
+			}
 		case []interface{}:
-			if target != "m_StartItems" {
+			if target != "m_StartItems" && target != "m_Skinsets" {
 				return errors.New("unsupported array field")
 			}
 			for _, item := range v {

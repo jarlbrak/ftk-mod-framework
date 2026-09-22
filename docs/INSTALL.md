@@ -30,7 +30,7 @@ Then launch For The King from Steam as usual. The installer prints what it did a
   mods that loaded (any key skips it; `UI / ShowSplash` in the framework config turns it off),
 - a **Mods** button on the title screen (toggle mods on and off; changes apply on the next launch),
 - the **Thief** and **Innkeeper** classes at character select,
-- **Smuggler's Run** and **The Hollow Mire** in the adventure list,
+- **Smuggler's Run** in the adventure list,
 - the Blacksmith starts with the **Emberbrand** shortsword.
 
 Steam must be closed for a moment while the launch option is written (Steam only reads that setting at

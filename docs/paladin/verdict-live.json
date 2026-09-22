@@ -1,0 +1,934 @@
+{
+  "frameworkSha256": "45beee438fe95dd7237a2a5e2a9ca290f0cc5bfdca8e2828d953f717e63ad120",
+  "helperSha256": "8f6f76efdc0b903f70e4ecd4488ddfcd807de17487f56297346164f6bfb353f4",
+  "fixtureContentSha256": "84ed91773562228f021b35ce2ac4df586a1e1c134def00b64814902fe718a6c8",
+  "schema": "ftkmf.paladin-verdict-live.v1",
+  "status": "native-two-target-retaliation-and-unguarded-control-pass",
+  "session": "5ac8a6a480594e408a8e8569f3b97884",
+  "method": "Protected fixture save, native keyboard walk and Fight. Fixture-owned Verdict shields on both Paladins and Hunter. Native Guard actions; no forced enemy outcomes, damage, HP or statuses.",
+  "snapshots": [
+    {
+      "label": "pre-enemy",
+      "requestId": "c69da75f96904839b95515464f39e325",
+      "frame": 26208,
+      "sourceSha256": "fb971ffaa1fdd33654a0661933ce453f6bd94c4bfa2974a1244993803ae2ff7d",
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -274834,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 31,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1191317998,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1191317998,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -280270,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -285188,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 35,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: None. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ],
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 59,
+        "armorMod": 0,
+        "tauntArmor": 0,
+        "armorEffectPresent": false,
+        "armorEffect": null
+      },
+      "combatEvents": [
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 1 Dummy(Player 1) engages attack",
+            "Player 1 Dummy(Player 1) is deciding",
+            "Player 1 Dummy(Player 1) rolls slots (attack)",
+            "Player 1 Dummy(Player 1) is attempting normal attack",
+            "[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(cragLightning) with 1191317998(None), expected result: Damaged",
+            "[RespondToHit] Enemy Dummy(cragLightning) hit (Damaged)",
+            "Player 1 Dummy(Player 1) takes secondary damage (6) new health is 31"
+          ],
+          "m_LogIndex": 0
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 1
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) is deciding"
+          ],
+          "m_LogIndex": 2
+        }
+      ]
+    },
+    {
+      "label": "after-enemy",
+      "requestId": "87ee3ae26dcd42089ba423b510302283",
+      "frame": 29208,
+      "sourceSha256": "4ee215ce1ba6f7732f477ea089542270bf018ff05fcece4da78c72e53844550f",
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -274834,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 1,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1191317998,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1191317998,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -280270,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": [
+            "2:1"
+          ]
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -285188,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 35,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "1:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 2. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ],
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 59,
+        "armorMod": 0,
+        "tauntArmor": 0,
+        "armorEffectPresent": false,
+        "armorEffect": null
+      },
+      "combatEvents": [
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 1 Dummy(Player 1) engages attack",
+            "Player 1 Dummy(Player 1) is deciding",
+            "Player 1 Dummy(Player 1) rolls slots (attack)",
+            "Player 1 Dummy(Player 1) is attempting normal attack",
+            "[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(cragLightning) with 1191317998(None), expected result: Damaged",
+            "[RespondToHit] Enemy Dummy(cragLightning) hit (Damaged)",
+            "Player 1 Dummy(Player 1) takes secondary damage (6) new health is 31"
+          ],
+          "m_LogIndex": 0
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 1
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) is deciding",
+            "Player 3 Dummy(Player 3) bypasses slot roll",
+            "[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 2 Dummy(Player 2) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 3 Dummy(Player 3) attempting ItemAttack",
+            "Player 3 Dummy(Player 3) guards Player 2 Dummy(Player 2)",
+            "[RespondToHit] Player 2 Dummy(Player 2) hit (HarmlessAttack)",
+            "Enemy Dummy(cragLightning) is attempting scheduled attack(Prof0)"
+          ],
+          "m_LogIndex": 2
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Enemy Dummy(cragLightning) engages attack",
+            "Enemy Dummy(cragLightning) rolls slots (attack)",
+            "[PlayAttackSequence] Enemy Dummy(cragLightning) attacking Player 1 Dummy(Player 1) with cragLightning(enLightningReg), expected result: DamagedHeavy",
+            "Player 1 Dummy(Player 1) is now Lightning",
+            "[RespondToHit] Player 1 Dummy(Player 1) hit (DamagedHeavy)"
+          ],
+          "m_LogIndex": 3
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [],
+          "m_LogIndex": 4
+        }
+      ]
+    },
+    {
+      "label": "pre-enemy-2",
+      "requestId": "40c155afda9f4716931928deecb0dc26",
+      "frame": 35548,
+      "sourceSha256": "a1d8352ffdbd4f7045d837323029bc54582876452c8ae437e1c0385dca0c4281",
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -274834,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 10,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1191317998,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1191317998,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -280270,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 39,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": []
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -285188,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 35,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "1:1",
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 2. Protection: inactive. Divine Intervention: ready.",
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ],
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 59,
+        "armorMod": 0,
+        "tauntArmor": 0,
+        "armorEffectPresent": false,
+        "armorEffect": null
+      },
+      "combatEvents": [
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 1 Dummy(Player 1) engages attack",
+            "Player 1 Dummy(Player 1) is deciding",
+            "Player 1 Dummy(Player 1) rolls slots (attack)",
+            "Player 1 Dummy(Player 1) is attempting normal attack",
+            "[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(cragLightning) with 1191317998(None), expected result: Damaged",
+            "[RespondToHit] Enemy Dummy(cragLightning) hit (Damaged)",
+            "Player 1 Dummy(Player 1) takes secondary damage (6) new health is 31"
+          ],
+          "m_LogIndex": 0
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 1
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) is deciding",
+            "Player 3 Dummy(Player 3) bypasses slot roll",
+            "[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 2 Dummy(Player 2) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 3 Dummy(Player 3) attempting ItemAttack",
+            "Player 3 Dummy(Player 3) guards Player 2 Dummy(Player 2)",
+            "[RespondToHit] Player 2 Dummy(Player 2) hit (HarmlessAttack)",
+            "Enemy Dummy(cragLightning) is attempting scheduled attack(Prof0)"
+          ],
+          "m_LogIndex": 2
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Enemy Dummy(cragLightning) engages attack",
+            "Enemy Dummy(cragLightning) rolls slots (attack)",
+            "[PlayAttackSequence] Enemy Dummy(cragLightning) attacking Player 1 Dummy(Player 1) with cragLightning(enLightningReg), expected result: DamagedHeavy",
+            "Player 1 Dummy(Player 1) is now Lightning",
+            "[RespondToHit] Player 1 Dummy(Player 1) hit (DamagedHeavy)"
+          ],
+          "m_LogIndex": 3
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 1 Dummy(Player 1) engages attack",
+            "Player 1 Dummy(Player 1) suffering from: Lightning, ",
+            "Player 1 Dummy(Player 1) is deciding",
+            "Player 1 Dummy(Player 1) is going to use herbGodsbeard1",
+            "Player 1 Dummy(Player 1) finished using herbGodsbeard1",
+            "Player 1 Dummy(Player 1) rolls slots (attack)",
+            "Player 1 Dummy(Player 1) is attempting normal attack",
+            "[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(cragLightning) with 1191317998(None), expected result: Block",
+            "[RespondToHit] Enemy Dummy(cragLightning) hit (Block)",
+            "Player 1 Dummy(Player 1) takes secondary damage (6) new health is 10"
+          ],
+          "m_LogIndex": 4
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 5
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) is deciding"
+          ],
+          "m_LogIndex": 6
+        }
+      ]
+    },
+    {
+      "label": "after-enemy-2",
+      "requestId": "e60f4e2d896d4c62bd434371e72fd1ef",
+      "frame": 39718,
+      "sourceSha256": "0d4118bcbc588909633e3adfa73a4afb91338cc7430210dee4a27464cfc75af7",
+      "encounterInstanceId": 358098,
+      "heroes": [
+        {
+          "identity": "0:1",
+          "dummyInstanceId": 358974,
+          "heroInstanceId": -274834,
+          "classId": 15,
+          "classKey": "paladin_gear_fixture_hunter",
+          "hp": 10,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1191317998,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1191317998,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": false,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": null,
+          "storedActive": false,
+          "effectiveActive": false,
+          "rescueAvailable": null,
+          "status": "",
+          "activeGuardians": []
+        },
+        {
+          "identity": "1:1",
+          "dummyInstanceId": 368986,
+          "heroInstanceId": -280270,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 36,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "2:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 3. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": [
+            "2:1"
+          ]
+        },
+        {
+          "identity": "2:1",
+          "dummyInstanceId": 364424,
+          "heroInstanceId": -285188,
+          "classId": 14,
+          "classKey": "paladin",
+          "hp": 22,
+          "focusPoints": 4,
+          "spentFocus": 0,
+          "weaponItemId": 1473502429,
+          "hands": [
+            {
+              "slot": "LeftHand",
+              "items": [
+                {
+                  "itemId": 1466315293,
+                  "count": 1
+                }
+              ]
+            },
+            {
+              "slot": "RightHand",
+              "items": [
+                {
+                  "itemId": 1473502429,
+                  "count": 1
+                }
+              ]
+            }
+          ],
+          "guardian": true,
+          "canAct": true,
+          "alive": true,
+          "stunned": false,
+          "petrified": false,
+          "fled": false,
+          "designatedAlly": "1:1",
+          "storedActive": true,
+          "effectiveActive": true,
+          "rescueAvailable": true,
+          "status": "Chosen ally: Player 2. Protection: active (50%). Divine Intervention: ready.",
+          "activeGuardians": [
+            "1:1"
+          ]
+        }
+      ],
+      "enemy": {
+        "dummyInstanceId": 369188,
+        "fid": "FTKPlayerID",
+        "side": "enemy",
+        "alive": true,
+        "fled": false,
+        "hp": 55,
+        "armorMod": 0,
+        "tauntArmor": 0,
+        "armorEffectPresent": false,
+        "armorEffect": null
+      },
+      "combatEvents": [
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 1 Dummy(Player 1) engages attack",
+            "Player 1 Dummy(Player 1) is deciding",
+            "Player 1 Dummy(Player 1) rolls slots (attack)",
+            "Player 1 Dummy(Player 1) is attempting normal attack",
+            "[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(cragLightning) with 1191317998(None), expected result: Damaged",
+            "[RespondToHit] Enemy Dummy(cragLightning) hit (Damaged)",
+            "Player 1 Dummy(Player 1) takes secondary damage (6) new health is 31"
+          ],
+          "m_LogIndex": 0
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 1
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) is deciding",
+            "Player 3 Dummy(Player 3) bypasses slot roll",
+            "[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 2 Dummy(Player 2) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 3 Dummy(Player 3) attempting ItemAttack",
+            "Player 3 Dummy(Player 3) guards Player 2 Dummy(Player 2)",
+            "[RespondToHit] Player 2 Dummy(Player 2) hit (HarmlessAttack)",
+            "Enemy Dummy(cragLightning) is attempting scheduled attack(Prof0)"
+          ],
+          "m_LogIndex": 2
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Enemy Dummy(cragLightning) engages attack",
+            "Enemy Dummy(cragLightning) rolls slots (attack)",
+            "[PlayAttackSequence] Enemy Dummy(cragLightning) attacking Player 1 Dummy(Player 1) with cragLightning(enLightningReg), expected result: DamagedHeavy",
+            "Player 1 Dummy(Player 1) is now Lightning",
+            "[RespondToHit] Player 1 Dummy(Player 1) hit (DamagedHeavy)"
+          ],
+          "m_LogIndex": 3
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 1 Dummy(Player 1) engages attack",
+            "Player 1 Dummy(Player 1) suffering from: Lightning, ",
+            "Player 1 Dummy(Player 1) is deciding",
+            "Player 1 Dummy(Player 1) is going to use herbGodsbeard1",
+            "Player 1 Dummy(Player 1) finished using herbGodsbeard1",
+            "Player 1 Dummy(Player 1) rolls slots (attack)",
+            "Player 1 Dummy(Player 1) is attempting normal attack",
+            "[PlayAttackSequence] Player 1 Dummy(Player 1) attacking Enemy Dummy(cragLightning) with 1191317998(None), expected result: Block",
+            "[RespondToHit] Enemy Dummy(cragLightning) hit (Block)",
+            "Player 1 Dummy(Player 1) takes secondary damage (6) new health is 10"
+          ],
+          "m_LogIndex": 4
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 2 Dummy(Player 2) engages attack",
+            "Player 2 Dummy(Player 2) is deciding",
+            "Player 2 Dummy(Player 2) bypasses slot roll",
+            "[PlayAttackSequence] Player 2 Dummy(Player 2) attacking Player 3 Dummy(Player 3) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 2 Dummy(Player 2) attempting ItemAttack",
+            "Player 2 Dummy(Player 2) guards Player 3 Dummy(Player 3)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (HarmlessAttack)"
+          ],
+          "m_LogIndex": 5
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 3 Dummy(Player 3) engages attack",
+            "Player 3 Dummy(Player 3) is deciding",
+            "Player 3 Dummy(Player 3) bypasses slot roll",
+            "[PlayAttackSequence] Player 3 Dummy(Player 3) attacking Player 2 Dummy(Player 2) with 1473502429(1398377095), expected result: HarmlessAttack",
+            "Player 3 Dummy(Player 3) attempting ItemAttack",
+            "Player 3 Dummy(Player 3) guards Player 2 Dummy(Player 2)",
+            "[RespondToHit] Player 2 Dummy(Player 2) hit (HarmlessAttack)",
+            "Enemy Dummy(cragLightning) is attempting scheduled attack(Prof2)"
+          ],
+          "m_LogIndex": 6
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Enemy Dummy(cragLightning) engages attack",
+            "Enemy Dummy(cragLightning) rolls slots (attack)",
+            "[PlayAttackSequence] Enemy Dummy(cragLightning) attacking Player 3 Dummy(Player 3) with cragLightning(enCragLightningSplash), expected result: DamagedHeavy",
+            "[RespondToHit] Player 2 Dummy(Player 2) hit (Damaged)",
+            "Guard protected Player 2 Dummy(Player 2)",
+            "[RespondToHit] Player 3 Dummy(Player 3) hit (DamagedHeavy)",
+            "Guard protected Player 3 Dummy(Player 3)",
+            "Enemy Dummy(cragLightning) takes secondary damage (4) new health is 55"
+          ],
+          "m_LogIndex": 7
+        },
+        {
+          "m_LogGroup": "Combat",
+          "m_LogEntryEvents": [
+            "Player 1 Dummy(Player 1) engages attack",
+            "Player 1 Dummy(Player 1) is deciding"
+          ],
+          "m_LogIndex": 8
+        }
+      ]
+    }
+  ],
+  "observations": [
+    "Native enCragLightningSplash damaged both reciprocally guarded Paladins. Both Guard protection events preceded exactly one enemy secondary-damage event of4; enemy HP59 ->55.",
+    "Earlier native enLightningReg damaged unguarded non-Guardian Hunter wearing Verdict shield; no retaliation, enemy HP remained59."
+  ],
+  "limits": [
+    "No per-target DDI capture in this helper version. Two-target coverage follows native hit/Guard events and final health, not intermediate modifier inspection.",
+    "Does not prove all three-target, zero-damage, single-target positive, native-reflection combination, or online cases.",
+    "Fixture-owned equipment does not prove acquisition or balance."
+  ]
+}

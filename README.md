@@ -23,7 +23,7 @@
 | Enemies | Working and verified (the bundled **Cutpurse**: custom stats, a gold-stealing Pilfer ability, custom loot, real spawns) |
 | Passive class traits | Working and verified (the bundled **Innkeeper**: class-innate passives via `Content.AddPassive`) |
 | Custom enemy and player models | Editor-free GLB authoring, strict transactional renderer replacement, and route-specific live validation are available. The catalog covers all 48 supported topology groups; see [`docs/CUSTOM-MODELS.md`](docs/CUSTOM-MODELS.md). |
-| Adventures & campaigns | Working and verified solo (cloned adventures, plus the bundled **The Hollow Mire**: a bespoke realm, boss, and questline played to victory; see [`docs/ADVENTURES.md`](docs/ADVENTURES.md)); co-op verification pending |
+| Adventures & campaigns | Working and verified solo for cloned adventures; co-op verification pending |
 
 "Verified in-game" means the content has been loaded into a running game with `SELF-TEST PASS` confirmed in `BepInEx/LogOutput.log`, not just compiled. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the plan.
 
@@ -41,8 +41,7 @@ compatible framework update before opening your owned game, preserving mods and 
 and using the verified installed version when offline. In **Mods > Updates**, follow Stable
 or Preview, or pin a specific release after reading its patch notes. Stable excludes previews.
 
-The title screen includes a **Mods** browser, and bundled content includes the **Thief**,
-**Innkeeper**, **Smuggler's Run**, and **The Hollow Mire**. See
+The title screen includes a **Mods** browser. The Paladin package is the first planned marketplace mod; see
 [the launcher guide](launcher/README.md) for setup and platform limits. macOS gameplay
 has been smoke-tested; Windows and Linux/Proton gameplay still need platform testing.
 
@@ -93,7 +92,6 @@ FTKModFramework/
     ThiefClass.cs          the Thief: a full custom class (stats, dagger, abilities, Steal)
     CutpurseEnemy.cs       the Cutpurse: a full custom enemy (stats, Pilfer, loot, real spawns)
     InnkeeperClass.cs      the Innkeeper: class-innate passive traits
-    RealmBossAdventure.cs  The Hollow Mire: a bespoke realm + boss + questline
   Agent/                   opt-in test bridge (env-gated, loopback-only, single-player; see harness/)
 FTKPerfProbe/              standalone perf-probe plugin (+ FTKPerfProbe.Tests)
 harness/                   MCP server that lets an agent drive the game to verify content
@@ -192,7 +190,7 @@ static class Register
 The bundled content is a working reference: `Content/SampleContent.cs` (a custom weapon + ability),
 `Content/ThiefClass.cs` (a full custom class, including a custom-behaviour `ProficiencyBase` in
 `ThiefStealProficiency.cs`), `Content/CutpurseEnemy.cs` (a custom enemy), `Content/InnkeeperClass.cs`
-(passive traits), and `Content/RealmBossAdventure.cs` (a bespoke adventure). The samples are gated
+(passive traits). The samples are gated
 behind the `Demo / EnableSampleContent` config (set it false to use the framework purely as a
 dependency for other mods).
 

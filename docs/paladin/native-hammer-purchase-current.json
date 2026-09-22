@@ -1,0 +1,44 @@
+{
+  "status": "native-sale-funded-one-handed-hammer-purchase-pass",
+  "frameworkSha256": "b4fbc2a209ab17136ea610f33370db0a8c7ae1d3b44280683f8aefaf4e1f29d8",
+  "session": "8550b0678ac34a7faff5fd81dfd3794b",
+  "town": "Oarton",
+  "item": "paladin_hammer_1h_novice",
+  "sale": {
+    "item": "bootsBeginner",
+    "countBefore": 1,
+    "countAfter": 0,
+    "goldBefore": 8,
+    "goldAfter": 11
+  },
+  "purchase": {
+    "nativeUiAction": "Buy",
+    "goldBefore": 11,
+    "goldAfter": 0,
+    "stockBefore": 1,
+    "stockAfter": 0,
+    "backpackCountBefore": 0,
+    "backpackCountAfter": 1
+  },
+  "observations": [
+    "Existing spare boots sold through native inventory menu at town.",
+    "Native Save and Exit then Resume retained 11 gold before purchase.",
+    "Original custom hammer model visible on native shop card.",
+    "Native Buy completed; read-only observers recorded gold, stock and inventory changes."
+  ],
+  "limits": [
+    "No stock refresh, item grant, gold injection or movement fixture in this trial.",
+    "One Novice one-handed hammer only. No other-family purchase or full progression claim.",
+    "Purchase persistence was not tested; the saved checkpoint precedes the purchase.",
+    "Single-player macOS only."
+  ],
+  "rawEvidenceSha256": {
+    "paladin-purchase-after-buy-inventory.txt": "624b1bbe8c14b8e2a50de62ab76933630a433e01fcac944b3370652b631d52cd",
+    "paladin-purchase-before-inventory.txt": "b6a4a43f16ef6787a5d2cc6f0a4d1b7d446ff6981056d18b71e58307667a4cdc",
+    "paladin-purchase-after-buy-stock.txt": "7ff6e1128b5f367ac0503f306b7d7587995b1c85273985d2379012ef5da7ae8f",
+    "paladin-purchase-resumed-stock.txt": "5bb4dc9cf6ea09052235560d90d0b2d9eee6c63263c0585afcb73c4b88e7fecd",
+    "paladin-purchase-after-sale-stock.txt": "375887cd2324389421acad7836bdadab8b2b025dd5a8d7c17096abd2107869ef",
+    "paladin-purchase-after-sale-inventory.txt": "2cf504249a87d74db3d1ed4f23fc7f408a0bcf564a2b5651cab490800705ddf5",
+    "paladin-purchase-before-stock.txt": "8560238d0ee48ee996395eba2c697da5bb06019e3f7912ae12219fec36a96e3a"
+  }
+}

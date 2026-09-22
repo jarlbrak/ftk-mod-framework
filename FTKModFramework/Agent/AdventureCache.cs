@@ -32,7 +32,7 @@ namespace FTKModFramework.Agent
 
         /// <summary>Force the game's adventure cache to exist, then (re)inject our previews. Initialize() is
         /// idempotent + fully synchronous, so on return the cache is built; Adventures.EnsureLoaded() then
-        /// guarantees our adventures (e.g. "HollowMire") are present. Logs and swallows any failure (never throws).</summary>
+        /// guarantees registered adventures are present. Logs and swallows any failure (never throws).</summary>
         internal static void EnsureCacheBuilt()
         {
             try

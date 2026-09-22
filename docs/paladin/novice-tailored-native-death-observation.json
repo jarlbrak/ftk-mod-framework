@@ -1,0 +1,31 @@
+{
+  "schema": "ftkmf.paladin-tailored-native-death-observation.v1",
+  "status": "native-death-observed-no-paired-motion-capture",
+  "packageSha256": "61fa7dbb3167a6dc463c91ff4e278fe09317d03d544189aa4c77768da357215d",
+  "frameworkSha256": "dd078282b5bfb8f8c55b3eea0837eeae70b8b4d2fe922539c542870ec45e5c7e",
+  "helperSha256": "895cbcea696d50cfc249aa05a369e7060de1eacc3c332416108ef0659ff4c01a",
+  "session": "b6c5ad60531445d3ad0b8f5bc41593c3",
+  "encounter": {
+    "enemy": "wolfA",
+    "scheduledAttack": "Prof1",
+    "proficiency": "enBiteReg",
+    "victim": "Player 3, female Paladin",
+    "result": "Death"
+  },
+  "observations": [
+    "The live isolated encounter rendered the equipped female Paladin falling after the wolf bite.",
+    "The retained native combat log records the enemy scheduled Prof1 selection, enBiteReg, expected Death, and Player 3 RespondToHit Death.",
+    "The post-hit native snapshot records female Paladin HP 0 and alive false."
+  ],
+  "rawEvidenceSha256": {
+    "postNativeDeathState": "690c165ef35ff75818345f38f5e33493c155fb495b3b98d76523acb73158233b",
+    "guardBeforeRescue": "70addb0c320b3f4cd35b88081d47f2e8683a9459b070da0417ce78069355f6d5",
+    "rescueOutcome": "62c31c99625e4b6412960be5c981ad6246239d8d8a0c5fe831f7cd62ef1879a2",
+    "guardRecast": "35c651c0f048e46262e70f8c4880de2f8ec4502cca6dd4a559560778c90bf725"
+  },
+  "limitations": [
+    "The final lethal bite used ordinary native attack selection and damage, not the controlled fixture. Guard had expired before the final attack.",
+    "The visual observation has no paired per-frame studio capture. It proves a native death occurred with the equipped avatar visible, not a full death-motion fit review.",
+    "This isolated single-player test writes no save and makes no acquisition, online, platform, or art-approval claim."
+  ]
+}

@@ -18,7 +18,7 @@ A trusted local DLL can still be installed by itself. Installed content remains 
 
 ## Content submission
 
-V1 accepts supported JSON content and approved image assets. It does not distribute behavior DLLs, arbitrary BepInEx plugins, native libraries, scripts or campaign files. JSON content still requires review and game testing; file hashes verify bytes, not author trust or gameplay correctness.
+V1 accepts supported JSON content and approved image assets. The development version for framework 0.1.4 also accepts bounded GLB models and typed Guardian/equipment declarations; see [the capability contract](GUARDIAN-AND-EQUIPMENT.md). It does not distribute behavior DLLs, arbitrary BepInEx plugins, native libraries, scripts or campaign files. JSON content still requires review and game testing; file hashes verify bytes, not author trust or gameplay correctness.
 
 Submit proposed packages through the repository's GitHub review workflow using the [package submission issue template](../.github/ISSUE_TEMPLATE/package_submission.yml). Each template field corresponds to one of these maintainer checks:
 
@@ -38,7 +38,6 @@ A catalog listing can provide up to three curated PNG or JPEG images in its `scr
 
 Host previews as approved repository release assets. Each image must be at most 2 MiB, no more than 4096 pixels on either side, and at most 8,388,608 pixels total. The helper validates and caches images before the interface displays them. Keep labels and important details readable at thumbnail size; use the larger gallery for inspection. Credit image creators and include the rights to distribute their work during review.
 
-The bundled Adventure Pack reuses its existing Hollow Mire artwork and Reeve Maddow portrait. These are illustrations included in the content, not screenshots or interactive 3D previews.
 
 ## Storage and recovery
 

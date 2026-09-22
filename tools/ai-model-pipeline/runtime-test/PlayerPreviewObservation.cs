@@ -26,10 +26,24 @@ public sealed partial class RuntimeModelTest
         CatalogNoLinks(root);RequireSinglePlayer();
         string key=Str(command,"classKey"),skinName=Str(command,"skinset");
         if(string.IsNullOrEmpty(key) || string.IsNullOrEmpty(skinName))throw new ArgumentException("Exact registered classKey and skinset required.");
-        JArray profiles=CatalogProfiles(true);string hash=CatalogHash(Path.Combine(root,"model-test-player-profiles.json"));
-        if(Str(command,"catalogSha256")!=hash)throw new InvalidOperationException("Player catalog pin differs.");
-        JObject profile=null;foreach(JObject candidate in profiles)if((string)candidate["key"]==key){if(profile!=null)throw new InvalidOperationException("Duplicate profile key.");profile=candidate;}
-        if(profile==null || (string)profile["skinset"]!=skinName)throw new InvalidOperationException("Exact loaded custom profile class/skinset required.");
+        bool packageOnly=Environment.GetEnvironmentVariable("FTK_MODEL_TEST_PACKAGE_ONLY")=="1";
+        JObject profile=null;string hash=null;
+        if(packageOnly)
+        {
+            if(!string.IsNullOrEmpty(Str(command,"catalogSha256")))throw new ArgumentException("Package-only observation has no fixture catalog pin.");
+            Type registry=CatalogAssembly("FTKModFramework").GetType("FTKModFramework.Core.ContentRegistry",true);
+            object[] args=new object[]{key,-1,new Type[]{typeof(FTK_playerGameStartDB)}};
+            bool registered=(bool)registry.GetMethod("TryGetSyntheticId",Statics).Invoke(null,args);
+            if(!registered || (int)args[1]!=FTK_playerGameStartDB.GetDB().GetIntFromID(key))
+                throw new InvalidOperationException("Package-only observation requires an exact registered custom class.");
+        }
+        else
+        {
+            JArray profiles=CatalogProfiles(true);hash=CatalogHash(Path.Combine(root,"model-test-player-profiles.json"));
+            if(Str(command,"catalogSha256")!=hash)throw new InvalidOperationException("Player catalog pin differs.");
+            foreach(JObject candidate in profiles)if((string)candidate["key"]==key){if(profile!=null)throw new InvalidOperationException("Duplicate profile key.");profile=candidate;}
+            if(profile==null || (string)profile["skinset"]!=skinName)throw new InvalidOperationException("Exact loaded custom profile class/skinset required.");
+        }
         FTK_playerGameStart row=FTK_playerGameStartDB.GetDB().GetEntryByStringID(key);
         FTK_skinset skin=FTK_skinsetDB.GetDB().GetEntryByStringID(skinName);
         if(row==null || row.m_ID!=key || skin==null || skin.m_ID!=skinName)throw new InvalidOperationException("Registered class or skinset unavailable.");
@@ -47,14 +61,14 @@ public sealed partial class RuntimeModelTest
         if(selected==null)return null;
         int skinType=(int)(selected.m_SkinType==FTK_playerGameStart.SkinType.None?row.m_DefaultSkinType:selected.m_SkinType);
         if(row.m_Skinsets==null || skinType<0 || skinType>=row.m_Skinsets.Length || FTK_skinsetDB.GetDB().GetEntry(row.m_Skinsets[skinType])!=skin)
-            throw new InvalidOperationException("Actual selected native skinset differs from profile.");
+            throw new InvalidOperationException("Actual selected native skinset differs from requested skinset.");
         CharacterEventListener cel=selected.m_Avatar;
         if(cel==null || !SceneOwner(cel) || !cel.gameObject.activeInHierarchy || cel.m_uiQuickPlayerCreate!=selected || selected.m_CharacterPos==null || cel.transform.parent!=selected.m_CharacterPos)return null;
         return new PreviewObservation{preview=selected,cel=cel,profile=profile,catalogHash=hash,skinset=skinName};
     }
     JArray PreviewAssets(JObject profile)
     {
-        JArray assets=new JArray();HashSet<string> seen=new HashSet<string>();
+        JArray assets=new JArray();if(profile==null)return assets;HashSet<string> seen=new HashSet<string>();
         System.Reflection.MethodInfo resolve=CatalogAssembly("FTKModFramework").GetType("FTKModFramework.Core.CustomModelLoader",true).GetMethod("ResolveModelPath",Statics,null,new[]{typeof(string)},null);
         foreach(string group in new[]{"renderers","apparel"})
         {
@@ -102,7 +116,9 @@ public sealed partial class RuntimeModelTest
         if(after==null || after.preview!=preview || after.cel!=cel || !JToken.DeepEquals(core,PreviewCoreIdentity()) || !JToken.DeepEquals(assets,PreviewAssets(after.profile)))throw new InvalidOperationException("Native preview or Core identity changed during observation.");
         return new JObject{{"ok",true},{"status","observed_actual_native_player_preview"},{"root",root},{"coreIdentity",core},
             {"classKey",Str(command,"classKey")},{"classId",preview.m_ClassID},{"skinType",(int)preview.m_SkinType},{"skinset",observed.skinset},
-            {"catalogSha256",observed.catalogHash},{"profile",observed.profile.DeepClone()},{"menuInstanceId",uiStartGame.Instance.GetInstanceID()},
+            {"catalogSha256",observed.catalogHash},{"profile",observed.profile==null?null:observed.profile.DeepClone()},
+            {"selectionSource",observed.profile==null?"registered-class-db-package-only":"pinned-test-profile"},
+            {"assetManifestCompared",observed.profile!=null},{"menuInstanceId",uiStartGame.Instance.GetInstanceID()},
             {"ownerInstanceId",preview.GetInstanceID()},{"celInstanceId",cel.GetInstanceID()},{"pedestalInstanceId",preview.m_CharacterPos.GetInstanceID()},
             {"nativeMenuMembership",true},{"reciprocalPreviewReference",true},{"parentIsNativePedestal",true},
             {"classLabel",preview.m_PlayerClass==null?null:preview.m_PlayerClass.text},{"turnIndex",preview.m_TurnIndex},

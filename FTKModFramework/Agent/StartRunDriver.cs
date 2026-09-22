@@ -114,7 +114,7 @@ namespace FTKModFramework.Agent
         /// <summary>
         /// Start the full continuation coroutine on the BridgeHost (must be called on the main thread). Returns
         /// false if already running (idempotent re-arm) or if no host is available. <paramref name="adventureKey"/>
-        /// is the adventure save-file key (e.g. "HollowMire"); <paramref name="classId"/> is the resolved
+        /// is the adventure save-file key (e.g. "DungeonCrawl"); <paramref name="classId"/> is the resolved
         /// FTK_playerGameStart id to start AS (e.g. the Innkeeper), or -1 to keep the RandomClass pick;
         /// <paramref name="partySize"/> is how many local hero slots to create (1..3, clamped). Only slot 0 takes
         /// the requested class; companions keep their RandomClass pick, which is what makes a party-facing passive
@@ -129,7 +129,7 @@ namespace FTKModFramework.Agent
                 Plugin.Log.LogError("[agent] start_run failed at arm: no BridgeHost (no session host)");
                 return false;
             }
-            _adventureKey = string.IsNullOrEmpty(adventureKey) ? "HollowMire" : adventureKey;
+            _adventureKey = string.IsNullOrEmpty(adventureKey) ? "DungeonCrawl" : adventureKey;
             _classId = classId;
             _partySize = partySize < 1 ? 1 : (partySize > 3 ? 3 : partySize); // gMaxPlayers=3
             _running = true;
