@@ -811,7 +811,7 @@ python3 tools/ai-model-pipeline/runtime-test/run_case.py new-run \
 #   --companion-enemy ogreA --skip-fortify
 ```
 
-This requires `phase:menu`, starts HollowMire with one hero, waits for a real
+This requires `phase:menu`, starts the requested adventure with one hero, waits for a real
 nonempty living party, quiets tutorials, fortifies to 999 maximum HP, and
 dismisses introductory messages until modal state stays clear for two seconds.
 It calls `enter_dungeon` followed immediately by `stage-enemy` with generation,

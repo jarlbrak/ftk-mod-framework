@@ -1707,7 +1707,7 @@ namespace FTKModFramework.Agent
         /// ENTER the realm's main dungeon (overworld -> inside). Locates the dungeon POI (GetSpecificDungeon,
         /// fallback GetPOIList(Dungeon)), gates cleared/locked/in-world/cow, SnapTo's the party onto its hex,
         /// then reflect-invokes OnLoadParty(cow) (the engage-equivalent enter). All plumbing lives in
-        /// <see cref="DungeonOps.EnterDungeon"/>. args: optional {dungeonId:"FloodedCrypt"}.
+        /// <see cref="DungeonOps.EnterDungeon"/>. args: optional {dungeonId:"Cave"}.
         /// </summary>
         private static object EnterDungeon(IDictionary<string, object> args)
         {
@@ -1841,7 +1841,7 @@ namespace FTKModFramework.Agent
         }
 
         /// <summary>
-        /// Confirm the framework's adventures (e.g. "HollowMire") are injected and selectable. As a deliberate
+        /// Confirm registered adventures are injected and selectable. As a deliberate
         /// ACTION it may force the adventure cache to build: GetPreviewNamesForced() runs Initialize() (idempotent
         /// + synchronous) then re-injects our previews, so the returned list always reflects the live cache.
         /// </summary>
@@ -1867,7 +1867,7 @@ namespace FTKModFramework.Agent
         /// </summary>
         private static object StartRun(IDictionary<string, object> args)
         {
-            string adventureKey = GetString(args, "adventure") ?? "HollowMire";
+            string adventureKey = GetString(args, "adventure") ?? "DungeonCrawl";
 
             // Idempotency: already in-world.
             object usg = StaticInstance("uiStartGame");

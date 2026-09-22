@@ -133,7 +133,7 @@ namespace FTKModFramework.Core
         // Weapon-renderer skip list (case-insensitive substring match on renderer name OR any material name): these
         // identify the held weapon so the per-part recolor does NOT tint it and so BossHideWeapon can disable it.
         // Tunable here (Core) because it is engine-classification, not aesthetics; the aesthetic knobs live in
-        // RealmBossAdventure.cs. Verified in-engine for trollCaveA: weapon renderers 'trollCaveA_axe_ftkmf(Clone)'
+        // Content callers can opt into the full visual route for an exact enemy chassis.
         // (material 'matLoot') and 'Break' (material 'matWeapons01').
         private static readonly string[] WeaponMarkers =
         {
@@ -150,7 +150,7 @@ namespace FTKModFramework.Core
             "weapon_holder", "hand", "wrist", "palm"
         };
 
-        // Keyed by FTK_enemyCombat.m_ID (the registered string id, e.g. "ftkmf_mudwretch_foreman"). We gate on
+        // Keyed by FTK_enemyCombat.m_ID (the registered string id, e.g. "example_enemy"). We gate on
         // m_ID, NOT EnemyDummy.m_EnemyType, to avoid the decimal-string-id ambiguity of the latter.
         private static readonly Dictionary<string, EnemyVisual> _visuals = new Dictionary<string, EnemyVisual>();
 

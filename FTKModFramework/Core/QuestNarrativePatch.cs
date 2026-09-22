@@ -4,7 +4,7 @@ using HarmonyLib;
 namespace FTKModFramework.Core
 {
     /// <summary>
-    /// Repairs a latent game bug on the custom-NPC quest-narrative path so a Reeve-Maddow-style story event (a
+    /// Repairs a latent game bug on the custom-NPC quest-narrative path so a custom-NPC story event (a
     /// <c>StoryEvent.Event</c> with <c>m_UserNPC</c> set) cannot softlock the game.
     ///
     /// <c>QuestLogicBase</c> has TWO <c>SetMessageTalkerParam</c> overloads. The <c>FTK_talkingHead.ID</c> overload

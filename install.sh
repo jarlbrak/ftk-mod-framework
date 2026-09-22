@@ -1142,7 +1142,7 @@ do_install() {
   say ""
   say "  What you get on the title screen: a new ${C_BOLD}Mods${C_OFF} button (toggle mods on and off)."
   say "  At character select: the ${C_BOLD}Thief${C_OFF} and ${C_BOLD}Innkeeper${C_OFF} classes."
-  say "  In the adventure list: ${C_BOLD}Smuggler's Run${C_OFF} and ${C_BOLD}The Hollow Mire${C_OFF}."
+  say "  In the adventure list: ${C_BOLD}Smuggler's Run${C_OFF}."
   say "  Drop other content mods into: $GAME_DIR/BepInEx/plugins/"
   say ""
   say "  Log (for troubleshooting): $GAME_DIR/BepInEx/LogOutput.log"

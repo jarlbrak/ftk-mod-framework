@@ -38,7 +38,6 @@ A catalog listing can provide up to three curated PNG or JPEG images in its `scr
 
 Host previews as approved repository release assets. Each image must be at most 2 MiB, no more than 4096 pixels on either side, and at most 8,388,608 pixels total. The helper validates and caches images before the interface displays them. Keep labels and important details readable at thumbnail size; use the larger gallery for inspection. Credit image creators and include the rights to distribute their work during review.
 
-The bundled Adventure Pack reuses its existing Hollow Mire artwork and Reeve Maddow portrait. These are illustrations included in the content, not screenshots or interactive 3D previews.
 
 ## Storage and recovery
 

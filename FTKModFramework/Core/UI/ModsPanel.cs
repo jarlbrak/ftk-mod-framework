@@ -569,7 +569,7 @@ namespace FTKModFramework.Core.UI
             {
                 _imagePage = Math.Min(_imagePage, previews.Count - 1);
                 AddScreenshot(previews[_imagePage]);
-                TextLine(bundled ? (_imagePage == 0 ? "The Hollow Mire / adventure artwork" : "Reeve Maddow / character portrait") : "Preview supplied by the mod author", 22, 48);
+                TextLine("Preview supplied by the mod author", 22, 48);
                 if (previews.Count > 1) ActionButton("Next preview (" + (_imagePage + 1) + " of " + previews.Count + ")", delegate { _imagePage = (_imagePage + 1) % previews.Count; Refresh(); });
                 return;
             }
@@ -585,7 +585,7 @@ namespace FTKModFramework.Core.UI
                 AddPreviewImage(hero.transform, previews[0]);
                 Button gallery = LinkButton("View " + (bundled ? "artwork" : "previews") + " (" + previews.Count + ")", delegate { _showGallery = true; _imagePage = 0; Refresh(); });
                 gallery.GetComponent<LayoutElement>().minHeight = gallery.GetComponent<LayoutElement>().preferredHeight = 32;
-                TextLine(bundled ? "• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run and The Hollow Mire." : Short(_package != null ? _package.Description : _entry.Description, 90), 22, bundled ? 78 : 52);
+                TextLine(bundled ? "• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run." : Short(_package != null ? _package.Description : _entry.Description, 90), 22, bundled ? 78 : 52);
             }
             else if (bundled)
             {
@@ -593,7 +593,7 @@ namespace FTKModFramework.Core.UI
                 TextLine("The playable content included with the framework, together in one optional pack.", 24, 60);
                 Spacer(4);
                 TextLine("What it adds", 28, 36).color = Gold;
-                TextLine("• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run and The Hollow Mire.", 24, 115);
+                TextLine("• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run.", 24, 115);
             }
             else
             {
@@ -781,12 +781,7 @@ namespace FTKModFramework.Core.UI
         private static List<string> PreviewPaths(PackageDescriptor package, bool bundled)
         {
             List<string> paths = new List<string>();
-            if (bundled)
-            {
-                paths.Add("embedded:FTKModFramework.assets.adventures.hollowmire.EndGameImage.png");
-                paths.Add("embedded:FTKModFramework.assets.npcs.reeve_maddow.portrait.png");
-            }
-            else if (package != null && package.ScreenshotPaths != null)
+            if (package != null && package.ScreenshotPaths != null)
                 foreach (string path in package.ScreenshotPaths)
                     if (paths.Count < 3 && MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) paths.Add(path);
             return paths;
@@ -798,21 +793,8 @@ namespace FTKModFramework.Core.UI
             try
             {
                 byte[] bytes;
-                if (path == "embedded:FTKModFramework.assets.adventures.hollowmire.EndGameImage.png" || path == "embedded:FTKModFramework.assets.npcs.reeve_maddow.portrait.png")
-                {
-                    using (Stream stream = typeof(Plugin).Assembly.GetManifestResourceStream(path.Substring(9)))
-                    {
-                        if (stream == null || stream.Length > 8 * 1024 * 1024) throw new IOException("Bundled preview unavailable.");
-                        bytes = new byte[(int)stream.Length];
-                        int read = 0;
-                        while (read < bytes.Length) { int n = stream.Read(bytes, read, bytes.Length - read); if (n == 0) throw new EndOfStreamException(); read += n; }
-                    }
-                }
-                else
-                {
-                    if (!MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) throw new IOException("Preview path is not approved.");
-                    bytes = File.ReadAllBytes(path);
-                }
+                if (!MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) throw new IOException("Preview path is not approved.");
+                bytes = File.ReadAllBytes(path);
                 texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);
                 if (!ImageConversion.LoadImage(texture, bytes)) throw new IOException("Preview image could not be decoded.");
                 _previewTextures.Add(texture);

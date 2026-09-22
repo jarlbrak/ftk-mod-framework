@@ -289,12 +289,12 @@ namespace FTKModFramework.Core
         /// json + portrait each call.
         /// </summary>
         /// <param name="preview">The adventure preview returned by <see cref="AddCampaignFromTemplate"/>/<see cref="AddFromTemplate"/>.</param>
-        /// <param name="adventureFolderName">A unique subfolder name for this adventure's mod folder (e.g. "HollowMire").</param>
+        /// <param name="adventureFolderName">A unique subfolder name for this adventure's mod folder (e.g. "MyAdventure").</param>
         /// <param name="npcKey">The UserNPC folder key (== the narrative's <c>m_UserNPC</c>); non-empty.</param>
         /// <param name="npcName">The NPC's display name (verbatim in the popup header).</param>
         /// <param name="npcTitle">The NPC's title/subtitle (verbatim in the popup header).</param>
         /// <param name="portraitResourceName">Embedded-resource name of the portrait PNG in THIS assembly
-        /// (e.g. "FTKModFramework.assets.npcs.reeve_maddow.portrait.png"); extracted to <c>portrait.png</c>.</param>
+        /// (e.g. "MyMod.assets.npcs.my_npc.portrait.png"); extracted to <c>portrait.png</c>.</param>
         /// <returns>The same <paramref name="preview"/>, for chaining (null if it was null).</returns>
         public static GameDefinitionPreview RegisterUserNpc(
             GameDefinitionPreview preview, string adventureFolderName, string npcKey,
@@ -373,9 +373,9 @@ namespace FTKModFramework.Core
         /// victory screen). Idempotent: it overwrites the image each call.
         /// </summary>
         /// <param name="preview">The adventure preview returned by <see cref="AddCampaignFromTemplate"/>/<see cref="AddFromTemplate"/>.</param>
-        /// <param name="adventureFolderName">The adventure's mod-folder subfolder (e.g. "HollowMire"); same as RegisterUserNpc.</param>
+        /// <param name="adventureFolderName">The adventure's mod-folder subfolder (e.g. "MyAdventure"); same as RegisterUserNpc.</param>
         /// <param name="endImageResourceName">Embedded-resource name of the victory PNG in THIS assembly
-        /// (e.g. "FTKModFramework.assets.adventures.hollowmire.EndGameImage.png"); extracted to <c>EndGameImage.png</c>.</param>
+        /// (e.g. "MyMod.assets.adventures.my_adventure.EndGameImage.png"); extracted to <c>EndGameImage.png</c>.</param>
         /// <returns>The same <paramref name="preview"/>, for chaining (null if it was null).</returns>
         public static GameDefinitionPreview RegisterEndGameImage(
             GameDefinitionPreview preview, string adventureFolderName, string endImageResourceName)

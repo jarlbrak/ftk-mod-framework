@@ -62,7 +62,7 @@ interactive control when available; it is not a dependency of this pipeline.
 No external paid generation service is required by the tools. If another
 service is selected, check its terms and costs before using it.
 
-Fit original geometry to the native mesh-local bind pose. For Mirewarden,
+Fit original geometry to the native mesh-local bind pose. For an enemy model,
 separate stone components use explicit single-bone tags, allowing articulation
 without rubbery stone deformation. Organic creatures usually need blended
 weights. Nearest-surface weight transfer is a starting point only when anatomy
@@ -83,7 +83,7 @@ runtime's vertex/index limits. The loader flips V, so its input uses top-origin
 V; native extracted UVs need conversion if used as roundtrip test input.
 
 The documented Blender X-right/Z-up/-Y-front conversion `(x,z,-y)` preserves
-orientation. Reversing the resulting triangles made the first Mirewarden
+orientation. Reversing the resulting triangles made the first model
 render inside-out. Compare against the selected native reference rather than
 relying on a clockwise/counterclockwise label. The extractor also repairs a
 verified UnityPy 1.25.3 negative fourth-weight residual; this is decoder repair,
@@ -160,10 +160,6 @@ stage path keeps an active row byte-identical; a deliberate one-row migration
 uses `--replace-existing-profile` and pins both canonical row hashes before the
 isolated deployment.
 
-For the Mirewarden experiment, `FTK_MIREWARDEN_BODY=1` selects the authored body;
-`FTK_BASELINE_STOCK_BODY` must be unset. The default sample configuration remains
-procedural. These are sample-specific test switches, not generic rig selectors.
-
 Prefer normal encounter flow. The measured isolated-harness setup is:
 
 1. Start the disposable run and wait for an actual nonempty, living party.
@@ -182,35 +178,7 @@ Prefer normal encounter flow. The measured isolated-harness setup is:
 5. Verify the exact custom row, production mesh assignment, and native combat
    readiness before capturing motion or issuing combat actions.
 
-This historical sequence is not yet reliable for every fresh HollowMire run.
-The [Reefstrider setup failure](../art-experiments/reefstrider-fish/setup-failure-v1/README.md)
-shows that initial story completion can be followed by a newly triggered quest
-message during dungeon entry, before any combatant exists. Both the ordinary
-runner and interrupted-start continuation now stop at `pending_story_message`
-without inventory or binding acceptance. Preserve that result and diagnose the
-native quest transition outside the dungeon; longer quiet waits and repeated
-staging are not verified repairs. The pre-entry native quest-completion gate
-completed two fresh startup trials with one discovery submission, its callback,
-and verified quest/destination readiness. In both trials, both story chains had
-already finished before positioning/discovery; these observations do not prove
-the gate repairs the late-story failure. Preserve that causal limit in new
-reports. See the [second trial](evidence/entry-preparation-native-v1/second-trial/validation.json).
-
-Waiting for dialogs after entry but before staging caused a race with native
-encounter startup. Sending dungeon acknowledgments early also caused missing
-dummies and aborted initiative construction; additional acknowledgments did
-not recover it. An empty initiative list alone does not identify the wait
-condition: inspect dialogs, camera state, and logs. See the
-[runtime helper guide](../tools/ai-model-pipeline/runtime-test/README.md) for
-command transport and fixture semantics, and the
-[test-content guide](../tools/ai-model-pipeline/runtime-test-content/README.md)
-for registered custom row IDs. The HP and tutorial changes are disposable
-fixture settings, not production content or representative game balance.
-
-The test used one hero to avoid a separately observed custom-realm party
-association issue. This does not establish multiplayer or full-adventure
-compatibility. Scratch helpers for selecting the boss room and replaying
-animations were test aids; they are not shipped APIs.
+Each model route needs its own captured evidence. A clean startup, successful staging, or a log receipt does not prove the model's visible fit, motion, lifecycle, or combat behavior.
 
 ## Evidence and completion
 

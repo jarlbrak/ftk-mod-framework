@@ -182,9 +182,6 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "enemy-lifetime-watch") Finish(id,ArmEnemyLifetime(command));
             else if(op == "enemy-lifetime-state"){CatalogKeys(command,"id","session","op");Finish(id,EnemyLifetimeState());}
             else if(op == "enemy-lifetime-clear"){CatalogKeys(command,"id","session","op");Finish(id,ClearEnemyLifetime());}
-            else if(op == "entry-preparation-state") Finish(id,EntryPreparationState(command));
-            else if(op == "entry-position") Finish(id,EntryPosition(command));
-            else if(op == "entry-discover") Finish(id,EntryDiscover(command));
             else if(op == "story-state") Finish(id,StorySetupState(command));
             else if(op == "story-submit") Finish(id,SubmitStorySetup(command));
             else if(op == "native-create-character-screen") StartNativeCreateCharacterScreen(id,command);
@@ -791,7 +788,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(quietTutorial!=null){quietTutorial.m_IsPromptTutorial=previousTutorialPrompt;quietTutorial.m_IsShowTutorial=previousTutorialShow;}
         quietTutorial=null;
     }
-    void OnDestroy(){CustomLootRemoveHook();PreviewRaceCleanup();NativeFightDisarm();GuardianFixtureRemoveHooks();if(combatEntryObserver==this)combatEntryObserver=null;enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();if(entryTicket!=null)entryTicket.valid=false;krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
+    void OnDestroy(){CustomLootRemoveHook();PreviewRaceCleanup();NativeFightDisarm();GuardianFixtureRemoveHooks();if(combatEntryObserver==this)combatEntryObserver=null;enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
     JObject QuietTutorials(JObject command)
     {
         FTKTutorial tutorial=FTKTutorial.Instance;if(tutorial==null)throw new InvalidOperationException("Tutorial manager unavailable.");
