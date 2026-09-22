@@ -1,6 +1,6 @@
 # Paladin beta release notes draft
 
-Paladin: Oath of the Dawn adds a Vitality-based protector class, six equipment
+Paladin adds a Vitality-based protector class, six equipment
 sets and three alternative endgame specializations. One marketplace mod enables
 the class, its two Censure actions and all 36 equipment items.
 

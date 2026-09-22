@@ -1,4 +1,4 @@
-# Paladin: Oath of the Dawn
+# Paladin
 
 ![Paladin Censure marketplace banner](promo/paladin-censure-banner.png)
 

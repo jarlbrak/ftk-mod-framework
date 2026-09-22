@@ -1,4 +1,4 @@
-# Paladin: Oath of the Dawn
+# Paladin
 
 Work in progress for [epic #138](https://github.com/jarlbrak/ftk-mod-framework/issues/138).
 This source directory is not a published or accepted marketplace package.
