@@ -4,7 +4,7 @@ Status: production hardening and final live acceptance are complete for the rest
 
 ## Supported first version
 
-Title-screen activation supports the audited macOS game build, with either no community content or the supported Paladin package. Paladin includes its class, abilities, 36 equipment definitions, managed Guardian behavior, icons and custom models. The installed managed assembly must match the audited fingerprint. Other game builds and platforms keep next-launch activation.
+Title-screen activation supports the audited macOS game build, with either no community content or the supported Paladin package. Paladin includes its class, abilities, 51 equipment definitions, managed Guardian behavior, icons and custom models. The installed managed assembly must match the audited fingerprint. Other game builds and platforms keep next-launch activation.
 
 Manual mods, arbitrary behavior DLLs, additional BepInEx plugins, dependencies, bundled demo content and diagnostic injections do not qualify. Their ordinary loading path remains available. An eligible but invalid candidate is rejected transactionally; it is never accepted merely because its package GUID says Paladin.
 
