@@ -44,6 +44,14 @@ namespace FTKModFramework.Core.Marketplace
         [JsonProperty("generationId")] public string GenerationId;
         [JsonProperty("contentRoot")] public string ContentRoot;
         [JsonProperty("packages")] public List<PackageDescriptor> Packages = new List<PackageDescriptor>();
+        [JsonIgnore] public List<MarketplaceGenerationFile> Files = new List<MarketplaceGenerationFile>();
+        [JsonIgnore] public bool FilesVerified;
+    }
+    internal sealed class MarketplaceGenerationFile
+    {
+        [JsonProperty("path")] public string Path;
+        [JsonProperty("sha256")] public string Sha256;
+        [JsonProperty("size")] public long Size;
     }
     internal sealed class MarketplacePlanEntry
     {
@@ -74,6 +82,9 @@ namespace FTKModFramework.Core.Marketplace
     }
     internal sealed class MarketplaceRequest
     {
+        [JsonProperty("maxGenerationBytes")] public long MaxGenerationBytes;
+        [JsonProperty("ensureEmptyGeneration")] public bool EnsureEmptyGeneration;
+        [JsonProperty("saveFingerprint")] public string SaveFingerprint;
         [JsonProperty("schemaVersion")] public int SchemaVersion = 1;
         [JsonProperty("operationId")] public string OperationId;
         [JsonProperty("stateRoot")] public string StateRoot;
@@ -86,6 +97,8 @@ namespace FTKModFramework.Core.Marketplace
         [JsonProperty("selection")] public List<PackageSelection> Selection;
         [JsonProperty("dryRun")] public bool DryRun;
         [JsonProperty("expectedRevision")] public string ExpectedRevision;
+        [JsonProperty("expectedCurrent")] public string ExpectedCurrent;
+        [JsonProperty("expectedPending")] public string ExpectedPending;
         [JsonProperty("settings")] public Dictionary<string, object> Settings;
     }
     internal sealed class MarketplaceStateRecord
@@ -97,8 +110,10 @@ namespace FTKModFramework.Core.Marketplace
     }
     internal sealed class MarketplaceGenerationLock
     {
+        [JsonProperty("frameworkVersion")] public string FrameworkVersion;
         [JsonProperty("schemaVersion")] public int SchemaVersion;
         [JsonProperty("packages")] public List<PackageDescriptor> Packages;
+        [JsonProperty("files")] public List<MarketplaceGenerationFile> Files = new List<MarketplaceGenerationFile>();
     }
     internal sealed class HelperManifest
     {

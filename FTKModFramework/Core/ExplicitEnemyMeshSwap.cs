@@ -280,8 +280,8 @@ namespace FTKModFramework.Core
                 if (batch != null) batch.Rollback(restored);
                 else
                 {
-                    if (lifetime != null && existing == null) UnityEngine.Object.Destroy(lifetime);
-                    foreach (UnityEngine.Object asset in owned) if (asset != null) UnityEngine.Object.Destroy(asset);
+                    if (lifetime != null && existing == null) HotReload.PaladinResourceState.DestroyTracked(lifetime);
+                    foreach (UnityEngine.Object asset in owned) if (asset != null) HotReload.PaladinResourceState.DestroyTracked(asset);
                 }
                 Plugin.Log.LogWarning("[enemy-visual] explicit mesh set rejected for '" + enemyId + "': " + e.Message + "; rollback attempted (see any incomplete rollback error).");
                 return false;
@@ -299,6 +299,17 @@ namespace FTKModFramework.Core
             internal readonly List<EnemyMeshResources> owners = new List<EnemyMeshResources>();
         }
         private static readonly Dictionary<int, Lease> Leases = new Dictionary<int, Lease>();
+        internal static int ReloadLeaseCount { get { PruneDestroyedOwners(); return Leases.Count; } }
+        internal static int ReloadResourceCount
+        {
+            get
+            {
+                PruneDestroyedOwners();
+                int count = 0;
+                foreach (Lease lease in Leases.Values) count += lease.resources.Length;
+                return count;
+            }
+        }
         private static int _nextLease;
         [SerializeField] private int _leaseId;
         [SerializeField] private Renderer[] _targets;
@@ -379,11 +390,11 @@ namespace FTKModFramework.Core
                 owner._targets = targets; owner._scrollRenderers = scrollRenderers;
                 owner._scrollMaterials = scrollMaterials; owner._scrollCounts = scrollCounts;
                 owner._scrollers = scrollers; owner._privateScrolling = privateScrolling;
-                if (fresh) { owner.Release(); UnityEngine.Object.Destroy(owner); }
+                if (fresh) { owner.Release(); HotReload.PaladinResourceState.DestroyTracked(owner); }
                 else
                 {
                     lease.resources = resources;
-                    foreach (UnityEngine.Object item in added) if (item != null) UnityEngine.Object.Destroy(item);
+                    foreach (UnityEngine.Object item in added) if (item != null) HotReload.PaladinResourceState.DestroyTracked(item);
                 }
             }
         }
@@ -485,7 +496,7 @@ namespace FTKModFramework.Core
                 if (restored)
                 {
                     lease.resources = priorResources;
-                    foreach (Material copy in copies) if (copy != null) UnityEngine.Object.Destroy(copy);
+                    foreach (Material copy in copies) if (copy != null) HotReload.PaladinResourceState.DestroyTracked(copy);
                 }
                 // On uncertainty retain the registered batch: live renderers may still reference it.
                 throw;
@@ -584,7 +595,7 @@ namespace FTKModFramework.Core
             // Remove before Destroy: lifecycle callbacks cannot reacquire a zero-reference lease.
             Leases.Remove(id);
             foreach (UnityEngine.Object resource in lease.resources)
-                if (resource != null) UnityEngine.Object.Destroy(resource);
+                if (resource != null) HotReload.PaladinResourceState.DestroyTracked(resource);
         }
 
         internal static void PruneDestroyedOwners()

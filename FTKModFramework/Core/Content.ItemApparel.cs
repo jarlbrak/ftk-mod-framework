@@ -43,7 +43,15 @@ namespace FTKModFramework.Core
 
     internal static class ItemApparelRegistry
     {
-        private static readonly Dictionary<int, PlayerApparelMesh[]> Items = new Dictionary<int, PlayerApparelMesh[]>();
+        private static Dictionary<int, PlayerApparelMesh[]> Items = new Dictionary<int, PlayerApparelMesh[]>();
+        internal static IEnumerable<KeyValuePair<int, PlayerApparelMesh[]>> ReloadPlans() { return Items; }
+        internal static int ReloadApparelCount { get { return Items.Count; } }
+        internal static Action SuspendForReload()
+        {
+            Dictionary<int, PlayerApparelMesh[]> old = Items;
+            Items = new Dictionary<int, PlayerApparelMesh[]>();
+            return delegate { Items = old; };
+        }
         internal static void Register(int id, PlayerApparelMesh[] meshes) { Items[id] = (PlayerApparelMesh[])meshes.Clone(); }
 
         internal static EnemyRendererMesh[] Resolve(CharacterEventListener avatar)

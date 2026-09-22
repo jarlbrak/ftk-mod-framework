@@ -49,6 +49,8 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             saveNamespace = "save-model-test-" + BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(root))).Replace("-", "").ToLowerInvariant().Substring(0,16);
         ApplySaveNamespace();
         isolatedSavePath = Path.Combine(Application.persistentDataPath, saveNamespace);
+        try { VerifyHotReloadProfile(); }
+        catch (Exception e) { Logger.LogError("HOT RELOAD PROFILE REFUSED: " + e); Application.Quit(); return; }
         Harmony harmony = new Harmony("com.ftkmf.runtime-model-test.saves");
         harmony.Patch(typeof(uiStartGame).GetMethod("GetSavePath", Statics), new HarmonyMethod(typeof(RuntimeModelTest).GetMethod("SavePathPrefix", Statics)));
         harmony.Patch(typeof(uiStartGame).GetMethod("GetSavePathSlash", Statics), new HarmonyMethod(typeof(RuntimeModelTest).GetMethod("SavePathSlashPrefix", Statics)));
@@ -61,7 +63,8 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         ArmCombatEntryTrace();
         enabled = true;
         Logger.LogInfo("MODEL TEST ACTIVE: root=" + root + "; saveNamespace=" + saveNamespace
-            + "; command=model-test-command.json; PlayerPrefs are not modified by this plugin.");
+            + "; command=model-test-command.json; " + (Environment.GetEnvironmentVariable("FTK_HOT_RELOAD") == "1"
+                ? "isolated preferences domain verified; test sentinel written." : "PlayerPrefs are not modified by this plugin."));
     }
 
     static bool SavePathPrefix(ref string __result) { __result = isolatedSavePath; return false; }
@@ -144,7 +147,8 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             // This diagnostic intentionally runs before the normal game-state
             // guard so it can report why the native Create Game route is not
             // currently eligible.  It only reads the native menu graph.
-            if (op == "native-title-new-game") Finish(id, NativeTitleNewGame(command));
+            if (op == "hot-reload") Finish(id, HotReloadProbe(command));
+            else if (op == "native-title-new-game") Finish(id, NativeTitleNewGame(command));
             else if (op == "native-create-character-preflight") Finish(id, NativeCreateCharacterPreflight(command));
             else if (op == "native-create-character-input-state") Finish(id, NativeCreateCharacterInputState(command));
             else

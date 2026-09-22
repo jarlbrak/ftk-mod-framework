@@ -19,6 +19,7 @@ OPS += ('player-studio',)
 OPS += ('custom-loot-fixture',)
 OPS += ('preview-race',)
 OPS += ('native-fight-trace',)
+OPS += ('hot-reload',)
 
 
 def main():

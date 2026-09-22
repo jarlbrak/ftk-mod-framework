@@ -8,8 +8,19 @@ namespace FTKModFramework.Core
 {
     internal static class ItemModelRegistry
     {
-        private static readonly Dictionary<int, EnemyRendererMesh[]> Models = new Dictionary<int, EnemyRendererMesh[]>();
-        private static readonly Dictionary<int, EnemyRendererMesh[]> Displays = new Dictionary<int, EnemyRendererMesh[]>();
+        private static Dictionary<int, EnemyRendererMesh[]> Models = new Dictionary<int, EnemyRendererMesh[]>();
+        private static Dictionary<int, EnemyRendererMesh[]> Displays = new Dictionary<int, EnemyRendererMesh[]>();
+        internal static IEnumerable<KeyValuePair<int, EnemyRendererMesh[]>> ReloadPlans(bool display)
+        { return display ? Displays : Models; }
+        internal static int ReloadModelCount { get { return Models.Count; } }
+        internal static int ReloadDisplayCount { get { return Displays.Count; } }
+        internal static Action SuspendForReload()
+        {
+            Dictionary<int, EnemyRendererMesh[]> models = Models, displays = Displays;
+            Models = new Dictionary<int, EnemyRendererMesh[]>();
+            Displays = new Dictionary<int, EnemyRendererMesh[]>();
+            return delegate { Models = models; Displays = displays; };
+        }
         internal static void RegisterDisplay(int id, EnemyRendererMesh[] meshes) { Displays[id] = (EnemyRendererMesh[])meshes.Clone(); }
         internal static void Register(int id, EnemyRendererMesh[] meshes) { Models[id] = (EnemyRendererMesh[])meshes.Clone(); }
         internal static void Apply(FTK_itembase.ID id, GameObject instance)
