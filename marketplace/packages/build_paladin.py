@@ -34,6 +34,7 @@ def main():
     parser.add_argument('--platform',choices=['macos','windows','linux'],default='macos')
     parser.add_argument('--helper',type=Path,help='Current helper executable to validate this local archive')
     parser.add_argument('--fixture',action='store_true',help='Prepare a separate ignored local managed state; never activate it')
+    parser.add_argument('--preview-state-root',type=Path,help='Seed the local draft banner into this marketplace state cache')
     args=parser.parse_args()
     output=args.output.resolve();output.relative_to(ROOT/'scratch')
     if args.fixture and not args.helper:parser.error('--fixture requires --helper')
@@ -55,6 +56,18 @@ def main():
             archive.writestr(info,data,compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
     payload=stream.getvalue();sha=digest(payload);manifest=json.loads(files['manifest.json'])
     stem='paladin-local-beta-'+manifest['version']+'-'+sha[:12]
+    preview_url='https://github.com/jarlbrak/ftk-mod-framework/releases/download/LOCAL-DRAFT-NOT-PUBLISHED/paladin-censure-banner.png'
+    if args.preview_state_root:
+        state_root=args.preview_state_root.resolve()
+        if not state_root.is_dir() or not (state_root/'state.json').is_file():
+            parser.error('--preview-state-root must be an existing local marketplace state')
+        banner=PACKAGE/'promo/paladin-censure-banner.png'
+        banner_bytes=banner.read_bytes()
+        if len(banner_bytes)>2*1024*1024 or banner_bytes[:8]!=b'\x89PNG\r\n\x1a\n':
+            parser.error('The promotional banner is not a valid-sized PNG preview')
+        cache=state_root/'cache/screenshots'/(digest(preview_url.encode())+'.png')
+        cache.parent.mkdir(parents=True,exist_ok=True)
+        immutable(cache,banner_bytes)
     archive_path=output/(stem+'.zip');descriptor_path=output/(stem+'.descriptor.json')
     immutable(archive_path,payload)
     descriptor={
@@ -68,7 +81,7 @@ def main():
         'requirements':['Local unpublished framework 0.1.4 capability build.','Local candidate only; no production catalog entry or published download exists.','Online co-op unverified.'],
         'contentChanges':['Adds the Paladin protector class and Guard action.','Adds 36 original hammers, shields and armor pieces across six progression sets.','Adds Divine Intervention and two Censure weapon actions.'],
         'changelog':'Initial local beta candidate; not approved for release.','sourceUrl':'https://github.com/jarlbrak/ftk-mod-framework',
-        'supportUrl':'https://github.com/jarlbrak/ftk-mod-framework/issues/138','screenshots':[]}
+        'supportUrl':'https://github.com/jarlbrak/ftk-mod-framework/issues/138','screenshots':[preview_url]}
     descriptor_bytes=(json.dumps(descriptor,indent=2,sort_keys=True)+'\n').encode()
     immutable(descriptor_path,descriptor_bytes)
     receipt={'archive':archive_path.name,'descriptor':descriptor_path.name,'archiveSha256':sha,'descriptorSha256':digest(descriptor_bytes),

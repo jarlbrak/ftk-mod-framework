@@ -392,6 +392,9 @@ namespace FTKModFramework.Core.UI
             List<ModEntry> entries = new List<ModEntry>();
             foreach (ModEntry candidate in ModRegistry.Entries)
             {
+                // Once the optional included demo is off, keep Installed focused on content
+                // that this player actually has selected. A pending toggle remains visible.
+                if (candidate.IsBundledDemo && !candidate.Enabled && !candidate.PendingEnabled.HasValue) continue;
                 PackageDescriptor managed = candidate.IsManaged ? MarketplaceRuntime.FindManaged(candidate.Key) : null;
                 bool component = managed != null && (managed.Classification == "dependency" || managed.Classification == "component");
                 if (component == components) entries.Add(candidate);

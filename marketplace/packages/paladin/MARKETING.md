@@ -6,6 +6,8 @@
 
 `promo/paladin-censure-banner.png` is original promotional illustration. It depicts the fully equipped Censure set and is not an in-game screenshot. The production listing should use it as the first hosted preview image after review.
 
+The unpublished local draft uses a reserved release-shaped preview URL and seeds the banner into the player's marketplace image cache during local setup. That URL is not published or downloadable. Replace it with the immutable hosted release asset URL for a public catalog entry.
+
 ## Card copy
 
 **Stand between danger and your party.**
