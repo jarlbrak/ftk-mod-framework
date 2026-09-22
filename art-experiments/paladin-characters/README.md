@@ -1,5 +1,21 @@
 # Original Paladin armor equipment
 
+## Highward and Censure rank separation
+
+Highward is the compact midgame guardian: steel fittings replace gold borders,
+the divided blue tabard is shorter, and the helmet keeps its low practical keel.
+Censure is the upper-tier judgment set: an asymmetric layered blade mantle,
+gold chest chevrons, deep crimson tabard, gold-edged greaves and a crowned dark
+helmet with a swept crimson plume give it a taller and broader silhouette.
+The native torso, head, face, beard and backpack remain game-owned. These changes
+increase armor coverage and decoration without enlarging the native body.
+
+The two sets are re-exported into the marketplace package together with their
+icons and rigid loot-display derivatives. Offline binary, exact binding,
+deterministic rebuild and helmet mount checks pass. Native fit and motion must
+be evaluated against the new hashes; earlier native screenshots are historical.
+Other sets' original model, source, piece and icon files remain unchanged.
+
 This package authors only equipment. Native FTK bodies, faces, hair and character
 appearance choices remain native. Obsolete original character/default-outfit and
 portrait experiments are archived in ignored scratch and are not runtime assets.
@@ -41,7 +57,7 @@ all-race, animation or resource-lifetime acceptance. The previous custom-body
 studio lineups are historical previews; new fit review must use native characters
 wearing the custom gear in the isolated game.
 
-## Distinct early tiers and connected boots
+## Historical early-tier and connected-boot revision
 
 Oathkeeper now has a low blue open-face helm, single-layer compact steel shoulder
 caps and a short narrow blue apron. Highward has taller gold crests, two ridged
@@ -164,7 +180,7 @@ transfers, combat motion, nonhuman fit, resource lifetime or user art approval.
 Item icons, loot-display derivatives and the marketplace package have not been
 updated.
 
-## Highward ceremonial guardian candidate
+## Earlier Highward ceremonial guardian candidate
 
 Highward progresses from Oathkeeper's two plain chest plates and short pointed
 surcoat to a single fitted silver cuirass, a blue central panel, a small order
@@ -222,7 +238,7 @@ only. Combat movement, nonhuman fit, real Mercy acquisition and equipment
 transfers, resource lifetime and user art approval remain separate gates.
 Icons, loot-display derivatives and marketplace assets are unchanged.
 
-## Censure disciplined guardian candidate
+## Earlier Censure disciplined guardian candidate
 
 Censure is an offensive horizontal max-level option with a fitted oxblood jack,
 three overlapping charcoal and slate chest chevrons, and short angular steel

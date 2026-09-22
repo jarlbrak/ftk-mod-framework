@@ -67,18 +67,32 @@ def render(path,points,portrait=False):
 def main():
     equipment=json.loads((OUT/'manifest.json').read_text());equipment_icons=[];character_icons=[]
     characters_only='--characters-only' in sys.argv
+    selected_arg=next((arg.split('=',1)[1] for arg in sys.argv if arg.startswith('--sets=')),None)
+    selected_sets=set(selected_arg.split(',')) if selected_arg else None
+    if selected_sets is not None:
+        assert selected_sets and selected_sets<={'novice','oathkeeper','highward','mercy','censure','verdict'}
+    prior_equipment={icon['owner']:icon for icon in json.loads((OUT/'icons-manifest.json').read_text())['icons']} if selected_sets else {}
+    prior_characters={icon['owner']:icon for icon in json.loads((CHAR/'icons-manifest.json').read_text())['icons']} if selected_sets else {}
     if not characters_only:
         for item in equipment['assets']:
+            if selected_sets and item['key'].rsplit('-',1)[-1] not in selected_sets:
+                equipment_icons.append(prior_equipment[item['key']]);continue
             mats=reset(EQUIPMENT_COLORS);source=OUT/(item['key']+'.source.json')
             points=add_source(source,mats);path=OUT/(item['key']+'-icon.png');render(path,points)
             equipment_icons.append({'owner':item['key'],'file':path.name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest()})
-        mats=reset(EQUIPMENT_COLORS);source=OUT/'paladin-shield-highward.source.json'
-        points=add_source(source,mats);path=OUT/'paladin-guard-icon.png';render(path,points)
-        equipment_icons.append({'owner':'paladin-guard','file':path.name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest()})
+        if selected_sets and 'highward' not in selected_sets:
+            equipment_icons.append(prior_equipment['paladin-guard'])
+        else:
+            mats=reset(EQUIPMENT_COLORS);source=OUT/'paladin-shield-highward.source.json'
+            points=add_source(source,mats);path=OUT/'paladin-guard-icon.png';render(path,points)
+            equipment_icons.append({'owner':'paladin-guard','file':path.name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest()})
     characters=json.loads((CHAR/'manifest.json').read_text())
     novice_only='--novice-only' in sys.argv
     previous_icons=json.loads((CHAR/'icons-manifest.json').read_text())['icons'] if novice_only else []
     for equipment_set in characters['equipmentSets']:
+        if selected_sets and equipment_set['set'] not in selected_sets:
+            character_icons.extend(prior_characters['paladin-'+equipment_set['set']+'-'+part] for part in ['armor','boots','helmet'])
+            continue
         if novice_only and equipment_set['set']!='novice':
             character_icons.extend(r for r in previous_icons if r['owner'].startswith('paladin-'+equipment_set['set']+'-'))
             continue

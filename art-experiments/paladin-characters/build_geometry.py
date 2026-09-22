@@ -581,7 +581,7 @@ def highward_shoulder(s,side,sign):
 
 
 def highward_armor(s,male):
-    """Framed silver cuirass, overlapping compact guards and a knee-length divided tabard."""
+    """Practical silver cuirass and compact guards distinguish the midgame guardian."""
     novice_armor(s,male)
     for uv in s.data["uvs"]:
         color=int(uv[0]*len(PALETTE))
@@ -624,7 +624,7 @@ def highward_armor(s,male):
         s.tube("Highward trouser underlayer "+side,[B[hip],B[knee],B[ankle]],
                [.087,.073,.057],[.080,.066,.055],[hip,knee,ankle],0,sides=8)
         root=B["Root_M"]
-        for face,z,length in [("front",.168,.463),("back",-.110,.395)]:
+        for face,z,length in [("front",.168,.343),("back",-.110,.315)]:
             points=[root+np.array([sign*.016,.073,z]),root+np.array([sign*.173,.073,z*.94]),
                     root+np.array([sign*.201,-length+.018,z*1.05]),root+np.array([sign*.041,-length,z*1.08])]
             lower={hip:.73,knee:.27}
@@ -653,6 +653,17 @@ def highward_armor(s,male):
         for prefix in ["MiddleToe1","MiddleToe2"]:
             toe=prefix+"_"+side
             if toe in B:s.ellipsoid("Highward toe underboot "+toe,offset(B[toe],y=.014),(.060,.020,.045),toe,0,sides=6)
+    highward_plain_fittings(s)
+
+
+def highward_plain_fittings(s):
+    """Reserve gilded borders for endgame; retain one small order seal as a family mark."""
+    for piece in s.pieces:
+        if piece["name"].startswith("Order ") or piece["name"]=="Suspended oath bead":continue
+        for index in range(piece["vertex_start"],piece["vertex_start"]+piece["vertex_count"]):
+            if int(s.data["uvs"][index][0]*len(PALETTE))==4:
+                s.data["uvs"][index][0]=(1+.5)/len(PALETTE)
+        piece["name"]=piece["name"].replace("gold","steel")
 
 
 def highward_boots(s):
@@ -685,10 +696,11 @@ def highward_boots(s):
                 s.triangle([pts[0],pts[2],pts[3]],[skin]*3,2)
             s.pieces.append({"name":"Highward articulated instep plate "+side+str(index),"vertex_start":start,"vertex_count":len(s.data["positions"])-start})
             s.tube("Highward instep dark articulation "+side+str(index),rings[1],[.005]*4,[.004]*4,[skin]*4,1,sides=4,axis=(0,0,1))
+    highward_plain_fittings(s)
 
 
 def highward_helmet():
-    """Face-clear reinforced helm with a modest raised keel, gold frame and order seal."""
+    """Face-clear steel helmet with a practical low keel and one small order seal."""
     s=oathkeeper_helmet()
     for piece in s.pieces:
         if any(label in piece["name"] for label in ["brow reinforcement","flush crown reinforcing strap","small brow rivet"]):
@@ -720,6 +732,7 @@ def highward_helmet():
     for sign in [-1,1]:
         s.tube("Highward temple gold binding "+str(sign),[np.array([sign*.227,.108,-.015]),np.array([sign*.225,.303,-.015])],
                [.008]*2,[.010]*2,["Head_M"]*2,4,sides=4)
+    highward_plain_fittings(s)
     return s
 
 
@@ -966,7 +979,7 @@ def censure_plate(s,label,points,skins,color=0,center_skin=None):
 
 
 def censure_shoulder(s,side,sign):
-    """An angular close-fitting steel cap over a short oxblood battle mantle."""
+    """An asymmetric layered judgment mantle, with the larger pauldron on the weapon arm."""
     shoulder="Shoulder_"+side;scap="Scapula_"+side;root=s.B[shoulder]
     for label,color,rows in [
             ("battle mantle",6,[(-.058,.069,.131),(.101,.081,.140),(.216,.012,.127)]),
@@ -994,10 +1007,25 @@ def censure_shoulder(s,side,sign):
                    [.006]*3,[.005]*3,[shoulder]*3,1 if color==0 else 7,sides=4,axis=(0,1,0))
     for z in [-.094,.094]:
         s.ellipsoid("Censure shoulder fastening "+side+str(z),offset(root,x=sign*.043,y=.099,z=z),(.010,.009,.009),shoulder,3,sides=6)
+    # Armor grows above and outside the shoulder, preserving the native torso and head scale.
+    layers=3 if side=="R" else 2
+    for layer in range(layers):
+        reach=.235+layer*.076
+        high=.218+layer*.035 if side=="R" else .162+layer*.025
+        coords=[(.015+layer*.050,.125,.157),(.105+layer*.060,high,.169),
+                (reach,high+.057,.123),(reach+.036,.028-layer*.026,.140),
+                (.145+layer*.063,-.028-layer*.034,.178)]
+        front=[root+np.array([sign*x,y,z]) for x,y,z in coords]
+        censure_plate(s,"Censure judgment wing "+side+str(layer),front,[shoulder]*5,7 if layer%2==0 else 0)
+        s.tube("Censure gilded wing blade "+side+str(layer),front[1:4],
+               [.013]*3,[.007]*3,[shoulder]*3,4,sides=4)
+        # A raised red lozenge gives the dark plate a readable inner plane.
+        center=root+np.array([sign*(.125+layer*.062),high-.044,.190])
+        s.ellipsoid("Censure wing crimson inlay "+side+str(layer),center,(.030,.058,.007),shoulder,6,sides=4)
 
 
 def censure_armor(s,male):
-    """A segmented angular cuirass and compact battle mantle over oxblood cloth."""
+    """Endgame judgment armor with gilded chevrons, a blade mantle and deep crimson cloth."""
     novice_armor(s,male)
     mercy_remove_underlayers(s,["Novice coat skirt"])
     for uv in s.data["uvs"]:
@@ -1012,11 +1040,11 @@ def censure_armor(s,male):
         censure_plate(s,"Censure overlapping cuirass chevron "+str(row),points,skins,0 if row!=1 else 1,
                       center_skin=mercy_torso_skin(s,float(np.mean(points,axis=0)[1])))
         edge=[offset(points[i],z=.006) for i in [3,4,5]]
-        s.tube("Censure slate cuirass folded lip "+str(row),edge,[.008]*3,[.005]*3,[skins[i] for i in [3,4,5]],1,sides=4)
+        s.tube("Censure gold judgment chevron "+str(row),edge,[.012]*3,[.007]*3,[skins[i] for i in [3,4,5]],4,sides=4)
     # An oxblood heraldic stitch carries a modest order seal, with no giant gilded relief.
     mark=offset(chest,y=.145,z=.202)
-    s.ellipsoid("Censure oxblood chest badge",mark,(.037,.047,.008),"Chest_M",6,sides=4)
-    s.ellipsoid("Censure bronze badge binding",offset(mark,z=.009),(.008,.031,.004),"Chest_M",3,sides=4)
+    s.ellipsoid("Censure oxblood chest badge",mark,(.049,.069,.010),"Chest_M",6,sides=4)
+    emblem(s,offset(mark,z=.017),"Chest_M",.053)
     s.tube("Censure low battle collar",[offset(B["Neck_M"],y=-.043),offset(B["Neck_M"],y=-.007)],
            [.124,.111],[.083,.075],["Neck_M"]*2,7,sides=10)
     s.ellipsoid("Censure small bronze belt clasp",offset(root,y=.086,z=.159),(.028,.025,.009),"Root_M",3,sides=4)
@@ -1037,15 +1065,18 @@ def censure_armor(s,male):
         lower={"Root_M":.15,hip:.85};skins=["Root_M","Root_M",lower,lower]
         censure_plate(s,"Censure angled hip tasset "+side,points,skins,0)
         s.tube("Censure oxblood tasset binding "+side,[points[2],points[3]],[.011]*2,[.006]*2,[lower]*2,6,sides=4)
-        cloth=[root+np.array([sign*.033,.059,.181]),root+np.array([sign*.113,.056,.170]),
-               root+np.array([sign*.126,-.308,.185]),root+np.array([sign*.093,-.356,.200]),
-               root+np.array([sign*.037,-.311,.191])]
-        cloth_skins=["Root_M","Root_M",{hip:.85,knee:.15},{hip:.85,knee:.15},{hip:.85,knee:.15}]
+        cloth=[root+np.array([sign*.024,.059,.186]),root+np.array([sign*.158,.056,.177]),
+               root+np.array([sign*.193,-.475,.207]),root+np.array([sign*.105,-.548,.225]),
+               root+np.array([sign*.038,-.486,.215])]
+        cloth_skins=["Root_M","Root_M",{hip:.6,knee:.4},{hip:.55,knee:.45},{hip:.6,knee:.4}]
         begin=len(s.data["positions"])
         oathkeeper_panel(s,"Censure divided oxblood battle cloth "+side,cloth,cloth_skins,6,.008)
         for i in range(begin,len(s.data["positions"])):
             if int(s.data["uvs"][i][0]*len(PALETTE))==1:s.data["uvs"][i][0]=(6+.5)/len(PALETTE)
-        s.tube("Censure dark pointed cloth hem "+side,cloth[2:],[.007]*3,[.004]*3,cloth_skins[2:],7,sides=4)
+        s.tube("Censure gilt pointed cloth hem "+side,cloth[1:],[.011]*4,[.005]*4,cloth_skins[1:],4,sides=4)
+        # Vertical judgment piping is broad enough to survive the ordinary combat camera.
+        s.tube("Censure tabard judgment inlay "+side,[root+np.array([sign*.084,-.015,.198]),root+np.array([sign*.107,-.397,.224])],
+               [.013,.015],[.005,.005],[hip,{hip:.65,knee:.35}],4,sides=4)
         # Rear hip guards retain the native backpack and leave the back leg silhouette light.
         rear=[root+np.array([sign*.045,.063,-.107]),root+np.array([sign*.184,.062,-.095]),
               root+np.array([sign*.194,-.161,-.121]),root+np.array([sign*.072,-.188,-.135])]
@@ -1081,6 +1112,10 @@ def censure_boots(s):
         points=[offset(high,x=-.086,z=.110),offset(high,y=.020,z=.130),offset(high,x=.086,z=.110),
                 offset(low,x=.074,z=.110),offset(low,y=-.022,z=.126),offset(low,x=-.074,z=.110)]
         censure_plate(s,"Censure tall folded shin armor "+side,points,[skin]*3+[ankle]*3,0)
+        s.tube("Censure gold greave judgment edge "+side,[offset(points[i],z=.006) for i in [0,1,2]],
+               [.010]*3,[.006]*3,[skin]*3,4,sides=4)
+        s.tube("Censure crimson greave channel "+side,[offset(high,y=-.025,z=.139),offset(low,y=.020,z=.139)],
+               [.020,.012],[.005,.005],[skin,ankle],6,sides=4)
         for sign in [-1,1]:
             s.ellipsoid("Censure greave bronze fastening "+side+str(sign),offset(high,x=sign*.059,y=-.007,z=.124),(.008,.008,.006),skin,3,sides=6)
         floor=B[toe][1]-.044
@@ -1103,14 +1138,14 @@ def censure_boots(s):
 
 
 def censure_helmet():
-    """Faceted closed crown and strong open brow, without visor, horns or a tall crest."""
+    """Narrow open judgment helm with a gold crowned brow and a swept crimson plume."""
     s=Surface(["Head_M"],np.zeros((1,3)));count=12;rings=[]
     for row,(radius,height) in enumerate([(1.,0),(.98,.326),(.71,.426),(.31,.464)]):
         ring=[]
         for j in range(count):
             angle=2*np.pi*j/count;x,z=np.cos(angle),np.sin(angle)
             base=.107+.159*max(z,0)+.010*max(-z,0)
-            ring.append(np.array([x*.226*radius,base if row==0 else height,z*.212*radius-.029]))
+            ring.append(np.array([x*.220*radius,base if row==0 else height,z*.212*radius-.029]))
         rings.append(ring)
     begin=len(s.data["positions"])
     for row in range(3):
@@ -1128,11 +1163,21 @@ def censure_helmet():
     s.pieces.append({"name":"Censure angular dark guardian crown","vertex_start":begin,"vertex_count":len(s.data["positions"])-begin})
     brow=[np.array([-.193,.212,.091]),np.array([-.120,.288,.157]),np.array([0,.311,.190]),
           np.array([.120,.288,.157]),np.array([.193,.212,.091])]
-    s.tube("Censure strong slate brow reinforcement",brow,[.020]*5,[.011]*5,["Head_M"]*5,1,sides=4,axis=(0,1,0))
+    s.tube("Censure crowned gold brow",brow,[.021]*5,[.012]*5,["Head_M"]*5,4,sides=4,axis=(0,1,0))
     s.tube("Censure oxblood nape lining",[np.array([0,.104,-.193]),np.array([0,.180,-.209])],
            [.172,.187],[.025,.025],["Head_M"]*2,6,sides=8)
     for sign in [-1,1]:
         s.ellipsoid("Censure small bronze brow rivet "+str(sign),np.array([sign*.117,.288,.171]),(.010,.010,.005),"Head_M",3,sides=6)
+        points=[np.array([sign*.068,.314,.183]),np.array([sign*.137,.294,.161]),
+                np.array([sign*.146,.469,.107]),np.array([sign*.095,.408,.153])]
+        censure_plate(s,"Censure rising crown tine "+str(sign),points,["Head_M"]*4,4)
+    emblem(s,np.array([0,.345,.209]),"Head_M",.060)
+    s.tube("Censure gold plume socket",[np.array([0,.454,.116]),np.array([0,.472,-.121])],
+           [.038,.034],[.020,.020],["Head_M"]*2,4,sides=6)
+    # A swept faceted crest creates vertical rank without widening the native face.
+    s.tube("Censure tall swept crimson plume",[np.array([0,.485,.089]),np.array([0,.675,.017]),
+               np.array([0,.748,-.137]),np.array([0,.687,-.294]),np.array([0,.559,-.380])],
+           [.029,.055,.050,.036,.010],[.041,.082,.084,.062,.016],["Head_M"]*5,6,sides=6)
     return s
 
 

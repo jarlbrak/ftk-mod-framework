@@ -1,5 +1,20 @@
 # Original Paladin equipment
 
+Highward now uses a compact plain steel hammer and a squared blue shield with
+restrained silver fittings. Censure keeps its heavy toothed hammer and gains
+a taller crowned tower shield with black and crimson heraldry, stepped gold
+inlays and modeled rear bracing. The silhouettes distinguish midgame equipment
+from upper-tier judgment equipment beyond their palette differences.
+
+Targeted rebuilds preserve other sets' files:
+
+```sh
+blender --background --factory-startup --python-exit-code 1 \
+  --python art-experiments/paladin-equipment/build_blender.py -- --sets=highward,censure
+blender --background --factory-startup --python-exit-code 1 \
+  --python art-experiments/paladin-equipment/render_icons.py -- --sets=highward,censure
+```
+
 Eighteen newly authored low-poly equipment meshes: six one-handed hammers, six
 two-handed hammers and six shields. Each family contains starter Novice, early
 Oathkeeper, midgame Highward, and three endgame alternatives: Mercy, Censure and

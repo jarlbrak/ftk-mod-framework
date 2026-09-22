@@ -90,6 +90,9 @@ def hammer(two_handed, tier):
     if tier in (3, 5):
         famous_endgame_hammer(two_handed, tier)
         return
+    if tier == 2:
+        highward_hammer(two_handed)
+        return
     length = 1.5 if two_handed else .88
     width = (.74 if two_handed else .50) + min(tier, 3)*.065
     height = .32 + min(tier, 3)*.035
@@ -230,9 +233,68 @@ def novice_shield():
     box("Leather back grip", (0,.116,0), (.060,.060,.34), 0,.015)
 
 
+def highward_hammer(two_handed):
+    """A compact working steel head leaves the ceremonial mass to the upper tiers."""
+    length=1.5 if two_handed else .88
+    width=.62 if two_handed else .45
+    cylinder("Highward ash haft",(0,0,length*.42),.043 if two_handed else .036,length*.93,3)
+    for i in range(9 if two_handed else 6):
+        cylinder("Highward blue grip",(0,0,.06+i*.043),.050 if two_handed else .043,.027,5)
+    cylinder("Highward plain steel pommel",(0,0,-.018),.064,.058,1,8)
+    cylinder("Highward steel neck",(0,0,length-.14),.060,.15,1,8)
+    box("Highward square steel head",(0,0,length),(width,.235,.275),1,.028)
+    for side in [-1,1]:
+        box("Highward flat strike face",(side*width*.50,0,length),(.047,.252,.294),2,.012)
+    box("Highward blue head binding",(0,0,length),(.093,.253,.288),5,.010)
+    plate("Highward small order stamp",[(0,length-.054),(.033,length),(0,length+.054),(-.033,length)],.012,-.141,2)
+
+
+def highward_shield():
+    """Squared practical guard with a steel rim, blue field and one modest silver device."""
+    outline=[(-.33,-.49),(.33,-.49),(.39,-.41),(.39,.43),(.33,.49),(-.33,.49),(-.39,.43),(-.39,-.41)]
+    plate("Highward squared steel rim",outline,.090,0,1)
+    plate("Highward blue guard field",[(x*.90,z*.92) for x,z in outline],.026,-.057,5)
+    plate("Highward blue reverse lining",[(x*.88,z*.90) for x,z in outline],.014,.052,5)
+    box("Highward plain vertical brace",(0,-.081,0),(.040,.022,.79),2,.006)
+    plate("Highward small silver order seal",[(0,-.13),(.095,.025),(0,.18),(-.095,.025)],.018,-.100,2)
+    box("Highward seal split",(0,-.114,.025),(.018,.015,.164),5,.003)
+    for side in [-1,1]:
+        for z in [-.39,.39]:gem("Highward steel corner rivet",(side*.29,-.058,z),.020,2)
+    for z in [-.17,.17]:box("Highward back strap anchor",(0,.068,z),(.21,.040,.048),3,.008)
+    box("Highward leather grip",(0,.12,0),(.068,.064,.36),0,.015)
+
+
+def censure_shield():
+    """Tall crowned shield whose dark heraldic field and gold architecture signal endgame."""
+    outline=[(0,-.86),(.36,-.64),(.48,-.20),(.48,.51),(.34,.66),(.16,.66),(0,.79),
+             (-.16,.66),(-.34,.66),(-.48,.51),(-.48,-.20),(-.36,-.64)]
+    plate("Censure tower gilt frame",outline,.120,0,4)
+    plate("Censure black tower field",[(x*.91,z*.93) for x,z in outline],.033,-.084,7)
+    # The shield's reverse is prominent beside the native three-quarter avatar.
+    plate("Censure black tower reverse",[(x*.91,z*.93) for x,z in outline],.018,.072,7)
+    plate("Censure crimson reverse heraldry",[(-.135,.57),(.135,.57),(.161,-.53),(0,-.71),(-.161,-.53)],.017,.088,6)
+    plate("Censure crimson heraldic pale",[(-.135,.57),(.135,.57),(.161,-.53),(0,-.71),(-.161,-.53)],.024,-.114,6)
+    for side in [-1,1]:
+        plate("Censure stepped gold judgment wing",[(side*.17,.37),(side*.39,.50),(side*.37,.35),
+              (side*.21,.23),(side*.34,.16),(side*.30,.05),(side*.16,.17)],.025,-.121,4)
+        plate("Censure dark crown blade",[(side*.27,.61),(side*.40,.80),(side*.40,.54)],.086,-.014,7)
+        for z in [-.41,.13,.48]:gem("Censure gilt tower rivet",(side*.386,-.087,z),.023,4)
+        plate("Censure lower gold judgment chevron",[(side*.04,-.51),(side*.25,-.37),(side*.26,-.43),(side*.04,-.59)],.024,-.126,4)
+    sigil(.17,-.160,.185,4)
+    gem("Censure crimson crest jewel",(0,-.095,.65),.064,6)
+    for z in [-.22,.24]:box("Censure back brace foot",(0,.090,z),(.29,.055,.072),3,.012)
+    box("Censure wrapped tower grip",(0,.159,0),(.080,.075,.45),0,.020)
+
+
 def shield(tier):
     if tier == 0:
         novice_shield()
+        return
+    if tier == 2:
+        highward_shield()
+        return
+    if tier == 4:
+        censure_shield()
         return
     extent = .42 + min(tier, 3)*.045
     top = .56 + min(tier, 3)*.035
@@ -301,6 +363,11 @@ def aim(obj, point):
 
 
 def build():
+    selected_arg=next((arg.split('=',1)[1] for arg in sys.argv if arg.startswith('--sets=')),None)
+    selected_sets=set(selected_arg.split(',')) if selected_arg else None
+    if selected_sets is not None:
+        assert selected_sets and selected_sets<=set(NAMES)
+    previous=json.loads((OUT/'manifest.json').read_text()) if selected_sets else None
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
     for color in COLORS:
@@ -320,6 +387,7 @@ def build():
     records=[]
     for row,family in enumerate(["hammer-1h","hammer-2h","shield"]):
         for tier,name in enumerate(NAMES):
+            if selected_sets and name not in selected_sets:continue
             pieces.clear()
             if family == "shield": shield(tier)
             else: hammer(family == "hammer-2h",tier)
@@ -355,6 +423,9 @@ def build():
     scene.render.image_settings.file_format="PNG"
     scene.render.filepath=str(OUT/"paladin-equipment-lineup.png")
     bpy.ops.wm.save_as_mainfile(filepath=str(OUT/"paladin-equipment-studio.blend"))
+    if previous:
+        revised={record['key']:record for record in records}
+        records=[revised.get(record['key'],record) for record in previous['assets']]
     files={}
     for record in records:
         for suffix in [".glb",".source.json",".pieces.json"]:
