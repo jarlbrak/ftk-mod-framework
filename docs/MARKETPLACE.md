@@ -2,11 +2,20 @@
 
 The title-screen Mods panel is the entry point for free community content. Discover lists curated packages; Installed distinguishes managed downloads, bundled content and manually installed mods. The catalog starts empty. Test fixtures and the interface preview's concept listings are not downloadable community mods.
 
-The interface puts gameplay descriptions and the next available action first. Mod cards distinguish what is enabled now from changes waiting for a restart. Package metadata and dependency details are available from secondary views. Required components stay separate from the gameplay list, under Components in Installed. Settings & Help is reachable from the footer of every view, including while an operation is running, and holds marketplace and registration status, the next-launch review, restore and the mod-list export.
+The mod selector follows the native Create Game screen. Select a mod in the left list to see its large cover image, description, features and metadata on the right. The lower parchment panels scroll when an author supplies longer text. Mod Options shows the installed state and the next available action; changes still go through the existing review and apply after restart. Required components stay separate under Components. Settings holds marketplace and registration status, the next-launch review, restore and the mod-list export.
+
+The framework creates its own UI objects and borrows the installed game's fonts, sprites and visual properties. It does not activate the adventure selector or copy its gameplay callbacks. The composition fits both dimensions of the window; narrow displays retain the whole menu.
 
 Back is contextual. It leaves an open requirements page, gallery or release review first, then returns to the view and mod selection it came from, and closes the panel from a tab with nothing behind it. Returning to a view already behind you unwinds to it instead of stacking another copy, so Back always reaches the title screen in a bounded number of presses.
 
 Players review the complete package/dependency plan before preparing a change. Prepared content applies on the next game launch, including launches from the original Steam entry. Installing, updating, disabling and removing managed packages never changes registrations inside the running game. Updates are explicit; cancellation leaves the active content unchanged. Rollback selects the retained previous generation for a subsequent launch.
+
+Next launch remains available with no queued changes and shows the selected mod
+versions and ON/OFF state. A deliberately empty selection is shown as no community
+mods selected. Installed packages can be toggled or removed after their listing
+leaves the catalog: the helper uses the exact descriptor retained in the active
+generation, while preserving validation and revocation checks. New installations
+still require a matching catalog entry.
 
 Existing saves can depend on the current mod set, especially playable classes with positional IDs. Start a new run when changing content. Marketplace operations do not edit saves. A managed-set export records exact versions and hashes, but it does not prove compatibility with saves or another player's complete installation.
 
@@ -34,9 +43,9 @@ See [mod versioning](MOD-VERSIONING.md) for the manifest compatibility policy, m
 
 ## Preview images
 
-A catalog listing can provide up to three curated PNG or JPEG images in its `screenshots` list. These may be item renders, character portraits, artwork, or in-game screenshots that accurately represent the mod. Put the cover image first; the interface uses it for the card thumbnail and main preview, with the remaining images available in the gallery. Preview images are optional.
+A catalog listing can provide up to three curated PNG or JPEG images in its `screenshots` list. These may be item renders, character portraits, artwork, or in-game screenshots that accurately represent the mod. Put the cover image first; it fills the large preview area above the metadata. Next image cycles through additional previews. Preview images are optional; a mod without artwork displays its name in the preview area.
 
-Host previews as approved repository release assets. Each image must be at most 2 MiB, no more than 4096 pixels on either side, and at most 8,388,608 pixels total. The helper validates and caches images before the interface displays them. Keep labels and important details readable at thumbnail size; use the larger gallery for inspection. Credit image creators and include the rights to distribute their work during review.
+Host previews as approved repository release assets. Each image must be at most 2 MiB, no more than 4096 pixels on either side, and at most 8,388,608 pixels total. The helper validates and caches images before the interface displays them. Landscape artwork near 16:9 best fills the native preview area; other proportions retain their aspect ratio. Credit image creators and include the rights to distribute their work during review.
 
 
 ## Storage and recovery
@@ -48,6 +57,17 @@ The framework selects one generation before discovery, merges it with manual con
 Do not manually edit activation records or remove generations while the game runs. If helper startup times out, the framework keeps the previously captured generation for that process and reconciles the disk state on a later launch. Catalog requests and archive downloads run outside Unity's main thread.
 
 ## Validation evidence
+
+The native Create Game-style selector was visually checked on 2026-09-22 in the
+normal macOS Steam installation, in a 1280x720 window (2560x1440 rendering on a
+Retina display). Paladin's banner, selected row, complete description and metadata
+were visible together. Keyboard focus traversal, empty Browse, removal review
+and cancellation were exercised during the same UI revision. The final displayed
+framework DLL was `3ca324c596f16b048f61dd52b0794288cd77388615511078c4d085f76a081eac`.
+Build, PlayerMods tests and source review passed. Narrow aspect ratios, long-text
+scrolling and offline pagination have source review coverage, not recorded live
+coverage. The later [lifecycle trial](paladin/MARKETPLACE-LIFECYCLE.md) covers
+enable, disable, uninstall, cached reinstall and populated next-launch information.
 
 Helper unit tests run without game files on macOS, Linux and Windows CI. Installer fixtures exercise release hashes and platform helper placement without launching Steam. Game runtime validation still requires an installed copy of For The King; cross-compilation and PowerShell tests on macOS are not Windows/Proton gameplay evidence.
 

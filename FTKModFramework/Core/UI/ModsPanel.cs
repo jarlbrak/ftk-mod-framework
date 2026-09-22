@@ -42,11 +42,11 @@ namespace FTKModFramework.Core.UI
         private int _imagePage;
         private bool _showAdvanced;
         private static Font _serif;
-        private static readonly Color Paper = new Color(0.94f, 0.925f, 0.88f, 1f);
-        private static readonly Color CardPaper = new Color(0.985f, 0.975f, 0.945f, 1f);
-        private static readonly Color Ink = new Color(0.17f, 0.18f, 0.16f, 1f);
-        private static readonly Color MutedInk = new Color(0.34f, 0.38f, 0.36f, 1f);
-        private static readonly Color Gold = new Color(0.48f, 0.32f, 0.07f, 1f);
+        private static readonly Color Paper = new Color(0.075f, 0.07f, 0.065f, 1f);
+        private static readonly Color CardPaper = new Color(0.20f, 0.19f, 0.18f, 1f);
+        private static readonly Color Ink = new Color(0.94f, 0.91f, 0.83f, 1f);
+        private static readonly Color MutedInk = new Color(0.84f, 0.82f, 0.76f, 1f);
+        private static readonly Color Gold = new Color(0.91f, 0.83f, 0.65f, 1f);
         private static readonly Color WarmBorder = new Color(0.78f, 0.75f, 0.68f, 1f);
         private static bool PanelBusy { get { return MarketplaceRuntime.Busy || FrameworkUpdateRuntime.Busy; } }
         private const string Alphabet = " abcdefghijklmnopqrstuvwxyz0123456789-";
@@ -130,6 +130,7 @@ namespace FTKModFramework.Core.UI
 
         public static void Open()
         {
+            CaptureNativeSkin();
             if (_instance == null) _instance = Build();
             else _instance.Render();
             FTKInput.Instance.SetFocus(_instance, null, true, null, false);
@@ -152,9 +153,11 @@ namespace FTKModFramework.Core.UI
                 CanvasScaler scaler = root.AddComponent<CanvasScaler>();
                 scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
                 scaler.referenceResolution = new Vector2(1920f, 1080f);
+                scaler.matchWidthOrHeight = 1f;
+                scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
                 root.AddComponent<GraphicRaycaster>();
                 Image background = root.AddComponent<Image>();
-                background.color = new Color(0.035f, 0.03f, 0.02f, 0.72f);
+                background.color = Color.clear;
                 Stretch(background.rectTransform);
                 ModsPanel panel = root.AddComponent<ModsPanel>();
                 GameObject container = NewChild("Content", root.transform);
@@ -345,31 +348,26 @@ namespace FTKModFramework.Core.UI
             }
             _controls.Clear();
             ReleasePreviews();
-            TextLine("For The King / Mods", 38, 58).color = Gold;
-            Rule();
-            AddTabs();
-            if (ModsPanelNavigation.IsBrowse(_view))
+            bool browse = ModsPanelNavigation.IsBrowse(_view);
+            _rootContent.GetComponent<VerticalLayoutGroup>().enabled = !browse;
+            _rootContent.GetComponent<Image>().enabled = !browse;
+            _rootContent.GetComponent<Outline>().enabled = !browse;
+            _rootContent.GetComponent<RectTransform>().sizeDelta = new Vector2(1580, browse ? 900 : 1010);
+            if (browse) BuildNativeBrowse();
+            else
             {
-                Transform left;
-                Transform right;
-                CreateColumns(out left, out right);
-                _container = left;
-                if (_view == "discover") Discover(); else Installed(_view == "components");
-                _container = right;
-                if (_package != null || _entry != null) Details();
-                else
-                {
-                    EmptyDetails();
-                }
-                _container = _rootContent;
+                StyleNativePanel(_rootContent.gameObject, false);
+                TextLine("Mods", 38, 58);
+                Rule();
+                AddTabs();
+                if (_view == "updates") BuildUpdates();
+                else if (_view == "details") Details();
+                else if (_view == "confirm") Confirmation();
+                else if (_view == "search") Search();
+                else if (_view == "maintenance") Maintenance();
+                else if (_view == "settings") SettingsAndHelp();
+                AddFooter();
             }
-            else if (_view == "updates") BuildUpdates();
-            else if (_view == "details") Details();
-            else if (_view == "confirm") Confirmation();
-            else if (_view == "search") Search();
-            else if (_view == "maintenance") Maintenance();
-            else if (_view == "settings") SettingsAndHelp();
-            AddFooter();
             if (gameObject.activeInHierarchy)
             {
                 UpdateSelectables();
@@ -385,8 +383,6 @@ namespace FTKModFramework.Core.UI
 
         private void Installed(bool components)
         {
-            TextLine(components ? "Required components" : "Your installed mods", 25, 42);
-            TextLine(components ? "Supporting content used by your community mods." : "Choose a mod to see what it adds.", 23, 42);
             if (MarketplaceRuntime.RegistrationNotice != null)
                 TextLine("Some content did not load correctly. Open Settings & Help for the error and recovery options.", 22, 76).color = Gold;
             List<ModEntry> entries = new List<ModEntry>();
@@ -411,7 +407,7 @@ namespace FTKModFramework.Core.UI
             }
             if (entries.Count == 0) TextLine(components ? "No extra components are needed." : "No mods installed yet.", 30, 90);
             if ((_entry == null && _package == null) && entries.Count > 0) SelectEntry(entries[0], false);
-            int perPage = MarketplaceRuntime.RegistrationNotice == null ? 3 : 2;
+            int perPage = MarketplaceRuntime.RegistrationNotice == null ? 6 : 4;
             int pages = Math.Max(1, (entries.Count + perPage - 1) / perPage);
             _page = Math.Min(_page, pages - 1);
             for (int i = _page * perPage; i < Math.Min(entries.Count, (_page + 1) * perPage); i++)
@@ -461,30 +457,6 @@ namespace FTKModFramework.Core.UI
 
         private void Discover()
         {
-            TextLine("Find your next adventure", 25, 42);
-            ActionButton(_search.Length == 0 ? "Search mods" : "Search: " + _search, delegate { Navigate("search"); }, true, 52);
-            Transform browse = _container;
-            string[] categoryLabels = { "All", "Items", "Weapons", "Abilities", "Classes", "Enemies", "Encounters" };
-            for (int row = 0; row < 2; row++)
-            {
-                _container = browse;
-                _container = HorizontalRow("Categories", 38);
-                for (int n = row * 4; n < Math.Min(categoryLabels.Length, (row + 1) * 4); n++)
-                {
-                    int choice = n;
-                    Button chip = ActionButton(categoryLabels[n], delegate { _category = choice; _page = 0; _entry = null; _package = null; Refresh(); }, true, 36);
-                    SetWidth(chip.gameObject, n == 6 ? 190 : 170);
-                    chip.GetComponentInChildren<Text>().fontSize = 20;
-                    if (_category == n) Border(chip.gameObject, Gold, 2);
-                }
-                if (row == 1)
-                {
-                    Button refresh = ActionButton("Refresh", LoadCatalog, !PanelBusy, 36);
-                    SetWidth(refresh.gameObject, 170);
-                    refresh.GetComponentInChildren<Text>().fontSize = 20;
-                }
-            }
-            _container = browse;
             MarketplaceResult catalog = MarketplaceRuntime.Catalog;
             if (MarketplaceRuntime.CatalogUnsupported && !PanelBusy)
             {
@@ -504,7 +476,7 @@ namespace FTKModFramework.Core.UI
                     TextLine(Short(MarketplaceRuntime.Notice, 240), 22, 110).color = Gold;
                 return;
             }
-            TextLine(catalog.Status == "offline" ? "Offline / saved catalog from " + FriendlyAge(catalog.CatalogAgeSeconds) + " ago" : "Free mods, reviewed before publication", 20, 36);
+            if (catalog.Status == "offline") TextLine("Offline / saved " + FriendlyAge(catalog.CatalogAgeSeconds) + " ago", 20, 36);
             List<PackageDescriptor> results = new List<PackageDescriptor>();
             if (catalog.Packages != null) foreach (PackageDescriptor package in LatestListings(catalog.Packages))
             {
@@ -519,12 +491,14 @@ namespace FTKModFramework.Core.UI
                 Spacer(28);
                 bool filtered = _search.Length > 0 || _category != 0;
                 TextLine(filtered ? "No matching mods" : "More adventures are on the way", 32, 84);
-                TextLine(filtered ? "Try a different search or category." : "Community packages will appear here once published. Your included Adventure Pack is ready in Installed.", 24, 114);
+                TextLine(filtered ? "Try a different search or category." : "Community packages will appear here once published. Manage your existing mods in Installed.", 24, 114);
                 if (filtered) ActionButton("Clear filters", delegate { _search = ""; _category = 0; _page = 0; _entry = null; _package = null; Refresh(); });
             }
-            int pages = Math.Max(1, (results.Count + 1) / 2);
+            if (_package == null && results.Count > 0) _package = results[0];
+            int perPage = catalog.Status == "offline" ? 5 : 6;
+            int pages = Math.Max(1, (results.Count + perPage - 1) / perPage);
             _page = Math.Min(_page, pages - 1);
-            for (int i = _page * 2; i < Math.Min(results.Count, (_page + 1) * 2); i++)
+            for (int i = _page * perPage; i < Math.Min(results.Count, (_page + 1) * perPage); i++)
             {
                 PackageDescriptor package = results[i];
                 PackageDescriptor active = MarketplaceRuntime.FindManaged(package.ModGuid);
@@ -581,6 +555,7 @@ namespace FTKModFramework.Core.UI
                 AdvancedDetails();
                 return;
             }
+            if (!bundled) TextLine(Short(OverviewCredit(), 64), 20, 28);
             if (previews.Count > 0)
             {
                 GameObject hero = NewChild("Mod preview", _container);
@@ -588,7 +563,7 @@ namespace FTKModFramework.Core.UI
                 AddPreviewImage(hero.transform, previews[0]);
                 Button gallery = LinkButton("View " + (bundled ? "artwork" : "previews") + " (" + previews.Count + ")", delegate { _showGallery = true; _imagePage = 0; Refresh(); });
                 gallery.GetComponent<LayoutElement>().minHeight = gallery.GetComponent<LayoutElement>().preferredHeight = 32;
-                TextLine(bundled ? "• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run." : Short(_package != null ? _package.Description : _entry.Description, 90), 22, bundled ? 78 : 52);
+                TextLine(bundled ? "• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run." : Short(_package != null ? _package.Description : _entry.Description, 135), 22, 78);
             }
             else if (bundled)
             {
@@ -600,16 +575,8 @@ namespace FTKModFramework.Core.UI
             }
             else
             {
-                string credit = _package != null ? "By " + Declared(_package.Author) + " / v" + Declared(_package.Version) : "By " + Declared(_entry.Author);
-                TextLine(Short(credit, 60), 22, 28);
                 string description = _package != null ? _package.Description : _entry.Description;
                 TextLine(Short(description, 135), 24, 84);
-                if (_package != null && _package.ContentChanges != null && _package.ContentChanges.Length > 0)
-                {
-                    TextLine("What it adds", 28, 36).color = Gold;
-                    TextLine("• " + Short(_package.ContentChanges[0], 85), 22, 52);
-                }
-                else Spacer(24);
             }
             Rule();
             if (_package == null)
@@ -638,21 +605,28 @@ namespace FTKModFramework.Core.UI
             else
             {
                 PackageDescriptor p = _package;
-                blocks.Add("About\n" + Declared(p.Description) + "\nBy " + Declared(p.Author) + "\nVersion " + Declared(p.Version) + " / " + Declared(p.License));
-                blocks.Add("What it adds\n" + Join(p.ContentChanges) + "\nLatest change\n" + Declared(p.Changelog));
-                StringBuilder requirements = new StringBuilder("Compatibility\n");
-                requirements.Append(CompatibilityText(p)).Append("\nFramework: ").Append(Declared(p.FrameworkVersion))
-                    .Append(" / ").Append(Join(p.Platforms)).Append("\n");
+                // The descriptor owns the listing. Show each field once, keeping full text
+                // available here only when its overview preview needed shortening.
+                StringBuilder details = new StringBuilder();
+                if (p.Description != null && p.Description.Length > 135) details.Append(p.Description).Append("\n");
+                string credit = OverviewCredit();
+                if (credit.Length > 64) details.Append(credit).Append("\n");
+                AppendDetailSection(details, "What it adds", p.ContentChanges);
+                string compatibility = CompatibilityText(p);
+                if (!string.IsNullOrEmpty(compatibility)) details.Append(compatibility).Append("\n");
+                details.Append("Framework ").Append(Declared(p.FrameworkVersion));
+                if (p.Platforms != null && p.Platforms.Length > 0) details.Append(" / ").Append(string.Join(", ", p.Platforms));
+                details.Append("\n");
                 if (p.Requirements != null && p.Requirements.Length > 0)
-                    requirements.Append(Join(p.Requirements)).Append("\n");
-                if (p.Dependencies == null || p.Dependencies.Length == 0) requirements.Append("No extra components.");
-                else
+                    AppendDetailSection(details, "Requirements", p.Requirements);
+                if (p.Dependencies != null && p.Dependencies.Length > 0)
                 {
-                    requirements.Append("Required components:\n");
+                    details.Append("Required components:\n");
                     foreach (PackageSelection dependency in p.Dependencies)
-                        requirements.Append(DependencyName(dependency)).Append(" / v").Append(dependency.Version).Append("\n");
+                        details.Append(DependencyName(dependency)).Append(" / v").Append(dependency.Version).Append("\n");
                 }
-                blocks.Add(requirements.ToString());
+                if (!string.IsNullOrEmpty(p.Changelog)) details.Append("Latest change\n").Append(p.Changelog).Append("\n");
+                blocks.Add(details.ToString().TrimEnd());
             }
             if (_package == null && _entry != null && !_entry.IsBundledDemo)
                 blocks.Add("Declared framework: " + Declared(_entry.FrameworkVersion) + "\n" +
@@ -665,6 +639,25 @@ namespace FTKModFramework.Core.UI
                 LinkButton("View previews", delegate { _showAdvanced = false; _showGallery = true; _imagePage = 0; Refresh(); });
             if (_package != null && MarketplaceRuntime.FindManaged(_package.ModGuid) != null)
                 LinkButton("Remove this community mod...", delegate { ReviewSelection(_package, true, false); }, !PanelBusy);
+        }
+
+        private string OverviewCredit()
+        {
+            if (_package == null) return "By " + Declared(_entry.Author) + " / v" + Declared(_entry.Version);
+            return "By " + Declared(_package.Author) + " / v" + Declared(_package.Version) +
+                (string.IsNullOrEmpty(_package.License) ? "" : " / " + _package.License);
+        }
+
+        private static void AppendDetailSection(StringBuilder text, string heading, string[] values)
+        {
+            if (values == null) return;
+            bool addedHeading = false;
+            foreach (string value in values)
+            {
+                if (string.IsNullOrEmpty(value)) continue;
+                if (!addedHeading) { text.Append(heading).Append("\n"); addedHeading = true; }
+                text.Append("• ").Append(value).Append("\n");
+            }
         }
 
         /// <summary>Names a required component from a descriptor that declares the exact version.
@@ -722,7 +715,7 @@ namespace FTKModFramework.Core.UI
         {
             string requirement = ModFrameworkCompatibility.Reason(package.FrameworkVersion, Plugin.Version);
             if (requirement != null) return requirement;
-            if (package.Compatible) return "Requirements match the reported build. This is not a save or co-op guarantee.";
+            if (package.Compatible) return null;
             if (string.IsNullOrEmpty(package.CompatibilityReason) && MarketplaceRuntime.FindManaged(package.ModGuid) != null)
                 return "Active this launch. Compatibility has not been refreshed from the catalog.";
             return "Unavailable for this build: " + Declared(package.CompatibilityReason);
@@ -892,16 +885,7 @@ namespace FTKModFramework.Core.UI
             TextLine("Your next launch", 36, 54);
             int pendingCount = PendingCount();
             TextLine(pendingCount == 0 ? (MarketplaceRuntime.Pending == null ? "There are no changes waiting to apply." : "Your selection is saved. No gameplay changes will apply.") : pendingCount + " change(s) are saved. Your current adventure has not changed.", 25, 48);
-            List<string> lines = new List<string>();
-            foreach (ModEntry entry in ModRegistry.Entries)
-                if (!entry.IsManaged && entry.PendingEnabled.HasValue) lines.Add(entry.DisplayName + ": " + (entry.PendingEnabled.Value ? "turn on" : "turn off"));
-            if (MarketplaceRuntime.Pending != null)
-            {
-                lines.Add("Community selection after restart:");
-                if (MarketplaceRuntime.Pending.Packages.Count == 0) lines.Add("No community mods selected.");
-                foreach (PackageDescriptor package in MarketplaceRuntime.Pending.Packages)
-                    lines.Add(package.Name + " " + package.Version + " / " + OnOff(package.Enabled));
-            }
+            List<string> lines = ModsPanelNextLaunch.Lines(MarketplaceRuntime.Active, MarketplaceRuntime.Pending, ModRegistry.Entries);
             List<string> pages = TextPages(new List<string> { string.Join("\n", lines.ToArray()) });
             if (pages.Count > 0)
             {
@@ -1091,20 +1075,29 @@ namespace FTKModFramework.Core.UI
             if (_view == "components")
             {
                 Spacer(56);
-                TextLine("Behind the adventure", 36, 104);
+                TextLine("Required components", 36, 104);
                 TextLine("Some community mods need supporting components. They appear here when needed, separate from the mods you choose to play.", 25, 170);
                 return;
             }
             Spacer(56);
-            TextLine("A new chapter awaits", 36, 104);
-            TextLine("Pick a mod to learn what it adds.\n\nYour included Adventure Pack is ready to play in Installed.", 25, 170);
-            Spacer(35);
-            Rule();
-            TextLine("Free community content.\nEvery change is yours to review.", 23, 90);
+            TextLine("Select a mod on the left to see its artwork, features and requirements.\n\nBrowse community content or manage your existing mods in Installed.", 25, 170);
         }
 
         private void Card(string title, string summary, string category, string state, bool selected, Action action, List<string> previews)
         {
+            if (ModsPanelNavigation.IsBrowse(_view))
+            {
+                Button row = ActionButton(title, action, true, 50);
+                StyleNativeButton(row, true, selected);
+                Text label = row.GetComponentInChildren<Text>();
+                StyleNativeText(label, true);
+                label.alignment = TextAnchor.MiddleCenter;
+                label.fontSize = 31;
+                label.resizeTextForBestFit = true;
+                label.resizeTextMinSize = 22;
+                label.resizeTextMaxSize = 31;
+                return;
+            }
             Button button = ActionButton(title, action, true, 166);
             Border(button.gameObject, selected ? Gold : WarmBorder, selected ? 2 : 1);
             Text heading = button.GetComponentInChildren<Text>();
@@ -1183,6 +1176,7 @@ namespace FTKModFramework.Core.UI
             button.GetComponent<Image>().color = new Color(0.95f, 0.87f, 0.67f, 1f);
             button.GetComponentInChildren<Text>().alignment = TextAnchor.MiddleCenter;
             Border(button.gameObject, Gold, 1);
+            StyleNativeButton(button, false);
             return button;
         }
         private Button LinkButton(string title, Action action, bool enabled = true)
@@ -1193,6 +1187,7 @@ namespace FTKModFramework.Core.UI
             Text text = button.GetComponentInChildren<Text>();
             text.fontSize = 20;
             text.color = Gold;
+            StyleNativeButton(button, false);
             return button;
         }
         private static void SetWidth(GameObject go, float width)
@@ -1285,6 +1280,7 @@ namespace FTKModFramework.Core.UI
             text.rectTransform.offsetMin = new Vector2(14f, 3f);
             text.rectTransform.offsetMax = new Vector2(-14f, -3f);
             Height(go, _container.name == "Details" ? Math.Min(height, 46) : height);
+            StyleNativeButton(button, false);
             return button;
         }
 
@@ -1307,6 +1303,7 @@ namespace FTKModFramework.Core.UI
             text.horizontalOverflow = HorizontalWrapMode.Wrap;
             text.verticalOverflow = VerticalWrapMode.Truncate;
             text.raycastTarget = false;
+            StyleNativeText(text, size >= 27);
         }
         private static void Height(GameObject go, float value)
         {

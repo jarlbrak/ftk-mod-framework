@@ -741,7 +741,16 @@ func marketResolve(c marketCatalog, r marketRequest) ([]marketPackage, error) {
 		}
 		p, ok := index[id+"@"+v]
 		if !ok {
-			return errors.New("missing exact package " + id + "@" + v)
+			// A removed catalog listing must not strand an installed version. Only
+			// the current generation supplies this fallback; cached archives and old
+			// generations alone do not authorize a new installation.
+			p, ok = active[id+"@"+v]
+			if !ok {
+				return errors.New("missing exact package " + id + "@" + v)
+			}
+			if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{p}}); e != nil {
+				return e
+			}
 		}
 		// A revoked package that is already active at this exact version may stay
 		// installed; revocation only blocks new installs, updates, and new dependencies.
