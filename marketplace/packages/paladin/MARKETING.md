@@ -29,6 +29,9 @@ Build from plain Novice gear into Oathkeeper, Highward, Mercy, Censure and Verdi
 - Twelve original hammers, six dedicated shields and eighteen armor pieces
 - Two Censure weapon actions that weaken enemy armor
 
-## Beta notice
+## Compatibility
 
-This is a beta package. It is tested on the supported macOS game build. Online co-op, including multiple Paladins and host/client state parity, remains unverified.
+The release target is Paladin 1.0.0 on framework 1.0.0. Publication is pending the
+[launch checks](../../../docs/paladin/LAUNCH-1.0.0.md). The declared platform is the
+verified macOS game build. Online co-op, including multiple Paladins and host/client
+state parity, remains unverified.

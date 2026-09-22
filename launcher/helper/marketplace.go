@@ -1070,8 +1070,11 @@ func marketContent(b []byte) error {
 		}
 		if entry.GuardianBonuses != nil {
 			b := entry.GuardianBonuses
-			if entry.Kind != "item" && entry.Kind != "weapon" || b.GuardHealPercent < 0 || b.GuardHealPercent > 20 || b.FocusHealBonusPercent < 0 || b.FocusHealBonusPercent > 20 || b.RetaliationDamage < 0 || b.RetaliationDamage > 20 {
+			if entry.Kind != "item" && entry.Kind != "weapon" || b.GuardHealPercent < 0 || b.GuardHealPercent > 20 || b.FocusHealBonusPercent < 0 || b.FocusHealBonusPercent > 20 || b.RetaliationDamage < 0 || b.RetaliationDamage > 20 || b.GuardFocusRestore < 0 || b.GuardFocusRestore > 1 {
 				return errors.New("invalid guardian equipment bonus")
+			}
+			if (b.GuardFocusRestore > 0 || b.GuardReckoning) && entry.Kind != "weapon" {
+				return errors.New("guardFocusRestore and guardReckoning require a weapon")
 			}
 		}
 		if entry.Icon != "" && (!marketSafePath(entry.Icon) || !strings.HasPrefix(entry.Icon, "assets/") || path.Ext(entry.Icon) != ".png" || entry.Kind != "item" && entry.Kind != "weapon" && entry.Kind != "proficiency" && !(entry.Kind == "class" && entry.Guardian)) {

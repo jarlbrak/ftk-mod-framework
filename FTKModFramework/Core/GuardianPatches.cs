@@ -117,7 +117,12 @@ namespace FTKModFramework.Core
         {
             try
             {
-                if (!GuardianRuntime.Enabled || !(__instance is EnemyDummy)) return;
+                if (!GuardianRuntime.Enabled) return;
+                if (!(__instance is EnemyDummy))
+                {
+                    GuardianRuntime.ReplayReckoning(__instance, _ddi);
+                    return;
+                }
                 GuardianRuntime.RefreshEligibility();
                 // All outcomes in an area attack use the pre-impact guardian eligibility snapshot.
                 // Clone before changing anything: RPCAllSelf may still serialize its original args.
@@ -212,6 +217,10 @@ namespace FTKModFramework.Core
     internal static class GuardianEndPatch
     {
         // Finishing one combatant must not recharge the other guardians in an ongoing encounter.
-        private static void Prefix(CharacterDummy __instance) { GuardianRuntime.Expire(__instance); }
+        private static void Prefix(CharacterDummy __instance)
+        {
+            GuardianRuntime.Expire(__instance);
+            GuardianRuntime.EndLegendaryCombat(__instance);
+        }
     }
 }

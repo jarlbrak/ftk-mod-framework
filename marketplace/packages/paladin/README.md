@@ -10,14 +10,18 @@ progression, native character appearances and original horizontal endgame equipm
 The [acceptance matrix](../../../docs/paladin/VALIDATION.md) separates offline,
 native gameplay, visual, save, package and online gates.
 
-The manifest requires the next framework capability release, 0.1.4. That release
-has not yet been published. No production catalog entry exists. Version 0.1.0 is
-the package's intended beta version; the package description explicitly labels it
-beta because the current marketplace version parser accepts numeric versions.
+The launch target is Paladin 1.0.0 on framework 1.0.0. Neither is published yet.
+The [launch checklist](../../../docs/paladin/LAUNCH-1.0.0.md) tracks the remaining
+checks separately from historical beta evidence.
+
+`manifest.json` owns identity, author, version and the short description. `listing.json`
+owns marketplace feature copy and requirements. The builder combines these with
+measured archive facts into the shared marketplace descriptor. Framework versions,
+platforms and artifact hashes are not repeated in prose.
 
 ## Current content state
 
-The source package declares one class, 36 equipment items and two Censure
+The source package declares one class, 39 equipment items and two Censure
 proficiencies. All equipment has new models and icons. Character bodies, faces,
 hair and backpacks remain native FTK assets. The cloned Blacksmith appearance
 list is inherited unchanged: Female, Male, Undead, Cat, Demon, Fish and Goblin,
@@ -37,16 +41,26 @@ it equips the same five slots after native startup, with the user separately con
 through native Save and Exit followed by a fresh resume with its starter equipment
 retained. This is user-operated validation without an automation receipt. All-race gear fit is a live acceptance gate.
 
-The 135 referenced GLB/PNG assets are traced by
+The original GLB/PNG assets are traced by
 [the external provenance receipt](../paladin-assets.provenance.json).
 No custom body, hair, portrait or backpack replacements are shipped. Hammers
 include original break fragments for every declared native break renderer.
 The class/action icon supplies the original Guard button. Native HUD portraits
 render the game-owned character with its equipped custom gear.
 
-Four acquisition bands cover levels 0-1, 2-3, 4-6 and 7-13. Endgame Mercy,
-Censure and Verdict are intended alternatives. Final item stats and benefits
-require local balance evidence.
+Four acquisition bands use native item tiers: Novice 0, Oathkeeper 1-2,
+Highward 3, and Mercy/Censure/Verdict 4-6. These are not character levels.
+All three endgame sets are eligible at the ordinary final campaign tier, 4.
+Native rarity weights normalize drops, and fixed shop stock counts remain intact.
+Neither path requires a Paladin in the party. Final combat balance still requires
+play evidence.
+
+Three Artifact items extend the late-game selection: The Last Vigil, Kingsfall
+and The Last Bastion. They use item tiers 4-6 and can enter shared drops, night
+markets and dungeon merchants without requiring a Paladin. They do not enter
+ordinary town stock or starting inventories. Their Guardian perks preserve
+Guard's 50% reduction. See the [legendary equipment design](../../../docs/paladin/LEGENDARY-CONCEPTS.md)
+for exact triggers and the remaining implementation and validation status.
 
 | Equipment | Declared prototype behavior |
 | --- | --- |
@@ -60,6 +74,9 @@ require local balance evidence.
 | Mercy one-handed hammer | Adds two percentage points to focused-hit healing |
 | Censure one-handed hammer | Censure action: 75% damage, three slots, native timed armor reduction of four |
 | Verdict one-handed hammer | Higher direct damage, 31 base |
+| The Last Vigil | 30 damage, three Vitality checks; first mitigated Guard hit restores one Focus to the protected ally |
+| Kingsfall | 42 damage, five Vitality checks; Guard mitigation charges the next single-target hammer attack for 50% more damage |
+| The Last Bastion | No personal armor or resistance, minus four Speed; Guard cleanses one existing eligible condition |
 | Mercy armor pieces | Equal base defenses within each slot plus two Vitality points |
 | Censure armor pieces | Equal base defenses within each slot plus one Speed point |
 | Verdict armor pieces | Equal base armor within each slot plus two resistance |
@@ -93,11 +110,11 @@ Offline structural checks establish unique identities, local asset references,
 original source hashes, complete progression and declared renderer coverage.
 Reproduce them with `python3 marketplace/packages/validate_paladin.py`.
 They do not establish registration, visual fit, normal shop acquisition, save
-behavior, native action semantics or co-op. This source package remains unready
-for beta until the applicable local gates pass.
+behavior, native action semantics or co-op. The current 1.0.0 candidate remains
+unpublished until its applicable launch gates pass.
 
-Beta online co-op remains unverified. Production requires community confirmation
-of host/client behavior, multiple guardians and state transitions.
+Online co-op remains unverified. Host/client behavior, multiple guardians and
+state transitions need community confirmation before claiming co-op support.
 
 ## Build an unpublished local candidate
 
@@ -107,6 +124,10 @@ their content hash. README and external provenance files are not runtime files.
 It emits a matching descriptor marked LOCAL DRAFT with a deliberately unpublished
 `LOCAL-DRAFT-NOT-PUBLISHED` release URL. It does not create a release, upload an
 archive, or modify the production catalog.
+
+Use `--release` to prepare the same archive with versioned `paladin-v1.0.0`
+release URLs and its final display name. This flag does not publish anything.
+The banner must be uploaded alongside the immutable archive before catalog inclusion.
 
 ```sh
 (cd launcher/helper && go build -o ../../scratch/paladin-package-helper .)

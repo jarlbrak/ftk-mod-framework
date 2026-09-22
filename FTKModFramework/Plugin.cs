@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "0.1.4";
+        public const string Version = "1.0.0";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -214,7 +214,7 @@ namespace FTKModFramework
             Instance = this;
             Log = Logger;
 
-            EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
+            EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", false,
                 "Enable the FTK Adventure Pack: Thief and Innkeeper classes, the Cutpurse enemy, equipment, and adventures. " +
                 "Set false if you only want the framework as a dependency for other content mods.");
 

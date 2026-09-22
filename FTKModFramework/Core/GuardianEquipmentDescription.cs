@@ -26,6 +26,12 @@ namespace FTKModFramework.Core
                 lines.Add("Guard blocks direct-attack\nPoison, Stun, Daze and Curse.");
             if (bonuses.RetaliationDamage > 0)
                 lines.Add("Guard retaliates for " + bonuses.RetaliationDamage + " damage\nonce per damaging direct attack\nfrom an enemy.");
+            if (bonuses.GuardFocusRestore > 0)
+                lines.Add("First reduced hit per Guard:\nrestore 1 Focus to guarded ally.");
+            if (bonuses.GuardReckoning)
+                lines.Add("Guarded hit readies Reckoning:\n+50% next single-target hammer hit.\nSpent on attempt; expires next turn end.");
+            if (bonuses.GuardCleanse)
+                lines.Add("Guard removes one ally condition:\nStun, Daze, Curse, then Poison.");
             if (lines.Count == 0) return string.Empty;
             return (string.IsNullOrEmpty(classNames) ? "Guard users" : classNames) + " only:\n" + string.Join("\n", lines.ToArray());
         }

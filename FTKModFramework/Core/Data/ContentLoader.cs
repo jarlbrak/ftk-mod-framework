@@ -375,8 +375,11 @@ namespace FTKModFramework.Core.Data
                 {
                     if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("guardianBonuses requires equipment");
                     GuardianBonusEntry b = c.Entry.GuardianBonuses;
+                    if ((b.GuardFocusRestore > 0 || b.GuardReckoning) && c.Kind != "weapon")
+                        throw new ArgumentException("guardFocusRestore and guardReckoning require a weapon");
                     if (!Content.SetGuardianEquipment((FTK_itembase)c.Row, new GuardianEquipmentBonuses(b.GuardHealPercent,
-                        b.FocusHealBonusPercent, b.RetaliationDamage, b.WardDebuffs))) throw new ArgumentException("guardian bonus registration rejected");
+                        b.FocusHealBonusPercent, b.RetaliationDamage, b.WardDebuffs, b.GuardFocusRestore,
+                        b.GuardReckoning, b.GuardCleanse))) throw new ArgumentException("guardian bonus registration rejected");
                 }
                 if (!string.IsNullOrEmpty(c.Entry.Icon))
                 {

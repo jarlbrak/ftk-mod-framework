@@ -40,11 +40,56 @@ require live validation.
 
 `Content.SetGuardianEquipment(item, new GuardianEquipmentBonuses(...))` registers
 Guardian-only bonuses on an exact custom equipment row. Constructor parameters
-are `guardHealPercent`, `focusHealBonusPercent`, `retaliationDamage` and
-`wardDebuffs`. Numeric values range from 0 to 20. Equipped bonuses choose the
+are `guardHealPercent`, `focusHealBonusPercent`, `retaliationDamage`,
+`wardDebuffs`, `guardFocusRestore`, `guardReckoning` and `guardCleanse`.
+The first three numeric values range from 0 to 20. Equipped bonuses choose the
 strongest value in each field, rather than summing. Ward covers poison, stun,
 daze and curse outcomes on guarded direct attacks. These bonuses never increase
 Guard's 50% reduction. Other classes can use the equipment's ordinary stats.
+
+### Legendary Guardian equipment
+
+The following optional capabilities support the Paladin legendary equipment.
+They remain encounter-local and require the Guardian class capability.
+
+| Constructor/data field | Equipment | Behavior |
+| --- | --- | --- |
+| `guardFocusRestore: 1` | weapon | The first direct enemy hit actually reduced by each Guard restores one Focus to the guarded ally, capped at their normal maximum. Zero disables it; other values are rejected. |
+| `guardReckoning: true` | weapon | The first reduced hit per Guard readies one charge for +50% damage on the next single-target blunt attack with that exact registered weapon. It is spent on the attempt, even on a miss, and expires at the end of the wielder's next turn. |
+| `guardCleanse: true` | item or weapon | Guard removes one existing eligible condition from its ally, in priority order Stun, Daze, active Curse, Poison. |
+
+Focus and Reckoning require retaining the weapon from the Guard action until the
+trigger. Unequipping and re-equipping cannot restore the pending perk or charge.
+Repeated Guard actions and overlapping guardians do not stack a charge; all
+first-hit Focus opportunities triggered by the same protected outcome are spent,
+but that outcome grants at most one Focus. A full-Focus ally still spends the
+opportunity. Damage over time, dodges, and fully absorbed or unreduced damage do
+not trigger these effects.
+
+Reckoning multiplies the native damage multiplier before slot scaling, criticals,
+armor, and resistance. It excludes item attacks, friendly or harmless actions,
+authored area/splash actions, and Justice's secondary attack. FTK has no native
+hammer subtype; author Reckoning on a registered blunt hammer weapon. Calculation
+runs on the acting owner, and the existing native attack outcome carries the
+result to the other peers. Their private charge state consumes the same attempt
+receipt during playback. Charge feedback uses native HUD text. Eligible attack
+previews show Reckoning and its increased damage. A crown effect and dedicated
+sound are not implemented.
+
+Cleanse removes one removable active curse in native enum order, preserving
+permanent campaign curses. Poison is one stacked condition and all its stacks
+are removed if selected. Native condition removal refreshes stats and effects;
+it neither rewinds the combat timeline nor restores a lost action. Guard replay
+cannot cleanse a second condition.
+
+Focus uses the recipient owner's native synchronized update at impact. Guard
+cleanse executes once per peer at the existing Guard application point, without
+introducing another RPC. Fresh combat, resurrection reset, combat exit, and a
+successful flee discard charges. These authority paths are source-backed;
+multiplayer agreement and native end-to-end behavior still require live evidence.
+Game-free coverage includes duplicate delivery, overlap, first-hit consumption,
+miss consumption, charge expiry, equipment swaps, all cleanse-priority combinations,
+capability validation, and installed-assembly hook signatures.
 
 ## Equipment stats and models
 
@@ -86,7 +131,7 @@ authoring example, subject to its documented live gates.
 | Property | Entry kind | Meaning |
 | --- | --- | --- |
 | `guardian: true` | class | Guardian kit |
-| `guardianBonuses` | item, weapon | The four equipment bonus fields above |
+| `guardianBonuses` | item, weapon | The equipment bonus fields above; Focus and Reckoning require a weapon |
 | `modifiers` | item, weapon | `armor`, `resistance`, `reflect` integers 0-100; `vitality`, `speed` numbers -1 to 1 |
 | `itemModels` | item, weapon | Equipped rigid renderers: `path`, `model`, `texture` |
 | `displayModels` | item, weapon | Loot/card rigid renderers, relative to the native display prefab root |

@@ -241,6 +241,9 @@ type marketGuardianBonuses struct {
 	FocusHealBonusPercent int  `json:"focusHealBonusPercent"`
 	RetaliationDamage     int  `json:"retaliationDamage"`
 	WardDebuffs           bool `json:"wardDebuffs"`
+	GuardFocusRestore     int  `json:"guardFocusRestore"`
+	GuardReckoning        bool `json:"guardReckoning"`
+	GuardCleanse          bool `json:"guardCleanse"`
 }
 type marketApparelModel struct {
 	FemaleBinding string                `json:"femaleBinding"`

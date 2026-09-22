@@ -1,0 +1,52 @@
+{
+  "status": "partial-launch-verification-not-published",
+  "frameworkVersion": "1.0.0",
+  "frameworkSha256": "f6807cf92fa04cf2c7973ffde27069740ee42875c9c0571add24273c72702023",
+  "packageVersion": "1.0.0",
+  "packageSha256": "a0d952d1cb2b60e2745695c9ba9535a1b1d18a31b5d2a94c24db4ab167c858f5",
+  "platform": "macos",
+  "adventure": "Lost Civilization",
+  "party": ["blacksmith", "hunter", "scholar"],
+  "registration": {"entries": 39, "errors": 0, "warnings": 0},
+  "acquisition": {
+    "equipmentInNativeCategoryCaches": 36,
+    "ordinaryStockItems": 5,
+    "townsWithPaladinStock": 4,
+    "purchase": {
+      "town": "Tamula",
+      "item": "paladin_hammer_1h_novice",
+      "goldBefore": 12,
+      "goldAfter": 0,
+      "stockBefore": 1,
+      "stockAfter": 0,
+      "backpackBefore": 0,
+      "backpackAfter": 1
+    },
+    "nativeSaveExitAndFreshProcessResume": {
+      "backpackCount": 1,
+      "gold": 0,
+      "remainingStock": 0
+    }
+  },
+  "sanctum": {
+    "nativeId": "Sanctum08",
+    "normal": {"vitality": 0, "extraHealth": 10, "healthRegen": 2},
+    "grand": {"vitality": 5, "extraHealth": 10, "healthRegen": 2},
+    "naturallyGeneratedGrandLife": true,
+    "devotionObserved": false
+  },
+  "limits": [
+    "Travel used the isolated snap_to shortcut. No stock, item or gold injection.",
+    "Native purchase and process-restart persistence passed. Random combat loot frequency and later-tier purchases remain unobserved.",
+    "No Paladin combat or tailored reward was exercised in this vanilla-party trial.",
+    "Single-player macOS only; no co-op or other-platform acceptance."
+  ],
+  "evidenceHashes": {
+    "purchase-before-inventory": "aabeab50064d0a24f27289c5d29d4279df8e8f2b4d9cb3f6c0f48aa04e9b9e16",
+    "purchase-after-inventory": "7395d629472b1c89922837b63e4bb7f8abbec5d1e9601596cc89d50c267b63bb",
+    "purchase-after-stock": "2b53ca116aae4c8ee27daf0139ec1b23573dc5079619267111c2a4ceac883178",
+    "resume-inventory": "db2a084b4d9e6710a699cb3c38c1cc05350d6760ce15be0e0a220a1154714000",
+    "resume-stock": "156c62a0c73206666adb2d4dff28663127b32a29c514de4150dab56fca524f23",
+    "town-stock-after-intro": "b76319713b9dbcf704b6d19a0fce939ebac4d36d8d7b23438997fac2b4d24101"
+  }
+}

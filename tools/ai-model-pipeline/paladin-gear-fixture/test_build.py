@@ -15,8 +15,10 @@ class FixtureBoundaries(unittest.TestCase):
         before = copy.deepcopy(original)
         actual, gear, old = builder.fixture_content(original)
         self.assertEqual(original, before)
-        self.assertEqual(len(gear), 36)
-        self.assertEqual(len(actual['entries']), 40)
+        self.assertEqual(len(gear), 39)
+        self.assertEqual(len(actual['entries']), 43)
+        self.assertTrue({'paladin_hammer_1h_last_vigil', 'paladin_hammer_2h_kingsfall',
+                         'paladin_shield_last_bastion'}.issubset(gear))
         self.assertNotIn('playerModels', next(row for row in actual['entries'] if row['id'] == 'paladin'))
         expected = copy.deepcopy(original)
         next(row for row in expected['entries'] if row['id'] == 'paladin')['fields']['startitems'] = gear

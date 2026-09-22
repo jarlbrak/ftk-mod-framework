@@ -1,5 +1,9 @@
 # Paladin beta release notes draft
 
+Historical beta plan. The current release target and open gates are recorded in
+[the 1.0.0 launch checklist](LAUNCH-1.0.0.md). Artifact hashes below identify
+older candidates and must not be used as current release receipts.
+
 Paladin adds a Vitality-based protector class, six equipment
 sets and three alternative endgame specializations. One marketplace mod enables
 the class, its two Censure actions and all 36 equipment items.

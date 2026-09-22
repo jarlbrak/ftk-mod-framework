@@ -13,17 +13,31 @@ namespace FTKModFramework.Core
         public int RetaliationDamage { get; private set; }
         /// <summary>Active Guard blocks direct-attack Poison, Stunned, Dazed, and Curse proficiencies.</summary>
         public bool WardDebuffs { get; private set; }
+        public int GuardFocusRestore { get; private set; }
+        public bool GuardReckoning { get; private set; }
+        public bool GuardCleanse { get; private set; }
+
+        // Preserve the constructor token used by previously compiled behavior mods.
+        public GuardianEquipmentBonuses(int guardHealPercent, int focusHealBonusPercent,
+            int retaliationDamage, bool wardDebuffs)
+            : this(guardHealPercent, focusHealBonusPercent, retaliationDamage, wardDebuffs, 0, false, false) { }
 
         public GuardianEquipmentBonuses(int guardHealPercent = 0, int focusHealBonusPercent = 0,
-            int retaliationDamage = 0, bool wardDebuffs = false)
+            int retaliationDamage = 0, bool wardDebuffs = false, int guardFocusRestore = 0,
+            bool guardReckoning = false, bool guardCleanse = false)
         {
             if (guardHealPercent < 0 || guardHealPercent > 20 || focusHealBonusPercent < 0 ||
                 focusHealBonusPercent > 20 || retaliationDamage < 0 || retaliationDamage > 20)
                 throw new ArgumentOutOfRangeException("Guardian equipment values must be between 0 and 20.");
+            if (guardFocusRestore < 0 || guardFocusRestore > 1)
+                throw new ArgumentOutOfRangeException("guardFocusRestore", "Guard restores at most one Focus.");
             GuardHealPercent = guardHealPercent;
             FocusHealBonusPercent = focusHealBonusPercent;
             RetaliationDamage = retaliationDamage;
             WardDebuffs = wardDebuffs;
+            GuardFocusRestore = guardFocusRestore;
+            GuardReckoning = guardReckoning;
+            GuardCleanse = guardCleanse;
         }
 
         internal static GuardianEquipmentBonuses Strongest(GuardianEquipmentBonuses first, GuardianEquipmentBonuses second)
@@ -32,7 +46,9 @@ namespace FTKModFramework.Core
             if (second == null) return first;
             return new GuardianEquipmentBonuses(Math.Max(first.GuardHealPercent, second.GuardHealPercent),
                 Math.Max(first.FocusHealBonusPercent, second.FocusHealBonusPercent),
-                Math.Max(first.RetaliationDamage, second.RetaliationDamage), first.WardDebuffs || second.WardDebuffs);
+                Math.Max(first.RetaliationDamage, second.RetaliationDamage), first.WardDebuffs || second.WardDebuffs,
+                Math.Max(first.GuardFocusRestore, second.GuardFocusRestore),
+                first.GuardReckoning || second.GuardReckoning, first.GuardCleanse || second.GuardCleanse);
         }
 
         internal static int HealAmount(int currentHealth, int maxHealth, int percent)

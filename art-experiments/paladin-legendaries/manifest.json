@@ -1,0 +1,286 @@
+{
+  "schema": "ftkmf.paladin-original-legendaries.v1",
+  "generator": "build.py",
+  "generatorSha256": "b27833845ba43b67378785b4a175d44e79489f43dc6962f6a6beafd2131be07f",
+  "dependencies": {
+    "art-experiments/paladin-equipment/build_blender.py": "690507443dc23a0d9cb132630765c8c1393ae2af85ef41178f208c6c6057200d",
+    "art-experiments/paladin-equipment/render_icons.py": "ee664ca5df1834037cb2ebff9c7e4370629f37b553b0d2d584a62b8591a66b9e",
+    "art-experiments/paladin-equipment/loot-display/build.py": "faa3eb5be37ee41004d4cbb9efad1d9082c6509c4d2556f1537664e1d55cdeba",
+    "tools/ai-model-pipeline/export_ftk_glb.py": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+  },
+  "provenance": "All surfaces and colors are original authored geometry. No native surface data read. Existing transform-only display metadata and frozen original-art envelopes used for card fit. Approved generated concepts interpreted as visual references only.",
+  "space": "Unity Y up, Z front via orientation-preserving Blender (x,z,-y). Existing authored grip stations retained.",
+  "status": "Offline original assets; exact equipped fit, Guard, attacks, break detach and cards require fresh live evidence.",
+  "assets": [
+    {
+      "key": "paladin-hammer-1h-last-vigil",
+      "triangles": 1856,
+      "vertices": 5568,
+      "pieces": 31,
+      "kind": "1h",
+      "fragments": [
+        {
+          "key": "paladin-hammer-1h-last-vigil-fragment-1",
+          "rendererPath": "Break",
+          "triangles": 436,
+          "sourcePieceNames": [
+            "Shield shaped gold pommel",
+            "Ivory pommel inset",
+            "Silver blunt striking face",
+            "Gold protective upright",
+            "Gold upright foot",
+            "Reliquary gold window frame 03",
+            "Reliquary gold window frame 04",
+            "Reliquary gold window frame 05",
+            "Central low roof crest",
+            "Rear gold shield seal"
+          ]
+        },
+        {
+          "key": "paladin-hammer-1h-last-vigil-fragment-2",
+          "rendererPath": "Break/Break",
+          "triangles": 1420,
+          "sourcePieceNames": [
+            "Octagonal dark structural haft",
+            "Broad leather wrap 00",
+            "Broad leather wrap 01",
+            "Broad leather wrap 02",
+            "Broad leather wrap 03",
+            "Broad leather wrap 04",
+            "Broad leather wrap 05",
+            "Broad leather wrap 06",
+            "Grip gold collar",
+            "Grip gold collar.001",
+            "Structural head collar",
+            "Ivory reliquary core",
+            "Silver blunt striking face.001",
+            "Gold protective upright.001",
+            "Gold upright foot.001",
+            "Recessed blue ward field",
+            "Reliquary gold window frame 00",
+            "Reliquary gold window frame 01",
+            "Reliquary gold window frame 02",
+            "Sapphire guardian stone",
+            "Low stepped reliquary roof"
+          ]
+        }
+      ],
+      "display": {
+        "key": "paladin-hammer-1h-last-vigil-display",
+        "rendererPath": "smithhammer",
+        "scale": 0.9134145644065372,
+        "authorToDisplayLocal": [
+          [
+            0.9134145644065372,
+            -5.551115123125783e-17,
+            0.0,
+            -0.002391554495789233
+          ],
+          [
+            0.0,
+            0.9134145644065372,
+            0.0,
+            0.03847093204641
+          ],
+          [
+            0.0,
+            0.0,
+            0.9134145644065372,
+            0.01590923101597219
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "referenceEnvelope": "art-experiments/paladin-equipment/loot-display/reference-envelope.json",
+        "referenceEnvelopeSha256": "17f9c63a8194b05e11b4484622cc7d5eb7b228b77cc9a6c2f1662a25f34b293a",
+        "bindingMetadataSha256": "4e083a116f7d6451f6460cc04346955b300370b917fee5401b16cd529a7bcc5f"
+      }
+    },
+    {
+      "key": "paladin-hammer-2h-kingsfall",
+      "triangles": 2224,
+      "vertices": 6672,
+      "pieces": 37,
+      "kind": "2h",
+      "fragments": [
+        {
+          "key": "paladin-hammer-2h-kingsfall-fragment-1",
+          "rendererPath": "break",
+          "triangles": 396,
+          "sourcePieceNames": [
+            "Broad iron striking block",
+            "Inset dark strike end",
+            "Gold structural head band",
+            "Broad crown shoulder",
+            "Fractured royal seal 00",
+            "Fractured royal seal 01",
+            "Fractured royal seal 06",
+            "Amber fractured seal seam",
+            "Amber fractured seal seam.001"
+          ]
+        },
+        {
+          "key": "paladin-hammer-2h-kingsfall-fragment-2",
+          "rendererPath": "break/break2",
+          "triangles": 728,
+          "sourcePieceNames": [
+            "Structural head collar",
+            "Heavy charcoal anvil core",
+            "Broad iron striking block.001",
+            "Inset dark strike end.001",
+            "Gold structural head band.001",
+            "Broad crown shoulder.001",
+            "Fractured crown center",
+            "Fractured royal seal 02",
+            "Fractured royal seal 04",
+            "Fractured royal seal 05",
+            "Amber fractured seal seam.002",
+            "Amber fractured seal seam.003",
+            "Amber fractured seal seam.004",
+            "Amber fractured seal seam.005",
+            "Rear gold seal field"
+          ]
+        },
+        {
+          "key": "paladin-hammer-2h-kingsfall-fragment-3",
+          "rendererPath": "break/break1",
+          "triangles": 1100,
+          "sourcePieceNames": [
+            "Octagonal dark structural haft",
+            "Broad leather wrap 00",
+            "Broad leather wrap 01",
+            "Broad leather wrap 02",
+            "Broad leather wrap 03",
+            "Broad leather wrap 04",
+            "Broad leather wrap 05",
+            "Broad leather wrap 06",
+            "Broad leather wrap 07",
+            "Grip gold collar",
+            "Grip gold collar.001",
+            "Faceted black pommel",
+            "Gold pommel belt"
+          ]
+        }
+      ],
+      "display": {
+        "key": "paladin-hammer-2h-kingsfall-display",
+        "rendererPath": "hammer",
+        "scale": 0.43809890978676114,
+        "authorToDisplayLocal": [
+          [
+            0.43809890978676114,
+            2.7755575615628914e-17,
+            0.0,
+            0.037861053606458556
+          ],
+          [
+            0.0,
+            0.43809890978676114,
+            0.0,
+            0.2360332061506316
+          ],
+          [
+            0.0,
+            0.0,
+            0.4380989097867612,
+            0.12909248289110956
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "referenceEnvelope": "art-experiments/paladin-equipment/loot-display/reference-envelope.json",
+        "referenceEnvelopeSha256": "17f9c63a8194b05e11b4484622cc7d5eb7b228b77cc9a6c2f1662a25f34b293a",
+        "bindingMetadataSha256": "4e083a116f7d6451f6460cc04346955b300370b917fee5401b16cd529a7bcc5f"
+      }
+    },
+    {
+      "key": "paladin-shield-last-bastion",
+      "triangles": 1244,
+      "vertices": 3732,
+      "pieces": 23,
+      "kind": "shield",
+      "fragments": [],
+      "display": {
+        "key": "paladin-shield-last-bastion-display",
+        "rendererPath": "shieldBlacksmith01",
+        "scale": 0.8896423667126209,
+        "authorToDisplayLocal": [
+          [
+            0.889642366712621,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.8896423667126209,
+            0.0,
+            -0.00669058712771034
+          ],
+          [
+            0.0,
+            0.0,
+            0.8896423667126209,
+            0.020715856454061918
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "referenceEnvelope": "art-experiments/paladin-equipment/shield-display/reference-envelope.json",
+        "referenceEnvelopeSha256": "ebec584cb2ea0fa5cc47f968e4e25fea95d3d56642d86e04dcde6a2ce26b9d41",
+        "bindingMetadataSha256": "4e083a116f7d6451f6460cc04346955b300370b917fee5401b16cd529a7bcc5f"
+      }
+    }
+  ],
+  "files": {
+    "paladin-hammer-1h-last-vigil-display.glb": "d9608c84a67d32ea38e5aaba26c41794db319bd35343f39c7d59f3ac7553dc0b",
+    "paladin-hammer-1h-last-vigil-display.pieces.json": "a9f7cd8e55ff521966b669f24711e38add553b988e73af83322e3abf34116ba2",
+    "paladin-hammer-1h-last-vigil-display.source.json": "41646fe00dcebfada13eea3e113a977f6ac1a94a7496790561160199526133c5",
+    "paladin-hammer-1h-last-vigil-fragment-1.glb": "1d3eea8f05ad5a2097b6ebee327f693f57bbe7409bbbba5feca09a7cae33d95b",
+    "paladin-hammer-1h-last-vigil-fragment-1.pieces.json": "a6542a6c35de2b3ad0c69029d15cc65fe9468242f0d747412d5ff68ebc62926c",
+    "paladin-hammer-1h-last-vigil-fragment-1.source.json": "865863f245c8ddcf9c4504130166d0158a5511f93b4f2591895fb4b8c4b93440",
+    "paladin-hammer-1h-last-vigil-fragment-2.glb": "1db417ff34cf9660ca8aefb9e6ec0beb7bf8040d01dcd691f2f931cee85e5d87",
+    "paladin-hammer-1h-last-vigil-fragment-2.pieces.json": "914a90dfc43fa7d9e647d07b86196d129e92a52f13c8a3fef8b95006030e715f",
+    "paladin-hammer-1h-last-vigil-fragment-2.source.json": "f52bad3d6164f107ba2769236c90830d5c8fdf77246218ec4926b8efd82ce0f4",
+    "paladin-hammer-1h-last-vigil-icon.png": "148e21d13219b06b59c1362a53e8460bb9fa069ba5cf59eefdb60efa6286b2a8",
+    "paladin-hammer-1h-last-vigil.glb": "96a8fdcde3a22e6df8a89f92be8f049cc3b36c697964aef584c9801186424066",
+    "paladin-hammer-1h-last-vigil.pieces.json": "a9f7cd8e55ff521966b669f24711e38add553b988e73af83322e3abf34116ba2",
+    "paladin-hammer-1h-last-vigil.source.json": "e06a8aa0a7ccf848ea24a2e111b40fb3c05127ae0c166f09a2d940ff1001b16f",
+    "paladin-hammer-2h-kingsfall-display.glb": "7fdce9896fcdf62a7c96f7202354d472207f424a7373888f21bf03cb1e029b1f",
+    "paladin-hammer-2h-kingsfall-display.pieces.json": "56228ad79738aada66ab65058d4ad1a581803b11ed60a215a463775ff45eb62b",
+    "paladin-hammer-2h-kingsfall-display.source.json": "ff804dd56e4393babad31153c3ab3f7f58a427f5520b1e55858506aa033d9c6a",
+    "paladin-hammer-2h-kingsfall-fragment-1.glb": "311ed9eb7b3f4d2e9705d626697aa0cd8af068caaa0fc0c9a9f340d4f6b6f583",
+    "paladin-hammer-2h-kingsfall-fragment-1.pieces.json": "cc4daccc62775462dfd4075c598d9d2da1467512282466e067cd2be0ef68e225",
+    "paladin-hammer-2h-kingsfall-fragment-1.source.json": "74bec83e21ef29a6130ea1420e4dc1a74f927bb2e6d702c2cff7006ec3593bcd",
+    "paladin-hammer-2h-kingsfall-fragment-2.glb": "48aa1664082e937e8dbe24bcf4f50b013485a251653953550c4520a22f21a7cb",
+    "paladin-hammer-2h-kingsfall-fragment-2.pieces.json": "4c86cea6786f03b5de4bdd246fda58f8c553f195f4ddc240c1b6beb24d6cd6bf",
+    "paladin-hammer-2h-kingsfall-fragment-2.source.json": "3389940d54d27a4e9ed16c2ecd794d30d3721f63da1857bca5a61e7cb568134c",
+    "paladin-hammer-2h-kingsfall-fragment-3.glb": "6fb23e0e3ef7d6f91aef3b00250952d9b103fc8dc7abbbe0eedb473d845b2b8c",
+    "paladin-hammer-2h-kingsfall-fragment-3.pieces.json": "7d5bc4b43f0fe68a93bd91e7a5d4237044e4d22d2ae108a9df21d43a9dde4638",
+    "paladin-hammer-2h-kingsfall-fragment-3.source.json": "fd8e3cc81559a9d8932f4a08364183beb1fcabb1ad8884d94a136e922f99451e",
+    "paladin-hammer-2h-kingsfall-icon.png": "b2a86d41d0fb9e8421a68a1d601b9617deaa137001584e139b3515d8229aaebc",
+    "paladin-hammer-2h-kingsfall.glb": "c5a7243898cf3d12495c1f70607bceb48beccc98815cad8e050052b877fa7575",
+    "paladin-hammer-2h-kingsfall.pieces.json": "56228ad79738aada66ab65058d4ad1a581803b11ed60a215a463775ff45eb62b",
+    "paladin-hammer-2h-kingsfall.source.json": "5260f7466b4588798249011812d87ccba20ded1c48f48733f537783f29996cc8",
+    "paladin-legendary-palette.png": "62660c3c40952c0d1d2163d083e60c68cafa8c81bf3a3024599d2aafa72f0781",
+    "paladin-shield-last-bastion-display.glb": "ddf2fb5b622e8355793cb01f125fb4dd35321f1fb9b88b437f6859c7d4167a35",
+    "paladin-shield-last-bastion-display.pieces.json": "926c17d900a12abb81439ba4912abc8288902bb389bea5a20ea266cb1ec5654e",
+    "paladin-shield-last-bastion-display.source.json": "a5e2a941981ca48c81c8217521a0a4e2b22990b0e8e447a59ced9a9e025eabba",
+    "paladin-shield-last-bastion-icon.png": "6254199f12a697e6c7265d81e40f77194a85403f5122c2428f1324778cb49a35",
+    "paladin-shield-last-bastion.glb": "228d10ac17a16389f90fb57459aae9be70604658172d3681916192f676c937e8",
+    "paladin-shield-last-bastion.pieces.json": "926c17d900a12abb81439ba4912abc8288902bb389bea5a20ea266cb1ec5654e",
+    "paladin-shield-last-bastion.source.json": "45b7fe753d0c6c5ef9186598df758b125833231b66260882b3ecca4794109fcb"
+  }
+}

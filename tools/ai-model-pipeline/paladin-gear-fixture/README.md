@@ -12,32 +12,35 @@ python3 tools/ai-model-pipeline/paladin-gear-fixture/build.py \
 
 Existing output is refused. Choose a new scratch directory for another run. The
 output contains `package/`, an external `receipt.json`, and a NEVER-PUBLISH notice.
-The current source contains 135 original GLB/PNG assets. Only the package's
+The current source includes original GLB/PNG assets for the progression sets and
+three legendary items. Only the package's
 `content.json` differs from the production source; all current
 original GLB/PNG assets and the manifest are copied byte-for-byte. The receipt
 records every source and copied file hash and the exact content delta.
 
 ## Explicit fixture delta
 
-- Existing class `paladin`: replace only `fields.startitems` with all 36 equipment
+- Existing class `paladin`: replace only `fields.startitems` with all 39 equipment
   keys, each appearing once. Preserve its original starting weapon, stats and
   Guardian capability. Paladin retains native FTK bodies, faces and hair; this
   fixture supplies only the original equipment assets.
 - Add `paladin_gear_fixture_hunter`: `kind: class`, `template: hunter`, display name
   `Gear Fixture Hunter`, `guardian: false`, and fields `dlc: None` plus the same
-  36 `startitems`. The native Hunter appearance and starting weapon remain
+  39 `startitems`. The native Hunter appearance and starting weapon remain
   inherited. No Paladin model plan or Guard icon is attached to this class.
 
-The 36 keys are `paladin_{family}_{set}` for families `hammer_1h`, `hammer_2h`,
+The 36 progression keys are `paladin_{family}_{set}` for families `hammer_1h`, `hammer_2h`,
 `shield`, `armor`, `boots`, `helmet` and sets `novice`, `oathkeeper`, `highward`,
-`mercy`, `censure`, `verdict`. The fixture has 40 rows, versus the production 39.
+`mercy`, `censure`, `verdict`. The three Artifact keys are
+`paladin_hammer_1h_last_vigil`, `paladin_hammer_2h_kingsfall` and
+`paladin_shield_last_bastion`. The fixture has 43 rows, versus the production 42.
 The existing `startweapon` is intentionally unchanged, so native creation may
 supply an additional instance of that starting weapon besides the start-items
 list. Observe actual inventory instead of assuming equipped slots or quantities.
 
 The public data loader maps `startitems` to `m_StartItems` and resolves the
 `FTK_itembase.ID[]` references in phase two after registering all rows. The
-fixture checks every reference against its 36 authored item/weapon rows. It uses
+fixture checks every reference against its 39 authored item/weapon rows. It uses
 that existing declarative route rather than adding a registration hook or
 hard-coding custom integer IDs. Native registration/creation remains a live gate.
 

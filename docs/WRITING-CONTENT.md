@@ -88,6 +88,15 @@ var classes = Content.Db<FTK_playerGameStartDB>();
 var blacksmith = classes.GetEntry(FTK_playerGameStart.ID.blacksmith);
 ```
 
+Tailored weapon rewards normally choose a non-common weapon matching the class's
+`m_PrimaryWeaponStat` at the current progression tier's item level plus one. For a
+registered custom class whose native reward pool is empty, the framework instead
+allows unlocked common weapons matching the same stat and inclusive level range.
+This fallback uses one native reward RNG draw. Vanilla classes and populated native
+pools retain their original selection behavior. Authors must still supply an eligible
+weapon at every reachable reward tier: if both pools are empty, the framework leaves
+the native path unchanged, including its unsupported empty-pool failure.
+
 ## 4. Playable classes: things to know
 
 `Content.AddClass` clones an existing class's `FTK_playerGameStart` row (so you inherit a valid 3D
