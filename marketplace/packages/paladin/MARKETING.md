@@ -4,9 +4,7 @@
 
 ## Hero banner
 
-`promo/paladin-censure-banner.png` is original promotional illustration. It depicts the fully equipped Censure set and is not an in-game screenshot. The production listing should use it as the first hosted preview image after review.
-
-The unpublished local draft uses a reserved release-shaped preview URL and seeds the banner into the player's marketplace image cache during local setup. That URL is not published or downloadable. Replace it with the immutable hosted release asset URL for a public catalog entry.
+`promo/paladin-censure-banner.png` is original promotional illustration of the fully equipped Censure set, not an in-game screenshot. The production catalog references its [published release asset](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.0.0).
 
 ## Card copy
 
@@ -18,7 +16,7 @@ Choose the Paladin, a Vitality-led protector built around a guaranteed Guard act
 
 The Paladin is a frontline protector for *For The King*. Guard a chosen ally to reduce qualifying direct attack damage by 50% until your next turn. A focused attack restores the marked ally, and Divine Intervention leaves that ally at 1 HP when an eligible direct hit would otherwise be lethal.
 
-Build from plain Novice gear into Oathkeeper, Highward, Mercy, Censure and Verdict sets. The package includes 36 original equipment items, with one-handed hammers, two-handed hammers and dedicated Guardian shields. Every weapon and armor piece uses original package artwork; faces, hair, backpacks and race appearances remain native FTK assets.
+Build from plain Novice gear into Oathkeeper, Highward, Mercy, Censure and Verdict sets. The package contains 51 equipment items: 12 hammers, six dedicated shields, 18 armor pieces, 12 accessories and three legendary artifacts. Its 3D gear and icons are original package assets; faces, hair, backpacks and race appearances remain native FTK assets.
 
 ## What it adds
 
@@ -27,11 +25,12 @@ Build from plain Novice gear into Oathkeeper, Highward, Mercy, Censure and Verdi
 - Divine Intervention, a once-per-combat lethal rescue for an actively guarded ally
 - Six visually distinct armor sets, from Novice through Verdict
 - Twelve original hammers, six dedicated shields and eighteen armor pieces
+- Twelve accessories and three legendary artifacts
 - Two Censure weapon actions that weaken enemy armor
 
 ## Compatibility
 
-The release target is Paladin 1.0.0 on framework 1.0.0. Publication is pending the
-[launch checks](../../../docs/paladin/LAUNCH-1.0.0.md). The declared platform is the
-verified macOS game build. Online co-op, including multiple Paladins and host/client
-state parity, remains unverified.
+Paladin 1.0.0 is published for framework 1.0.0. The catalog declares the
+verified macOS game build. Online co-op, including multiple Paladins and
+host/client state parity, remains unverified. The [validation record](../../../docs/paladin/LAUNCH-1.0.0.md)
+separates tested paths from remaining gameplay coverage.

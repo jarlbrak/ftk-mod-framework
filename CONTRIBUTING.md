@@ -1,38 +1,30 @@
 # Contributing to FTK Mod Framework
 
-Thanks for your interest. There are two ways to take part, and they are deliberately separate.
+Thanks for your interest. You can author a mod with the public API or contribute to the framework itself.
 
 ## Path A: Use the framework (make your own mod)
 
-If you want to build your own For The King mod, you do not need to change this repo at all. Depend on the plugin and register content from a single hook. The full guide is [`docs/WRITING-CONTENT.md`](docs/WRITING-CONTENT.md), and the bundled `Content/ThiefClass.cs` (a full custom class) and `Content/CutpurseEnemy.cs` (a custom enemy) are working references you can copy from.
+You can build a *For The King* mod without changing this repository. Start with [Writing Content](docs/WRITING-CONTENT.md) and the published [Paladin package](marketplace/packages/paladin/README.md), the sole complete example shipped with the 1.0.0 marketplace. The [marketplace publishing guide](docs/PUBLISHING-MODS.md) covers package metadata, validation and submission.
 
-If something in the public `Content.*` API is missing or awkward for your mod, open a [Discussion](https://github.com/jarlbrak/ftk-mod-framework/discussions) or file a content idea (see below). That feedback shapes the roadmap.
+If the public `Content.*` API is missing something your mod needs, open a [Discussion](https://github.com/jarlbrak/ftk-mod-framework/discussions) or file an issue.
 
 ## Path B: Contribute to the framework (engine and content pipeline)
 
-Work on this repo is tracked as a three-level hierarchy in [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues):
-
-- **Epic**: a broad content goal (for example, "new enemies").
-- **Spec**: a scoped deliverable under an epic, with acceptance criteria.
-- **Work item**: a concrete implementation task under a spec.
-
-If you are new, the best first step is to comment on an open issue you find interesting, or file a bug or content idea, before writing code. That lets us point you at the right game types and avoid duplicate work.
+Browse [GitHub Issues](https://github.com/jarlbrak/ftk-mod-framework/issues) for current work. Comment on a relevant issue or file a bug before a large change so maintainers can help identify the correct game types and avoid duplicate work.
 
 ### The source of truth
 
 The decompiled `Assembly-CSharp` is the only correctness authority for game data. Do not trust summaries, old notes, or even this file over the actual game types. Verify exact field names, enum values, and enum order against the decompiled assembly before implementing anything that touches game data.
 
-### The content-slice method
+### Implementing a change
 
 Every change should be the smallest faithful slice:
 
-1. Pick a documented gap (an open issue).
-2. Locate the exact game type(s) in the decompiled `Assembly-CSharp`.
-3. Compare the existing `Core/` and `Content/` code against what the game types actually require.
-4. Implement the smallest faithful change: clone the right `FTK_*DB` row and register it through `ContentRegistry`. Never mutate game rows in place.
-5. Build: `cd FTKModFramework && dotnet build -c Release`. Fix every error before moving on.
-6. Verify in-game: `./deploy.sh` installs your build with the self-tests on (`Diagnostics/RunSelfTests`); launch and confirm the `SELF-TEST PASS` lines appear in `BepInEx/LogOutput.log`.
-7. Update the issue with findings; close it only when the code is verified in-game.
+1. Pick an issue and verify game-data facts against your installed `Assembly-CSharp`.
+2. Extend the public `Content.*` API when a mod-author capability is missing; keep engine mechanics in `Core/`.
+3. Clone and register content through the existing helpers. Do not mutate vanilla rows or prefabs in place.
+4. Run the relevant game-free checks from [verification guidance](.agents/skills/verify-change/SKILL.md), then record live-game evidence separately when the change needs it.
+5. Update the affected public guide and the issue with the actual results.
 
 ### Determinism rules
 
@@ -69,7 +61,7 @@ Every top-level tree that carries work an agent may edit has its own `AGENTS.md`
 Before opening a pull request:
 
 - The framework builds in Release.
-- You have verified the change in-game and seen the `SELF-TEST PASS` lines (paste the relevant log lines into the PR).
+- Required game-free checks pass. State any outstanding live-game gate in the PR.
 - No game DLLs are staged.
 - Docs are updated if behavior changed.
 - No em dashes in any file, comment, commit message, or PR body. Use commas, colons, semicolons, periods, or parentheses.

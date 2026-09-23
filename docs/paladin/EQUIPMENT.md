@@ -1,9 +1,10 @@
 # Paladin equipment progression
 
-Status: authored inventory, 2026-09-22. **51 equipment items are defined in the
-unpublished source candidate, including twelve new accessories.** The accessory
-rows and original art have offline verification only; no new in-game test has
-been attempted. See [Accessory validation](ACCESSORY-VALIDATION.md).
+Status: Paladin 1.0.0 source inventory, 2026-09-22. **The published package
+defines 51 equipment items, including twelve accessories.** All 51 registered
+in the final-package macOS trial; individual accessory views, stats, acquisition
+and persistence still need live coverage. See [Accessory validation](ACCESSORY-VALIDATION.md)
+and the [launch record](LAUNCH-1.0.0.md).
 Values are transcribed from the [package definitions](../../marketplace/packages/paladin/content.json).
 Accessory values remain initial tuning targets, not measured balance.
 

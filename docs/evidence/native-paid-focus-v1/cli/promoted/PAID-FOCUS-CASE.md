@@ -21,4 +21,4 @@ Confirmed submission is followed only by paid-focus-state observations. The exac
 
 Tests use fake file-protocol responses and clocks, not Unity. They verify one native submission, immutable local claims, expiry, missing results, rejection, callback debit/baseline/identity corruption, duplicate evidence, changed session/turn, timeout and delayed animation readiness. The saved real Bronzehollow callback parses successfully as a schema check only; it was produced by the parent's manual helper operation, not this CLI.
 
-Live evidence: [native-paid-focus-v1](../../../docs/evidence/native-paid-focus-v1/README.md). Reproduce offline tests from this directory with `python3 -m unittest test_paid_focus_case -q`.
+Live evidence: [native-paid-focus-v1](../../README.md). Reproduce offline tests from this directory with `python3 -m unittest test_paid_focus_case -q`.

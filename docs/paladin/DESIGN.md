@@ -1,8 +1,9 @@
 # Paladin: complete class design
 
-Status: implemented core and 51 authored equipment items in an unpublished 1.0.0
-source candidate, 2026-09-22. Twelve new accessories have offline checks only. A documented
-rule, an authored content row and a passed live test are separate states.
+Status: design contract for the published Paladin 1.0.0 package. It defines 51
+equipment items, including twelve accessories. The design and historical plans
+below do not establish full live-game acceptance; see the
+[launch record](LAUNCH-1.0.0.md) for observed coverage.
 
 ## Read the design
 
@@ -13,7 +14,7 @@ rule, an authored content row and a passed live test are separate states.
 | [Artifacts](ARTIFACTS.md) | The Last Vigil, Kingsfall and The Last Bastion |
 | [Art direction](ART-DIRECTION.md) | Progression silhouettes, accessory art and native character boundaries |
 | [Native baseline](NATIVE-BASELINE.md) | Verified slots, templates, inherited actions and stat limits |
-| [Gap plan](GAPS.md) | Missing content, implementation dependencies and closure order |
+| [Gap plan](GAPS.md) | Historical accessory implementation plan and remaining validation gates |
 | [Validation](VALIDATION.md) | Historical acceptance evidence plus current verification entry points |
 
 ## The promise

@@ -8,7 +8,7 @@ body:
     attributes:
       value: |
         Every field below maps to a maintainer approval requirement in the marketplace guide (`docs/MARKETPLACE.md`).
-        V1 accepts supported JSON content and approved PNG or JPEG images only. A validator pass verifies bytes; it is not game-test evidence.
+        The marketplace accepts supported JSON content and approved PNG, JPEG, or bounded GLB assets. A validator pass verifies bytes; it is not game-test evidence.
         Do not attach the game's `Assembly-CSharp.dll` or any other game assembly.
   - type: input
     id: package_id
@@ -105,10 +105,10 @@ body:
   - type: input
     id: release_url
     attributes:
-      label: Release archive URL
-      description: The packageUrl of the archive as a repository release asset.
+      label: Release archive URL, if published
+      description: Maintainers fill in the repository release asset URL after the reviewed archive is uploaded. A candidate submission can leave this blank.
     validations:
-      required: true
+      required: false
   - type: input
     id: sha256
     attributes:
@@ -127,7 +127,7 @@ body:
     id: file_inventory
     attributes:
       label: File inventory
-      description: Every path in the archive. manifest.json and content JSON sit at the root; images are package asset files.
+      description: Every path in the archive. manifest.json and content JSON sit at the root; approved images and GLB models live under assets/.
       render: text
     validations:
       required: true
@@ -135,7 +135,7 @@ body:
     id: content_evidence
     attributes:
       label: Screenshots or other content evidence
-      description: Up to three PNG or JPEG previews hosted as release assets (at most 2 MiB, 4096 px per side, 8,388,608 px total), or other evidence of what the content looks like in play. Credit image creators and confirm you hold distribution rights.
+      description: Up to three proposed PNG or JPEG previews (at most 2 MiB, 4096 px per side, 8,388,608 px total), or other evidence of what the content looks like in play. Maintainers host approved previews as release assets. Credit image creators and confirm you hold distribution rights.
     validations:
       required: true
   - type: textarea
@@ -158,7 +158,7 @@ body:
     attributes:
       label: Package contents checklist
       options:
-        - label: The archive contains only supported JSON files and PNG or JPEG images. No DLLs, plugins, native libraries, scripts or campaign files.
+        - label: The archive contains only supported JSON files and approved PNG, JPEG or GLB assets. No DLLs, plugins, native libraries, scripts or campaign files.
           required: true
         - label: The archive has no unsafe paths, links or unsupported JSON fields.
           required: true

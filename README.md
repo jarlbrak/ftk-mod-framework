@@ -21,7 +21,7 @@ The launcher checks for compatible framework updates before Play and can use the
 
 ## Make a mod
 
-You can author content with JSON files and a manifest, or use the C# `Content.*` API for classes, equipment, abilities, enemies, encounters, and adventures. The framework provides deterministic content IDs and compatibility checks. Start with [Writing Content](docs/WRITING-CONTENT.md), then use the guides for [mod versioning](docs/MOD-VERSIONING.md), [adventures](docs/ADVENTURES.md), and [custom 3D models](docs/CUSTOM-MODELS.md). See [Contributing](CONTRIBUTING.md) if you want to work on the framework itself.
+You can author content with JSON files and a manifest, or use the C# `Content.*` API for classes, equipment, abilities, enemies, encounters, and adventures. The framework provides deterministic content IDs and compatibility checks. Start with [Writing Content](docs/WRITING-CONTENT.md) and the published [Paladin source](marketplace/packages/paladin/README.md). The [documentation index](docs/README.md) covers models, previews, equipment, publishing and framework contributions.
 
 ## Compatibility
 

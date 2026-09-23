@@ -1,5 +1,8 @@
 # Releasing the launcher and framework
 
+This guide is for framework and launcher maintainers. To publish a content mod
+to the marketplace, use [Publishing Mods](PUBLISHING-MODS.md).
+
 Players download one platform archive, extract it permanently, and add the launcher
 inside it as a non-Steam game. The archive includes the framework, native helper,
 installer, and Steam artwork. No game assemblies are redistributed. First setup fetches

@@ -1,6 +1,8 @@
 # Paladin legendary equipment validation
 
-Status: partial candidate validation, 2026-09-22. This is not launch acceptance.
+Historical candidate validation, 2026-09-22. These receipts predate the
+published Paladin 1.0.0 archive and do not establish its full gameplay
+acceptance. See [Launch 1.0.0](LAUNCH-1.0.0.md) for final-package observations.
 The approved mechanics and tuning are described in
 [Legendary equipment concepts](ARTIFACTS.md). General release gates
 remain in [Launch 1.0.0](LAUNCH-1.0.0.md).

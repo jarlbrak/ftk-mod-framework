@@ -1,12 +1,18 @@
 # Title-screen mod activation
 
-Status: production hardening and final live acceptance are complete for the restricted first version. This work remains on a separate branch and is not merged or released.
+Status: the restricted first version shipped in framework 1.0.0 after the
+recorded macOS live acceptance. Other platforms and arbitrary packages remain
+outside its verified scope.
 
 ## Supported first version
 
 Title-screen activation supports the audited macOS game build, with either no community content or the supported Paladin package. Paladin includes its class, abilities, 51 equipment definitions, managed Guardian behavior, icons and custom models. The installed managed assembly must match the audited fingerprint. Other game builds and platforms keep next-launch activation.
 
-Manual mods, arbitrary behavior DLLs, additional BepInEx plugins, dependencies, bundled demo content and diagnostic injections do not qualify. Their ordinary loading path remains available. An eligible but invalid candidate is rejected transactionally; it is never accepted merely because its package GUID says Paladin.
+Manual mods, arbitrary behavior DLLs, additional BepInEx plugins, dependencies,
+the legacy 1.0.0 bundled demo and diagnostic injections do not qualify. Their
+ordinary loading path remains available. An eligible but invalid candidate is
+rejected transactionally; it is never accepted merely because its package GUID
+says Paladin.
 
 Enable **Title-screen activation next launch** in Mods > Settings and start the game again once to enter this mode. The configuration key is `Marketplace.EnableTitleScreenActivation`. It defaults off. After that mode is active, supported install, enable, update, disable and remove operations can activate in the same process:
 
