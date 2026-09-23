@@ -151,4 +151,4 @@ Use `./deploy.sh --player` to return a development install to player mode, or `i
 
 ### Community marketplace
 
-Open **Mods** from the title screen to browse Discover or manage Installed content. Changes are prepared for the next launch. The initial catalog has no published community packages; the bundled Adventure Pack remains playable. See [Marketplace](MARKETPLACE.md) for package review, offline behavior, repair and save limitations.
+Open **Mods** from the title screen to browse Discover or manage Installed content. Changes are prepared for the next launch. The catalog includes Paladin 1.0.0 for the verified macOS game build; the bundled Adventure Pack remains playable. See [Marketplace](MARKETPLACE.md) for package review, offline behavior, repair and save limitations.

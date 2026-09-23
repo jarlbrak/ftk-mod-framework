@@ -1,6 +1,6 @@
 # Curated community catalog
 
-`catalog.json` is the production discovery source. Its empty package list is intentional until reviewed packages have passed game verification and their immutable archives are published. Do not add the interface preview's fictional listings or integration fixtures.
+`catalog.json` is the production discovery source. It contains the reviewed Paladin 1.0.0 package, whose archive and banner are published as immutable release assets. Do not add the interface preview's fictional listings or integration fixtures.
 
 The in-game client consumes this catalog through the installed native helper. See [the player and maintainer guide](../docs/MARKETPLACE.md) for installation, recovery and review requirements. The implementation contract is [spec #101](https://github.com/jarlbrak/ftk-mod-framework/issues/101).
 
