@@ -57,5 +57,28 @@ discard and populated next-launch information. The helper now retains the exact
 installed descriptor for toggles after a package leaves the catalog. Public
 catalog installation and fresh artifact download remain release gates.
 
+## Final-candidate live observations
+
+The isolated macOS test copy loaded the final `85aaad10576f44e86ed81f047c50170a8982aed31bb770716079a6eccd9dafec`
+Paladin archive with framework 1.0.0. A native Create Game run with a Paladin,
+Hunter and Scholar entered the overworld, saved through the native menu, and
+resumed in a fresh process. The 54 package entries registered and all 51 equipment
+rows appeared in the native category caches. Both Life sanctum variants were
+observed with their native modifiers; a sanctum visit remains untested.
+
+Native combat produced a regular victory and loot vote. On a later encounter,
+the Paladin selected Guard through the native ally picker. A one-shot test fixture
+targeted the Hunter with a direct 9-damage enemy hit. The production Guard patch
+reduced it to 5, and native hit playback left the Hunter at 33 from 38 HP.
+This proves that controlled direct-hit route, not random enemy targeting or
+multiplayer behavior.
+
+A separate one-shot loot fixture appended the registered Novice Helm after the
+native enemy loot generator ran. Its card rendered in the ordinary victory
+screen; the Hunter collected it through the native vote and equipped it from
+the backpack. This proves item display, collection and cross-class equip on the
+final package. The fixture does not prove natural drop frequency, the other 50
+equipment cards, or the twelve accessory stat and persistence checks.
+
 For repeatable checks and publication mechanics, see [Releasing](../RELEASING.md)
 and the [Paladin acceptance matrix](VALIDATION.md).
