@@ -1,4 +1,4 @@
-# Paladin 1.0.0
+# Paladin 1.0.1
 
 Paladin is the first published marketplace mod and the reference package for
 authoring through FTK Mod Framework 1.0.1. It adds a Vitality-based protector
@@ -39,5 +39,5 @@ co-op. See the [release notes](../../../docs/releases/v1.0.1.md) and
 Run `python3 marketplace/packages/validate_paladin.py` from the repository
 root for structural checks. The [package builder](../build_paladin.py) creates a
 content-addressed archive and descriptor; its local validation does not
-publish them or prove in-game behavior. Corrections to the published 1.0.0
+publish them or prove in-game behavior. Corrections to the published 1.0.1
 archive require a new mod version and a new reviewed artifact.
