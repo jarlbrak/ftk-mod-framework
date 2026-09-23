@@ -1,7 +1,7 @@
 # Paladin 1.0.0
 
 Paladin is the first published marketplace mod and the reference package for
-authoring through FTK Mod Framework 1.0.0. It adds a Vitality-based protector
+authoring through FTK Mod Framework 1.0.1. It adds a Vitality-based protector
 class, Guard, 51 equipment items, original 3D models and icons. Six equipment
 families cover early gear through horizontal endgame choices; three Artifacts
 add legendary hammers and a shield. The package author is JarlBrak.
@@ -31,7 +31,7 @@ The 1.0.0 macOS game trial verified package registration, native new-game and
 fresh-process resume, Guard's direct-hit reduction, and controlled loot
 collection and cross-class equip. It did not establish natural drop frequency,
 every accessory view, full campaign balance, Windows/Linux gameplay or online
-co-op. See the [release notes](../../../docs/releases/v1.0.0.md) and
+co-op. See the [release notes](../../../docs/releases/v1.0.1.md) and
 [accessory validation record](../../../docs/paladin/ACCESSORY-VALIDATION.md).
 
 ## Validate a source change

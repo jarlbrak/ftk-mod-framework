@@ -66,4 +66,4 @@ resume, a controlled Guard hit, and controlled loot collection and cross-class
 equip were observed on the verified macOS game build. Controlled fixtures do
 not establish natural drop frequency, every accessory presentation or full
 campaign balance. Windows and Linux/Proton gameplay and online co-op remain
-unverified. See the [release notes](releases/v1.0.0.md) for the release scope.
+unverified. See the [release notes](releases/v1.0.1.md) for the release scope.

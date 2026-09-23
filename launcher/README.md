@@ -7,7 +7,7 @@ the game through Steam. It does not include the game or its assemblies.
 ## Add it to Steam
 
 1. Download the archive for your platform from the
-   [framework 1.0.0 release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.0).
+   [framework 1.0.1 release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.1).
    Extract it to a permanent folder and keep the files together.
 2. In Steam, choose **Games > Add a Non-Steam Game > Browse**.
 3. Select **For The King Modded.app** on macOS, **For The King Modded.sh** on
@@ -58,6 +58,6 @@ For mod installation and marketplace repair, see the
   and installer have offline checks, but Windows installation, Steam
   integration and gameplay remain unverified.
 
-The [1.0.0 release notes](../docs/releases/v1.0.0.md) state the tested scope.
+The [1.0.1 release notes](../docs/releases/v1.0.1.md) state the tested scope.
 Maintainers can find packaging and release procedures in
 [Releasing](../docs/RELEASING.md).

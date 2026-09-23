@@ -1,14 +1,14 @@
 # Install FTK Mod Framework
 
 FTK Mod Framework adds a **Mods** menu to the original *For The King*. The game is
-required and is not included. The [1.0.0 release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.0)
+required and is not included. The [1.0.1 release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.1)
 provides a launcher for macOS, Windows and Linux. Paladin is the first curated
 marketplace mod; install it separately from the in-game catalog.
 
 ## Recommended: Modded launcher
 
 1. Download and extract the launcher archive for your platform from the
-   [framework release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.0).
+   [framework release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.1).
    Keep the extracted files together in a permanent folder.
 2. In Steam, choose **Games > Add a Non-Steam Game > Browse**. Select
    **For The King Modded.app** on macOS, **For The King Modded.sh** on Linux,
@@ -77,6 +77,6 @@ right-clicking it and choosing **Open**. The installer clears quarantine from
 the downloaded loader files.
 
 Windows and Linux/Proton gameplay are not yet verified; online co-op with
-Paladin is unverified. See the [1.0.0 release notes](releases/v1.0.0.md) for the
+Paladin is unverified. See the [1.0.1 release notes](releases/v1.0.1.md) for the
 tested scope. When reporting a problem, include the platform, game build,
 framework and mod versions, and relevant lines from `LogOutput.log`.
