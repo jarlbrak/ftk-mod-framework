@@ -1,6 +1,6 @@
 # Paladin artifacts
 
-Status: approved design included in published Paladin 1.0.0. The Last Vigil,
+Status: approved design included in Paladin 1.0.1. The Last Vigil,
 Kingsfall and The Last Bastion have original runtime
 models, icons and equipment rows. Gameplay validation is partial; see
 [Legendary validation](LEGENDARY-VALIDATION.md) for artifact identities, observed

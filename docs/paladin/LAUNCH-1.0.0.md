@@ -1,8 +1,9 @@
 # Framework and Paladin 1.0.0 launch
 
-Framework `v1.0.0` and package `paladin-v1.0.0` are published. Historical beta
-receipts remain evidence for their recorded builds; they do not prove the final
-release bytes.
+This is the historical 1.0.0 launch record. Its release entries were withdrawn
+when framework and Paladin 1.0.1 became the first supported public release.
+Historical beta receipts remain evidence for their recorded builds; they do not
+prove the 1.0.1 release bytes.
 
 ## Required work
 

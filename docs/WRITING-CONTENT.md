@@ -10,8 +10,8 @@ Place `manifest.json` and one or more JSON files containing `entries` arrays in 
 {
   "modGuid": "com.ftkmf.paladin",
   "name": "Paladin",
-  "version": "1.0.0",
-  "frameworkVersion": "1.0.0",
+  "version": "1.0.1",
+  "frameworkVersion": "1.0.1",
   "author": "JarlBrak"
 }
 ```

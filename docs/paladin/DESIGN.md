@@ -1,6 +1,6 @@
 # Paladin: complete class design
 
-Status: design contract for the published Paladin 1.0.0 package. It defines 51
+Status: design contract for the published Paladin 1.0.1 package. It defines 51
 equipment items, including twelve accessories. The design and historical plans
 below do not establish full live-game acceptance; see the
 [launch record](LAUNCH-1.0.0.md) for observed coverage.

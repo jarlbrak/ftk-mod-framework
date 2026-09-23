@@ -1,6 +1,6 @@
 # Paladin equipment progression
 
-Status: Paladin 1.0.0 source inventory, 2026-09-22. **The published package
+Status: Paladin 1.0.1 source inventory, 2026-09-22. **The published package
 defines 51 equipment items, including twelve accessories.** All 51 registered
 in the final-package macOS trial; individual accessory views, stats, acquisition
 and persistence still need live coverage. See [Accessory validation](ACCESSORY-VALIDATION.md)

@@ -2,7 +2,7 @@
 
 ## Current verification entry points
 
-The published Paladin 1.0.0 package contains **54 content entries and 51
+The Paladin 1.0.1 package contains **54 content entries and 51
 equipment items**, including three artifacts and twelve accessories. The
 final-package macOS trial registered all entries; it did not cover every item
 in play. See [accessory validation](ACCESSORY-VALIDATION.md) for the earlier

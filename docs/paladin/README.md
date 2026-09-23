@@ -1,6 +1,6 @@
 # Paladin
 
-[Paladin 1.0.0](../../marketplace/packages/paladin/README.md) is the first
+[Paladin 1.0.1](../../marketplace/packages/paladin/README.md) is the first
 published FTK Mod Framework marketplace package and this repository's complete
 mod-authoring example. It adds a Vitality-based protector, Guard and Divine
 Intervention, six equipment families, twelve accessories and three legendary

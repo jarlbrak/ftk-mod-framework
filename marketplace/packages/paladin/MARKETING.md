@@ -4,7 +4,7 @@
 
 ## Hero banner
 
-`promo/paladin-censure-banner.png` is original promotional illustration of the fully equipped Censure set, not an in-game screenshot. The production catalog references its [published release asset](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.0.0).
+`promo/paladin-censure-banner.png` is original promotional illustration of the fully equipped Censure set, not an in-game screenshot. The production catalog references its [published release asset](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.0.1).
 
 ## Card copy
 
@@ -30,7 +30,7 @@ Build from plain Novice gear into Oathkeeper, Highward, Mercy, Censure and Verdi
 
 ## Compatibility
 
-Paladin 1.0.0 is published for framework 1.0.0. The catalog declares the
+Paladin 1.0.1 is published for framework 1.0.1. The catalog declares the
 verified macOS game build. Online co-op, including multiple Paladins and
 host/client state parity, remains unverified. The [validation record](../../../docs/paladin/LAUNCH-1.0.0.md)
 separates tested paths from remaining gameplay coverage.
