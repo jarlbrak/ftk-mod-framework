@@ -40,10 +40,10 @@ namespace FTKModFramework.Core.Data
         ///
         /// Gated by <c>Plugin.EnableBehaviorLoading</c> (#35): when that flag is false the WHOLE external-DLL
         /// pre-pass is skipped, so NO Assembly.LoadFrom runs and ZERO DLL behaviours register. This gates ONLY
-        /// the external-DLL path; the in-assembly behaviours (FrameworkBehaviors / com.ftkmf.sampledata:Steal)
+        /// the external-DLL path; built-in quest verbs
         /// register on their own unconditional path and are unaffected. The flag is null-guarded so a test
         /// context where Plugin.Awake never ran defaults to running the pre-pass (matching the debug override
-        /// patches in Content/, e.g. ForceCustomEncounter_Patch / ForceCutpurse_Patch, which guard
+        /// patches, which guard
         /// <c>Plugin.&lt;cfg&gt; == null</c>).
         /// </summary>
         internal static void LoadAll(List<DiscoveredMod> mods, ValidationReport report)

@@ -17,8 +17,8 @@ namespace FTKModFramework.Core
     /// each quest deserialized to the EXACT expected concrete type. Round-tripping back through the game's own
     /// serializer is what validates the <c>$type</c> discriminators at load time.
     ///
-    /// Emits exactly one "SELF-TEST PASS [campaign-builder]" line on success (or a matching FAIL line). Gated
-    /// by EnableSampleContent (it registers a real, listable demo adventure), like the rest of AdventureContent.
+    /// Emits exactly one "SELF-TEST PASS [campaign-builder]" line on success (or a matching FAIL line).
+    /// This test registers a real, listable probe adventure and must only run in a development context.
     /// </summary>
     internal static class CampaignSelfTest
     {

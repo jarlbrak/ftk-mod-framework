@@ -8,11 +8,11 @@ import (
 )
 
 func saveSettings() map[string]interface{} {
-	return map[string]interface{}{"EnableDataContent": true, "EnableCampaignEngine": true, "EnableSampleContent": false, "EnableBehaviorLoading": false}
+	return map[string]interface{}{"EnableDataContent": true, "EnableCampaignEngine": true, "EnableBehaviorLoading": false}
 }
 func TestSaveFingerprintCrossLanguageVector(t *testing.T) {
-	got, err := marketSaveFingerprint(strings.Repeat("a", 64), "1.0.0", []marketPackage{{ModGUID: "com.ftkmf.paladin", SHA256: strings.Repeat("b", 64), Enabled: true}}, saveSettings())
-	if err != nil || got != "c29b7774b66ecd083cb64456430920bd6ecd70d4e92f1158b0a04f5a602f71d7" {
+	got, err := marketSaveFingerprint(strings.Repeat("a", 64), "1.0.1", []marketPackage{{ModGUID: "com.ftkmf.paladin", SHA256: strings.Repeat("b", 64), Enabled: true}}, saveSettings())
+	if err != nil || got != "54374d2cc4dd1ecf4a07915c258099f0bd8185e9ba91d33ad638a5c5ae579e8a" {
 		t.Fatal(got, err)
 	}
 }

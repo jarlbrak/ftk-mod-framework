@@ -118,7 +118,7 @@ namespace FTKModFramework.Core.UI
         {
             if (_package != null) _package = CurrentListing(_package);
             string title = _package == null ? _entry.DisplayName : _package.Name;
-            List<string> previews = PreviewPaths(_package, _entry != null && _entry.IsBundledDemo);
+            List<string> previews = PreviewPaths(_package);
             GameObject banner = NewChild("Mod banner", parent);
             BrowseRect(banner, 12, 12, 1032, 580);
             if (previews.Count > 0)

@@ -74,7 +74,7 @@ internal static class DiscoveryChecks
         WriteMod(managed, "bundled-clash", Plugin.Guid);
         report = new ValidationReport();
         mods = ModDiscovery.DiscoverAll(manual, managed, report);
-        Check(Guids(mods) == "a.first,b.second,c.third,d.fourth" && CountContaining(report, "conflicts with bundled") == 1, "a mod claiming the bundled pack GUID is skipped with an error");
+        Check(Guids(mods) == "a.first,b.second,c.third,d.fourth" && CountContaining(report, "conflicts with FTK Mod Framework") == 1, "a mod claiming the framework GUID is skipped with an error");
 
         RegistrationSelection(fixture);
     }

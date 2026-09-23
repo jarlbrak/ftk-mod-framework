@@ -19,43 +19,24 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.1";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
 
-        /// <summary>
-        /// Whether to register the bundled example content (Emberbrand weapon + Ember Lash ability,
-        /// added to the Blacksmith's starting kit). Off = the framework only powers other mods.
-        /// </summary>
-        public static ConfigEntry<bool> EnableSampleContent;
         internal static ConfigEntry<bool> EnableTitleScreenActivation;
-
-        /// <summary>
-        /// DEBUG verification aid: replace every overworld LAND enemy the game spawns with the custom
-        /// "Cutpurse" so enemy injection is immediately visible in combat. Turn off for normal play.
-        /// </summary>
-        public static ConfigEntry<bool> ForceCustomEnemy;
-
-        /// <summary>
-        /// DEBUG verification aid: replace every overworld encounter the game spawns with the custom
-        /// "Smuggler's Cache" so injection is immediately visible in a normal run. Turn off for normal play.
-        /// </summary>
-        public static ConfigEntry<bool> ForceCustomEncounter;
 
         /// <summary>
         /// Whether to run the JSON data-content loader: discover mod folders under
         /// <see cref="DataContentRoot"/>, parse their content files, and register them through the
-        /// public Content.* API. Independent of <see cref="EnableSampleContent"/>: disabling the bundled
-        /// demo never disables third-party data mods.
+        /// public Content.* API.
         /// </summary>
         public static ConfigEntry<bool> EnableDataContent;
 
         /// <summary>
         /// Whether to run the external-DLL behaviour pre-pass (#33): for each discovered mod that declares a
         /// behaviorDll, Assembly.LoadFrom + reflect + register its [ContentBehavior] proficiencies. Gates ONLY
-        /// the external-DLL pre-pass; the in-assembly Phase-1 behaviours (FrameworkBehaviors /
-        /// com.ftkmf.sampledata:Steal) are registered separately and are NOT affected. Default on; inert when
+        /// the external-DLL pre-pass; built-in quest verbs are registered separately. Default on; inert when
         /// no mod declares a behaviorDll. Set false to skip all Assembly.LoadFrom work (0 DLL behaviours loaded).
         /// </summary>
         public static ConfigEntry<bool> EnableBehaviorLoading;
@@ -111,8 +92,7 @@ namespace FTKModFramework
         // The load-time self-tests are a DEVELOPMENT gate (CLAUDE.md: "SELF-TEST PASS lines in the log"). They
         // register throwaway probe rows and probe ADVENTURES (which show up in the New Game list), deliberately
         // exercise failure paths (so they log errors by design), and add load time. None of that belongs in a
-        // player's game, so they are off by default; the bundled sample content still emits its own SELF-TEST
-        // lines as part of registering, so a plain install keeps a health signal in the log.
+        // player's game, so they are off by default.
 
         /// <summary>
         /// Run the framework's load-time self-tests (behaviour primitives, passive registry, campaign engine,
@@ -219,27 +199,14 @@ namespace FTKModFramework
 
             EnableTitleScreenActivation = Config.Bind("Marketplace", "EnableTitleScreenActivation", false,
                 "Allow supported packages to activate before the first adventure. Uses separate compatible adventure saves; multiplayer is unavailable in this mode. Unsupported installations retain next-launch activation.");
-            EnableSampleContent = Config.Bind("Demo", "EnableSampleContent", true,
-                "Enable the FTK Adventure Pack: Thief and Innkeeper classes, the Cutpurse enemy, equipment, and adventures. " +
-                "Set false if you only want the framework as a dependency for other content mods.");
-
-            ForceCustomEnemy = Config.Bind("Enemies", "ForceCustomEnemy", false,
-                "DEBUG: replace every overworld LAND enemy that spawns with the custom 'Cutpurse' so enemy " +
-                "injection is immediately visible in combat. Set false for normal play.");
-
-            ForceCustomEncounter = Config.Bind("Adventures", "ForceCustomEncounter", false,
-                "DEBUG: replace every overworld encounter that spawns with the bundled sample's 'Smuggler's " +
-                "Cache' so encounter injection is immediately visible in-game (requires EnableSampleContent; " +
-                "inert otherwise). Set false for normal play.");
-
             EnableDataContent = Config.Bind("Data", "EnableDataContent", true,
                 "Run the JSON data-content loader (discovers content-mod folders under DataContentRoot and " +
-                "registers their content). Independent of EnableSampleContent.");
+                "registers their content).");
 
             EnableBehaviorLoading = Config.Bind("Data", "EnableBehaviorLoading", true,
                 "Run the external-DLL behaviour pre-pass: for each mod that declares a behaviorDll, load + " +
                 "reflect + register its [ContentBehavior] proficiencies. Gates ONLY the external-DLL pre-pass; " +
-                "the in-assembly behaviours (FrameworkBehaviors / com.ftkmf.sampledata:Steal) are unaffected. " +
+                "built-in quest verbs are unaffected. " +
                 "Default on; inert when no mod declares a behaviorDll. Set false to skip all Assembly.LoadFrom " +
                 "work (0 DLL behaviours loaded).");
 
@@ -267,7 +234,7 @@ namespace FTKModFramework
                 "DEVELOPMENT: run the framework's load-time self-tests (behaviour primitives, passive registry, " +
                 "campaign engine, realm spike, ...). They register throwaway probe rows and probe adventures " +
                 "(visible in the New Game list), log deliberate failure-path errors, and add load time. " +
-                "Leave false for normal play. The bundled sample content emits its own SELF-TEST lines regardless.");
+                "Leave false for normal play.");
 
             DiagnosticsEnableGate = Config.Bind("Diagnostics", "EnableScaleBudgetGate", false,
                 "DEVELOPMENT: measure each content load against a calibration baseline and budgets, emitting one " +
@@ -389,37 +356,12 @@ namespace FTKModFramework
             Core.HotReload.HotReloadCoordinator.CaptureBaseline(__instance);
             if (Core.HotReload.HotReloadBoundary.Enabled && Core.HotReload.HotReloadCoordinator.Faulted) return;
 
-            // Register the bundled-demo row UNCONDITIONALLY, before its gate is read. EnableSampleContent.Value
-            // backs the row's Enabled state (so a disabled demo stays listed and re-enableable); registration
-            // itself never depends on that value. Doing this before the gate is what stops the FR-3 fail-open
-            // default from silently re-enabling sample content the user turned off.
-            ModRegistry.Register(Plugin.Guid, "FTK Adventure Pack", true, null, Plugin.EnableSampleContent.Value,
-                "Adds the Thief and Innkeeper classes, the Cutpurse enemy, new equipment, encounters, and adventures.",
-                "FTK Mod Framework team");
-
-            // Framework-shipped behaviours (#31): the bundled-demo Steal behaviour key (com.ftkmf.sampledata:Steal)
-            // and the built-in CollectN quest verb (com.ftkmf.framework:CollectN). Runs UNCONDITIONALLY
-            // (independent of EnableSampleContent) and FIRST: the sample campaign below validates its collect-N
-            // quest against the verb registry at registration time, and the data loader later resolves the demo
-            // fixture's behavior:"Steal", so both keys must exist before either consumer runs. (It used to run
-            // after the samples, which only worked because a self-test registered the verb early.)
+            // Built-in quest verbs must register before content authored through the data API loads.
             Run("framework behaviors", FrameworkBehaviors.Register);
 
-            // Bundled demo content (opt-in via the gate). Disabling it must NOT skip the data loader below.
-            if (ModRegistry.IsEnabled(Plugin.Guid))
-            {
-                Run("sample weapon/ability", SampleContent.Register);
-                Run("thief class", ThiefClass.Register);
-                Run("innkeeper class", InnkeeperClass.Register);
-                Run("hoarfrost maul status effects", HoarfrostMaul.Register); // after the Innkeeper: it extends that kit
-                Run("cutpurse enemy", CutpurseEnemy.Register);
-                Run("sample encounter + adventure", AdventureContent.Register);
-            }
-
             // Framework self-tests (development gate; config Diagnostics/RunSelfTests, off by default). Each is
-            // independent of EnableSampleContent: they only exercise their own throwaway keys, types, and probe
-            // rows. They are skipped for players because they log deliberate failure-path errors and cost load
-            // time; the sample content above still emits its own SELF-TEST lines as part of registering.
+            // They only exercise their own throwaway keys, types, and probe rows. They are skipped for players
+            // because they log deliberate failure-path errors and cost load time.
             if (Plugin.SelfTestsEnabled)
             {
                 // Behaviour primitives (P3, #29): proves BehaviorRegistry + BehaviorHost work on throwaway types.
@@ -429,9 +371,7 @@ namespace FTKModFramework
                 // filesystem, no game state): '..'/separator/absolute values rejected, a bare filename resolves.
                 Run("behavior dll guard", BehaviorDllGuardSelfTest.Run);
 
-                // Passive-trait registry (spec #78): binds a THROWAWAY probe to whatever class row is present
-                // (the bundled Thief when sample content is on, otherwise the first vanilla row) and clears it
-                // again, so it never leaves a trait bound to a real class.
+                // Passive-trait registry binds a throwaway probe to a class row and clears it again.
                 Run("passive registry", PassiveSelfTest.Run);
             }
             else
@@ -451,8 +391,7 @@ namespace FTKModFramework
                 Plugin.SyntheticContentKind.Value,
                 Plugin.SyntheticContentTemplate.Value));
 
-            // JSON data-content mods (opt-in, independent of the demo). Runs AFTER sample content so a
-            // data mod can reference vanilla rows the same way the demo does. ContentLoader registers each
+            // JSON data-content mods. ContentLoader registers each
             // discovered mod into ModRegistry, so the summary below sees data mods too. The LoadResult is
             // captured in a LOCAL (not a static "last load" field on ContentLoader, which the spec forbids)
             // so the scale-budget gate can read the single existing measurement.
@@ -471,21 +410,21 @@ namespace FTKModFramework
             // Campaign scale gate (#45). Sibling of the data-content gate above: it authors a SYNTHETIC multi-stage
             // campaign at a fixed scale target (default 20x25 = 500 quests, 250x vanilla) through the PUBLIC campaign
             // builder, then gates load-time, memory, and the REAL serialized save-size. It runs INDEPENDENTLY of
-            // EnableDataContent (campaigns are not part of the data load) and of EnableSampleContent (it registers its
-            // OWN reserved scale-probe adventure), gated only by DiagnosticsEnableGate so the smoke log shows a
+            // EnableDataContent (campaigns are not part of the data load). It registers its own reserved
+            // scale-probe adventure, gated only by DiagnosticsEnableGate so the smoke log shows a
             // deterministic SCALE-BUDGET [campaign] + SELF-TEST PASS [campaign-scale] line without config edits. The
             // data gate's IdAllocator save-proxy captures ZERO campaign growth (string-keyed quests, NFR-1), so this
             // gate measures the campaign's own m_FullFileData bytes and asserts CustomIdCount is unchanged.
             Run("campaign scale budget", CampaignScaleBudgetGate.Evaluate);
 
-            // Emit AFTER both registration sites so N counts the demo + every discovered data mod. Kept in the
+            // Emit after data discovery so N counts every discovered data mod. Kept in the
             // postfix (not inside ContentLoader.Load) so it still fires when EnableDataContent is false.
             LogModRegistrySummary();
         }
 
         /// <summary>
         /// FR-8 observability: a single "ModRegistry: N mods, M enabled" line over the whole registry, plus an
-        /// info line per disabled row. Runs once, after both registration sites have populated the registry.
+        /// info line per disabled row. Runs once after discovery has populated the registry.
         /// </summary>
         private static void LogModRegistrySummary()
         {

@@ -16,5 +16,5 @@ if command -v gh >/dev/null 2>&1; then
   gh issue list --state open -L 5 2>/dev/null | sed 's/^/Issue: /'
 fi
 
-echo "--- Read AGENTS.md, the nearest nested AGENTS.md, and docs/ROADMAP.md before starting."
+echo "--- Read AGENTS.md, the nearest nested AGENTS.md, and docs/README.md before starting."
 exit 0

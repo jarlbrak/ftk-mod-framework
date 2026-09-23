@@ -1,9 +1,11 @@
 # Paladin accessory verification
 
-Status: offline implementation complete; paused before in-game testing, 2026-09-22. This change adds six
-trinkets and six necklaces to the unpublished 1.0.0 source candidate. The user
-requested a pause before in-game testing. No game launch, deployment, installed
-mod change or new native trial is part of this work.
+This is the offline validation record for six trinkets and six necklaces added
+before Paladin 1.0.0 publication. A later final-package macOS trial registered
+all 54 content entries, including the accessories. Individual accessory views,
+stats, acquisition and persistence remain unverified. See the
+[launch record](LAUNCH-1.0.0.md). The candidate-specific sections below retain
+their original evidence scope.
 
 ## Content boundary
 
@@ -65,7 +67,7 @@ dotnet run --project FTKModFramework/Tests/PlayerMods/PlayerMods.csproj -c Relea
 git diff --check
 ```
 
-See the [package build instructions](../../marketplace/packages/paladin/README.md#build-an-unpublished-local-candidate)
+See the [package build instructions](../../marketplace/packages/paladin/README.md#validate-a-source-change)
 and [original-art workflow](../../art-experiments/paladin-accessories/README.md)
 for archive and reproducibility commands. Offline checks do not prove native
 registration, display fit, balance, acquisition or persistence.

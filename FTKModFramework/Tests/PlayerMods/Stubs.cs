@@ -12,15 +12,12 @@ namespace FTKModFramework
         public static bool SelfTestsEnabled;
         public static readonly Setting<bool> EnableDataContent = new Setting<bool>(true);
         public static readonly Setting<bool> EnableCampaignEngine = new Setting<bool>(true);
-        public static readonly Setting<bool> ForceCustomEnemy = new Setting<bool>(false);
-        public static readonly Setting<bool> ForceCustomEncounter = new Setting<bool>(false);
         public static readonly Setting<bool> DiagnosticsEnableGate = new Setting<bool>(false);
         public static readonly Setting<int> SyntheticContentCount = new Setting<int>(0);
         public static readonly Setting<string> SyntheticContentKind = new Setting<string>("weapon");
         public static readonly Setting<string> SyntheticContentTemplate = new Setting<string>("bladeDagger");
         public static readonly Setting<int> SyntheticCampaignStages = new Setting<int>(20);
         public static readonly Setting<int> SyntheticCampaignQuestsPerStage = new Setting<int>(25);
-        public static readonly Setting<bool> EnableSampleContent = new Setting<bool>(true);
         public static readonly Setting<bool> EnableBehaviorLoading = new Setting<bool>(true);
         public static readonly TestLog Log = new TestLog();
     }

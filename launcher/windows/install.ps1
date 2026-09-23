@@ -215,8 +215,6 @@ else {
     Set-ConfigValue $config 'Diagnostics' 'RunSelfTests' 'false'
     Set-ConfigValue $config 'Diagnostics' 'EnableScaleBudgetGate' 'false'
     Set-ConfigValue $config 'Diagnostics' 'SyntheticContentCount' '0'
-    Set-ConfigValue $config 'Enemies' 'ForceCustomEnemy' 'false'
-    Set-ConfigValue $config 'Adventures' 'ForceCustomEncounter' 'false'
 }
 Write-Host 'Installed. No Steam launch option is needed on native Windows.'
 Write-Host 'Launch using Play, then check BepInEx\LogOutput.log for SELF-TEST PASS.'

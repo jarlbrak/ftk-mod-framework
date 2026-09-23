@@ -26,11 +26,10 @@ namespace FTKModFramework.Core
     /// <see cref="ArgumentOutOfRangeException"/>.</item>
     /// <item>(d, sanity) <see cref="CollectNQuestLogic.IsCompleteState"/> returns false when the party holds
     /// fewer than N (here: no live party, so the sum is 0 &lt; N). The "holds N =&gt; completes" direction is
-    /// gameplay, covered by #44's sample campaign.</item>
+    /// gameplay, which requires a live campaign.</item>
     /// </list>
     ///
-    /// Part (a) needs the installed template, so the whole test runs alongside <see cref="CampaignSelfTest"/>
-    /// under the EnableSampleContent path. It registers the collect-N verb itself first (idempotent first-wins),
+    /// Part (a) needs the installed template. It registers the collect-N verb itself first (idempotent first-wins),
     /// so parts (b)/(d) do not depend on FrameworkBehaviors having run earlier.
     /// </summary>
     internal static class CollectNSelfTest

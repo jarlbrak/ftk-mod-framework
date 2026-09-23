@@ -1,9 +1,9 @@
 # Guardian classes and original equipment
 
-These APIs and data declarations are introduced for framework 0.1.4. They are
-implemented on the development branch and have not yet passed the Paladin live
-acceptance gates. See [the Paladin design](paladin/DESIGN.md) and
-[implementation plan](paladin/IMPLEMENTATION.md).
+These public APIs and data declarations ship in framework 1.0.0 and are used by
+the published Paladin package. The [Paladin design](paladin/DESIGN.md) describes
+their intended behavior; the [launch record](paladin/LAUNCH-1.0.0.md) separates
+observed macOS gameplay from open live and co-op coverage.
 
 ## Guardian behavior
 

@@ -2,16 +2,17 @@
 
 ## Current verification entry points
 
-The current unpublished source package contains **54 content entries and 51
-equipment items**, including three artifacts and twelve new accessories. See
-[accessory validation](ACCESSORY-VALIDATION.md) for the new offline-only candidate,
-[legendary validation](LEGENDARY-VALIDATION.md) for the previous live-tested bytes, and
-[Launch 1.0.0](LAUNCH-1.0.0.md) for release gates.
+The published Paladin 1.0.0 package contains **54 content entries and 51
+equipment items**, including three artifacts and twelve accessories. The
+final-package macOS trial registered all entries; it did not cover every item
+in play. See [accessory validation](ACCESSORY-VALIDATION.md) for the earlier
+offline candidate, [legendary validation](LEGENDARY-VALIDATION.md) for earlier
+live-tested bytes, and [Launch 1.0.0](LAUNCH-1.0.0.md) for current release gates.
 
-The [equipment inventory](EQUIPMENT.md) includes twelve newly authored
-accessories and original display art. Their native behavior and appearance
-have not been tested. [Gap plan](GAPS.md) owns their closure
-sequence; [Native baseline](NATIVE-BASELINE.md) records read-only game findings.
+The [equipment inventory](EQUIPMENT.md) includes twelve accessories and original
+display art. Their individual native behavior and appearance have not been
+tested. [Gap plan](GAPS.md) records the historical closure sequence;
+[Native baseline](NATIVE-BASELINE.md) records read-only game findings.
 Documentation and arithmetic review do not establish gameplay acceptance.
 
 ## Historical beta evidence
@@ -241,7 +242,7 @@ git diff --check
 ```
 
 Rebuild and validate the actual local archive with the commands in the
-[package README](../../marketplace/packages/paladin/README.md#build-an-unpublished-local-candidate).
+[package README](../../marketplace/packages/paladin/README.md#validate-a-source-change).
 Retain the builder's complete receipt, not only console success. Fixture
 preparation is a package gate; it does not activate the package or run gameplay.
 

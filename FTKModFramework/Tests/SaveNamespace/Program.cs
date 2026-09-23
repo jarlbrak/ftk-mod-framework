@@ -9,9 +9,9 @@ static class Program
     static void Main()
     {
         string a=new string('a',64),b=new string('b',64);
-        Check(SaveSetIdentity.Compute(a,"1.0.0",new Dictionary<string,string>{{"com.ftkmf.paladin",b}},
-            new Dictionary<string,string>{{"dataContent","True"},{"campaignEngine","True"},{"sampleContent","False"},{"behaviorLoading","False"}})
-            == "c29b7774b66ecd083cb64456430920bd6ecd70d4e92f1158b0a04f5a602f71d7");
+        Check(SaveSetIdentity.Compute(a,"1.0.1",new Dictionary<string,string>{{"com.ftkmf.paladin",b}},
+            new Dictionary<string,string>{{"dataContent","True"},{"campaignEngine","True"},{"behaviorLoading","False"}})
+            == "54374d2cc4dd1ecf4a07915c258099f0bd8185e9ba91d33ad638a5c5ae579e8a");
         var packages=new Dictionary<string,string>{{"paladin",a},{"other",b}};
         var reversed=new Dictionary<string,string>{{"other",b},{"paladin",a}};
         var settings=new Dictionary<string,string>{{"b","true"},{"a","false"}};

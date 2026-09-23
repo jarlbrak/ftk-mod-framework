@@ -127,10 +127,10 @@ if ($backups.Count -ne 1) { throw 'Existing framework was not backed up' }
 Write-Host 'PASS: local framework installs offline and backs up existing DLL'
 
 $config = Join-Path $game 'BepInEx/config/com.ftkmf.framework.cfg'
-[IO.File]::WriteAllText($config, "[Diagnostics]`nRunSelfTests = true`nEnableScaleBudgetGate = true`nSyntheticContentCount = 99`n[Enemies]`nForceCustomEnemy = true`n[Adventures]`nForceCustomEncounter = true`n[Demo]`nEnableSampleContent = false`n")
+[IO.File]::WriteAllText($config, "[Diagnostics]`nRunSelfTests = true`nEnableScaleBudgetGate = true`nSyntheticContentCount = 99`n[Data]`nEnableDataContent = false`n")
 & $installer -GameDir $game -Framework $source
 $playerConfig = Get-Content -LiteralPath $config -Raw
-foreach ($expected in @('RunSelfTests = false', 'EnableScaleBudgetGate = false', 'SyntheticContentCount = 0', 'ForceCustomEnemy = false', 'ForceCustomEncounter = false', 'EnableSampleContent = false')) {
+foreach ($expected in @('RunSelfTests = false', 'EnableScaleBudgetGate = false', 'SyntheticContentCount = 0', 'EnableDataContent = false')) {
     if (-not $playerConfig.Contains($expected)) { throw "Missing preserved/reset config: $expected" }
 }
 Write-Host 'PASS: player install clears developer flags and preserves gameplay selection'

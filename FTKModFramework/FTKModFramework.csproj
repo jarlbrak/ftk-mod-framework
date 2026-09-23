@@ -16,7 +16,7 @@
     <TargetFramework>net35</TargetFramework>
     <AssemblyName>FTKModFramework</AssemblyName>
     <Product>FTKModFramework</Product>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>disable</Nullable>
@@ -59,18 +59,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- The Samples/ tree is a SEPARATE assembly (the sample behaviour mod, #33), built on its own and
-         deployed into a sample MOD folder, NOT into BepInEx/plugins. Exclude it from the plugin's default
-         SDK globs so the plugin build gate (`dotnet build -c Release`) stays UNCHANGED and never pulls the
-         sample source (or its generated obj/ AssemblyInfo) into FTKModFramework.dll. -->
-    <Compile Remove="Samples\**\*.cs" />
+    <!-- Keep test harness sources out of the shipped plugin assembly. -->
     <Compile Remove="Tests\**\*.cs" />
     <None Remove="Tests\**\*" />
     <Content Remove="Tests\**\*" />
     <EmbeddedResource Remove="Tests\**\*" />
-    <None Remove="Samples\**\*" />
-    <Content Remove="Samples\**\*" />
-    <EmbeddedResource Remove="Samples\**\*" />
   </ItemGroup>
 
   <ItemGroup>

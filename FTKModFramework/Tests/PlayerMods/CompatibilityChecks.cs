@@ -36,7 +36,7 @@ internal static class CompatibilityChecks
             File.WriteAllText(Path.Combine(folder, "manifest.json"), JsonConvert.SerializeObject(manifest));
             File.WriteAllText(Path.Combine(folder, "content.json"), "not json");
             UnityEngine.PlayerPrefs.SetInt(ModRegistry.PrefKeyPrefix + key, 1);
-            ModEntry entry = ModRegistry.Register(key, key, false, "1.0.0", true, null, null, declaration, true);
+            ModEntry entry = ModRegistry.Register(key, key, "1.0.0", true, null, null, declaration, true);
             Check(entry.Enabled && !entry.FrameworkCompatible && !ModRegistry.IsEnabled(key), "blocked preference retained but loading disabled");
             ModRegistry.SetEnabled(key, true);
             Check(entry.PendingEnabled == null && UnityEngine.PlayerPrefs.GetInt(ModRegistry.PrefKeyPrefix + key, 0) == 1, "blocked enable cannot rewrite preference");
@@ -55,7 +55,7 @@ internal static class CompatibilityChecks
                 new List<string>(), Path.Combine(root, "missing-unregistered.dll"))
         }, unknownBehavior);
         Check(unknownBehavior.Errors.Count == 0, "manifest gate blocks behavior even without registry entry");
-        ModRegistry.Register("author.updated", "Author update", false, "1.0.0", true, null, null, null, true);
+        ModRegistry.Register("author.updated", "Author update", "1.0.0", true, null, null, null, true);
         Check(ModRegistry.CompatibilityReasonFor("author.updated", "1.0.0") != null, "installed unverified version retains its blocker");
         Check(ModRegistry.CompatibilityReasonFor("author.updated", "1.0.1") == null &&
             ModFrameworkCompatibility.Reason(Plugin.Version, Plugin.Version) == null,

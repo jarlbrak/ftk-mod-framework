@@ -67,7 +67,7 @@ namespace FTKModFramework.Core.Diagnostics
                 Plugin.Log.LogWarning("SCALE-BUDGET: baseline was calibrated with " +
                     baseline.CustomRowCountAtCalibration + " custom row(s) present (poisoned anchor); budgets " +
                     "may be inflated. Recalibrate with content disabled (set RecalibrateBaseline=true and " +
-                    "EnableSampleContent=false / EnableDataContent=false for one run).");
+                    "EnableDataContent=false for one run).");
 
             ScaleVerdict verdict = ScaleBudgetEval.Compare(metrics, baseline, budget);
             EmitVerdict(verdict);

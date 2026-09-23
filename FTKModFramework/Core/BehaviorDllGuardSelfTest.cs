@@ -14,7 +14,7 @@ namespace FTKModFramework.Core
     /// Emits exactly one "SELF-TEST PASS [behavior-dll-guard]" line on success (or a matching FAIL line), in
     /// the same style as the class/enemy/behavior-primitives self-tests.
     ///
-    /// Run UNCONDITIONALLY from the plugin postfix (it does not depend on EnableSampleContent): it touches
+    /// Run under the framework self-test gate: it touches
     /// no game state and no filesystem, only the guard's pure logic.
     /// </summary>
     internal static class BehaviorDllGuardSelfTest

@@ -49,7 +49,6 @@ namespace FTKModFramework.Core.HotReload
             Dictionary<string, string> settings = new Dictionary<string, string>(StringComparer.Ordinal);
             settings.Add("dataContent", Plugin.EnableDataContent.Value.ToString());
             settings.Add("campaignEngine", Plugin.EnableCampaignEngine.Value.ToString());
-            settings.Add("sampleContent", Plugin.EnableSampleContent.Value.ToString());
             settings.Add("behaviorLoading", Plugin.EnableBehaviorLoading.Value.ToString());
             string fingerprint = SaveSetIdentity.Compute(gameHash, Plugin.Version, packages, settings);
             return fingerprint;

@@ -29,7 +29,8 @@ release bytes.
 - [x] Review source and complete the clean-tree framework packaging dry run.
 - [x] Publish framework/package assets and verify downloaded hashes. The Paladin
   release is immutable. Framework `v1.0.0` remains the latest stable release.
-- [ ] Add the verified package to the production catalog and test Discover/install/restart.
+- [x] Add the verified package to the production catalog.
+- [ ] Test public Discover/install/restart against the published catalog and artifacts.
 
 `paladin-v1.0.0` was published with `--latest=false`. This repository's latest
 stable release remains framework `v1.0.0`: the updater expects a framework
@@ -41,8 +42,10 @@ The locally configured game is macOS. Online co-op and Windows/Linux/Proton
 gameplay are not verified. Version 1.0.0 does not change those evidence limits.
 Advertised platforms and game fingerprints must match actual verification.
 
-The initial framework disables bundled development examples by default. Existing
-explicit preferences remain intact. Paladin is a separate marketplace package.
+Framework 1.0.0 still contains a bundled development pack and its default
+setting enables it. This is a known release defect. Paladin is the only
+published marketplace package; the bundled pack is being removed in a new
+framework patch rather than changing immutable 1.0.0 release assets.
 
 The current candidates also load in the normal Steam installation: framework
 1.0.0, matching installed DLL/helper receipt, Paladin as the sole enabled mod,

@@ -52,8 +52,8 @@ namespace FTKModFramework.Core.HotReload
             if (!HotReloadBoundary.Enabled) return;
             try
             {
-                if (Plugin.EnableSampleContent.Value || Plugin.SelfTestsEnabled || Plugin.DiagnosticsEnableGate.Value ||
-                    Plugin.ForceCustomEnemy.Value || Plugin.ForceCustomEncounter.Value || Plugin.SyntheticContentCount.Value != 0 || !Plugin.EnableDataContent.Value)
+                if (Plugin.SelfTestsEnabled || Plugin.DiagnosticsEnableGate.Value ||
+                    Plugin.SyntheticContentCount.Value != 0 || !Plugin.EnableDataContent.Value)
                     throw new InvalidOperationException("Injected or diagnostic content is outside title-screen activation.");
                 using (SHA256 sha = SHA256.Create())
                 using (FileStream stream = File.OpenRead(typeof(TableManager).Assembly.Location))

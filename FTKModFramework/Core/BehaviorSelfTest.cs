@@ -19,7 +19,7 @@ namespace FTKModFramework.Core
     /// line on success (or matching FAIL lines), in the same style as the class/enemy self-tests. Cleans up its
     /// host GameObject.
     ///
-    /// Run unconditionally from the plugin postfix (it does not depend on EnableSampleContent): it only touches
+    /// Run under the framework self-test gate: it only touches
     /// its own throwaway keys/types and registers nothing the game or other content can observe.
     /// </summary>
     internal static class BehaviorSelfTest

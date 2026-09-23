@@ -1,10 +1,11 @@
 # Paladin completion and gap plan
 
-Status: accessory source implementation, 2026-09-22. The source candidate now
-contains 54 entries, including twelve new accessories and original display
-art. The previously installed 42-entry candidate is unchanged. Work is paused
-before deployment or any in-game test, as requested. See
-[Accessory validation](ACCESSORY-VALIDATION.md) for offline evidence.
+Historical accessory plan, written before Paladin 1.0.0 publication. The
+published package has 54 entries, including twelve accessories and original
+display art. The final-package macOS trial registered all 54 entries, but
+individual accessory views, stats, acquisition and persistence remain open.
+See [Launch 1.0.0](LAUNCH-1.0.0.md) for the current evidence boundary. Statements
+below about an unpublished candidate describe the earlier plan.
 
 ## Coverage ledger
 

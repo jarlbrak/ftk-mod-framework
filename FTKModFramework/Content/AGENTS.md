@@ -1,12 +1,9 @@
-# Bundled content instructions
+# Content directory instructions
 
 Read the root and `FTKModFramework/AGENTS.md` first.
 
-- Author bundled examples as consumers of the public `Content.*` and adventure APIs.
-- Do not reach into `Core/` to bypass a missing public primitive. Propose the smallest API extension
-  and have it reviewed first.
-- Clone the closest verified vanilla template and change only intended fields.
-- Use stable string keys and framework allocation. Never hard-code custom enum integers.
-- Keep samples gated by the existing sample-content configuration.
-- Add focused self-test coverage for registration and resolution, then verify visible behavior in
-  game before claiming the example works.
+The framework does not ship bundled example classes, items, enemies or
+adventures. Paladin is the published example under `marketplace/packages/paladin/`.
+Keep mod-author content on the public `Content.*` API and engine mechanics in
+`Core/`. Any future file here needs an explicit framework-owned purpose and
+stable registered identities. Never copy game assemblies or native assets.

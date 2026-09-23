@@ -56,8 +56,8 @@ namespace FTKModFramework.Core.HotReload
                 return "Title-screen activation currently supports the audited macOS build; this platform uses next-launch activation.";
             if (!MarketplaceRuntime.CanDiscover || !MarketplaceRuntime.BootstrapVerified || MarketplaceRuntime.LeaseFailure != null || !MarketplaceRuntimeLease.Acquired)
                 return "Marketplace startup did not establish exclusive ownership.";
-            if (Plugin.EnableSampleContent.Value || Plugin.SelfTestsEnabled || !Plugin.EnableDataContent.Value ||
-                Plugin.ForceCustomEnemy.Value || Plugin.ForceCustomEncounter.Value || Plugin.SyntheticContentCount.Value != 0 || Plugin.DiagnosticsEnableGate.Value)
+            if (Plugin.SelfTestsEnabled || !Plugin.EnableDataContent.Value ||
+                Plugin.SyntheticContentCount.Value != 0 || Plugin.DiagnosticsEnableGate.Value)
                 return "Injected or diagnostic content requires next-launch activation.";
             foreach (KeyValuePair<string, PluginInfo> plugin in Chainloader.PluginInfos)
                 if (plugin.Key != Plugin.Guid && !(TestEnvironment &&
@@ -129,9 +129,9 @@ namespace FTKModFramework.Core.HotReload
                 (!titleFocused && !ModsPanel.HasTitleOwner(main))) return "Return to the initial title screen or its Mods menu.";
             if (FTKInput.Instance.m_WaitingForPopup) return "A native popup is pending.";
             if (!DefinitionState.HasBaseline) return "No pristine database baseline.";
-            if (Plugin.EnableSampleContent.Value || Plugin.SelfTestsEnabled || !Plugin.EnableDataContent.Value ||
-                Plugin.ForceCustomEnemy.Value || Plugin.ForceCustomEncounter.Value || Plugin.SyntheticContentCount.Value != 0 || Plugin.DiagnosticsEnableGate.Value)
-                return "Demo, injected or diagnostic content is outside title-screen activation.";
+            if (Plugin.SelfTestsEnabled || !Plugin.EnableDataContent.Value ||
+                Plugin.SyntheticContentCount.Value != 0 || Plugin.DiagnosticsEnableGate.Value)
+                return "Diagnostic content is outside title-screen activation.";
             foreach (KeyValuePair<string, PluginInfo> plugin in Chainloader.PluginInfos)
                 if (plugin.Key != Plugin.Guid && !(TestEnvironment && (plugin.Key == "com.ftkmf.model-test-content" || plugin.Key == "com.ftkmf.runtime-model-test")))
                     return "Unsupported loaded plugin: " + plugin.Key;

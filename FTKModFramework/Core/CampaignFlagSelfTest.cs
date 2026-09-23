@@ -23,9 +23,8 @@ namespace FTKModFramework.Core
     /// declared type is <c>QuestLogicBase</c>, so Auto emits/consumes the framework <c>$type</c>. Asserts the
     /// element comes back a <see cref="CampaignStateQuest"/> with flag-equal <c>m_Flags</c>.</item>
     /// </list>
-    /// Emits exactly one <c>SELF-TEST PASS [campaign-flag-roundtrip]</c> line (or a matching FAIL). Wired the same
-    /// gated way as <see cref="CampaignSelfTest"/>/<see cref="CollectNSelfTest"/> from
-    /// <c>Content/AdventureContent.cs</c>. The store-injection / host-authority / load-rehydration paths are live
+    /// Emits exactly one <c>SELF-TEST PASS [campaign-flag-roundtrip]</c> line (or a matching FAIL). The
+    /// store-injection / host-authority / load-rehydration paths are live
     /// <c>GameLogic</c> behaviour, exercised in-game; this gate isolates the serializer round-trip, which is the
     /// spec's named headline risk (does the FullSerializer <c>$type</c> recover the subtype?).
     /// </summary>
