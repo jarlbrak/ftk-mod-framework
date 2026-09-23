@@ -1,8 +1,8 @@
 # Framework and Paladin 1.0.0 launch
 
-Target: framework `v1.0.0` and package `paladin-v1.0.0`. These are unpublished
-release candidates. Historical beta receipts remain evidence for their recorded
-builds; they do not prove the final release bytes.
+Framework `v1.0.0` and package `paladin-v1.0.0` are published. Historical beta
+receipts remain evidence for their recorded builds; they do not prove the final
+release bytes.
 
 ## Required work
 
@@ -26,13 +26,14 @@ builds; they do not prove the final release bytes.
 - [x] Validate the current package, all referenced assets and package lifecycle.
   Repeat these checks if the package changes again.
 - [ ] Exercise fresh game, combat, acquisition, sanctum and save/resume on final artifacts.
-- [ ] Review source and complete the clean-tree framework packaging dry run.
-- [ ] Publish immutable framework/package assets and verify downloaded hashes.
+- [x] Review source and complete the clean-tree framework packaging dry run.
+- [x] Publish framework/package assets and verify downloaded hashes. The Paladin
+  release is immutable. Framework `v1.0.0` remains the latest stable release.
 - [ ] Add the verified package to the production catalog and test Discover/install/restart.
 
-Publish `paladin-v1.0.0` with `--latest=false`. This repository's latest stable
-release must remain framework `v1.0.0`: the updater expects a framework `vX.Y.Z`
-tag and framework update assets, not a content-package release.
+`paladin-v1.0.0` was published with `--latest=false`. This repository's latest
+stable release remains framework `v1.0.0`: the updater expects a framework
+`vX.Y.Z` tag and framework update assets, not a content-package release.
 
 ## Coverage boundaries
 

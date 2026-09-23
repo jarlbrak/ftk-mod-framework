@@ -1,6 +1,6 @@
 # In-game community marketplace
 
-The title-screen Mods panel is the entry point for free community content. Discover lists curated packages; Installed distinguishes managed downloads, bundled content and manually installed mods. The catalog starts empty. Test fixtures and the interface preview's concept listings are not downloadable community mods.
+The title-screen Mods panel is the entry point for free community content. Discover lists curated packages; Installed distinguishes managed downloads, bundled content and manually installed mods. The catalog includes Paladin 1.0.0 for the verified macOS game build. Test fixtures and the interface preview's concept listings are not downloadable community mods.
 
 The mod selector follows the native Create Game screen. Select a mod in the left list to see its large cover image, description, features and metadata on the right. The lower parchment panels scroll when an author supplies longer text. Mod Options shows the installed state and the next available action; changes go through review and normally apply after restart. Required components stay separate under Components. Settings holds marketplace and registration status, the next-launch review, restore and the mod-list export.
 
