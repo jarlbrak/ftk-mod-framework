@@ -351,6 +351,9 @@ namespace FTKModFramework.Core.UI
         internal void RenderPending()
         {
             if (!_refreshPending || !gameObject.activeInHierarchy) return;
+            // Activation replaces resources used by the panel. Keep its controls inert until the
+            // transaction finishes, then rebuild from the committed or rolled-back generation.
+            if (HotReload.HotReloadCoordinator.Busy) return;
             try { Render(); }
             catch (Exception e)
             {
