@@ -191,8 +191,8 @@ The bundled content is a working reference: `Content/SampleContent.cs` (a custom
 `Content/ThiefClass.cs` (a full custom class, including a custom-behaviour `ProficiencyBase` in
 `ThiefStealProficiency.cs`), `Content/CutpurseEnemy.cs` (a custom enemy), `Content/InnkeeperClass.cs`
 (passive traits). The samples are gated
-behind the `Demo / EnableSampleContent` config (set it false to use the framework purely as a
-dependency for other mods).
+behind the `Demo / EnableSampleContent` config, which is false by default. Enable it explicitly
+to try the development examples; marketplace mods do not require it.
 
 Content can also be authored as **pure data**, no C# required: a mod folder with a `manifest.json`
 and one or more content JSON files is discovered and loaded at startup, and the title screen's

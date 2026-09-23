@@ -1,7 +1,16 @@
-# Paladin beta implementation
+# Paladin implementation
 
 Tracking epic: [#138](https://github.com/jarlbrak/ftk-mod-framework/issues/138).
 The [design contract](DESIGN.md) records the agreed player behavior.
+
+## Accessory completion plan
+
+The [equipment inventory](EQUIPMENT.md) records 51 authored items, including
+six new trinkets plus six new necklaces. [Gap plan](GAPS.md) orders data, original art,
+native verification and final package work. The new source candidate contains 54 entries;
+[accessory validation](ACCESSORY-VALIDATION.md) records offline checks and the
+explicit pause before live testing. [Native baseline](NATIVE-BASELINE.md)
+verifies the two equipment slots and existing modifier/display capabilities.
 
 ## Delivery boundary
 
@@ -12,7 +21,7 @@ models into the framework, or enabling bundled sample content.
 
 The development marketplace now validates bounded GLB assets and typed content
 capabilities while retaining executable-code rejection and matching helper/runtime
-validation. These capabilities require the unreleased framework 0.1.4. Models resolve within the owning package, with stable
+validation. These capabilities ship in the planned framework 1.0.0. Models resolve within the owning package, with stable
 package-specific identities; references must never escape that root.
 
 ## Ordered implementation slices

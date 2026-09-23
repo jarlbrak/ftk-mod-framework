@@ -1,3 +1,62 @@
+# Paladin: complete class design
+
+Status: implemented core and 51 authored equipment items in an unpublished 1.0.0
+source candidate, 2026-09-22. Twelve new accessories have offline checks only. A documented
+rule, an authored content row and a passed live test are separate states.
+
+## Read the design
+
+| Document | Purpose |
+| --- | --- |
+| [Combat](COMBAT.md) | Actions, costs, timing, healing, protection and counterplay |
+| [Equipment](EQUIPMENT.md) | Every ordinary item, accessories and combined loadout totals |
+| [Artifacts](ARTIFACTS.md) | The Last Vigil, Kingsfall and The Last Bastion |
+| [Art direction](ART-DIRECTION.md) | Progression silhouettes, accessory art and native character boundaries |
+| [Native baseline](NATIVE-BASELINE.md) | Verified slots, templates, inherited actions and stat limits |
+| [Gap plan](GAPS.md) | Missing content, implementation dependencies and closure order |
+| [Validation](VALIDATION.md) | Historical acceptance evidence plus current verification entry points |
+
+## The promise
+
+**A deliberate protector who gives up an attack to keep an ally standing, then
+turns focused strikes into recovery.** High Vitality makes hammer attacks
+reliable; modest Speed makes anticipating danger important. The shield route
+invests in the ally. The great-hammer route gives up shield support for damage.
+Mercy, Censure and Verdict are interchangeable equipment choices, not permanent
+subclasses or hidden matching-set bonuses.
+
+In a typical fight, Guard names the ally most exposed to the next enemy attack.
+On the Paladin's next turn protection expires, but the designation remains. The
+player can renew Guard, switch the protected ally, or spend Focus on an attack
+that heals the previously designated ally. Enemies attacking someone else,
+incapacitating the Paladin, or using damage over time keep that decision costly.
+Guard does not force enemy targeting, and the Paladin cannot protect itself.
+
+## Class sheet
+
+These are authored starting values in the package, before native difficulty,
+equipment, sanctum and other derived modifiers. They are not a promise that
+every in-game stat panel displays exactly these numbers.
+
+| Stat | Base value | Intent |
+| --- | ---: | --- |
+| Strength | 70 | Secondary physical checks and fallback weapons |
+| Intelligence | 40 | Clear exploration weakness |
+| Awareness | 60 | Ordinary scouting capability |
+| Talent | 50 | Limited utility specialization |
+| Speed | 60 | Protection requires anticipation rather than guaranteed initiative |
+| Vitality | 84 | Primary hammer stat and durable class identity |
+| Focus | 3 | Native resource shared between reliable attacks and exploration |
+| Gold | 3 | Modest starting purse |
+
+The six main stats total **364**. The class clones Blacksmith, declares Vitality
+as its primary stat and explicitly disables inherited Steadfast. Its starting
+equipment is Novice Hammer, Novice Aegis, Novice Plate, Novice Sabatons and Novice
+Helm. The new accessories are found or bought, not additional starting
+grants. [Native baseline](NATIVE-BASELINE.md) explains inherited weapon actions,
+difficulty bonuses and the stat cap; equip/remove verification remains in
+[the gap plan](GAPS.md).
+
 ## Vision
 Deliver one marketplace mod that enables a fully playable Paladin, its complete equipment progression, and entirely original custom 3D art. The class is a Vitality-based protector that spends actions safeguarding a chosen teammate and focused attacks restoring that teammate.
 
@@ -15,7 +74,12 @@ Build on the support-tank idea explored by DehydratedMud's Community DLC while r
 - Shields have real tradeoffs that make them unattractive as conventional shields, with value concentrated in Paladin mechanics. They never increase Guard above 50%.
 - One-handed hammer/shield emphasizes defense; two-handed hammers emphasize offense and focused healing. Both have several equally viable endgame specialties for horizontal progression.
 - Gear enters normal level-appropriate shops and loot. No special unlock or quest requirement.
-- Original armor draws aesthetic inspiration from classic WoW Paladin tier sets: slimmer early Lightforge-inspired direction and endgame Judgment-inspired direction, adapted to FTK. Endgame branches share a silhouette with distinct colors/details and defensive/offensive motifs. No copied Blizzard or Community DLC assets.
+- Complete accessory coverage means the native Trinket and Neck equipment slots.
+  The native Belt container holds consumables, not wearable belt armor. The
+  [equipment inventory](EQUIPMENT.md) defines six trinkets and six necklaces;
+  [accessory validation](ACCESSORY-VALIDATION.md) separates their offline
+  implementation from pending native tests.
+- Original armor draws aesthetic inspiration from classic WoW Paladin tier sets: slimmer early Lightforge-inspired direction and endgame Judgment-inspired direction, adapted to FTK. Endgame branches share an order identity with distinct silhouettes, colors, details and defensive/offensive motifs. No copied Blizzard or Community DLC assets.
 - Every added equipment item receives new custom 3D assets, editable sources, reproducible exports, and provenance. Bodies, faces and hair use native FTK models; no custom body replacement or two-appearance restriction is registered. Gear icons and textures are original.
 - Armor progression must read through geometry: Oathkeeper is a lighter field harness with restrained shoulders; Highward has a visibly more protective layered silhouette. Both retain a fitted waist. Greaves, ankle guards and articulated foot plates form a coherent boot, without detached round toe ornaments. Judge the result on native characters from the front and an angled view.
 - Global taunt, enemy behavior, and unrelated classes remain unchanged.
@@ -44,8 +108,11 @@ No borrowed assets, placeholder geometry represented as final art, blanket model
 Mechanics and model-route discovery can proceed independently. Final content depends on their reviewed public contracts. Packaging and beta acceptance depend on all three.
 
 ## Risks and evidence expectations
-- Existing passives do not expose the agreed triggers; exact native action and damage flow must be investigated before implementing hooks.
-- Marketplace currently rejects code and unsupported assets. Review the smallest safe declarative/asset support extension before selecting packaging architecture.
+- Core Guardian hooks and typed marketplace equipment capabilities now exist.
+  Review new effects against their exact native action and damage flow rather
+  than treating earlier integration evidence as coverage for new behavior.
+- Marketplace packages remain data-only. Accessory planning should reuse the
+  existing bounded stat and display capabilities where the native route fits.
 - Player body, apparel, rigid weapon and shield routes have distinct validation requirements; evidence does not transfer across sex, renderer, weapon or outfit.
 - Online co-op is designed for determinism but is not locally verified by single-player tests. Collect structured community reports for production.
 - Test pure state/math first, then framework and package suites, then live isolated gameplay and visual acceptance. Build success never substitutes for live proof.

@@ -14,6 +14,7 @@ namespace FTKModFramework.Core
                 ? (FTK_itembase)Db<FTK_weaponStats2DB>().GetEntry((FTK_itembase.ID)id)
                 : (FTK_itembase)Db<FTK_itemsDB>().GetEntry((FTK_itembase.ID)id);
             if (!object.ReferenceEquals(item, registered)) return false;
+            if ((bonuses.GuardFocusRestore > 0 || bonuses.GuardReckoning) && !(item is FTK_weaponStats2)) return false;
             GuardianRuntime.RegisterEquipment(id, bonuses);
             return true;
         }

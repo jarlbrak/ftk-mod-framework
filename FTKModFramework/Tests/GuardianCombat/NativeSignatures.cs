@@ -20,6 +20,14 @@ internal static class NativeSignatures
             Require(reader, "DamageCalculator", "_waitForUserPickTarget", "_party", "_av", "_dmgMod", "_aoeDmgMod", "_targetType", "_targetFriendly", "_consumable", "_cheatType");
             Require(reader, "DamageCalculator", "_calcDamage", "_atk", "_dmgMultiplier", "_mainTarget", "_itemAttack", "_cheatType");
             Require(reader, "DamageCalculator", "_playAttackSequence", "_atk", "_ddi0", "_ddi1", "_ddi2");
+            Require(reader, "DamageCalculator", "_finishEngageAttack", "_aa", "_dmgMod", "_aoeDmgMod", "_targetType", "_targetFriendly", "_consumable", "_cheatType");
+            Require(reader, "CharacterOverworld", "CheckUpdateAvatarAndPortrait", "_item", "_itembase", "_contID", "_isEquip", "_isWeaponSwap");
+            Require(reader, "EncounterSession", "UpdateAttackTimeline", "_attacked", "_foe", "_activeTimePortraitID", "_cfsm");
+            Require(reader, "CharacterDummy", "FleeRPC", "_success", "_fireSelected");
+            Require(reader, "CharacterStats", "UpdateFocusPoints", "_focus", "_broadcast");
+            Require(reader, "CharacterStats", "BroadcastAllCursesRPC", "_activecurses", "_permacurse");
+            Require(reader, "CharacterStats", "SetPoison", "_lvl", "_broadcast", "_hud");
+            Require(reader, "CharacterDummy", "RemoveSpecificProficiency", "_c");
             Require(reader, "CharacterDummy", "RespondToHit", "_mainVictim");
             Require(reader, "CharacterDummy", "PlayAttackSequence", "_attackAnim", "_override", "_ddi", "_ddi1", "_ddi2");
             Require(reader, "CharacterDummy", "EngageBattle", "_randomCheck", "_isFirstAttack", "_playerVictim", "_cheerIfDie");
@@ -34,7 +42,7 @@ internal static class NativeSignatures
             Require(reader, "uiItemDetail", "Show", "_itemID", "_mode", "_cow", "_showingEquip", "_forceFrontSide", "_loreCard");
             Require(reader, "uiWeaponDetail", "ShowWeapon", "_itemInfo");
             Require(reader, "uiSelectCharacterInfo", "ShowCharacterInfo", "_characterType");
-            Console.WriteLine("PASS GuardianCombat: 21 native method/parameter metadata checks");
+            Console.WriteLine("PASS GuardianCombat: 29 native method/parameter metadata checks");
         }
     }
 

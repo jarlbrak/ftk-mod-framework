@@ -213,6 +213,7 @@ internal static class Program
             Check(splash.ResolveFocusedHitHealing("second", attack, "ally", 30, 39, true, true, true, bonus) == 0,
                 "capped Mercy healing consumes the attack opportunity");
         }
+        LegendaryChecks.Run(Check);
         Console.WriteLine("PASS GuardianCombat: " + checks + " checks");
         if (args.Length == 2 && args[0] == "--assembly") NativeSignatures.Verify(args[1]);
         else if (args.Length != 0) throw new Exception("Usage: GuardianCombat [--assembly PATH]");

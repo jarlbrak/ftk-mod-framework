@@ -86,6 +86,7 @@ internal static class Program
         MarketplaceChecks.Run(root);
         FrameworkUpdateChecks.Run(root);
         NavigationChecks.Run();
+        NextLaunchChecks.Run();
         Console.WriteLine("Fixtures retained at " + root);
     }
 }

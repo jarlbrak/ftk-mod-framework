@@ -4,7 +4,7 @@ using GridEditor;
 
 namespace FTKModFramework.Core
 {
-    internal static class GuardianRuntime
+    internal static partial class GuardianRuntime
     {
         internal const string ActionKey = "ftkmf_guard_ally";
         private static HashSet<int> Classes = new HashSet<int>();
@@ -208,7 +208,8 @@ namespace FTKModFramework.Core
             string chosen = ally == null ? "None" : ally.m_CharacterOverworld.m_CharacterStats.m_CharacterName;
             return "Chosen ally: " + chosen + ". Protection: " +
                 (State.IsActive(id) && CanAct(guardian) ? "active (50%)." : "inactive.") +
-                " Divine Intervention: " + (State.RescueAvailable(id) ? "ready." : "spent this combat.");
+                " Divine Intervention: " + (State.RescueAvailable(id) ? "ready." : "spent this combat.") +
+                (Legendary.IsCharged(id) ? " Reckoning ready: +50% next single-target hammer attack." : string.Empty);
         }
 
         internal static void ApplyGuard(CharacterDummy guardian, CharacterDummy target)
@@ -216,6 +217,7 @@ namespace FTKModFramework.Core
             if (!IsGuardian(guardian) || EncounterSession.Instance == null) return;
             bool partyMember = EncounterSession.Instance.GetOtherCombatPlayerMembers(guardian).Contains(target);
             if (!State.TryGuard(Identity(guardian), Identity(target), CanAct(guardian), partyMember && LivingAlly(target))) return;
+            ApplyLegendaryGuard(guardian, target);
             if (target.m_DamageInfo != null)
             {
                 int originalHealth = target.m_DamageInfo.m_NewHealth;
@@ -244,6 +246,7 @@ namespace FTKModFramework.Core
             if (dummy == null || dummy.m_CharacterOverworld == null) return;
             string identity = Identity(dummy);
             State.ResetActor(identity);
+            Legendary.ResetActor(identity);
             PendingHealing.Remove(identity);
             PendingFeedback.Remove(identity);
         }
@@ -253,6 +256,7 @@ namespace FTKModFramework.Core
             if (dummy == null || dummy.m_CharacterOverworld == null) return;
             string identity = Identity(dummy);
             State.ResetGuardian(identity);
+            Legendary.ResetActor(identity);
             // This is a new native combat, so no previous attack's defensive snapshot applies.
             AttackEquipment.Clear();
             PendingHealing.Remove(identity);
@@ -263,6 +267,8 @@ namespace FTKModFramework.Core
         {
             State.BeginTurn();
             turnSerial++;
+            Legendary.BeginTurn(Identity(actor));
+            PendingGuardFocus.Clear();
             PendingFeedback.Clear();
             PendingHealing.Clear();
             AttackEquipment.Clear();
@@ -310,6 +316,7 @@ namespace FTKModFramework.Core
             string attackId = turnSerial.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + Identity(attacker);
             if (!State.TryResolveAttackDamage(attackId, Identity(victim), health, result.m_Damage, !nativeRescue, out resolved) ||
                 !resolved.Guarded) return 0;
+            ResolveLegendaryMitigation(attackId, victim, result.m_Damage, resolved.Damage);
             result.m_Damage = resolved.Damage;
             // m_Damage already includes critical damage; m_CritDamage is presentation metadata.
             result.m_CritDamage = Math.Min(result.m_CritDamage / 2, result.m_Damage);
@@ -357,6 +364,7 @@ namespace FTKModFramework.Core
             if (victim == null || victim.m_DamageInfo == null) return;
             DummyDamageInfo damage = victim.m_DamageInfo;
             string victimId = Identity(victim);
+            ApplyGuardFocusAtImpact(victim);
             string feedback;
             if (PendingFeedback.TryGetValue(victimId, out feedback))
             {

@@ -2693,6 +2693,25 @@ Petrify is intentionally rejected: its native application requires surviving
 hit context and starts a visual coroutine. Synchronous add/remove does not
 establish that lifecycle and could interfere with its delayed visual work.
 
+### Guardian legendary input fixture
+
+`guardian-legendary-fixture` takes `action: setup` or `inspect`, plus exact
+`encounterInstanceId`, `actorInstanceId` and `targetInstanceId` pins. Setup requires
+the owned living Guardian's native stance and a distinct owned living ally with
+no existing status effects or spent Focus. Supply integer `focusDeficit` (0..3)
+and `poisonLevels` (0..1), with at least one nonzero. A nonzero deficit reduces
+Focus to maximum minus that deficit; it never grants Focus. Zero leaves Focus
+unchanged. Poison uses the native status API and rejects immune targets.
+
+Each ally can be set up once per encounter. The result labels the fixture and
+records before/after values. Execute Guard and incoming attacks separately via
+native gameplay. `inspect` accepts only the identity pins and reports native
+Focus, Poison, Stunned, Dazed and the read-only Reckoning charge query. It does
+not require the actor's turn, so it can observe the subsequent enemy hit.
+The operation never equips items, executes Guard or mutates legendary receipts.
+Discard the isolated trial instead of saving fixture conditions; there is no
+automatic restore or claim of naturally acquired statuses.
+
 ### Native Options Menu Save/Exit
 
 `native-save-exit` accepts `action: inspect` or `submit`. It is available only in

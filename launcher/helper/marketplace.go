@@ -857,7 +857,16 @@ func marketResolve(c marketCatalog, r marketRequest) ([]marketPackage, error) {
 		}
 		p, ok := index[id+"@"+v]
 		if !ok {
-			return errors.New("missing exact package " + id + "@" + v)
+			// A removed catalog listing must not strand an installed version. Only
+			// the current generation supplies this fallback; cached archives and old
+			// generations alone do not authorize a new installation.
+			p, ok = active[id+"@"+v]
+			if !ok {
+				return errors.New("missing exact package " + id + "@" + v)
+			}
+			if e := marketValidateCatalog(marketCatalog{SchemaVersion: 1, Packages: []marketPackage{p}}); e != nil {
+				return e
+			}
 		}
 		// A revoked package that is already active at this exact version may stay
 		// installed; revocation only blocks new installs, updates, and new dependencies.
@@ -1177,8 +1186,11 @@ func marketContent(b []byte) error {
 		}
 		if entry.GuardianBonuses != nil {
 			b := entry.GuardianBonuses
-			if entry.Kind != "item" && entry.Kind != "weapon" || b.GuardHealPercent < 0 || b.GuardHealPercent > 20 || b.FocusHealBonusPercent < 0 || b.FocusHealBonusPercent > 20 || b.RetaliationDamage < 0 || b.RetaliationDamage > 20 {
+			if entry.Kind != "item" && entry.Kind != "weapon" || b.GuardHealPercent < 0 || b.GuardHealPercent > 20 || b.FocusHealBonusPercent < 0 || b.FocusHealBonusPercent > 20 || b.RetaliationDamage < 0 || b.RetaliationDamage > 20 || b.GuardFocusRestore < 0 || b.GuardFocusRestore > 1 {
 				return errors.New("invalid guardian equipment bonus")
+			}
+			if (b.GuardFocusRestore > 0 || b.GuardReckoning) && entry.Kind != "weapon" {
+				return errors.New("guardFocusRestore and guardReckoning require a weapon")
 			}
 		}
 		if entry.Icon != "" && (!marketSafePath(entry.Icon) || !strings.HasPrefix(entry.Icon, "assets/") || path.Ext(entry.Icon) != ".png" || entry.Kind != "item" && entry.Kind != "weapon" && entry.Kind != "proficiency" && !(entry.Kind == "class" && entry.Guardian)) {

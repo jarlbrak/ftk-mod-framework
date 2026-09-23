@@ -201,6 +201,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "trap-state") Finish(id,TrapState(command));
             else if(op == "trap-submit") Finish(id,TrapSubmit(command));
             else if(op == "town-stock-state") Finish(id,TownStockObservation(command));
+            else if(op == "launch-acquisition-state") Finish(id,LaunchAcquisitionState(command));
             else if(op == "dungeon-map-state") Finish(id,DungeonMapObservation(command));
             else if(op == "guardian-damage-fixture") Finish(id,GuardianDamageFixture(command));
             else if(op == "native-combat-focus") Finish(id,NativeCombatFocus(command));
@@ -211,6 +212,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "world-input-state") Finish(id,WorldInputObservation(command));
             else if(op == "guardian-state") Finish(id,GuardianObservation(command));
             else if(op == "guardian-incapacity-fixture") Finish(id,GuardianIncapacityFixture(command));
+            else if(op == "guardian-legendary-fixture") Finish(id,GuardianLegendaryFixture(command));
             else if(op == "fixture-state") Finish(id,FixtureState());
             else if(op == "collect-loot") Finish(id,CollectLoot(command));
             else if(op == "fortify-party") Finish(id,FortifyParty(command));

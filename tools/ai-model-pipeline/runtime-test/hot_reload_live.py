@@ -12,8 +12,8 @@ import uuid
 REPO = Path(__file__).resolve().parents[3]
 ZERO = ('ownedObjects', 'icons', 'paths', 'guardianClasses', 'guardianEquipment',
         'itemModels', 'displayModels', 'apparelModels')
-BASE = dict(ownedObjects=77, icons=37, paths=135, guardianClasses=1,
-            guardianEquipment=8, itemModels=24, displayModels=36, apparelModels=12)
+BASE = dict(ownedObjects=107, icons=52, paths=175, guardianClasses=1,
+            guardianEquipment=11, itemModels=27, displayModels=51, apparelModels=12)
 
 
 def require(condition, message):
@@ -141,7 +141,7 @@ class Runner:
     def audit(self, enabled, cycle, update=False):
         result = self.request(action='audit')
         require(result.get('ok') and not result.get('busy'), 'Audit not at a settled boundary')
-        require(len(result['ids']) == (64 if enabled else 0), 'Unexpected registered identity count')
+        require(len(result['ids']) == (92 if enabled else 0), 'Unexpected registered identity count')
         tables = result.get('nativeTables', {})
         require(len(tables) == 5, 'All five native table diagnostics required')
         require(all(not table['indexNull'] and table['indexCount'] == table['rows'] and
@@ -158,7 +158,7 @@ class Runner:
                 self.enabled_identity = result['identity']
             require(result['identity'] == self.enabled_identity, 'History changed final enabled identities')
         elif enabled:
-            require(result['noviceHammerDamage'] == 11 and result['guardianEquipment'] == 7,
+            require(result['noviceHammerDamage'] == 11 and result['guardianEquipment'] == 10,
                     'Update content was not replaced')
             require(result['identity'] == self.enabled_identity, 'Compatible update changed IDs')
         else:

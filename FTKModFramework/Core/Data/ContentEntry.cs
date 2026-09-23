@@ -67,6 +67,9 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("focusHealBonusPercent")] public int FocusHealBonusPercent;
         [JsonProperty("retaliationDamage")] public int RetaliationDamage;
         [JsonProperty("wardDebuffs")] public bool WardDebuffs;
+        [JsonProperty("guardFocusRestore")] public int GuardFocusRestore;
+        [JsonProperty("guardReckoning")] public bool GuardReckoning;
+        [JsonProperty("guardCleanse")] public bool GuardCleanse;
     }
     internal sealed class ApparelModelEntry
     {

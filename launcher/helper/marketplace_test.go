@@ -92,6 +92,137 @@ func TestMarketplacePrepareActivateRollback(t *testing.T) {
 		t.Fatalf("rollback activation: %+v %v", activated, e)
 	}
 }
+
+func TestMarketplaceUnlistedInstalledLifecycle(t *testing.T) {
+	r, p, _ := marketFixture(t)
+	if _, e := marketRun("prepare", r); e != nil {
+		t.Fatal(e)
+	}
+	initial, e := marketRun("activate", r)
+	if e != nil || !initial.OK {
+		t.Fatal(initial, e)
+	}
+	r.localCatalog = nil
+	cache := filepath.Join(r.StateRoot, "catalog.json")
+	if e = marketWrite(cache, marketCatalog{SchemaVersion: 1, Packages: []marketPackage{}}); e != nil {
+		t.Fatal(e)
+	}
+	current := initial.Active.GenerationID
+	apply := func(action string, selection []marketSelection) marketResult {
+		t.Helper()
+		r.Selection = selection
+		r.DryRun = true
+		plan, err := marketRun("prepare", r)
+		if err != nil || len(plan.Plan) != 1 || plan.Plan[0].Action != action || plan.Pending != nil {
+			t.Fatalf("%s review: %+v %v", action, plan, err)
+		}
+		r.DryRun = false
+		r.ExpectedRevision = plan.PlanRevision
+		pending, err := marketRun("prepare", r)
+		if err != nil || pending.Pending == nil || pending.Active.GenerationID != current {
+			t.Fatalf("%s preparation: %+v %v", action, pending, err)
+		}
+		if len(pending.Pending.Packages) != len(selection) || len(selection) > 0 && pending.Pending.Packages[0].Enabled != selection[0].Enabled {
+			t.Fatalf("%s next-launch state does not match selection: %+v", action, pending.Pending)
+		}
+		result, err := marketRun("activate", r)
+		if err != nil || !result.OK || result.Pending != nil || result.Active.GenerationID != pending.Pending.GenerationID {
+			t.Fatalf("%s activation: %+v %v", action, result, err)
+		}
+		current = result.Active.GenerationID
+		return result
+	}
+	disabled := apply("disable", []marketSelection{{p.PackageID, p.Version, false}})
+	if disabled.Active.Packages[0].Enabled {
+		t.Fatal("disabled package remained enabled")
+	}
+	enabled := apply("enable", []marketSelection{{p.PackageID, p.Version, true}})
+	if !enabled.Active.Packages[0].Enabled {
+		t.Fatal("enabled package remained disabled")
+	}
+	removed := apply("remove", nil)
+	if len(removed.Active.Packages) != 0 {
+		t.Fatal("removed package remained installed")
+	}
+	r.Selection = []marketSelection{{p.PackageID, p.Version, true}}
+	r.DryRun = true
+	if _, e = marketRun("prepare", r); e == nil || !strings.Contains(e.Error(), "missing exact package") {
+		t.Fatal("old generation or cached archive authorized an unlisted reinstall", e)
+	}
+	if e = marketWrite(cache, marketCatalog{SchemaVersion: 1, Packages: []marketPackage{p}}); e != nil {
+		t.Fatal(e)
+	}
+	reinstalled := apply("install", r.Selection)
+	if !reinstalled.Active.Packages[0].Enabled || reinstalled.Active.Packages[0].SHA256 != p.SHA256 {
+		t.Fatal("reinstalled package differs from the verified selection")
+	}
+}
+
+func TestMarketplaceUnlistedFallbackKeepsGuards(t *testing.T) {
+	for _, mode := range []string{"archive-tampered", "revoked", "incompatible", "invalid-installed-descriptor"} {
+		t.Run(mode, func(t *testing.T) {
+			r, p, _ := marketFixture(t)
+			if _, e := marketRun("prepare", r); e != nil {
+				t.Fatal(e)
+			}
+			initial, e := marketRun("activate", r)
+			if e != nil || !initial.OK {
+				t.Fatal(initial, e)
+			}
+			r.localCatalog = nil
+			cat := marketCatalog{SchemaVersion: 1, Packages: []marketPackage{}}
+			want := ""
+			switch mode {
+			case "archive-tampered":
+				if e = os.WriteFile(filepath.Join(r.StateRoot, "artifacts", p.SHA256+".zip"), []byte("tampered"), 0600); e != nil {
+					t.Fatal(e)
+				}
+				want = "archive size or SHA-256 mismatch"
+			case "revoked":
+				p.Revoked = true
+				cat.Packages = []marketPackage{p}
+				want = "revoked"
+			case "incompatible":
+				p.Platforms = []string{"windows"}
+				cat.Packages = []marketPackage{p}
+				want = "platform"
+			case "invalid-installed-descriptor":
+				lockPath := filepath.Join(r.StateRoot, "generations", initial.Active.GenerationID, "lock.json")
+				var lock marketLock
+				if e = marketRead(lockPath, &lock, marketLimit); e != nil {
+					t.Fatal(e)
+				}
+				lock.Packages[0].URL = "https://unapproved.example/package.zip"
+				if e = marketWrite(lockPath, lock); e != nil {
+					t.Fatal(e)
+				}
+				want = "unapproved package release"
+			}
+			if e = marketWrite(filepath.Join(r.StateRoot, "catalog.json"), cat); e != nil {
+				t.Fatal(e)
+			}
+			r.Selection[0].Enabled = false
+			r.DryRun = true
+			plan, err := marketRun("prepare", r)
+			if mode == "archive-tampered" {
+				if err != nil {
+					t.Fatal(err)
+				}
+				r.DryRun = false
+				r.ExpectedRevision = plan.PlanRevision
+				_, err = marketRun("prepare", r)
+			}
+			if err == nil || !strings.Contains(err.Error(), want) {
+				t.Fatalf("%s guard failed: %v", mode, err)
+			}
+			status, err := marketRun("status", r)
+			if err != nil || status.Active.GenerationID != initial.Active.GenerationID || status.Pending != nil {
+				t.Fatalf("rejected change altered current or pending state: %+v %v", status, err)
+			}
+		})
+	}
+}
+
 func TestMarketplaceFailurePreservesActive(t *testing.T) {
 	for _, mode := range []string{"hash", "extra", "manual", "bundled", "cancel"} {
 		t.Run(mode, func(t *testing.T) {

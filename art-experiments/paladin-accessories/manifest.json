@@ -1,0 +1,529 @@
+{
+  "schema": "ftkmf.paladin-original-accessories.v1",
+  "generator": "build.py",
+  "generatorSha256": "c121024fbd47e9c9b1c778d68262985186ddb6a59a7c890fe56192a8eb3b2b54",
+  "dependencies": {
+    "art-experiments/paladin-equipment/build_blender.py": "690507443dc23a0d9cb132630765c8c1393ae2af85ef41178f208c6c6057200d",
+    "art-experiments/paladin-equipment/render_icons.py": "ee664ca5df1834037cb2ebff9c7e4370629f37b553b0d2d584a62b8591a66b9e",
+    "tools/ai-model-pipeline/export_ftk_glb.py": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+  },
+  "provenance": "Original Astra High authored display objects using approved Paladin accessory briefs. No native geometry, bounds, UV, normal, texture, weights or animation data read. Original order stamp reused as a visual motif.",
+  "space": "Unity Y up, Z front via orientation-preserving Blender (x,z,-y), followed by inverse audited prefab-root rotation. Source authorToRuntime records this rotation for icon reconstruction. Authored display-local dimensions; exact native fitting is unverified.",
+  "status": "Offline original art only. Display fit, native binding, inventory flows and lifecycle await separately authorized live testing. These slots are not visible on the character.",
+  "palette": [
+    "B3BEC5",
+    "DDE5E5",
+    "565B64",
+    "292F3B",
+    "866749",
+    "B69A68",
+    "C49948",
+    "E9C771",
+    "19334D",
+    "2A5581",
+    "458FA8",
+    "98CDD1",
+    "EEE5CB",
+    "C9B996",
+    "802E3A",
+    "BD4D4D",
+    "161F2C"
+  ],
+  "assets": [
+    {
+      "key": "paladin-trinket-novice",
+      "triangles": 824,
+      "vertices": 2472,
+      "pieces": 12,
+      "authorToRuntime": [
+        [
+          -1.0,
+          0.0,
+          3.2584136988589307e-07,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -3.2584136988589307e-07,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Tin Oath Token",
+      "slot": "trinket",
+      "family": "novice",
+      "template": "trinketDefense1",
+      "rendererPath": "trinketHorn2"
+    },
+    {
+      "key": "paladin-trinket-oathkeeper",
+      "triangles": 708,
+      "vertices": 2124,
+      "pieces": 11,
+      "authorToRuntime": [
+        [
+          -1.0,
+          0.0,
+          3.2584136988589307e-07,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -3.2584136988589307e-07,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Keeper's Seal",
+      "slot": "trinket",
+      "family": "oathkeeper",
+      "template": "trinketDefense1",
+      "rendererPath": "trinketHorn2"
+    },
+    {
+      "key": "paladin-trinket-highward",
+      "triangles": 680,
+      "vertices": 2040,
+      "pieces": 15,
+      "authorToRuntime": [
+        [
+          -1.0,
+          0.0,
+          3.2584136988589307e-07,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -3.2584136988589307e-07,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Watchtower Reliquary",
+      "slot": "trinket",
+      "family": "highward",
+      "template": "trinketDefense1",
+      "rendererPath": "trinketHorn2"
+    },
+    {
+      "key": "paladin-trinket-mercy",
+      "triangles": 900,
+      "vertices": 2700,
+      "pieces": 16,
+      "authorToRuntime": [
+        [
+          -1.0,
+          0.0,
+          3.2584136988589307e-07,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -3.2584136988589307e-07,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Lantern of Mercy",
+      "slot": "trinket",
+      "family": "mercy",
+      "template": "trinketDefense1",
+      "rendererPath": "trinketHorn2"
+    },
+    {
+      "key": "paladin-trinket-censure",
+      "triangles": 604,
+      "vertices": 1812,
+      "pieces": 12,
+      "authorToRuntime": [
+        [
+          -1.0,
+          0.0,
+          3.2584136988589307e-07,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -3.2584136988589307e-07,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Seal of Censure",
+      "slot": "trinket",
+      "family": "censure",
+      "template": "trinketDefense1",
+      "rendererPath": "trinketHorn2"
+    },
+    {
+      "key": "paladin-trinket-verdict",
+      "triangles": 952,
+      "vertices": 2856,
+      "pieces": 18,
+      "authorToRuntime": [
+        [
+          -1.0,
+          0.0,
+          3.2584136988589307e-07,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          -3.2584136988589307e-07,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Scales of Verdict",
+      "slot": "trinket",
+      "family": "verdict",
+      "template": "trinketDefense1",
+      "rendererPath": "trinketHorn2"
+    },
+    {
+      "key": "paladin-necklace-novice",
+      "triangles": 628,
+      "vertices": 1884,
+      "pieces": 9,
+      "authorToRuntime": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Pilgrim's Pendant",
+      "slot": "necklace",
+      "family": "novice",
+      "template": "amuletVitality1",
+      "rendererPath": "amuletLocket1"
+    },
+    {
+      "key": "paladin-necklace-oathkeeper",
+      "triangles": 1668,
+      "vertices": 5004,
+      "pieces": 20,
+      "authorToRuntime": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Oath Chain",
+      "slot": "necklace",
+      "family": "oathkeeper",
+      "template": "amuletVitality1",
+      "rendererPath": "amuletLocket1"
+    },
+    {
+      "key": "paladin-necklace-highward",
+      "triangles": 904,
+      "vertices": 2712,
+      "pieces": 12,
+      "authorToRuntime": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Highward Gorget",
+      "slot": "necklace",
+      "family": "highward",
+      "template": "amuletVitality1",
+      "rendererPath": "amuletLocket1"
+    },
+    {
+      "key": "paladin-necklace-mercy",
+      "triangles": 1972,
+      "vertices": 5916,
+      "pieces": 23,
+      "authorToRuntime": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Mercy Locket",
+      "slot": "necklace",
+      "family": "mercy",
+      "template": "amuletVitality1",
+      "rendererPath": "amuletLocket1"
+    },
+    {
+      "key": "paladin-necklace-censure",
+      "triangles": 1552,
+      "vertices": 4656,
+      "pieces": 20,
+      "authorToRuntime": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Censure Medallion",
+      "slot": "necklace",
+      "family": "censure",
+      "template": "amuletVitality1",
+      "rendererPath": "amuletLocket1"
+    },
+    {
+      "key": "paladin-necklace-verdict",
+      "triangles": 1348,
+      "vertices": 4044,
+      "pieces": 27,
+      "authorToRuntime": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "name": "Judge's Collar",
+      "slot": "necklace",
+      "family": "verdict",
+      "template": "amuletVitality1",
+      "rendererPath": "amuletLocket1"
+    }
+  ],
+  "files": {
+    "paladin-accessory-palette.png": "7bb9c210dc206a259e59255dfcb1169486f87cba5a6aa4e6cea5fccc634e7f8a",
+    "paladin-necklace-censure-icon.png": "e3657744bce921e2714504eaedc47f2638f0eff9b610b1781835a41f3a9a7296",
+    "paladin-necklace-censure.glb": "1463bdcc4754c4e419bc83276df0079f58f08da25c9f14426c710e732bd67680",
+    "paladin-necklace-censure.pieces.json": "55568f18de44eefb7d2a45140ababcee3aae5554365b3f0a774273094dd8cbd4",
+    "paladin-necklace-censure.source.json": "0e54288f6d0ce765941a50d5d84704e9ad9ac746835243492ef61aa87f149a8b",
+    "paladin-necklace-highward-icon.png": "3ae06b1ef8b07b90f59081391ada54b43155b5e989330bd65301f042b0118e36",
+    "paladin-necklace-highward.glb": "b1fe3a0da4cde1ba70f7dbaa243e83c53437df458334388a1d23f8efb2beae11",
+    "paladin-necklace-highward.pieces.json": "a5c879bedb6f4860d02b8902dc56f2826a02feb658d9e0130a029ed571cb958e",
+    "paladin-necklace-highward.source.json": "2413cf155711f637e5fcab127f4f1b96a6d74ce7fb02fb284c33a50d77f715c4",
+    "paladin-necklace-mercy-icon.png": "1ff2cd9e6e6df04d372f7a72808720e376a51446be25b46be479d1d03ad3fa80",
+    "paladin-necklace-mercy.glb": "10131cf8f0b43e31d5787dbee38ec52cf2f895e8792ef8d2275f3df66a8b887a",
+    "paladin-necklace-mercy.pieces.json": "43ea6a72ea0875b32b7adaa44863cd74b899cb6d056133b1c6a0e78c1d16c709",
+    "paladin-necklace-mercy.source.json": "c1c420690f646e373add85fc2a775a6945451223cb9049a7a022d5c901d5395e",
+    "paladin-necklace-novice-icon.png": "4777e146c20b77ad288e5733cacacd5da442c8e09d880f661e9cec4649458257",
+    "paladin-necklace-novice.glb": "49cf0f5f64d31fa09acb97c0e897702e07bc7cdcff0852ca4e42c39fa572d446",
+    "paladin-necklace-novice.pieces.json": "7b7d95cfa5217084e611602185c8f1bcb7b33bf01baa59b0620289240fa2bd18",
+    "paladin-necklace-novice.source.json": "8d5ab8aa7b0611db7bd830483045e72110e77c1c7d37416683d74b1633200c4a",
+    "paladin-necklace-oathkeeper-icon.png": "ed5eace9a8815a39e5504e617a658b81760750529b269b91a56b2111c61c9ddf",
+    "paladin-necklace-oathkeeper.glb": "7b388ec3fca44f29391d9c643ca48fc13142744afaf7981062de83e4fbb0392c",
+    "paladin-necklace-oathkeeper.pieces.json": "4e9dda3793f7ec666050e294b5dd8e5fb82f0677f7369416f5ec2b1da3d468ca",
+    "paladin-necklace-oathkeeper.source.json": "cce8fdfe7c4c582d650d14158c6755de34b4673bf41dbbe58616a9a3ec376d34",
+    "paladin-necklace-verdict-icon.png": "3ccbab825def3440362f5445213cd43147af1b87527ebfd7874022e54e0bfb34",
+    "paladin-necklace-verdict.glb": "31fa9a4f82f11d881801c1dd5ecf74ecc5fdd29f0da268744548e2aeb51e5a21",
+    "paladin-necklace-verdict.pieces.json": "2b36ca9c369fa03851b45cfabcaf0f074bfa73947a7dbee2119ceb568f93a235",
+    "paladin-necklace-verdict.source.json": "36c516e1743a83d2921337058972c2cf1d61449124989e5c97698d713168e358",
+    "paladin-trinket-censure-icon.png": "bf0cc73d220559927a0bfe82a5cbb27c9333faee628d50047e5d4caa3287b1e6",
+    "paladin-trinket-censure.glb": "f6e22ad7832e9543dd59e6cf47a7939efd77123ff7d3d92f15651c28940867d7",
+    "paladin-trinket-censure.pieces.json": "69b52927b2ef6744449f9f8b845f338eb3aeeb1b396b2858760967e7a233b141",
+    "paladin-trinket-censure.source.json": "b7c045f1b6306304a46d1c62fc830ef2acb5a5dbf850a67d9c7482286997fb31",
+    "paladin-trinket-highward-icon.png": "022f853861d2bd3b010dda88a178a23a8b8475109651ef62f514b161e374cbd0",
+    "paladin-trinket-highward.glb": "d9fc3efd5adcf06e963329fd24421424bba1e8c899d5b79edbb0c8e66c763037",
+    "paladin-trinket-highward.pieces.json": "5919fb2f2ce4ae00aaf1737cc78226f3fe3960b2b164e36ba8ce29380d9d23c9",
+    "paladin-trinket-highward.source.json": "712a8282a6bc50a982bf2e8b5a067afc2c85e9cf3005160931af0ab86b3e2ab9",
+    "paladin-trinket-mercy-icon.png": "ae3f6d60f1cc7c7ed8079130616c1bdd16b9d86a33e7e94f2157eccf274274a7",
+    "paladin-trinket-mercy.glb": "dc4ddeee25c1cfd8e6c47ea236cd305e6826975fbdf9bb24812c69c565206a70",
+    "paladin-trinket-mercy.pieces.json": "50be196d9ce25d8aba181fab7b7255314f1790ee1a710eec7873b8bb35d10efa",
+    "paladin-trinket-mercy.source.json": "7ecfaee2ca085faec04cc00c61a2246afe17091fcdf7c1e6038f39d7e2ae8698",
+    "paladin-trinket-novice-icon.png": "9a20de6ef2a93a73616781cfdc06d9c9d59f3c36072d8f8e2a6ce15a92111586",
+    "paladin-trinket-novice.glb": "70f0287c3693a3933ce0861ef0448eee8ae8ee577b2b5536c482a088c11db396",
+    "paladin-trinket-novice.pieces.json": "3e7ef6b2caaefa1a011c6f51b5574b62ac984d93438a563e69dab04dc1be60b4",
+    "paladin-trinket-novice.source.json": "9a566a2d3e648a98dd55c0c1142a219945a1754b85e3c03bc57918723a15ee7f",
+    "paladin-trinket-oathkeeper-icon.png": "80e33d2916c281c3af81d70abd2616755740b2fa036709ba693031687a8eb457",
+    "paladin-trinket-oathkeeper.glb": "d38b8d2cc048a3333eb8983b32ab2e111531104d580654574cc40ebe82d32545",
+    "paladin-trinket-oathkeeper.pieces.json": "2a5d05a45a319f4187e635c8354421d3ae236faa13c2f01dfd581f5a0449344c",
+    "paladin-trinket-oathkeeper.source.json": "6ed4f123378b0b4d28e57ff1b79fc1c7defbbca7fe2c1a2f367b85291a64ba75",
+    "paladin-trinket-verdict-icon.png": "20317fac2af204f2e82388d089144162f3b52f961b8c2c944898998a23f42adf",
+    "paladin-trinket-verdict.glb": "c0d703b8daca8e23af09d1138c9ae30568f313df2ba93f535418f272ac0dfea3",
+    "paladin-trinket-verdict.pieces.json": "1cf255e59196da899b4f05084b7ddd2c965b87c394436136cceb36091705cb48",
+    "paladin-trinket-verdict.source.json": "b3825ee329bfcb8c5826756bbd6e7c46400b1e6efe373f079ad3da916a4e071a"
+  }
+}

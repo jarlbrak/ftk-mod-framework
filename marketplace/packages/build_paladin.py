@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a deterministic unpublished Paladin beta archive and local descriptor."""
+"""Build deterministic Paladin artifacts without publishing them."""
 import argparse
 import hashlib
 import io
@@ -35,6 +35,7 @@ def main():
     parser.add_argument('--helper',type=Path,help='Current helper executable to validate this local archive')
     parser.add_argument('--fixture',action='store_true',help='Prepare a separate ignored local managed state; never activate it')
     parser.add_argument('--preview-state-root',type=Path,help='Seed the local draft banner into this marketplace state cache')
+    parser.add_argument('--release',action='store_true',help='Use versioned release URLs in the descriptor; does not upload or publish')
     args=parser.parse_args()
     output=args.output.resolve();output.relative_to(ROOT/'scratch')
     if args.fixture and not args.helper:parser.error('--fixture requires --helper')
@@ -55,8 +56,10 @@ def main():
             info.compress_type=zipfile.ZIP_DEFLATED;info.create_system=3;info.external_attr=0o100644<<16
             archive.writestr(info,data,compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
     payload=stream.getvalue();sha=digest(payload);manifest=json.loads(files['manifest.json'])
-    stem='paladin-local-beta-'+manifest['version']+'-'+sha[:12]
-    preview_url='https://github.com/jarlbrak/ftk-mod-framework/releases/download/LOCAL-DRAFT-NOT-PUBLISHED/paladin-censure-banner.png'
+    stem='paladin-'+manifest['version']+'-'+sha[:12]
+    tag='paladin-v'+manifest['version'] if args.release else 'LOCAL-DRAFT-NOT-PUBLISHED'
+    release_url='https://github.com/jarlbrak/ftk-mod-framework/releases/download/'+tag+'/'
+    preview_url=release_url+'paladin-censure-banner.png'
     if args.preview_state_root:
         state_root=args.preview_state_root.resolve()
         if not state_root.is_dir() or not (state_root/'state.json').is_file():
@@ -70,18 +73,18 @@ def main():
         immutable(cache,banner_bytes)
     archive_path=output/(stem+'.zip');descriptor_path=output/(stem+'.descriptor.json')
     immutable(archive_path,payload)
-    descriptor={
-        'packageId':'ftkmf.paladin','modGuid':manifest['modGuid'],'name':manifest['name']+' (LOCAL DRAFT)',
-        'author':manifest['author'],'description':manifest['description']+' Local unpublished beta candidate.',
-        'category':'classes','version':manifest['version'],'license':'MIT','frameworkVersion':manifest['frameworkVersion'],
+    descriptor=json.loads((PACKAGE/'listing.json').read_text())
+    # Runtime identity and summary come only from the manifest; artifact facts
+    # come only from the finished bytes. Listing copy cannot override either.
+    descriptor.update({
+        'modGuid':manifest['modGuid'],'name':manifest['name'] if args.release else manifest['name']+' (LOCAL DRAFT)',
+        'author':manifest['author'],'description':manifest['description'],
+        'version':manifest['version'],'frameworkVersion':manifest['frameworkVersion'],
         'frameworkRange':'>='+manifest['frameworkVersion']+' <'+str(int(manifest['frameworkVersion'].split('.')[0])+1)+'.0.0',
-        'gameFingerprints':[digest(args.game_assembly.read_bytes())],'platforms':[args.platform],'dependencies':[],
-        'classification':'gameplay','packageUrl':'https://github.com/jarlbrak/ftk-mod-framework/releases/download/LOCAL-DRAFT-NOT-PUBLISHED/'+stem+'.zip',
+        'gameFingerprints':[digest(args.game_assembly.read_bytes())],'platforms':[args.platform],
+        'packageUrl':release_url+stem+'.zip',
         'sha256':sha,'compressedSize':len(payload),'expandedSize':sum(len(data) for data in files.values()),'fileCount':len(files),
-        'requirements':['Local unpublished framework 0.1.4 capability build.','Local candidate only; no production catalog entry or published download exists.','Online co-op unverified.'],
-        'contentChanges':['Adds the Paladin protector class and Guard action.','Adds 36 original hammers, shields and armor pieces across six progression sets.','Adds Divine Intervention and two Censure weapon actions.'],
-        'changelog':'Initial local beta candidate; not approved for release.','sourceUrl':'https://github.com/jarlbrak/ftk-mod-framework',
-        'supportUrl':'https://github.com/jarlbrak/ftk-mod-framework/issues/138','screenshots':[preview_url]}
+        'screenshots':[preview_url]})
     descriptor_bytes=(json.dumps(descriptor,indent=2,sort_keys=True)+'\n').encode()
     immutable(descriptor_path,descriptor_bytes)
     receipt={'archive':archive_path.name,'descriptor':descriptor_path.name,'archiveSha256':sha,'descriptorSha256':digest(descriptor_bytes),
