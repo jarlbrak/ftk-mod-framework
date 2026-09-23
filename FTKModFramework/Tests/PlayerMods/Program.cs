@@ -63,7 +63,7 @@ internal static class Program
 
         string key = "thirdparty.disabled";
         UnityEngine.PlayerPrefs.SetInt(ModRegistry.PrefKeyPrefix + key, 0);
-        ModEntry entry = ModRegistry.Register(key, "Disabled mod", false, "3", true, "Description", "Author");
+        ModEntry entry = ModRegistry.Register(key, "Disabled mod", "3", true, "Description", "Author");
         Assert(!entry.Enabled && entry.Description == "Description" && entry.Author == "Author", "metadata preserves existing disabled preference");
         List<DiscoveredMod> disabled = new List<DiscoveredMod>();
         disabled.Add(new DiscoveredMod(new ModManifest { ModGuid = key, FrameworkVersion = Plugin.Version }, new List<string>(), Path.Combine(root, "missing.dll")));
@@ -73,14 +73,11 @@ internal static class Program
         ModRegistry.SetEnabled(key, true);
         Assert(!entry.Enabled && entry.PendingEnabled == true && !ModRegistry.IsEnabled(key), "toggle writes pending state without changing this session's enabled snapshot");
         string enabledKey = "thirdparty.enabled";
-        ModRegistry.Register(enabledKey, "Enabled mod", false, "1", true, null, null);
+        ModRegistry.Register(enabledKey, "Enabled mod", "1", true, null, null);
         disabled[0] = new DiscoveredMod(new ModManifest { ModGuid = enabledKey, FrameworkVersion = Plugin.Version }, new List<string>(), Path.Combine(root, "missing.dll"));
         BehaviorLoader.LoadAll(disabled, report);
         Assert(report.Errors.Count == 1 && report.Errors[0].Contains("behaviorDll not found"), "enabled mod reaches behavior DLL validation");
-        Plugin.EnableSampleContent.Value = false;
-        ModEntry bundled = ModRegistry.Register("com.ftkmf.framework", "FTK Adventure Pack", true, null, true, "Classes and adventures", "FTK Mod Framework team");
-        Assert(!bundled.Enabled, "renamed bundled pack preserves config disabled state");
-        Assert(object.ReferenceEquals(bundled, ModRegistry.Register(bundled.Key, "Other name", true, null, true, null, null)), "registration remains idempotent by stable key");
+        Assert(object.ReferenceEquals(entry, ModRegistry.Register(entry.Key, "Other name", null, true, null, null)), "registration remains idempotent by stable key");
         CompatibilityChecks.Run(root);
         DiscoveryChecks.Run(root);
         MarketplaceChecks.Run(root);

@@ -55,7 +55,7 @@ func marketSaveFingerprint(gameHash, framework string, packages []marketPackage,
 	}
 	writeMap(enabled)
 	mapped := map[string]string{}
-	for key, native := range map[string]string{"dataContent": "EnableDataContent", "campaignEngine": "EnableCampaignEngine", "sampleContent": "EnableSampleContent", "behaviorLoading": "EnableBehaviorLoading"} {
+	for key, native := range map[string]string{"dataContent": "EnableDataContent", "campaignEngine": "EnableCampaignEngine", "behaviorLoading": "EnableBehaviorLoading"} {
 		value, ok := settings[native].(bool)
 		if !ok {
 			return "", fmt.Errorf("saved setting %s is missing", native)
@@ -71,7 +71,7 @@ func marketSaveFingerprint(gameHash, framework string, packages []marketPackage,
 }
 
 // Early immutable generations did not record framework settings. Their save
-// fingerprints still contain the four compatibility settings, so reconstruct
+// fingerprints still contain the compatibility settings for that framework version, so reconstruct
 // only missing historical values from the running request and compare that
 // result with the pinned fingerprint. A changed current value therefore still
 // rejects the restore; it is never silently accepted as a default.

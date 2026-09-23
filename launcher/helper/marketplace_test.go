@@ -657,7 +657,7 @@ func TestMarketplaceConfirmedPlanRevision(t *testing.T) {
 				cat.Packages[0].SHA256 = strings.Repeat("b", 64)
 				marketWrite(filepath.Join(r.StateRoot, "catalog.json"), cat)
 			case "settings":
-				r.Settings = map[string]interface{}{"EnableSampleContent": false}
+				r.Settings = map[string]interface{}{"EnableDataContent": false}
 			case "display":
 				cat.Packages[0].Description = "Edited descriptive copy"
 				marketWrite(filepath.Join(r.StateRoot, "catalog.json"), cat)

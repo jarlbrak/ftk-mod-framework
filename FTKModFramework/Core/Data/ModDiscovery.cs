@@ -54,7 +54,7 @@ namespace FTKModFramework.Core.Data
                 string prior;
                 if (mod.Manifest.ModGuid == Plugin.Guid)
                 {
-                    report.Error("Mod GUID conflicts with bundled FTK Adventure Pack: " + mod.Manifest.FolderPath);
+                    report.Error("Mod GUID conflicts with FTK Mod Framework: " + mod.Manifest.FolderPath);
                     continue;
                 }
                 if (seen.TryGetValue(mod.Manifest.ModGuid, out prior))

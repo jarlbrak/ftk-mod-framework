@@ -296,11 +296,12 @@ scenario_dev_config() {
   fake_dll "$WORK/fake.dll"
   cfg="$game/BepInEx/config/com.ftkmf.framework.cfg"
   mkdir -p "$(dirname "$cfg")"
-  printf '[Demo]\nEnableSampleContent = true\n\n[Diagnostics]\nRunSelfTests = false\nEnableScaleBudgetGate = false\n' > "$cfg"
+  printf '[Data]\nEnableDataContent = false\n\n[Diagnostics]\nRunSelfTests = false\nEnableScaleBudgetGate = false\n' > "$cfg"
   run_installer "$home" --framework "$WORK/fake.dll" --dev || fail "dev install failed"
   assert_grep "$cfg" "RunSelfTests = true"
   assert_nogrep "$cfg" "RunSelfTests = false"
   assert_grep "$cfg" "EnableScaleBudgetGate = false"
+  assert_grep "$cfg" "EnableDataContent = false"
   if [ "$(grep -c '^\[Diagnostics\]' "$cfg")" = "1" ]; then pass "single [Diagnostics] section"; else fail "duplicate [Diagnostics] sections"; fi
 }
 
@@ -331,15 +332,13 @@ scenario_player_config() {
   fi
   cfg="$game/BepInEx/config/com.ftkmf.framework.cfg"
   mkdir -p "$(dirname "$cfg")"
-  printf '[Diagnostics]\nRunSelfTests = true\nEnableScaleBudgetGate = true\nSyntheticContentCount = 50\n[Enemies]\nForceCustomEnemy = true\n[Adventures]\nForceCustomEncounter = true\n[Demo]\nEnableSampleContent = false\n' > "$cfg"
+  printf '[Diagnostics]\nRunSelfTests = true\nEnableScaleBudgetGate = true\nSyntheticContentCount = 50\n[Data]\nEnableDataContent = false\n' > "$cfg"
   fake_dll "$WORK/player.dll"
   run_installer "$fixture_home" --framework "$WORK/player.dll" --dev --player --no-launch-options || fail "player install failed"
   assert_grep "$cfg" "RunSelfTests = false"
   assert_grep "$cfg" "EnableScaleBudgetGate = false"
   assert_grep "$cfg" "SyntheticContentCount = 0"
-  assert_grep "$cfg" "ForceCustomEnemy = false"
-  assert_grep "$cfg" "ForceCustomEncounter = false"
-  assert_grep "$cfg" "EnableSampleContent = false"
+  assert_grep "$cfg" "EnableDataContent = false"
   run_installer "$fixture_home" --framework "$WORK/player.dll" --dev --no-launch-options || fail "developer install failed"
   assert_grep "$cfg" "RunSelfTests = true"
 }

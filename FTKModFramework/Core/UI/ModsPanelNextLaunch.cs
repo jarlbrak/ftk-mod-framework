@@ -20,10 +20,10 @@ namespace FTKModFramework.Core.UI
             bool addedLocalHeading = false;
             foreach (ModEntry entry in entries)
             {
-                if (entry.IsManaged || (entry.IsBundledDemo && !entry.Enabled && !entry.PendingEnabled.HasValue)) continue;
+                if (entry.IsManaged) continue;
                 if (!addedLocalHeading)
                 {
-                    lines.Add("Included and manual mods after restart:");
+                    lines.Add("Manually installed mods after restart:");
                     addedLocalHeading = true;
                 }
                 bool enabled = entry.PendingEnabled ?? entry.Enabled;

@@ -22,9 +22,8 @@ namespace FTKModFramework.Core
     /// It uses the SAME shared <see cref="ValidationReport"/> channel the data loader uses (asserting the report
     /// contains the expected FAIL text), mirroring the negative-fixture style of the #34/#35 self-tests. The two
     /// campaigns are registered via <see cref="Adventures.AddCampaignFromTemplate"/> (which now runs the
-    /// validator as its load pre-pass), so this also exercises the end-to-end wiring. Gated like the other
-    /// campaign self-tests (run from Content/AdventureContent.cs under EnableSampleContent), since it registers
-    /// real selectable demo adventures. Unique quest keys avoid colliding with the other self-tests in the
+    /// validator as its load pre-pass), so this also exercises the end-to-end wiring. This development probe
+    /// registers selectable adventures. Unique quest keys avoid colliding with the other self-tests in the
     /// process-wide <see cref="BranchSidecar"/>.
     /// </summary>
     internal static class QuestValidatorSelfTest

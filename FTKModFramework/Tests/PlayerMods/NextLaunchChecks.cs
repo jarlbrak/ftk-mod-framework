@@ -17,7 +17,7 @@ internal static class NextLaunchChecks
         ManagedSnapshot active = new ManagedSnapshot();
         active.Packages.Add(new PackageDescriptor { PackageId = "paladin", Name = "Paladin", Version = "1.0.0", Enabled = true });
         List<ModEntry> entries = new List<ModEntry>();
-        ModEntry managed = new ModEntry("paladin", "Paladin", false, "1.0.0", true, null, null);
+        ModEntry managed = new ModEntry("paladin", "Paladin", "1.0.0", true, null, null);
         managed.MarkManaged("paladin");
         entries.Add(managed);
         List<string> lines = ModsPanelNextLaunch.Lines(active, null, entries);
@@ -38,18 +38,16 @@ internal static class NextLaunchChecks
         lines = ModsPanelNextLaunch.Lines(null, pending, entries);
         Assert(lines[1] == "Paladin 1.0.0 / ON", "first installation appears before an active generation exists");
 
-        ModEntry demo = new ModEntry("demo", "Included examples", true, null, false, null, null);
-        entries = new List<ModEntry> { demo };
+        entries = new List<ModEntry>();
         lines = ModsPanelNextLaunch.Lines(null, null, entries);
-        Assert(lines.Count == 2 && lines[1] == "No community mods selected.", "empty state is explicit and unchanged disabled developer examples stay hidden");
-        demo.PendingEnabled = true;
-        ModEntry manual = new ModEntry("manual", "Manual mod", false, "2.0.0", true, null, null);
+        Assert(lines.Count == 2 && lines[1] == "No community mods selected.", "empty state is explicit");
+        ModEntry manual = new ModEntry("manual", "Manual mod", "2.0.0", true, null, null);
         manual.PendingEnabled = false;
-        ModEntry blocked = new ModEntry("blocked", "Incompatible mod", false, "1.0.0", true, null, null, ">=999.0.0", true);
+        ModEntry blocked = new ModEntry("blocked", "Incompatible mod", "1.0.0", true, null, null, ">=999.0.0", true);
         entries.Add(manual);
         entries.Add(blocked);
         lines = ModsPanelNextLaunch.Lines(null, null, entries);
-        Assert(lines.Contains("Included examples / ON") && lines.Contains("Manual mod 2.0.0 / OFF"), "included and manual pending preferences are reflected");
+        Assert(lines.Contains("Manual mod 2.0.0 / OFF"), "manual pending preference is reflected");
         Assert(lines.Contains("Incompatible mod 1.0.0 / BLOCKED / FRAMEWORK REQUIREMENT"), "incompatible enabled preference is not promised to load");
         manual.PendingEnabled = null;
         lines = ModsPanelNextLaunch.Lines(null, null, entries);

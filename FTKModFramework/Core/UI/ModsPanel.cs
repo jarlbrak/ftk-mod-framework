@@ -426,9 +426,6 @@ namespace FTKModFramework.Core.UI
             List<ModEntry> entries = new List<ModEntry>();
             foreach (ModEntry candidate in ModRegistry.Entries)
             {
-                // Once the optional included demo is off, keep Installed focused on content
-                // that this player actually has selected. A pending toggle remains visible.
-                if (candidate.IsBundledDemo && !candidate.Enabled && !candidate.PendingEnabled.HasValue) continue;
                 PackageDescriptor managed = candidate.IsManaged ? MarketplaceRuntime.FindManaged(candidate.Key) : null;
                 bool component = managed != null && (managed.Classification == "dependency" || managed.Classification == "component");
                 if (component == components) entries.Add(candidate);
@@ -439,7 +436,7 @@ namespace FTKModFramework.Core.UI
                 if (MarketplaceRuntime.FindManaged(package.ModGuid) != null) continue;
                 bool component = package.Classification == "dependency" || package.Classification == "component";
                 if (component != components) continue;
-                ModEntry queued = new ModEntry(package.ModGuid, package.Name, false, package.Version, false, package.Description, package.Author, package.FrameworkVersion, true);
+                ModEntry queued = new ModEntry(package.ModGuid, package.Name, package.Version, false, package.Description, package.Author, package.FrameworkVersion, true);
                 queued.MarkManaged(package.PackageId);
                 entries.Add(queued);
             }
@@ -451,10 +448,10 @@ namespace FTKModFramework.Core.UI
             for (int i = _page * perPage; i < Math.Min(entries.Count, (_page + 1) * perPage); i++)
             {
                 ModEntry entry = entries[i];
-                string origin = entry.IsBundledDemo ? "INCLUDED" : entry.IsManaged ? "COMMUNITY" : "INSTALLED MANUALLY";
-                string summary = entry.IsBundledDemo ? "New classes, enemies, equipment and two adventures." : Short(entry.Description, 110);
+                string origin = entry.IsManaged ? "COMMUNITY" : "INSTALLED MANUALLY";
+                string summary = Short(entry.Description, 110);
                 Card(entry.DisplayName, summary, origin, EntryState(entry),
-                    _entry != null && _entry.Key == entry.Key, delegate { SelectEntry(entry, true); }, PreviewPaths(entry.IsManaged ? CurrentListing(MarketplaceRuntime.FindManaged(entry.Key) ?? DesiredPackage(entry.PackageId)) : null, entry.IsBundledDemo));
+                    _entry != null && _entry.Key == entry.Key, delegate { SelectEntry(entry, true); }, PreviewPaths(entry.IsManaged ? CurrentListing(MarketplaceRuntime.FindManaged(entry.Key) ?? DesiredPackage(entry.PackageId)) : null));
             }
             PageButtons(pages);
         }
@@ -544,7 +541,7 @@ namespace FTKModFramework.Core.UI
                 string state = active == null && desired != null ? "READY FOR NEXT LAUNCH" : active != null ? "INSTALLED" : package.Compatible ? "AVAILABLE" : "CHECK REQUIREMENTS";
                 Card(package.Name, Short(package.Description, 100), Declared(package.Category).ToUpperInvariant(), state,
                     _package != null && _package.PackageId == package.PackageId,
-                    delegate { _package = package; _entry = null; _detailPage = 0; _showAdvanced = false; _showGallery = false; _imagePage = 0; Refresh(); }, PreviewPaths(package, false));
+                    delegate { _package = package; _entry = null; _detailPage = 0; _showAdvanced = false; _showGallery = false; _imagePage = 0; Refresh(); }, PreviewPaths(package));
             }
             PageButtons(pages);
         }
@@ -563,11 +560,10 @@ namespace FTKModFramework.Core.UI
         private void Details()
         {
             if (_package != null) _package = CurrentListing(_package);
-            bool bundled = _entry != null && _entry.IsBundledDemo;
             string name = _package != null ? _package.Name : _entry.DisplayName;
-            List<string> previews = PreviewPaths(_package, bundled);
-            if (previews.Count == 0 || _showAdvanced || _showGallery) TextLine(bundled ? "INCLUDED CONTENT" : _package != null ? "COMMUNITY MOD" : "INSTALLED MANUALLY", 18, 24).color = Gold;
-            Text title = TextLine(Short(name, 50), 36, bundled ? 50 : 72);
+            List<string> previews = PreviewPaths(_package);
+            if (previews.Count == 0 || _showAdvanced || _showGallery) TextLine(_package != null ? "COMMUNITY MOD" : "INSTALLED MANUALLY", 18, 24).color = Gold;
+            Text title = TextLine(Short(name, 50), 36, 72);
             title.resizeTextForBestFit = true;
             title.resizeTextMinSize = 24;
             title.resizeTextMaxSize = 36;
@@ -593,23 +589,15 @@ namespace FTKModFramework.Core.UI
                 AdvancedDetails();
                 return;
             }
-            if (!bundled) TextLine(Short(OverviewCredit(), 64), 20, 28);
+            TextLine(Short(OverviewCredit(), 64), 20, 28);
             if (previews.Count > 0)
             {
                 GameObject hero = NewChild("Mod preview", _container);
-                Height(hero, bundled ? 220 : 175);
+                Height(hero, 175);
                 AddPreviewImage(hero.transform, previews[0]);
-                Button gallery = LinkButton("View " + (bundled ? "artwork" : "previews") + " (" + previews.Count + ")", delegate { _showGallery = true; _imagePage = 0; Refresh(); });
+                Button gallery = LinkButton("View previews (" + previews.Count + ")", delegate { _showGallery = true; _imagePage = 0; Refresh(); });
                 gallery.GetComponent<LayoutElement>().minHeight = gallery.GetComponent<LayoutElement>().preferredHeight = 32;
-                TextLine(bundled ? "• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run." : Short(_package != null ? _package.Description : _entry.Description, 135), 22, 78);
-            }
-            else if (bundled)
-            {
-                TextLine("FTK Mod Framework / Included", 22, 28);
-                TextLine("The playable content included with the framework, together in one optional pack.", 24, 60);
-                Spacer(4);
-                TextLine("What it adds", 28, 36).color = Gold;
-                TextLine("• Play as the Thief or Innkeeper.\n• Encounter the Cutpurse and new equipment.\n• Explore Smuggler's Run.", 24, 115);
+                TextLine(Short(_package != null ? _package.Description : _entry.Description, 135), 22, 78);
             }
             else
             {
@@ -638,7 +626,7 @@ namespace FTKModFramework.Core.UI
             if (fullName != null && fullName.Length > 50) blocks.Add("Full mod name\n" + fullName);
             if (_package == null)
             {
-                blocks.Add(Declared(_entry.Description) + "\nAuthor: " + Declared(_entry.Author) + "\n" + (_entry.IsBundledDemo ? "Included with FTK Mod Framework " + Plugin.Version + "\nLicense: MIT." : "Version: " + Declared(_entry.Version) + "\nLicense: Not declared.\nInstalled manually; marketplace actions cannot remove these files."));
+                blocks.Add(Declared(_entry.Description) + "\nAuthor: " + Declared(_entry.Author) + "\nVersion: " + Declared(_entry.Version) + "\nLicense: Not declared.\nInstalled manually; marketplace actions cannot remove these files.");
             }
             else
             {
@@ -666,14 +654,14 @@ namespace FTKModFramework.Core.UI
                 if (!string.IsNullOrEmpty(p.Changelog)) details.Append("Latest change\n").Append(p.Changelog).Append("\n");
                 blocks.Add(details.ToString().TrimEnd());
             }
-            if (_package == null && _entry != null && !_entry.IsBundledDemo)
+            if (_package == null && _entry != null)
                 blocks.Add("Declared framework: " + Declared(_entry.FrameworkVersion) + "\n" +
                     (_entry.CompatibilityReason ?? "Meets the declared minimum within the same framework major. This is not a save or co-op guarantee."));
             List<string> pages = TextPages(blocks, 10);
             _detailPage = Math.Min(_detailPage, pages.Count - 1);
             TextLine(pages[_detailPage], 22, 280);
             if (pages.Count > 1) ActionButton("Next detail (" + (_detailPage + 1) + " of " + pages.Count + ")", delegate { _detailPage = (_detailPage + 1) % pages.Count; Refresh(); });
-            if (_package != null && PreviewPaths(_package, false).Count > 0)
+            if (_package != null && PreviewPaths(_package).Count > 0)
                 LinkButton("View previews", delegate { _showAdvanced = false; _showGallery = true; _imagePage = 0; Refresh(); });
             if (_package != null && MarketplaceRuntime.FindManaged(_package.ModGuid) != null)
                 LinkButton("Remove this community mod...", delegate { ReviewSelection(_package, true, false); }, !PanelBusy);
@@ -816,7 +804,7 @@ namespace FTKModFramework.Core.UI
             return pages;
         }
 
-        private static List<string> PreviewPaths(PackageDescriptor package, bool bundled)
+        private static List<string> PreviewPaths(PackageDescriptor package)
         {
             List<string> paths = new List<string>();
             if (package != null && package.ScreenshotPaths != null)

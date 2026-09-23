@@ -69,13 +69,10 @@ namespace FTKModFramework.Core.Marketplace
             if (_initialized) return;
             _initialized = true;
             _activeSettings = new Dictionary<string, object>();
-            _activeSettings["EnableSampleContent"] = Plugin.EnableSampleContent.Value;
             _activeSettings["EnableDataContent"] = Plugin.EnableDataContent.Value;
             _activeSettings["EnableBehaviorLoading"] = Plugin.EnableBehaviorLoading.Value;
             _activeSettings["EnableCampaignEngine"] = Plugin.EnableCampaignEngine.Value;
             _activeSettings["RunSelfTests"] = Plugin.SelfTestsEnabled;
-            _activeSettings["ForceCustomEnemy"] = Plugin.ForceCustomEnemy.Value;
-            _activeSettings["ForceCustomEncounter"] = Plugin.ForceCustomEncounter.Value;
             _activeSettings["DiagnosticsEnableGate"] = Plugin.DiagnosticsEnableGate.Value;
             _activeSettings["SyntheticContentCount"] = Plugin.SyntheticContentCount.Value;
             _activeSettings["SyntheticContentKind"] = Plugin.SyntheticContentKind.Value;

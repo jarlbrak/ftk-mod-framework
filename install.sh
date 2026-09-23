@@ -732,9 +732,7 @@ install_framework() {
     cfg_set "$cfg" "Diagnostics" "RunSelfTests" "false"
     cfg_set "$cfg" "Diagnostics" "EnableScaleBudgetGate" "false"
     cfg_set "$cfg" "Diagnostics" "SyntheticContentCount" "0"
-    cfg_set "$cfg" "Enemies" "ForceCustomEnemy" "false"
-    cfg_set "$cfg" "Adventures" "ForceCustomEncounter" "false"
-    ok "player mode: developer fixtures, scale probes, and forced encounters/enemies are disabled."
+    ok "player mode: developer fixtures and scale probes are disabled."
   fi
 }
 

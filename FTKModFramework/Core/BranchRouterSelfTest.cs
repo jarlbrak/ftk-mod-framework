@@ -30,8 +30,7 @@ namespace FTKModFramework.Core
     /// temporarily forces offline-mode (=&gt; host) and installs an uninitialized <c>GameLogic</c> singleton purely
     /// so the store materializes, then RESTORES both in a finally. It does NOT call the real <c>GetNextQuest</c>
     /// (which NREs on the null <c>FTKGameStats.Inst</c> at load); it drives only the Postfix, exactly as the
-    /// collect-N self-test drives its patch method directly. Gated the same way as the other campaign self-tests
-    /// (from Content/AdventureContent.cs), since it registers a real selectable demo adventure.
+    /// collect-N self-test drives its patch method directly. This development probe registers a selectable adventure.
     /// </summary>
     internal static class BranchRouterSelfTest
     {
