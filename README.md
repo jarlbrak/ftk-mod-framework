@@ -8,14 +8,14 @@
   <a href="https://github.com/jarlbrak/ftk-mod-framework/actions/workflows/ci.yml"><img src="https://github.com/jarlbrak/ftk-mod-framework/actions/workflows/ci.yml/badge.svg" alt="Build status"></a>
 </p>
 
-**FTK Mod Framework 1.0.1** brings community mods to the original [For The King](https://store.steampowered.com/app/527230/) (2018). Its launcher installs the framework into your Steam copy, and the game's **Mods** menu lets you discover and manage content. The first marketplace mod is [Paladin](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.0.1), a protector class with original equipment and 3D art.
+**FTK Mod Framework 1.0.2** brings community mods to the original [For The King](https://store.steampowered.com/app/527230/) (2018). Its launcher installs the framework into your Steam copy, and the game's **Mods** menu lets you discover and manage content. The first marketplace mod is [Paladin](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.0.1), a protector class with original equipment and 3D art.
 
 ## Install and play
 
-1. Download the launcher archive for your platform from the [framework 1.0.1 release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.1) and extract it to a permanent folder.
+1. Download the launcher archive for your platform from the [framework 1.0.2 release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.2) and extract it to a permanent folder.
 2. In Steam, choose **Games > Add a Non-Steam Game > Browse**. Select **For The King Modded.app** on macOS, **For The King Modded.sh** on Linux, or **FtkModdedLauncher.exe** on Windows. Keep the extracted files together.
 3. Start that Steam shortcut. The first launch installs the mod loader and framework, then opens your owned game.
-4. Open **Mods** on the game title screen to browse, install, enable, disable, or remove mods. The menu tells you when a change takes effect on the next game launch.
+4. Open **Mods** on the game title screen to browse, install, enable, disable, or remove mods. Supported changes can be applied there before starting an adventure; the menu identifies changes that need the next game launch.
 
 The launcher checks for compatible framework updates before Play and can use the installed version when offline. **Mods > Updates** lets you follow Stable or Preview releases, or pin a version. Your game saves and mod settings are kept outside the launcher bundle. For manual installation, removal, and troubleshooting, see the [installation guide](docs/INSTALL.md).
 
