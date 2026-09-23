@@ -32,6 +32,7 @@ namespace FTKModFramework.Core.HotReload
             HashSet<int> requiredItems = new HashSet<int>();
             foreach (bool display in new[] { false, true })
                 foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadPlans(display)) requiredItems.Add(plan.Key);
+            foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadOffHandPlans()) requiredItems.Add(plan.Key);
             foreach (KeyValuePair<int, PlayerApparelMesh[]> plan in ItemApparelRegistry.ReloadPlans()) requiredItems.Add(plan.Key);
             Dictionary<int, FTK_itembase> items = PreflightRowIndex.Build(ItemRowsForPreflight(), requiredItems,
                 delegate(FTK_itembase row) { return (int)FTK_itembase.GetEnum(row.m_ID); });
@@ -68,6 +69,29 @@ namespace FTKModFramework.Core.HotReload
                         textures.Add(mesh.TextureFileName);
                     }
                 }
+            foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadOffHandPlans())
+            {
+                FTK_weaponStats2 item = items[plan.Key] as FTK_weaponStats2;
+                if (item == null || item.m_Prefab == null)
+                    throw new InvalidOperationException("Off-hand model requires a native weapon prefab.");
+                Weapon weapon = item.m_Prefab.GetComponentInChildren<Weapon>();
+                if (weapon == null || weapon.m_OffHand == null)
+                    throw new InvalidOperationException("Weapon has no native off-hand object: " + item.m_ID);
+                foreach (EnemyRendererMesh mesh in plan.Value)
+                {
+                    Transform target = ExactTarget(weapon.m_OffHand, mesh.RendererPath);
+                    MeshRenderer[] renderers = target.GetComponents<MeshRenderer>();
+                    MeshFilter[] filters = target.GetComponents<MeshFilter>();
+                    if (renderers.Length != 1 || filters.Length != 1 || filters[0].sharedMesh == null ||
+                        target.GetComponents<SkinnedMeshRenderer>().Length != 0)
+                        throw new InvalidOperationException("Invalid native off-hand rigid renderer: " + item.m_ID + "/" + mesh.RendererPath);
+                    ValidateMaterial(renderers[0], true);
+                    string resolved = CustomModelLoader.ResolveModelPath(mesh.GlbFileName);
+                    if (rigidModels.Add(resolved))
+                        jobs.Add(delegate { RuntimeGltfMeshLoader.PreflightResolved(resolved, null, null); });
+                    textures.Add(mesh.TextureFileName);
+                }
+            }
             List<string[]> avatars = null;
             foreach (KeyValuePair<int, PlayerApparelMesh[]> plan in ItemApparelRegistry.ReloadPlans())
             {

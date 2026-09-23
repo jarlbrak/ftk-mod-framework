@@ -66,14 +66,8 @@ namespace FTKModFramework.Core.HotReload
             if (Directory.Exists(Plugin.DataContentRootPath))
                 foreach (string folder in Directory.GetDirectories(Plugin.DataContentRootPath))
                     if (File.Exists(Path.Combine(folder, "manifest.json"))) return "Manual content requires next-launch activation.";
-            ManagedSnapshot active = MarketplaceRuntime.Active;
-            if (active != null)
-            {
-                if (active.Packages == null || active.Packages.Count > 1) return "This package set has no hot activation adapter.";
-                foreach (PackageDescriptor package in active.Packages)
-                    if (package.ModGuid != "com.ftkmf.paladin" || (package.Dependencies != null && package.Dependencies.Length != 0))
-                        return "This package or dependency has no hot activation adapter.";
-            }
+            string packageReason = HotReloadPackagePolicy.InvalidReason(MarketplaceRuntime.Active);
+            if (packageReason != null) return packageReason;
             using (SHA256 hash = SHA256.Create())
             using (FileStream file = File.OpenRead(typeof(GridEditor.TableManager).Assembly.Location))
                 if (BitConverter.ToString(hash.ComputeHash(file)).Replace("-", "").ToLowerInvariant() !=

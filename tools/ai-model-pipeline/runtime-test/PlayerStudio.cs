@@ -11,7 +11,7 @@ public sealed partial class RuntimeModelTest
         CatalogKeys(command,"id","session","op","source","ownerInstanceId","celInstanceId","view");
         RequireSinglePlayer();CatalogNoLinks(root);CatalogNoLinks(output);
         string source=Str(command,"source"),view=Str(command,"view");
-        if(view!="front" && view!="three-quarter" && view!="back")throw new ArgumentException("view must be front, three-quarter or back");
+        if(view!="front" && view!="three-quarter" && view!="side" && view!="back")throw new ArgumentException("view must be front, three-quarter, side or back");
         int ownerId=LeaseObservationPin.ExactId(command,"ownerInstanceId",false);
         int celId=LeaseObservationPin.ExactId(command,"celInstanceId",false);
         if(source=="preview")PreviewRaceRequireStudioReady(ownerId);
@@ -51,7 +51,7 @@ public sealed partial class RuntimeModelTest
     JObject RenderPlayerStudioAvatar(CharacterEventListener avatar,string path,string view,Vector3? fixedForward=null,float minimumSpan=0f)
     {
         RequireSinglePlayer();CatalogNoLinks(root);CatalogNoLinks(output);
-        if(view!="front" && view!="three-quarter" && view!="back")throw new ArgumentException("Invalid studio view");
+        if(view!="front" && view!="three-quarter" && view!="side" && view!="back")throw new ArgumentException("Invalid studio view");
         if(avatar==null || !SceneOwner(avatar) || !avatar.gameObject.activeInHierarchy)
             throw new InvalidOperationException("Active native avatar required for studio render");
         Renderer[] renderers=avatar.GetComponentsInChildren<Renderer>(true);
@@ -90,7 +90,7 @@ public sealed partial class RuntimeModelTest
         {
             foreach(GameObject part in layers.Keys)part.layer=layer;
             Vector3 center=avatar.transform.position+up*centerHeight;
-            float yaw=view=="back"?180f:view=="three-quarter"?25f:0f;
+            float yaw=view=="back"?180f:view=="side"?90f:view=="three-quarter"?25f:0f;
             Vector3 direction=Quaternion.AngleAxis(yaw,up)*(fixedForward.HasValue?fixedForward.Value:avatar.transform.forward.normalized);
             cameraObject=new GameObject("FTK test player studio camera");Camera camera=cameraObject.AddComponent<Camera>();camera.enabled=false;
             camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.13f,.15f,.18f,1f);

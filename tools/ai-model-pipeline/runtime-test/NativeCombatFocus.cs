@@ -37,12 +37,36 @@ public sealed partial class RuntimeModelTest
     JObject NativeCombatFocus(JObject command)
     {
         CatalogKeys(command,"id","session","op","action","expectedHeroFID","expectedFocus","expectedSpentFocus","receipt");
+        if(Str(command,"action")=="select-basic")
+        {
+            RequireSinglePlayer();
+            uiBattleStanceButtons stance=FTKUI.Instance.m_BattleStanceButtons;
+            if(stance==null || !stance.m_Initialized || stance.m_InputFocus==null || stance.CombatCow==null)
+                throw new InvalidOperationException("Native hero stance required");
+            CharacterDummy actor=stance.CombatCow.GetCombatDummy();
+            uiBattleButton basic=stance.m_AttackButton;
+            if(actor==null || actor.m_CharacterDummyFSM.ActiveStateName!="Wait For Stance" ||
+                NativeFocusIdentity(actor)!=Str(command,"expectedHeroFID") ||
+                stance.CombatCow.m_CharacterStats.m_FocusPoints!=Int(command,"expectedFocus",-1) ||
+                stance.CombatCow.m_CharacterStats.SpentFocus!=Int(command,"expectedSpentFocus",-1) ||
+                basic==null || !basic.gameObject.activeInHierarchy || !basic.m_CanUse ||
+                stance.m_Focusing || stance.m_FocusInterrupt)
+                throw new InvalidOperationException("Basic attack selection inputs changed");
+            FTKInput.Instance.SetFocus(stance.m_InputFocus,basic.m_Selectable);
+            stance.DisplayBattleActionInfo(basic,true);
+            if(stance.m_CombatActionProfile.m_Button!=basic)
+                throw new InvalidOperationException("Native basic attack profile was not selected");
+            return new JObject{{"ok",true},{"selectionRequested","basic"},{"heroFID",NativeFocusIdentity(actor)},
+                {"slots",stance.m_CombatActionProfile.m_Slots},{"focus",stance.CombatCow.m_CharacterStats.m_FocusPoints},
+                {"spentFocus",stance.CombatCow.m_CharacterStats.SpentFocus},
+                {"scope","Native UI selection only; no Focus debit or attack"}};
+        }
         if(Str(command,"action")=="inspect")
         {
             if(nativeFocusReceipt==null || Str(command,"receipt")!=nativeFocusReceipt.Token)throw new ArgumentException("Exact receipt required");
             NativeCombatFocusTick();return NativeFocusReport();
         }
-        if(Str(command,"action")!="spend")throw new ArgumentException("Action must be spend or inspect");
+        if(Str(command,"action")!="spend")throw new ArgumentException("Action must be select-basic, spend or inspect");
         if(nativeFocusReceipt!=null && (nativeFocusReceipt.Stage=="pending" || nativeFocusReceipt.Stage=="unknown"))
             throw new InvalidOperationException("Previous Focus attempt is pending or uncertain; no retry");
         RequireSinglePlayer();

@@ -1,0 +1,482 @@
+{
+  "schema": "ftkmf.thief-apparel-delivery.v1",
+  "items": 28,
+  "equippedMeshes": 35,
+  "displayMeshes": 28,
+  "icons": 28,
+  "palette": "assets/thief-apparel-palette.png",
+  "files": {
+    "thief-apparel-palette.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-apparel-palette.png",
+      "package": "assets/thief-apparel-palette.png",
+      "sha256": "52164cbcbe9daba87cb4115c6982ebb8cc8df977e313586eb2810db6ca2ab3a4"
+    },
+    "thief-boots-burglar-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-burglar-display.glb",
+      "package": "assets/thief-boots-burglar-display.glb",
+      "sha256": "3e6dae679b91dc82f3396573bc050b53d017e1607f78fdeba6c25b57cc1ee3da"
+    },
+    "thief-boots-burglar-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-burglar-icon.png",
+      "package": "assets/thief-boots-burglar-icon.png",
+      "sha256": "4849425d64c8ba68724e4138201ef851ad20613cc8648508ef147ac7978f7c9d"
+    },
+    "thief-boots-burglar.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-burglar.glb",
+      "package": "assets/thief-boots-burglar.glb",
+      "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec"
+    },
+    "thief-boots-guild-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-guild-display.glb",
+      "package": "assets/thief-boots-guild-display.glb",
+      "sha256": "dbe4759c5016172fc24e032b3fdf45f330132885f7d1762885a70c5b62b8d9a9"
+    },
+    "thief-boots-guild-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-guild-icon.png",
+      "package": "assets/thief-boots-guild-icon.png",
+      "sha256": "b11994e3b6455202c27c3a9a29c1482a700b83b9cd116494106c28e4d670df04"
+    },
+    "thief-boots-guild.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-guild.glb",
+      "package": "assets/thief-boots-guild.glb",
+      "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba"
+    },
+    "thief-boots-locksmith-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-locksmith-display.glb",
+      "package": "assets/thief-boots-locksmith-display.glb",
+      "sha256": "7fc38eb896fd69fbfc068ac112af6413a82bd06e1d4b55a78ed2d5a8132cc0b5"
+    },
+    "thief-boots-locksmith-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-locksmith-icon.png",
+      "package": "assets/thief-boots-locksmith-icon.png",
+      "sha256": "e1f9c790069218440d823a36cd71f3879dbba0f9afe41dca6daa964e2c409cc1"
+    },
+    "thief-boots-locksmith.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-locksmith.glb",
+      "package": "assets/thief-boots-locksmith.glb",
+      "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6"
+    },
+    "thief-boots-masterwork-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-masterwork-display.glb",
+      "package": "assets/thief-boots-masterwork-display.glb",
+      "sha256": "fcb54c82a7437dd179680d63b97bc483136256673b77fdfdd4a44c48545c10fb"
+    },
+    "thief-boots-masterwork-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-masterwork-icon.png",
+      "package": "assets/thief-boots-masterwork-icon.png",
+      "sha256": "32d4f2af4c2caeebc63508d58e0c034b68ee946ab2ef572ab576c8ad1c6f0771"
+    },
+    "thief-boots-masterwork.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-masterwork.glb",
+      "package": "assets/thief-boots-masterwork.glb",
+      "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41"
+    },
+    "thief-boots-nightblade-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-nightblade-display.glb",
+      "package": "assets/thief-boots-nightblade-display.glb",
+      "sha256": "4b83f912f06970905749aa77399913bd697ecbde1138e15b91aeb1c8e765a27a"
+    },
+    "thief-boots-nightblade-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-nightblade-icon.png",
+      "package": "assets/thief-boots-nightblade-icon.png",
+      "sha256": "debd7d4b4cc5506e4ff374d5aff68f07b8e1d6d766101c615d3180cd738804e5"
+    },
+    "thief-boots-nightblade.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-nightblade.glb",
+      "package": "assets/thief-boots-nightblade.glb",
+      "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca"
+    },
+    "thief-boots-street-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-street-display.glb",
+      "package": "assets/thief-boots-street-display.glb",
+      "sha256": "04e805b66fd0e7c5fd54c11adc3e2e6c3a00f8374f4ccff8c9b40324571375e4"
+    },
+    "thief-boots-street-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-street-icon.png",
+      "package": "assets/thief-boots-street-icon.png",
+      "sha256": "37e6ad4a713511a365a228771b9d9bf4c6407b1161412d1f808e3c9caab817e5"
+    },
+    "thief-boots-street.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-street.glb",
+      "package": "assets/thief-boots-street.glb",
+      "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d"
+    },
+    "thief-boots-wayfarer-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-wayfarer-display.glb",
+      "package": "assets/thief-boots-wayfarer-display.glb",
+      "sha256": "cd09c12669d5153483f8fa390335bbeeb7501a6744af3ac7387dbd26e73a8107"
+    },
+    "thief-boots-wayfarer-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-wayfarer-icon.png",
+      "package": "assets/thief-boots-wayfarer-icon.png",
+      "sha256": "420745fe71e10665bc501ec255710e67b554b09751b280a65ca2c4a92a97f0d8"
+    },
+    "thief-boots-wayfarer.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-boots-wayfarer.glb",
+      "package": "assets/thief-boots-wayfarer.glb",
+      "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7"
+    },
+    "thief-charm-burglar-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-burglar-display.glb",
+      "package": "assets/thief-charm-burglar-display.glb",
+      "sha256": "1fb412357de3e8b83e92d1b2a082af1daf72006c429620aee148844133eabcda"
+    },
+    "thief-charm-burglar-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-burglar-icon.png",
+      "package": "assets/thief-charm-burglar-icon.png",
+      "sha256": "a5c782ab058f451d0111deda20bc73e83d67ed03d505e526408a56e467871316"
+    },
+    "thief-charm-burglar.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-burglar.glb",
+      "package": "assets/thief-charm-burglar.glb",
+      "sha256": "1fb412357de3e8b83e92d1b2a082af1daf72006c429620aee148844133eabcda"
+    },
+    "thief-charm-guild-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-guild-display.glb",
+      "package": "assets/thief-charm-guild-display.glb",
+      "sha256": "84b5a3b2a090498deab994de22c9e4c839cdac4de3b70fb0a292bed66d23afb9"
+    },
+    "thief-charm-guild-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-guild-icon.png",
+      "package": "assets/thief-charm-guild-icon.png",
+      "sha256": "e2f3063a0acebf81728905f1283f7191a44a9d6bfb8cc1ad4aaa9d09be2d5f60"
+    },
+    "thief-charm-guild.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-guild.glb",
+      "package": "assets/thief-charm-guild.glb",
+      "sha256": "84b5a3b2a090498deab994de22c9e4c839cdac4de3b70fb0a292bed66d23afb9"
+    },
+    "thief-charm-locksmith-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-locksmith-display.glb",
+      "package": "assets/thief-charm-locksmith-display.glb",
+      "sha256": "68438a5c87c5a84413ed9bf6369550d0c3f0db25a38e7dd13489f7a02fd57b78"
+    },
+    "thief-charm-locksmith-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-locksmith-icon.png",
+      "package": "assets/thief-charm-locksmith-icon.png",
+      "sha256": "787f6d9c6d9a8809924ff5dababcbd255d84547189cef14e402f3ac292f32fcd"
+    },
+    "thief-charm-locksmith.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-locksmith.glb",
+      "package": "assets/thief-charm-locksmith.glb",
+      "sha256": "68438a5c87c5a84413ed9bf6369550d0c3f0db25a38e7dd13489f7a02fd57b78"
+    },
+    "thief-charm-masterwork-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-masterwork-display.glb",
+      "package": "assets/thief-charm-masterwork-display.glb",
+      "sha256": "f91a42790108fe86bd8c88b68e00e2db5fb5cc7839141c1fdd6fb2626952f900"
+    },
+    "thief-charm-masterwork-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-masterwork-icon.png",
+      "package": "assets/thief-charm-masterwork-icon.png",
+      "sha256": "757efcd4d660c9a8932f0a4269822278e37610d8ec2ef1de4648a2d94d757331"
+    },
+    "thief-charm-masterwork.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-masterwork.glb",
+      "package": "assets/thief-charm-masterwork.glb",
+      "sha256": "f91a42790108fe86bd8c88b68e00e2db5fb5cc7839141c1fdd6fb2626952f900"
+    },
+    "thief-charm-nightblade-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-nightblade-display.glb",
+      "package": "assets/thief-charm-nightblade-display.glb",
+      "sha256": "c821adaa59a415078977a6e63c06d0fe2f1ddefdf22fee07072069a139f3d591"
+    },
+    "thief-charm-nightblade-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-nightblade-icon.png",
+      "package": "assets/thief-charm-nightblade-icon.png",
+      "sha256": "fb835ecceaa85037a02a2786a0dd0ae78617cfa4abb07ee291f1e98a090db729"
+    },
+    "thief-charm-nightblade.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-nightblade.glb",
+      "package": "assets/thief-charm-nightblade.glb",
+      "sha256": "c821adaa59a415078977a6e63c06d0fe2f1ddefdf22fee07072069a139f3d591"
+    },
+    "thief-charm-street-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-street-display.glb",
+      "package": "assets/thief-charm-street-display.glb",
+      "sha256": "c5377e85242883550b1df51764c1488d986f69f32b73dced458ef93b85dbd634"
+    },
+    "thief-charm-street-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-street-icon.png",
+      "package": "assets/thief-charm-street-icon.png",
+      "sha256": "886a2f7abc72cc63845ad5612436f098d81184565d83ddb2ed2ac44c29cd352f"
+    },
+    "thief-charm-street.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-street.glb",
+      "package": "assets/thief-charm-street.glb",
+      "sha256": "c5377e85242883550b1df51764c1488d986f69f32b73dced458ef93b85dbd634"
+    },
+    "thief-charm-wayfarer-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-wayfarer-display.glb",
+      "package": "assets/thief-charm-wayfarer-display.glb",
+      "sha256": "fad1cfd2fe580e2c2649c5b8f44174090b4977e713804b66c9c0c8231b733812"
+    },
+    "thief-charm-wayfarer-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-wayfarer-icon.png",
+      "package": "assets/thief-charm-wayfarer-icon.png",
+      "sha256": "49412975366522efbc56d88837566f112249a3b89ed7d4a8255e07903cc4accd"
+    },
+    "thief-charm-wayfarer.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-charm-wayfarer.glb",
+      "package": "assets/thief-charm-wayfarer.glb",
+      "sha256": "fad1cfd2fe580e2c2649c5b8f44174090b4977e713804b66c9c0c8231b733812"
+    },
+    "thief-coat-burglar-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-burglar-display.glb",
+      "package": "assets/thief-coat-burglar-display.glb",
+      "sha256": "b858ff1a8509436ae2afe331683ad97c7f2666566d237fcdeea24fda96c4cd1b"
+    },
+    "thief-coat-burglar-female.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-burglar-female.glb",
+      "package": "assets/thief-coat-burglar-female.glb",
+      "sha256": "ceb773fcf4798ad9b5a8baab486e4db959a538d9052a23c038eb59a85be08c92"
+    },
+    "thief-coat-burglar-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-burglar-icon.png",
+      "package": "assets/thief-coat-burglar-icon.png",
+      "sha256": "a56a4e38c35d8e5d4e413447393caf6c269484dbf7ad6c73da6a8764f40efb2c"
+    },
+    "thief-coat-burglar-male.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-burglar-male.glb",
+      "package": "assets/thief-coat-burglar-male.glb",
+      "sha256": "713e30be5b403369e623c34270a9fc167b3afbb808a159f2c74956efbf0385b8"
+    },
+    "thief-coat-guild-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-guild-display.glb",
+      "package": "assets/thief-coat-guild-display.glb",
+      "sha256": "a2d46a2805b841f2d309a3d2c087232384995bdaa47a7e9215c08cfa917f7040"
+    },
+    "thief-coat-guild-female.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-guild-female.glb",
+      "package": "assets/thief-coat-guild-female.glb",
+      "sha256": "a44af11f94312adcc8ed39568b9df818c8ad0c4afdbd6644eced7bfff66ad7a6"
+    },
+    "thief-coat-guild-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-guild-icon.png",
+      "package": "assets/thief-coat-guild-icon.png",
+      "sha256": "3bb386d61a6f576313489b805680afaaaccd0c304c680c735022195d45003b8c"
+    },
+    "thief-coat-guild-male.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-guild-male.glb",
+      "package": "assets/thief-coat-guild-male.glb",
+      "sha256": "a2f61f4d1585752a6227cd924690d89b96e036f71a2ff8718afa215f729f295f"
+    },
+    "thief-coat-locksmith-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-locksmith-display.glb",
+      "package": "assets/thief-coat-locksmith-display.glb",
+      "sha256": "1e167001b1e1372854ccae80304ee8324d6c3c5e553c9585cf272bc4c0bc7a98"
+    },
+    "thief-coat-locksmith-female.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-locksmith-female.glb",
+      "package": "assets/thief-coat-locksmith-female.glb",
+      "sha256": "ad3b67b6147ba76f1365752a7ea8d1d4db5daaace5b5f7c4265fa4014419a16e"
+    },
+    "thief-coat-locksmith-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-locksmith-icon.png",
+      "package": "assets/thief-coat-locksmith-icon.png",
+      "sha256": "8773d5fb101aa3e8f76a39ddbae0f25f8710075c51f8ad693994e8b2ea08d43a"
+    },
+    "thief-coat-locksmith-male.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-locksmith-male.glb",
+      "package": "assets/thief-coat-locksmith-male.glb",
+      "sha256": "d6eb2d2a62865a9cca13238bfc4916a5784c3c82698950452316170eb78967c8"
+    },
+    "thief-coat-masterwork-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-masterwork-display.glb",
+      "package": "assets/thief-coat-masterwork-display.glb",
+      "sha256": "7585deb963f28357a83af8638258c8d830aed38ad3799821640f834d1eb0a66f"
+    },
+    "thief-coat-masterwork-female.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-masterwork-female.glb",
+      "package": "assets/thief-coat-masterwork-female.glb",
+      "sha256": "f242f73f2b0db19c5b0c736fca7e2a36883b0a267ad2b8bf4a0ed33ffc5efc84"
+    },
+    "thief-coat-masterwork-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-masterwork-icon.png",
+      "package": "assets/thief-coat-masterwork-icon.png",
+      "sha256": "fe9642cd7cdc9597bc94270978afdb4bd8254dad6c7878775fd06b82de2c819c"
+    },
+    "thief-coat-masterwork-male.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-masterwork-male.glb",
+      "package": "assets/thief-coat-masterwork-male.glb",
+      "sha256": "d074797bedf58a1c3eb216799fa3189a595dd6e4af212ad888a5323da59dddce"
+    },
+    "thief-coat-nightblade-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-nightblade-display.glb",
+      "package": "assets/thief-coat-nightblade-display.glb",
+      "sha256": "81ea00931790efd0bc49c645216731423d690da43db84f6db58916d3300dd998"
+    },
+    "thief-coat-nightblade-female.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-nightblade-female.glb",
+      "package": "assets/thief-coat-nightblade-female.glb",
+      "sha256": "c1c8f970cd4508faf249615675c161bed30e400404c4216016127bb4e61cd542"
+    },
+    "thief-coat-nightblade-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-nightblade-icon.png",
+      "package": "assets/thief-coat-nightblade-icon.png",
+      "sha256": "8f14c186fe14f289e6b5a7a38f91d1a09a4934d2e05b41d2876a4fa380bfb9d2"
+    },
+    "thief-coat-nightblade-male.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-nightblade-male.glb",
+      "package": "assets/thief-coat-nightblade-male.glb",
+      "sha256": "efb081d7577d3ea512f80216414a732dcf71e98b6b4b29c70ab3643c7bce57c6"
+    },
+    "thief-coat-street-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-street-display.glb",
+      "package": "assets/thief-coat-street-display.glb",
+      "sha256": "a0e9ab1837c049491729ad5bf49b02a9e8592722389accd315aacd45510a5ff4"
+    },
+    "thief-coat-street-female.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-street-female.glb",
+      "package": "assets/thief-coat-street-female.glb",
+      "sha256": "9ae12c501839ac1e8cffa8a23447ecc0f9a68ac01a582be06140f50c8aa1d3fc"
+    },
+    "thief-coat-street-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-street-icon.png",
+      "package": "assets/thief-coat-street-icon.png",
+      "sha256": "77bdffddd0d6a29664fd239da73027b22ecb9dff933b2bccdc9d4ec185721873"
+    },
+    "thief-coat-street-male.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-street-male.glb",
+      "package": "assets/thief-coat-street-male.glb",
+      "sha256": "c44004ba862553c3bc2b2540ecdd3f0a258070aa5de633b944c8d77c23b901aa"
+    },
+    "thief-coat-wayfarer-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-wayfarer-display.glb",
+      "package": "assets/thief-coat-wayfarer-display.glb",
+      "sha256": "3e6c81df13e946efea1b1914b3d579c9749fe0cd45cc7b0c74e58d78c2541d80"
+    },
+    "thief-coat-wayfarer-female.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-wayfarer-female.glb",
+      "package": "assets/thief-coat-wayfarer-female.glb",
+      "sha256": "5a30f0f5efcd62a63c02ff6f279990d1876fae8732ab1759fe20b72a6438cb88"
+    },
+    "thief-coat-wayfarer-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-wayfarer-icon.png",
+      "package": "assets/thief-coat-wayfarer-icon.png",
+      "sha256": "e111dddfbcd13e9683e75578d1b68255b8aaec1e497e7cd12a1ec70db1ad3bf7"
+    },
+    "thief-coat-wayfarer-male.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-coat-wayfarer-male.glb",
+      "package": "assets/thief-coat-wayfarer-male.glb",
+      "sha256": "af8201c245ccf8a13cc537ea02f13a01ed843288fd0b2af9ed8a7cbfefe368a1"
+    },
+    "thief-hood-burglar-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-burglar-display.glb",
+      "package": "assets/thief-hood-burglar-display.glb",
+      "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56"
+    },
+    "thief-hood-burglar-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-burglar-icon.png",
+      "package": "assets/thief-hood-burglar-icon.png",
+      "sha256": "472f58760b9a2bf4f4c9baefc7b1be10e899a118c4933fe3674720cdf42a5d28"
+    },
+    "thief-hood-burglar.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-burglar.glb",
+      "package": "assets/thief-hood-burglar.glb",
+      "sha256": "8ec412d7dfcc614123376603780bfbe6519ba8b75020ea4639ee7478148068e2"
+    },
+    "thief-hood-guild-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-guild-display.glb",
+      "package": "assets/thief-hood-guild-display.glb",
+      "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46"
+    },
+    "thief-hood-guild-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-guild-icon.png",
+      "package": "assets/thief-hood-guild-icon.png",
+      "sha256": "634509284ef2cbdb801b945b70897ca2293b219103f5404487fe859feff65217"
+    },
+    "thief-hood-guild.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-guild.glb",
+      "package": "assets/thief-hood-guild.glb",
+      "sha256": "142cc748d0f7f6dc8a998df2b3860e47d304d828e58862ef5e0c8fc1f462a726"
+    },
+    "thief-hood-locksmith-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-locksmith-display.glb",
+      "package": "assets/thief-hood-locksmith-display.glb",
+      "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483"
+    },
+    "thief-hood-locksmith-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-locksmith-icon.png",
+      "package": "assets/thief-hood-locksmith-icon.png",
+      "sha256": "d6d57d2e5d35f55de0c2fbbc34ad6686a66c9e89a38111179c465ac34e542698"
+    },
+    "thief-hood-locksmith.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-locksmith.glb",
+      "package": "assets/thief-hood-locksmith.glb",
+      "sha256": "0d5878d0542c6f4257d5d5f779bb2081ef5bc713f95a439fb42385f48336dc93"
+    },
+    "thief-hood-masterwork-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-masterwork-display.glb",
+      "package": "assets/thief-hood-masterwork-display.glb",
+      "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148"
+    },
+    "thief-hood-masterwork-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-masterwork-icon.png",
+      "package": "assets/thief-hood-masterwork-icon.png",
+      "sha256": "7217ec08c9111e8de7e0f8ef7184f1619bb05897ca7356506a2243ad2819244f"
+    },
+    "thief-hood-masterwork.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-masterwork.glb",
+      "package": "assets/thief-hood-masterwork.glb",
+      "sha256": "6843bbcb3fbf69c7b5d941bd083c204d763c44f50ecb78fc4564c46f1a13aff9"
+    },
+    "thief-hood-nightblade-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-nightblade-display.glb",
+      "package": "assets/thief-hood-nightblade-display.glb",
+      "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff"
+    },
+    "thief-hood-nightblade-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-nightblade-icon.png",
+      "package": "assets/thief-hood-nightblade-icon.png",
+      "sha256": "7c0adb7fa52c7e8ac4402c4ba334ca25fa5d74bfedfb5b2cca4d5b62bd9f6d92"
+    },
+    "thief-hood-nightblade.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-nightblade.glb",
+      "package": "assets/thief-hood-nightblade.glb",
+      "sha256": "304f8b807f97b518e4144079742813e7af937184ff212cea1b4f378473454ccf"
+    },
+    "thief-hood-street-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-street-display.glb",
+      "package": "assets/thief-hood-street-display.glb",
+      "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f"
+    },
+    "thief-hood-street-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-street-icon.png",
+      "package": "assets/thief-hood-street-icon.png",
+      "sha256": "b95a4112edecddf2f6ac829b6d11813082519e460abdd92c0d2fd493306b1e7e"
+    },
+    "thief-hood-street.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-street.glb",
+      "package": "assets/thief-hood-street.glb",
+      "sha256": "24f3c8b01dbba3c23d01b62d907511732e491bd75613f4855f17f9a58dadca3d"
+    },
+    "thief-hood-wayfarer-display.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-wayfarer-display.glb",
+      "package": "assets/thief-hood-wayfarer-display.glb",
+      "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477"
+    },
+    "thief-hood-wayfarer-icon.png": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-wayfarer-icon.png",
+      "package": "assets/thief-hood-wayfarer-icon.png",
+      "sha256": "488acf3843b55fbad05c82d35be0693ae09b88d00b1917eb696365ef9bd233a5"
+    },
+    "thief-hood-wayfarer.glb": {
+      "source": "art-experiments/thief/ranged-apparel/thief-hood-wayfarer.glb",
+      "package": "assets/thief-hood-wayfarer.glb",
+      "sha256": "d2664f6fa4c6631b8da1c51fd393a1dc574566bcdfd8ceb0d1d299e7f10c1107"
+    }
+  },
+  "inventory": "apparel-inventory.json",
+  "validation": "apparel-validation.json",
+  "review": "apparel-review/manifest.json",
+  "reviewSha256": "228ee9769d05fa503182b727028fd2639b14b38bb6b825894c3f0da7e1a89db5",
+  "remainingGates": [
+    "Art approval",
+    "Native rigid headwear mount and retained hair visibility",
+    "Male/female and alternate race fit",
+    "Ordinary motion and equipment rebuilds",
+    "Native displays and lifecycle"
+  ],
+  "scope": "Original apparel art candidate. All content IDs and established renderer and skin binding metadata retained. No weapons or content definitions edited by the apparel builder."
+}

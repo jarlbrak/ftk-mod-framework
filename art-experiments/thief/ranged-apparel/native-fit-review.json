@@ -1,0 +1,133 @@
+{
+  "schema": "ftkmf.thief-native-fit-review.v1",
+  "scope": "Actual native male Thief overworld avatar. Starting gear replaced with Nightblade outfit and Skeleton Key in disposable isolated package fixture. Presentation captures do not establish combat motion.",
+  "before": [
+    {
+      "id": "7fab8157071b48e4aaf52e86602dab24",
+      "view": "front",
+      "imageSha256": "ba55f2922ccc2a67bab6bb93d87059343915ab31ab8888636cbe8e6788ee7515",
+      "coreSha256": "86792110baf6c92b053f1b56c1d757b49a40ee41b986fc7c0eaaf8ca5b01673e",
+      "verdict": "Rejected: hood floats above native head; trouser legs leave waist gap; shoulder cross sections twist."
+    },
+    {
+      "id": "443ff9679e344458973cdcaee01a6707",
+      "view": "three-quarter",
+      "imageSha256": "35ef5f7cd6e8c650004fa652f616e617729a0f6242cfd1fb0748aee88d0ab8f8",
+      "coreSha256": "86792110baf6c92b053f1b56c1d757b49a40ee41b986fc7c0eaaf8ca5b01673e",
+      "verdict": "Rejected: hood floats above native head; trouser legs leave waist gap; shoulder cross sections twist."
+    },
+    {
+      "id": "1015557e6abd478d966bd43541e15f49",
+      "view": "back",
+      "imageSha256": "8b1bc40885e7ea0df578e04b7355528511411c9736f84540dae717a776b9013c",
+      "coreSha256": "86792110baf6c92b053f1b56c1d757b49a40ee41b986fc7c0eaaf8ca5b01673e",
+      "verdict": "Rejected: hood floats above native head; trouser legs leave waist gap; shoulder cross sections twist."
+    }
+  ],
+  "corrections": [
+    "Move equipped headwear down 0.55 units from authored head-centered presentation origin into crown mount.",
+    "Add continuous trouser pelvis to close detached waist/leg seam.",
+    "Stabilize sleeve cross-section axis across shoulder and align cuffs along forearm.",
+    "Deepen hood rear shell and side envelope after revised native back view showed rear skull clipping."
+  ],
+  "after": [
+    {
+      "outfit": "Street",
+      "sex": "male",
+      "id": "79d3699b21154442b7211b73b688e902",
+      "view": "front",
+      "imageSha256": "8b4e69d49dadfbde0e389b3a680ddfe5007c3c8c8984fa4342348884bcd74f3c",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Cap seated above brow, open face, connected trouser waist, stable shoulder sections. Native idle presentation only."
+    },
+    {
+      "outfit": "Street",
+      "sex": "male",
+      "id": "a83df776343a43da809402f23daea1c1",
+      "view": "three-quarter",
+      "imageSha256": "dadee09f9c2a47d125dac4c6da3fba907d1cd4a7f8b3e9051c33117fcfd9973d",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Cap seated above brow, open face, connected trouser waist, stable shoulder sections. Native idle presentation only."
+    },
+    {
+      "outfit": "Street",
+      "sex": "male",
+      "id": "317214c803734f749887ac6df399525d",
+      "view": "back",
+      "imageSha256": "28e0ac6d857818261a87b9558f2a85595732bf2d019c590081b76363c49d7df4",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Cap seated above brow, open face, connected trouser waist, stable shoulder sections. Native idle presentation only."
+    },
+    {
+      "outfit": "Nightblade revision 1",
+      "sex": "male",
+      "id": "b870e716ddeb40dc9efd5f03cee85d63",
+      "view": "front",
+      "imageSha256": "c3f85120e14f9bd0f9b50eaa85591c6f97951c93d7fcd6332d6343ac2df99415",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Front mount corrected; rejected rear shell because native rear skull/hair clips through."
+    },
+    {
+      "outfit": "Nightblade revision 1",
+      "sex": "male",
+      "id": "d6228b250bee4a92830a628364aa977f",
+      "view": "three-quarter",
+      "imageSha256": "e885e36f32520a264c9d3b1cf3e0e6adbdbe975ee2826feb024ac6e40784e895",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Front mount corrected; rejected rear shell because native rear skull/hair clips through."
+    },
+    {
+      "outfit": "Nightblade revision 1",
+      "sex": "male",
+      "id": "421278476b8d4561bc70a7fc26310ded",
+      "view": "back",
+      "imageSha256": "c1529a279be25bb1fabc67a39ef1bb10a285332bd86b495cc7911e1ad9ed6357",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Front mount corrected; rejected rear shell because native rear skull/hair clips through."
+    },
+    {
+      "outfit": "Nightblade final",
+      "sex": "male",
+      "id": "8b8a48625bbb485b80b1b455ed93026c",
+      "view": "front",
+      "image": "art-experiments/thief/review/nightblade-male-front.png",
+      "imageSha256": "d4f3d303085bb60ccb399103e9086c1df01dc61b911abd7b2de7f81c354af297",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Accepted for this native male idle fit: seated hood, open face, rear skull covered, connected waist."
+    },
+    {
+      "outfit": "Nightblade final",
+      "sex": "male",
+      "id": "2d294abc675948f184ee4ec8592ee011",
+      "view": "three-quarter",
+      "image": "art-experiments/thief/review/nightblade-male-three-quarter.png",
+      "imageSha256": "e10df9808d82af7138e86d21ee5bcd7a4cd16da6e7f337d4ad39f2b14aa492a0",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Accepted for this native male idle fit: seated hood, open face, rear skull covered, connected waist."
+    },
+    {
+      "outfit": "Nightblade final",
+      "sex": "male",
+      "id": "e6fd92c897f84faa95fcb19f294d8b2a",
+      "view": "back",
+      "image": "art-experiments/thief/review/nightblade-male-back.png",
+      "imageSha256": "f1807fc357ca08a315aff1f4c83153c7e02fc23ed196d0692832bd59c3285a4c",
+      "coreSha256": "7cd6a4f3440e152f7e981b613cbe616b6984f9a279aae4a99faef6354eb97b89",
+      "verdict": "Accepted for this native male idle fit: seated hood, open face, rear skull covered, connected waist."
+    }
+  ],
+  "remaining": [
+    "Female and alternate race fit",
+    "Native combat attack/hit/movement coverage",
+    "Other progression tiers",
+    "Native material tint palette fidelity"
+  ],
+  "currentFitAssetHashes": {
+    "thief-hood-street-display.glb": "3388a3471ed038e4746c6910a68cb42a08e3e3ec5a4e301509f0368992c551b4",
+    "thief-coat-nightblade-male.glb": "d17d430bcbf704f23efa9ac234ebbadc1eba884549f9a70073eee0c65a89feeb",
+    "thief-hood-nightblade-display.glb": "78094bed2141b64aa094e7028604b59ae8d08d925be9eab19d03483213fc433b",
+    "thief-coat-street-male.glb": "61d332e912dbd81a85fb9839b4ebc7e3e67e3c1062d8f2f2a68822fec2e65050",
+    "thief-hood-street.glb": "d03740177897c3b1a953aec4518ca5e053263df2ebfc638eb8b755f54b6db428",
+    "thief-hood-nightblade.glb": "80b332dcc11b6c78743f97b316ae63edbd57f6ed007e64b7b3422f26371910f7"
+  }
+}

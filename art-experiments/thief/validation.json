@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "validatorSha256": "76c41679e44f23fe08b1cf32bbfef4decc8663f889ddf7d2b7f6bce6afb998c6",
+  "manifestSha256": "51c8710825ca48b7cdcb4f921a2cc3a44187660110ce6e92648b7924a67aca00",
+  "assets": [
+    {
+      "file": "thief-street-twins-display-offhand.glb",
+      "triangles": 350,
+      "closedOutwardComponents": 12,
+      "status": "PASS"
+    },
+    {
+      "file": "thief-street-twins-display.glb",
+      "triangles": 350,
+      "closedOutwardComponents": 12,
+      "status": "PASS"
+    },
+    {
+      "file": "thief-street-twins-fragment-1.glb",
+      "triangles": 42,
+      "closedOutwardComponents": 1,
+      "status": "PASS"
+    },
+    {
+      "file": "thief-street-twins-fragment-2.glb",
+      "triangles": 308,
+      "closedOutwardComponents": 11,
+      "status": "PASS"
+    },
+    {
+      "file": "thief-street-twins.glb",
+      "triangles": 350,
+      "closedOutwardComponents": 12,
+      "status": "PASS"
+    }
+  ],
+  "iconAlphaBounds": [
+    42,
+    23,
+    214,
+    234
+  ],
+  "maximumDisplayReconstructionError": 1.8271219426324592e-08,
+  "checks": [
+    "Independent GLB decode and source equality",
+    "Closed outward components, winding, UVs and unit normals",
+    "Exact-once transformed fragment reconstruction",
+    "Display transform reconstruction",
+    "Package/provenance hashes and icon framing"
+  ],
+  "limitations": "Offline source/export only. Off-hand API, in-game fit, native attack motion, break lifetime, card framing and art acceptance remain unverified."
+}

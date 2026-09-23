@@ -1,0 +1,674 @@
+{
+  "schema": "ftkmf.thief-original-artifacts.v1",
+  "generator": "build.py",
+  "generatorSha256": "ae6219551a0710ed9575f231ef2aec1d34886a6131b1789f0d1f743034fa07a4",
+  "dependencies": {
+    "art-experiments/thief/build.py": "42cc509c121d62495a9e78be87acea0d8645828cea89a31f8e6135292b485bf3",
+    "art-experiments/thief/native-route.json": "22203d9c3fcdd6dfb828e73216b9fb89a9bff1e58b9d6ac81634cddf0c9eaf12",
+    "art-experiments/thief/ranged-apparel/bow-route.json": "58c26a32b4c0bc4f9f64810904c3793aac3197e313e79ac680df9ecbbb969995",
+    "tools/ai-model-pipeline/export_ftk_glb.py": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b",
+    "art-experiments/paladin-equipment/render_icons.py": "ee664ca5df1834037cb2ebff9c7e4370629f37b553b0d2d584a62b8591a66b9e"
+  },
+  "palette": "thief-artifact-palette.png",
+  "artifacts": [
+    {
+      "id": "thief_twins_skeleton_key",
+      "name": "The Skeleton Key",
+      "key": "thief-twins-skeleton-key",
+      "template": "dualKnife",
+      "main": "thief-twins-skeleton-key.glb",
+      "offhand": "thief-twins-skeleton-key-offhand.glb",
+      "fragments": [
+        {
+          "key": "thief-twins-skeleton-key-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-skeleton-key-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-skeleton-key-display",
+          "sourceKey": "thief-twins-skeleton-key",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.17000000178813934
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-skeleton-key-display-offhand",
+          "sourceKey": "thief-twins-skeleton-key-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.17000000178813934
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thief_twins_candles_end",
+      "name": "Candle's End",
+      "key": "thief-twins-candles-end",
+      "template": "dualKnife",
+      "main": "thief-twins-candles-end.glb",
+      "offhand": "thief-twins-candles-end-offhand.glb",
+      "fragments": [
+        {
+          "key": "thief-twins-candles-end-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-candles-end-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-candles-end-display",
+          "sourceKey": "thief-twins-candles-end",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.17000000178813934
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-candles-end-display-offhand",
+          "sourceKey": "thief-twins-candles-end-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.17000000178813934
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thief_bow_unlost_road",
+      "name": "The Unlost Road",
+      "key": "thief-bow-unlost-road",
+      "template": "bowShort",
+      "main": "thief-bow-unlost-road.glb",
+      "string": {
+        "key": "thief-bow-unlost-road-string",
+        "path": "shortbowString",
+        "stringToWeaponLocal": [
+          [
+            0.015083475038409233,
+            -0.6317980289459229,
+            -0.6316177845001221,
+            0.03700000047683716
+          ],
+          [
+            0.015083539299666882,
+            0.6317978501319885,
+            -0.6316179037094116,
+            -0.0989999994635582
+          ],
+          [
+            0.893242597579956,
+            -2.3549526773081197e-08,
+            0.021331289783120155,
+            -0.07699999958276749
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "fragments": [
+        {
+          "key": "thief-bow-unlost-road-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-bow-unlost-road-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.003000000026077032
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              -0.7179999947547913
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-bow-unlost-road-display",
+          "sourceKey": "thief-bow-unlost-road",
+          "path": "shortbow",
+          "rendererToDisplayRoot": [
+            [
+              0.9656471610069275,
+              -0.9656468629837036,
+              0.0,
+              -0.33399999141693115
+            ],
+            [
+              0.9656467437744141,
+              0.9656472206115723,
+              0.0,
+              -0.13099999725818634
+            ],
+            [
+              0.0,
+              0.0,
+              1.365631103515625,
+              -0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredToDisplayRoot": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-bow-unlost-road-display-string",
+          "sourceKey": "thief-bow-unlost-road-string-authored",
+          "path": "shortbow/shortbowString",
+          "rendererToDisplayRoot": [
+            [
+              -5.774199962615967e-08,
+              -1.2201875448226929,
+              -5.960464477539063e-08,
+              -0.20267200469970703
+            ],
+            [
+              0.029130686074495316,
+              1.1920928955078125e-07,
+              -1.2198398113250732,
+              -0.19087013602256775
+            ],
+            [
+              1.2198399305343628,
+              -3.2159967133793543e-08,
+              0.02913067303597927,
+              -0.10515359789133072
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredToDisplayRoot": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "routeMetadata": "art-experiments/thief/ranged-apparel/bow-route.json",
+      "routeStatus": "Exact renderer local transforms only. Authored bow endpoints require a later native draw/anchor fitting pass; no draw compatibility claimed."
+    }
+  ],
+  "files": {
+    "thief-artifact-palette.png": "3578cc869a0ac6f19bd0f5fe6ea7918aa3ca682de7f4ec0eaaad6901ba8becb4",
+    "thief-bow-unlost-road-display-string.glb": "e586700d2eb7b063768713b1f3a490555292bd5c318888709f67e948f5ac9fc4",
+    "thief-bow-unlost-road-display-string.pieces.json": "233ab1d0c248c1e9a377114ddfd8bc072480a0a6c91282f8d79c5ddbefb90276",
+    "thief-bow-unlost-road-display-string.source.json": "2600b6958404de21c719c74219b85307b7369c732dbad8586ade79833f6ce3a3",
+    "thief-bow-unlost-road-display.glb": "5d4ecd3a55f455c79550fbd590a1680cd410d025f3f4e7789ccaf6cbdffaa01f",
+    "thief-bow-unlost-road-display.pieces.json": "daa509d349ed1eae57bbb0a4bee6daf237c5b2f6179a431006557245e4be401a",
+    "thief-bow-unlost-road-display.source.json": "8bb8a4bb9033eeec50c407c8cbd68f5c7a524cc7b3dcf31ab642d42b4efcbdc5",
+    "thief-bow-unlost-road-fragment-1.glb": "044a21f7a01a6908c00d8adee3a1ca3ee34170f93d011dd3cc1287e08d2cd450",
+    "thief-bow-unlost-road-fragment-1.pieces.json": "593b16cd54e62d4d3880d19caff9d419d0bf0ad489c3d77d1c02ff2b79ed0bfc",
+    "thief-bow-unlost-road-fragment-1.source.json": "f6250b83bfd318a6de176d7ab606299082679a925dc072f2f54a90532be67103",
+    "thief-bow-unlost-road-fragment-2.glb": "5053b8dcc49c3068372a07fe3036f7f2155987b3609b3a98444ad8570085603b",
+    "thief-bow-unlost-road-fragment-2.pieces.json": "bd30e480e265f9af365d148889403464bcdae5756d37493e28a96f037ee9cdc6",
+    "thief-bow-unlost-road-fragment-2.source.json": "e70b2009e5f1a4eeec339aae25fe23e4800303d3585874f5b0267ac27e162ba2",
+    "thief-bow-unlost-road-icon.png": "7c1a0184dfd21ad1b9e3ecd26a3b605019b0f4f926b6280f8e1128046e5c5b0c",
+    "thief-bow-unlost-road-icon.source.json": "f14de5d60f8ad309dbc15f6f41cc7b57bbb83a0415914d478ab91367611b4a5f",
+    "thief-bow-unlost-road-preview.png": "fcf82cedfd7f0da43fc8db7f797e8f9ad382c9e9f6aecc4b1e62df0c399f7eff",
+    "thief-bow-unlost-road-string-authored.pieces.json": "233ab1d0c248c1e9a377114ddfd8bc072480a0a6c91282f8d79c5ddbefb90276",
+    "thief-bow-unlost-road-string-authored.source.json": "16261817ad78f81d9747e4e1b41e0b4d0454ecd272f7d3076e4ed353616dd085",
+    "thief-bow-unlost-road-string.glb": "a2b2a45b60ae1cb59db9dc8860d86a5c56732779e4924b3b7a778cebb4cb4b6b",
+    "thief-bow-unlost-road-string.pieces.json": "233ab1d0c248c1e9a377114ddfd8bc072480a0a6c91282f8d79c5ddbefb90276",
+    "thief-bow-unlost-road-string.source.json": "d3a3af690a3a0d082110eed46439638f0551fe762d078f9b9d467a9d76a03f38",
+    "thief-bow-unlost-road.glb": "d34efae5c583d436f5979d376c19a39c667e8a1694d80fe839a8c057257d04be",
+    "thief-bow-unlost-road.pieces.json": "daa509d349ed1eae57bbb0a4bee6daf237c5b2f6179a431006557245e4be401a",
+    "thief-bow-unlost-road.source.json": "27d5eaef853951c6b6fc632ec5ea8aec104e351380cbc688058497a175c68884",
+    "thief-twins-candles-end-display-offhand.glb": "19b96056331e5b7c1fbd6523125e18c2d13f96af26c96df5b47a54fe6eed502e",
+    "thief-twins-candles-end-display-offhand.pieces.json": "a1c5eff3be8bc90581c3bb06c747770e681392daa83f60a02f24ae8d8dca88fd",
+    "thief-twins-candles-end-display-offhand.source.json": "323052525c6e6503a5bf78f332d93ff15a2511cc34c38039112519903955d81d",
+    "thief-twins-candles-end-display.glb": "74cba131c15758e48817b2260886f5f7d460583228597ee28bb6a1a0eec240fd",
+    "thief-twins-candles-end-display.pieces.json": "f1bc9d59234aa64a52fbf07e27b793e56c41a49166661388db97a439a67f88b4",
+    "thief-twins-candles-end-display.source.json": "edc437022b37ef54a342745672b2a3bf22abfaf556497d79e1f02c06945a0e10",
+    "thief-twins-candles-end-fragment-1.glb": "f1a325c98d3dbfdbed2de8937b4b02174ebb0bb6610f2d266219a4377f96cb63",
+    "thief-twins-candles-end-fragment-1.pieces.json": "11c808955895e0d0241778aa99f73e11cd2e63aef357bf4cc2be7d2b49f52268",
+    "thief-twins-candles-end-fragment-1.source.json": "39e5765ce5dcaaf43ab30b7b8f393b154e0443efc6c011de0191430f012a661c",
+    "thief-twins-candles-end-fragment-2.glb": "beb1d055bc69a38fc24cd9dc3e544528b4a0dae35d41ad49c81bc8f4eec6cb80",
+    "thief-twins-candles-end-fragment-2.pieces.json": "cb79b55a7c71c243d800d6f14f18188c48fc375b85acdb3f23d7dd1ade4e04b0",
+    "thief-twins-candles-end-fragment-2.source.json": "30656d2603e16be23002bb365a0c79024111a9b63372d0e262ccc57bc9a08de9",
+    "thief-twins-candles-end-icon.png": "34bc74f06680f80bde23b4dbbef527406a3fffda38269763127a4e2c289856c0",
+    "thief-twins-candles-end-icon.source.json": "fb51b4941c82ad8c719e7bd9f7dc54bf801ad5d4e828f2d453dba900b33cfec9",
+    "thief-twins-candles-end-offhand.glb": "b2bb5973f7527a24cf6ac47ecdf695d96c0e187be3b3f8c8fcd27982b2a68b1f",
+    "thief-twins-candles-end-offhand.pieces.json": "a1c5eff3be8bc90581c3bb06c747770e681392daa83f60a02f24ae8d8dca88fd",
+    "thief-twins-candles-end-offhand.source.json": "84dea89e6a21f98c18d5551bc05632cdb70a8fb08e95bf70734af08b502b66ed",
+    "thief-twins-candles-end-preview.png": "f383bbfada75b80b765d98a838a53372ab79775bbe44cd648aa3b6f87675897e",
+    "thief-twins-candles-end.glb": "98c47ec1a996c28cb933f761da72da987475e4d226f58b6019f7fa33697111b8",
+    "thief-twins-candles-end.pieces.json": "f1bc9d59234aa64a52fbf07e27b793e56c41a49166661388db97a439a67f88b4",
+    "thief-twins-candles-end.source.json": "8ea60b11982ab2c0006c4b3d35711f38377b2ab4f2289f471812bf05d1caf5db",
+    "thief-twins-skeleton-key-display-offhand.glb": "edc9dc06efe8a6384d07970223e05162bf1c9b62cff51ee49b2037b5bbfa721c",
+    "thief-twins-skeleton-key-display-offhand.pieces.json": "a15b3cd47874992829573bb97c1c2682a9408aca0720baa1c9e6e39b6bb40236",
+    "thief-twins-skeleton-key-display-offhand.source.json": "a2bb7a4cc618da331cd03ff75ae3f6af45de9118f99374079e832fac9e955d01",
+    "thief-twins-skeleton-key-display.glb": "4813e58ad68de2f6d38acfa43e878fce797e3bb9c2c0c851ca23051d4044052d",
+    "thief-twins-skeleton-key-display.pieces.json": "7875969f47930ebe19bb75f796aa0537766e870bff70efcda8ebcedd394ab4fe",
+    "thief-twins-skeleton-key-display.source.json": "1826d214949ba0e34cecb19da1fa07fb0a63d5ea7e276c64156686818c1b61d9",
+    "thief-twins-skeleton-key-fragment-1.glb": "3da96d689648d87b1c79a768882dc70ea37d1c52466863c52743ed4ac1363a34",
+    "thief-twins-skeleton-key-fragment-1.pieces.json": "9297d64185640575e93925049cde0cbe4e6be64560c6989af1bdabe05b86558d",
+    "thief-twins-skeleton-key-fragment-1.source.json": "cdb951d82b0a69c572a7f5d3d2987416b398c97b49fda3e0a7d0c3f3fe8ed5cd",
+    "thief-twins-skeleton-key-fragment-2.glb": "d90d27e28137f8042555aafde3793ae161c5065fe79cfd90db4c313f047c69e9",
+    "thief-twins-skeleton-key-fragment-2.pieces.json": "605dbe7970412b039eb49a3eb1acb2fc283522f3e97a288b4297216ff9835412",
+    "thief-twins-skeleton-key-fragment-2.source.json": "057b90f2c11854ed561dd496f9aec09bca87e146c576122988a995876cdd64d9",
+    "thief-twins-skeleton-key-icon.png": "d7f4283bf9223d21c255841050e7423aada9de3536c6b09611ae0ab2b29d2d9b",
+    "thief-twins-skeleton-key-icon.source.json": "9ec16f2ed2bd30456caf5c44063201ed671532c96c0fbec1d6c54ed1b92c406f",
+    "thief-twins-skeleton-key-offhand.glb": "ff5c4c3ef5ebdd09cb1432a02a51c486a0b93c687134e0975157f6d2786b7b30",
+    "thief-twins-skeleton-key-offhand.pieces.json": "a15b3cd47874992829573bb97c1c2682a9408aca0720baa1c9e6e39b6bb40236",
+    "thief-twins-skeleton-key-offhand.source.json": "72cafa6a62d0818a146293edbc7cd1618f1dbcf2c482bdecebdfcb836aaeb166",
+    "thief-twins-skeleton-key-preview.png": "41070b2081cc7ce50109de121343e0b86610c5d16bfb9abea3734305728f9db5",
+    "thief-twins-skeleton-key.glb": "6d2e27fa96b1eb34f459f3d45461f9e4736e968558c87c9dcf24ca7196ea2a02",
+    "thief-twins-skeleton-key.pieces.json": "7875969f47930ebe19bb75f796aa0537766e870bff70efcda8ebcedd394ab4fe",
+    "thief-twins-skeleton-key.source.json": "9833bb95f3b28a1b13d5571c3d4602d76a9873f866ea7a4981f7020d5fb59046"
+  },
+  "provenance": "Original authored vertices, faces, palette, UVs and geometry-rendered icons. No native surface data, copied commercial art, or image-generated model is used. Native metadata supplies only exact renderer identity and local transforms.",
+  "scope": "Offline art production only. No deployment, native fit, motion, material, lifecycle or in-game visual acceptance claimed."
+}

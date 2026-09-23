@@ -1,0 +1,2913 @@
+{
+  "schema": "ftkmf.thief-apparel-common-scale-review.v1",
+  "generator": "render_sets.py",
+  "generatorSha256": "85d7e320afe37fae5389a43d95b88c9d8edd038038b35a98a829b8cd03862fe0",
+  "scope": "Actual exported apparel GLBs. Original coat, boots and low neckerchief only. Native body, face, hair, hands and backpack omitted. No fabricated avatar, animation or fit claim. All tiers and sexes share camera, light and framing.",
+  "headwearAssembly": "Display GLB at authored Head_M rest landmark (0,1.76766508,0.08568515). Native rigid mount, native hair visibility and neck motion require separate live checks.",
+  "palette": "thief-apparel-palette.png",
+  "paletteSha256": "52164cbcbe9daba87cb4115c6982ebb8cc8df977e313586eb2810db6ca2ab3a4",
+  "renderSettings": {
+    "resolution": [
+      640,
+      640
+    ],
+    "engine": "CYCLES",
+    "samples": 16,
+    "background": "transparent",
+    "viewTransform": "Standard"
+  },
+  "views": [
+    {
+      "file": "armor-street-male-front.png",
+      "sha256": "11cefa6e942c615f170fb09025eee101e088c311788e99677e9a663a038dbdfd",
+      "band": "street",
+      "sex": "male",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-street-male.glb",
+          "sha256": "c44004ba862553c3bc2b2540ecdd3f0a258070aa5de633b944c8d77c23b901aa",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-street-male.png",
+      "sha256": "f2a4fcbed0e154e7b9272a8a12327769f0f4e4aad87d711294222ca1ae99583f",
+      "band": "street",
+      "sex": "male",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-street-male.glb",
+          "sha256": "c44004ba862553c3bc2b2540ecdd3f0a258070aa5de633b944c8d77c23b901aa",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-street-male-side.png",
+      "sha256": "e5f967afe0b83a64218399c08a668e746fa3d2902c93e4cfa55a7797e18f7d12",
+      "band": "street",
+      "sex": "male",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-street-male.glb",
+          "sha256": "c44004ba862553c3bc2b2540ecdd3f0a258070aa5de633b944c8d77c23b901aa",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-street-male-back.png",
+      "sha256": "d17b37d23536d8b1d584e03e3232b6dd8fe5df923b3ee699f5d31a627e4a0065",
+      "band": "street",
+      "sex": "male",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-street-male.glb",
+          "sha256": "c44004ba862553c3bc2b2540ecdd3f0a258070aa5de633b944c8d77c23b901aa",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-street-female-front.png",
+      "sha256": "1f090ece9fbda0ee01665cac4779c2313b53314e491b89088fd1bf0fb8f976e8",
+      "band": "street",
+      "sex": "female",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-street-female.glb",
+          "sha256": "9ae12c501839ac1e8cffa8a23447ecc0f9a68ac01a582be06140f50c8aa1d3fc",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-street-female.png",
+      "sha256": "8924d2aba601abe824d8710efb128147191ba04b909f2051a7912117c3799978",
+      "band": "street",
+      "sex": "female",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-street-female.glb",
+          "sha256": "9ae12c501839ac1e8cffa8a23447ecc0f9a68ac01a582be06140f50c8aa1d3fc",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-street-female-side.png",
+      "sha256": "f971bfb854b5abb1158afc6acd7d1ec67334159c63c8fd0ce9c19194edf65e76",
+      "band": "street",
+      "sex": "female",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-street-female.glb",
+          "sha256": "9ae12c501839ac1e8cffa8a23447ecc0f9a68ac01a582be06140f50c8aa1d3fc",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-street-female-back.png",
+      "sha256": "413f888b878523441427ce46ddb7ec81d82d4689c6c5e459fa7317d8cc62cf38",
+      "band": "street",
+      "sex": "female",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-street-female.glb",
+          "sha256": "9ae12c501839ac1e8cffa8a23447ecc0f9a68ac01a582be06140f50c8aa1d3fc",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-street.glb",
+          "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-street-display.glb",
+          "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-male-front.png",
+      "sha256": "9403b40cb6940103242b9a49c7af083a9e934a863a5c194fa5a28d88900bc9ed",
+      "band": "burglar",
+      "sex": "male",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-male.glb",
+          "sha256": "713e30be5b403369e623c34270a9fc167b3afbb808a159f2c74956efbf0385b8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-male.png",
+      "sha256": "ef7a4d3641fb3ad0c5dfb2f9ae0913105bc1be430621b7486bd149bddd3a0bf5",
+      "band": "burglar",
+      "sex": "male",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-male.glb",
+          "sha256": "713e30be5b403369e623c34270a9fc167b3afbb808a159f2c74956efbf0385b8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-male-side.png",
+      "sha256": "dd5cf7061521adf9f4f044fb761240f01843d7692c5af47ffb875b6703f1705d",
+      "band": "burglar",
+      "sex": "male",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-male.glb",
+          "sha256": "713e30be5b403369e623c34270a9fc167b3afbb808a159f2c74956efbf0385b8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-male-back.png",
+      "sha256": "6b5c45143ffd6703b2339b502b7a575193fbf8afa2755fb1c7c1fd0e148053cd",
+      "band": "burglar",
+      "sex": "male",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-male.glb",
+          "sha256": "713e30be5b403369e623c34270a9fc167b3afbb808a159f2c74956efbf0385b8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-female-front.png",
+      "sha256": "f4bc593fa3fd0cd8980b2d85192259ee7b5364d39636f11cdc35705b6983d209",
+      "band": "burglar",
+      "sex": "female",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-female.glb",
+          "sha256": "ceb773fcf4798ad9b5a8baab486e4db959a538d9052a23c038eb59a85be08c92",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-female.png",
+      "sha256": "0b8c816ae0d90fe86c237ba5913aa0b1546bc4f613d8f9ecdfd17096cbe1f578",
+      "band": "burglar",
+      "sex": "female",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-female.glb",
+          "sha256": "ceb773fcf4798ad9b5a8baab486e4db959a538d9052a23c038eb59a85be08c92",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-female-side.png",
+      "sha256": "30c478059e0cabc90a1a37e65dd79c9e11d82755caba9ca21684f593429723df",
+      "band": "burglar",
+      "sex": "female",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-female.glb",
+          "sha256": "ceb773fcf4798ad9b5a8baab486e4db959a538d9052a23c038eb59a85be08c92",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-burglar-female-back.png",
+      "sha256": "223dd388f421187459f85b1f569c3bc1da1b4c6f458f5db262e3ebb11fd3441c",
+      "band": "burglar",
+      "sex": "female",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-burglar-female.glb",
+          "sha256": "ceb773fcf4798ad9b5a8baab486e4db959a538d9052a23c038eb59a85be08c92",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-burglar.glb",
+          "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-burglar-display.glb",
+          "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-male-front.png",
+      "sha256": "6adb3037938a858bd2174a44fa06bd56bdc9abb56684240c7370200cf0547347",
+      "band": "guild",
+      "sex": "male",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-male.glb",
+          "sha256": "a2f61f4d1585752a6227cd924690d89b96e036f71a2ff8718afa215f729f295f",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-male.png",
+      "sha256": "3ca6063fdc0ef57c5dbe908353bf42fc713329def2ed3a42e579d9664877ecc2",
+      "band": "guild",
+      "sex": "male",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-male.glb",
+          "sha256": "a2f61f4d1585752a6227cd924690d89b96e036f71a2ff8718afa215f729f295f",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-male-side.png",
+      "sha256": "5bd67dac14caef58914ffef501abaf767d0d16684ffab3e19cf2d79b6c8519e5",
+      "band": "guild",
+      "sex": "male",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-male.glb",
+          "sha256": "a2f61f4d1585752a6227cd924690d89b96e036f71a2ff8718afa215f729f295f",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-male-back.png",
+      "sha256": "022dbc47a9d13beb63d2ef0b34c57e7d1c11deefec8c0edaa13b84304d29343e",
+      "band": "guild",
+      "sex": "male",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-male.glb",
+          "sha256": "a2f61f4d1585752a6227cd924690d89b96e036f71a2ff8718afa215f729f295f",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-female-front.png",
+      "sha256": "aa709f503a9d23ec9ac878fc2e284aa52fefd3618fea86b37e6884cab9af2fb4",
+      "band": "guild",
+      "sex": "female",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-female.glb",
+          "sha256": "a44af11f94312adcc8ed39568b9df818c8ad0c4afdbd6644eced7bfff66ad7a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-female.png",
+      "sha256": "8b387b560e807bf4ab6e706434da5a85f936ebc2e4246c01517eefee1bce5f17",
+      "band": "guild",
+      "sex": "female",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-female.glb",
+          "sha256": "a44af11f94312adcc8ed39568b9df818c8ad0c4afdbd6644eced7bfff66ad7a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-female-side.png",
+      "sha256": "6cd3c73e9eb9ce3cb1946c5a014791c076c3847fdc8656452b88fa3dcadd20da",
+      "band": "guild",
+      "sex": "female",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-female.glb",
+          "sha256": "a44af11f94312adcc8ed39568b9df818c8ad0c4afdbd6644eced7bfff66ad7a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-guild-female-back.png",
+      "sha256": "e44aed3da27f8e25dd753fbc1e0a8dbba96b9051acba7b05551f0c7f99ab33c2",
+      "band": "guild",
+      "sex": "female",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-guild-female.glb",
+          "sha256": "a44af11f94312adcc8ed39568b9df818c8ad0c4afdbd6644eced7bfff66ad7a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-guild.glb",
+          "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-guild-display.glb",
+          "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-male-front.png",
+      "sha256": "59b155b6a538da8d753056faafcc366a09d870996bfeb7354e9e3c8edf50cd21",
+      "band": "masterwork",
+      "sex": "male",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-male.glb",
+          "sha256": "d074797bedf58a1c3eb216799fa3189a595dd6e4af212ad888a5323da59dddce",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-male.png",
+      "sha256": "ea6e2d83362d9d92d8998c72e5a6c4cd7c93a3e34ca88e588a5d3e97671bbcfb",
+      "band": "masterwork",
+      "sex": "male",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-male.glb",
+          "sha256": "d074797bedf58a1c3eb216799fa3189a595dd6e4af212ad888a5323da59dddce",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-male-side.png",
+      "sha256": "610b9e3503820a8037fab370ffa01157404819f36f1010112093e1fb0ece9f7c",
+      "band": "masterwork",
+      "sex": "male",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-male.glb",
+          "sha256": "d074797bedf58a1c3eb216799fa3189a595dd6e4af212ad888a5323da59dddce",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-male-back.png",
+      "sha256": "2c1c49bf394bdcd58871b3ebfec2f9b049d38d58c29dbb2dbcf50e818b7038a9",
+      "band": "masterwork",
+      "sex": "male",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-male.glb",
+          "sha256": "d074797bedf58a1c3eb216799fa3189a595dd6e4af212ad888a5323da59dddce",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-female-front.png",
+      "sha256": "f4c23b675da4f2337b04c08270934a49aa1a026c172acd54a43433ce5006dabc",
+      "band": "masterwork",
+      "sex": "female",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-female.glb",
+          "sha256": "f242f73f2b0db19c5b0c736fca7e2a36883b0a267ad2b8bf4a0ed33ffc5efc84",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-female.png",
+      "sha256": "8e35cea1704b6cc2c2603477c23c3bc9dc2aa1f1d6ddc9ade8c75b91f6a1b60f",
+      "band": "masterwork",
+      "sex": "female",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-female.glb",
+          "sha256": "f242f73f2b0db19c5b0c736fca7e2a36883b0a267ad2b8bf4a0ed33ffc5efc84",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-female-side.png",
+      "sha256": "b4293e95b18ad1e8af9acc48ee4505d9996ef7fec92d9d1abbff42639d806297",
+      "band": "masterwork",
+      "sex": "female",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-female.glb",
+          "sha256": "f242f73f2b0db19c5b0c736fca7e2a36883b0a267ad2b8bf4a0ed33ffc5efc84",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-masterwork-female-back.png",
+      "sha256": "9ec2e3215cd3061f3837d7236215ef07a805336e61043870726a58a390c11e20",
+      "band": "masterwork",
+      "sex": "female",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-masterwork-female.glb",
+          "sha256": "f242f73f2b0db19c5b0c736fca7e2a36883b0a267ad2b8bf4a0ed33ffc5efc84",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-masterwork.glb",
+          "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-masterwork-display.glb",
+          "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-male-front.png",
+      "sha256": "da0ab3f68fbe31e2d4f034568de1b2de18701faf190ef51a3ed00e956743c075",
+      "band": "locksmith",
+      "sex": "male",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-male.glb",
+          "sha256": "d6eb2d2a62865a9cca13238bfc4916a5784c3c82698950452316170eb78967c8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-male.png",
+      "sha256": "865b97502d8a3b656a4b29276dd023a6d0c2568d2a42a4b35b5cc3cf74ec2b16",
+      "band": "locksmith",
+      "sex": "male",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-male.glb",
+          "sha256": "d6eb2d2a62865a9cca13238bfc4916a5784c3c82698950452316170eb78967c8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-male-side.png",
+      "sha256": "bd4a12963a46c1d002352545f4fdcfa22e435024208e07dc991cd41f543a1b8e",
+      "band": "locksmith",
+      "sex": "male",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-male.glb",
+          "sha256": "d6eb2d2a62865a9cca13238bfc4916a5784c3c82698950452316170eb78967c8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-male-back.png",
+      "sha256": "38037774de4cec47ce2ff8c1e7bec569ec7bfa01caca39fa5b98ee2332d692a9",
+      "band": "locksmith",
+      "sex": "male",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-male.glb",
+          "sha256": "d6eb2d2a62865a9cca13238bfc4916a5784c3c82698950452316170eb78967c8",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-female-front.png",
+      "sha256": "be0f7b878a033fafb04dc0dc006bd0d9a56292d14c1dbb9a1fc78f46deb73d9f",
+      "band": "locksmith",
+      "sex": "female",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-female.glb",
+          "sha256": "ad3b67b6147ba76f1365752a7ea8d1d4db5daaace5b5f7c4265fa4014419a16e",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-female.png",
+      "sha256": "8988de05c87c96391033dff1fa4688d83f1568145cf3a68f7234f00129b7da1a",
+      "band": "locksmith",
+      "sex": "female",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-female.glb",
+          "sha256": "ad3b67b6147ba76f1365752a7ea8d1d4db5daaace5b5f7c4265fa4014419a16e",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-female-side.png",
+      "sha256": "47d63452ea60c7c233be29bf1779b7ddd9f4024d2f8e2fdfa2ca419b1dc5d4c1",
+      "band": "locksmith",
+      "sex": "female",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-female.glb",
+          "sha256": "ad3b67b6147ba76f1365752a7ea8d1d4db5daaace5b5f7c4265fa4014419a16e",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-locksmith-female-back.png",
+      "sha256": "38f32d3c1ec51672707d99f84bddb42d409efcf10aa84a8edb8cb6064e0326bb",
+      "band": "locksmith",
+      "sex": "female",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-locksmith-female.glb",
+          "sha256": "ad3b67b6147ba76f1365752a7ea8d1d4db5daaace5b5f7c4265fa4014419a16e",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-locksmith.glb",
+          "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-locksmith-display.glb",
+          "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-male-front.png",
+      "sha256": "8ee8d3f3dcd4ae09708586d6c8c3006575276859d62a3ec670d1ac4bb662acfb",
+      "band": "nightblade",
+      "sex": "male",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-male.glb",
+          "sha256": "efb081d7577d3ea512f80216414a732dcf71e98b6b4b29c70ab3643c7bce57c6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-male.png",
+      "sha256": "317d6276ec7f4055ef171acdc1dab4087cb6ae0dc8ff8b2bb3fb66281ba0cd5e",
+      "band": "nightblade",
+      "sex": "male",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-male.glb",
+          "sha256": "efb081d7577d3ea512f80216414a732dcf71e98b6b4b29c70ab3643c7bce57c6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-male-side.png",
+      "sha256": "921f77336f6f3a3fed949336f07eabca3dfd0395d6df66c74ea3fb08f9ae6856",
+      "band": "nightblade",
+      "sex": "male",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-male.glb",
+          "sha256": "efb081d7577d3ea512f80216414a732dcf71e98b6b4b29c70ab3643c7bce57c6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-male-back.png",
+      "sha256": "a303195b7969fd04adb5530d7c36f425bc1d85763d6bc3aca43b00e32897d3f0",
+      "band": "nightblade",
+      "sex": "male",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-male.glb",
+          "sha256": "efb081d7577d3ea512f80216414a732dcf71e98b6b4b29c70ab3643c7bce57c6",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-female-front.png",
+      "sha256": "8905693ed489570244ee6b80a6ecc65aeec85518d66413c7cb0ce374f3933b29",
+      "band": "nightblade",
+      "sex": "female",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-female.glb",
+          "sha256": "c1c8f970cd4508faf249615675c161bed30e400404c4216016127bb4e61cd542",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-female.png",
+      "sha256": "80fcaf2f734f1573cce54052e4adb10dfab15af0287253b98396fd19772839b4",
+      "band": "nightblade",
+      "sex": "female",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-female.glb",
+          "sha256": "c1c8f970cd4508faf249615675c161bed30e400404c4216016127bb4e61cd542",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-female-side.png",
+      "sha256": "2814bae773f2ced61e6ed8ef4c4e373cfcf5d40e97c9085d2441f416ba01137d",
+      "band": "nightblade",
+      "sex": "female",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-female.glb",
+          "sha256": "c1c8f970cd4508faf249615675c161bed30e400404c4216016127bb4e61cd542",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-nightblade-female-back.png",
+      "sha256": "d22f3dd445736ba79cb9204d778860930765d5cf156e9e00a90932b1a05f323a",
+      "band": "nightblade",
+      "sex": "female",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-nightblade-female.glb",
+          "sha256": "c1c8f970cd4508faf249615675c161bed30e400404c4216016127bb4e61cd542",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-nightblade.glb",
+          "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-nightblade-display.glb",
+          "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-male-front.png",
+      "sha256": "5d01d58e9b9df6cab6ee5df1a5f2ec48c93e98949546245c2b574c1cd200f0ec",
+      "band": "wayfarer",
+      "sex": "male",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-male.glb",
+          "sha256": "af8201c245ccf8a13cc537ea02f13a01ed843288fd0b2af9ed8a7cbfefe368a1",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-male.png",
+      "sha256": "573e62fc32c946ae1364c4056fb4b2fb04f795da2b22a0a0b919f103388ada16",
+      "band": "wayfarer",
+      "sex": "male",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-male.glb",
+          "sha256": "af8201c245ccf8a13cc537ea02f13a01ed843288fd0b2af9ed8a7cbfefe368a1",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-male-side.png",
+      "sha256": "0565d93074473b98a23cb19506f477dde708a5c73ad545b8faaba201402efda6",
+      "band": "wayfarer",
+      "sex": "male",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-male.glb",
+          "sha256": "af8201c245ccf8a13cc537ea02f13a01ed843288fd0b2af9ed8a7cbfefe368a1",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-male-back.png",
+      "sha256": "ab2fb9bd61efcbed548c94da2b3f6cc075d215a23b7f03493e4e3ec5cfb5e72a",
+      "band": "wayfarer",
+      "sex": "male",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-male.glb",
+          "sha256": "af8201c245ccf8a13cc537ea02f13a01ed843288fd0b2af9ed8a7cbfefe368a1",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-female-front.png",
+      "sha256": "cdebbbc2ea4c61d29495dafc3bfd778127274fb537e964341529f58d19debac1",
+      "band": "wayfarer",
+      "sex": "female",
+      "view": "front",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-female.glb",
+          "sha256": "5a30f0f5efcd62a63c02ff6f279990d1876fae8732ab1759fe20b72a6438cb88",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          -1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-female.png",
+      "sha256": "3926901b328dd785494a5cd18d5141f72a16609b5cf9e96df942b7799cd37c2e",
+      "band": "wayfarer",
+      "sex": "female",
+      "view": "three-quarter",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-female.glb",
+          "sha256": "5a30f0f5efcd62a63c02ff6f279990d1876fae8732ab1759fe20b72a6438cb88",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.6,
+          -1,
+          0.08
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-female-side.png",
+      "sha256": "49500c15b75adb354e33a0895bb20eedec7c18b1cdd9058ebbfff5fcdc1fcfa2",
+      "band": "wayfarer",
+      "sex": "female",
+      "view": "side",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-female.glb",
+          "sha256": "5a30f0f5efcd62a63c02ff6f279990d1876fae8732ab1759fe20b72a6438cb88",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          1,
+          0,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    },
+    {
+      "file": "armor-wayfarer-female-back.png",
+      "sha256": "467c72ae9aab1744af0128cf6893033fc8d8696c5ce2eff5229cb014389304ef",
+      "band": "wayfarer",
+      "sex": "female",
+      "view": "back",
+      "inputs": [
+        {
+          "file": "thief-coat-wayfarer-female.glb",
+          "sha256": "5a30f0f5efcd62a63c02ff6f279990d1876fae8732ab1759fe20b72a6438cb88",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+          "reviewTranslation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "file": "thief-hood-wayfarer-display.glb",
+          "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+          "reviewTranslation": [
+            0,
+            1.76766508,
+            0.08568515
+          ]
+        }
+      ],
+      "camera": {
+        "direction": [
+          0,
+          1,
+          0.03
+        ],
+        "target": [
+          0,
+          -0.04,
+          0.92
+        ],
+        "orthographicSpan": 2.4
+      },
+      "pose": "exported neutral bind pose"
+    }
+  ],
+  "lighting": {
+    "worldColor": [
+      0.2,
+      0.2,
+      0.2
+    ],
+    "areaLights": [
+      {
+        "delta": [
+          -2,
+          -4,
+          5
+        ],
+        "energyFactor": 420
+      },
+      {
+        "delta": [
+          3,
+          -2,
+          2
+        ],
+        "energyFactor": 230
+      },
+      {
+        "delta": [
+          2,
+          3,
+          4
+        ],
+        "energyFactor": 340
+      }
+    ],
+    "positionFormula": "target + delta * 2.40",
+    "powerFormula": "energyFactor * 2.40 * 2.40",
+    "areaSize": 7.2,
+    "materialRoughness": 0.82,
+    "materialMetallic": 0
+  },
+  "derivedSheets": [
+    {
+      "file": "compare-male-front.png",
+      "sha256": "2e443e18d8a5e9e5f936868e547a4a1ff9469cafe332cd3925d3e73181241959",
+      "scope": "male front, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "compare-male-three-quarter.png",
+      "sha256": "3ab5ea83df78e92ae2fb9110ee005a09f6ad302968618d300bd78c44ecb27eea",
+      "scope": "male three-quarter, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "compare-male-side.png",
+      "sha256": "fb03ea1fb87a2da03a5cf4f52171dabf47d0ed66da4945b4ff7e088fc40465f5",
+      "scope": "male side, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "compare-male-back.png",
+      "sha256": "17fd025ad8c99bd684c08de2220b0e822df7f044906c85075c4f2aec52b3ab94",
+      "scope": "male back, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "combat-scale-male.png",
+      "sha256": "ea158051c6312282fab5bcd00467f8e397eff6fddd39076859ac01d4eec5c49e",
+      "scope": "Two uniformly scaled rows, approximately 96 and 160 pixels apparel height. Native head/hair/body omitted."
+    },
+    {
+      "file": "compare-female-front.png",
+      "sha256": "10e64946be87a38abcd776430bde4f2daaeccaf4e1973140eabac05b31e19334",
+      "scope": "female front, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "compare-female-three-quarter.png",
+      "sha256": "96838c565c3a27177b558fff128cd80ece869591c3ca4080687ba4a0678b42f6",
+      "scope": "female three-quarter, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "compare-female-side.png",
+      "sha256": "d5290374cb1f6f0c76f650d992312f42f1651906edda21abad9ae1a0c431fe16",
+      "scope": "female side, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "compare-female-back.png",
+      "sha256": "e529899e01d3bde6614233beeaa57b7ac345906a4294b1cb99f895de8db84854",
+      "scope": "female back, same source framing; actual exports, native body omitted"
+    },
+    {
+      "file": "combat-scale-female.png",
+      "sha256": "bd4f23d95a237632a4883e1b761175e554f4d59e486fde1b8a245d58ab7524be",
+      "scope": "Two uniformly scaled rows, approximately 96 and 160 pixels apparel height. Native head/hair/body omitted."
+    }
+  ],
+  "finalizer": "finalize_apparel_review.py",
+  "finalizerSha256": "a92d398f733656b598bfa6e0abfaa1c56ea74165e042839c2136ece280edc3a1"
+}

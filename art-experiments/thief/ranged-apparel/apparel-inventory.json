@@ -1,0 +1,1195 @@
+{
+  "schema": "ftkmf.thief-apparel-inventory.v1",
+  "items": [
+    {
+      "id": "thief_coat_street",
+      "tier": "street",
+      "slot": "coat",
+      "displayName": "Patched Jack",
+      "nativeTemplate": "armorHeavy1",
+      "levelBand": [
+        0,
+        1
+      ],
+      "rarity": "common",
+      "gold": 8,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 0
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-coat-street-female.glb",
+          "source": "thief-coat-street-female.source.json",
+          "sex": "female",
+          "vertices": 3132,
+          "triangles": 1044,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-street-male.glb",
+          "source": "thief-coat-street-male.source.json",
+          "sex": "male",
+          "vertices": 4392,
+          "triangles": 1464,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-street-display.glb",
+      "icon": "thief-coat-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_hood_street",
+      "tier": "street",
+      "slot": "hood",
+      "displayName": "Street Neckerchief",
+      "nativeTemplate": "helmetHeavy1",
+      "levelBand": [
+        0,
+        1
+      ],
+      "rarity": "common",
+      "gold": 6,
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "talent": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-hood-street.glb",
+          "source": "thief-hood-street.source.json",
+          "sex": "shared",
+          "vertices": 516,
+          "triangles": 172
+        }
+      ],
+      "display": "thief-hood-street-display.glb",
+      "icon": "thief-hood-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_boots_street",
+      "tier": "street",
+      "slot": "boots",
+      "displayName": "Softstep Shoes",
+      "nativeTemplate": "bootsHeavy3",
+      "levelBand": [
+        0,
+        1
+      ],
+      "rarity": "common",
+      "gold": 6,
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-boots-street.glb",
+          "source": "thief-boots-street.source.json",
+          "sex": "shared",
+          "vertices": 1632,
+          "triangles": 544,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-street-display.glb",
+      "icon": "thief-boots-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_charm_street",
+      "tier": "street",
+      "slot": "charm",
+      "displayName": "Bent Copper",
+      "nativeTemplate": "trinketDefense1",
+      "levelBand": [
+        0,
+        1
+      ],
+      "rarity": "common",
+      "gold": 8,
+      "modifiers": {
+        "talent": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-charm-street.glb",
+          "source": "thief-charm-street.source.json",
+          "sex": "shared",
+          "vertices": 912,
+          "triangles": 304
+        }
+      ],
+      "display": "thief-charm-street-display.glb",
+      "icon": "thief-charm-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_coat_burglar",
+      "tier": "burglar",
+      "slot": "coat",
+      "displayName": "Burglar's Jack",
+      "nativeTemplate": "armorHeavy1",
+      "levelBand": [
+        1,
+        2
+      ],
+      "rarity": "common",
+      "gold": 26,
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-coat-burglar-female.glb",
+          "source": "thief-coat-burglar-female.source.json",
+          "sex": "female",
+          "vertices": 2940,
+          "triangles": 980,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-burglar-male.glb",
+          "source": "thief-coat-burglar-male.source.json",
+          "sex": "male",
+          "vertices": 4200,
+          "triangles": 1400,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-burglar-display.glb",
+      "icon": "thief-coat-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_hood_burglar",
+      "tier": "burglar",
+      "slot": "hood",
+      "displayName": "Burglar's Hood",
+      "nativeTemplate": "helmetHeavy1",
+      "levelBand": [
+        1,
+        2
+      ],
+      "rarity": "common",
+      "gold": 18,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 0,
+        "talent": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-hood-burglar.glb",
+          "source": "thief-hood-burglar.source.json",
+          "sex": "shared",
+          "vertices": 516,
+          "triangles": 172
+        }
+      ],
+      "display": "thief-hood-burglar-display.glb",
+      "icon": "thief-hood-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_boots_burglar",
+      "tier": "burglar",
+      "slot": "boots",
+      "displayName": "Burglar's Boots",
+      "nativeTemplate": "bootsHeavy3",
+      "levelBand": [
+        1,
+        2
+      ],
+      "rarity": "common",
+      "gold": 18,
+      "modifiers": {
+        "armor": 0,
+        "resistance": 1,
+        "speed": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-boots-burglar.glb",
+          "source": "thief-boots-burglar.source.json",
+          "sex": "shared",
+          "vertices": 1632,
+          "triangles": 544,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-burglar-display.glb",
+      "icon": "thief-boots-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_charm_burglar",
+      "tier": "burglar",
+      "slot": "charm",
+      "displayName": "Brass Pick",
+      "nativeTemplate": "trinketDefense1",
+      "levelBand": [
+        1,
+        2
+      ],
+      "rarity": "common",
+      "gold": 24,
+      "modifiers": {
+        "talent": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-charm-burglar.glb",
+          "source": "thief-charm-burglar.source.json",
+          "sex": "shared",
+          "vertices": 564,
+          "triangles": 188
+        }
+      ],
+      "display": "thief-charm-burglar-display.glb",
+      "icon": "thief-charm-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_coat_guild",
+      "tier": "guild",
+      "slot": "coat",
+      "displayName": "Guild Leather",
+      "nativeTemplate": "armorHeavy1",
+      "levelBand": [
+        2,
+        3
+      ],
+      "rarity": "uncommon",
+      "gold": 62,
+      "modifiers": {
+        "armor": 3,
+        "resistance": 1
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-coat-guild-female.glb",
+          "source": "thief-coat-guild-female.source.json",
+          "sex": "female",
+          "vertices": 3036,
+          "triangles": 1012,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-guild-male.glb",
+          "source": "thief-coat-guild-male.source.json",
+          "sex": "male",
+          "vertices": 4296,
+          "triangles": 1432,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-guild-display.glb",
+      "icon": "thief-coat-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_hood_guild",
+      "tier": "guild",
+      "slot": "hood",
+      "displayName": "Guild Hood",
+      "nativeTemplate": "helmetHeavy1",
+      "levelBand": [
+        2,
+        3
+      ],
+      "rarity": "uncommon",
+      "gold": 44,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 1,
+        "awareness": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-hood-guild.glb",
+          "source": "thief-hood-guild.source.json",
+          "sex": "shared",
+          "vertices": 1044,
+          "triangles": 348
+        }
+      ],
+      "display": "thief-hood-guild-display.glb",
+      "icon": "thief-hood-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_boots_guild",
+      "tier": "guild",
+      "slot": "boots",
+      "displayName": "Guild Treads",
+      "nativeTemplate": "bootsHeavy3",
+      "levelBand": [
+        2,
+        3
+      ],
+      "rarity": "uncommon",
+      "gold": 44,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 1,
+        "speed": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-boots-guild.glb",
+          "source": "thief-boots-guild.source.json",
+          "sex": "shared",
+          "vertices": 1992,
+          "triangles": 664,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-guild-display.glb",
+      "icon": "thief-boots-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_charm_guild",
+      "tier": "guild",
+      "slot": "charm",
+      "displayName": "Guild Token",
+      "nativeTemplate": "trinketDefense1",
+      "levelBand": [
+        2,
+        3
+      ],
+      "rarity": "uncommon",
+      "gold": 55,
+      "modifiers": {
+        "awareness": 0.02,
+        "talent": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-charm-guild.glb",
+          "source": "thief-charm-guild.source.json",
+          "sex": "shared",
+          "vertices": 1044,
+          "triangles": 348
+        }
+      ],
+      "display": "thief-charm-guild-display.glb",
+      "icon": "thief-charm-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_coat_masterwork",
+      "tier": "masterwork",
+      "slot": "coat",
+      "displayName": "Masterwork Jack",
+      "nativeTemplate": "armorHeavy1",
+      "levelBand": [
+        3,
+        4
+      ],
+      "rarity": "uncommon",
+      "gold": 140,
+      "modifiers": {
+        "armor": 4,
+        "resistance": 2,
+        "vitality": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-coat-masterwork-female.glb",
+          "source": "thief-coat-masterwork-female.source.json",
+          "sex": "female",
+          "vertices": 3180,
+          "triangles": 1060,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-masterwork-male.glb",
+          "source": "thief-coat-masterwork-male.source.json",
+          "sex": "male",
+          "vertices": 4440,
+          "triangles": 1480,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-masterwork-display.glb",
+      "icon": "thief-coat-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_hood_masterwork",
+      "tier": "masterwork",
+      "slot": "hood",
+      "displayName": "Masterwork Cowl",
+      "nativeTemplate": "helmetHeavy1",
+      "levelBand": [
+        3,
+        4
+      ],
+      "rarity": "uncommon",
+      "gold": 100,
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1,
+        "talent": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-hood-masterwork.glb",
+          "source": "thief-hood-masterwork.source.json",
+          "sex": "shared",
+          "vertices": 912,
+          "triangles": 304
+        }
+      ],
+      "display": "thief-hood-masterwork-display.glb",
+      "icon": "thief-hood-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_boots_masterwork",
+      "tier": "masterwork",
+      "slot": "boots",
+      "displayName": "Masterwork Treads",
+      "nativeTemplate": "bootsHeavy3",
+      "levelBand": [
+        3,
+        4
+      ],
+      "rarity": "uncommon",
+      "gold": 100,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "speed": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-boots-masterwork.glb",
+          "source": "thief-boots-masterwork.source.json",
+          "sex": "shared",
+          "vertices": 2472,
+          "triangles": 824,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-masterwork-display.glb",
+      "icon": "thief-boots-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_charm_masterwork",
+      "tier": "masterwork",
+      "slot": "charm",
+      "displayName": "Silver Rook",
+      "nativeTemplate": "trinketDefense1",
+      "levelBand": [
+        3,
+        4
+      ],
+      "rarity": "uncommon",
+      "gold": 130,
+      "modifiers": {
+        "speed": 0.01,
+        "awareness": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-charm-masterwork.glb",
+          "source": "thief-charm-masterwork.source.json",
+          "sex": "shared",
+          "vertices": 480,
+          "triangles": 160
+        }
+      ],
+      "display": "thief-charm-masterwork-display.glb",
+      "icon": "thief-charm-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_coat_locksmith",
+      "tier": "locksmith",
+      "slot": "coat",
+      "displayName": "Locksmith's Coat",
+      "nativeTemplate": "armorHeavy1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 300,
+      "modifiers": {
+        "armor": 4,
+        "resistance": 4,
+        "vitality": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-coat-locksmith-female.glb",
+          "source": "thief-coat-locksmith-female.source.json",
+          "sex": "female",
+          "vertices": 3300,
+          "triangles": 1100,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-locksmith-male.glb",
+          "source": "thief-coat-locksmith-male.source.json",
+          "sex": "male",
+          "vertices": 4560,
+          "triangles": 1520,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-locksmith-display.glb",
+      "icon": "thief-coat-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_hood_locksmith",
+      "tier": "locksmith",
+      "slot": "hood",
+      "displayName": "Locksmith's Hood",
+      "nativeTemplate": "helmetHeavy1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 220,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 3,
+        "talent": 0.03
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-hood-locksmith.glb",
+          "source": "thief-hood-locksmith.source.json",
+          "sex": "shared",
+          "vertices": 1044,
+          "triangles": 348
+        }
+      ],
+      "display": "thief-hood-locksmith-display.glb",
+      "icon": "thief-hood-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_boots_locksmith",
+      "tier": "locksmith",
+      "slot": "boots",
+      "displayName": "Locksmith's Steps",
+      "nativeTemplate": "bootsHeavy3",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 220,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "speed": 0.02,
+        "talent": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-boots-locksmith.glb",
+          "source": "thief-boots-locksmith.source.json",
+          "sex": "shared",
+          "vertices": 2472,
+          "triangles": 824,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-locksmith-display.glb",
+      "icon": "thief-boots-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_charm_locksmith",
+      "tier": "locksmith",
+      "slot": "charm",
+      "displayName": "Master Keyring",
+      "nativeTemplate": "trinketDefense1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 290,
+      "modifiers": {
+        "talent": 0.03,
+        "focusCapacity": 1
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-charm-locksmith.glb",
+          "source": "thief-charm-locksmith.source.json",
+          "sex": "shared",
+          "vertices": 1944,
+          "triangles": 648
+        }
+      ],
+      "display": "thief-charm-locksmith-display.glb",
+      "icon": "thief-charm-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_coat_nightblade",
+      "tier": "nightblade",
+      "slot": "coat",
+      "displayName": "Nightblade Jack",
+      "nativeTemplate": "armorHeavy1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 300,
+      "modifiers": {
+        "armor": 5,
+        "resistance": 2,
+        "speed": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-coat-nightblade-female.glb",
+          "source": "thief-coat-nightblade-female.source.json",
+          "sex": "female",
+          "vertices": 2988,
+          "triangles": 996,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-nightblade-male.glb",
+          "source": "thief-coat-nightblade-male.source.json",
+          "sex": "male",
+          "vertices": 4248,
+          "triangles": 1416,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-nightblade-display.glb",
+      "icon": "thief-coat-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_hood_nightblade",
+      "tier": "nightblade",
+      "slot": "hood",
+      "displayName": "Nightblade Cowl",
+      "nativeTemplate": "helmetHeavy1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 220,
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1,
+        "speed": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-hood-nightblade.glb",
+          "source": "thief-hood-nightblade.source.json",
+          "sex": "shared",
+          "vertices": 864,
+          "triangles": 288
+        }
+      ],
+      "display": "thief-hood-nightblade-display.glb",
+      "icon": "thief-hood-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_boots_nightblade",
+      "tier": "nightblade",
+      "slot": "boots",
+      "displayName": "Nightblade Steps",
+      "nativeTemplate": "bootsHeavy3",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 220,
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1,
+        "speed": 0.03
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-boots-nightblade.glb",
+          "source": "thief-boots-nightblade.source.json",
+          "sex": "shared",
+          "vertices": 1560,
+          "triangles": 520,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-nightblade-display.glb",
+      "icon": "thief-boots-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_charm_nightblade",
+      "tier": "nightblade",
+      "slot": "charm",
+      "displayName": "Snuffed Wick",
+      "nativeTemplate": "trinketDefense1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 290,
+      "modifiers": {
+        "speed": 0.02,
+        "talent": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-charm-nightblade.glb",
+          "source": "thief-charm-nightblade.source.json",
+          "sex": "shared",
+          "vertices": 888,
+          "triangles": 296
+        }
+      ],
+      "display": "thief-charm-nightblade-display.glb",
+      "icon": "thief-charm-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_coat_wayfarer",
+      "tier": "wayfarer",
+      "slot": "coat",
+      "displayName": "Wayfarer's Coat",
+      "nativeTemplate": "armorHeavy1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 300,
+      "modifiers": {
+        "armor": 4,
+        "resistance": 3,
+        "awareness": 0.02
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-coat-wayfarer-female.glb",
+          "source": "thief-coat-wayfarer-female.source.json",
+          "sex": "female",
+          "vertices": 2988,
+          "triangles": 996,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-wayfarer-male.glb",
+          "source": "thief-coat-wayfarer-male.source.json",
+          "sex": "male",
+          "vertices": 4248,
+          "triangles": 1416,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-wayfarer-display.glb",
+      "icon": "thief-coat-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    },
+    {
+      "id": "thief_hood_wayfarer",
+      "tier": "wayfarer",
+      "slot": "hood",
+      "displayName": "Wayfarer's Hood",
+      "nativeTemplate": "helmetHeavy1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 220,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "awareness": 0.03
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-hood-wayfarer.glb",
+          "source": "thief-hood-wayfarer.source.json",
+          "sex": "shared",
+          "vertices": 972,
+          "triangles": 324
+        }
+      ],
+      "display": "thief-hood-wayfarer-display.glb",
+      "icon": "thief-hood-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    },
+    {
+      "id": "thief_boots_wayfarer",
+      "tier": "wayfarer",
+      "slot": "boots",
+      "displayName": "Wayfarer's Treads",
+      "nativeTemplate": "bootsHeavy3",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 220,
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "speed": 0.02,
+        "awareness": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "source": "thief-boots-wayfarer.source.json",
+          "sex": "shared",
+          "vertices": 1920,
+          "triangles": 640,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-wayfarer-display.glb",
+      "icon": "thief-boots-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    },
+    {
+      "id": "thief_charm_wayfarer",
+      "tier": "wayfarer",
+      "slot": "charm",
+      "displayName": "Trail Compass",
+      "nativeTemplate": "trinketDefense1",
+      "levelBand": [
+        4,
+        6
+      ],
+      "rarity": "rare",
+      "gold": 290,
+      "modifiers": {
+        "awareness": 0.03,
+        "speed": 0.01
+      },
+      "acquisition": {
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1
+      },
+      "models": [
+        {
+          "file": "thief-charm-wayfarer.glb",
+          "source": "thief-charm-wayfarer.source.json",
+          "sex": "shared",
+          "vertices": 1644,
+          "triangles": 548
+        }
+      ],
+      "display": "thief-charm-wayfarer-display.glb",
+      "icon": "thief-charm-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    }
+  ],
+  "totalItems": 28,
+  "generator": "document_apparel.py",
+  "generatorSha256": "58f5be752e1abe2525375cfaf462d520c2a52d67606b65e55e2d81722c43fbbb"
+}

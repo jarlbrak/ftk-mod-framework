@@ -1,0 +1,1162 @@
+{
+  "schema": "ftkmf.thief-ranged-apparel-art.v1",
+  "generator": "build.py",
+  "generatorSha256": "ac19e39a24d6c90a58227830dfe8f58512b83f80e9eaa2153b17363b420e65be",
+  "palette": [
+    "202A35",
+    "6A4A35",
+    "937458",
+    "355A7C",
+    "245968",
+    "A9996B",
+    "CCC8AF",
+    "693F55",
+    "52614C",
+    "849CA9",
+    "BCCDD1",
+    "303744"
+  ],
+  "items": [
+    {
+      "id": "thief_bow_street",
+      "name": "Rooftop Bow",
+      "family": "bow",
+      "band": "street",
+      "models": [
+        {
+          "file": "thief-bow-street.glb",
+          "source": "thief-bow-street.source.json",
+          "sex": "shared",
+          "vertices": 1308,
+          "triangles": 436
+        }
+      ],
+      "display": "thief-bow-street-display.glb",
+      "icon": "thief-bow-street-icon.png",
+      "palette": "thief-ranged-apparel-palette.png"
+    },
+    {
+      "id": "thief_coat_street",
+      "name": "Patched Jack",
+      "family": "coat",
+      "band": "street",
+      "models": [
+        {
+          "file": "thief-coat-street-female.glb",
+          "source": "thief-coat-street-female.source.json",
+          "sex": "female",
+          "vertices": 3132,
+          "triangles": 1044,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-street-male.glb",
+          "source": "thief-coat-street-male.source.json",
+          "sex": "male",
+          "vertices": 4392,
+          "triangles": 1464,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-street-display.glb",
+      "icon": "thief-coat-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_hood_street",
+      "name": "Street Neckerchief",
+      "family": "hood",
+      "band": "street",
+      "models": [
+        {
+          "file": "thief-hood-street.glb",
+          "source": "thief-hood-street.source.json",
+          "sex": "shared",
+          "vertices": 516,
+          "triangles": 172
+        }
+      ],
+      "display": "thief-hood-street-display.glb",
+      "icon": "thief-hood-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_boots_street",
+      "name": "Softstep Shoes",
+      "family": "boots",
+      "band": "street",
+      "models": [
+        {
+          "file": "thief-boots-street.glb",
+          "source": "thief-boots-street.source.json",
+          "sex": "shared",
+          "vertices": 1632,
+          "triangles": 544,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-street-display.glb",
+      "icon": "thief-boots-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_charm_street",
+      "name": "Bent Copper",
+      "family": "charm",
+      "band": "street",
+      "models": [
+        {
+          "file": "thief-charm-street.glb",
+          "source": "thief-charm-street.source.json",
+          "sex": "shared",
+          "vertices": 912,
+          "triangles": 304
+        }
+      ],
+      "display": "thief-charm-street-display.glb",
+      "icon": "thief-charm-street-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short repaired leather jerkin, one tool pouch, low oxblood neckerchief, wrapped shoes"
+    },
+    {
+      "id": "thief_bow_burglar",
+      "name": "Alley Recurve",
+      "family": "bow",
+      "band": "burglar",
+      "models": [
+        {
+          "file": "thief-bow-burglar.glb",
+          "source": "thief-bow-burglar.source.json",
+          "sex": "shared",
+          "vertices": 1308,
+          "triangles": 436
+        }
+      ],
+      "display": "thief-bow-burglar-display.glb",
+      "icon": "thief-bow-burglar-icon.png",
+      "palette": "thief-ranged-apparel-palette.png"
+    },
+    {
+      "id": "thief_coat_burglar",
+      "name": "Burglar's Jack",
+      "family": "coat",
+      "band": "burglar",
+      "models": [
+        {
+          "file": "thief-coat-burglar-female.glb",
+          "source": "thief-coat-burglar-female.source.json",
+          "sex": "female",
+          "vertices": 2940,
+          "triangles": 980,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-burglar-male.glb",
+          "source": "thief-coat-burglar-male.source.json",
+          "sex": "male",
+          "vertices": 4200,
+          "triangles": 1400,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-burglar-display.glb",
+      "icon": "thief-coat-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_hood_burglar",
+      "name": "Burglar's Hood",
+      "family": "hood",
+      "band": "burglar",
+      "models": [
+        {
+          "file": "thief-hood-burglar.glb",
+          "source": "thief-hood-burglar.source.json",
+          "sex": "shared",
+          "vertices": 516,
+          "triangles": 172
+        }
+      ],
+      "display": "thief-hood-burglar-display.glb",
+      "icon": "thief-hood-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_boots_burglar",
+      "name": "Burglar's Boots",
+      "family": "boots",
+      "band": "burglar",
+      "models": [
+        {
+          "file": "thief-boots-burglar.glb",
+          "source": "thief-boots-burglar.source.json",
+          "sex": "shared",
+          "vertices": 1632,
+          "triangles": 544,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-burglar-display.glb",
+      "icon": "thief-boots-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_charm_burglar",
+      "name": "Brass Pick",
+      "family": "charm",
+      "band": "burglar",
+      "models": [
+        {
+          "file": "thief-charm-burglar.glb",
+          "source": "thief-charm-burglar.source.json",
+          "sex": "shared",
+          "vertices": 564,
+          "triangles": 188
+        }
+      ],
+      "display": "thief-charm-burglar-display.glb",
+      "icon": "thief-charm-burglar-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Overlapping dark jack, single shoulder fold, side-tied scarf, ankle boots"
+    },
+    {
+      "id": "thief_bow_guild",
+      "name": "Guild Shortbow",
+      "family": "bow",
+      "band": "guild",
+      "models": [
+        {
+          "file": "thief-bow-guild.glb",
+          "source": "thief-bow-guild.source.json",
+          "sex": "shared",
+          "vertices": 1584,
+          "triangles": 528
+        }
+      ],
+      "display": "thief-bow-guild-display.glb",
+      "icon": "thief-bow-guild-icon.png",
+      "palette": "thief-ranged-apparel-palette.png"
+    },
+    {
+      "id": "thief_coat_guild",
+      "name": "Guild Leather",
+      "family": "coat",
+      "band": "guild",
+      "models": [
+        {
+          "file": "thief-coat-guild-female.glb",
+          "source": "thief-coat-guild-female.source.json",
+          "sex": "female",
+          "vertices": 3036,
+          "triangles": 1012,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-guild-male.glb",
+          "source": "thief-coat-guild-male.source.json",
+          "sex": "male",
+          "vertices": 4296,
+          "triangles": 1432,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-guild-display.glb",
+      "icon": "thief-coat-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_hood_guild",
+      "name": "Guild Hood",
+      "family": "hood",
+      "band": "guild",
+      "models": [
+        {
+          "file": "thief-hood-guild.glb",
+          "source": "thief-hood-guild.source.json",
+          "sex": "shared",
+          "vertices": 1044,
+          "triangles": 348
+        }
+      ],
+      "display": "thief-hood-guild-display.glb",
+      "icon": "thief-hood-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_boots_guild",
+      "name": "Guild Treads",
+      "family": "boots",
+      "band": "guild",
+      "models": [
+        {
+          "file": "thief-boots-guild.glb",
+          "source": "thief-boots-guild.source.json",
+          "sex": "shared",
+          "vertices": 1992,
+          "triangles": 664,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-guild-display.glb",
+      "icon": "thief-boots-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_charm_guild",
+      "name": "Guild Token",
+      "family": "charm",
+      "band": "guild",
+      "models": [
+        {
+          "file": "thief-charm-guild.glb",
+          "source": "thief-charm-guild.source.json",
+          "sex": "shared",
+          "vertices": 1044,
+          "triangles": 348
+        }
+      ],
+      "display": "thief-charm-guild-display.glb",
+      "icon": "thief-charm-guild-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Clean blue split hem, framed guild fastening, folded low cowl, fitted calf boots"
+    },
+    {
+      "id": "thief_bow_masterwork",
+      "name": "Gloamwood Bow",
+      "family": "bow",
+      "band": "masterwork",
+      "models": [
+        {
+          "file": "thief-bow-masterwork.glb",
+          "source": "thief-bow-masterwork.source.json",
+          "sex": "shared",
+          "vertices": 1584,
+          "triangles": 528
+        }
+      ],
+      "display": "thief-bow-masterwork-display.glb",
+      "icon": "thief-bow-masterwork-icon.png",
+      "palette": "thief-ranged-apparel-palette.png"
+    },
+    {
+      "id": "thief_coat_masterwork",
+      "name": "Masterwork Jack",
+      "family": "coat",
+      "band": "masterwork",
+      "models": [
+        {
+          "file": "thief-coat-masterwork-female.glb",
+          "source": "thief-coat-masterwork-female.source.json",
+          "sex": "female",
+          "vertices": 3180,
+          "triangles": 1060,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-masterwork-male.glb",
+          "source": "thief-coat-masterwork-male.source.json",
+          "sex": "male",
+          "vertices": 4440,
+          "triangles": 1480,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-masterwork-display.glb",
+      "icon": "thief-coat-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_hood_masterwork",
+      "name": "Masterwork Cowl",
+      "family": "hood",
+      "band": "masterwork",
+      "models": [
+        {
+          "file": "thief-hood-masterwork.glb",
+          "source": "thief-hood-masterwork.source.json",
+          "sex": "shared",
+          "vertices": 912,
+          "triangles": 304
+        }
+      ],
+      "display": "thief-hood-masterwork-display.glb",
+      "icon": "thief-hood-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_boots_masterwork",
+      "name": "Masterwork Treads",
+      "family": "boots",
+      "band": "masterwork",
+      "models": [
+        {
+          "file": "thief-boots-masterwork.glb",
+          "source": "thief-boots-masterwork.source.json",
+          "sex": "shared",
+          "vertices": 2472,
+          "triangles": 824,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-masterwork-display.glb",
+      "icon": "thief-boots-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_charm_masterwork",
+      "name": "Silver Rook",
+      "family": "charm",
+      "band": "masterwork",
+      "models": [
+        {
+          "file": "thief-charm-masterwork.glb",
+          "source": "thief-charm-masterwork.source.json",
+          "sex": "shared",
+          "vertices": 480,
+          "triangles": 160
+        }
+      ],
+      "display": "thief-charm-masterwork-display.glb",
+      "icon": "thief-charm-masterwork-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Layered blue-gray leather panels, double shoulder folds, stepped cowl, reinforced boots"
+    },
+    {
+      "id": "thief_bow_locksmith",
+      "name": "Latchspring",
+      "family": "bow",
+      "band": "locksmith",
+      "models": [
+        {
+          "file": "thief-bow-locksmith.glb",
+          "source": "thief-bow-locksmith.source.json",
+          "sex": "shared",
+          "vertices": 2664,
+          "triangles": 888
+        }
+      ],
+      "display": "thief-bow-locksmith-display.glb",
+      "icon": "thief-bow-locksmith-icon.png",
+      "palette": "thief-ranged-apparel-palette.png"
+    },
+    {
+      "id": "thief_coat_locksmith",
+      "name": "Locksmith's Coat",
+      "family": "coat",
+      "band": "locksmith",
+      "models": [
+        {
+          "file": "thief-coat-locksmith-female.glb",
+          "source": "thief-coat-locksmith-female.source.json",
+          "sex": "female",
+          "vertices": 3300,
+          "triangles": 1100,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-locksmith-male.glb",
+          "source": "thief-coat-locksmith-male.source.json",
+          "sex": "male",
+          "vertices": 4560,
+          "triangles": 1520,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-locksmith-display.glb",
+      "icon": "thief-coat-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_hood_locksmith",
+      "name": "Locksmith's Hood",
+      "family": "hood",
+      "band": "locksmith",
+      "models": [
+        {
+          "file": "thief-hood-locksmith.glb",
+          "source": "thief-hood-locksmith.source.json",
+          "sex": "shared",
+          "vertices": 1044,
+          "triangles": 348
+        }
+      ],
+      "display": "thief-hood-locksmith-display.glb",
+      "icon": "thief-hood-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_boots_locksmith",
+      "name": "Locksmith's Steps",
+      "family": "boots",
+      "band": "locksmith",
+      "models": [
+        {
+          "file": "thief-boots-locksmith.glb",
+          "source": "thief-boots-locksmith.source.json",
+          "sex": "shared",
+          "vertices": 2472,
+          "triangles": 824,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-locksmith-display.glb",
+      "icon": "thief-boots-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_charm_locksmith",
+      "name": "Master Keyring",
+      "family": "charm",
+      "band": "locksmith",
+      "models": [
+        {
+          "file": "thief-charm-locksmith.glb",
+          "source": "thief-charm-locksmith.source.json",
+          "sex": "shared",
+          "vertices": 1944,
+          "triangles": 648
+        }
+      ],
+      "display": "thief-charm-locksmith-display.glb",
+      "icon": "thief-charm-locksmith-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Petrol leather tool coat, compact pick roll, clasped asymmetric cowl, strapped work boots"
+    },
+    {
+      "id": "thief_bow_nightblade",
+      "name": "Blackthorn",
+      "family": "bow",
+      "band": "nightblade",
+      "models": [
+        {
+          "file": "thief-bow-nightblade.glb",
+          "source": "thief-bow-nightblade.source.json",
+          "sex": "shared",
+          "vertices": 1596,
+          "triangles": 532
+        }
+      ],
+      "display": "thief-bow-nightblade-display.glb",
+      "icon": "thief-bow-nightblade-icon.png",
+      "palette": "thief-ranged-apparel-palette.png"
+    },
+    {
+      "id": "thief_coat_nightblade",
+      "name": "Nightblade Jack",
+      "family": "coat",
+      "band": "nightblade",
+      "models": [
+        {
+          "file": "thief-coat-nightblade-female.glb",
+          "source": "thief-coat-nightblade-female.source.json",
+          "sex": "female",
+          "vertices": 2988,
+          "triangles": 996,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-nightblade-male.glb",
+          "source": "thief-coat-nightblade-male.source.json",
+          "sex": "male",
+          "vertices": 4248,
+          "triangles": 1416,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-nightblade-display.glb",
+      "icon": "thief-coat-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_hood_nightblade",
+      "name": "Nightblade Cowl",
+      "family": "hood",
+      "band": "nightblade",
+      "models": [
+        {
+          "file": "thief-hood-nightblade.glb",
+          "source": "thief-hood-nightblade.source.json",
+          "sex": "shared",
+          "vertices": 864,
+          "triangles": 288
+        }
+      ],
+      "display": "thief-hood-nightblade-display.glb",
+      "icon": "thief-hood-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_boots_nightblade",
+      "name": "Nightblade Steps",
+      "family": "boots",
+      "band": "nightblade",
+      "models": [
+        {
+          "file": "thief-boots-nightblade.glb",
+          "source": "thief-boots-nightblade.source.json",
+          "sex": "shared",
+          "vertices": 1560,
+          "triangles": 520,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-nightblade-display.glb",
+      "icon": "thief-boots-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_charm_nightblade",
+      "name": "Snuffed Wick",
+      "family": "charm",
+      "band": "nightblade",
+      "models": [
+        {
+          "file": "thief-charm-nightblade.glb",
+          "source": "thief-charm-nightblade.source.json",
+          "sex": "shared",
+          "vertices": 888,
+          "triangles": 296
+        }
+      ],
+      "display": "thief-charm-nightblade-display.glb",
+      "icon": "thief-charm-nightblade-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Short charcoal angled jack, sparse trim, wine scarf, close black split-cuff boots"
+    },
+    {
+      "id": "thief_bow_wayfarer",
+      "name": "Farstep",
+      "family": "bow",
+      "band": "wayfarer",
+      "models": [
+        {
+          "file": "thief-bow-wayfarer.glb",
+          "source": "thief-bow-wayfarer.source.json",
+          "sex": "shared",
+          "vertices": 1584,
+          "triangles": 528
+        }
+      ],
+      "display": "thief-bow-wayfarer-display.glb",
+      "icon": "thief-bow-wayfarer-icon.png",
+      "palette": "thief-ranged-apparel-palette.png"
+    },
+    {
+      "id": "thief_coat_wayfarer",
+      "name": "Wayfarer's Coat",
+      "family": "coat",
+      "band": "wayfarer",
+      "models": [
+        {
+          "file": "thief-coat-wayfarer-female.glb",
+          "source": "thief-coat-wayfarer-female.source.json",
+          "sex": "female",
+          "vertices": 2988,
+          "triangles": 996,
+          "bindingInput": "female-armor.json",
+          "bindingSha256": "1cd0d23f9d5bf09baebdb56ec0acfeca8e19b7be8ac8e00f9e09e0ff22b04407",
+          "rendererId": 121248,
+          "nativeMeshName": "armorBlacksmith"
+        },
+        {
+          "file": "thief-coat-wayfarer-male.glb",
+          "source": "thief-coat-wayfarer-male.source.json",
+          "sex": "male",
+          "vertices": 4248,
+          "triangles": 1416,
+          "bindingInput": "male-armor.json",
+          "bindingSha256": "e9f643addefdf0bd259644cb749c8eab1c3cf4b895ca69f6d1c34e240b7e5ad5",
+          "rendererId": 121510,
+          "nativeMeshName": "armorBlacksmithM"
+        }
+      ],
+      "display": "thief-coat-wayfarer-display.glb",
+      "icon": "thief-coat-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    },
+    {
+      "id": "thief_hood_wayfarer",
+      "name": "Wayfarer's Hood",
+      "family": "hood",
+      "band": "wayfarer",
+      "models": [
+        {
+          "file": "thief-hood-wayfarer.glb",
+          "source": "thief-hood-wayfarer.source.json",
+          "sex": "shared",
+          "vertices": 972,
+          "triangles": 324
+        }
+      ],
+      "display": "thief-hood-wayfarer-display.glb",
+      "icon": "thief-hood-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    },
+    {
+      "id": "thief_boots_wayfarer",
+      "name": "Wayfarer's Treads",
+      "family": "boots",
+      "band": "wayfarer",
+      "models": [
+        {
+          "file": "thief-boots-wayfarer.glb",
+          "source": "thief-boots-wayfarer.source.json",
+          "sex": "shared",
+          "vertices": 1920,
+          "triangles": 640,
+          "bindingInput": "boots.json",
+          "bindingSha256": "3aa4045cef64dfbaf554b4bd9b3dfe716692b78d57a407610aae17ef6f4e32c3",
+          "rendererId": 121113,
+          "nativeMeshName": "bootsBlacksmith"
+        }
+      ],
+      "display": "thief-boots-wayfarer-display.glb",
+      "icon": "thief-boots-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    },
+    {
+      "id": "thief_charm_wayfarer",
+      "name": "Trail Compass",
+      "family": "charm",
+      "band": "wayfarer",
+      "models": [
+        {
+          "file": "thief-charm-wayfarer.glb",
+          "source": "thief-charm-wayfarer.source.json",
+          "sex": "shared",
+          "vertices": 1644,
+          "triangles": 548
+        }
+      ],
+      "display": "thief-charm-wayfarer-display.glb",
+      "icon": "thief-charm-wayfarer-icon.png",
+      "palette": "thief-apparel-palette.png",
+      "motif": "Moss field coat with longer rear skirt, rolled travel scarf, laced leather boots"
+    }
+  ],
+  "status": "Open-face apparel art candidate. Offline validation and renders do not establish native fit, motion, appearance selection, displays or art approval. Previous native-fit records cover superseded bytes.",
+  "provenance": "Original geometry, normals, palette, UVs, weights and rendered icons. Generic original Surface helper reused. No native surface, texture, bounds, UV, weights or animation data used. Only pinned bone names and inverse binds inform apparel joints.",
+  "files": {
+    "thief-boots-burglar-display.glb": "3e6dae679b91dc82f3396573bc050b53d017e1607f78fdeba6c25b57cc1ee3da",
+    "thief-boots-burglar-display.source.json": "10ebf068f17fc116a54eabf0b66bc70e8fdb824d2d2659fffd4be901f3475608",
+    "thief-boots-burglar-icon.png": "4849425d64c8ba68724e4138201ef851ad20613cc8648508ef147ac7978f7c9d",
+    "thief-boots-burglar.glb": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec",
+    "thief-boots-burglar.pieces.json": "536e5a933dbbb334c3ffe27d5553a08d2173c322bf012d2ba9bb741de78b0cd3",
+    "thief-boots-burglar.source.json": "4b55d0259007f3f593cf1090d06c8c1ff34bc335072b706ee443c7c866054e84",
+    "thief-boots-guild-display.glb": "dbe4759c5016172fc24e032b3fdf45f330132885f7d1762885a70c5b62b8d9a9",
+    "thief-boots-guild-display.source.json": "d87600277721b66748479e902a2c4a41ced30d37163ec3514fed2dc87f695fb8",
+    "thief-boots-guild-icon.png": "b11994e3b6455202c27c3a9a29c1482a700b83b9cd116494106c28e4d670df04",
+    "thief-boots-guild.glb": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba",
+    "thief-boots-guild.pieces.json": "437169bb58f4f5d790f90aaddc6b7f04732af876d682e1c85096c4152504d836",
+    "thief-boots-guild.source.json": "c7bf98083fc53900cfa4a8b73ca8d815b03ff8604df89df2af67ddf18f753774",
+    "thief-boots-locksmith-display.glb": "7fc38eb896fd69fbfc068ac112af6413a82bd06e1d4b55a78ed2d5a8132cc0b5",
+    "thief-boots-locksmith-display.source.json": "abecbbe63fddcc8d0f0cb6ebf093bcd3f6ad734438ce8b39135c3d785aa8d2e5",
+    "thief-boots-locksmith-icon.png": "e1f9c790069218440d823a36cd71f3879dbba0f9afe41dca6daa964e2c409cc1",
+    "thief-boots-locksmith.glb": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6",
+    "thief-boots-locksmith.pieces.json": "3bc2e0502bca5e3a501cdfc2e2b64c933816e425eaa899fcc23a0b48e8f7f768",
+    "thief-boots-locksmith.source.json": "b824d7b964e4178405d22e69d4637991d383a2e6f48ec266e638d737545718cb",
+    "thief-boots-masterwork-display.glb": "fcb54c82a7437dd179680d63b97bc483136256673b77fdfdd4a44c48545c10fb",
+    "thief-boots-masterwork-display.source.json": "5a98657744c47e26ee50b176bdb3903bf812c45d89072298315fbe304041d758",
+    "thief-boots-masterwork-icon.png": "32d4f2af4c2caeebc63508d58e0c034b68ee946ab2ef572ab576c8ad1c6f0771",
+    "thief-boots-masterwork.glb": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41",
+    "thief-boots-masterwork.pieces.json": "3bc2e0502bca5e3a501cdfc2e2b64c933816e425eaa899fcc23a0b48e8f7f768",
+    "thief-boots-masterwork.source.json": "a8a6d5b0176a2aaf8d78ebda05d706b5a2d165079c320d2a94d708c0d557f15f",
+    "thief-boots-nightblade-display.glb": "4b83f912f06970905749aa77399913bd697ecbde1138e15b91aeb1c8e765a27a",
+    "thief-boots-nightblade-display.source.json": "3c407f41cd3c6e0c284a3e068c230dbc5e9ab2f67a89c169ecacd15362b370fe",
+    "thief-boots-nightblade-icon.png": "debd7d4b4cc5506e4ff374d5aff68f07b8e1d6d766101c615d3180cd738804e5",
+    "thief-boots-nightblade.glb": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca",
+    "thief-boots-nightblade.pieces.json": "9cb26e4877c2fc21aaeee6fd44c638930013fc4e60ed723cf2f58464a815b870",
+    "thief-boots-nightblade.source.json": "4f071a6c952f9ac51a78d50e1e1f9171e8d68e41ab1746222459a0f53027d6a9",
+    "thief-boots-street-display.glb": "04e805b66fd0e7c5fd54c11adc3e2e6c3a00f8374f4ccff8c9b40324571375e4",
+    "thief-boots-street-display.source.json": "7c60887b8df9a973c08aab07dd03bd902b52e9825a6346c236c9f40624e9c0d3",
+    "thief-boots-street-icon.png": "37e6ad4a713511a365a228771b9d9bf4c6407b1161412d1f808e3c9caab817e5",
+    "thief-boots-street.glb": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d",
+    "thief-boots-street.pieces.json": "536e5a933dbbb334c3ffe27d5553a08d2173c322bf012d2ba9bb741de78b0cd3",
+    "thief-boots-street.source.json": "8dbc746a983cc3158e67b5b9136b8344ae662e3b587eeb31b12412fc735e95ba",
+    "thief-boots-wayfarer-display.glb": "cd09c12669d5153483f8fa390335bbeeb7501a6744af3ac7387dbd26e73a8107",
+    "thief-boots-wayfarer-display.source.json": "ecdacd8531a12a1275d4c64865a697d2ff013df7f0c5182196180d9378c60565",
+    "thief-boots-wayfarer-icon.png": "420745fe71e10665bc501ec255710e67b554b09751b280a65ca2c4a92a97f0d8",
+    "thief-boots-wayfarer.glb": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7",
+    "thief-boots-wayfarer.pieces.json": "948a4418e44410f909d1969a37d25ab5cd41c442c1ad47f09d2085e3dc5d785c",
+    "thief-boots-wayfarer.source.json": "5280b7b19529bb263343164aacff9aed20b38b5961fff133dca695857a76c4b0",
+    "thief-bow-burglar-body.glb": "db0f51e7918108fe84bed67d705ee537e4aa6677cd81b2ea6239d73647f1597c",
+    "thief-bow-burglar-body.source.json": "e8f0fb0845f793b51e6ade7fc0c85c553ecee99c976a18b88ad7c6fdd0cd34bf",
+    "thief-bow-burglar-display-body.glb": "06872547de56c42f67e3a97a1012bf6482800738b72a339c8eaffc1ec8c689bf",
+    "thief-bow-burglar-display-body.source.json": "01433c6fa2bb9c34da80a3c739a7472b5c62a3a24bb6127daddddc6ba22f5890",
+    "thief-bow-burglar-display-string.glb": "3bad3402817184e84a3682dd483d5d990a8e0c8e8e11cfe3dea950951800d5e1",
+    "thief-bow-burglar-display-string.source.json": "6caf93fe09b3b06fdb4b65a22a5febc9b85c3fdc68bcffc10f71d24689323810",
+    "thief-bow-burglar-display.glb": "acfbd49cd70de6fdb3992847e1caf663a4a1e30a52238c3c6d862a7aeb960c94",
+    "thief-bow-burglar-display.source.json": "41586e3ba82278127ea36107be2bf7bcb1503d094345f59ee2b97459ca641f92",
+    "thief-bow-burglar-fragment-1.glb": "f1b6fbed0cc2c80bbb4e17fd7d4ead88f440408be375fed90a6b01be079cc9b7",
+    "thief-bow-burglar-fragment-1.source.json": "6d71a94debe2a4d127a13a9544e83aa22824add70f33d417e8912dda5cf8df29",
+    "thief-bow-burglar-fragment-2.glb": "08ff480bb4e32b1164dd9029fe5e7f1e83ee130f937c31db44c334414ceba58d",
+    "thief-bow-burglar-fragment-2.source.json": "d09156b723f2d462cf5109de70def1a9e9b6ff552641f435c047e66611c85f43",
+    "thief-bow-burglar-icon.png": "719d8f284c211b267eed3767dc0c74c0febe3ec39984a670059c6b7e03812cef",
+    "thief-bow-burglar-string.glb": "06f8268967c714b718d1e91369d6d307b53fb3236ec5d32dae9166947aaf435a",
+    "thief-bow-burglar-string.source.json": "6bbc03099a5c3ef0200881dceeffedf4f21f59947066679a5f5770227d19f467",
+    "thief-bow-burglar.glb": "acfbd49cd70de6fdb3992847e1caf663a4a1e30a52238c3c6d862a7aeb960c94",
+    "thief-bow-burglar.pieces.json": "bbb0b22cdcb84aeeadf4353359b6be9ab642ca53f7365ac70924e3c5e3ce1ffd",
+    "thief-bow-burglar.source.json": "41586e3ba82278127ea36107be2bf7bcb1503d094345f59ee2b97459ca641f92",
+    "thief-bow-guild-body.glb": "2c682b71f90802f1f16a0baef533f257b62771fd1d55998f2bb6d33966b65491",
+    "thief-bow-guild-body.source.json": "95629841c0802cba9e8d02bbd95112c3b375a069461e166036f2d3ce14549803",
+    "thief-bow-guild-display-body.glb": "161e8afcb0db0446cc61a0a14c47deee1274e8f7775a0163d3b918e4c728bb34",
+    "thief-bow-guild-display-body.source.json": "4d53d2e2f2c86963e171dc790d0f035071de9fd30eb08f9c517a5e54228a7a8a",
+    "thief-bow-guild-display-string.glb": "a1e0ed750755b425e49427d3f3058ff50e5ff22d6f1bcf4bde955a078af8368d",
+    "thief-bow-guild-display-string.source.json": "8c2a1569ef4f22da3109e28f6b48229a5a9882d7f1adb4664801adc29bf354a0",
+    "thief-bow-guild-display.glb": "857938e8d29f3cd7eef78f2faf2787141beaebf8a3f959f91cb057b1e00de71c",
+    "thief-bow-guild-display.source.json": "78ad50640a29fba7f1ac7e54da7db86e4ebf0fbc7755c3abfc6a504069f5552d",
+    "thief-bow-guild-fragment-1.glb": "08e4a9dad262b66243124f3e0b590ffbe3bf8dc0bdab43ed700f7408f280e28c",
+    "thief-bow-guild-fragment-1.source.json": "ed97aedadcf9bf6ae4534a68edccde21d9d6631acfb7f748ef8269efa5ad53de",
+    "thief-bow-guild-fragment-2.glb": "5155186b985b645de49b446b3d720f688d877bc7e0cfa5d035955ea6eb7eaa2b",
+    "thief-bow-guild-fragment-2.source.json": "db2ae68096167d494ca5af1085883591dee66583cd2b559ced647d98bdf2387c",
+    "thief-bow-guild-icon.png": "cd2b13e329ea689fae1d71958c6a5fc37d8169996f3864adcdd6c1ffee8ee2ef",
+    "thief-bow-guild-string.glb": "f5d2c350f1c2bedf7d3b16f58b417b03752b3995294f99302091eda7e9f7f495",
+    "thief-bow-guild-string.source.json": "3fae065a4fdf0dd6115943175b6c9540fce768969783a2a16abb50581a49b6b1",
+    "thief-bow-guild.glb": "857938e8d29f3cd7eef78f2faf2787141beaebf8a3f959f91cb057b1e00de71c",
+    "thief-bow-guild.pieces.json": "a03048f2bea18ff0591138fdfbf869e59a467a11366fbb8a4a7fc64998d9340f",
+    "thief-bow-guild.source.json": "78ad50640a29fba7f1ac7e54da7db86e4ebf0fbc7755c3abfc6a504069f5552d",
+    "thief-bow-locksmith-body.glb": "afa7cf6d939fb6f0d600f0cbf070daa2636d95906c9ca7e04f9313f45216ef23",
+    "thief-bow-locksmith-body.source.json": "4e647e5c2b0b2e25ca06978f20d3a9db1a815aa99e6aa62673ad3e4c7cabb106",
+    "thief-bow-locksmith-display-body.glb": "9e087cd9f91b891d8189f7fa123a840cf0426a2e717ad5afee8568fa71257e41",
+    "thief-bow-locksmith-display-body.source.json": "9aed6ce87b0534a0f90f974643f2c824eb29b86b02e662c5daccbb8db1146959",
+    "thief-bow-locksmith-display-string.glb": "4f2ce36e507556859e8f4e83e1e9e32da092a7e19e58f2a6e91ba157c0129069",
+    "thief-bow-locksmith-display-string.source.json": "baf75c86f6bd61428c2951721e6ddb181680a03ffee8ddd3be78c7d77f6fbec9",
+    "thief-bow-locksmith-display.glb": "bd4a8867f65b845bc448737a28ba2f835bf9278e2d2a096e9cada7a044f8f550",
+    "thief-bow-locksmith-display.source.json": "e228d3d217b8396df527c3c4e9e3c2cad83e671cb61045d0a0c80a91bae62abe",
+    "thief-bow-locksmith-fragment-1.glb": "8f03117567335dfd4dbc35eeb92d355c1dcf85209d96107e877fa2c7e2193e18",
+    "thief-bow-locksmith-fragment-1.source.json": "d781f5448ecd66274c6a577fbe2830ac9e3de3fd0aed0845c12b60eefbbd6075",
+    "thief-bow-locksmith-fragment-2.glb": "5cba4f51cee4d8d381f2f70e3df5b4e71d3c7e2a1f29cd5c403c09d49f30b9dd",
+    "thief-bow-locksmith-fragment-2.source.json": "815dba313021f6deb079cfb181121a85bac84df4ca173598165af7d4478d6800",
+    "thief-bow-locksmith-icon.png": "4f2c0f7da8359daf9932bf5e16656d277405627ed1d8d89519008a921549a49a",
+    "thief-bow-locksmith-string.glb": "2d1cec53ef393f2a0de9eb4ce27815b801886479b1fe1376f93882335731b3d0",
+    "thief-bow-locksmith-string.source.json": "9e282f5e6b423a9957bd73db36bdc66f8500e1775e8ef09ebc8f0f0114768ec5",
+    "thief-bow-locksmith.glb": "bd4a8867f65b845bc448737a28ba2f835bf9278e2d2a096e9cada7a044f8f550",
+    "thief-bow-locksmith.pieces.json": "cdc6238c1af91028942a3906f5cd7bf396452a8e09c24a16ed9454dbcbd3b0ea",
+    "thief-bow-locksmith.source.json": "e228d3d217b8396df527c3c4e9e3c2cad83e671cb61045d0a0c80a91bae62abe",
+    "thief-bow-masterwork-body.glb": "2d14c18f2dc319f96db148cfb4ea724c3374e0014af1227e002adc8ad19a7386",
+    "thief-bow-masterwork-body.source.json": "a7464762080a3ddfe643154f8347f986d1d870ef2c6751f2d7344e2b768ecf91",
+    "thief-bow-masterwork-display-body.glb": "01e3e61db8c8dc963c167d96d0187d31e1f0ad1aedc750e4b8184409e1c298cc",
+    "thief-bow-masterwork-display-body.source.json": "1a9932793eb1ee1f3cb90df082bab3cdd0b2aec976e0c06992a14870c6957364",
+    "thief-bow-masterwork-display-string.glb": "ff30ec5444bc4138316129e3b5c75c7cc8f51312b6e601e77c9d30cf67674219",
+    "thief-bow-masterwork-display-string.source.json": "a598f4b53d06340cbbe9ae384d61d7580d7f61e969490ad6b1cf14d74ed77fb9",
+    "thief-bow-masterwork-display.glb": "dc6946e861b3c08e239b266995857b70a753a49b9a5d5992ce1b1c9d49aa01ac",
+    "thief-bow-masterwork-display.source.json": "e8fa6ca85eb2de7ea454969a4cf8b8c08211a6831e465612abf8bf7491693afe",
+    "thief-bow-masterwork-fragment-1.glb": "3061a2d650a8b03faabc3e6a955aee5a027dbfc6b2bc3bcc49c0ec82a33023bb",
+    "thief-bow-masterwork-fragment-1.source.json": "da0b5cf4cf5e4c88fa7f79c23830bd455d04d01b364041291ce6b33a3d0718d8",
+    "thief-bow-masterwork-fragment-2.glb": "12b2ebf636eb20d9076faace757eced5a3b1f4bbc119f92351b1df7a8e66961d",
+    "thief-bow-masterwork-fragment-2.source.json": "e7b2eb77098b91c38802f700171692690f07bb5cd5550ff0bef88e6e8e57ca93",
+    "thief-bow-masterwork-icon.png": "ccfaa34ea1c8fcfec764e035dad43563f51cd869e6b603b3999ebf2009f6ef70",
+    "thief-bow-masterwork-string.glb": "b95f4016a27c9b5f3df83bb0b198b5cc730e74581b3f0db446f083df6cff735c",
+    "thief-bow-masterwork-string.source.json": "de2cf1c0fe0ce47d71b201b3aa452b8f5a7bdbadd11fbb200805214ff40301df",
+    "thief-bow-masterwork.glb": "dc6946e861b3c08e239b266995857b70a753a49b9a5d5992ce1b1c9d49aa01ac",
+    "thief-bow-masterwork.pieces.json": "a03048f2bea18ff0591138fdfbf869e59a467a11366fbb8a4a7fc64998d9340f",
+    "thief-bow-masterwork.source.json": "e8fa6ca85eb2de7ea454969a4cf8b8c08211a6831e465612abf8bf7491693afe",
+    "thief-bow-nightblade-body.glb": "216283c195e25d48217a885e9d9ef41d0f72c0386e0b321222be4353dfa97bea",
+    "thief-bow-nightblade-body.source.json": "00bae22bedf7b5f08c728300e3a0dbf46ec3de412c3a9faa51d5e0c0cb013204",
+    "thief-bow-nightblade-display-body.glb": "32dbeb7fe35c95def20d57b10644c14c9486042c455ea511328e90cfb2dc111d",
+    "thief-bow-nightblade-display-body.source.json": "c14b439fc69da8f59ff7a8132d2cfb3e8fd56a36feb4357b595a6698cfdb7b22",
+    "thief-bow-nightblade-display-string.glb": "c4536b55eeaad809f46817aad19fc56c2a4513fc2ff80c28d31336a941da52f9",
+    "thief-bow-nightblade-display-string.source.json": "2a6577b258562d4ab3b77aed6d0db27ce7c2e723b216e449914495aef6128669",
+    "thief-bow-nightblade-display.glb": "9359888d4bc70ee3fa7e2fe08c6a280fffb017bd4259fb587e8d61165206e393",
+    "thief-bow-nightblade-display.source.json": "e6daef46f8029b7544d5afff9feb1fa75c92fbbc1c0b3bb3fdc00d762152b52a",
+    "thief-bow-nightblade-fragment-1.glb": "76f26597c0a192c06b0ea95453334ecc9811ca2cbcb0a40f4aa2c659b2035040",
+    "thief-bow-nightblade-fragment-1.source.json": "125a397dc30d11f137cfe30ab9f2249e6298c43c7535bb4e86b1f5ea8c9fbeb8",
+    "thief-bow-nightblade-fragment-2.glb": "03ac5d566d1d76d7a4edfd38b21b6f6be5180dbf97f80f211278d9d63fe48483",
+    "thief-bow-nightblade-fragment-2.source.json": "bbf769396782f09baafa31b59d5407c409beeb7897e84d69845e7188347d080b",
+    "thief-bow-nightblade-icon.png": "2c55c759bc5e027d066533430497c01b1dfd139fe2006c4a4d3b1b4965a5922a",
+    "thief-bow-nightblade-string.glb": "35908776b5fc24a4816b9db7e530359294e87ef0062b729b8b5512ab8963ac85",
+    "thief-bow-nightblade-string.source.json": "6effcc0f4bbc1e0ab78496b79cabc4c5faa3c03986deb4729f904aad34254e0f",
+    "thief-bow-nightblade.glb": "9359888d4bc70ee3fa7e2fe08c6a280fffb017bd4259fb587e8d61165206e393",
+    "thief-bow-nightblade.pieces.json": "15ffb8487c6968a8ebae6c5db0cad693a3e1ed87012a0499401f4b59ea8e70fe",
+    "thief-bow-nightblade.source.json": "e6daef46f8029b7544d5afff9feb1fa75c92fbbc1c0b3bb3fdc00d762152b52a",
+    "thief-bow-street-body.glb": "ca3af57573acebe69f05cfd7cdee859e604e21f58a6c30f465e5a2828b650f5f",
+    "thief-bow-street-body.source.json": "195f9db01c49bab950f3f1254c69cc3cd4e7a482dc906f3b4eda5dd1d8e9ac44",
+    "thief-bow-street-display-body.glb": "ea4cc8548bcad850c1e9984830a93d5f10ba0a484a9d6342da4ba9dc75aa5db1",
+    "thief-bow-street-display-body.source.json": "16e59882b0a349195ddaf71e29633806fb101245bddd0632acc0906234daaee1",
+    "thief-bow-street-display-string.glb": "201ea1e686047ff31d57b9c097d28126bf8dc776f8d5c667cd55d0f9868941ca",
+    "thief-bow-street-display-string.source.json": "86927373dbd0a403b7c85ad7255c6892d12679eb02c7632aa65d0f6893f3e088",
+    "thief-bow-street-display.glb": "e42afed24780b143288b347ac4fc93edc1616a27026a305e58968c87ea787c42",
+    "thief-bow-street-display.source.json": "a80f642493db67e142261299520a7f7a8d8db101cb25452331168efd8aae2661",
+    "thief-bow-street-fragment-1.glb": "723e9e33de4bedd1b39419a81dcf3ae0d254938e013ff256e3c7c42b0cfdbbf6",
+    "thief-bow-street-fragment-1.source.json": "dd693310162997ca07f34bd45b6097b087bae32e56361b4f2247982221bebaa5",
+    "thief-bow-street-fragment-2.glb": "7c481f6695b632cfadfe8d226a89f215f79939bda46f7b2441178865f5847bd5",
+    "thief-bow-street-fragment-2.source.json": "64d137701a93daedac9a730a3e3a97c380b9b6b6ed612a7a37c1a7f2f32fdfb3",
+    "thief-bow-street-icon.png": "48737bfd5f7e5662d4a269c8dd742e651130b53d8624b6af2fbf1313974a2404",
+    "thief-bow-street-string.glb": "3b6363073c86255acad28609e268d7766574d166d953e50bf13403844c8d49e1",
+    "thief-bow-street-string.source.json": "d3464353fe9f7c5e7ddc7ed0e95f920d371ed132736c282f0f9c6c1cc088e05a",
+    "thief-bow-street.glb": "e42afed24780b143288b347ac4fc93edc1616a27026a305e58968c87ea787c42",
+    "thief-bow-street.pieces.json": "bbb0b22cdcb84aeeadf4353359b6be9ab642ca53f7365ac70924e3c5e3ce1ffd",
+    "thief-bow-street.source.json": "a80f642493db67e142261299520a7f7a8d8db101cb25452331168efd8aae2661",
+    "thief-bow-wayfarer-body.glb": "4e379acd4df15ffc27913fd2040b5db949a070017360fc5cb79bed863a6727da",
+    "thief-bow-wayfarer-body.source.json": "545bb79a6a07380b485659675388b5c2c809fd9a6a70df079155a0ec3950be16",
+    "thief-bow-wayfarer-display-body.glb": "d8ce536bfab62c6ba2b864930e650783434b06ecbb7a1cddcbb8db54acdd687b",
+    "thief-bow-wayfarer-display-body.source.json": "af78f12f9397ca64a16f6771351641f822a6974c39086202cc89cf1f68964c66",
+    "thief-bow-wayfarer-display-string.glb": "1b66bbfe9af5c1a8f4dd3480de86599148348d9996bb40d5ef3ccd3f72c68047",
+    "thief-bow-wayfarer-display-string.source.json": "01309101773524357e210a0314acfd55c14676a70c99f4eae0b70d4d2deb3ae3",
+    "thief-bow-wayfarer-display.glb": "5d53eb560da0ff1dd66978c72ab8217b8b192b7d89d17bbad5bc5b2998a7020f",
+    "thief-bow-wayfarer-display.source.json": "b95ed25136b8667dca90e5df4d045f8c62731805aa56f5ac16c5f692b89e12f4",
+    "thief-bow-wayfarer-fragment-1.glb": "fafc30ed10aeb49df1614beb3ad5a6c85cbb60fea8dfc45679bcd38fac0645ae",
+    "thief-bow-wayfarer-fragment-1.source.json": "5ef7dc1f461f73bf8257d5532544d3eca5c397fa938311c49a42abbfb207c90b",
+    "thief-bow-wayfarer-fragment-2.glb": "8a5971628b6a5d53fd91b121b0b63cf101abefde465554774d5a92b166007fcb",
+    "thief-bow-wayfarer-fragment-2.source.json": "9c6addf432f16665f0980a051f2a355ca6e8d7196ad9897610a9bfedc36898da",
+    "thief-bow-wayfarer-icon.png": "ea9fb86949326cdfe6dbfe02e4d781369f893ecfaa386a6e072c9d0e46ba1fe5",
+    "thief-bow-wayfarer-string.glb": "e16d375b159d5ceba66458821a6ddd9d484a4d4afe5768c72894899805bfb575",
+    "thief-bow-wayfarer-string.source.json": "5ea67ed1984192ca4b19fedd399572d009f5c7aa6ca2ce782fe6a8bf871a608b",
+    "thief-bow-wayfarer.glb": "5d53eb560da0ff1dd66978c72ab8217b8b192b7d89d17bbad5bc5b2998a7020f",
+    "thief-bow-wayfarer.pieces.json": "a03048f2bea18ff0591138fdfbf869e59a467a11366fbb8a4a7fc64998d9340f",
+    "thief-bow-wayfarer.source.json": "b95ed25136b8667dca90e5df4d045f8c62731805aa56f5ac16c5f692b89e12f4",
+    "thief-charm-burglar-display.glb": "1fb412357de3e8b83e92d1b2a082af1daf72006c429620aee148844133eabcda",
+    "thief-charm-burglar-display.source.json": "2ce1a84b33ced8bd2a2686d34c2f8de5eaefc38939d48a7926c7b7d36a4eac4f",
+    "thief-charm-burglar-icon.png": "a5c782ab058f451d0111deda20bc73e83d67ed03d505e526408a56e467871316",
+    "thief-charm-burglar.glb": "1fb412357de3e8b83e92d1b2a082af1daf72006c429620aee148844133eabcda",
+    "thief-charm-burglar.pieces.json": "9741125ccccf03b39a95cebdf32ef12830bfefbbc339ba1f73c606852567527e",
+    "thief-charm-burglar.source.json": "2ce1a84b33ced8bd2a2686d34c2f8de5eaefc38939d48a7926c7b7d36a4eac4f",
+    "thief-charm-guild-display.glb": "84b5a3b2a090498deab994de22c9e4c839cdac4de3b70fb0a292bed66d23afb9",
+    "thief-charm-guild-display.source.json": "b6728871d982f3851f03fbea2ce6d8f84a6e371f5f16855fff9ba82ceeea049c",
+    "thief-charm-guild-icon.png": "e2f3063a0acebf81728905f1283f7191a44a9d6bfb8cc1ad4aaa9d09be2d5f60",
+    "thief-charm-guild.glb": "84b5a3b2a090498deab994de22c9e4c839cdac4de3b70fb0a292bed66d23afb9",
+    "thief-charm-guild.pieces.json": "01e0057d47abebedb812f58328d118259667d7e6caca78d6c430d60cacfaad77",
+    "thief-charm-guild.source.json": "b6728871d982f3851f03fbea2ce6d8f84a6e371f5f16855fff9ba82ceeea049c",
+    "thief-charm-locksmith-display.glb": "68438a5c87c5a84413ed9bf6369550d0c3f0db25a38e7dd13489f7a02fd57b78",
+    "thief-charm-locksmith-display.source.json": "03a89b6afcfa7a0bc8fd422ede138d96bd45751fbe05aa5711118e0ce27662f4",
+    "thief-charm-locksmith-icon.png": "787f6d9c6d9a8809924ff5dababcbd255d84547189cef14e402f3ac292f32fcd",
+    "thief-charm-locksmith.glb": "68438a5c87c5a84413ed9bf6369550d0c3f0db25a38e7dd13489f7a02fd57b78",
+    "thief-charm-locksmith.pieces.json": "db936197914b27765d13345d636a1040e47098b35425e48f53cd6883f7bddba4",
+    "thief-charm-locksmith.source.json": "03a89b6afcfa7a0bc8fd422ede138d96bd45751fbe05aa5711118e0ce27662f4",
+    "thief-charm-masterwork-display.glb": "f91a42790108fe86bd8c88b68e00e2db5fb5cc7839141c1fdd6fb2626952f900",
+    "thief-charm-masterwork-display.source.json": "0e8faa41dfa74646dae80454f33e8eb5388c2136a6fe1c10575d7c361ea5817c",
+    "thief-charm-masterwork-icon.png": "757efcd4d660c9a8932f0a4269822278e37610d8ec2ef1de4648a2d94d757331",
+    "thief-charm-masterwork.glb": "f91a42790108fe86bd8c88b68e00e2db5fb5cc7839141c1fdd6fb2626952f900",
+    "thief-charm-masterwork.pieces.json": "4b7aaf56e61351baf29bbe7b73abf3ded56735da941aa77e19371d4b4b043f17",
+    "thief-charm-masterwork.source.json": "0e8faa41dfa74646dae80454f33e8eb5388c2136a6fe1c10575d7c361ea5817c",
+    "thief-charm-nightblade-display.glb": "c821adaa59a415078977a6e63c06d0fe2f1ddefdf22fee07072069a139f3d591",
+    "thief-charm-nightblade-display.source.json": "c9a5f7a90d5389b995bf2bff8f7a4347599a715470738a916e337f814efd836b",
+    "thief-charm-nightblade-icon.png": "fb835ecceaa85037a02a2786a0dd0ae78617cfa4abb07ee291f1e98a090db729",
+    "thief-charm-nightblade.glb": "c821adaa59a415078977a6e63c06d0fe2f1ddefdf22fee07072069a139f3d591",
+    "thief-charm-nightblade.pieces.json": "81e649974d57d7af06890b1629559857013f9b53789cf6c3d2a0cf2e28ffb453",
+    "thief-charm-nightblade.source.json": "c9a5f7a90d5389b995bf2bff8f7a4347599a715470738a916e337f814efd836b",
+    "thief-charm-street-display.glb": "c5377e85242883550b1df51764c1488d986f69f32b73dced458ef93b85dbd634",
+    "thief-charm-street-display.source.json": "e44cb7134fb3e15cf757b71e80e767551f8813d0c96396a3c06d47ffbf0249fb",
+    "thief-charm-street-icon.png": "886a2f7abc72cc63845ad5612436f098d81184565d83ddb2ed2ac44c29cd352f",
+    "thief-charm-street.glb": "c5377e85242883550b1df51764c1488d986f69f32b73dced458ef93b85dbd634",
+    "thief-charm-street.pieces.json": "50a42ca29cedaf5c0cf2e1ebae2aa78c684b772571c0550c6f5d548ee44f8902",
+    "thief-charm-street.source.json": "e44cb7134fb3e15cf757b71e80e767551f8813d0c96396a3c06d47ffbf0249fb",
+    "thief-charm-wayfarer-display.glb": "fad1cfd2fe580e2c2649c5b8f44174090b4977e713804b66c9c0c8231b733812",
+    "thief-charm-wayfarer-display.source.json": "4dcf11d42818caa1a0e95ba9254891a7441d13b2fb8991838e915968def43a81",
+    "thief-charm-wayfarer-icon.png": "49412975366522efbc56d88837566f112249a3b89ed7d4a8255e07903cc4accd",
+    "thief-charm-wayfarer.glb": "fad1cfd2fe580e2c2649c5b8f44174090b4977e713804b66c9c0c8231b733812",
+    "thief-charm-wayfarer.pieces.json": "df566e24ee97ca7f4fc75717d8c80ed1aa430b3ac3f06f6db1e3bbd6641d62f4",
+    "thief-charm-wayfarer.source.json": "4dcf11d42818caa1a0e95ba9254891a7441d13b2fb8991838e915968def43a81",
+    "thief-coat-burglar-display.glb": "b858ff1a8509436ae2afe331683ad97c7f2666566d237fcdeea24fda96c4cd1b",
+    "thief-coat-burglar-display.source.json": "873baaee3eaa92a9657435e153438d558f70823fcb105fb32be1df5d5d8166f3",
+    "thief-coat-burglar-female.glb": "ceb773fcf4798ad9b5a8baab486e4db959a538d9052a23c038eb59a85be08c92",
+    "thief-coat-burglar-female.pieces.json": "19a6c913a33e89507ae8f2130f49b2d57d58c910be9a59103804ac1b944d7c87",
+    "thief-coat-burglar-female.source.json": "0c74d29278b6fb83fb15aac2fb53641f4c586bdfa31555aff2783bf3a3ecb5e2",
+    "thief-coat-burglar-icon.png": "a56a4e38c35d8e5d4e413447393caf6c269484dbf7ad6c73da6a8764f40efb2c",
+    "thief-coat-burglar-male.glb": "713e30be5b403369e623c34270a9fc167b3afbb808a159f2c74956efbf0385b8",
+    "thief-coat-burglar-male.pieces.json": "03a8e0739f713ba2d63a221fc801341a7d9e435de93ebd4cdaa9f0e9a8b91828",
+    "thief-coat-burglar-male.source.json": "98b7b1b0f91802f211cb26080a50ae9cc2ea7eb687960d0dc9c991f337b076ae",
+    "thief-coat-guild-display.glb": "a2d46a2805b841f2d309a3d2c087232384995bdaa47a7e9215c08cfa917f7040",
+    "thief-coat-guild-display.source.json": "f678a112ca5cbcb053d37823c99e3687b09c24c27a3d2357fa2768e5d8901172",
+    "thief-coat-guild-female.glb": "a44af11f94312adcc8ed39568b9df818c8ad0c4afdbd6644eced7bfff66ad7a6",
+    "thief-coat-guild-female.pieces.json": "9a051e9a9c6d1d69c7370a7653ddc277584a19bee597be04337addbd840458fe",
+    "thief-coat-guild-female.source.json": "774ed7f5432cdbeac4f2e73b8dcd26463eb85a7466275884f3f65fe0d8d236ca",
+    "thief-coat-guild-icon.png": "3bb386d61a6f576313489b805680afaaaccd0c304c680c735022195d45003b8c",
+    "thief-coat-guild-male.glb": "a2f61f4d1585752a6227cd924690d89b96e036f71a2ff8718afa215f729f295f",
+    "thief-coat-guild-male.pieces.json": "105fcdc970dc139250b778f75d01fe74656f67a941f6591d3da7354f14c6f01d",
+    "thief-coat-guild-male.source.json": "16eb27af0a87e7c8747dc54dc2b98e4ebed05d80feba36e0d5c93ea1919d8b02",
+    "thief-coat-locksmith-display.glb": "1e167001b1e1372854ccae80304ee8324d6c3c5e553c9585cf272bc4c0bc7a98",
+    "thief-coat-locksmith-display.source.json": "28f54f50a4e335c900bab6a561344b23391e5dfbe0af4ad66f968f0d77638114",
+    "thief-coat-locksmith-female.glb": "ad3b67b6147ba76f1365752a7ea8d1d4db5daaace5b5f7c4265fa4014419a16e",
+    "thief-coat-locksmith-female.pieces.json": "07e4e0bf4a434fea2b24a08efa869b1b1428fbcb4a5ee91963483c7326da1faf",
+    "thief-coat-locksmith-female.source.json": "53c1e526232feb9462f2c6c4ef26686b9a333344ba7cdadb0c5cd772bb903ce8",
+    "thief-coat-locksmith-icon.png": "8773d5fb101aa3e8f76a39ddbae0f25f8710075c51f8ad693994e8b2ea08d43a",
+    "thief-coat-locksmith-male.glb": "d6eb2d2a62865a9cca13238bfc4916a5784c3c82698950452316170eb78967c8",
+    "thief-coat-locksmith-male.pieces.json": "1c7d98c39cdaf49da92b4828b3fb06c8a5857c62c60585c31accdc5d7c27cc2d",
+    "thief-coat-locksmith-male.source.json": "710254075caa87bd20c7db47617f83c4a7e6dbd52ce7609f93c049f9533d5afa",
+    "thief-coat-masterwork-display.glb": "7585deb963f28357a83af8638258c8d830aed38ad3799821640f834d1eb0a66f",
+    "thief-coat-masterwork-display.source.json": "9ea9573bef2cd97d67cc4c6ae4226958b87dca46e773681b558146cd59ffcc0f",
+    "thief-coat-masterwork-female.glb": "f242f73f2b0db19c5b0c736fca7e2a36883b0a267ad2b8bf4a0ed33ffc5efc84",
+    "thief-coat-masterwork-female.pieces.json": "8a690d463ee694eafdbda7f26689dd7a6f54e59adee4db4be61eeb542b2b7e9d",
+    "thief-coat-masterwork-female.source.json": "edca1643a952196d11a815b6f9cfb0b8a96c6aa263f06f26f6d86ad29700e675",
+    "thief-coat-masterwork-icon.png": "fe9642cd7cdc9597bc94270978afdb4bd8254dad6c7878775fd06b82de2c819c",
+    "thief-coat-masterwork-male.glb": "d074797bedf58a1c3eb216799fa3189a595dd6e4af212ad888a5323da59dddce",
+    "thief-coat-masterwork-male.pieces.json": "0003b93166774707cf4392a9dc77bd12e840cb68688de76d5d2eb9f0772021b3",
+    "thief-coat-masterwork-male.source.json": "fcce5e7b293884e4588d73d7fe298409597cf81cca91919254d0b2bea86aa5d9",
+    "thief-coat-nightblade-display.glb": "81ea00931790efd0bc49c645216731423d690da43db84f6db58916d3300dd998",
+    "thief-coat-nightblade-display.source.json": "6847f160316e73148e1f48b9f7f47f8408e401abb2187b6bdb4ab6afcb68a611",
+    "thief-coat-nightblade-female.glb": "c1c8f970cd4508faf249615675c161bed30e400404c4216016127bb4e61cd542",
+    "thief-coat-nightblade-female.pieces.json": "0ca26ec10f78027b03d8b13fb4fc6b77630b2a42a3495e9709628e4402354e71",
+    "thief-coat-nightblade-female.source.json": "28886dc0bc5459a5199deae5726ad40c60eca901680235cce107f94f15f085c5",
+    "thief-coat-nightblade-icon.png": "8f14c186fe14f289e6b5a7a38f91d1a09a4934d2e05b41d2876a4fa380bfb9d2",
+    "thief-coat-nightblade-male.glb": "efb081d7577d3ea512f80216414a732dcf71e98b6b4b29c70ab3643c7bce57c6",
+    "thief-coat-nightblade-male.pieces.json": "b7cdb310616942359ab5cd6d52c84a5918c9b099c30fe68329d83f9f31dc6f15",
+    "thief-coat-nightblade-male.source.json": "2c07a4f6a21bd80989e048e424089cad5873c898ae1a3f1394153478da135f1f",
+    "thief-coat-street-display.glb": "a0e9ab1837c049491729ad5bf49b02a9e8592722389accd315aacd45510a5ff4",
+    "thief-coat-street-display.source.json": "c814861e495de84469804b36aac359cba5f07120ab218c0bebca89851af453a8",
+    "thief-coat-street-female.glb": "9ae12c501839ac1e8cffa8a23447ecc0f9a68ac01a582be06140f50c8aa1d3fc",
+    "thief-coat-street-female.pieces.json": "926e3f053636d671212f53e48b83aea3a9e3a05bc29872d2d71a75604b50151b",
+    "thief-coat-street-female.source.json": "2e472a3349ddf06d44cc4cf482cd091be167f3bfa4268399d308f1f7cf453676",
+    "thief-coat-street-icon.png": "77bdffddd0d6a29664fd239da73027b22ecb9dff933b2bccdc9d4ec185721873",
+    "thief-coat-street-male.glb": "c44004ba862553c3bc2b2540ecdd3f0a258070aa5de633b944c8d77c23b901aa",
+    "thief-coat-street-male.pieces.json": "6f3ecc210df601553ce9d93575819b3d2c016cdbb17f08dce0a733da3d5ab1ca",
+    "thief-coat-street-male.source.json": "bd328eca6df15dd4e3371923abe5bc883328020f8b9fb0762a3b25007c3e9e86",
+    "thief-coat-wayfarer-display.glb": "3e6c81df13e946efea1b1914b3d579c9749fe0cd45cc7b0c74e58d78c2541d80",
+    "thief-coat-wayfarer-display.source.json": "199f2291257574cdb82344fdef5a336757de308a70b6966633da8101b3ff2827",
+    "thief-coat-wayfarer-female.glb": "5a30f0f5efcd62a63c02ff6f279990d1876fae8732ab1759fe20b72a6438cb88",
+    "thief-coat-wayfarer-female.pieces.json": "b8c428435fb3f8d49618376987866f86c87a4a6807f93d403dd9fd339b5355aa",
+    "thief-coat-wayfarer-female.source.json": "774948b2e8a43d8aa0e7e6b3f33bc462482661088c5891f2a47e309349707218",
+    "thief-coat-wayfarer-icon.png": "e111dddfbcd13e9683e75578d1b68255b8aaec1e497e7cd12a1ec70db1ad3bf7",
+    "thief-coat-wayfarer-male.glb": "af8201c245ccf8a13cc537ea02f13a01ed843288fd0b2af9ed8a7cbfefe368a1",
+    "thief-coat-wayfarer-male.pieces.json": "3332c29e4a7ff025bc8eef15256c0785b7d1236c5f2d68a91c58c2ec5eb350d8",
+    "thief-coat-wayfarer-male.source.json": "352f59584cd55ef795634a057a310c86f2cb8a39401c58a44919d3160f487af4",
+    "thief-hood-burglar-display.glb": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56",
+    "thief-hood-burglar-display.source.json": "55545e003bf627730192ac8df24f686741ab10e38264c1964c3d65543dbd9917",
+    "thief-hood-burglar-icon.png": "472f58760b9a2bf4f4c9baefc7b1be10e899a118c4933fe3674720cdf42a5d28",
+    "thief-hood-burglar.glb": "8ec412d7dfcc614123376603780bfbe6519ba8b75020ea4639ee7478148068e2",
+    "thief-hood-burglar.pieces.json": "ab40a5b7c19981f7ec7164f0275ac9e6a4a4ec67b0b5f5a747212f28178a337a",
+    "thief-hood-burglar.source.json": "d79b4c7ff216af5cdfd40fd47e806c545a931b7e332780b92ff9e0a650110085",
+    "thief-hood-guild-display.glb": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46",
+    "thief-hood-guild-display.source.json": "fe3af363a3225fe21c7438aab3ca83027b29167a7e8c90b53221f9dbdb72f448",
+    "thief-hood-guild-icon.png": "634509284ef2cbdb801b945b70897ca2293b219103f5404487fe859feff65217",
+    "thief-hood-guild.glb": "142cc748d0f7f6dc8a998df2b3860e47d304d828e58862ef5e0c8fc1f462a726",
+    "thief-hood-guild.pieces.json": "e76c4f8b91beb8b069549466c4eb2661f5ab497f133f5b345a42b3b2a163705b",
+    "thief-hood-guild.source.json": "4c98f4250abfc75c64a1755980de05399e5d3a9fbd36b1bd753e3c421b641a6e",
+    "thief-hood-locksmith-display.glb": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483",
+    "thief-hood-locksmith-display.source.json": "afe75476716a7d7d90c0719d7288e22abe11becf9b483a0b3c0d2a1d54c3defd",
+    "thief-hood-locksmith-icon.png": "d6d57d2e5d35f55de0c2fbbc34ad6686a66c9e89a38111179c465ac34e542698",
+    "thief-hood-locksmith.glb": "0d5878d0542c6f4257d5d5f779bb2081ef5bc713f95a439fb42385f48336dc93",
+    "thief-hood-locksmith.pieces.json": "e76c4f8b91beb8b069549466c4eb2661f5ab497f133f5b345a42b3b2a163705b",
+    "thief-hood-locksmith.source.json": "3c80f411c878eb02f05747809e00b83309ad3e15a16942797429e47c1d8cee13",
+    "thief-hood-masterwork-display.glb": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148",
+    "thief-hood-masterwork-display.source.json": "d14386714cfe23ec72850efb09204210fb20fe6fd77633601e6e3d43e40efd48",
+    "thief-hood-masterwork-icon.png": "7217ec08c9111e8de7e0f8ef7184f1619bb05897ca7356506a2243ad2819244f",
+    "thief-hood-masterwork.glb": "6843bbcb3fbf69c7b5d941bd083c204d763c44f50ecb78fc4564c46f1a13aff9",
+    "thief-hood-masterwork.pieces.json": "2ae1c9c6de778e7e8efd57a31831d34a145d0ab6c5b2bf7aea828db883963bbb",
+    "thief-hood-masterwork.source.json": "bdb2bc549a9420b4e76329493c577360d94e11aaa4cdb17294547929b70a17b3",
+    "thief-hood-nightblade-display.glb": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff",
+    "thief-hood-nightblade-display.source.json": "679fed85258e84a5e7f4b930f173c20636394746c33d53d98ea93e394148bd1b",
+    "thief-hood-nightblade-icon.png": "7c0adb7fa52c7e8ac4402c4ba334ca25fa5d74bfedfb5b2cca4d5b62bd9f6d92",
+    "thief-hood-nightblade.glb": "304f8b807f97b518e4144079742813e7af937184ff212cea1b4f378473454ccf",
+    "thief-hood-nightblade.pieces.json": "6473aab7de2a15a40e77e7d1aecf72289c383905e947a87bf47271ec6b698747",
+    "thief-hood-nightblade.source.json": "8c7d13f6388b140ed6f068b3889730308563415721a0608048b8cd3c08ba9bf8",
+    "thief-hood-street-display.glb": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f",
+    "thief-hood-street-display.source.json": "f2072ad09fe7fee4a0ee84756f2a5329552440bec272eac837ad202f67b3638a",
+    "thief-hood-street-icon.png": "b95a4112edecddf2f6ac829b6d11813082519e460abdd92c0d2fd493306b1e7e",
+    "thief-hood-street.glb": "24f3c8b01dbba3c23d01b62d907511732e491bd75613f4855f17f9a58dadca3d",
+    "thief-hood-street.pieces.json": "ab40a5b7c19981f7ec7164f0275ac9e6a4a4ec67b0b5f5a747212f28178a337a",
+    "thief-hood-street.source.json": "481e55762df0ad86d528e6d2536f1a0d1b96aefd2b9ac40e64f3ffb4d10ee12e",
+    "thief-hood-wayfarer-display.glb": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477",
+    "thief-hood-wayfarer-display.source.json": "d15a5b9c01afd3e8c062ac9399551d2db2076963c36f930fd00b54f1a7ae47b3",
+    "thief-hood-wayfarer-icon.png": "488acf3843b55fbad05c82d35be0693ae09b88d00b1917eb696365ef9bd233a5",
+    "thief-hood-wayfarer.glb": "d2664f6fa4c6631b8da1c51fd393a1dc574566bcdfd8ceb0d1d299e7f10c1107",
+    "thief-hood-wayfarer.pieces.json": "27943f7b991fc21e0343faa46410375d2a659c106b39b8e202bdf945d0d674eb",
+    "thief-hood-wayfarer.source.json": "8c19bd32c8eec5944b01104a06364d15cf94549b95f94641fb62ea47edf76c14",
+    "thief-ranged-apparel-palette.png": "22b269ee44e89c0b821ece504967adae3ba44413f4cff9d353de8ef0c7b547eb",
+    "thief-apparel-palette.png": "52164cbcbe9daba87cb4115c6982ebb8cc8df977e313586eb2810db6ca2ab3a4"
+  },
+  "generators": {
+    "bow_parts.py": "0e913617c7454f67c9cfc5a1c6b0f5c2a6de2ff8c73579b9fb5322cfbaa208a7",
+    "build.py": "ac19e39a24d6c90a58227830dfe8f58512b83f80e9eaa2153b17363b420e65be",
+    "document_apparel.py": "58f5be752e1abe2525375cfaf462d520c2a52d67606b65e55e2d81722c43fbbb",
+    "finalize_apparel_review.py": "a92d398f733656b598bfa6e0abfaa1c56ea74165e042839c2136ece280edc3a1",
+    "inspect_bow_route.py": "211b8679f8045be085c0c23fbcff7f29744a34adcf5c46d5a5b517a0c9c9455f",
+    "redesign.py": "f1fda3f27fbfc3d7386d8b8b26792741385d9dc9fe025eb073016f9ebaa8167b",
+    "render.py": "9a05456dfdc31c592e65917db2742d9e267b909fe2c85c500f300b2f102f5970",
+    "render_sets.py": "85d7e320afe37fae5389a43d95b88c9d8edd038038b35a98a829b8cd03862fe0",
+    "validate.py": "759e8fd8aa37d017018a018209f6dac594ce2e9d68d6f69f24062f4b42ced553"
+  },
+  "apparelPalette": [
+    "343F49",
+    "644834",
+    "8B6B4D",
+    "4F6776",
+    "365759",
+    "9B865A",
+    "C3B798",
+    "63333B",
+    "5F6850",
+    "838D92",
+    "ABB8B7",
+    "282F38",
+    "333537",
+    "536773",
+    "453C35",
+    "77816B"
+  ]
+}

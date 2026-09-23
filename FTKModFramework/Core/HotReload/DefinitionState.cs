@@ -7,8 +7,8 @@ using FTKModFramework.Core.Data;
 
 namespace FTKModFramework.Core.HotReload
 {
-    // Closed Paladin slice. This snapshot is valid only while the coordinator excludes every
-    // consumer and starts each candidate from the pristine baseline. It is not general teardown.
+    // This snapshot is valid only while the coordinator excludes every consumer and starts each
+    // managed data candidate from the pristine baseline. It is not general teardown.
     internal sealed class DefinitionState
     {
         private static DefinitionState baseline;
@@ -175,7 +175,7 @@ namespace FTKModFramework.Core.HotReload
             private readonly object rows, index;
             internal TableState(GEDataArrayBase db)
             {
-                if (db == null) throw new InvalidOperationException("Missing Paladin database.");
+                if (db == null) throw new InvalidOperationException("Missing content database.");
                 this.db = db;
                 arrayField = Reflect.Field(db.GetType(), "m_Array");
                 indexField = Reflect.Field(db.GetType(), "m_Dictionary");

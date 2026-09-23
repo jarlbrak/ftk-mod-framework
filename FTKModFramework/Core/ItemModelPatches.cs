@@ -9,23 +9,33 @@ namespace FTKModFramework.Core
     internal static class ItemModelRegistry
     {
         private static Dictionary<int, EnemyRendererMesh[]> Models = new Dictionary<int, EnemyRendererMesh[]>();
+        private static Dictionary<int, EnemyRendererMesh[]> OffHands = new Dictionary<int, EnemyRendererMesh[]>();
         private static Dictionary<int, EnemyRendererMesh[]> Displays = new Dictionary<int, EnemyRendererMesh[]>();
         internal static IEnumerable<KeyValuePair<int, EnemyRendererMesh[]>> ReloadPlans(bool display)
         { return display ? Displays : Models; }
+        internal static IEnumerable<KeyValuePair<int, EnemyRendererMesh[]>> ReloadOffHandPlans()
+        { return OffHands; }
         internal static int ReloadModelCount { get { return Models.Count; } }
+        internal static int ReloadOffHandCount { get { return OffHands.Count; } }
         internal static int ReloadDisplayCount { get { return Displays.Count; } }
         internal static Action SuspendForReload()
         {
-            Dictionary<int, EnemyRendererMesh[]> models = Models, displays = Displays;
+            Dictionary<int, EnemyRendererMesh[]> models = Models, offHands = OffHands, displays = Displays;
             Models = new Dictionary<int, EnemyRendererMesh[]>();
+            OffHands = new Dictionary<int, EnemyRendererMesh[]>();
             Displays = new Dictionary<int, EnemyRendererMesh[]>();
-            return delegate { Models = models; Displays = displays; };
+            return delegate { Models = models; OffHands = offHands; Displays = displays; };
         }
         internal static void RegisterDisplay(int id, EnemyRendererMesh[] meshes) { Displays[id] = (EnemyRendererMesh[])meshes.Clone(); }
+        internal static void RegisterOffHand(int id, EnemyRendererMesh[] meshes) { OffHands[id] = (EnemyRendererMesh[])meshes.Clone(); }
         internal static void Register(int id, EnemyRendererMesh[] meshes) { Models[id] = (EnemyRendererMesh[])meshes.Clone(); }
         internal static void Apply(FTK_itembase.ID id, GameObject instance)
         {
             Apply(id, instance, Models, "item:");
+        }
+        internal static void ApplyOffHand(FTK_itembase.ID id, GameObject instance)
+        {
+            Apply(id, instance, OffHands, "item-offhand:");
         }
         internal static void ApplyDisplay(FTK_itembase.ID id, GameObject instance)
         {
@@ -49,7 +59,12 @@ namespace FTKModFramework.Core
     [HarmonyPatch(typeof(FTKHub), "CreateWeapon", new Type[] { typeof(FTK_itembase.ID) })]
     internal static class ItemWeaponModelPatch
     {
-        private static void Postfix(FTK_itembase.ID _weaponID, GameObject __result) { ItemModelRegistry.Apply(_weaponID, __result); }
+        private static void Postfix(FTK_itembase.ID _weaponID, GameObject __result)
+        {
+            ItemModelRegistry.Apply(_weaponID, __result);
+            Weapon weapon = __result == null ? null : __result.GetComponent<Weapon>();
+            if (weapon != null) ItemModelRegistry.ApplyOffHand(_weaponID, weapon.m_OffHand);
+        }
     }
     [HarmonyPatch(typeof(FTKHub), "CreateShield")]
     internal static class ItemShieldModelPatch

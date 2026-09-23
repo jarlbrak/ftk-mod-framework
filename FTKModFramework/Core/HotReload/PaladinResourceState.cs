@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace FTKModFramework.Core.HotReload
 {
-    // This is an allocation ledger, not a Unity isolation boundary. The coordinator must
+    // This is an allocation ledger for every managed data package, not a Unity isolation boundary. The coordinator must
     // quiesce native consumers before Suspend and restore their references before Rollback.
     internal static partial class PaladinResourceState
     {
@@ -48,6 +48,7 @@ namespace FTKModFramework.Core.HotReload
             result["paths"] = PackageModelPaths.ReloadPathCount;
             result["icons"] = PackageIcons.ReloadIconCount;
             result["itemModels"] = ItemModelRegistry.ReloadModelCount;
+            result["offHandModels"] = ItemModelRegistry.ReloadOffHandCount;
             result["displayModels"] = ItemModelRegistry.ReloadDisplayCount;
             result["apparelModels"] = ItemApparelRegistry.ReloadApparelCount;
             return result;

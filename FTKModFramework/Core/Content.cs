@@ -84,6 +84,17 @@ namespace FTKModFramework.Core
         /// <summary>Attach one or more proficiencies to a weapon in a single private prefab copy.</summary>
         public static bool AttachProficiencies(FTK_weaponStats2 weapon, params string[] proficiencyIds)
         {
+            return SetProficiencies(weapon, false, proficiencyIds);
+        }
+
+        /// <summary>Replace inherited actions on a private weapon prefab with the supplied proficiencies.</summary>
+        public static bool ReplaceProficiencies(FTK_weaponStats2 weapon, params string[] proficiencyIds)
+        {
+            return SetProficiencies(weapon, true, proficiencyIds);
+        }
+
+        private static bool SetProficiencies(FTK_weaponStats2 weapon, bool replace, string[] proficiencyIds)
+        {
             if (weapon == null) return false;
             GameObject src = weapon.m_Prefab;
             if (src == null)
@@ -111,9 +122,9 @@ namespace FTKModFramework.Core
 
             try
             {
-                int count = AddProfsToWeapon(w, proficiencyIds);
+                int count = AddProfsToWeapon(w, proficiencyIds, replace);
                 weapon.m_Prefab = copy;
-                Plugin.Log.LogInfo("AttachProficiencies: added " + proficiencyIds.Length + " to '" + weapon.m_ID +
+                Plugin.Log.LogInfo("AttachProficiencies: " + (replace ? "replaced with " : "added ") + proficiencyIds.Length + " on '" + weapon.m_ID +
                     "' (now " + count + " actions).");
                 return true;
             }
@@ -134,7 +145,7 @@ namespace FTKModFramework.Core
         /// <see cref="Weapon.SaveState"/> so it survives the game's re-Instantiate of the weapon.
         /// Returns the dictionary's new entry count.
         /// </summary>
-        private static int AddProfsToWeapon(Weapon w, string[] proficiencyIds)
+        private static int AddProfsToWeapon(Weapon w, string[] proficiencyIds, bool replace = false)
         {
             if (w.m_ProficiencyEffects == null)
                 w.m_ProficiencyEffects = new Dictionary<ProficiencyID, HitEffect>();
@@ -144,6 +155,8 @@ namespace FTKModFramework.Core
             foreach (HitEffect v in w.m_ProficiencyEffects.Values) { reuse = v; break; }
             if (reuse == null)
                 Plugin.Log.LogWarning("AddProfsToWeapon: weapon had no HitEffect to reuse; new actions may lack an impact visual.");
+
+            if (replace) w.m_ProficiencyEffects.Clear();
 
             foreach (string profId in proficiencyIds)
             {

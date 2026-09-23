@@ -211,6 +211,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "player-studio") Finish(id,PlayerStudio(command));
             else if(op == "world-input-state") Finish(id,WorldInputObservation(command));
             else if(op == "guardian-state") Finish(id,GuardianObservation(command));
+            else if(op == "thief-state") Finish(id,ThiefStateProbe(command));
             else if(op == "guardian-incapacity-fixture") Finish(id,GuardianIncapacityFixture(command));
             else if(op == "guardian-legendary-fixture") Finish(id,GuardianLegendaryFixture(command));
             else if(op == "fixture-state") Finish(id,FixtureState());

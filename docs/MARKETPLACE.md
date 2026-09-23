@@ -16,10 +16,10 @@ loaded in the current adventure. You can cancel a prepared change before it
 takes effect.
 
 The optional [title-screen activation mode](HOT-RELOAD.md) supports
-same-process changes for Paladin or an empty managed selection on the audited
-macOS build. It must be enabled before launch and used before adventure setup,
-save loading or Lore Store entry. It uses separate save libraries and does not
-support multiplayer. Other platforms and mod sets use next-launch activation.
+same-process changes for managed data-package selections on the audited macOS
+build. It must be enabled before launch and used before adventure setup, save
+loading or Lore Store entry. It uses separate save libraries and does not
+support multiplayer. Other platforms use next-launch activation.
 
 Existing saves may depend on their exact framework and mod versions. Start a new
 run when changing content, or restore the matching set for an existing run.

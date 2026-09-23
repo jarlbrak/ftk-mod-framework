@@ -1,0 +1,1247 @@
+{
+  "schema": "ftkmf.thief-paired-progression.v1",
+  "generator": "build.py",
+  "generatorSha256": "7723f09ac4a318d63204a438541295ccf690682cc28a443978d7d1b40bc0491c",
+  "dependencies": {
+    "art-experiments/thief/build.py": "42cc509c121d62495a9e78be87acea0d8645828cea89a31f8e6135292b485bf3",
+    "art-experiments/thief/native-route.json": "22203d9c3fcdd6dfb828e73216b9fb89a9bff1e58b9d6ac81634cddf0c9eaf12",
+    "tools/ai-model-pipeline/export_ftk_glb.py": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b",
+    "art-experiments/paladin-equipment/render_icons.py": "ee664ca5df1834037cb2ebff9c7e4370629f37b553b0d2d584a62b8591a66b9e"
+  },
+  "provenance": "Original authored geometry, normals, UVs, palette and source-rendered icons. No native surfaces, extracted textures or external artwork are used. Native metadata supplies renderer paths and local transforms only.",
+  "status": "Offline art assets. No live fit, animation, card framing or integration acceptance claimed.",
+  "assets": [
+    {
+      "id": "thief_twins_burglar",
+      "name": "Windowfangs",
+      "key": "thief-twins-burglar",
+      "template": "dualKnife",
+      "path": ".",
+      "offHandPath": ".",
+      "fragments": [
+        {
+          "key": "thief-twins-burglar-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-burglar-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-burglar-display",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-burglar-display-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "palette": "thief-twins-burglar-palette.png",
+      "icon": "thief-twins-burglar-icon.png"
+    },
+    {
+      "id": "thief_twins_guild",
+      "name": "Guild Twin Daggers",
+      "key": "thief-twins-guild",
+      "template": "dualKnife",
+      "path": ".",
+      "offHandPath": ".",
+      "fragments": [
+        {
+          "key": "thief-twins-guild-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-guild-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-guild-display",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-guild-display-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "palette": "thief-twins-guild-palette.png",
+      "icon": "thief-twins-guild-icon.png"
+    },
+    {
+      "id": "thief_twins_masterwork",
+      "name": "Velvet Fangs",
+      "key": "thief-twins-masterwork",
+      "template": "dualKnife",
+      "path": ".",
+      "offHandPath": ".",
+      "fragments": [
+        {
+          "key": "thief-twins-masterwork-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-masterwork-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-masterwork-display",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-masterwork-display-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "palette": "thief-twins-masterwork-palette.png",
+      "icon": "thief-twins-masterwork-icon.png"
+    },
+    {
+      "id": "thief_twins_locksmith",
+      "name": "Locksmith's Picks",
+      "key": "thief-twins-locksmith",
+      "template": "dualKnife",
+      "path": ".",
+      "offHandPath": ".",
+      "fragments": [
+        {
+          "key": "thief-twins-locksmith-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-locksmith-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-locksmith-display",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-locksmith-display-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "palette": "thief-twins-locksmith-palette.png",
+      "icon": "thief-twins-locksmith-icon.png"
+    },
+    {
+      "id": "thief_twins_nightblade",
+      "name": "Nightglass Twins",
+      "key": "thief-twins-nightblade",
+      "template": "dualKnife",
+      "path": ".",
+      "offHandPath": ".",
+      "fragments": [
+        {
+          "key": "thief-twins-nightblade-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-nightblade-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-nightblade-display",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-nightblade-display-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "palette": "thief-twins-nightblade-palette.png",
+      "icon": "thief-twins-nightblade-icon.png"
+    },
+    {
+      "id": "thief_twins_wayfarer",
+      "name": "Trailbreakers",
+      "key": "thief-twins-wayfarer",
+      "template": "dualKnife",
+      "path": ".",
+      "offHandPath": ".",
+      "fragments": [
+        {
+          "key": "thief-twins-wayfarer-fragment-1",
+          "path": "Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              -0.0,
+              0.0
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              0.3969861567020416
+            ],
+            [
+              0.0,
+              -0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-wayfarer-fragment-2",
+          "path": "Break/Break",
+          "fragmentToWeaponLocal": [
+            [
+              1.0,
+              -3.725290298461914e-09,
+              0.0,
+              0.0030000025872141123
+            ],
+            [
+              3.725290298461914e-09,
+              1.0,
+              0.0,
+              -0.32101383805274963
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "displays": [
+        {
+          "key": "thief-twins-wayfarer-display",
+          "path": "dualKnife",
+          "rendererToDisplayRoot": [
+            [
+              0.9135921001434326,
+              -0.94379061460495,
+              0.5781497955322266,
+              0.0949999988079071
+            ],
+            [
+              0.7975134253501892,
+              1.081160306930542,
+              0.5046911239624023,
+              -0.29899999499320984
+            ],
+            [
+              -0.7674440145492554,
+              2.8569874643835647e-07,
+              1.2127151489257812,
+              0.019999995827674866
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              0.16274048388004303,
+              -0.11395201832056046,
+              -0.9800665974617004,
+              -0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              -0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "key": "thief-twins-wayfarer-display-offhand",
+          "path": "offHandWeapon",
+          "rendererToDisplayRoot": [
+            [
+              0.9344821572303772,
+              0.9158341288566589,
+              -0.5896114110946655,
+              -0.07199999690055847
+            ],
+            [
+              0.7822676301002502,
+              -1.1048853397369385,
+              -0.4763779640197754,
+              0.45500001311302185
+            ],
+            [
+              -0.7579262852668762,
+              -0.011195485480129719,
+              -1.218636393547058,
+              0.00800000037997961
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "authoredBladeToDisplayRoot": [
+            [
+              -0.16274039447307587,
+              0.11395213752985,
+              -0.9800665974617004,
+              0.14000000059604645
+            ],
+            [
+              -0.8028236031532288,
+              0.5621431469917297,
+              0.19866937398910522,
+              -0.1899999976158142
+            ],
+            [
+              0.5735764503479004,
+              0.8191521167755127,
+              7.549790126404332e-08,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "palette": "thief-twins-wayfarer-palette.png",
+      "icon": "thief-twins-wayfarer-icon.png"
+    }
+  ],
+  "files": {
+    "thief-twins-burglar-display-offhand.glb": "138620bba4d7ff0e993599cad537527052d96952bcde5cf51fe4f932974dbec0",
+    "thief-twins-burglar-display-offhand.pieces.json": "4783d51219751083488feb3fe445fce4b9bb4cbcba070beb397eab8d62506db6",
+    "thief-twins-burglar-display-offhand.source.json": "130f5df263e04b0f7959059b52921d96adc48da9d6848e542c67082a4335add2",
+    "thief-twins-burglar-display.glb": "9899e858bdd1d8be202b367150c98f0e8d91db9e29e3647b25ffee6d52465b98",
+    "thief-twins-burglar-display.pieces.json": "4783d51219751083488feb3fe445fce4b9bb4cbcba070beb397eab8d62506db6",
+    "thief-twins-burglar-display.source.json": "13df4e04e360097430f033739f6ab140c859a8dc04106132df1701a6206f51cb",
+    "thief-twins-burglar-fragment-1.glb": "5b1ea25aa88f15e70390e1c70c36a16e889d05e494f40b29c95f58c6d008230b",
+    "thief-twins-burglar-fragment-1.pieces.json": "053f7583386fe4690d4a0cff19cdb47f7e8b1a1c8d82a4a75b6f75887585f780",
+    "thief-twins-burglar-fragment-1.source.json": "529d257a01a478425ad7aa13e5a90be2ed92066841b80548cff0e72f06805423",
+    "thief-twins-burglar-fragment-2.glb": "65d2aa7c4357ef9763d62f45504cb9761757a79ba86bbf71d33dd4184eddd3fb",
+    "thief-twins-burglar-fragment-2.pieces.json": "779a014a59235b2cd8a5a5e5cbe380a8cc9f27dae93d6b8f345ead647fc54995",
+    "thief-twins-burglar-fragment-2.source.json": "4c9ac7e2c9132c58c8e390235892e3dbbbdfa196ed6cf4f88ff38e85a6dfc570",
+    "thief-twins-burglar-icon.png": "0bac34267f88bcbd285614a7b8efb911bf86233e309af94a111194d57bbf009b",
+    "thief-twins-burglar-icon.source.json": "2d770b49817924f0a622f35319c0cadeb1440ef47f2d55ec724c93c578971044",
+    "thief-twins-burglar-palette.png": "c2ec73f0847c7da08911d43aaeb6383a956add2d9c2a735ebde6ff6abe2ace6f",
+    "thief-twins-burglar-preview.png": "75ed34683a08ef853fbe761a349198e5e79970ffb8c93f9856156dd1f0f2038e",
+    "thief-twins-burglar.glb": "a86a48e4ad346761efee2c4c79ac629fd6a0b38cf21fdc6059f95e6215d372bf",
+    "thief-twins-burglar.pieces.json": "4783d51219751083488feb3fe445fce4b9bb4cbcba070beb397eab8d62506db6",
+    "thief-twins-burglar.source.json": "a6bb400e507b322f96626667e8b4910198578f7af78474566c8285e2af7bb47a",
+    "thief-twins-guild-display-offhand.glb": "fb1bc325b42cb45d1ab42afec004116d29b3b774fd021dc7c46f72d0094609d8",
+    "thief-twins-guild-display-offhand.pieces.json": "4ba642b2330b93e8382fd99b0ab6eb43caa3bb562f51464491e2246aaf5268c3",
+    "thief-twins-guild-display-offhand.source.json": "28589cfd6a0934d562c16cd10027d63684d44aaa79e59c0dc8d799184c0be90f",
+    "thief-twins-guild-display.glb": "8130caa64f9af05357047df259fe4aaf19273285a5fb89deb31efcbc50c15849",
+    "thief-twins-guild-display.pieces.json": "4ba642b2330b93e8382fd99b0ab6eb43caa3bb562f51464491e2246aaf5268c3",
+    "thief-twins-guild-display.source.json": "142ee00bd89dfb8e292fb64424ca547d80f1f583a068628168da82c0ef861fb6",
+    "thief-twins-guild-fragment-1.glb": "4aa09119c89bcfd1de13141ef94bf042860396e84f66310550b87d6e22ddf945",
+    "thief-twins-guild-fragment-1.pieces.json": "fc09aa9f6e696d7bb18dcd2a2eeba64a2a7f62e2ceef894f6f411e0c7a0d5e9d",
+    "thief-twins-guild-fragment-1.source.json": "21c3a6b258583d55d433c2505f754f857cd092cac411f4bca7a2dbe55fd85d64",
+    "thief-twins-guild-fragment-2.glb": "147ca4a49d0a4ba17eafd50ee9b1dc8805da3f1ea4af2e554ca9bf3e81f46f54",
+    "thief-twins-guild-fragment-2.pieces.json": "c04c874da299953311b0664e93159dcc07c5e27a73b1492010191fd9f69d71fe",
+    "thief-twins-guild-fragment-2.source.json": "5e7a10580b7ec67346fceb415cb25071ce120352d8801861ab8b807f653f5171",
+    "thief-twins-guild-icon.png": "44c5749ecd44051329fc527ee144689be13507a3450e9107fc2e0cbbc31ef162",
+    "thief-twins-guild-icon.source.json": "e1aa9899977a17b6e3643ee89e54233544a032130876e7004026dfebc9fe093f",
+    "thief-twins-guild-palette.png": "5f99f2a0bb86b89084c615a2c13bb809e046e8b425df9853d14801a87eeaea87",
+    "thief-twins-guild-preview.png": "bc3087608804b27de7dd46bca8b487e4b0c13502b9daa1ab391f0c941440795c",
+    "thief-twins-guild.glb": "0d6f1b037b802cafd21f6020745c361960b5b1bf944da5f5b84be5467fa81313",
+    "thief-twins-guild.pieces.json": "4ba642b2330b93e8382fd99b0ab6eb43caa3bb562f51464491e2246aaf5268c3",
+    "thief-twins-guild.source.json": "5a53886c3b2bd15e63590d4048f622d57551ac8e44e3ee9b5b271bf2f9a8a198",
+    "thief-twins-locksmith-display-offhand.glb": "4f18a07272c1142dcaf4707c4cd6c3e597ad72ce2d896f7af2fc64b6d7096d3e",
+    "thief-twins-locksmith-display-offhand.pieces.json": "9de2ffb6ad8ee1c3b1532f48b400f94ca644d895c101ec453ab8df63fbc6daae",
+    "thief-twins-locksmith-display-offhand.source.json": "21bbe54c7b229ee7010845deddae241a71790696362e3371be991372193b105c",
+    "thief-twins-locksmith-display.glb": "5a61ae3a85f7a80829f1cdb7565d4ece52e4344884966874b39e180138a114a4",
+    "thief-twins-locksmith-display.pieces.json": "9de2ffb6ad8ee1c3b1532f48b400f94ca644d895c101ec453ab8df63fbc6daae",
+    "thief-twins-locksmith-display.source.json": "e150edd5167e9d5568ac5581651feb43f033cb242b05ce74f75f4f3e16af5e1b",
+    "thief-twins-locksmith-fragment-1.glb": "6a20a97ce9b993537621909aa30c011f0156ff41fa9bda1aed4f4491515fdce7",
+    "thief-twins-locksmith-fragment-1.pieces.json": "1866e53b1ee3f0b1935ad2e9068596eee3e69bd72f615a3842ad44c3bc280760",
+    "thief-twins-locksmith-fragment-1.source.json": "d0f193fcdbb7bb53c56ad8fd44a36b13da5204dd8a2da2fdf7289d8fa5cb1f62",
+    "thief-twins-locksmith-fragment-2.glb": "bbdc7ebefe4686a91508271a8cf5c53ca8658c9fd96fb9df9d88b6d1126f1ec1",
+    "thief-twins-locksmith-fragment-2.pieces.json": "ba3165416a67af6bde8c6996ae68eadec5e21cf5a66a4d541cd5009ba600a692",
+    "thief-twins-locksmith-fragment-2.source.json": "c5016b77b038195cd582491e1ef835c65b68005e95a2c2e04646560b38d77795",
+    "thief-twins-locksmith-icon.png": "035661e5d07940ac1a898eead31191ba2eea54b2756a473757616140b577f742",
+    "thief-twins-locksmith-icon.source.json": "5f81150e698885de2cae6e9e530bd1baa56730f7aa54158aa47739b9f5d477aa",
+    "thief-twins-locksmith-palette.png": "1d08dcf2f48ebfbbc65c22cb3f3015aabdff8fe6de2bed165357b921db91d857",
+    "thief-twins-locksmith-preview.png": "00fd6ceadf0ebe345ff25eabed69954ae3a25a8f7594ec0522ed432c0812dbb1",
+    "thief-twins-locksmith.glb": "89c17691a0e1972656cd7a73d1e35a0d53e880ef9ac09e6684d08bb22877c9bd",
+    "thief-twins-locksmith.pieces.json": "9de2ffb6ad8ee1c3b1532f48b400f94ca644d895c101ec453ab8df63fbc6daae",
+    "thief-twins-locksmith.source.json": "dc244e4747d6e6086afb99631c9e7cacc3be91cdfafa51858629dc5eb1e262d5",
+    "thief-twins-masterwork-display-offhand.glb": "6fee98ef0506d66df115b7e4342aef5c06aa383adac43e93e02752298fb19b4f",
+    "thief-twins-masterwork-display-offhand.pieces.json": "db242d9365962ac34c6778f6ae3d0cd01a4e19c44b843d8e59465ab3e6e374ef",
+    "thief-twins-masterwork-display-offhand.source.json": "b07b78d982a05148afd4525f743ff40001d4bd16acd9b4750f35c5835e4772b5",
+    "thief-twins-masterwork-display.glb": "5cd69fd174fd40555d3ad9c7ebe7b8704431876d5d9cb7d683538ed88fcae652",
+    "thief-twins-masterwork-display.pieces.json": "db242d9365962ac34c6778f6ae3d0cd01a4e19c44b843d8e59465ab3e6e374ef",
+    "thief-twins-masterwork-display.source.json": "db039ae2a053023265f77b392d34dcec324f9dc93df541b47d2f4d254fa9d136",
+    "thief-twins-masterwork-fragment-1.glb": "8fde00c112f58fff064026b0c1bbcbee3c71070040dd9e45a46889fd830f6a97",
+    "thief-twins-masterwork-fragment-1.pieces.json": "6a1b083e7cf247c6e011a21dea61a1b35408ae40e1109018630a2305f92d2312",
+    "thief-twins-masterwork-fragment-1.source.json": "0c1bc6336c711bab04644bec0f2146b320da29a1562e61503a25b1cd18f58b11",
+    "thief-twins-masterwork-fragment-2.glb": "78befaface811f1fded70771160a836637206e503ca7610792133f68acd12f0b",
+    "thief-twins-masterwork-fragment-2.pieces.json": "e6b28a98769dd5bd065378917cd0df66afdad2e1df418c3b95fee278e6bd5bf8",
+    "thief-twins-masterwork-fragment-2.source.json": "04ed9afbb79f332a9dce7b30e5e3b925036a503b46029ff1df7833ec51fecadc",
+    "thief-twins-masterwork-icon.png": "781719f96966b7f72417e1adcce919ee054a243a8e50bfa7e1e031ceb1d02538",
+    "thief-twins-masterwork-icon.source.json": "60f357f63df1718d2f12d02395d03ef9c7ab1863c8c9e0d61daaf4da464f4448",
+    "thief-twins-masterwork-palette.png": "36613d50f6b461c3ae9ef12f54664f9821cb11a885ff4ac8030252a995585e86",
+    "thief-twins-masterwork-preview.png": "f57599f30cfc37f655c323da92d36e3303d0e82899f15b581553956db8c94606",
+    "thief-twins-masterwork.glb": "d1ba22caa3a4edae5781e3a8b9aa3f249389c0dcf3112339672f31fda3070c26",
+    "thief-twins-masterwork.pieces.json": "db242d9365962ac34c6778f6ae3d0cd01a4e19c44b843d8e59465ab3e6e374ef",
+    "thief-twins-masterwork.source.json": "6cfedbd20aaf7ce2004cce727b94768a97d9859326426aa04bdce55e813b8040",
+    "thief-twins-nightblade-display-offhand.glb": "d41f43bb408ea60f4f9c008f7b554a0bec0780ceb8e4fa396df17d9a388bb2ec",
+    "thief-twins-nightblade-display-offhand.pieces.json": "d3c986441c33e75e44d465e385ae13d41483b79b53f03198738001026388ce07",
+    "thief-twins-nightblade-display-offhand.source.json": "7666409506d18a4a08ad363de4d2233f36656a0dd6de5b5653676a32c78fbf6b",
+    "thief-twins-nightblade-display.glb": "5ac25a5cba799a6cf8c5c64df7b8ea0835d958e4d7150e3839831a8d42cf0ced",
+    "thief-twins-nightblade-display.pieces.json": "d3c986441c33e75e44d465e385ae13d41483b79b53f03198738001026388ce07",
+    "thief-twins-nightblade-display.source.json": "20a0c936b9928dc5c599d6a60374c095705d22d4a80cac03b1d3ee51a8e940b5",
+    "thief-twins-nightblade-fragment-1.glb": "e915e4917ca22d8d705175264400cb9c50797c749d5cbdc186d4a52de601f048",
+    "thief-twins-nightblade-fragment-1.pieces.json": "e5884c7c239f1371624d6a1e0dfe7cc5e090e288c2e964528ab232a98cb8e251",
+    "thief-twins-nightblade-fragment-1.source.json": "cd3b0d1f12324340d16cf17a3efe0b16351b01b58cfdaa3e8c6bd6bf41c1dab5",
+    "thief-twins-nightblade-fragment-2.glb": "ee7008879bc78f21280fd2459506304f21e31893187fa14733ba2050725405b8",
+    "thief-twins-nightblade-fragment-2.pieces.json": "2b30314c55cf914ebb9d3aca80edc37652adb6c034224af54cd0345280df94c8",
+    "thief-twins-nightblade-fragment-2.source.json": "ae094d7a0b7a8a7e5d5cdd2e14ccdc0acfead181c3711c9bf7e3e2f0f0c900a9",
+    "thief-twins-nightblade-icon.png": "336240012cf37f2adb8b4bd2e2eb6a559522e5ca44701e99c37d1a623c8c8092",
+    "thief-twins-nightblade-icon.source.json": "c044478aaabdd84bb556ca580807474a86da62a4967cd295d4a4a5a4cfdd6e93",
+    "thief-twins-nightblade-palette.png": "dc50599da4b05ae078c3e02b2a3c0bea198578fe718720f31f7c82c9a1a84ab1",
+    "thief-twins-nightblade-preview.png": "ca6e2afc739c4465e8c7451f5d2c8acdfabde18ec2226fc9c5c10620129511ec",
+    "thief-twins-nightblade.glb": "ff059158157940befd5f073eae56da3fcdc0b71f56ce2f4b1cac17a9a3f3e717",
+    "thief-twins-nightblade.pieces.json": "d3c986441c33e75e44d465e385ae13d41483b79b53f03198738001026388ce07",
+    "thief-twins-nightblade.source.json": "3577e561770cd97601297c26263ce72a5d78191077fe3b7ac73e93226560eb1a",
+    "thief-twins-wayfarer-display-offhand.glb": "e79478e27938d505907578952dd7ad1bdb1d58252716961014a70f0c04cf5c60",
+    "thief-twins-wayfarer-display-offhand.pieces.json": "455c0d9e752e133108abdd8b85e2125df9fb24113b31279d14451401c22d3505",
+    "thief-twins-wayfarer-display-offhand.source.json": "f7a0746d19d2d5e4bf06a643a3f8ed489b09abef1113fdbadd5a1529f5bec251",
+    "thief-twins-wayfarer-display.glb": "2c622a90f93adba807e8f5e764e4b9822099817a9a0f73e6b1f92c51e6920376",
+    "thief-twins-wayfarer-display.pieces.json": "455c0d9e752e133108abdd8b85e2125df9fb24113b31279d14451401c22d3505",
+    "thief-twins-wayfarer-display.source.json": "8b472a157091a1cea0c84229f060eb83478f9bacd89b8513179e74d63885d63a",
+    "thief-twins-wayfarer-fragment-1.glb": "c765b1f4e16e08f146bab170574767112798ecb58cce73138cc2fb3878e3d236",
+    "thief-twins-wayfarer-fragment-1.pieces.json": "8bdb62d5c2a2e0fedb67b5c859f7c35f5fa24559b476cb64538779b7894dd3ce",
+    "thief-twins-wayfarer-fragment-1.source.json": "4a65b1ec1ed6e7a03c6f3262d9cea14a8e53bad5be691bd76831e283ab62124c",
+    "thief-twins-wayfarer-fragment-2.glb": "885872130322155f928529b241b3094d7d785323d893f6f86a0c6073d7d30452",
+    "thief-twins-wayfarer-fragment-2.pieces.json": "cdadeea0c83f3d54eb8a23439138d63df919b52c882fe27acd68d0ccb244aff0",
+    "thief-twins-wayfarer-fragment-2.source.json": "08e5f2e62d2132a7af99a1face9e8a79cb664697d08976932e6db8254f75e75a",
+    "thief-twins-wayfarer-icon.png": "1edbbd406f133acf020a2f5824b95cd4f65ac3348c3d3b3cec2f9a637ca76989",
+    "thief-twins-wayfarer-icon.source.json": "df52b2eb74e9206c81b5683b3a17e5566ac86c0cedfbcbaa74a4f7010f352da4",
+    "thief-twins-wayfarer-palette.png": "55beac6c47eee174a26e8be3a68ab894f0e95537f3fb2e6c13a42273e42a0efc",
+    "thief-twins-wayfarer-preview.png": "b102b50a5387c0f6703c3bd5f761d43266ab66db5658fc2c9adf7cab49e897ea",
+    "thief-twins-wayfarer.glb": "a407958e4607bfd9977359ca321b170fbeff67dec357bdbb9fe836822f1bbed8",
+    "thief-twins-wayfarer.pieces.json": "455c0d9e752e133108abdd8b85e2125df9fb24113b31279d14451401c22d3505",
+    "thief-twins-wayfarer.source.json": "68a9e6b9850cccf597ae3de153cc0c6cb47199942834573b32af8d4f55e6f4a6"
+  }
+}

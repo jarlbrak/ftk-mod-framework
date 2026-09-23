@@ -114,6 +114,13 @@ internal static class Program
         Check(ExplicitEnemyMeshSwap.Calls == 1 && ExplicitEnemyMeshSwap.LastRoot == pack && ExplicitEnemyMeshSwap.Last[0].GlbFileName == "display.glb" && ExplicitEnemyMeshSwap.Last[0].RendererPath == "child", "loot preview routes exact display snapshot independently of equipped mapping");
         ItemModelRegistry.Apply(FTK_itembase.ID.Armor, pack);
         Check(ExplicitEnemyMeshSwap.Last[0].GlbFileName == "loot.glb" && ExplicitEnemyMeshSwap.Last[0].RendererPath == ".", "equipped mapping remains independent of display mapping");
+        var offHand = new GameObject(".");
+        ItemModelRegistry.RegisterOffHand((int)FTK_itembase.ID.Armor, new[] { EnemyRendererMesh.ForStaticRenderer(".", "offhand.glb", "offhand.png", true) });
+        ExplicitEnemyMeshSwap.Calls = 0;
+        ItemModelRegistry.ApplyOffHand(FTK_itembase.ID.Unregistered, offHand);
+        Check(ExplicitEnemyMeshSwap.Calls == 0, "unregistered off-hand mapping leaves native paired weapons unchanged");
+        ItemModelRegistry.ApplyOffHand(FTK_itembase.ID.Armor, offHand);
+        Check(ExplicitEnemyMeshSwap.Calls == 1 && ExplicitEnemyMeshSwap.LastRoot == offHand && ExplicitEnemyMeshSwap.Last[0].GlbFileName == "offhand.glb", "paired off-hand mapping applies only to the separately owned left-hand root");
         FTK_characterModifier.ID modifierId = FTK_characterModifier.ID.None;
         Check(ItemModifierEnumPatch.Prefix("vanilla", ref modifierId) && modifierId == FTK_characterModifier.ID.None, "unregistered modifier keeps native enum lookup");
         Check(ItemModifierEnumPatch.Prefix(null, ref modifierId), "null modifier keeps native handling");

@@ -106,8 +106,7 @@ namespace FTKModFramework.Core.Data
                 foreach (PendingEntry entry in pending)
                 {
                     string kind = (entry.Entry.Kind ?? "").ToLowerInvariant();
-                    if (entry.ModGuid != "com.ftkmf.paladin" ||
-                        (kind != "class" && kind != "item" && kind != "weapon" && kind != "proficiency") ||
+                    if (!CandidateKindSupported(kind) ||
                         !string.IsNullOrEmpty(entry.Entry.Behavior) || entry.Entry.PlayerModels != null)
                         report.Error("Unsupported hot activation entry: " + entry.ModGuid + "/" + entry.Entry.Id);
                 }
@@ -170,16 +169,16 @@ namespace FTKModFramework.Core.Data
             int expected = managed == null || managed.Packages == null ? 0 : managed.Packages.Count;
             if (mods.Count != expected) report.Error("Candidate discovery does not match its package lock.");
             HashSet<string> ids = new HashSet<string>(StringComparer.Ordinal);
+            HashSet<string> packageGuids = new HashSet<string>(StringComparer.Ordinal);
             foreach (DiscoveredMod mod in mods)
             {
                 Marketplace.PackageDescriptor package = FindManaged(managed, mod.Manifest.ModGuid);
-                if (mod.Manifest.ModGuid != "com.ftkmf.paladin" || package == null ||
+                if (!packageGuids.Add(mod.Manifest.ModGuid) || package == null ||
                     managed == null || !mod.Manifest.FolderPath.StartsWith(managed.ContentRoot +
                         System.IO.Path.DirectorySeparatorChar, StringComparison.Ordinal) ||
                     mod.Manifest.Version != package.Version || mod.Manifest.CompatibilityReason != null ||
                     !string.IsNullOrEmpty(mod.Manifest.BehaviorDll))
                     report.Error("Candidate contains an unsupported or mismatched package: " + mod.Manifest.ModGuid);
-                Dictionary<string, int> counts = new Dictionary<string, int>(StringComparer.Ordinal);
                 // Inspect disabled packages too. Enablement must not hide unsupported capabilities.
                 foreach (string path in mod.ContentFilePaths)
                 {
@@ -189,9 +188,6 @@ namespace FTKModFramework.Core.Data
                     {
                         if (entry == null) { report.Error("Null candidate entry."); continue; }
                         string kind = (entry.Kind ?? "").ToLowerInvariant();
-                        int priorCount;
-                        counts.TryGetValue(kind, out priorCount);
-                        counts[kind] = priorCount + 1;
                         Type tableType = kind == "class" ? typeof(FTK_playerGameStartDB) :
                             kind == "item" ? typeof(FTK_itemsDB) : kind == "weapon" ? typeof(FTK_weaponStats2DB) :
                             kind == "proficiency" ? typeof(FTK_proficiencyTableDB) : null;
@@ -199,30 +195,32 @@ namespace FTKModFramework.Core.Data
                             foreach (object native in (Array)Reflect.GetField(TableManager.Instance.Get(tableType), "m_Array"))
                                 if (string.Equals((string)Reflect.GetField(native, "m_ID"), entry.Id, StringComparison.OrdinalIgnoreCase))
                                     report.Error("Candidate shadows a baseline row: " + entry.Id);
-                        bool supportedTemplate = kind == "class" ? entry.Template == "blacksmith" :
-                            kind == "proficiency" ? entry.Template == "musicArmorDown" :
-                            kind == "weapon" ? entry.Template == "bluntSmithHammer" || entry.Template == "bluntWarHammer" :
-                            kind == "item" && (entry.Template == "shieldblacksmith" || entry.Template == "armorHeavy1" ||
-                                entry.Template == "bootsHeavy3" || entry.Template == "helmetHeavy1" ||
-                                entry.Template == "trinketDefense1" || entry.Template == "amuletVitality1");
-                        if (!supportedTemplate) report.Error("Unsupported hot activation template: " + entry.Template);
-                        if (string.IsNullOrEmpty(entry.Id) || !ids.Add(entry.Id) ||
-                            (kind == "class" ? entry.Id != "paladin" : !entry.Id.StartsWith("paladin_", StringComparison.Ordinal)) ||
-                            (kind != "class" && kind != "item" && kind != "weapon" && kind != "proficiency") ||
+                        if (!CandidateTemplateSupported(kind, entry.Template))
+                            report.Error("Unsupported hot activation template: " + entry.Template);
+                        if (string.IsNullOrEmpty(entry.Id) || !ids.Add(mod.Manifest.ModGuid + "/" + entry.Id) ||
+                            !CandidateKindSupported(kind) ||
                             !string.IsNullOrEmpty(entry.Behavior) || entry.PlayerModels != null)
                             report.Error("Unsupported or duplicate candidate entry: " + entry.Id);
                     }
                 }
-                string[] kinds = { "class", "proficiency", "weapon", "item" };
-                int[] required = { 1, 2, 14, 37 };
-                for (int i = 0; i < kinds.Length; i++)
-                {
-                    int actual;
-                    if (!counts.TryGetValue(kinds[i], out actual) || actual != required[i])
-                        report.Error("Paladin requires exactly " + required[i] + " " + kinds[i] + " entries.");
-                }
             }
             RequireComplete(report);
+        }
+
+        private static bool CandidateKindSupported(string kind)
+        {
+            return kind == "class" || kind == "item" || kind == "weapon" || kind == "proficiency";
+        }
+
+        private static bool CandidateTemplateSupported(string kind, string template)
+        {
+            if (string.IsNullOrEmpty(template)) return false;
+            FTK_playerGameStart.ID classId;
+            FTK_itembase.ID itemId;
+            FTK_proficiencyTable.ID proficiencyId;
+            return kind == "class" ? TryParseEnum(template, out classId) :
+                kind == "item" || kind == "weapon" ? TryParseEnum(template, out itemId) :
+                kind == "proficiency" && TryParseEnum(template, out proficiencyId);
         }
 
         private static ContentFile ParseCandidateFile(string path, ValidationReport report)
@@ -500,6 +498,17 @@ namespace FTKModFramework.Core.Data
             {
                 if (c.Entry.Guardian && (c.Kind != "class" || !Content.AddGuardian((FTK_playerGameStart)c.Row)))
                     throw new ArgumentException("guardian requires a registered custom class");
+                if (c.Entry.Opportunist && (c.Kind != "class" || !Content.AddOpportunist((FTK_playerGameStart)c.Row)))
+                    throw new ArgumentException("opportunist requires a registered custom class");
+                if (!string.IsNullOrEmpty(c.Entry.PrecisionWeapon) &&
+                    (c.Kind != "weapon" || !Content.SetPrecisionWeapon((FTK_weaponStats2)c.Row, c.Entry.PrecisionWeapon)))
+                    throw new ArgumentException("precisionWeapon requires a registered physical paired weapon or bow");
+                if (!string.IsNullOrEmpty(c.Entry.PrecisionAction) &&
+                    (c.Kind != "proficiency" || !Content.SetPrecisionAction((FTK_proficiencyTable)c.Row, c.Entry.PrecisionAction)))
+                    throw new ArgumentException("precisionAction requires a registered direct damage proficiency");
+                if (!string.IsNullOrEmpty(c.Entry.ThiefArtifact) &&
+                    (c.Kind != "weapon" || !Content.SetThiefArtifact((FTK_weaponStats2)c.Row, c.Entry.ThiefArtifact)))
+                    throw new ArgumentException("thiefArtifact requires a registered physical precision weapon");
                 if (c.Entry.GuardianBonuses != null)
                 {
                     if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("guardianBonuses requires equipment");
@@ -521,7 +530,9 @@ namespace FTKModFramework.Core.Data
                     else if (c.Kind == "proficiency") ((FTK_proficiencyTable)c.Row).m_BattleButton = icon;
                     else if (c.Kind == "class" && c.Entry.Guardian)
                         Content.Db<FTK_proficiencyTableDB>().GetEntry(GuardianRuntime.ActionId).m_BattleButton = icon;
-                    else throw new ArgumentException("icon requires equipment, a proficiency or guardian class");
+                    else if (c.Kind == "class" && c.Entry.Opportunist)
+                        Content.Db<FTK_proficiencyTableDB>().GetEntry(ThiefRuntime.SlipAwayId).m_BattleButton = icon;
+                    else throw new ArgumentException("icon requires equipment, a proficiency or supported class capability");
                 }
                 if (c.Entry.ApparelModels != null)
                 {
@@ -542,14 +553,10 @@ namespace FTKModFramework.Core.Data
                 {
                     if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("modifiers requires equipment");
                     ItemModifierEntry m = c.Entry.Modifiers;
-                    if (m.Armor < 0 || m.Armor > 100 || m.Resistance < 0 || m.Resistance > 100 || m.Reflect < 0 || m.Reflect > 100 ||
-                        float.IsNaN(m.Vitality) || float.IsInfinity(m.Vitality) || Math.Abs(m.Vitality) > 1 ||
-                        float.IsNaN(m.Speed) || float.IsInfinity(m.Speed) || Math.Abs(m.Speed) > 1)
-                        throw new ArgumentException("item modifier outside supported range");
+                    m.Validate();
                     if (Content.SetItemModifiers(c.ModGuid, (FTK_itembase)c.Row, delegate(FTK_characterModifier modifier)
                     {
-                        modifier.m_ModDefensePhysical = m.Armor; modifier.m_ModDefenseMagic = m.Resistance;
-                        modifier.m_ModVitality = m.Vitality; modifier.m_ModQuickness = m.Speed; modifier.m_ReflectDamage = m.Reflect;
+                        m.Apply(modifier);
                     }) == null) throw new ArgumentException("item modifier registration rejected");
                 }
                 if (c.Entry.ItemModels != null)
@@ -562,6 +569,17 @@ namespace FTKModFramework.Core.Data
                         meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                     }
                     if (!Content.SetItemMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("item model registration rejected");
+                }
+                if (c.Entry.OffHandModels != null)
+                {
+                    if (c.Kind != "weapon") throw new ArgumentException("offHandModels requires a weapon");
+                    ItemRendererMesh[] meshes = new ItemRendererMesh[c.Entry.OffHandModels.Length];
+                    for (int i = 0; i < meshes.Length; i++)
+                    {
+                        ModelRendererEntry entry = c.Entry.OffHandModels[i];
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                    }
+                    if (!Content.SetItemOffHandMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("off-hand item model registration rejected");
                 }
                 if (c.Entry.DisplayModels != null)
                 {
@@ -729,7 +747,10 @@ namespace FTKModFramework.Core.Data
 
             if (c.Kind == "weapon")
             {
-                Content.AttachProficiencies((FTK_weaponStats2)c.Row, profs);
+                if (c.Entry.ReplaceProficiencies)
+                    Content.ReplaceProficiencies((FTK_weaponStats2)c.Row, profs);
+                else
+                    Content.AttachProficiencies((FTK_weaponStats2)c.Row, profs);
             }
             else if (c.Kind == "enemy")
             {
