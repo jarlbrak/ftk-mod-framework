@@ -64,6 +64,38 @@ func TestReportingSubmissionSendsUnchangedPayload(t *testing.T) {
 	}
 }
 
+func TestReportingTransportsUsefulLogDumpAbovePreviousLimit(t *testing.T) {
+	req, res := reportingFixture(t)
+	var input map[string]interface{}
+	if err := json.Unmarshal([]byte(reportingTestRequest), &input); err != nil {
+		t.Fatal(err)
+	}
+	input["includeDiagnostics"] = true
+	input["diagnostics"] = map[string]interface{}{
+		"logs":            strings.Repeat("[Info] useful session context\n", 3500) + "CURRENT END",
+		"previousSession": map[string]interface{}{"logs": strings.Repeat("[Warning] previous context\n", 3500) + "PREVIOUS END"},
+	}
+	body, err := json.Marshal(input)
+	if err != nil || len(body) <= 128*1024 {
+		t.Fatal("fixture did not exceed old bound")
+	}
+	if err = os.WriteFile(req, body, 0600); err != nil {
+		t.Fatal(err)
+	}
+	server := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		observed, readErr := io.ReadAll(r.Body)
+		if readErr != nil || string(observed) != string(body) {
+			t.Error("useful log dump changed or truncated")
+		}
+		w.WriteHeader(201)
+		fmt.Fprint(w, `{"schemaVersion":1,"status":"submitted","reportId":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","issueNumber":123,"issueUrl":"https://github.com/jarlbrak/ftk-mod-framework/issues/123"}`)
+	}))
+	defer server.Close()
+	if err = reportingSubmit(req, res, server.URL+"/v1/reports", server.Client()); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestReportingPreservesFailureAndRejectsInvalidSuccess(t *testing.T) {
 	for _, tc := range []struct {
 		code        int

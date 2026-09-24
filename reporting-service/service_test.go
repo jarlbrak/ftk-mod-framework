@@ -87,6 +87,110 @@ func TestSubmitRedactsAndSurvivesRestart(t *testing.T) {
 	}
 }
 
+func TestUsefulLogDumpRoundTripRedactionAndExpiry(t *testing.T) {
+	var postedBody string
+	s := fixture(t, func(w http.ResponseWriter, r *http.Request) {
+		var issue map[string]string
+		_ = json.NewDecoder(r.Body).Decode(&issue)
+		postedBody = issue["body"]
+		w.WriteHeader(201)
+		fmt.Fprint(w, `{"number":12,"html_url":"https://github.com/owner/repo/issues/12"}`)
+	})
+	var req report
+	_ = json.Unmarshal([]byte(requestBody()), &req)
+	current := "CURRENT BEGIN\n" + strings.Repeat("[Info] useful process context\n", 3500) + "password=never-share\nCURRENT END"
+	previous := "PREVIOUS BEGIN\n" + strings.Repeat("[Warning] useful previous context\n", 3500) + "/Users/private-user/game.cs\nPREVIOUS END"
+	req.Diagnostics = map[string]interface{}{"logs": current, "logCoverage": "Observed since initialization", "previousSession": map[string]interface{}{"logs": previous}}
+	body, _ := json.Marshal(req)
+	if len(body) <= 128*1024 {
+		t.Fatal("fixture did not exceed old request bound")
+	}
+	if w := post(s, string(body)); w.Code != 201 {
+		t.Fatal(w.Code, w.Body.String())
+	}
+	if !strings.Contains(postedBody, "/diagnostics/"+req.ReportID+".log") || !strings.Contains(postedBody, ".json") {
+		t.Fatal("issue missing automatic downloads")
+	}
+	restarted, err := newService(s.cfg, s.client)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, extension := range []string{".json", ".log"} {
+		w := httptest.NewRecorder()
+		restarted.ServeHTTP(w, httptest.NewRequest("GET", "/diagnostics/"+req.ReportID+extension, nil))
+		text := w.Body.String()
+		if w.Code != 200 || len(text) <= 128*1024 {
+			t.Fatalf("%s download truncated: %d/%d", extension, w.Code, len(text))
+		}
+		for _, marker := range []string{"CURRENT BEGIN", "CURRENT END", "PREVIOUS BEGIN", "PREVIOUS END"} {
+			if !strings.Contains(text, marker) {
+				t.Errorf("missing %s", marker)
+			}
+		}
+		for _, secret := range []string{"never-share", "private-user"} {
+			if strings.Contains(text, secret) {
+				t.Errorf("leaked %s", secret)
+			}
+		}
+		if extension == ".log" && (!strings.HasPrefix(w.Header().Get("Content-Type"), "text/plain") || !strings.Contains(text, "=== Previous session ===")) {
+			t.Fatal("log is not a readable session-separated attachment")
+		}
+	}
+	if post(restarted, string(body)).Code != 200 {
+		t.Fatal("large report retry lost receipt")
+	}
+	future := time.Now().Add(retention + time.Minute)
+	restarted.now = func() time.Time { return future }
+	w := httptest.NewRecorder()
+	restarted.ServeHTTP(w, httptest.NewRequest("GET", "/diagnostics/"+req.ReportID+".log", nil))
+	if w.Code != 404 {
+		t.Fatal("expired log remained public")
+	}
+}
+
+func TestLogDownloadRequiresDiagnosticsConsent(t *testing.T) {
+	s := fixture(t, func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(201)
+		fmt.Fprint(w, `{"number":12,"html_url":"https://github.com/owner/repo/issues/12"}`)
+	})
+	var req report
+	_ = json.Unmarshal([]byte(requestBody()), &req)
+	req.IncludeDiagnostics = false
+	req.Diagnostics = nil
+	body, _ := json.Marshal(req)
+	if post(s, string(body)).Code != 201 {
+		t.Fatal("opt-out report failed")
+	}
+	for _, extension := range []string{".json", ".log"} {
+		w := httptest.NewRecorder()
+		s.ServeHTTP(w, httptest.NewRequest("GET", "/diagnostics/"+req.ReportID+extension, nil))
+		if w.Code != 404 {
+			t.Fatal("opt-out exposed diagnostics", extension)
+		}
+	}
+}
+
+func TestExpandedSanitizedReceiptRemainsBounded(t *testing.T) {
+	s := fixture(t, func(w http.ResponseWriter, r *http.Request) { t.Fatal("oversize sanitized receipt reached GitHub") })
+	var req report
+	_ = json.Unmarshal([]byte(requestBody()), &req)
+	req.Diagnostics = map[string]interface{}{"logs": strings.Repeat("ghp_a ", 300000)}
+	body, _ := json.Marshal(req)
+	if len(body) > maxPayload {
+		t.Fatal("fixture exceeds wire bound before filtering")
+	}
+	if w := post(s, string(body)); w.Code != 413 {
+		t.Fatalf("storage expansion not rejected: %d %s", w.Code, w.Body.String())
+	}
+	if len(s.receipts) != 0 {
+		t.Fatal("rejected oversized receipt reserved an ID")
+	}
+	rec := &receipt{ReportID: req.ReportID, Report: &report{Diagnostics: map[string]interface{}{"logs": strings.Repeat("x", maxStoredReceipt)}}}
+	if s.persist(rec) == nil {
+		t.Fatal("disk receipt limit missing")
+	}
+}
+
 func TestAmbiguousCreateNeverPostsTwiceAndCanReconcile(t *testing.T) {
 	var posts atomic.Int32
 	var found atomic.Bool

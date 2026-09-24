@@ -33,7 +33,7 @@ func positiveEnv(name string, fallback int) int {
 }
 
 func environmentConfig() (config, error) {
-	c := config{dataDir: os.Getenv("DATA_DIR"), repository: os.Getenv("GITHUB_REPOSITORY"), token: os.Getenv("GITHUB_TOKEN"), publicURL: strings.TrimRight(os.Getenv("PUBLIC_BASE_URL"), "/"), apiURL: "https://api.github.com", maxReports: positiveEnv("MAX_REPORTS", 10000), perIP: positiveEnv("REPORTS_PER_IP_HOUR", 5), global: positiveEnv("REPORTS_PER_HOUR", 100), daily: positiveEnv("REPORTS_PER_DAY", 500)}
+	c := config{dataDir: os.Getenv("DATA_DIR"), repository: os.Getenv("GITHUB_REPOSITORY"), token: os.Getenv("GITHUB_TOKEN"), publicURL: strings.TrimRight(os.Getenv("PUBLIC_BASE_URL"), "/"), apiURL: "https://api.github.com", maxReports: positiveEnv("MAX_REPORTS", 1000), perIP: positiveEnv("REPORTS_PER_IP_HOUR", 5), global: positiveEnv("REPORTS_PER_HOUR", 100), daily: positiveEnv("REPORTS_PER_DAY", 500)}
 	if c.dataDir == "" {
 		c.dataDir = "/data"
 	}

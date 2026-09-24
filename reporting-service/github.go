@@ -66,7 +66,7 @@ func (s *service) createIssue(rec *receipt) bool {
 	body := marker(r.ReportID) + "\n## Player description\n\n" + fenced(r.Description) + "\n\nReport kind: `" + r.Kind + "`\nReport ID: `" + r.ReportID + "`\nCapture ID: `" + r.CaptureID + "`\n"
 	if r.IncludeDiagnostics {
 		excerpt := diagnosticExcerpt(r.Diagnostics)
-		body += "\n## Diagnostics excerpt\n\n" + fenced(excerpt) + "\n\n[Download sanitized diagnostics](" + s.cfg.publicURL + "/diagnostics/" + r.ReportID + ".json). This public download expires 30 days after submission. The excerpt above remains on GitHub.\n"
+		body += "\n## Diagnostics excerpt\n\n" + fenced(excerpt) + "\n\n[Download readable log dump](" + s.cfg.publicURL + "/diagnostics/" + r.ReportID + ".log) | [Download diagnostic JSON](" + s.cfg.publicURL + "/diagnostics/" + r.ReportID + ".json). These public downloads expire 30 days after submission. The excerpt above remains on GitHub.\n"
 	} else {
 		body += "\nThe player chose not to include diagnostics.\n"
 	}
@@ -136,16 +136,16 @@ func fenced(text string) string {
 	return "```text\n" + strings.ReplaceAll(strings.ReplaceAll(text, "`", "'"), "@", "@\u200b") + "\n```"
 }
 
-// Put recent error tails first so a large metadata section or older log lines
+// Put recent log tails first so a large metadata section or older log lines
 // cannot hide the failure that prompted the report.
 func diagnosticExcerpt(diagnostics map[string]interface{}) string {
 	var parts []string
 	if logs, ok := diagnostics["logs"].(string); ok && logs != "" {
-		parts = append(parts, "Current session errors:\n"+validTail(logs, 4000))
+		parts = append(parts, "Current session log tail:\n"+validTail(logs, 4000))
 	}
 	if previous, ok := diagnostics["previousSession"].(map[string]interface{}); ok {
 		if logs, ok := previous["logs"].(string); ok && logs != "" {
-			parts = append(parts, "Previous session errors:\n"+validTail(logs, 4000))
+			parts = append(parts, "Previous session log tail:\n"+validTail(logs, 4000))
 		}
 	}
 	data, _ := json.MarshalIndent(diagnostics, "", "  ")

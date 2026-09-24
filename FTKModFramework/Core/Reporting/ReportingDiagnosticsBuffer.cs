@@ -14,16 +14,20 @@ namespace FTKModFramework.Core.Reporting
         { Id = Guid.NewGuid().ToString("N"); Summary = summary; CapturedAtUtc = utcNow; }
     }
 
-    // Only error events enter this buffer. Redaction is defensive, not a promise that arbitrary
-    // third-party log text can never contain personal information. The UI must disclose this.
+    // A process-local transcript includes ordinary activity before a freeze, even when nothing
+    // throws. Redaction is defensive, not a promise that arbitrary third-party log text can
+    // never contain personal information. The UI must disclose this.
     internal sealed class ReportingDiagnosticsBuffer
     {
-        internal const int ByteLimit = 32 * 1024;
-        private const int EventLimit = 64;
+        internal const int ByteLimit = 128 * 1024;
+        private const int EventLimit = 2048;
+        private const int ErrorSignatureLimit = 64;
+        private const int HeaderReserve = 128;
         private readonly object gate = new object();
         private readonly Queue<string> entries = new Queue<string>();
         private readonly List<string> signatures = new List<string>();
-        private int bytes, receivedThisSecond, offers;
+        private int bytes, errorsThisSecond, ordinaryThisSecond, offers;
+        private long omitted;
         private long second;
         private DateTime nextOffer;
         private ReportingDiagnosticsError pending;
@@ -33,27 +37,40 @@ namespace FTKModFramework.Core.Reporting
         internal void Acknowledge(string id) { lock (gate) { if (pending != null && pending.Id == id) pending = null; } }
 
         internal void Add(string source, string message, string stack, DateTime utcNow)
+        { Add(source, message, stack, utcNow, true); }
+
+        internal void Add(string source, string message, string stack, DateTime utcNow, bool isError)
         {
             lock (gate)
             {
-                // Bound callback cost before regex processing, even for a stream of unique errors.
+                // Bound callback cost before regex processing. Keep a separate error allowance
+                // so a busy normal log cannot suppress an exception or its reporting offer.
                 long currentSecond = utcNow.Ticks / TimeSpan.TicksPerSecond;
-                if (currentSecond != second) { second = currentSecond; receivedThisSecond = 0; }
-                if (++receivedThisSecond > 32) return;
+                if (currentSecond != second) { second = currentSecond; errorsThisSecond = ordinaryThisSecond = 0; }
+                if ((isError ? ++errorsThisSecond > 32 : ++ordinaryThisSecond > 128)) { omitted++; return; }
                 string body = Sanitize(message) + (String.IsNullOrEmpty(stack) ? "" : "\n" + Sanitize(stack));
-                body = LimitUtf8(body, 4096);
+                body = LimitUtf8(body, 8192);
                 if (body.Trim().Length == 0) return;
-                string signature = body.Length > 512 ? body.Substring(0, 512) : body;
-                if (signatures.Contains(signature)) return;
-                signatures.Add(signature);
-                if (signatures.Count > EventLimit) signatures.RemoveAt(0);
+                // Retain repeated log messages in order: a repeated combat transition can be
+                // the useful clue. Deduplication applies only to automatic error offers.
+                bool newError = false;
+                if (isError)
+                {
+                    string signature = body.Length > 512 ? body.Substring(0, 512) : body;
+                    newError = !signatures.Contains(signature);
+                    if (newError)
+                    {
+                        signatures.Add(signature);
+                        if (signatures.Count > ErrorSignatureLimit) signatures.RemoveAt(0);
+                    }
+                }
                 string entry = utcNow.ToString("u", System.Globalization.CultureInfo.InvariantCulture) + " [" +
                     LimitUtf8(Sanitize(source), 80).Replace('\n', ' ') + "] " + body + "\n";
                 int count = Encoding.UTF8.GetByteCount(entry);
-                while (entries.Count != 0 && (entries.Count >= EventLimit || bytes + count > ByteLimit))
-                    bytes -= Encoding.UTF8.GetByteCount(entries.Dequeue());
+                while (entries.Count != 0 && (entries.Count >= EventLimit || bytes + count > ByteLimit - HeaderReserve))
+                { bytes -= Encoding.UTF8.GetByteCount(entries.Dequeue()); omitted++; }
                 entries.Enqueue(entry); bytes += count; version++;
-                if (pending == null && offers < 3 && utcNow >= nextOffer)
+                if (newError && pending == null && offers < 3 && utcNow >= nextOffer)
                 {
                     string summary = body.Split('\n')[0];
                     pending = new ReportingDiagnosticsError(LimitUtf8(summary, 240), utcNow);
@@ -67,6 +84,7 @@ namespace FTKModFramework.Core.Reporting
             lock (gate)
             {
                 StringBuilder result = new StringBuilder();
+                if (omitted != 0) result.Append("[Recent log dump: ").Append(omitted).Append(" older or rate-limited entries omitted]\n");
                 foreach (string entry in entries) result.Append(entry);
                 return result.ToString();
             }

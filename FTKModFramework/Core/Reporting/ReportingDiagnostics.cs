@@ -20,7 +20,7 @@ namespace FTKModFramework.Core.Reporting
         { lock (Gate) return expectedSessionId != null && expectedSessionId == previousId ? previous : ""; }
         internal static void Acknowledge(string id) { Buffer.Acknowledge(id); }
 
-        // Subscribe in Awake, before content registration. Startup errors stay in memory while
+        // Subscribe in Awake, before content registration. Startup logs stay in memory while
         // the existing session worker obtains its lease and binds the exact session identities.
         internal static void Start()
         {
@@ -73,14 +73,14 @@ namespace FTKModFramework.Core.Reporting
         }
         private static void UnityLog(string message, string stack, LogType type)
         {
-            if (type != LogType.Error && type != LogType.Exception && type != LogType.Assert) return;
-            try { Buffer.Add("Unity " + type, message, stack, DateTime.UtcNow); } catch { }
+            bool error = type == LogType.Error || type == LogType.Exception || type == LogType.Assert;
+            try { Buffer.Add("Unity " + type, message, stack, DateTime.UtcNow, error); } catch { }
         }
         private sealed class Listener : ILogListener
         {
             public void LogEvent(object sender, LogEventArgs args)
             {
-                if (args == null || (args.Level & (LogLevel.Error | LogLevel.Fatal)) == 0) return;
+                if (args == null) return;
                 try
                 {
                     // Unity has a direct callback with stack traces. Avoid its forwarded duplicate.
@@ -89,7 +89,8 @@ namespace FTKModFramework.Core.Reporting
                     string message = args.Data as string;
                     Exception error = args.Data as Exception;
                     if (message == null) message = error != null ? error.ToString() : "[non-text log data omitted]";
-                    Buffer.Add(source, message, "", DateTime.UtcNow);
+                    bool isError = (args.Level & (LogLevel.Error | LogLevel.Fatal)) != 0;
+                    Buffer.Add(source + " " + args.Level, message, "", DateTime.UtcNow, isError);
                 }
                 catch { }
             }

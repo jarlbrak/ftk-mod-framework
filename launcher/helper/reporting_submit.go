@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-const reportingRequestLimit = 128 * 1024
+const reportingRequestLimit = 2 * 1024 * 1024
 const reportingResponseLimit = 64 * 1024
 
 var reportingID = regexp.MustCompile(`^[a-f0-9]{32}$`)

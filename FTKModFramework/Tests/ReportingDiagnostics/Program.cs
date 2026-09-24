@@ -11,7 +11,7 @@ internal static class Program
     { checks++; if (!condition) throw new Exception(message); }
     private static void Main()
     {
-        Redaction(); BufferBounds(); Offers(); SessionPersistence(); HookCoverage();
+        Redaction(); BufferBounds(); Offers(); SessionPersistence(); LargeTranscriptPersistence(); HookCoverage();
         Console.WriteLine("Reporting diagnostics: " + checks + " checks passed.");
     }
     private sealed class Source : BepInEx.Logging.ILogSource
@@ -23,18 +23,25 @@ internal static class Program
     {
         ReportingDiagnostics.Start(); ReportingDiagnostics.Start();
         Check(BepInEx.Logging.Logger.Listeners.Count == 1, "Duplicate listener registration");
-        BepInEx.Logging.Logger.Emit("info excluded", BepInEx.Logging.LogLevel.Info, new Source("mod"));
-        BepInEx.Logging.Logger.Emit("warning excluded", BepInEx.Logging.LogLevel.Warning, new Source("mod"));
-        UnityEngine.Application.Emit("unity info excluded", "", UnityEngine.LogType.Log);
-        Check(ReportingDiagnostics.CaptureCurrent() == "", "Non-error logs captured");
+        BepInEx.Logging.Logger.Emit("combat completed", BepInEx.Logging.LogLevel.Info, new Source("mod"));
+        BepInEx.Logging.Logger.Emit("transition delayed", BepInEx.Logging.LogLevel.Warning, new Source("mod"));
+        BepInEx.Logging.Logger.Emit("turn ownership changed", BepInEx.Logging.LogLevel.Debug, new Source("mod"));
+        UnityEngine.Application.Emit("awaiting next player", "", UnityEngine.LogType.Log);
+        UnityEngine.Application.Emit("animation still playing", "", UnityEngine.LogType.Warning);
+        string activity = ReportingDiagnostics.CaptureCurrent();
+        Check(activity.Contains("combat completed") && activity.Contains("transition delayed") && activity.Contains("turn ownership changed"), "Ordinary BepInEx activity missing");
+        Check(activity.Contains("awaiting next player") && activity.Contains("animation still playing"), "Ordinary Unity activity missing");
+        Check(activity.Contains("mod Info") && activity.Contains("Unity Warning"), "Log source or level missing");
+        Check(ReportingDiagnostics.PendingError == null, "Ordinary activity opened an error offer");
         BepInEx.Logging.Logger.Emit("forwarded excluded", BepInEx.Logging.LogLevel.Error, new Source("Unity Log"));
-        Check(ReportingDiagnostics.CaptureCurrent() == "", "Unity forwarded duplicate captured");
+        Check(ReportingDiagnostics.CaptureCurrent() == activity, "Unity forwarded duplicate captured");
         BepInEx.Logging.Logger.Emit("loader fatal", BepInEx.Logging.LogLevel.Fatal, new Source("mod"));
         BepInEx.Logging.Logger.Emit("loader error", BepInEx.Logging.LogLevel.Error, new Source("mod"));
         Thread emitter = new Thread(delegate() { UnityEngine.Application.Emit("Unity exception", " at Game.Method()", UnityEngine.LogType.Exception); });
         emitter.Start(); emitter.Join();
         string captured = ReportingDiagnostics.CaptureCurrent();
         Check(captured.Contains("loader fatal") && captured.Contains("loader error") && captured.Contains(" at Game.Method()"), "Hook did not capture fatal/error/stack");
+        Check(ReportingDiagnostics.PendingError != null, "Error hook did not create an offer");
         Check(ReportingDiagnostics.CapturePrevious("unrelated") == "", "Wrong previous session returned");
         ReportingDiagnostics.Stop();
         Check(BepInEx.Logging.Logger.Listeners.Count == 0, "Listener not removed");
@@ -69,12 +76,22 @@ internal static class Program
         string captured = buffer.Capture();
         Check(Encoding.UTF8.GetByteCount(captured) <= ReportingDiagnosticsBuffer.ByteLimit, "Buffer exceeded byte bound");
         Check(captured.Contains("Exception 999") && !captured.Contains("Exception 0"), "Buffer did not retain recent entries");
+        Check(captured.Contains("older or rate-limited entries omitted"), "Truncated transcript missing disclosure");
         ReportingDiagnosticsBuffer flood = new ReportingDiagnosticsBuffer();
         for (int i = 0; i < 10000; i++) flood.Add("mod", "Error " + i, "", now);
         Check(flood.Version == 32, "Callback flood was not bounded");
         ReportingDiagnosticsBuffer repeated = new ReportingDiagnosticsBuffer();
         for (int i = 0; i < 100; i++) repeated.Add("mod", "Same error", " at Method()", now.AddSeconds(i));
-        Check(repeated.Version == 1, "Repeated error not deduplicated");
+        Check(repeated.Version == 100, "Repeated log activity lost from transcript");
+        repeated.Acknowledge(repeated.Pending.Id);
+        repeated.Add("mod", "Same error", " at Method()", now.AddMinutes(6));
+        Check(repeated.Pending == null, "Repeated error offered again after acknowledgement");
+        ReportingDiagnosticsBuffer ordinaryFlood = new ReportingDiagnosticsBuffer();
+        for (int i = 0; i < 10000; i++) ordinaryFlood.Add("mod Info", "activity " + i, "", now, false);
+        Check(ordinaryFlood.Version == 128 && ordinaryFlood.Pending == null, "Normal activity flood was not bounded separately");
+        ordinaryFlood.Add("mod Error", "critical error after activity", "", now, true);
+        Check(ordinaryFlood.Pending != null && ordinaryFlood.Capture().Contains("critical error after activity"), "Normal flood suppressed an error");
+        Check(ordinaryFlood.Capture().Contains("9872 older or rate-limited entries omitted"), "Rate limit silently lost activity");
         ReportingDiagnosticsBuffer concurrent = new ReportingDiagnosticsBuffer();
         Thread a = new Thread(delegate() { for (int i = 0; i < 1000; i++) concurrent.Add("a", "a" + i, "", now.AddSeconds(i)); });
         Thread b = new Thread(delegate() { for (int i = 0; i < 1000; i++) { concurrent.Add("b", "b" + i, "", now.AddSeconds(i)); concurrent.Capture(); } });
@@ -82,6 +99,13 @@ internal static class Program
         Check(Encoding.UTF8.GetByteCount(concurrent.Capture()) <= ReportingDiagnosticsBuffer.ByteLimit, "Concurrent buffer exceeded bound");
         string unicode = ReportingDiagnosticsBuffer.LimitUtf8(new string('\u2603', 9000), 4096);
         Check(Encoding.UTF8.GetByteCount(unicode) <= 4096, "UTF8 limit used character count");
+        ReportingDiagnosticsBuffer unicodeBuffer = new ReportingDiagnosticsBuffer();
+        for (int i = 0; i < 100; i++) unicodeBuffer.Add("mod Info", i + new string('\u2603', 5000), "", now.AddSeconds(i), false);
+        Check(Encoding.UTF8.GetByteCount(unicodeBuffer.Capture()) <= 128 * 1024 && unicodeBuffer.Capture().Contains("99"), "Large UTF8 transcript exceeded bound or lost latest entry");
+        ReportingDiagnosticsBuffer smallEntries = new ReportingDiagnosticsBuffer();
+        for (int i = 0; i < 3000; i++) smallEntries.Add("mod Info", "turn " + i, "", now.AddSeconds(i), false);
+        Check(smallEntries.Capture().Contains("turn 2999") && !smallEntries.Capture().Contains("turn 0\n"), "Small log entries bypassed count bound");
+        Check(smallEntries.Pending == null, "Normal transcript produced error offer");
     }
     private static void Offers()
     {
@@ -154,6 +178,34 @@ internal static class Program
             Check(full, "Diagnostics exceeded shared root quota");
             File.Delete(pressure);
             fourth.Dispose();
+        }
+        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+    }
+    private static void LargeTranscriptPersistence()
+    {
+        string root = Path.Combine(Path.GetTempPath(), "ftk-diagnostics-transcript-" + Guid.NewGuid().ToString("N"));
+        if (root.StartsWith("/var/", StringComparison.Ordinal)) root = "/private" + root;
+        try
+        {
+            ReportingSessionStore first;
+            Check(ReportingSessionStore.TryOpen(root, DateTime.UtcNow, out first), "Transcript session failed");
+            string firstId = first.SessionId;
+            string unrelatedLog = Path.Combine(root, "LogOutput.log");
+            File.WriteAllText(unrelatedLog, "another game instance private data");
+            ReportingDiagnosticsBuffer buffer = new ReportingDiagnosticsBuffer();
+            for (int i = 0; i < 40; i++) buffer.Add("mod Info", "turn " + i + new string('x', 5000), "", DateTime.UtcNow.AddSeconds(i), false);
+            string transcript = buffer.Capture();
+            Check(Encoding.UTF8.GetByteCount(transcript) > 32 * 1024, "Fixture did not exercise expanded transcript");
+            ReportingDiagnosticsStore store = new ReportingDiagnosticsStore(first, root);
+            store.Write(transcript);
+            Check(first.TryCheckpoint("metadata", "session_or_transition", DateTime.UtcNow), "Transcript checkpoint failed");
+            first.Dispose();
+            ReportingSessionStore second;
+            Check(ReportingSessionStore.TryOpen(root, DateTime.UtcNow, out second), "Transcript restart failed");
+            ReportingDiagnosticsStore restored = new ReportingDiagnosticsStore(second, root);
+            Check(restored.PreviousSessionId == firstId && restored.Previous == transcript, "Full transcript did not survive exact-session restart");
+            Check(!restored.Previous.Contains("another game instance") && File.ReadAllText(unrelatedLog) == "another game instance private data", "Unrelated installation log read or changed");
+            second.Dispose();
         }
         finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
     }

@@ -25,7 +25,7 @@ internal static class Program
     private static int Main(string[] args)
     {
         if (args.Length > 0 && args[0] == "--helper") return FakeHelper(args);
-        ExclusionAndFreeze(); Bounds(); Responses(); HelperEnvironment();
+        ExclusionAndFreeze(); Bounds(); UsefulLogDump(); Responses(); HelperEnvironment();
         if (Environment.OSVersion.Platform != PlatformID.Win32NT) Bridge();
         Console.WriteLine("Reporting submission: " + checks + " checks passed.");
         return 0;
@@ -68,6 +68,7 @@ internal static class Program
         string emojiResult = ReportingSubmissionPayload.Create(report, "emoji", "error", "x" + emoji, "x" + emoji);
         string log = (string)JObject.Parse(emojiResult)["diagnostics"]["logs"];
         Check(!log.Contains("\ufffd") && Encoding.UTF8.GetByteCount(emojiResult) <= ReportingSubmissionPayload.MaximumBytes, "Surrogate tail broken");
+        Check(Encoding.UTF8.GetByteCount(log) <= ReportingSubmissionPayload.MaximumLogBytes, "Log UTF8 byte limit exceeded");
         ReportingReport huge = ReportingReport.Create(delegate { return "{\"blob\":\"" + new string('x', 25000) + "\"}"; }, null, DateTime.UtcNow);
         Check(ReportingSubmissionPayload.Create(huge, "", "error", "", "").Contains("size_limit"), "Oversize metadata retained");
         ReportingReport broken = ReportingReport.Create(delegate { return "invalid json"; }, null, DateTime.UtcNow);
@@ -75,6 +76,23 @@ internal static class Program
         Throws(delegate { ReportingSubmissionPayload.Create(report, new string('x', 4001), "manual", "", ""); }, "Description length accepted");
         Throws(delegate { ReportingSubmissionPayload.Create(report, "", "unknown", "", ""); }, "Unknown kind accepted");
         Throws(delegate { ReportingSubmissionPayload.Create(null, "", "manual", "", ""); }, "Null report accepted");
+    }
+    private static void UsefulLogDump()
+    {
+        string current = "CURRENT BEGIN\n" + new string('i', 120000) + "\nCURRENT WARN END";
+        string previous = "PREVIOUS BEGIN\n" + new string('w', 120000) + "\nPREVIOUS ERROR END";
+        string json = ReportingSubmissionPayload.Create(Report(true), "Large diagnostic log dump", "unexpected_exit", current, previous);
+        JObject payload = JObject.Parse(json);
+        Check(Encoding.UTF8.GetByteCount(json) > 128 * 1024, "Useful log dump did not exercise larger envelope");
+        Check((string)payload["diagnostics"]["logs"] == current, "Current useful log was trimmed to old 20k limit");
+        Check((string)payload["diagnostics"]["previousSession"]["logs"] == previous, "Previous useful log was trimmed to old 20k limit");
+        string manyEmoji = string.Concat(System.Linq.Enumerable.Repeat("\U0001f680", 50000)) + "LATEST FAILURE";
+        payload = JObject.Parse(ReportingSubmissionPayload.Create(Report(false), "", "error", manyEmoji, null));
+        string tail = (string)payload["diagnostics"]["logs"];
+        Check(Encoding.UTF8.GetByteCount(tail) <= ReportingSubmissionPayload.MaximumLogBytes && !tail.Contains("\ufffd") && tail.EndsWith("LATEST FAILURE"), "Bounded log tail lost newest text or split UTF8");
+        string escaping = new string('\u0001', ReportingSubmissionPayload.MaximumLogBytes);
+        Check(Encoding.UTF8.GetByteCount(ReportingSubmissionPayload.Create(Report(true), "", "unexpected_exit", escaping, escaping)) <= ReportingSubmissionPayload.MaximumBytes, "JSON escaping exceeded transport cap");
+        Check(ReportingSubmissionPayload.Disclosure.Contains("informational messages, warnings and errors"), "Disclosure still promises only error logs");
     }
     private static void Throws(Action action, string message)
     { bool thrown = false; try { action(); } catch (ArgumentException) { thrown = true; } Check(thrown, message); }

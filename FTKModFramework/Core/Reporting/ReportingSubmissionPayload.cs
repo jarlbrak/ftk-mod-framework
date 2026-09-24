@@ -7,8 +7,9 @@ namespace FTKModFramework.Core.Reporting
 {
     internal static class ReportingSubmissionPayload
     {
-        internal const int MaximumBytes = 128 * 1024;
-        internal const string Disclosure = "Send publishes your description and selected diagnostics to the public FTK framework GitHub tracker through our Railway service. Diagnostics include recent errors, versions, mods and session context. No saves or screenshots are collected. Logs are filtered, but may contain personal information. Nothing is uploaded until you press Send. Downloadable diagnostics expire after 30 days; text published on GitHub remains public.";
+        internal const int MaximumBytes = 2 * 1024 * 1024;
+        internal const int MaximumLogBytes = 128 * 1024;
+        internal const string Disclosure = "Send publishes your description and selected diagnostics to the public FTK framework GitHub tracker through our Railway service. Diagnostics include a filtered recent game/framework log dump with informational messages, warnings and errors, plus versions, mods and session context. No saves or screenshots are collected. Logs may contain personal information despite filtering. Nothing is uploaded until you press Send. Downloadable diagnostics expire after 30 days; text published on GitHub remains public.";
         internal static string Create(ReportingReport report, string description, string kind, string currentLogs, string previousLogs)
         {
             if (report == null || !ReportingDraft.ValidId(report.ReportId) || !ReportingDraft.ValidId(report.CaptureId)) throw new ArgumentException("Invalid report.");
@@ -19,18 +20,12 @@ namespace FTKModFramework.Core.Reporting
             if (report.IncludeMetadata)
             {
                 JObject diagnostics = new JObject { ["metadata"] = Metadata(report.CurrentMetadata),
-                    ["logs"] = Tail(currentLogs, 20000), ["logCoverage"] = "Errors, exceptions and asserts observed since reporting initialized; bounded and filtered, not a complete game log." };
+                    ["logs"] = Tail(currentLogs, MaximumLogBytes), ["logCoverage"] = "Recent filtered game/framework process logs observed since reporting initialized, including informational messages, warnings and errors; at most 128 KiB of UTF-8 text, not a complete game log." };
                 if (report.PreviousSessionId != null)
                     diagnostics["previousSession"] = new JObject { ["sessionId"] = report.PreviousSessionId,
-                        ["metadata"] = Metadata(report.PreviousMetadata), ["logs"] = Tail(previousLogs, 20000),
-                        ["logCoverage"] = "Last persisted errors matching this session; abrupt exit may lose the most recent entries." };
+                        ["metadata"] = Metadata(report.PreviousMetadata), ["logs"] = Tail(previousLogs, MaximumLogBytes),
+                        ["logCoverage"] = "Last persisted filtered process log dump matching this session, up to 128 KiB of UTF-8 text; abrupt exit may lose the most recent entries. Logs missing from older captures cannot be recovered." };
                 payload["diagnostics"] = diagnostics;
-                if (Encoding.UTF8.GetByteCount(payload.ToString(Formatting.None)) > MaximumBytes)
-                {
-                    diagnostics["logs"] = Tail(currentLogs, 8000);
-                    if (diagnostics["previousSession"] != null) diagnostics["previousSession"]["logs"] = Tail(previousLogs, 8000);
-                    diagnostics["truncated"] = true;
-                }
             }
             string json = payload.ToString(Formatting.None);
             if (Encoding.UTF8.GetByteCount(json) > MaximumBytes) throw new ArgumentException("Diagnostic capture exceeds the report limit.");
@@ -52,11 +47,13 @@ namespace FTKModFramework.Core.Reporting
         }
         private static string Tail(string value, int maximum)
         {
-            if (String.IsNullOrEmpty(value)) return "No matching error log was captured.";
-            if (value.Length <= maximum) return value;
-            int start = value.Length - maximum;
-            if (Char.IsLowSurrogate(value[start])) start++;
-            return "[Earlier entries omitted]\n" + value.Substring(start);
+            if (String.IsNullOrEmpty(value)) return "No matching log dump was captured.";
+            byte[] bytes = Encoding.UTF8.GetBytes(value);
+            if (bytes.Length <= maximum) return value;
+            const string prefix = "[Earlier entries omitted]\n";
+            int start = bytes.Length - maximum + Encoding.UTF8.GetByteCount(prefix);
+            while (start < bytes.Length && (bytes[start] & 0xc0) == 0x80) start++;
+            return prefix + Encoding.UTF8.GetString(bytes, start, bytes.Length - start);
         }
     }
 }

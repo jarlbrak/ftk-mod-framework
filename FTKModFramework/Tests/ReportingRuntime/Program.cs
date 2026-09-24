@@ -95,10 +95,34 @@ internal static class Program
                     Check(Thread.CurrentThread.ManagedThreadId == ReportingSources.MainThread && ok, "main-thread saved callback"); saved = true;
                 });
                 Wait(delegate { ReportingRuntime.Tick(); return saved; });
-                Check(ReportingRuntime.SavedDraft.Description == "saved description" && !ReportingRuntime.SavedDraft.Report.IncludeMetadata, "saved cache recovery consent");
-                ReportingRuntime.SavedDraft.Report.IncludeMetadata = true;
-                Check(!ReportingRuntime.SavedDraft.Report.IncludeMetadata, "cache detached from UI mutation");
+                Check(ReportingRuntime.SavedDraft.Description == "saved description" && ReportingRuntime.SavedDraft.Report.IncludeMetadata, "saved diagnostics default");
+                ReportingRuntime.SavedDraft.Report.IncludeMetadata = false;
+                Check(ReportingRuntime.SavedDraft.Report.IncludeMetadata, "cache detached from UI mutation");
                 Check(ReportingRuntime.Pending != null, "save does not acknowledge incident");
+                ReportingReport secondDraft = ReportingRuntime.CreateReport(false);
+                secondDraft.IncludeMetadata = false;
+                ReportingDraft snapshot = ReportingDraft.Create(secondDraft, "second draft", DateTime.UtcNow, "error", "exact captured errors", "", new string('e', 32));
+                bool secondSaved = false;
+                ReportingRuntime.SaveDraft(snapshot, delegate(bool ok) { Check(ok, "second distinct draft saved"); secondSaved = true; });
+                Check(ReportingRuntime.DraftsBusy, "save busy until callback");
+                Wait(delegate { ReportingRuntime.Tick(); return secondSaved; });
+                Check(!ReportingRuntime.DraftsBusy && ReportingRuntime.SavedDrafts.Length == 2 &&
+                    ReportingRuntime.SavedDraft.CurrentLogs == "exact captured errors" && !ReportingRuntime.SavedDraft.Report.IncludeMetadata, "draft collection frozen logs and explicit optout");
+                ReportingRuntime.SavedDrafts[0].Report.IncludeMetadata = true;
+                Check(!ReportingRuntime.SavedDraft.Report.IncludeMetadata, "collection detached from consumer");
+                string pressure = Path.Combine(storeRoot, "user-quota-pressure.bin");
+                File.WriteAllBytes(pressure, new byte[ReportingSessionStore.StoreLimit]);
+                bool failedDelete = false;
+                ReportingRuntime.DeleteDraft(secondDraft.ReportId, delegate(bool ok) { Check(!ok, "quota rejects deletion safely"); failedDelete = true; });
+                Check(ReportingRuntime.DraftsBusy && ReportingRuntime.SavedDrafts.Length == 1, "target draft hidden during delete");
+                Wait(delegate { ReportingRuntime.Tick(); return failedDelete; });
+                Check(ReportingRuntime.SavedDrafts.Length == 2 && ReportingRuntime.SavedDraft.Report.ReportId == secondDraft.ReportId &&
+                    ReportingRuntime.SavedDraft.CurrentLogs == "exact captured errors", "failed user deletion restores exact snapshot");
+                File.Delete(pressure);
+                bool secondDeleted = false;
+                ReportingRuntime.DeleteDraft(secondDraft.ReportId, delegate(bool ok) { Check(ok, "delete retry succeeds"); secondDeleted = true; });
+                Wait(delegate { ReportingRuntime.Tick(); return secondDeleted; });
+                Check(ReportingRuntime.SavedDrafts.Length == 1 && ReportingRuntime.SavedDraft.Report.ReportId == report.ReportId, "single draft delete preserves other identity");
                 bool wrongDelete = false;
                 ReportingRuntime.DeleteDraft(Guid.NewGuid().ToString("N"), delegate(bool ok) { Check(!ok, "unrelated draft preserved"); wrongDelete = true; });
                 Wait(delegate { ReportingRuntime.Tick(); return wrongDelete; });

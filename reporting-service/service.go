@@ -19,7 +19,8 @@ import (
 	"unicode/utf8"
 )
 
-const maxPayload = 128 * 1024
+const maxPayload = 2 * 1024 * 1024
+const maxStoredReceipt = maxPayload + 4096
 const retention = 30 * 24 * time.Hour
 
 var idPattern = regexp.MustCompile(`^[a-f0-9]{32}$`)
@@ -79,8 +80,13 @@ func newService(cfg config, client *http.Client) (*service, error) {
 		if !idPattern.MatchString(id) || entry.IsDir() {
 			return nil, errors.New("unexpected receipt file")
 		}
-		data, err := os.ReadFile(filepath.Join(cfg.dataDir, entry.Name()))
-		if err != nil || len(data) > maxPayload*2 {
+		f, err := os.Open(filepath.Join(cfg.dataDir, entry.Name()))
+		if err != nil {
+			return nil, errors.New("cannot open receipt")
+		}
+		data, err := io.ReadAll(io.LimitReader(f, maxStoredReceipt+1))
+		_ = f.Close()
+		if err != nil || len(data) > maxStoredReceipt {
 			return nil, errors.New("cannot read receipt")
 		}
 		var rec receipt
@@ -98,7 +104,7 @@ func newService(cfg config, client *http.Client) (*service, error) {
 // Sync the file and containing directory before attempting GitHub. A pending receipt
 // never becomes permission to POST again, even after a timeout or process restart.
 func (s *service) persist(rec *receipt) error {
-	data, err := json.Marshal(rec)
+	data, err := encodeReceipt(rec)
 	if err != nil {
 		return err
 	}
@@ -130,6 +136,19 @@ func (s *service) persist(rec *receipt) error {
 	}
 	defer dir.Close()
 	return dir.Sync()
+}
+
+func encodeReceipt(rec *receipt) ([]byte, error) {
+	var buffer bytes.Buffer
+	encoder := json.NewEncoder(&buffer)
+	encoder.SetEscapeHTML(false)
+	if err := encoder.Encode(rec); err != nil {
+		return nil, err
+	}
+	if buffer.Len() > maxStoredReceipt {
+		return nil, errors.New("receipt exceeds storage limit")
+	}
+	return buffer.Bytes(), nil
 }
 
 func (s *service) expire() error {
@@ -276,6 +295,13 @@ func (s *service) submit(w http.ResponseWriter, r *http.Request) {
 		req.Diagnostics = sanitize(req.Diagnostics).(map[string]interface{})
 	}
 	rec := &receipt{SchemaVersion: 1, Status: "pending", ReportID: req.ReportID, Hash: hash, Created: s.now().UTC(), Report: &req}
+	// Filtering and JSON encoding can expand the request. Reserve room for the later
+	// success URL/number and enforce the actual stored size before any GitHub call.
+	encoded, err := encodeReceipt(rec)
+	if err != nil || len(encoded) > maxPayload {
+		fail(w, 413, "payload_too_large")
+		return
+	}
 	// Reserve the ID in memory even if persistence fails; a partially persisted file
 	// must never allow a second attempt with a different payload in this process.
 	s.receipts[rec.ReportID] = rec
@@ -328,8 +354,9 @@ func validValue(value interface{}, depth int) bool {
 }
 
 func (s *service) download(w http.ResponseWriter, r *http.Request) {
-	id := strings.TrimSuffix(strings.TrimPrefix(r.URL.Path, "/diagnostics/"), ".json")
-	if !idPattern.MatchString(id) || r.URL.Path != "/diagnostics/"+id+".json" {
+	extension := filepath.Ext(r.URL.Path)
+	id := strings.TrimSuffix(strings.TrimPrefix(r.URL.Path, "/diagnostics/"), extension)
+	if (extension != ".json" && extension != ".log") || !idPattern.MatchString(id) || r.URL.Path != "/diagnostics/"+id+extension {
 		fail(w, 404, "not_found")
 		return
 	}
@@ -340,8 +367,44 @@ func (s *service) download(w http.ResponseWriter, r *http.Request) {
 		fail(w, 404, "not_found")
 		return
 	}
+	if extension == ".log" {
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		w.Header().Set("Content-Disposition", `attachment; filename="ftk-logs-`+id+`.log"`)
+		_, _ = io.WriteString(w, logDump(rec))
+		return
+	}
 	w.Header().Set("Content-Disposition", `attachment; filename="ftk-diagnostics-`+id+`.json"`)
 	writeJSON(w, 200, rec.Report.Diagnostics)
+}
+
+func logDump(rec *receipt) string {
+	var result strings.Builder
+	result.WriteString("FTK Mod Framework diagnostic log dump\nReport: " + rec.ReportID + "\nCapture: " + rec.Report.CaptureID + "\n")
+	appendSessionLog(&result, "Current session", rec.Report.Diagnostics)
+	if previous, ok := rec.Report.Diagnostics["previousSession"].(map[string]interface{}); ok {
+		appendSessionLog(&result, "Previous session", previous)
+	}
+	return result.String()
+}
+
+func appendSessionLog(result *strings.Builder, title string, diagnostics map[string]interface{}) {
+	result.WriteString("\n=== " + title + " ===\n")
+	if coverage, ok := diagnostics["logCoverage"].(string); ok {
+		result.WriteString(coverage + "\n\n")
+	}
+	switch logs := diagnostics["logs"].(type) {
+	case string:
+		result.WriteString(logs)
+	case []interface{}:
+		for _, line := range logs {
+			if text, ok := line.(string); ok {
+				result.WriteString(text + "\n")
+			}
+		}
+	default:
+		result.WriteString("No matching log dump was captured.")
+	}
+	result.WriteString("\n")
 }
 
 func (s *service) address(r *http.Request) string {

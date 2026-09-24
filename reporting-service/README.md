@@ -84,11 +84,18 @@ local state. Use a read-only `railway config pull` into an ignored scratch direc
 when inspecting another environment; never inline its variables into public code.
 
 Railway supplies `PORT`. Other settings are `DATA_DIR` (default `/data`),
-`MAX_REPORTS` (default 10000 permanent receipts), `REPORTS_PER_IP_HOUR` (5),
+`MAX_REPORTS` (default 1000 permanent receipts), `REPORTS_PER_IP_HOUR` (5),
 `REPORTS_PER_HOUR` (100 globally), and `REPORTS_PER_DAY` (500 globally).
 Limits are in-memory fixed windows and reset on restart. There is no unbounded
 background queue. Storage refuses new IDs at capacity; at the default limit,
-active report bodies occupy at most about 1.3 GiB plus receipts and JSON overhead.
+each serialized receipt is capped at 2 MiB plus 4 KiB, including its report.
+At 1000 receipts the maximum is about 2.0 GiB plus filesystem overhead and one
+temporary replacement file; JSON and readable log downloads are generated from the
+same receipt and do not create extra stored copies. This stays below the configured
+5000 MB volume. The service also retains active report payloads in memory, so size
+the runtime memory for expected retained volume. Existing deployments that explicitly
+set a higher `MAX_REPORTS` must lower it or provision equivalent storage headroom.
+Lowering the cap does not delete existing receipts; it stops accepting new IDs.
 Use a volume with headroom and alert on disk usage, 429/503 responses, and capacity.
 The Docker image uses the standard CA trust store; never disable TLS verification.
 
@@ -102,7 +109,7 @@ relying on this file-backed store.
 
 ## HTTP contract
 
-`POST /v1/reports`, `Content-Type: application/json`, maximum 128 KiB:
+`POST /v1/reports`, `Content-Type: application/json`, maximum 2 MiB:
 
 ```json
 {
@@ -114,7 +121,7 @@ relying on this file-backed store.
   "includeDiagnostics": true,
   "diagnostics": {
     "versions": { "framework": "example" },
-    "logs": [ "Example filtered error" ]
+    "logs": "[Info] Example process context\n[Warning] Example warning\n[Error] Example failure"
   }
 }
 ```
@@ -122,8 +129,14 @@ relying on this file-backed store.
 IDs are random 32-character lowercase hexadecimal identifiers. `kind` is `manual`,
 `error`, or `unexpected_exit`. Description is optional, up to 4000 Unicode code
 points. Diagnostics must be an object when enabled and omitted or null when
-disabled. JSON depth is bounded. The client owns the diagnostic schema and should
-collect only the diagnostic fields disclosed to the player, never arbitrary files.
+disabled. JSON depth is bounded. The client owns the diagnostic schema and collects only disclosed fields, never
+arbitrary files. The game attaches up to 128 KiB of UTF-8 process log text per
+current and correlated previous session, including informational messages, warnings,
+and errors observed since reporting initialized. It is a filtered tail, not a
+complete on-disk game log. Previous sessions use the last persisted matching capture;
+abrupt exit may lose recent messages and old saved drafts cannot backfill missing
+logs. JSON escaping has room within the 2 MiB transport envelope; filtering/encoding
+that would exceed the actual receipt size limit returns 413 before creating an issue.
 The service additionally drops known credential/player fields and redacts common
 credentials, home-folder names, email, IPv4, Steam ID, and URL patterns. This is
 defense in depth, not a guarantee that arbitrary mod logs contain no personal data.
@@ -150,9 +163,13 @@ Failures use `{"schemaVersion":1,"status":"error","error":"code"}`:
 The service does not send arbitrary GitHub error bodies to clients and does not log
 payloads, tokens, or client addresses. `/healthz` reports process/configuration
 readiness, not GitHub connectivity. `/privacy` is the public disclosure.
-`GET /diagnostics/<reportId>.json` is public for submitted diagnostic bundles until
-30 days after first receipt. Issue text contains up to 12000 bytes of filtered
-diagnostics and a download link. Excerpts remain in GitHub after download expiry.
+`GET /diagnostics/<reportId>.json` returns the filtered metadata/log bundle.
+`GET /diagnostics/<reportId>.log` returns readable UTF-8 text with current and
+previous session headings and coverage notes. Both are public only for submitted
+reports with diagnostic consent and expire 30 days after the first receipt. Issue
+text contains up to 12000 bytes of filtered diagnostic excerpts and both download
+links; the attachment retains the bounded uploaded dump rather than only the short
+issue excerpt. Excerpts remain in GitHub after download expiry.
 
 ## Duplicate prevention and operations
 
@@ -192,7 +209,9 @@ a read-only `railway config plan` against the explicitly linked environment. A
 successful plan validates the SDK graph and proposed changes without deploying.
 Tests use a fake GitHub server and cover automatic bundle inclusion, redaction,
 receipt restart, conflict detection, uncertain-response reconciliation without
-duplicate creation, input bounds, diagnostic opt-out, rate/storage limits, trusted
+duplicate creation, input and serialized-storage bounds, a useful log dump larger
+than the former 128 KiB request limit, readable log downloads, diagnostic opt-out,
+rate/storage limits, trusted
 proxy boundaries, unconfigured startup, and expiry with retained receipts.
 These checks do not prove Railway deployment, game transport, or real GitHub issue
 creation; those require a separately identified synthetic live report.

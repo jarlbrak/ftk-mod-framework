@@ -47,7 +47,6 @@ namespace FTKModFramework.Core.Reporting
                 PreviousSessionId = previous.SessionId; PreviousCheckpointId = previous.CheckpointId;
                 PreviousMetadata = previous.Metadata; PreviousObservedAtUtc = previous.ObservedAtUtc;
             }
-            IncludeMetadata = false;
         }
         internal static ReportingReport Restore(string reportId, string captureId, DateTime createdAtUtc, string currentMetadata, ReportingIncident previous)
         { return new ReportingReport(reportId, captureId, createdAtUtc, currentMetadata, previous); }
@@ -56,7 +55,9 @@ namespace FTKModFramework.Core.Reporting
             ReportingIncident previous = PreviousSessionId == null ? null : new ReportingIncident {
                 SessionId = PreviousSessionId, CheckpointId = PreviousCheckpointId, Metadata = PreviousMetadata,
                 ObservedAtUtc = PreviousObservedAtUtc.Value };
-            return Restore(ReportId, CaptureId, CreatedAtUtc, CurrentMetadata, previous);
+            ReportingReport copy = Restore(ReportId, CaptureId, CreatedAtUtc, CurrentMetadata, previous);
+            copy.IncludeMetadata = IncludeMetadata;
+            return copy;
         }
 
         internal static ReportingReport Create(Func<string> collect, ReportingIncident previous, DateTime utcNow)

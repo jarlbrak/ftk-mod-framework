@@ -1,35 +1,36 @@
 # Durable local reporting draft checks
 
 Run `dotnet run --project FTKModFramework/Tests/ReportingDraft/ReportingDraft.csproj -c Release`.
-The real filesystem suite covers report/capture identity, previous/current provenance,
-recovery with metadata sharing off, detached cache copies, same-report updates, different-report
-slot rejection, UTF-8 narrative limits, shared quota failure, normal restart, expiry, corrupt
-latest state and refusal to write after the session lease is released.
+The filesystem suite covers collection creation, same-ID updates, targeted deletion, restart,
+per-draft expiry, corrupt authority rejection, quotas, released leases, detached copies,
+legacy imports and preservation of report IDs, capture IDs, metadata, captured logs and choice.
 
-The backend requires the existing session-store lease and its serialized owner. It has one
-saved draft slot and no autosave. An unexpired different report is never overwritten. Explicit
-save updates the same report identity; there is no deletion/replacement UI in this slice.
-Save does not link or acknowledge an unexpected-exit incident, so that offer may return.
+The existing session-store lease and serialized worker own the flat draft files. Schema 3
+publishes one verified collection generation with at most ten drafts, ordered by newest save
+time and report ID for ties. Saving an eleventh identity preserves all existing drafts; updating
+one identity remains possible. Each description accepts at most 4,000 UTF-16 characters and
+16,000 UTF-8 bytes. Current and previous logs each accept at most 128 KiB UTF-8. Metadata keeps
+its existing per-source limit. The total collection body is capped at 1.5 MiB, so large captures
+may fill storage before the ten-draft count limit.
 
-The encoded description is capped at 8,256 UTF-8 bytes, allowing bounded field framing
-around the UI's 8,192-byte total narrative limit. Each current/previous metadata string is independently
-capped at 261,120 UTF-8 bytes. The combined binary draft body is capped at 538,688 bytes, plus a
-32-byte integrity hash. It counts with session records, temporary files and unknown files
-against the shared 5 MiB root quota. Temporary publication is validated before an immutable
-revision becomes visible. Seven-day expiry removes the recovery offer and attempts to remove
-owned valid records; invalid content remains untouched, and a failed cleanup preserves the
-latest authority rather than reviving an older draft. No power-loss durability claim is made.
+Saves reserve space for another collection publication within the shared 5 MiB root quota.
+Deletion uses only its actual smaller publication size. Tests exhaust save headroom and verify
+that deletion still succeeds without removing unrelated files. External files can exhaust the
+shared quota independently; failed mutations preserve durable state. Invalid files remain
+untouched and quota-counted. Empty collection generations prevent deleted drafts from reviving.
+No power-loss durability claim is made.
 
-The report object restores IDs, timestamps and detached metadata without collecting again.
-Every recovered/cached copy starts with metadata sharing off and logs unavailable. Review is
-owned by the UI and is not persisted. Worker-facade tests in ../ReportingRuntime additionally
-cover save callbacks on the caller thread, busy-root failure and isolated simultaneous
-save/dismiss completions. These game-free tests do not qualify native UI or Windows behavior.
+Valid schema-1 and schema-2 drafts import with diagnostics enabled. Legacy descriptions up to
+the previous 8,256-byte limit survive import and later collection publications; editing them
+requires the new description limit. Schema 3 preserves an explicit diagnostics opt-out. Copies
+retain that choice, exact captured logs and provenance without collecting another session's
+logs. Drafts expire after seven days; expired entries are never offered, even if unrelated files
+block physical cleanup. Saving a draft does not acknowledge an unexpected-exit incident.
 
-Reviewed artifact checks also exercise exact UTF-8 files, text-only exclusion, included diagnostics,
-idempotent revision retry, conflicting bytes, shared quota, corruption and validated expiry.
-Report text is capped at 64 KiB and diagnostics at 256 KiB. A binary schema-1 manifest records
-report/capture/revision identities, UTC publication, lengths and SHA-256 hashes and publishes
-last. Files remain flat in the leased root; at most 16 export manifests are retained. Existing
-matching revisions are reused only after payload validation. Interrupted unpublished files
-remain quota-counted; invalid or unknown files never authorize deletion.
+Worker-facade tests in ../ReportingRuntime cover main-thread callbacks, multiple drafts,
+busy-root failure, failed-delete restoration and simultaneous save/dismiss completions.
+These game-free tests do not qualify native UI or Windows behavior.
+
+Reviewed legacy export checks still exercise exact UTF-8 files, text-only exclusion, included
+diagnostics, idempotent revision retry, conflicting bytes, shared quota, corruption and validated
+expiry. Export records remain independent of the saved-draft collection.

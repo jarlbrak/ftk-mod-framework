@@ -130,12 +130,8 @@ namespace FTKModFramework.Core.UI
                 uiOptionsMenu openingOwner = owner;
                 panel.Closed = delegate { if (restart && openingOwner) closeOptions = openingOwner; };
                 if (restart) panel.ShowOffer();
-                else if (panel.Report == null || panel.Submitted)
-                {
-                    ReportingDraft saved = ReportingRuntime.SavedDraft;
-                    if (saved != null) panel.BeginSavedDraft(saved);
-                    else panel.BeginReport(ReportingRuntime.CreateReport(false));
-                }
+                else if (!panel.HasUnfinishedSubmission)
+                    panel.BeginReport(ReportingRuntime.CreateReport(false));
                 owner.m_MainOptions.m_SubBlocker.gameObject.SetActive(true);
                 input.SetFocus(panel, null, true);
                 if (input.InputFocus != panel || !panel.m_HasInputFocus) throw new InvalidOperationException();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using BepInEx;
@@ -22,7 +23,8 @@ namespace FTKModFramework.Core.Reporting
         private static ReportingIncident pending;
         private static Action<bool> dismissCompletion;
         private static Action delivery;
-        private static ReportingDraft savedDraft, queuedDraft;
+        private static ReportingDraft queuedDraft;
+        private static ReportingDraft[] savedDrafts = new ReportingDraft[0], deleteRollback;
         private static bool draftsReady, saveBusy;
         private static Action<bool> saveCompletion;
         private static string queuedDeleteId;
@@ -44,12 +46,33 @@ namespace FTKModFramework.Core.Reporting
             Wake.Set();
         }
         internal static bool DraftsReady { get { lock (Gate) return draftsReady; } }
+        internal static bool DraftsBusy { get { lock (Gate) return saveBusy; } }
+        internal static ReportingDraft[] SavedDrafts
+        {
+            get
+            {
+                lock (Gate)
+                {
+                    List<ReportingDraft> result = new List<ReportingDraft>();
+                    foreach (ReportingDraft draft in savedDrafts)
+                        if (DateTime.UtcNow - draft.SavedAtUtc < TimeSpan.FromDays(7)) result.Add(draft.Copy());
+                    return result.ToArray();
+                }
+            }
+        }
         internal static ReportingDraft SavedDraft
-        { get { lock (Gate) return savedDraft == null || DateTime.UtcNow - savedDraft.SavedAtUtc >= TimeSpan.FromDays(7) ? null : savedDraft.Copy(); } }
+        { get { ReportingDraft[] values = SavedDrafts; return values.Length == 0 ? null : values[0]; } }
         internal static void SaveDraft(ReportingReport report, string description, Action<bool> completed)
         {
             ReportingDraft snapshot;
             try { snapshot = ReportingDraft.Create(report, description, DateTime.UtcNow); }
+            catch { lock (Gate) { delivery += delegate { if (completed != null) completed(false); }; } return; }
+            SaveDraft(snapshot, completed);
+        }
+        internal static void SaveDraft(ReportingDraft draft, Action<bool> completed)
+        {
+            ReportingDraft snapshot;
+            try { snapshot = ReportingDraft.Create(draft.Report, draft.Description, draft.SavedAtUtc, draft.Kind, draft.CurrentLogs, draft.PreviousLogs, draft.ErrorId); }
             catch { lock (Gate) { delivery += delegate { if (completed != null) completed(false); }; } return; }
             lock (Gate)
             {
@@ -64,11 +87,13 @@ namespace FTKModFramework.Core.Reporting
             lock (Gate)
             {
                 if (quitting || worker == null || stopped || !draftsReady || saveBusy ||
-                    !ReportingDraft.ValidId(expectedReportId) || savedDraft == null || savedDraft.Report.ReportId != expectedReportId)
+                    !ReportingDraft.ValidId(expectedReportId) || !Array.Exists(savedDrafts, delegate(ReportingDraft item) { return item.Report.ReportId == expectedReportId; }))
                 { delivery += delegate { if (completed != null) completed(false); }; return; }
                 saveBusy = true; queuedDeleteId = expectedReportId; saveCompletion = completed;
-                // A submitted draft must not reopen while its durable deletion is queued.
-                savedDraft = null;
+                deleteRollback = savedDrafts;
+                List<ReportingDraft> remaining = new List<ReportingDraft>();
+                foreach (ReportingDraft draft in savedDrafts) if (draft.Report.ReportId != expectedReportId) remaining.Add(draft);
+                savedDrafts = remaining.ToArray();
             }
             Wake.Set();
         }
@@ -178,7 +203,7 @@ namespace FTKModFramework.Core.Reporting
                 lock (Gate)
                 {
                     pending = store == null ? null : store.Pending;
-                    savedDraft = drafts == null ? null : drafts.Saved; draftsReady = true;
+                    savedDrafts = drafts == null ? new ReportingDraft[0] : drafts.Drafts; draftsReady = true;
                     trackingAvailable = store != null;
                     notice = trackingAvailable ? "Restart tracking is available." : "Restart tracking is unavailable for this launch.";
                 }
@@ -211,7 +236,9 @@ namespace FTKModFramework.Core.Reporting
                         Action<bool> completedSave = activeSave;
                         lock (Gate)
                         {
-                            if (success) savedDraft = drafts.Saved;
+                            if (success) savedDrafts = drafts.Drafts;
+                            else if (deleteRollback != null) savedDrafts = deleteRollback;
+                            deleteRollback = null;
                             delivery += delegate { lock (Gate) { saveBusy = false; } if (completedSave != null) completedSave(success); };
                         }
                         activeSave = null;
@@ -251,6 +278,8 @@ namespace FTKModFramework.Core.Reporting
                     exportCompletion = null; queuedExport = null;
                     if (exportBusy) delivery += delegate { lock (Gate) { exportBusy = false; } if (failedExport != null) failedExport(null); };
                     Action<bool> failedSave = activeSave ?? saveCompletion;
+                    if (deleteRollback != null) savedDrafts = deleteRollback;
+                    deleteRollback = null;
                     saveCompletion = null; queuedDraft = null; queuedDeleteId = null;
                     if (saveBusy) delivery += delegate { lock (Gate) { saveBusy = false; } if (failedSave != null) failedSave(false); };
                     notice = "Restart tracking is unavailable for this launch.";
