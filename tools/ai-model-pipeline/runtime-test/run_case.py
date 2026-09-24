@@ -62,17 +62,6 @@ def validate_registration_freshness(report, session_mtime, profile_mtime, now, e
         raise ValueError('Registration report belongs to a different loaded content instance')
 
 
-def journal_has_new_run(path, session):
-    with path.open() as stream:
-        for _ in range(20):
-            line=stream.readline(1024*1024+1)
-            if not line: break
-            if len(line)>1024*1024: raise ValueError('Oversized case journal preamble')
-            record=json.loads(line)
-            if record.get('kind')=='provenance':
-                data=record.get('data') or {}
-                return data.get('session')==session and data.get('mode')=='new-run'
-    return False
 
 
 def living(state):
@@ -198,8 +187,15 @@ def validate_inventory(inventory, profile, require_active=True, visual_scale=Non
     return matched
 
 
+NATIVE_SETUP_GUIDANCE = ("Automatic new-run setup is retired with the direct-action bridge. "
+    "Use harness ftk_ui/ftk_input and prepare_offline to create and enter an offline run, "
+    "then use explicit next-case fixtures only at an observed native Ready boundary.")
+
+
 class Runner:
     def __init__(self, args):
+        if getattr(args, "mode", None) == "new-run":
+            raise ValueError(NATIVE_SETUP_GUIDANCE)
         self.a = args
         self.root = args.root.resolve(strict=True)
         if not args.root.is_absolute() or self.root != args.root.absolute() or self.root.parent.name != 'scratch':
@@ -309,16 +305,6 @@ class Runner:
                  record.get('contentRegistrationRun') != self.content_registration_run)):
             raise RuntimeError('Game helper session changed; stopping')
 
-    def claim_first_run(self):
-        for journal in (self.root/'model-test-output').glob('case-*/journal.jsonl'):
-            if journal!=self.journal and journal_has_new_run(journal,self.session):
-                raise RuntimeError('A prior new-run journal exists for this helper session; fresh game process required: '+str(journal))
-        marker=self.root/'model-test-output'/('new-run-session-'+self.session+'.json')
-        # Exclusive creation also closes the race between two copies of this runner.
-        # Keep the marker even after rejection/timeout; an uncertain action is never retried.
-        with marker.open('x') as stream:
-            json.dump({'session':self.session,'case':self.case,'journal':str(self.journal)},stream)
-        self.log('fresh-process-claim',{'marker':str(marker),'prerequisite':'operator confirms first run of this game process'})
 
     def http(self, path, payload=None):
         # Only an explicit read-only busy response permits another observation.
@@ -360,18 +346,13 @@ class Runner:
     def state(self):
         return self.http('/state')
 
-    def action(self, name, args=None, tolerate_no_message=False):
-        # Only this exact transition rejection is observationally harmless.
-        try:
-            result = self.http('/action', {'action':name,'args':args or {}})
-            if result.get('ok') is not True:
-                raise RuntimeError('Bridge action returned no explicit success: ' + name)
-            return result
-        except RuntimeError as error:
-            if tolerate_no_message and str(error)=='Bridge rejected request: no message open':
-                self.log('transition-no-message', {'action':name})
-                return None
-            raise
+    def action(self, name, args=None):
+        if name not in ('native_input', 'input_cancel', 'prepare_offline'):
+            raise RuntimeError('Direct bridge actions are retired; use native_input with observed UI coordinates and bindings')
+        result = self.http('/action', {'action':name,'args':args or {}})
+        if result.get('ok') is not True:
+            raise RuntimeError('Bridge action returned no explicit success: ' + name)
+        return result
 
     def helper(self, op, payload=None):
         self.check_inputs()
@@ -411,8 +392,6 @@ class Runner:
             time.sleep(.25)
         raise TimeoutError('Timed out waiting for '+label+'; no action retried')
 
-    def clear_intro(self):
-        return story_setup.clear(self)
 
     def staging_result(self,matches,final):
         companion=getattr(self.a,'companion_enemy',None)
@@ -443,74 +422,19 @@ class Runner:
         return None
 
     def run(self):
+        if self.a.mode == "new-run":
+            raise ValueError(NATIVE_SETUP_GUIDANCE)
         initial=self.state()
-        if self.a.mode=='new-run':
-            if initial.get('phase')!='menu': raise ValueError('new-run requires bridge phase menu')
-            self.claim_first_run()
-            payload={'adventure':getattr(self.a, 'adventure', 'DungeonCrawl'),'party':1}
-            if self.a.class_key: payload['class']=self.a.class_key
-            self.action('start_run',payload)
-            party_state = self.wait(lambda s: s.get('singlePlayer') is True and living(s),'actual living party')
-            self.verify_party_class(party_state)
-            self.helper('quiet-tutorials')
-            if not getattr(self.a,'skip_fortify',False):
-                fixture={'targetMaxHp':999}
-                if getattr(self.a,'cap_equipped_attack_skill',False):fixture['capEquippedAttackSkill']=True
-                self.party_fixture=self.helper('fortify-party',fixture)
-            self.clear_intro()
-            if self.expected_class_id is not None:
-                self.verify_party_class(self.state())
-            minimum=getattr(self.a,'minimum_native_weapon_max_damage',None)
-            if minimum is not None:
-                after=(getattr(self,'party_fixture',None) or {}).get('after') or []
-                if len(after)!=1 or type(after[0].get('heroInstanceId')) is not int:
-                    raise RuntimeError('Damage fixture requires one exact fortified native hero owner')
-                hero_id=after[0]['heroInstanceId']
-                inspected=self.helper('hero-damage-fixture',{'action':'inspect','heroInstanceId':hero_id})
-                hero=inspected.get('hero') or {}
-                if (inspected.get('restorationPending') is not False or inspected.get('receipt') is not None
-                        or hero.get('heroInstanceId')!=hero_id or type(hero.get('weaponItemId')) is not int
-                        or type(hero.get('augmentedPhysicalDamage')) is not int
-                        or type(hero.get('nativeWeaponMaxDamage')) is not int):
-                    raise RuntimeError('Damage fixture inspection lacks an unused exact hero/weapon baseline')
-                boundary='Applied after entry preflight and immediately before dungeon entry; restore only from the exact receipt at native between-room Ready.'
-                self.hero_damage_fixture={'inspect':inspected,'status':'inspected_before_apply','boundary':boundary}
-                try:
-                    applied=self.helper('hero-damage-fixture',{
-                        'action':'apply','heroInstanceId':hero_id,
-                        'expectedWeaponItemId':hero['weaponItemId'],
-                        'expectedAugmentedPhysicalDamage':hero['augmentedPhysicalDamage'],
-                        'expectedNativeWeaponMaxDamage':hero['nativeWeaponMaxDamage'],
-                        'minimumNativeWeaponMaxDamage':minimum})
-                except Exception:
-                    self.hero_damage_fixture['status']='apply_failed_or_uncertain_without_receipt'
-                    raise
-                self.hero_damage_fixture.update(apply=applied,status='apply_response_received_pending_validation')
-                if (applied.get('status')!='hero-damage-fixture-applied'
-                        or not isinstance(applied.get('receipt'),str) or not applied['receipt']
-                        or applied.get('minimumNativeWeaponMaxDamage')!=minimum
-                        or (applied.get('before') or {}).get('heroInstanceId')!=hero_id
-                        or (applied.get('after') or {}).get('nativeWeaponMaxDamage',0)<minimum):
-                    self.hero_damage_fixture['status']='apply_response_rejected_receipt_may_require_inspection'
-                    raise RuntimeError('Damage fixture apply receipt is incomplete or disagrees with the request')
-                self.hero_damage_fixture['status']='applied_outside_combat'
-            self.action('enter_dungeon',{'dungeonId':getattr(self.a, 'dungeon', 'Cave')})
-            # Deliberately no state read, delay, modal handling, or extra bridge action here.
-            stage={'enemy':self.a.enemy,'level':0,'room':1,'regenerate':True}
-            companion=getattr(self.a,'companion_enemy',None)
-            if companion:stage['companionEnemy']=companion
-            self.helper('stage-enemy',stage)
-        else:
-            if not living(initial) or initial.get('singlePlayer') is not True:
-                raise ValueError('next-case requires a living single-player party')
-            dungeon=initial.get('dungeon') or {}
-            if dungeon.get('level')!=self.a.level or dungeon.get('room')!=self.a.room:
-                raise ValueError('Supplied indices differ from current dungeon slot')
-            # Authoritative helper additionally requires both native Ready votes, enabled
-            # vote FSM, empty fight order, living heroes, and an active Ready button.
-            self.helper('stage-next-enemy',{'enemy':self.a.enemy,'level':self.a.level,'room':self.a.room})
-            self.helper('fortify-party',{'targetMaxHp':999,'allowReady':True})
-            self.helper('ready')
+        if not living(initial) or initial.get('singlePlayer') is not True:
+            raise ValueError('next-case requires a living single-player party')
+        dungeon=initial.get('dungeon') or {}
+        if dungeon.get('level')!=self.a.level or dungeon.get('room')!=self.a.room:
+            raise ValueError('Supplied indices differ from current dungeon slot')
+        # Authoritative helper additionally requires both native Ready votes, enabled
+        # vote FSM, empty fight order, living heroes, and an active Ready button.
+        self.helper('stage-next-enemy',{'enemy':self.a.enemy,'level':self.a.level,'room':self.a.room})
+        self.helper('fortify-party',{'targetMaxHp':999,'allowReady':True})
+        self.helper('ready')
         pending=self.wait_for_encounter()
         if pending is not None:return pending
         inventory=self.helper('inventory',{'scope':'enemies'})
@@ -525,30 +449,18 @@ def main():
     p.add_argument('--root',type=Path,required=True)
     p.add_argument('--port',type=int,required=True)
     p.add_argument('--enemy',required=True)
-    p.add_argument('--adventure',default='DungeonCrawl')
-    p.add_argument('--dungeon',default='Cave')
-    p.add_argument('--companion-enemy')
-    p.add_argument('--skip-fortify',action='store_true')
-    p.add_argument('--cap-equipped-attack-skill',action='store_true',help='Raise only the equipped weapon skill to the native stat cap in the disposable fixture.')
-    p.add_argument('--minimum-native-weapon-max-damage',type=int,help='Apply an explicit bounded hero physical-damage fixture immediately before dungeon entry.')
-    p.add_argument('--class',dest='class_key')
     p.add_argument('--level',type=int)
     p.add_argument('--room',type=int)
     p.add_argument('--operation-timeout',type=float,default=40)
     p.add_argument('--wait-timeout',type=float,default=120)
-    a=p.parse_args()
+    a, unknown=p.parse_known_args()
+    if a.mode == "new-run": p.error(NATIVE_SETUP_GUIDANCE)
+    if unknown: p.error("unrecognized arguments: " + " ".join(unknown))
+    a.class_key=None
     if not 1<=a.port<=65535 or not 1<=a.operation_timeout<=120 or not 1<=a.wait_timeout<=600:
         p.error('Invalid port/timeouts')
-    if a.mode=='next-case' and (a.level is None or a.room is None or a.class_key or a.companion_enemy or a.skip_fortify or a.cap_equipped_attack_skill or a.minimum_native_weapon_max_damage is not None):
-        p.error('next-case requires --level/--room and does not accept new-run party fixtures')
-    if a.skip_fortify and (a.cap_equipped_attack_skill or a.minimum_native_weapon_max_damage is not None):
-        p.error('hero stat fixtures require the disposable fortify-party fixture')
-    if a.minimum_native_weapon_max_damage is not None and not 1<=a.minimum_native_weapon_max_damage<=100:
-        p.error('--minimum-native-weapon-max-damage must be in 1..100')
-    if a.mode=='next-case' and (a.level<0 or a.room<0):
-        p.error('Current level and room must be nonnegative')
-    if a.mode=='new-run' and (a.level is not None or a.room is not None):
-        p.error('new-run stages fixed level0/room1; do not supply indices')
+    if a.level is None or a.room is None or a.level < 0 or a.room < 0:
+        p.error('next-case requires explicit nonnegative --level and --room')
     runner=None
     try:
         runner=Runner(a); result=runner.run()

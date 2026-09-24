@@ -1,9 +1,10 @@
 # Native story setup before dungeon staging
 
-`run_case.py` now uses helper `story-state` and `story-submit` during overworld
-setup. It does not call generic `dismiss_message`. The original bridge action is
-unchanged. An older helper without these commands fails closed; use a reviewed
-helper candidate in the isolated copy.
+Automatic `run_case.py new-run` setup is retired. Prepare and dismiss story UI
+through the [native-input harness](../../../harness/README.md). The dedicated
+helper commands described below remain isolated fixture tools; they are not
+ordinary gameplay evidence. The old entry-and-staging sequence later in this
+note describes prior evidence, not a supported bridge action sequence.
 
 `story-state` takes only the usual id/session/op fields. It observes the native
 coordinator instance/current message ID/type/closed flag, private current-instance

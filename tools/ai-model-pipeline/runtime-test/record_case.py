@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record one explicit combat action on an already staged isolated enemy; never retry."""
+"""Capture an already prepared isolated combat avatar without submitting game actions."""
 import argparse
 import importlib.util
 import json
@@ -31,11 +31,14 @@ def guard(state, enemy):
             'partyFids':[p['fid'] for p in state['party']]}
 
 
-def action_request(action, target_fid=None, focus=False):
-    if action=='pass': return 'end_turn',{}
-    if action=='attack': return 'combat_turn',{'cheat':'None','focus':bool(focus),'targetFid':target_fid}
-    if action=='kill-fixture': return 'combat_turn',{'cheat':'KillSingle','focus':False,'targetFid':target_fid}
-    raise ValueError('Unsupported action')
+RECORD_GUIDANCE = ("Direct pass/attack/kill-fixture recording is retired. Use --action observe "
+    "to capture an already prepared encounter; drive gameplay separately with harness ftk_ui/ftk_input. "
+    "Capture alone does not establish an attack, hit, death, or ordinary-gameplay outcome.")
+
+
+def require_observation(args):
+    if getattr(args, 'action', None) != 'observe' or getattr(args, 'focus', False):
+        raise ValueError(RECORD_GUIDANCE)
 
 
 def verify_action(action,result,target_fid=None,focus=False):
@@ -90,6 +93,7 @@ def kill_fixture_handoff(state,target_fid):
 class Recorder(Runner):
     capture_scope="enemies"
     def __init__(self,args):
+        require_observation(args)
         if not 1<=args.port<=65535 or not all(math.isfinite(v) and v>0 for v in (args.operation_timeout,args.capture_timeout)):
             raise ValueError('Valid explicit port and positive timeouts required')
         for name in ('model-test-output','model-test-session.json','model-test-profiles.json','model-test-registration.json'):
@@ -136,14 +140,14 @@ class Recorder(Runner):
         deadline=time.monotonic()+self.a.operation_timeout
         while time.monotonic()<deadline:
             self.check_inputs()
-            if self.capture_path.exists():raise RuntimeError('Capture completed/failed before action; action withheld')
+            if self.capture_path.exists():raise RuntimeError('Capture completed/failed before observation; capture outcome incomplete')
             frame=self.capture_path.with_suffix('')/'0000.png'
             if frame.is_file() and frame.stat().st_size>8:
                 with frame.open('rb') as stream:
                     if stream.read(8)!=b'\x89PNG\r\n\x1a\n':raise RuntimeError('Invalid first PNG')
                 self.log('first-frame',{'path':str(frame)});return
             time.sleep(.05)
-        raise TimeoutError('No first PNG in budget; action withheld, capture execution uncertain')
+        raise TimeoutError('No first PNG in budget; observation stopped, capture execution uncertain')
 
     def collect_capture(self,renderer):
         deadline=time.monotonic()+self.a.capture_timeout
@@ -197,8 +201,8 @@ class Recorder(Runner):
         return matches[0]
 
     def record(self):
-        errors=[]; action_result=None; capture=None; renderer=None; target_fid=None
-        action_confirmed=False; after=None; handoff=None
+        require_observation(self.a)
+        errors=[]; capture=None; renderer=None
         try:
             self.check_inputs(); initial=self.state(); original_guard=self.combat_guard(initial)
             self.log('before',initial)
@@ -208,31 +212,25 @@ class Recorder(Runner):
             renderer=self.select_renderer();self.begin_capture(renderer);self.wait_first_frame()
             self.check_inputs();fresh=self.state()
             fresh_guard=self.combat_guard(fresh)
-            if fresh_guard!=original_guard:raise RuntimeError('Combat identity changed; action withheld')
-            if self.capture_path.exists():raise RuntimeError('Capture ended before action; action withheld')
-            self.log('action-before',fresh)
-            target_fid=fresh_guard['enemyFid']
-            focus=bool(getattr(self.a,'focus',False)) and self.a.action=='attack'
-            name,args=action_request(self.a.action,target_fid,focus)
-            self.log('action-attempt',{'action':self.a.action,'normalDamage':self.a.action=='attack','focus':focus,'killFixture':self.a.action=='kill-fixture'})
-            action_result=self.action(name,args);verify_action(self.a.action,action_result,target_fid,focus);action_confirmed=True
+            if fresh_guard!=original_guard:raise RuntimeError('Combat identity changed; observation stopped')
+            if self.capture_path.exists():raise RuntimeError('Capture ended before observation; capture outcome incomplete')
+            self.log('capture-observation',fresh)
+            self.log('observation-only', {'gameActionsSubmitted': 0,
+                'boundary': 'Capture only; operate native input separately and verify its outcome.'})
         except Exception as error:
-            errors.append(str(error));self.log('error',{'error':str(error),'actionRetry':False})
+            errors.append(str(error));self.log('error',{'error':str(error),'gameActionsSubmitted':0})
         finally:
             if getattr(self,'capture_id',None):
                 try:capture=self.collect_capture(renderer)
                 except Exception as error:errors.append(str(error));self.log('capture-error',{'error':str(error),'resultPath':str(self.capture_path)})
             try:
                 after=self.state();self.log('after',after)
-                if self.a.action=='kill-fixture' and action_confirmed:
-                    handoff=kill_fixture_handoff(after,target_fid);self.log('kill-fixture-handoff',handoff)
             except Exception as error:errors.append(str(error));self.log('after-error',{'error':str(error)})
-        note='No visual acceptance verdict. Kill-fixture uses explicit cheat death, not normal damage. Never retry uncertain action.'
-        if handoff is not None and handoff.get('status')=='victory_pending_native_loot':
-            note+=' Native victory is awaiting loot; this recorder deliberately performs no collection.'
-        result={'ok':not errors,'status':'recorded_action_and_frames' if not errors else 'partial_or_uncertain',
-                'captureScope':self.capture_scope,'classKey':getattr(self.a,'class_key',None),'action':self.a.action,'minimumBaseHealth':self.profile.get('minimumBaseHealth'),'actionResult':action_result,'capture':capture,'errors':errors,
-                'killFixtureHandoff':handoff,'note':note}
+        note='No visual acceptance verdict or game action submitted. Capture does not establish a gameplay outcome.'
+        result={'ok':not errors,'status':'recorded_observation_frames' if not errors else 'partial_or_uncertain',
+                'captureScope':self.capture_scope,'classKey':getattr(self.a,'class_key',None),
+                'action':'observe','gameActionsSubmitted':0,'minimumBaseHealth':self.profile.get('minimumBaseHealth'),
+                'capture':capture,'errors':errors,'note':note}
         with (self.output/'result.json').open('x') as stream:json.dump(result,stream,indent=2)
         self.log('result',result)
         return result
@@ -243,12 +241,10 @@ def main():
     parser.add_argument('--root',type=Path,required=True);parser.add_argument('--port',type=int,required=True)
     parser.add_argument('--enemy',required=True);parser.add_argument('--renderer-path',required=True)
     parser.add_argument('--profile-sha256',required=True,help='Expected SHA256 of model-test-profiles.json')
-    parser.add_argument('--action',choices=('pass','attack','kill-fixture'),required=True)
-    parser.add_argument('--focus',action='store_true',help='Spend native max focus on an honest attack; only valid with --action attack.')
+    parser.add_argument('--action',choices=('observe',),required=True)
     parser.add_argument('--motion-evidence',action='store_true',help='Request bounded passive target-CEL action/trigger telemetry during this existing capture.')
     parser.add_argument('--operation-timeout',type=float,default=40);parser.add_argument('--capture-timeout',type=float,default=DEFAULT_CAPTURE_TIMEOUT)
     args=parser.parse_args();args.class_key=None;args.mode='record-action'
-    if args.focus and args.action!='attack':parser.error('--focus is only valid with --action attack')
     recorder=Recorder(args);result=recorder.record();print(recorder.output);raise SystemExit(0 if result['ok'] else 1)
 
 
