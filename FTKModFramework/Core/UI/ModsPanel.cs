@@ -49,7 +49,6 @@ namespace FTKModFramework.Core.UI
         private bool _wasBusy;
         private string _lastHotNotice;
         private bool _refreshPending;
-        private int _renderCount;
         private readonly List<Texture2D> _previewTextures = new List<Texture2D>();
         private bool _showGallery;
         private int _imagePage;
@@ -64,82 +63,6 @@ namespace FTKModFramework.Core.UI
         private static bool PanelBusy { get { return MarketplaceRuntime.Busy || FrameworkUpdateRuntime.Busy || HotReload.HotReloadCoordinator.Busy; } }
         private const string Alphabet = " abcdefghijklmnopqrstuvwxyz0123456789-";
         private static readonly string[] Categories = { "All", "items", "weapons", "proficiencies", "classes", "enemies", "encounters" };
-
-        // Explicit, environment-gated smoke seam. Only visible framework-owned buttons are invokable.
-        internal static object TestBridge(IDictionary<string, object> args)
-        {
-            if (Environment.GetEnvironmentVariable("FTK_AGENT_BRIDGE") != "1") throw new InvalidOperationException("Marketplace test bridge is disabled.");
-            object raw;
-            string operation = args != null && args.TryGetValue("operation", out raw) ? Convert.ToString(raw) : "inspect";
-            if (operation == "open")
-            {
-                StartGameFE.MainScreen title = UnityEngine.Object.FindObjectOfType<StartGameFE.MainScreen>();
-                if (title == null || !title.gameObject.activeInHierarchy) throw new InvalidOperationException("Marketplace test bridge requires the title screen.");
-                Open();
-            }
-            if (_instance == null || !_instance.gameObject.activeInHierarchy) throw new InvalidOperationException("Mods panel is not visible.");
-            Button[] buttons = _instance.GetComponentsInChildren<Button>(false);
-            if (operation == "click")
-            {
-                Button target = null;
-                if (args.TryGetValue("index", out raw))
-                {
-                    int index = Convert.ToInt32(raw);
-                    if (index >= 0 && index < buttons.Length) target = buttons[index];
-                }
-                else if (args.TryGetValue("label", out raw))
-                {
-                    string label = Convert.ToString(raw);
-                    foreach (Button button in buttons)
-                    {
-                        Text text = button.GetComponentInChildren<Text>();
-                        if (text != null && text.text == label) { target = button; break; }
-                    }
-                }
-                if (target == null || !target.interactable || !target.gameObject.activeInHierarchy) throw new InvalidOperationException("No matching visible enabled marketplace button.");
-                target.onClick.Invoke();
-            }
-            else if (operation != "inspect" && operation != "open") throw new InvalidOperationException("Unsupported marketplace test operation.");
-            List<object> visibleButtons = new List<object>();
-            buttons = _instance.GetComponentsInChildren<Button>(false);
-            for (int n = 0; n < buttons.Length; n++)
-            {
-                Text caption = buttons[n].GetComponentInChildren<Text>();
-                visibleButtons.Add(new Dictionary<string, object> { { "index", n }, { "label", caption == null ? "" : caption.text }, { "enabled", buttons[n].interactable }, { "bounds", ScreenBounds(buttons[n].GetComponent<RectTransform>()) } });
-            }
-            List<string> texts = new List<string>();
-            List<object> metrics = new List<object>();
-            foreach (Text text in _instance.GetComponentsInChildren<Text>(false))
-            {
-                texts.Add(text.text);
-                Dictionary<string, object> bounds = ScreenBounds(text.rectTransform);
-                bounds["text"] = text.text;
-                bounds["font"] = text.font == null ? "" : text.font.name;
-                bounds["fontNames"] = text.font == null ? new string[0] : text.font.fontNames;
-                // Unity owns the cached generator. Do not allocate/dispose native generators
-                // here: this game's old Unity build can dispose them again on its finalizer thread.
-                int renderedSize = text.resizeTextForBestFit ? text.cachedTextGenerator.fontSizeUsedForBestFit : text.fontSize;
-                bounds["renderedFontSize"] = renderedSize;
-                bounds["preferredHeight"] = text.preferredHeight;
-                bounds["rectHeight"] = text.rectTransform.rect.height;
-                bounds["clippingMeasured"] = !text.resizeTextForBestFit;
-                bounds["clipped"] = !text.resizeTextForBestFit && text.preferredHeight > text.rectTransform.rect.height + 1f;
-                metrics.Add(bounds);
-            }
-            List<string> loadedFonts = new List<string>();
-            foreach (Font font in Resources.FindObjectsOfTypeAll<Font>()) loadedFonts.Add(font.name + ": " + string.Join(", ", font.fontNames));
-            return new Dictionary<string, object> { { "loadedFonts", loadedFonts }, { "osFonts", Font.GetOSInstalledFontNames() }, { "renderCount", _instance._renderCount }, { "view", _instance._view }, { "texts", texts }, { "buttons", visibleButtons }, { "busy", PanelBusy },
-                { "screenWidth", Screen.width }, { "screenHeight", Screen.height }, { "textMetrics", metrics }, { "notesScroll", _instance.NotesScrollMetrics() } };
-        }
-
-        private static Dictionary<string, object> ScreenBounds(RectTransform rect)
-        {
-            Vector3[] corners = new Vector3[4];
-            rect.GetWorldCorners(corners);
-            Vector2 lower = RectTransformUtility.WorldToScreenPoint(null, corners[0]);
-            Vector2 upper = RectTransformUtility.WorldToScreenPoint(null, corners[2]);
-            return new Dictionary<string, object> { { "x", lower.x }, { "y", Screen.height - upper.y }, { "width", upper.x - lower.x }, { "height", upper.y - lower.y } };
-        }
 
         public static void Open()
         {
@@ -377,7 +300,6 @@ namespace FTKModFramework.Core.UI
         private void RenderContent()
         {
             if (_rootContent == null) return;
-            _renderCount++;
             _container = _rootContent;
             for (int i = _rootContent.childCount - 1; i >= 0; i--)
             {

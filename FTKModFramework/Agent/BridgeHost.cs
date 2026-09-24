@@ -21,10 +21,12 @@ namespace FTKModFramework.Agent
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            NativeInput.Initialize();
         }
 
         private void Update()
         {
+            NativeInput.Tick();
             // Drain everything queued this frame, but invoke each action OUTSIDE the lock so a long game
             // call never blocks the HTTP thread from enqueuing the next request.
             while (true)
@@ -45,6 +47,13 @@ namespace FTKModFramework.Agent
                     try { Plugin.Log.LogError("[agent] main-thread work threw: " + e); } catch { }
                 }
             }
+        }
+
+        private void OnDestroy()
+        {
+            NativeInput.Shutdown();
+            AgentBridge.Stop();
+            if (Instance == this) Instance = null;
         }
 
         /// <summary>

@@ -118,13 +118,6 @@ namespace FTKModFramework.Core.UI
                 }
             return heading ? HeadingFont() : Resources.GetBuiltinResource<Font>("Arial.ttf");
         }
-        private object NotesScrollMetrics()
-        {
-            if (_notesScroll == null || !_notesScroll.gameObject.activeInHierarchy) return null;
-            return new Dictionary<string, object> { { "position", _notesScroll.verticalNormalizedPosition },
-                { "contentHeight", _notesScroll.content.rect.height }, { "viewportHeight", _notesScroll.viewport.rect.height },
-                { "expanded", _expandedNotes } };
-        }
         private void ScrollNotes(int direction)
         {
             if (_notesScroll == null) return;

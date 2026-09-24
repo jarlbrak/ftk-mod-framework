@@ -18,8 +18,8 @@ namespace FTKModFramework.Agent
     ///
     /// Threading: one background thread blocks in HttpListener.GetContext(); per request the handler builds
     /// a Func&lt;object&gt;, enqueues it under <see cref="Gate"/> into <see cref="Queue"/>, and blocks on a
-    /// per-request ManualResetEvent. BridgeHost.Update() drains the queue on the main thread. net35: no
-    /// Task/async/ConcurrentQueue, only lock + Queue + ManualResetEvent.
+    /// per-request monitor. BridgeHost.Update() drains the queue on the main thread. net35: no
+    /// Task/async/ConcurrentQueue, only lock + Queue + Monitor.
     /// </summary>
     internal static class AgentBridge
     {
@@ -30,6 +30,7 @@ namespace FTKModFramework.Agent
         // Shared with BridgeHost: the main-thread work queue and its lock.
         internal static readonly object Gate = new object();
         internal static readonly Queue<Action> Queue = new Queue<Action>();
+        private static readonly HashSet<MainThreadWork> Outstanding = new HashSet<MainThreadWork>();
 
         private static bool _started;
         private static volatile bool _running;
@@ -79,7 +80,12 @@ namespace FTKModFramework.Agent
         /// <summary>Stop the listener and background thread. Idempotent.</summary>
         public static void Stop()
         {
-            _running = false;
+            lock (Gate)
+            {
+                _running = false;
+                foreach (MainThreadWork work in Outstanding) work.CancelPending();
+                Queue.Clear();
+            }
             try { if (_listener != null) _listener.Stop(); } catch { }
             try { if (_listener != null) _listener.Close(); } catch { }
             _listener = null;
@@ -131,33 +137,25 @@ namespace FTKModFramework.Agent
         /// <summary>
         /// Marshal <paramref name="work"/> onto the Unity main thread and block (up to <paramref name="timeoutMs"/>)
         /// for its result. Returns the work's return value, or rethrows the captured exception, or throws
-        /// TimeoutException if the main thread did not drain the queue in time. Called from the HTTP thread.
+        /// TimeoutException on timeout. Pending work is cancelled; already running work has an unknown
+        /// outcome and must not be retried automatically. Called from the HTTP thread.
         /// </summary>
         public static object RunOnMainThread(Func<object> work, int timeoutMs)
         {
-            ManualResetEvent done = new ManualResetEvent(false);
-            object[] resultSlot = new object[1];
-            Exception[] errorSlot = new Exception[1];
-
-            Action wrapped = delegate
-            {
-                try { resultSlot[0] = work(); }
-                catch (Exception e) { errorSlot[0] = e; }
-                finally { done.Set(); }
-            };
-
+            if (timeoutMs < 0) throw new ArgumentOutOfRangeException("timeoutMs");
+            MainThreadWork pending = new MainThreadWork(work);
             lock (Gate)
             {
-                Queue.Enqueue(wrapped);
+                if (!_running) throw new InvalidOperationException("agent bridge is not running");
+                Outstanding.Add(pending);
+                Queue.Enqueue(pending.Execute);
             }
 
-            if (!done.WaitOne(timeoutMs))
-                throw new TimeoutException("main-thread work did not complete within " + timeoutMs + "ms");
-
-            if (errorSlot[0] != null)
-                throw errorSlot[0];
-
-            return resultSlot[0];
+            try { return pending.Wait(timeoutMs); }
+            finally
+            {
+                lock (Gate) { Outstanding.Remove(pending); }
+            }
         }
     }
 }

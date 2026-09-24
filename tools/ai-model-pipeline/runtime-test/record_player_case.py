@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Capture one real custom player's combat avatar during one native pass or attack."""
+"""Capture one real custom player's combat avatar without submitting game actions."""
 import argparse
 import re
 from pathlib import Path
 from run_case import read,digest,validate_inventory
-from record_case import DEFAULT_CAPTURE_TIMEOUT, Recorder,guard
+from record_case import DEFAULT_CAPTURE_TIMEOUT, Recorder,guard,require_observation
 
 
 def player_guard(state,enemy,class_id):
@@ -90,7 +90,7 @@ class PlayerRecorder(Recorder):
     capture_scope='player-combat'
 
     def __init__(self,args):
-        if args.action not in ('pass','attack'):raise ValueError('Player recorder supports only native pass or ordinary attack')
+        require_observation(args)
         for name in ('model-test-player-profiles.json','model-test-player-registration.json'):
             path=args.root/name
             if any(p.is_symlink() for p in (path,*path.parents)):raise ValueError('Symlink player metadata refused')
@@ -140,7 +140,7 @@ def main():
     p.add_argument('--enemy',required=True);p.add_argument('--profile-sha256',required=True,help='Expected enemy profile JSON SHA256')
     p.add_argument('--class-key',required=True);p.add_argument('--skinset',required=True)
     p.add_argument('--player-profile-sha256',required=True);p.add_argument('--hero-instance-id',type=int,required=True)
-    p.add_argument('--renderer-path',required=True);p.add_argument('--action',choices=('pass','attack'),required=True)
+    p.add_argument('--renderer-path',required=True);p.add_argument('--action',choices=('observe',),required=True)
     p.add_argument('--operation-timeout',type=float,default=40);p.add_argument('--capture-timeout',type=float,default=DEFAULT_CAPTURE_TIMEOUT)
     args=p.parse_args();args.mode='record-player-action'
     recorder=PlayerRecorder(args);result=recorder.record();print(recorder.output);raise SystemExit(0 if result['ok'] else 1)

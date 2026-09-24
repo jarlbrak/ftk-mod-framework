@@ -70,81 +70,24 @@ class RunnerTests(unittest.TestCase):
             return {'renderers':[{'ownerInstanceId':1,'instanceId':2,'celRelativeRendererPath':'Body',
                 'mesh':'ftkmf_glb_original.glb','active':True,'enabled':True}]}
         r.action=action;r.helper=helper
-        r.claim_first_run=lambda:calls.append('claim_first_run')
         def wait(pred,label):
             calls.append('wait:'+label)
             return active
         r.wait=wait
         r.log=lambda *args:None
-        r.clear_intro=lambda:calls.append('clear_intro')
         r.verify_story_clear=lambda:calls.append('verify_story_clear')
         r.prepare_entry=lambda:calls.append('prepare_entry')
         return r,calls
 
-    def test_new_sequence_no_gap_after_entry(self):
-        r,calls=self.setup_runner();result=r.run()
-        index=calls.index('enter_dungeon')
-        self.assertEqual(calls[index+1],'stage-enemy')
-        self.assertNotIn('dungeon_encounter',calls)
-        self.assertEqual(result['status'],'binding_metadata_observed')
 
-    def test_native_cap_attack_skill_is_an_explicit_fortify_fixture(self):
-        r,calls=self.setup_runner();r.a.cap_equipped_attack_skill=True;submitted=[]
-        original=r.helper
-        def helper(name,args=None):
-            submitted.append((name,args));return original(name,args)
-        r.helper=helper
-        result=r.run()
-        fortify=[args for name,args in submitted if name=='fortify-party']
-        self.assertEqual(fortify,[{'targetMaxHp':999,'capEquippedAttackSkill':True}])
-        self.assertIsNotNone(result['partyFixture'])
 
-    def test_damage_fixture_uses_fortified_hero_and_exact_inspected_before_values(self):
-        r,calls=self.setup_runner();r.a.minimum_native_weapon_max_damage=30;submitted=[]
-        original=r.helper
-        hero={'heroInstanceId':41,'weaponItemId':100006,'augmentedPhysicalDamage':0,'nativeWeaponMaxDamage':10}
-        def helper(name,args=None):
-            submitted.append((name,args));calls.append(name)
-            if name=='fortify-party':return {'after':[{'heroInstanceId':41}]}
-            if name=='hero-damage-fixture' and args['action']=='inspect':
-                return {'receipt':None,'restorationPending':False,'hero':hero}
-            if name=='hero-damage-fixture' and args['action']=='apply':
-                return {'status':'hero-damage-fixture-applied','receipt':'token','minimumNativeWeaponMaxDamage':30,
-                    'before':hero,'after':{**hero,'augmentedPhysicalDamage':20,'nativeWeaponMaxDamage':30}}
-            return original(name,args)
-        r.helper=helper
-        result=r.run()
-        apply=next(args for name,args in submitted if name=='hero-damage-fixture' and args['action']=='apply')
-        self.assertEqual(apply,{'action':'apply','heroInstanceId':41,'expectedWeaponItemId':100006,
-            'expectedAugmentedPhysicalDamage':0,'expectedNativeWeaponMaxDamage':10,
-            'minimumNativeWeaponMaxDamage':30})
-        self.assertEqual(result['heroDamageFixture']['status'],'applied_outside_combat')
-        self.assertLess(calls.index('hero-damage-fixture'),calls.index('enter_dungeon'))
 
-    def test_damage_fixture_retains_rejected_apply_response_for_inspection(self):
-        r,calls=self.setup_runner();r.a.minimum_native_weapon_max_damage=30
-        hero={'heroInstanceId':41,'weaponItemId':100006,'augmentedPhysicalDamage':0,'nativeWeaponMaxDamage':10}
-        original=r.helper
-        def helper(name,args=None):
-            calls.append(name)
-            if name=='fortify-party':return {'after':[{'heroInstanceId':41}]}
-            if name=='hero-damage-fixture' and args['action']=='inspect':
-                return {'receipt':None,'restorationPending':False,'hero':hero}
-            if name=='hero-damage-fixture' and args['action']=='apply':
-                return {'status':'hero-damage-fixture-applied','receipt':'token','minimumNativeWeaponMaxDamage':30,
-                    'before':hero,'after':{**hero,'augmentedPhysicalDamage':20,'nativeWeaponMaxDamage':29}}
-            return original(name,args)
-        r.helper=helper
-        with self.assertRaisesRegex(RuntimeError,'apply receipt is incomplete'):
-            r.run()
-        self.assertEqual(r.hero_damage_fixture['status'],'apply_response_rejected_receipt_may_require_inspection')
-        self.assertEqual(r.hero_damage_fixture['apply']['receipt'],'token')
-        self.assertNotIn('enter_dungeon',calls)
 
-    def test_entry_rejection_stops_before_stage(self):
-        r,calls=self.setup_runner(reject='enter_dungeon')
-        with self.assertRaises(RuntimeError):r.run()
-        self.assertNotIn('stage-enemy',calls)
+
+
+
+
+
 
 
     def test_ready_stage_rejection_stops_before_heal_and_click(self):
@@ -165,30 +108,13 @@ class RunnerTests(unittest.TestCase):
         self.assertTrue(run_case.exact_combat(state,'gloamfin','ogreA'))
         self.assertFalse(run_case.exact_combat(state,'gloamfin'))
 
-    def test_victory_setup_can_skip_fortify_and_stage_native_companion(self):
-        r,calls=self.setup_runner();r.a.companion_enemy='ogreA';r.a.skip_fortify=True
-        active={'signals':{'modalOpen':False,'choiceOpen':False},'singlePlayer':True,'party':[{'hp':30}],
-                'combat':{'active':True,'heroTurnReady':True,
-                          'enemies':[{'type':'test_key'},{'type':'ogreA'}]}}
-        states=iter([{'phase':'menu'},active]);r.state=lambda:next(states)
-        r.wait=lambda predicate,label:active
-        staged=[]
-        def helper(name,args=None):
-            calls.append(name);staged.append((name,args))
-            return {'renderers':[{'ownerInstanceId':1,'instanceId':2,'celRelativeRendererPath':'Body',
-                'mesh':'ftkmf_glb_original.glb','active':True,'enabled':True}]}
-        r.helper=helper
-        result=r.run()
-        self.assertEqual(result['companionEnemy'],'ogreA')
-        self.assertNotIn('fortify-party',calls)
-        stage=next(args for name,args in staged if name=='stage-enemy')
-        self.assertEqual(stage['companionEnemy'],'ogreA')
+
 
     def test_observed_late_story_stops_before_inventory(self):
         # Exact first post-stage bridge observation from the stopped Reefstrider
         # session, where the story prevented any combatant from being created.
         observed=run_case.read(Path(__file__).parent/'fixtures/reefstrider-post-stage-story.json')
-        r,calls=self.setup_runner()
+        r,calls=self.setup_runner("next-case")
         r.a.enemy='ftkmf_modeltest_reefstrider'
         r.wait=lambda predicate,label:observed
         self.assertTrue(r.encounter_observed(observed))
@@ -198,7 +124,7 @@ class RunnerTests(unittest.TestCase):
         self.assertFalse(result['finalState']['combat']['active'])
         self.assertNotIn('inventory',calls)
         self.assertNotIn('story-submit',calls)
-        self.assertEqual(calls.count('stage-enemy'),1)
+        self.assertEqual(calls.count('stage-next-enemy'),1)
 
     def test_unknown_post_stage_modal_is_rejected(self):
         r,calls=self.setup_runner()
@@ -287,21 +213,14 @@ class RunnerTests(unittest.TestCase):
         inventory['renderers'][0]['celRootLocalScale']=[.55,.55,.55]
         with self.assertRaises(ValueError):run_case.validate_inventory(inventory,profile,visual_scale=contract)
 
-    def test_only_exact_no_message_rejection_tolerated(self):
-        r=run_case.Runner.__new__(run_case.Runner);r.log=lambda *args:None
-        with patch.object(r,'http',side_effect=RuntimeError('Bridge rejected request: no message open')):
-            self.assertIsNone(r.action('dismiss_message',tolerate_no_message=True))
-        with patch.object(r,'http',side_effect=TimeoutError('uncertain')):
-            with self.assertRaises(TimeoutError):r.action('dismiss_message',tolerate_no_message=True)
-
-    def test_unknown_modal_never_dismissed(self):
+    def test_retired_actions_rejected_before_transport(self):
         r=run_case.Runner.__new__(run_case.Runner)
-        r.a=argparse.Namespace(wait_timeout=2)
-        r.helper=lambda op,payload=None:{'signals':{'modalOpen':None}}
-        r.log=lambda *args:None
-        with patch.object(r,'action') as action:
-            with self.assertRaises(RuntimeError):r.clear_intro()
-            action.assert_not_called()
+        with patch.object(r, 'http') as transport:
+            for name in ('start_run', 'enter_dungeon', 'combat_turn', 'end_turn', 'dismiss_message'):
+                with self.subTest(name=name), self.assertRaisesRegex(RuntimeError, 'retired'):
+                    r.action(name)
+            transport.assert_not_called()
+
 
     def test_old_registration_refused(self):
         with self.assertRaises(ValueError):
@@ -330,23 +249,17 @@ class RunnerTests(unittest.TestCase):
         r=run_case.Runner.__new__(run_case.Runner);r.expected_class_id=17
         with self.assertRaises(RuntimeError):r.verify_party_class({'party':[{'classId':16}]})
 
-    def test_prior_session_journal_detected(self):
-        text=json.dumps({'kind':'provenance','data':{'session':'abc','mode':'new-run'}})+'\n'
-        with patch.object(Path,'open',return_value=io.StringIO(text)):
-            self.assertTrue(run_case.journal_has_new_run(Path('offline'),'abc'))
-        with patch.object(Path,'open',return_value=io.StringIO(text)):
-            self.assertFalse(run_case.journal_has_new_run(Path('offline'),'different-process'))
 
-    def test_second_new_run_stops_before_start_action(self):
+    def test_new_run_rejected_before_initialization_or_observation(self):
+        with patch.object(Path, 'resolve') as filesystem:
+            with self.assertRaisesRegex(ValueError, 'retired'):
+                run_case.Runner(argparse.Namespace(mode='new-run'))
+            filesystem.assert_not_called()
         r,calls=self.setup_runner()
-        with patch.object(r,'claim_first_run',side_effect=RuntimeError('fresh process required')):
-            with self.assertRaises(RuntimeError):r.run()
-        self.assertNotIn('start_run',calls)
+        with patch.object(r, 'state') as state:
+            with self.assertRaisesRegex(ValueError, 'retired'): r.run()
+            state.assert_not_called()
+        self.assertEqual(calls, [])
 
-    def test_existing_exclusive_marker_refused(self):
-        r=run_case.Runner.__new__(run_case.Runner)
-        r.root=Path('offline');r.journal=Path('own');r.session='abc'
-        with patch.object(Path,'glob',return_value=[]),patch.object(Path,'open',side_effect=FileExistsError('prior attempt')):
-            with self.assertRaises(FileExistsError):r.claim_first_run()
 
 if __name__=='__main__':unittest.main()

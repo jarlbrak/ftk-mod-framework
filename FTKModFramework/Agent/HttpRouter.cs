@@ -26,6 +26,8 @@ namespace FTKModFramework.Agent
             string path = req.Url.AbsolutePath;
 
             if (method == "GET" && path == "/health") { HandleHealth(ctx); return; }
+            if (method == "GET" && path == "/input") { HandleInput(ctx); return; }
+            if (method == "GET" && path == "/ui") { HandleUi(ctx); return; }
             if (method == "GET" && path == "/state") { HandleState(ctx); return; }
             if (method == "GET" && path == "/screenshot") { HandleScreenshot(ctx); return; }
             if (method == "POST" && path == "/action") { HandleAction(ctx); return; }
@@ -38,6 +40,8 @@ namespace FTKModFramework.Agent
             Dictionary<string, object> body = new Dictionary<string, object>();
             body["ok"] = true;
             body["port"] = AgentBridge.Port;
+            body["protocolVersion"] = 3;
+            body["frameworkMvid"] = typeof(AgentBridge).Module.ModuleVersionId.ToString();
             // singlePlayer is best-effort and may be null at the menu; do not marshal heavily for liveness.
             body["singlePlayer"] = TrySinglePlayer();
             WriteJson(ctx, 200, Json.Write(body));
@@ -65,6 +69,18 @@ namespace FTKModFramework.Agent
             }
         }
 
+        private static void HandleInput(HttpListenerContext ctx)
+        {
+            try { WriteJson(ctx, 200, Json.Write(AgentBridge.RunOnMainThread(NativeInput.Status, StateTimeoutMs))); }
+            catch (Exception e) { WriteJson(ctx, 500, Json.Write(ActionFail("input read failed: " + e.Message))); }
+        }
+
+        private static void HandleUi(HttpListenerContext ctx)
+        {
+            try { WriteJson(ctx, 200, Json.Write(AgentBridge.RunOnMainThread(UiReader.Read, StateTimeoutMs))); }
+            catch (Exception e) { WriteJson(ctx, 500, Json.Write(Err("UI read failed: " + e.Message))); }
+        }
+
         private static void HandleState(HttpListenerContext ctx)
         {
             try
@@ -89,6 +105,8 @@ namespace FTKModFramework.Agent
             try
             {
                 string bodyText;
+                if (ctx.Request.ContentLength64 < 0 || ctx.Request.ContentLength64 > 262144)
+                    throw new ArgumentException("action body requires Content-Length of at most 262144 bytes");
                 using (StreamReader sr = new StreamReader(ctx.Request.InputStream, Encoding.UTF8))
                     bodyText = sr.ReadToEnd();
 
@@ -118,9 +136,9 @@ namespace FTKModFramework.Agent
                     delegate { return ActionExecutor.Execute(actCopy, argCopy); }, ActionTimeoutMs);
                 WriteJson(ctx, 200, Json.Write(result));
             }
-            catch (TimeoutException)
+            catch (TimeoutException e)
             {
-                WriteJson(ctx, 200, Json.Write(ActionFail("action timed out (main thread busy)")));
+                WriteJson(ctx, 200, Json.Write(ActionFail(e.Message)));
             }
             catch (Exception e)
             {

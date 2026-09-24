@@ -5,6 +5,34 @@ single-player game inspect enemy rigs, replace explicitly selected meshes, and
 capture motion inside the game. It does not turn a successful mesh load into a
 claim of visual quality or normal-combat validation.
 
+## Current native-input boundary
+
+The bridge now accepts only `native_input`, `input_cancel`, and
+`prepare_offline`. See [the harness contract](../../../harness/README.md) for
+observed UI coordinates, configured bindings, once-only input, and offline setup.
+
+The following automated routes are retired and reject before creating output,
+claiming a session, capturing frames, or submitting helper/game mutations:
+
+- `run_case.py new-run`, including automatic dungeon entry and party setup.
+- Recorder actions `pass`, `attack`, and `kill-fixture`, including player capture.
+- `exercise_case.py` automatic pass/attack/death/loot sequences.
+- `run_kraken_production_campaign.py run`; offline `assemble` remains available.
+
+Prepare an offline run and encounter with native input. Both recorders accept
+`--action observe` to retain the existing guarded renderer capture, binary/profile
+pins, and frame validation without submitting game actions. Operate native input
+separately during capture when needed, and verify actual gameplay outcomes from
+state and frames. An observation capture alone proves no hit, death, or attack.
+
+`run_case.py next-case` remains an explicit test fixture at an already observed
+native between-room Ready boundary. It still stages, fortifies, and selects Ready
+through the dedicated isolated helper; it is not ordinary-gameplay evidence.
+The independent Kraken bank suite and passive helper observations remain usable.
+Existing report validators and campaign assembly can still inspect old evidence.
+
+No removed fixture behavior has been moved into the native-input implementation.
+
 ## Build and launch
 
 Build against an existing disposable copy. No original Steam path is a default:
@@ -174,166 +202,18 @@ ledgers.
 
 ## One enemy validation sequence
 
-After `run_case.py` stages an exact enemy in an owned isolated game, use
-`exercise_case.py` to record one pass/enemy attack, an ordinary hero attack,
-an explicit fixture death, and native loot progression. The default is one
-ordinary attack; native rows whose first attack can be blocked or protected
-may opt into a bounded sequence:
+Prepare offline gameplay through the native-input harness and observe the exact
+registered enemy, hero, and renderer identities before recording. Use
+`record_case.py --action observe --motion-evidence` for a bounded capture and
+operate gameplay separately through observed native controls. Keep input receipts,
+before/after state, and the corresponding frames together.
 
-```sh
-python3 tools/ai-model-pipeline/runtime-test/exercise_case.py \
-  --root /absolute/project/scratch/game-copy --port 8788 \
-  --enemy YOUR_REGISTERED_ENEMY_KEY --renderer-path 'EXACT_RENDERER_PATH' \
-  --profile-sha256 SHA256_OF_DEPLOYED_MODEL_TEST_PROFILES_JSON \
-  --attack-attempts 8 --capture-timeout 360
-```
-
-The hash covers the entire deployed catalog, not an individual combat profile.
-Select the renderer path from that exact profile. To stage and exercise a new
-candidate from an existing eligible native Ready slot, add `--from-ready
---level LEVEL --room ROOM` with the currently observed indices. Staged mode
-accepts neither index. This does not start a campaign, restart the game, cross
-stairs, replace non-enemy rooms, or continue to another candidate.
-
-Each action capture in this exercise now requests the passive native combat
-motion observer. It arms only when the exact selected enemy CEL is enabled and
-settled at `Base Layer.IDLE` and the bound renderer resolves to that CEL's native
-Animator. The first retained PNG must still show that exact idle state before an
-action can qualify. The observer then records bounded `PlayAttackSequence` entries
-and exact target `CombatTrigger` entries while the existing bridge owns the
-unchanged action. The case requires an enemy-attacker event for pass, a
-`Damaged` or `DamagedHeavy` victim response and matching target trigger for the
-ordinary hit, and a `Death` victim response and target trigger for the
-KillSingle fixture. The raw capture's `motionObservation` plus the case entry's
-`motionEvidence` identify the original PNG after each event. This is native
-action provenance and a review pointer, not automatic pose, art, clip-coverage
-or ordinary-lethal acceptance.
-
-Only one operator may issue helper commands or game actions during the run.
-The runner claims the session/slot and stops on uncertain actions, changed
-identity/pins, or an ordinary attack without observed nonlethal HP loss. With
-`--attack-attempts N`, a later attack is issued only after the preceding attack
-has a complete same-target `no_hp_loss_unclassified` observation; the sequence
-stops on any other outcome and still requires measured nonlethal HP loss. This
-bounded retry preserves an observed `Block`, `Dodge`, or absent exact victim
-response as an `attackResponseObservation`, but does not infer block, dodge,
-protection or immunity from it. Only the accepted positive-HP-loss attempt must
-also prove the exact `Damaged`/`DamagedHeavy` target motion and trigger. Uncertain
-actions are never retried. A stopped run is evidence to inspect, not permission
-to rerun the command. Known
-renderer destruction during death preserves the raw partial failure; it does
-not become a complete capture. Loot clicks require a fresh native Collect
-predicate and observed progress before another submission.
-
-If a retained no-focus process proves repeated exact native `Block` outcomes,
-one separate fresh execution-queue run may opt into the disposable hero-side
-skill fixture:
-
-```sh
-python3 tools/ai-model-pipeline/runtime-test/run_execution_queue_route.py \
-  --stage-readiness scratch/model-validation-stage-readiness.json \
-  --game-root scratch/game-copy \
-  --topology-group EXACT_TOPOLOGY_GROUP \
-  --route-kind directEnemy \
-  --attack-attempts 8 \
-  --cap-equipped-attack-skill \
-  --run --output scratch/my-native-cap-run.json
-```
-
-The fixture requires exactly one equipped right-hand weapon and zero spent
-focus. It resolves that weapon's real `_skilltest`, raises only the matching
-hero augmented stat to `GameFlow.m_MaxCharacterStat`, verifies the resulting
-zero-focus value, and records the weapon, skill, native cap, exact augmentation,
-and before/after values. It does not set attack results, damage, enemy stats,
-focus, RNG, or animation state. The native roll is still probabilistic, and the
-fixture is balance-unrepresentative even when the later action is an ordinary
-zero-focus combat action. Preserve every preceding Block attempt and the full
-fixture receipt with the accepted hit. Do not use this option with
-`--skip-fortify` or `next-case`.
-
-If two separately retained bounded no-focus routes still prove exact native
-no-loss responses, inspect the native damage calculation and source row before
-trying another route. When that evidence supports a conservative threshold, one
-further fresh run may combine the skill cap with an explicit minimum native
-weapon maximum damage:
-
-```sh
-python3 tools/ai-model-pipeline/runtime-test/run_execution_queue_route.py \
-  --stage-readiness scratch/model-validation-stage-readiness.json \
-  --game-root scratch/game-copy \
-  --topology-group EXACT_TOPOLOGY_GROUP \
-  --route-kind directEnemy \
-  --attack-attempts 8 \
-  --cap-equipped-attack-skill \
-  --minimum-native-weapon-max-damage 30 \
-  --run --output scratch/my-native-damage-run.json
-```
-
-The damage request must be 1 through 100, exceed the inspected current maximum,
-and require no more than 50 additional physical damage. After entry preflight
-and immediately before dungeon entry, `run_case.py` uses
-`hero-damage-fixture` to inspect and pin the exact hero, stats object, equipped
-native weapon and database row, character event listener, Animator, controller,
-focus and before-values. It applies only the required physical augmentation
-through native `AugmentCharacterOther(PhysDmg, delta)`. It does not replace the
-weapon, spend focus, set RNG, choose an attack result, issue animation triggers,
-or modify the enemy.
-
-Derive the minimum from the exact decompiled enemy source row and native damage
-calculation. It must exceed the effective physical armor boundary. A native
-skill cap can improve the roll while repeated successful actions still resolve
-to Block when damage cannot penetrate armor. Preserve the inspected source value
-and any runtime-scaling caveat instead of probing higher damage values blindly.
-For Jungle Snake C, source armor 32 justifies a conservative minimum of 33.
-
-The stage result stores the exact receipt. `exercise_case.py` accepts it only
-from that same session and isolated output root, then issues the normal
-zero-focus native action. After death and loot handling reach native between-room
-`Ready`, it makes one receipt-bound restoration attempt and verifies the exact
-prior augmentation and the native maximum expected at the hero's current
-legitimate level. Native combat may award XP and levels before Ready. The restore
-must preserve XP and level progression, remove only the fixture augmentation,
-and report the original maximum, current-level expected maximum, actual restored
-maximum, and level progression used in the calculation. Object, controller, focus, weapon,
-row or invariant drift rejects restoration. An error path may attempt restore
-once, but never retries it; if combat remains active the helper rejects the
-mutation and the runner stops without granting later action credit. Preserve
-that rejected state rather than treating process disposal as restoration.
-Every result under this fixture is balance-unrepresentative, remains
-probabilistic, and cannot establish ordinary lethal damage. Amberwake V3 is the
-canonical 10 to 30 maximum-damage, 11-damage hit and exact Ready-time restore
-example. Bramblecoil V2 records source armor 32, a requested minimum of 33,
-maximum damage 12→35, an ordinary native HP 86→85 hit, XP 0→110 and level 0→2,
-then restoration of augmentation 23→0 and the correct level-adjusted maximum 12.
-Its earlier stale-wrapper rejection remains rejected evidence even though the
-helper itself restored the correct current-level value.
-
-The 120 full-size PNGs in one fixed capture can take several minutes to encode
-and visibly slow the isolated game. The default capture budget is 360 seconds;
-that is observation time for the one already-issued capture, never permission
-to submit a second action or capture.
-
-After a completed no-focus bounded result, a separate fresh run may add
-`--focus` to spend native maximum focus for a strongest legitimate attack. Its
-raw case is explicitly marked `focusedAttack: true`; preserve the no-focus
-boundary beside it, and do not relabel focused damage as ordinary no-focus
-damage.
-
-Successful completion prints a `case-result.json` path with status
-`needs_visual_review`. Its journals, raw captures, PNG hashes, HP observations,
-and final Ready snapshot support the recorded mechanics. `selected-frames.html`
-is a small deterministic sample, initially marked unreviewed. Inspect the clip
-occurrences in each capture summary and additional attack, hit, and death poses;
-the default selected frames can miss those moments. Record visual findings in a
-separate artifact and preserve the original raw result. An explicit `KillSingle`
-death is not ordinary lethal damage, and one renderer does not validate other
-parts of a multipart model.
-
-The first live trial used the exact fairyA calibration profile in session
-`5d8860c3aa834e8286ad4d97dedea7c4`, case
-`9fa034b1acf246eaa5b8b8dc144aaf01`: three 120-frame captures, ordinary HP
-58 to 55, one native Collect, then strict Ready at level 0 / room 3.
-This establishes that sequence on that case, not universal rig or art acceptance.
+The automatic exercise driver has been removed. A capture is not proof of an
+attack or death: the passive observer must identify the relevant native CEL event,
+and the retained frames must show the claimed result. Ordinary gameplay and
+explicit isolated helper fixtures remain separate evidence lanes. Pure classifiers
+in `exercise_case.py` and `motion_evidence.py` can inspect existing evidence without
+issuing actions. Never retry an uncertain input to obtain missing evidence.
 
 ## Preserve a model evidence archive
 
@@ -551,7 +431,7 @@ A preview still requires the existing single-player guard to succeed.
   records the native Animator state with each retained frame; exercise evidence
   rejects an action that precedes the retained idle frame. It does not call a
   trigger, select a combatant or send a bridge action. The
-  capture result adds `motionObservation`; use `exercise_case.py` to interpret
+  capture result adds `motionObservation`; use the offline evidence classifiers to interpret
   its pass, hit and fixture-death evidence safely.
 - `play`: same fields/timing as capture (including optional `fixedStep:true`) plus exact `state` and optional `layer`
   (default 0). `Animator.HasState` must validate the state before playback.
@@ -578,7 +458,7 @@ A preview still requires the existing single-player guard to succeed.
   encounter afterward because the trigger changes animation state.
 - `select-room`: `{"enemy":"exact-row-ID"}`. Outside combat, selects an existing
   generated room containing that enemy. Generate rooms with the existing
-  bridge's `dungeon_regen` first. Selection is synthetic setup. Wait for native
+  bridge's native dungeon generation or helper `stage-enemy` with `regenerate:true` at its allowed setup boundary first. Selection is synthetic setup. Wait for native
   spawn/camera initialization; never force an early dungeon acknowledgment.
   This operation does not invent enemies or clear a campaign.
 
@@ -587,8 +467,8 @@ A preview still requires the existing single-player guard to succeed.
   calls native `GenerateDungeonEncounters(dungeon, dungeonRandom)` and selects
   the replacement room in the same main-thread Update. Generation and requested
   indexes validate before the generated dictionary is assigned. Call immediately
-  after `enter_dungeon` succeeds, before waiting for camera/dialog flow; this
-  removes the separate `dungeon_regen`/stage timing gap. A rejected staging request
+  at its allowed setup boundary after native dungeon entry; this
+  removes the separate native dungeon generation or helper `stage-enemy` with `regenerate:true` at its allowed setup boundary/stage timing gap. A rejected staging request
   must stop the caller: never follow it with `dungeon_encounter`.
   The operation
   validates an exact DB row and its native enemy/weapon assets, then substitutes
@@ -672,8 +552,8 @@ A preview still requires the existing single-player guard to succeed.
   the realtime fade/reset/disconnect path and does not call `SaveAndQuit`.
   Native cleanup may commit pending lore through the isolated save getter.
   Returning to a title-like state is not a validated fresh-process reset.
-  A measured second `start_run` in the same process failed native map generation
-  before custom-class application. Start a new owned game process for `new-run`;
+  A measured second run in the same process failed native map generation
+  before custom-class application. Start a fresh owned game process for native setup;
   use strict native Ready `next-case` transitions to reuse a healthy process.
 
 - `native-create-character-preflight`: `{}` is a synchronous, read-only
@@ -785,64 +665,10 @@ preserves the observed failure and the exact bridge state used by the regression
 test. Detecting this boundary does not fix the underlying newly triggered quest
 sequence. Resolve that sequence outside the dungeon before another fresh run.
 
-From a freshly launched owned game process, before its first run:
-
-The current `new-run` and interrupted-start continuation require a helper with
-`entry-preparation-state`, `entry-position` and `entry-discover`. Older helper
-`0c65f127` does not implement this protocol. Reviewed helper `2c42e55d` completed
-two fresh startup trials; verify its full receipt and deployment hashes.
-Both story chains finished before positioning/discovery in both trials, so this
-does not establish a repair for the earlier late-story failure. The
-[second trial archive](../../../docs/evidence/entry-preparation-native-v1/second-trial/validation.json)
-preserves that chronology and leaves the first validation unchanged.
-Do not mix the new Python runner with the older helper. The runner positions once,
-services exact native story pages while one discovery check is pending, and
-requires its callback, the registered dungeon quest/destination and fresh
-quiet readiness before entry. `next-case` retains its existing native Ready
-path. [Entry orchestration](entry_setup.py) never retries an uncertain mutation.
-
-```sh
-python3 tools/ai-model-pipeline/runtime-test/run_case.py new-run \
-  --root /absolute/project/scratch/game-copy --port 8766 \
-  --enemy ftkmf_modeltest_ashfang
-# Optional explicit class for a new run:
-#   --class ftkmf_modeltest_player_blacksmith_female
-# Optional two-enemy party-loss setup for a terminal observer campaign:
-#   --companion-enemy ogreA --skip-fortify
-```
-
-This requires `phase:menu`, starts the requested adventure with one hero, waits for a real
-nonempty living party, quiets tutorials, fortifies to 999 maximum HP, and
-dismisses introductory messages until modal state stays clear for two seconds.
-It calls `enter_dungeon` followed immediately by `stage-enemy` with generation,
-level 0 and room 1, with no intervening state read or dialog wait. No
-`dungeon_encounter` call is made. It waits for exactly the requested enemy set
-and native `heroTurnReady` before inspecting the original mesh assignments.
-Without `--companion-enemy`, that remains one exact enemy. A new-run-only
-`--companion-enemy` stages one additional exact native row for a measured
-multi-enemy fixture. `--skip-fortify` leaves the party's ordinary starting
-health intact. These options exist for the Kraken party-loss campaign, where
-the head's own four proficiencies are harmless and cannot defeat a solo hero.
-
-`phase:menu` only means `!inSession` in the state reader; it does not prove that
-the actual MainScreen FSM is ready or that a prior game was cleanly reset. The
-native startup driver has stronger internal gates, but its asynchronous failure
-is not returned by the initial successful `start_run` response. The runner
-therefore requires an operator-confirmed fresh process and refuses any prior
-`new-run` journal with the same helper session nonce. An exclusive
-`new-run-session-<nonce>.json` marker also prevents a second attempt after a
-timeout/rejection, including concurrent runners. Do not delete that marker to
-bypass the guard. Manually started runs outside the runner cannot be inferred
-from its journal, so the fresh-process prerequisite still applies.
-
-Startup polling is bounded and inspects newly appended BepInEx log text for
-`start_run failed` or `_createRealmCasterTable` failures. Detection stops with
-an ordered log excerpt; an ordinary state timeout also stops without retry.
-The measured failed case followed `return-to-title` and a second run in the
-same process, failing native `GameDefinition._createRealmCasterTable` before
-the requested custom class was applied. Initial process startup and strict
-same-process Ready transitions are the observed successful paths; title reset
-is not evidence that another new run will work.
+Prepare a fresh offline run, class selection, story pages, and dungeon entry
+through `prepare_offline`, `ftk_ui`, and `ftk_input`. Automatic first-run setup and
+interrupted-start orchestration are retired. Native input receipts establish
+input delivery; observe actual party, story, and dungeon state before proceeding.
 
 At an existing native Ready preparation slot, supply its current indices:
 
@@ -955,25 +781,10 @@ operations never send raw FSM events, acknowledgments, or room advances.
 The new readiness/collection operations have build validation only until
 their results are recorded from an isolated live session.
 
-For manual motion evidence, the caller can yield a hero turn through the bridge:
-
-```json
-{"action":"end_turn","args":{}}
-```
-
-Before sending it, verify an active combat with the exact intended enemy, a
-living party, and `combat.heroTurnReady:true` from a fresh state. The caller must
-provide these guards: the current endpoint's combat branch checks combat and
-the stance-button object, then calls native `DoSkipCombatTurn` (Pass); it does
-not enforce the full hero-turn readiness gate itself. Send once, stop on any
-rejection or uncertain timeout, and observe the ensuing native enemy turn.
-Do not send this action outside verified combat, where it has different behavior.
-
-This allows a low-HP enemy to take an ordinary attack before a lethal hero hit.
-Record before/after state and native attack frames, then review the frames and
-timing. An accepted Pass or completed enemy turn alone is not a visual motion
-pass; attack appearance remains pending until viewed. `run_case.py` deliberately
-does not issue combat actions, including this one.
+For motion evidence, observe the native Pass control and activate it through
+`ftk_input` only after checking the exact enemy and living hero-turn state.
+Record the input receipt and ensuing native enemy turn; do not infer an attack
+from input completion alone.
 
 ## Native owned-equipment avatar rebuild checks
 
@@ -1120,102 +931,35 @@ process leak freedom. Already-retired assets cannot be reconstructed from old
 mesh names: arm first, then perform a fresh native transfer. Live validation
 is required; compilation does not establish Unity destruction timing.
 
-## Record one already-staged enemy action
+## Record one already-staged enemy observation
 
-`record_case.py` replaces ad hoc capture scripts for an enemy that is already
-in native combat. Explicitly select the isolated root, its bridge port, exact
-registered enemy, CEL-relative renderer assignment, expected SHA256 of the
-profile JSON, and one action:
+Select the isolated root, bridge port, registered enemy, CEL-relative renderer
+assignment, and profile JSON SHA256:
 
 ```sh
 python3 tools/ai-model-pipeline/runtime-test/record_case.py \
   --root /absolute/project/scratch/game-copy --port 8788 \
   --enemy ftkmf_modeltest_ashfang --renderer-path wolf01 \
-  --profile-sha256 EXPECTED_SHA256_OF_MODEL_TEST_PROFILES_JSON --action pass \
+  --profile-sha256 EXPECTED_SHA256_OF_MODEL_TEST_PROFILES_JSON --action observe \
   --motion-evidence
 ```
 
-`pass` uses native combat end-turn. By default, `attack` explicitly uses
-`cheat:None` and `focus:false`; `--focus` makes a separately labelled native
-max-focus attack. `kill-fixture` explicitly uses `KillSingle`; its death is
-fixture cheat evidence, not normal damage. The recorder never stages a room,
-starts a run, collects loot, restarts, deploys, or retries an action.
+The recorder validates registration, binary/profile/asset pins, helper nonce,
+living single-player hero-turn readiness, and exact enemy/renderer identity.
+It captures 120 fixed-step frames at 12 FPS and rechecks identity after the
+first PNG. It sends no bridge game action. Native input can be operated separately
+during capture; retain those receipts and inspect state and frames independently.
 
-`--motion-evidence` adds no game action. It requests the helper's bounded
-passive target-CEL observer and leaves interpretation to
-`motion_evidence.py` or `exercise_case.py`. A missing required native event is
-an evidence failure, not permission to repeat the action.
+`--motion-evidence` requests passive native CEL telemetry. Missing events cannot
+be inferred from input completion. A case directory preserves requests, before
+and after state, capture paths, summary, and partial failures. Success requires
+all PNGs, stable renderer/CEL/mesh/bone identities and at least nine sampled game
+seconds. It establishes completed observation, not visual or gameplay acceptance.
 
-After a successfully finalized native `Death` trigger, a renderer can lose its
-unique controller association during native teardown. The observer still checks
-the exact renderer, owner, CEL, native Animator and FID first. Only the specific
-absent/ambiguous controller resolution then ends the capture as a terminal
-prefix, before sampling that unresolved frame. The raw result remains `ok:false`
-and retains an explicit `motionObservation.termination` boundary. Pre-death
-ambiguity, replacement controllers and identity changes remain failures.
-`allowDeathControllerTeardownPrefix:true` is a separate, default-off verifier
-option; `exercise_case.py` enables it only for `kill-fixture`, validates the
-successful exact-target Death and boundary provenance, and labels the outcome
-`expected_death_capture_boundary`. `record_case.py` preserves the partial raw
-failure and records its validated boundary in the summary. Neither path claims
-a complete requested capture or full death-animation coverage. The existing
-renderer-destroyed prefix rule remains separate and unchanged.
-
-[Rustpetal V2](../../../art-experiments/rustpetal-snapper/live-validation-v2/README.md)
-records the renderer-destroyed variant on exact
-`plantD / enJungleNibbler_C / 121537`. Its pass and ordinary-hit captures are
-complete before the explicit fixture death. The death prefix retains 94 of 120
-frames with stable mesh, renderer path, bone signature, owner and CEL identity;
-the last retained sample marks the selected renderer inactive and not visible,
-then the next sample reports renderer destruction. Preserve the raw `ok:false`
-result and `termination:"renderer_destroyed"`. This supports the reviewed
-animated fall and sampled Victory handoff, while full duration, cleanup
-causality, active-corpse lifetime and later disposal remain unproved.
-
-After a successful `KillSingle`, FTK can remain at `combat.active:true` with
-`heroTurnReady:false` while it presents the native Loot vote. That is the
-expected victory handoff when the target is dead, `liveEnemies:0`,
-`winningPlayerFid` is present, and `stuck:false`. `record_case.py` records it
-as `killFixtureHandoff.status:"victory_pending_native_loot"` and stops; it
-does not click Collect. Use the separately guarded native collection path in
-`exercise_case.py` or an archived continuation to advance. The actual combat
-failure signature remains `stuck:true`, meaning a zero-HP enemy still reports
-`alive:true`.
-
-The runner checks successful current registration, fixed profile/asset hashes,
-helper nonce, native living single-player hero-turn readiness and exact enemy.
-A fresh enemy inventory must match every profile mesh assignment. It starts
-120 fixed-step frames at 12 FPS (10 requested game seconds, max width1280),
-waits for the first PNG, rechecks inputs and fresh combat identity/readiness,
-then sends the action once. Attack and kill-fixture send that fresh enemy FID
-as explicit targetFid and require the returned target to match. Timeouts must
-be finite positive numbers. Do not operate the UI or another bridge client
-concurrently. Bridge HTTP has no root/session identity endpoint: the explicit
-port is operator-owned, not cryptographically tied to the helper root. HTTP
-observation/action is not atomic; per-frame helper owner checks and final
-identity validation detect capture changes but cannot undo a submitted action.
-
-A UUID case directory preserves ordered journal requests/results, before and
-after state, action uncertainty, capture ID/path, immutable final result and
-`summarize_capture.py` output. Capture files remain in their original helper
-output directory. Even on an action timeout it waits for the existing capture
-without retrying the action. Missing/paused/changed/partial captures fail the
-run and retain available evidence. Success requires 120 present PNGs, stable
-renderer/CEL/mesh/bone identities, fixed-step12 and at least 9 sampled game
-seconds. It means action/frame recording completed, never visual acceptance.
-A late capture after timeout remains inspectable at its journaled result path.
-
-Keep `exercise_case.py` as a one-shot setup and diagnostic probe by default.
-Its optional `--attack-attempts N` mode is the bounded exception for native
-rows that produce a complete same-target no-loss observation such as a block or
-protection turn. Every attempt is retained in the case result and archive, the
-sequence stops on a different native outcome, and acceptance still requires
-measured nonlethal HP loss. For uncertain actions or a stopped run, start a
-fresh process and use bounded `record_case.py` captures for `pass`, `attack`,
-and `kill-fixture`, then compose the reviewed frames and native Collect/Ready
-continuation into an asset-local archive. This separation keeps stochastic
-native combat outcomes from being mistaken for a broken model or a completed
-live validation.
+Existing offline validators still distinguish exact renderer-destroyed and native
+death-controller-teardown prefixes. Raw partial captures remain unsuccessful and
+do not prove full death duration or cleanup. Historical action archives below
+retain their original fixture-versus-ordinary-gameplay distinctions.
 
 The [Thistlewick V2 archive](../../../art-experiments/thistlewick-hexer/live-validation-v2/README.md)
 demonstrates the same boundary when a native scourge removes itself on `pass`:
@@ -1491,7 +1235,7 @@ and the terminal loot overlay. The custom corpse remains sampled behind that
 overlay, which supports the recorded handoff without establishing ordinary
 lethal damage or later corpse lifetime. Keep Spider A routes independent.
 
-For an ordinary lethal-damage trial, use separate `--action attack` recordings
+For an ordinary lethal-damage trial, use native gameplay input during separate `--action observe` recordings
 against the same current enemy until native combat resolves. Inspect each
 terminal result and its before/after HP, then require a fresh living target and
 hero-ready state before submitting the next action. Preserve dodges and other
@@ -1762,13 +1506,11 @@ preserved for comparison.
 
 ## Record a real custom player's combat avatar
 
-`record_player_case.py` reuses the enemy recorder's transport, immutable case
-journal, first-PNG gate, one-action rule, fixed-step120-frame capture, partial
-result preservation and numerical summary. It supports only native `pass` and
-ordinary `attack`; it never creates a run, stages a room, collects loot, grants
-items or deploys. A pass allows an enemy turn but does not guarantee the hero
-is hit. Review recorded HP/action/frames before claiming any actual damage or
-animation acceptance.
+`record_player_case.py` reuses the enemy recorder's immutable journal,
+first-PNG gate, guarded fixed-step capture, partial-result preservation and
+numerical summary. Its only action mode is `observe`; it submits no game action.
+Use native input separately and review HP, input receipts and frames before
+claiming damage or animation acceptance.
 
 ```sh
 python3 tools/ai-model-pipeline/runtime-test/record_player_case.py \
@@ -1777,7 +1519,7 @@ python3 tools/ai-model-pipeline/runtime-test/record_player_case.py \
   --class-key ftkmf_modeltest_player_blacksmith_female --skinset blacksmith_Female \
   --player-profile-sha256 EXPECTED_PLAYER_PROFILE_SHA256 \
   --hero-instance-id ACTUAL_EQUIPMENT_INVENTORY_HERO_ID \
-  --renderer-path playerBlacksmith --action attack
+  --renderer-path playerBlacksmith --action observe
 ```
 
 This first implementation requires exactly one living party hero and one
@@ -1802,8 +1544,8 @@ hero-instance-ID-to-FID mapping. Single-hero use is generic across supported
 player profiles; no Blacksmith IDs are hard-coded.
 
 Run both recorder suites offline with `-p 'test_record*case.py'`; wrong class,
-owner, scope, mesh and ambiguous ownership cases are covered alongside one-call
-native action uncertainty. No live player recording is implied by these tests.
+owner, scope, mesh and ambiguous ownership cases are covered alongside
+observation-only capture and early rejection of retired action modes. No live player recording is implied by these tests.
 
 Catalog preflight accepts optional `visualScale` using the exact pure validator
 source shared with the test-content plugin: finite JSON number0.1..4, rejecting
@@ -1939,7 +1681,7 @@ These are measured **on-disk DLL identities**, not loaded-memory attestation.
 
 Both DLLs must exist as regular nonsymlink files in the exact isolated
 `BepInEx/plugins` directory. Shared input guards remeasure them before every helper
-request and HTTP request; recorder pre-capture/action guards also pin them. A changed
+request and HTTP request; recorder pre-capture observation guards also pin them. A changed
 or missing binary stops further dependent operations. An already submitted uncertain
 action is never retried; pending capture collection still preserves its evidence.
 Older journals without these measurements remain unpinned and must not be backfilled.
@@ -2275,51 +2017,15 @@ The two required roles are `native-combat-death` and
 the four source-backed Kraken proficiency attacks, ordinary hit responses,
 DEFEND and DAMAGED, an ordinary non-cheat lethal hit, native DEATH, and natural
 teardown. The second reaches native VICTORY through an ordinary party loss and
-then tears down. After launching the isolated game and obtaining its helper
-port, stage and run the death role:
+then tears down. Prepare and operate each fresh offline owner through native
+input; automated staging and combat driving are retired. Arm the passive observer
+using the exact identities above and save its final report after natural teardown.
+The native companion, when present, remains outside the custom adapter.
 
-```sh
-python3 tools/ai-model-pipeline/runtime-test/run_case.py new-run \
-  --root /absolute/project/scratch/game-copy \
-  --port PORT \
-  --enemy ftkmf_modeltest_gloamfin_kraken_legacy
-
-python3 tools/ai-model-pipeline/runtime-test/run_kraken_production_campaign.py run \
-  --root /absolute/project/scratch/game-copy \
-  --port PORT \
-  --role native-combat-death \
-  --report /absolute/project/scratch/kraken-campaign/native-combat-death-SESSION.json
-```
-
-Stop that process, launch a fresh process, obtain its new port, and stage the
-victory role with one native companion enemy:
-
-```sh
-python3 tools/ai-model-pipeline/runtime-test/run_case.py new-run \
-  --root /absolute/project/scratch/game-copy \
-  --port PORT \
-  --enemy ftkmf_modeltest_gloamfin_kraken_legacy \
-  --companion-enemy ogreA \
-  --skip-fortify
-
-python3 tools/ai-model-pipeline/runtime-test/run_kraken_production_campaign.py run \
-  --root /absolute/project/scratch/game-copy \
-  --port PORT \
-  --role enemy-victory-terminal \
-  --report /absolute/project/scratch/kraken-campaign/enemy-victory-terminal-SESSION.json
-```
-
-The runner requires the current content-registration handshake and a same-session
-`new-run` marker. It creates an exclusive role claim and will not retry an
-uncertain action. With two enemies, only the selected Gloamfin owner may bind the
-custom renderer; the native companion remains outside the adapter. A late Visit
-story can be serviced once but is never replayed. Every report independently checks the framework, helper,
-content plugin, game assembly, source/evidence files, controller extraction,
-manifest, GLB, PNG, live controller, two manual samplers, full mesh resource
-lease, and natural teardown. Full file hashes run only at arm and explicit
-state checkpoints. Per-frame observation reads native runtime state; it does
-not hash `resources.assets`, drive the controller, invoke combat, or destroy
-game objects.
+Every report independently pins the framework, helper, content, source assets,
+controller extraction, manifest, mesh resources, and natural teardown. Passive
+observation does not invoke combat or destroy game objects. The offline assemble
+command below remains available for two independently obtained reports.
 
 Keep attack evidence native. A credited Kraken window starts with
 `attackAnim=AttackProf` and `override=Attack`, enters ATTACK, and contains the

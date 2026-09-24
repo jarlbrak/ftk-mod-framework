@@ -736,7 +736,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         {
             CharacterOverworld cow=item as CharacterOverworld;if(cow==null)continue;
             CharacterStats stats=typeof(CharacterOverworld).GetField("m_CharacterStats",Members).GetValue(cow)as CharacterStats;
-            if(stats==null || stats.m_HealthCurrent<=0)throw new InvalidOperationException("Every hero must be alive; defeated runs require return-to-title and a fresh start_run.");
+            if(stats==null || stats.m_HealthCurrent<=0)throw new InvalidOperationException("Every hero must be alive; defeated runs require return-to-title and a fresh offline run created through native input.");
             JObject view=HeroHealth(stats,cow);FTK_weaponStats2.SkillType attackSkill=default(FTK_weaponStats2.SkillType);FTK_itembase.ID attackItem=FTK_itembase.ID.None;
             if(capAttackSkill)
             {
@@ -781,7 +781,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         RestoreTutorials();fortifiedMaxHpTarget=0;returningFromInstance=instance;
         logic.RestartGameRT();
         return new JObject{{"ok",true},{"status","requested"},{"method","GameLogic.RestartGameRT"},
-            {"note","Native realtime fade/reset requested; wait for menu before start_run. This is not confirmation of completion and does not call SaveAndQuit."}};
+            {"note","Native realtime fade/reset requested; wait for the menu before creating a run through native input. This is not confirmation of completion and does not call SaveAndQuit."}};
     }
     static JObject TutorialState(FTKTutorial tutorial)
     {
@@ -882,7 +882,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         object flow=Instance(typeof(GameFlow));object dungeon=typeof(GameFlow).GetField("m_DungeonEntered",Members).GetValue(flow);
         if(dungeon==null)throw new InvalidOperationException("Enter dungeon first.");
         IDictionary levels=dungeon.GetType().GetField("m_DungeonEncounters",Members).GetValue(dungeon)as IDictionary;
-        if(levels==null || levels.Count==0)throw new InvalidOperationException("Generate rooms with dungeon_regen first.");
+        if(levels==null || levels.Count==0)throw new InvalidOperationException("Use stage-enemy with regenerate:true at its allowed setup boundary, or enter a natively generated dungeon first.");
         foreach(DictionaryEntry level in levels)
         {
             IList rooms=level.Value as IList;

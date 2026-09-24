@@ -75,10 +75,10 @@ class PlayerRecordingTests(unittest.TestCase):
         with self.assertRaises(ValueError):validate_player_registration_assignments(PROFILE,profile)
         validate_player_registration_assignments(PROFILE,{}) # Legacy profiles without apparel remain compatible.
 
-    def test_native_action_once_after_player_owner_selection(self):
+    def test_observation_capture_after_player_owner_selection(self):
         with tempfile.TemporaryDirectory() as directory:
             runner=object.__new__(PlayerRecorder)
-            runner.a=SimpleNamespace(enemy='probe',renderer_path='body',hero_instance_id=101,action='attack',class_key='custom')
+            runner.a=SimpleNamespace(enemy='probe',renderer_path='body',hero_instance_id=101,action='observe',class_key='custom')
             runner.profile=PROFILE;runner.player_profile=PROFILE;runner.expected_class_id=16;runner.output=Path(directory)
             runner.check_inputs=Mock();runner.log=Mock();s=state();s['party'][0]['classId']=16;runner.state=Mock(return_value=s)
             runner.helper=Mock(side_effect=[EQUIPMENT,{'renderers':[RENDERER]}])
@@ -87,8 +87,7 @@ class PlayerRecordingTests(unittest.TestCase):
             runner.action=Mock(side_effect=TimeoutError('uncertain native action'))
             runner.collect_capture=Mock(return_value={'frames':120})
             result=runner.record()
-            self.assertFalse(result['ok']);self.assertEqual(runner.action.call_count,1)
-            self.assertEqual(runner.action.call_args.args,('combat_turn',{'cheat':'None','focus':False,'targetFid':{'photonId':-1,'turnIndex':0}}))
+            self.assertTrue(result['ok']);runner.action.assert_not_called()
             runner.collect_capture.assert_called_once();self.assertEqual(result['captureScope'],'player-combat')
             self.assertEqual(runner.helper.call_args_list[1].args,('inventory',{'scope':'player-combat'}))
 

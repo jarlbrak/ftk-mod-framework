@@ -153,10 +153,8 @@ namespace FTKModFramework.Agent
             root["choices"] = choices;
 
             // --- selectable adventures (menu only) ---------------------------------------------------
-            // Surface injected adventures so the agent loop can observe registered content
-            // as a pickable start_run option and confirm the current selection. STRICTLY READ-ONLY: this is
-            // an observation, so it must never force the cache to build (that is the list_adventures action's
-            // job). GetPreviewNamesIfBuilt returns null until something else builds the cache.
+            // Observe registered adventures and current selection without forcing cache initialization.
+            // GetPreviewNamesIfBuilt returns null until the game builds the cache.
             if (!inSession)
             {
                 try
@@ -302,12 +300,10 @@ namespace FTKModFramework.Agent
             try { c["currentEnemyFid"] = FidDict(Reflect.GetField(es, "m_CurrentEnemy")); }
             catch { c["currentEnemyFid"] = null; }
 
-            // whoseTurn: EncounterSessionMC.m_FightOrder[0].m_Pid + IsPlayer(). Lets the agent know when to call
-            // auto_combat_turn (isPlayer==true) vs wait for the enemy's turn.
+            // The native fight-order head identifies whether a hero or enemy is acting.
             c["whoseTurn"] = ReadWhoseTurn(warnings);
 
-            // heroTurnReady: FTKUI.m_BattleStanceButtons.m_Initialized && the current combat COW's dummy FSM is
-            // parked in "Wait For Stance". This is the exact readiness gate the combat commit checks.
+            // Read the acting hero's stance readiness before choosing native controls.
             c["heroTurnReady"] = ReadHeroTurnReady(warnings);
             // readyParts:{initialized, fsmState} so the harness can SEE which half of heroTurnReady is false
             // (banner intro vs enemy-turn vs genuinely-ready). The empty abilities[] below is NORMAL whenever
@@ -356,11 +352,9 @@ namespace FTKModFramework.Agent
             }
             catch (Exception e) { warnings.Add("combat.enemies: " + e.Message); }
             c["enemies"] = enemies;
-            // liveEnemies recomputed from enemies[].alive so it always agrees with the per-enemy data the agent
-            // commits against (kept consistent with the old GetLiveEnemyCount semantics).
+            // Keep the total consistent with the per-enemy snapshot.
             c["liveEnemies"] = liveEnemyCount;
-            // stuck: the HUD-shows-0-but-m_IsAlive-still-true corruption fingerprint. When true the harness must
-            // NOT re-fire a commit; it should report and abort the run rather than spin.
+            // Surface inconsistent health/alive data so the caller can stop and investigate.
             c["stuck"] = stuck;
 
             // winningPlayerFid: EncounterSessionMC.m_WinningPlayerID, populated post-resolve so the harness can
@@ -373,10 +367,6 @@ namespace FTKModFramework.Agent
             // heroTurnReady==false (UI not initialized) -- empty abilities + ready:false is normal pre-stance.
             c["abilities"] = ReadAbilities(warnings);
 
-            // driver: mirrors dungeon.driver so win_combat/force_win/auto_combat progress is pollable on
-            // /state.combat (the harness polls combat.active==false but can also watch driver.lastError).
-            c["driver"] = ReadCombatDriver();
-
             return c;
         }
 
@@ -384,7 +374,7 @@ namespace FTKModFramework.Agent
         // banner-vs-enemy-turn distinction when heroTurnReady is false ("Wait For Stance" means ready; a
         // banner/anim state means not yet). actingFid is the fight-order HEAD, which may be an ENEMY: that is
         // what makes a null fsmState self-explaining, since ActingCow returns null on an enemy turn rather
-        // than reporting some other hero's dummy. Same source as ActionExecutor.ReadyParts.
+        // than reporting some other hero's dummy.
         private static object ReadReadyParts(List<object> warnings)
         {
             Dictionary<string, object> rp = new Dictionary<string, object>();
@@ -392,15 +382,15 @@ namespace FTKModFramework.Agent
             {
                 object ui = StaticInstance("FTKUI");
                 object bsb = ui != null ? Reflect.GetField(ui, "m_BattleStanceButtons") : null;
-                rp["initialized"] = DungeonOps.StanceUiInitialized(bsb);
+                rp["initialized"] = StanceUiInitialized(bsb);
                 // The ACTING hero's dummy (m_FightOrder[0] in a fight), so fsmState describes the hero the
-                // commit gates read rather than hero 0 or an enemy's victim. See DungeonOps.ActingCow (#93).
-                object cow = DungeonOps.ActingCow();
+                // current combat turn identifies rather than hero 0 or an enemy's victim.
+                object cow = ActingCow();
                 object dummy = cow != null ? SafeField(cow, "m_CurrentDummy") : null;
                 object fsm = dummy != null ? SafeField(dummy, "m_CharacterDummyFSM") : null;
                 object sn = fsm != null ? SafeProp(fsm, "ActiveStateName") : null;
                 rp["fsmState"] = sn as string;
-                rp["actingFid"] = FidDict(DungeonOps.ActingFid());
+                rp["actingFid"] = FidDict(ActingFid());
             }
             catch (Exception e)
             {
@@ -427,26 +417,6 @@ namespace FTKModFramework.Agent
             catch (Exception e) { warnings.Add("combat.winningPlayerFid: " + e.Message); return null; }
         }
 
-        // {running, lastError} from CombatDriver when the resolve coroutine is active or left an error.
-        private static object ReadCombatDriver()
-        {
-            if (CombatDriver.IsRunning)
-            {
-                Dictionary<string, object> drv = new Dictionary<string, object>();
-                drv["running"] = true;
-                drv["lastError"] = CombatDriver.LastError;
-                return drv;
-            }
-            if (CombatDriver.LastError != null)
-            {
-                Dictionary<string, object> drv = new Dictionary<string, object>();
-                drv["running"] = false;
-                drv["lastError"] = CombatDriver.LastError;
-                return drv;
-            }
-            return null;
-        }
-
         // whoseTurn: { fid, isPlayer } from EncounterSessionMC.m_FightOrder[0].m_Pid. Null when no fight order.
         private static object ReadWhoseTurn(List<object> warnings)
         {
@@ -471,14 +441,49 @@ namespace FTKModFramework.Agent
             catch (Exception e) { warnings.Add("combat.whoseTurn: " + e.Message); return null; }
         }
 
-        // heroTurnReady: the SHARED commit gate, DungeonOps.StanceReady. /state and /action must never
-        // disagree about whether a hero can act, so this reads the very same method the drivers and the
-        // combat actions gate on rather than reimplementing it (a local copy is how the in-dungeon
-        // m_Initialized carve-out drifted out of two gates and deadlocked in-dungeon commits).
+        // Readiness is an observation only; native input decides whether an attempted action is accepted.
         private static object ReadHeroTurnReady(List<object> warnings)
         {
-            try { return DungeonOps.StanceReady(); }
+            try { return StanceReady(); }
             catch (Exception e) { warnings.Add("combat.heroTurnReady: " + e.Message); return false; }
+        }
+
+        private static object ActingFid()
+        {
+            object mc = StaticInstance("EncounterSessionMC");
+            IList order = SafeField(mc, "m_FightOrder") as IList;
+            return order != null && order.Count > 0 ? SafeField(order[0], "m_Pid") : null;
+        }
+
+        // Combat's timeline owns the acting hero; the overworld turn holder can still be another hero.
+        private static object ActingCow()
+        {
+            object hub = StaticInstance("FTKHub");
+            if (!ToBool(SafeField(StaticInstance("EncounterSession"), "m_IsInCombat")))
+                return CurrentTurnCow(hub, StaticInstance("GameLogic"));
+            object fid = ActingFid();
+            if (fid == null || !ToBool(SafeInvoke(fid, "IsPlayer")) || hub == null) return null;
+            try { return Reflect.InvokeArgs(hub, "GetCharacterOverworldByFID", new[] { fid.GetType() }, new[] { fid }); }
+            catch { return null; }
+        }
+
+        private static bool StanceUiInitialized(object buttons)
+        {
+            object value = SafeProp(buttons, "m_Initialized");
+            return ToBool(value ?? SafeField(buttons, "m_Initialized"));
+        }
+
+        private static bool StanceReady()
+        {
+            object buttons = SafeField(StaticInstance("FTKUI"), "m_BattleStanceButtons");
+            if (buttons == null) return false;
+            bool inDungeon = ToBool(SafeInvoke(StaticInstance("FTKHub"), "AnyPlayersInDungeon")) ||
+                SafeField(StaticInstance("GameFlow"), "m_DungeonEntered") != null;
+            // Dungeon readiness uses the acting dummy; the global UI flag can remain false there.
+            if (!inDungeon && !StanceUiInitialized(buttons)) return false;
+            object dummy = SafeField(ActingCow(), "m_CurrentDummy");
+            object fsm = SafeField(dummy, "m_CharacterDummyFSM");
+            return SafeProp(fsm, "ActiveStateName") as string == "Wait For Stance";
         }
 
         private static object ReadEnemyName(object enemyCombat, object dummy)
@@ -631,22 +636,7 @@ namespace FTKModFramework.Agent
                     dg["deactivated"] = deact is bool ? (object)(bool)deact : null;
                 }
 
-                // driver status (only when the clear orchestrator is running).
-                if (DungeonDriver.IsRunning)
-                {
-                    Dictionary<string, object> drv = new Dictionary<string, object>();
-                    drv["running"] = true;
-                    drv["lastError"] = DungeonDriver.LastError;
-                    dg["driver"] = drv;
-                }
-                else if (DungeonDriver.LastError != null)
-                {
-                    Dictionary<string, object> drv = new Dictionary<string, object>();
-                    drv["running"] = false;
-                    drv["lastError"] = DungeonDriver.LastError;
-                    dg["driver"] = drv;
-                }
-                else dg["driver"] = null;
+
             }
             catch (Exception e) { warnings.Add("dungeon: " + e.Message); }
             return dg;
