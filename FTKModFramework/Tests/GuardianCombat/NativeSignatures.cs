@@ -27,6 +27,7 @@ internal static class NativeSignatures
             Require(reader, "CharacterStats", "UpdateFocusPoints", "_focus", "_broadcast");
             Require(reader, "CharacterStats", "BroadcastAllCursesRPC", "_activecurses", "_permacurse");
             Require(reader, "CharacterStats", "SetPoison", "_lvl", "_broadcast", "_hud");
+            Require(reader, "CharacterStats", "HasImmunity", "_type");
             Require(reader, "CharacterDummy", "RemoveSpecificProficiency", "_c");
             Require(reader, "CharacterDummy", "RespondToHit", "_mainVictim");
             Require(reader, "CharacterDummy", "PlayAttackSequence", "_attackAnim", "_override", "_ddi", "_ddi1", "_ddi2");
@@ -42,7 +43,7 @@ internal static class NativeSignatures
             Require(reader, "uiItemDetail", "Show", "_itemID", "_mode", "_cow", "_showingEquip", "_forceFrontSide", "_loreCard");
             Require(reader, "uiWeaponDetail", "ShowWeapon", "_itemInfo");
             Require(reader, "uiSelectCharacterInfo", "ShowCharacterInfo", "_characterType");
-            Console.WriteLine("PASS GuardianCombat: 29 native method/parameter metadata checks");
+            Console.WriteLine("PASS GuardianCombat: 30 native method/parameter metadata checks");
         }
     }
 

@@ -1,13 +1,17 @@
-# Paladin 1.0.1
+# Paladin 1.1.0
 
 Paladin is the first published marketplace mod and the reference package for
-authoring through FTK Mod Framework 1.0.1. It adds a Vitality-based protector
-class, Guard, 51 equipment items, original 3D models and icons. Six equipment
+authoring through FTK Mod Framework. Version 1.1.0 requires
+framework 1.0.3. It adds a Vitality-based protector class, Guard, Cleansing
+March, 51 equipment items, original 3D models and icons. Six equipment
 families cover early gear through horizontal endgame choices; three Artifacts
 add legendary hammers and a shield. The package author is JarlBrak.
 
-Install the published package from the in-game Mods catalog. Its
-[manifest](manifest.json) owns the mod identity, author, version and short
+Version 1.1.0 adds Cleansing March: Paladins cannot gain Poison or Curse while
+exploring, including from poison, curse and chaos tiles. Existing conditions
+remain, and fire damage or chaos resource and item losses still apply. Combat
+Poison and Curse still apply normally. The ability works with any equipment.
+The [manifest](manifest.json) owns the mod identity, author, version and short
 description; [listing metadata](listing.json) supplies marketplace copy and
 requirements. The builder combines those files with measured archive facts to
 produce the [catalog descriptor](../../catalog.json). The published archive
@@ -48,4 +52,8 @@ Run `python3 marketplace/packages/validate_paladin.py` from the repository
 root for structural checks. The [package builder](../build_paladin.py) creates a
 content-addressed archive and descriptor; its local validation does not
 publish them or prove in-game behavior. Corrections to the published 1.0.1
-archive require a new mod version and a new reviewed artifact.
+archive require a new mod version and a new reviewed artifact. The
+[isolated live receipt](../../../docs/paladin/cleansing-march-live-2026-09-24.json)
+records Poison and Curse tile entry on macOS. Natural hazard spawning, ordinary
+Curse walking, combat ailment application, save/resume, online co-op and
+Windows/Linux gameplay remain unverified for 1.1.0.

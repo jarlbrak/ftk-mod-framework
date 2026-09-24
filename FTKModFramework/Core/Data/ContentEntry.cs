@@ -50,6 +50,7 @@ namespace FTKModFramework.Core.Data
         /// </summary>
         [JsonProperty("behaviorCategory")] public string BehaviorCategory;
         [JsonProperty("guardian")] public bool Guardian;
+        [JsonProperty("overworldAilmentImmunity")] public OverworldAilmentImmunityEntry OverworldAilmentImmunity;
         [JsonProperty("guardianBonuses")] public GuardianBonusEntry GuardianBonuses;
         [JsonProperty("icon")] public string Icon;
         [JsonProperty("apparelModels")] public ApparelModelEntry ApparelModels;
@@ -70,6 +71,10 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("guardFocusRestore")] public int GuardFocusRestore;
         [JsonProperty("guardReckoning")] public bool GuardReckoning;
         [JsonProperty("guardCleanse")] public bool GuardCleanse;
+    }
+    internal sealed class OverworldAilmentImmunityEntry
+    {
+        [JsonProperty("displayName")] public string DisplayName;
     }
     internal sealed class ApparelModelEntry
     {

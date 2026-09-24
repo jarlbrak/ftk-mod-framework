@@ -1,0 +1,14 @@
+{
+  "name": "ftk-reporting-infrastructure",
+  "private": true,
+  "type": "module",
+  "description": "Pinned Railway infrastructure authoring dependencies; not used by the Go service at runtime.",
+  "scripts": {
+    "check:infra": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "26.0.0",
+    "railway": "3.11.0",
+    "typescript": "7.0.2"
+  }
+}

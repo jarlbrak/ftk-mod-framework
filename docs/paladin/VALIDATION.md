@@ -9,6 +9,20 @@ in play. See [accessory validation](ACCESSORY-VALIDATION.md) for the earlier
 offline candidate, [legendary validation](LEGENDARY-VALIDATION.md) for earlier
 live-tested bytes, and [Launch 1.0.0](LAUNCH-1.0.0.md) for current release gates.
 
+The 1.1.0 source retains those entries and adds Cleansing
+March to the class registration. Its offline framework, package and hot
+activation checks are separate from live gameplay. The [isolated 1.1.0 tile-entry
+receipt](cleansing-march-live-2026-09-24.json) records a native Poison walk and
+Curse tile entry for the Paladin, plus native Hunter controls that received both
+ailments. The combat immunity query reverted to false. Natural hazard spawning,
+an ordinary Curse walk, combat ailment application, chaos and fire tile effects,
+save/resume, online co-op, and Windows/Linux gameplay remain open. The
+[prerelease smoke](release-smoke-2026-09-24.json) confirms registration and
+native single-player startup with a later 1.0.3 framework build; it did not repeat
+hazard entry. [Spec
+#182](https://github.com/jarlbrak/ftk-mod-framework/issues/182) defines the
+effect and its exact scope; no 1.0.1 observation proves it.
+
 The [equipment inventory](EQUIPMENT.md) includes twelve accessories and original
 display art. Their individual native behavior and appearance have not been
 tested. [Gap plan](GAPS.md) records the historical closure sequence;

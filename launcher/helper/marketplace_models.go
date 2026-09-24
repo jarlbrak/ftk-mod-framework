@@ -236,6 +236,10 @@ type marketItemModifiers struct {
 	Reflect    int     `json:"reflect"`
 }
 
+type marketAilmentImmunity struct {
+	DisplayName string `json:"displayName"`
+}
+
 type marketGuardianBonuses struct {
 	GuardHealPercent      int  `json:"guardHealPercent"`
 	FocusHealBonusPercent int  `json:"focusHealBonusPercent"`
