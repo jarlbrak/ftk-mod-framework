@@ -13,6 +13,7 @@
     <Error Condition="'$(TestManagedDir)' == '' or !Exists('$(TestManagedDir)/Assembly-CSharp.dll')" Text="Game managed assemblies were not found in the isolated copy." />
   </Target>
   <ItemGroup>
+    <Compile Remove="frame-profiler/**/*.cs" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
     <Reference Include="BepInEx" Private="false"><HintPath>$(TestGameRoot)/BepInEx/core/BepInEx.dll</HintPath></Reference>
     <Reference Include="Assembly-CSharp" Private="false"><HintPath>$(TestManagedDir)/Assembly-CSharp.dll</HintPath></Reference>

@@ -60,6 +60,19 @@ Use the [scale-budget gate](SCALE-BUDGET.md) for content-loading regressions.
 It does not measure gameplay frame rate. Live tests must use the configured
 isolated installation and preserve production saves and plugins.
 
+## Locating frame-time costs
+
+The developer-only [isolated frame profiler](../tools/performance/frame-profiler/README.md)
+records bounded frame captures, focus state, collection counts and estimated heap
+size. It can use available Unity CPU counters or temporarily time selected managed
+callbacks when a release player exposes no native counters. It never changes
+graphics settings or ships with the framework.
+
+Managed timings are inclusive and add instrumentation overhead. Use them to choose
+an optimization target, then remove managed timers for FPS comparisons. Match focus
+and background execution as well as graphics settings, and record competing host
+load. A lower callback time alone does not establish smoother gameplay.
+
 ## Item lookup optimization and measured result
 
 The framework resolves custom IDs before checking a bounded dictionary of exact
