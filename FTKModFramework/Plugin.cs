@@ -308,6 +308,10 @@ namespace FTKModFramework
 
             _harmony = new Harmony(Guid);
             DbLookupPatcher.Init(_harmony);
+            // Build the bounded native-name cache during startup, before a gameplay lookup can
+            // pay its one-time parsing cost. Failure leaves the original parser available.
+            if (!CanonicalEnumLookup<FTK_itembase.ID>.Initialize())
+                Log.LogWarning("Native item lookup cache unavailable; using the original parser.");
             _harmony.PatchAll();
 
             // Agentic test harness bridge (env-gated). No-ops unless FTK_AGENT_BRIDGE==1: with the env var

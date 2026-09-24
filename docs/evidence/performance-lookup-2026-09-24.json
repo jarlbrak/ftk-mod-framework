@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-24",
+  "baselineCommit": "8f68c548",
+  "environment": {
+    "hardware": "Apple M5 (Mac17,2)",
+    "os": "macOS 26.6.2",
+    "unity": "2017.2.2p2",
+    "runtime": "game Mono, CLR 2.0.50727.1433",
+    "process": "x86_64 game on Apple Silicon",
+    "resolution": "1280x720 windowed",
+    "isolation": "disposable copy, root-derived test save namespace",
+    "content": "no installed content packages",
+    "probeCoverage": {
+      "id": 112,
+      "overworld": 7,
+      "playmaker": 1,
+      "canvas": 1,
+      "photon": 1
+    }
+  },
+  "method": {
+    "names": 676,
+    "passesPerTrial": 50,
+    "callsPerTrial": 33800,
+    "parity": "Every declared item name compared to Enum.Parse(ignoreCase: true) before every timed batch; aggregate checksum checked afterward.",
+    "warmup": "One all-name pass, followed by forced GC outside timing.",
+    "order": [
+      "baseline_before",
+      "lazy_candidate_experiment",
+      "candidate",
+      "baseline_after"
+    ],
+    "scenario": "Synchronous main-thread benchmark. First trial starts after plugin loading; subsequent trials run at the title screen.",
+    "identity": {
+      "game": {
+        "assembly": "Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "mvid": "c6d40985-d73e-4911-a180-fd0dbb906500",
+        "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "probe": {
+        "assembly": "FTKPerfProbe, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null",
+        "mvid": "b984fe75-3f45-4c86-b62f-1fb24cf93cdf",
+        "sha256": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21"
+      },
+      "benchmark": {
+        "assembly": "FtkLookupBenchmark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "mvid": "985cf4c9-b016-488d-9ab8-5419356f8e4e",
+        "sha256": "f79b948fa8adc2b2ec157b2face6b2a87263bcebdcc65eb1b76381f23d65e35e"
+      }
+    }
+  },
+  "groups": {
+    "baseline_before": {
+      "frameworkSha256": "3ef4273d3d3426c602694383192819970c8dd5d90d307e987032f9ea6748e224",
+      "medianMs": 2084.585,
+      "trials": [
+        {
+          "id": "all-baseline-1",
+          "utc": "2026-09-24T21:50:48.1682980Z",
+          "firstLookupMs": 1.875,
+          "warmupMs": 35.566,
+          "elapsedMs": 1868.388,
+          "gc0Delta": 3,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "6881a33dfaa40894016e2e3fa0454d3a21f9c42c19321303094c058c6ad55bf2"
+        },
+        {
+          "id": "all-baseline-2",
+          "utc": "2026-09-24T21:51:02.1919990Z",
+          "firstLookupMs": 0.162,
+          "warmupMs": 40.036,
+          "elapsedMs": 2363.488,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "94b2f547358aa04d1ee2a4ab0b1657f3b4ced6cece7635511e08087410594f86"
+        },
+        {
+          "id": "all-baseline-3",
+          "utc": "2026-09-24T21:51:06.0513420Z",
+          "firstLookupMs": 0.024,
+          "warmupMs": 43.276,
+          "elapsedMs": 2055.473,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "e614fce6cb73bc52e8e75f8668c0b929bd23945cd41f48264cba0fd1cb8ff79f"
+        },
+        {
+          "id": "all-baseline-4",
+          "utc": "2026-09-24T21:51:09.9228080Z",
+          "firstLookupMs": 0.008,
+          "warmupMs": 42.991,
+          "elapsedMs": 2084.585,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "3025a2a51cdb5adceb353a764243494d2f625ad517652faadbbabb3428d15db8"
+        },
+        {
+          "id": "all-baseline-5",
+          "utc": "2026-09-24T21:51:13.4458950Z",
+          "firstLookupMs": 0.008,
+          "warmupMs": 42.484,
+          "elapsedMs": 2230.745,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "22df214d5b6babaa67b82fca883c8a7b2b3d467dcb01ef3ada93048b31ae02f0"
+        }
+      ]
+    },
+    "candidate": {
+      "frameworkSha256": "08d3fa433da31ca70065e60551a6c2580b7f1ef5238882380784f39c5994c6aa",
+      "medianMs": 3.798,
+      "trials": [
+        {
+          "id": "all-final-1",
+          "utc": "2026-09-24T21:53:08.9390320Z",
+          "firstLookupMs": 2.038,
+          "warmupMs": 0.768,
+          "elapsedMs": 3.731,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "52b1d61054c92300a72e1242e8f9203e9fcf4d427767b7a6da811fd3de1261d5"
+        },
+        {
+          "id": "all-final-2",
+          "utc": "2026-09-24T21:53:19.9497850Z",
+          "firstLookupMs": 0.043,
+          "warmupMs": 0.15,
+          "elapsedMs": 3.798,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "de31c3b8c34c4d7212c66b612452e829457a85708a23782bb8f2829b97633d68"
+        },
+        {
+          "id": "all-final-3",
+          "utc": "2026-09-24T21:53:21.4358950Z",
+          "firstLookupMs": 0.015,
+          "warmupMs": 0.079,
+          "elapsedMs": 3.476,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "c0089cea819ac6eff75be3e14d125a83e8b37b9d883e10d8b56436be09eb88ff"
+        },
+        {
+          "id": "all-final-4",
+          "utc": "2026-09-24T21:53:22.9646190Z",
+          "firstLookupMs": 0.014,
+          "warmupMs": 0.09,
+          "elapsedMs": 3.845,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "356e0bf661b7ba5345addb6b0c6450300beac14c1ab1c2162bc0e3f8a77c2f3c"
+        },
+        {
+          "id": "all-final-5",
+          "utc": "2026-09-24T21:53:24.4807830Z",
+          "firstLookupMs": 0.004,
+          "warmupMs": 0.083,
+          "elapsedMs": 3.808,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "81d6adc1e768cf0bf315c671871bf3afd71e97689b06f927c74029e3d874b372"
+        }
+      ]
+    },
+    "baseline_after": {
+      "frameworkSha256": "3ef4273d3d3426c602694383192819970c8dd5d90d307e987032f9ea6748e224",
+      "medianMs": 2163.765,
+      "trials": [
+        {
+          "id": "all-baseline-repeat-1",
+          "utc": "2026-09-24T21:53:55.8895650Z",
+          "firstLookupMs": 2.029,
+          "warmupMs": 42.325,
+          "elapsedMs": 2098.918,
+          "gc0Delta": 6,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "e3097675256b8c3a4a062c0a11d7470f3d46bcede73b9d7e63ad93c45531c20c"
+        },
+        {
+          "id": "all-baseline-repeat-2",
+          "utc": "2026-09-24T21:54:12.3525740Z",
+          "firstLookupMs": 0.039,
+          "warmupMs": 38.962,
+          "elapsedMs": 2154.447,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "e286c9b886f23696be5d5fa9713b419b0f232a2b090fdd2b155d7b1945692fcf"
+        },
+        {
+          "id": "all-baseline-repeat-3",
+          "utc": "2026-09-24T21:54:16.4473390Z",
+          "firstLookupMs": 0.014,
+          "warmupMs": 52.839,
+          "elapsedMs": 2163.765,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "56e3fc336af2e3ad6a261840310bc6e0b7b43a2dd817763bcda78d1e9d274aab"
+        },
+        {
+          "id": "all-baseline-repeat-4",
+          "utc": "2026-09-24T21:54:20.4332730Z",
+          "firstLookupMs": 0.009,
+          "warmupMs": 40.879,
+          "elapsedMs": 2202.297,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "058eecef6bd880e55f5e5d03d68ae267c7f7fda7dc77fc0b64eede580750dbd6"
+        },
+        {
+          "id": "all-baseline-repeat-5",
+          "utc": "2026-09-24T21:54:31.4090720Z",
+          "firstLookupMs": 0.014,
+          "warmupMs": 134.085,
+          "elapsedMs": 8309.583,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "32ba1f576ccd5d1b3492c7abbead37109bd90a1e71d7679ace5237bdfad67691"
+        }
+      ]
+    }
+  },
+  "exploration": {
+    "lazyCandidateFirstLookupMs": 53.57,
+    "finalFirstLookupMs": 2.038,
+    "resolution": "Cache construction moved to framework Awake before patch installation; startup cost moved, not eliminated.",
+    "initialInvalidInputTrial": "Discarded from performance comparisons because one exploratory input was not a declared item name.",
+    "idleOverworld": "Observed zero ID-resolution calls in two exploratory stationary captures; no frame-rate benefit established."
+  },
+  "limits": [
+    "Canonical native item lookup microbenchmark only; no overall FPS or loading-time claim.",
+    "Host scheduling noise is visible, including an 8309.583 ms baseline repeat; all final completed trials retained.",
+    "No uninstrumented benchmark comparison; probe and benchmark binaries identical across reported groups.",
+    "No co-op, Windows/Linux, long-session save compatibility, or third-party GetEnum patch compatibility claim.",
+    "Initial lazy-candidate measurements are exploratory, not final-binary acceptance."
+  ]
+}

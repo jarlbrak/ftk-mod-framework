@@ -84,6 +84,8 @@ jobs:
           done
       - name: Run the game-free unit tests
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
+      - name: Synthetic ID lookup compatibility and allocation checks
+        run: dotnet run --project FTKModFramework/Tests/SyntheticLookup/SyntheticLookup.csproj -c Release
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

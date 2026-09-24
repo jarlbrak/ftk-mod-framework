@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>FtkLookupBenchmark</AssemblyName>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TestManagedDir Condition="'$(TestManagedDir)' == '' and Exists('$(TestGameRoot)/FTK.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll')">$(TestGameRoot)/FTK.app/Contents/Resources/Data/Managed</TestManagedDir>
+    <TestManagedDir Condition="'$(TestManagedDir)' == '' and Exists('$(TestGameRoot)/FTK_Data/Managed/Assembly-CSharp.dll')">$(TestGameRoot)/FTK_Data/Managed</TestManagedDir>
+  </PropertyGroup>
+  <Target Name="RequireIsolatedGame" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(TestGameRoot)' == ''" Text="Pass TestGameRoot pointing to an isolated game copy under scratch." />
+    <Error Condition="'$(TestManagedDir)' == '' or !Exists('$(TestManagedDir)/Assembly-CSharp.dll')" Text="Game managed assemblies were not found in the isolated copy." />
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="BepInEx" Private="false"><HintPath>$(TestGameRoot)/BepInEx/core/BepInEx.dll</HintPath></Reference>
+    <Reference Include="Assembly-CSharp" Private="false"><HintPath>$(TestManagedDir)/Assembly-CSharp.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json" Private="false"><HintPath>$(TestManagedDir)/Newtonsoft.Json.dll</HintPath></Reference>
+    <Reference Include="$(TestManagedDir)/UnityEngine*.dll" Private="false" />
+  </ItemGroup>
+</Project>
