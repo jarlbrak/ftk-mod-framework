@@ -105,6 +105,65 @@ The service returned `/healthz` HTTP 200 with `configured: true`, served `/priva
 and created the real issues above. Configuration readiness alone was not used as
 proof of GitHub access.
 
+## Expanded logs and managed drafts
+
+Follow-up implementation `cb7ee059` addresses the thin diagnostics in real issue
+[#193](https://github.com/jarlbrak/ftk-mod-framework/issues/193). That older report
+said no matching error log was captured; an exception-only buffer could not explain
+a freeze without an exception. The new buffer records recent informational/debug
+messages, warnings, errors and stack traces from the running game and framework,
+up to 128 KiB per current/prior session. It does not recover logs that the old build
+never captured. Fresh manual opens take fresh snapshots; saved drafts retain their
+original snapshots and explicit diagnostic choices.
+
+Game-free checks passed: ReportingDraft 91 checks, ReportingDiagnostics 76 checks,
+ReportingSubmission 124 checks, ReportingRuntime normal/busy, ReportingMetadata,
+ReportingSession, the Release/net35 build, service/helper race tests and vet, four
+helper platform builds, service build, infrastructure typecheck and diff checks.
+The larger-payload tests cover more than 128 KiB through the payload, helper and
+service, receipt restart, readable download, opt-out/expiry 404 and encoded receipt
+size rejection. This is separate from the smaller live startup capture below.
+
+Two isolated macOS launches exercised these native flows:
+
+- Diagnostics defaulted on in an error offer and fresh manual reports. Draft A
+  retained on; draft B retained an explicit off choice across a normal restart.
+- Save, Open, Keep editing, Save and continue, and Discard edits worked. Discard
+  preserved the saved version. Ordinary descriptions restored exactly, without
+  adding the legacy narrative format's blank lines.
+- Both drafts appeared after restart. Keep draft cancelled deletion; confirming
+  Delete removed only B. A retained its original report/capture and metadata time.
+- Native keyboard navigation reached A's Open button and Return opened it. Native
+  screenshots showed the editor, expanded preview and draft list without overlap.
+- A fresh Options > Report Bugs opened an empty default-on report with a new ID and
+  current observation time, rather than silently reopening an old capture.
+- Sending restored A created [issue #194](https://github.com/jarlbrak/ftk-mod-framework/issues/194).
+  During Send, Back and reopening Report Bugs retained the same in-flight identity;
+  confirmation then showed #194 and retired the matching saved draft.
+
+Issue #194 links both JSON and a readable `.log` attachment. Both returned HTTP 200.
+The 12,193-byte, 120-line uploaded log exactly matched A's saved capture, including
+framework Info/Debug and Unity Warning/Error/Exception entries from the first
+launch. No second-launch entries replaced it. The `.log` response was 12,534 bytes
+including its capture/coverage headings. These are real game-generated startup
+logs, not an injected long-payload fixture or a manual GitHub attachment. The
+existing opt-out issue #190 returned 404 for both `.log` and `.json` downloads after
+the upgrade. Repository-triggered Railway deployment succeeded and health remained
+configured. No existing report, including #193, was backfilled with new logs.
+
+Final framework SHA-256:
+`799365744f34b15272b8992867517b49c99705c41705054c9b524f2ec5ac974a`.
+Final macOS arm64 helper SHA-256:
+`a0dce4fefe2a09f388f4c086de31c8ff0c341f0997f051d5965a3c2d3fb7b9b2`.
+
+The isolated game quit normally. These binaries and matching helper/installation
+hash records were installed into the stopped Steam installation, with all four
+prior files backed up. Hashes were verified after copying. A separate foreign FTK
+process was running when `prepare-launch` was called; the helper correctly declined
+to perform its preparation checks. That process was left untouched. The earlier
+`Framework verified.` observation applies to the preceding build, not this update.
+Authenticated Steam launch of this final pair remains a user-facing test gate.
+
 ## Remaining qualification gates
 
 - Authenticated Steam-launched manual test of the installed final pair.
