@@ -60,6 +60,11 @@ public class uiSelectCharacterInfo:Component {public Text m_ClassAbility,m_Start
 namespace FTKModFramework.Core
 {
     internal static class GuardianRuntime {internal static bool IsGuardianClass(int id){return id==1;}}
+    internal static class OverworldAilmentImmunity
+    {
+        internal static bool IsRegistered(int id){return id==1;}
+        internal static string DisplayName(int id){return id==1?"Cleansing March":null;}
+    }
     internal static class Plugin {internal static Logger Log=new Logger();}
     internal class Logger {internal void LogWarning(string message){}}
 }
@@ -97,6 +102,14 @@ internal static class Program
         state.Restore();group.name="unsupported";
         bool rejected=false;try{state.Arrange(info);}catch(InvalidOperationException){rejected=true;}
         Check(rejected && info.m_ClassAbility.alignment==TextAnchor.MiddleLeft && info.m_StartingItems.transform.localPosition.y==-381,"unknown native hierarchy fails before layout mutation");
+        group.name="Image (1)";
+        info.m_ClassAbility.text="native";
+        var show=typeof(GuardianClassInfoPatch).GetMethod("Postfix",BindingFlags.Static|BindingFlags.NonPublic);
+        show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)1});
+        Check(info.m_ClassAbility.text.Contains("Cleansing March: immune to\nPoison/Curse while exploring."),"class card names the registered passive and exact scope");
+        string once=info.m_ClassAbility.text;
+        show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)1});
+        Check(info.m_ClassAbility.text==once,"repeated class UI refresh does not duplicate passive text");
         Console.WriteLine("PASS "+checks+" actual class UI layout lifecycle checks (Unity stand-ins; no live fit proof)");
     }
 }
