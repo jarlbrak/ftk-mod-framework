@@ -370,6 +370,13 @@ func run(args []string) error {
 	return nil
 }
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "report-submit" {
+		if e := reportingSubmitMain(os.Args[2:]); e != nil {
+			fmt.Fprintln(os.Stderr, e)
+			os.Exit(1)
+		}
+		return
+	}
 	if len(os.Args) > 1 && os.Args[1] == "framework-updates" {
 		if e := frameworkUpdatesMain(os.Args[2:]); e != nil {
 			fmt.Fprintln(os.Stderr, e)

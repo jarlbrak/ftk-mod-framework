@@ -84,6 +84,14 @@ jobs:
           done
       - name: Run the game-free unit tests
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
+      - name: Reporting capture, recovery and submission checks (no game required)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for project in ReportingDraft ReportingMetadata ReportingRuntime ReportingSession ReportingDiagnostics ReportingSubmission; do
+            dotnet run --project "FTKModFramework/Tests/$project/$project.csproj" -c Release
+          done
+          dotnet run --project FTKModFramework/Tests/ReportingRuntime/ReportingRuntime.csproj -c Release -- busy
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
