@@ -1503,5 +1503,256 @@
       0
     ],
     "semantics": "Read-only postfix on actual production callbacks; compares final vertices to native Perlin at updated cursor, and final normal arrays to original corner arithmetic. Prototype transpiler is disabled. Validation postfix removed before this result is written."
+  },
+  "mergedMasterIntegration": {
+    "masterCommit": "d7be6630",
+    "mergeCommit": "42ed976",
+    "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+    "waterSourceChanged": false,
+    "gameFreeChecks": "Release build,126380 water assertions,115 lookup checks,28 probe tests passed again",
+    "numericalValidation": {
+      "id": "merged-production-output",
+      "methodOrder": [
+        "WaterDistort",
+        "LakeDistort"
+      ],
+      "complete": true,
+      "error": null,
+      "callbacks": [
+        25,
+        25
+      ],
+      "vertices": [
+        31000,
+        10875
+      ],
+      "vertexBitMismatches": [
+        0,
+        0
+      ],
+      "normalChecks": [
+        31000,
+        10875
+      ],
+      "normalBitMismatches": [
+        1405,
+        1081
+      ],
+      "maximumNormalComponentError": [
+        1.1920928955078125e-07,
+        1.1920928955078125e-07
+      ],
+      "maximumNormalSquaredVectorError": [
+        1.426636586643326e-14,
+        1.426636586643326e-14
+      ],
+      "normalNonfiniteMismatches": [
+        0,
+        0
+      ],
+      "normalZeroClassificationMismatches": [
+        0,
+        0
+      ],
+      "semantics": "Read-only postfix on actual production callbacks; compares final vertices to native Perlin at updated cursor, and final normal arrays to original corner arithmetic. Prototype transpiler is disabled. Validation postfix removed before this result is written."
+    },
+    "trials": [
+      {
+        "id": "merged-unpatched-0-off",
+        "frames": 900,
+        "meanMs": 8.349112272262573,
+        "fps": 119.77321269498324,
+        "p50Ms": 8.590936660766602,
+        "p95Ms": 9.191036224365234,
+        "p99Ms": 9.54902172088623,
+        "over33ms": 0,
+        "gcCollections": [
+          0,
+          0,
+          0
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "711863fe74b617ad6668f4dd6f3dc1592b19448870d0f28ae2a914bb54b54039"
+      },
+      {
+        "id": "merged-unpatched-1-on",
+        "frames": 900,
+        "meanMs": 9.057381020651924,
+        "fps": 110.40719140774569,
+        "p50Ms": 8.237957954406738,
+        "p95Ms": 10.632991790771484,
+        "p99Ms": 24.7650146484375,
+        "over33ms": 8,
+        "gcCollections": [
+          0,
+          0,
+          0
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "3fa0a977b59c3f9136b620a8babf78e08caa3f91e0384a26b822778c74bd2f92"
+      },
+      {
+        "id": "merged-unpatched-2-on",
+        "frames": 900,
+        "meanMs": 8.342648877037895,
+        "fps": 119.8660059579369,
+        "p50Ms": 8.317947387695312,
+        "p95Ms": 9.338021278381348,
+        "p99Ms": 9.727954864501953,
+        "over33ms": 0,
+        "gcCollections": [
+          0,
+          0,
+          0
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "6dcb9480507e1e9b07ee17fd44cd299c2264eeb6e70281e9ce334ee33244cebd"
+      },
+      {
+        "id": "merged-unpatched-3-off",
+        "frames": 900,
+        "meanMs": 8.663702143563164,
+        "fps": 115.42409739270249,
+        "p50Ms": 8.405089378356934,
+        "p95Ms": 9.685993194580078,
+        "p99Ms": 11.500000953674316,
+        "over33ms": 1,
+        "gcCollections": [
+          0,
+          0,
+          0
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "e72b40f4e99b11a40f52fd2afbffa28ec2265b574de857e22912a1281538d25d"
+      },
+      {
+        "id": "merged-unpatched-4-off",
+        "frames": 900,
+        "meanMs": 8.727307849460178,
+        "fps": 114.58287220403876,
+        "p50Ms": 8.395075798034668,
+        "p95Ms": 10.275006294250488,
+        "p99Ms": 11.602997779846191,
+        "over33ms": 1,
+        "gcCollections": [
+          1,
+          1,
+          1
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "a9eb472284f52a1ed20aea54115379b9077db59e719549326170215d88fe4e48"
+      },
+      {
+        "id": "merged-unpatched-5-on",
+        "frames": 900,
+        "meanMs": 8.359225458568996,
+        "fps": 119.62830826328597,
+        "p50Ms": 8.362054824829102,
+        "p95Ms": 9.405970573425293,
+        "p99Ms": 9.85097885131836,
+        "over33ms": 0,
+        "gcCollections": [
+          0,
+          0,
+          0
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "cefc8cfcd59d280376fcb7e6eeb4296fc7894ba94d0f09fd50a18841fdcf7062"
+      },
+      {
+        "id": "merged-unpatched-6-on",
+        "frames": 900,
+        "meanMs": 8.337008953094482,
+        "fps": 119.94709441073897,
+        "p50Ms": 8.362054824829102,
+        "p95Ms": 9.158015251159668,
+        "p99Ms": 9.613990783691406,
+        "over33ms": 0,
+        "gcCollections": [
+          0,
+          0,
+          0
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "1fa640f5afce8047521531e29663704d31bd94b1167ecee3d2cf036009552918"
+      },
+      {
+        "id": "merged-unpatched-7-off",
+        "frames": 900,
+        "meanMs": 8.437621063656277,
+        "fps": 118.51681800541417,
+        "p50Ms": 8.352994918823242,
+        "p95Ms": 9.25898551940918,
+        "p99Ms": 9.914994239807129,
+        "over33ms": 0,
+        "gcCollections": [
+          0,
+          0,
+          0
+        ],
+        "focusedFrames": 900,
+        "unfocusedFrames": 0,
+        "focusChanges": 0,
+        "lookAt": "(69.3, 0.0, 125.0)",
+        "distance": 70.0,
+        "frameworkSha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e",
+        "csvSha256": "fa6030749439093ef19b30fb9a898b7476a67ed920b293e2ef70d9872a4b19b9"
+      }
+    ],
+    "summary": {
+      "off": {
+        "fps": 116.97045769905833,
+        "meanMs": 8.55066160360972,
+        "p95Ms": 9.472489356994629,
+        "p99Ms": 10.707497596740723,
+        "over33ms": 0.5,
+        "pooledMeanMs": 8.544435832235548
+      },
+      "on": {
+        "fps": 119.74715711061144,
+        "meanMs": 8.350937167803446,
+        "p95Ms": 9.37199592590332,
+        "p99Ms": 9.789466857910156,
+        "over33ms": 0.0,
+        "pooledMeanMs": 8.524066077338325
+      }
+    },
+    "startupObservation": "Native AkInitializer.OnApplicationFocus NullReferenceException triggered upstream reporting UI during startup. Prompt dismissed without submission; native setup then resumed. No water patch error observed.",
+    "interpretation": "Repeat shows smaller median FPS/p95 gain. One optimized capture had8 frames above33ms; pooled mean improved only about0.24%. No claim of broad hitch reduction or consistent improvement in every run."
   }
 }

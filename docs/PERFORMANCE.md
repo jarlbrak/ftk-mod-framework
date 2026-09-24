@@ -107,7 +107,7 @@ the incoming method unchanged. It runs at Harmony's `Priority.Last` to inspect
 earlier transforms. Another transform running afterward can still conflict;
 compatibility with arbitrary third-party patches is not established.
 
-The final candidate passed 126,380 game-free assertions, including emitted-IL
+The measured candidate passed 126,380 game-free assertions, including emitted-IL
 execution, cache bounds, lifecycle callbacks, numerical comparisons, and rejection
 of altered instruction patterns. These tests use a modern CLR with engine stubs;
 they do not establish native Mono behavior by themselves.
@@ -169,6 +169,28 @@ See [all trials, binary identities and numerical evidence](evidence/performance-
 These results describe one Apple M5 running the macOS game through its shipped
 Mono runtime, with 1280x720 windowed rendering, quality level 4 and VSync disabled.
 Both comparison arms used the same graphics settings and diagnostic plugins.
+
+### Current-master integration repeat
+
+After merging master `d7be6630`, the water source was unchanged. The rebuilt
+framework SHA-256 was
+`7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e`.
+Release build and the water, lookup and probe suites passed again. Native validation
+again compared 41,875 vertices with zero bit mismatches and maximum normal
+component error `1.1920928955078125e-7`.
+
+Another eight-run original-water/optimized-water crossover on this merged binary
+measured median trial FPS of 116.97 / 119.75 (+2.4%) and p95 of 9.47 / 9.37 ms
+(1.1% lower). One optimized trial contained eight frames over 33 ms. Across all
+frames, pooled mean time improved only from 8.5444 to 8.5241 ms, about 0.24%.
+This smaller repeat reinforces the limits: typical-run gains vary with conditions,
+and large hitches are not solved. These trials are recorded separately rather than
+pooled with the earlier binary's results.
+
+The new upstream reporting UI surfaced a native `AkInitializer.OnApplicationFocus`
+null-reference exception during startup. Its prompt was dismissed without sending
+a report, then native setup resumed. No water-patch error was observed. This is a
+separate startup observation, not a passing audio-initialization claim.
 
 ## Repeating the overworld comparison
 
