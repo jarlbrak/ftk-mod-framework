@@ -17,8 +17,9 @@ The catalog permits installation on macOS, Windows and Linux. The listing owns
 this platform allowlist; the builder's `--platform` selects only the local fixture
 platform. Installation permission does not establish gameplay validation. The
 framework version and game assembly fingerprint checks still apply, so an
-unlisted game build remains blocked. Framework release manifests already include
-helpers for all three desktop operating systems.
+unlisted game build remains blocked. The Windows Steam build fingerprint was
+supplied by a player; Windows installation and gameplay remain unverified.
+Framework release manifests already include helpers for all three desktop operating systems.
 
 This source shows mod authors how to declare a class, abilities, equipment,
 custom models and icons. See [Writing Content](../../../docs/WRITING-CONTENT.md),
