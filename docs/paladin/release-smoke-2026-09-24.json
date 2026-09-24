@@ -1,0 +1,26 @@
+{
+  "schema": "ftkmf.paladin-1.1.0-prerelease-smoke.v1",
+  "observedAt": "2026-09-24",
+  "environment": "Task-owned isolated macOS game copy, package-only test helper, offline single-player, development self-tests enabled for this run and disabled afterward",
+  "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "frameworkVersion": "1.0.3",
+  "frameworkSha256": "334f2fa0b83ea5f5e66b3162a9e07bbef32239f7d95945b53d26e97d3e2de015",
+  "paladinVersion": "1.1.0",
+  "paladinArchiveSha256": "b5501fc3708f5ab6c53502252e7738bf2054c87cdb27eb22ae97e80c26f0774b",
+  "testHelperSha256": "381bb6dc34e84cc3d0c310eb17f30bf9c1d6e7b370fc7d1f0acc55c543d5b2d1",
+  "observations": {
+    "registeredEntries": 54,
+    "registrationErrors": 0,
+    "registrationWarnings": 0,
+    "selfTestPassLines": 5,
+    "selfTestFailLines": 0,
+    "nativeInputChecksPassed": 60,
+    "nativeStartReachedSinglePlayerSession": true,
+    "loggedErrors": "Two intentional AddPassive rejection cases from the development self-test; no other framework error or fatal line"
+  },
+  "limits": [
+    "This was a prerelease 1.0.3 build. The native start smoke used the default hero; it did not repeat Paladin Poison or Curse entry on this framework binary.",
+    "The separate Cleansing March tile trial used the same Paladin archive with an earlier 1.0.3 framework build; see cleansing-march-live-2026-09-24.json.",
+    "This smoke did not test public download, update, install, save/resume, multiplayer, or Windows/Linux gameplay."
+  ]
+}
