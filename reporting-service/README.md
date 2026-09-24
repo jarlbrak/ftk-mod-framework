@@ -29,8 +29,11 @@ IaC is evaluated by `railway config`, not read automatically by a source deploym
 4. The GitHub source is `jarlbrak/ftk-mod-framework`, with branch `master` by default.
    To validate an unmerged branch, set `FTK_REPORTING_SOURCE_BRANCH` in the local
    planning/apply process. Push that branch before applying. The plan connects the
-   GitHub source and deployment settings in the same operation. Source connection
-   requires the Railway GitHub integration to have access to the repository.
+   GitHub source and deployment settings in the same operation. Also register the
+   GitHub deployment trigger with `railway service source connect --repo
+   jarlbrak/ftk-mod-framework --branch <deployment-branch> --service reporting-api`.
+   Source connection requires the Railway GitHub integration to have access to
+   the repository. Verify a subsequent push starts a deployment.
 5. Generate a public HTTPS domain and set `PUBLIC_BASE_URL` in the Railway service
    to that origin. Add `GITHUB_TOKEN` directly as a Railway secret when ready. Use
    a fine-grained token restricted to this repository with Issues read/write
@@ -68,7 +71,7 @@ The first plan must contain no resource deletion, volume relocation/detachment, 
 secret replacement. An unattended `apply --yes` is appropriate only for an already
 reviewed non-destructive change; do not add `--confirm-destructive` to this workflow.
 After the branch merges, plan and apply without the source-branch override to return
-its source to `master`.
+its source to `master`, then reconnect the deployment trigger with `--branch master`.
 
 The local `.railway` importer, lock, binding, plan, and generated type files are
 ignored. Only `railway.ts` is source-controlled. Keep project linkage in the CLI's
