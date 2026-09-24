@@ -109,6 +109,19 @@ fixture class. The result labels its selection source as the registered class
 database and sets `assetManifestCompared: false`. This is runtime inspection,
 not comparison against a fixture asset manifest.
 
+For an isolated Paladin tile trial, `overworld-ailment-state` reads each native
+hero's class, hex, Poison level, active curses, combat flag and Poison/Curse
+immunity, plus current Poison, Curse, Chaos and Fire POIs. It changes no state.
+In package-only mode, `stage-native-ailment-hex` accepts an exact owned Paladin
+or Hunter instance ID, `type` (`Poison` or `Curse`) and a vacant neighboring
+`big`/`small` hex. It stages one native hazard prefab of each type per process.
+`enter-native-ailment-hex` accepts an exact owned hero and a current
+neighboring hazard; it calls native `CharacterOverworld.SnapTo` and returns
+before/after status counters. This is a disposable setup and tile-entry check.
+Use the bridge's `move_to` for an ordinary movement claim, and observe that the
+hero actually reaches the target. A staged hazard does not prove natural spawn
+timing, and `SnapTo` does not prove walking animation or movement controls.
+
 ## Run one pinned execution-queue route
 
 For a direct-enemy or resource-prefab route already marked

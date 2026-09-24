@@ -1,10 +1,11 @@
 # Paladin
 
-[Paladin 1.0.1](../../marketplace/packages/paladin/README.md) is the first
-published FTK Mod Framework marketplace package and this repository's complete
-mod-authoring example. It adds a Vitality-based protector, Guard and Divine
-Intervention, six equipment families, twelve accessories and three legendary
-artifacts. Its original gear art is worn over native character bodies.
+[Paladin 1.0.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.0.1)
+is the first published FTK Mod Framework marketplace package. The
+[1.1.0 source candidate](../../marketplace/packages/paladin/README.md) adds
+Cleansing March to the Vitality-based protector, Guard and Divine Intervention,
+six equipment families, twelve accessories and three legendary artifacts. Its
+original gear art is worn over native character bodies.
 
 Read the [combat design](COMBAT.md), [equipment inventory](EQUIPMENT.md),
 [art direction](ART-DIRECTION.md) and [package source](../../marketplace/packages/paladin/)

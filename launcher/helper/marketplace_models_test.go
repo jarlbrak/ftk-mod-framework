@@ -106,12 +106,18 @@ func TestPaladinOriginalModels(t *testing.T) {
 }
 
 func TestMarketModelDeclarations(t *testing.T) {
-	good := []byte(`{"entries":[{"kind":"class","id":"paladin","template":"blacksmith","guardian":true,"playerModels":[{"skinset":"blacksmith_Female","body":[{"path":"playerBlacksmith","model":"assets/body.glb","texture":"assets/body.png"}]}]}]}`)
+	good := []byte(`{"entries":[{"kind":"class","id":"paladin","template":"blacksmith","guardian":true,"overworldAilmentImmunity":{"displayName":"Cleansing March"},"playerModels":[{"skinset":"blacksmith_Female","body":[{"path":"playerBlacksmith","model":"assets/body.glb","texture":"assets/body.png"}]}]}]}`)
 	if err := marketContent(good); err != nil {
 		t.Fatal(err)
 	}
+	legacy := []byte(`{"entries":[{"kind":"class","id":"paladin","template":"blacksmith","guardian":true}]}`)
+	if err := marketContent(legacy); err != nil {
+		t.Fatalf("published Paladin shape without new capability rejected: %v", err)
+	}
 	for _, raw := range []string{
 		`{"entries":[{"kind":"weapon","id":"bad","template":"bluntSmithHammer","guardian":true}]}`,
+		`{"entries":[{"kind":"weapon","id":"bad","template":"bluntSmithHammer","overworldAilmentImmunity":{"displayName":"Cleansing March"}}]}`,
+		`{"entries":[{"kind":"class","id":"bad","template":"blacksmith","overworldAilmentImmunity":{}}]}`,
 		`{"entries":[{"kind":"weapon","id":"bad","template":"bluntSmithHammer","itemModels":[{"path":".","model":"../evil.glb","texture":"assets/a.png"}]}]}`,
 		`{"entries":[{"kind":"class","id":"bad","template":"blacksmith","playerModels":[]}]}`,
 		`{"entries":[{"kind":"class","id":"bad","template":"blacksmith","behavior":"arbitrary-code"}]}`,

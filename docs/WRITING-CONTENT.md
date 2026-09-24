@@ -1,17 +1,17 @@
 # Write a content mod
 
-FTK Mod Framework 1.0.1 adds content to the original *For The King* without editing the game's files. The [Paladin package](../marketplace/packages/paladin/content.json) is the complete, shipped content example. Its [manifest](../marketplace/packages/paladin/manifest.json) defines identity and compatibility; its content file defines the class, equipment, abilities, models, and icons. Copy its structure, then use your own stable mod GUID, IDs, names, and original assets. The [marketplace guide](MARKETPLACE.md) covers review and publication.
+FTK Mod Framework adds content to the original *For The King* without editing the game's files. The [Paladin package](../marketplace/packages/paladin/content.json) is a complete source example. Its 1.1.0 source candidate requires framework 1.0.3; the published catalog still serves Paladin 1.0.1. The [manifest](../marketplace/packages/paladin/manifest.json) defines identity and compatibility; its content file defines the class, equipment, abilities, models, and icons. Copy its structure, then use your own stable mod GUID, IDs, names, and original assets. The [marketplace guide](MARKETPLACE.md) covers review and publication.
 
 ## Start with a manifest
 
-Place `manifest.json` and one or more JSON files containing `entries` arrays in a folder under `<game>/BepInEx/plugins/`. The shipped Paladin manifest begins:
+Place `manifest.json` and one or more JSON files containing `entries` arrays in a folder under `<game>/BepInEx/plugins/`. The Paladin 1.1.0 source manifest begins:
 
 ```json
 {
   "modGuid": "com.ftkmf.paladin",
   "name": "Paladin",
-  "version": "1.0.1",
-  "frameworkVersion": "1.0.1",
+  "version": "1.1.0",
+  "frameworkVersion": "1.0.3",
   "author": "JarlBrak"
 }
 ```
@@ -35,6 +35,14 @@ Use original PNG and GLB assets for marketplace packages. The Paladin package sh
 For a compiled mod, reference `FTKModFramework.dll` and the game's publicized `Assembly-CSharp` from a .NET 3.5 BepInEx 5 plugin. Register through `FTKModFramework.Core.Content` after `GridEditor.TableManager.Initialize` has populated the tables. `Content.AddItem`, `AddWeapon`, `AddProficiency`, `AddClass`, `AddEnemy`, and `AddEncounter` clone and register rows; `Content.AttachProficiencies` and `AttachEnemyProficiencies` connect actions to privately cloned weapons. `Content.Db<T>()` ensures a table index exists before direct reads. `Content.AddPassive` binds one of the framework's closed `PassiveTrigger` moments to a registered class; it does not create a database row or a chance roll. Keep registrations idempotent and pass your plugin GUID to each call.
 
 A data mod can declare `behaviorDll` for a `ProficiencyBase` subclass or custom quest-logic verb, but the marketplace's current [content contract](MARKETPLACE.md#content-submission) does not distribute behavior DLLs. Campaign and adventure authoring have separate [campaign](CAMPAIGNS.md) and [adventure](ADVENTURES.md) guides; their availability as framework APIs does not mean that a campaign package has shipped.
+
+In framework 1.0.3, `Content.AddOverworldAilmentImmunity(classRow, displayName)` or a class
+entry's `overworldAilmentImmunity` object with a `displayName` opts an exact registered custom class
+into native Poison and Curse immunity while outside combat. This includes tile
+hazards and other exploration sources, but does not cure existing conditions,
+prevent tile damage or losses, or change combat immunity. The Paladin 1.1.0
+candidate uses this declaration for Cleansing March. Verify the effect in game
+before advertising it as a released ability.
 
 ## Validate and play
 

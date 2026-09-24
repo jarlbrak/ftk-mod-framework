@@ -210,6 +210,9 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "custom-loot-fixture") Finish(id,CustomLootFixture(command));
             else if(op == "player-studio") Finish(id,PlayerStudio(command));
             else if(op == "world-input-state") Finish(id,WorldInputObservation(command));
+            else if(op == "overworld-ailment-state") Finish(id,OverworldAilmentObservation(command));
+            else if(op == "stage-native-ailment-hex") Finish(id,StageNativeAilmentHex(command));
+            else if(op == "enter-native-ailment-hex") Finish(id,EnterNativeAilmentHex(command));
             else if(op == "guardian-state") Finish(id,GuardianObservation(command));
             else if(op == "guardian-incapacity-fixture") Finish(id,GuardianIncapacityFixture(command));
             else if(op == "guardian-legendary-fixture") Finish(id,GuardianLegendaryFixture(command));

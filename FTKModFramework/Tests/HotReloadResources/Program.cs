@@ -41,6 +41,15 @@ namespace FTKModFramework.Core
             return delegate { ReloadClassCount = old; };
         }
     }
+    internal static class OverworldAilmentImmunity
+    {
+        internal static int ReloadClassCount;
+        internal static Action SuspendForReload()
+        {
+            int old = ReloadClassCount; ReloadClassCount = 0;
+            return delegate { ReloadClassCount = old; };
+        }
+    }
     internal static class ItemModelRegistry
     {
         internal static int ReloadModelCount;
@@ -95,16 +104,20 @@ internal static class Program
         PaladinResourceState.Own(old); PaladinResourceState.Own(old);
         Check(PaladinResourceState.OwnedObjectCount == 1, "Ownership cannot duplicate a native object.");
         GuardianRuntime.ReloadClassCount = 1;
+        OverworldAilmentImmunity.ReloadClassCount = 1;
         PackageIcons.FailSuspend = true;
         Reject(delegate { PaladinResourceState.Suspend(); }, "Partial participant suspension rejects.");
         Check(!PaladinResourceState.TransactionOpen && GuardianRuntime.ReloadClassCount == 1 &&
+            OverworldAilmentImmunity.ReloadClassCount == 1 &&
             PaladinResourceState.OwnedObjectCount == 1 && old != null, "Partial suspension restores prior owner and binding.");
         PackageIcons.FailSuspend = false;
         var rollback = PaladinResourceState.Suspend();
         UnityEngine.Object rejected = new UnityEngine.Object(); PaladinResourceState.Own(rejected);
         GuardianRuntime.ReloadClassCount = 2;
+        OverworldAilmentImmunity.ReloadClassCount = 2;
         PaladinResourceState.Rollback(rollback);
-        Check(old != null && PaladinResourceState.OwnedObjectCount == 1 && GuardianRuntime.ReloadClassCount == 1,
+        Check(old != null && PaladinResourceState.OwnedObjectCount == 1 && GuardianRuntime.ReloadClassCount == 1 &&
+            OverworldAilmentImmunity.ReloadClassCount == 1,
             "Rollback preserves exact old object and binding.");
         Check(PaladinResourceState.PendingDestroyCount == 1 && rejected != null, "Destroy request is not proof of native release.");
         Reject(delegate { PaladinResourceState.Suspend(); }, "Next activation waits for destruction.");
@@ -135,7 +148,8 @@ internal static class Program
         GuardianRuntime.ReloadTransientStateEmpty = true;
         var remove = PaladinResourceState.Suspend(); PaladinResourceState.Retire(remove);
         UnityEngine.Object.EndFrame();
-        Check(PaladinResourceState.OwnedObjectCount == 0 && PaladinResourceState.PendingDestroyCount == 0,
+        Check(PaladinResourceState.OwnedObjectCount == 0 && PaladinResourceState.PendingDestroyCount == 0 &&
+            OverworldAilmentImmunity.ReloadClassCount == 0,
             "Removal leaves no owned native allocations.");
         Console.WriteLine("PASS: " + checks + " resource ledger checks; Unity lifecycle remains a live gate.");
     }
