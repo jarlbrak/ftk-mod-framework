@@ -1,6 +1,6 @@
 # Mod and framework versions
 
-A content mod's [manifest](../marketplace/packages/paladin/manifest.json) records its own release version and the minimum framework version it declares compatible. Before publication, gameplay must confirm that declaration. The unpublished Paladin 1.1.0 source candidate declares:
+A content mod's [manifest](../marketplace/packages/paladin/manifest.json) records its own release version and the minimum framework version it declares compatible. Before publication, gameplay must confirm that declaration. Paladin 1.1.0 declares:
 
 ```json
 {
