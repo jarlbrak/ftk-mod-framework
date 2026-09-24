@@ -73,6 +73,11 @@ reviewed non-destructive change; do not add `--confirm-destructive` to this work
 After the branch merges, plan and apply without the source-branch override to return
 its source to `master`, then reconnect the deployment trigger with `--branch master`.
 
+A public repository can build by URL without the Railway GitHub App having access.
+A successful source connection alone therefore does not prove automatic deployment.
+Verify that the source branch has a deployment trigger and that a subsequent push
+starts a deployment after authorizing the app for the selected repository.
+
 The local `.railway` importer, lock, binding, plan, and generated type files are
 ignored. Only `railway.ts` is source-controlled. Keep project linkage in the CLI's
 local state. Use a read-only `railway config pull` into an ignored scratch directory

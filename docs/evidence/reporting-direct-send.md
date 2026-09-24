@@ -57,6 +57,10 @@ The live `/healthz` returned HTTP 200 with `configured: false`; `/privacy` retur
 its public disclosure. This proves deployment and HTTPS reachability, not issue
 creation. The scoped GitHub service credential has not yet been configured.
 
+After account verification and approval of repository-scoped Railway App access,
+the source connection registered a deployment trigger for the feature branch.
+This authorization is separate from the issue-writing credential.
+
 ## Remaining qualification gates
 
 - Scoped service credential; GitHub requires interactive re-authentication.
