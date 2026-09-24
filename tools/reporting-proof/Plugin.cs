@@ -456,6 +456,7 @@ namespace FTKReportingProof
                 last = id;
                 string op = (string)command["op"];
                 if (op == "state") Write(id, State());
+                else if (op == "guardian-cleanup") Write(id, GuardianCleanupProof.Run(session, nativeReporting));
                 else if (op == "browser-focus") Write(id, BrowserFocusProbe());
                 else if (op == "fault-open") StartCoroutine(RunFaultProbe(id, (string)command["point"]));
                 else if (op == "screenshot") StartCoroutine(Screenshot(id));

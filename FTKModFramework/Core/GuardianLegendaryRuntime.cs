@@ -164,8 +164,12 @@ namespace FTKModFramework.Core
 
         internal static void EndLegendaryCombat(CharacterDummy actor)
         {
-            Legendary.ResetActor(Identity(actor));
-            PendingGuardFocus.Remove(Identity(actor));
+            // Native combat exit visits unused pooled dummies too. Their FID getter
+            // dereferences an absent overworld character, and they own no Guardian state.
+            if (actor == null || actor.m_CharacterOverworld == null) return;
+            string identity = Identity(actor);
+            Legendary.ResetActor(identity);
+            PendingGuardFocus.Remove(identity);
         }
     }
 }

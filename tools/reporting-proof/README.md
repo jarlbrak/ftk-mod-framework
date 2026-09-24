@@ -218,3 +218,31 @@ for the tested build, observations and remaining gates. Test normal quit, owned
 forced termination, prior/current provenance, deferred offers, durable dismissal,
 review invalidation and draft reopening separately. Never infer those outcomes from
 a successful build or the historical menu-only trials.
+
+## Guardian combat cleanup regression
+
+In framework integration mode, `guardian-cleanup` runs a fixed regression fixture
+only at a pristine disconnected title, with the current isolation receipt and the
+actual framework `GuardianEndPatch` installed. It refuses active sessions, map or
+character creation, network rooms, and lobby connections.
+
+```json
+{"session":"unique-run","id":"guardian-cleanup-1","op":"guardian-cleanup"}
+```
+
+The fixture creates owned inactive Unity components, so native `Awake` and scene
+registration are deferred. It calls the actual patched `CharacterDummy.CombatFinished`
+twice on a dummy with no overworld character and checks that the native completion
+flag is set each time. Separate checks invoke null-actor cleanup, seed two temporary
+legendary and pending-focus entries, verify cleanup removes only the matching actor,
+and verify an enemy's virtual identity still uses its own FID without a character.
+It removes its temporary entries and destroys only its owned objects in `finally`.
+No party, prefab, save, or shared scene asset is adopted or modified.
+
+The response includes `passed` and named checks with explicit exception details on
+failure. An exception outside a check uses the normal command error response and is
+never passing evidence. Run the same proof DLL against the prior and fixed framework
+builds, recording their hashes. The prior build should fail the unbound native calls;
+the fixed build must pass every check. This qualifies the reported cleanup fault and
+state preservation in the real patched runtime, not an actual combat encounter,
+rewards, overworld input recovery, co-op, or another platform.
