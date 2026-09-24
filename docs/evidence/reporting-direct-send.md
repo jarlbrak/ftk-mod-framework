@@ -164,6 +164,26 @@ to perform its preparation checks. That process was left untouched. The earlier
 `Framework verified.` observation applies to the preceding build, not this update.
 Authenticated Steam launch of this final pair remains a user-facing test gate.
 
+## Credential-label filtering follow-up
+
+Final merge review found that the explicit labels `credential` and `credentials`
+were missing from filtering. Synthetic cases reproduced the gap in both the client
+and service before the fix. The client now omits matching messages, and the service
+omits matching strings and structured credential fields. Entire matching strings
+are omitted because values can contain spaces and line breaks.
+
+The client diagnostics suite passed 80 checks. The service race suite passed,
+including a fake-GitHub submission that checks issue text, stored payload, public
+JSON and readable log downloads for exclusion of synthetic values. Service vet,
+build and infrastructure typecheck passed, as did the framework Release/net35 build
+with seven existing warnings. This is offline filtering evidence, not another live
+report submission. The earlier binary hashes describe those earlier trials.
+
+This change does not retroactively rewrite retained uploads. Historical test issues
+were deleted on request; removing an issue does not remove its service copy. Cleanup
+of those copies remains a separate operational task. No real credential exposure
+was established by the synthetic regression.
+
 ## Remaining qualification gates
 
 - Authenticated Steam-launched manual test of the installed final pair.

@@ -6,6 +6,8 @@ import (
 	"unicode/utf8"
 )
 
+var credentialLabel = regexp.MustCompile(`(?i)\bcredentials?\b\s*["']?\s*[:=]`)
+
 var redactPatterns = []*regexp.Regexp{
 	regexp.MustCompile(`(?i)(?:authorization\s*[:=]\s*|bearer\s+|(?:password|passwd|token|secret|api[_-]?key)\s*[:=]\s*)[^\s,;"']+`),
 	regexp.MustCompile(`\b(?:gh[pousr]_[A-Za-z0-9_]+|github_pat_[A-Za-z0-9_]+)\b`),
@@ -17,6 +19,10 @@ var redactPatterns = []*regexp.Regexp{
 }
 
 func redact(text string) string {
+	// Credential values may contain spaces or multiple lines; omit the whole string.
+	if credentialLabel.MatchString(text) {
+		return "[sensitive log entry omitted]"
+	}
 	for _, pattern := range redactPatterns {
 		text = pattern.ReplaceAllString(text, "[redacted]")
 	}
@@ -42,7 +48,7 @@ func sanitize(value interface{}) interface{} {
 		for key, child := range v {
 			lower := strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(key, "_", ""), "-", ""))
 			blocked := false
-			for _, fragment := range []string{"password", "passwd", "token", "secret", "apikey", "authorization", "cookie", "email", "username", "playername", "steamid", "savegame", "savedata", "screenshot", "environmentvariables", "ipaddress"} {
+			for _, fragment := range []string{"password", "passwd", "credential", "token", "secret", "apikey", "authorization", "cookie", "email", "username", "playername", "steamid", "savegame", "savedata", "screenshot", "environmentvariables", "ipaddress"} {
 				if strings.Contains(lower, fragment) {
 					blocked = true
 					break

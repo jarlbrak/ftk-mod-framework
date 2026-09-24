@@ -53,6 +53,8 @@ internal static class Program
         string[] sensitive = {
             "Authorization: Bearer private-secret", "{\"token\":\"private-secret\"}",
             "PASSWORD=private-secret", "username=private-secret", "player_name: private-secret",
+            "credential=private-secret", "CREDENTIALS: private-secret",
+            "{\"credentials\":\"private-secret with spaces\"}", "credential:\nprivate-secret",
             "-----BEGIN RSA PRIVATE KEY-----\nprivate-secret\n-----END RSA PRIVATE KEY-----",
             "https://user:private-secret@example.net/path?q=secret", "private-secret@example.net",
             "/Users/private-secret/Library/Application Support/FTK/save.json", "C:\\Users\\private-secret\\FTK\\save.json",

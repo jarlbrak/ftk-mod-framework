@@ -148,6 +148,53 @@ func TestUsefulLogDumpRoundTripRedactionAndExpiry(t *testing.T) {
 	}
 }
 
+func TestCredentialLabelsExcludedFromPublicReports(t *testing.T) {
+	for _, value := range []string{"credential=synthetic-value", "CREDENTIALS: synthetic-value", `{"credentials":"synthetic-value with spaces"}`, "credential:\nsynthetic-value"} {
+		if strings.Contains(redact(value), "synthetic-value") {
+			t.Errorf("credential label survived filtering: %q", value)
+		}
+	}
+	var postedBody string
+	s := fixture(t, func(w http.ResponseWriter, r *http.Request) {
+		var issue map[string]string
+		_ = json.NewDecoder(r.Body).Decode(&issue)
+		postedBody = issue["body"]
+		w.WriteHeader(201)
+		fmt.Fprint(w, `{"number":12,"html_url":"https://github.com/owner/repo/issues/12"}`)
+	})
+	var req report
+	_ = json.Unmarshal([]byte(requestBody()), &req)
+	req.Diagnostics = map[string]interface{}{
+		"logs":            "credentials: synthetic-value with spaces\nand multiple lines",
+		"credential":      "synthetic-field-value",
+		"previousSession": map[string]interface{}{"CREDENTIALS": "synthetic-prior-value", "logs": "ordinary prior context"},
+	}
+	body, _ := json.Marshal(req)
+	if w := post(s, string(body)); w.Code != 201 {
+		t.Fatal(w.Code, w.Body.String())
+	}
+	stored, err := os.ReadFile(filepath.Join(s.cfg.dataDir, req.ReportID+".json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	outputs := []string{postedBody, string(stored)}
+	for _, extension := range []string{".json", ".log"} {
+		w := httptest.NewRecorder()
+		s.ServeHTTP(w, httptest.NewRequest("GET", "/diagnostics/"+req.ReportID+extension, nil))
+		if w.Code != 200 {
+			t.Fatal(w.Code)
+		}
+		outputs = append(outputs, w.Body.String())
+	}
+	for _, output := range outputs {
+		for _, secret := range []string{"synthetic-value", "with spaces", "multiple lines", "synthetic-field-value", "synthetic-prior-value"} {
+			if strings.Contains(output, secret) {
+				t.Errorf("credential content leaked: %s", secret)
+			}
+		}
+	}
+}
+
 func TestLogDownloadRequiresDiagnosticsConsent(t *testing.T) {
 	s := fixture(t, func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(201)

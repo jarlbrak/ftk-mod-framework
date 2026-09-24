@@ -95,7 +95,7 @@ namespace FTKModFramework.Core.Reporting
             if (String.IsNullOrEmpty(value)) return "";
             if (value.Length > 8192) value = value.Substring(0, 8192);
             // Omit an entire message containing sensitive fields, including multiline values.
-            if (Regex.IsMatch(value, @"(?i)\b(password|passwd|pwd|secret|token|authorization|cookie|api[_ -]?key|access[_ -]?key|connectionstring|private[_ -]?key|username|user[_ -]?name|user[_ -]?id|display[_ -]?name|player[_ -]?name|account[_ -]?id|steam[_ -]?id)\b\s*[""']?\s*[:=]|-----BEGIN .*PRIVATE KEY-----|\bBearer\s+"))
+            if (Regex.IsMatch(value, @"(?i)\b(password|passwd|pwd|credentials?|secret|token|authorization|cookie|api[_ -]?key|access[_ -]?key|connectionstring|private[_ -]?key|username|user[_ -]?name|user[_ -]?id|display[_ -]?name|player[_ -]?name|account[_ -]?id|steam[_ -]?id)\b\s*[""']?\s*[:=]|-----BEGIN .*PRIVATE KEY-----|\bBearer\s+"))
                 return "[sensitive log entry omitted]";
             value = Regex.Replace(value, @"(?i)\b(?:https?|ftp|file)://[^\s<>""']+", "[url]");
             value = Regex.Replace(value, @"(?i)\b(?:gh[pousr]_[a-z0-9_]+|github_pat_[a-z0-9_]+|sk-[a-z0-9_-]{12,}|AKIA[A-Z0-9]{16})\b", "[credential]");
