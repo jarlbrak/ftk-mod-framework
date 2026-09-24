@@ -47,3 +47,28 @@ body:
       description: Which content (class, item, ability, enemy, adventure) and which mode (solo, co-op, ironman)?
     validations:
       required: false
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often does this happen?
+      options:
+        - Not sure
+        - Once
+        - Sometimes
+        - Every time
+    validations:
+      required: false
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and mod state
+      description: Framework, game, runtime and known mod observations. Unknown state is identified as unknown.
+    validations:
+      required: false
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Optional reviewed diagnostic metadata
+      description: Inline metadata only. No file has been attached by the game. Review before submitting.
+    validations:
+      required: false

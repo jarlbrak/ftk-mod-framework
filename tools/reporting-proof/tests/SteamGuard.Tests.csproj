@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net10.0</TargetFramework><OutputType>Exe</OutputType>
+    <TestGameRoot Condition="'$(TestGameRoot)' == ''">$(MSBuildThisFileDirectory)../../../scratch/reporting-game</TestGameRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../steam-guard/SteamGuard.cs" Link="SteamGuard.cs" />
+    <Reference Include="Mono.Cecil"><HintPath>$(TestGameRoot)/BepInEx/core/Mono.Cecil.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>

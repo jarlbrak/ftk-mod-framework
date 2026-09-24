@@ -26,6 +26,8 @@ namespace FTKModFramework.Core.UI
         private const string LogoResource = "FTKModFramework.assets.brand.splash-logo.png";
         private const int MaxNamesListed = 6;
         private static bool _shown;
+        private static GameObject _activeRoot;
+        internal static bool Finished { get { return _shown && (!_activeRoot || !_activeRoot.activeInHierarchy); } }
 
         /// <summary>Show the card once per process (a later return to the title never re-shows it).</summary>
         public static void ShowOnce()
@@ -46,6 +48,7 @@ namespace FTKModFramework.Core.UI
             try
             {
                 root = new GameObject("FtkmfSplash");
+                _activeRoot = root;
                 Build(root, hold);
             }
             catch (Exception e)
