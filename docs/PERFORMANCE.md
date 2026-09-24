@@ -82,18 +82,21 @@ before each trial, and every timed checksum matched afterward.
 
 | Build/order | Five-trial median | Observed range |
 | --- | ---: | ---: |
-| Baseline before | 2,084.585 ms | 1,868.388 to 2,363.488 ms |
-| Final candidate | 3.798 ms | 3.476 to 3.845 ms |
-| Baseline repeated afterward | 2,163.765 ms | 2,098.918 to 8,309.583 ms |
+| Baseline before | 1,794.088 ms | 1,727.713 to 1,919.423 ms |
+| Final candidate | 3.201 ms | 3.160 to 3.361 ms |
+| Baseline repeated afterward | 1,735.474 ms | 1,724.670 to 1,972.725 ms |
 
-That is about 549 to 570 times faster for this warmed canonical-name workload.
-The outlier remains in the [numeric evidence record](evidence/performance-lookup-2026-09-24.json),
-alongside all trials, binary hashes and methodology. The same probe and benchmark
-binaries ran in every group. No uninstrumented comparison was made.
+That is about 542 to 560 times faster for this warmed canonical-name workload.
+These measurements use baseline commit `5561401f` and the candidate rebased onto
+that commit. All trials, binary hashes and methodology are in the
+[numeric evidence record](evidence/performance-lookup-2026-09-24.json).
+The same probe and benchmark binaries ran in every group. No uninstrumented
+comparison was made. Earlier-base exploration is retained separately, including
+an 8,309.583 ms baseline outlier; it is not final-binary acceptance evidence.
 
 An exploratory lazy cache paid 53.57 ms on its first benchmark lookup. The final
 implementation constructs the cache before installing patches, moving that cost
-into startup. Its first benchmark invocation took 2.038 ms, which can include JIT
+into startup. Its first benchmark invocation took 3.509 ms, which can include JIT
 and instrumentation startup. This does not establish an overall startup-time
 improvement or eliminate the cache's construction cost.
 
@@ -104,3 +107,11 @@ often a scenario resolves IDs. Co-op, other operating systems, long-session save
 behavior and compatibility with third-party patches of `GetEnum` remain untested.
 The native-name fast path skips the original body, which can affect another mod's
 transpiler or later side-effecting Harmony prefix.
+
+The final current-base binary also passed the native-input harness's 60 checks,
+created a single-player adventure through native UI controls, and displayed its
+three heroes in the overworld. Four development self-test PASS lines were
+observed; the two deliberate AddPassive rejection errors were expected. Release
+builds, 115 game-free lookup checks and 28 probe tests passed. This smoke does not
+establish combat, save/reload or co-op coverage. The disposable test game was
+stopped after verification; production plugins and saves were not modified.
