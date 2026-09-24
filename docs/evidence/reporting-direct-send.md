@@ -47,9 +47,19 @@ quit normally; no game process remained.
 Later small fixes to deferred-report recovery and explicit dismissal were rebuilt
 but not covered by that captured binary's live trial.
 
+## Repository deployment
+
+Railway successfully built commit `e462cb06429af4bfa8186563c4a76ad73b7001d8`
+from this repository's `docs/reporting-feasibility` branch and `/reporting-service`
+root. The repository's reporting-service CI completed successfully. The checked-in
+IaC plan was applied with no resource deletion, variable change or volume replacement.
+The live `/healthz` returned HTTP 200 with `configured: false`; `/privacy` returned
+its public disclosure. This proves deployment and HTTPS reachability, not issue
+creation. The scoped GitHub service credential has not yet been configured.
+
 ## Remaining qualification gates
 
-- Scoped service credential and repository-connected Railway deployment.
+- Scoped service credential; GitHub requires interactive re-authentication.
 - A real in-game Send producing a public issue with the correct diagnostic download;
   confirm report ID, exact-session content, opt-out and same-ID retry behavior.
 - Steam-launched matched framework/helper installation, including receipt integrity.
