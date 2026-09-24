@@ -28,20 +28,27 @@ namespace FTKPerfProbe
         private int _idCalls, _pmCalls, _canvasCalls, _photonCalls;
         private double _idMs, _owMs, _pmMs, _canvasMs, _photonMs;
 
-        public void Init(ProbeConfig cfg, ManualLogSource log)
+        public void Init(ProbeConfig cfg, ManualLogSource log, ProbeCounts coverage)
         {
             _cfg = cfg;
             _log = log;
             _overlay = new Overlay();
-            _capture = new CaptureSession(cfg, log);
+            _capture = new CaptureSession(cfg, log, coverage);
             _showOverlay = cfg.ShowOverlayOnStart.Value;
             StartCoroutine(EndOfFrameLoop());
         }
 
+        public bool StartCapture(string scenario, int seconds) { return _capture.Start(scenario, seconds, _showOverlay); }
+        public bool CaptureActive { get { return _capture != null && _capture.IsActive; } }
+        public string LastCapturePath { get { return _capture == null ? null : _capture.LastPath; } }
+        public string LastCaptureError { get { return _capture == null ? null : _capture.LastError; } }
+
+        private void OnDestroy() { if (_capture != null) _capture.Stop("runner destroyed"); }
+
         private void Update()
         {
             if (_cfg.OverlayKey.Value.IsDown()) _showOverlay = !_showOverlay;
-            if (_cfg.CaptureKey.Value.IsDown()) _capture.Toggle();
+            if (_cfg.CaptureKey.Value.IsDown()) _capture.Toggle(_showOverlay);
             if (_cfg.CensusKey.Value.IsDown()) SceneCensus.Dump(_cfg, _log);
         }
 
@@ -88,7 +95,7 @@ namespace FTKPerfProbe
                     CanvasCalls = canC, CanvasMs = _canvasMs,
                     PhotonCalls = phC, PhotonMs = _photonMs
                 };
-                _capture.Record(row, _stats);
+                _capture.Record(row);
             }
         }
 
