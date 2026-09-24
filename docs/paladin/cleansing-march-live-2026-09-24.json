@@ -1,0 +1,71 @@
+{
+  "schema": "ftkmf.paladin-cleansing-march-live.v1",
+  "observedAt": "2026-09-24",
+  "status": "Poison and Curse native tile-entry behavior passed in an isolated macOS single-player run; broader release gates remain open",
+  "binaryIdentity": {
+    "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "frameworkVersion": "1.0.3",
+    "frameworkSha256": "99661f5a035f9ad015e177c21fce067fdf846c0e13e681d61b8b0705af8d3532",
+    "paladinVersion": "1.1.0",
+    "paladinArchiveSha256": "b5501fc3708f5ab6c53502252e7738bf2054c87cdb27eb22ae97e80c26f0774b",
+    "paladinManagedGeneration": "5f8f11fcbb26380ee5de38a19c0ad1b7",
+    "firstTrialHelperSha256": "0e9065e141246b97ac651eed7d3c8aa964af1b68305026b8c110a969a7d63438",
+    "controlTrialHelperSha256": "381bb6dc34e84cc3d0c310eb17f30bf9c1d6e7b370fc7d1f0acc55c543d5b2d1"
+  },
+  "environment": {
+    "gameCopy": "scratch/cleansing-march-game",
+    "mode": "task-owned isolated macOS copy, package-only test helper, dedicated loopback bridge port",
+    "saveNamespace": "save-model-test-a9515e9390666fbb",
+    "adventure": "LostCiv",
+    "party": ["paladin", "hunter"],
+    "packageActivation": "The isolated marketplace state selected one active Paladin 1.1.0 package from the pinned archive."
+  },
+  "paladinTrial": {
+    "session": "93a1d49798b247a9ad4b69af340cd98a",
+    "before": "Paladin and Hunter each had Poison 0 and no active curses. Outside combat, Paladin HasImmunity(Poison/Curse) returned true and Hunter returned false.",
+    "poison": {
+      "setup": "A native MMpoison POI was staged on a vacant neighboring hex (20,0) through PhotonNetwork.InstantiateSceneObject.",
+      "stageResultId": "71196800410f4ea7abb1978c93ac7217",
+      "entry": "The agent bridge move_to action returned tile (20,0) with 3 action points left; subsequent native hero state placed the Paladin on (20,0). The POI had decayed on entry.",
+      "afterResultId": "d174e9b7915b4a4caa6196afb8fd4513",
+      "after": {"paladinPoisonLevels": 0, "paladinActiveCurses": []}
+    },
+    "curse": {
+      "setup": "A native MMcurse POI was staged on a vacant neighboring hex (20,9) through PhotonNetwork.InstantiateSceneObject.",
+      "stageResultId": "f811a088375c4f3ba92f562e4f8b9d4c",
+      "entry": "A second move_to returned success but did not complete native movement. The bridge then used CharacterOverworld.SnapTo(hex, false, true), which calls HexLand.OnPlayerEnter; native hero state placed the Paladin on (20,9). The POI had decayed on entry.",
+      "afterResultId": "a1ff0a7651d946aebaf8c0550ccc4013",
+      "after": {"paladinPoisonLevels": 0, "paladinActiveCurses": []}
+    }
+  },
+  "controlTrial": {
+    "session": "f567f500b1dc44c7bb55113127af8d29",
+    "route": "An exact Hunter entered each newly staged native hazard first through CharacterOverworld.SnapTo(hex, false, true). This invokes HexLand.OnPlayerEnter before the one-use POI decays.",
+    "before": {"paladinPoisonLevels": 0, "paladinActiveCurses": [], "hunterPoisonLevels": 0, "hunterActiveCurses": []},
+    "poison": {
+      "stageResultId": "90863150401d432db299d53c25fd49ef",
+      "entryResultId": "a2f5f743856144ecb62410190de7a393",
+      "hunterPoisonLevelsAfter": 1,
+      "paladinPoisonLevelsAfter": 0
+    },
+    "curse": {
+      "stageResultId": "873ba9a765824cad93925173f2a1182d",
+      "entryResultId": "be0415fba46a45da83c34e17ec794505",
+      "hunterActiveCursesAfter": ["Clumsy"],
+      "paladinActiveCursesAfter": []
+    },
+    "combat": {
+      "route": "The bridge entered one native overworld fight with both heroes; this observation queried immunity only.",
+      "resultId": "7ba85bc4b07949b18a24ff4de712ad9d",
+      "paladinInCombat": true,
+      "paladinPoisonImmunity": false,
+      "paladinCurseImmunity": false
+    }
+  },
+  "limits": [
+    "Hazards were staged on native tiles in a disposable run. Their natural spawn timing was not exercised.",
+    "Ordinary walking was observed for the Paladin's Poison entry. The Paladin's Curse entry and Hunter controls used native SnapTo placement and HexLand.OnPlayerEnter.",
+    "The combat observation confirms the immunity query returns false, but no ordinary combat Poison or Curse application was attempted.",
+    "Chaos and fire tile consequences, save/resume, online co-op, and Windows/Linux gameplay were not tested."
+  ]
+}
