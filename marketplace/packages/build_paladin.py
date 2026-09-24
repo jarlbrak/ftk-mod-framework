@@ -74,6 +74,8 @@ def main():
     archive_path=output/(stem+'.zip');descriptor_path=output/(stem+'.descriptor.json')
     immutable(archive_path,payload)
     descriptor=json.loads((PACKAGE/'listing.json').read_text())
+    if digest(args.game_assembly.read_bytes()) not in descriptor['gameFingerprints']:
+        raise ValueError('Local game assembly is not declared in listing.json')
     # Runtime identity and summary come only from the manifest; artifact facts
     # come only from the finished bytes. Listing copy cannot override either.
     descriptor.update({
@@ -81,7 +83,6 @@ def main():
         'author':manifest['author'],'description':manifest['description'],
         'version':manifest['version'],'frameworkVersion':manifest['frameworkVersion'],
         'frameworkRange':'>='+manifest['frameworkVersion']+' <'+str(int(manifest['frameworkVersion'].split('.')[0])+1)+'.0.0',
-        'gameFingerprints':[digest(args.game_assembly.read_bytes())],
         'packageUrl':release_url+stem+'.zip',
         'sha256':sha,'compressedSize':len(payload),'expandedSize':sum(len(data) for data in files.values()),'fileCount':len(files),
         'screenshots':[preview_url]})
