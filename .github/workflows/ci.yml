@@ -86,6 +86,8 @@ jobs:
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
       - name: Synthetic ID lookup compatibility and allocation checks
         run: dotnet run --project FTKModFramework/Tests/SyntheticLookup/SyntheticLookup.csproj -c Release
+      - name: Water mesh math, cache and patch compatibility checks
+        run: dotnet run --project FTKModFramework/Tests/WaterMeshes/WaterMeshes.csproj -c Release
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

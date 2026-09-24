@@ -1,0 +1,1507 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-24",
+  "baselineCommit": "5561401f",
+  "environment": {
+    "hardware": "Apple M5 (Mac17,2)",
+    "os": "macOS 26.6.2",
+    "unity": "2017.2.2p2",
+    "runtime": "game Mono, x86_64 on Apple Silicon",
+    "graphics": "Metal",
+    "resolution": "1280x720 windowed",
+    "qualityLevel": 4,
+    "vSync": 0,
+    "targetFrameRate": -1,
+    "runInBackground": true,
+    "scenario": "Single-player overworld, three heroes in Oarton, fixed town-hex camera, distance70, tilt50, rotation180, FOV23",
+    "cameraPosition": [
+      69.263954,
+      53.623104,
+      169.962951
+    ],
+    "isolation": "Disposable test copy and test save; no content packages",
+    "hostLoad": "Uncontrolled competing VM, WindowServer, another game and compiler processes observed; no unrelated processes stopped"
+  },
+  "method": {
+    "primaryComparison": "Same-process crossover with water patches fully removed/restored. Separately record fallback-disabled crossover and whole-framework DLL comparisons.",
+    "crossoverOrder": [
+      "off",
+      "on",
+      "on",
+      "off",
+      "off",
+      "on",
+      "on",
+      "off"
+    ],
+    "framesPerCrossover": 900,
+    "framesPerDllTrial": 1800,
+    "warmupFrames": 120,
+    "settleSecondsBeforeCrossover": 2,
+    "managedTimers": false,
+    "prototypePatches": false,
+    "forceGc": false,
+    "percentiles": "Sorted frame times indexed floor((n-1)*p); FPS is1000/mean frame ms. Group summaries are medians of trial statistics.",
+    "foregroundRule": "Use only trials fully focused with no focus transitions; retain all excluded trials.",
+    "dllComparisonCaveat": "Separate-process comparisons were strongly confounded by changing host load. Report every anchored trial, do not attribute the entire DLL gap to this optimization."
+  },
+  "binaryHashes": {
+    "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+    "FtkWaterPrototype.dll": "b8fd2354712e1730c9af71a6e190fc71b52e42dc60d49647c71a6407bf004982",
+    "FtkFrameProfiler.dll": "686a4befa6025e7a66f13c0e9d3396f1dd3300915e531989d6192027f8768829",
+    "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+    "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+    "FTKModFramework.dll": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+    "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+  },
+  "earlierValidatorSha256": "dec9cac72e41951fec7516f63c42c5614c0d50bc290ab67fb95392c0419bde8b",
+  "dllTrials": [
+    {
+      "id": "anchored-b1-0",
+      "frames": 1800,
+      "meanMs": 18.012277219030594,
+      "fps": 55.51768873196474,
+      "p50Ms": 15.443921089172363,
+      "p95Ms": 29.819011688232422,
+      "p99Ms": 58.911919593811035,
+      "over33ms": 66,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "64f9e2c3e4d4993bd8596689a5493aed1821d68f5791daf7140b2219f2454390",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-b1-1",
+      "frames": 1800,
+      "meanMs": 22.109415001339382,
+      "fps": 45.22960014724136,
+      "p50Ms": 16.513943672180176,
+      "p95Ms": 47.54495620727539,
+      "p99Ms": 113.4641170501709,
+      "over33ms": 166,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "caa0098a01346a18a21c0ae3a0c84b22cc9bd0dc2067cf69c61b3dd99e054d6a",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-b1-2",
+      "frames": 1800,
+      "meanMs": 22.092887229389614,
+      "fps": 45.26343658106058,
+      "p50Ms": 16.903042793273926,
+      "p95Ms": 49.53193664550781,
+      "p99Ms": 108.98208618164062,
+      "over33ms": 163,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "d7e224bc8f6a6a951e89876514357fb2a4f42c5f7137b132ee59461d4b555efe",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-b2-0",
+      "frames": 1800,
+      "meanMs": 8.802430563502842,
+      "fps": 113.60498589403922,
+      "p50Ms": 8.353948593139648,
+      "p95Ms": 12.03906536102295,
+      "p99Ms": 14.256000518798828,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "631b02f26a119cfb4ed5c8dd9a2bf7fa187c1b45be1aebafb679b89d7f43dfc0",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-b2-1",
+      "frames": 1800,
+      "meanMs": 8.51295444700453,
+      "fps": 117.4680313662282,
+      "p50Ms": 8.210062980651855,
+      "p95Ms": 10.43403148651123,
+      "p99Ms": 13.567090034484863,
+      "over33ms": 2,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "f24aa92e0d882f36b4e3a73f25c0a5e93d46eeacf31706b71e204f3697000df3",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-b2-2",
+      "frames": 1800,
+      "meanMs": 8.66364942656623,
+      "fps": 115.42479973088456,
+      "p50Ms": 8.2780122756958,
+      "p95Ms": 11.06405258178711,
+      "p99Ms": 13.850092887878418,
+      "over33ms": 2,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "53c3f09157a4ae2437317ad16de0b14aa42f638d8e636c0741095e6105ec3bd8",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-c1-0",
+      "frames": 1800,
+      "meanMs": 8.468409445550707,
+      "fps": 118.085929409731,
+      "p50Ms": 8.358955383300781,
+      "p95Ms": 9.572029113769531,
+      "p99Ms": 10.692000389099121,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "ae6aac6ec81ca4d9243702eba7472d344ea5e9e194262497cafee1299df548ba",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-c1-1",
+      "frames": 1800,
+      "meanMs": 8.450420035256279,
+      "fps": 118.33731291792203,
+      "p50Ms": 8.358001708984375,
+      "p95Ms": 9.515047073364258,
+      "p99Ms": 10.309100151062012,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "a091701aef217769c83424dcfd8bc98becebafeb3090523bbf7ef7023d5406e2",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-c1-2",
+      "frames": 1800,
+      "meanMs": 9.611743291219076,
+      "fps": 104.03939948266846,
+      "p50Ms": 8.431077003479004,
+      "p95Ms": 10.641098022460938,
+      "p99Ms": 18.070101737976074,
+      "over33ms": 6,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 915,
+      "unfocusedFrames": 885,
+      "focusChanges": 1,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "f805ea40bcab4a8ba0e703ed704d2d836f940ca9b1d38f27c63b5bba8e25b45e",
+      "includedForeground": false
+    },
+    {
+      "id": "anchored-c2-0",
+      "frames": 1800,
+      "meanMs": 8.232873876889547,
+      "fps": 121.46426812234962,
+      "p50Ms": 8.141040802001953,
+      "p95Ms": 9.400010108947754,
+      "p99Ms": 10.225057601928711,
+      "over33ms": 0,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "4b5d4af190cb136eedb045b63294b677aba56a6a98697b71c20f8e53641d3b55",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-c2-1",
+      "frames": 1800,
+      "meanMs": 8.162052234013876,
+      "fps": 122.51820636881996,
+      "p50Ms": 7.997035980224609,
+      "p95Ms": 9.13691520690918,
+      "p99Ms": 15.505075454711914,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "36eee6030797ec5dcc1a27eea9f100054bdf83ef8f474f90e15245a240995576",
+      "includedForeground": true
+    },
+    {
+      "id": "anchored-c2-2",
+      "frames": 1800,
+      "meanMs": 7.988332774904039,
+      "fps": 125.1825666478964,
+      "p50Ms": 7.905006408691406,
+      "p95Ms": 8.813977241516113,
+      "p99Ms": 9.510040283203125,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "559d82f5f370556ef47d562d80c0360e246f53decff74a3aa19a3daf6c2bffbc",
+      "includedForeground": true
+    }
+  ],
+  "crossoverTrials": [
+    {
+      "id": "crossover-0-off",
+      "frames": 900,
+      "meanMs": 8.988891177707249,
+      "fps": 111.24842655566167,
+      "p50Ms": 8.947014808654785,
+      "p95Ms": 9.943962097167969,
+      "p99Ms": 10.41102409362793,
+      "over33ms": 0,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "991cd5c75c17104a09d82b08cc7ac73a842a4dc511790085468af542f33138c6",
+      "optimizationEnabled": false
+    },
+    {
+      "id": "crossover-1-on",
+      "frames": 900,
+      "meanMs": 8.245103359222412,
+      "fps": 121.28410723699031,
+      "p50Ms": 8.005023002624512,
+      "p95Ms": 9.778976440429688,
+      "p99Ms": 13.07690143585205,
+      "over33ms": 0,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "56b23c60732166c21ab24a8f388007bcf7a02f927859739f07ac3e5e77cdc3a5",
+      "optimizationEnabled": true
+    },
+    {
+      "id": "crossover-2-on",
+      "frames": 900,
+      "meanMs": 8.93175999323527,
+      "fps": 111.96001692358274,
+      "p50Ms": 8.7510347366333,
+      "p95Ms": 10.185003280639648,
+      "p99Ms": 12.78996467590332,
+      "over33ms": 1,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "4ef3ebd411d930f4a6a6a7b0797e0a34382d4473da5e7165427e6d585084c20f",
+      "optimizationEnabled": true
+    },
+    {
+      "id": "crossover-3-off",
+      "frames": 900,
+      "meanMs": 9.113744364844429,
+      "fps": 109.72438549597939,
+      "p50Ms": 8.915901184082031,
+      "p95Ms": 10.87808609008789,
+      "p99Ms": 13.642072677612305,
+      "over33ms": 0,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "f6d720d11e38bb38f6fe0bf0fea0ef25a512625a60f3d514b00de987f3d8cb9f",
+      "optimizationEnabled": false
+    },
+    {
+      "id": "crossover-4-off",
+      "frames": 900,
+      "meanMs": 9.157892200681898,
+      "fps": 109.1954325391098,
+      "p50Ms": 8.986949920654297,
+      "p95Ms": 10.55598258972168,
+      "p99Ms": 11.25490665435791,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "28e051159960c27ab82100d5902176e9870bce6f37f9869582cc94eb78eb0167",
+      "optimizationEnabled": false
+    },
+    {
+      "id": "crossover-5-on",
+      "frames": 900,
+      "meanMs": 8.185037771860758,
+      "fps": 122.17414602995332,
+      "p50Ms": 7.961034774780273,
+      "p95Ms": 9.52005386352539,
+      "p99Ms": 12.526988983154297,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "80f2f3cb2a00c4627413bb4f7fdc28028a70385a867160eb288987a3ca9fd129",
+      "optimizationEnabled": true
+    },
+    {
+      "id": "crossover-6-on",
+      "frames": 900,
+      "meanMs": 9.198392232259115,
+      "fps": 108.71465085963192,
+      "p50Ms": 8.805036544799805,
+      "p95Ms": 11.66999340057373,
+      "p99Ms": 16.00492000579834,
+      "over33ms": 3,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "bd5f9e92bad47dbea1377a7cc69e5f30be472c51567f604adc1412052b80161f",
+      "optimizationEnabled": true
+    },
+    {
+      "id": "crossover-7-off",
+      "frames": 900,
+      "meanMs": 10.859320031272041,
+      "fps": 92.08679706650673,
+      "p50Ms": 10.496020317077637,
+      "p95Ms": 12.646913528442383,
+      "p99Ms": 14.893054962158203,
+      "over33ms": 2,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "61ce4077b5c002426139e1891cae1e63584e7a7436a162bf6a6746b8e4aa2b14",
+      "optimizationEnabled": false
+    }
+  ],
+  "crossoverPairs": [
+    {
+      "off": "crossover-0-off",
+      "on": "crossover-1-on",
+      "fpsIncreasePercent": 9.020964153868217,
+      "p95ReductionPercent": 1.659154119113837
+    },
+    {
+      "off": "crossover-3-off",
+      "on": "crossover-2-on",
+      "fpsIncreasePercent": 2.0374973325189227,
+      "p95ReductionPercent": 6.371367202910616
+    },
+    {
+      "off": "crossover-4-off",
+      "on": "crossover-5-on",
+      "fpsIncreasePercent": 11.885765905268087,
+      "p95ReductionPercent": 9.813664596273297
+    },
+    {
+      "off": "crossover-7-off",
+      "on": "crossover-6-on",
+      "fpsIncreasePercent": 18.05671857727471,
+      "p95ReductionPercent": 7.724573475351115
+    }
+  ],
+  "crossoverMedian": {
+    "off": {
+      "fps": 109.45990901754459,
+      "meanMs": 9.135818282763164,
+      "p95Ms": 10.717034339904785,
+      "p99Ms": 12.448489665985107,
+      "over33ms": 0.5
+    },
+    "on": {
+      "fps": 116.62206208028653,
+      "meanMs": 8.58843167622884,
+      "p95Ms": 9.981989860534668,
+      "p99Ms": 12.933433055877686,
+      "over33ms": 1.0
+    }
+  },
+  "numericalValidation": {
+    "id": "production-final-output",
+    "methodOrder": [
+      "WaterDistort",
+      "LakeDistort"
+    ],
+    "complete": true,
+    "error": null,
+    "callbacks": [
+      25,
+      25
+    ],
+    "vertices": [
+      31000,
+      10875
+    ],
+    "vertexBitMismatches": [
+      0,
+      0
+    ],
+    "normalChecks": [
+      31000,
+      10875
+    ],
+    "normalBitMismatches": [
+      195,
+      756
+    ],
+    "maximumNormalComponentError": [
+      2.9802322387695312e-08,
+      1.1920928955078125e-07
+    ],
+    "maximumNormalSquaredVectorError": [
+      8.881784197001252e-16,
+      1.4214324162153957e-14
+    ],
+    "normalNonfiniteMismatches": [
+      0,
+      0
+    ],
+    "normalZeroClassificationMismatches": [
+      0,
+      0
+    ],
+    "semantics": "Read-only postfix on actual production callbacks; compares final vertices to native Perlin at updated cursor, and final normal arrays to original corner arithmetic. Prototype transpiler is disabled. Validation postfix removed before this result is written."
+  },
+  "gameFree": {
+    "waterAssertions": 126380,
+    "lookupChecks": 115,
+    "probeTests": 28,
+    "frameworkBuild": "Release passed, seven existing CS0649 warnings"
+  },
+  "limitations": [
+    "No co-op, combat playthrough, Windows/Linux or long-session validation.",
+    "Normal reuse changes floating-point rounding; tested error is not a universal bound.",
+    "p99 and counts above33ms did not consistently improve; broad hitch elimination is not established.",
+    "Inactive diagnostics were present in both arms; no diagnostics-free overhead comparison.",
+    "Restart comparisons have host-load confounding; use crossover as narrower attribution evidence."
+  ],
+  "exploratoryTrials": [
+    {
+      "id": "production-b1-0",
+      "frames": 1800,
+      "meanMs": 10.445377760463291,
+      "fps": 95.73612586660975,
+      "p50Ms": 9.889960289001465,
+      "p95Ms": 13.551950454711914,
+      "p99Ms": 20.32005786895752,
+      "over33ms": 4,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(68.3, 0.0, 125.5)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "c316c3f1b203f280c9da782378d29b25eb1a965036490254c0db312b179d347c"
+    },
+    {
+      "id": "production-b1-1",
+      "frames": 1800,
+      "meanMs": 14.792778889338175,
+      "fps": 67.60055074714496,
+      "p50Ms": 13.524055480957031,
+      "p95Ms": 23.487091064453125,
+      "p99Ms": 45.81904411315918,
+      "over33ms": 38,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(68.3, 0.0, 125.5)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "515f3ef2141cb8eb96023e802aed7ef796e6531534fefd62b8f5ca33ca216d97"
+    },
+    {
+      "id": "production-b1-2",
+      "frames": 1800,
+      "meanMs": 13.73428331481086,
+      "fps": 72.81049743029648,
+      "p50Ms": 12.86005973815918,
+      "p95Ms": 20.599007606506348,
+      "p99Ms": 42.050957679748535,
+      "over33ms": 29,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(68.3, 0.0, 125.5)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "846be093f15b935c19e077c6810117a99b0e4ca307c2c6d41292c5abde976cba"
+    },
+    {
+      "id": "production-b2-0",
+      "frames": 1800,
+      "meanMs": 14.113497734069824,
+      "fps": 70.85415811461189,
+      "p50Ms": 13.357043266296387,
+      "p95Ms": 20.77507972717285,
+      "p99Ms": 39.013028144836426,
+      "over33ms": 23,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(68.3, 0.0, 125.5)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "fc72a1842d1f4f3b4c51de5f6ea424a555e1322315435aa60478e09e06061f8f"
+    },
+    {
+      "id": "production-b2-1",
+      "frames": 1800,
+      "meanMs": 15.351636608441671,
+      "fps": 65.13963465303189,
+      "p50Ms": 13.585925102233887,
+      "p95Ms": 27.701973915100098,
+      "p99Ms": 61.74600124359131,
+      "over33ms": 71,
+      "gcCollections": [
+        2,
+        2,
+        2
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(68.3, 0.0, 125.5)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "24bcac6b3c348bcc7a585a082a3525a7aec00305d3ffe6c1bdbff8fc4e9632e0"
+    },
+    {
+      "id": "production-b2-2",
+      "frames": 1800,
+      "meanMs": 14.754202763239542,
+      "fps": 67.77729817374643,
+      "p50Ms": 13.626933097839355,
+      "p95Ms": 21.900057792663574,
+      "p99Ms": 45.84002494812012,
+      "over33ms": 38,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(68.3, 0.0, 125.5)",
+      "distance": 70.0,
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "csvSha256": "8e7d680c8afc56838d8547636ffee2b5c734da73e551daf63026814a4add92d1"
+    },
+    {
+      "id": "production-c1-0",
+      "frames": 1800,
+      "meanMs": 10.06689276960161,
+      "fps": 99.33551721337886,
+      "p50Ms": 9.137988090515137,
+      "p95Ms": 15.56396484375,
+      "p99Ms": 18.200993537902832,
+      "over33ms": 5,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(70.2, 0.0, 125.6)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "70e961a8d7c8eaedeb67d663a54356ab86627a56ee6b225b88970e60be4dbbc6"
+    },
+    {
+      "id": "production-c1-1",
+      "frames": 1800,
+      "meanMs": 9.676994482676188,
+      "fps": 103.33787022305386,
+      "p50Ms": 8.77392292022705,
+      "p95Ms": 15.968084335327148,
+      "p99Ms": 18.146991729736328,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(70.2, 0.0, 125.6)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "4f2cb7de7134a1727944ce9a40c31260bc5a1d9b79e5f746d44759276c37b83e"
+    },
+    {
+      "id": "production-c1-2",
+      "frames": 1800,
+      "meanMs": 9.568586084577772,
+      "fps": 104.50864852559107,
+      "p50Ms": 8.666038513183594,
+      "p95Ms": 15.957951545715332,
+      "p99Ms": 17.69411563873291,
+      "over33ms": 2,
+      "gcCollections": [
+        2,
+        2,
+        2
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(70.2, 0.0, 125.6)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "2e020dfc2e2d7705e4448cf20833b8886c4ac75943a10b37ebaace1b14276dcc"
+    },
+    {
+      "id": "production-c2-0",
+      "frames": 1800,
+      "meanMs": 8.420959446165297,
+      "fps": 118.75131407447593,
+      "p50Ms": 8.27789306640625,
+      "p95Ms": 9.390950202941895,
+      "p99Ms": 10.158061981201172,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 0,
+      "unfocusedFrames": 1800,
+      "focusChanges": 0,
+      "lookAt": "(66.4, 0.0, 100.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "127c6834f920f369b7d8f3d8283cdf5634fcc24ce2e77553070ed32c82054789"
+    },
+    {
+      "id": "production-c3-0",
+      "frames": 1800,
+      "meanMs": 8.488048315048218,
+      "fps": 117.81271299164598,
+      "p50Ms": 8.278965950012207,
+      "p95Ms": 9.544014930725098,
+      "p99Ms": 10.401010513305664,
+      "over33ms": 2,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(66.4, 0.0, 100.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "ca8841a282ac73c2f723338a7454d1eb73d0b664dbc371160999bf01a846bf9d"
+    },
+    {
+      "id": "production-c3-1",
+      "frames": 1800,
+      "meanMs": 9.645599987771776,
+      "fps": 103.67421428088988,
+      "p50Ms": 8.661031723022461,
+      "p95Ms": 12.811064720153809,
+      "p99Ms": 28.50198745727539,
+      "over33ms": 17,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 1800,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(66.4, 0.0, 100.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "aba3c7fdc2e9e9f5718228d98ad896cfe3b4379753e6f30a56e1c748f7838df2"
+    }
+  ],
+  "exploratoryReason": "Pre-anchor trials have different camera targets or setup/focus changes; none contribute to acceptance metrics.",
+  "unpatchedWaterCrossoverTrials": [
+    {
+      "id": "unpatched-0-off",
+      "frames": 900,
+      "meanMs": 9.08315340677897,
+      "fps": 110.09392390683135,
+      "p50Ms": 8.876919746398926,
+      "p95Ms": 10.205984115600586,
+      "p99Ms": 13.20505142211914,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "822018ca3dc1c4c7b65b36c9faeb3b7f8f48749085925c93933c8371e26aeeb8"
+    },
+    {
+      "id": "unpatched-1-on",
+      "frames": 900,
+      "meanMs": 8.752912282943726,
+      "fps": 114.24768896046633,
+      "p50Ms": 8.404970169067383,
+      "p95Ms": 11.077046394348145,
+      "p99Ms": 16.487956047058105,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "f01169e1093f7cb4d34d5b269ac9a354e85117e89fbff61693bf2b1acf6626e6"
+    },
+    {
+      "id": "unpatched-2-on",
+      "frames": 900,
+      "meanMs": 8.775336742401123,
+      "fps": 113.95574088549202,
+      "p50Ms": 8.655905723571777,
+      "p95Ms": 10.080933570861816,
+      "p99Ms": 11.02602481842041,
+      "over33ms": 0,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "fb2ff59dd148ee3bd49ad669a5ff4efc1ce1c2ec0cda225aacbb71fe86e0f66a"
+    },
+    {
+      "id": "unpatched-3-off",
+      "frames": 900,
+      "meanMs": 10.582616726557413,
+      "fps": 94.49458728770439,
+      "p50Ms": 10.020971298217773,
+      "p95Ms": 11.899948120117188,
+      "p99Ms": 13.608098030090332,
+      "over33ms": 3,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "71859ace6c6e5d44d9ef163d762325ff6d4f412ddf9b7566a2a2abe35404ef86"
+    },
+    {
+      "id": "unpatched-4-off",
+      "frames": 900,
+      "meanMs": 9.513951010174221,
+      "fps": 105.10880273932457,
+      "p50Ms": 9.204983711242676,
+      "p95Ms": 11.33108139038086,
+      "p99Ms": 13.023018836975098,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "3a905227995207c2d28632dd10f2d751e2cd66ae1ffeda0542056fc6c718871b"
+    },
+    {
+      "id": "unpatched-5-on",
+      "frames": 900,
+      "meanMs": 8.564901087019178,
+      "fps": 116.75558069381366,
+      "p50Ms": 8.442044258117676,
+      "p95Ms": 10.092020034790039,
+      "p99Ms": 11.396050453186035,
+      "over33ms": 0,
+      "gcCollections": [
+        0,
+        0,
+        0
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "609dce6912675b2009203f4bb9793842ae188388400a42461c96e28e1624c423"
+    },
+    {
+      "id": "unpatched-6-on",
+      "frames": 900,
+      "meanMs": 8.095981147554186,
+      "fps": 123.51807418698131,
+      "p50Ms": 7.892966270446777,
+      "p95Ms": 9.333968162536621,
+      "p99Ms": 12.914061546325684,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "c77f2dc9e54107a8a6838400e8823f58d6effb49d7491f74918135764f85fe22"
+    },
+    {
+      "id": "unpatched-7-off",
+      "frames": 900,
+      "meanMs": 9.270021120707193,
+      "fps": 107.87461937559337,
+      "p50Ms": 8.980989456176758,
+      "p95Ms": 10.818004608154297,
+      "p99Ms": 13.635993003845215,
+      "over33ms": 1,
+      "gcCollections": [
+        1,
+        1,
+        1
+      ],
+      "focusedFrames": 900,
+      "unfocusedFrames": 0,
+      "focusChanges": 0,
+      "lookAt": "(69.3, 0.0, 125.0)",
+      "distance": 70.0,
+      "frameworkSha256": "9f029d8e80e2d49a21af5f01c2cca48704dd013c76379ef4cf587b14e98a5499",
+      "csvSha256": "f773b29bdb9baac58bd7772e7247c2c7ddf451a24396cfdd6095e3bdf86032ed"
+    }
+  ],
+  "unpatchedWaterCrossoverMethod": "Same process and candidate framework, with ONLY the two water transpilers fully removed/restored. Other framework optimizations remain enabled in both arms. No fallback-call overhead in the off arm. This isolates the water change; it is not a whole-master-DLL comparison.",
+  "unpatchedWaterHelperSha256": "7f0c5404efde71c318770d7bdc048743edd049e7641fdd6c49c799ec27bb9dea",
+  "unpatchedWaterCrossoverSummary": {
+    "off": {
+      "fps": 106.49171105745897,
+      "meanMs": 9.391986065440708,
+      "p95Ms": 11.074542999267578,
+      "p99Ms": 13.406574726104736,
+      "over33ms": 1.0
+    },
+    "on": {
+      "fps": 115.50163482714,
+      "meanMs": 8.658906684981453,
+      "p95Ms": 10.086476802825928,
+      "p99Ms": 12.15505599975586,
+      "over33ms": 0.5
+    }
+  },
+  "unpatchedWaterCrossoverPairs": [
+    {
+      "off": "unpatched-0-off",
+      "on": "unpatched-1-on",
+      "fpsIncreasePercent": 3.77292851978841,
+      "p95ReductionPercent": -8.53481907164717
+    },
+    {
+      "off": "unpatched-3-off",
+      "on": "unpatched-2-on",
+      "fpsIncreasePercent": 20.59499295820504,
+      "p95ReductionPercent": 15.285903189613725
+    },
+    {
+      "off": "unpatched-4-off",
+      "on": "unpatched-5-on",
+      "fpsIncreasePercent": 11.080687488538633,
+      "p95ReductionPercent": 10.93506712115474
+    },
+    {
+      "off": "unpatched-7-off",
+      "on": "unpatched-6-on",
+      "fpsIncreasePercent": 14.501515650239472,
+      "p95ReductionPercent": 13.718208665755716
+    }
+  ],
+  "unpatchedWaterPatchStates": [
+    {
+      "id": "unpatched-0-off",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": true,
+        "enabled": false,
+        "retainedVertices": 0,
+        "retainedBytes": 0,
+        "entryCount": 0,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    },
+    {
+      "id": "unpatched-1-on",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": false,
+        "enabled": true,
+        "retainedVertices": 0,
+        "retainedBytes": 0,
+        "entryCount": 0,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    },
+    {
+      "id": "unpatched-2-on",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": false,
+        "enabled": true,
+        "retainedVertices": 1675,
+        "retainedBytes": 54112,
+        "entryCount": 2,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    },
+    {
+      "id": "unpatched-3-off",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": true,
+        "enabled": false,
+        "retainedVertices": 0,
+        "retainedBytes": 0,
+        "entryCount": 0,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    },
+    {
+      "id": "unpatched-4-off",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": true,
+        "enabled": false,
+        "retainedVertices": 0,
+        "retainedBytes": 0,
+        "entryCount": 0,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    },
+    {
+      "id": "unpatched-5-on",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": false,
+        "enabled": true,
+        "retainedVertices": 0,
+        "retainedBytes": 0,
+        "entryCount": 0,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    },
+    {
+      "id": "unpatched-6-on",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": false,
+        "enabled": true,
+        "retainedVertices": 1675,
+        "retainedBytes": 54112,
+        "entryCount": 2,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [
+              "com.ftkmf.framework"
+            ],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 1
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    },
+    {
+      "id": "unpatched-7-off",
+      "state": {
+        "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+        "available": true,
+        "unpatchedByHelper": true,
+        "enabled": false,
+        "retainedVertices": 0,
+        "retainedBytes": 0,
+        "entryCount": 0,
+        "methods": {
+          "WaterDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          },
+          "LakeDistort.OnWillRenderObject": {
+            "owners": [],
+            "prefixCount": 0,
+            "postfixCount": 0,
+            "transpilerCount": 0
+          }
+        },
+        "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+      }
+    }
+  ],
+  "visualCheck": {
+    "result": "Matched native UI screenshots show the same town view and graphics settings; no obvious water corruption. Animated frames are not pixel-identical.",
+    "candidateScreenshotSha256": "2fbf9c1b7d183dd212af8abe9e92c8c751022b4f74c111fc3d04efa317728900",
+    "baselineScreenshotSha256": "5b96045ff3ad688691a4504a560767baa194fb3cd6323da5a96b4a6beb569956"
+  },
+  "lifecycle": {
+    "lifecycle-before": {
+      "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+      "available": true,
+      "unpatchedByHelper": false,
+      "enabled": true,
+      "retainedVertices": 1675,
+      "retainedBytes": 54112,
+      "entryCount": 2,
+      "methods": {
+        "WaterDistort.OnWillRenderObject": {
+          "owners": [
+            "com.ftkmf.framework"
+          ],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 1
+        },
+        "LakeDistort.OnWillRenderObject": {
+          "owners": [
+            "com.ftkmf.framework"
+          ],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 1
+        }
+      },
+      "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+    },
+    "lifecycle-title": {
+      "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+      "available": true,
+      "unpatchedByHelper": false,
+      "enabled": true,
+      "retainedVertices": 0,
+      "retainedBytes": 0,
+      "entryCount": 0,
+      "methods": {
+        "WaterDistort.OnWillRenderObject": {
+          "owners": [
+            "com.ftkmf.framework"
+          ],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 1
+        },
+        "LakeDistort.OnWillRenderObject": {
+          "owners": [
+            "com.ftkmf.framework"
+          ],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 1
+        }
+      },
+      "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+    },
+    "lifecycle-resumed": {
+      "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+      "available": true,
+      "unpatchedByHelper": false,
+      "enabled": true,
+      "retainedVertices": 1675,
+      "retainedBytes": 54112,
+      "entryCount": 2,
+      "methods": {
+        "WaterDistort.OnWillRenderObject": {
+          "owners": [
+            "com.ftkmf.framework"
+          ],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 1
+        },
+        "LakeDistort.OnWillRenderObject": {
+          "owners": [
+            "com.ftkmf.framework"
+          ],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 1
+        }
+      },
+      "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+    },
+    "optout-verification": {
+      "assemblyName": "FTKModFramework, Version=1.0.2.0, Culture=neutral, PublicKeyToken=null",
+      "available": true,
+      "unpatchedByHelper": false,
+      "enabled": false,
+      "retainedVertices": 0,
+      "retainedBytes": 0,
+      "entryCount": 0,
+      "methods": {
+        "WaterDistort.OnWillRenderObject": {
+          "owners": [],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 0
+        },
+        "LakeDistort.OnWillRenderObject": {
+          "owners": [],
+          "prefixCount": 0,
+          "postfixCount": 0,
+          "transpilerCount": 0
+        }
+      },
+      "semantics": "Read-only reflection of production lifecycle/cache state and Harmony patch owners. production-on/off separately invokes Initialize/Shutdown for a within-process crossover diagnostic. Compiled patches remain installed and disabled helper calls still incur overhead; this is not a master-baseline comparison. production-unpatch/repatch instead removes/restores only the production water transpiler on both callbacks after rejecting other owners; unpatched callbacks contain no optimization helper calls. Other framework patches and restart-only configuration are unchanged."
+    }
+  },
+  "afterResumeNumericalValidation": {
+    "id": "production-resumed-output",
+    "methodOrder": [
+      "WaterDistort",
+      "LakeDistort"
+    ],
+    "complete": true,
+    "error": null,
+    "callbacks": [
+      25,
+      25
+    ],
+    "vertices": [
+      31000,
+      10875
+    ],
+    "vertexBitMismatches": [
+      0,
+      0
+    ],
+    "normalChecks": [
+      31000,
+      10875
+    ],
+    "normalBitMismatches": [
+      1625,
+      1019
+    ],
+    "maximumNormalComponentError": [
+      1.1920928955078125e-07,
+      1.1920928955078125e-07
+    ],
+    "maximumNormalSquaredVectorError": [
+      1.4488410471358293e-14,
+      1.426636586643326e-14
+    ],
+    "normalNonfiniteMismatches": [
+      0,
+      0
+    ],
+    "normalZeroClassificationMismatches": [
+      0,
+      0
+    ],
+    "semantics": "Read-only postfix on actual production callbacks; compares final vertices to native Perlin at updated cursor, and final normal arrays to original corner arithmetic. Prototype transpiler is disabled. Validation postfix removed before this result is written."
+  }
+}
