@@ -28,6 +28,8 @@ display art. Their individual native behavior and appearance have not been
 tested. [Gap plan](GAPS.md) records the historical closure sequence;
 [Native baseline](NATIVE-BASELINE.md) records read-only game findings.
 Documentation and arithmetic review do not establish gameplay acceptance.
+The [1.1.0 publication receipt](PUBLICATION-1.1.0.md) pins the public release
+bytes and lists public-install checks still outstanding.
 
 ## Historical beta evidence
 
