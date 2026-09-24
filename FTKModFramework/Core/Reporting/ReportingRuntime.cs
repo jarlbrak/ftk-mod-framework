@@ -67,6 +67,8 @@ namespace FTKModFramework.Core.Reporting
                     !ReportingDraft.ValidId(expectedReportId) || savedDraft == null || savedDraft.Report.ReportId != expectedReportId)
                 { delivery += delegate { if (completed != null) completed(false); }; return; }
                 saveBusy = true; queuedDeleteId = expectedReportId; saveCompletion = completed;
+                // A submitted draft must not reopen while its durable deletion is queued.
+                savedDraft = null;
             }
             Wake.Set();
         }

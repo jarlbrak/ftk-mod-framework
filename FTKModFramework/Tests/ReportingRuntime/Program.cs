@@ -99,6 +99,20 @@ internal static class Program
                 ReportingRuntime.SavedDraft.Report.IncludeMetadata = true;
                 Check(!ReportingRuntime.SavedDraft.Report.IncludeMetadata, "cache detached from UI mutation");
                 Check(ReportingRuntime.Pending != null, "save does not acknowledge incident");
+                bool wrongDelete = false;
+                ReportingRuntime.DeleteDraft(Guid.NewGuid().ToString("N"), delegate(bool ok) { Check(!ok, "unrelated draft preserved"); wrongDelete = true; });
+                Wait(delegate { ReportingRuntime.Tick(); return wrongDelete; });
+                Check(ReportingRuntime.SavedDraft.Report.ReportId == report.ReportId, "unrelated submission keeps saved draft");
+                bool deleted = false;
+                ReportingRuntime.DeleteDraft(report.ReportId, delegate(bool ok) { Check(ok, "submitted draft retired"); deleted = true; });
+                Check(ReportingRuntime.SavedDraft == null, "submitted draft hidden before deletion callback");
+                Wait(delegate { ReportingRuntime.Tick(); return deleted; });
+                Check(ReportingRuntime.SavedDraft == null, "submitted draft remains retired");
+                ReportingReport nextReport = ReportingRuntime.CreateReport(false);
+                Check(nextReport.ReportId != report.ReportId, "next report has a fresh identity");
+                saved = false;
+                ReportingRuntime.SaveDraft(nextReport, "saved description", delegate(bool ok) { Check(ok, "new draft saved after retirement"); saved = true; });
+                Wait(delegate { ReportingRuntime.Tick(); return saved; });
                 bool exported = false;
                 ReportingRuntime.ExportReviewed(report.ReportId, 1, report.CaptureId, "exact approved text", report.CurrentMetadata, delegate(ReportingExportArtifact artifact) {
                     Check(Thread.CurrentThread.ManagedThreadId == ReportingSources.MainThread && artifact != null, "export main-thread callback");

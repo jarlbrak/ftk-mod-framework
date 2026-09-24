@@ -25,7 +25,7 @@ internal static class Program
     private static int Main(string[] args)
     {
         if (args.Length > 0 && args[0] == "--helper") return FakeHelper(args);
-        ExclusionAndFreeze(); Bounds(); Responses();
+        ExclusionAndFreeze(); Bounds(); Responses(); HelperEnvironment();
         if (Environment.OSVersion.Platform != PlatformID.Win32NT) Bridge();
         Console.WriteLine("Reporting submission: " + checks + " checks passed.");
         return 0;
@@ -105,6 +105,10 @@ internal static class Program
         { if (args[i] == "--request") request = args[++i]; else if (args[i] == "--result") result = args[++i]; }
         if (request == null || result == null) return 99;
         string root = Path.GetDirectoryName(request);
+        JObject environment = new JObject();
+        foreach (string name in InjectionVariables) environment[name] = Environment.GetEnvironmentVariable(name);
+        environment["FTK_REPORTING_TEST_CONTEXT"] = Environment.GetEnvironmentVariable("FTK_REPORTING_TEST_CONTEXT");
+        File.WriteAllText(Path.Combine(root, "observed-environment.json"), environment.ToString());
         File.AppendAllText(Path.Combine(root, "helper-calls.txt"), "call\n");
         string json = File.ReadAllText(request); File.WriteAllText(Path.Combine(root, "observed.json"), json);
         string id = (string)JObject.Parse(json)["reportId"];
@@ -120,6 +124,14 @@ internal static class Program
         BepInEx.Paths.BepInExRootPath = root;
         Directory.CreateDirectory(Path.Combine(root, "ftkmf"));
         string helper = Path.Combine(Path.Combine(root, "ftkmf"), "ftkmf-launcher-helper");
+        string[] inherited = new string[InjectionVariables.Length];
+        for (int i = 0; i < InjectionVariables.Length; i++)
+        {
+            inherited[i] = Environment.GetEnvironmentVariable(InjectionVariables[i]);
+            Environment.SetEnvironmentVariable(InjectionVariables[i], "reporting-test-injector");
+        }
+        string context = Environment.GetEnvironmentVariable("FTK_REPORTING_TEST_CONTEXT");
+        Environment.SetEnvironmentVariable("FTK_REPORTING_TEST_CONTEXT", "ordinary-helper-context");
         try
         {
             File.WriteAllText(helper, "#!/bin/sh\nexec " + ShellQuote(Environment.ProcessPath) + " --helper \"$@\"\n");
@@ -136,6 +148,13 @@ internal static class Program
             Check(!first.Success && first.Error == "retry_later", "Offline/pending helper result not propagated");
             Check(File.ReadAllText(Path.Combine(delivery, "pending.json")) == frozen && ReportingSubmission.PendingPayload == frozen, "Frozen request was not durable");
             Check(File.ReadAllText(Path.Combine(delivery, "observed.json")) == frozen, "Helper did not receive frozen request");
+            JObject observedEnvironment = JObject.Parse(File.ReadAllText(Path.Combine(delivery, "observed-environment.json")));
+            foreach (string name in InjectionVariables)
+            {
+                Check(observedEnvironment[name].Type == JTokenType.Null, "Helper inherited game injector: " + name);
+                Check(Environment.GetEnvironmentVariable(name) == "reporting-test-injector", "Parent injector environment changed: " + name);
+            }
+            Check((string)observedEnvironment["FTK_REPORTING_TEST_CONTEXT"] == "ordinary-helper-context", "Unrelated helper environment removed");
             string other = ReportingSubmissionPayload.Create(Report(false), "different report", "manual", "", "");
             ReportingSubmissionResult conflict = Send(other);
             Check(!conflict.Success && conflict.Error == "pending_report_exists", "Pending report overwritten by new report");
@@ -145,8 +164,37 @@ internal static class Program
             Check(done.Success && done.ReportId == report.ReportId && done.IssueNumber == 187, "Retry failed to submit same report");
             Check(ReportingSubmission.PendingPayload == null && !File.Exists(Path.Combine(delivery, "pending.json")), "Successful send left pending data");
             int calls = File.ReadAllLines(Path.Combine(delivery, "helper-calls.txt")).Length;
+            FTKModFramework.Core.Marketplace.MarketplaceProtocol.RefuseHelper = true;
             Check(Send(frozen).Success, "Receipt replay failed");
             Check(File.ReadAllLines(Path.Combine(delivery, "helper-calls.txt")).Length == calls, "Receipt replay sent duplicate request");
+            FTKModFramework.Core.Marketplace.MarketplaceProtocol.RefuseHelper = false;
+            string receiptPath = Path.Combine(delivery, "submitted.json");
+            string boundReceipt = File.ReadAllText(receiptPath);
+            using (System.Security.Cryptography.SHA256 sha = System.Security.Cryptography.SHA256.Create())
+            {
+                string expectedHash = BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(frozen))).Replace("-", "").ToLowerInvariant();
+                Check((string)JObject.Parse(boundReceipt)["requestSha256"] == expectedHash, "Receipt not bound to exact UTF8 request");
+            }
+            JObject changed = JObject.Parse(frozen); changed["description"] = "Changed description \u2603";
+            string changedSameId = changed.ToString(Formatting.None);
+            File.Delete(Path.Combine(delivery, "allow-submit"));
+            ReportingSubmissionResult changedResult = Send(changedSameId);
+            Check(!changedResult.Success && changedResult.Error == "retry_later", "Changed payload with same ID replayed old success");
+            Check(File.ReadAllLines(Path.Combine(delivery, "helper-calls.txt")).Length == calls + 1, "Changed payload skipped server idempotency");
+            Check(ReportingSubmission.PendingPayload == changedSameId && File.ReadAllText(Path.Combine(delivery, "pending.json")) == changedSameId, "Old receipt discarded changed request");
+            Check(File.ReadAllText(receiptPath) == boundReceipt, "Pending changed request replaced successful receipt");
+            Discard(changedSameId);
+            string whitespaceChanged = frozen + "\n";
+            ReportingSubmissionResult whitespaceResult = Send(whitespaceChanged);
+            Check(!whitespaceResult.Success && ReportingSubmission.PendingPayload == whitespaceChanged, "Receipt matched reserialized content instead of exact bytes");
+            Discard(whitespaceChanged);
+            File.WriteAllText(receiptPath, Receipt(report.ReportId).ToString(Formatting.None));
+            calls = File.ReadAllLines(Path.Combine(delivery, "helper-calls.txt")).Length;
+            ReportingSubmissionResult legacy = Send(frozen);
+            Check(!legacy.Success && legacy.Error == "retry_later", "Legacy unbound receipt replayed success");
+            Check(File.ReadAllLines(Path.Combine(delivery, "helper-calls.txt")).Length == calls + 1 && ReportingSubmission.PendingPayload == frozen, "Legacy receipt bypassed server retry or lost pending request");
+            File.WriteAllText(Path.Combine(delivery, "allow-submit"), "yes");
+            Check(Send(frozen).Success, "Legacy receipt did not recover through server submission");
             FTKModFramework.Core.Marketplace.MarketplaceProtocol.RefuseHelper = true;
             ReportingSubmissionResult unavailable = Send(other);
             Check(!unavailable.Success, "Missing helper accepted");
@@ -160,13 +208,42 @@ internal static class Program
             Spin(delegate { return discarded.HasValue; });
             Check(discarded == true && ReportingSubmission.PendingPayload == null && !File.Exists(Path.Combine(delivery, "pending.json")), "Discard failed");
         }
-        finally { if (Directory.Exists(root)) Directory.Delete(root, true); }
+        finally
+        {
+            for (int i = 0; i < InjectionVariables.Length; i++) Environment.SetEnvironmentVariable(InjectionVariables[i], inherited[i]);
+            Environment.SetEnvironmentVariable("FTK_REPORTING_TEST_CONTEXT", context);
+            if (Directory.Exists(root)) Directory.Delete(root, true);
+        }
+    }
+    private static readonly string[] InjectionVariables = {
+        "DYLD_INSERT_LIBRARIES", "LD_PRELOAD", "DOORSTOP_ENABLED", "DOORSTOP_TARGET_ASSEMBLY",
+        "DOORSTOP_BOOT_CONFIG_OVERRIDE", "DOORSTOP_IGNORE_DISABLED_ENV", "DOORSTOP_MONO_DLL_SEARCH_PATH_OVERRIDE",
+        "DOORSTOP_MONO_DEBUG_ENABLED", "DOORSTOP_MONO_DEBUG_ADDRESS", "DOORSTOP_MONO_DEBUG_SUSPEND",
+        "DOORSTOP_CLR_RUNTIME_CORECLR_PATH", "DOORSTOP_CLR_CORLIB_DIR", "DOORSTOP_DISABLE"
+    };
+    private static void HelperEnvironment()
+    {
+        ProcessStartInfo info = new ProcessStartInfo();
+        foreach (string name in InjectionVariables) info.EnvironmentVariables[name] = "libdoorstop-test";
+        info.EnvironmentVariables["doorstop_future_setting"] = "future-control";
+        info.EnvironmentVariables["FTK_REPORTING_TEST_CONTEXT"] = "preserved";
+        ReportingSubmission.PrepareHelperEnvironment(info);
+        foreach (string name in InjectionVariables) Check(!info.EnvironmentVariables.ContainsKey(name), "Prepared environment kept " + name);
+        Check(!info.EnvironmentVariables.ContainsKey("doorstop_future_setting"), "Doorstop prefix cleanup missed another setting");
+        Check(info.EnvironmentVariables["FTK_REPORTING_TEST_CONTEXT"] == "preserved", "Prepared environment lost unrelated context");
     }
     private static ReportingSubmissionResult Send(string json)
     {
         ReportingSubmissionResult result = null;
         Check(ReportingSubmission.Start(json, delegate(ReportingSubmissionResult value) { result = value; }), "Send refused");
         Spin(delegate { return result != null; }); return result;
+    }
+    private static void Discard(string payload)
+    {
+        bool? done = null;
+        ReportingSubmission.DiscardPending(payload, delegate(bool value) { done = value; });
+        Spin(delegate { return done.HasValue; });
+        Check(done == true && ReportingSubmission.PendingPayload == null, "Matching pending discard failed");
     }
     private static void Spin(Func<bool> done)
     {

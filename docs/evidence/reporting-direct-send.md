@@ -2,71 +2,120 @@
 
 ## Scope
 
-This record covers the Railway-backed reporting implementation in this change.
-Historical browser-created issue #187 does not prove this transport. No new issue
-has yet been created through the deployed service.
+This record covers the Railway-backed reporting implementation on 2026-09-24.
+Historical browser-created issue #187 does not prove this transport. The new
+issues below were created by the actual game panel, verified native helper and
+repository-owned service, without browser form submission or manual attachments.
 
 ## Game-free checks
 
 - Framework Release/net35 build passed with seven existing unassigned-field warnings.
-- ReportingDraft, ReportingMetadata, ReportingRuntime and ReportingSession suites passed.
-- ReportingDiagnostics passed 58 checks, including throttling, redaction, bounded
-  snapshots, exact-session recovery, corrupt-slot fallback and owned cleanup.
-- ReportingSubmission passed 60 checks, including diagnostics exclusion, UTF-8
-  bounds, immutable retries, local helper process invocation, competing pending
-  reports, receipt replay, missing-helper persistence and identity-checked discard.
-- Service and launcher/helper `go test -race ./...`, `go vet ./...` and builds passed.
+- ReportingDraft, ReportingMetadata, ReportingRuntime (normal and busy owner), and
+  ReportingSession suites passed.
+- ReportingDiagnostics passed 58 checks covering bounded collection, redaction,
+  throttling, exact-session recovery, corrupt-slot fallback and owned cleanup.
+- ReportingSubmission passed 117 checks, including diagnostic exclusion, UTF-8
+  bounds, frozen retries, real local helper subprocesses, child-only injector
+  environment cleanup, exact-request receipt hashes, legacy receipt fallback,
+  competing pending reports, missing-helper persistence and checked discard.
+- Runtime regression checks cover immediate retirement of a submitted saved draft,
+  preserving an unrelated draft, and creating a fresh report afterward.
+- Service and launcher/helper tests with race detection, vet and builds passed.
   Helper cross-builds passed for Windows amd64, Linux amd64, macOS amd64 and arm64.
 - Release integrity metadata tests passed (four tests).
+- All GitHub checks passed for deployment commit `322d05c3`. Later client fixes
+  have the focused local checks above; their CI status is tracked by PR #188.
 
-These checks use fake service/GitHub responses where applicable. They do not prove
-live GitHub credentials, Railway deployment or supported gameplay on other platforms.
+Fake responses in offline tests do not establish live behavior. The following
+observations are separate evidence.
 
-## Isolated macOS game observation
+## Live service and game chain
 
-Framework SHA-256:
-`87367ef4b9aa94d0909ad99846fbb55fd5105a574c3940bcea1f403ea9d37cba`.
-The authorized disposable game copy used a unique profile and Steam-suppression
-receipt. No other FTK process was running when this trial began. The fixture's
-native command channel drove controls; this was not physical input qualification.
+The authorized disposable macOS game had a unique profile, save root, process
+identity and per-launch Steam-suppression receipt. No other FTK process was running
+when these trials began. The harness invoked native button callbacks; these are
+programmatic game tests, not comprehensive mouse/controller qualification.
 
-After the introductory screen, the title automatically opened the previous-session
-report offer through Options. The panel owned native focus, retained the Options
-blocker, used the native Mods panel styling, and displayed one optional description,
-diagnostics inclusion, a detail toggle, Send report, Not now and Back to game.
-A screenshot confirmed the public-sharing disclosure was legible without overlap at
-1280 by 800. The expanded preview displayed the outgoing disclosure and payload.
+The first live Send found a real helper-launch defect: BepInEx's inherited
+`DYLD_INSERT_LIBRARIES` made the standalone helper exit before HTTP. The report
+remained saved locally. Clearing game-only injector variables from the child
+process fixed the launch without changing the game's environment. After a normal
+quit and restart, the panel recovered the same frozen report and its explicit Retry
+created [issue #189](https://github.com/jarlbrak/ftk-mod-framework/issues/189).
+The issue and public bundle contained the originally captured startup errors and
+metadata, not replacement diagnostics from the retry launch.
 
-A native `AkInitializer.OnApplicationFocus` null-reference error was observed during
-startup and appeared in both bounded local diagnostic slots. This is positive
-capture evidence, not a claim that the framework caused or repaired that game error.
-Not now closed the report, removed the blocker and returned through Options to the
-title screen. No pending upload file was created. The exact owned process then
-quit normally; no game process remained.
+| Trial | Result |
+| --- | --- |
+| Automatic detected-error offer, explicit Send/Retry | [#189](https://github.com/jarlbrak/ftk-mod-framework/issues/189), HTTP 201, with diagnostic excerpt and verified public download. |
+| Diagnostics explicitly excluded | [#190](https://github.com/jarlbrak/ftk-mod-framework/issues/190), description only; no excerpt or download link, diagnostic URL returned 404. |
+| Verified isolated process forcibly terminated, then restarted | The title offered the previous session automatically; explicit Send created [#191](https://github.com/jarlbrak/ftk-mod-framework/issues/191). Download contained the exact previous session ID and persisted error timestamps, separately from the new launch's errors. The pending incident cleared only after confirmed submission. |
+| Final-build manual Options > Report Bugs | [#192](https://github.com/jarlbrak/ftk-mod-framework/issues/192), fresh report identity and automatic diagnostics, HTTP 201. |
+| Exact service replay of #189 | HTTP 200 returned #189 again. Changed content under its ID returned 409. This was an HTTP replay check, separate from the game's retry test. |
+| Migrated saved-draft retirement | Final build resent the exact #190 content through the game, received HTTP 200/#190, retired the matching legacy draft, and reopened an empty manual report with a new ID. That new report became #192. |
 
-Later small fixes to deferred-report recovery and explicit dismissal were rebuilt
-but not covered by that captured binary's live trial.
+Successful reports showed their issue number and View issue in the native panel.
+The latest local receipt contains a SHA-256 of the exact frozen request: changed
+text under the same ID cannot reuse an old success locally. Legacy receipts without
+that hash go through the service's idempotency check. The saved-draft regression
+was found during this trial and fixed before the final manual report.
+
+Framework SHA-256 for initial service/restart trials:
+`5e10591102bfc5673fbf74abb5ce6bdff956a11a926d3dcaf3b0e913d4110046`.
+Final framework SHA-256 for migrated-draft retry and issue #192:
+`d5d40fc53399a6c5b1a2e58ce4bb15afe35a695b220d9043c903be4515c0bf03`.
+Native macOS arm64 helper SHA-256 for these trials:
+`b27912873d2607adae500f347c3152a74f1809938fc3497f6cad0ba09ead1b0f`.
+
+The logs include an observed `AkInitializer.OnApplicationFocus` null-reference
+error and the fixture's expected unavailable-Steam message. These qualify capture
+and transport, not a claim that the framework caused or repaired a native error.
+Metadata explicitly marked unavailable plugin/managed inventory sources and partial
+coverage. This does not prove complete inventory coverage for every installation.
+
+## Native UI and local Steam installation
+
+Screenshots at 1280 by 800 showed the native Mods-style panel, legible public-sharing
+disclosure, diagnostic toggle and expandable preview. The original edit button
+covered the description; the corrected compact Edit button sits beside it. A
+keyboard Escape trial ended editing and restored focus to Edit, with native cancel
+semantics. The final screenshot showed entered text unobscured. Not now dismissed
+an automatic error offer without creating an outgoing report. Closing returned to
+the owning Options menu/title. The last isolated process quit normally.
+
+The final framework/helper pair and matching verification records were installed
+into the local Steam game after confirming it was stopped. The prior four files
+were backed up. The helper's actual `prepare-launch` check returned
+`Framework verified.` without launching or requiring repair. No saves, unrelated
+plugins or game configuration were replaced. This is installation verification;
+the new build has not been exercised in an authenticated Steam-launched game here.
 
 ## Repository deployment
 
-Railway successfully built commit `e462cb06429af4bfa8186563c4a76ad73b7001d8`
-from this repository's `docs/reporting-feasibility` branch and `/reporting-service`
-root. The repository's reporting-service CI completed successfully. The checked-in
-IaC plan was applied with no resource deletion, variable change or volume replacement.
-The live `/healthz` returned HTTP 200 with `configured: false`; `/privacy` returned
-its public disclosure. This proves deployment and HTTPS reachability, not issue
-creation. The scoped GitHub service credential has not yet been configured.
+Railway builds the feature branch from this repository's `/reporting-service`
+root. The checked-in IaC was applied without deleting resources, changing secrets
+or replacing the receipt volume. Repository-scoped Railway GitHub App authorization
+registered the push trigger; pushing commit `322d05c3` automatically built and
+deployed it. The separate fine-grained GitHub token grants Issues read/write only
+to the framework repository and is stored as a Railway service secret. It is absent
+from game files and source control. The initial credential expires 2026-10-24 and
+must be rotated before then; automatic credential refresh is not implemented.
 
-After account verification and approval of repository-scoped Railway App access,
-the source connection registered a deployment trigger for the feature branch.
-This authorization is separate from the issue-writing credential.
+The service returned `/healthz` HTTP 200 with `configured: true`, served `/privacy`,
+and created the real issues above. Configuration readiness alone was not used as
+proof of GitHub access.
 
 ## Remaining qualification gates
 
-- Scoped service credential; GitHub requires interactive re-authentication.
-- A real in-game Send producing a public issue with the correct diagnostic download;
-  confirm report ID, exact-session content, opt-out and same-ID retry behavior.
-- Steam-launched matched framework/helper installation, including receipt integrity.
-- Active-session error offer and return-to-game behavior for this simplified panel.
-- Fresh abrupt-exit/restart trial proving the previous session's error snapshot is
-  attached through the service, plus Windows/Linux and co-op coverage.
+- Authenticated Steam-launched manual test of the installed final pair.
+- Active-session error offer, pause ownership and return-to-game behavior for this
+  simplified panel; combat/co-op and Windows/Linux runtime qualification.
+- Spoof-resistant client identity at Railway ingress. `TRUSTED_PROXY_HOPS` remains
+  zero; the five-per-hour limit can apply to shared proxy addresses. Do not assume
+  a proxy hop count without evidence or claim broad public-rollout readiness.
+- A native crash is not distinguished from force quit or power loss. This trial
+  proves abrupt-exit recovery with persisted logs, not crash-dump collection.
+- If disk failure/quota prevents the saved-draft tombstone, or exit interrupts that
+  write, the legacy draft can return on another launch. Edited same-ID content is
+  rejected safely instead of falsely confirmed; durable retirement recovery still
+  needs separate failure-path qualification.

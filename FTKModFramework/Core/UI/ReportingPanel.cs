@@ -104,12 +104,12 @@ namespace FTKModFramework.Core.UI
             if (!primary || Report == null) return;
             primary.interactable = !sending && !ReportingSubmission.Busy && ReportingSubmission.Ready && valid;
             SetLabel(primary, submitted ? "View issue" : frozen != null ? "Retry report" : "Send report");
-            SetLabel(secondary, frozen != null && !submitted ? "Discard local copy" : deferredPayload != null ? "Return to your report" : IsOffer ? "Not now" : "Close");
+            SetLabel(secondary, frozen != null && !submitted ? "Discard local copy" : deferredPayload != null ? "Return to your report" : submitted ? "Close" : IsOffer ? "Not now" : "Close");
             secondary.interactable = !sending;
             metadataButton.interactable = ReportingSubmission.Ready && frozen == null && !sending && !submitted;
             SetLabel(metadataButton, Report.IncludeMetadata ? "Include diagnostics: yes" : "Include diagnostics: no");
             narrativeRoot.SetActive(ReportingSubmission.Ready && frozen == null && !submitted);
-            narrative.m_ButtonText.text = description.Length == 0 ? "What happened? (optional)" : "Edit description";
+            narrative.m_ButtonText.text = "Edit";
             SetLabel(metadataDetailsButton, expanded ? "Hide details" : "What will be sent?");
             SetupOwnedNavigation();
         }
@@ -129,6 +129,7 @@ namespace FTKModFramework.Core.UI
                 // Bookkeeping does not depend on a scene-owned panel surviving the response.
                 if (result.Success)
                 {
+                    ReportingRuntime.DeleteDraft(result.ReportId, null);
                     if (sentErrorId != null) ReportingDiagnostics.Acknowledge(sentErrorId);
                     ReportingIncident pending = ReportingRuntime.Pending;
                     if (sentPriorId != null && pending != null && pending.SessionId == sentPriorId) ReportingRuntime.DismissPending(null);
@@ -138,7 +139,8 @@ namespace FTKModFramework.Core.UI
                 if (result.Success)
                 {
                     submitted = true; issueUrl = result.IssueUrl;
-                    status.text = "Report #" + result.IssueNumber + " sent. Thank you. Your selected diagnostics were included automatically.";
+                    status.text = "Report #" + result.IssueNumber + " sent. Thank you. " +
+                        (Report.IncludeMetadata ? "Your selected diagnostics were included automatically." : "No diagnostics were included.");
                 }
                 else if (result.Error == "pending_report_exists")
                 {
@@ -340,14 +342,17 @@ namespace FTKModFramework.Core.UI
             ModsPanel.StyleNativePanel(narrativeRoot, true);
             InputField input = narrativeRoot.GetComponent<InputField>(); input.targetGraphic = narrativeRoot.GetComponent<Image>();
             GameObject content = new GameObject("Text", typeof(RectTransform), typeof(Text)); content.transform.SetParent(narrativeRoot.transform, false);
-            Place(content.GetComponent<RectTransform>(), 0, 0, 1220, 90);
+            Place(content.GetComponent<RectTransform>(), -120, 0, 980, 90);
             Text text = content.GetComponent<Text>(); text.font = font; text.fontSize = 22; text.supportRichText = false;
             ModsPanel.StyleNativeText(text, false, false); text.color = new Color(.13f, .12f, .10f, 1f); input.textComponent = text;
+            Text placeholder = Instantiate(text, narrativeRoot.transform); placeholder.name = "Placeholder";
+            placeholder.text = "What happened? (optional)"; placeholder.fontStyle = FontStyle.Italic;
+            placeholder.raycastTarget = false; input.placeholder = placeholder;
             input.characterLimit = 0; input.lineType = InputField.LineType.MultiLineNewline;
             narrative = narrativeRoot.AddComponent<FTKInputFieldSelectable>(); narrative.m_InputFocus = this; narrative.m_UnitySelectable = input;
             narrative.m_InputField = input; narrative.m_TextEditFinished = new FTKInputFieldSelectable.StringEvent(); narrative.m_TextEditChanged = new FTKInputFieldSelectable.StringEvent();
-            Button edit = AddButton(source, "EditDescription", "What happened? (optional)", 0, 253, 1260, delegate { editing = true; narrative.OnTextButtonClick(); });
-            edit.transform.SetParent(narrativeRoot.transform, true); Place(edit.GetComponent<RectTransform>(), 0, 0, 1000, 85);
+            Button edit = AddButton(source, "EditDescription", "Edit", 0, 253, 220, delegate { editing = true; narrative.OnTextButtonClick(); });
+            edit.transform.SetParent(narrativeRoot.transform, true); Place(edit.GetComponent<RectTransform>(), 500, 0, 220, 48);
             narrative.m_TextButton = edit.GetComponent<FTKSelectable>(); narrative.m_ButtonText = edit.GetComponentInChildren<Text>(true);
             input.onValueChanged = new InputField.OnChangeEvent(); input.onValueChanged.AddListener(delegate(string value) {
                 description = value; valid = value.Length <= 4000;

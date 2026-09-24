@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using BepInEx;
@@ -103,6 +104,9 @@ namespace FTKModFramework.Core.Reporting
             JObject request = JObject.Parse(json);
             string id = (string)request["reportId"];
             if (!ReportingDraft.ValidId(id)) throw new ArgumentException();
+            string requestHash;
+            using (SHA256 hash = SHA256.Create())
+                requestHash = BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(json))).Replace("-", "").ToLowerInvariant();
             using (ReportingSessionLease lease = new ReportingSessionLease())
             {
                 lease.Acquire(Root); ReadPending();
@@ -120,8 +124,8 @@ namespace FTKModFramework.Core.Reporting
                 if (File.Exists(receiptPath))
                 {
                     SafeFile(receiptPath, 65536);
-                    ReportingSubmissionResult prior = ParseResult(File.ReadAllText(receiptPath), id);
-                    if (prior.Success) { File.Delete(requestPath); lock (Gate) pending = null; return prior; }
+                    ReportingSubmissionResult prior = ReadReceipt(File.ReadAllText(receiptPath), id, requestHash);
+                    if (prior != null && prior.Success) { File.Delete(requestPath); lock (Gate) pending = null; return prior; }
                 }
                 try { MarketplaceProtocol.VerifyHelper(helper); }
                 catch { return new ReportingSubmissionResult { Error = "helper_unavailable", ReportId = id }; }
@@ -130,6 +134,7 @@ namespace FTKModFramework.Core.Reporting
                 ProcessStartInfo info = new ProcessStartInfo(helper,
                     "report-submit --request " + Quote(requestPath) + " --result " + Quote(resultPath) + " --endpoint " + Quote(Endpoint));
                 info.UseShellExecute = false; info.CreateNoWindow = true; info.WorkingDirectory = Root;
+                PrepareHelperEnvironment(info);
                 using (Process process = Process.Start(info))
                 {
                     if (!process.WaitForExit(40000))
@@ -144,13 +149,39 @@ namespace FTKModFramework.Core.Reporting
                 ReportingSubmissionResult result = ParseResult(response, id);
                 if (result.Success)
                 {
-                    AtomicWrite(receiptPath, response);
+                    JObject receipt = JObject.Parse(response);
+                    receipt["requestSha256"] = requestHash;
+                    AtomicWrite(receiptPath, receipt.ToString(Newtonsoft.Json.Formatting.None));
                     File.Delete(requestPath);
                     lock (Gate) pending = null;
                 }
                 File.Delete(resultPath);
                 return result;
             }
+        }
+        private static ReportingSubmissionResult ReadReceipt(string json, string expectedId, string requestHash)
+        {
+            try
+            {
+                // Identity alone is insufficient: edits can keep an ID while changing the
+                // frozen request. Legacy receipts must go through server idempotency again.
+                JToken storedHash = JObject.Parse(json)["requestSha256"];
+                if (storedHash == null || storedHash.Type != JTokenType.String || (string)storedHash != requestHash) return null;
+                return ParseResult(json, expectedId);
+            }
+            catch { return null; }
+        }
+        internal static void PrepareHelperEnvironment(ProcessStartInfo info)
+        {
+            // The Steam wrapper injects Doorstop into the game. Carrying that environment into
+            // the standalone helper can crash its native loader before it writes a result.
+            string[] names = new string[info.EnvironmentVariables.Count];
+            info.EnvironmentVariables.Keys.CopyTo(names, 0);
+            foreach (string name in names)
+                if (String.Equals(name, "DYLD_INSERT_LIBRARIES", StringComparison.OrdinalIgnoreCase) ||
+                    String.Equals(name, "LD_PRELOAD", StringComparison.OrdinalIgnoreCase) ||
+                    name.StartsWith("DOORSTOP_", StringComparison.OrdinalIgnoreCase))
+                    info.EnvironmentVariables.Remove(name);
         }
         internal static ReportingSubmissionResult ParseResult(string json, string expectedId)
         {
