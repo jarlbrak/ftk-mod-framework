@@ -13,6 +13,13 @@ requirements. The builder combines those files with measured archive facts to
 produce the [catalog descriptor](../../catalog.json). The published archive
 contains content and original art, without game assemblies or executable code.
 
+The catalog permits installation on macOS, Windows and Linux. The listing owns
+this platform allowlist; the builder's `--platform` selects only the local fixture
+platform. Installation permission does not establish gameplay validation. The
+framework version and game assembly fingerprint checks still apply, so an
+unlisted game build remains blocked. Framework release manifests already include
+helpers for all three desktop operating systems.
+
 This source shows mod authors how to declare a class, abilities, equipment,
 custom models and icons. See [Writing Content](../../../docs/WRITING-CONTENT.md),
 [Custom Models](../../../docs/CUSTOM-MODELS.md), and
