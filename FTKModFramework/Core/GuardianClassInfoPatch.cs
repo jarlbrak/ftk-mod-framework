@@ -19,9 +19,16 @@ namespace FTKModFramework.Core
         {
             try
             {
-                if (!GuardianRuntime.IsGuardianClass((int)_characterType) || __instance.m_ClassAbility == null) return;
-                __instance.m_ClassAbility.text = GuardianEquipmentDescription.Append(
+                int classId = (int)_characterType;
+                if (__instance.m_ClassAbility == null) return;
+                bool guardian = GuardianRuntime.IsGuardianClass(classId);
+                bool cleansing = OverworldAilmentImmunity.IsRegistered(classId);
+                if (!guardian && !cleansing) return;
+                if (guardian) __instance.m_ClassAbility.text = GuardianEquipmentDescription.Append(
                     __instance.m_ClassAbility.text, GuardianEquipmentDescription.ClassRules);
+                if (cleansing) __instance.m_ClassAbility.text = GuardianEquipmentDescription.Append(
+                    __instance.m_ClassAbility.text, OverworldAilmentImmunity.DisplayName(classId) +
+                    ": immune to\nPoison/Curse while exploring.");
                 GuardianClassLayoutState state = __instance.GetComponent<GuardianClassLayoutState>();
                 if (state == null) state = __instance.gameObject.AddComponent<GuardianClassLayoutState>();
                 state.Arrange(__instance);

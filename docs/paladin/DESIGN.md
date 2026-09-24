@@ -1,6 +1,7 @@
 # Paladin: complete class design
 
-Status: design contract for the published Paladin 1.0.1 package. It defines 51
+Status: design contract for the published Paladin 1.0.1 package and the
+unpublished 1.1.0 Cleansing March candidate. It defines 51
 equipment items, including twelve accessories. The design and historical plans
 below do not establish full live-game acceptance; see the
 [launch record](LAUNCH-1.0.0.md) for observed coverage.
@@ -57,6 +58,12 @@ Helm. The new accessories are found or bought, not additional starting
 grants. [Native baseline](NATIVE-BASELINE.md) explains inherited weapon actions,
 difficulty bonuses and the stat cap; equip/remove verification remains in
 [the gap plan](GAPS.md).
+
+The 1.1.0 candidate adds **Cleansing March**, an equipment-independent passive.
+During exploration it prevents new Poison and Curse from tiles and other
+noncombat sources. It neither cures existing conditions nor prevents fire tile
+damage or chaos losses. In combat the native status rules remain in force.
+The implementation and release gates are specified in [issue #182](https://github.com/jarlbrak/ftk-mod-framework/issues/182).
 
 ## Vision
 Deliver one marketplace mod that enables a fully playable Paladin, its complete equipment progression, and entirely original custom 3D art. The class is a Vitality-based protector that spends actions safeguarding a chosen teammate and focused attacks restoring that teammate.

@@ -76,6 +76,7 @@ def main():
     validate_accessories(by_id)
     # Inherit the template's complete native appearance list and unlock checks.
     assert by_id['paladin']['template']=='blacksmith'
+    assert by_id['paladin']['overworldAilmentImmunity'] == {'displayName': 'Cleansing March'}
     assert 'm_Skinsets' not in by_id['paladin']['fields']
     assert 'playerModels' not in by_id['paladin']
     refs=[]
@@ -176,7 +177,7 @@ def main():
     for name,record in receipt['files'].items():assert hashlib.sha256((PACKAGE/name).read_bytes()).hexdigest()==record['sha256'],name
     assert set(refs)<=set(receipt['files'])
     assert all(path.suffix in ['.png','.glb'] for path in (PACKAGE/'assets').iterdir())
-    print('PASS: 54 unique rows, 51 equipment items, six-family progression, 12 accessories, three Artifact items, original asset hashes, renderer paths and references. No live-game claims.')
+    print('PASS: Cleansing March class declaration, 54 unique rows, 51 equipment items, six-family progression, 12 accessories, three Artifact items, original asset hashes, renderer paths and references. No live-game claims.')
 
 
 if __name__=='__main__':main()

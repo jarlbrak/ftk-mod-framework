@@ -1155,22 +1155,23 @@ func marketManifest(b []byte, p marketPackage) error {
 func marketContent(b []byte) error {
 	var c struct {
 		Entries []struct {
-			Kind            string                 `json:"kind"`
-			ID              string                 `json:"id"`
-			Template        string                 `json:"template"`
-			DisplayName     string                 `json:"displayName"`
-			Fields          map[string]interface{} `json:"fields"`
-			Proficiencies   []string               `json:"proficiencies"`
-			Flavor          string                 `json:"flavor"`
-			Description     string                 `json:"description"`
-			Guardian        bool                   `json:"guardian,omitempty"`
-			GuardianBonuses *marketGuardianBonuses `json:"guardianBonuses,omitempty"`
-			Icon            string                 `json:"icon,omitempty"`
-			ApparelModels   *marketApparelModel    `json:"apparelModels,omitempty"`
-			Modifiers       *marketItemModifiers   `json:"modifiers,omitempty"`
-			ItemModels      []marketModelRenderer  `json:"itemModels,omitempty"`
-			DisplayModels   []marketModelRenderer  `json:"displayModels,omitempty"`
-			PlayerModels    []marketPlayerModel    `json:"playerModels,omitempty"`
+			Kind                     string                 `json:"kind"`
+			ID                       string                 `json:"id"`
+			Template                 string                 `json:"template"`
+			DisplayName              string                 `json:"displayName"`
+			Fields                   map[string]interface{} `json:"fields"`
+			Proficiencies            []string               `json:"proficiencies"`
+			Flavor                   string                 `json:"flavor"`
+			Description              string                 `json:"description"`
+			Guardian                 bool                   `json:"guardian,omitempty"`
+			OverworldAilmentImmunity *marketAilmentImmunity `json:"overworldAilmentImmunity,omitempty"`
+			GuardianBonuses          *marketGuardianBonuses `json:"guardianBonuses,omitempty"`
+			Icon                     string                 `json:"icon,omitempty"`
+			ApparelModels            *marketApparelModel    `json:"apparelModels,omitempty"`
+			Modifiers                *marketItemModifiers   `json:"modifiers,omitempty"`
+			ItemModels               []marketModelRenderer  `json:"itemModels,omitempty"`
+			DisplayModels            []marketModelRenderer  `json:"displayModels,omitempty"`
+			PlayerModels             []marketPlayerModel    `json:"playerModels,omitempty"`
 		} `json:"entries"`
 	}
 	if e := marketJSON(b, &c); e != nil {
@@ -1213,6 +1214,10 @@ func marketContent(b []byte) error {
 		}
 		if entry.Guardian && entry.Kind != "class" {
 			return errors.New("guardian requires a class")
+		}
+		if entry.OverworldAilmentImmunity != nil &&
+			(entry.Kind != "class" || strings.TrimSpace(entry.OverworldAilmentImmunity.DisplayName) == "") {
+			return errors.New("overworldAilmentImmunity requires a class and display name")
 		}
 		if entry.ItemModels != nil {
 			if entry.Kind != "item" && entry.Kind != "weapon" {

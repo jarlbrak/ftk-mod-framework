@@ -500,6 +500,10 @@ namespace FTKModFramework.Core.Data
             {
                 if (c.Entry.Guardian && (c.Kind != "class" || !Content.AddGuardian((FTK_playerGameStart)c.Row)))
                     throw new ArgumentException("guardian requires a registered custom class");
+                if (c.Entry.OverworldAilmentImmunity != null &&
+                    (c.Kind != "class" || !Content.AddOverworldAilmentImmunity((FTK_playerGameStart)c.Row,
+                        c.Entry.OverworldAilmentImmunity.DisplayName)))
+                    throw new ArgumentException("overworldAilmentImmunity requires a registered custom class");
                 if (c.Entry.GuardianBonuses != null)
                 {
                     if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("guardianBonuses requires equipment");

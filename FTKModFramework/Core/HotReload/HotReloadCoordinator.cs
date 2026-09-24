@@ -222,6 +222,11 @@ namespace FTKModFramework.Core.HotReload
                     throw new InvalidOperationException("Class identity differs from its array position.");
             if (paladin && !GuardianRuntime.Enabled) throw new InvalidOperationException("Guardian capability is missing.");
             if (!paladin && GuardianRuntime.Enabled) throw new InvalidOperationException("Guardian capability survived removal.");
+            int paladinClassId = classes.GetIntFromID("paladin");
+            if (OverworldAilmentImmunity.ReloadClassCount > (paladin ? 1 : 0) ||
+                (OverworldAilmentImmunity.ReloadClassCount != 0 &&
+                    (paladinClassId < 0 || !OverworldAilmentImmunity.IsRegistered(paladinClassId))))
+                throw new InvalidOperationException("Unexpected overworld immunity registration.");
             foreach (KeyValuePair<Type, Dictionary<string, int>> table in ContentRegistry.CustomIds)
             {
                 GEDataArrayBase db = TableManager.Instance.Get(table.Key);

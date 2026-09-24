@@ -9,6 +9,13 @@ in play. See [accessory validation](ACCESSORY-VALIDATION.md) for the earlier
 offline candidate, [legendary validation](LEGENDARY-VALIDATION.md) for earlier
 live-tested bytes, and [Launch 1.0.0](LAUNCH-1.0.0.md) for current release gates.
 
+The unpublished 1.1.0 source candidate retains those entries and adds Cleansing
+March to the class registration. Its offline framework, package and hot
+activation checks must be recorded separately from a live walk onto poison,
+curse, chaos and fire tiles, an ordinary combat Poison/Curse check, save/resume,
+and install lifecycle. [Spec #182](https://github.com/jarlbrak/ftk-mod-framework/issues/182)
+defines the new effect and its exact scope; no 1.0.1 observation proves it.
+
 The [equipment inventory](EQUIPMENT.md) includes twelve accessories and original
 display art. Their individual native behavior and appearance have not been
 tested. [Gap plan](GAPS.md) records the historical closure sequence;

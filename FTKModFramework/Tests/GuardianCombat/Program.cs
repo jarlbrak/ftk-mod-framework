@@ -214,6 +214,7 @@ internal static class Program
                 "capped Mercy healing consumes the attack opportunity");
         }
         LegendaryChecks.Run(Check);
+        OverworldAilmentChecks.Run(Check);
         Console.WriteLine("PASS GuardianCombat: " + checks + " checks");
         if (args.Length == 2 && args[0] == "--assembly") NativeSignatures.Verify(args[1]);
         else if (args.Length != 0) throw new Exception("Usage: GuardianCombat [--assembly PATH]");

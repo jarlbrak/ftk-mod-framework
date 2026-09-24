@@ -25,6 +25,19 @@ Multiple guards do not multiply reduction. Rescue selection uses stable ordinal
 guardian identity and consumes one available charge. Combat state is transient.
 Online peer agreement remains an explicit validation gate.
 
+## Overworld ailment immunity
+
+Framework 1.0.3 adds `Content.AddOverworldAilmentImmunity(classRow, displayName)` for an exact
+registered custom class, or `overworldAilmentImmunity: { "displayName": "Cleansing March" }` on a JSON class
+entry. It makes native `CharacterStats.HasImmunity` report Poison and Curse
+immunity outside combat. This prevents new Poison and Curse from poison, curse
+and chaos tiles. It also applies to other exploration sources of those two
+conditions because a tile's curse can complete through a later RPC. Existing
+conditions are not removed. Fire tile damage, chaos gold, Focus and item loss,
+and combat ailments retain native behavior. The capability is independent of
+equipment and of the Guardian kit, and opt-in identity follows the registered
+class across a save. Native gameplay and co-op parity remain separate gates.
+
 Registered Guardian classes show the three kit rules in native class-selection
 ability text. Registered perk equipment appends its own bonuses to native item
 stat text, or to weapon-front stat text even when no modifier row exists. Values
@@ -131,6 +144,7 @@ authoring example, subject to its documented live gates.
 | Property | Entry kind | Meaning |
 | --- | --- | --- |
 | `guardian: true` | class | Guardian kit |
+| `overworldAilmentImmunity` with `displayName` | class | Prevent new Poison and Curse outside combat; requires framework 1.0.3 |
 | `guardianBonuses` | item, weapon | The equipment bonus fields above; Focus and Reckoning require a weapon |
 | `modifiers` | item, weapon | `armor`, `resistance`, `reflect` integers 0-100; `vitality`, `speed` numbers -1 to 1 |
 | `itemModels` | item, weapon | Equipped rigid renderers: `path`, `model`, `texture` |
