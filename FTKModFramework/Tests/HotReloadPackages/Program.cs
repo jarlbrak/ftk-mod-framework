@@ -63,6 +63,10 @@ namespace FTKModFramework.Core.HotReload
                 Reject(selection, "Disabled race declarations cannot hide unsnapshotted capability.");
                 File.WriteAllText(content, "{\"entries\":[{\"kind\":\"class\",\"raceBindings\":[]}]}");
                 Reject(selection, "Race bindings reject activation regardless of kind or package identity.");
+                File.WriteAllText(content, "{\"entries\":[{\"kind\":\"loreStoreUnlock\",\"id\":\"all\"}]}");
+                Check(HotReloadPackagePolicy.InvalidReason(selection) != null,
+                    "An active Lore Store unlock disables title activation, so removal waits for next launch.");
+                Reject(selection, "A pending Lore Store unlock rejects activation before coordinator mutation.");
                 File.WriteAllText(content, "{\"entries\":[{\"kind\":\"item\",\"id\":\"tools\"}]}");
                 Check(HotReloadPackagePolicy.InvalidReason(selection) == null,
                     "Ordinary capabilities remain eligible under the same arbitrary package identities.");

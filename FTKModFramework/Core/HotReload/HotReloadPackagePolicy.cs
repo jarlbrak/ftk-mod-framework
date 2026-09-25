@@ -38,6 +38,8 @@ namespace FTKModFramework.Core.HotReload
                     foreach (ContentEntry entry in file.Entries)
                         if (entry == null || string.Equals(entry.Kind, "race", StringComparison.OrdinalIgnoreCase) || entry.RaceBindings != null)
                             return "Custom races require next-launch activation.";
+                        else if (string.Equals(entry.Kind, "loreStoreUnlock", StringComparison.OrdinalIgnoreCase))
+                            return "Lore Store unlocks require next-launch activation.";
                 }
             }
             catch (Exception) { return "Cannot inspect managed content capabilities; restart to activate."; }
