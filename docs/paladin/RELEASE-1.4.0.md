@@ -112,3 +112,14 @@ registering all 112 enabled content entries with zero content errors and warning
 and reporting `SELF-TEST PASS: data-content determinism`. The optional full
 diagnostic suite was disabled. This establishes registration and the specific
 determinism check, not visual fit or the remaining gameplay gates.
+
+## Publication verification
+
+Published [Paladin 1.4.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.4.0)
+and [framework 1.2.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.2.1).
+The Paladin draft's four uploaded assets matched local bytes before publication.
+The public archive and preview were downloaded independently and hash-verified
+before catalog inclusion. Every public framework asset matched `SHA256SUMS`;
+`update.json` includes framework 1.2.0 in the automatic upgrade range. The
+repository's latest release remains framework 1.2.1, not the content package.
+Public download checks do not establish the in-game Discover/install lifecycle.
