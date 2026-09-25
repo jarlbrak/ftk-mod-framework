@@ -1,10 +1,10 @@
 # Write a content mod
 
-FTK Mod Framework adds content to the original *For The King* without editing the game's files. The [Paladin package](../marketplace/packages/paladin/content.json) is a complete source example. Its 1.2.0 source candidate requires framework 1.0.3; the published catalog still serves Paladin 1.1.0. The [manifest](../marketplace/packages/paladin/manifest.json) defines identity and compatibility; its content file defines the class, equipment, abilities, models, and icons. Copy its structure, then use your own stable mod GUID, IDs, names, and original assets. The [marketplace guide](MARKETPLACE.md) covers review and publication.
+FTK Mod Framework adds content to the original *For The King* without editing the game's files. The [Paladin package](../marketplace/packages/paladin/content.json) is a complete source example. Published Paladin 1.2.0 requires framework 1.0.3. The [manifest](../marketplace/packages/paladin/manifest.json) defines identity and compatibility; its content file defines the class, equipment, abilities, models, and icons. Copy its structure, then use your own stable mod GUID, IDs, names, and original assets. The [marketplace guide](MARKETPLACE.md) covers review and publication.
 
 ## Start with a manifest
 
-Place `manifest.json` and one or more JSON files containing `entries` arrays in a folder under `<game>/BepInEx/plugins/`. The Paladin 1.2.0 source manifest begins:
+Place `manifest.json` and one or more JSON files containing `entries` arrays in a folder under `<game>/BepInEx/plugins/`. The Paladin 1.2.0 manifest begins:
 
 ```json
 {
@@ -41,7 +41,7 @@ entry's `overworldAilmentImmunity` object with a `displayName` opts an exact reg
 into native Poison and Curse immunity while outside combat. This includes tile
 hazards and other exploration sources, but does not cure existing conditions,
 prevent tile damage or losses, or change combat immunity. The Paladin 1.2.0
-candidate uses this declaration for Cleansing March. Verify the effect in game
+package uses this declaration for Cleansing March. Verify the effect in game
 before advertising it as a released ability.
 
 ## Validate and play

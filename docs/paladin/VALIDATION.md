@@ -9,7 +9,7 @@ in play. See [accessory validation](ACCESSORY-VALIDATION.md) for the earlier
 offline candidate, [legendary validation](LEGENDARY-VALIDATION.md) for earlier
 live-tested bytes, and [Launch 1.0.0](LAUNCH-1.0.0.md) for current release gates.
 
-The unpublished 1.2.0 source candidate retains those entries and Cleansing
+The published 1.2.0 package retains those entries and Cleansing
 March, introduced in the 1.1.0 release. The [balance review](BALANCE-1.2.0.md)
 and [verification receipt](balance-1.2.0-verification.json) record its five tuning
 changes and game-free checks. The [1.2.0 live receipt](balance-1.2.0-live.json)

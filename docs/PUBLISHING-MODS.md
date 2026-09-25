@@ -1,6 +1,6 @@
 # Publish a marketplace mod
 
-The FTK marketplace is a curated catalog of content packages. [Paladin](../marketplace/packages/paladin/) is the published 1.1.0 example. A package submission proposes content for review; a maintainer publishes its archive and adds it to the production [catalog](../marketplace/catalog.json). The [player marketplace guide](MARKETPLACE.md) explains installation and recovery, while [mod versioning](MOD-VERSIONING.md) defines compatibility and immutable versions.
+The FTK marketplace is a curated catalog of content packages. [Paladin](../marketplace/packages/paladin/) is the published 1.2.0 example. A package submission proposes content for review; a maintainer publishes its archive and adds it to the production [catalog](../marketplace/catalog.json). The [player marketplace guide](MARKETPLACE.md) explains installation and recovery, while [mod versioning](MOD-VERSIONING.md) defines compatibility and immutable versions.
 
 ## Submit a package
 
