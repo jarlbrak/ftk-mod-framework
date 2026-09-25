@@ -190,6 +190,7 @@ func marketModelReferences(data map[string][]byte) error {
 		var doc struct {
 			Entries []struct {
 				ItemModels    []marketModelRenderer `json:"itemModels"`
+				OffHandModels []marketModelRenderer `json:"offHandModels"`
 				DisplayModels []marketModelRenderer `json:"displayModels"`
 				PlayerModels  []marketPlayerModel   `json:"playerModels"`
 				Icon          string                `json:"icon"`
@@ -207,6 +208,7 @@ func marketModelReferences(data map[string][]byte) error {
 			}
 			refs := append([]marketModelRenderer{}, e.ItemModels...)
 			refs = append(refs, e.DisplayModels...)
+			refs = append(refs, e.OffHandModels...)
 			if e.ApparelModels != nil {
 				refs = append(refs, e.ApparelModels.Renderers...)
 			}
@@ -229,11 +231,14 @@ func marketModelReferences(data map[string][]byte) error {
 }
 
 type marketItemModifiers struct {
-	Armor      int     `json:"armor"`
-	Resistance int     `json:"resistance"`
-	Vitality   float64 `json:"vitality"`
-	Speed      float64 `json:"speed"`
-	Reflect    int     `json:"reflect"`
+	Armor         int     `json:"armor"`
+	Resistance    int     `json:"resistance"`
+	Vitality      float64 `json:"vitality"`
+	Speed         float64 `json:"speed"`
+	Reflect       int     `json:"reflect"`
+	Awareness     float64 `json:"awareness"`
+	Talent        float64 `json:"talent"`
+	FocusCapacity int     `json:"focusCapacity"`
 }
 
 type marketGuardianBonuses struct {

@@ -28,6 +28,7 @@ internal static class MarketplaceChecks
         Check(diskActive.GenerationId == first, "fallback reads authoritative pointer rather than stale runtime projection");
         Check(!diskActive.FilesVerified && MarketplaceProtocol.ReadVerifiedGeneration(stateRoot, diskActive).FilesVerified,
             "only helper-validated generation reads authorize lock-file hashes");
+        CheckVerifiedPreviews(stateRoot, diskActive);
         string invalidFiles = "55555555555555555555555555555555";
         string invalidRoot = Path.Combine(stateRoot, "generations/" + invalidFiles);
         Directory.CreateDirectory(Path.Combine(invalidRoot, "content"));
@@ -85,6 +86,34 @@ internal static class MarketplaceChecks
         File.AppendAllText(helper, "# changed bytes\n");
         Reject(delegate { MarketplaceProtocol.VerifyHelper(helper); }, "modified helper checksum rejected before launch");
     }
+    private static void CheckVerifiedPreviews(string root, ManagedSnapshot returned)
+    {
+        string cache = Path.Combine(root, "cache/screenshots");
+        Directory.CreateDirectory(cache);
+        string banner = Path.Combine(cache, "banner.png");
+        File.WriteAllBytes(banner, new byte[] { 1 });
+        string outside = Path.Combine(root, "outside.png");
+        File.WriteAllBytes(outside, new byte[] { 1 });
+        string large = Path.Combine(cache, "large.png");
+        File.WriteAllBytes(large, new byte[2 * 1024 * 1024 + 1]);
+        PackageDescriptor preview = returned.Packages[0];
+        preview.ScreenshotPaths = new string[] { outside, large, "\0", banner, banner };
+        preview.Name = "helper must not replace locked metadata";
+        preview.Enabled = !preview.Enabled;
+        ManagedSnapshot verified = MarketplaceProtocol.ReadVerifiedGeneration(root, returned);
+        Check(verified.Packages[0].ScreenshotPaths.Length == 1 && verified.Packages[0].ScreenshotPaths[0] == banner,
+            "verified generation retains only valid unique bounded cached preview paths");
+        Check(verified.Packages[0].Name != preview.Name && verified.Packages[0].Enabled != preview.Enabled && verified.FilesVerified,
+            "preview enrichment preserves authoritative lock metadata and content verification");
+        preview.Version = "9.0.0";
+        Check(MarketplaceProtocol.ReadVerifiedGeneration(root, returned).Packages[0].ScreenshotPaths == null,
+            "preview from another package version cannot cross into verified generation");
+        preview.Version = "1.0.0";
+        preview.Sha256 = new string('f', 64);
+        Check(MarketplaceProtocol.ReadVerifiedGeneration(root, returned).Packages[0].ScreenshotPaths == null,
+            "preview from another archive cannot cross into verified generation");
+    }
+
     private static void RunCatalog()
     {
         MarketplaceResult completed = null;
