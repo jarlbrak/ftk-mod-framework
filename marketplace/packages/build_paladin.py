@@ -31,7 +31,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,default=ROOT/'scratch/paladin-package-build')
     parser.add_argument('--game-assembly',type=Path,default=ROOT/'scratch/paladin-game/FTK.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll')
-    parser.add_argument('--platform',choices=['macos','windows','linux'],default='macos')
+    parser.add_argument('--platform',choices=['macos','windows','linux'],default='macos',help='Local fixture platform; install platforms come from listing.json')
     parser.add_argument('--helper',type=Path,help='Current helper executable to validate this local archive')
     parser.add_argument('--fixture',action='store_true',help='Prepare a separate ignored local managed state; never activate it')
     parser.add_argument('--preview-state-root',type=Path,help='Seed the local draft banner into this marketplace state cache')
@@ -74,6 +74,8 @@ def main():
     archive_path=output/(stem+'.zip');descriptor_path=output/(stem+'.descriptor.json')
     immutable(archive_path,payload)
     descriptor=json.loads((PACKAGE/'listing.json').read_text())
+    if digest(args.game_assembly.read_bytes()) not in descriptor['gameFingerprints']:
+        raise ValueError('Local game assembly is not declared in listing.json')
     # Runtime identity and summary come only from the manifest; artifact facts
     # come only from the finished bytes. Listing copy cannot override either.
     descriptor.update({
@@ -81,7 +83,6 @@ def main():
         'author':manifest['author'],'description':manifest['description'],
         'version':manifest['version'],'frameworkVersion':manifest['frameworkVersion'],
         'frameworkRange':'>='+manifest['frameworkVersion']+' <'+str(int(manifest['frameworkVersion'].split('.')[0])+1)+'.0.0',
-        'gameFingerprints':[digest(args.game_assembly.read_bytes())],'platforms':[args.platform],
         'packageUrl':release_url+stem+'.zip',
         'sha256':sha,'compressedSize':len(payload),'expandedSize':sum(len(data) for data in files.values()),'fileCount':len(files),
         'screenshots':[preview_url]})

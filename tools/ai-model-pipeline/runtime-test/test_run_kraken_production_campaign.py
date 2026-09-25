@@ -75,12 +75,11 @@ class KrakenProductionRunnerTests(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 campaign.assemble(args)
 
-    def test_runner_keeps_native_actions_and_process_boundary_explicit(self):
+    def test_active_campaign_rejected_before_any_initialization(self):
+        with self.assertRaisesRegex(ValueError, 'retired'):
+            campaign.KrakenRun(argparse.Namespace())
         source = (HERE / 'run_kraken_production_campaign.py').read_text()
-        self.assertIn("'cheat': 'None', 'focus': False", source)
-        self.assertIn("'Hero turn returned before party loss; no second action issued'", source)
-        self.assertIn("'kraken-production-session-' + self.session", source)
-        self.assertNotIn('subprocess.', source)
+        self.assertNotIn("self.action(", source)
 
 
 if __name__ == '__main__':

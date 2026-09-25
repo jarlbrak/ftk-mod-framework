@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """FTK Agent MCP server.
 
-A stdio MCP server (official `mcp` Python SDK, FastMCP) that exposes four tools
-for a live Claude session to PLAY For The King and test custom content:
+A stdio MCP server (official `mcp` Python SDK, FastMCP) that exposes tools
+for an agent session to play For The King and test custom content:
 
     ftk_observe     -> GET  /state
-    ftk_act         -> POST /action
+    ftk_prepare_offline -> POST /action (prepare_offline)
+    ftk_ui          -> GET /ui
+    ftk_input       -> POST /action (native_input), poll GET /input
+    ftk_input_status -> GET /input
+    ftk_input_cancel -> POST /action (input_cancel)
     ftk_wait_for    -> poll GET /health then GET /state until a predicate holds
     ftk_screenshot  -> GET  /screenshot (raw PNG bytes)
 
@@ -27,6 +31,7 @@ import tempfile
 import time
 import urllib.error
 import urllib.request
+import uuid
 
 from mcp.server.fastmcp import FastMCP
 
@@ -270,21 +275,8 @@ def ftk_observe() -> dict:
     return snap
 
 
-@mcp.tool()
-def ftk_act(action: str, args: dict = None) -> dict:
-    """Perform a game action (the agent's primary write).
-
-    Wraps POST /action with body {action, args}. Returns {ok, error, result}.
-    The bridge validates single-player and all preconditions BEFORE the game
-    call, so a rejected action returns {ok:false, error:...} (HTTP 200), never
-    an exception.
-
-    Action set (see README for full arg shapes):
-      start_run, move_to {big,small}, snap_to {big,small},
-      set_target {enemyFid}, choose_ability {profId}, set_focus {n},
-      attack {}, resolve_turn {attackerFid?,targetFid?,profId?,hit?},
-      end_turn {}, select_choice {index}, advance {}, enter_tile {}.
-    """
+def _action(action: str, args: dict = None) -> dict:
+    """Internal transport for the three supported bridge commands; never retries."""
     payload = {"action": action, "args": args or {}}
     try:
         status, _ctype, body = _post_json("/action", payload, ACTION_TIMEOUT)
@@ -295,6 +287,86 @@ def ftk_act(action: str, args: dict = None) -> dict:
         result.setdefault("ok", False)
         result.setdefault("error", "POST /action returned HTTP %d" % status)
     return result
+
+
+@mcp.tool()
+def ftk_prepare_offline() -> dict:
+    """Configure native offline single-player from disconnected title/setup.
+
+    Does not start a run. Also affects native resume; use disposable test saves.
+    """
+    return _action("prepare_offline", {})
+
+
+@mcp.tool()
+def ftk_ui() -> dict:
+    """Observe native UI controls, labels, focus and bottom-left pixel coordinates.
+
+    centerHit indicates whether a control is the top raycast target at its center;
+    it is not a promise that a click will change game state. Inspect after input.
+    """
+    try:
+        status, _ctype, body = _get("/ui", STATE_TIMEOUT)
+        return _json_or_error(status, body)
+    except (urllib.error.URLError, OSError) as e:
+        return _bridge_unreachable(e)
+
+
+@mcp.tool()
+def ftk_input_status() -> dict:
+    """Read input capabilities and the latest sequence outcome without mutating."""
+    try:
+        status, _ctype, body = _get("/input", STATE_TIMEOUT)
+        return _json_or_error(status, body)
+    except (urllib.error.URLError, OSError) as e:
+        return _bridge_unreachable(e)
+
+
+@mcp.tool()
+def ftk_input(steps: list, request_id: str = None, wait: bool = True,
+              timeout_s: float = 20.0) -> dict:
+    """Simulate bounded native mouse/keyboard input using the game's input pipeline.
+
+    Steps: {frames, keys:[KeyCode names], buttons:[0..2], x, y, scroll, text}.
+    Coordinates are pixels from bottom-left. Each step replaces the held key and
+    button sets; omitted sets are empty. Position persists; scroll/text pulse.
+    Example click: [{"x":400,"y":300,"buttons":[0],"frames":2}, {"frames":2}].
+    Example Escape: [{"keys":["Escape"],"frames":2}, {"frames":2}].
+    A request ID deduplicates retries. No retry is performed automatically.
+    Completion means the sequence was consumed, not that gameplay succeeded.
+    """
+    if not isinstance(timeout_s, (int, float)) or not 0 < timeout_s <= 60:
+        return {"ok": False, "error": "timeout_s must be greater than 0 and at most 60"}
+    request_id = request_id or uuid.uuid4().hex
+    reply = _action("native_input", {"requestId": request_id, "steps": steps})
+    reply["requestId"] = request_id
+    if not wait or not reply.get("ok"):
+        return reply
+    accepted = reply.get("result") or {}
+    if accepted.get("state") in ("completed", "cancelled", "failed"):
+        return reply
+    deadline = time.monotonic() + timeout_s
+    while time.monotonic() < deadline:
+        snapshot = ftk_input_status()
+        result = snapshot.get("result") or {}
+        if not snapshot.get("ok"):
+            snapshot["requestId"] = request_id
+            return snapshot
+        if result.get("requestId") != request_id:
+            return {"ok": False, "requestId": request_id,
+                    "error": "latest input changed; inspect status before any retry", "snapshot": snapshot}
+        if result.get("state") not in ("queued", "running", "releasing", "cancelling"):
+            snapshot["requestId"] = request_id
+            return snapshot
+        time.sleep(0.05)
+    return {"ok": False, "timeout": True, "requestId": request_id,
+            "error": "input wait expired; sequence may still be running; inspect status or cancel"}
+
+
+@mcp.tool()
+def ftk_input_cancel() -> dict:
+    """Cancel the current sequence and release synthetic controls. Inspect afterward."""
+    return _action("input_cancel", {})
 
 
 @mcp.tool()

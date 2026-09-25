@@ -55,6 +55,7 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("precisionWeapon")] public string PrecisionWeapon;
         [JsonProperty("precisionAction")] public string PrecisionAction;
         [JsonProperty("thiefArtifact")] public string ThiefArtifact;
+        [JsonProperty("overworldAilmentImmunity")] public OverworldAilmentImmunityEntry OverworldAilmentImmunity;
         [JsonProperty("guardianBonuses")] public GuardianBonusEntry GuardianBonuses;
         [JsonProperty("icon")] public string Icon;
         [JsonProperty("apparelModels")] public ApparelModelEntry ApparelModels;
@@ -76,6 +77,10 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("guardFocusRestore")] public int GuardFocusRestore;
         [JsonProperty("guardReckoning")] public bool GuardReckoning;
         [JsonProperty("guardCleanse")] public bool GuardCleanse;
+    }
+    internal sealed class OverworldAilmentImmunityEntry
+    {
+        [JsonProperty("displayName")] public string DisplayName;
     }
     internal sealed class ApparelModelEntry
     {

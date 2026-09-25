@@ -241,6 +241,10 @@ type marketItemModifiers struct {
 	FocusCapacity int     `json:"focusCapacity"`
 }
 
+type marketAilmentImmunity struct {
+	DisplayName string `json:"displayName"`
+}
+
 type marketGuardianBonuses struct {
 	GuardHealPercent      int  `json:"guardHealPercent"`
 	FocusHealBonusPercent int  `json:"focusHealBonusPercent"`

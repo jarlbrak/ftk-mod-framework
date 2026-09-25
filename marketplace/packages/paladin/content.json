@@ -6,14 +6,17 @@
       "template": "blacksmith",
       "displayName": "Paladin",
       "guardian": true,
-      "flavor": "An oath is measured by the lives it shelters.",
+      "overworldAilmentImmunity": {
+        "displayName": "Cleansing March"
+      },
+      "flavor": "An oath is measured by the lives it shelters. Cleansing March prevents new Poison and Curse while exploring.",
       "fields": {
         "strength": 0.7,
         "intelligence": 0.4,
         "awareness": 0.6,
         "talent": 0.5,
         "speed": 0.6,
-        "vitality": 0.84,
+        "vitality": 0.8,
         "focus": 3,
         "startinggold": 3,
         "primarystat": "vitality",
@@ -431,7 +434,7 @@
       "template": "bluntWarHammer",
       "displayName": "Highward Great Hammer",
       "fields": {
-        "damage": 33,
+        "damage": 32,
         "skill": "vitality",
         "slots": 4,
         "damagegain": 1,
@@ -602,7 +605,7 @@
       "template": "bluntWarHammer",
       "displayName": "Mercy Great Hammer",
       "fields": {
-        "damage": 36,
+        "damage": 34,
         "skill": "vitality",
         "slots": 4,
         "damagegain": 1,
@@ -776,7 +779,7 @@
       "template": "bluntWarHammer",
       "displayName": "Censure Great Hammer",
       "fields": {
-        "damage": 36,
+        "damage": 34,
         "skill": "vitality",
         "slots": 4,
         "damagegain": 1,
@@ -947,7 +950,7 @@
       "template": "bluntWarHammer",
       "displayName": "Verdict Great Hammer",
       "fields": {
-        "damage": 39,
+        "damage": 37,
         "skill": "vitality",
         "slots": 4,
         "damagegain": 1,

@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "1.0.2";
+        public const string Version = "1.0.4";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -190,12 +190,24 @@ namespace FTKModFramework
             Core.Marketplace.MarketplaceRuntime.DispatchHotReloadCompletion();
             Core.HotReload.HotReloadCoordinator.Tick();
             LegacyKrakenResourceAdapterLease.PruneDestroyedOwners();
+            Core.Reporting.ReportingRuntime.Tick();
+            Core.Reporting.ReportingSubmission.Tick();
+            Core.UI.ReportingMenu.Tick();
+        }
+
+        private void OnApplicationQuit()
+        {
+            Core.Reporting.ReportingDiagnostics.Stop();
+            Core.Reporting.ReportingRuntime.Quit();
         }
 
         private void Awake()
         {
             Instance = this;
             Log = Logger;
+            Core.Reporting.ReportingDiagnostics.Start();
+            Core.Reporting.ReportingRuntime.Start();
+            Core.Reporting.ReportingSubmission.Initialize();
 
             EnableTitleScreenActivation = Config.Bind("Marketplace", "EnableTitleScreenActivation", false,
                 "Allow supported packages to activate before the first adventure. Uses separate compatible adventure saves; multiplayer is unavailable in this mode. Unsupported installations retain next-launch activation.");
@@ -447,7 +459,9 @@ namespace FTKModFramework
 
         private static LoadResult LoadDataContent()
         {
-            return Core.HotReload.HotReloadBoundary.Enabled ? Core.HotReload.HotReloadCoordinator.LoadInitial() : ContentLoader.Load(Plugin.DataContentRootPath);
+            LoadResult result = Core.HotReload.HotReloadBoundary.Enabled ? Core.HotReload.HotReloadCoordinator.LoadInitial() : ContentLoader.Load(Plugin.DataContentRootPath);
+            Core.Reporting.ReportingRuntime.SourcesReady();
+            return result;
         }
 
         private static void Run(string what, Action register)

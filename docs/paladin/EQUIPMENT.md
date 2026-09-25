@@ -1,10 +1,11 @@
 # Paladin equipment progression
 
-Status: Paladin 1.0.1 source inventory, 2026-09-22. **The published package
+Status: Paladin 1.2.0 source candidate, 2026-09-24. **The source package
 defines 51 equipment items, including twelve accessories.** All 51 registered
-in the final-package macOS trial; individual accessory views, stats, acquisition
+in the earlier 1.0.1 macOS trial; individual accessory views, stats, acquisition
 and persistence still need live coverage. See [Accessory validation](ACCESSORY-VALIDATION.md)
 and the [launch record](LAUNCH-1.0.0.md).
+The [1.2.0 balance review](BALANCE-1.2.0.md) records changed values and limits.
 Values are transcribed from the [package definitions](../../marketplace/packages/paladin/content.json).
 Accessory values remain initial tuning targets, not measured balance.
 
@@ -93,10 +94,10 @@ be included in balance comparisons, even when no custom action was authored.
 | --- | --- | --- | --- | ---: | --- |
 | Novice | `paladin_hammer_2h_novice` | Novice Great Hammer | 15 / 4 | 12 | None; native template actions |
 | Oathkeeper | `paladin_hammer_2h_oathkeeper` | Oathkeeper Great Hammer | 24 / 4 | 70 | None; native template actions |
-| Highward | `paladin_hammer_2h_highward` | Highward Great Hammer | 33 / 4 | 200 | None; native template actions |
-| Mercy | `paladin_hammer_2h_mercy` | Mercy Great Hammer | 36 / 4 | 360 | Focused ally heal becomes 12% |
-| Censure | `paladin_hammer_2h_censure` | Censure Great Hammer | 36 / 4 | 360 | Censure: 0.75 damage coefficient, Armor -6 |
-| Verdict | `paladin_hammer_2h_verdict` | Verdict Great Hammer | 39 / 4 | 360 | None; native template actions |
+| Highward | `paladin_hammer_2h_highward` | Highward Great Hammer | 32 / 4 | 200 | None; native template actions |
+| Mercy | `paladin_hammer_2h_mercy` | Mercy Great Hammer | 34 / 4 | 360 | Focused ally heal becomes 12% |
+| Censure | `paladin_hammer_2h_censure` | Censure Great Hammer | 34 / 4 | 360 | Censure: 0.75 damage coefficient, Armor -6 |
+| Verdict | `paladin_hammer_2h_verdict` | Verdict Great Hammer | 37 / 4 | 360 | None; native template actions |
 
 ## Shields: six existing items
 
@@ -199,12 +200,12 @@ trinket and necklace. These are source calculations, not observed stat panels.
 
 | Family | Existing Armor / Resistance | With new accessories | Existing VIT / SPD, before shield | With accessories VIT / SPD, before shield |
 | --- | --- | --- | --- | --- |
-| Novice | 4 / 2 | 4 / 3 | 84 / 60 | 85 / 60 |
-| Oathkeeper | 8 / 4 | 8 / 5 | 84 / 60 | 87 / 60 |
-| Highward | 12 / 7 | 12 / 10 | 84 / 60 | 86 / 60 |
-| Mercy | 14 / 10 | 15 / 15 | 90 / 60 | 90 / 61 |
-| Censure | 14 / 10 | 15 / 10 | 84 / 63 | 84 / 67 |
-| Verdict | 14 / 16 | 16 / 21 | 84 / 60 | 84 / 60 |
+| Novice | 4 / 2 | 4 / 3 | 80 / 60 | 81 / 60 |
+| Oathkeeper | 8 / 4 | 8 / 5 | 80 / 60 | 83 / 60 |
+| Highward | 12 / 7 | 12 / 10 | 80 / 60 | 82 / 60 |
+| Mercy | 14 / 10 | 15 / 15 | 86 / 60 | 86 / 61 |
+| Censure | 14 / 10 | 15 / 10 | 80 / 63 | 80 / 67 |
+| Verdict | 14 / 16 | 16 / 21 | 80 / 60 | 80 / 60 |
 
 An ordinary shield subtracts 2 Speed from either column; Last Bastion subtracts
 4. A 2H build pays neither penalty. Accessories leave authored Focus at 3;
@@ -212,21 +213,21 @@ actual maximum Focus also includes native difficulty and other modifiers.
 
 | Authored endgame loadout | Base normal hit / checks | Armor / Resistance | VIT / SPD | Distinct reason to choose it |
 | --- | --- | --- | --- | --- |
-| Mercy 1H + Mercy Aegis | 28 / 3 | 15 / 15 | 90 / 59 | 8% on-Guard heal and 10% focused-hit heal |
-| Mercy 2H | 36 / 4 | 15 / 15 | 90 / 61 | 12% focused-hit healing and larger attacks, no shield perk |
-| Censure 1H + Censure Aegis | 28 / 3 | 15 / 10 | 84 / 65 | Debuff prevention, initiative and control choices |
-| Censure 2H | 36 / 4 | 15 / 10 | 84 / 67 | Stronger Censure Armor reduction, no shield prevention |
-| Verdict 1H + Verdict Aegis | 31 / 3 | 16 / 21 | 84 / 58 | Personal magic defense, harder normal hits and retaliation |
-| Verdict 2H | 39 / 4 | 16 / 21 | 84 / 60 | Highest ordinary base hit, no shield retaliation |
+| Mercy 1H + Mercy Aegis | 28 / 3 | 15 / 15 | 86 / 59 | 8% on-Guard heal and 10% focused-hit heal |
+| Mercy 2H | 34 / 4 | 15 / 15 | 86 / 61 | 12% focused-hit healing and larger attacks, no shield perk |
+| Censure 1H + Censure Aegis | 28 / 3 | 15 / 10 | 80 / 65 | Debuff prevention, initiative and control choices |
+| Censure 2H | 34 / 4 | 15 / 10 | 80 / 67 | Stronger Censure Armor reduction, no shield prevention |
+| Verdict 1H + Verdict Aegis | 31 / 3 | 16 / 21 | 80 / 58 | Personal magic defense, harder normal hits and retaliation |
+| Verdict 2H | 37 / 4 | 16 / 21 | 80 / 60 | Highest ordinary base hit, no shield retaliation |
 
 Mixed-build check: Mercy apparel with the Censure trinket and necklace totals
-15 Armor, 10 Resistance, 90 VIT and 64 SPD before a shield. It trades five
+15 Armor, 10 Resistance, 86 VIT and 64 SPD before a shield. It trades five
 Resistance relative to full authored Mercy for three Speed, keeping Armor and
 Vitality unchanged. The choice should remain readable without equipping a full set.
 
-Mercy apparel reaches 90 Vitality before outside bonuses. Apprentice adds five
-points, already reaching the native 95-point cap. Its new accessories
-therefore add defense and Speed instead of more Vitality. The ceiling and
+Mercy apparel reaches 86 Vitality before outside bonuses. Apprentice adds five
+points, reaching 91, below the native 95-point cap. Its accessories retain
+defense and Speed instead of adding further Vitality. The ceiling and
 penalty ordering are recorded in [Native baseline](NATIVE-BASELINE.md). Verdict's 21 Resistance is another explicit playtest concern; compare
 physical and magical enemies and native accessory alternatives.
 

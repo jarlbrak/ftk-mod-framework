@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
-from record_case import Recorder, guard, action_request, verify_action, kill_fixture_handoff
+from record_case import Recorder, guard, verify_action, kill_fixture_handoff
 
 
 def state():
@@ -65,7 +65,7 @@ class RecordingTests(unittest.TestCase):
     def test_invalid_timeouts_rejected_before_filesystem(self):
         for value in (float('nan'),float('inf'),float('-inf'),0,-1):
             for field in ('operation_timeout','capture_timeout'):
-                args=SimpleNamespace(port=8788,operation_timeout=40,capture_timeout=180)
+                args=SimpleNamespace(action="observe",port=8788,operation_timeout=40,capture_timeout=180)
                 setattr(args,field,value)
                 with self.subTest(field=field,value=value):
                     with self.assertRaises(ValueError):Recorder(args)
@@ -76,17 +76,14 @@ class RecordingTests(unittest.TestCase):
         for target in (None,{'photonId':-2,'turnIndex':0}):
             with self.assertRaises(RuntimeError):
                 verify_action('attack',{'ok':True,'result':{'committed':'Attack','target':target}},fid)
-        self.assertEqual(action_request('pass',fid),('end_turn',{}))
 
-    def test_explicit_action_mapping(self):
-        fid={'photonId':-1,'turnIndex':0}
-        self.assertEqual(action_request('attack',fid),('combat_turn',{'cheat':'None','focus':False,'targetFid':fid}))
-        self.assertEqual(action_request('attack',fid,True),('combat_turn',{'cheat':'None','focus':True,'targetFid':fid}))
-        self.assertEqual(action_request('kill-fixture')[1]['cheat'],'KillSingle')
-        verify_action('pass',{'ok':True,'result':{'ended':'combat'}})
-        verify_action('attack',{'ok':True,'result':{'committed':'Attack(focus)','target':fid}},fid,True)
-        with self.assertRaises(RuntimeError):verify_action('attack',{'ok':True,'result':{'committed':'KillSingle'}})
-        with self.assertRaises(RuntimeError):verify_action('attack',{'ok':True,'result':{'committed':'Attack','target':fid}},fid,True)
+
+    def test_retired_actions_rejected_before_initialization(self):
+        for action in ('pass', 'attack', 'kill-fixture', None):
+            with self.subTest(action=action), patch('record_case.Runner.__init__') as parent:
+                with self.assertRaisesRegex(ValueError, 'retired'):
+                    Recorder(SimpleNamespace(action=action))
+                parent.assert_not_called()
 
     def test_motion_evidence_capture_request_is_opt_in(self):
         renderer={'ownerInstanceId':1,'instanceId':2,'celInstanceId':3,'rendererPath':'body',
@@ -120,7 +117,7 @@ class RecordingTests(unittest.TestCase):
         combat['enemies'][0].update({'hp':0,'alive':True})
         self.assertEqual(kill_fixture_handoff(s,{'photonId':-1,'turnIndex':0})['status'],'stuck_signature')
 
-    def run_mock(self,folder,action_error=None,first_error=None,capture_error=None,changed=False,action='attack',final_state=None):
+    def run_mock(self,folder,action_error=None,first_error=None,capture_error=None,changed=False,action='observe',final_state=None):
         runner=object.__new__(Recorder);runner.a=SimpleNamespace(enemy='probe',renderer_path='body',action=action)
         runner.output=Path(folder);runner.profile={'renderers':[{'rendererPath':'body','glbFile':'probe.glb'}]}
         renderer={'ownerInstanceId':1,'instanceId':2,'celInstanceId':3,'celRelativeRendererPath':'body','rendererPath':'body',
@@ -136,12 +133,13 @@ class RecordingTests(unittest.TestCase):
         runner.collect_capture=Mock(side_effect=capture_error,return_value={'frames':120})
         return runner,runner.record()
 
-    def test_uncertain_action_never_retried_preserves_capture(self):
+    def test_observe_never_submits_an_action(self):
         with tempfile.TemporaryDirectory() as folder:
-            runner,result=self.run_mock(folder,action_error=TimeoutError('HTTP execution uncertain'))
-            self.assertFalse(result['ok']);self.assertEqual(runner.action.call_count,1)
-            self.assertEqual(runner.collect_capture.call_count,1);self.assertEqual(result['capture']['frames'],120)
-            self.assertTrue((Path(folder)/'result.json').exists())
+            runner,result=self.run_mock(folder)
+            self.assertTrue(result['ok'])
+            runner.action.assert_not_called()
+            runner.collect_capture.assert_called_once()
+            self.assertEqual(result['status'], 'recorded_observation_frames')
 
     def test_changed_identity_withholds_action(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -156,7 +154,7 @@ class RecordingTests(unittest.TestCase):
     def test_partial_capture_is_not_success(self):
         with tempfile.TemporaryDirectory() as folder:
             runner,result=self.run_mock(folder,capture_error=RuntimeError('partial capture'))
-            self.assertFalse(result['ok']);self.assertEqual(runner.action.call_count,1)
+            self.assertFalse(result['ok']);runner.action.assert_not_called()
             self.assertEqual(result['status'],'partial_or_uncertain')
 
     def test_happy_capture_is_recorded_not_visual_verdict(self):
@@ -164,16 +162,12 @@ class RecordingTests(unittest.TestCase):
             runner,result=self.run_mock(folder)
             self.assertTrue(result['ok']);self.assertIn('No visual acceptance',result['note'])
 
-    def test_kill_fixture_records_loot_handoff_without_a_second_action(self):
-        with tempfile.TemporaryDirectory() as folder:
-            final=state();combat=final['combat']
-            combat.update({'heroTurnReady':False,'liveEnemies':0,'winningPlayerFid':{'photonId':1,'turnIndex':0},'stuck':False})
-            combat['enemies'][0].update({'hp':0,'alive':False})
-            runner,result=self.run_mock(folder,action='kill-fixture',final_state=final)
-            self.assertTrue(result['ok'])
-            self.assertEqual(result['killFixtureHandoff']['status'],'victory_pending_native_loot')
-            runner.action.assert_called_once_with('combat_turn',{'cheat':'KillSingle','focus':False,'targetFid':{'photonId':-1,'turnIndex':0}})
-            self.assertIn('awaiting loot',result['note'])
+    def test_retired_action_stops_before_capture_even_without_constructor(self):
+        runner=object.__new__(Recorder)
+        runner.a=SimpleNamespace(action='kill-fixture')
+        runner.check_inputs=Mock();runner.begin_capture=Mock();runner.action=Mock()
+        with self.assertRaisesRegex(ValueError, 'retired'): runner.record()
+        runner.check_inputs.assert_not_called();runner.begin_capture.assert_not_called();runner.action.assert_not_called()
 
 
 if __name__=='__main__':unittest.main()

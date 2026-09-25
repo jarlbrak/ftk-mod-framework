@@ -19,9 +19,25 @@ namespace FTKModFramework.Core
         {
             try
             {
-                if (!GuardianRuntime.IsGuardianClass((int)_characterType) || __instance.m_ClassAbility == null) return;
-                __instance.m_ClassAbility.text = GuardianEquipmentDescription.Append(
-                    __instance.m_ClassAbility.text, GuardianEquipmentDescription.ClassRules);
+                int classId = (int)_characterType;
+                if (__instance.m_ClassAbility == null) return;
+                bool guardian = GuardianRuntime.IsGuardianClass(classId);
+                bool cleansing = OverworldAilmentImmunity.IsRegistered(classId);
+                if (!guardian && !cleansing) return;
+                if (guardian && (__instance.m_ClassAbility.text == null ||
+                    __instance.m_ClassAbility.text.IndexOf(GuardianEquipmentDescription.ClassRules,
+                        StringComparison.Ordinal) < 0))
+                    __instance.m_ClassAbility.text = GuardianEquipmentDescription.Append(
+                        __instance.m_ClassAbility.text, GuardianEquipmentDescription.ClassRules);
+                if (cleansing)
+                {
+                    string rule = OverworldAilmentImmunity.DisplayName(classId) +
+                        ": immune to\nPoison/Curse while exploring.";
+                    if (__instance.m_ClassAbility.text == null ||
+                        __instance.m_ClassAbility.text.IndexOf(rule, StringComparison.Ordinal) < 0)
+                        __instance.m_ClassAbility.text = GuardianEquipmentDescription.Append(
+                            __instance.m_ClassAbility.text, rule);
+                }
                 GuardianClassLayoutState state = __instance.GetComponent<GuardianClassLayoutState>();
                 if (state == null) state = __instance.gameObject.AddComponent<GuardianClassLayoutState>();
                 state.Arrange(__instance);

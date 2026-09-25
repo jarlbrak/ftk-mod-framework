@@ -10,6 +10,7 @@ to the underlying design and validation records.
 
 - [Install the launcher and framework](INSTALL.md)
 - [Find and manage mods](MARKETPLACE.md)
+- [Report a problem and understand diagnostic sharing](REPORTING.md)
 - [See what 1.0.1 shipped](releases/v1.0.1.md)
 
 ## Make a mod
@@ -27,6 +28,8 @@ to the underlying design and validation records.
 - [Contributing guide](../CONTRIBUTING.md)
 - [Framework release procedure](RELEASING.md)
 - [Agent instructions and reusable skills](AI-NATIVE.md)
+- [In-game reporting feasibility and outstanding proof gates](REPORTING-FEASIBILITY.md)
+- [Internal reporting contract and synthetic fixtures](REPORTING-CONTRACT.md)
 
 Design records, validation matrices and older release notes under `docs/` are
 retained as evidence for their specific versions. They are not a current

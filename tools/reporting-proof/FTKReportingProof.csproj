@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>FTKReportingProof</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);NU1701</NoWarn>
+    <FtkManagedDir Condition="'$(FtkManagedDir)' == ''">$(HOME)/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed</FtkManagedDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="Assembly-CSharp" Publicize="true" Private="false"><HintPath>$(FtkManagedDir)/Assembly-CSharp.dll</HintPath></Reference>
+    <Reference Include="Assembly-CSharp-firstpass" Publicize="true" Private="false"><HintPath>$(FtkManagedDir)/Assembly-CSharp-firstpass.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json" Private="false"><HintPath>$(FtkManagedDir)/Newtonsoft.Json.dll</HintPath></Reference>
+    <Reference Include="$(FtkManagedDir)/UnityEngine*.dll" Private="false" />
+    <Compile Remove="steam-guard/**/*.cs;tests/**/*.cs" />
+  </ItemGroup>
+</Project>

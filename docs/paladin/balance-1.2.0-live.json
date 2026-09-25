@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-25",
+  "platform": "macos",
+  "scope": "Exact package on published framework, native single-player input, natural starter fight and same-version fresh-process resume. No matched campaign balance claim.",
+  "archiveSha256": "c9d9e7c31ad7fa69f6aee08bc1bf00ca104c9f0796cace7b5b2094404710bf39",
+  "frameworkSha256": "f2ab444bd389c97f64786bc8ba7e8c77c010b2c4aa3edb778d5e4a6c866fce7f",
+  "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "registration": {
+    "registered": 54,
+    "expected": 54,
+    "contentErrors": 0,
+    "contentWarnings": 0
+  },
+  "party": {
+    "difficulty": "Journeyman",
+    "level": 0,
+    "Paladin": {
+      "vitality": 80,
+      "hp": 33,
+      "focus": 3
+    },
+    "Blacksmith": {
+      "hp": 33,
+      "focus": 3
+    },
+    "Monk": {
+      "hp": 31,
+      "focus": 3
+    }
+  },
+  "combat": {
+    "kind": "natural encounter, solo Paladin",
+    "enemies": "Two level-0 Beastman Warriors, each 10 HP",
+    "normalAttackPreview": {
+      "damage": 10,
+      "perSlotAccuracy": 80
+    },
+    "normalAttacks": 4,
+    "focusSpent": 1,
+    "endingHp": 19,
+    "maxHp": 33,
+    "loot": [
+      "10 Gold",
+      "Makeshift Mace"
+    ],
+    "endingGold": 13,
+    "endingXp": 8,
+    "result": "native victory and loot collection"
+  },
+  "freshProcessResume": {
+    "status": "passed-on-retry",
+    "paladinHp": 19,
+    "maxHp": 33,
+    "focus": 2,
+    "gold": 13,
+    "xp": 8,
+    "protectedDisposableSave": true
+  },
+  "restartFailure": {
+    "status": "one observed native Mono SIGABRT before resume selection",
+    "stackAnchor": "mono_jit_compile_method_with_opt -> FTKModFramework.Core.Reporting.ReportingRuntime.Run",
+    "recovery": "Unchanged binary/package retry reached title and resumed disposable save. No workaround or framework patch applied.",
+    "limit": "Cause not established; not attributed to Paladin content."
+  },
+  "acquisitionObservation": {
+    "registeredEquipment": 51,
+    "kind": "Read-only runtime category-cache inspection; no ordinary endgame acquisition claim"
+  },
+  "evidence": {
+    "paladin-sheet.json": "732c01056530f8eb80b426bbf8782ece8dae260ab783cb444782aebf456b4001",
+    "starter-attack-preview.json": "b9ec433f0fdc377137a7ca03c853a46f16e049568112762c03894e9a2c13b539",
+    "solo-turn1-guardian.json": "43e326ed2e64d9eccd6d09e5013290e640520944891cbd120137264b7aa5a252",
+    "solo-turn3-guardian.json": "18843c325e6f3039c5ad98b91c6cc29b5c59aa4d4f8145ae17068526ebf004a1",
+    "solo-victory-state.json": "39bb4a2f48821e1e31d5a43a20a459ed806cfd47b5ade2a8b40d0ba04b1bd3b6",
+    "resumed-state.json": "ee2279556cd54908537ebe5355fe540df71a59af79a8edf527e49f9e7e2c6418",
+    "resume-acquisition.json": "3992d77442b56fb8afbc8e6572ff032ffd8f8b39beb6917511f5bd946f6fc609",
+    "party-selected.png": "96ccf056ffbfb09b578ce1e24a1df6e36077934b3263f754298dce8d50427be6",
+    "solo-victory.png": "3f37b3624218bd065dee73641a2c0c6d3f97be8db50225c9ac95524ba6bae1f8",
+    "resumed-world.png": "316e84315b0f9f51b9d31de41d792946ffa6d2019e036eb9524862712b050cfb",
+    "first-game.log": "ba0310ab1a357f29ef8d512189fd8d0c0157c930d0aacbca5e8100c3a2fb0f9c"
+  },
+  "unverified": [
+    "Matched multi-class combat at equivalent gear and Focus budgets",
+    "Endgame equipped weapon behavior and campaign balance",
+    "Guard, focused healing and rescue repeated on these exact bytes",
+    "Online co-op",
+    "Windows and Linux gameplay",
+    "Cross-version saves"
+  ]
+}

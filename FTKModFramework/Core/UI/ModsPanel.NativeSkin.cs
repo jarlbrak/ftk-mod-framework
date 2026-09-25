@@ -20,7 +20,7 @@ namespace FTKModFramework.Core.UI
 
         // Read the inactive native screen too: opening Mods must not depend on visiting New Game.
         // Only fresh framework objects receive these shared, read-only asset references.
-        private static void CaptureNativeSkin()
+        internal static void CaptureNativeSkin()
         {
             _nativeMenu = uiStartGame.Instance == null ? null : uiStartGame.Instance.m_GameConfig;
             if (_nativeMenu == null)
@@ -41,7 +41,7 @@ namespace FTKModFramework.Core.UI
             CaptureNativePanels();
         }
 
-        private static void StyleNativePanel(GameObject target, bool parchment, bool previewFrame = false)
+        internal static void StyleNativePanel(GameObject target, bool parchment, bool previewFrame = false)
         {
             Image image = target.GetComponent<Image>();
             if (image == null) image = target.AddComponent<Image>();
@@ -67,7 +67,7 @@ namespace FTKModFramework.Core.UI
             DisableOldBorder(target);
         }
 
-        private static void StyleNativePlaque(GameObject target, bool compact = false)
+        internal static void StyleNativePlaque(GameObject target, bool compact = false)
         {
             Image image = target.GetComponent<Image>();
             if (image == null) image = target.AddComponent<Image>();
@@ -78,7 +78,7 @@ namespace FTKModFramework.Core.UI
             DisableOldBorder(target);
         }
 
-        private static void StyleNativeButton(Button target, bool adventureRow, bool selected = false)
+        internal static void StyleNativeButton(Button target, bool adventureRow, bool selected = false)
         {
             Button donor = adventureRow ? _nativeAdventureButton : _nativeActionButton;
             Image image = target.GetComponent<Image>();
@@ -121,7 +121,7 @@ namespace FTKModFramework.Core.UI
             }
         }
 
-        private static void StyleNativeText(Text target, bool heading, bool onDark = true)
+        internal static void StyleNativeText(Text target, bool heading, bool onDark = true)
         {
             ApplyNativeText(target, heading ? _nativeHeadingText : _nativeBodyText, onDark);
         }

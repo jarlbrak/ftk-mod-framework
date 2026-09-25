@@ -28,13 +28,13 @@ class BusyTests(unittest.TestCase):
                 with self.assertRaises(urllib.error.HTTPError):runner().state()
                 self.assertEqual(transport.call_count,1)
     def test_nonstate_or_payload_never_retry(self):
-        for path,payload in [('/action',{'action':'start_run'}),('/state',{}),('/other',None)]:
+        for path,payload in [('/action',{'action':'native_input'}),('/state',{}),('/other',None)]:
             with patch('run_case.urllib.request.urlopen',side_effect=failure()) as transport:
                 with self.assertRaises(urllib.error.HTTPError):runner().http(path,payload)
                 self.assertEqual(transport.call_count,1)
     def test_uncertain_action_timeout_never_retry(self):
         with patch('run_case.urllib.request.urlopen',side_effect=TimeoutError('uncertain')) as transport:
-            with self.assertRaises(TimeoutError):runner().action('enter_dungeon')
+            with self.assertRaises(TimeoutError):runner().action('native_input', {'requestId':'test','steps':[{'frames':1}]})
             self.assertEqual(transport.call_count,1)
     def test_fixed_deadline_stops_busy(self):
         with patch('run_case.time.monotonic',side_effect=[0,0,2.1,2.1]),patch('run_case.urllib.request.urlopen',side_effect=failure()) as transport:

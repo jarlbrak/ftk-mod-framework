@@ -509,6 +509,10 @@ namespace FTKModFramework.Core.Data
                 if (!string.IsNullOrEmpty(c.Entry.ThiefArtifact) &&
                     (c.Kind != "weapon" || !Content.SetThiefArtifact((FTK_weaponStats2)c.Row, c.Entry.ThiefArtifact)))
                     throw new ArgumentException("thiefArtifact requires a registered physical precision weapon");
+                if (c.Entry.OverworldAilmentImmunity != null &&
+                    (c.Kind != "class" || !Content.AddOverworldAilmentImmunity((FTK_playerGameStart)c.Row,
+                        c.Entry.OverworldAilmentImmunity.DisplayName)))
+                    throw new ArgumentException("overworldAilmentImmunity requires a registered custom class");
                 if (c.Entry.GuardianBonuses != null)
                 {
                     if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("guardianBonuses requires equipment");

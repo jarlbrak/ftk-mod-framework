@@ -214,6 +214,14 @@ namespace FTKModFramework.Core.HotReload
             for (int i = 0; i < classes.m_Array.Length; i++)
                 if ((int)FTK_playerGameStart.GetEnum(classes.m_Array[i].m_ID) != i)
                     throw new InvalidOperationException("Class identity differs from its array position.");
+            // Capability ownership follows the selected custom classes, regardless of package name.
+            int immunityClasses = 0;
+            Dictionary<string, int> customClasses;
+            if (ContentRegistry.CustomIds.TryGetValue(typeof(FTK_playerGameStartDB), out customClasses))
+                foreach (int classId in customClasses.Values)
+                    if (OverworldAilmentImmunity.IsRegistered(classId)) immunityClasses++;
+            if (immunityClasses != OverworldAilmentImmunity.ReloadClassCount)
+                throw new InvalidOperationException("Unexpected overworld immunity registration.");
             foreach (KeyValuePair<Type, Dictionary<string, int>> table in ContentRegistry.CustomIds)
             {
                 GEDataArrayBase db = TableManager.Instance.Get(table.Key);

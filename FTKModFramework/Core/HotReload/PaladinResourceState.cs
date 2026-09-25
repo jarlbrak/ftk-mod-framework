@@ -43,6 +43,7 @@ namespace FTKModFramework.Core.HotReload
             result["rendererLeases"] = RendererLeaseCount;
             result["rendererResources"] = RendererResourceCount;
             result["guardianClasses"] = GuardianRuntime.ReloadClassCount;
+            result["overworldAilmentClasses"] = OverworldAilmentImmunity.ReloadClassCount;
             result["guardianEquipment"] = GuardianRuntime.ReloadEquipmentCount;
             result["guardianTransientEmpty"] = GuardianRuntime.ReloadTransientStateEmpty;
             result["paths"] = PackageModelPaths.ReloadPathCount;
@@ -77,6 +78,7 @@ namespace FTKModFramework.Core.HotReload
             try
             {
                 snapshot.Restore.Add(GuardianRuntime.SuspendForReload());
+                snapshot.Restore.Add(OverworldAilmentImmunity.SuspendForReload());
                 snapshot.Restore.Add(ItemModelRegistry.SuspendForReload());
                 snapshot.Restore.Add(ItemApparelRegistry.SuspendForReload());
                 snapshot.Restore.Add(PackageModelPaths.SuspendForReload());

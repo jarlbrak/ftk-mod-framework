@@ -1,6 +1,6 @@
 # Paladin combat contract
 
-Status: current implemented rules, with evidence limits, 2026-09-22. New accessories in [Equipment](EQUIPMENT.md) do not change these rules. Read
+Status: current implemented rules, with evidence limits, 2026-09-24. The 1.2.0 balance candidate changes class Vitality and four weapon damage values; see [balance review](BALANCE-1.2.0.md). New accessories in [Equipment](EQUIPMENT.md) do not change these rules. Read
 [Design](DESIGN.md) for the class promise and [Artifacts](ARTIFACTS.md) for the
 three optional legendary effects.
 
@@ -106,8 +106,8 @@ Its authored `m_FullSlots` is false; do not describe it as perfect-only.
 
 ## Counterplay and balance checks
 
-At base 84 Vitality, independent unfocused perfect chances are about 59.3% for
-three checks, 49.8% for four and 41.8% for five. These are illustrative
+At base 80 Vitality, independent unfocused perfect chances are about 51.2% for
+three checks, 41.0% for four and 32.8% for five. These are illustrative
 probabilities, not a live damage model: native proficiency accuracy, modifiers,
 rounding and enemy defenses still apply. Kingsfall's fifth check is a real
 reliability cost despite its larger damage value.

@@ -1,5 +1,9 @@
 # Paladin paper-design native baseline
 
+Historical 2026-09-22 evidence for the pre-1.2.0 values. See the
+[1.2.0 balance review](BALANCE-1.2.0.md) for fresh class and weapon comparisons
+and the current Mercy Vitality total.
+
 Authority: installed original FTK `Assembly-CSharp.dll`, SHA-256
 `94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8`.
 The 2026-09-22 read-only audit used fresh ILSpy declarations/methods and matching

@@ -68,14 +68,52 @@ def validate_accessories(by_id):
     ]
 
 
+def validate_balance(by_id):
+    """Protect the role tradeoffs, not a duplicate table of tuning constants."""
+    stats = by_id['paladin']['fields']
+    # Vitality buys both hammer accuracy and health. Keep it within the freshly
+    # inspected native Blacksmith ceiling; slower initiative pays for support.
+    assert stats['vitality'] <= 0.80
+    assert stats['speed'] <= 0.60
+    assert stats['focus'] == 3
+    for family in ['novice', 'oathkeeper', 'highward', 'mercy', 'censure', 'verdict']:
+        one = by_id['paladin_hammer_1h_' + family]['fields']
+        two = by_id['paladin_hammer_2h_' + family]['fields']
+        assert one['damage'] < two['damage'], family
+        assert one['slots'] < two['slots'], family
+    for hands in ['1h', '2h']:
+        damage = lambda family: by_id['paladin_hammer_' + hands + '_' + family]['fields']['damage']
+        assert damage('novice') < damage('oathkeeper') < damage('highward')
+        assert damage('highward') <= damage('mercy') == damage('censure') < damage('verdict')
+    # These four-check weapons keep native control actions. Support branches
+    # must not exceed the comparable five-check native hammer's base damage.
+    assert by_id['paladin_hammer_2h_highward']['fields']['damage'] <= 32
+    for family in ['mercy', 'censure']:
+        assert by_id['paladin_hammer_2h_' + family]['fields']['damage'] <= 34
+    assert by_id['paladin_hammer_2h_verdict']['fields']['damage'] < 38
+    mercy_vitality = stats['vitality'] + sum(
+        by_id['paladin_' + slot + '_mercy'].get('modifiers', {}).get('vitality', 0)
+        for slot in ['armor', 'helmet', 'boots', 'trinket', 'necklace'])
+    assert mercy_vitality + 0.05 < 0.95  # Leave room below the Apprentice cap.
+    # Kingsfall's secured normal Guard/strike pair must not outdamage two
+    # Verdict strikes; mitigation and healing are its reason to spend that turn.
+    kingsfall = by_id['paladin_hammer_2h_kingsfall']['fields']
+    verdict = by_id['paladin_hammer_2h_verdict']['fields']
+    assert kingsfall['slots'] > verdict['slots']
+    for level in [0, 6, 8, 10]:
+        assert 1.5 * (kingsfall['damage'] + level * kingsfall['damagegain']) < 2 * (verdict['damage'] + level * verdict['damagegain'])
+
+
 def main():
     document=json.loads((PACKAGE/'content.json').read_text())
     entries=document['entries'];by_id={entry['id']:entry for entry in entries}
     assert len(entries)==len(by_id)==54
     assert {kind:sum(e['kind']==kind for e in entries) for kind in ['class','weapon','item','proficiency']}=={'class':1,'weapon':14,'item':37,'proficiency':2}
     validate_accessories(by_id)
+    validate_balance(by_id)
     # Inherit the template's complete native appearance list and unlock checks.
     assert by_id['paladin']['template']=='blacksmith'
+    assert by_id['paladin']['overworldAilmentImmunity'] == {'displayName': 'Cleansing March'}
     assert 'm_Skinsets' not in by_id['paladin']['fields']
     assert 'playerModels' not in by_id['paladin']
     refs=[]
@@ -176,7 +214,7 @@ def main():
     for name,record in receipt['files'].items():assert hashlib.sha256((PACKAGE/name).read_bytes()).hexdigest()==record['sha256'],name
     assert set(refs)<=set(receipt['files'])
     assert all(path.suffix in ['.png','.glb'] for path in (PACKAGE/'assets').iterdir())
-    print('PASS: 54 unique rows, 51 equipment items, six-family progression, 12 accessories, three Artifact items, original asset hashes, renderer paths and references. No live-game claims.')
+    print('PASS: balance tradeoffs, Cleansing March class declaration, 54 unique rows, 51 equipment items, six-family progression, 12 accessories, three Artifact items, original asset hashes, renderer paths and references. No live-game claims.')
 
 
 if __name__=='__main__':main()

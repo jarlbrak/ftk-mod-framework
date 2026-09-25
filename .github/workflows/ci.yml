@@ -71,6 +71,10 @@ jobs:
           dotnet-version: '10.0.x'
       - name: Player mod discovery and enable-state checks
         run: dotnet run --project FTKModFramework/Tests/PlayerMods/PlayerMods.csproj -c Release
+      - name: Native input and main-thread queue checks (no game required)
+        run: |
+          dotnet run --project FTKModFramework/Tests/NativeInput -c Release
+          dotnet run --project FTKModFramework/Tests/AgentQueue -c Release
       - name: Guardian and equipment capability checks (no game required)
         shell: bash
         run: |
@@ -80,11 +84,23 @@ jobs:
           done
       - name: Run the game-free unit tests
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
+      - name: Reporting capture, recovery and submission checks (no game required)
+        shell: bash
+        run: |
+          set -euo pipefail
+          for project in ReportingDraft ReportingMetadata ReportingRuntime ReportingSession ReportingDiagnostics ReportingSubmission; do
+            dotnet run --project "FTKModFramework/Tests/$project/$project.csproj" -c Release
+          done
+          dotnet run --project FTKModFramework/Tests/ReportingRuntime/ReportingRuntime.csproj -c Release -- busy
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Install model pipeline dependencies
         run: python3 -m pip install -r tools/ai-model-pipeline/requirements.txt
+      - name: Native input client and legacy retirement checks
+        run: |
+          python3 -m unittest discover -s harness/tests -v
+          python3 -m unittest discover -s tools/ai-model-pipeline/runtime-test -p 'test_*.py'
       - name: Model pipeline tests (local-only tests skip without extracted game data)
         run: python3 -m unittest discover -s tools/ai-model-pipeline -p 'test_*.py'
 
