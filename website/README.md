@@ -28,6 +28,9 @@ requires immutable public download hashes to match and verifies manifest identit
 framework. Review authored guides when mechanics change; regenerated cards alone cannot update
 explanations. The guides are scoped to Paladin 1.3.0 and Thief 1.0.0.
 
+`src/data/catalog.ts` applies author-approved website wording to the immutable catalog snapshot.
+Thief 1.0.0 is labeled as a release; its compatibility limitations and package identity are retained.
+
 No workflow creates a GitHub release or changes the repository's latest release. Mod release
 publishing must continue to use `--latest=false`. Framework download links are explicitly pinned.
 

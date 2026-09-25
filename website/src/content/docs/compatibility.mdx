@@ -2,11 +2,11 @@
 title: Compatibility
 description: Published versions, framework requirements, tested platforms, and save or multiplayer limitations.
 ---
-import catalog from '../../data/catalog.json';
+import catalog from '../../data/catalog';
 
 ## Know your versions
 
-Framework and mods have separate release numbers. This site documents **framework 1.2.0**, **Paladin 1.3.0**, **Thief 1.0.0 playtest**, and **Possum 1.0.0**. These are published downloads. A playtest label means available for testing, not fully validated. No unreleased features are presented as available.
+Framework and mods have separate release numbers. This site documents **framework 1.2.0**, **Paladin 1.3.0**, **Thief 1.0.0**, and **Possum 1.0.0**. These are published downloads. No unreleased features are presented as available.
 
 <table><thead><tr><th>Mod</th><th>Published version</th><th>Framework range</th><th>Listed platforms</th><th>Dependencies</th></tr></thead><tbody>{catalog.packages.map(p=><tr><td>{p.name}</td><td>{p.version}</td><td>{p.frameworkRange}</td><td>{p.platforms.join(', ')}</td><td>{p.dependencies.length?'See package':'None'}</td></tr>)}</tbody></table>
 
