@@ -1,9 +1,9 @@
 # Paladin 1.2.0 balance review
 
-Status: unpublished tuning candidate, 2026-09-24. This is a native-data-backed
+Status: Paladin 1.2.0 tuning release, 2026-09-25. This is a native-data-backed
 balance pass with calculated tradeoffs, not a completed campaign comparison.
 The [source package](../../marketplace/packages/paladin/content.json) is the
-runtime authority. The published catalog and earlier archive bytes are unchanged.
+runtime authority. The production catalog selects 1.2.0; earlier published archive bytes are unchanged.
 
 ## Role and decision
 
