@@ -1,0 +1,29 @@
+---
+title: Compatibility
+description: Published versions, framework requirements, tested platforms, and save or multiplayer limitations.
+---
+import catalog from '../../data/catalog.json';
+
+## Know your versions
+
+Framework and mods have separate release numbers. This site documents **framework 1.2.0**, **Paladin 1.3.0**, **Thief 1.0.0 playtest**, and **Possum 1.0.0**. These are published downloads. A playtest label means available for testing, not fully validated. No unreleased features are presented as available.
+
+<table><thead><tr><th>Mod</th><th>Published version</th><th>Framework range</th><th>Listed platforms</th><th>Dependencies</th></tr></thead><tbody>{catalog.packages.map(p=><tr><td>{p.name}</td><td>{p.version}</td><td>{p.frameworkRange}</td><td>{p.platforms.join(', ')}</td><td>{p.dependencies.length?'See package':'None'}</td></tr>)}</tbody></table>
+
+## Game and platform
+
+Use the original For The King, not its sequel. Current listings target the verified macOS game build. Windows and Linux launcher downloads do not establish that these mods have been tested in gameplay on those platforms. Matching a version number alone does not establish support for a different game build.
+
+<details><summary>Supported game build fingerprint</summary><p>All three current listings declare game assembly SHA-256 <code>94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8</code>. This identifies the tested build; no game assembly is distributed here.</p></details>
+
+## Saves and multiplayer
+
+Online co-op is unverified. Matching versions and mod sets is necessary preparation, not proof of compatibility. Existing-save migration is not a promised feature. Restore a save's original mod set or begin a new run if you change content. Removing a mod does not modify the save to remove that dependency.
+
+## Per-mod limits
+
+{catalog.packages.map(p=><section><h3>{p.name} {p.version}</h3><ul>{p.requirements.map(r=><li>{r}</li>)}</ul></section>)}
+
+## Published versus preview
+
+Published pages describe the immutable catalog packages named above. Future previews must carry a separate **Preview / not published** label and must never replace published stat tables. Selecting the launcher's Preview channel is a separate framework update choice. Keep it out of an ongoing run unless you intend to test that release.

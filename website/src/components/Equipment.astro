@@ -1,0 +1,9 @@
+---
+import data from '../data/paladin.json';
+const labels:Record<string,string>={guardHealPercent:'Guard healing',focusHealBonusPercent:'Focused-hit healing bonus',retaliationDamage:'Retaliation damage',wardDebuffs:'Guard ailment ward',guardFocusRestore:'Guard Focus restoration',guardReckoning:'Reckoning',guardCleanse:'Guard cleanse'};
+const stat=(key:string,value:any)=>`${key[0].toUpperCase()+key.slice(1)} ${['vitality','speed','strength','intelligence','awareness','talent'].includes(key)?Math.round(Number(value)*100):value}`;
+const gear=data.entries.filter(e=>['weapon','item'].includes(e.kind));
+const families=['novice','oathkeeper','highward','mercy','censure','verdict','artifacts'];
+---
+<p>Generated from the hash-verified published Paladin {data.version} archive. These are declared base values and modifiers; inherited template properties and combat modifiers can affect final in-game values.</p>
+{families.map(family=> <section><h2 id={family}>{family[0].toUpperCase()+family.slice(1)}</h2><div class="table-scroll" tabindex="0" role="region" aria-label={`${family} equipment table`}><table><thead><tr><th scope="col">Equipment</th><th scope="col">Loot level</th><th scope="col">Base damage / rolls</th><th scope="col">Stat modifiers</th><th scope="col">Guardian perk</th><th scope="col">Base gold</th></tr></thead><tbody>{gear.filter(e=>family==='artifacts'?e.fields.rarity==='artifact':e.id.endsWith('_'+family)).map(e=><tr><th scope="row">{e.displayName}</th><td>{e.fields.minlevel}–{e.fields.maxlevel}</td><td>{e.fields.damage?`${e.fields.damage} / ${e.fields.slots}`:'N/A'}</td><td>{Object.entries(e.modifiers??{}).map(([k,v])=>stat(k,v)).join(', ')||'None declared'}</td><td>{Object.entries(e.guardianBonuses??{}).map(([k,v])=>`${labels[k]??k}${v===true?'':`: ${v}${k.endsWith('Percent')?'%':''}`}`).join(', ')||'None'}</td><td>{e.fields.goldvalue}</td></tr>)}</tbody></table></div></section>)}
