@@ -154,7 +154,8 @@ namespace FTKModFramework.Core
                 !ReckoningAttack(guardian, enemy, proficiency, guardian.m_EventListener.m_Weapon.m_WeaponType,
                     guardian.m_SpecialAttack)) return;
             float multiplier = proficiency == FTK_proficiencyTable.ID.None ? 1f : FTK_proficiencyTableDB.Get(proficiency).m_DmgMultiplier;
-            int damage = FTKUtil.RoundToInt(owner.CombatCow.m_CharacterStats.GetWeaponMaxDamage(enemy.m_EnemyCombat.m_RaceTypes) * multiplier * 1.5f);
+            int damage = FTKUtil.RoundToInt(owner.CombatCow.m_CharacterStats.GetWeaponMaxDamage(enemy.m_EnemyCombat.m_RaceTypes) * multiplier * 1.5f *
+                CombatProficiencyRuntime.DamageBonus(proficiency, enemy));
             if (enemy.Frozen) damage = FTKUtil.RoundToInt(damage * GameFlow.Instance.m_FrozenDmgPercent);
             owner.m_InfoPanel.m_DamageValue.text = damage.ToString(System.Globalization.CultureInfo.InvariantCulture);
             // Native description bounds already share the compact damage/accuracy panel. Keep

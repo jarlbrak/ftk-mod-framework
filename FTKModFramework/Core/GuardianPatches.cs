@@ -16,6 +16,8 @@ namespace FTKModFramework.Core
             {
                 CharacterDummy guardian = __instance.CombatCow.GetCombatDummy();
                 if (!GuardianRuntime.IsGuardian(guardian)) return;
+                foreach (uiBattleStanceButtons.ProfValues existing in __instance.m_Proficiencies)
+                    if (existing.m_Prof == GuardianRuntime.ActionId) return;
                 uiBattleStanceButtons.ProfValues entry = new uiBattleStanceButtons.ProfValues();
                 entry.m_Prof = GuardianRuntime.ActionId;
                 entry.m_Button = UnityEngine.Object.Instantiate(__instance.m_ProficiencyButtonMaster);

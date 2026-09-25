@@ -1,63 +1,68 @@
-# Paladin 1.2.0
+# Paladin 1.3.0
 
-Paladin is the first published marketplace mod and the reference package for
-authoring through FTK Mod Framework. Version 1.2.0 requires
-framework 1.0.3. It adds a Vitality-based protector class, Guard, Cleansing
-March, 51 equipment items, original 3D models and icons. Six equipment
-families cover early gear through horizontal endgame choices; three Artifacts
-add legendary hammers and a shield. The package author is JarlBrak.
+Release candidate for the original For The King. Requires FTK Mod Framework
+1.2.0 or a compatible later 1.x version. Author: JarlBrak.
 
-The 1.2.0 package is published in the in-game Mods catalog. Version 1.2.0
-tunes base Vitality to 80 and the Highward, Mercy, Censure and
-Verdict great hammers to 32, 34, 34 and 37 base damage. The
-[balance review](../../../docs/paladin/BALANCE-1.2.0.md) explains the comparisons
-and remaining playtests. It retains Cleansing March: Paladins cannot gain Poison or Curse while
-exploring, including from poison, curse and chaos tiles. Existing conditions
-remain, and fire damage or chaos resource and item losses still apply. Combat
-Poison and Curse still apply normally. The ability works with any equipment.
-The [manifest](manifest.json) owns the mod identity, author, version and short
-description; [listing metadata](listing.json) supplies marketplace copy and
-requirements. The builder combines those files with measured archive facts to
-produce the [catalog descriptor](../../catalog.json). The published archive
-contains content and original art, without game assemblies or executable code.
+Paladin is a Vitality-based protector with 51 equipment items across six families
+and three Artifacts. This version replaces equipment artwork and clarifies which
+abilities come from the class, weapon, and trinket:
 
-The catalog permits installation on macOS, Windows and Linux. The listing owns
-this platform allowlist; the builder's `--platform` selects only the local fixture
-platform. Installation permission does not establish gameplay validation. The
-framework version and game assembly fingerprint checks still apply, so an
-unlisted game build remains blocked. The Windows Steam build fingerprint was
-supplied by a player; Windows installation and gameplay remain unverified.
-Framework release manifests already include helpers for all three desktop operating systems.
+- **Class:** Guard protects another ally, and Cleansing March prevents new Poison
+  and Curse while exploring. It does not remove existing conditions or prevent
+  combat ailments, fire damage, or other chaos-tile losses.
+- **Weapon:** Every Paladin hammer grants Censure. A successful debuff application
+  randomly lowers Armor or Resistance by four for one-handed hammers or six for
+  two-handed hammers. Existing native weapon actions remain.
+- **Trinket:** Every equipped Paladin trinket grants Smite. The starting Tin Oath
+  Token is equipped. Smite uses the current weapon's rolls and deals magic damage
+  at 0.25 times weapon damage, multiplied by six while the enemy has an active
+  negative Resistance effect from Censure. Unrelated debuffs do not enable it.
 
-This source shows mod authors how to declare a class, abilities, equipment,
-custom models and icons. See [Writing Content](../../../docs/WRITING-CONTENT.md),
+Censure's two effects can coexist after successive casts. They use native timed
+expiry; a follow-up turn before expiry is not guaranteed. Smite consumes no mark.
+Perfect rolls are not required for damage. Ordinary Attack keeps the native
+weapon-family glyph; custom action symbols are separate from equipment renders.
+
+The upstream 1.2.0 balance is retained: base Vitality 80 and Highward, Mercy,
+Censure and Verdict great-hammer damage 32, 34, 34 and 37. Equipment retains its
+native acquisition declarations. Controlled test inventories do not establish
+ordinary drop frequency or long-campaign balance.
+
+## Compatibility and evidence
+
+The listing is restricted to the observed macOS game assembly fingerprint
+`94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8`.
+Windows, Linux, and online co-op are unverified for this overhaul. Current
+observations include female tier previews, corrected helmet placement, selected
+combat/action UI, normal starter equipment, and equipment-dependent ability
+swaps. Full skinset fit, all animation/display paths, detached break fragments,
+and long-campaign balance are not comprehensively accepted by those checks.
+
+The [manifest](manifest.json) owns runtime identity and framework minimum;
+[listing metadata](listing.json) owns marketplace claims. The
+[provenance record](../paladin-assets.provenance.json) pins runtime art and source
+evidence. Campaign source identifiers in that record refer to separately retained
+authoring files, not bundled or downloadable repository paths. The release
+contains the runtime assets, not the full generation and Blender source campaign.
+Native bodies, faces, hair and backpacks remain game-owned. Read the
+[generated artwork notice](ASSET-LICENSE.md) separately from the code/data MIT
+license. On 2026-09-25 the author confirmed an active Creator plan during model
+generation; the official Rodin terms were reviewed. This account statement was
+provided by the author, not independently verified with the provider.
+
+## Validation and publication
+
+Run `python3 marketplace/packages/validate_paladin.py` from the repository root.
+It checks balance, acquisition, action ownership, asset hashes, binary structure,
+and renderer routes. The [package builder](../build_paladin.py) prepares a
+content-addressed archive and descriptor; neither command establishes live
+acceptance or publication. A new version and reviewed artifact are required for
+corrections to published bytes. This source update does not replace any existing
+remote release or catalog entry.
+
+See [Writing Content](../../../docs/WRITING-CONTENT.md),
 [Custom Models](../../../docs/CUSTOM-MODELS.md), and
-[Marketplace](../../../docs/MARKETPLACE.md) for the supported contracts. The
-[design contract](../../../docs/paladin/DESIGN.md) and
-[validation matrix](../../../docs/paladin/VALIDATION.md) retain deeper design
-and test evidence.
+[Marketplace](../../../docs/MARKETPLACE.md) for authoring contracts.
 
-The original GLB and PNG assets have an
-[external provenance receipt](../paladin-assets.provenance.json). Native FTK
-character bodies, faces, hair and backpacks remain game-owned; custom gear is
-worn over them. The class uses the original game's appearance choices and
-normal unlock checks.
-
-The 1.0.0 macOS game trial verified package registration, native new-game and
-fresh-process resume, Guard's direct-hit reduction, and controlled loot
-collection and cross-class equip. It did not establish natural drop frequency,
-every accessory view, full campaign balance, Windows/Linux gameplay or online
-co-op. See the [release notes](../../../docs/releases/v1.0.1.md) and
-[accessory validation record](../../../docs/paladin/ACCESSORY-VALIDATION.md).
-
-## Validate a source change
-
-Run `python3 marketplace/packages/validate_paladin.py` from the repository
-root for structural checks. The [package builder](../build_paladin.py) creates a
-content-addressed archive and descriptor; its local validation does not
-publish them or prove in-game behavior. Corrections to the published 1.0.1
-archive require a new mod version and a new reviewed artifact. The [1.2.0 live receipt](../../../docs/paladin/balance-1.2.0-live.json) records
-registration, native starter combat, loot and fresh-process resume. Matched
-campaign balance remains unverified. The [publication receipt](../../../docs/paladin/PUBLICATION-1.2.0.md)
-records the released bytes. Earlier Cleansing March evidence remains in the
-[1.1.0 trial](../../../docs/paladin/cleansing-march-live-2026-09-24.json).
+The release preview is a native inventory screenshot of Censure armor with an
+Oathkeeper hammer and Novice shield. See the [native release evidence](../../../docs/evidence/paladin-1.3.0/README.md) for all six male armor tiers and combat UI.

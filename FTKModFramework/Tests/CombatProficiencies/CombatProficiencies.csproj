@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>Major</RollForward>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <NoWarn>CS0649</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/CombatProficiencyPolicy.cs" Link="CombatProficiencyPolicy.cs" />
+    <Compile Include="../../Core/ProficiencyDescriptionRestoration.cs" Link="ProficiencyDescriptionRestoration.cs" />
+    <Compile Include="../../Core/CombatProficiencyRegistry.cs" Link="CombatProficiencyRegistry.cs" />
+    <Compile Include="../../Core/CombatProficiencyRuntime.cs" Link="CombatProficiencyRuntime.cs" />
+    <Compile Include="../../Core/ClassProficiencyRegistry.cs" Link="ClassProficiencyRegistry.cs" />
+    <Compile Include="../../Core/ItemProficiencyRegistry.cs" Link="ItemProficiencyRegistry.cs" />
+    <Compile Include="../../Core/ItemProficiencyRuntime.cs" Link="ItemProficiencyRuntime.cs" />
+    <Compile Include="../../Core/Content.ItemProficiencies.cs" Link="Content.ItemProficiencies.cs" />
+    <Compile Include="../../Core/Content.ClassProficiencies.cs" Link="Content.ClassProficiencies.cs" />
+    <Compile Include="../../Core/Content.CombatProficiencies.cs" Link="Content.CombatProficiencies.cs" />
+  </ItemGroup>
+</Project>

@@ -548,6 +548,27 @@ namespace FTKModFramework.Core.Data
                 if (!string.IsNullOrEmpty(c.Entry.ThiefArtifact) &&
                     (c.Kind != "weapon" || !Content.SetThiefArtifact((FTK_weaponStats2)c.Row, c.Entry.ThiefArtifact)))
                     throw new ArgumentException("thiefArtifact requires a registered physical precision weapon");
+                if (c.Kind == "class" && c.Entry.Proficiencies != null && c.Entry.Proficiencies.Length > 0 &&
+                    !Content.AttachClassProficiencies((FTK_playerGameStart)c.Row, c.Entry.Proficiencies))
+                    throw new ArgumentException("class proficiency grant rejected; every action must resolve");
+                if (c.Kind == "item" && c.Entry.Proficiencies != null && c.Entry.Proficiencies.Length > 0 &&
+                    !Content.AttachItemProficiencies((FTK_items)c.Row, c.Entry.Proficiencies))
+                    throw new ArgumentException("item proficiency grant requires registered equipment and resolved actions");
+                if (c.Entry.RandomDebuffOutcomes != null && c.Entry.ResistanceDamageBonus != null)
+                    throw new ArgumentException("randomDebuffOutcomes and resistanceDamageBonus cannot coexist");
+                if (c.Entry.RandomDebuffOutcomes != null)
+                {
+                    if (c.Kind != "proficiency" || !Content.SetRandomDebuffOutcomes((FTK_proficiencyTable)c.Row,
+                        ResolveCapabilityProficiencies(c.Entry.RandomDebuffOutcomes)))
+                        throw new ArgumentException("randomDebuffOutcomes requires two compatible registered armor/resistance debuffs including itself");
+                }
+                if (c.Entry.ResistanceDamageBonus != null)
+                {
+                    ResistanceDamageBonusEntry bonus = c.Entry.ResistanceDamageBonus;
+                    if (c.Kind != "proficiency" || !Content.SetResistanceDebuffDamageBonus((FTK_proficiencyTable)c.Row,
+                        ResolveCapabilityProficiencies(bonus.Sources), bonus.Multiplier))
+                        throw new ArgumentException("resistanceDamageBonus requires a magic action, registered resistance debuffs and a finite multiplier greater than one and at most sixteen");
+                }
                 if (c.Entry.OverworldAilmentImmunity != null &&
                     (c.Kind != "class" || !Content.AddOverworldAilmentImmunity((FTK_playerGameStart)c.Row,
                         c.Entry.OverworldAilmentImmunity.DisplayName)))
@@ -787,6 +808,21 @@ namespace FTKModFramework.Core.Data
         }
 
         /// <summary>Attach inline <c>proficiencies</c>: weapon -&gt; AttachProficiencies, enemy -&gt; AttachEnemyProficiencies.</summary>
+        private static FTK_proficiencyTable[] ResolveCapabilityProficiencies(string[] ids)
+        {
+            if (ids == null || ids.Length == 0 || ids.Length > 16) return null;
+            FTK_proficiencyTableDB db = Content.Db<FTK_proficiencyTableDB>();
+            FTK_proficiencyTable[] rows = new FTK_proficiencyTable[ids.Length];
+            for (int i = 0; i < ids.Length; i++)
+            {
+                if (string.IsNullOrEmpty(ids[i])) return null;
+                int id = db.GetIntFromID(ids[i]);
+                if (id < 0) return null;
+                rows[i] = db.GetEntryByInt(id);
+            }
+            return rows;
+        }
+
         private static void AttachProficiencies(Cached c, ValidationReport report)
         {
             string[] profs = c.Entry.Proficiencies;
@@ -803,9 +839,14 @@ namespace FTKModFramework.Core.Data
             {
                 Content.AttachEnemyProficiencies((FTK_enemyCombat)c.Row, profs);
             }
+            else if (c.Kind == "class" || c.Kind == "item")
+            {
+                // Exact row validation needs published indexes; ApplyCapabilities runs after EndBatch.
+                return;
+            }
             else
             {
-                report.Warning(c.Context + ": 'proficiencies' is only supported on weapon/enemy, not '" + c.Kind + "' (ignored).");
+                report.Warning(c.Context + ": 'proficiencies' is only supported on weapon/enemy/class/item, not '" + c.Kind + "' (ignored).");
             }
         }
 

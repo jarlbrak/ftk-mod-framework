@@ -1,0 +1,1264 @@
+{
+  "frameworkVersion": "1.2.0",
+  "frameworkSha256": "58a0448bc92704acf980f9b976ad752731197ab094b03f9376a77ed865a61760",
+  "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "platform": "macos",
+  "scope": "Native inventory male six-tier static fit; native Hildebrant Cellar combat UI and Censure armor outcome; Smite base preview with armor-only Censure. Starting inventory was expanded for gear review. These are not comprehensive animation, acquisition or multiplayer tests. Also native Censure Resistance -4 and subsequent Smite bonus preview15, actualmagicdamage14 withno critical.",
+  "files": {
+    "inventory-open.png": "7be743135042919cc4b8f27cfbe06718a54e30fe64c4a4f631f225f99eee7352",
+    "male-oathkeeper-inventory.png": "e24e39530cac4eee28a1d7b9af9f4e08b26128a1d7b9ed6cd374831069702bb4",
+    "male-highward-inventory.png": "4a12b90bb37499006e540f4d2d466b03ecfc0e06e9ccfff774f8cd4a7ca26cc2",
+    "male-mercy-inventory.png": "13652280d1c851498b7d8a4280879ab5bd3445b92f4e6a37cae85beae29d6fb7",
+    "male-censure-inventory.png": "f79dcdfd6f0dd68b497d6c264cb2ac463a4a63877cbf5cba826ba85d30946529",
+    "male-verdict-inventory.png": "60e515d17ac65941fe582145d2a9aa1f848b2ee47c269bd93233c8b1250c5855",
+    "release-combat-actions.png": "ea1302535b43955ae45f53df5c23bbe260e8415e68198e0342934aac166307fb",
+    "release-censure-preview.png": "74e7be1300fca4bfaceb26fd5776b10cb29ceb0a093d24f7255e4d59c3db8230",
+    "release-smite-base.png": "e02ca0e91273e3a63d44ff17331e3dff19e5236ae786c3d1b3de21716821e0f4",
+    "release-smite-bonus.png": "01376c46713180913f4d19156dd5b6466113eba747b3d1556ee055db8b5d737e"
+  },
+  "release-censure-after.json": {
+    "actionUi": null,
+    "combatants": [
+      {
+        "fid": "0:1",
+        "hp": 33,
+        "maxHp": 33,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:1",
+            "victim": "0:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 9,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": 1572329033,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 33,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:1",
+        "hp": 28,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "1:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": 401,
+            "profSuccess": true,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:1",
+        "hp": 31,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "2:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 31,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "0:-1",
+        "hp": 9,
+        "maxHp": 14,
+        "armorMod": -4,
+        "resistMod": 0,
+        "sufferingCategories": [
+          {
+            "category": "Armor",
+            "proficiencyId": 1572329033,
+            "count": 1,
+            "time": 2.5574710369110107,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 33,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "0:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 9,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": 1572329033,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:-1",
+        "hp": 9,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "1:-1",
+            "victim": "1:1",
+            "damage": 3,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:0",
+            "victim": "0:0",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "None",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:-1",
+        "hp": 9,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "2:-1",
+            "victim": "1:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": 401,
+            "profSuccess": true,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:0",
+            "victim": "0:0",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "None",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      }
+    ]
+  },
+  "release-smite-base.json": {
+    "actionUi": {
+      "selectedProficiency": 1298107567,
+      "slots": 3,
+      "displayedDamage": "3",
+      "weaponMaxDamageVsTarget": 10
+    },
+    "combatants": [
+      {
+        "fid": "0:1",
+        "hp": 31,
+        "maxHp": 33,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:1",
+            "victim": "0:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 9,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": 1572329033,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "1:-1",
+            "victim": "0:1",
+            "damage": 2,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 31,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:1",
+        "hp": 28,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "1:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": 401,
+            "profSuccess": true,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:1",
+        "hp": 23,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "0:-1",
+            "victim": "2:1",
+            "damage": 8,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "0:-1",
+        "hp": 9,
+        "maxHp": 14,
+        "armorMod": -4,
+        "resistMod": 0,
+        "sufferingCategories": [
+          {
+            "category": "Armor",
+            "proficiencyId": 1572329033,
+            "count": 1,
+            "time": 1.6091954708099365,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:-1",
+            "victim": "2:1",
+            "damage": 8,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "0:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 9,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": 1572329033,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:-1",
+        "hp": 9,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "1:-1",
+            "victim": "0:1",
+            "damage": 2,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 31,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:0",
+            "victim": "0:0",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "None",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:-1",
+        "hp": 9,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "2:-1",
+            "victim": "1:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": 401,
+            "profSuccess": true,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:0",
+            "victim": "0:0",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "None",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      }
+    ]
+  },
+  "release-censure-third.json": {
+    "actionUi": {
+      "selectedProficiency": null,
+      "slots": 3,
+      "displayedDamage": "6",
+      "weaponMaxDamageVsTarget": 6
+    },
+    "combatants": [
+      {
+        "fid": "0:1",
+        "hp": 28,
+        "maxHp": 33,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:1",
+            "victim": "2:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 4,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "DamagedHeavy",
+            "proficiencyId": 1185215088,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "0:1",
+            "damage": 3,
+            "criticalDamage": 2,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:1",
+        "hp": 28,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "1:-1",
+            "victim": "1:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Block",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:1",
+        "hp": 23,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "2:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "magic",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": 402,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "0:-1",
+        "hp": 0,
+        "maxHp": 14,
+        "armorMod": -4,
+        "resistMod": 0,
+        "sufferingCategories": [
+          {
+            "category": "Armor",
+            "proficiencyId": 1572329033,
+            "count": 1,
+            "time": 3.3333332538604736,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:-1",
+            "victim": "2:1",
+            "damage": 8,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "0:-1",
+            "damage": 12,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Death",
+            "proficiencyId": 1572329033,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:-1",
+        "hp": 9,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "1:-1",
+            "victim": "1:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Block",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:0",
+            "victim": "0:0",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "None",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:-1",
+        "hp": 4,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": -4,
+        "sufferingCategories": [
+          {
+            "category": "Resist",
+            "proficiencyId": 1185215088,
+            "count": 1,
+            "time": 2.8775410652160645,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "2:-1",
+            "victim": "0:1",
+            "damage": 3,
+            "criticalDamage": 2,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "2:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 4,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "DamagedHeavy",
+            "proficiencyId": 1185215088,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      }
+    ]
+  },
+  "release-smite-bonus.json": {
+    "actionUi": {
+      "selectedProficiency": 1298107567,
+      "slots": 3,
+      "displayedDamage": "15",
+      "weaponMaxDamageVsTarget": 10
+    },
+    "combatants": [
+      {
+        "fid": "0:1",
+        "hp": 28,
+        "maxHp": 33,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:1",
+            "victim": "2:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 4,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "DamagedHeavy",
+            "proficiencyId": 1185215088,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Block",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:1",
+        "hp": 22,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "1:-1",
+            "victim": "1:1",
+            "damage": 6,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 22,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:1",
+        "hp": 23,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "2:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "magic",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": 402,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "0:-1",
+        "hp": 0,
+        "maxHp": 14,
+        "armorMod": -4,
+        "resistMod": 0,
+        "sufferingCategories": [
+          {
+            "category": "Armor",
+            "proficiencyId": 1572329033,
+            "count": 1,
+            "time": 3.3333332538604736,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:-1",
+            "victim": "2:1",
+            "damage": 8,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "0:-1",
+            "damage": 12,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Death",
+            "proficiencyId": 1572329033,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:-1",
+        "hp": 9,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "1:-1",
+            "victim": "1:1",
+            "damage": 6,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 22,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:0",
+            "victim": "0:0",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "None",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:-1",
+        "hp": 4,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": -4,
+        "sufferingCategories": [
+          {
+            "category": "Resist",
+            "proficiencyId": 1185215088,
+            "count": 1,
+            "time": 1.6091954708099365,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "2:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Block",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "2:-1",
+            "damage": 5,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 4,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "DamagedHeavy",
+            "proficiencyId": 1185215088,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      }
+    ]
+  },
+  "release-smite-after.json": {
+    "actionUi": {
+      "selectedProficiency": null,
+      "slots": 3,
+      "displayedDamage": "6",
+      "weaponMaxDamageVsTarget": 6
+    },
+    "combatants": [
+      {
+        "fid": "0:1",
+        "hp": 28,
+        "maxHp": 33,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:1",
+            "victim": "2:-1",
+            "damage": 14,
+            "criticalDamage": 0,
+            "damageType": "magic",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Death",
+            "proficiencyId": 1298107567,
+            "profSuccess": true,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Block",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:1",
+        "hp": 22,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "1:-1",
+            "victim": "1:1",
+            "damage": 6,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 22,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:1",
+        "hp": 23,
+        "maxHp": 31,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": null,
+          "damageInfo": {
+            "attacker": "2:-1",
+            "victim": "2:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "magic",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Dodge",
+            "proficiencyId": 402,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "0:-1",
+        "hp": 0,
+        "maxHp": 14,
+        "armorMod": -4,
+        "resistMod": 0,
+        "sufferingCategories": [
+          {
+            "category": "Armor",
+            "proficiencyId": 1572329033,
+            "count": 1,
+            "time": 3.3333332538604736,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "0:-1",
+            "victim": "2:1",
+            "damage": 8,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 23,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "0:-1",
+            "damage": 12,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Death",
+            "proficiencyId": 1572329033,
+            "profSuccess": true,
+            "profAffect": true,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "1:-1",
+        "hp": 9,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": 0,
+        "sufferingCategories": [],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "1:-1",
+            "victim": "1:1",
+            "damage": 6,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 22,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Damaged",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:0",
+            "victim": "0:0",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "None",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      },
+      {
+        "fid": "2:-1",
+        "hp": 0,
+        "maxHp": 9,
+        "armorMod": 0,
+        "resistMod": -4,
+        "sufferingCategories": [
+          {
+            "category": "Resist",
+            "proficiencyId": 1185215088,
+            "count": 1,
+            "time": 1.6091954708099365,
+            "fullTime": 3.3333332538604736,
+            "customValue": -4.0,
+            "endOnTurn": false
+          }
+        ],
+        "storedCombat": {
+          "scope": "Last stored native fields; may belong to an earlier attack. Match FIDs and combat log before attribution.",
+          "attackInfo": {
+            "attacker": "2:-1",
+            "victim": "0:1",
+            "damage": 0,
+            "criticalDamage": 0,
+            "damageType": "physical",
+            "newHealth": 28,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Block",
+            "proficiencyId": -1,
+            "profSuccess": false,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "damageInfo": {
+            "attacker": "0:1",
+            "victim": "2:-1",
+            "damage": 14,
+            "criticalDamage": 0,
+            "damageType": "magic",
+            "newHealth": 0,
+            "attackerHealthMod": 0,
+            "aoe": false,
+            "response": "Death",
+            "proficiencyId": 1298107567,
+            "profSuccess": true,
+            "profAffect": false,
+            "profImmune": false
+          },
+          "postAttackHealthMod": 0
+        }
+      }
+    ]
+  }
+}

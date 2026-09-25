@@ -170,6 +170,17 @@ namespace FTKModFramework.Core
         }
     }
 
+    // Native non-perfect actions without a status prefab replace their category description
+    // with "Standard Attack" after localization. Restore only an explicitly authored custom body.
+    [HarmonyPatch(typeof(FTK_proficiencyTable), "GetBattleButtonInfo")]
+    internal static class ProficiencyBattleDescription_Patch
+    {
+        private static void Postfix(FTK_proficiencyTable __instance, string[] __result)
+        {
+            ProficiencyDescriptionRestoration.Apply(__instance, __result);
+        }
+    }
+
     [HarmonyPatch(typeof(FTK_playerGameStart), "GetDisplayName")]
     internal static class ClassName_Patch
     {

@@ -16,7 +16,7 @@ internal static class HotReloadContentChecks
         {
             int count; counts.TryGetValue(entry.Kind, out count); counts[entry.Kind] = count + 1;
         }
-        if (content.Entries.Count != 54 || counts["class"] != 1 || counts["proficiency"] != 2 || counts["weapon"] != 14 || counts["item"] != 37)
+        if (content.Entries.Count != 57 || counts["class"] != 1 || counts["proficiency"] != 5 || counts["weapon"] != 14 || counts["item"] != 37)
             throw new Exception("Paladin authored shape changed.");
         bool rejected = false;
         try { JsonConvert.DeserializeObject<ContentFile>("{\"entries\":[{\"kind\":\"class\",\"unknownCapability\":true}]}", strict); }

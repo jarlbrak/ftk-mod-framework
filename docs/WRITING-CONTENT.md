@@ -30,6 +30,8 @@ An `AddWeapon` or JSON weapon entry inherits the template's action list. `profic
 
 Equipment can declare `modifiers` with `armor`, `resistance`, `vitality`, `speed`, `awareness`, `talent`, `focusCapacity`, and `reflect`. The four stat fields are fractional bonuses (for example, `0.05` for five stat points); `focusCapacity` adds to maximum Focus. The modifier row is private to the custom item's ID and starts empty, so bonuses from a cloned native template are not inherited. An omitted bonus has value zero. All modifier values are checked when the package loads.
 
+See [class actions and conditional proficiency damage](COMBAT-PROFICIENCIES.md) for equipment-independent rolling class actions, random armor/resistance outcomes, and bonuses requiring an exact active resistance-debuff source.
+
 ## Models and behavior
 
 Use original PNG and GLB assets for marketplace packages. The Paladin package shows the path-relative `icon`, `itemModels`, `displayModels`, `playerModels`, and apparel declarations. Mesh paths must match the actual renderer hierarchy and skeleton; a valid JSON file or successful build cannot prove the model fits in game. Follow [custom models](CUSTOM-MODELS.md), the [player renderer contract](MODEL-PLAYER-API.md), and the [renderer transaction contract](MODEL-RENDERER-API.md).

@@ -1,706 +1,2395 @@
 {
-  "schema": "ftkmf.paladin-package-original-assets.v1",
-  "scope": "Newly authored equipment meshes, textures and icons only. Native character bodies, faces, hair, race selection and backpacks remain game-owned. Exact per-race gear fit remains a live gate.",
+  "schema": "ftkmf.paladin-package-original-assets.v2",
+  "packageVersion": "1.3.0",
+  "scope": "Original generated concepts, Hyper3D Rodin meshes and shaded atlases, Blender-fitted/exported models and original action symbols. Native bodies, faces, hair and backpacks remain game-owned.",
+  "generation": {
+    "concepts": "Original generated images with retained prompts.",
+    "geometryAndTextures": "Hyper3D Rodin outputs from original concepts; Blender fitting, skinning, capped fragments and display variants.",
+    "actionSymbols": "Original generated flat symbols from written native-style observations; no native pixels used as image input.",
+    "rightsStatus": "Author confirmed on 2026-09-25 that Creator was active when the models were generated. Official Rodin terms sections 5(b) and 6.3 reviewed for this release. Account status is author-reported, not independently provider-verified. See paladin/ASSET-LICENSE.md.",
+    "rightsSources": [
+      {
+        "url": "https://hyper3d.ai/legal/terms",
+        "reviewedOn": "2026-09-25",
+        "scope": "Rodin section 5(b), applicable restrictions and section 6.3 recipient notice"
+      }
+    ]
+  },
+  "sourceEvidence": {
+    "art-experiments/paladin-overhaul/inventory.json": "cc7cddb1540187833b3ed42118bbba090960b27a8b0a665b75502dac8f35ce22",
+    "art-experiments/paladin-overhaul/asset-map.json": "32f96288604fa10ec9756c7c5f50540859a0f47ec73b78a91b43fc06a9e0fc94",
+    "art-experiments/paladin-overhaul/helmet-fit-review.json": "a9e5187c6220ae9754d98c8b5263e0ed50c6bef4abab182dbdb2ad5cca7608f3",
+    "art-experiments/paladin-overhaul/hammer-route-review.json": "ddd6252ea6986844a3afbbcc44312ae0639a64550c0143fdbf37901c4f627222",
+    "art-experiments/paladin-overhaul/runtime-textures/validation.json": "91b784f693951e3c11d0f7482d1b082155702a9b573ace7b70e3cd696e54814c",
+    "art-experiments/paladin-overhaul/ability-ownership-validation.json": "cf78336f6a19dc81826417979cb808c3335932b703cdbd9ea431511d6060ccb5",
+    "scratch/paladin-overhaul/package-gameplay-preview-v6/gameplay-preview-receipt.json": "13b681a3741b4bc7eec82e67bc48a601509d4e72ab2ba6a4e4b9bbbbba777c1d"
+  },
+  "testedGame": {
+    "platform": "macOS",
+    "assemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "scope": "Female static tier previews, selected combat/action UI observations and starter/equipment ability ownership checks. Not complete model, skinset or lifecycle acceptance."
+  },
+  "remainingGates": [
+    "Male apparel native fit and motion; other native appearances and all-skinset coverage.",
+    "Complete item display camera/framing and native detached fragment behavior.",
+    "Co-op and platforms other than the observed macOS build.",
+    "Accurate current preview images."
+  ],
   "files": {
     "assets/paladin-hammer-1h-novice.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-novice.glb",
-      "sha256": "a89ed961396247c49dcacb811ab28f03857dcd04428d5f679c93c61e6174ef1e"
+      "source": "art-experiments/paladin-overhaul/candidates/novice-hammer-1h/novice-hammer-1h.glb",
+      "sha256": "42b2a760f4d381f003ee047602224b30e38f3e86a4ed103d8e9ea7d092341eb5",
+      "bytes": 213352
     },
-    "assets/paladin-hammer-1h-oathkeeper.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-oathkeeper.glb",
-      "sha256": "d136f6265301414806cf4e1654b5d81e45b93413185a5927c3b5acd7c7bda91b"
-    },
-    "assets/paladin-hammer-1h-highward.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-highward.glb",
-      "sha256": "32e42b71e4259037f5108a4aa1cc38694616604755671a93f6477729be0cc90c"
-    },
-    "assets/paladin-hammer-1h-mercy.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-mercy.glb",
-      "sha256": "9c60ea3f94eabc57db7a0a1ac19a6183a3d4b8b7a53ddf2b712cec939fbd2eca"
-    },
-    "assets/paladin-hammer-1h-censure.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-censure.glb",
-      "sha256": "304c6829615fe91997c9e2a5779b1e72162e664f465944041ba0101aaa1ea113"
-    },
-    "assets/paladin-hammer-1h-verdict.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-verdict.glb",
-      "sha256": "f9260fc8cc072b6f467657026576abf5c2ecf4f64f57a6b4835a542e233c4585"
-    },
-    "assets/paladin-hammer-2h-novice.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-novice.glb",
-      "sha256": "e026b74b5dc62e4ff6c22e60616b3ab5b40afe3dc3ee59b6bb356c0ecf9fbd41"
-    },
-    "assets/paladin-hammer-2h-oathkeeper.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-oathkeeper.glb",
-      "sha256": "bee1f58f29633af5c43b609aaeb91582537a3854d27cbfa761c600d2f8e8f166"
-    },
-    "assets/paladin-hammer-2h-highward.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-highward.glb",
-      "sha256": "6a0892d89f7a83622f6f89c100add4cad4dd5cfad5713681e1227b8fde4aac46"
-    },
-    "assets/paladin-hammer-2h-mercy.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-mercy.glb",
-      "sha256": "bf136d27572c97103311e741a5f07a5065945e1c4e62636027c30baf228fc246"
-    },
-    "assets/paladin-hammer-2h-censure.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-censure.glb",
-      "sha256": "a84f89992d0c36762d2816b62ed098d20bfbe61abe6a370fce0b399a6a511897"
-    },
-    "assets/paladin-hammer-2h-verdict.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-verdict.glb",
-      "sha256": "7462a9907728ee5390249fbeb5246c2105271c536448eed5a8afc48bf889cdd4"
-    },
-    "assets/paladin-shield-novice.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-novice.glb",
-      "sha256": "dcf82c1cf9824d9ace9ae3897c3b07aa8cfdf9bf484bc55ed6b27a9cc089f328"
-    },
-    "assets/paladin-shield-oathkeeper.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-oathkeeper.glb",
-      "sha256": "cf4314fb2888ec5151f198aa595ad5a55d14d2606f09c2446016f9db260ffda0"
-    },
-    "assets/paladin-shield-highward.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-highward.glb",
-      "sha256": "ea558085413cc1583fd03a73a4fd03f32dc079e00590b5aa68065ceacd0071cc"
-    },
-    "assets/paladin-shield-mercy.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-mercy.glb",
-      "sha256": "2e51664915a2c5f69a686c9075b2a873923a307c31a1700e52123c97747f70d3"
-    },
-    "assets/paladin-shield-censure.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-censure.glb",
-      "sha256": "892455908f78408609f06d405c91e3b77930d5cd250695cb7ea520160e018c46"
-    },
-    "assets/paladin-shield-verdict.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-verdict.glb",
-      "sha256": "83511306c639c9daef78b690a3e442fd6f48f44d0dbab368961aed0377103a77"
-    },
-    "assets/paladin-equipment-palette.png": {
-      "source": "art-experiments/paladin-equipment/paladin-equipment-palette.png",
-      "sha256": "f29dde9ec31395bb192a95ce8b342c6051907bcd141ca6e1280b804c1bc3d5da"
-    },
-    "assets/paladin-hammer-1h-novice-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-novice-icon.png",
-      "sha256": "d3af78c37f22c612fe04acb2fd737dead475a3a9517c61f256ffd73beb19b744"
-    },
-    "assets/paladin-hammer-1h-oathkeeper-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-oathkeeper-icon.png",
-      "sha256": "2552e3c73cd5d8a1c23d959c742dfbe41532e579c66ef8aceb0f7a39e5d22f56"
-    },
-    "assets/paladin-hammer-1h-highward-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-highward-icon.png",
-      "sha256": "b3027f16d0d1e8d6b0e83a68f34884144bf514f3cb0b3f74456da198cd48e251"
-    },
-    "assets/paladin-hammer-1h-mercy-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-mercy-icon.png",
-      "sha256": "5ca535d11e0af293050119e3e36ff41329f6c6dd28672d4e8d56b29b3358fe51"
-    },
-    "assets/paladin-hammer-1h-censure-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-censure-icon.png",
-      "sha256": "ea7420079c2885f2d504f3e1f78221ef1ed412ada944ee12f293bcfa563f7602"
-    },
-    "assets/paladin-hammer-1h-verdict-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-verdict-icon.png",
-      "sha256": "76eb58b875285662d13b5cf54186579e2d7611b528a93d85aa304c6781813a5f"
-    },
-    "assets/paladin-hammer-2h-novice-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-novice-icon.png",
-      "sha256": "5ee3d23c84e37d7efa998bc7aa41de475f54cac761db074601302d600f020ab0"
-    },
-    "assets/paladin-hammer-2h-oathkeeper-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-oathkeeper-icon.png",
-      "sha256": "0beb3e50164aad36389becb96d1cf6241594ef909b32869a357ee501360d60a7"
-    },
-    "assets/paladin-hammer-2h-highward-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-highward-icon.png",
-      "sha256": "f51aa399c473ecd5bef3436fc4b3204460ec2e8a3b829d226d32f882fea1cab1"
-    },
-    "assets/paladin-hammer-2h-mercy-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-mercy-icon.png",
-      "sha256": "de8306fb0d86afc38787395cdd6fa5a7d1559dea6d85be0e4ce14ba6ee97b446"
-    },
-    "assets/paladin-hammer-2h-censure-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-censure-icon.png",
-      "sha256": "302e94de5046170a18062a7da4ed96d22e1955af845ef39aa34c3f3d20ca9866"
-    },
-    "assets/paladin-hammer-2h-verdict-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-verdict-icon.png",
-      "sha256": "9093ddab6ae4c91eeeb04b5ceb3ebb3a4a6711209ce5451d5e40c3071271a35d"
-    },
-    "assets/paladin-shield-novice-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-novice-icon.png",
-      "sha256": "dd03f330f43d367eac9e3e049a56bcaaad293b49aad7b6dcf27607fcf2c93cab"
-    },
-    "assets/paladin-shield-oathkeeper-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-oathkeeper-icon.png",
-      "sha256": "f9caf7eec706b63417d491e18d18b0d07e7c3cbaf4a3584594a2980cca6d5bfe"
-    },
-    "assets/paladin-shield-highward-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-highward-icon.png",
-      "sha256": "e664f7d4262e42d5e1d9ec953b85007ee17bcdc41d8294e8ffbab4681902875d"
-    },
-    "assets/paladin-shield-mercy-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-mercy-icon.png",
-      "sha256": "ce5e663d310278ae545c149b5868554ce6be402816656b8ed43e2a107a9da26d"
-    },
-    "assets/paladin-shield-censure-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-censure-icon.png",
-      "sha256": "e53a36a40e4b6daed9244184620750cef211a442da5197b44cfa3434411c4340"
-    },
-    "assets/paladin-shield-verdict-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-shield-verdict-icon.png",
-      "sha256": "9c4131242afab1502ce3916eb8271bb2323388a81e47ac9f9c236635a7bfb197"
-    },
-    "assets/paladin-guard-icon.png": {
-      "source": "art-experiments/paladin-equipment/paladin-guard-icon.png",
-      "sha256": "e664f7d4262e42d5e1d9ec953b85007ee17bcdc41d8294e8ffbab4681902875d"
+    "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/a727b9cead46f19f0baac19d1f35fe0697e7a8c5df0e9f522d9c249ac93382be.png",
+      "sha256": "cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264",
+      "bytes": 975523
     },
     "assets/paladin-hammer-1h-novice-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-novice-fragment-1.glb",
-      "sha256": "a40a76af3598b72d4dce74ba154df030a6f32cfa26902a4ce62b1747fdda2a94"
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_novice/fragment-1.glb",
+      "sha256": "962a88b264a5a04392c7932500ac5d0434286df6f6ec1d3cbd2c8ee206b7186b",
+      "bytes": 123116
     },
     "assets/paladin-hammer-1h-novice-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-novice-fragment-2.glb",
-      "sha256": "fef7e5b69f0938fe30e7514a0aeba2a65e7bdc6e6091d6d9e7896aa9f33d0865"
-    },
-    "assets/paladin-hammer-1h-oathkeeper-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-oathkeeper-fragment-1.glb",
-      "sha256": "fb8030a45f0f14a4e698443ea077c0fddbc3d8df2aaeb01756ac6e8338b49cf5"
-    },
-    "assets/paladin-hammer-1h-oathkeeper-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-oathkeeper-fragment-2.glb",
-      "sha256": "5125350ed0bffd50ba052afb776188f39cc35085c19fdac8a6a6045a9cab9fe2"
-    },
-    "assets/paladin-hammer-1h-highward-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-highward-fragment-1.glb",
-      "sha256": "dede5eed1cc6410ec536a37b1c5441d877ff47701d4811e77cd4282876c6dae3"
-    },
-    "assets/paladin-hammer-1h-highward-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-highward-fragment-2.glb",
-      "sha256": "360258a2fffd9792f65331e8de40cbdc24455068ddee1818fb12d2bc96430451"
-    },
-    "assets/paladin-hammer-1h-mercy-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-mercy-fragment-1.glb",
-      "sha256": "21d39c2b1ad60ff42e7eeb405e32f2fc1eaf5663ea9656a6ce1796ef340c9f95"
-    },
-    "assets/paladin-hammer-1h-mercy-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-mercy-fragment-2.glb",
-      "sha256": "0a860d14c0e3fb825b57412355ffb85d1960eea672a0a76c1572111464c8218d"
-    },
-    "assets/paladin-hammer-1h-censure-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-censure-fragment-1.glb",
-      "sha256": "fb6d9f157b38930ef02bce3095e876faaecba0c336bde06820c01e84c64fec94"
-    },
-    "assets/paladin-hammer-1h-censure-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-censure-fragment-2.glb",
-      "sha256": "1c5d56127484bd8845ede97a8c49ad01b3d37bfd0cf10f60e73cb7a02d05af4d"
-    },
-    "assets/paladin-hammer-1h-verdict-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-verdict-fragment-1.glb",
-      "sha256": "a723ee5d0e8a61a49fff0d08210685833face7832a8df7fee9dce3d78f7efdb3"
-    },
-    "assets/paladin-hammer-1h-verdict-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-1h-verdict-fragment-2.glb",
-      "sha256": "84f4f7f47877d33d77f7ae97279391a25d8590972bd407efa21e96cf7b786af0"
-    },
-    "assets/paladin-hammer-2h-novice-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-novice-fragment-1.glb",
-      "sha256": "161640171b988f26bb14d687df35b098f0f63ee3c265ff11437bef117f3275fd"
-    },
-    "assets/paladin-hammer-2h-novice-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-novice-fragment-2.glb",
-      "sha256": "0fca064137e5aadbb17c9f3b4f6fa78ce59f0ae7efb87349bb6081d03a823637"
-    },
-    "assets/paladin-hammer-2h-novice-fragment-3.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-novice-fragment-3.glb",
-      "sha256": "5094e623891904e517e01c7774bc494d7e85e0a569799fb13b29dd500df42da3"
-    },
-    "assets/paladin-hammer-2h-oathkeeper-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-oathkeeper-fragment-1.glb",
-      "sha256": "c92ff643e2a73e74443d0d69fd57f52776eae74a0c6bc1a36579ad82df052ca9"
-    },
-    "assets/paladin-hammer-2h-oathkeeper-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-oathkeeper-fragment-2.glb",
-      "sha256": "4784675b9195c0708b3c87639216451d911682080b6e21e1aae1a8057c20ffd4"
-    },
-    "assets/paladin-hammer-2h-oathkeeper-fragment-3.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-oathkeeper-fragment-3.glb",
-      "sha256": "92294624c5b0bda5e3508c90c2b8dab499e0dfc06d6449012b028f9e06141f58"
-    },
-    "assets/paladin-hammer-2h-highward-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-highward-fragment-1.glb",
-      "sha256": "0ea071dfd310d15aa63583d90ec4a6e142c156645f998d8635b51c76aca97328"
-    },
-    "assets/paladin-hammer-2h-highward-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-highward-fragment-2.glb",
-      "sha256": "c1a0e717f28e0b56b9b6af714c6625c469b8e323a33876eeb4225e30d49df0b2"
-    },
-    "assets/paladin-hammer-2h-highward-fragment-3.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-highward-fragment-3.glb",
-      "sha256": "7dac18d1c0acb0cc3e9e78e8f929bd024e5ae7e7a24e3879b1a9bd0fe4d4ab1c"
-    },
-    "assets/paladin-hammer-2h-mercy-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-mercy-fragment-1.glb",
-      "sha256": "57fa2333cba7b86b3eff22f388bb4805b6a3b3c458ae93d890b2fb6debb4439e"
-    },
-    "assets/paladin-hammer-2h-mercy-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-mercy-fragment-2.glb",
-      "sha256": "01b4a22896ee92bc896ad00f743b724dae82f6f3d652bfed950fa7142073ad1e"
-    },
-    "assets/paladin-hammer-2h-mercy-fragment-3.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-mercy-fragment-3.glb",
-      "sha256": "bf877fae2c8e165b0106ea1f7178fa44ab57feb173f83208c65998e626540177"
-    },
-    "assets/paladin-hammer-2h-censure-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-censure-fragment-1.glb",
-      "sha256": "688d1d3544df71ed4ff3d74d76fa89f3339c340c94c509652942e3dee2fb5995"
-    },
-    "assets/paladin-hammer-2h-censure-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-censure-fragment-2.glb",
-      "sha256": "bb08c0ac9005023965006655346b73c010e1dc667b3acd9ceae3e6e11baaafd3"
-    },
-    "assets/paladin-hammer-2h-censure-fragment-3.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-censure-fragment-3.glb",
-      "sha256": "2912a5469b2bfd055565cb75d2439804657a506f41804d4293c4291ad3f2341d"
-    },
-    "assets/paladin-hammer-2h-verdict-fragment-1.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-verdict-fragment-1.glb",
-      "sha256": "ce29c281171dbbbb2644d2dd736e59960ded79d40f65636b618c91b6cd644e96"
-    },
-    "assets/paladin-hammer-2h-verdict-fragment-2.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-verdict-fragment-2.glb",
-      "sha256": "e32dc0eafb77029e5cc61e62067b85d46946b16a1d26f576ee4decc9124e59c1"
-    },
-    "assets/paladin-hammer-2h-verdict-fragment-3.glb": {
-      "source": "art-experiments/paladin-equipment/paladin-hammer-2h-verdict-fragment-3.glb",
-      "sha256": "7587260c564b49c28b9433afb9ab7b238fc8e0343e3e63377d35a4969606c2d2"
-    },
-    "assets/paladin-censure-boots.glb": {
-      "source": "art-experiments/paladin-characters/paladin-censure-boots.glb",
-      "sha256": "2939c64bc5b1550dadda968b33df51ff5a4e8aa9aef3e4c334541628e9bdeaa2"
-    },
-    "assets/paladin-censure-helmet.glb": {
-      "source": "art-experiments/paladin-characters/paladin-censure-helmet.glb",
-      "sha256": "c7459cd458c75e30b21818144a084e096e3cf2de233302b96eda7c651b6621f0"
-    },
-    "assets/paladin-character-palette.png": {
-      "source": "art-experiments/paladin-characters/paladin-character-palette.png",
-      "sha256": "79433ac3319fa31861afffb179980f097540f84f4b499ca4478c7b90107ed38c"
-    },
-    "assets/paladin-female-censure-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-female-censure-armor.glb",
-      "sha256": "c11918e7cf83243c01e9eb436dd971e7ee40b72c7939327d6a9f2c3251a1959b"
-    },
-    "assets/paladin-female-highward-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-female-highward-armor.glb",
-      "sha256": "47aae4c484b6adc9c2d49b272b0ba8299c8be5f832023f3492a6ed693273f992"
-    },
-    "assets/paladin-female-mercy-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-female-mercy-armor.glb",
-      "sha256": "79b04d22c512a3751c68a24d59fe853bebc0df3ea4a147c2a81b163f965c77b9"
-    },
-    "assets/paladin-female-novice-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-female-novice-armor.glb",
-      "sha256": "c9fd2d727a549ff29083365aa2e2e814b04d279999095f4fa91ee45b39720592"
-    },
-    "assets/paladin-female-oathkeeper-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-female-oathkeeper-armor.glb",
-      "sha256": "b8416589568593ad1589f337d7c4efcdc2b95f01b9dcce7a30ce2be4b9c536cc"
-    },
-    "assets/paladin-female-verdict-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-female-verdict-armor.glb",
-      "sha256": "58813c6145e4aa4f2cddcea1c3c00a50f2b517ecff961965c3133fde36b004ad"
-    },
-    "assets/paladin-highward-boots.glb": {
-      "source": "art-experiments/paladin-characters/paladin-highward-boots.glb",
-      "sha256": "ef6436321c1047601b690c96bcb6391320fb36d8fb8f2164cecb6bf9277b38cf"
-    },
-    "assets/paladin-highward-helmet.glb": {
-      "source": "art-experiments/paladin-characters/paladin-highward-helmet.glb",
-      "sha256": "fe88afbaf56436a5e61744f5ea26cb1d96a0586969acf46c437b97332eed4203"
-    },
-    "assets/paladin-male-censure-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-male-censure-armor.glb",
-      "sha256": "9a1cc812c69fdfc7f3ce88adc35ada14668c5a0925f2e54c6ca9d989095c81aa"
-    },
-    "assets/paladin-male-highward-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-male-highward-armor.glb",
-      "sha256": "3754de979de12259599dedd9c5c0fe2a796a5108ce5857418d3f5c26226989c7"
-    },
-    "assets/paladin-male-mercy-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-male-mercy-armor.glb",
-      "sha256": "aeca51e36df5183c80b84aac59207af4d6335e7e19bfe23df7dcc11d34d01bec"
-    },
-    "assets/paladin-male-novice-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-male-novice-armor.glb",
-      "sha256": "5cd8480451aaf7e678de57dca4311e83be8c6ca9a89a87448ba151a0ff61609d"
-    },
-    "assets/paladin-male-oathkeeper-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-male-oathkeeper-armor.glb",
-      "sha256": "010eeae35ed70d4ae25f6b15718e3208e6e3910573333aa0cb20f4f88c1020c2"
-    },
-    "assets/paladin-male-verdict-armor.glb": {
-      "source": "art-experiments/paladin-characters/paladin-male-verdict-armor.glb",
-      "sha256": "af2453627615587a57e7e3b1e34ca9f258d255b9d226aca09979ed2f47e0ff6c"
-    },
-    "assets/paladin-mercy-boots.glb": {
-      "source": "art-experiments/paladin-characters/paladin-mercy-boots.glb",
-      "sha256": "d2a6d20a6c9a494e8b810430f6fb8072d75284368306a810dabfdc65080d0f1e"
-    },
-    "assets/paladin-mercy-helmet.glb": {
-      "source": "art-experiments/paladin-characters/paladin-mercy-helmet.glb",
-      "sha256": "92c234acb3bb9a43bc65462f424c8f682069843a7e55a4c5e0f941f193798fee"
-    },
-    "assets/paladin-novice-boots.glb": {
-      "source": "art-experiments/paladin-characters/paladin-novice-boots.glb",
-      "sha256": "429f5106cea2cdbc04aafa032b6d76b1c3181c1a4ea5aa8cc6c260e43746604a"
-    },
-    "assets/paladin-novice-helmet.glb": {
-      "source": "art-experiments/paladin-characters/paladin-novice-helmet.glb",
-      "sha256": "748b60a0ed09171b9b7a1659524e9b958c94446c10b87b63970ed98136dd9196"
-    },
-    "assets/paladin-oathkeeper-boots.glb": {
-      "source": "art-experiments/paladin-characters/paladin-oathkeeper-boots.glb",
-      "sha256": "81d935608dc9306cf4442396ebe1ee787116be7bd5d31d84760a153839eecc3d"
-    },
-    "assets/paladin-oathkeeper-helmet.glb": {
-      "source": "art-experiments/paladin-characters/paladin-oathkeeper-helmet.glb",
-      "sha256": "f562a5ed9629445f7cbe9db7cffdd235175633603c10c08a838af7e67f4a6914"
-    },
-    "assets/paladin-verdict-boots.glb": {
-      "source": "art-experiments/paladin-characters/paladin-verdict-boots.glb",
-      "sha256": "455ccb0511326485b18806358781a5db81f2c47c92a4521fa809ad5bcd84fb41"
-    },
-    "assets/paladin-verdict-helmet.glb": {
-      "source": "art-experiments/paladin-characters/paladin-verdict-helmet.glb",
-      "sha256": "0289ba942779d4f6e2b5f01b7336bd0cab12767c8c5dc898c57a5cc229e66766"
-    },
-    "assets/paladin-novice-armor-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-novice-armor-icon.png",
-      "sha256": "f358a378248bb3b6b82f800e8cdd9e5d67629d96e818b62c98d8afc7ab232849"
-    },
-    "assets/paladin-novice-boots-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-novice-boots-icon.png",
-      "sha256": "2b34e2e70a8144cf6bc17fc473e61e49cfbb4ad324af6f3498921975b8d0f31f"
-    },
-    "assets/paladin-novice-helmet-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-novice-helmet-icon.png",
-      "sha256": "2a3ab74fa3b7996b2f37e23255c8a3d9ac4f37cee8ce58296bfbf368c94e96e5"
-    },
-    "assets/paladin-oathkeeper-armor-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-oathkeeper-armor-icon.png",
-      "sha256": "ddb57b63badf2048bac8d25f87c60712d1d172c875e9201a46d978c98b4f2029"
-    },
-    "assets/paladin-oathkeeper-boots-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-oathkeeper-boots-icon.png",
-      "sha256": "d992ba51e333e581f4819fad67dc19991f4fb8b4a9108980fb3f5fa825f57718"
-    },
-    "assets/paladin-oathkeeper-helmet-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-oathkeeper-helmet-icon.png",
-      "sha256": "94214174b19d2d752fc94f647c1d55bff5e1e5f9556e79c12ba5e6e3bf7a1eef"
-    },
-    "assets/paladin-highward-armor-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-highward-armor-icon.png",
-      "sha256": "ed0a7c05b436d2927207e582383460be7f5f3403fb80e6735855d0389ff0b4bb"
-    },
-    "assets/paladin-highward-boots-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-highward-boots-icon.png",
-      "sha256": "ddb166710844dd269d8c9647b91fb1849fff065d7c2d0cc83da818d5c01f20af"
-    },
-    "assets/paladin-highward-helmet-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-highward-helmet-icon.png",
-      "sha256": "7f0f577612b2e2614304d9602b9c127a3a7bf0c71eb43c3ddaf69f9f08fc9abd"
-    },
-    "assets/paladin-mercy-armor-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-mercy-armor-icon.png",
-      "sha256": "345d0a28401aa3f1f6f63930174573d67705b361eedbaeab23a0116fb457e2ce"
-    },
-    "assets/paladin-mercy-boots-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-mercy-boots-icon.png",
-      "sha256": "7c81e37e2cae0fe13e757c825792dcd71369c4fcf94a3eb96c2d9cff7e97028f"
-    },
-    "assets/paladin-mercy-helmet-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-mercy-helmet-icon.png",
-      "sha256": "e6a53f9c0ff08a49f4c8f8635c0c14e888dd46fdf116e5b4ac15db806ca50d18"
-    },
-    "assets/paladin-censure-armor-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-censure-armor-icon.png",
-      "sha256": "d9e8e4f46f82187c85f4009af140dc085c2435b5550392e3433530c1778226e4"
-    },
-    "assets/paladin-censure-boots-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-censure-boots-icon.png",
-      "sha256": "65460e070e8e5816ccfa1cf7ae5fe6e5918c020da7906f7e59d46194dc709c65"
-    },
-    "assets/paladin-censure-helmet-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-censure-helmet-icon.png",
-      "sha256": "41d2ee61888e974be5e8f9dc0e42d207b7ef8480dd9f75422eaf391c42219913"
-    },
-    "assets/paladin-verdict-armor-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-verdict-armor-icon.png",
-      "sha256": "de90de9805310b5552a5909654cb14aef6697a0765e1d97bba07d8f8aca2aa5d"
-    },
-    "assets/paladin-verdict-boots-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-verdict-boots-icon.png",
-      "sha256": "2ce869c1cb8a99bac65e3ab18f1aac189b355f635dfbdd84f0782ac78af0aa08"
-    },
-    "assets/paladin-verdict-helmet-icon.png": {
-      "source": "art-experiments/paladin-characters/paladin-verdict-helmet-icon.png",
-      "sha256": "3325a57d6339e7087dad1b61add5a9979c12111dee22712e49bc4be48862d5b2"
-    },
-    "assets/paladin-novice-armor-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-novice-armor-display.glb",
-      "sha256": "f4a887f992eb3885ec0ff1322ec6ba197caf9df9dea88e0f6f97fea6e20fd278"
-    },
-    "assets/paladin-novice-boots-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-novice-boots-display.glb",
-      "sha256": "c0269b4567b64a11af06724507994c29d27942e9f8e54eb8ff105a295f202c50"
-    },
-    "assets/paladin-oathkeeper-armor-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-oathkeeper-armor-display.glb",
-      "sha256": "7df5e98c69836795a5ed11870f8dafbf72e7278a373879ea0c755c1d1327929d"
-    },
-    "assets/paladin-oathkeeper-boots-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-oathkeeper-boots-display.glb",
-      "sha256": "97a26bbdc907fdf6bece119674c673c4d87f4e98abbcdf588a824332b34d4518"
-    },
-    "assets/paladin-highward-armor-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-highward-armor-display.glb",
-      "sha256": "cc58563367655a0be17d1c49b23291b63fe1fc084d13a24b977a297d262032ed"
-    },
-    "assets/paladin-highward-boots-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-highward-boots-display.glb",
-      "sha256": "9a7aabddb088513150cfc54e5d1882734637ead4123d4e23c0d2c69b58314b8b"
-    },
-    "assets/paladin-mercy-armor-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-mercy-armor-display.glb",
-      "sha256": "44f3f7c1507d9b4be937371ad22c66ec72535d5481deb666c690e7b19450baa5"
-    },
-    "assets/paladin-mercy-boots-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-mercy-boots-display.glb",
-      "sha256": "fff2190216efe513f83f1c53c38eb5f04c42543607c0950ef9e1305b47373dd9"
-    },
-    "assets/paladin-censure-armor-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-censure-armor-display.glb",
-      "sha256": "4417e7965810a9b957fc75198e14e84e132ca2f10497feb71c2d03316b327040"
-    },
-    "assets/paladin-censure-boots-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-censure-boots-display.glb",
-      "sha256": "e95ffb9232bb10d7d53dcb89f0c2ddf735d6621b7c68e814049b57b6dca3d2e8"
-    },
-    "assets/paladin-verdict-armor-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-verdict-armor-display.glb",
-      "sha256": "dc99bc97e900d05fb6936094855a4e8c59872aa9d2b1d75f680cb57f122f4d0e"
-    },
-    "assets/paladin-verdict-boots-display.glb": {
-      "source": "art-experiments/paladin-characters/loot-display/paladin-verdict-boots-display.glb",
-      "sha256": "320ffc04e2e96a66a0994e43891d31589aa741e70fb4e3329d5722a2af37188e"
-    },
-    "assets/paladin-hammer-2h-novice-display.glb": {
-      "source": "art-experiments/paladin-equipment/loot-display/paladin-hammer-2h-novice-display.glb",
-      "sha256": "65703cb0b7e72d75300ca75b770ec64f301170401acbfcf2cc6c5463ff951e3b"
-    },
-    "assets/paladin-hammer-2h-oathkeeper-display.glb": {
-      "source": "art-experiments/paladin-equipment/loot-display/paladin-hammer-2h-oathkeeper-display.glb",
-      "sha256": "9264898f7d3d5f80cd8b01d0827f0bfbebb570df6d31b09c36315447acdace33"
-    },
-    "assets/paladin-hammer-2h-highward-display.glb": {
-      "source": "art-experiments/paladin-equipment/loot-display/paladin-hammer-2h-highward-display.glb",
-      "sha256": "7280393dce661a82442f53949b2a7215f5f20cf4aa366c2dab83035ab89548ce"
-    },
-    "assets/paladin-hammer-2h-mercy-display.glb": {
-      "source": "art-experiments/paladin-equipment/loot-display/paladin-hammer-2h-mercy-display.glb",
-      "sha256": "4c55622fac14a4164ce105cc1eaeacb92942d9fc8abc94c150150007a51f5794"
-    },
-    "assets/paladin-hammer-2h-censure-display.glb": {
-      "source": "art-experiments/paladin-equipment/loot-display/paladin-hammer-2h-censure-display.glb",
-      "sha256": "d3226f0199a00612fb3f6043108caa4041cd5c539ffd2a767a8b6a93ce95fade"
-    },
-    "assets/paladin-hammer-2h-verdict-display.glb": {
-      "source": "art-experiments/paladin-equipment/loot-display/paladin-hammer-2h-verdict-display.glb",
-      "sha256": "49382dcc59600585f52f3adce35408035483a1caf0b97a1498e5a397a13b7d00"
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_novice/fragment-2.glb",
+      "sha256": "0dc23b0f54ed0a0203c3b5892993dd38a9f12013e1fecb0134ee4c2481711149",
+      "bytes": 98900
+    },
+    "assets/paladin-shield-novice-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-shield/novice-shield-icon.png",
+      "sha256": "82f2c5a96de60d5e63e96f82fa59e6621c6f887019967aa398514c17c3ec9dae",
+      "bytes": 75572
+    },
+    "assets/paladin-shield-novice.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-shield/novice-shield.glb",
+      "sha256": "554418bf39153685ce40d1dda970e70253ec8674811aedf50f05be66e6b98dd5",
+      "bytes": 149340
+    },
+    "assets/atlas-a31f8a13ff4809eb206a86ea68574e0e805be286ffa2a398b6e942f11b1efc58.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/9ca3819485fd2f7b589423ec61ff7407e0783efc536f519dc1f93e24782f1136.png",
+      "sha256": "a31f8a13ff4809eb206a86ea68574e0e805be286ffa2a398b6e942f11b1efc58",
+      "bytes": 291980
     },
     "assets/paladin-shield-novice-display.glb": {
-      "source": "art-experiments/paladin-equipment/shield-display/paladin-shield-novice-display.glb",
-      "sha256": "192dc46a3ad19a22b954759cdae93c902a5cd273a2a40a3129aa8f7c14860f77"
+      "source": "art-experiments/paladin-overhaul/candidates/novice-shield-display/novice-shield-display.glb",
+      "sha256": "76a9ced14bbd771779240709ce49bfb665c2a2dc258ec9b59feff01cc49cc87b",
+      "bytes": 149344
     },
-    "assets/paladin-shield-oathkeeper-display.glb": {
-      "source": "art-experiments/paladin-equipment/shield-display/paladin-shield-oathkeeper-display.glb",
-      "sha256": "2f3abc9646d4a87c084a8833b219e3a796d56ee4fe090e0e59c43c3a7f2e1301"
+    "assets/paladin-novice-armor-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/armor-male/icon.png",
+      "sha256": "9913d97f8f7254da6976ee8187dddf597b403cf94d7eaf961eb88c1aa1fb7075",
+      "bytes": 71837
     },
-    "assets/paladin-shield-highward-display.glb": {
-      "source": "art-experiments/paladin-equipment/shield-display/paladin-shield-highward-display.glb",
-      "sha256": "72955095d2c82d0b0e02551a21c8bc1e94460b581d0a2243e4909b2d5629279f"
+    "assets/paladin-novice-armor-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/armor-display/novice-armor-display.glb",
+      "sha256": "3a3baff098071b584c6da5903653f5d80650c0411aa0c16ad377d3a3f2248917",
+      "bytes": 852320
     },
-    "assets/paladin-shield-mercy-display.glb": {
-      "source": "art-experiments/paladin-equipment/shield-display/paladin-shield-mercy-display.glb",
-      "sha256": "8f7239017dd895bd0fe59f6264a29eda28d2882ea426ec0e9f2ce1d3c9e6fb7b"
+    "assets/atlas-9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/cb6cfbbdda53e9d279b3bd66e50a521c76de171b101d88baa36662adbe496c8c.png",
+      "sha256": "9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3",
+      "bytes": 994354
+    },
+    "assets/paladin-female-novice-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/armor-female/candidate.glb",
+      "sha256": "b60f2361613326031115a1e87dbb2b948d50c7649aec980643353e26657d263d",
+      "bytes": 1426268
+    },
+    "assets/paladin-male-novice-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/armor-male/candidate.glb",
+      "sha256": "dfbd5029ad42a995949d0acebdd0ea38303874f86f4f2a8e3d14cc7772fee111",
+      "bytes": 1426904
+    },
+    "assets/paladin-novice-boots-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots/icon.png",
+      "sha256": "2c08c6771a4c6d5b1057eab31c6746d8f3ab1a4b50d42b489610cdf53ff64dd4",
+      "bytes": 53657
+    },
+    "assets/paladin-novice-boots-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots-display/novice-boots-display.glb",
+      "sha256": "0e48a38b858eefb31ae405c2e129b4dc0359766d8da5fe270b9124338370924f",
+      "bytes": 465268
+    },
+    "assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/9ecffe170a90ff5403b1aad74e87f2eb25d7076f907d142dd9d83b378b2701ad.png",
+      "sha256": "470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d",
+      "bytes": 880061
+    },
+    "assets/paladin-novice-boots.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots/candidate.glb",
+      "sha256": "4fd79be52caa86fd14fd9dff851e566286a38f61956f37ff844c0d0322c2ad3c",
+      "bytes": 778244
+    },
+    "assets/paladin-novice-helmet-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet-icon.png",
+      "sha256": "32210646eb07f88d3d20b6af8d0c3353640f24215e2b602408ccbe1e9d66d128",
+      "bytes": 61162
+    },
+    "assets/paladin-novice-helmet.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet.glb",
+      "sha256": "b590e85c42f4613d0b0056fae1243ef48be3e553a2defb04069cc8b088cd19df",
+      "bytes": 202612
+    },
+    "assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/90ca5c74c4ea2efc70abbdd96ab8f0eaf0a17bc5f0f8de8b33e4e9a096927844.png",
+      "sha256": "caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07",
+      "bytes": 834353
+    },
+    "assets/paladin-hammer-1h-censure.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-1h/censure-hammer-1h.glb",
+      "sha256": "52bb9d5c79112ff3422e972316cf3b5a5454f7723a5f7db81e4d4e044c64e5e9",
+      "bytes": 351916
+    },
+    "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/bcc3e8180d3e44632786344d9b225e99b05e0b0cdb12efb2f23b2996a66ab1ad.png",
+      "sha256": "2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60",
+      "bytes": 1018004
+    },
+    "assets/paladin-hammer-1h-censure-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-1.glb",
+      "sha256": "35dd63b8b91025eb1bb8f8da30603b020aec440b93f64af5fb520f128084b5fe",
+      "bytes": 218216
+    },
+    "assets/paladin-hammer-1h-censure-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-2.glb",
+      "sha256": "a215af844d2837ac34d0e177dce1c15692b473a2b4dc35d4004b91d9b3adee93",
+      "bytes": 144544
+    },
+    "assets/paladin-shield-censure-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield-icon.png",
+      "sha256": "93ffde5fe633e43059714ff48c6658b5abfc78d5ebcf2f4a6f6bdcdac7d4af9b",
+      "bytes": 63894
+    },
+    "assets/paladin-shield-censure.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield.glb",
+      "sha256": "b5f8ec5f1ab477a1776b99f395cfb27f812a2f878bff4831c2a6f499671f027f",
+      "bytes": 231772
+    },
+    "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/f069b5dab4c17b90cdb5bbebc567b74f5844f0097d9701e076aeacd67b85b9c2.png",
+      "sha256": "a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6",
+      "bytes": 322667
     },
     "assets/paladin-shield-censure-display.glb": {
-      "source": "art-experiments/paladin-equipment/shield-display/paladin-shield-censure-display.glb",
-      "sha256": "d4db088ebab23f2cc964aaa11761c004dafd634db315e752849d69ec5a231448"
+      "source": "art-experiments/paladin-overhaul/candidates/censure-shield-display/censure-shield-display.glb",
+      "sha256": "ae76b9b1ca0183ad1fd55047a24d82d4b7fe5c50ea853c65d834e17e7a502572",
+      "bytes": 231772
     },
-    "assets/paladin-shield-verdict-display.glb": {
-      "source": "art-experiments/paladin-equipment/shield-display/paladin-shield-verdict-display.glb",
-      "sha256": "42c310332050f0644f13649ddf83b4d983757e2c6e2611e78f320b89e3ad66e5"
+    "assets/paladin-censure-armor-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/icon.png",
+      "sha256": "b41c3af8c9a97365a145cc61c4b75f3316ddd465b336ef0784dafa923d8d8c5b",
+      "bytes": 77022
     },
-    "assets/paladin-hammer-1h-last-vigil-display.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-1h-last-vigil-display.glb",
-      "sha256": "d9608c84a67d32ea38e5aaba26c41794db319bd35343f39c7d59f3ac7553dc0b"
+    "assets/paladin-censure-armor-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-display/censure-armor-display.glb",
+      "sha256": "cab54d44d05863be10364aeff8c750b700eb2a2e48e8722c04a2a00b6369293f",
+      "bytes": 840164
     },
-    "assets/paladin-hammer-1h-last-vigil-fragment-1.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-1h-last-vigil-fragment-1.glb",
-      "sha256": "1d3eea8f05ad5a2097b6ebee327f693f57bbe7409bbbba5feca09a7cae33d95b"
+    "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/e515a2e1e5c89e29df395897726bdcef62992354f62848f80a63379eef8e52e9.png",
+      "sha256": "e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4",
+      "bytes": 996028
     },
-    "assets/paladin-hammer-1h-last-vigil-fragment-2.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-1h-last-vigil-fragment-2.glb",
-      "sha256": "1db417ff34cf9660ca8aefb9e6ec0beb7bf8040d01dcd691f2f931cee85e5d87"
+    "assets/paladin-female-censure-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-female/candidate.glb",
+      "sha256": "e9a0dff0121fe07f26930c7fc47e98a8d1af9659c24bca2980821111c75689be",
+      "bytes": 1404824
     },
-    "assets/paladin-hammer-1h-last-vigil-icon.png": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-1h-last-vigil-icon.png",
-      "sha256": "148e21d13219b06b59c1362a53e8460bb9fa069ba5cf59eefdb60efa6286b2a8"
+    "assets/paladin-male-censure-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/candidate.glb",
+      "sha256": "9253340ee5faf3fbc1c44137483f9debaeb02bd74ab6ca36a6dac4f808385f5a",
+      "bytes": 1405460
+    },
+    "assets/paladin-censure-boots-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/icon.png",
+      "sha256": "4115760fb5890947b671a1632b81890a5356f8faf143231e81e54b0eacb00db7",
+      "bytes": 52828
+    },
+    "assets/paladin-censure-boots-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots-display/censure-boots-display.glb",
+      "sha256": "06b4e61dc04399909228c3d2cd6f9c79aebf0029f3931a808058b3518856279b",
+      "bytes": 447092
+    },
+    "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/810abb9d5315f97bb69b02670e79d701f6138608767da524964501a16429f5a2.png",
+      "sha256": "4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b",
+      "bytes": 839463
+    },
+    "assets/paladin-censure-boots.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/candidate.glb",
+      "sha256": "c708feb8b3df88c9351dd0f71f9b5e59b9c4ee790dddd87e26364f7582adf74e",
+      "bytes": 746432
+    },
+    "assets/paladin-censure-helmet-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet-icon.png",
+      "sha256": "3eb08d248e159308631bb6951843d7290f403417ccceec4dec79d9b13e60e564",
+      "bytes": 72953
+    },
+    "assets/paladin-censure-helmet.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.glb",
+      "sha256": "1805d57e5c89153a8a528de4d951da35198a5e2217380c8ca9e1feb734d878fa",
+      "bytes": 443152
+    },
+    "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/cf6fa62d5c531b87e1482138343ba52125b5f42c4a3b53bada275fecd7e1befa.png",
+      "sha256": "0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91",
+      "bytes": 1035374
+    },
+    "assets/paladin-hammer-2h-censure.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-2h/censure-hammer-2h.glb",
+      "sha256": "cee503bc8693efd23faa07c3bbe445f8a0b787c3a12492d75d5fa1d307d57774",
+      "bytes": 373584
+    },
+    "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/c3dcec3d2e6b319eb4318008b2aaa0326a25515b16c90bb89d3ff0a579510937.png",
+      "sha256": "3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8",
+      "bytes": 1012561
+    },
+    "assets/paladin-hammer-2h-censure-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-1.glb",
+      "sha256": "56c44bdd869eccbc11fcf3d86ceeaf0a7a5ea569722c02485f12d93d2a055990",
+      "bytes": 109488
+    },
+    "assets/paladin-hammer-2h-censure-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-2.glb",
+      "sha256": "ec39a61d5513f2954c8c4c219e3f034b8a8e656127f71b1ea4044a762f0f5bda",
+      "bytes": 122112
+    },
+    "assets/paladin-hammer-2h-censure-fragment-3.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-3.glb",
+      "sha256": "387a66a80cae82b8e669f90261a4a020a1038974b4cd30ad4cd8a4c330a34902",
+      "bytes": 164672
+    },
+    "assets/paladin-hammer-2h-censure-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display.glb",
+      "sha256": "1294ae245fc861813ca87469a3c67b1c5b8eac48ed6725062d0791ae65bc4515",
+      "bytes": 373580
+    },
+    "assets/paladin-hammer-2h-censure-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-1.glb",
+      "sha256": "98889d91af275b1648cdfbc19ded1db12d4772baa181945aa414d79158778a9a",
+      "bytes": 109488
+    },
+    "assets/paladin-hammer-2h-censure-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-2.glb",
+      "sha256": "e91955404cf7bbc564106e41d11dbf023a469ec9a187f002a4ead5e09bc1f55c",
+      "bytes": 122112
+    },
+    "assets/paladin-hammer-2h-censure-fragment-3-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-3.glb",
+      "sha256": "7d2acba9401508ecf0a5e71274678696c63eb8e4f5dcc4dd655b2ea801910eb7",
+      "bytes": 164672
     },
     "assets/paladin-hammer-1h-last-vigil.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-1h-last-vigil.glb",
-      "sha256": "96a8fdcde3a22e6df8a89f92be8f049cc3b36c697964aef584c9801186424066"
+      "source": "art-experiments/paladin-overhaul/candidates/last-vigil-hammer/last-vigil-hammer.glb",
+      "sha256": "ce8f46ed4858044cb2fd29aee54c0b085fc8af71953f2f1eeb20aeae03d1269d",
+      "bytes": 429408
     },
-    "assets/paladin-hammer-2h-kingsfall-display.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-2h-kingsfall-display.glb",
-      "sha256": "7fdce9896fcdf62a7c96f7202354d472207f424a7373888f21bf03cb1e029b1f"
+    "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/b3862bdff25347b4bd0f52a7fa305f25a15ae698d6d2b26143cb68b2641f8642.png",
+      "sha256": "1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340",
+      "bytes": 1161367
     },
-    "assets/paladin-hammer-2h-kingsfall-fragment-1.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-2h-kingsfall-fragment-1.glb",
-      "sha256": "311ed9eb7b3f4d2e9705d626697aa0cd8af068caaa0fc0c9a9f340d4f6b6f583"
+    "assets/paladin-hammer-1h-last-vigil-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_last_vigil/fragment-1.glb",
+      "sha256": "22bcfb0eea6a25ab84b585c523b869551a489788ef8e587ebeacec6e1a2ea99d",
+      "bytes": 282052
     },
-    "assets/paladin-hammer-2h-kingsfall-fragment-2.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-2h-kingsfall-fragment-2.glb",
-      "sha256": "48aa1664082e937e8dbe24bcf4f50b013485a251653953550c4520a22f21a7cb"
+    "assets/paladin-hammer-1h-last-vigil-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_last_vigil/fragment-2.glb",
+      "sha256": "372e388bd278051a308e79037c0f88836e26c39e56d076df7c6234d1d64fe191",
+      "bytes": 156484
     },
-    "assets/paladin-hammer-2h-kingsfall-fragment-3.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-2h-kingsfall-fragment-3.glb",
-      "sha256": "6fb23e0e3ef7d6f91aef3b00250952d9b103fc8dc7abbbe0eedb473d845b2b8c"
+    "assets/paladin-hammer-1h-last-vigil-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_last_vigil/display.glb",
+      "sha256": "befb53fa22ce68a8f1bafd043220c0613c12f79f538cf2ce64f55393306f2d78",
+      "bytes": 429408
     },
-    "assets/paladin-hammer-2h-kingsfall-icon.png": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-2h-kingsfall-icon.png",
-      "sha256": "b2a86d41d0fb9e8421a68a1d601b9617deaa137001584e139b3515d8229aaebc"
+    "assets/paladin-hammer-1h-last-vigil-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_last_vigil/display-fragment-1.glb",
+      "sha256": "2e75415507bd06c1cf2dcc936f1965d95912ef48c3438e487069def728e42aec",
+      "bytes": 282052
+    },
+    "assets/paladin-hammer-1h-last-vigil-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_last_vigil/display-fragment-2.glb",
+      "sha256": "c8c01142cdc65afeb51485a52236b8370c8da6da4aa593cf29d6314162860fcb",
+      "bytes": 156484
     },
     "assets/paladin-hammer-2h-kingsfall.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-hammer-2h-kingsfall.glb",
-      "sha256": "c5a7243898cf3d12495c1f70607bceb48beccc98815cad8e050052b877fa7575"
+      "source": "art-experiments/paladin-overhaul/candidates/kingsfall-hammer/kingsfall-hammer.glb",
+      "sha256": "dc81880edc35ccd822af0b094f85dd4c6dd6c172c96dd665e5dd74d6eba54102",
+      "bytes": 461456
     },
-    "assets/paladin-legendary-palette.png": {
-      "source": "art-experiments/paladin-legendaries/paladin-legendary-palette.png",
-      "sha256": "62660c3c40952c0d1d2163d083e60c68cafa8c81bf3a3024599d2aafa72f0781"
+    "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/e0658d9cff125efe186e0256f3c762c54d80b04b34f0504d2ab9ecc4df3caf6d.png",
+      "sha256": "c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec",
+      "bytes": 951435
     },
-    "assets/paladin-shield-last-bastion-display.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-shield-last-bastion-display.glb",
-      "sha256": "ddf2fb5b622e8355793cb01f125fb4dd35321f1fb9b88b437f6859c7d4167a35"
+    "assets/paladin-hammer-2h-kingsfall-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_kingsfall/fragment-1.glb",
+      "sha256": "8c28dab65b72e2f00bad98eedeb5747f2da86a3e56f30791e8256a4ea183b1fe",
+      "bytes": 189896
+    },
+    "assets/paladin-hammer-2h-kingsfall-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_kingsfall/fragment-2.glb",
+      "sha256": "c874bb83024e4daffd677bd67cb38764669c3e1141a86ffa1f960e86a2e65827",
+      "bytes": 105824
+    },
+    "assets/paladin-hammer-2h-kingsfall-fragment-3.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_kingsfall/fragment-3.glb",
+      "sha256": "b8c9e3be7568494d09901f12e012769dced38e0697e8393ace3abb1627296546",
+      "bytes": 199356
+    },
+    "assets/paladin-hammer-2h-kingsfall-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_kingsfall/display.glb",
+      "sha256": "dd99fbb4baa1362ab052523fc6b0e864e5f32d000b78557030307ef666891c40",
+      "bytes": 461456
+    },
+    "assets/paladin-hammer-2h-kingsfall-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_kingsfall/display-fragment-1.glb",
+      "sha256": "7343b864df427068e7cfd4e6d8ddd447dcb57cccf64dd639f8ce2f99ee4cd6bd",
+      "bytes": 189892
+    },
+    "assets/paladin-hammer-2h-kingsfall-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_kingsfall/display-fragment-2.glb",
+      "sha256": "92041545f1a396ad69eeedaa3a0f0b4d1e3924ce137e1a45a6d6c11edd26d4be",
+      "bytes": 105820
+    },
+    "assets/paladin-hammer-2h-kingsfall-fragment-3-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_kingsfall/display-fragment-3.glb",
+      "sha256": "5fc4a3cba475afd4a2a2a6e525b66c068c1a92f275fd6e19f4153bcc4c6c4b2a",
+      "bytes": 199356
     },
     "assets/paladin-shield-last-bastion-icon.png": {
-      "source": "art-experiments/paladin-legendaries/paladin-shield-last-bastion-icon.png",
-      "sha256": "6254199f12a697e6c7265d81e40f77194a85403f5122c2428f1324778cb49a35"
+      "source": "art-experiments/paladin-overhaul/candidates/last-bastion-shield/last-bastion-shield-icon.png",
+      "sha256": "0a27c2c84572349908878d286e6917c6be63a7be03f6c6ea3aea69dc35211115",
+      "bytes": 58842
     },
     "assets/paladin-shield-last-bastion.glb": {
-      "source": "art-experiments/paladin-legendaries/paladin-shield-last-bastion.glb",
-      "sha256": "228d10ac17a16389f90fb57459aae9be70604658172d3681916192f676c937e8"
+      "source": "art-experiments/paladin-overhaul/candidates/last-bastion-shield/last-bastion-shield.glb",
+      "sha256": "1814556d5491287ab4d327ae502f13f98caa58c788f241e91509d74a06ab31a0",
+      "bytes": 259572
     },
-    "assets/paladin-accessory-palette.png": {
-      "source": "art-experiments/paladin-accessories/paladin-accessory-palette.png",
-      "sha256": "7bb9c210dc206a259e59255dfcb1169486f87cba5a6aa4e6cea5fccc634e7f8a"
+    "assets/atlas-21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/ca3bfb7639802a87cff193440709f8152738259d9939ff03dac98f3c1fd0d34a.png",
+      "sha256": "21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31",
+      "bytes": 309159
     },
-    "assets/paladin-necklace-censure-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-censure-icon.png",
-      "sha256": "e3657744bce921e2714504eaedc47f2638f0eff9b610b1781835a41f3a9a7296"
+    "assets/paladin-shield-last-bastion-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/last-bastion-shield-display/last-bastion-shield-display.glb",
+      "sha256": "9a95c1a3874a02b8e2f5bc6094450e2df8ce4d3165a44564288e067fd5a50015",
+      "bytes": 259572
     },
-    "assets/paladin-necklace-censure.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-censure.glb",
-      "sha256": "1463bdcc4754c4e419bc83276df0079f58f08da25c9f14426c710e732bd67680"
+    "assets/paladin-hammer-1h-oathkeeper.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-hammer-1h/oathkeeper-hammer-1h.glb",
+      "sha256": "c081d29c08fd35d99985f045307c5036a20da92b54f354c51b6d6f6f088ec349",
+      "bytes": 272632
     },
-    "assets/paladin-necklace-highward-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-highward-icon.png",
-      "sha256": "3ae06b1ef8b07b90f59081391ada54b43155b5e989330bd65301f042b0118e36"
+    "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/b8ea780a1e98df8f5637d71f41a2df3da7d82c080da605f32d7421946272a493.png",
+      "sha256": "d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d",
+      "bytes": 949408
     },
-    "assets/paladin-necklace-highward.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-highward.glb",
-      "sha256": "b1fe3a0da4cde1ba70f7dbaa243e83c53437df458334388a1d23f8efb2beae11"
+    "assets/paladin-hammer-1h-oathkeeper-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_oathkeeper/fragment-1.glb",
+      "sha256": "a03151e00ba83445b522a4e50d0f221608552b692af27ae73b7ba6e580a7afcc",
+      "bytes": 153600
     },
-    "assets/paladin-necklace-mercy-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-mercy-icon.png",
-      "sha256": "1ff2cd9e6e6df04d372f7a72808720e376a51446be25b46be479d1d03ad3fa80"
+    "assets/paladin-hammer-1h-oathkeeper-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_oathkeeper/fragment-2.glb",
+      "sha256": "2a1cc3dc887a865ef604b47ad289b840aa6e4e056584089b8be90036555ff7bb",
+      "bytes": 123532
     },
-    "assets/paladin-necklace-mercy.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-mercy.glb",
-      "sha256": "10131cf8f0b43e31d5787dbee38ec52cf2f895e8792ef8d2275f3df66a8b887a"
+    "assets/paladin-shield-oathkeeper-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-shield/oathkeeper-shield-icon.png",
+      "sha256": "05a75511dc95181b58dd737144bb73d57ee1ced5df8e3b331e878f5768ce8752",
+      "bytes": 62170
     },
-    "assets/paladin-necklace-novice-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-novice-icon.png",
-      "sha256": "4777e146c20b77ad288e5733cacacd5da442c8e09d880f661e9cec4649458257"
+    "assets/paladin-shield-oathkeeper.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-shield/oathkeeper-shield.glb",
+      "sha256": "ad5d6be4fb798ee035449c16f0509c6cea5662d3a462887e026e9972495e828d",
+      "bytes": 225808
     },
-    "assets/paladin-necklace-novice.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-novice.glb",
-      "sha256": "49cf0f5f64d31fa09acb97c0e897702e07bc7cdcff0852ca4e42c39fa572d446"
+    "assets/atlas-c49d74d57afc27eaf203f9cf6d1e437fa8659d62a8b1fd0b2edae319020022b5.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/b3a4b856c25797d1ff47e6b55c02a92b05875183cd7cb2daf27c9a3bd22ab7d9.png",
+      "sha256": "c49d74d57afc27eaf203f9cf6d1e437fa8659d62a8b1fd0b2edae319020022b5",
+      "bytes": 283560
     },
-    "assets/paladin-necklace-oathkeeper-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-oathkeeper-icon.png",
-      "sha256": "ed5eace9a8815a39e5504e617a658b81760750529b269b91a56b2111c61c9ddf"
+    "assets/paladin-shield-oathkeeper-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-shield-display/oathkeeper-shield-display.glb",
+      "sha256": "39c48e877f4c84e2e2918b8bc2b9e9dd1b393aab23c21ae317a8488ac229c3c5",
+      "bytes": 225808
     },
-    "assets/paladin-necklace-oathkeeper.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-oathkeeper.glb",
-      "sha256": "7b388ec3fca44f29391d9c643ca48fc13142744afaf7981062de83e4fbb0392c"
+    "assets/paladin-oathkeeper-armor-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/armor-male/icon.png",
+      "sha256": "8b646a247a7503fe0e95a88fc8712947a1f4742ae05e3acd013a56a5763f1f14",
+      "bytes": 79236
     },
-    "assets/paladin-necklace-verdict-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-verdict-icon.png",
-      "sha256": "3ccbab825def3440362f5445213cd43147af1b87527ebfd7874022e54e0bfb34"
+    "assets/paladin-oathkeeper-armor-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/armor-display/oathkeeper-armor-display.glb",
+      "sha256": "151a8e14bd4efdb6e586383ec0b6165f0ddc5b928bfd7952104e2b4d6f3af6b5",
+      "bytes": 839012
     },
-    "assets/paladin-necklace-verdict.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-necklace-verdict.glb",
-      "sha256": "31fa9a4f82f11d881801c1dd5ecf74ecc5fdd29f0da268744548e2aeb51e5a21"
+    "assets/atlas-8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/7818922cc0588168afb3c64c6c22c8705fb5e88d47f26c9738fab1e5c464c54c.png",
+      "sha256": "8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66",
+      "bytes": 978000
     },
-    "assets/paladin-trinket-censure-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-censure-icon.png",
-      "sha256": "bf0cc73d220559927a0bfe82a5cbb27c9333faee628d50047e5d4caa3287b1e6"
+    "assets/paladin-female-oathkeeper-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/armor-female/candidate.glb",
+      "sha256": "a4f9fbf4ab26e74e9ff2deea1b36e99448b99fbd610fd9b8c8d6b36af0536e1a",
+      "bytes": 1403032
     },
-    "assets/paladin-trinket-censure.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-censure.glb",
-      "sha256": "f6e22ad7832e9543dd59e6cf47a7939efd77123ff7d3d92f15651c28940867d7"
+    "assets/paladin-male-oathkeeper-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/armor-male/candidate.glb",
+      "sha256": "d5446fc3bf893d0e2e36ca2633de7b52f7b263283d1452497eb075dd9f1096c3",
+      "bytes": 1403668
     },
-    "assets/paladin-trinket-highward-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-highward-icon.png",
-      "sha256": "022f853861d2bd3b010dda88a178a23a8b8475109651ef62f514b161e374cbd0"
+    "assets/paladin-oathkeeper-boots-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots/icon.png",
+      "sha256": "25cb5f9e87b1c70c48de36e67e40bab9a33875f242c17e647fe459451f1dacfc",
+      "bytes": 55725
     },
-    "assets/paladin-trinket-highward.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-highward.glb",
-      "sha256": "d9fc3efd5adcf06e963329fd24421424bba1e8c899d5b79edbb0c8e66c763037"
+    "assets/paladin-oathkeeper-boots-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots-display/oathkeeper-boots-display.glb",
+      "sha256": "21333fbb77daa26b80c4950778c1a12307f3a5db68578ca3c238f6a2a7738f6d",
+      "bytes": 486896
     },
-    "assets/paladin-trinket-mercy-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-mercy-icon.png",
-      "sha256": "ae3f6d60f1cc7c7ed8079130616c1bdd16b9d86a33e7e94f2157eccf274274a7"
+    "assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/78e5fa039d07f51f037645bb98d4d3c643fe2b6008fb8670b8871a72c6156f04.png",
+      "sha256": "70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc",
+      "bytes": 888128
     },
-    "assets/paladin-trinket-mercy.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-mercy.glb",
-      "sha256": "dc4ddeee25c1cfd8e6c47ea236cd305e6826975fbdf9bb24812c69c565206a70"
+    "assets/paladin-oathkeeper-boots.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots/candidate.glb",
+      "sha256": "8586e188e84cdbc1f776b10ef11f9f981fc82bc24ec2661d2d9fa5b5fb78b163",
+      "bytes": 816104
+    },
+    "assets/paladin-oathkeeper-helmet-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet-icon.png",
+      "sha256": "b40bf9cc0cca6ff71d19a69c318410a9186ac7ff4ace66113a68214e8452be76",
+      "bytes": 69680
+    },
+    "assets/paladin-oathkeeper-helmet.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.glb",
+      "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
+      "bytes": 251548
+    },
+    "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/6ec6216d849c7fbe009b884599053193b3545e95784e6a7fb7c721a712a33912.png",
+      "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e",
+      "bytes": 903966
+    },
+    "assets/paladin-hammer-2h-oathkeeper.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-hammer-2h/oathkeeper-hammer-2h.glb",
+      "sha256": "d535c5723595bd3184f3c694aa25dff2a30d00e20e9a92693712f6ad27701480",
+      "bytes": 357328
+    },
+    "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/55492124b31a2e18493bc486d6ed6274be64b112c6866fb1f29efd16b57a0558.png",
+      "sha256": "e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af",
+      "bytes": 1025118
+    },
+    "assets/paladin-hammer-2h-oathkeeper-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_oathkeeper/fragment-1.glb",
+      "sha256": "94f9698773e2f513fecb797b57c68fb1753f462afac732a1ae17df393a5779f2",
+      "bytes": 129228
+    },
+    "assets/paladin-hammer-2h-oathkeeper-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_oathkeeper/fragment-2.glb",
+      "sha256": "85a539edfe873a93b2ca66cc3a8ed8a4727db6366b653ce1201f234d61569a53",
+      "bytes": 131688
+    },
+    "assets/paladin-hammer-2h-oathkeeper-fragment-3.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_oathkeeper/fragment-3.glb",
+      "sha256": "c669065c00d348a5faf606af18ff4c6ffc2d1e97e5225ae3eb04b55bec0282e3",
+      "bytes": 120040
+    },
+    "assets/paladin-hammer-2h-oathkeeper-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_oathkeeper/display.glb",
+      "sha256": "e23ba679fa840b31dd6a7a704acecdb9c55882d65066f98dadfaea91f7c8a6f2",
+      "bytes": 357324
+    },
+    "assets/paladin-hammer-2h-oathkeeper-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_oathkeeper/display-fragment-1.glb",
+      "sha256": "ca54b0302ddc9aeed66ee8f0595aa7fa092c90e57852d5d062731747a00182dd",
+      "bytes": 129228
+    },
+    "assets/paladin-hammer-2h-oathkeeper-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_oathkeeper/display-fragment-2.glb",
+      "sha256": "cf6efb19657a448720faca209114b1f8bcc688868e31cf84f0e3103bc685a3fb",
+      "bytes": 131692
+    },
+    "assets/paladin-hammer-2h-oathkeeper-fragment-3-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_oathkeeper/display-fragment-3.glb",
+      "sha256": "ed21cfb0b0600d55412b6b1abc08e06cf19656d97e6ac6e5028d8f94a9c48453",
+      "bytes": 120044
+    },
+    "assets/paladin-hammer-1h-highward.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-hammer-1h/highward-hammer-1h.glb",
+      "sha256": "2e60bc5bff252c38a1c777e45aa78a13a768d328057d635f42a562dd7d9f74cb",
+      "bytes": 298272
+    },
+    "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/55c3e837cea1c5173ccf5cc831dc21c294cde6237989e31255c2738c56b8ec2e.png",
+      "sha256": "e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229",
+      "bytes": 1001714
+    },
+    "assets/paladin-hammer-1h-highward-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_highward/fragment-1.glb",
+      "sha256": "2008505426b7eb78616c4d1607c2cffcf085fe7335e9a00e68218c17083862b0",
+      "bytes": 150588
+    },
+    "assets/paladin-hammer-1h-highward-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_highward/fragment-2.glb",
+      "sha256": "8f53a7b3f3baa25abdc4a74ee8c2d38c6789b20242e3df1f5dd8edaf259aa7f9",
+      "bytes": 151352
+    },
+    "assets/paladin-shield-highward-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-shield/highward-shield-icon.png",
+      "sha256": "fe9303a374b7279ab53858230db9070016821877e51547393ff1c0526773c47b",
+      "bytes": 69891
+    },
+    "assets/paladin-shield-highward.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-shield/highward-shield.glb",
+      "sha256": "ecca4f414e3ba12a63f1991ec81da2353f74111118ab02abdb8272149fd357f2",
+      "bytes": 302568
+    },
+    "assets/atlas-1e4a588cfb80a2147be246a18b88c77c589be0899587aa1f6fa99c9020e40f03.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/c1052fbd3b9f6924130b163472a63740b731638e3acd9d30e4955071e7079ff1.png",
+      "sha256": "1e4a588cfb80a2147be246a18b88c77c589be0899587aa1f6fa99c9020e40f03",
+      "bytes": 287162
+    },
+    "assets/paladin-shield-highward-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-shield-display/highward-shield-display.glb",
+      "sha256": "55cb78d553f3293a23d81d4088e46c4f5763d0aaab599e5b71c07b1f5806224a",
+      "bytes": 302564
+    },
+    "assets/paladin-highward-armor-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/armor-male/icon.png",
+      "sha256": "6bf2c10ec1d607ea68d479895b5f43ad10905c585b0c36074dcd5d9bca9187ef",
+      "bytes": 74544
+    },
+    "assets/paladin-highward-armor-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/armor-display/highward-armor-display.glb",
+      "sha256": "ce919095bf54529000f68282136065212e4d0a7386d4fe722941ae7e3f89bfdc",
+      "bytes": 794912
+    },
+    "assets/atlas-2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/2e62bd955f23b9eaaba52f32832c472d6b8e48dc78b67651009ebd26f0856de6.png",
+      "sha256": "2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9",
+      "bytes": 1044313
+    },
+    "assets/paladin-female-highward-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/armor-female/candidate.glb",
+      "sha256": "f8a85ed28443e2f2663b9ccb667a43b0fbb481c5c7eb8aea1ef55e9f9a3abebb",
+      "bytes": 1324968
+    },
+    "assets/paladin-male-highward-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/armor-male/candidate.glb",
+      "sha256": "23012677c64d761d88f34b69d54fc1357235622a0fc94320d207fab1ee9f2fe7",
+      "bytes": 1325604
+    },
+    "assets/paladin-highward-boots-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots/icon.png",
+      "sha256": "77e9cc6458c3daec450ea0ed87869c77e50de737601e159143a275f6923e8c2a",
+      "bytes": 56618
+    },
+    "assets/paladin-highward-boots-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots-display/highward-boots-display.glb",
+      "sha256": "d77abed8fbac015331059ec660f474121d0e88b6a931591e0580d9a82c2ff877",
+      "bytes": 460340
+    },
+    "assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/f8ff0916524ab5ff82ce4d47fdbb242c3927acb9e56bd12986a9e0487b466f9f.png",
+      "sha256": "700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef",
+      "bytes": 1087669
+    },
+    "assets/paladin-highward-boots.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots/candidate.glb",
+      "sha256": "eb84f7d97a7c1cbd323cb85a874e844166cb2553b00bd9feb5cdc16be572d5f1",
+      "bytes": 769620
+    },
+    "assets/paladin-highward-helmet-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet-icon.png",
+      "sha256": "150a365bc691cb417d0d24cdd4a70f567f53cce4f2026a04309b37f3d4026224",
+      "bytes": 73488
+    },
+    "assets/paladin-highward-helmet.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet.glb",
+      "sha256": "dd709f2c9b5edcad26802c02b903a34b143fb6ac1bce372c3a2c33a00fe6fd65",
+      "bytes": 258108
+    },
+    "assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/68e3001656d03d8be268af5fda0463b28199db882641f2c63f5c77b206364174.png",
+      "sha256": "47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8",
+      "bytes": 1000779
+    },
+    "assets/paladin-hammer-2h-highward.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-hammer-2h/highward-hammer-2h.glb",
+      "sha256": "8d67839f171c2015be7fa2e55ce17adc6c2b9d078e7c752e093d61bf555c6e00",
+      "bytes": 412624
+    },
+    "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/bc5e8e049f39c5312ce44ae4b3b53573fee12eaa306659e9cb6cb5a2c346f70a.png",
+      "sha256": "5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab",
+      "bytes": 1150625
+    },
+    "assets/paladin-hammer-2h-highward-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_highward/fragment-1.glb",
+      "sha256": "fe78f142edf58e10dd522173da32011c7660070c3eaed8d5fb21118497cca8b5",
+      "bytes": 181084
+    },
+    "assets/paladin-hammer-2h-highward-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_highward/fragment-2.glb",
+      "sha256": "1d636af7c9dd548778c62dff2368fb91483cc5ecd8cbfc0ace136fc2678fbebe",
+      "bytes": 106616
+    },
+    "assets/paladin-hammer-2h-highward-fragment-3.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_highward/fragment-3.glb",
+      "sha256": "345f6a36afa7ba27c98123533286c76af8327a0ced3ebc72b955e402fbf902da",
+      "bytes": 139096
+    },
+    "assets/paladin-hammer-2h-highward-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_highward/display.glb",
+      "sha256": "9874e149599eb5ef97039c7ce5ee616f7a71db1214170520a2b95f73135cd585",
+      "bytes": 412624
+    },
+    "assets/paladin-hammer-2h-highward-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_highward/display-fragment-1.glb",
+      "sha256": "1aa9f3a1d7427180222a0738bbeff5455c3fd1b3d682f94303cbd16680a188f3",
+      "bytes": 181084
+    },
+    "assets/paladin-hammer-2h-highward-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_highward/display-fragment-2.glb",
+      "sha256": "0f3ffb8e05a62157c7d79bf9d1e2e94cc4bbc4aa79426ad510d7b776baad5c66",
+      "bytes": 106612
+    },
+    "assets/paladin-hammer-2h-highward-fragment-3-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_highward/display-fragment-3.glb",
+      "sha256": "28999df63895704b4207e127a3e530b109ddcbe880e7968ce07b45f2f8e28998",
+      "bytes": 139096
+    },
+    "assets/paladin-hammer-1h-mercy.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-hammer-1h/mercy-hammer-1h.glb",
+      "sha256": "2f85f3c35e4c4971e2006713500b15979bb7319a66b01632367ddfe2afefdc02",
+      "bytes": 332744
+    },
+    "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/70d820a1eedeacda4d3498c9bebe2ed2a0667aed533c126d661d907f7d5ad3b6.png",
+      "sha256": "d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7",
+      "bytes": 998232
+    },
+    "assets/paladin-hammer-1h-mercy-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_mercy/fragment-1.glb",
+      "sha256": "37c16ad10a77e5612dbdb9400464a978c1eb7e0870487a5b151541a36cb18d8c",
+      "bytes": 206600
+    },
+    "assets/paladin-hammer-1h-mercy-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_mercy/fragment-2.glb",
+      "sha256": "9074f35ccf7715add6a1d15c10ae06df72da77e2faa6e7f067e50bf904f2dac7",
+      "bytes": 130228
+    },
+    "assets/paladin-shield-mercy-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-shield/mercy-shield-icon.png",
+      "sha256": "e373a4d56559da8a2f091afb87a3a2c727372285743d5dc4e2d406e401ebb9a6",
+      "bytes": 64887
+    },
+    "assets/paladin-shield-mercy.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-shield/mercy-shield.glb",
+      "sha256": "94915c646cb8400098fe24e89b9b2bed322545b3ed7e6d1dc9e2980b3d89bd6d",
+      "bytes": 238072
+    },
+    "assets/atlas-fd301cd3d6a3c7f3d1506094855bb80b0f53108c6091f93b98b9d90aaeb3db8f.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/39b434eb7229b8cd1c40f2dcff0648039d64b0b6d88b11a6a96947cf24dd46e8.png",
+      "sha256": "fd301cd3d6a3c7f3d1506094855bb80b0f53108c6091f93b98b9d90aaeb3db8f",
+      "bytes": 874512
+    },
+    "assets/paladin-shield-mercy-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-shield-display/mercy-shield-display.glb",
+      "sha256": "365e6474d798dd3dd5237b44d05a8047a4481e320d7a353fc5f2ba0031bb7b79",
+      "bytes": 238068
+    },
+    "assets/paladin-mercy-armor-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/armor-male/icon.png",
+      "sha256": "2ed451bddc21f4f824f649e09278ad0f03e5f973cb96fa56435f26c07947659e",
+      "bytes": 70784
+    },
+    "assets/paladin-mercy-armor-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/armor-display/mercy-armor-display.glb",
+      "sha256": "7c1749a82155fd99c671ba6ba5e0608e5d7cabe06a4c3fb3659492455959cffc",
+      "bytes": 759812
+    },
+    "assets/atlas-5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/b099e5e06ebee3430a696f3fe0bdce3bbbfc4dd2c9cc467fb7b900cbfd833aaf.png",
+      "sha256": "5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec",
+      "bytes": 997350
+    },
+    "assets/paladin-female-mercy-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/armor-female/candidate.glb",
+      "sha256": "9bea5f953ba50bc1ebfbba9bb8a6a48d201f03c5e68d59c3ac4116ec44d51fe6",
+      "bytes": 1263756
+    },
+    "assets/paladin-male-mercy-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/armor-male/candidate.glb",
+      "sha256": "ec69c4bd68795b3c851540a4a9b3d21b3c5088ae18eca4d6d2028943de72e821",
+      "bytes": 1264392
+    },
+    "assets/paladin-mercy-boots-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots/icon.png",
+      "sha256": "5a68d5c9c7b1dfbb4356c12cd50e8b8fedc270de110af96bb344463cc0207a9c",
+      "bytes": 55260
+    },
+    "assets/paladin-mercy-boots-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots-display/mercy-boots-display.glb",
+      "sha256": "1fc1451a91123322fe762e3f86e1819d11f0635876f51748fd5edaa44f998b70",
+      "bytes": 491316
+    },
+    "assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/1a4d7a0067071a18caeafe1917554f29c297e3c9819a8cf3613c3308ea23eb26.png",
+      "sha256": "fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2",
+      "bytes": 914895
+    },
+    "assets/paladin-mercy-boots.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots/candidate.glb",
+      "sha256": "44e7ad599e659b6d4962ef32fa0107cf0163e1b537654d822f1d2267338e8fd3",
+      "bytes": 823828
+    },
+    "assets/paladin-mercy-helmet-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet-icon.png",
+      "sha256": "b1b2a419f077fda8e3d99b73495d25fb10da5536087dd751e60f00f7af1e07dc",
+      "bytes": 68349
+    },
+    "assets/paladin-mercy-helmet.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet.glb",
+      "sha256": "94080d663173b819a680bef0385fda72f674ca575b0e6cdd0f53f4207cd858bd",
+      "bytes": 250460
+    },
+    "assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/e6ad07b5419251bf6ff0bbde0f3d7860aad20a00e35571e258434967d2afc88a.png",
+      "sha256": "ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf",
+      "bytes": 787472
+    },
+    "assets/paladin-hammer-2h-mercy.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-hammer-2h/mercy-hammer-2h.glb",
+      "sha256": "6b17e3a665311b27b3ece108e1e92cb053afef4cd4f22cb832edcc3a5396c544",
+      "bytes": 373424
+    },
+    "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/6f39f1269c444a1bb61f83fb6da1b74847d426b1fc1ffff160a72c2747b8eb58.png",
+      "sha256": "640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051",
+      "bytes": 914484
+    },
+    "assets/paladin-hammer-2h-mercy-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_mercy/fragment-1.glb",
+      "sha256": "db4eda9aa107626d0fb6d0ee589eef9046518fc9173f82ffc68db74ff10b74e9",
+      "bytes": 103464
+    },
+    "assets/paladin-hammer-2h-mercy-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_mercy/fragment-2.glb",
+      "sha256": "0cebeea3b0e4bff84b5de4cc1d4a34aaef60e8ce74e35bc6a632c323bfe79e31",
+      "bytes": 109876
+    },
+    "assets/paladin-hammer-2h-mercy-fragment-3.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_mercy/fragment-3.glb",
+      "sha256": "bfe9913b9a798f4b2ab580756d8a0df9ec9ef97bdec668ef3b353eec4777cd9c",
+      "bytes": 185324
+    },
+    "assets/paladin-hammer-2h-mercy-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_mercy/display.glb",
+      "sha256": "1a396ea53f65cc9972b289e262f7ea6e4ef1b4f5ea2eaf486b78d75a3a244c30",
+      "bytes": 373424
+    },
+    "assets/paladin-hammer-2h-mercy-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_mercy/display-fragment-1.glb",
+      "sha256": "ea4d5f53d5c9bb6c858ed935bf1a1192ba6bcbe822065b027e434976f6d83626",
+      "bytes": 103468
+    },
+    "assets/paladin-hammer-2h-mercy-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_mercy/display-fragment-2.glb",
+      "sha256": "f9a63d4f8a2653fc20211e2bc3028929968d775a85fa2d2dd0bd4807591e877f",
+      "bytes": 109880
+    },
+    "assets/paladin-hammer-2h-mercy-fragment-3-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_mercy/display-fragment-3.glb",
+      "sha256": "e5c8e2af1336730114c85e628c11e93251bf802a67434e7b25a34888c06b9657",
+      "bytes": 185328
+    },
+    "assets/paladin-hammer-1h-verdict.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-hammer-1h/verdict-hammer-1h.glb",
+      "sha256": "851d240eea2c97d51e3454a1db1e04f325fa6455280ab8127d149a544154581a",
+      "bytes": 343340
+    },
+    "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/221b5bfa989ee071f2361be64d37a1de9eb68af06b7c26b8ced4b7fabf8ad0de.png",
+      "sha256": "a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462",
+      "bytes": 989838
+    },
+    "assets/paladin-hammer-1h-verdict-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_verdict/fragment-1.glb",
+      "sha256": "1638f613fdc23cce5abca2cd835f693fcc86abf46ef084581673251fb4797916",
+      "bytes": 241008
+    },
+    "assets/paladin-hammer-1h-verdict-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_verdict/fragment-2.glb",
+      "sha256": "c3ca0f0a205fd03726667c2bcee149211c493054a067721b02cc791d02b0d7f9",
+      "bytes": 108360
+    },
+    "assets/paladin-shield-verdict-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-shield/verdict-shield-icon.png",
+      "sha256": "9f62c88b1fe61646bb6612dbfb78400e6829017c4f88a2259ec6b3043282cf7b",
+      "bytes": 64314
+    },
+    "assets/paladin-shield-verdict.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-shield/verdict-shield.glb",
+      "sha256": "ece2e3e930052526c55f5cab7a0e341acd3a881d5409ef9cf114676edbf78e66",
+      "bytes": 186008
+    },
+    "assets/atlas-7f7a129340c6fb1bbd3c5f5434e9c9a95298bba5aae1e401d3271d524406c7a0.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/58e93718b91352e9f2c133af1dd607a39ecf8f840f2205e0522cc92fa075d42f.png",
+      "sha256": "7f7a129340c6fb1bbd3c5f5434e9c9a95298bba5aae1e401d3271d524406c7a0",
+      "bytes": 271239
+    },
+    "assets/paladin-shield-verdict-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-shield-display/verdict-shield-display.glb",
+      "sha256": "3b4218bd8400beb98956f6bf983560517ffd61e98cc721179fd5ed62f3bb5aad",
+      "bytes": 186008
+    },
+    "assets/paladin-verdict-armor-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/armor-male/icon.png",
+      "sha256": "9b03623faabfd65668bfea3039bfd79c64f01cb7c7875c4203a9a173e27281c5",
+      "bytes": 73632
+    },
+    "assets/paladin-verdict-armor-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/armor-display/verdict-armor-display.glb",
+      "sha256": "590b77f377837025b80a00cdea2871df0c4f163da8f1ab209ab16125702a037f",
+      "bytes": 795776
+    },
+    "assets/atlas-9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/fe5921ff761240bfc645ed7edf8d1545bcda1a4118edac053750e9870b384f6c.png",
+      "sha256": "9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a",
+      "bytes": 955293
+    },
+    "assets/paladin-female-verdict-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/armor-female/candidate.glb",
+      "sha256": "8798bc06ce76cac8b36b182df35d019f1c25ea0b4ab19fe6953373cf48f32f09",
+      "bytes": 1327432
+    },
+    "assets/paladin-male-verdict-armor.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/armor-male/candidate.glb",
+      "sha256": "bdaf8edcd5a049da3d84a74abb7cfe32753309438b1978556c67846a64916673",
+      "bytes": 1328068
+    },
+    "assets/paladin-verdict-boots-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots/icon.png",
+      "sha256": "0183b38dee050cdde53a07b21210fb007d7181a8dbdc7afb34793fd8ca0243c2",
+      "bytes": 51754
+    },
+    "assets/paladin-verdict-boots-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots-display/verdict-boots-display.glb",
+      "sha256": "09a638c0cb9f7d82e6c0d3cbf9094feaadada3f03727f3d66a5b0974bb3f71df",
+      "bytes": 503092
+    },
+    "assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/679d810561309f3e8d4615c61c8476b87f06c82b2d10da2cf4c73a82670272b1.png",
+      "sha256": "3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f",
+      "bytes": 857830
+    },
+    "assets/paladin-verdict-boots.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots/candidate.glb",
+      "sha256": "b1d7444a193f19bc1d6117429b7524fc25b6789b0192a4446986a646be3ca5ad",
+      "bytes": 844436
+    },
+    "assets/paladin-verdict-helmet-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet-icon.png",
+      "sha256": "09ed181a164a38893b29e365679cd875b19428aedb962c4a74edc0c0e57c7d13",
+      "bytes": 72826
+    },
+    "assets/paladin-verdict-helmet.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet.glb",
+      "sha256": "f466c8d44bdc48226113967893309a62767af8c51dbd0ce094b01e246c144dd6",
+      "bytes": 247900
+    },
+    "assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/212c20823310b90528cfb83091720b4764fa6ef8a4709feb844cffc8b6b472c1.png",
+      "sha256": "394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507",
+      "bytes": 843852
+    },
+    "assets/paladin-hammer-2h-verdict.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-hammer-2h/verdict-hammer-2h.glb",
+      "sha256": "55def31e6feefa24e435dc804bffcbfeb9eeaf1883d123587a5070cafe8bbf77",
+      "bytes": 352076
+    },
+    "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/2b97bf69e651678d0867f1a751ee9e0238b5b2f2b15556089b738348be1a77c8.png",
+      "sha256": "7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a",
+      "bytes": 922036
+    },
+    "assets/paladin-hammer-2h-verdict-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_verdict/fragment-1.glb",
+      "sha256": "5f7f2369be06995c87274d73c9af6f069831cf30c28c2cab304c4712457b675f",
+      "bytes": 100808
+    },
+    "assets/paladin-hammer-2h-verdict-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_verdict/fragment-2.glb",
+      "sha256": "be14a50ea7b0c307f7ec693ce290533421e5f1b724f6ec86076bdebd296e84fc",
+      "bytes": 112608
+    },
+    "assets/paladin-hammer-2h-verdict-fragment-3.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_verdict/fragment-3.glb",
+      "sha256": "7dff5c99f72056d2e3c59a95b019668c66bb2c4fb62bd7ce66e71e17cfd32a7c",
+      "bytes": 158440
+    },
+    "assets/paladin-hammer-2h-verdict-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_verdict/display.glb",
+      "sha256": "20727e5ef89b40986c052d18431dce7e38603484122ada417e6a4c03128fae58",
+      "bytes": 352076
+    },
+    "assets/paladin-hammer-2h-verdict-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_verdict/display-fragment-1.glb",
+      "sha256": "38c59267ffeae9ecd295c9a0204475a22eafe6b4d4825495f9c96ba625c6dbe3",
+      "bytes": 100808
+    },
+    "assets/paladin-hammer-2h-verdict-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_verdict/display-fragment-2.glb",
+      "sha256": "b9e556f52553f7bc7436be3f0ea80925e3a930f24c40e752aba73136a456c75a",
+      "bytes": 112608
+    },
+    "assets/paladin-hammer-2h-verdict-fragment-3-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_verdict/display-fragment-3.glb",
+      "sha256": "a16ad76acc199ba32a01bd77ba42e923efb1d3bfc24a7bdff7ffc7496c9ced77",
+      "bytes": 158444
+    },
+    "assets/paladin-hammer-2h-novice.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-hammer-2h/novice-hammer-2h.glb",
+      "sha256": "ed211efe64f3ea0124ee94306173ffffa7376250438a7783b13a3dfaa4ade595",
+      "bytes": 285148
+    },
+    "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/76cd5ef9f4fd0f7fa632cef41621b8c78222539485fec82d3d0e18cc231c90ef.png",
+      "sha256": "c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e",
+      "bytes": 905274
+    },
+    "assets/paladin-hammer-2h-novice-fragment-1.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_novice/fragment-1.glb",
+      "sha256": "49621d434431dca6d80d7f089d0f767732f12dbcee511c9ca9a60e4e0ab8b8f0",
+      "bytes": 79956
+    },
+    "assets/paladin-hammer-2h-novice-fragment-2.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_novice/fragment-2.glb",
+      "sha256": "9059177d1ac58632114da4c174be93068b3cb5a1300dd0049837c8a966f406f8",
+      "bytes": 75988
+    },
+    "assets/paladin-hammer-2h-novice-fragment-3.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_novice/fragment-3.glb",
+      "sha256": "70add80721d453e25502eaaacf1a8e08c86495e7242903fa0ca3974b634ea94d",
+      "bytes": 152684
+    },
+    "assets/paladin-hammer-2h-novice-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_novice/display.glb",
+      "sha256": "2a7178ce06e6015286492f5fef8d75acb5779baefe1514c3983219f3ca5ade6c",
+      "bytes": 285144
+    },
+    "assets/paladin-hammer-2h-novice-fragment-1-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_novice/display-fragment-1.glb",
+      "sha256": "3f0e95d347dd0b512901679e61a0a6942d9648b79a99f566feb3473967b3f472",
+      "bytes": 79956
+    },
+    "assets/paladin-hammer-2h-novice-fragment-2-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_novice/display-fragment-2.glb",
+      "sha256": "7a45fe98dbf580872ae707da9633827488e2ba72cd06e280f6bc17a3ea7b6be3",
+      "bytes": 75988
+    },
+    "assets/paladin-hammer-2h-novice-fragment-3-display.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_novice/display-fragment-3.glb",
+      "sha256": "91e0f69f8837609372d047d007429a89e7db8547534e426c3d2e43313b852156",
+      "bytes": 152684
     },
     "assets/paladin-trinket-novice-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-novice-icon.png",
-      "sha256": "9a20de6ef2a93a73616781cfdc06d9c9d59f3c36072d8f8e2a6ce15a92111586"
+      "source": "art-experiments/paladin-overhaul/candidates/novice-trinket/novice-trinket-icon.png",
+      "sha256": "20db76f292261e4ca997f3e6d0fb77b7328591b6f6e181c2de8c352d96c5bf2d",
+      "bytes": 66414
     },
     "assets/paladin-trinket-novice.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-novice.glb",
-      "sha256": "70f0287c3693a3933ce0861ef0448eee8ae8ee577b2b5536c482a088c11db396"
+      "source": "art-experiments/paladin-overhaul/candidates/novice-trinket/novice-trinket.glb",
+      "sha256": "1f52d260f1172e3706f857e46b316fd700cf621ed16faeec2133dba5d43d2589",
+      "bytes": 112456
+    },
+    "assets/atlas-784ef8205354ff53362de6d5c277643d4971125da246bb0ca78e3476534033e8.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/c204c1ffb5dd8d4f3c175a744ab23967ff02f1e3eaf476df7f5b2533f83dfa07.png",
+      "sha256": "784ef8205354ff53362de6d5c277643d4971125da246bb0ca78e3476534033e8",
+      "bytes": 787735
+    },
+    "assets/paladin-necklace-novice-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-necklace/novice-necklace-icon.png",
+      "sha256": "a2f56f01f169f0180c551c0f6cb4098467853fdb5205ce39173e46a9a08b7190",
+      "bytes": 38164
+    },
+    "assets/paladin-necklace-novice.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/novice-necklace/novice-necklace.glb",
+      "sha256": "d69166df8ff24b1bd8da7aeec00e1b5d22bbb2f7f5a8695ed531a70fc0af4666",
+      "bytes": 176348
+    },
+    "assets/atlas-c243e5d5e21d69a07fe41e499ae798aaece435a801c7eb28a26fe6f738a1c127.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/708c566e218ed87e6638a3eb5534539c0df51542524ed39882a5b1e1b9764bf9.png",
+      "sha256": "c243e5d5e21d69a07fe41e499ae798aaece435a801c7eb28a26fe6f738a1c127",
+      "bytes": 981349
+    },
+    "assets/paladin-trinket-censure-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-trinket/censure-trinket-icon.png",
+      "sha256": "995d2bcd57dc44cb537fb1b5bd5046535a09d8d1e2f6816575d61a57f0a26105",
+      "bytes": 56148
+    },
+    "assets/paladin-trinket-censure.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-trinket/censure-trinket.glb",
+      "sha256": "5acc823db836a4919d05a7cb69ebd71b3e7dae0fc35a58e7ab4b1c17acfa4808",
+      "bytes": 153760
+    },
+    "assets/atlas-925a07524c816904ba4b84350671d231a4004ae0855b51767f2c4cf7e4dc139f.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/6d67109f3bee496c88f54c12c49791b14d29126e1d4d4c0c1b792e648eb8775b.png",
+      "sha256": "925a07524c816904ba4b84350671d231a4004ae0855b51767f2c4cf7e4dc139f",
+      "bytes": 936993
+    },
+    "assets/paladin-necklace-censure-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-necklace/censure-necklace-icon.png",
+      "sha256": "6a7827aac124bb3fbfee763f326d1d42a6ce5d73ef6d72ac9dd3f68416212540",
+      "bytes": 52210
+    },
+    "assets/paladin-necklace-censure.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/censure-necklace/censure-necklace.glb",
+      "sha256": "346ed6e8b54341481fea8aa2d4dbbe66f8784ed437ebab79ef91b4789f0a3f6b",
+      "bytes": 329776
+    },
+    "assets/atlas-cef3300a985f7a0fc182183168493e033869f0d838bd7ccb04f65b269979f8ed.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/eff5f1cd52ad067a4f6aabebfe80ab04e59511d1534fd5611165119fdeaaf1d5.png",
+      "sha256": "cef3300a985f7a0fc182183168493e033869f0d838bd7ccb04f65b269979f8ed",
+      "bytes": 1113686
     },
     "assets/paladin-trinket-oathkeeper-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-oathkeeper-icon.png",
-      "sha256": "80e33d2916c281c3af81d70abd2616755740b2fa036709ba693031687a8eb457"
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-trinket/oathkeeper-trinket-icon.png",
+      "sha256": "05e7c7062090f4d08116b0c790694477837c7c42721bf070ab38b79501126a95",
+      "bytes": 47004
     },
     "assets/paladin-trinket-oathkeeper.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-oathkeeper.glb",
-      "sha256": "d38b8d2cc048a3333eb8983b32ab2e111531104d580654574cc40ebe82d32545"
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-trinket/oathkeeper-trinket.glb",
+      "sha256": "b253b324540f89386c0f696574db70708abffd6f604ce2b0c14770e051d5681d",
+      "bytes": 110144
+    },
+    "assets/atlas-a101e61cae6049187f771495f874db474af49d182f4739c0c05d101c766fa6ee.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/59d1b44f7a03349bf23f0ceb65f4681683b29662a4ca2331ae1ea654cdd25a32.png",
+      "sha256": "a101e61cae6049187f771495f874db474af49d182f4739c0c05d101c766fa6ee",
+      "bytes": 688298
+    },
+    "assets/paladin-necklace-oathkeeper-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-necklace/oathkeeper-necklace-icon.png",
+      "sha256": "c6ba9984e4a67fd856e151fea5582a9bbbc0566853b787e02ec2992d101cc93e",
+      "bytes": 56098
+    },
+    "assets/paladin-necklace-oathkeeper.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-necklace/oathkeeper-necklace.glb",
+      "sha256": "51f7850bed4f3c3da8aadc54ab9d8a0a8df19b1debb9d84627ca90ca164738c7",
+      "bytes": 279304
+    },
+    "assets/atlas-5bb46537bd991728736dacb9f34333616b86e9598af467f7f10e889b27be45ac.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/dc36a29348421125ceeb6bd9fd3e7476d677cb12a2796806b0f7a7e9869e3f8b.png",
+      "sha256": "5bb46537bd991728736dacb9f34333616b86e9598af467f7f10e889b27be45ac",
+      "bytes": 855257
+    },
+    "assets/paladin-trinket-highward-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-trinket/highward-trinket-icon.png",
+      "sha256": "03ca2dbf5c8f285d1836647b18891fa6071e68ae487bd0b75dccdf1f32c124d8",
+      "bytes": 68202
+    },
+    "assets/paladin-trinket-highward.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-trinket/highward-trinket.glb",
+      "sha256": "8a1833ea76d8d2844fb8b9cefc96e813b57420aa6d32aec4d974dde78722b4a5",
+      "bytes": 203928
+    },
+    "assets/atlas-095dddc9eaa4298135fc1223383b1839fb144e895df90a780bd2571862448399.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/49c77ebb2651ff7ce8712e8a0c01db9be23f30d93b57176aab9aabb78c0eee1e.png",
+      "sha256": "095dddc9eaa4298135fc1223383b1839fb144e895df90a780bd2571862448399",
+      "bytes": 913983
+    },
+    "assets/paladin-necklace-highward-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-necklace/highward-necklace-icon.png",
+      "sha256": "e54fd0324f714193114bae98ec97e573fe905b65bd53f17ade79f6ae7a5dc126",
+      "bytes": 53849
+    },
+    "assets/paladin-necklace-highward.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/highward-necklace/highward-necklace.glb",
+      "sha256": "789c83e8f180306471dabfade7022afe78cafb6c299286fea64eba6aa9fbf547",
+      "bytes": 239240
+    },
+    "assets/atlas-dc5dcd69a6bff895141e76f5a607b7086ab51f1054e72a04122709c596949333.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/2c4084966036f6a0f235af7d7a72e4dc7ae65ff881690ad370c7bd1bdbb7e406.png",
+      "sha256": "dc5dcd69a6bff895141e76f5a607b7086ab51f1054e72a04122709c596949333",
+      "bytes": 966133
+    },
+    "assets/paladin-trinket-mercy-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-trinket/mercy-trinket-icon.png",
+      "sha256": "5d76c5c231a805dd1c1cdfdc6f17fd523ea51c3659762404bb4e103825317284",
+      "bytes": 56852
+    },
+    "assets/paladin-trinket-mercy.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-trinket/mercy-trinket.glb",
+      "sha256": "cc977bfddb8775454e78a9992d8fc37626ccb1279e38b25dea3051ccd91b47ae",
+      "bytes": 202872
+    },
+    "assets/atlas-67e46556586e353a5de2aa4a774976a6d23d17701828267777c5ddb4bd7b1022.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/c022e430ae43a5950bc3798d87d420e6e312504d0bdc3e5d07e4f0eee41cf7e4.png",
+      "sha256": "67e46556586e353a5de2aa4a774976a6d23d17701828267777c5ddb4bd7b1022",
+      "bytes": 800097
+    },
+    "assets/paladin-necklace-mercy-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-necklace/mercy-necklace-icon.png",
+      "sha256": "8859969d825be7bec0074044ce06ae0268ac660dbf51cef0f8457fa43c962384",
+      "bytes": 50665
+    },
+    "assets/paladin-necklace-mercy.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/mercy-necklace/mercy-necklace.glb",
+      "sha256": "53a0d7f655c97065be58ec5575bfbe1d1d9d03de8e2eec54094f730a2dfdbaa9",
+      "bytes": 318860
+    },
+    "assets/atlas-0521bc0ed222227c75cebd4660c6448656d0ebb931a15d7657c51f3fc716454f.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/86d586f56bd36e59e91fc3d47f1707d3c62324a6fa22a1f98532f0bf3c3165e9.png",
+      "sha256": "0521bc0ed222227c75cebd4660c6448656d0ebb931a15d7657c51f3fc716454f",
+      "bytes": 990159
     },
     "assets/paladin-trinket-verdict-icon.png": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-verdict-icon.png",
-      "sha256": "20317fac2af204f2e82388d089144162f3b52f961b8c2c944898998a23f42adf"
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-trinket/verdict-trinket-icon.png",
+      "sha256": "24142e4fe5e0aad83edcb4c488e367dda89f965f6b6bb11ac458afebbe7a343b",
+      "bytes": 48884
     },
     "assets/paladin-trinket-verdict.glb": {
-      "source": "art-experiments/paladin-accessories/paladin-trinket-verdict.glb",
-      "sha256": "c0d703b8daca8e23af09d1138c9ae30568f313df2ba93f535418f272ac0dfea3"
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-trinket/verdict-trinket.glb",
+      "sha256": "951b848dfcad1415cd52ed97948b125ccd2996f4b120feb89664bbaa6856a2f7",
+      "bytes": 198036
+    },
+    "assets/atlas-9d172089232f8e3fafd6c33422e72678825dc2188597b983be7f8f0b765e21ef.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/e2aa7c8fa33f2acd5f18d105d0e6c4ec1a45a4f3cbc9a03ff8c575814e81c32e.png",
+      "sha256": "9d172089232f8e3fafd6c33422e72678825dc2188597b983be7f8f0b765e21ef",
+      "bytes": 700973
+    },
+    "assets/paladin-necklace-verdict-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-necklace/verdict-necklace-icon.png",
+      "sha256": "a800001f5934119d29a5580a64954e0d8e2b2e5f59df80cba696606cf50aef51",
+      "bytes": 62473
+    },
+    "assets/paladin-necklace-verdict.glb": {
+      "source": "art-experiments/paladin-overhaul/candidates/verdict-necklace/verdict-necklace.glb",
+      "sha256": "7bcd18f12fddcb2accd1af798714ac8ea8a6fbf6a90cf78d690aebb87d72e233",
+      "bytes": 269132
+    },
+    "assets/atlas-009a996cf36dab0b94c7a9f3d8fb7390b3bea38388c7fb8c579b51c2e1777104.png": {
+      "source": "art-experiments/paladin-overhaul/runtime-textures/5dd7ab4d20babaa8f69a095d1d8f0029e61e3ea227bf144ce78de83a40738836.png",
+      "sha256": "009a996cf36dab0b94c7a9f3d8fb7390b3bea38388c7fb8c579b51c2e1777104",
+      "bytes": 978712
+    },
+    "assets/paladin-guard-icon.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/action-icons-v2/guard-256.png",
+      "sha256": "7577424512f3c0110a7a20a972b56e42b762000c692c468046bca263efa4ce10",
+      "bytes": 43538
+    },
+    "assets/paladin-censure-1h-action.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/action-icons-v2/censure-1h-256.png",
+      "sha256": "24d7e10fe4485b1ad7718d98b09e5d2c0a29aaa66d35dc33b860c8a3bb3db524",
+      "bytes": 34068
+    },
+    "assets/paladin-censure-2h-action.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/action-icons-v2/censure-2h-256.png",
+      "sha256": "2eadd91036c7ce6026cbbdfcecc2a04bb3a44e70ebe01982d9cfdad7b0800257",
+      "bytes": 35976
+    },
+    "assets/paladin-smite-action.png": {
+      "source": "art-experiments/paladin-overhaul/candidates/smite-action/smite-256.png",
+      "sha256": "b34feedf5acdd3c1edf6c2de03349c1251c2a3ad09b65de1ef27cf302b858e60",
+      "bytes": 30629
     }
+  },
+  "rendererRoutes": {
+    "paladin_hammer_1h_novice": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-novice.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-1.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-2.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-novice.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-1.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-2.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        }
+      ]
+    },
+    "paladin_hammer_2h_novice": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-novice.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-novice-fragment-1.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-novice-fragment-2.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-novice-fragment-3.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-novice-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-novice-fragment-1-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-novice-fragment-2-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-novice-fragment-3-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        }
+      ]
+    },
+    "paladin_shield_novice": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-novice.glb",
+          "texture": "assets/atlas-a31f8a13ff4809eb206a86ea68574e0e805be286ffa2a398b6e942f11b1efc58.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-novice-display.glb",
+          "texture": "assets/atlas-a31f8a13ff4809eb206a86ea68574e0e805be286ffa2a398b6e942f11b1efc58.png"
+        }
+      ]
+    },
+    "paladin_hammer_1h_oathkeeper": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-oathkeeper.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-1.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-2.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-oathkeeper.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-1.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-2.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        }
+      ]
+    },
+    "paladin_hammer_2h_oathkeeper": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-oathkeeper.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-1.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-2.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-3.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-oathkeeper-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-1-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-2-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-3-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        }
+      ]
+    },
+    "paladin_shield_oathkeeper": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-oathkeeper.glb",
+          "texture": "assets/atlas-c49d74d57afc27eaf203f9cf6d1e437fa8659d62a8b1fd0b2edae319020022b5.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-oathkeeper-display.glb",
+          "texture": "assets/atlas-c49d74d57afc27eaf203f9cf6d1e437fa8659d62a8b1fd0b2edae319020022b5.png"
+        }
+      ]
+    },
+    "paladin_hammer_1h_highward": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-highward.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-1.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-2.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-highward.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-1.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-2.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        }
+      ]
+    },
+    "paladin_hammer_2h_highward": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-highward.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-highward-fragment-1.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-highward-fragment-2.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-highward-fragment-3.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-highward-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-highward-fragment-1-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-highward-fragment-2-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-highward-fragment-3-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        }
+      ]
+    },
+    "paladin_shield_highward": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-highward.glb",
+          "texture": "assets/atlas-1e4a588cfb80a2147be246a18b88c77c589be0899587aa1f6fa99c9020e40f03.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-highward-display.glb",
+          "texture": "assets/atlas-1e4a588cfb80a2147be246a18b88c77c589be0899587aa1f6fa99c9020e40f03.png"
+        }
+      ]
+    },
+    "paladin_hammer_1h_mercy": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-mercy.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-1.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-2.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-mercy.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-1.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-2.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        }
+      ]
+    },
+    "paladin_hammer_2h_mercy": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-mercy.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-1.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-2.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-3.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-mercy-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-1-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-2-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-3-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        }
+      ]
+    },
+    "paladin_shield_mercy": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-mercy.glb",
+          "texture": "assets/atlas-fd301cd3d6a3c7f3d1506094855bb80b0f53108c6091f93b98b9d90aaeb3db8f.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-mercy-display.glb",
+          "texture": "assets/atlas-fd301cd3d6a3c7f3d1506094855bb80b0f53108c6091f93b98b9d90aaeb3db8f.png"
+        }
+      ]
+    },
+    "paladin_hammer_1h_censure": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-censure.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-1.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-2.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-censure.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-1.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-2.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        }
+      ]
+    },
+    "paladin_hammer_2h_censure": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-censure.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-censure-fragment-1.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-censure-fragment-2.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-censure-fragment-3.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-censure-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-censure-fragment-1-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-censure-fragment-2-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-censure-fragment-3-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        }
+      ]
+    },
+    "paladin_shield_censure": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-censure.glb",
+          "texture": "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-censure-display.glb",
+          "texture": "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png"
+        }
+      ]
+    },
+    "paladin_hammer_1h_verdict": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-verdict.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-1.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-2.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-verdict.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-1.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-2.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        }
+      ]
+    },
+    "paladin_hammer_2h_verdict": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-verdict.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-1.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-2.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-3.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-verdict-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-1-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-2-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-3-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        }
+      ]
+    },
+    "paladin_shield_verdict": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-verdict.glb",
+          "texture": "assets/atlas-7f7a129340c6fb1bbd3c5f5434e9c9a95298bba5aae1e401d3271d524406c7a0.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-verdict-display.glb",
+          "texture": "assets/atlas-7f7a129340c6fb1bbd3c5f5434e9c9a95298bba5aae1e401d3271d524406c7a0.png"
+        }
+      ]
+    },
+    "paladin_armor_novice": {
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-novice-armor-display.glb",
+          "texture": "assets/atlas-9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-novice-armor.glb",
+            "texture": "assets/atlas-9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-novice-armor.glb",
+            "texture": "assets/atlas-9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3.png"
+          }
+        ]
+      }
+    },
+    "paladin_boots_novice": {
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-novice-boots-display.glb",
+          "texture": "assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-novice-boots.glb",
+            "texture": "assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png"
+          }
+        ]
+      }
+    },
+    "paladin_helmet_novice": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-novice-helmet.glb",
+          "texture": "assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-novice-helmet.glb",
+          "texture": "assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png"
+        }
+      ]
+    },
+    "paladin_armor_oathkeeper": {
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-oathkeeper-armor-display.glb",
+          "texture": "assets/atlas-8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-oathkeeper-armor.glb",
+            "texture": "assets/atlas-8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-oathkeeper-armor.glb",
+            "texture": "assets/atlas-8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66.png"
+          }
+        ]
+      }
+    },
+    "paladin_boots_oathkeeper": {
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-oathkeeper-boots-display.glb",
+          "texture": "assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-oathkeeper-boots.glb",
+            "texture": "assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png"
+          }
+        ]
+      }
+    },
+    "paladin_helmet_oathkeeper": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-oathkeeper-helmet.glb",
+          "texture": "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-oathkeeper-helmet.glb",
+          "texture": "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
+        }
+      ]
+    },
+    "paladin_armor_highward": {
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-highward-armor-display.glb",
+          "texture": "assets/atlas-2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-highward-armor.glb",
+            "texture": "assets/atlas-2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-highward-armor.glb",
+            "texture": "assets/atlas-2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9.png"
+          }
+        ]
+      }
+    },
+    "paladin_boots_highward": {
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-highward-boots-display.glb",
+          "texture": "assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-highward-boots.glb",
+            "texture": "assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png"
+          }
+        ]
+      }
+    },
+    "paladin_helmet_highward": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-highward-helmet.glb",
+          "texture": "assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-highward-helmet.glb",
+          "texture": "assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png"
+        }
+      ]
+    },
+    "paladin_armor_mercy": {
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-mercy-armor-display.glb",
+          "texture": "assets/atlas-5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-mercy-armor.glb",
+            "texture": "assets/atlas-5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-mercy-armor.glb",
+            "texture": "assets/atlas-5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec.png"
+          }
+        ]
+      }
+    },
+    "paladin_boots_mercy": {
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-mercy-boots-display.glb",
+          "texture": "assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-mercy-boots.glb",
+            "texture": "assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png"
+          }
+        ]
+      }
+    },
+    "paladin_helmet_mercy": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-mercy-helmet.glb",
+          "texture": "assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-mercy-helmet.glb",
+          "texture": "assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png"
+        }
+      ]
+    },
+    "paladin_armor_censure": {
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-censure-armor-display.glb",
+          "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-censure-armor.glb",
+            "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-censure-armor.glb",
+            "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+          }
+        ]
+      }
+    },
+    "paladin_boots_censure": {
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-censure-boots-display.glb",
+          "texture": "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-censure-boots.glb",
+            "texture": "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png"
+          }
+        ]
+      }
+    },
+    "paladin_helmet_censure": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-censure-helmet.glb",
+          "texture": "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-censure-helmet.glb",
+          "texture": "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png"
+        }
+      ]
+    },
+    "paladin_armor_verdict": {
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-verdict-armor-display.glb",
+          "texture": "assets/atlas-9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-verdict-armor.glb",
+            "texture": "assets/atlas-9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-verdict-armor.glb",
+            "texture": "assets/atlas-9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a.png"
+          }
+        ]
+      }
+    },
+    "paladin_boots_verdict": {
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-verdict-boots-display.glb",
+          "texture": "assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-verdict-boots.glb",
+            "texture": "assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png"
+          }
+        ]
+      }
+    },
+    "paladin_helmet_verdict": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-verdict-helmet.glb",
+          "texture": "assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-verdict-helmet.glb",
+          "texture": "assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png"
+        }
+      ]
+    },
+    "paladin_hammer_1h_last_vigil": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-last-vigil.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-1.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-2.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-last-vigil-display.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-1-display.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-2-display.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        }
+      ]
+    },
+    "paladin_hammer_2h_kingsfall": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-kingsfall.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-1.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-2.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-3.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-kingsfall-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-1-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-2-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-3-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        }
+      ]
+    },
+    "paladin_shield_last_bastion": {
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-last-bastion.glb",
+          "texture": "assets/atlas-21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-last-bastion-display.glb",
+          "texture": "assets/atlas-21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31.png"
+        }
+      ]
+    },
+    "paladin_trinket_novice": {
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-novice.glb",
+          "texture": "assets/atlas-784ef8205354ff53362de6d5c277643d4971125da246bb0ca78e3476534033e8.png"
+        }
+      ]
+    },
+    "paladin_trinket_oathkeeper": {
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-oathkeeper.glb",
+          "texture": "assets/atlas-a101e61cae6049187f771495f874db474af49d182f4739c0c05d101c766fa6ee.png"
+        }
+      ]
+    },
+    "paladin_trinket_highward": {
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-highward.glb",
+          "texture": "assets/atlas-095dddc9eaa4298135fc1223383b1839fb144e895df90a780bd2571862448399.png"
+        }
+      ]
+    },
+    "paladin_trinket_mercy": {
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-mercy.glb",
+          "texture": "assets/atlas-67e46556586e353a5de2aa4a774976a6d23d17701828267777c5ddb4bd7b1022.png"
+        }
+      ]
+    },
+    "paladin_trinket_censure": {
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-censure.glb",
+          "texture": "assets/atlas-925a07524c816904ba4b84350671d231a4004ae0855b51767f2c4cf7e4dc139f.png"
+        }
+      ]
+    },
+    "paladin_trinket_verdict": {
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-verdict.glb",
+          "texture": "assets/atlas-9d172089232f8e3fafd6c33422e72678825dc2188597b983be7f8f0b765e21ef.png"
+        }
+      ]
+    },
+    "paladin_necklace_novice": {
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-novice.glb",
+          "texture": "assets/atlas-c243e5d5e21d69a07fe41e499ae798aaece435a801c7eb28a26fe6f738a1c127.png"
+        }
+      ]
+    },
+    "paladin_necklace_oathkeeper": {
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-oathkeeper.glb",
+          "texture": "assets/atlas-5bb46537bd991728736dacb9f34333616b86e9598af467f7f10e889b27be45ac.png"
+        }
+      ]
+    },
+    "paladin_necklace_highward": {
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-highward.glb",
+          "texture": "assets/atlas-dc5dcd69a6bff895141e76f5a607b7086ab51f1054e72a04122709c596949333.png"
+        }
+      ]
+    },
+    "paladin_necklace_mercy": {
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-mercy.glb",
+          "texture": "assets/atlas-0521bc0ed222227c75cebd4660c6448656d0ebb931a15d7657c51f3fc716454f.png"
+        }
+      ]
+    },
+    "paladin_necklace_censure": {
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-censure.glb",
+          "texture": "assets/atlas-cef3300a985f7a0fc182183168493e033869f0d838bd7ccb04f65b269979f8ed.png"
+        }
+      ]
+    },
+    "paladin_necklace_verdict": {
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-verdict.glb",
+          "texture": "assets/atlas-009a996cf36dab0b94c7a9f3d8fb7390b3bea38388c7fb8c579b51c2e1777104.png"
+        }
+      ]
+    }
+  },
+  "sourceStorage": {
+    "sourceEvidenceAndFileSourceFields": "Archive-relative ledger identifiers from the retained authoring campaign, not downloadable repository links. The campaign and its raw generation/editing sources are retained separately and are not bundled in this source checkout or runtime release.",
+    "runtimeInventory": "The files map pins every distributed runtime PNG/GLB under marketplace/packages/paladin/assets. Those installed assets and rendererRoutes are reproducible package validation inputs.",
+    "acceptanceBoundary": "Source hashes establish identity and provenance, not universal fit, animation or distribution entitlement."
   }
 }
