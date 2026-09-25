@@ -17,6 +17,7 @@ const base=import.meta.env.BASE_URL.replace(/\/$/,'');
    <div class="body">
     <div class="mod-chips" aria-label={`${p.name} details`}>
      <span class="pill version-chip">{p.version || 'In Development'}</span>
+     <span class="pill" aria-label="Published platforms">{p.platforms.map(platform=>({windows:'Windows',macos:'macOS',linux:'Linux'}[platform]??platform)).join(' · ')}</span>
      <span class="pill">{p.category === 'classes' ? 'Class' : p.category === 'races' ? 'Race' : p.category}</span>
      <span class="pill" title={`Compatible framework versions: ${p.frameworkRange}`}>
       Framework {p.frameworkVersion}+ ({p.frameworkVersion.split('.')[0]}.x)

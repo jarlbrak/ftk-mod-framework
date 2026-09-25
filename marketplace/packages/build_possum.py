@@ -52,7 +52,7 @@ def main():
     descriptor = json.loads((PACKAGE / 'listing.json').read_text())
     descriptor.update({k: manifest[k] for k in ('modGuid', 'name', 'version', 'author', 'description', 'frameworkVersion')})
     descriptor.update(frameworkRange='>=' + manifest['frameworkVersion'] + ' <2.0.0',
-                      platforms=['macos'], gameFingerprints=[digest(args.game_assembly.read_bytes())],
+                      gameFingerprints=[digest(args.game_assembly.read_bytes())],
                       packageUrl=base + stem + '.zip', sha256=sha,
                       compressedSize=len(payload), expandedSize=sum(map(len, files.values())),
                       fileCount=len(files), screenshots=[base + 'possum-banner.png'])

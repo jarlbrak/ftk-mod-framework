@@ -102,7 +102,7 @@ def main():
         'author':manifest['author'],'description':manifest['description'],
         'version':manifest['version'],'frameworkVersion':manifest['frameworkVersion'],
         'frameworkRange':'>='+manifest['frameworkVersion']+' <'+str(int(manifest['frameworkVersion'].split('.')[0])+1)+'.0.0',
-        'gameFingerprints':[digest(args.game_assembly.read_bytes())],'platforms':[args.platform],
+        'gameFingerprints':[digest(args.game_assembly.read_bytes())],'platforms':descriptor['platforms'] if args.release else [args.platform],
         'packageUrl':release_url+stem+'.zip',
         'sha256':sha,'compressedSize':len(payload),'expandedSize':sum(len(data) for data in files.values()),'fileCount':len(files),
         'screenshots':[preview_url]})
