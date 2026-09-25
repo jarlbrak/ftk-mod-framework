@@ -40,6 +40,8 @@ from the credits page. The site intentionally does not publish raw verification 
 
 `node scripts/prepare-media.mjs` verifies the committed native capture hashes, downloads approved
 release banners selected in `src/data/library-art.json`, and regenerates WebP derivatives.
+The Possum banner has a retained website-only edited source and generation prompt in `artwork/`;
+its local source hash is verified during media preparation. Published package assets are unchanged.
 Library artwork is presentation metadata, separate from the current package screenshot. Cards
 use complete promotional banners and version, category, and framework chips. Keep the artwork notice in `public/media/`.
 No image-generation transformations are applied to captures. Hero and cards use CSS cropping;
