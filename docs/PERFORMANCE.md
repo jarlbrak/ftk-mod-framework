@@ -73,6 +73,15 @@ an optimization target, then remove managed timers for FPS comparisons. Match fo
 and background execution as well as graphics settings, and record competing host
 load. A lower callback time alone does not establish smoother gameplay.
 
+The [subsystem replacement investigation](PERFORMANCE-SUBSYSTEMS.md) compares
+GPU water, shared cloud positioning, and persistent hex overlays. Its temporary
+work-removal measurements are exploratory evidence, not shipped improvements.
+
+The subsequent [native water experiment](PERFORMANCE-NATIVE-WATER.md) demonstrates
+a large reduction in water CPU work and a 31.5% FPS gain in one measured view.
+Other views and background runs were mixed. The isolated developer tool is
+separate from the normal framework and is not enabled by default.
+
 ## Water mesh optimization
 
 The framework reduces repeated calculations in the native `WaterDistort` and
