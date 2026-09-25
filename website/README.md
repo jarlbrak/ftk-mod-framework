@@ -25,8 +25,11 @@ logs, game binaries, extracted game assets, or unreleased package claims into `p
 
 Use `node scripts/sync-published.mjs` to refresh the public catalog and package projection. It
 requires immutable public download hashes to match and verifies manifest identity and minimum
-framework. Review authored guides when mechanics change; regenerated cards alone cannot update
-explanations. The guides are scoped to Paladin 1.3.0 and Thief 1.0.0.
+framework. During an authorized release, pass a reviewed local catalog path, for example
+`node scripts/sync-published.mjs ../marketplace/catalog.json`, after its release assets are public.
+This uses the same public-download hash checks and allows the catalog and site to merge together.
+Review authored guides when mechanics change; regenerated cards alone cannot update
+explanations. The guides are scoped to Paladin 1.4.0 and Thief 1.0.0.
 
 `src/data/catalog.ts` applies author-approved website wording to the immutable catalog snapshot.
 Thief 1.0.0 is labeled as a release; its compatibility limitations and package identity are retained.

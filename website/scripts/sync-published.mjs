@@ -5,8 +5,11 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 const url='https://raw.githubusercontent.com/jarlbrak/ftk-mod-framework/master/marketplace/catalog.json';
-const response=await fetch(url);if(!response.ok)throw Error(response.status);
-const catalog=await response.json();
+const catalogPath=process.argv[2];
+const catalog=catalogPath?JSON.parse(await fs.readFile(catalogPath,'utf8')):await (async()=>{
+ const response=await fetch(url);if(!response.ok)throw Error(response.status);
+ return response.json();
+})();
 const temp=await fs.mkdtemp(path.join(os.tmpdir(),'ftk-published-'));
 const snapshots={};
 for(const p of catalog.packages){
@@ -18,7 +21,7 @@ for(const p of catalog.packages){
  const manifest=read('manifest.json');
  if(manifest.version!==p.version||manifest.modGuid!==p.modGuid||manifest.frameworkVersion!==p.frameworkVersion)throw Error(`${p.name}: manifest mismatch`);
  if(['Paladin','Thief'].includes(p.name)){
-  if(p.version!==({Paladin:'1.3.0',Thief:'1.0.0'})[p.name])throw Error('Review and update the version-specific mod guide before syncing a new release.');
+  if(p.version!==({Paladin:'1.4.0',Thief:'1.0.0'})[p.name])throw Error('Review and update the version-specific mod guide before syncing a new release.');
   snapshots[p.name.toLowerCase()]={version:p.version,sha256:p.sha256,entries:read('content.json').entries.map(e=>Object.fromEntries(Object.entries(e).filter(([k])=>['kind','id','displayName','fields','modifiers','guardianBonuses','proficiencies','icon','description','precisionWeapon','thiefArtifact'].includes(k))))};
  }
  console.log(`Verified ${p.name} ${p.version}`);

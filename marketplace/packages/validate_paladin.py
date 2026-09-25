@@ -68,8 +68,7 @@ def validate_accessories(by_id):
             assert route['model'] == stem + '.glb', key
     assert by_id['paladin']['fields']['startweapon'] == 'paladin_hammer_1h_novice'
     assert by_id['paladin']['fields']['startitems'] == [
-        'paladin_shield_novice', 'paladin_armor_novice',
-        'paladin_boots_novice', 'paladin_helmet_novice', 'paladin_trinket_novice',
+        'paladin_shield_novice',
     ]
 
 
@@ -291,7 +290,8 @@ def main():
             for e in entries if any(k in e for k in ['itemModels','displayModels','apparelModels'])}
     assert routes == receipt['rendererRoutes']
     manifest=json.loads((PACKAGE/'manifest.json').read_text())
-    assert manifest['version']=='1.3.0' and manifest['frameworkVersion']=='1.2.0'
+    assert manifest['version']=='1.4.0' and manifest['frameworkVersion']=='1.2.1'
+    # The unchanged art retains its original 1.3.0 provenance and evidence.
     assert manifest['modGuid']=='com.ftkmf.paladin' and receipt['packageVersion']=='1.3.0'
     for name in set(refs):validate_asset(PACKAGE/name)
     assert all(path.suffix in ['.png','.glb'] for path in (PACKAGE/'assets').iterdir())

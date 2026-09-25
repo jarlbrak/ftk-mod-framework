@@ -59,14 +59,14 @@ namespace GridEditor {public class FTK_playerGameStart {public enum ID {None}}}
 public class uiSelectCharacterInfo:Component {public Text m_ClassAbility,m_StartingItems;}
 namespace FTKModFramework.Core
 {
-    internal static class GuardianRuntime {internal static bool IsGuardianClass(int id){return id==1;}}
+    internal static class GuardianRuntime {internal static bool IsGuardianClass(int id){return id==1 || id==2;}}
     internal static class OverworldAilmentImmunity
     {
-        internal static bool IsRegistered(int id){return id==1;}
-        internal static string DisplayName(int id){return id==1?"Cleansing March":null;}
+        internal static bool IsRegistered(int id){return id==1 || id==3;}
+        internal static string DisplayName(int id){return id==1 || id==3?"Cleansing March":null;}
     }
     internal static class Plugin {internal static Logger Log=new Logger();}
-    internal class Logger {internal void LogWarning(string message){}}
+    internal class Logger {internal int Warnings; internal void LogWarning(string message){Warnings++;}}
 }
 internal static class Program
 {
@@ -85,31 +85,27 @@ internal static class Program
         header.rectTransform.rect=new Rect{yMax=18};
         info.m_StartingItems=new GameObject("charItems",display.transform).AddComponent<Text>();
         info.m_StartingItems.transform.localPosition=new Vector3(18,-381,0);
-        var state=root.AddComponent<GuardianClassLayoutState>();
-        state.Arrange(info);
-        Check(group.transform.localPosition.y==-387,"heading clears top-anchored132unit text plus6unit gap");
-        Check(info.m_StartingItems.transform.localPosition.y==-462,"item list shifts with heading preserving native spacing");
-        Check(display.transform.localPosition.y==0,"shared parent and other stats stay unchanged");
-        Check(info.m_ClassAbility.alignment==TextAnchor.UpperLeft,"expanded label is top-anchored");
-        state.Arrange(info);
-        Check(group.transform.localPosition.y==-387 && info.m_StartingItems.transform.localPosition.y==-462,"repeated Guardian arrange does not accumulate displacement");
-        typeof(GuardianClassInfoPatch).GetMethod("Prefix",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,new object[]{info});
-        Check(group.transform.localPosition.y==-306 && info.m_StartingItems.transform.localPosition.y==-381,"native refresh prefix restores both positions before vanilla reuse");
-        Check(info.m_ClassAbility.alignment==TextAnchor.MiddleLeft,"native refresh restores original text alignment");
-        state.Restore();Check(group.transform.localPosition.y==-306,"restoration is idempotent");
-        info.m_ClassAbility.preferredHeight=30;state.Arrange(info);
-        Check(group.transform.localPosition.y==-306,"short existing label never moves equipment upward");
-        state.Restore();group.name="unsupported";
-        bool rejected=false;try{state.Arrange(info);}catch(InvalidOperationException){rejected=true;}
-        Check(rejected && info.m_ClassAbility.alignment==TextAnchor.MiddleLeft && info.m_StartingItems.transform.localPosition.y==-381,"unknown native hierarchy fails before layout mutation");
-        group.name="Image (1)";
-        info.m_ClassAbility.text="native";
         var show=typeof(GuardianClassInfoPatch).GetMethod("Postfix",BindingFlags.Static|BindingFlags.NonPublic);
+        info.m_ClassAbility.text="";
         show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)1});
-        Check(info.m_ClassAbility.text.Contains("Cleansing March: immune to\nPoison/Curse while exploring."),"class card names the registered passive and exact scope");
+        Check(info.m_ClassAbility.text=="Skill: Guard\nPassive Skill: Cleansing March","class card lists registered ability names without mechanics");
         string once=info.m_ClassAbility.text;
         show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)1});
-        Check(info.m_ClassAbility.text==once,"repeated class UI refresh does not duplicate passive text");
-        Console.WriteLine("PASS "+checks+" actual class UI layout lifecycle checks (Unity stand-ins; no live fit proof)");
+        Check(info.m_ClassAbility.text==once,"repeated patch invocation does not duplicate abilities");
+        Check(group.transform.localPosition.y==-306 && info.m_StartingItems.transform.localPosition.y==-381,"native equipment layout remains unchanged");
+        Check(display.transform.localPosition.y==0 && info.m_ClassAbility.alignment==TextAnchor.MiddleLeft,"native alignment and shared parent remain unchanged");
+        info.m_ClassAbility.text="Passive Skill: Steadfast\n";
+        show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)2});
+        Check(info.m_ClassAbility.text=="Passive Skill: Steadfast\nSkill: Guard","Guardian keeps native abilities and adds only its own skill");
+        info.m_ClassAbility.text=null;
+        show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)3});
+        Check(info.m_ClassAbility.text=="Passive Skill: Cleansing March","passive-only class does not acquire Guard");
+        info.m_ClassAbility.text="native abilities\n";
+        show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)0});
+        Check(info.m_ClassAbility.text=="native abilities\n","unregistered class retains exact native text on reused panel");
+        info.m_ClassAbility=null;
+        show.Invoke(null,new object[]{info,(GridEditor.FTK_playerGameStart.ID)1});
+        Check(Plugin.Log.Warnings==0,"missing ability label is a safe no-op");
+        Console.WriteLine("PASS "+checks+" class UI presentation checks (Unity stand-ins; no live fit proof)");
     }
 }
