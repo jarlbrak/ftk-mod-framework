@@ -57,7 +57,9 @@ the allowed patched framework binary is
 or the texture-memory build
 `aac00e1e03a1fb53ba9bfbd8b4017c2f82bfecfe03d4531a6f1906d2993a2223`.
 The latter changes framework-owned PNG uploads, transaction-local PNG sharing, and splash texture lifetime; its
-decompiled water transpiler is unchanged.
+decompiled water transpiler is unchanged. The unknown-portrait allocation build
+`b307c20a76bec2d0cacabbd9f17c167e3f722f142e39ac9ee6bdbe15801c75c8`
+is also allowed after confirming the same unchanged water transpiler.
 A different hash requires a fresh method-body review before changing these developer pins.
 Boundary, schema and call checks reject unsupported shapes; they do not prove equivalence against arbitrary modified IL.
 This is an experimental matcher, not a guarantee of compatibility with later third-party patches.

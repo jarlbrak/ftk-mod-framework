@@ -50,6 +50,13 @@ all recorded textures. This covers constructed binding and ownership, not comple
 avatar appearance, scrolling shaders, every mip level, combat, co-op, or other
 platforms. UI preview and splash visual/lifetime checks remain separate live gates.
 
+## Native unknown portrait follow-up
+
+An opt-in [unknown portrait allocation skip](PERFORMANCE-PORTRAITS.md) avoids the
+native texture that is immediately discarded for a pre-resolved unknown enemy.
+This targets baseline game allocations. Known-enemy texture retention remains native;
+no global cleanup scans or quality changes are introduced.
+
 ## CPU observations
 
 The [native water experiment](PERFORMANCE-NATIVE-WATER.md) was compared on/off with

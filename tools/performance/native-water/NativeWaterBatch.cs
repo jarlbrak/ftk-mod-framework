@@ -35,7 +35,8 @@ internal static class NativeWaterBatch
                     using (SHA256 algorithm = SHA256.Create())
                     using (FileStream stream = File.OpenRead(patch.PatchMethod.Module.Assembly.Location)) digest = BitConverter.ToString(algorithm.ComputeHash(stream)).Replace("-", "").ToLowerInvariant();
                     if (digest != "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e" &&
-                        digest != "aac00e1e03a1fb53ba9bfbd8b4017c2f82bfecfe03d4531a6f1906d2993a2223")
+                        digest != "aac00e1e03a1fb53ba9bfbd8b4017c2f82bfecfe03d4531a6f1906d2993a2223" &&
+                        digest != "b307c20a76bec2d0cacabbd9f17c167e3f722f142e39ac9ee6bdbe15801c75c8")
                         throw new InvalidOperationException("Unreviewed framework binary; re-review the incoming method body before changing the pinned hash.");
                 }
             }

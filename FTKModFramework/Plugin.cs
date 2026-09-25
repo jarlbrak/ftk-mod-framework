@@ -333,6 +333,8 @@ namespace FTKModFramework
                 "Reuse water noise samples and well-conditioned face normals. Geometry and animation " +
                 "timing are preserved; normals may differ by floating-point rounding. Restart required.").Value)
                 Core.Performance.WaterMeshPerformance.Initialize();
+            Core.UI.UnknownEncounterPortraitAllocationPatch.Enabled = Config.Bind("Performance", "AvoidUnusedEncounterPortraitTextures", false,
+                "Experimental skip of unused texture allocations for unknown encounter portraits. Restart required.").Value;
             _harmony.PatchAll();
 
             // Agentic test harness bridge (env-gated). No-ops unless FTK_AGENT_BRIDGE==1: with the env var
