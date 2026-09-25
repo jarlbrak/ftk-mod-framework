@@ -82,6 +82,13 @@ a large reduction in water CPU work and a 31.5% FPS gain in one measured view.
 Other views and background runs were mixed. The isolated developer tool is
 separate from the normal framework and is not enabled by default.
 
+## Whole-framework result
+
+The latest [whole-framework in-game benchmark](PERFORMANCE-OVERALL.md) did not
+establish a repeatable overall gain. Its planned comparison was slower with the
+current build, while a follow-up was faster. All runs and host/focus limitations
+are retained; isolated gains below must not be presented as whole-game gains.
+
 ## Water mesh optimization
 
 The framework reduces repeated calculations in the native `WaterDistort` and
