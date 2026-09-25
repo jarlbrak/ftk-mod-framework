@@ -1,12 +1,63 @@
 # Whole-framework in-game benchmark
 
-The September 24, 2026 comparison **does not establish a repeatable overall
-performance improvement**. The planned whole-build comparison was substantially
-slower with the current build; an additional current-build launch was faster than
-the baseline. Both outcomes are retained. Earlier isolated water, texture and
-lookup gains must not be added together or presented as whole-game gains.
+The September 25 dedicated-window repeat measured **7.52% higher average FPS**
+and **3.50% less CPU time per rendered frame** in the stationary Oarton scenario.
+Both adjacent launch pairs improved average FPS. RAM was effectively unchanged,
+p95 frame time was unchanged, and p99 worsened. This is a modest local throughput
+result, not a demonstrated improvement in hitching or whole-game memory use.
+Earlier contradictory results remain below; isolated fixture gains must not be
+added together or presented as whole-game gains.
 
-## Results
+## September 25 dedicated-window results
+
+| Metric | Baseline | Current |
+| --- | ---: | ---: |
+| Pooled FPS | 110.44 | 118.74 |
+| Individual capture FPS range | 109.26 to 111.12 | 110.72 to 124.52 |
+| P95 frame time | 10.158 ms | 10.162 ms |
+| P99 frame time | 11.12 ms | 13.86 ms |
+| Frames longer than 33.33 ms | 0.068% | 0.126% |
+| Process CPU time per rendered frame | 17.92 ms | 17.29 ms |
+| Process CPU use, one logical CPU = 100% | 197.89% | 205.32% |
+| Median physical footprint at capture boundaries | 4.395 GiB | 4.396 GiB |
+
+The two adjacent launch-pair FPS improvements were **8.05% and 6.99%**.
+Total process CPU utilization increased while rendering more frames; the measured
+CPU saving is per frame, not lower total utilization at an equal frame rate.
+P99 worsened by 24.6%, with more frames above 33.33 ms. No reduction in lag or
+hitching is established, and the memory difference is negligible.
+
+The same baseline/current binaries, instrumentation, save, camera and display
+settings described below were used. Production water was enabled in current;
+experimental native water and unknown-portrait changes remained off. The user
+provided a dedicated foreground window. Only the benchmark game instance was
+running at the checked setup, with no competing build observed; Time Machine
+and ordinary host services remained active. Recorded one-minute load samples
+ranged 6.04 to 8.42 for baseline and 5.56 to 8.86 for current. This is quieter
+than the earlier slow runs, not complete host isolation.
+
+Four accepted fresh launches followed baseline/current/current/baseline, each
+with 60 seconds of post-camera settling, 120 profiler warmup frames and two
+30-second captures. All eight captures were focused throughout; none was
+excluded. One additional closing-baseline setup failed camera alignment and
+was restarted before sampling. A temporary idle-sleep prevention assertion was
+used for the final accepted baseline process only and ended on process exit.
+Setup screenshots matched; screenshots and inventory were outside sampling.
+
+There are only four independent launches; captures within a launch are correlated.
+This does not establish statistical significance or generalize to combat,
+co-op, other machines, mod-heavy content or long sessions. Diagnostic overhead
+was matched but not separately quantified. Yesterday's conflicting evidence
+still limits any broad claim that the framework is consistently faster.
+
+[Dedicated-window numeric evidence](evidence/overall-performance-dedicated-2026-09-25/summary.json)
+and [local reconstruction script](evidence/overall-performance-dedicated-2026-09-25/archive.py)
+retain every timed capture. Independent review reproduced the pooled metrics,
+launch-pair gains, hashes and focus/settings checks from the eight raw CSVs.
+The script requires ignored local captures. The owned game was stopped, the
+current framework restored, and the original isolated configuration restored.
+
+## September 24 results
 
 Five fresh game launches produced ten accepted 30-second captures. Four other
 captures lost foreground focus and are retained but excluded. The planned order

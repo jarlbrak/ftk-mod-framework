@@ -84,10 +84,11 @@ separate from the normal framework and is not enabled by default.
 
 ## Whole-framework result
 
-The latest [whole-framework in-game benchmark](PERFORMANCE-OVERALL.md) did not
-establish a repeatable overall gain. Its planned comparison was slower with the
-current build, while a follow-up was faster. All runs and host/focus limitations
-are retained; isolated gains below must not be presented as whole-game gains.
+The dedicated-window [whole-framework in-game benchmark](PERFORMANCE-OVERALL.md)
+measured 7.52% higher average FPS and 3.50% less CPU time per frame in one stationary
+overworld scenario. P95 was unchanged, p99 worsened, and RAM was unchanged.
+Earlier conflicting runs and host/focus limitations remain documented. This is
+not a whole-game smoothness guarantee; isolated gains below cannot be added to it.
 
 ## Water mesh optimization
 
