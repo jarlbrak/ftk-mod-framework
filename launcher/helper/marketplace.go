@@ -15,6 +15,7 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"io"
+	"math"
 	"net/http"
 	"net/url"
 	"os"
@@ -1152,33 +1153,55 @@ func marketManifest(b []byte, p marketPackage) error {
 	}
 	return nil
 }
+
+type marketResistanceDamageBonus struct {
+	Sources    []string `json:"sources"`
+	Multiplier float64  `json:"multiplier"`
+}
+
+func marketActionReferences(ids []string, minimum, maximum int) bool {
+	if len(ids) < minimum || len(ids) > maximum {
+		return false
+	}
+	seen := map[string]bool{}
+	for _, id := range ids {
+		if strings.TrimSpace(id) == "" || seen[id] {
+			return false
+		}
+		seen[id] = true
+	}
+	return true
+}
+
 func marketContent(b []byte) error {
 	var c struct {
 		Entries []struct {
-			Kind                     string                 `json:"kind"`
-			ID                       string                 `json:"id"`
-			Template                 string                 `json:"template"`
-			DisplayName              string                 `json:"displayName"`
-			Fields                   map[string]interface{} `json:"fields"`
-			Proficiencies            []string               `json:"proficiencies"`
-			Flavor                   string                 `json:"flavor"`
-			Description              string                 `json:"description"`
-			Guardian                 bool                   `json:"guardian,omitempty"`
-			Opportunist              bool                   `json:"opportunist,omitempty"`
-			PrecisionWeapon          string                 `json:"precisionWeapon,omitempty"`
-			PrecisionAction          string                 `json:"precisionAction,omitempty"`
-			ThiefArtifact            string                 `json:"thiefArtifact,omitempty"`
-			ReplaceProficiencies     bool                   `json:"replaceProficiencies,omitempty"`
-			GuardianBonuses          *marketGuardianBonuses `json:"guardianBonuses,omitempty"`
-			Icon                     string                 `json:"icon,omitempty"`
-			ApparelModels            *marketApparelModel    `json:"apparelModels,omitempty"`
-			Modifiers                *marketItemModifiers   `json:"modifiers,omitempty"`
-			ItemModels               []marketModelRenderer  `json:"itemModels,omitempty"`
-			OffHandModels            []marketModelRenderer  `json:"offHandModels,omitempty"`
-			DisplayModels            []marketModelRenderer  `json:"displayModels,omitempty"`
-			PlayerModels             []marketPlayerModel    `json:"playerModels,omitempty"`
-			RaceBindings             []marketRaceBinding    `json:"raceBindings,omitempty"`
-			OverworldAilmentImmunity *marketAilmentImmunity `json:"overworldAilmentImmunity,omitempty"`
+			Kind                     string                       `json:"kind"`
+			ID                       string                       `json:"id"`
+			Template                 string                       `json:"template"`
+			DisplayName              string                       `json:"displayName"`
+			Fields                   map[string]interface{}       `json:"fields"`
+			Proficiencies            []string                     `json:"proficiencies"`
+			Flavor                   string                       `json:"flavor"`
+			Description              string                       `json:"description"`
+			Guardian                 bool                         `json:"guardian,omitempty"`
+			Opportunist              bool                         `json:"opportunist,omitempty"`
+			PrecisionWeapon          string                       `json:"precisionWeapon,omitempty"`
+			PrecisionAction          string                       `json:"precisionAction,omitempty"`
+			ThiefArtifact            string                       `json:"thiefArtifact,omitempty"`
+			ReplaceProficiencies     bool                         `json:"replaceProficiencies,omitempty"`
+			GuardianBonuses          *marketGuardianBonuses       `json:"guardianBonuses,omitempty"`
+			Icon                     string                       `json:"icon,omitempty"`
+			ApparelModels            *marketApparelModel          `json:"apparelModels,omitempty"`
+			Modifiers                *marketItemModifiers         `json:"modifiers,omitempty"`
+			ItemModels               []marketModelRenderer        `json:"itemModels,omitempty"`
+			OffHandModels            []marketModelRenderer        `json:"offHandModels,omitempty"`
+			DisplayModels            []marketModelRenderer        `json:"displayModels,omitempty"`
+			PlayerModels             []marketPlayerModel          `json:"playerModels,omitempty"`
+			RaceBindings             []marketRaceBinding          `json:"raceBindings,omitempty"`
+			OverworldAilmentImmunity *marketAilmentImmunity       `json:"overworldAilmentImmunity,omitempty"`
+			RandomDebuffOutcomes     []string                     `json:"randomDebuffOutcomes,omitempty"`
+			ResistanceDamageBonus    *marketResistanceDamageBonus `json:"resistanceDamageBonus,omitempty"`
 		} `json:"entries"`
 	}
 	if e := marketJSON(b, &c); e != nil {
@@ -1238,6 +1261,20 @@ func marketContent(b []byte) error {
 			}
 			if (b.GuardFocusRestore > 0 || b.GuardReckoning) && entry.Kind != "weapon" {
 				return errors.New("guardFocusRestore and guardReckoning require a weapon")
+			}
+		}
+		if (entry.Kind == "class" || entry.Kind == "item") && entry.Proficiencies != nil && !marketActionReferences(entry.Proficiencies, 1, 16) {
+			return errors.New("invalid class or item proficiency grants")
+		}
+		if entry.RandomDebuffOutcomes != nil {
+			if entry.Kind != "proficiency" || !marketActionReferences(entry.RandomDebuffOutcomes, 2, 2) || !contains(entry.RandomDebuffOutcomes, entry.ID) || entry.ResistanceDamageBonus != nil {
+				return errors.New("invalid random debuff outcomes")
+			}
+		}
+		if entry.ResistanceDamageBonus != nil {
+			bonus := entry.ResistanceDamageBonus
+			if entry.Kind != "proficiency" || !marketActionReferences(bonus.Sources, 1, 16) || math.IsNaN(bonus.Multiplier) || math.IsInf(bonus.Multiplier, 0) || bonus.Multiplier <= 1 || bonus.Multiplier > 16 {
+				return errors.New("invalid resistance damage bonus")
 			}
 		}
 		if entry.Icon != "" && (!marketSafePath(entry.Icon) || !strings.HasPrefix(entry.Icon, "assets/") || path.Ext(entry.Icon) != ".png" || entry.Kind != "item" && entry.Kind != "weapon" && entry.Kind != "proficiency" && !(entry.Kind == "class" && (entry.Guardian || entry.Opportunist))) {
@@ -1627,6 +1664,7 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_NoRegularAttack=m_NoRegularAttack")
 	case "proficiency":
 		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride fullslots=m_FullSlots customvalue=m_CustomValue repeatcount=m_RepeatCount m_Target=m_Target")
+		add("m_DmgTypeOverride=m_DmgTypeOverride m_WpnTypeOverride=m_WpnTypeOverride m_TargetFriendly=m_TargetFriendly m_Harmless=m_Harmless m_PerSlotSkillRoll=m_PerSlotSkillRoll m_Quickness=m_Quickness m_DamagePerAttack=m_DamagePerAttack m_Suicide=m_Suicide m_GunShot=m_GunShot m_BoatDamage=m_BoatDamage m_ChaosOption=m_ChaosOption")
 	case "class":
 		add("strength=_toughness intelligence=_fortitude awareness=_awareness talent=_talent speed=_quickness vitality=_vitality startinggold=_startinggold focus=_basefocus primarystat=m_PrimaryWeaponStat startweapon=m_StartWeapon startitems=m_StartItems dlc=m_DLC skinsets=m_Skinsets skills=m_CharacterSkills")
 	}

@@ -25,9 +25,11 @@ namespace FTKModFramework.Core.Data
         /// <summary>Raw member overrides: member name -&gt; JSON value (scalar in P1a).</summary>
         [JsonProperty("fields")] public Dictionary<string, object> Fields;
 
-        /// <summary>Proficiency ids to attach in Phase 2 (weapon -&gt; AttachProficiencies, enemy -&gt; AttachEnemyProficiencies).</summary>
+        /// <summary>Proficiency ids for a weapon, enemy, custom class, or equipped custom item.</summary>
         [JsonProperty("proficiencies")] public string[] Proficiencies;
         [JsonProperty("replaceProficiencies")] public bool ReplaceProficiencies;
+        [JsonProperty("randomDebuffOutcomes")] public string[] RandomDebuffOutcomes;
+        [JsonProperty("resistanceDamageBonus")] public ResistanceDamageBonusEntry ResistanceDamageBonus;
 
         /// <summary>Class flavor text -&gt; <c>Localization.SetClassFlavor</c> in Phase 2 (class kind).</summary>
         [JsonProperty("flavor")] public string Flavor;
@@ -69,6 +71,12 @@ namespace FTKModFramework.Core.Data
     }
     // Populated by JSON reflection.
 #pragma warning disable CS0649
+    internal sealed class ResistanceDamageBonusEntry
+    {
+        [JsonProperty("sources")] public string[] Sources;
+        [JsonProperty("multiplier")] public float Multiplier;
+    }
+
     internal sealed class GuardianBonusEntry
     {
         [JsonProperty("guardHealPercent")] public int GuardHealPercent;

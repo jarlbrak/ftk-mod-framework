@@ -45,7 +45,7 @@ internal static class Program
         string[] files=Directory.GetFiles(root,"*.png"); if(files.Length==0)throw new Exception("No real package PNG fixtures");
         foreach(string path in files) { int w,h; PngStructure.Validate(File.ReadAllBytes(path),16*1024*1024,4096,out w,out h); if(w<=0||h<=0)throw new Exception("Lost dimensions"); }
         Console.WriteLine("PASS: "+files.Length+" actual Paladin PNGs including RGB/RGBA and ancillary chunks");
-        byte[] original=File.ReadAllBytes(Path.Combine(root,"paladin-hammer-1h-novice-icon.png"));
+        byte[] original=File.ReadAllBytes(Path.Combine(root,"paladin-guard-icon.png"));
         byte[] signature=Slice(original,0,8), header=Slice(original,8,25), end=Chunk("IEND",new byte[0]);
         byte[] image=Chunk("IDAT",new byte[]{120,156,1});
         Reject(Slice(original,0,33),"exact live 33-byte IHDR-only fixture");

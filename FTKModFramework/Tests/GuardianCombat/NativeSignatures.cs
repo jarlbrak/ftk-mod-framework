@@ -17,6 +17,7 @@ internal static class NativeSignatures
             Require(reader, "uiBattleStanceButtons", "DisplayBattleActionInfo", "_button", "_on");
             Require(reader, "uiBattleStanceButtons", "FocusSlot", "_button");
             Require(reader, "uiBattleStanceButtons", "AttackProficiency", "_button");
+            Require(reader, "FTK_proficiencyTable", "GetBattleButtonInfo", "_cow");
             Require(reader, "DamageCalculator", "_waitForUserPickTarget", "_party", "_av", "_dmgMod", "_aoeDmgMod", "_targetType", "_targetFriendly", "_consumable", "_cheatType");
             Require(reader, "DamageCalculator", "_calcDamage", "_atk", "_dmgMultiplier", "_mainTarget", "_itemAttack", "_cheatType");
             Require(reader, "DamageCalculator", "_playAttackSequence", "_atk", "_ddi0", "_ddi1", "_ddi2");
@@ -43,7 +44,7 @@ internal static class NativeSignatures
             Require(reader, "uiItemDetail", "Show", "_itemID", "_mode", "_cow", "_showingEquip", "_forceFrontSide", "_loreCard");
             Require(reader, "uiWeaponDetail", "ShowWeapon", "_itemInfo");
             Require(reader, "uiSelectCharacterInfo", "ShowCharacterInfo", "_characterType");
-            Console.WriteLine("PASS GuardianCombat: 30 native method/parameter metadata checks");
+            Console.WriteLine("PASS GuardianCombat: 31 native method/parameter metadata checks");
         }
     }
 
