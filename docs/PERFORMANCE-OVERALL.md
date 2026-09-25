@@ -92,3 +92,23 @@ from all fourteen raw CSVs and checked their hashes and inclusion rules.
 The owned game was stopped, its current framework binary retained, and its original
 isolated configuration restored. The normal installation and production saves
 were not modified.
+
+## September 25 repeat attempt
+
+A quieter-host repeat was attempted with the same binaries, save, camera and
+settings, using 60 seconds of settling before two 30-second captures per launch.
+The first baseline launch produced two fully focused captures at 103.21 and
+93.48 FPS. Both current-build captures and both same-process retries were
+unfocused and are retained as excluded. There is no valid current arm, so this
+attempt supplies no new improvement percentage.
+
+During the retry, another isolated FTK instance was running and a concurrent
+TypeScript compiler snapshot used approximately four logical CPUs. Host
+one-minute load rose above 22. The attempt stopped before completing ABBA;
+unrelated processes were left running. The owned game was stopped and its
+original isolated configuration restored. A dedicated window without concurrent
+game testing or heavy builds remains necessary.
+
+[Repeat attempt evidence](evidence/overall-performance-repeat-2026-09-25.json)
+records all six captures and their focus exclusions. These interference
+observations do not establish the cause of every September 24 slowdown.
