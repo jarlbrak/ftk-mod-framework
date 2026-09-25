@@ -100,3 +100,39 @@ also include an `is_focused` CSV column (1 or 0), focused/unfocused frame counts
 is sampled once per Update, so transitions between samples may be missed. These are
 read-only observations; this tool never changes background execution or focus settings.
 Compare runs with matching focus state and account for unrelated host CPU activity.
+
+## CPU and memory observations
+
+Inventory includes a read-only `resources` object. Captures include `resources.start` and
+`resources.end`, sampled once at the end of warmup and once after the final frame sample.
+No process or memory polling occurs in the per-frame sample loop. These observations change
+no process priority, graphics setting, frame cap, or collection policy.
+
+- `processCpuTimeTicks`: `Process.GetCurrentProcess().TotalProcessorTime`, in 100 ns
+  `TimeSpan` ticks, summed across all process threads. Capture `processCpuSeconds` is its
+  difference. `processCpuPercentOneCore` divides that difference by the monotonic interval
+  between CPU observations; 200% means roughly two cores' worth of process CPU time.
+  It is not a percentage of the machine's total CPU capacity and can exceed 100%.
+- `captureWallSeconds`: monotonic time from capture start to completion. The separately
+  reported `processCpuObservationWallSeconds` includes the sequential boundary polling.
+- `processWorkingSetBytes`: the runtime's current resident/working-set report, not peak RSS,
+  a configured RAM cap, virtual address space, or guaranteed independently owned memory.
+- `unityAllocatedBytes`, `unityReservedBytes`, `unityUnusedReservedBytes`: snapshots from the
+  installed Unity `Profiler.GetTotal*MemoryLong()` APIs. Allocated bytes describe current
+  allocator use, not bytes allocated over the capture. Unused reserved bytes are allocator
+  headroom, not necessarily memory immediately returned to the OS.
+- `unityMonoHeapBytes` and `unityMonoUsedBytes`: Unity's managed-heap reservation/use reports.
+  `managedHeapBytes` is `GC.GetTotalMemory(false)`, with no forced collection. These overlap
+  with other memory figures; do not add them to process working set or Unity totals.
+
+`unavailable` explains counters that threw or returned invalid values; their values are JSON
+null. The installed Mono assembly exposes both process APIs, but platform implementations can
+still be unavailable. Nonpositive process CPU/working-set reports are treated as unavailable.
+Unity release builds can return zero for unsupported profiler instrumentation, so a zero value
+alone does not establish zero usage. Existing GC generation counts and heap-delta fields remain.
+
+Endpoints are not atomic and cannot reveal peaks, leaks, total allocation volume, or a memory
+limit by themselves. `observationMilliseconds` reports snapshot duration. Boundary queries can
+affect adjacent frame intervals, so use identical instrumentation in comparisons and inspect
+endpoint cost. These counters require live validation on the target Mono player; a successful
+build only verifies API compatibility.

@@ -272,3 +272,10 @@ observed; the two deliberate AddPassive rejection errors were expected. Release
 builds, 115 game-free lookup checks and 28 probe tests passed. This smoke does not
 establish combat, save/reload or co-op coverage. The disposable test game was
 stopped after verification; production plugins and saves were not modified.
+
+## Resource utilization
+
+See [CPU and memory utilization](PERFORMANCE-RESOURCES.md) for measured model
+texture-copy savings, transaction-local PNG sharing, CPU-per-frame comparisons,
+and the separate reduced-texture-resolution experiment. Process footprint, RSS,
+Unity allocator counters and managed heap values overlap and must not be summed.

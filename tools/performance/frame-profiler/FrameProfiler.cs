@@ -33,6 +33,8 @@ public sealed class FrameProfiler : BaseUnityPlugin
     private bool resultReserved, cleanupFailed;
     private int gc0Start, gc1Start, gc2Start;
     private long managedBytesStart;
+    private ResourceSnapshot resourcesStart;
+    private long captureWallStart;
     private const string TimerOwner = "com.ftkmf.frame-profiler.timers";
     private Harmony timerHarmony;
     private string[] managedNames = new string[0];
@@ -131,6 +133,8 @@ public sealed class FrameProfiler : BaseUnityPlugin
                     warmup--;
                     if (warmup == 0)
                     {
+                        resourcesStart = ResourceSnapshot.Read();
+                        captureWallStart = Stopwatch.GetTimestamp();
                         gc0Start = GC.CollectionCount(0);
                         gc1Start = GC.CollectionCount(1);
                         gc2Start = GC.CollectionCount(2);
@@ -306,6 +310,7 @@ public sealed class FrameProfiler : BaseUnityPlugin
         PendingTicks = null;
         PendingCalls = null;
         originalEnabled = null;
+        resourcesStart = null;
     }
 
     private void Fail(Exception error)
@@ -343,8 +348,11 @@ public sealed class FrameProfiler : BaseUnityPlugin
         try
         {
             // Boundary-only observations, before unpatching and serialization allocate.
+            long captureWallEnd = Stopwatch.GetTimestamp();
             int gc0End = GC.CollectionCount(0), gc1End = GC.CollectionCount(1), gc2End = GC.CollectionCount(2);
             long managedBytesEnd = GC.GetTotalMemory(false);
+            ResourceSnapshot resourcesEnd = ResourceSnapshot.Read();
+            metadata["resources"] = ResourceSnapshot.Interval(resourcesStart, resourcesEnd, captureWallStart, captureWallEnd);
             metadata["focusStart"] = focusStart;
             metadata["focusEnd"] = previousFocus;
             metadata["focusChangedCount"] = focusChangedCount;
@@ -458,6 +466,7 @@ public sealed class FrameProfiler : BaseUnityPlugin
             using (FileStream stream = File.OpenRead(path)) binaries.Add(new JObject { { "name", Path.GetFileName(path) }, { "sha256", BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", "").ToLowerInvariant() } });
         }
         return new JObject { { "utc", DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture) }, { "unity", Application.unityVersion },
+            { "resources", ResourceSnapshot.Read().Json() }, { "resourceSemantics", ResourceSnapshot.Semantics },
             { "isFocused", Application.isFocused }, { "runInBackground", Application.runInBackground },
             { "width", Screen.width }, { "height", Screen.height }, { "fullscreen", Screen.fullScreen }, { "qualityLevel", QualitySettings.GetQualityLevel() },
             { "vSyncCount", QualitySettings.vSyncCount }, { "targetFrameRate", Application.targetFrameRate },

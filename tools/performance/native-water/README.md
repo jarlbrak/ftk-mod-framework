@@ -53,7 +53,11 @@ is declared. Only the inspected `com.ftkmf.framework` water patch shape and bina
 cause activation to refuse. The inspected game assembly is SHA-256
 `94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8`;
 the allowed patched framework binary is
-`7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e`.
+`7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e`
+or the texture-memory build
+`aac00e1e03a1fb53ba9bfbd8b4017c2f82bfecfe03d4531a6f1906d2993a2223`.
+The latter changes framework-owned PNG uploads, transaction-local PNG sharing, and splash texture lifetime; its
+decompiled water transpiler is unchanged.
 A different hash requires a fresh method-body review before changing these developer pins.
 Boundary, schema and call checks reject unsupported shapes; they do not prove equivalence against arbitrary modified IL.
 This is an experimental matcher, not a guarantee of compatibility with later third-party patches.

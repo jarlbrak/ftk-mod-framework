@@ -747,7 +747,8 @@ namespace FTKModFramework.Core.UI
                 if (!MarketplaceProtocol.IsScreenshotPath(MarketplaceRuntime.StateRoot, path)) throw new IOException("Preview path is not approved.");
                 bytes = File.ReadAllBytes(path);
                 texture = new Texture2D(2, 2, TextureFormat.ARGB32, false);
-                if (!ImageConversion.LoadImage(texture, bytes)) throw new IOException("Preview image could not be decoded.");
+                // This private RawImage texture is rendered only; no consumer reads CPU pixels.
+                if (!ImageConversion.LoadImage(texture, bytes, true)) throw new IOException("Preview image could not be decoded.");
                 _previewTextures.Add(texture);
                 GameObject go = NewChild("Preview image", parent);
                 RawImage image = go.AddComponent<RawImage>();
