@@ -182,6 +182,11 @@ namespace FTKModFramework
 
         private Harmony _harmony;
 
+        private void OnDestroy()
+        {
+            Core.Performance.WaterMeshPerformance.Shutdown();
+        }
+
         private void Update()
         {
             // Inactive cloned avatars may never receive OnDestroy. Prune their acquired model leases
@@ -320,6 +325,16 @@ namespace FTKModFramework
 
             _harmony = new Harmony(Guid);
             DbLookupPatcher.Init(_harmony);
+            // Build the bounded native-name cache during startup, before a gameplay lookup can
+            // pay its one-time parsing cost. Failure leaves the original parser available.
+            if (!CanonicalEnumLookup<FTK_itembase.ID>.Initialize())
+                Log.LogWarning("Native item lookup cache unavailable; using the original parser.");
+            if (Config.Bind("Performance", "OptimizeWaterMeshes", true,
+                "Reuse water noise samples and well-conditioned face normals. Geometry and animation " +
+                "timing are preserved; normals may differ by floating-point rounding. Restart required.").Value)
+                Core.Performance.WaterMeshPerformance.Initialize();
+            Core.UI.UnknownEncounterPortraitAllocationPatch.Enabled = Config.Bind("Performance", "AvoidUnusedEncounterPortraitTextures", false,
+                "Experimental skip of unused texture allocations for unknown encounter portraits. Restart required.").Value;
             _harmony.PatchAll();
 
             // Agentic test harness bridge (env-gated). No-ops unless FTK_AGENT_BRIDGE==1: with the env var

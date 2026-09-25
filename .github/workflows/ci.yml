@@ -84,6 +84,14 @@ jobs:
           done
       - name: Run the game-free unit tests
         run: dotnet test FTKPerfProbe.Tests/FTKPerfProbe.Tests.csproj -c Release
+      - name: Synthetic ID lookup compatibility and allocation checks
+        run: dotnet run --project FTKModFramework/Tests/SyntheticLookup/SyntheticLookup.csproj -c Release
+      - name: Scrolling UV phase and allocation checks
+        run: dotnet run --project FTKModFramework/Tests/ScrollingUvs/ScrollingUvs.csproj -c Release
+      - name: Unknown portrait allocation and patch compatibility checks
+        run: dotnet run --project FTKModFramework/Tests/EncounterPortraitTextures/EncounterPortraitTextures.csproj -c Release
+      - name: Water mesh math, cache and patch compatibility checks
+        run: dotnet run --project FTKModFramework/Tests/WaterMeshes/WaterMeshes.csproj -c Release
       - name: Reporting capture, recovery and submission checks (no game required)
         shell: bash
         run: |

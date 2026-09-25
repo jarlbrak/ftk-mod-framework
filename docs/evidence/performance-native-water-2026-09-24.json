@@ -1,0 +1,2478 @@
+{
+  "date": "2026-09-24",
+  "scope": "Isolated macOS x86_64 Unity 2017.2.2p2, Apple M5 host; developer-only native water experiment",
+  "baseline": "Framework DLL 7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e with existing water optimization enabled; no graphics changes",
+  "method": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "qualityLevel": 4,
+    "vSyncCount": 0,
+    "targetFrameRate": -1,
+    "framesPerUninstrumentedTrial": 900,
+    "warmupFrames": 120,
+    "order": "control,candidate,candidate,control,candidate,control,control,candidate",
+    "pairing": "Adjacent trials; only compare pairs with identical focus counts and zero transitions.",
+    "quantiles": "Sorted samples at floor((n-1)*p). Pooled metrics combine all frames within each arm; trial summaries are also retained.",
+    "hostLoad": "Other task-owned FTK game instances and host workloads were active or changing during this session. They were not paused or controlled.",
+    "scopeLimits": "Two camera views of one early-game town area, not different biomes or representative gameplay. No combat/co-op/Windows/Linux performance claim. Matched focus does not control external CPU/GPU load.",
+    "nativeSafety": "Synchronous pinned arrays on the game thread; native code retains no array pointers. Original cursor advancement, mesh lookup and uploads remain. Native rejected inputs fall back; native machine faults cannot be recovered by managed fallback."
+  },
+  "series": {
+    "reuse-a": {
+      "trials": [
+        {
+          "id": "reuse-a-0-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 12.538262208302816,
+          "fps": 79.75586914570998,
+          "p95Ms": 19.999027252197266,
+          "p99Ms": 49.327969551086426,
+          "over33ms": 19,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "hits": 1966,
+            "misses": 13933,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "reuse-a-1-normals",
+          "arm": "normals",
+          "frames": 900,
+          "meanMs": 12.03252116839091,
+          "fps": 83.1081022842471,
+          "p95Ms": 18.52893829345703,
+          "p99Ms": 34.201979637145996,
+          "over33ms": 10,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "hits": 3263,
+            "misses": 23012,
+            "rejected": 0,
+            "entries": 2,
+            "vertices": 1675
+          },
+          "ceilingArm": "normal-reuse"
+        },
+        {
+          "id": "reuse-a-2-normals",
+          "arm": "normals",
+          "frames": 900,
+          "meanMs": 21.21685226758321,
+          "fps": 47.13234495806333,
+          "p95Ms": 32.266974449157715,
+          "p99Ms": 97.87607192993164,
+          "over33ms": 43,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "hits": 4524,
+            "misses": 31839,
+            "rejected": 0,
+            "entries": 2,
+            "vertices": 1675
+          },
+          "ceilingArm": "normal-reuse"
+        },
+        {
+          "id": "reuse-a-3-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 18.64411883884006,
+          "fps": 53.63621679544147,
+          "p95Ms": 28.907060623168945,
+          "p99Ms": 62.96801567077637,
+          "over33ms": 29,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "hits": 4554,
+            "misses": 32049,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "reuse-a-4-normals",
+          "arm": "normals",
+          "frames": 900,
+          "meanMs": 19.844922224680584,
+          "fps": 50.390724069269844,
+          "p95Ms": 31.654953956604004,
+          "p99Ms": 58.892011642456055,
+          "over33ms": 36,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "hits": 5710,
+            "misses": 40141,
+            "rejected": 0,
+            "entries": 2,
+            "vertices": 1675
+          },
+          "ceilingArm": "normal-reuse"
+        },
+        {
+          "id": "reuse-a-5-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 13.208451138602364,
+          "fps": 75.70910392948721,
+          "p95Ms": 17.756938934326172,
+          "p99Ms": 50.93693733215332,
+          "over33ms": 15,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "hits": 5724,
+            "misses": 40239,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "reuse-a-6-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 11.541152265336779,
+          "fps": 86.64646103001738,
+          "p95Ms": 15.41292667388916,
+          "p99Ms": 20.33090591430664,
+          "over33ms": 1,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "hits": 5724,
+            "misses": 40239,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "reuse-a-7-normals",
+          "arm": "normals",
+          "frames": 900,
+          "meanMs": 13.159091075261435,
+          "fps": 75.99309057750654,
+          "p95Ms": 17.39799976348877,
+          "p99Ms": 26.064038276672363,
+          "over33ms": 4,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "hits": 6943,
+            "misses": 48772,
+            "rejected": 0,
+            "entries": 2,
+            "vertices": 1675
+          },
+          "ceilingArm": "normal-reuse"
+        }
+      ],
+      "pooled": {
+        "control": {
+          "frames": 3600,
+          "meanMs": 13.982996112770504,
+          "fps": 71.51543145225592,
+          "p95Ms": 22.279977798461914,
+          "p99Ms": 48.73001575469971,
+          "over33ms": 64
+        },
+        "normals": {
+          "frames": 3600,
+          "meanMs": 16.563346683979034,
+          "fps": 60.37427212504428,
+          "p95Ms": 27.081012725830078,
+          "p99Ms": 59.19206142425537,
+          "over33ms": 93
+        }
+      },
+      "matchedPairs": [
+        {
+          "control": "reuse-a-0-control",
+          "candidate": "reuse-a-1-normals",
+          "focusMatched": true,
+          "meanSavingsMs": 0.5057410399119071,
+          "p95SavingsMs": 1.4700889587402344
+        },
+        {
+          "control": "reuse-a-3-control",
+          "candidate": "reuse-a-2-normals",
+          "focusMatched": true,
+          "meanSavingsMs": -2.572733428743149,
+          "p95SavingsMs": -3.3599138259887695
+        },
+        {
+          "control": "reuse-a-5-control",
+          "candidate": "reuse-a-4-normals",
+          "focusMatched": true,
+          "meanSavingsMs": -6.63647108607822,
+          "p95SavingsMs": -13.898015022277832
+        },
+        {
+          "control": "reuse-a-6-control",
+          "candidate": "reuse-a-7-normals",
+          "focusMatched": true,
+          "meanSavingsMs": -1.6179388099246559,
+          "p95SavingsMs": -1.9850730895996094
+        }
+      ],
+      "limitation": "Whole-normal caching had about 12.5% reuse and inconsistent performance. Not adopted.",
+      "loadedBinaryHashes": [
+        {
+          "name": "FtkWaterPrototype.dll",
+          "sha256": "24488e67eb3000a5faeb38436cf2083b31dbf9b2efefa8b987447427cbc33c4c"
+        },
+        {
+          "name": "FtkFrameProfiler.dll",
+          "sha256": "686a4befa6025e7a66f13c0e9d3396f1dd3300915e531989d6192027f8768829"
+        },
+        {
+          "name": "FTKModFramework.dll",
+          "sha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e"
+        },
+        {
+          "name": "Assembly-CSharp.dll",
+          "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+        }
+      ]
+    },
+    "native-a": {
+      "trials": [
+        {
+          "id": "native-a-0-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 13.255495495266384,
+          "fps": 75.44040887472715,
+          "p95Ms": 29.515981674194336,
+          "p99Ms": 112.16795444488525,
+          "over33ms": 41,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 10040,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-a-1-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 8.571002218458387,
+          "fps": 116.67247009298566,
+          "p95Ms": 9.320974349975586,
+          "p99Ms": 10.246992111206055,
+          "over33ms": 4,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "nativeEnabled": true,
+            "nativeCalls": 21080,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "native-normals"
+        },
+        {
+          "id": "native-a-2-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 8.431827757093641,
+          "fps": 118.59824806771066,
+          "p95Ms": 10.174989700317383,
+          "p99Ms": 15.864014625549316,
+          "over33ms": 2,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "nativeEnabled": true,
+            "nativeCalls": 32704,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "native-normals"
+        },
+        {
+          "id": "native-a-3-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 9.125294420454237,
+          "fps": 109.58550529158951,
+          "p95Ms": 11.090993881225586,
+          "p99Ms": 20.94590663909912,
+          "over33ms": 6,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 33336,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-a-4-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 6.3540532853868275,
+          "fps": 157.37985740532253,
+          "p95Ms": 8.347034454345703,
+          "p99Ms": 10.849952697753906,
+          "over33ms": 2,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "nativeEnabled": true,
+            "nativeCalls": 44104,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "native-normals"
+        },
+        {
+          "id": "native-a-5-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 7.73437778155009,
+          "fps": 129.29288279471453,
+          "p95Ms": 9.132027626037598,
+          "p99Ms": 10.789990425109863,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 44680,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-a-6-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 7.662116686503093,
+          "fps": 130.51223844730941,
+          "p95Ms": 8.607983589172363,
+          "p99Ms": 12.45105266571045,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 44680,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-a-7-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 5.684401061799791,
+          "fps": 175.92002906342796,
+          "p95Ms": 6.482958793640137,
+          "p99Ms": 6.967067718505859,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": true,
+            "nativeEnabled": true,
+            "nativeCalls": 57032,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "ceilingArm": "native-normals"
+        }
+      ],
+      "pooled": {
+        "control": {
+          "frames": 3600,
+          "meanMs": 9.444321095943451,
+          "fps": 105.88373582824525,
+          "p95Ms": 12.616991996765137,
+          "p99Ms": 38.609981536865234,
+          "over33ms": 47
+        },
+        "native": {
+          "frames": 3600,
+          "meanMs": 7.260321080684662,
+          "fps": 137.73495536724914,
+          "p95Ms": 9.25290584564209,
+          "p99Ms": 11.777043342590332,
+          "over33ms": 9
+        }
+      },
+      "matchedPairs": [
+        {
+          "control": "native-a-0-control",
+          "candidate": "native-a-1-native",
+          "focusMatched": true,
+          "meanSavingsMs": 4.684493276807997,
+          "p95SavingsMs": 20.19500732421875
+        },
+        {
+          "control": "native-a-3-control",
+          "candidate": "native-a-2-native",
+          "focusMatched": true,
+          "meanSavingsMs": 0.6934666633605957,
+          "p95SavingsMs": 0.9160041809082031
+        },
+        {
+          "control": "native-a-5-control",
+          "candidate": "native-a-4-native",
+          "focusMatched": false,
+          "meanSavingsMs": 1.3803244961632624,
+          "p95SavingsMs": 0.7849931716918945
+        },
+        {
+          "control": "native-a-6-control",
+          "candidate": "native-a-7-native",
+          "focusMatched": true,
+          "meanSavingsMs": 1.9777156247033014,
+          "p95SavingsMs": 2.1250247955322266
+        }
+      ],
+      "limitation": "One adjacent pair has different focus conditions. Native companion hash was not recorded for this earlier normals-only exploratory binary. Do not use pooled values as a matched comparison.",
+      "loadedBinaryHashes": [
+        {
+          "name": "FtkWaterPrototype.dll",
+          "sha256": "89db557066094d13a09e6a9c56fbd3aaf7bc8a84899a25d957c65dc60c96a1c7"
+        },
+        {
+          "name": "FtkFrameProfiler.dll",
+          "sha256": "686a4befa6025e7a66f13c0e9d3396f1dd3300915e531989d6192027f8768829"
+        },
+        {
+          "name": "FTKModFramework.dll",
+          "sha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e"
+        },
+        {
+          "name": "Assembly-CSharp.dll",
+          "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+        }
+      ]
+    },
+    "native-water-a": {
+      "trials": [
+        {
+          "id": "native-water-a-0-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 8.17985561158922,
+          "fps": 122.25154666339097,
+          "p95Ms": 10.348916053771973,
+          "p99Ms": 13.975977897644043,
+          "over33ms": 1,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 1320,
+            "fallback": 0,
+            "nativeWaterCalls": 1320,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-a-1-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 6.5191709995269775,
+          "fps": 153.39373673010857,
+          "p95Ms": 8.260965347290039,
+          "p99Ms": 11.363029479980469,
+          "over33ms": 1,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 13752,
+            "fallback": 0,
+            "nativeWaterCalls": 13752,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        },
+        {
+          "id": "native-water-a-2-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 5.639128949907091,
+          "fps": 177.33235201448545,
+          "p95Ms": 6.653070449829102,
+          "p99Ms": 8.123993873596191,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 25736,
+            "fallback": 0,
+            "nativeWaterCalls": 25736,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        },
+        {
+          "id": "native-water-a-3-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 7.847161028120253,
+          "fps": 127.43462207752667,
+          "p95Ms": 9.638071060180664,
+          "p99Ms": 10.84601879119873,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 26328,
+            "fallback": 0,
+            "nativeWaterCalls": 26328,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-a-4-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 6.24328891436259,
+          "fps": 160.17198846901277,
+          "p95Ms": 8.027911186218262,
+          "p99Ms": 11.564970016479492,
+          "over33ms": 2,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 37488,
+            "fallback": 0,
+            "nativeWaterCalls": 37488,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        },
+        {
+          "id": "native-water-a-5-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 7.622627682156033,
+          "fps": 131.18835678422556,
+          "p95Ms": 8.6669921875,
+          "p99Ms": 9.696006774902344,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 38176,
+            "fallback": 0,
+            "nativeWaterCalls": 38176,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-a-6-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 8.220398823420206,
+          "fps": 121.64859898901312,
+          "p95Ms": 11.094093322753906,
+          "p99Ms": 13.936042785644531,
+          "over33ms": 2,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 38176,
+            "fallback": 0,
+            "nativeWaterCalls": 38176,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-a-7-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 5.839668909708659,
+          "fps": 171.24258506119483,
+          "p95Ms": 7.318019866943359,
+          "p99Ms": 8.247971534729004,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 49752,
+            "fallback": 0,
+            "nativeWaterCalls": 49752,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        }
+      ],
+      "pooled": {
+        "control": {
+          "frames": 3600,
+          "meanMs": 7.967510786321428,
+          "fps": 125.50971398956794,
+          "p95Ms": 10.149955749511719,
+          "p99Ms": 12.861967086791992,
+          "over33ms": 5
+        },
+        "native": {
+          "frames": 3600,
+          "meanMs": 6.060314443376329,
+          "fps": 165.00793966111087,
+          "p95Ms": 7.653951644897461,
+          "p99Ms": 9.559988975524902,
+          "over33ms": 3
+        }
+      },
+      "matchedPairs": [
+        {
+          "control": "native-water-a-0-control",
+          "candidate": "native-water-a-1-native",
+          "focusMatched": true,
+          "meanSavingsMs": 1.6606846120622425,
+          "p95SavingsMs": 2.0879507064819336
+        },
+        {
+          "control": "native-water-a-3-control",
+          "candidate": "native-water-a-2-native",
+          "focusMatched": true,
+          "meanSavingsMs": 2.2080320782131615,
+          "p95SavingsMs": 2.9850006103515625
+        },
+        {
+          "control": "native-water-a-5-control",
+          "candidate": "native-water-a-4-native",
+          "focusMatched": true,
+          "meanSavingsMs": 1.3793387677934428,
+          "p95SavingsMs": 0.6390810012817383
+        },
+        {
+          "control": "native-water-a-6-control",
+          "candidate": "native-water-a-7-native",
+          "focusMatched": true,
+          "meanSavingsMs": 2.380729913711547,
+          "p95SavingsMs": 3.776073455810547
+        }
+      ],
+      "nativeSha256": "78e0bb25a3c5b246bd024257a33f97c73ac31680050fe38a42c1100e1704949d",
+      "pluginSha256": "3181c297cf8d70910593f908f6304bcc7141e902a156cdeaf2b4a45460cb4e78",
+      "loadedBinaryHashes": [
+        {
+          "name": "FtkWaterPrototype.dll",
+          "sha256": "3181c297cf8d70910593f908f6304bcc7141e902a156cdeaf2b4a45460cb4e78"
+        },
+        {
+          "name": "FtkFrameProfiler.dll",
+          "sha256": "686a4befa6025e7a66f13c0e9d3396f1dd3300915e531989d6192027f8768829"
+        },
+        {
+          "name": "FTKModFramework.dll",
+          "sha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e"
+        },
+        {
+          "name": "Assembly-CSharp.dll",
+          "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+        }
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26393127441406,
+          "y": 53.62307357788086,
+          "z": 169.9629364013672
+        },
+        "rotation": {
+          "x": 49.99998474121094,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      }
+    },
+    "native-water-b": {
+      "trials": [
+        {
+          "id": "native-water-b-0-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 8.681674400965372,
+          "fps": 115.18515367137051,
+          "p95Ms": 10.55908203125,
+          "p99Ms": 17.70603656768799,
+          "over33ms": 7,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 50392,
+            "fallback": 0,
+            "nativeWaterCalls": 50392,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-b-1-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 13.562366697523329,
+          "fps": 73.73344360189093,
+          "p95Ms": 28.292059898376465,
+          "p99Ms": 97.55301475524902,
+          "over33ms": 40,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 60486,
+            "fallback": 0,
+            "nativeWaterCalls": 60486,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        },
+        {
+          "id": "native-water-b-2-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 5.59355894724528,
+          "fps": 178.7770557942329,
+          "p95Ms": 6.787896156311035,
+          "p99Ms": 8.111953735351562,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 70090,
+            "fallback": 0,
+            "nativeWaterCalls": 70090,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        },
+        {
+          "id": "native-water-b-3-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 8.578602208031548,
+          "fps": 116.56910715171868,
+          "p95Ms": 9.509921073913574,
+          "p99Ms": 12.784957885742188,
+          "over33ms": 2,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 70482,
+            "fallback": 0,
+            "nativeWaterCalls": 70482,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-b-4-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 8.340389993455675,
+          "fps": 119.89847006970352,
+          "p95Ms": 9.274959564208984,
+          "p99Ms": 9.554028511047363,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 80289,
+            "fallback": 0,
+            "nativeWaterCalls": 80289,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        },
+        {
+          "id": "native-water-b-5-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 8.3451599544949,
+          "fps": 119.82993800632622,
+          "p95Ms": 9.251952171325684,
+          "p99Ms": 9.485006332397461,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 80667,
+            "fallback": 0,
+            "nativeWaterCalls": 80667,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-b-6-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 8.440743419859144,
+          "fps": 118.47297687632917,
+          "p95Ms": 9.534001350402832,
+          "p99Ms": 12.256026268005371,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": false,
+            "completed": 80667,
+            "fallback": 0,
+            "nativeWaterCalls": 80667,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "control"
+        },
+        {
+          "id": "native-water-b-7-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 8.334256675508287,
+          "fps": 119.98670534574246,
+          "p95Ms": 9.538054466247559,
+          "p99Ms": 10.000944137573242,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": {
+            "enabled": false,
+            "nativeEnabled": false,
+            "nativeCalls": 9600,
+            "nativeRejected": 4,
+            "nativeError": null,
+            "hits": 0,
+            "misses": 0,
+            "rejected": 0,
+            "entries": 0,
+            "vertices": 0
+          },
+          "nativeWater": {
+            "enabled": true,
+            "completed": 90425,
+            "fallback": 0,
+            "nativeWaterCalls": 90425,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": "native-water"
+        }
+      ],
+      "pooled": {
+        "control": {
+          "frames": 3600,
+          "meanMs": 8.511544995837742,
+          "fps": 117.48748323471393,
+          "p95Ms": 9.624958038330078,
+          "p99Ms": 12.727022171020508,
+          "over33ms": 9
+        },
+        "native": {
+          "frames": 3600,
+          "meanMs": 8.957643078433144,
+          "fps": 111.63650876061902,
+          "p95Ms": 13.500094413757324,
+          "p99Ms": 34.80494022369385,
+          "over33ms": 40
+        }
+      },
+      "matchedPairs": [
+        {
+          "control": "native-water-b-0-control",
+          "candidate": "native-water-b-1-native",
+          "focusMatched": true,
+          "meanSavingsMs": -4.880692296557957,
+          "p95SavingsMs": -17.732977867126465
+        },
+        {
+          "control": "native-water-b-3-control",
+          "candidate": "native-water-b-2-native",
+          "focusMatched": true,
+          "meanSavingsMs": 2.9850432607862674,
+          "p95SavingsMs": 2.722024917602539
+        },
+        {
+          "control": "native-water-b-5-control",
+          "candidate": "native-water-b-4-native",
+          "focusMatched": true,
+          "meanSavingsMs": 0.004769961039224668,
+          "p95SavingsMs": -0.02300739288330078
+        },
+        {
+          "control": "native-water-b-6-control",
+          "candidate": "native-water-b-7-native",
+          "focusMatched": true,
+          "meanSavingsMs": 0.10648674435085681,
+          "p95SavingsMs": -0.0040531158447265625
+        }
+      ],
+      "nativeSha256": "78e0bb25a3c5b246bd024257a33f97c73ac31680050fe38a42c1100e1704949d",
+      "pluginSha256": "3181c297cf8d70910593f908f6304bcc7141e902a156cdeaf2b4a45460cb4e78",
+      "loadedBinaryHashes": [
+        {
+          "name": "FtkWaterPrototype.dll",
+          "sha256": "3181c297cf8d70910593f908f6304bcc7141e902a156cdeaf2b4a45460cb4e78"
+        },
+        {
+          "name": "FtkFrameProfiler.dll",
+          "sha256": "686a4befa6025e7a66f13c0e9d3396f1dd3300915e531989d6192027f8768829"
+        },
+        {
+          "name": "FTKModFramework.dll",
+          "sha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e"
+        },
+        {
+          "name": "Assembly-CSharp.dll",
+          "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+        }
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 71.04615783691406,
+          "y": 36.13335418701172,
+          "z": 161.84979248046875
+        },
+        "rotation": {
+          "x": 44.41260528564453,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      }
+    },
+    "packaged-native-a": {
+      "trials": [
+        {
+          "id": "packaged-native-a-0-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 12.995851039886475,
+          "fps": 76.94763482059237,
+          "p95Ms": 34.193992614746094,
+          "p99Ms": 70.69897651672363,
+          "over33ms": 46,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 6008,
+            "fallback": 0,
+            "nativeWaterCalls": 6264,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-a-1-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 10.22685342364841,
+          "fps": 97.78178669184953,
+          "p95Ms": 18.209099769592285,
+          "p99Ms": 45.01307010650635,
+          "over33ms": 14,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 16344,
+            "fallback": 0,
+            "nativeWaterCalls": 16600,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-a-2-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 12.104485564761692,
+          "fps": 82.61400244147323,
+          "p95Ms": 21.184921264648438,
+          "p99Ms": 110.25798320770264,
+          "over33ms": 25,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 259,
+          "unfocused": 641,
+          "focusChanges": 2,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 27272,
+            "fallback": 0,
+            "nativeWaterCalls": 27528,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-a-3-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 9.523420996136135,
+          "fps": 105.00428369235408,
+          "p95Ms": 14.996051788330078,
+          "p99Ms": 20.080924034118652,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 27728,
+            "fallback": 0,
+            "nativeWaterCalls": 27984,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-a-4-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 8.800346586439344,
+          "fps": 113.63188826459664,
+          "p95Ms": 15.787005424499512,
+          "p99Ms": 18.604040145874023,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 38320,
+            "fallback": 0,
+            "nativeWaterCalls": 38576,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-a-5-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 9.101461172103882,
+          "fps": 109.87246784780177,
+          "p95Ms": 12.787103652954102,
+          "p99Ms": 17.796993255615234,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 38784,
+            "fallback": 0,
+            "nativeWaterCalls": 39040,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-a-6-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 8.218992153803507,
+          "fps": 121.66941898554187,
+          "p95Ms": 9.150028228759766,
+          "p99Ms": 13.08596134185791,
+          "over33ms": 1,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 38784,
+            "fallback": 0,
+            "nativeWaterCalls": 39040,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-a-7-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 5.883277787102593,
+          "fps": 169.9732761543598,
+          "p95Ms": 7.355928421020508,
+          "p99Ms": 8.57698917388916,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 900,
+          "unfocused": 0,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 50384,
+            "fallback": 0,
+            "nativeWaterCalls": 50640,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        }
+      ],
+      "pooled": {
+        "control": {
+          "frames": 3600,
+          "meanMs": 9.9599313404825,
+          "fps": 100.40229855154362,
+          "p95Ms": 15.780925750732422,
+          "p99Ms": 40.27104377746582,
+          "over33ms": 49
+        },
+        "native": {
+          "frames": 3600,
+          "meanMs": 9.25374084048801,
+          "fps": 108.06440522136596,
+          "p95Ms": 15.906929969787598,
+          "p99Ms": 37.7269983291626,
+          "over33ms": 40
+        }
+      },
+      "matchedPairs": [
+        {
+          "control": "packaged-native-a-0-control",
+          "candidate": "packaged-native-a-1-native",
+          "focusMatched": true,
+          "meanSavingsMs": 2.768997616238064,
+          "p95SavingsMs": 15.984892845153809
+        },
+        {
+          "control": "packaged-native-a-3-control",
+          "candidate": "packaged-native-a-2-native",
+          "focusMatched": false,
+          "meanSavingsMs": -2.581064568625557,
+          "p95SavingsMs": -6.188869476318359
+        },
+        {
+          "control": "packaged-native-a-5-control",
+          "candidate": "packaged-native-a-4-native",
+          "focusMatched": true,
+          "meanSavingsMs": 0.3011145856645374,
+          "p95SavingsMs": -2.99990177154541
+        },
+        {
+          "control": "packaged-native-a-6-control",
+          "candidate": "packaged-native-a-7-native",
+          "focusMatched": true,
+          "meanSavingsMs": 2.3357143667009135,
+          "p95SavingsMs": 1.7940998077392578
+        }
+      ],
+      "limitation": "Focus varied across some runs. Pooled values are descriptive only; use focusMatched pairs and do not infer foreground performance from background trials.",
+      "loadedBinaryHashes": [
+        {
+          "name": "FtkWaterPrototype.dll",
+          "sha256": "3181c297cf8d70910593f908f6304bcc7141e902a156cdeaf2b4a45460cb4e78"
+        },
+        {
+          "name": "FtkNativeWater.dll",
+          "sha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387"
+        },
+        {
+          "name": "FtkFrameProfiler.dll",
+          "sha256": "686a4befa6025e7a66f13c0e9d3396f1dd3300915e531989d6192027f8768829"
+        },
+        {
+          "name": "FTKModFramework.dll",
+          "sha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e"
+        },
+        {
+          "name": "Assembly-CSharp.dll",
+          "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+        }
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      }
+    },
+    "packaged-native-b": {
+      "trials": [
+        {
+          "id": "packaged-native-b-0-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 11.439587672551474,
+          "fps": 87.4157381038683,
+          "p95Ms": 16.1360502243042,
+          "p99Ms": 27.778029441833496,
+          "over33ms": 5,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 76987,
+            "fallback": 0,
+            "nativeWaterCalls": 77243,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-b-1-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 9.477476676305136,
+          "fps": 105.51331690428991,
+          "p95Ms": 17.086029052734375,
+          "p99Ms": 21.1639404296875,
+          "over33ms": 0,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 87363,
+            "fallback": 0,
+            "nativeWaterCalls": 87619,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-b-2-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 9.715978966818916,
+          "fps": 102.92323639389345,
+          "p95Ms": 16.981005668640137,
+          "p99Ms": 23.517966270446777,
+          "over33ms": 2,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 98299,
+            "fallback": 0,
+            "nativeWaterCalls": 98555,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-b-3-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 9.856818781958687,
+          "fps": 101.45261083934487,
+          "p95Ms": 15.172004699707031,
+          "p99Ms": 20.0350284576416,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 98739,
+            "fallback": 0,
+            "nativeWaterCalls": 98995,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-b-4-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 9.446420007281834,
+          "fps": 105.86020939457948,
+          "p95Ms": 16.914010047912598,
+          "p99Ms": 19.332051277160645,
+          "over33ms": 1,
+          "gc": [
+            1,
+            1,
+            1
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 109283,
+            "fallback": 0,
+            "nativeWaterCalls": 109539,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-b-5-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 10.285576581954956,
+          "fps": 97.22352383768187,
+          "p95Ms": 15.049934387207031,
+          "p99Ms": 20.286917686462402,
+          "over33ms": 1,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 109707,
+            "fallback": 0,
+            "nativeWaterCalls": 109963,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-b-6-control",
+          "arm": "control",
+          "frames": 900,
+          "meanMs": 10.456534359190199,
+          "fps": 95.63398021267962,
+          "p95Ms": 14.88196849822998,
+          "p99Ms": 19.26100254058838,
+          "over33ms": 3,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": false,
+            "completed": 109707,
+            "fallback": 0,
+            "nativeWaterCalls": 109963,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        },
+        {
+          "id": "packaged-native-b-7-native",
+          "arm": "native",
+          "frames": 900,
+          "meanMs": 9.535230000813803,
+          "fps": 104.87424004608731,
+          "p95Ms": 16.409993171691895,
+          "p99Ms": 19.21093463897705,
+          "over33ms": 1,
+          "gc": [
+            0,
+            0,
+            0
+          ],
+          "focus": 0,
+          "unfocused": 900,
+          "focusChanges": 0,
+          "normalReuse": null,
+          "nativeWater": {
+            "enabled": true,
+            "completed": 120339,
+            "fallback": 0,
+            "nativeWaterCalls": 120595,
+            "nativeError": null,
+            "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+          },
+          "ceilingArm": null
+        }
+      ],
+      "pooled": {
+        "control": {
+          "frames": 3600,
+          "meanMs": 10.509629348913828,
+          "fps": 95.15083423026238,
+          "p95Ms": 15.313982963562012,
+          "p99Ms": 21.55601978302002,
+          "over33ms": 10
+        },
+        "native": {
+          "frames": 3600,
+          "meanMs": 9.543776412804922,
+          "fps": 104.78032560133073,
+          "p95Ms": 16.923904418945312,
+          "p99Ms": 20.550012588500977,
+          "over33ms": 4
+        }
+      },
+      "matchedPairs": [
+        {
+          "control": "packaged-native-b-0-control",
+          "candidate": "packaged-native-b-1-native",
+          "focusMatched": true,
+          "meanSavingsMs": 1.962110996246338,
+          "p95SavingsMs": -0.9499788284301758
+        },
+        {
+          "control": "packaged-native-b-3-control",
+          "candidate": "packaged-native-b-2-native",
+          "focusMatched": true,
+          "meanSavingsMs": 0.1408398151397705,
+          "p95SavingsMs": -1.8090009689331055
+        },
+        {
+          "control": "packaged-native-b-5-control",
+          "candidate": "packaged-native-b-4-native",
+          "focusMatched": true,
+          "meanSavingsMs": 0.8391565746731224,
+          "p95SavingsMs": -1.8640756607055664
+        },
+        {
+          "control": "packaged-native-b-6-control",
+          "candidate": "packaged-native-b-7-native",
+          "focusMatched": true,
+          "meanSavingsMs": 0.9213043583763962,
+          "p95SavingsMs": -1.528024673461914
+        }
+      ],
+      "limitation": "Focus varied across some runs. Pooled values are descriptive only; use focusMatched pairs and do not infer foreground performance from background trials.",
+      "loadedBinaryHashes": [
+        {
+          "name": "FtkWaterPrototype.dll",
+          "sha256": "3181c297cf8d70910593f908f6304bcc7141e902a156cdeaf2b4a45460cb4e78"
+        },
+        {
+          "name": "FtkNativeWater.dll",
+          "sha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387"
+        },
+        {
+          "name": "FtkFrameProfiler.dll",
+          "sha256": "686a4befa6025e7a66f13c0e9d3396f1dd3300915e531989d6192027f8768829"
+        },
+        {
+          "name": "FTKModFramework.dll",
+          "sha256": "7e16f411cf704dddb38d24b2547354a02ab2b6b869ac8f4f74a14d54ccad929e"
+        },
+        {
+          "name": "Assembly-CSharp.dll",
+          "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+        }
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26397705078125,
+          "y": 53.62309646606445,
+          "z": 169.9629669189453
+        },
+        "rotation": {
+          "x": 49.99999237060547,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      }
+    }
+  },
+  "runtimeSelfTest": {
+    "normals": {
+      "variants": [
+        {
+          "componentChecks": 36000,
+          "bitMismatches": 5705,
+          "finiteOrClassMismatches": 5705,
+          "nanPayloadMismatches": 0,
+          "mode": 0,
+          "maxFiniteError": 4.917383193969727e-07,
+          "rejectedValidCases": 0,
+          "invalidTopologyRejectedWithoutWrites": true,
+          "error": null
+        },
+        {
+          "componentChecks": 36000,
+          "bitMismatches": 611,
+          "finiteOrClassMismatches": 611,
+          "nanPayloadMismatches": 0,
+          "mode": 1,
+          "maxFiniteError": 1.1920928955078125e-07,
+          "rejectedValidCases": 0,
+          "invalidTopologyRejectedWithoutWrites": true,
+          "error": null
+        },
+        {
+          "componentChecks": 36000,
+          "bitMismatches": 5494,
+          "finiteOrClassMismatches": 5494,
+          "nanPayloadMismatches": 0,
+          "mode": 2,
+          "maxFiniteError": 5.066394805908203e-07,
+          "rejectedValidCases": 0,
+          "invalidTopologyRejectedWithoutWrites": true,
+          "error": null
+        },
+        {
+          "componentChecks": 36000,
+          "bitMismatches": 0,
+          "finiteOrClassMismatches": 0,
+          "nanPayloadMismatches": 0,
+          "mode": 3,
+          "maxFiniteError": 0.0,
+          "rejectedValidCases": 0,
+          "invalidTopologyRejectedWithoutWrites": true,
+          "error": null
+        }
+      ],
+      "selectedExactMode": 3,
+      "error": null
+    },
+    "perlin": {
+      "bound": 1,
+      "checks": 10081,
+      "bitMismatches": 0,
+      "ready": true
+    },
+    "water": {
+      "componentChecks": 7680,
+      "bitMismatches": 0,
+      "rejectedValidCases": 0,
+      "invalidInputsRejectedWithoutWrites": true,
+      "ready": true
+    },
+    "id": "packaged-selftest-1",
+    "action": "selftest",
+    "supported": true,
+    "selfTestsPassed": true,
+    "experiment": {
+      "enabled": false,
+      "completed": 0,
+      "fallback": 0,
+      "nativeWaterCalls": 256,
+      "nativeError": null,
+      "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+    },
+    "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+    "pluginSha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387",
+    "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "utc": "2026-09-25T03:48:59.3938680Z",
+    "unityVersion": "2017.2.2p2",
+    "runtimeVersion": "2.0.50727.1433",
+    "pointerBytes": 8,
+    "operatingSystem": "Mac OS X 26.6.2"
+  },
+  "activationBeforeSelfTest": {
+    "error": "InvalidOperationException: Successful numeric self-tests are required before activation.",
+    "id": "packaged-before-selftest",
+    "action": "on",
+    "supported": true,
+    "selfTestsPassed": false,
+    "experiment": {
+      "enabled": false,
+      "completed": 0,
+      "fallback": 0,
+      "nativeWaterCalls": 0,
+      "nativeError": null,
+      "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+    },
+    "nativeSha256": null,
+    "pluginSha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387",
+    "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "utc": "2026-09-25T03:48:57.4272880Z",
+    "unityVersion": "2017.2.2p2",
+    "runtimeVersion": "2.0.50727.1433",
+    "pointerBytes": 8,
+    "operatingSystem": "Mac OS X 26.6.2"
+  },
+  "liveOutputChecks": [
+    {
+      "id": "native-water-live-3",
+      "methodOrder": [
+        "WaterDistort",
+        "LakeDistort"
+      ],
+      "complete": true,
+      "error": null,
+      "callbacks": [
+        25,
+        25
+      ],
+      "vertices": [
+        31000,
+        10875
+      ],
+      "vertexBitMismatches": [
+        0,
+        0
+      ],
+      "normalChecks": [
+        31000,
+        10875
+      ],
+      "normalBitMismatches": [
+        0,
+        0
+      ],
+      "maximumNormalComponentError": [
+        0.0,
+        0.0
+      ],
+      "maximumNormalSquaredVectorError": [
+        0.0,
+        0.0
+      ],
+      "normalNonfiniteMismatches": [
+        0,
+        0
+      ],
+      "normalZeroClassificationMismatches": [
+        0,
+        0
+      ],
+      "semantics": "Read-only postfix on actual production callbacks; compares final vertices to native Perlin at updated cursor, and final normal arrays to original corner arithmetic. Prototype transpiler is disabled. Validation postfix removed before this result is written."
+    },
+    {
+      "id": "packaged-live-1",
+      "methodOrder": [
+        "WaterDistort",
+        "LakeDistort"
+      ],
+      "complete": true,
+      "error": null,
+      "callbacks": [
+        25,
+        25
+      ],
+      "vertices": [
+        31000,
+        10875
+      ],
+      "vertexBitMismatches": [
+        0,
+        0
+      ],
+      "normalChecks": [
+        31000,
+        10875
+      ],
+      "normalBitMismatches": [
+        0,
+        0
+      ],
+      "maximumNormalComponentError": [
+        0.0,
+        0.0
+      ],
+      "maximumNormalSquaredVectorError": [
+        0.0,
+        0.0
+      ],
+      "normalNonfiniteMismatches": [
+        0,
+        0
+      ],
+      "normalZeroClassificationMismatches": [
+        0,
+        0
+      ],
+      "semantics": "Read-only postfix on actual production callbacks; compares final vertices to native Perlin at updated cursor, and final normal arrays to original corner arithmetic. Prototype transpiler is disabled. Validation postfix removed before this result is written."
+    },
+    {
+      "id": "packaged-resumed-output",
+      "methodOrder": [
+        "WaterDistort",
+        "LakeDistort"
+      ],
+      "complete": true,
+      "error": null,
+      "callbacks": [
+        25,
+        25
+      ],
+      "vertices": [
+        31000,
+        10875
+      ],
+      "vertexBitMismatches": [
+        0,
+        0
+      ],
+      "normalChecks": [
+        31000,
+        10875
+      ],
+      "normalBitMismatches": [
+        0,
+        0
+      ],
+      "maximumNormalComponentError": [
+        0.0,
+        0.0
+      ],
+      "maximumNormalSquaredVectorError": [
+        0.0,
+        0.0
+      ],
+      "normalNonfiniteMismatches": [
+        0,
+        0
+      ],
+      "normalZeroClassificationMismatches": [
+        0,
+        0
+      ],
+      "semantics": "Read-only postfix on actual production callbacks; compares final vertices to native Perlin at updated cursor, and final normal arrays to original corner arithmetic. Prototype transpiler is disabled. Validation postfix removed before this result is written."
+    }
+  ],
+  "validationClarification": "Legacy prototype transpiler was disabled during checks; the tested native batch was enabled. The validator description uses prototype to mean the older noise/cache experiment.",
+  "lifecycle": {
+    "packaged-lifecycle-before": {
+      "id": "packaged-lifecycle-before",
+      "action": "on",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": true,
+        "completed": 51000,
+        "fallback": 0,
+        "nativeWaterCalls": 51256,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T03:52:10.9125060Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    "packaged-lifecycle-title": {
+      "id": "packaged-lifecycle-title",
+      "action": "inventory",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": true,
+        "completed": 51816,
+        "fallback": 0,
+        "nativeWaterCalls": 52072,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T03:52:17.9835400Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    "packaged-lifecycle-resumed": {
+      "id": "packaged-lifecycle-resumed",
+      "action": "inventory",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": true,
+        "completed": 69307,
+        "fallback": 0,
+        "nativeWaterCalls": 69563,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T03:52:46.5108540Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    }
+  },
+  "instrumentedCallbacks": [
+    {
+      "id": "native-water-cpu-0-control",
+      "arm": "control",
+      "frames": 600,
+      "totals": [
+        {
+          "method": "WaterDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 1102.103,
+          "calls": 3600
+        },
+        {
+          "method": "LakeDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 181.794,
+          "calls": 600
+        }
+      ],
+      "focus": 600,
+      "focusChanges": 0
+    },
+    {
+      "id": "native-water-cpu-1-native",
+      "arm": "native",
+      "frames": 600,
+      "totals": [
+        {
+          "method": "WaterDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 173.881,
+          "calls": 3600
+        },
+        {
+          "method": "LakeDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 37.4,
+          "calls": 600
+        }
+      ],
+      "focus": 600,
+      "focusChanges": 0
+    },
+    {
+      "id": "native-water-cpu-2-native",
+      "arm": "native",
+      "frames": 600,
+      "totals": [
+        {
+          "method": "WaterDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 139.005,
+          "calls": 3600
+        },
+        {
+          "method": "LakeDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 29.406,
+          "calls": 600
+        }
+      ],
+      "focus": 600,
+      "focusChanges": 0
+    },
+    {
+      "id": "native-water-cpu-3-control",
+      "arm": "control",
+      "frames": 600,
+      "totals": [
+        {
+          "method": "WaterDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 982.736,
+          "calls": 3600
+        },
+        {
+          "method": "LakeDistort.OnWillRenderObject",
+          "inclusiveMilliseconds": 170.651,
+          "calls": 600
+        }
+      ],
+      "focus": 600,
+      "focusChanges": 0
+    }
+  ],
+  "cleanup": {
+    "off": {
+      "id": "packaged-final-off",
+      "action": "off",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": false,
+        "completed": 120771,
+        "fallback": 0,
+        "nativeWaterCalls": 121027,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "2b5e205c36bfb4ffbf87111fb9628698233d1bd658ab2470b7be6bab4a91c387",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T03:55:59.1324110Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    "priorPatchOwnersRestored": true,
+    "ownedGameStopped": true
+  },
+  "instrumentedCallbacksNote": "Separate diagnostic captures, not used for FPS claims. Inclusive callback times include timing overhead, native crossing and mesh uploads; identical counts of 3600 Water and600 Lake callbacks per600frames."
+}

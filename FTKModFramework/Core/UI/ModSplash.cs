@@ -104,7 +104,10 @@ namespace FTKModFramework.Core.UI
             layout.childForceExpandWidth = false;
             layout.childForceExpandHeight = false;
 
+            // Own the texture before further UI construction, including failed builds.
+            ModSplashBehaviour behaviour = root.AddComponent<ModSplashBehaviour>();
             Texture2D logo = LoadLogo();
+            behaviour.Init(group, hold, logo);
             if (logo != null)
             {
                 GameObject logoGo = NewChild("Logo", card.transform);
@@ -127,9 +130,6 @@ namespace FTKModFramework.Core.UI
             AddText(card.transform, modsLine, 26, FontStyle.Normal, new Color(0.92f, 0.92f, 0.94f, 1f), 1100f);
             AddText(card.transform, "Toggle mods with the Mods button on the title screen. Press any key to continue.",
                 20, FontStyle.Normal, new Color(0.65f, 0.68f, 0.74f, 1f), 1100f);
-
-            ModSplashBehaviour behaviour = root.AddComponent<ModSplashBehaviour>();
-            behaviour.Init(group, hold);
 
             Plugin.Log.LogInfo("Splash: shown (" + enabledCount + " mod(s) enabled, logo=" + (logo != null) +
                 ", hold=" + hold + "s).");
@@ -165,6 +165,7 @@ namespace FTKModFramework.Core.UI
         /// <summary>The embedded logo PNG as a texture; null (with one warning) if it cannot be read.</summary>
         private static Texture2D LoadLogo()
         {
+            Texture2D tex = null;
             try
             {
                 Assembly asm = typeof(Plugin).Assembly;
@@ -186,8 +187,8 @@ namespace FTKModFramework.Core.UI
                     }
                 }
 
-                Texture2D tex = new Texture2D(2, 2, TextureFormat.ARGB32, false);
-                if (!ImageConversion.LoadImage(tex, bytes))
+                tex = new Texture2D(2, 2, TextureFormat.ARGB32, false);
+                if (!ImageConversion.LoadImage(tex, bytes, true))
                 {
                     Plugin.Log.LogWarning("Splash: the embedded logo is not a readable PNG.");
                     UnityEngine.Object.Destroy(tex);
@@ -199,6 +200,7 @@ namespace FTKModFramework.Core.UI
             }
             catch (Exception e)
             {
+                if (tex != null) UnityEngine.Object.Destroy(tex);
                 Plugin.Log.LogWarning("Splash: logo load failed: " + e.Message);
                 return null;
             }
@@ -250,16 +252,24 @@ namespace FTKModFramework.Core.UI
         private const float SkipFade = 0.25f;
 
         private CanvasGroup _group;
+        private Texture2D _logo;
         private float _hold;
         private float _t;
         private bool _skipping;
         private float _skipT;
         private float _skipFrom;
 
-        public void Init(CanvasGroup group, float hold)
+        public void Init(CanvasGroup group, float hold, Texture2D logo)
         {
             _group = group;
             _hold = hold;
+            _logo = logo;
+        }
+
+        private void OnDestroy()
+        {
+            if (_logo != null) Destroy(_logo);
+            _logo = null;
         }
 
         private void Update()

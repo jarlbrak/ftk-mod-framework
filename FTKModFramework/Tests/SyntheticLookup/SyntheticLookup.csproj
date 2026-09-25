@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/ContentRegistry.cs" Link="ContentRegistry.cs" />
+    <Compile Include="../../Core/CanonicalEnumLookup.cs" Link="CanonicalEnumLookup.cs" />
+    <Compile Include="../../Core/EnumPatches.cs" Link="EnumPatches.cs" />
+  </ItemGroup>
+</Project>
