@@ -8,7 +8,7 @@ Paladin artwork by JarlBrak uses original generated concepts, Hyper3D Rodin mode
 
 The author confirmed the Creator plan was active during model generation on September 25, 2026. This is author confirmation, not provider verification. Generation provenance is not an independent guarantee of third-party rights clearance.
 
-Library cards consistently use original promotional banners, not game captures. Paladin's banner is the illustration first published with 1.2.0, reused as class artwork for its current listing; it is not a literal preview of every 1.3.0 equipment model. Thief and Possum also use their published promotional artwork. Current native Paladin captures remain in the gallery, where inventory comparisons may show previously equipped items separately.
+Library cards consistently use original promotional banners, not game captures. Paladin's banner is the illustration first published with 1.2.0, reused as class artwork for its current listing; it is not a literal preview of every 1.3.0 equipment model. Thief uses its published promotional artwork. Possum uses a website edit of its published banner: the title typography and centered divider match the library, and the embedded version badge has been removed. The package artwork remains unchanged. Current native Paladin captures remain in the gallery, where inventory comparisons may show previously equipped items separately.
 
 ## Native game captures
 
