@@ -1,11 +1,11 @@
 ---
-import catalog from '../data/catalog.json';
+import catalog from '../data/catalog';
 const { name }=Astro.props;
 const slug=name.toLowerCase();
 const p=catalog.packages.find(p=>p.name===name)!;
 ---
 <figure><img class="mod-banner" src={`${import.meta.env.BASE_URL}media/${slug}.webp`} alt={`Original ${name} promotional illustration`} width="1280" height="720"/><figcaption>Original promotional illustration. {name!=='Possum'&&'Item cards below show the published equipment artwork.'}</figcaption></figure>
-<p><span class="pill">Published {p.version}{p.name==='Thief'?' · Playtest':''}</span> · By {p.author}</p>
+<p><span class="pill">Published {p.version}</span> · By {p.author}</p>
 <p>{p.description}</p>
 <div class="actions"><a class="button primary" href={p.packageUrl}>Download {p.name} {p.version}</a><a class="button" href={`${import.meta.env.BASE_URL}installation/`}>Install through Mods</a></div>
 <details><summary>Requirements & availability</summary>

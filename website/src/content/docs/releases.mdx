@@ -2,7 +2,7 @@
 title: Release notes
 description: What changed in the published framework and mod packages.
 ---
-import catalog from '../../data/catalog.json';
+import catalog from '../../data/catalog';
 
 ## Framework 1.2.0
 
@@ -10,7 +10,7 @@ Adds equipment-granted combat actions and conditional damage support used by Pal
 
 ## Current mod releases
 
-{catalog.packages.map(p=><section><h3>{p.name} {p.version}{p.name==='Thief'?' · Published playtest':''}</h3><p>{p.changelog}</p><ul>{p.contentChanges.map(c=><li>{c}</li>)}</ul><p><a href={p.packageUrl}>Download exact published package</a> · Framework {p.frameworkRange}</p></section>)}
+{catalog.packages.map(p=><section><h3>{p.name} {p.version}</h3><p>{p.changelog}</p><ul>{p.contentChanges.map(c=><li>{c}</li>)}</ul><p><a href={p.packageUrl}>Download exact published package</a> · Framework {p.frameworkRange}</p></section>)}
 
 ## Paladin upgrade notes
 
