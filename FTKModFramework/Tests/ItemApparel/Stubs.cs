@@ -36,6 +36,7 @@ namespace UnityEngine
         public T[] GetComponents<T>() where T : class { return gameObject.GetComponents<T>(); }
     }
     public class Mesh { public string name; }
+    public class Material { }
     public class Renderer : Component { public string name; }
     public class SkinnedMeshRenderer : Component { public Mesh sharedMesh; }
 }
@@ -104,6 +105,14 @@ public class CharacterDummy { public CharacterOverworld m_CharacterOverworld; pu
 namespace HarmonyLib { public class HarmonyPatch : Attribute { public HarmonyPatch(Type t, string method, Type[] args) { } public HarmonyPatch(Type t, string method) { } } }
 namespace FTKModFramework.Core
 {
+    internal static class PlayerRaceRegistry
+    {
+        internal static PlayerMeshPlan GetPlan(FTK_playerGameStart row, FTK_skinset skin) { return null; }
+    }
+    internal static class ExplicitMaterialOptions
+    {
+        internal static void PreservePalette(UnityEngine.Material material) { }
+    }
     public static partial class Content
     {
         private static readonly Dictionary<Type, object> databases = new Dictionary<Type, object>();
