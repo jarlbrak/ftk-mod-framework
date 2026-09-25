@@ -9,9 +9,12 @@ in play. See [accessory validation](ACCESSORY-VALIDATION.md) for the earlier
 offline candidate, [legendary validation](LEGENDARY-VALIDATION.md) for earlier
 live-tested bytes, and [Launch 1.0.0](LAUNCH-1.0.0.md) for current release gates.
 
-The unpublished 1.1.0 source candidate retains those entries and adds Cleansing
-March to the class registration. Its offline framework, package and hot
-activation checks are separate from live gameplay. The [isolated 1.1.0 tile-entry
+The unpublished 1.2.0 source candidate retains those entries and Cleansing
+March, introduced in the earlier 1.1.0 candidate. The [balance review](BALANCE-1.2.0.md)
+and [verification receipt](balance-1.2.0-verification.json) record its five tuning
+changes and game-free checks. Matched live combat comparisons remain pending.
+Earlier offline framework, package and hot activation checks are separate from
+live gameplay. The [isolated 1.1.0 tile-entry
 receipt](cleansing-march-live-2026-09-24.json) records a native Poison walk and
 Curse tile entry for the Paladin, plus native Hunter controls that received both
 ailments. The combat immunity query reverted to false. Natural hazard spawning,

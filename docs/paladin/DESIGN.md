@@ -1,7 +1,7 @@
 # Paladin: complete class design
 
 Status: design contract for the published Paladin 1.0.1 package and the
-unpublished 1.1.0 Cleansing March candidate. It defines 51
+unpublished 1.2.0 balance candidate. It defines 51
 equipment items, including twelve accessories. The design and historical plans
 below do not establish full live-game acceptance; see the
 [launch record](LAUNCH-1.0.0.md) for observed coverage.
@@ -17,6 +17,9 @@ below do not establish full live-game acceptance; see the
 | [Native baseline](NATIVE-BASELINE.md) | Verified slots, templates, inherited actions and stat limits |
 | [Gap plan](GAPS.md) | Historical accessory implementation plan and remaining validation gates |
 | [Validation](VALIDATION.md) | Historical acceptance evidence plus current verification entry points |
+
+The [1.2.0 balance review](BALANCE-1.2.0.md) records native comparisons,
+tuning decisions, calculated tradeoffs and outstanding matched playtests.
 
 ## The promise
 
@@ -47,11 +50,11 @@ every in-game stat panel displays exactly these numbers.
 | Awareness | 60 | Ordinary scouting capability |
 | Talent | 50 | Limited utility specialization |
 | Speed | 60 | Protection requires anticipation rather than guaranteed initiative |
-| Vitality | 84 | Primary hammer stat and durable class identity |
+| Vitality | 80 | Primary hammer stat and durable class identity |
 | Focus | 3 | Native resource shared between reliable attacks and exploration |
 | Gold | 3 | Modest starting purse |
 
-The six main stats total **364**. The class clones Blacksmith, declares Vitality
+The six main stats total **360**. The class clones Blacksmith, declares Vitality
 as its primary stat and explicitly disables inherited Steadfast. Its starting
 equipment is Novice Hammer, Novice Aegis, Novice Plate, Novice Sabatons and Novice
 Helm. The new accessories are found or bought, not additional starting
@@ -59,7 +62,7 @@ grants. [Native baseline](NATIVE-BASELINE.md) explains inherited weapon actions,
 difficulty bonuses and the stat cap; equip/remove verification remains in
 [the gap plan](GAPS.md).
 
-The 1.1.0 candidate adds **Cleansing March**, an equipment-independent passive.
+The earlier 1.1.0 candidate introduced **Cleansing March**, an equipment-independent passive.
 During exploration it prevents new Poison and Curse from tiles and other
 noncombat sources. It neither cures existing conditions nor prevents fire tile
 damage or chaos losses. In combat the native status rules remain in force.

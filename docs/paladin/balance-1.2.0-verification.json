@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-24",
+  "modGuid": "com.ftkmf.paladin",
+  "version": "1.2.0",
+  "minimumFrameworkVersion": "1.0.3",
+  "status": "unpublished-source-candidate",
+  "contentSha256": "41f55f91d5d82fca7770827de0a46bea02f9ef978589b2cd880f0201613939bd",
+  "manifestSha256": "fe46023b3b58046cc176b2c18df16ca3c8cdcaa0aaeb2d0f9aa20f12264ccd71",
+  "archiveSha256": "c9d9e7c31ad7fa69f6aee08bc1bf00ca104c9f0796cace7b5b2094404710bf39",
+  "archiveFileCount": 177,
+  "nativeEvidence": {
+    "assemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+    "sharedassets1Sha256": "e38abff2efd7ca8ef8ede4b92754d6b3a06c6498a774ee55d0d1ddbffba4750f",
+    "method": "Fresh ILSpy methods and matching assembly type trees for installed class and weapon tables; summarized in BALANCE-1.2.0.md."
+  },
+  "checks": [
+    {
+      "command": "python3 marketplace/packages/validate_paladin.py",
+      "result": "passed",
+      "scope": "Balance guardrails, 54 rows, 51 equipment items, asset hashes, acquisition and references."
+    },
+    {
+      "command": "go build (launcher/helper)",
+      "result": "passed",
+      "scope": "Local helper binary for exact archive validation."
+    },
+    {
+      "command": "python3 marketplace/packages/build_paladin.py --helper <local-helper> --game-assembly <installed-assembly> --output <scratch-output>",
+      "result": "passed",
+      "scope": "Exact candidate archive and descriptor accepted by the current helper; no publication."
+    },
+    {
+      "command": "dotnet run --project FTKModFramework/Tests/PlayerMods/PlayerMods.csproj -c Release",
+      "result": "passed",
+      "scope": "Game-free PlayerMods suite; compiler CS0649 warnings were emitted."
+    },
+    {
+      "command": "python3 marketplace/packages/verify_paladin_lifecycle.py --helper <local-helper> --archive <candidate-archive> --descriptor <candidate-descriptor> --game-assembly <installed-assembly>",
+      "result": "passed",
+      "scope": "Fresh scratch helper state: activation, byte inventory, disable, enable, remove, rollback, export. No game launch or save load.",
+      "localReceiptSha256": "ece34ad7dfd6056d83f983ee1ec5af449a2e2c7c8f1571e3a04799fbc68831a6"
+    },
+    {
+      "command": "Relative Markdown link check and semantic JSON comparison against HEAD",
+      "result": "passed",
+      "scope": "Exactly five numeric runtime content changes; IDs, actions, gear inventory and art preserved."
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "liveGame": {
+    "status": "not-run",
+    "reason": "No task-owned deployment overlay configured in this checkout. Other tasks game trials were not modified.",
+    "remaining": [
+      "Matched class and gear comparisons across starter, middle and endgame encounters",
+      "Current-version starting stats, equip/remove deltas, ordinary acquisition and save/resume",
+      "Online co-op",
+      "Windows and Linux gameplay"
+    ]
+  },
+  "limits": "Offline package integrity and modeled tradeoffs do not prove campaign balance. Published catalog and prior release bytes remain unchanged."
+}
