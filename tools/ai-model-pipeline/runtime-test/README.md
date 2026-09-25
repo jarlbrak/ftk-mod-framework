@@ -2302,7 +2302,7 @@ successful completion; instrumentation can change runtime timing. Compare with
 `player-studio` renders an existing active avatar synchronously, without creating
 or equipping a character. Supply `source: preview` or `world`, exact
 `ownerInstanceId` and `celInstanceId` from the observer, and `view: front`,
-`three-quarter`, or `back`. World capture requires an owned noncombat hero.
+`three-quarter`, `side`, or `back`. World capture requires an owned noncombat hero.
 The isolated-root and single-player helper guards remain mandatory.
 
 Output is `model-test-output/<command-id>.png` at 768 by 1024 pixels, with a
@@ -2442,3 +2442,6 @@ inspection token and button instance ID, then invokes that callback once. The
 helper never calls `SaveAndQuit`, writes save data, edits inventory, or chooses
 an action by text or screen coordinates. Observe process exit and a fresh native
 Resume separately before claiming save persistence.
+# Thief state inspection
+
+The isolated runtime helper accepts `thief-state` with an exact active `heroInstanceId`. It returns the equipped weapon ID, Thief identity, Prepared and Evasion state, Slip Away availability, and pending artifact receipt count. The operation only reads private framework state and is intended for single-player native validation; it provides no multiplayer delivery proof. Use the ordinary native combat commands to produce state changes.

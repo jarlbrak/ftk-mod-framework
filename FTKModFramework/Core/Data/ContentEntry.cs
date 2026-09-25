@@ -27,6 +27,7 @@ namespace FTKModFramework.Core.Data
 
         /// <summary>Proficiency ids to attach in Phase 2 (weapon -&gt; AttachProficiencies, enemy -&gt; AttachEnemyProficiencies).</summary>
         [JsonProperty("proficiencies")] public string[] Proficiencies;
+        [JsonProperty("replaceProficiencies")] public bool ReplaceProficiencies;
 
         /// <summary>Class flavor text -&gt; <c>Localization.SetClassFlavor</c> in Phase 2 (class kind).</summary>
         [JsonProperty("flavor")] public string Flavor;
@@ -50,12 +51,17 @@ namespace FTKModFramework.Core.Data
         /// </summary>
         [JsonProperty("behaviorCategory")] public string BehaviorCategory;
         [JsonProperty("guardian")] public bool Guardian;
+        [JsonProperty("opportunist")] public bool Opportunist;
+        [JsonProperty("precisionWeapon")] public string PrecisionWeapon;
+        [JsonProperty("precisionAction")] public string PrecisionAction;
+        [JsonProperty("thiefArtifact")] public string ThiefArtifact;
         [JsonProperty("overworldAilmentImmunity")] public OverworldAilmentImmunityEntry OverworldAilmentImmunity;
         [JsonProperty("guardianBonuses")] public GuardianBonusEntry GuardianBonuses;
         [JsonProperty("icon")] public string Icon;
         [JsonProperty("apparelModels")] public ApparelModelEntry ApparelModels;
         [JsonProperty("modifiers")] public ItemModifierEntry Modifiers;
         [JsonProperty("itemModels")] public ModelRendererEntry[] ItemModels;
+        [JsonProperty("offHandModels")] public ModelRendererEntry[] OffHandModels;
         [JsonProperty("displayModels")] public ModelRendererEntry[] DisplayModels;
         [JsonProperty("playerModels")] public PlayerModelEntry[] PlayerModels;
 #pragma warning restore CS0649
@@ -81,14 +87,6 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("femaleBinding")] public string FemaleBinding;
         [JsonProperty("maleBinding")] public string MaleBinding;
         [JsonProperty("renderers")] public ModelRendererEntry[] Renderers;
-    }
-    internal sealed class ItemModifierEntry
-    {
-        [JsonProperty("armor")] public int Armor;
-        [JsonProperty("resistance")] public int Resistance;
-        [JsonProperty("vitality")] public float Vitality;
-        [JsonProperty("speed")] public float Speed;
-        [JsonProperty("reflect")] public int Reflect;
     }
     internal sealed class ModelRendererEntry
     {

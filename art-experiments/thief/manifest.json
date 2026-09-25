@@ -1,0 +1,243 @@
+{
+  "schema": "ftkmf.thief-original-street-twins.v1",
+  "generator": "build.py",
+  "generatorSha256": "42cc509c121d62495a9e78be87acea0d8645828cea89a31f8e6135292b485bf3",
+  "dependencies": {
+    "tools/ai-model-pipeline/export_ftk_glb.py": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b",
+    "art-experiments/paladin-equipment/render_icons.py": "ee664ca5df1834037cb2ebff9c7e4370629f37b553b0d2d584a62b8591a66b9e",
+    "art-experiments/thief/native-route.json": "22203d9c3fcdd6dfb828e73216b9fb89a9bff1e58b9d6ac81634cddf0c9eaf12"
+  },
+  "provenance": "All geometry, bevels, normals, UVs, palette, proportions and icon pixels are original authored outputs. No image generation, external art or native surface data is used. Native metadata supplies only renderer paths and local transforms.",
+  "space": "Unity Y up. Original grip center near Y=0, authored tip Y=0.550 before native-local orientation. Downward blade orientation reviewed in native male idle; other poses remain open.",
+  "status": "Revised original assets with explicit off-hand package assignments. Native male idle review is separate from remaining motion, body variants, and user art acceptance.",
+  "equippedOrientation": {
+    "rotationOrder": "Z55 @ Y90 degrees",
+    "matrix": [
+      [
+        4.330381386807858e-08,
+        -0.8191520571708679,
+        0.5735763907432556,
+        0.0
+      ],
+      [
+        6.184426126765175e-08,
+        0.5735763907432556,
+        0.8191520571708679,
+        0.0
+      ],
+      [
+        -1.0,
+        0.0,
+        7.549790126404332e-08,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "weapon": {
+    "key": "thief-street-twins",
+    "path": ".",
+    "offHandPath": ".",
+    "fragments": [
+      {
+        "key": "thief-street-twins-fragment-1",
+        "path": "Break",
+        "fragmentToWeaponLocal": [
+          [
+            1.0,
+            -3.725290298461914e-09,
+            -0.0,
+            0.0
+          ],
+          [
+            3.725290298461914e-09,
+            1.0,
+            0.0,
+            0.3969861567020416
+          ],
+          [
+            0.0,
+            -0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "key": "thief-street-twins-fragment-2",
+        "path": "Break/Break",
+        "fragmentToWeaponLocal": [
+          [
+            1.0,
+            -3.725290298461914e-09,
+            0.0,
+            0.0030000025872141123
+          ],
+          [
+            3.725290298461914e-09,
+            1.0,
+            0.0,
+            -0.32101383805274963
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "displays": [
+      {
+        "key": "thief-street-twins-display",
+        "path": "dualKnife",
+        "rendererToDisplayRoot": [
+          [
+            0.9135921001434326,
+            -0.94379061460495,
+            0.5781497955322266,
+            0.0949999988079071
+          ],
+          [
+            0.7975134253501892,
+            1.081160306930542,
+            0.5046911239624023,
+            -0.29899999499320984
+          ],
+          [
+            -0.7674440145492554,
+            2.8569874643835647e-07,
+            1.2127151489257812,
+            0.019999995827674866
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "authoredBladeToDisplayRoot": [
+          [
+            0.19471466541290283,
+            -0.13634057343006134,
+            -0.9713379740715027,
+            -0.12999999523162842
+          ],
+          [
+            -0.7956735491752625,
+            0.557136595249176,
+            -0.2377026379108429,
+            -0.17000000178813934
+          ],
+          [
+            0.5735764503479004,
+            0.8191521167755127,
+            7.549790126404332e-08,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "key": "thief-street-twins-display-offhand",
+        "path": "offHandWeapon",
+        "rendererToDisplayRoot": [
+          [
+            0.9344821572303772,
+            0.9158341288566589,
+            -0.5896114110946655,
+            -0.07199999690055847
+          ],
+          [
+            0.7822676301002502,
+            -1.1048853397369385,
+            -0.4763779640197754,
+            0.45500001311302185
+          ],
+          [
+            -0.7579262852668762,
+            -0.011195485480129719,
+            -1.218636393547058,
+            0.00800000037997961
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "authoredBladeToDisplayRoot": [
+          [
+            -0.19471457600593567,
+            0.1363406926393509,
+            -0.9713379740715027,
+            0.12999999523162842
+          ],
+          [
+            -0.7956735491752625,
+            0.557136595249176,
+            0.2377026379108429,
+            -0.17000000178813934
+          ],
+          [
+            0.5735764503479004,
+            0.8191521167755127,
+            7.549790126404332e-08,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ]
+  },
+  "files": {
+    "thief-street-palette.png": "4acc6627fb4b5cf52b21e9dd2962f3b81d74974b152776fede525074e200ea5d",
+    "thief-street-twins-display-offhand.glb": "2db6bd28e98d782edbfef3d960a91512bf21175a5ebef1d89b8c122e65276ad3",
+    "thief-street-twins-display-offhand.pieces.json": "52db565758d11fe8a974eebf27dbfe07d63b65d257f65cbec201fc75ab61f0e8",
+    "thief-street-twins-display-offhand.source.json": "4cdf0789ac7134f6245d808d02ab6144ce42d1036c0b83eeed986bd0d3a707fa",
+    "thief-street-twins-display.glb": "a62ae49e7750b7793c0d6b7ff1efe8fc66e2fb1b93c74891695723d810674d9f",
+    "thief-street-twins-display.pieces.json": "52db565758d11fe8a974eebf27dbfe07d63b65d257f65cbec201fc75ab61f0e8",
+    "thief-street-twins-display.source.json": "4cb499f75e27fede62889b17b80e364bd985b409038c3182242cd0f3ab49779c",
+    "thief-street-twins-fragment-1.glb": "2400af5c78c5cc5416606f463f1988193194862eadb531417056fea9a18daf98",
+    "thief-street-twins-fragment-1.pieces.json": "1ba6012991c1a306d4c5fb2a96a0e6c0437b7377788fb554305b9e538cd70e30",
+    "thief-street-twins-fragment-1.source.json": "030a3c982117e1baa28834eafb40a5a806e5904f008446ef2e07d279373d14fa",
+    "thief-street-twins-fragment-2.glb": "398c21ef8acf58f8f799cba19355e125c8732c6b38ff6db0a7ad0cb36beac1db",
+    "thief-street-twins-fragment-2.pieces.json": "00a5c4d2eeb5f0b9ffba6b38b257576f0da7a4af5b2d6e172f4cec9888088340",
+    "thief-street-twins-fragment-2.source.json": "8cb9a567404dbadea73b075eb96f00c5559c5d4655d961b9d488d6ae2e7ae91e",
+    "thief-street-twins-icon.png": "31a30ddbe0ddd19c59d6e73fe5f223840f30efbe796e3966ef1c281aab13bc8c",
+    "thief-street-twins-icon.source.json": "7e6af55ae5e6959ead739ac633049ad17ad51ee420a8cc04c1b2e64cf0a41bc7",
+    "thief-street-twins.glb": "8dd6444ad18277594fbd6737275dc9a0ab96f7226d9dad83fa960a66e5a1a8cb",
+    "thief-street-twins.pieces.json": "52db565758d11fe8a974eebf27dbfe07d63b65d257f65cbec201fc75ab61f0e8",
+    "thief-street-twins.source.json": "36ec20c047deed26a56c8625c5a33c3e9c9f46c7076d6376686f16bd7698c827"
+  }
+}

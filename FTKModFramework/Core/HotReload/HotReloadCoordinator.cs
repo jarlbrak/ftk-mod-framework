@@ -24,6 +24,7 @@ namespace FTKModFramework.Core.HotReload
         private static DefinitionState definitions;
         private static HotReloadNativeCaches caches;
         private static PaladinResourceState.Snapshot resources;
+        private static Action restoreThief;
         private static ClassPreferences preferences;
         private static string failurePoint;
         private static bool draining;
@@ -118,12 +119,7 @@ namespace FTKModFramework.Core.HotReload
 
         private static void ValidateSelection(ManagedSnapshot selection)
         {
-            if (selection == null) return;
-            if (selection.Packages == null || selection.Packages.Count > 1)
-                throw new InvalidOperationException("Title-screen activation supports only empty or Paladin selections.");
-            foreach (PackageDescriptor package in selection.Packages)
-                if (package.ModGuid != "com.ftkmf.paladin" || (package.Dependencies != null && package.Dependencies.Length != 0))
-                    throw new InvalidOperationException("Unsupported package or dependency closure.");
+            HotReloadPackagePolicy.Require(selection);
         }
 
         private static void Validated(MarketplaceResult result)
@@ -141,6 +137,7 @@ namespace FTKModFramework.Core.HotReload
                 definitions = DefinitionState.Capture(TableManager.Instance);
                 caches = HotReloadNativeCaches.Capture();
                 preferences = new ClassPreferences();
+                restoreThief = ThiefRuntime.SuspendForReload();
                 resources = PaladinResourceState.Suspend();
                 DefinitionState.RestoreBaseline(TableManager.Instance);
                 Mark("snapshotResetMs");
@@ -199,6 +196,7 @@ namespace FTKModFramework.Core.HotReload
                     caches = null;
                     PaladinResourceState.Retire(resources);
                     resources = null;
+                    restoreThief = null;
                     definitions = null;
                     preferences = null;
                     BeginDrain("Activated in this process. Start a new local adventure. Epoch " + Epoch + ".");
@@ -212,20 +210,17 @@ namespace FTKModFramework.Core.HotReload
         private static void VerifyCandidate()
         {
             DefinitionState.ValidateLookups(TableManager.Instance);
-            bool paladin = target.Packages.Count == 1 && target.Packages[0].Enabled;
-            int count = 0;
-            foreach (Dictionary<string, int> table in ContentRegistry.CustomIds.Values) count += table.Count;
-            if (count != (paladin ? 92 : 0)) throw new InvalidOperationException("Unexpected registered row count: " + count);
             FTK_playerGameStartDB classes = TableManager.Instance.Get<FTK_playerGameStartDB>();
             for (int i = 0; i < classes.m_Array.Length; i++)
                 if ((int)FTK_playerGameStart.GetEnum(classes.m_Array[i].m_ID) != i)
                     throw new InvalidOperationException("Class identity differs from its array position.");
-            if (paladin && !GuardianRuntime.Enabled) throw new InvalidOperationException("Guardian capability is missing.");
-            if (!paladin && GuardianRuntime.Enabled) throw new InvalidOperationException("Guardian capability survived removal.");
-            int paladinClassId = classes.GetIntFromID("paladin");
-            if (OverworldAilmentImmunity.ReloadClassCount > (paladin ? 1 : 0) ||
-                (OverworldAilmentImmunity.ReloadClassCount != 0 &&
-                    (paladinClassId < 0 || !OverworldAilmentImmunity.IsRegistered(paladinClassId))))
+            // Capability ownership follows the selected custom classes, regardless of package name.
+            int immunityClasses = 0;
+            Dictionary<string, int> customClasses;
+            if (ContentRegistry.CustomIds.TryGetValue(typeof(FTK_playerGameStartDB), out customClasses))
+                foreach (int classId in customClasses.Values)
+                    if (OverworldAilmentImmunity.IsRegistered(classId)) immunityClasses++;
+            if (immunityClasses != OverworldAilmentImmunity.ReloadClassCount)
                 throw new InvalidOperationException("Unexpected overworld immunity registration.");
             foreach (KeyValuePair<Type, Dictionary<string, int>> table in ContentRegistry.CustomIds)
             {
@@ -245,8 +240,9 @@ namespace FTKModFramework.Core.HotReload
 
                 ModsPanel.InvalidateForHotReload();
                 if (resources != null) PaladinResourceState.Rollback(resources);
+                if (restoreThief != null) restoreThief();
                 if (preferences != null) preferences.Rollback();
-                definitions = null; caches = null; preferences = null; resources = null;
+                definitions = null; caches = null; preferences = null; resources = null; restoreThief = null;
                 if (oldIdentity != null && Identity() != oldIdentity) throw new InvalidOperationException("Rollback identity verification failed.");
                 BeginDrain("Activation rejected; previous content retained. " + error.Message);
             }

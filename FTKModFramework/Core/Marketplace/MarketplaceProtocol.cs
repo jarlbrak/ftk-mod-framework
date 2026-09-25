@@ -82,6 +82,29 @@ namespace FTKModFramework.Core.Marketplace
         {
             if (returned == null) return null;
             ManagedSnapshot snapshot = ReadGeneration(root, returned.GenerationId);
+            // The lock remains authoritative for content and identity. Preview cache paths are
+            // transient helper output, so retain only bounded paths for that exact package.
+            foreach (PackageDescriptor package in snapshot.Packages)
+            {
+                package.ScreenshotPaths = null;
+                if (returned.Packages == null) continue;
+                foreach (PackageDescriptor preview in returned.Packages)
+                {
+                    if (preview == null || preview.PackageId != package.PackageId || preview.ModGuid != package.ModGuid ||
+                        preview.Version != package.Version || preview.Sha256 != package.Sha256 || preview.ScreenshotPaths == null) continue;
+                    List<string> paths = new List<string>();
+                    foreach (string path in preview.ScreenshotPaths)
+                    {
+                        if (paths.Count == 3) break;
+                        try { if (IsScreenshotPath(root, path) && !paths.Contains(path)) paths.Add(path); }
+                        catch (ArgumentException) { }
+                        catch (IOException) { }
+                        catch (UnauthorizedAccessException) { }
+                    }
+                    package.ScreenshotPaths = paths.ToArray();
+                    break;
+                }
+            }
             snapshot.FilesVerified = true;
             return snapshot;
         }

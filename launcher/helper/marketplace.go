@@ -1164,14 +1164,20 @@ func marketContent(b []byte) error {
 			Flavor                   string                 `json:"flavor"`
 			Description              string                 `json:"description"`
 			Guardian                 bool                   `json:"guardian,omitempty"`
-			OverworldAilmentImmunity *marketAilmentImmunity `json:"overworldAilmentImmunity,omitempty"`
+			Opportunist              bool                   `json:"opportunist,omitempty"`
+			PrecisionWeapon          string                 `json:"precisionWeapon,omitempty"`
+			PrecisionAction          string                 `json:"precisionAction,omitempty"`
+			ThiefArtifact            string                 `json:"thiefArtifact,omitempty"`
+			ReplaceProficiencies     bool                   `json:"replaceProficiencies,omitempty"`
 			GuardianBonuses          *marketGuardianBonuses `json:"guardianBonuses,omitempty"`
 			Icon                     string                 `json:"icon,omitempty"`
 			ApparelModels            *marketApparelModel    `json:"apparelModels,omitempty"`
 			Modifiers                *marketItemModifiers   `json:"modifiers,omitempty"`
 			ItemModels               []marketModelRenderer  `json:"itemModels,omitempty"`
+			OffHandModels            []marketModelRenderer  `json:"offHandModels,omitempty"`
 			DisplayModels            []marketModelRenderer  `json:"displayModels,omitempty"`
 			PlayerModels             []marketPlayerModel    `json:"playerModels,omitempty"`
+			OverworldAilmentImmunity *marketAilmentImmunity `json:"overworldAilmentImmunity,omitempty"`
 		} `json:"entries"`
 	}
 	if e := marketJSON(b, &c); e != nil {
@@ -1185,6 +1191,35 @@ func marketContent(b []byte) error {
 		if !contains([]string{"item", "weapon", "proficiency", "class", "enemy", "encounter"}, entry.Kind) || entry.ID == "" || entry.Template == "" {
 			return errors.New("unsupported kind or missing identity/template")
 		}
+		if entry.Opportunist && entry.Kind != "class" {
+			return errors.New("opportunist requires a class")
+		}
+		if entry.PrecisionWeapon != "" && (entry.Kind != "weapon" || !contains([]string{"paired", "bow"}, entry.PrecisionWeapon)) {
+			return errors.New("invalid precision weapon declaration")
+		}
+		if entry.PrecisionAction != "" && (entry.Kind != "proficiency" || !contains([]string{"prepare", "pierce"}, entry.PrecisionAction)) {
+			return errors.New("invalid precision action declaration")
+		}
+		if entry.ThiefArtifact != "" {
+			expectedWeapon := "paired"
+			if entry.ThiefArtifact == "looseAndLeave" {
+				expectedWeapon = "bow"
+			}
+			if entry.Kind != "weapon" || !contains([]string{"borrowedFortune", "lastLight", "looseAndLeave"}, entry.ThiefArtifact) || entry.PrecisionWeapon != expectedWeapon {
+				return errors.New("invalid thief artifact precision weapon")
+			}
+		}
+		if entry.ReplaceProficiencies && entry.Kind != "weapon" {
+			return errors.New("replaceProficiencies requires a weapon")
+		}
+		if entry.OffHandModels != nil {
+			if entry.Kind != "weapon" {
+				return errors.New("offHandModels requires a weapon")
+			}
+			if e := marketModelRenderers(entry.OffHandModels, false); e != nil {
+				return e
+			}
+		}
 		if entry.GuardianBonuses != nil {
 			b := entry.GuardianBonuses
 			if entry.Kind != "item" && entry.Kind != "weapon" || b.GuardHealPercent < 0 || b.GuardHealPercent > 20 || b.FocusHealBonusPercent < 0 || b.FocusHealBonusPercent > 20 || b.RetaliationDamage < 0 || b.RetaliationDamage > 20 || b.GuardFocusRestore < 0 || b.GuardFocusRestore > 1 {
@@ -1194,7 +1229,7 @@ func marketContent(b []byte) error {
 				return errors.New("guardFocusRestore and guardReckoning require a weapon")
 			}
 		}
-		if entry.Icon != "" && (!marketSafePath(entry.Icon) || !strings.HasPrefix(entry.Icon, "assets/") || path.Ext(entry.Icon) != ".png" || entry.Kind != "item" && entry.Kind != "weapon" && entry.Kind != "proficiency" && !(entry.Kind == "class" && entry.Guardian)) {
+		if entry.Icon != "" && (!marketSafePath(entry.Icon) || !strings.HasPrefix(entry.Icon, "assets/") || path.Ext(entry.Icon) != ".png" || entry.Kind != "item" && entry.Kind != "weapon" && entry.Kind != "proficiency" && !(entry.Kind == "class" && (entry.Guardian || entry.Opportunist))) {
 			return errors.New("invalid original icon declaration")
 		}
 		if entry.ApparelModels != nil {
@@ -1208,7 +1243,7 @@ func marketContent(b []byte) error {
 		}
 		if entry.Modifiers != nil {
 			m := entry.Modifiers
-			if entry.Kind != "item" && entry.Kind != "weapon" || m.Armor < 0 || m.Armor > 100 || m.Resistance < 0 || m.Resistance > 100 || m.Reflect < 0 || m.Reflect > 100 || m.Vitality < -1 || m.Vitality > 1 || m.Speed < -1 || m.Speed > 1 {
+			if entry.Kind != "item" && entry.Kind != "weapon" || m.Armor < 0 || m.Armor > 100 || m.Resistance < 0 || m.Resistance > 100 || m.Reflect < 0 || m.Reflect > 100 || m.Vitality < -1 || m.Vitality > 1 || m.Speed < -1 || m.Speed > 1 || m.Awareness < -1 || m.Awareness > 1 || m.Talent < -1 || m.Talent > 1 || m.FocusCapacity < 0 || m.FocusCapacity > 10 {
 				return errors.New("invalid item modifiers")
 			}
 		}
@@ -1563,7 +1598,8 @@ func marketDeveloperGUID(g string) bool {
 }
 
 // Deliberately narrower than the manual loader's raw field escape hatch. These
-// aliases and exact serialized targets are verified in Core/Data/AliasTable.cs.
+// aliases are verified in Core/Data/AliasTable.cs. Additional exact native targets
+// and CharacterSkills flags are checked against the supported game assembly.
 func marketAllowedFields(kind string, fields map[string]interface{}) error {
 	aliases := map[string]string{}
 	add := func(spec string) {
@@ -1577,9 +1613,9 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 	}
 	switch kind {
 	case "weapon":
-		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain")
+		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_NoRegularAttack=m_NoRegularAttack")
 	case "proficiency":
-		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride fullslots=m_FullSlots customvalue=m_CustomValue repeatcount=m_RepeatCount")
+		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride fullslots=m_FullSlots customvalue=m_CustomValue repeatcount=m_RepeatCount m_Target=m_Target")
 	case "class":
 		add("strength=_toughness intelligence=_fortitude awareness=_awareness talent=_talent speed=_quickness vitality=_vitality startinggold=_startinggold focus=_basefocus primarystat=m_PrimaryWeaponStat startweapon=m_StartWeapon startitems=m_StartItems dlc=m_DLC skinsets=m_Skinsets skills=m_CharacterSkills")
 	}
@@ -1608,7 +1644,13 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 				return errors.New("nested objects are not supported in marketplace fields")
 			}
 			for flag, enabled := range v {
-				if flag != "m_SteadFast" {
+				if !contains([]string{
+					"m_SteadFast", "m_PartyHeal", "m_Sneak", "m_Ambush", "m_Flee",
+					"m_DoorBash", "m_TrapDisarm", "m_TrapProceed", "m_CounterAttack",
+					"m_EnergyBoost", "m_Refocus", "m_FindHerb", "m_Entertain", "m_Encourage",
+					"m_Inspire", "m_Justice", "m_Distract", "m_CalledShot", "m_Discipline",
+					"m_SupportRange", "m_Taunt", "m_MimicWhisper", "m_FindTreasure", "m_Glory", "m_BlackHole",
+				}, flag) {
 					return errors.New("unsupported marketplace class skill flag")
 				}
 				if _, ok := enabled.(bool); !ok {

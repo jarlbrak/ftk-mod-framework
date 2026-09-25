@@ -99,7 +99,7 @@ public class uiQuickPlayerCreate
 }
 public class CharacterEventListener : UnityEngine.Component { public UnityEngine.Transform m_Backpack; public CharacterOverworld m_CharacterOverworld; public uiQuickPlayerCreate m_uiQuickPlayerCreate; }
 public class FTKHub { }
-public class Weapon : UnityEngine.Component { }
+public class Weapon : UnityEngine.Component { public UnityEngine.GameObject m_OffHand; }
 public class CharacterDummy { public CharacterOverworld m_CharacterOverworld; public CharacterEventListener m_EventListener; }
 namespace HarmonyLib { public class HarmonyPatch : Attribute { public HarmonyPatch(Type t, string method, Type[] args) { } public HarmonyPatch(Type t, string method) { } } }
 namespace FTKModFramework.Core

@@ -17,7 +17,18 @@ namespace FTKModFramework.Core
             return RegisterItemMeshes(item, meshes, true);
         }
 
+        /// <summary>Bind exact rigid renderers on a native paired weapon's separately owned off-hand object.</summary>
+        public static bool SetItemOffHandMeshesFromGlb(FTK_itembase item, params ItemRendererMesh[] meshes)
+        {
+            return RegisterItemMeshes(item, meshes, false, true);
+        }
+
         private static bool RegisterItemMeshes(FTK_itembase item, ItemRendererMesh[] meshes, bool display)
+        {
+            return RegisterItemMeshes(item, meshes, display, false);
+        }
+
+        private static bool RegisterItemMeshes(FTK_itembase item, ItemRendererMesh[] meshes, bool display, bool offHand)
         {
             int id;
             if (item == null || !ContentRegistry.TryGetSyntheticId(item.m_ID, out id,
@@ -42,6 +53,7 @@ namespace FTKModFramework.Core
                 return false;
             }
             if (display) ItemModelRegistry.RegisterDisplay(id, assignments);
+            else if (offHand) ItemModelRegistry.RegisterOffHand(id, assignments);
             else ItemModelRegistry.Register(id, assignments);
             return true;
         }

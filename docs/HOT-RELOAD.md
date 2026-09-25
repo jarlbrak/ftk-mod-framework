@@ -1,18 +1,18 @@
 # Title-screen mod activation
 
-Status: the restricted first version shipped in framework 1.0.0 after the
-recorded macOS live acceptance. Other platforms and arbitrary packages remain
-outside its verified scope.
+Status: title-screen activation is available for managed data-package selections
+on the audited macOS game build. Package-specific gameplay and visual acceptance
+remain separate evidence requirements.
 
 ## Supported first version
 
-Title-screen activation supports the audited macOS game build, with either no community content or the supported Paladin package. Paladin includes its class, abilities, 51 equipment definitions, managed Guardian behavior, icons and custom models. The installed managed assembly must match the audited fingerprint. Other game builds and platforms keep next-launch activation.
+Title-screen activation supports the audited macOS game build and any managed selection of data packages. The installed managed assembly must match the audited fingerprint. Other game builds and platforms keep next-launch activation.
 
-Manual mods, arbitrary behavior DLLs, additional BepInEx plugins, dependencies,
-the legacy 1.0.0 bundled demo and diagnostic injections do not qualify. Their
-ordinary loading path remains available. An eligible but invalid candidate is
-rejected transactionally; it is never accepted merely because its package GUID
-says Paladin.
+Manual mods, arbitrary behavior DLLs, additional BepInEx plugins, the legacy
+1.0.0 bundled demo and diagnostic injections do not qualify. Their ordinary
+loading path remains available. Dependencies within a managed package selection
+are validated as part of that selection. An invalid candidate is rejected
+transactionally.
 
 Enable **Title-screen activation next launch** in Mods > Settings and start the game again once to enter this mode. The configuration key is `Marketplace.EnableTitleScreenActivation`. It defaults off. After that mode is active, supported install, enable, update, disable and remove operations can activate in the same process:
 
@@ -43,7 +43,7 @@ Every native renderer and skeleton contract is checked. GLB decoding uses at mos
 
 After runtime validation, the helper revalidates the generation and commits with compare-and-swap. The durable current pointer decides whether a lost acknowledgement means success or rollback. Old resources retire only after commitment. Interrupted uncommitted selections are quarantined at startup. Unknown decisions and failed rollback fault closed.
 
-No historical registration reservations survive a successful canonical rebuild. A clean boot and hot activation of the same supported set must produce identical row identities, including the positional class ID. Per-mod teardown, arbitrary assembly unloading and hot changes during an adventure are not implemented.
+No historical registration reservations survive a successful canonical rebuild. A clean boot and hot activation of the same managed set must produce identical row identities, including the positional class ID. Per-mod teardown, arbitrary assembly unloading and hot changes during an adventure are not implemented.
 
 ## Retention and recovery
 
@@ -59,4 +59,4 @@ A failed activation retains the previous runtime and generation whenever rollbac
 
 The [initial investigation](HOT-RELOAD-FEASIBILITY.md), [prototype record](HOT-RELOAD-PROTOTYPE.md) and [historical live evidence](HOT-RELOAD-LIVE-EVIDENCE.md) preserve the earlier findings, including failures that drove these changes. The initial two-second latency target was not met by the prototype. Final timing, the completed acceptance matrix and longer-run outliers are recorded in the [hardening evidence](HOT-RELOAD-HARDENING-EVIDENCE.md); an offline build is not live evidence.
 
-This feature's acceptance concerns lifecycle, identities, resource ownership, activation, fresh adventures and exact-set resume. It does not expand the visual, ability, co-op or platform coverage of the Paladin package. Unsupported mods continue to require a new process.
+This feature's acceptance concerns lifecycle, identities, resource ownership, activation, fresh adventures and exact-set resume. Each package still needs its own visual, ability, co-op and platform evidence. Unsupported mod forms continue to require a new process.

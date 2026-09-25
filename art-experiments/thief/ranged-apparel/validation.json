@@ -1,0 +1,732 @@
+{
+  "status": "PASS",
+  "scope": "Offline exported geometry, authored source equality, finite outward triangle normals, unit normals, UV bounds, skin palette use, icon alpha framing and package hashes. Native fit, draw animation and game integration not tested.",
+  "geometryVariantsPerFamily": {
+    "coat": 7,
+    "hood": 7,
+    "boots": 7,
+    "charm": 7
+  },
+  "exactBindingInputsChecked": false,
+  "priorBindingBytesCompared": false,
+  "items": 35,
+  "glbs": 119,
+  "icons": 35,
+  "packageFiles": 156,
+  "meshes": [
+    {
+      "file": "thief-boots-burglar-display.glb",
+      "vertices": 1344,
+      "triangles": 448,
+      "sha256": "3e6dae679b91dc82f3396573bc050b53d017e1607f78fdeba6c25b57cc1ee3da"
+    },
+    {
+      "file": "thief-boots-burglar.glb",
+      "vertices": 1632,
+      "triangles": 544,
+      "sha256": "dd1078be2ca8a199a215915bda631a494cf38b9da818c631f6519a6623ddd4ec"
+    },
+    {
+      "file": "thief-boots-guild-display.glb",
+      "vertices": 1704,
+      "triangles": 568,
+      "sha256": "dbe4759c5016172fc24e032b3fdf45f330132885f7d1762885a70c5b62b8d9a9"
+    },
+    {
+      "file": "thief-boots-guild.glb",
+      "vertices": 1992,
+      "triangles": 664,
+      "sha256": "5d5c5e762ae2475d2d660a16dec24fdd22d62afc115dc5c326cf79e34c1729ba"
+    },
+    {
+      "file": "thief-boots-locksmith-display.glb",
+      "vertices": 2184,
+      "triangles": 728,
+      "sha256": "7fc38eb896fd69fbfc068ac112af6413a82bd06e1d4b55a78ed2d5a8132cc0b5"
+    },
+    {
+      "file": "thief-boots-locksmith.glb",
+      "vertices": 2472,
+      "triangles": 824,
+      "sha256": "8a985f06c17ae6792490485a937d601c5ac0c35a68cba6dd6f10ff2b2bd000a6"
+    },
+    {
+      "file": "thief-boots-masterwork-display.glb",
+      "vertices": 2184,
+      "triangles": 728,
+      "sha256": "fcb54c82a7437dd179680d63b97bc483136256673b77fdfdd4a44c48545c10fb"
+    },
+    {
+      "file": "thief-boots-masterwork.glb",
+      "vertices": 2472,
+      "triangles": 824,
+      "sha256": "d6e9260ea625cfe203acce1599a14a251db806822a2ed15d1d82f0aa8a307f41"
+    },
+    {
+      "file": "thief-boots-nightblade-display.glb",
+      "vertices": 1272,
+      "triangles": 424,
+      "sha256": "4b83f912f06970905749aa77399913bd697ecbde1138e15b91aeb1c8e765a27a"
+    },
+    {
+      "file": "thief-boots-nightblade.glb",
+      "vertices": 1560,
+      "triangles": 520,
+      "sha256": "1524af189673c4beb169c21d789a6b844b554facd71b3568488cfae89eb097ca"
+    },
+    {
+      "file": "thief-boots-street-display.glb",
+      "vertices": 1344,
+      "triangles": 448,
+      "sha256": "04e805b66fd0e7c5fd54c11adc3e2e6c3a00f8374f4ccff8c9b40324571375e4"
+    },
+    {
+      "file": "thief-boots-street.glb",
+      "vertices": 1632,
+      "triangles": 544,
+      "sha256": "b1ad6c63d476a6a1044241b8c004406325a3d93a158293043d2a97a399963f4d"
+    },
+    {
+      "file": "thief-boots-wayfarer-display.glb",
+      "vertices": 1632,
+      "triangles": 544,
+      "sha256": "cd09c12669d5153483f8fa390335bbeeb7501a6744af3ac7387dbd26e73a8107"
+    },
+    {
+      "file": "thief-boots-wayfarer.glb",
+      "vertices": 1920,
+      "triangles": 640,
+      "sha256": "5f3cd2baf6d13c51fcfd039ed1820d385c1e13724d0ce5be446af2ec9c15ddf7"
+    },
+    {
+      "file": "thief-bow-burglar-body.glb",
+      "vertices": 1200,
+      "triangles": 400,
+      "sha256": "db0f51e7918108fe84bed67d705ee537e4aa6677cd81b2ea6239d73647f1597c"
+    },
+    {
+      "file": "thief-bow-burglar-display-body.glb",
+      "vertices": 1200,
+      "triangles": 400,
+      "sha256": "06872547de56c42f67e3a97a1012bf6482800738b72a339c8eaffc1ec8c689bf"
+    },
+    {
+      "file": "thief-bow-burglar-display-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "3bad3402817184e84a3682dd483d5d990a8e0c8e8e11cfe3dea950951800d5e1"
+    },
+    {
+      "file": "thief-bow-burglar-display.glb",
+      "vertices": 1308,
+      "triangles": 436,
+      "sha256": "acfbd49cd70de6fdb3992847e1caf663a4a1e30a52238c3c6d862a7aeb960c94"
+    },
+    {
+      "file": "thief-bow-burglar-fragment-1.glb",
+      "vertices": 888,
+      "triangles": 296,
+      "sha256": "f1b6fbed0cc2c80bbb4e17fd7d4ead88f440408be375fed90a6b01be079cc9b7"
+    },
+    {
+      "file": "thief-bow-burglar-fragment-2.glb",
+      "vertices": 312,
+      "triangles": 104,
+      "sha256": "08ff480bb4e32b1164dd9029fe5e7f1e83ee130f937c31db44c334414ceba58d"
+    },
+    {
+      "file": "thief-bow-burglar-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "06f8268967c714b718d1e91369d6d307b53fb3236ec5d32dae9166947aaf435a"
+    },
+    {
+      "file": "thief-bow-burglar.glb",
+      "vertices": 1308,
+      "triangles": 436,
+      "sha256": "acfbd49cd70de6fdb3992847e1caf663a4a1e30a52238c3c6d862a7aeb960c94"
+    },
+    {
+      "file": "thief-bow-guild-body.glb",
+      "vertices": 1476,
+      "triangles": 492,
+      "sha256": "2c682b71f90802f1f16a0baef533f257b62771fd1d55998f2bb6d33966b65491"
+    },
+    {
+      "file": "thief-bow-guild-display-body.glb",
+      "vertices": 1476,
+      "triangles": 492,
+      "sha256": "161e8afcb0db0446cc61a0a14c47deee1274e8f7775a0163d3b918e4c728bb34"
+    },
+    {
+      "file": "thief-bow-guild-display-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "a1e0ed750755b425e49427d3f3058ff50e5ff22d6f1bcf4bde955a078af8368d"
+    },
+    {
+      "file": "thief-bow-guild-display.glb",
+      "vertices": 1584,
+      "triangles": 528,
+      "sha256": "857938e8d29f3cd7eef78f2faf2787141beaebf8a3f959f91cb057b1e00de71c"
+    },
+    {
+      "file": "thief-bow-guild-fragment-1.glb",
+      "vertices": 1056,
+      "triangles": 352,
+      "sha256": "08e4a9dad262b66243124f3e0b590ffbe3bf8dc0bdab43ed700f7408f280e28c"
+    },
+    {
+      "file": "thief-bow-guild-fragment-2.glb",
+      "vertices": 420,
+      "triangles": 140,
+      "sha256": "5155186b985b645de49b446b3d720f688d877bc7e0cfa5d035955ea6eb7eaa2b"
+    },
+    {
+      "file": "thief-bow-guild-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "f5d2c350f1c2bedf7d3b16f58b417b03752b3995294f99302091eda7e9f7f495"
+    },
+    {
+      "file": "thief-bow-guild.glb",
+      "vertices": 1584,
+      "triangles": 528,
+      "sha256": "857938e8d29f3cd7eef78f2faf2787141beaebf8a3f959f91cb057b1e00de71c"
+    },
+    {
+      "file": "thief-bow-locksmith-body.glb",
+      "vertices": 2556,
+      "triangles": 852,
+      "sha256": "afa7cf6d939fb6f0d600f0cbf070daa2636d95906c9ca7e04f9313f45216ef23"
+    },
+    {
+      "file": "thief-bow-locksmith-display-body.glb",
+      "vertices": 2556,
+      "triangles": 852,
+      "sha256": "9e087cd9f91b891d8189f7fa123a840cf0426a2e717ad5afee8568fa71257e41"
+    },
+    {
+      "file": "thief-bow-locksmith-display-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "4f2ce36e507556859e8f4e83e1e9e32da092a7e19e58f2a6e91ba157c0129069"
+    },
+    {
+      "file": "thief-bow-locksmith-display.glb",
+      "vertices": 2664,
+      "triangles": 888,
+      "sha256": "bd4a8867f65b845bc448737a28ba2f835bf9278e2d2a096e9cada7a044f8f550"
+    },
+    {
+      "file": "thief-bow-locksmith-fragment-1.glb",
+      "vertices": 2136,
+      "triangles": 712,
+      "sha256": "8f03117567335dfd4dbc35eeb92d355c1dcf85209d96107e877fa2c7e2193e18"
+    },
+    {
+      "file": "thief-bow-locksmith-fragment-2.glb",
+      "vertices": 420,
+      "triangles": 140,
+      "sha256": "5cba4f51cee4d8d381f2f70e3df5b4e71d3c7e2a1f29cd5c403c09d49f30b9dd"
+    },
+    {
+      "file": "thief-bow-locksmith-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "2d1cec53ef393f2a0de9eb4ce27815b801886479b1fe1376f93882335731b3d0"
+    },
+    {
+      "file": "thief-bow-locksmith.glb",
+      "vertices": 2664,
+      "triangles": 888,
+      "sha256": "bd4a8867f65b845bc448737a28ba2f835bf9278e2d2a096e9cada7a044f8f550"
+    },
+    {
+      "file": "thief-bow-masterwork-body.glb",
+      "vertices": 1476,
+      "triangles": 492,
+      "sha256": "2d14c18f2dc319f96db148cfb4ea724c3374e0014af1227e002adc8ad19a7386"
+    },
+    {
+      "file": "thief-bow-masterwork-display-body.glb",
+      "vertices": 1476,
+      "triangles": 492,
+      "sha256": "01e3e61db8c8dc963c167d96d0187d31e1f0ad1aedc750e4b8184409e1c298cc"
+    },
+    {
+      "file": "thief-bow-masterwork-display-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "ff30ec5444bc4138316129e3b5c75c7cc8f51312b6e601e77c9d30cf67674219"
+    },
+    {
+      "file": "thief-bow-masterwork-display.glb",
+      "vertices": 1584,
+      "triangles": 528,
+      "sha256": "dc6946e861b3c08e239b266995857b70a753a49b9a5d5992ce1b1c9d49aa01ac"
+    },
+    {
+      "file": "thief-bow-masterwork-fragment-1.glb",
+      "vertices": 1056,
+      "triangles": 352,
+      "sha256": "3061a2d650a8b03faabc3e6a955aee5a027dbfc6b2bc3bcc49c0ec82a33023bb"
+    },
+    {
+      "file": "thief-bow-masterwork-fragment-2.glb",
+      "vertices": 420,
+      "triangles": 140,
+      "sha256": "12b2ebf636eb20d9076faace757eced5a3b1f4bbc119f92351b1df7a8e66961d"
+    },
+    {
+      "file": "thief-bow-masterwork-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "b95f4016a27c9b5f3df83bb0b198b5cc730e74581b3f0db446f083df6cff735c"
+    },
+    {
+      "file": "thief-bow-masterwork.glb",
+      "vertices": 1584,
+      "triangles": 528,
+      "sha256": "dc6946e861b3c08e239b266995857b70a753a49b9a5d5992ce1b1c9d49aa01ac"
+    },
+    {
+      "file": "thief-bow-nightblade-body.glb",
+      "vertices": 1488,
+      "triangles": 496,
+      "sha256": "216283c195e25d48217a885e9d9ef41d0f72c0386e0b321222be4353dfa97bea"
+    },
+    {
+      "file": "thief-bow-nightblade-display-body.glb",
+      "vertices": 1488,
+      "triangles": 496,
+      "sha256": "32dbeb7fe35c95def20d57b10644c14c9486042c455ea511328e90cfb2dc111d"
+    },
+    {
+      "file": "thief-bow-nightblade-display-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "c4536b55eeaad809f46817aad19fc56c2a4513fc2ff80c28d31336a941da52f9"
+    },
+    {
+      "file": "thief-bow-nightblade-display.glb",
+      "vertices": 1596,
+      "triangles": 532,
+      "sha256": "9359888d4bc70ee3fa7e2fe08c6a280fffb017bd4259fb587e8d61165206e393"
+    },
+    {
+      "file": "thief-bow-nightblade-fragment-1.glb",
+      "vertices": 1068,
+      "triangles": 356,
+      "sha256": "76f26597c0a192c06b0ea95453334ecc9811ca2cbcb0a40f4aa2c659b2035040"
+    },
+    {
+      "file": "thief-bow-nightblade-fragment-2.glb",
+      "vertices": 420,
+      "triangles": 140,
+      "sha256": "03ac5d566d1d76d7a4edfd38b21b6f6be5180dbf97f80f211278d9d63fe48483"
+    },
+    {
+      "file": "thief-bow-nightblade-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "35908776b5fc24a4816b9db7e530359294e87ef0062b729b8b5512ab8963ac85"
+    },
+    {
+      "file": "thief-bow-nightblade.glb",
+      "vertices": 1596,
+      "triangles": 532,
+      "sha256": "9359888d4bc70ee3fa7e2fe08c6a280fffb017bd4259fb587e8d61165206e393"
+    },
+    {
+      "file": "thief-bow-street-body.glb",
+      "vertices": 1200,
+      "triangles": 400,
+      "sha256": "ca3af57573acebe69f05cfd7cdee859e604e21f58a6c30f465e5a2828b650f5f"
+    },
+    {
+      "file": "thief-bow-street-display-body.glb",
+      "vertices": 1200,
+      "triangles": 400,
+      "sha256": "ea4cc8548bcad850c1e9984830a93d5f10ba0a484a9d6342da4ba9dc75aa5db1"
+    },
+    {
+      "file": "thief-bow-street-display-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "201ea1e686047ff31d57b9c097d28126bf8dc776f8d5c667cd55d0f9868941ca"
+    },
+    {
+      "file": "thief-bow-street-display.glb",
+      "vertices": 1308,
+      "triangles": 436,
+      "sha256": "e42afed24780b143288b347ac4fc93edc1616a27026a305e58968c87ea787c42"
+    },
+    {
+      "file": "thief-bow-street-fragment-1.glb",
+      "vertices": 888,
+      "triangles": 296,
+      "sha256": "723e9e33de4bedd1b39419a81dcf3ae0d254938e013ff256e3c7c42b0cfdbbf6"
+    },
+    {
+      "file": "thief-bow-street-fragment-2.glb",
+      "vertices": 312,
+      "triangles": 104,
+      "sha256": "7c481f6695b632cfadfe8d226a89f215f79939bda46f7b2441178865f5847bd5"
+    },
+    {
+      "file": "thief-bow-street-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "3b6363073c86255acad28609e268d7766574d166d953e50bf13403844c8d49e1"
+    },
+    {
+      "file": "thief-bow-street.glb",
+      "vertices": 1308,
+      "triangles": 436,
+      "sha256": "e42afed24780b143288b347ac4fc93edc1616a27026a305e58968c87ea787c42"
+    },
+    {
+      "file": "thief-bow-wayfarer-body.glb",
+      "vertices": 1476,
+      "triangles": 492,
+      "sha256": "4e379acd4df15ffc27913fd2040b5db949a070017360fc5cb79bed863a6727da"
+    },
+    {
+      "file": "thief-bow-wayfarer-display-body.glb",
+      "vertices": 1476,
+      "triangles": 492,
+      "sha256": "d8ce536bfab62c6ba2b864930e650783434b06ecbb7a1cddcbb8db54acdd687b"
+    },
+    {
+      "file": "thief-bow-wayfarer-display-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "1b66bbfe9af5c1a8f4dd3480de86599148348d9996bb40d5ef3ccd3f72c68047"
+    },
+    {
+      "file": "thief-bow-wayfarer-display.glb",
+      "vertices": 1584,
+      "triangles": 528,
+      "sha256": "5d53eb560da0ff1dd66978c72ab8217b8b192b7d89d17bbad5bc5b2998a7020f"
+    },
+    {
+      "file": "thief-bow-wayfarer-fragment-1.glb",
+      "vertices": 1056,
+      "triangles": 352,
+      "sha256": "fafc30ed10aeb49df1614beb3ad5a6c85cbb60fea8dfc45679bcd38fac0645ae"
+    },
+    {
+      "file": "thief-bow-wayfarer-fragment-2.glb",
+      "vertices": 420,
+      "triangles": 140,
+      "sha256": "8a5971628b6a5d53fd91b121b0b63cf101abefde465554774d5a92b166007fcb"
+    },
+    {
+      "file": "thief-bow-wayfarer-string.glb",
+      "vertices": 108,
+      "triangles": 36,
+      "sha256": "e16d375b159d5ceba66458821a6ddd9d484a4d4afe5768c72894899805bfb575"
+    },
+    {
+      "file": "thief-bow-wayfarer.glb",
+      "vertices": 1584,
+      "triangles": 528,
+      "sha256": "5d53eb560da0ff1dd66978c72ab8217b8b192b7d89d17bbad5bc5b2998a7020f"
+    },
+    {
+      "file": "thief-charm-burglar-display.glb",
+      "vertices": 564,
+      "triangles": 188,
+      "sha256": "1fb412357de3e8b83e92d1b2a082af1daf72006c429620aee148844133eabcda"
+    },
+    {
+      "file": "thief-charm-burglar.glb",
+      "vertices": 564,
+      "triangles": 188,
+      "sha256": "1fb412357de3e8b83e92d1b2a082af1daf72006c429620aee148844133eabcda"
+    },
+    {
+      "file": "thief-charm-guild-display.glb",
+      "vertices": 1044,
+      "triangles": 348,
+      "sha256": "84b5a3b2a090498deab994de22c9e4c839cdac4de3b70fb0a292bed66d23afb9"
+    },
+    {
+      "file": "thief-charm-guild.glb",
+      "vertices": 1044,
+      "triangles": 348,
+      "sha256": "84b5a3b2a090498deab994de22c9e4c839cdac4de3b70fb0a292bed66d23afb9"
+    },
+    {
+      "file": "thief-charm-locksmith-display.glb",
+      "vertices": 1944,
+      "triangles": 648,
+      "sha256": "68438a5c87c5a84413ed9bf6369550d0c3f0db25a38e7dd13489f7a02fd57b78"
+    },
+    {
+      "file": "thief-charm-locksmith.glb",
+      "vertices": 1944,
+      "triangles": 648,
+      "sha256": "68438a5c87c5a84413ed9bf6369550d0c3f0db25a38e7dd13489f7a02fd57b78"
+    },
+    {
+      "file": "thief-charm-masterwork-display.glb",
+      "vertices": 480,
+      "triangles": 160,
+      "sha256": "f91a42790108fe86bd8c88b68e00e2db5fb5cc7839141c1fdd6fb2626952f900"
+    },
+    {
+      "file": "thief-charm-masterwork.glb",
+      "vertices": 480,
+      "triangles": 160,
+      "sha256": "f91a42790108fe86bd8c88b68e00e2db5fb5cc7839141c1fdd6fb2626952f900"
+    },
+    {
+      "file": "thief-charm-nightblade-display.glb",
+      "vertices": 888,
+      "triangles": 296,
+      "sha256": "c821adaa59a415078977a6e63c06d0fe2f1ddefdf22fee07072069a139f3d591"
+    },
+    {
+      "file": "thief-charm-nightblade.glb",
+      "vertices": 888,
+      "triangles": 296,
+      "sha256": "c821adaa59a415078977a6e63c06d0fe2f1ddefdf22fee07072069a139f3d591"
+    },
+    {
+      "file": "thief-charm-street-display.glb",
+      "vertices": 912,
+      "triangles": 304,
+      "sha256": "c5377e85242883550b1df51764c1488d986f69f32b73dced458ef93b85dbd634"
+    },
+    {
+      "file": "thief-charm-street.glb",
+      "vertices": 912,
+      "triangles": 304,
+      "sha256": "c5377e85242883550b1df51764c1488d986f69f32b73dced458ef93b85dbd634"
+    },
+    {
+      "file": "thief-charm-wayfarer-display.glb",
+      "vertices": 1644,
+      "triangles": 548,
+      "sha256": "fad1cfd2fe580e2c2649c5b8f44174090b4977e713804b66c9c0c8231b733812"
+    },
+    {
+      "file": "thief-charm-wayfarer.glb",
+      "vertices": 1644,
+      "triangles": 548,
+      "sha256": "fad1cfd2fe580e2c2649c5b8f44174090b4977e713804b66c9c0c8231b733812"
+    },
+    {
+      "file": "thief-coat-burglar-display.glb",
+      "vertices": 2532,
+      "triangles": 844,
+      "sha256": "b858ff1a8509436ae2afe331683ad97c7f2666566d237fcdeea24fda96c4cd1b"
+    },
+    {
+      "file": "thief-coat-burglar-female.glb",
+      "vertices": 2940,
+      "triangles": 980,
+      "sha256": "ceb773fcf4798ad9b5a8baab486e4db959a538d9052a23c038eb59a85be08c92"
+    },
+    {
+      "file": "thief-coat-burglar-male.glb",
+      "vertices": 4200,
+      "triangles": 1400,
+      "sha256": "713e30be5b403369e623c34270a9fc167b3afbb808a159f2c74956efbf0385b8"
+    },
+    {
+      "file": "thief-coat-guild-display.glb",
+      "vertices": 2628,
+      "triangles": 876,
+      "sha256": "a2d46a2805b841f2d309a3d2c087232384995bdaa47a7e9215c08cfa917f7040"
+    },
+    {
+      "file": "thief-coat-guild-female.glb",
+      "vertices": 3036,
+      "triangles": 1012,
+      "sha256": "a44af11f94312adcc8ed39568b9df818c8ad0c4afdbd6644eced7bfff66ad7a6"
+    },
+    {
+      "file": "thief-coat-guild-male.glb",
+      "vertices": 4296,
+      "triangles": 1432,
+      "sha256": "a2f61f4d1585752a6227cd924690d89b96e036f71a2ff8718afa215f729f295f"
+    },
+    {
+      "file": "thief-coat-locksmith-display.glb",
+      "vertices": 2892,
+      "triangles": 964,
+      "sha256": "1e167001b1e1372854ccae80304ee8324d6c3c5e553c9585cf272bc4c0bc7a98"
+    },
+    {
+      "file": "thief-coat-locksmith-female.glb",
+      "vertices": 3300,
+      "triangles": 1100,
+      "sha256": "ad3b67b6147ba76f1365752a7ea8d1d4db5daaace5b5f7c4265fa4014419a16e"
+    },
+    {
+      "file": "thief-coat-locksmith-male.glb",
+      "vertices": 4560,
+      "triangles": 1520,
+      "sha256": "d6eb2d2a62865a9cca13238bfc4916a5784c3c82698950452316170eb78967c8"
+    },
+    {
+      "file": "thief-coat-masterwork-display.glb",
+      "vertices": 2772,
+      "triangles": 924,
+      "sha256": "7585deb963f28357a83af8638258c8d830aed38ad3799821640f834d1eb0a66f"
+    },
+    {
+      "file": "thief-coat-masterwork-female.glb",
+      "vertices": 3180,
+      "triangles": 1060,
+      "sha256": "f242f73f2b0db19c5b0c736fca7e2a36883b0a267ad2b8bf4a0ed33ffc5efc84"
+    },
+    {
+      "file": "thief-coat-masterwork-male.glb",
+      "vertices": 4440,
+      "triangles": 1480,
+      "sha256": "d074797bedf58a1c3eb216799fa3189a595dd6e4af212ad888a5323da59dddce"
+    },
+    {
+      "file": "thief-coat-nightblade-display.glb",
+      "vertices": 2580,
+      "triangles": 860,
+      "sha256": "81ea00931790efd0bc49c645216731423d690da43db84f6db58916d3300dd998"
+    },
+    {
+      "file": "thief-coat-nightblade-female.glb",
+      "vertices": 2988,
+      "triangles": 996,
+      "sha256": "c1c8f970cd4508faf249615675c161bed30e400404c4216016127bb4e61cd542"
+    },
+    {
+      "file": "thief-coat-nightblade-male.glb",
+      "vertices": 4248,
+      "triangles": 1416,
+      "sha256": "efb081d7577d3ea512f80216414a732dcf71e98b6b4b29c70ab3643c7bce57c6"
+    },
+    {
+      "file": "thief-coat-street-display.glb",
+      "vertices": 2724,
+      "triangles": 908,
+      "sha256": "a0e9ab1837c049491729ad5bf49b02a9e8592722389accd315aacd45510a5ff4"
+    },
+    {
+      "file": "thief-coat-street-female.glb",
+      "vertices": 3132,
+      "triangles": 1044,
+      "sha256": "9ae12c501839ac1e8cffa8a23447ecc0f9a68ac01a582be06140f50c8aa1d3fc"
+    },
+    {
+      "file": "thief-coat-street-male.glb",
+      "vertices": 4392,
+      "triangles": 1464,
+      "sha256": "c44004ba862553c3bc2b2540ecdd3f0a258070aa5de633b944c8d77c23b901aa"
+    },
+    {
+      "file": "thief-coat-wayfarer-display.glb",
+      "vertices": 2580,
+      "triangles": 860,
+      "sha256": "3e6c81df13e946efea1b1914b3d579c9749fe0cd45cc7b0c74e58d78c2541d80"
+    },
+    {
+      "file": "thief-coat-wayfarer-female.glb",
+      "vertices": 2988,
+      "triangles": 996,
+      "sha256": "5a30f0f5efcd62a63c02ff6f279990d1876fae8732ab1759fe20b72a6438cb88"
+    },
+    {
+      "file": "thief-coat-wayfarer-male.glb",
+      "vertices": 4248,
+      "triangles": 1416,
+      "sha256": "af8201c245ccf8a13cc537ea02f13a01ed843288fd0b2af9ed8a7cbfefe368a1"
+    },
+    {
+      "file": "thief-hood-burglar-display.glb",
+      "vertices": 516,
+      "triangles": 172,
+      "sha256": "5a6f6feae6c649c43978dd9a37e80c50f694cb5d9f00a960a41d8ec2a34bff56"
+    },
+    {
+      "file": "thief-hood-burglar.glb",
+      "vertices": 516,
+      "triangles": 172,
+      "sha256": "8ec412d7dfcc614123376603780bfbe6519ba8b75020ea4639ee7478148068e2"
+    },
+    {
+      "file": "thief-hood-guild-display.glb",
+      "vertices": 1044,
+      "triangles": 348,
+      "sha256": "15e7661ab79937beff0459c03f6696909b93f492dcdb41df08c48ac87941fd46"
+    },
+    {
+      "file": "thief-hood-guild.glb",
+      "vertices": 1044,
+      "triangles": 348,
+      "sha256": "142cc748d0f7f6dc8a998df2b3860e47d304d828e58862ef5e0c8fc1f462a726"
+    },
+    {
+      "file": "thief-hood-locksmith-display.glb",
+      "vertices": 1044,
+      "triangles": 348,
+      "sha256": "00eadd66b5f9ec198a8a748691726c8337cddce5c535e19f140e96e61ac86483"
+    },
+    {
+      "file": "thief-hood-locksmith.glb",
+      "vertices": 1044,
+      "triangles": 348,
+      "sha256": "0d5878d0542c6f4257d5d5f779bb2081ef5bc713f95a439fb42385f48336dc93"
+    },
+    {
+      "file": "thief-hood-masterwork-display.glb",
+      "vertices": 912,
+      "triangles": 304,
+      "sha256": "b47a314d4237dc9b3a1ac5587bd2bce3e2cb0a5edb5e79052de02a1aaadae148"
+    },
+    {
+      "file": "thief-hood-masterwork.glb",
+      "vertices": 912,
+      "triangles": 304,
+      "sha256": "6843bbcb3fbf69c7b5d941bd083c204d763c44f50ecb78fc4564c46f1a13aff9"
+    },
+    {
+      "file": "thief-hood-nightblade-display.glb",
+      "vertices": 864,
+      "triangles": 288,
+      "sha256": "5c7d6f6b3721fa7c58e6dfcd3a72446935758323c17123360fcc8f524be7c5ff"
+    },
+    {
+      "file": "thief-hood-nightblade.glb",
+      "vertices": 864,
+      "triangles": 288,
+      "sha256": "304f8b807f97b518e4144079742813e7af937184ff212cea1b4f378473454ccf"
+    },
+    {
+      "file": "thief-hood-street-display.glb",
+      "vertices": 516,
+      "triangles": 172,
+      "sha256": "57ea94ae5fde1e079eaf34fbf88cc57c0606649f66a26279f8fea63b7a8b643f"
+    },
+    {
+      "file": "thief-hood-street.glb",
+      "vertices": 516,
+      "triangles": 172,
+      "sha256": "24f3c8b01dbba3c23d01b62d907511732e491bd75613f4855f17f9a58dadca3d"
+    },
+    {
+      "file": "thief-hood-wayfarer-display.glb",
+      "vertices": 972,
+      "triangles": 324,
+      "sha256": "b7ccb40be5c4a647e2698dacf74036223a9392c60ab76caaf7f00793099fd477"
+    },
+    {
+      "file": "thief-hood-wayfarer.glb",
+      "vertices": 972,
+      "triangles": 324,
+      "sha256": "d2664f6fa4c6631b8da1c51fd393a1dc574566bcdfd8ceb0d1d299e7f10c1107"
+    }
+  ]
+}

@@ -7,7 +7,15 @@ attacks, selects another button, writes Focus fields, invokes callbacks, or retr
 It is fixture-assisted UI evidence, not keyboard or mouse coverage.
 
 Read the current hero FID, `focusPoints`, and `spentFocus` with `guardian-state`.
-Select an ordinary attack through native UI, then send:
+Select the basic attack through native UI or use the guarded selection operation:
+
+```json
+{"op":"native-combat-focus","action":"select-basic","expectedHeroFID":"1:1","expectedFocus":3,"expectedSpentFocus":0}
+```
+
+Selection uses the game's input focus and action-profile methods, without spending
+Focus or attacking. The input focus may settle on a later frame; observe the
+selected basic attack before sending:
 
 ```json
 {"op":"native-combat-focus","action":"spend","expectedHeroFID":"1:1","expectedFocus":3,"expectedSpentFocus":0}

@@ -53,6 +53,7 @@ namespace FTKModFramework.Core
     internal static class ItemModelRegistry
     {
         internal static int ReloadModelCount;
+        internal static int ReloadOffHandCount;
         internal static int ReloadDisplayCount;
         internal static Action SuspendForReload() { return delegate { }; }
     }
