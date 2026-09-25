@@ -18,7 +18,7 @@ internal static class Program
         state.BeginActorTurn("thief");
         Check(state.IsOpenFor("thief", "enemy"), "first enemy turn is open");
         ThiefCombatState.AttackCommit first = state.CommitPrecisionAttack("thief", "enemy");
-        Check(first.EligibleForSneakAttack && first.BonusPercent == 35, "first precision attack has fixed bonus");
+        Check(first.EligibleForSneakAttack && first.BonusPercent == 20, "ordinary Sneak Attack uses tuned 20 percent bonus");
         Check(!state.CommitPrecisionAttack("thief", "enemy").EligibleForSneakAttack, "one precision entitlement per turn");
         state.TryPrepare("thief", true);
         Check(!state.CommitPrecisionAttack("thief", "enemy").EligibleForSneakAttack,
@@ -69,6 +69,7 @@ internal static class Program
 
         state.BeginActorTurn("thief");
         Check(state.TrySlipAway("thief"), "Slip Away arms once per combat and prepares");
+        Check(state.SlipAwayUsed("thief"), "spent Slip Away exposes its used state");
         Check(!state.TrySlipAway("thief"), "Slip Away cannot rearm in one combat");
         Check(state.ResolveSlipAwayDamage("thief", false, 9) == 9, "non-enemy damage cannot consume Slip Away");
         Check(state.ResolveSlipAwayDamage("thief", true, 0) == 0, "zero post-defense damage cannot consume Slip Away");
@@ -92,7 +93,7 @@ internal static class Program
         ThiefCombatState.AttackCommit light = state.CommitPrecisionAttack("thief", "enemy", true, true);
         Check(light.LastLight && light.BonusPercent == 75, "full-health opening spends Last Light for 75 percent");
         state.BeginActorTurn("thief");
-        Check(state.CommitPrecisionAttack("thief", "enemy", true, true).BonusPercent == 35,
+        Check(state.CommitPrecisionAttack("thief", "enemy", true, true).BonusPercent == 20,
             "Last Light cannot recharge on a later turn in the same combat");
         state.GrantEvasion("thief");
         Check(state.HasEvasion("thief"), "damaging artifact Sneak Attack grants timed Evasion");
@@ -119,6 +120,7 @@ internal static class Program
 
         state.BeginEncounter(new[] { "enemy" });
         Check(state.SlipAwayAvailable("thief"), "new encounter restores Slip Away");
+        Check(!state.SlipAwayUsed("thief"), "new encounter clears the used state");
         state.BeginActorTurn("thief");
         Check(!state.CommitPrecisionAttack("thief", "enemy", true, false).LastLight,
             "injured target does not spend Last Light");

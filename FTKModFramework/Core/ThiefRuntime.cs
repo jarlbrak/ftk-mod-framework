@@ -240,6 +240,11 @@ namespace FTKModFramework.Core
                 state.SlipAwayAvailable(GuardianRuntime.Identity(actor));
         }
 
+        internal static bool SlipAwayUsed(CharacterDummy actor)
+        {
+            return IsThief(actor) && state.SlipAwayUsed(GuardianRuntime.Identity(actor));
+        }
+
         internal static void ApplySlipAway(CharacterDummy actor)
         {
             if (!IsThief(actor) || !GuardianRuntime.CanAct(actor)) return;

@@ -20,7 +20,7 @@ namespace FTKModFramework.Core
             {
                 EligibleForSneakAttack = eligible;
                 LastLight = eligible && lastLight;
-                BonusPercent = eligible ? (lastLight ? 75 : 35) : 0;
+                BonusPercent = eligible ? (lastLight ? 75 : 20) : 0;
             }
         }
 
@@ -229,6 +229,12 @@ namespace FTKModFramework.Core
         {
             Actor actor = GetActor(actorId);
             return actor != null && !actor.SlipAwayUsed;
+        }
+
+        internal bool SlipAwayUsed(string actorId)
+        {
+            Actor actor = GetActor(actorId);
+            return actor != null && actor.SlipAwayUsed;
         }
 
         internal void GrantEvasion(string actorId)

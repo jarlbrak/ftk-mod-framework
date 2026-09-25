@@ -42,7 +42,7 @@ Native character appearances remain available under normal unlock rules. The cla
 | Elite Sneak | Native skill flag, unchanged native behavior | Choose fights and routes |
 | Elite Ambush | Native skill flag, unchanged native behavior | Try to isolate a dangerous enemy |
 | Elite Trap Disarm | Native skill flag, unchanged native behavior | Spend checks, Focus, or lockpicks appropriately |
-| Sneak Attack | A perfect eligible physical attack against an Open enemy gains +35% of current weapon damage, once per own turn | Commit Focus to the right target and moment |
+| Sneak Attack | A perfect eligible physical attack against an Open enemy gains +20% of current weapon damage, once per own turn | Commit Focus to the right target and moment |
 | Twin Feint | A normal paired strike with exactly one failed check that damages its target grants Prepared | A near miss sets up the next turn without a second attack |
 | Feint / Draw Out | Weapon action: 60% damage; positive direct damage prepares the next eligible attack | Pay damage now to make an opening for later |
 | Slip Away | Once per combat, full action: halve the next direct enemy attack against self before next turn and prepare a strike | Give up damage now to survive and set up |

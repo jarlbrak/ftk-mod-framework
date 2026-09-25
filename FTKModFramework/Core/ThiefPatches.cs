@@ -33,10 +33,46 @@ namespace FTKModFramework.Core
     {
         internal static bool IsSlipAway(uiBattleStanceButtons owner, uiBattleButton button)
         {
-            if (owner == null || button == null || ThiefRuntime.SlipAwayId == GridEditor.FTK_proficiencyTable.ID.None) return false;
+            if (owner == null || owner.m_Proficiencies == null || button == null ||
+                ThiefRuntime.SlipAwayId == GridEditor.FTK_proficiencyTable.ID.None) return false;
             foreach (uiBattleStanceButtons.ProfValues entry in owner.m_Proficiencies)
                 if (entry.m_Button == button) return entry.m_Prof == ThiefRuntime.SlipAwayId;
             return false;
+        }
+
+        internal static void RefreshSlipAway(uiBattleStanceButtons owner)
+        {
+            if (owner == null || !owner.m_Initialized || owner.CombatCow == null || owner.m_Proficiencies == null) return;
+            CharacterDummy thief = owner.CombatCow.GetCombatDummy();
+            if (!ThiefRuntime.IsThief(thief)) return;
+            bool canUse = ThiefRuntime.SlipAwayAvailable(thief);
+            bool used = ThiefRuntime.SlipAwayUsed(thief);
+            foreach (uiBattleStanceButtons.ProfValues entry in owner.m_Proficiencies)
+            {
+                if (entry.m_Prof != ThiefRuntime.SlipAwayId || entry.m_Button == null) continue;
+                entry.m_Button.SetCanUse(canUse);
+                if (!used || owner.m_InfoPanel == null || owner.m_CombatActionProfile.m_Button != entry.m_Button) continue;
+                Text[] descriptions = owner.m_InfoPanel.m_Description;
+                if (descriptions != null && descriptions.Length > 1 && descriptions[1] != null)
+                    descriptions[1].text = "Slip Away used.";
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(uiBattleStanceButtons), "Update")]
+    internal static class ThiefSlipAwayUiRefreshPatch
+    {
+        private static bool loggedRefreshFailure;
+
+        private static void Postfix(uiBattleStanceButtons __instance)
+        {
+            try { ThiefActionUi.RefreshSlipAway(__instance); }
+            catch (Exception e)
+            {
+                if (loggedRefreshFailure) return;
+                loggedRefreshFailure = true;
+                Plugin.Log.LogError("[thief] Slip Away UI refresh failed: " + e);
+            }
         }
     }
 
@@ -56,7 +92,9 @@ namespace FTKModFramework.Core
                 if (descriptions != null && descriptions.Length > 0 && descriptions[0] != null)
                     descriptions[0].text = "Target: self";
                 if (descriptions != null && descriptions.Length > 1 && descriptions[1] != null)
-                    descriptions[1].text = "Prepare your next precision attack.\nHalve the next direct enemy attack before your next turn.\nOnce per combat. No Focus.";
+                    descriptions[1].text = ThiefRuntime.SlipAwayUsed(__instance.CombatCow.GetCombatDummy())
+                        ? "Slip Away used."
+                        : "Prepare your next precision attack.\nHalve the next direct enemy attack before your next turn.\nOnce per combat. No Focus.";
                 uiToolTipFocusable.gCanFocus = false;
                 FTKUI.Instance.m_PlayerSlots.ResetSlots();
             }

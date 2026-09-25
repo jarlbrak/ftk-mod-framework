@@ -39,7 +39,7 @@ A damaging Sneak Attack with this weapon returns **exactly one Focus actually sp
 
 This signature can recur on later turns. A one-Focus attempt may be resource-neutral on a damaging perfect result, while a fully focused three-check attack still costs two Focus net. It never generates net Focus, but can make a remaining point last longer. That is its intended artifact identity and a required long-fight balance test.
 
-At player level 8 before other modifiers, its current damage is 35. A perfect Sneak Attack is 47.25 before native rounding, criticals, and armor. Nightglass Twins are 38 at that level and reach 51.3, so the artifact pays a continuing damage cost for the refund.
+At player level 8 before other modifiers, its current damage is 35. A perfect ordinary Sneak Attack is 42 before native rounding, criticals, and armor. Nightglass Twins are 38 at that level and reach 45.6, so the artifact pays a continuing damage cost for the refund.
 
 Feedback: **Borrowed Fortune: 1 Focus returned.** Preview text states the condition; it does not subtract the expected refund from the Focus cost before resolution. The ordinary attack animation remains authoritative; a small key-glint effect is optional polish, never a required gameplay signal.
 
@@ -53,18 +53,18 @@ A matched candle-and-snuffer pair. One blackened leaf blade has an ivory grip an
 
 ### Last Light
 
-Once per wielder per combat, a committed Strike with this weapon against a **full-health enemy that qualifies for Sneak Attack** automatically replaces the ordinary +35% bonus with **+75%** on a perfect result. There is no separate toggle or extra action.
+Once per wielder per combat, a committed Strike with this weapon against a **full-health enemy that qualifies for Sneak Attack** automatically replaces the ordinary +20% bonus with **+75%** on a perfect result. There is no separate toggle or extra action.
 
 - At commitment, target HP must equal its current maximum HP, and the actor must have an unused Sneak Attack entitlement and either an ordinary opening or Prepared.
 - The artifact charge is spent on that eligible commitment, even on a partial result or a fully absorbed hit. Canceled targeting spends nothing. An ineligible ordinary attack does not waste the charge.
-- A partial result receives ordinary fractional Strike damage. A perfect result uses 1.75 times current weapon damage before the usual critical and mitigation sequence. Do not multiply 1.35 by 1.75 or add both bonuses.
+- A partial result receives ordinary fractional Strike damage. A perfect result uses 1.75 times current weapon damage before the usual critical and mitigation sequence. Do not multiply 1.20 by 1.75 or add both bonuses.
 - No automatic kill, extra attack, armor bypass, poison, bleed, or damage over time is added.
 - Unequipping, swapping copies, moving the weapon between inventories, or reviving cannot refresh that wielder's spent Last Light in the current combat. Track the budget by wielder and effect, not item instance.
 - A different Thief has its own per-combat budget. Normal equipment-transfer action costs remain; this is not an extra turn or an exemption from them.
 
 A full-health enemy before its first turn is the natural target. Ally damage opens a later opportunity but usually removes full health. A near-miss basic Strike can prepare a later attack through Twin Feint; Slip Away can prepare without damaging anyone. An enemy healed to full can qualify later if the charge remains and an opening or Prepared exists. The rule does not rely on a permanent once-injured flag.
 
-At level 8 its current damage is 36. Last Light reaches 63 before native rounding/mitigation, compared with Nightglass Twins' ordinary Sneak Attack at 51.3. Later Sneak Attacks from Candle's End reach 48.6. Over five perfect Sneak Attacks it totals 257.4 versus Nightglass Twins' 256.5; at six it falls behind, 306 versus 307.8, before per-hit rounding and mitigation. The artifact shifts value into the opening and loses its advantage in longer fights. These are arithmetic illustrations, not expected encounter damage.
+At level 8 its current damage is 36. Last Light reaches 63 before native rounding/mitigation, compared with Nightglass Twins' ordinary Sneak Attack at 45.6. Later Sneak Attacks from Candle's End reach 43.2. Over five perfect Sneak Attacks it totals 235.8 versus Nightglass Twins' 228; at seven it is 322.2 versus 319.2; at eight it is 365.4 versus 364.8; by nine Nightglass Twins lead 410.4 to 408.6, before per-hit rounding and mitigation. The artifact shifts value into the opening and loses its advantage in longer fights. These are arithmetic illustrations, not expected encounter damage.
 
 Feedback: the action preview shows **Last Light ready** only when all commitment conditions hold, then **Last Light spent** for the rest of combat. A miss still shows the spent state. Full health and opening status must be visible without guessing from the blade's glow.
 
@@ -87,7 +87,7 @@ A damaging Sneak Attack grants **+8 Evasion points** after it resolves, until th
 - A perfect enemy attack or other native rule that bypasses evasion continues to do so. Do not override native dodge eligibility.
 - A partial result, fully absorbed attack, or Thread the Needle grants nothing. A killing Sneak Attack can grant the buff because another enemy may still act.
 
-At level 8 current damage is 37 and Sneak Attack reaches 49.95 before rounding/mitigation. Farstep reaches 51.3 and has stronger penetration; Blackthorn reaches 54 with fewer actions. The artifact pays damage and action-quality costs for protection without a shield. Bows do not receive Twin Feint; the defensive signature is this artifact's particular reason to invest in Awareness.
+At level 8 current damage is 37 and Sneak Attack reaches 44.4 before rounding/mitigation. Farstep reaches 45.6 and has stronger penetration; Blackthorn reaches 48 with fewer actions. The artifact pays damage and action-quality costs for protection without a shield. Bows do not receive Twin Feint; the defensive signature is this artifact's particular reason to invest in Awareness.
 
 Feedback: **Loose and Leave: +8 Evasion until your next turn.** Use a small boot-and-arrow status icon with a clear expiry description. The effect never makes the character transparent or pretends enemies cannot target them.
 

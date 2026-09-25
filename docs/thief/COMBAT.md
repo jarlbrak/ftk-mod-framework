@@ -27,9 +27,9 @@ The opening is not consumed by attacking it. Several Thieves may each exploit th
 
 When the player commits an eligible attack, capture the target's opening state, the actor's current turn identity, any Prepared token, and artifact eligibility. Canceled targeting spends nothing. A committed attack uses this captured state; damage caused by that attack cannot qualify itself retroactively.
 
-If the enemy was Open, or the actor had Prepared, a perfect result adds **35% of the actor's current maximum weapon damage** to the normal attack before mitigation. A partial result receives ordinary partial damage only. This is one enhanced native hit, not a second damage event. Two visible blades never double the listed damage, Sneak Attack, or artifact reward. Native critical and Frozen calculations operate on the enhanced damage through their normal order. Armor is deducted once. No automatic armor bypass is granted.
+If the enemy was Open, or the actor had Prepared, a perfect result adds **20% of the actor's current maximum weapon damage** to the normal attack before mitigation. A partial result receives ordinary partial damage only. This is one enhanced native hit, not a second damage event. Two visible blades never double the listed damage, Sneak Attack, or artifact reward. Native critical and Frozen calculations operate on the enhanced damage through their normal order. Armor is deducted once. No automatic armor bypass is granted.
 
-Let `D` be the native current maximum weapon damage after level growth and ordinary equipment modifiers, `s` the successful-slot fraction, and `b` the bonus fraction. For eligible ordinary attacks, base damage before native critical/Frozen/mitigation is `RoundNative(D * (s + b))`, where `b = 0.35` only when `s = 1`, the captured opening qualifies, and this turn's entitlement is unused. Otherwise `b = 0`. No extra rounding is introduced before the native rounding step. Candle's End replaces `b` with `0.75`; it does not add or multiply both values.
+Let `D` be the native current maximum weapon damage after level growth and ordinary equipment modifiers, `s` the successful-slot fraction, and `b` the bonus fraction. For eligible ordinary attacks, base damage before native critical/Frozen/mitigation is `RoundNative(D * (s + b))`, where `b = 0.20` only when `s = 1`, the captured opening qualifies, and this turn's entitlement is unused. Otherwise `b = 0`. No extra rounding is introduced before the native rounding step. Candle's End replaces `b` with `0.75`; it does not add or multiply both values.
 
 One committed eligible attempt per own turn can claim the entitlement. It is spent on the qualifying attempt even if the roll is partial or armor absorbs everything. Ordinary turns only have one action; this limit also protects against replay, native extra-action interactions, and later content. New animation callbacks or extra actions within the same turn do not refresh it. A genuinely new scheduled own turn does.
 
@@ -89,7 +89,7 @@ Fleeing ends transient protection and preparation. A later encounter can reiniti
 
 | Place | Proposed text |
 | --- | --- |
-| Class passive | **Sneak Attack:** Perfect single-target strikes with a precision weapon deal 35% extra damage against enemies that have not acted, or were damaged by a teammate since their last turn. Once per turn. |
+| Class passive | **Sneak Attack:** Perfect single-target strikes with a precision weapon deal 20% extra damage against enemies that have not acted, or were damaged by a teammate since their last turn. Once per turn. |
 | Target, first turn | **Opening: has not acted** |
 | Target, ally hit | **Opening: distracted by an ally** |
 | Personal state | **Prepared: your next precision attack can Sneak Attack. Expires after your next turn.** |
