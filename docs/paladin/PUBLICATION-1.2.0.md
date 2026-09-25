@@ -21,8 +21,9 @@ Both assets were uploaded to a draft, independently downloaded and compared
 byte-for-byte before publication. Both public URLs were downloaded again after
 publication and matched the same hashes. The published framework 1.0.3 helper
 accepted the exact archive and descriptor. GitHub reports the mod release as
-immutable, with `draft=false`. Framework v1.0.3 remains the latest stable release;
-Paladin was published with `--latest=false`.
+immutable, with `draft=false`. Framework v1.0.3 remained the latest stable release
+at Paladin publication; Paladin was published with `--latest=false`. A later
+framework release does not alter this package or its tested 1.0.3 minimum.
 
 The package minimum remains framework 1.0.3. The existing desktop installation
 allowlist and player-reported Windows fingerprint are preserved; they do not
