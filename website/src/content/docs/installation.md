@@ -13,7 +13,7 @@ Download **framework 1.2.0**, extract it into a permanent folder, and keep its f
 - [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.2.0/FTKModdedLauncher-linux-amd64.tar.gz)
 - [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.2.0/FTKModdedLauncher-linux-arm64.tar.gz)
 
-Linux ARM64 provides helper tooling, not a native ARM game port. Windows bundles remain a preview. The launcher packages exist for these platforms; native Windows/Linux gameplay remains unverified. The current mod catalog lists macOS. Read [compatibility](../compatibility/) before installing a mod.
+Linux ARM64 provides helper tooling, not a native ARM game port. Windows bundles remain a preview. The launcher packages exist for these platforms; native Windows/Linux gameplay remains unverified. Paladin, Thief, and Possum are published for Windows, macOS, and Linux. The same mod archive serves all three platforms; installation still requires a listed game build. Read [compatibility](../compatibility/) before installing a mod.
 
 ## 2. Add it to Steam
 
