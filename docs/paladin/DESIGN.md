@@ -1,6 +1,6 @@
 # Paladin: complete class design
 
-Status: design contract for the published Paladin 1.2.0 package. It defines 51
+Status: design contract for the Paladin 1.4.0 package. It defines 51
 equipment items, including twelve accessories. The design and historical plans
 below do not establish full live-game acceptance; see the
 [launch record](LAUNCH-1.0.0.md) for observed coverage.
@@ -55,9 +55,11 @@ every in-game stat panel displays exactly these numbers.
 
 The six main stats total **360**. The class clones Blacksmith, declares Vitality
 as its primary stat and explicitly disables inherited Steadfast. Its starting
-equipment is Novice Hammer, Novice Aegis, Novice Plate, Novice Sabatons and Novice
-Helm. The new accessories are found or bought, not additional starting
-grants. [Native baseline](NATIVE-BASELINE.md) explains inherited weapon actions,
+equipment is Novice Hammer and Novice Aegis. Armor, boots, helmets and
+accessories are found or bought, not additional starting grants. Smite requires
+an acquired and equipped Paladin trinket. The [1.4.0 revision](RELEASE-1.4.0.md)
+records the native comparison and validation gates.
+[Native baseline](NATIVE-BASELINE.md) explains inherited weapon actions,
 difficulty bonuses and the stat cap; equip/remove verification remains in
 [the gap plan](GAPS.md).
 

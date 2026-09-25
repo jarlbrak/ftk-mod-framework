@@ -4,16 +4,6 @@ namespace FTKModFramework.Core
 {
     internal static class GuardianEquipmentDescription
     {
-        // The native class label overflows horizontally rather than wrapping. Keep each rule
-        // on two short lines; the exact live panel fit remains a separate visual check.
-        internal const string ClassRules =
-            "Guard: -50% ally direct damage\n" +
-            "until next turn or incapacity.\n" +
-            "Focused hit: heal chosen ally\n" +
-            "8% max HP, once per attack.\n" +
-            "Active Guard: lethal direct hit\n" +
-            "leaves 1 HP, once per combat.";
-
         internal static string Format(GuardianEquipmentBonuses bonuses, string classNames)
         {
             if (bonuses == null) return string.Empty;

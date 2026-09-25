@@ -162,14 +162,6 @@ internal static class Program
         Check(card.StartsWith("<color=red>-2 Speed</color>\nPaladin only:"), "native rich stat text preserved");
         Check(GuardianEquipmentDescription.Append(card, guardText) == card, "same card append is idempotent");
         Check(GuardianEquipmentDescription.Append("native", "") == "native", "no perk leaves native text untouched");
-        Check(GuardianEquipmentDescription.ClassRules.Split('\n').Length == 6 && GuardianEquipmentDescription.ClassRules.Contains("-50% ally direct damage") && GuardianEquipmentDescription.ClassRules.Contains("next turn or incapacity"), "class card states bounded ally Guard action");
-        Check(GuardianEquipmentDescription.ClassRules.Contains("8% max HP, once per attack") && GuardianEquipmentDescription.ClassRules.Contains("Active Guard: lethal direct hit") && GuardianEquipmentDescription.ClassRules.Contains("1 HP, once per combat"), "class card states focused healing and active lethal rescue limits");
-        foreach (string line in GuardianEquipmentDescription.ClassRules.Split('\n'))
-            Check(line.Length <= 31, "class ability text stays within conservative native line width");
-        Check(GuardianClassLayout.Shift(-350, -290, 6) == -66, "overlapping equipment moves exactly below expanded ability text");
-        Check(GuardianClassLayout.Shift(-250, -290, 6) == 0, "existing native gap never moves equipment upward");
-        Check(GuardianClassLayout.Shift(-284, -290, 6) == 0, "exact required gap remains unchanged");
-        Check(GuardianClassLayout.Shift(float.NaN, -290, 6) == 0 && GuardianClassLayout.Shift(-350, -290, -1) == 0, "invalid layout measurements fail without displacement");
         Check(GuardianFocusedHit.EligibleAttempt(1, 0.5f, false, false), "partially successful focused direct attack qualifies");
         Check(!GuardianFocusedHit.EligibleAttempt(0, 1, false, false) && !GuardianFocusedHit.EligibleAttempt(1, 0, false, false), "unfocused and zero-slot misses excluded");
         Check(!GuardianFocusedHit.EligibleAttempt(1, 1, true, false) && !GuardianFocusedHit.EligibleAttempt(1, 1, false, true), "harmless Guard and forced misses excluded");

@@ -41,9 +41,10 @@ where eligible, with no new class, Lore, quest or DLC requirement. Eligibility
 does not guarantee a spawn. Use native rarity weighting and category selection;
 adding another normalization system is not part of this plan.
 
-The starting grant remains five equipment items: Novice Hammer, Aegis, Plate,
-Sabatons and Helm. Novice Great Hammer and both new Novice accessories must
-be found or bought. No new consumables are proposed.
+The 1.4.0 package starts with Novice Hammer and Novice Aegis only. Armor,
+boots, helmets, great hammers and accessories must be found or bought. Smite
+is unlocked by equipping an acquired Paladin trinket. No new consumables are
+added. Existing acquisition declarations remain unchanged.
 
 ## Slot coverage
 

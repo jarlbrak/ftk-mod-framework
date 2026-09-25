@@ -16,7 +16,7 @@ Read the pending-change message in Mods, close the game, then relaunch. Changes 
 
 ## Paladin has no Smite or Censure
 
-Check that Paladin **1.3.0** is active with framework **1.2.0 or later compatible 1.x**. Censure comes from an equipped Paladin hammer. Smite comes from an equipped Paladin trinket, including the starting Tin Oath Token. They are not permanent class actions. Smite's stronger multiplier requires an active Censure Resistance reduction; an Armor reduction will not activate it.
+Check that Paladin **1.4.0** is active with framework **1.2.1 or later compatible 1.x**. Censure comes from an equipped Paladin hammer. Smite comes from an equipped Paladin trinket, which must now be acquired and equipped. They are not permanent class actions. Smite's stronger multiplier requires an active Censure Resistance reduction; an Armor reduction will not activate it.
 
 ## A mod is blocked as incompatible
 
