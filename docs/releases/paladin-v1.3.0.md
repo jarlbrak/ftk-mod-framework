@@ -1,6 +1,6 @@
 # Paladin 1.3.0
 
-Release candidate for the original For The King. Requires FTK Mod Framework
+For the original For The King. Requires FTK Mod Framework
 **1.2.0** or a compatible later 1.x release. This is a minor Paladin content
 release; package identity remains `ftkmf.paladin` / `com.ftkmf.paladin`.
 
@@ -65,8 +65,9 @@ The [source validator](../../marketplace/packages/validate_paladin.py) checks
 57 unique entries, ownership contracts, retained balance and acquisition,
 exact assets and renderer routes. Archive validation, public download hashes,
 and installation lifecycle checks remain separate from those source checks.
-This document does not establish that publication or catalog installation has
-completed.
+The [Paladin release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.3.0)
+is public. Archive and preview downloads were independently hash-verified before
+catalog inclusion. Public game installation is a separate follow-up check.
 
 ## Artwork provenance and rights
 

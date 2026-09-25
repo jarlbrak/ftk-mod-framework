@@ -55,3 +55,13 @@ Use a full game restart for content declaring the new capabilities.
 See the [release notes](../releases/v1.2.0.md) for upgrade requirements and
 platform limitations. Final clean-source release staging and published-asset
 verification remain separate release workflow steps.
+
+## Clean-source release identity
+
+Published DLL SHA-256: `858966bfdfe03dae610ab6853cf07125f9b424a8614bf7b3819beb40911eb143`.
+The clean-source build embeds commit `07017821a3f7c3367c1d4d7f878c7150cd34c3ef`.
+All 162,549 disassembled IL lines match the earlier combat-tested DLL above.
+Only informational version and derived MVID, PE timestamp and PDB metadata differ.
+This exact release DLL also passed native self-tests and registered 57/57 entries
+without content errors or warnings in a fresh isolated macOS process.
+All 13 public framework release files were downloaded and hash-verified.
