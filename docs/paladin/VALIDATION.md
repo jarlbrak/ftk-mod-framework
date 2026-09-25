@@ -10,7 +10,7 @@ offline candidate, [legendary validation](LEGENDARY-VALIDATION.md) for earlier
 live-tested bytes, and [Launch 1.0.0](LAUNCH-1.0.0.md) for current release gates.
 
 The unpublished 1.2.0 source candidate retains those entries and Cleansing
-March, introduced in the earlier 1.1.0 candidate. The [balance review](BALANCE-1.2.0.md)
+March, introduced in the 1.1.0 release. The [balance review](BALANCE-1.2.0.md)
 and [verification receipt](balance-1.2.0-verification.json) record its five tuning
 changes and game-free checks. Matched live combat comparisons remain pending.
 Earlier offline framework, package and hot activation checks are separate from

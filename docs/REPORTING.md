@@ -1,8 +1,9 @@
 # Reporting a problem
 
 Direct sending requires a deployed reporting service and a matched framework/helper
-build. The expanded log dump and draft manager described here require their own
-live qualification before release.
+build. The [isolated macOS direct-send trial](evidence/reporting-direct-send.md)
+created real issues through the game panel. Expanded log dump, draft management,
+physical input routes and other platforms retain the limits in that receipt.
 
 Open **Options > Report Bugs** from the title screen or an active game. Add a short
 description if you can, then choose **Send report**. A GitHub account, browser form,

@@ -1,6 +1,6 @@
 # Paladin: complete class design
 
-Status: design contract for the published Paladin 1.0.1 package and the
+Status: design contract for the published Paladin 1.1.0 package and the
 unpublished 1.2.0 balance candidate. It defines 51
 equipment items, including twelve accessories. The design and historical plans
 below do not establish full live-game acceptance; see the
@@ -62,7 +62,7 @@ grants. [Native baseline](NATIVE-BASELINE.md) explains inherited weapon actions,
 difficulty bonuses and the stat cap; equip/remove verification remains in
 [the gap plan](GAPS.md).
 
-The earlier 1.1.0 candidate introduced **Cleansing March**, an equipment-independent passive.
+The 1.1.0 release introduced **Cleansing March**, an equipment-independent passive.
 During exploration it prevents new Poison and Curse from tiles and other
 noncombat sources. It neither cures existing conditions nor prevents fire tile
 damage or chaos losses. In combat the native status rules remain in force.

@@ -7,7 +7,7 @@ March, 51 equipment items, original 3D models and icons. Six equipment
 families cover early gear through horizontal endgame choices; three Artifacts
 add legendary hammers and a shield. The package author is JarlBrak.
 
-The 1.0.1 package is published in the in-game Mods catalog. This 1.2.0 source
+The 1.1.0 package is published in the in-game Mods catalog. This 1.2.0 source
 candidate tunes base Vitality to 80 and the Highward, Mercy, Censure and
 Verdict great hammers to 32, 34, 34 and 37 base damage. The
 [balance review](../../../docs/paladin/BALANCE-1.2.0.md) explains the comparisons
