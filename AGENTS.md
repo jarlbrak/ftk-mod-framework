@@ -49,6 +49,7 @@ See `docs/AI-NATIVE.md` for the complete layout and adapter rules.
 - `marketplace/`: production catalog and validation fixtures.
 - `tools/ai-model-pipeline/`: editor-free model authoring and evidence tooling.
 - `docs/`: public architecture, authoring, operational, and evidence documentation.
+- `website/`: public mod library, player guides, installation, compatibility, media, and release notes.
 
 Registered content must use deterministic identities. Never introduce hard-coded custom enum
 integers. Never mutate vanilla database rows or prefab assets in place.
@@ -71,7 +72,8 @@ integers. Never mutate vanilla database rows or prefab assets in place.
 3. State the invariant and observable outcome before choosing an implementation.
 4. Make the smallest coherent change.
 5. Run narrow verification first, then the proportional checks selected by `verify-change`.
-6. Update public documentation when behavior, setup, compatibility, or evidence changes.
+6. Assess public website impact for every change, regardless of which files changed. Follow
+   the website maintenance rule below and update affected public documentation.
 7. Report live-game gates separately from game-free tests. Never imply a build proves in-game behavior.
 
 ## Common commands
@@ -130,8 +132,32 @@ register a knowledge-curator role when a private knowledge service is available.
 - Do not overstate platform, co-op, animation, lifecycle, or art coverage.
 - Do not use em dashes in repository text, comments, commits, issues, or pull requests.
 
+## Public website maintenance
+
+The [public website](https://jarlbrak.github.io/ftk-mod-framework/) is a maintained product
+surface. **Every repository task must consider website updates**, including changes outside
+`website/`: runtime code, mods, equipment, abilities, artwork, packages, platform availability,
+installation, compatibility, release tooling, documentation, tests, and automation.
+
+- Assess impact when planning and again before completing the change. Identify affected library
+  entries, mod guides, item cards, media, installation steps, compatibility information,
+  troubleshooting, download links, and release notes as applicable.
+- Update affected website content in the same change when it describes published behavior.
+  Read [website/AGENTS.md](website/AGENTS.md) and [website/README.md](website/README.md), use
+  published package data as the authority, and regenerate derived data through its generator.
+- For unreleased work, record the exact pages or data that must change at release time in the
+  PR or task handoff. Keep the current published site accurate; use an explicitly labeled preview
+  only when appropriate. Release work must complete the corresponding website updates.
+- Every PR and completion report must state **Website impact**: what was updated and verified,
+  what is tied to a pending release, or why no website change is needed. An internal-only change
+  may need no website edits, but it never skips this assessment.
+- When the site changes, follow its build, browser, media, and accessibility checks. When a
+  deployment is part of delivery, verify the public pages and links after deployment. Keep
+  published availability distinct from gameplay verification and preserve media provenance.
+
 ## Definition of done
 
 A change is complete only when the relevant game-free checks pass, `git diff --check` passes,
-documentation is current, and remaining live or platform gates are stated precisely. Before a
+documentation is current, the website impact assessment and any required website updates are
+complete, and remaining live or platform gates are stated precisely. Before a
 commit or pull request, confirm no game DLL or private local-agent file is staged.
