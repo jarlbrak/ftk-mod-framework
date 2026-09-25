@@ -57,6 +57,35 @@ native texture that is immediately discarded for a pre-resolved unknown enemy.
 This targets baseline game allocations. Known-enemy texture retention remains native;
 no global cleanup scans or quality changes are introduced.
 
+## Scrolling phase allocation follow-up
+
+Owned scrolling materials now update the native UV phase through Harmony's field
+reference injection, avoiding reflection reads/writes that box two `Vector2` values
+per update. Native phase accumulation, disabled-renderer behavior and fallback stay
+unchanged. Setup validation and patch preparation share the same field compatibility
+check. Other costs, including Unity material-array getters, remain.
+
+Seventeen game-free checks pass. In a warmed host-CLR test, 100,000 reflection phase
+updates allocated 4,800,000 bytes versus zero for the linked by-reference prefix with
+allocation-free Unity/resource stubs. This isolates the removed boxing; it is not a
+claim of zero allocations in the actual game or a measured process RAM reduction.
+
+A live constructed fixture invokes the real patched native `LateUpdate`: 1,000 calls
+each while enabled, disabled, and re-enabled preserve exact phase, texture offset and
+owned material identity. A deliberately foreign assignment falls back to native code
+without double-advancing the phase. The source material remains unchanged. Full-avatar
+appearance, clone lifecycle, co-op and other-platform gates remain separate.
+
+A baseline foliage keyword experiment was also tested and rejected. Eight alternating
+native/candidate batches had matching shader outputs and repaired external keyword
+changes, but state queries did not consistently beat unconditional native keyword
+writes. No foliage patch ships. Earlier inclusive diagnostic timings do not establish
+this method's uninstrumented CPU cost.
+
+[Evidence and rejected trial](evidence/scrolling-allocation-2026-09-24/summary.json),
+[owned fixture source](evidence/scrolling-allocation-2026-09-24/owned-fixture-source/README.md).
+No new total CPU or FPS improvement is claimed by this follow-up.
+
 ## CPU observations
 
 The [native water experiment](PERFORMANCE-NATIVE-WATER.md) was compared on/off with

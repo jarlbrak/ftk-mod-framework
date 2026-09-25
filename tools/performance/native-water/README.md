@@ -59,7 +59,9 @@ or the texture-memory build
 The latter changes framework-owned PNG uploads, transaction-local PNG sharing, and splash texture lifetime; its
 decompiled water transpiler is unchanged. The unknown-portrait allocation build
 `b307c20a76bec2d0cacabbd9f17c167e3f722f142e39ac9ee6bdbe15801c75c8`
-is also allowed after confirming the same unchanged water transpiler.
+is also allowed after confirming the same unchanged water transpiler. The scrolling
+phase build `883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31`
+passed the same body comparison.
 A different hash requires a fresh method-body review before changing these developer pins.
 Boundary, schema and call checks reject unsupported shapes; they do not prove equivalence against arbitrary modified IL.
 This is an experimental matcher, not a guarantee of compatibility with later third-party patches.
