@@ -32,7 +32,21 @@ framework DLL also loaded the same Paladin archive in an isolated macOS game:
 development self-tests passed with no self-test failures. These observations
 do not repeat Poison or Curse entry on the final framework DLL.
 
-Public Discover, player-facing download/install/restart, disable/enable/remove,
-online co-op and Windows/Linux gameplay remain separate live gates. The
-Windows game fingerprint was player-reported; macOS is the locally verified
-game build.
+After the [production catalog change](https://github.com/jarlbrak/ftk-mod-framework/pull/198)
+merged, the isolated macOS game refreshed public Discover. The Paladin card
+showed version 1.1.0, framework 1.0.3, Cleansing March, the published banner
+and the stated platform limitations. The game removed Paladin through the Mods
+panel, then prepared and applied a fresh installation from the public catalog.
+For a second installation, the existing archive cache was moved aside in the
+isolated copy before using the Mods panel. The helper restored the missing
+archive at the catalog's SHA-256 path; its bytes hashed to
+`b5501fc3708f5ab6c53502252e7738bf2054c87cdb27eb22ae97e80c26f0774b`.
+The resulting marketplace generation contained Paladin 1.1.0. After a full
+game exit and restart, the title screen reported one enabled mod, Paladin
+1.1.0, with FTK Mod Framework 1.0.3. The game registered all 54 entries with
+zero content errors or warnings. This is a public catalog install and restart
+smoke on the locally verified macOS game build.
+
+Disable/enable, online co-op and Windows/Linux gameplay remain live gates. The
+Windows game fingerprint was player-reported. The final framework DLL has not
+been used to repeat the Poison and Curse tile trial.
