@@ -4,7 +4,9 @@ Then encode frames with the commands in website/README.md.
 """
 import bpy, sys, json, math, pathlib
 from mathutils import Vector
-package,out,item_id=sys.argv[sys.argv.index('--')+1:]
+args=sys.argv[sys.argv.index('--')+1:]
+package,out,item_id=args[:3]
+still='--still' in args[3:]
 package=pathlib.Path(package); out=pathlib.Path(out); out.mkdir(parents=True,exist_ok=True)
 entry=next(e for e in json.loads((package/'content.json').read_text())['entries'] if e['id']==item_id)
 model=entry['itemModels'][0]
@@ -31,8 +33,9 @@ scene.view_settings.view_transform='AgX'
 bpy.ops.object.camera_add(location=(4,-6,2.4)); camera=bpy.context.object; camera.rotation_euler=(-camera.location).to_track_quat('-Z','Y').to_euler(); camera.data.type='ORTHO'; camera.data.ortho_scale=4.3; scene.camera=camera
 for loc,power,size in [((3,-4,5),650,4),((-4,-2,2),450,3),((1,4,3),850,3)]:
  bpy.ops.object.light_add(type='AREA',location=loc); light=bpy.context.object;light.data.energy=power;light.data.shape='DISK';light.data.size=size;light.rotation_euler=(-light.location).to_track_quat('-Z','Y').to_euler()
-scene.render.film_transparent=False
+scene.render.film_transparent=still
+if still: scene.render.resolution_x=512; scene.render.resolution_y=512
 # Exact camera and render settings live here; a studio rotation is not a native animation.
-for frame in range(96):
+for frame in range(1 if still else 96):
  pivot.rotation_euler[2]=2*math.pi*frame/96
  scene.render.filepath=str(out/f'{frame:04}.png'); bpy.ops.render.render(write_still=True)

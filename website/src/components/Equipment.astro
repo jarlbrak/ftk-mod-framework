@@ -1,9 +1,60 @@
 ---
-import data from '../data/paladin.json';
-const labels:Record<string,string>={guardHealPercent:'Guard healing',focusHealBonusPercent:'Focused-hit healing bonus',retaliationDamage:'Retaliation damage',wardDebuffs:'Guard ailment ward',guardFocusRestore:'Guard Focus restoration',guardReckoning:'Reckoning',guardCleanse:'Guard cleanse'};
-const stat=(key:string,value:any)=>`${key[0].toUpperCase()+key.slice(1)} ${['vitality','speed','strength','intelligence','awareness','talent'].includes(key)?Math.round(Number(value)*100):value}`;
+import paladin from '../data/paladin.json';
+import thief from '../data/thief.json';
+import { itemAbilities, statName, statValue } from '../data/item-guide';
+const { mod='paladin' }=Astro.props;
+const data=mod==='thief'?thief:paladin;
 const gear=data.entries.filter(e=>['weapon','item'].includes(e.kind));
-const families=['novice','oathkeeper','highward','mercy','censure','verdict','artifacts'];
+const families=mod==='thief'?['street','burglar','guild','masterwork','locksmith','nightblade','wayfarer','artifacts']:['novice','oathkeeper','highward','mercy','censure','verdict','artifacts'];
+const base=import.meta.env.BASE_URL;
 ---
-<p>Generated from the hash-verified published Paladin {data.version} archive. These are declared base values and modifiers; inherited template properties and combat modifiers can affect final in-game values.</p>
-{families.map(family=> <section><h2 id={family}>{family[0].toUpperCase()+family.slice(1)}</h2><div class="table-scroll" tabindex="0" role="region" aria-label={`${family} equipment table`}><table><thead><tr><th scope="col">Equipment</th><th scope="col">Loot level</th><th scope="col">Base damage / rolls</th><th scope="col">Stat modifiers</th><th scope="col">Guardian perk</th><th scope="col">Base gold</th></tr></thead><tbody>{gear.filter(e=>family==='artifacts'?e.fields.rarity==='artifact':e.id.endsWith('_'+family)).map(e=><tr><th scope="row">{e.displayName}</th><td>{e.fields.minlevel}–{e.fields.maxlevel}</td><td>{e.fields.damage?`${e.fields.damage} / ${e.fields.slots}`:'N/A'}</td><td>{Object.entries(e.modifiers??{}).map(([k,v])=>stat(k,v)).join(', ')||'None declared'}</td><td>{Object.entries(e.guardianBonuses??{}).map(([k,v])=>`${labels[k]??k}${v===true?'':`: ${v}${k.endsWith('Percent')?'%':''}`}`).join(', ')||'None'}</td><td>{e.fields.goldvalue}</td></tr>)}</tbody></table></div></section>)}
+<item-armory>
+<p class="armory-intro">Explore all {gear.length} pieces in published {data.version}. Select an item to see its stats, abilities, and where to find it. Artwork is original package icon art or a studio render of the published model.</p>
+<label class="armory-search">Find equipment <input type="search" placeholder="Try a name, Smite, or healing…" aria-label="Find equipment" /></label>
+<p class="armory-count" role="status" aria-live="polite">{gear.length} items</p>
+{families.map(family=><section class="gear-family"><h3 id={family}>{family==='artifacts'?'Legendary artifacts':family[0].toUpperCase()+family.slice(1)}</h3><div class="equipment-grid">{gear.filter(e=>family==='artifacts'?e.fields.rarity==='artifact':e.id.endsWith('_'+family)).map(e=>{
+ const abilities=itemAbilities(e,data.entries);
+ const image=`${base}media/items/${e.id}.webp`;
+ const f=e.fields;
+ return <details class="equipment-item" id={e.id} data-search={`${e.displayName} ${family} ${abilities.map(a=>a.title+' '+a.text).join(' ')}`.toLowerCase()}>
+ <summary class:list={['item-tile',`rarity-${f.rarity}`]} aria-label={`Inspect ${e.displayName}`}><img src={image} alt={`Original artwork of ${e.displayName}`} width="256" height="256" loading="lazy"/><span>{e.displayName}</span><small>{e.kind==='weapon'?`${f.damage} damage · ${f.slots} rolls`:family==='artifacts'?'Artifact':family}</small><span class="inspect-hint">Inspect item ↗</span></summary>
+ <div class:list={['item-tooltip',`rarity-${f.rarity}`]}>
+ <div class="tooltip-art"><img src={image} alt={`Original artwork of ${e.displayName}`} width="384" height="384" loading="lazy"/></div>
+ <div class="tooltip-body"><p class="item-art-credit">{e.icon?'Original package icon':'Original published model · Studio render'}</p><p class="item-rarity">{f.rarity} · {mod} {data.version}</p><h4>{e.displayName}</h4>
+ <dl class="item-stats">{e.kind==='weapon'&&<><div><dt>Base damage</dt><dd>{f.damage}</dd></div><div><dt>Checks</dt><dd>{f.slots} {statName(f.skill)}</dd></div>{f.damagegain!==undefined&&<div><dt>Damage per level</dt><dd>+{f.damagegain}</dd></div>}</>}{Object.entries(e.modifiers??{}).map(([k,v])=><div><dt>{statName(k)}</dt><dd>{statValue(k,v)}</dd></div>)}</dl>
+ {abilities.length>0?<div class="item-abilities">{abilities.map(a=><section><h5>{a.title}</h5><p>{a.text}</p></section>)}</div>:<p class="item-note">Equipment bonuses are listed above. No additional custom action or passive is declared for this piece.</p>}
+ <div class="item-acquisition"><h5>Find this item</h5><p>Loot level {f.minlevel}{f.maxlevel!==f.minlevel?`–${f.maxlevel}`:''} · Base value {f.goldvalue} gold</p><p>{[f.dropable?'Enemy drops':null,f.townmarket?'town markets':null,f.m_NightMarket?'Night Markets':null,f.m_DungeonMerchant?'dungeon merchants':null].filter(Boolean).join(' · ')}.</p><p>These are eligible sources, not guaranteed spawns or an equip-level requirement. Shop prices and final combat values can vary.</p></div>
+ </div></div></details>
+})}</div></section>)}
+<dialog class="equipment-dialog" aria-label="Equipment details"><button class="close-item" type="button" aria-label="Close item details">Close ×</button><div class="dialog-content"></div></dialog>
+</item-armory>
+<script>
+class ItemArmory extends HTMLElement {
+ connectedCallback(){
+  const dialog=this.querySelector('dialog')!;
+  const content=dialog.querySelector('.dialog-content')!;
+  let trigger:HTMLElement|null=null;
+  this.querySelectorAll<HTMLDetailsElement>('.equipment-item').forEach(item=>{
+   const summary=item.querySelector('summary')!;
+   summary.setAttribute('aria-haspopup','dialog');
+   summary.addEventListener('click',event=>{
+    event.preventDefault();trigger=summary;
+    content.replaceChildren(item.querySelector('.item-tooltip')!.cloneNode(true));
+    content.querySelectorAll('img').forEach(img=>img.loading='eager');
+    dialog.setAttribute('aria-label',item.querySelector('h4')!.textContent!);
+    dialog.showModal();dialog.scrollTop=0;
+   });
+  });
+  dialog.querySelector('button')!.addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
+  dialog.addEventListener('close',()=>trigger?.focus({preventScroll:true}));
+  this.querySelector('input')!.addEventListener('input',event=>{
+   const q=(event.target as HTMLInputElement).value.trim().toLowerCase();let count=0;
+   this.querySelectorAll<HTMLElement>('.equipment-item').forEach(item=>{item.hidden=!item.dataset.search!.includes(q);if(!item.hidden)count++;});
+   this.querySelectorAll<HTMLElement>('.gear-family').forEach(s=>s.hidden=!s.querySelector('.equipment-item:not([hidden])'));
+   this.querySelector('[role=status]')!.textContent=`${count} ${count===1?'item':'items'}${q?' found':''}`;
+  });
+ }
+}
+if(!customElements.get('item-armory'))customElements.define('item-armory',ItemArmory);
+</script>

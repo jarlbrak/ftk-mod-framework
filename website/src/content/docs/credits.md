@@ -8,13 +8,17 @@ Paladin artwork by JarlBrak uses original generated concepts, Hyper3D Rodin mode
 
 The author confirmed the Creator plan was active during model generation on September 25, 2026. This is author confirmation, not provider verification. Generation provenance is not an independent guarantee of third-party rights clearance.
 
-Library cards consistently use original promotional banners, not game captures. Paladin's banner is the illustration first published with 1.2.0, reused as class artwork for its current listing; it is not a literal preview of every 1.3.0 equipment model. Thief uses its published promotional artwork. Possum uses a website edit of its published banner: the title typography and centered divider match the library, and the embedded version badge has been removed. The package artwork remains unchanged. Current native Paladin captures remain in the gallery, where inventory comparisons may show previously equipped items separately.
+Library cards consistently use original promotional banners, not game captures. Paladin's banner is the illustration first published with 1.2.0, reused as class artwork for its current listing; it is not a literal preview of every 1.3.0 equipment model. Thief uses its published promotional artwork. Possum uses a website edit of its published banner: the title typography and centered divider match the library, and the embedded version badge has been removed. The package artwork remains unchanged. Current native Paladin captures are embedded in the Paladin guide, where inventory comparisons may show previously equipped items separately.
 
 ## Native game captures
 
-The gallery reuses the Paladin overhaul campaign's verified macOS captures. Original source hashes and capture scope are retained in the [release evidence record](https://github.com/jarlbrak/ftk-mod-framework/tree/master/docs/evidence/paladin-1.3.0). The website stores only compressed display derivatives and a curated source-hash manifest, not internal validation logs.
+The Paladin page reuses the Paladin overhaul campaign's verified macOS captures. Original source hashes and capture scope are retained in the [release evidence record](https://github.com/jarlbrak/ftk-mod-framework/tree/master/docs/evidence/paladin-1.3.0). The website stores only compressed display derivatives and a curated source-hash manifest, not internal validation logs.
 
 Native bodies, faces, hair, backpacks, UI, and shared weapon glyphs remain game-owned. Screenshots document the mod within the game; they do not make those underlying assets original framework artwork. No game assemblies or extracted native models or textures are distributed by this website.
+
+## Item artwork
+
+All 96 equipment cards use original artwork from the hash-verified Paladin 1.3.0 and Thief 1.0.0 packages. Published icons are retained where available. The fourteen Paladin hammers use website studio stills rendered from their published models and atlases. These are labeled studio artwork, not game captures. Source and derivative hashes are retained with the site. No native item art is extracted or republished.
 
 ## Studio films
 
