@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><RollForward>Major</RollForward></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/PlayerRaceSelection.cs" Link="PlayerRaceSelection.cs" />
+    <Compile Include="../../Core/PlayerRaceRegistry.cs" Link="PlayerRaceRegistry.cs" />
+    <Compile Include="../../Core/PlayerRacePatches.cs" Link="PlayerRacePatches.cs" />
+    <Compile Include="../../Core/IdAllocator.cs" Link="IdAllocator.cs" />
+    <PackageReference Include="HarmonyX" Version="2.7.0" />
+  </ItemGroup>
+</Project>

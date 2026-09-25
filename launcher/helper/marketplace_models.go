@@ -163,6 +163,35 @@ type marketPlayerModel struct {
 	Backpack []marketModelRenderer `json:"backpack,omitempty"`
 }
 
+type marketRaceBinding struct {
+	Class   string                `json:"class"`
+	Skinset string                `json:"skinset"`
+	Body    []marketModelRenderer `json:"body"`
+	Apparel []marketModelRenderer `json:"apparel,omitempty"`
+}
+
+func marketRaceBindings(bindings []marketRaceBinding) error {
+	if len(bindings) == 0 || len(bindings) > 64 {
+		return errors.New("invalid race binding count")
+	}
+	seen := map[string]bool{}
+	for _, binding := range bindings {
+		if strings.TrimSpace(binding.Class) == "" || strings.TrimSpace(binding.Skinset) == "" || seen[binding.Class] {
+			return errors.New("invalid or duplicate race class binding")
+		}
+		seen[binding.Class] = true
+		if err := marketModelRenderers(binding.Body, false); err != nil {
+			return err
+		}
+		if binding.Apparel != nil {
+			if err := marketModelRenderers(binding.Apparel, true); err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
 func marketModelRenderers(renderers []marketModelRenderer, apparel bool) error {
 	if len(renderers) == 0 || len(renderers) > 32 {
 		return errors.New("invalid model renderer count")
@@ -193,6 +222,7 @@ func marketModelReferences(data map[string][]byte) error {
 				OffHandModels []marketModelRenderer `json:"offHandModels"`
 				DisplayModels []marketModelRenderer `json:"displayModels"`
 				PlayerModels  []marketPlayerModel   `json:"playerModels"`
+				RaceBindings  []marketRaceBinding   `json:"raceBindings"`
 				Icon          string                `json:"icon"`
 				ApparelModels *marketApparelModel   `json:"apparelModels"`
 			} `json:"entries"`
@@ -216,6 +246,10 @@ func marketModelReferences(data map[string][]byte) error {
 				refs = append(refs, p.Body...)
 				refs = append(refs, p.Apparel...)
 				refs = append(refs, p.Backpack...)
+			}
+			for _, binding := range e.RaceBindings {
+				refs = append(refs, binding.Body...)
+				refs = append(refs, binding.Apparel...)
 			}
 			for _, r := range refs {
 				if _, ok := data[r.Model]; !ok {

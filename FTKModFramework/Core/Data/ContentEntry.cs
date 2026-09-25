@@ -64,6 +64,7 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("offHandModels")] public ModelRendererEntry[] OffHandModels;
         [JsonProperty("displayModels")] public ModelRendererEntry[] DisplayModels;
         [JsonProperty("playerModels")] public PlayerModelEntry[] PlayerModels;
+        [JsonProperty("raceBindings")] public RaceBindingEntry[] RaceBindings;
 #pragma warning restore CS0649
     }
     // Populated by JSON reflection.
@@ -101,5 +102,12 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("body")] public ModelRendererEntry[] Body;
         [JsonProperty("apparel")] public ModelRendererEntry[] Apparel;
         [JsonProperty("backpack")] public ModelRendererEntry[] Backpack;
+    }
+    internal sealed class RaceBindingEntry
+    {
+        [JsonProperty("class")] public string Class;
+        [JsonProperty("skinset")] public string Skinset;
+        [JsonProperty("body")] public ModelRendererEntry[] Body;
+        [JsonProperty("apparel")] public ModelRendererEntry[] Apparel;
     }
 }

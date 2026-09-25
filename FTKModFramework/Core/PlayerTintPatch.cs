@@ -48,7 +48,7 @@ namespace FTKModFramework.Core
                     if (materials == null) throw new InvalidOperationException("Tint material provenance changed");
                     foreach (Material material in materials)
                     {
-                        if (owner != null && ExplicitMaterialOptions.HasAuthoredMainPalette(material)) continue;
+                        if (owner != null && ExplicitMaterialOptions.HasAuthoredPalette(material)) continue;
                         string name = material.name;
                         if (name.Contains("_main")) material.SetColor("_Color", main);
                         else if (name.Contains("_skin")) material.SetColor("_Color", skin);

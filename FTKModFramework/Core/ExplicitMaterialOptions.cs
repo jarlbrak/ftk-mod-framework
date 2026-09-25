@@ -6,6 +6,19 @@ namespace FTKModFramework.Core
     internal static class ExplicitMaterialOptions
     {
         private const string AuthoredMainPrefix = "ftkmf_authored_main_palette:";
+        private const string AuthoredPalettePrefix = "ftkmf_authored_palette:";
+        internal static bool HasAuthoredPalette(Material material)
+        {
+            return HasAuthoredMainPalette(material) || (material.name != null &&
+                material.name.StartsWith(AuthoredPalettePrefix, System.StringComparison.Ordinal));
+        }
+        internal static void PreservePalette(Material material)
+        {
+            // Race callers opt in only for required body renderers with an authored texture.
+            // The marker survives avatar cloning and later owned-material privatization.
+            if (!HasAuthoredPalette(material)) material.name = AuthoredPalettePrefix + material.name;
+            if (material.HasProperty("_Color")) material.SetColor("_Color", new Color(1f, 1f, 1f, 1f));
+        }
         internal static bool HasAuthoredMainPalette(Material material)
         {
             return material.name != null && material.name.StartsWith(AuthoredMainPrefix, System.StringComparison.Ordinal);

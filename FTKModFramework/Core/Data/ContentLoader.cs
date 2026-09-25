@@ -309,7 +309,8 @@ namespace FTKModFramework.Core.Data
 
             if (IsBlank(entry.Kind)) { report.Error(ctx + ": entry missing 'kind'."); return null; }
             if (IsBlank(entry.Id)) { report.Error(ctx + ": entry missing 'id'."); return null; }
-            if (IsBlank(entry.Template)) { report.Error(ctx + ": entry '" + entry.Id + "' missing 'template'."); return null; }
+            if (!string.Equals(entry.Kind, "race", StringComparison.OrdinalIgnoreCase) && IsBlank(entry.Template))
+            { report.Error(ctx + ": entry '" + entry.Id + "' missing 'template'."); return null; }
 
             string idKey = pe.ModGuid + "/" + entry.Id;
             if (!seenIds.Add(idKey))
@@ -325,6 +326,15 @@ namespace FTKModFramework.Core.Data
                 case "item": return RegisterItem(pe, entryCtx, report);
                 case "proficiency": return RegisterProficiency(pe, entryCtx, report);
                 case "class": return RegisterClass(pe, entryCtx, report);
+                case "race":
+                    if (IsBlank(entry.DisplayName) || entry.RaceBindings == null || entry.RaceBindings.Length == 0 ||
+                        (entry.Fields != null && entry.Fields.Count != 0))
+                    {
+                        report.Error(entryCtx + ": a race requires displayName and raceBindings, with no row field overrides.");
+                        return null;
+                    }
+                    try { return Cached.Make(pe, "race", Content.AddRace(pe.ModGuid, entry.Id, entry.DisplayName), null); }
+                    catch (Exception e) { report.Error(entryCtx + ": race registration failed: " + e.Message); return null; }
                 case "enemy": return RegisterEnemy(pe, entryCtx, report);
                 case "encounter": return RegisterEncounter(pe, entryCtx, report);
                 default:
@@ -481,6 +491,7 @@ namespace FTKModFramework.Core.Data
         /// </summary>
         private static void ResolvePhase2(Cached c, ValidationReport report)
         {
+            if (c.Kind == "race") return;
             string ctx = c.Context;
 
             int refs = OverrideEngine.ApplyResolved(c.Row, c.ReferenceFields, ctx, report);
@@ -496,6 +507,34 @@ namespace FTKModFramework.Core.Data
         {
             try
             {
+                if (c.Entry.RaceBindings != null)
+                {
+                    if (c.Kind != "race") throw new ArgumentException("raceBindings requires a race");
+                    foreach (RaceBindingEntry binding in c.Entry.RaceBindings)
+                    {
+                        FTK_skinset.ID skinset;
+                        if (binding == null || string.IsNullOrEmpty(binding.Class) || binding.Body == null ||
+                            !TryParseEnum(binding.Skinset, out skinset)) throw new ArgumentException("invalid race class, skinset or body");
+                        FTK_playerGameStart row = Content.Db<FTK_playerGameStartDB>().GetEntryByStringID(binding.Class);
+                        if (row == null) throw new ArgumentException("unknown race class '" + binding.Class + "'");
+                        PlayerRendererMesh[] body = new PlayerRendererMesh[binding.Body.Length];
+                        for (int i = 0; i < body.Length; i++)
+                        {
+                            ModelRendererEntry entry = binding.Body[i];
+                            if (entry == null) throw new ArgumentException("null race body assignment");
+                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                        }
+                        PlayerApparelMesh[] apparel = new PlayerApparelMesh[binding.Apparel == null ? 0 : binding.Apparel.Length];
+                        for (int i = 0; i < apparel.Length; i++)
+                        {
+                            ModelRendererEntry entry = binding.Apparel[i];
+                            if (entry == null) throw new ArgumentException("null race apparel assignment");
+                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                        }
+                        if (!Content.SetRaceClassBodyMeshesFromGlb((int)c.Row, row, skinset, body, apparel))
+                            throw new ArgumentException("race binding registration rejected for '" + binding.Class + "'");
+                    }
+                }
                 if (c.Entry.Guardian && (c.Kind != "class" || !Content.AddGuardian((FTK_playerGameStart)c.Row)))
                     throw new ArgumentException("guardian requires a registered custom class");
                 if (c.Entry.Opportunist && (c.Kind != "class" || !Content.AddOpportunist((FTK_playerGameStart)c.Row)))
@@ -632,7 +671,11 @@ namespace FTKModFramework.Core.Data
                     }
                 }
             }
-            catch (Exception e) { report.Error(c.Context + ": capability registration failed: " + e.Message); }
+            catch (Exception e)
+            {
+                if (c.Kind == "race") PlayerRaceRegistry.Disable((int)c.Row);
+                report.Error(c.Context + ": capability registration failed: " + e.Message);
+            }
         }
 
         private static string Asset(Cached c, string relativePath,
