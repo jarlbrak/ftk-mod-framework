@@ -1,13 +1,17 @@
-# Paladin 1.1.0
+# Paladin 1.2.0 source candidate
 
 Paladin is the first published marketplace mod and the reference package for
-authoring through FTK Mod Framework. Version 1.1.0 requires
+authoring through FTK Mod Framework. This 1.2.0 source candidate requires
 framework 1.0.3. It adds a Vitality-based protector class, Guard, Cleansing
 March, 51 equipment items, original 3D models and icons. Six equipment
 families cover early gear through horizontal endgame choices; three Artifacts
 add legendary hammers and a shield. The package author is JarlBrak.
 
-Version 1.1.0 adds Cleansing March: Paladins cannot gain Poison or Curse while
+The 1.1.0 package is published in the in-game Mods catalog. This 1.2.0 source
+candidate tunes base Vitality to 80 and the Highward, Mercy, Censure and
+Verdict great hammers to 32, 34, 34 and 37 base damage. The
+[balance review](../../../docs/paladin/BALANCE-1.2.0.md) explains the comparisons
+and remaining playtests. It retains Cleansing March: Paladins cannot gain Poison or Curse while
 exploring, including from poison, curse and chaos tiles. Existing conditions
 remain, and fire damage or chaos resource and item losses still apply. Combat
 Poison and Curse still apply normally. The ability works with any equipment.
@@ -52,8 +56,7 @@ Run `python3 marketplace/packages/validate_paladin.py` from the repository
 root for structural checks. The [package builder](../build_paladin.py) creates a
 content-addressed archive and descriptor; its local validation does not
 publish them or prove in-game behavior. Corrections to the published 1.0.1
-archive require a new mod version and a new reviewed artifact. The
-[isolated live receipt](../../../docs/paladin/cleansing-march-live-2026-09-24.json)
-records Poison and Curse tile entry on macOS. Natural hazard spawning, ordinary
-Curse walking, combat ailment application, save/resume, online co-op and
-Windows/Linux gameplay remain unverified for 1.1.0.
+archive require a new mod version and a new reviewed artifact. The 1.2.0
+balance candidate has not had matched live combat trials and is not in the
+production catalog. Earlier Cleansing March evidence is recorded in the
+[1.1.0 trial](../../../docs/paladin/cleansing-march-live-2026-09-24.json).

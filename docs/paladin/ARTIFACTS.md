@@ -88,7 +88,7 @@ single-target hammer attack.
   a dodge, or simply designating an ally.
 
 Candidate base values: 42 physical damage, 5 Vitality checks, two hands. Current
-Verdict Great Hammer is 39/4; Mercy and Censure great hammers are 36/4 with their
+Verdict Great Hammer is 37/4; Mercy and Censure great hammers are 34/4 with their
 own benefits. Kingsfall demands more checks and gives up a shield. Its burst
 requires first spending an action on Guard and having that protection matter.
 Native testing has demonstrated one charged attack with partial slot success.
