@@ -39,7 +39,9 @@ output hashes for studio films. Native capture scope is in the source evidence R
 from the credits page. The site intentionally does not publish raw verification receipts.
 
 `node scripts/prepare-media.mjs` verifies the committed native capture hashes, downloads approved
-release previews, and regenerates WebP derivatives. Keep the artwork notice in `public/media/`.
+release banners selected in `src/data/library-art.json`, and regenerates WebP derivatives.
+Library artwork is presentation metadata, separate from the current package screenshot. Cards
+use complete promotional banners and version, category, and framework chips. Keep the artwork notice in `public/media/`.
 No image-generation transformations are applied to captures. Hero and cards use CSS cropping;
 gallery images preserve their complete source composition.
 

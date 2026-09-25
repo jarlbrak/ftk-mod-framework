@@ -9,6 +9,9 @@ Read the root `AGENTS.md` first.
   generator or its source inputs rather than hand-editing derived stats.
 - Keep published versions distinct from playtests and unreleased previews. A declaration of
   platform support is not live validation. Match player claims to published metadata and evidence.
+- Library cards use promotional banners selected in `src/data/library-art.json`, not screenshots.
+  Use a version number or "In Development" for the primary chip, with separate framework and
+  category chips. Keep playtest limitations in the description and detail pages.
 - Keep compressed media source/output hashes, accurate capture or studio labels, and the artwork
   notice. Do not imply a studio rotation proves native animation or a review inventory proves drops.
 - Run `npm ci`, `npm run build`, the preview server, and `npm test` for site changes. Inspect desktop
