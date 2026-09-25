@@ -32,7 +32,27 @@ recorded separately from the game-free helper lifecycle. One native Mono
 startup crash in the framework reporting worker preceded a successful unchanged
 retry. No cause or Paladin-specific regression was established.
 
-The production descriptor is promoted only after these public asset checks.
-Public in-game update and restart verification follows the catalog merge and
-will be recorded here. Matched campaign balance, broad endgame gear trials,
-online co-op and Windows/Linux gameplay remain unverified.
+The production descriptor merged in [PR #201](https://github.com/jarlbrak/ftk-mod-framework/pull/201)
+after all seven CI jobs passed. Public in-game verification on native macOS then
+passed using the published framework 1.0.3 and its verified launcher helper:
+
+1. Installed public Paladin 1.1.0 through Mods and restarted to activate it.
+2. Opened Browse after the catalog merge. The public 1.2.0 listing, promotional
+   banner, compatibility notes and update action appeared.
+3. Selected Update to 1.2.0 and Save for next launch. The downloaded cache archive
+   matched the release SHA-256 above, and 1.2.0 was prepared as the pending generation.
+4. Selected Quit and apply on next launch. The game exited. A fresh process
+   activated the pending generation and cleared pending state.
+5. Confirmed Installed showed version 1.2.0 and On for this adventure. All 177
+   installed files matched the release archive byte-for-byte. Registration reported
+   54/54 entries, zero content errors and zero content warnings.
+
+The native audio focus exception prompted the framework report view on startup;
+it was dismissed without submitting a report. This public upgrade trial did not
+repeat combat or save resume: those were already exercised on the byte-identical
+candidate. Existing saves were not migrated. Disable, removal and reinstall were
+covered by game-free helper lifecycle checks, not repeated in this native trial.
+The owned game process was stopped after verification.
+
+Matched campaign balance, broad endgame gear trials, online co-op and
+Windows/Linux gameplay remain unverified.
