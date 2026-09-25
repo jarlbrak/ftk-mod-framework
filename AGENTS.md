@@ -96,6 +96,11 @@ uses `.agents/skills/ingame-smoke/SKILL.md` and requires an explicitly configure
 - Keep one coherent change per commit. Do not mix a refactor with the behavior change it enables.
 - Pull request bodies state the verification actually run and name every gate still outstanding.
   `CONTRIBUTING.md` holds the full checklist and the pull-request template walks through it.
+- For each issue fully resolved, put `Fixes #<number>` or `Closes #<number>` in the PR body.
+  For an authorized direct commit without a PR, put it in the commit body. A bare issue
+  reference does not auto-close it; closure occurs when the fix reaches the default branch.
+  Use `Refs #<number>` for partial work or issues with unmet acceptance gates. After merging
+  or pushing to the default branch, verify that every intended issue actually closed.
 - Never add generated-by boilerplate to a pull request body or an issue. A `Co-Authored-By:`
   trailer on a commit follows the existing convention in this repository's history.
 - Never commit a game assembly, decompiled source, a save, a log, a credential, or a local overlay

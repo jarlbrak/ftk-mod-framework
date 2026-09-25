@@ -60,6 +60,10 @@ Every top-level tree that carries work an agent may edit has its own `AGENTS.md`
 
 Before opening a pull request:
 
+- Include `Fixes #<number>` or `Closes #<number>` in the PR body for each fully resolved issue.
+  Use `Refs #<number>` for partial work or unmet acceptance gates. A bare issue reference
+  does not auto-close it. For an authorized direct commit without a PR, use the closing
+  keyword in the commit body instead. After the fix reaches the default branch, verify closure.
 - The framework builds in Release.
 - Required game-free checks pass. State any outstanding live-game gate in the PR.
 - No game DLLs are staged.
