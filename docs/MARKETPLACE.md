@@ -1,7 +1,7 @@
 # In-game Mods marketplace
 
 Open **Mods** on the title screen to discover and manage curated community
-content. The catalog contains [Paladin 1.1.0](../marketplace/packages/paladin/README.md)
+content. The catalog contains [Paladin 1.2.0](../marketplace/packages/paladin/README.md)
 for its declared game builds and desktop platforms. macOS gameplay has been tested;
 Windows/Linux gameplay remains unverified. Select a mod on the left to see its banner,
 description, requirements and version details on the right. **Installed** also
