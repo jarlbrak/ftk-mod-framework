@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "author": "JarlBrak",
+      "category": "classes",
+      "changelog": "Paladin 1.3.0 overhauls equipment and action artwork, adds Censure to every Paladin hammer and Smite to equipped Paladin trinkets, and includes the starting Tin Oath Token. Retains Cleansing March and the 1.2.0 balance values: Vitality 80 and Highward/Mercy/Censure/Verdict great-hammer damage 32/34/34/37. Requires framework 1.2.0.",
+      "classification": "gameplay",
+      "compressedSize": 72200207,
+      "contentChanges": [
+        "Paladin class retains Guard and Cleansing March, which prevents new Poison and Curse while exploring.",
+        "All 14 Paladin hammers grant Censure, randomly lowering Armor or Resistance on successful debuff application.",
+        "All six Paladin trinkets grant Smite while equipped; the starting Tin Oath Token is equipped.",
+        "Smite deals modest magic damage and receives a sixfold bonus while its target has an active Censure Resistance reduction.",
+        "Replaces original equipment art across six families and three artifacts, with separate action symbols and native normal-Attack glyphs."
+      ],
+      "dependencies": [],
+      "description": "Protect allies with Guard and Cleansing March, weaken enemies with Paladin hammers, and cast Smite through Paladin trinkets. Includes original equipment and action artwork.",
+      "expandedSize": 99140371,
+      "fileCount": 236,
+      "frameworkRange": ">=1.2.0 <2.0.0",
+      "frameworkVersion": "1.2.0",
+      "gameFingerprints": [
+        "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      ],
+      "license": "MIT (code); see ASSET-LICENSE.md for generated artwork",
+      "modGuid": "com.ftkmf.paladin",
+      "name": "Paladin",
+      "packageId": "ftkmf.paladin",
+      "packageUrl": "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v1.3.0/paladin-1.3.0-8ef90c2cc870.zip",
+      "platforms": [
+        "macos"
+      ],
+      "requirements": [
+        "Requires FTK Mod Framework 1.2.0 or a compatible later 1.x release.",
+        "Validated on the listed macOS game fingerprint only; Windows, Linux and online co-op remain unverified.",
+        "Complete skinset fit, native breakage, all display views and long-campaign balance are not yet comprehensively validated.",
+        "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md."
+      ],
+      "screenshots": [
+        "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v1.3.0/paladin-censure-banner.png"
+      ],
+      "sha256": "8ef90c2cc8701bbba29ee237e3b0d4a27a01eff3cdd82b15ef7a14c13f1782f7",
+      "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
+      "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues/138",
+      "version": "1.3.0"
+    },
+    {
+      "author": "JarlBrak",
+      "category": "classes",
+      "changelog": "1.0.0 playtest candidate. Ordinary Sneak Attack bonus tuned to 20%; Slip Away reports its spent state. Promotional banner is an illustration, not a gameplay screenshot.",
+      "classification": "gameplay",
+      "compressedSize": 3594406,
+      "contentChanges": [
+        "Play a fast Thief with Speed-based two-handed paired daggers and bows.",
+        "Exploit openings and preparation with Sneak Attack; spend a turn on Slip Away.",
+        "Discover 45 equipment pieces across seven tiers, including Skeleton Key, Candle's End, and Unlost Road."
+      ],
+      "dependencies": [],
+      "description": "A Speed-based paired-dagger specialist with tactical openings, bows, seven equipment tiers, and three artifact weapons. Version 1.0.0 playtest.",
+      "expandedSize": 10245623,
+      "fileCount": 209,
+      "frameworkRange": ">=1.0.4 <2.0.0",
+      "frameworkVersion": "1.0.4",
+      "gameFingerprints": [
+        "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      ],
+      "license": "MIT",
+      "modGuid": "com.ftkmf.thief",
+      "name": "Thief",
+      "packageId": "ftkmf.thief",
+      "packageUrl": "https://github.com/jarlbrak/ftk-mod-framework/releases/download/thief-v1.0.0/thief-1.0.0-adadb168f384.zip",
+      "platforms": [
+        "macos"
+      ],
+      "requirements": [
+        "Requires FTK Mod Framework 1.0.4 or later within 1.x.",
+        "Single-player playtest. Multiplayer, save/resume, and hot-reload lifecycle remain unverified.",
+        "Balance, higher-tier and female outfit fit, and final mouse usability remain under review."
+      ],
+      "screenshots": [
+        "https://github.com/jarlbrak/ftk-mod-framework/releases/download/thief-v1.0.0/thief-playtest-banner.png"
+      ],
+      "sha256": "adadb168f38466837b8ef573385159981de8435724dd3a95137b64063c57c82e",
+      "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
+      "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues",
+      "version": "1.0.0"
+    },
+    {
+      "author": "JarlBrak",
+      "category": "races",
+      "changelog": "1.0.0: Original cosmetic Possum race, faceted model and texture, smaller palms and fingers, and fourteen native class bindings.",
+      "classification": "gameplay",
+      "compressedSize": 3911040,
+      "contentChanges": [
+        "Choose Possum alongside the native character appearances.",
+        "An original faceted possum model with a pointed muzzle, rounded ears and a long pink tail.",
+        "Keep your class abilities, stats and native equipment.",
+        "The tail follows the body; it has no independent animation."
+      ],
+      "dependencies": [],
+      "description": "An original possum appearance for your adventurer, with faceted fur, rounded ears and a long pink tail. Keeps your class abilities, stats and native equipment.",
+      "expandedSize": 6195596,
+      "fileCount": 5,
+      "frameworkRange": ">=1.1.0 <2.0.0",
+      "frameworkVersion": "1.1.0",
+      "gameFingerprints": [
+        "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      ],
+      "license": "MIT",
+      "modGuid": "com.ftkmf.possum",
+      "name": "Possum",
+      "packageId": "ftkmf.possum",
+      "packageUrl": "https://github.com/jarlbrak/ftk-mod-framework/releases/download/possum-v1.0.0/possum-1.0.0-c10a86cc0eeb.zip",
+      "platforms": [
+        "macos"
+      ],
+      "requirements": [
+        "Requires FTK Mod Framework 1.1.0 or later within major version 1. Restart the game after installation or removal.",
+        "Final smaller-hand model verified in Hunter character selection, overworld and an ordinary starting-bow attack on macOS.",
+        "Other class layouts, armor changes, other weapons, hit and death animations, save/reload, and online co-op are unverified."
+      ],
+      "screenshots": [
+        "https://github.com/jarlbrak/ftk-mod-framework/releases/download/possum-v1.0.0/possum-banner.png"
+      ],
+      "sha256": "c10a86cc0eeb80cee6ca6b9aeccaebf343469a61cb4e46562c925c59fbfc2b40",
+      "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
+      "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues",
+      "version": "1.0.0"
+    }
+  ]
+}

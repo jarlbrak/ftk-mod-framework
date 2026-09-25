@@ -1,0 +1,59 @@
+name: Public website
+on:
+  push:
+    branches: [master]
+    paths: ['website/**', '.github/workflows/website.yml']
+  pull_request:
+    paths: ['website/**', '.github/workflows/website.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Check rendered pages and interactions
+        run: |
+          npm run preview -- --host 127.0.0.1 &
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4321/ftk-mod-framework/ > /dev/null; then break; fi
+            sleep 1
+          done
+          npm test
+      - name: Enforce public artifact budget
+        run: |
+          test "$(du -sk dist | cut -f1)" -lt 51200
+          test -z "$(find dist -type f -size +10M -print)"
+          if grep -rIlE '/Users/|/home/runner/|localhost:|127\.0\.0\.1:' dist --include='*.html' --include='*.json'; then exit 1; fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website/dist
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

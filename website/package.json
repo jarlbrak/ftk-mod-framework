@@ -1,0 +1,19 @@
+{
+  "name": "ftk-public-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "node scripts/check-site.mjs"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.42.4",
+    "astro": "7.3.5",
+    "sharp": "0.35.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

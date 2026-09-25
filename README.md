@@ -10,6 +10,8 @@
 
 **FTK Mod Framework 1.0.3** brings community mods to the original [For The King](https://store.steampowered.com/app/527230/) (2018). Its launcher installs the framework into your Steam copy, and the game's **Mods** menu lets you discover and manage content. The first marketplace mod is [Paladin](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.2.0), a protector class with Cleansing March, original equipment and 3D art.
 
+Explore the [public mod library and player guides](https://jarlbrak.github.io/ftk-mod-framework/) for current published mods, equipment tables, screenshots, and installation help.
+
 ## Install and play
 
 1. Download the launcher archive for your platform from the [framework 1.0.3 release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.0.3) and extract it to a permanent folder.

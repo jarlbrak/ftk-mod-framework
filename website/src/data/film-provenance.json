@@ -1,0 +1,89 @@
+{
+  "date": "2026-09-25",
+  "films": [
+    {
+      "name": "Kingsfall",
+      "packageVersion": "1.3.0",
+      "packageSha256": "8ef90c2cc8701bbba29ee237e3b0d4a27a01eff3cdd82b15ef7a14c13f1782f7",
+      "kind": "studio turntable, not native gameplay",
+      "sources": [
+        {
+          "archivePath": "assets/paladin-hammer-2h-kingsfall.glb",
+          "sha256": "dc81880edc35ccd822af0b094f85dd4c6dd6c172c96dd665e5dd74d6eba54102"
+        },
+        {
+          "archivePath": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png",
+          "sha256": "c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec"
+        }
+      ],
+      "renderer": "scripts/render-turntable.py",
+      "frames": 96,
+      "fps": 24,
+      "durationSeconds": 4,
+      "resolution": [
+        800,
+        800
+      ],
+      "encoders": "H.264 CRF25, VP9 CRF36; yuv420p; silent; poster frame 0 WebP quality85",
+      "outputs": [
+        {
+          "file": "media/kingsfall-poster.webp",
+          "sha256": "cbdcaa3da5c23db22b43f1b45c643843ada149c89eecd52e24504bd18e946d2f",
+          "bytes": 8380
+        },
+        {
+          "file": "media/kingsfall.mp4",
+          "sha256": "7728652ea7d2e6347183b8028db94007db5ac0e2063d1aa19b50609e6de4a8cd",
+          "bytes": 153605
+        },
+        {
+          "file": "media/kingsfall.webm",
+          "sha256": "0c7da0dca288bbca9bcfde2dde41834fc0e6fc236b9a148df9177f88f592ce3d",
+          "bytes": 145156
+        }
+      ]
+    },
+    {
+      "name": "The Last Bastion",
+      "packageVersion": "1.3.0",
+      "packageSha256": "8ef90c2cc8701bbba29ee237e3b0d4a27a01eff3cdd82b15ef7a14c13f1782f7",
+      "kind": "studio turntable, not native gameplay",
+      "sources": [
+        {
+          "archivePath": "assets/paladin-shield-last-bastion.glb",
+          "sha256": "1814556d5491287ab4d327ae502f13f98caa58c788f241e91509d74a06ab31a0"
+        },
+        {
+          "archivePath": "assets/atlas-21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31.png",
+          "sha256": "21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31"
+        }
+      ],
+      "renderer": "scripts/render-turntable.py",
+      "frames": 96,
+      "fps": 24,
+      "durationSeconds": 4,
+      "resolution": [
+        800,
+        800
+      ],
+      "encoders": "H.264 CRF25, VP9 CRF36; yuv420p; silent; poster frame 0 WebP quality85",
+      "outputs": [
+        {
+          "file": "media/bastion-poster.webp",
+          "sha256": "1ec92f150ab5baaacd2d1bbd6428fb59b59013943a0e15a94453f5c9497c9ac3",
+          "bytes": 10202
+        },
+        {
+          "file": "media/bastion.mp4",
+          "sha256": "8b15593ae8fe7a643c0796c551d16fe61a14be2beb76482ea9dce6cc488b9922",
+          "bytes": 165607
+        },
+        {
+          "file": "media/bastion.webm",
+          "sha256": "b449f2b1f790ed98feac2040873edc09848b51d65d9d313c91f0259f2d206871",
+          "bytes": 146828
+        }
+      ]
+    }
+  ]
+}

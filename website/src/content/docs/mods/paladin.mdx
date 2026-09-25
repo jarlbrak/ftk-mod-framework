@@ -1,0 +1,73 @@
+---
+title: Paladin
+description: Guard your allies, master Censure and Smite, and build your Paladin through six equipment families.
+---
+import PackageDetails from '../../../components/PackageDetails.astro';
+
+<PackageDetails name="Paladin" />
+
+## The oath is to your party
+
+Paladin is a Vitality-based protector. Choose between a one-handed hammer and shield for support, or a great hammer for a heavier strike. The class supplies **Guard** and **Cleansing March**; your hammer supplies **Censure**, and an equipped Paladin trinket supplies **Smite**. Swapping equipment can therefore change your available actions.
+
+### Starting out
+
+Your starting kit is the Novice Hammer, Novice Aegis, Novice Plate, Novice Sabatons, Novice Helm, and equipped Tin Oath Token. The hammer has 10 base damage and three Vitality rolls. The token makes Smite available immediately.
+
+| Strength | Vitality | Intelligence | Awareness | Talent | Speed | Focus | Gold |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 70 | 80 | 40 | 60 | 50 | 60 | 3 | 3 |
+
+## Class features
+
+**Guard** targets another living ally and halves incoming direct attack damage until your next turn or incapacitation. Retained damage rounds upward; damage over time is excluded. An active Guard can prevent one lethal direct hit per Paladin per combat, leaving the ally at 1 HP, subject to the native death-prevention rules.
+
+Your ally remains designated after the protection expires. A focused attack that lands heals that living ally for 8% of their maximum HP, rounded down and capped by missing health, once per attack. Even a landed hit fully absorbed by defenses qualifies. Overlapping Guards do not multiply the damage reduction.
+
+**Cleansing March** prevents new Poison and Curse while exploring, including hazardous tiles. It does not remove existing conditions, block combat ailments, or prevent fire damage or other chaos-tile losses.
+
+## Censure: open a weakness
+
+Every one of the 14 Paladin hammers grants Censure while equipped. It attacks at **0.75× weapon damage**. A successful debuff application chooses Armor or Resistance with equal probability: **−4 with a one-handed hammer**, **−6 with a great hammer**. Normal weapon actions remain available.
+
+Armor reduction helps physical follow-up attacks. Resistance reduction opens the special Smite opportunity. You do not choose which defense falls. Successive casts may leave both effects active, but native expiry means your next turn may arrive too late to use them.
+
+## Smite: recognize the opening
+
+All six Paladin trinkets grant Smite while equipped, even if you change your weapon. Smite uses the current weapon's rolls and deals magic damage at **0.25× weapon damage**. While the target has an active negative Resistance effect from Censure, that multiplier rises sixfold to **1.5×** before native mitigation and other modifiers.
+
+Censure's Armor result and unrelated Resistance debuffs do not enable the bonus. Smite does not consume a mark and does not require perfect rolls to deal damage.
+
+## Combat examples
+
+**Protect first.** If a guarded ally would take 11 direct damage, the retained amount is 6. Guard can buy time for the party to recover; do not rely on it against damage over time. Later, a landed focused attack heals a designated ally with 50 maximum HP for 4 HP, unless they are missing less health.
+
+**Read the debuff before committing.** With the starting 10-damage hammer, ordinary Smite has a 2.5 pre-rounding damage basis. In the verified game capture the preview showed 3 after an Armor-only Censure. A later Resistance reduction enabled the 15-damage bonus preview; the actual native cast dealt 14 magic damage. That is one observed encounter, not a promise that every cast hits for 14.
+
+**Choose your next action.** If Censure reduced Armor, a physical attack may make better use of that opening. If it reduced Resistance and the effect is still active, inspect Smite's preview. Guard remains an option when keeping an ally alive matters more than immediate damage.
+
+## Build your equipment
+
+The early path is Novice → Oathkeeper → Highward. Mercy, Censure, and Verdict share the later acquisition band and offer different tradeoffs. Mercy emphasizes healing support and Vitality, Censure adds Speed and a guarded-attack ailment ward, and Verdict offers stronger Resistance and retaliation on its shield.
+
+**Shield support:** Novice, Oathkeeper, Highward, and Mercy shields heal the guarded ally when Guard is used, for the listed percentage of that ally's maximum HP (at least 1, capped by missing health). Mercy hammers add their listed percentage of ally maximum HP to focused-hit healing. Censure Aegis wards Poison, Stun, Daze, and Curse from guarded direct attacks. Verdict Aegis retaliates for 4 damage once per damaging direct enemy attack.
+
+Guardian perks require the Paladin's Guardian capability. Other classes may use ordinary equipment stats. Matching perks use their strongest equipped value rather than adding together; equipment never raises Guard's 50% reduction.
+
+[Browse every item and its declared stats](../paladin-equipment/) or [inspect the native gear gallery](../../gallery/).
+
+## Three legendary artifacts
+
+- **The Last Vigil:** a 30-damage, three-roll one-handed hammer. The first enemy hit actually reduced by each Guard restores one Focus to the ally, capped at their maximum. Keep the weapon equipped until the trigger; an ally already at full Focus still spends the opportunity.
+- **Kingsfall:** a 42-damage, five-roll great hammer. The first reduced hit readies Reckoning: +50% damage on the next eligible single-target blunt attack with that weapon. The charge is spent on the attempt, even a miss, and expires at the end of your next turn. Equipment swapping does not preserve it.
+- **The Last Bastion:** a shield with a −4 Speed modifier. Guard cleanses one existing eligible condition in priority order: Stun, Daze, an active removable Curse, then Poison. It does not remove permanent campaign curses or restore a lost turn.
+
+## Finding the gear
+
+Regular equipment is declared for drops, town markets, Night Markets, and dungeon merchants. The level bands in the armory describe acquisition eligibility, not a guaranteed spawn or an equip requirement. Novice is level 0; Oathkeeper 1–2; Highward 3; the three later families and artifacts 4–6.
+
+Artifacts can drop and appear through Night Markets and dungeon merchants, but are excluded from ordinary town markets. No Lore Store unlock is declared. Availability still follows the game's loot and merchant systems. Review inventories in screenshots were expanded for visual checks and do not demonstrate natural drop rates.
+
+## What to expect
+
+Published 1.3.0 includes the art overhaul and these abilities. Online co-op, Windows/Linux gameplay, existing-save migration, every skinset and animation, complete item-display and breakage coverage, and long-campaign balance remain unverified or incomplete. See [compatibility](../../compatibility/) before starting a run.
