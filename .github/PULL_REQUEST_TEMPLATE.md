@@ -12,7 +12,13 @@ or unmet acceptance gates. Closure occurs when the fix reaches the default branc
 - [ ] No game DLLs are staged (`Assembly-CSharp*.dll`, `UnityEngine*.dll`, `Newtonsoft.Json.dll`).
 - [ ] All custom content IDs go through `IdAllocator` (no hard-coded integer IDs).
 - [ ] Docs updated if behavior changed.
+- [ ] Website impact assessed, even for changes outside `website/`; required updates completed or tied explicitly to the pending release below.
 - [ ] No em dashes anywhere in the diff.
+
+## Website impact
+
+<!-- Name the website pages/data updated and checks run. For unreleased work, identify the
+exact release-time updates. If no website change is needed, explain why. Always fill this in. -->
 
 ## In-game evidence
 
