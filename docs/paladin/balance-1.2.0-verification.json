@@ -52,14 +52,15 @@
     }
   ],
   "liveGame": {
-    "status": "not-run",
-    "reason": "No task-owned deployment overlay configured in this checkout. Other tasks game trials were not modified.",
+    "status": "bounded-smoke-and-fresh-process-resume-passed",
+    "receipt": "balance-1.2.0-live.json",
     "remaining": [
-      "Matched class and gear comparisons across starter, middle and endgame encounters",
-      "Current-version starting stats, equip/remove deltas, ordinary acquisition and save/resume",
+      "Matched campaign balance",
+      "Endgame gear trials",
       "Online co-op",
       "Windows and Linux gameplay"
-    ]
+    ],
+    "restartFailure": "One native Mono crash before resume; unchanged retry passed. See live receipt."
   },
   "limits": "Offline package integrity and modeled tradeoffs do not prove campaign balance. Published catalog and prior release bytes remain unchanged."
 }

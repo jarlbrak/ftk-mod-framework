@@ -153,13 +153,22 @@ Game-free verification for this candidate:
   are recorded in the accompanying [verification receipt](balance-1.2.0-verification.json).
 - Documentation links and `git diff --check` are checked before handoff.
 
-No 1.2.0 live combat, save/resume or campaign comparison is claimed. This checkout
-has no configured task-owned game deployment overlay; other tasks' running
-trials and saved states are not reused. Existing observations, including the
-[1.1.0 Cleansing March trial](cleansing-march-live-2026-09-24.json), remain
-historical evidence for their exact bytes.
+The [exact candidate live receipt](balance-1.2.0-live.json) records native
+registration, Journeyman starting stats, a natural solo fight, loot and
+same-version fresh-process save/resume on the published framework DLL. One
+restart crashed in native Mono compilation on the reporting worker; an unchanged
+retry resumed successfully. No cause or Paladin regression is established.
 
-Before publication, compare Paladin, Blacksmith and Monk at equal hero level,
+Release scope is this conservative five-number tuning with native-data,
+calculation and bounded gameplay evidence. It is not certification of matched
+class parity. The broader campaign matrix below remains explicit follow-up;
+it is not represented as completed by the starter smoke. The existing desktop
+installation allowlist is preserved per the merged installation policy;
+Windows/Linux gameplay and the player-reported Windows fingerprint remain
+unverified locally. Earlier [1.1.0 Cleansing March evidence](cleansing-march-live-2026-09-24.json)
+remains historical evidence for those exact bytes.
+
+For broader balance acceptance, compare Paladin, Blacksmith and Monk at equal hero level,
 difficulty, gear budget and Focus budget. Use starter, item tier 3 and endgame
 gear against physical and magical enemies, a single dangerous foe and multiple
 foes. Record damage per action, own HP lost, ally HP prevented/restored, Focus
@@ -170,5 +179,5 @@ target-selection luck from a consistent advantage. Verify starting stats,
 equip/remove changes, ordinary acquisition and new-version save/resume.
 
 Online co-op and Windows/Linux gameplay remain separate unverified gates.
-Matched trials can justify further tuning; this source candidate does not
-establish final balance or authorize publication.
+Matched trials can justify further tuning; this tuning release does not
+establish final balance. Publication is separately authorized by the maintainer.
