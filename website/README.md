@@ -17,16 +17,16 @@ checks at the deployed site. Screenshots go to the system temporary directory, n
 
 ## Published data boundary
 
-`src/data/catalog.json` is a reviewed snapshot of the production catalog. `paladin.json` is a
-public-field projection of `content.json` from the downloaded, SHA-256 verified Paladin archive.
-Equipment tables render from this projection; they do not read a working development package.
+`src/data/catalog.json` is a reviewed snapshot of the production catalog. `paladin.json` and `thief.json` are
+public-field projection of `content.json` from the downloaded, SHA-256 verified Paladin and Thief archives.
+Equipment cards render from this projection; they do not read a working development package.
 Update both deliberately when a new public package is ready. Never copy private manifests,
 logs, game binaries, extracted game assets, or unreleased package claims into `public/`.
 
 Use `node scripts/sync-published.mjs` to refresh the public catalog and package projection. It
 requires immutable public download hashes to match and verifies manifest identity and minimum
-framework. Review authored guides when mechanics change; regenerated tables alone cannot update
-explanations. The current guide is explicitly scoped to Paladin 1.3.0.
+framework. Review authored guides when mechanics change; regenerated cards alone cannot update
+explanations. The guides are scoped to Paladin 1.3.0 and Thief 1.0.0.
 
 No workflow creates a GitHub release or changes the repository's latest release. Mod release
 publishing must continue to use `--latest=false`. Framework download links are explicitly pinned.
@@ -45,7 +45,7 @@ its local source hash is verified during media preparation. Published package as
 Library artwork is presentation metadata, separate from the current package screenshot. Cards
 use complete promotional banners and version, category, and framework chips. Keep the artwork notice in `public/media/`.
 No image-generation transformations are applied to captures. Hero and cards use CSS cropping;
-gallery images preserve their complete source composition.
+embedded screenshots preserve their complete source composition.
 
 Studio turntables render only original equipment from an extracted, hash-verified public archive.
 From the repository root, use Blender with the script arguments documented in
@@ -71,3 +71,22 @@ The artifact budget is 50 MiB, with a 10 MiB single-file cap, comfortably below 
 
 Before publishing, inspect desktop and mobile screenshots, validate external downloads, run
 `git diff --check`, and verify that the repository latest release still identifies the framework.
+
+## Integrated mod showcases
+
+Each mod has one page. Paladin includes its native screenshots and studio films beside the
+relevant guide sections. The old gallery and armory URLs lead to the complete Paladin guide.
+Equipment cards progressively enhance native details elements into keyboard-accessible dialogs;
+without JavaScript they expand inline. Search filters names and equipped ability explanations.
+The test suite opens all 96 item cards at desktop and mobile sizes and checks their images,
+focus restoration, search, and dismissal. The cards are original CSS inspired by native tooltips,
+not extracted game UI assets.
+
+`node scripts/prepare-items.mjs` downloads the hash-verified archives and compresses their original
+icons to WebP. Fourteen Paladin hammers have no standalone published icon. For each, render the
+original published model with `render-turntable.py -- PACKAGE_DIR OUTPUT_DIR ITEM_ID --still`,
+and retain frame `0000.png` as `artwork/items/ITEM_ID.png` before preparing media. This optional
+mode uses the same scene as the turntables, at 512 pixels with a transparent background.
+`src/data/item-art-provenance.json` records package, source, model, atlas, and derivative hashes.
+Only icon derivatives reach the deployed site; no raw models or atlases do. These stills show
+geometry in studio lighting and do not establish native fit or animation coverage.

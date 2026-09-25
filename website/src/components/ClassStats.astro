@@ -1,0 +1,11 @@
+---
+import paladin from '../data/paladin.json';
+import thief from '../data/thief.json';
+import {statName} from '../data/item-guide';
+const {mod}=Astro.props;
+const data=mod==='thief'?thief:paladin;
+const fields=data.entries.find(e=>e.kind==='class')!.fields;
+const stats=['strength','vitality','intelligence','awareness','talent','speed','focus','startinggold'];
+---
+<dl class="class-stats">{stats.map(key=><div><dt>{statName(key)}</dt><dd>{Math.round(Number(fields[key])*(key==='focus'||key==='startinggold'?1:100))}</dd></div>)}</dl>
+<style>.class-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:1.5rem 0}.class-stats div{margin:0;padding:.6rem .4rem;text-align:center;border:1px solid var(--sl-color-gray-5);border-radius:4px}.class-stats dt{font-size:.68rem}.class-stats dd{font:1.5rem Georgia,serif;margin:.3rem 0 0;color:var(--sl-color-accent-high)}@media(max-width:400px){.class-stats{grid-template-columns:repeat(2,1fr)}}</style>

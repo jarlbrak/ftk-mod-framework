@@ -2,14 +2,50 @@
 title: Thief
 description: A published playtest class with paired daggers, bows, and seven equipment tiers.
 ---
+import Equipment from '../../../components/Equipment.astro';
+import ClassStats from '../../../components/ClassStats.astro';
 import PackageDetails from '../../../components/PackageDetails.astro';
 
 <PackageDetails name="Thief" />
 
 ## Find an opening
 
-Thief is a fast, Speed-based specialist with two-handed paired daggers and bows. Sneak Attack rewards openings and preparation; Slip Away spends a turn and reports when it has been used. Version 1.0.0 tunes the ordinary Sneak Attack bonus to 20%.
+Thief is a fast specialist with Speed-based paired daggers and Awareness-based bows. Sneak Attack rewards openings and preparation; Slip Away spends a turn and reports when it has been used. Version 1.0.0 tunes the ordinary Sneak Attack bonus to 20%.
 
 The published playtest includes 45 equipment pieces across seven tiers, including Skeleton Key, Candle's End, and Unlost Road. Treat this as a chance to try the class and give feedback: balance, higher-tier and female outfit fit, and final mouse usability remain under review.
 
 The library banner is a promotional illustration, not a gameplay capture. Start a new single-player adventure for testing, and keep its exact mod set if you intend to return to the save. Save/resume and hot-reload lifecycle are not yet verified for this package.
+
+## Class features
+
+**Sneak Attack** rewards a perfect basic Strike or Shoot with a precision weapon. Against an Open enemy, or while Prepared, it adds 20% of current maximum weapon damage before native modifiers and armor. An enemy is Open before its first scheduled turn, or after a different ally damages it directly and before its next turn. Your own damage does not create your own opening. The qualifying attempt spends your once-per-turn opportunity, even with partial rolls; partial results get ordinary damage.
+
+**Prepared** lets your next eligible basic attack treat any target as Open. It is consumed on the attempt, never stacks, and expires at the end of your next turn, on weapon change, incapacity, or leaving combat.
+
+**Twin Feint** is the paired-dagger safety net: a basic Strike with exactly one failed check that deals HP damage grants Prepared, once per own turn. Two blades are one damage event. Bows do not receive this passive.
+
+**Slip Away** spends your full turn, once per combat, to grant Prepared and halve the next damaging direct enemy attack before your next turn. It costs no Focus and requires no roll. It does not stop damage over time or attached conditions, and its reduction does not multiply with Paladin Guard.
+
+The class also starts with Sneak, Ambush, and Trap Disarm skills.
+
+## Starting equipment and stats
+
+Street Twins use Speed checks. Bows use Awareness. You begin with Street Twins, Patched Jack, Street Neckerchief, Softstep Shoes, and Lockpicks; the bow and charm are equipment options to find later.
+
+<ClassStats mod="thief" />
+
+## Pick your weapon action
+
+**Feint** and **Draw Out** trade damage for preparation: a hit that causes HP loss grants Prepared to a Thief. **Pierce** and **Thread the Needle** trade damage for armor penetration on perfect rolls. Each weapon has its basic attack and one special action. Special actions cannot Sneak Attack. Open a weapon card below for its exact damage coefficient and conditions.
+
+**An opening worth taking.** If your current weapon damage is 20 and you land a perfect basic attack on an Open target, the damage basis becomes 24 before criticals, armor, and other native modifiers. A partial result does not get that bonus. This is an arithmetic example, not a captured combat result.
+
+**Prepare a different target.** A damaging Feint can prepare your next turn even if the next enemy is not Open. Slip Away can prepare without harming anyone, useful for Candle's End, which requires a full-health target. Neither choice supplies an extra attack.
+
+## Every piece, up close
+
+Street and Burglar lead into Guild and Masterwork equipment. Locksmith favors preparation, Nightblade favors sustained damage, and Wayfarer offers stronger penetration. Three artifacts add Focus recovery, an opening burst, or temporary Evasion. Their effects and exact acquisition bands are explained on the cards.
+
+<Equipment mod="thief" />
+
+Regular equipment can appear in drops, town markets, Night Markets, and dungeon merchants according to its listed loot band. Artifacts exclude town markets. A loot band is eligibility, not a guaranteed spawn or an equip requirement. No Lore Store unlock is declared.

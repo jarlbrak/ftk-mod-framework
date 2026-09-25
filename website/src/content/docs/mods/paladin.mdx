@@ -2,6 +2,9 @@
 title: Paladin
 description: Guard your allies, master Censure and Smite, and build your Paladin through six equipment families.
 ---
+import ClassStats from '../../../components/ClassStats.astro';
+import Equipment from '../../../components/Equipment.astro';
+import Gallery from '../../../components/Gallery.astro';
 import PackageDetails from '../../../components/PackageDetails.astro';
 
 <PackageDetails name="Paladin" />
@@ -14,9 +17,7 @@ Paladin is a Vitality-based protector. Choose between a one-handed hammer and sh
 
 Your starting kit is the Novice Hammer, Novice Aegis, Novice Plate, Novice Sabatons, Novice Helm, and equipped Tin Oath Token. The hammer has 10 base damage and three Vitality rolls. The token makes Smite available immediately.
 
-| Strength | Vitality | Intelligence | Awareness | Talent | Speed | Focus | Gold |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 70 | 80 | 40 | 60 | 50 | 60 | 3 | 3 |
+<ClassStats mod="paladin" />
 
 ## Class features
 
@@ -38,6 +39,8 @@ All six Paladin trinkets grant Smite while equipped, even if you change your wea
 
 Censure's Armor result and unrelated Resistance debuffs do not enable the bonus. Smite does not consume a mark and does not require perfect rolls to deal damage.
 
+<Gallery section="combat" />
+
 ## Combat examples
 
 **Protect first.** If a guarded ally would take 11 direct damage, the retained amount is 6. Guard can buy time for the party to recover; do not rely on it against damage over time. Later, a landed focused attack heals a designated ally with 50 maximum HP for 4 HP, unless they are missing less health.
@@ -54,13 +57,21 @@ The early path is Novice → Oathkeeper → Highward. Mercy, Censure, and Verdic
 
 Guardian perks require the Paladin's Guardian capability. Other classes may use ordinary equipment stats. Matching perks use their strongest equipped value rather than adding together; equipment never raises Guard's 50% reduction.
 
-[Browse every item and its declared stats](../paladin-equipment/) or [inspect the native gear gallery](../../gallery/).
+<Gallery section="armor" />
 
 ## Three legendary artifacts
 
 - **The Last Vigil:** a 30-damage, three-roll one-handed hammer. The first enemy hit actually reduced by each Guard restores one Focus to the ally, capped at their maximum. Keep the weapon equipped until the trigger; an ally already at full Focus still spends the opportunity.
 - **Kingsfall:** a 42-damage, five-roll great hammer. The first reduced hit readies Reckoning: +50% damage on the next eligible single-target blunt attack with that weapon. The charge is spent on the attempt, even a miss, and expires at the end of your next turn. Equipment swapping does not preserve it.
 - **The Last Bastion:** a shield with a −4 Speed modifier. Guard cleanses one existing eligible condition in priority order: Stun, Daze, an active removable Curse, then Poison. It does not remove permanent campaign curses or restore a lost turn.
+
+<Gallery section="films" />
+
+## Every piece, up close
+
+Weapon stats are declared base values before level growth and combat modifiers. Stat bonuses use character points. Select a card for the full explanation of its equipped abilities.
+
+<Equipment mod="paladin" />
 
 ## Finding the gear
 

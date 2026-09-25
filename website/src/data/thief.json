@@ -1,0 +1,1332 @@
+{
+  "version": "1.0.0",
+  "sha256": "adadb168f38466837b8ef573385159981de8435724dd3a95137b64063c57c82e",
+  "entries": [
+    {
+      "kind": "class",
+      "id": "thief",
+      "displayName": "Thief",
+      "fields": {
+        "strength": 0.54,
+        "intelligence": 0.46,
+        "awareness": 0.72,
+        "talent": 0.74,
+        "speed": 0.78,
+        "vitality": 0.5,
+        "focus": 3,
+        "startinggold": 3,
+        "primarystat": "quickness",
+        "dlc": "None",
+        "startweapon": "thief_twins_street",
+        "startitems": [
+          "thief_coat_street",
+          "thief_hood_street",
+          "thief_boots_street",
+          "conLockpicks"
+        ],
+        "skills": {
+          "m_SteadFast": false,
+          "m_PartyHeal": false,
+          "m_Sneak": true,
+          "m_Ambush": true,
+          "m_Flee": false,
+          "m_DoorBash": false,
+          "m_TrapDisarm": true,
+          "m_TrapProceed": false,
+          "m_CounterAttack": false,
+          "m_EnergyBoost": false,
+          "m_Refocus": false,
+          "m_FindHerb": false,
+          "m_Entertain": false,
+          "m_Encourage": false,
+          "m_Inspire": false,
+          "m_Justice": false,
+          "m_Distract": false,
+          "m_CalledShot": false,
+          "m_Discipline": false,
+          "m_SupportRange": false,
+          "m_Taunt": false,
+          "m_MimicWhisper": false,
+          "m_FindTreasure": false,
+          "m_Glory": false,
+          "m_BlackHole": false
+        }
+      },
+      "icon": "assets/thief-slip-away-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_street",
+      "displayName": "Street Twins",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 10,
+        "skill": "quickness",
+        "slots": 2,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 0,
+        "maxlevel": 1,
+        "goldvalue": 14,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-street-twins-icon.png",
+      "proficiencies": [
+        "thief_feint"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_street",
+      "displayName": "Rooftop Bow",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 10,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 0,
+        "maxlevel": 1,
+        "goldvalue": 16,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-street-icon.png",
+      "proficiencies": [
+        "thief_draw_out"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "thief_coat_street",
+      "displayName": "Patched Jack",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 1,
+        "goldvalue": 8,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 0
+      },
+      "icon": "assets/thief-coat-street-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_hood_street",
+      "displayName": "Street Neckerchief",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 1,
+        "goldvalue": 6,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "talent": 0.01
+      },
+      "icon": "assets/thief-hood-street-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_boots_street",
+      "displayName": "Softstep Shoes",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 1,
+        "goldvalue": 6,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": 0.01
+      },
+      "icon": "assets/thief-boots-street-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_charm_street",
+      "displayName": "Bent Copper",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 1,
+        "goldvalue": 8,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "talent": 0.01
+      },
+      "icon": "assets/thief-charm-street-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_burglar",
+      "displayName": "Windowfangs",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 15,
+        "skill": "quickness",
+        "slots": 2,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 45,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-burglar-icon.png",
+      "proficiencies": [
+        "thief_pierce"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_burglar",
+      "displayName": "Alley Recurve",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 14,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 40,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-burglar-icon.png",
+      "proficiencies": [
+        "thief_thread_needle"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "thief_coat_burglar",
+      "displayName": "Burglar's Jack",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 26,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1
+      },
+      "icon": "assets/thief-coat-burglar-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_hood_burglar",
+      "displayName": "Burglar's Hood",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 18,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 0,
+        "talent": 0.01
+      },
+      "icon": "assets/thief-hood-burglar-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_boots_burglar",
+      "displayName": "Burglar's Boots",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 18,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 1,
+        "speed": 0.01
+      },
+      "icon": "assets/thief-boots-burglar-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_charm_burglar",
+      "displayName": "Brass Pick",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 24,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "talent": 0.02
+      },
+      "icon": "assets/thief-charm-burglar-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_guild",
+      "displayName": "Guild Twin Daggers",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 20,
+        "skill": "quickness",
+        "slots": 2,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 2,
+        "maxlevel": 4,
+        "goldvalue": 100,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-guild-icon.png",
+      "proficiencies": [
+        "thief_pierce"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_guild",
+      "displayName": "Guild Shortbow",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 18,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 2,
+        "maxlevel": 3,
+        "goldvalue": 85,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-guild-icon.png",
+      "proficiencies": [
+        "thief_thread_needle"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "thief_coat_guild",
+      "displayName": "Guild Leather",
+      "fields": {
+        "minlevel": 2,
+        "maxlevel": 3,
+        "goldvalue": 62,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 1
+      },
+      "icon": "assets/thief-coat-guild-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_hood_guild",
+      "displayName": "Guild Hood",
+      "fields": {
+        "minlevel": 2,
+        "maxlevel": 3,
+        "goldvalue": 44,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 1,
+        "awareness": 0.01
+      },
+      "icon": "assets/thief-hood-guild-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_boots_guild",
+      "displayName": "Guild Treads",
+      "fields": {
+        "minlevel": 2,
+        "maxlevel": 3,
+        "goldvalue": 44,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 1,
+        "speed": 0.01
+      },
+      "icon": "assets/thief-boots-guild-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_charm_guild",
+      "displayName": "Guild Token",
+      "fields": {
+        "minlevel": 2,
+        "maxlevel": 3,
+        "goldvalue": 55,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "awareness": 0.02,
+        "talent": 0.01
+      },
+      "icon": "assets/thief-charm-guild-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_masterwork",
+      "displayName": "Velvet Fangs",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 25,
+        "skill": "quickness",
+        "slots": 3,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 3,
+        "maxlevel": 4,
+        "goldvalue": 200,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-masterwork-icon.png",
+      "proficiencies": [
+        "thief_pierce"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_masterwork",
+      "displayName": "Gloamwood Bow",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 23,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 3,
+        "maxlevel": 4,
+        "goldvalue": 180,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-masterwork-icon.png",
+      "proficiencies": [
+        "thief_thread_needle"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "thief_coat_masterwork",
+      "displayName": "Masterwork Jack",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 4,
+        "goldvalue": 140,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 2,
+        "vitality": 0.01
+      },
+      "icon": "assets/thief-coat-masterwork-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_hood_masterwork",
+      "displayName": "Masterwork Cowl",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 4,
+        "goldvalue": 100,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1,
+        "talent": 0.02
+      },
+      "icon": "assets/thief-hood-masterwork-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_boots_masterwork",
+      "displayName": "Masterwork Treads",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 4,
+        "goldvalue": 100,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "speed": 0.02
+      },
+      "icon": "assets/thief-boots-masterwork-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_charm_masterwork",
+      "displayName": "Silver Rook",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 4,
+        "goldvalue": 130,
+        "rarity": "uncommon",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "speed": 0.01,
+        "awareness": 0.02
+      },
+      "icon": "assets/thief-charm-masterwork-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_locksmith",
+      "displayName": "Locksmith's Picks",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 28,
+        "skill": "quickness",
+        "slots": 3,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 390,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-locksmith-icon.png",
+      "proficiencies": [
+        "thief_feint_locksmith"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_locksmith",
+      "displayName": "Latchspring",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 29,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 390,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-locksmith-icon.png",
+      "proficiencies": [
+        "thief_draw_out_locksmith"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "thief_coat_locksmith",
+      "displayName": "Locksmith's Coat",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 300,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 4,
+        "vitality": 0.02
+      },
+      "icon": "assets/thief-coat-locksmith-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_hood_locksmith",
+      "displayName": "Locksmith's Hood",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 3,
+        "talent": 0.03
+      },
+      "icon": "assets/thief-hood-locksmith-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_boots_locksmith",
+      "displayName": "Locksmith's Steps",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "speed": 0.02,
+        "talent": 0.01
+      },
+      "icon": "assets/thief-boots-locksmith-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_charm_locksmith",
+      "displayName": "Master Keyring",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 290,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "talent": 0.03,
+        "focusCapacity": 1
+      },
+      "icon": "assets/thief-charm-locksmith-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_nightblade",
+      "displayName": "Nightglass Twins",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 30,
+        "skill": "quickness",
+        "slots": 3,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 430,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-nightblade-icon.png",
+      "proficiencies": [
+        "thief_feint"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_nightblade",
+      "displayName": "Blackthorn",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 32,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 440,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-nightblade-icon.png",
+      "proficiencies": [
+        "thief_draw_out"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "thief_coat_nightblade",
+      "displayName": "Nightblade Jack",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 300,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 5,
+        "resistance": 2,
+        "speed": 0.01
+      },
+      "icon": "assets/thief-coat-nightblade-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_hood_nightblade",
+      "displayName": "Nightblade Cowl",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1,
+        "speed": 0.02
+      },
+      "icon": "assets/thief-hood-nightblade-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_boots_nightblade",
+      "displayName": "Nightblade Steps",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1,
+        "speed": 0.03
+      },
+      "icon": "assets/thief-boots-nightblade-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_charm_nightblade",
+      "displayName": "Snuffed Wick",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 290,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "speed": 0.02,
+        "talent": 0.02
+      },
+      "icon": "assets/thief-charm-nightblade-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_wayfarer",
+      "displayName": "Trailbreakers",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 29,
+        "skill": "quickness",
+        "slots": 3,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 410,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-wayfarer-icon.png",
+      "proficiencies": [
+        "thief_pierce_wayfarer"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_wayfarer",
+      "displayName": "Farstep",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 30,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 420,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-wayfarer-icon.png",
+      "proficiencies": [
+        "thief_thread_needle_wayfarer"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "thief_coat_wayfarer",
+      "displayName": "Wayfarer's Coat",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 300,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 3,
+        "awareness": 0.02
+      },
+      "icon": "assets/thief-coat-wayfarer-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_hood_wayfarer",
+      "displayName": "Wayfarer's Hood",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "awareness": 0.03
+      },
+      "icon": "assets/thief-hood-wayfarer-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_boots_wayfarer",
+      "displayName": "Wayfarer's Treads",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 2,
+        "speed": 0.02,
+        "awareness": 0.01
+      },
+      "icon": "assets/thief-boots-wayfarer-icon.png"
+    },
+    {
+      "kind": "item",
+      "id": "thief_charm_wayfarer",
+      "displayName": "Trail Compass",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 290,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "awareness": 0.03,
+        "speed": 0.01
+      },
+      "icon": "assets/thief-charm-wayfarer-icon.png"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_skeleton_key",
+      "displayName": "The Skeleton Key",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 27,
+        "skill": "quickness",
+        "slots": 3,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 650,
+        "rarity": "artifact",
+        "dropable": true,
+        "townmarket": false,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-skeleton-key-icon.png",
+      "proficiencies": [
+        "thief_pierce"
+      ],
+      "thiefArtifact": "borrowedFortune"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_twins_candles_end",
+      "displayName": "Candle's End",
+      "precisionWeapon": "paired",
+      "fields": {
+        "damage": 28,
+        "skill": "quickness",
+        "slots": 3,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 750,
+        "rarity": "artifact",
+        "dropable": true,
+        "townmarket": false,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-twins-candles-end-icon.png",
+      "proficiencies": [
+        "thief_feint"
+      ],
+      "thiefArtifact": "lastLight"
+    },
+    {
+      "kind": "weapon",
+      "id": "thief_bow_unlost_road",
+      "displayName": "The Unlost Road",
+      "precisionWeapon": "bow",
+      "fields": {
+        "damage": 29,
+        "skill": "awareness",
+        "slots": 4,
+        "m_NoRegularAttack": false,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 700,
+        "rarity": "artifact",
+        "dropable": true,
+        "townmarket": false,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {},
+      "icon": "assets/thief-bow-unlost-road-icon.png",
+      "proficiencies": [
+        "thief_thread_needle"
+      ],
+      "thiefArtifact": "looseAndLeave"
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_feint",
+      "displayName": "Feint",
+      "description": "Deal 60% damage. A damaging hit prepares your next precision attack if you are a Thief.",
+      "icon": "assets/thief-street-twins-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.6,
+        "m_FullSlots": false,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_draw_out",
+      "displayName": "Draw Out",
+      "description": "Deal 60% damage. A damaging hit prepares your next precision attack if you are a Thief.",
+      "icon": "assets/thief-bow-street-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.6,
+        "m_FullSlots": false,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_pierce",
+      "displayName": "Pierce",
+      "description": "Deal 75% damage. A perfect result ignores armor.",
+      "icon": "assets/thief-twins-guild-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.75,
+        "m_FullSlots": true,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0,
+        "m_IgnoresArmor": true
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_thread_needle",
+      "displayName": "Thread the Needle",
+      "description": "Deal 75% damage. A perfect result ignores armor.",
+      "icon": "assets/thief-bow-guild-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.75,
+        "m_FullSlots": true,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0,
+        "m_IgnoresArmor": true
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_feint_locksmith",
+      "displayName": "Feint",
+      "description": "Deal 80% damage. A damaging hit prepares your next precision attack if you are a Thief.",
+      "icon": "assets/thief-twins-locksmith-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.8,
+        "m_FullSlots": false,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_draw_out_locksmith",
+      "displayName": "Draw Out",
+      "description": "Deal 80% damage. A damaging hit prepares your next precision attack if you are a Thief.",
+      "icon": "assets/thief-bow-locksmith-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.8,
+        "m_FullSlots": false,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_pierce_wayfarer",
+      "displayName": "Pierce",
+      "description": "Deal 85% damage. A perfect result ignores armor.",
+      "icon": "assets/thief-twins-wayfarer-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.85,
+        "m_FullSlots": true,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0,
+        "m_IgnoresArmor": true
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_thread_needle_wayfarer",
+      "displayName": "Thread the Needle",
+      "description": "Deal 85% damage. A perfect result ignores armor.",
+      "icon": "assets/thief-bow-wayfarer-icon.png",
+      "fields": {
+        "m_DmgMultiplier": 0.85,
+        "m_FullSlots": true,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0,
+        "m_IgnoresArmor": true
+      }
+    }
+  ]
+}
