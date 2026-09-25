@@ -22,6 +22,7 @@ namespace UnityEngine
         public Material(){}
         public Material(Material source)
         {
+            name=source.name;
             properties.UnionWith(source.properties);keywords.UnionWith(source.keywords);
             foreach(var item in source.textures)textures[item.Key]=item.Value;
             foreach(var item in source.colors)colors[item.Key]=item.Value;
@@ -66,6 +67,22 @@ static class Program
         Check(privateCopy.textures["_EmissionMap"]==null && privateCopy.colors["_EmissionColor"].r==0,"Repeated option is idempotent");
         var unsupported=new UnityEngine.Material();unsupported.keywords.Add("_EMISSION");ExplicitMaterialOptions.Apply(unsupported,true);
         Check(unsupported.writes==1 && !unsupported.keywords.Contains("_EMISSION"),"Shader without emission properties handled");
+        foreach (string suffix in new[] { "_skin", "_hair", "_main" })
+        {
+            var source = new UnityEngine.Material { name = "native" + suffix };
+            source.properties.Add("_Color"); source.colors["_Color"] = new UnityEngine.Color(.1f, .8f, .2f, 1f);
+            var owned = new UnityEngine.Material(source);
+            ExplicitMaterialOptions.PreserveMainPalette(owned);
+            Check(ExplicitMaterialOptions.HasAuthoredPalette(owned) == (suffix == "_main"), "ordinary palette rule stays main-only: " + suffix);
+            ExplicitMaterialOptions.PreservePalette(owned);
+            Check(ExplicitMaterialOptions.HasAuthoredPalette(owned) && owned.colors["_Color"].r == 1f &&
+                owned.colors["_Color"].g == 1f && owned.colors["_Color"].b == 1f, "race palette neutralizes native tint: " + suffix);
+            string marker = owned.name; ExplicitMaterialOptions.PreservePalette(owned);
+            Check(owned.name == marker && ExplicitMaterialOptions.HasAuthoredPalette(new UnityEngine.Material(owned)),
+                "race palette marker is idempotent and survives material copy: " + suffix);
+            Check(source.name == "native" + suffix && source.colors["_Color"].g == .8f && source.writes == 0,
+                "source palette remains untouched: " + suffix);
+        }
         Check(!RendererEmissionFixture.Read(null),"Absent JSON defaults false");
         Check(!RendererEmissionFixture.Read(new JValue(false)) && RendererEmissionFixture.Read(new JValue(true)),"JSON boolean accepted");
         foreach(var invalid in new[]{new JValue((object)null),new JValue("true"),new JValue(1),new JValue(0.0)})

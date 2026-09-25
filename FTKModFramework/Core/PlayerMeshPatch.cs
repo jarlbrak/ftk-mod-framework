@@ -62,10 +62,11 @@ namespace FTKModFramework.Core
                 if (!existing.VisualResourcesOnly && existing.Applied) existing.EnsureRetained();
                 return;
             }
-            PlayerMeshPlan plan = null;
+            PlayerMeshPlan plan = PlayerRaceRegistry.GetPlan(classRow, skinset);
+            PlayerMeshPlan racePlan = plan;
             int classId;
             Dictionary<int, PlayerMeshPlan> skins;
-            if (ContentRegistry.TryGetSyntheticId(classRow.m_ID, out classId, typeof(FTK_playerGameStartDB)) &&
+            if (plan == null && ContentRegistry.TryGetSyntheticId(classRow.m_ID, out classId, typeof(FTK_playerGameStartDB)) &&
                 object.ReferenceEquals(Content.Db<FTK_playerGameStartDB>().GetEntryByInt(classId), classRow) &&
                 Registrations.TryGetValue(classId, out skins))
                 skins.TryGetValue(Content.Db<FTK_skinsetDB>().GetIntFromID(skinset.m_ID), out plan);
@@ -78,7 +79,14 @@ namespace FTKModFramework.Core
                 return;
             }
             if (resolved.Length == 0) return;
-            bool applied = ExplicitEnemyMeshSwap.Apply("player:" + classRow.m_ID, avatar, resolved, null, true);
+            Action<UnityEngine.Renderer, UnityEngine.Material> prepare = null;
+            if (racePlan != null)
+                prepare = delegate(UnityEngine.Renderer renderer, UnityEngine.Material material)
+                {
+                    if (racePlan.HasTexturedRequiredPath(ExplicitEnemyMeshSwap.RelativePath(avatar.transform, renderer.transform)))
+                        ExplicitMaterialOptions.PreservePalette(material);
+                };
+            bool applied = ExplicitEnemyMeshSwap.Apply("player:" + classRow.m_ID, avatar, resolved, prepare, true);
             Plugin.Log.LogInfo("[player-mesh] " + (applied ? "applied" : "rejected") + " class '" +
                 classRow.m_ID + "', skinset '" + skinset.m_ID + "'.");
         }

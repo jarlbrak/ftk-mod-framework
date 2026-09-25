@@ -1177,6 +1177,7 @@ func marketContent(b []byte) error {
 			OffHandModels            []marketModelRenderer  `json:"offHandModels,omitempty"`
 			DisplayModels            []marketModelRenderer  `json:"displayModels,omitempty"`
 			PlayerModels             []marketPlayerModel    `json:"playerModels,omitempty"`
+			RaceBindings             []marketRaceBinding    `json:"raceBindings,omitempty"`
 			OverworldAilmentImmunity *marketAilmentImmunity `json:"overworldAilmentImmunity,omitempty"`
 		} `json:"entries"`
 	}
@@ -1188,8 +1189,18 @@ func marketContent(b []byte) error {
 	}
 	seen := map[string]bool{}
 	for _, entry := range c.Entries {
-		if !contains([]string{"item", "weapon", "proficiency", "class", "enemy", "encounter"}, entry.Kind) || entry.ID == "" || entry.Template == "" {
+		if !contains([]string{"item", "weapon", "proficiency", "class", "enemy", "encounter", "race"}, entry.Kind) || entry.ID == "" || (entry.Template == "" && entry.Kind != "race") {
 			return errors.New("unsupported kind or missing identity/template")
+		}
+		if entry.Kind == "race" {
+			if strings.TrimSpace(entry.DisplayName) == "" || len(entry.Fields) != 0 {
+				return errors.New("race requires display name and no row field overrides")
+			}
+			if err := marketRaceBindings(entry.RaceBindings); err != nil {
+				return err
+			}
+		} else if entry.RaceBindings != nil {
+			return errors.New("raceBindings requires a race")
 		}
 		if entry.Opportunist && entry.Kind != "class" {
 			return errors.New("opportunist requires a class")

@@ -25,6 +25,14 @@ class Program
     static void Main()
     {
         var plan=Plan();var empty=Avatar();ExplicitEnemyMeshSwap.calls=0;
+        PlayerMeshPlan racePalettePlan; string paletteError;
+        Check(PlayerMeshPlan.TryCreate(new[] { new PlayerRendererMesh("body", "body.glb", "body.png"),
+            new PlayerRendererMesh("hair", "hair.glb") }, Clothes(), out racePalettePlan, out paletteError), "race palette plan creation");
+        Check(racePalettePlan.HasTexturedRequiredPath("body"), "required authored texture opts into race palette");
+        Check(!racePalettePlan.HasTexturedRequiredPath("hair"), "required body without authored texture retains native tint");
+        Check(!racePalettePlan.HasTexturedRequiredPath("armor(Clone)") && !racePalettePlan.HasTexturedRequiredPath("boots(Clone)"),
+            "conditional apparel is excluded from race palette override");
+        Check(!racePalettePlan.HasTexturedRequiredPath("Body"), "palette target path must match exactly");
         Check(plan.Apply("test",empty),"absent apparel keeps body");Check(ExplicitEnemyMeshSwap.calls==1,"one body transaction");Check(ExplicitEnemyMeshSwap.last.Length==2,"both required paths kept");
         var full=Avatar(Target("armor(Clone)","nativeArmor"),Target("boots(Clone)","nativeBoots"));ExplicitEnemyMeshSwap.calls=0;
         Check(plan.Apply("test",full),"present apparel accepted");Check(ExplicitEnemyMeshSwap.calls==1 && ExplicitEnemyMeshSwap.last.Length==4,"one combined body+apparel transaction");

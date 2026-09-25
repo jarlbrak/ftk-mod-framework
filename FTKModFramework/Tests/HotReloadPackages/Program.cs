@@ -1,10 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FTKModFramework.Core.Marketplace
 {
     internal sealed class PackageDescriptor { internal string ModGuid; internal bool Enabled; }
-    internal sealed class ManagedSnapshot { internal List<PackageDescriptor> Packages = new List<PackageDescriptor>(); }
+    internal sealed class MarketplaceGenerationFile { internal string Path; }
+    internal sealed class ManagedSnapshot {
+        internal List<PackageDescriptor> Packages = new List<PackageDescriptor>();
+        internal string ContentRoot = Path.GetTempPath();
+        internal bool FilesVerified = true;
+        internal List<MarketplaceGenerationFile> Files = new List<MarketplaceGenerationFile>();
+    }
 }
 
 namespace FTKModFramework.Core.HotReload
@@ -41,7 +48,33 @@ namespace FTKModFramework.Core.HotReload
             HotReloadPackagePolicy.Require(disabled);
             Check(HotReloadPackagePolicy.InvalidReason(disabled) == null,
                 "A managed generation can retain an installed but disabled package.");
+            string root = Path.Combine(Path.GetTempPath(), "ftk-race-policy-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(root);
+            try
+            {
+                selection.ContentRoot = root;
+                selection.Files.Add(new Marketplace.MarketplaceGenerationFile { Path = "content.json" });
+                string content = Path.Combine(root, "content.json");
+                File.WriteAllText(content, "{\"entries\":[{\"kind\":\"race\",\"id\":\"possum\"}]}");
+                Check(HotReloadPackagePolicy.InvalidReason(selection) != null,
+                    "Active race capability disables title activation so startup uses the ordinary loader.");
+                Reject(selection, "Pending race capability rejects activation before coordinator mutation.");
+                selection.Packages[0].Enabled = false;
+                Reject(selection, "Disabled race declarations cannot hide unsnapshotted capability.");
+                File.WriteAllText(content, "{\"entries\":[{\"kind\":\"class\",\"raceBindings\":[]}]}");
+                Reject(selection, "Race bindings reject activation regardless of kind or package identity.");
+                File.WriteAllText(content, "{\"entries\":[{\"kind\":\"item\",\"id\":\"tools\"}]}");
+                Check(HotReloadPackagePolicy.InvalidReason(selection) == null,
+                    "Ordinary capabilities remain eligible under the same arbitrary package identities.");
+                File.Delete(content);
+                Reject(selection, "Unreadable content fails closed before mutation.");
+                selection.FilesVerified = false;
+                Reject(selection, "Unverified selection cannot enter capability admission.");
+            }
+            finally { Directory.Delete(root, true); }
             Console.WriteLine("PASS: " + checks + " hot-reload package policy checks.");
         }
     }
 }
+
+namespace FTKModFramework.Core.Data { internal sealed class ItemModifierEntry { } }

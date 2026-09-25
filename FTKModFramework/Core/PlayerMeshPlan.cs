@@ -17,6 +17,13 @@ namespace FTKModFramework.Core
         internal int RequiredCount { get { return _required.Length; } }
         internal int ApparelCount { get { return _apparel.Length; } }
 
+        internal bool HasTexturedRequiredPath(string path)
+        {
+            foreach (EnemyRendererMesh item in _required)
+                if (item.RendererPath == path && !string.IsNullOrEmpty(item.TextureFileName)) return true;
+            return false;
+        }
+
         internal static bool TryCreate(PlayerRendererMesh[] required, PlayerApparelMesh[] apparel,
             out PlayerMeshPlan plan, out string error)
         {
