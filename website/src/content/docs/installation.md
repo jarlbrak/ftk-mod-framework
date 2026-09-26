@@ -6,14 +6,14 @@ You need an owned Steam copy of the **original For The King (2018)**. The framew
 
 ## 1. Get the launcher
 
-Download **framework 1.2.1**, extract it into a permanent folder, and keep its files together.
+Download **framework 1.3.0**, extract it into a permanent folder, and keep its files together.
 
-- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.2.1/FTKModdedLauncher-macos-universal.zip)
-- [Windows x64 launcher (preview)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.2.1/FTKModdedLauncher-windows-x64.zip)
-- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.2.1/FTKModdedLauncher-linux-amd64.tar.gz)
-- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.2.1/FTKModdedLauncher-linux-arm64.tar.gz)
+- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-macos-universal.zip)
+- [Windows x64 launcher (preview)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-windows-x64.zip)
+- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-linux-amd64.tar.gz)
+- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-linux-arm64.tar.gz)
 
-Linux ARM64 provides helper tooling, not a native ARM game port. Windows bundles remain a preview. The launcher packages exist for these platforms; native Windows/Linux gameplay remains unverified. Paladin, Thief, and Possum are published for Windows, macOS, and Linux. The same mod archive serves all three platforms; installation still requires a listed game build. Read [compatibility](../compatibility/) before installing a mod.
+Linux ARM64 provides helper tooling, not a native ARM game port. Windows bundles remain a preview. The launcher packages exist for these platforms; native Windows/Linux gameplay remains unverified. Paladin, Thief, Possum, and Lore Store Unlocked are published for Windows, macOS, and Linux. The same mod archive serves all three platforms; installation still requires a listed game build. Read [compatibility](../compatibility/) before installing a mod.
 
 ## 2. Add it to Steam
 
@@ -25,7 +25,7 @@ On macOS, the community launcher is not notarized. If Gatekeeper blocks it, righ
 
 At the title screen, open **Mods → Discover**. Select a listing, read its requirements, review the proposed changes, and confirm installation. Follow the menu's activation guidance. Normally, changes take effect on the **next game launch**. Restart before starting your adventure.
 
-Paladin 1.4.0 needs framework 1.2.1 or a compatible later 1.x release. Thief 1.0.0 adds a class and equipment. Possum 1.0.0 changes appearance. All three install separately from the framework.
+Paladin 1.4.0 needs framework 1.2.1 or a compatible later 1.x release. Thief 1.0.0 adds a class and equipment. Possum 1.0.0 changes appearance. Lore Store Unlocked 1.0.0 needs framework 1.3.0 and unlocks the Lore Store while installed. All four install separately from the framework.
 
 ## Keep your adventure consistent
 
