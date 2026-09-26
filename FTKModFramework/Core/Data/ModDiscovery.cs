@@ -30,6 +30,8 @@ namespace FTKModFramework.Core.Data
 
     /// <summary>
     /// Walks the configured content root for immediate subfolders containing a <c>manifest.json</c>.
+    /// Thunderstore package folders use their root manifest for package metadata and may place one FTK
+    /// content mod in the reserved <c>FTKMFContent</c> child folder.
     ///
     /// A folder with no <c>manifest.json</c> is skipped and logged at debug level (it is not an error:
     /// the plugins dir holds unrelated BepInEx plugins too). A folder whose manifest is missing a
@@ -41,6 +43,8 @@ namespace FTKModFramework.Core.Data
     /// </summary>
     internal static class ModDiscovery
     {
+        private const string ThunderstoreContentFolderName = "FTKMFContent";
+
         internal static List<DiscoveredMod> DiscoverAll(string manualRoot, string managedRoot, ValidationReport report)
         {
             List<DiscoveredMod> mods = Discover(manualRoot, report);
@@ -91,50 +95,72 @@ namespace FTKModFramework.Core.Data
                 }
 
                 ModManifest manifest = ReadManifest(manifestPath, folder, report);
-                if (manifest == null) continue;           // malformed manifest JSON: error already recorded
-                // Filter before content enumeration or behavior resolution, so fixtures contribute no
-                // registry rows, DLL loads, validation noise, or content in player mode.
-                if (manifest.IsDevelopmentOnly && !Plugin.SelfTestsEnabled)
-                {
-                    Plugin.Log.LogDebug("Skipping development-only mod '" + manifest.ModGuid + "'.");
-                    continue;
-                }
-                if (!manifest.Validate(report)) continue; // missing required field: error already recorded
+                if (manifest == null) continue; // malformed manifest JSON: error already recorded
 
-                // RESERVED guid: com.ftkmf.synthetic belongs ONLY to the generator's own reserved subfolder
-                // (SyntheticContentGenerator.ReservedSubfolderName). A real data mod declaring it from any
-                // other folder is rejected and skipped, so it cannot perturb the deterministic (modGuid, id)
-                // sort the synthetic-id band depends on. The generator's own folder passes this check.
-                if (string.Equals(manifest.ModGuid, SyntheticContentGenerator.ReservedModGuid, StringComparison.Ordinal) &&
-                    !IsReservedSyntheticFolder(folder))
+                if (manifest.ThunderstoreVersionNumber != null)
                 {
-                    report.Error("manifest.json (" + folder + "): modGuid '" + SyntheticContentGenerator.ReservedModGuid +
-                        "' is RESERVED for generated synthetic content and may only be used by the '" +
-                        SyntheticContentGenerator.ReservedSubfolderName + "' subfolder (mod skipped).");
+                    // Thunderstore installs each package under its own plugin folder. Its manifest
+                    // is not an FTK content manifest, so only inspect the explicitly reserved child.
+                    // Code-only packages such as FTK Mod Framework have no such child and are skipped.
+                    string contentFolder = Path.Combine(folder, ThunderstoreContentFolderName);
+                    string contentManifest = Path.Combine(contentFolder, "manifest.json");
+                    if (File.Exists(contentManifest)) DiscoverModFolder(contentFolder, contentManifest, report, mods);
+                    else Plugin.Log.LogDebug("Skipping Thunderstore package '" + folder + "': no FTKMFContent manifest.");
                     continue;
                 }
 
-                if (manifest.CompatibilityReason != null)
-                {
-                    Plugin.Log.LogWarning("Blocked mod '" + manifest.ModGuid + "': " + manifest.CompatibilityReason);
-                    mods.Add(new DiscoveredMod(manifest, new List<string>(), null));
-                    continue;
-                }
-                List<string> contentFiles = ContentFilesIn(folder);
-
-                // OPTIONAL behaviorDll (FR-3 manifest side, #32): only parsed + shape-validated here; #33
-                // owns the actual Assembly.LoadFrom. An absent value is no error and no log. A present but
-                // traversal-unsafe value is a validation ERROR, but the mod's CONTENT still loads (the DLL
-                // path is just dropped). Determinism is preserved: this neither aborts discovery nor skips
-                // the mod, so the (modGuid, id) load order is identical with or without a valid behaviorDll.
-                string behaviorDllPath = ResolveBehaviorDll(manifest, folder, report);
-
-                mods.Add(new DiscoveredMod(manifest, contentFiles, behaviorDllPath));
+                DiscoverModFolder(folder, manifestPath, report, mods, manifest);
             }
 
             // Deterministic across machines: order by (modGuid, folder name).
             mods.Sort(CompareMods);
             return mods;
+        }
+
+        private static void DiscoverModFolder(string folder, string manifestPath, ValidationReport report,
+            List<DiscoveredMod> mods, ModManifest manifest = null)
+        {
+            if (manifest == null) manifest = ReadManifest(manifestPath, folder, report);
+            if (manifest == null) return; // malformed manifest JSON: error already recorded
+
+            // Filter before content enumeration or behavior resolution, so fixtures contribute no
+            // registry rows, DLL loads, validation noise, or content in player mode.
+            if (manifest.IsDevelopmentOnly && !Plugin.SelfTestsEnabled)
+            {
+                Plugin.Log.LogDebug("Skipping development-only mod '" + manifest.ModGuid + "'.");
+                return;
+            }
+            if (!manifest.Validate(report)) return; // missing required field: error already recorded
+
+            // RESERVED guid: com.ftkmf.synthetic belongs ONLY to the generator's own reserved subfolder
+            // (SyntheticContentGenerator.ReservedSubfolderName). A real data mod declaring it from any
+            // other folder is rejected and skipped, so it cannot perturb the deterministic (modGuid, id)
+            // sort the synthetic-id band depends on. The generator's own folder passes this check.
+            if (string.Equals(manifest.ModGuid, SyntheticContentGenerator.ReservedModGuid, StringComparison.Ordinal) &&
+                !IsReservedSyntheticFolder(folder))
+            {
+                report.Error("manifest.json (" + folder + "): modGuid '" + SyntheticContentGenerator.ReservedModGuid +
+                    "' is RESERVED for generated synthetic content and may only be used by the '" +
+                    SyntheticContentGenerator.ReservedSubfolderName + "' subfolder (mod skipped).");
+                return;
+            }
+
+            if (manifest.CompatibilityReason != null)
+            {
+                Plugin.Log.LogWarning("Blocked mod '" + manifest.ModGuid + "': " + manifest.CompatibilityReason);
+                mods.Add(new DiscoveredMod(manifest, new List<string>(), null));
+                return;
+            }
+            List<string> contentFiles = ContentFilesIn(folder);
+
+            // OPTIONAL behaviorDll (FR-3 manifest side, #32): only parsed + shape-validated here; #33
+            // owns the actual Assembly.LoadFrom. An absent value is no error and no log. A present but
+            // traversal-unsafe value is a validation ERROR, but the mod's CONTENT still loads (the DLL
+            // path is just dropped). Determinism is preserved: this neither aborts discovery nor skips
+            // the mod, so the (modGuid, id) load order is identical with or without a valid behaviorDll.
+            string behaviorDllPath = ResolveBehaviorDll(manifest, folder, report);
+
+            mods.Add(new DiscoveredMod(manifest, contentFiles, behaviorDllPath));
         }
 
         private static ModManifest ReadManifest(string path, string folder, ValidationReport report)

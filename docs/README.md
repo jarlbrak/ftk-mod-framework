@@ -17,6 +17,7 @@ to the underlying design and validation records.
 
 - [Write content](WRITING-CONTENT.md)
 - [Version a package](MOD-VERSIONING.md)
+- [Publish through Thunderstore](THUNDERSTORE.md)
 - [Add custom models](CUSTOM-MODELS.md)
 - [Preview assets outside the game](../.agents/skills/preview-ftk-assets/SKILL.md)
 - [Author a class](../.agents/skills/author-class/SKILL.md), [item](../.agents/skills/author-item/SKILL.md), [gear set](../.agents/skills/author-gear-set/SKILL.md), or [player skin](../.agents/skills/author-player-skin/SKILL.md)

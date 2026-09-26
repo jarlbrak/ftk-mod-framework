@@ -39,8 +39,33 @@ internal static class DiscoveryChecks
         return count;
     }
 
+    private static void ThunderstorePackageDiscovery(string fixture)
+    {
+        string root = Path.Combine(fixture, "discovery-thunderstore");
+        string contentPackage = Path.Combine(root, "JarlBrak-Paladin");
+        Directory.CreateDirectory(contentPackage);
+        File.WriteAllText(Path.Combine(contentPackage, "manifest.json"),
+            "{\"name\":\"Paladin\",\"version_number\":\"1.4.0\",\"website_url\":\"https://github.com/jarlbrak/ftk-mod-framework\",\"description\":\"FTK content\",\"dependencies\":[]}");
+        string content = Path.Combine(contentPackage, "FTKMFContent");
+        WriteMod(contentPackage, "FTKMFContent", "thirdparty.thunderstore");
+
+        string frameworkPackage = Path.Combine(root, "JarlBrak-FTKModFramework");
+        Directory.CreateDirectory(frameworkPackage);
+        File.WriteAllText(Path.Combine(frameworkPackage, "manifest.json"),
+            "{\"name\":\"FTKModFramework\",\"version_number\":\"1.4.0\",\"website_url\":\"https://github.com/jarlbrak/ftk-mod-framework\",\"description\":\"Framework\",\"dependencies\":[]}");
+        File.WriteAllText(Path.Combine(frameworkPackage, "FTKModFramework.dll"), "fixture");
+
+        ValidationReport report = new ValidationReport();
+        List<DiscoveredMod> mods = ModDiscovery.Discover(root, report);
+        Check(mods.Count == 1 && mods[0].Manifest.ModGuid == "thirdparty.thunderstore" &&
+            mods[0].Manifest.FolderPath == content, "Thunderstore metadata delegates to the reserved FTK content folder");
+        Check(report.Errors.Count == 0, "Thunderstore metadata and framework-only packages are ignored as content");
+    }
+
     internal static void Run(string fixture)
     {
+        ThunderstorePackageDiscovery(fixture);
+
         string manual = Path.Combine(fixture, "discovery-manual");
         string managed = Path.Combine(fixture, "discovery-managed");
         // Folder names deliberately sort opposite to their GUIDs, and the roots are interleaved, so the

@@ -20,6 +20,9 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("modGuid")] public string ModGuid;
         [JsonProperty("name")] public string Name;
         [JsonProperty("version")] public string Version;
+        // Thunderstore reserves the root manifest.json for its package metadata. Its
+        // version_number field marks a package directory whose FTK content lives below it.
+        [JsonProperty("version_number")] public string ThunderstoreVersionNumber;
         [JsonProperty("frameworkVersion")] public string FrameworkVersion;
         [JsonIgnore] public string CompatibilityReason { get { return ModFrameworkCompatibility.Reason(FrameworkVersion, Plugin.Version); } }
         [JsonProperty("description")] public string Description;

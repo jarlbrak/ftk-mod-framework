@@ -7,6 +7,21 @@ on:
     branches: [master]
 
 jobs:
+  thunderstore-packages:
+    name: Thunderstore package layout (game-free)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build and validate current content packages without publishing
+        env:
+          OUTPUT_DIR: ${{ runner.temp }}/thunderstore-packages
+        run: python3 marketplace/packages/build_thunderstore.py --all-content --output "$OUTPUT_DIR"
+
   launcher:
     name: Launcher helpers (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
