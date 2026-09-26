@@ -9,14 +9,17 @@ namespace FTKModFramework.Core.Reporting
     {
         internal const int MaximumBytes = 2 * 1024 * 1024;
         internal const int MaximumLogBytes = 128 * 1024;
-        internal const string Disclosure = "Send publishes your description and selected diagnostics to the public FTK framework GitHub tracker through our Railway service. Diagnostics include a filtered recent game/framework log dump with informational messages, warnings and errors, plus versions, mods and session context. No saves or screenshots are collected. Logs may contain personal information despite filtering. Nothing is uploaded until you press Send. Downloadable diagnostics expire after 30 days; text published on GitHub remains public.";
+        internal const string Disclosure = "Send publishes your description and selected diagnostics to the public FTK framework GitHub tracker through our Railway service. Diagnostics include filtered recent game/framework logs with informational messages, warnings and errors, plus versions, mods and session context. No saves or screenshots are collected. Filtering may miss personal information. Opening this editor does not send this report. Automatic reports may send separately when enabled in Mods > Settings & Help. Downloadable diagnostics expire after 30 days; text published on GitHub remains public.";
         internal static string Create(ReportingReport report, string description, string kind, string currentLogs, string previousLogs)
+        { return Create(report, description, kind, currentLogs, previousLogs, false); }
+        internal static string Create(ReportingReport report, string description, string kind, string currentLogs, string previousLogs, bool automatic)
         {
             if (report == null || !ReportingDraft.ValidId(report.ReportId) || !ReportingDraft.ValidId(report.CaptureId)) throw new ArgumentException("Invalid report.");
             if (kind != "manual" && kind != "error" && kind != "unexpected_exit") throw new ArgumentException("Invalid report kind.");
             if (description == null || description.Length > 4000) throw new ArgumentException("Keep the description within 4,000 characters.");
             JObject payload = new JObject { ["schemaVersion"] = 1, ["reportId"] = report.ReportId, ["captureId"] = report.CaptureId,
                 ["kind"] = kind, ["description"] = description, ["includeDiagnostics"] = report.IncludeMetadata };
+            if (automatic) payload["submissionMode"] = "automatic";
             if (report.IncludeMetadata)
             {
                 JObject diagnostics = new JObject { ["metadata"] = Metadata(report.CurrentMetadata),

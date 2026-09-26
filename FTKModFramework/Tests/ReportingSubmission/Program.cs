@@ -57,6 +57,9 @@ internal static class Program
         Check(!edited.Contains("CURRENT-LOG-MARKER") && !edited.Contains("PREVIOUS-LOG-MARKER"), "Editing produced stale diagnostics inclusion");
         string currentOnly = ReportingSubmissionPayload.Create(Report(false), "", "error", "current", "MUST-NOT-ATTACH");
         Check(!currentOnly.Contains("MUST-NOT-ATTACH") && JObject.Parse(currentOnly)["diagnostics"]["previousSession"] == null, "Uncorrelated previous logs attached");
+        string automatic = ReportingSubmissionPayload.Create(Report(false), "Detected error", "error", "current", "", true);
+        Check((string)JObject.Parse(automatic)["submissionMode"] == "automatic" &&
+            JObject.Parse(currentOnly)["submissionMode"] == null, "Automatic submission mode did not preserve manual default");
     }
     private static void Bounds()
     {
@@ -217,6 +220,16 @@ internal static class Program
             ReportingSubmissionResult unavailable = Send(other);
             Check(!unavailable.Success, "Missing helper accepted");
             Check(ReportingSubmission.PendingPayload == other && File.ReadAllText(Path.Combine(delivery, "pending.json")) == other, "Missing helper lost consented report");
+            FTKModFramework.Core.Marketplace.MarketplaceProtocol.RefuseHelper = false;
+            string automatic = ReportingSubmissionPayload.Create(Report(false), "automatic error", "error", "auto logs", "", true);
+            ReportingSubmissionResult autoPending = Send(automatic);
+            string autoDelivery = Path.Combine(root, "ReportingAutomaticDelivery");
+            Check(!autoPending.Success && ReportingSubmission.PendingAutomaticPayload == automatic &&
+                ReportingSubmission.PendingPayload == other && File.Exists(Path.Combine(autoDelivery, "pending.json")),
+                "Automatic retry displaced the manual report");
+            File.WriteAllText(Path.Combine(autoDelivery, "allow-submit"), "yes");
+            Check(Send(automatic).Success && ReportingSubmission.PendingAutomaticPayload == null &&
+                ReportingSubmission.PendingPayload == other, "Automatic completion changed the manual queue");
             bool? staleDiscard = null;
             ReportingSubmission.DiscardPending(frozen, delegate(bool success) { staleDiscard = success; });
             Spin(delegate { return staleDiscard.HasValue; });

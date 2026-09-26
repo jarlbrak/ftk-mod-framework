@@ -24,12 +24,15 @@ const maxStoredReceipt = maxPayload + 4096
 const retention = 30 * 24 * time.Hour
 
 var idPattern = regexp.MustCompile(`^[a-f0-9]{32}$`)
+var fingerprintPattern = regexp.MustCompile(`^[a-f0-9]{64}$`)
 
 type report struct {
 	SchemaVersion      int                    `json:"schemaVersion"`
 	ReportID           string                 `json:"reportId"`
 	CaptureID          string                 `json:"captureId"`
 	Kind               string                 `json:"kind"`
+	SubmissionMode     string                 `json:"submissionMode,omitempty"`
+	Fingerprint        string                 `json:"fingerprint,omitempty"`
 	Description        string                 `json:"description"`
 	IncludeDiagnostics bool                   `json:"includeDiagnostics"`
 	Diagnostics        map[string]interface{} `json:"diagnostics,omitempty"`
@@ -321,6 +324,16 @@ func validReport(r report) bool {
 		return false
 	}
 	if r.Kind != "manual" && r.Kind != "error" && r.Kind != "unexpected_exit" {
+		return false
+	}
+	if r.SubmissionMode != "" && r.SubmissionMode != "automatic" {
+		return false
+	}
+	if r.SubmissionMode == "automatic" && (r.Kind == "manual" || !r.IncludeDiagnostics ||
+		(r.Kind == "error" && !fingerprintPattern.MatchString(r.Fingerprint))) {
+		return false
+	}
+	if r.Fingerprint != "" && (r.SubmissionMode != "automatic" || r.Kind != "error" || !fingerprintPattern.MatchString(r.Fingerprint)) {
 		return false
 	}
 	if !r.IncludeDiagnostics && r.Diagnostics != nil {

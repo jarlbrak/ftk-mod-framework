@@ -64,6 +64,9 @@ func TestSubmitRedactsAndSurvivesRestart(t *testing.T) {
 	if !strings.Contains(issueBody, "/diagnostics/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json") {
 		t.Fatal("missing automatic bundle")
 	}
+	if !strings.Contains(issueBody, "player's Send action") || strings.Contains(issueBody, "Submitted automatically") {
+		t.Fatal("manual issue attribution is incorrect")
+	}
 	stored, err := os.ReadFile(filepath.Join(s.cfg.dataDir, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json"))
 	if err != nil || bytes.Contains(stored, []byte("hunter2")) {
 		t.Fatal("unredacted disk content")
@@ -84,6 +87,40 @@ func TestSubmitRedactsAndSurvivesRestart(t *testing.T) {
 	restarted.ServeHTTP(get, httptest.NewRequest("GET", "/diagnostics/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json", nil))
 	if get.Code != 200 || strings.Contains(get.Body.String(), "hunter2") {
 		t.Fatal("invalid download")
+	}
+}
+
+func TestAutomaticSubmissionIsLabeled(t *testing.T) {
+	var issueBody string
+	s := fixture(t, func(w http.ResponseWriter, r *http.Request) {
+		var issue map[string]string
+		_ = json.NewDecoder(r.Body).Decode(&issue)
+		issueBody = issue["body"]
+		w.WriteHeader(201)
+		fmt.Fprint(w, `{"number":12,"html_url":"https://github.com/owner/repo/issues/12"}`)
+	})
+	var req report
+	if err := json.Unmarshal([]byte(requestBody()), &req); err != nil {
+		t.Fatal(err)
+	}
+	req.SubmissionMode = "automatic"
+	req.Fingerprint = strings.Repeat("a", 64)
+	data, _ := json.Marshal(req)
+	if w := post(s, string(data)); w.Code != 201 {
+		t.Fatal(w.Code, w.Body.String())
+	}
+	if !strings.Contains(issueBody, "Submitted automatically") || !strings.Contains(issueBody, "Automatically generated description") ||
+		strings.Contains(issueBody, "player's Send action") || strings.Contains(issueBody, "Player description") {
+		t.Fatal("automatic issue attribution is incorrect")
+	}
+	req.Fingerprint = "invalid"
+	if validReport(req) {
+		t.Fatal("invalid automatic fingerprint accepted")
+	}
+	req.Fingerprint = strings.Repeat("a", 64)
+	req.IncludeDiagnostics = false
+	if validReport(req) {
+		t.Fatal("automatic report without diagnostics accepted")
 	}
 }
 

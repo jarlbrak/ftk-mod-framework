@@ -4,7 +4,8 @@ Read the root `AGENTS.md` first.
 
 - Keep the service, Dockerfile, deployment definition, disclosure and tests in this repository.
 - Credentials belong in Railway secrets. Never commit, print or copy a developer CLI credential.
-- Each client report requires an explicit player Send action. Detecting an error must not upload.
+- Manual reports require a player Send action. Default-on automatic reports send only while
+  the player-facing setting is enabled; the privacy disclosure must describe this path.
 - Preserve bounded collection, diagnostic exclusion, public-sharing disclosure and retention limits.
 - Keep durable submission receipts on the existing volume. An uncertain GitHub creation must be
   reconciled; never retry it as a new creation or discard its receipt to unblock a deployment.

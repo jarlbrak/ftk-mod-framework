@@ -1,10 +1,13 @@
 # In-game reporting service
 
-This small Go service accepts a player-approved report, filters diagnostic content,
+This small Go service accepts manual and default-on automatic reports, filters diagnostic content,
 creates a public issue in one fixed GitHub repository, and serves a public diagnostic
 bundle for 30 days. Players need no GitHub account. Credentials exist only on the
-service. The client must show the disclosure and require a Send action for each
-report, including automatically detected errors and unexpected previous exits.
+service. The client exposes an in-game setting to turn automatic reports off, and
+manual reports require a Send action. The privacy page discloses both paths.
+Deploy this service schema before distributing a framework build with automatic
+reports enabled. Older service builds reject the automatic submission fields;
+the client preserves those reports locally for retry and keeps the manual queue separate.
 
 ## Railway deployment
 
@@ -117,6 +120,8 @@ relying on this file-backed store.
   "reportId": "0123456789abcdef0123456789abcdef",
   "captureId": "fedcba9876543210fedcba9876543210",
   "kind": "error",
+  "submissionMode": "automatic",
+  "fingerprint": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
   "description": "Optional player description",
   "includeDiagnostics": true,
   "diagnostics": {
@@ -127,7 +132,11 @@ relying on this file-backed store.
 ```
 
 IDs are random 32-character lowercase hexadecimal identifiers. `kind` is `manual`,
-`error`, or `unexpected_exit`. Description is optional, up to 4000 Unicode code
+`error`, or `unexpected_exit`. `submissionMode` is omitted for manual reports and set
+to `automatic` for background reports. Automatic reports require diagnostics and
+cannot use `manual` kind. Automatic error reports also require a 64-character
+lowercase hexadecimal `fingerprint`, used by clients to suppress repeated errors.
+Description is optional, up to 4000 Unicode code
 points. Diagnostics must be an object when enabled and omitted or null when
 disabled. JSON depth is bounded. The client owns the diagnostic schema and collects only disclosed fields, never
 arbitrary files. The game attaches up to 128 KiB of UTF-8 process log text per
