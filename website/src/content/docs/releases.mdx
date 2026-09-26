@@ -4,6 +4,12 @@ description: What changed in the published framework and mod packages.
 ---
 import catalog from '../../data/catalog';
 
+## Framework 1.5.1 and bootstrap 1.0.0
+
+[Framework 1.5.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.5.1) adds the Windows launcher handoff for the independently versioned [bootstrap 1.0.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/bootstrap-v1.0.0). The launcher waits for the original game to exit before installing, acknowledges startup, and preserves the durable entry in Start menu and Steam shortcuts. Existing pins, framework updates, and the mod marketplace keep their normal flow.
+
+**Windows tester preview:** the complete in-game setup flow remains unverified. Automated launcher/helper and installer checks passed on Windows, macOS, and Ubuntu, and Unity-free CI passed. No new live-game smoke was performed. The Thunderstore upload completed through GitHub CI, but Thunderstore rejected the submission as **Invalid submission**. It is not available in the mod manager. Volunteers can use the regular [Windows launcher](../installation/) and report their results. A stable framework release does not imply verified Windows gameplay. Bootstrap 1.0.0 is only the thin initial installer; its number is independent of framework releases.
+
 ## Framework 1.5.0
 
 Adds default-on automatic bug reports. Detected errors and unexpected previous-session exits can send filtered diagnostics to a public framework GitHub issue without opening a prompt. Turn **Automatic bug reports** off in **Mods > Settings & Help** to stop new sends. The manual **Report Bugs** editor stays available when you want to add context. Automatic diagnostics may contain personal information from mod logs; read the [reporting disclosure](https://reporting-api-production-ff50.up.railway.app/privacy). A send already in progress may finish after the setting is turned off. [Download the 1.5.0 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.5.0).

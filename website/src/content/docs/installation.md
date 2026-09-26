@@ -6,12 +6,12 @@ You need an owned Steam copy of the **original For The King (2018)**. The framew
 
 ## 1. Get the launcher
 
-Download **framework 1.4.0**, extract it into a permanent folder, and keep its files together.
+Download **framework 1.5.1**, extract it into a permanent folder, and keep its files together.
 
-- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-macos-universal.zip)
-- [Windows x64 launcher (preview)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-windows-x64.zip)
-- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-linux-amd64.tar.gz)
-- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-linux-arm64.tar.gz)
+- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.5.1/FTKModdedLauncher-macos-universal.zip)
+- [Windows x64 launcher (preview)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.5.1/FTKModdedLauncher-windows-x64.zip)
+- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.5.1/FTKModdedLauncher-linux-amd64.tar.gz)
+- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.5.1/FTKModdedLauncher-linux-arm64.tar.gz)
 
 Linux ARM64 provides helper tooling, not a native ARM game port. Windows bundles remain a preview. The launcher packages exist for these platforms; native Windows/Linux gameplay remains unverified. Paladin, Thief, Possum, and Lore Store Unlocked are published for Windows, macOS, and Linux. The same mod archive serves all three platforms; installation still requires a listed game build. Read [compatibility](../compatibility/) before installing a mod.
 
@@ -38,3 +38,9 @@ Enable, disable, remove, and update through Mods. Cancel pending changes there i
 ## Manual installation
 
 The [repository installation guide](https://github.com/jarlbrak/ftk-mod-framework/blob/master/docs/INSTALL.md) documents the terminal installer and uninstall options. Manual content folders contain a manifest under the game's BepInEx plugins directory. For ordinary play, the launcher and in-game marketplace handle the package identity and dependencies for you.
+
+## Thunderstore status
+
+Framework 1.5.1 includes the launcher support for an optional thin Windows bootstrap. The initial bootstrap 1.0.0 submission was rejected by Thunderstore with the reason **Invalid submission** and is not available through its mod manager. Use the platform launcher downloads above while this is resolved.
+
+The complete Windows in-game setup flow remains unverified. Windows volunteers can try the regular Windows launcher and [report results](https://github.com/jarlbrak/ftk-mod-framework/issues), including their Windows version, whether setup and Play succeed, and any displayed error. Remove private information before attaching logs.
