@@ -6,12 +6,12 @@ You need an owned Steam copy of the **original For The King (2018)**. The framew
 
 ## 1. Get the launcher
 
-Download **framework 1.3.0**, extract it into a permanent folder, and keep its files together.
+Download **framework 1.4.0**, extract it into a permanent folder, and keep its files together.
 
-- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-macos-universal.zip)
-- [Windows x64 launcher (preview)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-windows-x64.zip)
-- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-linux-amd64.tar.gz)
-- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.3.0/FTKModdedLauncher-linux-arm64.tar.gz)
+- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-macos-universal.zip)
+- [Windows x64 launcher (preview)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-windows-x64.zip)
+- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-linux-amd64.tar.gz)
+- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.4.0/FTKModdedLauncher-linux-arm64.tar.gz)
 
 Linux ARM64 provides helper tooling, not a native ARM game port. Windows bundles remain a preview. The launcher packages exist for these platforms; native Windows/Linux gameplay remains unverified. Paladin, Thief, Possum, and Lore Store Unlocked are published for Windows, macOS, and Linux. The same mod archive serves all three platforms; installation still requires a listed game build. Read [compatibility](../compatibility/) before installing a mod.
 
@@ -20,6 +20,8 @@ Linux ARM64 provides helper tooling, not a native ARM game port. Windows bundles
 Choose **Games → Add a Non-Steam Game → Browse**. Select **For The King Modded.app** on macOS, **FtkModdedLauncher.exe** on Windows, or **For The King Modded.sh** on Linux. Start this shortcut to install the loader, framework, and matching marketplace helper, then open your game.
 
 On macOS, the community launcher is not notarized. If Gatekeeper blocks it, right-click the app and choose **Open**.
+
+Framework 1.4.0 includes the **Skyharbor** menu scene: a fortress airship dock with a departing and returning airship, plus the **MODDED EDITION** subtitle. It is enabled automatically; no separate mod is needed. To restore the original background, see [menu background settings](../troubleshooting/#change-the-menu-background).
 
 ## 3. Choose your mods
 

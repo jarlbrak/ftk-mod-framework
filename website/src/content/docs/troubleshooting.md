@@ -30,6 +30,12 @@ Compare the installed framework, package version, platform, and game build with 
 
 Restore the exact framework and mod set used by that run, or start a new adventure. Marketplace operations do not rewrite saves. If an update damaged a managed package, the menu can retain previous generations for rollback on a later launch.
 
+## Change the menu background
+
+Framework **1.4.0** includes the animated Skyharbor menu background. To restore the original background, close the game and open `BepInEx/config/com.ftkmf.framework.cfg` inside the game folder. Under `[UI]`, set `EnableSkyharborBackground = false`, save, and relaunch. Set it back to `true` to enable Skyharbor again. The file is created after the first framework launch.
+
+If Skyharbor is unexpectedly missing, check that the launcher installed framework 1.4.0 and that this setting is `true`, then restart. Party Select intentionally uses the native character stage. If the old background appears in other front-end transitions, report the menu route and framework version.
+
 ## Report a problem
 
 [Open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues) with your platform, game build, framework version, mod versions, what you did, and what happened. Include only relevant log lines and a screenshot if useful. Remove personal paths and other private information before posting. The loader's `BepInEx/LogOutput.log` inside the game folder can help identify the error. Do not upload game assemblies or saves containing private data.
