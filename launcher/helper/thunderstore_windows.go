@@ -31,10 +31,11 @@ func thunderstoreOpenLauncher(launcher, game string, parent int) error {
 		return fmt.Errorf("create launcher readiness event: %w", callErr)
 	}
 	defer syscall.CloseHandle(syscall.Handle(handle))
-	if err = thunderstoreShortcut(launcher); err != nil {
-		return err
+	args := []string{"--game-dir", game, "--ready-event", eventName}
+	if parent > 0 {
+		args = append(args, "--wait-for-process", strconv.Itoa(parent))
 	}
-	command := exec.Command(launcher, "--game-dir", game, "--wait-for-process", strconv.Itoa(parent), "--ready-event", eventName)
+	command := exec.Command(launcher, args...)
 	command.Dir = filepath.Dir(launcher)
 	if err = command.Start(); err != nil {
 		return fmt.Errorf("open installed launcher: %w", err)
@@ -68,4 +69,10 @@ func thunderstoreShortcut(launcher string) error {
 		return fmt.Errorf("create Start menu launcher entry: %w: %s", err, output)
 	}
 	return nil
+}
+
+func thunderstoreShowError(message string) {
+	text, _ := syscall.UTF16PtrFromString(message)
+	title, _ := syscall.UTF16PtrFromString("For The King Modded")
+	syscall.NewLazyDLL("user32.dll").NewProc("MessageBoxW").Call(0, uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(title)), 0x10)
 }

@@ -1,12 +1,10 @@
-name: Thunderstore release
+name: Thunderstore bootstrap release
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       tag:
-        description: Stable framework GitHub release tag (vX.Y.Z)
+        description: Independent bootstrap GitHub release tag (bootstrap-vX.Y.Z)
         required: true
         type: string
 
@@ -14,12 +12,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: thunderstore-${{ github.event.release.tag_name || inputs.tag || github.ref }}
+  group: thunderstore-${{ inputs.tag }}
   cancel-in-progress: false
 
 jobs:
   publish:
-    if: vars.THUNDERSTORE_BOOTSTRAP_READY == 'true' && (github.event_name == 'workflow_dispatch' || (github.event.release.prerelease == false && startsWith(github.event.release.tag_name, 'v')))
+    if: vars.THUNDERSTORE_BOOTSTRAP_READY == 'true'
     runs-on: ubuntu-latest
     environment: thunderstore
     steps:
@@ -31,7 +29,7 @@ jobs:
       - name: Check out the published release source
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.release.tag_name || inputs.tag }}
+          ref: ${{ inputs.tag }}
           path: release-source
 
       - name: Set up Python
@@ -49,7 +47,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           THUNDERSTORE_NAMESPACE: ${{ vars.THUNDERSTORE_NAMESPACE }}
-          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+          RELEASE_TAG: ${{ inputs.tag }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           OUTPUT_DIR: ${{ runner.temp }}/thunderstore-package
         shell: bash
@@ -59,19 +57,23 @@ jobs:
           published_tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
             --jq 'select(.draft == false and .prerelease == false) | .tag_name')"
           [[ "$published_tag" == "$RELEASE_TAG" ]] || {
-            echo "An already published stable framework release is required." >&2
+            echo "An already published stable bootstrap release is required." >&2
             exit 1
           }
 
-          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
-            echo "Only stable framework releases can be published to Thunderstore." >&2
+          [[ "$RELEASE_TAG" =~ ^bootstrap-v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+            echo "Only independent bootstrap releases can be published to Thunderstore." >&2
+            exit 1
+          }
+          latest_tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq '.tag_name')"
+          [[ "$latest_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+            echo "Bootstrap releases must use --latest=false to preserve the framework update feed." >&2
             exit 1
           }
           mkdir -p "$RUNNER_TEMP/ftkmf-release"
           gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
-            --pattern FTKModFramework.dll --pattern FTKThunderstoreBootstrap.dll \
-            --pattern ftkmf-helper-windows-amd64.exe \
-            --pattern FTKModdedLauncher-windows-x64.zip --pattern SHA256SUMS \
+            --pattern FTKThunderstoreBootstrap.dll \
+            --pattern ftkmf-bootstrap-helper.exe --pattern SHA256SUMS \
             --dir "$RUNNER_TEMP/ftkmf-release"
           python3 marketplace/packages/build_thunderstore.py \
             --tag "$RELEASE_TAG" \

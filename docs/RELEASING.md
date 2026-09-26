@@ -84,10 +84,11 @@ offline fallback; a first stable publication still needs an end-to-end download/
 Hashes establish consistency with the official release metadata, not an independent publisher
 signature. Account/repository security remains part of the distribution trust model.
 
-Thunderstore is planned as a framework-only initial installation channel. Mods retain their existing
-release and catalog process. The [Thunderstore workflow](THUNDERSTORE.md) consumes a stable framework
-release asset and remains disabled until the Windows launcher handoff passes its live acceptance gate.
-See that guide for setup, the readiness variable, and outstanding live-profile gates.
+Thunderstore uses an independently versioned thin Windows bootstrap. Framework and content releases
+do not publish Thunderstore packages. The [bootstrap workflow](THUNDERSTORE.md) is manually dispatched
+for reviewed `bootstrap-vX.Y.Z` releases after live acceptance. Publish bootstrap releases with
+`--latest=false` so they never replace the stable framework update feed. Preserve the launcher
+archive, checksum, and handoff contract described in that guide across framework releases.
 
 Automatic updates do not replace the launcher bootstrap or BepInEx and do not update community
 mods. Unknown local builds are preserved. For an incompatible launcher protocol, ship a new

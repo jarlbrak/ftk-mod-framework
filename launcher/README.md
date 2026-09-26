@@ -62,10 +62,11 @@ The [1.0.1 release notes](../docs/releases/v1.0.1.md) state the tested scope.
 Maintainers can find packaging and release procedures in
 [Releasing](../docs/RELEASING.md).
 
-## Thunderstore initial setup (unreleased)
+## Thin Thunderstore bootstrap (unreleased)
 
-The Windows Thunderstore package hands off to this launcher. It places a durable copy outside
-the manager profile, creates a Start menu entry, and remembers the game directory. The launcher
-waits for the initial game session to close; choose Play to finish installation, then use this
-launcher for future play and framework updates. Individual mods retain their in-game marketplace
-flow. See [Thunderstore setup](../docs/THUNDERSTORE.md) for release readiness and lifecycle details.
+The Windows Thunderstore package installs a small durable entry that downloads the current launcher
+on first run and refreshes it on later launches. The entry and cache live outside the manager profile;
+Start menu and Steam shortcuts keep targeting that entry. Once the initial game exits, choose Play
+to finish installation. Framework updates and content mods retain their existing managed flows.
+The bootstrap version is independent of framework releases. See [Thunderstore setup](../docs/THUNDERSTORE.md)
+for the stable launcher contract, offline fallback, publication process, and live validation gates.

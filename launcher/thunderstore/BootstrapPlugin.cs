@@ -25,9 +25,9 @@ namespace FTKThunderstoreBootstrap
             GUILayout.BeginArea(new Rect((Screen.width - width) / 2f, 40f, width, Math.Min(420f, Screen.height - 60f)), GUI.skin.box);
             GUILayout.Label("FTK Mod Framework: initial setup");
             GUILayout.Space(12f);
-            GUILayout.Label("Thunderstore installs this setup tool. Setup opens the FTK Modded Launcher and closes this game session. The launcher installs and updates the framework and manages your mods.", bodyStyle);
+            GUILayout.Label("Thunderstore installs this setup tool. First setup requires internet access to download the current FTK Modded Launcher from the official GitHub releases. Setup opens the launcher and closes this game session.", bodyStyle);
             GUILayout.Space(8f);
-            GUILayout.Label("After setup, always play through the FTK Modded Launcher. Launching this Thunderstore profile again returns to this setup screen.", bodyStyle);
+            GUILayout.Label("After setup, play through the FTK Modded Launcher entry in Start Menu or Steam. That entry checks for launcher updates. The framework manages framework and mod updates as usual. Launching this Thunderstore profile again returns to setup.", bodyStyle);
             GUILayout.Space(12f);
             if (Environment.OSVersion.Platform != PlatformID.Win32NT)
             {

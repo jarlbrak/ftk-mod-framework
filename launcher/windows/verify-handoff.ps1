@@ -64,6 +64,32 @@ try {
     if ($status.Text -notlike 'Choose Play to finish installation*') { throw "Unexpected ready status: $($status.Text)" }
     if ($launcherType.GetField('_busy', $instanceFlags).GetValue($form)) { throw 'Launcher remained busy after process exit.' }
     Write-Host 'PASS: process exit enables Play and prompts completion without running an installer'
+
+    $form.Close()
+    $form.Dispose()
+    $form = $null
+    # No bundled helper exists in this PowerShell host directory, so the normal
+    # artwork worker can only report a missing tool; it cannot touch Steam.
+    if (Test-Path -LiteralPath (Join-Path ([AppDomain]::CurrentDomain.BaseDirectory) 'ftkmf-launcher-helper.exe')) {
+        throw 'Unexpected helper in the fixture host directory.'
+    }
+    $entry = Join-Path $fixtureRoot 'FTKModdedBootstrap.exe'
+    [IO.File]::WriteAllText($entry, 'fixture entry')
+    [IO.File]::WriteAllText((Join-Path $fixtureRoot 'ftkmf-bootstrap-entry.txt'), $entry + "`r`n")
+    $arguments[0] = [string[]]@('--ready-event', $eventName)
+    $options = $optionsType.GetMethod('FromDirectory', $staticFlags).Invoke($null, $arguments)
+    $boundEntry = $optionsType.GetProperty('BootstrapEntry', $instanceFlags).GetValue($options, $null)
+    if ($boundEntry -ne $entry) { throw 'Persistent bootstrap entry was not loaded.' }
+    $form = $constructor.Invoke([object[]]@($options.PSObject.BaseObject))
+    if ($signal.WaitOne(0)) { throw 'Refresh acknowledged readiness before showing the launcher.' }
+    $form.Show()
+    [Windows.Forms.Application]::DoEvents()
+    if (-not $signal.WaitOne(2000)) { throw 'Normal refresh did not acknowledge launcher readiness.' }
+    $actions = $launcherType.GetField('_actions', $instanceFlags).GetValue($form)
+    foreach ($button in $actions) {
+        if (-not $button.Enabled) { throw 'Normal refresh unexpectedly blocked launcher actions.' }
+    }
+    Write-Host 'PASS: refresh readiness works without a running game and retains the durable bootstrap entry'
 }
 finally {
     if ($null -ne $form) { $form.Close(); $form.Dispose() }

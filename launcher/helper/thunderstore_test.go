@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -107,4 +108,16 @@ func TestThunderstoreRejectsLinkedOrIncompleteTarget(t *testing.T) {
 			t.Fatal("incomplete or linked target accepted")
 		}
 	}
+}
+
+func thunderstoreStage(bundle, root, game string) (string, error) {
+	archive, err := marketReadBytes(filepath.Join(bundle, thunderstoreArchive), updaterAssetLimit)
+	if err != nil {
+		return "", err
+	}
+	expected, err := marketReadBytes(filepath.Join(bundle, "launcher.sha256"), 128)
+	if err != nil {
+		return "", err
+	}
+	return thunderstoreStageBytes(archive, strings.TrimSpace(string(expected)), root, game, "")
 }

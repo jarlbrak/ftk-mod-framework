@@ -77,10 +77,10 @@ cp "$DLL" "$DIST/FTKModFramework.dll"
 cp "$ROOT/install.sh" "$DIST/install.sh"
 cp "$ROOT/launcher/windows/install.ps1" "$DIST/install.ps1"
 bash "$ROOT/launcher/build.sh" "$DIST/launchers"
-cp "$DIST/launchers/"ftkmf-helper-* "$DIST/launchers/FTKThunderstoreBootstrap.dll" "$DIST/"
+cp "$DIST/launchers/"ftkmf-helper-* "$DIST/"
 cp "$DIST/launchers/"*.zip "$DIST/launchers/"*.tar.gz "$DIST/"
 python3 "$ROOT/launcher/tools/release-manifest.py" release "$DIST" "$PLUGIN_VERSION" --policy "$ROOT/launcher/update-policy.json"
-(cd "$DIST" && if command -v sha256sum >/dev/null 2>&1; then sha256sum update.json FTKModFramework.dll FTKThunderstoreBootstrap.dll install.sh install.ps1 ftkmf-helper-* ./*.zip ./*.tar.gz; else shasum -a 256 update.json FTKModFramework.dll FTKThunderstoreBootstrap.dll install.sh install.ps1 ftkmf-helper-* ./*.zip ./*.tar.gz; fi > SHA256SUMS)
+(cd "$DIST" && if command -v sha256sum >/dev/null 2>&1; then sha256sum update.json FTKModFramework.dll install.sh install.ps1 ftkmf-helper-* ./*.zip ./*.tar.gz; else shasum -a 256 update.json FTKModFramework.dll install.sh install.ps1 ftkmf-helper-* ./*.zip ./*.tar.gz; fi > SHA256SUMS)
 echo "assets:"; (cd "$DIST" && ls -la && cat SHA256SUMS)
 
 # 6) The installer must accept the DLL we are about to publish.
@@ -108,7 +108,7 @@ RELEASE_ARGS=(--repo "$REPO" --target "$SOURCE_COMMIT" --title "$TAG" --draft)
 [ "$PRERELEASE" = 0 ] || RELEASE_ARGS+=(--prerelease)
 if [ -n "$NOTES_FILE" ]; then RELEASE_ARGS+=(--notes-file "$NOTES_FILE"); else RELEASE_ARGS+=(--generate-notes); fi
 gh release create "$TAG" "${RELEASE_ARGS[@]}" \
-  "$DIST/FTKModFramework.dll" "$DIST/FTKThunderstoreBootstrap.dll" "$DIST/SHA256SUMS" "$DIST/update.json" "$DIST/install.sh" "$DIST/install.ps1" \
+  "$DIST/FTKModFramework.dll" "$DIST/SHA256SUMS" "$DIST/update.json" "$DIST/install.sh" "$DIST/install.ps1" \
   "$DIST/"ftkmf-helper-* "$DIST/"*.zip "$DIST/"*.tar.gz
 
 # Check every uploaded name and byte count before exposing this release to players.

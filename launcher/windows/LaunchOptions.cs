@@ -9,6 +9,7 @@ namespace FtkModdedLauncher
         internal string GameDir { get; private set; }
         internal int? WaitForProcess { get; private set; }
         internal string ReadyEvent { get; private set; }
+        internal string BootstrapEntry { get; private set; }
 
         internal static LaunchOptions FromDirectory(string[] args, string directory)
         {
@@ -18,7 +19,16 @@ namespace FtkModdedLauncher
                 string metadata = Path.Combine(directory, "ftkmf-game-directory.txt");
                 if (File.Exists(metadata)) defaultGameDir = File.ReadAllText(metadata).TrimEnd('\r', '\n');
             }
-            return Parse(args, defaultGameDir);
+            LaunchOptions options = Parse(args, defaultGameDir);
+            string entryMetadata = Path.Combine(directory, "ftkmf-bootstrap-entry.txt");
+            if (File.Exists(entryMetadata))
+            {
+                string entry = ValidateGameDirectory(File.ReadAllText(entryMetadata).TrimEnd('\r', '\n'));
+                if (!string.Equals(Path.GetFileName(entry), "FTKModdedBootstrap.exe", StringComparison.OrdinalIgnoreCase) || !File.Exists(entry))
+                    throw new ArgumentException("The bootstrap entry must name an existing FTKModdedBootstrap.exe.");
+                options.BootstrapEntry = entry;
+            }
+            return options;
         }
 
         internal static LaunchOptions Parse(string[] args, string defaultGameDir = null)
@@ -62,8 +72,8 @@ namespace FtkModdedLauncher
             }
             if (options.GameDir == null && defaultGameDir != null)
                 options.GameDir = ValidateGameDirectory(defaultGameDir);
-            if (options.ReadyEvent != null && !options.WaitForProcess.HasValue)
-                throw new ArgumentException("--ready-event requires --wait-for-process.");
+            if (options.ReadyEvent != null && options.GameDir == null)
+                throw new ArgumentException("--ready-event requires --game-dir.");
             if (options.WaitForProcess.HasValue && options.GameDir == null)
                 throw new ArgumentException("--wait-for-process requires --game-dir.");
             return options;

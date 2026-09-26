@@ -32,6 +32,19 @@ internal static class Program
                 Require(remembered.GameDir == @"C:\Games\For The King", "Remembered directory changed.");
                 LaunchOptions acknowledged = LaunchOptions.FromDirectory(new[] { "--wait-for-process", "42", "--ready-event", readyEvent }, directory);
                 Require(acknowledged.ReadyEvent == readyEvent && acknowledged.WaitForProcess == 42, "Readiness contract changed.");
+                LaunchOptions refreshed = LaunchOptions.FromDirectory(new[] { "--ready-event", readyEvent }, directory);
+                Require(refreshed.ReadyEvent == readyEvent && !refreshed.WaitForProcess.HasValue, "Refresh readiness requires a game process.");
+                string entry = Path.Combine(directory, "FTKModdedBootstrap.exe");
+                string sidecar = Path.Combine(directory, "ftkmf-bootstrap-entry.txt");
+                File.WriteAllText(entry, "fixture");
+                File.WriteAllText(sidecar, entry + "\r\n");
+                Require(LaunchOptions.FromDirectory(new string[0], directory).BootstrapEntry == entry, "Bootstrap target was not preserved.");
+                foreach (string invalid in new[] { "relative.exe", Path.Combine(directory, "wrong.exe"), Path.Combine(directory, "missing", "FTKModdedBootstrap.exe") })
+                {
+                    File.WriteAllText(sidecar, invalid);
+                    try { LaunchOptions.FromDirectory(new string[0], directory); throw new Exception("Accepted invalid bootstrap target."); }
+                    catch (ArgumentException) { }
+                }
             }
         }
         finally { Directory.Delete(directory, true); }

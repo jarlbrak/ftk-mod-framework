@@ -80,29 +80,31 @@ namespace FtkModdedLauncher
             _artworkStatus.Font = new Font("Segoe UI", 9);
             Controls.Add(_artworkStatus);
             Shown += delegate {
+                bool ready = true;
                 if (_options.WaitForProcess.HasValue)
                 {
                     _playUsed = true;
                     SetHandoffWaiting();
-                    bool ready = CheckHandoffGame();
+                    ready = CheckHandoffGame();
                     if (_handoffGame != null) _handoffMonitor.Start();
-                    if (ready && _options.ReadyEvent != null)
-                    {
-                        try
-                        {
-                            using (System.Threading.EventWaitHandle signal = System.Threading.EventWaitHandle.OpenExisting(_options.ReadyEvent))
-                                if (!signal.Set()) throw new InvalidOperationException("The bootstrap readiness event could not be signaled.");
-                        }
-                        catch (Exception error)
-                        {
-                            _handoffMonitor.Stop();
-                            SetHandoffWaiting();
-                            MessageBox.Show(this, "Unable to confirm launcher readiness: " + error.Message,
-                                "For The King Modded", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
                 }
                 else ApplyArtwork();
+                if (ready && _options.ReadyEvent != null)
+                {
+                    try
+                    {
+                        using (System.Threading.EventWaitHandle signal = System.Threading.EventWaitHandle.OpenExisting(_options.ReadyEvent))
+                            if (!signal.Set()) throw new InvalidOperationException("The bootstrap readiness event could not be signaled.");
+                    }
+                    catch (Exception error)
+                    {
+                        _handoffMonitor.Stop();
+                        _busy = true;
+                        foreach (Button button in _actions) button.Enabled = false;
+                        MessageBox.Show(this, "Unable to confirm launcher readiness: " + error.Message,
+                            "For The King Modded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             };
             _handoffMonitor.Tick += delegate { CheckHandoffGame(); };
             _childMonitor.Tick += delegate { CheckPreviousChild(); };
@@ -236,11 +238,11 @@ namespace FtkModdedLauncher
             internal ChildStillRunningException(Process child) : base("The previous setup or update process may still be running. Play and Repair remain blocked until it exits.") { Child = child; }
         }
 
-        private static string RunHelper(string command)
+        private string RunHelper(string command)
         {
             string directory = AppDomain.CurrentDomain.BaseDirectory;
             return RunProcess(Path.Combine(directory, "ftkmf-launcher-helper.exe"),
-                command + " --launcher " + Quote(Application.ExecutablePath) + " --art " + Quote(Path.Combine(directory, "assets", "steam")), 60000);
+                command + " --launcher " + Quote(_options.BootstrapEntry ?? Application.ExecutablePath) + " --art " + Quote(Path.Combine(directory, "assets", "steam")), 60000);
         }
 
         // CommandLineToArgvW quoting, including trailing backslashes and paths containing quotes.

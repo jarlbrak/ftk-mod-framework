@@ -370,6 +370,13 @@ func run(args []string) error {
 	return nil
 }
 func main() {
+	if len(os.Args) == 1 && strings.EqualFold(filepath.Base(os.Args[0]), "FTKModdedBootstrap.exe") {
+		if err := thunderstoreStandalone(); err != nil {
+			thunderstoreShowError(err.Error())
+			os.Exit(1)
+		}
+		return
+	}
 	if len(os.Args) > 1 && os.Args[1] == "thunderstore-handoff" {
 		if err := thunderstoreHandoffMain(os.Args[2:]); err != nil {
 			fmt.Fprintln(os.Stderr, err)

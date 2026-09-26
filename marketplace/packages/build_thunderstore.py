@@ -16,8 +16,7 @@ FRAMEWORK_PACKAGE_NAME = "FTKModFramework"
 FRAMEWORK_DEPENDENCY = "BepInEx-BepInExPack_ForTheKing"
 FRAMEWORK_DEPENDENCY_VERSION = "5.4.19001"
 
-TAG_PATTERN = re.compile(r"^v(?P<version>(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))$")
-PLUGIN_VERSION_PATTERN = re.compile(r'public const string Version = "([0-9]+\.[0-9]+\.[0-9]+)";')
+TAG_PATTERN = re.compile(r"^bootstrap-v(?P<version>(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))$")
 
 
 def sha256(data):
@@ -30,15 +29,9 @@ def version_tuple(value):
     return tuple(int(part) for part in value.split("."))
 
 
-def plugin_version(source_root):
-    source = (source_root / "FTKModFramework" / "Plugin.cs").read_text(encoding="utf-8")
-    match = PLUGIN_VERSION_PATTERN.search(source)
-    if not match:
-        raise ValueError("Could not read FTK Mod Framework version from Plugin.cs")
-    version = match.group(1)
-    project = (source_root / "FTKModFramework" / "FTKModFramework.csproj").read_text(encoding="utf-8")
-    if "<Version>" + version + "</Version>" not in project:
-        raise ValueError("Plugin.cs and FTKModFramework.csproj versions differ")
+def bootstrap_version(source_root):
+    version = (source_root / "launcher" / "thunderstore" / "bootstrap-version.txt").read_text().strip()
+    version_tuple(version)
     return version
 
 
@@ -149,11 +142,7 @@ def write_package(output, namespace, package_name, version, description, website
             "package": receipt["package"], "version": version}
 
 
-RELEASE_FILES = (
-    "FTKThunderstoreBootstrap.dll", "ftkmf-helper-windows-amd64.exe",
-    "FTKModdedLauncher-windows-x64.zip", "FTKModFramework.dll",
-)
-
+RELEASE_FILES = ("FTKThunderstoreBootstrap.dll", "ftkmf-bootstrap-helper.exe")
 
 def release_files(directory):
     checksums = {}
@@ -177,62 +166,14 @@ def release_files(directory):
     return result
 
 
-def validate_launcher(data, version, artifacts):
-    import io
-    with zipfile.ZipFile(io.BytesIO(data)) as archive:
-        names = archive.namelist()
-        if len(names) > 2000 or len({name.lower() for name in names}) != len(names):
-            raise ValueError("Invalid launcher archive inventory")
-        root = "For The King Modded/"
-        total = 0
-        for entry in archive.infolist():
-            name = entry.filename
-            total += entry.file_size
-            if (not name.startswith(root) or ".." in Path(name).parts or "\\" in name
-                    or ":" in name or (entry.external_attr >> 16) & 0o170000 == 0o120000
-                    or total > 300 * 1024 * 1024):
-                raise ValueError("Unsafe launcher archive entry: " + name)
-            if entry.is_dir():
-                continue
-            relative = name[len(root):]
-            allowed = {"FtkModdedLauncher.exe", "FtkModdedLauncher.exe.config", "FTKModFramework.dll",
-                       "ftkmf-launcher-helper.exe", "bundle-manifest.json", "install.ps1", "README.md"}
-            if relative not in allowed and not (relative.startswith("assets/steam/") and relative.endswith(".png")):
-                raise ValueError("Unexpected launcher payload: " + name)
-        for required in ("FtkModdedLauncher.exe", "FtkModdedLauncher.exe.config", "install.ps1"):
-            if not archive.read(root + required):
-                raise ValueError("Empty required launcher file: " + required)
-        manifest = json.loads(archive.read(root + "bundle-manifest.json"))
-        dll = archive.read(root + "FTKModFramework.dll")
-        helper = archive.read(root + "ftkmf-launcher-helper.exe")
-        if (manifest.get("schemaVersion") != 1 or manifest.get("frameworkVersion") != version
-                or dll != artifacts["FTKModFramework.dll"]
-                or helper != artifacts["ftkmf-helper-windows-amd64.exe"]
-                or manifest.get("dllSha256") != sha256(dll)
-                or manifest.get("helpers", {}).get("ftkmf-helper-windows-amd64.exe") != sha256(helper)):
-            raise ValueError("Launcher bundle does not match the framework/helper release pair")
-
-
-def framework_package(tag_version, namespace, release_dir, output, source_root):
-    if plugin_version(source_root) != tag_version:
-        raise ValueError("Framework tag version does not match its source")
-    if not (source_root / "launcher" / "helper" / "thunderstore.go").is_file():
-        raise ValueError("This release predates the Thunderstore launcher handoff")
+def bootstrap_package(tag_version, namespace, release_dir, output, source_root):
+    if bootstrap_version(source_root) != tag_version:
+        raise ValueError("Bootstrap tag version does not match its independent source version")
     artifacts = release_files(Path(release_dir))
-    archive = artifacts["FTKModdedLauncher-windows-x64.zip"]
-    validate_launcher(archive, tag_version, artifacts)
-    # Keep the actual framework DLL opaque to the manager's BepInEx discovery.
-    # Only the setup plugin loads in the initial profile.
-    prefix = "plugins/FTKSetup/"
-    files = {
-        prefix + "FTKThunderstoreBootstrap.dll": artifacts["FTKThunderstoreBootstrap.dll"],
-        prefix + "ftkmf-bootstrap-helper.exe": artifacts["ftkmf-helper-windows-amd64.exe"],
-        prefix + "FTKModdedLauncher-windows-x64.zip": archive,
-        prefix + "launcher.sha256": (sha256(archive) + "\n").encode("ascii"),
-    }
+    files = {"plugins/FTKSetup/" + name: content for name, content in artifacts.items()}
     return write_package(
         output, namespace, FRAMEWORK_PACKAGE_NAME, tag_version,
-        "Initial Windows setup for FTK Mod Framework. Continue playing and managing mods through the FTK Modded Launcher.",
+        "Thin Windows installer for FTK Mod Framework. Downloads the current launcher; framework and mods update through FTK.",
         "https://github.com/jarlbrak/ftk-mod-framework",
         {FRAMEWORK_DEPENDENCY: FRAMEWORK_DEPENDENCY_VERSION},
         ROOT / "FTKModFramework" / "thunderstore" / "README.md",
@@ -241,7 +182,7 @@ def framework_package(tag_version, namespace, release_dir, output, source_root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--tag", required=True, help="Stable framework GitHub release tag: vX.Y.Z")
+    parser.add_argument("--tag", required=True, help="Independent bootstrap release tag: bootstrap-vX.Y.Z")
     parser.add_argument("--namespace", default="JarlBrak", help="Thunderstore team namespace")
     parser.add_argument("--release-dir", type=Path, required=True, help="Downloaded release assets and SHA256SUMS")
     parser.add_argument("--source-root", type=Path, default=ROOT, help="Exact release source checkout")
@@ -249,8 +190,8 @@ def main():
     args = parser.parse_args()
     match = TAG_PATTERN.fullmatch(args.tag)
     if not match:
-        parser.error("only stable framework tags vX.Y.Z are supported; mods use the existing marketplace")
-    result = framework_package(match.group("version"), args.namespace,
+        parser.error("only bootstrap-vX.Y.Z tags are supported; framework and mods retain their own releases")
+    result = bootstrap_package(match.group("version"), args.namespace,
                                args.release_dir, args.output, args.source_root.resolve())
     print(json.dumps([result], indent=2, sort_keys=True))
 

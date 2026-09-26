@@ -1,7 +1,5 @@
-"""Game-free checks for the framework bootstrap distribution boundary."""
-import hashlib
+"""Game-free checks for independently versioned thin bootstrap packages."""
 import importlib.util
-import io
 import json
 from pathlib import Path
 import tempfile
@@ -14,78 +12,56 @@ spec.loader.exec_module(builder)
 
 
 class ThunderstoreTests(unittest.TestCase):
-    def assets(self, root, extra=None):
-        dll, helper = b"MZframework fixture", b"MZhelper fixture"
-        files = {
-            "FtkModdedLauncher.exe": b"MZlauncher fixture",
-            "FtkModdedLauncher.exe.config": b"config",
-            "install.ps1": b"installer",
-            "FTKModFramework.dll": dll,
-            "ftkmf-launcher-helper.exe": helper,
-            "bundle-manifest.json": json.dumps({
-                "schemaVersion": 1, "frameworkVersion": builder.plugin_version(builder.ROOT),
-                "dllSha256": builder.sha256(dll),
-                "helpers": {"ftkmf-helper-windows-amd64.exe": builder.sha256(helper)},
-            }).encode(),
-        }
-        if extra:
-            files[extra] = b"unwanted"
-        archive = io.BytesIO()
-        with zipfile.ZipFile(archive, "w") as output:
-            for name, content in files.items():
-                output.writestr("For The King Modded/" + name, content)
-        artifacts = {
-            "FTKModFramework.dll": dll, "ftkmf-helper-windows-amd64.exe": helper,
-            "FTKThunderstoreBootstrap.dll": b"MZbootstrap fixture",
-            "FTKModdedLauncher-windows-x64.zip": archive.getvalue(),
-        }
+    def assets(self, root):
+        artifacts = {name: b"MZfixture " + name.encode() for name in builder.RELEASE_FILES}
         for name, content in artifacts.items():
             (root / name).write_bytes(content)
         (root / "SHA256SUMS").write_text("".join(
             builder.sha256(content) + "  " + name + "\n" for name, content in artifacts.items()))
-        return artifacts
 
-    def test_bootstrap_only_and_deterministic(self):
+    def test_thin_bootstrap_only_and_deterministic(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             self.assets(root)
-            arguments = (builder.plugin_version(builder.ROOT), "Fixture", root, root / "output", builder.ROOT)
-            result = builder.framework_package(*arguments)
-            self.assertEqual(result["sha256"], builder.framework_package(*arguments)["sha256"])
+            args = (builder.bootstrap_version(builder.ROOT), "Fixture", root, root / "output", builder.ROOT)
+            result = builder.bootstrap_package(*args)
+            self.assertEqual(result["sha256"], builder.bootstrap_package(*args)["sha256"])
             with zipfile.ZipFile(result["archive"]) as archive:
                 self.assertIsNone(archive.testzip())
-                dlls = [name for name in archive.namelist() if name.endswith(".dll")]
-                self.assertEqual(dlls, ["plugins/FTKSetup/FTKThunderstoreBootstrap.dll"])
+                self.assertEqual(set(archive.namelist()), {
+                    "README.md", "manifest.json", "icon.png",
+                    "plugins/FTKSetup/FTKThunderstoreBootstrap.dll",
+                    "plugins/FTKSetup/ftkmf-bootstrap-helper.exe"})
                 metadata = json.loads(archive.read("manifest.json"))
+                self.assertEqual(metadata["version_number"], builder.bootstrap_version(builder.ROOT))
                 self.assertEqual(metadata["dependencies"], ["BepInEx-BepInExPack_ForTheKing-5.4.19001"])
-                payload = archive.read("plugins/FTKSetup/FTKModdedLauncher-windows-x64.zip")
-                self.assertEqual(archive.read("plugins/FTKSetup/launcher.sha256").strip().decode(), hashlib.sha256(payload).hexdigest())
 
-    def test_release_asset_tampering_rejected(self):
+    def test_release_tampering_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             self.assets(root)
-            (root / "ftkmf-helper-windows-amd64.exe").write_bytes(b"MZmodified")
+            (root / "ftkmf-bootstrap-helper.exe").write_bytes(b"MZmodified")
             with self.assertRaisesRegex(ValueError, "checksum mismatch"):
                 builder.release_files(root)
 
-    def test_game_assemblies_and_traversal_rejected(self):
-        for extra in ("Assembly-CSharp.dll", "../outside.exe", "other.exe"):
-            with self.subTest(extra=extra), tempfile.TemporaryDirectory() as temporary:
-                root = Path(temporary)
-                artifacts = self.assets(root, extra)
-                with self.assertRaises(ValueError):
-                    builder.validate_launcher(artifacts["FTKModdedLauncher-windows-x64.zip"], builder.plugin_version(builder.ROOT), artifacts)
-
-    def test_framework_helper_pair_must_match_release(self):
+    def test_missing_checksum_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
-            artifacts = self.assets(Path(temporary))
-            artifacts["ftkmf-helper-windows-amd64.exe"] = b"MZdifferent helper"
-            with self.assertRaisesRegex(ValueError, "release pair"):
-                builder.validate_launcher(artifacts["FTKModdedLauncher-windows-x64.zip"], builder.plugin_version(builder.ROOT), artifacts)
+            root = Path(temporary)
+            self.assets(root)
+            (root / "SHA256SUMS").write_text("")
+            with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                builder.release_files(root)
 
-    def test_content_and_prerelease_tags_rejected(self):
-        for tag in ("paladin-v1.4.0", "v1.5.0-beta", "v01.5.0"):
+    def test_bootstrap_version_must_match(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.assets(root)
+            with self.assertRaisesRegex(ValueError, "independent source version"):
+                builder.bootstrap_package("999.0.0", "Fixture", root, root / "out", builder.ROOT)
+
+    def test_framework_content_and_preview_tags_rejected(self):
+        self.assertIsNotNone(builder.TAG_PATTERN.fullmatch("bootstrap-v1.0.0"))
+        for tag in ("paladin-v1.4.0", "v1.5.0", "bootstrap-v1.0.0-beta", "bootstrap-v01.0.0"):
             self.assertIsNone(builder.TAG_PATTERN.fullmatch(tag))
 
 
