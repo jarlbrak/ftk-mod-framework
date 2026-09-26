@@ -37,10 +37,10 @@ try {
     [IO.File]::WriteAllText((Join-Path $fixtureRoot 'ftkmf-game-directory.txt'), $fixtureRoot + "`r`n")
     $arguments = New-Object 'object[]' 2
     $arguments[0] = [string[]]@('--wait-for-process', [string]$child.Id, '--ready-event', $eventName)
-    $arguments[1] = $fixtureRoot
+    $arguments[1] = $fixtureRoot.PSObject.BaseObject
     $options = $optionsType.GetMethod('FromDirectory', $staticFlags).Invoke($null, $arguments)
     $constructor = $launcherType.GetConstructor($instanceFlags, $null, [Type[]]@($optionsType), $null)
-    $form = $constructor.Invoke([object[]]@($options))
+    $form = $constructor.Invoke([object[]]@($options.PSObject.BaseObject))
     if ($signal.WaitOne(0)) { throw 'Launcher acknowledged readiness before showing its waiting UI.' }
     $form.Show()
     [Windows.Forms.Application]::DoEvents()
