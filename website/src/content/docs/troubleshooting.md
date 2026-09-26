@@ -38,4 +38,6 @@ If Skyharbor is unexpectedly missing, check that the launcher installed framewor
 
 ## Report a problem
 
-[Open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues) with your platform, game build, framework version, mod versions, what you did, and what happened. Include only relevant log lines and a screenshot if useful. Remove personal paths and other private information before posting. The loader's `BepInEx/LogOutput.log` inside the game folder can help identify the error. Do not upload game assemblies or saves containing private data.
+Framework 1.5.0 sends detected errors and unexpected previous-session exits to public framework GitHub issues by default, with filtered diagnostics. Turn off **Automatic bug reports** in **Mods > Settings & Help** to stop new automatic sends. The manual **Report Bugs** editor remains available when you want to explain a problem. Diagnostics can still contain personal information written by mods; see the [reporting disclosure](https://reporting-api-production-ff50.up.railway.app/privacy).
+
+You can also [open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues) with your platform, game build, framework version, mod versions, what you did, and what happened. Include only relevant log lines and remove personal paths and other private information. The loader's `BepInEx/LogOutput.log` inside the game folder can help identify the error. Do not upload game assemblies or saves containing private data.

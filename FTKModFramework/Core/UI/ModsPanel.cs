@@ -909,6 +909,11 @@ namespace FTKModFramework.Core.UI
                 Plugin.EnableTitleScreenActivation.Value = !Plugin.EnableTitleScreenActivation.Value;
                 Plugin.Instance.Config.Save(); Refresh();
             }, !PanelBusy);
+            ActionButton("Automatic bug reports: " + (Plugin.AutomaticBugReports.Value ? "On" : "Off"), delegate {
+                Plugin.AutomaticBugReports.Value = !Plugin.AutomaticBugReports.Value;
+                Plugin.Instance.Config.Save(); Refresh();
+            }, !PanelBusy);
+            TextLine("When on, detected errors and unexpected exits send filtered diagnostics to public GitHub issues without asking. Turn off to stop new automatic sends. Report Bugs remains available.", 23, 76);
             ActionButton("Review prepared changes", delegate { Navigate("maintenance"); });
             ActionButton("Saved mod sets", delegate { Navigate("saved-sets"); }, !PanelBusy);
             ActionButton("Restore previous mods...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !PanelBusy);

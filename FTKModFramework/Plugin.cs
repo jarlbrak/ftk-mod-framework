@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "1.4.0";
+        public const string Version = "1.5.0";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -88,6 +88,10 @@ namespace FTKModFramework
 
         /// <summary>Seconds the splash card holds at full opacity before fading (0.5 to 120; any key skips).</summary>
         public static ConfigEntry<float> SplashSeconds;
+
+        /// <summary>Send detected errors automatically when the reporting service is available.</summary>
+        public static ConfigEntry<bool> AutomaticBugReports;
+        internal static ConfigEntry<string> AutomaticBugReportHistory;
 
         // ---- Diagnostics: framework self-tests ---------------------------------------------------------
         // The load-time self-tests are a DEVELOPMENT gate (CLAUDE.md: "SELF-TEST PASS lines in the log"). They
@@ -193,6 +197,7 @@ namespace FTKModFramework
             LegacyKrakenResourceAdapterLease.PruneDestroyedOwners();
             Core.Reporting.ReportingRuntime.Tick();
             Core.Reporting.ReportingSubmission.Tick();
+            Core.Reporting.ReportingAutomatic.Tick(AutomaticBugReports != null && AutomaticBugReports.Value && !SelfTestsEnabled);
             Core.UI.ReportingMenu.Tick();
         }
 
@@ -246,6 +251,11 @@ namespace FTKModFramework
 
             SplashSeconds = Config.Bind("UI", "SplashSeconds", 4f,
                 "How many seconds the splash card holds at full opacity before fading out (0.5 to 120).");
+
+            AutomaticBugReports = Config.Bind("Reporting", "AutomaticBugReports", true,
+                "Automatically send detected errors and unexpected exits with filtered diagnostics to public GitHub issues. Turn off to use only manual Report Bugs.");
+            AutomaticBugReportHistory = Config.Bind("Reporting", "AutomaticBugReportHistory", "",
+                "Recent automatic error fingerprints used to avoid duplicate public reports. Managed by the framework.");
 
             RunSelfTests = Config.Bind("Diagnostics", "RunSelfTests", false,
                 "DEVELOPMENT: run the framework's load-time self-tests (behaviour primitives, passive registry, " +

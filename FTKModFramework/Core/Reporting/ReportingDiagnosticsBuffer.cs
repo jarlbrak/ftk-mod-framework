@@ -9,9 +9,10 @@ namespace FTKModFramework.Core.Reporting
     {
         internal string Id { get; private set; }
         internal string Summary { get; private set; }
+        internal string Signature { get; private set; }
         internal DateTime CapturedAtUtc { get; private set; }
-        internal ReportingDiagnosticsError(string summary, DateTime utcNow)
-        { Id = Guid.NewGuid().ToString("N"); Summary = summary; CapturedAtUtc = utcNow; }
+        internal ReportingDiagnosticsError(string summary, string signature, DateTime utcNow)
+        { Id = Guid.NewGuid().ToString("N"); Summary = summary; Signature = signature; CapturedAtUtc = utcNow; }
     }
 
     // A process-local transcript includes ordinary activity before a freeze, even when nothing
@@ -54,9 +55,10 @@ namespace FTKModFramework.Core.Reporting
                 // Retain repeated log messages in order: a repeated combat transition can be
                 // the useful clue. Deduplication applies only to automatic error offers.
                 bool newError = false;
+                string signature = null;
                 if (isError)
                 {
-                    string signature = body.Length > 512 ? body.Substring(0, 512) : body;
+                    signature = body.Length > 512 ? body.Substring(0, 512) : body;
                     newError = !signatures.Contains(signature);
                     if (newError)
                     {
@@ -73,7 +75,7 @@ namespace FTKModFramework.Core.Reporting
                 if (newError && pending == null && offers < 3 && utcNow >= nextOffer)
                 {
                     string summary = body.Split('\n')[0];
-                    pending = new ReportingDiagnosticsError(LimitUtf8(summary, 240), utcNow);
+                    pending = new ReportingDiagnosticsError(LimitUtf8(summary, 240), signature, utcNow);
                     offers++; nextOffer = utcNow.AddMinutes(5);
                 }
             }

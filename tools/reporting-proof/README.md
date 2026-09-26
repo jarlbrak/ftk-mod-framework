@@ -194,11 +194,12 @@ legacy-form interception patches. The framework's ReportingMenu and ReportingPan
 own that route. Do not mix menu-only suppression counters or fault injection
 results with evidence for this mode.
 
-The current direct-send panel offers one optional description, a diagnostics toggle,
-an expandable payload preview, and Send report. It routes through the trusted native
-helper to the repository-owned Railway service. Error and restart offers require
-explicit Send; merely opening or dismissing them uploads nothing. Retry keeps the
-same frozen bytes and report ID. See [Reporting](../../docs/REPORTING.md).
+The current reporting panel offers one optional description, a diagnostics toggle,
+an expandable payload preview, and Send report. Manual reports route through the
+trusted native helper to the repository-owned Railway service and require explicit
+Send. Default-on automatic reports send detected errors and unexpected previous
+exits with filtered diagnostics; the setting is in Mods > Settings & Help. Retry
+keeps the same bytes and report ID. See [Reporting](../../docs/REPORTING.md).
 
 Earlier evidence below and in historical records exercised browser handoff, local
 export, and multi-field narrative editing. Those paths do not qualify the direct-send

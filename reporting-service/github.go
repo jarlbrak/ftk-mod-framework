@@ -63,14 +63,22 @@ func (s *service) createIssue(rec *receipt) bool {
 		}
 		title += ": " + string(runes)
 	}
-	body := marker(r.ReportID) + "\n## Player description\n\n" + fenced(r.Description) + "\n\nReport kind: `" + r.Kind + "`\nReport ID: `" + r.ReportID + "`\nCapture ID: `" + r.CaptureID + "`\n"
+	descriptionHeading := "Player description"
+	if r.SubmissionMode == "automatic" {
+		descriptionHeading = "Automatically generated description"
+	}
+	body := marker(r.ReportID) + "\n## " + descriptionHeading + "\n\n" + fenced(r.Description) + "\n\nReport kind: `" + r.Kind + "`\nReport ID: `" + r.ReportID + "`\nCapture ID: `" + r.CaptureID + "`\n"
 	if r.IncludeDiagnostics {
 		excerpt := diagnosticExcerpt(r.Diagnostics)
 		body += "\n## Diagnostics excerpt\n\n" + fenced(excerpt) + "\n\n[Download readable log dump](" + s.cfg.publicURL + "/diagnostics/" + r.ReportID + ".log) | [Download diagnostic JSON](" + s.cfg.publicURL + "/diagnostics/" + r.ReportID + ".json). These public downloads expire 30 days after submission. The excerpt above remains on GitHub.\n"
 	} else {
 		body += "\nThe player chose not to include diagnostics.\n"
 	}
-	body += "\nSubmitted from the game with the player's action. [Reporting disclosure](" + s.cfg.publicURL + "/privacy).\n"
+	if r.SubmissionMode == "automatic" {
+		body += "\nSubmitted automatically by the game's default-on reporting setting. [Reporting disclosure](" + s.cfg.publicURL + "/privacy).\n"
+	} else {
+		body += "\nSubmitted from the game with the player's Send action. [Reporting disclosure](" + s.cfg.publicURL + "/privacy).\n"
+	}
 	payload, _ := json.Marshal(map[string]string{"title": title, "body": body})
 	response, err := s.githubRequest(context.Background(), "POST", "/repos/"+s.cfg.repository+"/issues", payload)
 	if err != nil {

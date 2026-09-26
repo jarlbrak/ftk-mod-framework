@@ -10,11 +10,21 @@ description if you can, then choose **Send report**. A GitHub account, browser f
 or manual file attachment is not required. The game shows the issue number only
 after receiving a validated submission receipt. **View issue** opens that issue.
 
+**Automatic bug reports** are on by default under **Mods > Settings & Help**.
+Detected errors and unexpected previous exits send filtered diagnostics to the same
+public GitHub tracker without opening the report panel. Turn the setting off to use
+manual reporting only. The installation remembers the 32 most recent successful
+automatic error signatures for 30 days to avoid repeated reports. A failed
+automatic submission keeps its exact local payload and retries at most once per
+later launch for seven days; it does not replace a pending manual report.
+Turning the setting off stops new automatic sends; a send already in progress may
+finish. The manual reporting panel remains available in either setting.
+
 Diagnostics are selected by default for new reports. Choose **What will be sent?** to inspect the
 outgoing content, or turn off **Include diagnostics** to send only your description
 and report identifiers. A saved draft remembers your diagnostics choice, including
 an explicit opt-out, when you reopen it. Opening the panel, saving a draft, or
-receiving an offer uploads nothing. Each report requires its own explicit Send action.
+opening the manual editor uploads nothing. Manual reports require an explicit Send action.
 
 ## What is collected and shared
 
@@ -49,20 +59,19 @@ issues. Hosting providers process network requests, including the connecting IP;
 the service uses addresses for rate limits and does not log report bodies or tokens.
 See the deployed service's `/privacy` page for the same disclosure.
 
-## Automatic offers
+## Automatic detection
 
-A detected error can offer a report at the title screen or when opening Options.
-During play, offers wait for Options instead of interrupting combat. Repeated errors
-are deduplicated and offers are throttled. Detection means an error was logged; it
-does not prove which mod caused it or detect every gameplay bug.
+Automatic reports use a generated description and the same bounded filtered logs and
+metadata as a manual report. The public issue text identifies an automatic submission.
+The error detector deduplicates and throttles reports within a session. Detection
+means an error was logged; it does not prove which mod caused it or detect every
+gameplay bug. The manual panel remains available for context that logs cannot tell us.
 
-After an unexpected exit, the next eligible title screen offers the previous
-session's saved metadata and matching process log snapshot. Force quit and power loss
-can also produce this offer, so it is not labelled proof of a crash. Abrupt exit can
-lose recent entries since the last successful log checkpoint, normally taken every
-two seconds. **Not now** dismisses the offer without
-uploading anything. Previous-session data is never replaced by unrelated current
-session logs.
+An unexpected-exit report includes the previous session's saved metadata and matching
+process log snapshot. Force quit and power loss look the same, so this is not proof
+of a crash. Abrupt exit can lose recent entries since the last successful log
+checkpoint, normally taken every two seconds. Previous-session data is never replaced
+by unrelated current-session logs. The incident is acknowledged after a confirmed send.
 
 ## Save and manage drafts
 
@@ -86,8 +95,8 @@ remove an issue already posted on GitHub.
 
 A report is frozen and saved locally before transmission. Retry sends those same
 bytes with the same ID. A timeout does not mean that no issue was created; the
-service reconciles uncertain results before returning a receipt. There is no silent
-background upload on the next launch. Choose Retry explicitly.
+service reconciles uncertain results before returning a receipt. Manual reports
+retry only after the player chooses Retry in the editor.
 
 The frozen outgoing copy is separate from editable drafts. Its description,
 diagnostics choice and captured content cannot change during retries. If a previous
@@ -96,8 +105,14 @@ or **Discard local copy** controls. A draft corresponding to that pending submis
 cannot be deleted through the draft list while it is pending.
 
 The local outgoing copy expires after seven days. **Discard local copy** removes
-the pending copy and any corresponding local draft; it cannot delete an issue that
-already reached GitHub. Other saved drafts remain available.
+the pending manual copy and any corresponding local draft; it cannot delete an issue
+that already reached GitHub. Other saved drafts remain available.
+
+Automatic reports use a separate local queue. While automatic reporting is enabled,
+a saved automatic payload retries at most once on each later launch for up to seven
+days. Turning the setting off pauses these retries; the payload remains local until
+it expires or the setting is turned back on. Every attempt uses the same report ID
+and bytes.
 
 ## Maintainer verification
 

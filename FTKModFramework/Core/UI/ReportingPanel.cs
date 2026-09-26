@@ -12,7 +12,6 @@ namespace FTKModFramework.Core.UI
     // A single explicit send action authorizes the frozen description and selected diagnostics.
     internal sealed class ReportingPanel : FTKInputFocus
     {
-        internal Action Closed;
         internal ReportingReport Report { get; private set; }
         internal bool IsOffer { get { return kind != "manual"; } }
         internal bool Submitted { get { return submitted; } }
@@ -44,28 +43,7 @@ namespace FTKModFramework.Core.UI
         {
             FinishTyping(); gameObject.SetActive(false);
             if (owner && owner.m_MainOptions && owner.m_MainOptions.m_SubBlocker) owner.m_MainOptions.m_SubBlocker.gameObject.SetActive(false);
-            base.OnClose(); if (Closed != null) Closed();
-        }
-        internal void ShowOffer()
-        {
-            if (frozen != null && !submitted) return;
-            BeginReport(ReportingRuntime.CreateReport(ReportingRuntime.Pending));
-            if (frozen != null) return;
-            kind = "unexpected_exit"; priorId = Report.PreviousSessionId;
-            heading.text = "Report the previous session?";
-            status.text = "The last session ended unexpectedly. Send its saved diagnostics with one click. Force quit or power loss can also cause this offer.";
-            Refresh();
-        }
-        internal void ShowErrorOffer()
-        {
-            if (frozen != null && !submitted) return;
-            ReportingDiagnosticsError error = ReportingDiagnostics.PendingError;
-            BeginReport(ReportingRuntime.CreateReport(false));
-            if (frozen != null) return;
-            kind = "error"; errorId = error == null ? null : error.Id;
-            heading.text = "An error was detected";
-            status.text = "Help us diagnose it with one click. You can add what you were doing, or keep playing.";
-            Refresh();
+            base.OnClose();
         }
         internal void BeginReport(ReportingReport report)
         {
@@ -253,9 +231,17 @@ namespace FTKModFramework.Core.UI
                 });
                 return;
             }
+            LeaveOffer();
+        }
+        private void LeaveOffer()
+        {
+            string dismissedErrorId = errorId;
+            string dismissedSessionId = kind == "unexpected_exit" ? priorId : null;
             RequestLeave(delegate {
-                if (errorId != null) ReportingDiagnostics.Acknowledge(errorId);
-                if (kind == "unexpected_exit") ReportingRuntime.DismissPending(null);
+                if (dismissedErrorId != null) ReportingDiagnostics.Acknowledge(dismissedErrorId);
+                ReportingIncident pending = ReportingRuntime.Pending;
+                if (dismissedSessionId != null && pending != null && pending.SessionId == dismissedSessionId)
+                    ReportingRuntime.DismissPending(null);
                 Report = null; Close();
             });
         }
@@ -402,7 +388,8 @@ namespace FTKModFramework.Core.UI
             if (view == View.Delete) { ShowDrafts(); return; }
             if (view != View.Editor) { leaveAction = null; ShowEditor(); return; }
             if (sending) { Close(); return; }
-            RequestLeave(Close);
+            if (IsOffer && frozen == null && !submitted) LeaveOffer();
+            else RequestLeave(Close);
         }
         private void ChangePage(int delta)
         {
@@ -533,7 +520,7 @@ namespace FTKModFramework.Core.UI
                 ModsPanel.StyleNativeText(panel.heading, true);
                 panel.status = panel.AddText(font, "Status", 360, 90, 22, TextAnchor.MiddleCenter, 1320);
                 panel.disclosure = panel.AddText(font, "Disclosure", -274, 135, 20, TextAnchor.MiddleCenter, 1320);
-                panel.disclosure.text = "Send publishes your description and selected game/framework logs, versions, mods and session context to the public GitHub tracker via our Railway service. Logs include recent messages, warnings and errors. No saves or screenshots. Filtering may miss personal information. Downloads expire after 30 days; GitHub text stays public. Nothing is uploaded until you press Send.";
+                panel.disclosure.text = "Send publishes this report and selected diagnostics to the public GitHub tracker via our Railway service. Logs include recent messages, warnings and errors. No saves or screenshots. Filtering may miss personal information. Downloads expire after 30 days; GitHub text stays public. Automatic reports may send separately when enabled in Mods > Settings & Help.";
                 panel.previewSurface = new GameObject("ReportingPreviewSurface", typeof(RectTransform), typeof(Image)); panel.previewSurface.transform.SetParent(root.transform, false);
                 Place(panel.previewSurface.GetComponent<RectTransform>(), 0, -40, 1320, 230); ModsPanel.StyleNativePanel(panel.previewSurface, true);
                 panel.preview = panel.AddText(font, "MetadataPreview", -40, 210, 20, TextAnchor.UpperLeft, 1260);

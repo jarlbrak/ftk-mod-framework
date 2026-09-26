@@ -23,21 +23,29 @@ namespace FTKModFramework.Core.Reporting
         internal const string Endpoint = "https://reporting-api-production-ff50.up.railway.app/v1/reports";
         private static readonly object Gate = new object();
         private static bool initialized, ready, busy;
-        private static string pending;
+        private static string pending, pendingAutomatic;
         private static Action delivery;
         internal static bool Busy { get { lock (Gate) return busy; } }
         internal static bool Ready { get { lock (Gate) return ready; } }
         internal static string PendingPayload { get { lock (Gate) return pending; } }
+        internal static string PendingAutomaticPayload { get { lock (Gate) return pendingAutomatic; } }
         private static string Root { get { return Path.Combine(Paths.BepInExRootPath, "ReportingDelivery"); } }
+        private static string AutomaticRoot { get { return Path.Combine(Paths.BepInExRootPath, "ReportingAutomaticDelivery"); } }
         internal static void Initialize()
         {
             lock (Gate) { if (initialized) return; initialized = true; }
             Thread thread = new Thread(delegate() {
-                try { using (ReportingSessionLease lease = new ReportingSessionLease()) { lease.Acquire(Root); ReadPending(); } }
-                catch { }
+                try { LoadPending(false); LoadPending(true); }
                 finally { lock (Gate) ready = true; }
             });
             thread.IsBackground = true; thread.Start();
+        }
+        private static void LoadPending(bool automatic)
+        {
+            try { using (ReportingSessionLease lease = new ReportingSessionLease()) {
+                lease.Acquire(automatic ? AutomaticRoot : Root); ReadPending(automatic);
+            } }
+            catch { }
         }
         internal static void Tick()
         {
@@ -85,9 +93,9 @@ namespace FTKModFramework.Core.Reporting
             try { thread.Start(); return true; }
             catch { lock (Gate) busy = false; return false; }
         }
-        private static void ReadPending()
+        private static void ReadPending(bool automatic)
         {
-            string path = Path.Combine(Root, "pending.json");
+            string path = Path.Combine(automatic ? AutomaticRoot : Root, "pending.json");
             string json = null;
             if (File.Exists(path))
             {
@@ -96,7 +104,7 @@ namespace FTKModFramework.Core.Reporting
                 if (DateTime.UtcNow - File.GetLastWriteTimeUtc(path) > TimeSpan.FromDays(7)) File.Delete(path);
                 else json = File.ReadAllText(path);
             }
-            lock (Gate) pending = json;
+            lock (Gate) { if (automatic) pendingAutomatic = json; else pending = json; }
         }
         private static ReportingSubmissionResult Submit(string json)
         {
@@ -104,36 +112,38 @@ namespace FTKModFramework.Core.Reporting
             JObject request = JObject.Parse(json);
             string id = (string)request["reportId"];
             if (!ReportingDraft.ValidId(id)) throw new ArgumentException();
+            bool automatic = (string)request["submissionMode"] == "automatic";
+            string root = automatic ? AutomaticRoot : Root;
             string requestHash;
             using (SHA256 hash = SHA256.Create())
                 requestHash = BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(json))).Replace("-", "").ToLowerInvariant();
             using (ReportingSessionLease lease = new ReportingSessionLease())
             {
-                lease.Acquire(Root); ReadPending();
-                string original = PendingPayload;
+                lease.Acquire(root); ReadPending(automatic);
+                string original = automatic ? PendingAutomaticPayload : PendingPayload;
                 if (original != null && original != json) return new ReportingSubmissionResult { Error = "pending_report_exists" };
                 string helper = Path.Combine(Path.Combine(Paths.BepInExRootPath, "ftkmf"),
                     Environment.OSVersion.Platform == PlatformID.Win32NT ? "ftkmf-launcher-helper.exe" : "ftkmf-launcher-helper");
-                string requestPath = Path.Combine(Root, "pending.json");
+                string requestPath = Path.Combine(root, "pending.json");
                 if (original == null)
                 {
                     AtomicWrite(requestPath, json);
-                    lock (Gate) pending = json;
+                    lock (Gate) { if (automatic) pendingAutomatic = json; else pending = json; }
                 }
-                string receiptPath = Path.Combine(Root, "submitted.json");
+                string receiptPath = Path.Combine(root, "submitted.json");
                 if (File.Exists(receiptPath))
                 {
                     SafeFile(receiptPath, 65536);
                     ReportingSubmissionResult prior = ReadReceipt(File.ReadAllText(receiptPath), id, requestHash);
-                    if (prior != null && prior.Success) { File.Delete(requestPath); lock (Gate) pending = null; return prior; }
+                    if (prior != null && prior.Success) { File.Delete(requestPath); lock (Gate) { if (automatic) pendingAutomatic = null; else pending = null; } return prior; }
                 }
                 try { MarketplaceProtocol.VerifyHelper(helper); }
                 catch { return new ReportingSubmissionResult { Error = "helper_unavailable", ReportId = id }; }
-                string resultPath = Path.Combine(Root, "result.json");
+                string resultPath = Path.Combine(root, "result.json");
                 if (File.Exists(resultPath)) { SafeFile(resultPath, 65536); File.Delete(resultPath); }
                 ProcessStartInfo info = new ProcessStartInfo(helper,
                     "report-submit --request " + Quote(requestPath) + " --result " + Quote(resultPath) + " --endpoint " + Quote(Endpoint));
-                info.UseShellExecute = false; info.CreateNoWindow = true; info.WorkingDirectory = Root;
+                info.UseShellExecute = false; info.CreateNoWindow = true; info.WorkingDirectory = root;
                 PrepareHelperEnvironment(info);
                 using (Process process = Process.Start(info))
                 {
@@ -153,7 +163,7 @@ namespace FTKModFramework.Core.Reporting
                     receipt["requestSha256"] = requestHash;
                     AtomicWrite(receiptPath, receipt.ToString(Newtonsoft.Json.Formatting.None));
                     File.Delete(requestPath);
-                    lock (Gate) pending = null;
+                    lock (Gate) { if (automatic) pendingAutomatic = null; else pending = null; }
                 }
                 File.Delete(resultPath);
                 return result;
