@@ -86,7 +86,7 @@ signature. Account/repository security remains part of the distribution trust mo
 
 Thunderstore uses an independently versioned thin Windows bootstrap. Framework and content releases
 do not publish Thunderstore packages. The [bootstrap workflow](THUNDERSTORE.md) is manually dispatched
-for reviewed `bootstrap-vX.Y.Z` releases after live acceptance. Publish bootstrap releases with
+for reviewed `bootstrap-vX.Y.Z` releases after live acceptance or explicit authorization for a labeled tester preview. Publish bootstrap releases with
 `--latest=false` so they never replace the stable framework update feed. Preserve the launcher
 archive, checksum, and handoff contract described in that guide across framework releases.
 

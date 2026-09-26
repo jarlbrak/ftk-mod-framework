@@ -2,6 +2,12 @@
 
 A thin **Windows** installer for FTK Mod Framework and its launcher. Requires the original *For The King*, Steam, .NET Framework 4.8, and internet access for first setup.
 
+## Windows tester preview
+
+**The complete setup flow has not yet been tested in a running Windows game.** This first release is for volunteers who want to try it and report problems. Automated Windows launcher and installer checks pass; they do not establish gameplay compatibility. First setup requires framework launcher 1.5.1 or newer, which is downloaded automatically.
+
+Please [open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues/new) with your Windows version, mod manager/version, whether setup reached the launcher, whether Play started the modded game, and any displayed error. Remove personal paths or other private information before attaching logs. Also tell us whether the Start menu or Steam shortcut works after removing the initial manager profile, and whether a later launch works offline. Keep a backup of saves before testing mods.
+
 ## Install once
 
 1. Install this package and its BepInEx dependency in a For The King profile.

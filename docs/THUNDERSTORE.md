@@ -2,7 +2,7 @@
 
 Thunderstore distributes a small, independently versioned Windows bootstrap. It contains no framework DLL, launcher archive, or content mods. The bootstrap downloads the current stable launcher from official GitHub release assets; that launcher installs and updates the framework/helper pair through the existing managed flow. Individual mods retain their existing releases and in-game marketplace.
 
-Ordinary framework releases do not require a Thunderstore update. Bootstrap bugs or changes to the download/launcher contract may still require a new bootstrap version. Uploads remain disabled until native Windows acceptance passes and `THUNDERSTORE_BOOTSTRAP_READY=true` is set.
+Ordinary framework releases do not require a Thunderstore update. Bootstrap bugs or changes to the download/launcher contract may still require a new bootstrap version. The initial publication is a Windows tester preview authorized before native Windows acceptance. Set `THUNDERSTORE_BOOTSTRAP_READY=true` only for an authorized publication; this switch does not record a successful live test.
 
 ## Player flow
 
@@ -58,7 +58,7 @@ gh release create bootstrap-vX.Y.Z \
 gh release edit bootstrap-vX.Y.Z --draft=false --latest=false
 ```
 
-Configure `THUNDERSTORE_API_TOKEN` as an Actions secret, `THUNDERSTORE_NAMESPACE` as the team namespace variable, and the `thunderstore` environment. After the live gate passes, set `THUNDERSTORE_BOOTSTRAP_READY=true` and manually run **Thunderstore bootstrap release** with the published `bootstrap-vX.Y.Z` tag. The workflow verifies source version and downloaded artifact checksums, then publishes with pinned CLI `0.2.4`. Framework and content release events do not trigger it.
+Configure `THUNDERSTORE_API_TOKEN` as an Actions secret, `THUNDERSTORE_NAMESPACE` as the team namespace variable, and the `thunderstore` environment. After authorizing a clearly labeled tester release or completing live acceptance, set `THUNDERSTORE_BOOTSTRAP_READY=true` and manually run **Thunderstore bootstrap release** with the published `bootstrap-vX.Y.Z` tag. The workflow verifies source version and downloaded artifact checksums, then publishes with pinned CLI `0.2.4`. Framework and content release events do not trigger it.
 
 Local package construction does not upload:
 
@@ -76,9 +76,9 @@ The resulting ZIP contains Thunderstore metadata and only the two bootstrap bina
 
 Game-free checks cover thin package inventory, independent versioning, checksums, archive traversal rejection, first online setup, fresh offline failure, cached offline reuse, changed-file preservation, failed-update fallback, concurrent download exclusion, and exact game/shortcut associations. Windows CI checks both initial game-exit gating and subsequent launcher-readiness acknowledgement. Cross-builds and these fixtures are not in-game evidence.
 
-Before publication, validate a fresh native Windows manager profile through first download, readiness, game exit, normal installation, one framework instance, catalog mod activation, and a framework update/relaunch. Exercise the Start menu and Steam entries after publishing a newer launcher while leaving the Thunderstore package unchanged. Test offline reuse, failed startup, a damaged cache, pins/preferences preservation, and manager profile removal/reinstallation.
+For full Windows acceptance, validate a fresh native Windows manager profile through first download, readiness, game exit, normal installation, one framework instance, catalog mod activation, and a framework update/relaunch. Exercise the Start menu and Steam entries after publishing a newer launcher while leaving the Thunderstore package unchanged. Test offline reuse, failed startup, a damaged cache, pins/preferences preservation, and manager profile removal/reinstallation.
 
-No native Windows in-game handoff or real Thunderstore upload has been verified here. The repository has no configured local Windows game validation route. A new compatible stable framework release, independent bootstrap release, credentials, and live acceptance are still required before enabling publication.
+Native Windows in-game handoff remains unverified. The initial tester publication intentionally precedes this acceptance so volunteers can supply evidence. Framework 1.5.1 supplies the required launcher contract. Credentials are configured separately from source; a release enablement switch is not evidence of live acceptance.
 
 ## Website impact
 
