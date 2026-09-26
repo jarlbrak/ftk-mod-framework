@@ -79,7 +79,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for project in GuardianCombat GuardianClassUi CombatProficiencies HotReloadResources PackageModels ItemApparel RegisteredRows CombatAvatarLease ModsButton PlayerRaces LoreStoreUnlock HotReloadPackages; do
+          for project in Skyharbor GuardianCombat GuardianClassUi CombatProficiencies HotReloadResources PackageModels ItemApparel RegisteredRows CombatAvatarLease ModsButton PlayerRaces LoreStoreUnlock HotReloadPackages; do
             dotnet run --project "FTKModFramework/Tests/$project/$project.csproj" -c Release
           done
       - name: Run the game-free unit tests

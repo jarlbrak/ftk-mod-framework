@@ -19,12 +19,13 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "1.3.0";
+        public const string Version = "1.4.0";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
 
         internal static ConfigEntry<bool> EnableTitleScreenActivation;
+        internal static ConfigEntry<bool> EnableSkyharborBackground;
 
         /// <summary>
         /// Whether to run the JSON data-content loader: discover mod folders under
@@ -234,6 +235,10 @@ namespace FTKModFramework
                 "Folder scanned for content-mod subfolders (each with a manifest.json). Leave blank to use the " +
                 "BepInEx plugins directory (resolved at runtime, so the install can move). A relative path is " +
                 "taken from the game folder; an absolute path is used as-is.");
+
+            EnableSkyharborBackground = Config.Bind("UI", "EnableSkyharborBackground", true,
+                "Show the animated Skyharbor scene behind front-end menus. Disable to retain the original title background.");
+            gameObject.AddComponent<Core.UI.Skyharbor.SkyharborBackground>();
 
             ShowSplash = Config.Bind("UI", "ShowSplash", true,
                 "Show the framework's splash card (logo, version, and the enabled mods) the first time the title " +

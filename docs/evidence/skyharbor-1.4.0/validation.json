@@ -1,0 +1,58 @@
+{
+  "scope": "Framework 1.4.0 integrated macOS release smoke, 1600x900",
+  "testedBinarySha256": "ee4e55f7b13d2f1ca694240045f6becfbf2b93fd95e3c57e7b58f6eba3bb7829",
+  "prototypePluginsAbsent": true,
+  "pluginIds": [
+    "com.ftkmf.framework",
+    "ftk.proof.skyharbor-release"
+  ],
+  "assetBytes": 34458650,
+  "cycleSamples": 124,
+  "phasesObserved": [
+    "buoyant-descent",
+    "buoyant-lift",
+    "depart",
+    "docked",
+    "forward-turn",
+    "lower-gangway",
+    "raise-gangway",
+    "reel-lines",
+    "restore-lines",
+    "return",
+    "wide-turn"
+  ],
+  "selfTestsPassed": [
+    "behavior-primitives",
+    "questlogic-instantiate",
+    "behavior-dll-guard",
+    "AddPassive registry"
+  ],
+  "passed": [
+    "Embedded scene loads from framework DLL with no prototype renderer or external asset dependency",
+    "Title, Options, nested Video settings and New Game configuration visually retain custom background",
+    "124 samples across a full flight cycle and front-end menus retain an active canvas with no renderer failure",
+    "Native character stage remains visible in Party Select",
+    "Return to title restores custom scene and one subtitle",
+    "Configuration opt-out restores vanilla background with no allocated scene or subtitle"
+  ],
+  "knownNativeIssue": "AkInitializer.OnApplicationFocus NullReferenceException at startup, unrelated to Skyharbor; reporting dialog dismissed without sending.",
+  "notVerified": [
+    "Windows and Linux native gameplay",
+    "Online co-op",
+    "Non-16:9 framing and font fallbacks",
+    "Playable sky campaign"
+  ],
+  "screenshotsRetainedLocally": [
+    "title.png",
+    "options.png",
+    "video.png",
+    "new-game.png",
+    "character-preview.png",
+    "return-title.png",
+    "opt-out.png"
+  ],
+  "cleanup": {
+    "ownedGameExited": true,
+    "keepAwakeRetained": true
+  }
+}
