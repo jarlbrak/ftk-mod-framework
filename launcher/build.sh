@@ -75,6 +75,8 @@ done
 WIN="$OUT/windows/For The King Modded"
 mkdir -p "$WIN"
 bundle_common "$WIN"
+dotnet build "$ROOT/launcher/thunderstore/FTKThunderstoreBootstrap.csproj" -c Release -p:Version="$VERSION"
+cp "$ROOT/launcher/thunderstore/bin/Release/net35/FTKThunderstoreBootstrap.dll" "$OUT/"
 dotnet build "$ROOT/launcher/windows/FtkModdedLauncher.csproj" -c Release
 cp "$ROOT/launcher/windows/bin/Release/net48/FtkModdedLauncher.exe" "$WIN/"
 cp "$ROOT/launcher/windows/bin/Release/net48/FtkModdedLauncher.exe.config" "$WIN/"

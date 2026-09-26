@@ -12,36 +12,12 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 COMMUNITY = "for-the-king"
-CONTENT_FOLDER = "FTKMFContent"
 FRAMEWORK_PACKAGE_NAME = "FTKModFramework"
 FRAMEWORK_DEPENDENCY = "BepInEx-BepInExPack_ForTheKing"
 FRAMEWORK_DEPENDENCY_VERSION = "5.4.19001"
 
-CONTENT_PACKAGES = {
-    "paladin": {
-        "package_name": "Paladin",
-        "icon": "assets/paladin-guard-icon.png",
-    },
-    "thief": {
-        "package_name": "Thief",
-        "icon": "assets/thief-street-twins-icon.png",
-    },
-    "possum": {
-        "package_name": "Possum",
-        "icon": "thunderstore/icon.png",
-    },
-    "lore-store-unlocked": {
-        "package_name": "LoreStoreUnlocked",
-        "icon": "thunderstore/icon.png",
-    },
-}
-
-TAG_PATTERN = re.compile(r"^(?:(?P<framework>v)|(?P<package>paladin|thief|possum|lore-store-unlocked)-v)(?P<version>(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))$")
+TAG_PATTERN = re.compile(r"^v(?P<version>(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*))$")
 PLUGIN_VERSION_PATTERN = re.compile(r'public const string Version = "([0-9]+\.[0-9]+\.[0-9]+)";')
-
-
-def read_json(path):
-    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def sha256(data):
@@ -66,15 +42,6 @@ def plugin_version(source_root):
     return version
 
 
-def require_thunderstore_discovery(source_root):
-    manifest = (source_root / "FTKModFramework" / "Core" / "Data" / "ModManifest.cs").read_text(encoding="utf-8")
-    discovery = (source_root / "FTKModFramework" / "Core" / "Data" / "ModDiscovery.cs").read_text(encoding="utf-8")
-    if "ThunderstoreVersionNumber" not in manifest or "ThunderstoreContentFolderName" not in discovery:
-        raise ValueError(
-            "This framework release predates Thunderstore content discovery. "
-            "Publish a new stable framework release after merging this integration.")
-
-
 def validate_namespace(namespace):
     if not re.fullmatch(r"[A-Za-z0-9_]+", namespace or ""):
         raise ValueError("Thunderstore namespace must contain only letters, digits, and underscores")
@@ -86,60 +53,6 @@ def png_dimensions(data, label):
     width, height = struct.unpack(">II", data[16:24])
     if (width, height) != (256, 256):
         raise ValueError(label + " must be exactly 256x256 pixels")
-
-
-def add_file(files, archive_path, source_path):
-    source_path = Path(source_path)
-    if source_path.is_symlink() or not source_path.is_file():
-        raise ValueError("Expected a regular non-symlink file: " + str(source_path))
-    if source_path.suffix.lower() in {".dll", ".exe", ".so", ".dylib"} and source_path.name != "FTKModFramework.dll":
-        raise ValueError("Refusing unexpected executable in package: " + str(source_path))
-    archive_path = Path(archive_path).as_posix()
-    if archive_path.startswith("/") or ".." in Path(archive_path).parts:
-        raise ValueError("Unsafe package path: " + archive_path)
-    files[archive_path] = source_path.read_bytes()
-
-
-def referenced_thief_assets(content):
-    found = set()
-
-    def visit(value):
-        if isinstance(value, dict):
-            for key, child in value.items():
-                if key in {"model", "texture", "icon"} and isinstance(child, str):
-                    path = Path(child)
-                    if path.is_absolute() or ".." in path.parts or not path.parts or path.parts[0] != "assets":
-                        raise ValueError("Unsafe Thief asset reference: " + child)
-                    found.add(path.as_posix())
-                else:
-                    visit(child)
-        elif isinstance(value, list):
-            for child in value:
-                visit(child)
-
-    visit(content)
-    return sorted(found)
-
-
-def source_content_files(slug, package_dir):
-    files = {}
-    add_file(files, "manifest.json", package_dir / "manifest.json")
-    add_file(files, "content.json", package_dir / "content.json")
-
-    if slug == "thief":
-        refs = referenced_thief_assets(read_json(package_dir / "content.json"))
-        paths = [package_dir / path for path in refs]
-    elif slug in {"paladin", "possum"}:
-        assets = package_dir / "assets"
-        paths = sorted(assets.iterdir(), key=lambda path: path.as_posix())
-    else:
-        paths = []
-
-    for path in paths:
-        if path.suffix.lower() not in {".png", ".glb"}:
-            raise ValueError("Unsupported runtime asset: " + str(path))
-        add_file(files, path.relative_to(package_dir), path)
-    return files
 
 
 def tstore_manifest(package_name, version, description, website_url, dependencies):
@@ -236,108 +149,110 @@ def write_package(output, namespace, package_name, version, description, website
             "package": receipt["package"], "version": version}
 
 
-def framework_package(tag_version, namespace, framework_dll, output, source_root):
-    source_version = plugin_version(source_root)
-    if source_version != tag_version:
-        raise ValueError("Framework tag version " + tag_version + " does not match source version " + source_version)
-    require_thunderstore_discovery(source_root)
-    dll = Path(framework_dll)
-    if dll.name != "FTKModFramework.dll" or not dll.is_file() or dll.is_symlink():
-        raise ValueError("Expected the published FTKModFramework.dll release asset")
-    dll_bytes = dll.read_bytes()
-    if not dll_bytes.startswith(b"MZ"):
-        raise ValueError("Framework release asset is not a PE/.NET assembly")
-    files = {"plugins/FTKModFramework.dll": dll_bytes}
+RELEASE_FILES = (
+    "FTKThunderstoreBootstrap.dll", "ftkmf-helper-windows-amd64.exe",
+    "FTKModdedLauncher-windows-x64.zip", "FTKModFramework.dll",
+)
+
+
+def release_files(directory):
+    checksums = {}
+    for line in (directory / "SHA256SUMS").read_text(encoding="utf-8").splitlines():
+        digest, name = line.split(maxsplit=1)
+        name = name.removeprefix("*").removeprefix("./")
+        if name in checksums or not re.fullmatch(r"[a-f0-9]{64}", digest):
+            raise ValueError("Invalid or duplicate release checksum")
+        checksums[name] = digest
+    result = {}
+    for name in RELEASE_FILES:
+        path = directory / name
+        if path.is_symlink() or not path.is_file() or path.stat().st_size > 100 * 1024 * 1024:
+            raise ValueError("Missing or unsafe release asset: " + name)
+        data = path.read_bytes()
+        if checksums.get(name) != sha256(data):
+            raise ValueError("Release checksum mismatch: " + name)
+        if name.endswith((".dll", ".exe")) and not data.startswith(b"MZ"):
+            raise ValueError("Release executable is not a PE image: " + name)
+        result[name] = data
+    return result
+
+
+def validate_launcher(data, version, artifacts):
+    import io
+    with zipfile.ZipFile(io.BytesIO(data)) as archive:
+        names = archive.namelist()
+        if len(names) > 2000 or len({name.lower() for name in names}) != len(names):
+            raise ValueError("Invalid launcher archive inventory")
+        root = "For The King Modded/"
+        total = 0
+        for entry in archive.infolist():
+            name = entry.filename
+            total += entry.file_size
+            if (not name.startswith(root) or ".." in Path(name).parts or "\\" in name
+                    or ":" in name or (entry.external_attr >> 16) & 0o170000 == 0o120000
+                    or total > 300 * 1024 * 1024):
+                raise ValueError("Unsafe launcher archive entry: " + name)
+            if entry.is_dir():
+                continue
+            relative = name[len(root):]
+            allowed = {"FtkModdedLauncher.exe", "FtkModdedLauncher.exe.config", "FTKModFramework.dll",
+                       "ftkmf-launcher-helper.exe", "bundle-manifest.json", "install.ps1", "README.md"}
+            if relative not in allowed and not (relative.startswith("assets/steam/") and relative.endswith(".png")):
+                raise ValueError("Unexpected launcher payload: " + name)
+        for required in ("FtkModdedLauncher.exe", "FtkModdedLauncher.exe.config", "install.ps1"):
+            if not archive.read(root + required):
+                raise ValueError("Empty required launcher file: " + required)
+        manifest = json.loads(archive.read(root + "bundle-manifest.json"))
+        dll = archive.read(root + "FTKModFramework.dll")
+        helper = archive.read(root + "ftkmf-launcher-helper.exe")
+        if (manifest.get("schemaVersion") != 1 or manifest.get("frameworkVersion") != version
+                or dll != artifacts["FTKModFramework.dll"]
+                or helper != artifacts["ftkmf-helper-windows-amd64.exe"]
+                or manifest.get("dllSha256") != sha256(dll)
+                or manifest.get("helpers", {}).get("ftkmf-helper-windows-amd64.exe") != sha256(helper)):
+            raise ValueError("Launcher bundle does not match the framework/helper release pair")
+
+
+def framework_package(tag_version, namespace, release_dir, output, source_root):
+    if plugin_version(source_root) != tag_version:
+        raise ValueError("Framework tag version does not match its source")
+    if not (source_root / "launcher" / "helper" / "thunderstore.go").is_file():
+        raise ValueError("This release predates the Thunderstore launcher handoff")
+    artifacts = release_files(Path(release_dir))
+    archive = artifacts["FTKModdedLauncher-windows-x64.zip"]
+    validate_launcher(archive, tag_version, artifacts)
+    # Keep the actual framework DLL opaque to the manager's BepInEx discovery.
+    # Only the setup plugin loads in the initial profile.
+    prefix = "plugins/FTKSetup/"
+    files = {
+        prefix + "FTKThunderstoreBootstrap.dll": artifacts["FTKThunderstoreBootstrap.dll"],
+        prefix + "ftkmf-bootstrap-helper.exe": artifacts["ftkmf-helper-windows-amd64.exe"],
+        prefix + "FTKModdedLauncher-windows-x64.zip": archive,
+        prefix + "launcher.sha256": (sha256(archive) + "\n").encode("ascii"),
+    }
     return write_package(
         output, namespace, FRAMEWORK_PACKAGE_NAME, tag_version,
-        "BepInEx 5 framework for the original For The King. Loads curated JSON content packages.",
+        "Initial Windows setup for FTK Mod Framework. Continue playing and managing mods through the FTK Modded Launcher.",
         "https://github.com/jarlbrak/ftk-mod-framework",
         {FRAMEWORK_DEPENDENCY: FRAMEWORK_DEPENDENCY_VERSION},
         ROOT / "FTKModFramework" / "thunderstore" / "README.md",
         ROOT / "FTKModFramework" / "thunderstore" / "icon.png", files)
 
 
-def compatible_framework_version(package, framework_version):
-    current = version_tuple(framework_version)
-    minimum = version_tuple(package["frameworkVersion"])
-    match = re.fullmatch(r">=([0-9]+\.[0-9]+\.[0-9]+) <([0-9]+\.[0-9]+\.[0-9]+)", package["frameworkRange"])
-    if not match:
-        raise ValueError("Unsupported frameworkRange in catalog: " + package["frameworkRange"])
-    upper = version_tuple(match.group(2))
-    if current < minimum or current >= upper:
-        raise ValueError("Thunderstore Framework " + framework_version + " is outside " + package["frameworkRange"])
-
-
-def content_package(slug, tag_version, namespace, framework_version, output, source_root):
-    package_config = CONTENT_PACKAGES[slug]
-    package_dir = source_root / "marketplace" / "packages" / slug
-    manifest = read_json(package_dir / "manifest.json")
-    if manifest.get("version") != tag_version:
-        raise ValueError(slug + " release tag version does not match its runtime manifest")
-    # The builder checkout supplies the current production catalog. Release tags can predate
-    # the catalog commit that promotes their package version, so the catalog is intentionally
-    # read from ROOT while runtime content is read from the exact release source root.
-    catalog = read_json(ROOT / "marketplace" / "catalog.json")
-    descriptor = next((item for item in catalog["packages"] if item["packageId"] == "ftkmf." + slug), None)
-    if descriptor is None:
-        raise ValueError("Refusing to publish a package absent from marketplace/catalog.json: " + slug)
-    if descriptor["version"] != tag_version:
-        raise ValueError(slug + " release version does not match marketplace/catalog.json")
-    if descriptor["modGuid"] != manifest.get("modGuid") or descriptor["name"] != manifest.get("name"):
-        raise ValueError(slug + " catalog identity differs from its runtime manifest")
-    compatible_framework_version(descriptor, framework_version)
-
-    source_files = source_content_files(slug, package_dir)
-    nested_files = {"plugins/" + CONTENT_FOLDER + "/" + name: data
-                    for name, data in source_files.items()}
-    icon_path = ROOT / "marketplace" / "packages" / slug / package_config["icon"]
-    readme_path = ROOT / "marketplace" / "packages" / slug / "thunderstore" / "README.md"
-    return write_package(
-        output, namespace, package_config["package_name"], tag_version,
-        descriptor["description"], descriptor["sourceUrl"],
-        {FRAMEWORK_PACKAGE_NAME: framework_version}, readme_path, icon_path, nested_files)
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--tag", help="GitHub release tag, such as v1.5.0 or paladin-v1.4.0")
-    parser.add_argument("--all-content", action="store_true", help="Build local candidates for catalog content packages")
+    parser.add_argument("--tag", required=True, help="Stable framework GitHub release tag: vX.Y.Z")
     parser.add_argument("--namespace", default="JarlBrak", help="Thunderstore team namespace")
-    parser.add_argument("--framework-version", help="Published compatible FTKModFramework package version")
-    parser.add_argument("--framework-dll", type=Path, help="Published FTKModFramework.dll for a framework release tag")
-    parser.add_argument("--source-root", type=Path, default=ROOT,
-                        help="Checkout containing the exact published GitHub release source")
-    parser.add_argument("--output", type=Path, required=True, help="Directory for the local candidate packages")
+    parser.add_argument("--release-dir", type=Path, required=True, help="Downloaded release assets and SHA256SUMS")
+    parser.add_argument("--source-root", type=Path, default=ROOT, help="Exact release source checkout")
+    parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    if bool(args.tag) == bool(args.all_content):
-        parser.error("provide exactly one of --tag or --all-content")
-    validate_namespace(args.namespace)
-    source_root = args.source_root.resolve()
-
-    results = []
-    if args.all_content:
-        framework_version = args.framework_version or plugin_version(source_root)
-        for slug in CONTENT_PACKAGES:
-            manifest = read_json(source_root / "marketplace" / "packages" / slug / "manifest.json")
-            results.append(content_package(slug, manifest["version"], args.namespace,
-                                           framework_version, args.output, source_root))
-    else:
-        match = TAG_PATTERN.fullmatch(args.tag)
-        if not match:
-            parser.error("unsupported tag; use vX.Y.Z or one of the published package tag prefixes")
-        if match.group("framework"):
-            if not args.framework_dll:
-                parser.error("framework release packages require --framework-dll")
-            results.append(framework_package(match.group("version"), args.namespace,
-                                             args.framework_dll, args.output, source_root))
-        else:
-            if args.framework_dll:
-                parser.error("--framework-dll is only valid for framework release tags")
-            if not args.framework_version:
-                parser.error("content package releases require --framework-version")
-            results.append(content_package(match.group("package"), match.group("version"),
-                                           args.namespace, args.framework_version, args.output, source_root))
-    print(json.dumps(results, indent=2, sort_keys=True))
+    match = TAG_PATTERN.fullmatch(args.tag)
+    if not match:
+        parser.error("only stable framework tags vX.Y.Z are supported; mods use the existing marketplace")
+    result = framework_package(match.group("version"), args.namespace,
+                               args.release_dir, args.output, args.source_root.resolve())
+    print(json.dumps([result], indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

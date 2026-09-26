@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Published GitHub release tag to publish to Thunderstore
+        description: Stable framework GitHub release tag (vX.Y.Z)
         required: true
         type: string
 
@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   publish:
-    if: github.event_name == 'workflow_dispatch' || github.event.release.prerelease == false
+    if: vars.THUNDERSTORE_BOOTSTRAP_READY == 'true' && (github.event_name == 'workflow_dispatch' || (github.event.release.prerelease == false && startsWith(github.event.release.tag_name, 'v')))
     runs-on: ubuntu-latest
     environment: thunderstore
     steps:
@@ -56,39 +56,29 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$THUNDERSTORE_NAMESPACE" || { echo "Set the THUNDERSTORE_NAMESPACE repository variable." >&2; exit 1; }
-          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
-            --jq 'select(.draft == false and .prerelease == false) | .tag_name' >/dev/null
+          published_tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
+            --jq 'select(.draft == false and .prerelease == false) | .tag_name')"
+          [[ "$published_tag" == "$RELEASE_TAG" ]] || {
+            echo "An already published stable framework release is required." >&2
+            exit 1
+          }
 
-          if [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            framework_version="${RELEASE_TAG#v}"
-            mkdir -p "$RUNNER_TEMP/ftkmf-release"
-            gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
-              --pattern FTKModFramework.dll --dir "$RUNNER_TEMP/ftkmf-release"
-            python3 marketplace/packages/build_thunderstore.py \
-              --tag "$RELEASE_TAG" \
-              --namespace "$THUNDERSTORE_NAMESPACE" \
-              --framework-dll "$RUNNER_TEMP/ftkmf-release/FTKModFramework.dll" \
-              --source-root "$GITHUB_WORKSPACE/release-source" \
-              --output "$OUTPUT_DIR"
-          else
-            framework_tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq '.tag_name')"
-            [[ "$framework_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
-              echo "Latest stable GitHub release is not an FTK Mod Framework version: $framework_tag" >&2
-              exit 1
-            }
-            framework_version="${framework_tag#v}"
-            dependency_url="https://thunderstore.io/api/experimental/package/$THUNDERSTORE_NAMESPACE/FTKModFramework/$framework_version/"
-            curl --fail --silent --show-error "$dependency_url" >/dev/null || {
-              echo "Publish FTKModFramework $framework_version to Thunderstore before publishing content packages." >&2
-              exit 1
-            }
-            python3 marketplace/packages/build_thunderstore.py \
-              --tag "$RELEASE_TAG" \
-              --namespace "$THUNDERSTORE_NAMESPACE" \
-              --framework-version "$framework_version" \
-              --source-root "$GITHUB_WORKSPACE/release-source" \
-              --output "$OUTPUT_DIR"
-          fi
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+            echo "Only stable framework releases can be published to Thunderstore." >&2
+            exit 1
+          }
+          mkdir -p "$RUNNER_TEMP/ftkmf-release"
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
+            --pattern FTKModFramework.dll --pattern FTKThunderstoreBootstrap.dll \
+            --pattern ftkmf-helper-windows-amd64.exe \
+            --pattern FTKModdedLauncher-windows-x64.zip --pattern SHA256SUMS \
+            --dir "$RUNNER_TEMP/ftkmf-release"
+          python3 marketplace/packages/build_thunderstore.py \
+            --tag "$RELEASE_TAG" \
+            --namespace "$THUNDERSTORE_NAMESPACE" \
+            --release-dir "$RUNNER_TEMP/ftkmf-release" \
+            --source-root "$GITHUB_WORKSPACE/release-source" \
+            --output "$OUTPUT_DIR"
 
           package_zip="$(find "$OUTPUT_DIR" -type f -name package.zip -print -quit)"
           test -n "$package_zip" || { echo "Thunderstore package build produced no package.zip." >&2; exit 1; }

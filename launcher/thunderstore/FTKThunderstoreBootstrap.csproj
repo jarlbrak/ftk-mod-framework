@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>FTKThunderstoreBootstrap</AssemblyName>
+    <Version Condition="'$(Version)' == ''">1.5.0</Version>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <FtkManagedDir Condition="'$(FtkManagedDir)' == ''">$(HOME)/Library/Application Support/Steam/steamapps/common/For The King/FTK.app/Contents/Resources/Data/Managed</FtkManagedDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="$(FtkManagedDir)/UnityEngine*.dll" Private="false" />
+  </ItemGroup>
+  <Target Name="GenerateBootstrapVersion" BeforeTargets="CoreCompile">
+    <WriteLinesToFile File="$(IntermediateOutputPath)BootstrapVersion.g.cs"
+                      Lines="namespace FTKThunderstoreBootstrap { internal static class BootstrapVersion { internal const string Value = &quot;$(Version)&quot;%3B } }"
+                      Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <ItemGroup>
+      <Compile Include="$(IntermediateOutputPath)BootstrapVersion.g.cs" />
+    </ItemGroup>
+  </Target>
+</Project>

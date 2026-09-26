@@ -13,11 +13,15 @@ namespace FtkModdedLauncher
     internal static class Program
     {
         [STAThread]
-        private static void Main()
+        private static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Launcher());
+            try { Application.Run(new Launcher(LaunchOptions.FromDirectory(args, AppDomain.CurrentDomain.BaseDirectory))); }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "For The King Modded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
@@ -31,8 +35,26 @@ namespace FtkModdedLauncher
         private Process _unstoppedChild;
         private readonly Timer _childMonitor = new Timer { Interval = 1000 };
 
-        internal Launcher()
+        private readonly LaunchOptions _options;
+        private Process _handoffGame;
+        private readonly Timer _handoffMonitor = new Timer { Interval = 1000 };
+
+        internal Launcher(LaunchOptions options)
         {
+            _options = options;
+            // Keep an opened handle, rather than looking up the PID on every tick: Windows
+            // can reuse the PID after the original game exits.
+            if (options.WaitForProcess.HasValue)
+            {
+                try
+                {
+                    _handoffGame = Process.GetProcessById(options.WaitForProcess.Value);
+                    IntPtr handle = _handoffGame.Handle;
+                }
+                catch (ArgumentException) { ReleaseHandoffGame(); }
+                catch (InvalidOperationException) { ReleaseHandoffGame(); }
+                catch { ReleaseHandoffGame(); throw; }
+            }
             Text = "For The King Modded";
             ClientSize = new Size(600, 380);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -57,9 +79,72 @@ namespace FtkModdedLauncher
             _artworkStatus.Size = new Size(525, 60);
             _artworkStatus.Font = new Font("Segoe UI", 9);
             Controls.Add(_artworkStatus);
-            Shown += delegate { ApplyArtwork(); };
+            Shown += delegate {
+                if (_options.WaitForProcess.HasValue)
+                {
+                    _playUsed = true;
+                    SetHandoffWaiting();
+                    bool ready = CheckHandoffGame();
+                    if (_handoffGame != null) _handoffMonitor.Start();
+                    if (ready && _options.ReadyEvent != null)
+                    {
+                        try
+                        {
+                            using (System.Threading.EventWaitHandle signal = System.Threading.EventWaitHandle.OpenExisting(_options.ReadyEvent))
+                                if (!signal.Set()) throw new InvalidOperationException("The bootstrap readiness event could not be signaled.");
+                        }
+                        catch (Exception error)
+                        {
+                            _handoffMonitor.Stop();
+                            SetHandoffWaiting();
+                            MessageBox.Show(this, "Unable to confirm launcher readiness: " + error.Message,
+                                "For The King Modded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else ApplyArtwork();
+            };
+            _handoffMonitor.Tick += delegate { CheckHandoffGame(); };
             _childMonitor.Tick += delegate { CheckPreviousChild(); };
-            Disposed += delegate { _childMonitor.Dispose(); };
+            Disposed += delegate {
+                _childMonitor.Dispose();
+                _handoffMonitor.Dispose();
+                ReleaseHandoffGame();
+            };
+        }
+
+        private void SetHandoffWaiting()
+        {
+            _busy = true;
+            foreach (Button button in _actions) button.Enabled = false;
+            _artworkStatus.Text = "Close For The King to finish installation. Setup will wait until the game exits.";
+        }
+
+        private void ReleaseHandoffGame()
+        {
+            if (_handoffGame != null) _handoffGame.Dispose();
+            _handoffGame = null;
+        }
+
+        private bool CheckHandoffGame()
+        {
+            try
+            {
+                if (_handoffGame != null && !_handoffGame.HasExited) return true;
+                ReleaseHandoffGame();
+                _handoffMonitor.Stop();
+                _busy = false;
+                foreach (Button button in _actions) button.Enabled = true;
+                _artworkStatus.Text = "Choose Play to finish installation and open For The King with your managed mods.";
+                _statusDetails.SetToolTip(_artworkStatus, _artworkStatus.Text);
+                return true;
+            }
+            catch (Exception error)
+            {
+                // If exit cannot be established, keep all writers blocked.
+                _statusDetails.SetToolTip(_artworkStatus, "Waiting for the game to exit: " + error.Message);
+                return false;
+            }
         }
 
         private void ApplyArtwork()
@@ -91,7 +176,8 @@ namespace FtkModdedLauncher
                 string script = Path.Combine(directory, "install.ps1");
                 if (!File.Exists(script)) throw new FileNotFoundException("The bundled installer is missing.", script);
                 string powershell = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "WindowsPowerShell", "v1.0", "powershell.exe");
-                string scriptArguments = "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File " + Quote(script);
+                string scriptArguments = "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File " + Quote(script) +
+                    (_options.GameDir == null ? "" : " -GameDir " + Quote(_options.GameDir));
                 string status = RunProcess(powershell, scriptArguments + " -Status", 30000);
                 Dictionary<string, object> record = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(status);
                 object path;

@@ -61,3 +61,11 @@ For mod installation and marketplace repair, see the
 The [1.0.1 release notes](../docs/releases/v1.0.1.md) state the tested scope.
 Maintainers can find packaging and release procedures in
 [Releasing](../docs/RELEASING.md).
+
+## Thunderstore initial setup (unreleased)
+
+The Windows Thunderstore package hands off to this launcher. It places a durable copy outside
+the manager profile, creates a Start menu entry, and remembers the game directory. The launcher
+waits for the initial game session to close; choose Play to finish installation, then use this
+launcher for future play and framework updates. Individual mods retain their in-game marketplace
+flow. See [Thunderstore setup](../docs/THUNDERSTORE.md) for release readiness and lifecycle details.

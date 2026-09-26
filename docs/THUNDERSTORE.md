@@ -1,59 +1,86 @@
-# Thunderstore distribution
+# Thunderstore framework setup
 
-Thunderstore has an existing community for the original *For The King* and accepts BepInEx packages. This repository can publish the framework and the released content packages listed in `marketplace/catalog.json` there, alongside the existing GitHub releases and curated in-game marketplace.
+Thunderstore provides the initial Windows setup for FTK Mod Framework. The package contains a small setup plugin and the normal Windows launcher bundle. After setup, players use **For The King Modded** to play and update the framework, and the in-game marketplace to manage mods. Individual mods retain their existing GitHub release and catalog process.
 
-## Package layout
+This is an unreleased integration. Publishing remains disabled until the Windows live acceptance gate below passes and the repository variable `THUNDERSTORE_BOOTSTRAP_READY` is set to `true`.
 
-Thunderstore reserves the root `manifest.json`, `README.md`, and 256 by 256 PNG `icon.png` for package metadata and presentation. A Thunderstore BepInEx profile installs each package below its own `BepInEx/plugins/<namespace>-<package>` folder. Our content packages therefore place the framework's own manifest, content JSON, and assets under `plugins/FTKMFContent/`. `ModDiscovery` recognizes Thunderstore metadata by `version_number` and scans only that reserved child folder. Code-only framework packages have no content child and are ignored by content discovery.
+## Player flow
 
-The framework package contains the exact `FTKModFramework.dll` attached to its published GitHub release and depends on `BepInEx-BepInExPack_ForTheKing-5.4.19001`. A content package depends on the latest stable FTK Mod Framework package already published on Thunderstore. The release workflow checks that dependency exists before it uploads the content package. The content version must match both its source `manifest.json` and the production catalog entry.
+1. Install the framework package in a Thunderstore-compatible For The King profile. Its dependency supplies the For The King BepInEx pack.
+2. Start that profile and choose **Set up and open FTK Modded Launcher** in the setup panel.
+3. Setup checks the bundled launcher archive, copies it outside the manager profile, creates a Windows Start menu entry under **FTK Mod Framework**, and opens the launcher. The game closes only after the launcher confirms its waiting window is ready.
+4. Once the game exits, choose **Play** in the launcher. The existing installer provisions the framework and verified helper in the actual game folder; the existing updater then checks for updates and launches the game.
+5. Use the Start menu launcher entry for subsequent play. Optionally use **Add to Steam / Art** in the launcher to create a Steam shortcut. Manage mods through the in-game marketplace as usual.
 
-The package builder is game-free for content packages:
+The launcher remembers the exact game directory supplied by setup. Its durable location is `%LOCALAPPDATA%/FTKModFramework/Launcher/<archive-and-game-identity>/`. Removing the Thunderstore profile after setup does not remove this launcher or the normal managed installation. Reopening the initial profile shows setup again; it does not load the framework from that profile. Updating or reinstalling the Thunderstore package refreshes the setup bundle, not the managed framework. Removing the package is not an uninstall of the normal framework installation.
+
+This route targets native Windows and requires .NET Framework 4.8 for the launcher. macOS, Linux, and Proton continue to use the existing platform launchers. The setup plugin shows an unsupported-platform message outside Windows; it does not attempt installation there. Other mods installed solely in the initial manager profile are not migrated to the normal installation.
+
+## Ownership and failure behavior
+
+Only `FTKThunderstoreBootstrap.dll` is exposed to BepInEx in the initial profile. The framework DLL stays inside the opaque launcher ZIP, preventing it from loading alongside the setup plugin. No runtime content discovery changes are needed.
+
+The bootstrap helper verifies the archive digest, rejects unsafe ZIP paths and unexpected filesystem links, and stages a new durable directory atomically. Repeated setup verifies existing bytes before execution and never replaces a changed launcher directory. A checksum or staging failure keeps the game open and reports an error. A launcher readiness timeout also keeps the game open. Remove or move aside a damaged durable launcher directory before retrying; setup preserves it for inspection.
+
+The Windows launcher holds a handle to the originating game process and disables its actions until that process exits. The normal updater retains its independent running-game checks, paired framework/helper verification, compatibility preflight, journal recovery, and offline fallback. No running-game exception or profile-specific updater is introduced.
+
+SHA-256 checks establish consistency with the release assets and bundled metadata. They are not a separate publisher signature. The GitHub and Thunderstore accounts remain part of the distribution trust model.
+
+## Release preparation and GitHub Actions
+
+`launcher/build.sh` builds the bootstrap plugin alongside platform launchers. `release.sh` includes its DLL in the GitHub release and `SHA256SUMS`. A new stable framework release from this change is required; older releases lack the setup plugin and handoff support.
+
+Configure the repository before enabling uploads:
+
+1. Create or select the Thunderstore team and service account. Save its token in the `THUNDERSTORE_API_TOKEN` Actions secret.
+2. Set `THUNDERSTORE_NAMESPACE` to the team namespace and configure the `thunderstore` environment as needed.
+3. Complete the live acceptance gate below, then set `THUNDERSTORE_BOOTSTRAP_READY=true`.
+4. Publish a stable framework GitHub release or manually dispatch its already published `vX.Y.Z` tag.
+
+The workflow downloads the framework DLL, bootstrap DLL, Windows helper, Windows launcher ZIP, and `SHA256SUMS` from that exact release. It verifies hashes and the framework/helper bundle identity before creating the Thunderstore package, then uploads using pinned Thunderstore CLI `0.2.4`. Content tags, draft releases, and prereleases cannot publish. The For The King community currently has no category slugs, so no categories are assigned.
+
+Local packaging uses the same builder without uploading:
 
 ```sh
 python3 marketplace/packages/build_thunderstore.py \
-  --all-content \
+  --tag vX.Y.Z \
   --namespace JarlBrak \
-  --output /tmp/ftk-thunderstore-candidates
+  --release-dir /path/to/downloaded-release-assets \
+  --source-root /path/to/exact-release-checkout \
+  --output /tmp/ftk-thunderstore-candidate
 ```
 
-This creates deterministic candidates and a SHA-256 receipt. It does not upload them. The framework DLL itself is built by the existing release process against the installed game assemblies; GitHub Actions cannot compile that project from this repository alone. The Thunderstore release workflow consumes the verified DLL already attached to the GitHub release. Game assemblies are not copied into either package.
+The ZIP contains Thunderstore metadata and `plugins/FTKSetup/` with the bootstrap DLL, setup helper, launcher ZIP, and its digest. It depends on `BepInEx-BepInExPack_ForTheKing-5.4.19001`. Neither game assemblies nor individual marketplace mods are included.
 
-## GitHub Actions setup and release flow
+## Verification and live release gate
 
-Before the first upload, configure the repository:
+Game-free checks cover archive integrity and layout, rejection of content tags and unsafe paths, repeat setup, changed launcher preservation, durable storage after profile removal, argument validation, and existing installer/update behavior. Windows CI also exercises the launcher readiness event and game-exit control gating. Cross-builds do not establish in-game behavior.
 
-1. Create or select the Thunderstore team that will own these packages. From the team's settings, create a service account and save its API token as the `THUNDERSTORE_API_TOKEN` Actions secret. Keep that token out of source and workflow logs.
-2. Add the exact team namespace as the `THUNDERSTORE_NAMESPACE` Actions variable.
-3. Optionally configure the `thunderstore` environment with required reviewers if each upload should wait for a release approval.
-4. After this change is merged, publish the next stable framework release with the normal version bump, from a commit that includes Thunderstore content discovery. GitHub's current `v1.5.0` release predates this loader support and the package builder rejects it. The `release.published` event uploads the supported framework package automatically.
-5. After that workflow succeeds, use **Actions → Thunderstore release → Run workflow** to bootstrap the currently released content tags one by one. Dispatch requires an already published, non-prerelease GitHub Release. Do not bootstrap an unreleased candidate.
+Before enabling publication, validate on native Windows with a fresh manager profile:
 
-After bootstrap, publishing a stable GitHub release automatically builds and uploads the matching Thunderstore package. Supported tags are `vX.Y.Z` for the framework and `paladin-vX.Y.Z`, `thief-vX.Y.Z`, `possum-vX.Y.Z`, or `lore-store-unlocked-vX.Y.Z` for the content packages. Draft and prerelease releases are excluded. If a content upload races ahead of its framework package, it fails the dependency preflight; rerun the workflow after the framework upload completes.
+- Install the package and confirm only the setup plugin loads. Verify the setup panel is visible and usable.
+- Complete setup, observe the waiting launcher, and confirm installation starts only after the game exits and Play is selected.
+- Confirm one framework loads from the normal game installation. Install and activate a catalog mod, select a framework update, and relaunch through the durable launcher.
+- Reopen the Start menu and optional Steam entries and verify they target the original game directory.
+- Test offline repeat setup, damaged archive failure, and failed launcher startup. Failures must leave the running game available.
+- Remove or reinstall the original profile and verify the managed installation and launcher remain usable. Check that a refreshed bootstrap bundle preserves existing update preferences and installed mods.
 
-CI builds and inspects all current content package candidates on pull requests without a game install or Thunderstore token. Publishing uses Thunderstore CLI `0.2.4`, pinned in the workflow. This version is marked pre-release by the CLI project, so the pin avoids silently changing the publishing client; review its release notes before deliberately upgrading it. Thunderstore currently returns no category slugs for the For The King community, so the publisher does not assign categories.
+No Windows in-game handoff or Thunderstore publication has been verified in this change. The repository has no configured local Windows game validation route.
 
-## Tradeoffs and distribution rules
+## Tradeoffs
 
-Thunderstore adds a familiar package browser, manager profile installation, and dependency installation for players already using its For The King community. It also creates another public copy and update path to maintain.
+Thunderstore adds discovery and an initial BepInEx setup for its For The King audience. Keeping individual mods in our marketplace avoids duplicating their listings and release process.
 
-- A package version is immutable, the highest semantic version is shown as latest, and version strings do not take prerelease suffixes. Correcting an upload needs a higher version. A published bad version cannot be replaced byte-for-byte in place.
-- Thunderstore dependencies identify exact package versions. A content upload depends on the framework release present when it is published; republish content with a new version if it later needs a newer framework.
-- Thunderstore metadata and the existing marketplace descriptor are different formats. Thunderstore uploads do not pass through the launcher's catalog hash, platform/game-build compatibility, or approval checks. Keep the existing package validation and gameplay gates before publishing, and keep both listings aligned.
-- Thunderstore package installs live in manager profiles, while the launcher installs the framework and marketplace packages through its own paths. Do not install the framework or a content mod twice in one active profile through different channels. Duplicate copies of a content package share the same `modGuid` and will be reported by the framework loader.
-- The Thunderstore community is a separate service and can reject or deprecate listings under its moderation rules. The Thunderstore Mod Manager itself is documented for Windows; compatible community tools have their own platform coverage. Do not imply the same manager is available on every platform.
-- The For The King community currently has no category filters, so listings rely on search and the community's All view. Its audience and browsing surface are separate from the curated in-game marketplace and the project website.
+The cost is one visible handoff from the manager to our launcher. Players must understand that subsequent play uses our launcher and that deleting the initial profile does not uninstall the managed framework. Thunderstore hosting and moderation add a service dependency. Published package versions are immutable, so packaging corrections require a higher version. New bootstrap packages can track stable framework releases without taking ownership of existing installations.
 
-Thunderstore requires authors to follow copyright and license rules and prohibits distributing game assemblies such as `Assembly-CSharp.dll`. The packages produced here contain original project files and the framework's own plugin only; the BepInEx pack remains a package dependency.
+## Website impact and release handoff
 
-## Website release handoff
-
-No Thunderstore listing is live as part of this code change, so the current website remains unchanged. When the first listings are published, update the player-facing distribution choice and links in `website/src/content/docs/installation.md`, the platform and source explanation in `website/src/content/docs/compatibility.mdx`, duplicate-install guidance in `website/src/content/docs/troubleshooting.md`, each affected `website/src/content/docs/mods/*.mdx` page, and `website/src/content/docs/releases.mdx`. Keep package availability separate from gameplay verification, and link the exact Thunderstore package pages only after their public URLs work.
+No listing is live. At release, update `website/src/content/docs/installation.md` with the Windows setup flow, Start menu entry, subsequent launcher usage, and exact listing URL; `website/src/content/docs/compatibility.mdx` with verified manager/platform coverage; `website/src/content/docs/troubleshooting.md` with bootstrap retry and uninstall distinctions; and `website/src/content/docs/releases.mdx` with availability. Mod pages retain their existing distribution method. Verify published pages and links after deployment.
 
 ## References
 
 - [Creating a Thunderstore package](https://wiki.thunderstore.io/mods/creating-a-package)
-- [Thunderstore package layout for BepInEx](https://wiki.thunderstore.io/mods/packaging-your-mods)
-- [Updating an immutable package](https://wiki.thunderstore.io/mods/updating-a-package)
+- [BepInEx package layout](https://wiki.thunderstore.io/mods/packaging-your-mods)
+- [Updating a package](https://wiki.thunderstore.io/mods/updating-a-package)
 - [Thunderstore CLI](https://github.com/thunderstore-io/thunderstore-cli)
-- [For The King Thunderstore community](https://thunderstore.io/c/for-the-king/)
+- [For The King community](https://thunderstore.io/c/for-the-king/)

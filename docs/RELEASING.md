@@ -84,11 +84,10 @@ offline fallback; a first stable publication still needs an end-to-end download/
 Hashes establish consistency with the official release metadata, not an independent publisher
 signature. Account/repository security remains part of the distribution trust model.
 
-When the `thunderstore` Actions secret and namespace variable are configured, publishing a stable
-GitHub release also triggers the separate [Thunderstore release workflow](THUNDERSTORE.md). For a
-framework release it packages the DLL already attached to that release; it does not build the
-framework on GitHub-hosted runners or publish game assemblies. Content packages publish only after
-their framework dependency is present on Thunderstore.
+Thunderstore is planned as a framework-only initial installation channel. Mods retain their existing
+release and catalog process. The [Thunderstore workflow](THUNDERSTORE.md) consumes a stable framework
+release asset and remains disabled until the Windows launcher handoff passes its live acceptance gate.
+See that guide for setup, the readiness variable, and outstanding live-profile gates.
 
 Automatic updates do not replace the launcher bootstrap or BepInEx and do not update community
 mods. Unknown local builds are preserved. For an incompatible launcher protocol, ship a new
