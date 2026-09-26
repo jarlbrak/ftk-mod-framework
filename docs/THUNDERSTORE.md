@@ -70,6 +70,8 @@ python3 marketplace/packages/build_thunderstore.py \
   --output /tmp/ftk-thunderstore-candidate
 ```
 
+The package icon is the existing 256x256 PNG embedded in `assets/steam/icon.ico`, copied without redrawing.
+
 The resulting ZIP contains Thunderstore metadata and only the two bootstrap binaries under `plugins/FTKSetup/`. Its package version is the bootstrap version and it depends on `BepInEx-BepInExPack_ForTheKing-5.4.19001`.
 
 ## Validation and release gate
@@ -82,7 +84,7 @@ Native Windows in-game handoff remains unverified. The initial tester publicatio
 
 ## Initial submission status
 
-Framework 1.5.1 and bootstrap 1.0.0 are published on GitHub. The first CI upload succeeded, but Thunderstore marked `JarlBrak-FTKModFramework-1.0.0` as **Rejected: Invalid submission**. No more specific reason was displayed. The package is not available in the mod manager; successful `tcli publish` output alone does not establish moderation approval. Publication is disabled again pending resolution. Do not retry unchanged uploads or claim public Thunderstore availability.
+Framework 1.5.1 and bootstrap 1.0.0 are published on GitHub. The first CI upload succeeded, but Thunderstore marked `JarlBrak-FTKModFramework-1.0.0` as **Rejected: Invalid submission**. No more specific reason was displayed. The package is not available in the mod manager; successful `tcli publish` output alone does not establish moderation approval. Publication is disabled again pending resolution. Do not retry unchanged uploads or claim public Thunderstore availability. A corrected 1.0.1 submission uses the existing crown icon and a shorter README; neither change is a confirmed fix for the rejection.
 
 Thunderstore's [rejection guidance](https://wiki.thunderstore.io/mods/mod-not-visible) directs maintainers to its Discord rejected-uploads forum for clarification. Contacting moderators requires separate authorization. Native Windows acceptance remains outstanding.
 

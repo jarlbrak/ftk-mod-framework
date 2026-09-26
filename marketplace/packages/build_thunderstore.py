@@ -173,7 +173,7 @@ def bootstrap_package(tag_version, namespace, release_dir, output, source_root):
     files = {"plugins/FTKSetup/" + name: content for name, content in artifacts.items()}
     return write_package(
         output, namespace, FRAMEWORK_PACKAGE_NAME, tag_version,
-        "Windows tester preview: thin installer for FTK Mod Framework. Downloads the current launcher. Full in-game setup is unverified.",
+        "Windows setup for FTK Mod Framework. Downloads the launcher; install content mods through the in-game Mods menu.",
         "https://github.com/jarlbrak/ftk-mod-framework",
         {FRAMEWORK_DEPENDENCY: FRAMEWORK_DEPENDENCY_VERSION},
         ROOT / "FTKModFramework" / "thunderstore" / "README.md",
