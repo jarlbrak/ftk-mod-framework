@@ -20,7 +20,7 @@ Replace Paladin's identity and author with your own values. `version` identifies
 
 ## Add entries
 
-Each entry has a `kind`, a stable local `id`, a vanilla `template` to clone, and a `displayName`. Supported kinds are `item`, `weapon`, `proficiency`, `class`, `enemy`, and `encounter`. The loader reads entries in deterministic `(modGuid, id)` order and resolves cross-file references after reading all files. Do not use hard-coded custom enum integers.
+Each entry has a `kind`, a stable local `id`, a vanilla `template` to clone, and a `displayName`. Supported kinds are `item`, `weapon`, `proficiency`, `class`, `enemy`, and `encounter`. [Custom races](CUSTOM-RACES.md) and the [Lore Store unlock](#unlock-the-lore-store) are exceptions without a template. The loader reads entries in deterministic `(modGuid, id)` order and resolves cross-file references after reading all files. Do not use hard-coded custom enum integers.
 
 The Paladin's [Novice Hammer](../marketplace/packages/paladin/content.json) illustrates a weapon entry. Its `fields` set damage, Vitality skill, level range, rarity, and shop/drop eligibility. `itemModels` and `displayModels` provide different original meshes for equipped and inventory views; `icon` provides the 2D image. The Paladin class entry uses local IDs in `startweapon` and `startitems`, so those items can be declared elsewhere in the same file.
 
@@ -47,6 +47,18 @@ hazards and other exploration sources, but does not cure existing conditions,
 prevent tile damage or losses, or change combat immunity. The Paladin 1.2.0
 package uses this declaration for Cleansing March. Verify the effect in game
 before advertising it as a released ability.
+
+## Unlock the Lore Store
+
+Framework 1.3.0 adds a `loreStoreUnlock` entry. Its only supported form is:
+
+```json
+{ "kind": "loreStoreUnlock", "id": "all" }
+```
+
+While the mod is loaded, every Lore Store entry the player could buy reads as purchased. Entries from free DLC packs also unlock. Entries for unowned paid DLC, entries the game hides from the store, and cloud promotions it is not currently offering keep their real state. A purchased class is also shown at character creation.
+
+The framework writes no Lore Store purchase, so removing the mod restores the player's real purchases. Lore reveals and the party's shared reveal state remain genuine progress. In co-op, most unlocks apply only to the player who has the mod. The game shares some world unlocks with the party, except entries it requires every player to own. Co-op is unverified. The entry requires next-launch activation. [Lore Store Unlocked](../marketplace/packages/lore-store-unlocked/README.md) is the package that uses it.
 
 ## Validate and play
 

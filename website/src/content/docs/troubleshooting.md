@@ -18,6 +18,10 @@ Read the pending-change message in Mods, close the game, then relaunch. Changes 
 
 Check that Paladin **1.4.0** is active with framework **1.2.1 or later compatible 1.x**. Censure comes from an equipped Paladin hammer. Smite comes from an equipped Paladin trinket, which must now be acquired and equipped. They are not permanent class actions. Smite's stronger multiplier requires an active Censure Resistance reduction; an Armor reduction will not activate it.
 
+## Some Lore Store entries are still locked
+
+Lore Store Unlocked needs framework **1.3.0 or later compatible 1.x** and a full game restart after installing. Entries from paid DLC you do not own, such as Lost Civilization, intentionally stay locked. Entries the game hides from the store stay hidden, and limited-time cloud entries unlock only while the game offers them.
+
 ## A mod is blocked as incompatible
 
 Compare the installed framework, package version, platform, and game build with the listing. Update through the launcher and Mods menu where appropriate. Do not edit a manifest to bypass the compatibility check; get a compatible release instead.

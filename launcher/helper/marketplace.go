@@ -1212,8 +1212,12 @@ func marketContent(b []byte) error {
 	}
 	seen := map[string]bool{}
 	for _, entry := range c.Entries {
-		if !contains([]string{"item", "weapon", "proficiency", "class", "enemy", "encounter", "race"}, entry.Kind) || entry.ID == "" || (entry.Template == "" && entry.Kind != "race") {
+		if !contains([]string{"item", "weapon", "proficiency", "class", "enemy", "encounter", "race", "loreStoreUnlock"}, entry.Kind) || entry.ID == "" || (entry.Template == "" && entry.Kind != "race" && entry.Kind != "loreStoreUnlock") {
 			return errors.New("unsupported kind or missing identity/template")
+		}
+		if entry.Kind == "loreStoreUnlock" && (entry.ID != "all" || entry.Template != "" || entry.DisplayName != "" || entry.Flavor != "" ||
+			entry.Description != "" || len(entry.Fields) != 0 || entry.Proficiencies != nil) {
+			return errors.New("loreStoreUnlock supports only id all with no template, text, fields or proficiencies")
 		}
 		if entry.Kind == "race" {
 			if strings.TrimSpace(entry.DisplayName) == "" || len(entry.Fields) != 0 {

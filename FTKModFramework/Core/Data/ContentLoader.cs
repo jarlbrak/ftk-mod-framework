@@ -309,7 +309,8 @@ namespace FTKModFramework.Core.Data
 
             if (IsBlank(entry.Kind)) { report.Error(ctx + ": entry missing 'kind'."); return null; }
             if (IsBlank(entry.Id)) { report.Error(ctx + ": entry missing 'id'."); return null; }
-            if (!string.Equals(entry.Kind, "race", StringComparison.OrdinalIgnoreCase) && IsBlank(entry.Template))
+            if (!string.Equals(entry.Kind, "race", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(entry.Kind, "loreStoreUnlock", StringComparison.OrdinalIgnoreCase) && IsBlank(entry.Template))
             { report.Error(ctx + ": entry '" + entry.Id + "' missing 'template'."); return null; }
 
             string idKey = pe.ModGuid + "/" + entry.Id;
@@ -335,6 +336,15 @@ namespace FTKModFramework.Core.Data
                     }
                     try { return Cached.Make(pe, "race", Content.AddRace(pe.ModGuid, entry.Id, entry.DisplayName), null); }
                     catch (Exception e) { report.Error(entryCtx + ": race registration failed: " + e.Message); return null; }
+                case "lorestoreunlock":
+                    // Reject before activating: the unlock cannot be undone within this launch.
+                    if (entry.Id != "all" || DeclaresAnythingElse(entry))
+                    {
+                        report.Error(entryCtx + ": loreStoreUnlock supports only id 'all' with no other declarations.");
+                        return null;
+                    }
+                    LoreStoreUnlock.UnlockAll();
+                    return Cached.Make(pe, "lorestoreunlock", entry.Id, null);
                 case "enemy": return RegisterEnemy(pe, entryCtx, report);
                 case "encounter": return RegisterEncounter(pe, entryCtx, report);
                 default:
@@ -484,6 +494,17 @@ namespace FTKModFramework.Core.Data
 
         // ===================== PHASE 2 =====================
 
+        private static bool DeclaresAnythingElse(ContentEntry e)
+        {
+            return e.Template != null || e.DisplayName != null || e.Fields != null || e.Proficiencies != null ||
+                e.ReplaceProficiencies || e.RandomDebuffOutcomes != null || e.ResistanceDamageBonus != null ||
+                e.Flavor != null || e.Description != null || e.Behavior != null || e.BehaviorCategory != null ||
+                e.Guardian || e.Opportunist || e.PrecisionWeapon != null || e.PrecisionAction != null ||
+                e.ThiefArtifact != null || e.OverworldAilmentImmunity != null || e.GuardianBonuses != null ||
+                e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
+                e.OffHandModels != null || e.DisplayModels != null || e.PlayerModels != null || e.RaceBindings != null;
+        }
+
         /// <summary>
         /// Phase 2 for one cached row: apply its content-id REFERENCE fields (now that every base row
         /// exists, a cross-file reference like a class' m_StartWeapon resolves regardless of file order),
@@ -491,7 +512,7 @@ namespace FTKModFramework.Core.Data
         /// </summary>
         private static void ResolvePhase2(Cached c, ValidationReport report)
         {
-            if (c.Kind == "race") return;
+            if (c.Kind == "race" || c.Kind == "lorestoreunlock") return;
             string ctx = c.Context;
 
             int refs = OverrideEngine.ApplyResolved(c.Row, c.ReferenceFields, ctx, report);

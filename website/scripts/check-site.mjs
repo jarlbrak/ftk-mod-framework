@@ -2,7 +2,7 @@ import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const root=process.env.SITE_URL || 'http://127.0.0.1:4321/ftk-mod-framework/';
-const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/possum/','gallery/','releases/','credits/'];
+const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/'];
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage();
 const errors=[];page.on('pageerror',e=>errors.push(e.message));

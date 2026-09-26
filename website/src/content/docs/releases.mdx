@@ -4,13 +4,17 @@ description: What changed in the published framework and mod packages.
 ---
 import catalog from '../../data/catalog';
 
+## Framework 1.3.0
+
+Adds the Lore Store unlock used by [Lore Store Unlocked 1.0.0](../mods/lore-store-unlocked/). While a package declaring it is enabled, every Lore Store entry you could buy reads as purchased, including free DLC entries. Unowned paid DLC, entries the game hides from the store, and cloud promotions not currently offered keep their real state. No Lore Store purchase is written to your profile or Steam, so removing the package restores your own unlocks. Existing 1.x mods remain supported, and framework 1.2.1 is included in the launcher's automatic upgrade range. Restart the game after updating. Download the launcher from the [framework release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.3.0).
+
 ## Framework 1.2.1
 
 Restores native-style class selection for Paladin 1.4.0, with a two-sentence flavor description and short skill labels. Guard's detailed rules remain in its combat ability description. Use a full game restart after updating. Download the launcher from the [framework release](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.2.1). Framework and mod versions are independent; a new mod release does not replace the framework download.
 
 ## Current mod releases
 
-All three mods are published for Windows, macOS, and Linux using the same versioned archives. Installation requires a listed game build; see [platform availability and gameplay verification](../compatibility/).
+All four mods are published for Windows, macOS, and Linux using the same versioned archives. Installation requires a listed game build; see [platform availability and gameplay verification](../compatibility/).
 
 {catalog.packages.map(p=><section><h3>{p.name} {p.version}</h3><p>{p.changelog}</p><ul>{p.contentChanges.map(c=><li>{c}</li>)}</ul><p><a href={p.packageUrl}>Download exact published package</a> · Framework {p.frameworkRange}</p></section>)}
 
