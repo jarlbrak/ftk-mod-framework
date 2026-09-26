@@ -1,0 +1,103 @@
+name: Thunderstore bootstrap release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Independent bootstrap GitHub release tag (bootstrap-vX.Y.Z)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: thunderstore-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: vars.THUNDERSTORE_BOOTSTRAP_READY == 'true'
+    runs-on: ubuntu-latest
+    environment: thunderstore
+    steps:
+      - name: Check out the current package builder
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Check out the published release source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+          path: release-source
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up .NET for Thunderstore CLI
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build the immutable Thunderstore package
+        id: build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          THUNDERSTORE_NAMESPACE: ${{ vars.THUNDERSTORE_NAMESPACE }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          OUTPUT_DIR: ${{ runner.temp }}/thunderstore-package
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$THUNDERSTORE_NAMESPACE" || { echo "Set the THUNDERSTORE_NAMESPACE repository variable." >&2; exit 1; }
+          published_tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
+            --jq 'select(.draft == false and .prerelease == false) | .tag_name')"
+          [[ "$published_tag" == "$RELEASE_TAG" ]] || {
+            echo "An already published stable bootstrap release is required." >&2
+            exit 1
+          }
+
+          [[ "$RELEASE_TAG" =~ ^bootstrap-v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+            echo "Only independent bootstrap releases can be published to Thunderstore." >&2
+            exit 1
+          }
+          latest_tag="$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq '.tag_name')"
+          [[ "$latest_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || {
+            echo "Bootstrap releases must use --latest=false to preserve the framework update feed." >&2
+            exit 1
+          }
+          mkdir -p "$RUNNER_TEMP/ftkmf-release"
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
+            --pattern FTKThunderstoreBootstrap.dll \
+            --pattern ftkmf-bootstrap-helper.exe --pattern SHA256SUMS \
+            --dir "$RUNNER_TEMP/ftkmf-release"
+          python3 marketplace/packages/build_thunderstore.py \
+            --tag "$RELEASE_TAG" \
+            --namespace "$THUNDERSTORE_NAMESPACE" \
+            --release-dir "$RUNNER_TEMP/ftkmf-release" \
+            --source-root "$GITHUB_WORKSPACE/release-source" \
+            --output "$OUTPUT_DIR"
+
+          package_zip="$(find "$OUTPUT_DIR" -type f -name package.zip -print -quit)"
+          test -n "$package_zip" || { echo "Thunderstore package build produced no package.zip." >&2; exit 1; }
+          package_dir="$(dirname "$package_zip")"
+          echo "package_dir=$package_dir" >> "$GITHUB_OUTPUT"
+
+      - name: Install pinned Thunderstore CLI
+        run: dotnet tool install --tool-path "$RUNNER_TEMP/tcli" tcli --version 0.2.4
+
+      - name: Publish package
+        env:
+          TCLI_AUTH_TOKEN: ${{ secrets.THUNDERSTORE_API_TOKEN }}
+          PACKAGE_DIR: ${{ steps.build.outputs.package_dir }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$TCLI_AUTH_TOKEN" || { echo "Set the THUNDERSTORE_API_TOKEN Actions secret." >&2; exit 1; }
+          "$RUNNER_TEMP/tcli/tcli" publish \
+            --file "$PACKAGE_DIR/package.zip" \
+            --config-path "$PACKAGE_DIR/thunderstore.toml"

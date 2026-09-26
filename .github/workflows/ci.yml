@@ -30,6 +30,17 @@ jobs:
           dotnet-version: '10.0.x'
       - name: Build Windows launcher (no game required)
         run: dotnet build launcher/windows/FtkModdedLauncher.csproj -c Release
+      - name: Windows launcher handoff UI checks
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./launcher/windows/verify-handoff.ps1
+      - name: Launcher handoff argument checks
+        run: dotnet run --project launcher/tests/LaunchOptions/LaunchOptions.csproj -c Release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Thunderstore package checks
+        run: python3 -m unittest discover -s marketplace/packages -p 'test_thunderstore.py'
       - name: Windows installer offline checks
         if: runner.os == 'Windows'
         shell: pwsh
