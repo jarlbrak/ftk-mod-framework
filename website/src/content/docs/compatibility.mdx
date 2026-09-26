@@ -6,7 +6,7 @@ import catalog from '../../data/catalog';
 
 ## Know your versions
 
-Framework and mods have separate release numbers. This site documents **framework 1.4.0**, **Paladin 1.4.0**, **Thief 1.0.0**, **Possum 1.0.0**, and **Lore Store Unlocked 1.0.0**. These are published downloads. No unreleased features are presented as available.
+Framework and mods have separate release numbers. This site documents **framework 1.5.1**, **Paladin 1.4.0**, **Thief 1.0.0**, **Possum 1.0.0**, and **Lore Store Unlocked 1.0.0**. These are published downloads. No unreleased features are presented as available.
 
 <table><thead><tr><th>Mod</th><th>Published version</th><th>Framework range</th><th>Published platforms</th><th>Dependencies</th></tr></thead><tbody>{catalog.packages.map(p=><tr><td>{p.name}</td><td>{p.version}</td><td>{p.frameworkRange}</td><td>{p.platforms.join(', ')}</td><td>{p.dependencies.length?'See package':'None'}</td></tr>)}</tbody></table>
 
@@ -33,3 +33,7 @@ Online co-op is unverified. Matching versions and mod sets is necessary preparat
 ## Published versus preview
 
 Published pages describe the immutable catalog packages named above. Future previews must carry a separate **Preview / not published** label and must never replace published stat tables. Selecting the launcher's Preview channel is a separate framework update choice. Keep it out of an ongoing run unless you intend to test that release.
+
+## Thunderstore Windows tester preview
+
+Bootstrap 1.0.0 was submitted to Thunderstore but rejected as Invalid submission, so it is not available through the mod manager. It targets native Windows x64 with .NET Framework 4.8. Framework 1.5.1 supplies its launcher handoff. Automated Windows launcher and installer checks pass, but no running-game handoff, mod activation, or update/relaunch acceptance has been performed. No specific mod manager is yet verified end to end. This preview does not establish Proton support or broaden the published game-build fingerprints.

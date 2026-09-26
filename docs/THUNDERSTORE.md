@@ -80,6 +80,12 @@ For full Windows acceptance, validate a fresh native Windows manager profile thr
 
 Native Windows in-game handoff remains unverified. The initial tester publication intentionally precedes this acceptance so volunteers can supply evidence. Framework 1.5.1 supplies the required launcher contract. Credentials are configured separately from source; a release enablement switch is not evidence of live acceptance.
 
+## Initial submission status
+
+Framework 1.5.1 and bootstrap 1.0.0 are published on GitHub. The first CI upload succeeded, but Thunderstore marked `JarlBrak-FTKModFramework-1.0.0` as **Rejected: Invalid submission**. No more specific reason was displayed. The package is not available in the mod manager; successful `tcli publish` output alone does not establish moderation approval. Publication is disabled again pending resolution. Do not retry unchanged uploads or claim public Thunderstore availability.
+
+Thunderstore's [rejection guidance](https://wiki.thunderstore.io/mods/mod-not-visible) directs maintainers to its Discord rejected-uploads forum for clarification. Contacting moderators requires separate authorization. Native Windows acceptance remains outstanding.
+
 ## Website impact
 
 At first publication update `website/src/content/docs/installation.md` with first-run internet access, the thin Start menu/Steam entries, and the actual listing URL; `compatibility.mdx` with verified Windows manager coverage; `troubleshooting.md` with cache failure/retry, offline behavior, and uninstall distinctions; and `releases.mdx` with availability. Mod pages keep their current distribution flow. Until then the public site must not advertise a live Thunderstore listing.

@@ -41,3 +41,13 @@ If Skyharbor is unexpectedly missing, check that the launcher installed framewor
 Framework 1.5.0 sends detected errors and unexpected previous-session exits to public framework GitHub issues by default, with filtered diagnostics. Turn off **Automatic bug reports** in **Mods > Settings & Help** to stop new automatic sends. The manual **Report Bugs** editor remains available when you want to explain a problem. Diagnostics can still contain personal information written by mods; see the [reporting disclosure](https://reporting-api-production-ff50.up.railway.app/privacy).
 
 You can also [open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues) with your platform, game build, framework version, mod versions, what you did, and what happened. Include only relevant log lines and remove personal paths and other private information. The loader's `BepInEx/LogOutput.log` inside the game folder can help identify the error. Do not upload game assemblies or saves containing private data.
+
+## Thunderstore bootstrap
+
+The initial Thunderstore submission was rejected as **Invalid submission**. A successful CI upload does not mean the package is approved or visible in the manager. Use the regular launcher downloads in the [installation guide](../installation/) while this is resolved. The following behavior describes the intended bootstrap flow, which has not passed live Windows acceptance.
+
+The first Windows setup needs internet access to download the official current launcher and verify its checksum. If setup fails, the original game stays open; check the displayed error and retry. A fresh installation cannot work offline. After a launcher has opened successfully, the bootstrap retains a verified cached copy for offline use and failed updates. A damaged cache may require reconnecting and downloading again.
+
+Use the Start menu or Steam entry created by setup for normal play. The durable entry and cache live under `%LOCALAPPDATA%/FTKModFramework/Bootstrap/`. Removing the Thunderstore package or its profile does not uninstall the managed framework or those files. Reopening the initial profile offers setup again. Other profile mods are not migrated. Use the normal framework uninstall instructions when removing the managed installation.
+
+For this unverified Windows tester preview, [report](https://github.com/jarlbrak/ftk-mod-framework/issues) your Windows version, manager/version, whether setup reached the launcher, whether Play started the modded game, and the exact error. Remove personal information before attaching logs. Shortcut behavior after profile removal, offline launches, pins, and framework updates all need volunteer testing.
