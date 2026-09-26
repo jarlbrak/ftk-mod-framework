@@ -1,4 +1,4 @@
-# Lore Store Unlocked 1.0.0
+# Lore Store Unlocked 1.0.1
 
 Play with the whole Lore Store open. While this mod is installed, every Lore
 Store entry you could buy reads as purchased: classes, items, encounters,
