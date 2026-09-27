@@ -329,6 +329,7 @@ namespace FTKModFramework.Core.UI
                 else if (_view == "settings") SettingsAndHelp();
                 else if (_view == "saved-sets") SavedSets();
                 else if (_view == "saved-set-review") SavedSetReview();
+                else if (_view == "tweaks") TweaksView();
                 AddFooter();
             }
             if (gameObject.activeInHierarchy)
@@ -984,6 +985,10 @@ namespace FTKModFramework.Core.UI
             Button updates = ActionButton("Updates", delegate { Navigate("updates"); if (FrameworkUpdateRuntime.State == null && !PanelBusy) LoadUpdates("refresh"); }, true, 48);
             SetWidth(updates.gameObject, 170);
             if (_view == "updates") Border(updates.gameObject, Gold, 2);
+            // Before the conditional Review changes tab, so the Tweaks tab keeps one controller index.
+            Button tweaks = ActionButton(ModsPanelTweaks.TabTitle, delegate { Navigate("tweaks"); }, true, 48);
+            SetWidth(tweaks.gameObject, 160);
+            if (_view == "tweaks") Border(tweaks.gameObject, Gold, 2);
             if (PendingCount() > 0)
             {
                 Button changes = ActionButton(PendingCount() == 0 ? "Next-launch selection" : "Review changes (" + PendingCount() + ")", delegate { Navigate("maintenance"); }, true, 48);
@@ -1020,6 +1025,7 @@ namespace FTKModFramework.Core.UI
                 : PendingCount() > 0 ? "Changes are saved for next launch." : MarketplaceRuntime.Pending != null ? "Your selection is saved. No gameplay changes will apply." : "Your installed mods stay unchanged until you restart.";
             if (_view == "updates") notice = Short(FrameworkUpdateRuntime.Notice, 120);
             else if (_message.Length > 0) notice = Short(_message, 120);
+            else if (_view == "tweaks" && !PanelBusy) notice = "Tweak choices save immediately. Mod changes still wait for a restart.";
             Text status = TextLine(notice, 21, 58);
             status.GetComponent<LayoutElement>().flexibleWidth = 1;
             if (PanelBusy)
