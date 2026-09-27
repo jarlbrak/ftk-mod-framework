@@ -63,11 +63,12 @@ internal static class Program
         NonAllocating();
         Facade();
         SkipIntro();
+        XpInLevel();
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, xp in level, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -454,6 +455,78 @@ internal static class Program
         Check(!FrameworkTweaks.SkipIntroAnyButton(restarted, TweakRegistry.InvalidHandle, false), "an unregistered handle leaves vanilla untouched");
     }
 
+    // Spec #243 FR-1: XP within the level. The window mirrors the patch, which indexes
+    // m_LevelXpValues as CharacterStats.GetXpPercent does.
+    private static string XpAt(TweakRegistry r, int handle, string vanilla, int[] thresholds, int maxLevel, int level, int xp)
+    {
+        int start = 0, end = 0;
+        if (level < maxLevel)
+        {
+            end = thresholds[level];
+            if (level > 0) start = thresholds[level - 1];
+        }
+        return FrameworkTweaks.XpInLevelDisplay(r, handle, vanilla, level, maxLevel, xp, start, end);
+    }
+
+    private static void XpInLevel()
+    {
+        TweakDescriptor d = FrameworkTweaks.XpInLevelDescriptor;
+        Check(d.Id == "information.xp-in-level" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
+            "XP within the level is a Local Information tweak with the specified ID");
+        Check(!d.DefaultOn && !d.ExplicitDefault.HasValue && d.BalanceNote == null, "XP within the level is off by default and has no balance note");
+        Check(d.Evidence.Contains("CharacterStats.GetXpDisplayString") && d.Evidence.Contains("CharacterStats.GetXpPercent")
+            && d.Evidence.Contains("uiPlayerMainHud.SetXpDisplay") && d.Evidence.Contains("uiPlayerStats.UpdateDisplay"),
+            "the evidence names the verified methods and both callers");
+
+        // Pure formula. Cumulative thresholds; the max level is 4, so m_LevelXpValues[4] is the XP cap.
+        int[] t = { 100, 300, 600, 1000, 1500 };
+        const int max = 4;
+        Check(XpInLevelText.Format(0, max, 0, 0, 100) == "0 / 100 (0)", "level 0 starts its window at 0");
+        Check(XpInLevelText.Format(0, max, 99, 0, 100) == "99 / 100 (99)", "level 0 one short of the threshold");
+        Check(XpInLevelText.Format(1, max, 100, 100, 300) == "0 / 200 (100)", "level 1 at its first XP: the window starts at m_LevelXpValues[0]");
+        Check(XpInLevelText.Format(1, max, 250, 100, 300) == "150 / 200 (250)", "level 1 part way through");
+        Check(XpInLevelText.Format(1, max, 299, 100, 300) == "199 / 200 (299)", "level 1 one short of the next threshold");
+        Check(XpInLevelText.Format(2, max, 300, 300, 600) == "0 / 300 (300)", "exactly at a threshold after the level-up: an empty new window");
+        Check(XpInLevelText.Format(1, max, 300, 100, 300) == "200 / 200 (300)", "exactly at a threshold before the level-up applies: a full window");
+        Check(XpInLevelText.Format(1, max, 450, 100, 300) == "200 / 200 (450)", "past the threshold before the level-up applies: clamped full, like the bar");
+        Check(XpInLevelText.Format(3, max, 999, 600, 1000) == "399 / 400 (999)", "the last level below max");
+        Check(XpInLevelText.Format(3, max, 40, 600, 1000) == "0 / 400 (40)", "XP lost below the window: clamped empty, like the bar");
+        Check(XpInLevelText.Format(4, max, 1499, 0, 0) == "1499", "max level shows the total alone");
+        Check(XpInLevelText.Format(4, max, 1000, 1000, 1500) == "1000", "max level ignores the window");
+        Check(XpInLevelText.Format(5, max, 1499, 0, 0) == "1499", "above max is treated as max, as vanilla does");
+        Check(XpInLevelText.Format(1, max, 150, 300, 300) == null && XpInLevelText.Format(1, max, 150, 300, 100) == null,
+            "an empty or inverted window yields no text");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.XpInLevel;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "the handle resolves to the XP within the level descriptor");
+
+        string vanilla = "250 / 300";
+        Check(ReferenceEquals(XpAt(r, handle, vanilla, t, max, 1, 250), vanilla), "before initialization vanilla's string passes through");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves XP within the level off");
+        Check(ReferenceEquals(XpAt(r, handle, vanilla, t, max, 1, 250), vanilla), "off: vanilla's string passes through unchanged");
+        Check(ReferenceEquals(XpAt(r, handle, "1500 / 1500", t, max, 4, 1499), "1500 / 1500"), "off at max level: vanilla's string passes through");
+
+        Check(r.Toggle(handle) && store.Values["information.xp-in-level"] == TweakPreference.On && r.IsOn(handle), "turning it on stores On");
+        Check(XpAt(r, handle, vanilla, t, max, 1, 250) == "150 / 200 (250)", "on: level 1 uses m_LevelXpValues[0] and [1]");
+        Check(XpAt(r, handle, vanilla, t, max, 0, 60) == "60 / 100 (60)", "on: level 0 uses 0 and m_LevelXpValues[0]");
+        Check(XpAt(r, handle, vanilla, t, max, 2, 300) == "0 / 300 (300)", "on: exactly at a threshold");
+        Check(XpAt(r, handle, "1500 / 1500", t, max, 4, 1499) == "1499", "on: max level shows the total alone");
+        Check(ReferenceEquals(FrameworkTweaks.XpInLevelDisplay(r, handle, vanilla, 1, max, 250, 300, 300), vanilla),
+            "on: an empty window keeps vanilla's string");
+
+        r.Fault(handle, new InvalidOperationException("xp"));
+        Check(!r.IsOn(handle) && ReferenceEquals(XpAt(r, handle, vanilla, t, max, 1, 250), vanilla), "faulted: vanilla's string passes through");
+        Check(ReferenceEquals(XpAt(r, TweakRegistry.InvalidHandle, vanilla, t, max, 1, 250), vanilla), "an unregistered handle leaves vanilla untouched");
+
+        TweakRegistry restarted = NewRegistry();
+        FrameworkTweaks.RegisterAll(restarted);
+        Check(restarted.Initialize(store) && XpAt(restarted, FrameworkTweaks.XpInLevel, vanilla, t, max, 1, 250) == "150 / 200 (250)",
+            "the stored On applies from the first call after a restart");
+    }
+
     private static List<string> Warnings = new List<string>(), Infos = new List<string>(), Errors = new List<string>();
 
     private static TweakSessionLifecycle NewLifecycle(TweakRegistry r, Func<int> probe)
@@ -597,7 +670,7 @@ internal static class Program
 
         TweakRegistry players = NewRegistry();
         FrameworkTweaks.RegisterAll(players);
-        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle && players.Count == 1, "without self-tests the probe is not registered");
+        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle && players.Count == 2, "without self-tests only Skip intro and XP within the level register");
         FrameworkTweaks.RegisterAll(NewRegistry(), false);
         Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle, "an explicit false leaves it out too");
 
@@ -605,7 +678,7 @@ internal static class Program
         TweakRegistry r = NewRegistry();
         FrameworkTweaks.RegisterAll(r, true);
         int probe = FrameworkTweaks.SessionProbe;
-        Check(probe != TweakRegistry.InvalidHandle && r.Count == 2 && Logs.Count == 0, "self-tests register the probe cleanly");
+        Check(probe != TweakRegistry.InvalidHandle && r.Count == 3 && Logs.Count == 0, "self-tests register the probe cleanly");
         store.Values["probe.session-lifecycle"] = TweakPreference.On;
         r.Initialize(store);
         TweakSessionLifecycle l = NewLifecycle(r, () => FrameworkTweaks.SessionProbe);
