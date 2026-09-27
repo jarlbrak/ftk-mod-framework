@@ -50,7 +50,8 @@ built after it, including every quest after a save is loaded. Its patch comment 
 | Facade | `Core/Tweaks/Tweaks.cs` | Process-wide `Tweaks.Registry`, `Tweaks.Session`, `IsOn`, `Fault` |
 | Framework tweak list | `Core/Tweaks/FrameworkTweaks.cs` | Every framework descriptor, its handle and `RegisterAll` |
 | Preference resolution | `Core/Tweaks/TweakPreferences.cs` | Pure Default/On/Off rules shared by the registry and the tab |
-| Session lifecycle | `Core/Tweaks/TweakSessionLifecycle.cs` | Unity-free capture, lock and clear decisions, plus the probe trace |
+| Session lifecycle | `Core/Tweaks/TweakSessionLifecycle.cs` | Unity-free capture, lock and clear decisions, resume state, plus the probe trace |
+| Session record | `Core/Tweaks/TweakSessionRecord.cs` | Unity-free codec and per-ID resolution for the `ftkmf.session` save record |
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
 | Tweaks tab | `Core/UI/ModsPanelTweaks.cs`, `ModsPanel.Tweaks.cs` | Row text, paging and layout |
@@ -138,8 +139,14 @@ room and room membership cannot tell it from co-op.
 - **Multiplayer**, and any value this build does not recognize, captures an empty set with the
   source `pending`. Session tweaks stay off in online co-op until a host set can be supplied.
 - `TweakRegistry.SetSessionSet(ids, label)` replaces a captured set with a complete one, such
-  as a host's set or a save's record. It is only valid between capture and lock, and nothing
-  calls it yet.
+  as a host's set or a save's record. It is only valid between capture and lock. The resume
+  state below calls it; nothing supplies a host set yet.
+- **Resume state (in progress, Spec #253).** `TweakSessionLifecycle.ArmResume`, `ReadRecord`
+  and `RecordToWrite` hold a resumed run's `ftkmf.session` record from the save's load to the
+  lock, apply it to a solo or local capture with the source `save`, `preferences-legacy` (no
+  record) or `preferences-invalid` (unreadable record), and reapply it if the lock recaptures.
+  Scene reload, run end, a title-screen activation and the lock disarm it; Photon callbacks
+  do not. Online co-op keeps `pending`. No game hook calls these yet, so saves carry no record.
 - A co-op client never passes a capture hook. At lock, the lifecycle recaptures from the run's
   own mode unless a capture for that mode already exists, so a solo capture can never reach a
   co-op run.
@@ -256,6 +263,7 @@ While the probe is registered, the lifecycle writes these lines to `BepInEx/LogO
 | Line | Level | When |
 | --- | --- | --- |
 | `SESSION-PROBE [session-lifecycle] capture via=<hook> state=Captured mode=<mode> source=<source> probe=<on\|off>` | Info | Every capture. A co-op client's shows `via=uiStartGame.EnterFahrulRPC (at run start)` |
+| `SESSION-PROBE [session-lifecycle] resume-arm via=<hook> ...` and `record via=<hook> ...` | Info | A resume starting, and its save record read while armed |
 | `SESSION-PROBE [session-lifecycle] lock via=<hook> state=Locked ...` | Info | Run start |
 | `SELF-TEST PASS [session-lifecycle]: lock mode=<mode> source=<source> probe=<on\|off> expected=<on\|off>` | Info | Lock matched the expectation |
 | `SESSION-PROBE [session-lifecycle] clear via=<hook> locked=<true\|false> state=None mode=none source=none probe=off` | Info | A clear that had something to clear |
@@ -264,8 +272,10 @@ While the probe is registered, the lifecycle writes these lines to `BepInEx/LogO
 | `SELF-TEST FAIL [session-lifecycle]: clear via <hook> while the run may continue=<True\|False>, probe on after clear=<True\|False>` | Error | A mid-run clear, or a probe left on |
 
 `mode` is `SinglePlayer`, `Multiplayer` or `LocalMultiplayer`. At lock, the expected value is
-the player's probe choice for the `preferences` source (off if the probe has faulted) and off
-for `pending`; a lock from any other source is traced but not checked. A clear with nothing to
+the player's probe choice for the `preferences`, `preferences-legacy` and `preferences-invalid`
+sources (off if the probe has faulted), off for `pending`, and the save record's state for
+`save`, falling back to the player's choice when the record does not list the probe. A lock
+from any other source is traced but not checked. A clear with nothing to
 clear writes no line. Two warnings can accompany these lines: "cleared the Session set of a
 run that may still be going" for a mid-run clear, and "a run started while the previous run's
 Session set was still locked" for a missed clear.
@@ -284,6 +294,7 @@ dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c R
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
 hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, the Perfect chance
 math and fix, XP within the level, Poison turns left, Sell price in item details, Mark
-encounters that vanish, Name the achievements House Rules disable, the probe and the tab.
+encounters that vanish, Name the achievements House Rules disable, the probe, the tab, and the
+Session record codec, resolution and resume state.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`. Both run
 in CI.
