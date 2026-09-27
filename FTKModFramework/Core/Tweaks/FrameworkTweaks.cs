@@ -90,7 +90,6 @@ namespace FTKModFramework.Core
             + "character (uiPlayerInventory.SelectItemIcon passes Mode.Inventory and m_InventoryOwner) but "
             + "hands uiItemDetail.Show Mode.ItemDisplay, so the postfix is on the former. It only extends "
             + "uiItemDetail.m_ItemRarityDisplay, which uiItemDetail.Show rewrites on every call, on this client.");
-
         internal static readonly TweakDescriptor VanishingEncountersDescriptor = new TweakDescriptor(
             "information.vanishing-encounters", TweakCategory.Information, TweakScope.Local,
             "Mark encounters that vanish",
@@ -119,6 +118,19 @@ namespace FTKModFramework.Core
             + "The postfix applies Rules2.IsEasier to the passed rules and that GameDifficulty's "
             + "m_CustomizableRules and only extends the returned text, on this client.");
 
+        internal static readonly TweakDescriptor OnePressInventoryDescriptor = new TweakDescriptor(
+            "convenience.one-press-inventory", TweakCategory.Convenience, TweakScope.Local,
+            "One-press inventory",
+            "Open your inventory with one press of the Inventory key on keyboard and mouse. Controllers keep the two-press belt.",
+            "The private CharacterOverworld.CheckInput sends the first Inventory press to "
+            + "SetFocus(m_UIPlayMainHud.m_QuickUseInput), and FTKInputFocus.GetButtonDown ignores the frame "
+            + "after SetFocus. A second press reaches uiPlayerMainHud.Update, which starts "
+            + "InventoryToggleSequence(true) on the HUD when GameLogic.m_GameAborted is false, "
+            + "FTKUI.m_BattleStanceButtons.m_Initialized is false and m_OpenInventory.interactable. The "
+            + "CheckInput postfix starts that same coroutine under the same conditions, only for a press on a "
+            + "key or mouse button bound to Inventory by a character with CharacterOverworld.m_IsUseMouse, "
+            + "two frames later so a same-frame vanilla open is seen first. Input only, on this client.");
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -140,6 +152,7 @@ namespace FTKModFramework.Core
         internal static int SellPrice { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int VanishingEncounters { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int HouseRulesAchievements { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int OnePressInventory { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -153,6 +166,7 @@ namespace FTKModFramework.Core
             SellPrice = registry.Register(SellPriceDescriptor);
             VanishingEncounters = registry.Register(VanishingEncountersDescriptor);
             HouseRulesAchievements = registry.Register(HouseRulesAchievementsDescriptor);
+            OnePressInventory = registry.Register(OnePressInventoryDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
