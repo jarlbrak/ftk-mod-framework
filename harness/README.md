@@ -91,13 +91,44 @@ a timeout after execution starts reports an unknown outcome and must not be
 retried automatically. The MCP client never retries a mutation automatically.
 
 `GET /health` includes `protocolVersion` and `frameworkMvid` to identify the loaded
-bridge. The game window must report focus. Losing focus fails the sequence and clears
-native pointer state without activating a stale target. The input status reports
+bridge. By default the game window must report focus, and losing focus fails the sequence and
+clears native pointer state without activating a stale target. Automated runs use background
+mode instead (next section) so they never need focus. The input status reports
 whether native hooks installed successfully;
 failed initialization leaves ordinary input intact and rejects synthetic input.
 Requests require a Content-Length and are limited to 256 KiB.
 The environment and loopback gates remain in force. Input also checks the native
 network state every frame and refuses online transitions or sessions.
+
+### Background mode
+
+Set `FTK_AGENT_BACKGROUND=1` together with `FTK_AGENT_BRIDGE=1` to accept native input while the
+game window is unfocused. This is the required mode for agent-driven play tests: the user keeps
+working in other apps while the test runs. Synthetic input is injected at the game's own input
+reads, so clicks, keys, hover, and text behave exactly as in focused play; only the OS focus
+requirement is removed. The mode:
+
+- sets `Application.runInBackground` so the player loop keeps running unfocused;
+- clears Rewired's `ignoreInputWhenAppNotInFocus` once Rewired is ready (logged as
+  `[agent] background mode: Rewired ignoreInputWhenAppNotInFocus True -> False`), because Rewired
+  and its UI input module otherwise drop unfocused input;
+- skips the focus guard. Status and `/ui` report `"background": true` and the real `focused` value.
+
+The startup log line `[agent] native input ready: ...; background mode` confirms it. The game's
+own focus flag still follows the OS, so mouse-wheel zoom and screen-edge scrolling stay inactive
+while unfocused; drive the camera with keys or clicks instead.
+
+A newly launched game activates its window once. Record the frontmost app before launching and
+reactivate it as soon as the game window is frontmost; on macOS:
+
+```sh
+front=$(osascript -e 'tell application "System Events" to get name of first process whose frontmost is true')
+# ...launch the isolated copy with FTK_AGENT_BRIDGE=1 FTK_AGENT_BACKGROUND=1...
+osascript -e "tell application \"$front\" to activate"
+```
+
+After that, never activate or raise the game window. Read the screen through `ftk_screenshot`,
+not a desktop capture.
 
 Game-free protocol checks:
 
@@ -107,8 +138,8 @@ dotnet run --project FTKModFramework/Tests/AgentQueue -c Release
 dotnet run --project FTKModFramework/Tests/NativeInput -c Release
 ```
 
-Run the reproducible live smoke only against an already launched, focused,
-authorized isolated copy at its fresh English title screen:
+Run the reproducible live smoke only against an already launched, authorized isolated copy in
+background mode (or focused) at its fresh English title screen:
 
 ```sh
 python3 harness/native_input_smoke.py --url http://127.0.0.1:8777 \
