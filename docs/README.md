@@ -31,6 +31,7 @@ to the underlying design and validation records.
 - [Agent instructions and reusable skills](AI-NATIVE.md)
 - [In-game reporting feasibility and outstanding proof gates](REPORTING-FEASIBILITY.md)
 - [Internal reporting contract and synthetic fixtures](REPORTING-CONTRACT.md)
+- [Co-op session feasibility and draft contract (research record)](COOP-SESSION-FEASIBILITY.md)
 
 Design records, validation matrices and older release notes under `docs/` are
 retained as evidence for their specific versions. They are not a current
