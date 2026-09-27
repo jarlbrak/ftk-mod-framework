@@ -8,3 +8,5 @@ Read the root and `FTKModFramework/AGENTS.md` first.
 - Keep runtime evidence distinct from fixture actions. A fixture-assisted hit or death is not
   ordinary gameplay evidence.
 - Update `harness/README.md` and focused tests when the command contract changes.
+- Keep the focus guard as the default. Background mode (`FTK_AGENT_BACKGROUND=1`) is the opt-in
+  that lets tests run without the desktop's focus; do not remove it or make it implicit.

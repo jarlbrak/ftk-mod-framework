@@ -13,7 +13,9 @@ route. Read `.local/agents/game-validation.md` and `.local/agents/environment.md
 3. Deploy through the configured project script or isolated test copy. Do not overwrite unrelated
    plugins, saves, settings, or evidence.
 4. Enable diagnostic self-tests only in a development configuration.
-5. Launch through the configured local route and inspect the fresh log for framework load,
+5. Launch through the configured local route with the bridge in background mode
+   (`FTK_AGENT_BACKGROUND=1`, see `harness/README.md#background-mode`), hand focus back to the
+   user's previous app, and never refocus the game. Inspect the fresh log for framework load,
    expected `SELF-TEST PASS` lines, zero relevant failures, and the intended feature evidence.
 6. For visual or gameplay claims, exercise and observe the exact route. Log success alone does not
    establish appearance, motion, save, progression, co-op, or lifecycle behavior.
