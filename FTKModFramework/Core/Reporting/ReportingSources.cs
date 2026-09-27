@@ -31,6 +31,7 @@ namespace FTKModFramework.Core.Reporting
             input.CampaignEngine = Plugin.EnableCampaignEngine == null ? (bool?)null : Plugin.EnableCampaignEngine.Value;
             input.SelfTests = Plugin.RunSelfTests == null ? (bool?)null : Plugin.RunSelfTests.Value;
             input.ScaleBudgetGate = Plugin.DiagnosticsEnableGate == null ? (bool?)null : Plugin.DiagnosticsEnableGate.Value;
+            input.TweakState = ReportingTweakSource.Copy(Tweaks.Registry);
             input.SourcesReady = sourcesReady;
             input.Transitioning = HotReloadCoordinator.Busy;
             input.RuntimeFaulted = HotReloadCoordinator.Faulted;

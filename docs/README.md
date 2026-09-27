@@ -29,6 +29,7 @@ to the underlying design and validation records.
 - [Contributing guide](../CONTRIBUTING.md)
 - [Framework release procedure](RELEASING.md)
 - [Agent instructions and reusable skills](AI-NATIVE.md)
+- [Add a framework tweak](TWEAKS.md)
 - [In-game reporting feasibility and outstanding proof gates](REPORTING-FEASIBILITY.md)
 - [Internal reporting contract and synthetic fixtures](REPORTING-CONTRACT.md)
 

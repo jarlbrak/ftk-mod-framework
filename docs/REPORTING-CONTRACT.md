@@ -129,7 +129,8 @@ marker; this contract makes no power-loss atomicity promise.
 
 Every newly created report attempts to bundle framework/game versions, bounded
 OS/runtime/architecture fields, current and pending mod selection, supported
-plugin metadata, known loader outcomes and timestamped game context. Use the
+plugin metadata, framework tweak preferences and effective tweak state, known
+loader outcomes and timestamped game context. Use the
 source authorities below: unknown outcomes remain unknown, and absent sections
 carry a reason. Never include usernames, machine IDs, absolute paths, saves,
 credentials, full configs or raw exception text. Optional sanitized logs require
@@ -207,6 +208,7 @@ ordinal identity order; registration order is untouched.
 | Narrative/suspicion/choices | Explicit editor input, timestamped draft revision | Never inferred from logs or blamed mods |
 | Framework version/settings | Plugin assembly metadata and existing named config entries in `Plugin.cs` | B allowlists EnableDataContent, EnableBehaviorLoading, EnableCampaignEngine, RunSelfTests, DiagnosticsEnableGate; configured is distinct from applied, which is unknown without an application observation |
 | Environment | Verified version source, Unity version, runtime/OS/architecture primitives | B restricts fields; no machine/user identifiers or environment dump |
+| Framework tweaks | `Core/Tweaks/TweakRegistry.cs`, copied by `Core/Reporting/ReportingTweakSource.cs`: Preference, IsOn, IsFaulted, SessionState, SessionMode, SessionSource | Configured preference and effective state are separate sections. Tweak IDs are framework-defined but still pass the identifier filter; preference, state and mode are closed value sets. An uninitialized registry is unavailable, not an empty success. The copy never toggles, captures or clears. Hot-reload authority does not gate it, because the registry is static and its patches install once |
 | Discovery/current selection | `Core/Data/ModRegistry.cs`: Entries, Register, RegisterManaged, IsEnabled | Rows include disabled mods. Enabled is current selection, compatibility is separate. Unknown GUID's permissive IsEnabled result is not evidence. Main-thread collection wrapper and mutable PendingEnabled must be copied |
 | Manual pending preference | `ModRegistry.SetEnabled`, row PendingEnabled | Next-launch preference, not current selection or outcome. Null means no differing preference. Collector never calls SetEnabled or reads arbitrary PlayerPrefs |
 | Managed active/pending | `Core/Marketplace/MarketplaceRuntime.cs`: Active, Pending, BootstrapVerified, PollHelperCompletion | Selected generations/packages only. BootstrapVerified verifies helper activation. Pending can lag polling; no existing freshness timestamp. Record capture observation time without claiming helper freshness |
@@ -322,6 +324,23 @@ strings. Free-form names/descriptions are currently excluded; machine identifier
 use conservative syntax and sensitive-pattern exclusion. Load outcomes remain
 unknown, logs are absent and native started state means `session_or_transition`.
 This is a narrower first producer, not full coverage of the source table.
+
+Two sections report the framework [tweak registry](TWEAKS.md) (Spec #233 FR-7).
+They follow the inventory conventions: `status`, `reason`, `payload`,
+`observedAt`, `retainedCount`, `totalCount` and `fieldsExcluded`, at most 256
+rows in ordinal ID order, and IDs passed through the identifier filter.
+`tweakPreferences` holds `{ "id", "preference" }` rows, where `preference` is the
+stored `[Tweaks]` choice: `default`, `on` or `off`. `tweakEffective` holds
+`session` (`state`: `none`, `captured` or `locked`; `mode`: `single_player`,
+`multiplayer`, `local_multiplayer` or null; `source`: the Session set's label,
+such as `preferences` or `pending`, or null), `tweaks` (`{ "id", "on" }` rows,
+the value `Tweaks.IsOn` returns) and `faulted` (sorted IDs). The two differ
+during a run, because a Session choice waits for the next capture, and after a
+fault. Both sections are `unavailable` with `not_initialized` when the registry
+never initialized. They are additive under schema 1: no existing field changed
+meaning, and the reporting service treats metadata as opaque. With 256 rows of
+256-byte IDs the snapshot is about 213 KB once the byte cap drops the
+inventories, so the tweak sections are kept.
 
 The [session store](../FTKModFramework/Core/Reporting/ReportingSessionStore.cs)
 uses a dedicated OS lease and hashed immutable current/pending state publications.

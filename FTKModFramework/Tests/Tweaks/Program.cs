@@ -491,11 +491,12 @@ internal static class Program
         Check(TweakSessionLifecycle.NeedsCaptureAtLock(TweakSessionState.Locked, sp, sp), "a stale locked set is never reused");
 
         var triggers = new[] { TweakClearTrigger.SceneReload, TweakClearTrigger.RunEnd, TweakClearTrigger.LeftRoom,
-            TweakClearTrigger.Disconnected, TweakClearTrigger.JoinRoomFailed };
+            TweakClearTrigger.Disconnected, TweakClearTrigger.JoinRoomFailed, TweakClearTrigger.TitleActivation };
         foreach (TweakClearTrigger trigger in triggers)
             Check(!TweakSessionLifecycle.WarnOnClear(false, trigger), "clearing an unstarted run never warns: " + trigger);
         Check(!TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.SceneReload), "a scene reload ends the run: no warning");
         Check(!TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.RunEnd), "the run-end fade ends the run: no warning");
+        Check(!TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.TitleActivation), "a title-screen activation is never mid-run: no warning");
         Check(TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.LeftRoom), "leaving the room mid-run warns");
         Check(TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.Disconnected), "a disconnect mid-run warns");
         Check(TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.JoinRoomFailed), "a join failure mid-run warns");
@@ -558,6 +559,22 @@ internal static class Program
         Check(l.Clear(TweakClearTrigger.LeftRoom, "uiStartGame.OnLeftRoom") && !r.IsOn(on), "a mid-run clear still clears");
         Check(Warnings.Count == 1 && Warnings[0].Contains("uiStartGame.OnLeftRoom") && Warnings[0].Contains("may still be going"), "a mid-run clear logs one warning");
         Check(!l.Clear(TweakClearTrigger.Disconnected, "uiStartGame.OnDisconnectedFromPhoton") && Warnings.Count == 1, "the callbacks after it do not warn again");
+
+        // NFR-4: a title-screen hot-reload activation clears whatever Session state is left, like
+        // a return to the title, without a mid-run warning. Preferences and faults are untouched.
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+        Warnings.Clear();
+        l.Capture(0, "GameLogic.CreateOfflineRoom");
+        Check(!l.Clear(TweakClearTrigger.TitleActivation, "HotReloadCoordinator.Committed") && !r.IsOn(on)
+            && r.SessionState == TweakSessionState.None && r.SessionSource == null, "an activation clears a leftover capture");
+        l.Capture(0, "GameLogic.CreateOfflineRoom");
+        l.Lock(0, "uiStartGame.EnterFahrulRPC");
+        Check(l.Clear(TweakClearTrigger.TitleActivation, "HotReloadCoordinator.Committed") && !r.IsOn(on) && Warnings.Count == 0,
+            "an activation clears even a locked set without warning");
+        Check(!l.Clear(TweakClearTrigger.TitleActivation, "HotReloadCoordinator.Committed") && Warnings.Count == 0 && r.IsOn(local)
+            && r.PreferredOn(on), "an activation with nothing to clear is silent and leaves Local tweaks and preferences alone");
+        Check(l.Capture(0, "GameLogic.CreateOfflineRoom") && r.IsOn(on), "the next run captures afresh");
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
 
         // Uninitialized registry: nothing captures, locks or logs.
         TweakRegistry cold = NewRegistry();
