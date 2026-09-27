@@ -7,9 +7,19 @@ code. There is no `Content.*` API for them, so mods cannot register one.
 
 This guide describes the foundation from [Spec #233](https://github.com/jarlbrak/ftk-mod-framework/issues/233)
 under [epic #232](https://github.com/jarlbrak/ftk-mod-framework/issues/232), and how to add a tweak
-on top of it. Three descriptors exist today: the **Skip intro** pilot, **XP within the level**
-([Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1) and the self-test
-**Session lifecycle probe**. Live verification status is tracked on #233 and #243.
+on top of it. Four descriptors exist today: the **Skip intro** pilot, the self-test
+**Session lifecycle probe**, the first Local Fix, **Dungeon names in quest text**
+(`fix.quest-dungeon-name`, [Spec #242](https://github.com/jarlbrak/ftk-mod-framework/issues/242)
+FR-1), and **XP within the level**
+([Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1). Live verification
+status is tracked on #233, #242 and #243.
+
+`fix.quest-dungeon-name` postfixes `QuestLogicBase.SetMessageParams`. Quest message params are
+cached: they are built on the first `GetMessageParams` call, rebuilt by
+`GameLogic.SyncQuestDestinationRPC`, and never saved, so a toggle reaches a quest whose params are
+built after it, including every quest after a save is loaded. Its patch comment in
+`Core/QuestDungeonNamePatch.cs` records the ordering with the realm-name postfix on
+`GetMessageParams(bool)` in `Core/Localization.cs`.
 
 ## Architecture
 
@@ -251,5 +261,6 @@ dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c R
 ```
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
-hooks, faults, Skip intro, XP within the level, the probe and the tab. `Tests/TweaksConfig` runs the `[Tweaks]`
-binding through BepInEx's real `ConfigFile`. Both run in CI.
+hooks, faults, Skip intro, the quest dungeon name decision, XP within the level, the probe and
+the tab. `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
+Both run in CI.

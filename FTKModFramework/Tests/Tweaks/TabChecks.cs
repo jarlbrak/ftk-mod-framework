@@ -67,19 +67,51 @@ internal static class TabChecks
         Check(ModsPanelTweaks.Status(true, 1) == null, "a populated registry renders rows");
     }
 
+    // The shipped rows are found by ID, not position, so adding a framework tweak does not move
+    // another tweak's expectations. Exact positions and page counts are covered by Paging.
     private static void PilotPage()
     {
         TweakRegistry registry = new TweakRegistry(null);
         FrameworkTweaks.RegisterAll(registry);
         registry.Initialize(new MemoryStore());
         List<List<ModsPanelTweaks.Item>> pages = ModsPanelTweaks.Pages(registry, ModsPanelTweaks.PageBudget);
-        Check(pages.Count == 1 && pages[0].Count == 4, "the shipped tweaks fit on one page");
-        Check(pages[0][0].Heading == "Information" && pages[0][1].Row.Caption == "XP within the level: Off (default)",
+
+        Dictionary<int, string> headings = new Dictionary<int, string>();
+        Dictionary<int, ModsPanelTweaks.Row> rows = new Dictionary<int, ModsPanelTweaks.Row>();
+        List<int> seen = new List<int>();
+        foreach (List<ModsPanelTweaks.Item> page in pages)
+        {
+            string heading = null;
+            foreach (ModsPanelTweaks.Item item in page)
+            {
+                if (item.Heading != null) { heading = item.Heading; continue; }
+                seen.Add(item.Row.Handle);
+                rows[item.Row.Handle] = item.Row;
+                headings[item.Row.Handle] = heading;
+            }
+        }
+        Check(seen.Count == registry.Count && rows.Count == registry.Count, "every shipped tweak appears exactly once");
+        for (int i = 0; i < seen.Count; i++) Check(seen[i] == registry.DisplayOrder[i], "the shipped rows keep the registry's display order");
+
+        ShippedRow(registry, rows, headings, "fix.quest-dungeon-name", "Dungeon names in quest text: On (default)",
+            "a fresh install shows the quest dungeon name fix under Fixes, on by default");
+        ShippedRow(registry, rows, headings, "information.xp-in-level", "XP within the level: Off (default)",
             "a fresh install shows XP within the level under Information, off by default");
-        Check(pages[0][1].Row.Lines[1].Text == "Only you", "XP within the level is labelled Local");
-        Check(pages[0][2].Heading == "Convenience" && pages[0][3].Row.Caption == "Skip intro: Off (default)",
+        ShippedRow(registry, rows, headings, "convenience.skip-intro", "Skip intro: Off (default)",
             "a fresh install shows Skip intro under Convenience, off by default");
-        Check(pages[0][3].Row.Lines[1].Text == "Only you", "Skip intro is labelled Local");
+    }
+
+    private static void ShippedRow(TweakRegistry registry, Dictionary<int, ModsPanelTweaks.Row> rows,
+        Dictionary<int, string> headings, string id, string caption, string message)
+    {
+        int handle;
+        Check(registry.TryGetHandle(id, out handle) && rows.ContainsKey(handle), "the shipped row is on the tab: " + id);
+        TweakDescriptor d = registry.Get(handle);
+        ModsPanelTweaks.Row row = rows[handle];
+        string heading = headings[handle];
+        Check(row.Caption == caption && (heading == ModsPanelTweaks.CategoryHeading(d.Category, false)
+            || heading == ModsPanelTweaks.CategoryHeading(d.Category, true)), message);
+        Check(row.Lines[1].Text == ModsPanelTweaks.ScopeLabel(d.Scope) && d.Scope == TweakScope.Local, id + " is labelled Local");
     }
 
     private static TweakRegistry Populated(MemoryStore store, int perCategory)
