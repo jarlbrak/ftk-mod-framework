@@ -13,6 +13,8 @@ on top of it. These descriptors exist today:
 - **Session lifecycle probe**, self-test only.
 - **Dungeon names in quest text** (`fix.quest-dungeon-name`,
   [Spec #242](https://github.com/jarlbrak/ftk-mod-framework/issues/242) FR-1), the first Local Fix.
+- **Clear the Wet icon after combat** (`fix.stale-wet-icon`, Spec #242 FR-4): the HUD hides the
+  Wet status icon outside combat, as vanilla already does for the other combat statuses.
 - **XP within the level** (`information.xp-in-level`,
   [Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1).
 - **Poison turns left** (`information.poison-turns`, Spec #243 FR-3): the poison status tooltip
@@ -269,6 +271,7 @@ dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c R
 ```
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
-hooks, faults, Skip intro, the quest dungeon name decision, XP within the level, Poison turns
-left, Sell price in item details, the probe and the tab. `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
-Both run in CI.
+hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, XP within the
+level, Poison turns left, Sell price in item details, the probe and the tab.
+`Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`. Both run
+in CI.
