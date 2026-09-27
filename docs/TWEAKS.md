@@ -54,6 +54,7 @@ built after it, including every quest after a save is loaded. Its patch comment 
 | Session record | `Core/Tweaks/TweakSessionRecord.cs` | Unity-free codec and per-ID resolution for the `ftkmf.session` save record |
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
+| Session record hooks | `Core/TweakSessionRecordPatches.cs` | The save transpiler, the load prefix and the resume arm for the `ftkmf.session` record |
 | Tweaks tab | `Core/UI/ModsPanelTweaks.cs`, `ModsPanel.Tweaks.cs` | Row text, paging and layout |
 | Diagnostics | `Core/Reporting/ReportingTweakSource.cs` | Copies registry state into bug-report metadata |
 
@@ -125,7 +126,8 @@ directly:
 | Capture | `GameLogic.CreateOnlineRoom` postfix | Solo and local play in a closed Photon room |
 | Capture | `GameLogic.CreateOfflineRoom` postfix | Offline solo and local play |
 | Capture | `StartGameFE.GameConfig.CreateOnlineRoom(bool, string, bool, string, DifficultyType, TimeOfDay)` postfix | Online co-op host; it never calls the `GameLogic` methods |
-| Lock | `uiStartGame.EnterFahrulRPC` postfix | Runs once per run on every player |
+| Resume arm | `uiStartGame.OnResumeGame` prefix, last priority | Arms the [save-bound record](#save-bound-session-record) read |
+| Lock | `uiStartGame.EnterFahrulRPC` postfix | Runs once per run on every player; also disarms a resume |
 | Clear | `GameLogic.RestartFadeOutFinish` prefix, last priority | The one exit every run takes; clears before its offline `PhotonNetwork.Disconnect` |
 | Clear | `uiStartGame.InitializeSingleton` postfix | Every `FTK_main` load |
 | Clear | `uiStartGame.OnLeftRoom`, `OnDisconnectedFromPhoton`, `OnPhotonJoinRoomFailed` postfixes | Can also fire while a run is on screen |
@@ -139,14 +141,9 @@ room and room membership cannot tell it from co-op.
 - **Multiplayer**, and any value this build does not recognize, captures an empty set with the
   source `pending`. Session tweaks stay off in online co-op until a host set can be supplied.
 - `TweakRegistry.SetSessionSet(ids, label)` replaces a captured set with a complete one, such
-  as a host's set or a save's record. It is only valid between capture and lock. The resume
-  state below calls it; nothing supplies a host set yet.
-- **Resume state (in progress, Spec #253).** `TweakSessionLifecycle.ArmResume`, `ReadRecord`
-  and `RecordToWrite` hold a resumed run's `ftkmf.session` record from the save's load to the
-  lock, apply it to a solo or local capture with the source `save`, `preferences-legacy` (no
-  record) or `preferences-invalid` (unreadable record), and reapply it if the lock recaptures.
-  Scene reload, run end, a title-screen activation and the lock disarm it; Photon callbacks
-  do not. Online co-op keeps `pending`. No game hook calls these yet, so saves carry no record.
+  as a host's set or a save's record. It is only valid between capture and lock. A resumed
+  solo or local run calls it with its save's record, as described in
+  [the save-bound Session record](#save-bound-session-record); nothing supplies a host set yet.
 - A co-op client never passes a capture hook. At lock, the lifecycle recaptures from the run's
   own mode unless a capture for that mode already exists, so a solo capture can never reach a
   co-op run.
@@ -161,6 +158,100 @@ original. The capture, lock and run-end hooks therefore read `__runOriginal` and
 vetoed call, such as `HotReloadSessionEntry` blocking `GameLogic.CreateOnlineRoom`. The clear
 postfixes ignore it on purpose: the room was left or the scene reloaded either way. Every hook
 catches its own exceptions and logs them as a warning.
+
+### Save-bound Session record
+
+A run keeps the Session rules it started with across saves
+([Spec #253](https://github.com/jarlbrak/ftk-mod-framework/issues/253)). The save carries the
+run's set, and a resume restores it even if the player has changed a Session preference since.
+
+**Format.** The record is the key `ftkmf.session` in the `GameFlow` state dictionary, which
+the game stores as `GameStatesSerialize.m_GameFlowStates` in every manual save and autosave.
+The key contains a dot, so it cannot collide with a serialized C# field name. The value is one
+string, so vanilla's FullSerializer never meets a framework type:
+
+```text
+v1:+fix.find-herb-cooldown,-probe.session-lifecycle
+```
+
+- `v1:` is the format version.
+- Then every registered Session tweak as `+id` (on) or `-id` (off), comma-separated and in
+  ordinal ID order. Local tweaks are never recorded.
+- At most 1024 characters. A run whose record would be longer writes none and logs one warning.
+
+`TweakSessionRecord.Decode` treats a missing key as **absent**. Anything else is either a
+complete valid record or **invalid** as a whole: a value over the limit, an unknown or missing
+version prefix, `v1:` with no entries, an entry without `+` or `-`, an ID that fails
+`TweakRegistry.IsValidId`, a duplicate ID, or a value that is not a string. A partly readable
+record is never applied, because dropping one entry would silently change the run's rules.
+
+**Resolution.** For each registered Session tweak, a valid record's state wins, faults
+included, so the run keeps the rules it was saved with. A tweak the record does not list, such
+as one added by a later framework version, resolves as a solo capture does: the player's
+preference, minus faulted tweaks. Recorded IDs this build does not register, and IDs it
+registers as Local, are ignored and logged once each; they are not carried forward.
+
+**No record.** A save with no record predates this feature, or vanilla re-saved it. It follows
+the player's current settings, the decision on epic #232 open question 3. The source is
+`preferences-legacy`, and the next save writes a full record. An invalid record also follows
+the current settings, with the source `preferences-invalid` and one warning.
+
+**Arm, read and apply.** For a solo or local resume:
+
+1. `uiStartGame.OnResumeGame` arms the resume state (prefix, last priority). It reads
+   `__runOriginal`, because `HotReloadSessionEntry` and `SaveNamespace.GuardResume` can veto
+   the resume and HarmonyX still runs later prefixes after a veto. Arming forgets any record
+   from an earlier resume.
+2. Room creation captures from preferences as usual: `CreateOfflineRoom`, or on the
+   `m_UseOnlineSinglePlayer` route `ConnectToDefaultServer`, `_OnJoinedLobby` and then
+   `GameLogic.CreateOnlineRoom`.
+3. The host's real load runs `uiStartGame.LoadGame`, `GameSerialize.Load`,
+   `OnMapDeserializeFinished`, `GameStatesSerialize.Deserialize` and
+   `GameFlow.StateDataDeserialize`. A prefix on `FTKNetworkObject.StateDataDeserialize(string,
+   bool)` checks `__instance is GameFlow` first. Only while a resume is armed and the run is not
+   locked does it parse the state string with the same FullSerializer helper vanilla uses, then
+   pass the dictionary to `TweakSessionLifecycle.ReadState`. The record is kept and applied at
+   once through `SetSessionSet` with the source `save`, `preferences-legacy` or
+   `preferences-invalid`, and the lifecycle logs where each tweak's state came from.
+4. In solo offline an asynchronous disconnect callback can clear the capture before the run
+   starts. Photon callbacks never disarm, so the lock's recapture applies the record again.
+5. `uiStartGame.EnterFahrulRPC` locks the run and disarms. A scene reload, the run end and a
+   title-screen activation also disarm.
+
+The prefix is gated because the same deserializer is also a PunRPC (`SendGameData`) and runs
+again for resumed online clients in `ClientDeserializeFinalRPC`, after their lock. An unarmed
+or locked read parses nothing and changes nothing. The extra parse happens at most once per
+resume; the `GameFlow` state is a few integers, a flag and the `Rules2` parameters, and vanilla
+already parses it an extra time in `GameSerialize.Load` for saves that carry the old difficulty
+field. A parse failure is
+logged once and leaves vanilla's load untouched.
+
+An online co-op host that resumes a save does not apply the record and keeps `pending`,
+because applying it alone would give the host different rules from its clients. Publishing a
+resumed host's set to clients belongs to the co-op contract (Spec B).
+
+**Write.** A transpiler on `FTKNetworkObject.StateDataSerialize(bool)` inserts
+`ldarg.0; call TweakSessionRecordHooks.Decorate` just before the method's only
+`SerializationHelpers.SerializeToContent<Dictionary<string, object>, FullSerializerSerializer>`
+call. `Decorate` returns the dictionary unchanged unless the object is `GameFlow` and
+`TweakSessionLifecycle.WriteRecord` has a value, which it has only for a locked run with
+Session tweaks. It then adds the one key. It catches its own exceptions and returns the
+dictionary unchanged.
+
+- **Why a transpiler.** A postfix only sees the finished string. Adding the key there means
+  parsing and re-serializing the whole state, which round-trips object-typed values such as
+  `GameFlow.Rules2` through a path nobody has proven faithful. The transpiler adds the key to
+  the dictionary vanilla already built, so with nothing to add the output is vanilla's byte for
+  byte.
+- **Drift.** The transpiler inserts only when exactly one matching call exists, the rule
+  `SaveNamespace.RewritePaths` asserts. Otherwise it returns the original IL and logs one
+  warning, and saves carry no record. It never throws, since that would abort `PatchAll`.
+- `SendGameData` serializes through the same method, so a locked run's `GameFlow` data sent
+  that way also carries the key. Vanilla ignores it.
+
+**Vanilla compatibility.** Vanilla reads only keys named by its serialized fields, so it ignores
+the record on load and drops it on its next save. That a vanilla game loads such a save is
+live gate L8. The record does not change `SaveSetIdentity` or the save namespaces.
 
 ### Faults
 
@@ -188,7 +279,9 @@ covers.
 Bug-report metadata carries two tweak sections, copied from the registry on the Unity thread.
 `tweakPreferences` lists each ID with its stored choice (`default`, `on` or `off`).
 `tweakEffective` lists each ID with the value `IsOn` returns, the faulted IDs, and the Session
-state, mode and source. They are separate because they differ during a run and after a fault.
+state, mode and source. The source is `preferences` or `pending` for a new run, and `save`,
+`preferences-legacy` or `preferences-invalid` for a resumed solo or local run. They are
+separate because they differ during a run and after a fault.
 The field shape and bounds are in the [reporting contract](REPORTING-CONTRACT.md#runtime-foundation-progress).
 
 ## Patch contract
@@ -263,7 +356,7 @@ While the probe is registered, the lifecycle writes these lines to `BepInEx/LogO
 | Line | Level | When |
 | --- | --- | --- |
 | `SESSION-PROBE [session-lifecycle] capture via=<hook> state=Captured mode=<mode> source=<source> probe=<on\|off>` | Info | Every capture. A co-op client's shows `via=uiStartGame.EnterFahrulRPC (at run start)` |
-| `SESSION-PROBE [session-lifecycle] resume-arm via=<hook> ...` and `record via=<hook> ...` | Info | A resume starting, and its save record read while armed |
+| `SESSION-PROBE [session-lifecycle] resume-arm via=uiStartGame.OnResumeGame ...` and `record via=GameFlow.StateDataDeserialize ...` | Info | A resume starting, and its save record read while armed |
 | `SESSION-PROBE [session-lifecycle] lock via=<hook> state=Locked ...` | Info | Run start |
 | `SELF-TEST PASS [session-lifecycle]: lock mode=<mode> source=<source> probe=<on\|off> expected=<on\|off>` | Info | Lock matched the expectation |
 | `SESSION-PROBE [session-lifecycle] clear via=<hook> locked=<true\|false> state=None mode=none source=none probe=off` | Info | A clear that had something to clear |
@@ -289,12 +382,19 @@ are in the Session capture rules above.
 ```bash
 dotnet run --project FTKModFramework/Tests/Tweaks/Tweaks.csproj -c Release
 dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c Release
+dotnet run --project FTKModFramework/Tests/SessionRecordHooks/SessionRecordHooks.csproj -c Release
 ```
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
 hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, the Perfect chance
 math and fix, XP within the level, Poison turns left, Sell price in item details, Mark
 encounters that vanish, Name the achievements House Rules disable, the probe, the tab, and the
-Session record codec, resolution and resume state.
-`Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`. Both run
-in CI.
+Session record codec, resolution, resume state, the state dictionary read and write, and the
+single-match rule of the save transpiler.
+`Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
+`Tests/SessionRecordHooks` compiles `Core/TweakSessionRecordPatches.cs` against stand-ins for
+the game types it names. It runs the save transpiler over a stand-in of vanilla's tail sequence,
+compiles and executes the result, and drives the load prefix and the resume arm. The real IL
+shape comes from decompiling the installed assembly; FullSerializer's handling of the string
+value (live gate L9) and the round trip in the game are covered only by the live checks on #253.
+All three run in CI.

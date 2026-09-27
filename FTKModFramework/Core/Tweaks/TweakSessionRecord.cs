@@ -81,6 +81,33 @@ namespace FTKModFramework.Core
             return new TweakSessionRecord(TweakSessionRecordStatus.Valid, states, null);
         }
 
+        /// <summary>Decodes the value found under <see cref="Key"/> in a parsed GameFlow state. The
+        /// framework only ever writes a string; any other type means something else wrote the key, so
+        /// the record is invalid rather than guessed at.</summary>
+        internal static TweakSessionRecord FromStateValue(object value)
+        {
+            if (value == null) return Absent;
+            string text = value as string;
+            return text != null ? Decode(text) : Invalid("not a string");
+        }
+
+        /// <summary>The index of the only item that matches, or -1 when none or several do; count
+        /// reports how many matched. The save transpiler inserts its call only at a single match, as
+        /// SaveNamespace.RewritePaths asserts, so drifted IL gets no record instead of a wrong one.</summary>
+        internal static int SingleMatch<T>(IList<T> items, Predicate<T> match, out int count)
+        {
+            count = 0;
+            int index = -1;
+            if (items == null || match == null) return -1;
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (!match(items[i])) continue;
+                count++;
+                index = i;
+            }
+            return count == 1 ? index : -1;
+        }
+
         /// <summary>Every registered Session tweak with its effective state, or null when none is
         /// registered or the value would exceed <see cref="MaxLength"/>. Local tweaks are never recorded.</summary>
         internal static string Encode(TweakRegistry registry)

@@ -1,6 +1,7 @@
-// Game-free checks for the save-bound Session record (Spec #253 work item 1): the codec, per-ID
-// resolution, the resume state inside TweakSessionLifecycle, the probe check per source and the
-// save hook's write decision. The Harmony hooks that feed these are live-gated elsewhere.
+// Game-free checks for the save-bound Session record (Spec #253 work items 1 and 2): the codec,
+// per-ID resolution, the resume state inside TweakSessionLifecycle, the probe check per source,
+// the save hook's write decision, the state dictionary entry points and the IL match rule. The
+// Harmony hooks themselves need the game and are live-gated in work item 3.
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,6 +34,8 @@ internal static class SessionRecordChecks
         ResumeSources();
         ProbeBySource();
         WriteDecision();
+        StateHooks();
+        IlMatch();
         return _checks;
     }
 
@@ -532,5 +535,100 @@ internal static class SessionRecordChecks
         Check(TweakSessionRecord.Oversized(big) && TweakSessionRecord.Encode(big) == null, "an oversized record is not encoded");
         Check(bigLife.RecordToWrite() == null && bigLife.RecordToWrite() == null, "an oversized record is not written");
         Check(Warnings.Count == 1 && Warnings[0].Contains("exceeds " + TweakSessionRecord.MaxLength), "the size is warned about once");
+    }
+
+    private static Dictionary<string, object> VanillaState()
+    {
+        return new Dictionary<string, object> { { "m_RoundCount", 7 }, { "m_Rules", new object() }, { "m_FindHerbRoundCoolDown", false } };
+    }
+
+    private static bool SameState(Dictionary<string, object> a, Dictionary<string, object> b)
+    {
+        if (a.Count != b.Count) return false;
+        foreach (KeyValuePair<string, object> entry in a)
+        {
+            object other;
+            if (!b.TryGetValue(entry.Key, out other) || !ReferenceEquals(entry.Value, other) && !Equals(entry.Value, other)) return false;
+        }
+        return true;
+    }
+
+    // Work item 2: the dictionary entry points the save transpiler and the load prefix call. The
+    // GameFlow type check, the FullSerializer parse and the IL itself need the game and are live-gated.
+    private static void StateHooks()
+    {
+        Check(TweakSessionRecord.FromStateValue(null) == TweakSessionRecord.Absent, "a missing or null value is absent");
+        Check(TweakSessionRecord.FromStateValue("v1:+session.on").Status == TweakSessionRecordStatus.Valid, "a string value is decoded");
+        TweakSessionRecord boxed = TweakSessionRecord.FromStateValue(1);
+        Check(boxed.Status == TweakSessionRecordStatus.Invalid && boxed.Problem == "not a string", "a non-string value is invalid, not guessed at");
+
+        // FR-2: with no locked run the dictionary is untouched, so FullSerializer writes vanilla's bytes.
+        TweakRegistry r = Registry();
+        TweakSessionLifecycle l = Lifecycle(r);
+        Dictionary<string, object> state = VanillaState(), pristine = VanillaState();
+        pristine["m_Rules"] = state["m_Rules"];
+        Check(!l.WriteRecord(state) && SameState(state, pristine), "no record at the title screen");
+        l.Capture(0, Via);
+        Check(!l.WriteRecord(state) && SameState(state, pristine), "no record during setup");
+        Check(!l.WriteRecord(null), "a null dictionary is ignored");
+        l.Lock(0, Via);
+        Check(l.WriteRecord(state) && state.Count == pristine.Count + 1 && (string)state[TweakSessionRecord.Key] == "v1:-session.off,+session.on",
+            "a locked run adds exactly the record");
+        state.Remove(TweakSessionRecord.Key);
+        Check(SameState(state, pristine), "the record is the only change to the state");
+        Check(l.WriteRecord(state) && l.WriteRecord(state) && state.Count == pristine.Count + 1, "a repeated write replaces the key");
+        Dictionary<string, object> saved = state;
+        l.Clear(TweakClearTrigger.RunEnd, Via);
+        Dictionary<string, object> after = VanillaState();
+        Check(!l.WriteRecord(after) && !after.ContainsKey(TweakSessionRecord.Key), "no record after the run ends");
+
+        // FR-3: the load reads only while armed and unlocked, and parses nothing otherwise.
+        Check(!l.WantsRecord && !l.ReadState(saved, ReadVia) && l.ResumeRecord == null, "an unarmed load, such as the PunRPC path, reads nothing");
+        int on;
+        r.TryGetHandle("session.on", out on);
+        r.Toggle(on);
+        l.ArmResume(ResumeVia);
+        Check(l.WantsRecord, "an armed resume wants the record");
+        l.Capture(0, "GameLogic.CreateOfflineRoom");
+        Check(!r.IsOn("session.on") && r.SessionSource == TweakRegistry.PreferencesSource, "the changed preference reaches the capture");
+        Check(l.ReadState(saved, ReadVia) && r.IsOn("session.on") && r.SessionSource == TweakRegistry.SaveSource,
+            "the saved state restores the run's set over the changed preference");
+        l.Lock(0, "uiStartGame.EnterFahrulRPC");
+        Check(!l.WantsRecord && !l.ReadState(saved, ReadVia), "a locked run reads nothing");
+        l.Clear(TweakClearTrigger.RunEnd, Via);
+
+        l.ArmResume(ResumeVia);
+        l.Capture(0, Via);
+        Check(l.ReadState(VanillaState(), ReadVia) && r.SessionSource == TweakRegistry.PreferencesLegacySource && !r.IsOn("session.on"),
+            "a state without the key is legacy and follows current preferences");
+        l.Lock(0, Via);
+        Dictionary<string, object> next = VanillaState();
+        Check(l.WriteRecord(next) && (string)next[TweakSessionRecord.Key] == "v1:-session.off,-session.on", "the next save of a legacy run writes a full record");
+        l.Clear(TweakClearTrigger.RunEnd, Via);
+
+        l.ArmResume(ResumeVia);
+        l.Capture(0, Via);
+        Dictionary<string, object> foreign = VanillaState();
+        foreign[TweakSessionRecord.Key] = 42;
+        int warnings = Warnings.Count;
+        Check(l.ReadState(foreign, ReadVia) && r.SessionSource == TweakRegistry.PreferencesInvalidSource && Warnings.Count == warnings + 1,
+            "a non-string record is invalid, warned once, and follows current preferences");
+        Check(!l.ReadState(null, ReadVia) && r.SessionSource == TweakRegistry.PreferencesInvalidSource, "a null state is ignored");
+        l.Clear(TweakClearTrigger.SceneReload, Via);
+        Check(!l.WantsRecord, "a scene reload disarms");
+    }
+
+    // FR-2: the transpiler inserts its call only at a single match.
+    private static void IlMatch()
+    {
+        int count;
+        var none = new List<string> { "ldarg.0", "ret" };
+        Check(TweakSessionRecord.SingleMatch(none, s => s == "call", out count) == -1 && count == 0, "no match is a mismatch");
+        var one = new List<string> { "ldloc.0", "call", "stloc.5" };
+        Check(TweakSessionRecord.SingleMatch(one, s => s == "call", out count) == 1 && count == 1, "a single match gives its index");
+        var two = new List<string> { "call", "ldloc.0", "call" };
+        Check(TweakSessionRecord.SingleMatch(two, s => s == "call", out count) == -1 && count == 2, "two matches are a mismatch, never the first");
+        Check(TweakSessionRecord.SingleMatch<string>(null, s => true, out count) == -1 && count == 0, "a null list is a mismatch");
+        Check(TweakSessionRecord.SingleMatch(one, null, out count) == -1 && count == 0, "a null predicate is a mismatch");
     }
 }

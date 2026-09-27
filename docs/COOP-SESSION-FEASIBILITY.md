@@ -278,10 +278,19 @@ a priority below `Priority.Normal`, honor `__runOriginal`, and never call
 `HotReloadBoundary.Seal`. The new transpiler and postfixes target methods no
 existing patch touches.
 
-**Save key.** Postfix `FTKNetworkObject.StateDataSerialize(bool)` guarded by
-`__instance is GameFlow`, re-serializing the result with `ftkmf.session` added.
-Prefix `FTKNetworkObject.StateDataDeserialize(string, bool)` with the same
-guard to read the record. No sidecar file is needed.
+**Save key.** Transpile `FTKNetworkObject.StateDataSerialize(bool)` to insert
+`ldarg.0; call Decorate(dict, self)` just before its single
+`SerializationHelpers.SerializeToContent<Dictionary<string, object>, FullSerializerSerializer>`
+call. `Decorate` adds `ftkmf.session` only when `self is GameFlow` and a run is
+locked, so with nothing to add the output is vanilla's byte for byte. Assert
+exactly one match, as `SaveNamespace.RewritePaths` does; on a mismatch, keep the
+original IL, write no record and warn once. A postfix that re-serialized the
+returned string was rejected, because it would round-trip object-typed values
+such as `Rules2` through an unproven path. Prefix
+`FTKNetworkObject.StateDataDeserialize(string, bool)` with the `GameFlow` check
+first; while a resume is armed and unlocked, it parses the string with the same
+FullSerializer helper to read the record. No sidecar file is needed. Spec #253
+implements this for solo and local play; `docs/TWEAKS.md` documents it.
 
 **Resumed co-op flow.**
 
