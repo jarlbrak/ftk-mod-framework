@@ -38,7 +38,17 @@ namespace FTKModFramework.Core.UI
         private string kind = "manual", description = "", currentLogs, previousLogs, frozen, issueUrl, errorId, priorId;
         private string deferredPayload, deferredErrorId, deferredPriorId;
         private new void Awake() { m_IsOptionSubMenu = true; m_Cancel = Back; }
-        public override void OnPreSetFocus() { gameObject.SetActive(true); Refresh(); base.OnPreSetFocus(); }
+        public override void OnPreSetFocus() { gameObject.SetActive(true); ApplySorting(); Refresh(); base.OnPreSetFocus(); }
+        // A nested Canvas created on an inactive object read overrideSorting false and order 0
+        // live, so this panel tied the root canvas and the dialogue click-anywhere layer won the
+        // first click on depth. Reapply the sorting once the panel is active.
+        private int sortingOrder;
+        private void ApplySorting()
+        {
+            Canvas canvas = GetComponent<Canvas>();
+            if (!canvas) return;
+            canvas.overrideSorting = true; canvas.sortingOrder = sortingOrder;
+        }
         public override void OnClose()
         {
             FinishTyping(); gameObject.SetActive(false);
@@ -524,11 +534,19 @@ namespace FTKModFramework.Core.UI
                 // Options dims its parent group while a child owns focus.
                 root.AddComponent<CanvasGroup>().ignoreParentGroups = true;
                 ReportingPanel panel = root.AddComponent<ReportingPanel>(); panel.owner = owner;
+                panel.sortingOrder = order + 1;
                 panel.m_IsModal = owner.m_AudioOptions.m_IsModal; panel.m_IsOptionSubMenu = true;
                 panel.m_IsCloseOnLoseFocus = owner.m_AudioOptions.m_IsCloseOnLoseFocus;
                 panel.m_InputMode = owner.m_AudioOptions.m_InputMode;
                 panel.m_NavigationSetup = NavigationSetup.None; panel.m_SelectableParent = root.transform;
                 Font font = source.GetComponentInChildren<Text>(true).font;
+                // Once sorted above the root canvas, this transparent first child keeps a click
+                // that misses every panel control, on or off the panel, from reaching the layers
+                // below, such as the dialogue click-anywhere layer, while the modal panel is open.
+                GameObject catcher = new GameObject("ReportingClickCatcher", typeof(RectTransform), typeof(Image));
+                catcher.transform.SetParent(root.transform, false);
+                Place(catcher.GetComponent<RectTransform>(), 0, 0, 8000, 8000);
+                catcher.GetComponent<Image>().color = Color.clear;
                 GameObject plaque = new GameObject("ReportingTitlePlaque", typeof(RectTransform), typeof(Image));
                 plaque.transform.SetParent(root.transform, false);
                 Place(plaque.GetComponent<RectTransform>(), 0, 438, 980, 62);
