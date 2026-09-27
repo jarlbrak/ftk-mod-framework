@@ -63,12 +63,13 @@ internal static class Program
         NonAllocating();
         Facade();
         SkipIntro();
+        QuestDungeonName();
         XpInLevel();
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, xp in level, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, xp in level, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -455,6 +456,64 @@ internal static class Program
         Check(!FrameworkTweaks.SkipIntroAnyButton(restarted, TweakRegistry.InvalidHandle, false), "an unregistered handle leaves vanilla untouched");
     }
 
+    private static FrameworkTweaks.QuestDungeonNameState DungeonNameState()
+    {
+        var state = new FrameworkTweaks.QuestDungeonNameState();
+        state.HasQuestDefId = true;
+        state.DestinationSet = true;
+        state.DestinationRealmHasNoMainDungeon = true;
+        state.StartRealmDidNotOverwrite = true;
+        state.DestinationIsDungeon = true;
+        state.DungeonDisplayValue = "King's Maze";
+        return state;
+    }
+
+    // Spec #242 FR-1: param 8 is replaced only when every game-state condition holds, and never when off.
+    private static void QuestDungeonName()
+    {
+        TweakDescriptor d = FrameworkTweaks.QuestDungeonNameDescriptor;
+        Check(d.Id == "fix.quest-dungeon-name" && d.Category == TweakCategory.Fix && d.Scope == TweakScope.Local,
+            "the quest dungeon name tweak is a Local Fix with the specified ID");
+        Check(d.DefaultOn && !d.ExplicitDefault.HasValue && d.BalanceNote == null, "it follows the Fix default, on, with no balance note");
+        Check(d.Title == "Dungeon names in quest text" && d.Summary.Contains("STR_DungeonNoneDisplay"), "the title and summary name the defect");
+        Check(d.Evidence.Contains("QuestLogicBase.SetMessageParams") && d.Evidence.Contains("GetSpecificDungeon")
+            && d.Evidence.Contains("HasQuestDefID") && d.Evidence.Contains("SetMessageParam(8"),
+            "the evidence names the verified methods and the vanilla wrapping path");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.QuestDungeonName;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "the descriptor registers cleanly");
+
+        FrameworkTweaks.QuestDungeonNameState all = DungeonNameState();
+        Check(FrameworkTweaks.QuestDungeonNameReplacement(r, handle, all) == null, "before initialization param 8 stays vanilla");
+
+        Check(r.Initialize(store) && r.IsOn(handle), "a fresh install turns the fix on");
+        Check(FrameworkTweaks.QuestDungeonNameReplacement(r, handle, all) == "King's Maze", "all conditions true: the dungeon's own name replaces param 8");
+
+        var failing = new List<KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>>();
+        FrameworkTweaks.QuestDungeonNameState s;
+        s = DungeonNameState(); s.HasQuestDefId = false; failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("no quest def ID", s));
+        s = DungeonNameState(); s.DestinationSet = false; failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("no destination", s));
+        s = DungeonNameState(); s.DestinationRealmHasNoMainDungeon = false; failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("destination realm has a main dungeon", s));
+        s = DungeonNameState(); s.StartRealmDidNotOverwrite = false; failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("start-realm overwrite fired", s));
+        s = DungeonNameState(); s.DestinationIsDungeon = false; failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("destination POI is not a dungeon", s));
+        s = DungeonNameState(); s.DungeonDisplayValue = null; failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("dungeon has no display value", s));
+        s = DungeonNameState(); s.DungeonDisplayValue = ""; failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("dungeon has an empty display value", s));
+        failing.Add(new KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState>("nothing read", new FrameworkTweaks.QuestDungeonNameState()));
+        foreach (KeyValuePair<string, FrameworkTweaks.QuestDungeonNameState> c in failing)
+            Check(FrameworkTweaks.QuestDungeonNameReplacement(r, handle, c.Value) == null, "param 8 stays vanilla when " + c.Key);
+
+        Check(r.Toggle(handle) && store.Values["fix.quest-dungeon-name"] == TweakPreference.Off && !r.IsOn(handle), "turning it off stores Off");
+        Check(FrameworkTweaks.QuestDungeonNameReplacement(r, handle, all) == null, "off: param 8 stays vanilla even when every condition holds");
+
+        Check(r.Toggle(handle) && store.Values["fix.quest-dungeon-name"] == TweakPreference.Default && r.IsOn(handle), "turning it back on returns to Default");
+        r.Fault(handle, new InvalidOperationException("quest params"));
+        Check(!r.IsOn(handle) && FrameworkTweaks.QuestDungeonNameReplacement(r, handle, all) == null, "faulted: param 8 stays vanilla for the process");
+        Check(FrameworkTweaks.QuestDungeonNameReplacement(r, TweakRegistry.InvalidHandle, all) == null, "an unregistered handle leaves vanilla untouched");
+    }
+
     // Spec #243 FR-1: XP within the level. The window mirrors the patch, which indexes
     // m_LevelXpValues as CharacterStats.GetXpPercent does.
     private static string XpAt(TweakRegistry r, int handle, string vanilla, int[] thresholds, int maxLevel, int level, int xp)
@@ -670,7 +729,7 @@ internal static class Program
 
         TweakRegistry players = NewRegistry();
         FrameworkTweaks.RegisterAll(players);
-        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle && players.Count == 2, "without self-tests only Skip intro and XP within the level register");
+        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle && players.Count == 3, "without self-tests the probe is not registered");
         FrameworkTweaks.RegisterAll(NewRegistry(), false);
         Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle, "an explicit false leaves it out too");
 
@@ -678,7 +737,7 @@ internal static class Program
         TweakRegistry r = NewRegistry();
         FrameworkTweaks.RegisterAll(r, true);
         int probe = FrameworkTweaks.SessionProbe;
-        Check(probe != TweakRegistry.InvalidHandle && r.Count == 3 && Logs.Count == 0, "self-tests register the probe cleanly");
+        Check(probe != TweakRegistry.InvalidHandle && r.Count == 4 && Logs.Count == 0, "self-tests register the probe cleanly");
         store.Values["probe.session-lifecycle"] = TweakPreference.On;
         r.Initialize(store);
         TweakSessionLifecycle l = NewLifecycle(r, () => FrameworkTweaks.SessionProbe);

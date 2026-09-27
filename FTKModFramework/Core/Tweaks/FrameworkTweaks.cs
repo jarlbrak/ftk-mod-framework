@@ -13,6 +13,21 @@ namespace FTKModFramework.Core
             + "SplashScreen.GetAnyButton returns true, then loads FTK_main. The patch makes "
             + "GetAnyButton report a press, which is the exit vanilla already takes on a key press.");
 
+        /// <summary>Spec #242 FR-1. Presentation only: the patch rewrites one cached message param on
+        /// this machine and never touches quest state, so it is Local and runs on every machine.</summary>
+        internal static readonly TweakDescriptor QuestDungeonNameDescriptor = new TweakDescriptor(
+            "fix.quest-dungeon-name", TweakCategory.Fix, TweakScope.Local,
+            "Dungeon names in quest text",
+            "Show the dungeon's name in quest dialogue instead of STR_DungeonNoneDisplay, as after the King's Maze.",
+            "QuestLogicBase.SetMessageParams sets param 8 from MiniHexInfo.GetPOIDisplayValue(Dungeon, "
+            + "m_MainDungeon) of GameDefinition.GetRealmProperties(m_DestRealm, m_DestStageIndex) when "
+            + "HasQuestDefID and m_Destination is set, then overwrites it only when the start hex realm's "
+            + "m_MainDungeon is not None and FTKHex.GetSpecificDungeon finds it. DungeonQuestLogic."
+            + "_determineDestinationFromQuestDef falls back to the dungeon in another realm when the Allocated "
+            + "m_DestRealm has none, so m_MainDungeon None yields the missing key STR_DungeonNoneDisplay "
+            + "(KillVexor 2_KingsMaze complete dialogue Q2_2_TALK2). The patch sets param 8 through "
+            + "SetMessageParam(8, MiniHexDungeon.GetPOIDisplayValue(), true), the vanilla rich-text path.");
+
         internal static readonly TweakDescriptor XpInLevelDescriptor = new TweakDescriptor(
             "information.xp-in-level", TweakCategory.Information, TweakScope.Local,
             "XP within the level",
@@ -37,12 +52,14 @@ namespace FTKModFramework.Core
 
         internal static int SkipIntro { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int SessionProbe { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int QuestDungeonName { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
         {
             SkipIntro = registry.Register(SkipIntroDescriptor);
+            QuestDungeonName = registry.Register(QuestDungeonNameDescriptor);
             XpInLevel = registry.Register(XpInLevelDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
@@ -53,6 +70,35 @@ namespace FTKModFramework.Core
         {
             if (!registry.IsOn(handle)) return vanillaPressed;
             return true;
+        }
+
+        /// <summary>The game state the quest dungeon name decision reads after vanilla SetMessageParams.
+        /// Every flag is phrased so that its default, false, keeps vanilla.</summary>
+        internal struct QuestDungeonNameState
+        {
+            /// <summary>QuestLogicBase.HasQuestDefID: vanilla fills param 8 from the destination realm only then.</summary>
+            internal bool HasQuestDefId { get; set; }
+            /// <summary>m_Destination is not the null hex.</summary>
+            internal bool DestinationSet { get; set; }
+            /// <summary>The destination realm's RealmProperties exist and their m_MainDungeon is None.</summary>
+            internal bool DestinationRealmHasNoMainDungeon { get; set; }
+            /// <summary>Vanilla's start-realm overwrite of param 8 did not fire.</summary>
+            internal bool StartRealmDidNotOverwrite { get; set; }
+            /// <summary>The destination hex's POI is a MiniHexDungeon.</summary>
+            internal bool DestinationIsDungeon { get; set; }
+            /// <summary>That dungeon's own GetPOIDisplayValue(), unwrapped.</summary>
+            internal string DungeonDisplayValue { get; set; }
+        }
+
+        /// <summary>The quest dungeon name decision for one SetMessageParams call. Returns the display
+        /// value to put in param 8, or null to leave vanilla's value. Off, faulted or uninitialized, or
+        /// any condition failing, returns null.</summary>
+        internal static string QuestDungeonNameReplacement(TweakRegistry registry, int handle, QuestDungeonNameState state)
+        {
+            if (!registry.IsOn(handle)) return null;
+            if (!state.HasQuestDefId || !state.DestinationSet || !state.DestinationRealmHasNoMainDungeon) return null;
+            if (!state.StartRealmDidNotOverwrite || !state.DestinationIsDungeon) return null;
+            return string.IsNullOrEmpty(state.DungeonDisplayValue) ? null : state.DungeonDisplayValue;
         }
 
         /// <summary>The XP within the level decision for one GetXpDisplayString call. Off, faulted or

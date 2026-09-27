@@ -73,13 +73,16 @@ internal static class TabChecks
         FrameworkTweaks.RegisterAll(registry);
         registry.Initialize(new MemoryStore());
         List<List<ModsPanelTweaks.Item>> pages = ModsPanelTweaks.Pages(registry, ModsPanelTweaks.PageBudget);
-        Check(pages.Count == 1 && pages[0].Count == 4, "the shipped tweaks fit on one page");
-        Check(pages[0][0].Heading == "Information" && pages[0][1].Row.Caption == "XP within the level: Off (default)",
+        Check(pages.Count == 1 && pages[0].Count == 6, "the shipped tweaks fit on one page");
+        Check(pages[0][0].Heading == "Fixes" && pages[0][1].Row.Caption == "Dungeon names in quest text: On (default)",
+            "a fresh install shows the quest dungeon name fix first, on by default");
+        Check(pages[0][1].Row.Lines[1].Text == "Only you", "the quest dungeon name fix is labelled Local");
+        Check(pages[0][2].Heading == "Information" && pages[0][3].Row.Caption == "XP within the level: Off (default)",
             "a fresh install shows XP within the level under Information, off by default");
-        Check(pages[0][1].Row.Lines[1].Text == "Only you", "XP within the level is labelled Local");
-        Check(pages[0][2].Heading == "Convenience" && pages[0][3].Row.Caption == "Skip intro: Off (default)",
+        Check(pages[0][3].Row.Lines[1].Text == "Only you", "XP within the level is labelled Local");
+        Check(pages[0][4].Heading == "Convenience" && pages[0][5].Row.Caption == "Skip intro: Off (default)",
             "a fresh install shows Skip intro under Convenience, off by default");
-        Check(pages[0][3].Row.Lines[1].Text == "Only you", "Skip intro is labelled Local");
+        Check(pages[0][5].Row.Lines[1].Text == "Only you", "Skip intro is labelled Local");
     }
 
     private static TweakRegistry Populated(MemoryStore store, int perCategory)
