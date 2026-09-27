@@ -3,6 +3,8 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <Compile Include="../../Core/Reporting/ReportingMetadata.cs" Link="ReportingMetadata.cs" />
+    <Compile Include="../../Core/Reporting/ReportingTweakSource.cs" Link="ReportingTweakSource.cs" />
+    <Compile Include="../../Core/Tweaks/*.cs" Link="Tweaks/%(Filename)%(Extension)" />
     <Compile Include="../../Core/Reporting/ReportingReport.cs" Link="ReportingReport.cs" />
     <Compile Include="../../Core/Reporting/ReportingSessionStore.cs" Link="ReportingSessionStore.cs" />
     <Compile Include="../../Core/Reporting/ReportingSessionLease.cs" Link="ReportingSessionLease.cs" />

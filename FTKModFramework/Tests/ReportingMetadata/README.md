@@ -5,6 +5,10 @@ The game-free suite links the production collector and report factory. It checks
 collection at report creation, detached previous/current observations, collector failure
 recovery, optional metadata exclusion, logs off, selection versus unknown load outcomes,
 initialization/reload authority, sensitive-field exclusion and the final UTF-8 byte cap.
+It also links `Core/Tweaks` and `ReportingTweakSource` to check the two tweak sections
+against a real registry: stored preferences apart from the effective set, a mid-run
+Session change that stays out of the run, faulted IDs, session state, mode and source,
+allowlist exclusion, the row cap and the byte cap with maximum tweak rows.
 
 The source adapter copies existing references on the Unity thread. It never discovers mods,
 reads saves, starts networking or probes arbitrary configuration. The first implementation

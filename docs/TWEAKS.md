@@ -22,6 +22,7 @@ on top of it. Two descriptors exist today: the **Skip intro** pilot and the self
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
 | Tweaks tab | `Core/UI/ModsPanelTweaks.cs`, `ModsPanel.Tweaks.cs` | Row text, paging and layout |
+| Diagnostics | `Core/Reporting/ReportingTweakSource.cs` | Copies registry state into bug-report metadata |
 
 Everything under `Core/Tweaks/` stays free of `UnityEngine`, `Plugin` and game types, so the
 game-free `Tests/Tweaks` project compiles it directly. The types live in the
@@ -142,6 +143,14 @@ its default, then the summary, a scope label, any balance note and any fault. Th
 is the player's choice, not the effective value; for Session rows the scope label adds
 "Changes apply to the next run." The text lives in `ModsPanelTweaks`, which `Tests/Tweaks`
 covers.
+
+### Diagnostics
+
+Bug-report metadata carries two tweak sections, copied from the registry on the Unity thread.
+`tweakPreferences` lists each ID with its stored choice (`default`, `on` or `off`).
+`tweakEffective` lists each ID with the value `IsOn` returns, the faulted IDs, and the Session
+state, mode and source. They are separate because they differ during a run and after a fault.
+The field shape and bounds are in the [reporting contract](REPORTING-CONTRACT.md#runtime-foundation-progress).
 
 ## Patch contract
 

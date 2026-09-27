@@ -29,8 +29,8 @@ opening the manual editor uploads nothing. Manual reports require an explicit Se
 ## What is collected and shared
 
 The framework keeps bounded local metadata and process log snapshots. With diagnostics
-enabled, Send uploads versions, mod inventory and registration context, session
-context, and a recent filtered game/framework log dump through the Railway service. The
+enabled, Send uploads versions, mod inventory and registration context, framework
+tweak settings, session context, and a recent filtered game/framework log dump through the Railway service. The
 service creates a **public GitHub issue** in `jarlbrak/ftk-mod-framework`, includes a
 short diagnostic excerpt, and links both a public diagnostic JSON download and a
 readable **.log** download. The downloads retain the uploaded log dump, beyond the

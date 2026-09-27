@@ -20,6 +20,22 @@ namespace FTKModFramework.Core.Reporting
         internal int TotalCount;
     }
 
+    // Detached copy of one registered tweak. Preference is the stored choice ("default", "on" or
+    // "off"); On and Faulted are what Tweaks.IsOn and the fault flag report at copy time.
+    internal sealed class ReportingTweakRow
+    {
+        internal string Id, Preference;
+        internal bool On, Faulted;
+    }
+
+    // Detached tweak registry state. Null means the registry never initialized, so every tweak is off.
+    internal sealed class ReportingTweakState
+    {
+        internal IList<ReportingTweakRow> Rows;
+        internal int TotalCount;
+        internal string SessionState, SessionMode, SessionSource;
+    }
+
     internal sealed class ReportingMetadataInput
     {
         internal string FrameworkVersion, UnityVersion, GameVersion;
@@ -28,6 +44,7 @@ namespace FTKModFramework.Core.Reporting
         internal bool SourcesReady, Transitioning, RuntimeFaulted;
         internal bool? DataContent, BehaviorLoading, CampaignEngine, SelfTests, ScaleBudgetGate;
         internal ReportingInventory Mods, Plugins, Active, Pending;
+        internal ReportingTweakState TweakState;
     }
 
     internal static class ReportingMetadata
@@ -123,6 +140,76 @@ namespace FTKModFramework.Core.Reporting
             return section;
         }
 
+        private static readonly string[] PreferenceValues = { "default", "on", "off" };
+        private static readonly string[] StateValues = { "none", "captured", "locked" };
+        private static readonly string[] ModeValues = { "single_player", "multiplayer", "local_multiplayer" };
+
+        private static string Allowed(string value, string[] allowed)
+        {
+            foreach (string candidate in allowed) if (value == candidate) return candidate;
+            return null;
+        }
+
+        private static int CompareIds(Dictionary<string, object> a, Dictionary<string, object> b)
+        {
+            return StringComparer.Ordinal.Compare((string)a["id"], (string)b["id"]);
+        }
+
+        private static Dictionary<string, object> Counted(Dictionary<string, object> section, int retained, int total, bool redacted)
+        {
+            section.Add("retainedCount", retained);
+            section.Add("totalCount", total);
+            section.Add("fieldsExcluded", redacted);
+            return section;
+        }
+
+        // Two sections: what the player configured, and what patches see now. They differ during a
+        // run (Session choices wait for the next capture) and after a fault. Neither reads hot-reload
+        // authority, because the registry is static and its patches are installed once.
+        private static void AddTweaks(Dictionary<string, object> sections, ReportingTweakState tweaks)
+        {
+            if (tweaks == null || tweaks.Rows == null)
+            {
+                sections.Add("tweakPreferences", Section("unavailable", "not_initialized", null));
+                sections.Add("tweakEffective", Section("unavailable", "not_initialized", null));
+                return;
+            }
+            IList<ReportingTweakRow> source = tweaks.Rows;
+            int count = Math.Min(MaximumRows, source.Count);
+            List<Dictionary<string, object>> preferences = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> effective = new List<Dictionary<string, object>>();
+            List<string> faulted = new List<string>();
+            bool idsExcluded = false, preferenceExcluded = false;
+            for (int i = 0; i < count; i++)
+            {
+                ReportingTweakRow row = source[i];
+                string id = row == null ? null : Identifier(row.Id);
+                string preference = row == null ? null : Allowed(row.Preference, PreferenceValues);
+                if (id == null) idsExcluded = true;
+                if (preference == null) preferenceExcluded = true;
+                preferences.Add(new Dictionary<string, object> { { "id", id }, { "preference", preference } });
+                effective.Add(new Dictionary<string, object> { { "id", id }, { "on", row == null ? null : (object)row.On } });
+                if (row != null && row.Faulted) faulted.Add(id);
+            }
+            preferences.Sort(CompareIds);
+            effective.Sort(CompareIds);
+            faulted.Sort(StringComparer.Ordinal);
+            bool limited = tweaks.TotalCount > count;
+            string status = limited ? "partial" : "complete", reason = limited ? "limit_reached" : "none";
+            sections.Add("tweakPreferences", Counted(Section(status, reason, preferences), count, tweaks.TotalCount,
+                idsExcluded || preferenceExcluded));
+            string state = Allowed(tweaks.SessionState, StateValues);
+            string mode = Allowed(tweaks.SessionMode, ModeValues);
+            string label = Identifier(tweaks.SessionSource);
+            bool sessionExcluded = state == null || (tweaks.SessionMode != null && mode == null) ||
+                (tweaks.SessionSource != null && label == null);
+            Dictionary<string, object> payload = new Dictionary<string, object> {
+                { "session", new Dictionary<string, object> { { "state", state }, { "mode", mode }, { "source", label } } },
+                { "tweaks", effective }, { "faulted", faulted } };
+            sections.Add("tweakEffective", Counted(Section(status, reason, payload), count, tweaks.TotalCount,
+                idsExcluded || sessionExcluded));
+        }
+
         internal static string Capture(ReportingMetadataInput input, DateTime observedAtUtc)
         {
             if (input == null) throw new ArgumentNullException("input");
@@ -152,6 +239,7 @@ namespace FTKModFramework.Core.Reporting
             sections.Add("plugins", Inventory(input.Plugins, unavailable, false));
             sections.Add("managedActive", Inventory(input.Active, unavailable, true));
             sections.Add("managedPending", Inventory(input.Pending, unavailable, true));
+            AddTweaks(sections, input.TweakState);
             sections.Add("logs", Section("omitted", "user_declined", null));
             bool incomplete = false, limited = false;
             foreach (Dictionary<string, object> section in sections.Values)
@@ -169,6 +257,8 @@ namespace FTKModFramework.Core.Reporting
                 if (!section.ContainsKey("totalCount")) section["totalCount"] = null;
             }
             // Exact post-escaping bytes govern the cap. Keep basic context if maximum inventories do not fit.
+            // Tweak sections stay: with 256 rows of 256-byte IDs the snapshot is about 213 KB once the
+            // inventories are dropped, so it still fits. Tests/ReportingMetadata holds that bound.
             string json = JsonConvert.SerializeObject(envelope);
             if (Encoding.UTF8.GetByteCount(json) <= MaximumBytes) return json;
             foreach (string key in new[] { "mods", "plugins", "managedActive", "managedPending" })
