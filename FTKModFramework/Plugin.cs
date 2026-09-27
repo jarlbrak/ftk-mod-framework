@@ -111,6 +111,12 @@ namespace FTKModFramework
             get { return RunSelfTests != null && RunSelfTests.Value; }
         }
 
+        /// <summary>
+        /// Log each missing text-table key once, with its caller (spec #242 FR-2). Read once at startup:
+        /// when false, the lookups are not patched at all.
+        /// </summary>
+        public static ConfigEntry<bool> LogLocalizationMisses;
+
         // ---- Diagnostics: scale-and-performance gate (P5a, #22) ----------------------------------------
         // The gate measures one content load against a persisted calibration baseline + tunable budgets and
         // emits exactly one SCALE-BUDGET line. The five budget fields are calibrated later; the values here
@@ -266,7 +272,12 @@ namespace FTKModFramework
                 "(visible in the New Game list), log deliberate failure-path errors, and add load time. " +
                 "Leave false for normal play.");
 
-            DiagnosticsEnableGate = Config.Bind("Diagnostics", "EnableScaleBudgetGate", false,
+            LogLocalizationMisses = Config.Bind("Diagnostics", "LogLocalizationMisses", false,
+                "Write one [loc-miss] line to LogOutput.log for each text key the game looks up and cannot " +
+                "find, with the table and caller, up to 256 keys. Keys the framework shows verbatim on purpose " +
+                "are skipped. Never changes text. Read at startup; restart the game after changing it.");
+
+            DiagnosticsEnableGate =Config.Bind("Diagnostics", "EnableScaleBudgetGate", false,
                 "DEVELOPMENT: measure each content load against a calibration baseline and budgets, emitting one " +
                 "SCALE-BUDGET line, and author a synthetic 500-quest probe campaign (visible in the New Game list) " +
                 "to gate the campaign engine at scale. First run with no baseline writes one and emits CALIBRATED. " +
@@ -346,6 +357,13 @@ namespace FTKModFramework
             _harmony = new Harmony(Guid);
             DbLookupPatcher.Init(_harmony);
             _harmony.PatchAll();
+
+            // Opt-in only: when the key is false, the text-table lookups are never patched.
+            if (LogLocalizationMisses.Value)
+            {
+                try { LocalizationMissPatch.Apply(_harmony); }
+                catch (Exception e) { Log.LogWarning("[loc-miss] Could not enable localization-miss logging: " + e.Message); }
+            }
 
             // Agentic test harness bridge (env-gated). No-ops unless FTK_AGENT_BRIDGE==1: with the env var
             // unset nothing is created (no thread, no listener, no GameObject) and shipped behavior is
