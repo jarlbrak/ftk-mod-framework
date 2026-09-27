@@ -68,11 +68,13 @@ internal static class Program
         PoisonTurns();
         SellPrice();
         StaleWetIcon();
+        PerfectChanceMath();
+        PerfectChanceTweak();
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, xp in level, poison turns, sell price, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -767,6 +769,129 @@ internal static class Program
         r.Fault(handle, new InvalidOperationException("hud"));
         neverHides(r, handle, "faulted");
         neverHides(r, TweakRegistry.InvalidHandle, "an unregistered handle");
+    }
+
+    private static bool Near(float actual, float expected)
+    {
+        return Math.Abs(actual - expected) < 1e-6f;
+    }
+
+    // Spec #242 FR-5: the Perfect figure, following SlotControl's per-slot order for the player.
+    private static void PerfectChanceMath()
+    {
+        const PerfectChance.SlotStatus none = PerfectChance.SlotStatus.None;
+        const PerfectChance.SlotStatus lit = PerfectChance.SlotStatus.Illuminated;
+        const PerfectChance.SlotStatus dark = PerfectChance.SlotStatus.Darkness;
+        const PerfectChance.SlotStatus shocked = PerfectChance.SlotStatus.Shocked;
+
+        // Plain chance: CalculateFullSkillChance's power, hundredths and clamp.
+        Check(Near(PerfectChance.Vanilla(0.8f, 3, 0), 0.51f), "0.8 over three unfocused slots is 0.51 (0.512 rounded)");
+        Check(Near(PerfectChance.Vanilla(0.85f, 1, 0), 0.85f), "one slot is the per-slot value");
+        Check(Near(PerfectChance.Vanilla(0.8f, 3, 1), 0.64f), "one focus-locked slot drops out of the power");
+        Check(Near(PerfectChance.Vanilla(0.8f, 3, 3), 1f), "all slots focus-locked is certain");
+        Check(Near(PerfectChance.Vanilla(0.8f, 3, 4), 1f), "focus beyond the slots clamps to certain");
+        Check(Near(PerfectChance.Vanilla(0.05f, 3, 0), 0f), "a tiny chance rounds to 0");
+        Check(Near(PerfectChance.Full(0.8f, 3, 0, none), PerfectChance.Vanilla(0.8f, 3, 0))
+            && Near(PerfectChance.Full(0.8f, 3, 1, none), PerfectChance.Vanilla(0.8f, 3, 1)), "no status leaves the plain figure, with and without focus");
+
+        Check(PerfectChance.Statuses(false, false, false) == none, "no statuses map to None");
+        Check(PerfectChance.Statuses(true, true, true) == (lit | dark | shocked), "every status maps to its flag");
+        Check(PerfectChance.Statuses(false, true, false) == dark && PerfectChance.Statuses(false, false, true) == shocked
+            && PerfectChance.Statuses(true, false, false) == lit, "each status maps alone");
+
+        // Shocked: slot 0 is forced to fail unless Focus locks it.
+        Check(Near(PerfectChance.Full(0.8f, 3, 0, shocked), 0f), "Shocked without focus can never be Perfect");
+        Check(Near(PerfectChance.Full(1f, 3, 0, shocked), 0f), "Shocked without focus fails even at a certain skill");
+        Check(Near(PerfectChance.Full(0.8f, 3, 1, shocked), 0.64f), "Focus on slot 0 lifts the Shocked failure");
+        Check(Near(PerfectChance.Full(0.8f, 1, 0, shocked), 0f), "a single-slot Shocked flee cannot be Perfect");
+        Check(Near(PerfectChance.Full(0.8f, 3, 3, shocked), 1f), "all slots focused is certain while Shocked");
+
+        // Illuminated: every unfocused slot succeeds before the roll.
+        Check(Near(PerfectChance.Full(0.2f, 3, 0, lit), 1f), "Illuminated is always Perfect");
+        Check(Near(PerfectChance.Full(0.2f, 3, 2, lit), 1f), "Illuminated with focus is always Perfect");
+
+        // Darkness: every unfocused slot fails before the roll.
+        Check(Near(PerfectChance.Full(0.9f, 3, 0, dark), 0f), "Darkness is never Perfect");
+        Check(Near(PerfectChance.Full(0.9f, 3, 2, dark), 0f), "Darkness fails the one unfocused slot");
+        Check(Near(PerfectChance.Full(0.9f, 3, 3, dark), 1f), "Darkness cannot touch focus-locked slots");
+
+        // Combinations follow SlotControl's order: focus, Illuminated, Darkness, then Shocked slot 0.
+        Check(Near(PerfectChance.Full(0.5f, 3, 0, lit | dark), 1f), "Illuminated is checked before Darkness");
+        Check(Near(PerfectChance.Full(0.5f, 3, 0, lit | shocked), 1f), "Illuminated is checked before the Shocked slot");
+        Check(Near(PerfectChance.Full(0.5f, 3, 1, dark | shocked), 0f), "Darkness still fails once Focus lifts Shocked");
+        Check(Near(PerfectChance.Full(0.5f, 3, 0, lit | dark | shocked), 1f), "all three statuses resolve to Illuminated");
+        Check(Near(PerfectChance.Full(0.5f, 3, 3, lit | dark | shocked), 1f), "all focused ignores every status");
+
+        // WithStatuses keeps whatever vanilla computed when no status applies.
+        Check(Near(PerfectChance.WithStatuses(0.37f, 3, 0, none), 0.37f), "no status returns the vanilla figure");
+        Check(Near(PerfectChance.WithStatuses(0.37f, 3, 1, shocked), 0.37f), "Shocked with slot 0 focused returns the vanilla figure");
+    }
+
+    // Spec #242 FR-5: the descriptor, both decisions and their off paths.
+    private static void PerfectChanceTweak()
+    {
+        TweakDescriptor d = FrameworkTweaks.PerfectChanceDescriptor;
+        Check(d.Id == "fix.perfect-chance" && d.Category == TweakCategory.Fix && d.Scope == TweakScope.Local,
+            "the Perfect chance fix is a Local Fix with the specified ID");
+        Check(d.DefaultOn && d.BalanceNote == null, "the Perfect chance fix is on by default with no balance note");
+        Check(d.Evidence.Contains("CalculateFullSkillChance") && d.Evidence.Contains("ComputeShieldTauntSlotResults")
+            && d.Evidence.Contains("m_PerSlotSkillRoll") && d.Evidence.Contains("GetBattleButtonInfo"),
+            "the evidence names the verified methods and the taunt roll");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.PerfectChanceFix;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "the Perfect chance fix registers cleanly");
+
+        PerfectChance.SlotStatus[] every =
+        {
+            PerfectChance.SlotStatus.None, PerfectChance.SlotStatus.Illuminated, PerfectChance.SlotStatus.Darkness,
+            PerfectChance.SlotStatus.Shocked, PerfectChance.SlotStatus.Illuminated | PerfectChance.SlotStatus.Darkness | PerfectChance.SlotStatus.Shocked,
+        };
+        Action<TweakRegistry, int, string> vanillaStands = (registry, h, label) =>
+        {
+            foreach (PerfectChance.SlotStatus statuses in every)
+                for (int focus = 0; focus <= 3; focus++)
+                {
+                    Check(Near(FrameworkTweaks.PerfectChanceDisplay(registry, h, 0.51f, 3, focus, statuses), 0.51f),
+                        label + ": the vanilla figure passes through (" + statuses + ", focus " + focus + ")");
+                    float chance;
+                    Check(!FrameworkTweaks.TauntPerfectChance(registry, h, 0.7f, 3, focus, statuses, out chance),
+                        label + ": the Taunt line is left alone (" + statuses + ", focus " + focus + ")");
+                }
+        };
+        vanillaStands(r, handle, "before initialization");
+
+        Check(r.Initialize(store) && r.IsOn(handle), "a fresh install turns the Perfect chance fix on");
+        Check(Near(FrameworkTweaks.PerfectChanceDisplay(r, handle, 0.51f, 3, 0, PerfectChance.SlotStatus.None), 0.51f), "on: no status keeps vanilla");
+        Check(Near(FrameworkTweaks.PerfectChanceDisplay(r, handle, 0.51f, 3, 0, PerfectChance.SlotStatus.Shocked), 0f), "on: Shocked without focus shows 0");
+        Check(Near(FrameworkTweaks.PerfectChanceDisplay(r, handle, 0.64f, 3, 1, PerfectChance.SlotStatus.Shocked), 0.64f), "on: Shocked with focus keeps vanilla");
+        Check(Near(FrameworkTweaks.PerfectChanceDisplay(r, handle, 0.51f, 3, 0, PerfectChance.SlotStatus.Illuminated), 1f), "on: Illuminated shows 100");
+        Check(Near(FrameworkTweaks.PerfectChanceDisplay(r, handle, 0.51f, 3, 0, PerfectChance.SlotStatus.Darkness), 0f), "on: Darkness shows 0");
+
+        // Taunt: vanilla shows the 0f-modifier figure while the roll uses m_PerSlotSkillRoll.
+        // Vitality 0.8 with the class default of -0.1 rolls 0.7 per slot: 0.343, shown as 0.34, not 0.51.
+        float taunt;
+        Check(FrameworkTweaks.TauntPerfectChance(r, handle, 0.7f, 3, 0, PerfectChance.SlotStatus.None, out taunt) && Near(taunt, 0.34f),
+            "on: Taunt uses the per-slot value its roll uses (0.34, not 0.51)");
+        Check(FrameworkTweaks.TauntPerfectChance(r, handle, 0.7f, 3, 1, PerfectChance.SlotStatus.None, out taunt) && Near(taunt, 0.49f),
+            "on: Taunt with one focus-locked slot is 0.49");
+        Check(FrameworkTweaks.TauntPerfectChance(r, handle, 0.7f, 3, 0, PerfectChance.SlotStatus.Shocked, out taunt) && Near(taunt, 0f),
+            "on: a Shocked Taunt without focus shows 0");
+        Check(FrameworkTweaks.TauntPerfectChance(r, handle, 0.7f, 3, 1, PerfectChance.SlotStatus.Shocked, out taunt) && Near(taunt, 0.49f),
+            "on: a Shocked Taunt with slot 0 focused is 0.49");
+        Check(FrameworkTweaks.TauntPerfectChance(r, handle, 0.7f, 3, 0, PerfectChance.SlotStatus.Illuminated, out taunt) && Near(taunt, 1f),
+            "on: an Illuminated Taunt shows 100");
+        Check(FrameworkTweaks.TauntPerfectChance(r, handle, 0.7f, 3, 3, PerfectChance.SlotStatus.Darkness, out taunt) && Near(taunt, 1f),
+            "on: a fully focused Taunt is certain in Darkness");
+
+        Check(r.Toggle(handle) && store.Values["fix.perfect-chance"] == TweakPreference.Off && !r.IsOn(handle), "turning it off stores Off");
+        vanillaStands(r, handle, "off");
+        Check(r.Toggle(handle) && r.IsOn(handle), "turning it back on applies at once");
+        r.Fault(handle, new InvalidOperationException("perfect"));
+        vanillaStands(r, handle, "faulted");
+        vanillaStands(r, TweakRegistry.InvalidHandle, "an unregistered handle");
     }
 
     private static List<string> Warnings = new List<string>(), Infos = new List<string>(), Errors = new List<string>();

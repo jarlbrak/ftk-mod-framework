@@ -15,6 +15,8 @@ on top of it. These descriptors exist today:
   [Spec #242](https://github.com/jarlbrak/ftk-mod-framework/issues/242) FR-1), the first Local Fix.
 - **Clear the Wet icon after combat** (`fix.stale-wet-icon`, Spec #242 FR-4): the HUD hides the
   Wet status icon outside combat, as vanilla already does for the other combat statuses.
+- **Correct Perfect chances** (`fix.perfect-chance`, Spec #242 FR-5): the Perfect figure on combat
+  buttons counts Shocked, Illuminated and Darkness, and Taunt's own accuracy. Rolls are unchanged.
 - **XP within the level** (`information.xp-in-level`,
   [Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1).
 - **Poison turns left** (`information.poison-turns`, Spec #243 FR-3): the poison status tooltip
@@ -271,7 +273,8 @@ dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c R
 ```
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
-hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, XP within the
-level, Poison turns left, Sell price in item details, the probe and the tab.
+hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, the Perfect chance
+math and fix, XP within the level, Poison turns left, Sell price in item details, the probe and
+the tab.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`. Both run
 in CI.

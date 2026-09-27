@@ -39,6 +39,19 @@ namespace FTKModFramework.Core
             + "combat. SetStatusIcons runs from uiPlayerMainHud.Update when the HUD is flagged for update. "
             + "The postfix hides the icon under the else-branch predicate, on every machine, for display.");
 
+        internal static readonly TweakDescriptor PerfectChanceDescriptor = new TweakDescriptor(
+            "fix.perfect-chance", TweakCategory.Fix, TweakScope.Local,
+            "Correct Perfect chances",
+            "Show Perfect chances that count Shocked, Illuminated and Darkness, and Taunt's own accuracy. Rolls are unchanged.",
+            "CharacterStats.CalculateFullSkillChance returns GetSkillValue(skill, true, modify)^(slots - SpentFocus) "
+            + "and ignores the dummy statuses that SlotControl.ComputeAttackSlotResults, ComputeFleeSlotResults "
+            + "and ComputeShieldTauntSlotResults apply to each unfocused slot before the roll: Illuminated "
+            + "succeeds, then Darkness fails, then slot 0 fails when Shocked. Its only callers are display: "
+            + "uiBattleStanceButtons.DisplayBattleActionInfo (flee and shieldtaunt) and "
+            + "FTK_proficiencyTable.GetBattleButtonInfo, itself called only there. The shieldtaunt branch passes 0f "
+            + "while ComputeShieldTauntSlotResults rolls m_SkillRoll[vitality].Roll(taunt m_PerSlotSkillRoll). "
+            + "Postfixes change only the returned figure and the Taunt Perfect line, on every machine, for display.");
+
         internal static readonly TweakDescriptor XpInLevelDescriptor = new TweakDescriptor(
             "information.xp-in-level", TweakCategory.Information, TweakScope.Local,
             "XP within the level",
@@ -93,6 +106,7 @@ namespace FTKModFramework.Core
         internal static int SessionProbe { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int QuestDungeonName { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int StaleWetIcon { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int PerfectChanceFix { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PoisonTurns { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int SellPrice { get; private set; } = TweakRegistry.InvalidHandle;
@@ -103,6 +117,7 @@ namespace FTKModFramework.Core
             SkipIntro = registry.Register(SkipIntroDescriptor);
             QuestDungeonName = registry.Register(QuestDungeonNameDescriptor);
             StaleWetIcon = registry.Register(StaleWetIconDescriptor);
+            PerfectChanceFix = registry.Register(PerfectChanceDescriptor);
             XpInLevel = registry.Register(XpInLevelDescriptor);
             PoisonTurns = registry.Register(PoisonTurnsDescriptor);
             SellPrice = registry.Register(SellPriceDescriptor);
@@ -154,6 +169,26 @@ namespace FTKModFramework.Core
             if (!registry.IsOn(handle)) return false;
             bool vanillaInCombatBranch = hasCurrentDummy && inCombat;
             return !vanillaInCombatBranch && wetIconActive;
+        }
+
+        /// <summary>The Perfect chance decision for one CalculateFullSkillChance call. Off, faulted or
+        /// uninitialized returns vanilla's figure unchanged; on applies the slot statuses.</summary>
+        internal static float PerfectChanceDisplay(TweakRegistry registry, int handle, float vanillaChance,
+            int slots, int spentFocus, PerfectChance.SlotStatus statuses)
+        {
+            if (!registry.IsOn(handle)) return vanillaChance;
+            return PerfectChance.WithStatuses(vanillaChance, slots, spentFocus, statuses);
+        }
+
+        /// <summary>The Taunt Perfect decision for one DisplayBattleActionInfo call. False leaves
+        /// vanilla's line alone; true gives the figure from the per-slot value the taunt roll uses.</summary>
+        internal static bool TauntPerfectChance(TweakRegistry registry, int handle, float perSlotSkill,
+            int slots, int spentFocus, PerfectChance.SlotStatus statuses, out float chance)
+        {
+            chance = 0f;
+            if (!registry.IsOn(handle)) return false;
+            chance = PerfectChance.Full(perSlotSkill, slots, spentFocus, statuses);
+            return true;
         }
 
         /// <summary>The XP within the level decision for one GetXpDisplayString call. Off, faulted or
