@@ -211,6 +211,7 @@ namespace FTKModFramework
         {
             Instance = this;
             Log = Logger;
+            Tweaks.Warn = message => Log.LogWarning(message);
             Core.Reporting.ReportingDiagnostics.Start();
             Core.Reporting.ReportingRuntime.Start();
             Core.Reporting.ReportingSubmission.Initialize();
@@ -332,6 +333,12 @@ namespace FTKModFramework
             // Save-safety: synthetic enum ids must round-trip through saves as their int value.
             // The save-size proxy depends on this invariant holding (ids persist as ints).
             fsConfig.SerializeEnumsAsInteger = true;
+
+            // Tweaks: register and read [Tweaks] before PatchAll, so every tweak patch sees its
+            // player's choice from its first call (Skip intro runs during the splash scene). If
+            // initialization fails, every tweak reports off and the game runs vanilla.
+            FrameworkTweaks.RegisterAll(Tweaks.Registry);
+            Tweaks.Registry.Initialize(new TweakConfigStore(Config, Tweaks.Registry));
 
             _harmony = new Harmony(Guid);
             DbLookupPatcher.Init(_harmony);

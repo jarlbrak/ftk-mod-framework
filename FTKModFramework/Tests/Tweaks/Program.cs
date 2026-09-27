@@ -62,7 +62,8 @@ internal static class Program
         UnknownHandlesAndPreInitialization();
         NonAllocating();
         Facade();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults).");
+        SkipIntro();
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -407,5 +408,45 @@ internal static class Program
         Check(Tweaks.Registry.Initialize(new MemoryStore()) && Tweaks.IsOn(handle), "the facade reflects the shared registry");
         Tweaks.Fault(handle, new Exception("facade"));
         Check(!Tweaks.IsOn(handle) && messages.Count == 2, "the facade forwards faults");
+    }
+
+    // FR-6: the Skip intro descriptor, its registration, and the GetAnyButton gate the patch applies.
+    private static void SkipIntro()
+    {
+        TweakDescriptor d = FrameworkTweaks.SkipIntroDescriptor;
+        Check(d.Id == "convenience.skip-intro" && d.Category == TweakCategory.Convenience && d.Scope == TweakScope.Local,
+            "Skip intro is a Local Convenience tweak with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "Skip intro is off by default and has no balance note");
+        Check(d.Evidence.Contains("SplashScreen.GetAnyButton") && d.Evidence.Contains("SplashScreen.DisplayScene"),
+            "the evidence names the verified methods");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.SkipIntro;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0, "the framework descriptors register cleanly");
+        Check(r.Get(handle) == d, "the handle resolves to the Skip intro descriptor");
+
+        bool[] vanilla = { false, true };
+        foreach (bool pressed in vanilla)
+            Check(FrameworkTweaks.SkipIntroAnyButton(r, handle, pressed) == pressed, "before initialization the vanilla result passes through: " + pressed);
+
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Skip intro off");
+        foreach (bool pressed in vanilla)
+            Check(FrameworkTweaks.SkipIntroAnyButton(r, handle, pressed) == pressed, "off: the vanilla result passes through: " + pressed);
+
+        Check(r.Toggle(handle) && store.Values["convenience.skip-intro"] == TweakPreference.On, "turning it on stores On");
+        foreach (bool pressed in vanilla)
+            Check(FrameworkTweaks.SkipIntroAnyButton(r, handle, pressed), "on: every call reports a press: " + pressed);
+
+        r.Fault(handle, new InvalidOperationException("splash"));
+        foreach (bool pressed in vanilla)
+            Check(FrameworkTweaks.SkipIntroAnyButton(r, handle, pressed) == pressed, "faulted: the vanilla result passes through: " + pressed);
+
+        TweakRegistry restarted = NewRegistry();
+        FrameworkTweaks.RegisterAll(restarted);
+        Check(restarted.Initialize(store) && FrameworkTweaks.SkipIntroAnyButton(restarted, FrameworkTweaks.SkipIntro, false),
+            "the stored On applies from the first call after a restart");
+        Check(!FrameworkTweaks.SkipIntroAnyButton(restarted, TweakRegistry.InvalidHandle, false), "an unregistered handle leaves vanilla untouched");
     }
 }
