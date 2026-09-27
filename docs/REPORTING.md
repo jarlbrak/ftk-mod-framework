@@ -25,6 +25,8 @@ outgoing content, or turn off **Include diagnostics** to send only your descript
 and report identifiers. A saved draft remembers your diagnostics choice, including
 an explicit opt-out, when you reopen it. Opening the panel, saving a draft, or
 opening the manual editor uploads nothing. Manual reports require an explicit Send action.
+The panel opens with the description selected, or another control that cannot send when
+the description is hidden, so a single confirm press never sends or retries a report.
 
 ## What is collected and shared
 

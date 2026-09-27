@@ -152,7 +152,24 @@ namespace FTKModFramework.Core.UI
                 { SetLabel(primary, "Delete draft"); SetLabel(secondary, "Keep draft"); SetLabel(back, "Back to drafts"); }
             }
             else SetLabel(back, "Back to game");
+            // FTKInputFocus.SetFocus(null) selects m_FirstSelected, so keep it on a control that
+            // cannot publish. OnPreSetFocus refreshes before every focus gain.
+            m_FirstSelected = SafeControl(ReportingPanelFocus.Default(Usable)).GetComponent<FTKSelectable>();
             SetupOwnedNavigation();
+        }
+        private Selectable SafeControl(ReportingPanelFocus.Control control)
+        {
+            if (control == ReportingPanelFocus.Control.Description) return narrative.m_TextButton.m_UnitySelectable;
+            if (control == ReportingPanelFocus.Control.SaveDraft) return saveDraft;
+            if (control == ReportingPanelFocus.Control.Details) return metadataDetailsButton;
+            if (control == ReportingPanelFocus.Control.Drafts) return manageDrafts;
+            return back;
+        }
+        private bool Usable(ReportingPanelFocus.Control control)
+        {
+            if (control == ReportingPanelFocus.Control.Description && !narrativeRoot.activeSelf) return false;
+            Selectable selectable = SafeControl(control);
+            return selectable && selectable.interactable && selectable.gameObject.activeSelf;
         }
         private void Primary()
         {
@@ -544,7 +561,6 @@ namespace FTKModFramework.Core.UI
                     panel.draftDelete[i] = panel.AddButton(source, "DeleteDraft" + i, "Delete", 610, y, 230, delegate { panel.ConfirmDelete(row); });
                 }
                 panel.CreateNarrative(source, font); panel.SetExpanded(false); panel.SetPages("");
-                panel.m_FirstSelected = panel.primary.GetComponent<FTKSelectable>();
                 return panel;
             }
             catch { Destroy(root); throw; }
