@@ -13,6 +13,17 @@ namespace FTKModFramework.Core
             + "SplashScreen.GetAnyButton returns true, then loads FTK_main. The patch makes "
             + "GetAnyButton report a press, which is the exit vanilla already takes on a key press.");
 
+        internal static readonly TweakDescriptor XpInLevelDescriptor = new TweakDescriptor(
+            "information.xp-in-level", TweakCategory.Information, TweakScope.Local,
+            "XP within the level",
+            "Show XP as progress through your current level, matching the XP bar, with your total in brackets.",
+            "CharacterStats.GetXpDisplayString returns m_PlayerXP / m_LevelXpValues[m_PlayerLevel], both "
+            + "cumulative, and m_LevelXpValues[m_MaxCharacterLevels] twice at max level, while "
+            + "CharacterStats.GetXpPercent fills the bar from m_LevelXpValues[level - 1] (0 at level 0) to "
+            + "m_LevelXpValues[level]. Its callers are uiPlayerMainHud.SetXpDisplay, run when the HUD is "
+            + "flagged for update, and uiPlayerStats.UpdateDisplay, run when the stats panel opens. The "
+            + "postfix only replaces the returned string, on every machine, for display.");
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -26,11 +37,13 @@ namespace FTKModFramework.Core
 
         internal static int SkipIntro { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int SessionProbe { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
         {
             SkipIntro = registry.Register(SkipIntroDescriptor);
+            XpInLevel = registry.Register(XpInLevelDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
@@ -40,6 +53,15 @@ namespace FTKModFramework.Core
         {
             if (!registry.IsOn(handle)) return vanillaPressed;
             return true;
+        }
+
+        /// <summary>The XP within the level decision for one GetXpDisplayString call. Off, faulted or
+        /// uninitialized returns vanilla's text unchanged, as does a window that is not a positive span.</summary>
+        internal static string XpInLevelDisplay(TweakRegistry registry, int handle, string vanillaText,
+            int level, int maxLevel, int totalXp, int levelStartXp, int levelEndXp)
+        {
+            if (!registry.IsOn(handle)) return vanillaText;
+            return XpInLevelText.Format(level, maxLevel, totalXp, levelStartXp, levelEndXp) ?? vanillaText;
         }
     }
 }
