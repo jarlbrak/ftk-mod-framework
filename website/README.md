@@ -12,7 +12,7 @@ npm test
 
 The browser checks use Playwright Chromium (`npx playwright install chromium`). They exercise
 all pages at desktop and mobile widths, local links and fragments, images, search, mobile
-navigation, reduced-motion defaults, and actual video playback. `SITE_URL` can point the same
+navigation, tier and slot filters, and visible ability text. `SITE_URL` can point the same
 checks at the deployed site. Screenshots go to the system temporary directory, not the site.
 
 ## Published data boundary
@@ -80,12 +80,10 @@ Before publishing, inspect desktop and mobile screenshots, validate external dow
 
 ## Integrated mod showcases
 
-Each mod has one page. Paladin includes its native screenshots and studio films beside the
-relevant guide sections. The old gallery and armory URLs lead to the complete Paladin guide.
-Equipment cards progressively enhance native details elements into keyboard-accessible dialogs;
-without JavaScript they expand inline. Search filters names and equipped ability explanations.
-The test suite opens all 96 item cards at desktop and mobile sizes and checks their images,
-focus restoration, search, and dismissal. The cards are original CSS inspired by native tooltips,
+Each mod has one page with its promotional banner, class guide, and searchable HTML equipment cards. The old gallery and armory URLs lead to the complete Paladin guide.
+Cards display artwork, stats, and compact ability lines directly as flat HTML content. Without JavaScript all cards remain visible. Search filters names and equipped ability explanations.
+The test suite checks all 96 published HTML item cards at desktop and mobile sizes, including
+images, inline ability text, search, tier and slot filtering. The cards are original CSS inspired by native tooltips,
 not extracted game UI assets.
 
 `node scripts/prepare-items.mjs` downloads the hash-verified archives and compresses their original
@@ -99,7 +97,7 @@ geometry in studio lighting and do not establish native fit or animation coverag
 
 ## Coming Soon: Blacksmith
 
-`mods/blacksmith/` is an explicitly unreleased, tooltip-only preview with 32 static HTML cards.
+`mods/blacksmith/` is an explicitly unreleased, preview with 32 HTML tooltip cards, search, tier and slot filters, and a promotional banner.
 It has no package download and does not alter the published catalog. Studio artwork is labeled
 and preview stats may change. The cards use selectable text with a browser font substitute.
 
@@ -108,3 +106,7 @@ Regenerate the public-safe projection and WebP artwork from the approved local g
 are retained in `src/data/blacksmith-art-provenance.json`; private captures and receipts are excluded.
 At release, replace this preview with the verified public archive projection and update its
 Coming Soon navigation and library link.
+
+Paladin, Thief, and Blacksmith share `TooltipGallery.astro`. Paladin and Thief use their verified
+published projections and retain release/download information. Blacksmith remains a Coming Soon
+preview. Native screenshots and turntable sections are omitted from these mod pages.

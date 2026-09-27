@@ -37,8 +37,8 @@ notice is supplied in the source and as a separate release asset.
 
 ## Blacksmith coming-soon studio artwork
 
-The `blacksmith/` directory contains studio renders of original Rodin-derived Blacksmith
-equipment, not extracted native game assets. The Rodin terms linked above also apply to
+The `blacksmith/` directory contains a promotional illustration and studio renders of original
+Rodin-derived Blacksmith equipment, not extracted native game assets. The Rodin terms linked above also apply to
 these renders; the Paladin account confirmation above is scoped to Paladin. These preview
 images do not distribute the unreleased package or establish gameplay validation. Source
 and derivative hashes are recorded in `src/data/blacksmith-art-provenance.json` in the site
