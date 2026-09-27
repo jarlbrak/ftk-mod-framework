@@ -685,34 +685,42 @@ internal static class Program
         Check(d.Id == "information.sell-price" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
             "Sell price in item details is a Local Information tweak with the specified ID");
         Check(!d.DefaultOn && d.BalanceNote == null, "Sell price in item details is off by default and has no balance note");
-        Check(d.Evidence.Contains("uiItemMenu.GetSellItemValue") && d.Evidence.Contains("uiInventoryItemDisplay.Show")
-            && d.Evidence.Contains("CanSellItems"), "the evidence names the Sell button's method, the hook and the gate");
+        Check(d.Evidence.Contains("uiPopupMenu.GetSellItemValue") && d.Evidence.Contains("uiInventoryItemDisplay.Show")
+            && d.Evidence.Contains("CanSellItems") && d.Evidence.Contains("ShowPlayerEquiped")
+            && d.Evidence.Contains("m_CanControl"),
+            "the evidence names the Sell button's method, the hook, the gate, the equipped path and the control test");
 
         Check(SellPriceText.Line(12) == "Sells for 12", "the price line");
         Check(SellPriceText.Append("UNCOMMON", 12) == "UNCOMMON  (Sells for 12)", "the price follows the rarity line");
         Check(SellPriceText.Append("", 3) == "Sells for 3" && SellPriceText.Append(null, 3) == "Sells for 3",
             "an empty rarity line shows the price alone");
 
-        Check(SellPriceText.Shown(true, true, true, true), "an inventory card at a POI that buys shows the price");
-        Check(!SellPriceText.Shown(false, true, true, true), "shop, reward, vote and lore cards show nothing");
-        Check(!SellPriceText.Shown(true, false, true, true), "no POI, or a POI that does not buy, shows nothing");
-        Check(!SellPriceText.Shown(true, true, false, true), "quest and unsellable items show nothing");
-        Check(!SellPriceText.Shown(true, true, true, false), "no pricing POI shows nothing, so GetCost is never reached");
+        Check(SellPriceText.Shown(true, true, true, true, true, true), "an unequipped inventory card at a POI that buys shows the price");
+        Check(!SellPriceText.Shown(false, true, true, true, true, true), "shop, reward, vote and lore cards show nothing");
+        Check(!SellPriceText.Shown(true, false, true, true, true, true),
+            "an equipped item shows nothing, as its menu offers Unequip but not Sell");
+        Check(!SellPriceText.Shown(true, true, false, true, true, true),
+            "another player's character in multiplayer shows nothing, as its Sell button is disabled and unpriced");
+        Check(!SellPriceText.Shown(true, true, true, false, true, true), "no POI, or a POI that does not buy, shows nothing");
+        Check(!SellPriceText.Shown(true, true, true, true, false, true), "quest and unsellable items show nothing");
+        Check(!SellPriceText.Shown(true, true, true, true, true, false), "no pricing POI shows nothing, so GetCost is never reached");
 
         var store = new MemoryStore();
         TweakRegistry r = NewRegistry();
         FrameworkTweaks.RegisterAll(r);
         int handle = FrameworkTweaks.SellPrice;
         Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "Sell price in item details registers cleanly");
-        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "before initialization nothing is shown");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true, true, true), "before initialization nothing is shown");
         Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Sell price in item details off");
-        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "off: nothing is shown");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true, true, true), "off: nothing is shown");
         Check(r.Toggle(handle) && store.Values["information.sell-price"] == TweakPreference.On, "turning it on stores On");
-        Check(FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "on: an inventory card at a shop shows the price");
-        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, false, true, true), "on: away from a shop nothing is shown");
+        Check(FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true, true, true), "on: an unequipped inventory card at a shop shows the price");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, false, true, true, true, true), "on: an equipped item at a shop shows nothing");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, false, true, true, true), "on: a character this client cannot control shows nothing");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, false, true, true), "on: away from a shop nothing is shown");
         r.Fault(handle, new InvalidOperationException("card"));
-        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "faulted: nothing is shown");
-        Check(!FrameworkTweaks.SellPriceShown(r, TweakRegistry.InvalidHandle, true, true, true, true), "an unregistered handle shows nothing");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true, true, true), "faulted: nothing is shown");
+        Check(!FrameworkTweaks.SellPriceShown(r, TweakRegistry.InvalidHandle, true, true, true, true, true, true), "an unregistered handle shows nothing");
     }
 
     // Spec #243 FR-5: the vanishing encounter descriptor, marker and gate.

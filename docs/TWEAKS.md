@@ -22,7 +22,9 @@ on top of it. These descriptors exist today:
 - **Poison turns left** (`information.poison-turns`, Spec #243 FR-3): the poison status tooltip
   counts the end turns left for characters this client owns.
 - **Sell price in item details** (`information.sell-price`, Spec #243 FR-4): at a POI that buys
-  items, an inventory item card shows the price the Sell button would offer.
+  items, an inventory item card shows the price the Sell button would offer, only where that
+  button would be offered: not for equipped items, which must be unequipped first, and not for
+  another player's character in multiplayer.
 - **Mark encounters that vanish** (`information.vanishing-encounters`, Spec #243 FR-5): the
   overworld hover card of a known encounter that leaving or ending the turn removes says "Gone
   once you leave or end your turn here." Unknown encounters show nothing new.
