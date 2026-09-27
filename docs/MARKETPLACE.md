@@ -4,7 +4,7 @@ Open **Mods** on the title screen to discover and manage curated community
 content. The catalog contains [Paladin 1.4.0](../marketplace/packages/paladin/README.md),
 [Thief 1.0.0](../marketplace/packages/thief/README.md),
 [Possum 1.0.0](../marketplace/packages/possum/README.md) and
-[Lore Store Unlocked 1.0.0](../marketplace/packages/lore-store-unlocked/README.md)
+[Lore Store Unlocked 1.0.1](../marketplace/packages/lore-store-unlocked/README.md)
 for their declared game builds and desktop platforms. macOS gameplay has been tested;
 Windows/Linux gameplay remains unverified. Select a mod on the left to see its banner,
 description, requirements and version details on the right. **Installed** also
