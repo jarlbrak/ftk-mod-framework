@@ -13,11 +13,25 @@ namespace FTKModFramework.Core
             + "SplashScreen.GetAnyButton returns true, then loads FTK_main. The patch makes "
             + "GetAnyButton report a press, which is the exit vanilla already takes on a key press.");
 
-        internal static int SkipIntro { get; private set; } = TweakRegistry.InvalidHandle;
+        /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
+        /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
+        internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
+            "probe.session-lifecycle", TweakCategory.Convenience, TweakScope.Session,
+            "Session lifecycle probe",
+            "Self-test only. Changes nothing in the game; logs when a run's shared rules are captured, locked and cleared.",
+            "Capture: GameLogic.CreateOnlineRoom, GameLogic.CreateOfflineRoom and "
+            + "StartGameFE.GameConfig.CreateOnlineRoom postfixes. Lock: uiStartGame.EnterFahrulRPC postfix. "
+            + "Clear: uiStartGame.InitializeSingleton, OnLeftRoom, OnDisconnectedFromPhoton, "
+            + "OnPhotonJoinRoomFailed postfixes and a GameLogic.RestartFadeOutFinish prefix.");
 
-        internal static void RegisterAll(TweakRegistry registry)
+        internal static int SkipIntro { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int SessionProbe { get; private set; } = TweakRegistry.InvalidHandle;
+
+        /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
+        internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
         {
             SkipIntro = registry.Register(SkipIntroDescriptor);
+            SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
         /// <summary>The Skip intro decision for one GetAnyButton call. Off, faulted or uninitialized

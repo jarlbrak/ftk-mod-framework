@@ -212,6 +212,8 @@ namespace FTKModFramework
             Instance = this;
             Log = Logger;
             Tweaks.Warn = message => Log.LogWarning(message);
+            Tweaks.Info = message => Log.LogInfo(message);
+            Tweaks.Error = message => Log.LogError(message);
             Core.Reporting.ReportingDiagnostics.Start();
             Core.Reporting.ReportingRuntime.Start();
             Core.Reporting.ReportingSubmission.Initialize();
@@ -336,8 +338,9 @@ namespace FTKModFramework
 
             // Tweaks: register and read [Tweaks] before PatchAll, so every tweak patch sees its
             // player's choice from its first call (Skip intro runs during the splash scene). If
-            // initialization fails, every tweak reports off and the game runs vanilla.
-            FrameworkTweaks.RegisterAll(Tweaks.Registry);
+            // initialization fails, every tweak reports off and the game runs vanilla. The Session
+            // lifecycle probe is registered only for self-test runs.
+            FrameworkTweaks.RegisterAll(Tweaks.Registry, SelfTestsEnabled);
             Tweaks.Registry.Initialize(new TweakConfigStore(Config, Tweaks.Registry));
 
             _harmony = new Harmony(Guid);

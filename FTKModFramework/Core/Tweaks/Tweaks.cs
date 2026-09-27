@@ -11,11 +11,17 @@ namespace FTKModFramework.Core
         /// it is null are dropped rather than failing a registration.</summary>
         internal static Action<string> Warn { get; set; }
 
-        internal static readonly TweakRegistry Registry = new TweakRegistry(message =>
-        {
-            Action<string> warn = Warn;
-            if (warn != null) warn(message);
-        });
+        /// <summary>Assigned by the plugin at load. Used by the Session lifecycle's probe trace and
+        /// self-test lines; dropped while null.</summary>
+        internal static Action<string> Info { get; set; }
+        internal static Action<string> Error { get; set; }
+
+        internal static readonly TweakRegistry Registry = new TweakRegistry(message => Emit(Warn, message));
+
+        /// <summary>Capture, lock and clear, called by the lifecycle patches.</summary>
+        internal static readonly TweakSessionLifecycle Session = new TweakSessionLifecycle(Registry,
+            message => Emit(Warn, message), message => Emit(Info, message), message => Emit(Error, message),
+            () => FrameworkTweaks.SessionProbe);
 
         internal static int Register(TweakDescriptor descriptor)
         {
@@ -35,6 +41,11 @@ namespace FTKModFramework.Core
         internal static void Fault(int handle, Exception exception)
         {
             Registry.Fault(handle, exception);
+        }
+
+        private static void Emit(Action<string> sink, string message)
+        {
+            if (sink != null) sink(message);
         }
     }
 }
