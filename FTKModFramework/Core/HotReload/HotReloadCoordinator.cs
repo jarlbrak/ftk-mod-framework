@@ -189,6 +189,10 @@ namespace FTKModFramework.Core.HotReload
                     VerifyCandidate();
                     preferences.Commit();
                     SaveNamespace.Publish(target);
+                    // The next run starts from a fresh Session capture, as after a return to the
+                    // title. Patches are not reinstalled and preferences and fault flags are kept.
+                    // The hook catches its own failure, so a tweak error cannot fault the commit.
+                    TweakSessionHooks.Clear(TweakClearTrigger.TitleActivation, "HotReloadCoordinator.Committed");
                     MarketplaceRuntime.PublishHotReload(target);
                     Epoch++;
                     ModsPanel.InvalidateForHotReload();

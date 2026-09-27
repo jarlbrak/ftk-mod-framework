@@ -2,8 +2,8 @@ using System;
 
 namespace FTKModFramework.Core
 {
-    /// <summary>What emptied the Session set. Scene reload and run end mean the run is over; the
-    /// Photon callbacks can also fire while a run is still on screen.</summary>
+    /// <summary>What emptied the Session set. Scene reload, run end and a title-screen activation
+    /// mean no run is going; the Photon callbacks can also fire while a run is still on screen.</summary>
     internal enum TweakClearTrigger
     {
         SceneReload,
@@ -11,6 +11,9 @@ namespace FTKModFramework.Core
         LeftRoom,
         Disconnected,
         JoinRoomFailed,
+        /// <summary>A title-screen hot-reload activation committed. HotReloadBoundary.Check only
+        /// admits one at a pristine title with no started run, so it is never a mid-run clear.</summary>
+        TitleActivation,
     }
 
     /// <summary>Drives the registry's capture, lock and clear from game lifecycle hooks and, when the
@@ -59,10 +62,12 @@ namespace FTKModFramework.Core
         }
 
         /// <summary>A locked run cleared by a Photon callback may still be on screen, which points at a
-        /// lifecycle bug. Scene reload and the run-end fade mean the run is over.</summary>
+        /// lifecycle bug. Scene reload, the run-end fade and a title-screen activation mean the run
+        /// is over.</summary>
         internal static bool WarnOnClear(bool clearedLockedRun, TweakClearTrigger trigger)
         {
-            return clearedLockedRun && trigger != TweakClearTrigger.SceneReload && trigger != TweakClearTrigger.RunEnd;
+            return clearedLockedRun && trigger != TweakClearTrigger.SceneReload && trigger != TweakClearTrigger.RunEnd
+                && trigger != TweakClearTrigger.TitleActivation;
         }
 
         /// <summary>Run setup created its room. A later capture before the lock replaces this one.</summary>
