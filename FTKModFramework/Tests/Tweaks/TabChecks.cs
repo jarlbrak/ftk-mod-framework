@@ -95,6 +95,10 @@ internal static class TabChecks
 
         ShippedRow(registry, rows, headings, "fix.quest-dungeon-name", "Dungeon names in quest text: On (default)",
             "a fresh install shows the quest dungeon name fix under Fixes, on by default");
+        ShippedRow(registry, rows, headings, "fix.stale-wet-icon", "Clear the Wet icon after combat: On (default)",
+            "a fresh install shows the Wet icon fix under Fixes, on by default");
+        ShippedRow(registry, rows, headings, "fix.perfect-chance", "Correct Perfect chances: On (default)",
+            "a fresh install shows the Perfect chance fix under Fixes, on by default");
         ShippedRow(registry, rows, headings, "information.xp-in-level", "XP within the level: Off (default)",
             "a fresh install shows XP within the level under Information, off by default");
         ShippedRow(registry, rows, headings, "information.poison-turns", "Poison turns left: Off (default)",
