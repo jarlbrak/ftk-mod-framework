@@ -67,6 +67,8 @@ internal static class Program
         XpInLevel();
         PoisonTurns();
         SellPrice();
+        VanishingEncounters();
+        HouseRulesAchievements();
         StaleWetIcon();
         PerfectChanceMath();
         PerfectChanceTweak();
@@ -74,7 +76,7 @@ internal static class Program
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -710,6 +712,110 @@ internal static class Program
         r.Fault(handle, new InvalidOperationException("card"));
         Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "faulted: nothing is shown");
         Check(!FrameworkTweaks.SellPriceShown(r, TweakRegistry.InvalidHandle, true, true, true, true), "an unregistered handle shows nothing");
+    }
+
+    // Spec #243 FR-5: the vanishing encounter descriptor, marker and gate.
+    private static void VanishingEncounters()
+    {
+        TweakDescriptor d = FrameworkTweaks.VanishingEncountersDescriptor;
+        Check(d.Id == "information.vanishing-encounters" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
+            "Mark encounters that vanish is a Local Information tweak with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "Mark encounters that vanish is off by default and has no balance note");
+        Check(d.Evidence.Contains("MiniEncounterMenuBase.UseLeaveOrEndTurnButton") && d.Evidence.Contains("DecayHexRPC")
+            && d.Evidence.Contains("MiniEncounter.GetPOIProfile") && d.Evidence.Contains("m_Known"),
+            "the evidence names the removal, the hook and the known gate");
+
+        const string effect = "Pray for a blessing";
+        Check(VanishingEncounterText.Line == "Gone once you leave or end your turn here.", "the marker text");
+        Check(VanishingEncounterText.Append(effect) == effect + "\nGone once you leave or end your turn here.",
+            "the marker goes on its own line after the effect");
+        Check(VanishingEncounterText.Append("") == VanishingEncounterText.Line && VanishingEncounterText.Append(null) == VanishingEncounterText.Line,
+            "an empty effect shows the marker alone");
+        Check(VanishingEncounterText.Shown(true, true), "a known encounter that goes on leave is marked");
+        Check(!VanishingEncounterText.Shown(true, false), "a known encounter that stays is not marked");
+        Check(!VanishingEncounterText.Shown(false, true) && !VanishingEncounterText.Shown(false, false), "an unknown encounter reveals nothing");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.VanishingEncounters;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "Mark encounters that vanish registers cleanly");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true), effect),
+            "before initialization the vanilla effect passes through");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Mark encounters that vanish off");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true), effect),
+            "off: the vanilla effect passes through");
+        Check(r.Toggle(handle) && store.Values["information.vanishing-encounters"] == TweakPreference.On, "turning it on stores On");
+        Check(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true) == VanishingEncounterText.Append(effect),
+            "on: a known encounter that goes on leave gets the marker");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, false), effect),
+            "on: an encounter that stays keeps vanilla");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, false, true), effect),
+            "on: an unknown encounter keeps vanilla");
+        r.Fault(handle, new InvalidOperationException("profile"));
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true), effect),
+            "faulted: the vanilla effect passes through");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, TweakRegistry.InvalidHandle, effect, true, true), effect),
+            "an unregistered handle leaves vanilla untouched");
+
+        // The off path runs on every hover. It must not allocate.
+        TweakRegistry off = NewRegistry();
+        FrameworkTweaks.RegisterAll(off);
+        off.Initialize(new MemoryStore());
+        int offHandle = FrameworkTweaks.VanishingEncounters;
+        string sink = null;
+        for (int i = 0; i < 1000; i++) sink = FrameworkTweaks.VanishingEncounterEffect(off, offHandle, effect, true, true);
+        long before = GC.GetAllocatedBytesForCurrentThread();
+        for (int i = 0; i < 10000; i++) sink = FrameworkTweaks.VanishingEncounterEffect(off, offHandle, effect, true, true);
+        long allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+        Check(allocated == 0, "the off path allocated " + allocated + " bytes (" + sink.Length + ")");
+    }
+
+    // Spec #243 FR-6: the House Rules descriptor, line and gate. The patch computes "easier" with the
+    // game's own Rules2.IsEasier, so infinite lives, which vanilla does not count as easier, arrives
+    // here as false and keeps the vanilla text.
+    private static void HouseRulesAchievements()
+    {
+        TweakDescriptor d = FrameworkTweaks.HouseRulesAchievementsDescriptor;
+        Check(d.Id == "information.house-rules-achievements" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
+            "Name the achievements House Rules disable is a Local Information tweak with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "Name the achievements House Rules disable is off by default and has no balance note");
+        Check(d.Evidence.Contains("sPlayerAchievement_trigger") && d.Evidence.Contains("HouseRulesEasyEnabled")
+            && d.Evidence.Contains("GameDifficulty.GetDynamicDifficultyText(Rules2)") && d.Evidence.Contains("IsDifficultyEasier"),
+            "the evidence names the revert, the flag, the hook and the easier test");
+        Check(d.Evidence.Contains("ACH_STORY_KILL_VEXOR_EASY/NORMAL/HARD") && d.Evidence.Contains("15 STAT_GAMEWIN_*"),
+            "the evidence names the affected rows");
+
+        const string vanilla = "Lore Payout: 50%\nLife Pool: 5\nEconomy: 100";
+        Check(HouseRulesText.Line == "Easier House Rules: the three Defeat Vexor achievements and win statistics won't be recorded.",
+            "the line text");
+        Check(HouseRulesText.Append(vanilla, true) == vanilla + "\n" + HouseRulesText.Line, "easier rules get the line after the summary");
+        Check(ReferenceEquals(HouseRulesText.Append(vanilla, false), vanilla), "rules that are not easier keep the summary");
+        Check(HouseRulesText.Append("", true) == HouseRulesText.Line && HouseRulesText.Append(null, true) == HouseRulesText.Line,
+            "an empty summary shows the line alone");
+        Check(HouseRulesText.Append(null, false) == null, "no summary and not easier stays null");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.HouseRulesAchievements;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d,
+            "Name the achievements House Rules disable registers cleanly");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true), vanilla),
+            "before initialization the vanilla text passes through");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Name the achievements House Rules disable off");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true), vanilla),
+            "off: the vanilla text passes through");
+        Check(r.Toggle(handle) && store.Values["information.house-rules-achievements"] == TweakPreference.On, "turning it on stores On");
+        Check(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true) == vanilla + "\n" + HouseRulesText.Line,
+            "on: easier rules name what is not recorded");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, false), vanilla),
+            "on: default, harder or infinite-lives rules keep vanilla");
+        r.Fault(handle, new InvalidOperationException("rules"));
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true), vanilla),
+            "faulted: the vanilla text passes through");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, TweakRegistry.InvalidHandle, vanilla, true), vanilla),
+            "an unregistered handle leaves vanilla untouched");
     }
 
     /// <summary>The counter steps of CharacterStats.EndTurnActionSequence for a living character
