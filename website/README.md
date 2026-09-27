@@ -96,3 +96,15 @@ mode uses the same scene as the turntables, at 512 pixels with a transparent bac
 `src/data/item-art-provenance.json` records package, source, model, atlas, and derivative hashes.
 Only icon derivatives reach the deployed site; no raw models or atlases do. These stills show
 geometry in studio lighting and do not establish native fit or animation coverage.
+
+## Coming Soon: Blacksmith
+
+`mods/blacksmith/` is an explicitly unreleased, tooltip-only preview with 32 static HTML cards.
+It has no package download and does not alter the published catalog. Studio artwork is labeled
+and preview stats may change. The cards use selectable text with a browser font substitute.
+
+Regenerate the public-safe projection and WebP artwork from the approved local gallery with
+`node scripts/prepare-blacksmith-preview.mjs GALLERY_DIRECTORY`. Source and output image hashes
+are retained in `src/data/blacksmith-art-provenance.json`; private captures and receipts are excluded.
+At release, replace this preview with the verified public archive projection and update its
+Coming Soon navigation and library link.

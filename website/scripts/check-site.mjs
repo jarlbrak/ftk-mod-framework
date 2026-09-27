@@ -2,7 +2,7 @@ import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const root=process.env.SITE_URL || 'http://127.0.0.1:4321/ftk-mod-framework/';
-const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/'];
+const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/blacksmith/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/'];
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage();
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -19,9 +19,13 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
   for(const i of info.images){assert(i.alt,`Missing alt ${i.src}`);assert(i.loaded,`Broken image ${i.src}`);resources.add(i.src)}
   info.links.forEach(l=>links.add(l));info.media.forEach(l=>resources.add(l));
   for(const v of info.videos){assert(v.controls&&v.loop&&!v.autoplay);resources.add(v.poster)}
-  if(['','mods/paladin/','gallery/','mods/paladin-equipment/'].includes(path))await page.screenshot({path:`/tmp/ftk-site-${path.replaceAll('/','-')||'home'}-${size.width}.png`,fullPage:true});
+  if(['','mods/paladin/','gallery/','mods/paladin-equipment/','mods/blacksmith/'].includes(path))await page.screenshot({path:`/tmp/ftk-site-${path.replaceAll('/','-')||'home'}-${size.width}.png`,fullPage:true});
  }
 }
+await page.goto(root+'mods/blacksmith/');
+assert.equal(await page.locator('.forge-card').count(),32);
+assert.match(await page.locator('.preview-status').textContent(),/Coming Soon/);
+assert.equal(await page.locator('.forge-card .affinity').count(),43);
 // Exercise every published item's dialog and its art, including mobile and keyboard dismissal.
 for(const size of [{width:1440,height:1000},{width:390,height:844}]){
  await page.setViewportSize(size);
