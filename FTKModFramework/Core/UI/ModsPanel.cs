@@ -77,6 +77,8 @@ namespace FTKModFramework.Core.UI
             _instance.UpdateSelectables();
             _instance.SetupNavigation();
             if (_instance._controls.Count > 0) FTKInput.SetSelected(_instance._controls[Math.Min(_instance._focusIndex, _instance._controls.Count - 1)]);
+            // The panel opens under the cursor that clicked Mods on the title.
+            _instance.HoldHover();
         }
 
         private static ModsPanel Build()
@@ -149,6 +151,7 @@ namespace FTKModFramework.Core.UI
 
         internal void Tick()
         {
+            ReleaseHeldHover();
             MarketplaceRuntime.Poll();
             FrameworkUpdateRuntime.Poll();
             string hotNotice = HotReload.HotReloadCoordinator.Notice;
@@ -329,6 +332,7 @@ namespace FTKModFramework.Core.UI
                 else if (_view == "settings") SettingsAndHelp();
                 else if (_view == "saved-sets") SavedSets();
                 else if (_view == "saved-set-review") SavedSetReview();
+                else if (_view == "tweaks") TweaksView();
                 AddFooter();
             }
             if (gameObject.activeInHierarchy)
@@ -341,6 +345,7 @@ namespace FTKModFramework.Core.UI
                     _restoreFocusCount = 0;
                 }
                 if (_controls.Count > 0) FTKInput.SetSelected(_controls[Math.Min(_focusIndex, _controls.Count - 1)]);
+                HoldHover();
             }
         }
 
@@ -984,6 +989,10 @@ namespace FTKModFramework.Core.UI
             Button updates = ActionButton("Updates", delegate { Navigate("updates"); if (FrameworkUpdateRuntime.State == null && !PanelBusy) LoadUpdates("refresh"); }, true, 48);
             SetWidth(updates.gameObject, 170);
             if (_view == "updates") Border(updates.gameObject, Gold, 2);
+            // Before the conditional Review changes tab, so the Tweaks tab keeps one controller index.
+            Button tweaks = ActionButton(ModsPanelTweaks.TabTitle, delegate { Navigate("tweaks"); }, true, 48);
+            SetWidth(tweaks.gameObject, 160);
+            if (_view == "tweaks") Border(tweaks.gameObject, Gold, 2);
             if (PendingCount() > 0)
             {
                 Button changes = ActionButton(PendingCount() == 0 ? "Next-launch selection" : "Review changes (" + PendingCount() + ")", delegate { Navigate("maintenance"); }, true, 48);
@@ -1020,6 +1029,7 @@ namespace FTKModFramework.Core.UI
                 : PendingCount() > 0 ? "Changes are saved for next launch." : MarketplaceRuntime.Pending != null ? "Your selection is saved. No gameplay changes will apply." : "Your installed mods stay unchanged until you restart.";
             if (_view == "updates") notice = Short(FrameworkUpdateRuntime.Notice, 120);
             else if (_message.Length > 0) notice = Short(_message, 120);
+            else if (_view == "tweaks" && !PanelBusy) notice = "Tweak choices save immediately. Mod changes still wait for a restart.";
             Text status = TextLine(notice, 21, 58);
             status.GetComponent<LayoutElement>().flexibleWidth = 1;
             if (PanelBusy)
@@ -1257,7 +1267,8 @@ namespace FTKModFramework.Core.UI
             Image image = go.AddComponent<Image>();
             image.color = CardPaper;
             Border(go, WarmBorder, 1);
-            Button button = go.AddComponent<Button>();
+            ModsPanelButton button = go.AddComponent<ModsPanelButton>();
+            button.Panel = this;
             button.targetGraphic = image;
             enabled = enabled && (allowDuringActivation || !HotReload.HotReloadBoundary.NavigationLocked);
             button.interactable = enabled;
@@ -1267,7 +1278,8 @@ namespace FTKModFramework.Core.UI
             colors.disabledColor = new Color(0.88f, 0.86f, 0.81f, 1f);
             button.colors = colors;
             // Verified FTKSelectable.Awake requires the Unity Selectable to exist first.
-            FTKSelectable selectable = go.AddComponent<FTKSelectable>();
+            ModsPanelSelectable selectable = go.AddComponent<ModsPanelSelectable>();
+            selectable.Panel = this;
             int index = _controls.Count;
             if (enabled) _controls.Add(selectable);
             button.onClick.AddListener(delegate {

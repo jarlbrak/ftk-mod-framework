@@ -63,7 +63,8 @@ internal static class Program
         NonAllocating();
         Facade();
         SkipIntro();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro).");
+        _checks += TabChecks.Run();
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.

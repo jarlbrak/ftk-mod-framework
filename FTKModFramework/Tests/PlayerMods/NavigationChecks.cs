@@ -45,6 +45,8 @@ internal static class NavigationChecks
     {
         Assert(ModsPanelNavigation.IsRoot("installed") && ModsPanelNavigation.IsRoot("discover") && ModsPanelNavigation.IsRoot("updates"),
             "the three tabs are navigation roots");
+        Assert(ModsPanelNavigation.IsRoot("tweaks") && !ModsPanelNavigation.IsBrowse("tweaks") && ModsPanelNavigation.IsRestorable("tweaks"),
+            "Tweaks is a stacked navigation root, not a browse view");
         Assert(!ModsPanelNavigation.IsRoot("components") && ModsPanelNavigation.IsBrowse("components"),
             "required components is a browse view reached from Installed, not a root");
         Assert(ModsPanelNavigation.IsBrowse("installed") && ModsPanelNavigation.IsBrowse("discover") && !ModsPanelNavigation.IsBrowse("settings"),
@@ -69,6 +71,24 @@ internal static class NavigationChecks
         Assert(panel.Navigation.Depth == 0, "a tab root discards history");
         panel.Back();
         Assert(panel.Closed, "Back from a root with no history closes the panel");
+
+        // Tweaks starts its own journey like the other tabs, and Back from it closes the panel.
+        panel = new Panel();
+        panel.Navigate("settings");
+        panel.Navigate("maintenance");
+        panel.Page = 2;
+        panel.Navigate("tweaks");
+        Assert(panel.View == "tweaks" && panel.Navigation.Depth == 0 && panel.Page == 0 && panel.Focus == 3,
+            "the Tweaks tab discards history, starts on its first page and focuses its own tab");
+        panel.Page = 1;
+        panel.Navigate("tweaks");
+        Assert(panel.View == "tweaks" && panel.Navigation.Depth == 0 && panel.Page == 0, "re-selecting Tweaks returns it to its first page");
+        panel.Navigate("settings");
+        Assert(panel.Navigation.Depth == 1 && panel.Navigation.Contains("tweaks"), "a view opened from Tweaks stacks on it");
+        panel.Back();
+        Assert(panel.View == "tweaks" && !panel.Closed, "Back from that view returns to Tweaks");
+        panel.Back();
+        Assert(panel.Closed, "Back from the Tweaks root closes the panel");
 
         // Re-entering the current view is not history.
         panel = new Panel();
@@ -125,7 +145,50 @@ internal static class NavigationChecks
         Assert(ModsPanelNavigation.ResolveFocus(9, 9, 4, 2) == 2, "an out-of-range focus falls back to the view default");
         Assert(ModsPanelNavigation.ResolveFocus(0, 0, 0, 1) == 0, "an empty view asks for the first control");
         Assert(ModsPanelNavigation.ResolveFocus(1, 3, 2, 5) == 0, "a fallback beyond the rebuilt view is clamped to the first control");
-        Assert(ModsPanelNavigation.DefaultFocus("updates") == 2 && ModsPanelNavigation.DefaultFocus("installed") == 1 && ModsPanelNavigation.DefaultFocus("settings") == 0,
+        Assert(ModsPanelNavigation.DefaultFocus("updates") == 2 && ModsPanelNavigation.DefaultFocus("installed") == 1 && ModsPanelNavigation.DefaultFocus("settings") == 0
+            && ModsPanelNavigation.DefaultFocus("tweaks") == 3,
             "each view keeps its default controller focus");
+
+        HoverChecks();
+    }
+
+    // Models the panel's use of the hover gate: a rebuild holds it at the resting pointer, and an
+    // admitted enter moves focus to the hovered control. The live input module is not covered.
+    private sealed class HoverPanel
+    {
+        internal readonly ModsPanelHoverGate Gate = new ModsPanelHoverGate();
+        internal int Focus;
+
+        internal void Rebuild(int focus, float x, float y) { Focus = focus; Gate.Hold(x, y); }
+
+        internal void Enter(int control, float x, float y) { if (Gate.Admits(x, y)) Focus = control; }
+    }
+
+    private static void HoverChecks()
+    {
+        ModsPanelHoverGate gate = new ModsPanelHoverGate();
+        Assert(!gate.Held && gate.Admits(40, 60), "hover works before the panel has rebuilt");
+        gate.Hold(40, 60);
+        Assert(!gate.Admits(40, 60) && gate.Held, "a pointer that has not moved since a rebuild cannot claim hover");
+        Assert(!gate.Admits(40, 60), "a still pointer stays held across repeated enters");
+        Assert(gate.Admits(40.5f, 60), "any pointer movement admits hover");
+        Assert(gate.Admits(40, 60) && !gate.Held, "returning to the rebuild spot does not hold hover again");
+        gate.Hold(40, 60);
+        Assert(!gate.Admits(40, 60), "every rebuild holds hover again");
+        Assert(gate.Admits(40, 61), "vertical movement alone admits hover");
+
+        // The reported case: Tweaks from the browse column rebuilds as a stacked view whose Updates
+        // tab (index 2) lands under the resting pointer. The view's own tab must keep focus.
+        HoverPanel panel = new HoverPanel();
+        panel.Rebuild(ModsPanelNavigation.DefaultFocus("tweaks"), 812, 944);
+        panel.Enter(2, 812, 944);
+        Assert(panel.Focus == 3, "a browse-to-stacked rebuild keeps Tweaks focused under a still pointer");
+        panel.Enter(2, 813, 944);
+        Assert(panel.Focus == 2, "moving the pointer over Updates then focuses it as before");
+
+        // The same rule covers every other view change, such as a footer link to Settings.
+        panel.Rebuild(ModsPanelNavigation.DefaultFocus("settings"), 300, 120);
+        panel.Enter(5, 300, 120);
+        Assert(panel.Focus == 0, "a footer link into a stacked view keeps that view's default focus");
     }
 }
