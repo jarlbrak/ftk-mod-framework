@@ -892,6 +892,11 @@ namespace FTKModFramework.Core.UI
         private void SettingsAndHelp()
         {
             TextLine("Settings & Help", 36, 56);
+            // One stacked column outgrew the 1010 frame and pushed Back below the border. Page it,
+            // with the page buttons first so their controller index is the same on both pages.
+            _page = Math.Min(_page, 1);
+            PageButtons(2);
+            if (_page == 1) { SettingsMaintenance(); return; }
             List<string> blocks = new List<string>();
             // The newest result first, so an export path or a failed operation is the page you land on.
             if (_message.Length > 0) blocks.Add(_message);
@@ -919,6 +924,10 @@ namespace FTKModFramework.Core.UI
                 Plugin.Instance.Config.Save(); Refresh();
             }, !PanelBusy);
             TextLine("When on, detected errors and unexpected exits send filtered diagnostics to public GitHub issues without asking. Turn off to stop new automatic sends. Report Bugs remains available.", 23, 76);
+        }
+
+        private void SettingsMaintenance()
+        {
             ActionButton("Review prepared changes", delegate { Navigate("maintenance"); });
             ActionButton("Saved mod sets", delegate { Navigate("saved-sets"); }, !PanelBusy);
             ActionButton("Restore previous mods...", delegate { _confirmOperation = "rollback"; Navigate("confirm"); }, MarketplaceRuntime.PreviousAvailable && !PanelBusy);
@@ -928,7 +937,7 @@ namespace FTKModFramework.Core.UI
             ActionButton("Export mod list", delegate {
                 MarketplaceRuntime.Start("export", null, false, delegate(MarketplaceResult result) {
                     _message = result.Ok ? "Mod list saved to: " + result.ExportPath : "Could not export the mod list: " + Declared(result.Message ?? result.Status);
-                    _detailPage = 0;
+                    _page = 0; _detailPage = 0;
                     Refresh();
                 });
                 Refresh();
