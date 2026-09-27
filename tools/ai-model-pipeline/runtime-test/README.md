@@ -173,7 +173,9 @@ Any changed semantic field requires a newly planned trial. The canonical
 is the reference for this snapshot-only reconciliation workflow.
 
 Append `--run --output scratch/my-route-run.json` only after the dry plan is
-current. The runner will reject a concurrent FTK session and a busy bridge port,
+current. The runner will reject a concurrent FTK session in any app bundle, such
+as a renamed `PaladinGear.app`, any process already running from inside the
+isolated copy, and a busy bridge port, naming each blocking PID and path. It will
 then launch and stop only its own isolated game process. It executes one binding
 stage and one bounded exercise, preserving the stage/case result paths in its
 new record. The record still requires manual image review and a separately
