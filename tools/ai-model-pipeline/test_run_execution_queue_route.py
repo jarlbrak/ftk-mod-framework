@@ -210,6 +210,81 @@ class ExecutionQueueRouteRunnerTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "another FTK session"):
                 runner.assert_fresh_launch_environment(self.game, 8788)
 
+    def fake_processes(self, rows, cwds=None):
+        """Replace the live process table so no test depends on what this machine runs."""
+        cwds = cwds or {}
+        return mock.patch.multiple(
+            runner,
+            running_processes=mock.Mock(return_value=rows),
+            process_cwd=mock.Mock(side_effect=lambda pid: cwds.get(pid)),
+        )
+
+    def free_port(self):
+        return mock.patch.object(runner.socket, "create_connection", side_effect=OSError("refused"))
+
+    def test_process_table_parsing_keeps_paths_with_spaces(self) -> None:
+        output = "    1 /sbin/launchd\n  812 /Games/My Copy/Paladin Control.app/Contents/MacOS/FTK\nbad row\n"
+        with mock.patch.object(runner.subprocess, "check_output", return_value=output) as check_output:
+            rows = runner.running_processes()
+        self.assertEqual(check_output.call_args.args[0], ["ps", "-axo", "pid=,comm="])
+        self.assertEqual(rows, [(1, "/sbin/launchd"), (812, "/Games/My Copy/Paladin Control.app/Contents/MacOS/FTK")])
+
+    def test_ftk_sessions_are_found_whatever_the_app_bundle_is_named(self) -> None:
+        sibling = self.root / "scratch" / "game2"
+        rows = [
+            (1, "/sbin/launchd"),
+            (2, "/Applications/Safari.app/Contents/MacOS/Safari"),
+            (3, "/Applications/FTK.app/Contents/MacOS/FTK"),
+            (4, str(sibling / "PaladinGear.app" / "Contents" / "MacOS" / "FTK")),
+            (5, "PaladinControl.app/Contents/MacOS/FTK"),
+            (6, "FTK"),
+            (7, "/usr/local/bin/FTK"),
+            (8, "Contents/MacOS/FTK"),
+        ]
+        with self.fake_processes(rows, cwds={5: sibling, 8: sibling}):
+            found = runner.active_ftk_processes()
+        self.assertEqual([pid for pid, _ in found], [3, 4, 5])
+        self.assertEqual(found[2][1], str(sibling / "PaladinControl.app" / "Contents" / "MacOS" / "FTK"))
+
+    def test_renamed_foreign_copy_blocks_a_live_launch_with_pid_and_path(self) -> None:
+        executable = str(self.root / "scratch" / "game2" / "PaladinGear.app" / "Contents" / "MacOS" / "FTK")
+        with self.fake_processes([(4, executable)]), self.free_port():
+            with self.assertRaises(RuntimeError) as raised:
+                runner.assert_fresh_launch_environment(self.game, 8788)
+        self.assertIn("another FTK session is running", str(raised.exception))
+        self.assertIn("PID 4 " + executable, str(raised.exception))
+
+    def test_renamed_bundle_inside_the_copy_is_an_owner_not_a_foreign_session(self) -> None:
+        for bundle in ("PaladinControl.app", "PaladinGear.app"):
+            executable = str(self.game / bundle / "Contents" / "MacOS" / "FTK")
+            with self.fake_processes([(1, "/sbin/launchd"), (5150, executable)]), self.free_port():
+                with self.assertRaises(RuntimeError) as raised:
+                    runner.assert_fresh_launch_environment(self.game, 8788)
+            self.assertIn("isolated FTK already has a running owner", str(raised.exception))
+            self.assertIn("PID 5150 " + executable, str(raised.exception))
+
+    def test_owner_detection_resolves_symlinked_and_relative_launch_paths(self) -> None:
+        alias = self.root / "alias-to-game"
+        alias.symlink_to(self.game, target_is_directory=True)
+        rows = [
+            (77, str(alias / "PaladinControl.app" / "Contents" / "MacOS" / "FTK")),
+            (31, "PaladinGear.app/Contents/MacOS/FTK"),
+            (32, "sleep"),
+            (33, str(self.game / "BepInEx" / "helper")),
+        ]
+        with self.fake_processes(rows, cwds={31: self.game}):
+            self.assertEqual(runner.active_game_pids(self.game), [77, 31, 33])
+            runner.process_cwd.assert_called_once_with(31)
+
+    def test_clean_process_table_and_free_port_allow_a_launch(self) -> None:
+        rows = [
+            (1, "/sbin/launchd"),
+            (2, "/Applications/Safari.app/Contents/MacOS/Safari"),
+            (3, "sleep"),
+        ]
+        with self.fake_processes(rows), self.free_port():
+            runner.assert_fresh_launch_environment(self.game, 8788)
+
     def test_symlinked_inputs_are_rejected_before_planning_or_launch(self) -> None:
         linked_document = self.root / "art-experiments" / "linked-profile.json"
         linked_document.symlink_to(self.document)

@@ -364,47 +364,77 @@ def validate_stage_ledger(
     return result
 
 
-def active_game_pids(game: Path) -> list[int]:
-    executable = str(game / "FTK.app/Contents/MacOS/FTK")
-    result = subprocess.run(
-        ["ps", "-ax", "-o", "pid=,command="],
-        check=True,
-        text=True,
-        capture_output=True,
+def running_processes() -> list[tuple[int, str]]:
+    """Return (pid, executable) rows. On macOS ``comm`` is the launched executable path."""
+    rows: list[tuple[int, str]] = []
+    for line in subprocess.check_output(["ps", "-axo", "pid=,comm="], text=True).splitlines():
+        fields = line.strip().split(None, 1)
+        if len(fields) == 2 and fields[0].isdigit():
+            rows.append((int(fields[0]), fields[1]))
+    return rows
+
+
+def process_cwd(pid: int) -> Path | None:
+    completed = subprocess.run(
+        ["lsof", "-a", "-p", str(pid), "-d", "cwd", "-Fn"], capture_output=True, text=True
     )
-    pids: list[int] = []
-    for line in result.stdout.splitlines():
-        fields = line.strip().split(maxsplit=1)
-        if len(fields) == 2 and (fields[1] == executable or fields[1].startswith(executable + " ")):
-            pids.append(int(fields[0]))
-    return pids
+    for line in completed.stdout.splitlines():
+        if line.startswith("n/"):
+            return Path(line[1:])
+    return None
+
+
+def process_executables() -> list[tuple[int, Path]]:
+    """Return each process's absolute launch path, skipping bare names found through PATH."""
+    found: list[tuple[int, Path]] = []
+    for pid, executable in running_processes():
+        path = Path(executable)
+        if not path.is_absolute():
+            # A relative path depends on the launch directory, as with run_bepinex.sh.
+            if "/" not in executable:
+                continue
+            cwd = process_cwd(pid)
+            if cwd is None:
+                continue
+            path = cwd / path
+        found.append((pid, path))
+    return found
+
+
+def active_game_processes(game: Path) -> list[tuple[int, str]]:
+    """Find processes whose executable lives in the copy, whatever its app bundle is named."""
+    root = game.resolve()
+    return [(pid, str(path)) for pid, path in process_executables() if path.resolve().is_relative_to(root)]
+
+
+def active_game_pids(game: Path) -> list[int]:
+    return [pid for pid, _ in active_game_processes(game)]
 
 
 def active_ftk_processes() -> list[tuple[int, str]]:
-    result = subprocess.run(
-        ["ps", "-ax", "-o", "pid=,command="],
-        check=True,
-        text=True,
-        capture_output=True,
-    )
-    suffix = "/FTK.app/Contents/MacOS/FTK"
+    """Find every FTK game binary, including isolated copies with renamed app bundles."""
     result_rows: list[tuple[int, str]] = []
-    for line in result.stdout.splitlines():
-        fields = line.strip().split(maxsplit=1)
-        if len(fields) == 2 and (fields[1].endswith(suffix) or (suffix + " ") in fields[1]):
-            result_rows.append((int(fields[0]), fields[1]))
+    for pid, path in process_executables():
+        parts = path.resolve().parts
+        if len(parts) > 4 and parts[-4].endswith(".app") and parts[-3:] == ("Contents", "MacOS", "FTK"):
+            result_rows.append((pid, str(path)))
     return result_rows
 
 
+def describe_processes(rows: list[tuple[int, str]]) -> str:
+    return ", ".join("PID " + str(pid) + " " + path for pid, path in rows)
+
+
 def assert_fresh_launch_environment(game: Path, port: int) -> None:
-    executable = str(game / "FTK.app/Contents/MacOS/FTK")
-    foreign = [pid for pid, command in active_ftk_processes()
-               if command != executable and not command.startswith(executable + " ")]
+    root = game.resolve()
+    foreign = [(pid, path) for pid, path in active_ftk_processes() if not Path(path).resolve().is_relative_to(root)]
     if foreign:
-        raise RuntimeError("another FTK session is running; refusing a concurrent isolated launch: " + ", ".join(map(str, foreign)))
-    pids = active_game_pids(game)
-    if pids:
-        raise RuntimeError("isolated FTK already has a running owner: " + ", ".join(map(str, pids)))
+        raise RuntimeError(
+            "another FTK session is running; refusing a concurrent isolated launch: " + describe_processes(foreign)
+        )
+    owned = active_game_processes(game)
+    if owned:
+        raise RuntimeError("isolated FTK already has a running owner: " + describe_processes(owned))
     try:
         connection = socket.create_connection(("127.0.0.1", port), timeout=0.2)
     except OSError:

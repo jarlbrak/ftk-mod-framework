@@ -265,8 +265,9 @@ python3 tools/ai-model-pipeline/audit_model_validation_stage_readiness.py \
 ```
 
 The report separates a profile already present byte-for-byte, an ordinary
-append or asset stage, and an explicit isolated migration. It refuses a running
-isolated game and never changes files. Pick one listed historical revision
+append or asset stage, and an explicit isolated migration. It refuses while any
+process runs an executable from inside the copy, whatever its app bundle is named,
+names that PID and path, and never changes files. Pick one listed historical revision
 before staging; it does not merge profile variants or prove live compatibility.
 For routes with several stage-ready documents,
 [`docs/model-validation-profile-selections.json`](../../docs/model-validation-profile-selections.json)
@@ -384,8 +385,10 @@ python3 tools/ai-model-pipeline/deploy_custom_model_stage.py \
   --label my-model --execute
 ```
 
-The deployer preserves a timestamped backup under that isolated game copy and
-refuses a running game, symlinks, a stale catalog, or model-directory drift.
+The deployer preserves a timestamped backup under that isolated game copy. It
+refuses while any process runs an executable from inside the copy, whatever its
+app bundle is named, and names that PID and path. It also refuses symlinks, a
+stale catalog, or model-directory drift.
 Never point it at the Steam installation.
 
 For one changed existing profile row, preserve the old stage receipt and use a

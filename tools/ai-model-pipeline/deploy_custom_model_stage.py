@@ -2,8 +2,9 @@
 """Review or deploy one pinned custom-model stage into an isolated FTK copy.
 
 Without ``--execute`` this performs all integrity checks and reports the exact
-files that would change.  Deployment refuses a running game, stale catalog, or
-any drift in the source/staged model directories. A staged in-place profile
+files that would change.  Deployment refuses while any process runs an
+executable from inside the copy, whatever its app bundle is named, and refuses a
+stale catalog or any drift in the source/staged model directories. A staged in-place profile
 migration is accepted only when its old and new canonical row hashes match the
 stage receipt exactly.
 """
@@ -67,12 +68,52 @@ def flat_file_hashes(directory: Path) -> dict[str, str]:
     return result
 
 
-def assert_game_stopped(game: Path) -> None:
-    executable = str(game / "FTK.app/Contents/MacOS/FTK")
-    commands = subprocess.check_output(["ps", "-axo", "command="], text=True).splitlines()
-    assert not any(command == executable or command.startswith(executable + " ") for command in commands), (
-        "Isolated FTK is running; no files were changed."
+def running_processes() -> list[tuple[int, str]]:
+    """Return (pid, executable) rows. On macOS ``comm`` is the launched executable path."""
+    rows: list[tuple[int, str]] = []
+    for line in subprocess.check_output(["ps", "-axo", "pid=,comm="], text=True).splitlines():
+        fields = line.strip().split(None, 1)
+        if len(fields) == 2 and fields[0].isdigit():
+            rows.append((int(fields[0]), fields[1]))
+    return rows
+
+
+def process_cwd(pid: int) -> Path | None:
+    completed = subprocess.run(
+        ["lsof", "-a", "-p", str(pid), "-d", "cwd", "-Fn"], capture_output=True, text=True
     )
+    for line in completed.stdout.splitlines():
+        if line.startswith("n/"):
+            return Path(line[1:])
+    return None
+
+
+def processes_inside(game: Path) -> list[tuple[int, str]]:
+    """Find processes whose executable lives in the copy, whatever its app bundle is named."""
+    root = game.resolve()
+    found: list[tuple[int, str]] = []
+    for pid, executable in running_processes():
+        path = Path(executable)
+        if not path.is_absolute():
+            # A bare name was found through PATH; a relative path depends on the launch directory.
+            if "/" not in executable:
+                continue
+            cwd = process_cwd(pid)
+            if cwd is None:
+                continue
+            path = cwd / path
+        if path.resolve().is_relative_to(root):
+            found.append((pid, str(path)))
+    return found
+
+
+def assert_game_stopped(game: Path) -> None:
+    running = processes_inside(game)
+    if running:
+        raise AssertionError(
+            "Isolated FTK is running from " + str(game) + "; no files were changed: "
+            + ", ".join("PID " + str(pid) + " " + path for pid, path in running)
+        )
 
 
 def safe_child(root: Path, relative: str | Path) -> Path:
