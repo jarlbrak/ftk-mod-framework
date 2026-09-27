@@ -91,6 +91,19 @@ namespace FTKModFramework.Core
             + "hands uiItemDetail.Show Mode.ItemDisplay, so the postfix is on the former. It only extends "
             + "uiItemDetail.m_ItemRarityDisplay, which uiItemDetail.Show rewrites on every call, on this client.");
 
+        internal static readonly TweakDescriptor VanishingEncountersDescriptor = new TweakDescriptor(
+            "information.vanishing-encounters", TweakCategory.Information, TweakScope.Local,
+            "Mark encounters that vanish",
+            "On a known encounter's hover card, say when leaving it or ending your turn there removes it.",
+            "MiniEncounterMenuBase.UseLeaveOrEndTurnButton runs the base leave or end turn, then sends "
+            + "RPCAllSelf(\"DecayHexRPC\", m_DecayTime) when GetDBEntry().m_DestroyOnLeave. "
+            + "uiHexStatusOverworld.DisplayPoiStatus copies MiniEncounter.GetPOIProfile().m_Effect into the "
+            + "hover card once per hover (m_UpdatePanel), not per frame; GetPOIProfile builds a new PoiProfile "
+            + "each call and shows GetDBEntry().m_MouseOver only when m_Known, else STR_couldBeAnything. The "
+            + "postfix extends m_Effect of the returned profile when m_Known and m_DestroyOnLeave, on this "
+            + "client, and never touches GetPOIDisplayValue, which quest params, MessageCoordinator, "
+            + "uiBuyMenuHud, OnlineText and the remote-info HUD also read.");
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -110,6 +123,7 @@ namespace FTKModFramework.Core
         internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PoisonTurns { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int SellPrice { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int VanishingEncounters { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -121,6 +135,7 @@ namespace FTKModFramework.Core
             XpInLevel = registry.Register(XpInLevelDescriptor);
             PoisonTurns = registry.Register(PoisonTurnsDescriptor);
             SellPrice = registry.Register(SellPriceDescriptor);
+            VanishingEncounters = registry.Register(VanishingEncountersDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
@@ -219,6 +234,17 @@ namespace FTKModFramework.Core
         {
             if (!registry.IsOn(handle)) return false;
             return SellPriceText.Shown(inventoryView, shopCanSell, sellableItem, hasPricePoi);
+        }
+
+        /// <summary>The hover card effect for one MiniEncounter.GetPOIProfile call. Off, faulted or
+        /// uninitialized returns vanilla's effect unchanged, as does an unknown encounter or one that
+        /// stays when the player leaves.</summary>
+        internal static string VanishingEncounterEffect(TweakRegistry registry, int handle, string vanillaEffect,
+            bool known, bool destroyOnLeave)
+        {
+            if (!registry.IsOn(handle)) return vanillaEffect;
+            if (!VanishingEncounterText.Shown(known, destroyOnLeave)) return vanillaEffect;
+            return VanishingEncounterText.Append(vanillaEffect);
         }
     }
 }

@@ -67,6 +67,7 @@ internal static class Program
         XpInLevel();
         PoisonTurns();
         SellPrice();
+        VanishingEncounters();
         StaleWetIcon();
         PerfectChanceMath();
         PerfectChanceTweak();
@@ -74,7 +75,7 @@ internal static class Program
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -710,6 +711,63 @@ internal static class Program
         r.Fault(handle, new InvalidOperationException("card"));
         Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "faulted: nothing is shown");
         Check(!FrameworkTweaks.SellPriceShown(r, TweakRegistry.InvalidHandle, true, true, true, true), "an unregistered handle shows nothing");
+    }
+
+    // Spec #243 FR-5: the vanishing encounter descriptor, marker and gate.
+    private static void VanishingEncounters()
+    {
+        TweakDescriptor d = FrameworkTweaks.VanishingEncountersDescriptor;
+        Check(d.Id == "information.vanishing-encounters" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
+            "Mark encounters that vanish is a Local Information tweak with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "Mark encounters that vanish is off by default and has no balance note");
+        Check(d.Evidence.Contains("MiniEncounterMenuBase.UseLeaveOrEndTurnButton") && d.Evidence.Contains("DecayHexRPC")
+            && d.Evidence.Contains("MiniEncounter.GetPOIProfile") && d.Evidence.Contains("m_Known"),
+            "the evidence names the removal, the hook and the known gate");
+
+        const string effect = "Pray for a blessing";
+        Check(VanishingEncounterText.Line == "Gone once you leave or end your turn here.", "the marker text");
+        Check(VanishingEncounterText.Append(effect) == effect + "\nGone once you leave or end your turn here.",
+            "the marker goes on its own line after the effect");
+        Check(VanishingEncounterText.Append("") == VanishingEncounterText.Line && VanishingEncounterText.Append(null) == VanishingEncounterText.Line,
+            "an empty effect shows the marker alone");
+        Check(VanishingEncounterText.Shown(true, true), "a known encounter that goes on leave is marked");
+        Check(!VanishingEncounterText.Shown(true, false), "a known encounter that stays is not marked");
+        Check(!VanishingEncounterText.Shown(false, true) && !VanishingEncounterText.Shown(false, false), "an unknown encounter reveals nothing");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.VanishingEncounters;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "Mark encounters that vanish registers cleanly");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true), effect),
+            "before initialization the vanilla effect passes through");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Mark encounters that vanish off");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true), effect),
+            "off: the vanilla effect passes through");
+        Check(r.Toggle(handle) && store.Values["information.vanishing-encounters"] == TweakPreference.On, "turning it on stores On");
+        Check(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true) == VanishingEncounterText.Append(effect),
+            "on: a known encounter that goes on leave gets the marker");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, false), effect),
+            "on: an encounter that stays keeps vanilla");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, false, true), effect),
+            "on: an unknown encounter keeps vanilla");
+        r.Fault(handle, new InvalidOperationException("profile"));
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, handle, effect, true, true), effect),
+            "faulted: the vanilla effect passes through");
+        Check(ReferenceEquals(FrameworkTweaks.VanishingEncounterEffect(r, TweakRegistry.InvalidHandle, effect, true, true), effect),
+            "an unregistered handle leaves vanilla untouched");
+
+        // The off path runs on every hover. It must not allocate.
+        TweakRegistry off = NewRegistry();
+        FrameworkTweaks.RegisterAll(off);
+        off.Initialize(new MemoryStore());
+        int offHandle = FrameworkTweaks.VanishingEncounters;
+        string sink = null;
+        for (int i = 0; i < 1000; i++) sink = FrameworkTweaks.VanishingEncounterEffect(off, offHandle, effect, true, true);
+        long before = GC.GetAllocatedBytesForCurrentThread();
+        for (int i = 0; i < 10000; i++) sink = FrameworkTweaks.VanishingEncounterEffect(off, offHandle, effect, true, true);
+        long allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+        Check(allocated == 0, "the off path allocated " + allocated + " bytes (" + sink.Length + ")");
     }
 
     /// <summary>The counter steps of CharacterStats.EndTurnActionSequence for a living character
