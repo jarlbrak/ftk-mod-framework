@@ -77,6 +77,8 @@ namespace FTKModFramework.Core.UI
             _instance.UpdateSelectables();
             _instance.SetupNavigation();
             if (_instance._controls.Count > 0) FTKInput.SetSelected(_instance._controls[Math.Min(_instance._focusIndex, _instance._controls.Count - 1)]);
+            // The panel opens under the cursor that clicked Mods on the title.
+            _instance.HoldHover();
         }
 
         private static ModsPanel Build()
@@ -149,6 +151,7 @@ namespace FTKModFramework.Core.UI
 
         internal void Tick()
         {
+            ReleaseHeldHover();
             MarketplaceRuntime.Poll();
             FrameworkUpdateRuntime.Poll();
             string hotNotice = HotReload.HotReloadCoordinator.Notice;
@@ -342,6 +345,7 @@ namespace FTKModFramework.Core.UI
                     _restoreFocusCount = 0;
                 }
                 if (_controls.Count > 0) FTKInput.SetSelected(_controls[Math.Min(_focusIndex, _controls.Count - 1)]);
+                HoldHover();
             }
         }
 
@@ -1263,7 +1267,8 @@ namespace FTKModFramework.Core.UI
             Image image = go.AddComponent<Image>();
             image.color = CardPaper;
             Border(go, WarmBorder, 1);
-            Button button = go.AddComponent<Button>();
+            ModsPanelButton button = go.AddComponent<ModsPanelButton>();
+            button.Panel = this;
             button.targetGraphic = image;
             enabled = enabled && (allowDuringActivation || !HotReload.HotReloadBoundary.NavigationLocked);
             button.interactable = enabled;
@@ -1273,7 +1278,8 @@ namespace FTKModFramework.Core.UI
             colors.disabledColor = new Color(0.88f, 0.86f, 0.81f, 1f);
             button.colors = colors;
             // Verified FTKSelectable.Awake requires the Unity Selectable to exist first.
-            FTKSelectable selectable = go.AddComponent<FTKSelectable>();
+            ModsPanelSelectable selectable = go.AddComponent<ModsPanelSelectable>();
+            selectable.Panel = this;
             int index = _controls.Count;
             if (enabled) _controls.Add(selectable);
             button.onClick.AddListener(delegate {
