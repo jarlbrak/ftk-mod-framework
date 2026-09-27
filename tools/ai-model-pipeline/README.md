@@ -431,10 +431,11 @@ python3 tools/ai-model-pipeline/deploy_isolated_test_binaries.py \
 ```
 
 Each of `--framework`, `--helper`, and `--content` is optional, but at least one
-must be supplied. `deploy_isolated_test_binaries.py` refuses a running game, symlinks, missing
-ordinary files, external source paths, and hash mismatches. Its receipt proves
-only binary deployment; repeat registration and the relevant live evidence
-afterward.
+must be supplied. `deploy_isolated_test_binaries.py` refuses while any process runs an
+executable from inside the copy, whatever its app bundle is named, and names that PID
+and path. It also refuses symlinks, missing ordinary files, external source paths,
+and hash mismatches. Its receipt proves only binary deployment; repeat registration
+and the relevant live evidence afterward.
 
 The same transaction handles a custom-class player profile. Pass
 `--catalog-kind player` to both commands, run the player skinset preflight below,
