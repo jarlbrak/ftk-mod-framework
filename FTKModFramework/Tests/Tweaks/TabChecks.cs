@@ -49,7 +49,7 @@ internal static class TabChecks
             ModsPanelTweaks.SaveFailed, ModsPanelTweaks.Unavailable, ModsPanelTweaks.Empty, ModsPanelTweaks.NextRun,
             ModsPanelTweaks.ScopeLabel(TweakScope.Session), ModsPanelTweaks.FaultLabel(TweakScope.Local), ModsPanelTweaks.FaultLabel(TweakScope.Session) };
         foreach (string text in fixedText)
-            Check(text.IndexOf('—') < 0 && !text.StartsWith("STR_", StringComparison.Ordinal), "panel text is plain English without em dashes: " + text);
+            Check(text.IndexOf('\u2014') < 0 && !text.StartsWith("STR_", StringComparison.Ordinal), "panel text is plain English without em dashes: " + text);
     }
 
     private static void Status()
