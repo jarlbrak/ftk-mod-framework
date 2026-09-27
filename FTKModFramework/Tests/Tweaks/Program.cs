@@ -729,7 +729,9 @@ internal static class Program
 
         TweakRegistry players = NewRegistry();
         FrameworkTweaks.RegisterAll(players);
-        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle && players.Count == 3, "without self-tests the probe is not registered");
+        int absent;
+        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle && !players.TryGetHandle(d.Id, out absent),
+            "without self-tests the probe is not registered");
         FrameworkTweaks.RegisterAll(NewRegistry(), false);
         Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle, "an explicit false leaves it out too");
 
@@ -737,7 +739,8 @@ internal static class Program
         TweakRegistry r = NewRegistry();
         FrameworkTweaks.RegisterAll(r, true);
         int probe = FrameworkTweaks.SessionProbe;
-        Check(probe != TweakRegistry.InvalidHandle && r.Count == 4 && Logs.Count == 0, "self-tests register the probe cleanly");
+        Check(probe != TweakRegistry.InvalidHandle && r.Get(probe) == d && r.Count == players.Count + 1 && Logs.Count == 0,
+            "self-tests register the probe cleanly and add nothing else");
         store.Values["probe.session-lifecycle"] = TweakPreference.On;
         r.Initialize(store);
         TweakSessionLifecycle l = NewLifecycle(r, () => FrameworkTweaks.SessionProbe);
