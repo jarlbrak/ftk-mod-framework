@@ -66,7 +66,8 @@ internal static class Program
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, lifecycle hooks, session probe).");
+        _checks += TabChecks.Run();
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.

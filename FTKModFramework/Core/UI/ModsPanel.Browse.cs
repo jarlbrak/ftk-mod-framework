@@ -22,9 +22,11 @@ namespace FTKModFramework.Core.UI
             _container = BrowseStack(left.transform, "Sources", 16, 38, 468, 46);
             Transform tabs = HorizontalRow("Sources", 44);
             _container = tabs;
-            BrowseTab("Browse", "discover", 144);
-            BrowseTab("Installed", "installed", 156);
-            BrowseTab("Updates", "updates", 144);
+            // Four tabs share the column's 468 units: widths plus three 12-unit gaps.
+            BrowseTab("Browse", "discover", 100);
+            BrowseTab("Installed", "installed", 124);
+            BrowseTab("Updates", "updates", 108);
+            BrowseTab(ModsPanelTweaks.TabTitle, "tweaks", 100);
 
             _container = BrowseStack(left.transform, "Choose a mod", 16, 104, 468, 378);
             if (_view == "discover") Discover(); else Installed(_view == "components");
@@ -112,6 +114,11 @@ namespace FTKModFramework.Core.UI
             }, true, 42);
             SetWidth(button.gameObject, width);
             StyleNativeButton(button, false, _view == view);
+            // The native caption font is wider than the fallback; shrink rather than clip a tab name.
+            Text caption = button.GetComponentInChildren<Text>();
+            caption.resizeTextForBestFit = true;
+            caption.resizeTextMinSize = 16;
+            caption.resizeTextMaxSize = caption.fontSize;
         }
 
         private void BrowseModPage(Transform parent)

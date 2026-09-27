@@ -2,5 +2,6 @@
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0</TargetFramework></PropertyGroup>
   <ItemGroup>
     <Compile Include="../../Core/Tweaks/*.cs" Link="Tweaks/%(Filename)%(Extension)" />
+    <Compile Include="../../Core/UI/ModsPanelTweaks.cs" Link="UI/ModsPanelTweaks.cs" />
   </ItemGroup>
 </Project>

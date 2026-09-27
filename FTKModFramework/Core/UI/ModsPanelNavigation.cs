@@ -28,7 +28,7 @@ namespace FTKModFramework.Core.UI
         /// <summary>Tab roots. Entering one starts a new journey, so it discards the stack.</summary>
         internal static bool IsRoot(string view)
         {
-            return view == "installed" || view == "discover" || view == "updates";
+            return view == "installed" || view == "discover" || view == "updates" || view == "tweaks";
         }
 
         /// <summary>Views rendered as a browse list beside a details column. The required-components
@@ -42,9 +42,11 @@ namespace FTKModFramework.Core.UI
         /// belongs to an operation the player already left.</summary>
         internal static bool IsRestorable(string view) { return view != "confirm"; }
 
+        /// <summary>A tab root lands on its own tab: the tab rows order Browse, Installed, Updates,
+        /// Tweaks, and any conditional tab follows them.</summary>
         internal static int DefaultFocus(string view)
         {
-            return view == "updates" ? 2 : view == "installed" ? 1 : 0;
+            return view == "tweaks" ? 3 : view == "updates" ? 2 : view == "installed" ? 1 : 0;
         }
 
         private readonly List<Frame> _stack = new List<Frame>();
