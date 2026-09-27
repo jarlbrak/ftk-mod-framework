@@ -1,0 +1,1270 @@
+{
+  "scope": "Game plus pre-performance framework 5561401f versus current 12b2be3e, isolated single-player stationary Oarton overworld, empty content package.",
+  "environment": "Apple M5, macOS 26.6.2, x86_64 Unity 2017.2.2p2/Mono, 1280x720, quality4, VSync0, uncapped.",
+  "method": {
+    "plannedOrder": [
+      "baseline",
+      "current",
+      "current",
+      "baseline"
+    ],
+    "captureSeconds": 30,
+    "capturesPerLaunch": 2,
+    "postCameraSettleSeconds": 20,
+    "profilerWarmupFrames": 120,
+    "samplers": [],
+    "managedCallbackTiming": false,
+    "forcedGc": false,
+    "currentDefaults": {
+      "OptimizeWaterMeshes": true,
+      "AvoidUnusedEncounterPortraitTextures": false,
+      "nativeWaterExperiment": false
+    },
+    "includedRule": "All frames focused, no focus transitions. Unfocused captures retained but excluded.",
+    "aggregation": "Pooled raw frames; FPS total frames / summed frame intervals. Percentiles floor((n-1)*p). CPU total process time / observation wall time, 100%=one logical CPU. Memory median of capture endpoint physical footprints, not RSS, peaks or summed Unity/driver memory.",
+    "followup": "Additional current launch after original ABBA because the current-build slowdown required checking; reported separately and in all-run aggregate."
+  },
+  "primaryABBA": {
+    "baseline": {
+      "captures": 4,
+      "frames": 11467,
+      "fps": 95.54724495738431,
+      "captureFpsRange": [
+        85.26534800237646,
+        106.04371873983203
+      ],
+      "p95Ms": 14.375090599060059,
+      "p99Ms": 23.015975952148438,
+      "over33Percent": 0.5057992500218017,
+      "cpuPercentOneCore": 180.50827837554107,
+      "cpuMsPerFrame": 18.891875991976978,
+      "medianFootprintGiB": 4.348313558846712,
+      "footprintRangeGiB": [
+        4.337445542216301,
+        4.358212664723396
+      ]
+    },
+    "current": {
+      "captures": 4,
+      "frames": 5825,
+      "fps": 48.52319625591382,
+      "captureFpsRange": [
+        34.015876386756794,
+        57.706176661617704
+      ],
+      "p95Ms": 56.48601055145264,
+      "p99Ms": 156.33797645568848,
+      "over33Percent": 9.768240343347639,
+      "cpuPercentOneCore": 117.5005976009138,
+      "cpuMsPerFrame": 24.231579399141634,
+      "medianFootprintGiB": 4.292235389351845,
+      "footprintRangeGiB": [
+        4.185227163136005,
+        4.4135182574391365
+      ]
+    }
+  },
+  "includingFollowup": {
+    "baseline": {
+      "captures": 4,
+      "frames": 11467,
+      "fps": 95.54724495738431,
+      "captureFpsRange": [
+        85.26534800237646,
+        106.04371873983203
+      ],
+      "p95Ms": 14.375090599060059,
+      "p99Ms": 23.015975952148438,
+      "over33Percent": 0.5057992500218017,
+      "cpuPercentOneCore": 180.50827837554107,
+      "cpuMsPerFrame": 18.891875991976978,
+      "medianFootprintGiB": 4.348313558846712,
+      "footprintRangeGiB": [
+        4.337445542216301,
+        4.358212664723396
+      ]
+    },
+    "current": {
+      "captures": 6,
+      "frames": 12406,
+      "fps": 68.90052732062978,
+      "captureFpsRange": [
+        34.015876386756794,
+        110.66178478769955
+      ],
+      "p95Ms": 31.429052352905273,
+      "p99Ms": 113.42096328735352,
+      "over33Percent": 4.6751571820087054,
+      "cpuPercentOneCore": 146.08188778139987,
+      "cpuMsPerFrame": 21.2114563114622,
+      "medianFootprintGiB": 4.4109509550035,
+      "footprintRangeGiB": [
+        4.185227163136005,
+        4.415700398385525
+      ]
+    }
+  },
+  "followup": {
+    "captures": 2,
+    "frames": 6581,
+    "fps": 109.66323030073062,
+    "captureFpsRange": [
+      108.66435225435859,
+      110.66178478769955
+    ],
+    "p95Ms": 10.672926902770996,
+    "p99Ms": 13.21399211883545,
+    "over33Percent": 0.1671478498708403,
+    "cpuPercentOneCore": 203.29304894056742,
+    "cpuMsPerFrame": 18.538273362710832,
+    "medianFootprintGiB": 4.415227375924587,
+    "footprintRangeGiB": [
+      4.408803269267082,
+      4.415700398385525
+    ]
+  },
+  "trials": [
+    {
+      "id": "overall-a1-0",
+      "arm": "baseline",
+      "frames": 1593,
+      "fps": 53.09307671226903,
+      "meanMs": 18.83484744007903,
+      "p95Ms": 37.744998931884766,
+      "p99Ms": 99.23696517944336,
+      "over33Percent": 6.277463904582548,
+      "over50Count": 54,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 0,
+      "unfocused": 1593,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 517976064,
+        "footprint": 4688995680,
+        "pageins": 3796
+      },
+      "hostMemoryAfter": {
+        "rss": 423968768,
+        "footprint": 4686337376,
+        "pageins": 3804
+      },
+      "hostLoadBefore": [
+        16.4853515625,
+        11.1416015625,
+        10.46142578125
+      ],
+      "hostLoadAfter": [
+        16.85693359375,
+        11.83251953125,
+        10.73974609375
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "c0381c54eeeb400153018a7160487b4cb5843d99e43491d1bccbe41fe71baa19",
+      "included": false,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 37.719745,
+        "processCpuObservationWallSeconds": 30.012743,
+        "processCpuPercentOneCore": 125.67909904136387,
+        "captureWallSeconds": 30.011575
+      },
+      "unityAllocatedStart": 1232789625,
+      "unityAllocatedEnd": 1229310536,
+      "processCpuMsPerFrame": 23.67843377275581,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-a1-1",
+      "arm": "baseline",
+      "frames": 1275,
+      "fps": 42.49011674931034,
+      "meanMs": 23.53488473331227,
+      "p95Ms": 35.23695468902588,
+      "p99Ms": 51.2770414352417,
+      "over33Percent": 6.03921568627451,
+      "over50Count": 17,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 0,
+      "unfocused": 1275,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 426385408,
+        "footprint": 4684535136,
+        "pageins": 3804
+      },
+      "hostMemoryAfter": {
+        "rss": 639139840,
+        "footprint": 4687275360,
+        "pageins": 3810
+      },
+      "hostLoadBefore": [
+        16.85693359375,
+        11.83251953125,
+        10.73974609375
+      ],
+      "hostLoadAfter": [
+        14.27978515625,
+        11.86474609375,
+        10.8046875
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "8263b2e096a0f0ed2ce05e0df71715edfd34682ec72170d9adcce2d79702e7d4",
+      "included": false,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 45.047809,
+        "processCpuObservationWallSeconds": 30.006874,
+        "processCpuPercentOneCore": 150.1249646997551,
+        "captureWallSeconds": 30.006769
+      },
+      "unityAllocatedStart": 1230508187,
+      "unityAllocatedEnd": 1229239240,
+      "processCpuMsPerFrame": 35.33161490196078,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-a1-retry-0",
+      "arm": "baseline",
+      "frames": 2877,
+      "fps": 95.89579314567116,
+      "meanMs": 10.427986121152813,
+      "p95Ms": 13.966083526611328,
+      "p99Ms": 17.765045166015625,
+      "over33Percent": 0.13903371567605144,
+      "over50Count": 1,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 2877,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 617410560,
+        "footprint": 4657296688,
+        "pageins": 3814
+      },
+      "hostMemoryAfter": {
+        "rss": 613056512,
+        "footprint": 4658570544,
+        "pageins": 3815
+      },
+      "hostLoadBefore": [
+        14.21142578125,
+        12.419921875,
+        11.10107421875
+      ],
+      "hostLoadAfter": [
+        11.2177734375,
+        11.86767578125,
+        10.94580078125
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "cacd990a55f9b1477b246461329cef895ca668ffd657bdd36c0f960ef4d70904",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 55.527675,
+        "processCpuObservationWallSeconds": 30.001896,
+        "processCpuPercentOneCore": 185.08055290905617,
+        "captureWallSeconds": 30.001797
+      },
+      "unityAllocatedStart": 1229273392,
+      "unityAllocatedEnd": 1229363264,
+      "processCpuMsPerFrame": 19.300547445255475,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-a1-retry-1",
+      "arm": "baseline",
+      "frames": 2850,
+      "fps": 94.98209873460537,
+      "meanMs": 10.528299683018735,
+      "p95Ms": 15.570998191833496,
+      "p99Ms": 26.484012603759766,
+      "over33Percent": 0.7719298245614035,
+      "over50Count": 11,
+      "gc": [
+        2,
+        2,
+        2
+      ],
+      "focused": 2850,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 615211008,
+        "footprint": 4660782384,
+        "pageins": 3815
+      },
+      "hostMemoryAfter": {
+        "rss": 592506880,
+        "footprint": 4657964336,
+        "pageins": 3820
+      },
+      "hostLoadBefore": [
+        10.9599609375,
+        11.80322265625,
+        10.92822265625
+      ],
+      "hostLoadAfter": [
+        10.9052734375,
+        11.73583984375,
+        10.9345703125
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "22ea165a4347fe155f9316920227b80d9ba1b610a8f3a7a84afcf76d14a8511d",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 54.260125,
+        "processCpuObservationWallSeconds": 30.004869,
+        "processCpuPercentOneCore": 180.8377333692075,
+        "captureWallSeconds": 30.00473
+      },
+      "unityAllocatedStart": 1229280736,
+      "unityAllocatedEnd": 1229279952,
+      "processCpuMsPerFrame": 19.03864035087719,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-b1-0",
+      "arm": "current",
+      "frames": 1021,
+      "fps": 34.015876386756794,
+      "meanMs": 29.398037217389593,
+      "p95Ms": 114.7090196609497,
+      "p99Ms": 198.11904430389404,
+      "over33Percent": 18.41332027424094,
+      "over50Count": 129,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 1021,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 769536000,
+        "footprint": 4722287896,
+        "pageins": 2654
+      },
+      "hostMemoryAfter": {
+        "rss": 727212032,
+        "footprint": 4738528584,
+        "pageins": 2654
+      },
+      "hostLoadBefore": [
+        19.04052734375,
+        13.6123046875,
+        11.708984375
+      ],
+      "hostLoadAfter": [
+        25.67138671875,
+        15.62109375,
+        12.49462890625
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "ae3c61e26d4e86b3e286ad63bab6d5a1a854afeda9108e5bae3cf89de635aab9",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 26.114125,
+        "processCpuObservationWallSeconds": 30.01615,
+        "processCpuPercentOneCore": 87.00024819971917,
+        "captureWallSeconds": 30.014787
+      },
+      "unityAllocatedStart": 1242660303,
+      "unityAllocatedEnd": 1230326404,
+      "processCpuMsPerFrame": 25.577007835455436,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-b1-1",
+      "arm": "current",
+      "frames": 1724,
+      "fps": 57.45693526684491,
+      "meanMs": 17.404339360526986,
+      "p95Ms": 36.608099937438965,
+      "p99Ms": 85.02602577209473,
+      "over33Percent": 5.626450116009281,
+      "over50Count": 55,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 1724,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 728649728,
+        "footprint": 4738901320,
+        "pageins": 2654
+      },
+      "hostMemoryAfter": {
+        "rss": 746741760,
+        "footprint": 4738979144,
+        "pageins": 2654
+      },
+      "hostLoadBefore": [
+        26.337890625,
+        15.92578125,
+        12.62060546875
+      ],
+      "hostLoadAfter": [
+        24.078125,
+        16.36328125,
+        12.892578125
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "c68a4e9fc778232caef02467e7d8358bf33edbd46bcd0aa08d6e49a788336ac7",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 43.644193,
+        "processCpuObservationWallSeconds": 30.006272,
+        "processCpuPercentOneCore": 145.4502345376327,
+        "captureWallSeconds": 30.006161
+      },
+      "unityAllocatedStart": 1245674395,
+      "unityAllocatedEnd": 1230254476,
+      "processCpuMsPerFrame": 25.315657192575404,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-b2-0",
+      "arm": "current",
+      "frames": 1732,
+      "fps": 57.706176661617704,
+      "meanMs": 17.32916748000623,
+      "p95Ms": 40.85695743560791,
+      "p99Ms": 169.2889928817749,
+      "over33Percent": 6.697459584295612,
+      "over50Count": 68,
+      "gc": [
+        2,
+        2,
+        2
+      ],
+      "focused": 1732,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 701952000,
+        "footprint": 4494193392,
+        "pageins": 1337
+      },
+      "hostMemoryAfter": {
+        "rss": 328417280,
+        "footprint": 4495094536,
+        "pageins": 1412
+      },
+      "hostLoadBefore": [
+        28.44580078125,
+        24.9306640625,
+        17.25537109375
+      ],
+      "hostLoadAfter": [
+        24.54443359375,
+        24.32958984375,
+        17.30224609375
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "b9d4546bfde71b09ffb0b97ed0f137af911bcc8c2609ce3278d8f9aa9a6af52a",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 38.352561,
+        "processCpuObservationWallSeconds": 30.094497,
+        "processCpuPercentOneCore": 127.44044534121969,
+        "captureWallSeconds": 30.09323
+      },
+      "unityAllocatedStart": 1229973000,
+      "unityAllocatedEnd": 1229909808,
+      "processCpuMsPerFrame": 22.143510969976905,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-b2-1",
+      "arm": "current",
+      "frames": 1348,
+      "fps": 44.916739582237796,
+      "meanMs": 22.26341469351545,
+      "p95Ms": 65.7280683517456,
+      "p99Ms": 166.23294353485107,
+      "over33Percent": 12.462908011869436,
+      "over50Count": 95,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 1348,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 338956288,
+        "footprint": 4495217416,
+        "pageins": 1414
+      },
+      "hostMemoryAfter": {
+        "rss": 561885184,
+        "footprint": 4493853448,
+        "pageins": 1571
+      },
+      "hostLoadBefore": [
+        23.69970703125,
+        24.15771484375,
+        17.28271484375
+      ],
+      "hostLoadAfter": [
+        28.36865234375,
+        25.39013671875,
+        18.0146484375
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "ce04be71d843570478bc87a39185f6700f5d7ed783bdd117d1edecad8e829ac3",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 33.038071,
+        "processCpuObservationWallSeconds": 30.009236,
+        "processCpuPercentOneCore": 110.09300936551666,
+        "captureWallSeconds": 30.00914
+      },
+      "unityAllocatedStart": 1229972352,
+      "unityAllocatedEnd": 1230009736,
+      "processCpuMsPerFrame": 24.50895474777448,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-a2-0",
+      "arm": "baseline",
+      "frames": 1624,
+      "fps": 54.11626506524474,
+      "meanMs": 18.47873275796768,
+      "p95Ms": 31.861066818237305,
+      "p99Ms": 68.4208869934082,
+      "over33Percent": 4.6182266009852215,
+      "over50Count": 32,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 437,
+      "unfocused": 1187,
+      "focusChanges": 1,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 458690560,
+        "footprint": 4689183976,
+        "pageins": 15252
+      },
+      "hostMemoryAfter": {
+        "rss": 606072832,
+        "footprint": 4698580248,
+        "pageins": 15328
+      },
+      "hostLoadBefore": [
+        23.490234375,
+        25.05078125,
+        18.90478515625
+      ],
+      "hostLoadAfter": [
+        22.19482421875,
+        24.6318359375,
+        19.0029296875
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "3ab22aa02b900da7d914e0a239a04b41877900d556645a70e9c2a62ef8397edb",
+      "included": false,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 41.493253,
+        "processCpuObservationWallSeconds": 30.01185,
+        "processCpuPercentOneCore": 138.2562321216453,
+        "captureWallSeconds": 30.010316
+      },
+      "unityAllocatedStart": 1229258708,
+      "unityAllocatedEnd": 1229274460,
+      "processCpuMsPerFrame": 25.550032635467982,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-a2-1",
+      "arm": "baseline",
+      "frames": 1953,
+      "fps": 65.09492475383045,
+      "meanMs": 15.362180750368806,
+      "p95Ms": 20.900964736938477,
+      "p99Ms": 45.426011085510254,
+      "over33Percent": 1.6897081413210446,
+      "over50Count": 17,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 0,
+      "unfocused": 1953,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 511848448,
+        "footprint": 4700800280,
+        "pageins": 15328
+      },
+      "hostMemoryAfter": {
+        "rss": 450334720,
+        "footprint": 4674159800,
+        "pageins": 15345
+      },
+      "hostLoadBefore": [
+        21.13818359375,
+        24.3720703125,
+        18.94384765625
+      ],
+      "hostLoadAfter": [
+        18.85595703125,
+        23.53271484375,
+        18.86083984375
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "3b65a42036d6f6b169c48080ebd2ba6e7a5b6f140f29c9cc8ba00a5fb2a689fd",
+      "included": false,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 48.518717,
+        "processCpuObservationWallSeconds": 30.002198,
+        "processCpuPercentOneCore": 161.71720818588028,
+        "captureWallSeconds": 30.002022
+      },
+      "unityAllocatedStart": 1230532430,
+      "unityAllocatedEnd": 1229262524,
+      "processCpuMsPerFrame": 24.843173067076297,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-a2-retry-0",
+      "arm": "baseline",
+      "frames": 3182,
+      "fps": 106.04371873983203,
+      "meanMs": 9.430072915996117,
+      "p95Ms": 12.444019317626953,
+      "p99Ms": 16.270995140075684,
+      "over33Percent": 0.21998742928975487,
+      "over50Count": 3,
+      "gc": [
+        2,
+        2,
+        2
+      ],
+      "focused": 3182,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 607027200,
+        "footprint": 4677588152,
+        "pageins": 15345
+      },
+      "hostMemoryAfter": {
+        "rss": 466419712,
+        "footprint": 4677149880,
+        "pageins": 15345
+      },
+      "hostLoadBefore": [
+        11.6875,
+        20.5078125,
+        18.06494140625
+      ],
+      "hostLoadAfter": [
+        11.0888671875,
+        19.4384765625,
+        17.7763671875
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "74229c44b96027ef26b1f231c993a1775fe2a4f3ca4263db3b629029b4a180e6",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 56.50384,
+        "processCpuObservationWallSeconds": 30.005849,
+        "processCpuPercentOneCore": 188.30941927355562,
+        "captureWallSeconds": 30.005762
+      },
+      "unityAllocatedStart": 1229265356,
+      "unityAllocatedEnd": 1229307564,
+      "processCpuMsPerFrame": 17.757335009428033,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-a2-retry-1",
+      "arm": "baseline",
+      "frames": 2558,
+      "fps": 85.26534800237646,
+      "meanMs": 11.728093808661036,
+      "p95Ms": 16.009926795959473,
+      "p99Ms": 31.24094009399414,
+      "over33Percent": 0.9773260359655981,
+      "over50Count": 12,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 2558,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 460169216,
+        "footprint": 4679509176,
+        "pageins": 15345
+      },
+      "hostMemoryAfter": {
+        "rss": 395132928,
+        "footprint": 4679595216,
+        "pageins": 15427
+      },
+      "hostLoadBefore": [
+        11.0888671875,
+        19.4384765625,
+        17.7763671875
+      ],
+      "hostLoadAfter": [
+        20.755859375,
+        20.80029296875,
+        18.32958984375
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26399230957031,
+          "y": 53.623104095458984,
+          "z": 169.96298217773438
+        },
+        "rotation": {
+          "x": 50,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "abe9570fa44e23189d554bc1b011e924e98c55fe5fc59d00f9725053e1167b52",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 50.341502,
+        "processCpuObservationWallSeconds": 30.000243,
+        "processCpuPercentOneCore": 167.80364745712225,
+        "captureWallSeconds": 30.000111
+      },
+      "unityAllocatedStart": 1229257348,
+      "unityAllocatedEnd": 1229362676,
+      "processCpuMsPerFrame": 19.680024237685693,
+      "phase": "ABBA"
+    },
+    {
+      "id": "overall-b3-0",
+      "arm": "current",
+      "frames": 3321,
+      "fps": 110.66178478769955,
+      "meanMs": 9.036543210634658,
+      "p95Ms": 10.72704792022705,
+      "p99Ms": 13.038992881774902,
+      "over33Percent": 0.27100271002710025,
+      "over50Count": 7,
+      "gc": [
+        2,
+        2,
+        2
+      ],
+      "focused": 3321,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 1388077056,
+        "footprint": 4733916464,
+        "pageins": 22703
+      },
+      "hostMemoryAfter": {
+        "rss": 927748096,
+        "footprint": 4741322200,
+        "pageins": 23622
+      },
+      "hostLoadBefore": [
+        9.47265625,
+        16.51708984375,
+        16.97314453125
+      ],
+      "hostLoadAfter": [
+        8.470703125,
+        15.60546875,
+        16.62548828125
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26395416259766,
+          "y": 53.62308120727539,
+          "z": 169.96295166015625
+        },
+        "rotation": {
+          "x": 49.99999237060547,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "fa0c7cc4ed22f40381de81737534b67e142cd0bddaa1fea4de72f56de6f3640a",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 61.10761,
+        "processCpuObservationWallSeconds": 30.010927,
+        "processCpuPercentOneCore": 203.61786891821106,
+        "captureWallSeconds": 30.010097
+      },
+      "unityAllocatedStart": 1230536696,
+      "unityAllocatedEnd": 1230344112,
+      "processCpuMsPerFrame": 18.400364348087926,
+      "phase": "followup"
+    },
+    {
+      "id": "overall-b3-1",
+      "arm": "current",
+      "frames": 3260,
+      "fps": 108.66435225435859,
+      "meanMs": 9.202649988279752,
+      "p95Ms": 10.64598560333252,
+      "p99Ms": 13.164997100830078,
+      "over33Percent": 0.06134969325153374,
+      "over50Count": 2,
+      "gc": [
+        1,
+        1,
+        1
+      ],
+      "focused": 3260,
+      "unfocused": 0,
+      "focusChanges": 0,
+      "settings": {
+        "width": 1280,
+        "height": 720,
+        "qualityLevel": 4,
+        "vSyncCount": 0,
+        "targetFrameRate": -1
+      },
+      "hostMemoryBefore": {
+        "rss": 928722944,
+        "footprint": 4741092824,
+        "pageins": 23622
+      },
+      "hostMemoryAfter": {
+        "rss": 698548224,
+        "footprint": 4740535768,
+        "pageins": 23622
+      },
+      "hostLoadBefore": [
+        8.5126953125,
+        15.49560546875,
+        16.58056640625
+      ],
+      "hostLoadAfter": [
+        8.14111328125,
+        14.70654296875,
+        16.25390625
+      ],
+      "camera": {
+        "path": "Cameras/Overworld Camera",
+        "position": {
+          "x": 69.26395416259766,
+          "y": 53.62308120727539,
+          "z": 169.96295166015625
+        },
+        "rotation": {
+          "x": 49.99999237060547,
+          "y": 180,
+          "z": 0
+        },
+        "fieldOfView": 23,
+        "orthographicSize": 7.099999904632568
+      },
+      "csvSha256": "37f526d82cb36deeda0b0299449c6baa7da395b4e902118d124415805f71849f",
+      "included": true,
+      "binaries": {
+        "FTKPerfProbe.dll": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21",
+        "FtkFrameProfiler.dll": "e4588426dc49b28dc686a052840b1afe64a37d59ee395feb00f358e507ae4382",
+        "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+        "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4",
+        "FTKModFramework.dll": "883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31",
+        "Assembly-CSharp.dll": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "resources": {
+        "processCpuSeconds": 60.892767,
+        "processCpuObservationWallSeconds": 30.001148,
+        "processCpuPercentOneCore": 202.9681230864899,
+        "captureWallSeconds": 30.001044
+      },
+      "unityAllocatedStart": 1230251728,
+      "unityAllocatedEnd": 1230399672,
+      "processCpuMsPerFrame": 18.67876288343558,
+      "phase": "followup"
+    }
+  ],
+  "limitations": [
+    "Two captures per launch are correlated; the original ABBA has four independent launches.",
+    "Competing host workloads were not controlled; no unrelated processes were stopped. No statistical significance or causal attribution to one patch.",
+    "Baseline includes older framework behavior; current also contains unrelated reporting/UI/gameplay changes.",
+    "Static overworld does not exercise mod-heavy textures, repeated encounters, combat, co-op or long-session behavior.",
+    "Matched scene/settings and setup screenshots were inspected; screenshot capture and inventory happen outside timed sampling.",
+    "Focus retries extended baseline process age before accepted captures; memory figures are endpoint observations, not a controlled leak/lifetime experiment."
+  ]
+}

@@ -10,7 +10,7 @@ namespace FTKPerfProbe
 
     /// <summary>
     /// Resolves the four buckets' target methods (null-guarded) and attaches the shared read-only
-    /// Buckets probes to each. Never throws on a missing target — logs a warning and continues.
+    /// Buckets probes to each. Never throws on a missing target; logs a warning and continues.
     /// </summary>
     internal static class ProbeInstaller
     {
@@ -84,14 +84,14 @@ namespace FTKPerfProbe
         {
             HarmonyMethod pre = HM("OwPre"), post = HM("OwPost");
             int n = 0;
-            // OverworldCamera has Update only (no LateUpdate); the ui*OW types below prefer LateUpdate.
+            // Probe each callback independently: some UI components implement both.
             PatchNamed(h, "OverworldCamera", "Update", pre, post, ref n, log);
             string[] uiTypes = { "uiBoatHealthOW", "uiCharactPortraitOW", "uiHexStatusOverworld",
                                  "uiPoiNameTag", "uiActionPointLabel" };
             foreach (string typeName in uiTypes)
             {
-                if (!PatchNamed(h, typeName, "LateUpdate", pre, post, ref n, log))
-                    PatchNamed(h, typeName, "Update", pre, post, ref n, log);
+                PatchNamed(h, typeName, "LateUpdate", pre, post, ref n, log);
+                PatchNamed(h, typeName, "Update", pre, post, ref n, log);
             }
             log.LogInfo("overworld probes attached: " + n);
             return n;

@@ -121,6 +121,8 @@ namespace FTKModFramework.Core
                 return !existing.VisualResourcesOnly && existing.Applied && existing.EnsureRetained();
             List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
             List<Prepared> prepared = new List<Prepared>();
+            // Share immutable PNGs only inside this allocation batch, never across independent leases.
+            Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>(StringComparer.Ordinal);
             EnemyMeshResources lifetime = null;
             EnemyMeshResources.Batch batch = null;
             int attempted = 0;
@@ -201,11 +203,17 @@ namespace FTKModFramework.Core
                         string textureName = option == null ? assignment.TextureFileName : option.TextureFileName;
                         if (string.IsNullOrEmpty(textureName)) continue;
                         string path = CustomModelLoader.ResolveModelPath(textureName);
-                        if (!File.Exists(path)) throw new FileNotFoundException("requested texture missing", path);
-                        Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-                        owned.Add(texture);
-                        if (!texture.LoadImage(File.ReadAllBytes(path))) throw new InvalidOperationException("requested texture could not decode: " + textureName);
-                        texture.name = "ftkmf_" + textureName;
+                        Texture2D texture;
+                        if (!textures.TryGetValue(path, out texture))
+                        {
+                            if (!File.Exists(path)) throw new FileNotFoundException("requested texture missing", path);
+                            texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                            owned.Add(texture);
+                            // Owned PNGs are sampled by materials only; release the CPU pixel copy after upload.
+                            if (!texture.LoadImage(File.ReadAllBytes(path), true)) throw new InvalidOperationException("requested texture could not decode: " + textureName);
+                            texture.name = "ftkmf_" + textureName;
+                            textures.Add(path, texture);
+                        }
                         if (!material.HasProperty("_MainTex")) throw new InvalidOperationException("target shader lacks _MainTex");
                         material.SetTexture("_MainTex", texture);
                         if (preserveAuthoredMainPalette) ExplicitMaterialOptions.PreserveMainPalette(material);

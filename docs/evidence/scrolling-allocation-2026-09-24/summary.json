@@ -1,0 +1,495 @@
+{
+  "frameworkSha256": "883065872d32b7ce717e37fd8a5eccaa9aa6d54c526eab2fbbff4eccea151c31",
+  "fixtureSha256": "fd855050492bf4ca4446d9352cf68c7568f6baa4fcd4f028e9622d2a8722674f",
+  "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "hostTest": {
+    "checks": 17,
+    "warmedCalls": 100000,
+    "reflectionAllocatedBytes": 4800000,
+    "byReferenceAllocatedBytes": 0,
+    "scope": "Host CLR phase access and linked prefix with allocation-free Unity/resource stubs; actual Unity material array allocations remain."
+  },
+  "live": {
+    "cases": [
+      {
+        "mode": "enabled",
+        "calls": 1000,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": true
+      },
+      {
+        "mode": "disabled",
+        "calls": 1000,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": true
+      },
+      {
+        "mode": "re-enabled",
+        "calls": 1000,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": true
+      },
+      {
+        "mode": "foreign-fallback",
+        "calls": 1,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": false
+      }
+    ],
+    "deltaTime": 0.00962285976856947,
+    "originalOffsetUnchanged": true,
+    "id": "scroll-phase-live-final",
+    "targetFrameRate": -1,
+    "utc": "2026-09-25T05:26:23.6900270Z"
+  },
+  "earlyFixture": {
+    "result": {
+      "cases": [
+        {
+          "mode": "enabled",
+          "calls": 1000,
+          "phaseEqual": true,
+          "materialEqual": true,
+          "ownedMaterialUnchanged": false
+        },
+        {
+          "mode": "disabled",
+          "calls": 1000,
+          "phaseEqual": true,
+          "materialEqual": true,
+          "ownedMaterialUnchanged": false
+        },
+        {
+          "mode": "re-enabled",
+          "calls": 1000,
+          "phaseEqual": true,
+          "materialEqual": true,
+          "ownedMaterialUnchanged": false
+        },
+        {
+          "mode": "foreign-fallback",
+          "calls": 1,
+          "phaseEqual": true,
+          "materialEqual": true,
+          "ownedMaterialUnchanged": false
+        }
+      ],
+      "deltaTime": 0.011559784412384033,
+      "originalOffsetUnchanged": true,
+      "id": "scroll-phase-live-a",
+      "targetFrameRate": -1,
+      "utc": "2026-09-25T05:21:22.1057760Z"
+    },
+    "reason": "Inactive hierarchy did not enter owned prefix. Matching native offsets did not establish patch acceptance; fixture corrected and rerun."
+  },
+  "preHardeningFrameworkSha256": "a7790258a9a7f9ba4de57d9ab13cd6bbdb46eba85fe9f34a9994a3d608da612a",
+  "preHardeningLive": {
+    "cases": [
+      {
+        "mode": "enabled",
+        "calls": 1000,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": true
+      },
+      {
+        "mode": "disabled",
+        "calls": 1000,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": true
+      },
+      {
+        "mode": "re-enabled",
+        "calls": 1000,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": true
+      },
+      {
+        "mode": "foreign-fallback",
+        "calls": 1,
+        "phaseEqual": true,
+        "materialEqual": true,
+        "ownedMaterialUnchanged": false
+      }
+    ],
+    "deltaTime": 0.009407997131347656,
+    "originalOffsetUnchanged": true,
+    "id": "scroll-phase-live-b",
+    "targetFrameRate": -1,
+    "utc": "2026-09-25T05:23:41.1464010Z"
+  },
+  "rejectedFoliage": {
+    "result": {
+      "rows": [
+        {
+          "round": 0,
+          "candidate": false,
+          "count": 250,
+          "milliseconds": 15.253,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        },
+        {
+          "round": 1,
+          "candidate": true,
+          "count": 250,
+          "milliseconds": 19.61,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        },
+        {
+          "round": 2,
+          "candidate": true,
+          "count": 250,
+          "milliseconds": 17.189,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        },
+        {
+          "round": 3,
+          "candidate": false,
+          "count": 250,
+          "milliseconds": 16.089,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        },
+        {
+          "round": 4,
+          "candidate": false,
+          "count": 1000,
+          "milliseconds": 65.192,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        },
+        {
+          "round": 5,
+          "candidate": true,
+          "count": 1000,
+          "milliseconds": 61.136,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        },
+        {
+          "round": 6,
+          "candidate": true,
+          "count": 1000,
+          "milliseconds": 70.087,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        },
+        {
+          "round": 7,
+          "candidate": false,
+          "count": 1000,
+          "milliseconds": 59.737,
+          "heapDelta": 0,
+          "gc0Delta": 0,
+          "outputMatchesCommon": true
+        }
+      ],
+      "outputsMatch": true,
+      "externalKeywordRepair": true,
+      "ambientMode": "Trilight",
+      "componentName": "windForFoliage",
+      "grassApproxTrans": false,
+      "billboardAdjustToCamera": true,
+      "semantics": "Synchronous bound-delegate native Update microbenchmark; patch install and warmup excluded. Heap delta is not allocated bytes; no overall FPS or CPU utilization claim.",
+      "id": "foliage-keywords-a",
+      "targetFrameRate": -1,
+      "utc": "2026-09-25T05:21:46.1008430Z",
+      "commonOutput": {
+        "_AFS_GRASS_APPROXTRANS": false,
+        "AFS_SH_AMBIENT": false,
+        "AFS_COLOR_AMBIENT": false,
+        "AFS_GRADIENT_AMBIENT": true,
+        "_AfsDirectSunDir": [
+          -0.11925329267978668,
+          -0.8191520571708679,
+          -0.5610424280166626,
+          1.2705399990081787
+        ],
+        "_AfsDirectSunCol": [
+          1.649999976158142,
+          1.1934888362884521,
+          0.8977941870689392,
+          0.0
+        ],
+        "_AfsSpecFade": [
+          30.100000381469727,
+          10.699999809265137,
+          1.0,
+          1.0
+        ],
+        "_AfsSkyColor": [
+          0.15384541451931,
+          0.06815771013498306,
+          0.5575470924377441,
+          1.0
+        ],
+        "_AfsGroundColor": [
+          0.3395341634750366,
+          0.1955743283033371,
+          0.08983319997787476,
+          1.0
+        ],
+        "_AfsEquatorColor": [
+          1.0,
+          0.5263532400131226,
+          0.16513223946094513,
+          1.0
+        ],
+        "_AfsAmbientColor": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "afs_SHAr": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "afs_SHAg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "afs_SHAb": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "afs_SHBr": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "afs_SHBg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "afs_SHBb": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "afs_SHC": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "_AfsWavingTint": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "_AfsTreeColor": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "_AfsTerrainTrees": [
+          150.0,
+          5.0,
+          60.0,
+          0.0
+        ],
+        "_AfsBillboardCameraForward": [
+          1.0406347783487035e-08,
+          0.14186008274555206,
+          0.11903475224971771,
+          1.0
+        ],
+        "_AfsBillboardShadowCameraForward": [
+          3.1219045126817946e-08,
+          0.4255802631378174,
+          0.3571043014526367,
+          1.0
+        ],
+        "_AfsRainamount": 0.0
+      }
+    },
+    "reason": "No consistent CPU benefit. No production keyword change."
+  },
+  "waterCompatibility": [
+    {
+      "normals": {
+        "variants": [
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 5705,
+            "finiteOrClassMismatches": 5705,
+            "nanPayloadMismatches": 0,
+            "mode": 0,
+            "maxFiniteError": 4.917383193969727e-07,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          },
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 611,
+            "finiteOrClassMismatches": 611,
+            "nanPayloadMismatches": 0,
+            "mode": 1,
+            "maxFiniteError": 1.1920928955078125e-07,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          },
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 5494,
+            "finiteOrClassMismatches": 5494,
+            "nanPayloadMismatches": 0,
+            "mode": 2,
+            "maxFiniteError": 5.066394805908203e-07,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          },
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 0,
+            "finiteOrClassMismatches": 0,
+            "nanPayloadMismatches": 0,
+            "mode": 3,
+            "maxFiniteError": 0.0,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          }
+        ],
+        "selectedExactMode": 3,
+        "error": null
+      },
+      "perlin": {
+        "bound": 1,
+        "checks": 10081,
+        "bitMismatches": 0,
+        "ready": true
+      },
+      "water": {
+        "componentChecks": 7680,
+        "bitMismatches": 0,
+        "rejectedValidCases": 0,
+        "invalidInputsRejectedWithoutWrites": true,
+        "ready": true
+      },
+      "id": "scroll-final-selftest",
+      "action": "selftest",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": false,
+        "completed": 0,
+        "fallback": 0,
+        "nativeWaterCalls": 256,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "9208a032a2b21ddef0d2a59113c25d8b703de791c9aac39c61f3930cb140f207",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:26:31.7098350Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    {
+      "id": "scroll-final-on",
+      "action": "on",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": true,
+        "completed": 0,
+        "fallback": 0,
+        "nativeWaterCalls": 256,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "9208a032a2b21ddef0d2a59113c25d8b703de791c9aac39c61f3930cb140f207",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:26:33.3336360Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    {
+      "id": "scroll-final-inventory",
+      "action": "inventory",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": true,
+        "completed": 1360,
+        "fallback": 0,
+        "nativeWaterCalls": 1616,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "9208a032a2b21ddef0d2a59113c25d8b703de791c9aac39c61f3930cb140f207",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:26:34.8072230Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    {
+      "id": "scroll-final-off",
+      "action": "off",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": false,
+        "completed": 2336,
+        "fallback": 0,
+        "nativeWaterCalls": 2592,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "9208a032a2b21ddef0d2a59113c25d8b703de791c9aac39c61f3930cb140f207",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:26:35.8319970Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    }
+  ],
+  "limits": [
+    "No measured total process RAM, CPU-utilization or FPS reduction.",
+    "Live constructed material fixture verifies Harmony field injection and phase semantics, not full avatar appearance or animation.",
+    "No new clone-lifecycle, co-op, other-platform or long-session coverage."
+  ]
+}

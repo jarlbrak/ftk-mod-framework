@@ -1,0 +1,1138 @@
+{
+  "scope": "Constructed widget invoking native Initialize in isolated macOS x86_64 Unity 2017.2.2p2, not an end-to-end menu benchmark.",
+  "fixtureSha256": "de445650145eaddf8bbbd093e05438b24d301e9f1a3e5f850684a4140208cf1e",
+  "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+  "baselineFrameworkSha256": "aac00e1e03a1fb53ba9bfbd8b4017c2f82bfecfe03d4531a6f1906d2993a2223",
+  "baseline": [
+    {
+      "id": "portrait-baseline-a-0-create",
+      "unityAllocated": 1230204128,
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-baseline-a-1-run",
+      "enemy": "None",
+      "count": 50,
+      "milliseconds": 42.596,
+      "unityAllocated": 1255193264,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 50
+    },
+    {
+      "id": "portrait-baseline-a-2-state",
+      "unityAllocated": 1254739632,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 50
+    },
+    {
+      "id": "portrait-baseline-a-3-run",
+      "enemy": "banditA",
+      "count": 1,
+      "milliseconds": 54.122,
+      "unityAllocated": 1256016408,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 51
+    },
+    {
+      "id": "portrait-baseline-a-4-state",
+      "unityAllocated": 1271461640,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 51
+    },
+    {
+      "id": "portrait-baseline-a-5-run",
+      "enemy": "banditA",
+      "count": 20,
+      "milliseconds": 263.301,
+      "unityAllocated": 1275630883,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 71
+    },
+    {
+      "id": "portrait-baseline-a-6-state",
+      "unityAllocated": 1277686341,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 71
+    },
+    {
+      "id": "portrait-baseline-a-7-run",
+      "enemy": "None",
+      "count": 1,
+      "milliseconds": 0.612,
+      "unityAllocated": 1265818776,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 72
+    },
+    {
+      "id": "portrait-baseline-a-8-state",
+      "unityAllocated": 1269519898,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 72
+    },
+    {
+      "id": "portrait-baseline-a-9-destroy",
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-baseline-a-10-state",
+      "unityAllocated": 1265880328,
+      "widgetAlive": false,
+      "liveObservedTextures": 72
+    }
+  ],
+  "rejectedReuse": {
+    "reason": "Per-initialization reference census caused severe latency regression.",
+    "frameworkSha256": "9af7fa6b37f7c062036c5bf154e17e83387347dc6f0c374366a4f68b0200be28",
+    "captures": [
+      {
+        "id": "portrait-candidate-a-0-create",
+        "unityAllocated": 1230286108,
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-candidate-a-1-run",
+        "enemy": "None",
+        "count": 50,
+        "milliseconds": 1704.017,
+        "unityAllocated": 1254566172,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 50
+      },
+      {
+        "id": "portrait-candidate-a-2-state",
+        "unityAllocated": 1229972724,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-candidate-a-3-run",
+        "enemy": "banditA",
+        "count": 1,
+        "milliseconds": 36.289,
+        "unityAllocated": 1231565034,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-candidate-a-4-state",
+        "unityAllocated": 1248801429,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-candidate-a-5-run",
+        "enemy": "banditA",
+        "count": 20,
+        "milliseconds": 1166.381,
+        "unityAllocated": 1241363324,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-candidate-a-6-state",
+        "unityAllocated": 1230681564,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-candidate-a-7-run",
+        "enemy": "None",
+        "count": 1,
+        "milliseconds": 46.587,
+        "unityAllocated": 1230690852,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-candidate-a-8-state",
+        "unityAllocated": 1230256684,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-candidate-a-9-destroy",
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-candidate-a-10-state",
+        "unityAllocated": 1230122012,
+        "widgetAlive": false,
+        "liveObservedTextures": 0
+      }
+    ]
+  },
+  "rejectedDeferred": {
+    "reason": "Batched census still added a 24 to 40 ms synchronous cleanup hitch.",
+    "frameworkSha256": "8b95b94dfb1670459a09ae8ad44db547712514ec2a5d113999620b5c9b5af4f4",
+    "captures": [
+      {
+        "id": "portrait-deferred-a-0-create",
+        "unityAllocated": 1230529992,
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-deferred-a-1-run",
+        "enemy": "None",
+        "count": 50,
+        "milliseconds": 22.479,
+        "unityAllocated": 1255152800,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 50
+      },
+      {
+        "id": "portrait-deferred-a-2-state",
+        "unityAllocated": 1230093328,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-deferred-a-3-run",
+        "enemy": "banditA",
+        "count": 1,
+        "milliseconds": 20.93,
+        "unityAllocated": 1231396610,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-deferred-a-4-state",
+        "unityAllocated": 1241418674,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-deferred-a-5-run",
+        "enemy": "banditA",
+        "count": 20,
+        "milliseconds": 204.714,
+        "unityAllocated": 1251018540,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-deferred-a-6-state",
+        "unityAllocated": 1230851056,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-deferred-a-7-run",
+        "enemy": "None",
+        "count": 1,
+        "milliseconds": 0.429,
+        "unityAllocated": 1231360448,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 2
+      },
+      {
+        "id": "portrait-deferred-a-8-state",
+        "unityAllocated": 1234015056,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-deferred-a-9-destroy",
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-deferred-a-10-state",
+        "unityAllocated": 1230376808,
+        "widgetAlive": false,
+        "liveObservedTextures": 0
+      }
+    ],
+    "drainMeasurements": [
+      {
+        "calls": 287,
+        "totalMs": 0.444,
+        "maxMs": 0.316,
+        "id": "portrait-deferred-a-0-create-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:34.7381870Z"
+      },
+      {
+        "calls": 276,
+        "totalMs": 26.64,
+        "maxMs": 26.528,
+        "id": "portrait-deferred-a-1-run-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:37.7706590Z"
+      },
+      {
+        "calls": 244,
+        "totalMs": 0.127,
+        "maxMs": 0.002,
+        "id": "portrait-deferred-a-10-state-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T05:00:05.4659330Z"
+      },
+      {
+        "calls": 271,
+        "totalMs": 0.133,
+        "maxMs": 0.003,
+        "id": "portrait-deferred-a-2-state-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:40.8084800Z"
+      },
+      {
+        "calls": 238,
+        "totalMs": 0.123,
+        "maxMs": 0.002,
+        "id": "portrait-deferred-a-3-run-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:43.8441240Z"
+      },
+      {
+        "calls": 173,
+        "totalMs": 0.093,
+        "maxMs": 0.002,
+        "id": "portrait-deferred-a-4-state-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:46.9544450Z"
+      },
+      {
+        "calls": 119,
+        "totalMs": 40.151,
+        "maxMs": 40.071,
+        "id": "portrait-deferred-a-5-run-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:50.1673780Z"
+      },
+      {
+        "calls": 208,
+        "totalMs": 0.109,
+        "maxMs": 0.002,
+        "id": "portrait-deferred-a-6-state-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:53.3952880Z"
+      },
+      {
+        "calls": 107,
+        "totalMs": 24.167,
+        "maxMs": 24.109,
+        "id": "portrait-deferred-a-7-run-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:56.3151510Z"
+      },
+      {
+        "calls": 152,
+        "totalMs": 0.105,
+        "maxMs": 0.002,
+        "id": "portrait-deferred-a-8-state-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T04:59:59.3992760Z"
+      },
+      {
+        "calls": 232,
+        "totalMs": 0.135,
+        "maxMs": 0.002,
+        "id": "portrait-deferred-a-9-destroy-drain",
+        "targetFrameRate": -1,
+        "utc": "2026-09-25T05:00:02.4321260Z"
+      }
+    ]
+  },
+  "candidateFrameworkSha256": "b307c20a76bec2d0cacabbd9f17c167e3f722f142e39ac9ee6bdbe15801c75c8",
+  "prematureMenuFixture": {
+    "reason": "Ran before overworld setup completed; known-enemy image differs with scene lighting. Excluded from matched claims.",
+    "captures": [
+      {
+        "id": "portrait-unused-a-0-create",
+        "unityAllocated": 1110636100,
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-a-1-run",
+        "enemy": "None",
+        "count": 50,
+        "milliseconds": 9.858,
+        "unityAllocated": 1112561548,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-a-2-state",
+        "unityAllocated": 1112783308,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-a-3-run",
+        "enemy": "banditA",
+        "count": 1,
+        "milliseconds": 140.888,
+        "unityAllocated": 1114553018,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "86fad7f3bd78f706fd166da35a2175f637ce4daf87109269280fb53146a74ab2",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-unused-a-4-state",
+        "unityAllocated": 1113561324,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "86fad7f3bd78f706fd166da35a2175f637ce4daf87109269280fb53146a74ab2",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-unused-a-5-run",
+        "enemy": "banditA",
+        "count": 20,
+        "milliseconds": 241.66,
+        "unityAllocated": 1132946667,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "86fad7f3bd78f706fd166da35a2175f637ce4daf87109269280fb53146a74ab2",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-a-6-state",
+        "unityAllocated": 1123744580,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "86fad7f3bd78f706fd166da35a2175f637ce4daf87109269280fb53146a74ab2",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-a-7-run",
+        "enemy": "None",
+        "count": 1,
+        "milliseconds": 0.294,
+        "unityAllocated": 1123753196,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-a-8-state",
+        "unityAllocated": 1123778500,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-a-9-destroy",
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-a-10-state",
+        "unityAllocated": 1123802308,
+        "widgetAlive": false,
+        "liveObservedTextures": 21
+      }
+    ]
+  },
+  "duringSetupFixture": {
+    "reason": "Overworld loaded but camera setup still running; retained as an unmatched capture.",
+    "captures": [
+      {
+        "id": "portrait-unused-b-0-create",
+        "unityAllocated": 1240496004,
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-b-1-run",
+        "enemy": "None",
+        "count": 50,
+        "milliseconds": 5.142,
+        "unityAllocated": 1240547180,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-b-2-state",
+        "unityAllocated": 1240570244,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-b-3-run",
+        "enemy": "banditA",
+        "count": 1,
+        "milliseconds": 10.445,
+        "unityAllocated": 1242580600,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-unused-b-4-state",
+        "unityAllocated": 1241027972,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+        "widgetAlive": true,
+        "liveObservedTextures": 1
+      },
+      {
+        "id": "portrait-unused-b-5-run",
+        "enemy": "banditA",
+        "count": 20,
+        "milliseconds": 140.412,
+        "unityAllocated": 1262112777,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-b-6-state",
+        "unityAllocated": 1250991772,
+        "aliasesMatch": true,
+        "sharedUnknown": false,
+        "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-b-7-run",
+        "enemy": "None",
+        "count": 1,
+        "milliseconds": 0.164,
+        "unityAllocated": 1251015916,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-b-8-state",
+        "unityAllocated": 1251082700,
+        "aliasesMatch": true,
+        "sharedUnknown": true,
+        "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+        "widgetAlive": true,
+        "liveObservedTextures": 21
+      },
+      {
+        "id": "portrait-unused-b-9-destroy",
+        "liveObservedTextures": 0
+      },
+      {
+        "id": "portrait-unused-b-10-state",
+        "unityAllocated": 1250942036,
+        "widgetAlive": false,
+        "liveObservedTextures": 21
+      }
+    ]
+  },
+  "afterPrematureSceneCapture": [
+    {
+      "id": "portrait-unused-c-0-create",
+      "unityAllocated": 1251010060,
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-c-1-run",
+      "enemy": "None",
+      "count": 50,
+      "milliseconds": 4.204,
+      "unityAllocated": 1251039388,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-c-2-state",
+      "unityAllocated": 1251074044,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-c-3-run",
+      "enemy": "banditA",
+      "count": 1,
+      "milliseconds": 7.743,
+      "unityAllocated": 1253448617,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+      "widgetAlive": true,
+      "liveObservedTextures": 1
+    },
+    {
+      "id": "portrait-unused-c-4-state",
+      "unityAllocated": 1251479564,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+      "widgetAlive": true,
+      "liveObservedTextures": 1
+    },
+    {
+      "id": "portrait-unused-c-5-run",
+      "enemy": "banditA",
+      "count": 20,
+      "milliseconds": 86.484,
+      "unityAllocated": 1272341666,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-c-6-state",
+      "unityAllocated": 1261303268,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "4828082ea5fbe883b1b43a0e566338abf74f551a485e01f32457e8cd0f85012c",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-c-7-run",
+      "enemy": "None",
+      "count": 1,
+      "milliseconds": 0.15,
+      "unityAllocated": 1261315668,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-c-8-state",
+      "unityAllocated": 1261350668,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-c-9-destroy",
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-c-10-state",
+      "unityAllocated": 1261251844,
+      "widgetAlive": false,
+      "liveObservedTextures": 21
+    }
+  ],
+  "candidate": [
+    {
+      "id": "portrait-unused-final-0-create",
+      "unityAllocated": 1230180368,
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-final-1-run",
+      "enemy": "None",
+      "count": 50,
+      "milliseconds": 8.35,
+      "unityAllocated": 1230219688,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-final-2-state",
+      "unityAllocated": 1230123640,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-final-3-run",
+      "enemy": "banditA",
+      "count": 1,
+      "milliseconds": 13.219,
+      "unityAllocated": 1231381483,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 1
+    },
+    {
+      "id": "portrait-unused-final-4-state",
+      "unityAllocated": 1230655696,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 1
+    },
+    {
+      "id": "portrait-unused-final-5-run",
+      "enemy": "banditA",
+      "count": 20,
+      "milliseconds": 90.155,
+      "unityAllocated": 1250826364,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-final-6-state",
+      "unityAllocated": 1240712216,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-final-7-run",
+      "enemy": "None",
+      "count": 1,
+      "milliseconds": 0.343,
+      "unityAllocated": 1240713640,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-final-8-state",
+      "unityAllocated": 1240740088,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 21
+    },
+    {
+      "id": "portrait-unused-final-9-destroy",
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-unused-final-10-state",
+      "unityAllocated": 1240658184,
+      "widgetAlive": false,
+      "liveObservedTextures": 21
+    }
+  ],
+  "sameProcessNativeControl": [
+    {
+      "id": "portrait-control-final-0-create",
+      "unityAllocated": 1241141808,
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-control-final-1-run",
+      "enemy": "None",
+      "count": 50,
+      "milliseconds": 96.893,
+      "unityAllocated": 1265753216,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 50
+    },
+    {
+      "id": "portrait-control-final-2-state",
+      "unityAllocated": 1265768944,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 50
+    },
+    {
+      "id": "portrait-control-final-3-run",
+      "enemy": "banditA",
+      "count": 1,
+      "milliseconds": 75.967,
+      "unityAllocated": 1266999105,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 51
+    },
+    {
+      "id": "portrait-control-final-4-state",
+      "unityAllocated": 1266272320,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 51
+    },
+    {
+      "id": "portrait-control-final-5-run",
+      "enemy": "banditA",
+      "count": 20,
+      "milliseconds": 156.288,
+      "unityAllocated": 1286349596,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 71
+    },
+    {
+      "id": "portrait-control-final-6-state",
+      "unityAllocated": 1276171480,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 71
+    },
+    {
+      "id": "portrait-control-final-7-run",
+      "enemy": "None",
+      "count": 1,
+      "milliseconds": 1.038,
+      "unityAllocated": 1276574480,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 72
+    },
+    {
+      "id": "portrait-control-final-8-state",
+      "unityAllocated": 1276592320,
+      "aliasesMatch": true,
+      "sharedUnknown": true,
+      "gpuSha256": "13c8cbbe5033dce0a0471825d8507347c8614af94bb4df546840bb12c71036d5",
+      "widgetAlive": true,
+      "liveObservedTextures": 72
+    },
+    {
+      "id": "portrait-control-final-9-destroy",
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-control-final-10-state",
+      "unityAllocated": 1276625624,
+      "widgetAlive": false,
+      "liveObservedTextures": 72
+    }
+  ],
+  "candidatePlayerTransition": [
+    {
+      "id": "portrait-final-player-0",
+      "unityAllocated": 1240637072,
+      "widgetAlive": true,
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-final-player-1",
+      "enemy": "banditA",
+      "count": 1,
+      "milliseconds": 15.751,
+      "unityAllocated": 1241877681,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "e788e1c6d9dc00d5b9174b4323cd757f23fd3060008d98ce7f5e5a0792d30434",
+      "widgetAlive": true,
+      "liveObservedTextures": 1
+    },
+    {
+      "id": "portrait-final-player-2",
+      "unityAllocated": 1241785976,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "5ea9aa8a2f01813922110ace8e1df0e04d6fd656f3a42e833097399568b37d16",
+      "widgetAlive": true,
+      "liveObservedTextures": 1
+    },
+    {
+      "id": "portrait-final-player-3",
+      "unityAllocated": 1241133432,
+      "aliasesMatch": true,
+      "sharedUnknown": false,
+      "gpuSha256": "5ea9aa8a2f01813922110ace8e1df0e04d6fd656f3a42e833097399568b37d16",
+      "widgetAlive": true,
+      "liveObservedTextures": 1
+    },
+    {
+      "id": "portrait-final-player-4",
+      "liveObservedTextures": 0
+    },
+    {
+      "id": "portrait-final-player-5",
+      "unityAllocated": 1241158344,
+      "widgetAlive": false,
+      "liveObservedTextures": 1
+    }
+  ],
+  "nativeWaterCompatibility": [
+    {
+      "normals": {
+        "variants": [
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 5705,
+            "finiteOrClassMismatches": 5705,
+            "nanPayloadMismatches": 0,
+            "mode": 0,
+            "maxFiniteError": 4.917383193969727e-07,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          },
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 611,
+            "finiteOrClassMismatches": 611,
+            "nanPayloadMismatches": 0,
+            "mode": 1,
+            "maxFiniteError": 1.1920928955078125e-07,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          },
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 5494,
+            "finiteOrClassMismatches": 5494,
+            "nanPayloadMismatches": 0,
+            "mode": 2,
+            "maxFiniteError": 5.066394805908203e-07,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          },
+          {
+            "componentChecks": 36000,
+            "bitMismatches": 0,
+            "finiteOrClassMismatches": 0,
+            "nanPayloadMismatches": 0,
+            "mode": 3,
+            "maxFiniteError": 0.0,
+            "rejectedValidCases": 0,
+            "invalidTopologyRejectedWithoutWrites": true,
+            "error": null
+          }
+        ],
+        "selectedExactMode": 3,
+        "error": null
+      },
+      "perlin": {
+        "bound": 1,
+        "checks": 10081,
+        "bitMismatches": 0,
+        "ready": true
+      },
+      "water": {
+        "componentChecks": 7680,
+        "bitMismatches": 0,
+        "rejectedValidCases": 0,
+        "invalidInputsRejectedWithoutWrites": true,
+        "ready": true
+      },
+      "id": "portrait-final-water-selftest",
+      "action": "selftest",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": false,
+        "completed": 0,
+        "fallback": 0,
+        "nativeWaterCalls": 256,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "ee9dc3948e999217119cfe8a4cf9aeaae6693767354c924c1eccc67747ecd81a",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:10:47.6104920Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    {
+      "id": "portrait-final-water-on",
+      "action": "on",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": true,
+        "completed": 0,
+        "fallback": 0,
+        "nativeWaterCalls": 256,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "ee9dc3948e999217119cfe8a4cf9aeaae6693767354c924c1eccc67747ecd81a",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:10:48.9722530Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    {
+      "id": "portrait-final-water-inventory",
+      "action": "inventory",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": true,
+        "completed": 1208,
+        "fallback": 0,
+        "nativeWaterCalls": 1464,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "ee9dc3948e999217119cfe8a4cf9aeaae6693767354c924c1eccc67747ecd81a",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:10:50.4219930Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    },
+    {
+      "id": "portrait-final-water-off",
+      "action": "off",
+      "supported": true,
+      "selfTestsPassed": true,
+      "experiment": {
+        "enabled": false,
+        "completed": 2280,
+        "fallback": 0,
+        "nativeWaterCalls": 2536,
+        "nativeError": null,
+        "semantics": "Process-lifetime callback totals. Native batch replaces only vertex and normal arithmetic. Native cursor increment/wrap, mesh-info lookup and both original mesh uploads remain. False returns fall through to original managed loops without prior native writes."
+      },
+      "nativeSha256": "3b58cb09ff8586d530e152facfdd4c46074418cd6f9d0a8540a6004d799d4799",
+      "pluginSha256": "ee9dc3948e999217119cfe8a4cf9aeaae6693767354c924c1eccc67747ecd81a",
+      "gameAssemblySha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8",
+      "utc": "2026-09-25T05:10:51.9553590Z",
+      "unityVersion": "2017.2.2p2",
+      "runtimeVersion": "2.0.50727.1433",
+      "pointerBytes": 8,
+      "operatingSystem": "Mac OS X 26.6.2"
+    }
+  ],
+  "limits": [
+    "Baseline records exact constructor allocations; candidate observes new 328x280 ARGB32 textures and displayed images.",
+    "Unity allocated bytes include unrelated engine activity; they are not process RSS or graphics-driver memory.",
+    "GPU readback verifies tested image pixels, not complete UI composition, every enemy, Deimos, or co-op.",
+    "Known-enemy texture retention remains native; no general leak reclamation or total CPU/FPS claim."
+  ],
+  "unknownFiftySettledDeltaMiB": {
+    "candidate": -0.05410003662109375,
+    "control": 23.48626708984375
+  }
+}

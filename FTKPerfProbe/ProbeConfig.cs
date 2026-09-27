@@ -34,7 +34,7 @@ namespace FTKPerfProbe
             IdResolution = c.Bind("Probes", "IdResolution", true,
                 "Probe FTK_*.GetEnum / GetIntFromID string->enum resolution.");
             Overworld = c.Bind("Probes", "Overworld", true,
-                "Probe OverworldCamera.Update and overworld UI LateUpdates.");
+                "Probe OverworldCamera.Update and overworld UI Update and LateUpdate callbacks.");
             PlayMaker = c.Bind("Probes", "PlayMaker", true, "Probe PlayMakerFSM.Update.");
             Canvas = c.Bind("Probes", "Canvas", true, "Probe uGUI CanvasUpdateRegistry.PerformUpdate.");
             Photon = c.Bind("Probes", "Photon", true,

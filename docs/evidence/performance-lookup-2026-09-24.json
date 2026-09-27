@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-24",
+  "baselineCommit": "5561401f",
+  "environment": {
+    "hardware": "Apple M5 (Mac17,2)",
+    "os": "macOS 26.6.2",
+    "unity": "2017.2.2p2",
+    "runtime": "game Mono, CLR 2.0.50727.1433",
+    "process": "x86_64 game on Apple Silicon",
+    "resolution": "1280x720 windowed",
+    "isolation": "disposable copy, root-derived test save namespace",
+    "content": "no installed content packages",
+    "probeCoverage": {
+      "id": 112,
+      "overworld": 7,
+      "playmaker": 1,
+      "canvas": 1,
+      "photon": 1
+    },
+    "isolationPluginSha256": {
+      "FtkRuntimeModelTest.dll": "3a1d8b397ad85402dc3da1b53933026a0a99b3603e290ee655d0b05c6d9a2683",
+      "FtkRuntimeModelTestContent.dll": "d49ef581f42f201cde38202424308dbf26badf5a6f6ed8029cdc1550aa3435b4"
+    }
+  },
+  "method": {
+    "names": 676,
+    "passesPerTrial": 50,
+    "callsPerTrial": 33800,
+    "parity": "Every declared item name compared to Enum.Parse(ignoreCase: true) before every timed batch; aggregate checksum checked afterward.",
+    "warmup": "One all-name pass, followed by forced GC outside timing.",
+    "order": [
+      "baseline_before",
+      "candidate",
+      "baseline_after"
+    ],
+    "scenario": "Synchronous main-thread benchmark. First trial starts after plugin loading; subsequent trials run at the title screen.",
+    "identity": {
+      "game": {
+        "assembly": "Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "mvid": "c6d40985-d73e-4911-a180-fd0dbb906500",
+        "sha256": "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
+      },
+      "probe": {
+        "assembly": "FTKPerfProbe, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null",
+        "mvid": "b984fe75-3f45-4c86-b62f-1fb24cf93cdf",
+        "sha256": "e3340db537a5d3fdb595bc73283adccba678bba18e9a680fe169b4e7f5f59b21"
+      },
+      "benchmark": {
+        "assembly": "FtkLookupBenchmark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "mvid": "985cf4c9-b016-488d-9ab8-5419356f8e4e",
+        "sha256": "f79b948fa8adc2b2ec157b2face6b2a87263bcebdcc65eb1b76381f23d65e35e"
+      }
+    }
+  },
+  "groups": {
+    "baseline_before": {
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "medianMs": 1794.088,
+      "trials": [
+        {
+          "id": "current-baseline-1",
+          "utc": "2026-09-24T21:59:29.4610510Z",
+          "firstLookupMs": 1.699,
+          "warmupMs": 33.185,
+          "elapsedMs": 1794.088,
+          "gc0Delta": 3,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "9460ff605cd495650fc054482e4c6557c56d87cc66ffb9d75b95f8aaec73e38a"
+        },
+        {
+          "id": "current-baseline-2",
+          "utc": "2026-09-24T22:00:00.3309460Z",
+          "firstLookupMs": 0.065,
+          "warmupMs": 38.17,
+          "elapsedMs": 1755.559,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "c7db3bfed77cd78d9d80a7569c1ddf04d6fc9d1d47c7123bdbaf35bc70f78eb2"
+        },
+        {
+          "id": "current-baseline-3",
+          "utc": "2026-09-24T22:00:03.8271560Z",
+          "firstLookupMs": 0.011,
+          "warmupMs": 33.493,
+          "elapsedMs": 1727.713,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "511c955579a2e091b73144b07bc1cfb3da5a3fb9e221d4d6b2004af5c56dd0f4"
+        },
+        {
+          "id": "current-baseline-4",
+          "utc": "2026-09-24T22:00:07.4554650Z",
+          "firstLookupMs": 0.016,
+          "warmupMs": 34.101,
+          "elapsedMs": 1831.558,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "c723c329a02a536712124005035dce3ab41725b48aa4b8e91bdfaff45f56da15"
+        },
+        {
+          "id": "current-baseline-5",
+          "utc": "2026-09-24T22:00:11.1933360Z",
+          "firstLookupMs": 0.01,
+          "warmupMs": 42.379,
+          "elapsedMs": 1919.423,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "5cbd233fb86d7218f49dbdad1bf54ccf25d4e86f35d530c7b32b77b4e3cee3e0"
+        }
+      ]
+    },
+    "candidate": {
+      "frameworkSha256": "0a33790feaef6ef0e1ec0dfa0661722513d2eec79052c8f32651b311cb03abf8",
+      "medianMs": 3.201,
+      "trials": [
+        {
+          "id": "current-candidate-1",
+          "utc": "2026-09-24T22:00:24.0254150Z",
+          "firstLookupMs": 3.509,
+          "warmupMs": 1.038,
+          "elapsedMs": 3.361,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "9300a1e3805310084eea2ce0f3bdc8b079fb08862d351dbd1f7251a1a88aabe4"
+        },
+        {
+          "id": "current-candidate-2",
+          "utc": "2026-09-24T22:00:25.5017890Z",
+          "firstLookupMs": 0.014,
+          "warmupMs": 0.071,
+          "elapsedMs": 3.185,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "b0d62967703a89f7975bf857b49c185af911e6f4448a44fbf0593fe776097f00"
+        },
+        {
+          "id": "current-candidate-3",
+          "utc": "2026-09-24T22:00:27.0200630Z",
+          "firstLookupMs": 0.003,
+          "warmupMs": 0.072,
+          "elapsedMs": 3.311,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "1d2c105228e8057ff1e7094ec044cfe97874a160abf2b9b4382c675720249e05"
+        },
+        {
+          "id": "current-candidate-4",
+          "utc": "2026-09-24T22:00:28.5155190Z",
+          "firstLookupMs": 0.003,
+          "warmupMs": 0.073,
+          "elapsedMs": 3.16,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "c1cd29f27c50558cc0795570f3f13064b284c5ebd21b66b59787eff0e23d894c"
+        },
+        {
+          "id": "current-candidate-5",
+          "utc": "2026-09-24T22:00:32.6627000Z",
+          "firstLookupMs": 0.085,
+          "warmupMs": 0.12,
+          "elapsedMs": 3.201,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "865460c50f52a9faf8971322cdbe6029e7fc10f9fed551d66d21afbd94fe4e12"
+        }
+      ]
+    },
+    "baseline_after": {
+      "frameworkSha256": "69c00dd78bb10cc97a166bb54c18035cf3c2e130f0dac0f1cbf6159bc7f628a2",
+      "medianMs": 1735.474,
+      "trials": [
+        {
+          "id": "current-baseline-repeat-1",
+          "utc": "2026-09-24T22:00:47.7398620Z",
+          "firstLookupMs": 2.966,
+          "warmupMs": 50.858,
+          "elapsedMs": 1972.725,
+          "gc0Delta": 1,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "8345887760171331c34d0ce2a8c8148d5394db2927bb80a418d711a280002b7e"
+        },
+        {
+          "id": "current-baseline-repeat-2",
+          "utc": "2026-09-24T22:00:51.1760550Z",
+          "firstLookupMs": 0.025,
+          "warmupMs": 41.609,
+          "elapsedMs": 1849.037,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "620fe12c82264180d2e3ded7be6c1546070ccda0012037129eb3ce53f64a7f17"
+        },
+        {
+          "id": "current-baseline-repeat-3",
+          "utc": "2026-09-24T22:00:57.8253060Z",
+          "firstLookupMs": 0.06,
+          "warmupMs": 35.18,
+          "elapsedMs": 1724.67,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "25843ec6901b865fb71c01cd7396cb1cb3393c3f4d01d288b7cb57fa76c43bc6"
+        },
+        {
+          "id": "current-baseline-repeat-4",
+          "utc": "2026-09-24T22:01:00.9441230Z",
+          "firstLookupMs": 0.016,
+          "warmupMs": 39.198,
+          "elapsedMs": 1725.204,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "1cf3552662337ffdef390ab6e3bbbbfb39881949880d8cd732427cc7b0ab01fe"
+        },
+        {
+          "id": "current-baseline-repeat-5",
+          "utc": "2026-09-24T22:01:04.4461930Z",
+          "firstLookupMs": 0.007,
+          "warmupMs": 33.231,
+          "elapsedMs": 1735.474,
+          "gc0Delta": 0,
+          "checksum": 1286010500,
+          "sourceRecordSha256": "e402bbb0b74798e12edeefa050328c2e248e3efb8f1138c09ac3894fce4259a3"
+        }
+      ]
+    }
+  },
+  "exploration": {
+    "lazyCandidateFirstLookupMs": 53.57,
+    "finalFirstLookupMs": 3.509,
+    "resolution": "Cache construction moved to framework Awake before patch installation; startup cost moved, not eliminated.",
+    "initialInvalidInputTrial": "Discarded from performance comparisons because one exploratory input was not a declared item name.",
+    "idleOverworld": "Observed zero ID-resolution calls in two exploratory stationary captures; no frame-rate benefit established."
+  },
+  "limits": [
+    "Canonical native item lookup microbenchmark only; no overall FPS or loading-time claim.",
+    "Host scheduling noise is visible. All 15 current-base completed trials and earlier-base exploratory timing arrays are retained.",
+    "No uninstrumented benchmark comparison; probe and benchmark binaries identical across reported groups.",
+    "No co-op, Windows/Linux, long-session save compatibility, or third-party GetEnum patch compatibility claim.",
+    "Initial lazy-candidate measurements are exploratory, not final-binary acceptance."
+  ],
+  "earlierBaseExploration": {
+    "baseCommit": "8f68c548",
+    "groups": {
+      "baseline_before": {
+        "frameworkSha256": "3ef4273d3d3426c602694383192819970c8dd5d90d307e987032f9ea6748e224",
+        "elapsedMs": [
+          1868.388,
+          2363.488,
+          2055.473,
+          2084.585,
+          2230.745
+        ]
+      },
+      "candidate": {
+        "frameworkSha256": "08d3fa433da31ca70065e60551a6c2580b7f1ef5238882380784f39c5994c6aa",
+        "elapsedMs": [
+          3.731,
+          3.798,
+          3.476,
+          3.845,
+          3.808
+        ]
+      },
+      "baseline_after": {
+        "frameworkSha256": "3ef4273d3d3426c602694383192819970c8dd5d90d307e987032f9ea6748e224",
+        "elapsedMs": [
+          2098.918,
+          2154.447,
+          2163.765,
+          2202.297,
+          8309.583
+        ]
+      }
+    },
+    "note": "Superseded by the current-base comparison below; retained as exploratory measurements."
+  },
+  "verification": {
+    "frameworkReleaseBuild": "passed, seven existing CS0649 warnings",
+    "probePureTests": 28,
+    "lookupChecks": 115,
+    "nativeInputSmokeChecks": 60,
+    "selfTestPasses": [
+      "behavior-primitives",
+      "questlogic-instantiate",
+      "behavior-dll-guard",
+      "AddPassive registry"
+    ],
+    "smokeFrameworkSha256": "0a33790feaef6ef0e1ec0dfa0661722513d2eec79052c8f32651b311cb03abf8",
+    "singlePlayerSession": true,
+    "partyCount": 3,
+    "phaseAtObservation": "modal",
+    "runtimeErrors": "Only the two expected AddPassive rejection errors emitted by the enabled development self-tests.",
+    "scope": "Native UI adventure creation and three-hero overworld observation. No combat or save/reload claim.",
+    "ownedGameStopped": true,
+    "temporaryDiagnosticsRestored": true
+  }
+}

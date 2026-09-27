@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>FtkNativeWater</AssemblyName>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TestManagedDir>$(TestGameRoot)/FTK.app/Contents/Resources/Data/Managed</TestManagedDir>
+  </PropertyGroup>
+  <Target Name="RequireIsolatedGame" BeforeTargets="ResolveReferences">
+    <Error Condition="'$(TestGameRoot)' == '' or !Exists('$(TestManagedDir)/Assembly-CSharp.dll')" Text="Pass TestGameRoot pointing to an isolated macOS game copy under scratch." />
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="0Harmony" Private="false"><HintPath>$(TestGameRoot)/BepInEx/core/0Harmony.dll</HintPath></Reference>
+    <Reference Include="BepInEx" Private="false"><HintPath>$(TestGameRoot)/BepInEx/core/BepInEx.dll</HintPath></Reference>
+    <Reference Include="Assembly-CSharp" Private="false"><HintPath>$(TestManagedDir)/Assembly-CSharp.dll</HintPath></Reference>
+    <Reference Include="Newtonsoft.Json" Private="false"><HintPath>$(TestManagedDir)/Newtonsoft.Json.dll</HintPath></Reference>
+    <Reference Include="$(TestManagedDir)/UnityEngine*.dll" Private="false" />
+  </ItemGroup>
+</Project>

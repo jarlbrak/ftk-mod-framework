@@ -109,7 +109,8 @@ namespace FTKModFramework.Core
                 string path = CustomModelLoader.ResolveModelPath(file);
                 if (!File.Exists(path)) throw new IOException("not found at '" + path + "'");
                 texture = new Texture2D(2, 2);
-                if (!texture.LoadImage(File.ReadAllBytes(path))) throw new InvalidDataException("PNG decode returned false");
+                // Owned PNGs are sampled by materials only; release the CPU pixel copy after upload.
+                if (!texture.LoadImage(File.ReadAllBytes(path), true)) throw new InvalidDataException("PNG decode returned false");
                 Texture2D prepared = texture;
                 // Materials owns the allocation on entry, including its failure paths.
                 texture = null;
