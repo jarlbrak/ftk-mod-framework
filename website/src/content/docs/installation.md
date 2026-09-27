@@ -27,7 +27,7 @@ Framework 1.4.0 includes the **Skyharbor** menu scene: a fortress airship dock w
 
 At the title screen, open **Mods → Discover**. Select a listing, read its requirements, review the proposed changes, and confirm installation. Follow the menu's activation guidance. Normally, changes take effect on the **next game launch**. Restart before starting your adventure.
 
-Paladin 1.4.0 needs framework 1.2.1 or a compatible later 1.x release. Thief 1.0.0 adds a class and equipment. Possum 1.0.0 changes appearance. Lore Store Unlocked 1.0.0 needs framework 1.3.0 and unlocks the Lore Store while installed. All four install separately from the framework.
+Paladin 1.4.0 needs framework 1.2.1 or a compatible later 1.x release. Thief 1.0.0 adds a class and equipment. Possum 1.0.0 changes appearance. Lore Store Unlocked 1.0.1 needs framework 1.3.0 and unlocks the Lore Store while installed. All four install separately from the framework.
 
 ## Keep your adventure consistent
 

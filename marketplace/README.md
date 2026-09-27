@@ -1,8 +1,8 @@
 # Curated marketplace catalog
 
-[`catalog.json`](catalog.json) is the production discovery source. Paladin 1.2.0
-is its current published package. The archive and banner are immutable release
-assets. Integration fixtures and fictional UI previews do not belong in this
+[`catalog.json`](catalog.json) is the production discovery source. It lists
+Paladin 1.4.0, Thief 1.0.0, Possum 1.0.0 and Lore Store Unlocked 1.0.1.
+Each archive and banner is an immutable release asset. Integration fixtures and fictional UI previews do not belong in this
 catalog.
 
 Players should use the [Mods marketplace guide](../docs/MARKETPLACE.md).
@@ -22,7 +22,7 @@ A descriptor records identity, author, license, version, description,
 requirements, compatibility, dependencies, links and preview images. Its
 artifact fields record the exact archive URL, SHA-256, sizes and file count.
 The stable manifest identity and `frameworkVersion` must match the descriptor.
-For Paladin 1.2.0, the supported range is `>=1.0.3 <2.0.0`.
+For Paladin 1.4.0, the supported range is `>=1.2.1 <2.0.0`.
 [Mod versioning](../docs/MOD-VERSIONING.md) defines the range rule.
 
 Archives contain a root `manifest.json`, content JSON and approved assets.
