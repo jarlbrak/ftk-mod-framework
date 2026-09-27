@@ -17,6 +17,8 @@ on top of it. These descriptors exist today:
   [Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1).
 - **Poison turns left** (`information.poison-turns`, Spec #243 FR-3): the poison status tooltip
   counts the end turns left for characters this client owns.
+- **Sell price in item details** (`information.sell-price`, Spec #243 FR-4): at a POI that buys
+  items, an inventory item card shows the price the Sell button would offer.
 
 Live verification status is tracked on #233, #242 and #243.
 
@@ -268,5 +270,5 @@ dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c R
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
 hooks, faults, Skip intro, the quest dungeon name decision, XP within the level, Poison turns
-left, the probe and the tab. `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
+left, Sell price in item details, the probe and the tab. `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 Both run in CI.

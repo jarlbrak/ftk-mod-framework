@@ -66,11 +66,12 @@ internal static class Program
         QuestDungeonName();
         XpInLevel();
         PoisonTurns();
+        SellPrice();
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, xp in level, poison turns, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, xp in level, poison turns, sell price, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -668,6 +669,43 @@ internal static class Program
             "faulted: the vanilla text passes through");
         Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, TweakRegistry.InvalidHandle, cache, vanilla, true, true, false, 2, 1), vanilla),
             "an unregistered handle leaves vanilla untouched");
+    }
+
+    // Spec #243 FR-4: the sell price descriptor, text and display gate.
+    private static void SellPrice()
+    {
+        TweakDescriptor d = FrameworkTweaks.SellPriceDescriptor;
+        Check(d.Id == "information.sell-price" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
+            "Sell price in item details is a Local Information tweak with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "Sell price in item details is off by default and has no balance note");
+        Check(d.Evidence.Contains("uiItemMenu.GetSellItemValue") && d.Evidence.Contains("uiInventoryItemDisplay.Show")
+            && d.Evidence.Contains("CanSellItems"), "the evidence names the Sell button's method, the hook and the gate");
+
+        Check(SellPriceText.Line(12) == "Sells for 12", "the price line");
+        Check(SellPriceText.Append("UNCOMMON", 12) == "UNCOMMON  (Sells for 12)", "the price follows the rarity line");
+        Check(SellPriceText.Append("", 3) == "Sells for 3" && SellPriceText.Append(null, 3) == "Sells for 3",
+            "an empty rarity line shows the price alone");
+
+        Check(SellPriceText.Shown(true, true, true, true), "an inventory card at a POI that buys shows the price");
+        Check(!SellPriceText.Shown(false, true, true, true), "shop, reward, vote and lore cards show nothing");
+        Check(!SellPriceText.Shown(true, false, true, true), "no POI, or a POI that does not buy, shows nothing");
+        Check(!SellPriceText.Shown(true, true, false, true), "quest and unsellable items show nothing");
+        Check(!SellPriceText.Shown(true, true, true, false), "no pricing POI shows nothing, so GetCost is never reached");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.SellPrice;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "Sell price in item details registers cleanly");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "before initialization nothing is shown");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Sell price in item details off");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "off: nothing is shown");
+        Check(r.Toggle(handle) && store.Values["information.sell-price"] == TweakPreference.On, "turning it on stores On");
+        Check(FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "on: an inventory card at a shop shows the price");
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, false, true, true), "on: away from a shop nothing is shown");
+        r.Fault(handle, new InvalidOperationException("card"));
+        Check(!FrameworkTweaks.SellPriceShown(r, handle, true, true, true, true), "faulted: nothing is shown");
+        Check(!FrameworkTweaks.SellPriceShown(r, TweakRegistry.InvalidHandle, true, true, true, true), "an unregistered handle shows nothing");
     }
 
     /// <summary>The counter steps of CharacterStats.EndTurnActionSequence for a living character

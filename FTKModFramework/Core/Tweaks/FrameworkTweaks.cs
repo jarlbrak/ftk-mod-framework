@@ -54,6 +54,19 @@ namespace FTKModFramework.Core
             + "(uiPlayerMainHud.m_Cow) and inventory (uiPlayerInventory.m_InventoryOwner) icons and "
             + "only extends the returned string, on this client, for display.");
 
+        internal static readonly TweakDescriptor SellPriceDescriptor = new TweakDescriptor(
+            "information.sell-price", TweakCategory.Information, TweakScope.Local,
+            "Sell price in item details",
+            "At a shop, show what each item in your inventory sells for on its item card.",
+            "uiItemMenu.ShowPlayerInventory adds \"Sell (N)\" only when m_Cow.m_HexLand.m_POI is non-null, "
+            + "CanSellItems() and the item is neither quest rarity nor in GameLogic.m_CantSellOrDiscardItems; "
+            + "N is uiItemMenu.GetSellItemValue: FTK_weaponStats2DB or FTK_itemsDB GetSellValue(m_Cow, "
+            + "m_Cow.GetPOI()), and uiPopupMenu uses the same gate and value. GetSellValue calls GetCost, "
+            + "which dereferences the POI. uiInventoryItemDisplay.Show receives the card's real mode and "
+            + "character (uiPlayerInventory.SelectItemIcon passes Mode.Inventory and m_InventoryOwner) but "
+            + "hands uiItemDetail.Show Mode.ItemDisplay, so the postfix is on the former. It only extends "
+            + "uiItemDetail.m_ItemRarityDisplay, which uiItemDetail.Show rewrites on every call, on this client.");
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -70,6 +83,7 @@ namespace FTKModFramework.Core
         internal static int QuestDungeonName { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PoisonTurns { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int SellPrice { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -78,6 +92,7 @@ namespace FTKModFramework.Core
             QuestDungeonName = registry.Register(QuestDungeonNameDescriptor);
             XpInLevel = registry.Register(XpInLevelDescriptor);
             PoisonTurns = registry.Register(PoisonTurnsDescriptor);
+            SellPrice = registry.Register(SellPriceDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
@@ -137,6 +152,15 @@ namespace FTKModFramework.Core
             if (!registry.IsOn(handle)) return vanillaText;
             if (!owned || !alive || waitingForRespawn || level <= 0) return vanillaText;
             return text.Append(vanillaText, PoisonTurnsText.Remaining(level, counter));
+        }
+
+        /// <summary>Whether one item card gets a sell price. Off, faulted or uninitialized never shows
+        /// one; on shows it only where the Sell button's own gate would offer the sale.</summary>
+        internal static bool SellPriceShown(TweakRegistry registry, int handle, bool inventoryView, bool shopCanSell,
+            bool sellableItem, bool hasPricePoi)
+        {
+            if (!registry.IsOn(handle)) return false;
+            return SellPriceText.Shown(inventoryView, shopCanSell, sellableItem, hasPricePoi);
         }
     }
 }

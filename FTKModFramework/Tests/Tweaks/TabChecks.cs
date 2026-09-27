@@ -99,6 +99,8 @@ internal static class TabChecks
             "a fresh install shows XP within the level under Information, off by default");
         ShippedRow(registry, rows, headings, "information.poison-turns", "Poison turns left: Off (default)",
             "a fresh install shows Poison turns left under Information, off by default");
+        ShippedRow(registry, rows, headings, "information.sell-price", "Sell price in item details: Off (default)",
+            "a fresh install shows Sell price in item details under Information, off by default");
         ShippedRow(registry, rows, headings, "convenience.skip-intro", "Skip intro: Off (default)",
             "a fresh install shows Skip intro under Convenience, off by default");
     }
