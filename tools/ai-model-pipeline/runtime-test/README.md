@@ -70,8 +70,8 @@ plugin is `runtime-test-content/bin/Release/net35/FtkRuntimeModelTestContent.dll
 Select whichever framework, helper, or content binaries changed, stop the
 isolated game, and use `../deploy_isolated_test_binaries.py` for a dry review
 followed by its explicit `--execute` replacement. It creates a
-hash-pinned backup under that exact isolated copy and refuses a running game or
-symlinked path. Do not manually replace a helper in a live process.
+hash-pinned backup under that exact isolated copy and refuses a symlinked path or
+any running process launched from inside the copy, such as a renamed `PaladinGear.app`. Do not manually replace a helper in a live process.
 
 Launch the copy with `FTK_MODEL_TEST=1`, `FTK_MODEL_TEST_ROOT` equal to its exact
 absolute directory, `FTK_AGENT_BRIDGE=1`, and a dedicated

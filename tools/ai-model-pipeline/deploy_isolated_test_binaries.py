@@ -2,7 +2,8 @@
 """Review or reversibly deploy test-plugin binaries into one isolated FTK copy.
 
 The source binaries must be ordinary files inside this repository. Deployment
-refuses a running isolated game, saves the replaced binaries under that game's
+refuses while any process runs an executable from inside the isolated copy,
+whatever its app bundle is named, saves the replaced binaries under that game's
 ``deployment-backups`` directory, pins every byte hash, and never reads game
 logs. Without ``--execute`` it performs the same input checks and reports the
 exact replacement plan without modifying the game copy.
@@ -81,11 +82,52 @@ def isolated_game(repo: Path, value: Path) -> Path:
     return game
 
 
+def running_processes() -> list[tuple[int, str]]:
+    """Return (pid, executable) rows. On macOS ``comm`` is the launched executable path."""
+    rows: list[tuple[int, str]] = []
+    for line in subprocess.check_output(["ps", "-axo", "pid=,comm="], text=True).splitlines():
+        fields = line.strip().split(None, 1)
+        if len(fields) == 2 and fields[0].isdigit():
+            rows.append((int(fields[0]), fields[1]))
+    return rows
+
+
+def process_cwd(pid: int) -> Path | None:
+    completed = subprocess.run(
+        ["lsof", "-a", "-p", str(pid), "-d", "cwd", "-Fn"], capture_output=True, text=True
+    )
+    for line in completed.stdout.splitlines():
+        if line.startswith("n/"):
+            return Path(line[1:])
+    return None
+
+
+def processes_inside(game: Path) -> list[tuple[int, str]]:
+    """Find processes whose executable lives in the copy, whatever its app bundle is named."""
+    root = game.resolve()
+    found: list[tuple[int, str]] = []
+    for pid, executable in running_processes():
+        path = Path(executable)
+        if not path.is_absolute():
+            # A bare name was found through PATH; a relative path depends on the launch directory.
+            if "/" not in executable:
+                continue
+            cwd = process_cwd(pid)
+            if cwd is None:
+                continue
+            path = cwd / path
+        if path.resolve().is_relative_to(root):
+            found.append((pid, str(path)))
+    return found
+
+
 def assert_game_stopped(game: Path) -> None:
-    executable = str(game / "FTK.app/Contents/MacOS/FTK")
-    commands = subprocess.check_output(["ps", "-axo", "command="], text=True).splitlines()
-    if any(command == executable or command.startswith(executable + " ") for command in commands):
-        raise AssertionError("Isolated FTK is running; no files were changed.")
+    running = processes_inside(game)
+    if running:
+        raise AssertionError(
+            "Isolated FTK is running from " + str(game) + "; no files were changed: "
+            + ", ".join("PID " + str(pid) + " " + path for pid, path in running)
+        )
 
 
 def pin(path: Path) -> dict[str, object]:
