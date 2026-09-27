@@ -637,6 +637,7 @@ internal static class Program
         Check(ReferenceEquals(text.Append(vanilla, 0), vanilla) && text.Append(null, 2) == null && text.Append("", 2) == "",
             "nothing to count, or no vanilla text, leaves vanilla untouched");
         string warm = text.Append(vanilla, 5);
+        for (int i = 0; i < 1000; i++) warm = text.Append(vanilla, 5);
         long before = GC.GetAllocatedBytesForCurrentThread();
         for (int i = 0; i < 10000; i++) warm = text.Append(vanilla, 5);
         long allocated = GC.GetAllocatedBytesForCurrentThread() - before;
