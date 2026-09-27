@@ -63,8 +63,11 @@ internal static class Program
         NonAllocating();
         Facade();
         SkipIntro();
+        LifecycleDecisions();
+        LifecycleHooks();
+        SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -449,5 +452,205 @@ internal static class Program
         Check(restarted.Initialize(store) && FrameworkTweaks.SkipIntroAnyButton(restarted, FrameworkTweaks.SkipIntro, false),
             "the stored On applies from the first call after a restart");
         Check(!FrameworkTweaks.SkipIntroAnyButton(restarted, TweakRegistry.InvalidHandle, false), "an unregistered handle leaves vanilla untouched");
+    }
+
+    private static List<string> Warnings = new List<string>(), Infos = new List<string>(), Errors = new List<string>();
+
+    private static TweakSessionLifecycle NewLifecycle(TweakRegistry r, Func<int> probe)
+    {
+        Warnings = new List<string>();
+        Infos = new List<string>();
+        Errors = new List<string>();
+        return new TweakSessionLifecycle(r, Warnings.Add, Infos.Add, Errors.Add, probe);
+    }
+
+    private static int Count(List<string> lines, string fragment)
+    {
+        int n = 0;
+        foreach (string line in lines) if (line.Contains(fragment)) n++;
+        return n;
+    }
+
+    // FR-3 (work item 2b): the pure decisions behind the lifecycle hooks.
+    private static void LifecycleDecisions()
+    {
+        Check(TweakSessionLifecycle.ModeFromGame(0) == TweakSessionMode.SinglePlayer, "GameMode 0 is SinglePlayer");
+        Check(TweakSessionLifecycle.ModeFromGame(1) == TweakSessionMode.Multiplayer, "GameMode 1 is Multiplayer");
+        Check(TweakSessionLifecycle.ModeFromGame(2) == TweakSessionMode.LocalMultiplayer, "GameMode 2 is LocalMultiplayer");
+        foreach (int unknown in new[] { -1, 3, 9, int.MaxValue, int.MinValue })
+            Check(TweakSessionLifecycle.ModeFromGame(unknown) == TweakSessionMode.Multiplayer, "an unknown GameMode fails closed as Multiplayer: " + unknown);
+        foreach (TweakSessionMode mode in new[] { TweakSessionMode.SinglePlayer, TweakSessionMode.Multiplayer, TweakSessionMode.LocalMultiplayer })
+            Check(TweakSessionLifecycle.ModeFromGame((int)mode) == mode, "the mirror enum round-trips " + mode);
+
+        var sp = TweakSessionMode.SinglePlayer;
+        var mp = TweakSessionMode.Multiplayer;
+        Check(!TweakSessionLifecycle.NeedsCaptureAtLock(TweakSessionState.Captured, sp, sp), "a capture for the run's mode is kept");
+        Check(TweakSessionLifecycle.NeedsCaptureAtLock(TweakSessionState.Captured, sp, mp), "a capture for another mode is replaced");
+        Check(TweakSessionLifecycle.NeedsCaptureAtLock(TweakSessionState.None, null, mp), "a client that never captured captures at run start");
+        Check(TweakSessionLifecycle.NeedsCaptureAtLock(TweakSessionState.None, null, sp), "a capture lost to a clear is redone at run start");
+        Check(TweakSessionLifecycle.NeedsCaptureAtLock(TweakSessionState.Locked, sp, sp), "a stale locked set is never reused");
+
+        var triggers = new[] { TweakClearTrigger.SceneReload, TweakClearTrigger.RunEnd, TweakClearTrigger.LeftRoom,
+            TweakClearTrigger.Disconnected, TweakClearTrigger.JoinRoomFailed };
+        foreach (TweakClearTrigger trigger in triggers)
+            Check(!TweakSessionLifecycle.WarnOnClear(false, trigger), "clearing an unstarted run never warns: " + trigger);
+        Check(!TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.SceneReload), "a scene reload ends the run: no warning");
+        Check(!TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.RunEnd), "the run-end fade ends the run: no warning");
+        Check(TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.LeftRoom), "leaving the room mid-run warns");
+        Check(TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.Disconnected), "a disconnect mid-run warns");
+        Check(TweakSessionLifecycle.WarnOnClear(true, TweakClearTrigger.JoinRoomFailed), "a join failure mid-run warns");
+    }
+
+    // FR-3 (work item 2b): capture, lock and clear as the hooks drive them, without the probe.
+    private static void LifecycleHooks()
+    {
+        var store = new MemoryStore();
+        int on, off, local;
+        TweakRegistry r = SessionRegistry(store, out on, out off, out local);
+        TweakSessionLifecycle l = NewLifecycle(r, () => TweakRegistry.InvalidHandle);
+
+        // Solo: capture at room creation, lock at run start, clear at the run-end fade, then the
+        // Photon callbacks and the scene reload that follow find nothing to clear.
+        Check(l.Capture(0, "GameLogic.CreateOnlineRoom") && r.IsOn(on), "solo capture applies preferences");
+        Check(l.Lock(0, "uiStartGame.EnterFahrulRPC") && r.SessionState == TweakSessionState.Locked && r.IsOn(on), "solo lock keeps the set");
+        Check(l.Clear(TweakClearTrigger.RunEnd, "GameLogic.RestartFadeOutFinish") && !r.IsOn(on), "the run-end fade clears a locked run");
+        Check(!l.Clear(TweakClearTrigger.Disconnected, "uiStartGame.OnDisconnectedFromPhoton"), "the disconnect after the fade has nothing to clear");
+        Check(!l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton"), "the scene reload has nothing to clear");
+        Check(Warnings.Count == 0 && Infos.Count == 0 && Errors.Count == 0, "a normal run logs nothing without the probe");
+
+        // Local multiplayer in an offline room.
+        Check(l.Capture(2, "GameLogic.CreateOfflineRoom") && r.IsOn(on) && r.SessionMode == TweakSessionMode.LocalMultiplayer, "local play applies preferences");
+        Check(l.Lock(2, "uiStartGame.EnterFahrulRPC") && r.IsOn(on), "local play locks");
+        Check(l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton") && Warnings.Count == 0, "a scene reload ends a locked run without a warning");
+
+        // Online co-op host: captured when GameConfig creates the room; everything Session is off.
+        Check(l.Capture(1, "StartGameFE.GameConfig.CreateOnlineRoom") && !r.IsOn(on) && r.SessionSource == TweakRegistry.PendingSource, "the co-op host captures Multiplayer");
+        Check(l.Lock(1, "uiStartGame.EnterFahrulRPC") && !r.IsOn(on) && !r.IsOn(off) && r.IsOn(local), "the co-op host locks with Session off, Local unaffected");
+        l.Clear(TweakClearTrigger.RunEnd, "GameLogic.RestartFadeOutFinish");
+
+        // Co-op client: no capture hook runs; the lock captures Multiplayer itself.
+        Check(r.SessionState == TweakSessionState.None && l.Lock(1, "uiStartGame.EnterFahrulRPC"), "a client with no capture still locks");
+        Check(!r.IsOn(on) && r.SessionMode == TweakSessionMode.Multiplayer && r.SessionState == TweakSessionState.Locked, "the client's Session tweaks are off");
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+
+        // A solo setup abandoned without a clear, then joining co-op: the stale capture is replaced.
+        l.Capture(0, "GameLogic.CreateOnlineRoom");
+        Check(r.IsOn(on) && l.Lock(1, "uiStartGame.EnterFahrulRPC") && !r.IsOn(on) && r.SessionMode == TweakSessionMode.Multiplayer,
+            "a capture for solo is not carried into a co-op run");
+        Check(Warnings.Count == 0, "a mode mismatch before the lock is corrected silently");
+
+        // A locked solo run that was never cleared, then a co-op run starts: one warning, then off.
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+        l.Capture(0, "GameLogic.CreateOfflineRoom");
+        l.Lock(0, "uiStartGame.EnterFahrulRPC");
+        Check(r.IsOn(on) && l.Lock(1, "uiStartGame.EnterFahrulRPC") && !r.IsOn(on) && r.SessionState == TweakSessionState.Locked,
+            "a stale locked solo set never reaches a co-op run");
+        Check(Warnings.Count == 1 && Warnings[0].Contains("never cleared"), "the stale lock is warned about once");
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+
+        // A disconnect callback between setup and start clears the capture; the lock redoes it.
+        Warnings.Clear();
+        l.Capture(0, "GameLogic.CreateOfflineRoom");
+        Check(!l.Clear(TweakClearTrigger.Disconnected, "uiStartGame.OnDisconnectedFromPhoton") && Warnings.Count == 0, "clearing a setup capture never warns");
+        Check(l.Lock(0, "uiStartGame.EnterFahrulRPC") && r.IsOn(on) && r.SessionMode == TweakSessionMode.SinglePlayer, "the lock recaptures the solo set");
+
+        // A Photon callback clearing a locked run that is still on screen warns once.
+        Check(l.Clear(TweakClearTrigger.LeftRoom, "uiStartGame.OnLeftRoom") && !r.IsOn(on), "a mid-run clear still clears");
+        Check(Warnings.Count == 1 && Warnings[0].Contains("uiStartGame.OnLeftRoom") && Warnings[0].Contains("may still be going"), "a mid-run clear logs one warning");
+        Check(!l.Clear(TweakClearTrigger.Disconnected, "uiStartGame.OnDisconnectedFromPhoton") && Warnings.Count == 1, "the callbacks after it do not warn again");
+
+        // Uninitialized registry: nothing captures, locks or logs.
+        TweakRegistry cold = NewRegistry();
+        int coldHandle = cold.Register(Session("session.cold"));
+        TweakSessionLifecycle coldLife = NewLifecycle(cold, () => coldHandle);
+        Check(!coldLife.Capture(0, "x") && !coldLife.Lock(0, "x") && !coldLife.Clear(TweakClearTrigger.LeftRoom, "x"), "an uninitialized registry ignores the hooks");
+        Check(Warnings.Count == 0 && Infos.Count == 0 && Errors.Count == 0 && !cold.IsOn(coldHandle), "and logs nothing");
+
+        Check(Tweaks.Session != null, "the facade exposes the lifecycle");
+    }
+
+    // FR-6: the self-test Session probe registers only for self-tests and traces each step.
+    private static void SessionProbe()
+    {
+        TweakDescriptor d = FrameworkTweaks.SessionProbeDescriptor;
+        Check(d.Id == "probe.session-lifecycle" && d.Scope == TweakScope.Session && d.Category == TweakCategory.Convenience,
+            "the probe is a Session Convenience descriptor with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "the probe is off by default");
+        Check(d.Evidence.Contains("EnterFahrulRPC") && d.Evidence.Contains("InitializeSingleton"), "the probe names its hooks");
+
+        TweakRegistry players = NewRegistry();
+        FrameworkTweaks.RegisterAll(players);
+        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle && players.Count == 1, "without self-tests the probe is not registered");
+        FrameworkTweaks.RegisterAll(NewRegistry(), false);
+        Check(FrameworkTweaks.SessionProbe == TweakRegistry.InvalidHandle, "an explicit false leaves it out too");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r, true);
+        int probe = FrameworkTweaks.SessionProbe;
+        Check(probe != TweakRegistry.InvalidHandle && r.Count == 2 && Logs.Count == 0, "self-tests register the probe cleanly");
+        store.Values["probe.session-lifecycle"] = TweakPreference.On;
+        r.Initialize(store);
+        TweakSessionLifecycle l = NewLifecycle(r, () => FrameworkTweaks.SessionProbe);
+        Check(!r.IsOn(probe), "the probe is off outside a run even when chosen");
+
+        string trace = TweakSessionLifecycle.ProbeTrace;
+        l.Capture(0, "GameLogic.CreateOnlineRoom");
+        Check(Infos.Count == 1 && Infos[0].StartsWith(trace + " capture via=GameLogic.CreateOnlineRoom", StringComparison.Ordinal)
+            && Infos[0].Contains("mode=SinglePlayer") && Infos[0].Contains("source=preferences") && Infos[0].Contains("probe=on"),
+            "capture is traced with mode, source and the probe value: " + (Infos.Count > 0 ? Infos[0] : "<none>"));
+        l.Lock(0, "uiStartGame.EnterFahrulRPC");
+        Check(Count(Infos, trace + " lock via=uiStartGame.EnterFahrulRPC") == 1, "lock is traced");
+        Check(Count(Infos, "SELF-TEST PASS [session-lifecycle]: lock mode=SinglePlayer source=preferences probe=on expected=on") == 1,
+            "solo lock passes with the probe on");
+        l.Clear(TweakClearTrigger.RunEnd, "GameLogic.RestartFadeOutFinish");
+        Check(Count(Infos, trace + " clear via=GameLogic.RestartFadeOutFinish locked=true") == 1, "clear is traced");
+        Check(Count(Infos, "SELF-TEST PASS [session-lifecycle]: clear via GameLogic.RestartFadeOutFinish") == 1 && Errors.Count == 0,
+            "the run-end clear passes");
+        int before = Infos.Count;
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+        Check(Infos.Count == before, "a clear with nothing to clear is not traced");
+
+        l.Capture(0, "GameLogic.CreateOfflineRoom");
+        l.Lock(0, "uiStartGame.EnterFahrulRPC");
+        Check(Count(Infos, "capture via=GameLogic.CreateOfflineRoom") == 1 && Count(Infos, "SELF-TEST PASS [session-lifecycle]: lock mode=SinglePlayer") == 2,
+            "solo offline traces and passes");
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+
+        l.Capture(2, "GameLogic.CreateOnlineRoom");
+        l.Lock(2, "uiStartGame.EnterFahrulRPC");
+        Check(Count(Infos, "SELF-TEST PASS [session-lifecycle]: lock mode=LocalMultiplayer source=preferences probe=on expected=on") == 1,
+            "local multiplayer passes with the probe on");
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+
+        l.Capture(1, "StartGameFE.GameConfig.CreateOnlineRoom");
+        string last = Infos[Infos.Count - 1];
+        Check(last.Contains("mode=Multiplayer") && last.Contains("source=pending") && last.Contains("probe=off"),
+            "the co-op capture shows the probe resolving off");
+        l.Lock(1, "uiStartGame.EnterFahrulRPC");
+        Check(Count(Infos, "SELF-TEST PASS [session-lifecycle]: lock mode=Multiplayer source=pending probe=off expected=off") == 1,
+            "online co-op passes with the probe off");
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+
+        l.Lock(1, "uiStartGame.EnterFahrulRPC");
+        Check(Count(Infos, "capture via=uiStartGame.EnterFahrulRPC (at run start)") == 1
+            && Count(Infos, "SELF-TEST PASS [session-lifecycle]: lock mode=Multiplayer source=pending probe=off expected=off") == 2,
+            "a co-op client traces its run-start capture and passes off");
+        Check(Errors.Count == 0 && Warnings.Count == 0, "the four modes log no failure or warning");
+
+        l.Clear(TweakClearTrigger.SceneReload, "uiStartGame.InitializeSingleton");
+        l.Capture(0, "GameLogic.CreateOnlineRoom");
+        l.Lock(0, "uiStartGame.EnterFahrulRPC");
+        l.Clear(TweakClearTrigger.Disconnected, "uiStartGame.OnDisconnectedFromPhoton");
+        Check(Warnings.Count == 1 && Errors.Count == 1
+            && Errors[0].StartsWith("SELF-TEST FAIL [session-lifecycle]: clear via uiStartGame.OnDisconnectedFromPhoton", StringComparison.Ordinal),
+            "a mid-run clear is a probe failure as well as a warning");
+
+        Errors.Clear();
+        r.Fault(probe, new InvalidOperationException("probe"));
+        l.Capture(0, "GameLogic.CreateOnlineRoom");
+        l.Lock(0, "uiStartGame.EnterFahrulRPC");
+        Check(!r.IsOn(probe) && Errors.Count == 0 && Count(Infos, "lock mode=SinglePlayer source=preferences probe=off expected=off") == 1,
+            "a faulted probe is left out of the next run and the check expects that");
     }
 }

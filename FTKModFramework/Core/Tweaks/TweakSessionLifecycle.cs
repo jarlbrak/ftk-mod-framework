@@ -1,0 +1,169 @@
+using System;
+
+namespace FTKModFramework.Core
+{
+    /// <summary>What emptied the Session set. Scene reload and run end mean the run is over; the
+    /// Photon callbacks can also fire while a run is still on screen.</summary>
+    internal enum TweakClearTrigger
+    {
+        SceneReload,
+        RunEnd,
+        LeftRoom,
+        Disconnected,
+        JoinRoomFailed,
+    }
+
+    /// <summary>Drives the registry's capture, lock and clear from game lifecycle hooks and, when the
+    /// self-test Session probe is registered, traces each step. Unity-free: the Harmony patches pass
+    /// the raw GameLogic.GameMode value and a label naming the hook.</summary>
+    internal sealed class TweakSessionLifecycle
+    {
+        internal const string ProbeTrace = "SESSION-PROBE [session-lifecycle]";
+        internal const string ProbeTest = "[session-lifecycle]";
+
+        private readonly TweakRegistry _registry;
+        private readonly Action<string> _warn;
+        private readonly Action<string> _info;
+        private readonly Action<string> _error;
+        private readonly Func<int> _probe;
+
+        internal TweakSessionLifecycle(TweakRegistry registry, Action<string> warn, Action<string> info,
+            Action<string> error, Func<int> probeHandle)
+        {
+            _registry = registry;
+            _warn = warn;
+            _info = info;
+            _error = error;
+            _probe = probeHandle;
+        }
+
+        /// <summary>GameLogic.GameMode is SinglePlayer = 0, Multiplayer = 1, LocalMultiplayer = 2.
+        /// Any other value, including -1 for "GameLogic is missing", fails closed as Multiplayer so
+        /// every Session tweak stays off.</summary>
+        internal static TweakSessionMode ModeFromGame(int gameMode)
+        {
+            switch (gameMode)
+            {
+                case 0: return TweakSessionMode.SinglePlayer;
+                case 2: return TweakSessionMode.LocalMultiplayer;
+                default: return TweakSessionMode.Multiplayer;
+            }
+        }
+
+        /// <summary>At run start the captured set is kept only if it was captured for the mode the run
+        /// actually has. A co-op client never passes a capture hook, and a disconnect callback can land
+        /// between setup and start, so anything else is recaptured from the current mode.</summary>
+        internal static bool NeedsCaptureAtLock(TweakSessionState state, TweakSessionMode? captured, TweakSessionMode current)
+        {
+            return state != TweakSessionState.Captured || captured != current;
+        }
+
+        /// <summary>A locked run cleared by a Photon callback may still be on screen, which points at a
+        /// lifecycle bug. Scene reload and the run-end fade mean the run is over.</summary>
+        internal static bool WarnOnClear(bool clearedLockedRun, TweakClearTrigger trigger)
+        {
+            return clearedLockedRun && trigger != TweakClearTrigger.SceneReload && trigger != TweakClearTrigger.RunEnd;
+        }
+
+        /// <summary>Run setup created its room. A later capture before the lock replaces this one.</summary>
+        internal bool Capture(int gameMode, string via)
+        {
+            bool captured = _registry.Capture(ModeFromGame(gameMode));
+            if (captured) Trace("capture", via);
+            return captured;
+        }
+
+        /// <summary>The run started on this machine. Reconciles the captured set with the run's mode,
+        /// then fixes it until the next clear.</summary>
+        internal bool Lock(int gameMode, string via)
+        {
+            if (!_registry.IsInitialized) return false;
+            TweakSessionMode mode = ModeFromGame(gameMode);
+            if (_registry.SessionState == TweakSessionState.Locked)
+            {
+                Warn("Tweaks: a run started while the previous run's Session set was still locked; it was never cleared. Recapturing for this run.");
+                _registry.Clear();
+            }
+            if (NeedsCaptureAtLock(_registry.SessionState, _registry.SessionMode, mode))
+                Capture(gameMode, via + " (at run start)");
+            bool locked = _registry.Lock();
+            if (locked)
+            {
+                Trace("lock", via);
+                CheckLockedProbe();
+            }
+            return locked;
+        }
+
+        /// <summary>Empties the Session set. Returns true when a locked run was cleared.</summary>
+        internal bool Clear(TweakClearTrigger trigger, string via)
+        {
+            if (_registry.SessionState == TweakSessionState.None) return false;
+            bool wasLocked = _registry.Clear();
+            bool warn = WarnOnClear(wasLocked, trigger);
+            if (warn)
+                Warn("Tweaks: " + via + " cleared the Session set of a run that may still be going; its Session tweaks are now off. This points at a lifecycle bug.");
+            Trace("clear", via + (wasLocked ? " locked=true" : " locked=false"));
+            int probe = ProbeHandle();
+            if (probe != TweakRegistry.InvalidHandle)
+            {
+                if (warn || _registry.IsOn(probe))
+                    Error("SELF-TEST FAIL " + ProbeTest + ": clear via " + via + " while the run may continue=" + warn + ", probe on after clear=" + _registry.IsOn(probe));
+                else
+                    Info("SELF-TEST PASS " + ProbeTest + ": clear via " + via + " left the probe off");
+            }
+            return wasLocked;
+        }
+
+        private void CheckLockedProbe()
+        {
+            int probe = ProbeHandle();
+            if (probe == TweakRegistry.InvalidHandle) return;
+            string source = _registry.SessionSource;
+            bool expected;
+            if (source == TweakRegistry.PreferencesSource) expected = _registry.PreferredOn(probe) && !_registry.IsFaulted(probe);
+            else if (source == TweakRegistry.PendingSource) expected = false;
+            else return;
+            bool actual = _registry.IsOn(probe);
+            string detail = "lock mode=" + _registry.SessionMode + " source=" + source + " probe=" + OnOff(actual) + " expected=" + OnOff(expected);
+            if (actual == expected) Info("SELF-TEST PASS " + ProbeTest + ": " + detail);
+            else Error("SELF-TEST FAIL " + ProbeTest + ": " + detail);
+        }
+
+        private void Trace(string step, string via)
+        {
+            int probe = ProbeHandle();
+            if (probe == TweakRegistry.InvalidHandle) return;
+            Info(ProbeTrace + " " + step + " via=" + via + " state=" + _registry.SessionState
+                + " mode=" + (_registry.SessionMode.HasValue ? _registry.SessionMode.Value.ToString() : "none")
+                + " source=" + (_registry.SessionSource ?? "none") + " probe=" + OnOff(_registry.IsOn(probe)));
+        }
+
+        private int ProbeHandle()
+        {
+            if (_probe == null) return TweakRegistry.InvalidHandle;
+            int handle = _probe();
+            return _registry.Get(handle) != null ? handle : TweakRegistry.InvalidHandle;
+        }
+
+        private static string OnOff(bool value)
+        {
+            return value ? "on" : "off";
+        }
+
+        private void Warn(string message)
+        {
+            if (_warn != null) _warn(message);
+        }
+
+        private void Info(string message)
+        {
+            if (_info != null) _info(message);
+        }
+
+        private void Error(string message)
+        {
+            if (_error != null) _error(message);
+        }
+    }
+}
