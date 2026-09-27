@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace FTKModFramework.Core
 {
@@ -111,14 +112,47 @@ namespace FTKModFramework.Core
             Trace("resume-arm", via);
         }
 
+        /// <summary>True while a GameFlow state read would be used: a resume is armed and its run is
+        /// not locked yet. The load hook checks this before parsing, so it parses at most once per
+        /// resume and never for the PunRPC or co-op client paths into the same deserializer.</summary>
+        internal bool WantsRecord
+        {
+            get { return _resumeArmed && _registry.IsInitialized && _registry.SessionState != TweakSessionState.Locked; }
+        }
+
         /// <summary>The save's GameFlow state was deserialized; value is the record, or null when the
         /// key was absent. Returns false when the read is ignored: nothing is armed, which is how the
         /// same deserializer is reached as a PunRPC, or the run is already locked. Otherwise the record
         /// is kept for the lock and applied now if a capture exists.</summary>
         internal bool ReadRecord(string value, string via)
         {
-            if (!_resumeArmed || !_registry.IsInitialized || _registry.SessionState == TweakSessionState.Locked) return false;
-            TweakSessionRecord record = TweakSessionRecord.Decode(value);
+            return Accept(TweakSessionRecord.Decode(value), via);
+        }
+
+        /// <summary>The load hook's entry: reads <see cref="TweakSessionRecord.Key"/> from a parsed
+        /// GameFlow state dictionary, with the same rules as <see cref="ReadRecord"/>.</summary>
+        internal bool ReadState(IDictionary<string, object> state, string via)
+        {
+            if (!WantsRecord || state == null) return false;
+            object value;
+            state.TryGetValue(TweakSessionRecord.Key, out value);
+            return Accept(TweakSessionRecord.FromStateValue(value), via);
+        }
+
+        /// <summary>The save hook's entry: adds the record to a GameFlow state dictionary about to be
+        /// serialized. Adds nothing, so the save matches vanilla, unless a locked run has a record.</summary>
+        internal bool WriteRecord(IDictionary<string, object> state)
+        {
+            if (state == null) return false;
+            string value = RecordToWrite();
+            if (value == null) return false;
+            state[TweakSessionRecord.Key] = value;
+            return true;
+        }
+
+        private bool Accept(TweakSessionRecord record, string via)
+        {
+            if (!WantsRecord) return false;
             if (record.Status == TweakSessionRecordStatus.Invalid)
                 Warn("Tweaks: the save's Session record is unreadable (" + record.Problem + "); the resumed run's Session tweaks follow the current preferences.");
             _resumeRecord = record;

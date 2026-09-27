@@ -136,6 +136,32 @@ internal static class Program
         Require((string)coop["state"] == "captured" && (string)coop["mode"] == "multiplayer" && (string)coop["source"] == "pending", "Co-op capture misreported");
         Require(ReportingTweakSource.Mode(TweakSessionMode.LocalMultiplayer) == "local_multiplayer", "Local multiplayer wire name");
 
+        // Spec #253 FR-5: a resumed run reports where its Session set came from, through the lock.
+        registry.Clear();
+        var lifecycle = new TweakSessionLifecycle(registry, null, null, null, null);
+        var resumes = new[] {
+            new KeyValuePair<object, string>("v1:+convenience.rule", "save"),
+            new KeyValuePair<object, string>(null, "preferences-legacy"),
+            new KeyValuePair<object, string>("v2:+convenience.rule", "preferences-invalid") };
+        foreach (KeyValuePair<object, string> resume in resumes)
+        {
+            var state = new Dictionary<string, object> { { "m_RoundCount", 3 } };
+            if (resume.Key != null) state["ftkmf.session"] = resume.Key;
+            lifecycle.ArmResume("test");
+            lifecycle.Capture(0, "test");
+            Require(lifecycle.ReadState(state, "test"), "Resume read ignored for " + resume.Value);
+            foreach (bool locked in new[] { false, true })
+            {
+                if (locked) lifecycle.Lock(0, "test");
+                var resumed = Snapshot(ReportingTweakSource.Copy(registry))["sections"]["tweakEffective"]["payload"]["session"];
+                Require((string)resumed["source"] == resume.Value && (string)resumed["state"] == (locked ? "locked" : "captured")
+                    && (string)resumed["mode"] == "single_player", "Resume source misreported: " + resumed);
+            }
+            lifecycle.Clear(TweakClearTrigger.RunEnd, "test");
+        }
+        Require(TweakRegistry.SaveSource == "save" && TweakRegistry.PreferencesLegacySource == "preferences-legacy"
+            && TweakRegistry.PreferencesInvalidSource == "preferences-invalid", "Resume source wire names changed");
+
         // Values outside the allowlist or identifier syntax are excluded and disclosed, never passed through.
         var hostile = new ReportingTweakState { TotalCount = 3, SessionState = "running", SessionMode = "LocalMultiplayer", SessionSource = "https://private/token",
             Rows = new List<ReportingTweakRow> { new ReportingTweakRow { Id = "fix.my_secret", Preference = "7", Faulted = true },
