@@ -1,0 +1,43 @@
+---
+interface Item {id:string;name:string;tier:string;kind:string;rarity:string;image:string;damage?:string|number|null;damageType?:string|null;lines:{text:string;tone:string}[];}
+interface Props {items:Item[];families:string[];slots:Record<string,string>;}
+const {items,families,slots}=Astro.props;
+---
+<tooltip-armory>
+<div class="preview-filters"><label>Search equipment<input type="search" placeholder="Name, bonus, or ability…" /></label><label>Tier<select aria-label="Tier" name="tier"><option value="all">All tiers</option>{families.map(tier=><option value={tier}>{tier[0].toUpperCase()+tier.slice(1)}</option>)}</select></label><label>Slot<select aria-label="Slot" name="slot"><option value="all">Every slot</option>{Object.entries(slots).map(([value,label])=><option value={value}>{label}</option>)}</select></label></div>
+<p class="preview-count" role="status" aria-live="polite">{items.length} items</p>
+<div class="blacksmith-gallery">
+{items.map(item=><article class:list={['forge-card',item.rarity.toLowerCase()]} aria-label={item.name} data-tier={item.tier} data-slot={item.kind} id={item.id} data-search={`${item.name} ${item.lines.map(line=>line.text).join(" ")}`.toLowerCase()}>
+ <div class="forge-art"><img src={item.image} alt={`Studio render of ${item.name}`} width="512" height="512" loading="lazy" /></div>
+ <header class="forge-identity"><img src={item.image} alt={`Thumbnail of ${item.name}`} width="30" height="36" loading="lazy"/><h2>{item.name}</h2><p class="forge-rarity">{item.rarity}</p></header>
+ <div class="forge-properties">{item.damage&&<p class="forge-damage"><strong>{item.damage}</strong> {item.damageType}</p>}{item.lines.map(line=><p class={line.tone}>{line.text}</p>)}
+
+ </div>
+ {['tl','tr','bl','br'].map(position=><span class={`forge-corner ${position}`} aria-hidden="true"/>)}
+</article>)}
+</div>
+<p class="preview-empty" hidden>No items match. Try another search, tier, or slot.</p>
+</tooltip-armory>
+<script>
+class TooltipArmory extends HTMLElement {
+ connectedCallback(){
+  const search=this.querySelector('input')!;
+  const tier=this.querySelector<HTMLSelectElement>('[name=tier]')!;
+  const slot=this.querySelector<HTMLSelectElement>('[name=slot]')!;
+  const update=()=>{
+   const query=search.value.trim().toLowerCase();let count=0;
+   this.querySelectorAll<HTMLElement>('.forge-card').forEach(card=>{
+    card.hidden=!(card.dataset.search!.includes(query)&&(tier.value==='all'||card.dataset.tier===tier.value)&&(slot.value==='all'||card.dataset.slot===slot.value));
+    if(!card.hidden)count++;
+   });
+   this.querySelector('[role=status]')!.textContent=`${count} of ${this.querySelectorAll('.forge-card').length} items`;
+   this.querySelector<HTMLElement>('.preview-empty')!.hidden=count!==0;
+  };
+  search.addEventListener('input',update);tier.addEventListener('change',update);slot.addEventListener('change',update);
+ }
+}
+if(!customElements.get('tooltip-armory'))customElements.define('tooltip-armory',TooltipArmory);
+</script>
+<style>
+.preview-banner{margin:0 0 24px!important}.preview-banner img{display:block;width:100%;height:auto;border-radius:8px}.preview-banner figcaption{font-size:12px;color:var(--sl-color-gray-2);margin-top:6px}.preview-filters{display:flex;flex-wrap:wrap;gap:16px;margin:24px 0 12px}.preview-filters label{display:flex;flex-direction:column;gap:6px;margin:0;font-size:13px}.preview-filters input,.preview-filters select{padding:10px 12px;border:1px solid var(--sl-color-gray-4);border-radius:5px;color:var(--sl-color-text);background:var(--sl-color-bg);font:inherit}.preview-filters input{min-width:220px}.preview-count,.preview-empty{font-size:13px}.forge-card[hidden],.preview-empty[hidden]{display:none}.preview-status{display:inline-block;margin:0!important;padding:6px 13px;border:1px solid #b69656;border-radius:4px;color:#efcc86;font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}.preview-note{font-size:13px;color:var(--sl-color-gray-2)}.blacksmith-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(0,310px));gap:24px;align-items:start}.forge-card{--rim:#9363a3;--bar:#40234d;--base:#180d23;position:relative;width:310px;max-width:100%;margin:0!important;border:2px solid var(--rim);background:var(--base);color:#eeeae1;font-family:"Arial Narrow","Avenir Next Condensed",Arial,sans-serif;box-shadow:0 8px 24px #0003;overflow:hidden}.forge-card.artifact{--rim:#bd9b57;--bar:#534125;--base:#251c10}.artifact .forge-rarity{color:#e4c27d}.forge-abilities,.forge-acquisition{border:0!important;border-top:1px solid var(--rim)!important;padding:8px 0 0!important;margin-top:9px!important;font-style:normal}.forge-abilities summary,.forge-acquisition summary{font-size:13px;cursor:pointer;color:#dec894}.forge-abilities section{padding-top:10px}.forge-abilities h3{font:600 15px/20px Arial,sans-serif;color:#ffdf9a;margin:0!important}.forge-abilities p,.forge-acquisition p{font:13px/19px Arial,sans-serif;margin-top:4px!important}.forge-card.common{--rim:#776957;--bar:#30291f;--base:#211c16}.forge-card *{box-sizing:border-box;margin:0}.forge-art{height:263px;display:grid;place-items:center;overflow:hidden;border-bottom:3px double var(--rim);background:radial-gradient(ellipse,#ffffff08,transparent 75%)}.forge-art img{display:block;width:100%;height:263px;object-fit:contain;padding:12px 0}.forge-identity{position:relative;min-height:49px;padding:3px 5px 3px 43px;background:var(--bar);border-bottom:2px solid var(--rim)}.forge-identity img{position:absolute;left:7px;top:5px;width:30px;height:36px;object-fit:contain}.forge-identity h2{color:#eeeae1;font:600 23px/25px "Arial Narrow","Avenir Next Condensed",Arial,sans-serif;letter-spacing:-.35px;margin:0!important;text-shadow:1px 1px 2px #000;overflow-wrap:normal}.forge-rarity{font:700 16px/17px Arial,sans-serif;color:#c080f1}.common .forge-rarity{color:#eee1cb}.forge-properties{min-height:126px;padding:5px 6px 16px;font:italic 14px/18px Arial,sans-serif;letter-spacing:-.25px}.forge-properties p{margin:0!important}.forge-properties .affinity{color:#79a2d6}.forge-properties .ability{color:#ffdf9a}.forge-properties .skill{color:#c4b6a6}.forge-properties .forge-damage{font-style:normal;border-bottom:1px solid var(--rim);padding:3px 0 7px;margin-bottom:7px!important}.forge-damage strong{font-size:27px;margin-right:9px}.forge-corner{position:absolute;width:8px;height:8px;border:1px solid var(--rim);background:var(--base);pointer-events:none}.forge-corner:after{content:"";position:absolute;inset:2px 0 0 2px;border-top:1px solid var(--rim);border-left:1px solid var(--rim);width:3px;height:3px}.tl{top:1px;left:1px}.tr{top:1px;right:1px;transform:rotate(90deg)}.bl{bottom:1px;left:1px;transform:rotate(-90deg)}.br{bottom:1px;right:1px;transform:rotate(180deg)}
+</style>

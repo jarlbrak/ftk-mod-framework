@@ -1,0 +1,11 @@
+---
+import preview from '../data/blacksmith-preview.json';
+import TooltipGallery from './TooltipGallery.astro';
+const base=import.meta.env.BASE_URL;
+const slots={'hammer-1h':'One-handed hammer','hammer-2h':'Two-handed maul',shield:'Shield',armor:'Armor',helmet:'Helmet',boots:'Boots',necklace:'Pendant',trinket:'Fire kit'};
+---
+<figure class="preview-banner"><img src={`${base}media/blacksmith/banner.webp`} alt="Blacksmith in forge armor carrying a hammer and shield" width="1280" height="720" fetchpriority="high"/><figcaption>Promotional illustration · Blacksmith Gear</figcaption></figure>
+<p class="preview-status">Coming Soon</p>
+<p class="preview-note">{preview.artwork}</p>
+<TooltipGallery items={preview.items.map(item=>({...item,image:`${base}media/blacksmith/${item.id}.webp`}))} families={['coalmark','bellowsworn','rivetwatch','kilnward']} slots={slots}/>
+<style>.preview-banner{margin:0 0 24px!important}.preview-banner img{display:block;width:100%;height:auto;border-radius:8px}.preview-banner figcaption{font-size:12px;color:var(--sl-color-gray-2);margin-top:6px}.preview-status{display:inline-block;margin:0!important;padding:6px 13px;border:1px solid #b69656;border-radius:4px;color:#efcc86;font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}.preview-note{font-size:13px;color:var(--sl-color-gray-2)}</style>

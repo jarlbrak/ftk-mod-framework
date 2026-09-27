@@ -32,3 +32,53 @@ export function itemAbilities(e:any,entries:any[]):Ability[]{
  if(e.thiefArtifact){if(!artifacts[e.thiefArtifact])throw Error('Unexplained artifact');result.push(artifacts[e.thiefArtifact]);}
  return result;
 }
+
+// Compact card copy; full conditions remain in the class guides.
+export function itemTooltipLines(e:any,entries:any[]):{text:string;tone:string}[]{
+ const lines:{text:string;tone:string}[]=[];
+ const add=(text:string,tone='affinity')=>lines.push({text,tone});
+ for(const id of e.proficiencies??[]){
+  const p=entries.find(p=>p.id===id);if(!p)throw Error(`Missing proficiency ${id}`);
+  if(id.startsWith('paladin_censure')){
+   add('Censure: 75% weapon damage.','ability');
+   add(`Random −${Math.abs(p.fields.m_CustomValue)} Armor or Resistance.`);
+   add('Censure Resistance reduction enables Smite.');
+  }else if(id==='paladin_smite'){
+   add('Smite: 25% weapon damage as magic.','ability');
+   add('150% against Censure Resistance reduction.');
+   add('Uses current weapon rolls; no perfect required.');
+  }else{
+   add(`${p.displayName}: ${Math.round(p.fields.m_DmgMultiplier*100)}% damage.`,'ability');
+   add(p.fields.m_IgnoresArmor?'Perfect result ignores Armor.':'Thief: damaging hit grants Prepared.');
+   add('Special attacks cannot Sneak Attack.');
+  }
+ }
+ const perks:Record<string,(v:any)=>string>={
+  guardHealPercent:v=>`Paladin: Guard heals ally ${v}% maximum HP.`,
+  focusHealBonusPercent:v=>`Paladin: +${v}% ally maximum HP to focused-hit healing.`,
+  wardDebuffs:()=> 'Paladin: Guard wards Poison, Stun, Daze, Curse.',
+  retaliationDamage:v=>`Paladin: ${v} retaliation per damaging guarded hit.`,
+  guardFocusRestore:v=>`Paladin: first reduced hit per Guard restores ${v} ally Focus.`,
+  guardReckoning:()=> 'Paladin: reduced Guard hit readies +50% next eligible blunt attack.',
+  guardCleanse:()=> 'Paladin: Guard removes one eligible condition.'
+ };
+ for(const [key,value] of Object.entries(e.guardianBonuses??{})){
+  if(!perks[key])throw Error(`Unexplained Guardian perk ${key}`);
+  add(perks[key](value));
+  if(key==='guardReckoning')add('Spent on attempt; expires after next turn.');
+ }
+ if(e.precisionWeapon){
+  add('Thief: +20% perfect basic damage vs Open or while Prepared.');
+  add('Once per turn; qualifying attempt spends it.');
+  if(e.precisionWeapon==='paired')add('Thief: one missed check + HP hit grants Prepared.');
+ }
+ if(e.thiefArtifact==='borrowedFortune')add('Borrowed Fortune: damaging Sneak Attack refunds 1 spent Focus.');
+ else if(e.thiefArtifact==='lastLight'){
+  add('Last Light: +75% replaces Sneak Attack bonus vs full HP.');
+  add('Once per combat; qualifying attempt spends it.');
+ }else if(e.thiefArtifact==='looseAndLeave'){
+  add('Loose and Leave: damaging Sneak Attack grants +8 Evasion.');
+  add('Until next turn; cannot stack.');
+ }else if(e.thiefArtifact)throw Error('Unexplained artifact');
+ return lines;
+}

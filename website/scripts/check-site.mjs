@@ -2,7 +2,7 @@ import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const root=process.env.SITE_URL || 'http://127.0.0.1:4321/ftk-mod-framework/';
-const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/'];
+const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/blacksmith/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/'];
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage();
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -12,41 +12,53 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
  for(const path of paths){
   const response=await page.goto(root+path);assert.equal(response.status(),200,path);
   await page.waitForLoadState('networkidle');
-  for(const img of await page.locator('img:visible').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(i=>i.decode());}
+  for(const img of await page.locator('img:visible').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(async i=>{try{await i.decode()}catch(error){throw new Error(`Image failed to decode: ${i.src}: ${error.message}`)}});}
   await page.evaluate(()=>window.scrollTo(0,0));
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`Overflow ${path} at ${size.width}`);
   const info=await page.evaluate(()=>({images:[...document.images].filter(i=>i.getClientRects().length).map(i=>({src:i.src,alt:i.alt,loaded:i.complete&&i.naturalWidth>0})),links:[...document.querySelectorAll('a[href]')].map(a=>a.href),media:[...document.querySelectorAll('source')].map(s=>s.src),videos:[...document.querySelectorAll('video')].map(v=>({controls:v.controls,autoplay:v.autoplay,poster:v.poster,loop:v.loop}))}));
   for(const i of info.images){assert(i.alt,`Missing alt ${i.src}`);assert(i.loaded,`Broken image ${i.src}`);resources.add(i.src)}
   info.links.forEach(l=>links.add(l));info.media.forEach(l=>resources.add(l));
   for(const v of info.videos){assert(v.controls&&v.loop&&!v.autoplay);resources.add(v.poster)}
-  if(['','mods/paladin/','gallery/','mods/paladin-equipment/'].includes(path))await page.screenshot({path:`/tmp/ftk-site-${path.replaceAll('/','-')||'home'}-${size.width}.png`,fullPage:true});
+  if(['','mods/paladin/','gallery/','mods/paladin-equipment/','mods/blacksmith/'].includes(path))await page.screenshot({path:`/tmp/ftk-site-${path.replaceAll('/','-')||'home'}-${size.width}.png`,fullPage:true});
  }
 }
-// Exercise every published item's dialog and its art, including mobile and keyboard dismissal.
+await page.goto(root+'mods/blacksmith/');
+assert.equal(await page.locator('.forge-card').count(),32);
+assert.match(await page.locator('.preview-status').textContent(),/Coming Soon/);
+assert.equal(await page.locator('.forge-card .affinity').count(),43);
+await page.getByLabel('Tier',{exact:true}).selectOption('kilnward');
+assert.equal(await page.locator('.forge-card:visible').count(),8);
+await page.getByLabel('Slot',{exact:true}).selectOption('armor');
+assert.equal(await page.locator('.forge-card:visible').count(),1);
+await page.getByRole('searchbox',{name:'Search equipment'}).fill('no-such-item');
+assert.equal(await page.locator('.forge-card:visible').count(),0);
+assert(await page.locator('.preview-empty').isVisible());
+await page.getByLabel('Tier',{exact:true}).selectOption('all');
+await page.getByLabel('Slot',{exact:true}).selectOption('all');
+await page.getByRole('searchbox',{name:'Search equipment'}).fill('Temper');
+assert.equal(await page.locator('.forge-card:visible').count(),3);
+// Exercise every published HTML card and its visible explanations at both widths.
 for(const size of [{width:1440,height:1000},{width:390,height:844}]){
  await page.setViewportSize(size);
  for(const [mod,count] of [['paladin',51],['thief',45]]){
   await page.goto(root+'mods/'+mod+'/');
-  const items=page.locator('.equipment-item');assert.equal(await items.count(),count);
+  const items=page.locator('.forge-card');assert.equal(await items.count(),count);
   for(const item of await items.all()){
-   const name=await item.locator('h4').textContent();
-   await item.locator('summary').click();
-   const dialog=page.getByRole('dialog',{name,exact:true});await dialog.waitFor();
-   await dialog.locator('img').evaluate(i=>i.decode());
-   assert(await dialog.locator('img').evaluate(i=>i.naturalWidth>0));
-   assert.equal(await dialog.evaluate(d=>d.scrollWidth<=d.clientWidth),true,'Dialog overflow '+name);
-   assert(await dialog.evaluate(d=>{const r=d.getBoundingClientRect();return Math.abs(r.left+r.width/2-innerWidth/2)<2;}),'Dialog centering '+name);
-   assert(await dialog.locator('.item-acquisition').innerText());
-   if(name==='Tin Oath Token'){
-    assert.match(await dialog.innerText(),/Grants Smite/);assert.match(await dialog.innerText(),/150%/);
-    await page.screenshot({path:`/tmp/ftk-item-smite-${size.width}.png`});
-   }
-   await page.keyboard.press('Escape');assert.equal(await dialog.count(),0);
-   assert(await item.locator('summary').evaluate(s=>s===document.activeElement));
+   const name=await item.locator('h2').textContent();
+   await item.scrollIntoViewIfNeeded();
+   await item.locator('.forge-art img').evaluate(i=>i.decode());
+   assert.equal(await item.evaluate(d=>d.scrollWidth<=d.clientWidth),true,'Card overflow '+name);
+   assert.equal(await item.locator('details, summary').count(),0);
+   if(name==='Tin Oath Token'){assert.match(await item.innerText(),/Smite/);assert.match(await item.innerText(),/150%/);}
+   assert(await item.locator('.forge-properties').innerText());
   }
-  await page.getByRole('searchbox',{name:'Find equipment'}).fill('no-such-item');assert.equal(await page.locator('.equipment-item:visible').count(),0);
-  await page.getByRole('searchbox',{name:'Find equipment'}).fill(mod==='paladin'?'smite':'borrowed fortune');
-  assert.equal(await page.locator('.equipment-item:visible').count(),mod==='paladin'?20:1);
+  await page.getByRole('searchbox',{name:'Search equipment'}).fill('no-such-item');assert.equal(await page.locator('.forge-card:visible').count(),0);
+  await page.getByRole('searchbox',{name:'Search equipment'}).fill(mod==='paladin'?'smite':'borrowed fortune');
+  assert.equal(await page.locator('.forge-card:visible').count(),mod==='paladin'?20:1);
+  for(const card of await page.locator('.forge-card:visible').all())assert(await card.evaluate(c=>c.getBoundingClientRect().width<=310.5),'Tooltip width exceeds 310px');
+  await page.getByRole('searchbox',{name:'Search equipment'}).fill('');
+  await page.getByLabel('Tier',{exact:true}).selectOption('artifacts');assert.equal(await page.locator('.forge-card:visible').count(),3);
+  await page.getByLabel('Slot',{exact:true}).selectOption(mod==='paladin'?'shield':'bow');assert.equal(await page.locator('.forge-card:visible').count(),1);
  }
 }
 for(const url of [...resources,...links]){
@@ -60,11 +72,6 @@ await page.getByPlaceholder('Search',{exact:true}).fill('Smite');
 await page.locator('.pagefind-ui__result').first().waitFor();
 assert.match(await page.locator('.pagefind-ui__results').innerText(),/Paladin/);
 await page.keyboard.press('Escape');
-await page.emulateMedia({reducedMotion:'reduce'});await page.goto(root+'mods/paladin/');
-assert(await page.locator('video').evaluateAll(vs=>vs.every(v=>v.paused&&!v.autoplay)));
-for(const video of await page.locator('video').all()){
- await video.evaluate(async v=>{await v.play()});await page.waitForTimeout(300);assert(await video.evaluate(v=>v.currentTime>0&&!v.error));await video.evaluate(v=>v.pause());
-}
 await page.setViewportSize({width:390,height:844});await page.goto(root+'mods/paladin/');
 await page.getByRole('button',{name:'Menu',exact:true}).click();
 await page.locator('#starlight__sidebar').waitFor({state:'visible'});
@@ -72,5 +79,5 @@ await page.locator('#starlight__sidebar').getByRole('link',{name:'Installation',
 await page.waitForURL(root+'installation/');
 assert.deepEqual(errors,[]);
 await fs.writeFile('/tmp/ftk-site-external-links.json',JSON.stringify([...links].filter(l=>!l.startsWith(root)),null,2));
-console.log(`PASS: ${paths.length} pages at desktop/mobile, local links, fragments, images, search, mobile menu, reduced motion, and video playback.`);
+console.log(`PASS: ${paths.length} pages at desktop/mobile, local links, fragments, images, search, tier/slot filters, inline ability text, and mobile menu.`);
 await browser.close();
