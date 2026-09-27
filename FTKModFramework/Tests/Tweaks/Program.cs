@@ -76,7 +76,8 @@ internal static class Program
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, lifecycle hooks, session probe, tab).");
+        _checks += SessionRecordChecks.Run();
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, lifecycle hooks, session probe, tab, session record).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.

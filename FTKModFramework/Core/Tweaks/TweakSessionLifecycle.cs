@@ -16,8 +16,8 @@ namespace FTKModFramework.Core
         TitleActivation,
     }
 
-    /// <summary>Drives the registry's capture, lock and clear from game lifecycle hooks and, when the
-    /// self-test Session probe is registered, traces each step. Unity-free: the Harmony patches pass
+    /// <summary>Drives the registry's capture, lock and clear, and a resumed run's save record, from
+    /// game lifecycle hooks and, when the self-test Session probe is registered, traces each step. Unity-free: the Harmony patches pass
     /// the raw GameLogic.GameMode value and a label naming the hook.</summary>
     internal sealed class TweakSessionLifecycle
     {
@@ -29,6 +29,13 @@ namespace FTKModFramework.Core
         private readonly Action<string> _info;
         private readonly Action<string> _error;
         private readonly Func<int> _probe;
+        // Resume state (Spec #253 FR-3). Armed when a resume starts and disarmed at lock or when the
+        // run is over. Photon callbacks never disarm: in solo offline an asynchronous disconnect can
+        // clear the capture between the save's load and the lock, and the record must survive that.
+        private bool _resumeArmed;
+        private TweakSessionRecord _resumeRecord;
+        private bool _resumeIgnoresLogged;
+        private bool _oversizeWarned;
 
         internal TweakSessionLifecycle(TweakRegistry registry, Action<string> warn, Action<string> info,
             Action<string> error, Func<int> probeHandle)
@@ -70,25 +77,87 @@ namespace FTKModFramework.Core
                 && trigger != TweakClearTrigger.TitleActivation;
         }
 
-        /// <summary>Run setup created its room. A later capture before the lock replaces this one.</summary>
+        /// <summary>Resume state is disarmed only by triggers that mean no run is going. The Photon
+        /// callbacks can fire during a resume's setup, so they leave it armed.</summary>
+        internal static bool DisarmsResume(TweakClearTrigger trigger)
+        {
+            return trigger == TweakClearTrigger.SceneReload || trigger == TweakClearTrigger.RunEnd
+                || trigger == TweakClearTrigger.TitleActivation;
+        }
+
+        /// <summary>True from the start of a resume until its run locks or ends.</summary>
+        internal bool ResumeArmed { get { return _resumeArmed; } }
+
+        /// <summary>The record read during the armed resume, or null when none has been read.</summary>
+        internal TweakSessionRecord ResumeRecord { get { return _resumeRecord; } }
+
+        /// <summary>Run setup created its room. A later capture before the lock replaces this one, so
+        /// a record read earlier in the same resume is applied again on top of it.</summary>
         internal bool Capture(int gameMode, string via)
         {
             bool captured = _registry.Capture(ModeFromGame(gameMode));
-            if (captured) Trace("capture", via);
-            return captured;
+            if (!captured) return false;
+            ApplyResume(via);
+            Trace("capture", via);
+            return true;
+        }
+
+        /// <summary>A saved run is being resumed. Forgets any record from an earlier resume.</summary>
+        internal void ArmResume(string via)
+        {
+            _resumeArmed = true;
+            _resumeRecord = null;
+            _resumeIgnoresLogged = false;
+            Trace("resume-arm", via);
+        }
+
+        /// <summary>The save's GameFlow state was deserialized; value is the record, or null when the
+        /// key was absent. Returns false when the read is ignored: nothing is armed, which is how the
+        /// same deserializer is reached as a PunRPC, or the run is already locked. Otherwise the record
+        /// is kept for the lock and applied now if a capture exists.</summary>
+        internal bool ReadRecord(string value, string via)
+        {
+            if (!_resumeArmed || !_registry.IsInitialized || _registry.SessionState == TweakSessionState.Locked) return false;
+            TweakSessionRecord record = TweakSessionRecord.Decode(value);
+            if (record.Status == TweakSessionRecordStatus.Invalid)
+                Warn("Tweaks: the save's Session record is unreadable (" + record.Problem + "); the resumed run's Session tweaks follow the current preferences.");
+            _resumeRecord = record;
+            _resumeIgnoresLogged = false;
+            ApplyResume(via);
+            Trace("record", via);
+            return true;
+        }
+
+        /// <summary>The value the save hook adds under TweakSessionRecord.Key, or null to add nothing.
+        /// Warns once if a locked run's record would be too long to write.</summary>
+        internal string RecordToWrite()
+        {
+            string value = TweakSessionRecord.ValueToWrite(_registry);
+            if (value == null && !_oversizeWarned && TweakSessionRecord.Oversized(_registry))
+            {
+                _oversizeWarned = true;
+                Warn("Tweaks: the Session record exceeds " + TweakSessionRecord.MaxLength + " characters and is not saved; a resume of this save will follow the current preferences.");
+            }
+            return value;
         }
 
         /// <summary>The run started on this machine. Reconciles the captured set with the run's mode,
         /// then fixes it until the next clear.</summary>
         internal bool Lock(int gameMode, string via)
         {
-            if (!_registry.IsInitialized) return false;
+            if (!_registry.IsInitialized)
+            {
+                DisarmResume();
+                return false;
+            }
             TweakSessionMode mode = ModeFromGame(gameMode);
             if (_registry.SessionState == TweakSessionState.Locked)
             {
                 Warn("Tweaks: a run started while the previous run's Session set was still locked; it was never cleared. Recapturing for this run.");
                 _registry.Clear();
             }
+            // A recapture here also reapplies an armed resume's record, such as after a Photon clear
+            // between the save's load and the lock.
             if (NeedsCaptureAtLock(_registry.SessionState, _registry.SessionMode, mode))
                 Capture(gameMode, via + " (at run start)");
             bool locked = _registry.Lock();
@@ -97,12 +166,14 @@ namespace FTKModFramework.Core
                 Trace("lock", via);
                 CheckLockedProbe();
             }
+            DisarmResume();
             return locked;
         }
 
         /// <summary>Empties the Session set. Returns true when a locked run was cleared.</summary>
         internal bool Clear(TweakClearTrigger trigger, string via)
         {
+            if (DisarmsResume(trigger)) DisarmResume();
             if (_registry.SessionState == TweakSessionState.None) return false;
             bool wasLocked = _registry.Clear();
             bool warn = WarnOnClear(wasLocked, trigger);
@@ -125,14 +196,50 @@ namespace FTKModFramework.Core
             int probe = ProbeHandle();
             if (probe == TweakRegistry.InvalidHandle) return;
             string source = _registry.SessionSource;
+            bool preferred = _registry.PreferredOn(probe) && !_registry.IsFaulted(probe);
             bool expected;
-            if (source == TweakRegistry.PreferencesSource) expected = _registry.PreferredOn(probe) && !_registry.IsFaulted(probe);
+            if (source == TweakRegistry.PreferencesSource || source == TweakRegistry.PreferencesLegacySource
+                || source == TweakRegistry.PreferencesInvalidSource) expected = preferred;
             else if (source == TweakRegistry.PendingSource) expected = false;
+            else if (source == TweakRegistry.SaveSource && _resumeRecord != null
+                && _resumeRecord.Status == TweakSessionRecordStatus.Valid)
+            {
+                bool recorded;
+                expected = _resumeRecord.TryGetState(_registry.Get(probe).Id, out recorded) ? recorded : preferred;
+            }
             else return;
             bool actual = _registry.IsOn(probe);
             string detail = "lock mode=" + _registry.SessionMode + " source=" + source + " probe=" + OnOff(actual) + " expected=" + OnOff(expected);
             if (actual == expected) Info("SELF-TEST PASS " + ProbeTest + ": " + detail);
             else Error("SELF-TEST FAIL " + ProbeTest + ": " + detail);
+        }
+
+        /// <summary>Applies the armed record to a captured solo or local run. Online co-op keeps its
+        /// pending set: a host applying its save alone would split rules with its clients.</summary>
+        private void ApplyResume(string via)
+        {
+            if (!_resumeArmed || _resumeRecord == null || _registry.SessionState != TweakSessionState.Captured) return;
+            TweakSessionMode? mode = _registry.SessionMode;
+            if (mode != TweakSessionMode.SinglePlayer && mode != TweakSessionMode.LocalMultiplayer) return;
+            TweakSessionResolution resolution = TweakSessionRecord.Resolve(_registry, _resumeRecord);
+            if (!_registry.SetSessionSet(resolution.OnIds, resolution.Source)) return;
+            if (!_resumeIgnoresLogged)
+            {
+                _resumeIgnoresLogged = true;
+                foreach (string id in resolution.UnknownIds)
+                    Info("Tweaks: the save's Session record lists '" + id + "', which this build does not register; ignored.");
+                foreach (string id in resolution.LocalIds)
+                    Info("Tweaks: the save's Session record lists '" + id + "', which is a Local tweak; ignored.");
+            }
+            Info("Tweaks: the resumed run's Session set comes from " + resolution.Source + " via " + via + " ("
+                + resolution.FromRecord + " from the save, " + resolution.FromPreferences + " from preferences).");
+        }
+
+        private void DisarmResume()
+        {
+            _resumeArmed = false;
+            _resumeRecord = null;
+            _resumeIgnoresLogged = false;
         }
 
         private void Trace(string step, string via)

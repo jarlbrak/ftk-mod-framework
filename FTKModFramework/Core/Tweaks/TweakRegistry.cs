@@ -33,6 +33,14 @@ namespace FTKModFramework.Core
         internal const string PreferencesSource = "preferences";
         /// <summary>Online co-op before a host set arrives: every Session tweak is off.</summary>
         internal const string PendingSource = "pending";
+        /// <summary>A resumed run whose save holds a valid Session record. IDs the record does not
+        /// list still resolve from preferences.</summary>
+        internal const string SaveSource = "save";
+        /// <summary>A resumed run whose save has no Session record, such as one made before the
+        /// record existed or re-saved by vanilla. Resolves from preferences.</summary>
+        internal const string PreferencesLegacySource = "preferences-legacy";
+        /// <summary>A resumed run whose Session record was unreadable. Resolves from preferences.</summary>
+        internal const string PreferencesInvalidSource = "preferences-invalid";
 
         private readonly Action<string> _warn;
         private readonly List<TweakDescriptor> _descriptors = new List<TweakDescriptor>();
