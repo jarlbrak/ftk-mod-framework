@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The localization-miss logger's filter, dedupe and cap decisions (spec #242 FR-2). Compiling
+       the source alone proves it needs no Unity, BepInEx or game reference. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/Diagnostics/LocalizationMissLog.cs" Link="Diagnostics/LocalizationMissLog.cs" />
+  </ItemGroup>
+</Project>

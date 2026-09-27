@@ -72,6 +72,20 @@ adventure.
 used by that save or start a new adventure. Marketplace operations do not edit
 save files.
 
+**Text shows a raw key such as `STR_DungeonNoneDisplay`.** The game shows the
+key itself when a text table has no row for it. To list the missing keys, close
+the game, open `<game>/BepInEx/config/com.ftkmf.framework.cfg`, set
+`LogLocalizationMisses = true` under `[Diagnostics]`, and relaunch. Each
+missing key then adds one `[loc-miss]` line to `LogOutput.log` naming the text
+table, the key and up to three calling methods. Each key is logged once per
+table, and logging stops after 256 keys with a final line saying so. Keys the
+framework shows verbatim on purpose are skipped: literal names that do not
+start with `STR_`, custom realm keys `STR_<number>Display`, custom enemy IDs in
+their `STR_<number>` form, and `STR_<id>` for any registered custom content.
+The setting never changes text and is read only at startup; while it is `false`
+(the default) nothing is patched. Set it back to `false` after collecting the
+lines.
+
 **macOS blocks the launcher.** The community app is not notarized. Try
 right-clicking it and choosing **Open**. The installer clears quarantine from
 the downloaded loader files.
