@@ -39,6 +39,30 @@ namespace FTKModFramework.Core.UI
         private string deferredPayload, deferredErrorId, deferredPriorId;
         private new void Awake() { m_IsOptionSubMenu = true; m_Cancel = Back; }
         public override void OnPreSetFocus() { gameObject.SetActive(true); Refresh(); base.OnPreSetFocus(); }
+        public override void OnSetFocus() { base.OnSetFocus(); HoldClickAnywhere(); }
+        public override void OnLostFocus() { ReleaseClickAnywhere(); base.OnLostFocus(); }
+        private void OnDisable() { ReleaseClickAnywhere(); }
+        // Live, the dialogue click-anywhere layer on the root canvas was the top RaycastAll hit
+        // over this panel, so a first click advanced the dialogue behind the menu instead. Hold
+        // its raycast target off only while this panel has focus, and restore exactly what we set.
+        private Graphic clickAnywhere;
+        private void HoldClickAnywhere()
+        {
+            if (clickAnywhere) return;
+            try
+            {
+                FTKClickAnywhere layer = FTKClickAnywhere.Instance;
+                Graphic graphic = layer ? layer.GetComponent<Graphic>() : null;
+                if (!graphic || !graphic.raycastTarget) return;
+                graphic.raycastTarget = false; clickAnywhere = graphic;
+            }
+            catch (Exception) { clickAnywhere = null; }
+        }
+        private void ReleaseClickAnywhere()
+        {
+            if (clickAnywhere) clickAnywhere.raycastTarget = true;
+            clickAnywhere = null;
+        }
         public override void OnClose()
         {
             FinishTyping(); gameObject.SetActive(false);
