@@ -27,6 +27,8 @@ an explicit opt-out, when you reopen it. Opening the panel, saving a draft, or
 opening the manual editor uploads nothing. Manual reports require an explicit Send action.
 The panel opens with the description selected, or another control that cannot send when
 the description is hidden, so a single confirm press never sends or retries a report.
+Switching views selects a safe control too: the first draft's **Open** (or **Back to report**)
+in Drafts, **Keep editing** when asked to save, and **Keep draft** when confirming a deletion.
 
 ## What is collected and shared
 
