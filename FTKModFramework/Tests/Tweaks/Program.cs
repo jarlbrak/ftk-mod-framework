@@ -65,11 +65,12 @@ internal static class Program
         SkipIntro();
         QuestDungeonName();
         XpInLevel();
+        PoisonTurns();
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, xp in level, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, xp in level, poison turns, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -584,6 +585,103 @@ internal static class Program
         FrameworkTweaks.RegisterAll(restarted);
         Check(restarted.Initialize(store) && XpAt(restarted, FrameworkTweaks.XpInLevel, vanilla, t, max, 1, 250) == "150 / 200 (250)",
             "the stored On applies from the first call after a restart");
+    }
+
+    // Spec #243 FR-3: the poison countdown, its text cache, the descriptor, and the tooltip gate.
+    private static void PoisonTurns()
+    {
+        TweakDescriptor d = FrameworkTweaks.PoisonTurnsDescriptor;
+        Check(d.Id == "information.poison-turns" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
+            "Poison turns left is a Local Information tweak with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "Poison turns left is off by default and has no balance note");
+        Check(d.Evidence.Contains("CharacterStats.EndTurnActionSequence") && d.Evidence.Contains("uiToolTipGeneral.GetMoreToolTip")
+            && d.Evidence.Contains("IsOwner"), "the evidence names the verified methods and the ownership check");
+
+        // (3 - counter) + 3 * (level - 1), for every counter value the game holds between end turns.
+        Check(PoisonTurnsText.RoundsPerLevel == 3, "one level lasts PoisonTimeRounds (3) end turns");
+        Check(PoisonTurnsText.Remaining(1, 0) == 3 && PoisonTurnsText.Remaining(1, 1) == 2 && PoisonTurnsText.Remaining(1, 2) == 1,
+            "one level counts down 3, 2, 1");
+        Check(PoisonTurnsText.Remaining(3, 0) == 9 && PoisonTurnsText.Remaining(3, 2) == 7, "each stacked level adds 3 end turns");
+        Check(PoisonTurnsText.Remaining(0, 0) == 0 && PoisonTurnsText.Remaining(0, 2) == 0 && PoisonTurnsText.Remaining(-1, 1) == 0,
+            "no poison counts nothing");
+        Check(PoisonTurnsText.Remaining(2, 3) == 3 && PoisonTurnsText.Remaining(1, 3) == 0 && PoisonTurnsText.Remaining(2, 7) == 3,
+            "a counter at or past 3 reads as the current level finished");
+        Check(PoisonTurnsText.Remaining(2, -4) == 6, "a negative counter reads as 0");
+
+        // Simulate EndTurnActionSequence: gaining poison never resets the counter, so a level stacked
+        // mid-countdown adds exactly 3 end turns and the prediction holds at every step.
+        int level = 1, counter = 0;
+        Check(PoisonTurnsText.Remaining(level, counter) == 3, "fresh poison: 3 end turns");
+        counter = EndTurn(ref level, counter);
+        Check(PoisonTurnsText.Remaining(level, counter) == 2, "after one end turn: 2");
+        level++;
+        Check(PoisonTurnsText.Remaining(level, counter) == 5, "a level stacked mid-countdown adds 3 without resetting the counter");
+        int predicted = PoisonTurnsText.Remaining(level, counter), ends = 0;
+        while (level > 0)
+        {
+            counter = EndTurn(ref level, counter);
+            ends++;
+            Check(PoisonTurnsText.Remaining(level, counter) == predicted - ends, "the count drops by one each end turn: " + ends);
+        }
+        Check(ends == predicted, "the poison clears after exactly the predicted end turns");
+
+        Check(PoisonTurnsText.Line(1) == "1 end turn left" && PoisonTurnsText.Line(4) == "4 end turns left", "the line text");
+        var text = new PoisonTurnsText();
+        const string vanilla = "Small penalty to stats and damage at end of turn";
+        string first = text.Append(vanilla, 4);
+        Check(first == vanilla + "\n4 end turns left", "the count goes on its own line after vanilla's detail");
+        Check(ReferenceEquals(text.Append(vanilla, 4), first), "repeated frames reuse the composed string");
+        Check(ReferenceEquals(text.Append(new string(vanilla.ToCharArray()), 4), first), "an equal vanilla string reuses the cache");
+        Check(text.Append(vanilla, 3) == vanilla + "\n3 end turns left", "a new count rebuilds the string");
+        Check(ReferenceEquals(text.Append(vanilla, 0), vanilla) && text.Append(null, 2) == null && text.Append("", 2) == "",
+            "nothing to count, or no vanilla text, leaves vanilla untouched");
+        string warm = text.Append(vanilla, 5);
+        long before = GC.GetAllocatedBytesForCurrentThread();
+        for (int i = 0; i < 10000; i++) warm = text.Append(vanilla, 5);
+        long allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+        Check(allocated == 0, "a steady tooltip allocated " + allocated + " bytes (" + warm.Length + ")");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.PoisonTurns;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "Poison turns left registers cleanly");
+        var cache = new PoisonTurnsText();
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, true, true, false, 2, 1), vanilla),
+            "before initialization the vanilla text passes through");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Poison turns left off");
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, true, true, false, 2, 1), vanilla),
+            "off: the vanilla text passes through");
+        Check(r.Toggle(handle) && store.Values["information.poison-turns"] == TweakPreference.On, "turning it on stores On");
+        Check(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, true, true, false, 2, 1) == vanilla + "\n5 end turns left",
+            "on: an owned, living, poisoned character gets the count");
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, false, true, false, 2, 1), vanilla),
+            "on: a character this client does not own keeps vanilla");
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, true, false, false, 2, 1), vanilla),
+            "on: a dead character keeps vanilla");
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, true, true, true, 2, 1), vanilla),
+            "on: a character waiting to respawn keeps vanilla");
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, true, true, false, 0, 0), vanilla),
+            "on: a character that is not poisoned keeps vanilla");
+        r.Fault(handle, new InvalidOperationException("tooltip"));
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, handle, cache, vanilla, true, true, false, 2, 1), vanilla),
+            "faulted: the vanilla text passes through");
+        Check(ReferenceEquals(FrameworkTweaks.PoisonTurnsDetail(r, TweakRegistry.InvalidHandle, cache, vanilla, true, true, false, 2, 1), vanilla),
+            "an unregistered handle leaves vanilla untouched");
+    }
+
+    /// <summary>The counter steps of CharacterStats.EndTurnActionSequence for a living character
+    /// that is not waiting to respawn.</summary>
+    private static int EndTurn(ref int level, int counter)
+    {
+        if (level > 0) counter++;
+        else counter = 0;
+        if (level > 0 && counter >= PoisonTurnsText.RoundsPerLevel)
+        {
+            level--;
+            counter = 0;
+        }
+        return counter;
     }
 
     private static List<string> Warnings = new List<string>(), Infos = new List<string>(), Errors = new List<string>();

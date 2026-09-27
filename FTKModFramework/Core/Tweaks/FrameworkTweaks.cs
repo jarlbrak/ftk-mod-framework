@@ -39,6 +39,21 @@ namespace FTKModFramework.Core
             + "flagged for update, and uiPlayerStats.UpdateDisplay, run when the stats panel opens. The "
             + "postfix only replaces the returned string, on every machine, for display.");
 
+        internal static readonly TweakDescriptor PoisonTurnsDescriptor = new TweakDescriptor(
+            "information.poison-turns", TweakCategory.Information, TweakScope.Local,
+            "Poison turns left",
+            "Show how many end turns remain until your poison wears off in the poison status tooltip.",
+            "CharacterStats.EndTurnActionSequence adds 1 to the private, unsynced and unsaved "
+            + "m_PoisonTimeCounter at each end turn while m_HealthCurrent > 0 and "
+            + "!CharacterOverworld.m_WaitForRespawn, then at PoisonTimeRounds (3) calls "
+            + "RPCAllSelf(\"UpdatePoison\", -1) and resets it; UpdatePoison never resets it. The turn "
+            + "FSM state that calls CheckEndTurnAction is activated only where m_PhotonView.isMine, and "
+            + "in dungeons DoRemoteEndTurnAction arrives through RPCOwner, so the patch requires "
+            + "CharacterOverworld.IsOwner (FTKNetworkObject: ownerId == PhotonNetwork.player.ID). The postfix on "
+            + "uiToolTipGeneral.GetMoreToolTip matches m_DetailInfo STR_statusPoisonInfo on the HUD "
+            + "(uiPlayerMainHud.m_Cow) and inventory (uiPlayerInventory.m_InventoryOwner) icons and "
+            + "only extends the returned string, on this client, for display.");
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -54,6 +69,7 @@ namespace FTKModFramework.Core
         internal static int SessionProbe { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int QuestDungeonName { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int PoisonTurns { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -61,6 +77,7 @@ namespace FTKModFramework.Core
             SkipIntro = registry.Register(SkipIntroDescriptor);
             QuestDungeonName = registry.Register(QuestDungeonNameDescriptor);
             XpInLevel = registry.Register(XpInLevelDescriptor);
+            PoisonTurns = registry.Register(PoisonTurnsDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
@@ -108,6 +125,18 @@ namespace FTKModFramework.Core
         {
             if (!registry.IsOn(handle)) return vanillaText;
             return XpInLevelText.Format(level, maxLevel, totalXp, levelStartXp, levelEndXp) ?? vanillaText;
+        }
+
+        /// <summary>The poison tooltip decision for one GetMoreToolTip call on a poison status icon.
+        /// Off, faulted or uninitialized returns vanilla's text unchanged, as does a character this
+        /// client does not own (its counter copy stays 0), a dead or respawning one (the counter is
+        /// paused), or one that is not poisoned.</summary>
+        internal static string PoisonTurnsDetail(TweakRegistry registry, int handle, PoisonTurnsText text,
+            string vanillaText, bool owned, bool alive, bool waitingForRespawn, int level, int counter)
+        {
+            if (!registry.IsOn(handle)) return vanillaText;
+            if (!owned || !alive || waitingForRespawn || level <= 0) return vanillaText;
+            return text.Append(vanillaText, PoisonTurnsText.Remaining(level, counter));
         }
     }
 }

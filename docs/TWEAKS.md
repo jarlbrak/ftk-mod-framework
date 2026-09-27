@@ -7,12 +7,18 @@ code. There is no `Content.*` API for them, so mods cannot register one.
 
 This guide describes the foundation from [Spec #233](https://github.com/jarlbrak/ftk-mod-framework/issues/233)
 under [epic #232](https://github.com/jarlbrak/ftk-mod-framework/issues/232), and how to add a tweak
-on top of it. Four descriptors exist today: the **Skip intro** pilot, the self-test
-**Session lifecycle probe**, the first Local Fix, **Dungeon names in quest text**
-(`fix.quest-dungeon-name`, [Spec #242](https://github.com/jarlbrak/ftk-mod-framework/issues/242)
-FR-1), and **XP within the level**
-([Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1). Live verification
-status is tracked on #233, #242 and #243.
+on top of it. These descriptors exist today:
+
+- **Skip intro**, the pilot.
+- **Session lifecycle probe**, self-test only.
+- **Dungeon names in quest text** (`fix.quest-dungeon-name`,
+  [Spec #242](https://github.com/jarlbrak/ftk-mod-framework/issues/242) FR-1), the first Local Fix.
+- **XP within the level** (`information.xp-in-level`,
+  [Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1).
+- **Poison turns left** (`information.poison-turns`, Spec #243 FR-3): the poison status tooltip
+  counts the end turns left for characters this client owns.
+
+Live verification status is tracked on #233, #242 and #243.
 
 `fix.quest-dungeon-name` postfixes `QuestLogicBase.SetMessageParams`. Quest message params are
 cached: they are built on the first `GetMessageParams` call, rebuilt by
@@ -261,6 +267,6 @@ dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c R
 ```
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
-hooks, faults, Skip intro, the quest dungeon name decision, XP within the level, the probe and
-the tab. `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
+hooks, faults, Skip intro, the quest dungeon name decision, XP within the level, Poison turns
+left, the probe and the tab. `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 Both run in CI.
