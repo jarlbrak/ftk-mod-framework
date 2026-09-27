@@ -34,8 +34,9 @@ Build from plain Novice gear into Oathkeeper, Highward, Mercy, Censure and Verdi
 
 ## Compatibility
 
-Paladin 1.2.0 requires framework 1.0.3. Paladin 1.0.1 remains
-available for framework 1.0.1. The current catalog declares the verified
-macOS game build and a player-reported Windows fingerprint. Online co-op, including multiple Paladins and
+Paladin 1.4.0 requires framework 1.2.1 or a compatible later 1.x release. Paladin 1.0.1 remains
+available for framework 1.0.1. The current catalog publishes Paladin for Windows, macOS and Linux
+on the listed game build. Gameplay is verified on macOS only; Windows and Linux gameplay remain
+unverified. Online co-op, including multiple Paladins and
 host/client state parity, remains unverified. The [validation record](../../../docs/paladin/LAUNCH-1.0.0.md)
 separates tested paths from remaining gameplay coverage.
