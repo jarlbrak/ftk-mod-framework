@@ -26,6 +26,12 @@ on top of it. These descriptors exist today:
 - **Mark encounters that vanish** (`information.vanishing-encounters`, Spec #243 FR-5): the
   overworld hover card of a known encounter that leaving or ending the turn removes says "Gone
   once you leave or end your turn here." Unknown encounters show nothing new.
+- **Name the achievements House Rules disable** (`information.house-rules-achievements`,
+  Spec #243 FR-6): when the chosen House Rules count as easier, the rules summary on the game
+  setup, waiting room and resume screens adds that the three Defeat Vexor achievements and the
+  win statistics won't be recorded. The game counts rules as easier when the chaos frequency
+  value or the life pool is above the difficulty's, or inflation is below it. It does not count
+  infinite lives as easier, and the line follows the game.
 
 Live verification status is tracked on #233, #242 and #243.
 
@@ -278,6 +284,6 @@ dotnet run --project FTKModFramework/Tests/TweaksConfig/TweaksConfig.csproj -c R
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
 hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, the Perfect chance
 math and fix, XP within the level, Poison turns left, Sell price in item details, Mark
-encounters that vanish, the probe and the tab.
+encounters that vanish, Name the achievements House Rules disable, the probe and the tab.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`. Both run
 in CI.

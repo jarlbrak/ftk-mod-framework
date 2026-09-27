@@ -107,6 +107,8 @@ internal static class TabChecks
             "a fresh install shows Sell price in item details under Information, off by default");
         ShippedRow(registry, rows, headings, "information.vanishing-encounters", "Mark encounters that vanish: Off (default)",
             "a fresh install shows Mark encounters that vanish under Information, off by default");
+        ShippedRow(registry, rows, headings, "information.house-rules-achievements", "Name the achievements House Rules disable: Off (default)",
+            "a fresh install shows Name the achievements House Rules disable under Information, off by default");
         ShippedRow(registry, rows, headings, "convenience.skip-intro", "Skip intro: Off (default)",
             "a fresh install shows Skip intro under Convenience, off by default");
     }

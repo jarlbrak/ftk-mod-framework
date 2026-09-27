@@ -68,6 +68,7 @@ internal static class Program
         PoisonTurns();
         SellPrice();
         VanishingEncounters();
+        HouseRulesAchievements();
         StaleWetIcon();
         PerfectChanceMath();
         PerfectChanceTweak();
@@ -75,7 +76,7 @@ internal static class Program
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, lifecycle hooks, session probe, tab).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, lifecycle hooks, session probe, tab).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -768,6 +769,53 @@ internal static class Program
         for (int i = 0; i < 10000; i++) sink = FrameworkTweaks.VanishingEncounterEffect(off, offHandle, effect, true, true);
         long allocated = GC.GetAllocatedBytesForCurrentThread() - before;
         Check(allocated == 0, "the off path allocated " + allocated + " bytes (" + sink.Length + ")");
+    }
+
+    // Spec #243 FR-6: the House Rules descriptor, line and gate. The patch computes "easier" with the
+    // game's own Rules2.IsEasier, so infinite lives, which vanilla does not count as easier, arrives
+    // here as false and keeps the vanilla text.
+    private static void HouseRulesAchievements()
+    {
+        TweakDescriptor d = FrameworkTweaks.HouseRulesAchievementsDescriptor;
+        Check(d.Id == "information.house-rules-achievements" && d.Category == TweakCategory.Information && d.Scope == TweakScope.Local,
+            "Name the achievements House Rules disable is a Local Information tweak with the specified ID");
+        Check(!d.DefaultOn && d.BalanceNote == null, "Name the achievements House Rules disable is off by default and has no balance note");
+        Check(d.Evidence.Contains("sPlayerAchievement_trigger") && d.Evidence.Contains("HouseRulesEasyEnabled")
+            && d.Evidence.Contains("GameDifficulty.GetDynamicDifficultyText(Rules2)") && d.Evidence.Contains("IsDifficultyEasier"),
+            "the evidence names the revert, the flag, the hook and the easier test");
+        Check(d.Evidence.Contains("ACH_STORY_KILL_VEXOR_EASY/NORMAL/HARD") && d.Evidence.Contains("15 STAT_GAMEWIN_*"),
+            "the evidence names the affected rows");
+
+        const string vanilla = "Lore Payout: 50%\nLife Pool: 5\nEconomy: 100";
+        Check(HouseRulesText.Line == "Easier House Rules: the three Defeat Vexor achievements and win statistics won't be recorded.",
+            "the line text");
+        Check(HouseRulesText.Append(vanilla, true) == vanilla + "\n" + HouseRulesText.Line, "easier rules get the line after the summary");
+        Check(ReferenceEquals(HouseRulesText.Append(vanilla, false), vanilla), "rules that are not easier keep the summary");
+        Check(HouseRulesText.Append("", true) == HouseRulesText.Line && HouseRulesText.Append(null, true) == HouseRulesText.Line,
+            "an empty summary shows the line alone");
+        Check(HouseRulesText.Append(null, false) == null, "no summary and not easier stays null");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.HouseRulesAchievements;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d,
+            "Name the achievements House Rules disable registers cleanly");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true), vanilla),
+            "before initialization the vanilla text passes through");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves Name the achievements House Rules disable off");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true), vanilla),
+            "off: the vanilla text passes through");
+        Check(r.Toggle(handle) && store.Values["information.house-rules-achievements"] == TweakPreference.On, "turning it on stores On");
+        Check(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true) == vanilla + "\n" + HouseRulesText.Line,
+            "on: easier rules name what is not recorded");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, false), vanilla),
+            "on: default, harder or infinite-lives rules keep vanilla");
+        r.Fault(handle, new InvalidOperationException("rules"));
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, handle, vanilla, true), vanilla),
+            "faulted: the vanilla text passes through");
+        Check(ReferenceEquals(FrameworkTweaks.HouseRulesDifficultyText(r, TweakRegistry.InvalidHandle, vanilla, true), vanilla),
+            "an unregistered handle leaves vanilla untouched");
     }
 
     /// <summary>The counter steps of CharacterStats.EndTurnActionSequence for a living character
