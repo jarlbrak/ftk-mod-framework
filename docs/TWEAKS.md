@@ -15,6 +15,10 @@ on top of it. These descriptors exist today:
   [Spec #242](https://github.com/jarlbrak/ftk-mod-framework/issues/242) FR-1), the first Local Fix.
 - **Clear the Wet icon after combat** (`fix.stale-wet-icon`, Spec #242 FR-4): the HUD hides the
   Wet status icon outside combat, as vanilla already does for the other combat statuses.
+- **Clear the group shield icon after combat** (`fix.stale-group-shield-icon`,
+  [Spec #260](https://github.com/jarlbrak/ftk-mod-framework/issues/260) FR-4, a #242 follow-up):
+  the same fix for the group shield icon. Both icons share one `SetStatusIcons` postfix and one
+  decision, and each keeps its own toggle and fault state.
 - **Correct Perfect chances** (`fix.perfect-chance`, Spec #242 FR-5): the Perfect figure on combat
   buttons counts Shocked, Illuminated and Darkness, and Taunt's own accuracy. Rolls are unchanged.
 - **XP within the level** (`information.xp-in-level`,
@@ -37,7 +41,7 @@ on top of it. These descriptors exist today:
   value or the life pool is above the difficulty's, or inflation is below it. It does not count
   infinite lives as easier, and the line follows the game.
 
-Live verification status is tracked on #233, #242 and #243.
+Live verification status is tracked on #233, #242, #243 and #260.
 
 `fix.quest-dungeon-name` postfixes `QuestLogicBase.SetMessageParams`. Quest message params are
 cached: they are built on the first `GetMessageParams` call, rebuilt by
@@ -390,8 +394,8 @@ dotnet run --project FTKModFramework/Tests/SessionRecordHooks/SessionRecordHooks
 ```
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
-hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, the Perfect chance
-math and fix, XP within the level, One-press inventory, Poison turns left, Sell price in item
+hooks, faults, Skip intro, the quest dungeon name decision, the shared stale combat icon decision
+for the Wet and group shield icons, the Perfect chance math and fix, XP within the level, One-press inventory, Poison turns left, Sell price in item
 details, Mark encounters that vanish, Name the achievements House Rules disable, the probe, the
 tab, and the Session record codec, resolution, resume state, the state dictionary read and
 write, and the single-match rule of the save transpiler.

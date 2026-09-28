@@ -69,7 +69,7 @@ internal static class Program
         SellPrice();
         VanishingEncounters();
         HouseRulesAchievements();
-        StaleWetIcon();
+        StaleCombatIcons();
         PerfectChanceMath();
         PerfectChanceTweak();
         OnePressInventory();
@@ -78,7 +78,7 @@ internal static class Program
         SessionProbe();
         _checks += TabChecks.Run();
         _checks += SessionRecordChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, one-press inventory, lifecycle hooks, session probe, tab, session record).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet and group shield icons, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, one-press inventory, lifecycle hooks, session probe, tab, session record).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -916,46 +916,76 @@ internal static class Program
         return counter;
     }
 
-    // Spec #242 FR-4: the stale Wet icon descriptor and the SetStatusIcons else-branch decision.
-    private static void StaleWetIcon()
+    // Spec #242 FR-4 and Spec #260 FR-4: the stale Wet and group shield icon descriptors and the
+    // shared SetStatusIcons else-branch decision, run once per icon through that icon's own handle.
+    private static void StaleCombatIcons()
     {
-        TweakDescriptor d = FrameworkTweaks.StaleWetIconDescriptor;
-        Check(d.Id == "fix.stale-wet-icon" && d.Category == TweakCategory.Fix && d.Scope == TweakScope.Local,
-            "the Wet icon fix is a Local Fix with the specified ID");
-        Check(d.DefaultOn && d.BalanceNote == null, "the Wet icon fix is on by default with no balance note");
-        Check(d.Evidence.Contains("uiPlayerMainHudStatus.SetStatusIcons") && d.Evidence.Contains("m_IsInCombat"),
-            "the evidence names the verified method and predicate");
+        StaleCombatIcon(FrameworkTweaks.StaleWetIconDescriptor, "fix.stale-wet-icon", "Wet icon", "m_wet", "Category.Water",
+            () => FrameworkTweaks.StaleWetIcon);
+        StaleCombatIcon(FrameworkTweaks.StaleGroupShieldIconDescriptor, "fix.stale-group-shield-icon", "group shield icon",
+            "m_GroupShield", "Category.Shield", () => FrameworkTweaks.StaleGroupShieldIcon);
+
+        // Each icon's handle gates only that icon: one off or faulted leaves the other working.
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        Check(r.Initialize(new MemoryStore()), "the registry initializes");
+        int wet = FrameworkTweaks.StaleWetIcon;
+        int shield = FrameworkTweaks.StaleGroupShieldIcon;
+        Check(wet != shield && r.IsOn(wet) && r.IsOn(shield), "the two icons have separate handles, both on");
+        Check(r.Toggle(wet) && !r.IsOn(wet) && r.IsOn(shield), "turning the Wet fix off leaves the group shield fix on");
+        Check(!FrameworkTweaks.HideStaleCombatIcon(r, wet, true, false, true)
+            && FrameworkTweaks.HideStaleCombatIcon(r, shield, true, false, true), "with the Wet fix off, only the group shield icon is hidden");
+        Check(r.Toggle(wet) && r.IsOn(wet), "the Wet fix turns back on");
+        Check(r.Toggle(shield) && !r.IsOn(shield) && r.IsOn(wet), "turning the group shield fix off leaves the Wet fix on");
+        Check(FrameworkTweaks.HideStaleCombatIcon(r, wet, true, false, true)
+            && !FrameworkTweaks.HideStaleCombatIcon(r, shield, true, false, true), "with the group shield fix off, only the Wet icon is hidden");
+        Check(r.Toggle(shield) && r.IsOn(shield), "the group shield fix turns back on");
+        r.Fault(shield, new InvalidOperationException("hud"));
+        Check(FrameworkTweaks.HideStaleCombatIcon(r, wet, true, false, true)
+            && !FrameworkTweaks.HideStaleCombatIcon(r, shield, true, false, true), "a group shield fault leaves the Wet fix working");
+    }
+
+    private static void StaleCombatIcon(TweakDescriptor d, string id, string label, string field, string status, Func<int> handleOf)
+    {
+        Check(d.Id == id && d.Category == TweakCategory.Fix && d.Scope == TweakScope.Local,
+            "the " + label + " fix is a Local Fix with the specified ID");
+        Check(d.DefaultOn && d.BalanceNote == null, "the " + label + " fix is on by default with no balance note");
+        Check(d.Evidence.Contains("uiPlayerMainHudStatus.SetStatusIcons") && d.Evidence.Contains("m_IsInCombat")
+            && d.Evidence.Contains(field) && d.Evidence.Contains(status),
+            "the " + label + " evidence names the verified method, predicate, field and status");
 
         var store = new MemoryStore();
         TweakRegistry r = NewRegistry();
         FrameworkTweaks.RegisterAll(r);
-        int handle = FrameworkTweaks.StaleWetIcon;
-        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "the Wet icon fix registers cleanly");
+        int handle = handleOf();
+        int byId;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d
+            && r.TryGetHandle(id, out byId) && byId == handle, "the " + label + " fix registers cleanly");
 
         bool[] values = { false, true };
         // Before initialization, off, faulted or unregistered: never hide, whatever the state.
-        Action<TweakRegistry, int, string> neverHides = (registry, h, label) =>
+        Action<TweakRegistry, int, string> neverHides = (registry, h, state) =>
         {
             foreach (bool dummy in values)
                 foreach (bool combat in values)
                     foreach (bool shown in values)
-                        Check(!FrameworkTweaks.HideStaleWetIcon(registry, h, dummy, combat, shown),
-                            label + ": vanilla stands (dummy " + dummy + ", combat " + combat + ", shown " + shown + ")");
+                        Check(!FrameworkTweaks.HideStaleCombatIcon(registry, h, dummy, combat, shown),
+                            label + ", " + state + ": vanilla stands (dummy " + dummy + ", combat " + combat + ", shown " + shown + ")");
         };
         neverHides(r, handle, "before initialization");
 
-        Check(r.Initialize(store) && r.IsOn(handle), "a fresh install turns the Wet icon fix on");
-        Check(FrameworkTweaks.HideStaleWetIcon(r, handle, true, false, true), "on: a shown icon with a dummy out of combat is hidden");
-        Check(FrameworkTweaks.HideStaleWetIcon(r, handle, false, false, true), "on: a shown icon with no dummy is hidden");
-        Check(FrameworkTweaks.HideStaleWetIcon(r, handle, false, true, true), "on: in combat without a dummy is vanilla's else-branch, so it is hidden");
-        Check(!FrameworkTweaks.HideStaleWetIcon(r, handle, true, true, true), "on: in combat with a dummy vanilla owns the icon");
-        Check(!FrameworkTweaks.HideStaleWetIcon(r, handle, true, true, false), "on: in combat a hidden icon is left alone");
-        Check(!FrameworkTweaks.HideStaleWetIcon(r, handle, true, false, false), "on: an icon already hidden is not touched again");
-        Check(!FrameworkTweaks.HideStaleWetIcon(r, handle, false, false, false), "on: no dummy and a hidden icon is not touched");
+        Check(r.Initialize(store) && r.IsOn(handle), "a fresh install turns the " + label + " fix on");
+        Check(FrameworkTweaks.HideStaleCombatIcon(r, handle, true, false, true), label + " on: a shown icon with a dummy out of combat is hidden");
+        Check(FrameworkTweaks.HideStaleCombatIcon(r, handle, false, false, true), label + " on: a shown icon with no dummy is hidden");
+        Check(FrameworkTweaks.HideStaleCombatIcon(r, handle, false, true, true), label + " on: in combat without a dummy is vanilla's else-branch, so it is hidden");
+        Check(!FrameworkTweaks.HideStaleCombatIcon(r, handle, true, true, true), label + " on: in combat with a dummy vanilla owns the icon");
+        Check(!FrameworkTweaks.HideStaleCombatIcon(r, handle, true, true, false), label + " on: in combat a hidden icon is left alone");
+        Check(!FrameworkTweaks.HideStaleCombatIcon(r, handle, true, false, false), label + " on: an icon already hidden is not touched again");
+        Check(!FrameworkTweaks.HideStaleCombatIcon(r, handle, false, false, false), label + " on: no dummy and a hidden icon is not touched");
 
-        Check(r.Toggle(handle) && store.Values["fix.stale-wet-icon"] == TweakPreference.Off && !r.IsOn(handle), "turning it off stores Off");
+        Check(r.Toggle(handle) && store.Values[id] == TweakPreference.Off && !r.IsOn(handle), label + ": turning it off stores Off");
         neverHides(r, handle, "off");
-        Check(r.Toggle(handle) && store.Values["fix.stale-wet-icon"] == TweakPreference.Default && r.IsOn(handle), "turning it back on follows the default");
+        Check(r.Toggle(handle) && store.Values[id] == TweakPreference.Default && r.IsOn(handle), label + ": turning it back on follows the default");
         r.Fault(handle, new InvalidOperationException("hud"));
         neverHides(r, handle, "faulted");
         neverHides(r, TweakRegistry.InvalidHandle, "an unregistered handle");

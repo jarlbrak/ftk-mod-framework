@@ -39,6 +39,18 @@ namespace FTKModFramework.Core
             + "combat. SetStatusIcons runs from uiPlayerMainHud.Update when the HUD is flagged for update. "
             + "The postfix hides the icon under the else-branch predicate, on every machine, for display.");
 
+        /// <summary>Spec #260 FR-4, a #242 follow-up. Shares the Wet icon's postfix and decision.</summary>
+        internal static readonly TweakDescriptor StaleGroupShieldIconDescriptor = new TweakDescriptor(
+            "fix.stale-group-shield-icon", TweakCategory.Fix, TweakScope.Local,
+            "Clear the group shield icon after combat",
+            "Hide the group shield status icon on your HUD outside combat, as the game already does for the other combat statuses.",
+            "uiPlayerMainHudStatus.SetStatusIcons sets m_GroupShield from m_CurrentDummy.Shielded, and "
+            + "m_GroupShieldLvl from EncounterSession.Instance.GetPlayerShieldStrength() when shielded, only while "
+            + "(bool)m_CurrentDummy && m_CharacterStats.m_IsInCombat; its else-branch hides every other "
+            + "combat-only icon but never m_GroupShield, and no other Assembly-CSharp method references it. Shielded is "
+            + "CharacterDummy.m_SufferingProficiencies holding Category.Shield, a combat dummy status. "
+            + "The postfix hides the icon under the else-branch predicate, on every machine, for display.");
+
         internal static readonly TweakDescriptor PerfectChanceDescriptor = new TweakDescriptor(
             "fix.perfect-chance", TweakCategory.Fix, TweakScope.Local,
             "Correct Perfect chances",
@@ -150,6 +162,7 @@ namespace FTKModFramework.Core
         internal static int SessionProbe { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int QuestDungeonName { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int StaleWetIcon { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int StaleGroupShieldIcon { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PerfectChanceFix { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PoisonTurns { get; private set; } = TweakRegistry.InvalidHandle;
@@ -164,6 +177,7 @@ namespace FTKModFramework.Core
             SkipIntro = registry.Register(SkipIntroDescriptor);
             QuestDungeonName = registry.Register(QuestDungeonNameDescriptor);
             StaleWetIcon = registry.Register(StaleWetIconDescriptor);
+            StaleGroupShieldIcon = registry.Register(StaleGroupShieldIconDescriptor);
             PerfectChanceFix = registry.Register(PerfectChanceDescriptor);
             XpInLevel = registry.Register(XpInLevelDescriptor);
             PoisonTurns = registry.Register(PoisonTurnsDescriptor);
@@ -211,14 +225,15 @@ namespace FTKModFramework.Core
             return string.IsNullOrEmpty(state.DungeonDisplayValue) ? null : state.DungeonDisplayValue;
         }
 
-        /// <summary>The stale Wet icon decision for one SetStatusIcons call. True only when the tweak
-        /// is on, vanilla took its else-branch (no combat dummy, or not in combat), and the icon is
-        /// still shown. Off, faulted or uninitialized never hides it, so vanilla stands.</summary>
-        internal static bool HideStaleWetIcon(TweakRegistry registry, int handle, bool hasCurrentDummy, bool inCombat, bool wetIconActive)
+        /// <summary>The stale combat icon decision for one SetStatusIcons call, shared by every icon
+        /// that vanilla sets only in its in-combat branch (m_wet, m_GroupShield). True only when the
+        /// icon's tweak is on, vanilla took its else-branch (no combat dummy, or not in combat), and the
+        /// icon is still shown. Off, faulted or uninitialized never hides it, so vanilla stands.</summary>
+        internal static bool HideStaleCombatIcon(TweakRegistry registry, int handle, bool hasCurrentDummy, bool inCombat, bool iconActive)
         {
             if (!registry.IsOn(handle)) return false;
             bool vanillaInCombatBranch = hasCurrentDummy && inCombat;
-            return !vanillaInCombatBranch && wetIconActive;
+            return !vanillaInCombatBranch && iconActive;
         }
 
         /// <summary>The Perfect chance decision for one CalculateFullSkillChance call. Off, faulted or
