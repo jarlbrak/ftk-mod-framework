@@ -206,7 +206,7 @@ namespace FTKModFramework.Core
         internal static readonly TweakDescriptor RefundMovementFocusDescriptor = new TweakDescriptor(
             "convenience.refund-movement-focus", TweakCategory.Convenience, TweakScope.Session,
             "Refund movement focus",
-            "Take back focus you spent on movement this turn, while the extra move is unused and you have not set off. Click a faded focus pip or press Backspace (configurable). Keyboard and mouse only.",
+            "Take back focus you spent on movement this turn, up to one point per move you have left, whenever you are standing still with no path chosen. Click a faded focus pip or press F (configurable). Keyboard and mouse only.",
             "The private Movement.ConvertFocusToAction runs only when m_FocusPoints > 0 and m_ActionPoints < 9, "
             + "then calls FTKGameStats m_ActionFocus++, CharacterStats.UpdateFocusPoints(-1) (clamped to MaxFocus, "
             + "UpdateHud, SyncMembers m_FocusPoints, m_BaseMaxFocus, m_SpentFocus) and CharacterOverworld."
@@ -220,7 +220,10 @@ namespace FTKModFramework.Core
             + "Movement.TrackResetList and uiPlayerMainHud.UpdateHud. Counts clear on CharacterOverworld.EndTurn, "
             + "EncounterSession.StartEncounterSession_Actual, SetInCombat(true), SetDeath and any Session set change. "
             + "The HUD postfixes the private uiPlayerMainHud.SetFocusMeter, whose m_FocusPoints pips show child 0 "
-            + "below m_FocusPoints; FTKInput's remap table needs a Rewired action per entry, so the key is framework config.");
+            + "below m_FocusPoints; FTKInput's remap table needs a Rewired action per entry, so the key is framework config. "
+            + "Its default F appears in no FTKInput.m_DefaultKeys or m_DefaultKeysMacOverride entry (the override sets "
+            + "EndTurn to Backspace on every platform through RestoreDefaultInputMap), no Rewired keyboard map and no "
+            + "UnityEngine.Input read.");
 
         /// <summary>Spec #265 FR-4. Local: it fires only the continuation vanilla's own popup coroutine
         /// would have fired on this machine, sends no RPC, and otherwise only hides this machine's popup.</summary>

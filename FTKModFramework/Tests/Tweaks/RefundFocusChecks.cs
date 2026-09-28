@@ -98,8 +98,10 @@ internal static class RefundFocusChecks
         Check(d.Id == Id && d.Category == TweakCategory.Convenience && d.Scope == TweakScope.Session,
             "a Session Convenience tweak with the specified ID");
         Check(!d.DefaultOn && d.ExplicitDefault == null && d.BalanceNote == null, "off by default with no balance note");
-        Check(d.Title == "Refund movement focus" && d.Summary.Contains("faded focus pip") && d.Summary.Contains("Backspace")
+        Check(d.Title == "Refund movement focus" && d.Summary.Contains("faded focus pip") && d.Summary.Contains("press F")
             && d.Summary.Contains("Keyboard and mouse only"), "the title, and a summary naming the pip, the default key and the input scope");
+        Check(!d.Summary.Contains("Backspace") && !d.Summary.Contains("set off") && d.Summary.Contains("per move you have left")
+            && d.Summary.Contains("no path chosen"), "the summary states the actual rule: bounded by moves left, standing with no path");
         foreach (string member in new[] { "Movement.ConvertFocusToAction", "UpdateFocusPoints(-1)", "UpdatePlayerAction(1)",
             "IsOwner", "FTKPlayerID", "MaxFocus", "m_IsMyTurn", "m_CharacterOverworld", "TrackingMode.Movement",
             "\"Tracking\"", "m_HexList.Count <= 1", "m_LockedInput", "\"PickSneakHex\"", "EncounterSession.m_IsInCombat",
@@ -376,19 +378,67 @@ internal static class RefundFocusChecks
         for (int i = 0; i < s.MaxFocus; i++) if (RefundFocus.PipMarked(i, s.FocusPoints, shown)) marked++;
         Check(shown == 0 && marked == 0, "a committed path unmarks every pip");
 
-        const int backspace = 8, escape = 27, space = 32, mouse0 = 323, joystickButton0 = 330;
-        Check(RefundFocusInput.Usable(backspace, new List<int> { escape, space }), "an unbound keyboard key is usable");
-        Check(!RefundFocusInput.Usable(backspace, new List<int> { escape, backspace }), "a key a game control uses is not");
-        Check(!RefundFocusInput.Usable(RefundFocusInput.None, null), "None is not a key");
-        Check(!RefundFocusInput.Usable(mouse0, null) && !RefundFocusInput.Usable(joystickButton0, null),
-            "mouse and controller buttons are not keyboard keys");
-        Check(RefundFocusInput.Usable(backspace, null) && RefundFocusInput.Usable(backspace, new List<int>()),
-            "no remap table yet means nothing conflicts");
+        KeyRules();
 
         Check(RefundFocusText.Title == "Refund focus", "the tooltip title");
-        Check(RefundFocusText.Detail("Backspace").Contains("Click") && RefundFocusText.Detail("Backspace").EndsWith(" Key: Backspace."),
+        Check(RefundFocusText.Detail("F").Contains("Click") && RefundFocusText.Detail("F").EndsWith(" Key: F."),
             "the tooltip names the click and the key");
-        Check(!RefundFocusText.Detail(null).Contains("Key:"), "no key configured: the tooltip names only the click");
-        Check(RefundFocusText.Detail("Backspace").IndexOf('\u2014') < 0, "no em dash in the tooltip");
+        Check(!RefundFocusText.Detail(null).Contains("Key:"), "no usable key: the tooltip names only the click");
+        Check(RefundFocusText.Detail("F").IndexOf('\u2014') < 0, "no em dash in the tooltip");
+    }
+
+    // The refund key: its default, the 1.6.0 migration, and the conflict decision. KeyCode values:
+    // Backspace 8, Return 13, Escape 27, F 102, R 114, Delete 127, UpArrow 273, Mouse0 323,
+    // JoystickButton0 330.
+    private static void KeyRules()
+    {
+        const int backspace = 8, enter = 13, escape = 27, f = 102, r = 114, delete = 127, up = 273, mouse0 = 323, joystickButton0 = 330;
+
+        Check(RefundFocusInput.DefaultKey == f, "the default key is F");
+        Check(!RefundFocusInput.IsDefaultBinding(RefundFocusInput.DefaultKey), "no default game binding uses the default key");
+        foreach (int bound in RefundFocusInput.FixedBindings)
+            Check(bound != RefundFocusInput.DefaultKey, "the default key is not fixed binding " + bound);
+        foreach (int bound in RefundFocusInput.RemappableDefaults)
+            Check(bound != RefundFocusInput.DefaultKey, "the default key is not remappable default " + bound);
+        Check(RefundFocusInput.Status(RefundFocusInput.DefaultKey, null) == RefundKeyStatus.Usable,
+            "the default key is usable against the default bindings");
+        Check(RefundFocusInput.IsDefaultBinding(backspace) && RefundFocusInput.IsDefaultBinding(delete),
+            "End Turn's Backspace (the platform override) and Delete (the base default) are default bindings");
+
+        // A player's saved custominput.bin with the default map: every keyboard key and modifier in it.
+        int[] savedTable = { 100, 97, 119, 115, 306, 113, 101, 32, 9, 304, 8, 105, 99, 116, 308, 304, 44, 46 };
+        foreach (int bound in savedTable)
+            Check(RefundFocusInput.IsDefaultBinding(bound) && RefundFocusInput.Status(bound, null) == RefundKeyStatus.Conflict,
+                "saved default binding " + bound + " conflicts");
+
+        Check(RefundFocusInput.Status(RefundFocusInput.None, null) == RefundKeyStatus.Off, "None turns the key off");
+        Check(RefundFocusInput.Status(mouse0, null) == RefundKeyStatus.NotKeyboard
+            && RefundFocusInput.Status(joystickButton0, null) == RefundKeyStatus.NotKeyboard
+            && RefundFocusInput.Status(-1, null) == RefundKeyStatus.NotKeyboard, "mouse and controller buttons are not keyboard keys");
+        Check(RefundFocusInput.Status(backspace, null) == RefundKeyStatus.Conflict,
+            "without the remap table Backspace conflicts with End Turn, not treated as free");
+        Check(RefundFocusInput.Status(backspace, new List<int> { escape, delete }) == RefundKeyStatus.Usable,
+            "with End Turn remapped away from Backspace, the live table frees it");
+        Check(RefundFocusInput.Status(f, new List<int> { f }) == RefundKeyStatus.Conflict,
+            "a key the player bound to a game control in the remap table conflicts");
+        Check(RefundFocusInput.Status(enter, new List<int>()) == RefundKeyStatus.Conflict
+            && RefundFocusInput.Status(escape, new List<int>()) == RefundKeyStatus.Conflict
+            && RefundFocusInput.Status(up, new List<int>()) == RefundKeyStatus.Conflict,
+            "keys the game reads outside the remap table conflict whatever the table says");
+        Check(RefundFocusInput.Status(r, new List<int> { escape }) == RefundKeyStatus.Usable, "an unbound keyboard key is usable");
+
+        Check(RefundFocusInput.Migrate(backspace) == RefundFocusInput.DefaultKey, "a saved 1.6.0 default Backspace reads as the new default");
+        Check(RefundFocusInput.Migrate(f) == f && RefundFocusInput.Migrate(r) == r && RefundFocusInput.Migrate(RefundFocusInput.None) == RefundFocusInput.None,
+            "any other saved key, and None, is kept");
+
+        Check(RefundFocusInput.Warning(RefundKeyStatus.Usable, "F") == null && RefundFocusInput.Warning(RefundKeyStatus.Off, "None") == null,
+            "a usable or switched-off key warns nothing");
+        string conflict = RefundFocusInput.Warning(RefundKeyStatus.Conflict, "Backspace");
+        string notKeyboard = RefundFocusInput.Warning(RefundKeyStatus.NotKeyboard, "Mouse0");
+        Check(conflict != null && conflict.Contains("Backspace") && conflict.Contains("game's own controls") && conflict.Contains("[TweakKeys] RefundMovementFocus"),
+            "a conflicting key warns, naming the key and the setting");
+        Check(notKeyboard != null && notKeyboard.Contains("Mouse0") && notKeyboard.Contains("not a keyboard key"),
+            "a mouse or controller button warns, naming it");
+        Check(conflict.IndexOf('\u2014') < 0 && notKeyboard.IndexOf('\u2014') < 0, "no em dash in the warnings");
     }
 }

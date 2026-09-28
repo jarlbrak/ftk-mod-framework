@@ -56,9 +56,9 @@ on top of it. These descriptors exist today:
   [Poison countdown on resume](#poison-countdown-on-resume).
 - **Refund movement focus** (`convenience.refund-movement-focus`,
   [Spec #264](https://github.com/jarlbrak/ftk-mod-framework/issues/264)), a Session Convenience
-  tweak, off by default: during your own turn, take back focus you spent on movement while the
-  extra move is unused and you have not set off. Click a faded focus pip or press Backspace
-  (configurable). Keyboard and mouse only. See [below](#refund-movement-focus).
+  tweak, off by default: during your own turn, take back focus you spent on movement, up to one
+  point per move you have left, whenever you are standing still with no path chosen. Click a faded
+  focus pip or press F (configurable). Keyboard and mouse only. See [below](#refund-movement-focus).
 - **Unstick the skip-turn popup** (`fix.stuck-skip-turn-popup`,
   [Spec #265](https://github.com/jarlbrak/ftk-mod-framework/issues/265) FR-4), a Local Fix, on by
   default: a skip-turn popup that is interrupted before it closes is closed once, as the game would
@@ -202,14 +202,37 @@ index is below `m_FocusPoints`. Nothing on the pips is clickable in vanilla.
   vanilla's fill state, then disables the component. Unity sends no pointer events to a disabled
   component, so an unmarked pip behaves as vanilla's.
 - A left click on a marked pip refunds one point. The tooltip reads "Refund focus" and explains
-  the click and the key.
+  the click, and the key when it is usable.
+- **Tooltip order.** The pips are children of `focusBar`, which carries the game's own
+  `uiToolTipGeneral` ("Focus Points"). `BaseInputModule.HandlePointerExitAndEnter` sends pointer
+  enter to the new target and then to each ancestor up to the common root with the previous
+  target. Entering a pip from the map therefore reaches the pip and then `focusBar`, whose tooltip
+  replaces the pip's; entering from a neighbouring pip stops at `focusBar`. A marked pip notes its
+  pointer enter and, in `LateUpdate` after that frame's events, takes the tooltip back once
+  through `uiToolTipManager.ClientOnPointerEnter` if another tooltip holds it.
 - **Key.** `FTKInput`'s remap table cannot take a framework action. It is built from the game's
   serialized defaults, saved to `custominput.bin`, and every entry is assigned to a Rewired action.
   The key is therefore the framework config entry `[TweakKeys] RefundMovementFocus` in
-  `BepInEx/config/com.ftkmf.framework.cfg`, default `Backspace`. `None` turns the key off. The key
-  acts only on the character whose pips are showing, and not while the chat box has text focus.
-  On a press, it is checked against every key in `FTKInput.m_RemappableKeys`. A key that a game
-  control also uses, or that is a mouse or controller button, is ignored, with one warning.
+  `BepInEx/config/com.ftkmf.framework.cfg`, default `F`. `None` turns the key off. The key acts
+  only on the character whose pips are showing, and not while the chat box has text focus.
+- **Default and conflicts.** `FTKInput.m_DefaultKeys` sets End Turn to `Delete`, and
+  `RestoreDefaultInputMap` applies `m_DefaultKeysMacOverride` on every platform, which sets it to
+  `Backspace`; a saved `custominput.bin` shows `EndTurn [8]`. Framework 1.6.0 defaulted the refund
+  key to `Backspace`, and its conflict check ran only on a press while pips showed. In the live run
+  a press ended the turn and logged nothing: vanilla `CharacterOverworld.Update` had already read
+  End Turn earlier in the frame and ended the turn, which hid the pips, so the check never ran. The
+  check now runs whenever the HUD redraws and on every press of the
+  configured key, whether or not a refund is possible. It tests the key against the fixed game
+  bindings (the Rewired keyboard maps' Return, Escape, arrows, Space, M and RightAlt, and the keys
+  Assembly-CSharp reads straight from `UnityEngine.Input`) and every key and modifier in
+  `FTKInput.m_RemappableKeys`, or the serialized defaults while that table is not loaded. A key
+  that a game control also uses, or that is a mouse or controller button, is never acted on, and
+  each such value is warned about once. `F` appears in none of these bindings; the game-free
+  tests encode the lists and assert it.
+- **Migration.** BepInEx writes a default into the config file, so every 1.6.0 player who turned
+  the tweak on has `Backspace` saved, indistinguishable from a chosen one. At startup a saved
+  `Backspace` is read as the old default and rewritten to `F`, with one log line. The cost is that
+  a player who remapped End Turn and wants `Backspace` for refunds cannot choose it.
 - **Controllers** are not supported in this version. Rewired has no spare action, so a character
   without the keyboard and mouse sees no refundable pips.
 

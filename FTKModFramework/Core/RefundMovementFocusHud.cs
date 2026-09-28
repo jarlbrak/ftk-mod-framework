@@ -43,13 +43,14 @@ namespace FTKModFramework.Core
     /// refund is possible, and restores every pip it changed when the tweak goes off.</summary>
     internal sealed class RefundFocusHud : MonoBehaviour
     {
-        private static bool _keyWarned;
+        /// <summary>The last key value warned about, so each unusable value warns once.</summary>
+        private static int _warnedKey = RefundFocusInput.None;
+        private static readonly List<int> BoundKeys = new List<int>();
 
         private uiPlayerMainHud _hud;
         private int _shown = -1;
         private int _focus = -1;
         private int _pipCount = -1;
-        private readonly List<int> _boundKeys = new List<int>();
 
         internal void Bind(uiPlayerMainHud hud)
         {
@@ -62,6 +63,10 @@ namespace FTKModFramework.Core
         {
             _shown = -1;
             Refresh();
+            // Checked here too, not only on a press, so a conflicting key warns once the HUD is up
+            // even when the game acts on the press first (End Turn ends the turn and hides the pips).
+            KeyCode code;
+            ConfiguredKey(out code);
         }
 
         private void Update()
@@ -76,7 +81,7 @@ namespace FTKModFramework.Core
             try
             {
                 int shown = Refresh();
-                if (shown > 0 && KeyPressed()) Refund("the refund key");
+                if (KeyPressed() && shown > 0) Refund("the refund key");
             }
             catch (Exception e)
             {
@@ -125,46 +130,65 @@ namespace FTKModFramework.Core
             if (RefundMovementFocus.TryRefund(_hud.m_Cow, via)) Redraw();
         }
 
-        /// <summary>The configured key went down this frame, on the keyboard of a keyboard and mouse
-        /// character, outside the chat box, and no vanilla action uses it. GetKeyDown is the only
-        /// per-frame read; the rest runs on a press.</summary>
-        private bool KeyPressed()
+        /// <summary>The configured key went down this frame, outside the chat box, and no game control
+        /// uses it. GetKeyDown is the only per-frame read. The conflict check runs on every press,
+        /// whether or not a refund is possible, so a conflicting press is never acted on and is always
+        /// reported.</summary>
+        private static bool KeyPressed()
         {
             ConfigEntry<KeyCode> key = Plugin.RefundMovementFocusKey;
             if (key == null) return false;
-            KeyCode code = key.Value;
-            if (code == KeyCode.None || !Input.GetKeyDown(code)) return false;
+            KeyCode pressed = key.Value;
+            if (pressed == KeyCode.None || !Input.GetKeyDown(pressed)) return false;
+            KeyCode code;
+            if (ConfiguredKey(out code) != RefundKeyStatus.Usable) return false;
             uiChatBox chat = uiChatBox.Instance;
-            if (chat != null && chat.IsTextInputInFocus()) return false;
-            CollectBoundKeys();
-            if (RefundFocusInput.Usable((int)code, _boundKeys)) return true;
-            if (!_keyWarned)
-            {
-                _keyWarned = true;
-                Plugin.Log.LogWarning("Tweaks: the refund movement focus key " + code + " is not a free keyboard key (a game control uses it, "
-                    + "or it is a mouse or controller button), so it is ignored. Change [TweakKeys] RefundMovementFocus in the framework config.");
-            }
-            return false;
+            return chat == null || !chat.IsTextInputInFocus();
         }
 
-        private void CollectBoundKeys()
+        /// <summary>The configured key and whether it is usable now, against the fixed game bindings and
+        /// the live remap table, warning once for each unusable value.</summary>
+        internal static RefundKeyStatus ConfiguredKey(out KeyCode code)
         {
-            _boundKeys.Clear();
+            ConfigEntry<KeyCode> key = Plugin.RefundMovementFocusKey;
+            code = key != null ? key.Value : KeyCode.None;
+            RefundKeyStatus status = RefundFocusInput.Status((int)code, CollectBoundKeys());
+            string warning = RefundFocusInput.Warning(status, code.ToString());
+            if (warning != null && _warnedKey != (int)code)
+            {
+                _warnedKey = (int)code;
+                Plugin.Log.LogWarning(warning);
+            }
+            return status;
+        }
+
+        /// <summary>Every key and modifier key of FTKInput.m_RemappableKeys, the player's current
+        /// bindings, or null while the table is not loaded, which means the defaults.</summary>
+        private static List<int> CollectBoundKeys()
+        {
             FTKInput input = FTKInput.Instance;
-            if (input == null || input.m_RemappableKeys == null) return;
+            if (input == null || input.m_RemappableKeys == null) return null;
+            BoundKeys.Clear();
             foreach (FTKInput.RemapKeyInfo info in input.m_RemappableKeys)
             {
                 if (info == null) continue;
-                AddKeys(info.m_PosKeys);
-                AddKeys(info.m_NegKeys);
+                AddKeys(info.m_PosKeys, info.m_PosMods);
+                AddKeys(info.m_NegKeys, info.m_NegMods);
             }
+            return BoundKeys;
         }
 
-        private void AddKeys(KeyCode[] keys)
+        private static void AddKeys(KeyCode[] keys, FTKInput.FTKModifierKeyFlags[] mods)
         {
-            if (keys == null) return;
-            for (int i = 0; i < keys.Length; i++)
-                if (keys[i] != KeyCode.None) _boundKeys.Add((int)keys[i]);
+            if (keys != null)
+                for (int i = 0; i < keys.Length; i++)
+                    if (keys[i] != KeyCode.None) BoundKeys.Add((int)keys[i]);
+            if (mods == null) return;
+            for (int i = 0; i < mods.Length; i++)
+            {
+                if (mods[i] == 0) continue;
+                foreach (KeyCode modifier in FTKInput.GetKeyFromModifier(mods[i])) BoundKeys.Add((int)modifier);
+            }
         }
 
         private void RestoreAll()
@@ -192,7 +216,7 @@ namespace FTKModFramework.Core
     /// redraw never allocates. While disabled Unity sends it no pointer events, so an unmarked pip
     /// behaves as vanilla's. Marking fades the pip's fill through a CanvasGroup, makes the pip a raycast
     /// target and shows the tooltip; unmarking restores each value and vanilla's fill state.</summary>
-    internal sealed class RefundFocusPip : MonoBehaviour, IPointerClickHandler
+    internal sealed class RefundFocusPip : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private const float FadedAlpha = 0.4f;
 
@@ -207,6 +231,7 @@ namespace FTKModFramework.Core
         private bool _raw;
         private bool _raycast;
         private bool _marked;
+        private PointerEventData _entered;
 
         internal void Attach(RefundFocusHud owner, Image pip)
         {
@@ -241,8 +266,9 @@ namespace FTKModFramework.Core
                         _detail = _tooltip.m_DetailInfo;
                         _raw = _tooltip.m_ReturnRawInfo;
                     }
-                    KeyCode key = Plugin.RefundMovementFocusKey != null ? Plugin.RefundMovementFocusKey.Value : KeyCode.None;
-                    _tooltip.SetToolTipInfo(RefundFocusText.Title, RefundFocusText.Detail(key == KeyCode.None ? null : key.ToString()), true);
+                    KeyCode key;
+                    bool usable = RefundFocusHud.ConfiguredKey(out key) == RefundKeyStatus.Usable;
+                    _tooltip.SetToolTipInfo(RefundFocusText.Title, RefundFocusText.Detail(usable ? key.ToString() : null), true);
                     enabled = true;
                 }
                 if (_fill != null)
@@ -266,6 +292,7 @@ namespace FTKModFramework.Core
                 _tooltip.enabled = false;
             }
             else _tooltip.SetToolTipInfo(_info, _detail, _raw);
+            _entered = null;
             enabled = false;
         }
 
@@ -273,6 +300,42 @@ namespace FTKModFramework.Core
         {
             if (!_marked || _owner == null || eventData.button != PointerEventData.InputButton.Left) return;
             _owner.Refund("a focus pip");
+        }
+
+        /// <summary>BaseInputModule.HandlePointerExitAndEnter sends pointer enter to the new target and
+        /// then to each ancestor up to the common root with the previous target. From the map that
+        /// includes focusBar, the pips' parent, whose own uiToolTipGeneral ("Focus Points") enters after
+        /// the pip's and replaces it; from a neighbouring pip focusBar is the common root and is skipped.
+        /// So the pip notes the enter and, after this frame's events, takes the tooltip back once.</summary>
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (_marked) _entered = eventData;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _entered = null;
+        }
+
+        private void LateUpdate()
+        {
+            if (_entered == null) return;
+            PointerEventData entered = _entered;
+            _entered = null;
+            int handle = FrameworkTweaks.RefundMovementFocus;
+            if (!Tweaks.IsOn(handle)) return;
+            try
+            {
+                uiToolTipManager manager = uiToolTipManager.Instance;
+                if (!_marked || manager == null || _tooltip == null) return;
+                IToolTipInfo current = manager.m_CurrentToolTip;
+                if (current == null || ReferenceEquals(current, _tooltip)) return;
+                manager.ClientOnPointerEnter(_tooltip, entered);
+            }
+            catch (Exception e)
+            {
+                Tweaks.Fault(handle, e);
+            }
         }
     }
 }

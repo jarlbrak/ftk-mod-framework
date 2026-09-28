@@ -383,10 +383,20 @@ namespace FTKModFramework
             // lifecycle probe is registered only for self-test runs.
             FrameworkTweaks.RegisterAll(Tweaks.Registry, SelfTestsEnabled);
             Tweaks.Registry.Initialize(new TweakConfigStore(Config, Tweaks.Registry));
-            RefundMovementFocusKey = Config.Bind("TweakKeys", "RefundMovementFocus", UnityEngine.KeyCode.Backspace,
+            RefundMovementFocusKey = Config.Bind("TweakKeys", "RefundMovementFocus", (UnityEngine.KeyCode)Core.RefundFocusInput.DefaultKey,
                 "Keyboard key that refunds one point of movement focus when the Refund movement focus tweak is on. " +
                 "None turns the key off; clicking a faded focus pip still works. A key that one of the game's own " +
-                "controls also uses is ignored, with one warning in the log. Controllers are not supported.");
+                "controls also uses is ignored, with one warning in the log. Backspace, the game's End Turn key and " +
+                "the 1.6.0 default, is read as the default. Controllers are not supported.");
+            // 1.6.0 wrote its Backspace default into every config file, so a saved Backspace is read as
+            // "the default" and rewritten, rather than ending the player's turn on every refund attempt.
+            int refundKey = Core.RefundFocusInput.Migrate((int)RefundMovementFocusKey.Value);
+            if (refundKey != (int)RefundMovementFocusKey.Value)
+            {
+                Log.LogInfo("Tweaks: [TweakKeys] RefundMovementFocus was " + RefundMovementFocusKey.Value
+                    + ", the game's End Turn key and the old default; it is now the default, " + (UnityEngine.KeyCode)refundKey + ".");
+                RefundMovementFocusKey.Value = (UnityEngine.KeyCode)refundKey;
+            }
             // fix.stuck-skip-turn-popup recovers from a later frame, outside any vanilla call. Idle frames
             // cost one comparison, and the driver checks the tweak before doing anything else.
             gameObject.AddComponent<Core.StuckSkipTurnDriver>();
