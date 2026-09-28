@@ -1,0 +1,2705 @@
+{
+  "schema": "ftkmf.nonweapon-inventory-icons.v2",
+  "deliveryManifest": {
+    "sourceId": "gear-consolidation/thief-coat-fit/nonweapon-icons-v2/manifest.json",
+    "sha256": "c2e19dae1ce0acfa232d4a8763e23afcbe9424466ba385926d8da0701e891331"
+  },
+  "adoptionGenerator": {
+    "path": "marketplace/packages/sync_nonweapon_icons_v3.py",
+    "sha256": "fa6fa6d51e3993b786f53af0b053d4ae266bc51b14d89b69979f87e9191eebb7"
+  },
+  "revisionGenerator": {
+    "path": "marketplace/packages/nonweapon_icon_revisions.py",
+    "sha256": "8211ab302e14712a1d799e7fa90587f3c9b593228114e434523eceffd86f59da"
+  },
+  "studioManifest": {
+    "sourceId": "gear-consolidation/studio-v3/manifest.json",
+    "sha256": "8e7a1d326ea1094278f9bca8423a9a6ab802b7eb31e6758530be9bcc9952d784"
+  },
+  "studioFrozenReceipt": {
+    "sourceId": "gear-consolidation/studio-v3/frozen.json",
+    "sha256": "e40d833e70be93c92e73f170e020b818e41562650b4a71374bda7c9422eed40f"
+  },
+  "renderGenerator": {
+    "sourceId": "gear-consolidation/studio-v3/render.py",
+    "sha256": "a4429e2af6a89597edef60fc2cf86da746133a1569fcab9433a5142214afe266"
+  },
+  "recipe": {
+    "engine": "Cycles",
+    "samples": 32,
+    "denoise": true,
+    "viewTransform": "Standard",
+    "roughness": 0.72,
+    "metallic": 0,
+    "lights": "Three area lights; 420/230/340 W times family span squared",
+    "framing": "Shared orthographic scale per package/family, 16% margin over maximum projected span",
+    "coordinates": "Decode strict mesh-local GLB directly; (x,y,z) to (x,-z,y); texture V flips once"
+  },
+  "outputFormat": {
+    "width": 512,
+    "height": 512,
+    "mode": "RGBA",
+    "transformation": "byte-identical copy"
+  },
+  "limits": "Studio art with original inputs; native icon-state/layout evidence remains separate. Retained coat/charm pixels keep their prior studio-v2 provenance.",
+  "items": [
+    {
+      "itemId": "paladin_armor_censure",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-censure-armor-icon.png",
+      "sha256": "2b813fef4a2684c1bd9bcd28d5424dfe20255bef4a94dc2337f5514476c41f74",
+      "bytes": 275035,
+      "priorSha256": "b41c3af8c9a97365a145cc61c4b75f3316ddd465b336ef0784dafa923d8d8c5b",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v8/paladin/paladin_armor_censure.png",
+        "sha256": "2b813fef4a2684c1bd9bcd28d5424dfe20255bef4a94dc2337f5514476c41f74"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257.png",
+          "sha256": "ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-censure-armor-display.glb",
+          "sha256": "6c29832b04877ad9677673fc08b499e10fba031a710061b4624f1168ddb0fb71"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          0.003902022682971154,
+          0.01168189636335843,
+          -0.0036008033517308676
+        ],
+        "orthographicScale": 1.1832325334592209
+      },
+      "native64Bounds": [
+        6,
+        4,
+        58,
+        59
+      ],
+      "native64AlphaThreshold": 16
+    },
+    {
+      "itemId": "paladin_boots_censure",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-censure-boots-icon.png",
+      "sha256": "3bba0433b767c1d9d0ab152189f00868be8e915f05b3091064ecae6bdc3fdd76",
+      "bytes": 238863,
+      "priorSha256": "d25297f22be1fac4bc87e87844c7d0428670285f737cb285d3cc43c9c2b00bcb",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v8/paladin/paladin_boots_censure.png",
+        "sha256": "3bba0433b767c1d9d0ab152189f00868be8e915f05b3091064ecae6bdc3fdd76"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a.png",
+          "sha256": "7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-censure-boots-display.glb",
+          "sha256": "66d4ad344fb2d262ec67a8a312d3ee1738a9463c873ce29c0c1ce166d49f2882"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          0.000766848946779683,
+          0.17721975824943453,
+          0.011576885572678594
+        ],
+        "orthographicScale": 2.4935563247891666
+      },
+      "native64Bounds": [
+        4,
+        8,
+        60,
+        56
+      ],
+      "native64AlphaThreshold": 16,
+      "previous": {
+        "itemId": "paladin_boots_censure",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-censure-boots-icon.png",
+        "sha256": "d25297f22be1fac4bc87e87844c7d0428670285f737cb285d3cc43c9c2b00bcb",
+        "bytes": 219566,
+        "priorSha256": "242375b5c1c48b9774d3c1201cd5704d84f8a643407ea238680f89657165343c",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v3/paladin/paladin_boots_censure.png",
+          "sha256": "d25297f22be1fac4bc87e87844c7d0428670285f737cb285d3cc43c9c2b00bcb"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-censure-boots-display.glb",
+            "sha256": "8954fba01d32fbd31e0424fe78b7428467fce505b4c9c199ae813d8b6fa7980e"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png",
+            "sha256": "4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.45,
+            -1,
+            0.26
+          ],
+          "target": [
+            -0.002809080987559817,
+            0.14955248495501078,
+            0.010862751506018245
+          ],
+          "orthographicScale": 1.8846583276604785
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          5,
+          7,
+          59,
+          57
+        ],
+        "sourceRevision": "studio-v3",
+        "previous": {
+          "itemId": "paladin_boots_censure",
+          "package": "paladin",
+          "path": "marketplace/packages/paladin/assets/paladin-censure-boots-icon.png",
+          "sha256": "242375b5c1c48b9774d3c1201cd5704d84f8a643407ea238680f89657165343c",
+          "bytes": 219656,
+          "priorSha256": "4115760fb5890947b671a1632b81890a5356f8faf143231e81e54b0eacb00db7",
+          "renderSource": {
+            "sourceId": "gear-consolidation/studio-v2/paladin/paladin_boots_censure.png",
+            "sha256": "242375b5c1c48b9774d3c1201cd5704d84f8a643407ea238680f89657165343c"
+          },
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-censure-boots-display.glb",
+              "sha256": "f10afc7a4ba5321caf3d7d0c467ea7f4b1d33a3cf297a6886cff2ad68e18c756"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png",
+              "sha256": "4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b"
+            }
+          ],
+          "camera": {
+            "direction": [
+              0.45,
+              -1,
+              0.26
+            ],
+            "target": [
+              -0.0011122924441089067,
+              0.059254338390846865,
+              -0.007544084034875514
+            ],
+            "orthographicScale": 0.7467223087261141
+          },
+          "native64AlphaThreshold": 16,
+          "native64Bounds": [
+            5,
+            7,
+            59,
+            57
+          ]
+        }
+      }
+    },
+    {
+      "itemId": "paladin_boots_highward",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-highward-boots-icon.png",
+      "sha256": "07ec21e3ab33c9974684de36a4f6dffbd7f97d7a395279fd39e72f67a9261726",
+      "bytes": 237870,
+      "priorSha256": "0bae520b45355c1af74462059d716db50c2f4552e9eafa1c35c45f6d77279c8d",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_boots_highward.png",
+        "sha256": "07ec21e3ab33c9974684de36a4f6dffbd7f97d7a395279fd39e72f67a9261726"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-highward-boots-display.glb",
+          "sha256": "acd4262bd651b233d6650f043c06ec07337d5de4a7c83156397e0948e39df1ba"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png",
+          "sha256": "700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.005243633875683225,
+          0.15443959451492678,
+          0.011767117573786248
+        ],
+        "orthographicScale": 1.8846583276604785
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        6,
+        6,
+        58,
+        58
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "paladin_boots_highward",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-highward-boots-icon.png",
+        "sha256": "0bae520b45355c1af74462059d716db50c2f4552e9eafa1c35c45f6d77279c8d",
+        "bytes": 237864,
+        "priorSha256": "77e9cc6458c3daec450ea0ed87869c77e50de737601e159143a275f6923e8c2a",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/paladin/paladin_boots_highward.png",
+          "sha256": "0bae520b45355c1af74462059d716db50c2f4552e9eafa1c35c45f6d77279c8d"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-highward-boots-display.glb",
+            "sha256": "7f6b1d56b11dfca50248bd59fd6c918902d5219dc5561195f1c0f50ccd0f545b"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png",
+            "sha256": "700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.45,
+            -1,
+            0.26
+          ],
+          "target": [
+            -0.0020768845392807635,
+            0.06119066514810903,
+            -0.010153612976156119
+          ],
+          "orthographicScale": 0.7467223087261141
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          6,
+          6,
+          58,
+          58
+        ]
+      }
+    },
+    {
+      "itemId": "paladin_boots_mercy",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-mercy-boots-icon.png",
+      "sha256": "0b664e9faa8bba45b1b15377b80e49bf6a8dc2d4e8dfbdfca152946a08ba92eb",
+      "bytes": 249391,
+      "priorSha256": "42b94d2a18e15bc2eee9540bfc56ce8c1c491f54cd1b3b8986dd17b5a4095552",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_boots_mercy.png",
+        "sha256": "0b664e9faa8bba45b1b15377b80e49bf6a8dc2d4e8dfbdfca152946a08ba92eb"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-mercy-boots-display.glb",
+          "sha256": "fb77aa33072c722690791f85fb22a2828d8d8557dfc093b8c92b18ada5634357"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png",
+          "sha256": "fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.039905168541662935,
+          0.11148410013551582,
+          0.014311481742171187
+        ],
+        "orthographicScale": 1.8846583276604785
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        4,
+        7,
+        60,
+        57
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "paladin_boots_mercy",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-mercy-boots-icon.png",
+        "sha256": "42b94d2a18e15bc2eee9540bfc56ce8c1c491f54cd1b3b8986dd17b5a4095552",
+        "bytes": 249277,
+        "priorSha256": "5a68d5c9c7b1dfbb4356c12cd50e8b8fedc270de110af96bb344463cc0207a9c",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/paladin/paladin_boots_mercy.png",
+          "sha256": "42b94d2a18e15bc2eee9540bfc56ce8c1c491f54cd1b3b8986dd17b5a4095552"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-mercy-boots-display.glb",
+            "sha256": "81693c192451b709ab73f0fc69373a3f7a5260c672df86bb7bfd92e173628e07"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png",
+            "sha256": "fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.45,
+            -1,
+            0.26
+          ],
+          "target": [
+            -0.015810151837777568,
+            0.044171215314568836,
+            -0.002056178165635676
+          ],
+          "orthographicScale": 0.7467223087261141
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          4,
+          7,
+          60,
+          57
+        ]
+      }
+    },
+    {
+      "itemId": "paladin_boots_novice",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-novice-boots-icon.png",
+      "sha256": "c530f81f72d55d76c39dd64918b8a69959281af4065ccf8d95fa77090b1c1583",
+      "bytes": 221918,
+      "priorSha256": "08d1c794d3a4b3a7fff7434db6e73bd5d4d5bd4351da7f8321534d5302e1c361",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_boots_novice.png",
+        "sha256": "c530f81f72d55d76c39dd64918b8a69959281af4065ccf8d95fa77090b1c1583"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-novice-boots-display.glb",
+          "sha256": "88a79c3cca7a17a5c46273dc20f245c624a4de7077f4305cec9053054a3c7e2e"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png",
+          "sha256": "470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.059319661070445964,
+          0.09835086444290131,
+          -0.018071006267930772
+        ],
+        "orthographicScale": 1.8846583276604785
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        4,
+        8,
+        60,
+        56
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "paladin_boots_novice",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-novice-boots-icon.png",
+        "sha256": "08d1c794d3a4b3a7fff7434db6e73bd5d4d5bd4351da7f8321534d5302e1c361",
+        "bytes": 221911,
+        "priorSha256": "2c08c6771a4c6d5b1057eab31c6746d8f3ab1a4b50d42b489610cdf53ff64dd4",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/paladin/paladin_boots_novice.png",
+          "sha256": "08d1c794d3a4b3a7fff7434db6e73bd5d4d5bd4351da7f8321534d5302e1c361"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-novice-boots-display.glb",
+            "sha256": "a0cb2c679b7510aea48c3e47b5fc23a58510b276ebf09f82a7493ff1b74f5e47"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png",
+            "sha256": "470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.45,
+            -1,
+            0.26
+          ],
+          "target": [
+            -0.02350237787949036,
+            0.03896768493964774,
+            -0.01498583400202848
+          ],
+          "orthographicScale": 0.7467223087261141
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          4,
+          8,
+          60,
+          56
+        ]
+      }
+    },
+    {
+      "itemId": "paladin_boots_oathkeeper",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-boots-icon.png",
+      "sha256": "518d36b4b46e37d5f176eef4e507b16b6034438497290c94de4eaea6476eacc5",
+      "bytes": 246859,
+      "priorSha256": "73ae8634fd6e260c641b893137d15afe336d884eacbc1171e0ff497a319807c9",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_boots_oathkeeper.png",
+        "sha256": "518d36b4b46e37d5f176eef4e507b16b6034438497290c94de4eaea6476eacc5"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-boots-display.glb",
+          "sha256": "f49342e574df27da62243d62c46db85f7b7eaf6ff9d153b4248fce24759b9751"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png",
+          "sha256": "70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.031373073795684804,
+          0.0979434155486137,
+          0.021541715025545756
+        ],
+        "orthographicScale": 1.8846583276604785
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        4,
+        7,
+        60,
+        57
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "paladin_boots_oathkeeper",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-boots-icon.png",
+        "sha256": "73ae8634fd6e260c641b893137d15afe336d884eacbc1171e0ff497a319807c9",
+        "bytes": 246841,
+        "priorSha256": "25cb5f9e87b1c70c48de36e67e40bab9a33875f242c17e647fe459451f1dacfc",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/paladin/paladin_boots_oathkeeper.png",
+          "sha256": "73ae8634fd6e260c641b893137d15afe336d884eacbc1171e0ff497a319807c9"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-boots-display.glb",
+            "sha256": "4d77bcd19b14673abb7aa469b84f304f6c71f9610519711ae426ae961afd930b"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png",
+            "sha256": "70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.45,
+            -1,
+            0.26
+          ],
+          "target": [
+            -0.012429640701107638,
+            0.03880625446956759,
+            -0.0018488335956119671
+          ],
+          "orthographicScale": 0.7467223087261141
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          4,
+          7,
+          60,
+          57
+        ]
+      }
+    },
+    {
+      "itemId": "paladin_boots_verdict",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-verdict-boots-icon.png",
+      "sha256": "a763e3f52e004c41f13bb77a4b688c92d38718f68180e2312e0754367be705c9",
+      "bytes": 226593,
+      "priorSha256": "979ae234f572e4e4006a6a0643a4ff3828b5550156fb3222fd49ddc193bdd104",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_boots_verdict.png",
+        "sha256": "a763e3f52e004c41f13bb77a4b688c92d38718f68180e2312e0754367be705c9"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-verdict-boots-display.glb",
+          "sha256": "0a1688c8e2bacfbf08c577e27aa7f9cca8baaa78c574b837fdb89b3c5e5b1fc1"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png",
+          "sha256": "3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.05050601750730974,
+          0.07195968086690874,
+          -0.028351830142844495
+        ],
+        "orthographicScale": 1.8846583276604785
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        4,
+        7,
+        60,
+        57
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "paladin_boots_verdict",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-verdict-boots-icon.png",
+        "sha256": "979ae234f572e4e4006a6a0643a4ff3828b5550156fb3222fd49ddc193bdd104",
+        "bytes": 226767,
+        "priorSha256": "0183b38dee050cdde53a07b21210fb007d7181a8dbdc7afb34793fd8ca0243c2",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/paladin/paladin_boots_verdict.png",
+          "sha256": "979ae234f572e4e4006a6a0643a4ff3828b5550156fb3222fd49ddc193bdd104"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-verdict-boots-display.glb",
+            "sha256": "731d33a6cb366f2d921f77f3f0a2f1e94406b61434bee79cdb14e842d9cf35dc"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png",
+            "sha256": "3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.45,
+            -1,
+            0.26
+          ],
+          "target": [
+            -0.020010321434032384,
+            0.028511220408108308,
+            -0.02016350171968915
+          ],
+          "orthographicScale": 0.7467223087261141
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          4,
+          7,
+          60,
+          57
+        ]
+      }
+    },
+    {
+      "itemId": "paladin_helmet_censure",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-censure-helmet-icon.png",
+      "sha256": "c5ddb28adbd96f45930e38ed7b6b09fbdbf631a92a81dc5577ef877c4e935ba7",
+      "bytes": 192441,
+      "priorSha256": "df25f0611dffbae014f17e8a533d65de72718e3a6a1c9ddce57bd95d154b6d02",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v8/paladin/paladin_helmet_censure.png",
+        "sha256": "c5ddb28adbd96f45930e38ed7b6b09fbdbf631a92a81dc5577ef877c4e935ba7"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c.png",
+          "sha256": "6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-censure-helmet-display.glb",
+          "sha256": "0bf6487398da1af7146a354d2b62e50262f8183c87cbc68c9ff471d62d151973"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.017732202289630843,
+          0.1176145737166569,
+          -0.22909698331469777
+        ],
+        "orthographicScale": 0.7593437384756219
+      },
+      "native64Bounds": [
+        15,
+        4,
+        49,
+        60
+      ],
+      "native64AlphaThreshold": 16,
+      "previous": {
+        "itemId": "paladin_helmet_censure",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-censure-helmet-icon.png",
+        "sha256": "df25f0611dffbae014f17e8a533d65de72718e3a6a1c9ddce57bd95d154b6d02",
+        "bytes": 233453,
+        "priorSha256": "5be80ce5408979b3b36d86353a050b1707ee4174a752b3f305a39c419d085f06",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v3/paladin/paladin_helmet_censure.png",
+          "sha256": "df25f0611dffbae014f17e8a533d65de72718e3a6a1c9ddce57bd95d154b6d02"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-censure-helmet-display.glb",
+            "sha256": "3b06b607154f2c92ebcee74ff6f2525d21eec55b4c0c3f5a7d49a2f957ba87b4"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png",
+            "sha256": "0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            0.0035996592686920736,
+            0.14527884098681187,
+            -0.2548325333931396
+          ],
+          "orthographicScale": 0.7593437384756219
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          12,
+          8,
+          52,
+          56
+        ],
+        "sourceRevision": "studio-v3",
+        "previous": {
+          "itemId": "paladin_helmet_censure",
+          "package": "paladin",
+          "path": "marketplace/packages/paladin/assets/paladin-censure-helmet-icon.png",
+          "sha256": "5be80ce5408979b3b36d86353a050b1707ee4174a752b3f305a39c419d085f06",
+          "bytes": 233502,
+          "priorSha256": "3eb08d248e159308631bb6951843d7290f403417ccceec4dec79d9b13e60e564",
+          "renderSource": {
+            "sourceId": "gear-consolidation/studio-v2/paladin/paladin_helmet_censure.png",
+            "sha256": "5be80ce5408979b3b36d86353a050b1707ee4174a752b3f305a39c419d085f06"
+          },
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-censure-helmet.glb",
+              "sha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png",
+              "sha256": "0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91"
+            }
+          ],
+          "camera": {
+            "direction": [
+              0.3,
+              -1,
+              0.12
+            ],
+            "target": [
+              -0.005921705782736902,
+              0.1372894505046084,
+              -0.3490204198901736
+            ],
+            "orthographicScale": 0.7593437480070289
+          },
+          "native64AlphaThreshold": 16,
+          "native64Bounds": [
+            12,
+            8,
+            52,
+            56
+          ]
+        }
+      }
+    },
+    {
+      "itemId": "paladin_helmet_highward",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-highward-helmet-icon.png",
+      "sha256": "52e33d5d062e99d653c2d341cd2aa60932d9f4ea5f91668f9acf8bb2f869c6d1",
+      "bytes": 235852,
+      "priorSha256": "150a365bc691cb417d0d24cdd4a70f567f53cce4f2026a04309b37f3d4026224",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_helmet_highward.png",
+        "sha256": "52e33d5d062e99d653c2d341cd2aa60932d9f4ea5f91668f9acf8bb2f869c6d1"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-highward-helmet-display.glb",
+          "sha256": "81668f4e2c36e1d70669ed39b6c6dbc92aa8e4aaa90291576062e65e9d12ff7b"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png",
+          "sha256": "47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.0011645085360713903,
+          0.1451144299067377,
+          -0.23171564785084522
+        ],
+        "orthographicScale": 0.7593437384756219
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "paladin_helmet_mercy",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-mercy-helmet-icon.png",
+      "sha256": "52f81109ae7acf58ee93463b88c317bc57f083cf373b616cb7639a1af052391c",
+      "bytes": 209262,
+      "priorSha256": "b1b2a419f077fda8e3d99b73495d25fb10da5536087dd751e60f00f7af1e07dc",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_helmet_mercy.png",
+        "sha256": "52f81109ae7acf58ee93463b88c317bc57f083cf373b616cb7639a1af052391c"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-mercy-helmet-display.glb",
+          "sha256": "0847bc0366880625ad3882090426f8a583a1b59c6b85fa04d5bc4a2f415acee3"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png",
+          "sha256": "ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.02567925862916713,
+          0.16237895092758656,
+          -0.23648898127009255
+        ],
+        "orthographicScale": 0.7593437384756219
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        11,
+        5,
+        53,
+        59
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "paladin_helmet_novice",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-novice-helmet-icon.png",
+      "sha256": "deb77a43c93bce082297c8227546e3ea46c442584e7e40597abd18048c2a1c5c",
+      "bytes": 206630,
+      "priorSha256": "32210646eb07f88d3d20b6af8d0c3353640f24215e2b602408ccbe1e9d66d128",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_helmet_novice.png",
+        "sha256": "deb77a43c93bce082297c8227546e3ea46c442584e7e40597abd18048c2a1c5c"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-novice-helmet-display.glb",
+          "sha256": "206ec6450aafe1f5888577205955d8060bfdf593225652da52c326733c81cf67"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png",
+          "sha256": "caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.025863390406719547,
+          0.15859296314900748,
+          -0.23421327907164768
+        ],
+        "orthographicScale": 0.7593437384756219
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        10,
+        6,
+        54,
+        58
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "paladin_helmet_oathkeeper",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-icon.png",
+      "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237",
+      "bytes": 217608,
+      "priorSha256": "b3b3208183c03b2cf7db9ebb31751c3b9c2e6d1185df009b2e008741d34d31e7",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v4/paladin/paladin_helmet_oathkeeper.png",
+        "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png",
+          "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-display.glb",
+          "sha256": "ca2bf74937dbc540185d1ab0851f8ea699f6359ef6fd70c4c5972f24f73cf5fa"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.020177797707064397,
+          0.14102516482656874,
+          -0.23763347800841883
+        ],
+        "orthographicScale": 0.7593437384756219
+      },
+      "native64Bounds": [
+        10,
+        3,
+        54,
+        61
+      ],
+      "native64AlphaThreshold": 16,
+      "previous": {
+        "itemId": "paladin_helmet_oathkeeper",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-icon.png",
+        "sha256": "b3b3208183c03b2cf7db9ebb31751c3b9c2e6d1185df009b2e008741d34d31e7",
+        "bytes": 202914,
+        "priorSha256": "2caa8de574c101d9e941dc20189b278faa646c621cd5f29e692fd52f0e5625f2",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v3/paladin/paladin_helmet_oathkeeper.png",
+          "sha256": "b3b3208183c03b2cf7db9ebb31751c3b9c2e6d1185df009b2e008741d34d31e7"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-display.glb",
+            "sha256": "1b3c925c9b4116e560fded89a49746f2ed9a4aee06fefceb511521d9a66d2bfc"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png",
+            "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            0.04789382137082819,
+            0.06844607865917676,
+            -0.24527314301778938
+          ],
+          "orthographicScale": 0.7593437384756219
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          8,
+          7,
+          56,
+          57
+        ],
+        "sourceRevision": "studio-v3",
+        "previous": {
+          "itemId": "paladin_helmet_oathkeeper",
+          "package": "paladin",
+          "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-icon.png",
+          "sha256": "2caa8de574c101d9e941dc20189b278faa646c621cd5f29e692fd52f0e5625f2",
+          "bytes": 202933,
+          "priorSha256": "b40bf9cc0cca6ff71d19a69c318410a9186ac7ff4ace66113a68214e8452be76",
+          "renderSource": {
+            "sourceId": "gear-consolidation/studio-v2/paladin/paladin_helmet_oathkeeper.png",
+            "sha256": "2caa8de574c101d9e941dc20189b278faa646c621cd5f29e692fd52f0e5625f2"
+          },
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet.glb",
+              "sha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png",
+              "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e"
+            }
+          ],
+          "camera": {
+            "direction": [
+              0.3,
+              -1,
+              0.12
+            ],
+            "target": [
+              0.037407420981301176,
+              0.05964694410937175,
+              -0.4004414077968763
+            ],
+            "orthographicScale": 0.7593437480070289
+          },
+          "native64AlphaThreshold": 16,
+          "native64Bounds": [
+            8,
+            7,
+            56,
+            57
+          ]
+        }
+      }
+    },
+    {
+      "itemId": "paladin_helmet_verdict",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-verdict-helmet-icon.png",
+      "sha256": "ca8376299886a1d2d79270fb1b95229f47dd3cd4192333237288d22177ff1210",
+      "bytes": 211133,
+      "priorSha256": "09ed181a164a38893b29e365679cd875b19428aedb962c4a74edc0c0e57c7d13",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/paladin/paladin_helmet_verdict.png",
+        "sha256": "ca8376299886a1d2d79270fb1b95229f47dd3cd4192333237288d22177ff1210"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-verdict-helmet-display.glb",
+          "sha256": "1a5c4097401cddfc86d009baebe161cbf8d81af8589242109c30c75da4acd712"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png",
+          "sha256": "394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.03645538432004394,
+          0.17310090647268409,
+          -0.23119536006920982
+        ],
+        "orthographicScale": 0.7593437384756219
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        11,
+        6,
+        53,
+        58
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "paladin_shield_censure",
+      "package": "paladin",
+      "path": "marketplace/packages/paladin/assets/paladin-shield-censure-icon.png",
+      "sha256": "ec9c762957bd68af3ef2a69edc5b2200dae45a53c0e3ef3cc0eb0d618c519024",
+      "bytes": 228225,
+      "priorSha256": "93ffde5fe633e43059714ff48c6658b5abfc78d5ebcf2f4a6f6bdcdac7d4af9b",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v8/paladin/paladin_shield_censure.png",
+        "sha256": "ec9c762957bd68af3ef2a69edc5b2200dae45a53c0e3ef3cc0eb0d618c519024"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/paladin/assets/atlas-633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b.png",
+          "sha256": "633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b"
+        },
+        {
+          "path": "marketplace/packages/paladin/assets/paladin-shield-censure-display.glb",
+          "sha256": "6f57968cefcbcd40a58bf689460c381d6c4fc812e6d3d540e553f7f743d8b75b"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.002909935647796239,
+          -0.045128473767115415,
+          -0.08709674229340833
+        ],
+        "orthographicScale": 1.3362751032785274
+      },
+      "native64Bounds": [
+        14,
+        6,
+        50,
+        58
+      ],
+      "native64AlphaThreshold": 16
+    },
+    {
+      "itemId": "thief_boots_burglar",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-boots-burglar-icon.png",
+      "sha256": "fe39c1005bc5ac11560b81e29828017272949c8c5370179034002f3e94fc3425",
+      "bytes": 198149,
+      "priorSha256": "538311b51a2da079cdf9464207a764a5eff61981f6c62fc0d2cbbd1f0b86f37d",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_boots_burglar.png",
+        "sha256": "fe39c1005bc5ac11560b81e29828017272949c8c5370179034002f3e94fc3425"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-burglar-display.glb",
+          "sha256": "77738b2b24274156f04051d8fd1e06efba1c0a427304f0908c78e004ee160c5e"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-burglar-advanced-shaded.png",
+          "sha256": "4cec14380c43788606bcedf556db890ee4282e9b9929b994cc0376571bf386a2"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.0038057398408637907,
+          0.11690066089904962,
+          0.018452738042125348
+        ],
+        "orthographicScale": 1.8556055171189276
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        5,
+        13,
+        59,
+        51
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "thief_boots_guild",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-boots-guild-icon.png",
+      "sha256": "2fd00b454c4e859f45ca08dd6ebba9190193dd151710624a40095a5d2a666aad",
+      "bytes": 257917,
+      "priorSha256": "3203fd90383028fd2f056e963ccf6d828f3c8045254aead5ec69305009967e5d",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_boots_guild.png",
+        "sha256": "2fd00b454c4e859f45ca08dd6ebba9190193dd151710624a40095a5d2a666aad"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-guild-display.glb",
+          "sha256": "1dcac7a4b0e94572b13a6597d4dba3cac332c70e10c822bf4ef77696ab19bb83"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-guild-advanced-shaded.png",
+          "sha256": "fd483ee788306c27a0cd0fd8b8ee155c786d487f9bf93f3df645054562cd99fe"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.030426266619853322,
+          0.09562969242176819,
+          0.02116054930733403
+        ],
+        "orthographicScale": 1.8556055171189276
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        5,
+        11,
+        59,
+        53
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "thief_boots_locksmith",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-boots-locksmith-icon.png",
+      "sha256": "51865a6ea5cd48b828f6f69cbc7625a301d705c6ade85ab72cd7b7a5cd347b5d",
+      "bytes": 250970,
+      "priorSha256": "f2c53419ae922df10bd48a703ed3591fd891e5646432e49d9e2a7744ff413ff8",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_boots_locksmith.png",
+        "sha256": "51865a6ea5cd48b828f6f69cbc7625a301d705c6ade85ab72cd7b7a5cd347b5d"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-locksmith-display.glb",
+          "sha256": "115b7a6adb2b0e8118b0c904d286d4ded2c6cda9162fcc077089216235d85914"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-locksmith-advanced-shaded.png",
+          "sha256": "0273ae59cf15c41d95a013035f5748c18951e8e3562c07b7539231e3a7392981"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.03735364895330721,
+          0.08318005465338904,
+          0.00609838700147167
+        ],
+        "orthographicScale": 1.8556055171189276
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        6,
+        11,
+        58,
+        53
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "thief_boots_masterwork",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-boots-masterwork-icon.png",
+      "sha256": "3f520b04fd3c464ae69d0281f0ad0fc0669d2254f0746169773d0b65f5bf4604",
+      "bytes": 249900,
+      "priorSha256": "8e2973f931fcd5988b817d5f02eb0d183c8fbdb2c2f3bc44ee189d7da2f96d6d",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_boots_masterwork.png",
+        "sha256": "3f520b04fd3c464ae69d0281f0ad0fc0669d2254f0746169773d0b65f5bf4604"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-masterwork-display.glb",
+          "sha256": "45460dec98d8f3bed03c7e02cd45767fd63a46afc00f720d698621c0537fa79d"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-masterwork-advanced-shaded.png",
+          "sha256": "106514a0a533339fe12eda96669bccab24d89d3394b1e759016ee2a22b84dd57"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.04537880800050353,
+          0.0815987318539382,
+          0.012686866933764085
+        ],
+        "orthographicScale": 1.8556055171189276
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        5,
+        9,
+        59,
+        55
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "thief_boots_nightblade",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-boots-nightblade-icon.png",
+      "sha256": "98df1b6c949210095326e25302ddb28815a21eed9ea14ce43e02a3a9dbc0b553",
+      "bytes": 199051,
+      "priorSha256": "323a311227cd1a1c14a90f03613b4fde9589ff516873d07c08c409a1c21aed36",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_boots_nightblade.png",
+        "sha256": "98df1b6c949210095326e25302ddb28815a21eed9ea14ce43e02a3a9dbc0b553"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-nightblade-display.glb",
+          "sha256": "4a7c8dcb7284870c91489a7af4b3760889b725a4978115f8294be716b24c0947"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-nightblade-advanced-shaded.png",
+          "sha256": "44cebf53c27f1a0c2a47dfde2162e8aef62c9e7e6bcdf9ca544afc5c608231a4"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.03466128117560889,
+          0.08737357697350773,
+          0.013066161238244719
+        ],
+        "orthographicScale": 1.8556055171189276
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        5,
+        11,
+        59,
+        53
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "thief_boots_street",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-boots-street-icon.png",
+      "sha256": "c6ecb79caca6149bdd2bcc2a6868f29f9140c08d2b4557c08285115b27322c50",
+      "bytes": 197224,
+      "priorSha256": "6cb5b9daeef7fabb843df0a972764101a3e18e879d6557b502c588c144505ce9",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_boots_street.png",
+        "sha256": "c6ecb79caca6149bdd2bcc2a6868f29f9140c08d2b4557c08285115b27322c50"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-street-display.glb",
+          "sha256": "f8ff525c9accbbecc0d3058ed4f01027eea87d08b78bc8d2190e6a12c7e50545"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-street-advanced-shaded.png",
+          "sha256": "68f4df7ee2cd0921062a7ced7b2092ff427a3dbc4a88bef82573c34e7633ff51"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.045158311400567676,
+          0.04223441555047827,
+          -0.011503430135877225
+        ],
+        "orthographicScale": 1.8556055171189276
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        5,
+        16,
+        59,
+        48
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "thief_boots_wayfarer",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-boots-wayfarer-icon.png",
+      "sha256": "8b5c10260f10310d62aa300b2e0df5cdcb3b3280c012a4b1ca8c6c14d4df7916",
+      "bytes": 289493,
+      "priorSha256": "b55844d83c33f8d3f5648e302dea4b509137a957f9b34a4ad05d1056f311054b",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_boots_wayfarer.png",
+        "sha256": "8b5c10260f10310d62aa300b2e0df5cdcb3b3280c012a4b1ca8c6c14d4df7916"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-wayfarer-display.glb",
+          "sha256": "6f2ec00bef2a7a4536b604874b566cd284b87e34021f5f9eb5877e36af4a1af3"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-boots-wayfarer-advanced-shaded.png",
+          "sha256": "a6c80102c1ac2b4acc81ec89e7395ecfd31e3eb673c4574da7f45345ad6c6bbe"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.45,
+          -1,
+          0.26
+        ],
+        "target": [
+          -0.050177238594877924,
+          0.09219621775001002,
+          -0.018544288218044117
+        ],
+        "orthographicScale": 1.8556055171189276
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        4,
+        10,
+        60,
+        54
+      ],
+      "sourceRevision": "studio-v3"
+    },
+    {
+      "itemId": "thief_charm_burglar",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-charm-burglar-icon.png",
+      "sha256": "a4862640931b7bcbc4a56ba2f06670768c73e3ce439bea751498e1cb649d53ad",
+      "bytes": 137675,
+      "priorSha256": "a5c782ab058f451d0111deda20bc73e83d67ed03d505e526408a56e467871316",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_charm_burglar.png",
+        "sha256": "a4862640931b7bcbc4a56ba2f06670768c73e3ce439bea751498e1cb649d53ad"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-burglar-display.glb",
+          "sha256": "f021080be911e4b12399447c57a671e721746cc34487461639c4f7e4e8dcd5f4"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-burglar-diffuse.png",
+          "sha256": "696912a8d437bb6cae3dc40c487ebc92419c734ad656f820ec91386b1ac96728"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.00210072027827116,
+          -0.006525874772653821,
+          0.0006124550258415647
+        ],
+        "orthographicScale": 0.4429511944635774
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        23,
+        6,
+        41,
+        58
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_charm_guild",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-charm-guild-icon.png",
+      "sha256": "159c86ea2f82d7587441eefde6bb8be01ddd652aea34c7ce32a15d0d5c3d4d00",
+      "bytes": 279645,
+      "priorSha256": "e2f3063a0acebf81728905f1283f7191a44a9d6bfb8cc1ad4aaa9d09be2d5f60",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_charm_guild.png",
+        "sha256": "159c86ea2f82d7587441eefde6bb8be01ddd652aea34c7ce32a15d0d5c3d4d00"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-guild-display.glb",
+          "sha256": "54a0d4f6a5cc3395af2568950117d2ddc3e3c78371d7082afdb39b3e27c0dbea"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-guild-diffuse.png",
+          "sha256": "a8d4de6adc23e810efb0bb342ceccde132f30ee5141036e2715ec8ba9dde2115"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.0005781934988465438,
+          0.0026551709273672755,
+          -0.000750921715188496
+        ],
+        "orthographicScale": 0.4429511944635774
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        9,
+        6,
+        55,
+        58
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_charm_locksmith",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-charm-locksmith-icon.png",
+      "sha256": "d31fa018191391be3f90bcd838baa9cee452a23eee51eddd94dc926a906087a3",
+      "bytes": 219848,
+      "priorSha256": "787f6d9c6d9a8809924ff5dababcbd255d84547189cef14e402f3ac292f32fcd",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_charm_locksmith.png",
+        "sha256": "d31fa018191391be3f90bcd838baa9cee452a23eee51eddd94dc926a906087a3"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-locksmith-display.glb",
+          "sha256": "103862506a0feca34c6e6c928dc93e377e036e274b964c96e2178526982da056"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-locksmith-diffuse.png",
+          "sha256": "c297687c55e0146ef0df9f149ba2188521f798e93d2ee22cd19afbca59d43be8"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.0021063570953443207,
+          0.006683131194785866,
+          -0.0012108134418391705
+        ],
+        "orthographicScale": 0.4429511944635774
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        8,
+        6,
+        56,
+        58
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_charm_masterwork",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-charm-masterwork-icon.png",
+      "sha256": "61e0d69f93af036c8e9bfa5af01c25d8b860f3d68fcc7dd6668126d72b0cc222",
+      "bytes": 205087,
+      "priorSha256": "757efcd4d660c9a8932f0a4269822278e37610d8ec2ef1de4648a2d94d757331",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_charm_masterwork.png",
+        "sha256": "61e0d69f93af036c8e9bfa5af01c25d8b860f3d68fcc7dd6668126d72b0cc222"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-masterwork-display.glb",
+          "sha256": "e0278304f45ee9e2b436991ba1e3f3434148a88f3c983ee5e313187c2ab3cd57"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-masterwork-diffuse.png",
+          "sha256": "292b50b98ff6a0badf2e6378c1b49ba76b4ef3a707ec57ceba379966e2be4cfa"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.005245349001679999,
+          0.01565984728028225,
+          -0.002867134557151476
+        ],
+        "orthographicScale": 0.4429511944635774
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        15,
+        4,
+        49,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_charm_nightblade",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-charm-nightblade-icon.png",
+      "sha256": "31f42f037c26115206e899920cb32c5b2897e98664a91ff5a7f5f45ea9d8ead4",
+      "bytes": 230262,
+      "priorSha256": "fb835ecceaa85037a02a2786a0dd0ae78617cfa4abb07ee291f1e98a090db729",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_charm_nightblade.png",
+        "sha256": "31f42f037c26115206e899920cb32c5b2897e98664a91ff5a7f5f45ea9d8ead4"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-nightblade-display.glb",
+          "sha256": "7f669ddfbdc72564c51822cde6939929aafdd0d7fbb220340e03675d8430d4f9"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-nightblade-diffuse.png",
+          "sha256": "f68f0904df37b4e53d18012abcd106b7ee356af5f6c29935af0f6aa92f9b2986"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.011266040461998876,
+          -0.00576674261140991,
+          0.0031444738680032397
+        ],
+        "orthographicScale": 0.4429511944635774
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        7,
+        6,
+        57,
+        58
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_charm_street",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-charm-street-icon.png",
+      "sha256": "7bee21aaaa89af28240cb1a9e103b5571eb779633e9e2b1ffdcff930833098e9",
+      "bytes": 243651,
+      "priorSha256": "886a2f7abc72cc63845ad5612436f098d81184565d83ddb2ed2ac44c29cd352f",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_charm_street.png",
+        "sha256": "7bee21aaaa89af28240cb1a9e103b5571eb779633e9e2b1ffdcff930833098e9"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-street-display.glb",
+          "sha256": "84d3f79cdd79d9e0292657c80e15d1311a0f4d00844f81ba5d7cf778b4e147c1"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-street-diffuse.png",
+          "sha256": "38d9a3214a529041578f9804ac836f95239c09d15d5a952d223abc9dfc0ad31e"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.0010367717670793331,
+          0.0037614686615669796,
+          -0.0014117997535153441
+        ],
+        "orthographicScale": 0.4429511944635774
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        14,
+        6,
+        50,
+        58
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_charm_wayfarer",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-charm-wayfarer-icon.png",
+      "sha256": "d102cdbd5303d86ff3535e4ba3ae70a4af85b4615ef90076bba48ff9e6c1896e",
+      "bytes": 267494,
+      "priorSha256": "49412975366522efbc56d88837566f112249a3b89ed7d4a8255e07903cc4accd",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_charm_wayfarer.png",
+        "sha256": "d102cdbd5303d86ff3535e4ba3ae70a4af85b4615ef90076bba48ff9e6c1896e"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-wayfarer-display.glb",
+          "sha256": "d12b6caca65bfff0e408630067ebf1c7f9a0e7342ff58cafee761f23262b5b96"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-charm-wayfarer-diffuse.png",
+          "sha256": "3058a7f36f38eeeb7b4878ce31ecd60f153a4701d2d86ca2cb36bc3e2984f2f1"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          -0.001180703402971968,
+          0.008755952393561936,
+          -0.0005855577888048525
+        ],
+        "orthographicScale": 0.4429511944635774
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        10,
+        6,
+        54,
+        58
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_coat_burglar",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-coat-burglar-icon.png",
+      "sha256": "bf8da4e948def8ed675540e177cbab76bf107f1a24304debdfebfba62fe15d11",
+      "bytes": 232903,
+      "priorSha256": "a4114956ec85768dd6ecf944927787239a2297a1512039d4055d654a8731fece",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_coat_burglar.png",
+        "sha256": "bf8da4e948def8ed675540e177cbab76bf107f1a24304debdfebfba62fe15d11"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-burglar-display.glb",
+          "sha256": "4d3c4a9d5c7c2560320f821925ece697750c3e8ebc4cf5098ce5ce218356f050"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-burglar-advanced-atlas.png",
+          "sha256": "6fb55c1e22888ed56e7736b65131d3a1868ee5a5c2b2fc68e861f8992835dc73"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          0.0069226274820679105,
+          -0.006012784834156745,
+          -0.0033165788200477213
+        ],
+        "orthographicScale": 1.1763887205950714
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_coat_guild",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-coat-guild-icon.png",
+      "sha256": "e7ec671624f16b4d60280a9250eafc3fead5e8c9263a8baa257369dbf26bd80f",
+      "bytes": 253338,
+      "priorSha256": "6753eb2d8ef2db282a569b55527121038cff4bb51c559dfc8197688d1298ed8d",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_coat_guild.png",
+        "sha256": "e7ec671624f16b4d60280a9250eafc3fead5e8c9263a8baa257369dbf26bd80f"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-guild-display.glb",
+          "sha256": "941769455ce33c46cead5873d01cfa99ee7652fbb9ac0e3fe2fc3c2fadf6bb72"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-guild-advanced-atlas.png",
+          "sha256": "6a8fa59cd34316e042b590c0ed0e602a2b99592a6b3379e60e874f846b20276b"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          0.0010565157068498582,
+          -0.002725019408892449,
+          -0.0043556892979593
+        ],
+        "orthographicScale": 1.1763887205950714
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        9,
+        4,
+        55,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_coat_locksmith",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-coat-locksmith-icon.png",
+      "sha256": "f40c24e8114c191d52fd2a1d1d349937d080a4ba7bd7bd93e46b3320d1e2ee2d",
+      "bytes": 257457,
+      "priorSha256": "a98cbdbc72592bfff828a4ed0cb2d7bf5fd5d86fc795524ff1c54b04edb02ef6",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_coat_locksmith.png",
+        "sha256": "f40c24e8114c191d52fd2a1d1d349937d080a4ba7bd7bd93e46b3320d1e2ee2d"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-locksmith-display.glb",
+          "sha256": "50142372bb93df9f489c1a6f74e3712e9ae1c9954eaa1e666bbe29e7793572b1"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-locksmith-advanced-atlas.png",
+          "sha256": "27bac20be0b7cb19429b1af141bc4ca33a0a4d200b0789c6a43a18958963f9a9"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          -0.002198751223609475,
+          -0.0019376915969279147,
+          -0.0037538430028318834
+        ],
+        "orthographicScale": 1.1763887205950714
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        6,
+        4,
+        58,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_coat_masterwork",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-coat-masterwork-icon.png",
+      "sha256": "d0d8d173db91a2d0302799326917da91bd6aa745434db76f48fc5a36a1b023c4",
+      "bytes": 255815,
+      "priorSha256": "bfc7a3e623cc874650f1d3681d3006fd16df62cbf6c4be3fc04a3e273a3f232f",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_coat_masterwork.png",
+        "sha256": "d0d8d173db91a2d0302799326917da91bd6aa745434db76f48fc5a36a1b023c4"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-masterwork-display.glb",
+          "sha256": "445bd9a128874cbda7aab582b9716f8b48ca6bbbaaa3977a4b1193fd7c272a56"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-masterwork-advanced-atlas.png",
+          "sha256": "bf4b518b3c1f44d1c4a0bc30dc39b65ca3ce5f592f1d4a1f2c0771864ed609c6"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          0.007438277483141848,
+          -0.001596021796502603,
+          -0.003323722380434193
+        ],
+        "orthographicScale": 1.1763887205950714
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        9,
+        4,
+        55,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_coat_nightblade",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-coat-nightblade-icon.png",
+      "sha256": "86ba11208adb9229090f921323d202f838aff05a2c88ff83d128a4bfa783fb77",
+      "bytes": 226993,
+      "priorSha256": "e2d4e9f04bc350f566bb870a7323716cf3933d6f294e4ee985751d61a8c4f9b5",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_coat_nightblade.png",
+        "sha256": "86ba11208adb9229090f921323d202f838aff05a2c88ff83d128a4bfa783fb77"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-nightblade-display.glb",
+          "sha256": "4e1d2bb1b887152fc8b5af49da021888e18e4fe9176b4c1f50b10a9f89fe0a56"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-nightblade-advanced-atlas.png",
+          "sha256": "2b65cd6ec8242ba1927afb03271753d5e0186483472f688651485086dbb7b9b0"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          -0.0020243341749610066,
+          4.577051386720312e-05,
+          -0.004864485515420437
+        ],
+        "orthographicScale": 1.1763887205950714
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_coat_street",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-coat-street-icon.png",
+      "sha256": "f44a11d39206ed64f7cbccc53c1c24e8a9da85a49f3f1711a4da09282032121c",
+      "bytes": 235587,
+      "priorSha256": "121280de1f14154b5d902d3ccfedd74437a4a5231b5df4e3404bef6468ff0971",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_coat_street.png",
+        "sha256": "f44a11d39206ed64f7cbccc53c1c24e8a9da85a49f3f1711a4da09282032121c"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-street-display.glb",
+          "sha256": "9498acce27962403092b5f5c16e61ac1f7419eda788ac6d722b359c82709a470"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-street-advanced-atlas.png",
+          "sha256": "458a931fae6ee4d9d8fa1b77324c1a93b3cb65ba7018b4192fc59294f11ba95d"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          0.008748912409227604,
+          -0.006469709930345967,
+          -0.003667762262790545
+        ],
+        "orthographicScale": 1.1763887205950714
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        9,
+        4,
+        55,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_coat_wayfarer",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-coat-wayfarer-icon.png",
+      "sha256": "eb10b644064a7bea23cce33a01892d542cbf3ba493fd9b6b4d4a77c294f99c72",
+      "bytes": 270296,
+      "priorSha256": "51fb8c296c892e9a407aab9033fccb16605d0ec880d394bb45a26089cadbfc10",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v2/thief/thief_coat_wayfarer.png",
+        "sha256": "eb10b644064a7bea23cce33a01892d542cbf3ba493fd9b6b4d4a77c294f99c72"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-wayfarer-display.glb",
+          "sha256": "c9e6faaf0e466f239fdb128cc4564e45692dc8ff02827042a9a76112993a017e"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-coat-wayfarer-advanced-atlas.png",
+          "sha256": "623fe2297d9b56d2708ed40cb8480e0e7448b9e7a85320999c61a36542394ede"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.12,
+          -1,
+          0.065
+        ],
+        "target": [
+          -0.0035167061059079943,
+          -0.005111509804969222,
+          -0.004641040052275764
+        ],
+        "orthographicScale": 1.1763887205950714
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        6,
+        4,
+        58,
+        60
+      ],
+      "sourceRevision": "studio-v2"
+    },
+    {
+      "itemId": "thief_hood_burglar",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-hood-burglar-icon.png",
+      "sha256": "fc640cb3bc95a47f5aec97e06496b16a28c140e395d28b67901bdbbe3179ae77",
+      "bytes": 125595,
+      "priorSha256": "15c21b1db7a69558e1c7a3b20f5ab191745d4d40917d609c6ec91697cb0c5a3f",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_hood_burglar.png",
+        "sha256": "fc640cb3bc95a47f5aec97e06496b16a28c140e395d28b67901bdbbe3179ae77"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-burglar-display.glb",
+          "sha256": "eaf4a69d0acf08c503ac1234ceb2025c308af7bdb01943c016f05432b04343d0"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-burglar-diffuse.png",
+          "sha256": "5c5fdcee2e1a23c7ada99baf33e74e936e17aa32dce8ff20705b14d57818eb40"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.05403107091765391,
+          0.04683536385703174,
+          -0.23541797600657743
+        ],
+        "orthographicScale": 0.6805403845847392
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        17,
+        21,
+        47,
+        43
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "thief_hood_burglar",
+        "package": "thief",
+        "path": "marketplace/packages/thief/assets/thief-hood-burglar-icon.png",
+        "sha256": "15c21b1db7a69558e1c7a3b20f5ab191745d4d40917d609c6ec91697cb0c5a3f",
+        "bytes": 96576,
+        "priorSha256": "472f58760b9a2bf4f4c9baefc7b1be10e899a118c4933fe3674720cdf42a5d28",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/thief/thief_hood_burglar.png",
+          "sha256": "15c21b1db7a69558e1c7a3b20f5ab191745d4d40917d609c6ec91697cb0c5a3f"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-burglar-display.glb",
+            "sha256": "792e3b89bb8bda5ea6297c2baedec385e6aa9bc29003e0e4d04b94155215c34c"
+          },
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-burglar-diffuse.png",
+            "sha256": "5c5fdcee2e1a23c7ada99baf33e74e936e17aa32dce8ff20705b14d57818eb40"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            0.003745290621029197,
+            0.004640544004462885,
+            -0.0021522820503676356
+          ],
+          "orthographicScale": 0.9912227545895382
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          22,
+          24,
+          42,
+          40
+        ]
+      }
+    },
+    {
+      "itemId": "thief_hood_guild",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-hood-guild-icon.png",
+      "sha256": "d9e6f3fc22d17ef41b46ca47150665eb16cbdebc50f26092d2380be5c198f7dd",
+      "bytes": 235306,
+      "priorSha256": "0b72e0d7dee467b1e4d60916f838ac7487b76c9d05891e524400d68f8e970cd0",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_hood_guild.png",
+        "sha256": "d9e6f3fc22d17ef41b46ca47150665eb16cbdebc50f26092d2380be5c198f7dd"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-guild-display.glb",
+          "sha256": "eef55d7a8e82496f1404de5207679faa343116785603bf68349d0f8a39aeaaf9"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-guild-diffuse.png",
+          "sha256": "f70978f627f78b71b0cc1022a444789bfd3e810426374e21da24bb4d2eac261d"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.06873578101232708,
+          0.046276862111317846,
+          -0.2383825211894023
+        ],
+        "orthographicScale": 0.6805403845847392
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "thief_hood_guild",
+        "package": "thief",
+        "path": "marketplace/packages/thief/assets/thief-hood-guild-icon.png",
+        "sha256": "0b72e0d7dee467b1e4d60916f838ac7487b76c9d05891e524400d68f8e970cd0",
+        "bytes": 235210,
+        "priorSha256": "634509284ef2cbdb801b945b70897ca2293b219103f5404487fe859feff65217",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/thief/thief_hood_guild.png",
+          "sha256": "0b72e0d7dee467b1e4d60916f838ac7487b76c9d05891e524400d68f8e970cd0"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-guild-display.glb",
+            "sha256": "dae54769393f486a05ad0306e4b904d406f925b77422107a12f4ce605495cdcb"
+          },
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-guild-diffuse.png",
+            "sha256": "f70978f627f78b71b0cc1022a444789bfd3e810426374e21da24bb4d2eac261d"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            0.011899217928197054,
+            -0.0034014424478875462,
+            -0.012402335850147774
+          ],
+          "orthographicScale": 0.9912227545895382
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          11,
+          4,
+          53,
+          60
+        ]
+      }
+    },
+    {
+      "itemId": "thief_hood_locksmith",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-hood-locksmith-icon.png",
+      "sha256": "9ad762443a6566f800c09b81f520b75e0e628a66777c99605ba31ed66997d37c",
+      "bytes": 248330,
+      "priorSha256": "fade5dca626f8a382d75621a722f1af3eae0ec7e016b47ad96c50a911f2beba9",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_hood_locksmith.png",
+        "sha256": "9ad762443a6566f800c09b81f520b75e0e628a66777c99605ba31ed66997d37c"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-locksmith-display.glb",
+          "sha256": "c7c8a42cbe1bc2616e3ed28d011c8898c3b43d638a996e5ba020749fa1731039"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-locksmith-diffuse.png",
+          "sha256": "6a866e18765422eaa2a3f689b57c09828d16a118e85312371a4f85046c26a9ba"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.06409350727453222,
+          0.028976613996499884,
+          -0.23193474657643057
+        ],
+        "orthographicScale": 0.6805403845847392
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        10,
+        4,
+        54,
+        60
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "thief_hood_locksmith",
+        "package": "thief",
+        "path": "marketplace/packages/thief/assets/thief-hood-locksmith-icon.png",
+        "sha256": "fade5dca626f8a382d75621a722f1af3eae0ec7e016b47ad96c50a911f2beba9",
+        "bytes": 248362,
+        "priorSha256": "d6d57d2e5d35f55de0c2fbbc34ad6686a66c9e89a38111179c465ac34e542698",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/thief/thief_hood_locksmith.png",
+          "sha256": "fade5dca626f8a382d75621a722f1af3eae0ec7e016b47ad96c50a911f2beba9"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-locksmith-display.glb",
+            "sha256": "6a080e7798b98133786552e61e9baeeaff461f59a3cf9f7fb7151e6fc685c2f1"
+          },
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-locksmith-diffuse.png",
+            "sha256": "6a866e18765422eaa2a3f689b57c09828d16a118e85312371a4f85046c26a9ba"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            0.008629162585920724,
+            -0.026938312548153244,
+            -0.003432855368283965
+          ],
+          "orthographicScale": 0.9912227545895382
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          10,
+          4,
+          54,
+          60
+        ]
+      }
+    },
+    {
+      "itemId": "thief_hood_masterwork",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-hood-masterwork-icon.png",
+      "sha256": "2decd1677907c259c7965e326e632908ed60f5c1eae9a9dd68c6a3d329b1ff2d",
+      "bytes": 233862,
+      "priorSha256": "9d96435b056e845456e45d3038496d27ba886526f598f537a58f8da90580cbe9",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_hood_masterwork.png",
+        "sha256": "2decd1677907c259c7965e326e632908ed60f5c1eae9a9dd68c6a3d329b1ff2d"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-masterwork-display.glb",
+          "sha256": "897f1d9c3f35ea8771e2feed07155770cafd6eeb988865b36adf1628e72a4b0b"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-masterwork-diffuse.png",
+          "sha256": "8ede0a72012aaea6f141dee196174d6bbe7745fee12e733abfa090154ac5c71c"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.047365678568164774,
+          0.049041976094363,
+          -0.23152656762318535
+        ],
+        "orthographicScale": 0.6805403845847392
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        11,
+        4,
+        53,
+        60
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "thief_hood_masterwork",
+        "package": "thief",
+        "path": "marketplace/packages/thief/assets/thief-hood-masterwork-icon.png",
+        "sha256": "9d96435b056e845456e45d3038496d27ba886526f598f537a58f8da90580cbe9",
+        "bytes": 233730,
+        "priorSha256": "7217ec08c9111e8de7e0f8ef7184f1619bb05897ca7356506a2243ad2819244f",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/thief/thief_hood_masterwork.png",
+          "sha256": "9d96435b056e845456e45d3038496d27ba886526f598f537a58f8da90580cbe9"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-masterwork-display.glb",
+            "sha256": "5f9fe7bf0d41c962e6bbb47e65cc9da5a1fdc58c9bc0e6f953977b3b2f5a61c0"
+          },
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-masterwork-diffuse.png",
+            "sha256": "8ede0a72012aaea6f141dee196174d6bbe7745fee12e733abfa090154ac5c71c"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            0.013261747586954559,
+            0.00932018622726918,
+            -0.007411134938647788
+          ],
+          "orthographicScale": 0.9912227545895382
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          11,
+          4,
+          53,
+          60
+        ]
+      }
+    },
+    {
+      "itemId": "thief_hood_nightblade",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-hood-nightblade-icon.png",
+      "sha256": "8ae62c254205f4a372a5f69953863062a3f53c783dbf146d670ddb32f2945c1c",
+      "bytes": 229295,
+      "priorSha256": "222457d8e2a328cdd723f72390e558d0fb1da6a97f9701c3a07bc2774fc70ae1",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_hood_nightblade.png",
+        "sha256": "8ae62c254205f4a372a5f69953863062a3f53c783dbf146d670ddb32f2945c1c"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-nightblade-display.glb",
+          "sha256": "ba7894d60c489849574947e5cdc77d31e6efe3544ccec45ac51d6bdace712323"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-nightblade-diffuse.png",
+          "sha256": "10c160175658e1b490fe50c278a79e27c9a1b6d17e004716fda86d9f6097d601"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.06367265197274369,
+          0.051663954165550044,
+          -0.2331540446731309
+        ],
+        "orthographicScale": 0.6805403845847392
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        9,
+        4,
+        56,
+        60
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "thief_hood_nightblade",
+        "package": "thief",
+        "path": "marketplace/packages/thief/assets/thief-hood-nightblade-icon.png",
+        "sha256": "222457d8e2a328cdd723f72390e558d0fb1da6a97f9701c3a07bc2774fc70ae1",
+        "bytes": 229295,
+        "priorSha256": "7c0adb7fa52c7e8ac4402c4ba334ca25fa5d74bfedfb5b2cca4d5b62bd9f6d92",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/thief/thief_hood_nightblade.png",
+          "sha256": "222457d8e2a328cdd723f72390e558d0fb1da6a97f9701c3a07bc2774fc70ae1"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-nightblade-display.glb",
+            "sha256": "41306fcf9f1d4a7b35933b17cc605aafaf371b228a65fb284295c40525cbb45b"
+          },
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-nightblade-diffuse.png",
+            "sha256": "10c160175658e1b490fe50c278a79e27c9a1b6d17e004716fda86d9f6097d601"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            -0.0021476115062226244,
+            -0.00566907606722041,
+            -0.0063528426714158735
+          ],
+          "orthographicScale": 0.9912227545895382
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          9,
+          4,
+          56,
+          60
+        ]
+      }
+    },
+    {
+      "itemId": "thief_hood_street",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-hood-street-icon.png",
+      "sha256": "3678829544f6c204eb53ab899fa7859b9ab124f1ce52ec8557b29daef2956018",
+      "bytes": 116184,
+      "priorSha256": "70a92709708bfbf503c031bf1f5dd09379e02a5ac50e5483efe53b6df4501e43",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_hood_street.png",
+        "sha256": "3678829544f6c204eb53ab899fa7859b9ab124f1ce52ec8557b29daef2956018"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-street-display.glb",
+          "sha256": "57e3abc51f5705e609342609ad35267379da9d3192866458a181c8f99b4f3e04"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-street-diffuse.png",
+          "sha256": "109c94b759456dfb392ca47480667cd6958a14ab80903785da16c07b4bc8e70a"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.052995381617863935,
+          0.05792132086695544,
+          -0.23529951448565667
+        ],
+        "orthographicScale": 0.6805403845847392
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        20,
+        19,
+        44,
+        44
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "thief_hood_street",
+        "package": "thief",
+        "path": "marketplace/packages/thief/assets/thief-hood-street-icon.png",
+        "sha256": "70a92709708bfbf503c031bf1f5dd09379e02a5ac50e5483efe53b6df4501e43",
+        "bytes": 91260,
+        "priorSha256": "b95a4112edecddf2f6ac829b6d11813082519e460abdd92c0d2fd493306b1e7e",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/thief/thief_hood_street.png",
+          "sha256": "70a92709708bfbf503c031bf1f5dd09379e02a5ac50e5483efe53b6df4501e43"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-street-display.glb",
+            "sha256": "bd69a7bc1e4eebdac488f6cc7f890fe085aec25f275f32c4f588c3bf2dfeca53"
+          },
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-street-diffuse.png",
+            "sha256": "109c94b759456dfb392ca47480667cd6958a14ab80903785da16c07b4bc8e70a"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            -0.002903449137698084,
+            0.011016591455803953,
+            -0.0022266909962695594
+          ],
+          "orthographicScale": 0.9912227545895382
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          24,
+          23,
+          40,
+          41
+        ]
+      }
+    },
+    {
+      "itemId": "thief_hood_wayfarer",
+      "package": "thief",
+      "path": "marketplace/packages/thief/assets/thief-hood-wayfarer-icon.png",
+      "sha256": "48fab58e90f85f6a827247fb24a25ea1b5acd72dc59f7de7ce88dd305138b7d7",
+      "bytes": 233844,
+      "priorSha256": "9b70ffa560ca06fea6175bb7d9b7de3b9d025e70f37824bd416e93f3e7b68c86",
+      "renderSource": {
+        "sourceId": "gear-consolidation/studio-v3/thief/thief_hood_wayfarer.png",
+        "sha256": "48fab58e90f85f6a827247fb24a25ea1b5acd72dc59f7de7ce88dd305138b7d7"
+      },
+      "inputs": [
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-wayfarer-display.glb",
+          "sha256": "8008a58ed42c0e578ee8b83320bf219a2b1fccccd825ef43882d5ffbb16ab4f3"
+        },
+        {
+          "path": "marketplace/packages/thief/assets/thief-hood-wayfarer-diffuse.png",
+          "sha256": "ddd229e5560b947d508e8b40050512973e0777ee8ca2d9dfaaeafd48d8179cd0"
+        }
+      ],
+      "camera": {
+        "direction": [
+          0.3,
+          -1,
+          0.12
+        ],
+        "target": [
+          0.058624952926797584,
+          0.03877300413301604,
+          -0.23579683419740122
+        ],
+        "orthographicScale": 0.6805403845847392
+      },
+      "native64AlphaThreshold": 16,
+      "native64Bounds": [
+        8,
+        5,
+        56,
+        59
+      ],
+      "sourceRevision": "studio-v3",
+      "previous": {
+        "itemId": "thief_hood_wayfarer",
+        "package": "thief",
+        "path": "marketplace/packages/thief/assets/thief-hood-wayfarer-icon.png",
+        "sha256": "9b70ffa560ca06fea6175bb7d9b7de3b9d025e70f37824bd416e93f3e7b68c86",
+        "bytes": 233824,
+        "priorSha256": "488acf3843b55fbad05c82d35be0693ae09b88d00b1917eb696365ef9bd233a5",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v2/thief/thief_hood_wayfarer.png",
+          "sha256": "9b70ffa560ca06fea6175bb7d9b7de3b9d025e70f37824bd416e93f3e7b68c86"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-wayfarer-display.glb",
+            "sha256": "daa7714611fd405f542ed2d30c50da1b6e3e317b41278e258fa501f98e04f522"
+          },
+          {
+            "path": "marketplace/packages/thief/assets/thief-hood-wayfarer-diffuse.png",
+            "sha256": "ddd229e5560b947d508e8b40050512973e0777ee8ca2d9dfaaeafd48d8179cd0"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            0.019881514246852385,
+            -0.009779274623488467,
+            -0.004881516950757657
+          ],
+          "orthographicScale": 0.9912227545895382
+        },
+        "native64AlphaThreshold": 16,
+        "native64Bounds": [
+          8,
+          5,
+          56,
+          59
+        ]
+      }
+    }
+  ],
+  "scope": "42 nonweapon inventory icons; four Censure copies and one separately accepted Oathkeeper copy, 37 unchanged prior rows. Native icon UI states are a separate gate.",
+  "revisions": {
+    "studio-v2": {
+      "schema": "ftkmf.nonweapon-inventory-icons.v1",
+      "scope": "Exact copies of frozen original-model studio artwork for 29 nonweapon inventory icons. Not native item-display or fit evidence. No weapon/class/proficiency/combat icon changes.",
+      "deliveryManifest": {
+        "sourceId": "gear-consolidation/thief-coat-fit/nonweapon-icons-v1/manifest.json",
+        "sha256": "cee639931c3c6c5f026b48841b2d19d5c8196f396934196dd36994b96a4b0aa6"
+      },
+      "adoptionGenerator": {
+        "path": "marketplace/packages/sync_nonweapon_icons.py",
+        "sha256": "cc4e1be96d8cf7ac77c552f52809c17b5887321b134a359178c22294c97cf7d7"
+      },
+      "studioManifest": {
+        "sourceId": "gear-consolidation/studio-v2/manifest.json",
+        "sha256": "6d9e16393bef7d34db26675b83b9b9e281725e4086c33077ecd4814290887310"
+      },
+      "studioFrozenReceipt": {
+        "sourceId": "gear-consolidation/studio-v2/frozen.json",
+        "sha256": "93a070e2e844eb21639ae2c853d3bc9cbb2f6822e9588e5018b95e532bdb27d9"
+      },
+      "renderGenerator": {
+        "sourceId": "gear-consolidation/studio-v2/render.py",
+        "sha256": "220dfd5b3182138f104d19ac53877b4625a402e749578074296463bc5a7e188b"
+      },
+      "recipe": {
+        "engine": "Cycles",
+        "samples": 32,
+        "denoise": true,
+        "viewTransform": "Standard",
+        "roughness": 0.72,
+        "metallic": 0,
+        "lights": "Three area lights; 420/230/340 W times family span squared",
+        "framing": "Shared orthographic scale per package/family, 16% margin over maximum projected span",
+        "coordinates": "Decode strict mesh-local GLB directly; (x,y,z) to (x,-z,y); texture V flips once"
+      },
+      "outputFormat": {
+        "width": 512,
+        "height": 512,
+        "mode": "RGBA",
+        "transformation": "byte-identical copy"
+      },
+      "limits": "Street and Burglar neckwear remain small at shared scale; color/silhouette identifiable at 64px but fine detail weak. Native UI icon-state/layout checks pending."
+    },
+    "studio-v3": {
+      "schema": "ftkmf.nonweapon-inventory-icons.v2",
+      "deliveryManifest": {
+        "sourceId": "gear-consolidation/thief-coat-fit/nonweapon-icons-v2/manifest.json",
+        "sha256": "c2e19dae1ce0acfa232d4a8763e23afcbe9424466ba385926d8da0701e891331"
+      },
+      "adoptionGenerator": {
+        "path": "marketplace/packages/sync_nonweapon_icons_v3.py",
+        "sha256": "fa6fa6d51e3993b786f53af0b053d4ae266bc51b14d89b69979f87e9191eebb7"
+      },
+      "revisionGenerator": {
+        "path": "marketplace/packages/nonweapon_icon_revisions.py",
+        "sha256": "8211ab302e14712a1d799e7fa90587f3c9b593228114e434523eceffd86f59da"
+      },
+      "studioManifest": {
+        "sourceId": "gear-consolidation/studio-v3/manifest.json",
+        "sha256": "8e7a1d326ea1094278f9bca8423a9a6ab802b7eb31e6758530be9bcc9952d784"
+      },
+      "studioFrozenReceipt": {
+        "sourceId": "gear-consolidation/studio-v3/frozen.json",
+        "sha256": "e40d833e70be93c92e73f170e020b818e41562650b4a71374bda7c9422eed40f"
+      },
+      "renderGenerator": {
+        "sourceId": "gear-consolidation/studio-v3/render.py",
+        "sha256": "a4429e2af6a89597edef60fc2cf86da746133a1569fcab9433a5142214afe266"
+      },
+      "recipe": {
+        "engine": "Cycles",
+        "samples": 32,
+        "denoise": true,
+        "viewTransform": "Standard",
+        "roughness": 0.72,
+        "metallic": 0,
+        "lights": "Three area lights; 420/230/340 W times family span squared",
+        "framing": "Shared orthographic scale per package/family, 16% margin over maximum projected span",
+        "coordinates": "Decode strict mesh-local GLB directly; (x,y,z) to (x,-z,y); texture V flips once"
+      },
+      "outputFormat": {
+        "width": 512,
+        "height": 512,
+        "mode": "RGBA",
+        "transformation": "byte-identical copy"
+      },
+      "limits": "Studio art with original inputs; native icon-state/layout evidence remains separate. Retained coat/charm pixels keep their prior studio-v2 provenance."
+    }
+  },
+  "previousLedger": {
+    "path": "marketplace/packages/nonweapon-icons.studio-v2.provenance.json",
+    "sha256": "63a58e8650252670d4c3b845b1331119f52734952dffab09dd8a245687adede8"
+  },
+  "censureVisualRevision": {
+    "path": "marketplace/packages/censure-visual.provenance.json",
+    "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+  }
+}

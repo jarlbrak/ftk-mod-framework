@@ -19,6 +19,9 @@ namespace FTKModFramework.Agent
         // does not need window focus; Unity's player loop and Rewired's focus filter are the only blockers.
         internal const string BackgroundEnvFlag = "FTK_AGENT_BACKGROUND";
         private static readonly bool Background = Environment.GetEnvironmentVariable(BackgroundEnvFlag) == "1";
+        internal const string InputIsolationEnvFlag = "FTK_AGENT_INPUT_ISOLATED";
+        private static readonly bool InputIsolated = Background && Environment.GetEnvironmentVariable(InputIsolationEnvFlag) == "1";
+        private static Vector3 _isolatedMouse;
         private static bool _rewiredFocusFilterOff;
         private static Harmony _harmony;
         private static bool _available, _advancing;
@@ -73,10 +76,12 @@ namespace FTKModFramework.Agent
                 _harmony.Patch(updateSelected, prefix: new HarmonyMethod(typeof(NativeInput), "BeforeInputFieldUpdate"));
                 _patchedMethods++;
                 _available = true;
+                if (InputIsolated) _isolatedMouse = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
                 _error = null;
                 if (Background) Application.runInBackground = true;
                 Plugin.Log.LogInfo("[agent] native input ready: " + _rewiredMethods + " Rewired, " + _gameMethods + " game, " + _uiMethods + " UI, " + _frameworkMethods + " framework hooks" +
-                    (Background ? "; background mode (" + BackgroundEnvFlag + "=1): runInBackground on, window focus not required" : ""));
+                    (Background ? "; background mode (" + BackgroundEnvFlag + "=1): runInBackground on, window focus not required" : "") +
+                    (InputIsolated ? "; isolated native reads: hardware suppressed between requests" : ""));
             }
             catch (Exception e)
             {
@@ -101,7 +106,7 @@ namespace FTKModFramework.Agent
             try
             {
                 if (!_available) throw new InvalidOperationException(_error ?? "native input is unavailable");
-                Vector3 mouse = Input.mousePosition;
+                Vector3 mouse = SuppressHardware() ? _isolatedMouse : Input.mousePosition;
                 NativeInputPlan plan = NativeInputPlan.Parse(args, ParseKey, mouse.x, mouse.y, Screen.width, Screen.height);
                 if (_timeline != null && plan.RequestId == _requestId) return Envelope(Snapshot(), null, true);
                 Dictionary<string, object> previous;
@@ -179,6 +184,8 @@ namespace FTKModFramework.Agent
                 ResetPointer();
                 _resetPointerFrame = Time.frameCount + 1;
             }
+            if (SuppressHardware() && _timeline != null)
+                _isolatedMouse = new Vector3(_timeline.Current.X, _timeline.Current.Y, 0);
             _timeline = null; _state = state; _error = error;
             if (_requestId == null) return;
             if (!History.ContainsKey(_requestId)) HistoryOrder.Enqueue(_requestId);
@@ -219,7 +226,7 @@ namespace FTKModFramework.Agent
         private static Dictionary<string, object> Snapshot()
         {
             var hooks = new Dictionary<string, object> { { "methods", _patchedMethods }, { "rewired", _rewiredMethods }, { "game", _gameMethods }, { "ui", _uiMethods }, { "framework", _frameworkMethods }, { "reads", _reads }, { "syntheticReads", _syntheticReads }, { "textCharacters", _textCharacters } };
-            return new Dictionary<string, object> { { "available", _available }, { "sessionId", SessionId }, { "retainedRequestLimit", 64 }, { "focused", Application.isFocused }, { "background", Background }, { "requestId", _requestId }, { "state", _state }, { "frame", _completedFrames }, { "totalFrames", _totalFrames }, { "progress", _totalFrames == 0 ? 0d : (double)_completedFrames / _totalFrames }, { "error", _error }, { "hooks", hooks }, { "screenWidth", Screen.width }, { "screenHeight", Screen.height } };
+            return new Dictionary<string, object> { { "available", _available }, { "sessionId", SessionId }, { "retainedRequestLimit", 64 }, { "focused", Application.isFocused }, { "background", Background }, { "inputIsolated", InputIsolated }, { "hardwareInputSuppressed", SuppressHardware() }, { "requestId", _requestId }, { "state", _state }, { "frame", _completedFrames }, { "totalFrames", _totalFrames }, { "progress", _totalFrames == 0 ? 0d : (double)_completedFrames / _totalFrames }, { "error", _error }, { "hooks", hooks }, { "screenWidth", Screen.width }, { "screenHeight", Screen.height } };
         }
 
         private static Dictionary<string, object> Envelope(Dictionary<string, object> result, string error, bool duplicate)
@@ -328,12 +335,16 @@ namespace FTKModFramework.Agent
             return active;
         }
 
+        // Applies only to already patched native/framework consumers, never OS input or agent guards.
+        // Failure to initialize or ordinary foreground/background mode preserves hardware behavior.
+        private static bool SuppressHardware() { return _available && InputIsolated; }
+
         private static bool HeldKey(int key) { return key >= (int)KeyCode.Mouse0 && key <= (int)KeyCode.Mouse6 ? _timeline.Button(key - (int)KeyCode.Mouse0) : _timeline.Key(key); }
         private static bool DownKey(int key) { return key >= (int)KeyCode.Mouse0 && key <= (int)KeyCode.Mouse6 ? _timeline.ButtonDown(key - (int)KeyCode.Mouse0) : _timeline.KeyDown(key); }
         private static bool UpKey(int key) { return key >= (int)KeyCode.Mouse0 && key <= (int)KeyCode.Mouse6 ? _timeline.ButtonUp(key - (int)KeyCode.Mouse0) : _timeline.KeyUp(key); }
-        private static bool GetKey(KeyCode key) { return Synthetic() ? HeldKey((int)key) : Input.GetKey(key); }
-        private static bool GetKeyDown(KeyCode key) { return Synthetic() ? DownKey((int)key) : Input.GetKeyDown(key); }
-        private static bool GetKeyUp(KeyCode key) { return Synthetic() ? UpKey((int)key) : Input.GetKeyUp(key); }
+        private static bool GetKey(KeyCode key) { return Synthetic() ? HeldKey((int)key) : !SuppressHardware() && Input.GetKey(key); }
+        private static bool GetKeyDown(KeyCode key) { return Synthetic() ? DownKey((int)key) : !SuppressHardware() && Input.GetKeyDown(key); }
+        private static bool GetKeyUp(KeyCode key) { return Synthetic() ? UpKey((int)key) : !SuppressHardware() && Input.GetKeyUp(key); }
         private static int StringKey(string key)
         {
             string normalized = key.Replace(" ", "");
@@ -341,12 +352,12 @@ namespace FTKModFramework.Agent
             try { return (int)(KeyCode)Enum.Parse(typeof(KeyCode), normalized, true); }
             catch { return -1; }
         }
-        private static bool GetKey(string key) { return Synthetic() ? HeldKey(StringKey(key)) : Input.GetKey(key); }
-        private static bool GetKeyDown(string key) { return Synthetic() ? DownKey(StringKey(key)) : Input.GetKeyDown(key); }
-        private static bool GetKeyUp(string key) { return Synthetic() ? UpKey(StringKey(key)) : Input.GetKeyUp(key); }
-        private static bool GetMouseButton(int button) { return Synthetic() ? _timeline.Button(button) : Input.GetMouseButton(button); }
-        private static bool GetMouseButtonDown(int button) { return Synthetic() ? _timeline.ButtonDown(button) : Input.GetMouseButtonDown(button); }
-        private static bool GetMouseButtonUp(int button) { return Synthetic() ? _timeline.ButtonUp(button) : Input.GetMouseButtonUp(button); }
+        private static bool GetKey(string key) { return Synthetic() ? HeldKey(StringKey(key)) : !SuppressHardware() && Input.GetKey(key); }
+        private static bool GetKeyDown(string key) { return Synthetic() ? DownKey(StringKey(key)) : !SuppressHardware() && Input.GetKeyDown(key); }
+        private static bool GetKeyUp(string key) { return Synthetic() ? UpKey(StringKey(key)) : !SuppressHardware() && Input.GetKeyUp(key); }
+        private static bool GetMouseButton(int button) { return Synthetic() ? _timeline.Button(button) : !SuppressHardware() && Input.GetMouseButton(button); }
+        private static bool GetMouseButtonDown(int button) { return Synthetic() ? _timeline.ButtonDown(button) : !SuppressHardware() && Input.GetMouseButtonDown(button); }
+        private static bool GetMouseButtonUp(int button) { return Synthetic() ? _timeline.ButtonUp(button) : !SuppressHardware() && Input.GetMouseButtonUp(button); }
         private static int NamedButton(string button)
         {
             if (button != null && button.StartsWith("MouseButton", StringComparison.Ordinal))
@@ -356,9 +367,9 @@ namespace FTKModFramework.Agent
             }
             return -1;
         }
-        private static bool GetButton(string button) { return Synthetic() ? _timeline.Button(NamedButton(button)) : Input.GetButton(button); }
-        private static bool GetButtonDown(string button) { return Synthetic() ? _timeline.ButtonDown(NamedButton(button)) : Input.GetButtonDown(button); }
-        private static bool GetButtonUp(string button) { return Synthetic() ? _timeline.ButtonUp(NamedButton(button)) : Input.GetButtonUp(button); }
+        private static bool GetButton(string button) { return Synthetic() ? _timeline.Button(NamedButton(button)) : !SuppressHardware() && Input.GetButton(button); }
+        private static bool GetButtonDown(string button) { return Synthetic() ? _timeline.ButtonDown(NamedButton(button)) : !SuppressHardware() && Input.GetButtonDown(button); }
+        private static bool GetButtonUp(string button) { return Synthetic() ? _timeline.ButtonUp(NamedButton(button)) : !SuppressHardware() && Input.GetButtonUp(button); }
         private static float Axis(string axis)
         {
             if (axis == "MouseAxis1" || axis == "Mouse X") return _timeline.Current.X - _timeline.Previous.X;
@@ -366,22 +377,22 @@ namespace FTKModFramework.Agent
             if (axis == "MouseAxis3" || axis == "Mouse ScrollWheel") return _timeline.Scroll;
             return 0;
         }
-        private static float GetAxis(string axis) { return Synthetic() ? Axis(axis) : Input.GetAxis(axis); }
-        private static float GetAxisRaw(string axis) { return Synthetic() ? Axis(axis) : Input.GetAxisRaw(axis); }
-        private static Vector3 MousePosition() { return Synthetic() ? new Vector3(_timeline.Current.X, _timeline.Current.Y, 0) : Input.mousePosition; }
-        private static Vector2 MouseScrollDelta() { return Synthetic() ? new Vector2(0, _timeline.Scroll) : Input.mouseScrollDelta; }
-        private static bool MousePresent() { return Synthetic() || Input.mousePresent; }
-        private static bool AnyKey() { return Synthetic() ? _timeline.Current.Keys.Count > 0 || _timeline.Current.Buttons.Count > 0 : Input.anyKey; }
+        private static float GetAxis(string axis) { return Synthetic() ? Axis(axis) : SuppressHardware() ? 0 : Input.GetAxis(axis); }
+        private static float GetAxisRaw(string axis) { return Synthetic() ? Axis(axis) : SuppressHardware() ? 0 : Input.GetAxisRaw(axis); }
+        private static Vector3 MousePosition() { return Synthetic() ? new Vector3(_timeline.Current.X, _timeline.Current.Y, 0) : SuppressHardware() ? _isolatedMouse : Input.mousePosition; }
+        private static Vector2 MouseScrollDelta() { return Synthetic() ? new Vector2(0, _timeline.Scroll) : SuppressHardware() ? Vector2.zero : Input.mouseScrollDelta; }
+        private static bool MousePresent() { return Synthetic() || SuppressHardware() || Input.mousePresent; }
+        private static bool AnyKey() { return Synthetic() ? _timeline.Current.Keys.Count > 0 || _timeline.Current.Buttons.Count > 0 : !SuppressHardware() && Input.anyKey; }
         private static bool AnyKeyDown()
         {
-            if (!Synthetic()) return Input.anyKeyDown;
+            if (!Synthetic()) return !SuppressHardware() && Input.anyKeyDown;
             foreach (int key in _timeline.Current.Keys) if (_timeline.KeyDown(key)) return true;
             foreach (int button in _timeline.Current.Buttons) if (_timeline.ButtonDown(button)) return true;
             return false;
         }
         private static string InputString()
         {
-            if (!Synthetic()) return Input.inputString;
+            if (!Synthetic()) return SuppressHardware() ? string.Empty : Input.inputString;
             string text = _timeline.Text;
             if (text.Length > 0) AcknowledgeText(text.Length);
             return _timeline.InputString((int)KeyCode.Backspace, (int)KeyCode.Return, (int)KeyCode.KeypadEnter, (int)KeyCode.Tab);
@@ -399,7 +410,7 @@ namespace FTKModFramework.Agent
 
         private static bool BeforeInputFieldUpdate(InputField __instance, BaseEventData __0)
         {
-            if (!Synthetic()) return true;
+            if (!Synthetic()) return !SuppressHardware();
             try { return DeliverInputFieldEvents(__instance, __0); }
             catch (Exception e)
             {

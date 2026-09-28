@@ -14,3 +14,10 @@ Read the root and nearest `AGENTS.md`, [content authoring](../../../docs/WRITING
 5. Verify registration, ordinary acquisition, equip/unequip, action or modifier behavior, save/resume, and package inventory. Use `verify-change` for game-free checks and `ingame-smoke` for an available local game. Record offline and live evidence separately, including unavailable routes.
 
 Deliver the content definition, original asset inventory when applicable, template rationale, intended acquisition, observed results, and remaining limits.
+
+Combat UI: follow the repository combat icon rule. Reuse an existing native
+all-white outlined proficiency icon for every action; never generate or import
+a custom combat icon. Verify it beside vanilla buttons in game.
+
+FTK basic attack buttons use the weapon item icon. Preserve native weapon icons;
+do not override them with custom inventory renders.

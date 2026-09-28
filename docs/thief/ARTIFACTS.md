@@ -14,7 +14,7 @@ All use item levels 4-6, ordinary loot plus night-market and dungeon-merchant el
 | --- | --- | --- | ---: | ---: | --- |
 | The Skeleton Key | `thief_twins_skeleton_key` | 2 / Speed / 3 | 27 | 650 | Strike 1.00, Pierce 0.75 |
 | Candle's End | `thief_twins_candles_end` | 2 / Speed / 3 | 28 | 750 | Strike 1.00, Feint 0.60; no Pierce |
-| The Unlost Road | `thief_bow_unlost_road` | 2 / Awareness / 4 | 29 | 700 | Shoot 1.00, Thread the Needle 0.75 |
+| The Unlost Road | `thief_bow_unlost_road` | 2 / Talent / 4 | 29 | 700 | Fire 1.00, Deadeye 0.75 |
 
 Damage figures are base values. Level growth and other native modifiers are applied before the signatures calculate their effects. Native criticals use the normal enhanced attack; no artifact grants critical chance or additional critical scaling.
 
@@ -74,7 +74,7 @@ Feedback: the action preview shows **Last Light ready** only when all commitment
 
 "Every path has a way home."
 
-A compact recurved shortbow of weathered dark wood, pale reinforcement strips, and a small brass trail-marker shape at the grip. A split green cloth binding identifies it at distance. Short curved limb tips distinguish it from a longbow. No hanging object should obstruct the string or require extra simulated physics.
+A compact pirate-style flintlock with weathered dark wood, brass furniture, a pale reinforcement strip, and a small trail-marker inlay at the grip. Its lock and trigger remain readable at game scale. It occupies both equipment hands even though the character can aim it with one.
 
 ### Loose and Leave
 
@@ -85,14 +85,14 @@ A damaging Sneak Attack grants **+8 Evasion points** after it resolves, until th
 - Ends immediately on unequip, incapacity, combat exit, or the next own turn boundary, including a skipped turn. Equipment reconstruction must not duplicate the modifier.
 - No initiative bonus, extra move, enemy accuracy penalty, targeting immunity, or protection from damage over time is granted.
 - A perfect enemy attack or other native rule that bypasses evasion continues to do so. Do not override native dodge eligibility.
-- A partial result, fully absorbed attack, or Thread the Needle grants nothing. A killing Sneak Attack can grant the buff because another enemy may still act.
+- A partial result, fully absorbed attack, or Deadeye grants nothing. A killing Sneak Attack can grant the buff because another enemy may still act.
 
-At level 8 current damage is 37 and Sneak Attack reaches 44.4 before rounding/mitigation. Farstep reaches 45.6 and has stronger penetration; Blackthorn reaches 48 with fewer actions. The artifact pays damage and action-quality costs for protection without a shield. Bows do not receive Twin Feint; the defensive signature is this artifact's particular reason to invest in Awareness.
+At level 8 current damage is 37 and Sneak Attack reaches 44.4 before rounding/mitigation. Farstep Flintlock reaches 45.6 and has stronger penetration; Blackwake reaches 48 with higher raw damage. The artifact pays damage and action-quality costs for protection without a shield. Pistols do not receive Twin Feint; the defensive signature is this artifact's particular reason to invest in Talent.
 
-Feedback: **Loose and Leave: +8 Evasion until your next turn.** Use a small boot-and-arrow status icon with a clear expiry description. The effect never makes the character transparent or pretends enemies cannot target them.
+Feedback: **Loose and Leave: +8 Evasion until your next turn.** Use a small boot-and-flintlock status icon with a clear expiry description. The effect never makes the character transparent or pretends enemies cannot target them.
 
 ## Why these remain alternatives
 
-Both dagger artifacts require the two-handed paired loadout; no one-handed artifact variant is included. The Skeleton Key rewards managing Focus over repeated openings. Candle's End rewards initiative and target selection. The Unlost Road rewards a bow user who accepts lower damage to survive the enemy response. Ordinary Locksmith preparation and Wayfarer penetration remain stronger versions of those weapon actions; ordinary Nightblade remains the raw sustained-damage choice. No artifact requires matching armor, another artifact, or a Paladin in the party.
+Both dagger artifacts require the two-handed paired loadout; no one-handed artifact variant is included. The Skeleton Key rewards managing Focus over repeated openings. Candle's End rewards initiative and target selection. The Unlost Road rewards a pistol user who accepts lower damage to survive the enemy response. Ordinary Locksmith preparation and Wayfarer penetration remain stronger versions of those weapon actions; ordinary Nightblade remains the raw sustained-damage choice. No artifact requires matching armor, another artifact, or a Paladin in the party.
 
 Before accepting balance, test each against its strongest ordinary alternative in short and long encounters, with low and high armor, scarce and abundant Focus, multiple Thieves, a solo Thief, and another class using its base weapon. Test charge/refund/buff lifecycle separately from art and acquisition.

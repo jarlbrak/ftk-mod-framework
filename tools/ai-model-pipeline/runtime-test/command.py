@@ -6,7 +6,7 @@ from pathlib import Path
 import time
 import uuid
 
-OPS = ('hero-damage-fixture', 'material-lifecycle-fixture', 'native-row-portrait-fixture', 'portrait-texture-capture', 'inventory', 'reload', 'capture', 'play', 'combat-trigger-capture', 'select-room', 'stage-enemy', 'fortify-party', 'return-to-title', 'native-save-exit', 'native-save-exit-state', 'quiet-tutorials', 'lease-test', 'stage-next-enemy', 'ready', 'fixture-state', 'collect-loot', 'equipment-inventory', 'equip-body', 'unequip-body', 'catalog-preflight', 'playercatalog-preflight', 'material-state', 'story-state', 'story-submit', 'native-title-new-game', 'native-create-character-preflight', 'native-create-character-input-state', 'native-create-character-screen', 'player-preview-state', 'lease-watch-preview', 'lease-watch', 'lease-watch-state', 'lease-watch-clear', 'kraken-sample-fixture', 'kraken-production-adapter-arm', 'kraken-production-adapter-state', 'kraken-production-adapter-clear')
+OPS = ('hero-damage-fixture', 'material-lifecycle-fixture', 'native-row-portrait-fixture', 'portrait-texture-capture', 'inventory', 'reload', 'capture', 'play', 'combat-trigger-capture', 'select-room', 'stage-enemy', 'fortify-party', 'return-to-title', 'native-save-exit', 'native-save-exit-state', 'quiet-tutorials', 'lease-test', 'stage-next-enemy', 'ready', 'fixture-state', 'collect-loot', 'equipment-inventory', 'equip-body', 'unequip-body', 'catalog-preflight', 'playercatalog-preflight', 'material-state', 'story-state', 'story-submit', 'native-title-new-game', 'native-game-definition-select', 'native-create-character-preflight', 'native-create-character-input-state', 'native-create-character-screen', 'player-preview-state', 'lease-watch-preview', 'lease-watch', 'lease-watch-state', 'lease-watch-clear', 'kraken-sample-fixture', 'kraken-production-adapter-arm', 'kraken-production-adapter-state', 'kraken-production-adapter-clear')
 
 
 OPS += ('native-party-start', 'native-resume-party-start', 'native-party-class', 'guardian-state', 'guardian-damage-fixture')
@@ -21,11 +21,15 @@ OPS += ('overworld-ailment-state',)
 OPS += ('stage-native-ailment-hex',)
 OPS += ('enter-native-ailment-hex',)
 OPS += ('player-studio',)
+OPS += ('native-inventory-capture',)
 OPS += ('custom-loot-fixture',)
 OPS += ('preview-race',)
 OPS += ('native-fight-trace',)
 OPS += ('hot-reload',)
 OPS += ('thief-state',)
+OPS += ('native-gear-metadata', 'item-visual-state', 'native-item-card', 'native-dungeon-entry', 'party-native-gear-stage', 'blacksmith-gear-grant', 'blacksmith-gear-equip')
+OPS += ('package-gear-state', 'class-appearance-roster', 'package-gear-grant', 'package-gear-equip', 'package-gear-appearance')
+OPS += ('blacksmith-endgame-level-up', 'blacksmith-combat-state', 'blacksmith-appearance', 'native-inventory')
 
 
 def main():

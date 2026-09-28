@@ -29,6 +29,7 @@ public sealed partial class RuntimeModelTest
         CharacterEventListener dummy=cow.m_CurrentDummy==null?null:cow.m_CurrentDummy.m_EventListener;
         return new JObject{{"heroInstanceId",cow.GetInstanceID()},{"alive",cow.m_CharacterStats!=null && cow.m_CharacterStats.m_HealthCurrent>0},
             {"dummyCelInstanceId",dummy==null?0:dummy.GetInstanceID()},{"dummyLease",dummy==null?null:ReadLease(dummy)},
+            {"avatarWeaponPresent",avatar!=null && avatar.m_Weapon!=null},{"dummyWeaponPresent",dummy!=null && dummy.m_Weapon!=null},
             {"celInstanceId",avatar==null?0:avatar.GetInstanceID()},{"lease",avatar==null?null:ReadLease(avatar)},{"slots",slots}};
     }
     JObject EquipmentInventory()

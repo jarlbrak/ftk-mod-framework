@@ -4,9 +4,9 @@ Status: implemented rules accompanying [the class design](DESIGN.md). All percen
 
 ## 1. Eligible attacks
 
-The Opportunist capability belongs to the Thief class. Weapons declare precision support through the typed public Content API. Every paired-dagger set and bow in this package carries that tag. The native `dualKnife` and `dualDagger` rows are also explicitly eligible, retaining their actual native actions, checks, stats, and ownership gates. Their ordinary physical basic attacks qualify; unverified special proficiencies do not. One-handed weapons are ineligible. Release one does not guess other native weapon eligibility from a name, animation, governing stat, or all weapons of a broad type. A different weapon still functions normally; the class card says Sneak Attack requires a precision weapon.
+The Opportunist capability belongs to the Thief class. Weapons declare precision support through the typed public Content API. Every paired-dagger set and pistol in this package carries that tag. The native `dualKnife` and `dualDagger` rows are also explicitly eligible, retaining their actual native actions, checks, stats, and ownership gates. Their ordinary physical basic attacks qualify; unverified special proficiencies do not. One-handed weapons are ineligible. Release one does not guess other native weapon eligibility from a name, animation, governing stat, or all weapons of a broad type. A different weapon still functions normally; the class card says Sneak Attack requires a precision weapon.
 
-An eligible attack is a committed, direct, single-target, physical weapon action authored to allow Sneak Attack. Normal Strike and Shoot qualify. Feint, Draw Out, Pierce, Thread the Needle, consumables, magic damage, splash, AoE, repeat attacks, damage over time, retaliation, reflection, and off-turn attacks do not. A multi-hit animation representing one native damage outcome remains one attack; an action with several separately calculated damaging hits is excluded.
+An eligible attack is a committed, direct, single-target, physical weapon action authored to allow Sneak Attack. Normal Strike and custom Fire qualify. Feint, Bait Shot, Pierce, Deadeye, consumables, magic damage, splash, AoE, repeat attacks, damage over time, retaliation, reflection, and off-turn attacks do not. A multi-hit animation representing one native damage outcome remains one attack; an action with several separately calculated damaging hits is excluded.
 
 All normal attacks keep native partial-success damage, critical behavior, enemy dodge rules, and armor. Perfect means every required slot succeeded, including slots secured with Focus. Native perfect player attacks bypass enemy evasion. Perfect does not mean the target necessarily loses HP after mitigation.
 
@@ -42,17 +42,19 @@ Each custom weapon shows its basic attack and one authored weapon action. Slip A
 | Action | Required weapon | Checks | Damage coefficient | Extra rule |
 | --- | --- | ---: | ---: | --- |
 | Strike | Package paired daggers | Weapon's 2 or 3 Speed checks | 1.00 | Can Sneak Attack |
-| Shoot | Package bow | 4 Awareness | 1.00 | Can Sneak Attack |
+| Fire | Package pistol | 4 Talent | 1.00 | Can Sneak Attack; consumes one round |
 | Feint | Package paired daggers | Weapon's 2 or 3 Speed checks | 0.60 | Positive direct damage grants Prepared |
-| Draw Out | Package bow | 4 Awareness | 0.60 | Same Prepared rule as Feint |
+| Bait Shot | Package pistol | 4 Talent | 0.60 | Same Prepared rule as Feint; consumes one round |
 | Pierce | Listed paired daggers | Weapon's 2 or 3 Speed checks | 0.75 | Perfect result bypasses positive physical armor |
-| Thread the Needle | Listed bow | 4 Awareness | 0.75 | Same armor rule as Pierce |
-| Locksmith preparation | Locksmith endgame weapon | Normal checks | 0.80 | Replaces its Feint/Draw Out coefficient |
-| Wayfarer penetration | Wayfarer endgame weapon | Normal checks | 0.85 | Replaces its Pierce/Thread the Needle coefficient |
+| Deadeye | Listed pistol | 4 Talent | 0.75 | Same armor rule as Pierce; consumes one round |
+| Locksmith preparation | Locksmith endgame weapon | Normal checks | 0.80 | Replaces its Feint/Bait Shot coefficient |
+| Wayfarer penetration | Wayfarer endgame weapon | Normal checks | 0.85 | Replaces its Pierce/Deadeye coefficient |
 
-**Twin Feint** is a Thief-only benefit of explicitly eligible paired daggers, including the two native sets. After an ordinary Strike with exactly one failed check causes positive direct HP damage, grant Prepared once per own turn. Resolve this after damage; it cannot enhance the same attack. A Strike that consumed Prepared may earn a replacement through this near miss. Two failed checks, a fully blocked hit, a dodged partial attack, a special action, and secondary impacts grant nothing. Both native two-check sets and later three-check sets use this exact one-failure rule. Bows and one-handed weapons do not receive Twin Feint.
+**Instant Reload** is attached to every custom Thief pistol. At the start of each scheduled Thief combat turn, the equipped pistol restores one round up to native capacity before the stance menu checks ammunition. It does not trigger on extra actions or benefit another class, and it does not change native attack ammunition consumption. Equipping a pistol still occupies both equipment hands and prevents a shield. The firearm animation may show one-handed use.
 
-Feint and Draw Out retain ordinary partial damage at their reduced coefficient. Any positive HP loss grants one Prepared token to the wielder, independent of the target's existing Open state. They cannot trigger Sneak Attack, artifact rewards, or a second preparation token. A fully absorbed or dodged hit grants nothing. For a different Thief, their positive direct hit can create an ordinary opening.
+**Twin Feint** is a Thief-only benefit of explicitly eligible paired daggers, including the two native sets. After an ordinary Strike with exactly one failed check causes positive direct HP damage, grant Prepared once per own turn. Resolve this after damage; it cannot enhance the same attack. A Strike that consumed Prepared may earn a replacement through this near miss. Two failed checks, a fully blocked hit, a dodged partial attack, a special action, and secondary impacts grant nothing. Both native two-check sets and later three-check sets use this exact one-failure rule. Pistols and one-handed weapons do not receive Twin Feint.
+
+Feint and Bait Shot retain ordinary partial damage at their reduced coefficient. Any positive HP loss grants one Prepared token to the wielder, independent of the target's existing Open state. They cannot trigger Sneak Attack, artifact rewards, or a second preparation token. A fully absorbed or dodged hit grants nothing. For a different Thief, their positive direct hit can create an ordinary opening.
 
 Prepared makes the next eligible attack count as having an opening, against any living enemy. Consume it when that attack commits, including on failure. It never stacks, never increases the Sneak Attack multiplier, and is consumed even when the target was already Open. It expires at the end of the actor's next scheduled turn, on weapon change, on incapacity/death, or on combat exit. A skipped next turn still reaches that expiry. Taking another non-eligible weapon attack clears an existing token before resolution; a new successful Feint can replace it. Passing or using an item does not extend its deadline.
 

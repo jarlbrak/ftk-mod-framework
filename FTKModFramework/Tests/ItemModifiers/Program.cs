@@ -2,10 +2,13 @@ using System;
 using FTKModFramework.Core.Data;
 using Newtonsoft.Json;
 
+public sealed class CharacterSkills { public bool m_Taunt; }
+
 namespace GridEditor
 {
     public sealed class FTK_characterModifier
     {
+        public CharacterSkills m_CharacterSkills;
         public int m_ModDefensePhysical, m_ModDefenseMagic, m_ExtraFocus, m_ReflectDamage;
         public float m_ModVitality, m_ModQuickness, m_ModAwareness, m_ModTalent;
     }
@@ -39,6 +42,7 @@ internal static class Program
     {
         ItemModifierEntry values = JsonConvert.DeserializeObject<ItemModifierEntry>(
             "{\"armor\":2,\"resistance\":3,\"vitality\":0.1,\"speed\":0.2,\"awareness\":0.15,\"talent\":0.25,\"focusCapacity\":2,\"reflect\":4}");
+        values.Taunt = true;
         values.Validate();
         GridEditor.FTK_characterModifier row = new GridEditor.FTK_characterModifier();
         values.Apply(row);
@@ -46,10 +50,12 @@ internal static class Program
         Check(Math.Abs(row.m_ModVitality - 0.1f) < 0.0001f && Math.Abs(row.m_ModQuickness - 0.2f) < 0.0001f, "existing stat mapping");
         Check(Math.Abs(row.m_ModAwareness - 0.15f) < 0.0001f && Math.Abs(row.m_ModTalent - 0.25f) < 0.0001f, "new stat mapping");
         Check(row.m_ExtraFocus == 2, "Focus capacity mapping");
+        Check(row.m_CharacterSkills != null && row.m_CharacterSkills.m_Taunt, "Taunt skill mapping");
 
         ItemModifierEntry empty = JsonConvert.DeserializeObject<ItemModifierEntry>("{}");
         empty.Validate();
         empty.Apply(row);
+        Check(!row.m_CharacterSkills.m_Taunt, "omitted Taunt clears previous value");
         Check(row.m_ModAwareness == 0 && row.m_ModTalent == 0 && row.m_ExtraFocus == 0 && row.m_ModQuickness == 0, "omitted values clear previously populated fields");
 
         Reject("{\"focusCapacity\":-1}");

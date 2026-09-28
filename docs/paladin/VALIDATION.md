@@ -1,6 +1,159 @@
 # Paladin validation and historical acceptance
 
-## Current verification entry points
+## Unreleased Censure banner correction
+
+The replacement Censure set follows the original marketplace illustration:
+angular red plume, dark shell and gold brow, tall gold-edged shoulders with red
+gems, chest chevrons, split red tabard, red greaves, compact hammer and framed
+shield. The [banner fidelity contract](ART-DIRECTION.md#censure-banner-fidelity)
+and [visual revision ledger](../../marketplace/packages/censure-visual.provenance.json)
+identify the selected source assets and bounded acceptance. This is an unreleased
+source correction; published archives remain unchanged.
+
+Five original Rodin sources supply the reconstruction. The two-handed hammer is
+a family derivative, not an object depicted in the banner. Reproducible recipes
+cover [armor and helmet](../../art-experiments/paladin-overhaul/censure-armor-helmet/README.md)
+and [accessories](../../art-experiments/paladin-overhaul/censure-accessories/README.md).
+The final armor and helmet atlases use the documented
+[1024-pixel runtime budget](../../art-experiments/paladin-overhaul/censure-armor-helmet/RUNTIME-TEXTURES.md).
+Texture resampling preserves every delivered GLB byte.
+
+Bounded native evidence:
+
+- All fifteen class defaults passed 75 one-handed inventory-idle views on the
+  final geometry. Minor ear, rim, cuff-opening and rear contacts are accepted.
+  This does not cover every appearance variant.
+- Blacksmith Female, Thief Male and Treasure Hunter Male passed fifteen
+  two-handed idle views. Native idle uses a one-handed carry pose.
+- Thief Male and Blacksmith Female passed forty reviewed two-handed attack
+  frames plus eleven transition samples. Shoulder plates follow the arms and
+  bracers remain coherent. The native off-hand releases and regrips; continuous
+  dual-hand contact is not claimed. Two female victory samples crop the hammer
+  at the supplemental camera boundary, so the cropped region was not judged.
+- Final 1K materials passed fifteen fresh views on Busker Male, Blacksmith Female
+  and Thief Male, plus fresh armor and helmet native item-card snapshots.
+  Earlier fifteen-class and combat checks used identical geometry with 2K
+  predecessor atlases. The other four item-card assets remain byte-identical
+  to their accepted captures.
+
+Directional views use supplemental lighting on the actual native avatar.
+Inventory and item-card images are game-produced textures. Combat observations
+use fixed simulation pacing; none establishes realtime performance, comprehensive
+animation coverage, balance, save/load or co-op behavior. Backpacks obscure some
+rear garment surfaces. Small native-like clipping does not justify distorting
+helmet silhouettes.
+
+Two native ForceEquip sessions aborted before accepted captures. Fresh sessions
+with frame-separated item operations succeeded, but the cause is unresolved.
+This remains a release stability gate; successful later runs are not a fix.
+
+Oathkeeper's separately accepted original-shape successor replaces its bulged
+clearance candidate. Its bounded acceptance covers all fifteen class defaults
+and its native item card. The frozen studio gallery retains that exact source
+lineage alongside the new Censure portraits.
+
+## Historical superseded helmet clearance candidate
+
+The earlier Oathkeeper and Censure clearance edits introduced visible shell bulges.
+These candidates are superseded by the selections described above. The static-fit observations below remain
+evidence for those exact bytes, but do not approve their silhouettes. Revised
+models require a fresh shape review and native fit check before adoption.
+
+The historical source package selected Oathkeeper v2 and Censure v3 local shell-clearance
+meshes. Both retain their original textures, UVs, triangle indices, face openings
+and source lineage. Only these two helmet entries set public
+`helmetHairVisibility` to `{"top": false, "bottom": false}`. Other helmets and all
+gameplay fields are unchanged. Their equipped routes retain the selected fit GLBs. All six helmets now use
+separate display-only GLBs for the accepted native item-card framing.
+
+| Helmet | Selected SHA-256 | Bounded native inventory-idle observation |
+| --- | --- | --- |
+| Oathkeeper v2 | `bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415` | Hunter Male, Scholar Male, Herbalist Female, Busker Male, Blacksmith Female, Thief Male, Paladin Female, Trapper Female, Minstrel Female, Woodcutter Male, Monk Male, Hobo Male, Gladiator Female, Treasure Hunter Male, Astronomer Male |
+| Censure v3 | `8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e` | Hunter Male, Scholar Male, Herbalist Female, Busker Male, Blacksmith Female, Thief Male, Paladin Female, Trapper Female, Minstrel Female, Woodcutter Male, Monk Male, Hobo Male, Gladiator Female, Treasure Hunter Male, Astronomer Male |
+
+Censure regression on Busker Male, Blacksmith Female and Thief Male also passed
+the bounded inventory views, with minor extreme rear-rim contact accepted.
+Both historical revised helmets passed bounded inventory-idle views on all fifteen usable
+class defaults. Astronomer's visible ear contact at Oathkeeper's lower rim is
+accepted; the main closed dome remains clear. Native wraps, beards and small rim
+contacts are assessed against ordinary game tolerances.
+
+An earlier final-party session aborted during a native equip RPC before any
+capture. A fresh session with passive diagnostics completed all 27 requested
+loadouts; cached RPC metadata matched and no equip-method Harmony owners were
+present. This success does not explain or repair the prior native abort.
+Appearance variants, combat animation and lifecycle remain separate gates;
+current native item-card framing is covered below. Earlier six-tier one-handed captures across all fifteen classes
+cover unchanged armor, boots, shields and hammers; the revised helmet evidence
+above replaces the earlier failed helmet observations. No full
+class-by-appearance-by-equipment matrix is claimed.
+
+The [clearance recipe](../../art-experiments/paladin-overhaul/HELMET-CLEARANCE.md)
+reproduces both outputs from hash-pinned original fitted inputs, preserving those
+inputs. The [package provenance](../../marketplace/packages/paladin-assets.provenance.json)
+adds their derived lineage and retains the existing six boot-display records.
+The historical raw Rodin inputs are identified by retained preparation hashes;
+the recipe does not claim to recreate them from unavailable raw source files.
+
+After selecting the exact meshes, regenerate only their provenance and validate:
+
+```sh
+python3 marketplace/packages/validate_paladin.py --update-helmet-provenance
+python3 marketplace/packages/validate_paladin.py
+```
+
+That earlier Coming Soon preview used 51 studio portraits from its then-selected
+assets, including the revised helmets and six corrected boot displays. Source
+and compressed-image hashes establish artwork identity, not native acceptance.
+
+This remains an unreleased source candidate. Existing published archives and
+historical evidence remain unchanged. At release, update the Paladin library
+entry, guide/gallery media and generated preview provenance to the selected
+assets and their actual coverage; studio images must remain labeled as studio
+art rather than native gameplay evidence.
+
+## Current nonweapon inventory icons
+
+The selected Censure armor, helmet, boots and shield icons copy the matching
+512 x 512 RGBA studio portraits. Oathkeeper's helmet icon follows its separately
+accepted shape successor. Other icon artwork retains its recorded lineage.
+Weapon, class, proficiency and combat icons keep the native outlined artwork.
+The [icon ledger](../../marketplace/packages/nonweapon-icons.provenance.json)
+pins sources, cameras and exact copies; the package retains 57 entries and
+238 active asset references.
+
+Offline review confirms the four Censure icon silhouettes remain distinct and
+contained at 64 pixels. This is not an actual native icon-state/layout check.
+The older `sync_nonweapon_icons_v3.py` workflow reproduces historical artwork;
+it must not overwrite the selected visual revision. Current adoption follows
+[the integration contract](../../marketplace/packages/CENSURE-VISUAL-INTEGRATION.md).
+
+## Historical native item-display framing
+
+The native 96-item snapshot baseline completed with verified inventory closure.
+It exposed bottom cropping on six Paladin helmets, top cropping on five raised
+Thief hoods, and small framing on thirteen boot pairs. The existing display-model
+API now uses 26 original display-only derivatives: six Paladin helmets, six
+Paladin boot pairs, seven Thief headpieces and seven Thief boot pairs. Positive
+uniform scale and translation are baked into positions; equipped meshes,
+textures, normals, UVs and topology remain unchanged.
+
+All 26 corrections passed native Show/inspect and post-close preservation.
+Independent review verified 139 pinned artifacts, exact sources, bindings and
+material semantics. The maximum original-source projection discrepancy was
+0.792 pixels, with at least 54 pixels of canvas margin and no clipping. These
+static item-card observations do not establish combat motion, save/load,
+multiplayer or lifecycle behavior. Earlier unexplained native equip aborts
+remain unresolved despite subsequent successful fresh sessions.
+
+The [display recipe](../../art-experiments/gear-display-framing/README.md) and
+[display ledger](../../marketplace/packages/display-framing.provenance.json)
+preserve original input hashes and fixed transforms. Previous paired-boot and
+helmet-fit records remain in package provenance. The 26 affected inventory
+icons use frozen studio-v3 renders; unchanged coat/charm artwork retains its
+studio-v2 source lineage. Studio images remain distinct from native captures.
+
+## Historical release verification entry points
 
 The Paladin 1.0.1 package contains **54 content entries and 51
 equipment items**, including three artifacts and twelve accessories. The

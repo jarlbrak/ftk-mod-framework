@@ -1,0 +1,33 @@
+{
+  "packageId": "ftkmf.classgear",
+  "category": "gear",
+  "license": "MIT",
+  "classification": "gameplay",
+  "dependencies": [],
+  "requirements": [
+    "Unpublished 0.2.0 development prototype requiring unreleased framework capabilities. The manifest frameworkVersion 1.0.2 is a local development baseline, not verified public release compatibility. A compatible public framework and launcher are release gates.",
+    "Current source declarations cover 32 items and 162 referenced runtime assets: 106 GLBs and 56 PNG textures/icons. Source hashes and route declarations do not establish native visual acceptance.",
+    "Controlled native trials cover both weapon paths at all four tiers, mixed native/themed gear and a Hunter wearer without Blacksmith-only bonuses or actions. Rule tests cover further lifecycle and stacking cases; these tests do not establish broad live interoperability.",
+    "Ordinary acquisition was observed through native loot. Natural acquisition frequencies and statistical full-campaign balance are not claimed.",
+    "Static native fit passed 35 presentations across seven appearances and all 32 item cards. Sampled female human maul motion passed at every tier, plus Kilnward hammer-and-shield motion. Other motion/skin combinations, break behavior and obscured contact remain unverified.",
+    "Co-op agreement and Windows/Linux behavior remain unverified. macOS is the local development target, not a complete platform acceptance claim.",
+    "Applicable Rodin account/export and distribution entitlement must be established before release. No universal paid-plan requirement is asserted."
+  ],
+  "contentChanges": [
+    "Adds 32 Blacksmith-themed equipment items: eight identities in each of Coalmark, Bellowsworn, Rivetwatch and Kilnward.",
+    "Provides one-handed hammers and two-handed mauls in all four tiers, plus shields, body armor, helmets, boots, necklaces and trinkets.",
+    "Keeps all gear usable by every class. Native Blacksmith passives vary by piece: Vitality on weapons, helmets and necklaces; Armor on body armor and shields; Speed on boots; Resistance on trinkets.",
+    "Native Blacksmiths gain Set Hammer: a shield-required 75%-damage strike granting 2/3/4/5 temporary Armor on positive HP damage until the next scheduled own turn.",
+    "Native Blacksmiths gain Overhand: a 115%-damage maul strike applying a 2/3/4/6 Armor penalty until the next scheduled own turn, including misses.",
+    "Bellowsworn and later trinkets grant native Blacksmiths Temper: once per combat, spend a full action for 3/4/5 Armor through a living ally or self target's next two completed turns, without rolls or Focus. Positive protection uses the strongest increase; Overhand remains additive.",
+    "Retains ordinary basic weapon attacks and native shield Taunt. Removes inherited Splash, Shockwave and Stun from the themed private weapons while preserving vanilla rows and the native Blacksmith starting loadout and Steady.",
+    "Configures shared level-appropriate shop and drop pools without a Blacksmith-in-party, lore-unlock or DLC requirement."
+  ],
+  "changelog": "Unpublished 0.2.0 redesign: 32 items across four tiers with Rodin-derived art, piece-specific Blacksmith affinity, Set Hammer, Overhand and Temper. Includes all-tier native kit trials, reviewed item cards and scoped motion checks. Stats and prices retained after native comparisons. The Kilnward promotional banner is unchanged. Requires unreleased framework capabilities; no public compatibility or co-op claim.",
+  "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
+  "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues/185",
+  "platforms": [
+    "macos"
+  ],
+  "screenshots": []
+}

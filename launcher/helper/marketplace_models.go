@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"math"
 	"path"
 	"strings"
 )
@@ -151,10 +152,11 @@ func rejectModelReferences(value interface{}, depth int) error {
 }
 
 type marketModelRenderer struct {
-	Path       string `json:"path"`
-	Model      string `json:"model"`
-	Texture    string `json:"texture"`
-	NativeMesh string `json:"nativeMesh,omitempty"`
+	NativeSkinType *string `json:"nativeSkinType,omitempty"`
+	Path           string  `json:"path"`
+	Model          string  `json:"model"`
+	Texture        string  `json:"texture"`
+	NativeMesh     string  `json:"nativeMesh,omitempty"`
 }
 type marketPlayerModel struct {
 	Skinset  string                `json:"skinset"`
@@ -192,16 +194,24 @@ func marketRaceBindings(bindings []marketRaceBinding) error {
 	return nil
 }
 
-func marketModelRenderers(renderers []marketModelRenderer, apparel bool) error {
+func marketModelRenderers(renderers []marketModelRenderer, apparel bool, appearance ...bool) error {
+	allowAppearance := len(appearance) == 1 && appearance[0]
 	if len(renderers) == 0 || len(renderers) > 32 {
 		return errors.New("invalid model renderer count")
 	}
 	seen := map[string]bool{}
 	for _, r := range renderers {
-		if r.Path != "." && !marketSafePath(r.Path) || seen[r.Path] {
+		key := r.Path
+		if r.NativeSkinType != nil {
+			if !apparel || !allowAppearance || !contains([]string{"Female", "Male", "Undead", "Cat", "Demon", "Fish", "Goblin"}, *r.NativeSkinType) {
+				return errors.New("nativeSkinType requires an exact native appearance on item apparel")
+			}
+			key += "\x00" + *r.NativeSkinType
+		}
+		if r.Path != "." && !marketSafePath(r.Path) || seen[key] {
 			return errors.New("invalid or duplicate renderer path")
 		}
-		seen[r.Path] = true
+		seen[key] = true
 		if !marketSafePath(r.Model) || !strings.HasPrefix(r.Model, "assets/") || path.Ext(r.Model) != ".glb" || !marketSafePath(r.Texture) || !strings.HasPrefix(r.Texture, "assets/") || path.Ext(r.Texture) != ".png" {
 			return errors.New("invalid model/texture package path")
 		}
@@ -269,6 +279,7 @@ type marketItemModifiers struct {
 	Resistance    int     `json:"resistance"`
 	Vitality      float64 `json:"vitality"`
 	Speed         float64 `json:"speed"`
+	Taunt         bool    `json:"taunt"`
 	Reflect       int     `json:"reflect"`
 	Awareness     float64 `json:"awareness"`
 	Talent        float64 `json:"talent"`
@@ -288,8 +299,81 @@ type marketGuardianBonuses struct {
 	GuardReckoning        bool `json:"guardReckoning"`
 	GuardCleanse          bool `json:"guardCleanse"`
 }
+type marketClassAffinity struct {
+	ClassID   string                   `json:"classId"`
+	Modifiers *marketAffinityModifiers `json:"modifiers"`
+}
+type marketBlacksmithGear struct {
+	SetHammerArmor       int `json:"setHammerArmor"`
+	OverhandArmorPenalty int `json:"overhandArmorPenalty"`
+	TemperArmor          int `json:"temperArmor"`
+}
+
+func (gear *marketBlacksmithGear) UnmarshalJSON(raw []byte) error {
+	type declaration marketBlacksmithGear
+	var decoded declaration
+	decoder := json.NewDecoder(bytes.NewReader(raw))
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(&decoded); err != nil {
+		return err
+	}
+	var fields map[string]json.RawMessage
+	if err := json.Unmarshal(raw, &fields); err != nil {
+		return err
+	}
+	for _, value := range fields {
+		if bytes.Equal(bytes.TrimSpace(value), []byte("null")) {
+			return errors.New("blacksmith gear values must be integers")
+		}
+	}
+	*gear = marketBlacksmithGear(decoded)
+	return nil
+}
+
+func marketValidBlacksmithGear(kind string, gear *marketBlacksmithGear) bool {
+	if gear == nil {
+		return false
+	}
+	if gear.SetHammerArmor != 0 {
+		return kind == "weapon" && gear.SetHammerArmor >= 2 && gear.SetHammerArmor <= 5 && gear.OverhandArmorPenalty == 0 && gear.TemperArmor == 0
+	}
+	if gear.OverhandArmorPenalty != 0 {
+		return kind == "weapon" && gear.OverhandArmorPenalty >= 2 && gear.OverhandArmorPenalty <= 6 && gear.TemperArmor == 0
+	}
+	return kind == "item" && gear.TemperArmor >= 3 && gear.TemperArmor <= 5
+}
+
+type marketAffinityModifiers struct {
+	Armor      int     `json:"armor"`
+	Resistance int     `json:"resistance"`
+	Vitality   float64 `json:"vitality"`
+	Speed      float64 `json:"speed"`
+	Reflect    int     `json:"reflect"`
+}
 type marketApparelModel struct {
 	FemaleBinding string                `json:"femaleBinding"`
 	MaleBinding   string                `json:"maleBinding"`
 	Renderers     []marketModelRenderer `json:"renderers"`
+}
+
+func marketValidClassAffinity(kind string, affinity *marketClassAffinity) bool {
+	if (kind != "item" && kind != "weapon") || affinity == nil || strings.TrimSpace(affinity.ClassID) == "" || affinity.Modifiers == nil {
+		return false
+	}
+	m := affinity.Modifiers
+	if m.Armor < 0 || m.Armor > 1 || m.Resistance < 0 || m.Resistance > 1 || m.Reflect < 0 || m.Reflect > 1 {
+		return false
+	}
+	if !marketValidAffinityPoint(m.Vitality) || !marketValidAffinityPoint(m.Speed) {
+		return false
+	}
+	return m.Armor != 0 || m.Resistance != 0 || m.Reflect != 0 || m.Vitality != 0 || m.Speed != 0
+}
+
+func marketValidAffinityPoint(value float64) bool {
+	if value < 0 || value > 0.01 || math.IsNaN(value) || math.IsInf(value, 0) {
+		return false
+	}
+	points := value * 100
+	return math.Abs(points-math.Round(points)) < 0.0001
 }

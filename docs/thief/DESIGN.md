@@ -24,14 +24,14 @@ The reward is a readable, earned damage spike. The cost is low Vitality, depende
 | --- | ---: | --- |
 | Strength | 54 | Serviceable physical checks, no heavy weapon specialty |
 | Intelligence | 46 | Weak magical checks |
-| Awareness | 72 | Secondary bow path and scouting |
-| Talent | 74 | Tools and utility checks |
+| Awareness | 72 | Scouting and awareness checks |
+| Talent | 74 | Pistol accuracy, tools, and utility checks |
 | Speed | 78 | Primary dagger stat and initiative |
 | Vitality | 50 | Principal cost of the combat and exploration kit |
 | Focus | 3 | Native resource; no baseline regeneration |
 | Gold | 3 | Modest start |
 
-Total of the six main stats: **374**. The primary stat is Speed. Starting equipment is Street Twins, Patched Jack, Street Neckerchief, Softstep Shoes, and one native Lockpicks consumable. The paired starter occupies both hands. No starting shield, charm, bow, rare item, or extra consumable is added. Exact gear is specified in [Equipment](EQUIPMENT.md).
+Total of the six main stats: **374**. The primary stat is Speed. Starting equipment is Street Twins, Patched Jack, Street Neckerchief, Softstep Shoes, and one native Lockpicks consumable. The paired starter occupies both hands. No starting shield, charm, pistol, rare item, or extra consumable is added. Exact gear is specified in [Equipment](EQUIPMENT.md).
 
 Native character appearances remain available under normal unlock rules. The class has no new Lore prerequisite. Native paired weapons retain their existing DLC/ownership gates; compatibility of original custom pairs with installations lacking that DLC must be verified before declaring base-game support. All gear is transferable and usable by other classes; class-specific effects explicitly require the Thief's Opportunist capability.
 
@@ -44,7 +44,7 @@ Native character appearances remain available under normal unlock rules. The cla
 | Elite Trap Disarm | Native skill flag, unchanged native behavior | Spend checks, Focus, or lockpicks appropriately |
 | Sneak Attack | A perfect eligible physical attack against an Open enemy gains +20% of current weapon damage, once per own turn | Commit Focus to the right target and moment |
 | Twin Feint | A normal paired strike with exactly one failed check that damages its target grants Prepared | A near miss sets up the next turn without a second attack |
-| Feint / Draw Out | Weapon action: 60% damage; positive direct damage prepares the next eligible attack | Pay damage now to make an opening for later |
+| Feint / Bait Shot | Weapon action: 60% damage; positive direct damage prepares the next eligible attack | Pay damage now to make an opening for later |
 | Slip Away | Once per combat, full action: halve the next direct enemy attack against self before next turn and prepare a strike | Give up damage now to survive and set up |
 
 All class abilities are available from the start. Weapons add or improve actions through acquisition. There is no separate experience currency, level unlock tree, passive counterattack, baseline critical bonus, or resource generation. Native skills retain their actual check behavior; none makes every chest or trap free.
@@ -56,19 +56,19 @@ All class abilities are available from the start. Weapons add or improve actions
 | Path | Governing stat | Checks | Equipment tradeoff | Feel |
 | --- | --- | ---: | --- | --- |
 | Paired daggers, primary | Speed | 2 early, 3 late | Two hands; no shield | Fast precision, Twin Feint, and a choice between reliability and a larger hit |
-| Shortbow, secondary | Awareness | 4 | Two hands; no shield | A different accuracy investment, penetration actions, and the scout artifact |
+| Flintlock pistol, secondary | Talent | 4 | Two hands; no shield | One native round per turn for a Thief, penetration actions, and the scout artifact |
 
-Every band supplies both paths. The paired-dagger progression deliberately continues the native Speed-based `dualKnife` and `dualDagger` route into late-game equipment and artifacts. Weapons use physical damage and ordinary native level growth. These are custom items with authored actions and art. The native one-handed Dagger is a one-check Vitality weapon. One-handed dagger and buckler is an emergency fallback, with native actions and defenses but no Sneak Attack, Twin Feint, or prepared-strike payoff. It receives no custom progression or artifacts. Slip Away remains available for survival with any loadout.
+Every band supplies both paths. A Thief restores one round at the start of each combat turn while holding a custom pistol, so its listed damage is tuned for one shot per turn. Other classes use the native reload cycle. All custom pistols occupy both equipment hands and exclude a shield, although the avatar may hold the small weapon in one hand. The paired-dagger progression deliberately continues the native Speed-based `dualKnife` and `dualDagger` route into late-game equipment and artifacts. Weapons use physical damage and ordinary native level growth. These are custom items with authored actions and art. The native one-handed Dagger is a one-check Vitality weapon. One-handed dagger and buckler is an emergency fallback, with native actions and defenses but no Sneak Attack, Twin Feint, or prepared-strike payoff. It receives no custom progression or artifacts. Slip Away remains available for survival with any loadout.
 
-At the end of the campaign, **Locksmith** improves preparation and the tool/Focus budget, **Nightblade** offers raw damage and Speed at the cost of magical protection and piercing options, and **Wayfarer** supports bow accuracy and armor penetration. Mixing pieces is encouraged. There are no set bonuses or requirements to wear matching pieces.
+At the end of the campaign, **Locksmith** improves preparation and the tool/Focus budget, **Nightblade** offers raw damage and Speed at the cost of magical protection and piercing options, and **Wayfarer** supports pistol accuracy and armor penetration. Mixing pieces is encouraged. There are no set bonuses or requirements to wear matching pieces.
 
 ## Full inventory and artifact weapons
 
-The complete paper inventory contains **45 equipment items**: seven paired-dagger sets, seven bows, seven coats, seven headpieces, seven boots, seven charms, and three artifact weapons. Each ordinary family has four successive campaign bands and three alternatives in the final band. All 42 ordinary items have stats, prices, acquisition bands, and actions or bonuses in [Equipment](EQUIPMENT.md).
+The complete paper inventory contains **45 equipment items**: seven paired-dagger sets, seven pistols, seven coats, seven headpieces, seven boots, seven charms, and three artifact weapons. Each ordinary family has four successive campaign bands and three alternatives in the final band. All 42 ordinary items have stats, prices, acquisition bands, and actions or bonuses in [Equipment](EQUIPMENT.md).
 
 - **The Skeleton Key:** a burglar's matched dagger set that returns one Focus actually spent when a Sneak Attack damages its target. Lower damage buys resource efficiency.
 - **Candle's End:** an assassin's paired blades whose once-per-combat opening strike can raise the Sneak Attack bonus to 75% against an uninjured foe. Lower sustained damage buys initiative burst.
-- **The Unlost Road:** a scout's shortbow that grants eight Evasion points after a damaging Sneak Attack until the next turn. Lower damage buys a safer enemy response.
+- **The Unlost Road:** a scout's compact flintlock that grants eight Evasion points after a damaging Sneak Attack until the next turn. Lower damage buys a safer enemy response.
 
 [Artifacts](ARTIFACTS.md) defines exact triggers, limits, appearance, lore, and acquisition. They use native Artifact rarity, the game's top ordinary equipment rarity. They are optional alternatives, not required to make the class work.
 

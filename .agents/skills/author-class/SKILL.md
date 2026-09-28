@@ -14,3 +14,10 @@ Read the root and nearest `AGENTS.md`, [content authoring](../../../docs/WRITING
 5. Verify class selection, starting items, ordinary acquisition, every advertised action and passive, combat and encounter resets, save/resume, and the supported avatar layouts. Run `verify-change` and available `ingame-smoke` checks. Separate offline, simulated, and live results, including co-op limitations.
 
 Deliver the role and progression contract, content and asset inventory, template rationale, observed behavior, and remaining gates.
+
+Combat UI: follow the repository combat icon rule. Reuse an existing native
+all-white outlined proficiency icon for every action; never generate or import
+a custom combat icon. Verify it beside vanilla buttons in game.
+
+FTK basic attack buttons use the weapon item icon. Preserve native weapon icons;
+do not override them with custom inventory renders.

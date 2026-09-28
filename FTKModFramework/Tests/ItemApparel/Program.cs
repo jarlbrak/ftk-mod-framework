@@ -121,6 +121,32 @@ internal static class Program
         Check(ExplicitEnemyMeshSwap.Calls == 0, "unregistered off-hand mapping leaves native paired weapons unchanged");
         ItemModelRegistry.ApplyOffHand(FTK_itembase.ID.Armor, offHand);
         Check(ExplicitEnemyMeshSwap.Calls == 1 && ExplicitEnemyMeshSwap.LastRoot == offHand && ExplicitEnemyMeshSwap.Last[0].GlbFileName == "offhand.glb", "paired off-hand mapping applies only to the separately owned left-hand root");
+        Check(!Content.SetHelmetHairVisibility(item, true, true), "non-helmet registration rejected");
+        item.m_ObjectType = FTK_itembase.ObjectType.helmet;
+        Check(!Content.SetHelmetHairVisibility(new FTK_items { m_ID = item.m_ID, m_ObjectType = FTK_itembase.ObjectType.helmet }, true, true), "detached helmet row rejected");
+        Check(!Content.SetHelmetHairVisibility(new FTK_items { m_ID = "vanilla", m_ObjectType = FTK_itembase.ObjectType.helmet }, true, true), "vanilla helmet row rejected");
+        Check(Content.SetHelmetHairVisibility(item, true, true), "custom helmet hair registered");
+        var helmetObject = new GameObject("helmet");
+        var helmet = helmetObject.AddComponent<Helmet>();
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Unregistered, helmetObject);
+        Check(!helmet.m_IsHairTopOn && !helmet.m_IsHairBottomOn, "unregistered helmet preserves native flags");
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Armor, null);
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Armor, new GameObject("missing component"));
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Armor, helmetObject);
+        Check(helmet.m_IsHairTopOn && helmet.m_IsHairBottomOn, "fresh custom helmet exposes both hair sections");
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Armor, helmetObject);
+        Check(helmet.m_IsHairTopOn && helmet.m_IsHairBottomOn, "helmet visibility application is idempotent");
+        var restoreModels = ItemModelRegistry.SuspendForReload();
+        var nextHelmetObject = new GameObject("next helmet");
+        var nextHelmet = nextHelmetObject.AddComponent<Helmet>();
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Armor, nextHelmetObject);
+        Check(!nextHelmet.m_IsHairTopOn && !nextHelmet.m_IsHairBottomOn, "reload suspension clears previous hair registration");
+        restoreModels();
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Armor, nextHelmetObject);
+        Check(nextHelmet.m_IsHairTopOn && nextHelmet.m_IsHairBottomOn, "reload rollback restores hair registration for new instances");
+        Check(Content.SetHelmetHairVisibility(item, false, true), "false is an explicit supported visibility override");
+        ItemHelmetModelPatch.Postfix(FTK_itembase.ID.Armor, nextHelmetObject);
+        Check(!nextHelmet.m_IsHairTopOn && nextHelmet.m_IsHairBottomOn && helmet.m_IsHairTopOn, "each section is independent and existing other instance remains untouched");
         FTK_characterModifier.ID modifierId = FTK_characterModifier.ID.None;
         Check(ItemModifierEnumPatch.Prefix("vanilla", ref modifierId) && modifierId == FTK_characterModifier.ID.None, "unregistered modifier keeps native enum lookup");
         Check(ItemModifierEnumPatch.Prefix(null, ref modifierId), "null modifier keeps native handling");
@@ -128,6 +154,54 @@ internal static class Program
         Check(ItemModifierEnumPatch.Prefix("itemOnly", ref modifierId), "item identity alone cannot fabricate a modifier");
         ContentRegistry.Bindings[typeof(FTK_characterModifierDB).Name + "customShield"] = 54322;
         Check(!ItemModifierEnumPatch.Prefix("customShield", ref modifierId) && (int)modifierId == 54322, "native card string lookup resolves exact registered modifier integer");
+        item.m_ObjectType = FTK_itembase.ObjectType.armor;
+        var cat = new PlayerApparelMesh("robeM(Clone)", "nativeM", "cat.glb", null, FTK_playerGameStart.SkinType.Cat);
+        var demon = new PlayerApparelMesh("robeM(Clone)", "nativeM", "demon.glb", null, FTK_playerGameStart.SkinType.Demon);
+        var fallback = new PlayerApparelMesh("robeM(Clone)", "nativeM", "fallback.glb");
+        Check(Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male, cat, fallback, demon), "same path permits exact appearance alternatives and fallback");
+        Check(ItemApparelRegistry.ReloadPlans().Single(p => p.Key == (int)FTK_itembase.ID.Armor).Value.Length == 3, "reload preflight retains every appearance alternative");
+        foreach (FTK_playerGameStart.SkinType skin in new[] { FTK_playerGameStart.SkinType.Female, FTK_playerGameStart.SkinType.Male, FTK_playerGameStart.SkinType.Undead, FTK_playerGameStart.SkinType.Cat, FTK_playerGameStart.SkinType.Demon, FTK_playerGameStart.SkinType.Fish, FTK_playerGameStart.SkinType.Goblin })
+        {
+            foreach (bool preview in new[] { false, true })
+            {
+                avatar = Avatar(preview);
+                if (preview) avatar.m_uiQuickPlayerCreate.m_SkinType = skin;
+                else avatar.m_CharacterOverworld.m_SkinType = skin;
+                resolved = ItemApparelRegistry.Resolve(avatar);
+                string expected = skin == FTK_playerGameStart.SkinType.Cat ? "cat.glb" : skin == FTK_playerGameStart.SkinType.Demon ? "demon.glb" : "fallback.glb";
+                Check(resolved.Length == 1 && resolved[0].GlbFileName == expected, "exact native appearance selection " + skin + " preview=" + preview);
+            }
+        }
+        foreach (bool preview in new[] { false, true })
+        {
+            avatar = Avatar(preview);
+            var defaultCat = new FTK_playerGameStart { m_DefaultSkinType = FTK_playerGameStart.SkinType.Cat };
+            if (preview) avatar.m_uiQuickPlayerCreate.ClassRow = defaultCat;
+            else avatar.m_CharacterOverworld.ClassRow = defaultCat;
+            Check(ItemApparelRegistry.Resolve(avatar)[0].GlbFileName == "cat.glb", "None uses native class default preview=" + preview);
+        }
+        Check(!Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male, cat, cat), "duplicate exact selector rejected");
+        Check(!Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male, fallback, fallback), "duplicate fallback rejected");
+        Check(!Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male,
+            new PlayerApparelMesh("robeM(Clone)", "nativeM", "invalid.glb", null, FTK_playerGameStart.SkinType.None)), "None is not an appearance selector");
+        Check(!Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male,
+            new PlayerApparelMesh("robeM(Clone)", "nativeM", "invalid.glb", null, (FTK_playerGameStart.SkinType)99)), "undefined appearance rejected");
+        Check(ItemApparelRegistry.Resolve(Avatar())[0].GlbFileName == "fallback.glb", "rejected registration preserves prior plan");
+        Check(!PlayerMeshPlan.TryCreate(new[] { new PlayerRendererMesh("body", "body.glb") }, new[] { cat }, out plan, out error), "class apparel rejects item-only selectors");
+        // An unselected fallback's identity must not be compared to the selected native renderer.
+        var staleFallback = new PlayerApparelMesh("robeM(Clone)", "otherNative", "fallback.glb");
+        Check(Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male, staleFallback, cat), "override may have different native expectation");
+        avatar = Avatar(); avatar.m_CharacterOverworld.m_SkinType = FTK_playerGameStart.SkinType.Cat;
+        Check(ItemApparelRegistry.Resolve(avatar)[0].GlbFileName == "cat.glb", "select before native identity validation");
+        Check(Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male, cat), "specific-only registration accepted");
+        Check(ItemApparelRegistry.Resolve(Avatar()).Length == 0, "unmatched selector skips without a fallback");
+        var restoreApparel = ItemApparelRegistry.SuspendForReload();
+        Check(ItemApparelRegistry.Resolve(avatar).Length == 0 && ItemApparelRegistry.ReloadApparelCount == 0, "reload suspension clears selected alternatives");
+        restoreApparel();
+        Check(ItemApparelRegistry.Resolve(avatar)[0].GlbFileName == "cat.glb", "reload rollback restores alternatives");
+        Check(Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male, fallback), "replacement clears previous selector plan");
+        Check(ItemApparelRegistry.Resolve(avatar)[0].GlbFileName == "fallback.glb", "fresh rebuild resolves replacement without stale Cat route");
+        Check(item.m_WearablePrefab == female.m_Armor.gameObject && item.m_WearablePrefabM == male.m_Armor.gameObject, "appearance routes retain native garment binding");
         Console.WriteLine("PASS " + checks + " item apparel registration/merge assertions (Unity and DB stand-ins; no live proof)");
     }
 }

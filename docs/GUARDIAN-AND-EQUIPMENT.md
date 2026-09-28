@@ -119,6 +119,12 @@ renderer paths on newly instantiated equipped weapons, shields and helmets.
 `.` names the component root. Include break fragments when the native weapon has
 them. Native prefabs, hit targets and animation structure remain intact.
 
+`Content.SetHelmetHairVisibility(item, top, bottom)` optionally controls native
+hair sections on fresh instances of a registered custom helmet. Neck accessories
+that reuse a crown-covering helmet template may need both sections enabled to
+avoid exposing an open scalp. Omission preserves the template's behavior. This
+API is unreleased; verify front and rear views in game before accepting the fit.
+
 `Content.SetItemDisplayMeshesFromGlb(item, ItemRendererMesh[])` separately replaces
 rigid renderers relative to the native loot-display prefab root. Shops and large
 inventory cards render these objects through the native offscreen camera; `icon`
@@ -133,6 +139,18 @@ supply the native skeleton and garment assembly; custom meshes supply the visual
 geometry. Each declaration names an exact renderer path and expected native mesh.
 Absent alternate-sex or hidden garment paths are allowed. Equipped apparel
 overrides class default apparel, but cannot replace required body renderers.
+Item apparel declarations may add `nativeSkinType` with one exact native name:
+`Female`, `Male`, `Undead`, `Cat`, `Demon`, `Fish`, or `Goblin`. For each renderer
+path, the matching appearance declaration takes precedence over the declaration
+without a selector. With no match or fallback, that path is skipped. Duplicate
+path/selector pairs are rejected. C# authors can use the five-argument
+`PlayerApparelMesh` constructor with a nullable `FTK_playerGameStart.SkinType`.
+The selector applies only to item apparel; class apparel is already skinset scoped.
+Selection reads the native preview or world character appearance, with the native
+class default used for `None`; combat clones inherit the assembled world outfit.
+Every alternative is included in hot reload asset preflight. These routing rules
+have game-free coverage; each authored appearance still requires live fit checks.
+
 See [player model authoring](MODEL-PLAYER-API.md) for rig constraints.
 
 ## Data package declarations
@@ -146,8 +164,10 @@ authoring example, subject to its documented live gates.
 | `guardian: true` | class | Guardian kit |
 | `overworldAilmentImmunity` with `displayName` | class | Prevent new Poison and Curse outside combat; requires framework 1.0.3 |
 | `guardianBonuses` | item, weapon | The equipment bonus fields above; Focus and Reckoning require a weapon |
-| `modifiers` | item, weapon | `armor`, `resistance`, `reflect` integers 0-100; `vitality`, `speed` numbers -1 to 1 |
+| `modifiers` | item, weapon | `armor`, `resistance`, `reflect` integers 0-100; `vitality`, `speed` numbers -1 to 1; optional `taunt` boolean |
+| `classAffinity` | item, weapon | `classId` plus bounded additive `modifiers` that apply only to that class while equipped |
 | `itemModels` | item, weapon | Equipped rigid renderers: `path`, `model`, `texture` |
+| `helmetHairVisibility` | helmet item | Unreleased: required boolean `top` and `bottom` when present; overrides native hair visibility on fresh equipped instances |
 | `displayModels` | item, weapon | Loot/card rigid renderers, relative to the native display prefab root |
 | `apparelModels` | item | `femaleBinding`, `maleBinding`, and `renderers` with `nativeMesh` in addition to model fields |
 | `playerModels` | class | Array of `skinset`, required `body`, optional `apparel` and `backpack` renderer declarations |
@@ -156,6 +176,17 @@ authoring example, subject to its documented live gates.
 Stat fractions use native units: `speed: -0.02` means minus two Speed points.
 Icons do not replace the class portrait. Class portraits use the native avatar
 rendering path, which requires separate visual validation.
+
+`classAffinity` is a separate capability from ordinary `modifiers`: ordinary
+modifiers apply to every wearer, while affinity values apply only to the named
+class. The initial contract supports up to one point per item for Armor,
+Resistance, Reflect, Vitality, or Speed. Attribute fractions use 0.01 per point.
+The loader resolves the native class name and rejects unknown affinity fields.
+Cards append the matching class name and bonus. The gear remains usable by other
+classes, which receive its ordinary stats and actions only. The native stat
+tallies add affinity after rebuilding equipped modifier rows, so equip and
+unequip use the same deterministic path. Save and multiplayer behavior still
+need live verification.
 
 Models and textures must reside under the package's `assets/` directory and use
 relative paths. The loader pins package identity and asset bytes, rejects path
@@ -171,7 +202,7 @@ animation quality, resource lifetime, shop acquisition or save compatibility.
 The framework retains successfully registered row objects for the current process.
 When native title recreation initializes fresh database components, it restores
 those rows at their original array positions and rebuilds lookup indexes. This
-preserves saved class indices and existing equipment/Guardian capability identity
+preserves saved class indices and existing equipment, Guardian, and class-affinity capability identity
 without repeating content discovery, model loading, or author callbacks.
 
 Restoration leaves newly created vanilla rows intact. A type, position collision,

@@ -1,12 +1,62 @@
 #!/usr/bin/env python3
 """Reproduce Paladin source-package structural checks without launching FTK."""
+import argparse
 import hashlib
 import json
 import struct
+from sync_nonweapon_icons import validate_package_icons
+from sync_display_framing import validate_display_framing
 from pathlib import Path
 
 HERE=Path(__file__).resolve().parent
 PACKAGE=HERE/'paladin'
+
+
+def helmet_clearance_provenance():
+    """Derive only the two selected clearance records; preserve all other campaign provenance."""
+    root = HERE.parents[1]
+    profile_path = root/'art-experiments/paladin-overhaul/helmet-clearance-profiles.json'
+    helper = root/'art-experiments/paladin-overhaul/helmet_clearance.py'
+    profiles = json.loads(profile_path.read_text())['items']
+    approved = {
+        'oathkeeper': 'bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415',
+        'censure': '8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e',
+    }
+    evidence = {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()
+                for path in [helper, profile_path]}
+    records = {}
+    for tier, expected in approved.items():
+        profile = profiles[tier]
+        name = 'assets/paladin-'+tier+'-helmet.glb'
+        original = root/profile['input']['path']
+        assert hashlib.sha256(original.read_bytes()).hexdigest() == profile['input']['sha256'], tier
+        assert profile['outputSha256'] == expected == hashlib.sha256((PACKAGE/name).read_bytes()).hexdigest(), tier
+        records[name] = {
+            'source': str(helper.relative_to(root)), 'sha256': expected, 'bytes': (PACKAGE/name).stat().st_size,
+            'baseline': {'source': profile['input']['path'], 'sha256': profile['input']['sha256'], 'bytes': original.stat().st_size},
+            'derivation': {'profile': str(profile_path.relative_to(root)), 'tier': tier,
+                           'sourceHashes': evidence, 'steps': profile['steps'], 'lineage': profile['lineage'],
+                           'scope': 'Local original-art shell clearance and affected normal reconstruction. Original UVs, indices and textures preserved; no native geometry inputs.'},
+        }
+    revision = {
+        'scope': 'Unreleased selected helmet clearance; historical equipped-art evidence does not transfer to changed geometry.',
+        'assets': list(records), 'hairVisibility': {'top': False, 'bottom': False},
+        'nativeValidation': {
+            'oathkeeper': 'Bounded inventory idle on Hunter Male, Scholar Male, Herbalist Female, Busker Male, Blacksmith Female and Thief Male.',
+            'censure': 'Bounded inventory idle on Hunter Male, Scholar Male, Herbalist Female, Busker Male, Blacksmith Female and Thief Male. Minor extreme rear-rim contact accepted.',
+            'remaining': 'Other classes/appearances, movement/combat animation, item display framing and lifecycle remain separate gates.'},
+    }
+    return records, evidence, revision
+
+
+def update_helmet_provenance():
+    records, evidence, revision = helmet_clearance_provenance()
+    path = HERE/'paladin-assets.provenance.json'
+    receipt = json.loads(path.read_text())
+    receipt['files'].update(records)
+    receipt['sourceEvidence'].update(evidence)
+    receipt['helmetClearanceRevision'] = revision
+    path.write_text(json.dumps(receipt, indent=2)+'\n')
 
 
 def validate_accessories(by_id):
@@ -182,6 +232,10 @@ def main():
     assert {kind:sum(e['kind']==kind for e in entries) for kind in ['class','weapon','item','proficiency']}=={'class':1,'weapon':14,'item':37,'proficiency':5}
     validate_accessories(by_id)
     validate_balance(by_id)
+    for row in entries:
+        if row['kind'] in {'class', 'weapon', 'proficiency'}:
+            assert 'icon' not in row, row['id']
+
     # Inherit the template's complete native appearance list and unlock checks.
     assert by_id['paladin']['template']=='blacksmith'
     assert by_id['paladin']['overworldAilmentImmunity'] == {'displayName': 'Cleansing March'}
@@ -282,20 +336,71 @@ def main():
     assert by_id['paladin_censure_fracture_1h']['fields']['m_SlotOverride']==3
     assert by_id['paladin_censure_fracture_1h']['fields']['m_CustomValue']==-4
     validate_actions(by_id)
+    display_records = validate_display_framing('paladin', entries)
     receipt=json.loads((HERE/'paladin-assets.provenance.json').read_text())
     for name,record in receipt['files'].items():assert hashlib.sha256((PACKAGE/name).read_bytes()).hexdigest()==record['sha256'],name
-    assert set(refs)==set(receipt['files'])
-    assert {str(path.relative_to(PACKAGE)) for path in (PACKAGE/'assets').iterdir()} == set(refs)
+    # Retain published source provenance, excluding historical custom combat art
+    # from this development candidate's references and archive.
+    historical_combat_art = {
+        'assets/paladin-guard-icon.png', 'assets/paladin-censure-1h-action.png',
+        'assets/paladin-censure-2h-action.png', 'assets/paladin-smite-action.png',
+    }
+    historical_textures = set()
+    if receipt.get('censureVisualRevision'):
+        from censure_visual_revision import validate_paladin
+        historical_textures = validate_paladin(receipt)
+    assert set(refs) == set(receipt['files']) - historical_combat_art - historical_textures
+    assert {str(path.relative_to(PACKAGE)) for path in (PACKAGE/'assets').iterdir()} == set(receipt['files'])
     routes={e['id']:{k:e[k] for k in ['itemModels','displayModels','apparelModels'] if k in e}
             for e in entries if any(k in e for k in ['itemModels','displayModels','apparelModels'])}
     assert routes == receipt['rendererRoutes']
     manifest=json.loads((PACKAGE/'manifest.json').read_text())
     assert manifest['version']=='1.4.0' and manifest['frameworkVersion']=='1.2.1'
-    # The unchanged art retains its original 1.3.0 provenance and evidence.
-    assert manifest['modGuid']=='com.ftkmf.paladin' and receipt['packageVersion']=='1.3.0'
+    # Six dedicated boot displays change in the 1.4.0 candidate. Historical
+    # equipped-art evidence remains scoped to the unchanged 1.3.0 baseline.
+    assert manifest['modGuid']=='com.ftkmf.paladin' and receipt['packageVersion']=='1.4.0'
+    assert receipt['baselinePackageVersion']=='1.3.0'
+    revised = {'assets/paladin-'+tier+'-boots-display.glb'
+               for tier in ['novice','oathkeeper','highward','mercy','censure','verdict']}
+    assert set(receipt['developmentRevision']['assets']) == revised
+    icon_records = validate_package_icons('paladin', entries)
+    if receipt.get('censureVisualRevision'):
+        pass  # Complete prior ledger and bounded successor were checked above.
+    elif receipt.get('helmetShapeRevision'):
+        from sync_display_framing import validate_helmet_paladin
+        validate_helmet_paladin(receipt,display_records,icon_records)
+    else:
+        helmet_records, helmet_evidence, helmet_revision = helmet_clearance_provenance()
+        icon_names = {str(Path(row['path']).relative_to('marketplace/packages/paladin')) for row in icon_records}
+        display_names = {str(Path(row['output']['path']).relative_to('marketplace/packages/paladin')) for row in display_records}
+        assert {name for name, record in receipt['files'].items() if 'baseline' in record} == revised | set(helmet_records) | icon_names | display_names
+        for row in display_records:
+            record = receipt['files'][row['displayAssignment']['model']]
+            assert record['previous']['sha256'] == row['source']['sha256']
+            assert record['derivation']['displayFramingItem'] == row['itemId']
+            assert record['derivation']['transform'] == row['transform']
+        icon_ledger = HERE/'nonweapon-icons.provenance.json'
+        assert receipt['nonweaponIconRevision']['sha256'] == hashlib.sha256(icon_ledger.read_bytes()).hexdigest()
+        for row in icon_records:
+            record = receipt['files'][str(Path(row['path']).relative_to('marketplace/packages/paladin'))]
+            assert record.get('previous',record['baseline'])['sha256'] == row['priorSha256']
+            assert record['derivation']['inputs'] == row['inputs']
+        for name, record in helmet_records.items(): assert receipt['files'][name] == record, name
+        for name, sha in helmet_evidence.items(): assert receipt['sourceEvidence'][name] == sha, name
+        assert receipt['helmetClearanceRevision'] == helmet_revision
+    policies = {e['id']: e['helmetHairVisibility'] for e in entries if 'helmetHairVisibility' in e}
+    assert policies == {'paladin_helmet_'+tier: {'top': False, 'bottom': False} for tier in ['oathkeeper','censure']}
+    for name in revised:
+        assert receipt['files'][name]['sha256'] != receipt['files'][name]['baseline']['sha256']
     for name in set(refs):validate_asset(PACKAGE/name)
     assert all(path.suffix in ['.png','.glb'] for path in (PACKAGE/'assets').iterdir())
     print('PASS: balance tradeoffs, Guard/March class ownership, 57 unique rows, 14 Censure weapons, six Smite trinkets, 51 equipment items, acquisition, Artifact contracts, pinned assets and renderer routes. No live-game claims.')
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--update-helmet-provenance', action='store_true',
+                        help='Regenerate only the selected helmet ledger records from pinned installed assets and source profiles before validation')
+    args = parser.parse_args()
+    if args.update_helmet_provenance: update_helmet_provenance()
+    main()

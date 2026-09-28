@@ -56,6 +56,7 @@ namespace FTKModFramework.Core
     }
 }
 internal class ProficiencyBase { }
+internal class CharacterSkills { internal bool m_Taunt; }
 
 namespace BepInEx { internal static class Paths { public static string GameRootPath; } }
 namespace GridEditor
@@ -63,6 +64,7 @@ namespace GridEditor
     internal class TableManager { }
     internal class FTK_characterModifier
     {
+        internal CharacterSkills m_CharacterSkills;
         internal int m_ModDefensePhysical, m_ModDefenseMagic, m_ExtraFocus, m_ReflectDamage;
         internal float m_ModVitality, m_ModQuickness, m_ModAwareness, m_ModTalent;
     }

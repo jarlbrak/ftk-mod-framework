@@ -50,6 +50,25 @@ namespace FTKModFramework.Core
             return delegate { ReloadClassCount = old; };
         }
     }
+    internal static class BlacksmithRuntime
+    {
+        internal static int ReloadEquipmentCount;
+        internal static bool ReloadTransientStateEmpty = true;
+        internal static Action SuspendForReload()
+        {
+            int old = ReloadEquipmentCount; ReloadEquipmentCount = 0;
+            return delegate { ReloadEquipmentCount = old; };
+        }
+    }
+    internal static class ClassAffinityRuntime
+    {
+        internal static int ReloadEquipmentCount;
+        internal static Action SuspendForReload()
+        {
+            int old = ReloadEquipmentCount; ReloadEquipmentCount = 0;
+            return delegate { ReloadEquipmentCount = old; };
+        }
+    }
     internal static class ItemModelRegistry
     {
         internal static int ReloadModelCount;
@@ -106,11 +125,16 @@ internal static class Program
         Check(PaladinResourceState.OwnedObjectCount == 1, "Ownership cannot duplicate a native object.");
         GuardianRuntime.ReloadClassCount = 1;
         OverworldAilmentImmunity.ReloadClassCount = 1;
+        ClassAffinityRuntime.ReloadEquipmentCount = 3;
+        BlacksmithRuntime.ReloadEquipmentCount = 11;
+        BlacksmithRuntime.ReloadTransientStateEmpty = false;
+        Reject(delegate { PaladinResourceState.Suspend(); }, "Blacksmith combat prevents hot activation.");
+        BlacksmithRuntime.ReloadTransientStateEmpty = true;
         PackageIcons.FailSuspend = true;
         Reject(delegate { PaladinResourceState.Suspend(); }, "Partial participant suspension rejects.");
         Check(!PaladinResourceState.TransactionOpen && GuardianRuntime.ReloadClassCount == 1 &&
-            OverworldAilmentImmunity.ReloadClassCount == 1 &&
-            PaladinResourceState.OwnedObjectCount == 1 && old != null, "Partial suspension restores prior owner and binding.");
+            OverworldAilmentImmunity.ReloadClassCount == 1 && ClassAffinityRuntime.ReloadEquipmentCount == 3 && PaladinResourceState.OwnedObjectCount == 1 && old != null,
+            "Partial suspension restores prior owner and capability bindings.");
         PackageIcons.FailSuspend = false;
         var rollback = PaladinResourceState.Suspend();
         UnityEngine.Object rejected = new UnityEngine.Object(); PaladinResourceState.Own(rejected);
@@ -120,6 +144,9 @@ internal static class Program
         Check(old != null && PaladinResourceState.OwnedObjectCount == 1 && GuardianRuntime.ReloadClassCount == 1 &&
             OverworldAilmentImmunity.ReloadClassCount == 1,
             "Rollback preserves exact old object and binding.");
+        Check(BlacksmithRuntime.ReloadEquipmentCount == 11, "Rollback restores Blacksmith equipment registrations.");
+        Check(ClassAffinityRuntime.ReloadEquipmentCount == 3,
+            "Rollback restores prior class-affinity bindings.");
         Check(PaladinResourceState.PendingDestroyCount == 1 && rejected != null, "Destroy request is not proof of native release.");
         Reject(delegate { PaladinResourceState.Suspend(); }, "Next activation waits for destruction.");
         UnityEngine.Object.EndFrame();

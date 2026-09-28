@@ -13,7 +13,14 @@ public sealed partial class RuntimeModelTest
     }
     static JObject WorldInputHex(HexLand hex)
     {
-        return hex==null?null:new JObject{{"instanceId",hex.GetInstanceID()},{"parentIndex",hex.m_ParentIndex},{"index",hex.m_Index}};
+        if(hex==null)return null;
+        Vector3 world=hex.transform.position;
+        Camera camera=OverworldCamera.Instance==null?null:OverworldCamera.Instance.m_Camera;
+        Vector3 screen=camera==null?Vector3.zero:camera.WorldToScreenPoint(world);
+        return new JObject{{"instanceId",hex.GetInstanceID()},{"parentIndex",hex.m_ParentIndex},{"index",hex.m_Index},
+            {"worldPosition",new JArray(world.x,world.y,world.z)},
+            {"screenPoint",camera==null?null:new JArray(screen.x,Screen.height-screen.y,screen.z)},
+            {"screenSize",camera==null?null:new JArray(Screen.width,Screen.height)},{"screenOrigin","top-left"}};
     }
     static JObject WorldInputFocus(FTKInputFocus focus)
     {
@@ -47,6 +54,75 @@ public sealed partial class RuntimeModelTest
             {"activeSelf",transform.gameObject.activeSelf},{"activeInHierarchy",transform.gameObject.activeInHierarchy},
             {"localPosition",new JArray(position.x,position.y,position.z)},
             {"rect",rect==null?null:new JArray(rect.rect.x,rect.rect.y,rect.rect.width,rect.rect.height)}};
+    }
+    static JToken WorldInputFollowTransform(Transform transform)
+    {
+        if(transform==null)return null;
+        JObject result=WorldInputTransform(transform);
+        Vector3 position=transform.position;
+        result["worldPosition"]=new JArray(position.x,position.y,position.z);
+        return result;
+    }
+    static JToken WorldInputCameraComponent(Behaviour component)
+    {
+        if(component==null)return null;
+        return new JObject{{"instanceId",component.GetInstanceID()},{"type",component.GetType().FullName},
+            {"enabled",component.enabled},{"transform",WorldInputFollowTransform(component.transform)}};
+    }
+    static JToken WorldInputRtsCamera(RtsCamera camera)
+    {
+        if(camera==null)return null;
+        GameObject target=(GameObject)RuntimeFieldRead.Read(camera,"_target");
+        Vector3 look=camera.LookAt,min=camera.MinBounds,max=camera.MaxBounds;
+        return new JObject{{"component",WorldInputCameraComponent(camera)},
+            {"camera",WorldInputCameraComponent(camera.m_ThisCamera)},
+            {"lookAt",new JArray(look.x,look.y,look.z)},
+            {"minBounds",new JArray(min.x,min.y,min.z)},{"maxBounds",new JArray(max.x,max.y,max.z)},
+            {"target",target==null?null:WorldInputFollowTransform(target.transform)},
+            {"followTarget",WorldInputFollowTransform((Transform)RuntimeFieldRead.Read(camera,"_followTarget"))},
+            {"followCursor",camera.m_FollowCursor},{"smoothing",camera.Smoothing},{"moveDampening",camera.MoveDampening},
+            {"distance",camera.Distance},{"currentDistance",camera._currDistance},
+            {"realtimeMode",camera.m_IsRealtimeMode},{"realtimeDelta",camera.m_RealTimeDeltaTime}};
+    }
+    static JToken WorldInputCameraFollow()
+    {
+        Camera main=Camera.main;
+        OverworldCamera world=OverworldCamera.Instance;
+        CharacterOverworld cow=GameLogic.Instance==null?null:GameLogic.Instance.GetCurrentCOW();
+        FollowHelper helper=cow==null?null:cow.m_FollowHelper;
+        JArray cameras=new JArray(),portraits=new JArray();
+        // Enumerate scene instances rather than invoking the lazy RTS singleton getter.
+        foreach(RtsCamera camera in Resources.FindObjectsOfTypeAll<RtsCamera>())
+            if(camera!=null && camera.gameObject.scene.IsValid())
+                cameras.Add(WorldInputRead(delegate{return WorldInputRtsCamera(camera);}));
+        if(cow!=null && cow.m_UIPlayMainHud!=null)
+            foreach(Button button in cow.m_UIPlayMainHud.GetComponentsInChildren<Button>(true))
+                if(button.name=="PortraitButton")
+                {
+                    JArray callbacks=new JArray();
+                    for(int i=0;i<button.onClick.GetPersistentEventCount();i++)
+                    {
+                        UnityEngine.Object target=button.onClick.GetPersistentTarget(i);
+                        callbacks.Add(new JObject{{"targetInstanceId",target==null?new JValue((object)null):new JValue(target.GetInstanceID())},
+                            {"targetType",target==null?null:target.GetType().FullName},{"method",button.onClick.GetPersistentMethodName(i)}});
+                    }
+                    portraits.Add(new JObject{{"button",WorldInputCameraComponent(button)},
+                        {"interactable",button.interactable},{"persistentCallbacks",callbacks}});
+                }
+        Movement movement=Movement.Instance;
+        return new JObject{{"callbackTrace",CameraFollowDiagnosticState()},{"deltaTime",Time.deltaTime},{"main",WorldInputCameraComponent(main)},
+            {"mainRts",WorldInputCameraComponent(main==null?null:main.GetComponent<RtsCamera>())},
+            {"overworldCamera",WorldInputCameraComponent(world==null?null:world.m_Camera)},
+            {"overworldRts",WorldInputCameraComponent(world==null?null:world.m_RtsCamera)},
+            {"sceneRtsCameras",cameras},{"currentHeroInstanceId",cow==null?new JValue((object)null):new JValue(cow.GetInstanceID())},
+            {"currentHudInstanceId",cow==null || cow.m_UIPlayMainHud==null?new JValue((object)null):new JValue(cow.m_UIPlayMainHud.GetInstanceID())},
+            {"followHelper",WorldInputCameraComponent(helper)},
+            {"helperTarget",helper==null || helper.FollowTarget==null?null:WorldInputFollowTransform(helper.FollowTarget.transform)},
+            {"helperCachedRts",helper==null?null:WorldInputCameraComponent((RtsCamera)RuntimeFieldRead.Read(helper,"_rtsCamera"))},
+            {"usingThumbStick",movement==null?new JValue((object)null):new JValue(movement.m_UsingThumbStick)},
+            {"forceReengageMouse",movement==null?new JValue((object)null):new JValue((bool)RuntimeFieldRead.Read(movement,"m_ForceReengageMouse"))},
+            {"forceReengageController",movement==null?new JValue((object)null):new JValue((bool)RuntimeFieldRead.Read(movement,"m_ForceReengageController"))},
+            {"portraitButtons",portraits}};
     }
     static JObject WorldInputTitle(StartGameFE.MainScreen screen)
     {
@@ -208,6 +284,7 @@ public sealed partial class RuntimeModelTest
         result["creationScreens"]=WorldInputRead(WorldInputCreations);
         result["titleScreens"]=WorldInputRead(WorldInputTitles);
         result["currentHero"]=WorldInputRead(delegate{return WorldInputHero(GameLogic.Instance==null?null:GameLogic.Instance.GetCurrentCOW());});
+        result["cameraFollow"]=WorldInputRead(WorldInputCameraFollow);
         result["party"]=WorldInputRead(delegate{
             JArray heroes=new JArray();if(FTKHub.Instance!=null)foreach(CharacterOverworld cow in FTKHub.Instance.m_CharacterOverworlds)
                 if(cow!=null)heroes.Add(WorldInputRead(delegate{return WorldInputHero(cow);}));return heroes;});
@@ -216,6 +293,7 @@ public sealed partial class RuntimeModelTest
             HexLand start=(HexLand)typeof(Movement).GetField("m_StartHex",Members).GetValue(movement);
             return new JObject{{"state",movement.m_MovementFSM==null?null:movement.m_MovementFSM.ActiveStateName},
                 {"mode",movement.m_Mode.ToString()},{"hero",WorldInputHero(movement.m_CharacterOverworld)},
+                {"pathState",MovementTraceSnapshot(movement)},
                 {"startHex",WorldInputHex(start)},{"cursorHex",WorldInputHex(movement.m_CursorHex)}};});
         result["input"]=WorldInputRead(delegate{
             FTKInput input=FTKInput.Instance;if(input==null)return null;

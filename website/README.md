@@ -37,6 +37,23 @@ Thief 1.0.0 is labeled as a release; its compatibility limitations and package i
 No workflow creates a GitHub release or changes the repository's latest release. Mod release
 publishing must continue to use `--latest=false`. Framework download links are explicitly pinned.
 
+## Unreleased gear previews
+
+The separate `previews/paladin/` and `previews/thief/` routes show candidate gear
+using the same flat tooltip component as the published galleries and Blacksmith.
+They are labeled Coming Soon and do not change published package data or downloads.
+Regenerate their projections with
+`node scripts/prepare-gear-preview.mjs STUDIO_DIRECTORY` after rendering the current
+package models. The studio directory must provide `manifest.json` with per-item
+source asset hashes, PNG paths and PNG hashes. Stale assets or renders fail the
+projection. A frozen trial manifest may supply `inputRoot`; every referenced
+model and texture must also match its canonical package asset before projection.
+Only canonical source paths and hashes enter the public provenance, along with
+the paired-dagger mount metadata hash. `gear-preview-provenance.json` records
+compressed artwork hashes.
+These studio portraits establish appearance only; equipped fit, motion and combat
+behavior still need native verification.
+
 ## Media provenance
 
 `src/data/media-provenance.json` records sources and hashes for compressed stills.
@@ -110,3 +127,8 @@ Coming Soon navigation and library link.
 Paladin, Thief, and Blacksmith share `TooltipGallery.astro`. Paladin and Thief use their verified
 published projections and retain release/download information. Blacksmith remains a Coming Soon
 preview. Native screenshots and turntable sections are omitted from these mod pages.
+
+The Coming Soon Thief preview features the Nightblade outfit. Regenerate its
+reviewed banner with `node scripts/prepare-thief-preview-banner.mjs`; source and
+WebP hashes are recorded separately in `src/data/thief-preview-banner-provenance.json`.
+Published Street artwork and release metadata remain unchanged.

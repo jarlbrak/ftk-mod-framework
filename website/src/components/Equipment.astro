@@ -3,12 +3,13 @@ import paladin from '../data/paladin.json';
 import thief from '../data/thief.json';
 import { itemTooltipLines, statName, statValue } from '../data/item-guide';
 import TooltipGallery from './TooltipGallery.astro';
-const { mod='paladin' }=Astro.props;
-const data=mod==='thief'?thief:paladin;
+const { mod='paladin', preview }=Astro.props;
+const data=preview??(mod==='thief'?thief:paladin);
 const gear=data.entries.filter(e=>['weapon','item'].includes(e.kind));
 const families=mod==='thief'?['street','burglar','guild','masterwork','locksmith','nightblade','wayfarer','artifacts']:['novice','oathkeeper','highward','mercy','censure','verdict','artifacts'];
 const slots:Record<string,string>=mod==='thief'?{twins:'Paired daggers',bow:'Bow',coat:'Armor',hood:'Hood',boots:'Boots',charm:'Charm'}:{hammer_1h:'One-handed hammer',hammer_2h:'Two-handed maul',shield:'Shield',armor:'Armor',helmet:'Helmet',boots:'Boots',trinket:'Trinket',necklace:'Pendant'};
 const base=import.meta.env.BASE_URL;
+if(preview&&mod==='thief')slots.bow='Pistol';
 const items=gear.map(e=>{
  const f=e.fields;
  const tier=f.rarity==='artifact'?'artifacts':families.find(family=>e.id.endsWith('_'+family))!;
@@ -19,9 +20,9 @@ const items=gear.map(e=>{
   if(f.damagegain!==undefined)lines.push({text:`+${f.damagegain} damage per level`,tone:'normal'});
  }
  lines.push(...itemTooltipLines(e,data.entries));
- return {id:e.id,name:e.displayName,tier,kind,rarity:f.rarity.toUpperCase(),image:`${base}media/items/${e.id}.webp`,damage:e.kind==='weapon'?f.damage:null,damageType:'Base damage',lines};
+ return {id:e.id,name:e.displayName,tier,kind,rarity:f.rarity.toUpperCase(),image:`${base}media/${preview?'gear-preview':'items'}/${e.id}.webp`,damage:e.kind==='weapon'?f.damage:null,damageType:'Base damage',lines};
 }).sort((a,b)=>families.indexOf(a.tier)-families.indexOf(b.tier));
 ---
-<p class="armory-intro">All {gear.length} pieces from published {data.version}. Original package artwork and studio renders; weapon damage is the published base value.</p>
+<p class="armory-intro">{preview?`Coming Soon · ${gear.length} pieces from the unreleased gear update. Studio renders of the candidate models; stats and artwork may change. Static armor fit has been reviewed across 15 class defaults. Broader appearance and animation checks remain.`:`All ${gear.length} pieces from published ${data.version}. Original package artwork and studio renders; weapon damage is the published base value.`}</p>
 {families.map(family=><span id={family} aria-hidden="true"/>)}
 <TooltipGallery items={items} families={families} slots={slots}/>

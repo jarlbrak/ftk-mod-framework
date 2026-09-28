@@ -27,11 +27,11 @@ PAIRS = (
     ("Locksmith's Picks", 28, 390), ("Nightglass Twins", 30, 430),
     ("Trailbreakers", 29, 410),
 )
-BOWS = (
-    ("Rooftop Bow", 10, 16), ("Alley Recurve", 14, 40),
-    ("Guild Shortbow", 18, 85), ("Gloamwood Bow", 23, 180),
-    ("Latchspring", 29, 390), ("Blackthorn", 32, 440),
-    ("Farstep", 30, 420),
+PISTOLS = (
+    ("Rooftop Flintlock", 10, 16), ("Windowlock", 14, 40),
+    ("Guild Sidearm", 18, 85), ("Gloam Flintlock", 23, 180),
+    ("Latchlock", 29, 390), ("Blackwake", 32, 440),
+    ("Farstep Flintlock", 30, 420),
 )
 COATS = (
     ("Patched Jack", 1, 0, {}, 8),
@@ -99,8 +99,9 @@ def pair(index, *, artifact=None):
     }[artifact]
     prefix = "thief-street-twins" if tier == "street" else "thief-twins-" + tier
     palette = ("thief-street-palette.png" if tier == "street" else
-               "thief-artifact-palette.png" if artifact else
+               prefix + "-diffuse.png" if artifact else
                "thief-twins-" + tier + "-palette.png")
+    blade_palette = palette if artifact else prefix + "-advanced-shaded.png"
     entry = {
         "kind": "weapon", "id": "thief_twins_" + tier.replace("-", "_"),
         "template": "dualKnife", "displayName": name,
@@ -109,13 +110,12 @@ def pair(index, *, artifact=None):
                    "m_NoRegularAttack": False,
                    "damagegain": 1, **fields(index, gold, artifact=artifact)},
         "modifiers": {},
-        "itemModels": [model(".", prefix + ".glb", palette),
-                       model("Break", prefix + "-fragment-1.glb", palette),
-                       model("Break/Break", prefix + "-fragment-2.glb", palette)],
-        "offHandModels": [model(".", prefix + ("-offhand.glb" if artifact else ".glb"), palette)],
-        "icon": file(prefix + "-icon.png"),
-        "displayModels": [model("dualKnife", prefix + "-display.glb", palette),
-                          model("offHandWeapon", prefix + "-display-offhand.glb", palette)],
+        "itemModels": [model(".", prefix + ".glb", blade_palette),
+                       model("Break", prefix + "-fragment-1.glb", blade_palette),
+                       model("Break/Break", prefix + "-fragment-2.glb", blade_palette)],
+        "offHandModels": [model(".", prefix + ("-offhand.glb" if artifact else ".glb"), blade_palette)],
+        "displayModels": [model("dualKnife", prefix + "-display.glb", blade_palette),
+                          model("offHandWeapon", prefix + "-display-offhand.glb", blade_palette)],
     }
     if tier == "street":
         entry["fields"]["maxlevel"] = 1
@@ -133,29 +133,28 @@ def pair(index, *, artifact=None):
     return entry
 
 
-def bow(index, *, artifact=False):
+def pistol(index, *, artifact=False):
     tier = "unlost-road" if artifact else TIERS[index]
-    name, damage, gold = ("The Unlost Road", 29, 700) if artifact else BOWS[index]
-    prefix = "thief-bow-" + tier
-    palette = "thief-artifact-palette.png" if artifact else "thief-bow-palette.png"
+    name, damage, gold = ("The Unlost Road", 29, 700) if artifact else PISTOLS[index]
+    prefix = "thief-pistol-" + tier
+    palette = prefix + "-shaded.png"
     entry = {
+        # Keep the published 1.0.0 item identity so saved equipment resolves.
         "kind": "weapon", "id": "thief_bow_" + tier.replace("-", "_"),
-        "template": "bowShort", "displayName": name,
-        "precisionWeapon": "bow",
-        "fields": {"damage": damage, "skill": "awareness", "slots": 4,
-                   "m_NoRegularAttack": False,
+        "template": "gunTreasureHunter", "displayName": name,
+        "precisionWeapon": "pistol",
+        "fields": {"damage": damage, "skill": "talent", "slots": 4,
+                   "m_ObjectSlot": "twoHands", "m_NoRegularAttack": True,
+                   "m_CanBreak": False, "m_NoFocus": False, "damageType": "physical",
                    "damagegain": 1, **fields(index, gold, artifact=artifact)},
         "modifiers": {},
-        "itemModels": [model(".", prefix + (".glb" if artifact else "-body.glb"), palette),
-                       model("shortbowString", prefix + "-string.glb", palette),
-                       model("Break", prefix + "-fragment-1.glb", palette),
-                       model("Break/Break", prefix + "-fragment-2.glb", palette)],
-        "icon": file(prefix + "-icon.png"),
-        "displayModels": [model("shortbow", prefix + ("-display.glb" if artifact else "-display-body.glb"), palette),
-                          model("shortbow/shortbowString", prefix + "-display-string.glb", palette)],
+        # FTKHub.CreateWeapon detaches the Weapon child before returning it.
+        # The gunDragon mesh is therefore the returned runtime root.
+        "itemModels": [model(".", prefix + ".glb", palette)],
+        "displayModels": [model("gunDragon", prefix + ".glb", palette)],
     }
     entry["replaceProficiencies"] = True
-    entry["proficiencies"] = [(
+    entry["proficiencies"] = ["thief_pistol_fire", (
         "thief_thread_needle_wayfarer" if tier == "wayfarer" else "thief_thread_needle"
     ) if tier in ("burglar", "guild", "masterwork", "wayfarer", "unlost-road") else (
         "thief_draw_out_locksmith" if tier == "locksmith" else "thief_draw_out"
@@ -165,39 +164,44 @@ def bow(index, *, artifact=False):
     return entry
 
 
-def action(action_id, name, description, mode, multiplier, icon):
-    return {
+def action(action_id, name, description, mode, multiplier, *, gun_shot=False):
+    entry = {
         "kind": "proficiency", "id": action_id, "template": "musicArmorDown",
         "displayName": name, "description": description,
-        "precisionAction": mode, "icon": file(icon),
         "fields": {
             "m_DmgMultiplier": multiplier,
             "m_FullSlots": mode == "pierce",
             "m_Target": "None", "m_RepeatCount": 0,
             "m_ChanceToAffect": 0,
+            "m_GunShot": gun_shot,
             **({"m_IgnoresArmor": True} if mode == "pierce" else {}),
         },
     }
+    if mode is not None:
+        entry["precisionAction"] = mode
+    return entry
 
 
 def actions():
     return [
+        action("thief_pistol_fire", "Fire", "Fire one shot. Thieves with this pistol restore one round at the start of each combat turn.",
+               "shot", 1.0, gun_shot=True),
         action("thief_feint", "Feint", "Deal 60% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-               "prepare", .6, "thief-street-twins-icon.png"),
-        action("thief_draw_out", "Draw Out", "Deal 60% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-               "prepare", .6, "thief-bow-street-icon.png"),
+               "prepare", .6),
+        action("thief_draw_out", "Bait Shot", "Deal 60% damage. A damaging shot prepares your next precision attack if you are a Thief.",
+               "prepare", .6, gun_shot=True),
         action("thief_pierce", "Pierce", "Deal 75% damage. A perfect result ignores armor.",
-               "pierce", .75, "thief-twins-guild-icon.png"),
-        action("thief_thread_needle", "Thread the Needle", "Deal 75% damage. A perfect result ignores armor.",
-               "pierce", .75, "thief-bow-guild-icon.png"),
+               "pierce", .75),
+        action("thief_thread_needle", "Deadeye", "Deal 75% damage. A perfect result ignores armor.",
+               "pierce", .75, gun_shot=True),
         action("thief_feint_locksmith", "Feint", "Deal 80% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-               "prepare", .8, "thief-twins-locksmith-icon.png"),
-        action("thief_draw_out_locksmith", "Draw Out", "Deal 80% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-               "prepare", .8, "thief-bow-locksmith-icon.png"),
+               "prepare", .8),
+        action("thief_draw_out_locksmith", "Bait Shot", "Deal 80% damage. A damaging shot prepares your next precision attack if you are a Thief.",
+               "prepare", .8, gun_shot=True),
         action("thief_pierce_wayfarer", "Pierce", "Deal 85% damage. A perfect result ignores armor.",
-               "pierce", .85, "thief-twins-wayfarer-icon.png"),
-        action("thief_thread_needle_wayfarer", "Thread the Needle", "Deal 85% damage. A perfect result ignores armor.",
-               "pierce", .85, "thief-bow-wayfarer-icon.png"),
+               "pierce", .85),
+        action("thief_thread_needle_wayfarer", "Deadeye", "Deal 85% damage. A perfect result ignores armor.",
+               "pierce", .85, gun_shot=True),
     ]
 
 
@@ -205,7 +209,9 @@ def apparel(index, family, data):
     tier = TIERS[index]
     name, armor, resistance, extra, gold = data
     prefix = "thief-" + family + "-" + tier
-    palette = "thief-apparel-palette.png"
+    palette = ("thief-coat-" + tier + "-advanced-atlas.png" if family == "coat"
+               else "thief-boots-" + tier + "-advanced-shaded.png" if family == "boots"
+               else prefix + "-diffuse.png")
     template, display = {
         "coat": ("armorHeavy1", "armorSplintVestDisplay"),
         "hood": ("helmetHeavy1", "helmKettle"),
@@ -220,6 +226,9 @@ def apparel(index, family, data):
     }
     if family == "hood":
         entry["itemModels"] = [model(".", prefix + ".glb", palette)]
+        # Neckwear leaves the crown exposed; the five raised hoods cover it.
+        exposed = tier in ("street", "burglar")
+        entry["helmetHairVisibility"] = {"top": exposed, "bottom": exposed}
     else:
         renderers = ([{"path": "armorBlacksmithF(Clone)", "nativeMesh": "armorBlacksmith",
                        "model": file(prefix + "-female.glb"), "texture": file(palette)},
@@ -243,7 +252,7 @@ def charm(index):
         "fields": fields(index, gold), "modifiers": modifiers,
         "icon": file(prefix + "-icon.png"),
         "displayModels": [model("trinketHorn2", prefix + "-display.glb",
-                                "thief-apparel-palette.png")],
+                                prefix + "-diffuse.png")],
     }
 
 
@@ -251,7 +260,8 @@ def generate():
     source = json.loads((HERE / "content.json").read_text())
     hero = source["entries"][0]
     hero["opportunist"] = True
-    hero["icon"] = file("thief-slip-away-icon.png")
+    # Class icons feed Slip Away; preserve the native combat glyph.
+    hero.pop("icon", None)
     hero["fields"]["skills"] = {skill: skill in ("m_Sneak", "m_Ambush", "m_TrapDisarm")
                                 for skill in SKILLS}
     hero["fields"]["startitems"] = ["thief_coat_street", "thief_hood_street",
@@ -259,11 +269,11 @@ def generate():
     hero["fields"]["startinggold"] = 3
     entries = [hero]
     for i in range(7):
-        entries += [pair(i), bow(i), apparel(i, "coat", COATS[i]),
+        entries += [pair(i), pistol(i), apparel(i, "coat", COATS[i]),
                     apparel(i, "hood", HOODS[i]), apparel(i, "boots", BOOTS[i]), charm(i)]
     entries += [pair(4, artifact="skeleton-key"), pair(5, artifact="candles-end"),
-                bow(6, artifact=True)] + actions()
-    assert len(entries) == 54
+                pistol(6, artifact=True)] + actions()
+    assert len(entries) == 55
     assert len({entry["id"] for entry in entries}) == len(entries)
     return {"entries": entries}
 

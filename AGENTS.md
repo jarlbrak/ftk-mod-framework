@@ -129,6 +129,17 @@ the role contract and apply it in the current session.
 Private knowledge curation is deliberately absent from the public role set. A local overlay may
 register a knowledge-curator role when a private knowledge service is available.
 
+## Combat UI icon rule
+
+Combat action buttons must reuse existing native all-white outlined icons. Never
+create, generate, import, embed, recolor or substitute custom combat icons,
+including icons derived from item renders. New abilities reuse the closest native
+proficiency icon. FTK also uses a weapon item icon for its basic attack button;
+preserve native weapon icons and never override them with item renders. Verify
+normal, selected and disabled states alongside
+vanilla buttons in game. Original equipment models, inventory item artwork and
+marketplace artwork do not grant an exception to this combat UI rule.
+
 ## Documentation and communication
 
 - Keep the README a stable front door. Put detailed procedures in focused guides.

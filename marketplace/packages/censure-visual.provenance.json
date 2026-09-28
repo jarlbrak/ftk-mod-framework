@@ -1,0 +1,2709 @@
+{
+  "schema": "ftkmf.censure-visual-revision.v1",
+  "previousLedgers": {
+    "paladin-assets.provenance.json": {
+      "path": "marketplace/packages/history/censure/05c71b7cc21e17c3299fe9274040d2724247cd8799db40212e1fb9a47d64a353/paladin-assets.provenance.json",
+      "sha256": "05c71b7cc21e17c3299fe9274040d2724247cd8799db40212e1fb9a47d64a353"
+    },
+    "display-framing.provenance.json": {
+      "path": "marketplace/packages/history/censure/05c71b7cc21e17c3299fe9274040d2724247cd8799db40212e1fb9a47d64a353/display-framing.provenance.json",
+      "sha256": "14d52fea1dabb786590d66cfc40abafd00efdab17f05da5ead163b11cf1256b8"
+    },
+    "nonweapon-icons.provenance.json": {
+      "path": "marketplace/packages/history/censure/05c71b7cc21e17c3299fe9274040d2724247cd8799db40212e1fb9a47d64a353/nonweapon-icons.provenance.json",
+      "sha256": "5b0660e390ffc8d0e022035de30cc8624228d4b09065b7975a19e4cae54288e5"
+    }
+  },
+  "previousContent": {
+    "path": "marketplace/packages/history/censure/05c71b7cc21e17c3299fe9274040d2724247cd8799db40212e1fb9a47d64a353/content.json",
+    "sha256": "bdbacaf0c84abc267260851d52421bca769e82c52894f4e8eeac1fa69a903306"
+  },
+  "previousThiefProvenance": {
+    "path": "marketplace/packages/history/censure/05c71b7cc21e17c3299fe9274040d2724247cd8799db40212e1fb9a47d64a353/thief-advanced.provenance.json",
+    "sha256": "4a96f371dbab8edec61a92448e957df9d5459e35b35e5b5cd7087e1944b74dcb"
+  },
+  "baselineSha256": "e8486f43352b23b783ce9b9d2b9e605cbadbbebe9f734a66d2b0c5abb3210d57",
+  "deliveries": [
+    {
+      "manifest": {
+        "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/helmet-runtime-1k-v5/delivery-manifest.json",
+        "sha256": "1a07e5bc13d1ac444ae1617ec18923071887f320c038576d5f86798216a86758"
+      },
+      "freeze": {
+        "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/helmet-runtime-1k-v5/frozen.json",
+        "sha256": "c95de5c2caf808c1af57a5807d929c09a8314f485d5605c26f3bf757e1d7778e"
+      },
+      "sourceProvenance": {
+        "previousGeometryDelivery": {
+          "sha256": "2ff7f345d96ffbe856a7a44da7539f4a0e681e69744937072b41f406f2b6f9bb",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/helmet-pilot-v4/delivery-manifest.json"
+        },
+        "previousGeometryFreeze": {
+          "sha256": "4d8f34e8fc63251fb54695f109b2a5bcfb0ec4c2f4b6b3a4de1f7b7ae7e5daa7",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/helmet-pilot-v4/frozen.json"
+        },
+        "originalSourceLineage": {
+          "governingBanner": {
+            "sha256": "ab1d493c687b3f4ff65895d334ed60cd823880e72fe77c1ee9f78fa2d06ff919",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/724b689d-banner.png"
+          },
+          "reviewedSource": {
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/helmet/source.glb"
+          },
+          "basecolorSource": {
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/helmet/base_basic_pbr.glb"
+          },
+          "concept": {
+            "sha256": "69aea28cf5be7043b0c92ded24792e81d9c8fae4ce98854c20df6de8eb40bdaa",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-concepts/helmet-v1.png"
+          },
+          "sourceReview": {
+            "sha256": "14cad95bf162f8c0e7027bf43ae2a461d24a527b802e5627197d494137d7d7e6",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-source-gate/all-five/review.json"
+          },
+          "generator": {
+            "sha256": "0a58899f2eac49a5ff678008f3a3c232da8099d3074a20c233120ec52e487c56",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/freeze_helmet.py"
+          },
+          "sharedBuilder": {
+            "sha256": "b41db14e826b7aee654234e3c45539213483d4fb0f618c9e6d51cf1d70a47ef4",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/build.py"
+          },
+          "cameraReceipt": {
+            "sha256": "6efb2f558da75470365e7823e32a2becaec1d9356c1a4a627ce68369b469882e",
+            "sourceId": "gear-consolidation/native-fit/icons-v17-gladiator-treasurehunter-astronomer/native-item-displays/paladin_helmet_censure/show.json"
+          },
+          "previousDelivery": {
+            "sha256": "aba2e4900680b24a7cfc912104be7b61205b92220120faf0d8bea6615dba1d39",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/helmet-pilot-v3/delivery-manifest.json"
+          },
+          "rigidRevisionGenerator": {
+            "sha256": "1f9afce82eadbd09b70c44d97ebdd361586318ef6e20c03ca5c5a904c5de7487",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/revise_helmet.py"
+          },
+          "rigidRevisionProfiles": {
+            "sha256": "06957c9c015badfd8987cb91841889b9f09b41eab506fe983c840a6f7e4934b6",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/helmet-fit-revisions.json"
+          },
+          "translationGenerator": {
+            "sha256": "8c7cdc28397fdf0aac65331a4a7294d1f616c845de5ef0c21b8203e28d922e83",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/translate_helmet.py"
+          },
+          "translationProfile": {
+            "sha256": "90b89aa89a65c3c485c0222499681a4d8cbe06945032183fe3a0c38c055176b0",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/helmet-placement-v3.json"
+          },
+          "envelopeGenerator": {
+            "sha256": "4722a46ab0712f312ce16772ffbff4f16e159a54e89266bb544598c1745a013d",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/affine_clearance.py"
+          },
+          "envelopeProfiles": {
+            "sha256": "6a90ac1387f0fee5a436d9683b0846a9cc2fe07cd08806eb40dc45c90fa13d3d",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/envelope-profiles.json"
+          }
+        },
+        "textureWorkflow": {
+          "path": "art-experiments/paladin-overhaul/prepare_runtime_textures.py",
+          "sha256": "eff4b35bcdcfc25b7a0fa85831e124bcdbda38a8f797846057a810a50a280c53"
+        },
+        "textureGenerator": {
+          "path": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+          "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+        },
+        "textureReplay": {
+          "sha256": "d4e87a0910713e4ebea14f8c7a8b5a93799ac06c748ff9b8c309827ed1bf8f1c",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/runtime-textures-1k-v1/texture-replay.json"
+        },
+        "publicGeometryRecipe": {
+          "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json"
+        }
+      }
+    },
+    {
+      "manifest": {
+        "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/armor-runtime-1k-v3/delivery-manifest.json",
+        "sha256": "9e774298bb5fe7d05025a046d3b2aa93131b1fe3404b951dd07846873550c4f5"
+      },
+      "freeze": {
+        "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/armor-runtime-1k-v3/frozen.json",
+        "sha256": "1baa6dc8383f854f1f8c3be9b3e0ddc3b8a1bd98c39c98b07919d02c10f7ca50"
+      },
+      "sourceProvenance": {
+        "previousGeometryDelivery": {
+          "sha256": "bd10833cc802e0290d7191e981c3ea7fec0534de42a9261bbe9004711a900c58",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/armor-bracer-front-pilot-v2/delivery-manifest.json"
+        },
+        "previousGeometryFreeze": {
+          "sha256": "25e5d96ddd91e66ca1c52d313cd7d2852f128ef2fa1078201438f7697ee4d6ca",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/armor-bracer-front-pilot-v2/frozen.json"
+        },
+        "originalSourceLineage": {
+          "governingBanner": {
+            "sha256": "ab1d493c687b3f4ff65895d334ed60cd823880e72fe77c1ee9f78fa2d06ff919",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/724b689d-banner.png"
+          },
+          "reviewedSource": {
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/armor/source.glb"
+          },
+          "basecolorSource": {
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/armor/base_basic_pbr.glb"
+          },
+          "sourceReview": {
+            "sha256": "14cad95bf162f8c0e7027bf43ae2a461d24a527b802e5627197d494137d7d7e6",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-source-gate/all-five/review.json"
+          },
+          "generator": {
+            "sha256": "816d5078e4ec6bd7ea03f321cbc59d168d1ed0326fe53bbe3340f193f766ee74",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/freeze_armor.py"
+          },
+          "sharedHelpers": {
+            "sha256": "b41db14e826b7aee654234e3c45539213483d4fb0f618c9e6d51cf1d70a47ef4",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/build.py"
+          },
+          "previousDelivery": {
+            "sha256": "3715dc3b06f522bf264acc595a526ee7ada7186c0a6d7f6435bbd7edc31104d9",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/armor-bracer-envelope-pilot-v1/delivery-manifest.json"
+          },
+          "weightRevision": {
+            "sha256": "a8ba5d8336bef03900400e39c2b0867ec4e7da4c99e91e9ded0a84d40ac004d8",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/rigid_tabard.py"
+          },
+          "bracerRevisionGenerator": {
+            "sha256": "7c943389ff04a91cf694745bc8ee97d88900db195f8fa092fc0e1a0f8c6be21e",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/revise_bracers.py"
+          },
+          "bracerRevisionProfile": {
+            "sha256": "b632e390e758f6545d6937a3078e0cf3a0ca86c7cf6b480706a71c56970a07d2",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/bracer-fit-v3.json"
+          },
+          "cuffClearanceGenerator": {
+            "sha256": "b3329bebd427ab635a7920f62e13940ddeb0d944b547570df860ed85690a1cef",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/adjust_bracer_components.py"
+          },
+          "cuffClearanceProfile": {
+            "sha256": "bc5ea0a0aaf30e37505ec61e3b2ad1aa650639c00f4f39bf2d3fa3780b822df5",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/bracer-placement-v4.json"
+          },
+          "envelopeGenerator": {
+            "sha256": "4722a46ab0712f312ce16772ffbff4f16e159a54e89266bb544598c1745a013d",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/affine_clearance.py"
+          },
+          "envelopeProfiles": {
+            "sha256": "6a90ac1387f0fee5a436d9683b0846a9cc2fe07cd08806eb40dc45c90fa13d3d",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/envelope-profiles.json"
+          },
+          "mechanicalCleanupGenerator": {
+            "sha256": "51e5de85c69dd8f0749d03482a389ffd68ac5bc97dcc9111860ac2cd4ed286d5",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/close_mechanical_shoulders_final.py"
+          },
+          "mechanicalFitGenerator": {
+            "sha256": "947121fa2ab779bd9136fc0b36d0895dee8b330bbb387ea753907b6808337923",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/fit_mechanical_shoulders.py"
+          },
+          "mechanicalCutChecks": {
+            "sha256": "4bdaa950eff086cd541e3a3d80bbea273dc0118c90bfbfcb2ef798b0a84fedb3",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/mechanical-shoulder-study-v6/cut-checks.json"
+          },
+          "mechanicalParts": [
+            {
+              "sha256": "c66343d62b2ad58fbb91577883197d61aa3d1b701b556578dd99795f14e87586",
+              "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/mechanical-shoulder-study-v6/body.json"
+            },
+            {
+              "sha256": "827e63408ad1aeed117113b2626ac5518e335acba625c70eff98a5e8e4da7d9b",
+              "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/mechanical-shoulder-study-v6/right.json"
+            },
+            {
+              "sha256": "a4c29c16568a3fa7afccf47d46be3fd5875e249f1716961b011886cde7e8a77a",
+              "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/mechanical-shoulder-study-v6/left.json"
+            }
+          ],
+          "measuredBracerGenerator": {
+            "sha256": "e733fce104c9dd2f5792daab6b33dd1fd59f6fcd64cff097abe124d748d24b25",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/preview_measured_bracers.py"
+          },
+          "measuredBracerProfile": {
+            "sha256": "4ab7c9b50fe8af0aed0d3d1584a9ed0bade4662cc4027a6ca068097ce5b013a4",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/measured-cuff-v36/shared-proportion-proposal.json"
+          },
+          "measurementConsumer": {
+            "sha256": "4553c40241db5f1b3bca7ae8b32b3bd9ff7bb09a41919cc9131ad510f90c308d",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/analyze_cuff_envelope.py"
+          },
+          "supportOptimizer": {
+            "sha256": "3fa94a24f7f80c5d65bec43e8ec9e057590fed76a06daa0be38bc99980eee6ca",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/fit_cuff_supports.py"
+          },
+          "validAggregateObservations": [
+            {
+              "sha256": "1fae02a3b58e61755b91b19e0acbf34c85e2ef7c90b174d470882aa9a822f941",
+              "sourceId": "gear-consolidation/native-fit/censure-banner-v35-scholar-trapper-monk/cuff-envelope/p0-scholar-male/envelope.json"
+            },
+            {
+              "sha256": "bb638392c11eb771d9566e9b1b07221997b6b52bb2eaf2a1ffb399ebb49f671f",
+              "sourceId": "gear-consolidation/native-fit/censure-banner-v35-scholar-trapper-monk/cuff-envelope/p1-trapper-female/envelope.json"
+            },
+            {
+              "sha256": "575ab334a4e42c7add05d38be1be64663452ab7ecbc51eb3828a30df98d8daf1",
+              "sourceId": "gear-consolidation/native-fit/censure-banner-v35-scholar-trapper-monk/cuff-envelope/p2-monk-male/envelope.json"
+            },
+            {
+              "sha256": "3d7f6c13d44c09689c81e1c0b9f80e3173c38c06d936761b5a8403448bdfc511",
+              "sourceId": "gear-consolidation/native-fit/censure-banner-v36-gladiator-astronomer-busker/cuff-envelope/p1-astronomer-male/envelope.json"
+            },
+            {
+              "sha256": "131370657361e9441cf0c1ef841ca668933369567196ff76ed5161e37a4e254a",
+              "sourceId": "gear-consolidation/native-fit/censure-banner-v36-gladiator-astronomer-busker/cuff-envelope/p2-busker-male/envelope.json"
+            }
+          ],
+          "frontClearanceGenerator": {
+            "sha256": "afe52a58d2acc64639ca112d30537f28786a1c72ebfc46d1a74aaa3437d7ac8e",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/refine_bracer_front.py"
+          },
+          "frontClearanceProfile": {
+            "sha256": "1cd7718936212a0a45e9b3ee9b61c0907350c8b76b097094aed133db12da0871",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/armor-bracer-front-pilot-v2/profile.json"
+          },
+          "originalFrontProjection": {
+            "sha256": "c90cf53ad928a38b3c0c3261af5a76ead011044d3d5a57eac31edae4f58c02cc",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/scholar-front-study-v37/measurements.json"
+          },
+          "frontDirectionSupportBounds": {
+            "sha256": "6bc86de160519f805039990b8610b00dddaba0d264a17dbc79995a01c0dad72f",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/scholar-front-study-v37/front-support-bound.json"
+          }
+        },
+        "textureWorkflow": {
+          "path": "art-experiments/paladin-overhaul/prepare_runtime_textures.py",
+          "sha256": "eff4b35bcdcfc25b7a0fa85831e124bcdbda38a8f797846057a810a50a280c53"
+        },
+        "textureGenerator": {
+          "path": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+          "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+        },
+        "textureReplay": {
+          "sha256": "d4e87a0910713e4ebea14f8c7a8b5a93799ac06c748ff9b8c309827ed1bf8f1c",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/runtime-textures-1k-v1/texture-replay.json"
+        },
+        "publicGeometryRecipe": {
+          "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc",
+          "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json"
+        }
+      }
+    },
+    {
+      "manifest": {
+        "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/pilot-v6/delivery-manifest.json",
+        "sha256": "18293b2c20c004dfd8a367fecac843f916a6152bac8224b7d73dda9cb2fd1bef"
+      },
+      "freeze": {
+        "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/pilot-v6/frozen.json",
+        "sha256": "38797be3b4f170802d943605e782f00a9aff1bc18f9ca82fc78f514f31001363"
+      },
+      "sourceProvenance": {
+        "sourceGate": {
+          "sha256": "14cad95bf162f8c0e7027bf43ae2a461d24a527b802e5627197d494137d7d7e6",
+          "sourceId": "gear-consolidation/helmet-silhouette-review/censure-source-gate/all-five/review.json"
+        },
+        "recipePins": [
+          {
+            "sha256": "ff8cacef7c4ba18306a62818be2d9fe7b40ad8ea483ee0eacebc108638b15410",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/build_accessories.py"
+          },
+          {
+            "sha256": "78e921028bd4f2b117027263e3ccb488b9fff5dd529b609e32ec04ebef7a4ffa",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/build_routes.py"
+          },
+          {
+            "sha256": "22f65e8ea04cd0ccadf5ef5daa42453643fafc1d880c0872e924f71b92b8fcf9",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/verify_delivery.py"
+          },
+          {
+            "sha256": "83efa3f24f35b40fdbd4f928623b079faf108308e787cd583dce7bd590dcbb2c",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/render_exports.py"
+          },
+          {
+            "path": "art-experiments/paladin-overhaul/prepare_rigid.py",
+            "sha256": "5c5e7d29dfe13b18b532cfb34971928c8a8466d4df56d430759bc5541d526f51"
+          },
+          {
+            "path": "art-experiments/paladin-overhaul/prepare_apparel.py",
+            "sha256": "8b16b8a8a4a0051eff3ca82aab4136c44133e1be7b2002b5ca1dfc8755a754c7"
+          },
+          {
+            "path": "art-experiments/paladin-overhaul/prepare_hammer_routes.py",
+            "sha256": "f955e7c1df64a7336aebc1fbc4e024f69c907cf8be8aeee53a29c20aff167224"
+          },
+          {
+            "path": "tools/ai-model-pipeline/export_ftk_glb.py",
+            "sha256": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+          },
+          {
+            "sha256": "9fa3f31463a799bf469788a7a1058e496945fa20cd9f31c376a3a5bd925bc13a",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/refit_native_v25.py"
+          },
+          {
+            "sha256": "5ec78e7540aa5f687cc6b11b9742eaf759cda45c38c7739aad0a03a51e099d33",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/update_fitted_blends.py"
+          },
+          {
+            "sha256": "7fd040fedca6ffc17fbaa32bdde90ac4ba2e9781a04c774be892b7282a0e459d",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-fit/refit_shield_v27.py"
+          }
+        ],
+        "sourcePins": [
+          {
+            "sha256": "67ce7706e26ad9e78ee9a015354265f84dbd9a4bc60030f3987b1967aeedbb03",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/boots/source.glb"
+          },
+          {
+            "sha256": "14132147101a8514ff235bddc5951860962d21dd53e4df86879d8900c653a511",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/boots/untouched-source.blend"
+          },
+          {
+            "sha256": "16f6076aee915973c4cfb83c5abb9608bc497719d1135c02954de841ba95b366",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/hammer/source.glb"
+          },
+          {
+            "sha256": "a818c1fd1bbebb8298f7de4ec5b5f42349a4678caa254c9425d05bb76beaede1",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/hammer/untouched-source.blend"
+          },
+          {
+            "sha256": "8804fe113e3f9d132b51b491f2e50d011906ab5abe150fe29deb2fcc69ed3047",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/shield/source.glb"
+          },
+          {
+            "sha256": "397c68799aa3d7d51f48d9dc28b3369450f64414374fe6af445f273cc4547619",
+            "sourceId": "gear-consolidation/censure-banner-fidelity/generation/shield/untouched-source.blend"
+          }
+        ]
+      }
+    }
+  ],
+  "nativeAcceptance": {
+    "schema": "ftkmf.censure-native-acceptance.v1",
+    "approved": true,
+    "authority": "parent-native-review",
+    "baselineSha256": "e8486f43352b23b783ce9b9d2b9e605cbadbbebe9f734a66d2b0c5abb3210d57",
+    "deliveryManifestSha256s": [
+      "18293b2c20c004dfd8a367fecac843f916a6152bac8224b7d73dda9cb2fd1bef",
+      "1a07e5bc13d1ac444ae1617ec18923071887f320c038576d5f86798216a86758",
+      "9e774298bb5fe7d05025a046d3b2aa93131b1fe3404b951dd07846873550c4f5"
+    ],
+    "assetSha256s": {
+      "marketplace/packages/paladin/assets/paladin-censure-helmet.glb": "91c94e0c532722a57e969f928ce43a46ee8a3be8a3688b694820ceee57eb7e40",
+      "marketplace/packages/paladin/assets/paladin-censure-helmet-display.glb": "0bf6487398da1af7146a354d2b62e50262f8183c87cbc68c9ff471d62d151973",
+      "marketplace/packages/paladin/assets/atlas-6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c.png": "6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c",
+      "marketplace/packages/paladin/assets/paladin-male-censure-armor.glb": "8a6230edd61537256e8ed529f067227b088a99289c69d60e3e5f32df09af81f6",
+      "marketplace/packages/paladin/assets/paladin-female-censure-armor.glb": "078960436cab7144b250853c4de11680f6f1ddee9c3c031cc2361fb71bfc79ef",
+      "marketplace/packages/paladin/assets/paladin-censure-armor-display.glb": "6c29832b04877ad9677673fc08b499e10fba031a710061b4624f1168ddb0fb71",
+      "marketplace/packages/paladin/assets/atlas-ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257.png": "ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257",
+      "marketplace/packages/paladin/assets/atlas-633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b.png": "633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b",
+      "marketplace/packages/paladin/assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png": "6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59",
+      "marketplace/packages/paladin/assets/atlas-7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a.png": "7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a",
+      "marketplace/packages/paladin/assets/paladin-censure-boots-display.glb": "66d4ad344fb2d262ec67a8a312d3ee1738a9463c873ce29c0c1ce166d49f2882",
+      "marketplace/packages/paladin/assets/paladin-censure-boots.glb": "be7a29eb3b99246c2131b8a3ce6ecbe2921924d131ec240e1918751b6d7fd33f",
+      "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-display.glb": "9105651a01ff6270b4488bbaf55d49cc43e85b242f477f7f8e5116a477ade256",
+      "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-1-display.glb": "2d344239414288066c895e9285a18d8c4272f60587e584ec012df96c6b63c40e",
+      "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-1.glb": "50e113ed89cd7706159328b9e01a9a030bf90b2406e6def6f5699646fb49ba42",
+      "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-2-display.glb": "4e426165581fdabac8252b375a4b07661f6d1fe803d94b570d66548e9359375a",
+      "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-2.glb": "9f71498360cba45873a48e2b6a26814a839bc1e349f9f9e32b4d86ae5bea9223",
+      "marketplace/packages/paladin/assets/paladin-hammer-1h-censure.glb": "fa94116627742c0632aef4fe100c6addbb5e7011e045d794f70ff4e8b9360e4c",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-display.glb": "be52866d6b8a5a9e1460a6d03471b199f9a3b9af4996ef8ba439812f71a9efbf",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-1-display.glb": "75f624954fae144efb470ab2ac4b23f3907fbd3a5cf55186fdbbd2028d58d240",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-1.glb": "973fb8d9ecab08abdc52023f6894b3c5294222c4cdca0e3394550cbffff57ce1",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-2-display.glb": "c5d37a1b38ec1d0b48e5feb4dde443ae831b466408bffb4e140a4fcc4b407372",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-2.glb": "d9a6c198cc096c246e07793f1f511f628b7c7725e563a301ad7e53a447db713b",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-3-display.glb": "1c1293e167944af53092391ed08c345d823619cb86a57778bfdf2c8415e32baf",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-3.glb": "bb29a12e6383f9c0397109c94fd8595c6c7390c7f38acd5f86d77dc63446e10e",
+      "marketplace/packages/paladin/assets/paladin-hammer-2h-censure.glb": "2ac13b8263a57909463770793333b063fb9468a9cf2d78a27ecbcbe60bf02320",
+      "marketplace/packages/paladin/assets/paladin-shield-censure-display.glb": "6f57968cefcbcd40a58bf689460c381d6c4fc812e6d3d540e553f7f743d8b75b",
+      "marketplace/packages/paladin/assets/paladin-shield-censure.glb": "73734257caea9b3b92e328612fb5ea919ba275b56d19e9f6bef525e50ddc6234"
+    },
+    "contentSha256": "fbdcef2d00893f2a3c99eee1c65871a9bb86e38ae36a5ebf5486f7118e31cf65",
+    "oathkeeperSuccessorSha256": "d0f90f02631837b9264b5ae52a1fa7fb0deb765a3706d21e42c66afd039968cc",
+    "limitations": [
+      "Visual source adoption only; this is not release, endgame balance, multiplayer, save migration or all-animation acceptance.",
+      "One-hand inventory-idle: 15 native class defaults, five views each. Two-hand idle: Blacksmith Female, Thief Male and Treasure Hunter Male. Alternate appearances are not exhaustively covered.",
+      "Final male/female two-handed attackProf_blunt2H motion reviewed in actual native combat with fixed simulation pacing and supplemental studio lighting, not a native framebuffer or realtime performance claim. Earlier female one-hand shoulder/body motion applies to its exact predecessor; final one-hand motion is not separately claimed.",
+      "Minor ear/rear helmet strip, native cuff/fringe, wrist-opening and elbow contacts remain accepted. Backpack occludes some rear armor. Native offhand releases during the selected two-hand animation. Female victory framing crops the hammer top; cropped portions were not judged.",
+      "Native equip RPC aborts in failed v39 and v40 sessions remain unresolved. Both failed before any accepted capture; successful fresh sessions with native frame-separated item calls do not establish the cause or a stability fix. Earlier unexpected v34 exit also remains unexplained.",
+      "Native item-display models are covered. Four nonweapon icon images were reviewed offline at64pixels; the new icon images were not separately exercised throughout native HUD layouts.",
+      "The two-handed hammer is a design-family derivative, not directly depicted in the original banner.",
+      "Three default profiles only for new1K materials. Prior15class fit and M/F2H motion apply to exact unchanged geometry with predecessor2K atlases.",
+      "Four directional views use supplemental studio lighting on actual native avatar; native image is the game-produced inventory portrait, not entire framebuffer.",
+      "No new combat, allappearance, balance, save/load or co-op claim.",
+      "Prior native equip aborts unresolved; successful frame-separated operations are not a stability fix."
+    ],
+    "predecessor": {
+      "path": "scratch/gear-consolidation/censure-banner-fidelity/integration-preparation/parent-native-acceptance-v38.json",
+      "sha256": "1f6d21e18ef5afca433ba5f73170fbeadd7115a55c5aa312cba56e9194de9788"
+    },
+    "geometryCarryForward": "Every delivered GLB byte-identical to v38 accepted geometry. Fifteen-default static and M/F two-hand combat observations carry forward for geometry. New1K material check covers only BuskerMale/BlacksmithFemale/ThiefMale plus2nativecards.",
+    "items": [
+      {
+        "itemId": "paladin_armor_censure",
+        "nativeEquipped": true,
+        "nativeDisplay": true,
+        "wearers": [
+          "scholar:Male",
+          "monk:Male",
+          "astronomer:Male",
+          "busker:Male",
+          "gladiator:Female",
+          "trapper:Female",
+          "hunter:Male",
+          "herbalist:Female",
+          "paladin:Female",
+          "woodcutter:Male",
+          "minstrel:Female",
+          "hobo:Male",
+          "blacksmith:Female",
+          "thief:Male",
+          "treasureHunter:Male"
+        ],
+        "nativeCombatMotion": true,
+        "currentTextureWearers": [
+          "busker:Male",
+          "blacksmith:Female",
+          "thief:Male"
+        ],
+        "evidence": [
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-all15-default-idle-v38-v42/review.json",
+            "sha256": "12f4d8e8fec56ba50e0e28dc06ba52b50f648f0818b9a4d78f3370f1eb15cb92"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-motion-v42/review.json",
+            "sha256": "23e9c23fb075812e02c01a0a45aaaddcfcf8e004b298eab2608f04ff59ae87dc"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v38.json",
+            "sha256": "5423012b8628e8c102eb8d0946ec16f2781840aa6e375ffaff963bfede6cc750"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-v42/review.json",
+            "sha256": "20b2909b9f5e99ce1482155ed6af10ce4b1c87493996ebaead23ffb7efd7bf4b"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-bracer-front-v38/review.json",
+            "sha256": "a3865bcca09d8c7052553a23be4b89725c4621a2533bf5d9bd9478a64cf0211d"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v39b-busker-gladiator-trapper/review.json",
+            "sha256": "2e750b088816f44e63662f522141f2e15775127608d5f651a6f2b7e9168e4f16"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v40b-hunter-herbalist-paladin/review.json",
+            "sha256": "9c301b2054f073d0c65fce1b43c482e0fd11ed1e6d5149a3ae992c1209826c21"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v41-woodcutter-minstrel-hobo/review.json",
+            "sha256": "92c4c379815c7b3c7521eeba8507ceb5eadcaabb0b330425097fa09f0c68d8b9"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v42-blacksmith-thief-treasurehunter/review.json",
+            "sha256": "bd5a2e0218611e5f36c433ba9fba01aef6ac12b48e66b3ba599d7d882f495b61"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/public-accessory-recipe-delivery.json",
+            "sha256": "726d85a67b4b4e76c2e768893b85f3c23be039adacdc7b22039e60ffa37fbb75"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/README.md",
+            "sha256": "fa1774bc4c4af7c1ff5e79a77fda353f21cdbd7e654731010f2b67d10af9aefb"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/build_source.py",
+            "sha256": "33fce5531a9f274371e30ccf19661d1d6390f6ced24ee029bc876740712a6aa0"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/dependencies.json",
+            "sha256": "5c1d31f4f120f083272f183790c76849a06daccf162cd3d6b7f726ea37502a64"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/finish_exports.py",
+            "sha256": "19e899560ed63b30c07ec9f3cc6e5978278bf9c2664fb92617317f2b45071681"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/recipe.json",
+            "sha256": "d86a5e7345d48790a1db6315d0654139c821aedf66fda421e3f622a2e134fab3"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/update_blends.py",
+            "sha256": "6e0c80ab8593f940070e41b520de8473c0669a2785f6f27ae6777909a8876970"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/verify_exports.py",
+            "sha256": "4c6d4e75439fa43c87ca8d63408d174867a50cf550ab6fc1f5d6db9bf50eb860"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-recipe-replay-v1/verification.json",
+            "sha256": "58f53d3c6ad8a89aedd19800f10f318ac34a8aab5a3b8e0fa0a52222c5751f32"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json",
+            "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-replay-v2/replay.json",
+            "sha256": "3a96af37672a29ed778b6a577829bbc921b437bec9d75abe9e75e1c5070a6e5c"
+          },
+          {
+            "sourceId": "tools/ai-model-pipeline/export_ftk_glb.py",
+            "sha256": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/editable/editable-checks.json",
+            "sha256": "e144994732a2f7e97279c7092d529b5e9384b049665bfcaa590c0c3e9b88632a"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-bracer-front-v38/review.json",
+            "sha256": "a3865bcca09d8c7052553a23be4b89725c4621a2533bf5d9bd9478a64cf0211d"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-material-acceptance-v43.json",
+            "sha256": "c6e4725f8ab4dba4692398edaa1061ffe5caa69f503dabbd144f2eb1331e46d0"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v43.json",
+            "sha256": "6066283a4e03f9bd7840ec752fede9fa0eadde142b4abff77bc89a0958ab107a"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v3/manifest.json",
+            "sha256": "2ab55ab8257c6886d4f0983b0a875a8962fbcc6ffa17fb289ae8d9c4afabdff5"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/RUNTIME-TEXTURES.md",
+            "sha256": "6782c78e6510a9a7c3e87f273c9b1c6603b6db1c5bf1903b8d6175ad8482291e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+            "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_runtime.py",
+            "sha256": "1c39333400ab3f0e802cb9f23def8582bd1dcd639c7d3d0433b0edbb7641da63"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/runtime-texture-profile.json",
+            "sha256": "1d316c3141f219dc9daa7d43438f758ae7d8e11ac5d9f55a93f8971e9ef2e41c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_runtime_editable.py",
+            "sha256": "2da76de2af174e13c7f00f91d65411d2cc99c88cbfa13e931395f842d5ccfe2f"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          }
+        ]
+      },
+      {
+        "itemId": "paladin_helmet_censure",
+        "nativeEquipped": true,
+        "nativeDisplay": true,
+        "wearers": [
+          "scholar:Male",
+          "monk:Male",
+          "astronomer:Male",
+          "busker:Male",
+          "gladiator:Female",
+          "trapper:Female",
+          "hunter:Male",
+          "herbalist:Female",
+          "paladin:Female",
+          "woodcutter:Male",
+          "minstrel:Female",
+          "hobo:Male",
+          "blacksmith:Female",
+          "thief:Male",
+          "treasureHunter:Male"
+        ],
+        "currentTextureWearers": [
+          "busker:Male",
+          "blacksmith:Female",
+          "thief:Male"
+        ],
+        "evidence": [
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-all15-default-idle-v38-v42/review.json",
+            "sha256": "12f4d8e8fec56ba50e0e28dc06ba52b50f648f0818b9a4d78f3370f1eb15cb92"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-motion-v42/review.json",
+            "sha256": "23e9c23fb075812e02c01a0a45aaaddcfcf8e004b298eab2608f04ff59ae87dc"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v38.json",
+            "sha256": "5423012b8628e8c102eb8d0946ec16f2781840aa6e375ffaff963bfede6cc750"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-v42/review.json",
+            "sha256": "20b2909b9f5e99ce1482155ed6af10ce4b1c87493996ebaead23ffb7efd7bf4b"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-bracer-front-v38/review.json",
+            "sha256": "a3865bcca09d8c7052553a23be4b89725c4621a2533bf5d9bd9478a64cf0211d"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v39b-busker-gladiator-trapper/review.json",
+            "sha256": "2e750b088816f44e63662f522141f2e15775127608d5f651a6f2b7e9168e4f16"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v40b-hunter-herbalist-paladin/review.json",
+            "sha256": "9c301b2054f073d0c65fce1b43c482e0fd11ed1e6d5149a3ae992c1209826c21"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v41-woodcutter-minstrel-hobo/review.json",
+            "sha256": "92c4c379815c7b3c7521eeba8507ceb5eadcaabb0b330425097fa09f0c68d8b9"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v42-blacksmith-thief-treasurehunter/review.json",
+            "sha256": "bd5a2e0218611e5f36c433ba9fba01aef6ac12b48e66b3ba599d7d882f495b61"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/public-accessory-recipe-delivery.json",
+            "sha256": "726d85a67b4b4e76c2e768893b85f3c23be039adacdc7b22039e60ffa37fbb75"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/README.md",
+            "sha256": "fa1774bc4c4af7c1ff5e79a77fda353f21cdbd7e654731010f2b67d10af9aefb"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/build_source.py",
+            "sha256": "33fce5531a9f274371e30ccf19661d1d6390f6ced24ee029bc876740712a6aa0"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/dependencies.json",
+            "sha256": "5c1d31f4f120f083272f183790c76849a06daccf162cd3d6b7f726ea37502a64"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/finish_exports.py",
+            "sha256": "19e899560ed63b30c07ec9f3cc6e5978278bf9c2664fb92617317f2b45071681"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/recipe.json",
+            "sha256": "d86a5e7345d48790a1db6315d0654139c821aedf66fda421e3f622a2e134fab3"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/update_blends.py",
+            "sha256": "6e0c80ab8593f940070e41b520de8473c0669a2785f6f27ae6777909a8876970"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/verify_exports.py",
+            "sha256": "4c6d4e75439fa43c87ca8d63408d174867a50cf550ab6fc1f5d6db9bf50eb860"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-recipe-replay-v1/verification.json",
+            "sha256": "58f53d3c6ad8a89aedd19800f10f318ac34a8aab5a3b8e0fa0a52222c5751f32"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json",
+            "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-replay-v2/replay.json",
+            "sha256": "3a96af37672a29ed778b6a577829bbc921b437bec9d75abe9e75e1c5070a6e5c"
+          },
+          {
+            "sourceId": "tools/ai-model-pipeline/export_ftk_glb.py",
+            "sha256": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/editable/editable-checks.json",
+            "sha256": "e144994732a2f7e97279c7092d529b5e9384b049665bfcaa590c0c3e9b88632a"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_helmet_censure/native-display.png",
+            "sha256": "dda387162dcae71d6737df641bd6cfde8595aae7fd783c7853c938d94d046262"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_helmet_censure/show.json",
+            "sha256": "3186ca9022491f6d469a450f1318cd0ace41ce92aa41611348aab752a2fa05ef"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-material-acceptance-v43.json",
+            "sha256": "c6e4725f8ab4dba4692398edaa1061ffe5caa69f503dabbd144f2eb1331e46d0"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v43.json",
+            "sha256": "6066283a4e03f9bd7840ec752fede9fa0eadde142b4abff77bc89a0958ab107a"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v3/manifest.json",
+            "sha256": "2ab55ab8257c6886d4f0983b0a875a8962fbcc6ffa17fb289ae8d9c4afabdff5"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/RUNTIME-TEXTURES.md",
+            "sha256": "6782c78e6510a9a7c3e87f273c9b1c6603b6db1c5bf1903b8d6175ad8482291e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+            "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_runtime.py",
+            "sha256": "1c39333400ab3f0e802cb9f23def8582bd1dcd639c7d3d0433b0edbb7641da63"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/runtime-texture-profile.json",
+            "sha256": "1d316c3141f219dc9daa7d43438f758ae7d8e11ac5d9f55a93f8971e9ef2e41c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_runtime_editable.py",
+            "sha256": "2da76de2af174e13c7f00f91d65411d2cc99c88cbfa13e931395f842d5ccfe2f"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          }
+        ]
+      },
+      {
+        "itemId": "paladin_boots_censure",
+        "nativeEquipped": true,
+        "nativeDisplay": true,
+        "wearers": [
+          "scholar:Male",
+          "monk:Male",
+          "astronomer:Male",
+          "busker:Male",
+          "gladiator:Female",
+          "trapper:Female",
+          "hunter:Male",
+          "herbalist:Female",
+          "paladin:Female",
+          "woodcutter:Male",
+          "minstrel:Female",
+          "hobo:Male",
+          "blacksmith:Female",
+          "thief:Male",
+          "treasureHunter:Male"
+        ],
+        "evidence": [
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-all15-default-idle-v38-v42/review.json",
+            "sha256": "12f4d8e8fec56ba50e0e28dc06ba52b50f648f0818b9a4d78f3370f1eb15cb92"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-motion-v42/review.json",
+            "sha256": "23e9c23fb075812e02c01a0a45aaaddcfcf8e004b298eab2608f04ff59ae87dc"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v38.json",
+            "sha256": "5423012b8628e8c102eb8d0946ec16f2781840aa6e375ffaff963bfede6cc750"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-v42/review.json",
+            "sha256": "20b2909b9f5e99ce1482155ed6af10ce4b1c87493996ebaead23ffb7efd7bf4b"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-bracer-front-v38/review.json",
+            "sha256": "a3865bcca09d8c7052553a23be4b89725c4621a2533bf5d9bd9478a64cf0211d"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v39b-busker-gladiator-trapper/review.json",
+            "sha256": "2e750b088816f44e63662f522141f2e15775127608d5f651a6f2b7e9168e4f16"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v40b-hunter-herbalist-paladin/review.json",
+            "sha256": "9c301b2054f073d0c65fce1b43c482e0fd11ed1e6d5149a3ae992c1209826c21"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v41-woodcutter-minstrel-hobo/review.json",
+            "sha256": "92c4c379815c7b3c7521eeba8507ceb5eadcaabb0b330425097fa09f0c68d8b9"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v42-blacksmith-thief-treasurehunter/review.json",
+            "sha256": "bd5a2e0218611e5f36c433ba9fba01aef6ac12b48e66b3ba599d7d882f495b61"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/public-accessory-recipe-delivery.json",
+            "sha256": "726d85a67b4b4e76c2e768893b85f3c23be039adacdc7b22039e60ffa37fbb75"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/README.md",
+            "sha256": "fa1774bc4c4af7c1ff5e79a77fda353f21cdbd7e654731010f2b67d10af9aefb"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/build_source.py",
+            "sha256": "33fce5531a9f274371e30ccf19661d1d6390f6ced24ee029bc876740712a6aa0"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/dependencies.json",
+            "sha256": "5c1d31f4f120f083272f183790c76849a06daccf162cd3d6b7f726ea37502a64"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/finish_exports.py",
+            "sha256": "19e899560ed63b30c07ec9f3cc6e5978278bf9c2664fb92617317f2b45071681"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/recipe.json",
+            "sha256": "d86a5e7345d48790a1db6315d0654139c821aedf66fda421e3f622a2e134fab3"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/update_blends.py",
+            "sha256": "6e0c80ab8593f940070e41b520de8473c0669a2785f6f27ae6777909a8876970"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/verify_exports.py",
+            "sha256": "4c6d4e75439fa43c87ca8d63408d174867a50cf550ab6fc1f5d6db9bf50eb860"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-recipe-replay-v1/verification.json",
+            "sha256": "58f53d3c6ad8a89aedd19800f10f318ac34a8aab5a3b8e0fa0a52222c5751f32"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json",
+            "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-replay-v2/replay.json",
+            "sha256": "3a96af37672a29ed778b6a577829bbc921b437bec9d75abe9e75e1c5070a6e5c"
+          },
+          {
+            "sourceId": "tools/ai-model-pipeline/export_ftk_glb.py",
+            "sha256": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/editable/editable-checks.json",
+            "sha256": "e144994732a2f7e97279c7092d529b5e9384b049665bfcaa590c0c3e9b88632a"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_boots_censure/native-display.png",
+            "sha256": "39309cc2ea208500c1200bc24404a1523e6387252e7924897a4d8aa9841be4ee"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_boots_censure/show.json",
+            "sha256": "5cdf46a971e91ff201a8a37d3931a863ab3db3277aa91b06a149b5da141142a4"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-material-acceptance-v43.json",
+            "sha256": "c6e4725f8ab4dba4692398edaa1061ffe5caa69f503dabbd144f2eb1331e46d0"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v43.json",
+            "sha256": "6066283a4e03f9bd7840ec752fede9fa0eadde142b4abff77bc89a0958ab107a"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v3/manifest.json",
+            "sha256": "2ab55ab8257c6886d4f0983b0a875a8962fbcc6ffa17fb289ae8d9c4afabdff5"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/RUNTIME-TEXTURES.md",
+            "sha256": "6782c78e6510a9a7c3e87f273c9b1c6603b6db1c5bf1903b8d6175ad8482291e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+            "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_runtime.py",
+            "sha256": "1c39333400ab3f0e802cb9f23def8582bd1dcd639c7d3d0433b0edbb7641da63"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/runtime-texture-profile.json",
+            "sha256": "1d316c3141f219dc9daa7d43438f758ae7d8e11ac5d9f55a93f8971e9ef2e41c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_runtime_editable.py",
+            "sha256": "2da76de2af174e13c7f00f91d65411d2cc99c88cbfa13e931395f842d5ccfe2f"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          }
+        ]
+      },
+      {
+        "itemId": "paladin_hammer_1h_censure",
+        "nativeEquipped": true,
+        "nativeDisplay": true,
+        "wearers": [
+          "scholar:Male",
+          "monk:Male",
+          "astronomer:Male",
+          "busker:Male",
+          "gladiator:Female",
+          "trapper:Female",
+          "hunter:Male",
+          "herbalist:Female",
+          "paladin:Female",
+          "woodcutter:Male",
+          "minstrel:Female",
+          "hobo:Male",
+          "blacksmith:Female",
+          "thief:Male",
+          "treasureHunter:Male"
+        ],
+        "evidence": [
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-all15-default-idle-v38-v42/review.json",
+            "sha256": "12f4d8e8fec56ba50e0e28dc06ba52b50f648f0818b9a4d78f3370f1eb15cb92"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-motion-v42/review.json",
+            "sha256": "23e9c23fb075812e02c01a0a45aaaddcfcf8e004b298eab2608f04ff59ae87dc"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v38.json",
+            "sha256": "5423012b8628e8c102eb8d0946ec16f2781840aa6e375ffaff963bfede6cc750"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-v42/review.json",
+            "sha256": "20b2909b9f5e99ce1482155ed6af10ce4b1c87493996ebaead23ffb7efd7bf4b"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-bracer-front-v38/review.json",
+            "sha256": "a3865bcca09d8c7052553a23be4b89725c4621a2533bf5d9bd9478a64cf0211d"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v39b-busker-gladiator-trapper/review.json",
+            "sha256": "2e750b088816f44e63662f522141f2e15775127608d5f651a6f2b7e9168e4f16"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v40b-hunter-herbalist-paladin/review.json",
+            "sha256": "9c301b2054f073d0c65fce1b43c482e0fd11ed1e6d5149a3ae992c1209826c21"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v41-woodcutter-minstrel-hobo/review.json",
+            "sha256": "92c4c379815c7b3c7521eeba8507ceb5eadcaabb0b330425097fa09f0c68d8b9"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v42-blacksmith-thief-treasurehunter/review.json",
+            "sha256": "bd5a2e0218611e5f36c433ba9fba01aef6ac12b48e66b3ba599d7d882f495b61"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/public-accessory-recipe-delivery.json",
+            "sha256": "726d85a67b4b4e76c2e768893b85f3c23be039adacdc7b22039e60ffa37fbb75"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/README.md",
+            "sha256": "fa1774bc4c4af7c1ff5e79a77fda353f21cdbd7e654731010f2b67d10af9aefb"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/build_source.py",
+            "sha256": "33fce5531a9f274371e30ccf19661d1d6390f6ced24ee029bc876740712a6aa0"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/dependencies.json",
+            "sha256": "5c1d31f4f120f083272f183790c76849a06daccf162cd3d6b7f726ea37502a64"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/finish_exports.py",
+            "sha256": "19e899560ed63b30c07ec9f3cc6e5978278bf9c2664fb92617317f2b45071681"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/recipe.json",
+            "sha256": "d86a5e7345d48790a1db6315d0654139c821aedf66fda421e3f622a2e134fab3"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/update_blends.py",
+            "sha256": "6e0c80ab8593f940070e41b520de8473c0669a2785f6f27ae6777909a8876970"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/verify_exports.py",
+            "sha256": "4c6d4e75439fa43c87ca8d63408d174867a50cf550ab6fc1f5d6db9bf50eb860"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-recipe-replay-v1/verification.json",
+            "sha256": "58f53d3c6ad8a89aedd19800f10f318ac34a8aab5a3b8e0fa0a52222c5751f32"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json",
+            "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-replay-v2/replay.json",
+            "sha256": "3a96af37672a29ed778b6a577829bbc921b437bec9d75abe9e75e1c5070a6e5c"
+          },
+          {
+            "sourceId": "tools/ai-model-pipeline/export_ftk_glb.py",
+            "sha256": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/editable/editable-checks.json",
+            "sha256": "e144994732a2f7e97279c7092d529b5e9384b049665bfcaa590c0c3e9b88632a"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_hammer_1h_censure/native-display.png",
+            "sha256": "0b94181376562e795d7d4ee982a226336f72072e5717ccaf48598ff0050780a4"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_hammer_1h_censure/show.json",
+            "sha256": "7ba5b71b1f64f03d70a9f0c96088f426c764e09b300abce1bb39d6a9bd2e3c7b"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-material-acceptance-v43.json",
+            "sha256": "c6e4725f8ab4dba4692398edaa1061ffe5caa69f503dabbd144f2eb1331e46d0"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v43.json",
+            "sha256": "6066283a4e03f9bd7840ec752fede9fa0eadde142b4abff77bc89a0958ab107a"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v3/manifest.json",
+            "sha256": "2ab55ab8257c6886d4f0983b0a875a8962fbcc6ffa17fb289ae8d9c4afabdff5"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/RUNTIME-TEXTURES.md",
+            "sha256": "6782c78e6510a9a7c3e87f273c9b1c6603b6db1c5bf1903b8d6175ad8482291e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+            "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_runtime.py",
+            "sha256": "1c39333400ab3f0e802cb9f23def8582bd1dcd639c7d3d0433b0edbb7641da63"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/runtime-texture-profile.json",
+            "sha256": "1d316c3141f219dc9daa7d43438f758ae7d8e11ac5d9f55a93f8971e9ef2e41c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_runtime_editable.py",
+            "sha256": "2da76de2af174e13c7f00f91d65411d2cc99c88cbfa13e931395f842d5ccfe2f"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          }
+        ]
+      },
+      {
+        "itemId": "paladin_hammer_2h_censure",
+        "nativeEquipped": true,
+        "nativeDisplay": true,
+        "wearers": [
+          "blacksmith:Female",
+          "thief:Male",
+          "treasureHunter:Male"
+        ],
+        "evidence": [
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-all15-default-idle-v38-v42/review.json",
+            "sha256": "12f4d8e8fec56ba50e0e28dc06ba52b50f648f0818b9a4d78f3370f1eb15cb92"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-motion-v42/review.json",
+            "sha256": "23e9c23fb075812e02c01a0a45aaaddcfcf8e004b298eab2608f04ff59ae87dc"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v38.json",
+            "sha256": "5423012b8628e8c102eb8d0946ec16f2781840aa6e375ffaff963bfede6cc750"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-v42/review.json",
+            "sha256": "20b2909b9f5e99ce1482155ed6af10ce4b1c87493996ebaead23ffb7efd7bf4b"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-bracer-front-v38/review.json",
+            "sha256": "a3865bcca09d8c7052553a23be4b89725c4621a2533bf5d9bd9478a64cf0211d"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v39b-busker-gladiator-trapper/review.json",
+            "sha256": "2e750b088816f44e63662f522141f2e15775127608d5f651a6f2b7e9168e4f16"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v40b-hunter-herbalist-paladin/review.json",
+            "sha256": "9c301b2054f073d0c65fce1b43c482e0fd11ed1e6d5149a3ae992c1209826c21"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v41-woodcutter-minstrel-hobo/review.json",
+            "sha256": "92c4c379815c7b3c7521eeba8507ceb5eadcaabb0b330425097fa09f0c68d8b9"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v42-blacksmith-thief-treasurehunter/review.json",
+            "sha256": "bd5a2e0218611e5f36c433ba9fba01aef6ac12b48e66b3ba599d7d882f495b61"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/public-accessory-recipe-delivery.json",
+            "sha256": "726d85a67b4b4e76c2e768893b85f3c23be039adacdc7b22039e60ffa37fbb75"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/README.md",
+            "sha256": "fa1774bc4c4af7c1ff5e79a77fda353f21cdbd7e654731010f2b67d10af9aefb"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/build_source.py",
+            "sha256": "33fce5531a9f274371e30ccf19661d1d6390f6ced24ee029bc876740712a6aa0"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/dependencies.json",
+            "sha256": "5c1d31f4f120f083272f183790c76849a06daccf162cd3d6b7f726ea37502a64"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/finish_exports.py",
+            "sha256": "19e899560ed63b30c07ec9f3cc6e5978278bf9c2664fb92617317f2b45071681"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/recipe.json",
+            "sha256": "d86a5e7345d48790a1db6315d0654139c821aedf66fda421e3f622a2e134fab3"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/update_blends.py",
+            "sha256": "6e0c80ab8593f940070e41b520de8473c0669a2785f6f27ae6777909a8876970"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/verify_exports.py",
+            "sha256": "4c6d4e75439fa43c87ca8d63408d174867a50cf550ab6fc1f5d6db9bf50eb860"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-recipe-replay-v1/verification.json",
+            "sha256": "58f53d3c6ad8a89aedd19800f10f318ac34a8aab5a3b8e0fa0a52222c5751f32"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json",
+            "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-replay-v2/replay.json",
+            "sha256": "3a96af37672a29ed778b6a577829bbc921b437bec9d75abe9e75e1c5070a6e5c"
+          },
+          {
+            "sourceId": "tools/ai-model-pipeline/export_ftk_glb.py",
+            "sha256": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/editable/editable-checks.json",
+            "sha256": "e144994732a2f7e97279c7092d529b5e9384b049665bfcaa590c0c3e9b88632a"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_hammer_2h_censure/native-display.png",
+            "sha256": "02749710735ad20af336d189e2c9036481b548256e803cb474b0bab47f333193"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_hammer_2h_censure/show.json",
+            "sha256": "2fb78ae6ed674b688be8b55eff82e93e13bd6314ec09fcf6d58f1e6573ef7873"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-material-acceptance-v43.json",
+            "sha256": "c6e4725f8ab4dba4692398edaa1061ffe5caa69f503dabbd144f2eb1331e46d0"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v43.json",
+            "sha256": "6066283a4e03f9bd7840ec752fede9fa0eadde142b4abff77bc89a0958ab107a"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v3/manifest.json",
+            "sha256": "2ab55ab8257c6886d4f0983b0a875a8962fbcc6ffa17fb289ae8d9c4afabdff5"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/RUNTIME-TEXTURES.md",
+            "sha256": "6782c78e6510a9a7c3e87f273c9b1c6603b6db1c5bf1903b8d6175ad8482291e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+            "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_runtime.py",
+            "sha256": "1c39333400ab3f0e802cb9f23def8582bd1dcd639c7d3d0433b0edbb7641da63"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/runtime-texture-profile.json",
+            "sha256": "1d316c3141f219dc9daa7d43438f758ae7d8e11ac5d9f55a93f8971e9ef2e41c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_runtime_editable.py",
+            "sha256": "2da76de2af174e13c7f00f91d65411d2cc99c88cbfa13e931395f842d5ccfe2f"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          }
+        ]
+      },
+      {
+        "itemId": "paladin_shield_censure",
+        "nativeEquipped": true,
+        "nativeDisplay": true,
+        "wearers": [
+          "scholar:Male",
+          "monk:Male",
+          "astronomer:Male",
+          "busker:Male",
+          "gladiator:Female",
+          "trapper:Female",
+          "hunter:Male",
+          "herbalist:Female",
+          "paladin:Female",
+          "woodcutter:Male",
+          "minstrel:Female",
+          "hobo:Male",
+          "blacksmith:Female",
+          "thief:Male",
+          "treasureHunter:Male"
+        ],
+        "evidence": [
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-all15-default-idle-v38-v42/review.json",
+            "sha256": "12f4d8e8fec56ba50e0e28dc06ba52b50f648f0818b9a4d78f3370f1eb15cb92"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-motion-v42/review.json",
+            "sha256": "23e9c23fb075812e02c01a0a45aaaddcfcf8e004b298eab2608f04ff59ae87dc"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v38.json",
+            "sha256": "5423012b8628e8c102eb8d0946ec16f2781840aa6e375ffaff963bfede6cc750"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-two-hand-v42/review.json",
+            "sha256": "20b2909b9f5e99ce1482155ed6af10ce4b1c87493996ebaead23ffb7efd7bf4b"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-bracer-front-v38/review.json",
+            "sha256": "a3865bcca09d8c7052553a23be4b89725c4621a2533bf5d9bd9478a64cf0211d"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v39b-busker-gladiator-trapper/review.json",
+            "sha256": "2e750b088816f44e63662f522141f2e15775127608d5f651a6f2b7e9168e4f16"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v40b-hunter-herbalist-paladin/review.json",
+            "sha256": "9c301b2054f073d0c65fce1b43c482e0fd11ed1e6d5149a3ae992c1209826c21"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v41-woodcutter-minstrel-hobo/review.json",
+            "sha256": "92c4c379815c7b3c7521eeba8507ceb5eadcaabb0b330425097fa09f0c68d8b9"
+          },
+          {
+            "sourceId": "gear-consolidation/helmet-silhouette-review/censure-native-v42-blacksmith-thief-treasurehunter/review.json",
+            "sha256": "bd5a2e0218611e5f36c433ba9fba01aef6ac12b48e66b3ba599d7d882f495b61"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/public-accessory-recipe-delivery.json",
+            "sha256": "726d85a67b4b4e76c2e768893b85f3c23be039adacdc7b22039e60ffa37fbb75"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/README.md",
+            "sha256": "fa1774bc4c4af7c1ff5e79a77fda353f21cdbd7e654731010f2b67d10af9aefb"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/build_source.py",
+            "sha256": "33fce5531a9f274371e30ccf19661d1d6390f6ced24ee029bc876740712a6aa0"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/dependencies.json",
+            "sha256": "5c1d31f4f120f083272f183790c76849a06daccf162cd3d6b7f726ea37502a64"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/finish_exports.py",
+            "sha256": "19e899560ed63b30c07ec9f3cc6e5978278bf9c2664fb92617317f2b45071681"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/recipe.json",
+            "sha256": "d86a5e7345d48790a1db6315d0654139c821aedf66fda421e3f622a2e134fab3"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/update_blends.py",
+            "sha256": "6e0c80ab8593f940070e41b520de8473c0669a2785f6f27ae6777909a8876970"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-accessories/verify_exports.py",
+            "sha256": "4c6d4e75439fa43c87ca8d63408d174867a50cf550ab6fc1f5d6db9bf50eb860"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/accessory-recipe-replay-v1/verification.json",
+            "sha256": "58f53d3c6ad8a89aedd19800f10f318ac34a8aab5a3b8e0fa0a52222c5751f32"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/manifest.json",
+            "sha256": "a7ece22e968d3a120fdfd093a36ae3a7f3227cfc48c1b4bff6a2acd1c2fb47fc"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-replay-v2/replay.json",
+            "sha256": "3a96af37672a29ed778b6a577829bbc921b437bec9d75abe9e75e1c5070a6e5c"
+          },
+          {
+            "sourceId": "tools/ai-model-pipeline/export_ftk_glb.py",
+            "sha256": "b955b64e6f2647e989a8f6877591c6418432dd0da62c918596f3f1975d322d3b"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v2/editable/editable-checks.json",
+            "sha256": "e144994732a2f7e97279c7092d529b5e9384b049665bfcaa590c0c3e9b88632a"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_shield_censure/native-display.png",
+            "sha256": "dcfbfe2dd523949a973e58db1a32b4d2c5defd70d1782ed0fe1a8165edfa876c"
+          },
+          {
+            "sourceId": "gear-consolidation/native-fit/censure-banner-v29b-busker-blacksmith-thief/native-censure-displays/paladin_shield_censure/show.json",
+            "sha256": "e66ac48dbc95ed6d022832c50dd669a90cc86df6b4ad86559ef2d59ae0798362"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-material-acceptance-v43.json",
+            "sha256": "c6e4725f8ab4dba4692398edaa1061ffe5caa69f503dabbd144f2eb1331e46d0"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-art-acceptance-v43.json",
+            "sha256": "6066283a4e03f9bd7840ec752fede9fa0eadde142b4abff77bc89a0958ab107a"
+          },
+          {
+            "sourceId": "gear-consolidation/censure-banner-fidelity/armor-helmet-fit/public-recipe-handoff-v3/manifest.json",
+            "sha256": "2ab55ab8257c6886d4f0983b0a875a8962fbcc6ffa17fb289ae8d9c4afabdff5"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/BRACER-FIT.md",
+            "sha256": "7aedd57183a142a9dc4c01a9f4e6743e6183a1c32deffd2b1f4f6542fe602d6e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/README.md",
+            "sha256": "6d58365e8b9daf50df53d912b1f1d980ec400941714f194f58f94753baa819c7"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/RUNTIME-TEXTURES.md",
+            "sha256": "6782c78e6510a9a7c3e87f273c9b1c6603b6db1c5bf1903b8d6175ad8482291e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/bracer-fit-profile.json",
+            "sha256": "761780afd2458906f797bf5cf56fb27c356383c71b243464733c712f8bdb9205"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/build.py",
+            "sha256": "d90cfbc887da8ed21a115d80c1cfb47c7a9ba3dd1ca44322ed271cb614d6b77e"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/mesh_io.py",
+            "sha256": "1292aea0ec489903239137de793ae221ab53197c477c66ab024e24b2af4b5403"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/prepare_bounded_atlases.py",
+            "sha256": "851b2de5620ba0a7152e040f54c10509f969b13bd33dd58c7b9a9048dc0461a6"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/profile.json",
+            "sha256": "5120c1e98dd1c053ecf9983dee4d6aed97a5c2d3158557e762d66871cfd89a12"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_bracer_fit.py",
+            "sha256": "6cddb98f92d320e5ad02b9acfc431300e87d2a1de2976b7aa2e394293ed8a65a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/rebuild_runtime.py",
+            "sha256": "1c39333400ab3f0e802cb9f23def8582bd1dcd639c7d3d0433b0edbb7641da63"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/requirements.txt",
+            "sha256": "27a64a9ab0cab4f876e577f1bb74efbfd2d9e482df904cb235c672bd091e176d"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/runtime-texture-profile.json",
+            "sha256": "1d316c3141f219dc9daa7d43438f758ae7d8e11ac5d9f55a93f8971e9ef2e41c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_bracer_editable.py",
+            "sha256": "236c5cfe98c234be792fe5a4c6df0e938f215bea99abac5b3f126a869f958c3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_editable.py",
+            "sha256": "0b6802f4d7f69de3f754f9800a4fdfbe1e63127f1eed37acaa0a8af63d05fc33"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/save_runtime_editable.py",
+            "sha256": "2da76de2af174e13c7f00f91d65411d2cc99c88cbfa13e931395f842d5ccfe2f"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/shoulder_cleanup.py",
+            "sha256": "454d46ad78735eb16a7adbbaa100e89c36d0ae32738088e59c6ae0acd0a34d3c"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/base_basic_pbr.glb",
+            "sha256": "db7e6e911f56ef3b5b4a730bab59f9ccef0ecc085445d8a3235dda11f6365a81"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/original-components.npz",
+            "sha256": "f699eadde815d369ffd95c96edaabf56ac3bf3b68fb6b72e0f42d89cd72e3b07"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/armor/source.glb",
+            "sha256": "35057577316d6daa81f600d921822496069bff40ec547df75924e75eac4d6e9a"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/base_basic_pbr.glb",
+            "sha256": "edbd65b2ee87c9d9c7c4bdecb77f4dedf52ff3cb4dac24614591a69126f02086"
+          },
+          {
+            "sourceId": "art-experiments/paladin-overhaul/censure-armor-helmet/sources/helmet/source.glb",
+            "sha256": "f59b7941fc705608d061161e4c13faca47454df551a1895cfe25cd797430feac"
+          }
+        ]
+      }
+    ]
+  },
+  "nativeAcceptanceReceipt": {
+    "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/parent-native-acceptance-v43.json",
+    "sha256": "230acf1e220fdf1a81ad560e2a0e6d35b08a2fb1d2b6768ed7b6d7e954fb9a05"
+  },
+  "studioManifest": {
+    "sourceId": "gear-consolidation/studio-v8/manifest.json",
+    "sha256": "14fdd792637d90a4d51d91511f6824901dec2ff302a87df685a80d5b71699d57"
+  },
+  "iconManifest": {
+    "sourceId": "gear-consolidation/censure-banner-fidelity/nonweapon-icons-v7/manifest.json",
+    "sha256": "0dd84512af9d08f481a8a2663bea61418beb881b945f5394319950cbbe9412c0"
+  },
+  "studioFreeze": {
+    "sourceId": "gear-consolidation/studio-v8/frozen.json",
+    "sha256": "6867dea3926f0e0370aa6fb74afb94a4ace6c47b4b3576fdd0ea2ac28451e676"
+  },
+  "iconFreeze": {
+    "sourceId": "gear-consolidation/censure-banner-fidelity/nonweapon-icons-v7/frozen.json",
+    "sha256": "30627ca3923efe0e7a65ab15a71d5d573a0f6a841b05de41afc7a9c02496cfc3"
+  },
+  "renderRecipe": {
+    "engine": "Cycles",
+    "samples": 32,
+    "denoise": true,
+    "viewTransform": "Standard",
+    "roughness": 0.72,
+    "metallic": 0,
+    "lights": "Three area lights; 420/230/340 W times family span squared",
+    "framing": "Keep studio-v3 family scale where it contains the new source with 16% margin; otherwise expand only the refreshed portrait to the measured required scale. Camera directions and studio styling remain unchanged.",
+    "coordinates": "Decode strict mesh-local GLB directly; (x,y,z) to (x,-z,y); texture V flips once"
+  },
+  "renderSources": {
+    "generator": {
+      "sha256": "4bc67dd48308e7b00fe270e7f56b82175a1c37641bc706a2590530b9c1f70e66",
+      "sourceId": "gear-consolidation/censure-banner-fidelity/studio-refresh/render_runtime_1k.py"
+    },
+    "renderer": {
+      "sha256": "a4429e2af6a89597edef60fc2cf86da746133a1569fcab9433a5142214afe266",
+      "sourceId": "gear-consolidation/studio-v3/render.py"
+    },
+    "decoder": {
+      "path": "art-experiments/thief-advanced/render.py",
+      "sha256": "922fcc7fb5436a608f84ca655169768fe98c3695792c2044011572352a43eab3"
+    }
+  },
+  "priorStudioManifest": {
+    "sourceId": "gear-consolidation/studio-v3/manifest.json",
+    "sha256": "8e7a1d326ea1094278f9bca8423a9a6ab802b7eb31e6758530be9bcc9952d784"
+  },
+  "changedAssets": {
+    "marketplace/packages/paladin/assets/paladin-censure-helmet.glb": {
+      "sha256": "91c94e0c532722a57e969f928ce43a46ee8a3be8a3688b694820ceee57eb7e40",
+      "previousSha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e"
+    },
+    "marketplace/packages/paladin/assets/paladin-censure-helmet-display.glb": {
+      "sha256": "0bf6487398da1af7146a354d2b62e50262f8183c87cbc68c9ff471d62d151973",
+      "previousSha256": "3b06b607154f2c92ebcee74ff6f2525d21eec55b4c0c3f5a7d49a2f957ba87b4"
+    },
+    "marketplace/packages/paladin/assets/atlas-6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c.png": {
+      "sha256": "6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/paladin-male-censure-armor.glb": {
+      "sha256": "8a6230edd61537256e8ed529f067227b088a99289c69d60e3e5f32df09af81f6",
+      "previousSha256": "9253340ee5faf3fbc1c44137483f9debaeb02bd74ab6ca36a6dac4f808385f5a"
+    },
+    "marketplace/packages/paladin/assets/paladin-female-censure-armor.glb": {
+      "sha256": "078960436cab7144b250853c4de11680f6f1ddee9c3c031cc2361fb71bfc79ef",
+      "previousSha256": "e9a0dff0121fe07f26930c7fc47e98a8d1af9659c24bca2980821111c75689be"
+    },
+    "marketplace/packages/paladin/assets/paladin-censure-armor-display.glb": {
+      "sha256": "6c29832b04877ad9677673fc08b499e10fba031a710061b4624f1168ddb0fb71",
+      "previousSha256": "cab54d44d05863be10364aeff8c750b700eb2a2e48e8722c04a2a00b6369293f"
+    },
+    "marketplace/packages/paladin/assets/atlas-ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257.png": {
+      "sha256": "ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/atlas-633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b.png": {
+      "sha256": "633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png": {
+      "sha256": "6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/atlas-7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a.png": {
+      "sha256": "7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/paladin-censure-boots-display.glb": {
+      "sha256": "66d4ad344fb2d262ec67a8a312d3ee1738a9463c873ce29c0c1ce166d49f2882",
+      "previousSha256": "8954fba01d32fbd31e0424fe78b7428467fce505b4c9c199ae813d8b6fa7980e"
+    },
+    "marketplace/packages/paladin/assets/paladin-censure-boots.glb": {
+      "sha256": "be7a29eb3b99246c2131b8a3ce6ecbe2921924d131ec240e1918751b6d7fd33f",
+      "previousSha256": "c708feb8b3df88c9351dd0f71f9b5e59b9c4ee790dddd87e26364f7582adf74e"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-display.glb": {
+      "sha256": "9105651a01ff6270b4488bbaf55d49cc43e85b242f477f7f8e5116a477ade256",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-1-display.glb": {
+      "sha256": "2d344239414288066c895e9285a18d8c4272f60587e584ec012df96c6b63c40e",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-1.glb": {
+      "sha256": "50e113ed89cd7706159328b9e01a9a030bf90b2406e6def6f5699646fb49ba42",
+      "previousSha256": "35dd63b8b91025eb1bb8f8da30603b020aec440b93f64af5fb520f128084b5fe"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-2-display.glb": {
+      "sha256": "4e426165581fdabac8252b375a4b07661f6d1fe803d94b570d66548e9359375a",
+      "previousSha256": null
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-1h-censure-fragment-2.glb": {
+      "sha256": "9f71498360cba45873a48e2b6a26814a839bc1e349f9f9e32b4d86ae5bea9223",
+      "previousSha256": "a215af844d2837ac34d0e177dce1c15692b473a2b4dc35d4004b91d9b3adee93"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-1h-censure.glb": {
+      "sha256": "fa94116627742c0632aef4fe100c6addbb5e7011e045d794f70ff4e8b9360e4c",
+      "previousSha256": "52bb9d5c79112ff3422e972316cf3b5a5454f7723a5f7db81e4d4e044c64e5e9"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-display.glb": {
+      "sha256": "be52866d6b8a5a9e1460a6d03471b199f9a3b9af4996ef8ba439812f71a9efbf",
+      "previousSha256": "1294ae245fc861813ca87469a3c67b1c5b8eac48ed6725062d0791ae65bc4515"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-1-display.glb": {
+      "sha256": "75f624954fae144efb470ab2ac4b23f3907fbd3a5cf55186fdbbd2028d58d240",
+      "previousSha256": "98889d91af275b1648cdfbc19ded1db12d4772baa181945aa414d79158778a9a"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-1.glb": {
+      "sha256": "973fb8d9ecab08abdc52023f6894b3c5294222c4cdca0e3394550cbffff57ce1",
+      "previousSha256": "56c44bdd869eccbc11fcf3d86ceeaf0a7a5ea569722c02485f12d93d2a055990"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-2-display.glb": {
+      "sha256": "c5d37a1b38ec1d0b48e5feb4dde443ae831b466408bffb4e140a4fcc4b407372",
+      "previousSha256": "e91955404cf7bbc564106e41d11dbf023a469ec9a187f002a4ead5e09bc1f55c"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-2.glb": {
+      "sha256": "d9a6c198cc096c246e07793f1f511f628b7c7725e563a301ad7e53a447db713b",
+      "previousSha256": "ec39a61d5513f2954c8c4c219e3f034b8a8e656127f71b1ea4044a762f0f5bda"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-3-display.glb": {
+      "sha256": "1c1293e167944af53092391ed08c345d823619cb86a57778bfdf2c8415e32baf",
+      "previousSha256": "7d2acba9401508ecf0a5e71274678696c63eb8e4f5dcc4dd655b2ea801910eb7"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure-fragment-3.glb": {
+      "sha256": "bb29a12e6383f9c0397109c94fd8595c6c7390c7f38acd5f86d77dc63446e10e",
+      "previousSha256": "387a66a80cae82b8e669f90261a4a020a1038974b4cd30ad4cd8a4c330a34902"
+    },
+    "marketplace/packages/paladin/assets/paladin-hammer-2h-censure.glb": {
+      "sha256": "2ac13b8263a57909463770793333b063fb9468a9cf2d78a27ecbcbe60bf02320",
+      "previousSha256": "cee503bc8693efd23faa07c3bbe445f8a0b787c3a12492d75d5fa1d307d57774"
+    },
+    "marketplace/packages/paladin/assets/paladin-shield-censure-display.glb": {
+      "sha256": "6f57968cefcbcd40a58bf689460c381d6c4fc812e6d3d540e553f7f743d8b75b",
+      "previousSha256": "ae76b9b1ca0183ad1fd55047a24d82d4b7fe5c50ea853c65d834e17e7a502572"
+    },
+    "marketplace/packages/paladin/assets/paladin-shield-censure.glb": {
+      "sha256": "73734257caea9b3b92e328612fb5ea919ba275b56d19e9f6bef525e50ddc6234",
+      "previousSha256": "b5f8ec5f1ab477a1776b99f395cfb27f812a2f878bff4831c2a6f499671f027f"
+    },
+    "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet.glb": {
+      "sha256": "0f1c364ce86b726e960b8c2d253b430928b6d9790bbdbead7e568fdb8d7bca95",
+      "previousSha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415"
+    },
+    "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-display.glb": {
+      "sha256": "ca2bf74937dbc540185d1ab0851f8ea699f6359ef6fd70c4c5972f24f73cf5fa",
+      "previousSha256": "1b3c925c9b4116e560fded89a49746f2ed9a4aee06fefceb511521d9a66d2bfc"
+    }
+  },
+  "changedIcons": {
+    "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-icon.png": {
+      "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237",
+      "previousSha256": "b3b3208183c03b2cf7db9ebb31751c3b9c2e6d1185df009b2e008741d34d31e7"
+    },
+    "marketplace/packages/paladin/assets/paladin-shield-censure-icon.png": {
+      "sha256": "ec9c762957bd68af3ef2a69edc5b2200dae45a53c0e3ef3cc0eb0d618c519024",
+      "previousSha256": "93ffde5fe633e43059714ff48c6658b5abfc78d5ebcf2f4a6f6bdcdac7d4af9b"
+    },
+    "marketplace/packages/paladin/assets/paladin-censure-armor-icon.png": {
+      "sha256": "2b813fef4a2684c1bd9bcd28d5424dfe20255bef4a94dc2337f5514476c41f74",
+      "previousSha256": "b41c3af8c9a97365a145cc61c4b75f3316ddd465b336ef0784dafa923d8d8c5b"
+    },
+    "marketplace/packages/paladin/assets/paladin-censure-boots-icon.png": {
+      "sha256": "3bba0433b767c1d9d0ab152189f00868be8e915f05b3091064ecae6bdc3fdd76",
+      "previousSha256": "d25297f22be1fac4bc87e87844c7d0428670285f737cb285d3cc43c9c2b00bcb"
+    },
+    "marketplace/packages/paladin/assets/paladin-censure-helmet-icon.png": {
+      "sha256": "c5ddb28adbd96f45930e38ed7b6b09fbdbf631a92a81dc5577ef877c4e935ba7",
+      "previousSha256": "df25f0611dffbae014f17e8a533d65de72718e3a6a1c9ddce57bd95d154b6d02"
+    }
+  },
+  "contentSha256": "fbdcef2d00893f2a3c99eee1c65871a9bb86e38ae36a5ebf5486f7118e31cf65",
+  "retainedHistoricalTextures": [
+    "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png",
+    "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png",
+    "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png",
+    "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png",
+    "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png",
+    "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+  ],
+  "oathkeeperSuccessor": {
+    "sourceId": "gear-consolidation/censure-banner-fidelity/integration-preparation/oathkeeper-successor.json",
+    "sha256": "d0f90f02631837b9264b5ae52a1fa7fb0deb765a3706d21e42c66afd039968cc",
+    "details": {
+      "schema": "ftkmf.oathkeeper-visual-successor.v1",
+      "itemId": "paladin_helmet_oathkeeper",
+      "canonicalWrites": false,
+      "files": [
+        {
+          "source": "scratch/gear-consolidation/paladin-helmet-silhouette-v6/oathkeeper/paladin-oathkeeper-helmet.glb",
+          "sha256": "0f1c364ce86b726e960b8c2d253b430928b6d9790bbdbead7e568fdb8d7bca95",
+          "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet.glb",
+          "previousSha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415"
+        },
+        {
+          "source": "scratch/gear-consolidation/paladin-helmet-silhouette-v6/oathkeeper/paladin-oathkeeper-helmet-display.glb",
+          "sha256": "ca2bf74937dbc540185d1ab0851f8ea699f6359ef6fd70c4c5972f24f73cf5fa",
+          "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-display.glb",
+          "previousSha256": "1b3c925c9b4116e560fded89a49746f2ed9a4aee06fefceb511521d9a66d2bfc"
+        },
+        {
+          "source": "scratch/gear-consolidation/thief-coat-fit/nonweapon-icons-v3/icons/paladin/paladin-oathkeeper-helmet-icon.png",
+          "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237",
+          "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-icon.png",
+          "previousSha256": "b3b3208183c03b2cf7db9ebb31751c3b9c2e6d1185df009b2e008741d34d31e7"
+        }
+      ],
+      "contentEntry": {
+        "kind": "item",
+        "id": "paladin_helmet_oathkeeper",
+        "template": "helmetHeavy1",
+        "displayName": "Oathkeeper Helm",
+        "fields": {
+          "minlevel": 1,
+          "maxlevel": 2,
+          "goldvalue": 70,
+          "rarity": "common",
+          "dropable": true,
+          "townmarket": true,
+          "m_NightMarket": true,
+          "m_DungeonMerchant": true,
+          "_shopStock": 1,
+          "m_CollectLoreItemUnlock": "",
+          "dlc": "None"
+        },
+        "modifiers": {
+          "armor": 2,
+          "resistance": 1
+        },
+        "itemModels": [
+          {
+            "path": ".",
+            "model": "assets/paladin-oathkeeper-helmet.glb",
+            "texture": "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
+          }
+        ],
+        "icon": "assets/paladin-oathkeeper-helmet-icon.png",
+        "displayModels": [
+          {
+            "path": "helmKettle",
+            "model": "assets/paladin-oathkeeper-helmet-display.glb",
+            "texture": "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
+          }
+        ],
+        "helmetHairVisibility": {
+          "top": false,
+          "bottom": false
+        }
+      },
+      "texture": {
+        "path": "marketplace/packages/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png",
+        "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e"
+      },
+      "sourceManifest": {
+        "sourceId": "gear-consolidation/paladin-helmet-silhouette-v6/pilot-manifest.json",
+        "sha256": "a60cdbf4e55330ef0f62f70e80a9c474cb3364ba2ccb5f217dce560996a729c3"
+      },
+      "iconManifest": {
+        "sourceId": "gear-consolidation/thief-coat-fit/nonweapon-icons-v3/manifest.json",
+        "sha256": "64ecdf97e629813c5b8d2e5256b421ec81fe41ada3b77e62f350033a9e4ac08f"
+      },
+      "publicRecipe": {
+        "profile": "original-shape-v6",
+        "sources": [
+          {
+            "path": "art-experiments/paladin-overhaul/helmet_clearance.py",
+            "sha256": "ac3344d3fe9bb3c603fa84082ae415ad25650f9856716c2d0f221ca18c75e0c4"
+          },
+          {
+            "path": "art-experiments/paladin-overhaul/helmet-shape-profiles.json",
+            "sha256": "9975be49596032ec145ddc95b26b0ff1c83409f113a649b61572532a2cafff35"
+          }
+        ]
+      },
+      "original": {
+        "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
+        "sourceId": "gear-consolidation/paladin-helmet-silhouette-v6/oathkeeper/original.glb"
+      },
+      "fit": {
+        "scale": 1.16,
+        "pivot": [
+          0.0,
+          -0.3857530653476715,
+          0.009422428905963898
+        ],
+        "postScaleTranslation": [
+          0.0,
+          0.025,
+          -0.17
+        ],
+        "bakedTranslation": [
+          0.0,
+          0.08672049045562741,
+          -0.17150758862495424
+        ]
+      },
+      "nativeEvidence": [
+        {
+          "receipt": {
+            "sha256": "0564daccfb55fbd7b4ba43b66e76e5334e4a372846611ac10d062f2bc63c310c",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/native-v22-firstparty/review.json"
+          },
+          "selected": [
+            {
+              "wearer": "busker:Male",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "blacksmith:Female",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "thief:Male",
+              "verdict": "pass-bounded-visible-fit"
+            }
+          ]
+        },
+        {
+          "receipt": {
+            "sha256": "ed2151bbaff282d6ab849f0933f39fbad0771b7f63d1f29e933f84d14ebb44f1",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/native-v23-hunter-scholar-herbalist/review.json"
+          },
+          "selected": [
+            {
+              "wearer": "hunter:Male",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "scholar:Male",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "herbalist:Female",
+              "verdict": "pass-bounded-visible-fit"
+            }
+          ]
+        },
+        {
+          "receipt": {
+            "sha256": "48410573dfe31c62a688ece9613cb2e6cdfa8fc891bf670f421e84099cca2f33",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/native-v23-woodcutter-monk-hobo/review.json"
+          },
+          "selected": [
+            {
+              "wearer": "woodcutter:Male",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "monk:Male",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "hobo:Male",
+              "verdict": "pass-bounded-visible-fit"
+            }
+          ]
+        },
+        {
+          "receipt": {
+            "sha256": "519c3ca1a4ab640487049980c86aef283536590691b7a2ba0bb5938df28a7864",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/native-v23-paladin-trapper-minstrel/review.json"
+          },
+          "selected": [
+            {
+              "wearer": "paladin:Female",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "trapper:Female",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "minstrel:Female",
+              "verdict": "pass-bounded-visible-fit"
+            }
+          ]
+        },
+        {
+          "receipt": {
+            "sha256": "a584bec31e4e6a6a00d2e6ca2dfd6b8f40e6c7ef3d778a70ce60620e4290ffc1",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/native-v23-gladiator-treasurehunter-astronomer/review.json"
+          },
+          "selected": [
+            {
+              "wearer": "gladiator:Female",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "treasureHunter:Male",
+              "verdict": "pass-bounded-visible-fit"
+            },
+            {
+              "wearer": "astronomer:Male",
+              "verdict": "pass-bounded-visible-fit"
+            }
+          ]
+        },
+        {
+          "receipt": {
+            "sha256": "75854e3295375445dafd65247239aefeb43c0769619d421f23bec9d87053ea7a",
+            "sourceId": "gear-consolidation/helmet-silhouette-review/native-displays-final/review.json"
+          },
+          "selected": [
+            {
+              "nativeDisplay": true,
+              "verdict": "pass-native-display-shape-and-framing"
+            }
+          ]
+        }
+      ],
+      "wearers": [
+        "astronomer:Male",
+        "blacksmith:Female",
+        "busker:Male",
+        "gladiator:Female",
+        "herbalist:Female",
+        "hobo:Male",
+        "hunter:Male",
+        "minstrel:Female",
+        "monk:Male",
+        "paladin:Female",
+        "scholar:Male",
+        "thief:Male",
+        "trapper:Female",
+        "treasureHunter:Male",
+        "woodcutter:Male"
+      ],
+      "portrait": {
+        "id": "paladin_helmet_oathkeeper",
+        "displayName": "Oathkeeper Helm",
+        "package": "paladin",
+        "family": "paladin_helmet",
+        "sources": [
+          {
+            "sha256": "ca2bf74937dbc540185d1ab0851f8ea699f6359ef6fd70c4c5972f24f73cf5fa",
+            "sourceId": "blacksmith-gear-game/gear-fit-helmet-pilot-v23/paladin/assets/paladin-oathkeeper-helmet-display.glb"
+          },
+          {
+            "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e",
+            "sourceId": "blacksmith-gear-game/gear-fit-helmet-pilot-v23/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
+          }
+        ],
+        "assignments": [
+          {
+            "rendererPath": "helmKettle",
+            "displayRootTransform": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          }
+        ],
+        "content": {
+          "sha256": "bdbacaf0c84abc267260851d52421bca769e82c52894f4e8eeac1fa69a903306",
+          "sourceId": "blacksmith-gear-game/gear-fit-helmet-pilot-v23/paladin/content.json"
+        },
+        "image": "paladin/paladin_helmet_oathkeeper.png",
+        "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237",
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            -0.020177797707064397,
+            0.14102516482656874,
+            -0.23763347800841883
+          ],
+          "orthographicScale": 0.7593437384756219
+        },
+        "renderProvenance": {
+          "mode": "studio-v4-two-helmet-refresh",
+          "generator": {
+            "sha256": "8c29c46168320f96f3cf1839ca5075c9936a2346cbb63c011db7681f79ac8709",
+            "sourceId": "gear-consolidation/studio-v4/render.py"
+          },
+          "frozenRenderer": {
+            "sha256": "a4429e2af6a89597edef60fc2cf86da746133a1569fcab9433a5142214afe266",
+            "sourceId": "gear-consolidation/studio-v3/render.py"
+          },
+          "previousManifest": {
+            "sha256": "8e7a1d326ea1094278f9bca8423a9a6ab802b7eb31e6758530be9bcc9952d784",
+            "sourceId": "gear-consolidation/studio-v3/manifest.json"
+          },
+          "selectedModelManifest": {
+            "sha256": "a60cdbf4e55330ef0f62f70e80a9c474cb3364ba2ccb5f217dce560996a729c3",
+            "sourceId": "gear-consolidation/paladin-helmet-silhouette-v6/pilot-manifest.json"
+          },
+          "sourceShapeProfile": {
+            "path": "art-experiments/paladin-overhaul/helmet-shape-profiles.json",
+            "sha256": "9975be49596032ec145ddc95b26b0ff1c83409f113a649b61572532a2cafff35"
+          }
+        }
+      },
+      "iconRow": {
+        "itemId": "paladin_helmet_oathkeeper",
+        "package": "paladin",
+        "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-icon.png",
+        "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237",
+        "bytes": 217608,
+        "priorSha256": "b3b3208183c03b2cf7db9ebb31751c3b9c2e6d1185df009b2e008741d34d31e7",
+        "renderSource": {
+          "sourceId": "gear-consolidation/studio-v4/paladin/paladin_helmet_oathkeeper.png",
+          "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237"
+        },
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png",
+            "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-display.glb",
+            "sha256": "ca2bf74937dbc540185d1ab0851f8ea699f6359ef6fd70c4c5972f24f73cf5fa"
+          }
+        ],
+        "camera": {
+          "direction": [
+            0.3,
+            -1,
+            0.12
+          ],
+          "target": [
+            -0.020177797707064397,
+            0.14102516482656874,
+            -0.23763347800841883
+          ],
+          "orthographicScale": 0.7593437384756219
+        },
+        "native64Bounds": [
+          10,
+          3,
+          54,
+          61
+        ],
+        "native64AlphaThreshold": 16
+      },
+      "limits": "Fifteen native class defaults and one native display; minor ear/rim contacts accepted. No motion or lifecycle claim. Explicit combined adoption approval still required."
+    }
+  }
+}

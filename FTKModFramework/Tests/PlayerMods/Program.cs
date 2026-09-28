@@ -33,6 +33,17 @@ internal static class Program
         ModManifest legacy = JsonContentParser.Deserialize<ModManifest>("{\"modGuid\":\"thirdparty.legacy\",\"name\":\"Legacy mod\",\"version\":\"1.0.0\"}");
         Assert(legacy.Validate(new ValidationReport()) && !legacy.IsDevelopmentOnly && legacy.Description == null,
             "legacy identity remains valid but framework compatibility is unverified");
+        ContentFile affinityFile = JsonContentParser.Deserialize<ContentFile>("{\"entries\":[{\"kind\":\"item\",\"id\":\"forge_coat\",\"classAffinity\":{\"classId\":\"blacksmith\",\"modifiers\":{\"vitality\":0.01}}}]}");
+        Assert((string)affinityFile.Entries[0].ClassAffinity["classId"] == "blacksmith" &&
+            (float)affinityFile.Entries[0].ClassAffinity["modifiers"]["vitality"] == 0.01f,
+            "typed class-affinity JSON parses known fields");
+        ContentFile tauntFile = JsonContentParser.Deserialize<ContentFile>("{\"entries\":[{\"kind\":\"item\",\"id\":\"forge_shield\",\"modifiers\":{\"armor\":1,\"taunt\":true}}]}");
+        Assert(tauntFile.Entries[0].Modifiers.Armor == 1 && tauntFile.Entries[0].Modifiers.Taunt,
+            "item modifier JSON parses Taunt alongside ordinary defense");
+        ContentFile invalidAffinityFile = JsonContentParser.Deserialize<ContentFile>("{\"entries\":[{\"kind\":\"item\",\"id\":\"forge_coat\",\"classAffinity\":{\"classId\":\"blacksmith\",\"mystery\":true,\"modifiers\":{\"vitality\":0.01,\"vitalty\":0.02}}}]}");
+        Assert(invalidAffinityFile.Entries[0].ClassAffinity["mystery"] != null &&
+            invalidAffinityFile.Entries[0].ClassAffinity["modifiers"]["vitalty"] != null,
+            "unknown affinity and modifier fields remain visible for fail-closed validation");
         string fixtures = args.Length > 0 ? Path.GetFullPath(args[0]) : Path.GetFullPath("FTKModFramework/SampleData");
         string root = Path.Combine(Path.GetTempPath(), "ftkmf-player-mods-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);

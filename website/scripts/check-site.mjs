@@ -1,8 +1,8 @@
-import { chromium } from '@playwright/test';
+import { chromium, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const root=process.env.SITE_URL || 'http://127.0.0.1:4321/ftk-mod-framework/';
-const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/blacksmith/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/'];
+const paths=['','installation/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/blacksmith/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/','previews/paladin/','previews/thief/'];
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage();
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -61,6 +61,26 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
   await page.getByLabel('Slot',{exact:true}).selectOption(mod==='paladin'?'shield':'bow');assert.equal(await page.locator('.forge-card:visible').count(),1);
  }
 }
+for(const size of [{width:1440,height:1000},{width:390,height:844}]){
+ await page.setViewportSize(size);
+ for(const [mod,count] of [['paladin',51],['thief',45]]){
+  await page.goto(root+'previews/'+mod+'/');
+  assert.match(await page.locator('.armory-intro').innerText(),/Coming Soon/);
+  assert.equal(await page.locator('.forge-card').count(),count);
+  assert.equal(await page.locator('.forge-card details,.forge-card summary').count(),0);
+  await page.getByRole('searchbox',{name:'Search equipment'}).fill(mod==='paladin'?'Kingsfall':'Rooftop Flintlock');
+  const result=page.locator('.forge-card:visible');
+  assert.equal(await result.count(),1);
+  assert(await result.evaluate(c=>c.getBoundingClientRect().width<=310.5));
+  if(mod==='thief'){
+   assert.match(await result.innerText(),/Instant Reload/);
+   assert.match(await result.innerText(),/Fire: 100% weapon damage/);
+   assert.equal(await page.getByLabel('Slot',{exact:true}).locator('option[value="bow"]').innerText(),'Pistol');
+  }
+  await page.getByRole('searchbox',{name:'Search equipment'}).fill('');
+  await page.screenshot({path:`/tmp/ftk-preview-${mod}-${size.width}.png`,fullPage:false});
+ }
+}
 for(const url of [...resources,...links]){
  if(!url.startsWith(root))continue;
  const u=new URL(url);const response=await page.request.get(u.href);assert.equal(response.status(),200,`Broken local URL ${url}`);
@@ -70,7 +90,7 @@ await page.setViewportSize({width:1440,height:1000});await page.goto(root);
 await page.getByRole('button',{name:'Search',exact:false}).first().click();
 await page.getByPlaceholder('Search',{exact:true}).fill('Smite');
 await page.locator('.pagefind-ui__result').first().waitFor();
-assert.match(await page.locator('.pagefind-ui__results').innerText(),/Paladin/);
+await expect(page.locator('.pagefind-ui__results')).toContainText('Paladin');
 await page.keyboard.press('Escape');
 await page.setViewportSize({width:390,height:844});await page.goto(root+'mods/paladin/');
 await page.getByRole('button',{name:'Menu',exact:true}).click();

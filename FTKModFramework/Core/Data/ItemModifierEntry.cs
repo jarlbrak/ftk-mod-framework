@@ -17,6 +17,7 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("talent")] public float Talent;
         [JsonProperty("focusCapacity")] public int FocusCapacity;
         [JsonProperty("reflect")] public int Reflect;
+        [JsonProperty("taunt")] public bool Taunt;
 #pragma warning restore CS0649
 
         internal void Validate()
@@ -38,6 +39,8 @@ namespace FTKModFramework.Core.Data
             modifier.m_ModTalent = Talent;
             modifier.m_ExtraFocus = FocusCapacity;
             modifier.m_ReflectDamage = Reflect;
+            if (modifier.m_CharacterSkills == null) modifier.m_CharacterSkills = new CharacterSkills();
+            modifier.m_CharacterSkills.m_Taunt = Taunt;
         }
 
         private static bool ValidStat(float value)

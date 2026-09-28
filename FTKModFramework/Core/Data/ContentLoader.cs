@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using GridEditor;
 using FTKModFramework.Core;
+using Newtonsoft.Json.Linq;
 
 namespace FTKModFramework.Core.Data
 {
@@ -500,8 +502,9 @@ namespace FTKModFramework.Core.Data
                 e.ReplaceProficiencies || e.RandomDebuffOutcomes != null || e.ResistanceDamageBonus != null ||
                 e.Flavor != null || e.Description != null || e.Behavior != null || e.BehaviorCategory != null ||
                 e.Guardian || e.Opportunist || e.PrecisionWeapon != null || e.PrecisionAction != null ||
+                e.ClassAffinity != null || e.BlacksmithGear != null ||
                 e.ThiefArtifact != null || e.OverworldAilmentImmunity != null || e.GuardianBonuses != null ||
-                e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
+                e.HelmetHairVisibility != null || e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
                 e.OffHandModels != null || e.DisplayModels != null || e.PlayerModels != null || e.RaceBindings != null;
         }
 
@@ -543,6 +546,7 @@ namespace FTKModFramework.Core.Data
                         {
                             ModelRendererEntry entry = binding.Body[i];
                             if (entry == null) throw new ArgumentException("null race body assignment");
+                            if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                             body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                         }
                         PlayerApparelMesh[] apparel = new PlayerApparelMesh[binding.Apparel == null ? 0 : binding.Apparel.Length];
@@ -550,6 +554,7 @@ namespace FTKModFramework.Core.Data
                         {
                             ModelRendererEntry entry = binding.Apparel[i];
                             if (entry == null) throw new ArgumentException("null race apparel assignment");
+                            if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                             apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                         }
                         if (!Content.SetRaceClassBodyMeshesFromGlb((int)c.Row, row, skinset, body, apparel))
@@ -562,7 +567,7 @@ namespace FTKModFramework.Core.Data
                     throw new ArgumentException("opportunist requires a registered custom class");
                 if (!string.IsNullOrEmpty(c.Entry.PrecisionWeapon) &&
                     (c.Kind != "weapon" || !Content.SetPrecisionWeapon((FTK_weaponStats2)c.Row, c.Entry.PrecisionWeapon)))
-                    throw new ArgumentException("precisionWeapon requires a registered physical paired weapon or bow");
+                    throw new ArgumentException("precisionWeapon requires a registered physical paired weapon, bow, or pistol");
                 if (!string.IsNullOrEmpty(c.Entry.PrecisionAction) &&
                     (c.Kind != "proficiency" || !Content.SetPrecisionAction((FTK_proficiencyTable)c.Row, c.Entry.PrecisionAction)))
                     throw new ArgumentException("precisionAction requires a registered direct damage proficiency");
@@ -630,7 +635,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry r = a.Renderers[i];
-                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model, verifiedFiles), Asset(c, r.Texture, verifiedFiles));
+                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model, verifiedFiles), Asset(c, r.Texture, verifiedFiles), ApparelSkinType(r.NativeSkinType));
                     }
                     if (!Content.SetItemApparelMeshesFromGlb((FTK_items)c.Row, female, male, meshes)) throw new ArgumentException("item apparel registration rejected");
                 }
@@ -644,6 +649,43 @@ namespace FTKModFramework.Core.Data
                         m.Apply(modifier);
                     }) == null) throw new ArgumentException("item modifier registration rejected");
                 }
+                if (c.Entry.BlacksmithGear != null)
+                {
+                    if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("blacksmithGear requires equipment");
+                    JObject gear = c.Entry.BlacksmithGear;
+                    ValidateAffinityFields(gear, "blacksmithGear", new[] { "setHammerArmor", "overhandArmorPenalty", "temperArmor" });
+                    BlacksmithEquipmentBonuses bonuses = new BlacksmithEquipmentBonuses(
+                        BlacksmithGearInt(gear, "setHammerArmor"), BlacksmithGearInt(gear, "overhandArmorPenalty"),
+                        BlacksmithGearInt(gear, "temperArmor"));
+                    if (!Content.SetBlacksmithEquipment(c.ModGuid, (FTK_itembase)c.Row, bonuses))
+                        throw new ArgumentException("blacksmithGear registration rejected");
+                }
+                if (c.Entry.ClassAffinity != null)
+                {
+                    if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("classAffinity requires equipment");
+                    JObject a = c.Entry.ClassAffinity;
+                    ValidateAffinityFields(a, "classAffinity", new[] { "classId", "modifiers" });
+                    string affinityClassId = AffinityString(a["classId"], "classId");
+                    JObject values = a["modifiers"] as JObject;
+                    if (values == null) throw new ArgumentException("classAffinity requires a modifiers object");
+                    ValidateAffinityFields(values, "classAffinity modifiers",
+                        new[] { "armor", "resistance", "vitality", "speed", "reflect" });
+                    FTK_playerGameStart.ID classId;
+                    if (!TryParseEnum(affinityClassId, out classId)) throw new ArgumentException("classAffinity requires a native class id");
+                    FTK_playerGameStart classRow = Content.Db<FTK_playerGameStartDB>().GetEntry(classId);
+                    if (classRow == null) throw new ArgumentException("classAffinity target class does not resolve");
+                    ItemClassAffinityBonuses bonuses = new ItemClassAffinityBonuses(AffinityInt(values, "armor"),
+                        AffinityInt(values, "resistance"), AffinityFloat(values, "vitality"),
+                        AffinityFloat(values, "speed"), AffinityInt(values, "reflect"));
+                    if (!Content.SetItemClassAffinity(c.ModGuid, (FTK_itembase)c.Row, classRow, bonuses))
+                        throw new ArgumentException("classAffinity registration rejected");
+                }
+                if (c.Entry.HelmetHairVisibility != null)
+                {
+                    HelmetHairVisibilityEntry hair = c.Entry.HelmetHairVisibility;
+                    if (c.Kind != "item" || !Content.SetHelmetHairVisibility(c.Row as FTK_items, hair.Top, hair.Bottom))
+                        throw new ArgumentException("helmetHairVisibility requires a registered custom helmet item");
+                }
                 if (c.Entry.ItemModels != null)
                 {
                     if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("itemModels requires equipment");
@@ -651,6 +693,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.ItemModels[i];
+                        if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                         meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                     }
                     if (!Content.SetItemMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("item model registration rejected");
@@ -662,6 +705,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.OffHandModels[i];
+                        if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                         meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                     }
                     if (!Content.SetItemOffHandMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("off-hand item model registration rejected");
@@ -673,6 +717,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.DisplayModels[i];
+                        if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                         meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                     }
                     if (!Content.SetItemDisplayMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("display model registration rejected");
@@ -689,12 +734,14 @@ namespace FTKModFramework.Core.Data
                         for (int i = 0; i < body.Length; i++)
                         {
                             ModelRendererEntry entry = model.Body[i];
+                            if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                             body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                         }
                         PlayerApparelMesh[] apparel = new PlayerApparelMesh[model.Apparel == null ? 0 : model.Apparel.Length];
                         for (int i = 0; i < apparel.Length; i++)
                         {
                             ModelRendererEntry entry = model.Apparel[i];
+                            if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                             apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                         }
                         if (!Content.SetClassBodyMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, body, apparel))
@@ -705,6 +752,7 @@ namespace FTKModFramework.Core.Data
                             for (int i = 0; i < backpack.Length; i++)
                             {
                                 ModelRendererEntry entry = model.Backpack[i];
+                                if (entry.NativeSkinType != null) throw new ArgumentException("nativeSkinType requires item apparelModels");
                                 backpack[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
                             }
                             if (!Content.SetClassBackpackMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, backpack))
@@ -983,6 +1031,63 @@ namespace FTKModFramework.Core.Data
         private static bool IsBlank(string s)
         {
             return s == null || s.Trim().Length == 0;
+        }
+
+        private static void ValidateAffinityFields(JObject fields, string context, string[] allowed)
+        {
+            if (fields == null) throw new ArgumentException(context + " must be an object");
+            foreach (JProperty property in fields.Properties())
+                if (Array.IndexOf(allowed, property.Name) < 0)
+                    throw new ArgumentException(context + " contains unsupported field '" + property.Name + "'");
+        }
+
+        private static string AffinityString(JToken token, string fieldName)
+        {
+            if (token == null || token.Type != JTokenType.String)
+                throw new ArgumentException("classAffinity " + fieldName + " must be a class name");
+            return (string)token;
+        }
+
+        private static FTK_playerGameStart.SkinType? ApparelSkinType(string name)
+        {
+            if (name == null) return null;
+            switch (name)
+            {
+                case "Female": case "Male": case "Undead": case "Cat":
+                case "Demon": case "Fish": case "Goblin":
+                    return (FTK_playerGameStart.SkinType)Enum.Parse(typeof(FTK_playerGameStart.SkinType), name, false);
+                default: throw new ArgumentException("nativeSkinType requires an exact native appearance name");
+            }
+        }
+
+        private static int BlacksmithGearInt(JObject fields, string fieldName)
+        {
+            JToken token = fields[fieldName];
+            if (token == null) return 0;
+            if (token.Type != JTokenType.Integer)
+                throw new ArgumentException("blacksmithGear '" + fieldName + "' must be an integer");
+            try { return Convert.ToInt32(((JValue)token).Value, CultureInfo.InvariantCulture); }
+            catch (Exception error) { throw new ArgumentException("blacksmithGear '" + fieldName + "' is outside range", error); }
+        }
+
+        private static int AffinityInt(JObject fields, string fieldName)
+        {
+            JToken token = fields[fieldName];
+            if (token == null) return 0;
+            if (token.Type != JTokenType.Integer)
+                throw new ArgumentException("classAffinity modifier '" + fieldName + "' must be an integer");
+            try { return Convert.ToInt32(((JValue)token).Value, CultureInfo.InvariantCulture); }
+            catch (Exception e) { throw new ArgumentException("classAffinity modifier '" + fieldName + "' is outside range", e); }
+        }
+
+        private static float AffinityFloat(JObject fields, string fieldName)
+        {
+            JToken token = fields[fieldName];
+            if (token == null) return 0f;
+            if (token.Type != JTokenType.Integer && token.Type != JTokenType.Float)
+                throw new ArgumentException("classAffinity modifier '" + fieldName + "' must be numeric");
+            try { return Convert.ToSingle(((JValue)token).Value, CultureInfo.InvariantCulture); }
+            catch (Exception e) { throw new ArgumentException("classAffinity modifier '" + fieldName + "' is outside range", e); }
         }
 
         /// <summary>A parsed entry tagged with the mod guid + source it came from. The unit of work.</summary>

@@ -25,7 +25,7 @@ public sealed partial class RuntimeModelTest
         if (action != "inspect" && action != "submit") throw new ArgumentException("Use inspect or submit.");
         NativePartyClassPolicy.RequireSelectionOpen(partyStartClaim.Consumed, partyClassUncertain,
             UnityEngine.Time.frameCount, partyClassSubmittedFrame);
-        int target = LeaseObservationPin.ExactId(command, "targetClassId", true);
+        int target = PreviewRaceIndex(command, "targetClassId");
         int ownerId = LeaseObservationPin.ExactId(command, "ownerInstanceId", true);
         uiStartGame menu;
         JObject pins = InspectNativePartyStart(out menu, true);
@@ -36,12 +36,7 @@ public sealed partial class RuntimeModelTest
             || owner.m_Mode.ToString() != "PlayerInfo")
             throw new InvalidOperationException("Exact interactive native PlayerInfo preview owner required.");
         FTK_playerGameStartDB db = FTK_playerGameStartDB.GetDB();
-        Type registry = CatalogAssembly("FTKModFramework").GetType("FTKModFramework.Core.ContentRegistry", true);
-        object[] registration = { key, 0, new[] { typeof(FTK_playerGameStartDB) } };
-        if (string.IsNullOrEmpty(key) || !(bool)registry.GetMethod("TryGetSyntheticId", Statics).Invoke(null, registration)
-            || (int)registration[1] != target || target < 0 || target >= db.GetCount()
-            || db.GetEntryByInt(target).m_ID != key)
-            throw new InvalidOperationException("Exact registered custom class key and ID required.");
+        ExactClassRow(key, target);
         if (db.GetCount() < 1 || db.GetCount() > 512) throw new InvalidOperationException("Class DB exceeds bounded route.");
         bool[] visible = new bool[db.GetCount()];
         var rows = new List<FTK_playerGameStart>();
@@ -63,7 +58,7 @@ public sealed partial class RuntimeModelTest
                 {"defaultSkin", (int)row.m_DefaultSkinType} });
         }
         if (!visible[target] || !db.IsUnlock((FTK_playerGameStart.ID)target, true))
-            throw new InvalidOperationException("Target custom class must be usable, revealed and unlocked.");
+            throw new InvalidOperationException("Target class must be usable, revealed and unlocked.");
         int next = NativePartyClassPolicy.Next(visible, owner.m_ClassID, direction);
         string method = direction == "right" ? "OnClassClick" : "OnClassClickLeft";
         if (owner.m_ClassButtons == null || owner.m_ClassButtons.Length > 8) throw new InvalidOperationException("Native class arrows unavailable.");

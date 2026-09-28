@@ -65,6 +65,9 @@ class WorldInputObservationBoundary(unittest.TestCase):
     def test_exact_fixed_scope_and_hex_property(self):
         self.assertIn('CatalogKeys(command,"id","session","op");', SOURCE)
         self.assertIn('WorldInputHex(cow.m_HexLand)', CODE)
+        self.assertIn('hex.transform.position', CODE)
+        self.assertIn('camera.WorldToScreenPoint(world)', CODE)
+        self.assertIn('Screen.height-screen.y', CODE)
         self.assertNotIn('GetField("m_HexLand"', SOURCE)
         self.assertIn('GetField("m_StartHex",Members).GetValue(movement)', SOURCE)
         self.assertIn('input.GetCurrentController()', CODE)
@@ -87,6 +90,29 @@ class WorldInputObservationBoundary(unittest.TestCase):
         self.assertIn('world-input-state', (ROOT / 'command.py').read_text())
         self.assertIn('WorldInputObservation(command)', (ROOT / 'Plugin.cs').read_text())
         self.assertNotIn('Harmony', CODE)
+
+    def test_movement_path_fields_and_coordinate_origin_are_explicit(self):
+        self.assertIn('"pathState",MovementTraceSnapshot(movement)', SOURCE)
+        self.assertIn('"screenOrigin","top-left"', SOURCE)
+        trace=(ROOT/'CameraFollowDiagnostic.cs').read_text()
+        for field in ('m_ActionPointsCurrent','m_IsUseMouse','m_LockedInput','m_HexListPartial','m_LastAdded'):
+            self.assertIn('.'+field,trace)
+        self.assertIn('Math.Min(path.Count,64)',trace)
+        for call in ('GetButton(', 'GetMouseButton(', 'FindPath(', 'CanTravel(', 'SetFocus('):
+            self.assertNotIn(call,trace)
+
+    def test_camera_follow_reads_existing_instances_and_callback_metadata_only(self):
+        self.assertIn('result["cameraFollow"]=WorldInputRead(WorldInputCameraFollow)', SOURCE)
+        self.assertIn('Resources.FindObjectsOfTypeAll<RtsCamera>()', CODE)
+        self.assertIn('camera.gameObject.scene.IsValid()', CODE)
+        for field in ('_target','_followTarget','_rtsCamera','m_ForceReengageMouse','m_ForceReengageController'):
+            self.assertIn('"'+field+'"', SOURCE)
+        for name in ('Follow','FollowPosition','SetCameraTarget','LateUpdate','UpdateCameraPosition','Render','IsForceReengage'):
+            self.assertNotRegex(CODE, r'\b'+name+r'\s*\(')
+        self.assertNotIn('RtsCamera.Instance', CODE)
+        self.assertIn('GetPersistentMethodName(i)', CODE)
+        self.assertIn('GetPersistentTarget(i)', CODE)
+        self.assertIn('camera.m_RealTimeDeltaTime', CODE)
 
 
 if __name__ == '__main__':

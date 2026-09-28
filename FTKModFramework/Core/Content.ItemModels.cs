@@ -5,6 +5,17 @@ namespace FTKModFramework.Core
 {
     public static partial class Content
     {
+        /// <summary>Override native hair visibility on fresh instances of a registered custom helmet.</summary>
+        public static bool SetHelmetHairVisibility(FTK_items item, bool top, bool bottom)
+        {
+            int id;
+            if (item == null || item.m_ObjectType != FTK_itembase.ObjectType.helmet ||
+                !ContentRegistry.TryGetSyntheticId(item.m_ID, out id, typeof(FTK_itemsDB)) ||
+                !object.ReferenceEquals(item, Db<FTK_itemsDB>().GetEntry((FTK_itembase.ID)id))) return false;
+            ItemModelRegistry.RegisterHelmetHairVisibility(id, top, bottom);
+            return true;
+        }
+
         /// <summary>Bind exact rigid renderers on newly instantiated custom equipment, for every wearer.</summary>
         public static bool SetItemMeshesFromGlb(FTK_itembase item, params ItemRendererMesh[] meshes)
         {

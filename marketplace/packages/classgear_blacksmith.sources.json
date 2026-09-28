@@ -1,0 +1,328 @@
+{
+  "schema": "ftkmf.blacksmith-banner-selection.v1",
+  "accepted": true,
+  "sourceManifests": {
+    "apparel": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/manifest.json",
+      "sha256": "1c4c15abebe28442127a467110d322c604db2a1368daac23aeef42733ab6a924"
+    },
+    "rigid": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/manifest.json",
+      "sha256": "6f1994b7a57141fbda7f2e210f7ab58cd17aea3f20fdc096da106f7baacbd049"
+    }
+  },
+  "entries": {
+    "blacksmith_armor_kilnward": {
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/blacksmith-anvilward-female-armor.glb",
+            "texture": "assets/blacksmith-anvilward-armor-palette.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/blacksmith-anvilward-male-armor.glb",
+            "texture": "assets/blacksmith-anvilward-armor-palette.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/blacksmith-anvilward-armor-display.glb",
+          "texture": "assets/blacksmith-anvilward-armor-palette.png"
+        }
+      ],
+      "icon": "assets/blacksmith-anvilward-armor-icon.png"
+    },
+    "blacksmith_boots_kilnward": {
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/blacksmith-anvilward-female-boots.glb",
+            "texture": "assets/blacksmith-anvilward-boots-palette.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/blacksmith-anvilward-boots-display.glb",
+          "texture": "assets/blacksmith-anvilward-boots-palette.png"
+        }
+      ],
+      "icon": "assets/blacksmith-anvilward-boots-icon.png"
+    },
+    "blacksmith_hammer_1h_kilnward": {
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/blacksmith-hammer-1h-kilnward-display.glb",
+          "texture": "assets/blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/blacksmith-hammer-1h-kilnward-fragment-1-display.glb",
+          "texture": "assets/blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/blacksmith-hammer-1h-kilnward-fragment-2-display.glb",
+          "texture": "assets/blacksmith-hammer-1h-kilnward-diffuse.png"
+        }
+      ],
+      "icon": "assets/blacksmith-hammer-1h-kilnward-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/blacksmith-hammer-1h-kilnward.glb",
+          "texture": "assets/blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/blacksmith-hammer-1h-kilnward-fragment-1.glb",
+          "texture": "assets/blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/blacksmith-hammer-1h-kilnward-fragment-2.glb",
+          "texture": "assets/blacksmith-hammer-1h-kilnward-diffuse.png"
+        }
+      ]
+    },
+    "blacksmith_hammer_2h_kilnward": {
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/blacksmith-hammer-2h-kilnward-display.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/blacksmith-hammer-2h-kilnward-fragment-1-display.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/blacksmith-hammer-2h-kilnward-fragment-2-display.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/blacksmith-hammer-2h-kilnward-fragment-3-display.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        }
+      ],
+      "icon": "assets/blacksmith-hammer-2h-kilnward-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/blacksmith-hammer-2h-kilnward.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/blacksmith-hammer-2h-kilnward-fragment-1.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/blacksmith-hammer-2h-kilnward-fragment-2.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/blacksmith-hammer-2h-kilnward-fragment-3.glb",
+          "texture": "assets/blacksmith-hammer-2h-kilnward-diffuse.png"
+        }
+      ]
+    },
+    "blacksmith_helmet_kilnward": {
+      "displayModels": [
+        {
+          "path": "helmCrown",
+          "model": "assets/blacksmith-helmet-kilnward-display.glb",
+          "texture": "assets/blacksmith-helmet-kilnward-diffuse.png"
+        }
+      ],
+      "icon": "assets/blacksmith-helmet-kilnward-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/blacksmith-helmet-kilnward.glb",
+          "texture": "assets/blacksmith-helmet-kilnward-diffuse.png"
+        }
+      ]
+    },
+    "blacksmith_shield_kilnward": {
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/blacksmith-shield-kilnward-display.glb",
+          "texture": "assets/blacksmith-shield-kilnward-diffuse.png"
+        }
+      ],
+      "icon": "assets/blacksmith-shield-kilnward-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/blacksmith-shield-kilnward.glb",
+          "texture": "assets/blacksmith-shield-kilnward-diffuse.png"
+        }
+      ]
+    }
+  },
+  "assets": {
+    "assets/blacksmith-anvilward-armor-icon.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-armor-kilnward-icon.png",
+      "sha256": "150c786e16977571ec279bf1741d5e8ef5e6c4cf5dfb7e82f1ab3c4a710ec1df"
+    },
+    "assets/blacksmith-anvilward-armor-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-armor-kilnward-female-display.glb",
+      "sha256": "356745ae7a5bc3d75882684c35c40a044f2a5214c4f81e0f1f220c7173c99842"
+    },
+    "assets/blacksmith-anvilward-armor-palette.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-armor-kilnward-diffuse.png",
+      "sha256": "3b12503f00bd548515f55b3aefb314687ffc00f4603d264056a7a4df8a439de7"
+    },
+    "assets/blacksmith-anvilward-female-armor.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-armor-kilnward-female.glb",
+      "sha256": "4cec87eb2b24e64eb75850e9937f8aea0daf7b76cd0f7c5e526e44d0f5490841"
+    },
+    "assets/blacksmith-anvilward-male-armor.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-armor-kilnward-male.glb",
+      "sha256": "27aa69e309c0f12ca69f1919e613b5f1e7d6d48eff1d05b9bfc4d48ecc123901"
+    },
+    "assets/blacksmith-anvilward-boots-icon.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-boots-kilnward-icon.png",
+      "sha256": "2447afbe75b2184c4b37c68a641364783e17a7e435a1dc99aac1248d4757e5e7"
+    },
+    "assets/blacksmith-anvilward-boots-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-boots-kilnward-display.glb",
+      "sha256": "4dd167d5432469ab0c5b7f44964235ce7515e818ad6f2460c6b2fc0f0b80db11"
+    },
+    "assets/blacksmith-anvilward-boots-palette.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-boots-kilnward-diffuse.png",
+      "sha256": "0e06bfa67dd035d276be8c726d501977bf927f44b9ed0b00c48fb8e4c1bcd6d6"
+    },
+    "assets/blacksmith-anvilward-female-boots.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/apparel/fitted-v12/assets/blacksmith-boots-kilnward.glb",
+      "sha256": "29324d2c760858f6367ea9852d7216adc349fe5a49f7d55ccaf64f8dd634c4ec"
+    },
+    "assets/blacksmith-hammer-1h-kilnward-icon.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward-icon.png",
+      "sha256": "5679d3d8657e06e074b320cb7a8a9962ca7f03e64240f18679248f3859fa74ff"
+    },
+    "assets/blacksmith-hammer-1h-kilnward.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward.glb",
+      "sha256": "615ef62bcdb18071d58464fcbc240030c3fc4795a51cd8454bb6ca4b5652185a"
+    },
+    "assets/blacksmith-hammer-1h-kilnward-diffuse.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward-diffuse.png",
+      "sha256": "afd0a29f52b330b24901528451fdb5b2b50a730cd9850cb25fc7afdfda50b779"
+    },
+    "assets/blacksmith-hammer-1h-kilnward-fragment-1.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward-fragment-1.glb",
+      "sha256": "9d17e2a92b8f007f5d3f5b5251d491f1bb2507fdd06594f895f745cfa8352f55"
+    },
+    "assets/blacksmith-hammer-1h-kilnward-fragment-2.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward-fragment-2.glb",
+      "sha256": "74d3d500dcd5ba677c44df00b1f6bc36431820b5cd8eb64f80c27de82a2d38c7"
+    },
+    "assets/blacksmith-hammer-1h-kilnward-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward-display.glb",
+      "sha256": "e174959b40a058cdda31240381de5b34af367dcef9950809ad72379d4dae8e0d"
+    },
+    "assets/blacksmith-hammer-1h-kilnward-fragment-1-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward-fragment-1-display.glb",
+      "sha256": "862875718ccd6f690a09d098079afd4317394791650c65367e5a1f3057b540ca"
+    },
+    "assets/blacksmith-hammer-1h-kilnward-fragment-2-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-1h-kilnward-fragment-2-display.glb",
+      "sha256": "218a1b89381cc010b8baacb81a071abea69d6d9a9823deae68f0b670acbaf809"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-icon.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-icon.png",
+      "sha256": "952a92cd1d751b3f0a4e1f981d8e465fcf6a430b9ca464c8703733f01d5e872a"
+    },
+    "assets/blacksmith-hammer-2h-kilnward.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward.glb",
+      "sha256": "c7d3128705d370121fddd745231e5168c00d97b4eae60a55b4f28d48036c001f"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-diffuse.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-diffuse.png",
+      "sha256": "afd0a29f52b330b24901528451fdb5b2b50a730cd9850cb25fc7afdfda50b779"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-fragment-1.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-fragment-1.glb",
+      "sha256": "58fb5e4347b72af6cb609398c26dd7005d6cc607c78e79816873b1c57016e79f"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-fragment-2.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-fragment-2.glb",
+      "sha256": "25d55360ff8a09b080cab3044141a2e55ca1af32e5c90ac91d706a3acb094af6"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-fragment-3.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-fragment-3.glb",
+      "sha256": "687b2485b332a1acbc775c39873db34e92d9842ffa663ec536bc7f99231dc180"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-display.glb",
+      "sha256": "97af5377602e52c9117f25448aeea39a6e3f7cc3634e161b2e6a4fb6dc9f2fad"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-fragment-1-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-fragment-1-display.glb",
+      "sha256": "cebadc9399dcc531e3e0dc745cbe8beb542e239d277f4011db72442c07dda1cc"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-fragment-2-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-fragment-2-display.glb",
+      "sha256": "e1c83409d00cc2177108e6129eecda895e1b55970d6fa8a19dc48ab3715f65e6"
+    },
+    "assets/blacksmith-hammer-2h-kilnward-fragment-3-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-hammer-2h-kilnward-fragment-3-display.glb",
+      "sha256": "c22bcb6c2016bb0028caff867be87609dd3e6cdb4446c3871fc71beac8acdcc2"
+    },
+    "assets/blacksmith-helmet-kilnward-icon.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-helmet-kilnward-icon.png",
+      "sha256": "4a95729bd217c3556ae1dbdeb330d9f4eccf6fc15146056775991ce9fb9cadbf"
+    },
+    "assets/blacksmith-helmet-kilnward.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-helmet-kilnward.glb",
+      "sha256": "9514363182908f9122d30b05185c4ae784e471561ee4bcb90951a97c7232b38c"
+    },
+    "assets/blacksmith-helmet-kilnward-diffuse.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-helmet-kilnward-diffuse.png",
+      "sha256": "9676d0bf4743da684aec7d081e4c8581227812d185968672756c903c62d25716"
+    },
+    "assets/blacksmith-helmet-kilnward-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-helmet-kilnward-display.glb",
+      "sha256": "c2b34f9ab37d6b2a5e432179fce8efe7644513a33ad3c8e2a1275aed27072432"
+    },
+    "assets/blacksmith-shield-kilnward-icon.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-shield-kilnward-icon.png",
+      "sha256": "6b049a72a778110983e169cae27bbe7183f1e226496b2dc6cb17d088db47ed7e"
+    },
+    "assets/blacksmith-shield-kilnward.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-shield-kilnward.glb",
+      "sha256": "ec2ec3b14d54cbed3b0f831c771eda4b8c6c205f1bed57c13ecdacfe3ff44952"
+    },
+    "assets/blacksmith-shield-kilnward-diffuse.png": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-shield-kilnward-diffuse.png",
+      "sha256": "2ed5deda6a0487a892e2d22caffe1af78a7f664a99b1cb500c8cc3a826df80b3"
+    },
+    "assets/blacksmith-shield-kilnward-display.glb": {
+      "source": "art-experiments/blacksmith-forge-rodin/banner-faithful/rigid/native-fit-v1/assets/blacksmith-shield-kilnward-display.glb",
+      "sha256": "ec2ec3b14d54cbed3b0f831c771eda4b8c6c205f1bed57c13ecdacfe3ff44952"
+    }
+  },
+  "acceptanceScope": "Accepted for the observed native Blacksmith visual fitting scope recorded in visualReview. Not full release, compatibility, or balance acceptance.",
+  "visualReview": "art-experiments/blacksmith-forge-rodin/banner-faithful/native-final-fit-review.json"
+}

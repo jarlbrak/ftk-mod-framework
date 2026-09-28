@@ -195,6 +195,22 @@ For each profile, record these independently:
 | Death | Applicable death pose, no detached parts or incorrect culling |
 | Gameplay | Normal attack resolves, damage occurs, turn order resumes |
 
+Calibrate visual acceptance against comparable vanilla equipment on the same
+appearance before expanding a fit correction. Judge the normal game and inventory
+view first; use close-ups to diagnose an observed defect. Minor intersections
+comparable to vanilla, including small ear or helmet-rim contacts, can be
+documented as limitations. Do not inflate helmet sidewalls or sacrifice the
+original silhouette or add complex geometry merely to eliminate a small
+intersection visible only under enlarged inspection. Floating equipment, major
+body breakthrough, broken shading and unreadable silhouettes remain defects.
+
+For equipped headgear, inspect close-up front, both side and rear views on each
+claimed appearance. Confirm visible seating at the forehead and temples, and
+check the rear silhouette for unintended gaps or exposed skull. Preserve intended
+openings in the design. A repeated three-quarter inventory view cannot establish
+depth fit, even when many skin variants were captured. Record any floating or
+perched appearance as a failed fit gate until corrected and recaptured.
+
 Direct Animator playback can inspect geometry through a native clip, but label
 it as playback. It does not prove attack events or gameplay logic work. Exact
 state paths differ from trigger and clip names: the tested troll controller uses

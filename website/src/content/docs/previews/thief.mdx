@@ -1,0 +1,10 @@
+---
+title: Thief Gear Preview
+description: Coming soon. Preview the Thief equipment update, including pistols, with studio artwork of the candidate models.
+---
+import Equipment from '../../../components/Equipment.astro';
+import preview from '../../../data/thief-preview.json';
+
+<figure><img src={`${import.meta.env.BASE_URL}media/thief-nightblade.webp`} alt="Thief wearing the Nightblade Cowl, Jack and Steps with Nightglass Twins" width="1660" height="948"/><figcaption>Nightblade set · Promotional illustration</figcaption></figure>
+
+<Equipment mod="thief" preview={preview}/>

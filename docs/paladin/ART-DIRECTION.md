@@ -1,7 +1,8 @@
 # Paladin art direction
 
-Status: current equipment direction plus authored accessory objects,
-2026-09-22. Existing geometry has bounded acceptance records in
+Status: Censure banner fidelity reopened, 2026-09-27. The original Censure
+banner governs its visible equipment design; current models are not approved
+merely because they fit. Existing geometry has bounded acceptance records in
 [Art acceptance](ART-ACCEPTANCE.md); the twelve new accessories have original models
 and icons in [their source campaign](../../art-experiments/paladin-accessories/README.md).
 Native display fit and gameplay remain untested. [Equipment](EQUIPMENT.md) owns names, slots and stat values.
@@ -28,12 +29,41 @@ must retain usable grips and recognizable striking faces.
 | Oathkeeper | Short blue field coat, split steel chest plates, small shoulders and partial greaves | Restrained brass seals, compact links and simple fastenings |
 | Highward | Complete framed breastplate, layered shoulders, long blue tabard and plated insteps | Silver architectural shapes and stronger framing, visibly above Oathkeeper |
 | Mercy | Ivory mantle, rounded prayer panels, subdued bronze bindings and ivory gaiters | Rounded lantern and locket forms, blue glass and gentle ivory surfaces |
-| Censure | Dark chest chevrons, compact shoulders, pointed red panels and folded greaves | Angular seals, dark steel and restrained red enamel or wax |
+| Censure | Original banner: tall angular red plume, broad gold-edged pauldrons, dark chest chevrons, long split red tabard and rectangular red greaves | Angular seals, dark steel and restrained red enamel or wax |
 | Verdict | Bright heraldic breastplate, layered hip plates, navy tabard and open coronet | Symmetrical scales and collars, navy, gold and dark stone |
 
 The branches are horizontal endgame choices. Mixed pieces should look like
 equipment from the same order without requiring every color or motif to match.
 Existing armor revisions are not reopened merely to add accessories.
+
+## Censure banner fidelity
+
+The [original promotional illustration](../../website/public/media/paladin.webp)
+is the approved visual reference for the visible Censure set. Its full-resolution
+source is `marketplace/packages/paladin/promo/paladin-censure-banner.png` at
+commit `724b689d`, SHA-256
+`ab1d493c687b3f4ff65895d334ed60cd823880e72fe77c1ee9f78fa2d06ff919`.
+The publication record and website media provenance pin that same source.
+Commit `1e85c7f8` replaced the package's similarly named file with a gameplay
+capture; that replacement is not the governing design reference.
+
+| Piece | Preserve from the original banner |
+| --- | --- |
+| Helm | Tall angular upright burgundy plume, dark faceted shell, gold brow and open face |
+| Plate | Broad angular gold-edged shoulder plates with red gem clusters, broad dark chest chevrons and central gem, long straight split red tabard, dark forearm guards |
+| Sabatons | Substantial rectangular burgundy shin plates and dark angular armored feet |
+| One-handed hammer | Compact black and burgundy rectangular head, gold end bars and central diamond, short practical grip |
+| Shield | Broad angular dark shield, thick gold border, long red central panel and large gold wing/cross motif surrounding the diamond |
+
+The banner does not sufficiently depict the two-handed hammer, necklace or
+trinket to claim exact reconstruction. Coordinate those pieces with the visible
+family without inventing details and calling them banner evidence.
+
+Review actual exported geometry against these features before broad fit testing.
+Improved craftsmanship must preserve the design's major proportions, silhouette,
+palette and motifs. A shared color scheme or successful fit check is insufficient.
+Do not revise the banner to conceal divergent models. Minor native-like ear and
+rim contacts are acceptable; do not introduce shell bulges to remove them.
 
 ## Twelve accessory objects
 

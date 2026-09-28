@@ -46,7 +46,7 @@ namespace GridEditor
     {
         public enum ID { None, Armor, Boots, Unregistered }
         public enum ObjectSlot { armor, boot, other, equip }
-        public enum ObjectType { armor, boots, other }
+        public enum ObjectType { armor, boots, helmet, other }
         public ObjectType m_ObjectType;
         public string m_ID;
         public ObjectSlot m_ObjectSlot;
@@ -63,7 +63,7 @@ namespace GridEditor
         public UnityEngine.Component m_Armor;
         public UnityEngine.GameObject m_Boot;
     }
-    public class FTK_playerGameStart { public string m_ID; public FTK_skinset.ID[] m_Skinsets; }
+    public class FTK_playerGameStart { public enum SkinType { None = -1, Female, Male, Undead, Cat, Demon, Fish, Goblin } public SkinType m_DefaultSkinType; public string m_ID; public FTK_skinset.ID[] m_Skinsets; }
     public class FTK_itemsDB
     {
         public readonly Dictionary<int, FTK_items> Rows = new Dictionary<int, FTK_items>();
@@ -89,13 +89,17 @@ public class PlayerInventory
 public class CharacterOverworld
 {
     public PlayerInventory m_PlayerInventory = new PlayerInventory();
-    public FTK_playerGameStart GetDBEntry() { return null; }
+    public FTK_playerGameStart.SkinType m_SkinType = FTK_playerGameStart.SkinType.None;
+    public FTK_playerGameStart ClassRow;
+    public FTK_playerGameStart GetDBEntry() { return ClassRow; }
     public FTK_skinset GetSkinset() { return null; }
 }
 public class uiQuickPlayerCreate
 {
     public PlayerInventory m_PlayerInventory = new PlayerInventory();
-    public FTK_playerGameStart GetClassDBEntry() { return null; }
+    public FTK_playerGameStart.SkinType m_SkinType = FTK_playerGameStart.SkinType.None;
+    public FTK_playerGameStart ClassRow;
+    public FTK_playerGameStart GetClassDBEntry() { return ClassRow; }
     public FTK_skinset GetSkinset() { return null; }
 }
 public class CharacterEventListener : UnityEngine.Component { public UnityEngine.Transform m_Backpack; public CharacterOverworld m_CharacterOverworld; public uiQuickPlayerCreate m_uiQuickPlayerCreate; }
@@ -151,3 +155,5 @@ namespace FTKModFramework.Core
         internal static bool Apply(string identity, CharacterEventListener avatar, EnemyRendererMesh[] entries, object prepareMaterial = null, bool preserveAuthoredMainPalette = false) { Calls++; Last = entries; return true; }
     }
 }
+
+public class Helmet : UnityEngine.Component { public bool m_IsHairTopOn, m_IsHairBottomOn; }

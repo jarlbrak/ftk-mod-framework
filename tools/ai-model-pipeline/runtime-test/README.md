@@ -582,6 +582,15 @@ A preview still requires the existing single-player guard to succeed.
   the normal single-player command guard so unavailable game logic can be
   reported instead of rejected without context.
 
+- `native-game-definition-select`: `{"action":"inspect"}` reports the live
+  native campaign rows on the active offline New Game configuration. Repeat
+  inspection with a returned `buttonInstanceId` to pin one scene-owned row and
+  its exact persistent `GameDefButton.OnClick` callback, then submit with that
+  inspection token. Submission invokes that one existing callback, which runs
+  the game's own campaign, difficulty, and rule refresh path. The command never
+  writes preferences directly, constructs UI, changes the resume state, or
+  accepts arbitrary method names.
+
 - `native-create-character-input-state` also reports the current native action names, positive key slots and modifier flags without remapping; this binding snapshot remains available outside Party Select.
 - `native-create-character-input-state`: `{}` is a synchronous, read-only
   Party Select focus diagnostic. On the actual native character-create screen,
@@ -804,10 +813,64 @@ from input completion alone.
 `equipment-inventory` is read-only: it reports each real party hero's native
 slot item enum integers/counts, current overworld and dummy CEL identities,
 and measurable resource leases. Default clothing appearance does not prove
-an owned Body item exists. If no Body armor is equipped and no equippable
-armor is owned in Backpack, stop; this harness does not grant items. Obtain
-an item through ordinary loot/shop gameplay, or prepare an explicit custom-class
-starting-armor fixture before a fresh process/run.
+an owned Body item exists. For ordinary model inspections, obtain an item
+through native loot/shop gameplay or prepare a custom-class starting-armor
+fixture before a fresh process/run. A separate Blacksmith-only fixture below
+can stage the unpublished set in the task-owned disposable game copy.
+
+### Disposable Blacksmith gear staging
+
+`blacksmith-gear-grant` and `blacksmith-gear-equip` are test-only operations.
+They run only inside the isolated `scratch/` game copy accepted by
+`RuntimeModelTest`; both require single-player, no active combat, a living
+current-party hero whose registered class ID is exactly `blacksmith`, and exact
+item string IDs from the loaded package. Grant preflights all rows and adds
+missing items to that hero's native Backpack. It accepts up to 32 unique items
+and does not alter any other hero. Existing ownership, including duplicates from
+native loot, is a no-op. Grant alone accepts optional boolean
+`allowNonBlacksmith: true` for a living, locally owned, active native Hunter or
+Scholar in the current party. This opt-in is limited to the approved 32 IDs and
+only stages Backpack ownership for wearability tests. It verifies scalar stats,
+class, serialized skin, outfit, colors, equipment, and all existing inventory
+counts remain unchanged, except for the missing requested Backpack copies.
+Grant preservation compares object keys independent of enumeration order because
+native dictionaries can reuse removed entries. Array order and all value types
+remain exact. Failure returns the added IDs and complete expected/actual
+preservation snapshots plus scalar stats, skin and owner checks; inspect this
+receipt before retrying, since native Add may already have succeeded.
+The complete-set equip fixture remains Blacksmith-only; use native inventory
+actions to equip other classes. This setup does not prove affinity or combat
+ability gating; inspect those separately in game.
+
+Equip accepts a complete same-tier loadout: seven items for one-handed weapon
+plus shield, or six items for a two-handed weapon without shield. It verifies
+exact ownership and native `ObjectType`/`ObjectSlot` compatibility before
+calling `CharacterOverworld.ForceEquip` in slot order. Native swaps move old
+equipment to Backpack. Duplicate copies remain in Backpack, with exactly one
+copy in the expected equipment slot. Already equipped items are not swapped.
+Postconditions preserve aggregate counts of every item, including displaced
+equipment and shields removed by a two-handed weapon. An unexpected native result stops the operation; inspect
+`equipment-inventory` before continuing and do not retry blindly. The response
+records equipment, class, native weapon stats, Vitality, defensive totals when
+available, and current dungeon level/room. Use `player-studio` and scoped
+`inventory` snapshots afterward to inspect visible fit and the actual assigned
+renderer meshes. This fixture does not modify production saves or multiplayer
+state and does not itself establish end-game balance.
+
+`blacksmith-endgame-level-up` prepares a controlled party level in the
+same disposable test copy. Optional integer `targetLevel` uses native zero-based
+levels and defaults to the native maximum. It only advances levels; use a fresh
+isolated run when a current hero exceeds the requested level. It requires exactly three living heroes, including
+one Blacksmith, single-player mode, no combat, and no pending native stat
+updates. It advances XP one native threshold at a time through
+`CharacterStats.UpdateXP`, then invokes the installed `CharacterStats.Update`
+method on Unity's main thread so the game's health, defense, focus, and level
+calculations run. A narrow Harmony guard suppresses only the
+`STAT_CHARACTER_LEVEL` player-stat write while each fixture level is processed;
+the response verifies one suppression per level. The accelerated XP setup is
+not natural campaign progression and is not combat evidence by itself. Use it
+only after the exact disposable gear loadout is equipped, and label any later
+staged enemy encounter as controlled test evidence.
 
 The [test-content plugin](../runtime-test-content/README.md) supports optional
 `startingArmor` without runtime item grants. For the verified common native
@@ -2237,7 +2300,47 @@ respawn and hex state; movement FSM and tracked hero; native input focus and
 Quick Use focus; current controller identity; end-turn availability, modal,
 chat and console gates; and encounter state and retained diorama.
 
+`cameraFollow` records the existing main/world camera and RTS component identities,
+activation, follow target, smoothing target, bounds, cursor-follow and realtime
+delta fields. It also reads the current hero's `FollowHelper` target/cached RTS
+reference and the HUD portrait button's persistent callback identities. It does
+not call a lazy RTS singleton, poll a button, invoke a callback or update a camera.
+Compare snapshots before and after one observed native centering input. A completed
+input sequence alone does not establish that the native centering callback ran.
+
+For a fresh isolated session, optional `FTK_MODEL_TEST_CAMERA_TRACE=1` installs
+passive prefixes on the exact native portrait callback, `FocusOverworldCamera`,
+`FollowHelper.SetCameraTarget`, `RtsCamera.Follow(Transform,bool,bool)`, and
+`RtsCamera.EndFollow`. The same opt-in also observes the exact private native
+`Movement.TrackCheckClickPath(HexLand,bool,bool,bool)` entry/normal return and
+`Movement.TrackingPathFinished(bool)` entry. Existing `world-input-state.cameraFollow.callbackTrace`
+reports per-method total counts and latest prefix arguments/frame, including
+after the log cap. Compare before/after totals to establish whether a callback
+ran; a prefix does not prove its original method completed successfully. Movement
+rows include the native target hex, force/right-click/controller arguments, internal
+AP, committed/partial paths and owner mouse mode. Paths are limited to 64 hex
+identities, with full count and truncation flags; no native geometry is read.
+`world-input-state.movement.pathState` reads the same current fields without
+requiring tracing. No diagnostic polls input, runs pathfinding or invokes a walk.
+An entry without the corresponding normal-return row requires inspecting the
+original exception and diagnostic error counters, not replaying the request.
+The session's `model-test-output/<session>.camera-follow.jsonl` synchronously
+records the first 16 calls of each method independently. Only sampled `EndFollow`
+rows include managed caller stacks. Unexpected off-thread calls record identity
+and counts without Unity object reads. Observation or file errors are counted
+and never change original arguments, return flow or exceptions. Hooks are removed
+on helper destruction or partial installation failure. This diagnostic invokes no
+callbacks, edits no cameras, and does not poll or alter input. It requires a fresh
+process with the exact opt-in flag; no public gameplay behavior is changed.
+
 It reads the native `m_HexLand` property, including its last-hex fallback.
+For a resolved hex it also reports the native world position and, when the
+overworld camera exists, its top-left-origin screen projection and screen size.
+Hex projections explicitly label `screenOrigin: "top-left"`; convert native
+input Y as screen height minus projected Y. `/ui` coordinates already use
+bottom-left origin and must not be flipped.
+These coordinates help select a visible native map destination; they do not
+move a character or select a point of interest.
 Missing objects are null; a section that throws reports `available: false` and
 its error instead of inventing a gate value. The operation does not poll input
 buttons, change focus, send events, advance turns, or write game/save state.
@@ -2300,10 +2403,27 @@ successful completion; instrumentation can change runtime timing. Compare with
 ### Actual native player studio image
 
 `player-studio` renders an existing active avatar synchronously, without creating
-or equipping a character. Supply `source: preview` or `world`, exact
+or equipping a character. Supply `source: preview`, `world`, or `inventory`, exact
 `ownerInstanceId` and `celInstanceId` from the observer, and `view: front`,
-`three-quarter`, `side`, or `back`. World capture requires an owned noncombat hero.
+`three-quarter`, `side`, `other-side`, `rear-quarter`, or `back`. World capture requires an owned noncombat hero.
+Optional `framing: "head"` centers a close-up on the unique live `Head_M` bone;
+omission or `framing: "body"` retains full-avatar framing. The head route rejects
+missing or ambiguous head bones, reads no native geometry, and records the bone
+instance and framing basis. Use front and both side views to review helmet brow
+clearance, crown seating, temple contact and cheek-guard position. A backpack or
+hair can still hide rear contact; record that occlusion rather than inferring fit.
+The original native screenshot remains separate from these studio camera views.
 The isolated-root and single-player helper guards remain mandatory.
+
+For `source: inventory`, open the native inventory for that hero first. The
+request pins the world hero and its source CEL, while the helper resolves the
+existing visible inventory clone through its native offscreen camera. It requires
+a settled streaming paper doll for the exact owner and verifies the clone's
+reciprocal camera and world-owner references. The receipt records the rendered
+clone as `celInstanceId` and the request's world avatar as `sourceCelInstanceId`.
+Static snapshot mode is rejected. This establishes inventory presentation only.
+An avatar with no enabled active renderers is rejected instead of producing a
+blank success image; inventory can hide the world avatar while showing its clone.
 
 Output is `model-test-output/<command-id>.png` at 768 by 1024 pixels, with a
 neutral opaque background. Framing uses live bone transforms, never native
@@ -2442,6 +2562,621 @@ inspection token and button instance ID, then invokes that callback once. The
 helper never calls `SaveAndQuit`, writes save data, edits inventory, or chooses
 an action by text or screen coordinates. Observe process exit and a fresh native
 Resume separately before claiming save persistence.
+
 # Thief state inspection
 
 The isolated runtime helper accepts `thief-state` with an exact active `heroInstanceId`. It returns the equipped weapon ID, Thief identity, Prepared and Evasion state, Slip Away availability, and pending artifact receipt count. The operation only reads private framework state and is intended for single-player native validation; it provides no multiplayer delivery proof. Use the ordinary native combat commands to produce state changes.
+
+
+## Native companion gear setup for release trials
+
+`party-native-gear-stage` takes `action` (`inspect` or `stage`), exact
+`heroInstanceId`, expected native `classKey` (`hunter`, `scholar`, or `blacksmith`),
+and six exact native `items` string IDs (armor, boots, helmet, necklace, trinket,
+weapon), optionally a seventh shield with a one-hand weapon. Inspect first to
+record the live row levels, weapon skill and damage. Stage grants missing native
+items through Backpack.Add and equips through ForceEquip, preserving displaced
+items in Backpack. It requires a living single-player party outside combat in
+the configured isolated game root. This is explicit test setup, not acquisition,
+progression, or balance evidence. Native rebuilds may settle on a later frame;
+reobserve `equipment-inventory` and require `avatarWeaponPresent` before combat.
+The same readback reports `dummyWeaponPresent` when a native combat dummy exists.
+No stat, level, save, database-row, or combat-state mutation is performed.
+
+`launch-acquisition-state` accepts optional `equipmentPrefix` restricted to
+`paladin_` (default) or `blacksmith_`. The corresponding `paladinEquipment` or
+`blacksmithEquipment` array records existing item rows and category cache
+membership. It does not refresh stocks, draw random items, grant items, or prove
+that an eligible item was naturally acquired.
+
+## Native dungeon entry from an isolated staging tile
+
+`native-dungeon-entry` starts with `action: open`, exact `dungeonInstanceId`, and the
+current `heroInstanceId`. It requires three living heroes together on one staging
+tile in the target dungeon's realm, exact native `GetLoadPartyPlayers` membership,
+an unlocked and uncleared dungeon without generated rooms, no existing or partial
+dungeon entry, and idle encounter sessions. It calls native `ShowLocationMenu` for
+readiness. Open calls the native `ShowLocationMenu(actor, true, null, false)`
+wrapper once, including its normal pre-encounter message path. Wait until that
+menu appears, then use `action: inspect` with the same IDs. Inspection requires
+the exact actor and dungeon, native menu FSM `Showing`, an interactive canvas,
+and one active interactable `OnLoadParty` entry. Submit the same IDs with
+`action: submit` and the returned `inspectionToken`; the helper rechecks every
+condition and invokes the pinned visible entry's native `OnClick` at most once
+per process. It never invokes `OnLoadParty` without native menu initialization.
+
+The callback itself moves the party to the dungeon, ends the turn, and generates
+rooms. The helper does not snap heroes, set dungeon pointers, force combat setup,
+change stats or save. A submitted callback is not proof of successful entry:
+observe the actual native dungeon UI, room state, and party state afterward.
+A stale entered-dungeon pointer is rejected because invoking the callback again
+would regenerate encounters. Restart from the isolated saved checkpoint instead.
+
+Before the first encounter, native encounter singletons or their fight-order
+collection may be absent. `native-dungeon-entry` accepts that uninitialized state
+while rejecting any existing session or hero combat flag, initialized battle UI,
+nonempty fight order, or entered-dungeon state. Its receipt records availability
+of both encounter sessions and the fight-order collection.
+
+`dungeon-map-state` also reports each dungeon realm and its existing native
+neighbor tiles: coordinates, tile type, realm, native land-travel eligibility,
+and POI presence. `emptyLandStagingCandidate` identifies same-realm land with no
+ground or air POI and native land-travel eligibility. This is a staging filter,
+not a guarantee against every possible world event; no movement is performed.
+
+## Native item card and rigid attachment observations
+
+`item-visual-state` takes exact `heroInstanceId` and optional `celInstanceId`
+(defaults to its world avatar; a current combat dummy CEL may be selected).
+It reads weapon hierarchy, wrist and holder transforms, original custom rigid
+renderer bounds/material identities, and the avatar lease. No pose or renderer
+is changed, and no native mesh surfaces or bounds are exported.
+
+`native-item-card` takes `action: show` or `inspect`, exact `heroInstanceId`, and
+an owned package `item` string ID (one or more copies). Without `configSha256`,
+the existing Blacksmith hero/item allowlist applies. An explicit `configSha256`
+selects the pinned Paladin/Thief package route, requiring the unchanged current
+session configuration, observed initial package registration and asset hashes,
+an exact living owned idle party hero, and certain package-fit state. Open that
+hero's native inventory first and remain outside combat.
+
+Show calls the native inventory card route with no texture override. Temporary
+read-only prefix/postfix hooks observe `OffscreenCamera.DoRender` during the native
+snapshot, before its transient object is destroyed; both hooks are removed in
+`finally`. Receipts include owned count, native label text/layout, camera matrices,
+and original custom rigid renderer bounds. Inspect reads the matching card.
+
+Optional `capture: true` is valid only with `action: show`. After native Show
+returns, it encodes the exact native-produced `Texture2D` assigned to the card,
+without another render, camera/light edit, resize or gamma adjustment. Capture
+requires exactly one completed same-frame native Item-camera snapshot with the
+same camera/texture identities and exact native pool key `Item,<width>,<height>`
+computed from the current card dimensions and portrait AA; texture dimensions
+must also match. Missing, ambiguous, stale, blank/uniform or
+unreadable texture evidence fails closed. The exclusive `<id>.item-display.png`
+output has SHA256, dimensions, frame, texture identity and pixel summary in
+`capture`. No native texture asset or mesh surface is extracted.
+
+```json
+{"op":"native-item-card","action":"show","heroInstanceId":123,"item":"thief_twins_guild","configSha256":"<exact-current-config-sha256>","capture":true}
+```
+
+Use the normal id/session envelope. This image covers the native item display,
+not surrounding UI labels, blur, clipping or full-card composition. Native Show
+performs its own synchronous offscreen render even when the batch main framebuffer
+is blank; a nonblank item-card PNG still requires live confirmation on the actual
+helper/session. Nonblank detection does not prove visual correctness. Capture an
+actual game screenshot when full UI readability/layout evidence is needed.
+
+Focused game-free checks:
+
+```sh
+python3 tools/ai-model-pipeline/runtime-test/test_item_visual_observation_boundary.py
+python3 tools/ai-model-pipeline/runtime-test/test_item_card_capture.py --newtonsoft <isolated-managed-dir>/Newtonsoft.Json.dll
+```
+
+The executable guard checks use production capture/completion methods with minimal
+native-object stubs. They do not execute Unity rendering or Harmony patching.
+
+## Blacksmith template transform observation
+
+`native-gear-metadata` accepts one exact native Blacksmith template item key from
+its fixed allowlist and reports prefab and wearable transform hierarchies,
+renderer types, and mesh names. It reads existing assets without instantiating
+or mutating them and never exports native vertices, indices, textures, or other
+surface data. Use it to place original geometry in the native renderer frame;
+it does not establish visual fit or card framing.
+
+### Read-only Blacksmith combat snapshot
+
+`blacksmith-combat-state` accepts only the normal `id`, `session`, and `op`
+envelope in the isolated single-player helper. It reports current party hero and
+dummy instance identities, HP, Focus and spent Focus, turn and incapacity flags,
+equipped action grants, and the existing Blacksmith state fields. It also records
+host timeline entry IDs, committed-action receipts, turn-start/end receipts,
+Temper's remaining target turns and encounter use, current session and encounter,
+and loaded framework/helper/game assembly MVIDs with file SHA-256 identities.
+
+```bash
+python3 tools/ai-model-pipeline/runtime-test/command.py \
+  --root /absolute/project/scratch/game-copy blacksmith-combat-state
+```
+
+Capture snapshots before and after ordinary native actions and turn transitions.
+The operation never calls Blacksmith state methods, initializes actors, resolves
+an action, or observes equipment through runtime mechanics. An absent stored actor
+has an unused Temper budget; `temperClassEquipmentBudgetEligible` describes only
+class, equipment, and budget, not the native UI's complete readiness decision.
+
+`nativeTotalArmor` is intentionally null: its patched getter calls
+`ObserveEquipment`, which can mutate the state under observation. Instead,
+`defense` includes raw native armor components, native suffering/taunt Armor,
+stored Blacksmith contribution, and a labeled pre-disease subtotal. This subtotal
+does not incorporate other mods' ArmorMod patches or run equipment cleanup.
+`nativeTotalResistance` uses the native resistance getter. The snapshot is
+observational evidence for that exact loaded session, not proof of co-op behavior
+or a replacement for native action, cancellation, expiry, and swap trials.
+
+### Temporary Blacksmith native appearance fixture
+
+`blacksmith-appearance` supports `apply`, `inspect`, and `restore`, with an exact
+`heroInstanceId` from the current party. `apply` also requires integer `skinType`
+(0 through 6, validated against the native Blacksmith's skinset table). It is
+restricted to the isolated helper, single-player, an owned living native
+Blacksmith outside combat, and a party with no active or queued movement.
+Close native inventory before apply or restore.
+
+The fixture temporarily changes the hero's skin field only during the synchronous
+native `AssignAvatar()` call. A `finally` block restores the original serialized
+skin before the operation returns, including rebuild failures. Native equipment,
+class, outfit and colors are pinned; scalar stats are compared immediately before
+and after each rebuild. The operation does not save, send RPCs, equip items,
+change unlocks or export native geometry. The resulting visual avatar can differ
+from the restored serialized skin; receipts record both explicitly.
+
+For each equipped tier:
+
+1. Apply a supported skin and inspect on a later frame until `settled` is true.
+2. Use `player-studio` with the returned exact hero and avatar IDs. World and
+   native inventory captures include `appearanceFixture` provenance. Inventory
+   captures still require the existing reciprocal native paperdoll stream.
+3. Close inventory before applying another skin or restoring the original.
+4. Restore, then inspect on a later frame to release the fixture before changing
+   gear, moving, entering combat or leaving the scene.
+
+A replaced avatar or changed class, inventory, outfit or colors invalidates the
+fixture; no automatic correction is attempted. A failed preservation check
+blocks studio acceptance. Restore is explicit and guarded, including at teardown:
+the helper does not rebuild avatars automatically on destruction. The serialized
+skin is already original throughout the interval between commands. These captures
+provide temporary native appearance and fit evidence, not persistent character
+customization, combat animation, save compatibility or co-op acceptance.
+
+The combat observer's field-only reflection reader has game-free regression tests:
+`dotnet run --project tools/ai-model-pipeline/runtime-field-tests/RuntimeFieldTests.csproj -c Release`.
+They cover private static and instance receivers, null field values, null targets,
+and missing or mismatched fields. A passing test is not a live combat snapshot.
+
+### Exact native inventory UI
+
+`native-inventory` takes `action` (`open`, `close`, or `inspect`) and an exact
+current-party `heroInstanceId`. It requires an owned living hero outside combat,
+with no party movement or queued native move. Open requires the native HUD
+inventory button to be visible and interactable with no inventory or other modal
+already open. It calls `uiPlayerMainHud.OnInventoryToggle()`. Close requires the
+exact hero's visible inventory, completed zoom, and inventory input focus, then
+calls `uiPlayerInventory.OnClose()`. It never forces object activation or input.
+Inspect on a later frame after opening until `zoomSettled` is true and
+`paperDollUpdatePending` is false before capturing the native inventory view.
+Close before applying/restoring the appearance fixture. The result records exact
+hero, avatar and inventory ownership and checks immediate preservation of class,
+equipment, outfit, colors and scalar stats. Native UI callbacks still run their
+ordinary focus, rendering, sound and panel lifecycle; no game save is requested.
+
+Combat studio supplements frame each observed pose from live bone transforms in
+three camera axes. The temporary camera follows the projected bone-center during
+native lunges, retaining the capture's initial facing and a nonshrinking framing
+span. Horizontal extent is accounted for at the 768:1024 output aspect. Receipts
+record the framing center, basis and bone spans. This changes only the temporary
+observer camera; it does not move the game camera, avatar, bones or equipment,
+and does not alter the capture's requested timing mode. No native mesh bounds or
+surfaces are read. Native framebuffer captures remain the gameplay authority;
+full weapon clearance still requires visual review of the new studio frames.
+
+### Paladin and Thief equipment fit across installed classes
+
+`class-appearance-roster` is read-only. It reports every exact installed native or
+registered class ID/key, native DLC/build/reveal/unlock availability, and each of
+seven alternative skin selectors with its resolved skinset and unlock state.
+`supported` means a row exists; it does not prove renderer fit or native gameplay
+availability. Record unsupported cells explicitly. `native-party-class` accepts
+those exact native keys/IDs (including Blacksmith ID zero) and custom registry IDs,
+while retaining its native arrow inspection token, single-step, DLC and unlock
+checks. Package-only `player-preview-state` also accepts exact native classes.
+No operation changes unlocks or a living hero's class.
+
+The isolated game owner must prepare `model-test-package-gear.json` in the game
+root after staging and auditing discovery paths. It contains exactly two packages:
+
+```json
+{"packages":[
+  {"modGuid":"com.ftkmf.paladin","version":"<candidate version>",
+   "manifest":"<relative package directory>/manifest.json","manifestSha256":"<64 lowercase hex>",
+   "content":"<relative package directory>/content.json","contentSha256":"<64 lowercase hex>"},
+  {"modGuid":"com.ftkmf.thief","version":"<candidate version>",
+   "manifest":"<relative package directory>/manifest.json","manifestSha256":"<64 lowercase hex>",
+   "content":"<relative package directory>/content.json","contentSha256":"<64 lowercase hex>"}
+]}
+```
+
+Paths must stay under the exact isolated root without symlinks. The helper checks
+both file hashes on every grant/equip, derives the exact item allowlist from those
+content files, and joins each loaded item to its registry ID, DB row and package
+allocator ownership. It never calls the allocator. The optional config must exist before process startup. Passive helper observers pin
+its hash, configured manual discovery root, manifest/content bytes and asset file
+hashes before the first content load. They join the actual discovery result's folder,
+version and sole content path, then require complete registration, enabled compatible
+manual ModRegistry entries and matching PackageModelPaths model/texture hashes.
+Those live registry object identities and file hashes are checked again for fit
+operations. A second load, changed root/config/file, missing observation, or observer
+failure makes fit mutations unavailable. Observer failures do not interrupt normal
+content registration. No config means no observers and no new fit mutation route.
+Restart to change candidates. The deploy owner must still verify archive provenance
+and discovery conflicts; renderer application still needs exact-avatar evidence.
+
+Use `command.py --root <isolated-game> <operation> --payload <absolute-json-file>`.
+`package-gear-grant` and `package-gear-equip` share this payload:
+
+```json
+{"heroInstanceId":123,"classKey":"hunter","classId":1,
+ "configSha256":"<SHA256 of model-test-package-gear.json>",
+ "items":["<exact item ID from the candidate content>"]}
+```
+
+All identities are current-session observations, not reusable examples. Grant adds
+one instance only when unowned, accepts 1 to 64 IDs, and rejects ambiguous existing
+multiplicity. Equip requires already owned items, accepts a partial loadout of 1 to
+7 distinct slots, and runs native `ForceEquip`, with the weapon before the shield.
+A shield requires a requested or currently equipped one-hand weapon. Two-hand
+weapons natively return any offhand item to Backpack. Each operation preflights the
+whole request before mutation, requires an owned living idle current-party hero,
+single-player, no combat, the exact root-derived save namespace, package-only
+mode, and closed inventory. Restore and settle every appearance fixture first.
+Inventory totals and unrelated slots/class/outfit/colors are checked; grant also
+checks every scalar stat. Equip permits native modifier/defense/health recalculation
+(including health clamping) and verifies all other scalar stats. Receipts include
+full before/after stats and changed paths. Native derived speed uses the verified
+`_ModQuickness` backing field; permanent base and augmented speed remain preserved.
+Failures can follow native partial changes: reobserve before
+retrying. Once a native mutation starts, an exception or failed postcondition latches
+the session as uncertain, including failure while producing its final receipt. The
+file dispatcher then permits only specific read-only observations. It blocks further
+setup, restore, inventory UI, save and scene commands until a fresh process. There is
+no speculative rollback, stat correction or latch-reset command. A failed appearance
+rebuild still restores the serialized skin synchronously in `finally`.
+`package-gear-state` reports the uncertainty/partial-state diagnostics, source errors,
+startup file hashes, actual discovery sources and registered model/texture identities.
+Mutation failures retain a full pre-mutation snapshot, partial post-mutation snapshot,
+changed paths with presence flags, and any completed preservation checks with exact
+expected/actual state and scalar stat differences.
+
+`package-gear-appearance` accepts `action: inspect|apply|restore`, exact
+`heroInstanceId`, `classKey`, `classId`, and `skinType` for apply. It shares the
+Blacksmith appearance fixture's synchronous serialized-skin restoration,
+reference/inventory/class/outfit/color/scalar preservation and exact stale-avatar
+checks. Its class resolver supports all installed classes and rejects unsupported
+skinsets. After apply, inspect on a later frame until `settled: true`; capture via
+`player-studio` with the new exact avatar ID. Restore through the same operation,
+then inspect until `fixtureActive: false` before equipment changes, movement,
+combat, saves or scene changes. These are temporary static visuals, including
+locked appearances; they do not prove native unlocked race gameplay. Native input
+outside the file queue is the operator's responsibility while a fixture is active.
+Existing Blacksmith entry points retain their class/item restrictions.
+
+Use actual native movement/combat after restoring the fixture for motion evidence.
+Store exact class, appearance, item IDs, candidate hashes, avatar identities and
+view/motion evidence per cell. Roster rows, package setup and static studio views
+alone do not establish all-class equipped fit, acquisition, save/resume or co-op.
+
+Focused offline checks:
+
+```sh
+python3 -m unittest discover -s tools/ai-model-pipeline/runtime-test -p 'test_package_fit_boundary.py'
+python3 tools/ai-model-pipeline/runtime-test/test_package_fit_guards.py --newtonsoft <isolated-managed>/Newtonsoft.Json.dll
+python3 tools/ai-model-pipeline/runtime-test/test_package_fit_session.py --newtonsoft <isolated-managed>/Newtonsoft.Json.dll
+python3 tools/ai-model-pipeline/runtime-test/test_package_fit_discovery.py --newtonsoft <isolated-managed>/Newtonsoft.Json.dll
+python3 tools/ai-model-pipeline/runtime-test/test_blacksmith_preservation_compat.py --newtonsoft <isolated-managed>/Newtonsoft.Json.dll
+python3 tools/ai-model-pipeline/runtime-test/test_blacksmith_grant_preservation.py --newtonsoft <isolated-managed>/Newtonsoft.Json.dll
+dotnet build tools/ai-model-pipeline/runtime-test/RuntimeModelTest.csproj -c Release -p:TestGameRoot=<absolute-isolated-game>
+```
+
+Website impact: these internal evidence operations do not change published content
+or warrant public fit claims. Update the affected Paladin/Thief compatibility and
+preview claims only when the release's actual per-class evidence is reviewed.
+
+
+For material diagnosis, `item-visual-state` reports material names, shader identity,
+property presence/value pairs for `_Color`, `_SpecColor`, `_EmissionColor`,
+`_Glossiness`, `_Shininess`, `_Metallic`, `_Smoothness` and `_GlossMapScale`, plus
+texture identities and scene light metadata. It includes original custom skinned
+apparel alongside original rigid item renderers. It reads shared materials without
+creating private copies, changing parameters, rendering, or extracting native geometry
+or texture pixels. Absent shader properties remain explicitly absent.
+
+The ordinary payload remains `{heroInstanceId,celInstanceId}` for a current world
+or combat avatar. For the existing native inventory clone, provide
+`{source:"inventory",heroInstanceId,celInstanceId,inventoryCelInstanceId}` with the
+exact world source CEL and exact current clone CEL returned by `player-studio`.
+The native inventory must be open and settled for that hero. Observation rejects
+stale pins and never creates or refreshes a clone. Compare both receipts when
+investigating native clone material differences. Scene light metadata is observed
+outside a studio capture; `player-studio` adds key/fill lights to existing lighting,
+so studio appearance alone cannot establish normal gameplay shading.
+
+
+`player-studio` optionally accepts `lighting:"native"` to omit its two temporary
+key/fill lights, or `lighting:"supplemental"` for the existing default. The receipt
+records `lighting` and `addedLightCount`. Use matching avatar/source/view/framing
+pins for a controlled comparison. Neither mode alters existing lights or materials.
+Native mode retains the studio camera and temporary renderer layer isolation, so
+existing light culling masks may affect illumination; it is not an exact native
+framebuffer capture and does not establish normal gameplay shading by itself.
+
+### Existing native inventory stream readback
+
+`native-inventory-capture` is an opt-in read-only operation for the isolated
+package-fit session. Supply `ownerInstanceId`, `celInstanceId` (world source CEL),
+`inventoryCelInstanceId`, and `inventoryCameraInstanceId` from the current native
+inventory studio receipt. The open inventory must be settled and still refer to
+those exact reciprocal identities. Initial package source and asset hashes are
+revalidated before capture.
+
+This copies the already-created native paperdoll `RenderTexture` to a PNG. It does
+not render, create or modify a camera, change lights/layers/materials, refresh the
+clone, or export native geometry. The previous active render target is restored
+on success and failure. The receipt records owner/clone/camera/texture IDs,
+readback frame, dimensions, format, color space, helper/core hashes and candidate
+pins. `lastNativeRenderFrame:null` explicitly means native frame freshness was not
+observed. PNG readback applies no manual gamma correction.
+
+A transparent, black or uniform image returns `imageEvidenceAvailable:false`
+alongside the saved PNG and pixel summary. A nonblank image still requires visual
+review and does not prove an avatar is present. Batch mode may produce a blank or
+stale native stream; there is no forced-render fallback. This is native paperdoll
+texture evidence, not a full UI framebuffer or gameplay acceptance.
+
+Focused boundary checks:
+`python3 -m unittest tools/ai-model-pipeline/runtime-test/test_native_inventory_capture_boundary.py`
+
+Original custom apparel entries in `item-visual-state.originalApparelMaterials`
+also include the renderer `localToWorld` matrix and a bounded `bones` array in
+renderer bone-index order. Each bone records its index, name, instance ID and
+`localToWorld` matrix, including explicit null entries. Matrices use row-major
+16-number order. For inventory source these are the pinned native inventory
+clone's current transforms. Only renderers with an original `ftkmf_` replacement
+mesh are included; native vertices, weights, UVs and bindposes are not read.
+
+Apparel pose metadata also records `skinQuality`, `globalBlendWeights`, and
+`derivedInfluenceLimit`. The limit is derived from the renderer's explicit
+quality, or the global setting when it is `Auto`; actual shader/backend influence
+execution is not observed. Unknown values produce a null derived limit.
+
+Studio receipts include `studioCamera` with the render frame, exact temporary
+camera `worldToCameraMatrix` and `projectionMatrix`, position and rotation,
+observed immediately after rendering and before camera destruction. Matrices are
+row-major Unity camera matrices, not GPU-adjusted projection matrices. To map
+world points to PNG pixels, project to normalized device coordinates then flip Y
+for the PNG's top-left origin. The capture behavior is unchanged.
+
+`studioOriginalApparelMaterials` reuses the filtered custom apparel observation
+in the same synchronous frame as `studioCamera`, immediately after rendering and
+before readback or temporary layer restoration. Its renderer and bone matrices
+can therefore be paired with the recorded camera without a separate observation
+command advancing the pose. Recorded layer IDs are the temporary studio layers.
+
+`item-visual-state.nativeSkinnedRenderers` reports the same pinned avatar's
+remaining native skinned renderer paths, mesh names/IDs, submesh counts, enabled
+state and indexed material metadata. This includes native body or other native
+skinned surfaces; it does not label a material slot as a cuff or hand. No native
+vertices, indices, UVs, normals, weights, bindposes, bounds or texture pixels are
+read. Material identities can narrow a clothing-interference investigation but
+cannot establish which body regions share a submesh. Nothing is hidden or changed.
+
+### Inventory material-slot diagnostic
+
+For identifying an occluding native surface, `player-studio` with
+`source:"inventory"` optionally accepts:
+
+```json
+"nativeMaterialDiagnostic": {
+  "inventoryCelInstanceId": -12345,
+  "rendererPath": "player_Busker",
+  "materialIndex": 1,
+  "expectedMaterialName": "matBusker_hair (Instance)"
+}
+```
+
+Use the current clone ID and exact path, zero-based slot, and full material name
+from `item-visual-state`. The existing owner, world-avatar, settled inventory,
+reciprocal clone and session guards remain required. The diagnostic rejects a
+changed clone, ambiguous path, custom apparel mesh, inactive renderer, wrong slot
+or material identity, unsupported native Standard shader, and uncertain session.
+
+Only the selected clone's material-slot reference is temporarily replaced with
+opaque magenta Standard color and emission during the synchronous studio camera
+render. The shader is the existing selected native material's supported `Standard`
+shader. Its texture maps are cleared; metallic and glossiness are zero. Opaque
+blend factors, depth writes and queue 2000 preserve the shader's normal depth test. Original shared
+materials are restored and checked by reference in `finally`; the temporary
+material is destroyed on success and failure. A restoration failure latches the
+session as uncertain and requires a fresh isolated session before further setup.
+No native geometry is read, and original material objects are not modified.
+
+Receipts record `nativeMaterialDiagnostic` with the exact renderer, original
+material observation, shader, color, frame and restoration result. Such captures
+always have `diagnosticCapture:true` and `artAcceptanceEligible:false`. They are
+surface-identification diagnostics, never ordinary art acceptance or native
+presentation evidence. Existing captures without the option retain their route.
+
+Game-free transaction checks:
+
+```bash
+python3 tools/ai-model-pipeline/runtime-test/test_studio_material_diagnostic.py \
+  --newtonsoft /path/to/isolated-game/Managed/Newtonsoft.Json.dll
+```
+
+These checks exercise production selection and restoration with Unity object
+stubs. Actual emitted color visibility and native clone restoration
+still require the explicitly operated isolated-game trial.
+
+## Optional null input caller diagnostic
+
+For a fresh isolated diagnostic session only, set
+`FTK_MODEL_TEST_NULL_INPUT_CALLER=1` alongside the normal model-test root/session
+environment. After the usual isolated-root startup checks, the helper installs a
+passive prefix on exactly `FTKInput.GetButton(Rewired.Player, string)`. It logs the
+first eight calls whose action argument is null, including the managed caller
+stack, session, occurrence, UTC time and managed thread ID. Output goes to the
+helper log and `<session>.null-input-caller.log` in `model-test-output`.
+
+The prefix has no result, writable arguments, skip-original return, or exception
+finalizer. The original method still executes and may throw its original error.
+Observer/logging failures are contained. It performs no Unity object reads on
+the caller thread and removes only its own prefix when the helper is destroyed.
+Without that exact startup flag, no diagnostic patch is installed. This is
+failure attribution, not input recovery or a crash fix. It does not establish
+normal gameplay or item-display lifecycle acceptance.
+
+Game-free diagnostic check:
+
+```sh
+python3 tools/ai-model-pipeline/runtime-test/test_null_input_caller_diagnostic.py
+```
+
+### Optional native equip RPC breadcrumbs
+
+Set `FTK_MODEL_TEST_EQUIP_RPC_TRACE=1` before starting an isolated helper session to
+observe existing `package-gear-equip` calls. The flag is read once after the root
+and save-namespace checks. It adds no Harmony patches and preserves the optional
+null-input caller diagnostic independently.
+
+For each actual native `ForceEquip(itemId, false)`, the helper appends and
+synchronously flushes a JSON line immediately before and after the call to
+`model-test-output/<session>.equip-rpc.jsonl`. An already equipped item makes no
+native call and produces no pair. Records pin command, session, config hash,
+item ID, ordinal, arguments, hero/class and current inventory counts. Before
+records also observe the exact hero PhotonView, existing RPC component/method
+and parameter caches, method signatures, module MVID, metadata token, managed IL
+hash and Harmony patch owners. Missing metadata is reported as unavailable;
+there is no cache refresh or population. The potentially mutating native
+`PhotonView.prefix` getter is not used; `prefixBackup` is reported directly.
+
+The native call remains unwrapped. A before record without an after record
+locates the helper item boundary but does not identify a native root cause or
+prove that the RPC target body ran. Diagnostic write failures are logged and
+leave original execution unchanged, so an absent record is not proof that no
+call occurred. The OS write-through request and synchronous stream flush improve
+crash evidence retention; they are not a power-loss durability guarantee.
+Existing uncertainty, owner, inventory and config guards remain mandatory.
+Never replay an uncertain request to obtain a missing marker. Metadata reads
+can affect timing, so successful diagnostic sessions do not prove a crash fixed.
+
+Game-free verification:
+
+```bash
+python3 tools/ai-model-pipeline/runtime-test/test_equip_rpc_diagnostic.py \
+  --newtonsoft /path/to/isolated/game/Managed/Newtonsoft.Json.dll
+```
+
+This executes production breadcrumb and native-call sequencing against stand-ins,
+including file visibility before the call, exception propagation, absent caches,
+I/O failure, and the ordinary no-diagnostic route. Exact loaded native cache and
+patch observations still require a separately operated fresh-session live check.
+
+### Opt-in native cuff envelope
+
+`item-visual-state` may include `configSha256` and a `cuffEnvelope` object only
+with `source: "inventory"`, an exact session, owned hero/world CEL and settled
+inventory clone pins. This isolated package-fit diagnostic requires the pinned
+Censure armor equipped and a certain startup source identity. Obtain fresh
+renderer identities from ordinary `item-visual-state` first. The object requires
+`nativeRendererId`, `nativePath`, `nativeMesh`, `nativeMeshInstanceId`,
+`nativeMaterialNames` (ordered exact slot names), `armorRendererId`, `armorPath`
+and `armorMesh`. The native body must be the unchanged native skinset prefab
+mesh at its direct `player...` renderer path. Apparel, hair and accessories are
+excluded. Original armor must be the exact male/female Blacksmith replacement.
+
+The optional `nativeCuffEnvelope` result records same-frame matrices and original
+Elbow/Wrist inverse binds. Each arm has three axial bands in original mesh units.
+Native triangles are temporarily baked, transformed by
+`inverse(originalElbowBoneWorld * originalElbowInverseBind) * verifiedBakedToWorld`,
+and clipped to interpolated same-arm Elbow/Wrist weight at least 0.25 and the
+three equal elbow-to-wrist slabs. Supports are min/max along projected mesh +Y,
+its perpendicular radial axis, and the two 45-degree diagonals. A clipped polygon
+with any corner beyond radius 0.35 is rejected and counted. Such rejection makes
+the measured envelope incomplete; null supports mean no accepted contribution.
+Material-slot identity is exact, but anatomical/material semantics remain unknown.
+Triangle contributions and support samples may repeat at slab boundaries.
+
+The native mesh is never assigned or retained. Temporary baked data is destroyed
+in `finally`; only scalar aggregates and matrices are returned, never native
+vertices, indices, normals, UVs or weights. CPU BakeMesh supports do not establish
+GPU pixel coverage or dynamic fit. Ordinary metadata calls do not bake surfaces.
+Close inventory using the existing guarded native callback and verify closure.
+The focused game-free checks are `python3 -m unittest discover -s
+ tools/ai-model-pipeline/runtime-test -p 'test_cuff_envelope.py'`; actual native
+body identity and measurement are a separate live gate. This internal diagnostic
+has no public website behavior or published asset impact.
+
+The cuff probe verifies BakeMesh coordinates against a temporary in-memory native
+four-weight skinning reference, requiring zero blendshapes. It compares full
+renderer local-to-world and position/rotation without renderer scale. A mapping
+must have maximum residual at most 0.002 world units. If both pass, they must
+agree within 0.001 world units; otherwise the observation fails as ambiguous.
+`bakeMappingVerification` records sample count, RMS/max errors, thresholds and
+selected matrix. Original/native Elbow and Wrist names must resolve to the same
+Transform instances. Native bindposes and reference positions are never returned.
+These residual checks validate coordinate mapping, not GPU raster fidelity.
+
+## One-item native War Hammer control
+
+`native-weapon-control` is a separate isolated diagnostic for the assembly-defined
+`bluntWarHammer` row. It does not add vanilla IDs to the package allowlist or
+change registration. It requires the same exact package-only root, startup source
+pins, certain session, living locally owned current hero, idle noncombat party,
+unchanged class/default appearance and closed inventory as package fit setup.
+
+Send `action: "inspect"` with the normal id/session envelope and these fields:
+
+```json
+{
+  "op": "native-weapon-control",
+  "action": "inspect",
+  "heroInstanceId": -123,
+  "classKey": "paladin",
+  "classId": 14,
+  "configSha256": "<current exact configuration SHA256>",
+  "item": "bluntWarHammer"
+}
+```
+
+Use the current observed hero/class values, never copy the example instance ID.
+Inspection returns a token and exact party/inventory/stat pins. Submit the same
+fields with `action: "submit"` and that `token`. Changed pins or a consumed token
+fail before mutation. There is no automatic retry. Missing ownership adds one
+native Backpack copy, then the existing native ForceEquip path equips that one
+weapon. Native two-hand handling moves a previous weapon and shield to Backpack.
+Unrelated slots, appearance, progression, inventory totals and other heroes are
+checked. Native derived equipment modifiers may change. A partial failure retains
+the shared package-fit uncertainty latch and requires a fresh session.
+
+Wait for native avatar settlement, then capture the same inventory view and whole
+game framebuffer used for the custom two-hand weapon. These are controlled setup
+images, not natural acquisition or motion evidence. Reequip package gear through
+its ordinary guarded route if needed afterward. No save, database row, material,
+input or camera mutation is introduced by this fixture.
+
+Game-free checks: `python3 test_native_weapon_control.py`, the existing package
+fit/session and inventory multiplicity checks, and the isolated net35 build.
+Native submit and comparison capture remain live gates. Website impact: internal
+diagnostic only; no published behavior or compatibility claim changes.

@@ -26,13 +26,13 @@ public sealed partial class RuntimeModelTest
     }
 
     static void LaunchEquipment(JArray output, FTK_itembase[] rows,
-        IDictionary<FTK_itembase.ObjectType, List<FTK_itembase>> cache)
+        IDictionary<FTK_itembase.ObjectType, List<FTK_itembase>> cache, string prefix)
     {
         if (rows == null || rows.Length > 4096)
             throw new InvalidOperationException("Item database unavailable or exceeds observation bound.");
         foreach (FTK_itembase row in rows)
         {
-            if (row == null || row.m_ID == null || !row.m_ID.StartsWith("paladin_", StringComparison.Ordinal)) continue;
+            if (row == null || row.m_ID == null || !row.m_ID.StartsWith(prefix, StringComparison.Ordinal)) continue;
             List<FTK_itembase> category;
             bool categoryAvailable = cache != null && cache.TryGetValue(row.m_ObjectType, out category);
             // Read the already-built cache without initializing or rebuilding its pools.
@@ -56,7 +56,11 @@ public sealed partial class RuntimeModelTest
 
     JObject LaunchAcquisitionState(JObject command)
     {
-        CatalogKeys(command, "id", "session", "op");
+        CatalogKeys(command, "id", "session", "op", "equipmentPrefix");
+        string prefix = Str(command, "equipmentPrefix");
+        if (string.IsNullOrEmpty(prefix)) prefix = "paladin_";
+        if (prefix != "paladin_" && prefix != "blacksmith_")
+            throw new ArgumentException("equipmentPrefix must be paladin_ or blacksmith_.");
         CatalogNoLinks(root);
         RequireSinglePlayer();
         if (FTKHex.Instance == null || FTKHub.Instance == null || GameLogic.Instance.m_SanctumManager == null)
@@ -76,8 +80,8 @@ public sealed partial class RuntimeModelTest
         }
         var cache = typeof(GameCache.Cache.Items).GetField("_itemsByCategory", Statics).GetValue(null)
             as IDictionary<FTK_itembase.ObjectType, List<FTK_itembase>>;
-        LaunchEquipment(equipment, FTK_itemsDB.GetDB().m_Array, cache);
-        LaunchEquipment(equipment, FTK_weaponStats2DB.GetDB().m_Array, cache);
+        LaunchEquipment(equipment, FTK_itemsDB.GetDB().m_Array, cache, prefix);
+        LaunchEquipment(equipment, FTK_weaponStats2DB.GetDB().m_Array, cache, prefix);
 
         var pois = FTKHex.Instance.GetPOIList(MiniHexInfo.MiniHexType.Sanctum);
         if (pois == null || pois.Count > 64) throw new InvalidOperationException("World sanctum list unavailable or exceeds bound.");
@@ -114,7 +118,9 @@ public sealed partial class RuntimeModelTest
         }
         return new JObject { {"ok", true}, {"readOnly", true}, {"frame", Time.frameCount},
             {"gameAssembly", typeof(FTK_itembase).Assembly.FullName},
-            {"heroes", heroes}, {"paladinEquipmentCount", equipment.Count}, {"paladinEquipment", equipment},
+            {"heroes", heroes}, {prefix == "paladin_" ? "paladinEquipmentCount" : "blacksmithEquipmentCount", equipment.Count},
+            {prefix == "paladin_" ? "paladinEquipment" : "blacksmithEquipment", equipment},
+            {"equipmentPrefix", prefix},
             {"lifeSanctum", lifeRow},
             {"lifeNormalModifier", LaunchModifier(FTK_characterModifier.ID.Sanctum08)},
             {"lifeGrandModifier", LaunchModifier(FTK_characterModifier.ID.Sanctum08E)},

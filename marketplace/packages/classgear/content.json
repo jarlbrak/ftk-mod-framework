@@ -1,0 +1,1685 @@
+{
+  "entries": [
+    {
+      "kind": "item",
+      "id": "blacksmith_armor_coalmark",
+      "template": "armorHeavy1",
+      "displayName": "Coalmark Forge Apron",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 35,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 3
+      },
+      "icon": "assets/539e96ba9b73af60-blacksmith-armor-coalmark-icon.png",
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/e93c8c10fa90d5a2-blacksmith-armor-coalmark-female-display.glb",
+          "texture": "assets/e2e4dfdc718ac63b-blacksmith-armor-coalmark-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/ebe4cbebd80b5fb6-blacksmith-armor-coalmark-female.glb",
+            "texture": "assets/e2e4dfdc718ac63b-blacksmith-armor-coalmark-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/1ba966944ab1cde8-blacksmith-armor-coalmark-male.glb",
+            "texture": "assets/e2e4dfdc718ac63b-blacksmith-armor-coalmark-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_boots_coalmark",
+      "template": "bootsHeavy3",
+      "displayName": "Coalmark Foundry Boots",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "speed": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 2
+      },
+      "icon": "assets/f8c4177f0fcee92a-blacksmith-boots-coalmark-icon.png",
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/69172fc7871d151f-blacksmith-boots-coalmark-display.glb",
+          "texture": "assets/7883434a3ba76674-blacksmith-boots-coalmark-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/25eb23089f183037-blacksmith-boots-coalmark.glb",
+            "texture": "assets/7883434a3ba76674-blacksmith-boots-coalmark-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_1h_coalmark",
+      "template": "bluntSmithHammer",
+      "displayName": "Coalmark Smithing Hammer",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 10,
+        "slots": 4,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "setHammerArmor": 2
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/9c6e841ef11843dc-blacksmith-hammer-1h-coalmark.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-1h-coalmark-diffuse.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/c22150db50b3c054-blacksmith-hammer-1h-coalmark-fragment-1.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-1h-coalmark-diffuse.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/7f217afbc0a0b05e-blacksmith-hammer-1h-coalmark-fragment-2.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-1h-coalmark-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/78377b6aa2dc8385-blacksmith-hammer-1h-coalmark-display.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-1h-coalmark-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/0fd31c2f66f8d228-blacksmith-hammer-1h-coalmark-fragment-1-display.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-1h-coalmark-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/48649adbb3d694bc-blacksmith-hammer-1h-coalmark-fragment-2-display.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-1h-coalmark-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_2h_coalmark",
+      "template": "bluntWarHammer",
+      "displayName": "Coalmark Forge Maul",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 14,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 14,
+        "slots": 5,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "overhandArmorPenalty": 2
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/0c04aa5a60154e05-blacksmith-hammer-2h-coalmark.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/fbfb7fd296980517-blacksmith-hammer-2h-coalmark-fragment-1.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/99198303a7d36c46-blacksmith-hammer-2h-coalmark-fragment-2.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/3a66fe72b3bf7494-blacksmith-hammer-2h-coalmark-fragment-3.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/6c6fde677ec268a8-blacksmith-hammer-2h-coalmark-display.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/ae46aa67382b189d-blacksmith-hammer-2h-coalmark-fragment-1-display.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/a223b140c3dc8909-blacksmith-hammer-2h-coalmark-fragment-2-display.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/b40da570f0fe8371-blacksmith-hammer-2h-coalmark-fragment-3-display.glb",
+          "texture": "assets/b9cba4752120ba4e-blacksmith-hammer-2h-coalmark-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_helmet_coalmark",
+      "template": "helmetHeavy1",
+      "displayName": "Coalmark Working Helm",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 16,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 2
+      },
+      "icon": "assets/4a81598af20b2ed6-blacksmith-helmet-coalmark-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/0a6e498a3002b1fd-blacksmith-helmet-coalmark.glb",
+          "texture": "assets/761133839f79de44-blacksmith-helmet-coalmark-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/951a5bc495877ad2-blacksmith-helmet-coalmark-display.glb",
+          "texture": "assets/761133839f79de44-blacksmith-helmet-coalmark-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_necklace_coalmark",
+      "template": "amuletVitality1",
+      "displayName": "Coalmark Forge Pendant",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "vitality": 0.02
+      },
+      "icon": "assets/eb45a53a45b3ed75-blacksmith-necklace-coalmark-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/5e7a9e411d9773ff-blacksmith-necklace-coalmark-display.glb",
+          "texture": "assets/6e1dd51bfde5c8ba-blacksmith-necklace-coalmark-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_shield_coalmark",
+      "template": "shieldblacksmith",
+      "displayName": "Coalmark Forge Shield",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 10,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 1,
+        "taunt": true
+      },
+      "icon": "assets/8fdc62363af954ac-blacksmith-shield-coalmark-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/072eb0d5eed01769-blacksmith-shield-coalmark.glb",
+          "texture": "assets/80ccc058d655dce6-blacksmith-shield-coalmark-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/29dc83b9acb6bece-blacksmith-shield-coalmark-display.glb",
+          "texture": "assets/80ccc058d655dce6-blacksmith-shield-coalmark-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_trinket_coalmark",
+      "template": "trinketDefense1",
+      "displayName": "Coalmark Fire Kit",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 10,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "resistance": 1
+        }
+      },
+      "modifiers": {
+        "armor": 1
+      },
+      "icon": "assets/67381a94034cde07-blacksmith-trinket-coalmark-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/bec00c4329cc984e-blacksmith-trinket-coalmark-display.glb",
+          "texture": "assets/4d3ec223c3927305-blacksmith-trinket-coalmark-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_armor_bellowsworn",
+      "template": "armorHeavy1",
+      "displayName": "Bellowsworn Riveted Harness",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 85,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 6,
+        "resistance": 1
+      },
+      "icon": "assets/0745b797368320aa-blacksmith-armor-bellowsworn-icon.png",
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/de68af53b52b8f73-blacksmith-armor-bellowsworn-female-display.glb",
+          "texture": "assets/52ccd2377d8b071d-blacksmith-armor-bellowsworn-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/18334f4ae905f6fa-blacksmith-armor-bellowsworn-female.glb",
+            "texture": "assets/52ccd2377d8b071d-blacksmith-armor-bellowsworn-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/f224c028b60cf46e-blacksmith-armor-bellowsworn-male.glb",
+            "texture": "assets/52ccd2377d8b071d-blacksmith-armor-bellowsworn-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "nativeSkinType": "Cat",
+            "model": "assets/0d858038534546c1-blacksmith-armor-bellowsworn-cat.glb",
+            "texture": "assets/52ccd2377d8b071d-blacksmith-armor-bellowsworn-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "nativeSkinType": "Demon",
+            "model": "assets/fbf2bb0320ca2913-blacksmith-armor-bellowsworn-demon.glb",
+            "texture": "assets/52ccd2377d8b071d-blacksmith-armor-bellowsworn-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_boots_bellowsworn",
+      "template": "bootsHeavy3",
+      "displayName": "Bellowsworn Riveted Boots",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 30,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "speed": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 1
+      },
+      "icon": "assets/34ae6645de1097c1-blacksmith-boots-bellowsworn-icon.png",
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/fcfa49caba5712eb-blacksmith-boots-bellowsworn-display.glb",
+          "texture": "assets/5441b010b69030c2-blacksmith-boots-bellowsworn-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/15b98b1f41d33f1e-blacksmith-boots-bellowsworn.glb",
+            "texture": "assets/5441b010b69030c2-blacksmith-boots-bellowsworn-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_1h_bellowsworn",
+      "template": "bluntSmithHammer",
+      "displayName": "Bellowsworn Smithing Hammer",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 58,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 17,
+        "slots": 4,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "setHammerArmor": 3
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/64ca48c45c194e02-blacksmith-hammer-1h-bellowsworn.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-1h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/955338aa8f39a061-blacksmith-hammer-1h-bellowsworn-fragment-1.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-1h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/8fa7e0cd77db1002-blacksmith-hammer-1h-bellowsworn-fragment-2.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-1h-bellowsworn-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/6fceda602c043910-blacksmith-hammer-1h-bellowsworn-display.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-1h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/0eef369c6ebf3087-blacksmith-hammer-1h-bellowsworn-fragment-1-display.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-1h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/254e712e5078dcb6-blacksmith-hammer-1h-bellowsworn-fragment-2-display.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-1h-bellowsworn-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_2h_bellowsworn",
+      "template": "bluntWarHammer",
+      "displayName": "Bellowsworn Forge Maul",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 65,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 22,
+        "slots": 5,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "overhandArmorPenalty": 3
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/cc0a7252d5fb4978-blacksmith-hammer-2h-bellowsworn.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/b4bacaeb6fff2b24-blacksmith-hammer-2h-bellowsworn-fragment-1.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/c85f7ec30c1cde57-blacksmith-hammer-2h-bellowsworn-fragment-2.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/728468c62f1aa460-blacksmith-hammer-2h-bellowsworn-fragment-3.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/ecd35f446be6e5cf-blacksmith-hammer-2h-bellowsworn-display.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/8a3a8f649cee4f38-blacksmith-hammer-2h-bellowsworn-fragment-1-display.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/c4ef4bc41ed1e3ba-blacksmith-hammer-2h-bellowsworn-fragment-2-display.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/26d925a17d45be47-blacksmith-hammer-2h-bellowsworn-fragment-3-display.glb",
+          "texture": "assets/77d35b2bc539d8c4-blacksmith-hammer-2h-bellowsworn-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_helmet_bellowsworn",
+      "template": "helmetHeavy1",
+      "displayName": "Bellowsworn Working Helm",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 32,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 1
+      },
+      "icon": "assets/5e667ad966989239-blacksmith-helmet-bellowsworn-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/96d71d02a364c5ca-blacksmith-helmet-bellowsworn.glb",
+          "texture": "assets/2bd12a00597c29d2-blacksmith-helmet-bellowsworn-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/c03afc374100f8fc-blacksmith-helmet-bellowsworn-display.glb",
+          "texture": "assets/2bd12a00597c29d2-blacksmith-helmet-bellowsworn-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_necklace_bellowsworn",
+      "template": "amuletVitality1",
+      "displayName": "Bellowsworn Forge Pendant",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 70,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "vitality": 0.02,
+        "resistance": 1
+      },
+      "icon": "assets/c5cb817f44cd31ea-blacksmith-necklace-bellowsworn-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/0f3947613d18ba18-blacksmith-necklace-bellowsworn-display.glb",
+          "texture": "assets/59c9b4b5fd575434-blacksmith-necklace-bellowsworn-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_shield_bellowsworn",
+      "template": "shieldblacksmith",
+      "displayName": "Bellowsworn Forge Shield",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 32,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1,
+        "taunt": true
+      },
+      "icon": "assets/cddbd59178c49969-blacksmith-shield-bellowsworn-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/6d7e268bad0e469d-blacksmith-shield-bellowsworn.glb",
+          "texture": "assets/b5f27c91792233e2-blacksmith-shield-bellowsworn-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/201c1fa4bc50c13e-blacksmith-shield-bellowsworn-display.glb",
+          "texture": "assets/b5f27c91792233e2-blacksmith-shield-bellowsworn-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_trinket_bellowsworn",
+      "template": "trinketDefense1",
+      "displayName": "Bellowsworn Fire Kit",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 55,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "resistance": 1
+        }
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1
+      },
+      "blacksmithGear": {
+        "temperArmor": 3
+      },
+      "icon": "assets/af2dc3a1dfd9c800-blacksmith-trinket-bellowsworn-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/b6e048f8f7acbdeb-blacksmith-trinket-bellowsworn-display.glb",
+          "texture": "assets/bd05d6a8d6766237-blacksmith-trinket-bellowsworn-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_armor_rivetwatch",
+      "template": "armorHeavy1",
+      "displayName": "Rivetwatch Platecoat",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 200,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 10,
+        "resistance": 2
+      },
+      "icon": "assets/fa5a7693752038b2-blacksmith-armor-rivetwatch-icon.png",
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/d800e55a8d25fa43-blacksmith-armor-rivetwatch-female-display.glb",
+          "texture": "assets/a0bb75789f56d4c7-blacksmith-armor-rivetwatch-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/fdc88bcc6993c90b-blacksmith-armor-rivetwatch-female.glb",
+            "texture": "assets/a0bb75789f56d4c7-blacksmith-armor-rivetwatch-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/c60087dbed459910-blacksmith-armor-rivetwatch-male.glb",
+            "texture": "assets/a0bb75789f56d4c7-blacksmith-armor-rivetwatch-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "nativeSkinType": "Cat",
+            "model": "assets/ba3e6c5313f73109-blacksmith-armor-rivetwatch-cat.glb",
+            "texture": "assets/a0bb75789f56d4c7-blacksmith-armor-rivetwatch-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "nativeSkinType": "Demon",
+            "model": "assets/dd16a6dce4513354-blacksmith-armor-rivetwatch-demon.glb",
+            "texture": "assets/a0bb75789f56d4c7-blacksmith-armor-rivetwatch-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_boots_rivetwatch",
+      "template": "bootsHeavy3",
+      "displayName": "Rivetwatch Forge Greaves",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 80,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "speed": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 6,
+        "resistance": 1
+      },
+      "icon": "assets/84cd063f89e9ece7-blacksmith-boots-rivetwatch-icon.png",
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/de452c196ce9ca9c-blacksmith-boots-rivetwatch-display.glb",
+          "texture": "assets/e5093fbbc88f7740-blacksmith-boots-rivetwatch-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/be233297ad81ef9b-blacksmith-boots-rivetwatch.glb",
+            "texture": "assets/e5093fbbc88f7740-blacksmith-boots-rivetwatch-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_1h_rivetwatch",
+      "template": "bluntSmithHammer",
+      "displayName": "Rivetwatch Smithing Hammer",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 178,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 24,
+        "slots": 4,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "setHammerArmor": 4
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/f532c8c57e654f25-blacksmith-hammer-1h-rivetwatch.glb",
+          "texture": "assets/3a55b172e6bb9f7a-blacksmith-hammer-1h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/98efd224855ab855-blacksmith-hammer-1h-rivetwatch-fragment-1.glb",
+          "texture": "assets/3a55b172e6bb9f7a-blacksmith-hammer-1h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/c88b4fbf475fb414-blacksmith-hammer-1h-rivetwatch-fragment-2.glb",
+          "texture": "assets/3a55b172e6bb9f7a-blacksmith-hammer-1h-rivetwatch-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/b6d197216a917c75-blacksmith-hammer-1h-rivetwatch-display.glb",
+          "texture": "assets/3a55b172e6bb9f7a-blacksmith-hammer-1h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/286b470fdd0475a8-blacksmith-hammer-1h-rivetwatch-fragment-1-display.glb",
+          "texture": "assets/3a55b172e6bb9f7a-blacksmith-hammer-1h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/b920cb77ed87407f-blacksmith-hammer-1h-rivetwatch-fragment-2-display.glb",
+          "texture": "assets/3a55b172e6bb9f7a-blacksmith-hammer-1h-rivetwatch-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_2h_rivetwatch",
+      "template": "bluntWarHammer",
+      "displayName": "Rivetwatch Forge Maul",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 188,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 30,
+        "slots": 5,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "overhandArmorPenalty": 4
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/cef91048fd7943ed-blacksmith-hammer-2h-rivetwatch.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/34f2f52d7879e3df-blacksmith-hammer-2h-rivetwatch-fragment-1.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/5808305a50d3b8a6-blacksmith-hammer-2h-rivetwatch-fragment-2.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/f81cd047876af78f-blacksmith-hammer-2h-rivetwatch-fragment-3.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/c51f9215ab7f8161-blacksmith-hammer-2h-rivetwatch-display.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/80c3c55a6838a1f2-blacksmith-hammer-2h-rivetwatch-fragment-1-display.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/78fe5cb29b4994fe-blacksmith-hammer-2h-rivetwatch-fragment-2-display.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/4fcd307d30726d5d-blacksmith-hammer-2h-rivetwatch-fragment-3-display.glb",
+          "texture": "assets/417a4b5b93d3638a-blacksmith-hammer-2h-rivetwatch-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_helmet_rivetwatch",
+      "template": "helmetHeavy1",
+      "displayName": "Rivetwatch Working Helm",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 75,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 6,
+        "resistance": 2
+      },
+      "icon": "assets/93a3a2c4bf820af8-blacksmith-helmet-rivetwatch-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/25fec88720c22a8c-blacksmith-helmet-rivetwatch.glb",
+          "texture": "assets/e0d3ad9e25183e24-blacksmith-helmet-rivetwatch-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/6989723ef47c72c2-blacksmith-helmet-rivetwatch-display.glb",
+          "texture": "assets/e0d3ad9e25183e24-blacksmith-helmet-rivetwatch-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_necklace_rivetwatch",
+      "template": "amuletVitality1",
+      "displayName": "Rivetwatch Forge Pendant",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 180,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "vitality": 0.03,
+        "resistance": 1
+      },
+      "icon": "assets/e604fa7c537093dd-blacksmith-necklace-rivetwatch-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/ec8fc776514297c2-blacksmith-necklace-rivetwatch-display.glb",
+          "texture": "assets/c7f1874bb6e4dba2-blacksmith-necklace-rivetwatch-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_shield_rivetwatch",
+      "template": "shieldblacksmith",
+      "displayName": "Rivetwatch Forge Shield",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 75,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 2,
+        "taunt": true
+      },
+      "icon": "assets/9c2c5e18f3a04dc4-blacksmith-shield-rivetwatch-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/96c20f507c542a79-blacksmith-shield-rivetwatch.glb",
+          "texture": "assets/22f0affa4ed69d22-blacksmith-shield-rivetwatch-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/ef267f009fa2e7ed-blacksmith-shield-rivetwatch-display.glb",
+          "texture": "assets/22f0affa4ed69d22-blacksmith-shield-rivetwatch-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_trinket_rivetwatch",
+      "template": "trinketDefense1",
+      "displayName": "Rivetwatch Fire Kit",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 135,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "resistance": 1
+        }
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 2
+      },
+      "blacksmithGear": {
+        "temperArmor": 4
+      },
+      "icon": "assets/473d666c8f81bd3a-blacksmith-trinket-rivetwatch-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/08a94f999eb33bbc-blacksmith-trinket-rivetwatch-display.glb",
+          "texture": "assets/1af08f5b419f8029-blacksmith-trinket-rivetwatch-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_armor_kilnward",
+      "template": "armorHeavy1",
+      "displayName": "Kilnward Forgeplate",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 560,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 13,
+        "resistance": 3
+      },
+      "icon": "assets/150c786e16977571-blacksmith-armor-kilnward-icon.png",
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/356745ae7a5bc3d7-blacksmith-armor-kilnward-female-display.glb",
+          "texture": "assets/407d3e1098e310a3-blacksmith-armor-kilnward-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/4cec87eb2b24e64e-blacksmith-armor-kilnward-female.glb",
+            "texture": "assets/407d3e1098e310a3-blacksmith-armor-kilnward-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/27aa69e309c0f12c-blacksmith-armor-kilnward-male.glb",
+            "texture": "assets/407d3e1098e310a3-blacksmith-armor-kilnward-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "nativeSkinType": "Cat",
+            "model": "assets/5d7ab9509c8fc968-blacksmith-armor-kilnward-cat.glb",
+            "texture": "assets/407d3e1098e310a3-blacksmith-armor-kilnward-diffuse.png"
+          },
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "nativeSkinType": "Demon",
+            "model": "assets/1308d8c61de76d77-blacksmith-armor-kilnward-demon.glb",
+            "texture": "assets/407d3e1098e310a3-blacksmith-armor-kilnward-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_boots_kilnward",
+      "template": "bootsHeavy3",
+      "displayName": "Kilnward Forge Greaves",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "speed": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 8,
+        "resistance": 2
+      },
+      "icon": "assets/2447afbe75b2184c-blacksmith-boots-kilnward-icon.png",
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/d7e8907b928bd05a-blacksmith-boots-kilnward-display.glb",
+          "texture": "assets/f39803067f2df4b5-blacksmith-boots-kilnward-diffuse.png"
+        }
+      ],
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/29324d2c760858f6-blacksmith-boots-kilnward.glb",
+            "texture": "assets/f39803067f2df4b5-blacksmith-boots-kilnward-diffuse.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_1h_kilnward",
+      "template": "bluntSmithHammer",
+      "displayName": "Kilnward Smithing Hammer",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 390,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 29,
+        "slots": 4,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "setHammerArmor": 5
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/fbd89f6a2a13088b-blacksmith-hammer-1h-kilnward.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/5432dfb748db9df5-blacksmith-hammer-1h-kilnward-fragment-1.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/7d0587135601e79f-blacksmith-hammer-1h-kilnward-fragment-2.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-1h-kilnward-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/db1874ba2f333dea-blacksmith-hammer-1h-kilnward-display.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/47c5870cf4d9781d-blacksmith-hammer-1h-kilnward-fragment-1-display.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-1h-kilnward-diffuse.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/e2a6f83b4a0a8294-blacksmith-hammer-1h-kilnward-fragment-2-display.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-1h-kilnward-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "blacksmith_hammer_2h_kilnward",
+      "template": "bluntWarHammer",
+      "displayName": "Kilnward Forge Maul",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 370,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "damage": 33,
+        "slots": 5,
+        "skill": "vitality",
+        "damagegain": 1
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "blacksmithGear": {
+        "overhandArmorPenalty": 6
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/b85fcfc9953baff2-blacksmith-hammer-2h-kilnward.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/0c335f7af576f280-blacksmith-hammer-2h-kilnward-fragment-1.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/450d2f81320a3f28-blacksmith-hammer-2h-kilnward-fragment-2.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/3ded4fe5d84c9dd8-blacksmith-hammer-2h-kilnward-fragment-3.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/a5a14d33ee9c63d1-blacksmith-hammer-2h-kilnward-display.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/b58cdcb9c1320682-blacksmith-hammer-2h-kilnward-fragment-1-display.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/b7a4d06d058aeff8-blacksmith-hammer-2h-kilnward-fragment-2-display.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/ac2c35aefa406abf-blacksmith-hammer-2h-kilnward-fragment-3-display.glb",
+          "texture": "assets/1b1ef1f57f94f27e-blacksmith-hammer-2h-kilnward-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_helmet_kilnward",
+      "template": "helmetCrown",
+      "displayName": "Kilnward Working Helm",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 220,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "armor": 8,
+        "resistance": 3
+      },
+      "icon": "assets/9a1a15a99dbb4a46-blacksmith-helmet-kilnward-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/c0e6f41843e3e4a4-blacksmith-helmet-kilnward.glb",
+          "texture": "assets/0dd58c327de46a67-blacksmith-helmet-kilnward-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "helmCrown",
+          "model": "assets/53d88fc8b3d31ec2-blacksmith-helmet-kilnward-display.glb",
+          "texture": "assets/0dd58c327de46a67-blacksmith-helmet-kilnward-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_necklace_kilnward",
+      "template": "amuletVitality1",
+      "displayName": "Kilnward Forge Pendant",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 350,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "vitality": 0.01
+        }
+      },
+      "modifiers": {
+        "vitality": 0.03,
+        "resistance": 2
+      },
+      "icon": "assets/4b342b6b7e66e0bc-blacksmith-necklace-kilnward-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/ce0ed79261027d89-blacksmith-necklace-kilnward-display.glb",
+          "texture": "assets/33d0342bfe4008aa-blacksmith-necklace-kilnward-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_shield_kilnward",
+      "template": "shieldblacksmith",
+      "displayName": "Kilnward Forge Shield",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 160,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "armor": 1
+        }
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 3,
+        "taunt": true
+      },
+      "icon": "assets/f81d0179275f45d9-blacksmith-shield-kilnward-icon.png",
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/03212597abce463e-blacksmith-shield-kilnward.glb",
+          "texture": "assets/d89c07760e747dc6-blacksmith-shield-kilnward-diffuse.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/b2aaf0be2f07e20d-blacksmith-shield-kilnward-display.glb",
+          "texture": "assets/d89c07760e747dc6-blacksmith-shield-kilnward-diffuse.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "blacksmith_trinket_kilnward",
+      "template": "trinketDefense1",
+      "displayName": "Kilnward Fire Kit",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 300,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "classAffinity": {
+        "classId": "blacksmith",
+        "modifiers": {
+          "resistance": 1
+        }
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 3
+      },
+      "blacksmithGear": {
+        "temperArmor": 5
+      },
+      "icon": "assets/1a6897ab6cfe4548-blacksmith-trinket-kilnward-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/286373f997c12d42-blacksmith-trinket-kilnward-display.glb",
+          "texture": "assets/bb1cf05b1a768f27-blacksmith-trinket-kilnward-diffuse.png"
+        }
+      ]
+    }
+  ]
+}

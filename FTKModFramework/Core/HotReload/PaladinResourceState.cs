@@ -49,6 +49,9 @@ namespace FTKModFramework.Core.HotReload
             result["combatProficiencies"] = CombatProficiencyRegistry.Count;
             result["guardianEquipment"] = GuardianRuntime.ReloadEquipmentCount;
             result["guardianTransientEmpty"] = GuardianRuntime.ReloadTransientStateEmpty;
+            result["classAffinityEquipment"] = ClassAffinityRuntime.ReloadEquipmentCount;
+            result["blacksmithEquipment"] = BlacksmithRuntime.ReloadEquipmentCount;
+            result["blacksmithTransientEmpty"] = BlacksmithRuntime.ReloadTransientStateEmpty;
             result["paths"] = PackageModelPaths.ReloadPathCount;
             result["icons"] = PackageIcons.ReloadIconCount;
             result["itemModels"] = ItemModelRegistry.ReloadModelCount;
@@ -64,6 +67,8 @@ namespace FTKModFramework.Core.HotReload
                 throw new InvalidOperationException("Live custom renderer leases prevent hot activation.");
             if (PendingDestroyCount != 0)
                 throw new InvalidOperationException("Owned resources are still awaiting Unity destruction.");
+            if (!BlacksmithRuntime.ReloadTransientStateEmpty)
+                throw new InvalidOperationException("Blacksmith gameplay state prevents hot activation.");
             if (!GuardianRuntime.ReloadTransientStateEmpty)
                 throw new InvalidOperationException("Guardian gameplay state prevents hot activation.");
         }
@@ -85,6 +90,8 @@ namespace FTKModFramework.Core.HotReload
                 snapshot.Restore.Add(ClassProficiencyRegistry.SuspendForReload());
                 snapshot.Restore.Add(ItemProficiencyRegistry.SuspendForReload());
                 snapshot.Restore.Add(CombatProficiencyRegistry.SuspendForReload());
+                snapshot.Restore.Add(ClassAffinityRuntime.SuspendForReload());
+                snapshot.Restore.Add(BlacksmithRuntime.SuspendForReload());
                 snapshot.Restore.Add(ItemModelRegistry.SuspendForReload());
                 snapshot.Restore.Add(ItemApparelRegistry.SuspendForReload());
                 snapshot.Restore.Add(PackageModelPaths.SuspendForReload());

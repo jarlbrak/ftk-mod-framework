@@ -47,10 +47,13 @@ export function itemTooltipLines(e:any,entries:any[]):{text:string;tone:string}[
    add('Smite: 25% weapon damage as magic.','ability');
    add('150% against Censure Resistance reduction.');
    add('Uses current weapon rolls; no perfect required.');
+  }else if(id==='thief_pistol_fire'){
+   add('Fire: 100% weapon damage.','ability');
+   add('Eligible for Thief Sneak Attack.');
   }else{
    add(`${p.displayName}: ${Math.round(p.fields.m_DmgMultiplier*100)}% damage.`,'ability');
    add(p.fields.m_IgnoresArmor?'Perfect result ignores Armor.':'Thief: damaging hit grants Prepared.');
-   add('Special attacks cannot Sneak Attack.');
+   add(`${p.displayName} cannot Sneak Attack.`);
   }
  }
  const perks:Record<string,(v:any)=>string>={
@@ -71,6 +74,7 @@ export function itemTooltipLines(e:any,entries:any[]):{text:string;tone:string}[
   add('Thief: +20% perfect basic damage vs Open or while Prepared.');
   add('Once per turn; qualifying attempt spends it.');
   if(e.precisionWeapon==='paired')add('Thief: one missed check + HP hit grants Prepared.');
+  if(e.precisionWeapon==='pistol')add('Thief: Instant Reload restores 1 round at turn start.');
  }
  if(e.thiefArtifact==='borrowedFortune')add('Borrowed Fortune: damaging Sneak Attack refunds 1 spent Focus.');
  else if(e.thiefArtifact==='lastLight'){

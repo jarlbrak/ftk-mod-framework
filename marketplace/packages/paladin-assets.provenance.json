@@ -1,6 +1,6 @@
 {
   "schema": "ftkmf.paladin-package-original-assets.v2",
-  "packageVersion": "1.3.0",
+  "packageVersion": "1.4.0",
   "scope": "Original generated concepts, Hyper3D Rodin meshes and shaded atlases, Blender-fitted/exported models and original action symbols. Native bodies, faces, hair and backpacks remain game-owned.",
   "generation": {
     "concepts": "Original generated images with retained prompts.",
@@ -22,7 +22,9 @@
     "art-experiments/paladin-overhaul/hammer-route-review.json": "ddd6252ea6986844a3afbbcc44312ae0639a64550c0143fdbf37901c4f627222",
     "art-experiments/paladin-overhaul/runtime-textures/validation.json": "91b784f693951e3c11d0f7482d1b082155702a9b573ace7b70e3cd696e54814c",
     "art-experiments/paladin-overhaul/ability-ownership-validation.json": "cf78336f6a19dc81826417979cb808c3335932b703cdbd9ea431511d6060ccb5",
-    "scratch/paladin-overhaul/package-gameplay-preview-v6/gameplay-preview-receipt.json": "13b681a3741b4bc7eec82e67bc48a601509d4e72ab2ba6a4e4b9bbbbba777c1d"
+    "scratch/paladin-overhaul/package-gameplay-preview-v6/gameplay-preview-receipt.json": "13b681a3741b4bc7eec82e67bc48a601509d4e72ab2ba6a4e4b9bbbbba777c1d",
+    "art-experiments/paladin-overhaul/helmet_clearance.py": "5c73aa32221fd78594d841cd2bff631b5c4584f60666d73891db4fd82cd99af5",
+    "art-experiments/paladin-overhaul/helmet-clearance-profiles.json": "b74e34d63462f23542550892b10113f545073cf7327e3df0d570f3fcf583b6b9"
   },
   "testedGame": {
     "platform": "macOS",
@@ -102,14 +104,91 @@
       "bytes": 1426904
     },
     "assets/paladin-novice-boots-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots/icon.png",
-      "sha256": "2c08c6771a4c6d5b1057eab31c6746d8f3ab1a4b50d42b489610cdf53ff64dd4",
-      "bytes": 53657
+      "source": "gear-consolidation/studio-v3/paladin/paladin_boots_novice.png",
+      "sha256": "c530f81f72d55d76c39dd64918b8a69959281af4065ccf8d95fa77090b1c1583",
+      "bytes": 221918,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots/icon.png",
+        "sha256": "2c08c6771a4c6d5b1057eab31c6746d8f3ab1a4b50d42b489610cdf53ff64dd4",
+        "bytes": 53657
+      },
+      "previous": {
+        "source": "gear-consolidation/studio-v2/paladin/paladin_boots_novice.png",
+        "sha256": "08d1c794d3a4b3a7fff7434db6e73bd5d4d5bd4351da7f8321534d5302e1c361",
+        "bytes": 221911,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots/icon.png",
+          "sha256": "2c08c6771a4c6d5b1057eab31c6746d8f3ab1a4b50d42b489610cdf53ff64dd4",
+          "bytes": 53657
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_boots_novice",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-novice-boots-display.glb",
+              "sha256": "a0cb2c679b7510aea48c3e47b5fc23a58510b276ebf09f82a7493ff1b74f5e47"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png",
+              "sha256": "470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d"
+            }
+          ]
+        }
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_boots_novice",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-novice-boots-display.glb",
+            "sha256": "88a79c3cca7a17a5c46273dc20f245c624a4de7077f4305cec9053054a3c7e2e"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png",
+            "sha256": "470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-novice-boots-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots-display/novice-boots-display.glb",
-      "sha256": "0e48a38b858eefb31ae405c2e129b4dc0359766d8da5fe270b9124338370924f",
-      "bytes": 465268
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "88a79c3cca7a17a5c46273dc20f245c624a4de7077f4305cec9053054a3c7e2e",
+      "bytes": 452300,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots-display/novice-boots-display.glb",
+        "sha256": "0e48a38b858eefb31ae405c2e129b4dc0359766d8da5fe270b9124338370924f",
+        "bytes": 465268
+      },
+      "previous": {
+        "source": "scratch/gear-consolidation/boot-display/outputs/paladin-novice-boots-display.glb",
+        "sha256": "a0cb2c679b7510aea48c3e47b5fc23a58510b276ebf09f82a7493ff1b74f5e47",
+        "bytes": 452308,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/novice-apparel/boots-display/novice-boots-display.glb",
+          "sha256": "0e48a38b858eefb31ae405c2e129b4dc0359766d8da5fe270b9124338370924f",
+          "bytes": 465268
+        },
+        "derivation": "Dedicated boot-only display: remove authored trouser component, retain closed generated footwear, translate only.",
+        "evidence": {
+          "path": "scratch/gear-consolidation/boot-display/evidence.json",
+          "sha256": "6b2d367806faf6e4d37f47f21dc1d8368dec64dfafbf171d78bdf49d256653a4"
+        }
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_boots_novice",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "a0cb2c679b7510aea48c3e47b5fc23a58510b276ebf09f82a7493ff1b74f5e47",
+        "transform": {
+          "positiveUniformScale": 2.5239078999347337,
+          "translation": [
+            -1.8056740589606697e-06,
+            0.019751864890828436,
+            -1.5960548572757455e-10
+          ]
+        }
+      }
     },
     "assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/9ecffe170a90ff5403b1aad74e87f2eb25d7076f907d142dd9d83b378b2701ad.png",
@@ -122,9 +201,34 @@
       "bytes": 778244
     },
     "assets/paladin-novice-helmet-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet-icon.png",
-      "sha256": "32210646eb07f88d3d20b6af8d0c3353640f24215e2b602408ccbe1e9d66d128",
-      "bytes": 61162
+      "source": "gear-consolidation/studio-v3/paladin/paladin_helmet_novice.png",
+      "sha256": "deb77a43c93bce082297c8227546e3ea46c442584e7e40597abd18048c2a1c5c",
+      "bytes": 206630,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet-icon.png",
+        "sha256": "32210646eb07f88d3d20b6af8d0c3353640f24215e2b602408ccbe1e9d66d128",
+        "bytes": 61162
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet-icon.png",
+        "sha256": "32210646eb07f88d3d20b6af8d0c3353640f24215e2b602408ccbe1e9d66d128",
+        "bytes": 61162
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_helmet_novice",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-novice-helmet-display.glb",
+            "sha256": "206ec6450aafe1f5888577205955d8060bfdf593225652da52c326733c81cf67"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png",
+            "sha256": "caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-novice-helmet.glb": {
       "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet.glb",
@@ -137,9 +241,24 @@
       "bytes": 834353
     },
     "assets/paladin-hammer-1h-censure.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-1h/censure-hammer-1h.glb",
-      "sha256": "52bb9d5c79112ff3422e972316cf3b5a5454f7723a5f7db81e4d4e044c64e5e9",
-      "bytes": 351916
+      "sha256": "fa94116627742c0632aef4fe100c6addbb5e7011e045d794f70ff4e8b9360e4c",
+      "bytes": 346928,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-1h/censure-hammer-1h.glb",
+        "sha256": "52bb9d5c79112ff3422e972316cf3b5a5454f7723a5f7db81e4d4e044c64e5e9",
+        "bytes": 351916
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-1h/censure-hammer-1h.glb",
+        "sha256": "52bb9d5c79112ff3422e972316cf3b5a5454f7723a5f7db81e4d4e044c64e5e9",
+        "bytes": 351916
+      }
     },
     "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/bcc3e8180d3e44632786344d9b225e99b05e0b0cdb12efb2f23b2996a66ab1ad.png",
@@ -147,24 +266,84 @@
       "bytes": 1018004
     },
     "assets/paladin-hammer-1h-censure-fragment-1.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-1.glb",
-      "sha256": "35dd63b8b91025eb1bb8f8da30603b020aec440b93f64af5fb520f128084b5fe",
-      "bytes": 218216
+      "sha256": "50e113ed89cd7706159328b9e01a9a030bf90b2406e6def6f5699646fb49ba42",
+      "bytes": 273016,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-1.glb",
+        "sha256": "35dd63b8b91025eb1bb8f8da30603b020aec440b93f64af5fb520f128084b5fe",
+        "bytes": 218216
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-1.glb",
+        "sha256": "35dd63b8b91025eb1bb8f8da30603b020aec440b93f64af5fb520f128084b5fe",
+        "bytes": 218216
+      }
     },
     "assets/paladin-hammer-1h-censure-fragment-2.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-2.glb",
-      "sha256": "a215af844d2837ac34d0e177dce1c15692b473a2b4dc35d4004b91d9b3adee93",
-      "bytes": 144544
+      "sha256": "9f71498360cba45873a48e2b6a26814a839bc1e349f9f9e32b4d86ae5bea9223",
+      "bytes": 80840,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-2.glb",
+        "sha256": "a215af844d2837ac34d0e177dce1c15692b473a2b4dc35d4004b91d9b3adee93",
+        "bytes": 144544
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_1h_censure/fragment-2.glb",
+        "sha256": "a215af844d2837ac34d0e177dce1c15692b473a2b4dc35d4004b91d9b3adee93",
+        "bytes": 144544
+      }
     },
     "assets/paladin-shield-censure-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield-icon.png",
-      "sha256": "93ffde5fe633e43059714ff48c6658b5abfc78d5ebcf2f4a6f6bdcdac7d4af9b",
-      "bytes": 63894
+      "sha256": "ec9c762957bd68af3ef2a69edc5b2200dae45a53c0e3ef3cc0eb0d618c519024",
+      "bytes": 228225,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield-icon.png",
+        "sha256": "93ffde5fe633e43059714ff48c6658b5abfc78d5ebcf2f4a6f6bdcdac7d4af9b",
+        "bytes": 63894
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield-icon.png",
+        "sha256": "93ffde5fe633e43059714ff48c6658b5abfc78d5ebcf2f4a6f6bdcdac7d4af9b",
+        "bytes": 63894
+      }
     },
     "assets/paladin-shield-censure.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield.glb",
-      "sha256": "b5f8ec5f1ab477a1776b99f395cfb27f812a2f878bff4831c2a6f499671f027f",
-      "bytes": 231772
+      "sha256": "73734257caea9b3b92e328612fb5ea919ba275b56d19e9f6bef525e50ddc6234",
+      "bytes": 361772,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield.glb",
+        "sha256": "b5f8ec5f1ab477a1776b99f395cfb27f812a2f878bff4831c2a6f499671f027f",
+        "bytes": 231772
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-shield/censure-shield.glb",
+        "sha256": "b5f8ec5f1ab477a1776b99f395cfb27f812a2f878bff4831c2a6f499671f027f",
+        "bytes": 231772
+      }
     },
     "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/f069b5dab4c17b90cdb5bbebc567b74f5844f0097d9701e076aeacd67b85b9c2.png",
@@ -172,19 +351,64 @@
       "bytes": 322667
     },
     "assets/paladin-shield-censure-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-shield-display/censure-shield-display.glb",
-      "sha256": "ae76b9b1ca0183ad1fd55047a24d82d4b7fe5c50ea853c65d834e17e7a502572",
-      "bytes": 231772
+      "sha256": "6f57968cefcbcd40a58bf689460c381d6c4fc812e6d3d540e553f7f743d8b75b",
+      "bytes": 361772,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-shield-display/censure-shield-display.glb",
+        "sha256": "ae76b9b1ca0183ad1fd55047a24d82d4b7fe5c50ea853c65d834e17e7a502572",
+        "bytes": 231772
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-shield-display/censure-shield-display.glb",
+        "sha256": "ae76b9b1ca0183ad1fd55047a24d82d4b7fe5c50ea853c65d834e17e7a502572",
+        "bytes": 231772
+      }
     },
     "assets/paladin-censure-armor-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/icon.png",
-      "sha256": "b41c3af8c9a97365a145cc61c4b75f3316ddd465b336ef0784dafa923d8d8c5b",
-      "bytes": 77022
+      "sha256": "2b813fef4a2684c1bd9bcd28d5424dfe20255bef4a94dc2337f5514476c41f74",
+      "bytes": 275035,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/icon.png",
+        "sha256": "b41c3af8c9a97365a145cc61c4b75f3316ddd465b336ef0784dafa923d8d8c5b",
+        "bytes": 77022
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/icon.png",
+        "sha256": "b41c3af8c9a97365a145cc61c4b75f3316ddd465b336ef0784dafa923d8d8c5b",
+        "bytes": 77022
+      }
     },
     "assets/paladin-censure-armor-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-display/censure-armor-display.glb",
-      "sha256": "cab54d44d05863be10364aeff8c750b700eb2a2e48e8722c04a2a00b6369293f",
-      "bytes": 840164
+      "sha256": "6c29832b04877ad9677673fc08b499e10fba031a710061b4624f1168ddb0fb71",
+      "bytes": 1481440,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-display/censure-armor-display.glb",
+        "sha256": "cab54d44d05863be10364aeff8c750b700eb2a2e48e8722c04a2a00b6369293f",
+        "bytes": 840164
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-display/censure-armor-display.glb",
+        "sha256": "cab54d44d05863be10364aeff8c750b700eb2a2e48e8722c04a2a00b6369293f",
+        "bytes": 840164
+      }
     },
     "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/e515a2e1e5c89e29df395897726bdcef62992354f62848f80a63379eef8e52e9.png",
@@ -192,24 +416,161 @@
       "bytes": 996028
     },
     "assets/paladin-female-censure-armor.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-female/candidate.glb",
-      "sha256": "e9a0dff0121fe07f26930c7fc47e98a8d1af9659c24bca2980821111c75689be",
-      "bytes": 1404824
+      "sha256": "078960436cab7144b250853c4de11680f6f1ddee9c3c031cc2361fb71bfc79ef",
+      "bytes": 2528576,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-female/candidate.glb",
+        "sha256": "e9a0dff0121fe07f26930c7fc47e98a8d1af9659c24bca2980821111c75689be",
+        "bytes": 1404824
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-female/candidate.glb",
+        "sha256": "e9a0dff0121fe07f26930c7fc47e98a8d1af9659c24bca2980821111c75689be",
+        "bytes": 1404824
+      }
     },
     "assets/paladin-male-censure-armor.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/candidate.glb",
-      "sha256": "9253340ee5faf3fbc1c44137483f9debaeb02bd74ab6ca36a6dac4f808385f5a",
-      "bytes": 1405460
+      "sha256": "8a6230edd61537256e8ed529f067227b088a99289c69d60e3e5f32df09af81f6",
+      "bytes": 2529208,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/candidate.glb",
+        "sha256": "9253340ee5faf3fbc1c44137483f9debaeb02bd74ab6ca36a6dac4f808385f5a",
+        "bytes": 1405460
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/armor-male/candidate.glb",
+        "sha256": "9253340ee5faf3fbc1c44137483f9debaeb02bd74ab6ca36a6dac4f808385f5a",
+        "bytes": 1405460
+      }
     },
     "assets/paladin-censure-boots-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/icon.png",
-      "sha256": "4115760fb5890947b671a1632b81890a5356f8faf143231e81e54b0eacb00db7",
-      "bytes": 52828
+      "sha256": "3bba0433b767c1d9d0ab152189f00868be8e915f05b3091064ecae6bdc3fdd76",
+      "bytes": 238863,
+      "previous": {
+        "source": "gear-consolidation/studio-v3/paladin/paladin_boots_censure.png",
+        "sha256": "d25297f22be1fac4bc87e87844c7d0428670285f737cb285d3cc43c9c2b00bcb",
+        "bytes": 219566,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/icon.png",
+          "sha256": "4115760fb5890947b671a1632b81890a5356f8faf143231e81e54b0eacb00db7",
+          "bytes": 52828
+        },
+        "previous": {
+          "source": "gear-consolidation/studio-v2/paladin/paladin_boots_censure.png",
+          "sha256": "242375b5c1c48b9774d3c1201cd5704d84f8a643407ea238680f89657165343c",
+          "bytes": 219656,
+          "baseline": {
+            "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/icon.png",
+            "sha256": "4115760fb5890947b671a1632b81890a5356f8faf143231e81e54b0eacb00db7",
+            "bytes": 52828
+          },
+          "derivation": {
+            "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+            "itemId": "paladin_boots_censure",
+            "inputs": [
+              {
+                "path": "marketplace/packages/paladin/assets/paladin-censure-boots-display.glb",
+                "sha256": "f10afc7a4ba5321caf3d7d0c467ea7f4b1d33a3cf297a6886cff2ad68e18c756"
+              },
+              {
+                "path": "marketplace/packages/paladin/assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png",
+                "sha256": "4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b"
+              }
+            ]
+          }
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_boots_censure",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-censure-boots-display.glb",
+              "sha256": "8954fba01d32fbd31e0424fe78b7428467fce505b4c9c199ae813d8b6fa7980e"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png",
+              "sha256": "4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b"
+            }
+          ],
+          "iconRevision": "studio-v3"
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/icon.png",
+        "sha256": "4115760fb5890947b671a1632b81890a5356f8faf143231e81e54b0eacb00db7",
+        "bytes": 52828
+      }
     },
     "assets/paladin-censure-boots-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots-display/censure-boots-display.glb",
-      "sha256": "06b4e61dc04399909228c3d2cd6f9c79aebf0029f3931a808058b3518856279b",
-      "bytes": 447092
+      "sha256": "66d4ad344fb2d262ec67a8a312d3ee1738a9463c873ce29c0c1ce166d49f2882",
+      "bytes": 259080,
+      "previous": {
+        "source": "art-experiments/gear-display-framing/fit_displays.py",
+        "sha256": "8954fba01d32fbd31e0424fe78b7428467fce505b4c9c199ae813d8b6fa7980e",
+        "bytes": 434124,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots-display/censure-boots-display.glb",
+          "sha256": "06b4e61dc04399909228c3d2cd6f9c79aebf0029f3931a808058b3518856279b",
+          "bytes": 447092
+        },
+        "previous": {
+          "source": "scratch/gear-consolidation/boot-display/outputs/paladin-censure-boots-display.glb",
+          "sha256": "f10afc7a4ba5321caf3d7d0c467ea7f4b1d33a3cf297a6886cff2ad68e18c756",
+          "bytes": 434132,
+          "baseline": {
+            "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots-display/censure-boots-display.glb",
+            "sha256": "06b4e61dc04399909228c3d2cd6f9c79aebf0029f3931a808058b3518856279b",
+            "bytes": 447092
+          },
+          "derivation": "Dedicated boot-only display: remove authored trouser component, retain closed generated footwear, translate only.",
+          "evidence": {
+            "path": "scratch/gear-consolidation/boot-display/evidence.json",
+            "sha256": "6b2d367806faf6e4d37f47f21dc1d8368dec64dfafbf171d78bdf49d256653a4"
+          }
+        },
+        "derivation": {
+          "displayFramingItem": "paladin_boots_censure",
+          "ledger": "marketplace/packages/display-framing.provenance.json",
+          "inputSha256": "f10afc7a4ba5321caf3d7d0c467ea7f4b1d33a3cf297a6886cff2ad68e18c756",
+          "transform": {
+            "positiveUniformScale": 2.5239078999347337,
+            "translation": [
+              -1.766619403450379e-06,
+              0.029903325062646972,
+              1.0772606321406398e-09
+            ]
+          }
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots-display/censure-boots-display.glb",
+        "sha256": "06b4e61dc04399909228c3d2cd6f9c79aebf0029f3931a808058b3518856279b",
+        "bytes": 447092
+      }
     },
     "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/810abb9d5315f97bb69b02670e79d701f6138608767da524964501a16429f5a2.png",
@@ -217,19 +578,159 @@
       "bytes": 839463
     },
     "assets/paladin-censure-boots.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/candidate.glb",
-      "sha256": "c708feb8b3df88c9351dd0f71f9b5e59b9c4ee790dddd87e26364f7582adf74e",
-      "bytes": 746432
+      "sha256": "be7a29eb3b99246c2131b8a3ce6ecbe2921924d131ec240e1918751b6d7fd33f",
+      "bytes": 440684,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/candidate.glb",
+        "sha256": "c708feb8b3df88c9351dd0f71f9b5e59b9c4ee790dddd87e26364f7582adf74e",
+        "bytes": 746432
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-apparel/boots/candidate.glb",
+        "sha256": "c708feb8b3df88c9351dd0f71f9b5e59b9c4ee790dddd87e26364f7582adf74e",
+        "bytes": 746432
+      }
     },
     "assets/paladin-censure-helmet-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet-icon.png",
-      "sha256": "3eb08d248e159308631bb6951843d7290f403417ccceec4dec79d9b13e60e564",
-      "bytes": 72953
+      "sha256": "c5ddb28adbd96f45930e38ed7b6b09fbdbf631a92a81dc5577ef877c4e935ba7",
+      "bytes": 192441,
+      "previous": {
+        "source": "gear-consolidation/studio-v3/paladin/paladin_helmet_censure.png",
+        "sha256": "df25f0611dffbae014f17e8a533d65de72718e3a6a1c9ddce57bd95d154b6d02",
+        "bytes": 233453,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet-icon.png",
+          "sha256": "3eb08d248e159308631bb6951843d7290f403417ccceec4dec79d9b13e60e564",
+          "bytes": 72953
+        },
+        "previous": {
+          "source": "gear-consolidation/studio-v2/paladin/paladin_helmet_censure.png",
+          "sha256": "5be80ce5408979b3b36d86353a050b1707ee4174a752b3f305a39c419d085f06",
+          "bytes": 233502,
+          "baseline": {
+            "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet-icon.png",
+            "sha256": "3eb08d248e159308631bb6951843d7290f403417ccceec4dec79d9b13e60e564",
+            "bytes": 72953
+          },
+          "derivation": {
+            "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+            "itemId": "paladin_helmet_censure",
+            "inputs": [
+              {
+                "path": "marketplace/packages/paladin/assets/paladin-censure-helmet.glb",
+                "sha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e"
+              },
+              {
+                "path": "marketplace/packages/paladin/assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png",
+                "sha256": "0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91"
+              }
+            ]
+          }
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_helmet_censure",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-censure-helmet-display.glb",
+              "sha256": "3b06b607154f2c92ebcee74ff6f2525d21eec55b4c0c3f5a7d49a2f957ba87b4"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png",
+              "sha256": "0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91"
+            }
+          ],
+          "iconRevision": "studio-v3"
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet-icon.png",
+        "sha256": "3eb08d248e159308631bb6951843d7290f403417ccceec4dec79d9b13e60e564",
+        "bytes": 72953
+      }
     },
     "assets/paladin-censure-helmet.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.glb",
-      "sha256": "1805d57e5c89153a8a528de4d951da35198a5e2217380c8ca9e1feb734d878fa",
-      "bytes": 443152
+      "sha256": "91c94e0c532722a57e969f928ce43a46ee8a3be8a3688b694820ceee57eb7e40",
+      "bytes": 349932,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/helmet_clearance.py",
+        "sha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e",
+        "bytes": 443156,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.glb",
+          "sha256": "1805d57e5c89153a8a528de4d951da35198a5e2217380c8ca9e1feb734d878fa",
+          "bytes": 443152
+        },
+        "derivation": {
+          "profile": "art-experiments/paladin-overhaul/helmet-clearance-profiles.json",
+          "tier": "censure",
+          "sourceHashes": {
+            "art-experiments/paladin-overhaul/helmet_clearance.py": "5c73aa32221fd78594d841cd2bff631b5c4584f60666d73891db4fd82cd99af5",
+            "art-experiments/paladin-overhaul/helmet-clearance-profiles.json": "b74e34d63462f23542550892b10113f545073cf7327e3df0d570f3fcf583b6b9"
+          },
+          "steps": [
+            {
+              "operation": "rear-z",
+              "amplitude": 0.1,
+              "outputSha256": "c09d4721719344d331e631d763548ab4c0af50e40a455de9d425235765c70827"
+            },
+            {
+              "operation": "side-x",
+              "amplitude": 0.85,
+              "outputSha256": "286b74d6c9f219bce7b50ffccdc9d226b0327daf7c7559f0b195d8347714bbf4"
+            },
+            {
+              "operation": "rear-taper-z",
+              "amplitude": 0.12,
+              "outputSha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e"
+            }
+          ],
+          "lineage": {
+            "rodin": {
+              "path": "scratch/paladin-overhaul/raw/censure-helmet/base_basic_shaded.glb",
+              "sha256": "b5ffa641fed700ebe9a88787a749a503c6477d947ce95decb10a0ffc3a37f6d0",
+              "hashEvidence": "preserved preparation receipt",
+              "availableInCheckout": false
+            },
+            "originalFit": {
+              "path": "art-experiments/paladin-overhaul/fit-censure-helmet.json",
+              "sha256": "3db300868bc3a25350f9aaaf24c4d2834cb839523fa97a583cce10482908d4b7"
+            },
+            "preparation": {
+              "path": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.preparation.json",
+              "sha256": "ac008c3c9c83dad25860e35ed4f6a9df263b505f4eece9260b0bf170d1b74964"
+            },
+            "originalGeometry": {
+              "path": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.source.json",
+              "sha256": "9671c5cfa15b80b2c356e326065dcca72c260e0b1a46cca51bb4c942df23902d"
+            }
+          },
+          "scope": "Local original-art shell clearance and affected normal reconstruction. Original UVs, indices and textures preserved; no native geometry inputs."
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.glb",
+        "sha256": "1805d57e5c89153a8a528de4d951da35198a5e2217380c8ca9e1feb734d878fa",
+        "bytes": 443152
+      }
     },
     "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/cf6fa62d5c531b87e1482138343ba52125b5f42c4a3b53bada275fecd7e1befa.png",
@@ -237,9 +738,24 @@
       "bytes": 1035374
     },
     "assets/paladin-hammer-2h-censure.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-2h/censure-hammer-2h.glb",
-      "sha256": "cee503bc8693efd23faa07c3bbe445f8a0b787c3a12492d75d5fa1d307d57774",
-      "bytes": 373584
+      "sha256": "2ac13b8263a57909463770793333b063fb9468a9cf2d78a27ecbcbe60bf02320",
+      "bytes": 346924,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-2h/censure-hammer-2h.glb",
+        "sha256": "cee503bc8693efd23faa07c3bbe445f8a0b787c3a12492d75d5fa1d307d57774",
+        "bytes": 373584
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-hammer-2h/censure-hammer-2h.glb",
+        "sha256": "cee503bc8693efd23faa07c3bbe445f8a0b787c3a12492d75d5fa1d307d57774",
+        "bytes": 373584
+      }
     },
     "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/c3dcec3d2e6b319eb4318008b2aaa0326a25515b16c90bb89d3ff0a579510937.png",
@@ -247,39 +763,144 @@
       "bytes": 1012561
     },
     "assets/paladin-hammer-2h-censure-fragment-1.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-1.glb",
-      "sha256": "56c44bdd869eccbc11fcf3d86ceeaf0a7a5ea569722c02485f12d93d2a055990",
-      "bytes": 109488
+      "sha256": "973fb8d9ecab08abdc52023f6894b3c5294222c4cdca0e3394550cbffff57ce1",
+      "bytes": 273008,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-1.glb",
+        "sha256": "56c44bdd869eccbc11fcf3d86ceeaf0a7a5ea569722c02485f12d93d2a055990",
+        "bytes": 109488
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-1.glb",
+        "sha256": "56c44bdd869eccbc11fcf3d86ceeaf0a7a5ea569722c02485f12d93d2a055990",
+        "bytes": 109488
+      }
     },
     "assets/paladin-hammer-2h-censure-fragment-2.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-2.glb",
-      "sha256": "ec39a61d5513f2954c8c4c219e3f034b8a8e656127f71b1ea4044a762f0f5bda",
-      "bytes": 122112
+      "sha256": "d9a6c198cc096c246e07793f1f511f628b7c7725e563a301ad7e53a447db713b",
+      "bytes": 67928,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-2.glb",
+        "sha256": "ec39a61d5513f2954c8c4c219e3f034b8a8e656127f71b1ea4044a762f0f5bda",
+        "bytes": 122112
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-2.glb",
+        "sha256": "ec39a61d5513f2954c8c4c219e3f034b8a8e656127f71b1ea4044a762f0f5bda",
+        "bytes": 122112
+      }
     },
     "assets/paladin-hammer-2h-censure-fragment-3.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-3.glb",
-      "sha256": "387a66a80cae82b8e669f90261a4a020a1038974b4cd30ad4cd8a4c330a34902",
-      "bytes": 164672
+      "sha256": "bb29a12e6383f9c0397109c94fd8595c6c7390c7f38acd5f86d77dc63446e10e",
+      "bytes": 17796,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-3.glb",
+        "sha256": "387a66a80cae82b8e669f90261a4a020a1038974b4cd30ad4cd8a4c330a34902",
+        "bytes": 164672
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/fragment-3.glb",
+        "sha256": "387a66a80cae82b8e669f90261a4a020a1038974b4cd30ad4cd8a4c330a34902",
+        "bytes": 164672
+      }
     },
     "assets/paladin-hammer-2h-censure-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display.glb",
-      "sha256": "1294ae245fc861813ca87469a3c67b1c5b8eac48ed6725062d0791ae65bc4515",
-      "bytes": 373580
+      "sha256": "be52866d6b8a5a9e1460a6d03471b199f9a3b9af4996ef8ba439812f71a9efbf",
+      "bytes": 346924,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display.glb",
+        "sha256": "1294ae245fc861813ca87469a3c67b1c5b8eac48ed6725062d0791ae65bc4515",
+        "bytes": 373580
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display.glb",
+        "sha256": "1294ae245fc861813ca87469a3c67b1c5b8eac48ed6725062d0791ae65bc4515",
+        "bytes": 373580
+      }
     },
     "assets/paladin-hammer-2h-censure-fragment-1-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-1.glb",
-      "sha256": "98889d91af275b1648cdfbc19ded1db12d4772baa181945aa414d79158778a9a",
-      "bytes": 109488
+      "sha256": "75f624954fae144efb470ab2ac4b23f3907fbd3a5cf55186fdbbd2028d58d240",
+      "bytes": 273008,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-1.glb",
+        "sha256": "98889d91af275b1648cdfbc19ded1db12d4772baa181945aa414d79158778a9a",
+        "bytes": 109488
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-1.glb",
+        "sha256": "98889d91af275b1648cdfbc19ded1db12d4772baa181945aa414d79158778a9a",
+        "bytes": 109488
+      }
     },
     "assets/paladin-hammer-2h-censure-fragment-2-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-2.glb",
-      "sha256": "e91955404cf7bbc564106e41d11dbf023a469ec9a187f002a4ead5e09bc1f55c",
-      "bytes": 122112
+      "sha256": "c5d37a1b38ec1d0b48e5feb4dde443ae831b466408bffb4e140a4fcc4b407372",
+      "bytes": 67928,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-2.glb",
+        "sha256": "e91955404cf7bbc564106e41d11dbf023a469ec9a187f002a4ead5e09bc1f55c",
+        "bytes": 122112
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-2.glb",
+        "sha256": "e91955404cf7bbc564106e41d11dbf023a469ec9a187f002a4ead5e09bc1f55c",
+        "bytes": 122112
+      }
     },
     "assets/paladin-hammer-2h-censure-fragment-3-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-3.glb",
-      "sha256": "7d2acba9401508ecf0a5e71274678696c63eb8e4f5dcc4dd655b2ea801910eb7",
-      "bytes": 164672
+      "sha256": "1c1293e167944af53092391ed08c345d823619cb86a57778bfdf2c8415e32baf",
+      "bytes": 17792,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-3.glb",
+        "sha256": "7d2acba9401508ecf0a5e71274678696c63eb8e4f5dcc4dd655b2ea801910eb7",
+        "bytes": 164672
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/hammer-routes/paladin_hammer_2h_censure/display-fragment-3.glb",
+        "sha256": "7d2acba9401508ecf0a5e71274678696c63eb8e4f5dcc4dd655b2ea801910eb7",
+        "bytes": 164672
+      }
     },
     "assets/paladin-hammer-1h-last-vigil.glb": {
       "source": "art-experiments/paladin-overhaul/candidates/last-vigil-hammer/last-vigil-hammer.glb",
@@ -447,14 +1068,91 @@
       "bytes": 1403668
     },
     "assets/paladin-oathkeeper-boots-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots/icon.png",
-      "sha256": "25cb5f9e87b1c70c48de36e67e40bab9a33875f242c17e647fe459451f1dacfc",
-      "bytes": 55725
+      "source": "gear-consolidation/studio-v3/paladin/paladin_boots_oathkeeper.png",
+      "sha256": "518d36b4b46e37d5f176eef4e507b16b6034438497290c94de4eaea6476eacc5",
+      "bytes": 246859,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots/icon.png",
+        "sha256": "25cb5f9e87b1c70c48de36e67e40bab9a33875f242c17e647fe459451f1dacfc",
+        "bytes": 55725
+      },
+      "previous": {
+        "source": "gear-consolidation/studio-v2/paladin/paladin_boots_oathkeeper.png",
+        "sha256": "73ae8634fd6e260c641b893137d15afe336d884eacbc1171e0ff497a319807c9",
+        "bytes": 246841,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots/icon.png",
+          "sha256": "25cb5f9e87b1c70c48de36e67e40bab9a33875f242c17e647fe459451f1dacfc",
+          "bytes": 55725
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_boots_oathkeeper",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-boots-display.glb",
+              "sha256": "4d77bcd19b14673abb7aa469b84f304f6c71f9610519711ae426ae961afd930b"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png",
+              "sha256": "70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc"
+            }
+          ]
+        }
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_boots_oathkeeper",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-boots-display.glb",
+            "sha256": "f49342e574df27da62243d62c46db85f7b7eaf6ff9d153b4248fce24759b9751"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png",
+            "sha256": "70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-oathkeeper-boots-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots-display/oathkeeper-boots-display.glb",
-      "sha256": "21333fbb77daa26b80c4950778c1a12307f3a5db68578ca3c238f6a2a7738f6d",
-      "bytes": 486896
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "f49342e574df27da62243d62c46db85f7b7eaf6ff9d153b4248fce24759b9751",
+      "bytes": 473932,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots-display/oathkeeper-boots-display.glb",
+        "sha256": "21333fbb77daa26b80c4950778c1a12307f3a5db68578ca3c238f6a2a7738f6d",
+        "bytes": 486896
+      },
+      "previous": {
+        "source": "scratch/gear-consolidation/boot-display/outputs/paladin-oathkeeper-boots-display.glb",
+        "sha256": "4d77bcd19b14673abb7aa469b84f304f6c71f9610519711ae426ae961afd930b",
+        "bytes": 473936,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-apparel/boots-display/oathkeeper-boots-display.glb",
+          "sha256": "21333fbb77daa26b80c4950778c1a12307f3a5db68578ca3c238f6a2a7738f6d",
+          "bytes": 486896
+        },
+        "derivation": "Dedicated boot-only display: remove authored trouser component, retain closed generated footwear, translate only.",
+        "evidence": {
+          "path": "scratch/gear-consolidation/boot-display/evidence.json",
+          "sha256": "6b2d367806faf6e4d37f47f21dc1d8368dec64dfafbf171d78bdf49d256653a4"
+        }
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_boots_oathkeeper",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "4d77bcd19b14673abb7aa469b84f304f6c71f9610519711ae426ae961afd930b",
+        "transform": {
+          "positiveUniformScale": 2.5239078999347337,
+          "translation": [
+            -1.8156571810828085e-06,
+            0.026207989965752552,
+            1.1281425926991755e-09
+          ]
+        }
+      }
     },
     "assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/78e5fa039d07f51f037645bb98d4d3c643fe2b6008fb8670b8871a72c6156f04.png",
@@ -467,14 +1165,134 @@
       "bytes": 816104
     },
     "assets/paladin-oathkeeper-helmet-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet-icon.png",
-      "sha256": "b40bf9cc0cca6ff71d19a69c318410a9186ac7ff4ace66113a68214e8452be76",
-      "bytes": 69680
+      "sha256": "813c4856ff7a704ffec82d91b40d53c2a432dcd03ae98074a83649de0d641237",
+      "bytes": 217608,
+      "previous": {
+        "source": "gear-consolidation/studio-v3/paladin/paladin_helmet_oathkeeper.png",
+        "sha256": "b3b3208183c03b2cf7db9ebb31751c3b9c2e6d1185df009b2e008741d34d31e7",
+        "bytes": 202914,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet-icon.png",
+          "sha256": "b40bf9cc0cca6ff71d19a69c318410a9186ac7ff4ace66113a68214e8452be76",
+          "bytes": 69680
+        },
+        "previous": {
+          "source": "gear-consolidation/studio-v2/paladin/paladin_helmet_oathkeeper.png",
+          "sha256": "2caa8de574c101d9e941dc20189b278faa646c621cd5f29e692fd52f0e5625f2",
+          "bytes": 202933,
+          "baseline": {
+            "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet-icon.png",
+            "sha256": "b40bf9cc0cca6ff71d19a69c318410a9186ac7ff4ace66113a68214e8452be76",
+            "bytes": 69680
+          },
+          "derivation": {
+            "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+            "itemId": "paladin_helmet_oathkeeper",
+            "inputs": [
+              {
+                "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet.glb",
+                "sha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415"
+              },
+              {
+                "path": "marketplace/packages/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png",
+                "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e"
+              }
+            ]
+          }
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_helmet_oathkeeper",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-oathkeeper-helmet-display.glb",
+              "sha256": "1b3c925c9b4116e560fded89a49746f2ed9a4aee06fefceb511521d9a66d2bfc"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png",
+              "sha256": "18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e"
+            }
+          ],
+          "iconRevision": "studio-v3"
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet-icon.png",
+        "sha256": "b40bf9cc0cca6ff71d19a69c318410a9186ac7ff4ace66113a68214e8452be76",
+        "bytes": 69680
+      }
     },
     "assets/paladin-oathkeeper-helmet.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.glb",
-      "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
-      "bytes": 251548
+      "sha256": "0f1c364ce86b726e960b8c2d253b430928b6d9790bbdbead7e568fdb8d7bca95",
+      "bytes": 251548,
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/helmet_clearance.py",
+        "sha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415",
+        "bytes": 251548,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.glb",
+          "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
+          "bytes": 251548
+        },
+        "derivation": {
+          "profile": "art-experiments/paladin-overhaul/helmet-clearance-profiles.json",
+          "tier": "oathkeeper",
+          "sourceHashes": {
+            "art-experiments/paladin-overhaul/helmet_clearance.py": "5c73aa32221fd78594d841cd2bff631b5c4584f60666d73891db4fd82cd99af5",
+            "art-experiments/paladin-overhaul/helmet-clearance-profiles.json": "b74e34d63462f23542550892b10113f545073cf7327e3df0d570f3fcf583b6b9"
+          },
+          "steps": [
+            {
+              "operation": "rear-z",
+              "amplitude": 0.15,
+              "outputSha256": "4cd46c5040159f8f89efb396cdc6efc91478b031f4a32edeee9361f7defaf08a"
+            },
+            {
+              "operation": "side-x",
+              "amplitude": 0.65,
+              "outputSha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415"
+            }
+          ],
+          "lineage": {
+            "rodin": {
+              "path": "scratch/paladin-overhaul/raw/paladin_helmet_oathkeeper/base_basic_shaded.glb",
+              "sha256": "15b461af8193e6c7e233825dfeb1b63b9991bc1166c7e4516e37ca4506bfafa5",
+              "hashEvidence": "preserved preparation receipt",
+              "availableInCheckout": false
+            },
+            "originalFit": {
+              "path": "art-experiments/paladin-overhaul/fit-oathkeeper-helmet.json",
+              "sha256": "03e629ae9bb529c6303ef87c92a30b23e806736967d5256ba72905dbf26ea603"
+            },
+            "preparation": {
+              "path": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.preparation.json",
+              "sha256": "d334c869fc96e4425c858b0f4722e301bf4dec61dde86ee471e328c80d105520"
+            },
+            "originalGeometry": {
+              "path": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.source.json",
+              "sha256": "52e16af8bfee8bc4588e50427247d1a3c4fd942e2fd007fd270cb1ac1645a238"
+            }
+          },
+          "scope": "Local original-art shell clearance and affected normal reconstruction. Original UVs, indices and textures preserved; no native geometry inputs."
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.glb",
+        "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
+        "bytes": 251548
+      }
     },
     "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/6ec6216d849c7fbe009b884599053193b3545e95784e6a7fb7c721a712a33912.png",
@@ -592,14 +1410,91 @@
       "bytes": 1325604
     },
     "assets/paladin-highward-boots-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots/icon.png",
-      "sha256": "77e9cc6458c3daec450ea0ed87869c77e50de737601e159143a275f6923e8c2a",
-      "bytes": 56618
+      "source": "gear-consolidation/studio-v3/paladin/paladin_boots_highward.png",
+      "sha256": "07ec21e3ab33c9974684de36a4f6dffbd7f97d7a395279fd39e72f67a9261726",
+      "bytes": 237870,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots/icon.png",
+        "sha256": "77e9cc6458c3daec450ea0ed87869c77e50de737601e159143a275f6923e8c2a",
+        "bytes": 56618
+      },
+      "previous": {
+        "source": "gear-consolidation/studio-v2/paladin/paladin_boots_highward.png",
+        "sha256": "0bae520b45355c1af74462059d716db50c2f4552e9eafa1c35c45f6d77279c8d",
+        "bytes": 237864,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots/icon.png",
+          "sha256": "77e9cc6458c3daec450ea0ed87869c77e50de737601e159143a275f6923e8c2a",
+          "bytes": 56618
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_boots_highward",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-highward-boots-display.glb",
+              "sha256": "7f6b1d56b11dfca50248bd59fd6c918902d5219dc5561195f1c0f50ccd0f545b"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png",
+              "sha256": "700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef"
+            }
+          ]
+        }
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_boots_highward",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-highward-boots-display.glb",
+            "sha256": "acd4262bd651b233d6650f043c06ec07337d5de4a7c83156397e0948e39df1ba"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png",
+            "sha256": "700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-highward-boots-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots-display/highward-boots-display.glb",
-      "sha256": "d77abed8fbac015331059ec660f474121d0e88b6a931591e0580d9a82c2ff877",
-      "bytes": 460340
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "acd4262bd651b233d6650f043c06ec07337d5de4a7c83156397e0948e39df1ba",
+      "bytes": 447372,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots-display/highward-boots-display.glb",
+        "sha256": "d77abed8fbac015331059ec660f474121d0e88b6a931591e0580d9a82c2ff877",
+        "bytes": 460340
+      },
+      "previous": {
+        "source": "scratch/gear-consolidation/boot-display/outputs/paladin-highward-boots-display.glb",
+        "sha256": "7f6b1d56b11dfca50248bd59fd6c918902d5219dc5561195f1c0f50ccd0f545b",
+        "bytes": 447376,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/highward-apparel/boots-display/highward-boots-display.glb",
+          "sha256": "d77abed8fbac015331059ec660f474121d0e88b6a931591e0580d9a82c2ff877",
+          "bytes": 460340
+        },
+        "derivation": "Dedicated boot-only display: remove authored trouser component, retain closed generated footwear, translate only.",
+        "evidence": {
+          "path": "scratch/gear-consolidation/boot-display/evidence.json",
+          "sha256": "6b2d367806faf6e4d37f47f21dc1d8368dec64dfafbf171d78bdf49d256653a4"
+        }
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_boots_highward",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "7f6b1d56b11dfca50248bd59fd6c918902d5219dc5561195f1c0f50ccd0f545b",
+        "transform": {
+          "positiveUniformScale": 2.5239078999347337,
+          "translation": [
+            -1.7640029383725285e-06,
+            0.03739390932321072,
+            4.019019167309608e-09
+          ]
+        }
+      }
     },
     "assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/f8ff0916524ab5ff82ce4d47fdbb242c3927acb9e56bd12986a9e0487b466f9f.png",
@@ -612,9 +1507,34 @@
       "bytes": 769620
     },
     "assets/paladin-highward-helmet-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet-icon.png",
-      "sha256": "150a365bc691cb417d0d24cdd4a70f567f53cce4f2026a04309b37f3d4026224",
-      "bytes": 73488
+      "source": "gear-consolidation/studio-v3/paladin/paladin_helmet_highward.png",
+      "sha256": "52e33d5d062e99d653c2d341cd2aa60932d9f4ea5f91668f9acf8bb2f869c6d1",
+      "bytes": 235852,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet-icon.png",
+        "sha256": "150a365bc691cb417d0d24cdd4a70f567f53cce4f2026a04309b37f3d4026224",
+        "bytes": 73488
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet-icon.png",
+        "sha256": "150a365bc691cb417d0d24cdd4a70f567f53cce4f2026a04309b37f3d4026224",
+        "bytes": 73488
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_helmet_highward",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-highward-helmet-display.glb",
+            "sha256": "81668f4e2c36e1d70669ed39b6c6dbc92aa8e4aaa90291576062e65e9d12ff7b"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png",
+            "sha256": "47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-highward-helmet.glb": {
       "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet.glb",
@@ -737,14 +1657,91 @@
       "bytes": 1264392
     },
     "assets/paladin-mercy-boots-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots/icon.png",
-      "sha256": "5a68d5c9c7b1dfbb4356c12cd50e8b8fedc270de110af96bb344463cc0207a9c",
-      "bytes": 55260
+      "source": "gear-consolidation/studio-v3/paladin/paladin_boots_mercy.png",
+      "sha256": "0b664e9faa8bba45b1b15377b80e49bf6a8dc2d4e8dfbdfca152946a08ba92eb",
+      "bytes": 249391,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots/icon.png",
+        "sha256": "5a68d5c9c7b1dfbb4356c12cd50e8b8fedc270de110af96bb344463cc0207a9c",
+        "bytes": 55260
+      },
+      "previous": {
+        "source": "gear-consolidation/studio-v2/paladin/paladin_boots_mercy.png",
+        "sha256": "42b94d2a18e15bc2eee9540bfc56ce8c1c491f54cd1b3b8986dd17b5a4095552",
+        "bytes": 249277,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots/icon.png",
+          "sha256": "5a68d5c9c7b1dfbb4356c12cd50e8b8fedc270de110af96bb344463cc0207a9c",
+          "bytes": 55260
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_boots_mercy",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-mercy-boots-display.glb",
+              "sha256": "81693c192451b709ab73f0fc69373a3f7a5260c672df86bb7bfd92e173628e07"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png",
+              "sha256": "fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2"
+            }
+          ]
+        }
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_boots_mercy",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-mercy-boots-display.glb",
+            "sha256": "fb77aa33072c722690791f85fb22a2828d8d8557dfc093b8c92b18ada5634357"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png",
+            "sha256": "fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-mercy-boots-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots-display/mercy-boots-display.glb",
-      "sha256": "1fc1451a91123322fe762e3f86e1819d11f0635876f51748fd5edaa44f998b70",
-      "bytes": 491316
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "fb77aa33072c722690791f85fb22a2828d8d8557dfc093b8c92b18ada5634357",
+      "bytes": 478348,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots-display/mercy-boots-display.glb",
+        "sha256": "1fc1451a91123322fe762e3f86e1819d11f0635876f51748fd5edaa44f998b70",
+        "bytes": 491316
+      },
+      "previous": {
+        "source": "scratch/gear-consolidation/boot-display/outputs/paladin-mercy-boots-display.glb",
+        "sha256": "81693c192451b709ab73f0fc69373a3f7a5260c672df86bb7bfd92e173628e07",
+        "bytes": 478356,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/mercy-apparel/boots-display/mercy-boots-display.glb",
+          "sha256": "1fc1451a91123322fe762e3f86e1819d11f0635876f51748fd5edaa44f998b70",
+          "bytes": 491316
+        },
+        "derivation": "Dedicated boot-only display: remove authored trouser component, retain closed generated footwear, translate only.",
+        "evidence": {
+          "path": "scratch/gear-consolidation/boot-display/evidence.json",
+          "sha256": "6b2d367806faf6e4d37f47f21dc1d8368dec64dfafbf171d78bdf49d256653a4"
+        }
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_boots_mercy",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "81693c192451b709ab73f0fc69373a3f7a5260c672df86bb7bfd92e173628e07",
+        "transform": {
+          "positiveUniformScale": 2.5239078999347337,
+          "translation": [
+            -1.8004629584195588e-06,
+            0.019501079153657723,
+            8.551885618114597e-10
+          ]
+        }
+      }
     },
     "assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/1a4d7a0067071a18caeafe1917554f29c297e3c9819a8cf3613c3308ea23eb26.png",
@@ -757,9 +1754,34 @@
       "bytes": 823828
     },
     "assets/paladin-mercy-helmet-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet-icon.png",
-      "sha256": "b1b2a419f077fda8e3d99b73495d25fb10da5536087dd751e60f00f7af1e07dc",
-      "bytes": 68349
+      "source": "gear-consolidation/studio-v3/paladin/paladin_helmet_mercy.png",
+      "sha256": "52f81109ae7acf58ee93463b88c317bc57f083cf373b616cb7639a1af052391c",
+      "bytes": 209262,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet-icon.png",
+        "sha256": "b1b2a419f077fda8e3d99b73495d25fb10da5536087dd751e60f00f7af1e07dc",
+        "bytes": 68349
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet-icon.png",
+        "sha256": "b1b2a419f077fda8e3d99b73495d25fb10da5536087dd751e60f00f7af1e07dc",
+        "bytes": 68349
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_helmet_mercy",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-mercy-helmet-display.glb",
+            "sha256": "0847bc0366880625ad3882090426f8a583a1b59c6b85fa04d5bc4a2f415acee3"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png",
+            "sha256": "ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-mercy-helmet.glb": {
       "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet.glb",
@@ -882,14 +1904,91 @@
       "bytes": 1328068
     },
     "assets/paladin-verdict-boots-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots/icon.png",
-      "sha256": "0183b38dee050cdde53a07b21210fb007d7181a8dbdc7afb34793fd8ca0243c2",
-      "bytes": 51754
+      "source": "gear-consolidation/studio-v3/paladin/paladin_boots_verdict.png",
+      "sha256": "a763e3f52e004c41f13bb77a4b688c92d38718f68180e2312e0754367be705c9",
+      "bytes": 226593,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots/icon.png",
+        "sha256": "0183b38dee050cdde53a07b21210fb007d7181a8dbdc7afb34793fd8ca0243c2",
+        "bytes": 51754
+      },
+      "previous": {
+        "source": "gear-consolidation/studio-v2/paladin/paladin_boots_verdict.png",
+        "sha256": "979ae234f572e4e4006a6a0643a4ff3828b5550156fb3222fd49ddc193bdd104",
+        "bytes": 226767,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots/icon.png",
+          "sha256": "0183b38dee050cdde53a07b21210fb007d7181a8dbdc7afb34793fd8ca0243c2",
+          "bytes": 51754
+        },
+        "derivation": {
+          "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+          "itemId": "paladin_boots_verdict",
+          "inputs": [
+            {
+              "path": "marketplace/packages/paladin/assets/paladin-verdict-boots-display.glb",
+              "sha256": "731d33a6cb366f2d921f77f3f0a2f1e94406b61434bee79cdb14e842d9cf35dc"
+            },
+            {
+              "path": "marketplace/packages/paladin/assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png",
+              "sha256": "3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f"
+            }
+          ]
+        }
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_boots_verdict",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-verdict-boots-display.glb",
+            "sha256": "0a1688c8e2bacfbf08c577e27aa7f9cca8baaa78c574b837fdb89b3c5e5b1fc1"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png",
+            "sha256": "3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-verdict-boots-display.glb": {
-      "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots-display/verdict-boots-display.glb",
-      "sha256": "09a638c0cb9f7d82e6c0d3cbf9094feaadada3f03727f3d66a5b0974bb3f71df",
-      "bytes": 503092
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "0a1688c8e2bacfbf08c577e27aa7f9cca8baaa78c574b837fdb89b3c5e5b1fc1",
+      "bytes": 490124,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots-display/verdict-boots-display.glb",
+        "sha256": "09a638c0cb9f7d82e6c0d3cbf9094feaadada3f03727f3d66a5b0974bb3f71df",
+        "bytes": 503092
+      },
+      "previous": {
+        "source": "scratch/gear-consolidation/boot-display/outputs/paladin-verdict-boots-display.glb",
+        "sha256": "731d33a6cb366f2d921f77f3f0a2f1e94406b61434bee79cdb14e842d9cf35dc",
+        "bytes": 490132,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/verdict-apparel/boots-display/verdict-boots-display.glb",
+          "sha256": "09a638c0cb9f7d82e6c0d3cbf9094feaadada3f03727f3d66a5b0974bb3f71df",
+          "bytes": 503092
+        },
+        "derivation": "Dedicated boot-only display: remove authored trouser component, retain closed generated footwear, translate only.",
+        "evidence": {
+          "path": "scratch/gear-consolidation/boot-display/evidence.json",
+          "sha256": "6b2d367806faf6e4d37f47f21dc1d8368dec64dfafbf171d78bdf49d256653a4"
+        }
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_boots_verdict",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "731d33a6cb366f2d921f77f3f0a2f1e94406b61434bee79cdb14e842d9cf35dc",
+        "transform": {
+          "positiveUniformScale": 2.5239078999347337,
+          "translation": [
+            -1.8010592817163487e-06,
+            0.022538987612445063,
+            -3.6005675067250505e-09
+          ]
+        }
+      }
     },
     "assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png": {
       "source": "art-experiments/paladin-overhaul/runtime-textures/679d810561309f3e8d4615c61c8476b87f06c82b2d10da2cf4c73a82670272b1.png",
@@ -902,9 +2001,34 @@
       "bytes": 844436
     },
     "assets/paladin-verdict-helmet-icon.png": {
-      "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet-icon.png",
-      "sha256": "09ed181a164a38893b29e365679cd875b19428aedb962c4a74edc0c0e57c7d13",
-      "bytes": 72826
+      "source": "gear-consolidation/studio-v3/paladin/paladin_helmet_verdict.png",
+      "sha256": "ca8376299886a1d2d79270fb1b95229f47dd3cd4192333237288d22177ff1210",
+      "bytes": 211133,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet-icon.png",
+        "sha256": "09ed181a164a38893b29e365679cd875b19428aedb962c4a74edc0c0e57c7d13",
+        "bytes": 72826
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet-icon.png",
+        "sha256": "09ed181a164a38893b29e365679cd875b19428aedb962c4a74edc0c0e57c7d13",
+        "bytes": 72826
+      },
+      "derivation": {
+        "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+        "itemId": "paladin_helmet_verdict",
+        "inputs": [
+          {
+            "path": "marketplace/packages/paladin/assets/paladin-verdict-helmet-display.glb",
+            "sha256": "1a5c4097401cddfc86d009baebe161cbf8d81af8589242109c30c75da4acd712"
+          },
+          {
+            "path": "marketplace/packages/paladin/assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png",
+            "sha256": "394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507"
+          }
+        ],
+        "iconRevision": "studio-v3"
+      }
     },
     "assets/paladin-verdict-helmet.glb": {
       "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet.glb",
@@ -1205,6 +2329,389 @@
       "source": "art-experiments/paladin-overhaul/candidates/smite-action/smite-256.png",
       "sha256": "b34feedf5acdd3c1edf6c2de03349c1251c2a3ad09b65de1ef27cf302b858e60",
       "bytes": 30629
+    },
+    "assets/paladin-novice-helmet-display.glb": {
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "206ec6450aafe1f5888577205955d8060bfdf593225652da52c326733c81cf67",
+      "bytes": 202612,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet.glb",
+        "sha256": "b590e85c42f4613d0b0056fae1243ef48be3e553a2defb04069cc8b088cd19df",
+        "bytes": 202612
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/novice-helmet/novice-helmet.glb",
+        "sha256": "b590e85c42f4613d0b0056fae1243ef48be3e553a2defb04069cc8b088cd19df",
+        "bytes": 202612
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_helmet_novice",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "b590e85c42f4613d0b0056fae1243ef48be3e553a2defb04069cc8b088cd19df",
+        "transform": {
+          "positiveUniformScale": 1.0,
+          "translation": [
+            -0.03289833568649869,
+            0.10106617796623221,
+            0.027605009371626455
+          ]
+        }
+      }
+    },
+    "assets/paladin-oathkeeper-helmet-display.glb": {
+      "sha256": "ca2bf74937dbc540185d1ab0851f8ea699f6359ef6fd70c4c5972f24f73cf5fa",
+      "bytes": 251548,
+      "previous": {
+        "source": "art-experiments/gear-display-framing/fit_displays.py",
+        "sha256": "1b3c925c9b4116e560fded89a49746f2ed9a4aee06fefceb511521d9a66d2bfc",
+        "bytes": 251548,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.glb",
+          "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
+          "bytes": 251548
+        },
+        "previous": {
+          "source": "art-experiments/paladin-overhaul/helmet_clearance.py",
+          "sha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415",
+          "bytes": 251548,
+          "baseline": {
+            "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.glb",
+            "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
+            "bytes": 251548
+          },
+          "derivation": {
+            "profile": "art-experiments/paladin-overhaul/helmet-clearance-profiles.json",
+            "tier": "oathkeeper",
+            "sourceHashes": {
+              "art-experiments/paladin-overhaul/helmet_clearance.py": "5c73aa32221fd78594d841cd2bff631b5c4584f60666d73891db4fd82cd99af5",
+              "art-experiments/paladin-overhaul/helmet-clearance-profiles.json": "b74e34d63462f23542550892b10113f545073cf7327e3df0d570f3fcf583b6b9"
+            },
+            "steps": [
+              {
+                "operation": "rear-z",
+                "amplitude": 0.15,
+                "outputSha256": "4cd46c5040159f8f89efb396cdc6efc91478b031f4a32edeee9361f7defaf08a"
+              },
+              {
+                "operation": "side-x",
+                "amplitude": 0.65,
+                "outputSha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415"
+              }
+            ],
+            "lineage": {
+              "rodin": {
+                "path": "scratch/paladin-overhaul/raw/paladin_helmet_oathkeeper/base_basic_shaded.glb",
+                "sha256": "15b461af8193e6c7e233825dfeb1b63b9991bc1166c7e4516e37ca4506bfafa5",
+                "hashEvidence": "preserved preparation receipt",
+                "availableInCheckout": false
+              },
+              "originalFit": {
+                "path": "art-experiments/paladin-overhaul/fit-oathkeeper-helmet.json",
+                "sha256": "03e629ae9bb529c6303ef87c92a30b23e806736967d5256ba72905dbf26ea603"
+              },
+              "preparation": {
+                "path": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.preparation.json",
+                "sha256": "d334c869fc96e4425c858b0f4722e301bf4dec61dde86ee471e328c80d105520"
+              },
+              "originalGeometry": {
+                "path": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.source.json",
+                "sha256": "52e16af8bfee8bc4588e50427247d1a3c4fd942e2fd007fd270cb1ac1645a238"
+              }
+            },
+            "scope": "Local original-art shell clearance and affected normal reconstruction. Original UVs, indices and textures preserved; no native geometry inputs."
+          }
+        },
+        "derivation": {
+          "displayFramingItem": "paladin_helmet_oathkeeper",
+          "ledger": "marketplace/packages/display-framing.provenance.json",
+          "inputSha256": "bb43bb83a41beaee89f1b6b37184d0143117eb8c797315ce96616b28d7cfc415",
+          "transform": {
+            "positiveUniformScale": 1.0,
+            "translation": [
+              0.010486388833442127,
+              0.15516830711144136,
+              -0.008799133937358648
+            ]
+          }
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/oathkeeper-helmet/oathkeeper-helmet.glb",
+        "sha256": "bf642f369e4cf520066253babf8d3a48990b24b44ea85b36dd40aaf96e4c5ec1",
+        "bytes": 251548
+      }
+    },
+    "assets/paladin-highward-helmet-display.glb": {
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "81668f4e2c36e1d70669ed39b6c6dbc92aa8e4aaa90291576062e65e9d12ff7b",
+      "bytes": 258104,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet.glb",
+        "sha256": "dd709f2c9b5edcad26802c02b903a34b143fb6ac1bce372c3a2c33a00fe6fd65",
+        "bytes": 258108
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/highward-helmet/highward-helmet.glb",
+        "sha256": "dd709f2c9b5edcad26802c02b903a34b143fb6ac1bce372c3a2c33a00fe6fd65",
+        "bytes": 258108
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_helmet_highward",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "dd709f2c9b5edcad26802c02b903a34b143fb6ac1bce372c3a2c33a00fe6fd65",
+        "transform": {
+          "positiveUniformScale": 1.0,
+          "translation": [
+            -0.001163139908038078,
+            0.09505539688980452,
+            0.0009759912588853062
+          ]
+        }
+      }
+    },
+    "assets/paladin-mercy-helmet-display.glb": {
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "0847bc0366880625ad3882090426f8a583a1b59c6b85fa04d5bc4a2f415acee3",
+      "bytes": 250456,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet.glb",
+        "sha256": "94080d663173b819a680bef0385fda72f674ca575b0e6cdd0f53f4207cd858bd",
+        "bytes": 250460
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/mercy-helmet/mercy-helmet.glb",
+        "sha256": "94080d663173b819a680bef0385fda72f674ca575b0e6cdd0f53f4207cd858bd",
+        "bytes": 250460
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_helmet_mercy",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "94080d663173b819a680bef0385fda72f674ca575b0e6cdd0f53f4207cd858bd",
+        "transform": {
+          "positiveUniformScale": 1.0,
+          "translation": [
+            -0.035982772328850915,
+            0.11982036698270981,
+            0.03019316164867673
+          ]
+        }
+      }
+    },
+    "assets/paladin-censure-helmet-display.glb": {
+      "sha256": "0bf6487398da1af7146a354d2b62e50262f8183c87cbc68c9ff471d62d151973",
+      "bytes": 349936,
+      "previous": {
+        "source": "art-experiments/gear-display-framing/fit_displays.py",
+        "sha256": "3b06b607154f2c92ebcee74ff6f2525d21eec55b4c0c3f5a7d49a2f957ba87b4",
+        "bytes": 443152,
+        "baseline": {
+          "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.glb",
+          "sha256": "1805d57e5c89153a8a528de4d951da35198a5e2217380c8ca9e1feb734d878fa",
+          "bytes": 443152
+        },
+        "previous": {
+          "source": "art-experiments/paladin-overhaul/helmet_clearance.py",
+          "sha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e",
+          "bytes": 443156,
+          "baseline": {
+            "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.glb",
+            "sha256": "1805d57e5c89153a8a528de4d951da35198a5e2217380c8ca9e1feb734d878fa",
+            "bytes": 443152
+          },
+          "derivation": {
+            "profile": "art-experiments/paladin-overhaul/helmet-clearance-profiles.json",
+            "tier": "censure",
+            "sourceHashes": {
+              "art-experiments/paladin-overhaul/helmet_clearance.py": "5c73aa32221fd78594d841cd2bff631b5c4584f60666d73891db4fd82cd99af5",
+              "art-experiments/paladin-overhaul/helmet-clearance-profiles.json": "b74e34d63462f23542550892b10113f545073cf7327e3df0d570f3fcf583b6b9"
+            },
+            "steps": [
+              {
+                "operation": "rear-z",
+                "amplitude": 0.1,
+                "outputSha256": "c09d4721719344d331e631d763548ab4c0af50e40a455de9d425235765c70827"
+              },
+              {
+                "operation": "side-x",
+                "amplitude": 0.85,
+                "outputSha256": "286b74d6c9f219bce7b50ffccdc9d226b0327daf7c7559f0b195d8347714bbf4"
+              },
+              {
+                "operation": "rear-taper-z",
+                "amplitude": 0.12,
+                "outputSha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e"
+              }
+            ],
+            "lineage": {
+              "rodin": {
+                "path": "scratch/paladin-overhaul/raw/censure-helmet/base_basic_shaded.glb",
+                "sha256": "b5ffa641fed700ebe9a88787a749a503c6477d947ce95decb10a0ffc3a37f6d0",
+                "hashEvidence": "preserved preparation receipt",
+                "availableInCheckout": false
+              },
+              "originalFit": {
+                "path": "art-experiments/paladin-overhaul/fit-censure-helmet.json",
+                "sha256": "3db300868bc3a25350f9aaaf24c4d2834cb839523fa97a583cce10482908d4b7"
+              },
+              "preparation": {
+                "path": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.preparation.json",
+                "sha256": "ac008c3c9c83dad25860e35ed4f6a9df263b505f4eece9260b0bf170d1b74964"
+              },
+              "originalGeometry": {
+                "path": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.source.json",
+                "sha256": "9671c5cfa15b80b2c356e326065dcca72c260e0b1a46cca51bb4c942df23902d"
+              }
+            },
+            "scope": "Local original-art shell clearance and affected normal reconstruction. Original UVs, indices and textures preserved; no native geometry inputs."
+          }
+        },
+        "derivation": {
+          "displayFramingItem": "paladin_helmet_censure",
+          "ledger": "marketplace/packages/display-framing.provenance.json",
+          "inputSha256": "8ae5d6c2643445d596a3f8810175da176b1d6d70c0fa315fa490b33f671c533e",
+          "transform": {
+            "positiveUniformScale": 1.0,
+            "translation": [
+              0.00952136136692166,
+              0.09418790574318325,
+              -0.007989378923881036
+            ]
+          }
+        }
+      },
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      },
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/censure-helmet/censure-helmet.glb",
+        "sha256": "1805d57e5c89153a8a528de4d951da35198a5e2217380c8ca9e1feb734d878fa",
+        "bytes": 443152
+      }
+    },
+    "assets/paladin-verdict-helmet-display.glb": {
+      "source": "art-experiments/gear-display-framing/fit_displays.py",
+      "sha256": "1a5c4097401cddfc86d009baebe161cbf8d81af8589242109c30c75da4acd712",
+      "bytes": 247900,
+      "baseline": {
+        "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet.glb",
+        "sha256": "f466c8d44bdc48226113967893309a62767af8c51dbd0ce094b01e246c144dd6",
+        "bytes": 247900
+      },
+      "previous": {
+        "source": "art-experiments/paladin-overhaul/candidates/verdict-helmet/verdict-helmet.glb",
+        "sha256": "f466c8d44bdc48226113967893309a62767af8c51dbd0ce094b01e246c144dd6",
+        "bytes": 247900
+      },
+      "derivation": {
+        "displayFramingItem": "paladin_helmet_verdict",
+        "ledger": "marketplace/packages/display-framing.provenance.json",
+        "inputSha256": "f466c8d44bdc48226113967893309a62767af8c51dbd0ce094b01e246c144dd6",
+        "transform": {
+          "positiveUniformScale": 1.0,
+          "translation": [
+            -0.03835153546751301,
+            0.09046634625825628,
+            0.03218079194295563
+          ]
+        }
+      }
+    },
+    "assets/atlas-6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c.png": {
+      "sha256": "6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c",
+      "bytes": 911709,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
+    },
+    "assets/atlas-ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257.png": {
+      "sha256": "ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257",
+      "bytes": 1098270,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
+    },
+    "assets/atlas-633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b.png": {
+      "sha256": "633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b",
+      "bytes": 951763,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
+    },
+    "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png": {
+      "sha256": "6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59",
+      "bytes": 1005884,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
+    },
+    "assets/atlas-7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a.png": {
+      "sha256": "7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a",
+      "bytes": 919157,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
+    },
+    "assets/paladin-hammer-1h-censure-display.glb": {
+      "sha256": "9105651a01ff6270b4488bbaf55d49cc43e85b242f477f7f8e5116a477ade256",
+      "bytes": 346924,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
+    },
+    "assets/paladin-hammer-1h-censure-fragment-1-display.glb": {
+      "sha256": "2d344239414288066c895e9285a18d8c4272f60587e584ec012df96c6b63c40e",
+      "bytes": 273012,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
+    },
+    "assets/paladin-hammer-1h-censure-fragment-2-display.glb": {
+      "sha256": "4e426165581fdabac8252b375a4b07661f6d1fe803d94b570d66548e9359375a",
+      "bytes": 80836,
+      "previous": null,
+      "derivation": {
+        "censureVisualRevision": {
+          "path": "marketplace/packages/censure-visual.provenance.json",
+          "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
+        }
+      }
     }
   },
   "rendererRoutes": {
@@ -1605,34 +3112,34 @@
         {
           "path": ".",
           "model": "assets/paladin-hammer-1h-censure.glb",
-          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "Break",
           "model": "assets/paladin-hammer-1h-censure-fragment-1.glb",
-          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/paladin-hammer-1h-censure-fragment-2.glb",
-          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         }
       ],
       "displayModels": [
         {
           "path": "smithhammer",
-          "model": "assets/paladin-hammer-1h-censure.glb",
-          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+          "model": "assets/paladin-hammer-1h-censure-display.glb",
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "smithhammer/Break",
-          "model": "assets/paladin-hammer-1h-censure-fragment-1.glb",
-          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+          "model": "assets/paladin-hammer-1h-censure-fragment-1-display.glb",
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "smithhammer/Break/Break",
-          "model": "assets/paladin-hammer-1h-censure-fragment-2.glb",
-          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+          "model": "assets/paladin-hammer-1h-censure-fragment-2-display.glb",
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         }
       ]
     },
@@ -1641,44 +3148,44 @@
         {
           "path": ".",
           "model": "assets/paladin-hammer-2h-censure.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "break",
           "model": "assets/paladin-hammer-2h-censure-fragment-1.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "break/break2",
           "model": "assets/paladin-hammer-2h-censure-fragment-2.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "break/break1",
           "model": "assets/paladin-hammer-2h-censure-fragment-3.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         }
       ],
       "displayModels": [
         {
           "path": "hammer",
           "model": "assets/paladin-hammer-2h-censure-display.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "hammer/break",
           "model": "assets/paladin-hammer-2h-censure-fragment-1-display.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "hammer/break/break2",
           "model": "assets/paladin-hammer-2h-censure-fragment-2-display.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         },
         {
           "path": "hammer/break/break1",
           "model": "assets/paladin-hammer-2h-censure-fragment-3-display.glb",
-          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+          "texture": "assets/atlas-6ee41cc1c915bfb3b54e7751a2879ad5629b24d856e2677e066678282429ab59.png"
         }
       ]
     },
@@ -1687,14 +3194,14 @@
         {
           "path": ".",
           "model": "assets/paladin-shield-censure.glb",
-          "texture": "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png"
+          "texture": "assets/atlas-633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b.png"
         }
       ],
       "displayModels": [
         {
           "path": "shieldBlacksmith01",
           "model": "assets/paladin-shield-censure-display.glb",
-          "texture": "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png"
+          "texture": "assets/atlas-633e3d05880e4ed4a9e8e8dfabac69fe388e60a7b5a9452bd1f49ba53cb3ec9b.png"
         }
       ]
     },
@@ -1855,7 +3362,7 @@
       "displayModels": [
         {
           "path": "helmKettle",
-          "model": "assets/paladin-novice-helmet.glb",
+          "model": "assets/paladin-novice-helmet-display.glb",
           "texture": "assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png"
         }
       ]
@@ -1919,7 +3426,7 @@
       "displayModels": [
         {
           "path": "helmKettle",
-          "model": "assets/paladin-oathkeeper-helmet.glb",
+          "model": "assets/paladin-oathkeeper-helmet-display.glb",
           "texture": "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
         }
       ]
@@ -1983,7 +3490,7 @@
       "displayModels": [
         {
           "path": "helmKettle",
-          "model": "assets/paladin-highward-helmet.glb",
+          "model": "assets/paladin-highward-helmet-display.glb",
           "texture": "assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png"
         }
       ]
@@ -2047,7 +3554,7 @@
       "displayModels": [
         {
           "path": "helmKettle",
-          "model": "assets/paladin-mercy-helmet.glb",
+          "model": "assets/paladin-mercy-helmet-display.glb",
           "texture": "assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png"
         }
       ]
@@ -2057,7 +3564,7 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/paladin-censure-armor-display.glb",
-          "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+          "texture": "assets/atlas-ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257.png"
         }
       ],
       "apparelModels": {
@@ -2068,13 +3575,13 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/paladin-female-censure-armor.glb",
-            "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+            "texture": "assets/atlas-ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/paladin-male-censure-armor.glb",
-            "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+            "texture": "assets/atlas-ebc32ac84a5c8e9c5cb7508805eb3798dca2ea7b8b046b8be9de425a8c4d3257.png"
           }
         ]
       }
@@ -2084,7 +3591,7 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/paladin-censure-boots-display.glb",
-          "texture": "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png"
+          "texture": "assets/atlas-7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a.png"
         }
       ],
       "apparelModels": {
@@ -2095,7 +3602,7 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/paladin-censure-boots.glb",
-            "texture": "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png"
+            "texture": "assets/atlas-7d16973127ce4bf35d5e7e0962f91b7fc89e8c08d2c02b3c25fbda792cb5e47a.png"
           }
         ]
       }
@@ -2105,14 +3612,14 @@
         {
           "path": ".",
           "model": "assets/paladin-censure-helmet.glb",
-          "texture": "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png"
+          "texture": "assets/atlas-6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c.png"
         }
       ],
       "displayModels": [
         {
           "path": "helmKettle",
-          "model": "assets/paladin-censure-helmet.glb",
-          "texture": "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png"
+          "model": "assets/paladin-censure-helmet-display.glb",
+          "texture": "assets/atlas-6d41d486158d4f706390b7b1ac475772c23674f1a4905beddf2506e814c43e9c.png"
         }
       ]
     },
@@ -2175,7 +3682,7 @@
       "displayModels": [
         {
           "path": "helmKettle",
-          "model": "assets/paladin-verdict-helmet.glb",
+          "model": "assets/paladin-verdict-helmet-display.glb",
           "texture": "assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png"
         }
       ]
@@ -2391,5 +3898,52 @@
     "sourceEvidenceAndFileSourceFields": "Archive-relative ledger identifiers from the retained authoring campaign, not downloadable repository links. The campaign and its raw generation/editing sources are retained separately and are not bundled in this source checkout or runtime release.",
     "runtimeInventory": "The files map pins every distributed runtime PNG/GLB under marketplace/packages/paladin/assets. Those installed assets and rendererRoutes are reproducible package validation inputs.",
     "acceptanceBoundary": "Source hashes establish identity and provenance, not universal fit, animation or distribution entitlement."
+  },
+  "baselinePackageVersion": "1.3.0",
+  "developmentRevision": {
+    "scope": "Six boot display meshes only; unpublished 1.4.0 source candidate. Historical 1.3.0 testedGame evidence does not cover these revised displays.",
+    "assets": [
+      "assets/paladin-novice-boots-display.glb",
+      "assets/paladin-oathkeeper-boots-display.glb",
+      "assets/paladin-highward-boots-display.glb",
+      "assets/paladin-mercy-boots-display.glb",
+      "assets/paladin-censure-boots-display.glb",
+      "assets/paladin-verdict-boots-display.glb"
+    ],
+    "evidence": {
+      "path": "scratch/gear-consolidation/boot-display/evidence.json",
+      "sha256": "6b2d367806faf6e4d37f47f21dc1d8368dec64dfafbf171d78bdf49d256653a4"
+    },
+    "nativeValidation": "Not run; verify boot card/drop framing and materials separately. Equipped assets unchanged."
+  },
+  "helmetClearanceRevision": {
+    "scope": "Unreleased selected helmet clearance; historical equipped-art evidence does not transfer to changed geometry.",
+    "assets": [
+      "assets/paladin-oathkeeper-helmet.glb",
+      "assets/paladin-censure-helmet.glb"
+    ],
+    "hairVisibility": {
+      "top": false,
+      "bottom": false
+    },
+    "nativeValidation": {
+      "oathkeeper": "Bounded inventory idle on Hunter Male, Scholar Male, Herbalist Female, Busker Male, Blacksmith Female and Thief Male.",
+      "censure": "Bounded inventory idle on Hunter Male, Scholar Male, Herbalist Female, Busker Male, Blacksmith Female and Thief Male. Minor extreme rear-rim contact accepted.",
+      "remaining": "Other classes/appearances, movement/combat animation, item display framing and lifecycle remain separate gates."
+    }
+  },
+  "nonweaponIconRevision": {
+    "ledger": "marketplace/packages/nonweapon-icons.provenance.json",
+    "sha256": "9874d62da04ac8f548586dc25234b1c5a9c423becb3f174dec691286c0af4244",
+    "scope": "Bounded accepted Censure visual revision; previous complete ledger retained."
+  },
+  "displayFramingRevision": {
+    "ledger": "marketplace/packages/display-framing.provenance.json",
+    "sha256": "b7648abecf57e124ac6113875aabb18de034717fd1ee5f524b280ffc98bb42c7",
+    "scope": "Bounded accepted Censure visual revision; previous complete ledger retained."
+  },
+  "censureVisualRevision": {
+    "path": "marketplace/packages/censure-visual.provenance.json",
+    "sha256": "59d6012874cf4a06ef62eb04f8fb17607e007d9d98b6829dd95f489bdd61a7ba"
   }
 }

@@ -14,3 +14,10 @@ Read the root and nearest `AGENTS.md`, [content authoring](../../../docs/WRITING
 5. Run content/package validators, `verify-change`, and available `ingame-smoke` checks. Record actual loot/shop observations and unmet probability or platform gates without upgrading offline checks into gameplay claims.
 
 Deliver the matrix, item and asset inventory, progression comparison, validation evidence, and explicit uncovered slots or skinsets.
+
+Combat UI: follow the repository combat icon rule. Reuse an existing native
+all-white outlined proficiency icon for every action; never generate or import
+a custom combat icon. Verify it beside vanilla buttons in game.
+
+FTK basic attack buttons use the weapon item icon. Preserve native weapon icons;
+do not override them with custom inventory renders.

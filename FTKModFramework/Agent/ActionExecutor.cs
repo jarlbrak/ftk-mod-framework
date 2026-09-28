@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 
 namespace FTKModFramework.Agent
@@ -20,7 +21,16 @@ namespace FTKModFramework.Agent
                     default: return Fail("unsupported action '" + action + "'; use native_input for game controls and GET /state or /ui for observation");
                 }
             }
-            catch (Exception e) { return Fail(action + ": " + e.Message); }
+            catch (Exception e) { return UnexpectedFailure(action, e); }
+        }
+
+        private static object UnexpectedFailure(string action, Exception error)
+        {
+            Exception cause = error;
+            while (cause is TargetInvocationException && cause.InnerException != null)
+                cause = cause.InnerException;
+            Plugin.Log.LogError("[agent] " + action + " failed: " + error);
+            return Fail(action + " threw: " + cause.GetType().Name + ": " + cause.Message);
         }
 
         private static object PrepareOffline()

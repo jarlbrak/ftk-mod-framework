@@ -31,11 +31,7 @@ public sealed partial class RuntimeModelTest
         if(packageOnly)
         {
             if(!string.IsNullOrEmpty(Str(command,"catalogSha256")))throw new ArgumentException("Package-only observation has no fixture catalog pin.");
-            Type registry=CatalogAssembly("FTKModFramework").GetType("FTKModFramework.Core.ContentRegistry",true);
-            object[] args=new object[]{key,-1,new Type[]{typeof(FTK_playerGameStartDB)}};
-            bool registered=(bool)registry.GetMethod("TryGetSyntheticId",Statics).Invoke(null,args);
-            if(!registered || (int)args[1]!=FTK_playerGameStartDB.GetDB().GetIntFromID(key))
-                throw new InvalidOperationException("Package-only observation requires an exact registered custom class.");
+            ExactClassRow(key, FTK_playerGameStartDB.GetDB().GetIntFromID(key));
         }
         else
         {

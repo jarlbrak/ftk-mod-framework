@@ -22,14 +22,8 @@ namespace FTKModFramework.Core
             GameObject f = item.m_ObjectType == FTK_itembase.ObjectType.armor ? female.m_Armor.gameObject : female.m_Boot;
             GameObject m = item.m_ObjectType == FTK_itembase.ObjectType.armor ? male.m_Armor.gameObject : male.m_Boot;
             if (f == null || m == null) return RejectApparel(item, "missing native garment prefab " + femaleBinding + "/" + maleBinding);
-            List<EnemyRendererMesh> check = new List<EnemyRendererMesh>();
-            foreach (PlayerApparelMesh mesh in meshes)
-            {
-                if (mesh == null || string.IsNullOrEmpty(mesh.ExpectedNativeMeshName) || mesh.ExpectedNativeMeshName.Trim().Length == 0) return RejectApparel(item, "missing expected native mesh name");
-                check.Add(new EnemyRendererMesh(mesh.RendererPath, mesh.GlbFileName, mesh.TextureFileName));
-            }
             string error;
-            if (!ExplicitEnemyMeshSwap.ValidateAssignments(check.ToArray(), out error)) return RejectApparel(item, error);
+            if (!ItemApparelRegistry.ValidateAssignments(meshes, out error)) return RejectApparel(item, error);
             item.m_WearablePrefab = f; item.m_WearablePrefabM = m;
             ItemApparelRegistry.Register(id, meshes);
             return true;
@@ -54,6 +48,48 @@ namespace FTKModFramework.Core
         }
         internal static void Register(int id, PlayerApparelMesh[] meshes) { Items[id] = (PlayerApparelMesh[])meshes.Clone(); }
 
+        internal static bool ValidateAssignments(PlayerApparelMesh[] meshes, out string error)
+        {
+            error = null;
+            if (meshes == null || meshes.Length == 0) { error = "requires nonempty apparel meshes"; return false; }
+            Dictionary<string, HashSet<FTK_playerGameStart.SkinType>> paths =
+                new Dictionary<string, HashSet<FTK_playerGameStart.SkinType>>(StringComparer.Ordinal);
+            foreach (PlayerApparelMesh mesh in meshes)
+            {
+                if (mesh == null || string.IsNullOrEmpty(mesh.ExpectedNativeMeshName) || mesh.ExpectedNativeMeshName.Trim().Length == 0)
+                { error = "missing expected native mesh name"; return false; }
+                if (mesh.NativeSkinType.HasValue && (mesh.NativeSkinType.Value == FTK_playerGameStart.SkinType.None ||
+                    !Enum.IsDefined(typeof(FTK_playerGameStart.SkinType), mesh.NativeSkinType.Value)))
+                { error = "native skin selector must name a playable appearance"; return false; }
+                // Validate every alternative's files without treating a deliberate override as a duplicate path.
+                if (!ExplicitEnemyMeshSwap.ValidateAssignments(new[] {
+                    new EnemyRendererMesh(mesh.RendererPath, mesh.GlbFileName, mesh.TextureFileName) }, out error)) return false;
+                HashSet<FTK_playerGameStart.SkinType> selectors;
+                if (!paths.TryGetValue(mesh.RendererPath, out selectors))
+                    paths.Add(mesh.RendererPath, selectors = new HashSet<FTK_playerGameStart.SkinType>());
+                if (!selectors.Add(mesh.NativeSkinType ?? FTK_playerGameStart.SkinType.None))
+                { error = "duplicate apparel path and native skin selector: " + mesh.RendererPath; return false; }
+            }
+            return true;
+        }
+
+        private static FTK_playerGameStart.SkinType NativeSkinType(CharacterEventListener avatar)
+        {
+            FTK_playerGameStart.SkinType skin = FTK_playerGameStart.SkinType.None;
+            FTK_playerGameStart row = null;
+            if (avatar.m_CharacterOverworld != null)
+            {
+                skin = avatar.m_CharacterOverworld.m_SkinType;
+                if (skin == FTK_playerGameStart.SkinType.None) row = avatar.m_CharacterOverworld.GetDBEntry();
+            }
+            else if (avatar.m_uiQuickPlayerCreate != null)
+            {
+                skin = avatar.m_uiQuickPlayerCreate.m_SkinType;
+                if (skin == FTK_playerGameStart.SkinType.None) row = avatar.m_uiQuickPlayerCreate.GetClassDBEntry();
+            }
+            return row == null ? skin : row.m_DefaultSkinType;
+        }
+
         internal static EnemyRendererMesh[] Resolve(CharacterEventListener avatar)
         {
             PlayerInventory inventory = avatar.m_CharacterOverworld != null ? avatar.m_CharacterOverworld.m_PlayerInventory :
@@ -69,9 +105,24 @@ namespace FTKModFramework.Core
         {
             PlayerApparelMesh[] meshes;
             if (!Items.TryGetValue((int)id, out meshes)) return;
-            Transform[] transforms = avatar.GetComponentsInChildren<Transform>(true);
+            FTK_playerGameStart.SkinType skin = NativeSkinType(avatar);
+            Dictionary<string, PlayerApparelMesh> selected = new Dictionary<string, PlayerApparelMesh>(StringComparer.Ordinal);
+            List<string> order = new List<string>();
             foreach (PlayerApparelMesh mesh in meshes)
             {
+                if (mesh.NativeSkinType.HasValue && mesh.NativeSkinType.Value != skin) continue;
+                PlayerApparelMesh prior;
+                if (!selected.TryGetValue(mesh.RendererPath, out prior))
+                {
+                    selected.Add(mesh.RendererPath, mesh);
+                    order.Add(mesh.RendererPath);
+                }
+                else if (mesh.NativeSkinType.HasValue) selected[mesh.RendererPath] = mesh;
+            }
+            Transform[] transforms = avatar.GetComponentsInChildren<Transform>(true);
+            foreach (string path in order)
+            {
+                PlayerApparelMesh mesh = selected[path];
                 Transform target = null;
                 foreach (Transform t in transforms)
                     if (ExplicitEnemyMeshSwap.RelativePath(avatar.transform, t) == mesh.RendererPath)

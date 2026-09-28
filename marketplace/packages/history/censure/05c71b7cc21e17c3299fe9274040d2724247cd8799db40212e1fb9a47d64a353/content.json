@@ -1,0 +1,2545 @@
+{
+  "entries": [
+    {
+      "kind": "class",
+      "id": "paladin",
+      "template": "blacksmith",
+      "displayName": "Paladin",
+      "guardian": true,
+      "overworldAilmentImmunity": {
+        "displayName": "Cleansing March"
+      },
+      "flavor": "An oath is measured by the lives it shelters. Through faith and resolve, the Paladin stands beside those who cannot stand alone.",
+      "fields": {
+        "strength": 0.7,
+        "intelligence": 0.4,
+        "awareness": 0.6,
+        "talent": 0.5,
+        "speed": 0.6,
+        "vitality": 0.8,
+        "focus": 3,
+        "startinggold": 3,
+        "primarystat": "vitality",
+        "dlc": "None",
+        "startweapon": "paladin_hammer_1h_novice",
+        "startitems": [
+          "paladin_shield_novice"
+        ],
+        "skills": {
+          "m_SteadFast": false
+        }
+      }
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_1h_novice",
+      "template": "bluntSmithHammer",
+      "displayName": "Novice Hammer",
+      "fields": {
+        "damage": 10,
+        "skill": "vitality",
+        "slots": 3,
+        "damagegain": 1,
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-novice.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-1.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-2.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-novice.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-1.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-novice-fragment-2.glb",
+          "texture": "assets/atlas-cfdb462d2fb13f170988a9ce53badedbee84285064f2defad33b26375e9b6264.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture_1h"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_2h_novice",
+      "template": "bluntWarHammer",
+      "displayName": "Novice Great Hammer",
+      "fields": {
+        "damage": 15,
+        "skill": "vitality",
+        "slots": 4,
+        "damagegain": 1,
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-novice.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-novice-fragment-1.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-novice-fragment-2.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-novice-fragment-3.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-novice-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-novice-fragment-1-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-novice-fragment-2-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-novice-fragment-3-display.glb",
+          "texture": "assets/atlas-c56be2772106ff40b43bc8e6e5f99ad8f9511b9609bb6ab592a8a574790e584e.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_shield_novice",
+      "template": "shieldblacksmith",
+      "displayName": "Novice Aegis",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.02
+      },
+      "guardianBonuses": {
+        "guardHealPercent": 2
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-novice.glb",
+          "texture": "assets/atlas-a31f8a13ff4809eb206a86ea68574e0e805be286ffa2a398b6e942f11b1efc58.png"
+        }
+      ],
+      "icon": "assets/paladin-shield-novice-icon.png",
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-novice-display.glb",
+          "texture": "assets/atlas-a31f8a13ff4809eb206a86ea68574e0e805be286ffa2a398b6e942f11b1efc58.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_1h_oathkeeper",
+      "template": "bluntSmithHammer",
+      "displayName": "Oathkeeper Hammer",
+      "fields": {
+        "damage": 17,
+        "skill": "vitality",
+        "slots": 3,
+        "damagegain": 1,
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 70,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-oathkeeper.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-1.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-2.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-oathkeeper.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-1.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-oathkeeper-fragment-2.glb",
+          "texture": "assets/atlas-d26e444f4f6969b8c0d34d327b59cb760924613cb4b9fd1e871d83709a83b76d.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture_1h"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_2h_oathkeeper",
+      "template": "bluntWarHammer",
+      "displayName": "Oathkeeper Great Hammer",
+      "fields": {
+        "damage": 24,
+        "skill": "vitality",
+        "slots": 4,
+        "damagegain": 1,
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 70,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-oathkeeper.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-1.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-2.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-3.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-oathkeeper-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-1-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-2-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-oathkeeper-fragment-3-display.glb",
+          "texture": "assets/atlas-e5f445ba01efc996ef2d02e0d6fa0aa167104d8b5df7aaa49f528a9ffdc3a8af.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_shield_oathkeeper",
+      "template": "shieldblacksmith",
+      "displayName": "Oathkeeper Aegis",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 70,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.02
+      },
+      "guardianBonuses": {
+        "guardHealPercent": 3
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-oathkeeper.glb",
+          "texture": "assets/atlas-c49d74d57afc27eaf203f9cf6d1e437fa8659d62a8b1fd0b2edae319020022b5.png"
+        }
+      ],
+      "icon": "assets/paladin-shield-oathkeeper-icon.png",
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-oathkeeper-display.glb",
+          "texture": "assets/atlas-c49d74d57afc27eaf203f9cf6d1e437fa8659d62a8b1fd0b2edae319020022b5.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_1h_highward",
+      "template": "bluntSmithHammer",
+      "displayName": "Highward Hammer",
+      "fields": {
+        "damage": 24,
+        "skill": "vitality",
+        "slots": 3,
+        "damagegain": 1,
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 200,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-highward.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-1.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-2.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-highward.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-1.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-highward-fragment-2.glb",
+          "texture": "assets/atlas-e8963bbc697c4a525681bef13a373a97c8d5aebfc9e5d7bb578cb35bb7f23229.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture_1h"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_2h_highward",
+      "template": "bluntWarHammer",
+      "displayName": "Highward Great Hammer",
+      "fields": {
+        "damage": 32,
+        "skill": "vitality",
+        "slots": 4,
+        "damagegain": 1,
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 200,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-highward.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-highward-fragment-1.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-highward-fragment-2.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-highward-fragment-3.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-highward-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-highward-fragment-1-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-highward-fragment-2-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-highward-fragment-3-display.glb",
+          "texture": "assets/atlas-5b9d97e841b988709500ae9a9bb94a80f2a9737c2dd94368583a5a005f89aaab.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_shield_highward",
+      "template": "shieldblacksmith",
+      "displayName": "Highward Aegis",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 200,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.02
+      },
+      "guardianBonuses": {
+        "guardHealPercent": 4
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-highward.glb",
+          "texture": "assets/atlas-1e4a588cfb80a2147be246a18b88c77c589be0899587aa1f6fa99c9020e40f03.png"
+        }
+      ],
+      "icon": "assets/paladin-shield-highward-icon.png",
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-highward-display.glb",
+          "texture": "assets/atlas-1e4a588cfb80a2147be246a18b88c77c589be0899587aa1f6fa99c9020e40f03.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_1h_mercy",
+      "template": "bluntSmithHammer",
+      "displayName": "Mercy Hammer",
+      "fields": {
+        "damage": 28,
+        "skill": "vitality",
+        "slots": 3,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "guardianBonuses": {
+        "focusHealBonusPercent": 2
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-mercy.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-1.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-2.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-mercy.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-1.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-mercy-fragment-2.glb",
+          "texture": "assets/atlas-d9efacb67b0c53bb84d7293d2fa25c0faa7cad7f3ed284b60f042e7a3b5cbdc7.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture_1h"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_2h_mercy",
+      "template": "bluntWarHammer",
+      "displayName": "Mercy Great Hammer",
+      "fields": {
+        "damage": 34,
+        "skill": "vitality",
+        "slots": 4,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "guardianBonuses": {
+        "focusHealBonusPercent": 4
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-mercy.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-1.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-2.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-3.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-mercy-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-1-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-2-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-mercy-fragment-3-display.glb",
+          "texture": "assets/atlas-640df82b6094b287e87103cdc1cd2bb8a587019b98902502597130792c0fe051.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_shield_mercy",
+      "template": "shieldblacksmith",
+      "displayName": "Mercy Aegis",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.02
+      },
+      "guardianBonuses": {
+        "guardHealPercent": 8
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-mercy.glb",
+          "texture": "assets/atlas-fd301cd3d6a3c7f3d1506094855bb80b0f53108c6091f93b98b9d90aaeb3db8f.png"
+        }
+      ],
+      "icon": "assets/paladin-shield-mercy-icon.png",
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-mercy-display.glb",
+          "texture": "assets/atlas-fd301cd3d6a3c7f3d1506094855bb80b0f53108c6091f93b98b9d90aaeb3db8f.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_1h_censure",
+      "template": "bluntSmithHammer",
+      "displayName": "Censure Hammer",
+      "fields": {
+        "damage": 28,
+        "skill": "vitality",
+        "slots": 3,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "proficiencies": [
+        "paladin_censure_fracture_1h"
+      ],
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-censure.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-1.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-2.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-censure.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-1.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-censure-fragment-2.glb",
+          "texture": "assets/atlas-2748d88a3f8ed36260b95292521b9663b30fc69570634b8d46500018d7df1a60.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_2h_censure",
+      "template": "bluntWarHammer",
+      "displayName": "Censure Great Hammer",
+      "fields": {
+        "damage": 34,
+        "skill": "vitality",
+        "slots": 4,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "proficiencies": [
+        "paladin_censure_fracture"
+      ],
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-censure.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-censure-fragment-1.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-censure-fragment-2.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-censure-fragment-3.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-censure-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-censure-fragment-1-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-censure-fragment-2-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-censure-fragment-3-display.glb",
+          "texture": "assets/atlas-3d0c137f117ef53c8e814c3896e45e2e1ffd685d1958498e9a913efdc69310f8.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_shield_censure",
+      "template": "shieldblacksmith",
+      "displayName": "Censure Aegis",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.02
+      },
+      "guardianBonuses": {
+        "wardDebuffs": true
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-censure.glb",
+          "texture": "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png"
+        }
+      ],
+      "icon": "assets/paladin-shield-censure-icon.png",
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-censure-display.glb",
+          "texture": "assets/atlas-a23cc6f23624b29d072fefc63e9adc0cbc4259f8f6728d5793a123dbd4797dc6.png"
+        }
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_1h_verdict",
+      "template": "bluntSmithHammer",
+      "displayName": "Verdict Hammer",
+      "fields": {
+        "damage": 31,
+        "skill": "vitality",
+        "slots": 3,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-verdict.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-1.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-2.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-verdict.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-1.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-verdict-fragment-2.glb",
+          "texture": "assets/atlas-a355e075b25d03ebd88efda6bd102146094d530633bac4fc951bb9b422232462.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture_1h"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_2h_verdict",
+      "template": "bluntWarHammer",
+      "displayName": "Verdict Great Hammer",
+      "fields": {
+        "damage": 37,
+        "skill": "vitality",
+        "slots": 4,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-verdict.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-1.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-2.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-3.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-verdict-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-1-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-2-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-verdict-fragment-3-display.glb",
+          "texture": "assets/atlas-7c3441f2ca341bcf81a4422222b05d636c4e8eae2def43c501e030ab2f90e99a.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_shield_verdict",
+      "template": "shieldblacksmith",
+      "displayName": "Verdict Aegis",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.02
+      },
+      "guardianBonuses": {
+        "retaliationDamage": 4
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-verdict.glb",
+          "texture": "assets/atlas-7f7a129340c6fb1bbd3c5f5434e9c9a95298bba5aae1e401d3271d524406c7a0.png"
+        }
+      ],
+      "icon": "assets/paladin-shield-verdict-icon.png",
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-verdict-display.glb",
+          "texture": "assets/atlas-7f7a129340c6fb1bbd3c5f5434e9c9a95298bba5aae1e401d3271d524406c7a0.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_armor_novice",
+      "template": "armorHeavy1",
+      "displayName": "Novice Plate",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1
+      },
+      "icon": "assets/paladin-novice-armor-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-novice-armor.glb",
+            "texture": "assets/atlas-9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-novice-armor.glb",
+            "texture": "assets/atlas-9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-novice-armor-display.glb",
+          "texture": "assets/atlas-9dfc8e392426802c00ba054d9c153e24f730747b55fdd154f968971209cdbfd3.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_boots_novice",
+      "template": "bootsHeavy3",
+      "displayName": "Novice Sabatons",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 0
+      },
+      "icon": "assets/paladin-novice-boots-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-novice-boots.glb",
+            "texture": "assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-novice-boots-display.glb",
+          "texture": "assets/atlas-470dc9295f6df29394791f22e76d8e4ed8f98fce63c58d118039664a0466436d.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_helmet_novice",
+      "template": "helmetHeavy1",
+      "displayName": "Novice Helm",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 12,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 1
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-novice-helmet.glb",
+          "texture": "assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png"
+        }
+      ],
+      "icon": "assets/paladin-novice-helmet-icon.png",
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-novice-helmet-display.glb",
+          "texture": "assets/atlas-caffe112a4287ea79c9c893526a85ebbf2b55806cd85795475534afd9ffbfb07.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_armor_oathkeeper",
+      "template": "armorHeavy1",
+      "displayName": "Oathkeeper Plate",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 70,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 2
+      },
+      "icon": "assets/paladin-oathkeeper-armor-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-oathkeeper-armor.glb",
+            "texture": "assets/atlas-8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-oathkeeper-armor.glb",
+            "texture": "assets/atlas-8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-oathkeeper-armor-display.glb",
+          "texture": "assets/atlas-8ce034f380f0262d9bfc33b6ffc5dcec8f2579cd1bc0fde0cb8bda8c313d6b66.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_boots_oathkeeper",
+      "template": "bootsHeavy3",
+      "displayName": "Oathkeeper Sabatons",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 70,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1
+      },
+      "icon": "assets/paladin-oathkeeper-boots-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-oathkeeper-boots.glb",
+            "texture": "assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-oathkeeper-boots-display.glb",
+          "texture": "assets/atlas-70858a197efc164d0c2a8b3db0f43115377b4072309bcb9538d8fe073ccd3bcc.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_helmet_oathkeeper",
+      "template": "helmetHeavy1",
+      "displayName": "Oathkeeper Helm",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 70,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 1
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-oathkeeper-helmet.glb",
+          "texture": "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
+        }
+      ],
+      "icon": "assets/paladin-oathkeeper-helmet-icon.png",
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-oathkeeper-helmet-display.glb",
+          "texture": "assets/atlas-18df25ea7cf8a98f9c52416f8922e13518fc4196838009b674973c9db1a58f2e.png"
+        }
+      ],
+      "helmetHairVisibility": {
+        "top": false,
+        "bottom": false
+      }
+    },
+    {
+      "kind": "item",
+      "id": "paladin_armor_highward",
+      "template": "armorHeavy1",
+      "displayName": "Highward Plate",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 200,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 6,
+        "resistance": 3
+      },
+      "icon": "assets/paladin-highward-armor-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-highward-armor.glb",
+            "texture": "assets/atlas-2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-highward-armor.glb",
+            "texture": "assets/atlas-2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-highward-armor-display.glb",
+          "texture": "assets/atlas-2149b8af9512747b0515bdfa5b6ddb2c62eb9e95049eaad20d6b362e5546aaa9.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_boots_highward",
+      "template": "bootsHeavy3",
+      "displayName": "Highward Sabatons",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 200,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 2
+      },
+      "icon": "assets/paladin-highward-boots-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-highward-boots.glb",
+            "texture": "assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-highward-boots-display.glb",
+          "texture": "assets/atlas-700bb41024785eae7e46aa2a1db57d9531aa5385d7cecc55b36f89dfeb4b31ef.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_helmet_highward",
+      "template": "helmetHeavy1",
+      "displayName": "Highward Helm",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 200,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 2
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-highward-helmet.glb",
+          "texture": "assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png"
+        }
+      ],
+      "icon": "assets/paladin-highward-helmet-icon.png",
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-highward-helmet-display.glb",
+          "texture": "assets/atlas-47aadda720d0da0e9c7e4751cbf4e8b43024578cde3b6ddd64621adfa3eb54c8.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_armor_mercy",
+      "template": "armorHeavy1",
+      "displayName": "Mercy Plate",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 7,
+        "resistance": 4,
+        "vitality": 0.02
+      },
+      "icon": "assets/paladin-mercy-armor-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-mercy-armor.glb",
+            "texture": "assets/atlas-5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-mercy-armor.glb",
+            "texture": "assets/atlas-5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-mercy-armor-display.glb",
+          "texture": "assets/atlas-5cc89420e02be7aefe4ce5550bf2b3f1ce3adac9f716e505f16ae30e37924cec.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_boots_mercy",
+      "template": "bootsHeavy3",
+      "displayName": "Mercy Sabatons",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 3,
+        "vitality": 0.02
+      },
+      "icon": "assets/paladin-mercy-boots-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-mercy-boots.glb",
+            "texture": "assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-mercy-boots-display.glb",
+          "texture": "assets/atlas-fdc6efe058b9c72ea186a197c2cec6cebc4339e305604c02a6189ed57f0f6da2.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_helmet_mercy",
+      "template": "helmetHeavy1",
+      "displayName": "Mercy Helm",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 3,
+        "vitality": 0.02
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-mercy-helmet.glb",
+          "texture": "assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png"
+        }
+      ],
+      "icon": "assets/paladin-mercy-helmet-icon.png",
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-mercy-helmet-display.glb",
+          "texture": "assets/atlas-ccd164973f96ee4543be986dd9edc23cc9f8b9d0b38dbcdc7329dd00fbbe0fdf.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_armor_censure",
+      "template": "armorHeavy1",
+      "displayName": "Censure Plate",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 7,
+        "resistance": 4,
+        "speed": 0.01
+      },
+      "icon": "assets/paladin-censure-armor-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-censure-armor.glb",
+            "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-censure-armor.glb",
+            "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-censure-armor-display.glb",
+          "texture": "assets/atlas-e2f7893e3b2832df3a6efd3668a640947707c70bd38fe59563ad7f18eadfe1a4.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_boots_censure",
+      "template": "bootsHeavy3",
+      "displayName": "Censure Sabatons",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 3,
+        "speed": 0.01
+      },
+      "icon": "assets/paladin-censure-boots-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-censure-boots.glb",
+            "texture": "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-censure-boots-display.glb",
+          "texture": "assets/atlas-4af1190fee7e9f845bc63e786e7a25c1bd5f24e2bd4eaea9ecce62e61407bc7b.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_helmet_censure",
+      "template": "helmetHeavy1",
+      "displayName": "Censure Helm",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 3,
+        "speed": 0.01
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-censure-helmet.glb",
+          "texture": "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png"
+        }
+      ],
+      "icon": "assets/paladin-censure-helmet-icon.png",
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-censure-helmet-display.glb",
+          "texture": "assets/atlas-0fb341fc30f641e4ee7680bf79b71391879e09e1d825365f5b2a7afe62f59a91.png"
+        }
+      ],
+      "helmetHairVisibility": {
+        "top": false,
+        "bottom": false
+      }
+    },
+    {
+      "kind": "item",
+      "id": "paladin_armor_verdict",
+      "template": "armorHeavy1",
+      "displayName": "Verdict Plate",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 7,
+        "resistance": 6
+      },
+      "icon": "assets/paladin-verdict-armor-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "armorBlacksmithF(Clone)",
+            "nativeMesh": "armorBlacksmith",
+            "model": "assets/paladin-female-verdict-armor.glb",
+            "texture": "assets/atlas-9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a.png"
+          },
+          {
+            "path": "armorBlacksmithM(Clone)",
+            "nativeMesh": "armorBlacksmithM",
+            "model": "assets/paladin-male-verdict-armor.glb",
+            "texture": "assets/atlas-9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "armorSplintVestDisplay",
+          "model": "assets/paladin-verdict-armor-display.glb",
+          "texture": "assets/atlas-9c732bd42fdd7ad9a22a74b1a6f4e1a5e2055b1f5c7bbd4a6ef8aa143001e12a.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_boots_verdict",
+      "template": "bootsHeavy3",
+      "displayName": "Verdict Sabatons",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 3,
+        "resistance": 5
+      },
+      "icon": "assets/paladin-verdict-boots-icon.png",
+      "apparelModels": {
+        "femaleBinding": "blacksmith_Female",
+        "maleBinding": "blacksmith_Male",
+        "renderers": [
+          {
+            "path": "bootsBlacksmith(Clone)",
+            "nativeMesh": "bootsBlacksmith",
+            "model": "assets/paladin-verdict-boots.glb",
+            "texture": "assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png"
+          }
+        ]
+      },
+      "displayModels": [
+        {
+          "path": "bootsIronGreavesDisplay",
+          "model": "assets/paladin-verdict-boots-display.glb",
+          "texture": "assets/atlas-3b4029b67dd0a9bcdf583524acc9a1ce522c0037dfa19104f993142e816f469f.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_helmet_verdict",
+      "template": "helmetHeavy1",
+      "displayName": "Verdict Helm",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 360,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 4,
+        "resistance": 5
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-verdict-helmet.glb",
+          "texture": "assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png"
+        }
+      ],
+      "icon": "assets/paladin-verdict-helmet-icon.png",
+      "displayModels": [
+        {
+          "path": "helmKettle",
+          "model": "assets/paladin-verdict-helmet-display.glb",
+          "texture": "assets/atlas-394185f0ab1ecdfe1ff8ec7ca63353d49d3c36482ab92c796041893195793507.png"
+        }
+      ]
+    },
+    {
+      "kind": "proficiency",
+      "id": "paladin_censure_fracture",
+      "template": "musicArmorDown",
+      "displayName": "Censure",
+      "description": "Strike; randomly lowers armor or resistance.",
+      "fields": {
+        "m_DmgMultiplier": 0.75,
+        "m_FullSlots": false,
+        "m_SlotOverride": 4,
+        "m_CustomValue": -6,
+        "m_ChanceToAffect": 1,
+        "m_RepeatCount": 1
+      },
+      "randomDebuffOutcomes": [
+        "paladin_censure_fracture",
+        "paladin_censure_resistance"
+      ]
+    },
+    {
+      "kind": "proficiency",
+      "id": "paladin_censure_fracture_1h",
+      "template": "musicArmorDown",
+      "displayName": "Censure",
+      "description": "Strike; randomly lowers armor or resistance.",
+      "fields": {
+        "m_DmgMultiplier": 0.75,
+        "m_FullSlots": false,
+        "m_SlotOverride": 3,
+        "m_CustomValue": -4,
+        "m_ChanceToAffect": 1,
+        "m_RepeatCount": 1
+      },
+      "randomDebuffOutcomes": [
+        "paladin_censure_fracture_1h",
+        "paladin_censure_resistance_1h"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_1h_last_vigil",
+      "template": "bluntSmithHammer",
+      "displayName": "The Last Vigil",
+      "fields": {
+        "damage": 30,
+        "skill": "vitality",
+        "slots": 3,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 450,
+        "rarity": "artifact",
+        "dropable": true,
+        "townmarket": false,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "guardianBonuses": {
+        "guardFocusRestore": 1
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-1h-last-vigil.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-1.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "Break/Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-2.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "smithhammer",
+          "model": "assets/paladin-hammer-1h-last-vigil-display.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "smithhammer/Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-1-display.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        },
+        {
+          "path": "smithhammer/Break/Break",
+          "model": "assets/paladin-hammer-1h-last-vigil-fragment-2-display.glb",
+          "texture": "assets/atlas-1803d5100825e60d963f7d45108d902042642131f4eff38383e7fafad6dc3340.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture_1h"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "paladin_hammer_2h_kingsfall",
+      "template": "bluntWarHammer",
+      "displayName": "Kingsfall",
+      "fields": {
+        "damage": 42,
+        "skill": "vitality",
+        "slots": 5,
+        "damagegain": 1,
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 550,
+        "rarity": "artifact",
+        "dropable": true,
+        "townmarket": false,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "guardianBonuses": {
+        "guardReckoning": true
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-hammer-2h-kingsfall.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "break",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-1.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "break/break2",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-2.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "break/break1",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-3.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        }
+      ],
+      "displayModels": [
+        {
+          "path": "hammer",
+          "model": "assets/paladin-hammer-2h-kingsfall-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "hammer/break",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-1-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "hammer/break/break2",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-2-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        },
+        {
+          "path": "hammer/break/break1",
+          "model": "assets/paladin-hammer-2h-kingsfall-fragment-3-display.glb",
+          "texture": "assets/atlas-c9ad46cc491b6ca7702a00e89d876f3b7e09e91fa5ecf59d3f4b36b251abbbec.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_censure_fracture"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_shield_last_bastion",
+      "template": "shieldblacksmith",
+      "displayName": "The Last Bastion",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 450,
+        "rarity": "artifact",
+        "dropable": true,
+        "townmarket": false,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.04
+      },
+      "guardianBonuses": {
+        "guardCleanse": true
+      },
+      "itemModels": [
+        {
+          "path": ".",
+          "model": "assets/paladin-shield-last-bastion.glb",
+          "texture": "assets/atlas-21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31.png"
+        }
+      ],
+      "icon": "assets/paladin-shield-last-bastion-icon.png",
+      "displayModels": [
+        {
+          "path": "shieldBlacksmith01",
+          "model": "assets/paladin-shield-last-bastion-display.glb",
+          "texture": "assets/atlas-21538b3cb7cd977319cef675046286a65dc10fcdff49c2c0f50362c472153a31.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_novice",
+      "template": "trinketDefense1",
+      "displayName": "Tin Oath Token",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 8,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "vitality": 0.01
+      },
+      "icon": "assets/paladin-trinket-novice-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-novice.glb",
+          "texture": "assets/atlas-784ef8205354ff53362de6d5c277643d4971125da246bb0ca78e3476534033e8.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_smite"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_oathkeeper",
+      "template": "trinketDefense1",
+      "displayName": "Keeper's Seal",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 35,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "vitality": 0.02
+      },
+      "icon": "assets/paladin-trinket-oathkeeper-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-oathkeeper.glb",
+          "texture": "assets/atlas-a101e61cae6049187f771495f874db474af49d182f4739c0c05d101c766fa6ee.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_smite"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_highward",
+      "template": "trinketDefense1",
+      "displayName": "Watchtower Reliquary",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 110,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "vitality": 0.02,
+        "resistance": 1
+      },
+      "icon": "assets/paladin-trinket-highward-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-highward.glb",
+          "texture": "assets/atlas-095dddc9eaa4298135fc1223383b1839fb144e895df90a780bd2571862448399.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_smite"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_mercy",
+      "template": "trinketDefense1",
+      "displayName": "Lantern of Mercy",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 1,
+        "resistance": 3
+      },
+      "icon": "assets/paladin-trinket-mercy-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-mercy.glb",
+          "texture": "assets/atlas-67e46556586e353a5de2aa4a774976a6d23d17701828267777c5ddb4bd7b1022.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_smite"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_censure",
+      "template": "trinketDefense1",
+      "displayName": "Seal of Censure",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "speed": 0.02,
+        "armor": 1
+      },
+      "icon": "assets/paladin-trinket-censure-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-censure.glb",
+          "texture": "assets/atlas-925a07524c816904ba4b84350671d231a4004ae0855b51767f2c4cf7e4dc139f.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_smite"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_trinket_verdict",
+      "template": "trinketDefense1",
+      "displayName": "Scales of Verdict",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "armor": 2,
+        "resistance": 2
+      },
+      "icon": "assets/paladin-trinket-verdict-icon.png",
+      "displayModels": [
+        {
+          "path": "trinketHorn2",
+          "model": "assets/paladin-trinket-verdict.glb",
+          "texture": "assets/atlas-9d172089232f8e3fafd6c33422e72678825dc2188597b983be7f8f0b765e21ef.png"
+        }
+      ],
+      "proficiencies": [
+        "paladin_smite"
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_novice",
+      "template": "amuletVitality1",
+      "displayName": "Pilgrim's Pendant",
+      "fields": {
+        "minlevel": 0,
+        "maxlevel": 0,
+        "goldvalue": 8,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 1
+      },
+      "icon": "assets/paladin-necklace-novice-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-novice.glb",
+          "texture": "assets/atlas-c243e5d5e21d69a07fe41e499ae798aaece435a801c7eb28a26fe6f738a1c127.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_oathkeeper",
+      "template": "amuletVitality1",
+      "displayName": "Oath Chain",
+      "fields": {
+        "minlevel": 1,
+        "maxlevel": 2,
+        "goldvalue": 35,
+        "rarity": "common",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 1,
+        "vitality": 0.01
+      },
+      "icon": "assets/paladin-necklace-oathkeeper-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-oathkeeper.glb",
+          "texture": "assets/atlas-5bb46537bd991728736dacb9f34333616b86e9598af467f7f10e889b27be45ac.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_highward",
+      "template": "amuletVitality1",
+      "displayName": "Highward Gorget",
+      "fields": {
+        "minlevel": 3,
+        "maxlevel": 3,
+        "goldvalue": 110,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 2
+      },
+      "icon": "assets/paladin-necklace-highward-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-highward.glb",
+          "texture": "assets/atlas-dc5dcd69a6bff895141e76f5a607b7086ab51f1054e72a04122709c596949333.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_mercy",
+      "template": "amuletVitality1",
+      "displayName": "Mercy Locket",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 2,
+        "speed": 0.01
+      },
+      "icon": "assets/paladin-necklace-mercy-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-mercy.glb",
+          "texture": "assets/atlas-0521bc0ed222227c75cebd4660c6448656d0ebb931a15d7657c51f3fc716454f.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_censure",
+      "template": "amuletVitality1",
+      "displayName": "Censure Medallion",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "speed": 0.02
+      },
+      "icon": "assets/paladin-necklace-censure-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-censure.glb",
+          "texture": "assets/atlas-cef3300a985f7a0fc182183168493e033869f0d838bd7ccb04f65b269979f8ed.png"
+        }
+      ]
+    },
+    {
+      "kind": "item",
+      "id": "paladin_necklace_verdict",
+      "template": "amuletVitality1",
+      "displayName": "Judge's Collar",
+      "fields": {
+        "minlevel": 4,
+        "maxlevel": 6,
+        "goldvalue": 250,
+        "rarity": "rare",
+        "dropable": true,
+        "townmarket": true,
+        "m_NightMarket": true,
+        "m_DungeonMerchant": true,
+        "_shopStock": 1,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None"
+      },
+      "modifiers": {
+        "resistance": 3
+      },
+      "icon": "assets/paladin-necklace-verdict-icon.png",
+      "displayModels": [
+        {
+          "path": "amuletLocket1",
+          "model": "assets/paladin-necklace-verdict.glb",
+          "texture": "assets/atlas-009a996cf36dab0b94c7a9f3d8fb7390b3bea38388c7fb8c579b51c2e1777104.png"
+        }
+      ]
+    },
+    {
+      "kind": "proficiency",
+      "id": "paladin_censure_resistance_1h",
+      "template": "magicResistDown",
+      "displayName": "Censure",
+      "description": "Resistance lowered by Censure.",
+      "fields": {
+        "m_DmgMultiplier": 0.75,
+        "m_FullSlots": false,
+        "m_SlotOverride": 3,
+        "m_CustomValue": -4,
+        "m_ChanceToAffect": 1,
+        "m_RepeatCount": 1,
+        "m_DmgTypeOverride": "none",
+        "m_WpnTypeOverride": "none",
+        "m_Target": "None",
+        "m_TargetFriendly": false,
+        "m_Harmless": false,
+        "m_IgnoresArmor": false,
+        "m_PerSlotSkillRoll": 0.0,
+        "m_Quickness": 0.30000001192092896,
+        "m_DamagePerAttack": 0,
+        "m_Suicide": false,
+        "m_GunShot": false,
+        "m_BoatDamage": 0,
+        "m_ChaosOption": false
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "paladin_censure_resistance",
+      "template": "magicResistDown",
+      "displayName": "Censure",
+      "description": "Resistance lowered by Censure.",
+      "fields": {
+        "m_DmgMultiplier": 0.75,
+        "m_FullSlots": false,
+        "m_SlotOverride": 4,
+        "m_CustomValue": -6,
+        "m_ChanceToAffect": 1,
+        "m_RepeatCount": 1,
+        "m_DmgTypeOverride": "none",
+        "m_WpnTypeOverride": "none",
+        "m_Target": "None",
+        "m_TargetFriendly": false,
+        "m_Harmless": false,
+        "m_IgnoresArmor": false,
+        "m_PerSlotSkillRoll": 0.0,
+        "m_Quickness": 0.30000001192092896,
+        "m_DamagePerAttack": 0,
+        "m_Suicide": false,
+        "m_GunShot": false,
+        "m_BoatDamage": 0,
+        "m_ChaosOption": false
+      }
+    },
+    {
+      "kind": "proficiency",
+      "id": "paladin_smite",
+      "template": "magicdamage",
+      "displayName": "Smite",
+      "description": "6x damage against Censure-reduced resistance.",
+      "fields": {
+        "m_DmgMultiplier": 0.25,
+        "m_DmgTypeOverride": "magic",
+        "m_Target": "None",
+        "m_TargetFriendly": false,
+        "m_Harmless": false,
+        "m_SlotOverride": -1,
+        "m_FullSlots": false
+      },
+      "resistanceDamageBonus": {
+        "sources": [
+          "paladin_censure_resistance_1h",
+          "paladin_censure_resistance"
+        ],
+        "multiplier": 6.0
+      }
+    }
+  ]
+}

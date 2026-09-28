@@ -52,14 +52,21 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         try { VerifyHotReloadProfile(); }
         catch (Exception e) { Logger.LogError("HOT RELOAD PROFILE REFUSED: " + e); Application.Quit(); return; }
         Harmony harmony = new Harmony("com.ftkmf.runtime-model-test.saves");
+        try { InstallPackageFitObserver(harmony); }
+        catch (Exception error) { packageFitSourceError = error.ToString(); Logger.LogWarning("PACKAGE FIT OBSERVATION UNAVAILABLE: " + error.Message); }
         harmony.Patch(typeof(uiStartGame).GetMethod("GetSavePath", Statics), new HarmonyMethod(typeof(RuntimeModelTest).GetMethod("SavePathPrefix", Statics)));
         harmony.Patch(typeof(uiStartGame).GetMethod("GetSavePathSlash", Statics), new HarmonyMethod(typeof(RuntimeModelTest).GetMethod("SavePathSlashPrefix", Statics)));
+        try { InstallEndgameLevelStatisticGuard(); }
+        catch (Exception error) { Logger.LogWarning("ENDGAME LEVEL TEST GUARD UNAVAILABLE: " + error.GetType().Name + ": " + error.Message); }
         string contentRegistrationRun = CurrentContentRegistrationRun();
         output = Path.Combine(root, "model-test-output");
         Directory.CreateDirectory(output);
         File.WriteAllText(Path.Combine(root,"model-test-session.json"),new JObject{{"session",sessionId},
             {"contentRegistrationRun",contentRegistrationRun},{"savePath",isolatedSavePath}}.ToString());
         Application.runInBackground = true;
+        equipRpcDiagnosticEnabled = Environment.GetEnvironmentVariable(EquipRpcDiagnosticFlag) == "1";
+        InstallNullInputCallerDiagnostic();
+        InstallCameraFollowDiagnostic();
         ArmCombatEntryTrace();
         enabled = true;
         Logger.LogInfo("MODEL TEST ACTIVE: root=" + root + "; saveNamespace=" + saveNamespace
@@ -144,11 +151,13 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             if (File.Exists(resultPath)) return;
             if(Str(command,"session") != sessionId) throw new ArgumentException("Stale session; read model-test-session.json.");
             string op = Str(command, "op");
+            PackageFitCommandBoundary(op);
             // This diagnostic intentionally runs before the normal game-state
             // guard so it can report why the native Create Game route is not
             // currently eligible.  It only reads the native menu graph.
             if (op == "hot-reload") Finish(id, HotReloadProbe(command));
             else if (op == "native-title-new-game") Finish(id, NativeTitleNewGame(command));
+            else if (op == "native-game-definition-select") Finish(id, NativeGameDefinitionSelect(command));
             else if (op == "native-create-character-preflight") Finish(id, NativeCreateCharacterPreflight(command));
             else if (op == "native-create-character-input-state") Finish(id, NativeCreateCharacterInputState(command));
             else
@@ -195,6 +204,23 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "lease-watch-state") Finish(id,WatchLeaseState());
             else if(op == "lease-watch-clear") Finish(id,ClearLeaseWatches());
             else if(op == "equipment-inventory") Finish(id,EquipmentInventory());
+            else if(op == "native-gear-metadata") Finish(id,NativeGearMetadata(command));
+            else if(op == "item-visual-state") Finish(id,ItemVisualState(command));
+            else if(op == "native-item-card") Finish(id,NativeItemCard(command));
+            else if(op == "native-dungeon-entry") Finish(id,NativeDungeonEntry(command));
+            else if(op == "party-native-gear-stage") Finish(id,PartyNativeGearStage(command));
+            else if(op == "native-weapon-control") Finish(id,NativeWeaponControl(command));
+            else if(op == "native-inventory") Finish(id,NativeInventoryFixture(command));
+            else if(op == "package-gear-state") Finish(id,PackageGearState(command));
+            else if(op == "class-appearance-roster") Finish(id,ClassAppearanceRoster(command));
+            else if(op == "package-gear-grant") Finish(id,GuardPackageFitCommand(command,0));
+            else if(op == "package-gear-equip") Finish(id,GuardPackageFitCommand(command,1));
+            else if(op == "package-gear-appearance") Finish(id,GuardPackageFitCommand(command,2));
+            else if(op == "blacksmith-appearance") Finish(id,BlacksmithAppearanceFixture(command));
+            else if(op == "blacksmith-combat-state") Finish(id,BlacksmithCombatObservation(command));
+            else if(op == "blacksmith-gear-grant") Finish(id,BlacksmithGearGrant(command));
+            else if(op == "blacksmith-gear-equip") Finish(id,BlacksmithGearEquip(command));
+            else if(op == "blacksmith-endgame-level-up") Finish(id,BlacksmithEndgameLevelUp(command));
             else if(op == "hero-damage-fixture") Finish(id,HeroDamageFixture(command));
             else if(op == "equip-body") Finish(id,ChangeBodyEquipment(command,true));
             else if(op == "unequip-body") Finish(id,ChangeBodyEquipment(command,false));
@@ -209,6 +235,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
             else if(op == "preview-race") Finish(id,PreviewRaceFixture(command));
             else if(op == "custom-loot-fixture") Finish(id,CustomLootFixture(command));
             else if(op == "player-studio") Finish(id,PlayerStudio(command));
+            else if(op == "native-inventory-capture") Finish(id,NativeInventoryCapture(command));
             else if(op == "world-input-state") Finish(id,WorldInputObservation(command));
             else if(op == "overworld-ailment-state") Finish(id,OverworldAilmentObservation(command));
             else if(op == "stage-native-ailment-hex") Finish(id,StageNativeAilmentHex(command));
@@ -798,7 +825,7 @@ public sealed partial class RuntimeModelTest : BaseUnityPlugin
         if(quietTutorial!=null){quietTutorial.m_IsPromptTutorial=previousTutorialPrompt;quietTutorial.m_IsShowTutorial=previousTutorialShow;}
         quietTutorial=null;
     }
-    void OnDestroy(){CustomLootRemoveHook();PreviewRaceCleanup();NativeFightDisarm();GuardianFixtureRemoveHooks();if(combatEntryObserver==this)combatEntryObserver=null;enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
+    void OnDestroy(){RemoveNullInputCallerDiagnostic();RemoveCameraFollowDiagnostic();CustomLootRemoveHook();PreviewRaceCleanup();NativeFightDisarm();GuardianFixtureRemoveHooks();if(combatEntryObserver==this)combatEntryObserver=null;enemyLifetime=null;if(spawnCaptureObserver==this)spawnCaptureObserver=null;ClearCombatMotionObservation();ClearKrakenProductionAdapter();krakenSkinArm=null;portraitArmed=false;portraitTrace.Clear();if(portraitObserver==this)portraitObserver=null;RestoreTutorials();watchedLeases.Clear();}
     JObject QuietTutorials(JObject command)
     {
         FTKTutorial tutorial=FTKTutorial.Instance;if(tutorial==null)throw new InvalidOperationException("Tutorial manager unavailable.");

@@ -1,0 +1,10 @@
+---
+title: Paladin Gear Preview
+description: Coming soon. Preview the Paladin equipment update with studio artwork of the candidate models.
+---
+import Equipment from '../../../components/Equipment.astro';
+import preview from '../../../data/paladin-preview.json';
+
+<figure><img src={`${import.meta.env.BASE_URL}media/paladin.webp`} alt="Paladin promotional illustration" width="1280" height="720"/><figcaption>Promotional illustration</figcaption></figure>
+
+<Equipment mod="paladin" preview={preview}/>

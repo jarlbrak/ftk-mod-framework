@@ -32,7 +32,18 @@ Equipment can declare `modifiers` with `armor`, `resistance`, `vitality`, `speed
 
 See [class actions and conditional proficiency damage](COMBAT-PROFICIENCIES.md) for equipment-independent rolling class actions, random armor/resistance outcomes, and bonuses requiring an exact active resistance-debuff source.
 
+Use the optional `classAffinity` capability when one equipment item should add a small stat bonus for one named class. It is additive to the item's ordinary `modifiers`, applies only while the matching class has that row equipped, and is displayed on both item and weapon detail cards. See [class affinity](CLASS-AFFINITY.md) for the supported bounds and JSON form.
+
+Native Blacksmith gear can additionally declare the bounded `blacksmithGear` capability for Set Hammer, Overhand, or Temper. See [Blacksmith combat](blacksmith/COMBAT.md) for the action contract, JSON example, native UI behavior, and current verification boundaries.
+
 ## Models and behavior
+
+Combat action buttons must reuse existing native all-white outlined proficiency
+icons. Never supply custom combat icons or use equipment renders as action icons.
+Native basic attacks also use the weapon item icon, so preserve native weapon
+icons instead of overriding them with inventory renders. Check normal, selected
+and disabled buttons beside vanilla actions in game.
+
 
 Use original PNG and GLB assets for marketplace packages. The Paladin package shows the path-relative `icon`, `itemModels`, `displayModels`, `playerModels`, and apparel declarations. Mesh paths must match the actual renderer hierarchy and skeleton; a valid JSON file or successful build cannot prove the model fits in game. Follow [custom models](CUSTOM-MODELS.md), the [player renderer contract](MODEL-PLAYER-API.md), and the [renderer transaction contract](MODEL-RENDERER-API.md).
 

@@ -42,7 +42,21 @@ def main():
     if not args.game_assembly.is_file():parser.error('Configured isolated game assembly is missing')
     subprocess.run([sys.executable,str(HERE/'validate_paladin.py')],check=True)
     output.mkdir(parents=True,exist_ok=True)
-    paths=[PACKAGE/'manifest.json',PACKAGE/'content.json']+sorted((PACKAGE/'assets').iterdir())
+    # Preserve historical artwork on disk, but package only active references.
+    refs=set()
+    def visit(value):
+        if isinstance(value,dict):
+            for key,child in value.items():
+                if key in {'model','texture','icon'} and isinstance(child,str):
+                    asset=Path(child)
+                    if asset.is_absolute() or '..' in asset.parts or not asset.parts or asset.parts[0]!='assets':
+                        raise ValueError('Unsafe asset reference: '+child)
+                    refs.add(child)
+                else:visit(child)
+        elif isinstance(value,list):
+            for child in value:visit(child)
+    visit(json.loads((PACKAGE/'content.json').read_text()))
+    paths=[PACKAGE/'manifest.json',PACKAGE/'content.json']+[PACKAGE/ref for ref in sorted(refs)]
     files={}
     for path in paths:
         if path.is_symlink() or not path.is_file():raise ValueError('Nonregular runtime asset: '+str(path))

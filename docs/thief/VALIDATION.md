@@ -1,5 +1,151 @@
 # Thief evidence, balance model, and implementation gates
 
+The consolidated development candidate removes custom combat icon bindings. See
+[consolidation](CONSOLIDATION.md). Historical combat evidence below describes older
+binary and asset revisions. It does not validate the combined runtime or its
+current combat buttons.
+
+## Current unreleased source candidate: rolled apparel and original replacements
+
+The source package now includes 152 unique current hash-checked candidate files: 21 rolled coat
+GLBs, 21 selected headpiece model/texture files, 28 charm and artifact-pair files,
+four coat palettes, eight repaired pistol GLBs, and 35 corrected ordinary dagger
+GLBs, seven framed boot-display derivatives, plus 28 current nonweapon inventory
+icons. The seven framed headpiece displays supersede their prior tracked paths;
+those earlier hashes remain historical predecessors. The seven original dagger shaded
+atlases are unchanged. No archive was packaged
+or published by this integration.
+
+All seven rolled coat tiers, selected headpieces and boots pass bounded static
+inventory review on Busker Male, Blacksmith Female, Thief Male, Hunter Male,
+Scholar Male, Herbalist Female, Paladin Female, Trapper Female, Minstrel Female,
+Woodcutter Male, Monk Male, Hobo Male, Gladiator Female, Treasure Hunter Male and
+Astronomer Male, including their native cuff differences.
+Guild also passes the seven supported Blacksmith appearance profiles in static
+views; locked Demon/Goblin profiles were temporary fixtures, restored afterward.
+These observations cover all fifteen usable class defaults in bounded idle
+views. They do not establish every class/appearance combination or motion. Native forearm skin, wraps and undersleeves remain visible
+below the authored rolled cuffs. The prior ordinary dagger candidate failed grip
+fit. The adopted successors now pass bounded inventory-idle grip review for all
+seven tiers on Busker Male, Blacksmith Female and Thief Male. Six newly reviewed
+tiers cover 18 loadouts and 90 images; Guild has a separate three-loadout pass.
+All 35 equipped, paired-display and complementary break meshes are from the
+frozen measured-grip family. Both ordinary Break routes now use their matching
+original shaded atlas. Native item-display composition has a completed 96-item baseline and accepted
+framing corrections below. Break visibility and detachment remain unverified; static equipped acceptance does not transfer to
+those routes or to combat motion.
+
+Street and Burglar use neckwear with both native hair sections visible. Guild v3,
+Masterwork/Locksmith v4, and Nightblade/Wayfarer v5 are raised hoods with both hair
+sections hidden. Guild, Street, Masterwork and Nightblade coat palettes have
+bounded native inventory acceptance; other coat palettes are unchanged. Artifact
+pairs have limited native idle-grip evidence. Their new break fragments still
+require native break/drop and lifecycle review. Charms remain display-only.
+
+The seven ordinary pistol tiers pass bounded static idle inventory review across
+the same three wearers: 21 completed loadouts and 105 images. The native firearm
+comparison supports the observed grip convention. The eighth repaired pistol,
+Unlost Road, also passes three-wearer bounded idle review. This review does not
+establish firing, reload, recoil, holstering,
+motion or other appearances; static native item-card evidence is described below. The existing
+`thief_bow_*` identities and equipped/display renderer routes are unchanged.
+
+The current 28 nonweapon inventory icons cover seven coats, seven headpieces,
+seven boot pairs and seven charms. Fourteen coat/charm PNGs remain byte-identical
+to studio-v2. Headpiece and boot icons copy the exact studio-v3 renders of the
+accepted display derivatives. Existing icon paths are unchanged; weapon, class,
+proficiency and combat icons remain native. These are studio portraits, not
+native screenshots or icon-state acceptance.
+
+The [nonweapon icon ledger](../../marketplace/packages/nonweapon-icons.provenance.json)
+pins each render revision, camera, original model/texture inputs and exact PNG.
+The full earlier 29-icon ledger is preserved as history. Run
+`sync_nonweapon_icons_v3.py --manifest <retained-delivery-manifest> --check` to
+verify frozen-copy reproduction without writes. The current package still has
+55 content entries and 184 active asset references.
+
+The native 96-item display baseline completed with verified inventory closure.
+It exposed cropping on six Paladin helmets and five raised Thief hoods, plus
+small framing on thirteen boot pairs. All 26 current display-only corrections
+passed native Show/inspect and post-close preservation. Independent review
+verified 139 pinned artifacts, exact model/texture bindings and material
+semantics, with no cropping, at least 54 pixels of canvas margin, and at most
+0.792 pixels of original-source projection discrepancy. The seven Thief headpieces
+and seven boot pairs use fixed positive scale/translation in POSITION only;
+equipped geometry, textures, normals, UVs and topology are unchanged.
+
+The [display recipe](../../art-experiments/gear-display-framing/README.md) and
+[display ledger](../../marketplace/packages/display-framing.provenance.json)
+retain exact source and predecessor hashes. These static native observations
+remain separate from motion, breakage, save/load, multiplayer and lifecycle.
+
+The [generated provenance](../../art-experiments/thief-advanced/provenance.json)
+joins the adopted bytes to frozen original Rodin sources, refit inputs, selected
+revisions, palette masks and generators. Logical source IDs identify retained
+authoring inputs, not downloadable files. Generator/validator checks and exact
+hash reproduction establish integration identity, not live acceptance.
+
+The final three class defaults completed their 27-loadout review in a fresh
+session with passive equipment diagnostics. An earlier session aborted during
+its first native equip RPC, before any capture; the successful session does not
+explain or repair that failure. No general runtime stability claim is made.
+
+Remaining gates include broader appearance combinations, broader dagger
+coverage, broader pistol coverage, motion/combat, swaps,
+save/load, multiplayer and lifecycle behavior. Existing full-length coat and
+prior headpiece/charm portraits are historical artwork. Equipment portraits do
+not authorize custom combat icons.
+
+Website impact: the Coming Soon preview now uses 45 studio portraits from these
+exact canonical assets, with source and compressed-image hashes. This establishes
+artwork identity only. This source remains an unreleased candidate. At release, update the
+Thief guide and published library data, and retain the coverage limits above.
+Published pages must continue describing the published package until then.
+
+## Historical 1.1.0 advanced model and pistol candidate
+
+The unreleased 1.1.0 candidate currently declares framework 1.2.2 and requires the development pistol runtime described below. Before publication, its minimum framework version must identify a released binary that actually contains that support. It replaces all seven ordinary custom bows and The Unlost Road with compact Talent-based pistols. It adds Thief-only Instant Reload at the scheduled combat turn boundary and new generated coat, boot, ordinary dagger, and pistol meshes. The prior 1.0.0 live-game receipts below establish historical behavior only.
+
+Offline evidence for this candidate: the framework Release build passes with seven existing warnings (DLL SHA-256 `0c0640a6b8b77b61d55955109021b8c6d0f8aa72d814329b27f4924ac7886686`); ThiefCombat passes 60 checks; `validate_thief.py` accepts 45 equipment rows, nine actions, and 200 referenced assets. The earlier icon-only 202-file archive is `scratch/thief-advanced/package-build-icons-v8/thief-1.1.0-e6d95ff817d3.zip`, SHA-256 `e6d95ff817d33c537fde4b69827c421e0e55e3e0db8d0594baa5b34ca841f55f`. On 2026-09-26, `package_thief.py` rebuilt the same deterministic archive, the marketplace helper validated its descriptor and contents, and the helper prepared a separate inactive fixture. Its build receipt, helper-validation result, and fixture result are beside the archive. This confirms package structure and local fixture preparation, not game acceptance or release readiness. The local rendered review boards are `scratch/thief-advanced/coat-review-board.jpg`, `boots-review-board.jpg`, `pistol-review-board.jpg`, and `dagger-review-board.jpg`. The source and delivered asset hashes are in `art-experiments/thief-advanced/provenance.json`.
+
+The six Thief combat icons were revised to match the minimal black-and-white action style. In the latest pass, Fire, Feint, and Bait Shot were redrawn; Slip Away, Pierce, and Deadeye were retained. The 32- and 42-pixel review strips are `scratch/thief-advanced/action-icons/review-v8-32.png` and `review-v8-42.png`. The latest isolated native capture, `scratch/thief-advanced-game/action-icons-v8-combat-row.png`, shows Slip Away, Fire, and Bait Shot in a combat row and the Fire tooltip. This verifies those visible glyphs in native UI; it does not show every proficiency or prove every scale/variant. Item portraits remain on items.
+
+Isolated native smoke on 2026-09-25 used `scratch/thief-advanced-game/FTK.app` with unique bundle and save paths; the Steam game installation and ordinary saves were not changed. The game registered all 55 content entries with zero registration errors or warnings. Only this test copy equipped Rooftop Flintlock as the starting weapon. The native inventory showed its compact pirate pistol model, empty offhand, and Instant Reload description, while the combat card showed Fire at 10 physical damage and 80% per slot. In a three-Crow encounter, the Thief fired the pistol on two consecutive scheduled Thief turns without choosing Reload; the native log records zero ammunition remaining after each shot. In a later Beastman encounter, the corrected equipped mesh and inventory display each received one successful renderer swap, and the pistol fired in native combat. The final action-icon capture is `scratch/thief-advanced-game/action-icons-v8-combat-row.png`. Earlier screenshots and logs are in `scratch/thief-advanced-game/`, notably `pistol-card-v4.png`, `pistol-combat-v4.png`, `player-v3.log`, and `BepInEx/LogOutput.log`. The initial smoke exposed a missing equipped renderer path; `FTKHub.CreateWeapon` returns the detached `Weapon` child, so equipped pistol bindings now target `.` while display bindings target `gunDragon`. The package validator checks this distinction.
+
+Those generated hood candidates contained modeled faces or masks, so that revision retained the established original hoods; the rejected source review is `scratch/thief-advanced/hood-source-review-board.jpg`. The current replacement headpieces described above come from separately reviewed original sources.
+
+Remaining live gates: verify every pistol tier equips without a shield, shows its intended action pair, and does not refill for another class or for extra actions. Inspect both avatar sexes, all seven coat/boot/dagger/pistol tiers, inventory icons, drops, equipped grips, attack and reload motion, swaps, and rebuilds. Compare sustained damage and Focus efficiency with native firearms and the dagger path. Confirm old bow item IDs resolve as pistols in existing saves before release. Multiplayer, save/resume, hot reload, acquisition, and redistribution rights also remain open.
+
+### Full rendering audit, 2026-09-26
+
+The all-equipment isolated fixture granted all 45 equipment rows to male and female Thieves through a disposable starting inventory. Native UI captures cover all 45 item cards. The baseline failed visual acceptance: coats tore at shoulders and sleeves, boots were fitted against trouser bounds, coat previews were cropped above the card, and seven standard dagger previews pointed into the camera. The eight pistol cards and both retained artifact dagger cards rendered clearly. Charm previews remain small; original headpieces retain their simpler neckerchief/nape geometry. Evidence is under `scratch/thief-native-render-pass/`, including `baseline-45-visual-review.json` and `coverage.json`.
+
+The corrected candidate fits coat sleeves to native rest pivots, uses continuous coat and boot joint weights, fits boots to footwear-only bounds with trouser coverage, centers apparel display meshes, and reorients the seven paired dagger displays without changing equipped dagger geometry. All 21 standard coat, boot and dagger portraits were regenerated from final exports. Strict skinned validation passes for 14 coats and seven boots. Synthetic deformation has zero edges stretched over four times their rest length for the repaired meshes, compared with hundreds in the baseline; this is offline evidence, not animation acceptance. Receipts are under `scratch/thief-advanced/coat-repair-v1/`, `boot-repair-v1/`, and `scratch/thief-render-audit-20260926/item-portraits/`.
+
+The first corrected 202-file local archive has SHA-256 `e9608745b919937f4a0fdc62e43884a372c07ee354cacf8f17255cab606949ad`; native helper archive/descriptor validation passes. A fresh process rendered the corrected Street male idle outfit on the prior pistol-smoke save (`corrected-male-open.png`): the former large sleeve spikes and stretched boot shafts are absent in that frame. Elbow/cuff clearance still needs another angle or motion. The background trial subsequently captured all 45 corrected native item cards and equipped all 21 apparel items on both male and female avatars through native inventory controls. Astra visual review found no blocking static fit defect in those 42 samples. Captures change one slot at a time, so they do not establish every matching outfit combination. Flared coat tails can resemble an extra blade beside the free hand; comparison with the coat-only export identifies this as outfit geometry, not a retained offhand weapon. All 17 weapons were subsequently equipped on the female avatar with no blocking static grip or fragment defect observed. The final seven dagger cards, enlarged uniformly by 1.3 times, are complete and unclipped in fresh native captures. Representative dagger and pistol motion is recorded below, with bounded loadout coverage. The card overview is `scratch/thief-native-render-pass/background-review/all-45-native-cards.jpg`; male and female apparel boards and corresponding hash ledgers are in that directory. The earlier screenshots and offline boards do not establish readiness to ship. A previously presented `*-shaded.png` pistol file was a texture atlas, not a model preview.
+
+The display-enlarged archive before the helmet correction is `scratch/thief-advanced/package-build-render-fixes-v2/thief-1.1.0-a1ab8c45c9c7.zip`, SHA-256 `a1ab8c45c9c7256db124afad209b1493e94161acbb49466a9baa00aaabd25f9d`. Native helper descriptor/archive validation and inactive fixture preparation pass. The same isolated all-equipment party saved and loaded successfully after this asset-only restart; this does not verify migration from a published bow save. The consolidated native overview is `scratch/thief-native-render-pass/background-review/render-audit-overview.jpg`, with source hashes and scope recorded beside it.
+
+### Combat rear-view helmet correction
+
+A native Vale Imp fight exposed an open crown on both avatars that was missed in the front inventory review. All seven neck/nape headpieces reused `helmKettle`, whose native `Helmet` disables top hair and retains bottom hair. The uncovered rear view therefore showed a ring of hair with no crown. This failed appearance acceptance despite the earlier static fit results.
+
+The optional `helmetHairVisibility` capability applies explicit native top/bottom flags only to fresh instances of registered custom helmets. All seven accessories in that historical revision preserved both hair sections; the current source uses the per-design policy above. Omitted metadata preserves native behavior; strict JSON booleans, registered row identity, and reload suspension/rollback were checked. ItemApparel passed 51 assertions, strict JSON parsing passed 49 checks, the Release build passed with seven existing warnings, PlayerMods and the Go helper suite passed, and a focused architecture review had no remaining findings. The corrected development DLL SHA-256 was `c320fbe8baab3b7438c331c0e349012342cc2193575dd920475f6af7dfa990d9`.
+
+The updated 202-file archive is `scratch/thief-advanced/package-build-render-fixes-v3/thief-1.1.0-011325240835.zip`, SHA-256 `0113252408357ae7152fb17b72ddc34404f3ba079c0bce39117cefab31b637d3`. The rebuilt native helper validates the descriptor/archive and prepares the inactive fixture. Fresh native registration is 55/55 with zero content errors/warnings. All seven headpieces on both male and female avatars show restored crown hair. Fresh combat rear views confirm complete crown/back silhouettes on both avatars, resolving the open-ring defect. Fresh 70-frame pistol and dagger sequences are recorded in `hairfix-motion-pistol/` and `hairfix-motion-dagger/`; Astra reviewed all 140 fresh frames and found coherent coats, boots, grips and complete hair crowns in the sampled attack/recovery poses. Visual review is limited to these representative loadouts. Earlier outfit boards remain useful only for garment fit and are labeled with superseded head appearance.
+
+Before that correction, a recorded male Street Twins strike and female Rooftop Flintlock Fire showed coherent Wayfarer coat deformation, footwear and grips. The female fired Bait Shot, then Fire on her next scheduled turn without selecting Reload. The first Bait Shot recording started after the shot and contains idle only. Exact attack frames, source hashes, loadouts and sampling limits are in `scratch/thief-native-render-pass/background-review/representative-combat-review.json`; this does not qualify every tier, reload animation, body variant or multiplayer.
+
+The native trial completed the Beastman Camp fight, saved to the isolated campaign, returned to title and exited. The original framework configuration was restored byte-for-byte. Background input was enabled; Unity reported focused during the final sequence, so this does not establish an unfocused run. Evidence and fixture files remain preserved.
+
+### Master synchronization and background trial
+
+The development branch was fast-forwarded to master `e366bf82`, preserving the uncommitted Thief changes. Framework version conflicts retain master 1.5.1. The rebuilt development DLL has SHA-256 `9910c1dcfcb581f3c11a005b7fd3963293e5e3f35845d34c7125bfa43a3fe86a`. Release build passes with seven existing warnings, ThiefCombat passes 60 checks, NativeInput passes 41 checks, the Go helper suite passes, and `git diff --check` passes. This custom development binary includes unreleased pistol support; its version label does not establish that the published framework contains that support.
+
+Website impact: this candidate is unreleased. At release, update `website/src/content/docs/mods/thief.mdx`, regenerate published catalog/library data and Thief item media from the released package, and update compatibility and release notes. The current published website continues to describe the released Thief package.
+
+## Earlier 1.0.0 evidence
+
 Status: implementation evidence through 2026-09-24. This separates offline checks, isolated native observations, and remaining release gates.
 
 ## Evidence reviewed

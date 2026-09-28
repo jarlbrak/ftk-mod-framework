@@ -20,6 +20,9 @@ Use for implementation handoff, review, or whenever the required checks are uncl
    - Marketplace catalog: run the helper's `marketplace-catalog-validate` command.
    - Model pipeline: run the focused Python or .NET suite named by the nearest guide, then
      current-ledger checks for generated output.
+   - Combat actions or button presentation: verify existing native all-white outlined
+     sprites are reused, with no custom combat icon resource or loading path. Inspect
+     normal, selected and disabled states beside vanilla buttons in game.
    - Documentation: check relative links and stale renamed paths.
 5. Always run `git diff --check`.
 6. Before commit or PR handoff, inspect staged names and stop if a game DLL, local overlay,
@@ -28,3 +31,6 @@ Use for implementation handoff, review, or whenever the required checks are uncl
    failed, or not run with the exact prerequisite.
 
 Do not weaken a test or reinterpret a nonzero exit as success. A build cannot satisfy an in-game gate.
+
+FTK basic attack buttons use the weapon item icon. Preserve native weapon icons;
+do not override them with custom inventory renders.

@@ -49,6 +49,8 @@ namespace FTKModFramework.Core
                 PlayerApparelMesh item = apparel[i];
                 if (item == null || string.IsNullOrEmpty(item.ExpectedNativeMeshName) || item.ExpectedNativeMeshName.Trim().Length == 0)
                 { error = "conditional apparel requires an exact native mesh name"; return false; }
+                if (item.NativeSkinType.HasValue)
+                { error = "native skin selectors apply only to item apparel; class apparel is already skinset scoped"; return false; }
                 clothes[i] = new PlayerApparelMesh(item.RendererPath, item.ExpectedNativeMeshName,
                     item.GlbFileName, item.TextureFileName);
                 all.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName));
