@@ -1,9 +1,9 @@
 ---
 title: Tweaks
-description: Optional fixes, extra information and conveniences for the base game. New in framework 1.6.0; the current preview is 1.6.1.
+description: Optional fixes, extra information and conveniences for the base game. New in framework 1.6.0; the current preview is 1.6.2.
 ---
 :::note[New in the framework 1.6 previews]
-Tweaks arrived in [framework 1.6.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.0), a **preview** release. The current preview is [framework 1.6.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.1), which fixes the refund focus key. Automatic updates stay on the stable framework, so a preview is never installed for you. To try it, choose **Preview** in **Mods > Updates**, or download a launcher from the 1.6.1 release page. Read the [known limitations](#known-limitations) first.
+Tweaks arrived in [framework 1.6.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.0), a **preview** release. The current preview is [framework 1.6.2](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.2); 1.6.1 fixed the refund focus key. Automatic updates stay on the stable framework, so a preview is never installed for you. To try it, choose **Preview** in **Mods > Updates**, or download a launcher from the 1.6.2 release page. Read the [known limitations](#known-limitations) first.
 :::
 
 Tweaks are small, optional changes to the original game that come with the framework itself. They fix defects, show information the game already tracks but never displays, and remove some interface friction. They never make the game easier or harder on purpose. The two fixes that do shift balance say so, and you can turn them off. No mod needs to be installed to use them.
@@ -118,7 +118,7 @@ With **Refund movement focus** on, during your own turn on the map:
 3. **Click a faded pip**, or press the refund key, to get one point of focus back. The extra move it bought is removed.
 
 :::caution[Still on the 1.6.0 preview? Change the refund key]
-Framework 1.6.1 fixes this: the refund key is now **F**, and a saved Backspace changes to F when the game starts. In the 1.6.0 preview the refund key is **Backspace**, which is also the game's **End Turn** key. Pressing it ends your turn, and the focus stays spent. If you are still on 1.6.0, update to 1.6.1, set the key to **F** as described below, or click the faded pips instead.
+Framework 1.6.1 and later fix this: the refund key is now **F**, and a saved Backspace changes to F when the game starts. In the 1.6.0 preview the refund key is **Backspace**, which is also the game's **End Turn** key. Pressing it ends your turn, and the focus stays spent. If you are still on 1.6.0, update to the current preview, set the key to **F** as described below, or click the faded pips instead.
 :::
 
 You can refund only focus spent on movement this turn, and at most one point for each move you have left. Choosing a path or walking hides the faded pips; if you stop with moves left, they come back. Refunds reset when your turn ends or combat or an encounter begins. Nothing carries over into a saved game.
@@ -139,7 +139,7 @@ Bug report diagnostics include your tweak settings and which tweaks were actuall
 
 ## Known limitations
 
-- **Preview release.** Framework 1.6.1 is a preview and is not delivered by automatic updates on the Stable channel.
+- **Preview release.** Framework 1.6.2 is a preview and is not delivered by automatic updates on the Stable channel.
 - **Windows and Linux gameplay are unverified.** In-game checks so far were solo play in a macOS game copy, and they do not yet cover every tweak.
 - **Online co-op.** Shared rules tweaks stay off in online co-op until a later release. Online co-op with tweaks has not been played, and local play has only been partly checked.
 - **Controllers** are not supported for refunding focus or one-press inventory, and controller play with tweaks has not been checked.
