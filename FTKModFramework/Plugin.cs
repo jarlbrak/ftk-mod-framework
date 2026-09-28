@@ -122,6 +122,12 @@ namespace FTKModFramework
         /// </summary>
         public static ConfigEntry<bool> LogLocalizationMisses;
 
+        /// <summary>
+        /// Write one STUCK-TURN warning line when this machine's turn cannot end, or when the master waits
+        /// on a client acknowledgement (spec #265 FR-1). Diagnostics only; read once at startup.
+        /// </summary>
+        public static ConfigEntry<bool> StuckTurnWatchdog;
+
         // ---- Diagnostics: scale-and-performance gate (P5a, #22) ----------------------------------------
         // The gate measures one content load against a persisted calibration baseline + tunable budgets and
         // emits exactly one SCALE-BUDGET line. The five budget fields are calibrated later; the values here
@@ -281,6 +287,13 @@ namespace FTKModFramework
                 "Write one [loc-miss] line to LogOutput.log for each text key the game looks up and cannot " +
                 "find, with the table and caller, up to 256 keys. Keys the framework shows verbatim on purpose " +
                 "are skipped. Never changes text. Read at startup; restart the game after changing it.");
+
+            StuckTurnWatchdog = Config.Bind("Diagnostics", "StuckTurnWatchdog", true,
+                "Write one STUCK-TURN warning line to LogOutput.log, and so to bug-report diagnostics, when your " +
+                "turn's End Turn button stays unavailable for 20 seconds with nothing on screen explaining it " +
+                "(90 seconds behind a shop, inventory or message), or when the host waits over 15 seconds for a " +
+                "player's acknowledgement. Changes nothing in the game and never opens a report. Read at startup.");
+            if (StuckTurnWatchdog.Value) gameObject.AddComponent<Core.Diagnostics.StuckTurnWatchdog>();
 
             DiagnosticsEnableGate =Config.Bind("Diagnostics", "EnableScaleBudgetGate", false,
                 "DEVELOPMENT: measure each content load against a calibration baseline and budgets, emitting one " +
