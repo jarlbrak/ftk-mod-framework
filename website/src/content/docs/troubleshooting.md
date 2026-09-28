@@ -36,9 +36,21 @@ Framework **1.4.0** includes the animated Skyharbor menu background. To restore 
 
 If Skyharbor is unexpectedly missing, check that the launcher installed framework 1.4.0 and that this setting is `true`, then restart. Party Select intentionally uses the native character stage. If the old background appears in other front-end transitions, report the menu route and framework version.
 
+## A tweak causes trouble
+
+Framework 1.6.0 adds [Tweaks](../tweaks/). If one misbehaves, turn it off in **Mods > Tweaks**. A tweak marked **Shared rules** keeps its setting for the current run, because the run's rules are decided at start and saved with it. Your change applies to runs you start afterwards; resuming this run's saves keeps the rules they recorded. Please [report it](#report-a-problem) as well.
+
+## Raw text such as `STR_` appears in the game
+
+The game shows a raw key, a name starting with `STR_`, when it cannot find the text for it. To help find the cause, close the game, open `BepInEx/config/com.ftkmf.framework.cfg`, set `LogLocalizationMisses = true` under `[Diagnostics]`, and relaunch. Each missing key then adds one line to `BepInEx/LogOutput.log` naming it. Attach those lines to your report, then set the option back to `false`. It never changes any text. See [diagnostics settings](../tweaks/#diagnostics-settings-for-troubleshooting).
+
+## A turn will not end
+
+From framework 1.6.0, when your turn cannot end and nothing on screen explains why, the framework writes one line starting with `STUCK-TURN` to `BepInEx/LogOutput.log`. It may also write a `SOFTLOCK-SIGNATURE` line when the game takes a path known to cause softlocks. Send a report from **Options > Report Bugs** with diagnostics included, or attach those lines to an issue. These lines only describe the game's state; they do not fix the stall.
+
 ## Report a problem
 
-Framework 1.5.0 sends detected errors and unexpected previous-session exits to public framework GitHub issues by default, with filtered diagnostics. Turn off **Automatic bug reports** in **Mods > Settings & Help** to stop new automatic sends. The manual **Report Bugs** editor remains available when you want to explain a problem. Diagnostics can still contain personal information written by mods; see the [reporting disclosure](https://reporting-api-production-ff50.up.railway.app/privacy).
+Framework 1.5.0 sends detected errors and unexpected previous-session exits to public framework GitHub issues by default, with filtered diagnostics. Turn off **Automatic bug reports** in **Mods > Settings & Help** to stop new automatic sends. The manual **Report Bugs** editor remains available when you want to explain a problem. From framework 1.6.0, diagnostics also include your [tweak](../tweaks/) settings and which tweaks were actually on, including a run's Shared rules and where they came from. Diagnostics can still contain personal information written by mods; see the [reporting disclosure](https://reporting-api-production-ff50.up.railway.app/privacy).
 
 You can also [open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues) with your platform, game build, framework version, mod versions, what you did, and what happened. Include only relevant log lines and remove personal paths and other private information. The loader's `BepInEx/LogOutput.log` inside the game folder can help identify the error. Do not upload game assemblies or saves containing private data.
 
