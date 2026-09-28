@@ -69,7 +69,9 @@ for(const url of [...resources,...links]){
 await page.setViewportSize({width:1440,height:1000});await page.goto(root);
 await page.getByRole('button',{name:'Search',exact:false}).first().click();
 await page.getByPlaceholder('Search',{exact:true}).fill('Smite');
-await page.locator('.pagefind-ui__result').first().waitFor();
+// Pagefind renders result rows before their text and ranking settle; wait for the expected hit
+// rather than reading the list as soon as the first row appears.
+await page.locator('.pagefind-ui__result',{hasText:'Paladin'}).first().waitFor();
 assert.match(await page.locator('.pagefind-ui__results').innerText(),/Paladin/);
 await page.keyboard.press('Escape');
 await page.setViewportSize({width:390,height:844});await page.goto(root+'mods/paladin/');
