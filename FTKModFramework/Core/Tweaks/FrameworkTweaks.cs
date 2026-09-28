@@ -51,6 +51,22 @@ namespace FTKModFramework.Core
             + "CharacterDummy.m_SufferingProficiencies holding Category.Shield, a combat dummy status. "
             + "The postfix hides the icon under the else-branch predicate, on every machine, for display.");
 
+        /// <summary>Spec #269 FR-1 and FR-2. Presentation only: it switches two prefab icons that
+        /// vanilla never wires and swaps tooltip keys on this machine's HUD, so it is Local.</summary>
+        internal static readonly TweakDescriptor PlayerStatusIconsDescriptor = new TweakDescriptor(
+            "fix.player-status-icons", TweakCategory.Fix, TweakScope.Local,
+            "Show Taunt and Petrified status icons",
+            "Show the game's own Taunt and Petrified status icons on your HUD in combat, and name Dazed in the stunned icon's tooltip.",
+            "The player HUD prefab's playerMainHudStatus/aliments grid has taunt (sprite statusTaunt, uiToolTipGeneral "
+            + "STR_statusTaunt, a key in no text table) and petrified (statusPetrified, STR_statusPetrified in TextInfo), "
+            + "both inactive, and uiPlayerMainHudStatus has no field for either. CharacterDummy.Taunting is "
+            + "m_SufferingProficiencies holding Category.Taunt and Petrified Category.Petrify. "
+            + "uiPlayerMainHudStatus.SetStatusIcons shows combat icons only while (bool)m_CurrentDummy && "
+            + "m_CharacterStats.m_IsInCombat. The postfix finds both children once per HUD, sets them under that "
+            + "predicate, and points the taunt tooltip at STR_skillsTaunt / STR_skillsTauntInfo (TextInfo). "
+            + "CharacterDummy.Stunned is Category.Stunned or Category.Dazed and m_Stunned's tooltip is STR_statusStunned; "
+            + "with Dazed alone the postfix uses STR_statusDazed / STR_statusDazedInfo (TextInfo). On every machine, for display.");
+
         internal static readonly TweakDescriptor PerfectChanceDescriptor = new TweakDescriptor(
             "fix.perfect-chance", TweakCategory.Fix, TweakScope.Local,
             "Correct Perfect chances",
@@ -241,6 +257,7 @@ namespace FTKModFramework.Core
         internal static int QuestDungeonName { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int StaleWetIcon { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int StaleGroupShieldIcon { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int PlayerStatusIconsFix { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PerfectChanceFix { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int XpInLevel { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PoisonTurns { get; private set; } = TweakRegistry.InvalidHandle;
@@ -260,6 +277,7 @@ namespace FTKModFramework.Core
             QuestDungeonName = registry.Register(QuestDungeonNameDescriptor);
             StaleWetIcon = registry.Register(StaleWetIconDescriptor);
             StaleGroupShieldIcon = registry.Register(StaleGroupShieldIconDescriptor);
+            PlayerStatusIconsFix = registry.Register(PlayerStatusIconsDescriptor);
             PerfectChanceFix = registry.Register(PerfectChanceDescriptor);
             XpInLevel = registry.Register(XpInLevelDescriptor);
             PoisonTurns = registry.Register(PoisonTurnsDescriptor);
@@ -320,6 +338,14 @@ namespace FTKModFramework.Core
             if (!registry.IsOn(handle)) return false;
             bool vanillaInCombatBranch = hasCurrentDummy && inCombat;
             return !vanillaInCombatBranch && iconActive;
+        }
+
+        /// <summary>The player status icon decision for one SetStatusIcons call. On mirrors vanilla's
+        /// combat branch for the taunt and petrified icons and names Dazed alone; off, faulted or
+        /// uninitialized only undoes what the tweak left showing. See PlayerStatusIcons.Decide.</summary>
+        internal static PlayerStatusIconChange PlayerStatusIconChanges(TweakRegistry registry, int handle, PlayerStatusIconState state)
+        {
+            return PlayerStatusIcons.Decide(registry.IsOn(handle), state);
         }
 
         /// <summary>The Perfect chance decision for one CalculateFullSkillChance call. Off, faulted or
