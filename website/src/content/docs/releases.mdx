@@ -4,6 +4,20 @@ description: What changed in the published framework and mod packages.
 ---
 import catalog from '../../data/catalog';
 
+## Framework 1.6.0 (preview)
+
+[Framework 1.6.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.0) is a **preview** release. Automatic updates stay on stable 1.5.1; choose **Preview** in **Mods > Updates**, or download a launcher from the release page, to try it. Restart the game after updating.
+
+It adds **Tweaks**, a new tab under **Mods > Tweaks** with optional fixes, extra information and conveniences for the base game. Fixes are on by default. Information and Convenience tweaks are off until you turn them on.
+
+- **Fixes (on by default):** dungeon names in quest text, the Wet and group shield icons cleared after combat, Taunt and Petrified status icons with a Dazed tooltip, corrected Perfect chances, and a stuck skip-turn popup that closes itself. Two fixes change how a run plays and carry balance notes: Find Herb refreshes after each full turn cycle in a dungeon, and poison countdowns are kept when you load a save.
+- **Information (off by default):** XP within the level, poison turns left, sell price in item details, encounters that vanish, and the achievements that easier House Rules disable.
+- **Convenience (off by default):** skip intro, one-press inventory, and refunding focus spent on movement.
+
+Shared rules tweaks are decided when a run starts, recorded in its saves, and restored when you resume it. Saves made before 1.6.0 follow your current settings. In online co-op, Shared rules tweaks are off until a later release. The framework also writes `STUCK-TURN` and `SOFTLOCK-SIGNATURE` lines to the log to help diagnose stalls, and bug report diagnostics now include your tweak settings. Read the [Tweaks guide](../tweaks/) for every tweak, its default and its balance note.
+
+**Known limitations:** Windows and Linux gameplay are unverified; in-game checks so far were solo play in a macOS game copy. Controllers are not supported for refunding focus or one-press inventory. Still open in the game: whether the original game without the framework opens a save carrying the Shared rules record, a second Find Herb in the same dungeon, the group shield icon, Skip intro on Windows, controllers, and co-op. See the [full list](../tweaks/#known-limitations).
+
 ## Framework 1.5.1 and bootstrap 1.0.0
 
 [Framework 1.5.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.5.1) adds the Windows launcher handoff for the independently versioned [bootstrap 1.0.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/bootstrap-v1.0.0). The launcher waits for the original game to exit before installing, acknowledges startup, and preserves the durable entry in Start menu and Steam shortcuts. Existing pins, framework updates, and the mod marketplace keep their normal flow.
@@ -48,4 +62,4 @@ Restart after preparing an upgrade and start a new adventure when changing conte
 
 ## Previous versions and future previews
 
-[GitHub release history](https://github.com/jarlbrak/ftk-mod-framework/releases) preserves previous immutable packages. Old versions are not silently replaced with new bytes. This site has no unreleased gameplay preview. Any future preview will be labeled separately from these published packages.
+[GitHub release history](https://github.com/jarlbrak/ftk-mod-framework/releases) preserves previous immutable packages. Old versions are not silently replaced with new bytes. Framework 1.6.0 is a published preview release, labeled as such, and is not offered by automatic updates. This site has no unreleased gameplay preview. Any future preview will be labeled separately from these published packages.
