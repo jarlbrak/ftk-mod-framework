@@ -40,6 +40,15 @@ namespace FTKModFramework.Core
             return candidate;
         }
 
+        /// <summary>
+        /// The "modGuid:contentKey" an id was minted for in this process, or false. Only ids allocated
+        /// since launch are known, so an id from content that is no longer installed has no key.
+        /// </summary>
+        internal static bool TryGetKey(int id, out string key)
+        {
+            return IntToKey.TryGetValue(id, out key);
+        }
+
         /// <summary>True if an int was minted by this framework (i.e. is in the custom band).</summary>
         public static bool IsCustom(int id)
         {

@@ -68,9 +68,15 @@ An optional, restricted [title-screen activation mode](HOT-RELOAD.md) supports
 same-process changes on the audited macOS build before starting or resuming an
 adventure.
 
-**The game cannot open a save after changing mods.** Restore the exact mod set
-used by that save or start a new adventure. Marketplace operations do not edit
-save files.
+**The game cannot open a save after changing mods.** A save refers to the mod
+content it was played with. When some of that content is no longer installed,
+the framework refuses to resume the save and shows what is missing, such as
+"1 enemy type, 1 item". The game stays on the title screen and the save file is
+not changed. Restore the exact mod set used by that save, choose another save,
+or start a new adventure. Framework versions without this check can instead
+wait on "Crafting adventure" indefinitely; quit the game and follow the same
+advice. Marketplace operations do not edit save files. See
+[save compatibility](MARKETPLACE.md#save-compatibility) for what is checked.
 
 **Text shows a raw key such as `STR_DungeonNoneDisplay`.** The game shows the
 key itself when a text table has no row for it. To list the missing keys, close
