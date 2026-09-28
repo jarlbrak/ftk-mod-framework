@@ -119,12 +119,22 @@ own focus flag still follows the OS, so mouse-wheel zoom and screen-edge scrolli
 while unfocused; drive the camera with keys or clicks instead.
 
 A newly launched game activates its window once. Record the frontmost app before launching and
-reactivate it as soon as the game window is frontmost; on macOS:
+reactivate it only when the game itself is frontmost. Compare against the game copy's bundle
+identifier, never against "anything other than the app I recorded": the user may switch apps
+while the game starts, and a guard that reacts to any change takes focus away from them. On macOS:
 
 ```sh
 front=$(osascript -e 'tell application "System Events" to get name of first process whose frontmost is true')
+game_id=$(defaults read "$PWD/TweaksTest.app/Contents/Info" CFBundleIdentifier)  # this copy's app bundle
 # ...launch the isolated copy with FTK_AGENT_BRIDGE=1 FTK_AGENT_BACKGROUND=1...
-osascript -e "tell application \"$front\" to activate"
+for _ in $(seq 1 80); do
+  now_id=$(osascript -e 'tell application "System Events" to get bundle identifier of first process whose frontmost is true')
+  if [ "$now_id" = "$game_id" ]; then
+    osascript -e "tell application \"$front\" to activate"
+    break
+  fi
+  sleep 0.5
+done
 ```
 
 After that, never activate or raise the game window. Read the screen through `ftk_screenshot`,
