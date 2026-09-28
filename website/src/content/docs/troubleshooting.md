@@ -30,9 +30,13 @@ Compare the installed framework, package version, platform, and game build with 
 
 Restore the exact framework and mod set used by that run, or start a new adventure. Marketplace operations do not rewrite saves. If an update damaged a managed package, the menu can retain previous generations for rollback on a later launch.
 
+From framework 1.6.2 (preview), a save that uses content that is no longer installed is refused before it loads. The game shows **Can't load this save** with a message such as "This save uses content that isn't installed: 1 enemy type, 1 map encounter, 1 item", names the mod when it can, and leaves the save file unchanged. Choose **OK**, then restore the mods used by that run, start a new adventure, or pick another save from **Load**.
+
 ## Resume is stuck on "Crafting adventure"
 
 The save most likely uses content, such as an enemy or item, from a mod or framework build that is no longer installed, and the game cannot finish rebuilding the map. Quit the game; the save itself is not changed. Then restore the framework and mods used by that run, start a new adventure, or choose another save from **Load**. **Resume** always opens the most recent save, so use **Load** to pick a different one.
+
+Framework 1.6.2 (preview) shows a **Can't load this save** message for such a save instead of hanging, and keeps you on the title screen or in the **Load** menu. Earlier framework versions still hang, so the advice above applies to them.
 
 ## Change the menu background
 
@@ -44,7 +48,7 @@ If Skyharbor is unexpectedly missing, check that the launcher installed framewor
 
 Framework 1.6.0 adds [Tweaks](../tweaks/). If one misbehaves, turn it off in **Mods > Tweaks**. A tweak marked **Shared rules** keeps its setting for the current run, because the run's rules are decided at start and saved with it. Your change applies to runs you start afterwards; resuming this run's saves keeps the rules they recorded. Please [report it](#report-a-problem) as well.
 
-If pressing the refund focus key ends your turn, you are on the 1.6.0 preview, whose refund key was the game's End Turn key. Update to framework 1.6.1, which uses **F**, or see [refund focus spent on movement](../tweaks/#refund-focus-spent-on-movement).
+If pressing the refund focus key ends your turn, you are on the 1.6.0 preview, whose refund key was the game's End Turn key. Update to framework 1.6.1 or later, which uses **F**, or see [refund focus spent on movement](../tweaks/#refund-focus-spent-on-movement).
 
 ## Raw text such as `STR_` appears in the game
 
@@ -57,6 +61,8 @@ From framework 1.6.0, when your turn cannot end and nothing on screen explains w
 ## Report a problem
 
 Framework 1.5.0 sends detected errors and unexpected previous-session exits to public framework GitHub issues by default, with filtered diagnostics. Turn off **Automatic bug reports** in **Mods > Settings & Help** to stop new automatic sends. The manual **Report Bugs** editor remains available when you want to explain a problem. From framework 1.6.0, diagnostics also include your [tweak](../tweaks/) settings and which tweaks were actually on, including a run's Shared rules and where they came from. Diagnostics can still contain personal information written by mods; see the [reporting disclosure](https://reporting-api-production-ff50.up.railway.app/privacy).
+
+**Automatic reports were not delivered before framework 1.6.2.** Framework 1.6.1 and earlier saved automatic reports in a folder the sending helper refuses, so none reached GitHub. Framework 1.6.2 (preview) delivers them, and the first launch deletes the old saved reports without sending them. If you want a problem from an earlier version looked at, send it from **Options > Report Bugs** or open an issue. Automatic sending is best effort: a report that could not be sent may be tried again on a later launch, but it never holds up a newer one. The game's own sound-engine error at startup is not reported.
 
 You can also [open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues) with your platform, game build, framework version, mod versions, what you did, and what happened. Include only relevant log lines and remove personal paths and other private information. The loader's `BepInEx/LogOutput.log` inside the game folder can help identify the error. Do not upload game assemblies or saves containing private data.
 

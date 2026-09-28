@@ -4,6 +4,17 @@ description: What changed in the published framework and mod packages.
 ---
 import catalog from '../../data/catalog';
 
+## Framework 1.6.2 (preview)
+
+[Framework 1.6.2](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.2) is a **preview** release that fixes two problems. It adds no new tweaks. Automatic updates stay on stable 1.5.1. If you chose **Preview** in **Mods > Updates**, 1.6.2 is offered to you; otherwise download a launcher from the release page. Restart the game after updating.
+
+- **Automatic bug reports are delivered.** Before 1.6.2, automatic reports were saved in a folder the sending helper refuses, so none of them reached GitHub, and one stuck report blocked every later one. They now send, a failed report never holds up a newer one, and the game's own sound-engine error at startup is no longer reported. The first launch of 1.6.2 deletes the old, never-sent reports without sending them. If you want an earlier problem looked at, use **Options > Report Bugs**.
+- **Saves with missing content are refused instead of hanging.** Resuming a save that uses an enemy, map encounter, item, class, quest or adventure that is not installed used to stop on "Crafting adventure". The game now shows **Can't load this save**, lists what is missing, and leaves the save file unchanged. This mostly affects saves made with a mod that has since been removed.
+
+The save check was tested in solo play in a macOS game copy. Automatic delivery was checked with one unexpected-exit report sent from a macOS test copy. An automatic error report has not been sent live, and Windows and Linux delivery are untested. The known limitations of 1.6.0 and 1.6.1 still apply. See the [full list](../tweaks/#known-limitations).
+
+**Known issue in the game itself:** on macOS the game can hang when you quit, inside the game's own sound engine. Force quit the game if it does not close.
+
 ## Framework 1.6.1 (preview)
 
 [Framework 1.6.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.1) is a **preview** release that fixes two problems found in 1.6.0. It adds no new tweaks. Automatic updates stay on stable 1.5.1. If you chose **Preview** in **Mods > Updates**, 1.6.1 is offered to you; otherwise download a launcher from the release page. Restart the game after updating.
@@ -73,4 +84,4 @@ Restart after preparing an upgrade and start a new adventure when changing conte
 
 ## Previous versions and future previews
 
-[GitHub release history](https://github.com/jarlbrak/ftk-mod-framework/releases) preserves previous immutable packages. Old versions are not silently replaced with new bytes. Framework 1.6.0 and 1.6.1 are published preview releases, labeled as such, and are not offered by automatic updates on the Stable channel. This site has no unreleased gameplay preview. Any future preview will be labeled separately from these published packages.
+[GitHub release history](https://github.com/jarlbrak/ftk-mod-framework/releases) preserves previous immutable packages. Old versions are not silently replaced with new bytes. Framework 1.6.0, 1.6.1 and 1.6.2 are published preview releases, labeled as such, and are not offered by automatic updates on the Stable channel. This site has no unreleased gameplay preview. Any future preview will be labeled separately from these published packages.
