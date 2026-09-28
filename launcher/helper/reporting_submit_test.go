@@ -176,6 +176,30 @@ func TestReportingPathAndEndpointBoundaries(t *testing.T) {
 	}
 }
 
+// The framework queues automatic reports in BepInEx/ReportingDelivery/Automatic. Framework
+// 1.6.1 used BepInEx/ReportingAutomaticDelivery, which this rule rejects, so nothing was sent.
+func TestReportingAcceptsAutomaticQueueOnly(t *testing.T) {
+	bepinex := filepath.Join(t.TempDir(), "BepInEx")
+	for _, c := range []struct {
+		dir    string
+		accept bool
+	}{
+		{filepath.Join(bepinex, "ReportingDelivery", "Automatic"), true},
+		{filepath.Join(bepinex, "ReportingAutomaticDelivery"), false},
+	} {
+		if err := os.MkdirAll(c.dir, 0700); err != nil {
+			t.Fatal(err)
+		}
+		req := filepath.Join(c.dir, "pending.json")
+		if err := os.WriteFile(req, []byte(reportingTestRequest), 0600); err != nil {
+			t.Fatal(err)
+		}
+		if err := reportingPaths(req, filepath.Join(c.dir, "result.json")); (err == nil) != c.accept {
+			t.Fatalf("%s: accepted=%v, want %v (%v)", c.dir, err == nil, c.accept, err)
+		}
+	}
+}
+
 func TestReportingOversizeInputIsNotSent(t *testing.T) {
 	req, res := reportingFixture(t)
 	if err := os.WriteFile(req, []byte(strings.Repeat("x", reportingRequestLimit+1)), 0600); err != nil {

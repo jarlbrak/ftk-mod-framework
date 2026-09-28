@@ -13,10 +13,11 @@ after receiving a validated submission receipt. **View issue** opens that issue.
 **Automatic bug reports** are on by default under **Mods > Settings & Help**.
 Detected errors and unexpected previous exits send filtered diagnostics to the same
 public GitHub tracker without opening the report panel. Turn the setting off to use
-manual reporting only. The installation remembers the 32 most recent successful
-automatic error signatures for 30 days to avoid repeated reports. A failed
-automatic submission keeps its exact local payload and retries at most once per
-later launch for seven days; it does not replace a pending manual report.
+manual reporting only. The installation remembers up to 32 automatic error
+signatures for 30 days to avoid repeated reports: those that were sent, that may
+have been sent, or that the service refused. Automatic sending is best effort and
+never blocks a newer report; see [If sending fails](#if-sending-fails). It never
+replaces a pending manual report.
 Turning the setting off stops new automatic sends; a send already in progress may
 finish. The manual reporting panel remains available in either setting.
 
@@ -67,9 +68,16 @@ See the deployed service's `/privacy` page for the same disclosure.
 
 Automatic reports use a generated description and the same bounded filtered logs and
 metadata as a manual report. The public issue text identifies an automatic submission.
-The error detector deduplicates and throttles reports within a session. Detection
-means an error was logged; it does not prove which mod caused it or detect every
-gameplay bug. The manual panel remains available for context that logs cannot tell us.
+The error detector deduplicates and throttles reports within a session: at most
+three error reports per launch, at least five minutes apart. Only an error that is
+actually queued counts toward those limits. An error signature already in the
+30-day history, and known vanilla noise, stay in the log dump but are not reported
+and do not count. The noise list is deliberately short. It holds only the game's
+`NullReferenceException` whose top stack frame is `AkInitializer.OnApplicationFocus`,
+which the Wwise sound integration throws at startup on every launch, with or without
+mods. Detection means an error was logged; it does not prove which mod caused it or
+detect every gameplay bug. The manual panel remains available for context that logs
+cannot tell us.
 
 An unexpected-exit report includes the previous session's saved metadata and matching
 process log snapshot. Force quit and power loss look the same, so this is not proof
@@ -168,18 +176,40 @@ The local outgoing copy expires after seven days. **Discard local copy** removes
 the pending manual copy and any corresponding local draft; it cannot delete an issue
 that already reached GitHub. Other saved drafts remain available.
 
-Automatic reports use a separate local queue. While automatic reporting is enabled,
-a saved automatic payload retries at most once on each later launch for up to seven
-days. Turning the setting off pauses these retries; the payload remains local until
-it expires or the setting is turned back on. Every attempt uses the same report ID
-and bytes.
+Automatic reports use a separate local queue in `BepInEx/ReportingDelivery/Automatic`,
+with its own lock, pending copy and receipt. It holds one automatic payload. While
+automatic reporting is enabled, a saved automatic payload retries at most once on
+each later launch for up to seven days, always with the same report ID and bytes.
+Turning the setting off pauses these retries; the payload remains local until it
+expires or the setting is turned back on.
+
+Automatic sending is best effort. Once the saved payload has failed during the
+current launch, a newer unexpected-exit or error report replaces it. An
+unexpected-exit report is sent before a pending error report. A replaced report is
+not resent under a new ID if it might already have reached GitHub (for example after
+a timeout): its error signature is remembered and its unexpected exit is settled.
+When the failure proves nothing was created, such as a rate limit or an unavailable
+service, the error can be reported again when it recurs, and the unexpected exit
+is reported again on the next launch. A payload that can never be accepted is
+deleted instead of retried. That covers a request the helper refuses and a service
+`invalid_report`, `report_conflict`, `payload_too_large` or `unsupported_media_type`
+response. Its signature or unexpected exit is settled as well. A manual report keeps
+its local copy on those errors until you retry or discard it.
+
+Framework 1.6.1 and earlier kept automatic reports in `BepInEx/ReportingAutomaticDelivery`,
+a folder the helper never accepts, so those reports were never delivered. The first
+launch of a fixed build deletes that queue's files and the empty folder without
+sending them, and logs one line. Unrecognized files there are left in place.
 
 ## Maintainer verification
 
 Game-free tests cover bounded capture, redaction, exact-session provenance, opt-out,
 local helper transport, durable retries, duplicate prevention, useful log dumps
 larger than the former transport limit, readable log/JSON downloads, draft editing
-and snapshot preservation, opt-out persistence, deletion and expiry.
+and snapshot preservation, opt-out persistence, deletion and expiry. They also cover
+the automatic queue's best-effort replacement, permanent-failure deletion, legacy
+queue removal and noise filtering. The submission test's stand-in helper enforces
+the real helper's request path rule, so a queue the helper would reject fails the test.
 They do not establish live UI appearance, Steam-launch compatibility,
 Railway connectivity or real GitHub issue creation. A release must separately prove
 those paths with an identified synthetic test report and downloaded diagnostics.

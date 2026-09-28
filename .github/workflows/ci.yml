@@ -99,7 +99,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for project in ReportingDraft ReportingMetadata ReportingRuntime ReportingSession ReportingDiagnostics ReportingSubmission; do
+          for project in ReportingDraft ReportingMetadata ReportingRuntime ReportingSession ReportingDiagnostics ReportingSubmission ReportingAutomatic; do
             dotnet run --project "FTKModFramework/Tests/$project/$project.csproj" -c Release
           done
           dotnet run --project FTKModFramework/Tests/ReportingRuntime/ReportingRuntime.csproj -c Release -- busy
