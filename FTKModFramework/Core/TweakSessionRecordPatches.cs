@@ -12,10 +12,34 @@ namespace FTKModFramework.Core
     // StateDataSerialize or StateDataDeserialize, so both hooks sit on FTKNetworkObject and run for
     // every serialized network object at every save, autosave and load; the non-GameFlow path is a
     // single type check. Every hook catches its own exceptions and never skips vanilla.
+    //
+    // The same two hooks carry fix.poison-decay-resume (Spec #260 FR-1, FR-2): the save adds
+    // PoisonCountdown.Key to a poisoned CharacterStats mid-countdown, the load prefix stashes it
+    // during a resume, and a CharacterStats.StateDataDeserializeDone prefix applies it.
     internal static class TweakSessionRecordHooks
     {
         internal const string LoadVia = "GameFlow.StateDataDeserialize";
-        private static bool _saveFailureWarned, _loadFailureWarned;
+        internal const string PoisonVia = "CharacterStats.StateDataDeserializeDone";
+        private static bool _saveFailureWarned, _loadFailureWarned, _poisonFailureWarned;
+
+        // CharacterStats.m_PoisonTimeCounter is private. The field is looked up once, on first use
+        // inside a try block, so a renamed field warns instead of failing the type initializer. A
+        // FieldInfo rather than a FieldRefAccess delegate: these paths run once per character per save
+        // or load, so boxing costs nothing that matters, and the game-free hooks test can run the
+        // same accessor on a modern runtime, where HarmonyX 2.7 cannot emit field refs.
+        private static FieldInfo _poisonCounter;
+
+        private static FieldInfo PoisonCounter()
+        {
+            if (_poisonCounter == null)
+            {
+                FieldInfo field = AccessTools.Field(typeof(CharacterStats), "m_PoisonTimeCounter");
+                if (field == null || field.FieldType != typeof(int))
+                    throw new MissingFieldException("CharacterStats", "m_PoisonTimeCounter");
+                _poisonCounter = field;
+            }
+            return _poisonCounter;
+        }
 
         internal static void Warn(string message)
         {
@@ -28,7 +52,12 @@ namespace FTKModFramework.Core
         /// returned unchanged, so the save is vanilla's.</summary>
         internal static Dictionary<string, object> Decorate(Dictionary<string, object> state, FTKNetworkObject self)
         {
-            if (!(self is GameFlow)) return state;
+            if (!(self is GameFlow))
+            {
+                CharacterStats stats = self as CharacterStats;
+                if (stats != null) DecoratePoison(state, stats);
+                return state;
+            }
             try { Tweaks.Session.WriteRecord(state); }
             catch (Exception e)
             {
@@ -41,9 +70,79 @@ namespace FTKModFramework.Core
             return state;
         }
 
+        /// <summary>FR-1. With the tweak off, outside a locked run or without poison this is a few
+        /// field reads and writes nothing, so the state matches vanilla.</summary>
+        private static void DecoratePoison(Dictionary<string, object> state, CharacterStats stats)
+        {
+            try
+            {
+                bool on = Tweaks.IsOn(FrameworkTweaks.PoisonDecayResume);
+                bool locked = Tweaks.Registry.SessionState == TweakSessionState.Locked;
+                int level = stats.m_PoisonLvl;
+                if (state == null || !on || !locked || level <= 0) return;
+                string value = PoisonCountdown.PoisonToWrite(locked, on, level, (int)PoisonCounter().GetValue(stats));
+                if (value != null) state[PoisonCountdown.Key] = value;
+            }
+            catch (Exception e)
+            {
+                WarnPoison("saving the poison countdown failed; this save keeps vanilla's character state", e);
+            }
+        }
+
+        /// <summary>FR-2 stash, before vanilla reads a CharacterStats state. Parses the string again
+        /// only inside a resume's players window and only when it contains the key: at most once per
+        /// saved character.</summary>
+        internal static void StashPoison(FTKNetworkObject self, string content)
+        {
+            CharacterStats stats = self as CharacterStats;
+            if (stats == null) return;
+            try
+            {
+                TweakSessionLifecycle session = Tweaks.Session;
+                if (!session.ResumePlayersOpen || !stats.m_IsSerialize || !PoisonCountdown.MayCarry(content)) return;
+                Dictionary<string, object> state =
+                    SerializationHelpers.DeserializeFromContent<Dictionary<string, object>, FullSerializerSerializer>(content);
+                object value;
+                if (state != null && state.TryGetValue(PoisonCountdown.Key, out value)) session.StashPoison(stats, value);
+            }
+            catch (Exception e)
+            {
+                WarnPoison("reading the saved poison countdown failed; the character keeps vanilla's countdown and vanilla's load is unaffected", e);
+            }
+        }
+
+        /// <summary>FR-2 apply, from CharacterStats.StateDataDeserializeDone: vanilla has restored
+        /// m_PoisonLvl, and nothing after it has read the countdown yet.</summary>
+        internal static void ApplyPoison(CharacterStats stats)
+        {
+            try
+            {
+                TweakSessionLifecycle session = Tweaks.Session;
+                if (stats == null || session.PoisonPending == 0) return;
+                int counter = session.TakePoison(stats, Tweaks.IsOn(FrameworkTweaks.PoisonDecayResume), stats.m_IsSerialize,
+                    stats.m_PoisonLvl, PoisonVia);
+                if (counter > 0) PoisonCounter().SetValue(stats, counter);
+            }
+            catch (Exception e)
+            {
+                WarnPoison("restoring the poison countdown failed; the character keeps vanilla's countdown and vanilla's load is unaffected", e);
+            }
+        }
+
+        private static void WarnPoison(string message, Exception e)
+        {
+            if (_poisonFailureWarned) return;
+            _poisonFailureWarned = true;
+            Warn("Tweaks: " + message + ": " + e);
+        }
+
         internal static void Read(FTKNetworkObject self, string content)
         {
-            if (!(self is GameFlow)) return;
+            if (!(self is GameFlow))
+            {
+                StashPoison(self, content);
+                return;
+            }
             try
             {
                 // Checked before parsing, so the extra parse happens at most once per resume, on the
@@ -141,12 +240,44 @@ namespace FTKModFramework.Core
     // the record. The GameFlow state is a few ints, a bool and the Rules2 parameters, and vanilla
     // already parses it an extra time in GameSerialize.Load for saves with the old difficulty field,
     // so one more parse per resume is negligible. Returning void, it can never skip the original.
+    // For CharacterStats it parses only a saved character's state that carries the poison key,
+    // inside a resume's players window, which PlayerSerialize.Deserialize reaches after the lock.
     [HarmonyPatch(typeof(FTKNetworkObject), "StateDataDeserialize", new[] { typeof(string), typeof(bool) })]
     internal static class TweakSessionRecordLoadPatch
     {
         private static void Prefix(FTKNetworkObject __instance, string _s)
         {
             TweakSessionRecordHooks.Read(__instance, _s);
+        }
+    }
+
+    // Spec #260 FR-2 apply. Not a StateDataDeserialize postfix: on the loading machine every RPC
+    // in the character chain executes at once (NetworkingPeer.RPC calls ExecuteRpc for the local
+    // player and the local master), so StateDataDeserializeDone's PlayerClientCreatedRPC,
+    // CreatePlayerFinishedRPC and the next CreatePlayer, up to AllCowsCreated, all run inside the
+    // first character's StateDataDeserialize. Its postfix would run last, after the window closed.
+    // This prefix runs inside the original after the field loop and before that chain.
+    [HarmonyPatch(typeof(CharacterStats), "StateDataDeserializeDone")]
+    internal static class TweakPoisonApplyPatch
+    {
+        private static void Prefix(CharacterStats __instance)
+        {
+            TweakSessionRecordHooks.ApplyPoison(__instance);
+        }
+    }
+
+    // Spec #260 FR-2 window close. The host sends AllCowsCreated from CreatePlayerFinishedRPC once
+    // m_CreatePlayerCount reaches m_CreateUIs.Count. A saved character reaches that count only
+    // through its own StateDataDeserializeDone, PlayerClientCreatedRPC and CreatePlayerFinishedRPC,
+    // so every saved CharacterStats has been deserialized by the time this runs. A prefix, so the
+    // window is closed before DeserializeFinal starts the resumed game.
+    [HarmonyPatch(typeof(uiStartGame), "AllCowsCreated")]
+    internal static class TweakResumePlayersClosePatch
+    {
+        private static void Prefix()
+        {
+            try { Tweaks.Session.CloseResumePlayers("uiStartGame.AllCowsCreated"); }
+            catch (Exception e) { TweakSessionHooks.Failed("uiStartGame.AllCowsCreated", e); }
         }
     }
 

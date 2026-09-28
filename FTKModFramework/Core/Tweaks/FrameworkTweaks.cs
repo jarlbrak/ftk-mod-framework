@@ -166,6 +166,25 @@ namespace FTKModFramework.Core
             "Herbalists can find herbs each party turn in dungeons, not once per visit; many more herbs in the Endless Dungeon.",
             true);
 
+        /// <summary>Spec #260 FR-1, FR-2. A shared rule, since it changes when poison wears off, so it
+        /// is Session scope. The balance note makes the default an explicit decision (on, 2026-09-27).</summary>
+        internal static readonly TweakDescriptor PoisonDecayResumeDescriptor = new TweakDescriptor(
+            "fix.poison-decay-resume", TweakCategory.Fix, TweakScope.Session,
+            "Keep poison countdowns on load",
+            "A loaded run keeps each character's poison countdown, so poison wears off on the same end turn as if you had never saved.",
+            "CharacterStats.m_PoisonTimeCounter is private with no sync or save attribute, and only "
+            + "EndTurnActionSequence writes it: +1 per end turn while m_PoisonLvl > 0, 0 otherwise, and at "
+            + "PoisonTimeRounds (3) RPCAllSelf(\"UpdatePoison\", -1) and a reset. A load restarts it at 0. "
+            + "GameLogic.GetPlayerSerializeData saves PlayerSerialize.m_StateCSData from "
+            + "m_CharacterStats.StateDataSerialize(), which the Session record transpiler already decorates; "
+            + "the CharacterStats branch adds ftkmf.poison = v1:<1 or 2> for a locked run. On resume, "
+            + "EnterFahrulRPC locks the run and fades to black before StartGame, whose CreatePlayer chain runs "
+            + "uiQuickPlayerCreate.CreatePlayerRPC, PlayerSerialize.Deserialize and RPCAllSelf(\"StateDataDeserialize\", "
+            + "m_StateCSData). The load prefix stashes the value per CharacterStats instance and a "
+            + "StateDataDeserializeDone prefix sets the counter once m_PoisonLvl is restored, until "
+            + "uiStartGame.AllCowsCreated.",
+            "Poison no longer lasts extra turns after loading a save.", true);
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -190,6 +209,7 @@ namespace FTKModFramework.Core
         internal static int HouseRulesAchievements { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int OnePressInventory { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int DungeonFindHerb { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int PoisonDecayResume { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -206,6 +226,7 @@ namespace FTKModFramework.Core
             HouseRulesAchievements = registry.Register(HouseRulesAchievementsDescriptor);
             OnePressInventory = registry.Register(OnePressInventoryDescriptor);
             DungeonFindHerb = registry.Register(DungeonFindHerbDescriptor);
+            PoisonDecayResume = registry.Register(PoisonDecayResumeDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 

@@ -33,7 +33,7 @@ namespace FullInspector
         public static T DeserializeFromContent<T, TSerializer>(string content) where TSerializer : BaseSerializer
         {
             Parses++;
-            if (content == "throw") throw new FormatException("stand-in parse failure");
+            if (content.StartsWith("throw", StringComparison.Ordinal)) throw new FormatException("stand-in parse failure");
             var state = new Dictionary<string, object>();
             foreach (string pair in content.Split(';'))
             {
@@ -48,6 +48,16 @@ namespace FullInspector
 public class FTKNetworkObject { public bool m_IsSerialize = true; }
 public class GameFlow : FTKNetworkObject { }
 public class uiStartGame { }
+
+// The two members the poison hooks read, with the counter private as in the game. m_PhotonID
+// stands for the PhotonID every local multiplayer character shares.
+public class CharacterStats : FTKNetworkObject
+{
+    public int m_PoisonLvl;
+    public int m_PhotonID;
+    private int m_PoisonTimeCounter;
+    public int Counter { get { return m_PoisonTimeCounter; } set { m_PoisonTimeCounter = value; } }
+}
 
 namespace FTKModFramework.Core
 {
@@ -127,8 +137,10 @@ internal static class Program
         Save();
         Drift();
         Load(probe);
+        PoisonSave();
+        PoisonLoad();
         Check(Errors.Count == 0, "no self-test failure: " + string.Join(" | ", Errors));
-        Console.WriteLine("SessionRecordHooks: " + _checks + " checks passed (save transpiler, IL drift, load prefix, resume arm; game stand-ins, no live proof).");
+        Console.WriteLine("SessionRecordHooks: " + _checks + " checks passed (save transpiler, IL drift, load prefix, resume arm, poison save, stash, apply and close; game stand-ins, no live proof).");
     }
 
     // FR-2: one insertion before the serialize call, the key only for a locked GameFlow, and
@@ -233,5 +245,132 @@ internal static class Program
         Check(Tweaks.Registry.SessionSource == TweakRegistry.PreferencesSource && Tweaks.Session.ResumeRecord == null,
             "after a parse failure the run keeps its capture");
         Tweaks.Session.Clear(TweakClearTrigger.SceneReload, "test");
+    }
+
+    private static string Content(Dictionary<string, object> state)
+    {
+        return SerializationHelpers.SerializeToContent<Dictionary<string, object>, FullSerializerSerializer>(state);
+    }
+
+    // Spec #260 FR-1: Decorate adds ftkmf.poison to a poisoned CharacterStats mid-countdown in a
+    // locked run with the tweak on, and otherwise leaves vanilla's output byte for byte.
+    private static void PoisonSave()
+    {
+        var hooked = Compile(TweakSessionRecordSavePatch.Transpiler(Vanilla()).ToList());
+        var original = Compile(Vanilla());
+        var stats = new CharacterStats { m_PoisonLvl = 2, Counter = 2 };
+        Check(hooked(stats, State()) == original(stats, State()), "at the title screen a poisoned character saves as vanilla");
+        Tweaks.Session.Capture(0, "test");
+        Check(hooked(stats, State()) == original(stats, State()), "during setup a poisoned character saves as vanilla");
+        Tweaks.Session.Lock(0, "test");
+
+        Dictionary<string, object> expected = State();
+        expected[PoisonCountdown.Key] = "v1:2";
+        Check(hooked(stats, State()) == original(stats, expected), "a locked run saves the countdown: " + hooked(stats, State()));
+        stats.Counter = 1;
+        expected[PoisonCountdown.Key] = "v1:1";
+        Check(hooked(stats, State()) == original(stats, expected), "counter 1 is saved too");
+        foreach (int counter in new[] { 0, 3 })
+        {
+            stats.Counter = counter;
+            Check(hooked(stats, State()) == original(stats, State()), "counter " + counter + " saves as vanilla");
+        }
+        stats.Counter = 2;
+        stats.m_PoisonLvl = 0;
+        Check(hooked(stats, State()) == original(stats, State()), "an unpoisoned character saves as vanilla");
+        stats.m_PoisonLvl = 2;
+        var flow = new GameFlow();
+        Check(!hooked(flow, State()).Contains(PoisonCountdown.Key) && hooked(flow, State()).Contains(TweakSessionRecord.Key),
+            "GameFlow keeps its record and never gets the poison key");
+        Check(!Tweaks.Session.RecordToWrite().Contains("-" + FrameworkTweaks.PoisonDecayResumeDescriptor.Id)
+            && Tweaks.Session.RecordToWrite().Contains("+" + FrameworkTweaks.PoisonDecayResumeDescriptor.Id),
+            "the Session record lists the tweak on");
+        Tweaks.Session.Clear(TweakClearTrigger.RunEnd, "test");
+        Check(hooked(stats, State()) == original(stats, State()), "after the run ends a poisoned character saves as vanilla");
+
+        int handle = FrameworkTweaks.PoisonDecayResume;
+        Tweaks.Registry.Toggle(handle);
+        Tweaks.Session.Capture(0, "test");
+        Tweaks.Session.Lock(0, "test");
+        Check(!Tweaks.IsOn(handle) && hooked(stats, State()) == original(stats, State()), "with the tweak off a poisoned character saves as vanilla");
+        Tweaks.Session.Clear(TweakClearTrigger.RunEnd, "test");
+        Tweaks.Registry.Toggle(handle);
+        Check(Tweaks.Registry.PreferredOn(handle), "the preference is back on");
+    }
+
+    // Spec #260 FR-2: the load prefix stashes inside the resume players window, the
+    // StateDataDeserializeDone prefix applies after vanilla restored the level, AllCowsCreated
+    // closes. The calls follow the game's order: arm, lock, then each character.
+    private static void PoisonLoad()
+    {
+        Type arm = typeof(TweakSessionResumeArmPatch), load = typeof(TweakSessionRecordLoadPatch);
+        Type apply = typeof(TweakPoisonApplyPatch), close = typeof(TweakResumePlayersClosePatch);
+        var savedTwo = new Dictionary<string, object>(State()) { { "m_PoisonLvl", 2 }, { PoisonCountdown.Key, "v1:2" } };
+        var savedOne = new Dictionary<string, object>(State()) { { "m_PoisonLvl", 1 }, { PoisonCountdown.Key, "v1:1" } };
+        string two = Content(savedTwo), one = Content(savedOne), plain = Content(State());
+
+        // Vanilla's StateDataDeserialize: prefix, field loop, then StateDataDeserializeDone.
+        Action<CharacterStats, string, int> deserialize = (stats, content, level) =>
+        {
+            Invoke(load, stats, content);
+            stats.m_PoisonLvl = level;
+            Invoke(apply, stats);
+        };
+
+        SerializationHelpers.Parses = 0;
+        var outside = new CharacterStats();
+        deserialize(outside, two, 2);
+        Check(SerializationHelpers.Parses == 0 && outside.Counter == 0, "outside a resume nothing is parsed or set");
+
+        Invoke(arm, true);
+        Tweaks.Session.Capture(0, "GameLogic.CreateOfflineRoom");
+        Tweaks.Session.Lock(0, "uiStartGame.EnterFahrulRPC");
+        Check(Tweaks.Session.ResumePlayersOpen && Tweaks.IsOn(FrameworkTweaks.PoisonDecayResume), "after the lock the window is open with the tweak on");
+
+        var first = new CharacterStats { m_PhotonID = 1 };
+        var second = new CharacterStats { m_PhotonID = 1 };
+        deserialize(first, two, 2);
+        deserialize(second, one, 1);
+        Check(first.Counter == 2 && second.Counter == 1, "two characters with one PhotonID each get their own countdown");
+        Check(SerializationHelpers.Parses == 2, "each saved character is parsed once");
+
+        var cured = new CharacterStats();
+        deserialize(cured, two, 0);
+        Check(cured.Counter == 0, "a character whose loaded level is 0 keeps vanilla's countdown");
+        var unsaved = new CharacterStats();
+        deserialize(unsaved, plain, 2);
+        var unserialized = new CharacterStats { m_IsSerialize = false };
+        deserialize(unserialized, two, 2);
+        Invoke(load, new FTKNetworkObject(), two);
+        Check(SerializationHelpers.Parses == 3 && unsaved.Counter == 0 && unserialized.Counter == 0,
+            "a state without the key, an unserialized object and other objects parse nothing");
+
+        int before = Warnings.Count;
+        var broken = new CharacterStats();
+        deserialize(broken, "throw " + PoisonCountdown.Key, 2);
+        deserialize(broken, "throw " + PoisonCountdown.Key, 2);
+        Check(Warnings.Count == before + 1 && Warnings[before].Contains("reading the saved poison countdown failed") && broken.Counter == 0,
+            "a parse failure is caught and warned about once, separately from the Session record");
+
+        Invoke(close);
+        Check(!Tweaks.Session.ResumePlayersOpen && Infos.Any(i => i.Contains("resume poison countdowns via uiStartGame.AllCowsCreated: restored 2, discarded 1.")),
+            "AllCowsCreated closes the window and logs the counts: " + Infos.LastOrDefault());
+        var late = new CharacterStats();
+        deserialize(late, two, 2);
+        Check(late.Counter == 0 && SerializationHelpers.Parses == 5, "after the close nothing is parsed or set");
+        Tweaks.Session.Clear(TweakClearTrigger.RunEnd, "test");
+
+        // A player who turned the tweak off: the countdown is read but discarded.
+        int handle = FrameworkTweaks.PoisonDecayResume;
+        Tweaks.Registry.Toggle(handle);
+        Invoke(arm, true);
+        Tweaks.Session.Capture(0, "GameLogic.CreateOfflineRoom");
+        Tweaks.Session.Lock(0, "uiStartGame.EnterFahrulRPC");
+        var off = new CharacterStats();
+        deserialize(off, two, 2);
+        Invoke(close);
+        Check(off.Counter == 0 && Infos.Any(i => i.Contains("restored 0, discarded 1.")), "with the tweak off the countdown is discarded");
+        Tweaks.Session.Clear(TweakClearTrigger.RunEnd, "test");
+        Tweaks.Registry.Toggle(handle);
     }
 }

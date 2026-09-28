@@ -79,7 +79,8 @@ internal static class Program
         SessionProbe();
         _checks += TabChecks.Run();
         _checks += SessionRecordChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet and group shield icons, Perfect chance, xp in level, poison turns, sell price, dungeon Find Herb, vanishing encounters, House Rules achievements, one-press inventory, lifecycle hooks, session probe, tab, session record).");
+        _checks += PoisonResumeChecks.Run();
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet and group shield icons, Perfect chance, xp in level, poison turns, sell price, dungeon Find Herb, poison countdown on resume, vanishing encounters, House Rules achievements, one-press inventory, lifecycle hooks, session probe, tab, session record).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
