@@ -387,6 +387,9 @@ namespace FTKModFramework
                 "Keyboard key that refunds one point of movement focus when the Refund movement focus tweak is on. " +
                 "None turns the key off; clicking a faded focus pip still works. A key that one of the game's own " +
                 "controls also uses is ignored, with one warning in the log. Controllers are not supported.");
+            // fix.stuck-skip-turn-popup recovers from a later frame, outside any vanilla call. Idle frames
+            // cost one comparison, and the driver checks the tweak before doing anything else.
+            gameObject.AddComponent<Core.StuckSkipTurnDriver>();
 
             _harmony = new Harmony(Guid);
             DbLookupPatcher.Init(_harmony);

@@ -54,8 +54,12 @@ on top of it. These descriptors exist today:
   tweak, off by default: during your own turn, take back focus you spent on movement while the
   extra move is unused and you have not set off. Click a faded focus pip or press Backspace
   (configurable). Keyboard and mouse only. See [below](#refund-movement-focus).
+- **Unstick the skip-turn popup** (`fix.stuck-skip-turn-popup`,
+  [Spec #265](https://github.com/jarlbrak/ftk-mod-framework/issues/265) FR-4), a Local Fix, on by
+  default: a skip-turn popup that is interrupted before it closes is closed once, as the game would
+  have closed it. See [below](#stuck-skip-turn-popup).
 
-Live verification status is tracked on #233, #242, #243, #260 and #264.
+Live verification status is tracked on #233, #242, #243, #260, #264 and #265.
 
 `fix.quest-dungeon-name` postfixes `QuestLogicBase.SetMessageParams`. Quest message params are
 cached: they are built on the first `GetMessageParams` call, rebuilt by
@@ -165,6 +169,47 @@ With the self-test probe registered, each refund is traced as
 `SESSION-PROBE [session-lifecycle] focus-refund`. Like every Session tweak, it is off in online
 co-op until the co-op contract ships.
 
+### Stuck skip-turn popup
+
+`SkipTurnUI.Show` stores its `ContinueFSM` in `m_ContinueFSM`, which nothing clears, and runs
+`uiMovementSlots.ShowActionPanelRPC` here and on the other clients. That calls `InitializeSkipTurn`:
+
+1. `ForceHide`, then `BaseInitialize`, which shows `m_Root`.
+2. `CharacterOverworld.RemoveSkipTurn`, so the skip is spent before the popup appears.
+3. The coroutine `SlotDisplayExpandSkipTurn`. It waits `m_TransitionTime` and `m_SlotAppearDelay`
+   of `Time.time`, then `VisualParams.m_ActionSlotDisplayTimeout` of `Time.deltaTime`, each cut
+   short by a skip click. The field defaults are 1, 0.8 and 3 seconds, about 4.8 seconds in all.
+4. The coroutine ends with `SkipTurnUI.Close(GetCurrentCOW().m_FTKPlayerID.IsLocal())`.
+
+`Close(_continue)` fades the panel out unless `m_IsFading` is already set, then continues
+`m_ContinueFSM` only when `_continue` is true. `IsLocal` is true on the machine that owns the
+character, where `Show` stored the continuation, so the other machines only hide the popup. The
+continuation is the only thing that moves the turn on. `ForceHide` calls `StopAllCoroutines`
+while `m_Root` is active, and Unity stops the coroutines of a deactivated object, so either can
+leave the popup open and the turn waiting.
+
+`Core/StuckSkipTurnPatch.cs` holds the patches and the driver, and the Unity-free episode and
+guard live in `Core/Tweaks/SkipTurnRecovery.cs`:
+
+- **Episode.** An `InitializeSkipTurn` postfix arms it for the character. Its prefix drops an
+  episode that a new popup replaces, because `Show` has already stored the new continuation. An
+  `Initialize` prefix also drops it: an action roll reuses the panel and starts only after the
+  turn has moved past the skip, and a close would fade that roll out. `Close` ends the episode.
+- **Trigger.** A `ForceHide` prefix records a hide while `m_Root` is active. A per-frame driver,
+  added once by `Plugin.Awake`, records `m_Root` or the panel's object going inactive, and 10
+  seconds of `Time.time` since the arm. A pause freezes `Time.time` as it freezes the coroutine.
+- **Recovery.** On a later frame, outside any vanilla call, the driver calls
+  `SkipTurnUI.Instance.Close(IsLocal())` exactly once, with vanilla's own argument. It waits while
+  the panel's object is inactive, because `Close` starts a fade coroutine there. It does nothing
+  if the turn now belongs to another character. It sends no RPC.
+- **Guard.** A `SkipTurnUI.Close` prefix lets each `m_ContinueFSM` continue once. A second
+  `Close(true)` with the same object runs as `Close(false)`, so vanilla's own close after a
+  recovery cannot continue twice. The continuation is made with `WaitClients.None`, which fires on
+  every `Continue`. A normal skip turn closes once with a new continuation and is never blocked.
+
+Each recovery, each dropped episode and each blocked repeat writes one Info line that starts
+`Tweaks: fix.stuck-skip-turn-popup`.
+
 ## Architecture
 
 | Piece | Location | Role |
@@ -177,6 +222,7 @@ co-op until the co-op contract ships.
 | Session record | `Core/Tweaks/TweakSessionRecord.cs` | Unity-free codec and per-ID resolution for the `ftkmf.session` save record |
 | Poison countdown | `Core/Tweaks/PoisonCountdown.cs` | Unity-free codec and write and restore decisions for the `ftkmf.poison` character value |
 | Refund movement focus | `Core/Tweaks/RefundFocus.cs`, `Core/RefundMovementFocusPatch.cs`, `Core/RefundMovementFocusHud.cs` | Unity-free ledger, bound, gates, reversal, pip and key rules; the counting and clear patches, the refund entry point, and the focus pip HUD and key |
+| Stuck skip-turn popup | `Core/Tweaks/SkipTurnRecovery.cs`, `Core/StuckSkipTurnPatch.cs` | Unity-free episode and continuation guard; the arm, drop, trigger and close patches and the per-frame driver |
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
 | Session record hooks | `Core/TweakSessionRecordPatches.cs` | The save transpiler, the load prefix and the resume arm for the `ftkmf.session` record, plus the `ftkmf.poison` write, stash, apply and window close |
@@ -588,7 +634,9 @@ codec, its write and restore decisions, and the resume players window: when it o
 applying once, each discard, and two instances that share a PhotonID. For refund movement focus it
 covers counting only real conversions, the bound, each gate failing, the exact reversal through a
 recording setter seam, every clear trigger, the off path, and which pips are marked, which keys
-are usable and the tooltip text.
+are usable and the tooltip text. For the stuck skip-turn popup it covers a normal skip turn, each
+trigger, recovery once, a pause, dropped episodes, the turn check, the once-only guard and the off
+path.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 `Tests/SessionRecordHooks` compiles `Core/TweakSessionRecordPatches.cs` against stand-ins for
 the game types it names. It runs the save transpiler over a stand-in of vanilla's tail sequence,
