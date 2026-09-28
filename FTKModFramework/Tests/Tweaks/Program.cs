@@ -72,12 +72,13 @@ internal static class Program
         StaleWetIcon();
         PerfectChanceMath();
         PerfectChanceTweak();
+        OnePressInventory();
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
         _checks += SessionRecordChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, lifecycle hooks, session probe, tab, session record).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet icon, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, one-press inventory, lifecycle hooks, session probe, tab, session record).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -462,6 +463,80 @@ internal static class Program
         Check(restarted.Initialize(store) && FrameworkTweaks.SkipIntroAnyButton(restarted, FrameworkTweaks.SkipIntro, false),
             "the stored On applies from the first call after a restart");
         Check(!FrameworkTweaks.SkipIntroAnyButton(restarted, TweakRegistry.InvalidHandle, false), "an unregistered handle leaves vanilla untouched");
+    }
+
+    // Spec #243 FR-2: the One-press inventory descriptor, the press device and the vanilla gates.
+    private static bool OpenAllowed(TweakRegistry r, int handle, InventoryPressDevice device = InventoryPressDevice.KeyboardMouse,
+        bool beltHasFocus = true, bool gameAborted = false, bool battleStance = false, bool interactable = true, bool showing = false)
+    {
+        return OnePressInventoryDecision.ShouldOpen(r, handle, device, beltHasFocus, gameAborted, battleStance, interactable, showing);
+    }
+
+    private static void OnePressInventory()
+    {
+        TweakDescriptor d = FrameworkTweaks.OnePressInventoryDescriptor;
+        Check(d.Id == "convenience.one-press-inventory" && d.Category == TweakCategory.Convenience && d.Scope == TweakScope.Local,
+            "One-press inventory is a Local Convenience tweak with the specified ID");
+        Check(!d.DefaultOn && d.ExplicitDefault == null && d.BalanceNote == null, "One-press inventory is off by default with no balance note");
+        Check(d.Title == "One-press inventory" && d.Summary.Contains("keyboard and mouse") && d.Summary.Contains("Controllers"),
+            "the title and summary name the keyboard and mouse scope");
+        foreach (string member in new[] { "CharacterOverworld.CheckInput", "m_QuickUseInput", "FTKInputFocus.GetButtonDown",
+            "uiPlayerMainHud.Update", "InventoryToggleSequence(true)", "m_BattleStanceButtons.m_Initialized",
+            "m_OpenInventory.interactable", "m_GameAborted", "m_IsUseMouse" })
+            Check(d.Evidence.Contains(member), "the evidence names " + member);
+        Check(d.Summary.IndexOf('\u2014') < 0 && d.Evidence.IndexOf('\u2014') < 0, "no em dashes in the descriptor text");
+
+        // The device behind a press.
+        Check(OnePressInventoryDecision.ClassifyPress(true, false, true) == InventoryPressDevice.KeyboardMouse,
+            "a keyboard and mouse character pressing a bound key is keyboard and mouse");
+        Check(OnePressInventoryDecision.ClassifyPress(true, true, true) == InventoryPressDevice.KeyboardMouse,
+            "a character with both devices pressing a bound key is keyboard and mouse");
+        Check(OnePressInventoryDecision.ClassifyPress(true, true, false) == InventoryPressDevice.Controller,
+            "a character with both devices and no bound key down pressed the controller");
+        Check(OnePressInventoryDecision.ClassifyPress(false, true, true) == InventoryPressDevice.Controller,
+            "a controller character stays a controller even when someone presses the shared keyboard");
+        Check(OnePressInventoryDecision.ClassifyPress(false, true, false) == InventoryPressDevice.Controller,
+            "a controller character pressing the pad is a controller press");
+        Check(OnePressInventoryDecision.ClassifyPress(true, false, false) == InventoryPressDevice.Unknown,
+            "no bound key down on a keyboard and mouse character is unknown");
+        Check(OnePressInventoryDecision.ClassifyPress(false, false, true) == InventoryPressDevice.Unknown,
+            "a character with no local device is unknown");
+
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.OnePressInventory;
+        Check(handle != TweakRegistry.InvalidHandle && handle != FrameworkTweaks.SkipIntro && Logs.Count == 0,
+            "One-press inventory registers cleanly beside Skip intro");
+        Check(r.Get(handle) == d, "the handle resolves to the One-press inventory descriptor");
+
+        // Off path: before initialization, off, faulted and an unknown handle never open.
+        Check(!OpenAllowed(r, handle), "before initialization nothing opens");
+        Check(r.Initialize(store) && !r.IsOn(handle), "a fresh install leaves One-press inventory off");
+        Check(!OpenAllowed(r, handle), "off: every press stays vanilla");
+        Check(!OpenAllowed(r, TweakRegistry.InvalidHandle), "an unregistered handle never opens");
+
+        Check(r.Toggle(handle) && store.Values["convenience.one-press-inventory"] == TweakPreference.On, "turning it on stores On");
+        Check(OpenAllowed(r, handle), "on: a keyboard and mouse press with every vanilla gate open opens the inventory");
+
+        // Controller input and an unknown device stay vanilla.
+        Check(!OpenAllowed(r, handle, InventoryPressDevice.Controller), "a controller press keeps the two-press belt");
+        Check(!OpenAllowed(r, handle, InventoryPressDevice.Unknown), "an unknown device keeps vanilla");
+
+        // Every gate vanilla's second press checks, plus the no-second-open guard.
+        Check(!OpenAllowed(r, handle, interactable: false), "an inventory button that is not interactable never opens");
+        Check(!OpenAllowed(r, handle, battleStance: true), "battle stance never opens");
+        Check(!OpenAllowed(r, handle, gameAborted: true), "an aborted game never opens");
+        Check(!OpenAllowed(r, handle, beltHasFocus: false), "without belt focus (a popup declined it, or it moved) nothing opens");
+        Check(!OpenAllowed(r, handle, showing: true), "an inventory already showing this character is not opened again");
+
+        r.Fault(handle, new InvalidOperationException("inventory"));
+        Check(!r.IsOn(handle) && !OpenAllowed(r, handle), "faulted: every press stays vanilla");
+
+        TweakRegistry restarted = NewRegistry();
+        FrameworkTweaks.RegisterAll(restarted);
+        Check(restarted.Initialize(store) && OpenAllowed(restarted, FrameworkTweaks.OnePressInventory),
+            "the stored On applies from the first press after a restart");
     }
 
     private static FrameworkTweaks.QuestDungeonNameState DungeonNameState()

@@ -19,6 +19,8 @@ on top of it. These descriptors exist today:
   buttons counts Shocked, Illuminated and Darkness, and Taunt's own accuracy. Rolls are unchanged.
 - **XP within the level** (`information.xp-in-level`,
   [Spec #243](https://github.com/jarlbrak/ftk-mod-framework/issues/243) FR-1).
+- **One-press inventory** (`convenience.one-press-inventory`, Spec #243 FR-2): one press of the
+  Inventory key opens the inventory for a keyboard and mouse character; controllers keep the belt.
 - **Poison turns left** (`information.poison-turns`, Spec #243 FR-3): the poison status tooltip
   counts the end turns left for characters this client owns.
 - **Sell price in item details** (`information.sell-price`, Spec #243 FR-4): at a POI that buys
@@ -387,10 +389,10 @@ dotnet run --project FTKModFramework/Tests/SessionRecordHooks/SessionRecordHooks
 
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
 hooks, faults, Skip intro, the quest dungeon name decision, the Wet icon fix, the Perfect chance
-math and fix, XP within the level, Poison turns left, Sell price in item details, Mark
-encounters that vanish, Name the achievements House Rules disable, the probe, the tab, and the
-Session record codec, resolution, resume state, the state dictionary read and write, and the
-single-match rule of the save transpiler.
+math and fix, XP within the level, One-press inventory, Poison turns left, Sell price in item
+details, Mark encounters that vanish, Name the achievements House Rules disable, the probe, the
+tab, and the Session record codec, resolution, resume state, the state dictionary read and
+write, and the single-match rule of the save transpiler.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 `Tests/SessionRecordHooks` compiles `Core/TweakSessionRecordPatches.cs` against stand-ins for
 the game types it names. It runs the save transpiler over a stand-in of vanilla's tail sequence,
