@@ -19,6 +19,11 @@ on top of it. These descriptors exist today:
   [Spec #260](https://github.com/jarlbrak/ftk-mod-framework/issues/260) FR-4, a #242 follow-up):
   the same fix for the group shield icon. Both icons share one `SetStatusIcons` postfix and one
   decision, and each keeps its own toggle and fault state.
+- **Show Taunt and Petrified status icons** (`fix.player-status-icons`,
+  [Spec #269](https://github.com/jarlbrak/ftk-mod-framework/issues/269)), a Local Fix, on by
+  default: in combat the HUD shows the game's own Taunt and Petrified icons, which it ships but
+  never switches on, and the stunned icon's tooltip says Dazed when only Dazed applies. See
+  [below](#player-status-icons).
 - **Correct Perfect chances** (`fix.perfect-chance`, Spec #242 FR-5): the Perfect figure on combat
   buttons counts Shocked, Illuminated and Darkness, and Taunt's own accuracy. Rolls are unchanged.
 - **XP within the level** (`information.xp-in-level`,
@@ -59,7 +64,7 @@ on top of it. These descriptors exist today:
   default: a skip-turn popup that is interrupted before it closes is closed once, as the game would
   have closed it. See [below](#stuck-skip-turn-popup).
 
-Live verification status is tracked on #233, #242, #243, #260, #264 and #265.
+Live verification status is tracked on #233, #242, #243, #260, #264, #265 and #269.
 
 `fix.quest-dungeon-name` postfixes `QuestLogicBase.SetMessageParams`. Quest message params are
 cached: they are built on the first `GetMessageParams` call, rebuilt by
@@ -67,6 +72,49 @@ cached: they are built on the first `GetMessageParams` call, rebuilt by
 built after it, including every quest after a save is loaded. Its patch comment in
 `Core/QuestDungeonNamePatch.cs` records the ordering with the realm-name postfix on
 `GetMessageParams(bool)` in `Core/Localization.cs`.
+
+### Player status icons
+
+The player HUD's `playerMainHUD/DisplayRoot/playerMainHudStatus/aliments` grid holds 40 status
+icons, all inactive in the prefab. `uiPlayerMainHudStatus` has no field for four of them (`taunt`,
+`petrified`, `reflect` and `damageReflect`), so vanilla never shows them. This fix wires two:
+
+- `taunt`, sprite `statusTaunt`, with tooltip keys `STR_statusTaunt` and `STR_statusTauntInfo`.
+  Neither key is in any text table. The status is `CharacterDummy.Taunting`, which is
+  `m_SufferingProficiencies` holding `Category.Taunt`.
+- `petrified`, sprite `statusPetrified`, with `STR_statusPetrified` and `STR_statusPetrifiedInfo` in
+  the Info table. The status is `CharacterDummy.Petrified`, which is `Category.Petrify`.
+
+`Core/PlayerStatusIconsPatch.cs` postfixes `uiPlayerMainHudStatus.SetStatusIcons`, which runs only
+when the HUD is flagged for update. The Unity-free decision is `PlayerStatusIcons.Decide` in
+`Core/Tweaks/PlayerStatusIcons.cs`.
+
+- **Lookup.** The first call on a HUD while the tweak is on finds `aliments/taunt` and
+  `aliments/petrified` under the status root, with the taunt icon's `uiToolTipGeneral`, and caches
+  them by instance ID. If any of them is missing, the tweak logs one warning and leaves that HUD
+  as vanilla has it. Entries for destroyed HUDs are dropped when a new HUD is added.
+- **Icons.** Under vanilla's combat predicate, `(bool)m_CurrentDummy &&
+  m_CharacterStats.m_IsInCombat`, each icon follows its status. Outside it, both are hidden, as the
+  else-branch hides the other combat icons. `SetActive` is called only when the state changes.
+- **Taunt tooltip.** The first call points the taunt icon's `m_Info` and `m_DetailInfo` at
+  `STR_skillsTaunt` ("Enemy Taunt") and `STR_skillsTauntInfo`, which exist in the Info table in
+  every language.
+- **Dazed.** `CharacterDummy.Stunned` is true for `Category.Stunned` or `Category.Dazed`, and the
+  game ships no Dazed sprite, so a Dazed character already shows the stunned icon with the Stunned
+  tooltip. In combat, when the dummy has Dazed and not Stunned, the stunned icon's tooltip keys are
+  set to `STR_statusDazed` and `STR_statusDazedInfo`; otherwise the keys read from the prefab are
+  restored. `uiPlayerMainHud` itself writes a tooltip's `m_Info` and `m_DetailInfo` the same way.
+- **Reads.** The statuses are read in one pass over `m_SufferingProficiencies`, which gives the
+  getters' answers without boxing an enum key, so the postfix allocates nothing of its own.
+- **Off.** Vanilla never touches the two icons, so turning the tweak off, or a fault, would leave
+  an icon it showed on screen. While off, the postfix therefore still hides an icon it left shown
+  and restores the Stunned tooltip, on HUDs it has cached. A HUD it never cached is not touched.
+  The rewritten taunt keys stay, because the icon is hidden and nothing else shows it.
+
+The postfix is a sibling of `StaleCombatIconPatch` on the same method, not part of it. It keeps a
+per-HUD cache and its own fault boundary, so a fault here cannot turn off the stale icon fixes.
+The two touch different icons, so their order does not matter. It changes only this machine's
+display, on every machine.
 
 ### Find Herb in dungeons
 
@@ -223,6 +271,7 @@ Each recovery, each dropped episode and each blocked repeat writes one Info line
 | Poison countdown | `Core/Tweaks/PoisonCountdown.cs` | Unity-free codec and write and restore decisions for the `ftkmf.poison` character value |
 | Refund movement focus | `Core/Tweaks/RefundFocus.cs`, `Core/RefundMovementFocusPatch.cs`, `Core/RefundMovementFocusHud.cs` | Unity-free ledger, bound, gates, reversal, pip and key rules; the counting and clear patches, the refund entry point, and the focus pip HUD and key |
 | Stuck skip-turn popup | `Core/Tweaks/SkipTurnRecovery.cs`, `Core/StuckSkipTurnPatch.cs` | Unity-free episode and continuation guard; the arm, drop, trigger and close patches and the per-frame driver |
+| Player status icons | `Core/Tweaks/PlayerStatusIcons.cs`, `Core/PlayerStatusIconsPatch.cs` | Unity-free icon and tooltip decision; the `SetStatusIcons` postfix, the per-HUD lookup and the writes |
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
 | Session record hooks | `Core/TweakSessionRecordPatches.cs` | The save transpiler, the load prefix and the resume arm for the `ftkmf.session` record, plus the `ftkmf.poison` write, stash, apply and window close |
@@ -636,7 +685,9 @@ covers counting only real conversions, the bound, each gate failing, the exact r
 recording setter seam, every clear trigger, the off path, and which pips are marked, which keys
 are usable and the tooltip text. For the stuck skip-turn popup it covers a normal skip turn, each
 trigger, recovery once, a pause, dropped episodes, the turn check, the once-only guard and the off
-path.
+path. For the player status icons it covers both icons in and out of combat, writes only on a
+change, the taunt tooltip rewritten once, the Dazed tooltip, a missing child, the off and fault
+paths, and a non-allocating decision.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 `Tests/SessionRecordHooks` compiles `Core/TweakSessionRecordPatches.cs` against stand-ins for
 the game types it names. It runs the save transpiler over a stand-in of vanilla's tail sequence,
