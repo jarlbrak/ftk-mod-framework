@@ -46,7 +46,10 @@ and `AND` in one predicate. On timeout it returns
 Grouped by phase. All are fully defensive (a missing precondition returns
 `{ok:false, error:"at <action>.<step>: ..."}` and never throws into the game).
 
-- **Run / flow**: `start_run {adventure?}` (autonomous title -> in-world),
+- **Run / flow**: `start_run {adventure?, party?}` (autonomous title -> in-world). `party`
+  defaults to 1 and accepts 1-3 with native capacity, or 1-5 when
+  `Core/EnableFiveHeroSinglePlayer` is enabled and the five-hero preflight succeeds. A
+  larger request fails before room creation when those slots are unavailable.
   `list_adventures`, `dismiss_message` / `dismiss_dialog`, `select_choice {index}`,
   `advance`, `enter_tile`, `end_turn`. In the overworld `end_turn` prefers the open
   POI menu, resolved through `FTKUI.m_EncounterMenu` and gated on its `m_MenuOn`

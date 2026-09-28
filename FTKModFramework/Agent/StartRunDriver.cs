@@ -30,8 +30,8 @@ namespace FTKModFramework.Agent
     ///      room-join transition reaches ShowCreateCharacter.
     ///   4. select our adventure (GameConfig.OnChangeValueGameDef(key)) then replicate GameConfig.OnStartGame's
     ///      SP+offline branch by direct calls: SetActiveGameDef(preview.GetNewGameDefInstance()),
-    ///      m_GameDefName=key, difficulty, m_GameMode=SinglePlayer, m_UseOnlineSinglePlayer=false,
-    ///      m_ActualMaxCharCount=1 (set AFTER Show, which resets it to gMaxPlayers), CreateOfflineRoom(...).
+    ///      m_GameDefName=key, difficulty, m_GameMode=SinglePlayer, m_UseOnlineSinglePlayer=false, run the
+    ///      single-player capacity preflight, set m_ActualMaxCharCount to the requested slots, then create room.
     ///   5. wait for create-UIs + generated map (GameFlowMC.m_IsMapReady && m_CreateUIs.Count>=1).
     ///   5b. ASSIGN PHOTON IDS (the COW fix): call AssignPhotonID(PhotonNetwork.player.ID, None, 0, false) on
     ///      each create UI so m_PhotonID stops being -1 BEFORE EnterFahrul. Without this StartGame's CreatePlayer
@@ -48,8 +48,9 @@ namespace FTKModFramework.Agent
     // RE NOTE (re-verified via ilspycmd, Assembly-CSharp, Jun 2026):
     // - uiScreen.gCurrent (public static field) = the screen most recently Show()n; the FSM-settle gate.
     // - MainScreen.OnNewGame(): sets m_GameConfig.m_IsResume=false; m_FSM.SendEvent("NewGame").
-    // - GameConfig.Show(): resets uiStartGame.m_ActualMaxCharCount = GameFlowMC.gMaxPlayers (=3), populates
-    //   _selectedGameDefPreview, sets m_IsResume default. So set m_ActualMaxCharCount=1 AFTER Show.
+    // - GameConfig.Show(): resets uiStartGame.m_ActualMaxCharCount = GameFlowMC.gMaxPlayers (3 natively, 5
+    //   after the framework preflight), populates _selectedGameDefPreview, and sets m_IsResume default. The
+    //   Agent runner sets the requested count after running that same framework preflight.
     // - GameConfig.OnChangeValueGameDef(string): selects an adventure (sets uiStartGame.m_GameDefName).
     // - GameConfig.OnStartGame() SP+offline branch (m_UseOnlineSinglePlayer==false, !m_IsResume):
     //     SetActiveGameDef(GetCurrentGameDefPreview().GetNewGameDefInstance());
@@ -104,9 +105,8 @@ namespace FTKModFramework.Agent
         // ActionExecutor). -1 => no class requested: keep the driver's RandomClass pick. Set on each Arm.
         private static int _classId = -1;
 
-        // How many hero slots the run starts with (1..3). Single-player in FTK still allows a local party of up
-        // to GameFlowMC.gMaxPlayers=3 characters, which is what a party-facing passive needs in order to have
-        // anyone to affect. 1 keeps the original solo behaviour. Set on each Arm.
+        // How many hero slots the run starts with (1..5). The native limit is three; the framework's opt-in
+        // five-hero feature raises it after setup preflight. 1 keeps the original solo behaviour. Set on each Arm.
         private static int _partySize = 1;
 
         public static bool IsRunning { get { return _running; } }
@@ -116,9 +116,10 @@ namespace FTKModFramework.Agent
         /// false if already running (idempotent re-arm) or if no host is available. <paramref name="adventureKey"/>
         /// is the adventure save-file key (e.g. "DungeonCrawl"); <paramref name="classId"/> is the resolved
         /// FTK_playerGameStart id to start AS (e.g. the Innkeeper), or -1 to keep the RandomClass pick;
-        /// <paramref name="partySize"/> is how many local hero slots to create (1..3, clamped). Only slot 0 takes
-        /// the requested class; companions keep their RandomClass pick, which is what makes a party-facing passive
-        /// testable against a NON-holder.
+        /// <paramref name="partySize"/> is how many local hero slots to request (1..5, clamped). The configure
+        /// step fails safely if the active framework setup has fewer slots available. Only slot 0 takes the
+        /// requested class; companions keep their RandomClass pick, which makes party-facing passives testable
+        /// against a NON-holder.
         /// </summary>
         public static bool Arm(string adventureKey, int classId = -1, int partySize = 1)
         {
@@ -131,7 +132,9 @@ namespace FTKModFramework.Agent
             }
             _adventureKey = string.IsNullOrEmpty(adventureKey) ? "DungeonCrawl" : adventureKey;
             _classId = classId;
-            _partySize = partySize < 1 ? 1 : (partySize > 3 ? 3 : partySize); // gMaxPlayers=3
+            _partySize = partySize < 1 ? 1 : (partySize > SinglePlayerPartyExpansion.ExpandedPlayerCapacity
+                ? SinglePlayerPartyExpansion.ExpandedPlayerCapacity
+                : partySize);
             _running = true;
             try { host.StartCoroutine(Drive()); }
             catch (Exception e)
@@ -373,6 +376,14 @@ namespace FTKModFramework.Agent
                 object spMode = ResolveEnumValue("GameLogic+GameMode", "SinglePlayer");
                 if (spMode != null) Reflect.SetField(gl, "m_GameMode", spMode);
 
+                int availableSlots = SinglePlayerPartyExpansion.PrepareForAgentSinglePlayerRun();
+                if (_partySize > availableSlots)
+                {
+                    error = "setup-capacity: requested " + _partySize + " local heroes but only " +
+                        availableSlots + " slots are ready";
+                    return false;
+                }
+
                 // Difficulty: best-effort. preview.GetDiffTypeByIndex(0) -> GameFlow.SetGameModeDifficulty(diff).
                 try
                 {
@@ -386,8 +397,8 @@ namespace FTKModFramework.Agent
                 }
                 catch (Exception e) { Plugin.Log.LogWarning("[agent] start_run difficulty: " + e.Message); }
 
-                // How many create slots this run gets (1 = solo). Set AFTER GameConfig.Show (it reset this to
-                // gMaxPlayers=3). Still single-player either way: these are local characters, not Photon peers,
+                // How many create slots this run gets (1 = solo). The mode preflight above has applied the
+                // framework capacity before this value is written. These are local characters, not Photon peers,
                 // so the bridge's IsSinglePlayer() guard keeps holding.
                 Reflect.SetField(usg, "m_ActualMaxCharCount", _partySize);
 

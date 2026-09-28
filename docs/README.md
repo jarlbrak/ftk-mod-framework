@@ -1,6 +1,6 @@
 # FTK Mod Framework documentation
 
-FTK Mod Framework 1.0.1 supports content mods for the original *For The King*.
+FTK Mod Framework 1.0.2 supports content mods for the original *For The King*.
 The [Paladin package](../marketplace/packages/paladin/README.md) is the first
 published mod and the sole complete example to copy from this repository.
 Its [class and equipment guide](paladin/README.md) links the current package
@@ -27,6 +27,10 @@ to the underlying design and validation records.
 - [Contributing guide](../CONTRIBUTING.md)
 - [Framework release procedure](RELEASING.md)
 - [Agent instructions and reusable skills](AI-NATIVE.md)
+
+## Experimental features
+
+- [Five-hero single-player mode](FIVE-HERO-PARTY.md): development status, config key, scope, and open live-game gates.
 
 Design records, validation matrices and older release notes under `docs/` are
 retained as evidence for their specific versions. They are not a current

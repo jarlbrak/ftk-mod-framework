@@ -48,6 +48,10 @@
     <Reference Include="Assembly-CSharp-firstpass" Publicize="true" Private="false">
       <HintPath>$(FtkManagedDir)/Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
+    <!-- Rewired types are game-managed input classes used by the single-player setup extension. -->
+    <Reference Include="Rewired_Core" Private="false">
+      <HintPath>$(FtkManagedDir)/Rewired_Core.dll</HintPath>
+    </Reference>
     <!-- The game bundles Newtonsoft.Json; adventures (.ftk2) are JSON. Bind to the game's exact
          version (Private=false) so there is no serializer-version conflict. -->
     <Reference Include="Newtonsoft.Json" Private="false">

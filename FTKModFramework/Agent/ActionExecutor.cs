@@ -1899,8 +1899,9 @@ namespace FTKModFramework.Agent
                         "' not found in FTK_playerGameStartDB");
             }
 
-            // Optional: how many local hero slots (1..3, clamped by the driver). Absent => 1 (solo), the original
-            // behaviour. A party is required to exercise anything that affects OTHER party members.
+            // Optional: how many local hero slots (1..3 natively, up to 5 when the framework preflight grants
+            // expanded single-player capacity). Absent => 1 (solo), the original behaviour. A party is required
+            // to exercise anything that affects OTHER party members.
             int? party = GetInt(args, "party");
 
             // Arm the full waited coroutine (dismiss -> settle -> NewGame -> GameConfig -> configure -> room ->

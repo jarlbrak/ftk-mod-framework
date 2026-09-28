@@ -54,6 +54,9 @@ namespace FTKModFramework
         /// </summary>
         public static ConfigEntry<bool> EnableCampaignEngine;
 
+        /// <summary>Allow parties of up to five heroes in offline single-player. Off by default.</summary>
+        public static ConfigEntry<bool> EnableFiveHeroSinglePlayer;
+
         /// <summary>
         /// Folder the data loader scans for mod subfolders (each with a manifest.json). Blank (the default)
         /// means BepInEx's plugins dir, resolved at runtime, so dropping a content-mod folder in alongside
@@ -217,6 +220,10 @@ namespace FTKModFramework
                 "flag, so false => NEITHER is installed (provably identical to a build without them). Default on, " +
                 "mirroring EnableBehaviorLoading; inert on any vanilla quest even when on. Also gates the " +
                 "load-time campaign QuestValidator pre-pass.");
+
+            EnableFiveHeroSinglePlayer = Config.Bind("Core", "EnableFiveHeroSinglePlayer", false,
+                "Allow up to five heroes in offline single-player when setup, HUD, item-transfer, gold-transfer, dummy, and combat support is ready. " +
+                "Extra hero actions make runs easier. Does not expand online or local multiplayer or change enemy capacity or rewards.");
 
             DataContentRoot = Config.Bind("Data", "DataContentRoot", "",
                 "Folder scanned for content-mod subfolders (each with a manifest.json). Leave blank to use the " +
