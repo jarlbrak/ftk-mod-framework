@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The stuck-turn watchdog's trigger, episode and host acknowledgement decisions and its
+       snapshot line (spec #265 FR-1). Compiling the source alone proves it needs no Unity,
+       BepInEx or game reference. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <!-- The allocation check measures a steady-state loop; tiered JIT can allocate mid-loop. -->
+    <TieredCompilation>false</TieredCompilation>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/Diagnostics/StuckTurnWatch.cs" Link="Diagnostics/StuckTurnWatch.cs" />
+  </ItemGroup>
+</Project>

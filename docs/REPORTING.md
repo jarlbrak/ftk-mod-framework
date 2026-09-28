@@ -77,6 +77,37 @@ of a crash. Abrupt exit can lose recent entries since the last successful log
 checkpoint, normally taken every two seconds. Previous-session data is never replaced
 by unrelated current-session logs. The incident is acknowledged after a confirmed send.
 
+## Stuck-turn snapshots
+
+When a turn seems stuck, send a report from **Options > Report Bugs**. The log dump may
+already hold a `STUCK-TURN` line describing the stall
+([Spec #265](https://github.com/jarlbrak/ftk-mod-framework/issues/265) FR-1). The framework
+writes one such Warning line to `LogOutput.log`:
+
+- when it is this machine's overworld turn and **End Turn** stays unavailable for 20 seconds
+  with nothing on screen explaining it (`reason=unexplained-20s`);
+- when it stays unavailable for 90 seconds behind the location menu, inventory, a global
+  message or a portrait message (`reason=panel-90s`);
+- on the host, when a client acknowledgement is still pending after 15 seconds
+  (`reason=host-ack-15s`).
+
+For the turn lines, time does not count while Options is open or chat has focus, and
+nothing is written during combat or after a disconnect has ended the run. Each stall writes
+at most one line, and one launch of the game writes at most ten of each kind. The line is a
+Warning, so it never raises the automatic error report or a report prompt. It records only the game's own state: the
+Movement, turn and game-flow state names, the gate's panel flags, the input focus, the
+popup wait and whether the HUD canvases accept input, the pending acknowledgement IDs, the coordinated message, the world-update
+flags, and each character's dungeon, combat and action-point state. It is one line of
+`key=value` pairs under 2 KB, for example (state names illustrative):
+
+```text
+STUCK-TURN reason=unexplained-20s waited=20.0s master=1 mode=SinglePlayer myTurn=1 turn=0 endTurns=7 button=0 gate=1 movement=Moving movementSub=OnStopAtHex:Wait turnEngage=Idle gameFlowMC=Wait_Turn panels=loc:0,inv:0,global:0,portrait:0,spectator:0 options=0 chat=0 aborted=0 popupWait=1 focus=uiPlayerMainHud/HUD uiInput=other:11,main:11 acks=none message=None/from:1 logicUpdating=gl:0,mc:0 camera=1 encounter=menu:0,combat:0 cows=t0:dungeon0,combat0,ap2
+```
+
+A field the framework cannot read shows `unavailable`. The watchdog changes nothing in the
+game. To turn it off, set `StuckTurnWatchdog = false` under `[Diagnostics]` in
+`BepInEx/config/com.ftkmf.framework.cfg`; it is read at startup.
+
 ## Save and manage drafts
 
 Choose **Save draft** to keep the report on this computer, then use **Drafts** to
