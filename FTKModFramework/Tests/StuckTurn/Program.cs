@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using FTKModFramework.Core.Diagnostics;
 
@@ -100,13 +101,17 @@ internal static class Program
     private static void Suppression()
     {
         float at;
-        string[] names = { "Options open", "chat focused", "game aborted" };
-        for (int i = 0; i < 3; i++)
+        // The encounter menu and the help focus are the two live false positives from the v1.6.0
+        // preview: a Fight/Sneak menu left open, and the Timeline tutorial at a turn start.
+        string[] names = { "Options open", "chat focused", "game aborted", "encounter menu open", "tutorial or encyclopedia focused" };
+        for (int i = 0; i < names.Length; i++)
         {
             StuckTurnPoll suppressed = Stuck();
             suppressed.OptionsOpen = i == 0;
             suppressed.ChatFocused = i == 1;
             suppressed.GameAborted = i == 2;
+            suppressed.EncounterMenuOpen = i == 3;
+            suppressed.HelpFocused = i == 4;
             var watch = new StuckTurnWatch();
             watch.Observe(suppressed, 0f);
             Check(Run(watch, suppressed, 0f, 300f, out at) == StuckTurnTrigger.None, names[i] + " suppresses the snapshot");
@@ -119,6 +124,14 @@ internal static class Program
             Check(Run(watch, suppressed, 15f, 75f, out at) == StuckTurnTrigger.None, names[i] + " for 60 s writes nothing");
             Check(Run(watch, Stuck(), 75f, 79.5f, out at) == StuckTurnTrigger.None, "the clock resumed where it paused");
             Check(Run(watch, Stuck(), 79.5f, 80f, out at) == StuckTurnTrigger.Unexplained, names[i] + " resumes the count after it ends");
+
+            // A suppression also pauses the panel clock.
+            StuckTurnPoll behindPanel = suppressed;
+            behindPanel.PanelShowing = true;
+            watch = new StuckTurnWatch();
+            watch.Observe(behindPanel, 0f);
+            Check(Run(watch, behindPanel, 0f, 300f, out at) == StuckTurnTrigger.None && watch.PanelElapsed == 0f,
+                names[i] + " with a panel writes nothing");
         }
     }
 
@@ -226,6 +239,49 @@ internal static class Program
         host.Observe(true, true, next, "Sync Board", 0, 15f);
         Check(!host.Observe(true, true, next, "Sync Board", 1, 15.5f) && host.Elapsed == 0f, "an emptied list ends the episode");
         Check(!host.Observe(true, true, next, "BeginTurn3", 1, 16f) && host.Elapsed == 0f, "a new wait ID on the same object restarts");
+
+        RemoteOnly();
+    }
+
+    // The master's own entry is a local wait (its turn start waits on local UI such as a
+    // tutorial), so only remote IDs count. Live v1.6.0 preview: SinglePlayer, master 1,
+    // acks=BeginTurnFinished:[1] behind the Timeline tutorial wrote host-ack-15s.
+    private static void RemoteOnly()
+    {
+        const int local = 1;
+        Check(HostAckWatch.RemotePending(null, local) == 0, "no list, nothing pending");
+        Check(HostAckWatch.RemotePending(new List<int>(), local) == 0, "an empty list, nothing pending");
+        Check(HostAckWatch.RemotePending(new List<int> { local }, local) == 0, "the master's own entry is not remote");
+        Check(HostAckWatch.RemotePending(new List<int> { local, 2 }, local) == 1, "a client beside the master counts once");
+        Check(HostAckWatch.RemotePending(new List<int> { 2, 3 }, local) == 2, "every client counts");
+        Check(HostAckWatch.RemotePending(new List<int> { local }, int.MinValue) == 1, "no known local ID counts every entry");
+
+        // Single player: the only entry is the master's own, so the watch never fires.
+        object wait = new object();
+        var host = new HostAckWatch();
+        List<int> solo = new List<int> { local };
+        bool any = false;
+        for (float t = 0f; t <= 120f; t += 0.5f)
+            any |= host.Observe(true, true, wait, "BeginTurnFinished", HostAckWatch.RemotePending(solo, local), t);
+        Check(!any && host.Snapshots == 0, "a single-player turn start behind a tutorial never fires");
+
+        // Co-op: the master's own tutorial plus a silent client fires on the client's 15 s.
+        host = new HostAckWatch();
+        List<int> coop = new List<int> { local, 2 };
+        float at = -1f;
+        for (float t = 0f; t <= 30f && at < 0f; t += 0.5f)
+            if (host.Observe(true, true, wait, "BeginTurnFinished", HostAckWatch.RemotePending(coop, local), t)) at = t;
+        Check(Math.Abs(at - 15f) < 0.01f, "a client pending 15 s beside the master's entry fires, got " + at);
+
+        // The client acknowledges while the master's tutorial is still open: the episode ends.
+        host = new HostAckWatch();
+        for (float t = 0f; t <= 10f; t += 0.5f)
+            host.Observe(true, true, wait, "BeginTurnFinished", HostAckWatch.RemotePending(coop, local), t);
+        coop.Remove(2);
+        any = false;
+        for (float t = 10.5f; t <= 60f; t += 0.5f)
+            any |= host.Observe(true, true, wait, "BeginTurnFinished", HostAckWatch.RemotePending(coop, local), t);
+        Check(!any && host.Snapshots == 0, "only the master's entry left ends the episode");
     }
 
     private static void Line()
@@ -255,13 +311,19 @@ internal static class Program
         object wait = new object();
         StuckTurnPoll idle = new StuckTurnPoll { InRun = true, MyTurn = true, OverworldGate = true, Interactable = true };
         StuckTurnPoll stuck = Stuck();
+        List<int> pending = new List<int> { 1, 2 };
         float t = 0f;
-        for (int i = 0; i < 1000; i++) { watch.Observe(idle, t); host.Observe(true, true, wait, "Sync Board", 1, t); t += 0.5f; }
+        for (int i = 0; i < 1000; i++)
+        {
+            watch.Observe(idle, t);
+            host.Observe(true, true, wait, "Sync Board", HostAckWatch.RemotePending(pending, 1), t);
+            t += 0.5f;
+        }
         long before = GC.GetAllocatedBytesForCurrentThread();
         for (int i = 0; i < 100000; i++)
         {
             watch.Observe((i & 1) == 0 ? idle : stuck, t);
-            host.Observe(true, (i & 2) == 0, wait, "Sync Board", 1, t);
+            host.Observe(true, (i & 2) == 0, wait, "Sync Board", HostAckWatch.RemotePending(pending, 1), t);
             t += 0.5f;
         }
         long allocated = GC.GetAllocatedBytesForCurrentThread() - before;
