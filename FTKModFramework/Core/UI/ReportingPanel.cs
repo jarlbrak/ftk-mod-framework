@@ -242,7 +242,7 @@ namespace FTKModFramework.Core.UI
             if (error == "rate_limited") return "Too many reports right now. Your report is saved; try again later.";
             if (error == "service_unavailable" || error == "capacity_reached") return "The reporting service is unavailable. Your report is saved; try again later.";
             if (error == "pending_report_exists") return "Another saved report needs confirmation first. Close and reopen Report Bugs to retry it.";
-            if (error == "helper_unavailable") return "The reporting helper needs updating. Your report is saved locally.";
+            if (error == "helper_unavailable" || error == "helper_rejected") return "The reporting helper needs updating. Your report is saved locally.";
             if (error == "local_delivery_failed") return "The report could not be sent or saved. Your text remains here; try again.";
             return "Submission is not confirmed. Retry sends this same report safely. A local copy is kept for seven days.";
         }

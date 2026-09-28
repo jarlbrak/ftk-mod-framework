@@ -239,6 +239,7 @@ namespace FTKModFramework
             Tweaks.Error = message => Log.LogError(message);
             Core.Reporting.ReportingDiagnostics.Start();
             Core.Reporting.ReportingRuntime.Start();
+            Core.Reporting.ReportingSubmission.Info = message => Log.LogInfo(message);
             Core.Reporting.ReportingSubmission.Initialize();
 
             EnableTitleScreenActivation = Config.Bind("Marketplace", "EnableTitleScreenActivation", false,

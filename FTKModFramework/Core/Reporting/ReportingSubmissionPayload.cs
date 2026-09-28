@@ -10,6 +10,20 @@ namespace FTKModFramework.Core.Reporting
         internal const int MaximumBytes = 2 * 1024 * 1024;
         internal const int MaximumLogBytes = 128 * 1024;
         internal const string Disclosure = "Send publishes your description and selected diagnostics to the public FTK framework GitHub tracker through our Railway service. Diagnostics include filtered recent game/framework logs with informational messages, warnings and errors, plus versions, mods and session context. No saves or screenshots are collected. Filtering may miss personal information. Opening this editor does not send this report. Automatic reports may send separately when enabled in Mods > Settings & Help. Downloadable diagnostics expire after 30 days; text published on GitHub remains public.";
+        // The helper refused these exact bytes before any network access, or the service rejected
+        // them without creating an issue (reporting-service README). Resending them cannot succeed.
+        internal static bool PermanentFailure(string error)
+        {
+            return error == "helper_rejected" || error == "invalid_report" || error == "report_conflict" ||
+                error == "payload_too_large" || error == "unsupported_media_type";
+        }
+        // Outcomes that prove no issue was created for the report ID. Any other failure, such as a
+        // timeout or transport error after the request left, may already have created one.
+        internal static bool NotDelivered(string error)
+        {
+            return PermanentFailure(error) || error == "rate_limited" || error == "service_unavailable" ||
+                error == "capacity_reached" || error == "helper_unavailable" || error == "pending_report_exists";
+        }
         internal static string Create(ReportingReport report, string description, string kind, string currentLogs, string previousLogs)
         { return Create(report, description, kind, currentLogs, previousLogs, false); }
         internal static string Create(ReportingReport report, string description, string kind, string currentLogs, string previousLogs, bool automatic)

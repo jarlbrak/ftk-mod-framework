@@ -169,7 +169,10 @@ internal static class Program
         for (int i = 1; i < args.Length - 1; i++)
         { if (args[i] == "--request") request = args[++i]; else if (args[i] == "--result") result = args[++i]; }
         if (request == null || result == null) return 99;
+        if (!HelperAcceptsPaths(request, result)) { Console.Error.WriteLine("report paths must be under BepInEx/ReportingDelivery"); return 1; }
         string root = Path.GetDirectoryName(request);
+        // The real helper validates the request before sending and exits 1 without a result.
+        if (File.Exists(Path.Combine(root, "refuse-request"))) { Console.Error.WriteLine("invalid report request"); return 1; }
         JObject environment = new JObject();
         foreach (string name in InjectionVariables) environment[name] = Environment.GetEnvironmentVariable(name);
         environment["FTK_REPORTING_TEST_CONTEXT"] = Environment.GetEnvironmentVariable("FTK_REPORTING_TEST_CONTEXT");
@@ -178,17 +181,51 @@ internal static class Program
         string json = File.ReadAllText(request); File.WriteAllText(Path.Combine(root, "observed.json"), json);
         string id = (string)JObject.Parse(json)["reportId"];
         JObject response = File.Exists(Path.Combine(root, "allow-submit")) ? Receipt(id) :
+            File.Exists(Path.Combine(root, "reject-invalid")) ? new JObject { ["schemaVersion"] = 1, ["status"] = "error", ["error"] = "invalid_report", ["reportId"] = id } :
             new JObject { ["schemaVersion"] = 1, ["status"] = "pending", ["error"] = "retry_later", ["reportId"] = id };
         File.WriteAllText(result, response.ToString(Formatting.None)); return 0;
+    }
+    // Mirrors reportingPaths in launcher/helper/reporting_submit.go. The shipped helper exits 1
+    // without a result unless the request and result share one real directory at or below
+    // BepInEx/ReportingDelivery. Framework 1.6.1 queued automatic reports outside it.
+    private static bool HelperAcceptsPaths(string request, string result)
+    {
+        if (!Path.IsPathRooted(request) || !Path.IsPathRooted(result) || Path.GetFullPath(request) != request ||
+            Path.GetFullPath(result) != result || request == result || Path.GetDirectoryName(request) != Path.GetDirectoryName(result)) return false;
+        string dir = Path.GetDirectoryName(request), root = null;
+        for (string current = dir; Path.GetDirectoryName(current) != null; current = Path.GetDirectoryName(current))
+            if (Path.GetFileName(current) == "ReportingDelivery" && Path.GetFileName(Path.GetDirectoryName(current)) == "BepInEx") { root = current; break; }
+        if (root == null) return false;
+        for (string current = dir; ; current = Path.GetDirectoryName(current))
+        {
+            DirectoryInfo info = new DirectoryInfo(current);
+            if (!info.Exists || info.LinkTarget != null) return false;
+            if (current == Path.GetDirectoryName(root)) break;
+        }
+        foreach (string path in new[] { request, result })
+        {
+            FileInfo info = new FileInfo(path);
+            if (!info.Exists && path == result) continue;
+            if (!info.Exists || info.LinkTarget != null) return false;
+        }
+        return true;
     }
     private static void Bridge()
     {
         if (OperatingSystem.IsWindows()) return;
         string root = Path.Combine(Path.GetTempPath(), "ftk-report-submit-" + Guid.NewGuid().ToString("N"));
         if (root.StartsWith("/var/", StringComparison.Ordinal)) root = "/private" + root;
-        BepInEx.Paths.BepInExRootPath = root;
-        Directory.CreateDirectory(Path.Combine(root, "ftkmf"));
-        string helper = Path.Combine(Path.Combine(root, "ftkmf"), "ftkmf-launcher-helper");
+        // The fake helper enforces the real helper's path rule, which requires a BepInEx folder.
+        string bepinex = Path.Combine(root, "BepInEx");
+        BepInEx.Paths.BepInExRootPath = bepinex;
+        Directory.CreateDirectory(Path.Combine(bepinex, "ftkmf"));
+        string helper = Path.Combine(Path.Combine(bepinex, "ftkmf"), "ftkmf-launcher-helper");
+        // A 1.6.1 queue the helper always rejected. Startup removes it instead of sending it.
+        string legacyQueue = Path.Combine(bepinex, "ReportingAutomaticDelivery");
+        Directory.CreateDirectory(legacyQueue);
+        foreach (string name in new[] { "pending.json", "reporting.lock", "result.json" }) File.WriteAllText(Path.Combine(legacyQueue, name), "{}");
+        string migrationLog = null;
+        ReportingSubmission.Info = delegate(string line) { migrationLog = line; };
         string[] inherited = new string[InjectionVariables.Length];
         for (int i = 0; i < InjectionVariables.Length; i++)
         {
@@ -202,7 +239,10 @@ internal static class Program
             File.WriteAllText(helper, "#!/bin/sh\nexec " + ShellQuote(Environment.ProcessPath) + " --helper \"$@\"\n");
             File.SetUnixFileMode(helper, UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute);
             ReportingSubmission.Initialize(); Spin(delegate { return ReportingSubmission.Ready; });
-            string delivery = Path.Combine(root, "ReportingDelivery");
+            Spin(delegate { return migrationLog != null; });
+            Check(!Directory.Exists(legacyQueue) && ReportingSubmission.PendingAutomaticPayload == null &&
+                migrationLog.StartsWith("Removed the undeliverable automatic", StringComparison.Ordinal), "Legacy automatic queue was not removed");
+            string delivery = Path.Combine(bepinex, "ReportingDelivery");
             ReportingReport report = Report(true);
             string frozen = ReportingSubmissionPayload.Create(report, "frozen description", "manual", "frozen-current", "frozen-previous");
             ReportingSubmissionResult first = null;
@@ -267,13 +307,51 @@ internal static class Program
             FTKModFramework.Core.Marketplace.MarketplaceProtocol.RefuseHelper = false;
             string automatic = ReportingSubmissionPayload.Create(Report(false), "automatic error", "error", "auto logs", "", true);
             ReportingSubmissionResult autoPending = Send(automatic);
-            string autoDelivery = Path.Combine(root, "ReportingAutomaticDelivery");
-            Check(!autoPending.Success && ReportingSubmission.PendingAutomaticPayload == automatic &&
+            string autoDelivery = Path.Combine(delivery, "Automatic");
+            Check(!autoPending.Success && autoPending.Error == "retry_later" && ReportingSubmission.PendingAutomaticPayload == automatic &&
                 ReportingSubmission.PendingPayload == other && File.Exists(Path.Combine(autoDelivery, "pending.json")),
-                "Automatic retry displaced the manual report");
+                "Automatic queue was not delivered to the helper or displaced the manual report");
+            Check(File.ReadAllText(Path.Combine(autoDelivery, "observed.json")) == automatic &&
+                File.Exists(Path.Combine(autoDelivery, "reporting.lock")) && File.Exists(Path.Combine(delivery, "reporting.lock")),
+                "Automatic queue does not have its own lock beside the manual queue");
             File.WriteAllText(Path.Combine(autoDelivery, "allow-submit"), "yes");
             Check(Send(automatic).Success && ReportingSubmission.PendingAutomaticPayload == null &&
                 ReportingSubmission.PendingPayload == other, "Automatic completion changed the manual queue");
+            string automaticId = (string)JObject.Parse(automatic)["reportId"];
+            Check((string)JObject.Parse(File.ReadAllText(Path.Combine(autoDelivery, "submitted.json")))["reportId"] == automaticId &&
+                (string)JObject.Parse(File.ReadAllText(receiptPath))["reportId"] != automaticId, "Automatic receipt is not separate from the manual receipt");
+            File.Delete(Path.Combine(autoDelivery, "allow-submit"));
+
+            // Permanent refusals delete an automatic payload but keep a manual report queued.
+            File.WriteAllText(Path.Combine(autoDelivery, "refuse-request"), "yes");
+            ReportingSubmissionResult refused = Send(ReportingSubmissionPayload.Create(Report(false), "refused", "error", "logs", "", true));
+            Check(refused.Error == "helper_rejected" && ReportingSubmission.PendingAutomaticPayload == null &&
+                !File.Exists(Path.Combine(autoDelivery, "pending.json")), "Helper refusal left an undeliverable automatic payload");
+            File.Delete(Path.Combine(autoDelivery, "refuse-request"));
+            File.WriteAllText(Path.Combine(autoDelivery, "reject-invalid"), "yes");
+            ReportingSubmissionResult invalid = Send(ReportingSubmissionPayload.Create(Report(false), "invalid", "error", "logs", "", true));
+            Check(invalid.Error == "invalid_report" && ReportingSubmission.PendingAutomaticPayload == null &&
+                !File.Exists(Path.Combine(autoDelivery, "pending.json")), "Service rejection left an automatic payload");
+            File.Delete(Path.Combine(autoDelivery, "reject-invalid"));
+            File.WriteAllText(Path.Combine(delivery, "reject-invalid"), "yes");
+            File.Delete(Path.Combine(delivery, "allow-submit"));
+            ReportingSubmissionResult manualInvalid = Send(other);
+            Check(manualInvalid.Error == "invalid_report" && ReportingSubmission.PendingPayload == other &&
+                File.ReadAllText(Path.Combine(delivery, "pending.json")) == other, "Service rejection dropped a manual report");
+            File.Delete(Path.Combine(delivery, "reject-invalid"));
+
+            // The automatic sender can drop a retained payload without touching the manual queue.
+            string retained = ReportingSubmissionPayload.Create(Report(false), "retained", "error", "logs", "", true);
+            Check(!Send(retained).Success && ReportingSubmission.PendingAutomaticPayload == retained, "Automatic retry was not retained");
+            bool? staleAutomatic = null;
+            ReportingSubmission.DiscardAutomatic(automatic, delegate(bool success) { staleAutomatic = success; });
+            Spin(delegate { return staleAutomatic.HasValue; });
+            Check(staleAutomatic == false && ReportingSubmission.PendingAutomaticPayload == retained, "Stale automatic discard removed another payload");
+            bool? droppedAutomatic = null;
+            ReportingSubmission.DiscardAutomatic(retained, delegate(bool success) { droppedAutomatic = success; });
+            Spin(delegate { return droppedAutomatic.HasValue; });
+            Check(droppedAutomatic == true && ReportingSubmission.PendingAutomaticPayload == null && !File.Exists(Path.Combine(autoDelivery, "pending.json")) &&
+                ReportingSubmission.PendingPayload == other && File.Exists(Path.Combine(delivery, "pending.json")), "Automatic discard failed or touched the manual queue");
             bool? staleDiscard = null;
             ReportingSubmission.DiscardPending(frozen, delegate(bool success) { staleDiscard = success; });
             Spin(delegate { return staleDiscard.HasValue; });

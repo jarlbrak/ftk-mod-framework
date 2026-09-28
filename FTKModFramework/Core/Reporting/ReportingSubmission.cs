@@ -25,17 +25,24 @@ namespace FTKModFramework.Core.Reporting
         private static bool initialized, ready, busy;
         private static string pending, pendingAutomatic;
         private static Action delivery;
+        // Main-thread log sink, assigned by the plugin.
+        internal static Action<string> Info;
         internal static bool Busy { get { lock (Gate) return busy; } }
         internal static bool Ready { get { lock (Gate) return ready; } }
         internal static string PendingPayload { get { lock (Gate) return pending; } }
         internal static string PendingAutomaticPayload { get { lock (Gate) return pendingAutomatic; } }
         private static string Root { get { return Path.Combine(Paths.BepInExRootPath, "ReportingDelivery"); } }
-        private static string AutomaticRoot { get { return Path.Combine(Paths.BepInExRootPath, "ReportingAutomaticDelivery"); } }
+        // The helper accepts request paths only under BepInEx/ReportingDelivery (reportingPaths in
+        // launcher/helper/reporting_submit.go), so the automatic queue is a subfolder with its own
+        // lock, pending request, result and receipt, separate from the manual queue.
+        private static string AutomaticRoot { get { return Path.Combine(Root, "Automatic"); } }
+        // Framework 1.6.1 and earlier queued automatic reports here. Every shipped helper rejects it.
+        private static string LegacyAutomaticRoot { get { return Path.Combine(Paths.BepInExRootPath, "ReportingAutomaticDelivery"); } }
         internal static void Initialize()
         {
             lock (Gate) { if (initialized) return; initialized = true; }
             Thread thread = new Thread(delegate() {
-                try { LoadPending(false); LoadPending(true); }
+                try { LoadPending(false); RemoveLegacyAutomatic(); LoadPending(true); }
                 finally { lock (Gate) ready = true; }
             });
             thread.IsBackground = true; thread.Start();
@@ -47,13 +54,45 @@ namespace FTKModFramework.Core.Reporting
             } }
             catch { }
         }
+        // Nothing in the legacy folder was ever delivered, and sending it now would publish stale
+        // startup noise under an old build's diagnostics. Remove only the files that queue wrote,
+        // under its own lease so a running older build keeps it. Unknown files keep the folder.
+        private static void RemoveLegacyAutomatic()
+        {
+            try
+            {
+                string legacy = LegacyAutomaticRoot;
+                if (!Directory.Exists(legacy) || (File.GetAttributes(legacy) & FileAttributes.ReparsePoint) != 0) return;
+                using (ReportingSessionLease lease = new ReportingSessionLease())
+                {
+                    lease.Acquire(legacy);
+                    foreach (string name in new[] { "pending.json", "pending.json.tmp", "result.json", "submitted.json", "submitted.json.tmp" })
+                    {
+                        string path = Path.Combine(legacy, name);
+                        if (File.Exists(path)) File.Delete(path);
+                    }
+                }
+                File.Delete(Path.Combine(legacy, "reporting.lock"));
+                bool empty = Directory.GetFileSystemEntries(legacy).Length == 0;
+                if (empty) Directory.Delete(legacy);
+                lock (Gate) delivery += delegate {
+                    if (Info != null) Info("Removed the undeliverable automatic bug report queue left by an earlier framework version" +
+                        (empty ? "." : "; unrecognized files remain in BepInEx/ReportingAutomaticDelivery."));
+                };
+            }
+            catch { }
+        }
         internal static void Tick()
         {
             Action callback;
             lock (Gate) { callback = delivery; delivery = null; }
             if (callback != null) callback();
         }
-        internal static void DiscardPending(string expectedPayload, Action<bool> completed)
+        internal static void DiscardPending(string expectedPayload, Action<bool> completed) { Discard(false, expectedPayload, completed); }
+        // Automatic delivery is best effort: the automatic sender may drop a retained payload that
+        // already failed so that a newer report can use the queue.
+        internal static void DiscardAutomatic(string expectedPayload, Action<bool> completed) { Discard(true, expectedPayload, completed); }
+        private static void Discard(bool automatic, string expectedPayload, Action<bool> completed)
         {
             lock (Gate) { if (busy || !ready) { delivery += delegate { completed(false); }; return; } busy = true; }
             Thread thread = new Thread(delegate() {
@@ -62,15 +101,16 @@ namespace FTKModFramework.Core.Reporting
                 {
                     using (ReportingSessionLease lease = new ReportingSessionLease())
                     {
-                        lease.Acquire(Root);
-                        string path = Path.Combine(Root, "pending.json");
+                        string root = automatic ? AutomaticRoot : Root;
+                        lease.Acquire(root);
+                        string path = Path.Combine(root, "pending.json");
                         if (File.Exists(path))
                         {
                             SafeFile(path, ReportingSubmissionPayload.MaximumBytes);
                             if (File.ReadAllText(path) != expectedPayload) throw new IOException();
                             File.Delete(path);
                         }
-                        lock (Gate) pending = null;
+                        lock (Gate) { if (automatic) pendingAutomatic = null; else pending = null; }
                         success = true;
                     }
                 }
@@ -141,6 +181,7 @@ namespace FTKModFramework.Core.Reporting
                 catch { return new ReportingSubmissionResult { Error = "helper_unavailable", ReportId = id }; }
                 string resultPath = Path.Combine(root, "result.json");
                 if (File.Exists(resultPath)) { SafeFile(resultPath, 65536); File.Delete(resultPath); }
+                ReportingSubmissionResult result = null;
                 ProcessStartInfo info = new ProcessStartInfo(helper,
                     "report-submit --request " + Quote(requestPath) + " --result " + Quote(resultPath) + " --endpoint " + Quote(Endpoint));
                 info.UseShellExecute = false; info.CreateNoWindow = true; info.WorkingDirectory = root;
@@ -152,20 +193,33 @@ namespace FTKModFramework.Core.Reporting
                         try { process.Kill(); process.WaitForExit(2000); } catch { }
                         return new ReportingSubmissionResult { Error = "submission_pending", ReportId = id };
                     }
-                    if (!File.Exists(resultPath)) return new ReportingSubmissionResult { Error = "helper_unavailable", ReportId = id };
+                    // The helper writes a result for every request it sends. Exiting non-zero without
+                    // one means it refused the paths or the request before any network access.
+                    if (!File.Exists(resultPath))
+                        result = new ReportingSubmissionResult { Error = process.ExitCode != 0 ? "helper_rejected" : "helper_unavailable", ReportId = id };
                 }
-                SafeFile(resultPath, 65536);
-                string response = File.ReadAllText(resultPath);
-                ReportingSubmissionResult result = ParseResult(response, id);
-                if (result.Success)
+                if (result == null)
                 {
-                    JObject receipt = JObject.Parse(response);
-                    receipt["requestSha256"] = requestHash;
-                    AtomicWrite(receiptPath, receipt.ToString(Newtonsoft.Json.Formatting.None));
-                    File.Delete(requestPath);
-                    lock (Gate) { if (automatic) pendingAutomatic = null; else pending = null; }
+                    SafeFile(resultPath, 65536);
+                    string response = File.ReadAllText(resultPath);
+                    result = ParseResult(response, id);
+                    if (result.Success)
+                    {
+                        JObject receipt = JObject.Parse(response);
+                        receipt["requestSha256"] = requestHash;
+                        AtomicWrite(receiptPath, receipt.ToString(Newtonsoft.Json.Formatting.None));
+                        File.Delete(requestPath);
+                        lock (Gate) { if (automatic) pendingAutomatic = null; else pending = null; }
+                    }
+                    File.Delete(resultPath);
                 }
-                File.Delete(resultPath);
+                // A manual report stays queued for the player's Retry or Discard. An automatic one
+                // that can never be accepted is dropped instead of retrying for seven days.
+                if (automatic && ReportingSubmissionPayload.PermanentFailure(result.Error))
+                {
+                    File.Delete(requestPath);
+                    lock (Gate) pendingAutomatic = null;
+                }
                 return result;
             }
         }
