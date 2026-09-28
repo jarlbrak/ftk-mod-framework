@@ -37,6 +37,18 @@ namespace FTKModFramework.Core
         private TweakSessionRecord _resumeRecord;
         private bool _resumeIgnoresLogged;
         private bool _oversizeWarned;
+        // Resume players window (Spec #260 FR-2). A resume's characters are deserialized after the
+        // lock: EnterFahrulRPC fades to black and only then calls StartGame, whose CreatePlayer chain
+        // runs PlayerSerialize.Deserialize. So the window is separate from the armed state above,
+        // survives the lock, and closes when uiStartGame.AllCowsCreated reports every character
+        // created, or when a clear means no run is going. A countdown is stashed before vanilla reads
+        // a state and applied from StateDataDeserializeDone, once m_PoisonLvl is restored. The stash
+        // is keyed by CharacterStats instance: in local multiplayer every character carries the
+        // loader's PhotonID.
+        private bool _playersOpen;
+        private readonly List<KeyValuePair<object, int>> _poisonStash = new List<KeyValuePair<object, int>>();
+        private int _poisonRestored;
+        private int _poisonDiscarded;
 
         internal TweakSessionLifecycle(TweakRegistry registry, Action<string> warn, Action<string> info,
             Action<string> error, Func<int> probeHandle)
@@ -109,7 +121,82 @@ namespace FTKModFramework.Core
             _resumeArmed = true;
             _resumeRecord = null;
             _resumeIgnoresLogged = false;
+            _playersOpen = true;
+            _poisonStash.Clear();
+            _poisonRestored = 0;
+            _poisonDiscarded = 0;
             Trace("resume-arm", via);
+        }
+
+        /// <summary>True from the start of a resume until its characters are all created or no run is
+        /// going. Unlike <see cref="ResumeArmed"/> it stays open through the lock.</summary>
+        internal bool ResumePlayersOpen { get { return _playersOpen; } }
+
+        /// <summary>Poison countdowns restored and discarded in the current or last resume window.</summary>
+        internal int PoisonRestored { get { return _poisonRestored; } }
+        internal int PoisonDiscarded { get { return _poisonDiscarded; } }
+
+        /// <summary>Stashed countdowns not yet applied or discarded.</summary>
+        internal int PoisonPending { get { return _poisonStash.Count; } }
+
+        /// <summary>The load prefix's entry for one CharacterStats state about to be deserialized.
+        /// value is what the state holds under <see cref="PoisonCountdown.Key"/>, or null when the key
+        /// is absent. Returns false, keeping nothing, outside the window: the same deserializer is also
+        /// a PunRPC. A second state for the same instance replaces the first, which is discarded.</summary>
+        internal bool StashPoison(object stats, object value)
+        {
+            if (!_playersOpen || stats == null || value == null) return false;
+            int index = PoisonIndex(stats);
+            if (index >= 0)
+            {
+                _poisonStash.RemoveAt(index);
+                _poisonDiscarded++;
+            }
+            _poisonStash.Add(new KeyValuePair<object, int>(stats, PoisonCountdown.FromStateValue(value)));
+            return true;
+        }
+
+        /// <summary>The apply hook's entry once vanilla has restored that instance's fields: removes its
+        /// stash and returns the counter to set, or 0 to keep vanilla's. An instance with nothing
+        /// stashed is not counted.</summary>
+        /// <param name="on">fix.poison-decay-resume in the locked set.</param>
+        /// <param name="level">m_PoisonLvl as vanilla just restored it.</param>
+        internal int TakePoison(object stats, bool on, bool isSerialize, int level, string via)
+        {
+            int index = stats != null ? PoisonIndex(stats) : -1;
+            if (index < 0) return 0;
+            int recorded = _poisonStash[index].Value;
+            _poisonStash.RemoveAt(index);
+            int counter = PoisonCountdown.CounterToRestore(_playersOpen,
+                _registry.IsInitialized && _registry.SessionState == TweakSessionState.Locked,
+                on, isSerialize, recorded, level);
+            if (counter == 0)
+            {
+                _poisonDiscarded++;
+                return 0;
+            }
+            _poisonRestored++;
+            Trace("poison-restore", via + " counter=" + counter);
+            return counter;
+        }
+
+        private int PoisonIndex(object stats)
+        {
+            for (int i = 0; i < _poisonStash.Count; i++)
+                if (ReferenceEquals(_poisonStash[i].Key, stats)) return i;
+            return -1;
+        }
+
+        /// <summary>Every character of the resume exists, or no run is going. Closes the window,
+        /// discards whatever is still stashed and logs the resume's counts once.</summary>
+        internal void CloseResumePlayers(string via)
+        {
+            if (!_playersOpen) return;
+            _playersOpen = false;
+            _poisonDiscarded += _poisonStash.Count;
+            _poisonStash.Clear();
+            Info("Tweaks: resume poison countdowns via " + via + ": restored " + _poisonRestored + ", discarded " + _poisonDiscarded + ".");
+            Trace("resume-players-close", via);
         }
 
         /// <summary>True while a GameFlow state read would be used: a resume is armed and its run is
@@ -207,7 +294,11 @@ namespace FTKModFramework.Core
         /// <summary>Empties the Session set. Returns true when a locked run was cleared.</summary>
         internal bool Clear(TweakClearTrigger trigger, string via)
         {
-            if (DisarmsResume(trigger)) DisarmResume();
+            if (DisarmsResume(trigger))
+            {
+                DisarmResume();
+                CloseResumePlayers(via);
+            }
             if (_registry.SessionState == TweakSessionState.None) return false;
             bool wasLocked = _registry.Clear();
             bool warn = WarnOnClear(wasLocked, trigger);

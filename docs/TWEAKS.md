@@ -44,6 +44,11 @@ on top of it. These descriptors exist today:
   [Spec #260](https://github.com/jarlbrak/ftk-mod-framework/issues/260) FR-3), the first Session
   Fix, on by default. Balance: "Herbalists can find herbs each party turn in dungeons, not once per
   visit; many more herbs in the Endless Dungeon." See [below](#find-herb-in-dungeons).
+- **Keep poison countdowns on load** (`fix.poison-decay-resume`,
+  [Spec #260](https://github.com/jarlbrak/ftk-mod-framework/issues/260) FR-1 and FR-2), a Session
+  Fix: a resumed solo or local run keeps each character's poison countdown. Default on,
+  with the balance note "Poison no longer lasts extra turns after loading a save." See
+  [Poison countdown on resume](#poison-countdown-on-resume).
 
 Live verification status is tracked on #233, #242, #243 and #260.
 
@@ -91,9 +96,10 @@ Like every Session tweak, it is off in online co-op until the co-op contract shi
 | Preference resolution | `Core/Tweaks/TweakPreferences.cs` | Pure Default/On/Off rules shared by the registry and the tab |
 | Session lifecycle | `Core/Tweaks/TweakSessionLifecycle.cs` | Unity-free capture, lock and clear decisions, resume state, plus the probe trace |
 | Session record | `Core/Tweaks/TweakSessionRecord.cs` | Unity-free codec and per-ID resolution for the `ftkmf.session` save record |
+| Poison countdown | `Core/Tweaks/PoisonCountdown.cs` | Unity-free codec and write and restore decisions for the `ftkmf.poison` character value |
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
-| Session record hooks | `Core/TweakSessionRecordPatches.cs` | The save transpiler, the load prefix and the resume arm for the `ftkmf.session` record |
+| Session record hooks | `Core/TweakSessionRecordPatches.cs` | The save transpiler, the load prefix and the resume arm for the `ftkmf.session` record, plus the `ftkmf.poison` write, stash, apply and window close |
 | Tweaks tab | `Core/UI/ModsPanelTweaks.cs`, `ModsPanel.Tweaks.cs` | Row text, paging and layout |
 | Diagnostics | `Core/Reporting/ReportingTweakSource.cs` | Copies registry state into bug-report metadata |
 
@@ -292,6 +298,71 @@ dictionary unchanged.
 the record on load and drops it on its next save. That a vanilla game loads such a save is
 live gate L8. The record does not change `SaveSetIdentity` or the save namespaces.
 
+### Poison countdown on resume
+
+`CharacterStats.m_PoisonTimeCounter` is private and has no sync or save attribute. Only
+`EndTurnActionSequence` writes it: it adds 1 at each end turn while the character is poisoned,
+and at `PoisonTimeRounds` (3) it lowers the poison level by one and resets. A load restarts it
+at 0, so a resumed, poisoned character suffers up to two extra poisoned end turns per level.
+`fix.poison-decay-resume` saves the countdown and restores it on resume. It never shortens
+poison.
+
+**Write.** `GameLogic.GetPlayerSerializeData` saves each character's
+`m_CharacterStats.StateDataSerialize()` as `PlayerSerialize.m_StateCSData`, and the Session
+record transpiler already decorates that method. `Decorate` has a `CharacterStats` branch that
+adds `ftkmf.poison` with the value `v1:1` or `v1:2`. It writes only when the run is locked, the
+tweak is on in the run's set, `m_PoisonLvl > 0` and the counter is 1 or 2
+(`PoisonCountdown.PoisonToWrite`). Otherwise the character's state is vanilla's byte for byte.
+The decoder accepts exactly those two strings.
+
+**Call order on resume.** In the installed assembly, a resume's characters are deserialized
+**after** the lock, not before it:
+
+1. `uiStartGame.OnResumeGame` arms the resume. `LoadGame` reads the `GameFlow` state and the
+   Session record, as described above.
+2. `EnterFahrulRPC` locks the run. It ends with `FTKUI.FadeToBlack(new ContinueFSM(StartGame))`,
+   a 0.5 second coroutine that yields before it continues.
+3. `StartGame` calls `CreatePlayer`, which reaches `uiQuickPlayerCreate.CreatePlayerRPC`,
+   `PlayerSerialize.Deserialize` and
+   `m_CharacterStats.RPCAllSelf("StateDataDeserialize", m_StateCSData, true)`.
+4. On the loading machine every RPC in that chain runs at once, because
+   `NetworkingPeer.RPC` calls `ExecuteRpc` for the local player and for a local master client.
+   `CharacterStats.StateDataDeserializeDone` sends `PlayerClientCreatedRPC`, which leads to
+   `CreatePlayerFinishedRPC` and the next `CreatePlayer`. After the last character,
+   `uiStartGame.AllCowsCreated` runs, all inside the first character's `StateDataDeserialize`.
+
+**Stash, apply and close.** The restore uses a **resume players window**, which is separate
+from the armed state of the Session record:
+
+- `ArmResume` opens the window. The lock leaves it open, and #253's `WantsRecord` and disarm
+  behaviour are unchanged.
+- The `StateDataDeserialize` prefix has a `CharacterStats` branch. Inside the window, and only
+  when `m_IsSerialize` holds and the ordinal search for `ftkmf.poison` finds the key, it parses
+  the state and stashes the value against the `CharacterStats` **instance**. In local
+  multiplayer every character carries the loader's PhotonID, so a PhotonID key would restore
+  the wrong character.
+- A `CharacterStats.StateDataDeserializeDone` prefix applies the value. It runs after vanilla has
+  restored `m_PoisonLvl` and before the creation chain in step 4 continues. It sets the counter
+  only when all of these hold: the window is open, the run is locked, the tweak is on,
+  `m_IsSerialize` holds, the value is 1 or 2, and `m_PoisonLvl > 0`
+  (`PoisonCountdown.CounterToRestore`).
+- A postfix on `StateDataDeserialize` cannot do this job. It would run after `AllCowsCreated`
+  has already closed the window.
+- `uiStartGame.AllCowsCreated` closes the window. A scene reload, the run end and a title-screen
+  activation also close it. The Photon clear callbacks leave it open. Closing discards anything
+  still stashed and logs one line per resume, for example
+  `Tweaks: resume poison countdowns via uiStartGame.AllCowsCreated: restored 1, discarded 0.`
+  With the self-test probe registered, each restore and the close are traced as
+  `SESSION-PROBE [session-lifecycle] poison-restore` and `resume-players-close`.
+
+Since the countdown is set before the game starts, `information.poison-turns` shows the right
+count from the first frame. No `EndTurnActionSequence` patch is needed.
+
+**Scope and authority.** The tweak is a Session Fix, so it is off in online co-op until the
+co-op contract (Spec B). In solo and local play the loading machine owns every character, and
+the restore runs there. A failure to read or write the private field is caught and logged once,
+separately from the Session record warnings, and the character keeps vanilla's countdown.
+
 ### Faults
 
 A patch that catches an exception calls `Tweaks.Fault(handle, exception)`. The first fault per
@@ -431,11 +502,15 @@ for the Wet and group shield icons, the Perfect chance math and fix, XP within t
 details, Mark encounters that vanish, Name the achievements House Rules disable, the dungeon Find
 Herb cycle and clear decisions, the probe, the
 tab, and the Session record codec, resolution, resume state, the state dictionary read and
-write, and the single-match rule of the save transpiler.
+write, and the single-match rule of the save transpiler. It also covers the poison countdown
+codec, its write and restore decisions, and the resume players window: when it opens and closes,
+applying once, each discard, and two instances that share a PhotonID.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 `Tests/SessionRecordHooks` compiles `Core/TweakSessionRecordPatches.cs` against stand-ins for
 the game types it names. It runs the save transpiler over a stand-in of vanilla's tail sequence,
-compiles and executes the result, and drives the load prefix and the resume arm. The real IL
+compiles and executes the result, and drives the load prefix and the resume arm. It also runs
+the poison countdown write through the same compiled method, and the stash, apply and window
+close in the game's call order. The real IL
 shape comes from decompiling the installed assembly; FullSerializer's handling of the string
 value (live gate L9) and the round trip in the game are covered only by the live checks on #253.
 All three run in CI.
