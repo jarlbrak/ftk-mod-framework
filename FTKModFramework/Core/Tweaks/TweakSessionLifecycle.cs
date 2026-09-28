@@ -276,7 +276,9 @@ namespace FTKModFramework.Core
             _resumeIgnoresLogged = false;
         }
 
-        private void Trace(string step, string via)
+        /// <summary>One probe trace line, written only while the self-test probe is registered. Session
+        /// tweak patches call it too, so a run's log shows their shared-state changes beside its lifecycle.</summary>
+        internal void Trace(string step, string via)
         {
             int probe = ProbeHandle();
             if (probe == TweakRegistry.InvalidHandle) return;

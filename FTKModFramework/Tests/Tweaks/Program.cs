@@ -73,12 +73,13 @@ internal static class Program
         PerfectChanceMath();
         PerfectChanceTweak();
         OnePressInventory();
+        DungeonFindHerb();
         LifecycleDecisions();
         LifecycleHooks();
         SessionProbe();
         _checks += TabChecks.Run();
         _checks += SessionRecordChecks.Run();
-        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet and group shield icons, Perfect chance, xp in level, poison turns, sell price, vanishing encounters, House Rules achievements, one-press inventory, lifecycle hooks, session probe, tab, session record).");
+        Console.WriteLine("Tweaks: " + _checks + " checks passed (registry, preferences, session lifecycle, faults, skip intro, quest dungeon name, stale Wet and group shield icons, Perfect chance, xp in level, poison turns, sell price, dungeon Find Herb, vanishing encounters, House Rules achievements, one-press inventory, lifecycle hooks, session probe, tab, session record).");
     }
 
     // FR-1: IDs, duplicates, balance-note defaults, and a freeze once initialized.
@@ -1129,6 +1130,160 @@ internal static class Program
         int n = 0;
         foreach (string line in lines) if (line.Contains(fragment)) n++;
         return n;
+    }
+
+    // Four characters with TurnIndex 0 to 3 in list order, the usual shape of m_IngamePlayerIDs and
+    // FTKHub.m_CharacterOverworlds, with the first player starting each round.
+    private static DungeonEndTurnState HerbTurn(bool inDungeon, int current, int start = 0, bool advanceRound = false)
+    {
+        return new DungeonEndTurnState
+        {
+            PlayersInDungeon = inDungeon,
+            CharacterTurnIndices = new[] { 0, 1, 2, 3 },
+            CurrentTurnIndex = current,
+            IngameTurnIndices = new[] { 0, 1, 2, 3 },
+            StartTurnIndex = start,
+            AdvanceRound = advanceRound,
+        };
+    }
+
+    private static DungeonEndTurnState JustEntered(DungeonEndTurnState state, int entrantTurnIndex)
+    {
+        state.JustEnteredDungeon = true;
+        state.HasDungeonEnterCharacter = true;
+        state.DungeonEnterTurnIndex = entrantTurnIndex;
+        return state;
+    }
+
+    // Spec #260 FR-3: the wrap GameFlowMC.EndTurn computes and suppresses in a dungeon, and the
+    // master-only clear that follows it.
+    private static void DungeonFindHerb()
+    {
+        TweakDescriptor d = FrameworkTweaks.DungeonFindHerbDescriptor;
+        Check(d.Id == "fix.dungeon-find-herb" && d.Category == TweakCategory.Fix && d.Scope == TweakScope.Session,
+            "the dungeon Find Herb fix is a Session Fix with the specified ID");
+        Check(d.ExplicitDefault == true && d.DefaultOn, "the dungeon Find Herb fix is explicitly on by default");
+        Check(d.BalanceNote == "Herbalists can find herbs each party turn in dungeons, not once per visit; many more herbs in the Endless Dungeon.",
+            "the dungeon Find Herb fix carries the specified balance note");
+        Check(d.Evidence.Contains("GameFlowMC.EndTurn") && d.Evidence.Contains("m_JustEnterDungeon")
+            && d.Evidence.Contains("AnyPlayersInDungeon") && d.Evidence.Contains("UpdateFindHerbRoundCoolDown")
+            && d.Evidence.Contains("master"), "the evidence names the verified methods and the master authority");
+
+        // The index computation, as vanilla takes it.
+        Check(DungeonHerbCycle.NextListIndex(HerbTurn(true, 1)) == 2, "next is the list index after the current turn");
+        Check(DungeonHerbCycle.NextListIndex(HerbTurn(true, 3)) == 0, "the last player wraps to list index 0");
+        DungeonEndTurnState shuffled = HerbTurn(true, 1);
+        shuffled.IngameTurnIndices = new[] { 2, 0, 3, 1 };
+        Check(DungeonHerbCycle.NextListIndex(shuffled) == 0, "the current turn is found by TurnIndex, and next is a list index");
+        Check(DungeonHerbCycle.CycleEnds(shuffled), "a list index equal to m_StartTurnIndex is a wrap, as vanilla compares it");
+        shuffled.CurrentTurnIndex = 3;
+        Check(DungeonHerbCycle.NextListIndex(shuffled) == 3 && !DungeonHerbCycle.CycleEnds(shuffled),
+            "TurnIndex 0 is not a wrap when the list puts it elsewhere");
+        Check(DungeonHerbCycle.NextListIndex(HerbTurn(true, 7)) == 1, "a current turn missing from the list restarts from index 0, as GetTurnIndex's -1 does");
+        DungeonEndTurnState empty = HerbTurn(true, 0, 0, true);
+        empty.IngameTurnIndices = new int[0];
+        Check(DungeonHerbCycle.NextListIndex(empty) == -1 && !DungeonHerbCycle.CycleEnds(empty), "an empty turn list, where vanilla throws, never clears");
+        empty.IngameTurnIndices = null;
+        Check(!DungeonHerbCycle.CycleEnds(empty), "a missing turn list never clears");
+
+        // In a dungeon or not.
+        Check(DungeonHerbCycle.CycleEnds(HerbTurn(true, 3)), "in a dungeon, the wrap to the start index ends a cycle");
+        Check(!DungeonHerbCycle.CycleEnds(HerbTurn(true, 0)) && !DungeonHerbCycle.CycleEnds(HerbTurn(true, 1))
+            && !DungeonHerbCycle.CycleEnds(HerbTurn(true, 2)), "in a dungeon, the other end turns do not");
+        Check(DungeonHerbCycle.CycleEnds(HerbTurn(true, 1, 2)), "the wrap follows m_StartTurnIndex, not index 0");
+        Check(!DungeonHerbCycle.CycleEnds(HerbTurn(false, 3)), "outside a dungeon vanilla's own round clears the cooldown");
+        Check(!DungeonHerbCycle.CycleEnds(HerbTurn(false, 1, 0, true)), "outside a dungeon an advanced round is vanilla's too");
+        // A cleared finite dungeon: vanilla's EndTurn drops its in-dungeon flag and passes the round on,
+        // but BeginTurnFinished2 still skips UpdateTurn because AnyPlayersInDungeon() holds. The
+        // decision reads only AnyPlayersInDungeon(), so the cleared state is the same state.
+        Check(DungeonHerbCycle.CycleEnds(HerbTurn(true, 3)), "a cleared dungeon with players inside still ends a cycle");
+
+        // _advanceRound.
+        Check(DungeonHerbCycle.CycleEnds(HerbTurn(true, 1, 0, true)), "in a dungeon, _advanceRound ends a cycle without a wrap");
+        Check(DungeonHerbCycle.CycleEnds(HerbTurn(true, 3, 0, true)), "_advanceRound with a wrap is one cycle");
+
+        // The just-entered re-point: the current turn becomes the entrant's TurnIndex minus one.
+        Check(DungeonHerbCycle.NextListIndex(JustEntered(HerbTurn(true, 2), 2)) == 2, "after entering, the entrant takes the next turn");
+        Check(!DungeonHerbCycle.CycleEnds(JustEntered(HerbTurn(true, 2, 3), 2)) && DungeonHerbCycle.CycleEnds(HerbTurn(true, 2, 3)),
+            "the re-point removes a wrap the unre-pointed index would have shown");
+        Check(DungeonHerbCycle.CycleEnds(JustEntered(HerbTurn(true, 2, 2), 2)) && !DungeonHerbCycle.CycleEnds(HerbTurn(true, 2, 2)),
+            "the re-point creates the wrap when the entrant starts the round");
+        Check(DungeonHerbCycle.CycleEnds(JustEntered(HerbTurn(true, 1), 0)), "the entrant at TurnIndex 0 re-points to the last character");
+        DungeonEndTurnState missing = JustEntered(HerbTurn(true, 3), 2);
+        missing.CharacterTurnIndices = new[] { 0, 2, 3 };
+        Check(DungeonHerbCycle.NextListIndex(missing) == 0, "with no character at the entrant's TurnIndex minus one, the current turn is kept");
+        missing.CharacterTurnIndices = new[] { 3, 2, 1, 0 };
+        Check(DungeonHerbCycle.NextListIndex(missing) == 2, "the re-point finds the character by TurnIndex, whatever its list position");
+        DungeonEndTurnState noEntrant = JustEntered(HerbTurn(true, 3), 1);
+        noEntrant.HasDungeonEnterCharacter = false;
+        Check(!DungeonHerbCycle.CycleEnds(noEntrant), "a missing entrant, where vanilla throws, never clears");
+        DungeonEndTurnState outside = JustEntered(HerbTurn(false, 3), 1);
+        Check(DungeonHerbCycle.NextListIndex(outside) == 0 && !DungeonHerbCycle.CycleEnds(outside),
+            "outside a dungeon the flag does not re-point and nothing clears");
+
+        // The registry: Session scope, so it is on only in a run's set.
+        var store = new MemoryStore();
+        TweakRegistry r = NewRegistry();
+        FrameworkTweaks.RegisterAll(r);
+        int handle = FrameworkTweaks.DungeonFindHerb;
+        Check(handle != TweakRegistry.InvalidHandle && Logs.Count == 0 && r.Get(handle) == d, "the dungeon Find Herb fix registers cleanly");
+        DungeonEndTurnState wrap = HerbTurn(true, 3);
+        bool[] values = { false, true };
+        Action<TweakRegistry, int, string> neverClears = (registry, h, label) =>
+        {
+            Check(!FrameworkTweaks.DungeonHerbCycleEnds(registry, h, wrap), label + ": no cycle is recorded");
+            foreach (bool run in values)
+                foreach (bool cycle in values)
+                    foreach (bool master in values)
+                        foreach (bool set in values)
+                            Check(!FrameworkTweaks.DungeonHerbClear(registry, h, run, cycle, master, set),
+                                label + ": nothing clears (ran " + run + ", cycle " + cycle + ", master " + master + ", set " + set + ")");
+        };
+        neverClears(r, handle, "before initialization");
+        Check(r.Initialize(store) && r.PreferredOn(handle), "a fresh install prefers the fix on");
+        neverClears(r, handle, "outside a run");
+        Check(r.Capture(TweakSessionMode.Multiplayer) && !r.IsOn(handle), "online co-op captures it off until the co-op contract");
+        neverClears(r, handle, "online co-op");
+        Check(r.Capture(TweakSessionMode.SinglePlayer) && r.Lock() && r.IsOn(handle), "a solo run turns it on");
+
+        // On: the prefix and the postfix halves.
+        Check(FrameworkTweaks.DungeonHerbCycleEnds(r, handle, wrap), "on: a dungeon wrap is recorded");
+        Check(!FrameworkTweaks.DungeonHerbCycleEnds(r, handle, HerbTurn(true, 1)), "on: a mid-cycle end turn is not");
+        Check(!FrameworkTweaks.DungeonHerbCycleEnds(r, handle, HerbTurn(false, 3)), "on: an overworld wrap is left to vanilla");
+        Check(FrameworkTweaks.DungeonHerbClear(r, handle, true, true, true, true), "on: the master clears a set cooldown after a recorded cycle");
+        Check(!FrameworkTweaks.DungeonHerbClear(r, handle, true, true, false, true), "on: a client never clears; it receives the master's SyncMember");
+        Check(!FrameworkTweaks.DungeonHerbClear(r, handle, false, true, true, true), "on: a vetoed EndTurn clears nothing");
+        Check(!FrameworkTweaks.DungeonHerbClear(r, handle, true, false, true, true), "on: without a recorded cycle nothing clears");
+        Check(!FrameworkTweaks.DungeonHerbClear(r, handle, true, true, true, false), "on: a cooldown already clear is not synced again");
+
+        // A Session fault leaves the running rules alone and drops the fix from the next capture.
+        r.Fault(handle, new InvalidOperationException("herb"));
+        Check(r.IsOn(handle) && FrameworkTweaks.DungeonHerbCycleEnds(r, handle, wrap), "faulted: the running run keeps its rules");
+        r.Clear();
+        Check(r.Capture(TweakSessionMode.SinglePlayer) && !r.IsOn(handle), "faulted: the next run captures it off");
+        neverClears(r, handle, "faulted");
+
+        // Off by choice.
+        TweakRegistry off = NewRegistry();
+        FrameworkTweaks.RegisterAll(off);
+        var offStore = new MemoryStore();
+        offStore.Values["fix.dungeon-find-herb"] = TweakPreference.Off;
+        Check(off.Initialize(offStore) && off.Capture(TweakSessionMode.LocalMultiplayer) && off.Lock()
+            && !off.IsOn(FrameworkTweaks.DungeonFindHerb), "a run started with the fix off has it off");
+        neverClears(off, FrameworkTweaks.DungeonFindHerb, "off");
+        neverClears(off, TweakRegistry.InvalidHandle, "an unregistered handle");
+
+        // The clear's probe trace: a line only while the self-test probe is registered.
+        TweakSessionLifecycle quiet = NewLifecycle(off, () => TweakRegistry.InvalidHandle);
+        quiet.Trace("herb-clear", "GameFlowMC.EndTurn");
+        Check(Infos.Count == 0, "without the probe the clear writes no trace");
+        TweakRegistry probed = NewRegistry();
+        FrameworkTweaks.RegisterAll(probed, true);
+        probed.Initialize(new MemoryStore());
+        TweakSessionLifecycle traced = NewLifecycle(probed, () => FrameworkTweaks.SessionProbe);
+        traced.Trace("herb-clear", "GameFlowMC.EndTurn");
+        Check(Infos.Count == 1 && Infos[0].StartsWith(TweakSessionLifecycle.ProbeTrace + " herb-clear via=GameFlowMC.EndTurn", StringComparison.Ordinal),
+            "with the probe the clear writes one trace line");
     }
 
     // FR-3 (work item 2b): the pure decisions behind the lifecycle hooks.

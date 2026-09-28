@@ -40,6 +40,10 @@ on top of it. These descriptors exist today:
   win statistics won't be recorded. The game counts rules as easier when the chaos frequency
   value or the life pool is above the difficulty's, or inflation is below it. It does not count
   infinite lives as easier, and the line follows the game.
+- **Find Herb in dungeons** (`fix.dungeon-find-herb`,
+  [Spec #260](https://github.com/jarlbrak/ftk-mod-framework/issues/260) FR-3), the first Session
+  Fix, on by default. Balance: "Herbalists can find herbs each party turn in dungeons, not once per
+  visit; many more herbs in the Endless Dungeon." See [below](#find-herb-in-dungeons).
 
 Live verification status is tracked on #233, #242, #243 and #260.
 
@@ -49,6 +53,33 @@ cached: they are built on the first `GetMessageParams` call, rebuilt by
 built after it, including every quest after a save is loaded. Its patch comment in
 `Core/QuestDungeonNamePatch.cs` records the ordering with the realm-name postfix on
 `GetMessageParams(bool)` in `Core/Localization.cs`.
+
+### Find Herb in dungeons
+
+`CharacterSkills.FindHerb` refuses while the party-wide `GameFlow.m_FindHerbRoundCoolDown` is set.
+A find sets it, and only `GameEventManager.UpdateTurnMC` clears it, on a new round. In a dungeon
+`GameFlowMC.EndTurn` still rotates the turn but suppresses the round, and `BeginTurnFinished2` skips
+`GameLogic.UpdateTurn` while `FTKHub.AnyPlayersInDungeon()`, so the cooldown stays set for the rest
+of the visit, and for the rest of the run in the Endless Dungeon.
+
+`Core/DungeonFindHerbPatch.cs` patches `GameFlowMC.EndTurn`, a PunRPC sent to the master:
+
+- **Prefix.** Before vanilla changes anything, it repeats vanilla's index computation: on the first
+  end turn after `m_JustEnterDungeon` the current turn becomes the character whose `TurnIndex` is
+  the entrant's minus one; the next turn is the `m_IngamePlayerIDs` list index after the current
+  turn's, wrapping. It records `(next == m_StartTurnIndex || _advanceRound) &&
+  AnyPlayersInDungeon()` in `__state`. A cleared finite dungeon with players still inside counts,
+  because `BeginTurnFinished2` suppresses the round there too. The decision is the Unity-free
+  `DungeonHerbCycle` in `Core/Tweaks/DungeonHerbCycle.cs`.
+- **Postfix.** When vanilla ran, the prefix recorded a cycle, this machine is the master and the
+  cooldown is set, it calls `GameFlow.UpdateFindHerbRoundCoolDown(false)`, whose `SyncMember`
+  reaches the other machines. It logs one line per clear and a `herb-clear` probe trace. It never
+  reads `m_PlayerCurrentTurn`, because a turn can end again inside `BeginTurn`.
+
+The rotation covers every in-game player, so a dungeon cycle clear also frees herbalists still in
+the overworld. The rate stays at one herb per party per cycle, the same as an overworld round.
+Overworld rounds are unchanged, and leaving the dungeon hands the clear back to vanilla's round.
+Like every Session tweak, it is off in online co-op until the co-op contract ships.
 
 ## Architecture
 
@@ -179,7 +210,7 @@ The key contains a dot, so it cannot collide with a serialized C# field name. Th
 string, so vanilla's FullSerializer never meets a framework type:
 
 ```text
-v1:+fix.find-herb-cooldown,-probe.session-lifecycle
+v1:+fix.dungeon-find-herb,-probe.session-lifecycle
 ```
 
 - `v1:` is the format version.
@@ -368,6 +399,7 @@ While the probe is registered, the lifecycle writes these lines to `BepInEx/LogO
 | `SESSION-PROBE [session-lifecycle] lock via=<hook> state=Locked ...` | Info | Run start |
 | `SELF-TEST PASS [session-lifecycle]: lock mode=<mode> source=<source> probe=<on\|off> expected=<on\|off>` | Info | Lock matched the expectation |
 | `SESSION-PROBE [session-lifecycle] clear via=<hook> locked=<true\|false> state=None mode=none source=none probe=off` | Info | A clear that had something to clear |
+| `SESSION-PROBE [session-lifecycle] herb-clear via=GameFlowMC.EndTurn state=Locked ...` | Info | `fix.dungeon-find-herb` cleared the Find Herb cooldown, beside its own log line |
 | `SELF-TEST PASS [session-lifecycle]: clear via <hook> left the probe off` | Info | After each traced clear |
 | `SELF-TEST FAIL [session-lifecycle]: lock ...` | Error | The probe's value at lock did not match |
 | `SELF-TEST FAIL [session-lifecycle]: clear via <hook> while the run may continue=<True\|False>, probe on after clear=<True\|False>` | Error | A mid-run clear, or a probe left on |
@@ -396,7 +428,8 @@ dotnet run --project FTKModFramework/Tests/SessionRecordHooks/SessionRecordHooks
 `Tests/Tweaks` covers the registry, preferences, the mode matrix, lifecycle decisions and
 hooks, faults, Skip intro, the quest dungeon name decision, the shared stale combat icon decision
 for the Wet and group shield icons, the Perfect chance math and fix, XP within the level, One-press inventory, Poison turns left, Sell price in item
-details, Mark encounters that vanish, Name the achievements House Rules disable, the probe, the
+details, Mark encounters that vanish, Name the achievements House Rules disable, the dungeon Find
+Herb cycle and clear decisions, the probe, the
 tab, and the Session record codec, resolution, resume state, the state dictionary read and
 write, and the single-match rule of the save transpiler.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
