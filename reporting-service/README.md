@@ -6,8 +6,9 @@ bundle for 30 days. Players need no GitHub account. Credentials exist only on th
 service. The client exposes an in-game setting to turn automatic reports off, and
 manual reports require a Send action. The privacy page discloses both paths.
 Deploy this service schema before distributing a framework build with automatic
-reports enabled. Older service builds reject the automatic submission fields;
-the client preserves those reports locally for retry and keeps the manual queue separate.
+reports enabled. Older service builds reject the automatic submission fields with
+`invalid_report`; the client deletes an automatic report refused that way rather than
+retrying it, and keeps the manual queue separate.
 
 ## Railway deployment
 
@@ -168,6 +169,11 @@ Failures use `{"schemaVersion":1,"status":"error","error":"code"}`:
 | 503 | `submission_pending` | GitHub result is uncertain. Retry the exact same payload and ID. |
 | 503 | `service_unavailable` | Keep local report; retry same payload and ID later. |
 | 503 | `capacity_reached` | Operator action needed; keep local report. |
+
+The table describes manual reports. Automatic reports are best effort: the framework
+deletes an automatic report on `invalid_report`, `report_conflict`, `payload_too_large`
+or `unsupported_media_type`, because the same bytes can never be accepted, and never
+resends a possibly created report under a new ID.
 
 The service does not send arbitrary GitHub error bodies to clients and does not log
 payloads, tokens, or client addresses. `/healthz` reports process/configuration

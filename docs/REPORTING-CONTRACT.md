@@ -1,7 +1,8 @@
 # Internal reporting contract, schema 1
 
 > Historical browser-handoff design and evidence. The current direct-send flow,
-> automatic error capture and sharing disclosure are described in [Reporting](REPORTING.md).
+> automatic error capture and sharing disclosure are described in [Reporting](REPORTING.md),
+> including the automatic queue location, best-effort retry and vanilla noise filtering.
 > Its service contract lives in [reporting-service](../reporting-service/README.md).
 > Browser-only, logs-off and mandatory review-step requirements below are superseded
 > for that flow. Historical proof results do not qualify the new transport.
