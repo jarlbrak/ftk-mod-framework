@@ -102,7 +102,7 @@ One press of the Inventory key opens your inventory, for a character using keybo
 *Only you. Off by default.*
 
 **Refund movement focus**<br/>
-Take back focus you spent on an extra move this turn, while the move is unused and you have not set off. See [how to refund focus](#refund-focus-spent-on-movement).<br/>
+Take back focus you spent on an extra move this turn, up to one point per move you have left, whenever you are standing still with no path chosen. See [how to refund focus](#refund-focus-spent-on-movement).<br/>
 *Shared rules. Off by default.*
 
 :::note[Settings file names]
@@ -114,12 +114,16 @@ Each tweak is also stored in `BepInEx/config/com.ftkmf.framework.cfg`, under `[T
 With **Refund movement focus** on, during your own turn on the map:
 
 1. Spend focus for an extra move, as usual.
-2. Before you start walking, the focus pips you can take back appear **faded** on your character's panel.
-3. **Click a faded pip**, or press **Backspace**, to get one point of focus back. The extra move it bought is removed.
+2. While you are standing still with no path chosen, the focus pips you can take back appear **faded** on your character's panel.
+3. **Click a faded pip**, or press the refund key, to get one point of focus back. The extra move it bought is removed.
 
-You can refund only focus spent on movement this turn and not yet walked. Refunds stop once you set off, and they reset when your turn ends or combat or an encounter begins. Nothing carries over into a saved game.
+:::caution[Change the refund key in the 1.6.0 preview]
+In the 1.6.0 preview the refund key is **Backspace**, which is also the game's **End Turn** key. Pressing it ends your turn, and the focus stays spent. Set the key to **F** as described below, or click the faded pips instead. A fix that makes F the default, and changes a saved Backspace to F, is waiting for the next framework release.
+:::
 
-To use a different key, close the game, open `BepInEx/config/com.ftkmf.framework.cfg`, and change `RefundMovementFocus` under `[TweakKeys]`. Set it to `None` to use clicks only. A key that one of the game's own controls already uses is ignored, and the log says so. The key does nothing while you are typing in chat.
+You can refund only focus spent on movement this turn, and at most one point for each move you have left. Choosing a path or walking hides the faded pips; if you stop with moves left, they come back. Refunds reset when your turn ends or combat or an encounter begins. Nothing carries over into a saved game.
+
+To change the key, close the game, open `BepInEx/config/com.ftkmf.framework.cfg`, and set `RefundMovementFocus` under `[TweakKeys]`, for example `RefundMovementFocus = F`. Set it to `None` to use clicks only. A key that one of the game's own controls already uses is ignored, and the log says so. The key does nothing while you are typing in chat.
 
 **Controllers are not supported yet.** A character on a controller sees no faded pips.
 

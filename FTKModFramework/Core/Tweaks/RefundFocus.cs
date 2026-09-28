@@ -274,6 +274,18 @@ namespace FTKModFramework.Core
         }
     }
 
+    /// <summary>What the configured refund key is good for.</summary>
+    internal enum RefundKeyStatus
+    {
+        /// <summary>None: clicks only.</summary>
+        Off,
+        Usable,
+        /// <summary>A mouse or controller button, or not a key at all.</summary>
+        NotKeyboard,
+        /// <summary>A game control also uses it, so a press would also act in vanilla.</summary>
+        Conflict,
+    }
+
     /// <summary>The refund key rules. Keys are UnityEngine.KeyCode values as ints, so the rules stay
     /// Unity-free: None is 0, and the mouse buttons and joystick buttons start at Mouse0 (323).</summary>
     internal static class RefundFocusInput
@@ -281,16 +293,81 @@ namespace FTKModFramework.Core
         internal const int None = 0;
         internal const int FirstNonKeyboard = 323;
 
-        /// <summary>A keyboard key that no FTKInput remappable action uses, with any modifiers, so a
-        /// press never also triggers a vanilla action. boundKeys are every m_PosKeys and m_NegKeys
-        /// entry of FTKInput.m_RemappableKeys.</summary>
-        internal static bool Usable(int key, IList<int> boundKeys)
+        /// <summary>KeyCode.F. No default game binding uses it: it is absent from every list below,
+        /// which were read from the installed game (see each list), and the 1.6.0 live run pressed F
+        /// with the tweak on and logged one refund and nothing else.</summary>
+        internal const int DefaultKey = 102;
+
+        /// <summary>KeyCode.Backspace, the 1.6.0 default. It is the game's own End Turn key.</summary>
+        internal const int LegacyDefaultKey = 8;
+
+        /// <summary>Keyboard keys the game reads whatever the remap table says. The Rewired Input
+        /// Manager's keyboard maps (level0, InputManager _userData.keyboardMaps) bind Return (Ok),
+        /// Escape (UICancel, Pause), the four arrows (UI and hex navigation), Space, M and RightAlt;
+        /// Assembly-CSharp also reads Return (uiChatBox, Lobby, uiStartGame), Escape
+        /// (uiCharacterCreateRoot), Space (SplashScreen, uiStartGame) and I (uiQuickPlayerCreate)
+        /// straight from UnityEngine.Input.</summary>
+        internal static readonly int[] FixedBindings =
         {
-            if (key <= None || key >= FirstNonKeyboard) return false;
-            if (boundKeys == null) return true;
-            for (int i = 0; i < boundKeys.Count; i++)
-                if (boundKeys[i] == key) return false;
-            return true;
+            13, 27, 32, 105, 109, 273, 274, 275, 276, 307,
+        };
+
+        /// <summary>Every keyboard key and modifier in FTKInput's serialized m_DefaultKeys (sharedassets1,
+        /// FTKInput): D and A (PanHorizontal), W and S (PanVertical), LeftControl (PanDrag), Q and E
+        /// (Zoom), Space (Center), Tab (NextLocation, and with LeftShift PrevLocation), LeftShift
+        /// (KeyMoreInfo modifier, WeaponInfo), Delete (EndTurn), I (Inventory), C (Chat), T
+        /// (ToggleStats), LeftAlt (KeyPing modifier), Comma (EnemyPrev) and Period (EnemyNext).
+        /// RestoreDefaultInputMap then applies m_DefaultKeysMacOverride on every platform, which sets
+        /// EndTurn to Backspace; a player's saved custominput.bin shows EndTurn [8].</summary>
+        internal static readonly int[] RemappableDefaults =
+        {
+            8, 9, 32, 44, 46, 97, 99, 100, 101, 105, 113, 115, 116, 119, 127, 304, 306, 308,
+        };
+
+        /// <summary>Old config values that mean "the default". BepInEx writes a default into the
+        /// config file, so a saved Backspace cannot be told apart from one a player typed; it is
+        /// always the game's End Turn key unless End Turn was remapped, so it is read as the new
+        /// default.</summary>
+        internal static int Migrate(int configured)
+        {
+            return configured == LegacyDefaultKey ? DefaultKey : configured;
+        }
+
+        /// <summary>Whether any default game binding, fixed or remappable, uses key.</summary>
+        internal static bool IsDefaultBinding(int key)
+        {
+            return Contains(FixedBindings, key) || Contains(RemappableDefaults, key);
+        }
+
+        /// <summary>Checks the key against the fixed bindings and the remap table, keys and modifiers.
+        /// remapped is every key and modifier key of FTKInput.m_RemappableKeys; null, when the table
+        /// is not loaded, means the defaults, so a conflict is never missed for want of the table.</summary>
+        internal static RefundKeyStatus Status(int key, IList<int> remapped)
+        {
+            if (key == None) return RefundKeyStatus.Off;
+            if (key < None || key >= FirstNonKeyboard) return RefundKeyStatus.NotKeyboard;
+            if (Contains(FixedBindings, key)) return RefundKeyStatus.Conflict;
+            if (remapped == null) return Contains(RemappableDefaults, key) ? RefundKeyStatus.Conflict : RefundKeyStatus.Usable;
+            return Contains(remapped, key) ? RefundKeyStatus.Conflict : RefundKeyStatus.Usable;
+        }
+
+        /// <summary>The one warning for a key that cannot be used, or null.</summary>
+        internal static string Warning(RefundKeyStatus status, string keyName)
+        {
+            if (status == RefundKeyStatus.Conflict)
+                return "Tweaks: the refund movement focus key " + keyName + " is also one of the game's own controls, so the tweak ignores it. "
+                    + "Change [TweakKeys] RefundMovementFocus in BepInEx/config/com.ftkmf.framework.cfg, for example to F.";
+            if (status == RefundKeyStatus.NotKeyboard)
+                return "Tweaks: the refund movement focus key " + keyName + " is not a keyboard key, so the tweak ignores it. "
+                    + "Change [TweakKeys] RefundMovementFocus in BepInEx/config/com.ftkmf.framework.cfg, for example to F.";
+            return null;
+        }
+
+        private static bool Contains(IList<int> keys, int key)
+        {
+            for (int i = 0; i < keys.Count; i++)
+                if (keys[i] == key) return true;
+            return false;
         }
     }
 
