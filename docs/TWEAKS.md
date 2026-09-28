@@ -49,8 +49,12 @@ on top of it. These descriptors exist today:
   Fix: a resumed solo or local run keeps each character's poison countdown. Default on,
   with the balance note "Poison no longer lasts extra turns after loading a save." See
   [Poison countdown on resume](#poison-countdown-on-resume).
+- **Refund movement focus** (`convenience.refund-movement-focus`,
+  [Spec #264](https://github.com/jarlbrak/ftk-mod-framework/issues/264)), a Session Convenience
+  tweak, off by default: during your own turn, take back focus you spent on movement while the
+  extra move is unused and you have not set off. See [below](#refund-movement-focus).
 
-Live verification status is tracked on #233, #242, #243 and #260.
+Live verification status is tracked on #233, #242, #243, #260 and #264.
 
 `fix.quest-dungeon-name` postfixes `QuestLogicBase.SetMessageParams`. Quest message params are
 cached: they are built on the first `GetMessageParams` call, rebuilt by
@@ -86,6 +90,50 @@ the overworld. The rate stays at one herb per party per cycle, the same as an ov
 Overworld rounds are unchanged, and leaving the dungeon hands the clear back to vanilla's round.
 Like every Session tweak, it is off in online co-op until the co-op contract ships.
 
+### Refund movement focus
+
+Vanilla's private `Movement.ConvertFocusToAction` runs only while `m_FocusPoints > 0` and
+`m_ActionPoints < 9`. It adds to a local analytics counter, calls
+`CharacterStats.UpdateFocusPoints(-1)` and `CharacterOverworld.UpdatePlayerAction(1)`, plays an
+effect and sends `reengageMovement`. It has no undo. Both setters clamp and sync absolute values
+(`SyncMembers` of `m_FocusPoints`, `m_BaseMaxFocus` and `m_SpentFocus`, and `SyncMember` of
+`m_ActionPoints`). Movement then spends one action point per step in `OnMoveOneHexFinish`.
+
+`Core/RefundMovementFocusPatch.cs` holds the patches, and the Unity-free rules live in
+`Core/Tweaks/RefundFocus.cs`:
+
+- **Counting.** A prefix on `ConvertFocusToAction` captures vanilla's guard and
+  `FTKNetworkObject.IsOwner` of `Movement.m_CharacterOverworld`. The postfix counts one conversion
+  only when both points actually moved. Counts are held per character in `RefundFocusLedger`,
+  keyed by `FTKPlayerID` (PhotonID and TurnIndex, because local multiplayer characters share a
+  PhotonID), on the owning client only. They are never saved, so a resumed run has nothing
+  refundable.
+- **Bound.** Refundable points are `min(count, m_ActionPoints)`, so a converted point that was
+  already walked, or lost to the action point cap, cannot be refunded.
+- **Gates.** A refund also needs all of these: `m_FocusPoints < MaxFocus` and at least one action
+  point; `IsOwner`, `CharacterStats.m_IsMyTurn`, and `Movement.Instance.m_CharacterOverworld` being
+  this character; `Movement.m_Mode == TrackingMode.Movement`, `m_MovementFSM.ActiveStateName ==
+  "Tracking"` and `m_HexList.Count <= 1`; neither `Movement.m_LockedInput` (the sneak destination
+  pick) nor the `PickSneakHex` state that the private `IsInSneakPickMode` tests; and neither
+  `CharacterStats.m_IsInCombat` nor `EncounterSession.m_IsInCombat`. `TrackingPathFinished` sets
+  `m_Mode` to `None` before it hands a committed path to the walk FSM, so a walk in progress is
+  always refused. The walk itself runs in PlayMaker, so the mid-walk refusal is a live gate.
+- **Reversal.** A refund calls exactly `UpdateFocusPoints(1)` and `UpdatePlayerAction(-1)`,
+  decrements the count, then calls `Movement.TrackResetList()` and `uiPlayerMainHud.UpdateHud()`.
+  It touches no analytics, no `SpentFocus`, no ability or proficiency event and no network call
+  beyond the setters' own syncs, so a peer sees the same absolute values even without the tweak.
+  The vanilla `ResetSpentFocus(false)` no-op is left alone.
+- **Clears.** A count resets on `CharacterOverworld.EndTurn`, on
+  `EncounterSession.StartEncounterSession_Actual` (every character), on `SetInCombat(true)` and on
+  the private `SetDeath`. Leaving the room, returning to the title and any other Session set
+  change reach the ledger through `TweakRegistry.SessionGeneration`, which capture,
+  `SetSessionSet` and clear change. The game never transfers ownership, so ownership needs no
+  clear.
+
+With the self-test probe registered, each refund is traced as
+`SESSION-PROBE [session-lifecycle] focus-refund`. Like every Session tweak, it is off in online
+co-op until the co-op contract ships.
+
 ## Architecture
 
 | Piece | Location | Role |
@@ -97,6 +145,7 @@ Like every Session tweak, it is off in online co-op until the co-op contract shi
 | Session lifecycle | `Core/Tweaks/TweakSessionLifecycle.cs` | Unity-free capture, lock and clear decisions, resume state, plus the probe trace |
 | Session record | `Core/Tweaks/TweakSessionRecord.cs` | Unity-free codec and per-ID resolution for the `ftkmf.session` save record |
 | Poison countdown | `Core/Tweaks/PoisonCountdown.cs` | Unity-free codec and write and restore decisions for the `ftkmf.poison` character value |
+| Refund movement focus | `Core/Tweaks/RefundFocus.cs`, `Core/RefundMovementFocusPatch.cs` | Unity-free ledger, bound, gates and reversal; the counting and clear patches and the refund entry point |
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
 | Session record hooks | `Core/TweakSessionRecordPatches.cs` | The save transpiler, the load prefix and the resume arm for the `ftkmf.session` record, plus the `ftkmf.poison` write, stash, apply and window close |
@@ -471,6 +520,7 @@ While the probe is registered, the lifecycle writes these lines to `BepInEx/LogO
 | `SELF-TEST PASS [session-lifecycle]: lock mode=<mode> source=<source> probe=<on\|off> expected=<on\|off>` | Info | Lock matched the expectation |
 | `SESSION-PROBE [session-lifecycle] clear via=<hook> locked=<true\|false> state=None mode=none source=none probe=off` | Info | A clear that had something to clear |
 | `SESSION-PROBE [session-lifecycle] herb-clear via=GameFlowMC.EndTurn state=Locked ...` | Info | `fix.dungeon-find-herb` cleared the Find Herb cooldown, beside its own log line |
+| `SESSION-PROBE [session-lifecycle] focus-refund via=<source> state=Locked ...` | Info | `convenience.refund-movement-focus` refunded one point, beside its own log line |
 | `SELF-TEST PASS [session-lifecycle]: clear via <hook> left the probe off` | Info | After each traced clear |
 | `SELF-TEST FAIL [session-lifecycle]: lock ...` | Error | The probe's value at lock did not match |
 | `SELF-TEST FAIL [session-lifecycle]: clear via <hook> while the run may continue=<True\|False>, probe on after clear=<True\|False>` | Error | A mid-run clear, or a probe left on |
@@ -504,7 +554,9 @@ Herb cycle and clear decisions, the probe, the
 tab, and the Session record codec, resolution, resume state, the state dictionary read and
 write, and the single-match rule of the save transpiler. It also covers the poison countdown
 codec, its write and restore decisions, and the resume players window: when it opens and closes,
-applying once, each discard, and two instances that share a PhotonID.
+applying once, each discard, and two instances that share a PhotonID. For refund movement focus it
+covers counting only real conversions, the bound, each gate failing, the exact reversal through a
+recording setter seam, every clear trigger and the off path.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 `Tests/SessionRecordHooks` compiles `Core/TweakSessionRecordPatches.cs` against stand-ins for
 the game types it names. It runs the save transpiler over a stand-in of vanilla's tail sequence,
