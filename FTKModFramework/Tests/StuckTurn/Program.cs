@@ -48,7 +48,8 @@ internal static class Program
         HostWatch();
         Line();
         NoAllocation();
-        Console.WriteLine("PASS: " + _checks + " stuck-turn checks.");
+        int signatures = SignatureChecks.Run();
+        Console.WriteLine("PASS: " + _checks + " stuck-turn checks, " + signatures + " softlock signature checks.");
     }
 
     private static void Thresholds()

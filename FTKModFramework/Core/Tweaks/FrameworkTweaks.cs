@@ -206,6 +206,25 @@ namespace FTKModFramework.Core
             + "The HUD postfixes the private uiPlayerMainHud.SetFocusMeter, whose m_FocusPoints pips show child 0 "
             + "below m_FocusPoints; FTKInput's remap table needs a Rewired action per entry, so the key is framework config.");
 
+        /// <summary>Spec #265 FR-4. Local: it fires only the continuation vanilla's own popup coroutine
+        /// would have fired on this machine, sends no RPC, and otherwise only hides this machine's popup.</summary>
+        internal static readonly TweakDescriptor StuckSkipTurnPopupDescriptor = new TweakDescriptor(
+            "fix.stuck-skip-turn-popup", TweakCategory.Fix, TweakScope.Local,
+            "Unstick the skip-turn popup",
+            "If the skip-turn popup is interrupted before it closes, close it and carry on with the turn, as the game does after about five seconds.",
+            "SkipTurnUI.Show stores the ContinueFSM (never cleared) and runs uiMovementSlots.ShowActionPanelRPC "
+            + "here and on the other clients; its InitializeSkipTurn calls ForceHide, BaseInitialize, "
+            + "CharacterOverworld.RemoveSkipTurn and StartCoroutine(SlotDisplayExpandSkipTurn), which waits "
+            + "m_TransitionTime and m_SlotAppearDelay of Time.time and m_ActionSlotDisplayTimeout of Time.deltaTime "
+            + "(1 + 0.8 + 3 s by default) and then calls SkipTurnUI.Close(GetCurrentCOW().m_FTKPlayerID.IsLocal()). "
+            + "Close runs Disengage unless m_IsFading and continues m_ContinueFSM when _continue. ForceHide calls "
+            + "StopAllCoroutines while m_Root is active, and a deactivated object loses its coroutines, so the close "
+            + "never comes. The episode is armed by an InitializeSkipTurn postfix; a ForceHide that stops coroutines, "
+            + "an inactive m_Root or host, or 10 s of Time.time triggers one Close(IsLocal()) from a per-frame driver, "
+            + "only while the armed character's turn is current. A new InitializeSkipTurn or an Initialize action roll "
+            + "ends the episode without a close. A SkipTurnUI.Close prefix turns a second _continue for the same "
+            + "m_ContinueFSM into false, because a WaitClients.None ContinueFSM fires on every Continue.");
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -232,6 +251,7 @@ namespace FTKModFramework.Core
         internal static int DungeonFindHerb { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PoisonDecayResume { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int RefundMovementFocus { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int StuckSkipTurnPopup { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -250,6 +270,7 @@ namespace FTKModFramework.Core
             DungeonFindHerb = registry.Register(DungeonFindHerbDescriptor);
             PoisonDecayResume = registry.Register(PoisonDecayResumeDescriptor);
             RefundMovementFocus = registry.Register(RefundMovementFocusDescriptor);
+            StuckSkipTurnPopup = registry.Register(StuckSkipTurnPopupDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
@@ -433,6 +454,26 @@ namespace FTKModFramework.Core
             if (!registry.IsOn(handle)) return false;
             ledger.Clear(trigger, key, inCombat);
             return true;
+        }
+
+        /// <summary>The Close prefix's decision for one SkipTurnUI.Close call: the _continue value to
+        /// run with. Off, faulted or uninitialized returns vanilla's value unchanged, as does a close
+        /// that does not continue. On, a continuation that already went through Close once is refused.</summary>
+        internal static bool SkipTurnCloseContinues(TweakRegistry registry, int handle, ContinueOnceGuard guard,
+            bool vanillaContinue, object continuation)
+        {
+            if (!registry.IsOn(handle) || !vanillaContinue || guard == null) return vanillaContinue;
+            return guard.Allow(continuation);
+        }
+
+        /// <summary>Whether a triggered recovery calls SkipTurnUI.Close: only while the tweak is on and
+        /// the armed character still holds the turn. Once the turn has moved on, the continuation vanilla
+        /// committed to is no longer the one waiting.</summary>
+        internal static bool SkipTurnRecoveryCloses(TweakRegistry registry, int handle, SkipTurnTrigger trigger,
+            long armedPlayer, long currentPlayer)
+        {
+            if (!registry.IsOn(handle)) return false;
+            return trigger != SkipTurnTrigger.None && armedPlayer == currentPlayer;
         }
     }
 }
