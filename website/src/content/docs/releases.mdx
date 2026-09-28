@@ -4,6 +4,17 @@ description: What changed in the published framework and mod packages.
 ---
 import catalog from '../../data/catalog';
 
+## Framework 1.6.1 (preview)
+
+[Framework 1.6.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.1) is a **preview** release that fixes two problems found in 1.6.0. It adds no new tweaks. Automatic updates stay on stable 1.5.1. If you chose **Preview** in **Mods > Updates**, 1.6.1 is offered to you; otherwise download a launcher from the release page. Restart the game after updating.
+
+- **Refund focus key.** In 1.6.0 the refund key was **Backspace**, which is also the game's **End Turn** key, so pressing it ended your turn and the focus stayed spent. The default is now **F**. If your settings file still has Backspace, 1.6.1 changes it to F when the game starts. A key that one of the game's own controls uses never refunds, and the log warns once. The refund tooltip now also appears when you move the pointer onto a faded pip straight from the map.
+- **Fewer false stuck-turn warnings.** The `STUCK-TURN` log line no longer appears while an encounter's Fight or Sneak menu waits for you, while a tutorial popup or the encyclopedia is open, or while a single-player game waits for your own game to be ready.
+
+Both fixes were checked in solo play in a macOS game copy. The known limitations of 1.6.0 still apply: Windows and Linux gameplay are unverified, controllers are not supported for refunding focus or one-press inventory, and co-op with tweaks has not been played. See the [full list](../tweaks/#known-limitations).
+
+**Known issue in the game itself:** on macOS the game can hang when you quit, inside the game's own sound engine. The framework is not involved. Force quit the game if it does not close.
+
 ## Framework 1.6.0 (preview)
 
 [Framework 1.6.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.0) is a **preview** release. Automatic updates stay on stable 1.5.1; choose **Preview** in **Mods > Updates**, or download a launcher from the release page, to try it. Restart the game after updating.
@@ -62,4 +73,4 @@ Restart after preparing an upgrade and start a new adventure when changing conte
 
 ## Previous versions and future previews
 
-[GitHub release history](https://github.com/jarlbrak/ftk-mod-framework/releases) preserves previous immutable packages. Old versions are not silently replaced with new bytes. Framework 1.6.0 is a published preview release, labeled as such, and is not offered by automatic updates. This site has no unreleased gameplay preview. Any future preview will be labeled separately from these published packages.
+[GitHub release history](https://github.com/jarlbrak/ftk-mod-framework/releases) preserves previous immutable packages. Old versions are not silently replaced with new bytes. Framework 1.6.0 and 1.6.1 are published preview releases, labeled as such, and are not offered by automatic updates on the Stable channel. This site has no unreleased gameplay preview. Any future preview will be labeled separately from these published packages.
