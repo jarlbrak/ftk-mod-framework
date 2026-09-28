@@ -65,8 +65,9 @@ namespace FTKModFramework.Core.Diagnostics
             GameFlowMC flow = inRun ? GameFlowMC.Instance : null;
             WaitForClientAcknowledge wait = flow != null ? AckWait(flow) : null;
             List<int> pending = wait != null ? wait.m_WaitList : null;
-            if (_host.Observe(inRun, PhotonNetwork.isMasterClient, wait, wait != null ? wait.m_WaitID : null,
-                    pending != null ? pending.Count : 0, now))
+            PhotonPlayer local = PhotonNetwork.player;
+            int remote = HostAckWatch.RemotePending(pending, local != null ? local.ID : int.MinValue);
+            if (_host.Observe(inRun, PhotonNetwork.isMasterClient, wait, wait != null ? wait.m_WaitID : null, remote, now))
                 Write("host-ack-15s", _host.Elapsed, poll, logic);
         }
 
@@ -91,6 +92,24 @@ namespace FTKModFramework.Core.Diagnostics
             poll.OptionsOpen = options != null && options.m_Showing;
             poll.ChatFocused = ChatFocused();
             poll.GameAborted = logic.m_GameAborted;
+            poll.EncounterMenuOpen = EncounterMenuOpen();
+            poll.HelpFocused = HelpFocused();
+        }
+
+        private static bool EncounterMenuOpen()
+        {
+            FTKUI ui = FTKUI.Instance;
+            return ui != null && ui.m_EncounterMenu != null && ui.m_EncounterMenu.m_MenuOn;
+        }
+
+        private static bool HelpFocused()
+        {
+            FTKInput input = FTKInput.Instance;
+            FTKInputFocus focus = input != null ? input.m_CurrentInputFocus : null;
+            // Both show their own GameObject and hide it on close, so a focus left on a hidden or
+            // destroyed help screen is not an explanation and still counts.
+            return focus != null && (focus is FTKHelp.FTKTutorialInputFocus || focus is FTKHelp.Encyclopedia)
+                && focus.gameObject.activeInHierarchy;
         }
 
         private static WaitForClientAcknowledge AckWait(GameFlowMC flow)

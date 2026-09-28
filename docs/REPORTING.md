@@ -88,11 +88,14 @@ writes one such Warning line to `LogOutput.log`:
   with nothing on screen explaining it (`reason=unexplained-20s`);
 - when it stays unavailable for 90 seconds behind the location menu, inventory, a global
   message or a portrait message (`reason=panel-90s`);
-- on the host, when a client acknowledgement is still pending after 15 seconds
-  (`reason=host-ack-15s`).
+- on the host, when another player's acknowledgement is still pending after 15 seconds
+  (`reason=host-ack-15s`). The host's own entry never counts: the host acknowledges its own
+  turn start only after local screens such as a tutorial close, so that wait is covered by the
+  turn lines. A single-player run therefore never writes this line.
 
-For the turn lines, time does not count while Options is open or chat has focus, and
-nothing is written during combat or after a disconnect has ended the run. Each stall writes
+For the turn lines, time does not count while Options is open, chat has focus, an encounter's
+choice menu (Fight, Sneak and the like) is open, or a tutorial popup or the encyclopedia has
+focus. Nothing is written during combat or after a disconnect has ended the run. Each stall writes
 at most one line, and one launch of the game writes at most ten of each kind. The line is a
 Warning, so it never raises the automatic error report or a report prompt. It records only the game's own state: the
 Movement, turn and game-flow state names, the gate's panel flags, the input focus, the

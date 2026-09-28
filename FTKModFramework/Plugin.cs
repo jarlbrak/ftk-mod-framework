@@ -297,8 +297,8 @@ namespace FTKModFramework
             StuckTurnWatchdog = Config.Bind("Diagnostics", "StuckTurnWatchdog", true,
                 "Write one STUCK-TURN warning line to LogOutput.log, and so to bug-report diagnostics, when your " +
                 "turn's End Turn button stays unavailable for 20 seconds with nothing on screen explaining it " +
-                "(90 seconds behind a shop, inventory or message), or when the host waits over 15 seconds for a " +
-                "player's acknowledgement. Changes nothing in the game and never opens a report. Read at startup.");
+                "(90 seconds behind a shop, inventory or message), or when the host waits over 15 seconds for " +
+                "another player's acknowledgement. Changes nothing in the game and never opens a report. Read at startup.");
             if (StuckTurnWatchdog.Value) gameObject.AddComponent<Core.Diagnostics.StuckTurnWatchdog>();
 
             SoftlockSignatures = Config.Bind("Diagnostics", "SoftlockSignatures", true,

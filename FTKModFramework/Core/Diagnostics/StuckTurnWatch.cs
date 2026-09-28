@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace FTKModFramework.Core.Diagnostics
@@ -26,6 +27,15 @@ namespace FTKModFramework.Core.Diagnostics
         internal bool ChatFocused;
         /// <summary>GameLogic.m_GameAborted: a disconnect is ending the run.</summary>
         internal bool GameAborted;
+        /// <summary>FTKUI.m_EncounterMenu.m_MenuOn: the Fight, Sneak or other encounter choice is
+        /// waiting for the player. The Movement FSM sits in its encounterMenu sub-state, so the
+        /// button stays off for as long as the player takes to choose.</summary>
+        internal bool EncounterMenuOpen;
+        /// <summary>A tutorial popup (FTKHelp.FTKTutorialInputFocus) or the encyclopedia
+        /// (FTKHelp.Encyclopedia) holds the input focus. Both wait for the player to close them and
+        /// both open during the overworld turn: a tutorial at the turn start, the encyclopedia from a
+        /// map location's More Info or from a tutorial.</summary>
+        internal bool HelpFocused;
         /// <summary>GameFlowMC.m_EndTurnCount. It advances only on the master.</summary>
         internal int EndTurnCount;
         /// <summary>The current player's turn index, so a client also sees the turn change.</summary>
@@ -86,7 +96,8 @@ namespace FTKModFramework.Core.Diagnostics
             }
 
             float step = Step(ref _last, now);
-            if (poll.OptionsOpen || poll.ChatFocused || poll.GameAborted) return StuckTurnTrigger.None;
+            if (poll.OptionsOpen || poll.ChatFocused || poll.GameAborted || poll.EncounterMenuOpen || poll.HelpFocused)
+                return StuckTurnTrigger.None;
             if (poll.PanelShowing) _panel += step;
             else _unexplained += step;
 
@@ -112,9 +123,13 @@ namespace FTKModFramework.Core.Diagnostics
 
     /// <summary>The master's client acknowledgement watch. GameFlowMC keeps one
     /// WaitForClientAcknowledge at a time and replaces it for each barrier; an entry is pending
-    /// while its m_WaitList is not empty. The same wait object and wait ID pending for
-    /// <see cref="PendingSeconds"/> reports once. A new object, a new wait ID or an empty list
-    /// ends the episode.</summary>
+    /// while its m_WaitList is not empty. Only remote clients count. The list holds the Photon ID of
+    /// every joined player, the master's own included, and the master acknowledges its own entry
+    /// only when its local turn start completes (GameFlow.BeginTurnCompleted), which waits on local
+    /// UI such as a tutorial popup. A pending master entry is a local wait that the turn watch
+    /// covers, and in single player it is the only entry. The same wait object and wait ID with a
+    /// remote client pending for <see cref="PendingSeconds"/> reports once. A new object, a new
+    /// wait ID or no remote client pending ends the episode.</summary>
     internal sealed class HostAckWatch
     {
         internal const float PendingSeconds = 15f;
@@ -128,9 +143,20 @@ namespace FTKModFramework.Core.Diagnostics
         internal float Elapsed { get { return _elapsed; } }
         internal int Snapshots { get { return _snapshots; } }
 
-        internal bool Observe(bool inRun, bool isMaster, object wait, string waitId, int pendingCount, float now)
+        /// <summary>The number of pending IDs other than <paramref name="localId"/>. It indexes the
+        /// list instead of enumerating it, so a poll allocates nothing.</summary>
+        internal static int RemotePending(IList<int> pending, int localId)
         {
-            if (!inRun || !isMaster || wait == null || pendingCount <= 0)
+            if (pending == null) return 0;
+            int count = 0;
+            for (int i = 0; i < pending.Count; i++)
+                if (pending[i] != localId) count++;
+            return count;
+        }
+
+        internal bool Observe(bool inRun, bool isMaster, object wait, string waitId, int remotePending, float now)
+        {
+            if (!inRun || !isMaster || wait == null || remotePending <= 0)
             {
                 _active = false;
                 _wait = null;
