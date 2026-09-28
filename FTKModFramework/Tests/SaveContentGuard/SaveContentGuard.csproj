@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The resume guard's game-free half: which saved ids are missing, the fail-safe path, and the
+       refusal text. Compiling the source alone proves it needs no Unity, BepInEx or game reference.
+       The fixtures are built from the shapes GameSerialize writes, never from a real save. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/SaveCompatibility/SaveContentCheck.cs" Link="SaveCompatibility/SaveContentCheck.cs" />
+    <Compile Include="../../Core/IdAllocator.cs" Link="IdAllocator.cs" />
+  </ItemGroup>
+</Project>

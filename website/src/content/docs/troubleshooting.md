@@ -30,6 +30,10 @@ Compare the installed framework, package version, platform, and game build with 
 
 Restore the exact framework and mod set used by that run, or start a new adventure. Marketplace operations do not rewrite saves. If an update damaged a managed package, the menu can retain previous generations for rollback on a later launch.
 
+## Resume is stuck on "Crafting adventure"
+
+The save most likely uses content, such as an enemy or item, from a mod or framework build that is no longer installed, and the game cannot finish rebuilding the map. Quit the game; the save itself is not changed. Then restore the framework and mods used by that run, start a new adventure, or choose another save from **Load**. **Resume** always opens the most recent save, so use **Load** to pick a different one.
+
 ## Change the menu background
 
 Framework **1.4.0** includes the animated Skyharbor menu background. To restore the original background, close the game and open `BepInEx/config/com.ftkmf.framework.cfg` inside the game folder. Under `[UI]`, set `EnableSkyharborBackground = false`, save, and relaunch. Set it back to `true` to enable Skyharbor again. The file is created after the first framework launch.

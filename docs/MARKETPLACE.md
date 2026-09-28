@@ -30,6 +30,41 @@ run when changing content, or restore the matching set for an existing run.
 Removing a mod never edits the save. A mod-list export records versions and
 archive hashes, but cannot prove save or multiplayer compatibility.
 
+## Save compatibility
+
+Before the game resumes a save from **Resume** or from **Load**, the framework
+reads that save file and checks the identifiers the game will look up in its
+content tables: the adventure, player classes, enemy types on the map
+(including enemy camps), map encounters, items in player inventories, and story
+quests. An identifier is missing when the game's own lookup finds no row, or
+when it lies in the framework's synthetic ID range but no installed content
+registered it. If anything is missing, the framework keeps the player on the
+title screen and shows a dialog such as "This save uses content that isn't
+installed: 1 enemy type, 1 map encounter, 1 item." It names the mod when the
+current registrations can attribute an identifier; content that is no longer
+installed usually cannot be attributed and is reported as unknown content.
+`BepInEx/LogOutput.log` receives one `[save-guard]` line with the save name and
+the missing identifiers grouped by kind.
+
+The check only reads the save. It uses the game's own decompressor and the same
+FullSerializer parser as the native load. If it cannot read a save, it logs a
+warning and lets the game load as before, so a checker problem never blocks a
+save the game could open. Only the machine that loads the file checks it. In
+co-op, clients receive the map from the host's load, so a refused host resume
+starts nothing for them.
+
+Limits:
+
+- Classes use positional IDs. A save whose class ID now belongs to a different
+  class loads as that class; the check cannot detect this.
+- Quests are checked against the adventure's definition, including the dungeon
+  quest copies the game makes at map generation.
+- Only these identifier kinds are checked. Other content, such as dungeon or
+  shop rows, is not.
+- A co-op client that lacks content the host has is not checked before the
+  load. If restoring a map point fails during any resume, a `[save-guard]` error
+  line names the map point and its saved data for the report.
+
 ## Repair and recovery
 
 **Install / Repair** restores a missing or mismatched marketplace helper.
