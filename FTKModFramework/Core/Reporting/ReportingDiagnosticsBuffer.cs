@@ -36,6 +36,9 @@ namespace FTKModFramework.Core.Reporting
         internal long Version { get { lock (gate) return version; } }
         internal ReportingDiagnosticsError Pending { get { lock (gate) return pending; } }
         internal void Acknowledge(string id) { lock (gate) { if (pending != null && pending.Id == id) pending = null; } }
+        // Reports whether an error signature was already reported recently. Consulted under the
+        // buffer lock before an error takes the offer slot, so a known error spends no allowance.
+        internal Func<string, bool> AlreadyReported;
 
         internal void Add(string source, string message, string stack, DateTime utcNow)
         { Add(source, message, stack, utcNow, true); }
@@ -72,13 +75,42 @@ namespace FTKModFramework.Core.Reporting
                 while (entries.Count != 0 && (entries.Count >= EventLimit || bytes + count > ByteLimit - HeaderReserve))
                 { bytes -= Encoding.UTF8.GetByteCount(entries.Dequeue()); omitted++; }
                 entries.Enqueue(entry); bytes += count; version++;
-                if (newError && pending == null && offers < 3 && utcNow >= nextOffer)
+                // The single slot, five-minute gap and per-launch cap are spent only by an error
+                // that will actually be offered. Known noise and recent reports stay in the log only.
+                if (newError && pending == null && offers < 3 && utcNow >= nextOffer &&
+                    !VanillaNoise(message, stack) && !Reported(signature))
                 {
                     string summary = body.Split('\n')[0];
                     pending = new ReportingDiagnosticsError(LimitUtf8(summary, 240), signature, utcNow);
                     offers++; nextOffer = utcNow.AddMinutes(5);
                 }
             }
+        }
+
+        private bool Reported(string signature)
+        {
+            Func<string, bool> check = AlreadyReported;
+            try { return check != null && check(signature); }
+            catch { return false; }
+        }
+
+        // Vanilla errors that occur on healthy installs and say nothing about mods. Keep this list
+        // short and exact: each entry must name the exception and the top stack frame.
+        // - AkInitializer.OnApplicationFocus: the game's Wwise integration throws this
+        //   NullReferenceException during startup on every launch, with or without mods. Unity
+        //   logs it with the trace "AkInitializer.OnApplicationFocus (Boolean focus)".
+        internal static bool VanillaNoise(string message, string stack)
+        {
+            if (message == null || stack == null || !message.StartsWith("NullReferenceException", StringComparison.Ordinal)) return false;
+            foreach (string line in stack.Split('\n'))
+            {
+                string frame = line.Trim();
+                if (frame.Length == 0) continue;
+                if (frame.StartsWith("at ", StringComparison.Ordinal)) frame = frame.Substring(3).TrimStart();
+                return frame.StartsWith("AkInitializer.OnApplicationFocus (", StringComparison.Ordinal) ||
+                    frame.StartsWith("AkInitializer.OnApplicationFocus(", StringComparison.Ordinal);
+            }
+            return false;
         }
 
         internal string Capture()

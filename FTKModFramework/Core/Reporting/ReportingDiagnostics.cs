@@ -19,6 +19,8 @@ namespace FTKModFramework.Core.Reporting
         internal static string CapturePrevious(string expectedSessionId)
         { lock (Gate) return expectedSessionId != null && expectedSessionId == previousId ? previous : ""; }
         internal static void Acknowledge(string id) { Buffer.Acknowledge(id); }
+        // Called from logging threads with an error signature; must be thread-safe and never log.
+        internal static Func<string, bool> AlreadyReported { set { Buffer.AlreadyReported = value; } }
 
         // Subscribe in Awake, before content registration. Startup logs stay in memory while
         // the existing session worker obtains its lease and binds the exact session identities.

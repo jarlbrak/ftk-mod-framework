@@ -123,6 +123,33 @@ internal static class Program
         buffer.Acknowledge(buffer.Pending.Id);
         buffer.Add("mod", "fourth", "", now.AddMinutes(12)); buffer.Acknowledge(buffer.Pending.Id);
         buffer.Add("mod", "fifth", "", now.AddMinutes(18)); Check(buffer.Pending == null, "Session offer cap failed");
+
+        // The vanilla Wwise focus error, in the exact form Unity logs it, stays in the transcript
+        // but spends none of the allowance: a distinct error seconds later is still offered.
+        const string nre = "NullReferenceException: Object reference not set to an instance of an object";
+        ReportingDiagnosticsBuffer noisy = new ReportingDiagnosticsBuffer();
+        noisy.Add("Unity Exception", nre, "AkInitializer.OnApplicationFocus (Boolean focus)\n", now);
+        Check(noisy.Pending == null && noisy.Capture().Contains("AkInitializer.OnApplicationFocus"), "Vanilla Wwise error offered or dropped from the log");
+        noisy.Add("Unity Exception", nre, "MiniHexEnemy.GenerateEnemyHexAsset (Boolean _playIntro)\nMiniHexEnemy.Awake2 ()\n", now.AddSeconds(30));
+        Check(noisy.Pending != null && noisy.Pending.Summary == nre, "Error after vanilla noise was suppressed");
+        Check(ReportingDiagnosticsBuffer.VanillaNoise(nre, "  at AkInitializer.OnApplicationFocus (Boolean focus) [0x00000] in <filename unknown>:0 \n"),
+            "Player.log form of the Wwise error not recognized");
+        Check(!ReportingDiagnosticsBuffer.VanillaNoise(nre, "MyMod.Patch ()\nAkInitializer.OnApplicationFocus (Boolean focus)\n") &&
+            !ReportingDiagnosticsBuffer.VanillaNoise("ArgumentException: bad", "AkInitializer.OnApplicationFocus (Boolean focus)\n") &&
+            !ReportingDiagnosticsBuffer.VanillaNoise(nre, "AkInitializer.OnApplicationFocusLost ()\n") &&
+            !ReportingDiagnosticsBuffer.VanillaNoise(nre, ""), "Noise filter matched beyond the top Wwise frame");
+
+        // An error the installation already reported spends none of the allowance either.
+        ReportingDiagnosticsBuffer known = new ReportingDiagnosticsBuffer();
+        known.AlreadyReported = delegate(string signature) { return signature.Contains("Known.Failure"); };
+        known.Add("mod Error", "known error", " at Known.Failure()", now);
+        Check(known.Pending == null && known.Capture().Contains("Known.Failure"), "Recently reported error offered or dropped from the log");
+        known.Add("mod Error", "fresh error", " at Fresh.Failure()", now.AddSeconds(1));
+        Check(known.Pending != null && known.Pending.Summary == "fresh error", "Recently reported error spent the allowance");
+        ReportingDiagnosticsBuffer faulty = new ReportingDiagnosticsBuffer();
+        faulty.AlreadyReported = delegate(string signature) { throw new InvalidOperationException(); };
+        faulty.Add("mod Error", "history unreadable", "", now);
+        Check(faulty.Pending != null, "History failure suppressed a new error");
     }
     private static void SessionPersistence()
     {

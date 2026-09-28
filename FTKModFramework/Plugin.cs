@@ -237,6 +237,8 @@ namespace FTKModFramework
             Tweaks.Warn = message => Log.LogWarning(message);
             Tweaks.Info = message => Log.LogInfo(message);
             Tweaks.Error = message => Log.LogError(message);
+            Core.Reporting.ReportingDiagnostics.AlreadyReported = signature => AutomaticBugReportHistory != null &&
+                Core.Reporting.ReportingAutomatic.RecentlyReported(Core.Reporting.ReportingAutomatic.Digest(signature), DateTime.UtcNow);
             Core.Reporting.ReportingDiagnostics.Start();
             Core.Reporting.ReportingRuntime.Start();
             Core.Reporting.ReportingSubmission.Info = message => Log.LogInfo(message);
