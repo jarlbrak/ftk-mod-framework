@@ -147,6 +147,25 @@ namespace FTKModFramework.Core
             + "key or mouse button bound to Inventory by a character with CharacterOverworld.m_IsUseMouse, "
             + "two frames later so a same-frame vanilla open is seen first. Input only, on this client.");
 
+        /// <summary>Spec #260 FR-3. Changes a shared rule, so it is Session scope, and only the master
+        /// clears the cooldown; clients receive it through vanilla's SyncMember.</summary>
+        internal static readonly TweakDescriptor DungeonFindHerbDescriptor = new TweakDescriptor(
+            "fix.dungeon-find-herb", TweakCategory.Fix, TweakScope.Session,
+            "Find Herb in dungeons",
+            "Refresh the party's Find Herb cooldown after each full turn cycle in a dungeon, as a new round does outside.",
+            "CharacterSkills.FindHerb returns false while GameFlow.m_FindHerbRoundCoolDown ([FTKSerialize]"
+            + "[ExplicitSync]) is set; a find sets it through UpdateFindHerbRoundCoolDown(true), and only "
+            + "GameEventManager.UpdateTurnMC clears it, on a new round from the master's GameLogic.UpdateTurn. "
+            + "GameFlowMC.EndTurn (a PunRPC sent to the master) re-points m_PlayerCurrentTurn on the first end "
+            + "turn after m_JustEnterDungeon, takes next = (GetTurnIndex(current) + 1) % m_IngamePlayerIDs.Count "
+            + "and starts a round when next == GameFlow.m_StartTurnIndex or _advanceRound, but not while "
+            + "FTKHub.AnyPlayersInDungeon() (a cleared finite dungeon passes the round to BeginTurn, where "
+            + "BeginTurnFinished2 skips UpdateTurn while AnyPlayersInDungeon() anyway). In the Endless Dungeon "
+            + "IsDungeonCleared() is always false. A prefix computes that suppressed wrap before vanilla runs; "
+            + "the postfix calls UpdateFindHerbRoundCoolDown(false) on the master only.",
+            "Herbalists can find herbs each party turn in dungeons, not once per visit; many more herbs in the Endless Dungeon.",
+            true);
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -170,6 +189,7 @@ namespace FTKModFramework.Core
         internal static int VanishingEncounters { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int HouseRulesAchievements { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int OnePressInventory { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int DungeonFindHerb { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -185,6 +205,7 @@ namespace FTKModFramework.Core
             VanishingEncounters = registry.Register(VanishingEncountersDescriptor);
             HouseRulesAchievements = registry.Register(HouseRulesAchievementsDescriptor);
             OnePressInventory = registry.Register(OnePressInventoryDescriptor);
+            DungeonFindHerb = registry.Register(DungeonFindHerbDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
@@ -305,6 +326,25 @@ namespace FTKModFramework.Core
         {
             if (!registry.IsOn(handle)) return vanillaText;
             return HouseRulesText.Append(vanillaText, easier);
+        }
+
+        /// <summary>The prefix half of the dungeon Find Herb fix for one GameFlowMC.EndTurn call: whether
+        /// this end turn completes a party turn cycle whose new round vanilla suppresses for the dungeon.
+        /// Off, faulted out of the run or uninitialized returns false, so nothing is cleared.</summary>
+        internal static bool DungeonHerbCycleEnds(TweakRegistry registry, int handle, DungeonEndTurnState state)
+        {
+            if (!registry.IsOn(handle)) return false;
+            return DungeonHerbCycle.CycleEnds(state);
+        }
+
+        /// <summary>The postfix half: clear the shared cooldown only after vanilla ran, on a cycle the
+        /// prefix recorded, on the master that owns the shared state, and only while it is set, so one
+        /// cycle yields at most one clear and one SyncMember.</summary>
+        internal static bool DungeonHerbClear(TweakRegistry registry, int handle, bool runOriginal, bool cycleEnded,
+            bool isMasterClient, bool coolDownSet)
+        {
+            if (!registry.IsOn(handle)) return false;
+            return runOriginal && cycleEnded && isMasterClient && coolDownSet;
         }
     }
 }
