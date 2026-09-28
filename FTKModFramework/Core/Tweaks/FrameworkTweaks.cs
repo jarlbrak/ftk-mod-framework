@@ -185,6 +185,27 @@ namespace FTKModFramework.Core
             + "uiStartGame.AllCowsCreated.",
             "Poison no longer lasts extra turns after loading a save.", true);
 
+        /// <summary>Spec #264. A refund changes a character's resources within a shared run, so it is
+        /// Session scope even though it is an exact reversal. Mutation happens on the owner only.</summary>
+        internal static readonly TweakDescriptor RefundMovementFocusDescriptor = new TweakDescriptor(
+            "convenience.refund-movement-focus", TweakCategory.Convenience, TweakScope.Session,
+            "Refund movement focus",
+            "Take back focus you spent on movement this turn, while the extra move is unused and you have not set off. Click a faded focus pip or press Backspace (configurable). Keyboard and mouse only.",
+            "The private Movement.ConvertFocusToAction runs only when m_FocusPoints > 0 and m_ActionPoints < 9, "
+            + "then calls FTKGameStats m_ActionFocus++, CharacterStats.UpdateFocusPoints(-1) (clamped to MaxFocus, "
+            + "UpdateHud, SyncMembers m_FocusPoints, m_BaseMaxFocus, m_SpentFocus) and CharacterOverworld."
+            + "UpdatePlayerAction(1) (clamped to 0..9, SyncMember m_ActionPoints). A prefix captures that guard "
+            + "and FTKNetworkObject.IsOwner; the postfix counts per FTKPlayerID when both points moved. A refund "
+            + "needs min(count, m_ActionPoints) > 0, m_FocusPoints < MaxFocus, IsOwner, m_IsMyTurn, "
+            + "Movement.Instance.m_CharacterOverworld, m_Mode == TrackingMode.Movement, m_MovementFSM."
+            + "ActiveStateName \"Tracking\", m_HexList.Count <= 1, neither m_LockedInput nor \"PickSneakHex\", "
+            + "and neither CharacterStats.m_IsInCombat nor EncounterSession.m_IsInCombat; TrackingPathFinished sets "
+            + "m_Mode None before a walk. It calls UpdateFocusPoints(1), UpdatePlayerAction(-1), "
+            + "Movement.TrackResetList and uiPlayerMainHud.UpdateHud. Counts clear on CharacterOverworld.EndTurn, "
+            + "EncounterSession.StartEncounterSession_Actual, SetInCombat(true), SetDeath and any Session set change. "
+            + "The HUD postfixes the private uiPlayerMainHud.SetFocusMeter, whose m_FocusPoints pips show child 0 "
+            + "below m_FocusPoints; FTKInput's remap table needs a Rewired action per entry, so the key is framework config.");
+
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>
         internal static readonly TweakDescriptor SessionProbeDescriptor = new TweakDescriptor(
@@ -210,6 +231,7 @@ namespace FTKModFramework.Core
         internal static int OnePressInventory { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int DungeonFindHerb { get; private set; } = TweakRegistry.InvalidHandle;
         internal static int PoisonDecayResume { get; private set; } = TweakRegistry.InvalidHandle;
+        internal static int RefundMovementFocus { get; private set; } = TweakRegistry.InvalidHandle;
 
         /// <param name="selfTests">Diagnostics/RunSelfTests. The Session probe exists only then.</param>
         internal static void RegisterAll(TweakRegistry registry, bool selfTests = false)
@@ -227,6 +249,7 @@ namespace FTKModFramework.Core
             OnePressInventory = registry.Register(OnePressInventoryDescriptor);
             DungeonFindHerb = registry.Register(DungeonFindHerbDescriptor);
             PoisonDecayResume = registry.Register(PoisonDecayResumeDescriptor);
+            RefundMovementFocus = registry.Register(RefundMovementFocusDescriptor);
             SessionProbe = selfTests ? registry.Register(SessionProbeDescriptor) : TweakRegistry.InvalidHandle;
         }
 
@@ -366,6 +389,50 @@ namespace FTKModFramework.Core
         {
             if (!registry.IsOn(handle)) return false;
             return runOriginal && cycleEnded && isMasterClient && coolDownSet;
+        }
+        /// <summary>The ConvertFocusToAction postfix's decision: count this call only when the tweak is
+        /// on, the prefix captured vanilla's guard for the owner, and both points actually moved.</summary>
+        internal static bool RefundFocusCounts(TweakRegistry registry, int handle, RefundFocusConversion before,
+            int focusAfter, int actionAfter)
+        {
+            if (!registry.IsOn(handle)) return false;
+            return RefundFocus.Converted(before, focusAfter, actionAfter);
+        }
+
+        /// <summary>The refund gate. Off, faulted out of the run or uninitialized reports Off, so
+        /// nothing is refunded and no pip is shown.</summary>
+        internal static RefundFocusBlock RefundFocusGate(TweakRegistry registry, int handle, RefundFocusState state)
+        {
+            if (!registry.IsOn(handle)) return RefundFocusBlock.Off;
+            return RefundFocus.Check(state);
+        }
+
+        /// <summary>Refundable pips to show on the HUD; 0 whenever the gate refuses.</summary>
+        internal static int RefundFocusPips(TweakRegistry registry, int handle, RefundFocusState state)
+        {
+            if (!registry.IsOn(handle)) return 0;
+            return RefundFocus.Pips(state);
+        }
+
+        /// <summary>One refund: the gate, then the exact reversal. Returns the block, None when the
+        /// refund was applied.</summary>
+        internal static RefundFocusBlock RefundFocusApply(TweakRegistry registry, int handle, RefundFocusLedger ledger,
+            long key, RefundFocusState state, IRefundFocusSetters setters)
+        {
+            RefundFocusBlock block = RefundFocusGate(registry, handle, state);
+            if (block != RefundFocusBlock.None) return block;
+            RefundFocus.Apply(ledger, key, setters);
+            return RefundFocusBlock.None;
+        }
+
+        /// <summary>A clear trigger. Off does nothing: counting only happens while on, and turning a
+        /// Session tweak off is itself a Session set change that empties the ledger.</summary>
+        internal static bool RefundFocusClear(TweakRegistry registry, int handle, RefundFocusLedger ledger,
+            RefundFocusClear trigger, long key, bool inCombat = true)
+        {
+            if (!registry.IsOn(handle)) return false;
+            ledger.Clear(trigger, key, inCombat);
+            return true;
         }
     }
 }

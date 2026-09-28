@@ -55,6 +55,7 @@ namespace FTKModFramework.Core
         private TweakSessionState _state;
         private TweakSessionMode? _mode;
         private string _source;
+        private int _sessionGeneration;
 
         internal TweakRegistry(Action<string> warn)
         {
@@ -69,6 +70,10 @@ namespace FTKModFramework.Core
         internal TweakSessionMode? SessionMode { get { return _mode; } }
         /// <summary>Where the current Session set came from, or null when there is none.</summary>
         internal string SessionSource { get { return _source; } }
+        /// <summary>Changes whenever the Session set is replaced: at capture, SetSessionSet and clear.
+        /// A lock does not change it, and a locked set never changes until its clear, so per-run state
+        /// that must not outlive its run's rules compares this instead of hooking each trigger.</summary>
+        internal int SessionGeneration { get { return _sessionGeneration; } }
 
         internal TweakDescriptor Get(int handle)
         {
@@ -218,6 +223,7 @@ namespace FTKModFramework.Core
             _state = TweakSessionState.Captured;
             _mode = mode;
             _source = fromPreferences ? PreferencesSource : PendingSource;
+            _sessionGeneration++;
             RefreshAll();
             return true;
         }
@@ -238,6 +244,7 @@ namespace FTKModFramework.Core
                     _session[handle] = true;
             }
             _source = string.IsNullOrEmpty(sourceLabel) ? "unlabeled" : sourceLabel;
+            _sessionGeneration++;
             RefreshAll();
             return true;
         }
@@ -259,6 +266,7 @@ namespace FTKModFramework.Core
             _state = TweakSessionState.None;
             _mode = null;
             _source = null;
+            _sessionGeneration++;
             if (_initialized)
             {
                 Array.Clear(_session, 0, _session.Length);
