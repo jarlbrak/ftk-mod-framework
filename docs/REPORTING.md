@@ -108,6 +108,28 @@ A field the framework cannot read shows `unavailable`. The watchdog changes noth
 game. To turn it off, set `StuckTurnWatchdog = false` under `[Diagnostics]` in
 `BepInEx/config/com.ftkmf.framework.cfg`; it is read at startup.
 
+## Softlock signatures
+
+The framework also recognizes several known softlock paths
+([Spec #265](https://github.com/jarlbrak/ftk-mod-framework/issues/265) FR-2). When it sees one, it
+writes one Warning line to `LogOutput.log` that starts with `SOFTLOCK-SIGNATURE kind=`. The line
+is in the same `key=value` form and under 2 KB. The host's pending acknowledgements after a
+disconnect are already in the `STUCK-TURN reason=host-ack-15s` line above.
+
+| Line | When |
+| --- | --- |
+| `SOFTLOCK-SIGNATURE kind=load-exception poi=<type> hex=<big>,<small> ... exception=<type> message=<text> stack=<frames>` | A place on the map fails to finish loading (`MiniHexInfo.DeserializeFinalRPC` throws), which leaves the load waiting forever. The error itself is still raised as before. The line keeps the frames inside that method, separated by `\|` |
+| `SOFTLOCK-SIGNATURE kind=loot-vote reason=<empty-queue\|null-voter\|unknown-voter> queue=<n> ...` | A loot screen starts with nobody to collect. This is the suspected cause of a lore book with no Collect button |
+| `SOFTLOCK-SIGNATURE kind=poi-rediscovery source=<movement\|walk> hex=<big>,<small> poi=<type> count=3 ...` | One discovery sequence finds the same hidden place three times. This is suspected in the teleport-scroll discovery loop |
+| `SOFTLOCK-SIGNATURE kind=stale-dungeon reason=<no-dungeon\|off-hex> character=<photon>:<turn> ...` | At the start of a turn, a character is still marked as inside a dungeon but no dungeon is recorded or the character is elsewhere. This is suspected after the King's Maze |
+| `SOFTLOCK-SIGNATURE kind=combat-without-encounter character=<photon>:<turn> ...` | At the start of a turn, a character is still marked as in combat while no fight is running. This is suspected after a confused flee |
+
+A stale dungeon or combat flag is written once when it appears and again only after it has
+cleared and returned. One launch writes at most ten lines of each kind. These lines only read the
+game's state and change nothing. They never raise an automatic error report or a report prompt.
+To turn them off, set `SoftlockSignatures = false` under `[Diagnostics]`; it is read at startup,
+and when it is off the framework does not install these hooks at all.
+
 ## Save and manage drafts
 
 Choose **Save draft** to keep the report on this computer, then use **Drafts** to

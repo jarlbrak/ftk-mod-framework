@@ -159,7 +159,7 @@ namespace FTKModFramework.Core.Diagnostics
     /// <summary>Builds the one-line snapshot: <c>STUCK-TURN key=value ...</c> in insertion order.
     /// Values are reduced to printable ASCII with no spaces, so the line is one log entry and its
     /// character count equals its UTF-8 byte count; the whole line is capped at
-    /// <see cref="MaxLength"/>.</summary>
+    /// <see cref="MaxLength"/>. The softlock signatures reuse it with their own prefix.</summary>
     internal sealed class StuckTurnLine
     {
         internal const string Prefix = "STUCK-TURN";
@@ -167,9 +167,23 @@ namespace FTKModFramework.Core.Diagnostics
         internal const int MaxValueLength = 160;
         private const string Truncated = " truncated=1";
 
-        private readonly StringBuilder _text = new StringBuilder(Prefix, 512);
+        private readonly StringBuilder _text;
+
+        internal StuckTurnLine() : this(Prefix) { }
+
+        internal StuckTurnLine(string prefix)
+        {
+            _text = new StringBuilder(prefix, 512);
+        }
 
         internal StuckTurnLine Add(string key, string value)
+        {
+            return Add(key, value, MaxValueLength);
+        }
+
+        /// <summary>Adds a value with its own length cap, for the one field (a stack trace) that
+        /// needs more than <see cref="MaxValueLength"/>. The line cap still applies.</summary>
+        internal StuckTurnLine Add(string key, string value, int maxValueLength)
         {
             _text.Append(' ').Append(key).Append('=');
             if (string.IsNullOrEmpty(value))
@@ -177,13 +191,14 @@ namespace FTKModFramework.Core.Diagnostics
                 _text.Append('-');
                 return this;
             }
-            int length = Math.Min(value.Length, MaxValueLength);
+            if (maxValueLength < 1) maxValueLength = 1;
+            int length = Math.Min(value.Length, maxValueLength);
             for (int i = 0; i < length; i++)
             {
                 char c = value[i];
                 _text.Append(c > ' ' && c < 127 ? c : '_');
             }
-            if (value.Length > MaxValueLength) _text.Append("...");
+            if (value.Length > maxValueLength) _text.Append("...");
             return this;
         }
 

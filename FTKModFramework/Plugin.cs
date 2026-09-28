@@ -128,6 +128,12 @@ namespace FTKModFramework
         /// </summary>
         public static ConfigEntry<bool> StuckTurnWatchdog;
 
+        /// <summary>
+        /// Write one SOFTLOCK-SIGNATURE warning line when a known softlock path is seen (spec #265 FR-2).
+        /// Diagnostics only; read once at startup, before PatchAll, whose Prepare skips the hooks when off.
+        /// </summary>
+        public static ConfigEntry<bool> SoftlockSignatures;
+
         // ---- Diagnostics: scale-and-performance gate (P5a, #22) ----------------------------------------
         // The gate measures one content load against a persisted calibration baseline + tunable budgets and
         // emits exactly one SCALE-BUDGET line. The five budget fields are calibrated later; the values here
@@ -294,6 +300,12 @@ namespace FTKModFramework
                 "(90 seconds behind a shop, inventory or message), or when the host waits over 15 seconds for a " +
                 "player's acknowledgement. Changes nothing in the game and never opens a report. Read at startup.");
             if (StuckTurnWatchdog.Value) gameObject.AddComponent<Core.Diagnostics.StuckTurnWatchdog>();
+
+            SoftlockSignatures = Config.Bind("Diagnostics", "SoftlockSignatures", true,
+                "Write one SOFTLOCK-SIGNATURE warning line to LogOutput.log, and so to bug-report diagnostics, when " +
+                "a known softlock path appears: a POI that fails to load, a loot vote with no voter, the same hidden " +
+                "place discovered over and over, a stale dungeon flag, or a combat flag with no fight. Changes " +
+                "nothing in the game and never opens a report. Off removes these hooks. Read at startup.");
 
             DiagnosticsEnableGate =Config.Bind("Diagnostics", "EnableScaleBudgetGate", false,
                 "DEVELOPMENT: measure each content load against a calibration baseline and budgets, emitting one " +
