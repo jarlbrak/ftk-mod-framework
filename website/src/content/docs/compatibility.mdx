@@ -6,7 +6,7 @@ import catalog from '../../data/catalog';
 
 ## Know your versions
 
-Framework and mods have separate release numbers. This site documents **framework 1.5.1** (stable), **framework 1.6.0** (preview), **Paladin 1.4.0**, **Thief 1.0.0**, **Possum 1.0.0**, and **Lore Store Unlocked 1.0.1**. These are published downloads. No unreleased features are presented as available.
+Framework and mods have separate release numbers. This site documents **framework 1.5.1** (stable), **framework 1.6.1** (preview), **Paladin 1.4.0**, **Thief 1.0.0**, **Possum 1.0.0**, and **Lore Store Unlocked 1.0.1**. These are published downloads. No unreleased features are presented as available.
 
 <table><thead><tr><th>Mod</th><th>Published version</th><th>Framework range</th><th>Published platforms</th><th>Dependencies</th></tr></thead><tbody>{catalog.packages.map(p=><tr><td>{p.name}</td><td>{p.version}</td><td>{p.frameworkRange}</td><td>{p.platforms.join(', ')}</td><td>{p.dependencies.length?'See package':'None'}</td></tr>)}</tbody></table>
 
@@ -22,7 +22,7 @@ Framework 1.4.0 includes Skyharbor on the same framework download platforms. Its
 
 The background is enabled by default and can be [disabled in the configuration](../troubleshooting/#change-the-menu-background). Its local animation does not change character statistics, saves, or multiplayer content identities. Online co-op gameplay remains unverified.
 
-## Tweaks (framework 1.6.0 preview)
+## Tweaks (framework 1.6.1 preview)
 
 [Tweaks](../tweaks/) are part of the framework download and need no mod. Tweaks marked **Only you** change your own display and controls. **Shared rules** tweaks are decided when a run starts, written into its saves, and restored on resume; a save made before 1.6.0 follows your current settings. In online co-op, Shared rules tweaks are off for everyone until a later release.
 
@@ -38,7 +38,7 @@ Online co-op is unverified. Matching versions and mod sets is necessary preparat
 
 ## Published versus preview
 
-Published pages describe the immutable catalog packages named above. Future previews must carry a separate **Preview / not published** label and must never replace published stat tables. Selecting the launcher's Preview channel is a separate framework update choice; it is how you get framework 1.6.0. Keep it out of an ongoing run unless you intend to test that release.
+Published pages describe the immutable catalog packages named above. Future previews must carry a separate **Preview / not published** label and must never replace published stat tables. Selecting the launcher's Preview channel is a separate framework update choice; it is how you get framework 1.6.1. Keep it out of an ongoing run unless you intend to test that release.
 
 ## Thunderstore Windows tester preview
 

@@ -40,6 +40,8 @@ If Skyharbor is unexpectedly missing, check that the launcher installed framewor
 
 Framework 1.6.0 adds [Tweaks](../tweaks/). If one misbehaves, turn it off in **Mods > Tweaks**. A tweak marked **Shared rules** keeps its setting for the current run, because the run's rules are decided at start and saved with it. Your change applies to runs you start afterwards; resuming this run's saves keeps the rules they recorded. Please [report it](#report-a-problem) as well.
 
+If pressing the refund focus key ends your turn, you are on the 1.6.0 preview, whose refund key was the game's End Turn key. Update to framework 1.6.1, which uses **F**, or see [refund focus spent on movement](../tweaks/#refund-focus-spent-on-movement).
+
 ## Raw text such as `STR_` appears in the game
 
 The game shows a raw key, a name starting with `STR_`, when it cannot find the text for it. To help find the cause, close the game, open `BepInEx/config/com.ftkmf.framework.cfg`, set `LogLocalizationMisses = true` under `[Diagnostics]`, and relaunch. Each missing key then adds one line to `BepInEx/LogOutput.log` naming it. Attach those lines to your report, then set the option back to `false`. It never changes any text. See [diagnostics settings](../tweaks/#diagnostics-settings-for-troubleshooting).
