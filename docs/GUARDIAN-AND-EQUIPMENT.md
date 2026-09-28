@@ -119,6 +119,12 @@ renderer paths on newly instantiated equipped weapons, shields and helmets.
 `.` names the component root. Include break fragments when the native weapon has
 them. Native prefabs, hit targets and animation structure remain intact.
 
+`Content.SetHelmetHairVisibility(item, top, bottom)` optionally controls native
+hair sections on fresh instances of a registered custom helmet. Neck accessories
+that reuse a crown-covering helmet template may need both sections enabled to
+avoid exposing an open scalp. Omission preserves the template's behavior. This
+API is unreleased; verify front and rear views in game before accepting the fit.
+
 `Content.SetItemDisplayMeshesFromGlb(item, ItemRendererMesh[])` separately replaces
 rigid renderers relative to the native loot-display prefab root. Shops and large
 inventory cards render these objects through the native offscreen camera; `icon`
@@ -148,6 +154,7 @@ authoring example, subject to its documented live gates.
 | `guardianBonuses` | item, weapon | The equipment bonus fields above; Focus and Reckoning require a weapon |
 | `modifiers` | item, weapon | `armor`, `resistance`, `reflect` integers 0-100; `vitality`, `speed` numbers -1 to 1 |
 | `itemModels` | item, weapon | Equipped rigid renderers: `path`, `model`, `texture` |
+| `helmetHairVisibility` | helmet item | Unreleased: required boolean `top` and `bottom` when present; overrides native hair visibility on fresh equipped instances |
 | `displayModels` | item, weapon | Loot/card rigid renderers, relative to the native display prefab root |
 | `apparelModels` | item | `femaleBinding`, `maleBinding`, and `renderers` with `nativeMesh` in addition to model fields |
 | `playerModels` | class | Array of `skinset`, required `body`, optional `apparel` and `backpack` renderer declarations |

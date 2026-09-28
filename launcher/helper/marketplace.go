@@ -1173,6 +1173,11 @@ func marketActionReferences(ids []string, minimum, maximum int) bool {
 	return true
 }
 
+type marketHelmetHairVisibility struct {
+	Top    *bool `json:"top"`
+	Bottom *bool `json:"bottom"`
+}
+
 func marketContent(b []byte) error {
 	var c struct {
 		Entries []struct {
@@ -1194,6 +1199,7 @@ func marketContent(b []byte) error {
 			Icon                     string                       `json:"icon,omitempty"`
 			ApparelModels            *marketApparelModel          `json:"apparelModels,omitempty"`
 			Modifiers                *marketItemModifiers         `json:"modifiers,omitempty"`
+			HelmetHairVisibility     *marketHelmetHairVisibility  `json:"helmetHairVisibility,omitempty"`
 			ItemModels               []marketModelRenderer        `json:"itemModels,omitempty"`
 			OffHandModels            []marketModelRenderer        `json:"offHandModels,omitempty"`
 			DisplayModels            []marketModelRenderer        `json:"displayModels,omitempty"`
@@ -1232,18 +1238,18 @@ func marketContent(b []byte) error {
 		if entry.Opportunist && entry.Kind != "class" {
 			return errors.New("opportunist requires a class")
 		}
-		if entry.PrecisionWeapon != "" && (entry.Kind != "weapon" || !contains([]string{"paired", "bow"}, entry.PrecisionWeapon)) {
+		if entry.PrecisionWeapon != "" && (entry.Kind != "weapon" || !contains([]string{"paired", "bow", "pistol"}, entry.PrecisionWeapon)) {
 			return errors.New("invalid precision weapon declaration")
 		}
-		if entry.PrecisionAction != "" && (entry.Kind != "proficiency" || !contains([]string{"prepare", "pierce"}, entry.PrecisionAction)) {
+		if entry.PrecisionAction != "" && (entry.Kind != "proficiency" || !contains([]string{"prepare", "pierce", "shot"}, entry.PrecisionAction)) {
 			return errors.New("invalid precision action declaration")
 		}
 		if entry.ThiefArtifact != "" {
-			expectedWeapon := "paired"
+			validWeapon := entry.PrecisionWeapon == "paired"
 			if entry.ThiefArtifact == "looseAndLeave" {
-				expectedWeapon = "bow"
+				validWeapon = entry.PrecisionWeapon == "bow" || entry.PrecisionWeapon == "pistol"
 			}
-			if entry.Kind != "weapon" || !contains([]string{"borrowedFortune", "lastLight", "looseAndLeave"}, entry.ThiefArtifact) || entry.PrecisionWeapon != expectedWeapon {
+			if entry.Kind != "weapon" || !contains([]string{"borrowedFortune", "lastLight", "looseAndLeave"}, entry.ThiefArtifact) || !validWeapon {
 				return errors.New("invalid thief artifact precision weapon")
 			}
 		}
@@ -1305,6 +1311,12 @@ func marketContent(b []byte) error {
 		if entry.OverworldAilmentImmunity != nil &&
 			(entry.Kind != "class" || strings.TrimSpace(entry.OverworldAilmentImmunity.DisplayName) == "") {
 			return errors.New("overworldAilmentImmunity requires a class and display name")
+		}
+		if entry.HelmetHairVisibility != nil {
+			hair := entry.HelmetHairVisibility
+			if entry.Kind != "item" || hair.Top == nil || hair.Bottom == nil {
+				return errors.New("helmetHairVisibility requires an item and both top and bottom booleans")
+			}
 		}
 		if entry.ItemModels != nil {
 			if entry.Kind != "item" && entry.Kind != "weapon" {
@@ -1665,7 +1677,7 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 	}
 	switch kind {
 	case "weapon":
-		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_NoRegularAttack=m_NoRegularAttack")
+		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_NoRegularAttack=m_NoRegularAttack m_ObjectSlot=m_ObjectSlot m_CanBreak=m_CanBreak m_NoFocus=m_NoFocus")
 	case "proficiency":
 		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride fullslots=m_FullSlots customvalue=m_CustomValue repeatcount=m_RepeatCount m_Target=m_Target")
 		add("m_DmgTypeOverride=m_DmgTypeOverride m_WpnTypeOverride=m_WpnTypeOverride m_TargetFriendly=m_TargetFriendly m_Harmless=m_Harmless m_PerSlotSkillRoll=m_PerSlotSkillRoll m_Quickness=m_Quickness m_DamagePerAttack=m_DamagePerAttack m_Suicide=m_Suicide m_GunShot=m_GunShot m_BoatDamage=m_BoatDamage m_ChaosOption=m_ChaosOption")

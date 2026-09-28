@@ -4,7 +4,7 @@ Status: all 42 ordinary equipment rows are authored in the local development pac
 
 ## Conventions and acquisition bands
 
-Damage is **base weapon damage**, before native level growth. Every custom weapon here has damage gain 1, physical damage, no break chance, and ordinary Focus use. Native paired items remain unchanged. At player level 8, a base-25 weapon starts at 33 damage before other bonuses. All dagger sets occupy both hands and use Speed, with two checks in the first three bands and three checks from Masterwork onward; all bows use four Awareness checks and two hands. The displayed class primary stat does not change a bow's Awareness checks.
+Damage is **base weapon damage**, before native level growth. Every custom weapon here has damage gain 1, physical damage, no break chance, and ordinary Focus use. Native paired items remain unchanged. At player level 8, a base-25 weapon starts at 33 damage before other bonuses. All dagger sets occupy both hands and use Speed, with two checks in the first three bands and three checks from Masterwork onward; all custom pistols use four Talent checks and two equipment hands. The Thief restores one round at the start of each combat turn while one is equipped; other classes use native firearm reload timing. The pistol damage curve assumes a Thief can fire every turn.
 
 Armor and Resistance are flat points. SPD, AWR, TAL, and VIT bonuses are whole stat points, so +2 SPD corresponds to a native stat fraction of +0.02. Focus bonuses increase capacity only; equipping a charm never fills it. Listed values are the complete authored modifier set. Unlisted bonuses, inherited skills, critical chance, evade bonuses, and immunities must be cleared.
 
@@ -47,21 +47,23 @@ Twin Feint grants Prepared after a positive-damage basic strike that misses exac
 
 One-handed dagger and buckler remains a last-resort native loadout when a preferred weapon is unavailable. It can use native attacks, shields, and Slip Away, but receives no Sneak Attack, Twin Feint, custom item line, or artifact. There is no shield alongside the paired sets.
 
-## Shortbows: seven ordinary weapons
+## Flintlock pistols: seven ordinary weapons
 
-Each row includes Shoot and exactly one authored weapon action. The custom bow replaces inherited `bowShort` actions on its private prefab. A bow offers no positional safety or increased combat join range simply because it is ranged.
+The `thief_bow_*` internal IDs are retained from the published 1.0.0 items so saved equipment resolves. Their display names, native template, actions, and models are now pistols.
+
+Each compact pirate-style flintlock is a two-handed equipment item, so it cannot be paired with a shield. The avatar may hold it with one hand. Each has four Talent checks, physical damage, and native firearm ammunition. A Thief with any custom pistol restores one round at the start of each combat turn through Instant Reload, allowing one shot per turn if the native attack uses one round. Another class must reload through the native firearm cycle. Fire and the authored special shot each consume ammunition; neither grants a free extra attack.
 
 | Band | ID | Name | Base damage | Base gold | Complete action differences |
 | --- | --- | --- | ---: | ---: | --- |
-| Street | `thief_bow_street` | Rooftop Bow | 10 | 16 | Shoot 1.00, Draw Out 0.60 |
-| Burglar | `thief_bow_burglar` | Alley Recurve | 14 | 40 | Shoot, Thread the Needle 0.75 |
-| Guild | `thief_bow_guild` | Guild Shortbow | 18 | 85 | Shoot, Thread the Needle 0.75 |
-| Masterwork | `thief_bow_masterwork` | Gloamwood Bow | 23 | 180 | Shoot, Thread the Needle 0.75 |
-| Locksmith | `thief_bow_locksmith` | Latchspring | 29 | 390 | Shoot, Draw Out 0.80 |
-| Nightblade | `thief_bow_nightblade` | Blackthorn | 32 | 440 | Shoot and Draw Out only; trades penetration for damage |
-| Wayfarer | `thief_bow_wayfarer` | Farstep | 30 | 420 | Shoot, Thread the Needle 0.85 |
+| Street | `thief_bow_street` | Rooftop Flintlock | 10 | 16 | Fire 1.00, Bait Shot 0.60 |
+| Burglar | `thief_bow_burglar` | Windowlock | 14 | 40 | Fire, Deadeye 0.75 |
+| Guild | `thief_bow_guild` | Guild Sidearm | 18 | 85 | Fire, Deadeye 0.75 |
+| Masterwork | `thief_bow_masterwork` | Gloam Flintlock | 23 | 180 | Fire, Deadeye 0.75 |
+| Locksmith | `thief_bow_locksmith` | Latchlock | 29 | 390 | Fire, Bait Shot 0.80 |
+| Nightblade | `thief_bow_nightblade` | Blackwake | 32 | 440 | Fire, Bait Shot 0.60 |
+| Wayfarer | `thief_bow_wayfarer` | Farstep Flintlock | 30 | 420 | Fire, Deadeye 0.85 |
 
-The early/middle bow curve follows native Long, Great, and Dragon bow base damage: 14, 18, 23. The proposed endgame 29-32 curve exceeds Royal Bow's 25 base damage and needs comparison against native actions and bonuses, especially on Hunter. It supports a viable secondary weapon path without granting Twin Feint. Reducing that endgame curve is the first correction if it replaces native bows too broadly.
+These numbers deliberately retain the earlier lower weapon damage curve while removing the Thief's reload turn, rather than raising damage to compensate for reload. Four Talent checks also make perfect results less reliable than the early two-check dagger path. Sustained output, native reload behavior for non-Thieves, and interaction with Focus need live comparison before balance is accepted.
 
 ## Body armor: seven coats
 
@@ -127,10 +129,10 @@ These totals include coat, hood, boots, and matching charm. Both authored weapon
 | --- | --- | --- | --- | --- |
 | Locksmith paired daggers | 6 / 9 | 80 / 72 / 81 | 52 / 4 | Preparation, tool checks, magical defense, larger Focus pool |
 | Nightblade paired daggers | 9 / 4 | 86 / 72 / 76 | 50 / 3 | Fast precision and raw damage, weak magic defense |
-| Wayfarer bow | 6 / 7 | 81 / 81 / 74 | 50 / 3 | Bow accuracy and balanced light protection |
+| Wayfarer pistol | 6 / 7 | 81 / 81 / 74 | 50 / 3 | Talent pistol accuracy and balanced light protection |
 | Wayfarer paired daggers | 6 / 7 | 81 / 81 / 74 | 50 / 3 | Penetration, with less Speed than Nightblade |
 
-There is no hidden bonus for these combinations. For example, a Nightblade can take the Locksmith hood to improve magic defense, or a bow user can use Nightblade boots for Speed. Mixed outfits should retain a coherent visual style. A one-handed emergency weapon may gain native shield defenses but loses the weapon-dependent Thief mechanics; it is not a third supported endgame build.
+There is no hidden bonus for these combinations. For example, a Nightblade can take the Locksmith hood to improve magic defense, or a pistol user can use Nightblade boots for Speed. Mixed outfits should retain a coherent visual style. A one-handed emergency weapon may gain native shield defenses but loses the weapon-dependent Thief mechanics; it is not a third supported endgame build.
 
 ## Inventory and production boundaries
 
@@ -138,4 +140,4 @@ There are 42 ordinary items in this document and [three artifacts](ARTIFACTS.md)
 
 Every equipped piece needs a verified native item type and template, explicit modifiers, an original icon, original item/display art where rendered, and save/acquisition checks. Native modifiers do not automatically transfer to a new item ID. Reusing original modular parts within a family is allowed; changing only a vanilla texture does not meet the original-art goal.
 
-The local package now includes the complete equipment inventory, eight action variants, and the designed Street starting loadout. Weapon actions, artifact signatures, and class combat capability must pass runtime checks before it is a completed class or a production catalog package.
+The local package now includes the complete equipment inventory, nine action variants, and the designed Street starting loadout. Weapon actions, artifact signatures, and class combat capability must pass runtime checks before it is a completed class or a production catalog package.

@@ -501,7 +501,7 @@ namespace FTKModFramework.Core.Data
                 e.Flavor != null || e.Description != null || e.Behavior != null || e.BehaviorCategory != null ||
                 e.Guardian || e.Opportunist || e.PrecisionWeapon != null || e.PrecisionAction != null ||
                 e.ThiefArtifact != null || e.OverworldAilmentImmunity != null || e.GuardianBonuses != null ||
-                e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
+                e.HelmetHairVisibility != null || e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
                 e.OffHandModels != null || e.DisplayModels != null || e.PlayerModels != null || e.RaceBindings != null;
         }
 
@@ -562,7 +562,7 @@ namespace FTKModFramework.Core.Data
                     throw new ArgumentException("opportunist requires a registered custom class");
                 if (!string.IsNullOrEmpty(c.Entry.PrecisionWeapon) &&
                     (c.Kind != "weapon" || !Content.SetPrecisionWeapon((FTK_weaponStats2)c.Row, c.Entry.PrecisionWeapon)))
-                    throw new ArgumentException("precisionWeapon requires a registered physical paired weapon or bow");
+                    throw new ArgumentException("precisionWeapon requires a registered physical paired weapon, bow, or pistol");
                 if (!string.IsNullOrEmpty(c.Entry.PrecisionAction) &&
                     (c.Kind != "proficiency" || !Content.SetPrecisionAction((FTK_proficiencyTable)c.Row, c.Entry.PrecisionAction)))
                     throw new ArgumentException("precisionAction requires a registered direct damage proficiency");
@@ -643,6 +643,12 @@ namespace FTKModFramework.Core.Data
                     {
                         m.Apply(modifier);
                     }) == null) throw new ArgumentException("item modifier registration rejected");
+                }
+                if (c.Entry.HelmetHairVisibility != null)
+                {
+                    HelmetHairVisibilityEntry hair = c.Entry.HelmetHairVisibility;
+                    if (c.Kind != "item" || !Content.SetHelmetHairVisibility(c.Row as FTK_items, hair.Top, hair.Bottom))
+                        throw new ArgumentException("helmetHairVisibility requires a registered custom helmet item");
                 }
                 if (c.Entry.ItemModels != null)
                 {

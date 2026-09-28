@@ -11,6 +11,18 @@ namespace FTKModFramework.Core
         private static Dictionary<int, EnemyRendererMesh[]> Models = new Dictionary<int, EnemyRendererMesh[]>();
         private static Dictionary<int, EnemyRendererMesh[]> OffHands = new Dictionary<int, EnemyRendererMesh[]>();
         private static Dictionary<int, EnemyRendererMesh[]> Displays = new Dictionary<int, EnemyRendererMesh[]>();
+        private static Dictionary<int, bool[]> HelmetHair = new Dictionary<int, bool[]>();
+        internal static void RegisterHelmetHairVisibility(int id, bool top, bool bottom)
+        { HelmetHair[id] = new[] { top, bottom }; }
+        internal static void ApplyHelmetHairVisibility(FTK_itembase.ID id, GameObject instance)
+        {
+            bool[] visibility;
+            if (instance == null || !HelmetHair.TryGetValue((int)id, out visibility)) return;
+            Helmet helmet = instance.GetComponent<Helmet>();
+            if (helmet == null) return;
+            helmet.m_IsHairTopOn = visibility[0];
+            helmet.m_IsHairBottomOn = visibility[1];
+        }
         internal static IEnumerable<KeyValuePair<int, EnemyRendererMesh[]>> ReloadPlans(bool display)
         { return display ? Displays : Models; }
         internal static IEnumerable<KeyValuePair<int, EnemyRendererMesh[]>> ReloadOffHandPlans()
@@ -21,10 +33,12 @@ namespace FTKModFramework.Core
         internal static Action SuspendForReload()
         {
             Dictionary<int, EnemyRendererMesh[]> models = Models, offHands = OffHands, displays = Displays;
+            Dictionary<int, bool[]> helmetHair = HelmetHair;
+            HelmetHair = new Dictionary<int, bool[]>();
             Models = new Dictionary<int, EnemyRendererMesh[]>();
             OffHands = new Dictionary<int, EnemyRendererMesh[]>();
             Displays = new Dictionary<int, EnemyRendererMesh[]>();
-            return delegate { Models = models; OffHands = offHands; Displays = displays; };
+            return delegate { Models = models; OffHands = offHands; Displays = displays; HelmetHair = helmetHair; };
         }
         internal static void RegisterDisplay(int id, EnemyRendererMesh[] meshes) { Displays[id] = (EnemyRendererMesh[])meshes.Clone(); }
         internal static void RegisterOffHand(int id, EnemyRendererMesh[] meshes) { OffHands[id] = (EnemyRendererMesh[])meshes.Clone(); }
@@ -74,7 +88,11 @@ namespace FTKModFramework.Core
     [HarmonyPatch(typeof(FTKHub), "CreateHelmet")]
     internal static class ItemHelmetModelPatch
     {
-        private static void Postfix(FTK_itembase.ID _helmetID, GameObject __result) { ItemModelRegistry.Apply(_helmetID, __result); }
+        internal static void Postfix(FTK_itembase.ID _helmetID, GameObject __result)
+        {
+            ItemModelRegistry.Apply(_helmetID, __result);
+            ItemModelRegistry.ApplyHelmetHairVisibility(_helmetID, __result);
+        }
     }
 
     // Inventory and shop cards render this fresh loot clone through OffscreenCamera. Icon

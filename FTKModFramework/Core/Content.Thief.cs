@@ -16,10 +16,17 @@ namespace FTKModFramework.Core
             return ThiefRuntime.RegisterClass(id);
         }
 
-        /// <summary>Declare a registered physical weapon as a paired dagger or bow precision weapon.</summary>
+        /// <summary>Declare a registered physical weapon as a paired dagger, bow, or pistol precision weapon.</summary>
         public static bool SetPrecisionWeapon(FTK_weaponStats2 weapon, string kind)
         {
             if (weapon == null || weapon._dmgtype != FTK_weaponStats2.DamageType.physical) return false;
+            if (kind == "pistol")
+            {
+                if (weapon.m_ObjectSlot != FTK_itembase.ObjectSlot.twoHands || weapon.m_Prefab == null) return false;
+                Weapon component = weapon.m_Prefab.GetComponentInChildren<Weapon>(true);
+                if (component == null || component.m_WeaponType != Weapon.WeaponType.firearm ||
+                    component.m_AmmoCapacity < 1) return false;
+            }
             int id;
             if (!ContentRegistry.TryGetSyntheticId(weapon.m_ID, out id, typeof(FTK_weaponStats2DB)) ||
                 !object.ReferenceEquals(Db<FTK_weaponStats2DB>().GetEntry((FTK_itembase.ID)id), weapon)) return false;

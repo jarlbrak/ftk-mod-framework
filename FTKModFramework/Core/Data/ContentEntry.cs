@@ -62,6 +62,7 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("icon")] public string Icon;
         [JsonProperty("apparelModels")] public ApparelModelEntry ApparelModels;
         [JsonProperty("modifiers")] public ItemModifierEntry Modifiers;
+        [JsonProperty("helmetHairVisibility")] public HelmetHairVisibilityEntry HelmetHairVisibility;
         [JsonProperty("itemModels")] public ModelRendererEntry[] ItemModels;
         [JsonProperty("offHandModels")] public ModelRendererEntry[] OffHandModels;
         [JsonProperty("displayModels")] public ModelRendererEntry[] DisplayModels;
@@ -71,6 +72,26 @@ namespace FTKModFramework.Core.Data
     }
     // Populated by JSON reflection.
 #pragma warning disable CS0649
+    internal sealed class HelmetHairVisibilityEntry
+    {
+        [JsonProperty("top", Required = Required.Always), JsonConverter(typeof(HelmetHairBooleanConverter))] public bool Top;
+        [JsonProperty("bottom", Required = Required.Always), JsonConverter(typeof(HelmetHairBooleanConverter))] public bool Bottom;
+    }
+
+    // Newtonsoft otherwise coerces strings and numbers to booleans, unlike package admission.
+    internal sealed class HelmetHairBooleanConverter : JsonConverter
+    {
+        public override bool CanConvert(System.Type objectType) { return objectType == typeof(bool); }
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType != JsonToken.Boolean)
+                throw new JsonSerializationException("helmetHairVisibility requires JSON boolean tokens");
+            return (bool)reader.Value;
+        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { writer.WriteValue((bool)value); }
+    }
+
     internal sealed class ResistanceDamageBonusEntry
     {
         [JsonProperty("sources")] public string[] Sources;

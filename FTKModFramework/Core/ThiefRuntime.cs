@@ -6,8 +6,8 @@ namespace FTKModFramework.Core
 {
     internal static class ThiefRuntime
     {
-        internal enum WeaponKind { None, Paired, Bow }
-        internal enum ActionKind { None, Prepare, Pierce }
+        internal enum WeaponKind { None, Paired, Bow, Pistol }
+        internal enum ActionKind { None, Prepare, Pierce, Shot }
         internal enum ArtifactKind { None, BorrowedFortune, LastLight, LooseAndLeave }
 
         private sealed class PendingSneak
@@ -129,7 +129,8 @@ namespace FTKModFramework.Core
 
         internal static bool RegisterWeapon(int id, string kind)
         {
-            WeaponKind parsed = kind == "paired" ? WeaponKind.Paired : kind == "bow" ? WeaponKind.Bow : WeaponKind.None;
+            WeaponKind parsed = kind == "paired" ? WeaponKind.Paired :
+                kind == "bow" ? WeaponKind.Bow : kind == "pistol" ? WeaponKind.Pistol : WeaponKind.None;
             if (parsed == WeaponKind.None) return false;
             WeaponKind existing;
             if (weapons.TryGetValue(id, out existing)) return existing == parsed;
@@ -139,7 +140,8 @@ namespace FTKModFramework.Core
 
         internal static bool RegisterAction(int id, string kind)
         {
-            ActionKind parsed = kind == "prepare" ? ActionKind.Prepare : kind == "pierce" ? ActionKind.Pierce : ActionKind.None;
+            ActionKind parsed = kind == "prepare" ? ActionKind.Prepare :
+                kind == "pierce" ? ActionKind.Pierce : kind == "shot" ? ActionKind.Shot : ActionKind.None;
             if (parsed == ActionKind.None) return false;
             ActionKind existing;
             if (actions.TryGetValue(id, out existing)) return existing == parsed;
@@ -154,7 +156,8 @@ namespace FTKModFramework.Core
                 signature == "looseAndLeave" ? ArtifactKind.LooseAndLeave : ArtifactKind.None;
             WeaponKind weapon;
             if (parsed == ArtifactKind.None || !weapons.TryGetValue(id, out weapon) ||
-                (parsed == ArtifactKind.LooseAndLeave ? weapon != WeaponKind.Bow : weapon != WeaponKind.Paired)) return false;
+                (parsed == ArtifactKind.LooseAndLeave ? weapon != WeaponKind.Bow && weapon != WeaponKind.Pistol :
+                    weapon != WeaponKind.Paired)) return false;
             ArtifactKind existing;
             if (artifacts.TryGetValue(id, out existing)) return existing == parsed;
             artifacts.Add(id, parsed);
@@ -166,6 +169,14 @@ namespace FTKModFramework.Core
             return dummy != null && dummy.m_CharacterOverworld != null &&
                 dummy.m_CharacterOverworld.m_CharacterStats != null &&
                 classes.Contains((int)dummy.m_CharacterOverworld.m_CharacterStats.m_CharacterClass);
+        }
+
+        internal static bool IsCustomPistol(FTK_weaponStats2 weapon)
+        {
+            if (weapon == null || string.IsNullOrEmpty(weapon.m_ID)) return false;
+            int id = Content.Db<FTK_weaponStats2DB>().GetIntFromID(weapon.m_ID);
+            WeaponKind kind;
+            return weapons.TryGetValue(id, out kind) && kind == WeaponKind.Pistol;
         }
 
         private static WeaponKind CurrentWeapon(CharacterDummy actor)
@@ -197,7 +208,22 @@ namespace FTKModFramework.Core
             if (!Enabled || actor == null) return;
             string id = GuardianRuntime.Identity(actor);
             if (actor is EnemyDummy) state.BeginEnemyTurn(id);
-            else if (IsThief(actor)) { pending.Remove(id); state.BeginActorTurn(id); }
+            else if (IsThief(actor))
+            {
+                pending.Remove(id);
+                state.BeginActorTurn(id);
+                // EngageBattle is the native turn boundary on every client. Restore one
+                // round before the stance UI checks ammo; extra actions in this turn
+                // do not trigger another refill.
+                if (CurrentWeapon(actor) == WeaponKind.Pistol && actor.m_EventListener != null &&
+                    actor.m_EventListener.m_Weapon != null)
+                {
+                    Weapon equipped = actor.m_EventListener.m_Weapon;
+                    if (equipped.m_WeaponType == Weapon.WeaponType.firearm && equipped.m_AmmoCapacity > 0 &&
+                        actor.m_CurrentAmmo < equipped.m_AmmoCapacity)
+                        actor.SetCurrentAmmo(Math.Min(equipped.m_AmmoCapacity, actor.m_CurrentAmmo + 1));
+                }
+            }
         }
 
         internal static void ResetEnemy(CharacterDummy actor)
@@ -368,12 +394,15 @@ namespace FTKModFramework.Core
             string actorId = GuardianRuntime.Identity(attack.m_AttackingDummy);
             // Each committed attack invalidates an earlier artifact receipt, including ineligible attacks.
             pending.Remove(actorId);
+            ActionKind action;
+            bool pistolShot = CurrentWeapon(attack.m_AttackingDummy) == WeaponKind.Pistol &&
+                actions.TryGetValue((int)attack.m_AttackProficiency, out action) && action == ActionKind.Shot;
             if (attack.m_Harmless || attack.m_CheatType != SlotControl.AttackCheatType.None ||
                 !(attack.m_DamagedDummy is EnemyDummy) ||
                 attack.m_DamageType != FTK_weaponStats2.DamageType.physical ||
                 CurrentWeapon(attack.m_AttackingDummy) == WeaponKind.None ||
                 attack.m_SpecialAttack != CharacterDummy.SpecialAttack.None ||
-                attack.m_AttackProficiency != FTK_proficiencyTable.ID.None)
+                (attack.m_AttackProficiency != FTK_proficiencyTable.ID.None && !pistolShot))
             {
                 state.ClearPrepared(actorId);
                 return;

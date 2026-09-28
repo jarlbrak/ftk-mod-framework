@@ -5,6 +5,24 @@ using UnityEngine.UI;
 
 namespace FTKModFramework.Core
 {
+    [HarmonyPatch(typeof(uiWeaponDetail), "ShowWeapon")]
+    internal static class ThiefPistolCardPatch
+    {
+        private static void Postfix(uiWeaponDetail __instance, GridEditor.FTK_itembase _itemInfo)
+        {
+            try
+            {
+                if (__instance.m_WeaponStatDisplay != null &&
+                    ThiefRuntime.IsCustomPistol(_itemInfo as GridEditor.FTK_weaponStats2) &&
+                    __instance.m_WeaponStatDisplay.text.IndexOf("Instant Reload (Thief)",
+                        StringComparison.Ordinal) < 0)
+                    __instance.m_WeaponStatDisplay.text +=
+                        "Instant Reload (Thief): Restore one round at the start of each combat turn.\n";
+            }
+            catch (Exception e) { Plugin.Log.LogError("[thief] pistol card failed: " + e); }
+        }
+    }
+
     [HarmonyPatch(typeof(uiBattleStanceButtons), "CreateWeaponProficiencyButtons")]
     internal static class ThiefActionButtonPatch
     {

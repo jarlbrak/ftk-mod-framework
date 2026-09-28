@@ -46,7 +46,7 @@ namespace GridEditor
     {
         public enum ID { None, Armor, Boots, Unregistered }
         public enum ObjectSlot { armor, boot, other, equip }
-        public enum ObjectType { armor, boots, other }
+        public enum ObjectType { armor, boots, helmet, other }
         public ObjectType m_ObjectType;
         public string m_ID;
         public ObjectSlot m_ObjectSlot;
@@ -151,3 +151,5 @@ namespace FTKModFramework.Core
         internal static bool Apply(string identity, CharacterEventListener avatar, EnemyRendererMesh[] entries, object prepareMaterial = null, bool preserveAuthoredMainPalette = false) { Calls++; Last = entries; return true; }
     }
 }
+
+public class Helmet : UnityEngine.Component { public bool m_IsHairTopOn, m_IsHairBottomOn; }
