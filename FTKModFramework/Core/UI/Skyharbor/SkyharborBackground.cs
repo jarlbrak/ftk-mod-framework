@@ -72,7 +72,7 @@ namespace FTKModFramework.Core.UI.Skyharbor
             }
         }
 
-        static byte[] ReadBounded(Stream stream, int limit)
+        internal static byte[] ReadBounded(Stream stream, int limit)
         {
             using (var output = new MemoryStream())
             {
@@ -87,7 +87,7 @@ namespace FTKModFramework.Core.UI.Skyharbor
             }
         }
 
-        static Stream OpenResource(string name)
+        internal static Stream OpenResource(string name)
         {
             if (string.IsNullOrEmpty(name) || name.IndexOf('/') >= 0 || name.IndexOf('\\') >= 0 || name.IndexOf("..", StringComparison.Ordinal) >= 0)
                 throw new InvalidDataException("Invalid Skyharbor resource name.");
@@ -376,8 +376,8 @@ namespace FTKModFramework.Core.UI.Skyharbor
             owned.Clear(); motions.Clear(); flightEnabled = false; flightPose = null; sceneRoot = null; imageObject = null; brandingGroup = null; presentationRoot = null; target = null; sceneCamera = null; image = null; subtitle = null; subtitleFont = null;
         }
         static float Finite(float v) { if (float.IsNaN(v) || float.IsInfinity(v)) throw new InvalidDataException("Nonfinite number."); return v; }
-        static Vector3 Vector(float[] v) { if (v == null || v.Length != 3) throw new InvalidDataException("Expected xyz."); return new Vector3(Finite(v[0]), Finite(v[1]), Finite(v[2])); }
-        static Vector3[] Vectors(float[] v)
+        internal static Vector3 Vector(float[] v) { if (v == null || v.Length != 3) throw new InvalidDataException("Expected xyz."); return new Vector3(Finite(v[0]), Finite(v[1]), Finite(v[2])); }
+        internal static Vector3[] Vectors(float[] v)
         {
             if (v == null || v.Length % 3 != 0) throw new InvalidDataException("Invalid vector array.");
             var result = new Vector3[v.Length / 3];

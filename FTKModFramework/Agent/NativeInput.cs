@@ -14,6 +14,12 @@ namespace FTKModFramework.Agent
     {
         private static readonly string SessionId = Guid.NewGuid().ToString("N");
         private const string HarmonyId = "FTKModFramework.Agent.NativeInput";
+        // Opt-in: accept native input while the game window is unfocused, so a test run never has to take the
+        // desktop's focus. Synthetic input is injected at the game's own input reads, not through the OS, so it
+        // does not need window focus; Unity's player loop and Rewired's focus filter are the only blockers.
+        internal const string BackgroundEnvFlag = "FTK_AGENT_BACKGROUND";
+        private static readonly bool Background = Environment.GetEnvironmentVariable(BackgroundEnvFlag) == "1";
+        private static bool _rewiredFocusFilterOff;
         private static Harmony _harmony;
         private static bool _available, _advancing;
         private static string _error, _state = "idle", _requestId;
@@ -68,7 +74,9 @@ namespace FTKModFramework.Agent
                 _patchedMethods++;
                 _available = true;
                 _error = null;
-                Plugin.Log.LogInfo("[agent] native input ready: " + _rewiredMethods + " Rewired, " + _gameMethods + " game, " + _uiMethods + " UI, " + _frameworkMethods + " framework hooks");
+                if (Background) Application.runInBackground = true;
+                Plugin.Log.LogInfo("[agent] native input ready: " + _rewiredMethods + " Rewired, " + _gameMethods + " game, " + _uiMethods + " UI, " + _frameworkMethods + " framework hooks" +
+                    (Background ? "; background mode (" + BackgroundEnvFlag + "=1): runInBackground on, window focus not required" : ""));
             }
             catch (Exception e)
             {
@@ -181,7 +189,7 @@ namespace FTKModFramework.Agent
         private static string Guard()
         {
             if (Environment.GetEnvironmentVariable(AgentBridge.EnvFlag) != "1") return "agent bridge is disabled";
-            if (!Application.isFocused) return "native input requires game window focus";
+            if (!Application.isFocused && !Background) return "native input requires game window focus (or " + BackgroundEnvFlag + "=1)";
             // Photon reports connected=true in offline mode. Only explicit offline or disconnected title
             // states are allowed; connection/join transitions fail closed before the next input sample.
             if (PhotonNetwork.offlineMode)
@@ -211,7 +219,7 @@ namespace FTKModFramework.Agent
         private static Dictionary<string, object> Snapshot()
         {
             var hooks = new Dictionary<string, object> { { "methods", _patchedMethods }, { "rewired", _rewiredMethods }, { "game", _gameMethods }, { "ui", _uiMethods }, { "framework", _frameworkMethods }, { "reads", _reads }, { "syntheticReads", _syntheticReads }, { "textCharacters", _textCharacters } };
-            return new Dictionary<string, object> { { "available", _available }, { "sessionId", SessionId }, { "retainedRequestLimit", 64 }, { "focused", Application.isFocused }, { "requestId", _requestId }, { "state", _state }, { "frame", _completedFrames }, { "totalFrames", _totalFrames }, { "progress", _totalFrames == 0 ? 0d : (double)_completedFrames / _totalFrames }, { "error", _error }, { "hooks", hooks }, { "screenWidth", Screen.width }, { "screenHeight", Screen.height } };
+            return new Dictionary<string, object> { { "available", _available }, { "sessionId", SessionId }, { "retainedRequestLimit", 64 }, { "focused", Application.isFocused }, { "background", Background }, { "requestId", _requestId }, { "state", _state }, { "frame", _completedFrames }, { "totalFrames", _totalFrames }, { "progress", _totalFrames == 0 ? 0d : (double)_completedFrames / _totalFrames }, { "error", _error }, { "hooks", hooks }, { "screenWidth", Screen.width }, { "screenHeight", Screen.height } };
         }
 
         private static Dictionary<string, object> Envelope(Dictionary<string, object> result, string error, bool duplicate)
@@ -281,7 +289,36 @@ namespace FTKModFramework.Agent
                 yield return instruction;
             }
         }
-        private static void BeforeEarlyUpdate() { Tick(); }
+        private static void BeforeEarlyUpdate()
+        {
+            if (Background && !_rewiredFocusFilterOff) DisableRewiredFocusFilter();
+            Tick();
+        }
+
+        // Rewired drops input (and its UI module drops pointer events) while the app is unfocused when
+        // ignoreInputWhenAppNotInFocus is set. Background mode clears it once Rewired is ready.
+        private static void DisableRewiredFocusFilter()
+        {
+            try
+            {
+                Type reInput = AccessTools.TypeByName("Rewired.ReInput");
+                PropertyInfo ready = reInput == null ? null : AccessTools.Property(reInput, "isReady");
+                if (ready == null || !(bool)ready.GetValue(null, null)) return;
+                PropertyInfo config = AccessTools.Property(reInput, "configuration");
+                object cfg = config == null ? null : config.GetValue(null, null);
+                PropertyInfo flag = cfg == null ? null : AccessTools.Property(cfg.GetType(), "ignoreInputWhenAppNotInFocus");
+                _rewiredFocusFilterOff = true;
+                if (flag == null) { Plugin.Log.LogWarning("[agent] background mode: Rewired ignoreInputWhenAppNotInFocus not found; unfocused input may be dropped"); return; }
+                bool was = (bool)flag.GetValue(cfg, null);
+                flag.SetValue(cfg, false, null);
+                Plugin.Log.LogInfo("[agent] background mode: Rewired ignoreInputWhenAppNotInFocus " + was + " -> False");
+            }
+            catch (Exception e)
+            {
+                _rewiredFocusFilterOff = true;
+                Plugin.Log.LogWarning("[agent] background mode: could not clear Rewired focus filter: " + e.Message);
+            }
+        }
         private static bool Synthetic()
         {
             _reads++;

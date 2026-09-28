@@ -38,6 +38,11 @@ See `docs/AI-NATIVE.md` for the complete layout and adapter rules.
   details belong in `AGENTS.local.md`.
 - Follow the public API boundary: mod-author surfaces belong in `Content.*`; engine mechanics
   belong in `Core/`.
+- Live game tests must never take the user's desktop focus. Launch the bridge with
+  `FTK_AGENT_BACKGROUND=1` beside `FTK_AGENT_BRIDGE=1`, return focus to the previous app after
+  launch, and never activate, raise, or refocus the game window afterward. Synthetic native input
+  still plays the game like a user, without needing the OS focus. See
+  [Background mode](harness/README.md#background-mode).
 
 ## Source of truth and architecture
 

@@ -199,6 +199,7 @@ namespace FTKModFramework
             Core.Reporting.ReportingSubmission.Tick();
             Core.Reporting.ReportingAutomatic.Tick(AutomaticBugReports != null && AutomaticBugReports.Value && !SelfTestsEnabled);
             Core.UI.ReportingMenu.Tick();
+            if (SkySpike.Enabled) SkySpike.Tick();
         }
 
         private void OnApplicationQuit()
@@ -405,6 +406,9 @@ namespace FTKModFramework
             {
                 Plugin.Log.LogInfo("Self-tests skipped (Diagnostics/RunSelfTests=false).");
             }
+
+            // Live-test sky spike (env FTK_SKY_SPIKE=1 only). Unset registers nothing.
+            if (SkySpike.Enabled) Run("sky spike", SkySpike.Register);
 
             // Synthetic stress content (P5b, #23). Runs ALWAYS, BEFORE the data load, so a count-0 run still
             // clears a stale reserved subfolder a prior higher-N run may have left. When count > 0 it writes N

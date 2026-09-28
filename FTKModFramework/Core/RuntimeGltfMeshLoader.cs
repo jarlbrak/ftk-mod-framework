@@ -530,7 +530,7 @@ namespace FTKModFramework.Core
         /// the magic/version is wrong or a required chunk is missing/out of bounds. BIN may be empty (returned as a
         /// zero-length array) only if there is no BIN chunk, which our skinned format never produces.
         /// </summary>
-        private static bool SplitGlb(byte[] bytes, out string json, out byte[] bin)
+        internal static bool SplitGlb(byte[] bytes, out string json, out byte[] bin)
         {
             json = null;
             bin = null;
