@@ -81,14 +81,18 @@ namespace FTKModFramework.Core
         internal static readonly TweakDescriptor SellPriceDescriptor = new TweakDescriptor(
             "information.sell-price", TweakCategory.Information, TweakScope.Local,
             "Sell price in item details",
-            "At a shop, show what each item in your inventory sells for on its item card.",
-            "uiItemMenu.ShowPlayerInventory adds \"Sell (N)\" only when m_Cow.m_HexLand.m_POI is non-null, "
-            + "CanSellItems() and the item is neither quest rarity nor in GameLogic.m_CantSellOrDiscardItems; "
-            + "N is uiItemMenu.GetSellItemValue: FTK_weaponStats2DB or FTK_itemsDB GetSellValue(m_Cow, "
-            + "m_Cow.GetPOI()), and uiPopupMenu uses the same gate and value. GetSellValue calls GetCost, "
-            + "which dereferences the POI. uiInventoryItemDisplay.Show receives the card's real mode and "
-            + "character (uiPlayerInventory.SelectItemIcon passes Mode.Inventory and m_InventoryOwner) but "
-            + "hands uiItemDetail.Show Mode.ItemDisplay, so the postfix is on the former. It only extends "
+            "At a shop, show what each unequipped item in your inventory sells for on its item card.",
+            "The static uiItemMenu.Show forwards to uiPopupMenu.Show, which sends a uiInventory1ItemContainer "
+            + "(equipped) icon to ShowPlayerEquiped, with no Sell button, and any other player icon to "
+            + "ShowPlayerBackpack. That shows \"Sell (N)\" interactable only when CanSell holds: "
+            + "m_Cow.m_HexLand.GetPOI() (land or air POI) is non-null and CanSellItems(), the item is neither "
+            + "quest rarity nor in GameLogic.m_CantSellOrDiscardItems, and m_CanControl (outside multiplayer "
+            + "always, otherwise IsOwner or m_WaitForRespawn); N is uiPopupMenu.GetSellItemValue: "
+            + "FTK_weaponStats2DB or FTK_itemsDB GetSellValue(m_Cow, m_Cow.GetPOI()). GetSellValue calls "
+            + "GetCost, which dereferences the POI. uiInventoryItemDisplay.Show receives the card's real mode "
+            + "and character (uiPlayerInventory.SelectItemIcon sets its private m_CurrentItem to the icon, then "
+            + "passes Mode.Inventory, its own transform and m_InventoryOwner) but hands uiItemDetail.Show "
+            + "Mode.ItemDisplay, so the postfix is on the former. It only extends "
             + "uiItemDetail.m_ItemRarityDisplay, which uiItemDetail.Show rewrites on every call, on this client.");
         internal static readonly TweakDescriptor VanishingEncountersDescriptor = new TweakDescriptor(
             "information.vanishing-encounters", TweakCategory.Information, TweakScope.Local,
@@ -260,11 +264,11 @@ namespace FTKModFramework.Core
 
         /// <summary>Whether one item card gets a sell price. Off, faulted or uninitialized never shows
         /// one; on shows it only where the Sell button's own gate would offer the sale.</summary>
-        internal static bool SellPriceShown(TweakRegistry registry, int handle, bool inventoryView, bool shopCanSell,
-            bool sellableItem, bool hasPricePoi)
+        internal static bool SellPriceShown(TweakRegistry registry, int handle, bool inventoryView, bool unequippedIcon,
+            bool canControl, bool shopCanSell, bool sellableItem, bool hasPricePoi)
         {
             if (!registry.IsOn(handle)) return false;
-            return SellPriceText.Shown(inventoryView, shopCanSell, sellableItem, hasPricePoi);
+            return SellPriceText.Shown(inventoryView, unequippedIcon, canControl, shopCanSell, sellableItem, hasPricePoi);
         }
 
         /// <summary>The hover card effect for one MiniEncounter.GetPOIProfile call. Off, faulted or
