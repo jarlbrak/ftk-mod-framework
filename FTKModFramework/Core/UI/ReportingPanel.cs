@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using View = FTKModFramework.Core.UI.ReportingPanelFocus.View;
 
 namespace FTKModFramework.Core.UI
 {
@@ -22,8 +23,7 @@ namespace FTKModFramework.Core.UI
         private readonly Button[] draftOpen = new Button[5], draftDelete = new Button[5];
         private readonly Text[] draftLabels = new Text[5];
         private ReportingDraft[] listedDrafts = new ReportingDraft[0];
-        private enum View { Editor, Drafts, Leave, Delete }
-        private View view;
+        private View view, selectedView;
         private int draftPage;
         private bool dirty, storing;
         private string deletingId;
@@ -163,8 +163,17 @@ namespace FTKModFramework.Core.UI
             }
             else SetLabel(back, "Back to game");
             // FTKInputFocus.SetFocus(null) selects m_FirstSelected, so keep it on a control that
-            // cannot publish. OnPreSetFocus refreshes before every focus gain.
-            m_FirstSelected = SafeControl(ReportingPanelFocus.Default(Usable)).GetComponent<FTKSelectable>();
+            // cannot publish or delete. OnPreSetFocus refreshes before every focus gain.
+            m_FirstSelected = SafeControl(ReportingPanelFocus.Default(view, Usable)).GetComponent<FTKSelectable>();
+            // A view switch hides the selected button, and FTKInputFocus.Update then falls back to
+            // the first interactable child, the primary action. Request the safe default instead;
+            // a pointer hover still wins. Only while focused: from OnPreSetFocus, SetSelected
+            // would restart the focus change, and that focus gain already uses m_FirstSelected.
+            if (view != selectedView)
+            {
+                selectedView = view;
+                if (m_HasInputFocus && m_FirstSelected) FTKInput.SetSelected(m_FirstSelected);
+            }
             SetupOwnedNavigation();
         }
         private Selectable SafeControl(ReportingPanelFocus.Control control)
@@ -173,6 +182,8 @@ namespace FTKModFramework.Core.UI
             if (control == ReportingPanelFocus.Control.SaveDraft) return saveDraft;
             if (control == ReportingPanelFocus.Control.Details) return metadataDetailsButton;
             if (control == ReportingPanelFocus.Control.Drafts) return manageDrafts;
+            if (control == ReportingPanelFocus.Control.OpenDraft) return draftOpen[0];
+            if (control == ReportingPanelFocus.Control.Secondary) return secondary;
             return back;
         }
         private bool Usable(ReportingPanelFocus.Control control)

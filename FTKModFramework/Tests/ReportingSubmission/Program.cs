@@ -31,30 +31,48 @@ internal static class Program
         Console.WriteLine("Reporting submission: " + checks + " checks passed.");
         return 0;
     }
+    private static ReportingPanelFocus.Control Focus(ReportingPanelFocus.View view, params ReportingPanelFocus.Control[] usable)
+    { return ReportingPanelFocus.Default(view, delegate(ReportingPanelFocus.Control c) { return Array.IndexOf(usable, c) >= 0; }); }
     private static void DefaultFocus()
     {
+        ReportingPanelFocus.View editor = ReportingPanelFocus.View.Editor, drafts = ReportingPanelFocus.View.Drafts,
+            leave = ReportingPanelFocus.View.Leave, delete = ReportingPanelFocus.View.Delete;
         ReportingPanelFocus.Control[] all = (ReportingPanelFocus.Control[])Enum.GetValues(typeof(ReportingPanelFocus.Control));
-        Check(ReportingPanelFocus.Default(delegate { return true; }) == ReportingPanelFocus.Control.Description,
+        Check(ReportingPanelFocus.Default(editor, delegate { return true; }) == ReportingPanelFocus.Control.Description,
             "A fresh report did not open on the description");
-        Check(ReportingPanelFocus.Default(delegate(ReportingPanelFocus.Control c) { return c != ReportingPanelFocus.Control.Description; }) == ReportingPanelFocus.Control.SaveDraft,
+        Check(ReportingPanelFocus.Default(editor, delegate(ReportingPanelFocus.Control c) { return c != ReportingPanelFocus.Control.Description; }) == ReportingPanelFocus.Control.SaveDraft,
             "Without a description field the report did not fall back to Save draft");
         // A pending retry hides the description and Save draft; Retry report must still need navigation.
-        Check(ReportingPanelFocus.Default(delegate(ReportingPanelFocus.Control c) {
-            return c == ReportingPanelFocus.Control.Details || c == ReportingPanelFocus.Control.Drafts || c == ReportingPanelFocus.Control.Primary ||
-                c == ReportingPanelFocus.Control.Secondary || c == ReportingPanelFocus.Control.Back; }) == ReportingPanelFocus.Control.Details,
+        Check(Focus(editor, ReportingPanelFocus.Control.Details, ReportingPanelFocus.Control.Drafts, ReportingPanelFocus.Control.Primary,
+            ReportingPanelFocus.Control.Secondary, ReportingPanelFocus.Control.Back) == ReportingPanelFocus.Control.Details,
             "A pending report did not open on its details");
-        Check(ReportingPanelFocus.Default(delegate(ReportingPanelFocus.Control c) {
-            return c == ReportingPanelFocus.Control.Primary || c == ReportingPanelFocus.Control.Secondary || c == ReportingPanelFocus.Control.Diagnostics; }) == ReportingPanelFocus.Control.Back,
+        Check(Focus(editor, ReportingPanelFocus.Control.Primary, ReportingPanelFocus.Control.Secondary, ReportingPanelFocus.Control.Diagnostics) == ReportingPanelFocus.Control.Back,
             "Only publishing, discarding or consent controls usable did not fall back to Back");
-        Check(ReportingPanelFocus.Default(delegate { return false; }) == ReportingPanelFocus.Control.Back, "No usable control did not fall back to Back");
-        // Every availability combination: the default never publishes, discards or changes consent.
-        for (int mask = 0; mask < 1 << all.Length; mask++)
-        {
-            int bits = mask;
-            ReportingPanelFocus.Control chosen = ReportingPanelFocus.Default(delegate(ReportingPanelFocus.Control c) { return (bits & (1 << Array.IndexOf(all, c))) != 0; });
-            Check(chosen != ReportingPanelFocus.Control.Primary && chosen != ReportingPanelFocus.Control.Secondary && chosen != ReportingPanelFocus.Control.Diagnostics,
-                "Default focus reached " + chosen + " for availability mask " + mask);
-        }
+        Check(Focus(editor) == ReportingPanelFocus.Control.Back, "No usable control did not fall back to Back");
+        // Drafts: New report (Primary) and each row's Delete precede nothing safe; the first Open does.
+        Check(Focus(drafts, ReportingPanelFocus.Control.Primary, ReportingPanelFocus.Control.Secondary, ReportingPanelFocus.Control.OpenDraft,
+            ReportingPanelFocus.Control.Back) == ReportingPanelFocus.Control.OpenDraft, "The drafts list did not open on the first draft");
+        Check(Focus(drafts, ReportingPanelFocus.Control.Primary, ReportingPanelFocus.Control.Secondary, ReportingPanelFocus.Control.Back) == ReportingPanelFocus.Control.Back,
+            "An empty drafts list did not fall back to Back to report");
+        // Leave: Save and continue and Discard edits both leave the editor; only Keep editing stays.
+        Check(Focus(leave, all) == ReportingPanelFocus.Control.Back, "The leave prompt did not open on Keep editing");
+        // Delete: a single confirm must keep the draft.
+        Check(Focus(delete, all) == ReportingPanelFocus.Control.Secondary, "The delete confirmation did not open on Keep draft");
+        Check(Focus(delete, ReportingPanelFocus.Control.Primary, ReportingPanelFocus.Control.Back) == ReportingPanelFocus.Control.Back,
+            "The delete confirmation without Keep draft did not fall back to Back to drafts");
+        // Every view and availability combination: the default never reaches a control that
+        // publishes, discards, deletes, leaves the editor or changes consent in that view.
+        foreach (ReportingPanelFocus.View view in (ReportingPanelFocus.View[])Enum.GetValues(typeof(ReportingPanelFocus.View)))
+            for (int mask = 0; mask < 1 << all.Length; mask++)
+            {
+                int bits = mask;
+                ReportingPanelFocus.Control chosen = ReportingPanelFocus.Default(view, delegate(ReportingPanelFocus.Control c) { return (bits & (1 << Array.IndexOf(all, c))) != 0; });
+                bool safe = chosen == ReportingPanelFocus.Control.Back ||
+                    (view == editor && chosen != ReportingPanelFocus.Control.Primary && chosen != ReportingPanelFocus.Control.Secondary && chosen != ReportingPanelFocus.Control.Diagnostics && chosen != ReportingPanelFocus.Control.OpenDraft) ||
+                    (view == drafts && chosen == ReportingPanelFocus.Control.OpenDraft) ||
+                    (view == delete && chosen == ReportingPanelFocus.Control.Secondary);
+                Check(safe, "Default focus reached " + chosen + " in " + view + " for availability mask " + mask);
+            }
     }
     private static ReportingReport Report(bool previous)
     {
