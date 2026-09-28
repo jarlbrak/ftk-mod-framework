@@ -253,6 +253,14 @@ namespace FTKModFramework.Core
             return refundable < room ? refundable : room;
         }
 
+        /// <summary>Whether pip index shows as refundable: the first shown empty pips after the filled
+        /// ones, which are exactly the pips a refund would fill.</summary>
+        internal static bool PipMarked(int index, int focusPoints, int shown)
+        {
+            if (shown <= 0 || focusPoints < 0) return false;
+            return index >= focusPoints && index < focusPoints + shown;
+        }
+
         /// <summary>The exact reversal of one conversion: the two vanilla setters, the count, then the
         /// path reset and the HUD. Nothing else: no analytics, no SpentFocus, no ability event and no
         /// sync beyond the setters' own.</summary>
@@ -263,6 +271,38 @@ namespace FTKModFramework.Core
             ledger.Take(key);
             setters.TrackResetList();
             setters.RefreshHud();
+        }
+    }
+
+    /// <summary>The refund key rules. Keys are UnityEngine.KeyCode values as ints, so the rules stay
+    /// Unity-free: None is 0, and the mouse buttons and joystick buttons start at Mouse0 (323).</summary>
+    internal static class RefundFocusInput
+    {
+        internal const int None = 0;
+        internal const int FirstNonKeyboard = 323;
+
+        /// <summary>A keyboard key that no FTKInput remappable action uses, with any modifiers, so a
+        /// press never also triggers a vanilla action. boundKeys are every m_PosKeys and m_NegKeys
+        /// entry of FTKInput.m_RemappableKeys.</summary>
+        internal static bool Usable(int key, IList<int> boundKeys)
+        {
+            if (key <= None || key >= FirstNonKeyboard) return false;
+            if (boundKeys == null) return true;
+            for (int i = 0; i < boundKeys.Count; i++)
+                if (boundKeys[i] == key) return false;
+            return true;
+        }
+    }
+
+    /// <summary>The refund tooltip. English only and raw, as the other tweak texts are.</summary>
+    internal static class RefundFocusText
+    {
+        internal const string Title = "Refund focus";
+
+        internal static string Detail(string keyName)
+        {
+            string text = "Click to take back 1 focus you spent on movement this turn. You lose the extra move it gave.";
+            return string.IsNullOrEmpty(keyName) ? text : text + " Key: " + keyName + ".";
         }
     }
 }

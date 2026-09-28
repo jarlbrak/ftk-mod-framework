@@ -1,7 +1,7 @@
-// Game-free checks for convenience.refund-movement-focus (Spec #264 FR-1 to FR-4): the descriptor,
+// Game-free checks for convenience.refund-movement-focus (Spec #264 FR-1 to FR-5): the descriptor,
 // counting only real conversions, the min(count, action points) bound, every gate, the exact reversal
-// through a recording setter seam, every clear trigger and the off path. The Harmony patches and the
-// HUD are live-gated on #264.
+// through a recording setter seam, every clear trigger, the off path, and the HUD's pip, key and
+// tooltip rules. The Harmony patches and the HUD itself are live-gated on #264.
 using System;
 using System.Collections.Generic;
 using FTKModFramework.Core;
@@ -27,6 +27,7 @@ internal static class RefundFocusChecks
         Reversal();
         Clears();
         OffPath();
+        HudRules();
         return _checks;
     }
 
@@ -97,12 +98,13 @@ internal static class RefundFocusChecks
         Check(d.Id == Id && d.Category == TweakCategory.Convenience && d.Scope == TweakScope.Session,
             "a Session Convenience tweak with the specified ID");
         Check(!d.DefaultOn && d.ExplicitDefault == null && d.BalanceNote == null, "off by default with no balance note");
-        Check(d.Title == "Refund movement focus" && !string.IsNullOrEmpty(d.Summary), "the title and a summary");
+        Check(d.Title == "Refund movement focus" && d.Summary.Contains("faded focus pip") && d.Summary.Contains("Backspace")
+            && d.Summary.Contains("Keyboard and mouse only"), "the title, and a summary naming the pip, the default key and the input scope");
         foreach (string member in new[] { "Movement.ConvertFocusToAction", "UpdateFocusPoints(-1)", "UpdatePlayerAction(1)",
             "IsOwner", "FTKPlayerID", "MaxFocus", "m_IsMyTurn", "m_CharacterOverworld", "TrackingMode.Movement",
             "\"Tracking\"", "m_HexList.Count <= 1", "m_LockedInput", "\"PickSneakHex\"", "EncounterSession.m_IsInCombat",
             "UpdateFocusPoints(1)", "UpdatePlayerAction(-1)", "TrackResetList", "UpdateHud", "CharacterOverworld.EndTurn",
-            "StartEncounterSession_Actual", "SetInCombat(true)", "SetDeath" })
+            "StartEncounterSession_Actual", "SetInCombat(true)", "SetDeath", "uiPlayerMainHud.SetFocusMeter", "Rewired" })
             Check(d.Evidence.Contains(member), "the evidence names " + member);
         Check(d.Summary.IndexOf('\u2014') < 0 && d.Evidence.IndexOf('\u2014') < 0, "no em dashes in the descriptor text");
 
@@ -349,5 +351,44 @@ internal static class RefundFocusChecks
             && recorder.Calls.Count == 0, label + ": no setter is called");
         Check(!FrameworkTweaks.RefundFocusClear(r, handle, ledger, RefundFocusClear.EncounterStart, key) && ledger.Count(key) == 1,
             label + ": a clear hook does nothing");
+    }
+
+    // FR-5: which pips are marked, which keys are usable, and the tooltip text.
+    private static void HudRules()
+    {
+        Check(!RefundFocus.PipMarked(0, 2, 1) && !RefundFocus.PipMarked(1, 2, 1), "filled pips are never marked");
+        Check(RefundFocus.PipMarked(2, 2, 1) && !RefundFocus.PipMarked(3, 2, 1), "one refundable point marks the first empty pip only");
+        Check(RefundFocus.PipMarked(2, 2, 2) && RefundFocus.PipMarked(3, 2, 2) && !RefundFocus.PipMarked(4, 2, 2),
+            "two refundable points mark the next two empty pips");
+        Check(RefundFocus.PipMarked(0, 0, 1), "with no focus left the first pip is the refundable one");
+        Check(!RefundFocus.PipMarked(2, 2, 0) && !RefundFocus.PipMarked(2, -1, 1), "nothing shown or a bad focus value marks nothing");
+
+        RefundFocusState s = Open();
+        s.Count = 2;
+        s.FocusPoints = 1;
+        int shown = RefundFocus.Pips(s);
+        int marked = 0;
+        for (int i = 0; i < s.MaxFocus; i++) if (RefundFocus.PipMarked(i, s.FocusPoints, shown)) marked++;
+        Check(shown == 2 && marked == 2, "the marked pips match the refundable count");
+        s.CommittedHexes = 2;
+        shown = RefundFocus.Pips(s);
+        marked = 0;
+        for (int i = 0; i < s.MaxFocus; i++) if (RefundFocus.PipMarked(i, s.FocusPoints, shown)) marked++;
+        Check(shown == 0 && marked == 0, "a committed path unmarks every pip");
+
+        const int backspace = 8, escape = 27, space = 32, mouse0 = 323, joystickButton0 = 330;
+        Check(RefundFocusInput.Usable(backspace, new List<int> { escape, space }), "an unbound keyboard key is usable");
+        Check(!RefundFocusInput.Usable(backspace, new List<int> { escape, backspace }), "a key a game control uses is not");
+        Check(!RefundFocusInput.Usable(RefundFocusInput.None, null), "None is not a key");
+        Check(!RefundFocusInput.Usable(mouse0, null) && !RefundFocusInput.Usable(joystickButton0, null),
+            "mouse and controller buttons are not keyboard keys");
+        Check(RefundFocusInput.Usable(backspace, null) && RefundFocusInput.Usable(backspace, new List<int>()),
+            "no remap table yet means nothing conflicts");
+
+        Check(RefundFocusText.Title == "Refund focus", "the tooltip title");
+        Check(RefundFocusText.Detail("Backspace").Contains("Click") && RefundFocusText.Detail("Backspace").EndsWith(" Key: Backspace."),
+            "the tooltip names the click and the key");
+        Check(!RefundFocusText.Detail(null).Contains("Key:"), "no key configured: the tooltip names only the click");
+        Check(RefundFocusText.Detail("Backspace").IndexOf('\u2014') < 0, "no em dash in the tooltip");
     }
 }

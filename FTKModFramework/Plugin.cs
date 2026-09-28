@@ -27,6 +27,11 @@ namespace FTKModFramework
         internal static ConfigEntry<bool> EnableTitleScreenActivation;
         internal static ConfigEntry<bool> EnableSkyharborBackground;
 
+        /// <summary>The keyboard key for convenience.refund-movement-focus. FTKInput's remap table is
+        /// built from the game's own serialized defaults and saved to custominput.bin, and every entry
+        /// needs a Rewired action, so a framework action cannot join it; the key lives here instead.</summary>
+        internal static ConfigEntry<UnityEngine.KeyCode> RefundMovementFocusKey;
+
         /// <summary>
         /// Whether to run the JSON data-content loader: discover mod folders under
         /// <see cref="DataContentRoot"/>, parse their content files, and register them through the
@@ -353,6 +358,10 @@ namespace FTKModFramework
             // lifecycle probe is registered only for self-test runs.
             FrameworkTweaks.RegisterAll(Tweaks.Registry, SelfTestsEnabled);
             Tweaks.Registry.Initialize(new TweakConfigStore(Config, Tweaks.Registry));
+            RefundMovementFocusKey = Config.Bind("TweakKeys", "RefundMovementFocus", UnityEngine.KeyCode.Backspace,
+                "Keyboard key that refunds one point of movement focus when the Refund movement focus tweak is on. " +
+                "None turns the key off; clicking a faded focus pip still works. A key that one of the game's own " +
+                "controls also uses is ignored, with one warning in the log. Controllers are not supported.");
 
             _harmony = new Harmony(Guid);
             DbLookupPatcher.Init(_harmony);

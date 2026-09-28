@@ -190,7 +190,7 @@ namespace FTKModFramework.Core
         internal static readonly TweakDescriptor RefundMovementFocusDescriptor = new TweakDescriptor(
             "convenience.refund-movement-focus", TweakCategory.Convenience, TweakScope.Session,
             "Refund movement focus",
-            "Take back focus you spent on movement this turn, while the extra move is unused and you have not set off.",
+            "Take back focus you spent on movement this turn, while the extra move is unused and you have not set off. Click a faded focus pip or press Backspace (configurable). Keyboard and mouse only.",
             "The private Movement.ConvertFocusToAction runs only when m_FocusPoints > 0 and m_ActionPoints < 9, "
             + "then calls FTKGameStats m_ActionFocus++, CharacterStats.UpdateFocusPoints(-1) (clamped to MaxFocus, "
             + "UpdateHud, SyncMembers m_FocusPoints, m_BaseMaxFocus, m_SpentFocus) and CharacterOverworld."
@@ -202,7 +202,9 @@ namespace FTKModFramework.Core
             + "and neither CharacterStats.m_IsInCombat nor EncounterSession.m_IsInCombat; TrackingPathFinished sets "
             + "m_Mode None before a walk. It calls UpdateFocusPoints(1), UpdatePlayerAction(-1), "
             + "Movement.TrackResetList and uiPlayerMainHud.UpdateHud. Counts clear on CharacterOverworld.EndTurn, "
-            + "EncounterSession.StartEncounterSession_Actual, SetInCombat(true), SetDeath and any Session set change.");
+            + "EncounterSession.StartEncounterSession_Actual, SetInCombat(true), SetDeath and any Session set change. "
+            + "The HUD postfixes the private uiPlayerMainHud.SetFocusMeter, whose m_FocusPoints pips show child 0 "
+            + "below m_FocusPoints; FTKInput's remap table needs a Rewired action per entry, so the key is framework config.");
 
         /// <summary>Self-test only. A Session tweak that no patch consults, so it cannot change
         /// gameplay; the lifecycle traces its captured value at each capture, lock and clear.</summary>

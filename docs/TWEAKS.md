@@ -52,7 +52,8 @@ on top of it. These descriptors exist today:
 - **Refund movement focus** (`convenience.refund-movement-focus`,
   [Spec #264](https://github.com/jarlbrak/ftk-mod-framework/issues/264)), a Session Convenience
   tweak, off by default: during your own turn, take back focus you spent on movement while the
-  extra move is unused and you have not set off. See [below](#refund-movement-focus).
+  extra move is unused and you have not set off. Click a faded focus pip or press Backspace
+  (configurable). Keyboard and mouse only. See [below](#refund-movement-focus).
 
 Live verification status is tracked on #233, #242, #243, #260 and #264.
 
@@ -130,6 +131,36 @@ effect and sends `reengageMovement`. It has no undo. Both setters clamp and sync
   `SetSessionSet` and clear change. The game never transfers ownership, so ownership needs no
   clear.
 
+**HUD and input.** `Core/RefundMovementFocusHud.cs` postfixes the private
+`uiPlayerMainHud.SetFocusMeter`. Vanilla keeps one `Image` per `MaxFocus` point in
+`m_FocusPoints`, cloning `m_MasterFocusPoint`, and shows each pip's fill (its child 0) when the
+index is below `m_FocusPoints`. Nothing on the pips is clickable in vanilla.
+
+- While the tweak is on, the postfix adds one `RefundFocusHud` component to the HUD of a character
+  this client owns. When the tweak is off it returns first, so no HUD gets a component.
+  `SetFocusMeter` runs only when the HUD is flagged for update, and `UpdatePlayerAction` never
+  flags it, so the component checks the gates each frame. It redraws only when the refundable
+  count, the focus or the pip count changes, so a steady frame allocates nothing.
+- The refundable pips are the first `min(refundable, MaxFocus - m_FocusPoints)` empty pips, the
+  ones a refund would fill. They show only when every gate passes and the character uses the
+  keyboard and mouse (`CharacterOverworld.m_IsUseMouse`). A pip gets a `RefundFocusPip` component
+  the first time it is refundable, and keeps it. Marking fades the fill with a `CanvasGroup` at
+  40% alpha, makes the pip a raycast target, and fills in the game's `uiToolTipGeneral`: a new
+  one, or the pip's existing tooltip with its text saved. Unmarking restores each value and
+  vanilla's fill state, then disables the component. Unity sends no pointer events to a disabled
+  component, so an unmarked pip behaves as vanilla's.
+- A left click on a marked pip refunds one point. The tooltip reads "Refund focus" and explains
+  the click and the key.
+- **Key.** `FTKInput`'s remap table cannot take a framework action. It is built from the game's
+  serialized defaults, saved to `custominput.bin`, and every entry is assigned to a Rewired action.
+  The key is therefore the framework config entry `[TweakKeys] RefundMovementFocus` in
+  `BepInEx/config/com.ftkmf.framework.cfg`, default `Backspace`. `None` turns the key off. The key
+  acts only on the character whose pips are showing, and not while the chat box has text focus.
+  On a press, it is checked against every key in `FTKInput.m_RemappableKeys`. A key that a game
+  control also uses, or that is a mouse or controller button, is ignored, with one warning.
+- **Controllers** are not supported in this version. Rewired has no spare action, so a character
+  without the keyboard and mouse sees no refundable pips.
+
 With the self-test probe registered, each refund is traced as
 `SESSION-PROBE [session-lifecycle] focus-refund`. Like every Session tweak, it is off in online
 co-op until the co-op contract ships.
@@ -145,7 +176,7 @@ co-op until the co-op contract ships.
 | Session lifecycle | `Core/Tweaks/TweakSessionLifecycle.cs` | Unity-free capture, lock and clear decisions, resume state, plus the probe trace |
 | Session record | `Core/Tweaks/TweakSessionRecord.cs` | Unity-free codec and per-ID resolution for the `ftkmf.session` save record |
 | Poison countdown | `Core/Tweaks/PoisonCountdown.cs` | Unity-free codec and write and restore decisions for the `ftkmf.poison` character value |
-| Refund movement focus | `Core/Tweaks/RefundFocus.cs`, `Core/RefundMovementFocusPatch.cs` | Unity-free ledger, bound, gates and reversal; the counting and clear patches and the refund entry point |
+| Refund movement focus | `Core/Tweaks/RefundFocus.cs`, `Core/RefundMovementFocusPatch.cs`, `Core/RefundMovementFocusHud.cs` | Unity-free ledger, bound, gates, reversal, pip and key rules; the counting and clear patches, the refund entry point, and the focus pip HUD and key |
 | Config binding | `Core/TweakConfigStore.cs` | The `[Tweaks]` section of the framework config |
 | Lifecycle hooks | `Core/TweakSessionPatches.cs` | Harmony patches that drive capture, lock and clear |
 | Session record hooks | `Core/TweakSessionRecordPatches.cs` | The save transpiler, the load prefix and the resume arm for the `ftkmf.session` record, plus the `ftkmf.poison` write, stash, apply and window close |
@@ -556,7 +587,8 @@ write, and the single-match rule of the save transpiler. It also covers the pois
 codec, its write and restore decisions, and the resume players window: when it opens and closes,
 applying once, each discard, and two instances that share a PhotonID. For refund movement focus it
 covers counting only real conversions, the bound, each gate failing, the exact reversal through a
-recording setter seam, every clear trigger and the off path.
+recording setter seam, every clear trigger, the off path, and which pips are marked, which keys
+are usable and the tooltip text.
 `Tests/TweaksConfig` runs the `[Tweaks]` binding through BepInEx's real `ConfigFile`.
 `Tests/SessionRecordHooks` compiles `Core/TweakSessionRecordPatches.cs` against stand-ins for
 the game types it names. It runs the save transpiler over a stand-in of vanilla's tail sequence,
