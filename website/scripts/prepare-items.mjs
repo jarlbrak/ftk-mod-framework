@@ -50,7 +50,8 @@ for(const p of matching){
    const still=`artwork/items/${e.id}.png`;
    source=await fs.readFile(still);
    const inputs=[['model','modelSha256'],['texture','textureSha256'],['metallicGlossTexture','metallicGlossTextureSha256']];
-   if(receipt.id!==e.id||receipt.output!==still||!digest.test(receipt.outputSha256)||receipt.outputSha256!==hash(source)||
+   if(receipt.id!==e.id||![still,path.basename(still)].includes(receipt.output)||
+      !digest.test(receipt.outputSha256)||receipt.outputSha256!==hash(source)||
       typeof receipt.renderer!=='string'||!receipt.renderer.trim())throw Error(`${e.id}: studio receipt/output mismatch`);
    for(const [field,sha] of inputs)
     if(receipt[field]!==model[field]||!digest.test(receipt[sha])||receipt[sha]!==hash(read(model[field])))

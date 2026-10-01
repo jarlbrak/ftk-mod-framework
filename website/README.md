@@ -94,7 +94,7 @@ This verifies the archive and manifest but does not publish the package or updat
 
 Each item with a package icon uses that icon. Each item without one needs a studio still at
 `artwork/items/ITEM_ID.png` and a matching `artwork/items/ITEM_ID.receipt.json`. The receipt must
-declare `id`, `output` (the relative PNG path), `outputSha256`, the actual `renderer`, and the
+declare `id`, `output` (the PNG basename or `artwork/items/` path), `outputSha256`, the actual `renderer`, and the
 equipped root `itemModels` paths and SHA-256 values as `model`/`modelSha256`,
 `texture`/`textureSha256`, and `metallicGlossTexture`/`metallicGlossTextureSha256`. The script
 checks the PNG and all three package assets before writing WebP or provenance. Fourteen currently
