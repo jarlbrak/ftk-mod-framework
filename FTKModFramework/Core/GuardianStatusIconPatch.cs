@@ -27,8 +27,8 @@ namespace FTKModFramework.Core
         }
     }
 
-    // Owned by one HUD. uiPlayerMainHud.Update calls SetStatusIcons each active frame, so the
-    // same refresh cadence catches guardian incapacity and card reuse.
+    // Owned by one HUD. The native HUD updates status icons only while m_UpdateHud is set,
+    // so this component also checks active Guard while its card remains visible.
     internal sealed class GuardianStatusIcon : MonoBehaviour
     {
         private GameObject icon;
@@ -36,7 +36,9 @@ namespace FTKModFramework.Core
 
         internal void Bind(GameObject nativeProtected, CharacterOverworld cow)
         {
+            bool rebound = character != cow;
             character = cow;
+            bool created = false;
             if (icon == null && nativeProtected != null)
             {
                 icon = (GameObject)Instantiate(nativeProtected);
@@ -49,7 +51,18 @@ namespace FTKModFramework.Core
                 tooltip.m_ReturnRawInfo = true;
                 tooltip.m_Info = "Guarded";
                 tooltip.m_DetailInfo = "Guard reduces direct attack damage until the guarding ally's next turn. Protection ends if the guarding ally is incapacitated.";
+                created = true;
             }
+            if (created || rebound) RefreshSafe();
+        }
+
+        private void LateUpdate()
+        {
+            RefreshSafe();
+        }
+
+        private void RefreshSafe()
+        {
             if (icon == null) return;
             try { Refresh(); }
             catch (Exception)
