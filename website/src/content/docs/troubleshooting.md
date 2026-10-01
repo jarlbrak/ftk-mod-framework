@@ -16,7 +16,13 @@ Read the pending-change message in Mods, close the game, then relaunch. Changes 
 
 ## Paladin has no Smite or Censure
 
-Check that Paladin **1.4.0** is active with framework **1.2.1 or later compatible 1.x**. Censure comes from an equipped Paladin hammer. Smite comes from an equipped Paladin trinket, which must now be acquired and equipped. They are not permanent class actions. Smite's stronger multiplier requires an active Censure Resistance reduction; an Armor reduction will not activate it.
+Check that Paladin **2.0.0** is active with framework **1.7.0 or later compatible 1.x**. Censure and Smite belong to the Paladin and require an eligible hammer. Equip a Paladin hammer, native Smith Hammer, or native War Hammer. Trinkets do not unlock these actions. Other classes using a Paladin hammer receive Strike only. Guard remains available independently of the weapon.
+
+Mercy enhances Smite through matching armor. An active Censure Resistance mark from your own Paladin provides a further bonus; an Armor mark does not activate that magic bonus.
+
+## Back Alley gear is missing
+
+The vendor lists gear for the buying character's class and hides pieces already equipped or in that character's backpack. Each piece costs one Guild Token. Enable a participating class mod, use its class, and visit a city in single-player. The shared service has no offers or drops when no participating catalogs are enabled.
 
 ## Some Lore Store entries are still locked
 
@@ -30,13 +36,13 @@ Compare the installed framework, package version, platform, and game build with 
 
 Restore the exact framework and mod set used by that run, or start a new adventure. Marketplace operations do not rewrite saves. If an update damaged a managed package, the menu can retain previous generations for rollback on a later launch.
 
-From framework 1.6.2 (preview), a save that uses content that is no longer installed is refused before it loads. The game shows **Can't load this save** with a message such as "This save uses content that isn't installed: 1 enemy type, 1 map encounter, 1 item", names the mod when it can, and leaves the save file unchanged. Choose **OK**, then restore the mods used by that run, start a new adventure, or pick another save from **Load**.
+From framework 1.6.2, a save that uses content that is no longer installed is refused before it loads. The game shows **Can't load this save** with a message such as "This save uses content that isn't installed: 1 enemy type, 1 map encounter, 1 item", names the mod when it can, and leaves the save file unchanged. Choose **OK**, then restore the mods used by that run, start a new adventure, or pick another save from **Load**.
 
 ## Resume is stuck on "Crafting adventure"
 
 The save most likely uses content, such as an enemy or item, from a mod or framework build that is no longer installed, and the game cannot finish rebuilding the map. Quit the game; the save itself is not changed. Then restore the framework and mods used by that run, start a new adventure, or choose another save from **Load**. **Resume** always opens the most recent save, so use **Load** to pick a different one.
 
-Framework 1.6.2 (preview) shows a **Can't load this save** message for such a save instead of hanging, and keeps you on the title screen or in the **Load** menu. Earlier framework versions still hang, so the advice above applies to them.
+Framework 1.6.2 and later shows a **Can't load this save** message for such a save instead of hanging, and keeps you on the title screen or in the **Load** menu. Earlier framework versions still hang, so the advice above applies to them.
 
 ## Change the menu background
 
@@ -62,7 +68,7 @@ From framework 1.6.0, when your turn cannot end and nothing on screen explains w
 
 Framework 1.5.0 sends detected errors and unexpected previous-session exits to public framework GitHub issues by default, with filtered diagnostics. Turn off **Automatic bug reports** in **Mods > Settings & Help** to stop new automatic sends. The manual **Report Bugs** editor remains available when you want to explain a problem. From framework 1.6.0, diagnostics also include your [tweak](../tweaks/) settings and which tweaks were actually on, including a run's Shared rules and where they came from. Diagnostics can still contain personal information written by mods; see the [reporting disclosure](https://reporting-api-production-ff50.up.railway.app/privacy).
 
-**Automatic reports were not delivered before framework 1.6.2.** Framework 1.6.1 and earlier saved automatic reports in a folder the sending helper refuses, so none reached GitHub. Framework 1.6.2 (preview) delivers them, and the first launch deletes the old saved reports without sending them. If you want a problem from an earlier version looked at, send it from **Options > Report Bugs** or open an issue. Automatic sending is best effort: a report that could not be sent may be tried again on a later launch, but it never holds up a newer one. The game's own sound-engine error at startup is not reported.
+**Automatic reports were not delivered before framework 1.6.2.** Framework 1.6.1 and earlier saved automatic reports in a folder the sending helper refuses, so none reached GitHub. Framework 1.6.2 and later delivers them, and the first launch deletes the old saved reports without sending them. If you want a problem from an earlier version looked at, send it from **Options > Report Bugs** or open an issue. Automatic sending is best effort: a report that could not be sent may be tried again on a later launch, but it never holds up a newer one. The game's own sound-engine error at startup is not reported.
 
 You can also [open an issue](https://github.com/jarlbrak/ftk-mod-framework/issues) with your platform, game build, framework version, mod versions, what you did, and what happened. Include only relevant log lines and remove personal paths and other private information. The loader's `BepInEx/LogOutput.log` inside the game folder can help identify the error. Do not upload game assemblies or saves containing private data.
 

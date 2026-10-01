@@ -4,23 +4,23 @@
     {
       "author": "JarlBrak",
       "category": "classes",
-      "changelog": "Paladin 1.4.0 brings the class card into line with native class presentation and reduces starting equipment to Novice Hammer and Novice Aegis. Armor and the Tin Oath Token must be acquired during play; Smite becomes available when a Paladin trinket is equipped. Retains existing stats, combat mechanics, artwork and acquisition settings. Requires framework 1.2.1.",
+      "changelog": "Paladin 2.0.0 adds hammer-gated class actions, equipped armor roles, and Guild Token acquisition through the framework Equipment Exchange. Requires framework 1.7.0.",
       "classification": "gameplay",
-      "compressedSize": 72200199,
+      "compressedSize": 78876970,
       "contentChanges": [
         "Uses a two-sentence flavor description, compact native-style class ability labels, and a Novice Hammer plus Novice Aegis starting kit.",
         "Paladin class retains Guard and Cleansing March, which prevents new Poison and Curse while exploring.",
-        "All 14 Paladin hammers grant Censure, randomly lowering Armor or Resistance on successful debuff application.",
-        "All six Paladin trinkets grant Smite while equipped; trinkets must be acquired during play.",
-        "Smite deals modest magic damage and receives a sixfold bonus while its target has an active Censure Resistance reduction.",
-        "Replaces original equipment art across six families and three artifacts, with separate action symbols and native normal-Attack glyphs."
+        "Paladin owns Censure and Smite while an eligible hammer is equipped. Paladin hammers offer only native Strike; native hammers retain their original actions.",
+        "Smite deals magic damage and can stun on a perfect cast; Censure Resistance reduction increases its damage.",
+        "Mercy, Verdict and Censure armor sets change Guard, healing and attack tradeoffs when equipped.",
+        "Equipment Exchange supplies shared Guild Tokens and the native Back Alley vendor. The vendor shows only gear for the buying character's class and hides backpack and equipped copies."
       ],
       "dependencies": [],
-      "description": "Protect allies with Guard and Cleansing March, weaken enemies with Paladin hammers, and cast Smite through Paladin trinkets. Includes original equipment and action artwork.",
-      "expandedSize": 99140252,
-      "fileCount": 236,
-      "frameworkRange": ">=1.2.1 <2.0.0",
-      "frameworkVersion": "1.2.1",
+      "description": "Protect allies with Guard and Cleansing March, use Censure and Smite with eligible hammers, and collect six equipment families through ordinary routes and the shared Equipment Exchange.",
+      "expandedSize": 110008302,
+      "fileCount": 306,
+      "frameworkRange": ">=1.7.0 <2.0.0",
+      "frameworkVersion": "1.7.0",
       "gameFingerprints": [
         "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
       ],
@@ -28,26 +28,24 @@
       "modGuid": "com.ftkmf.paladin",
       "name": "Paladin",
       "packageId": "ftkmf.paladin",
-      "packageUrl": "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v1.4.0/paladin-1.4.0-145545a47b99.zip",
+      "packageUrl": "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v2.0.0/paladin-2.0.0-ef7a6ec3b3cb.zip",
       "platforms": [
         "windows",
         "macos",
         "linux"
       ],
       "requirements": [
-        "Requires FTK Mod Framework 1.2.1 or a compatible later 1.x release.",
-        "Published for Windows, macOS and Linux on the listed game build. Gameplay verified on macOS only; Windows and Linux gameplay remain unverified.",
-        "Complete skinset fit, native breakage, all display views and long-campaign balance are not yet comprehensively validated.",
-        "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md.",
-        "Online co-op remains unverified."
+        "Requires FTK Mod Framework 1.7.0 or a compatible later 1.x release. Equipment Exchange is built into the framework; no separate currency mod is needed.",
+        "Requires a game build with the listed Assembly-CSharp fingerprint.",
+        "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md."
       ],
       "screenshots": [
-        "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v1.4.0/paladin-censure-banner.png"
+        "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v2.0.0/paladin-censure-banner.png"
       ],
-      "sha256": "145545a47b99e128b4ab1481e677e0d26a6f9fa16d3781a13de1ea362c8c36fc",
+      "sha256": "ef7a6ec3b3cbd72f9903ab35300f129b1c87730aa1db91c29e7e33d4e63ff6fe",
       "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
       "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues/138",
-      "version": "1.4.0"
+      "version": "2.0.0"
     },
     {
       "author": "JarlBrak",

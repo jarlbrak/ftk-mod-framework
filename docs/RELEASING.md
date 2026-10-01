@@ -12,12 +12,12 @@ the appropriate BepInEx loader; subsequent launcher starts check for framework u
 | --- | --- | --- |
 | macOS 13+, Intel or Apple Silicon | `FTKModdedLauncher-macos-universal.zip` | `For The King Modded.app` |
 | Linux x64, including Steam Deck | `FTKModdedLauncher-linux-amd64.tar.gz` | `For The King Modded.sh` |
-| Windows x64 preview | `FTKModdedLauncher-windows-x64.zip` | `FtkModdedLauncher.exe` |
+| Windows x64 | `FTKModdedLauncher-windows-x64.zip` | `FtkModdedLauncher.exe` |
 
 The Linux arm64 archive supports helper tooling; it is not a native ARM game port.
 Windows and Linux/Proton gameplay need real platform testing. macOS downloads are not
 notarized, so Gatekeeper may require right-click > Open. Steam may need one restart to
-refresh shortcut artwork. These limits belong in every early release's notes.
+refresh shortcut artwork. Keep platform validation results in the release validation record.
 
 ## Prepare a release
 

@@ -29,7 +29,7 @@ framework. During an authorized release, pass a reviewed local catalog path, for
 `node scripts/sync-published.mjs ../marketplace/catalog.json`, after its release assets are public.
 This uses the same public-download hash checks and allows the catalog and site to merge together.
 Review authored guides when mechanics change; regenerated cards alone cannot update
-explanations. The guides are scoped to Paladin 1.4.0 and Thief 1.0.0.
+explanations. The guides are scoped to Paladin 2.0.0 and Thief 1.0.0.
 
 `src/data/catalog.ts` applies author-approved website wording to the immutable catalog snapshot.
 Thief 1.0.0 is labeled as a release; its compatibility limitations and package identity are retained.
