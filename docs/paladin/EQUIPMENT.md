@@ -1,6 +1,6 @@
 # Paladin equipment progression
 
-Status: unreleased v4 source candidate, 2026-09-30. The published package and website still describe the released version. The candidate has 51 equipment pieces across six families: 36 ordinary slot pieces, 12 accessories, and three Artifacts. The current values in [content.json](../../marketplace/packages/paladin/content.json) are provisional and need matched native encounters. A successful source-package check does not prove native acquisition or balance.
+Paladin 2.0.0 rules. The [package content](../../marketplace/packages/paladin/content.json) defines the exact values. Native observations and their limits are recorded in [Validation](VALIDATION.md).
 
 ## Families and armor thresholds
 

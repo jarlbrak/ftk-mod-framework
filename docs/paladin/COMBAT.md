@@ -1,6 +1,6 @@
 # Paladin combat
 
-Status: unreleased v4 source candidate, 2026-09-30. Its role percentages are provisional until matched native encounters. Earlier combat captures describe older package values. The [package source](../../marketplace/packages/paladin/content.json) is the authority for this candidate's exact fields.
+Paladin 2.0.0 rules. The [package content](../../marketplace/packages/paladin/content.json) defines the exact values. Native observations and their limits are recorded in [Validation](VALIDATION.md).
 
 ## Baseline Guardian
 

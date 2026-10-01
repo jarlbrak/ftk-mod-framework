@@ -1,18 +1,10 @@
 # Paladin
 
-[Paladin 1.4.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.4.0)
-is the current published FTK Mod Framework marketplace package. The
-[1.4.0 revision](RELEASE-1.4.0.md) records the published class card and
-starting kit. The [working package source](../../marketplace/packages/paladin/README.md)
-now describes an unreleased candidate and must not be read as the 1.4.0 archive.
+Paladin 2.0.0 requires framework 1.7.0 or a compatible later 1.x release. The [package source](../../marketplace/packages/paladin/README.md) defines the current class, armor roles and shared Equipment Exchange catalog. The production marketplace catalog identifies the public download; older versioned archives remain immutable.
+
 The Vitality-based protector retains
 Cleansing March, Guard and Divine Intervention,
 six equipment families, twelve accessories and three legendary artifacts. Its
 original gear art is worn over native character bodies.
 
-Read the [combat design](COMBAT.md), [equipment inventory](EQUIPMENT.md),
-[art direction](ART-DIRECTION.md) and [package source](../../marketplace/packages/paladin/)
-to understand the authored content. The [1.4.0 publication verification](RELEASE-1.4.0.md#publication-verification) records the artifact checks. The [launch record](LAUNCH-1.0.0.md)
-distinguishes observed macOS gameplay from open coverage. Other files here
-preserve earlier design, candidate, and validation evidence; their dates and
-hashes describe those recorded builds, not the published release by default.
+Read the [combat design](COMBAT.md), [equipment inventory](EQUIPMENT.md), [artifact rules](ARTIFACTS.md), and [art direction](ART-DIRECTION.md) for the current content. The [validation record](VALIDATION.md) separates native observations from game-free checks and historical evidence. Earlier receipts retain their recorded dates, hashes and scope; they do not automatically approve changed release assets or behavior.
