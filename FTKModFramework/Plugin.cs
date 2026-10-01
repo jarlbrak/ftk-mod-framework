@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "1.6.2";
+        public const string Version = "1.7.0";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -455,6 +455,8 @@ namespace FTKModFramework
             }
             Core.HotReload.ClassPreferences.RecoverPending(Core.Marketplace.MarketplaceRuntime.StateRoot);
             if (Core.HotReload.ClassPreferences.RecoveryFaulted) return;
+            // This row is part of the baseline restored before every candidate activation.
+            Run("Guild Token", Core.BuiltinEquipmentExchange.Register);
             Core.Marketplace.MarketplaceRuntime.EnsureEmptyGeneration = Core.HotReload.HotReloadBoundary.Requested;
             Core.Marketplace.MarketplaceRuntime.InitializeBeforeDiscovery();
             Core.HotReload.HotReloadBoundary.Initialize();

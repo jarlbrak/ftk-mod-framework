@@ -60,6 +60,8 @@ namespace FTKModFramework.Core.HotReload
 
         internal static void RequireQuiescent()
         {
+            if (EnemyDropRuntime.HasRegistrations || TownExchangeService.HasRegistrations)
+                throw new InvalidOperationException("Token rewards and town exchanges require a game restart for content changes.");
             if (RendererLeaseCount != 0)
                 throw new InvalidOperationException("Live custom renderer leases prevent hot activation.");
             if (PendingDestroyCount != 0)

@@ -80,5 +80,36 @@ export function itemTooltipLines(e:any,entries:any[]):{text:string;tone:string}[
   add('Loose and Leave: damaging Sneak Attack grants +8 Evasion.');
   add('Until next turn; cannot stack.');
  }else if(e.thiefArtifact)throw Error('Unexplained artifact');
+ const paladin=entries.find(entry=>entry.kind==='class'&&entry.id==='paladin');
+ if(paladin?.weaponProficiencies?.some((group:any)=>group.weapons.includes(e.id))){
+  add('Paladin: eligible hammer for class Censure and Smite.','ability');
+  add('Other classes retain this weapon’s native actions.');
+ }
+ for(const set of paladin?.guardianEquipmentSets??[]){
+  const armor=[set.head,set.body,set.feet];
+  const hands=[set.oneHand,set.twoHand,set.shield];
+  if(!armor.includes(e.id)&&!hands.includes(e.id))continue;
+  if(armor.includes(e.id)){
+   add(`${set.id[0].toUpperCase()+set.id.slice(1)}: 2 matching armor pieces grant the minor role.`,'ability');
+   add('3 matching armor pieces grant the full core role, including its costs.');
+   add(`2-piece: ${roleSummary(set.minor)}.`);
+   add(`3-piece: ${roleSummary(set.core)}.`);
+  }else{
+   add(`${set.id[0].toUpperCase()+set.id.slice(1)} armament: requires all 3 matching armor pieces.`,'ability');
+   add('Complete with matching 2-handed hammer and empty offhand, or 1-handed hammer and shield.');
+  }
+  if(set.id==='mercy')add('Completion: +2% ally maximum HP to focused-hit healing.');
+  else if(set.id==='verdict')add('Completion: Guard wards Poison, Stun, Daze, and Curse on qualifying hits.');
+  else if(set.id==='censure')add('Completion: +20% qualifying physical damage against your own Censure Armor mark.');
+ }
  return lines;
+}
+function roleSummary(role:any):string{
+ const parts:string[]=[];
+ for(const [key,label] of [['physicalPercent','physical damage'],['smitePercent','Smite damage'],['healingPercent','healing'],['guardReductionPercent','Guard reduction']] as const){
+  if(role[key]!==undefined)parts.push(`${role[key]}% ${label}`);
+ }
+ if(role.bonuses?.guardHealPercent)parts.push(`Guard heals ${role.bonuses.guardHealPercent}% ally maximum HP`);
+ if(role.bonuses?.retaliationDamage)parts.push(`${role.bonuses.retaliationDamage} Guard retaliation damage`);
+ return parts.join('; ');
 }

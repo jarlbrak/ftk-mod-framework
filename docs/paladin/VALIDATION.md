@@ -1,6 +1,12 @@
 # Paladin validation and historical acceptance
 
-## Current verification entry points
+## Unreleased hammer-gated class candidate
+
+The current source candidate makes Censure and Smite baseline Paladin actions requiring an eligible hammer. Every Paladin hammer has only native Strike; accessories and Mercy armor no longer grant spell access. Earlier receipts below retain their original package scope and do not prove this ownership change. Current rules are in [Combat](COMBAT.md) and [Equipment](EQUIPMENT.md). Smite now clones native Stun with damaging magic explicitly enabled and a 25% perfect-only chance. Bounded private R17/R18 checks established native equip gating, class combat buttons, one Smite execution, save/resume and corrected hover text. Later bounded damage and status observations are described under [Unreleased Smite damage and stun](#unreleased-smite-damage-and-stun); endgame balance remains open.
+
+Required new checks cover Paladin with eligible one-hand, two-hand and native hammers; Paladin with no hammer or a non-hammer; other classes with the same custom hammers; actual combat buttons and effects; stale selection after a weapon swap; save/resume and no duplicate grants. Guard remains equipment-independent. Native paired Hammers and multiplayer need explicit coverage rather than inference from the broad `blunt` type.
+
+## Published and historical verification entry points
 
 The Paladin 1.0.1 package contains **54 content entries and 51
 equipment items**, including three artifacts and twelve accessories. The
@@ -169,7 +175,7 @@ revision, but cannot accept current art or ordinary acquisition.
 ## Native gameplay checklist
 
 - [ ] `paladin`: immediately selectable with all native appearance choices; native body/hair,
-  start weapon, shield and three novice armor items present. Record whether native
+  starting Novice Hammer and Novice Aegis present. Record whether native
   starting items equip or enter the backpack. Guard works without a shield and
   with both weapon types; other classes and global taunt keep native behavior.
 - [ ] Guard targets another living ally, always succeeds and consumes one action.
@@ -189,13 +195,14 @@ revision, but cannot accept current art or ordinary acquisition.
 - [ ] Shield variants apply their declared Guard recovery, debuff ward or
   retaliation and retain the personal defense/Speed tradeoff. Guard stays 50%.
   Mercy weapons add the correct focused-heal percentage; Verdict damage differs.
-- [ ] Both Censure IDs appear only on their intended weapons. Observe the native
-  timed armor effect, actual duration and damage, three versus four slots and
-  magnitudes four versus six. Both native armor deltas and timed expiry are
-  observed in [Censure live evidence](censure-live.json). The verified lifetime
-  is approximately 3.333333 synchronized combat-time units, not a target-turn
-  duration; see [native lifetime evidence](censure-native-lifetime.json). Remaining
-  slot/damage and equipment-change cases keep this composite requirement open.
+- [ ] Paladin receives the one-handed or two-handed Censure class action only
+  with an eligible equipped hammer; other classes using any of the 14 authored
+  hammers retain Strike without Censure or Smite. Observe native damage, the
+  three versus four checks, Armor and Resistance outcomes with magnitudes four
+  versus six, expiry, and stale-button removal after equipment change. Earlier
+  [Censure live evidence](censure-live.json) and [native lifetime evidence](censure-native-lifetime.json)
+  establish effects and approximately 3.333333 synchronized combat-time units
+  on their historical weapon-owned source, not current class ownership.
 
 ## Visual, lifecycle and save checklist
 
@@ -340,3 +347,13 @@ records wind-up, strike, recovery and victory within 100 paired frames. Reviewed
 armor remains attached without obvious chest intersections. Raised weapon tips
 are not always framed; received-hit, death, all-race motion and final art review
 remain separate gates.
+
+## Unreleased Smite damage and stun
+
+The current corrected Smite source explicitly sets `m_IgnoresArmor=false`. The bounded private R26 combat review pins that source and native receipts from controlled single-enemy encounters. Native enemy rows, dice, defenses and combat resolution remained in use; raised Paladin HP extended the diagnostic. These are mechanics observations, not campaign balance or release approval. R26 has ended; the protected original isolated campaign was restored byte for byte after native exit without saving.
+
+On the corrected source, a neutral perfect Smite against a Warlock with 18 Resistance dealt zero damage (70 to 70 HP) and applied no stun. Four perfect Mercy Smite hits on a nonimmune Ogre each dealt 24 magic damage. The first had no proc; the second applied one new native Stunned status to an initially unstunned target. A later `profAffect=true` while Stunned was already present did not add a second stun. A native Censure hit applied its own Resistance -6 mark to that Ogre. The following Mercy Smite hover showed 36 magic damage before target mitigation, and the natural perfect hit dealt 42 (32 to 0 HP): 36 plus six from negative Resistance. This lethal hit does not establish nonlethal stun behavior, mark expiry, the Armor branch, or behavior under a foreign mark. The authored 25% stun chance is not a measured frequency.
+
+R25 separately observed corrected Mercy Smite against an immune Wisp with 20 Resistance: four primary damage (41 to 37 HP), `profImmune=true`, and no Stunned. R21 on the prior content bytes observed positive partial Mercy hits for 14 and 19 magic damage without proficiency success or stun, each matched by target HP loss. The only intervening Smite change was `m_IgnoresArmor=false`, which the installed native damage path reads only on proficiency success. Thus R21 supports unchanged partial-hit behavior by source equivalence, not direct observation of partial hits on current bytes. Its earlier observer missed the native response callback; the HP and primary damage records support the narrower claim.
+
+The earlier neutral Ogre stun and Warlock hit through Resistance belong to the superseded bypassing row. R25's partial Dodge and Protect attempts gave zero damage and do not prove positive partial damage; its isolated campaign was restored byte for byte after that completed trial. Full collection, representative balance, save/reload and co-op remain separate gates.

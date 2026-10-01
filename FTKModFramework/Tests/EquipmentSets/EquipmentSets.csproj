@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Core/GuardianEquipmentBonuses.cs" Link="GuardianEquipmentBonuses.cs" />
+    <Compile Include="../../Core/GuardianProfile.cs" Link="GuardianProfile.cs" />
+    <Compile Include="../../Core/EquipmentSetState.cs" Link="EquipmentSetState.cs" />
+    <Compile Include="../../Core/CombatProficiencyPolicy.cs" Link="CombatProficiencyPolicy.cs" />
+    <Compile Include="../../Core/GuardianPreviewMath.cs" Link="GuardianPreviewMath.cs" />
+    <Compile Include="../../Core/GuardianSetDescription.cs" Link="GuardianSetDescription.cs" />
+  </ItemGroup>
+</Project>

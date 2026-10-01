@@ -28,14 +28,19 @@ namespace FTKModFramework.Core.HotReload
             List<Action> jobs = new List<Action>();
             if (!TransactionOpen) throw new InvalidOperationException("Asset preflight requires a resource transaction.");
             HashSet<string> rigidModels = new HashSet<string>(StringComparer.Ordinal);
+            HashSet<string> masks = new HashSet<string>(StringComparer.Ordinal);
             HashSet<string> textures = new HashSet<string>(StringComparer.Ordinal);
             HashSet<int> requiredItems = new HashSet<int>();
             foreach (bool display in new[] { false, true })
                 foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadPlans(display)) requiredItems.Add(plan.Key);
             foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadOffHandPlans()) requiredItems.Add(plan.Key);
             foreach (KeyValuePair<int, PlayerApparelMesh[]> plan in ItemApparelRegistry.ReloadPlans()) requiredItems.Add(plan.Key);
+            foreach (int id in ItemModelRegistry.ReloadHelmetHairItems()) requiredItems.Add(id);
             Dictionary<int, FTK_itembase> items = PreflightRowIndex.Build(ItemRowsForPreflight(), requiredItems,
                 delegate(FTK_itembase row) { return (int)FTK_itembase.GetEnum(row.m_ID); });
+            foreach (int id in ItemModelRegistry.ReloadHelmetHairItems())
+                if (!ItemModelRegistry.SupportsHelmetHairVisibility(items[id]))
+                    throw new InvalidOperationException("Helmet hair visibility requires the FTKHub.CreateHelmet route without a wearable prefab: " + items[id].m_ID);
             foreach (bool display in new[] { false, true })
                 foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadPlans(display))
                 {
@@ -61,12 +66,14 @@ namespace FTKModFramework.Core.HotReload
                             target.GetComponents<SkinnedMeshRenderer>().Length != 0)
                             throw new InvalidOperationException("Invalid native rigid renderer: " + item.m_ID + "/" + mesh.RendererPath);
                         ValidateMaterial(renderers[0], true);
+                        if (mesh.MetallicGlossTextureFileName != null) ExplicitMaterialOptions.ValidateMetallicGloss(renderers[0].sharedMaterials[0]);
                         // Every native target is checked, but identical immutable rigid bytes only
                         // need decoding once in this transaction. Skinned contracts remain distinct.
                         string resolved = CustomModelLoader.ResolveModelPath(mesh.GlbFileName);
                         if (rigidModels.Add(resolved))
                             jobs.Add(delegate { RuntimeGltfMeshLoader.PreflightResolved(resolved, null, null); });
                         textures.Add(mesh.TextureFileName);
+                        if (mesh.MetallicGlossTextureFileName != null) masks.Add(mesh.MetallicGlossTextureFileName);
                     }
                 }
             foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadOffHandPlans())
@@ -86,10 +93,12 @@ namespace FTKModFramework.Core.HotReload
                         target.GetComponents<SkinnedMeshRenderer>().Length != 0)
                         throw new InvalidOperationException("Invalid native off-hand rigid renderer: " + item.m_ID + "/" + mesh.RendererPath);
                     ValidateMaterial(renderers[0], true);
+                    if (mesh.MetallicGlossTextureFileName != null) ExplicitMaterialOptions.ValidateMetallicGloss(renderers[0].sharedMaterials[0]);
                     string resolved = CustomModelLoader.ResolveModelPath(mesh.GlbFileName);
                     if (rigidModels.Add(resolved))
                         jobs.Add(delegate { RuntimeGltfMeshLoader.PreflightResolved(resolved, null, null); });
                     textures.Add(mesh.TextureFileName);
+                    if (mesh.MetallicGlossTextureFileName != null) masks.Add(mesh.MetallicGlossTextureFileName);
                 }
             }
             List<string[]> avatars = null;
@@ -116,6 +125,7 @@ namespace FTKModFramework.Core.HotReload
                     }
                     if (renderer == null) throw new InvalidOperationException("Native garment renderer not found: " + mesh.RendererPath);
                     ValidateMaterial(renderer, false);
+                    if (mesh.MetallicGlossTextureFileName != null) ExplicitMaterialOptions.ValidateMetallicGloss(renderer.sharedMaterials[0]);
                     Transform[] sourceBones = renderer.bones ?? new Transform[0];
                     if (sourceBones.Length == 0) throw new InvalidOperationException("Native garment has no source bone palette.");
                     string[] names = new string[sourceBones.Length];
@@ -139,6 +149,7 @@ namespace FTKModFramework.Core.HotReload
                     Matrix4x4[] copiedBindposes = (Matrix4x4[])renderer.sharedMesh.bindposes.Clone();
                     jobs.Add(delegate { RuntimeGltfMeshLoader.PreflightResolved(resolved, copiedNames, copiedBindposes); });
                     textures.Add(mesh.TextureFileName);
+                    if (mesh.MetallicGlossTextureFileName != null) masks.Add(mesh.MetallicGlossTextureFileName);
                 }
             }
             AssetCaptureMs = phase.ElapsedMilliseconds;
@@ -147,6 +158,15 @@ namespace FTKModFramework.Core.HotReload
             while (!workers.Complete) yield return null;
             AssetWorkerWaitMs = phase.ElapsedMilliseconds;
             workers.ThrowIfFailed();
+            List<string> orderedMasks = new List<string>(masks);
+            orderedMasks.Sort(StringComparer.Ordinal);
+            foreach (string mask in orderedMasks)
+            {
+                phase = Stopwatch.StartNew();
+                PreflightTexture(mask, true);
+                AssetTextureMs += phase.ElapsedMilliseconds;
+                yield return null;
+            }
             List<string> orderedTextures = new List<string>(textures);
             orderedTextures.Sort(StringComparer.Ordinal);
             foreach (string texture in orderedTextures)
@@ -220,15 +240,18 @@ namespace FTKModFramework.Core.HotReload
             }
         }
 
-        private static void PreflightTexture(string identity)
+        private static void PreflightTexture(string identity, bool metallicGloss = false)
         {
             if (string.IsNullOrEmpty(identity)) throw new InvalidOperationException("Missing model texture.");
             string path = PackageModelPaths.Resolve(identity);
             if (new FileInfo(path).Length > 16 * 1024 * 1024) throw new InvalidOperationException("Model texture exceeds 16 MiB.");
             byte[] bytes = File.ReadAllBytes(path);
             int width, height;
-            PngStructure.Validate(bytes, 16 * 1024 * 1024, 4096, out width, out height);
-            Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            if (metallicGloss) ExplicitMaterialOptions.ValidateMetallicGlossPng(bytes, out width, out height);
+            else PngStructure.Validate(bytes, 16 * 1024 * 1024, 4096, out width, out height);
+            Texture2D texture = metallicGloss
+                ? new Texture2D(2, 2, TextureFormat.RGBA32, false, true)
+                : new Texture2D(2, 2, TextureFormat.RGBA32, false);
             try
             {
                 if (!texture.LoadImage(bytes) || texture.width != width || texture.height != height)

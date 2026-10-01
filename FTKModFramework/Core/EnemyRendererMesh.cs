@@ -44,6 +44,7 @@ namespace FTKModFramework.Core
         public string RendererPath { get; private set; }
         public string GlbFileName { get; private set; }
         public string TextureFileName { get; private set; }
+        public string MetallicGlossTextureFileName { get; private set; }
         public bool DisableNativeEmission { get; private set; }
         public EnemyRendererKind RendererKind { get; private set; }
 
@@ -59,16 +60,22 @@ namespace FTKModFramework.Core
         /// <param name="disableNativeEmission">False preserves native emission. True disables _EMISSION,
         /// clears _EmissionMap and sets _EmissionColor black where supported. Native materials are untouched.</param>
         public EnemyRendererMesh(string rendererPath, string glbFileName, string textureFileName, bool disableNativeEmission)
-            : this(rendererPath, glbFileName, textureFileName, disableNativeEmission, EnemyRendererKind.SkinnedMeshRenderer)
+            : this(rendererPath, glbFileName, textureFileName, disableNativeEmission, null)
         {
         }
 
+        public EnemyRendererMesh(string rendererPath, string glbFileName, string textureFileName,
+            bool disableNativeEmission, string metallicGlossTextureFileName)
+            : this(rendererPath, glbFileName, textureFileName, disableNativeEmission,
+                EnemyRendererKind.SkinnedMeshRenderer, metallicGlossTextureFileName) { }
+
         private EnemyRendererMesh(string rendererPath, string glbFileName, string textureFileName,
-            bool disableNativeEmission, EnemyRendererKind rendererKind)
+            bool disableNativeEmission, EnemyRendererKind rendererKind, string metallicGlossTextureFileName)
         {
             RendererPath = rendererPath;
             GlbFileName = glbFileName;
             TextureFileName = textureFileName;
+            MetallicGlossTextureFileName = metallicGlossTextureFileName;
             DisableNativeEmission = disableNativeEmission;
             RendererKind = rendererKind;
         }
@@ -82,7 +89,14 @@ namespace FTKModFramework.Core
             string textureFileName = null, bool disableNativeEmission = false)
         {
             return new EnemyRendererMesh(rendererPath, glbFileName, textureFileName, disableNativeEmission,
-                EnemyRendererKind.MeshRenderer);
+                EnemyRendererKind.MeshRenderer, null);
+        }
+
+        public static EnemyRendererMesh ForStaticRenderer(string rendererPath, string glbFileName,
+            string textureFileName, bool disableNativeEmission, string metallicGlossTextureFileName)
+        {
+            return new EnemyRendererMesh(rendererPath, glbFileName, textureFileName, disableNativeEmission,
+                EnemyRendererKind.MeshRenderer, metallicGlossTextureFileName);
         }
     }
 }

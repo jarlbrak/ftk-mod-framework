@@ -13,7 +13,8 @@ namespace GridEditor
     }
     public class FTK_items : FTK_itembase { }
     public class FTK_itemsDB : Rows<FTK_items> { public FTK_items GetEntry(FTK_itembase.ID id) { return GetEntryByInt((int)id); } }
-    public class FTK_weaponStats2 { public enum DamageType { none, physical, magic } }
+    public class FTK_weaponStats2 { public enum DamageType { none, physical, magic } public string m_ID; public GameObject m_Prefab; }
+    public class FTK_weaponStats2DB : Rows<FTK_weaponStats2> { }
     public class FTK_playerGameStart { public string m_ID; }
     public class FTK_playerGameStartDB : Rows<FTK_playerGameStart> { }
     public class FTK_proficiencyTableDB : Rows<FTK_proficiencyTable>
@@ -49,6 +50,13 @@ public class ProficiencyBase
 }
 public class ProficiencyArmor : ProficiencyBase { }
 public class ProficiencyResist : ProficiencyBase { }
+public class ProficiencyID { public string m_ID; }
+public class Weapon { public Dictionary<ProficiencyID, object> m_ProficiencyEffects = new Dictionary<ProficiencyID, object>(); }
+public class GameObject
+{
+    public Weapon CurrentWeapon;
+    public T GetComponentInChildren<T>(bool includeInactive) where T : class { return CurrentWeapon as T; }
+}
 public struct FTKPlayerID
 {
     public int m_TurnIndex, m_PhotonID;
@@ -67,7 +75,7 @@ public class CharacterDummy
 }
 public class EnemyDummy : CharacterDummy { public EnemyCombat m_EnemyCombat = new EnemyCombat(); public bool Frozen; }
 public class EnemyCombat { public object m_RaceTypes; }
-public class CharacterOverworld { public bool IsOwner = true; public CharacterStats m_CharacterStats = new CharacterStats(); public PlayerInventory m_PlayerInventory = new PlayerInventory(); }
+public class CharacterOverworld { public bool IsOwner = true; public CharacterStats m_CharacterStats = new CharacterStats(); public PlayerInventory m_PlayerInventory = new PlayerInventory(); public GridEditor.FTK_itembase.ID m_WeaponID; }
 public class PlayerInventory
 {
     public enum ContainerID { Trinket, Neck, LeftHand, RightHand, Foot, Body, Head, Belt, Backpack }
@@ -75,7 +83,7 @@ public class PlayerInventory
     private Dictionary<ContainerID, Container> slots = new Dictionary<ContainerID, Container>();
     public Container Get(ContainerID id) { Container value; if (!slots.TryGetValue(id, out value)) { value = new Container(); slots.Add(id, value); } return value; }
 }
-public class CharacterStats { public int Damage = 31; public int GetWeaponMaxDamage(object race) { return Damage; } }
+public class CharacterStats { public int Damage = 31, m_CharacterClass; public int GetWeaponMaxDamage(object race) { return Damage; } }
 public struct AttackAttempt { public CharacterDummy m_AttackingDummy, m_DamagedDummy; public GridEditor.FTK_proficiencyTable.ID m_AttackProficiency; public bool m_ProfSuccess; }
 public class EncounterSessionMC { public class FightOrderEntry { public int m_EntryID; public FTKPlayerID m_Pid; } }
 public class FTKRandom { public int OriginalSeed; }
@@ -114,9 +122,10 @@ namespace FTKModFramework.Core
     public static partial class Content
     {
         public static GridEditor.FTK_playerGameStartDB Classes = new GridEditor.FTK_playerGameStartDB();
+        public static GridEditor.FTK_weaponStats2DB Weapons = new GridEditor.FTK_weaponStats2DB();
         public static GridEditor.FTK_proficiencyTableDB Proficiencies = new GridEditor.FTK_proficiencyTableDB();
         public static GridEditor.FTK_itemsDB Items = new GridEditor.FTK_itemsDB();
-        public static T Db<T>() { return (T)(object)(typeof(T) == typeof(GridEditor.FTK_playerGameStartDB) ? (object)Classes : typeof(T) == typeof(GridEditor.FTK_itemsDB) ? (object)Items : Proficiencies); }
+        public static T Db<T>() { return (T)(object)(typeof(T) == typeof(GridEditor.FTK_playerGameStartDB) ? (object)Classes : typeof(T) == typeof(GridEditor.FTK_weaponStats2DB) ? (object)Weapons : typeof(T) == typeof(GridEditor.FTK_itemsDB) ? (object)Items : Proficiencies); }
     }
     internal static class ContentRegistry
     {

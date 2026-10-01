@@ -5,21 +5,19 @@
   "classification": "gameplay",
   "dependencies": [],
   "requirements": [
-    "Requires FTK Mod Framework 1.2.1 or a compatible later 1.x release.",
-    "Published for Windows, macOS and Linux on the listed game build. Gameplay verified on macOS only; Windows and Linux gameplay remain unverified.",
-    "Complete skinset fit, native breakage, all display views and long-campaign balance are not yet comprehensively validated.",
-    "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md.",
-    "Online co-op remains unverified."
+    "Requires FTK Mod Framework 1.7.0 or a compatible later 1.x release. Equipment Exchange is built into the framework; no separate currency mod is needed.",
+    "Requires a game build with the listed Assembly-CSharp fingerprint.",
+    "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md."
   ],
   "contentChanges": [
     "Uses a two-sentence flavor description, compact native-style class ability labels, and a Novice Hammer plus Novice Aegis starting kit.",
     "Paladin class retains Guard and Cleansing March, which prevents new Poison and Curse while exploring.",
-    "All 14 Paladin hammers grant Censure, randomly lowering Armor or Resistance on successful debuff application.",
-    "All six Paladin trinkets grant Smite while equipped; trinkets must be acquired during play.",
-    "Smite deals modest magic damage and receives a sixfold bonus while its target has an active Censure Resistance reduction.",
-    "Replaces original equipment art across six families and three artifacts, with separate action symbols and native normal-Attack glyphs."
+    "Paladin owns Censure and Smite while an eligible hammer is equipped. Paladin hammers offer only native Strike; native hammers retain their original actions.",
+    "Smite deals magic damage and can stun on a perfect cast; Censure Resistance reduction increases its damage.",
+    "Mercy, Verdict and Censure armor sets change Guard, healing and attack tradeoffs when equipped.",
+    "Equipment Exchange supplies shared Guild Tokens and the native Back Alley vendor. The vendor shows only gear for the buying character's class and hides backpack and equipped copies."
   ],
-  "changelog": "Paladin 1.4.0 brings the class card into line with native class presentation and reduces starting equipment to Novice Hammer and Novice Aegis. Armor and the Tin Oath Token must be acquired during play; Smite becomes available when a Paladin trinket is equipped. Retains existing stats, combat mechanics, artwork and acquisition settings. Requires framework 1.2.1.",
+  "changelog": "Paladin 2.0.0 adds hammer-gated class actions, equipped armor roles, and Guild Token acquisition through the framework Equipment Exchange. Requires framework 1.7.0.",
   "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
   "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues/138",
   "platforms": [

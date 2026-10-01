@@ -20,6 +20,12 @@ internal static class Program
         Type[] types = { typeof(FTK_playerGameStartDB), typeof(FTK_itemsDB), typeof(FTK_weaponStats2DB), typeof(FTK_proficiencyTableDB), typeof(FTK_characterModifierDB) };
         foreach (Type type in types) db.Tables.Add(type, (GEDataArrayBase)Activator.CreateInstance(type));
         foreach (Type type in types) Check(db.Get(type).m_Dictionary == null, "fixture must start before lazy indexing");
+        int tokenId = IdAllocator.Allocate("com.ftkmf.equipment-exchange", "FTK_itemsDB/equipment_token");
+        TestRow token = new TestRow("equipment_token");
+        object nativeItem = ((object[])db.Get<FTK_itemsDB>().m_Array)[0];
+        db.Get<FTK_itemsDB>().m_Array = new object[] { nativeItem, token };
+        ContentRegistry.CustomIds.Add(typeof(FTK_itemsDB), new Dictionary<string,int> { { "equipment_token", tokenId } });
+        ContentRegistry.RetainedRows.Add(typeof(FTK_itemsDB), token);
         DefinitionState.CaptureBaseline(db);
         foreach (Type type in types) Check(db.Get(type).IndexBuilds == 1, "baseline must normalize every early-null index once");
         DefinitionState.ValidateLookups(db);
@@ -29,33 +35,37 @@ internal static class Program
         {
             DefinitionState.RestoreBaseline(db);
             Check(object.ReferenceEquals(vanilla, db.Get(typeof(FTK_itemsDB)).m_Array), "vanilla array reference");
-            Check(ContentRegistry.CustomIds.Count == 0 && IdAllocator.CustomIdCount == 0, "baseline maps empty");
+            Check(ContentRegistry.CustomIds.Count == 1 && IdAllocator.CustomIdCount == 1, "framework token baseline maps");
+            Check(object.ReferenceEquals(db.Get<FTK_itemsDB>().GetEntryByInt(tokenId), token), "framework token survives reset");
             int id = IdAllocator.Allocate("paladin", "item");
             if (expected < 0) expected = id;
             Check(id == expected, "identity changed with history");
-            ContentRegistry.CustomIds.Add(typeof(FTK_itemsDB), new Dictionary<string,int> { { "item", id } });
+            ContentRegistry.CustomIds[typeof(FTK_itemsDB)] = new Dictionary<string,int> { { "equipment_token", tokenId }, { "item", id } };
             object oldRow = new TestRow("item");
             object vanillaItem = ((object[])vanilla)[0];
-            object[] activeRows = { vanillaItem, oldRow };
-            object activeIndex = new Dictionary<int, object> { { 1, vanillaItem }, { id, oldRow } };
+            object[] activeRows = { vanillaItem, token, oldRow };
+            object activeIndex = new Dictionary<int, object> { { 1, vanillaItem }, { tokenId, token }, { id, oldRow } };
             db.Get(typeof(FTK_itemsDB)).m_Array = activeRows;
             db.Get(typeof(FTK_itemsDB)).m_Dictionary = activeIndex;
-            ContentRegistry.RetainedRows.Add(typeof(FTK_itemsDB), oldRow);
+            ContentRegistry.RetainedRows[typeof(FTK_itemsDB)] = oldRow;
             Localization.Names.Add("item", "old");
+            Localization.ItemDescriptions.Add("item", "old description");
             DefinitionState.ValidateLookups(db);
             DefinitionState active = DefinitionState.Capture(db);
             DefinitionState.RestoreBaseline(db);
             DefinitionState.ValidateLookups(db);
             Check(object.ReferenceEquals(db.Get(typeof(FTK_itemsDB)).GetEntryByInt(1), vanillaItem), "hot disable restores usable vanilla lookup");
-            ContentRegistry.CustomIds.Add(typeof(FTK_itemsDB), new Dictionary<string,int> { { "new", 7 } });
+            ContentRegistry.CustomIds[typeof(FTK_itemsDB)] = new Dictionary<string,int> { { "equipment_token", tokenId }, { "new", 7 } };
             Localization.Names.Add("item", "new");
+            Localization.ItemDescriptions["item"] = "new description";
             IdAllocator.Allocate("other", "collision-history");
             active.Restore(db);
             Check(object.ReferenceEquals(activeRows, db.Get(typeof(FTK_itemsDB)).m_Array), "rollback array ref");
             Check(object.ReferenceEquals(activeIndex, db.Get(typeof(FTK_itemsDB)).m_Dictionary), "rollback index ref");
             Check(ContentRegistry.CustomIds[typeof(FTK_itemsDB)].ContainsKey("item"), "nested old map changed");
             Check(object.ReferenceEquals(oldRow, ContentRegistry.RetainedRows[typeof(FTK_itemsDB)]), "ledger changed");
-            Check(Localization.Names["item"] == "old" && IdAllocator.CustomIdCount == 1, "rollback localization/allocator");
+            Check(Localization.Names["item"] == "old" && IdAllocator.CustomIdCount == 2, "rollback localization/allocator");
+            Check(Localization.ItemDescriptions["item"] == "old description", "rollback item descriptions");
         }
         DefinitionState.RestoreBaseline(db);
         // Validation must fail, rather than repair a malformed candidate before commit.
@@ -71,9 +81,9 @@ internal static class Program
         items.m_Dictionary = new Dictionary<int, object> { { 1, ((object[])vanilla)[0] }, { 2, new TestRow("removed") } };
         ExpectLookupFailure(db, "extra retired index entry");
         items.m_Dictionary = savedIndex;
-        ContentRegistry.CustomIds.Add(typeof(FTK_itemsDB), new Dictionary<string, int> { { "orphan", 7 } });
+        ContentRegistry.CustomIds[typeof(FTK_itemsDB)] = new Dictionary<string, int> { { "equipment_token", tokenId }, { "orphan", 7 } };
         ExpectLookupFailure(db, "custom map without indexed row");
-            ContentRegistry.CustomIds.Clear();
+            ContentRegistry.CustomIds[typeof(FTK_itemsDB)] = new Dictionary<string, int> { { "equipment_token", tokenId } };
             DefinitionState.ValidateLookups(db);
             Console.WriteLine("PASS: early-null baseline indexes become complete; malformed candidates fail closed without repair");
         // These two real keys collide in the allocator's 29-bit band. Canonical rebuilding
@@ -160,8 +170,18 @@ namespace GameCache {public static class Cache {public static class Items {
  public static object GetMap(){return _itemPrefabs;}
 }}}
 namespace FTKModFramework.Core {
+ internal static class BuiltinEquipmentExchange {
+  internal static bool IsExactBaseline(GridEditor.TableManager manager) {
+   Dictionary<string,int> ids; int id;
+   return manager != null && IdAllocator.CustomIdCount == 1 && ContentRegistry.CustomIds.Count == 1 &&
+    ContentRegistry.CustomIds.TryGetValue(typeof(FTK_itemsDB),out ids) && ids.Count == 1 &&
+    ids.TryGetValue("equipment_token",out id) &&
+    object.ReferenceEquals(manager.Get<FTK_itemsDB>().GetEntryByInt(id),
+     ((object[])manager.Get<FTK_itemsDB>().m_Array)[1]);
+  }
+ }
  public static class ContentRegistry {public static Dictionary<Type,Dictionary<string,int>> CustomIds=new Dictionary<Type,Dictionary<string,int>>();public static Dictionary<Type,object> RetainedRows=new Dictionary<Type,object>();public static object _batchDirty;}
- public static class Localization {public static Dictionary<string,string> Names=new Dictionary<string,string>(),RealmDisplayKeys=new Dictionary<string,string>(),ClassFlavors=new Dictionary<string,string>(),ProficiencyDescriptions=new Dictionary<string,string>(),EnemyDescriptions=new Dictionary<string,string>();}
+ public static class Localization {public static Dictionary<string,string> Names=new Dictionary<string,string>(),RealmDisplayKeys=new Dictionary<string,string>(),ClassFlavors=new Dictionary<string,string>(),ItemDescriptions=new Dictionary<string,string>(),ProficiencyDescriptions=new Dictionary<string,string>(),EnemyDescriptions=new Dictionary<string,string>();}
 }
 namespace FTKModFramework.Core.Data {internal static class ModRegistry {internal sealed class Snapshot {internal void Restore(){}}internal static Snapshot Capture(){return new Snapshot();}}}
 

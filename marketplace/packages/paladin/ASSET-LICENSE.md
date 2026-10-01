@@ -1,6 +1,6 @@
-# Paladin 1.3.0 asset notice
+# Paladin 2.0.0 asset notice
 
-Reviewed on 2026-09-25. Author: JarlBrak.
+Updated for the 2.0.0 candidate on 2026-10-01. Author: JarlBrak.
 
 The repository's MIT license covers authored code and declarative gameplay data.
 It is not a blanket relicensing of generated artwork or third-party rights.
@@ -20,6 +20,8 @@ provider verification of the account. The official Rodin terms linked above
 were reviewed for this release.
 
 ## Other artwork and provenance
+
+Some replacement geometry and material masks are procedurally authored; exact origins are recorded per asset. Updated inventory stills render the actual exported display models, textures and material masks. These studio images are not native gameplay screenshots.
 
 Action symbols and concept references are original generated artwork. No game
 artwork was supplied as image-generation input. Native character bodies, faces,

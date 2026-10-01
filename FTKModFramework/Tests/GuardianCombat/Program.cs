@@ -205,6 +205,23 @@ internal static class Program
             Check(splash.ResolveFocusedHitHealing("second", attack, "ally", 30, 39, true, true, true, bonus) == 0,
                 "capped Mercy healing consumes the attack opportunity");
         }
+        GuardianCombatState profileGuard = new GuardianCombatState();
+        Check(profileGuard.TryGuard("protector", "ally", true, true), "profile Guard begins");
+        GuardianCombatState.DamageResult profileHit;
+        Check(profileGuard.TryResolveAttackDamage("profile-hit", "ally", 100, 11, true, 35, out profileHit) &&
+            profileHit.Damage == 8 && profileHit.RemainingHealth == 92, "35 percent Guard uses deterministic rounding");
+        Check(profileGuard.TryResolveAttackDamage("profile-hit", "ally", 100, 11, true, 50, out profileHit) &&
+            profileHit.Damage == 8, "committed attack keeps original Guard snapshot");
+        Check(profileGuard.TryResolveAttackDamage("next-hit", "ally", 100, 11, true, 25, out profileHit) &&
+            profileHit.Damage == 9, "next attack uses current Guardian profile");
+        GuardianCombatState scaledHealing = new GuardianCombatState();
+        Check(scaledHealing.TryGuard("mercy", "ally", true, true), "scaled Guardian designation");
+        Check(scaledHealing.ResolveFocusedHitHealing("mercy", "focus-one", "ally", 70, 100,
+            true, true, true, 2, 150) == 15, "focused healing scales percentage before health cap");
+        Check(scaledHealing.ResolveFocusedHitHealing("mercy", "focus-two", "ally", 98, 100,
+            true, true, true, 2, 150) == 2, "scaled focused healing caps at deficit");
+        Check(scaledHealing.ResolveGuardHealingHealth("mercy", "guard-one", "ally", 70, 100,
+            4, 150) == 76, "Guard healing scales before cap");
         LegendaryChecks.Run(Check);
         OverworldAilmentChecks.Run(Check);
         Console.WriteLine("PASS GuardianCombat: " + checks + " checks");

@@ -31,6 +31,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,default=ROOT/'scratch/paladin-package-build')
     parser.add_argument('--game-assembly',type=Path,default=ROOT/'scratch/paladin-game/FTK.app/Contents/Resources/Data/Managed/Assembly-CSharp.dll')
+    parser.add_argument('--source-root',type=Path,help='Retained authoring archive root for source hash validation')
     parser.add_argument('--platform',choices=['macos','windows','linux'],default='macos',help='Local fixture platform; install platforms come from listing.json')
     parser.add_argument('--helper',type=Path,help='Current helper executable to validate this local archive')
     parser.add_argument('--fixture',action='store_true',help='Prepare a separate ignored local managed state; never activate it')
@@ -40,7 +41,9 @@ def main():
     output=args.output.resolve();output.relative_to(ROOT/'scratch')
     if args.fixture and not args.helper:parser.error('--fixture requires --helper')
     if not args.game_assembly.is_file():parser.error('Configured isolated game assembly is missing')
-    subprocess.run([sys.executable,str(HERE/'validate_paladin.py')],check=True)
+    validation=[sys.executable,str(HERE/'validate_paladin.py')]
+    if args.source_root:validation.extend(['--source-root',str(args.source_root)])
+    subprocess.run(validation,check=True)
     output.mkdir(parents=True,exist_ok=True)
     paths=[PACKAGE/'manifest.json',PACKAGE/'content.json']+sorted((PACKAGE/'assets').iterdir())
     files={}

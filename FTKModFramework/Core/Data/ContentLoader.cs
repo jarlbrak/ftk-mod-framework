@@ -107,7 +107,8 @@ namespace FTKModFramework.Core.Data
                 {
                     string kind = (entry.Entry.Kind ?? "").ToLowerInvariant();
                     if (!CandidateKindSupported(kind) ||
-                        !string.IsNullOrEmpty(entry.Entry.Behavior) || entry.Entry.PlayerModels != null)
+                        !string.IsNullOrEmpty(entry.Entry.Behavior) || entry.Entry.PlayerModels != null ||
+                        DeclaresProgression(entry.Entry))
                         report.Error("Unsupported hot activation entry: " + entry.ModGuid + "/" + entry.Entry.Id);
                 }
                 RequireComplete(report);
@@ -145,6 +146,9 @@ namespace FTKModFramework.Core.Data
             // may register their own rows, which are indexed immediately outside the base-row batch.
             Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles = VerifiedFiles(managed);
             foreach (Cached c in cached) ApplyCapabilities(c, report, verifiedFiles);
+            // Sets reference registered equipment and proficiencies across the whole package.
+            foreach (Cached c in cached) ApplyProgression(c, cached, report);
+            ApplyStandaloneExchangeCatalogs(mods, cached, report);
             sw.Stop();
 
             if (strict)
@@ -184,9 +188,12 @@ namespace FTKModFramework.Core.Data
                 {
                     ContentFile file = ParseCandidateFile(path, report);
                     if (file == null || file.Entries == null) { report.Error("Candidate content file has no entries."); continue; }
+                    if (file.TownExchangeCatalogs != null && file.TownExchangeCatalogs.Count != 0)
+                        report.Error("Town exchange catalogs require a game restart: " + mod.Manifest.ModGuid);
                     foreach (ContentEntry entry in file.Entries)
                     {
                         if (entry == null) { report.Error("Null candidate entry."); continue; }
+                        if (IsLegacyToken(mod.Manifest.ModGuid, entry)) continue;
                         string kind = (entry.Kind ?? "").ToLowerInvariant();
                         Type tableType = kind == "class" ? typeof(FTK_playerGameStartDB) :
                             kind == "item" ? typeof(FTK_itemsDB) : kind == "weapon" ? typeof(FTK_weaponStats2DB) :
@@ -199,7 +206,7 @@ namespace FTKModFramework.Core.Data
                             report.Error("Unsupported hot activation template: " + entry.Template);
                         if (string.IsNullOrEmpty(entry.Id) || !ids.Add(mod.Manifest.ModGuid + "/" + entry.Id) ||
                             !CandidateKindSupported(kind) ||
-                            !string.IsNullOrEmpty(entry.Behavior) || entry.PlayerModels != null)
+                            !string.IsNullOrEmpty(entry.Behavior) || entry.PlayerModels != null || DeclaresProgression(entry))
                             report.Error("Unsupported or duplicate candidate entry: " + entry.Id);
                     }
                 }
@@ -286,12 +293,20 @@ namespace FTKModFramework.Core.Data
                     foreach (ContentEntry entry in file.Entries)
                     {
                         if (entry == null) continue;
+                        if (IsLegacyToken(mod.Manifest.ModGuid, entry)) continue;
                         pending.Add(new PendingEntry(mod.Manifest.ModGuid, path, entry));
                     }
                 }
             }
 
             return pending;
+        }
+
+        private static bool IsLegacyToken(string modGuid, ContentEntry entry)
+        {
+            return modGuid == BuiltinEquipmentExchange.ModGuid && entry != null &&
+                entry.Id == BuiltinEquipmentExchange.ItemId &&
+                string.Equals(entry.Kind, "item", StringComparison.OrdinalIgnoreCase);
         }
 
         // ===================== PHASE 1 =====================
@@ -306,6 +321,11 @@ namespace FTKModFramework.Core.Data
         {
             ContentEntry entry = pe.Entry;
             string ctx = Context(pe);
+
+            // The framework retains this exact identity. A concurrently installed legacy package
+            // remains managed, but its old declaration must not create a second physical row.
+            if (IsLegacyToken(pe.ModGuid, entry))
+                return null;
 
             if (IsBlank(entry.Kind)) { report.Error(ctx + ": entry missing 'kind'."); return null; }
             if (IsBlank(entry.Id)) { report.Error(ctx + ": entry missing 'id'."); return null; }
@@ -497,11 +517,12 @@ namespace FTKModFramework.Core.Data
         private static bool DeclaresAnythingElse(ContentEntry e)
         {
             return e.Template != null || e.DisplayName != null || e.Fields != null || e.Proficiencies != null ||
+                e.WeaponProficienciesDeclared ||
                 e.ReplaceProficiencies || e.RandomDebuffOutcomes != null || e.ResistanceDamageBonus != null ||
                 e.Flavor != null || e.Description != null || e.Behavior != null || e.BehaviorCategory != null ||
                 e.Guardian || e.Opportunist || e.PrecisionWeapon != null || e.PrecisionAction != null ||
-                e.ThiefArtifact != null || e.OverworldAilmentImmunity != null || e.GuardianBonuses != null ||
-                e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
+                e.ThiefArtifact != null || e.OverworldAilmentImmunity != null || e.GuardianBonuses != null || DeclaresProgression(e) ||
+                e.HelmetHairVisibility != null || e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
                 e.OffHandModels != null || e.DisplayModels != null || e.PlayerModels != null || e.RaceBindings != null;
         }
 
@@ -521,6 +542,184 @@ namespace FTKModFramework.Core.Data
             WireBehavior(c, report);
             AttachProficiencies(c, report);
             ApplyLocalization(c);
+        }
+
+        private static bool DeclaresProgression(ContentEntry entry)
+        {
+            return entry.GuardianProfile != null || entry.GuardianSmiteAction != null ||
+                entry.GuardianEquipmentSets != null || entry.EnemyDropRule != null || entry.TownExchange != null;
+        }
+
+        private static GuardianEquipmentBonuses ProgressionBonuses(GuardianBonusEntry entry)
+        {
+            if (entry == null) return new GuardianEquipmentBonuses();
+            return new GuardianEquipmentBonuses(entry.GuardHealPercent, entry.FocusHealBonusPercent,
+                entry.RetaliationDamage, entry.WardDebuffs, entry.GuardFocusRestore, entry.GuardReckoning, entry.GuardCleanse);
+        }
+
+        private static GuardianProfile ProgressionProfile(GuardianProfileEntry entry)
+        {
+            if (entry == null) throw new ArgumentException("Set profile is required.");
+            return new GuardianProfile(entry.PhysicalPercent, entry.SmitePercent, entry.HealingPercent,
+                entry.GuardReductionPercent, ProgressionBonuses(entry.Bonuses));
+        }
+
+        private static FTK_itembase ProgressionItem(string id)
+        {
+            if (IsBlank(id)) throw new ArgumentException("Equipment reference is required.");
+            FTK_itembase item = Content.Db<FTK_itemsDB>().GetEntryByStringID(id);
+            if (item == null) item = Content.Db<FTK_weaponStats2DB>().GetEntryByStringID(id);
+            if (item == null) throw new ArgumentException("Unknown equipment '" + id + "'.");
+            return item;
+        }
+
+        private static FTK_playerGameStart ExchangeOwner(List<Cached> all, string identity)
+        {
+            if (IsBlank(identity)) throw new ArgumentException("Exchange owner class is required.");
+            if (identity.IndexOf(':') >= 0)
+            {
+                foreach (Cached c in all)
+                    if (c.Kind == "class" && c.ModGuid + ":" + c.Id == identity)
+                        return (FTK_playerGameStart)c.Row;
+                throw new ArgumentException("Unknown qualified exchange class '" + identity + "'.");
+            }
+            FTK_playerGameStart native = Content.Db<FTK_playerGameStartDB>().GetEntryByStringID(identity);
+            if (native == null) throw new ArgumentException("Unknown native exchange class '" + identity + "'.");
+            foreach (Cached c in all)
+                if (c.Kind == "class" && object.ReferenceEquals(c.Row, native))
+                    throw new ArgumentException("Authored exchange class requires modGuid:id.");
+            return native;
+        }
+
+        private static FTK_itembase ExchangeItem(List<Cached> all, string modGuid, string identity)
+        {
+            if (IsBlank(identity)) throw new ArgumentException("Exchange item is required.");
+            string qualified = identity.IndexOf(':') >= 0 ? identity : modGuid + ":" + identity;
+            foreach (Cached c in all)
+                if ((c.Kind == "item" || c.Kind == "weapon") && c.ModGuid + ":" + c.Id == qualified)
+                    return (FTK_itembase)c.Row;
+            throw new ArgumentException("Unknown qualified exchange item '" + qualified + "'.");
+        }
+
+        private static TownExchangeOffer[] ExchangeOffers(List<Cached> all, string modGuid,
+            FTK_playerGameStart owner, TownExchangeOfferEntry[] entries)
+        {
+            if (entries == null || entries.Length == 0 || entries.Length > 128)
+                throw new ArgumentException("townExchange requires between one and 128 offers.");
+            FTK_playerGameStart.ID ownerId = FTK_playerGameStart.GetEnum(owner.m_ID);
+            TownExchangeOffer[] offers = new TownExchangeOffer[entries.Length];
+            for (int i = 0; i < entries.Length; i++)
+            {
+                TownExchangeOfferEntry offer = entries[i];
+                if (offer == null) throw new ArgumentException("Exchange offer cannot be null.");
+                FTK_itembase item = ExchangeItem(all, modGuid, offer.Item);
+                offers[i] = new TownExchangeOffer(ownerId, FTK_itembase.GetEnum(item.m_ID), offer.Name, offer.Family, offer.Slot);
+            }
+            return offers;
+        }
+
+        private static void ApplyStandaloneExchangeCatalogs(List<DiscoveredMod> mods, List<Cached> all, ValidationReport report)
+        {
+            foreach (DiscoveredMod mod in mods)
+            {
+                if (mod.Manifest.CompatibilityReason != null || !ModRegistry.IsEnabled(mod.Manifest.ModGuid)) continue;
+                foreach (string path in mod.ContentFilePaths)
+                {
+                    ContentFile file = JsonContentParser.ParseFile(path, report);
+                    if (file == null || file.TownExchangeCatalogs == null) continue;
+                    foreach (TownExchangeCatalogEntry catalog in file.TownExchangeCatalogs)
+                    {
+                        try
+                        {
+                            if (catalog == null) throw new ArgumentException("Exchange catalog cannot be null.");
+                            FTK_playerGameStart owner = ExchangeOwner(all, catalog.OwnerClass);
+                            Content.RegisterTownExchange(ExchangeOffers(all, mod.Manifest.ModGuid, owner, catalog.Offers));
+                        }
+                        catch (Exception error)
+                        { report.Error("[" + mod.Manifest.ModGuid + "] " + System.IO.Path.GetFileName(path) + ": townExchangeCatalogs rejected: " + error.Message); }
+                    }
+                }
+            }
+        }
+
+        private static FTK_proficiencyTable ProgressionAction(string id)
+        {
+            if (IsBlank(id)) throw new ArgumentException("Action reference is required.");
+            FTK_proficiencyTable action = Content.Db<FTK_proficiencyTableDB>().GetEntryByStringID(id);
+            if (action == null) throw new ArgumentException("Unknown action '" + id + "'.");
+            return action;
+        }
+
+        private static void ApplyProgression(Cached c, List<Cached> all, ValidationReport report)
+        {
+            try
+            {
+                ContentEntry entry = c.Entry;
+                if (entry.GuardianProfile != null || entry.GuardianSmiteAction != null || entry.GuardianEquipmentSets != null)
+                {
+                    if (c.Kind != "class" || !entry.Guardian)
+                        throw new ArgumentException("Guardian profiles and sets require a Guardian class.");
+                    FTK_playerGameStart owner = (FTK_playerGameStart)c.Row;
+                    if (entry.GuardianProfile != null && !Content.SetGuardianProfile(owner, ProgressionProfile(entry.GuardianProfile)))
+                        throw new ArgumentException("Guardian profile registration rejected.");
+                    if (entry.GuardianSmiteAction != null && !Content.SetGuardianSmiteAction(owner, ProgressionAction(entry.GuardianSmiteAction)))
+                        throw new ArgumentException("Guardian Smite action registration rejected.");
+                    if (entry.GuardianEquipmentSets != null)
+                    {
+                        if (entry.GuardianEquipmentSets.Length == 0 || entry.GuardianEquipmentSets.Length > 16)
+                            throw new ArgumentException("A class must declare between one and sixteen sets.");
+                        foreach (GuardianSetEntry set in entry.GuardianEquipmentSets)
+                        {
+                            if (set == null || IsBlank(set.Id)) throw new ArgumentException("Set identity is required.");
+                            string[] ids = set.CoreProficiencies ?? new string[0];
+                            FTK_proficiencyTable[] actions = new FTK_proficiencyTable[ids.Length];
+                            for (int i = 0; i < ids.Length; i++) actions[i] = ProgressionAction(ids[i]);
+                            string[] armorIds = set.ArmorDamageBonus == null ? new string[0] : set.ArmorDamageBonus.Sources;
+                            if (armorIds == null) throw new ArgumentException("Armor damage sources are required.");
+                            FTK_proficiencyTable[] armorActions = new FTK_proficiencyTable[armorIds.Length];
+                            for (int i = 0; i < armorIds.Length; i++) armorActions[i] = ProgressionAction(armorIds[i]);
+                            if (!Content.AddGuardianEquipmentSet(owner, c.ModGuid + ":" + set.Id,
+                                new GuardianEquipmentSet(ProgressionItem(set.Head), ProgressionItem(set.Body), ProgressionItem(set.Feet),
+                                    ProgressionItem(set.OneHand), ProgressionItem(set.Shield), ProgressionItem(set.TwoHand),
+                                    ProgressionProfile(set.Minor), ProgressionProfile(set.Core), ProgressionBonuses(set.Completion), actions,
+                                    armorActions, set.ArmorDamageBonus == null ? 1f : set.ArmorDamageBonus.Multiplier)))
+                                throw new ArgumentException("Guardian set registration rejected: " + set.Id);
+                        }
+                    }
+                }
+                if (entry.EnemyDropRule != null)
+                {
+                    if (c.Kind != "item") throw new ArgumentException("enemyDropRule requires a physical item.");
+                    EnemyDropRuleEntry rule = entry.EnemyDropRule;
+                    Content.SetEnemyDropRule((FTK_items)c.Row, new EnemyDropRule {
+                        MinimumDisplayedLevel = rule.MinimumDisplayedLevel, OrdinaryChancePercent = rule.OrdinaryChancePercent,
+                        BossChancePercent = rule.BossChancePercent, GuaranteedByOpportunity = rule.GuaranteedByOpportunity,
+                        NamedBossGroups = rule.NamedBossGroups });
+                }
+                if (entry.TownExchange != null)
+                {
+                    if (c.Kind != "class") throw new ArgumentException("townExchange requires a class catalog declaration.");
+                    FTK_playerGameStart owner = (FTK_playerGameStart)c.Row;
+                    FTK_playerGameStart.ID ownerId = FTK_playerGameStart.GetEnum(owner.m_ID);
+                    if (!string.IsNullOrEmpty(entry.TownExchange.Token) &&
+                        entry.TownExchange.Token != BuiltinEquipmentExchange.ItemId &&
+                        entry.TownExchange.Token != BuiltinEquipmentExchange.ModGuid + ":" + BuiltinEquipmentExchange.ItemId)
+                        throw new ArgumentException("townExchange uses the framework Guild Token.");
+                    TownExchangeOfferEntry[] entries = entry.TownExchange.Offers;
+                    if (entries == null || entries.Length == 0 || entries.Length > 128)
+                        throw new ArgumentException("townExchange requires between one and 128 offers.");
+                    TownExchangeOffer[] offers = new TownExchangeOffer[entries.Length];
+                    for (int i = 0; i < entries.Length; i++)
+                    {
+                        TownExchangeOfferEntry offer = entries[i];
+                        if (offer == null) throw new ArgumentException("Exchange offer cannot be null.");
+                        FTK_itembase row = ExchangeItem(all, c.ModGuid, offer.Item);
+                        offers[i] = new TownExchangeOffer(ownerId, FTK_itembase.GetEnum(row.m_ID), offer.Name, offer.Family, offer.Slot);
+                    }
+                    Content.RegisterTownExchange(offers);
+                }
+            }
+            catch (Exception error) { report.Error(c.Context + ": progression capability rejected: " + error.Message); }
         }
 
         private static void ApplyCapabilities(Cached c, ValidationReport report,
@@ -543,14 +742,14 @@ namespace FTKModFramework.Core.Data
                         {
                             ModelRendererEntry entry = binding.Body[i];
                             if (entry == null) throw new ArgumentException("null race body assignment");
-                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                         }
                         PlayerApparelMesh[] apparel = new PlayerApparelMesh[binding.Apparel == null ? 0 : binding.Apparel.Length];
                         for (int i = 0; i < apparel.Length; i++)
                         {
                             ModelRendererEntry entry = binding.Apparel[i];
                             if (entry == null) throw new ArgumentException("null race apparel assignment");
-                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                         }
                         if (!Content.SetRaceClassBodyMeshesFromGlb((int)c.Row, row, skinset, body, apparel))
                             throw new ArgumentException("race binding registration rejected for '" + binding.Class + "'");
@@ -572,6 +771,16 @@ namespace FTKModFramework.Core.Data
                 if (c.Kind == "class" && c.Entry.Proficiencies != null && c.Entry.Proficiencies.Length > 0 &&
                     !Content.AttachClassProficiencies((FTK_playerGameStart)c.Row, c.Entry.Proficiencies))
                     throw new ArgumentException("class proficiency grant rejected; every action must resolve");
+                if (c.Entry.WeaponProficienciesDeclared)
+                {
+                    ClassWeaponProficiencyEntry[] groups = c.Entry.WeaponProficiencies;
+                    if (c.Kind != "class" || groups == null || groups.Length == 0 || groups.Length > 16)
+                        throw new ArgumentException("weaponProficiencies requires a class and 1 to 16 groups");
+                    foreach (ClassWeaponProficiencyEntry group in groups)
+                        if (group == null || !Content.AttachClassWeaponProficiencies(
+                            (FTK_playerGameStart)c.Row, group.Weapons, group.Proficiencies))
+                            throw new ArgumentException("weaponProficiencies requires distinct resolved weapons and custom actions in every group");
+                }
                 if (c.Kind == "item" && c.Entry.Proficiencies != null && c.Entry.Proficiencies.Length > 0 &&
                     !Content.AttachItemProficiencies((FTK_items)c.Row, c.Entry.Proficiencies))
                     throw new ArgumentException("item proficiency grant requires registered equipment and resolved actions");
@@ -630,7 +839,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry r = a.Renderers[i];
-                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model, verifiedFiles), Asset(c, r.Texture, verifiedFiles));
+                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model, verifiedFiles), Asset(c, r.Texture, verifiedFiles), MaterialMaskAsset(c, r.MetallicGlossTexture, verifiedFiles));
                     }
                     if (!Content.SetItemApparelMeshesFromGlb((FTK_items)c.Row, female, male, meshes)) throw new ArgumentException("item apparel registration rejected");
                 }
@@ -644,6 +853,12 @@ namespace FTKModFramework.Core.Data
                         m.Apply(modifier);
                     }) == null) throw new ArgumentException("item modifier registration rejected");
                 }
+                if (c.Entry.HelmetHairVisibility != null)
+                {
+                    HelmetHairVisibilityEntry hair = c.Entry.HelmetHairVisibility;
+                    if (c.Kind != "item" || !Content.SetHelmetHairVisibility(c.Row as FTK_items, hair.Top, hair.Bottom))
+                        throw new ArgumentException("helmetHairVisibility requires a registered custom helmet using FTKHub.CreateHelmet without a wearable prefab");
+                }
                 if (c.Entry.ItemModels != null)
                 {
                     if (c.Kind != "item" && c.Kind != "weapon") throw new ArgumentException("itemModels requires equipment");
@@ -651,7 +866,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.ItemModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                     }
                     if (!Content.SetItemMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("item model registration rejected");
                 }
@@ -662,7 +877,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.OffHandModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                     }
                     if (!Content.SetItemOffHandMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("off-hand item model registration rejected");
                 }
@@ -673,7 +888,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.DisplayModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                     }
                     if (!Content.SetItemDisplayMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("display model registration rejected");
                 }
@@ -689,13 +904,13 @@ namespace FTKModFramework.Core.Data
                         for (int i = 0; i < body.Length; i++)
                         {
                             ModelRendererEntry entry = model.Body[i];
-                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                            body[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                         }
                         PlayerApparelMesh[] apparel = new PlayerApparelMesh[model.Apparel == null ? 0 : model.Apparel.Length];
                         for (int i = 0; i < apparel.Length; i++)
                         {
                             ModelRendererEntry entry = model.Apparel[i];
-                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                         }
                         if (!Content.SetClassBodyMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, body, apparel))
                             throw new ArgumentException("player model registration rejected");
@@ -705,7 +920,7 @@ namespace FTKModFramework.Core.Data
                             for (int i = 0; i < backpack.Length; i++)
                             {
                                 ModelRendererEntry entry = model.Backpack[i];
-                                backpack[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles));
+                                backpack[i] = new PlayerRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
                             }
                             if (!Content.SetClassBackpackMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, backpack))
                                 throw new ArgumentException("player backpack registration rejected");
@@ -718,6 +933,15 @@ namespace FTKModFramework.Core.Data
                 if (c.Kind == "race") PlayerRaceRegistry.Disable((int)c.Row);
                 report.Error(c.Context + ": capability registration failed: " + e.Message);
             }
+        }
+
+        private static string MaterialMaskAsset(Cached c, string relativePath,
+            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles)
+        {
+            if (relativePath == null) return null;
+            if (!relativePath.EndsWith(".png", StringComparison.Ordinal))
+                throw new ArgumentException("metallicGlossTexture must name a PNG asset");
+            return Asset(c, relativePath, verifiedFiles);
         }
 
         private static string Asset(Cached c, string relativePath,
@@ -847,14 +1071,21 @@ namespace FTKModFramework.Core.Data
         private static void AttachProficiencies(Cached c, ValidationReport report)
         {
             string[] profs = c.Entry.Proficiencies;
-            if (profs == null || profs.Length == 0) return;
+            ProficiencyAttachmentMode mode = ProficiencyAttachmentPolicy.Resolve(
+                c.Kind, profs, c.Entry.ReplaceProficiencies);
+            if (mode == ProficiencyAttachmentMode.Invalid)
+            {
+                report.Error(c.Context + ": invalid proficiencies: replacement requires a weapon and an explicit array; empty grants are unsupported");
+                return;
+            }
+            if (mode == ProficiencyAttachmentMode.None) return;
 
             if (c.Kind == "weapon")
             {
-                if (c.Entry.ReplaceProficiencies)
-                    Content.ReplaceProficiencies((FTK_weaponStats2)c.Row, profs);
-                else
-                    Content.AttachProficiencies((FTK_weaponStats2)c.Row, profs);
+                bool attached = mode == ProficiencyAttachmentMode.Replace
+                    ? Content.ReplaceProficiencies((FTK_weaponStats2)c.Row, profs)
+                    : Content.AttachProficiencies((FTK_weaponStats2)c.Row, profs);
+                if (!attached) report.Error(c.Context + ": weapon proficiencies could not be attached");
             }
             else if (c.Kind == "enemy")
             {
@@ -876,6 +1107,8 @@ namespace FTKModFramework.Core.Data
         {
             if (c.Kind == "class" && !IsBlank(c.Entry.Flavor))
                 Localization.SetClassFlavor(c.Id, c.Entry.Flavor);
+            else if (c.Kind == "item" && !IsBlank(c.Entry.Description))
+                Localization.SetItemDescription(c.Id, c.Entry.Description);
             else if (c.Kind == "proficiency" && !IsBlank(c.Entry.Description))
                 Localization.SetProficiencyDescription(c.Id, c.Entry.Description);
             else if (c.Kind == "enemy" && !IsBlank(c.Entry.Description))

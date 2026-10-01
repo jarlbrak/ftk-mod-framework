@@ -32,6 +32,8 @@ namespace FTKModFramework.Core
         {
             try
             {
+                if (__instance.m_CharacterStats != null && __instance.m_CharacterStats.m_IsInCombat)
+                    GuardianRuntime.ExpireIfRoleChanged(__instance.GetCombatDummy());
                 if (_itembase != null && _itembase.m_IsWeapon && __instance.m_CharacterStats != null &&
                     __instance.m_CharacterStats.m_IsInCombat)
                     GuardianRuntime.ObserveLegendaryEquipment(__instance.GetCombatDummy());

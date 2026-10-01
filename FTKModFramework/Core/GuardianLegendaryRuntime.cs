@@ -117,6 +117,7 @@ namespace FTKModFramework.Core
             CharacterDummy guardian = attempt.m_AttackingDummy;
             if (!IsGuardian(guardian)) return;
             ObserveLegendaryEquipment(guardian);
+            PrepareProfileAttack(attempt, consumable, ref damageMultiplier);
             if (consumable || attempt.m_Harmless || !CanAct(guardian) ||
                 !guardian.m_CharacterOverworld.IsOwner) return;
             bool eligible = ReckoningAttack(guardian, attempt.m_DamagedDummy, attempt.m_AttackProficiency,

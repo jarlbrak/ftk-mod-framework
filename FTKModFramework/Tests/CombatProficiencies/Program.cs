@@ -1,5 +1,6 @@
 using System;
 using FTKModFramework.Core;
+using FTKModFramework.Core.Data;
 using GridEditor;
 
 internal static class Program
@@ -13,11 +14,29 @@ internal static class Program
         return row;
     }
 
+    private static void AddWeapon(int id, string name)
+    {
+        Content.Weapons.Values.Add(id, new FTK_weaponStats2 {
+            m_ID = name, m_Prefab = new GameObject { CurrentWeapon = new Weapon() } });
+        Content.Weapons.Ids.Add(name, id);
+    }
+
     private static void Main()
     {
+        Check(ProficiencyAttachmentPolicy.Resolve("weapon", null, false) == ProficiencyAttachmentMode.None &&
+            ProficiencyAttachmentPolicy.Resolve("weapon", new string[0], false) == ProficiencyAttachmentMode.None,
+            "omitted or empty nonreplacement weapon list leaves inherited actions alone");
+        Check(ProficiencyAttachmentPolicy.Resolve("weapon", new string[0], true) == ProficiencyAttachmentMode.Replace,
+            "explicit empty replacement clears inherited weapon actions");
+        Check(ProficiencyAttachmentPolicy.Resolve("weapon", null, true) == ProficiencyAttachmentMode.Invalid &&
+            ProficiencyAttachmentPolicy.Resolve("class", new string[0], false) == ProficiencyAttachmentMode.Invalid &&
+            ProficiencyAttachmentPolicy.Resolve("item", new string[0], false) == ProficiencyAttachmentMode.Invalid,
+            "missing replacement array and empty class or item grants are rejected");
         FTK_proficiencyTable armor = Add(100, "armor", new ProficiencyArmor { m_Category = ProficiencyBase.Category.Armor });
         FTK_proficiencyTable resist = Add(101, "resist", new ProficiencyResist { m_Category = ProficiencyBase.Category.Resist });
         FTK_proficiencyTable smite = Add(102, "smite", null);
+        Add(103, "censure", null);
+        Add(105, "censure.two", null);
         smite.m_DmgTypeOverride = FTK_weaponStats2.DamageType.magic; smite.m_DmgMultiplier = .25f;
         string[] tooltip = { "Single target", "Standard attack" };
         ProficiencyDescriptionRestoration.Apply(smite, tooltip);
@@ -100,6 +119,99 @@ internal static class Program
         Check(!Content.AttachClassProficiencies(new FTK_playerGameStart { m_ID = "paladin" }, "smite"), "forged class rejected");
         int[] owned = ClassProficiencyRegistry.Get(14); owned[0] = 999;
         Check(ClassProficiencyRegistry.Get(14)[0] == 102, "caller cannot mutate registered list");
+        AddWeapon(300, "hammer.one"); AddWeapon(301, "hammer.two"); AddWeapon(302, "blade");
+        Check(Content.AttachClassWeaponProficiencies(heroClass, new[] { "hammer.one", "hammer.two" },
+            "censure", "smite"), "conditional class action group accepts exact weapons");
+        Check(Content.AttachClassWeaponProficiencies(heroClass, new[] { "hammer.two" }, "censure"),
+            "overlapping conditional group is idempotent");
+        Check(ClassProficiencyRegistry.Get(14, 300).Length == 2 &&
+            ClassProficiencyRegistry.Get(14, 301).Length == 2 &&
+            ClassProficiencyRegistry.Get(14, 302).Length == 1,
+            "matching weapon adds actions once; swap removes conditional action");
+        Check(ClassProficiencyRegistry.Allows(14, 300, 103) &&
+            !ClassProficiencyRegistry.Allows(14, 302, 103) &&
+            !ClassProficiencyRegistry.Allows(15, 300, 103) &&
+            ClassProficiencyRegistry.Allows(14, 302, 102),
+            "wrong class and weapon denied while unconditional grant persists");
+        Check(!Content.AttachClassWeaponProficiencies(heroClass, new[] { "hammer.one", "missing" },
+            "censure") && !ClassProficiencyRegistry.Allows(14, 302, 103),
+            "missing weapon rejects entire conditional grant");
+        Check(!Content.AttachClassWeaponProficiencies(heroClass, new[] { "blade" },
+            "censure", "missing") && !ClassProficiencyRegistry.Allows(14, 302, 103),
+            "missing action rejects entire conditional grant");
+        Check(!Content.AttachClassWeaponProficiencies(new FTK_playerGameStart { m_ID = "paladin" },
+            new[] { "blade" }, "censure"), "copied class cannot register weapon group");
+        Check(!Content.AttachClassWeaponProficiencies(heroClass, new[] { "blade", "blade" },
+            "censure") && !Content.AttachClassWeaponProficiencies(heroClass, new[] { "blade" },
+            "censure", "censure"), "duplicate IDs reject whole group");
+        FTK_proficiencyTable vanilla = new FTK_proficiencyTable { m_ID = "native-action" };
+        Content.Proficiencies.Values.Add(104, vanilla); Content.Proficiencies.Ids.Add(vanilla.m_ID, 104);
+        Check(!Content.AttachClassWeaponProficiencies(heroClass, new[] { "blade" },
+            "native-action"), "native shared actions cannot become class-gated");
+        int[] conditionalCopy = ClassProficiencyRegistry.Get(14, 300);
+        conditionalCopy[0] = 999;
+        Check(ClassProficiencyRegistry.Get(14, 300)[0] == 102,
+            "conditional action list is not caller mutable");
+        CharacterOverworld conditionalCow = new CharacterOverworld();
+        conditionalCow.m_CharacterStats.m_CharacterClass = 14;
+        conditionalCow.m_WeaponID = (FTK_itembase.ID)300;
+        Check(ClassWeaponProficiencyEligibility.Allows(conditionalCow, 103),
+            "eligible class with eligible weapon may use gated action");
+        conditionalCow.m_WeaponID = (FTK_itembase.ID)302;
+        Check(!ClassWeaponProficiencyEligibility.Allows(conditionalCow, 103) &&
+            ClassWeaponProficiencyEligibility.Allows(conditionalCow, 102),
+            "weapon swap removes gated action but preserves unconditional grant");
+        conditionalCow.m_WeaponID = (FTK_itembase.ID)300;
+        conditionalCow.m_CharacterStats.m_CharacterClass = 15;
+        Check(!ClassWeaponProficiencyEligibility.Allows(conditionalCow, 103) &&
+            ClassWeaponProficiencyEligibility.Allows(conditionalCow, 100),
+            "wrong class denied; unrelated action unaffected");
+        FTK_items duplicateGrant = new FTK_items { m_ID = "duplicate-grant", m_ObjectType = FTK_itembase.ObjectType.trinket };
+        Content.Items.Values.Add(201, duplicateGrant); Content.Items.Ids.Add(duplicateGrant.m_ID, 201);
+        ContentRegistry.Custom.Add(201);
+        Check(Content.AttachItemProficiencies(duplicateGrant, "censure"), "item can independently register same synthetic action");
+        conditionalCow.m_PlayerInventory.Get(PlayerInventory.ContainerID.Trinket).m_CountDictionary[(FTK_itembase.ID)201] = 1;
+        Check(ClassWeaponProficiencyEligibility.Allows(conditionalCow, 103),
+            "explicit item grant remains available despite a separate class-weapon grant");
+        conditionalCow.m_PlayerInventory.Get(PlayerInventory.ContainerID.Trinket).m_CountDictionary[(FTK_itembase.ID)201] = 0;
+        Content.Weapons.GetEntryByInt(302).m_Prefab.CurrentWeapon.m_ProficiencyEffects.Add(
+            new ProficiencyID { m_ID = "censure" }, null);
+        conditionalCow.m_WeaponID = (FTK_itembase.ID)302;
+        Check(ClassWeaponProficiencyEligibility.Allows(conditionalCow, 103),
+            "explicit weapon action remains available despite separate class-weapon grant");
+        FTK_playerGameStart isolatedClass = new FTK_playerGameStart { m_ID = "isolated-guardian" };
+        Content.Classes.Values.Add(15, isolatedClass); Content.Classes.Ids.Add(isolatedClass.m_ID, 15);
+        ContentRegistry.Custom.Add(15);
+        Check(Content.AttachClassWeaponProficiencies(isolatedClass, new[] { "hammer.one" },
+            "censure", "smite") && Content.AttachClassWeaponProficiencies(isolatedClass,
+            new[] { "hammer.two" }, "censure.two", "smite"),
+            "isolated class registers separate one- and two-hand action groups");
+        Check(ClassProficiencyRegistry.Get(15).Length == 0 &&
+            ClassProficiencyRegistry.Get(15, 300).Length == 2 &&
+            ClassProficiencyRegistry.Get(15, 301).Length == 2 &&
+            ClassProficiencyRegistry.Get(15, 302).Length == 0,
+            "class has no unconditional actions and no button with unrelated weapon");
+        CharacterOverworld isolatedCow = new CharacterOverworld();
+        isolatedCow.m_CharacterStats.m_CharacterClass = 15;
+        isolatedCow.m_WeaponID = (FTK_itembase.ID)300;
+        Check(ClassWeaponProficiencyEligibility.Allows(isolatedCow, 103) &&
+            ClassWeaponProficiencyEligibility.Allows(isolatedCow, 102) &&
+            !ClassWeaponProficiencyEligibility.Allows(isolatedCow, 105),
+            "one-hand Censure and Smite allowed, two-hand Censure denied");
+        isolatedCow.m_WeaponID = (FTK_itembase.ID)301;
+        Check(ClassWeaponProficiencyEligibility.Allows(isolatedCow, 105) &&
+            ClassWeaponProficiencyEligibility.Allows(isolatedCow, 102) &&
+            !ClassWeaponProficiencyEligibility.Allows(isolatedCow, 103),
+            "two-hand Censure and Smite allowed, one-hand Censure denied");
+        isolatedCow.m_WeaponID = (FTK_itembase.ID)302;
+        Check(!ClassWeaponProficiencyEligibility.Allows(isolatedCow, 105) &&
+            !ClassWeaponProficiencyEligibility.Allows(isolatedCow, 102),
+            "weapon swap removes both class actions");
+        isolatedCow.m_WeaponID = (FTK_itembase.ID)300;
+        isolatedCow.m_CharacterStats.m_CharacterClass = 16;
+        Check(!ClassWeaponProficiencyEligibility.Allows(isolatedCow, 102) &&
+            !ClassWeaponProficiencyEligibility.Allows(isolatedCow, 103),
+            "other class cannot use actions on same eligible hammer");
 
         CharacterDummy actor = new CharacterDummy { FID = new FTKPlayerID { m_TurnIndex = 1, m_PhotonID = 8 }, m_CharacterOverworld = new CharacterOverworld() };
         EnemyDummy victim = new EnemyDummy();
@@ -189,9 +301,12 @@ internal static class Program
         Check(zero > 4800 && zero < 5200, "hash branches balanced across synchronized seeds");
         Action restoreClasses = ClassProficiencyRegistry.SuspendForReload();
         Action restoreCombat = CombatProficiencyRegistry.SuspendForReload();
-        Check(ClassProficiencyRegistry.Count == 0 && CombatProficiencyRegistry.Count == 0, "reload detaches all registrations");
+        Check(ClassProficiencyRegistry.Count == 0 && CombatProficiencyRegistry.Count == 0 &&
+            !ClassProficiencyRegistry.IsWeaponAction(103), "reload detaches all registrations");
         restoreClasses(); restoreCombat();
-        Check(ClassProficiencyRegistry.Get(14)[0] == 102 && CombatProficiencyRegistry.Count == 2, "rollback restores prior registrations");
+        Check(ClassProficiencyRegistry.Get(14)[0] == 102 &&
+            ClassProficiencyRegistry.Allows(14, 300, 103) && CombatProficiencyRegistry.Count == 2,
+            "rollback restores unconditional and conditional registrations");
         Console.WriteLine("PASS CombatProficiencies: " + checks + " checks");
     }
 }

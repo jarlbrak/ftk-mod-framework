@@ -49,6 +49,33 @@ available and defaults to preserving emission. This is an assignment-time option
 subsequent native effects may still change material properties during combat.
 Re-registering applies to future avatar creation, not already retained swaps.
 
+### Authored material masks (unreleased)
+
+Single-material explicit assignments can replace an inherited metallic/smoothness
+map using an additional constructor argument:
+
+```csharp
+new EnemyRendererMesh("body", "body.glb", "body.png",
+    disableNativeEmission: true, metallicGlossTextureFileName: "body-mask.png")
+
+EnemyRendererMesh.ForStaticRenderer("prop", "prop.glb", "prop.png",
+    disableNativeEmission: true, metallicGlossTextureFileName: "prop-mask.png")
+```
+
+The paths are relative to the model directory. Use an 8-bit RGBA PNG: red stores
+metallic, alpha stores smoothness, and green/blue should be zero. This is linear
+data, not an albedo image. Omission or `null` retains the inherited map and
+smoothness channel; it does not opt out of other material inheritance.
+`WithNativeMaterialSlots` has no authored mask parameter.
+
+The texture belongs to the same private replacement transaction and resource
+lease as the mesh and material. Unsupported shaders or invalid masks reject the
+replacement; native shared materials are never edited. See the
+[complete mask contract](GUARDIAN-AND-EQUIPMENT.md#authored-metallic-and-smoothness-masks-unreleased)
+for bounds, channels, supported JSON/player/equipment surfaces and validation
+limits. These overloads are unreleased and do not imply compatibility with an
+already published framework version.
+
 
 The swap preserves the native renderer's animated local bounds. Mesh bind-pose bounds are not substituted for that envelope. A custom model extending beyond it requires measured live-animation bounds and a separate validated integration change; retaining the native envelope alone does not prove culling correctness for arbitrary art.
 

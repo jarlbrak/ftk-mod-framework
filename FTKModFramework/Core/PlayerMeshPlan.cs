@@ -40,7 +40,7 @@ namespace FTKModFramework.Core
             {
                 PlayerRendererMesh item = required[i];
                 if (item == null) { error = "required renderer assignment is null"; return false; }
-                body[i] = new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName);
+                body[i] = new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName, false, item.MetallicGlossTextureFileName);
                 all.Add(body[i]);
             }
             if (!ExplicitEnemyMeshSwap.ValidateAssignments(body, out error)) return false;
@@ -50,8 +50,8 @@ namespace FTKModFramework.Core
                 if (item == null || string.IsNullOrEmpty(item.ExpectedNativeMeshName) || item.ExpectedNativeMeshName.Trim().Length == 0)
                 { error = "conditional apparel requires an exact native mesh name"; return false; }
                 clothes[i] = new PlayerApparelMesh(item.RendererPath, item.ExpectedNativeMeshName,
-                    item.GlbFileName, item.TextureFileName);
-                all.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName));
+                    item.GlbFileName, item.TextureFileName, item.MetallicGlossTextureFileName);
+                all.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName, false, item.MetallicGlossTextureFileName));
             }
             // Validate all possible assignments, including duplicate paths across required and conditional sets.
             if (!ExplicitEnemyMeshSwap.ValidateAssignments(all.ToArray(), out error)) return false;
@@ -121,7 +121,7 @@ namespace FTKModFramework.Core
                         "', found '" + renderer.sharedMesh.name + "'";
                     return false;
                 }
-                assignments.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName));
+                assignments.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName, false, item.MetallicGlossTextureFileName));
             }
             assignments.AddRange(equipment);
             resolved = assignments.ToArray();

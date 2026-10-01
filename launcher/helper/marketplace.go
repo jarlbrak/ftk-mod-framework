@@ -1173,15 +1173,27 @@ func marketActionReferences(ids []string, minimum, maximum int) bool {
 	return true
 }
 
+type marketHelmetHairVisibility struct {
+	Top    *bool `json:"top"`
+	Bottom *bool `json:"bottom"`
+}
+
+type marketWeaponProficiency struct {
+	Weapons       []string `json:"weapons"`
+	Proficiencies []string `json:"proficiencies"`
+}
+
 func marketContent(b []byte) error {
 	var c struct {
-		Entries []struct {
+		TownExchangeCatalogs []marketTownExchangeCatalog `json:"townExchangeCatalogs,omitempty"`
+		Entries              []struct {
 			Kind                     string                       `json:"kind"`
 			ID                       string                       `json:"id"`
 			Template                 string                       `json:"template"`
 			DisplayName              string                       `json:"displayName"`
 			Fields                   map[string]interface{}       `json:"fields"`
 			Proficiencies            []string                     `json:"proficiencies"`
+			WeaponProficiencies      json.RawMessage              `json:"weaponProficiencies,omitempty"`
 			Flavor                   string                       `json:"flavor"`
 			Description              string                       `json:"description"`
 			Guardian                 bool                         `json:"guardian,omitempty"`
@@ -1191,9 +1203,15 @@ func marketContent(b []byte) error {
 			ThiefArtifact            string                       `json:"thiefArtifact,omitempty"`
 			ReplaceProficiencies     bool                         `json:"replaceProficiencies,omitempty"`
 			GuardianBonuses          *marketGuardianBonuses       `json:"guardianBonuses,omitempty"`
+			GuardianProfile          *marketGuardianProfile       `json:"guardianProfile,omitempty"`
+			GuardianSmiteAction      string                       `json:"guardianSmiteAction,omitempty"`
+			GuardianEquipmentSets    []marketGuardianSet          `json:"guardianEquipmentSets,omitempty"`
+			EnemyDropRule            *marketEnemyDropRule         `json:"enemyDropRule,omitempty"`
+			TownExchange             *marketTownExchange          `json:"townExchange,omitempty"`
 			Icon                     string                       `json:"icon,omitempty"`
 			ApparelModels            *marketApparelModel          `json:"apparelModels,omitempty"`
 			Modifiers                *marketItemModifiers         `json:"modifiers,omitempty"`
+			HelmetHairVisibility     *marketHelmetHairVisibility  `json:"helmetHairVisibility,omitempty"`
 			ItemModels               []marketModelRenderer        `json:"itemModels,omitempty"`
 			OffHandModels            []marketModelRenderer        `json:"offHandModels,omitempty"`
 			DisplayModels            []marketModelRenderer        `json:"displayModels,omitempty"`
@@ -1209,6 +1227,9 @@ func marketContent(b []byte) error {
 	}
 	if c.Entries == nil || len(c.Entries) > 10000 {
 		return errors.New("invalid entries")
+	}
+	if err := marketExchangeCatalogs(c.TownExchangeCatalogs); err != nil {
+		return err
 	}
 	seen := map[string]bool{}
 	for _, entry := range c.Entries {
@@ -1250,6 +1271,26 @@ func marketContent(b []byte) error {
 		if entry.ReplaceProficiencies && entry.Kind != "weapon" {
 			return errors.New("replaceProficiencies requires a weapon")
 		}
+		if entry.ReplaceProficiencies && entry.Proficiencies == nil {
+			return errors.New("replaceProficiencies requires a proficiencies array")
+		}
+		if entry.WeaponProficiencies != nil {
+			if entry.Kind != "class" {
+				return errors.New("weaponProficiencies requires a class")
+			}
+			var groups []marketWeaponProficiency
+			if e := marketJSON(entry.WeaponProficiencies, &groups); e != nil {
+				return e
+			}
+			if len(groups) == 0 || len(groups) > 16 {
+				return errors.New("invalid weaponProficiencies group count")
+			}
+			for _, group := range groups {
+				if !marketActionReferences(group.Weapons, 1, 128) || !marketActionReferences(group.Proficiencies, 1, 16) {
+					return errors.New("invalid weaponProficiencies references")
+				}
+			}
+		}
 		if entry.OffHandModels != nil {
 			if entry.Kind != "weapon" {
 				return errors.New("offHandModels requires a weapon")
@@ -1266,6 +1307,10 @@ func marketContent(b []byte) error {
 			if (b.GuardFocusRestore > 0 || b.GuardReckoning) && entry.Kind != "weapon" {
 				return errors.New("guardFocusRestore and guardReckoning require a weapon")
 			}
+		}
+		if err := marketProgression(entry.Kind, entry.Guardian, entry.GuardianProfile, entry.GuardianSmiteAction,
+			entry.GuardianEquipmentSets, entry.EnemyDropRule, entry.TownExchange); err != nil {
+			return err
 		}
 		if (entry.Kind == "class" || entry.Kind == "item") && entry.Proficiencies != nil && !marketActionReferences(entry.Proficiencies, 1, 16) {
 			return errors.New("invalid class or item proficiency grants")
@@ -1305,6 +1350,12 @@ func marketContent(b []byte) error {
 		if entry.OverworldAilmentImmunity != nil &&
 			(entry.Kind != "class" || strings.TrimSpace(entry.OverworldAilmentImmunity.DisplayName) == "") {
 			return errors.New("overworldAilmentImmunity requires a class and display name")
+		}
+		if entry.HelmetHairVisibility != nil {
+			hair := entry.HelmetHairVisibility
+			if entry.Kind != "item" || hair.Top == nil || hair.Bottom == nil {
+				return errors.New("helmetHairVisibility requires an item and both top and bottom booleans")
+			}
 		}
 		if entry.ItemModels != nil {
 			if entry.Kind != "item" && entry.Kind != "weapon" {
@@ -1664,8 +1715,10 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 		add("rarity=m_ItemRarity goldvalue=_goldValue minlevel=m_MinLevel maxlevel=m_MaxLevel dropable=m_Dropable townmarket=m_TownMarket dlc=m_DLC nightmarket=m_NightMarket dungeonmerchant=m_DungeonMerchant shopstock=_shopStock loreunlock=m_CollectLoreItemUnlock")
 	}
 	switch kind {
+	case "item":
+		add("_useable=_useable m_ObjectType=m_ObjectType m_ObjectSlot=m_ObjectSlot m_BackpackEquip=m_BackpackEquip")
 	case "weapon":
-		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_NoRegularAttack=m_NoRegularAttack")
+		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_AttackDisplay=m_AttackDisplay m_NoRegularAttack=m_NoRegularAttack")
 	case "proficiency":
 		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride fullslots=m_FullSlots customvalue=m_CustomValue repeatcount=m_RepeatCount m_Target=m_Target")
 		add("m_DmgTypeOverride=m_DmgTypeOverride m_WpnTypeOverride=m_WpnTypeOverride m_TargetFriendly=m_TargetFriendly m_Harmless=m_Harmless m_PerSlotSkillRoll=m_PerSlotSkillRoll m_Quickness=m_Quickness m_DamagePerAttack=m_DamagePerAttack m_Suicide=m_Suicide m_GunShot=m_GunShot m_BoatDamage=m_BoatDamage m_ChaosOption=m_ChaosOption")
@@ -1691,6 +1744,16 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 			return errors.New("duplicate alias/raw field " + target)
 		}
 		resolved[target] = true
+		if target == "m_AttackDisplay" {
+			if _, ok := value.(string); !ok {
+				return errors.New("weapon attack display must be a string")
+			}
+		}
+		if target == "m_NoRegularAttack" {
+			if _, ok := value.(bool); !ok {
+				return errors.New("weapon regular attack flag must be boolean")
+			}
+		}
 		switch v := value.(type) {
 		case map[string]interface{}:
 			if target != "m_CharacterSkills" {
