@@ -2,8 +2,10 @@
 
 [Paladin 1.4.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v1.4.0)
 is the current published FTK Mod Framework marketplace package. The
-[1.4.0 package](../../marketplace/packages/paladin/README.md) compacts the class card and
-starting kit; see the [1.4.0 revision](RELEASE-1.4.0.md). The Vitality-based protector retains
+[1.4.0 revision](RELEASE-1.4.0.md) records the published class card and
+starting kit. The [working package source](../../marketplace/packages/paladin/README.md)
+now describes an unreleased candidate and must not be read as the 1.4.0 archive.
+The Vitality-based protector retains
 Cleansing March, Guard and Divine Intervention,
 six equipment families, twelve accessories and three legendary artifacts. Its
 original gear art is worn over native character bodies.

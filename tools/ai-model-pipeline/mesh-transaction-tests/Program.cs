@@ -37,12 +37,14 @@ namespace UnityEngine
     public class Material:Object
     {
         public Dictionary<string,Vector2> offsets=new Dictionary<string,Vector2>();public Color color; public bool emission=true;public Dictionary<string,Object> textures=new Dictionary<string,Object>();
+        public HashSet<string> missing=new HashSet<string>(); public HashSet<string> keywords=new HashSet<string>(); public Dictionary<string,float> floats=new Dictionary<string,float>();
         public Material(){}
-        public Material(Material source){name=source.name;color=source.color;emission=source.emission;foreach(var entry in source.textures)textures[entry.Key]=entry.Value;}
-        public void SetTextureOffset(string name,Vector2 value){offsets[name]=value;}public bool HasProperty(string name)=>name!="missing";
+        public Material(Material source){missing.UnionWith(source.missing);keywords.UnionWith(source.keywords);foreach(var entry in source.floats)floats[entry.Key]=entry.Value;name=source.name;color=source.color;emission=source.emission;foreach(var entry in source.textures)textures[entry.Key]=entry.Value;}
+        public void SetTextureOffset(string name,Vector2 value){offsets[name]=value;}public bool HasProperty(string name)=>name!="missing"&&!missing.Contains(name);
         public Object mainTexture {get=>textures.GetValueOrDefault("_MainTex");set=>textures["_MainTex"]=value;}
-        public void EnableKeyword(string name){emission=true;}
-        public void DisableKeyword(string name){emission=false;}
+        public void EnableKeyword(string name){keywords.Add(name);if(name=="_EMISSION")emission=true;}
+        public void SetFloat(string name,float value){floats[name]=value;}
+        public void DisableKeyword(string name){keywords.Remove(name);if(name=="_EMISSION")emission=false;}
         public void SetColor(string name,Color value){if(name=="_Color")color=value;}
         public void SetTexture(string name,Object texture){textures[name]=texture;}
     }
@@ -57,7 +59,7 @@ namespace UnityEngine
     public class MeshFilter:Component {public Mesh sharedMesh;}
     public class Mesh:Object {public Matrix4x4[] bindposes=new[]{new Matrix4x4{value=19}};}
     public enum TextureFormat{RGBA32}
-    public class Texture2D:Object {public static bool loadResult=true; public Texture2D(int w,int h){}public Texture2D(int w,int h,TextureFormat f,bool m){}public bool LoadImage(byte[] bytes)=>loadResult;}
+    public class Texture2D:Object {public int width=1,height=1;public bool linear;public static bool loadResult=true; public Texture2D(int w,int h){}public Texture2D(int w,int h,TextureFormat f,bool m){}public Texture2D(int w,int h,TextureFormat f,bool m,bool linear){this.linear=linear;}public bool LoadImage(byte[] bytes)=>loadResult;}
 }
 public class CharacterEventListener:Component{public CharacterOverworld m_CharacterOverworld=new CharacterOverworld(); public QuickCreate m_uiQuickPlayerCreate=new QuickCreate();}
 public class CharacterOverworld {public CharacterStats m_CharacterStats=new CharacterStats();}
@@ -69,7 +71,7 @@ namespace HarmonyLib {public class HarmonyPatch:Attribute{public HarmonyPatch(Ty
 namespace FTKModFramework.Core
 {
     static class Plugin {public static Logger Log=new Logger();public class Logger {public string lastWarning;public void LogWarning(string v){lastWarning=v;}public void LogInfo(string v){}public void LogError(string v){} }}
-    static class CustomModelLoader {public static string ResolveModelPath(string file)=>file;}
+    static class CustomModelLoader {public static readonly Dictionary<string,string> resolved=new Dictionary<string,string>();public static string ResolveModelPath(string file)=>resolved.GetValueOrDefault(file,file);}
     static class RuntimeGltfMeshLoader
     {
         public static int calls;
@@ -372,8 +374,47 @@ static class Program
         piece.GetComponent<EnemyMeshResources>().Release();Check(!mesh.destroyed&&!secondMesh.destroyed,"Remaining fragment holds the shared resource set");
         other.GetComponent<EnemyMeshResources>().Release();Check(mesh.destroyed&&secondMesh.destroyed&&!foreignFilter.sharedMesh.destroyed,"Final fragment releases set without destroying unrelated native resources");
     }
+    static void MaskChecks()
+    {
+        string file="mask-"+Guid.NewGuid().ToString("N")+".png";
+        byte[] rgba=Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNQYGBIAAAA5QCBdQ3jAwAAAABJRU5ErkJggg==");
+        try {
+            System.IO.File.WriteAllBytes(file,rgba);
+            var cel=Avatar(out var a,out var b);var native=a.sharedMaterials;var inherited=new Texture2D(1,1);native[0].textures["_MetallicGlossMap"]=inherited;native[0].keywords.Add("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A");
+            CustomModelLoader.resolved["package-model:mask-identity"]=file;
+            string error;
+            Check(ExplicitEnemyMeshSwap.ValidateAssignments(new[]{new EnemyRendererMesh("a","a.glb",null,false,"package-model:mask-identity")},out error),"Opaque package mask identity resolves to PNG before extension validation");
+            Check(!ExplicitEnemyMeshSwap.ValidateAssignments(new[]{new EnemyRendererMesh("a","a.glb",null,false,"../escape.png")},out error),"Mask traversal rejected");
+            Check(!ExplicitEnemyMeshSwap.ValidateAssignments(new[]{new EnemyRendererMesh("a","a.glb",null,false,"")},out error),"Empty explicit mask rejected");
+            var plan=new[]{new EnemyRendererMesh("a","a.glb",null,false,file),new EnemyRendererMesh("b","b.glb")};
+            b.sharedMaterials[0].missing.Add("_MetallicGlossMap");
+            int start=UObject.created.Count;
+            Check(!ExplicitEnemyMeshSwap.Apply("mask",cel,new[]{plan[0],new EnemyRendererMesh("b","b.glb",null,false,file)}),"Unsupported late shader rejects entire mask set");
+            Check(ReferenceEquals(a.sharedMaterials,native)&&native[0].textures["_MetallicGlossMap"]==inherited,"Failed mask preflight leaves native map intact");CheckNewAssetsDestroyed(start);
+            b.sharedMaterials[0].missing.Clear();b.failOnce=true;start=UObject.created.Count;
+            Check(!ExplicitEnemyMeshSwap.Apply("mask",cel,plan),"Late renderer commit failure restores mask transaction");CheckNewAssetsDestroyed(start);
+            Check(ReferenceEquals(a.sharedMaterials,native),"Mask commit rollback restores original material array");
+            Texture2D.loadResult=false;start=UObject.created.Count;
+            Check(!ExplicitEnemyMeshSwap.Apply("mask",cel,plan),"Mask decoder failure rejects before commit");CheckNewAssetsDestroyed(start);Texture2D.loadResult=true;
+            System.IO.File.WriteAllBytes(file,Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNQYGAAAABkACGrnxNvAAAAAElFTkSuQmCC"));start=UObject.created.Count;
+            Check(!ExplicitEnemyMeshSwap.Apply("mask",cel,plan),"RGB mask rejected instead of assuming opaque smoothness");CheckNewAssetsDestroyed(start);
+            System.IO.File.WriteAllBytes(file,rgba);
+            plan[0]=new EnemyRendererMesh("a","a.glb",null,false,"package-model:mask-identity");
+            Check(ExplicitEnemyMeshSwap.Apply("mask",cel,plan),"Package mask transaction accepted");
+            var mask=(Texture2D)a.sharedMaterials[0].textures["_MetallicGlossMap"];
+            Check(mask.linear && mask!=inherited && a.sharedMaterials[0].floats["_GlossMapScale"]==1 && a.sharedMaterials[0].floats["_SmoothnessTextureChannel"]==0,"Owned mask loaded linear with full range and alpha channel");
+            Check(a.sharedMaterials[0].keywords.Contains("_METALLICGLOSSMAP")&&!a.sharedMaterials[0].keywords.Contains("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A"),"Shader uses authored mask alpha");
+            Check(native[0].textures["_MetallicGlossMap"]==inherited && native[0].keywords.Contains("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A"),"Native material preserved");
+            var clone=Avatar(out var ca,out var cb);var owner=cel.GetComponent<EnemyMeshResources>();var retained=SerializedClone(owner,clone);retained.EnsureRetained();owner.Release();Check(!mask.destroyed,"Cloned avatar retains mask lease");retained.Release();Check(mask.destroyed&&!inherited.destroyed,"Final owner destroys mask and preserves borrowed map");
+            var unchanged=Avatar(out a,out b);a.sharedMaterials[0].textures["_MetallicGlossMap"]=inherited;a.sharedMaterials[0].keywords.Add("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A");
+            Check(ExplicitEnemyMeshSwap.Apply("default",unchanged,new[]{new EnemyRendererMesh("a","a.glb")}) && a.sharedMaterials[0].textures["_MetallicGlossMap"]==inherited && a.sharedMaterials[0].keywords.Contains("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A"),"Omitted mask exactly preserves inherited map/channel");unchanged.GetComponent<EnemyMeshResources>().Release();
+            var root=new GameObject("rigid");var rigid=StaticPart(root,"weapon",out var filter);
+            Check(ExplicitEnemyMeshSwap.ApplyToObject("rigid",root,new[]{EnemyRendererMesh.ForStaticRenderer("weapon","a.glb",null,true,file)}),"Rigid equipment uses same mask transaction");root.GetComponent<EnemyMeshResources>().Release();
+        } finally {Texture2D.loadResult=true;System.IO.File.Delete(file);}
+    }
     static void Main()
     {
+        MaskChecks();
         TintChecks();
         AuthoredPaletteChecks();
         EquipmentLeaseChecks();

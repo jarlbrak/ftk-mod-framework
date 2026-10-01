@@ -140,6 +140,7 @@ namespace FTKModFramework.Core.HotReload
                 restoreThief = ThiefRuntime.SuspendForReload();
                 resources = PaladinResourceState.Suspend();
                 DefinitionState.RestoreBaseline(TableManager.Instance);
+                BuiltinEquipmentExchange.RegisterPresentation();
                 Mark("snapshotResetMs");
                 Inject("after-reset");
                 ContentLoader.LoadCandidate(Plugin.DataContentRootPath, target);

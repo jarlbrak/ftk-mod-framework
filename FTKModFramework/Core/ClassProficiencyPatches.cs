@@ -16,11 +16,13 @@ namespace FTKModFramework.Core
             {
                 if (__instance.CombatCow == null || __instance.CombatCow.m_CharacterStats == null) return;
                 int classId = (int)__instance.CombatCow.m_CharacterStats.m_CharacterClass;
-                List<int> actions = new List<int>(ClassProficiencyRegistry.Get(classId));
+                List<int> actions = new List<int>(ClassProficiencyRegistry.Get(classId,
+                    (int)__instance.CombatCow.m_WeaponID));
                 foreach (int action in ItemProficiencyRuntime.EquippedActions(__instance.CombatCow))
                     if (!actions.Contains(action)) actions.Add(action);
                 foreach (int id in actions)
                 {
+                    if (!ClassWeaponProficiencyEligibility.Allows(__instance.CombatCow, id)) continue;
                     FTK_proficiencyTable.ID proficiency = (FTK_proficiencyTable.ID)id;
                     bool present = false;
                     foreach (uiBattleStanceButtons.ProfValues existing in __instance.m_Proficiencies)
@@ -52,6 +54,36 @@ namespace FTKModFramework.Core
                 // Native CreateWeaponProficiencyButtons destroys these entries on its next refresh.
             }
             catch (Exception e) { Plugin.Log.LogError("[class-proficiency] action button failed: " + e); }
+        }
+    }
+
+    [HarmonyPatch(typeof(uiBattleStanceButtons), "AttackProficiency")]
+    internal static class ClassWeaponProficiencyCommitPatch
+    {
+        private static bool Prefix(uiBattleStanceButtons __instance, uiBattleButton _button)
+        {
+            if (__instance == null || _button == null) return true;
+            if (__instance.m_Focusing) return true;
+            foreach (uiBattleStanceButtons.ProfValues entry in __instance.m_Proficiencies)
+            {
+                if (entry.m_Button != _button) continue;
+                if (ClassWeaponProficiencyEligibility.Allows(__instance.CombatCow, (int)entry.m_Prof))
+                    return true;
+                if (__instance.CombatCow != null && __instance.CombatCow.m_CharacterStats != null)
+                    __instance.CombatCow.m_CharacterStats.ResetSpentFocus(true);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(SlotControl), "ComputeAttackSlotResults", new Type[] {
+        typeof(CharacterOverworld), typeof(bool), typeof(FTK_proficiencyTable.ID) })]
+    internal static class ClassWeaponProficiencyRollPatch
+    {
+        private static bool Prefix(CharacterOverworld _cow, FTK_proficiencyTable.ID _prof)
+        {
+            return ClassWeaponProficiencyEligibility.Allows(_cow, (int)_prof);
         }
     }
 }

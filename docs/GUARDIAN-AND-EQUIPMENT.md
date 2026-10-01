@@ -135,6 +135,88 @@ Absent alternate-sex or hidden garment paths are allowed. Equipped apparel
 overrides class default apparel, but cannot replace required body renderers.
 See [player model authoring](MODEL-PLAYER-API.md) for rig constraints.
 
+### Helmet hair visibility (unreleased)
+
+`Content.SetHelmetHairVisibility(item, top, bottom)` optionally controls native
+hair sections on fresh instances of a registered custom helmet. A JSON `item`
+entry can declare:
+
+```json
+{
+  "helmetHairVisibility": {
+    "top": false,
+    "bottom": true
+  }
+}
+```
+
+Both values must be JSON booleans when the object is present. Omission or `null`
+preserves the template's behavior. Hide a section only when the authored helmet
+covers it; open crowns may require visible hair. This affects hair visibility,
+not the head mesh, face, helmet proportions or attachment transform.
+
+The supported template route creates a helmet through native `FTKHub.CreateHelmet`.
+Templates that instantiate `m_WearablePrefab` directly bypass that route and are
+rejected; choose a supported helmet template rather than assuming the setting
+applies to every wearable prefab. The C# API returns `false` for unsupported,
+vanilla or detached rows; an invalid JSON registration is reported as an error.
+Only fresh helmet instances receive the policy; existing instances and native
+prefabs remain unchanged. Verify front, side and rear views on each supported
+appearance before accepting the fit. No released framework minimum is assigned
+to this API yet.
+
+### Authored metallic and smoothness masks (unreleased)
+
+Each supported renderer declaration can optionally set `metallicGlossTexture` to an
+`assets/*.png` package path. This replaces the inherited metallic/gloss map only
+on the private material for that assignment. Omission or `null` preserves the
+existing material behavior. Equipped, offhand, and display declarations are
+independent; set the mask on each route that requires it. JSON supports the field
+in `itemModels`, `offHandModels`, `displayModels`, `apparelModels.renderers`,
+`playerModels` body/apparel/backpack arrays, and `raceBindings` body/apparel arrays.
+
+```json
+{
+  "path": ".",
+  "model": "assets/helmet.glb",
+  "texture": "assets/helmet.png",
+  "metallicGlossTexture": "assets/helmet-metallic-gloss.png"
+}
+```
+
+Export an 8-bit RGBA PNG with metallic in red and smoothness in alpha, both in
+`0..255`; use zero for green and blue, which the metallic/smoothness contract
+does not read. Alpha is smoothness, not transparency or roughness: zero is rough
+and 255 is fully smooth. The framework loads this data as linear,
+without mipmaps, with a maximum dimension of 4096 and a 16 MiB file limit.
+An RGB PNG is rejected because it loses authored smoothness. Launcher admission
+checks the referenced mask signature and RGBA8 IHDR with the same size bounds;
+the runtime additionally validates the complete PNG structure and chunk checksums.
+Use the same UV layout as the model. The mask enables `_METALLICGLOSSMAP`, sets `_GlossMapScale`
+to `1` and `_SmoothnessTextureChannel` to `0`, and disables
+`_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A`. The inherited shader must support
+`_MetallicGlossMap`, `_GlossMapScale`, and `_SmoothnessTextureChannel`; otherwise
+the renderer transaction is rejected before committing any replacements.
+The shader and unrelated material properties remain inherited.
+
+C# authors can use the additional immutable constructor argument:
+`new ItemRendererMesh(path, glb, albedo, metallicGlossTexture)` or
+`new PlayerApparelMesh(path, nativeMesh, glb, albedo, metallicGlossTexture)`.
+`PlayerRendererMesh` accepts the same fourth argument as `ItemRendererMesh`.
+The explicit enemy renderer API also accepts a mask on its single-material
+skinned and rigid assignments; see the [renderer contract](MODEL-RENDERER-API.md#authored-material-masks-unreleased).
+Existing constructor signatures remain available. These are model-directory
+paths for C# authors; JSON package paths are resolved and verified by the loader.
+
+The transaction owns the new texture alongside the mesh and material, including
+rollback and cloned-avatar lifetime. Item hot reload preflights the shader and
+mask before publication, and package admission requires referenced mask files.
+Offline checks establish parsing and resource safety only. Check equipped and
+item-camera materials separately in the installed game before accepting an
+asset; a mask does not certify its appearance or fix geometry or UV defects.
+No released framework minimum is assigned to this option yet. A package using it
+must select a compatible framework release before publication.
+
 ## Data package declarations
 
 The content entry supports the following typed capabilities. The complete
@@ -148,6 +230,8 @@ authoring example, subject to its documented live gates.
 | `guardianBonuses` | item, weapon | The equipment bonus fields above; Focus and Reckoning require a weapon |
 | `modifiers` | item, weapon | `armor`, `resistance`, `reflect` integers 0-100; `vitality`, `speed` numbers -1 to 1 |
 | `itemModels` | item, weapon | Equipped rigid renderers: `path`, `model`, `texture` |
+| `offHandModels` | item, weapon | Separate rigid renderers for a native paired weapon's offhand root |
+| `helmetHairVisibility` | helmet item | Unreleased: required boolean `top` and `bottom` when present; overrides native hair visibility on fresh equipped instances from `FTKHub.CreateHelmet`; direct `m_WearablePrefab` routes are rejected |
 | `displayModels` | item, weapon | Loot/card rigid renderers, relative to the native display prefab root |
 | `apparelModels` | item | `femaleBinding`, `maleBinding`, and `renderers` with `nativeMesh` in addition to model fields |
 | `playerModels` | class | Array of `skinset`, required `body`, optional `apparel` and `backpack` renderer declarations |
@@ -179,3 +263,57 @@ or missing-prefix mismatch is rejected rather than replacing unrelated rows.
 Checks are per database, not a rollback transaction across all databases. Offline
 recreation checks cover these rules; live same-process resume must also confirm
 that native UI and retained model/icon resources remain usable.
+# Unreleased equipment-set extension
+
+The current working candidate adds `Content.SetGuardianProfile`,
+`Content.SetGuardianSmiteAction` and `Content.AddGuardianEquipmentSet`. These
+are not claims about the latest published framework. The immutable profiles
+bound physical, exact-action Smite and Guardian healing percentages and Guard
+reduction. Other classes that only call `AddGuardian` retain the original defaults.
+
+A set binds exact registered head, body, feet, one-handed, shield and two-handed
+rows. Two matching armor slots select its minor profile; all three select its
+core profile. Matching one-handed/shield or two-handed/empty-offhand adds its
+completion bonuses. Accessories never count. Profiles include their limitations;
+completion cannot restore another family's profile. Optional core proficiency
+grants deduplicate existing actions. The optional Armor payoff identifies exact
+registered negative-Armor proficiencies and applies only with complete armament.
+
+Data classes use `guardianProfile`, `guardianSmiteAction` and
+`guardianEquipmentSets`. Every profile declares `physicalPercent`, `smitePercent`,
+`healingPercent`, `guardReductionPercent` and optional `bonuses`. Set entries name
+`id`, `head`, `body`, `feet`, `oneHand`, `shield`, `twoHand`, `minor`, `core`,
+`completion`, optional `coreProficiencies`, and optional `armorDamageBonus` with
+`sources` and `multiplier`. References resolve after all base rows and ordinary
+capabilities are registered. Invalid registration is reported; no native row is
+used as a mutable set definition.
+
+The candidate Paladin values and live gates are documented in
+[Paladin equipment](paladin/EQUIPMENT.md). Successful registration and pure
+evaluation tests do not establish damage, UI, lifecycle or multiplayer approval.
+
+## Framework Equipment Exchange (1.7.0 candidate)
+
+The framework supplies the universal Guild Token and native Back Alley vendor. Supporting enabled mods contribute offers; without a valid catalog, the vendor and token reward rule remain inactive. The token row remains registered so existing inventory references survive. Adding catalogs does not multiply the shared drop rule or campaign miss counter. Class filtering, owned-item hiding and confirmation-time duplicate checks apply to every catalog. Content changes require a restart when exchange progression is active.
+
+For a class entry, omit `townExchange.token` and declare the existing `offers` list. A gear-only mod can instead declare top-level `townExchangeCatalogs` in its content file:
+
+```json
+{
+  "entries": [
+    { "kind": "item", "id": "guild_helm", "template": "helmetHeavy1", "displayName": "Guild Helm" }
+  ],
+  "townExchangeCatalogs": [
+    {
+      "ownerClass": "blacksmith",
+      "offers": [
+        { "item": "com.example.gear:guild_helm", "name": "Guild Helm", "family": "Guild", "slot": "Head" }
+      ]
+    }
+  ]
+}
+```
+
+The manifest in this example must declare `modGuid` as `com.example.gear`. Use the native class string ID for vanilla classes, or `modGuid:id` for a custom class. Qualified item references identify the contributing item without depending on globally ambiguous short names. Existing class-entry offer IDs can remain local to their owning mod. C# authors register their offers with `Content.RegisterTownExchange(offers)` after registering the class and items. There is no separate currency package or player enable switch for the framework service.
+
+The reserved token identity remains `com.ftkmf.equipment-exchange:FTK_itemsDB/equipment_token` for legacy saves. A legacy Exchange declaration is recognized without registering another token or drop rule. This candidate's single-player behavior and migration require final native verification; the existing online purchase restriction remains in force.

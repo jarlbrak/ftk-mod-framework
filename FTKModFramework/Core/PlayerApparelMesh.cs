@@ -10,14 +10,20 @@ namespace FTKModFramework.Core
         public string ExpectedNativeMeshName { get; private set; }
         public string GlbFileName { get; private set; }
         public string TextureFileName { get; private set; }
+        public string MetallicGlossTextureFileName { get; private set; }
 
         public PlayerApparelMesh(string rendererPath, string expectedNativeMeshName, string glbFileName,
             string textureFileName = null)
+            : this(rendererPath, expectedNativeMeshName, glbFileName, textureFileName, null) { }
+
+        public PlayerApparelMesh(string rendererPath, string expectedNativeMeshName, string glbFileName,
+            string textureFileName, string metallicGlossTextureFileName)
         {
             RendererPath = rendererPath;
             ExpectedNativeMeshName = expectedNativeMeshName;
             GlbFileName = glbFileName;
             TextureFileName = textureFileName;
+            MetallicGlossTextureFileName = metallicGlossTextureFileName;
         }
     }
 }

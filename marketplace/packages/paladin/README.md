@@ -1,74 +1,19 @@
-# Paladin 1.4.0
+# Paladin: unpublished 2.0.0 source candidate
 
-Release for the original For The King. Requires FTK Mod Framework
-1.2.1 or a compatible later 1.x version. Author: JarlBrak.
+This working package for the original *For The King* is authored by JarlBrak. It identifies unpublished Paladin 2.0.0 with minimum framework 1.7.0. Equipment Exchange is provided by the framework; Paladin contributes its catalog and requires no separate currency package. Final migration and release acceptance remain pending. These source versions do not establish public availability. The published Paladin 1.4.0 archive and production catalog remain immutable.
 
-Paladin is a Vitality-based protector with 51 equipment items across six families
-and three Artifacts. This version uses a two-sentence flavor description and
-compact native-style ability labels. New characters start with Novice Hammer
-and Novice Aegis only; armor and accessories must be acquired during play.
-Abilities retain their existing ownership:
+Paladin is a Vitality-based protector with 51 equipment pieces across six families and three Artifacts. New characters start with Novice Hammer and Novice Aegis. Guard protects an ally; Cleansing March prevents new Poison and Curse during exploration. Censure and Smite are baseline Paladin skills requiring an eligible equipped hammer. Paladin hammers grant only native Strike, so other classes do not receive those skills; trinkets grant stats only. Native white outlined action glyphs remain in use.
 
-- **Class:** Guard protects another ally, and Cleansing March prevents new Poison
-  and Curse while exploring. It does not remove existing conditions or prevent
-  combat ailments, fire damage, or other chaos-tile losses.
-- **Weapon:** Every Paladin hammer grants Censure. A successful debuff application
-  randomly lowers Armor or Resistance by four for one-handed hammers or six for
-  two-handed hammers. Existing native weapon actions remain.
-- **Trinket:** Every equipped Paladin trinket grants Smite. Trinkets, including the Tin Oath
-  Token, must be acquired and equipped during play. Smite uses the current weapon's rolls and deals magic damage
-  at 0.25 times weapon damage, multiplied by six while the enemy has an active
-  negative Resistance effect from Censure. Unrelated debuffs do not enable it.
+Mercy, Verdict and Censure are now exclusive armor roles. Two matching pieces among Head, Body and Foot grant a small theme; all three grant the core role and its costs. Matching hands grant one additional completion benefit: a 2H hammer with empty offhand, or a 1H hammer and shield. Accessories do not count. Artifacts retain a completed armor core but cannot complete the armament. Mercy's core improves baseline Smite rather than unlocking it. Source profile values are provisional; no role has accepted balance evidence yet.
 
-Censure's two effects can coexist after successive casts. They use native timed
-expiry; a follow-up turn before expiry is not guaranteed. Smite consumes no mark.
-Perfect rolls are not required for damage. Ordinary Attack keeps the native
-weapon-family glyph; custom action symbols are separate from equipment renders.
+The final families' 24 ordinary pieces are offered through the shared equipment exchange catalog, one chosen item for one physical **Guild Token**. This currency is framework-wide and can be used by future class catalogs; Paladin is its first catalog. Tokens can be awarded without a Paladin in the party. Back Alley shows only gear for the buying character's class and hides pieces already in their backpack or equipment. The purchase is checked again before token debit, so another confirmation cannot buy an owned piece. Native admitted enemies at displayed level 8 or above have a prototype 10% ordinary chance; reviewed named-boss groups use 50% instead. The sixth consecutive eligible miss guarantees a token. The chance and guarantee do not establish actual campaign supply. The current town exchange path has a solo source implementation; co-op transaction acceptance is outstanding.
 
-The upstream 1.2.0 balance is retained: base Vitality 80 and Highward, Mercy,
-Censure and Verdict great-hammer damage 32, 34, 34 and 37. Equipment retains its
-native acquisition declarations. Controlled test inventories do not establish
-ordinary drop frequency or long-campaign balance.
-
-The [1.4.0 revision notes](../../../docs/paladin/RELEASE-1.4.0.md) record the
-native class comparison. The Steam deployment loaded framework 1.2.1 and registered all enabled
-content without content errors. Visual fit and new-character behavior require
-separate observation. The original 1.3.0 art provenance is retained unchanged.
-
-## Compatibility and evidence
-
-The listing is restricted to the observed macOS game assembly fingerprint
-`94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8`.
-Windows, Linux, and online co-op are unverified for this overhaul. Historical 1.3.0
-observations include female tier previews, corrected helmet placement, selected
-combat/action UI, the previous six-piece starter kit, and equipment-dependent ability
-swaps. Full skinset fit, all animation/display paths, detached break fragments,
-and long-campaign balance are not comprehensively accepted by those checks.
-
-The [manifest](manifest.json) owns runtime identity and framework minimum;
-[listing metadata](listing.json) owns marketplace claims. The
-[provenance record](../paladin-assets.provenance.json) pins runtime art and source
-evidence. Campaign source identifiers in that record refer to separately retained
-authoring files, not bundled or downloadable repository paths. The release
-contains the runtime assets, not the full generation and Blender source campaign.
-Native bodies, faces, hair and backpacks remain game-owned. Read the
-[generated artwork notice](ASSET-LICENSE.md) separately from the code/data MIT
-license. On 2026-09-25 the author confirmed an active Creator plan during model
-generation; the official Rodin terms were reviewed. This account statement was
-provided by the author, not independently verified with the provider.
+See [Equipment](../../../docs/paladin/EQUIPMENT.md), [Combat](../../../docs/paladin/COMBAT.md), [Artifacts](../../../docs/paladin/ARTIFACTS.md), and the [native token audit](../../../scratch/paladin-polish/mechanics-gamefree/token-native-content-v4.md) for the design, authored scope and evidence limits.
 
 ## Validation and publication
 
-Run `python3 marketplace/packages/validate_paladin.py` from the repository root.
-It checks balance, acquisition, action ownership, asset hashes, binary structure,
-and renderer routes. The [package builder](../build_paladin.py) prepares a
-content-addressed archive and descriptor; neither command establishes live
-acceptance or publication. A new version and reviewed artifact are required for
-corrections to published bytes. Published 1.3.0 archive bytes remain unchanged.
+Run `python3 marketplace/packages/validate_paladin.py` from the repository root. It checks package structure, exclusive final-family acquisition, set roles, token catalog references, action ownership, asset hashes, renderer routes and source joins. The package builder prepares a content-addressed archive and descriptor. Neither command proves live acquisition, item fit, action ordering, save/reload, co-op or platform coverage. The historical macOS release evidence does not validate this candidate.
 
-See [Writing Content](../../../docs/WRITING-CONTENT.md),
-[Custom Models](../../../docs/CUSTOM-MODELS.md), and
-[Marketplace](../../../docs/MARKETPLACE.md) for authoring contracts.
+The candidate's macOS native observations use assembly fingerprint `94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8`; source metadata and these observations do not establish Windows, Linux or online co-op gameplay for this overhaul. Candidate provenance is pinned in [paladin-assets.provenance.json](../paladin-assets.provenance.json), with durable authoring sources under [art-experiments/paladin-polish](../../../art-experiments/paladin-polish/). These receipts identify bytes and reproduction status, not visual or gameplay acceptance. The published website remains tied to the released package; update its Paladin guide, item data, compatibility and release notes when a reviewed candidate is published.
 
-The release preview is a native inventory screenshot of Censure armor with an
-Oathkeeper hammer and Novice shield. See the [native release evidence](../../../docs/evidence/paladin-1.3.0/README.md) for all six male armor tiers and combat UI.
+Smite deals holy-themed magic damage at 0.50 weapon damage before ordinary modifiers. A perfect roll has an authored 25% chance to stun, subject to native damage, immunity and existing-control rules; partial hits still deal magic damage but cannot stun. Mercy's three matching armor pieces increase Smite damage by 60%, to a 0.80 coefficient before the Censure Resistance payoff and ordinary modifiers. This uses native magic damage and Resistance, not a new damage type. Bounded native encounters observed corrected Resistance blocking, one new stun and one marked Mercy impact. They do not measure the proc frequency or establish representative balance; see [Validation](../../../docs/paladin/VALIDATION.md#unreleased-smite-damage-and-stun).

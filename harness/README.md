@@ -102,6 +102,25 @@ network state every frame and refuses online transitions or sessions.
 
 ### Background mode
 
+For unattended background tests, also set `FTK_AGENT_INPUT_ISOLATED=1`. This
+additional opt-in takes effect only with background mode and a successfully
+initialized bridge. Patched game, Rewired keyboard/mouse, UI and non-agent
+framework input consumers receive neutral keys/buttons/axes/text between native
+input requests. The virtual pointer retains its last synthetic position, starting
+at the screen center. Active requests still use the ordinary bounded native input
+timeline. Completing, cancelling or failing a request does not restore hardware
+reads while isolation remains enabled. The agent namespace and OS input are not
+patched by this option.
+
+`GET /input` reports `inputIsolated` (requested with background mode) and
+`hardwareInputSuppressed` (the input bridge is available and isolation is active).
+Require both before an isolated capture campaign. Without the new flag, existing
+foreground and background hardware behavior is unchanged. The flag does not
+claim isolation of input devices or native callsites outside the bridge's existing
+patched read surface. Verify a fresh isolated session before relying on it for
+unattended evidence. Run `python3 harness/test_native_input_isolation.py` for the
+noisy-hardware wrapper checks and the NativeInput test project for timeline rules.
+
 Set `FTK_AGENT_BACKGROUND=1` together with `FTK_AGENT_BRIDGE=1` to accept native input while the
 game window is unfocused. This is the required mode for agent-driven play tests: the user keeps
 working in other apps while the test runs. Synthetic input is injected at the game's own input

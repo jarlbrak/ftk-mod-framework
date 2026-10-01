@@ -31,6 +31,20 @@ namespace FTKModFramework.Core
             return Names.TryGetValue(contentId, out displayName);
         }
 
+        // Non-equippable custom items use FTKItem's TextItemsDescription lookup with a synthetic ID.
+        private static readonly Dictionary<string, string> ItemDescriptions = new Dictionary<string, string>();
+
+        public static void SetItemDescription(string itemId, string description)
+        {
+            ItemDescriptions[itemId] = description;
+        }
+
+        public static bool TryGetItemDescription(string itemId, out string description)
+        {
+            if (itemId == null) { description = null; return false; }
+            return ItemDescriptions.TryGetValue(itemId, out description);
+        }
+
         // Synthetic-realm display names. A custom realm has no enum name, so the game renders its in-world
         // name from the raw text key "STR_<int>Display" (HexLand.GetRealmDisplayValue builds exactly that,
         // and QuestLogicBase wraps it in rich text for quest UI). Those keys are not in any Google2u table,
@@ -115,6 +129,19 @@ namespace FTKModFramework.Core
         {
             string name;
             if (Localization.TryGetName(__instance.m_ID, out name)) __result = name;
+        }
+    }
+
+    [HarmonyPatch(typeof(FTKItemName.FTKItem), "GetDescription")]
+    internal static class ItemDescription_Patch
+    {
+        private static void Postfix(FTK_itembase.ID ___m_ItemID, ref string __result)
+        {
+            if (__result != "STR_" + ___m_ItemID) return;
+            FTK_itembase item = FTK_itembase.GetItemBase(___m_ItemID);
+            string description;
+            if (item != null && Localization.TryGetItemDescription(item.m_ID, out description))
+                __result = description;
         }
     }
 

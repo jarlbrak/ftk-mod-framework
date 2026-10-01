@@ -11,12 +11,14 @@ namespace UnityEngine
         public Color(float r,float g,float b,float a){this.r=r;this.g=g;this.b=b;this.a=a;}
         public static Color black { get { return new Color(0,0,0,1); } }
     }
+    public class Texture2D { }
     public sealed class Material
     {
         public string name;
         public readonly HashSet<string> properties=new HashSet<string>();
         public readonly HashSet<string> keywords=new HashSet<string>();
         public readonly Dictionary<string,object> textures=new Dictionary<string,object>();
+        public readonly Dictionary<string,float> floats=new Dictionary<string,float>();
         public readonly Dictionary<string,Color> colors=new Dictionary<string,Color>();
         public int writes;
         public Material(){}
@@ -27,6 +29,8 @@ namespace UnityEngine
             foreach(var item in source.textures)textures[item.Key]=item.Value;
             foreach(var item in source.colors)colors[item.Key]=item.Value;
         }
+        public void EnableKeyword(string name){keywords.Add(name);writes++;}
+        public void SetFloat(string name,float value){floats[name]=value;writes++;}
         public bool HasProperty(string property){return properties.Contains(property);}
         public void DisableKeyword(string keyword){keywords.Remove(keyword);writes++;}
         public void SetColor(string property,Color value){if(!HasProperty(property))throw new Exception("Missing color property");colors[property]=value;writes++;}
@@ -83,6 +87,20 @@ static class Program
             Check(source.name == "native" + suffix && source.colors["_Color"].g == .8f && source.writes == 0,
                 "source palette remains untouched: " + suffix);
         }
+        var masked = new UnityEngine.Material(native);
+        masked.properties.UnionWith(new[]{"_MetallicGlossMap","_GlossMapScale","_SmoothnessTextureChannel"});
+        masked.keywords.Add("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A");
+        var mask = new UnityEngine.Texture2D(); ExplicitMaterialOptions.ApplyMetallicGloss(masked,mask);
+        Check(masked.textures["_MetallicGlossMap"]==mask && masked.floats["_GlossMapScale"]==1f && masked.floats["_SmoothnessTextureChannel"]==0f,"Mask replaces inherited map with full authored range");
+        Check(masked.keywords.Contains("_METALLICGLOSSMAP") && !masked.keywords.Contains("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A"),"Mask alpha is selected rather than albedo alpha");
+        Check(masked.textures["_MainTex"]==albedo && masked.keywords.Contains("_NORMALMAP") && native.writes==0,"Other properties and native material preserved");
+        foreach(string property in new[]{"_MetallicGlossMap","_GlossMapScale","_SmoothnessTextureChannel"}) {
+            var incompatible=new UnityEngine.Material(masked);incompatible.properties.Remove(property);bool rejected=false;
+            try {ExplicitMaterialOptions.ApplyMetallicGloss(incompatible,mask);} catch(InvalidOperationException){rejected=true;}
+            Check(rejected && incompatible.writes==0,"Missing mask property rejects before writes: "+property);
+        }
+        Check(new EnemyRendererMesh("body","body.glb").MetallicGlossTextureFileName==null,"Original descriptor defaults to inherited mask");
+        Check(EnemyRendererMesh.ForStaticRenderer(".","a.glb","a.png",true,"mask.png").MetallicGlossTextureFileName=="mask.png","Static mask metadata retained");
         Check(!RendererEmissionFixture.Read(null),"Absent JSON defaults false");
         Check(!RendererEmissionFixture.Read(new JValue(false)) && RendererEmissionFixture.Read(new JValue(true)),"JSON boolean accepted");
         foreach(var invalid in new[]{new JValue((object)null),new JValue("true"),new JValue(1),new JValue(0.0)})

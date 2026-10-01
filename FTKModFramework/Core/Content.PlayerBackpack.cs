@@ -32,7 +32,7 @@ namespace FTKModFramework.Core
             {
                 if (meshes[i] == null) return false;
                 snapshot[i] = EnemyRendererMesh.ForStaticRenderer(meshes[i].RendererPath,
-                    meshes[i].GlbFileName, meshes[i].TextureFileName, true);
+                    meshes[i].GlbFileName, meshes[i].TextureFileName, true, meshes[i].MetallicGlossTextureFileName);
             }
             string error;
             if (!ExplicitEnemyMeshSwap.ValidateAssignments(snapshot, out error)) return false;

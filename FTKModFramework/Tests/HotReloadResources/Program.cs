@@ -25,6 +25,8 @@ namespace UnityEngine
 }
 namespace FTKModFramework.Core
 {
+    internal static class EnemyDropRuntime { internal static bool HasRegistrations; }
+    internal static class TownExchangeService { internal static bool HasRegistrations; }
     internal static class EnemyMeshResources
     {
         internal static int ReloadLeaseCount;
@@ -147,6 +149,13 @@ internal static class Program
         GuardianRuntime.ReloadTransientStateEmpty = false;
         Reject(delegate { PaladinResourceState.Suspend(); }, "Guardian gameplay closes boundary.");
         GuardianRuntime.ReloadTransientStateEmpty = true;
+        EnemyDropRuntime.HasRegistrations = true;
+        Reject(delegate { PaladinResourceState.Suspend(); }, "Reward registry requires restart without detaching current resources.");
+        Check(!PaladinResourceState.TransactionOpen, "Rejected reward reload did not start a transaction.");
+        EnemyDropRuntime.HasRegistrations = false;
+        TownExchangeService.HasRegistrations = true;
+        Reject(delegate { PaladinResourceState.Suspend(); }, "Town exchange registry requires restart.");
+        TownExchangeService.HasRegistrations = false;
         var remove = PaladinResourceState.Suspend(); PaladinResourceState.Retire(remove);
         UnityEngine.Object.EndFrame();
         Check(PaladinResourceState.OwnedObjectCount == 0 && PaladinResourceState.PendingDestroyCount == 0 &&

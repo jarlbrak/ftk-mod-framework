@@ -1,6 +1,6 @@
 # Paladin artifacts
 
-Status: approved design included in Paladin 1.0.1. The Last Vigil,
+Status: released artifact identities with unreleased v4 role interaction. The Last Vigil,
 Kingsfall and The Last Bastion have original runtime
 models, icons and equipment rows. Gameplay validation is partial; see
 [Legendary validation](LEGENDARY-VALIDATION.md) for artifact identities, observed
@@ -39,6 +39,10 @@ success with a 5-point accuracy penalty. Royal Hammer's heavy attack uses a
 1.5 damage multiplier with a 35-point accuracy penalty. These weapons
 need comparison against native actions as well as nominal damage.
 
+## v4 armor role interaction
+
+A matching Head, Body and Foot family keeps its core role when an Artifact replaces ordinary hands. Artifacts have no fixed family affinity in the candidate. Last Vigil, Kingsfall and Last Bastion cannot supply a matching 1H-plus-shield or 2H armament completion benefit. They retain their own conditional Guardian effects and item stats. Balance must compare each combined artifact loadout against the corresponding completed ordinary family, including the role's costs.
+
 ## The Last Vigil
 
 One-handed guardian hammer. A compact reliquary head with silver or ivory
@@ -58,10 +62,10 @@ damaging direct enemy attack, restore 1 Focus to the guarded ally.
 - The wielder must retain this weapon until the trigger; swapping it away ends
   this weapon's pending perk.
 
-Candidate base values: 30 physical damage, 3 Vitality checks, one hand. Current
-Verdict Hammer is 31/3, while Mercy Hammer is 28/3 with its focused-heal bonus.
-The Last Vigil trades the strongest raw one-handed hit or extra healing for
-reliable party Focus generation when the player correctly anticipates an attack.
+Unpublished v4 values: 19 physical damage, 4 Vitality checks, one hand.
+The candidate Censure Hammer is 24/4. Last Vigil trades raw one-handed damage
+for party Focus when the player correctly anticipates an attack. It supplies no
+Mercy, Verdict or Censure armament completion benefit.
 
 The player chooses whom to protect based on both incoming danger and who needs
 Focus. The weapon grants no resource merely for pressing Guard on a safe target.
@@ -87,12 +91,13 @@ single-target hammer attack.
 - Charge generation requires actual Guard mitigation, not damage over time,
   a dodge, or simply designating an ally.
 
-Candidate base values: 42 physical damage, 5 Vitality checks, two hands. Current
-Verdict Great Hammer is 37/4; Mercy and Censure great hammers are 34/4 with their
-own benefits. Kingsfall demands more checks and gives up a shield. Its burst
+Unpublished v4 values: 28 physical damage, 5 Vitality checks, two hands.
+Candidate Censure Great Hammer is 30/5. Kingsfall trades uncharged damage
+relative to that physical branch for Reckoning and gives up a shield. Its burst
 requires first spending an action on Guard and having that protection matter.
-Native testing has demonstrated one charged attack with partial slot success.
-Criticals, mitigation and the remaining lifecycle cases still need coverage.
+Earlier native testing demonstrated one charged attack with partial slot success
+at the previous damage values. Revised previews and impacts, criticals, mitigation
+and the remaining lifecycle cases still need coverage.
 
 The player alternates protecting and striking instead of receiving a free
 retaliation attack. The candidate uses a "Reckoning ready" HUD message and a
@@ -128,17 +133,17 @@ Candidate modifiers: no personal Armor or Resistance bonus and a 4-point Speed
 penalty. This keeps the equipment valuable specifically for Guardians who spend
 actions protecting allies. Other shield users gain no compensating passive stats.
 
-Current Mercy Aegis heals 8% on Guard; Censure Aegis prevents eligible debuffs
-from guarded direct attacks. Both cost 2 Speed. Last Bastion instead recovers an
-ally who is already impaired, at a larger initiative cost. It does not replace
-Censure's prevention or Mercy's reliable healing. Combining it with Last Vigil
+Mercy armor core supplies a 4% qualifying Guard heal; Verdict's debuff
+prevention requires matching armament completion. Last Bastion instead recovers
+an ally who is already impaired. It does not grant either completion effect. Combining it with Last Vigil
 helps a troubled ally recover, then supplies Focus if an attack actually hits
-their Guard. The pairing does not require a set bonus.
+their Guard. The pairing does not complete a family armament.
 
 ## Acquisition and implementation boundaries
 
-All three rows are drop-enabled Artifact equipment at native item tiers 4 through
-6, with night-market and dungeon-merchant eligibility. Ordinary town-market
+All three rows retain drop-enabled Artifact declarations at native item tiers 4
+through 6, with night-market and dungeon-merchant eligibility. They are not
+in the shared Guild Token exchange catalog. Ordinary town-market
 stock is disabled. No class, Lore unlock or DLC gate is authored. This declares
 eligibility, not a guaranteed drop; ordinary acquisition of these new pieces has
 not yet been observed. The hammers retain ordinary Vitality weapon use for other

@@ -8,7 +8,7 @@ using FTKModFramework.Core.Data;
 namespace FTKModFramework.Core.HotReload
 {
     // This snapshot is valid only while the coordinator excludes every consumer and starts each
-    // managed data candidate from the pristine baseline. It is not general teardown.
+    // managed data candidate from the framework-owned baseline. It is not general teardown.
     internal sealed class DefinitionState
     {
         private static DefinitionState baseline;
@@ -22,8 +22,6 @@ namespace FTKModFramework.Core.HotReload
         internal static void CaptureBaseline(TableManager manager)
         {
             if (baseline != null) throw new InvalidOperationException("Definition baseline already captured.");
-            if (ContentRegistry.CustomIds.Count != 0 || IdAllocator.CustomIdCount != 0)
-                throw new InvalidOperationException("Definition baseline must precede custom registration.");
             if (manager == null) throw new ArgumentNullException("manager");
             // TableManager initialization can precede lazy database indexing. An empty
             // candidate does not register rows and therefore cannot repair a null index.
@@ -33,6 +31,8 @@ namespace FTKModFramework.Core.HotReload
                 if (db == null) throw new InvalidOperationException("Missing baseline table: " + type.Name);
                 db.CheckAndMakeIndex();
             }
+            if (!BuiltinEquipmentExchange.IsExactBaseline(manager))
+                throw new InvalidOperationException("Definition baseline must contain only the framework Guild Token.");
             ValidateLookups(manager);
             baseline = Capture(manager);
         }
@@ -58,7 +58,7 @@ namespace FTKModFramework.Core.HotReload
             AddMap(typeof(ContentRegistry), "RetainedRows");
             AddMap(typeof(IdAllocator), "KeyToInt");
             AddMap(typeof(IdAllocator), "IntToKey");
-            foreach (string name in new[] { "Names", "RealmDisplayKeys", "ClassFlavors", "ProficiencyDescriptions", "EnemyDescriptions" })
+            foreach (string name in new[] { "Names", "RealmDisplayKeys", "ClassFlavors", "ItemDescriptions", "ProficiencyDescriptions", "EnemyDescriptions" })
                 AddMap(typeof(Localization), name);
             mods = ModRegistry.Capture();
         }

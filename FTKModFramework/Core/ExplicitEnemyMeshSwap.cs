@@ -27,6 +27,9 @@ namespace FTKModFramework.Core
                 if (!ValidFileName(assignment.GlbFileName) ||
                     (!string.IsNullOrEmpty(assignment.TextureFileName) && !ValidFileName(assignment.TextureFileName)))
                 { error = "model files must be relative paths inside the models directory"; return false; }
+                if (assignment.MetallicGlossTextureFileName != null &&
+                    !ValidFileName(assignment.MetallicGlossTextureFileName))
+                { error = "metallic/gloss masks must be relative PNG model paths"; return false; }
                 EnemyRendererMaterial[] slots = assignment.Slots;
                 if (assignment.RendererKind == EnemyRendererKind.MeshRenderer && slots != null)
                 { error = "static MeshRenderer assignments do not support native material slot mode"; return false; }
@@ -50,6 +53,9 @@ namespace FTKModFramework.Core
                     if (slots != null) foreach (EnemyRendererMaterial slot in slots)
                         if (!string.IsNullOrEmpty(slot.TextureFileName)) CustomModelLoader.ResolveModelPath(slot.TextureFileName);
                     CustomModelLoader.ResolveModelPath(assignment.GlbFileName);
+                    if (assignment.MetallicGlossTextureFileName != null)
+                        if (!CustomModelLoader.ResolveModelPath(assignment.MetallicGlossTextureFileName).EndsWith(".png", StringComparison.Ordinal))
+                            throw new ArgumentException("Metallic/gloss mask must resolve to a PNG.");
                     if (!string.IsNullOrEmpty(assignment.TextureFileName))
                         CustomModelLoader.ResolveModelPath(assignment.TextureFileName);
                 }
@@ -198,6 +204,22 @@ namespace FTKModFramework.Core
                         p.materials[i] = material;
                         owned.Add(material);
                         ExplicitMaterialOptions.Apply(material, option == null ? assignment.DisableNativeEmission : option.DisableNativeEmission);
+                        if (assignment.MetallicGlossTextureFileName != null)
+                        {
+                            ExplicitMaterialOptions.ValidateMetallicGloss(material);
+                            string maskPath = CustomModelLoader.ResolveModelPath(assignment.MetallicGlossTextureFileName);
+                            if (new FileInfo(maskPath).Length > 16 * 1024 * 1024)
+                                throw new InvalidOperationException("Metallic/gloss mask exceeds 16 MiB.");
+                            byte[] bytes = File.ReadAllBytes(maskPath);
+                            int width, height;
+                            ExplicitMaterialOptions.ValidateMetallicGlossPng(bytes, out width, out height);
+                            Texture2D mask = new Texture2D(2, 2, TextureFormat.RGBA32, false, true);
+                            owned.Add(mask);
+                            if (!mask.LoadImage(bytes) || mask.width != width || mask.height != height)
+                                throw new InvalidOperationException("Metallic/gloss PNG decode failed or dimensions differ.");
+                            mask.name = "ftkmf_linear_" + assignment.MetallicGlossTextureFileName;
+                            ExplicitMaterialOptions.ApplyMetallicGloss(material, mask);
+                        }
                         string textureName = option == null ? assignment.TextureFileName : option.TextureFileName;
                         if (string.IsNullOrEmpty(textureName)) continue;
                         string path = CustomModelLoader.ResolveModelPath(textureName);

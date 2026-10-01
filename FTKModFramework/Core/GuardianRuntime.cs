@@ -29,6 +29,7 @@ namespace FTKModFramework.Core
             internal string Attack;
             internal string Ally;
             internal int FocusBonusPercent;
+            internal int HealingPercent;
             internal readonly HashSet<string> Victims = new HashSet<string>(StringComparer.Ordinal);
         }
 
@@ -53,6 +54,7 @@ namespace FTKModFramework.Core
             Dictionary<string, Healing> healing = PendingHealing;
             Dictionary<string, string> feedback = PendingFeedback;
             long attacks = attackSerial, turns = turnSerial;
+            Action restoreProfiles = SuspendProfilesForReload();
             Classes = new HashSet<int>(); State = new GuardianCombatState();
             ActionId = FTK_proficiencyTable.ID.None;
             Equipment = new Dictionary<int, GuardianEquipmentBonuses>();
@@ -64,7 +66,7 @@ namespace FTKModFramework.Core
             {
                 Classes = classes; State = state; ActionId = action; Equipment = equipment;
                 AttackEquipment = attackEquipment; PendingHealing = healing; PendingFeedback = feedback;
-                attackSerial = attacks; turnSerial = turns;
+                attackSerial = attacks; turnSerial = turns; restoreProfiles();
             };
         }
 
@@ -100,7 +102,8 @@ namespace FTKModFramework.Core
                     if (equipped.Value > 0 && Equipment.TryGetValue((int)equipped.Key, out bonuses))
                         result = GuardianEquipmentBonuses.Strongest(result, bonuses);
                 }
-            return result;
+            return ActiveProfile(guardian) == null ? result :
+                GuardianEquipmentBonuses.Strongest(ProfileBonuses(guardian), result);
         }
 
         private static GuardianEquipmentBonuses ProtectionBonuses(string targetId)
@@ -206,8 +209,9 @@ namespace FTKModFramework.Core
             string id = Identity(guardian);
             CharacterDummy ally = Find(State.DesignatedAlly(id));
             string chosen = ally == null ? "None" : ally.m_CharacterOverworld.m_CharacterStats.m_CharacterName;
+            int reduction = GuardReductionPercent(guardian);
             return "Chosen ally: " + chosen + ". Protection: " +
-                (State.IsActive(id) && CanAct(guardian) ? "active (50%)." : "inactive.") +
+                (State.IsActive(id) && CanAct(guardian) ? "active (" + reduction + "%)." : "inactive.") +
                 " Divine Intervention: " + (State.RescueAvailable(id) ? "ready." : "spent this combat.") +
                 (Legendary.IsCharged(id) ? " Reckoning ready: +50% next single-target hammer attack." : string.Empty);
         }
@@ -217,13 +221,16 @@ namespace FTKModFramework.Core
             if (!IsGuardian(guardian) || EncounterSession.Instance == null) return;
             bool partyMember = EncounterSession.Instance.GetOtherCombatPlayerMembers(guardian).Contains(target);
             if (!State.TryGuard(Identity(guardian), Identity(target), CanAct(guardian), partyMember && LivingAlly(target))) return;
+            RecordGuardRole(guardian);
             ApplyLegendaryGuard(guardian, target);
             if (target.m_DamageInfo != null)
             {
                 int originalHealth = target.m_DamageInfo.m_NewHealth;
+                GuardianProfile guardProfile = ActiveProfile(guardian);
                 int healedHealth = State.ResolveGuardHealingHealth(Identity(guardian),
                     turnSerial.ToString(System.Globalization.CultureInfo.InvariantCulture), Identity(target), originalHealth,
-                    target.m_CharacterOverworld.m_CharacterStats.MaxHealth, EquippedBonuses(guardian).GuardHealPercent);
+                    target.m_CharacterOverworld.m_CharacterStats.MaxHealth, EquippedBonuses(guardian).GuardHealPercent,
+                    guardProfile == null ? 100 : guardProfile.HealingPercent);
                 // AddToDummy runs before RespondToHit applies this exact outcome's health. Use that
                 // native all-peer application point instead of a heal which would be overwritten.
                 target.m_DamageInfo.m_NewHealth = healedHealth;
@@ -238,6 +245,7 @@ namespace FTKModFramework.Core
             if (guardian == null || guardian.m_CharacterOverworld == null) return;
             string identity = Identity(guardian);
             State.ExpireGuard(identity);
+            ForgetGuardRole(guardian);
             PendingHealing.Remove(identity);
         }
 
@@ -246,6 +254,7 @@ namespace FTKModFramework.Core
             if (dummy == null || dummy.m_CharacterOverworld == null) return;
             string identity = Identity(dummy);
             State.ResetActor(identity);
+            ForgetGuardRole(dummy);
             Legendary.ResetActor(identity);
             PendingHealing.Remove(identity);
             PendingFeedback.Remove(identity);
@@ -256,6 +265,7 @@ namespace FTKModFramework.Core
             if (dummy == null || dummy.m_CharacterOverworld == null) return;
             string identity = Identity(dummy);
             State.ResetGuardian(identity);
+            ForgetGuardRole(dummy);
             Legendary.ResetActor(identity);
             // This is a new native combat, so no previous attack's defensive snapshot applies.
             AttackEquipment.Clear();
@@ -280,6 +290,7 @@ namespace FTKModFramework.Core
             if (EncounterSession.Instance == null) return;
             foreach (CharacterDummy guardian in EncounterSession.Instance.m_PlayerDummies.Values)
                 if (!CanAct(guardian)) Expire(guardian);
+                else ExpireIfRoleChanged(guardian);
         }
 
         internal static int ResolveDamage(CharacterDummy attacker, DummyDamageInfo result)
@@ -314,7 +325,15 @@ namespace FTKModFramework.Core
             GuardianCombatState.DamageResult resolved;
             // Native rescue keeps precedence only when Guard alone cannot prevent lethal damage.
             string attackId = turnSerial.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + Identity(attacker);
-            if (!State.TryResolveAttackDamage(attackId, Identity(victim), health, result.m_Damage, !nativeRescue, out resolved) ||
+            int reduction = 0;
+            foreach (string guardianId in State.ActiveGuardians(Identity(victim)))
+            {
+                CharacterDummy protector = Find(guardianId);
+                GuardianProfile active = ActiveProfile(protector);
+                reduction = Math.Max(reduction, active == null ? 50 : active.GuardReductionPercent);
+            }
+            if (!State.TryResolveAttackDamage(attackId, Identity(victim), health, result.m_Damage, !nativeRescue,
+                reduction, out resolved) ||
                 !resolved.Guarded) return 0;
             ResolveLegendaryMitigation(attackId, victim, result.m_Damage, resolved.Damage);
             result.m_Damage = resolved.Damage;
@@ -346,6 +365,8 @@ namespace FTKModFramework.Core
             pending.Attack = (++attackSerial).ToString(System.Globalization.CultureInfo.InvariantCulture);
             pending.Ally = ally;
             pending.FocusBonusPercent = EquippedBonuses(attacker).FocusHealBonusPercent;
+            GuardianProfile profile = ActiveProfile(attacker);
+            pending.HealingPercent = profile == null ? 100 : profile.HealingPercent;
             AddHealingVictim(pending, first);
             AddHealingVictim(pending, second);
             AddHealingVictim(pending, third);
@@ -382,7 +403,8 @@ namespace FTKModFramework.Core
             CharacterStats stats = ally.m_CharacterOverworld.m_CharacterStats;
             int amount = State.ResolveFocusedHitHealing(attackerId, pending.Attack, pending.Ally,
                 stats.m_HealthCurrent, stats.MaxHealth, true, true,
-                GuardianFocusedHit.Landed(damage.m_Damage, damage.m_AttackResponse), pending.FocusBonusPercent);
+                GuardianFocusedHit.Landed(damage.m_Damage, damage.m_AttackResponse), pending.FocusBonusPercent,
+                pending.HealingPercent);
             if (amount > 0) stats.GainSpecificHealth(amount, true, true);
         }
     }

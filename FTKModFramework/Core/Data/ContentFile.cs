@@ -12,6 +12,7 @@ namespace FTKModFramework.Core.Data
         // Entries is populated by Newtonsoft via reflection, not by C# code; silence "never assigned".
 #pragma warning disable CS0649
         [JsonProperty("entries")] public List<ContentEntry> Entries;
+        [JsonProperty("townExchangeCatalogs")] public List<TownExchangeCatalogEntry> TownExchangeCatalogs;
 #pragma warning restore CS0649
 
         /// <summary>Absolute path this file was parsed from (for diagnostics). Filled by the parser.</summary>

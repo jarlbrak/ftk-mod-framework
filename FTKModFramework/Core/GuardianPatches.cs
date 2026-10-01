@@ -16,6 +16,26 @@ namespace FTKModFramework.Core
             {
                 CharacterDummy guardian = __instance.CombatCow.GetCombatDummy();
                 if (!GuardianRuntime.IsGuardian(guardian)) return;
+                foreach (int id in GuardianRuntime.ActiveActions(guardian))
+                {
+                    FTK_proficiencyTable.ID action = (FTK_proficiencyTable.ID)id;
+                    bool present = false;
+                    foreach (uiBattleStanceButtons.ProfValues existingAction in __instance.m_Proficiencies)
+                        if (existingAction.m_Prof == action) { present = true; break; }
+                    if (present) continue;
+                    FTK_proficiencyTable row = FTK_proficiencyTableDB.Get(action);
+                    if (row == null) continue;
+                    uiBattleStanceButtons.ProfValues added = new uiBattleStanceButtons.ProfValues();
+                    added.m_Prof = action;
+                    added.m_Button = UnityEngine.Object.Instantiate(__instance.m_ProficiencyButtonMaster);
+                    added.m_Button.transform.SetParent(__instance.m_ProficiencyButtonMaster.transform.parent, false);
+                    added.m_Button.m_Owner = __instance;
+                    added.m_Button.m_ButtonType = uiBattleButton.BattleButtonType.proficiency;
+                    added.m_Button.gameObject.GetComponent<Image>().sprite = row.m_BattleButton;
+                    __instance.m_Proficiencies.Add(added);
+                    added.m_Button.SetCanUse(true);
+                    added.m_Button.gameObject.SetActive(true);
+                }
                 foreach (uiBattleStanceButtons.ProfValues existing in __instance.m_Proficiencies)
                     if (existing.m_Prof == GuardianRuntime.ActionId) return;
                 uiBattleStanceButtons.ProfValues entry = new uiBattleStanceButtons.ProfValues();
@@ -62,7 +82,9 @@ namespace FTKModFramework.Core
                 if (descriptions != null && descriptions.Length > 0 && descriptions[0] != null)
                     descriptions[0].text = "Target: another ally";
                 if (descriptions != null && descriptions.Length > 1 && descriptions[1] != null)
-                    descriptions[1].text = "50% less direct damage.\nUntil your next turn or incapacitation.\nAlways succeeds. No Focus.";
+                    descriptions[1].text = GuardianRuntime.GuardReductionPercent(
+                        __instance.CombatCow.GetCombatDummy()) +
+                        "% less direct damage.\nUntil your next turn or incapacitation.\nAlways succeeds. No Focus.";
                 uiToolTipFocusable.gCanFocus = false;
                 FTKUI.Instance.m_PlayerSlots.ResetSlots();
             }

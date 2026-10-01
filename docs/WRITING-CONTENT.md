@@ -1,6 +1,6 @@
 # Write a content mod
 
-FTK Mod Framework adds content to the original *For The King* without editing the game's files. The [Paladin package](../marketplace/packages/paladin/content.json) is a complete source example. Published Paladin 1.4.0 requires framework 1.2.1. The [manifest](../marketplace/packages/paladin/manifest.json) defines identity and compatibility; its content file defines the class, equipment, abilities, models, and icons. Copy its structure, then use your own stable mod GUID, IDs, names, and original assets. The [marketplace guide](MARKETPLACE.md) covers review and publication.
+FTK Mod Framework adds content to the original *For The King* without editing the game's files. The [Paladin package](../marketplace/packages/paladin/content.json) is a complete source example. Published Paladin 1.4.0 requires framework 1.2.1; the current working source is an [unreleased polish candidate](../marketplace/packages/paladin/README.md) with additional API requirements. Its retained manifest pins do not establish compatibility for those new declarations. The [manifest](../marketplace/packages/paladin/manifest.json) defines identity and compatibility; its content file defines the class, equipment, abilities, models, and icons. Copy its structure, then use your own stable mod GUID, IDs, names, and original assets. The [marketplace guide](MARKETPLACE.md) covers review and publication.
 
 ## Start with a manifest
 
@@ -16,17 +16,19 @@ Place `manifest.json` and one or more JSON files containing `entries` arrays in 
 }
 ```
 
-Replace Paladin's identity and author with your own values. `version` identifies your mod release. `frameworkVersion` is the earliest framework version in the same major series on which you confirmed it works. An absent, invalid, older, or different-major declaration blocks content loading while leaving the mod visible. See [mod versioning](MOD-VERSIONING.md) before releasing an update. Optional manifest fields include `description`, `developmentOnly`, and `behaviorDll`; marketplace packages have a narrower [submission contract](MARKETPLACE.md#content-submission).
+Replace Paladin's identity and author with your own values. `version` identifies your mod release. `frameworkVersion` is the earliest framework version in the same major series on which you confirmed it works. An absent, invalid, older, or different-major declaration blocks content loading while leaving the mod visible. See [mod versioning](MOD-VERSIONING.md) before releasing an update. Optional manifest fields include `description`, `developmentOnly`, and `behaviorDll`; marketplace packages have a narrower [submission contract](MARKETPLACE.md#submit-a-mod).
 
 ## Add entries
 
 Each entry has a `kind`, a stable local `id`, a vanilla `template` to clone, and a `displayName`. Supported kinds are `item`, `weapon`, `proficiency`, `class`, `enemy`, and `encounter`. [Custom races](CUSTOM-RACES.md) and the [Lore Store unlock](#unlock-the-lore-store) are exceptions without a template. The loader reads entries in deterministic `(modGuid, id)` order and resolves cross-file references after reading all files. Do not use hard-coded custom enum integers.
 
-The Paladin's [Novice Hammer](../marketplace/packages/paladin/content.json) illustrates a weapon entry. Its `fields` set damage, Vitality skill, level range, rarity, and shop/drop eligibility. `itemModels` and `displayModels` provide different original meshes for equipped and inventory views; `icon` provides the 2D image. The Paladin class entry uses local IDs in `startweapon` and `startitems`, so those items can be declared elsewhere in the same file.
+The Paladin's [Novice Hammer](../marketplace/packages/paladin/content.json) illustrates a weapon entry. Its `fields` set damage, Vitality skill, level range, rarity, and shop/drop eligibility. `itemModels` and `displayModels` provide different original meshes for equipped and inventory views. An optional `icon` replaces small UI sprites, including a weapon's basic-attack glyph; the candidate omits it on weapons to retain native combat symbols. The Paladin class entry uses local IDs in `startweapon` and `startitems`, so those items can be declared elsewhere in the same file.
+
+An `item` entry may set `description` for its native item card. This is useful for custom resources: their synthetic ID otherwise appears as an untranslated description key. The authored text replaces only that missing-key fallback; native cannot-use messages still take precedence.
 
 `fields` accepts the game's serialized field names or case-insensitive friendly aliases. Common aliases are `rarity`, `goldValue`, `minLevel`, `maxLevel`, `dropable`, and `townMarket`; weapons add `damage`, `damageType`, `skill`, `slots`, and `damageGain`. Classes add `strength`, `intelligence`, `awareness`, `talent`, `speed`, `vitality`, `startingGold`, `focus`, `primaryStat`, `startWeapon`, `startItems`, and `skills`. Unknown fields log a warning; values that cannot be converted reject the affected entry. A class's `skills` object is copied privately so it cannot change its vanilla template.
 
-An `AddWeapon` or JSON weapon entry inherits the template's action list. `proficiencies` adds actions to that list. Set `replaceProficiencies: true` on a JSON weapon to replace the inherited list with the declared actions, or call `Content.ReplaceProficiencies` for a registered weapon. Replacement uses a private prefab copy and keeps the native template unchanged. Item levels are progression tiers, not hero levels; verify ordinary shop and loot availability in game.
+An `AddWeapon` or JSON weapon entry inherits the template's action list. `proficiencies` adds actions to that list. Set `replaceProficiencies: true` on a JSON weapon to replace the inherited list with the declared actions, or call `Content.ReplaceProficiencies` for a registered weapon. Replacement uses a private prefab copy and keeps the native template unchanged. In the unreleased candidate, an explicit empty `proficiencies: []` clears special actions while preserving an enabled regular attack. A missing or null array is an error when replacement is requested. Class-only actions conditioned on exact equipped weapons use [`weaponProficiencies`](COMBAT-PROFICIENCIES.md#weapon-gated-class-actions-unreleased). Item levels are progression tiers, not hero levels; verify ordinary shop and loot availability in game.
 
 Equipment can declare `modifiers` with `armor`, `resistance`, `vitality`, `speed`, `awareness`, `talent`, `focusCapacity`, and `reflect`. The four stat fields are fractional bonuses (for example, `0.05` for five stat points); `focusCapacity` adds to maximum Focus. The modifier row is private to the custom item's ID and starts empty, so bonuses from a cloned native template are not inherited. An omitted bonus has value zero. All modifier values are checked when the package loads.
 
@@ -34,11 +36,20 @@ See [class actions and conditional proficiency damage](COMBAT-PROFICIENCIES.md) 
 
 ## Models and behavior
 
-Use original PNG and GLB assets for marketplace packages. The Paladin package shows the path-relative `icon`, `itemModels`, `displayModels`, `playerModels`, and apparel declarations. Mesh paths must match the actual renderer hierarchy and skeleton; a valid JSON file or successful build cannot prove the model fits in game. Follow [custom models](CUSTOM-MODELS.md), the [player renderer contract](MODEL-PLAYER-API.md), and the [renderer transaction contract](MODEL-RENDERER-API.md).
+Use original PNG and GLB assets for marketplace packages. The Paladin package shows path-relative `icon`, `itemModels`, `displayModels`, and apparel declarations. Mesh paths must match the actual renderer hierarchy and skeleton; a valid JSON file or successful build cannot prove the model fits in game. Follow [custom models](CUSTOM-MODELS.md), the [player renderer contract](MODEL-PLAYER-API.md), and the [renderer transaction contract](MODEL-RENDERER-API.md).
+
+Two unreleased presentation options have focused contracts:
+
+- [`metallicGlossTexture`](GUARDIAN-AND-EQUIPMENT.md#authored-metallic-and-smoothness-masks-unreleased) supplies an optional linear RGBA metallic/smoothness map per renderer. Equipped and item-display assignments are separate.
+- [`helmetHairVisibility`](GUARDIAN-AND-EQUIPMENT.md#helmet-hair-visibility-unreleased) supplies explicit top/bottom hair booleans for supported custom helmet templates, without changing head geometry.
+
+Omitting either option preserves its inherited behavior. Do not copy a historical
+framework minimum for a package using these options; select a release that
+actually includes the APIs before publishing.
 
 For a compiled mod, reference `FTKModFramework.dll` and the game's publicized `Assembly-CSharp` from a .NET 3.5 BepInEx 5 plugin. Register through `FTKModFramework.Core.Content` after `GridEditor.TableManager.Initialize` has populated the tables. `Content.AddItem`, `AddWeapon`, `AddProficiency`, `AddClass`, `AddEnemy`, and `AddEncounter` clone and register rows; `Content.AttachProficiencies` and `AttachEnemyProficiencies` connect actions to privately cloned weapons. `Content.Db<T>()` ensures a table index exists before direct reads. `Content.AddPassive` binds one of the framework's closed `PassiveTrigger` moments to a registered class; it does not create a database row or a chance roll. Keep registrations idempotent and pass your plugin GUID to each call.
 
-A data mod can declare `behaviorDll` for a `ProficiencyBase` subclass or custom quest-logic verb, but the marketplace's current [content contract](MARKETPLACE.md#content-submission) does not distribute behavior DLLs. Campaign and adventure authoring have separate [campaign](CAMPAIGNS.md) and [adventure](ADVENTURES.md) guides; their availability as framework APIs does not mean that a campaign package has shipped.
+A data mod can declare `behaviorDll` for a `ProficiencyBase` subclass or custom quest-logic verb, but the marketplace's current [content contract](MARKETPLACE.md#submit-a-mod) does not distribute behavior DLLs. Campaign and adventure authoring have separate [campaign](CAMPAIGNS.md) and [adventure](ADVENTURES.md) guides; their availability as framework APIs does not mean that a campaign package has shipped.
 
 In framework 1.0.3, `Content.AddOverworldAilmentImmunity(classRow, displayName)` or a class
 entry's `overworldAilmentImmunity` object with a `displayName` opts an exact registered custom class
@@ -65,3 +76,36 @@ The framework writes no Lore Store purchase, so removing the mod restores the pl
 Read `BepInEx/LogOutput.log` for registration summaries and entry-specific errors. Verify the class or item in its native screen, acquire it through an ordinary route, test its action or modifier, then save and resume with the same mod set. A package hash proves bytes, not visual fit or gameplay behavior. The [marketplace guide](MARKETPLACE.md) lists publication checks.
 
 By default, prepared marketplace changes apply on the next launch. The opt-in [title-screen activation mode](HOT-RELOAD.md) can apply managed data-package selections in the same process on the audited macOS build, before entering an adventure. Manual content and unsupported plugin forms continue to use next-launch activation. Removing a mod used by a save can make that save unloadable until the mod is restored; the framework then refuses the resume with a message rather than loading it (see [save compatibility](MARKETPLACE.md#save-compatibility)). Renaming or removing a content ID has the same effect on saves that use it. Co-op clients need the same enabled content and assets; matching IDs alone do not prove multiplayer behavior.
+# Unreleased shared equipment progression
+
+The working candidate supports a universal physical currency through
+`Content.SetEnemyDropRule(registeredItem, rule)` and
+`Content.RegisterTownExchange(registeredToken, offers)`. This API is not yet
+published. Separate class packages can append distinct offers to the same
+registered currency. Duplicate offers and conflicting currencies are rejected.
+
+An item may declare `enemyDropRule` with integer `minimumDisplayedLevel`,
+`ordinaryChancePercent`, `bossChancePercent`, `guaranteedByOpportunity` and
+`namedBossGroups` arrays of native enemy row IDs. Reward decisions are made by
+the master for admitted native drops, with campaign-persisted miss counts and
+stable ordering. Chance, campaign exposure and live persistence are separate
+verification obligations.
+
+A class can declare `townExchange: { "token": "equipment_token",
+"offers": [...] }`. Each offer specifies `item`, `name`, `family` and native
+inventory `slot`. The declaring class supplies the registered owner identity.
+C# authors pass that registered class ID to `TownExchangeOffer`; unscoped offers
+are rejected. Stock includes only offers for the current buyer's class and hides
+items in their backpack or any equipped slot. Purchase confirmation checks
+ownership and class again before spending a token. The universal Equipment
+Exchange source package supplies
+`equipment_token`; Paladin contributes the first catalog. The dependency must
+be included in any future release descriptor. The currency is neither class-bound
+nor a specialization selector.
+
+Registered catalog items become exclusive to the exchange prospectively;
+ordinary shop/drop candidates and saved merchant stock are filtered, while
+already-owned items remain. Current purchases are solo-only pending verified
+network transaction support. Token and exchange registration require a game
+restart for content changes; hot activation is rejected. Do not describe these
+limitations as multiplayer or release approval.

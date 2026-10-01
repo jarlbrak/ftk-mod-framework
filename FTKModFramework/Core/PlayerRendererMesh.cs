@@ -6,12 +6,17 @@ namespace FTKModFramework.Core
         public string RendererPath { get; private set; }
         public string GlbFileName { get; private set; }
         public string TextureFileName { get; private set; }
+        public string MetallicGlossTextureFileName { get; private set; }
 
         public PlayerRendererMesh(string rendererPath, string glbFileName, string textureFileName = null)
+            : this(rendererPath, glbFileName, textureFileName, null) { }
+
+        public PlayerRendererMesh(string rendererPath, string glbFileName, string textureFileName, string metallicGlossTextureFileName)
         {
             RendererPath = rendererPath;
             GlbFileName = glbFileName;
             TextureFileName = textureFileName;
+            MetallicGlossTextureFileName = metallicGlossTextureFileName;
         }
     }
 }

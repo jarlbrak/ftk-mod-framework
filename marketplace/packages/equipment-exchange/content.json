@@ -1,0 +1,71 @@
+{
+  "entries": [
+    {
+      "kind": "item",
+      "id": "equipment_token",
+      "template": "royalJewel",
+      "displayName": "Guild Token",
+      "description": "Trade one Guild Token for class equipment at a town Back Alley.",
+      "fields": {
+        "goldvalue": 0,
+        "minlevel": 0,
+        "maxlevel": 10,
+        "rarity": "rare",
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
+        "m_CollectLoreItemUnlock": "",
+        "dlc": "None",
+        "_useable": false,
+        "m_ObjectType": "resource",
+        "m_ObjectSlot": "pack",
+        "m_BackpackEquip": false
+      },
+      "icon": "assets/guild-token-icon.png",
+      "enemyDropRule": {
+        "minimumDisplayedLevel": 8,
+        "ordinaryChancePercent": 10,
+        "bossChancePercent": 50,
+        "guaranteedByOpportunity": 6,
+        "namedBossGroups": [
+          [
+            "krakenHead",
+            "krakenTentacle",
+            "krakenTentacleMirror"
+          ],
+          [
+            "seaKing",
+            "seaKingTentacleA",
+            "seaKingTentacleB"
+          ],
+          [
+            "vexor",
+            "vexorEasy"
+          ],
+          [
+            "harazuelBoss1"
+          ],
+          [
+            "harazuelBoss2"
+          ],
+          [
+            "harazuelBoss3"
+          ],
+          [
+            "harazuelBoss4"
+          ]
+        ]
+      },
+      "displayModels": [
+        {
+          "path": ".",
+          "model": "assets/guild-token-display.glb",
+          "texture": "assets/guild-token-icon.png",
+          "metallicGlossTexture": "assets/guild-token-metallic-gloss.png"
+        }
+      ]
+    }
+  ]
+}

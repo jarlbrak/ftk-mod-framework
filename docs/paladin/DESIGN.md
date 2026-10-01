@@ -1,17 +1,21 @@
-# Paladin: complete class design
+# Paladin: historical class design
 
-Status: design contract for the Paladin 1.4.0 package. It defines 51
-equipment items, including twelve accessories. The design and historical plans
-below do not establish full live-game acceptance; see the
-[launch record](LAUNCH-1.0.0.md) for observed coverage.
+Status: historical design contract for published Paladin 1.4.0. It defines 51
+equipment items, including twelve accessories, but its no-set-bonus and
+trinket-gated Smite rules do not describe the unpublished 2.0.0 candidate.
+For current candidate behavior, use [Combat](COMBAT.md), [Equipment](EQUIPMENT.md),
+[Artifacts](ARTIFACTS.md), the [working package](../../marketplace/packages/paladin/README.md),
+and [Validation](VALIDATION.md). The historical plans below do not establish
+full live-game acceptance; the [launch record](LAUNCH-1.0.0.md) retains its
+own earlier scope.
 
 ## Read the design
 
 | Document | Purpose |
 | --- | --- |
-| [Combat](COMBAT.md) | Actions, costs, timing, healing, protection and counterplay |
-| [Equipment](EQUIPMENT.md) | Every ordinary item, accessories and combined loadout totals |
-| [Artifacts](ARTIFACTS.md) | The Last Vigil, Kingsfall and The Last Bastion |
+| [Combat](COMBAT.md) | Current candidate actions, roles, costs and evidence limits |
+| [Equipment](EQUIPMENT.md) | Current candidate acquisition, set thresholds and equipment |
+| [Artifacts](ARTIFACTS.md) | Current candidate role interaction for the three historical Artifact identities |
 | [Art direction](ART-DIRECTION.md) | Progression silhouettes, accessory art and native character boundaries |
 | [Native baseline](NATIVE-BASELINE.md) | Verified slots, templates, inherited actions and stat limits |
 | [Gap plan](GAPS.md) | Historical accessory implementation plan and remaining validation gates |

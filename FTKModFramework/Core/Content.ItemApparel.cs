@@ -26,7 +26,7 @@ namespace FTKModFramework.Core
             foreach (PlayerApparelMesh mesh in meshes)
             {
                 if (mesh == null || string.IsNullOrEmpty(mesh.ExpectedNativeMeshName) || mesh.ExpectedNativeMeshName.Trim().Length == 0) return RejectApparel(item, "missing expected native mesh name");
-                check.Add(new EnemyRendererMesh(mesh.RendererPath, mesh.GlbFileName, mesh.TextureFileName));
+                check.Add(new EnemyRendererMesh(mesh.RendererPath, mesh.GlbFileName, mesh.TextureFileName, false, mesh.MetallicGlossTextureFileName));
             }
             string error;
             if (!ExplicitEnemyMeshSwap.ValidateAssignments(check.ToArray(), out error)) return RejectApparel(item, error);
@@ -87,7 +87,7 @@ namespace FTKModFramework.Core
                 foreach (EnemyRendererMesh prior in result)
                     if (prior.RendererPath == mesh.RendererPath)
                         throw new InvalidOperationException("Two equipped items target the same apparel path: " + mesh.RendererPath);
-                result.Add(new EnemyRendererMesh(mesh.RendererPath, mesh.GlbFileName, mesh.TextureFileName));
+                result.Add(new EnemyRendererMesh(mesh.RendererPath, mesh.GlbFileName, mesh.TextureFileName, false, mesh.MetallicGlossTextureFileName));
             }
         }
     }

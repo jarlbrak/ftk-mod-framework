@@ -16,7 +16,7 @@
     <TargetFramework>net35</TargetFramework>
     <AssemblyName>FTKModFramework</AssemblyName>
     <Product>FTKModFramework</Product>
-    <Version>1.6.2</Version>
+    <Version>1.7.0</Version>
     <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>disable</Nullable>
@@ -82,6 +82,9 @@
     <!-- The framework title-screen splash card. LogicalName pins the manifest name so
          Core/UI/ModSplash.cs remains independent of MSBuild path normalization. -->
     <EmbeddedResource Include="assets\brand\splash-logo.png" LogicalName="FTKModFramework.assets.brand.splash-logo.png" />
+    <EmbeddedResource Include="assets/equipment-exchange/guild-token-icon.png" LogicalName="FTKModFramework.assets.equipment-exchange.guild-token-icon.png" />
+    <EmbeddedResource Include="assets/equipment-exchange/guild-token-display.glb" LogicalName="FTKModFramework.assets.equipment-exchange.guild-token-display.glb" />
+    <EmbeddedResource Include="assets/equipment-exchange/guild-token-metallic-gloss.png" LogicalName="FTKModFramework.assets.equipment-exchange.guild-token-metallic-gloss.png" />
   </ItemGroup>
 
   <ItemGroup>

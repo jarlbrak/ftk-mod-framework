@@ -17,9 +17,9 @@ def validate_accessories(by_id):
             ('Tin Oath Token', {'vitality': 0.01}),
             ("Keeper's Seal", {'vitality': 0.02}),
             ('Watchtower Reliquary', {'vitality': 0.02, 'resistance': 1}),
-            ('Lantern of Mercy', {'armor': 1, 'resistance': 3}),
-            ('Seal of Censure', {'speed': 0.02, 'armor': 1}),
-            ('Scales of Verdict', {'armor': 2, 'resistance': 2}),
+            ('Lantern of Mercy', {'resistance': 1}),
+            ('Seal of Censure', {'speed': 0.01}),
+            ('Scales of Verdict', {'armor': 2, 'resistance': 3}),
         ],
         'necklace': [
             ("Pilgrim's Pendant", {'resistance': 1}),
@@ -43,9 +43,6 @@ def validate_accessories(by_id):
             assert row['modifiers'] == modifiers, key
             expected_keys = {'kind', 'id', 'template', 'displayName', 'fields',
                              'modifiers', 'icon', 'displayModels'}
-            if slot == 'trinket':
-                expected_keys.add('proficiencies')
-                assert row['proficiencies'] == ['paladin_smite'], key
             assert set(row) == expected_keys, key
             assert row['kind'] == 'item' and row['displayName'] == name, key
             assert row['template'] == {'trinket': 'trinketDefense1', 'necklace': 'amuletVitality1'}[slot], key
@@ -55,8 +52,8 @@ def validate_accessories(by_id):
                 'minlevel': low, 'maxlevel': high,
                 'goldvalue': [8, 35, 110, 250][band],
                 'rarity': 'common' if index < 2 else 'rare',
-                'dropable': True, 'townmarket': True, 'm_NightMarket': True,
-                'm_DungeonMerchant': True, '_shopStock': 1,
+                'dropable': index < 3, 'townmarket': index < 3, 'm_NightMarket': index < 3,
+                'm_DungeonMerchant': index < 3, '_shopStock': 1 if index < 3 else 0,
                 'm_CollectLoreItemUnlock': '', 'dlc': 'None',
             }, key
             stem = 'assets/paladin-' + slot + '-' + family
@@ -65,7 +62,7 @@ def validate_accessories(by_id):
             assert len(row['displayModels']) == 1, key
             route = row['displayModels'][0]
             assert route['path'] == {'trinket': 'trinketHorn2', 'necklace': 'amuletLocket1'}[slot], key
-            assert route['model'] == stem + '.glb', key
+            assert original_or_framed_model(route['model'], stem + '.glb'), key
     assert by_id['paladin']['fields']['startweapon'] == 'paladin_hammer_1h_novice'
     assert by_id['paladin']['fields']['startitems'] == [
         'paladin_shield_novice',
@@ -84,39 +81,74 @@ def validate_balance(by_id):
         one = by_id['paladin_hammer_1h_' + family]['fields']
         two = by_id['paladin_hammer_2h_' + family]['fields']
         assert one['damage'] < two['damage'], family
-        assert one['slots'] < two['slots'], family
+        # Match native Smith/Flanged and War/Great/Royal focus costs. Vitality
+        # already buys accuracy and HP; support weapons need no cheaper basics.
+        assert one['slots'] == 4 and two['slots'] == 5, family
     for hands in ['1h', '2h']:
         damage = lambda family: by_id['paladin_hammer_' + hands + '_' + family]['fields']['damage']
         assert damage('novice') < damage('oathkeeper') < damage('highward')
-        assert damage('highward') <= damage('mercy') == damage('censure') < damage('verdict')
-    # These four-check weapons keep native control actions. Support branches
-    # must not exceed the comparable five-check native hammer's base damage.
-    assert by_id['paladin_hammer_2h_highward']['fields']['damage'] <= 32
+        # Core role costs travel with armor; physical output is intentionally
+        # ordered separately from ordinary tier progression.
+        assert damage('mercy') < damage('verdict') < damage('censure')
+        speed = lambda family: by_id['paladin_hammer_' + hands + '_' + family].get('modifiers', {}).get('speed', 0)
+        assert speed('censure') > max(speed('mercy'), speed('verdict'))
+        assert speed('censure') <= 0.02
+    # Leave a raw-damage budget for Vitality accuracy and added support actions.
+    # Native anchors: War21, Great32, Ice34, Royal38 and Flanged27.
+    assert by_id['paladin_hammer_2h_oathkeeper']['fields']['damage'] <= 21
+    assert by_id['paladin_hammer_2h_highward']['fields']['damage'] < 32
     for family in ['mercy', 'censure']:
-        assert by_id['paladin_hammer_2h_' + family]['fields']['damage'] <= 34
-    assert by_id['paladin_hammer_2h_verdict']['fields']['damage'] < 38
+        assert by_id['paladin_hammer_2h_' + family]['fields']['damage'] < 34
+    assert by_id['paladin_hammer_2h_verdict']['fields']['damage'] < 34
+    assert by_id['paladin_hammer_1h_verdict']['fields']['damage'] <= 27
     mercy_vitality = stats['vitality'] + sum(
         by_id['paladin_' + slot + '_mercy'].get('modifiers', {}).get('vitality', 0)
         for slot in ['armor', 'helmet', 'boots', 'trinket', 'necklace'])
     assert mercy_vitality + 0.05 < 0.95  # Leave room below the Apprentice cap.
     # Kingsfall's secured normal Guard/strike pair must not outdamage two
-    # Verdict strikes; mitigation and healing are its reason to spend that turn.
+    # Censure strikes; mitigation and healing are its reason to spend that turn.
     kingsfall = by_id['paladin_hammer_2h_kingsfall']['fields']
-    verdict = by_id['paladin_hammer_2h_verdict']['fields']
-    assert kingsfall['slots'] > verdict['slots']
+    censure = by_id['paladin_hammer_2h_censure']['fields']
+    vigil = by_id['paladin_hammer_1h_last_vigil']['fields']
+    one_censure = by_id['paladin_hammer_1h_censure']['fields']
+    # Artifacts now pay for their conditional benefit in base damage instead
+    # of replacing the ordinary damage branch at the same native check cost.
+    assert kingsfall['slots'] == censure['slots'] == 5
+    assert vigil['slots'] == one_censure['slots'] == 4
+    assert kingsfall['damage'] < censure['damage']
+    assert vigil['damage'] < one_censure['damage']
     for level in [0, 6, 8, 10]:
-        assert 1.5 * (kingsfall['damage'] + level * kingsfall['damagegain']) < 2 * (verdict['damage'] + level * verdict['damagegain'])
+        assert 1.5 * (kingsfall['damage'] + level * kingsfall['damagegain']) > censure['damage'] + level * censure['damagegain']
+        assert 1.5 * (kingsfall['damage'] + level * kingsfall['damagegain']) < 2 * (censure['damage'] + level * censure['damagegain'])
 
 
 def validate_actions(by_id):
     assert by_id['paladin']['guardian'] is True
     assert not by_id['paladin'].get('proficiencies')
+    groups = by_id['paladin']['weaponProficiencies']
+    assert len(groups) == 2
+    native = {
+        '1h': {'bluntSmithHammer', 'bluntToyHammer'},
+        '2h': {'bluntWarHammer', 'bluntIceHammer', 'bluntGreatHammer',
+               'bluntRoyalHammer', 'bluntHeavyHammer', 'dualHammer'},
+    }
+    for hands, group in zip(('1h', '2h'), groups):
+        assert set(group) == {'weapons', 'proficiencies'}
+        expected = {key for key, row in by_id.items()
+                    if row['kind'] == 'weapon' and '_'+hands+'_' in key} | native[hands]
+        assert len(group['weapons']) == len(expected) and set(group['weapons']) == expected
+        censure = 'paladin_censure_fracture_1h' if hands == '1h' else 'paladin_censure_fracture'
+        assert group['proficiencies'] == [censure, 'paladin_smite']
     for key, row in by_id.items():
+        if row['kind'] in ('class', 'proficiency'):
+            assert 'icon' not in row, key  # Keep native white outlined combat glyphs.
         if row['kind'] == 'weapon':
             assert 'icon' not in row, key  # Inherit the native weapon-family Attack glyph.
-            action = 'paladin_censure_fracture_1h' if '_1h_' in key else 'paladin_censure_fracture'
-            assert row['proficiencies'] == [action], key
-        elif row['kind'] == 'item' and not key.startswith('paladin_trinket_'):
+            assert row['proficiencies'] == [], key
+            assert row.get('replaceProficiencies') is True, key
+            assert row['fields'].get('m_AttackDisplay') == 'Strike', key
+            assert row['fields'].get('m_NoRegularAttack') is False, key
+        elif row['kind'] == 'item':
             assert not row.get('proficiencies'), key
     for suffix, slots, reduction in [('_1h', 3, -4), ('', 4, -6)]:
         armor = by_id['paladin_censure_fracture' + suffix]
@@ -133,11 +165,81 @@ def validate_actions(by_id):
             m_PerSlotSkillRoll=0.0, m_Quickness=0.30000001192092896, m_DamagePerAttack=0,
             m_Suicide=False, m_GunShot=False, m_BoatDamage=0, m_ChaosOption=False)
     smite = by_id['paladin_smite']
-    assert smite['template'] == 'magicdamage'
-    assert smite['fields'] == {'m_DmgMultiplier': 0.25, 'm_DmgTypeOverride': 'magic', 'm_Target': 'None',
-        'm_TargetFriendly': False, 'm_Harmless': False, 'm_SlotOverride': -1, 'm_FullSlots': False}
+    assert smite['template'] == 'bluntStun'
+    assert smite['fields'] == {'m_DmgMultiplier': 0.5, 'm_DmgTypeOverride': 'magic', 'm_Target': 'None',
+        'm_TargetFriendly': False, 'm_Harmless': False, 'm_IgnoresArmor': False,
+        'm_SlotOverride': -1, 'm_FullSlots': True,
+        'm_ChanceToAffect': 0.25}
     assert smite['resistanceDamageBonus'] == {
-        'sources': ['paladin_censure_resistance_1h', 'paladin_censure_resistance'], 'multiplier': 6.0}
+        'sources': ['paladin_censure_resistance_1h', 'paladin_censure_resistance'], 'multiplier': 1.5}
+
+
+def validate_v4_progression(by_id, token=None):
+    """Check that one physical currency and armor thresholds carry the three roles."""
+    guardian = by_id['paladin']
+    sets = guardian['guardianEquipmentSets']
+    assert {s['id'] for s in sets} == {'mercy', 'verdict', 'censure'} and len(sets) == 3
+    assert guardian['guardianSmiteAction'] == 'paladin_smite'
+    assert guardian['guardianProfile']['physicalPercent'] < 100
+    for definition in sets:
+        family = definition['id']
+        for field, slot in [('head', 'helmet'), ('body', 'armor'), ('feet', 'boots'),
+                            ('oneHand', 'hammer_1h'), ('shield', 'shield'), ('twoHand', 'hammer_2h')]:
+            assert definition[field] == 'paladin_' + slot + '_' + family
+        assert len({definition[x] for x in ('head', 'body', 'feet', 'oneHand', 'shield', 'twoHand')}) == 6
+        assert definition['core']['physicalPercent'] != definition['minor']['physicalPercent']
+        assert definition['core']['healingPercent'] != definition['minor']['healingPercent']
+        assert definition['core']['guardReductionPercent'] <= definition['minor']['guardReductionPercent']
+    by_family = {s['id']: s for s in sets}
+    assert all(not definition.get('coreProficiencies') for definition in sets)
+    assert by_family['mercy']['core']['smitePercent'] == 160
+    assert by_family['mercy']['core']['bonuses']['guardHealPercent'] == 4
+    assert by_family['mercy']['completion'] == {'focusHealBonusPercent': 2}
+    assert by_family['verdict']['completion'] == {'wardDebuffs': True}
+    assert by_family['censure']['armorDamageBonus'] == {
+        'sources': ['paladin_censure_fracture_1h', 'paladin_censure_fracture'], 'multiplier': 1.2}
+    assert by_family['censure']['completion'] == {}
+    for artifact in ('paladin_hammer_1h_last_vigil', 'paladin_hammer_2h_kingsfall',
+                     'paladin_shield_last_bastion'):
+        assert artifact not in {s[x] for s in sets for x in ('head','body','feet','oneHand','shield','twoHand')}
+    if token is None:
+        shared = json.loads((HERE/'equipment-exchange'/'content.json').read_text())
+        assert len(shared['entries']) == 1
+        token = shared['entries'][0]
+    assert token['id'] == 'equipment_token' and token['displayName'] == 'Guild Token'
+    assert token['kind'] == 'item' and token['template'] == 'royalJewel'
+    assert token['fields'] == {'goldvalue': 0, 'minlevel': 0, 'maxlevel': 10,
+        'rarity': 'rare', 'dropable': False, 'townmarket': False, 'm_NightMarket': False,
+        'm_DungeonMerchant': False, '_shopStock': 0, 'm_CollectLoreItemUnlock': '',
+        'dlc': 'None', '_useable': False, 'm_ObjectType': 'resource', 'm_ObjectSlot': 'pack',
+        'm_BackpackEquip': False}
+    assert token['icon'] == 'assets/guild-token-icon.png'
+    rule = token['enemyDropRule']
+    assert rule['minimumDisplayedLevel'] == 8
+    assert (rule['ordinaryChancePercent'], rule['bossChancePercent'], rule['guaranteedByOpportunity']) == (10, 50, 6)
+    assert rule['bossChancePercent'] > rule['ordinaryChancePercent']
+    assert rule['namedBossGroups'] == [
+        ['krakenHead','krakenTentacle','krakenTentacleMirror'],
+        ['seaKing','seaKingTentacleA','seaKingTentacleB'], ['vexor','vexorEasy'],
+        ['harazuelBoss1'], ['harazuelBoss2'], ['harazuelBoss3'], ['harazuelBoss4']]
+    assert 'token' not in guardian['townExchange'], 'Paladin must use the framework Guild Token'
+    offers = guardian['townExchange']['offers']
+    expected = {by_id['paladin_' + slot + '_' + family]['id']
+                for family in ('mercy','verdict','censure')
+                for slot in ('helmet','armor','boots','hammer_1h','shield','hammer_2h','trinket','necklace')}
+    assert len(offers) == len(expected) == 24
+    assert {offer['item'] for offer in offers} == expected
+    ordered = [(family, slot, display_slot)
+               for family in ('mercy','verdict','censure')
+               for slot, display_slot in (('helmet','Head'),('armor','Body'),('boots','Foot'),
+                   ('hammer_1h','RightHand'),('shield','LeftHand'),('hammer_2h','RightHand'),
+                   ('trinket','Trinket'),('necklace','Neck'))]
+    assert [(o['family'].lower(), o['slot'], o['item']) for o in offers] == [
+        (family, display_slot, 'paladin_' + slot + '_' + family) for family, slot, display_slot in ordered]
+    assert all(offer['name'] == by_id[offer['item']]['displayName'] for offer in offers)
+    assert not any(entry.get('townExchange') or entry.get('enemyDropRule')
+                   for key, entry in by_id.items() if key != 'paladin')
+    assert 'enemyDropRule' not in guardian
 
 
 def validate_asset(path):
@@ -191,10 +293,15 @@ def main():
     def walk(value):
         if isinstance(value,dict):
             for key,child in value.items():
-                if key in ['model','texture','icon'] and isinstance(child,str):
+                if key in ['model','texture','metallicGlossTexture','icon'] and isinstance(child,str):
                     path=Path(child)
                     assert not path.is_absolute() and '..' not in path.parts and path.parts[0]=='assets'
                     assert (PACKAGE/path).is_file(),child
+                    if key == 'metallicGlossTexture':
+                        # Runtime masks need alpha smoothness, not an RGB image
+                        # silently promoted to an entirely glossy surface.
+                        raw = (PACKAGE/path).read_bytes()
+                        assert path.suffix == '.png' and raw[24:26] == bytes([8, 6]), child
                     refs.append(child)
                 else:walk(child)
         elif isinstance(value,list):
@@ -206,13 +313,13 @@ def main():
             # Native acquisition uses item tiers, not character levels. Campaign
             # stages request 0, 1, 2, 3, 4, 4; rewards may request one tier higher.
             assert (entry['fields']['minlevel'],entry['fields']['maxlevel'])==[(0,0),(1,2),(3,3),(4,6)][min(index,3)]
-            assert entry['fields']['dropable'] and entry['fields']['townmarket']
+            assert entry['fields']['dropable'] == (index < 3) and entry['fields']['townmarket'] == (index < 3)
             # Every progression option must remain configured for acquisition,
             # including players without DLC. Live stock selection is a separate gate.
             assert entry['fields']['dlc']=='None',entry['id']
-            assert entry['fields']['_shopStock']==1,entry['id']
-            assert entry['fields']['m_DungeonMerchant'] is True,entry['id']
-            assert entry['fields']['m_NightMarket'] is True,entry['id']
+            assert entry['fields']['_shopStock']==(1 if index < 3 else 0),entry['id']
+            assert entry['fields']['m_DungeonMerchant'] is (index < 3),entry['id']
+            assert entry['fields']['m_NightMarket'] is (index < 3),entry['id']
             assert entry['fields']['goldvalue']==[12,70,200,360][min(index,3)],entry['id']
             assert entry['fields']['rarity']==('common' if index<2 else 'rare'),entry['id']
             # Native LootAccept treats this as a lore identifier, not a boolean.
@@ -234,9 +341,9 @@ def main():
                 expected_paths=[display_prefix if m['path']=='.' else display_prefix+'/'+m['path'] for m in entry['itemModels']]
                 assert [m['path'] for m in entry['displayModels']] == expected_paths
                 if family=='hammer_2h':
-                    assert entry['displayModels'][0]['model']=='assets/paladin-hammer-2h-'+tier+'-display.glb'
-                    assert all(m['model'].endswith('-display.glb') for m in entry['displayModels'])
-                if family=='shield':assert entry['displayModels'][0]['model']=='assets/paladin-shield-'+tier+'-display.glb'
+                    assert original_or_framed_model(entry['displayModels'][0]['model'], 'assets/paladin-hammer-2h-'+tier+'-display.glb')
+                    assert all(m['model'].endswith(('-display.glb','-display-card-v1.glb')) for m in entry['displayModels'])
+                if family=='shield':assert original_or_framed_model(entry['displayModels'][0]['model'], 'assets/paladin-shield-'+tier+'-display.glb')
             if family=='helmet':
                 assert entry['template']=='helmetHeavy1'
                 assert [m['path'] for m in entry['itemModels']]==['.']
@@ -267,7 +374,7 @@ def main():
         assert [m['path'] for m in row['displayModels']] == [m['path'] for m in template['displayModels']], key
         stem = 'assets/paladin-' + family.replace('_', '-') + '-' + slug
         assert row['itemModels'][0]['model'] == stem + '.glb', key
-        assert row['displayModels'][0]['model'] == stem + '-display.glb', key
+        assert original_or_framed_model(row['displayModels'][0]['model'], stem + '-display.glb'), key
         if not family.startswith('hammer'):assert row['icon'] == stem + '-icon.png', key
         if family.startswith('hammer'):
             assert fields['skill'] == 'vitality', key
@@ -282,20 +389,73 @@ def main():
     assert by_id['paladin_censure_fracture_1h']['fields']['m_SlotOverride']==3
     assert by_id['paladin_censure_fracture_1h']['fields']['m_CustomValue']==-4
     validate_actions(by_id)
+    validate_v4_progression(by_id)
     receipt=json.loads((HERE/'paladin-assets.provenance.json').read_text())
     for name,record in receipt['files'].items():assert hashlib.sha256((PACKAGE/name).read_bytes()).hexdigest()==record['sha256'],name
     assert set(refs)==set(receipt['files'])
     assert {str(path.relative_to(PACKAGE)) for path in (PACKAGE/'assets').iterdir()} == set(refs)
-    routes={e['id']:{k:e[k] for k in ['itemModels','displayModels','apparelModels'] if k in e}
-            for e in entries if any(k in e for k in ['itemModels','displayModels','apparelModels'])}
+    routes={e['id']:{k:e[k] for k in ['itemModels','displayModels','apparelModels','offHandModels'] if k in e}
+            for e in entries if any(k in e for k in ['itemModels','displayModels','apparelModels','offHandModels'])}
     assert routes == receipt['rendererRoutes']
     manifest=json.loads((PACKAGE/'manifest.json').read_text())
-    assert manifest['version']=='1.4.0' and manifest['frameworkVersion']=='1.2.1'
-    # The unchanged art retains its original 1.3.0 provenance and evidence.
+    assert manifest['version']=='2.0.0' and manifest['frameworkVersion']=='1.7.0'
+    # Adopted art source pins are historical provenance, not candidate package versions.
+    validate_adopted_sources(PACKAGE, receipt)
     assert manifest['modGuid']=='com.ftkmf.paladin' and receipt['packageVersion']=='1.3.0'
     for name in set(refs):validate_asset(PACKAGE/name)
     assert all(path.suffix in ['.png','.glb'] for path in (PACKAGE/'assets').iterdir())
-    print('PASS: balance tradeoffs, Guard/March class ownership, 57 unique rows, 14 Censure weapons, six Smite trinkets, 51 equipment items, acquisition, Artifact contracts, pinned assets and renderer routes. No live-game claims.')
+    print('PASS: balance tradeoffs, Guard/March class ownership, 57 unique rows, 14 Strike-only weapons, hammer-gated Paladin Censure/Smite, no item spell grants, 51 equipment items, token acquisition, exclusive final-family exchange, Artifact contracts, pinned assets and renderer routes. No live-game claims.')
+
+
+def original_or_framed_model(path, original):
+    """Allow only the original export or the reviewed item-camera naming variants."""
+    return path in (original, original[:-4] + '-card-v1.glb') or (
+        original == 'assets/paladin-trinket-novice.glb'
+        and path == 'assets/paladin-trinket-novice-face-card-v1.glb')
+
+def validate_adopted_sources(package, receipt):
+    """Verify durable adopted inputs without treating hashes as visual acceptance."""
+    root = package.parents[2]
+    content = json.loads((package / 'content.json').read_text())
+    policies = {row['id']: row['helmetHairVisibility'] for row in content['entries']
+                if 'helmetHairVisibility' in row}
+    assert policies == receipt.get('helmetHairPolicies', {})
+    for asset, record in receipt['files'].items():
+        if 'adoption' not in record:
+            continue  # Unchanged historical source debt remains explicit.
+        assert receipt['sourceStatus'] == 'unreleased-presentation-candidate'
+        adoption = record['adoption']
+        assert adoption['originalContentOnly'] is True
+        assert adoption['sourceKind'] in ('original-authored', 'preserved-fitted-output', 'pipeline-output', 'authored-mask')
+        assert adoption['reproductionStatus'] in ('not-run', 'reproduced')
+        for path, digest in adoption['durableFiles'].items():
+            rel = Path(path)
+            assert not rel.is_absolute() and '..' not in rel.parts
+            assert rel.parts[:2] == ('art-experiments', 'paladin-polish')
+            source = root / rel
+            assert not any(part.is_symlink() for part in [source, *source.parents])
+            assert hashlib.sha256(source.read_bytes()).hexdigest() == digest, path
+        assert adoption['durableFiles'][record['source']] == record['sha256']
+        assert record['recipe'] in adoption['durableFiles']
+        assert record['inputsManifest'] in adoption['durableFiles']
+        closure = json.loads((root / record['inputsManifest']).read_text())
+        assert closure['schema'] == 'ftkmf.paladin.adoption-inputs.v1'
+        assert closure['output'] == {'path': record['source'], 'sha256': record['sha256']}
+        assert closure['recipe']['path'] == record['recipe']
+        assert closure['recipe']['sha256'] == adoption['durableFiles'][record['recipe']]
+        assert closure['inputs'] == {name: digest for name, digest in adoption['durableFiles'].items()
+                                     if name not in (record['source'], record['recipe'], record['inputsManifest'])}
+    for row in content['entries']:
+        for route in ('itemModels', 'displayModels', 'offHandModels', 'apparelModels'):
+            value = row.get(route, [])
+            if isinstance(value, dict): value = value.get('renderers', [])
+            for model in value:
+                mask = model.get('metallicGlossTexture')
+                if mask is None: continue
+                data = (package / mask).read_bytes()
+                assert data[:8] == b'\x89PNG\r\n\x1a\n' and data[12:16] == b'IHDR'
+                width, height = struct.unpack('>II', data[16:24])
+                assert data[24:26] == bytes([8, 6]) and 1 <= width <= 4096 and 1 <= height <= 4096
 
 
 if __name__=='__main__':main()

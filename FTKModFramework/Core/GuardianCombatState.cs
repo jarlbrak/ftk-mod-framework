@@ -47,11 +47,17 @@ namespace FTKModFramework.Core
         internal bool TryResolveAttackDamage(string attackId, string targetId, int currentHealth, int damage,
             bool allowRescue, out DamageResult result)
         {
+            return TryResolveAttackDamage(attackId, targetId, currentHealth, damage, allowRescue, 50, out result);
+        }
+
+        internal bool TryResolveAttackDamage(string attackId, string targetId, int currentHealth, int damage,
+            bool allowRescue, int reductionPercent, out DamageResult result)
+        {
             result = null;
             if (!Valid(attackId) || !Valid(targetId)) return false;
             Dictionary<string, DamageResult> victims;
             if (attacks.TryGetValue(attackId, out victims) && victims.TryGetValue(targetId, out result)) return true;
-            if (!TryResolveDirectDamage(targetId, currentHealth, damage, allowRescue, out result)) return false;
+            if (!TryResolveDirectDamage(targetId, currentHealth, damage, allowRescue, reductionPercent, out result)) return false;
             if (victims == null)
             {
                 victims = new Dictionary<string, DamageResult>(StringComparer.Ordinal);
@@ -107,13 +113,20 @@ namespace FTKModFramework.Core
         internal int ResolveGuardHealingHealth(string guardianId, string actionId, string targetId,
             int currentHealth, int maxHealth, int percent)
         {
+            return ResolveGuardHealingHealth(guardianId, actionId, targetId, currentHealth, maxHealth, percent, 100);
+        }
+
+        internal int ResolveGuardHealingHealth(string guardianId, string actionId, string targetId,
+            int currentHealth, int maxHealth, int percent, int healingPercent)
+        {
             Guardian guardian;
-            if (!Valid(guardianId) || !Valid(actionId) || !Valid(targetId) || percent < 0 || percent > 20 ||
+            if (!Valid(guardianId) || !Valid(actionId) || !Valid(targetId) || percent < 0 || percent > 20 || healingPercent < 25 || healingPercent > 200 ||
                 !guardians.TryGetValue(guardianId, out guardian) || !guardian.Active || guardian.Target != targetId ||
                 currentHealth <= 0 || maxHealth < currentHealth) return currentHealth;
             int health;
             if (guardian.GuardHealHealth.TryGetValue(actionId, out health)) return health;
-            int amount = GuardianEquipmentBonuses.HealAmount(currentHealth, maxHealth, percent);
+            int amount = Math.Min(maxHealth - currentHealth,
+                (int)Math.Min(int.MaxValue, (long)maxHealth * percent * healingPercent / 10000));
             // Starting health is below 50: a positive novice perk must still restore one HP.
             if (percent > 0 && currentHealth < maxHealth) amount = Math.Max(1, amount);
             health = currentHealth + amount;
@@ -137,8 +150,14 @@ namespace FTKModFramework.Core
 
         internal bool TryResolveDirectDamage(string targetId, int currentHealth, int damage, bool allowRescue, out DamageResult result)
         {
+            return TryResolveDirectDamage(targetId, currentHealth, damage, allowRescue, 50, out result);
+        }
+
+        internal bool TryResolveDirectDamage(string targetId, int currentHealth, int damage, bool allowRescue,
+            int reductionPercent, out DamageResult result)
+        {
             result = null;
-            if (!Valid(targetId) || currentHealth <= 0 || damage < 0) return false;
+            if (!Valid(targetId) || currentHealth <= 0 || damage < 0 || reductionPercent < 0 || reductionPercent > 50) return false;
             bool guarded = false;
             string rescuer = null;
             foreach (KeyValuePair<string, Guardian> pair in guardians)
@@ -149,7 +168,7 @@ namespace FTKModFramework.Core
                 if (!guardian.RescueUsed && (rescuer == null || StringComparer.Ordinal.Compare(pair.Key, rescuer) < 0))
                     rescuer = pair.Key;
             }
-            int retained = guarded ? damage / 2 + damage % 2 : damage;
+            int retained = guarded ? damage - (int)((long)damage * reductionPercent / 100) : damage;
             if (allowRescue && rescuer != null && retained >= currentHealth)
             {
                 guardians[rescuer].RescueUsed = true;
@@ -171,12 +190,22 @@ namespace FTKModFramework.Core
         internal int ResolveFocusedHitHealing(string guardianId, string attackId, string targetId,
             int currentHealth, int maxHealth, bool guardianCanAct, bool focusSpent, bool landed, int bonusPercent)
         {
+            return ResolveFocusedHitHealing(guardianId, attackId, targetId, currentHealth, maxHealth,
+                guardianCanAct, focusSpent, landed, bonusPercent, 100);
+        }
+
+        internal int ResolveFocusedHitHealing(string guardianId, string attackId, string targetId,
+            int currentHealth, int maxHealth, bool guardianCanAct, bool focusSpent, bool landed,
+            int bonusPercent, int healingPercent)
+        {
             Guardian guardian;
             if (!Valid(guardianId) || !Valid(attackId) || !Valid(targetId) || guardianId == targetId ||
-                !guardianCanAct || !focusSpent || !landed || currentHealth <= 0 || maxHealth < currentHealth || bonusPercent < 0 || bonusPercent > 20 ||
+                !guardianCanAct || !focusSpent || !landed || currentHealth <= 0 || maxHealth < currentHealth || bonusPercent < 0 || bonusPercent > 20 || healingPercent < 25 || healingPercent > 200 ||
                 !guardians.TryGetValue(guardianId, out guardian) || guardian.Target != targetId) return 0;
             if (!guardian.HealedAttacks.Add(attackId)) return 0;
-            return GuardianEquipmentBonuses.HealAmount(currentHealth, maxHealth, 8 + bonusPercent);
+            int amount = (int)Math.Min(int.MaxValue,
+                (long)maxHealth * (8 + bonusPercent) * healingPercent / 10000);
+            return Math.Min(amount, maxHealth - currentHealth);
         }
 
         internal bool ReloadIsEmpty { get { return guardians.Count == 0 && attacks.Count == 0; } }

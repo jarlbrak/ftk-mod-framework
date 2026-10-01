@@ -151,10 +151,11 @@ func rejectModelReferences(value interface{}, depth int) error {
 }
 
 type marketModelRenderer struct {
-	Path       string `json:"path"`
-	Model      string `json:"model"`
-	Texture    string `json:"texture"`
-	NativeMesh string `json:"nativeMesh,omitempty"`
+	Path                 string  `json:"path"`
+	Model                string  `json:"model"`
+	Texture              string  `json:"texture"`
+	MetallicGlossTexture *string `json:"metallicGlossTexture,omitempty"`
+	NativeMesh           string  `json:"nativeMesh,omitempty"`
 }
 type marketPlayerModel struct {
 	Skinset  string                `json:"skinset"`
@@ -204,6 +205,9 @@ func marketModelRenderers(renderers []marketModelRenderer, apparel bool) error {
 		seen[r.Path] = true
 		if !marketSafePath(r.Model) || !strings.HasPrefix(r.Model, "assets/") || path.Ext(r.Model) != ".glb" || !marketSafePath(r.Texture) || !strings.HasPrefix(r.Texture, "assets/") || path.Ext(r.Texture) != ".png" {
 			return errors.New("invalid model/texture package path")
+		}
+		if r.MetallicGlossTexture != nil && (!marketSafePath(*r.MetallicGlossTexture) || !strings.HasPrefix(*r.MetallicGlossTexture, "assets/") || path.Ext(*r.MetallicGlossTexture) != ".png") {
+			return errors.New("invalid metallicGlossTexture package path")
 		}
 		if apparel && r.NativeMesh == "" || !apparel && r.NativeMesh != "" {
 			return errors.New("nativeMesh is required only for conditional apparel")
@@ -255,11 +259,35 @@ func marketModelReferences(data map[string][]byte) error {
 				if _, ok := data[r.Model]; !ok {
 					return errors.New("referenced model absent from package: " + r.Model)
 				}
+				if r.MetallicGlossTexture != nil {
+					mask, ok := data[*r.MetallicGlossTexture]
+					if !ok {
+						return errors.New("referenced metallic/gloss texture absent from package: " + *r.MetallicGlossTexture)
+					}
+					if err := marketMetallicGlossPNG(mask); err != nil {
+						return fmt.Errorf("%s: %w", *r.MetallicGlossTexture, err)
+					}
+				}
 				if _, ok := data[r.Texture]; !ok {
 					return errors.New("referenced texture absent from package: " + r.Texture)
 				}
 			}
 		}
+	}
+	return nil
+}
+
+// Mask alpha is smoothness data, so RGB and palette exports cannot inherit an
+// implicit opaque alpha. Full chunk/CRC validation remains a runtime preflight.
+func marketMetallicGlossPNG(raw []byte) error {
+	if len(raw) < 33 || len(raw) > 16<<20 || !bytes.Equal(raw[:8], []byte{137, 80, 78, 71, 13, 10, 26, 10}) ||
+		binary.BigEndian.Uint32(raw[8:12]) != 13 || string(raw[12:16]) != "IHDR" {
+		return errors.New("invalid metallic/gloss PNG signature or IHDR")
+	}
+	width, height := binary.BigEndian.Uint32(raw[16:20]), binary.BigEndian.Uint32(raw[20:24])
+	if width == 0 || height == 0 || width > 4096 || height > 4096 || raw[24] != 8 || raw[25] != 6 ||
+		raw[26] != 0 || raw[27] != 0 || raw[28] > 1 {
+		return errors.New("metallic/gloss texture requires an 8-bit RGBA PNG within 4096 pixels per dimension")
 	}
 	return nil
 }

@@ -28,6 +28,14 @@ namespace FTKModFramework.Core.Data
         /// <summary>Proficiency ids for a weapon, enemy, custom class, or equipped custom item.</summary>
         [JsonProperty("proficiencies")] public string[] Proficiencies;
         [JsonProperty("replaceProficiencies")] public bool ReplaceProficiencies;
+        private ClassWeaponProficiencyEntry[] weaponProficiencies;
+        [JsonIgnore] public bool WeaponProficienciesDeclared { get; private set; }
+        [JsonProperty("weaponProficiencies")]
+        public ClassWeaponProficiencyEntry[] WeaponProficiencies
+        {
+            get { return weaponProficiencies; }
+            set { WeaponProficienciesDeclared = true; weaponProficiencies = value; }
+        }
         [JsonProperty("randomDebuffOutcomes")] public string[] RandomDebuffOutcomes;
         [JsonProperty("resistanceDamageBonus")] public ResistanceDamageBonusEntry ResistanceDamageBonus;
 
@@ -59,9 +67,15 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("thiefArtifact")] public string ThiefArtifact;
         [JsonProperty("overworldAilmentImmunity")] public OverworldAilmentImmunityEntry OverworldAilmentImmunity;
         [JsonProperty("guardianBonuses")] public GuardianBonusEntry GuardianBonuses;
+        [JsonProperty("guardianProfile")] public GuardianProfileEntry GuardianProfile;
+        [JsonProperty("guardianSmiteAction")] public string GuardianSmiteAction;
+        [JsonProperty("guardianEquipmentSets")] public GuardianSetEntry[] GuardianEquipmentSets;
+        [JsonProperty("enemyDropRule")] public EnemyDropRuleEntry EnemyDropRule;
+        [JsonProperty("townExchange")] public TownExchangeEntry TownExchange;
         [JsonProperty("icon")] public string Icon;
         [JsonProperty("apparelModels")] public ApparelModelEntry ApparelModels;
         [JsonProperty("modifiers")] public ItemModifierEntry Modifiers;
+        [JsonProperty("helmetHairVisibility")] public HelmetHairVisibilityEntry HelmetHairVisibility;
         [JsonProperty("itemModels")] public ModelRendererEntry[] ItemModels;
         [JsonProperty("offHandModels")] public ModelRendererEntry[] OffHandModels;
         [JsonProperty("displayModels")] public ModelRendererEntry[] DisplayModels;
@@ -71,6 +85,34 @@ namespace FTKModFramework.Core.Data
     }
     // Populated by JSON reflection.
 #pragma warning disable CS0649
+    internal sealed class ClassWeaponProficiencyEntry
+    {
+        [JsonProperty("weapons")] public string[] Weapons;
+        [JsonProperty("proficiencies")] public string[] Proficiencies;
+    }
+#pragma warning restore CS0649
+    // Populated by JSON reflection.
+#pragma warning disable CS0649
+    internal sealed class HelmetHairVisibilityEntry
+    {
+        [JsonProperty("top", Required = Required.Always), JsonConverter(typeof(HelmetHairBooleanConverter))] public bool Top;
+        [JsonProperty("bottom", Required = Required.Always), JsonConverter(typeof(HelmetHairBooleanConverter))] public bool Bottom;
+    }
+
+    // Newtonsoft otherwise coerces strings and numbers to booleans, unlike package admission.
+    internal sealed class HelmetHairBooleanConverter : JsonConverter
+    {
+        public override bool CanConvert(System.Type objectType) { return objectType == typeof(bool); }
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType != JsonToken.Boolean)
+                throw new JsonSerializationException("helmetHairVisibility requires JSON boolean tokens");
+            return (bool)reader.Value;
+        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { writer.WriteValue((bool)value); }
+    }
+
     internal sealed class ResistanceDamageBonusEntry
     {
         [JsonProperty("sources")] public string[] Sources;
@@ -87,6 +129,54 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("guardReckoning")] public bool GuardReckoning;
         [JsonProperty("guardCleanse")] public bool GuardCleanse;
     }
+    internal sealed class GuardianProfileEntry
+    {
+        [JsonProperty("physicalPercent", Required = Required.Always)] public int PhysicalPercent;
+        [JsonProperty("smitePercent", Required = Required.Always)] public int SmitePercent;
+        [JsonProperty("healingPercent", Required = Required.Always)] public int HealingPercent;
+        [JsonProperty("guardReductionPercent", Required = Required.Always)] public int GuardReductionPercent;
+        [JsonProperty("bonuses")] public GuardianBonusEntry Bonuses;
+    }
+    internal sealed class GuardianSetEntry
+    {
+        [JsonProperty("id")] public string Id;
+        [JsonProperty("head")] public string Head;
+        [JsonProperty("body")] public string Body;
+        [JsonProperty("feet")] public string Feet;
+        [JsonProperty("oneHand")] public string OneHand;
+        [JsonProperty("shield")] public string Shield;
+        [JsonProperty("twoHand")] public string TwoHand;
+        [JsonProperty("minor")] public GuardianProfileEntry Minor;
+        [JsonProperty("core")] public GuardianProfileEntry Core;
+        [JsonProperty("completion")] public GuardianBonusEntry Completion;
+        [JsonProperty("coreProficiencies")] public string[] CoreProficiencies;
+        [JsonProperty("armorDamageBonus")] public ResistanceDamageBonusEntry ArmorDamageBonus;
+    }
+    internal sealed class EnemyDropRuleEntry
+    {
+        [JsonProperty("minimumDisplayedLevel", Required = Required.Always)] public int MinimumDisplayedLevel;
+        [JsonProperty("ordinaryChancePercent", Required = Required.Always)] public int OrdinaryChancePercent;
+        [JsonProperty("bossChancePercent", Required = Required.Always)] public int BossChancePercent;
+        [JsonProperty("guaranteedByOpportunity", Required = Required.Always)] public int GuaranteedByOpportunity;
+        [JsonProperty("namedBossGroups")] public string[][] NamedBossGroups;
+    }
+    internal sealed class TownExchangeEntry
+    {
+        [JsonProperty("token")] public string Token;
+        [JsonProperty("offers")] public TownExchangeOfferEntry[] Offers;
+    }
+    internal sealed class TownExchangeCatalogEntry
+    {
+        [JsonProperty("ownerClass")] public string OwnerClass;
+        [JsonProperty("offers")] public TownExchangeOfferEntry[] Offers;
+    }
+    internal sealed class TownExchangeOfferEntry
+    {
+        [JsonProperty("item")] public string Item;
+        [JsonProperty("name")] public string Name;
+        [JsonProperty("family")] public string Family;
+        [JsonProperty("slot")] public string Slot;
+    }
     internal sealed class OverworldAilmentImmunityEntry
     {
         [JsonProperty("displayName")] public string DisplayName;
@@ -97,11 +187,26 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("maleBinding")] public string MaleBinding;
         [JsonProperty("renderers")] public ModelRendererEntry[] Renderers;
     }
+    internal sealed class MetallicGlossPathConverter : JsonConverter
+    {
+        public override bool CanConvert(System.Type objectType) { return objectType == typeof(string); }
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType != JsonToken.String || string.IsNullOrEmpty((string)reader.Value))
+                throw new JsonSerializationException("metallicGlossTexture requires a nonempty PNG path or null");
+            return (string)reader.Value;
+        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { writer.WriteValue((string)value); }
+    }
+
     internal sealed class ModelRendererEntry
     {
         [JsonProperty("path")] public string Path;
         [JsonProperty("model")] public string Model;
         [JsonProperty("texture")] public string Texture;
+        [JsonProperty("metallicGlossTexture"), JsonConverter(typeof(MetallicGlossPathConverter))] public string MetallicGlossTexture;
         [JsonProperty("nativeMesh")] public string NativeMesh;
     }
     internal sealed class PlayerModelEntry
