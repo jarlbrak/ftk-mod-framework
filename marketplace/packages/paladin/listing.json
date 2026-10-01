@@ -6,10 +6,8 @@
   "dependencies": [],
   "requirements": [
     "Requires FTK Mod Framework 1.7.0 or a compatible later 1.x release. Equipment Exchange is built into the framework; no separate currency mod is needed.",
-    "Bounded single-player gameplay verified on the listed macOS game build; Windows, Linux and co-op remain unverified.",
-    "Complete skinset fit, every display view, token supply and long-campaign balance remain under review.",
-    "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md.",
-    "Online co-op remains unverified."
+    "Requires a game build with the listed Assembly-CSharp fingerprint.",
+    "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md."
   ],
   "contentChanges": [
     "Uses a two-sentence flavor description, compact native-style class ability labels, and a Novice Hammer plus Novice Aegis starting kit.",
@@ -23,7 +21,9 @@
   "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
   "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues/138",
   "platforms": [
-    "macos"
+    "windows",
+    "macos",
+    "linux"
   ],
   "gameFingerprints": [
     "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
