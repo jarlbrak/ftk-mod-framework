@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Reproduce Paladin source-package structural checks without launching FTK."""
 import hashlib
+import argparse
 import json
 import struct
 from pathlib import Path
@@ -277,7 +278,7 @@ def validate_asset(path):
         assert not accessor.get('sparse') and not accessor.get('normalized', False), path
 
 
-def main():
+def main(source_root=None):
     document=json.loads((PACKAGE/'content.json').read_text())
     entries=document['entries'];by_id={entry['id']:entry for entry in entries}
     assert len(entries)==len(by_id)==57
@@ -400,7 +401,7 @@ def main():
     manifest=json.loads((PACKAGE/'manifest.json').read_text())
     assert manifest['version']=='2.0.0' and manifest['frameworkVersion']=='1.7.0'
     # Adopted art source pins are historical provenance, not candidate package versions.
-    validate_adopted_sources(PACKAGE, receipt)
+    validate_adopted_sources(PACKAGE, receipt, source_root or PACKAGE.parents[2])
     assert manifest['modGuid']=='com.ftkmf.paladin' and receipt['packageVersion']=='1.3.0'
     for name in set(refs):validate_asset(PACKAGE/name)
     assert all(path.suffix in ['.png','.glb'] for path in (PACKAGE/'assets').iterdir())
@@ -413,9 +414,10 @@ def original_or_framed_model(path, original):
         original == 'assets/paladin-trinket-novice.glb'
         and path == 'assets/paladin-trinket-novice-face-card-v1.glb')
 
-def validate_adopted_sources(package, receipt):
+def validate_adopted_sources(package, receipt, source_root):
     """Verify durable adopted inputs without treating hashes as visual acceptance."""
-    root = package.parents[2]
+    root = Path(source_root).absolute()
+    assert root.is_dir() and not any(part.is_symlink() for part in [root, *root.parents])
     content = json.loads((package / 'content.json').read_text())
     policies = {row['id']: row['helmetHairVisibility'] for row in content['entries']
                 if 'helmetHairVisibility' in row}
@@ -458,4 +460,9 @@ def validate_adopted_sources(package, receipt):
                 assert data[24:26] == bytes([8, 6]) and 1 <= width <= 4096 and 1 <= height <= 4096
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source-root', type=Path,
+                        help='Retained authoring archive root; defaults to this repository')
+    args = parser.parse_args()
+    main(args.source_root)
