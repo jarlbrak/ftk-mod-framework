@@ -48,7 +48,7 @@ namespace FTKModFramework.Core
                 if (tooltip == null) tooltip = icon.AddComponent<uiToolTipGeneral>();
                 tooltip.m_ReturnRawInfo = true;
                 tooltip.m_Info = "Guarded";
-                tooltip.m_DetailInfo = "An ally's Guard reduces direct attack damage until that ally's next turn. Protection ends if the guardian is incapacitated.";
+                tooltip.m_DetailInfo = "Guard reduces direct attack damage until the guarding ally's next turn. Protection ends if the guarding ally is incapacitated.";
             }
             if (icon == null) return;
             try { Refresh(); }
