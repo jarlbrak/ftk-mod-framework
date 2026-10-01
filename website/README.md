@@ -86,12 +86,21 @@ The test suite checks all 96 published HTML item cards at desktop and mobile siz
 images, inline ability text, search, tier and slot filtering. The cards are original CSS inspired by native tooltips,
 not extracted game UI assets.
 
-`node scripts/prepare-items.mjs` downloads the hash-verified archives and compresses their original
-icons to WebP. Fourteen Paladin hammers have no standalone published icon. For each, render the
-original published model with `render-turntable.py -- PACKAGE_DIR OUTPUT_DIR ITEM_ID --still`,
-and retain frame `0000.png` as `artwork/items/ITEM_ID.png` before preparing media. This optional
-mode uses the same scene as the turntables, at 512 pixels with a transparent background.
-`src/data/item-art-provenance.json` records package, source, model, atlas, and derivative hashes.
+`node scripts/prepare-items.mjs --package Paladin` downloads the catalog's hash-verified Paladin
+archive and prepares only its item media; other package media and provenance are preserved. A
+different catalog package can be named with `--package NAME`. For a reviewed local archive before
+publication, use `--package Paladin --archive ZIP --archive-sha256 SHA256 --version VERSION`.
+This verifies the archive and manifest but does not publish the package or update catalog data.
+
+Each item with a package icon uses that icon. Each item without one needs a studio still at
+`artwork/items/ITEM_ID.png` and a matching `artwork/items/ITEM_ID.receipt.json`. The receipt must
+declare `id`, `output` (the relative PNG path), `outputSha256`, the actual `renderer`, and the
+equipped root `itemModels` paths and SHA-256 values as `model`/`modelSha256`,
+`texture`/`textureSha256`, and `metallicGlossTexture`/`metallicGlossTextureSha256`. The script
+checks the PNG and all three package assets before writing WebP or provenance. Fourteen currently
+published Paladin hammers use studio stills; future renders must have receipts for the exact
+selected package. `src/data/item-art-provenance.json` records package, source, receipt, model,
+albedo, metallic mask, and derivative hashes.
 Only icon derivatives reach the deployed site; no raw models or atlases do. These stills show
 geometry in studio lighting and do not establish native fit or animation coverage.
 
