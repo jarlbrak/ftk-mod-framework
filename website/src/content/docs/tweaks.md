@@ -1,10 +1,8 @@
 ---
 title: Tweaks
-description: Optional fixes, extra information and conveniences for the base game. New in framework 1.6.0; the current preview is 1.6.2.
+description: Optional fixes, extra information and conveniences for the base game. Included in framework 1.7.0.
 ---
-:::note[New in the framework 1.6 previews]
-Tweaks arrived in [framework 1.6.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.0), a **preview** release. The current preview is [framework 1.6.2](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.2); 1.6.1 fixed the refund focus key. Automatic updates stay on the stable framework, so a preview is never installed for you. To try it, choose **Preview** in **Mods > Updates**, or download a launcher from the 1.6.2 release page. Read the [known limitations](#known-limitations) first.
-:::
+Tweaks are included in [framework 1.7.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.7.0). Open **Mods > Tweaks** to choose optional fixes, information and conveniences. Read the [known limitations](#known-limitations) for control and gameplay scope.
 
 Tweaks are small, optional changes to the original game that come with the framework itself. They fix defects, show information the game already tracks but never displays, and remove some interface friction. They never make the game easier or harder on purpose. The two fixes that do shift balance say so, and you can turn them off. No mod needs to be installed to use them.
 
@@ -139,7 +137,6 @@ Bug report diagnostics include your tweak settings and which tweaks were actuall
 
 ## Known limitations
 
-- **Preview release.** Framework 1.6.2 is a preview and is not delivered by automatic updates on the Stable channel.
 - **Windows and Linux gameplay are unverified.** In-game checks so far were solo play in a macOS game copy, and they do not yet cover every tweak.
 - **Online co-op.** Shared rules tweaks stay off in online co-op until a later release. Online co-op with tweaks has not been played, and local play has only been partly checked.
 - **Controllers** are not supported for refunding focus or one-press inventory, and controller play with tweaks has not been checked.

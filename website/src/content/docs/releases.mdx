@@ -4,9 +4,22 @@ description: What changed in the published framework and mod packages.
 ---
 import catalog from '../../data/catalog';
 
+## Framework 1.7.0 and Paladin 2.0.0
+
+[Framework 1.7.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.7.0) is available for Windows, macOS, and Linux. It includes the shared Equipment Exchange, material and equipment improvements, and the fixes and Tweaks introduced in 1.6.x. [Download the launcher](../installation/) and restart after updating.
+
+[Paladin 2.0.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v2.0.0) requires framework 1.7.0 or a compatible later 1.x release.
+
+- **Hammer-gated class actions.** Paladins gain Censure and Smite with an eligible hammer. Paladin hammers provide a single native Strike, so other classes can use them without gaining Paladin skills. Smite deals magic damage and has a perfect-only stun chance.
+- **Three armor roles.** Matching Mercy armor strengthens healing and Smite; Verdict protects allies; Censure favors physical vengeance. Each role has explicit costs. Accessories do not substitute for matching armor.
+- **One shared gear store.** Level-8-and-above encounters can award Guild Tokens. Exchange one token for a piece at a city's native Back Alley vendor. It shows class-relevant gear and hides pieces already owned; purchases have no refunds.
+- **Revised equipment presentation.** Updated materials, helmet fit, weapon placement, item framing and studio media keep the six families visually consistent.
+
+The token service is built into the framework and activates when a participating catalog is installed. No separate currency mod is required. [Read the Paladin guide](../mods/paladin/) for role bonuses, artifacts and acquisition.
+
 ## Framework 1.6.2 (preview)
 
-[Framework 1.6.2](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.2) is a **preview** release that fixes two problems. It adds no new tweaks. Automatic updates stay on stable 1.5.1. If you chose **Preview** in **Mods > Updates**, 1.6.2 is offered to you; otherwise download a launcher from the release page. Restart the game after updating.
+[Framework 1.6.2](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.2) is a **preview** release that fixes two problems. It adds no new tweaks. At its publication, Stable remained on 1.5.1 and Preview offered 1.6.2. The current regular release is framework 1.7.0 above.
 
 - **Automatic bug reports are delivered.** Before 1.6.2, automatic reports were saved in a folder the sending helper refuses, so none of them reached GitHub, and one stuck report blocked every later one. They now send, a failed report never holds up a newer one, and the game's own sound-engine error at startup is no longer reported. The first launch of 1.6.2 deletes the old, never-sent reports without sending them. If you want an earlier problem looked at, use **Options > Report Bugs**.
 - **Saves with missing content are refused instead of hanging.** Resuming a save that uses an enemy, map encounter, item, class, quest or adventure that is not installed used to stop on "Crafting adventure". The game now shows **Can't load this save**, lists what is missing, and leaves the save file unchanged. This mostly affects saves made with a mod that has since been removed.
@@ -17,7 +30,7 @@ The save check was tested in solo play in a macOS game copy. Automatic delivery 
 
 ## Framework 1.6.1 (preview)
 
-[Framework 1.6.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.1) is a **preview** release that fixes two problems found in 1.6.0. It adds no new tweaks. Automatic updates stay on stable 1.5.1. If you chose **Preview** in **Mods > Updates**, 1.6.1 is offered to you; otherwise download a launcher from the release page. Restart the game after updating.
+[Framework 1.6.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.1) is a **preview** release that fixes two problems found in 1.6.0. It adds no new tweaks. At its publication, Stable remained on 1.5.1 and Preview offered 1.6.1. The current regular release is framework 1.7.0 above.
 
 - **Refund focus key.** In 1.6.0 the refund key was **Backspace**, which is also the game's **End Turn** key, so pressing it ended your turn and the focus stayed spent. The default is now **F**. If your settings file still has Backspace, 1.6.1 changes it to F when the game starts. A key that one of the game's own controls uses never refunds, and the log warns once. The refund tooltip now also appears when you move the pointer onto a faded pip straight from the map.
 - **Fewer false stuck-turn warnings.** The `STUCK-TURN` log line no longer appears while an encounter's Fight or Sneak menu waits for you, while a tutorial popup or the encyclopedia is open, or while a single-player game waits for your own game to be ready.
@@ -28,7 +41,7 @@ Both fixes were checked in solo play in a macOS game copy. The known limitations
 
 ## Framework 1.6.0 (preview)
 
-[Framework 1.6.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.0) is a **preview** release. Automatic updates stay on stable 1.5.1; choose **Preview** in **Mods > Updates**, or download a launcher from the release page, to try it. Restart the game after updating.
+[Framework 1.6.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.6.0) is a **preview** release. At its publication, Stable remained on 1.5.1 and Preview offered 1.6.0. The current regular release is framework 1.7.0 above.
 
 It adds **Tweaks**, a new tab under **Mods > Tweaks** with optional fixes, extra information and conveniences for the base game. Fixes are on by default. Information and Convenience tweaks are off until you turn them on.
 
@@ -76,11 +89,9 @@ All four mods are published for Windows, macOS, and Linux using the same version
 
 ## Paladin upgrade notes
 
-Moving from 1.3.0 to 1.4.0 requires framework 1.2.1. New Paladins start with the Novice Hammer and Novice Aegis. Armor and trinkets must be acquired, and Smite requires an equipped Paladin trinket. Existing characters keep their equipment.
+Update the framework to 1.7.0 before installing Paladin 2.0.0, then restart the game. New Paladins start with the Novice Hammer and Novice Aegis. Censure and Smite now follow the Paladin's class and equipped hammer; trinkets no longer grant spells. Final-tier gear is obtained through Guild Tokens and the Back Alley vendor.
 
-Class selection now shows **Skill: Guard** and **Passive Skill: Cleansing March** beneath two sentences of flavor. Base stats, ability mechanics, equipment values, and artwork are unchanged. Base Vitality remains 80; the Highward, Mercy, Censure, and Verdict great hammers retain damage values of 32, 34, 34, and 37.
-
-Restart after preparing an upgrade and start a new adventure when changing content. Existing-save migration and long-campaign balance remain unverified. [Read the full Paladin guide](../mods/paladin/).
+Keep a run's framework and mod versions consistent. Start a new adventure when changing content. [Read the full Paladin guide](../mods/paladin/).
 
 ## Previous versions and future previews
 

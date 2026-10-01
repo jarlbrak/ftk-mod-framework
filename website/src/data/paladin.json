@@ -1,1392 +1,1645 @@
 {
-  "version": "1.4.0",
-  "sha256": "145545a47b99e128b4ab1481e677e0d26a6f9fa16d3781a13de1ea362c8c36fc",
+  "version": "2.0.0",
+  "sha256": "ef7a6ec3b3cbd72f9903ab35300f129b1c87730aa1db91c29e7e33d4e63ff6fe",
   "entries": [
     {
-      "kind": "class",
-      "id": "paladin",
       "displayName": "Paladin",
       "fields": {
-        "strength": 0.7,
-        "intelligence": 0.4,
         "awareness": 0.6,
-        "talent": 0.5,
-        "speed": 0.6,
-        "vitality": 0.8,
-        "focus": 3,
-        "startinggold": 3,
-        "primarystat": "vitality",
         "dlc": "None",
-        "startweapon": "paladin_hammer_1h_novice",
+        "focus": 3,
+        "intelligence": 0.4,
+        "primarystat": "vitality",
+        "skills": {
+          "m_SteadFast": false
+        },
+        "speed": 0.6,
+        "startinggold": 3,
         "startitems": [
           "paladin_shield_novice"
         ],
-        "skills": {
-          "m_SteadFast": false
-        }
+        "startweapon": "paladin_hammer_1h_novice",
+        "strength": 0.7,
+        "talent": 0.5,
+        "vitality": 0.8
       },
-      "icon": "assets/paladin-guard-icon.png"
+      "guardianEquipmentSets": [
+        {
+          "body": "paladin_armor_mercy",
+          "completion": {
+            "focusHealBonusPercent": 2
+          },
+          "core": {
+            "bonuses": {
+              "guardHealPercent": 4
+            },
+            "guardReductionPercent": 35,
+            "healingPercent": 150,
+            "physicalPercent": 65,
+            "smitePercent": 160
+          },
+          "feet": "paladin_boots_mercy",
+          "head": "paladin_helmet_mercy",
+          "id": "mercy",
+          "minor": {
+            "guardReductionPercent": 50,
+            "healingPercent": 112,
+            "physicalPercent": 75,
+            "smitePercent": 100
+          },
+          "oneHand": "paladin_hammer_1h_mercy",
+          "shield": "paladin_shield_mercy",
+          "twoHand": "paladin_hammer_2h_mercy"
+        },
+        {
+          "body": "paladin_armor_verdict",
+          "completion": {
+            "wardDebuffs": true
+          },
+          "core": {
+            "bonuses": {
+              "retaliationDamage": 1
+            },
+            "guardReductionPercent": 50,
+            "healingPercent": 75,
+            "physicalPercent": 60,
+            "smitePercent": 50
+          },
+          "feet": "paladin_boots_verdict",
+          "head": "paladin_helmet_verdict",
+          "id": "verdict",
+          "minor": {
+            "bonuses": {
+              "retaliationDamage": 1
+            },
+            "guardReductionPercent": 50,
+            "healingPercent": 100,
+            "physicalPercent": 75,
+            "smitePercent": 100
+          },
+          "oneHand": "paladin_hammer_1h_verdict",
+          "shield": "paladin_shield_verdict",
+          "twoHand": "paladin_hammer_2h_verdict"
+        },
+        {
+          "armorDamageBonus": {
+            "multiplier": 1.2,
+            "sources": [
+              "paladin_censure_fracture_1h",
+              "paladin_censure_fracture"
+            ]
+          },
+          "body": "paladin_armor_censure",
+          "completion": {},
+          "core": {
+            "guardReductionPercent": 25,
+            "healingPercent": 50,
+            "physicalPercent": 125,
+            "smitePercent": 50
+          },
+          "feet": "paladin_boots_censure",
+          "head": "paladin_helmet_censure",
+          "id": "censure",
+          "minor": {
+            "guardReductionPercent": 50,
+            "healingPercent": 100,
+            "physicalPercent": 80,
+            "smitePercent": 100
+          },
+          "oneHand": "paladin_hammer_1h_censure",
+          "shield": "paladin_shield_censure",
+          "twoHand": "paladin_hammer_2h_censure"
+        }
+      ],
+      "guardianProfile": {
+        "guardReductionPercent": 50,
+        "healingPercent": 100,
+        "physicalPercent": 75,
+        "smitePercent": 100
+      },
+      "guardianSmiteAction": "paladin_smite",
+      "id": "paladin",
+      "kind": "class",
+      "townExchange": {
+        "offers": [
+          {
+            "family": "Mercy",
+            "item": "paladin_helmet_mercy",
+            "name": "Mercy Helm",
+            "slot": "Head"
+          },
+          {
+            "family": "Mercy",
+            "item": "paladin_armor_mercy",
+            "name": "Mercy Plate",
+            "slot": "Body"
+          },
+          {
+            "family": "Mercy",
+            "item": "paladin_boots_mercy",
+            "name": "Mercy Sabatons",
+            "slot": "Foot"
+          },
+          {
+            "family": "Mercy",
+            "item": "paladin_hammer_1h_mercy",
+            "name": "Mercy Hammer",
+            "slot": "RightHand"
+          },
+          {
+            "family": "Mercy",
+            "item": "paladin_shield_mercy",
+            "name": "Mercy Aegis",
+            "slot": "LeftHand"
+          },
+          {
+            "family": "Mercy",
+            "item": "paladin_hammer_2h_mercy",
+            "name": "Mercy Great Hammer",
+            "slot": "RightHand"
+          },
+          {
+            "family": "Mercy",
+            "item": "paladin_trinket_mercy",
+            "name": "Lantern of Mercy",
+            "slot": "Trinket"
+          },
+          {
+            "family": "Mercy",
+            "item": "paladin_necklace_mercy",
+            "name": "Mercy Locket",
+            "slot": "Neck"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_helmet_verdict",
+            "name": "Verdict Helm",
+            "slot": "Head"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_armor_verdict",
+            "name": "Verdict Plate",
+            "slot": "Body"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_boots_verdict",
+            "name": "Verdict Sabatons",
+            "slot": "Foot"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_hammer_1h_verdict",
+            "name": "Verdict Hammer",
+            "slot": "RightHand"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_shield_verdict",
+            "name": "Verdict Aegis",
+            "slot": "LeftHand"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_hammer_2h_verdict",
+            "name": "Verdict Great Hammer",
+            "slot": "RightHand"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_trinket_verdict",
+            "name": "Scales of Verdict",
+            "slot": "Trinket"
+          },
+          {
+            "family": "Verdict",
+            "item": "paladin_necklace_verdict",
+            "name": "Judge's Collar",
+            "slot": "Neck"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_helmet_censure",
+            "name": "Censure Helm",
+            "slot": "Head"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_armor_censure",
+            "name": "Censure Plate",
+            "slot": "Body"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_boots_censure",
+            "name": "Censure Sabatons",
+            "slot": "Foot"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_hammer_1h_censure",
+            "name": "Censure Hammer",
+            "slot": "RightHand"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_shield_censure",
+            "name": "Censure Aegis",
+            "slot": "LeftHand"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_hammer_2h_censure",
+            "name": "Censure Great Hammer",
+            "slot": "RightHand"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_trinket_censure",
+            "name": "Seal of Censure",
+            "slot": "Trinket"
+          },
+          {
+            "family": "Censure",
+            "item": "paladin_necklace_censure",
+            "name": "Censure Medallion",
+            "slot": "Neck"
+          }
+        ]
+      },
+      "weaponProficiencies": [
+        {
+          "proficiencies": [
+            "paladin_censure_fracture_1h",
+            "paladin_smite"
+          ],
+          "weapons": [
+            "paladin_hammer_1h_novice",
+            "paladin_hammer_1h_oathkeeper",
+            "paladin_hammer_1h_highward",
+            "paladin_hammer_1h_mercy",
+            "paladin_hammer_1h_censure",
+            "paladin_hammer_1h_verdict",
+            "paladin_hammer_1h_last_vigil",
+            "bluntSmithHammer",
+            "bluntToyHammer"
+          ]
+        },
+        {
+          "proficiencies": [
+            "paladin_censure_fracture",
+            "paladin_smite"
+          ],
+          "weapons": [
+            "paladin_hammer_2h_novice",
+            "paladin_hammer_2h_oathkeeper",
+            "paladin_hammer_2h_highward",
+            "paladin_hammer_2h_mercy",
+            "paladin_hammer_2h_censure",
+            "paladin_hammer_2h_verdict",
+            "paladin_hammer_2h_kingsfall",
+            "bluntWarHammer",
+            "bluntIceHammer",
+            "bluntGreatHammer",
+            "bluntRoyalHammer",
+            "bluntHeavyHammer",
+            "dualHammer"
+          ]
+        }
+      ]
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_1h_novice",
       "displayName": "Novice Hammer",
       "fields": {
-        "damage": 10,
-        "skill": "vitality",
-        "slots": 3,
-        "damagegain": 1,
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 12,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "damage": 10,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 12,
+        "m_AttackDisplay": "Strike",
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "proficiencies": [
-        "paladin_censure_fracture_1h"
-      ]
-    },
-    {
-      "kind": "weapon",
-      "id": "paladin_hammer_2h_novice",
-      "displayName": "Novice Great Hammer",
-      "fields": {
-        "damage": 15,
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
         "skill": "vitality",
         "slots": 4,
-        "damagegain": 1,
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 12,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "townmarket": true
       },
-      "proficiencies": [
-        "paladin_censure_fracture"
-      ]
+      "id": "paladin_hammer_1h_novice",
+      "kind": "weapon",
+      "proficiencies": []
     },
     {
-      "kind": "item",
-      "id": "paladin_shield_novice",
+      "displayName": "Novice Great Hammer",
+      "fields": {
+        "_shopStock": 1,
+        "damage": 14,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 12,
+        "m_AttackDisplay": "Strike",
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
+        "skill": "vitality",
+        "slots": 5,
+        "townmarket": true
+      },
+      "id": "paladin_hammer_2h_novice",
+      "kind": "weapon",
+      "proficiencies": []
+    },
+    {
       "displayName": "Novice Aegis",
       "fields": {
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 12,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 12,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "armor": 0,
-        "resistance": 0,
-        "speed": -0.02
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
+        "townmarket": true
       },
       "guardianBonuses": {
         "guardHealPercent": 2
       },
-      "icon": "assets/paladin-shield-novice-icon.png"
-    },
-    {
-      "kind": "weapon",
-      "id": "paladin_hammer_1h_oathkeeper",
-      "displayName": "Oathkeeper Hammer",
-      "fields": {
-        "damage": 17,
-        "skill": "vitality",
-        "slots": 3,
-        "damagegain": 1,
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 70,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "proficiencies": [
-        "paladin_censure_fracture_1h"
-      ]
-    },
-    {
-      "kind": "weapon",
-      "id": "paladin_hammer_2h_oathkeeper",
-      "displayName": "Oathkeeper Great Hammer",
-      "fields": {
-        "damage": 24,
-        "skill": "vitality",
-        "slots": 4,
-        "damagegain": 1,
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 70,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "proficiencies": [
-        "paladin_censure_fracture"
-      ]
-    },
-    {
+      "icon": "assets/paladin-shield-novice-icon.png",
+      "id": "paladin_shield_novice",
       "kind": "item",
-      "id": "paladin_shield_oathkeeper",
-      "displayName": "Oathkeeper Aegis",
-      "fields": {
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 70,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
       "modifiers": {
         "armor": 0,
         "resistance": 0,
         "speed": -0.02
+      }
+    },
+    {
+      "displayName": "Oathkeeper Hammer",
+      "fields": {
+        "_shopStock": 1,
+        "damage": 16,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 70,
+        "m_AttackDisplay": "Strike",
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "skill": "vitality",
+        "slots": 4,
+        "townmarket": true
+      },
+      "id": "paladin_hammer_1h_oathkeeper",
+      "kind": "weapon",
+      "proficiencies": []
+    },
+    {
+      "displayName": "Oathkeeper Great Hammer",
+      "fields": {
+        "_shopStock": 1,
+        "damage": 21,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 70,
+        "m_AttackDisplay": "Strike",
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "skill": "vitality",
+        "slots": 5,
+        "townmarket": true
+      },
+      "id": "paladin_hammer_2h_oathkeeper",
+      "kind": "weapon",
+      "proficiencies": []
+    },
+    {
+      "displayName": "Oathkeeper Aegis",
+      "fields": {
+        "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 70,
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "townmarket": true
       },
       "guardianBonuses": {
         "guardHealPercent": 3
       },
-      "icon": "assets/paladin-shield-oathkeeper-icon.png"
-    },
-    {
-      "kind": "weapon",
-      "id": "paladin_hammer_1h_highward",
-      "displayName": "Highward Hammer",
-      "fields": {
-        "damage": 24,
-        "skill": "vitality",
-        "slots": 3,
-        "damagegain": 1,
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 200,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "proficiencies": [
-        "paladin_censure_fracture_1h"
-      ]
-    },
-    {
-      "kind": "weapon",
-      "id": "paladin_hammer_2h_highward",
-      "displayName": "Highward Great Hammer",
-      "fields": {
-        "damage": 32,
-        "skill": "vitality",
-        "slots": 4,
-        "damagegain": 1,
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 200,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "proficiencies": [
-        "paladin_censure_fracture"
-      ]
-    },
-    {
+      "icon": "assets/paladin-shield-oathkeeper-icon.png",
+      "id": "paladin_shield_oathkeeper",
       "kind": "item",
-      "id": "paladin_shield_highward",
-      "displayName": "Highward Aegis",
-      "fields": {
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 200,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
       "modifiers": {
         "armor": 0,
         "resistance": 0,
         "speed": -0.02
+      }
+    },
+    {
+      "displayName": "Highward Hammer",
+      "fields": {
+        "_shopStock": 1,
+        "damage": 22,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 200,
+        "m_AttackDisplay": "Strike",
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "skill": "vitality",
+        "slots": 4,
+        "townmarket": true
+      },
+      "id": "paladin_hammer_1h_highward",
+      "kind": "weapon",
+      "proficiencies": []
+    },
+    {
+      "displayName": "Highward Great Hammer",
+      "fields": {
+        "_shopStock": 1,
+        "damage": 29,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 200,
+        "m_AttackDisplay": "Strike",
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "skill": "vitality",
+        "slots": 5,
+        "townmarket": true
+      },
+      "id": "paladin_hammer_2h_highward",
+      "kind": "weapon",
+      "proficiencies": []
+    },
+    {
+      "displayName": "Highward Aegis",
+      "fields": {
+        "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 200,
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "townmarket": true
       },
       "guardianBonuses": {
         "guardHealPercent": 4
       },
-      "icon": "assets/paladin-shield-highward-icon.png"
+      "icon": "assets/paladin-shield-highward-icon.png",
+      "id": "paladin_shield_highward",
+      "kind": "item",
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.02
+      }
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_1h_mercy",
       "displayName": "Mercy Hammer",
       "fields": {
-        "damage": 28,
-        "skill": "vitality",
-        "slots": 3,
+        "_shopStock": 0,
+        "damage": 18,
         "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "m_AttackDisplay": "Strike",
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "skill": "vitality",
+        "slots": 4,
+        "townmarket": false
       },
-      "guardianBonuses": {
-        "focusHealBonusPercent": 2
-      },
-      "proficiencies": [
-        "paladin_censure_fracture_1h"
-      ]
+      "id": "paladin_hammer_1h_mercy",
+      "kind": "weapon",
+      "proficiencies": []
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_2h_mercy",
       "displayName": "Mercy Great Hammer",
       "fields": {
-        "damage": 34,
-        "skill": "vitality",
-        "slots": 4,
+        "_shopStock": 0,
+        "damage": 22,
         "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "m_AttackDisplay": "Strike",
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "skill": "vitality",
+        "slots": 5,
+        "townmarket": false
       },
-      "guardianBonuses": {
-        "focusHealBonusPercent": 4
-      },
-      "proficiencies": [
-        "paladin_censure_fracture"
-      ]
+      "id": "paladin_hammer_2h_mercy",
+      "kind": "weapon",
+      "proficiencies": []
     },
     {
-      "kind": "item",
-      "id": "paladin_shield_mercy",
       "displayName": "Mercy Aegis",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-shield-mercy-icon.png",
+      "id": "paladin_shield_mercy",
+      "kind": "item",
       "modifiers": {
         "armor": 0,
         "resistance": 0,
         "speed": -0.02
-      },
-      "guardianBonuses": {
-        "guardHealPercent": 8
-      },
-      "icon": "assets/paladin-shield-mercy-icon.png"
+      }
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_1h_censure",
       "displayName": "Censure Hammer",
       "fields": {
-        "damage": 28,
-        "skill": "vitality",
-        "slots": 3,
+        "_shopStock": 0,
+        "damage": 24,
         "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "m_AttackDisplay": "Strike",
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "skill": "vitality",
+        "slots": 4,
+        "townmarket": false
       },
-      "proficiencies": [
-        "paladin_censure_fracture_1h"
-      ]
+      "id": "paladin_hammer_1h_censure",
+      "kind": "weapon",
+      "modifiers": {
+        "speed": 0.02
+      },
+      "proficiencies": []
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_2h_censure",
       "displayName": "Censure Great Hammer",
       "fields": {
-        "damage": 34,
-        "skill": "vitality",
-        "slots": 4,
+        "_shopStock": 0,
+        "damage": 30,
         "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "m_AttackDisplay": "Strike",
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "skill": "vitality",
+        "slots": 5,
+        "townmarket": false
       },
-      "proficiencies": [
-        "paladin_censure_fracture"
-      ]
+      "id": "paladin_hammer_2h_censure",
+      "kind": "weapon",
+      "modifiers": {
+        "speed": 0.02
+      },
+      "proficiencies": []
     },
     {
-      "kind": "item",
-      "id": "paladin_shield_censure",
       "displayName": "Censure Aegis",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-shield-censure-icon.png",
+      "id": "paladin_shield_censure",
+      "kind": "item",
       "modifiers": {
         "armor": 0,
         "resistance": 0,
         "speed": -0.02
-      },
-      "guardianBonuses": {
-        "wardDebuffs": true
-      },
-      "icon": "assets/paladin-shield-censure-icon.png"
+      }
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_1h_verdict",
       "displayName": "Verdict Hammer",
       "fields": {
-        "damage": 31,
-        "skill": "vitality",
-        "slots": 3,
+        "_shopStock": 0,
+        "damage": 20,
         "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "m_AttackDisplay": "Strike",
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "proficiencies": [
-        "paladin_censure_fracture_1h"
-      ]
-    },
-    {
-      "kind": "weapon",
-      "id": "paladin_hammer_2h_verdict",
-      "displayName": "Verdict Great Hammer",
-      "fields": {
-        "damage": 37,
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
         "skill": "vitality",
         "slots": 4,
-        "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
-        "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "townmarket": false
       },
-      "proficiencies": [
-        "paladin_censure_fracture"
-      ]
+      "id": "paladin_hammer_1h_verdict",
+      "kind": "weapon",
+      "proficiencies": []
     },
     {
-      "kind": "item",
-      "id": "paladin_shield_verdict",
+      "displayName": "Verdict Great Hammer",
+      "fields": {
+        "_shopStock": 0,
+        "damage": 26,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": false,
+        "goldvalue": 360,
+        "m_AttackDisplay": "Strike",
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "skill": "vitality",
+        "slots": 5,
+        "townmarket": false
+      },
+      "id": "paladin_hammer_2h_verdict",
+      "kind": "weapon",
+      "proficiencies": []
+    },
+    {
       "displayName": "Verdict Aegis",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-shield-verdict-icon.png",
+      "id": "paladin_shield_verdict",
+      "kind": "item",
       "modifiers": {
         "armor": 0,
         "resistance": 0,
         "speed": -0.02
-      },
-      "guardianBonuses": {
-        "retaliationDamage": 4
-      },
-      "icon": "assets/paladin-shield-verdict-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_armor_novice",
       "displayName": "Novice Plate",
       "fields": {
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 12,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 12,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
+        "townmarket": true
       },
+      "icon": "assets/paladin-novice-armor-icon.png",
+      "id": "paladin_armor_novice",
+      "kind": "item",
       "modifiers": {
         "armor": 2,
         "resistance": 1
-      },
-      "icon": "assets/paladin-novice-armor-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_boots_novice",
       "displayName": "Novice Sabatons",
       "fields": {
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 12,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 12,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
+        "townmarket": true
       },
+      "icon": "assets/paladin-novice-boots-icon.png",
+      "id": "paladin_boots_novice",
+      "kind": "item",
       "modifiers": {
         "armor": 1,
         "resistance": 0
-      },
-      "icon": "assets/paladin-novice-boots-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_helmet_novice",
       "displayName": "Novice Helm",
       "fields": {
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 12,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 12,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
+        "townmarket": true
       },
+      "icon": "assets/paladin-novice-helmet-icon.png",
+      "id": "paladin_helmet_novice",
+      "kind": "item",
       "modifiers": {
         "armor": 1,
         "resistance": 1
-      },
-      "icon": "assets/paladin-novice-helmet-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_armor_oathkeeper",
       "displayName": "Oathkeeper Plate",
       "fields": {
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 70,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 70,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "townmarket": true
       },
+      "icon": "assets/paladin-oathkeeper-armor-icon.png",
+      "id": "paladin_armor_oathkeeper",
+      "kind": "item",
       "modifiers": {
         "armor": 4,
         "resistance": 2
-      },
-      "icon": "assets/paladin-oathkeeper-armor-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_boots_oathkeeper",
       "displayName": "Oathkeeper Sabatons",
       "fields": {
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 70,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 70,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "townmarket": true
       },
+      "icon": "assets/paladin-oathkeeper-boots-icon.png",
+      "id": "paladin_boots_oathkeeper",
+      "kind": "item",
       "modifiers": {
         "armor": 2,
         "resistance": 1
-      },
-      "icon": "assets/paladin-oathkeeper-boots-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_helmet_oathkeeper",
       "displayName": "Oathkeeper Helm",
       "fields": {
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 70,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 70,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "townmarket": true
       },
+      "icon": "assets/paladin-oathkeeper-helmet-icon.png",
+      "id": "paladin_helmet_oathkeeper",
+      "kind": "item",
       "modifiers": {
         "armor": 2,
         "resistance": 1
-      },
-      "icon": "assets/paladin-oathkeeper-helmet-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_armor_highward",
       "displayName": "Highward Plate",
       "fields": {
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 200,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 200,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "townmarket": true
       },
+      "icon": "assets/paladin-highward-armor-icon.png",
+      "id": "paladin_armor_highward",
+      "kind": "item",
       "modifiers": {
         "armor": 6,
         "resistance": 3
-      },
-      "icon": "assets/paladin-highward-armor-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_boots_highward",
       "displayName": "Highward Sabatons",
       "fields": {
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 200,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 200,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "townmarket": true
       },
+      "icon": "assets/paladin-highward-boots-icon.png",
+      "id": "paladin_boots_highward",
+      "kind": "item",
       "modifiers": {
         "armor": 3,
         "resistance": 2
-      },
-      "icon": "assets/paladin-highward-boots-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_helmet_highward",
       "displayName": "Highward Helm",
       "fields": {
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 200,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 200,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "townmarket": true
       },
+      "icon": "assets/paladin-highward-helmet-icon.png",
+      "id": "paladin_helmet_highward",
+      "kind": "item",
       "modifiers": {
         "armor": 3,
         "resistance": 2
-      },
-      "icon": "assets/paladin-highward-helmet-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_armor_mercy",
       "displayName": "Mercy Plate",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-mercy-armor-icon.png",
+      "id": "paladin_armor_mercy",
+      "kind": "item",
       "modifiers": {
-        "armor": 7,
+        "armor": 4,
         "resistance": 4,
         "vitality": 0.02
-      },
-      "icon": "assets/paladin-mercy-armor-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_boots_mercy",
       "displayName": "Mercy Sabatons",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-mercy-boots-icon.png",
+      "id": "paladin_boots_mercy",
+      "kind": "item",
       "modifiers": {
-        "armor": 3,
-        "resistance": 3,
+        "armor": 2,
+        "resistance": 2,
         "vitality": 0.02
-      },
-      "icon": "assets/paladin-mercy-boots-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_helmet_mercy",
       "displayName": "Mercy Helm",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-mercy-helmet-icon.png",
+      "id": "paladin_helmet_mercy",
+      "kind": "item",
       "modifiers": {
-        "armor": 4,
+        "armor": 2,
         "resistance": 3,
         "vitality": 0.02
-      },
-      "icon": "assets/paladin-mercy-helmet-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_armor_censure",
       "displayName": "Censure Plate",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-censure-armor-icon.png",
+      "id": "paladin_armor_censure",
+      "kind": "item",
       "modifiers": {
-        "armor": 7,
-        "resistance": 4,
+        "armor": 4,
+        "resistance": 2,
         "speed": 0.01
-      },
-      "icon": "assets/paladin-censure-armor-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_boots_censure",
       "displayName": "Censure Sabatons",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-censure-boots-icon.png",
+      "id": "paladin_boots_censure",
+      "kind": "item",
       "modifiers": {
-        "armor": 3,
-        "resistance": 3,
+        "armor": 1,
+        "resistance": 1,
         "speed": 0.01
-      },
-      "icon": "assets/paladin-censure-boots-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_helmet_censure",
       "displayName": "Censure Helm",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-censure-helmet-icon.png",
+      "id": "paladin_helmet_censure",
+      "kind": "item",
       "modifiers": {
-        "armor": 4,
-        "resistance": 3,
+        "armor": 2,
+        "resistance": 1,
         "speed": 0.01
-      },
-      "icon": "assets/paladin-censure-helmet-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_armor_verdict",
       "displayName": "Verdict Plate",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-verdict-armor-icon.png",
+      "id": "paladin_armor_verdict",
+      "kind": "item",
       "modifiers": {
         "armor": 7,
-        "resistance": 6
-      },
-      "icon": "assets/paladin-verdict-armor-icon.png"
+        "resistance": 5,
+        "speed": -0.02
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_boots_verdict",
       "displayName": "Verdict Sabatons",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-verdict-boots-icon.png",
+      "id": "paladin_boots_verdict",
+      "kind": "item",
       "modifiers": {
         "armor": 3,
-        "resistance": 5
-      },
-      "icon": "assets/paladin-verdict-boots-icon.png"
+        "resistance": 3,
+        "speed": -0.01
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_helmet_verdict",
       "displayName": "Verdict Helm",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 360,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-verdict-helmet-icon.png",
+      "id": "paladin_helmet_verdict",
+      "kind": "item",
       "modifiers": {
         "armor": 4,
-        "resistance": 5
-      },
-      "icon": "assets/paladin-verdict-helmet-icon.png"
+        "resistance": 4,
+        "speed": -0.01
+      }
     },
     {
-      "kind": "proficiency",
-      "id": "paladin_censure_fracture",
-      "displayName": "Censure",
       "description": "Strike; randomly lowers armor or resistance.",
+      "displayName": "Censure",
       "fields": {
-        "m_DmgMultiplier": 0.75,
-        "m_FullSlots": false,
-        "m_SlotOverride": 4,
+        "m_ChanceToAffect": 1,
         "m_CustomValue": -6,
-        "m_ChanceToAffect": 1,
-        "m_RepeatCount": 1
-      },
-      "icon": "assets/paladin-censure-2h-action.png"
-    },
-    {
-      "kind": "proficiency",
-      "id": "paladin_censure_fracture_1h",
-      "displayName": "Censure",
-      "description": "Strike; randomly lowers armor or resistance.",
-      "fields": {
         "m_DmgMultiplier": 0.75,
         "m_FullSlots": false,
-        "m_SlotOverride": 3,
-        "m_CustomValue": -4,
-        "m_ChanceToAffect": 1,
-        "m_RepeatCount": 1
+        "m_RepeatCount": 1,
+        "m_SlotOverride": 4
       },
-      "icon": "assets/paladin-censure-1h-action.png"
+      "id": "paladin_censure_fracture",
+      "kind": "proficiency"
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_1h_last_vigil",
+      "description": "Strike; randomly lowers armor or resistance.",
+      "displayName": "Censure",
+      "fields": {
+        "m_ChanceToAffect": 1,
+        "m_CustomValue": -4,
+        "m_DmgMultiplier": 0.75,
+        "m_FullSlots": false,
+        "m_RepeatCount": 1,
+        "m_SlotOverride": 3
+      },
+      "id": "paladin_censure_fracture_1h",
+      "kind": "proficiency"
+    },
+    {
       "displayName": "The Last Vigil",
       "fields": {
-        "damage": 30,
-        "skill": "vitality",
-        "slots": 3,
-        "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
-        "goldvalue": 450,
-        "rarity": "artifact",
-        "dropable": true,
-        "townmarket": false,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "damage": 19,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 450,
+        "m_AttackDisplay": "Strike",
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "artifact",
+        "skill": "vitality",
+        "slots": 4,
+        "townmarket": false
       },
       "guardianBonuses": {
         "guardFocusRestore": 1
       },
-      "proficiencies": [
-        "paladin_censure_fracture_1h"
-      ]
+      "id": "paladin_hammer_1h_last_vigil",
+      "kind": "weapon",
+      "proficiencies": []
     },
     {
-      "kind": "weapon",
-      "id": "paladin_hammer_2h_kingsfall",
       "displayName": "Kingsfall",
       "fields": {
-        "damage": 42,
+        "_shopStock": 1,
+        "damage": 28,
+        "damagegain": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 550,
+        "m_AttackDisplay": "Strike",
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "m_NoRegularAttack": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "artifact",
         "skill": "vitality",
         "slots": 5,
-        "damagegain": 1,
-        "minlevel": 4,
-        "maxlevel": 6,
-        "goldvalue": 550,
-        "rarity": "artifact",
-        "dropable": true,
-        "townmarket": false,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "townmarket": false
       },
       "guardianBonuses": {
         "guardReckoning": true
       },
-      "proficiencies": [
-        "paladin_censure_fracture"
-      ]
+      "id": "paladin_hammer_2h_kingsfall",
+      "kind": "weapon",
+      "proficiencies": []
     },
     {
-      "kind": "item",
-      "id": "paladin_shield_last_bastion",
       "displayName": "The Last Bastion",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
-        "goldvalue": 450,
-        "rarity": "artifact",
-        "dropable": true,
-        "townmarket": false,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 450,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "armor": 0,
-        "resistance": 0,
-        "speed": -0.04
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "artifact",
+        "townmarket": false
       },
       "guardianBonuses": {
         "guardCleanse": true
       },
-      "icon": "assets/paladin-shield-last-bastion-icon.png"
+      "icon": "assets/paladin-shield-last-bastion-icon.png",
+      "id": "paladin_shield_last_bastion",
+      "kind": "item",
+      "modifiers": {
+        "armor": 0,
+        "resistance": 0,
+        "speed": -0.04
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_trinket_novice",
       "displayName": "Tin Oath Token",
       "fields": {
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 8,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 8,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "vitality": 0.01
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
+        "townmarket": true
       },
       "icon": "assets/paladin-trinket-novice-icon.png",
-      "proficiencies": [
-        "paladin_smite"
-      ]
+      "id": "paladin_trinket_novice",
+      "kind": "item",
+      "modifiers": {
+        "vitality": 0.01
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_trinket_oathkeeper",
       "displayName": "Keeper's Seal",
       "fields": {
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 35,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 35,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "vitality": 0.02
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "townmarket": true
       },
       "icon": "assets/paladin-trinket-oathkeeper-icon.png",
-      "proficiencies": [
-        "paladin_smite"
-      ]
+      "id": "paladin_trinket_oathkeeper",
+      "kind": "item",
+      "modifiers": {
+        "vitality": 0.02
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_trinket_highward",
       "displayName": "Watchtower Reliquary",
       "fields": {
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 110,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 110,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "vitality": 0.02,
-        "resistance": 1
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "townmarket": true
       },
       "icon": "assets/paladin-trinket-highward-icon.png",
-      "proficiencies": [
-        "paladin_smite"
-      ]
+      "id": "paladin_trinket_highward",
+      "kind": "item",
+      "modifiers": {
+        "resistance": 1,
+        "vitality": 0.02
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_trinket_mercy",
       "displayName": "Lantern of Mercy",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 250,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "armor": 1,
-        "resistance": 3
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
       "icon": "assets/paladin-trinket-mercy-icon.png",
-      "proficiencies": [
-        "paladin_smite"
-      ]
-    },
-    {
+      "id": "paladin_trinket_mercy",
       "kind": "item",
-      "id": "paladin_trinket_censure",
-      "displayName": "Seal of Censure",
-      "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
-        "goldvalue": 250,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "speed": 0.02,
-        "armor": 1
-      },
-      "icon": "assets/paladin-trinket-censure-icon.png",
-      "proficiencies": [
-        "paladin_smite"
-      ]
-    },
-    {
-      "kind": "item",
-      "id": "paladin_trinket_verdict",
-      "displayName": "Scales of Verdict",
-      "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
-        "goldvalue": 250,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
-      "modifiers": {
-        "armor": 2,
-        "resistance": 2
-      },
-      "icon": "assets/paladin-trinket-verdict-icon.png",
-      "proficiencies": [
-        "paladin_smite"
-      ]
-    },
-    {
-      "kind": "item",
-      "id": "paladin_necklace_novice",
-      "displayName": "Pilgrim's Pendant",
-      "fields": {
-        "minlevel": 0,
-        "maxlevel": 0,
-        "goldvalue": 8,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
-        "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
-      },
       "modifiers": {
         "resistance": 1
-      },
-      "icon": "assets/paladin-necklace-novice-icon.png"
+      }
     },
     {
+      "displayName": "Seal of Censure",
+      "fields": {
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
+        "goldvalue": 250,
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
+      },
+      "icon": "assets/paladin-trinket-censure-icon.png",
+      "id": "paladin_trinket_censure",
       "kind": "item",
-      "id": "paladin_necklace_oathkeeper",
+      "modifiers": {
+        "speed": 0.01
+      }
+    },
+    {
+      "displayName": "Scales of Verdict",
+      "fields": {
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
+        "goldvalue": 250,
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
+      },
+      "icon": "assets/paladin-trinket-verdict-icon.png",
+      "id": "paladin_trinket_verdict",
+      "kind": "item",
+      "modifiers": {
+        "armor": 2,
+        "resistance": 3
+      }
+    },
+    {
+      "displayName": "Pilgrim's Pendant",
+      "fields": {
+        "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 8,
+        "m_CollectLoreItemUnlock": "",
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 0,
+        "minlevel": 0,
+        "rarity": "common",
+        "townmarket": true
+      },
+      "icon": "assets/paladin-necklace-novice-icon.png",
+      "id": "paladin_necklace_novice",
+      "kind": "item",
+      "modifiers": {
+        "resistance": 1
+      }
+    },
+    {
       "displayName": "Oath Chain",
       "fields": {
-        "minlevel": 1,
-        "maxlevel": 2,
-        "goldvalue": 35,
-        "rarity": "common",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 35,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 2,
+        "minlevel": 1,
+        "rarity": "common",
+        "townmarket": true
       },
+      "icon": "assets/paladin-necklace-oathkeeper-icon.png",
+      "id": "paladin_necklace_oathkeeper",
+      "kind": "item",
       "modifiers": {
         "resistance": 1,
         "vitality": 0.01
-      },
-      "icon": "assets/paladin-necklace-oathkeeper-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_necklace_highward",
       "displayName": "Highward Gorget",
       "fields": {
-        "minlevel": 3,
-        "maxlevel": 3,
-        "goldvalue": 110,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
         "_shopStock": 1,
+        "dlc": "None",
+        "dropable": true,
+        "goldvalue": 110,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": true,
+        "m_NightMarket": true,
+        "maxlevel": 3,
+        "minlevel": 3,
+        "rarity": "rare",
+        "townmarket": true
       },
+      "icon": "assets/paladin-necklace-highward-icon.png",
+      "id": "paladin_necklace_highward",
+      "kind": "item",
       "modifiers": {
         "resistance": 2
-      },
-      "icon": "assets/paladin-necklace-highward-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_necklace_mercy",
       "displayName": "Mercy Locket",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 250,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-necklace-mercy-icon.png",
+      "id": "paladin_necklace_mercy",
+      "kind": "item",
       "modifiers": {
         "resistance": 2,
         "speed": 0.01
-      },
-      "icon": "assets/paladin-necklace-mercy-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_necklace_censure",
       "displayName": "Censure Medallion",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 250,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-necklace-censure-icon.png",
+      "id": "paladin_necklace_censure",
+      "kind": "item",
       "modifiers": {
         "speed": 0.02
-      },
-      "icon": "assets/paladin-necklace-censure-icon.png"
+      }
     },
     {
-      "kind": "item",
-      "id": "paladin_necklace_verdict",
       "displayName": "Judge's Collar",
       "fields": {
-        "minlevel": 4,
-        "maxlevel": 6,
+        "_shopStock": 0,
+        "dlc": "None",
+        "dropable": false,
         "goldvalue": 250,
-        "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
         "m_CollectLoreItemUnlock": "",
-        "dlc": "None"
+        "m_DungeonMerchant": false,
+        "m_NightMarket": false,
+        "maxlevel": 6,
+        "minlevel": 4,
+        "rarity": "rare",
+        "townmarket": false
       },
+      "icon": "assets/paladin-necklace-verdict-icon.png",
+      "id": "paladin_necklace_verdict",
+      "kind": "item",
       "modifiers": {
         "resistance": 3
-      },
-      "icon": "assets/paladin-necklace-verdict-icon.png"
-    },
-    {
-      "kind": "proficiency",
-      "id": "paladin_censure_resistance_1h",
-      "displayName": "Censure",
-      "description": "Resistance lowered by Censure.",
-      "fields": {
-        "m_DmgMultiplier": 0.75,
-        "m_FullSlots": false,
-        "m_SlotOverride": 3,
-        "m_CustomValue": -4,
-        "m_ChanceToAffect": 1,
-        "m_RepeatCount": 1,
-        "m_DmgTypeOverride": "none",
-        "m_WpnTypeOverride": "none",
-        "m_Target": "None",
-        "m_TargetFriendly": false,
-        "m_Harmless": false,
-        "m_IgnoresArmor": false,
-        "m_PerSlotSkillRoll": 0,
-        "m_Quickness": 0.30000001192092896,
-        "m_DamagePerAttack": 0,
-        "m_Suicide": false,
-        "m_GunShot": false,
-        "m_BoatDamage": 0,
-        "m_ChaosOption": false
-      },
-      "icon": "assets/paladin-censure-1h-action.png"
-    },
-    {
-      "kind": "proficiency",
-      "id": "paladin_censure_resistance",
-      "displayName": "Censure",
-      "description": "Resistance lowered by Censure.",
-      "fields": {
-        "m_DmgMultiplier": 0.75,
-        "m_FullSlots": false,
-        "m_SlotOverride": 4,
-        "m_CustomValue": -6,
-        "m_ChanceToAffect": 1,
-        "m_RepeatCount": 1,
-        "m_DmgTypeOverride": "none",
-        "m_WpnTypeOverride": "none",
-        "m_Target": "None",
-        "m_TargetFriendly": false,
-        "m_Harmless": false,
-        "m_IgnoresArmor": false,
-        "m_PerSlotSkillRoll": 0,
-        "m_Quickness": 0.30000001192092896,
-        "m_DamagePerAttack": 0,
-        "m_Suicide": false,
-        "m_GunShot": false,
-        "m_BoatDamage": 0,
-        "m_ChaosOption": false
-      },
-      "icon": "assets/paladin-censure-2h-action.png"
-    },
-    {
-      "kind": "proficiency",
-      "id": "paladin_smite",
-      "displayName": "Smite",
-      "description": "6x damage against Censure-reduced resistance.",
-      "icon": "assets/paladin-smite-action.png",
-      "fields": {
-        "m_DmgMultiplier": 0.25,
-        "m_DmgTypeOverride": "magic",
-        "m_Target": "None",
-        "m_TargetFriendly": false,
-        "m_Harmless": false,
-        "m_SlotOverride": -1,
-        "m_FullSlots": false
       }
+    },
+    {
+      "description": "Resistance lowered by Censure.",
+      "displayName": "Censure",
+      "fields": {
+        "m_BoatDamage": 0,
+        "m_ChanceToAffect": 1,
+        "m_ChaosOption": false,
+        "m_CustomValue": -4,
+        "m_DamagePerAttack": 0,
+        "m_DmgMultiplier": 0.75,
+        "m_DmgTypeOverride": "none",
+        "m_FullSlots": false,
+        "m_GunShot": false,
+        "m_Harmless": false,
+        "m_IgnoresArmor": false,
+        "m_PerSlotSkillRoll": 0,
+        "m_Quickness": 0.30000001192092896,
+        "m_RepeatCount": 1,
+        "m_SlotOverride": 3,
+        "m_Suicide": false,
+        "m_Target": "None",
+        "m_TargetFriendly": false,
+        "m_WpnTypeOverride": "none"
+      },
+      "id": "paladin_censure_resistance_1h",
+      "kind": "proficiency"
+    },
+    {
+      "description": "Resistance lowered by Censure.",
+      "displayName": "Censure",
+      "fields": {
+        "m_BoatDamage": 0,
+        "m_ChanceToAffect": 1,
+        "m_ChaosOption": false,
+        "m_CustomValue": -6,
+        "m_DamagePerAttack": 0,
+        "m_DmgMultiplier": 0.75,
+        "m_DmgTypeOverride": "none",
+        "m_FullSlots": false,
+        "m_GunShot": false,
+        "m_Harmless": false,
+        "m_IgnoresArmor": false,
+        "m_PerSlotSkillRoll": 0,
+        "m_Quickness": 0.30000001192092896,
+        "m_RepeatCount": 1,
+        "m_SlotOverride": 4,
+        "m_Suicide": false,
+        "m_Target": "None",
+        "m_TargetFriendly": false,
+        "m_WpnTypeOverride": "none"
+      },
+      "id": "paladin_censure_resistance",
+      "kind": "proficiency"
+    },
+    {
+      "description": "Perfect: 25% stun; +50% vs Censure Resist.",
+      "displayName": "Smite",
+      "fields": {
+        "m_DmgMultiplier": 0.5,
+        "m_DmgTypeOverride": "magic",
+        "m_FullSlots": true,
+        "m_Harmless": false,
+        "m_IgnoresArmor": false,
+        "m_SlotOverride": -1,
+        "m_Target": "None",
+        "m_TargetFriendly": false,
+        "m_ChanceToAffect": 0.25
+      },
+      "id": "paladin_smite",
+      "kind": "proficiency"
     }
   ]
 }

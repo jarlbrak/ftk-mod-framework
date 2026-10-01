@@ -49,12 +49,12 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
    await item.locator('.forge-art img').evaluate(i=>i.decode());
    assert.equal(await item.evaluate(d=>d.scrollWidth<=d.clientWidth),true,'Card overflow '+name);
    assert.equal(await item.locator('details, summary').count(),0);
-   if(name==='Tin Oath Token'){assert.match(await item.innerText(),/Smite/);assert.match(await item.innerText(),/150%/);}
+   if(name==='Tin Oath Token'){assert.doesNotMatch(await item.innerText(),/Smite|Censure|set bonus/i);assert.match(await item.innerText(),/Vitality/);}
    assert(await item.locator('.forge-properties').innerText());
   }
   await page.getByRole('searchbox',{name:'Search equipment'}).fill('no-such-item');assert.equal(await page.locator('.forge-card:visible').count(),0);
-  await page.getByRole('searchbox',{name:'Search equipment'}).fill(mod==='paladin'?'smite':'borrowed fortune');
-  assert.equal(await page.locator('.forge-card:visible').count(),mod==='paladin'?20:1);
+  await page.getByRole('searchbox',{name:'Search equipment'}).fill(mod==='paladin'?'eligible hammer':'borrowed fortune');
+  assert.equal(await page.locator('.forge-card:visible').count(),mod==='paladin'?14:1);
   for(const card of await page.locator('.forge-card:visible').all())assert(await card.evaluate(c=>c.getBoundingClientRect().width<=310.5),'Tooltip width exceeds 310px');
   await page.getByRole('searchbox',{name:'Search equipment'}).fill('');
   await page.getByLabel('Tier',{exact:true}).selectOption('artifacts');assert.equal(await page.locator('.forge-card:visible').count(),3);
