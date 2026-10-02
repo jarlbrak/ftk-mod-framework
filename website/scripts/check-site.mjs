@@ -50,6 +50,8 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
    assert.equal(await item.evaluate(d=>d.scrollWidth<=d.clientWidth),true,'Card overflow '+name);
    assert.equal(await item.locator('details, summary').count(),0);
    if(name==='Tin Oath Token'){assert.doesNotMatch(await item.innerText(),/Smite|Censure|set bonus/i);assert.match(await item.innerText(),/Vitality/);}
+   if(name==='Mercy Helm'){assert.match(await item.innerText(),/Guard heals 6%/);assert.match(await item.innerText(),/one focused class Smite heal/);assert.match(await item.innerText(),/15% instead of 12%/);}
+   if(name==='Censure Helm'){assert.match(await item.innerText(),/100% physical damage/);assert.match(await item.innerText(),/Guard-reduced hit readies \+50%/);assert.doesNotMatch(await item.innerText(),/125% physical damage/);}
    assert(await item.locator('.forge-properties').innerText());
   }
   await page.getByRole('searchbox',{name:'Search equipment'}).fill('no-such-item');assert.equal(await page.locator('.forge-card:visible').count(),0);

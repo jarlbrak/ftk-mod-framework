@@ -1,6 +1,6 @@
 # Paladin combat
 
-Paladin 2.0.1 candidate rules for framework 1.8.0. Native effect acceptance is pending. The [package content](../../marketplace/packages/paladin/content.json) defines the exact values. Native observations and their limits are recorded in [Validation](VALIDATION.md).
+Published Paladin 2.0.1 rules require framework 1.8.0. The [package content](../../marketplace/packages/paladin/content.json) defines the exact values. See the [2.0.1 release validation](RELEASE-2.0.1-VALIDATION.md) for bounded native observations and remaining gates.
 
 ## Baseline Guardian
 
@@ -32,6 +32,6 @@ The Last Vigil can restore one Focus to a guarded ally after a qualifying mitiga
 
 Game-free tests cover the isolated rule evaluator and package structure. They do not establish animation, co-op synchronization, save/reload, native damage ordering or balance. Native trials must compare neutral, Mercy, Verdict, Censure, mixed and artifact loadouts across no-injury fights, magic pressure, multiple enemies, durable targets and solo survivors. Record damage, effective healing, prevented damage, own HP loss, Focus spent, turns and burst separately. Preserve the native white outlined action glyphs, including basic attacks.
 
-Website impact: the authored Paladin guide and card explanations are prepared for 2.0.1, but published package projections and public pages stay on 2.0.0 until release. Native effects remain unverified for this candidate.
+Website impact: the published Paladin guide and projected item cards use the verified 2.0.1 archive. The [release validation](RELEASE-2.0.1-VALIDATION.md) separates native observations from remaining combat and platform gates.
 
 Smite deals holy-themed magic damage at 0.50 weapon damage before ordinary modifiers. A perfect roll can stun with an authored native 25% effect chance, subject to damage, immunity and existing-control rules; partial hits can deal magic damage but cannot stun. Mercy's three matching armor pieces raise the pre-mitigation coefficient to 0.80 before the Censure Resistance payoff. Bounded corrected-source R26 combat observed a perfect hit fully blocked by Resistance, perfect damaging hits with and without a new stun, and one Mercy hit after the Paladin's Censure Resistance mark. R25 separately observed damage without stun against an immune Wisp. Positive partial damage without stun was observed on prior source bytes in R21 and remains relevant only by the specific source-equivalence argument in [Validation](VALIDATION.md#unreleased-smite-damage-and-stun). None of these controlled encounters measures proc frequency, campaign pacing or representative balance.

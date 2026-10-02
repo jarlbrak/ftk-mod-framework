@@ -1,15 +1,11 @@
 # Paladin artifacts
 
-Status: released artifact identities with unreleased v4 role interaction. The Last Vigil,
-Kingsfall and The Last Bastion have original runtime
-models, icons and equipment rows. Gameplay validation is partial; see
-[Legendary validation](LEGENDARY-VALIDATION.md) for artifact identities, observed
-results and remaining gates. Earlier generated concept previews are not game
+Status: Paladin 2.0.1 publishes the v4 armor role interaction alongside the three released Artifacts. The Last Vigil, Kingsfall and The Last Bastion have original runtime models, icons and equipment rows. Gameplay validation is partial; see [2.0.1 release validation](RELEASE-2.0.1-VALIDATION.md) and [Legendary validation](LEGENDARY-VALIDATION.md) for observed results and remaining gates. Earlier generated concept previews are not game
 screenshots. Flavor quotations below remain proposals.
 
 ## Direction
 
-The candidate retains one exceptional hammer for each Paladin loadout. Both use Vitality and
+The release retains the two exceptional hammers. Both use Vitality and
 reward spending an action to protect another party member. Neither increases
 Guard's 50% reduction, adds another rescue charge, or replaces the existing
 Mercy, Censure and Verdict equipment families.
@@ -41,7 +37,7 @@ need comparison against native actions as well as nominal damage.
 
 ## v4 armor role interaction
 
-A matching Head, Body and Foot family keeps its core role when an Artifact replaces ordinary hands. Artifacts have no fixed family affinity in the candidate. Mercy's Guard-armed Smite bond requires the matching role core, not a matching artifact armament. Censure's Guard-armed physical charge likewise belongs to the core; if Kingsfall is also charged, the strongest +50% bonus applies once rather than multiplying. Changing weapon clears a pending role charge. Last Vigil, Kingsfall and Last Bastion cannot supply a matching 1H-plus-shield or 2H armament completion benefit. They retain their own conditional Guardian effects and item stats. Balance must compare each combined artifact loadout against the corresponding completed ordinary family, including the role's costs.
+A matching Head, Body and Foot family keeps its core role when an Artifact replaces ordinary hands. Artifacts have no fixed family affinity in Paladin 2.0.1. Mercy's Guard-armed Smite bond requires the matching role core, not a matching artifact armament. Censure's Guard-armed physical charge likewise belongs to the core; if Kingsfall is also charged, the strongest +50% bonus applies once rather than multiplying. Changing weapon clears a pending role charge. Last Vigil, Kingsfall and Last Bastion cannot supply a matching 1H-plus-shield or 2H armament completion benefit. They retain their own conditional Guardian effects and item stats. Balance must compare each combined artifact loadout against the corresponding completed ordinary family, including the role's costs.
 
 ## The Last Vigil
 
@@ -62,8 +58,8 @@ damaging direct enemy attack, restore 1 Focus to the guarded ally.
 - The wielder must retain this weapon until the trigger; swapping it away ends
   this weapon's pending perk.
 
-Unpublished v4 values: 19 physical damage, 4 Vitality checks, one hand.
-The candidate Censure Hammer is 24/4. Last Vigil trades raw one-handed damage
+Paladin 2.0.1 values: 19 physical damage, 4 Vitality checks, one hand.
+The Censure Hammer is 24/4. Last Vigil trades raw one-handed damage
 for party Focus when the player correctly anticipates an attack. It supplies no
 Mercy, Verdict or Censure armament completion benefit.
 
@@ -91,8 +87,8 @@ single-target hammer attack.
 - Charge generation requires actual Guard mitigation, not damage over time,
   a dodge, or simply designating an ally.
 
-Unpublished v4 values: 28 physical damage, 5 Vitality checks, two hands.
-Candidate Censure Great Hammer is 30/5. Kingsfall trades uncharged damage
+Paladin 2.0.1 values: 28 physical damage, 5 Vitality checks, two hands.
+The Censure Great Hammer is 30/5. Kingsfall trades uncharged damage
 relative to that physical branch for Reckoning and gives up a shield. Its burst
 requires first spending an action on Guard and having that protection matter.
 Earlier native testing demonstrated one charged attack with partial slot success
@@ -100,7 +96,7 @@ at the previous damage values. Revised previews and impacts, criticals, mitigati
 and the remaining lifecycle cases still need coverage.
 
 The player alternates protecting and striking instead of receiving a free
-retaliation attack. A Censure core can ready its own +50% physical vengeance after a real Guard-reduced hit, but it does not multiply with Kingsfall's Reckoning; one eligible attempt consumes the strongest charge, including on a miss. The candidate uses a "Reckoning ready" HUD message and a
+retaliation attack. A Censure core can ready its own +50% physical vengeance after a real Guard-reduced hit, but it does not multiply with Kingsfall's Reckoning; one eligible attempt consumes the strongest charge, including on a miss. The published item uses a "Reckoning ready" HUD message and a
 charged action title and damage preview. The earlier crown-light and sound
 concept is not implemented.
 
@@ -129,7 +125,7 @@ direct-attack damage reduction.
   The implementation uses native proficiency removal and stat recalculation;
   live Stun, Daze and Curse timing coverage remains outstanding.
 
-Candidate modifiers: no personal Armor or Resistance bonus and a 4-point Speed
+Paladin 2.0.1 modifiers: no personal Armor or Resistance bonus and a 4-point Speed
 penalty. This keeps the equipment valuable specifically for Guardians who spend
 actions protecting allies. Other shield users gain no compensating passive stats.
 
