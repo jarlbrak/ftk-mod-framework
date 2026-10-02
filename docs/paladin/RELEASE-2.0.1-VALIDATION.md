@@ -49,8 +49,10 @@ macOS universal helper SHA-256 is
 All 13 framework assets and all three Paladin assets were independently
 downloaded from unauthenticated public release URLs and matched the reviewed
 draft bytes. Both tags identify the exact source above, and the latest stable
-release endpoint remains framework 1.8.0. The reviewed catalog/site updates are ready for merge. Public Pages deployment
-and the production Mods installation check follow that merge.
+release endpoint remains framework 1.8.0. The catalog/site changes merged in PR #292 at
+`87c8f90883111a76285ecb0d94d5925bc9e1ad73`. The unauthenticated production
+catalog serves the exact 2.0.1 descriptor and archive hash. Public Pages
+deployment passed; the production Mods installation check is recorded below.
 A build, a screenshot, and a successful upload are separate claims. No fresh
 Windows, Linux/Proton, co-op, full campaign or statistical balance claim is made.
 
@@ -147,6 +149,48 @@ Combat and presentation continuations were retained separately, then the origina
 protected overworld save was restored byte-for-byte. The independent Thief
 workspace, process, profile and content were not changed.
 
+## Public install baseline
+
+The shipped macOS 1.8.0 bundle was downloaded publicly and verified against its
+reviewed hash. Its shipped installer upgraded a separate disposable game copy,
+preserving its managed Paladin 2.0.0 generation unchanged. The installed DLL and
+helper matched the public bundle. A fresh muted background title launch then
+registered all 57 Paladin 2.0.0 entries with zero errors and warnings. This is a
+bounded native backward-compatibility observation before the package update,
+not a new campaign test.
+
+Native Mods Browse fetched the production catalog online, offered 2.0.0 to 2.0.1,
+and downloaded the public 78,876,996-byte archive with the pinned SHA-256 above.
+Save for next launch retained the active 2.0.0 generation until native Quit and
+apply. On restart, 2.0.1 became active, pending state cleared, and all 57 entries
+registered with zero errors and warnings. A subsequent native disable/restart
+registered zero entries; enable/restart restored all 57, again without errors or
+warnings. Removal/restart left the package lock empty and registered zero
+entries. Reinstall through the production Browse listing, followed by native
+Save, Quit and restart, activated the exact enabled 2.0.1 package with all 57
+entries and no errors or warnings. Each observation follows activation, not just
+a queued request. No adventure was loaded in this public lifecycle test; combat
+results reuse the exact DLL/package trials above.
+
+The owned public game process was stopped. Test-created profile data was retained
+separately. The original IronOak profile inventory was restored byte-for-byte;
+the changed preference domain was restored through a domain-specific import,
+with both the original on-disk SHA-256 and all 82 exported preference values
+verified equal. The other native preference file was unchanged. No global
+preferences-daemon reset was used, and the separate Thief process, profile and
+preferences were left untouched. There is no pending smoke-profile snapshot or
+owned game process.
+
+## Public website verification
+
+Pages workflow `36966629018` built and deployed merge commit `87c8f908`. The
+public home, Paladin, installation, compatibility and release pages were checked
+at 1440 px and 390 px widths. They identify Paladin 2.0.1 and framework 1.8.0;
+Mercy and Censure card text and decoded artwork are readable, with no horizontal
+overflow or browser JavaScript errors. The Paladin ZIP and four platform launcher
+URLs return HTTP 200 with the expected sizes. The repository's latest release
+continues to identify framework 1.8.0.
+
 ## Pipeline lessons
 
 A new JSON capability must be added to both runtime loading and marketplace
@@ -164,6 +208,10 @@ explicit package minimum compatibility and positive/negative admission tests.
 - Test charged action titles with every relevant action name. Calling the charge
   Censure would produce confusing "Censure + Censure" feedback; Vengeance names
   the earned effect separately.
+- Concurrent native trials need explicit executable, save, preferences and bridge
+  isolation. A process-name-only guard blocked a separate Thief test; the private
+  launcher was narrowed only after those boundaries were verified. Restore only
+  the test's preference domain, without resetting the shared preferences daemon.
 - Freeze source and artifact identity before trials. Reuse after a text-only
   correction requires an exact source comparison, and the changed presentation
   still needs its own native check. These are recommendations for the subsequent
@@ -171,5 +219,4 @@ explicit package minimum compatibility and positive/negative admission tests.
 
 Website impact: the Paladin guide, item explanations, catalog projection and 51
 item-media provenance records now use the verified public 2.0.1 archive. Framework
-download references use 1.8.0. Thief content and media are unchanged. The final build and browser checks passed; public deployment verification
-follows the catalog merge.
+download references use 1.8.0. Thief content and media are unchanged. The final build, browser checks and public deployment verification passed.
