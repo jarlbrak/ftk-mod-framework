@@ -21,6 +21,8 @@ appearance and acquisition coverage; it does not prove the new combat effects.
 - Old profiles default to the existing behavior. New optional profile fields are
   admitted by both framework and helper; Paladin requires framework 1.8.0.
 
+Outside the full Mercy core, the original Guardian focused-hit healing rule remains in effect, scaled by the current profile. Leaving Mercy clears its one-use bond; it does not remove the baseline class rule.
+
 ## Evidence status
 
 Release preparation is in progress. Game-free validation passed the Release build,

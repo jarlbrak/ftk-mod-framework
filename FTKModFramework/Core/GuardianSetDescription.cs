@@ -76,7 +76,7 @@ namespace FTKModFramework.Core
                 lines.Add("Guard bond: next focused Smite heals ally " +
                     Percent((8 + profile.Bonuses.FocusHealBonusPercent) * profile.HealingPercent) + "% max HP once");
             if (profile.GuardPhysicalBonusPercent > baseline.GuardPhysicalBonusPercent)
-                lines.Add("Guarded hit readies +" + profile.GuardPhysicalBonusPercent + "% next single-target physical hit");
+                lines.Add("Guard-reduced hit readies +" + profile.GuardPhysicalBonusPercent + "% next single-target physical hit");
             if (profile.Bonuses.WardDebuffs && !baseline.Bonuses.WardDebuffs)
                 lines.Add("Guard wards direct-hit Poison, Stun, Daze, Curse");
             if (profile.Bonuses.GuardFocusRestore > baseline.Bonuses.GuardFocusRestore)

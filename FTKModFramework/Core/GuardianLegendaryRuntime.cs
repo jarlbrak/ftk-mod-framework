@@ -173,7 +173,7 @@ namespace FTKModFramework.Core
                 PhysicalChargeAttack(guardian, EncounterSession.Instance.GetDummyByFID(damage.m_VictimID),
                     damage.m_Prof, damage.m_DamageType, damage.m_SpecialAttack));
             if ((reckoning || censure > 0) && guardian.m_CharacterOverworld.IsOwner)
-                guardian.SpawnHudTextRPC(reckoning ? "Reckoning" : "Censure", string.Empty);
+                guardian.SpawnHudTextRPC(reckoning ? "Reckoning" : "Vengeance", string.Empty);
         }
 
         internal static void ShowReckoningPreview(uiBattleStanceButtons owner, uiBattleButton button)
@@ -215,7 +215,7 @@ namespace FTKModFramework.Core
             owner.m_InfoPanel.m_DamageValue.text = damage.ToString(System.Globalization.CultureInfo.InvariantCulture);
             // Native description bounds already share the compact damage/accuracy panel. Keep
             // the charged indicator in the action title instead of adding another body line.
-            owner.m_BattleActionDisplay.text += reckoning ? " + RECKONING" : " + CENSURE";
+            owner.m_BattleActionDisplay.text += reckoning ? " + RECKONING" : " + VENGEANCE";
         }
 
         internal static void EndLegendaryCombat(CharacterDummy actor)

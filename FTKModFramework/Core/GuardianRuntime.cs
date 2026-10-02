@@ -216,7 +216,7 @@ namespace FTKModFramework.Core
                 (State.IsActive(id) && CanAct(guardian) ? "active (" + reduction + "%)." : "inactive.") +
                 " Divine Intervention: " + (State.RescueAvailable(id) ? "ready." : "spent this combat.") +
                 (Theme.HasBond(id) ? " Mercy bond ready for focused Smite." : string.Empty) +
-                (Theme.ChargePercent(id) > 0 ? " Censure ready: next single-target physical hit +" + Theme.ChargePercent(id) + "%." : string.Empty) +
+                (Theme.ChargePercent(id) > 0 ? " Vengeance ready: next single-target physical hit +" + Theme.ChargePercent(id) + "%." : string.Empty) +
                 (Legendary.IsCharged(id) ? " Reckoning ready: +50% next single-target hammer attack." : string.Empty);
         }
 

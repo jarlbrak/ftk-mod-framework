@@ -47,7 +47,7 @@ namespace FTKModFramework.Core
                 {
                     if (__instance.m_BattleActionDisplay.text.EndsWith(" + RECKONING", StringComparison.Ordinal))
                         reckoning = 1.5f;
-                    else if (__instance.m_BattleActionDisplay.text.EndsWith(" + CENSURE", StringComparison.Ordinal))
+                    else if (__instance.m_BattleActionDisplay.text.EndsWith(" + VENGEANCE", StringComparison.Ordinal))
                         reckoning = 1f + GuardianRuntime.Theme.ChargePercent(GuardianRuntime.Identity(guardian)) / 100f;
                 }
                 int max = __instance.CombatCow.m_CharacterStats.GetWeaponMaxDamage(enemy.m_EnemyCombat.m_RaceTypes);
