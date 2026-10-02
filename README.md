@@ -6,6 +6,7 @@
   <a href="https://github.com/jarlbrak/ftk-mod-framework/releases/latest"><img src="https://img.shields.io/github/v/release/jarlbrak/ftk-mod-framework" alt="Latest release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT license"></a>
   <a href="https://github.com/jarlbrak/ftk-mod-framework/actions/workflows/ci.yml"><img src="https://github.com/jarlbrak/ftk-mod-framework/actions/workflows/ci.yml/badge.svg" alt="Build status"></a>
+  <a href="https://discord.gg/4r5SjRXc6X"><img src="https://img.shields.io/badge/Discord-Join%20the%20community-5865F2?logo=discord&amp;logoColor=white" alt="Join the FTK Discord community"></a>
 </p>
 
 **FTK Mod Framework 1.7.1** brings community mods to the original [For The King](https://store.steampowered.com/app/527230/) (2018). Its launcher installs the framework into your Steam copy, and the game's **Mods** menu lets you discover and manage content. The first marketplace mod is [Paladin](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/paladin-v2.0.0), a protector class with Cleansing March, original equipment and 3D art.
@@ -29,4 +30,4 @@ You can author content with JSON files and a manifest, or use the C# `Content.*`
 
 The framework targets the original *For The King*, not *For The King II*. macOS gameplay has been tested with the verified Steam game build. Windows and Linux/Proton launcher packages are available, but gameplay on those platforms remains unverified. Online co-op has not been verified for Paladin; players in a modded session should use the same framework version and mod set. The macOS launcher is not notarized, so Gatekeeper may require **right-click > Open**.
 
-Questions, feedback, and mod ideas are welcome in [Discussions](https://github.com/jarlbrak/ftk-mod-framework/discussions). The framework is MIT licensed; the game and its assets are not included.
+Join the [FTK community Discord](https://discord.gg/4r5SjRXc6X) to chat about mods, playtesting, and ideas. Questions and feedback are also welcome in [Discussions](https://github.com/jarlbrak/ftk-mod-framework/discussions). The framework is MIT licensed; the game and its assets are not included.
