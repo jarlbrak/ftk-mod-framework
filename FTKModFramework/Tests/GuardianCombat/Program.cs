@@ -223,6 +223,7 @@ internal static class Program
         Check(scaledHealing.ResolveGuardHealingHealth("mercy", "guard-one", "ally", 70, 100,
             4, 150) == 76, "Guard healing scales before cap");
         LegendaryChecks.Run(Check);
+        ThemeChecks.Run(Check);
         OverworldAilmentChecks.Run(Check);
         Console.WriteLine("PASS GuardianCombat: " + checks + " checks");
         if (args.Length == 2 && args[0] == "--assembly") NativeSignatures.Verify(args[1]);

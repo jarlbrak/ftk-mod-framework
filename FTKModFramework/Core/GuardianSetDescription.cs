@@ -70,8 +70,13 @@ namespace FTKModFramework.Core
                 lines.Add("Guard retaliates for " + profile.Bonuses.RetaliationDamage + " damage");
             if (profile.Bonuses.FocusHealBonusPercent != baseline.Bonuses.FocusHealBonusPercent &&
                 profile.Bonuses.FocusHealBonusPercent > 0)
-                lines.Add("Focused hits heal ally " + Percent((8 + profile.Bonuses.FocusHealBonusPercent) *
+                lines.Add((profile.GuardSmiteHealing ? "Guard bond: next focused Smite heals ally " : "Focused hits heal ally ") + Percent((8 + profile.Bonuses.FocusHealBonusPercent) *
                     profile.HealingPercent) + "% max HP");
+            else if (profile.GuardSmiteHealing && !baseline.GuardSmiteHealing)
+                lines.Add("Guard bond: next focused Smite heals ally " +
+                    Percent((8 + profile.Bonuses.FocusHealBonusPercent) * profile.HealingPercent) + "% max HP once");
+            if (profile.GuardPhysicalBonusPercent > baseline.GuardPhysicalBonusPercent)
+                lines.Add("Guarded hit readies +" + profile.GuardPhysicalBonusPercent + "% next single-target physical hit");
             if (profile.Bonuses.WardDebuffs && !baseline.Bonuses.WardDebuffs)
                 lines.Add("Guard wards direct-hit Poison, Stun, Daze, Curse");
             if (profile.Bonuses.GuardFocusRestore > baseline.Bonuses.GuardFocusRestore)
@@ -88,7 +93,7 @@ namespace FTKModFramework.Core
             GuardianEquipmentBonuses completion, float armorPayoff)
         {
             if (completion.FocusHealBonusPercent > 0)
-                lines.Add("Focused hits heal ally " + Percent((8 + Math.Max(core.Bonuses.FocusHealBonusPercent,
+                lines.Add((core.GuardSmiteHealing ? "Guard bond: next focused Smite heals ally " : "Focused hits heal ally ") + Percent((8 + Math.Max(core.Bonuses.FocusHealBonusPercent,
                     completion.FocusHealBonusPercent)) * core.HealingPercent) + "% max HP");
             if (completion.WardDebuffs && !core.Bonuses.WardDebuffs)
                 lines.Add("Guard wards direct-hit Poison, Stun, Daze, Curse");

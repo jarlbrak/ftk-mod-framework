@@ -69,6 +69,13 @@ namespace FTKModFramework.Core
             string target = Identity(victim);
             string[] active = State.ActiveGuardians(target);
             foreach (string id in active) ObserveLegendaryEquipment(Find(id));
+            foreach (string id in active)
+            {
+                CharacterDummy guardian = Find(id);
+                if (guardian != null)
+                    Theme.ObserveEquipment(id, RoleKey(guardian), (int)guardian.m_CharacterOverworld.m_WeaponID);
+            }
+            Theme.ResolveMitigation(attackId, target, original, reduced, active);
             List<string> newlyCharged = new List<string>();
             foreach (string id in active) if (!Legendary.IsCharged(id)) newlyCharged.Add(id);
             if (Legendary.ResolveMitigation(attackId, target, original, reduced, active)) PendingGuardFocus[target] = attackId;
@@ -112,27 +119,61 @@ namespace FTKModFramework.Core
                 !row.m_TargetFriendly && row.m_DmgMultiplier > 0;
         }
 
+        private static bool PhysicalChargeAttack(CharacterDummy guardian, CharacterDummy victim,
+            FTK_proficiencyTable.ID proficiency, FTK_weaponStats2.DamageType type,
+            CharacterDummy.SpecialAttack special)
+        {
+            if (!IsGuardian(guardian) || !(victim is EnemyDummy) ||
+                type != FTK_weaponStats2.DamageType.physical ||
+                special == CharacterDummy.SpecialAttack.Justice || special == CharacterDummy.SpecialAttack.ItemAttack)
+                return false;
+            if (proficiency == FTK_proficiencyTable.ID.None) return true;
+            FTK_proficiencyTable row = FTK_proficiencyTableDB.Get(proficiency);
+            return row != null && row.m_Target == CharacterDummy.TargetType.None &&
+                !row.m_Harmless && !row.m_TargetFriendly && row.m_DmgMultiplier > 0;
+        }
+
         internal static void PrepareReckoning(AttackAttempt attempt, bool consumable, ref float damageMultiplier)
         {
             CharacterDummy guardian = attempt.m_AttackingDummy;
             if (!IsGuardian(guardian)) return;
             ObserveLegendaryEquipment(guardian);
+            Theme.ObserveEquipment(Identity(guardian), RoleKey(guardian), (int)guardian.m_CharacterOverworld.m_WeaponID);
             PrepareProfileAttack(attempt, consumable, ref damageMultiplier);
             if (consumable || attempt.m_Harmless || !CanAct(guardian) ||
                 !guardian.m_CharacterOverworld.IsOwner) return;
+            GuardianProfile profile = ActiveProfile(guardian);
+            if (profile != null && profile.GuardSmiteHealing)
+            {
+                string ally = State.DesignatedAlly(Identity(guardian));
+                if (!LivingAlly(Find(ally))) Theme.LoseTarget(ally);
+                Theme.BeginMercyAttack(Identity(guardian), CurrentAction(guardian),
+                    attempt.m_AttackFocused > 0 && IsSmite(guardian, attempt.m_AttackProficiency) &&
+                    attempt.m_DamagedDummy is EnemyDummy);
+            }
             bool eligible = ReckoningAttack(guardian, attempt.m_DamagedDummy, attempt.m_AttackProficiency,
                 attempt.m_WeaponType, attempt.m_SpecialAttack);
-            if (Legendary.BeginAttack(Identity(guardian), CurrentAction(guardian), eligible)) damageMultiplier *= 1.5f;
+            bool reckoning = Legendary.BeginAttack(Identity(guardian), CurrentAction(guardian), eligible);
+            int censure = Theme.BeginPhysicalAttack(Identity(guardian), CurrentAction(guardian),
+                PhysicalChargeAttack(guardian, attempt.m_DamagedDummy, attempt.m_AttackProficiency,
+                    attempt.m_DamageType, attempt.m_SpecialAttack));
+            if (reckoning || censure > 0)
+                damageMultiplier *= 1f + GuardianThemeState.StrongestAttackBonus(reckoning, censure) / 100f;
         }
 
         internal static void ReplayReckoning(CharacterDummy guardian, DummyDamageInfo damage)
         {
             if (damage == null || !IsGuardian(guardian) || EncounterSession.Instance == null) return;
             ObserveLegendaryEquipment(guardian);
+            Theme.ObserveEquipment(Identity(guardian), RoleKey(guardian), (int)guardian.m_CharacterOverworld.m_WeaponID);
             bool eligible = ReckoningAttack(guardian, EncounterSession.Instance.GetDummyByFID(damage.m_VictimID),
                 damage.m_Prof, damage.m_WeaponType, damage.m_SpecialAttack);
-            if (Legendary.BeginAttack(Identity(guardian), CurrentAction(guardian), eligible) && guardian.m_CharacterOverworld.IsOwner)
-                guardian.SpawnHudTextRPC("Reckoning", string.Empty);
+            bool reckoning = Legendary.BeginAttack(Identity(guardian), CurrentAction(guardian), eligible);
+            int censure = Theme.BeginPhysicalAttack(Identity(guardian), CurrentAction(guardian),
+                PhysicalChargeAttack(guardian, EncounterSession.Instance.GetDummyByFID(damage.m_VictimID),
+                    damage.m_Prof, damage.m_DamageType, damage.m_SpecialAttack));
+            if ((reckoning || censure > 0) && guardian.m_CharacterOverworld.IsOwner)
+                guardian.SpawnHudTextRPC(reckoning ? "Reckoning" : "Censure", string.Empty);
         }
 
         internal static void ShowReckoningPreview(uiBattleStanceButtons owner, uiBattleButton button)
@@ -141,7 +182,10 @@ namespace FTKModFramework.Core
             CharacterDummy guardian = owner.CombatCow.GetCombatDummy();
             if (!IsGuardian(guardian)) return;
             ObserveLegendaryEquipment(guardian);
-            if (!Legendary.IsCharged(Identity(guardian))) return;
+            Theme.ObserveEquipment(Identity(guardian), RoleKey(guardian), (int)guardian.m_CharacterOverworld.m_WeaponID);
+            int censure = Theme.ChargePercent(Identity(guardian));
+            bool reckoningReady = Legendary.IsCharged(Identity(guardian));
+            if (!reckoningReady && censure == 0) return;
             FTK_proficiencyTable.ID proficiency = FTK_proficiencyTable.ID.None;
             if (button.m_ButtonType == uiBattleButton.BattleButtonType.proficiency)
             {
@@ -152,16 +196,26 @@ namespace FTKModFramework.Core
             else if (button.m_ButtonType != uiBattleButton.BattleButtonType.attack) return;
             EnemyDummy enemy = EncounterSession.Instance.GetCurrentEnemy();
             if (guardian.m_EventListener == null || guardian.m_EventListener.m_Weapon == null ||
-                !ReckoningAttack(guardian, enemy, proficiency, guardian.m_EventListener.m_Weapon.m_WeaponType,
-                    guardian.m_SpecialAttack)) return;
+                enemy == null) return;
+            bool reckoning = reckoningReady && ReckoningAttack(guardian, enemy, proficiency,
+                guardian.m_EventListener.m_Weapon.m_WeaponType, guardian.m_SpecialAttack);
+            FTK_weaponStats2 weapon = FTK_weaponStats2DB.Get(owner.CombatCow.m_WeaponID);
+            FTK_proficiencyTable row = proficiency == FTK_proficiencyTable.ID.None ? null : FTK_proficiencyTableDB.Get(proficiency);
+            if (weapon == null) return;
+            FTK_weaponStats2.DamageType type = (FTK_weaponStats2.DamageType)GuardianPreviewMath.EffectiveType(
+                (int)weapon._dmgtype, row == null ? (int)FTK_weaponStats2.DamageType.none : (int)row.m_DmgTypeOverride,
+                (int)FTK_weaponStats2.DamageType.none);
+            bool physical = censure > 0 && PhysicalChargeAttack(guardian, enemy, proficiency, type, guardian.m_SpecialAttack);
+            if (!reckoning && !physical) return;
+            float charge = 1f + GuardianThemeState.StrongestAttackBonus(reckoning, physical ? censure : 0) / 100f;
             float multiplier = proficiency == FTK_proficiencyTable.ID.None ? 1f : FTK_proficiencyTableDB.Get(proficiency).m_DmgMultiplier;
-            int damage = FTKUtil.RoundToInt(owner.CombatCow.m_CharacterStats.GetWeaponMaxDamage(enemy.m_EnemyCombat.m_RaceTypes) * multiplier * 1.5f *
+            int damage = FTKUtil.RoundToInt(owner.CombatCow.m_CharacterStats.GetWeaponMaxDamage(enemy.m_EnemyCombat.m_RaceTypes) * multiplier * charge *
                 CombatProficiencyRuntime.DamageBonus(proficiency, enemy));
             if (enemy.Frozen) damage = FTKUtil.RoundToInt(damage * GameFlow.Instance.m_FrozenDmgPercent);
             owner.m_InfoPanel.m_DamageValue.text = damage.ToString(System.Globalization.CultureInfo.InvariantCulture);
             // Native description bounds already share the compact damage/accuracy panel. Keep
             // the charged indicator in the action title instead of adding another body line.
-            owner.m_BattleActionDisplay.text += " + RECKONING";
+            owner.m_BattleActionDisplay.text += reckoning ? " + RECKONING" : " + CENSURE";
         }
 
         internal static void EndLegendaryCombat(CharacterDummy actor)
@@ -171,6 +225,8 @@ namespace FTKModFramework.Core
             if (actor == null || actor.m_CharacterOverworld == null) return;
             string identity = Identity(actor);
             Legendary.ResetActor(identity);
+            Theme.ResetActor(identity);
+            Theme.LoseTarget(identity);
             PendingGuardFocus.Remove(identity);
         }
     }

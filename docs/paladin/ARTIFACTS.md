@@ -9,7 +9,7 @@ screenshots. Flavor quotations below remain proposals.
 
 ## Direction
 
-The candidate adds one exceptional hammer for each Paladin loadout. Both use Vitality and
+The candidate retains one exceptional hammer for each Paladin loadout. Both use Vitality and
 reward spending an action to protect another party member. Neither increases
 Guard's 50% reduction, adds another rescue charge, or replaces the existing
 Mercy, Censure and Verdict equipment families.
@@ -41,7 +41,7 @@ need comparison against native actions as well as nominal damage.
 
 ## v4 armor role interaction
 
-A matching Head, Body and Foot family keeps its core role when an Artifact replaces ordinary hands. Artifacts have no fixed family affinity in the candidate. Last Vigil, Kingsfall and Last Bastion cannot supply a matching 1H-plus-shield or 2H armament completion benefit. They retain their own conditional Guardian effects and item stats. Balance must compare each combined artifact loadout against the corresponding completed ordinary family, including the role's costs.
+A matching Head, Body and Foot family keeps its core role when an Artifact replaces ordinary hands. Artifacts have no fixed family affinity in the candidate. Mercy's Guard-armed Smite bond requires the matching role core, not a matching artifact armament. Censure's Guard-armed physical charge likewise belongs to the core; if Kingsfall is also charged, the strongest +50% bonus applies once rather than multiplying. Changing weapon clears a pending role charge. Last Vigil, Kingsfall and Last Bastion cannot supply a matching 1H-plus-shield or 2H armament completion benefit. They retain their own conditional Guardian effects and item stats. Balance must compare each combined artifact loadout against the corresponding completed ordinary family, including the role's costs.
 
 ## The Last Vigil
 
@@ -100,7 +100,7 @@ at the previous damage values. Revised previews and impacts, criticals, mitigati
 and the remaining lifecycle cases still need coverage.
 
 The player alternates protecting and striking instead of receiving a free
-retaliation attack. The candidate uses a "Reckoning ready" HUD message and a
+retaliation attack. A Censure core can ready its own +50% physical vengeance after a real Guard-reduced hit, but it does not multiply with Kingsfall's Reckoning; one eligible attempt consumes the strongest charge, including on a miss. The candidate uses a "Reckoning ready" HUD message and a
 charged action title and damage preview. The earlier crown-light and sound
 concept is not implemented.
 

@@ -1,16 +1,20 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"errors"
 	"strings"
 )
 
 type marketGuardianProfile struct {
-	PhysicalPercent       *int                   `json:"physicalPercent"`
-	SmitePercent          *int                   `json:"smitePercent"`
-	HealingPercent        *int                   `json:"healingPercent"`
-	GuardReductionPercent *int                   `json:"guardReductionPercent"`
-	Bonuses               *marketGuardianBonuses `json:"bonuses,omitempty"`
+	PhysicalPercent           *int                   `json:"physicalPercent"`
+	SmitePercent              *int                   `json:"smitePercent"`
+	HealingPercent            *int                   `json:"healingPercent"`
+	GuardReductionPercent     *int                   `json:"guardReductionPercent"`
+	GuardSmiteHealing         json.RawMessage        `json:"guardSmiteHealing,omitempty"`
+	GuardPhysicalBonusPercent json.RawMessage        `json:"guardPhysicalBonusPercent,omitempty"`
+	Bonuses                   *marketGuardianBonuses `json:"bonuses,omitempty"`
 }
 
 type marketGuardianSet struct {
@@ -65,7 +69,30 @@ func marketProfile(p *marketGuardianProfile) bool {
 	}
 	return *p.PhysicalPercent >= 25 && *p.PhysicalPercent <= 200 && *p.SmitePercent >= 25 && *p.SmitePercent <= 200 &&
 		*p.HealingPercent >= 25 && *p.HealingPercent <= 200 && *p.GuardReductionPercent >= 0 && *p.GuardReductionPercent <= 50 &&
+		marketOptionalGuardSmite(p.GuardSmiteHealing) && marketOptionalGuardPhysical(p.GuardPhysicalBonusPercent) &&
 		marketProgressionBonuses(p.Bonuses)
+}
+
+func marketOptionalGuardSmite(raw json.RawMessage) bool {
+	if len(raw) == 0 {
+		return true
+	}
+	if bytes.Equal(bytes.TrimSpace(raw), []byte("null")) {
+		return false
+	}
+	var value bool
+	return json.Unmarshal(raw, &value) == nil
+}
+
+func marketOptionalGuardPhysical(raw json.RawMessage) bool {
+	if len(raw) == 0 {
+		return true
+	}
+	if bytes.Equal(bytes.TrimSpace(raw), []byte("null")) {
+		return false
+	}
+	var value int
+	return json.Unmarshal(raw, &value) == nil && value >= 0 && value <= 50
 }
 
 func marketProgression(kind string, guardian bool, profile *marketGuardianProfile, smite string,

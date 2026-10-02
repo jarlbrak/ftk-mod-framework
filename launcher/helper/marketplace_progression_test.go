@@ -49,6 +49,33 @@ func TestProgressionAdmission(t *testing.T) {
 		"string percentage": func(c, _ map[string]interface{}) {
 			c["guardianProfile"].(map[string]interface{})["physicalPercent"] = "75"
 		},
+		"negative Guard charge": func(c, _ map[string]interface{}) {
+			c["guardianProfile"].(map[string]interface{})["guardPhysicalBonusPercent"] = -1
+		},
+		"excessive Guard charge": func(c, _ map[string]interface{}) {
+			c["guardianProfile"].(map[string]interface{})["guardPhysicalBonusPercent"] = 51
+		},
+		"fractional Guard charge": func(c, _ map[string]interface{}) {
+			c["guardianProfile"].(map[string]interface{})["guardPhysicalBonusPercent"] = 1.5
+		},
+		"string Guard charge": func(c, _ map[string]interface{}) {
+			c["guardianProfile"].(map[string]interface{})["guardPhysicalBonusPercent"] = "50"
+		},
+		"string Guard bond": func(c, _ map[string]interface{}) {
+			c["guardianProfile"].(map[string]interface{})["guardSmiteHealing"] = "true"
+		},
+		"null Guard bond": func(c, _ map[string]interface{}) {
+			c["guardianProfile"].(map[string]interface{})["guardSmiteHealing"] = nil
+		},
+		"null Guard charge": func(c, _ map[string]interface{}) {
+			c["guardianProfile"].(map[string]interface{})["guardPhysicalBonusPercent"] = nil
+		},
+		"null set Guard bond": func(c, _ map[string]interface{}) {
+			c["guardianEquipmentSets"].([]interface{})[0].(map[string]interface{})["core"].(map[string]interface{})["guardSmiteHealing"] = nil
+		},
+		"null set Guard charge": func(c, _ map[string]interface{}) {
+			c["guardianEquipmentSets"].([]interface{})[0].(map[string]interface{})["minor"].(map[string]interface{})["guardPhysicalBonusPercent"] = nil
+		},
 		"duplicate set member": func(c, _ map[string]interface{}) {
 			c["guardianEquipmentSets"].([]interface{})[0].(map[string]interface{})["feet"] = "head"
 		},
@@ -96,5 +123,18 @@ func TestProgressionAdmission(t *testing.T) {
 				t.Fatal("invalid progression accepted")
 			}
 		})
+	}
+}
+
+func TestGuardThemeAdmission(t *testing.T) {
+	for _, value := range []string{
+		``,
+		`,"guardSmiteHealing":false,"guardPhysicalBonusPercent":0`,
+		`,"guardSmiteHealing":true,"guardPhysicalBonusPercent":50`,
+	} {
+		content := []byte(`{"entries":[{"kind":"class","id":"protector","template":"blacksmith","guardian":true,"guardianProfile":{"physicalPercent":100,"smitePercent":100,"healingPercent":100,"guardReductionPercent":50` + value + `}}]}`)
+		if err := marketContent(content); err != nil {
+			t.Fatal(err)
+		}
 	}
 }

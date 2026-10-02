@@ -165,15 +165,33 @@ namespace FTKModFramework.Core
 
         internal static void ExpireIfRoleChanged(CharacterDummy guardian)
         {
-            if (!IsGuardian(guardian)) return;
+            if (guardian == null || guardian.m_CharacterOverworld == null) return;
             string id = Identity(guardian);
             string previous;
+            if (!IsGuardian(guardian))
+            {
+                if (GuardRoles.ContainsKey(id))
+                {
+                    State.ExpireGuard(id);
+                    Theme.ResetActor(id);
+                    PendingHealing.Remove(id);
+                    GuardRoles.Remove(id);
+                }
+                return;
+            }
             if (GuardRoles.TryGetValue(id, out previous) && previous != RoleKey(guardian))
             {
                 State.ExpireGuard(id);
+                Theme.ResetActor(id);
                 PendingHealing.Remove(id);
                 GuardRoles.Remove(id);
             }
+        }
+
+        internal static void ObserveThemeEquipment(CharacterDummy guardian)
+        {
+            if (IsGuardian(guardian)) Theme.ObserveEquipment(Identity(guardian), RoleKey(guardian),
+                (int)guardian.m_CharacterOverworld.m_WeaponID);
         }
 
         internal static void ForgetGuardRole(CharacterDummy guardian)

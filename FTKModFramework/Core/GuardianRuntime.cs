@@ -9,6 +9,7 @@ namespace FTKModFramework.Core
         internal const string ActionKey = "ftkmf_guard_ally";
         private static HashSet<int> Classes = new HashSet<int>();
         internal static GuardianCombatState State = new GuardianCombatState();
+        internal static GuardianThemeState Theme = new GuardianThemeState();
         internal static FTK_proficiencyTable.ID ActionId = FTK_proficiencyTable.ID.None;
         internal static bool Enabled { get { return Classes.Count > 0; } }
         private static long attackSerial;
@@ -41,13 +42,14 @@ namespace FTKModFramework.Core
         internal static bool ReloadTransientStateEmpty
         {
             get { return attackSerial == 0 && turnSerial == 0 && PendingHealing.Count == 0 &&
-                PendingFeedback.Count == 0 && AttackEquipment.Count == 0 && State.ReloadIsEmpty; }
+                PendingFeedback.Count == 0 && AttackEquipment.Count == 0 && State.ReloadIsEmpty && Theme.IsEmpty; }
         }
 
         internal static Action SuspendForReload()
         {
             HashSet<int> classes = Classes;
             GuardianCombatState state = State;
+            GuardianThemeState theme = Theme;
             FTK_proficiencyTable.ID action = ActionId;
             Dictionary<int, GuardianEquipmentBonuses> equipment = Equipment;
             Dictionary<string, GuardianEquipmentBonuses> attackEquipment = AttackEquipment;
@@ -55,7 +57,7 @@ namespace FTKModFramework.Core
             Dictionary<string, string> feedback = PendingFeedback;
             long attacks = attackSerial, turns = turnSerial;
             Action restoreProfiles = SuspendProfilesForReload();
-            Classes = new HashSet<int>(); State = new GuardianCombatState();
+            Classes = new HashSet<int>(); State = new GuardianCombatState(); Theme = new GuardianThemeState();
             ActionId = FTK_proficiencyTable.ID.None;
             Equipment = new Dictionary<int, GuardianEquipmentBonuses>();
             AttackEquipment = new Dictionary<string, GuardianEquipmentBonuses>(StringComparer.Ordinal);
@@ -64,7 +66,7 @@ namespace FTKModFramework.Core
             attackSerial = turnSerial = 0;
             return delegate
             {
-                Classes = classes; State = state; ActionId = action; Equipment = equipment;
+                Classes = classes; State = state; Theme = theme; ActionId = action; Equipment = equipment;
                 AttackEquipment = attackEquipment; PendingHealing = healing; PendingFeedback = feedback;
                 attackSerial = attacks; turnSerial = turns; restoreProfiles();
             };
@@ -213,6 +215,8 @@ namespace FTKModFramework.Core
             return "Chosen ally: " + chosen + ". Protection: " +
                 (State.IsActive(id) && CanAct(guardian) ? "active (" + reduction + "%)." : "inactive.") +
                 " Divine Intervention: " + (State.RescueAvailable(id) ? "ready." : "spent this combat.") +
+                (Theme.HasBond(id) ? " Mercy bond ready for focused Smite." : string.Empty) +
+                (Theme.ChargePercent(id) > 0 ? " Censure ready: next single-target physical hit +" + Theme.ChargePercent(id) + "%." : string.Empty) +
                 (Legendary.IsCharged(id) ? " Reckoning ready: +50% next single-target hammer attack." : string.Empty);
         }
 
@@ -222,6 +226,13 @@ namespace FTKModFramework.Core
             bool partyMember = EncounterSession.Instance.GetOtherCombatPlayerMembers(guardian).Contains(target);
             if (!State.TryGuard(Identity(guardian), Identity(target), CanAct(guardian), partyMember && LivingAlly(target))) return;
             RecordGuardRole(guardian);
+            GuardianProfile profile = ActiveProfile(guardian);
+            // Focus count is absent from the native damage RPC. Only the attack owner can
+            // decide whether a focused Smite spends this healing opportunity.
+            Theme.BeginGuard(Identity(guardian), CurrentAction(guardian), Identity(target), RoleKey(guardian),
+                (int)guardian.m_CharacterOverworld.m_WeaponID,
+                profile != null && profile.GuardSmiteHealing && guardian.m_CharacterOverworld.IsOwner,
+                profile == null ? 0 : profile.GuardPhysicalBonusPercent);
             ApplyLegendaryGuard(guardian, target);
             if (target.m_DamageInfo != null)
             {
@@ -245,6 +256,8 @@ namespace FTKModFramework.Core
             if (guardian == null || guardian.m_CharacterOverworld == null) return;
             string identity = Identity(guardian);
             State.ExpireGuard(identity);
+            if (!CanAct(guardian)) Theme.ResetActor(identity);
+            if (!LivingAlly(guardian)) Theme.LoseTarget(identity);
             ForgetGuardRole(guardian);
             PendingHealing.Remove(identity);
         }
@@ -254,6 +267,8 @@ namespace FTKModFramework.Core
             if (dummy == null || dummy.m_CharacterOverworld == null) return;
             string identity = Identity(dummy);
             State.ResetActor(identity);
+            Theme.ResetActor(identity);
+            Theme.LoseTarget(identity);
             ForgetGuardRole(dummy);
             Legendary.ResetActor(identity);
             PendingHealing.Remove(identity);
@@ -265,6 +280,8 @@ namespace FTKModFramework.Core
             if (dummy == null || dummy.m_CharacterOverworld == null) return;
             string identity = Identity(dummy);
             State.ResetGuardian(identity);
+            Theme.ResetActor(identity);
+            Theme.LoseTarget(identity);
             ForgetGuardRole(dummy);
             Legendary.ResetActor(identity);
             // This is a new native combat, so no previous attack's defensive snapshot applies.
@@ -278,6 +295,7 @@ namespace FTKModFramework.Core
             State.BeginTurn();
             turnSerial++;
             Legendary.BeginTurn(Identity(actor));
+            Theme.BeginTurn(Identity(actor));
             PendingGuardFocus.Clear();
             PendingFeedback.Clear();
             PendingHealing.Clear();
@@ -359,13 +377,16 @@ namespace FTKModFramework.Core
             if (!attacker.m_CharacterOverworld.IsOwner || !GuardianFocusedHit.EligibleAttempt(
                 attempt.m_AttackFocused, attempt.m_SlotSuccessPercent, attempt.m_Harmless,
                 attempt.m_CheatType == SlotControl.AttackCheatType.Miss) || !CanAct(attacker)) return;
+            GuardianProfile profile = ActiveProfile(attacker);
+            if (profile != null && profile.GuardSmiteHealing &&
+                (!IsSmite(attacker, attempt.m_AttackProficiency) ||
+                !Theme.MercyReceipt(identity, CurrentAction(attacker)))) return;
             string ally = State.DesignatedAlly(identity);
             if (!LivingAlly(Find(ally))) return;
             Healing pending = new Healing();
             pending.Attack = (++attackSerial).ToString(System.Globalization.CultureInfo.InvariantCulture);
             pending.Ally = ally;
             pending.FocusBonusPercent = EquippedBonuses(attacker).FocusHealBonusPercent;
-            GuardianProfile profile = ActiveProfile(attacker);
             pending.HealingPercent = profile == null ? 100 : profile.HealingPercent;
             AddHealingVictim(pending, first);
             AddHealingVictim(pending, second);
@@ -382,6 +403,7 @@ namespace FTKModFramework.Core
 
         internal static void OnImpact(CharacterDummy victim)
         {
+            if (victim != null && !LivingAlly(victim)) Theme.LoseTarget(Identity(victim));
             if (victim == null || victim.m_DamageInfo == null) return;
             DummyDamageInfo damage = victim.m_DamageInfo;
             string victimId = Identity(victim);

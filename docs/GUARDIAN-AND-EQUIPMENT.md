@@ -25,6 +25,30 @@ Multiple guards do not multiply reduction. Rescue selection uses stable ordinal
 guardian identity and consumes one available charge. Combat state is transient.
 Online peer agreement remains an explicit validation gate.
 
+## Optional Guard-armed role effects (framework 1.8.0)
+
+`GuardianProfile` adds optional `guardSmiteHealing` (default `false`) and
+`guardPhysicalBonusPercent` (default `0`, range 0 to 50). Existing constructor
+signatures and omitted JSON fields keep their earlier behavior. These values
+are role-profile properties, not equipment bonuses or general class grants.
+
+When `guardSmiteHealing` is enabled, a successful native Guard arms one healing
+bond for the chosen living ally through the end of the Guardian's next own
+turn. The next qualifying focused class Smite attempt consumes it, including
+on a miss. A landed attempt heals that ally according to the active profile
+and completion bonus; unrelated focused attacks do not use the bond. Immediate
+Guard healing remains a separate equipment/profile calculation.
+
+When `guardPhysicalBonusPercent` is positive, only a direct enemy hit actually
+reduced by active Guard arms one nonstacking physical charge. The next eligible
+single-target physical attack uses the bonus and spends it on the attempt,
+including a miss. It expires at the end of the Guardian's next own turn. If
+Kingsfall's Reckoning also applies, the stronger bonus is used once; the two
+bonuses do not multiply. Role or weapon changes, incapacity, encounter exit
+and reload discard both pending role effects. Preview calculation must read
+the same charge authority without consuming it. Multiplayer agreement and
+native outcome coverage remain separate validation gates.
+
 ## Overworld ailment immunity
 
 Framework 1.0.3 adds `Content.AddOverworldAilmentImmunity(classRow, displayName)` for an exact

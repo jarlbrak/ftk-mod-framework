@@ -135,7 +135,36 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("smitePercent", Required = Required.Always)] public int SmitePercent;
         [JsonProperty("healingPercent", Required = Required.Always)] public int HealingPercent;
         [JsonProperty("guardReductionPercent", Required = Required.Always)] public int GuardReductionPercent;
+        [JsonProperty("guardSmiteHealing"), JsonConverter(typeof(GuardianProfileBooleanConverter))] public bool GuardSmiteHealing;
+        [JsonProperty("guardPhysicalBonusPercent"), JsonConverter(typeof(GuardianProfilePercentConverter))] public int GuardPhysicalBonusPercent;
         [JsonProperty("bonuses")] public GuardianBonusEntry Bonuses;
+    }
+    internal sealed class GuardianProfileBooleanConverter : JsonConverter
+    {
+        public override bool CanConvert(System.Type objectType) { return objectType == typeof(bool); }
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType != JsonToken.Boolean)
+                throw new JsonSerializationException("guardSmiteHealing requires a JSON boolean");
+            return (bool)reader.Value;
+        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { writer.WriteValue((bool)value); }
+    }
+    internal sealed class GuardianProfilePercentConverter : JsonConverter
+    {
+        public override bool CanConvert(System.Type objectType) { return objectType == typeof(int); }
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType != JsonToken.Integer)
+                throw new JsonSerializationException("guardPhysicalBonusPercent requires a JSON integer");
+            long percent = System.Convert.ToInt64(reader.Value);
+            if (percent < 0 || percent > 50)
+                throw new JsonSerializationException("guardPhysicalBonusPercent must be between 0 and 50");
+            return (int)percent;
+        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { writer.WriteValue((int)value); }
     }
     internal sealed class GuardianSetEntry
     {

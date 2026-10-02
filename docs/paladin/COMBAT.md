@@ -1,6 +1,6 @@
 # Paladin combat
 
-Paladin 2.0.0 rules. The [package content](../../marketplace/packages/paladin/content.json) defines the exact values. Native observations and their limits are recorded in [Validation](VALIDATION.md).
+Paladin 2.0.1 candidate rules for framework 1.8.0. Native effect acceptance is pending. The [package content](../../marketplace/packages/paladin/content.json) defines the exact values. Native observations and their limits are recorded in [Validation](VALIDATION.md).
 
 ## Baseline Guardian
 
@@ -16,13 +16,13 @@ Head, Body and Foot choose the role. Two same-family pieces grant only the minor
 
 | Core | Main strength | Attached cost | Completion |
 | --- | --- | --- | --- |
-| Mercy | Best effective Guardian healing and reliable magic Smite | Lower physical output and Guard reduction | Qualifying focused-hit healing rises from 12% to 15% of ally max HP |
+| Mercy | Guard heals immediately and arms one focused class Smite that can heal the chosen ally | Lower physical output and Guard reduction | A landed bonded Smite heals 15% rather than 12% of ally max HP |
 | Verdict | Best durability and ally protection | Lower damage and healing, slower initiative; Guard still costs a turn | Guard prevents reviewed debuffs on a qualifying direct hit |
-| Censure | Strongest ordinary physical role | Lower healing, Smite, Guard and personal defenses | Conditional physical gain against Censure's Armor outcome |
+| Censure | Guard mitigation arms a +50% single-target physical strike | Lower healing, Smite, Guard and personal defenses | Conditional physical gain against Censure's Armor outcome |
 
-The source core profiles use 65/60/125 physical percent for Mercy/Verdict/Censure and 150/75/50 healing percent respectively, before other item and action factors. These are authored inputs, not measured encounter results. The core role cannot be split across families. A foreign weapon may still contribute its own ordinary action or stats, but it cannot grant another role's signature effect. When a role breaks or changes, superseded protection and dependent pending effects must end without restoring Focus or rescue.
+The source core profiles use 65/60/100 physical percent for Mercy/Verdict/Censure and 150/75/50 healing percent respectively, before other item and action factors. These are authored inputs, not measured encounter results. The core role cannot be split across families. A foreign weapon may still contribute its own ordinary action or stats, but it cannot grant another role's signature effect. When a role breaks or changes, or its weapon is swapped, pending Mercy and Censure charges end without restoring Focus or rescue. Incapacity, combat exit and reload also clear them.
 
-Mercy's Guard heal has a 4% base, scaled by its 150% healing profile to 6% of the guarded ally's maximum HP. Its qualifying focused-hit heal is 12%, or 15% with matching armament. These amounts round down and cannot exceed missing HP; Guard healing has a minimum of 1 HP while injured. Focused healing requires Focus spent, a qualifying landed attack and a living designated ally; it is not limited to Smite. Verdict's small retaliation theme is limited to one guarded outcome; its debuff-prevention ward requires matching armament. Censure's 1.2 Armor-outcome payoff is authored for qualifying physical damage, not every status tick or splash target. The full effect and cost should be visible in tooltips, including the armor count and missing armament pieces.
+Mercy's Guard heal has a 4% base, scaled by its 150% healing profile to 6% of the guarded ally's maximum HP. Guard also arms a bond for one focused Paladin class Smite through the end of the Paladin's next turn. A landed bonded Smite heals the living chosen ally for 12% of maximum HP, or 15% with matching armament; the qualifying attempt spends the bond even on a miss. Other focused attacks cannot use it. Healing rounds down and cannot exceed missing HP; immediate Guard healing has a minimum of 1 HP while injured. Verdict's 50% Guard reduction, one retaliation point and completed-armament ward are unchanged. Censure's passive physical profile is 100%. Only a direct enemy hit actually reduced by its active Guard arms one nonstacking +50% bonus for the next eligible single-target physical attack. The qualifying attempt spends it even on a miss; it expires at the end of the Paladin's next turn. Censure's separate 1.2 Armor-outcome payoff remains conditional on its own mark, not every status tick or splash target. A simultaneous Kingsfall charge uses the strongest 1.5 bonus, not a product of both. The full effect and cost should be visible in tooltips, including the armor count and missing armament pieces.
 
 ## Artifact actions and remaining gates
 
@@ -30,6 +30,6 @@ The Last Vigil can restore one Focus to a guarded ally after a qualifying mitiga
 
 Game-free tests cover the isolated rule evaluator and package structure. They do not establish animation, co-op synchronization, save/reload, native damage ordering or balance. Native trials must compare neutral, Mercy, Verdict, Censure, mixed and artifact loadouts across no-injury fights, magic pressure, multiple enemies, durable targets and solo survivors. Record damage, effective healing, prevented damage, own HP loss, Focus spent, turns and burst separately. Preserve the native white outlined action glyphs, including basic attacks.
 
-Website impact: combat descriptions and item cards change at release, after the candidate's native gates are met. The published site remains unchanged for this unreleased work.
+Website impact: the authored Paladin guide and card explanations are prepared for 2.0.1, but published package projections and public pages stay on 2.0.0 until release. Native effects remain unverified for this candidate.
 
 Smite deals holy-themed magic damage at 0.50 weapon damage before ordinary modifiers. A perfect roll can stun with an authored native 25% effect chance, subject to damage, immunity and existing-control rules; partial hits can deal magic damage but cannot stun. Mercy's three matching armor pieces raise the pre-mitigation coefficient to 0.80 before the Censure Resistance payoff. Bounded corrected-source R26 combat observed a perfect hit fully blocked by Resistance, perfect damaging hits with and without a new stun, and one Mercy hit after the Paladin's Censure Resistance mark. R25 separately observed damage without stun against an immune Wisp. Positive partial damage without stun was observed on prior source bytes in R21 and remains relevant only by the specific source-equivalence argument in [Validation](VALIDATION.md#unreleased-smite-damage-and-stun). None of these controlled encounters measures proc frequency, campaign pacing or representative balance.

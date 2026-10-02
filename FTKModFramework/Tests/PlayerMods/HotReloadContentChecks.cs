@@ -26,6 +26,25 @@ internal static class HotReloadContentChecks
         try { JsonConvert.DeserializeObject<ContentFile>("{\"entries\":[{\"guardianBonuses\":{\"unknownBonus\":1}}]}", strict); }
         catch (JsonSerializationException) { rejected = true; }
         if (!rejected) throw new Exception("Unknown nested candidate capability was ignored.");
+        GuardianProfileEntry legacy = JsonConvert.DeserializeObject<GuardianProfileEntry>(
+            "{\"physicalPercent\":100,\"smitePercent\":100,\"healingPercent\":100,\"guardReductionPercent\":50}", strict);
+        if (legacy.GuardSmiteHealing || legacy.GuardPhysicalBonusPercent != 0)
+            throw new Exception("Legacy Guardian profile defaults changed.");
+        GuardianProfileEntry themed = JsonConvert.DeserializeObject<GuardianProfileEntry>(
+            "{\"physicalPercent\":100,\"smitePercent\":100,\"healingPercent\":100,\"guardReductionPercent\":50," +
+            "\"guardSmiteHealing\":true,\"guardPhysicalBonusPercent\":50}", strict);
+        if (!themed.GuardSmiteHealing || themed.GuardPhysicalBonusPercent != 50)
+            throw new Exception("Guardian themes did not parse.");
+        foreach (string invalid in new[] {
+            "\"guardSmiteHealing\":\"true\"", "\"guardPhysicalBonusPercent\":\"50\"",
+            "\"guardPhysicalBonusPercent\":true", "\"guardPhysicalBonusPercent\":51" })
+        {
+            rejected = false;
+            try { JsonConvert.DeserializeObject<GuardianProfileEntry>(
+                "{\"physicalPercent\":100,\"smitePercent\":100,\"healingPercent\":100,\"guardReductionPercent\":50," + invalid + "}", strict); }
+            catch (JsonSerializationException) { rejected = true; }
+            if (!rejected) throw new Exception("Invalid Guardian theme token accepted: " + invalid);
+        }
         Console.WriteLine("PASS: actual Paladin strict JSON shape and unknown capability rejection");
     }
 }
