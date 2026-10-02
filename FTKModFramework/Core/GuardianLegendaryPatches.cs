@@ -33,7 +33,11 @@ namespace FTKModFramework.Core
             try
             {
                 if (__instance.m_CharacterStats != null && __instance.m_CharacterStats.m_IsInCombat)
-                    GuardianRuntime.ExpireIfRoleChanged(__instance.GetCombatDummy());
+                {
+                    CharacterDummy dummy = __instance.GetCombatDummy();
+                    GuardianRuntime.ExpireIfRoleChanged(dummy);
+                    GuardianRuntime.ObserveThemeEquipment(dummy);
+                }
                 if (_itembase != null && _itembase.m_IsWeapon && __instance.m_CharacterStats != null &&
                     __instance.m_CharacterStats.m_IsInCombat)
                     GuardianRuntime.ObserveLegendaryEquipment(__instance.GetCombatDummy());
@@ -50,7 +54,11 @@ namespace FTKModFramework.Core
             try
             {
                 if (_attacked && _foe != null && _foe.Length > 0 && EncounterSession.Instance != null)
-                    GuardianRuntime.Legendary.EndTurn(GuardianRuntime.Identity(EncounterSession.Instance.GetDummyByFID(_foe[0].m_Pid)));
+                {
+                    string actor = GuardianRuntime.Identity(EncounterSession.Instance.GetDummyByFID(_foe[0].m_Pid));
+                    GuardianRuntime.Legendary.EndTurn(actor);
+                    GuardianRuntime.Theme.EndTurn(actor);
+                }
             }
             catch (Exception e) { Plugin.Log.LogError("[guardian] legendary turn expiry failed: " + e); }
         }

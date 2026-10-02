@@ -193,6 +193,13 @@ def validate_v4_progression(by_id, token=None):
         assert definition['core']['guardReductionPercent'] <= definition['minor']['guardReductionPercent']
     by_family = {s['id']: s for s in sets}
     assert all(not definition.get('coreProficiencies') for definition in sets)
+    assert by_family['mercy']['core']['guardSmiteHealing'] is True
+    assert by_family['censure']['core']['physicalPercent'] == 100
+    assert by_family['censure']['core']['guardPhysicalBonusPercent'] == 50
+    assert all(not s['minor'].get('guardSmiteHealing', False) and
+               s['minor'].get('guardPhysicalBonusPercent', 0) == 0 for s in sets)
+    assert not by_family['verdict']['core'].get('guardSmiteHealing', False)
+    assert by_family['verdict']['core'].get('guardPhysicalBonusPercent', 0) == 0
     assert by_family['mercy']['core']['smitePercent'] == 160
     assert by_family['mercy']['core']['bonuses']['guardHealPercent'] == 4
     assert by_family['mercy']['completion'] == {'focusHealBonusPercent': 2}
@@ -399,7 +406,7 @@ def main(source_root=None):
             for e in entries if any(k in e for k in ['itemModels','displayModels','apparelModels','offHandModels'])}
     assert routes == receipt['rendererRoutes']
     manifest=json.loads((PACKAGE/'manifest.json').read_text())
-    assert manifest['version']=='2.0.0' and manifest['frameworkVersion']=='1.7.0'
+    assert manifest['version']=='2.0.1' and manifest['frameworkVersion']=='1.8.0'
     # Adopted art source pins are historical provenance, not candidate package versions.
     validate_adopted_sources(PACKAGE, receipt, source_root or PACKAGE.parents[2])
     assert manifest['modGuid']=='com.ftkmf.paladin' and receipt['packageVersion']=='1.3.0'

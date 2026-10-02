@@ -42,8 +42,14 @@ namespace FTKModFramework.Core
                 int percent = GuardianRuntime.PreviewPercent(guardian, action, type);
                 float armor = GuardianRuntime.PreviewArmorPayoff(guardian, action, type);
                 float resistance = CombatProficiencyRuntime.DamageBonus(action, enemy);
-                float reckoning = __instance.m_BattleActionDisplay != null &&
-                    __instance.m_BattleActionDisplay.text.EndsWith(" + RECKONING", StringComparison.Ordinal) ? 1.5f : 1f;
+                float reckoning = 1f;
+                if (__instance.m_BattleActionDisplay != null)
+                {
+                    if (__instance.m_BattleActionDisplay.text.EndsWith(" + RECKONING", StringComparison.Ordinal))
+                        reckoning = 1.5f;
+                    else if (__instance.m_BattleActionDisplay.text.EndsWith(" + VENGEANCE", StringComparison.Ordinal))
+                        reckoning = 1f + GuardianRuntime.Theme.ChargePercent(GuardianRuntime.Identity(guardian)) / 100f;
+                }
                 int max = __instance.CombatCow.m_CharacterStats.GetWeaponMaxDamage(enemy.m_EnemyCombat.m_RaceTypes);
                 int displayed = GuardianPreviewMath.Calculate(max, row == null ? 1f : row.m_DmgMultiplier,
                     resistance, reckoning, percent, armor,

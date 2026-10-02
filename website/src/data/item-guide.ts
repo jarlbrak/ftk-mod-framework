@@ -98,7 +98,7 @@ export function itemTooltipLines(e:any,entries:any[]):{text:string;tone:string}[
    add(`${set.id[0].toUpperCase()+set.id.slice(1)} armament: requires all 3 matching armor pieces.`,'ability');
    add('Complete with matching 2-handed hammer and empty offhand, or 1-handed hammer and shield.');
   }
-  if(set.id==='mercy')add('Completion: +2% ally maximum HP to focused-hit healing.');
+  if(set.id==='mercy')add('Completion: bonded focused class Smite heals 15% instead of 12% ally maximum HP.');
   else if(set.id==='verdict')add('Completion: Guard wards Poison, Stun, Daze, and Curse on qualifying hits.');
   else if(set.id==='censure')add('Completion: +20% qualifying physical damage against your own Censure Armor mark.');
  }
@@ -109,7 +109,9 @@ function roleSummary(role:any):string{
  for(const [key,label] of [['physicalPercent','physical damage'],['smitePercent','Smite damage'],['healingPercent','healing'],['guardReductionPercent','Guard reduction']] as const){
   if(role[key]!==undefined)parts.push(`${role[key]}% ${label}`);
  }
- if(role.bonuses?.guardHealPercent)parts.push(`Guard heals ${role.bonuses.guardHealPercent}% ally maximum HP`);
+ if(role.bonuses?.guardHealPercent)parts.push(`Guard heals ${role.bonuses.guardHealPercent*(role.healingPercent??100)/100}% ally maximum HP`);
  if(role.bonuses?.retaliationDamage)parts.push(`${role.bonuses.retaliationDamage} Guard retaliation damage`);
+ if(role.guardSmiteHealing)parts.push(`Guard bonds one focused class Smite heal (${(8+(role.bonuses?.focusHealBonusPercent??0))*(role.healingPercent??100)/100}% on hit; attempt spends it)`);
+ if(role.guardPhysicalBonusPercent)parts.push(`Guard-reduced hit readies +${role.guardPhysicalBonusPercent}% next single-target physical attempt`);
  return parts.join('; ');
 }

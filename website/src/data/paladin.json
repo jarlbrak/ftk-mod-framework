@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "sha256": "ef7a6ec3b3cbd72f9903ab35300f129b1c87730aa1db91c29e7e33d4e63ff6fe",
+  "version": "2.0.1",
+  "sha256": "5400e2cd0c6d0822e2d6ca88bdf7529e026fbba91a7f97adca8909ec7384e464",
   "entries": [
     {
       "displayName": "Paladin",
@@ -36,7 +36,8 @@
             "guardReductionPercent": 35,
             "healingPercent": 150,
             "physicalPercent": 65,
-            "smitePercent": 160
+            "smitePercent": 160,
+            "guardSmiteHealing": true
           },
           "feet": "paladin_boots_mercy",
           "head": "paladin_helmet_mercy",
@@ -94,8 +95,9 @@
           "core": {
             "guardReductionPercent": 25,
             "healingPercent": 50,
-            "physicalPercent": 125,
-            "smitePercent": 50
+            "physicalPercent": 100,
+            "smitePercent": 50,
+            "guardPhysicalBonusPercent": 50
           },
           "feet": "paladin_boots_censure",
           "head": "paladin_helmet_censure",

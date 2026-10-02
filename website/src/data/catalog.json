@@ -4,23 +4,23 @@
     {
       "author": "JarlBrak",
       "category": "classes",
-      "changelog": "Paladin 2.0.0 adds hammer-gated class actions, equipped armor roles, and Guild Token acquisition through the framework Equipment Exchange. Requires framework 1.7.0.",
+      "changelog": "Paladin 2.0.1 makes Guard central to each endgame role: Mercy readies one healing Smite, Verdict protects allies, and Censure earns a one-use vengeance strike by reducing an incoming hit. Censure and Kingsfall charges use the stronger bonus, never multiply. Requires framework 1.8.0.",
       "classification": "gameplay",
-      "compressedSize": 78876970,
+      "compressedSize": 78876996,
       "contentChanges": [
         "Uses a two-sentence flavor description, compact native-style class ability labels, and a Novice Hammer plus Novice Aegis starting kit.",
         "Paladin class retains Guard and Cleansing March, which prevents new Poison and Curse while exploring.",
         "Paladin owns Censure and Smite while an eligible hammer is equipped. Paladin hammers offer only native Strike; native hammers retain their original actions.",
         "Smite deals magic damage and can stun on a perfect cast; Censure Resistance reduction increases its damage.",
-        "Mercy, Verdict and Censure armor sets change Guard, healing and attack tradeoffs when equipped.",
+        "Mercy Guard readies one focused healing Smite. Verdict retains its stronger protection and completed-armament ward. Censure trades passive damage for a one-use +50% physical strike earned through actual Guard mitigation.",
         "Equipment Exchange supplies shared Guild Tokens and the native Back Alley vendor. The vendor shows only gear for the buying character's class and hides backpack and equipped copies."
       ],
       "dependencies": [],
       "description": "Protect allies with Guard and Cleansing March, use Censure and Smite with eligible hammers, and collect six equipment families through ordinary routes and the shared Equipment Exchange.",
-      "expandedSize": 110008302,
+      "expandedSize": 110008386,
       "fileCount": 306,
-      "frameworkRange": ">=1.7.0 <2.0.0",
-      "frameworkVersion": "1.7.0",
+      "frameworkRange": ">=1.8.0 <2.0.0",
+      "frameworkVersion": "1.8.0",
       "gameFingerprints": [
         "94cab5f9be9633f7f85f6f072e0b5b919c605bbecb3414422f8f008d9b2bc1c8"
       ],
@@ -28,24 +28,24 @@
       "modGuid": "com.ftkmf.paladin",
       "name": "Paladin",
       "packageId": "ftkmf.paladin",
-      "packageUrl": "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v2.0.0/paladin-2.0.0-ef7a6ec3b3cb.zip",
+      "packageUrl": "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v2.0.1/paladin-2.0.1-5400e2cd0c6d.zip",
       "platforms": [
         "windows",
         "macos",
         "linux"
       ],
       "requirements": [
-        "Requires FTK Mod Framework 1.7.0 or a compatible later 1.x release. Equipment Exchange is built into the framework; no separate currency mod is needed.",
+        "Requires FTK Mod Framework 1.8.0 or a compatible later 1.x release. Equipment Exchange is built into the framework; no separate currency mod is needed.",
         "Requires a game build with the listed Assembly-CSharp fingerprint.",
         "Generated artwork has separate terms; see the source and release asset ASSET-LICENSE.md."
       ],
       "screenshots": [
-        "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v2.0.0/paladin-censure-banner.png"
+        "https://github.com/jarlbrak/ftk-mod-framework/releases/download/paladin-v2.0.1/paladin-censure-banner.png"
       ],
-      "sha256": "ef7a6ec3b3cbd72f9903ab35300f129b1c87730aa1db91c29e7e33d4e63ff6fe",
+      "sha256": "5400e2cd0c6d0822e2d6ca88bdf7529e026fbba91a7f97adca8909ec7384e464",
       "sourceUrl": "https://github.com/jarlbrak/ftk-mod-framework",
       "supportUrl": "https://github.com/jarlbrak/ftk-mod-framework/issues/138",
-      "version": "2.0.0"
+      "version": "2.0.1"
     },
     {
       "author": "JarlBrak",

@@ -9,18 +9,28 @@ namespace FTKModFramework.Core
         public int SmitePercent { get; private set; }
         public int HealingPercent { get; private set; }
         public int GuardReductionPercent { get; private set; }
+        public bool GuardSmiteHealing { get; private set; }
+        public int GuardPhysicalBonusPercent { get; private set; }
         public GuardianEquipmentBonuses Bonuses { get; private set; }
 
         public GuardianProfile(int physicalPercent, int smitePercent, int healingPercent,
             int guardReductionPercent, GuardianEquipmentBonuses bonuses)
+            : this(physicalPercent, smitePercent, healingPercent, guardReductionPercent, bonuses, false, 0) { }
+
+        public GuardianProfile(int physicalPercent, int smitePercent, int healingPercent,
+            int guardReductionPercent, GuardianEquipmentBonuses bonuses, bool guardSmiteHealing,
+            int guardPhysicalBonusPercent)
         {
             if (physicalPercent < 25 || physicalPercent > 200 || smitePercent < 25 || smitePercent > 200 ||
-                healingPercent < 25 || healingPercent > 200 || guardReductionPercent < 0 || guardReductionPercent > 50)
+                healingPercent < 25 || healingPercent > 200 || guardReductionPercent < 0 || guardReductionPercent > 50 ||
+                guardPhysicalBonusPercent < 0 || guardPhysicalBonusPercent > 50)
                 throw new ArgumentOutOfRangeException("Guardian profile percentages are outside their bounds.");
             PhysicalPercent = physicalPercent;
             SmitePercent = smitePercent;
             HealingPercent = healingPercent;
             GuardReductionPercent = guardReductionPercent;
+            GuardSmiteHealing = guardSmiteHealing;
+            GuardPhysicalBonusPercent = guardPhysicalBonusPercent;
             Bonuses = bonuses ?? new GuardianEquipmentBonuses();
         }
 

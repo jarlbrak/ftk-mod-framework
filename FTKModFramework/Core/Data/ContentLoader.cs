@@ -561,7 +561,8 @@ namespace FTKModFramework.Core.Data
         {
             if (entry == null) throw new ArgumentException("Set profile is required.");
             return new GuardianProfile(entry.PhysicalPercent, entry.SmitePercent, entry.HealingPercent,
-                entry.GuardReductionPercent, ProgressionBonuses(entry.Bonuses));
+                entry.GuardReductionPercent, ProgressionBonuses(entry.Bonuses),
+                entry.GuardSmiteHealing, entry.GuardPhysicalBonusPercent);
         }
 
         private static FTK_itembase ProgressionItem(string id)

@@ -6,14 +6,14 @@ You need an owned Steam copy of the **original For The King (2018)**. The framew
 
 ## 1. Get the launcher
 
-Download **framework 1.7.1**, extract it into a permanent folder, and keep its files together.
+Download **framework 1.8.0**, extract it into a permanent folder, and keep its files together.
 
-- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.7.1/FTKModdedLauncher-macos-universal.zip)
-- [Windows x64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.7.1/FTKModdedLauncher-windows-x64.zip)
-- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.7.1/FTKModdedLauncher-linux-amd64.tar.gz)
-- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.7.1/FTKModdedLauncher-linux-arm64.tar.gz)
+- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-macos-universal.zip)
+- [Windows x64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-windows-x64.zip)
+- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-linux-amd64.tar.gz)
+- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-linux-arm64.tar.gz)
 
-Framework 1.7.1 includes [Tweaks](../tweaks/) and the shared Equipment Exchange used by participating class mods. No separate token or vendor mod is needed.
+Framework 1.8.0 includes [Tweaks](../tweaks/) and the shared Equipment Exchange used by participating class mods. No separate token or vendor mod is needed.
 
 Linux ARM64 provides helper tooling, not a native ARM game port. The same mod archive serves Windows, macOS, and Linux; installation requires a listed game build. See [compatibility](../compatibility/) for build requirements.
 

@@ -1,8 +1,8 @@
 ---
 title: Tweaks
-description: Optional fixes, extra information and conveniences for the base game. Included in framework 1.7.1.
+description: Optional fixes, extra information and conveniences for the base game. Included in framework 1.8.0.
 ---
-Tweaks are included in [framework 1.7.1](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.7.1). Open **Mods > Tweaks** to choose optional fixes, information and conveniences. Read the [known limitations](#known-limitations) for control and gameplay scope.
+Tweaks are included in [framework 1.8.0](https://github.com/jarlbrak/ftk-mod-framework/releases/tag/v1.8.0). Open **Mods > Tweaks** to choose optional fixes, information and conveniences. Read the [known limitations](#known-limitations) for control and gameplay scope.
 
 Tweaks are small, optional changes to the original game that come with the framework itself. They fix defects, show information the game already tracks but never displays, and remove some interface friction. They never make the game easier or harder on purpose. The two fixes that do shift balance say so, and you can turn them off. No mod needs to be installed to use them.
 
