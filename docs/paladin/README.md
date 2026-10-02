@@ -8,3 +8,5 @@ six equipment families, twelve accessories and three legendary artifacts. Its
 original gear art is worn over native character bodies.
 
 Read the [combat design](COMBAT.md), [equipment inventory](EQUIPMENT.md), [artifact rules](ARTIFACTS.md), and [art direction](ART-DIRECTION.md) for the current content. The [validation record](VALIDATION.md) separates native observations from game-free checks and historical evidence. Earlier receipts retain their recorded dates, hashes and scope; they do not automatically approve changed release assets or behavior.
+
+The [2.0.0 release lessons](LESSONS-2.0.0.md) summarize authoring, validation and release findings, with proposed changes for the consolidated pipeline task.
