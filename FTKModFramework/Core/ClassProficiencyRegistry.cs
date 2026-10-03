@@ -85,6 +85,20 @@ namespace FTKModFramework.Core
             return false;
         }
 
+        internal static KeyValuePair<int, int[]>[] GetWeaponGrants(int weaponId)
+        {
+            List<int> classIds = new List<int>(weapons.Keys);
+            classIds.Sort();
+            List<KeyValuePair<int, int[]>> grants = new List<KeyValuePair<int, int[]>>();
+            foreach (int classId in classIds)
+            {
+                List<int> actions;
+                if (weapons[classId].TryGetValue(weaponId, out actions))
+                    grants.Add(new KeyValuePair<int, int[]>(classId, actions.ToArray()));
+            }
+            return grants.ToArray();
+        }
+
         internal static bool Allows(int classId, int weaponId, int action)
         {
             List<int> unconditional;

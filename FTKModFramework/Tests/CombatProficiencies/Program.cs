@@ -213,6 +213,77 @@ internal static class Program
             !ClassWeaponProficiencyEligibility.Allows(isolatedCow, 103),
             "other class cannot use actions on same eligible hammer");
 
+        heroClass.DisplayName = "Paladin";
+        isolatedClass.DisplayName = "Guardian";
+        Content.Proficiencies.Values[103].DisplayName = "Censure";
+        Content.Proficiencies.Values[105].DisplayName = "Censure";
+        smite.DisplayName = "Smite";
+        string[] skillLines = ClassWeaponProficiencyDescription.Lines(300);
+        Check(string.Join("\n", skillLines) == "Paladin Skill: Censure\nPaladin Skill: Smite\nGuardian Skill: Censure\nGuardian Skill: Smite",
+            "localized class skills preserve action registration order and deterministic class order");
+        Check(ClassWeaponProficiencyDescription.Lines(302).Length == 0 &&
+            ClassWeaponProficiencyDescription.Lines(999).Length == 0,
+            "unrelated weapon and unconditional class actions do not add skill rows");
+        var weaponGrants = ClassProficiencyRegistry.GetWeaponGrants(300);
+        weaponGrants[0].Value[0] = 999;
+        Check(ClassProficiencyRegistry.GetWeaponGrants(300)[0].Value[0] == 103,
+            "tooltip grants cannot mutate registry actions");
+        Check(Content.AttachClassWeaponProficiencies(heroClass, new[] { "hammer.one" }, "censure.two"),
+            "different action identities may share localized display name");
+        Check(ClassWeaponProficiencyDescription.Lines(300).Length == 4,
+            "duplicate localized class skill rows are displayed once");
+        isolatedClass.DisplayName = "Paladin";
+        Check(ClassWeaponProficiencyDescription.Lines(300).Length == 2,
+            "identical localized rows across classes deduplicate");
+        isolatedClass.DisplayName = "Guardian";
+        heroClass.DisplayName = " ";
+        Check(ClassWeaponProficiencyDescription.Lines(300).Length == 2,
+            "missing localized class name does not produce a partial row");
+        heroClass.DisplayName = "Paladin";
+        Content.Classes.Values.Remove(14);
+        Check(ClassWeaponProficiencyDescription.Lines(300).Length == 2,
+            "missing registered class row is safely ignored");
+        Content.Classes.Values.Add(14, heroClass);
+        FTK_proficiencyTable oneHandCensure = Content.Proficiencies.Values[103];
+        Content.Proficiencies.Values.Remove(103);
+        Check(ClassWeaponProficiencyDescription.Lines(301).Length == 3,
+            "missing action row preserves other localized class skill rows");
+        Content.Proficiencies.Values.Add(103, oneHandCensure);
+        oneHandCensure.DisplayName = "";
+        Content.Proficiencies.Values[105].DisplayName = "";
+        Check(ClassWeaponProficiencyDescription.Lines(300).Length == 2,
+            "empty action display names do not create unnamed skills");
+        oneHandCensure.DisplayName = "Censure";
+        Content.Proficiencies.Values[105].DisplayName = "Censure";
+
+        uiWeaponDetail weaponDetail = new uiWeaponDetail();
+        weaponDetail.m_WeaponStatDisplay.text = "<native>Strike, Crush</native>\nArmor: +1\n\n";
+        FTK_itembase weaponItem = new FTK_itembase { m_ID = "hammer.one" };
+        ClassWeaponProficiencyUiPatch.Apply(weaponDetail, weaponItem);
+        string expectedWeaponText = "<native>Strike, Crush</native>\nArmor: +1\n" +
+            "<color=skill>Paladin Skill: Censure</color>\n<color=skill>Paladin Skill: Smite</color>\n" +
+            "<color=skill>Guardian Skill: Censure</color>\n<color=skill>Guardian Skill: Smite</color>";
+        Check(weaponDetail.m_WeaponStatDisplay.text == expectedWeaponText,
+            "weapon front preserves native attack and stat text and uses skill color");
+        ClassWeaponProficiencyUiPatch.Apply(weaponDetail, weaponItem);
+        Check(weaponDetail.m_WeaponStatDisplay.text == expectedWeaponText,
+            "repeated tooltip composition does not duplicate skill rows");
+        weaponDetail.m_WeaponStatDisplay.text = "Vanilla front\n\n";
+        ClassWeaponProficiencyUiPatch.Apply(weaponDetail, new FTK_itembase { m_ID = "blade" });
+        Check(weaponDetail.m_WeaponStatDisplay.text == "Vanilla front\n\n",
+            "switching native tooltip to unrelated weapon leaves its front unchanged");
+        ClassWeaponProficiencyUiPatch.Apply(weaponDetail, new FTK_itembase { m_ID = "missing" });
+        ClassWeaponProficiencyUiPatch.Apply(weaponDetail, null);
+        ClassWeaponProficiencyUiPatch.Apply(null, weaponItem);
+        ClassWeaponProficiencyUiPatch.Apply(new uiWeaponDetail { m_WeaponStatDisplay = null }, weaponItem);
+        Check(weaponDetail.m_WeaponStatDisplay.text == "Vanilla front\n\n",
+            "missing weapon identity and UI leave native text unchanged");
+        VisualParams.Instance.m_ColorTints.m_CharacterModTypeColor.Clear();
+        ClassWeaponProficiencyUiPatch.Apply(weaponDetail, weaponItem);
+        Check(weaponDetail.m_WeaponStatDisplay.text == "Vanilla front\n\n",
+            "missing native skill color leaves front unchanged");
+        VisualParams.Instance.m_ColorTints.m_CharacterModTypeColor.Add(ModType.SkillOrImmunity, "skill");
+
         CharacterDummy actor = new CharacterDummy { FID = new FTKPlayerID { m_TurnIndex = 1, m_PhotonID = 8 }, m_CharacterOverworld = new CharacterOverworld() };
         EnemyDummy victim = new EnemyDummy();
         EncounterSession.Instance = new EncounterSession { m_Random = new FTKRandom { OriginalSeed = 42 }, m_EncounterIndex = 3, Enemy = victim };
@@ -302,11 +373,14 @@ internal static class Program
         Action restoreClasses = ClassProficiencyRegistry.SuspendForReload();
         Action restoreCombat = CombatProficiencyRegistry.SuspendForReload();
         Check(ClassProficiencyRegistry.Count == 0 && CombatProficiencyRegistry.Count == 0 &&
-            !ClassProficiencyRegistry.IsWeaponAction(103), "reload detaches all registrations");
+            !ClassProficiencyRegistry.IsWeaponAction(103) &&
+            ClassWeaponProficiencyDescription.Lines(300).Length == 0, "reload detaches all registrations and tooltip rows");
         restoreClasses(); restoreCombat();
         Check(ClassProficiencyRegistry.Get(14)[0] == 102 &&
             ClassProficiencyRegistry.Allows(14, 300, 103) && CombatProficiencyRegistry.Count == 2,
             "rollback restores unconditional and conditional registrations");
+        Check(ClassWeaponProficiencyDescription.Lines(300).Length == 4,
+            "rollback restores localized tooltip rows");
         Console.WriteLine("PASS CombatProficiencies: " + checks + " checks");
     }
 }

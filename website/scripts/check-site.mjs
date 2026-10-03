@@ -52,10 +52,27 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
    if(name==='Tin Oath Token'){assert.doesNotMatch(await item.innerText(),/Smite|Censure|set bonus/i);assert.match(await item.innerText(),/Vitality/);}
    if(name==='Mercy Helm'){assert.match(await item.innerText(),/Guard heals 6%/);assert.match(await item.innerText(),/one focused class Smite heal/);assert.match(await item.innerText(),/15% instead of 12%/);}
    if(name==='Censure Helm'){assert.match(await item.innerText(),/100% physical damage/);assert.match(await item.innerText(),/Guard-reduced hit readies \+50%/);assert.doesNotMatch(await item.innerText(),/125% physical damage/);}
+   const slot=await item.getAttribute('data-slot');
+   if(mod==='paladin'&&slot.startsWith('hammer_')){
+    const rows=await item.locator('.forge-properties > p').allTextContents();
+    assert.match(rows[0],/^\d+ Physical Damage$/);
+    assert.equal(rows[1],'Strike');
+    assert.deepEqual(rows.slice(-2),['Paladin Skill: Censure','Paladin Skill: Smite']);
+    assert.doesNotMatch(await item.innerText(),/eligible hammer|Other classes retain|damage per level|% weapon damage|Completion:/);
+    assert.equal(await item.locator('.forge-rolls').getAttribute('aria-label'),`${slot==='hammer_1h'?4:5} Vitality checks`);
+    if(name.startsWith('Mercy ')){
+     assert.match(await item.innerText(),/Mercy \(Paladin\) 0\/3 armor/);
+     assert.match(await item.innerText(),/Next: 2 armor\s+healing \+12%/);
+     assert.match(await item.innerText(),/Guard bond: next focused Smite heals ally 15% max HP/);
+     assert.doesNotMatch(await item.innerText(),/Guard heals 6%|15% instead of 12%/);
+    }
+    if(name==='The Last Vigil')assert.match(await item.innerText(),/Paladin only:\s+First reduced hit per Guard:\s+restore 1 Focus to guarded ally\./);
+    if(name==='Kingsfall')assert.match(await item.innerText(),/Paladin only:\s+Guarded hit readies Reckoning:\s+\+50% next single-target hammer hit\./);
+   }
    assert(await item.locator('.forge-properties').innerText());
   }
   await page.getByRole('searchbox',{name:'Search equipment'}).fill('no-such-item');assert.equal(await page.locator('.forge-card:visible').count(),0);
-  await page.getByRole('searchbox',{name:'Search equipment'}).fill(mod==='paladin'?'eligible hammer':'borrowed fortune');
+  await page.getByRole('searchbox',{name:'Search equipment'}).fill(mod==='paladin'?'Paladin Skill: Censure':'borrowed fortune');
   assert.equal(await page.locator('.forge-card:visible').count(),mod==='paladin'?14:1);
   for(const card of await page.locator('.forge-card:visible').all())assert(await card.evaluate(c=>c.getBoundingClientRect().width<=310.5),'Tooltip width exceeds 310px');
   await page.getByRole('searchbox',{name:'Search equipment'}).fill('');

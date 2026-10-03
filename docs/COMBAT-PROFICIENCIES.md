@@ -52,6 +52,14 @@ restricted unless another explicit capability imposes that restriction.
 
 Use exact weapon IDs rather than broad native weapon categories: native `blunt` also includes axes, clubs and maces. Groups select appropriate variants for different weapons. Each group validates its complete weapon/action list before registration. Grants deduplicate across eligible sources; registration snapshots participate in reload rollback. Eligibility must be checked both during native button creation and before committing a selected action. The native rolling path continues to supply slots, Focus, weapon skill, targeting and damage rules. A class grant does not by itself change a spell to Intelligence scaling.
 
+Framework 1.8.1 lists each weapon-gated grant as a separate
+`<Class> Skill: <Action>` row in the native skill color, after the weapon's own
+actions and modifiers. Eligible Paladin hammers show `Paladin Skill: Censure`
+and `Paladin Skill: Smite`. These rows describe class eligibility regardless of
+the inspecting character; they do not grant those actions to other classes.
+The public weapon cards mirror this wording and the unequipped set preview.
+Browser fonts and original artwork remain substitutes for the native UI.
+
 A weapon declaring `"replaceProficiencies": true, "proficiencies": []` deliberately clears inherited special actions while retaining its regular attack when `m_NoRegularAttack` is false. Replacement requires an explicit array; omitted or null arrays are errors when replacement is requested. Class and item action grants still require nonempty lists.
 
 The unreleased Paladin candidate puts Censure and Smite in these class groups, with one-handed and two-handed Censure variants. Paladin hammers have only regular Strike, accessories grant stats only, and Mercy strengthens an already available Smite. Guard and Cleansing March remain class capabilities independent of the hammer requirement. Native hammers keep their own weapon actions. See [Guardian classes](GUARDIAN-AND-EQUIPMENT.md) for their scope.
