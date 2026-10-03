@@ -29,7 +29,7 @@ framework. During an authorized release, pass a reviewed local catalog path, for
 `node scripts/sync-published.mjs ../marketplace/catalog.json`, after its release assets are public.
 This uses the same public-download hash checks and allows the catalog and site to merge together.
 Review authored guides when mechanics change; regenerated cards alone cannot update
-explanations. The published projections are Paladin 2.0.1 and Thief 1.0.0, generated from their immutable public archives. Keep authored Paladin guide copy aligned with the 2.0.1 projection and framework 1.8.0. Thief content stays unchanged.
+explanations. The published projections are Paladin 2.0.1 and Thief 1.0.0, generated from their immutable public archives. Keep authored Paladin guide copy aligned with the 2.0.1 projection and framework 1.8.1. Thief content stays unchanged.
 
 `src/data/catalog.ts` applies author-approved website wording to the immutable catalog snapshot.
 Thief 1.0.0 is labeled as a release; its compatibility limitations and package identity are retained.
@@ -85,6 +85,16 @@ Cards display artwork, stats, and compact ability lines directly as flat HTML co
 The test suite checks all 96 published HTML item cards at desktop and mobile sizes, including
 images, inline ability text, search, tier and slot filtering. The cards are original CSS inspired by native tooltips,
 not extracted game UI assets.
+
+Paladin hammer fronts follow native `uiWeaponDetail.ShowWeapon` ordering: repeated Vitality
+roll symbols above the name and rarity, Physical Damage, Strike, nonzero modifiers, and separate class-skill rows.
+They omit wiki-only damage-growth and eligibility explanations. Guardian perk text follows
+`GuardianEquipmentDescription`; family text follows `GuardianSetDescription` with no wearer
+(0/3 armor and no armament). Gameplay explanations remain in the guide. Framework 1.8.1 supplies the matching Paladin Skill labels in game.
+Published package stats and archive projections are unchanged. Browser fonts, original heart
+symbols, and studio artwork are substitutes, so these cards are not pixel-exact native captures.
+Paladin artifact weapons use the native red theme sampled from live captures; other mods retain
+their existing themes. Roll chips are original CSS hex outlines, not extracted game sprites.
 
 `node scripts/prepare-items.mjs --package Paladin` downloads the catalog's hash-verified Paladin
 archive and prepares only its item media; other package media and provenance are preserved. A

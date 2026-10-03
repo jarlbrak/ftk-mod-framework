@@ -15,7 +15,7 @@ namespace GridEditor
     public class FTK_itemsDB : Rows<FTK_items> { public FTK_items GetEntry(FTK_itembase.ID id) { return GetEntryByInt((int)id); } }
     public class FTK_weaponStats2 { public enum DamageType { none, physical, magic } public string m_ID; public GameObject m_Prefab; }
     public class FTK_weaponStats2DB : Rows<FTK_weaponStats2> { }
-    public class FTK_playerGameStart { public string m_ID; }
+    public class FTK_playerGameStart { public string m_ID, DisplayName; public string GetDisplayName() { return DisplayName ?? m_ID; } }
     public class FTK_playerGameStartDB : Rows<FTK_playerGameStart> { }
     public class FTK_proficiencyTableDB : Rows<FTK_proficiencyTable>
     { public static FTK_proficiencyTable Get(FTK_proficiencyTable.ID id) { return FTKModFramework.Core.Content.Proficiencies.GetEntryByInt((int)id); } }
@@ -30,6 +30,7 @@ namespace GridEditor
     {
         public enum ID { None = -1 }
         public string m_ID;
+        public string DisplayName;
         public ProficiencyBase m_ProficiencyPrefab;
         public float m_CustomValue, m_Quickness = .5f, m_DmgMultiplier = .75f, m_PerSlotSkillRoll, m_ChanceToAffect = 1;
         public int m_RepeatCount = 1, m_SlotOverride = 3, m_DamagePerAttack, m_BoatDamage;
@@ -37,7 +38,7 @@ namespace GridEditor
         public CharacterDummy.TargetType m_Target;
         public FTK_weaponStats2.DamageType m_DmgTypeOverride;
         public int m_WpnTypeOverride;
-        public string GetLocalizedDisplayName() { return m_ID; }
+        public string GetLocalizedDisplayName() { return DisplayName ?? m_ID; }
     }
 }
 public class ProficiencyBase
@@ -98,6 +99,28 @@ public class EncounterSession
 }
 public class uiBattleButton { public enum BattleButtonType { proficiency, attack } public BattleButtonType m_ButtonType; }
 public class TextStub { public string text; }
+public class uiWeaponDetail { public TextStub m_WeaponStatDisplay = new TextStub(); }
+public enum ModType { SkillOrImmunity }
+public class ColorTintsStub
+{
+    public Dictionary<ModType, string> m_CharacterModTypeColor =
+        new Dictionary<ModType, string> { { ModType.SkillOrImmunity, "skill" } };
+}
+public class VisualParams
+{
+    public static VisualParams Instance = new VisualParams();
+    public ColorTintsStub m_ColorTints = new ColorTintsStub();
+}
+public static class FTKUI
+{
+    public static string GetKeyInfoRichText(string color, bool bold, string text)
+    { return "<color=" + color + ">" + text + "</color>"; }
+}
+namespace HarmonyLib
+{
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class HarmonyPatch : Attribute { public HarmonyPatch(Type type, string method) { } }
+}
 public class InfoPanelStub { public TextStub m_DamageValue = new TextStub(); }
 public class uiBattleStanceButtons
 {

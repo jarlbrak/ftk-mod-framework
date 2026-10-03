@@ -6,14 +6,14 @@ You need an owned Steam copy of the **original For The King (2018)**. The framew
 
 ## 1. Get the launcher
 
-Download **framework 1.8.0**, extract it into a permanent folder, and keep its files together.
+Download **framework 1.8.1**, extract it into a permanent folder, and keep its files together.
 
-- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-macos-universal.zip)
-- [Windows x64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-windows-x64.zip)
-- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-linux-amd64.tar.gz)
-- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.0/FTKModdedLauncher-linux-arm64.tar.gz)
+- [macOS launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.1/FTKModdedLauncher-macos-universal.zip)
+- [Windows x64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.1/FTKModdedLauncher-windows-x64.zip)
+- [Linux AMD64 launcher](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.1/FTKModdedLauncher-linux-amd64.tar.gz)
+- [Linux ARM64 bundle (helper tooling)](https://github.com/jarlbrak/ftk-mod-framework/releases/download/v1.8.1/FTKModdedLauncher-linux-arm64.tar.gz)
 
-Framework 1.8.0 includes [Tweaks](../tweaks/) and the shared Equipment Exchange used by participating class mods. No separate token or vendor mod is needed.
+Framework 1.8.1 includes [Tweaks](../tweaks/) and the shared Equipment Exchange used by participating class mods. No separate token or vendor mod is needed.
 
 Linux ARM64 provides helper tooling, not a native ARM game port. The same mod archive serves Windows, macOS, and Linux; installation requires a listed game build. See [compatibility](../compatibility/) for build requirements.
 
@@ -29,7 +29,7 @@ Framework 1.4.0 includes the **Skyharbor** menu scene: a fortress airship dock w
 
 At the title screen, open **Mods → Discover**. Select a listing, read its requirements, review the proposed changes, and confirm installation. Follow the menu's activation guidance. Normally, changes take effect on the **next game launch**. Restart before starting your adventure.
 
-Paladin 2.0.0 needs framework 1.7.0 or a compatible later 1.x release. Thief 1.0.0 adds a class and equipment. Possum 1.0.0 changes appearance. Lore Store Unlocked 1.0.1 needs framework 1.3.0 and unlocks the Lore Store while installed. All four install separately from the framework.
+Paladin 2.0.1 needs framework 1.8.0 or a compatible later 1.x release. Thief 1.0.0 adds a class and equipment. Possum 1.0.0 changes appearance. Lore Store Unlocked 1.0.1 needs framework 1.3.0 and unlocks the Lore Store while installed. All four install separately from the framework.
 
 ## Keep your adventure consistent
 
