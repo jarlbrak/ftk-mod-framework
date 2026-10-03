@@ -93,8 +93,9 @@ They omit wiki-only damage-growth and eligibility explanations. Guardian perk te
 (0/3 armor and no armament). Gameplay explanations remain in the guide. Framework 1.8.1 supplies the matching Paladin Skill labels in game.
 Published package stats and archive projections are unchanged. Browser fonts, original heart
 symbols, and studio artwork are substitutes, so these cards are not pixel-exact native captures.
-Paladin artifact weapons use the native red theme sampled from live captures; other mods retain
-their existing themes. Roll chips are original CSS hex outlines, not extracted game sprites.
+Artifact cards share the native red rarity theme sampled from live weapon captures. Native
+`uiItemDetail.Show` selects the same rarity tint for weapons and shields. Roll chips are
+original CSS hex outlines, not extracted game sprites.
 
 `node scripts/prepare-items.mjs --package Paladin` downloads the catalog's hash-verified Paladin
 archive and prepares only its item media; other package media and provenance are preserved. A
