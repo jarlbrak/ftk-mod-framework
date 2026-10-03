@@ -52,6 +52,10 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
    if(name==='Tin Oath Token'){assert.doesNotMatch(await item.innerText(),/Smite|Censure|set bonus/i);assert.match(await item.innerText(),/Vitality/);}
    if(name==='Mercy Helm'){assert.match(await item.innerText(),/Guard heals 6%/);assert.match(await item.innerText(),/one focused class Smite heal/);assert.match(await item.innerText(),/15% instead of 12%/);}
    if(name==='Censure Helm'){assert.match(await item.innerText(),/100% physical damage/);assert.match(await item.innerText(),/Guard-reduced hit readies \+50%/);assert.doesNotMatch(await item.innerText(),/125% physical damage/);}
+   if(await item.evaluate(card=>card.classList.contains('artifact'))){
+    const colors=await item.evaluate(card=>({rim:getComputedStyle(card).borderTopColor,bar:getComputedStyle(card.querySelector('.forge-identity')).backgroundColor,base:getComputedStyle(card).backgroundColor,rarity:getComputedStyle(card.querySelector('.forge-rarity')).color}));
+    assert.deepEqual(colors,{rim:'rgb(159, 55, 47)',bar:'rgb(80, 23, 23)',base:'rgb(32, 5, 5)',rarity:'rgb(255, 96, 96)'},'Artifact rarity theme '+name);
+   }
    const slot=await item.getAttribute('data-slot');
    if(mod==='paladin'&&slot.startsWith('hammer_')){
     const rows=await item.locator('.forge-properties > p').allTextContents();
