@@ -1,7 +1,8 @@
 # Class actions and conditional proficiency damage
 
 These authoring capabilities are introduced in framework 1.2.0. Content packages
-using them must declare a minimum framework version of 1.2.0.
+using them must declare a minimum framework version of 1.2.0. Weapon-gated class
+actions were added in framework 1.7.0 and require that minimum instead.
 
 `Content.AttachClassProficiencies(classRow, proficiencyIds)` grants ordinary combat
 proficiencies to an exact registered custom class. JSON class entries use the
@@ -37,9 +38,9 @@ action names under "Actions while equipped". The rolling and damage rules remain
 those of the proficiency and currently equipped weapon; grants are not class
 restricted unless another explicit capability imposes that restriction.
 
-## Weapon-gated class actions (unreleased)
+## Weapon-gated class actions (framework 1.7.0)
 
-`Content.AttachClassWeaponProficiencies(classRow, weaponIds, proficiencyIds)` grants registered custom actions to an exact custom class only while one of the declared weapon IDs is equipped. This new capability is an unreleased candidate; it is not part of the published 1.2.0 API. JSON class entries use:
+`Content.AttachClassWeaponProficiencies(classRow, weaponIds, proficiencyIds)` grants registered custom actions to an exact custom class only while one of the declared weapon IDs is equipped. Framework 1.7.0 first shipped this capability; content packages using it must declare a minimum framework version of 1.7.0. JSON class entries use:
 
 ```json
 "weaponProficiencies": [
@@ -62,7 +63,7 @@ Browser fonts and original artwork remain substitutes for the native UI.
 
 A weapon declaring `"replaceProficiencies": true, "proficiencies": []` deliberately clears inherited special actions while retaining its regular attack when `m_NoRegularAttack` is false. Replacement requires an explicit array; omitted or null arrays are errors when replacement is requested. Class and item action grants still require nonempty lists.
 
-The unreleased Paladin candidate puts Censure and Smite in these class groups, with one-handed and two-handed Censure variants. Paladin hammers have only regular Strike, accessories grant stats only, and Mercy strengthens an already available Smite. Guard and Cleansing March remain class capabilities independent of the hammer requirement. Native hammers keep their own weapon actions. See [Guardian classes](GUARDIAN-AND-EQUIPMENT.md) for their scope.
+Paladin 2.0.0 and later put Censure and Smite in these class groups, with one-handed and two-handed Censure variants. Paladin hammers have only regular Strike, accessories grant stats only, and Mercy strengthens an already available Smite. Guard and Cleansing March remain class capabilities independent of the hammer requirement. Native hammers keep their own weapon actions. See [Guardian classes](GUARDIAN-AND-EQUIPMENT.md) for their scope.
 
 ## Random defense debuff outcomes
 
