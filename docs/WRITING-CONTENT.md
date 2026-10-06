@@ -76,13 +76,15 @@ The framework writes no Lore Store purchase, so removing the mod restores the pl
 Read `BepInEx/LogOutput.log` for registration summaries and entry-specific errors. Verify the class or item in its native screen, acquire it through an ordinary route, test its action or modifier, then save and resume with the same mod set. A package hash proves bytes, not visual fit or gameplay behavior. The [marketplace guide](MARKETPLACE.md) lists publication checks.
 
 By default, prepared marketplace changes apply on the next launch. The opt-in [title-screen activation mode](HOT-RELOAD.md) can apply managed data-package selections in the same process on the audited macOS build, before entering an adventure. Manual content and unsupported plugin forms continue to use next-launch activation. Removing a mod used by a save can make that save unloadable until the mod is restored; the framework then refuses the resume with a message rather than loading it (see [save compatibility](MARKETPLACE.md#save-compatibility)). Renaming or removing a content ID has the same effect on saves that use it. Co-op clients need the same enabled content and assets; matching IDs alone do not prove multiplayer behavior.
-# Unreleased shared equipment progression
 
-The working candidate supports a universal physical currency through
+## Shared equipment progression (framework 1.7.0)
+
+Framework 1.7.0 first shipped a universal physical currency through
 `Content.SetEnemyDropRule(registeredItem, rule)` and
-`Content.RegisterTownExchange(registeredToken, offers)`. This API is not yet
-published. Separate class packages can append distinct offers to the same
-registered currency. Duplicate offers and conflicting currencies are rejected.
+`Content.RegisterTownExchange(offers)`. Content packages using them must
+declare a minimum framework version of 1.7.0. Separate class packages can
+append distinct offers to the same framework Guild Token. Duplicate offers and
+conflicting currencies are rejected.
 
 An item may declare `enemyDropRule` with integer `minimumDisplayedLevel`,
 `ordinaryChancePercent`, `bossChancePercent`, `guaranteedByOpportunity` and
@@ -91,17 +93,18 @@ the master for admitted native drops, with campaign-persisted miss counts and
 stable ordering. Chance, campaign exposure and live persistence are separate
 verification obligations.
 
-A class can declare `townExchange: { "token": "equipment_token",
-"offers": [...] }`. Each offer specifies `item`, `name`, `family` and native
-inventory `slot`. The declaring class supplies the registered owner identity.
+A class can declare `townExchange: { "offers": [...] }`; a gear-only mod can
+declare top-level `townExchangeCatalogs`. Each offer specifies `item`, `name`,
+`family` and native inventory `slot`. The declaring class supplies the registered owner identity.
 C# authors pass that registered class ID to `TownExchangeOffer`; unscoped offers
 are rejected. Stock includes only offers for the current buyer's class and hides
 items in their backpack or any equipped slot. Purchase confirmation checks
-ownership and class again before spending a token. The universal Equipment
-Exchange source package supplies
-`equipment_token`; Paladin contributes the first catalog. The dependency must
-be included in any future release descriptor. The currency is neither class-bound
-nor a specialization selector.
+ownership and class again before spending a token. The framework supplies the
+token and Back Alley vendor; Paladin 2.0.0 contributed the first catalog. No
+separate currency package is needed. The currency is neither class-bound nor a
+specialization selector. See
+[Framework Equipment Exchange](GUARDIAN-AND-EQUIPMENT.md#framework-equipment-exchange-framework-170)
+for catalog and legacy-token details.
 
 Registered catalog items become exclusive to the exchange prospectively;
 ordinary shop/drop candidates and saved merchant stock are filtered, while

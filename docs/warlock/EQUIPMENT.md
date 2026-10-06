@@ -236,9 +236,9 @@ All rows declare no DLC requirement, no Lore or quest gate, no class restriction
 
 The Warlock contributes a second catalog to the shared token service that Paladin introduced ([Combat proficiencies](../COMBAT-PROFICIENCIES.md), [Paladin equipment](../paladin/EQUIPMENT.md)).
 
-- The class entry declares `townExchange: { "token": "equipment_token", "offers": [...] }` with twelve offers. Each offer names the item, display name, family (`Cindercall Regalia`, `Gloamhunt Raiment`, or `Hollowward Vestments`), and native slot (helmet, armor, boots, trinket).
+- The class entry declares `townExchange: { "offers": [...] }` with twelve offers. Each offer names the item, display name, family (`Cindercall Regalia`, `Gloamhunt Raiment`, or `Hollowward Vestments`), and native slot (helmet, armor, boots, trinket).
 - One token per piece; a complete demon costs four tokens. Stock shows only the buyer's class offers and hides pieces already owned.
-- The Warlock declares **no** `enemyDropRule`. Token supply belongs to the Equipment Exchange package (Paladin's published rule: displayed combat level at least 8, 10% ordinary, 50% named boss, guaranteed by the sixth eligible opportunity). Warlock phase 3 must declare that package as a dependency.
+- The Warlock declares **no** `enemyDropRule`. Token supply belongs to the framework's built-in Guild Token rule (displayed combat level at least 8, 10% ordinary, 50% named boss, guaranteed by the sixth eligible opportunity). No separate exchange package dependency is needed.
 - Exchange purchases are solo-only until network transactions are verified. Co-op stays unverified.
 - Rationale: a demon needs four specific pieces. As random rare drops among twelve candidates, a complete set would be unreliable; the exchange makes the set a deliberate goal, while the final tomes stay on ordinary routes.
 
@@ -270,7 +270,7 @@ Paper design only; no website change now. Each phase release must add item cards
 2. **Action button capacity.** Band 4 and final Hexbooks show six buttons (Umbral Bolt plus five actions) and band 4 Grimoires five. Confirm the native combat action bar fits them without overlap. Fallback: drop Hollow Fright from band 4 and final Hexbooks.
 3. **Vitality to maximum HP.** The native formula linking VIT points to max HP was not decoded, so the HP value of apparel Vitality is unquantified.
 4. **Intelligence modifiers.** The schema has no Intelligence field. The design does not need one; record it so nobody adds INT to these rows by editing a native modifier in place.
-5. **Exchange API state.** [Writing content](../WRITING-CONTENT.md) still labels `townExchange` and `enemyDropRule` unreleased while published Paladin 2.0.1 uses the exchange. Confirm the release state and minimum framework version before phase 3.
+5. **Exchange API state.** Resolved: framework 1.7.0 first shipped `townExchange`, `townExchangeCatalogs`, and `enemyDropRule` (absent at v1.6.2, present at v1.7.0), as [Writing content](../WRITING-CONTENT.md#shared-equipment-progression-framework-170) now states. Phase 3 needs a minimum framework version of at least 1.7.0.
 6. **Rot T2 and Blight T2 on final Hexbooks.** These extend the Combat band-to-tier mapping. Confirm the package validator (see [Validation](VALIDATION.md)) accepts declared per-tome tiers rather than deriving tier from band alone.
 7. **Curse tier by band.** Combat lists curse values by tier without a band mapping; this document maps them like burn. Confirm in Combat or revise.
 8. **Lore exclusions** may shrink the tailored-reward counts above; a live check should confirm the level 5 pool (8 rows) stays non-empty for a fresh profile.
