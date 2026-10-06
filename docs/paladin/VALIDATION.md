@@ -1,8 +1,8 @@
 # Paladin validation and historical acceptance
 
-## Unreleased hammer-gated class candidate
+## Published hammer-gated class design
 
-The current source candidate makes Censure and Smite baseline Paladin actions requiring an eligible hammer. Every Paladin hammer has only native Strike; accessories and Mercy armor no longer grant spell access. Earlier receipts below retain their original package scope and do not prove this ownership change. Current rules are in [Combat](COMBAT.md) and [Equipment](EQUIPMENT.md). Smite now clones native Stun with damaging magic explicitly enabled and a 25% perfect-only chance. Bounded private R17/R18 checks established native equip gating, class combat buttons, one Smite execution, save/resume and corrected hover text. Later bounded damage and status observations are described under [Unreleased Smite damage and stun](#unreleased-smite-damage-and-stun); endgame balance remains open.
+Paladin 2.0.0, published with framework 1.7.0 and retained in Paladin 2.0.1 on framework 1.8.0, makes Censure and Smite baseline Paladin actions requiring an eligible hammer. Every Paladin hammer has only native Strike; accessories and Mercy armor no longer grant spell access. Earlier receipts below retain their original package scope and do not prove this ownership change. Current rules are in [Combat](COMBAT.md) and [Equipment](EQUIPMENT.md); release evidence is in the [2.0.0](RELEASE-2.0.0-VALIDATION.md) and [2.0.1](RELEASE-2.0.1-VALIDATION.md) validation records. Smite now clones native Stun with damaging magic explicitly enabled and a 25% perfect-only chance. Bounded private pre-release R17/R18 checks established native equip gating, class combat buttons, one Smite execution, save/resume and corrected hover text. Later bounded damage and status observations are described under [Pre-release Smite damage and stun](#pre-release-smite-damage-and-stun); endgame balance remains open.
 
 Required new checks cover Paladin with eligible one-hand, two-hand and native hammers; Paladin with no hammer or a non-hammer; other classes with the same custom hammers; actual combat buttons and effects; stale selection after a weapon swap; save/resume and no duplicate grants. Guard remains equipment-independent. Native paired Hammers and multiplayer need explicit coverage rather than inference from the broad `blunt` type.
 
@@ -348,7 +348,7 @@ armor remains attached without obvious chest intersections. Raised weapon tips
 are not always framed; received-hit, death, all-race motion and final art review
 remain separate gates.
 
-## Unreleased Smite damage and stun
+## Pre-release Smite damage and stun
 
 The current corrected Smite source explicitly sets `m_IgnoresArmor=false`. The bounded private R26 combat review pins that source and native receipts from controlled single-enemy encounters. Native enemy rows, dice, defenses and combat resolution remained in use; raised Paladin HP extended the diagnostic. These are mechanics observations, not campaign balance or release approval. R26 has ended; the protected original isolated campaign was restored byte for byte after native exit without saving.
 
