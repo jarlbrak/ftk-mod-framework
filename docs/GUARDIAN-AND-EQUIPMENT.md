@@ -316,7 +316,7 @@ The candidate Paladin values and live gates are documented in
 [Paladin equipment](paladin/EQUIPMENT.md). Successful registration and pure
 evaluation tests do not establish damage, UI, lifecycle or multiplayer approval.
 
-## Framework Equipment Exchange (1.7.0 candidate)
+## Framework Equipment Exchange (framework 1.7.0)
 
 The framework supplies the universal Guild Token and native Back Alley vendor. Supporting enabled mods contribute offers; without a valid catalog, the vendor and token reward rule remain inactive. The token row remains registered so existing inventory references survive. Adding catalogs does not multiply the shared drop rule or campaign miss counter. Class filtering, owned-item hiding and confirmation-time duplicate checks apply to every catalog. Content changes require a restart when exchange progression is active.
 
@@ -340,4 +340,4 @@ For a class entry, omit `townExchange.token` and declare the existing `offers` l
 
 The manifest in this example must declare `modGuid` as `com.example.gear`. Use the native class string ID for vanilla classes, or `modGuid:id` for a custom class. Qualified item references identify the contributing item without depending on globally ambiguous short names. Existing class-entry offer IDs can remain local to their owning mod. C# authors register their offers with `Content.RegisterTownExchange(offers)` after registering the class and items. There is no separate currency package or player enable switch for the framework service.
 
-The reserved token identity remains `com.ftkmf.equipment-exchange:FTK_itemsDB/equipment_token` for legacy saves. A legacy Exchange declaration is recognized without registering another token or drop rule. This candidate's single-player behavior and migration require final native verification; the existing online purchase restriction remains in force.
+The reserved token identity remains `com.ftkmf.equipment-exchange:FTK_itemsDB/equipment_token` for legacy saves. A legacy Exchange declaration is recognized without registering another token or drop rule. Single-player behavior and legacy-save migration still require final native verification; the existing online purchase restriction remains in force.
