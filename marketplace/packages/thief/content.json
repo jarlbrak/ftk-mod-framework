@@ -53,7 +53,118 @@
         }
       },
       "opportunist": true,
-      "icon": "assets/thief-slip-away-icon.png"
+      "townExchange": {
+        "offers": [
+          {
+            "item": "thief_twins_locksmith",
+            "name": "Locksmith's Picks",
+            "family": "Locksmith",
+            "slot": "RightHand"
+          },
+          {
+            "item": "thief_bow_locksmith",
+            "name": "Latchlock",
+            "family": "Locksmith",
+            "slot": "RightHand"
+          },
+          {
+            "item": "thief_coat_locksmith",
+            "name": "Locksmith's Coat",
+            "family": "Locksmith",
+            "slot": "Body"
+          },
+          {
+            "item": "thief_hood_locksmith",
+            "name": "Locksmith's Bandana",
+            "family": "Locksmith",
+            "slot": "Head"
+          },
+          {
+            "item": "thief_boots_locksmith",
+            "name": "Locksmith's Steps",
+            "family": "Locksmith",
+            "slot": "Foot"
+          },
+          {
+            "item": "thief_charm_locksmith",
+            "name": "Master Keyring",
+            "family": "Locksmith",
+            "slot": "Trinket"
+          },
+          {
+            "item": "thief_twins_nightblade",
+            "name": "Nightglass Twins",
+            "family": "Nightblade",
+            "slot": "RightHand"
+          },
+          {
+            "item": "thief_bow_nightblade",
+            "name": "Blackwake",
+            "family": "Nightblade",
+            "slot": "RightHand"
+          },
+          {
+            "item": "thief_coat_nightblade",
+            "name": "Nightblade Jack",
+            "family": "Nightblade",
+            "slot": "Body"
+          },
+          {
+            "item": "thief_hood_nightblade",
+            "name": "Nightblade Bandana",
+            "family": "Nightblade",
+            "slot": "Head"
+          },
+          {
+            "item": "thief_boots_nightblade",
+            "name": "Nightblade Steps",
+            "family": "Nightblade",
+            "slot": "Foot"
+          },
+          {
+            "item": "thief_charm_nightblade",
+            "name": "Snuffed Wick",
+            "family": "Nightblade",
+            "slot": "Trinket"
+          },
+          {
+            "item": "thief_twins_wayfarer",
+            "name": "Trailbreakers",
+            "family": "Wayfarer",
+            "slot": "RightHand"
+          },
+          {
+            "item": "thief_bow_wayfarer",
+            "name": "Farstep Flintlock",
+            "family": "Wayfarer",
+            "slot": "RightHand"
+          },
+          {
+            "item": "thief_coat_wayfarer",
+            "name": "Wayfarer's Coat",
+            "family": "Wayfarer",
+            "slot": "Body"
+          },
+          {
+            "item": "thief_hood_wayfarer",
+            "name": "Wayfarer's Bandana",
+            "family": "Wayfarer",
+            "slot": "Head"
+          },
+          {
+            "item": "thief_boots_wayfarer",
+            "name": "Wayfarer's Treads",
+            "family": "Wayfarer",
+            "slot": "Foot"
+          },
+          {
+            "item": "thief_charm_wayfarer",
+            "name": "Trail Compass",
+            "family": "Wayfarer",
+            "slot": "Trinket"
+          }
+        ]
+      }
     },
     {
       "kind": "weapon",
@@ -84,37 +195,36 @@
         {
           "path": ".",
           "model": "assets/thief-street-twins.glb",
-          "texture": "assets/thief-street-palette.png"
+          "texture": "assets/thief-street-twins-advanced-shaded.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-street-twins-fragment-1.glb",
-          "texture": "assets/thief-street-palette.png"
+          "texture": "assets/thief-street-twins-advanced-shaded.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-street-twins-fragment-2.glb",
-          "texture": "assets/thief-street-palette.png"
+          "texture": "assets/thief-street-twins-advanced-shaded.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-street-twins.glb",
-          "texture": "assets/thief-street-palette.png"
+          "texture": "assets/thief-street-twins-advanced-shaded.png"
         }
       ],
-      "icon": "assets/thief-street-twins-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-street-twins-display.glb",
-          "texture": "assets/thief-street-palette.png"
+          "texture": "assets/thief-street-twins-advanced-shaded.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-street-twins-display-offhand.glb",
-          "texture": "assets/thief-street-palette.png"
+          "texture": "assets/thief-street-twins-advanced-shaded.png"
         }
       ],
       "replaceProficiencies": true,
@@ -125,14 +235,18 @@
     {
       "kind": "weapon",
       "id": "thief_bow_street",
-      "template": "bowShort",
-      "displayName": "Rooftop Bow",
-      "precisionWeapon": "bow",
+      "template": "gunTreasureHunter",
+      "displayName": "Rooftop Flintlock",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 10,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 0,
         "maxlevel": 1,
@@ -150,40 +264,20 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-street-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-street-string.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-street-fragment-1.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-street-fragment-2.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "model": "assets/thief-pistol-street.glb",
+          "texture": "assets/thief-pistol-street-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-street-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-street-display-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-street-display-string.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-street.glb",
+          "texture": "assets/thief-pistol-street-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_draw_out"
       ]
     },
@@ -214,7 +308,8 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/thief-coat-street-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-coat-street-advanced-atlas.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -225,13 +320,13 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/thief-coat-street-female.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-street-advanced-atlas.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/thief-coat-street-male.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-street-advanced-atlas.png"
           }
         ]
       }
@@ -240,7 +335,7 @@
       "kind": "item",
       "id": "thief_hood_street",
       "template": "helmetHeavy1",
-      "displayName": "Street Neckerchief",
+      "displayName": "Street Bandana",
       "fields": {
         "minlevel": 0,
         "maxlevel": 1,
@@ -264,14 +359,579 @@
         {
           "path": "helmKettle",
           "model": "assets/thief-hood-street-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-street-diffuse.png",
+          "matte": true
         }
       ],
       "itemModels": [
         {
           "path": ".",
           "model": "assets/thief-hood-street.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-street-diffuse.png",
+          "matte": true
+        }
+      ],
+      "helmetHairVisibility": {
+        "top": true,
+        "bottom": true
+      },
+      "headProfiles": [
+        {
+          "nativeSkinset": "treasureHunter_Female",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-hood-street.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Male",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-street-human-male.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_TreasureHunterM",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Undead",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-street-undead.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Cat",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-street-cat.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Demon",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-street-demon.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerDevil",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "clipStrictHead"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Fish",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-street-fish.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerFIsh",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.18
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              },
+              {
+                "normal": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "distance": 0.5020458146424487
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "hideRenderer"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Goblin",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-street-goblin.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_Goblin",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  -0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9788321006472066,
+                  -0.20466489377168862
+                ],
+                "distance": -0.412266283845319
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "customRace": {
+            "modGuid": "com.ftkmf.possum",
+            "key": "possum"
+          },
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-street-possum.glb",
+            "texture": "assets/thief-hood-street-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "clipStrictHead",
+            "lowerHair": "preserve"
+          }
         }
       ]
     },
@@ -303,7 +963,8 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/thief-boots-street-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-boots-street-advanced-shaded.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -314,7 +975,8 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/thief-boots-street.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-boots-street-advanced-shaded.png",
+            "matte": true
           }
         ]
       }
@@ -345,7 +1007,8 @@
         {
           "path": "trinketHorn2",
           "model": "assets/thief-charm-street-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-charm-street-diffuse.png",
+          "matte": true
         }
       ]
     },
@@ -378,37 +1041,36 @@
         {
           "path": ".",
           "model": "assets/thief-twins-burglar.glb",
-          "texture": "assets/thief-twins-burglar-palette.png"
+          "texture": "assets/thief-twins-burglar-advanced-shaded.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-burglar-fragment-1.glb",
-          "texture": "assets/thief-twins-burglar-palette.png"
+          "texture": "assets/thief-twins-burglar-advanced-shaded.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-burglar-fragment-2.glb",
-          "texture": "assets/thief-twins-burglar-palette.png"
+          "texture": "assets/thief-twins-burglar-advanced-shaded.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-burglar.glb",
-          "texture": "assets/thief-twins-burglar-palette.png"
+          "texture": "assets/thief-twins-burglar-advanced-shaded.png"
         }
       ],
-      "icon": "assets/thief-twins-burglar-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-burglar-display.glb",
-          "texture": "assets/thief-twins-burglar-palette.png"
+          "texture": "assets/thief-twins-burglar-advanced-shaded.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-burglar-display-offhand.glb",
-          "texture": "assets/thief-twins-burglar-palette.png"
+          "texture": "assets/thief-twins-burglar-advanced-shaded.png"
         }
       ],
       "replaceProficiencies": true,
@@ -419,14 +1081,18 @@
     {
       "kind": "weapon",
       "id": "thief_bow_burglar",
-      "template": "bowShort",
-      "displayName": "Alley Recurve",
-      "precisionWeapon": "bow",
+      "template": "gunTreasureHunter",
+      "displayName": "Windowlock",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 14,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 1,
         "maxlevel": 2,
@@ -444,40 +1110,20 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-burglar-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-burglar-string.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-burglar-fragment-1.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-burglar-fragment-2.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "model": "assets/thief-pistol-burglar.glb",
+          "texture": "assets/thief-pistol-burglar-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-burglar-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-burglar-display-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-burglar-display-string.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-burglar.glb",
+          "texture": "assets/thief-pistol-burglar-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_thread_needle"
       ]
     },
@@ -508,7 +1154,8 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/thief-coat-burglar-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-coat-burglar-advanced-atlas.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -519,13 +1166,13 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/thief-coat-burglar-female.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-burglar-advanced-atlas.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/thief-coat-burglar-male.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-burglar-advanced-atlas.png"
           }
         ]
       }
@@ -534,7 +1181,7 @@
       "kind": "item",
       "id": "thief_hood_burglar",
       "template": "helmetHeavy1",
-      "displayName": "Burglar's Hood",
+      "displayName": "Burglar's Bandana",
       "fields": {
         "minlevel": 1,
         "maxlevel": 2,
@@ -558,14 +1205,579 @@
         {
           "path": "helmKettle",
           "model": "assets/thief-hood-burglar-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-burglar-diffuse.png",
+          "matte": true
         }
       ],
       "itemModels": [
         {
           "path": ".",
           "model": "assets/thief-hood-burglar.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-burglar-diffuse.png",
+          "matte": true
+        }
+      ],
+      "helmetHairVisibility": {
+        "top": true,
+        "bottom": true
+      },
+      "headProfiles": [
+        {
+          "nativeSkinset": "treasureHunter_Female",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-hood-burglar.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Male",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-burglar-human-male.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_TreasureHunterM",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Undead",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-burglar-undead.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Cat",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-burglar-cat.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Demon",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-burglar-demon.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerDevil",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "clipStrictHead"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Fish",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-burglar-fish.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerFIsh",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.18
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              },
+              {
+                "normal": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "distance": 0.5020458146424487
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "hideRenderer"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Goblin",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-burglar-goblin.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_Goblin",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  -0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9788321006472066,
+                  -0.20466489377168862
+                ],
+                "distance": -0.412266283845319
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "customRace": {
+            "modGuid": "com.ftkmf.possum",
+            "key": "possum"
+          },
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-burglar-possum.glb",
+            "texture": "assets/thief-hood-burglar-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "clipStrictHead",
+            "lowerHair": "preserve"
+          }
         }
       ]
     },
@@ -597,7 +1809,8 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/thief-boots-burglar-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-boots-burglar-advanced-shaded.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -608,7 +1821,8 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/thief-boots-burglar.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-boots-burglar-advanced-shaded.png",
+            "matte": true
           }
         ]
       }
@@ -639,7 +1853,7 @@
         {
           "path": "trinketHorn2",
           "model": "assets/thief-charm-burglar-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-charm-burglar-diffuse.png"
         }
       ]
     },
@@ -672,37 +1886,36 @@
         {
           "path": ".",
           "model": "assets/thief-twins-guild.glb",
-          "texture": "assets/thief-twins-guild-palette.png"
+          "texture": "assets/thief-twins-guild-advanced-shaded.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-guild-fragment-1.glb",
-          "texture": "assets/thief-twins-guild-palette.png"
+          "texture": "assets/thief-twins-guild-advanced-shaded.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-guild-fragment-2.glb",
-          "texture": "assets/thief-twins-guild-palette.png"
+          "texture": "assets/thief-twins-guild-advanced-shaded.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-guild.glb",
-          "texture": "assets/thief-twins-guild-palette.png"
+          "texture": "assets/thief-twins-guild-advanced-shaded.png"
         }
       ],
-      "icon": "assets/thief-twins-guild-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-guild-display.glb",
-          "texture": "assets/thief-twins-guild-palette.png"
+          "texture": "assets/thief-twins-guild-advanced-shaded.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-guild-display-offhand.glb",
-          "texture": "assets/thief-twins-guild-palette.png"
+          "texture": "assets/thief-twins-guild-advanced-shaded.png"
         }
       ],
       "replaceProficiencies": true,
@@ -713,14 +1926,18 @@
     {
       "kind": "weapon",
       "id": "thief_bow_guild",
-      "template": "bowShort",
-      "displayName": "Guild Shortbow",
-      "precisionWeapon": "bow",
+      "template": "gunTreasureHunter",
+      "displayName": "Guild Sidearm",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 18,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 2,
         "maxlevel": 3,
@@ -738,40 +1955,20 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-guild-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-guild-string.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-guild-fragment-1.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-guild-fragment-2.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "model": "assets/thief-pistol-guild.glb",
+          "texture": "assets/thief-pistol-guild-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-guild-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-guild-display-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-guild-display-string.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-guild.glb",
+          "texture": "assets/thief-pistol-guild-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_thread_needle"
       ]
     },
@@ -802,7 +1999,8 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/thief-coat-guild-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-coat-guild-advanced-atlas.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -813,13 +2011,13 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/thief-coat-guild-female.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-guild-advanced-atlas.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/thief-coat-guild-male.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-guild-advanced-atlas.png"
           }
         ]
       }
@@ -828,7 +2026,7 @@
       "kind": "item",
       "id": "thief_hood_guild",
       "template": "helmetHeavy1",
-      "displayName": "Guild Hood",
+      "displayName": "Guild Bandana",
       "fields": {
         "minlevel": 2,
         "maxlevel": 3,
@@ -852,14 +2050,579 @@
         {
           "path": "helmKettle",
           "model": "assets/thief-hood-guild-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-guild-diffuse.png",
+          "matte": true
         }
       ],
       "itemModels": [
         {
           "path": ".",
           "model": "assets/thief-hood-guild.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-guild-diffuse.png",
+          "matte": true
+        }
+      ],
+      "helmetHairVisibility": {
+        "top": true,
+        "bottom": true
+      },
+      "headProfiles": [
+        {
+          "nativeSkinset": "treasureHunter_Female",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-hood-guild.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Male",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-guild-human-male.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_TreasureHunterM",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Undead",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-guild-undead.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Cat",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-guild-cat.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Demon",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-guild-demon.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerDevil",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "clipStrictHead"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Fish",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-guild-fish.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerFIsh",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.18
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              },
+              {
+                "normal": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "distance": 0.5020458146424487
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "hideRenderer"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Goblin",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-guild-goblin.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_Goblin",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  -0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9788321006472066,
+                  -0.20466489377168862
+                ],
+                "distance": -0.412266283845319
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "customRace": {
+            "modGuid": "com.ftkmf.possum",
+            "key": "possum"
+          },
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-guild-possum.glb",
+            "texture": "assets/thief-hood-guild-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "clipStrictHead",
+            "lowerHair": "preserve"
+          }
         }
       ]
     },
@@ -891,7 +2654,8 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/thief-boots-guild-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-boots-guild-advanced-shaded.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -902,7 +2666,8 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/thief-boots-guild.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-boots-guild-advanced-shaded.png",
+            "matte": true
           }
         ]
       }
@@ -911,7 +2676,7 @@
       "kind": "item",
       "id": "thief_charm_guild",
       "template": "trinketDefense1",
-      "displayName": "Guild Token",
+      "displayName": "Guild Insignia",
       "fields": {
         "minlevel": 2,
         "maxlevel": 3,
@@ -934,7 +2699,7 @@
         {
           "path": "trinketHorn2",
           "model": "assets/thief-charm-guild-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-charm-guild-diffuse.png"
         }
       ]
     },
@@ -967,37 +2732,36 @@
         {
           "path": ".",
           "model": "assets/thief-twins-masterwork.glb",
-          "texture": "assets/thief-twins-masterwork-palette.png"
+          "texture": "assets/thief-twins-masterwork-advanced-shaded.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-masterwork-fragment-1.glb",
-          "texture": "assets/thief-twins-masterwork-palette.png"
+          "texture": "assets/thief-twins-masterwork-advanced-shaded.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-masterwork-fragment-2.glb",
-          "texture": "assets/thief-twins-masterwork-palette.png"
+          "texture": "assets/thief-twins-masterwork-advanced-shaded.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-masterwork.glb",
-          "texture": "assets/thief-twins-masterwork-palette.png"
+          "texture": "assets/thief-twins-masterwork-advanced-shaded.png"
         }
       ],
-      "icon": "assets/thief-twins-masterwork-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-masterwork-display.glb",
-          "texture": "assets/thief-twins-masterwork-palette.png"
+          "texture": "assets/thief-twins-masterwork-advanced-shaded.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-masterwork-display-offhand.glb",
-          "texture": "assets/thief-twins-masterwork-palette.png"
+          "texture": "assets/thief-twins-masterwork-advanced-shaded.png"
         }
       ],
       "replaceProficiencies": true,
@@ -1008,14 +2772,18 @@
     {
       "kind": "weapon",
       "id": "thief_bow_masterwork",
-      "template": "bowShort",
-      "displayName": "Gloamwood Bow",
-      "precisionWeapon": "bow",
+      "template": "gunTreasureHunter",
+      "displayName": "Gloam Flintlock",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 23,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 3,
         "maxlevel": 4,
@@ -1033,40 +2801,20 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-masterwork-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-masterwork-string.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-masterwork-fragment-1.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-masterwork-fragment-2.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "model": "assets/thief-pistol-masterwork.glb",
+          "texture": "assets/thief-pistol-masterwork-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-masterwork-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-masterwork-display-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-masterwork-display-string.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-masterwork.glb",
+          "texture": "assets/thief-pistol-masterwork-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_thread_needle"
       ]
     },
@@ -1098,7 +2846,8 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/thief-coat-masterwork-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-coat-masterwork-advanced-atlas.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -1109,13 +2858,13 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/thief-coat-masterwork-female.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-masterwork-advanced-atlas.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/thief-coat-masterwork-male.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-masterwork-advanced-atlas.png"
           }
         ]
       }
@@ -1124,7 +2873,7 @@
       "kind": "item",
       "id": "thief_hood_masterwork",
       "template": "helmetHeavy1",
-      "displayName": "Masterwork Cowl",
+      "displayName": "Masterwork Bandana",
       "fields": {
         "minlevel": 3,
         "maxlevel": 4,
@@ -1148,14 +2897,579 @@
         {
           "path": "helmKettle",
           "model": "assets/thief-hood-masterwork-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-masterwork-diffuse.png",
+          "matte": true
         }
       ],
       "itemModels": [
         {
           "path": ".",
           "model": "assets/thief-hood-masterwork.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-masterwork-diffuse.png",
+          "matte": true
+        }
+      ],
+      "helmetHairVisibility": {
+        "top": true,
+        "bottom": true
+      },
+      "headProfiles": [
+        {
+          "nativeSkinset": "treasureHunter_Female",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-hood-masterwork.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Male",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-masterwork-human-male.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_TreasureHunterM",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Undead",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-masterwork-undead.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Cat",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-masterwork-cat.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Demon",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-masterwork-demon.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerDevil",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "clipStrictHead"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Fish",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-masterwork-fish.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerFIsh",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.18
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              },
+              {
+                "normal": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "distance": 0.5020458146424487
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "hideRenderer"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Goblin",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-masterwork-goblin.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_Goblin",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  -0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9788321006472066,
+                  -0.20466489377168862
+                ],
+                "distance": -0.412266283845319
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "customRace": {
+            "modGuid": "com.ftkmf.possum",
+            "key": "possum"
+          },
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-masterwork-possum.glb",
+            "texture": "assets/thief-hood-masterwork-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "clipStrictHead",
+            "lowerHair": "preserve"
+          }
         }
       ]
     },
@@ -1187,7 +3501,8 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/thief-boots-masterwork-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-boots-masterwork-advanced-shaded.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -1198,7 +3513,8 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/thief-boots-masterwork.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-boots-masterwork-advanced-shaded.png",
+            "matte": true
           }
         ]
       }
@@ -1230,7 +3546,7 @@
         {
           "path": "trinketHorn2",
           "model": "assets/thief-charm-masterwork-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-charm-masterwork-diffuse.png"
         }
       ]
     },
@@ -1250,11 +3566,11 @@
         "maxlevel": 6,
         "goldvalue": 390,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1263,65 +3579,69 @@
         {
           "path": ".",
           "model": "assets/thief-twins-locksmith.glb",
-          "texture": "assets/thief-twins-locksmith-palette.png"
+          "texture": "assets/thief-twins-locksmith-advanced-shaded.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-locksmith-fragment-1.glb",
-          "texture": "assets/thief-twins-locksmith-palette.png"
+          "texture": "assets/thief-twins-locksmith-advanced-shaded.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-locksmith-fragment-2.glb",
-          "texture": "assets/thief-twins-locksmith-palette.png"
+          "texture": "assets/thief-twins-locksmith-advanced-shaded.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-locksmith.glb",
-          "texture": "assets/thief-twins-locksmith-palette.png"
+          "texture": "assets/thief-twins-locksmith-advanced-shaded.png"
         }
       ],
-      "icon": "assets/thief-twins-locksmith-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-locksmith-display.glb",
-          "texture": "assets/thief-twins-locksmith-palette.png"
+          "texture": "assets/thief-twins-locksmith-advanced-shaded.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-locksmith-display-offhand.glb",
-          "texture": "assets/thief-twins-locksmith-palette.png"
+          "texture": "assets/thief-twins-locksmith-advanced-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
         "thief_feint_locksmith"
-      ]
+      ],
+      "thiefArmament": "locksmith"
     },
     {
       "kind": "weapon",
       "id": "thief_bow_locksmith",
-      "template": "bowShort",
-      "displayName": "Latchspring",
-      "precisionWeapon": "bow",
+      "template": "gunTreasureHunter",
+      "displayName": "Latchlock",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 29,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 4,
         "maxlevel": 6,
         "goldvalue": 390,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1329,42 +3649,23 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-locksmith-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-locksmith-string.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-locksmith-fragment-1.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-locksmith-fragment-2.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "model": "assets/thief-pistol-locksmith.glb",
+          "texture": "assets/thief-pistol-locksmith-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-locksmith-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-locksmith-display-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-locksmith-display-string.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-locksmith.glb",
+          "texture": "assets/thief-pistol-locksmith-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_draw_out_locksmith"
-      ]
+      ],
+      "thiefArmament": "locksmith"
     },
     {
       "kind": "item",
@@ -1376,11 +3677,11 @@
         "maxlevel": 6,
         "goldvalue": 300,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1394,7 +3695,8 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/thief-coat-locksmith-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-coat-locksmith-advanced-atlas.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -1405,32 +3707,36 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/thief-coat-locksmith-female.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-locksmith-advanced-atlas.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/thief-coat-locksmith-male.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-locksmith-advanced-atlas.png"
           }
         ]
+      },
+      "thiefArmor": {
+        "family": "locksmith",
+        "slot": "body"
       }
     },
     {
       "kind": "item",
       "id": "thief_hood_locksmith",
       "template": "helmetHeavy1",
-      "displayName": "Locksmith's Hood",
+      "displayName": "Locksmith's Bandana",
       "fields": {
         "minlevel": 4,
         "maxlevel": 6,
         "goldvalue": 220,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1444,16 +3750,585 @@
         {
           "path": "helmKettle",
           "model": "assets/thief-hood-locksmith-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-locksmith-diffuse.png",
+          "matte": true
         }
       ],
       "itemModels": [
         {
           "path": ".",
           "model": "assets/thief-hood-locksmith.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-locksmith-diffuse.png",
+          "matte": true
         }
-      ]
+      ],
+      "helmetHairVisibility": {
+        "top": true,
+        "bottom": true
+      },
+      "headProfiles": [
+        {
+          "nativeSkinset": "treasureHunter_Female",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-hood-locksmith.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Male",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-locksmith-human-male.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_TreasureHunterM",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Undead",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-locksmith-undead.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Cat",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-locksmith-cat.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Demon",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-locksmith-demon.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerDevil",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "clipStrictHead"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Fish",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-locksmith-fish.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerFIsh",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.18
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              },
+              {
+                "normal": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "distance": 0.5020458146424487
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "hideRenderer"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Goblin",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-locksmith-goblin.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_Goblin",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  -0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9788321006472066,
+                  -0.20466489377168862
+                ],
+                "distance": -0.412266283845319
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "customRace": {
+            "modGuid": "com.ftkmf.possum",
+            "key": "possum"
+          },
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-locksmith-possum.glb",
+            "texture": "assets/thief-hood-locksmith-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "clipStrictHead",
+            "lowerHair": "preserve"
+          }
+        }
+      ],
+      "thiefArmor": {
+        "family": "locksmith",
+        "slot": "head"
+      }
     },
     {
       "kind": "item",
@@ -1465,11 +4340,11 @@
         "maxlevel": 6,
         "goldvalue": 220,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1484,7 +4359,8 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/thief-boots-locksmith-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-boots-locksmith-advanced-shaded.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -1495,9 +4371,14 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/thief-boots-locksmith.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-boots-locksmith-advanced-shaded.png",
+            "matte": true
           }
         ]
+      },
+      "thiefArmor": {
+        "family": "locksmith",
+        "slot": "feet"
       }
     },
     {
@@ -1510,11 +4391,11 @@
         "maxlevel": 6,
         "goldvalue": 290,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1527,7 +4408,7 @@
         {
           "path": "trinketHorn2",
           "model": "assets/thief-charm-locksmith-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-charm-locksmith-diffuse.png"
         }
       ]
     },
@@ -1547,11 +4428,11 @@
         "maxlevel": 6,
         "goldvalue": 430,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1560,65 +4441,69 @@
         {
           "path": ".",
           "model": "assets/thief-twins-nightblade.glb",
-          "texture": "assets/thief-twins-nightblade-palette.png"
+          "texture": "assets/thief-twins-nightblade-advanced-shaded.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-nightblade-fragment-1.glb",
-          "texture": "assets/thief-twins-nightblade-palette.png"
+          "texture": "assets/thief-twins-nightblade-advanced-shaded.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-nightblade-fragment-2.glb",
-          "texture": "assets/thief-twins-nightblade-palette.png"
+          "texture": "assets/thief-twins-nightblade-advanced-shaded.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-nightblade.glb",
-          "texture": "assets/thief-twins-nightblade-palette.png"
+          "texture": "assets/thief-twins-nightblade-advanced-shaded.png"
         }
       ],
-      "icon": "assets/thief-twins-nightblade-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-nightblade-display.glb",
-          "texture": "assets/thief-twins-nightblade-palette.png"
+          "texture": "assets/thief-twins-nightblade-advanced-shaded.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-nightblade-display-offhand.glb",
-          "texture": "assets/thief-twins-nightblade-palette.png"
+          "texture": "assets/thief-twins-nightblade-advanced-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
         "thief_feint"
-      ]
+      ],
+      "thiefArmament": "nightblade"
     },
     {
       "kind": "weapon",
       "id": "thief_bow_nightblade",
-      "template": "bowShort",
-      "displayName": "Blackthorn",
-      "precisionWeapon": "bow",
+      "template": "gunTreasureHunter",
+      "displayName": "Blackwake",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 32,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 4,
         "maxlevel": 6,
         "goldvalue": 440,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1626,42 +4511,23 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-nightblade-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-nightblade-string.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-nightblade-fragment-1.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-nightblade-fragment-2.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "model": "assets/thief-pistol-nightblade.glb",
+          "texture": "assets/thief-pistol-nightblade-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-nightblade-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-nightblade-display-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-nightblade-display-string.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-nightblade.glb",
+          "texture": "assets/thief-pistol-nightblade-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_draw_out"
-      ]
+      ],
+      "thiefArmament": "nightblade"
     },
     {
       "kind": "item",
@@ -1673,11 +4539,11 @@
         "maxlevel": 6,
         "goldvalue": 300,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1691,7 +4557,8 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/thief-coat-nightblade-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-coat-nightblade-advanced-atlas.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -1702,32 +4569,36 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/thief-coat-nightblade-female.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-nightblade-advanced-atlas.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/thief-coat-nightblade-male.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-nightblade-advanced-atlas.png"
           }
         ]
+      },
+      "thiefArmor": {
+        "family": "nightblade",
+        "slot": "body"
       }
     },
     {
       "kind": "item",
       "id": "thief_hood_nightblade",
       "template": "helmetHeavy1",
-      "displayName": "Nightblade Cowl",
+      "displayName": "Nightblade Bandana",
       "fields": {
         "minlevel": 4,
         "maxlevel": 6,
         "goldvalue": 220,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1741,16 +4612,585 @@
         {
           "path": "helmKettle",
           "model": "assets/thief-hood-nightblade-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-nightblade-diffuse.png",
+          "matte": true
         }
       ],
       "itemModels": [
         {
           "path": ".",
           "model": "assets/thief-hood-nightblade.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-nightblade-diffuse.png",
+          "matte": true
         }
-      ]
+      ],
+      "helmetHairVisibility": {
+        "top": true,
+        "bottom": true
+      },
+      "headProfiles": [
+        {
+          "nativeSkinset": "treasureHunter_Female",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-hood-nightblade.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Male",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-nightblade-human-male.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_TreasureHunterM",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Undead",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-nightblade-undead.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Cat",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-nightblade-cat.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Demon",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-nightblade-demon.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerDevil",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "clipStrictHead"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Fish",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-nightblade-fish.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerFIsh",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.18
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              },
+              {
+                "normal": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "distance": 0.5020458146424487
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "hideRenderer"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Goblin",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-nightblade-goblin.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_Goblin",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  -0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9788321006472066,
+                  -0.20466489377168862
+                ],
+                "distance": -0.412266283845319
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "customRace": {
+            "modGuid": "com.ftkmf.possum",
+            "key": "possum"
+          },
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-nightblade-possum.glb",
+            "texture": "assets/thief-hood-nightblade-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "clipStrictHead",
+            "lowerHair": "preserve"
+          }
+        }
+      ],
+      "thiefArmor": {
+        "family": "nightblade",
+        "slot": "head"
+      }
     },
     {
       "kind": "item",
@@ -1762,11 +5202,11 @@
         "maxlevel": 6,
         "goldvalue": 220,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1780,7 +5220,8 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/thief-boots-nightblade-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-boots-nightblade-advanced-shaded.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -1791,9 +5232,14 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/thief-boots-nightblade.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-boots-nightblade-advanced-shaded.png",
+            "matte": true
           }
         ]
+      },
+      "thiefArmor": {
+        "family": "nightblade",
+        "slot": "feet"
       }
     },
     {
@@ -1806,11 +5252,11 @@
         "maxlevel": 6,
         "goldvalue": 290,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1823,7 +5269,7 @@
         {
           "path": "trinketHorn2",
           "model": "assets/thief-charm-nightblade-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-charm-nightblade-diffuse.png"
         }
       ]
     },
@@ -1843,11 +5289,11 @@
         "maxlevel": 6,
         "goldvalue": 410,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1856,65 +5302,69 @@
         {
           "path": ".",
           "model": "assets/thief-twins-wayfarer.glb",
-          "texture": "assets/thief-twins-wayfarer-palette.png"
+          "texture": "assets/thief-twins-wayfarer-advanced-shaded.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-wayfarer-fragment-1.glb",
-          "texture": "assets/thief-twins-wayfarer-palette.png"
+          "texture": "assets/thief-twins-wayfarer-advanced-shaded.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-wayfarer-fragment-2.glb",
-          "texture": "assets/thief-twins-wayfarer-palette.png"
+          "texture": "assets/thief-twins-wayfarer-advanced-shaded.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-wayfarer.glb",
-          "texture": "assets/thief-twins-wayfarer-palette.png"
+          "texture": "assets/thief-twins-wayfarer-advanced-shaded.png"
         }
       ],
-      "icon": "assets/thief-twins-wayfarer-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-wayfarer-display.glb",
-          "texture": "assets/thief-twins-wayfarer-palette.png"
+          "texture": "assets/thief-twins-wayfarer-advanced-shaded.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-wayfarer-display-offhand.glb",
-          "texture": "assets/thief-twins-wayfarer-palette.png"
+          "texture": "assets/thief-twins-wayfarer-advanced-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
         "thief_pierce_wayfarer"
-      ]
+      ],
+      "thiefArmament": "wayfarer"
     },
     {
       "kind": "weapon",
       "id": "thief_bow_wayfarer",
-      "template": "bowShort",
-      "displayName": "Farstep",
-      "precisionWeapon": "bow",
+      "template": "gunTreasureHunter",
+      "displayName": "Farstep Flintlock",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 30,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 4,
         "maxlevel": 6,
         "goldvalue": 420,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1922,42 +5372,23 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-wayfarer-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-wayfarer-string.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-wayfarer-fragment-1.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-wayfarer-fragment-2.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "model": "assets/thief-pistol-wayfarer.glb",
+          "texture": "assets/thief-pistol-wayfarer-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-wayfarer-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-wayfarer-display-body.glb",
-          "texture": "assets/thief-bow-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-wayfarer-display-string.glb",
-          "texture": "assets/thief-bow-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-wayfarer.glb",
+          "texture": "assets/thief-pistol-wayfarer-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_thread_needle_wayfarer"
-      ]
+      ],
+      "thiefArmament": "wayfarer"
     },
     {
       "kind": "item",
@@ -1969,11 +5400,11 @@
         "maxlevel": 6,
         "goldvalue": 300,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -1987,7 +5418,8 @@
         {
           "path": "armorSplintVestDisplay",
           "model": "assets/thief-coat-wayfarer-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-coat-wayfarer-advanced-atlas.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -1998,32 +5430,36 @@
             "path": "armorBlacksmithF(Clone)",
             "nativeMesh": "armorBlacksmith",
             "model": "assets/thief-coat-wayfarer-female.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-wayfarer-advanced-atlas.png"
           },
           {
             "path": "armorBlacksmithM(Clone)",
             "nativeMesh": "armorBlacksmithM",
             "model": "assets/thief-coat-wayfarer-male.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-coat-wayfarer-advanced-atlas.png"
           }
         ]
+      },
+      "thiefArmor": {
+        "family": "wayfarer",
+        "slot": "body"
       }
     },
     {
       "kind": "item",
       "id": "thief_hood_wayfarer",
       "template": "helmetHeavy1",
-      "displayName": "Wayfarer's Hood",
+      "displayName": "Wayfarer's Bandana",
       "fields": {
         "minlevel": 4,
         "maxlevel": 6,
         "goldvalue": 220,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -2037,16 +5473,585 @@
         {
           "path": "helmKettle",
           "model": "assets/thief-hood-wayfarer-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-wayfarer-diffuse.png",
+          "matte": true
         }
       ],
       "itemModels": [
         {
           "path": ".",
           "model": "assets/thief-hood-wayfarer.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-hood-wayfarer-diffuse.png",
+          "matte": true
         }
-      ]
+      ],
+      "helmetHairVisibility": {
+        "top": true,
+        "bottom": true
+      },
+      "headProfiles": [
+        {
+          "nativeSkinset": "treasureHunter_Female",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-hood-wayfarer.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Male",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-wayfarer-human-male.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_TreasureHunterM",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.149
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Undead",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-wayfarer-undead.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Cat",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-wayfarer-cat.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Demon",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-wayfarer-demon.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerDevil",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.205
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "clipStrictHead"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Fish",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-wayfarer-fish.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerFIsh",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.225
+              },
+              {
+                "normal": [
+                  0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  -0.1093404791528976,
+                  0.9940043559354328,
+                  0.0
+                ],
+                "distance": -0.4095297946453983
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.5374011537017761
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.18
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.6
+              },
+              {
+                "normal": [
+                  0,
+                  -0.7071067811865475,
+                  -0.7071067811865475
+                ],
+                "distance": 0.5020458146424487
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "hideRenderer"
+          }
+        },
+        {
+          "nativeSkinset": "treasureHunter_Goblin",
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-wayfarer-goblin.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "player_Goblin",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.185
+              },
+              {
+                "normal": [
+                  0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  -0.30477572710378376,
+                  0.9524241471993242,
+                  0.0
+                ],
+                "distance": -0.3752551139965337
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9788321006472066,
+                  -0.20466489377168862
+                ],
+                "distance": -0.412266283845319
+              },
+              {
+                "normal": [
+                  0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  -0.48191874977215593,
+                  -0.876215908676647,
+                  0.0
+                ],
+                "distance": 0.576139806557611
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "preserve",
+            "lowerHair": "preserve"
+          }
+        },
+        {
+          "customRace": {
+            "modGuid": "com.ftkmf.possum",
+            "key": "possum"
+          },
+          "model": {
+            "path": ".",
+            "model": "assets/thief-bandana-wayfarer-possum.glb",
+            "texture": "assets/thief-hood-wayfarer-diffuse.png",
+            "matte": true
+          },
+          "faceOcclusion": {
+            "bodyPath": "playerCat",
+            "planes": [
+              {
+                "normal": [
+                  1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  -1.0,
+                  0.0,
+                  0.0
+                ],
+                "distance": 0.14
+              },
+              {
+                "normal": [
+                  0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  -0.21486178267511977,
+                  0.9766444667050899,
+                  0.0
+                ],
+                "distance": -0.402377520282497
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.9898462873732436,
+                  -0.1421419268667978
+                ],
+                "distance": -0.4263050193533338
+              },
+              {
+                "normal": [
+                  0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  -0.7071067811865475,
+                  -0.7071067811865475,
+                  0.0
+                ],
+                "distance": 0.4949747468305832
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  -1.0
+                ],
+                "distance": 0.145
+              },
+              {
+                "normal": [
+                  0.0,
+                  0.0,
+                  1.0
+                ],
+                "distance": 0.35
+              }
+            ],
+            "upperHair": "clipStrictHead",
+            "lowerHair": "preserve"
+          }
+        }
+      ],
+      "thiefArmor": {
+        "family": "wayfarer",
+        "slot": "head"
+      }
     },
     {
       "kind": "item",
@@ -2058,11 +6063,11 @@
         "maxlevel": 6,
         "goldvalue": 220,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -2077,7 +6082,8 @@
         {
           "path": "bootsIronGreavesDisplay",
           "model": "assets/thief-boots-wayfarer-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-boots-wayfarer-advanced-shaded.png",
+          "matte": true
         }
       ],
       "apparelModels": {
@@ -2088,9 +6094,14 @@
             "path": "bootsBlacksmith(Clone)",
             "nativeMesh": "bootsBlacksmith",
             "model": "assets/thief-boots-wayfarer.glb",
-            "texture": "assets/thief-apparel-palette.png"
+            "texture": "assets/thief-boots-wayfarer-advanced-shaded.png",
+            "matte": true
           }
         ]
+      },
+      "thiefArmor": {
+        "family": "wayfarer",
+        "slot": "feet"
       }
     },
     {
@@ -2103,11 +6114,11 @@
         "maxlevel": 6,
         "goldvalue": 290,
         "rarity": "rare",
-        "dropable": true,
-        "townmarket": true,
-        "m_NightMarket": true,
-        "m_DungeonMerchant": true,
-        "_shopStock": 1,
+        "dropable": false,
+        "townmarket": false,
+        "m_NightMarket": false,
+        "m_DungeonMerchant": false,
+        "_shopStock": 0,
         "m_CollectLoreItemUnlock": "",
         "dlc": "None"
       },
@@ -2120,7 +6131,7 @@
         {
           "path": "trinketHorn2",
           "model": "assets/thief-charm-wayfarer-display.glb",
-          "texture": "assets/thief-apparel-palette.png"
+          "texture": "assets/thief-charm-wayfarer-diffuse.png"
         }
       ]
     },
@@ -2153,37 +6164,36 @@
         {
           "path": ".",
           "model": "assets/thief-twins-skeleton-key.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-skeleton-key-diffuse.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-skeleton-key-fragment-1.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-skeleton-key-diffuse.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-skeleton-key-fragment-2.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-skeleton-key-diffuse.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-skeleton-key-offhand.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-skeleton-key-diffuse.png"
         }
       ],
-      "icon": "assets/thief-twins-skeleton-key-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-skeleton-key-display.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-skeleton-key-diffuse.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-skeleton-key-display-offhand.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-skeleton-key-diffuse.png"
         }
       ],
       "replaceProficiencies": true,
@@ -2221,37 +6231,36 @@
         {
           "path": ".",
           "model": "assets/thief-twins-candles-end.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-candles-end-diffuse.png"
         },
         {
           "path": "Break",
           "model": "assets/thief-twins-candles-end-fragment-1.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-candles-end-diffuse.png"
         },
         {
           "path": "Break/Break",
           "model": "assets/thief-twins-candles-end-fragment-2.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-candles-end-diffuse.png"
         }
       ],
       "offHandModels": [
         {
           "path": ".",
           "model": "assets/thief-twins-candles-end-offhand.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-candles-end-diffuse.png"
         }
       ],
-      "icon": "assets/thief-twins-candles-end-icon.png",
       "displayModels": [
         {
           "path": "dualKnife",
           "model": "assets/thief-twins-candles-end-display.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-candles-end-diffuse.png"
         },
         {
           "path": "offHandWeapon",
           "model": "assets/thief-twins-candles-end-display-offhand.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "texture": "assets/thief-twins-candles-end-diffuse.png"
         }
       ],
       "replaceProficiencies": true,
@@ -2263,14 +6272,18 @@
     {
       "kind": "weapon",
       "id": "thief_bow_unlost_road",
-      "template": "bowShort",
+      "template": "gunTreasureHunter",
       "displayName": "The Unlost Road",
-      "precisionWeapon": "bow",
+      "precisionWeapon": "pistol",
       "fields": {
         "damage": 29,
-        "skill": "awareness",
+        "skill": "talent",
         "slots": 4,
-        "m_NoRegularAttack": false,
+        "m_ObjectSlot": "twoHands",
+        "m_NoRegularAttack": true,
+        "m_CanBreak": false,
+        "m_NoFocus": false,
+        "damageType": "physical",
         "damagegain": 1,
         "minlevel": 4,
         "maxlevel": 6,
@@ -2288,175 +6301,189 @@
       "itemModels": [
         {
           "path": ".",
-          "model": "assets/thief-bow-unlost-road.glb",
-          "texture": "assets/thief-artifact-palette.png"
-        },
-        {
-          "path": "shortbowString",
-          "model": "assets/thief-bow-unlost-road-string.glb",
-          "texture": "assets/thief-artifact-palette.png"
-        },
-        {
-          "path": "Break",
-          "model": "assets/thief-bow-unlost-road-fragment-1.glb",
-          "texture": "assets/thief-artifact-palette.png"
-        },
-        {
-          "path": "Break/Break",
-          "model": "assets/thief-bow-unlost-road-fragment-2.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "model": "assets/thief-pistol-unlost-road.glb",
+          "texture": "assets/thief-pistol-unlost-road-shaded.png"
         }
       ],
-      "icon": "assets/thief-bow-unlost-road-icon.png",
       "displayModels": [
         {
-          "path": "shortbow",
-          "model": "assets/thief-bow-unlost-road-display.glb",
-          "texture": "assets/thief-artifact-palette.png"
-        },
-        {
-          "path": "shortbow/shortbowString",
-          "model": "assets/thief-bow-unlost-road-display-string.glb",
-          "texture": "assets/thief-artifact-palette.png"
+          "path": "gunDragon",
+          "model": "assets/thief-pistol-unlost-road.glb",
+          "texture": "assets/thief-pistol-unlost-road-shaded.png"
         }
       ],
       "replaceProficiencies": true,
       "proficiencies": [
+        "thief_pistol_fire",
         "thief_thread_needle"
       ],
       "thiefArtifact": "looseAndLeave"
     },
     {
       "kind": "proficiency",
-      "id": "thief_feint",
+      "id": "thief_pistol_fire",
       "template": "musicArmorDown",
-      "displayName": "Feint",
-      "description": "Deal 60% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-      "precisionAction": "prepare",
-      "icon": "assets/thief-street-twins-icon.png",
+      "displayName": "Fire",
+      "description": "Fire one shot; uses ammo.",
+      "nativeBattleButton": "gunFire",
       "fields": {
-        "m_DmgMultiplier": 0.6,
+        "m_DmgMultiplier": 1.0,
+        "m_SlotOverride": 0,
         "m_FullSlots": false,
         "m_Target": "None",
         "m_RepeatCount": 0,
-        "m_ChanceToAffect": 0
-      }
+        "m_ChanceToAffect": 0,
+        "m_GunShot": true
+      },
+      "precisionAction": "shot"
+    },
+    {
+      "kind": "proficiency",
+      "id": "thief_feint",
+      "template": "musicArmorDown",
+      "displayName": "Feint",
+      "description": "60% dmg; hit prepares.",
+      "nativeBattleButton": "bladeDamage",
+      "fields": {
+        "m_DmgMultiplier": 0.6,
+        "m_SlotOverride": 0,
+        "m_FullSlots": false,
+        "m_Target": "None",
+        "m_RepeatCount": 0,
+        "m_ChanceToAffect": 0,
+        "m_GunShot": false
+      },
+      "precisionAction": "prepare"
     },
     {
       "kind": "proficiency",
       "id": "thief_draw_out",
       "template": "musicArmorDown",
-      "displayName": "Draw Out",
-      "description": "Deal 60% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-      "precisionAction": "prepare",
-      "icon": "assets/thief-bow-street-icon.png",
+      "displayName": "Bait Shot",
+      "description": "60% dmg; hit prepares.",
+      "nativeBattleButton": "gunFire",
       "fields": {
         "m_DmgMultiplier": 0.6,
+        "m_SlotOverride": 0,
         "m_FullSlots": false,
         "m_Target": "None",
         "m_RepeatCount": 0,
-        "m_ChanceToAffect": 0
-      }
+        "m_ChanceToAffect": 0,
+        "m_GunShot": true
+      },
+      "precisionAction": "prepare"
     },
     {
       "kind": "proficiency",
       "id": "thief_pierce",
       "template": "musicArmorDown",
       "displayName": "Pierce",
-      "description": "Deal 75% damage. A perfect result ignores armor.",
-      "precisionAction": "pierce",
-      "icon": "assets/thief-twins-guild-icon.png",
+      "description": "",
+      "nativeBattleButton": "piercingattack",
       "fields": {
         "m_DmgMultiplier": 0.75,
+        "m_SlotOverride": 0,
         "m_FullSlots": true,
         "m_Target": "None",
         "m_RepeatCount": 0,
         "m_ChanceToAffect": 0,
+        "m_GunShot": false,
         "m_IgnoresArmor": true
-      }
+      },
+      "precisionAction": "pierce"
     },
     {
       "kind": "proficiency",
       "id": "thief_thread_needle",
       "template": "musicArmorDown",
-      "displayName": "Thread the Needle",
-      "description": "Deal 75% damage. A perfect result ignores armor.",
-      "precisionAction": "pierce",
-      "icon": "assets/thief-bow-guild-icon.png",
+      "displayName": "Deadeye",
+      "description": "",
+      "nativeBattleButton": "gunPierce",
       "fields": {
         "m_DmgMultiplier": 0.75,
+        "m_SlotOverride": 0,
         "m_FullSlots": true,
         "m_Target": "None",
         "m_RepeatCount": 0,
         "m_ChanceToAffect": 0,
+        "m_GunShot": true,
         "m_IgnoresArmor": true
-      }
+      },
+      "precisionAction": "pierce"
     },
     {
       "kind": "proficiency",
       "id": "thief_feint_locksmith",
       "template": "musicArmorDown",
       "displayName": "Feint",
-      "description": "Deal 80% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-      "precisionAction": "prepare",
-      "icon": "assets/thief-twins-locksmith-icon.png",
+      "description": "80% dmg; hit prepares.",
+      "nativeBattleButton": "bladeDamage",
       "fields": {
         "m_DmgMultiplier": 0.8,
+        "m_SlotOverride": 0,
         "m_FullSlots": false,
         "m_Target": "None",
         "m_RepeatCount": 0,
-        "m_ChanceToAffect": 0
-      }
+        "m_ChanceToAffect": 0,
+        "m_GunShot": false
+      },
+      "precisionAction": "prepare"
     },
     {
       "kind": "proficiency",
       "id": "thief_draw_out_locksmith",
       "template": "musicArmorDown",
-      "displayName": "Draw Out",
-      "description": "Deal 80% damage. A damaging hit prepares your next precision attack if you are a Thief.",
-      "precisionAction": "prepare",
-      "icon": "assets/thief-bow-locksmith-icon.png",
+      "displayName": "Bait Shot",
+      "description": "80% dmg; hit prepares.",
+      "nativeBattleButton": "gunFire",
       "fields": {
         "m_DmgMultiplier": 0.8,
+        "m_SlotOverride": 0,
         "m_FullSlots": false,
         "m_Target": "None",
         "m_RepeatCount": 0,
-        "m_ChanceToAffect": 0
-      }
+        "m_ChanceToAffect": 0,
+        "m_GunShot": true
+      },
+      "precisionAction": "prepare"
     },
     {
       "kind": "proficiency",
       "id": "thief_pierce_wayfarer",
       "template": "musicArmorDown",
       "displayName": "Pierce",
-      "description": "Deal 85% damage. A perfect result ignores armor.",
-      "precisionAction": "pierce",
-      "icon": "assets/thief-twins-wayfarer-icon.png",
+      "description": "",
+      "nativeBattleButton": "piercingattack",
       "fields": {
         "m_DmgMultiplier": 0.85,
+        "m_SlotOverride": 0,
         "m_FullSlots": true,
         "m_Target": "None",
         "m_RepeatCount": 0,
         "m_ChanceToAffect": 0,
+        "m_GunShot": false,
         "m_IgnoresArmor": true
-      }
+      },
+      "precisionAction": "pierce"
     },
     {
       "kind": "proficiency",
       "id": "thief_thread_needle_wayfarer",
       "template": "musicArmorDown",
-      "displayName": "Thread the Needle",
-      "description": "Deal 85% damage. A perfect result ignores armor.",
-      "precisionAction": "pierce",
-      "icon": "assets/thief-bow-wayfarer-icon.png",
+      "displayName": "Deadeye",
+      "description": "",
+      "nativeBattleButton": "gunPierce",
       "fields": {
         "m_DmgMultiplier": 0.85,
+        "m_SlotOverride": 0,
         "m_FullSlots": true,
         "m_Target": "None",
         "m_RepeatCount": 0,
         "m_ChanceToAffect": 0,
+        "m_GunShot": true,
         "m_IgnoresArmor": true
-      }
+      },
+      "precisionAction": "pierce"
     }
   ]
 }

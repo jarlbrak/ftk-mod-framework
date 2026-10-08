@@ -1,5 +1,7 @@
 # Thief combat rules
 
+Scope: historical 1.0.0 bow collection. For the unreleased pistol and visible-armor implementation, use [the candidate contract](CANDIDATE.md). Historical evidence below does not validate the candidate.
+
 Status: implemented rules accompanying [the class design](DESIGN.md). All percentages below are design decisions; [Validation](VALIDATION.md) distinguishes tested behavior from remaining live gates.
 
 ## 1. Eligible attacks

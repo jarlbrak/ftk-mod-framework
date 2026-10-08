@@ -1,6 +1,20 @@
 # Thief art direction and asset brief
 
+Scope: historical 1.0.0 bow collection. For the unreleased pistol and visible-armor implementation, use [the candidate contract](CANDIDATE.md). Historical evidence below does not validate the candidate.
+
 Status: paper art brief for [the Thief design](DESIGN.md). No concept image, mesh, fitting, or animation acceptance is claimed.
+
+The unreleased candidate replaces the seven ordinary bows with pistols. Its revised headwear direction is seven lower-face bandanas covering the nose and mouth while leaving the crown and hair visible. The seven original variants are approved and integrated in the unreleased candidate, with eight authored fit profiles per item. Exact native Thief appearances and the registered Possum inventory preview have bounded standing evidence; full motion, other class skinsets, persistence and co-op remain gates. Existing neckerchief, neckwrap and hood exports are superseded art references, not accepted final bandanas. The historical cap, open-hood and bow descriptions below are not construction requirements for the candidate.
+
+The current Street male coat uses the V86 weight-only source adopted on 2026-10-03 after the user accepted its reviewed three-quarter gait and basic attack appearance. Earlier aesthetic holds remain historical evidence; the user decision does not approve other wearers, reactions or unobserved views. Original geometry, slim rest silhouette and rigid display remain unchanged. See [validation](VALIDATION.md) for exact source identity and technical limits.
+
+## Unreleased bandana direction
+
+Use the close fit and continuous triangular drape visible in World of Warcraft's [Red Defias Mask reference](https://wow.zamimg.com/uploads/screenshots/normal/447063-red-defias-mask.jpg) as a shape reference. Author original geometry and textile artwork. The upper edge follows the nose bridge and lower cheeks, with shallow tension folds across the face. Continue the same cloth panel below the chin into a distinct tapered point over the throat toward the upper chest, proportioned to the FTK wearer and coat. The reference reaches onto the upper chest; any shorter FTK adaptation must still retain a substantial drape below the chin. Do not curl the lower edge around the chin into a fitted cup. Taper the sides into a small rear knot with short tails. Keep the eyes, ears and hair visible and the shoulder line open. Avoid a gathered mouth pouch, deep concentric folds, narrow side straps, a rigid rim or glossy leather-like shading. Preserve each tier's palette and restrained stitching or signature detail against the corrected slim coat silhouette. Face masking can resolve covered-skin intersections after the cloth shape works; clipping success does not establish art acceptance.
+
+Prove one original bandana on both native sexes before building the seven variants. Check continuous nose, mouth and jaw coverage, side gaps, ears, hair, beard/moustache contact, the rear knot and coat clearance. Skin or facial hair must not break through the lower cloth folds; visible beard below the intended hem is a separate fit judgment. Test native movement, attack and equipment rebuilding, plus the separate item display and icon. Hair visibility flags do not prove facial-hair clearance.
+
+Keep stable head-item identities, Head slots, stats and set membership. Update player-facing names, models, displays and icons together after asset acceptance. Regenerate portraits, the Nightblade banner and collection media from the accepted outfits. Published 1.0.0 media remain unchanged until release; the revised head-item cards and Thief gallery are release-time website work.
 
 ## Visual identity
 

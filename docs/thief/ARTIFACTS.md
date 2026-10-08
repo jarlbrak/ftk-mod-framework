@@ -1,5 +1,7 @@
 # Thief artifact weapons
 
+Scope: historical 1.0.0 bow collection. For the unreleased pistol and visible-armor implementation, use [the candidate contract](CANDIDATE.md). Historical evidence below does not validate the candidate.
+
 Status: three artifact weapon rows and original model/icon assets are authored in the local package. The signatures require the combat capability described in [Combat](COMBAT.md); their live behavior and balance are unverified.
 
 ## Common contract

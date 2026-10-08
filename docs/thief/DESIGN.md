@@ -2,6 +2,8 @@
 
 Status: design baseline, 2026-09-23. Numbers are initial balance targets, not established gameplay balance. The development package implements the class, equipment, and authored assets; [Validation](VALIDATION.md) tracks the remaining runtime and delivery gates.
 
+An [unreleased next design direction](NEXT-DESIGN.md) proposes visible-armor roles, a shared Guild Token exchange, and reconciliation with a later flintlock candidate. The baseline below remains the published bow-era design until those changes are implemented and validated.
+
 ## The promise
 
 **A quick, fragile opportunist who turns a teammate's distraction into a decisive strike, then survives by choosing the right tool.** The Thief is the party's burglar, scout, and precision attacker. A patched street outfit grows into a guild professional's equipment and finally one of three master styles: Locksmith, Nightblade, or Wayfarer. These are equipment choices within one class, not subclasses or permanent specializations.
@@ -31,7 +33,7 @@ The reward is a readable, earned damage spike. The cost is low Vitality, depende
 | Focus | 3 | Native resource; no baseline regeneration |
 | Gold | 3 | Modest start |
 
-Total of the six main stats: **374**. The primary stat is Speed. Starting equipment is Street Twins, Patched Jack, Street Neckerchief, Softstep Shoes, and one native Lockpicks consumable. The paired starter occupies both hands. No starting shield, charm, bow, rare item, or extra consumable is added. Exact gear is specified in [Equipment](EQUIPMENT.md).
+Total of the six main stats: **374**. The primary stat is Speed. Starting equipment is Street Twins, Patched Jack, Street Bandana, Softstep Shoes, and one native Lockpicks consumable. The paired starter occupies both hands. No starting shield, charm, bow, rare item, or extra consumable is added. Exact gear is specified in [Equipment](EQUIPMENT.md).
 
 Native character appearances remain available under normal unlock rules. The class has no new Lore prerequisite. Native paired weapons retain their existing DLC/ownership gates; compatibility of original custom pairs with installations lacking that DLC must be verified before declaring base-game support. All gear is transferable and usable by other classes; class-specific effects explicitly require the Thief's Opportunist capability.
 
