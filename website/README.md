@@ -14,6 +14,14 @@ The browser checks use Playwright Chromium (`npx playwright install chromium`). 
 all pages at desktop and mobile widths, local links and fragments, images, search, mobile
 navigation, tier and slot filters, and visible ability text. `SITE_URL` can point the same
 checks at the deployed site. Screenshots go to the system temporary directory, not the site.
+Use the actual URL printed by the preview command. If Astro reuses an existing local preview,
+pass that URL through `SITE_URL` when running `npm test`; leave the existing server's ownership
+and port unchanged.
+
+The `postcss-nested` selector-parser override pins the fix for
+[GHSA-rj75-hqrm-r3gf](https://github.com/postcss/postcss-selector-parser/security/advisories/GHSA-rj75-hqrm-r3gf).
+Keep this override scoped to that dependency until its upstream range includes the fixed parser.
+Run the site build and browser checks when changing it.
 
 ## Published data boundary
 
@@ -29,7 +37,7 @@ framework. During an authorized release, pass a reviewed local catalog path, for
 `node scripts/sync-published.mjs ../marketplace/catalog.json`, after its release assets are public.
 This uses the same public-download hash checks and allows the catalog and site to merge together.
 Review authored guides when mechanics change; regenerated cards alone cannot update
-explanations. The published projections are Paladin 2.0.1 and Thief 1.0.0, generated from their immutable public archives. Keep authored Paladin guide copy aligned with the 2.0.1 projection and framework 1.8.1. Thief content stays unchanged.
+explanations. The published projections are Paladin 2.0.1 and Thief 1.0.0, generated from their immutable public archives. Keep authored Paladin guide copy aligned with the 2.0.1 projection and framework 1.8.1. Thief authored guide copy remains scoped to its published 1.0.0 bow collection. An unreleased pistol preview needs a separate projection and development-build compatibility statement; it must not change published Thief data or claims.
 
 `src/data/catalog.ts` applies author-approved website wording to the immutable catalog snapshot.
 Thief 1.0.0 is labeled as a release; its compatibility limitations and package identity are retained.
@@ -79,6 +87,8 @@ Before publishing, inspect desktop and mobile screenshots, validate external dow
 `git diff --check`, and verify that the repository latest release still identifies the framework.
 
 ## Integrated mod showcases
+
+Thief weapon cards share the compact weapon layout with Paladin: published damage, authored actions, check symbols and a separate class-effects section. Thief effects are explanations of class passives and artifact rules; they are not weapon-granted class proficiency labels. Preview armor-role weapons show a static zero-piece context with an optional matching weapon. Published Thief 1.0.0 still uses bows and its unchanged public data.
 
 Each mod has one page with its promotional banner, class guide, and searchable HTML equipment cards. The old gallery and armory URLs lead to the complete Paladin guide.
 Cards display artwork, stats, and compact ability lines directly as flat HTML content. Without JavaScript all cards remain visible. Search filters names and equipped ability explanations.
@@ -130,3 +140,39 @@ Coming Soon navigation and library link.
 Paladin, Thief, and Blacksmith share `TooltipGallery.astro`. Paladin and Thief use their verified
 published projections and retain release/download information. Blacksmith remains a Coming Soon
 preview. Native screenshots and turntable sections are omitted from these mod pages.
+
+Weapon check icons use unchanged original PNG files downloaded from the Official For The King Wiki at the author's request. `src/data/wiki-stat-icons.json` records file-page sources and matching source/output hashes. These game-owned symbols are credited separately from original mod artwork. Do not redraw, recolor or re-encode them. The accessible label retains the governing stat and check count.
+
+All game stat/check icons must use the shared `officialStatIcon` lookup and unchanged official-wiki files. The registry covers Strength, Vitality, Intelligence, Awareness, Talent, Speed, Luck, Focus, Armor, Resistance and Evasion. Missing stat icons fail the build; do not substitute a font character, emoji or redraw. New game UI icon types must first add a reviewed official-wiki source and unchanged file hash. Navigation symbols and original mod item artwork are separate from game UI symbols. `npm test` verifies the complete icon files and every current published and candidate weapon's governing stat.
+
+## Local Thief candidate review
+
+`scripts/prepare-thief-candidate.mjs` creates a standalone, explicitly unreleased review page
+inside this checkout's ignored `scratch/` directory. It never changes published catalog data,
+guide pages or media. Pass both archive identities explicitly, using a fresh output directory:
+
+```sh
+node scripts/prepare-thief-candidate.mjs \
+  --archive GAMEPLAY_ZIP --archive-sha256 GAMEPLAY_SHA256 \
+  --marketing MARKETING_ZIP --marketing-sha256 MARKETING_SHA256 \
+  --output ../scratch/thief-candidate-review
+node scripts/test-thief-candidate.mjs
+```
+
+The candidate is Thief 1.1.0 with development framework 1.9.0. Its 45 cards use the shared
+Thief tooltip explanations and official stat icons, while the retained bow and hood identities
+have Pistol and Bandana filter labels. The page states unresolved native crash, migration,
+balance and display gates and has no download or install controls. Inspect desktop and mobile
+layouts, all images, filters and accessible check labels using an owned local server before
+treating the page as reviewed. This page is preparation, not a published gameplay preview.
+
+The marketing input must contain exactly the accepted seventeen studio weapon images, original
+studio banner and schema-version-1 manifest. Every image hash and each ordered original
+model/texture source must match the candidate archive's `displayModels` declarations and bytes.
+The old sidecar's gameplay hash and framework minimum remain in `historicalMarketingIdentity`;
+the new preview receipt records the separately verified candidate association. No native glyph,
+gameplay icon or accepted artwork changes to satisfy website generation. Original source paths
+are reduced to package-relative paths; raw models, private evidence and executable files are
+excluded from the output. New release media still needs a final release association and public
+archive/download verification. The published synchronization version gate stays in place until
+the authored guide and release checks are complete.

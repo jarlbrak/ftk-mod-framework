@@ -8,6 +8,7 @@ export function itemAbilities(e:any,entries:any[]):Ability[]{
   const p=entries.find(p=>p.id===id);if(!p)throw Error(`Missing published proficiency ${id}`);
   if(id.startsWith('paladin_censure'))result.push({title:'Grants Censure',text:`Strike at 75% weapon damage. A successful debuff application randomly lowers Armor or Resistance by ${Math.abs(p.fields.m_CustomValue)}, with equal odds. Resistance reduced by Censure enables the bonus from Smite. Normal weapon actions remain available.`});
   else if(id==='paladin_smite')result.push({title:'Grants Smite',text:'A magic attack using your current weapon’s rolls and 25% of its damage. Against a target with active Resistance reduction from Censure, this rises to 150% weapon damage. Armor reduction and unrelated Resistance debuffs do not qualify. The effect is not consumed and perfect rolls are not required. Available while this trinket is equipped.'});
+  else if(id==='thief_pistol_fire')result.push({title:'Grants Fire',text:'Basic precision shot. A Thief can Sneak Attack on a perfect result against an Open target or while Prepared. Fire does not grant Prepared; Unlost Road can trigger Loose and Leave on a damaging Sneak Attack.'});
   else result.push({title:`Grants ${p.displayName}`,text:p.description+(id.includes('feint')||id.includes('draw_out')?' Prepared lets a Thief’s next eligible basic precision attack treat the target as Open. It is spent on the attempt and expires after your next turn or on weapon change. Non-Thieves get the reduced damage only.':' Partial rolls still face full armor. This special action cannot Sneak Attack.')});
  }
  const perks:Record<string,(n:any)=>Ability>={
@@ -47,6 +48,9 @@ export function itemTooltipLines(e:any,entries:any[]):{text:string;tone:string}[
    add('Smite: 25% weapon damage as magic.','ability');
    add('150% against Censure Resistance reduction.');
    add('Uses current weapon rolls; no perfect required.');
+  }else if(id==='thief_pistol_fire'){
+   add('Fire: basic precision shot.','ability');
+   add('Can Sneak Attack; does not grant Prepared.');
   }else{
    add(`${p.displayName}: ${Math.round(p.fields.m_DmgMultiplier*100)}% damage.`,'ability');
    add(p.fields.m_IgnoresArmor?'Perfect result ignores Armor.':'Thief: damaging hit grants Prepared.');
@@ -80,6 +84,20 @@ export function itemTooltipLines(e:any,entries:any[]):{text:string;tone:string}[
   add('Loose and Leave: damaging Sneak Attack grants +8 Evasion.');
   add('Until next turn; cannot stack.');
  }else if(e.thiefArtifact)throw Error('Unexplained artifact');
+ if(e.thiefArmor){
+  const family=e.thiefArmor.family;
+  const roles:Record<string,[string,string]>={
+   locksmith:['Prepared Sneak bonus +5 points; other Sneak bonuses -5 points','Prepared perfect damaging Sneak hit refunds 1 spent Focus once per combat; Sneak bonuses -10 points'],
+   nightblade:['Full-health or unacted opener +5 points; other Sneak bonuses -5 points','Full-health or unacted opener +10 points; other Sneak bonuses -10 points'],
+   wayfarer:['Eligible direct hit grants +2 Evasion until next turn; Sneak bonuses -5 points','Eligible direct hit grants +4 Evasion until next turn; Sneak bonuses -10 points']
+  };
+  if(!roles[family])throw Error('Unexplained Thief armor role');
+  add(`${family[0].toUpperCase()+family.slice(1)} armor role: Thief only.`,'ability');
+  add(`2 matching Head, Body, Foot pieces: ${roles[family][0]}.`);
+  add(`3 matching pieces: ${roles[family][1]}.`);
+  add('Charms and artifacts do not count; matching weapon gives no extra bonus.');
+ }
+ if(e.thiefArmament)add('Matching armor-role weapon: optional; grants no extra set bonus.');
  const paladin=entries.find(entry=>entry.kind==='class'&&entry.id==='paladin');
  if(paladin?.weaponProficiencies?.some((group:any)=>group.weapons.includes(e.id))){
   add('Paladin: eligible hammer for class Censure and Smite.','ability');

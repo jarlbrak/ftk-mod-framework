@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
+import {projectModContent} from './project-mod-content.mjs';
 const url='https://raw.githubusercontent.com/jarlbrak/ftk-mod-framework/master/marketplace/catalog.json';
 const catalogPath=process.argv[2];
 const catalog=catalogPath?JSON.parse(await fs.readFile(catalogPath,'utf8')):await (async()=>{
@@ -22,7 +23,7 @@ for(const p of catalog.packages){
  if(manifest.version!==p.version||manifest.modGuid!==p.modGuid||manifest.frameworkVersion!==p.frameworkVersion)throw Error(`${p.name}: manifest mismatch`);
  if(['Paladin','Thief'].includes(p.name)){
   if(!({Paladin:['1.4.0','2.0.0','2.0.1'],Thief:['1.0.0']})[p.name].includes(p.version))throw Error('Review and update the version-specific mod guide before syncing a new release.');
-  snapshots[p.name.toLowerCase()]={version:p.version,sha256:p.sha256,entries:read('content.json').entries.map(e=>Object.fromEntries(Object.entries(e).filter(([k])=>['kind','id','displayName','fields','modifiers','guardianBonuses','proficiencies','icon','description','precisionWeapon','thiefArtifact','guardianEquipmentSets','guardianProfile','guardianSmiteAction','weaponProficiencies','townExchange'].includes(k))))};
+  snapshots[p.name.toLowerCase()]={version:p.version,sha256:p.sha256,entries:projectModContent(read('content.json'))};
  }
  console.log(`Verified ${p.name} ${p.version}`);
 }

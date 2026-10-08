@@ -1,3 +1,6 @@
+import './test-item-guide.mjs';
+import './test-stat-icons.mjs';
+import './test-mod-projection.mjs';
 import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -15,11 +18,11 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
   for(const img of await page.locator('img:visible').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(async i=>{try{await i.decode()}catch(error){throw new Error(`Image failed to decode: ${i.src}: ${error.message}`)}});}
   await page.evaluate(()=>window.scrollTo(0,0));
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`Overflow ${path} at ${size.width}`);
-  const info=await page.evaluate(()=>({images:[...document.images].filter(i=>i.getClientRects().length).map(i=>({src:i.src,alt:i.alt,loaded:i.complete&&i.naturalWidth>0})),links:[...document.querySelectorAll('a[href]')].map(a=>a.href),media:[...document.querySelectorAll('source')].map(s=>s.src),videos:[...document.querySelectorAll('video')].map(v=>({controls:v.controls,autoplay:v.autoplay,poster:v.poster,loop:v.loop}))}));
-  for(const i of info.images){assert(i.alt,`Missing alt ${i.src}`);assert(i.loaded,`Broken image ${i.src}`);resources.add(i.src)}
+  const info=await page.evaluate(()=>({images:[...document.images].filter(i=>i.getClientRects().length).map(i=>({src:i.src,alt:i.alt,decorativeCheck:i.getAttribute('aria-hidden')==='true'&&/\d+ .+ checks$/.test(i.closest('[role=img]')?.getAttribute('aria-label')??''),loaded:i.complete&&i.naturalWidth>0})),links:[...document.querySelectorAll('a[href]')].map(a=>a.href),media:[...document.querySelectorAll('source')].map(s=>s.src),videos:[...document.querySelectorAll('video')].map(v=>({controls:v.controls,autoplay:v.autoplay,poster:v.poster,loop:v.loop}))}));
+  for(const i of info.images){assert(i.alt||i.decorativeCheck,`Missing alt or labeled check group ${i.src}`);assert(i.loaded,`Broken image ${i.src}`);resources.add(i.src)}
   info.links.forEach(l=>links.add(l));info.media.forEach(l=>resources.add(l));
   for(const v of info.videos){assert(v.controls&&v.loop&&!v.autoplay);resources.add(v.poster)}
-  if(['','mods/paladin/','gallery/','mods/paladin-equipment/','mods/blacksmith/'].includes(path))await page.screenshot({path:`/tmp/ftk-site-${path.replaceAll('/','-')||'home'}-${size.width}.png`,fullPage:true});
+  if(['','mods/paladin/','mods/thief/','gallery/','mods/paladin-equipment/','mods/blacksmith/'].includes(path))await page.screenshot({path:`/tmp/ftk-site-${path.replaceAll('/','-')||'home'}-${size.width}.png`,fullPage:true});
  }
 }
 await page.goto(root+'mods/blacksmith/');
@@ -46,7 +49,7 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
   for(const item of await items.all()){
    const name=await item.locator('h2').textContent();
    await item.scrollIntoViewIfNeeded();
-   await item.locator('.forge-art img').evaluate(i=>i.decode());
+   await item.locator('.forge-art > img').evaluate(i=>i.decode());
    assert.equal(await item.evaluate(d=>d.scrollWidth<=d.clientWidth),true,'Card overflow '+name);
    assert.equal(await item.locator('details, summary').count(),0);
    if(name==='Tin Oath Token'){assert.doesNotMatch(await item.innerText(),/Smite|Censure|set bonus/i);assert.match(await item.innerText(),/Vitality/);}
@@ -57,6 +60,14 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
     assert.deepEqual(colors,{rim:'rgb(159, 55, 47)',bar:'rgb(80, 23, 23)',base:'rgb(32, 5, 5)',rarity:'rgb(255, 96, 96)'},'Artifact rarity theme '+name);
    }
    const slot=await item.getAttribute('data-slot');
+   const rollGroup=item.locator('.forge-rolls');
+   if(await rollGroup.count()){
+    const label=await rollGroup.getAttribute('aria-label');
+    const match=label.match(/^(\d+) (.+) checks$/);assert(match,`Invalid checks label: ${label}`);
+    const icons=rollGroup.locator('img');assert.equal(await icons.count(),Number(match[1]));
+    assert.equal(await rollGroup.locator('span,b,svg').count(),0,'No drawn or font check fallback');
+    for(const icon of await icons.all())assert((await icon.getAttribute('src')).endsWith(`/media/stat-icons/${match[2].toLowerCase()}.png`),`Wrong stat icon: ${label}`);
+   }
    if(mod==='paladin'&&slot.startsWith('hammer_')){
     const rows=await item.locator('.forge-properties > p').allTextContents();
     assert.match(rows[0],/^\d+ Physical Damage$/);

@@ -18,3 +18,9 @@ Read the root `AGENTS.md` first.
   and mobile screenshots after visual changes. Check external downloads when updating release links.
 - Preserve `/ftk-mod-framework/` base-path handling and the 50 MiB artifact budget. The Pages
   workflow may deploy from master but must never create a release or change the latest framework tag.
+
+- Game UI symbols must use unchanged original icons sourced from the Official For The King Wiki.
+  Use the shared `src/data/stat-icons.ts` lookup for stat/check icons. Record source file pages
+  and matching source/output hashes in `wiki-stat-icons.json`, with media credits. Do not
+  substitute emoji, font glyphs, generated icons or hand-drawn approximations. A new icon type
+  needs its own reviewed original source before use. Original mod item art stays original.

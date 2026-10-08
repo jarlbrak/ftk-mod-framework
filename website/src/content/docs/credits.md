@@ -14,7 +14,13 @@ Library cards consistently use original promotional banners, not game captures. 
 
 The Paladin page reuses the Paladin overhaul campaign's verified macOS captures. Original source hashes and capture scope are retained in the [release evidence record](https://github.com/jarlbrak/ftk-mod-framework/tree/master/docs/evidence/paladin-1.3.0). The website stores only compressed display derivatives and a curated source-hash manifest, not internal validation logs.
 
-Native bodies, faces, hair, backpacks, UI, and shared weapon glyphs remain game-owned. Screenshots document the mod within the game; they do not make those underlying assets original framework artwork. No game assemblies or extracted native models or textures are distributed by this website.
+Native bodies, faces, hair, backpacks, UI, and shared weapon glyphs remain game-owned. Screenshots document the mod within the game; they do not make those underlying assets original framework artwork. No game assemblies or locally extracted native models or textures are distributed by this website. Public wiki stat artwork is credited separately below.
+
+## Stat check icons
+
+The shared stat icon set uses original PNG artwork from the [Official For The King Wiki](https://fortheking.wiki.gg/wiki/Stats_FTK). It covers all seven core stats, Focus and the three defensive stats. Weapon cards use the icon matching their governing stat. Hexagonal frames are part of the original images. Files are displayed at a smaller size without changing their bytes. Sources: [Strength](https://fortheking.wiki.gg/wiki/File:StatIcon-Strength.png), [Vitality](https://fortheking.wiki.gg/wiki/File:StatIcon-Vitality.png), [Intelligence](https://fortheking.wiki.gg/wiki/File:StatIcon-Intelligence.png), [Awareness](https://fortheking.wiki.gg/wiki/File:StatIcon-Awareness.png), [Talent](https://fortheking.wiki.gg/wiki/File:StatIcon-Talent.png), [Speed](https://fortheking.wiki.gg/wiki/File:StatIcon-Speed.png), [Luck](https://fortheking.wiki.gg/wiki/File:StatIcon-Luck.png), [Focus](https://fortheking.wiki.gg/wiki/File:StatIcon-Focus.png), [Armor](https://fortheking.wiki.gg/wiki/File:StatIcon-Armor.png), [Resistance](https://fortheking.wiki.gg/wiki/File:StatIcon-Resistance.png), [Evasion](https://fortheking.wiki.gg/wiki/File:StatIcon-Evasion.png).
+
+These are game-owned UI assets, not original framework or mod artwork, and the framework's MIT license does not apply to them. The wiki credits its page content under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) unless otherwise noted. Source and unchanged file hashes are recorded in the site's stat-icon manifest.
 
 ## Item artwork
 

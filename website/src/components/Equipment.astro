@@ -3,6 +3,7 @@ import paladin from '../data/paladin.json';
 import thief from '../data/thief.json';
 import { itemTooltipLines, statName, statValue } from '../data/item-guide';
 import { paladinWeaponTooltip } from '../data/paladin-weapon-tooltip';
+import { thiefWeaponTooltip } from '../data/thief-weapon-tooltip';
 import TooltipGallery from './TooltipGallery.astro';
 const { mod='paladin' }=Astro.props;
 const data=mod==='thief'?thief:paladin;
@@ -17,6 +18,9 @@ const items=gear.map(e=>{
  if(mod==='paladin'&&e.kind==='weapon'){
   return {id:e.id,name:e.displayName,tier,kind,rarity:f.rarity.toUpperCase(),image:`${base}media/items/${e.id}.webp`,damage:f.damage,damageType:'Physical Damage',rolls:f.slots,rollStat:statName(f.skill),...paladinWeaponTooltip(e,data.entries)};
  }
+ if(mod==='thief'&&e.kind==='weapon'){
+  return {id:e.id,name:e.displayName,tier,kind,rarity:f.rarity.toUpperCase(),image:`${base}media/items/${e.id}.webp`,damage:f.damage,damageType:'Physical Damage',rolls:f.slots,rollStat:statName(f.skill),...thiefWeaponTooltip(e,data.entries)};
+ }
  const lines=Object.entries(e.modifiers??{}).map(([key,value])=>({text:`${statValue(key,value)} ${statName(key)}`,tone:'normal'}));
  if(e.kind==='weapon'){
   lines.unshift({text:`${f.slots} ${statName(f.skill)} checks`,tone:'normal'});
@@ -27,6 +31,7 @@ const items=gear.map(e=>{
 }).sort((a,b)=>families.indexOf(a.tier)-families.indexOf(b.tier));
 ---
 <p class="armory-intro">All {gear.length} pieces from published {data.version}. Original package artwork and studio renders; weapon damage is the published base value.</p>
-{mod==='paladin'&&<p class="armory-intro">Hammer cards follow the in-game front tooltip's wording and order, with no matching armor or armament equipped. Framework 1.8.1 shows the same Paladin Skill labels in game. Browser fonts and original roll symbols stand in for the game's UI artwork.</p>}
+{mod==='paladin'&&<p class="armory-intro">Hammer cards follow the in-game front tooltip's wording and order, with no matching armor or armament equipped. Framework 1.8.1 shows the same Paladin Skill labels in game. Stat check icons are from the Official For The King Wiki; browser fonts stand in for the game's text.</p>}
+{mod==='thief'&&<p class="armory-intro">Weapon cards show damage, authored action names and checks, with Thief effects in a separate section. Stat check icons are from the Official For The King Wiki; browser fonts stand in for the game's text. Full action conditions are explained above.</p>}
 {families.map(family=><span id={family} aria-hidden="true"/>)}
 <TooltipGallery items={items} families={families} slots={slots}/>
