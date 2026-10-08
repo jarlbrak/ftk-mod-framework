@@ -108,7 +108,7 @@ namespace FTKModFramework.Core.Data
                     string kind = (entry.Entry.Kind ?? "").ToLowerInvariant();
                     if (!CandidateKindSupported(kind) ||
                         !string.IsNullOrEmpty(entry.Entry.Behavior) || entry.Entry.PlayerModels != null ||
-                        DeclaresProgression(entry.Entry))
+                        (DeclaresProgression(entry.Entry) || DeclaresThiefSet(entry.Entry)))
                         report.Error("Unsupported hot activation entry: " + entry.ModGuid + "/" + entry.Entry.Id);
                 }
                 RequireComplete(report);
@@ -144,7 +144,7 @@ namespace FTKModFramework.Core.Data
             // Capability registration validates exact live rows through indexed DB lookups.
             // EndBatch must publish those indexes before this phase. Guardian/modifier capabilities
             // may register their own rows, which are indexed immediately outside the base-row batch.
-            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles = VerifiedFiles(managed);
+            ContentAssetAdmission verifiedFiles = new ContentAssetAdmission(managed);
             foreach (Cached c in cached) ApplyCapabilities(c, report, verifiedFiles);
             // Sets reference registered equipment and proficiencies across the whole package.
             foreach (Cached c in cached) ApplyProgression(c, cached, report);
@@ -206,7 +206,7 @@ namespace FTKModFramework.Core.Data
                             report.Error("Unsupported hot activation template: " + entry.Template);
                         if (string.IsNullOrEmpty(entry.Id) || !ids.Add(mod.Manifest.ModGuid + "/" + entry.Id) ||
                             !CandidateKindSupported(kind) ||
-                            !string.IsNullOrEmpty(entry.Behavior) || entry.PlayerModels != null || DeclaresProgression(entry))
+                            !string.IsNullOrEmpty(entry.Behavior) || entry.PlayerModels != null || (DeclaresProgression(entry) || DeclaresThiefSet(entry)))
                             report.Error("Unsupported or duplicate candidate entry: " + entry.Id);
                     }
                 }
@@ -309,6 +309,24 @@ namespace FTKModFramework.Core.Data
                 string.Equals(entry.Kind, "item", StringComparison.OrdinalIgnoreCase);
         }
 
+        private static bool DeclaresThiefSet(ContentEntry entry)
+        {
+            return entry.ThiefArmor != null || entry.ThiefArmament != null;
+        }
+
+        private static bool ValidThiefFamily(string family)
+        {
+            return family == "locksmith" || family == "nightblade" || family == "wayfarer";
+        }
+
+        private static HeadHairMode HeadHair(string value)
+        {
+            if (value == "preserve") return HeadHairMode.Preserve;
+            if (value == "clipStrictHead") return HeadHairMode.ClipStrictHead;
+            if (value == "hideRenderer") return HeadHairMode.HideRenderer;
+            throw new ArgumentException("invalid headProfiles hair policy");
+        }
+
         // ===================== PHASE 1 =====================
 
         /// <summary>
@@ -341,6 +359,12 @@ namespace FTKModFramework.Core.Data
             }
 
             string entryCtx = ctx + " '" + entry.Id + "'";
+            if (entry.NativeBattleButton != null &&
+                !string.Equals(entry.Kind, "proficiency", StringComparison.OrdinalIgnoreCase))
+            {
+                report.Error(entryCtx + ": nativeBattleButton requires a proficiency (skipped).");
+                return null;
+            }
             switch (entry.Kind.ToLowerInvariant())
             {
                 case "weapon": return RegisterWeapon(pe, entryCtx, report);
@@ -418,6 +442,26 @@ namespace FTKModFramework.Core.Data
         private static Cached RegisterProficiency(PendingEntry pe, string ctx, ValidationReport report)
         {
             ContentEntry entry = pe.Entry;
+            UnityEngine.Sprite nativeButton = null;
+            if (entry.NativeBattleButton != null)
+            {
+                FTK_proficiencyTable.ID sourceId;
+                if (!string.IsNullOrEmpty(entry.Icon) || string.IsNullOrEmpty(entry.NativeBattleButton) ||
+                    !TryParseEnum(entry.NativeBattleButton, out sourceId) ||
+                    !string.Equals(Enum.GetName(typeof(FTK_proficiencyTable.ID), sourceId),
+                        entry.NativeBattleButton, StringComparison.Ordinal))
+                {
+                    report.Error(ctx + ": nativeBattleButton requires an exact vanilla proficiency name and no icon (skipped).");
+                    return null;
+                }
+                FTK_proficiencyTable source = Content.Db<FTK_proficiencyTableDB>().GetEntry(sourceId);
+                nativeButton = source == null ? null : source.m_BattleButton;
+                if (nativeButton == null)
+                {
+                    report.Error(ctx + ": nativeBattleButton source has no native sprite (skipped).");
+                    return null;
+                }
+            }
             FTK_proficiencyTable.ID template;
             if (!TryParseEnum(entry.Template, out template))
             {
@@ -430,7 +474,8 @@ namespace FTKModFramework.Core.Data
 
             int applied = 0;
             FTK_proficiencyTable row = Content.AddProficiency(pe.ModGuid, entry.Id, template, entry.DisplayName,
-                p => { applied = OverrideEngine.ApplyResolved(p, baseFields, ctx, report); });
+                p => { applied = OverrideEngine.ApplyResolved(p, baseFields, ctx, report);
+                    if (nativeButton != null) p.m_BattleButton = nativeButton; });
 
             Plugin.Log.LogInfo("Data: registered proficiency '" + entry.Id + "' (template " + template + ", " + applied + " base field(s)).");
             return Cached.Make(pe, "proficiency", row, refFields);
@@ -521,8 +566,8 @@ namespace FTKModFramework.Core.Data
                 e.ReplaceProficiencies || e.RandomDebuffOutcomes != null || e.ResistanceDamageBonus != null ||
                 e.Flavor != null || e.Description != null || e.Behavior != null || e.BehaviorCategory != null ||
                 e.Guardian || e.Opportunist || e.PrecisionWeapon != null || e.PrecisionAction != null ||
-                e.ThiefArtifact != null || e.OverworldAilmentImmunity != null || e.GuardianBonuses != null || DeclaresProgression(e) ||
-                e.HelmetHairVisibility != null || e.Icon != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
+                e.ThiefArtifact != null || e.OverworldAilmentImmunity != null || e.GuardianBonuses != null || DeclaresProgression(e) || DeclaresThiefSet(e) ||
+                e.HelmetHairVisibility != null || e.Icon != null || e.NativeBattleButton != null || e.HeadProfiles != null || e.ApparelModels != null || e.Modifiers != null || e.ItemModels != null ||
                 e.OffHandModels != null || e.DisplayModels != null || e.PlayerModels != null || e.RaceBindings != null;
         }
 
@@ -688,6 +733,14 @@ namespace FTKModFramework.Core.Data
                         }
                     }
                 }
+                if (entry.ThiefArmor != null &&
+                    (c.Kind != "item" || !ValidThiefFamily(entry.ThiefArmor.Family) ||
+                    !Content.SetThiefVisibleArmor((FTK_items)c.Row, c.ModGuid + ":" + entry.ThiefArmor.Family, entry.ThiefArmor.Slot)))
+                    throw new ArgumentException("thiefArmor requires a registered head, body, or feet item.");
+                if (entry.ThiefArmament != null &&
+                    (c.Kind != "weapon" || !ValidThiefFamily(entry.ThiefArmament) ||
+                    !Content.SetThiefArmament((FTK_weaponStats2)c.Row, c.ModGuid + ":" + entry.ThiefArmament)))
+                    throw new ArgumentException("thiefArmament requires a registered weapon and family.");
                 if (entry.EnemyDropRule != null)
                 {
                     if (c.Kind != "item") throw new ArgumentException("enemyDropRule requires a physical item.");
@@ -724,7 +777,7 @@ namespace FTKModFramework.Core.Data
         }
 
         private static void ApplyCapabilities(Cached c, ValidationReport report,
-            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles)
+            ContentAssetAdmission verifiedFiles)
         {
             try
             {
@@ -750,7 +803,7 @@ namespace FTKModFramework.Core.Data
                         {
                             ModelRendererEntry entry = binding.Apparel[i];
                             if (entry == null) throw new ArgumentException("null race apparel assignment");
-                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
+                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles), entry.Matte);
                         }
                         if (!Content.SetRaceClassBodyMeshesFromGlb((int)c.Row, row, skinset, body, apparel))
                             throw new ArgumentException("race binding registration rejected for '" + binding.Class + "'");
@@ -840,7 +893,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry r = a.Renderers[i];
-                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model, verifiedFiles), Asset(c, r.Texture, verifiedFiles), MaterialMaskAsset(c, r.MetallicGlossTexture, verifiedFiles));
+                        meshes[i] = new PlayerApparelMesh(r.Path, r.NativeMesh, Asset(c, r.Model, verifiedFiles), Asset(c, r.Texture, verifiedFiles), MaterialMaskAsset(c, r.MetallicGlossTexture, verifiedFiles), r.Matte);
                     }
                     if (!Content.SetItemApparelMeshesFromGlb((FTK_items)c.Row, female, male, meshes)) throw new ArgumentException("item apparel registration rejected");
                 }
@@ -858,7 +911,7 @@ namespace FTKModFramework.Core.Data
                 {
                     HelmetHairVisibilityEntry hair = c.Entry.HelmetHairVisibility;
                     if (c.Kind != "item" || !Content.SetHelmetHairVisibility(c.Row as FTK_items, hair.Top, hair.Bottom))
-                        throw new ArgumentException("helmetHairVisibility requires a registered custom helmet using FTKHub.CreateHelmet without a wearable prefab");
+                        throw new ArgumentException("helmetHairVisibility requires a registered helmet item");
                 }
                 if (c.Entry.ItemModels != null)
                 {
@@ -867,9 +920,64 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.ItemModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles), entry.Matte);
                     }
                     if (!Content.SetItemMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("item model registration rejected");
+                }
+                if (c.Entry.HeadProfiles != null)
+                {
+                    FTK_items helmet = c.Row as FTK_items;
+                    if (c.Kind != "item" || helmet == null || helmet.m_ObjectType != FTK_itembase.ObjectType.helmet ||
+                        c.Entry.ItemModels == null || c.Entry.ItemModels.Length != 1 ||
+                        c.Entry.HeadProfiles.Length == 0 || c.Entry.HeadProfiles.Length > 256)
+                        throw new ArgumentException("headProfiles requires a helmet, one itemModels fallback and 1-256 profiles");
+                    ItemHeadProfile[] profiles = new ItemHeadProfile[c.Entry.HeadProfiles.Length];
+                    HashSet<string> selectors = new HashSet<string>(StringComparer.Ordinal);
+                    for (int i = 0; i < profiles.Length; i++)
+                    {
+                        HeadProfileEntry p = c.Entry.HeadProfiles[i];
+                        if (p == null || p.Model == null ||
+                            (p.NativeSkinset == null) == (p.CustomRace == null) ||
+                            p.Model.Path != c.Entry.ItemModels[0].Path)
+                            throw new ArgumentException("headProfiles requires one exact selector and fallback renderer path");
+                        ItemRendererMesh model = new ItemRendererMesh(p.Model.Path,
+                            Asset(c, p.Model.Model, verifiedFiles), Asset(c, p.Model.Texture, verifiedFiles), p.Model.Matte);
+                        HeadFaceOcclusion face = null;
+                        if (p.FaceOcclusion != null)
+                        {
+                            HeadFaceOcclusionEntry declaration = p.FaceOcclusion;
+                            HeadPlane[] planes = new HeadPlane[declaration.Planes.Length];
+                            for (int plane = 0; plane < planes.Length; plane++)
+                            {
+                                HeadPlaneEntry source = declaration.Planes[plane];
+                                planes[plane] = new HeadPlane(source.X, source.Y, source.Z, source.Distance);
+                            }
+                            face = new HeadFaceOcclusion(declaration.BodyPath, planes,
+                                HeadHair(declaration.UpperHair), HeadHair(declaration.LowerHair));
+                        }
+                        if (p.NativeSkinset != null)
+                        {
+                            FTK_skinset.ID skinset;
+                            if (!TryParseEnum(p.NativeSkinset, out skinset) ||
+                                !string.Equals(Enum.GetName(typeof(FTK_skinset.ID), skinset), p.NativeSkinset, StringComparison.Ordinal) ||
+                                Content.Db<FTK_skinsetDB>().GetEntry(skinset) == null ||
+                                !selectors.Add("native:" + p.NativeSkinset))
+                                throw new ArgumentException("headProfiles nativeSkinset must name one unique native row");
+                            profiles[i] = ItemHeadProfile.ForNativeSkinset(skinset, model, face);
+                        }
+                        else
+                        {
+                            HeadCustomRaceEntry race = p.CustomRace;
+                            if (IsBlank(race.ModGuid) || IsBlank(race.Key) ||
+                                race.ModGuid != race.ModGuid.Trim() || race.Key != race.Key.Trim() ||
+                                race.ModGuid.IndexOf(':') >= 0 || race.Key.IndexOf(':') >= 0 ||
+                                !selectors.Add("custom:" + race.ModGuid + ":" + race.Key))
+                                throw new ArgumentException("headProfiles customRace must name one unique qualified binding");
+                            profiles[i] = ItemHeadProfile.ForCustomRace(race.ModGuid, race.Key, model, face);
+                        }
+                    }
+                    if (!Content.SetItemHeadProfilesFromGlb(helmet, profiles))
+                        throw new ArgumentException("headProfiles registration rejected");
                 }
                 if (c.Entry.OffHandModels != null)
                 {
@@ -878,7 +986,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.OffHandModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles), entry.Matte);
                     }
                     if (!Content.SetItemOffHandMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("off-hand item model registration rejected");
                 }
@@ -889,7 +997,7 @@ namespace FTKModFramework.Core.Data
                     for (int i = 0; i < meshes.Length; i++)
                     {
                         ModelRendererEntry entry = c.Entry.DisplayModels[i];
-                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
+                        meshes[i] = new ItemRendererMesh(entry.Path, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles), entry.Matte);
                     }
                     if (!Content.SetItemDisplayMeshesFromGlb((FTK_itembase)c.Row, meshes)) throw new ArgumentException("display model registration rejected");
                 }
@@ -911,7 +1019,7 @@ namespace FTKModFramework.Core.Data
                         for (int i = 0; i < apparel.Length; i++)
                         {
                             ModelRendererEntry entry = model.Apparel[i];
-                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles));
+                            apparel[i] = new PlayerApparelMesh(entry.Path, entry.NativeMesh, Asset(c, entry.Model, verifiedFiles), Asset(c, entry.Texture, verifiedFiles), MaterialMaskAsset(c, entry.MetallicGlossTexture, verifiedFiles), entry.Matte);
                         }
                         if (!Content.SetClassBodyMeshesFromGlb((FTK_playerGameStart)c.Row, skinset, body, apparel))
                             throw new ArgumentException("player model registration rejected");
@@ -937,7 +1045,7 @@ namespace FTKModFramework.Core.Data
         }
 
         private static string MaterialMaskAsset(Cached c, string relativePath,
-            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles)
+            ContentAssetAdmission verifiedFiles)
         {
             if (relativePath == null) return null;
             if (!relativePath.EndsWith(".png", StringComparison.Ordinal))
@@ -946,32 +1054,10 @@ namespace FTKModFramework.Core.Data
         }
 
         private static string Asset(Cached c, string relativePath,
-            Dictionary<string, Marketplace.MarketplaceGenerationFile> verifiedFiles)
+            ContentAssetAdmission verifiedFiles)
         {
             if (string.IsNullOrEmpty(relativePath)) throw new ArgumentException("model and original texture paths are required");
-            Marketplace.MarketplaceGenerationFile file;
-            if (verifiedFiles != null)
-            {
-                if (!verifiedFiles.TryGetValue(c.ModGuid + "\n" + relativePath, out file))
-                    throw new ArgumentException("Managed asset is absent from the verified generation lock.");
-                return PackageModelPaths.RegisterVerified(c.ModGuid, c.PackageRoot, relativePath, file.Sha256, file.Size);
-            }
-            return PackageModelPaths.Register(c.ModGuid, c.PackageRoot, relativePath);
-        }
-
-        private static Dictionary<string, Marketplace.MarketplaceGenerationFile> VerifiedFiles(Marketplace.ManagedSnapshot managed)
-        {
-            if (managed == null || !managed.FilesVerified) return null;
-            Dictionary<string, Marketplace.MarketplaceGenerationFile> result =
-                new Dictionary<string, Marketplace.MarketplaceGenerationFile>(StringComparer.Ordinal);
-            foreach (Marketplace.PackageDescriptor package in managed.Packages)
-            {
-                string prefix = package.PackageId + "/";
-                foreach (Marketplace.MarketplaceGenerationFile file in managed.Files)
-                    if (file != null && file.Path != null && file.Path.StartsWith(prefix, StringComparison.Ordinal))
-                        result[package.ModGuid + "\n" + file.Path.Substring(prefix.Length)] = file;
-            }
-            return result;
+            return verifiedFiles.Register(c.ModGuid, c.PackageRoot, relativePath);
         }
 
         /// <summary>

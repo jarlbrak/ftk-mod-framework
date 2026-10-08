@@ -90,6 +90,14 @@ Main-thread work that expires before execution is cancelled without executing;
 a timeout after execution starts reports an unknown outcome and must not be
 retried automatically. The MCP client never retries a mutation automatically.
 
+`GET /state` and `GET /ui` preserve this distinction in their HTTP 500 error
+messages. A state read cancelled before execution reports `state read failed:
+main-thread work timed out before execution; cancelled without executing`.
+If execution started, it reports `state read failed: main-thread work timed out
+after execution started; outcome unknown, do not retry automatically`.
+Only the exact cancellation message establishes that work did not execute.
+An older bridge's generic timeout message does not establish cancellation.
+
 `GET /health` includes `protocolVersion` and `frameworkMvid` to identify the loaded
 bridge. By default the game window must report focus, and losing focus fails the sequence and
 clears native pointer state without activating a stale target. Automated runs use background
@@ -284,3 +292,7 @@ Three independent guards keep co-op safe:
   input and inspect the result.
 - **native input rejected by network guard**: use a disconnected title/setup screen
   or an offline single-player run. Online sessions are unsupported.
+
+### Revealed chest battles
+
+`/state` recognizes a native revealed Mimic battle even when the client's original combat flag remains false. It requires the master's active encounter, client Enemy type, reciprocal populated enemy/dummy maps and a resolvable native fight-order head. Ready and unopened chests do not qualify. Combat readiness then observes the timeline's acting hero rather than the overworld turn holder. Enemy health is not an activation condition, so native dead-enemy reward transitions remain observable. This is reporting only; native input acceptance remains authoritative.

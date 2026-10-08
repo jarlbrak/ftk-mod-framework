@@ -10,6 +10,7 @@ namespace FTKModFramework.Core
         public string ExpectedNativeMeshName { get; private set; }
         public string GlbFileName { get; private set; }
         public string TextureFileName { get; private set; }
+        public bool Matte { get; private set; }
         public string MetallicGlossTextureFileName { get; private set; }
 
         public PlayerApparelMesh(string rendererPath, string expectedNativeMeshName, string glbFileName,
@@ -18,12 +19,21 @@ namespace FTKModFramework.Core
 
         public PlayerApparelMesh(string rendererPath, string expectedNativeMeshName, string glbFileName,
             string textureFileName, string metallicGlossTextureFileName)
+            : this(rendererPath, expectedNativeMeshName, glbFileName, textureFileName, metallicGlossTextureFileName, false) { }
+
+        public PlayerApparelMesh(string rendererPath, string expectedNativeMeshName, string glbFileName,
+            string textureFileName, bool matte)
+            : this(rendererPath, expectedNativeMeshName, glbFileName, textureFileName, null, matte) { }
+
+        public PlayerApparelMesh(string rendererPath, string expectedNativeMeshName, string glbFileName,
+            string textureFileName, string metallicGlossTextureFileName, bool matte)
         {
             RendererPath = rendererPath;
             ExpectedNativeMeshName = expectedNativeMeshName;
             GlbFileName = glbFileName;
             TextureFileName = textureFileName;
             MetallicGlossTextureFileName = metallicGlossTextureFileName;
+            Matte = matte;
         }
     }
 }

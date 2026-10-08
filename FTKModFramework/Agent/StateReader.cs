@@ -132,8 +132,7 @@ namespace FTKModFramework.Agent
                 object es = StaticInstance("EncounterSession");
                 if (es != null)
                 {
-                    object ic = Reflect.GetField(es, "m_IsInCombat");
-                    inCombat = ToBool(ic);
+                    inCombat = IsCombatActive(es);
                     combat = ReadCombat(es, inCombat, warnings);
                 }
             }
@@ -455,11 +454,22 @@ namespace FTKModFramework.Agent
             return order != null && order.Count > 0 ? SafeField(order[0], "m_Pid") : null;
         }
 
+        private static bool IsCombatActive(object session)
+        {
+            if (ToBool(SafeField(session, "m_IsInCombat"))) return true;
+            object master = StaticInstance("EncounterSessionMC");
+            object encounterType = SafeField(session, "m_EncounterType");
+            return CombatObservation.IsActive(false,
+                ToBool(SafeField(master, "m_IsInCombat")), encounterType == null ? null : encounterType.ToString(),
+                SafeField(session, "m_EnemyDummies") as IDictionary,
+                SafeField(session, "m_Dummies") as IDictionary, ActingFid());
+        }
+
         // Combat's timeline owns the acting hero; the overworld turn holder can still be another hero.
         private static object ActingCow()
         {
             object hub = StaticInstance("FTKHub");
-            if (!ToBool(SafeField(StaticInstance("EncounterSession"), "m_IsInCombat")))
+            if (!IsCombatActive(StaticInstance("EncounterSession")))
                 return CurrentTurnCow(hub, StaticInstance("GameLogic"));
             object fid = ActingFid();
             if (fid == null || !ToBool(SafeInvoke(fid, "IsPlayer")) || hub == null) return null;

@@ -97,11 +97,17 @@ internal static class Program
             "Last Light cannot recharge on a later turn in the same combat");
         state.GrantEvasion("thief");
         Check(state.HasEvasion("thief"), "damaging artifact Sneak Attack grants timed Evasion");
+        Check(state.EvasionPercent("thief") == 8, "artifact grants eight Evasion");
+        state.GrantEvasion("thief", 4);
+        Check(state.EvasionPercent("thief") == 8, "set Evasion uses stronger existing value");
         state.BeginActorTurn("thief");
         Check(!state.HasEvasion("thief"), "next scheduled turn expires Evasion");
         state.GrantEvasion("thief");
         state.ClearEvasion("thief");
         Check(!state.HasEvasion("thief"), "weapon swap clears Evasion");
+        state.GrantEvasion("thief", 2);
+        Check(state.EvasionPercent("thief") == 2, "set preview grants its own value");
+        state.ClearEvasion("thief");
         state.TrySlipAway("thief");
         Check(state.ResolveSlipAwayDamage("thief", true, 5, true) == 5,
             "Guard and Slip Away use one strongest reduction");
@@ -124,6 +130,10 @@ internal static class Program
         state.BeginActorTurn("thief");
         Check(!state.CommitPrecisionAttack("thief", "enemy", true, false).LastLight,
             "injured target does not spend Last Light");
+        Check(state.TryLocksmithRefund("thief"), "first qualifying Locksmith refund is available");
+        Check(!state.TryLocksmithRefund("thief"), "Locksmith refund is bounded to once per combat");
+        state.BeginEncounter(new[] { "enemy" });
+        Check(state.TryLocksmithRefund("thief"), "new encounter restores Locksmith refund");
         Console.WriteLine("PASS ThiefCombat: " + checks + " checks");
     }
 }

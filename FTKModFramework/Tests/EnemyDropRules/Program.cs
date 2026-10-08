@@ -47,6 +47,18 @@ internal static class Program
             delegate { rolls++; return 9; });
         Equal(1, hit.AwardAt.Count, "ordinary percentage success");
         Equal(0, hit.Misses, "success reset");
+        var ordinaryMiss = EnemyDropRules.Resolve(rule, new[] { O("x", "ordinary", 8, true) }, 0,
+            delegate { return 10; });
+        Equal(0, ordinaryMiss.AwardAt.Count, "ordinary ten percent miss");
+        Equal(1, ordinaryMiss.Misses, "ordinary miss persists");
+        bool duplicateRejected = false;
+        try
+        {
+            EnemyDropRules.Resolve(rule, new[] { O("same", "ordinary", 8, true),
+                O("same", "ordinary", 8, true) }, 0, miss);
+        }
+        catch (ArgumentException) { duplicateRejected = true; }
+        if (!duplicateRejected) throw new Exception("duplicate reward identity was accepted");
         Console.WriteLine("EnemyDropRules passed");
     }
 }

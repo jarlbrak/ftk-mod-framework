@@ -5,6 +5,31 @@ namespace FTKModFramework.Core
 {
     public static partial class Content
     {
+        /// <summary>Register exact visible Thief armor in a caller-namespaced set.</summary>
+        public static bool SetThiefVisibleArmor(FTK_items item, string setKey, string slot)
+        {
+            int id;
+            if (item == null || string.IsNullOrEmpty(setKey) || setKey.IndexOf(':') < 1 ||
+                !ContentRegistry.TryGetSyntheticId(item.m_ID, out id, typeof(FTK_itemsDB)) ||
+                !object.ReferenceEquals(Db<FTK_itemsDB>().GetEntry((FTK_itembase.ID)id), item)) return false;
+            ThiefEquipmentSets.Slot parsed;
+            if (slot == "head") parsed = ThiefEquipmentSets.Slot.Head;
+            else if (slot == "body") parsed = ThiefEquipmentSets.Slot.Body;
+            else if (slot == "feet") parsed = ThiefEquipmentSets.Slot.Feet;
+            else return false;
+            return ThiefRuntime.RegisterArmor(id, setKey, parsed);
+        }
+
+        /// <summary>Record an optional exact matching weapon; it does not unlock armor effects.</summary>
+        public static bool SetThiefArmament(FTK_weaponStats2 weapon, string setKey)
+        {
+            int id;
+            if (weapon == null || string.IsNullOrEmpty(setKey) || setKey.IndexOf(':') < 1 ||
+                !ContentRegistry.TryGetSyntheticId(weapon.m_ID, out id, typeof(FTK_weaponStats2DB)) ||
+                !object.ReferenceEquals(Db<FTK_weaponStats2DB>().GetEntry((FTK_itembase.ID)id), weapon)) return false;
+            return ThiefRuntime.RegisterArmament(id, setKey);
+        }
+
         /// <summary>Give an exact registered class the Thief's Opportunist combat rules.</summary>
         public static bool AddOpportunist(FTK_playerGameStart classRow)
         {
@@ -16,10 +41,17 @@ namespace FTKModFramework.Core
             return ThiefRuntime.RegisterClass(id);
         }
 
-        /// <summary>Declare a registered physical weapon as a paired dagger or bow precision weapon.</summary>
+        /// <summary>Declare an exact paired, bow, or native firearm precision weapon.</summary>
         public static bool SetPrecisionWeapon(FTK_weaponStats2 weapon, string kind)
         {
             if (weapon == null || weapon._dmgtype != FTK_weaponStats2.DamageType.physical) return false;
+            if (kind == "pistol")
+            {
+                if (weapon.m_ObjectSlot != FTK_itembase.ObjectSlot.twoHands || weapon.m_Prefab == null) return false;
+                Weapon component = weapon.m_Prefab.GetComponentInChildren<Weapon>(true);
+                if (component == null || component.m_WeaponType != Weapon.WeaponType.firearm ||
+                    component.m_AmmoCapacity < 1) return false;
+            }
             int id;
             if (!ContentRegistry.TryGetSyntheticId(weapon.m_ID, out id, typeof(FTK_weaponStats2DB)) ||
                 !object.ReferenceEquals(Db<FTK_weaponStats2DB>().GetEntry((FTK_itembase.ID)id), weapon)) return false;

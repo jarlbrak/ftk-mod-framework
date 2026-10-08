@@ -32,6 +32,16 @@ namespace FTKModFramework.Core
         internal static int ReloadLeaseCount;
         internal static int ReloadResourceCount;
     }
+    internal static class HeadFaceResources
+    {
+        internal static int ActiveLeaseCount;
+        internal static int ActiveMeshCount;
+    }
+    internal static class ItemHeadProfileRegistry
+    {
+        internal static int ReloadCount;
+        internal static Action SuspendForReload() { return delegate { }; }
+    }
     internal static class GuardianRuntime
     {
         internal static bool ReloadTransientStateEmpty = true;
@@ -115,6 +125,9 @@ internal static class Program
             PaladinResourceState.OwnedObjectCount == 1 && old != null, "Partial suspension restores prior owner and binding.");
         PackageIcons.FailSuspend = false;
         var rollback = PaladinResourceState.Suspend();
+        HeadFaceResources.ActiveLeaseCount = 1;
+        Reject(delegate { PaladinResourceState.Rollback(rollback); }, "Rollback waits for a face lease created during activation.");
+        HeadFaceResources.ActiveLeaseCount = 0;
         UnityEngine.Object rejected = new UnityEngine.Object(); PaladinResourceState.Own(rejected);
         GuardianRuntime.ReloadClassCount = 2;
         OverworldAilmentImmunity.ReloadClassCount = 2;
@@ -130,6 +143,12 @@ internal static class Program
         for (int i = 0; i < 100; i++)
         {
             var snapshot = PaladinResourceState.Suspend();
+            if (i == 0)
+            {
+                HeadFaceResources.ActiveMeshCount = 1;
+                Reject(delegate { PaladinResourceState.Retire(snapshot); }, "Retirement waits for a face mesh retained during activation.");
+                HeadFaceResources.ActiveMeshCount = 0;
+            }
             Reject(delegate { PaladinResourceState.Suspend(); }, "Nested activation rejects.");
             UnityEngine.Object current = new UnityEngine.Object(); PaladinResourceState.Own(current);
             PaladinResourceState.Retire(snapshot);
@@ -146,6 +165,12 @@ internal static class Program
         EnemyMeshResources.ReloadLeaseCount = 1;
         Reject(delegate { PaladinResourceState.Suspend(); }, "Live renderer lease closes boundary.");
         EnemyMeshResources.ReloadLeaseCount = 0;
+        HeadFaceResources.ActiveLeaseCount = 1;
+        Reject(delegate { PaladinResourceState.Suspend(); }, "Live face lease closes boundary.");
+        HeadFaceResources.ActiveLeaseCount = 0;
+        HeadFaceResources.ActiveMeshCount = 1;
+        Reject(delegate { PaladinResourceState.Suspend(); }, "Retained face mesh closes boundary after owner release.");
+        HeadFaceResources.ActiveMeshCount = 0;
         GuardianRuntime.ReloadTransientStateEmpty = false;
         Reject(delegate { PaladinResourceState.Suspend(); }, "Guardian gameplay closes boundary.");
         GuardianRuntime.ReloadTransientStateEmpty = true;

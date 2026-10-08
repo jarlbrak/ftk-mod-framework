@@ -41,7 +41,8 @@ namespace FTKModFramework.Core
             internal bool SlipAwayArmed;
             internal string SlipAwayAttack;
             internal bool LastLightUsed;
-            internal bool EvasionArmed;
+            internal int EvasionPercent;
+            internal bool LocksmithRefundUsed;
         }
 
         private readonly Dictionary<string, Enemy> enemies = new Dictionary<string, Enemy>(StringComparer.Ordinal);
@@ -67,7 +68,7 @@ namespace FTKModFramework.Core
             // Prepared deliberately survives this boundary and expires at this turn's end.
             actor.SlipAwayArmed = false;
             actor.SlipAwayAttack = null;
-            actor.EvasionArmed = false;
+            actor.EvasionPercent = 0;
         }
 
         internal void EndActorTurn(string actorId)
@@ -114,6 +115,12 @@ namespace FTKModFramework.Core
             foreach (string contributor in enemy.Contributors)
                 if (contributor != actorId) return true;
             return false;
+        }
+
+        internal bool HasEnemyActed(string enemyId)
+        {
+            Enemy enemy;
+            return string.IsNullOrEmpty(enemyId) || !enemies.TryGetValue(enemyId, out enemy) || enemy.BeganTurn;
         }
 
         /// <summary>
@@ -206,7 +213,7 @@ namespace FTKModFramework.Core
             actor.Prepared = false;
             actor.SlipAwayArmed = false;
             actor.SlipAwayAttack = null;
-            actor.EvasionArmed = false;
+            actor.EvasionPercent = 0;
         }
 
         /// <summary>
@@ -238,21 +245,38 @@ namespace FTKModFramework.Core
         }
 
         internal void GrantEvasion(string actorId)
+        { GrantEvasion(actorId, 8); }
+
+        internal void GrantEvasion(string actorId, int percent)
         {
             Actor actor = GetActor(actorId);
-            if (actor != null) actor.EvasionArmed = true;
+            if (actor != null && percent > actor.EvasionPercent) actor.EvasionPercent = percent;
         }
 
         internal bool HasEvasion(string actorId)
         {
             Actor actor = GetActor(actorId);
-            return actor != null && actor.EvasionArmed;
+            return actor != null && actor.EvasionPercent > 0;
+        }
+
+        internal int EvasionPercent(string actorId)
+        {
+            Actor actor = GetActor(actorId);
+            return actor == null ? 0 : actor.EvasionPercent;
         }
 
         internal void ClearEvasion(string actorId)
         {
             Actor actor = GetActor(actorId);
-            if (actor != null) actor.EvasionArmed = false;
+            if (actor != null) actor.EvasionPercent = 0;
+        }
+
+        internal bool TryLocksmithRefund(string actorId)
+        {
+            Actor actor = GetActor(actorId);
+            if (actor == null || actor.LocksmithRefundUsed) return false;
+            actor.LocksmithRefundUsed = true;
+            return true;
         }
 
         private Actor GetActor(string actorId)

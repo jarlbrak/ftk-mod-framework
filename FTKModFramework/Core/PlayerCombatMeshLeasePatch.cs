@@ -46,9 +46,21 @@ namespace FTKModFramework.Core
             try
             {
                 if (dummy != null && dummy.m_CharacterOverworld != null && dummy.m_EventListener != null)
+                {
                     EnemyMeshResources.RetainHierarchy(dummy.m_EventListener.gameObject);
+                    HeadFaceResources.RetainHierarchy(dummy.m_EventListener.gameObject);
+                    foreach (EnemyMeshResources owner in dummy.m_EventListener.GetComponentsInChildren<EnemyMeshResources>(true))
+                        if (owner.HasLease && !owner.ValidLease()) throw new InvalidOperationException("Inherited combat model lease unavailable");
+                    foreach (HeadFaceResources owner in dummy.m_EventListener.GetComponentsInChildren<HeadFaceResources>(true))
+                        if (owner.HasLease && !owner.Active) throw new InvalidOperationException("Inherited combat face lease unavailable");
+                }
             }
-            catch (Exception e) { Plugin.Log.LogWarning("[player-mesh] combat lease hook: " + e.Message); }
+            catch (Exception e)
+            {
+                if (dummy != null && dummy.m_EventListener != null)
+                    UnityEngine.Object.Destroy(dummy.m_EventListener.gameObject);
+                throw new InvalidOperationException("Combat avatar clone lease rejected", e);
+            }
         }
     }
 }

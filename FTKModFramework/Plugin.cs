@@ -19,7 +19,7 @@ namespace FTKModFramework
     {
         public const string Guid = "com.ftkmf.framework";
         public const string Name = "FTK Mod Framework";
-        public const string Version = "1.8.1";
+        public const string Version = "1.9.0";
 
         public static Plugin Instance;
         public static ManualLogSource Log;
@@ -215,6 +215,7 @@ namespace FTKModFramework
             // Inactive cloned avatars may never receive OnDestroy. Prune their acquired model leases
             // from this active plugin so custom resources still release after the last native owner dies.
             EnemyMeshResources.PruneDestroyedOwners();
+            HeadFaceResources.Prune();
             Core.Marketplace.MarketplaceRuntime.DispatchHotReloadCompletion();
             Core.HotReload.HotReloadCoordinator.Tick();
             LegacyKrakenResourceAdapterLease.PruneDestroyedOwners();

@@ -33,6 +33,8 @@ namespace FTKModFramework.Core.HotReload
         internal static int PendingDestroyCount { get { Prune(destroying); return destroying.Count; } }
         internal static int RendererLeaseCount { get { return EnemyMeshResources.ReloadLeaseCount; } }
         internal static int RendererResourceCount { get { return EnemyMeshResources.ReloadResourceCount; } }
+        internal static int FaceLeaseCount { get { return HeadFaceResources.ActiveLeaseCount; } }
+        internal static int FaceMeshCount { get { return HeadFaceResources.ActiveMeshCount; } }
         internal static bool TransactionOpen { get { return transaction != null; } }
 
         internal static Dictionary<string, object> Diagnostics()
@@ -42,6 +44,8 @@ namespace FTKModFramework.Core.HotReload
             result["pendingDestroy"] = PendingDestroyCount;
             result["rendererLeases"] = RendererLeaseCount;
             result["rendererResources"] = RendererResourceCount;
+            result["faceLeases"] = FaceLeaseCount;
+            result["faceMeshes"] = FaceMeshCount;
             result["guardianClasses"] = GuardianRuntime.ReloadClassCount;
             result["overworldAilmentClasses"] = OverworldAilmentImmunity.ReloadClassCount;
             result["classProficiencyClasses"] = ClassProficiencyRegistry.Count;
@@ -52,6 +56,7 @@ namespace FTKModFramework.Core.HotReload
             result["paths"] = PackageModelPaths.ReloadPathCount;
             result["icons"] = PackageIcons.ReloadIconCount;
             result["itemModels"] = ItemModelRegistry.ReloadModelCount;
+            result["headProfiles"] = ItemHeadProfileRegistry.ReloadCount;
             result["offHandModels"] = ItemModelRegistry.ReloadOffHandCount;
             result["displayModels"] = ItemModelRegistry.ReloadDisplayCount;
             result["apparelModels"] = ItemApparelRegistry.ReloadApparelCount;
@@ -64,6 +69,10 @@ namespace FTKModFramework.Core.HotReload
                 throw new InvalidOperationException("Token rewards and town exchanges require a game restart for content changes.");
             if (RendererLeaseCount != 0)
                 throw new InvalidOperationException("Live custom renderer leases prevent hot activation.");
+            if (FaceLeaseCount != 0)
+                throw new InvalidOperationException("Live head face leases prevent hot activation.");
+            if (FaceMeshCount != 0)
+                throw new InvalidOperationException("Live head face meshes prevent hot activation.");
             if (PendingDestroyCount != 0)
                 throw new InvalidOperationException("Owned resources are still awaiting Unity destruction.");
             if (!GuardianRuntime.ReloadTransientStateEmpty)
@@ -88,6 +97,7 @@ namespace FTKModFramework.Core.HotReload
                 snapshot.Restore.Add(ItemProficiencyRegistry.SuspendForReload());
                 snapshot.Restore.Add(CombatProficiencyRegistry.SuspendForReload());
                 snapshot.Restore.Add(ItemModelRegistry.SuspendForReload());
+                snapshot.Restore.Add(ItemHeadProfileRegistry.SuspendForReload());
                 snapshot.Restore.Add(ItemApparelRegistry.SuspendForReload());
                 snapshot.Restore.Add(PackageModelPaths.SuspendForReload());
                 snapshot.Restore.Add(PackageIcons.SuspendForReload());
@@ -105,7 +115,7 @@ namespace FTKModFramework.Core.HotReload
         internal static void Rollback(Snapshot snapshot)
         {
             Validate(snapshot);
-            if (RendererLeaseCount != 0)
+            if (RendererLeaseCount != 0 || FaceLeaseCount != 0 || FaceMeshCount != 0)
                 throw new InvalidOperationException("Cannot roll back resources while renderer consumers remain.");
             for (int i = snapshot.Restore.Count - 1; i >= 0; i--) snapshot.Restore[i]();
             DestroyOwned(owned);
@@ -118,7 +128,7 @@ namespace FTKModFramework.Core.HotReload
         internal static void Retire(Snapshot snapshot)
         {
             Validate(snapshot);
-            if (RendererLeaseCount != 0)
+            if (RendererLeaseCount != 0 || FaceLeaseCount != 0 || FaceMeshCount != 0)
                 throw new InvalidOperationException("Cannot retire resources while renderer consumers remain.");
             DestroyOwned(snapshot.Objects);
             Finish(snapshot);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace FTKModFramework.Core.Data
 {
@@ -65,18 +66,23 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("precisionWeapon")] public string PrecisionWeapon;
         [JsonProperty("precisionAction")] public string PrecisionAction;
         [JsonProperty("thiefArtifact")] public string ThiefArtifact;
+        [JsonProperty("thiefArmor")] public ThiefArmorEntry ThiefArmor;
+        [JsonProperty("thiefArmament")] public string ThiefArmament;
+        [JsonProperty("enemyDropRule")] public EnemyDropRuleEntry EnemyDropRule;
+        [JsonProperty("townExchange")] public TownExchangeEntry TownExchange;
         [JsonProperty("overworldAilmentImmunity")] public OverworldAilmentImmunityEntry OverworldAilmentImmunity;
         [JsonProperty("guardianBonuses")] public GuardianBonusEntry GuardianBonuses;
         [JsonProperty("guardianProfile")] public GuardianProfileEntry GuardianProfile;
         [JsonProperty("guardianSmiteAction")] public string GuardianSmiteAction;
         [JsonProperty("guardianEquipmentSets")] public GuardianSetEntry[] GuardianEquipmentSets;
-        [JsonProperty("enemyDropRule")] public EnemyDropRuleEntry EnemyDropRule;
-        [JsonProperty("townExchange")] public TownExchangeEntry TownExchange;
         [JsonProperty("icon")] public string Icon;
+        /// <summary>Exact vanilla proficiency row whose native combat-button sprite is reused.</summary>
+        [JsonProperty("nativeBattleButton")] public string NativeBattleButton;
         [JsonProperty("apparelModels")] public ApparelModelEntry ApparelModels;
         [JsonProperty("modifiers")] public ItemModifierEntry Modifiers;
         [JsonProperty("helmetHairVisibility")] public HelmetHairVisibilityEntry HelmetHairVisibility;
         [JsonProperty("itemModels")] public ModelRendererEntry[] ItemModels;
+        [JsonProperty("headProfiles")] public HeadProfileEntry[] HeadProfiles;
         [JsonProperty("offHandModels")] public ModelRendererEntry[] OffHandModels;
         [JsonProperty("displayModels")] public ModelRendererEntry[] DisplayModels;
         [JsonProperty("playerModels")] public PlayerModelEntry[] PlayerModels;
@@ -93,6 +99,36 @@ namespace FTKModFramework.Core.Data
 #pragma warning restore CS0649
     // Populated by JSON reflection.
 #pragma warning disable CS0649
+    internal sealed class ThiefArmorEntry
+    {
+        [JsonProperty("family", Required = Required.Always)] public string Family;
+        [JsonProperty("slot", Required = Required.Always)] public string Slot;
+    }
+    internal sealed class EnemyDropRuleEntry
+    {
+        [JsonProperty("minimumDisplayedLevel", Required = Required.Always)] public int MinimumDisplayedLevel;
+        [JsonProperty("ordinaryChancePercent", Required = Required.Always)] public int OrdinaryChancePercent;
+        [JsonProperty("bossChancePercent", Required = Required.Always)] public int BossChancePercent;
+        [JsonProperty("guaranteedByOpportunity", Required = Required.Always)] public int GuaranteedByOpportunity;
+        [JsonProperty("namedBossGroups")] public string[][] NamedBossGroups;
+    }
+    internal sealed class TownExchangeEntry
+    {
+        [JsonProperty("token")] public string Token;
+        [JsonProperty("offers")] public TownExchangeOfferEntry[] Offers;
+    }
+    internal sealed class TownExchangeCatalogEntry
+    {
+        [JsonProperty("ownerClass")] public string OwnerClass;
+        [JsonProperty("offers")] public TownExchangeOfferEntry[] Offers;
+    }
+    internal sealed class TownExchangeOfferEntry
+    {
+        [JsonProperty("item")] public string Item;
+        [JsonProperty("name")] public string Name;
+        [JsonProperty("family")] public string Family;
+        [JsonProperty("slot")] public string Slot;
+    }
     internal sealed class HelmetHairVisibilityEntry
     {
         [JsonProperty("top", Required = Required.Always), JsonConverter(typeof(HelmetHairBooleanConverter))] public bool Top;
@@ -181,31 +217,6 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("coreProficiencies")] public string[] CoreProficiencies;
         [JsonProperty("armorDamageBonus")] public ResistanceDamageBonusEntry ArmorDamageBonus;
     }
-    internal sealed class EnemyDropRuleEntry
-    {
-        [JsonProperty("minimumDisplayedLevel", Required = Required.Always)] public int MinimumDisplayedLevel;
-        [JsonProperty("ordinaryChancePercent", Required = Required.Always)] public int OrdinaryChancePercent;
-        [JsonProperty("bossChancePercent", Required = Required.Always)] public int BossChancePercent;
-        [JsonProperty("guaranteedByOpportunity", Required = Required.Always)] public int GuaranteedByOpportunity;
-        [JsonProperty("namedBossGroups")] public string[][] NamedBossGroups;
-    }
-    internal sealed class TownExchangeEntry
-    {
-        [JsonProperty("token")] public string Token;
-        [JsonProperty("offers")] public TownExchangeOfferEntry[] Offers;
-    }
-    internal sealed class TownExchangeCatalogEntry
-    {
-        [JsonProperty("ownerClass")] public string OwnerClass;
-        [JsonProperty("offers")] public TownExchangeOfferEntry[] Offers;
-    }
-    internal sealed class TownExchangeOfferEntry
-    {
-        [JsonProperty("item")] public string Item;
-        [JsonProperty("name")] public string Name;
-        [JsonProperty("family")] public string Family;
-        [JsonProperty("slot")] public string Slot;
-    }
     internal sealed class OverworldAilmentImmunityEntry
     {
         [JsonProperty("displayName")] public string DisplayName;
@@ -237,6 +248,133 @@ namespace FTKModFramework.Core.Data
         [JsonProperty("texture")] public string Texture;
         [JsonProperty("metallicGlossTexture"), JsonConverter(typeof(MetallicGlossPathConverter))] public string MetallicGlossTexture;
         [JsonProperty("nativeMesh")] public string NativeMesh;
+        [JsonProperty("matte"), JsonConverter(typeof(MatteBooleanConverter))] public bool Matte;
+    }
+    [JsonConverter(typeof(HeadProfileEntryConverter))]
+    internal sealed class HeadProfileEntry
+    {
+        [JsonProperty("nativeSkinset")] public string NativeSkinset;
+        [JsonProperty("customRace")] public HeadCustomRaceEntry CustomRace;
+        [JsonProperty("model", Required = Required.Always)] public HeadProfileModelEntry Model;
+        [JsonProperty("faceOcclusion")] public HeadFaceOcclusionEntry FaceOcclusion;
+    }
+    internal sealed class HeadCustomRaceEntry
+    {
+        [JsonProperty("modGuid", Required = Required.Always)] public string ModGuid;
+        [JsonProperty("key", Required = Required.Always)] public string Key;
+    }
+    internal sealed class HeadProfileModelEntry
+    {
+        [JsonProperty("path", Required = Required.Always)] public string Path;
+        [JsonProperty("model", Required = Required.Always)] public string Model;
+        [JsonProperty("texture", Required = Required.Always)] public string Texture;
+        [JsonProperty("matte"), JsonConverter(typeof(MatteBooleanConverter))] public bool Matte;
+    }
+    internal sealed class HeadFaceOcclusionEntry
+    {
+        public string BodyPath;
+        public HeadPlaneEntry[] Planes;
+        public string UpperHair, LowerHair;
+    }
+    internal sealed class HeadPlaneEntry
+    {
+        public float X, Y, Z, Distance;
+    }
+    internal sealed class HeadProfileEntryConverter : JsonConverter
+    {
+        public override bool CanConvert(System.Type objectType) { return objectType == typeof(HeadProfileEntry); }
+        private static void Only(JObject value, params string[] names)
+        {
+            foreach (JProperty property in value.Properties())
+            {
+                bool known = false;
+                foreach (string name in names) if (property.Name == name) known = true;
+                if (!known) throw new JsonSerializationException("Unknown headProfiles field: " + property.Name);
+            }
+        }
+        private static string RequiredString(JObject value, string name)
+        {
+            JToken token = value[name];
+            if (token == null || token.Type != JTokenType.String || string.IsNullOrEmpty((string)token))
+                throw new JsonSerializationException("headProfiles requires string " + name);
+            return (string)token;
+        }
+        private static float FiniteFloat(JToken token, string name)
+        {
+            if (token == null || token.Type != JTokenType.Integer && token.Type != JTokenType.Float)
+                throw new JsonSerializationException("headProfiles requires numeric " + name);
+            double value = (double)token;
+            if (double.IsNaN(value) || double.IsInfinity(value) || value < -1000d || value > 1000d)
+                throw new JsonSerializationException("headProfiles plane value out of bounds: " + name);
+            return (float)value;
+        }
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            JObject value = JObject.Load(reader);
+            Only(value, "nativeSkinset", "customRace", "model", "faceOcclusion");
+            HeadProfileEntry result = new HeadProfileEntry();
+            if (value["nativeSkinset"] != null) result.NativeSkinset = RequiredString(value, "nativeSkinset");
+            if (value["customRace"] != null)
+            {
+                JObject race = value["customRace"] as JObject;
+                if (race == null) throw new JsonSerializationException("headProfiles customRace must be an object");
+                Only(race, "modGuid", "key");
+                result.CustomRace = new HeadCustomRaceEntry { ModGuid = RequiredString(race, "modGuid"), Key = RequiredString(race, "key") };
+            }
+            JObject model = value["model"] as JObject;
+            if (model == null) throw new JsonSerializationException("headProfiles model must be an object");
+            Only(model, "path", "model", "texture", "matte");
+            JToken matte = model["matte"];
+            if (matte != null && matte.Type != JTokenType.Boolean)
+                throw new JsonSerializationException("headProfiles matte must be a boolean");
+            result.Model = new HeadProfileModelEntry { Path = RequiredString(model, "path"),
+                Model = RequiredString(model, "model"), Texture = RequiredString(model, "texture"),
+                Matte = matte != null && (bool)matte };
+            if (value["faceOcclusion"] != null)
+            {
+                JObject face = value["faceOcclusion"] as JObject;
+                if (face == null) throw new JsonSerializationException("faceOcclusion must be an object");
+                Only(face, "bodyPath", "planes", "upperHair", "lowerHair");
+                JArray planes = face["planes"] as JArray;
+                if (planes == null || planes.Count < 4 || planes.Count > 16)
+                    throw new JsonSerializationException("faceOcclusion requires 4-16 planes");
+                var occlusion = new HeadFaceOcclusionEntry { BodyPath = RequiredString(face, "bodyPath"),
+                    UpperHair = RequiredString(face, "upperHair"), LowerHair = RequiredString(face, "lowerHair"),
+                    Planes = new HeadPlaneEntry[planes.Count] };
+                for (int i = 0; i < planes.Count; i++)
+                {
+                    JObject plane = planes[i] as JObject;
+                    if (plane == null) throw new JsonSerializationException("faceOcclusion plane must be an object");
+                    Only(plane, "normal", "distance");
+                    JArray normal = plane["normal"] as JArray;
+                    if (normal == null || normal.Count != 3)
+                        throw new JsonSerializationException("faceOcclusion normal requires three numbers");
+                    occlusion.Planes[i] = new HeadPlaneEntry { X = FiniteFloat(normal[0], "normal.x"),
+                        Y = FiniteFloat(normal[1], "normal.y"), Z = FiniteFloat(normal[2], "normal.z"),
+                        Distance = FiniteFloat(plane["distance"], "distance") };
+                    float length2 = occlusion.Planes[i].X * occlusion.Planes[i].X +
+                        occlusion.Planes[i].Y * occlusion.Planes[i].Y + occlusion.Planes[i].Z * occlusion.Planes[i].Z;
+                    if (length2 < 0.998001f || length2 > 1.002001f)
+                        throw new JsonSerializationException("faceOcclusion plane normal must be normalized");
+                }
+                result.FaceOcclusion = occlusion;
+            }
+            return result;
+        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { throw new System.NotSupportedException("headProfiles are read-only declarations"); }
+    }
+    internal sealed class MatteBooleanConverter : JsonConverter
+    {
+        public override bool CanConvert(System.Type objectType) { return objectType == typeof(bool); }
+        public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType != JsonToken.Boolean)
+                throw new JsonSerializationException("matte requires a JSON boolean token");
+            return (bool)reader.Value;
+        }
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        { writer.WriteValue((bool)value); }
     }
     internal sealed class PlayerModelEntry
     {

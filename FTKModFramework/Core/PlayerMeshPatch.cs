@@ -90,6 +90,7 @@ namespace FTKModFramework.Core
             Plugin.Log.LogInfo("[player-mesh] " + (applied ? "applied" : "rejected") + " class '" +
                 classRow.m_ID + "', skinset '" + skinset.m_ID + "'.");
         }
+
     }
 
     // Per-avatar application is intentionally not globally guarded: each native assembly creates a fresh clone.
@@ -103,6 +104,8 @@ namespace FTKModFramework.Core
                 if (_cow != null) PlayerMeshRegistry.Apply(_cow.GetDBEntry(), _cow.GetSkinset(), __result);
             }
             catch (Exception e) { Plugin.Log.LogWarning("[player-mesh] overworld hook: " + e.Message); }
+            try { HeadProfileCoordinator.MarkReady(__result); }
+            catch (Exception e) { Plugin.Log.LogWarning("[head-profile] overworld ready hook: " + e.Message); }
         }
     }
 
@@ -116,6 +119,8 @@ namespace FTKModFramework.Core
                 if (_uiCreate != null) PlayerMeshRegistry.Apply(_uiCreate.GetClassDBEntry(), _uiCreate.GetSkinset(), __result);
             }
             catch (Exception e) { Plugin.Log.LogWarning("[player-mesh] preview hook: " + e.Message); }
+            try { HeadProfileCoordinator.MarkReady(__result); }
+            catch (Exception e) { Plugin.Log.LogWarning("[head-profile] preview ready hook: " + e.Message); }
         }
     }
 

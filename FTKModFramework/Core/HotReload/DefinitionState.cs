@@ -160,11 +160,18 @@ namespace FTKModFramework.Core.HotReload
                 this.target = target;
                 entries = new DictionaryEntry[target.Count];
                 target.CopyTo(entries, 0);
+                for (int i = 0; i < entries.Length; i++)
+                    entries[i] = new DictionaryEntry(entries[i].Key, CopyNestedMap(entries[i].Value));
             }
             internal void Restore()
             {
                 target.Clear();
-                foreach (DictionaryEntry entry in entries) target.Add(entry.Key, entry.Value);
+                foreach (DictionaryEntry entry in entries) target.Add(entry.Key, CopyNestedMap(entry.Value));
+            }
+            private static object CopyNestedMap(object value)
+            {
+                Dictionary<string, int> ids = value as Dictionary<string, int>;
+                return ids == null ? value : new Dictionary<string, int>(ids, StringComparer.Ordinal);
             }
         }
 

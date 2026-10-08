@@ -5,11 +5,11 @@ namespace FTKModFramework.Core
 {
     public static partial class Content
     {
-        /// <summary>Override native hair visibility on fresh registered custom helmets using FTKHub.CreateHelmet.</summary>
+        /// <summary>Override native hair visibility on fresh instances of a registered custom helmet.</summary>
         public static bool SetHelmetHairVisibility(FTK_items item, bool top, bool bottom)
         {
             int id;
-            if (!ItemModelRegistry.SupportsHelmetHairVisibility(item) ||
+            if (item == null || item.m_ObjectType != FTK_itembase.ObjectType.helmet ||
                 !ContentRegistry.TryGetSyntheticId(item.m_ID, out id, typeof(FTK_itemsDB)) ||
                 !object.ReferenceEquals(item, Db<FTK_itemsDB>().GetEntry((FTK_itembase.ID)id))) return false;
             ItemModelRegistry.RegisterHelmetHairVisibility(id, top, bottom);
@@ -55,7 +55,7 @@ namespace FTKModFramework.Core
             {
                 if (meshes[i] == null) return false;
                 assignments[i] = EnemyRendererMesh.ForStaticRenderer(meshes[i].RendererPath,
-                    meshes[i].GlbFileName, meshes[i].TextureFileName, true, meshes[i].MetallicGlossTextureFileName);
+                    meshes[i].GlbFileName, meshes[i].TextureFileName, true, meshes[i].MetallicGlossTextureFileName, meshes[i].Matte);
             }
             string error;
             if (!ExplicitEnemyMeshSwap.ValidateAssignments(assignments, out error))
@@ -77,13 +77,17 @@ namespace FTKModFramework.Core
         public string GlbFileName { get; private set; }
         public string TextureFileName { get; private set; }
         public string MetallicGlossTextureFileName { get; private set; }
+        public bool Matte { get; private set; }
         public ItemRendererMesh(string rendererPath, string glbFileName, string textureFileName)
-            : this(rendererPath, glbFileName, textureFileName, null) { }
-
+            : this(rendererPath, glbFileName, textureFileName, null, false) { }
+        public ItemRendererMesh(string rendererPath, string glbFileName, string textureFileName, bool matte)
+            : this(rendererPath, glbFileName, textureFileName, null, matte) { }
         public ItemRendererMesh(string rendererPath, string glbFileName, string textureFileName, string metallicGlossTextureFileName)
+            : this(rendererPath, glbFileName, textureFileName, metallicGlossTextureFileName, false) { }
+        public ItemRendererMesh(string rendererPath, string glbFileName, string textureFileName, string metallicGlossTextureFileName, bool matte)
         {
             RendererPath = rendererPath; GlbFileName = glbFileName; TextureFileName = textureFileName;
-            MetallicGlossTextureFileName = metallicGlossTextureFileName;
+            MetallicGlossTextureFileName = metallicGlossTextureFileName; Matte = matte;
         }
     }
 }

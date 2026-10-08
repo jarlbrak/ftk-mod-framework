@@ -59,6 +59,20 @@ namespace FTKModFramework.Core
             privateMaterial.DisableKeyword("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A");
         }
 
+        internal static void ApplyMatte(Material privateMaterial, bool matte)
+        {
+            if (!matte) return;
+            // The swap owns this copy; native templates and unrelated renderers keep their materials.
+            privateMaterial.DisableKeyword("_METALLICGLOSSMAP");
+            privateMaterial.DisableKeyword("_SPECGLOSSMAP");
+            privateMaterial.DisableKeyword("_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A");
+            if (privateMaterial.HasProperty("_MetallicGlossMap")) privateMaterial.SetTexture("_MetallicGlossMap", null);
+            if (privateMaterial.HasProperty("_SpecGlossMap")) privateMaterial.SetTexture("_SpecGlossMap", null);
+            if (privateMaterial.HasProperty("_Metallic")) privateMaterial.SetFloat("_Metallic", 0f);
+            if (privateMaterial.HasProperty("_Glossiness")) privateMaterial.SetFloat("_Glossiness", 0f);
+            if (privateMaterial.HasProperty("_GlossMapScale")) privateMaterial.SetFloat("_GlossMapScale", 0f);
+        }
+
         internal static void Apply(Material privateMaterial, bool disableNativeEmission)
         {
             if (!disableNativeEmission) return;

@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Emit;
 using HarmonyLib;
 using UnityEngine;
 
@@ -58,22 +61,52 @@ namespace FTKModFramework.Core
     /// Suppresses only FallOffLimb's custom-body hand-off after a verified explicit body assignment.
     /// CharacterEventListener's remaining death cleanup and native ragdoll handling still run.
     /// </summary>
-    [HarmonyPatch(typeof(FallOffLimb), "FallOff", new Type[] { typeof(Vector3) })]
+    [HarmonyPatch(typeof(CharacterEventListener), "DeathFallOff", new Type[0])]
     internal static class EnemyFallOffPatch
     {
-        [HarmonyPrefix]
-        private static bool Prefix(FallOffLimb __instance)
+        [HarmonyTranspiler]
+        internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
+            List<CodeInstruction> code = new List<CodeInstruction>(instructions);
+            MethodInfo native = typeof(FallOffLimb).GetMethod("FallOff", new Type[] { typeof(Vector3) });
+            int match = -1;
+            int count = 0;
+            for (int i = 0; i < code.Count; i++)
+            {
+                if ((code[i].opcode == OpCodes.Callvirt || code[i].opcode == OpCodes.Call) &&
+                    native.Equals(code[i].operand))
+                {
+                    match = i;
+                    count++;
+                }
+            }
+            if (count != 1)
+            {
+                Plugin.Log.LogWarning("[enemy-falloff] exact death call site unavailable; native fall-off retained.");
+                return code;
+            }
+
+            // Keep the native Vector3 method unpatched on the shipped Mono runtime.
+            // The static call consumes the same limb and direction, retaining branch and exception metadata.
+            code[match].opcode = OpCodes.Call;
+            code[match].operand = typeof(EnemyFallOffPatch).GetMethod("FallOff", BindingFlags.Static | BindingFlags.NonPublic);
+            return code;
+        }
+
+        internal static void FallOff(FallOffLimb limb, Vector3 direction)
+        {
+            bool preserve = false;
             try
             {
-                EnemyFallOffMarker marker = __instance == null ? null : __instance.GetComponent<EnemyFallOffMarker>();
-                return marker == null || !marker.Matches(__instance);
+                EnemyFallOffMarker marker = limb == null ? null : limb.GetComponent<EnemyFallOffMarker>();
+                preserve = marker != null && marker.Matches(limb);
             }
             catch (Exception e)
             {
                 Plugin.Log.LogWarning("[enemy-falloff] native fall-off retained after guard error: " + e.Message);
-                return true;
             }
+            // Native failures must retain their original exception behavior.
+            if (!preserve) limb.FallOff(direction);
         }
     }
 }

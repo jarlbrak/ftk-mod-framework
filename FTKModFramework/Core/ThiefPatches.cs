@@ -238,21 +238,6 @@ namespace FTKModFramework.Core
         }
     }
 
-    [HarmonyPatch(typeof(CharacterDummy), "RespondToHit")]
-    internal static class ThiefImpactPatch
-    {
-        private static void Prefix(CharacterDummy __instance, out int __state)
-        {
-            __state = __instance == null ? 0 : __instance.GetCurrentHealth();
-        }
-
-        private static void Postfix(CharacterDummy __instance, int __state)
-        {
-            try { ThiefRuntime.OnImpact(__instance, __state); }
-            catch (Exception e) { Plugin.Log.LogError("[thief] artifact impact failed: " + e); }
-        }
-    }
-
     [HarmonyPatch(typeof(CharacterDummy), "CombatFinished")]
     internal static class ThiefCombatEndPatch
     {

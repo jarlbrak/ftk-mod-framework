@@ -17,6 +17,18 @@ namespace FTKModFramework.Core
         internal int RequiredCount { get { return _required.Length; } }
         internal int ApparelCount { get { return _apparel.Length; } }
 
+        internal bool TryGetRequiredModel(string path, out string model)
+        {
+            model = null;
+            foreach (EnemyRendererMesh assignment in _required)
+                if (assignment.RendererPath == path)
+                {
+                    if (model != null) return false;
+                    model = assignment.GlbFileName;
+                }
+            return model != null;
+        }
+
         internal bool HasTexturedRequiredPath(string path)
         {
             foreach (EnemyRendererMesh item in _required)
@@ -50,8 +62,8 @@ namespace FTKModFramework.Core
                 if (item == null || string.IsNullOrEmpty(item.ExpectedNativeMeshName) || item.ExpectedNativeMeshName.Trim().Length == 0)
                 { error = "conditional apparel requires an exact native mesh name"; return false; }
                 clothes[i] = new PlayerApparelMesh(item.RendererPath, item.ExpectedNativeMeshName,
-                    item.GlbFileName, item.TextureFileName, item.MetallicGlossTextureFileName);
-                all.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName, false, item.MetallicGlossTextureFileName));
+                    item.GlbFileName, item.TextureFileName, item.MetallicGlossTextureFileName, item.Matte);
+                all.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName, false, item.MetallicGlossTextureFileName, item.Matte));
             }
             // Validate all possible assignments, including duplicate paths across required and conditional sets.
             if (!ExplicitEnemyMeshSwap.ValidateAssignments(all.ToArray(), out error)) return false;
@@ -121,7 +133,7 @@ namespace FTKModFramework.Core
                         "', found '" + renderer.sharedMesh.name + "'";
                     return false;
                 }
-                assignments.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName, false, item.MetallicGlossTextureFileName));
+                assignments.Add(new EnemyRendererMesh(item.RendererPath, item.GlbFileName, item.TextureFileName, false, item.MetallicGlossTextureFileName, item.Matte));
             }
             assignments.AddRange(equipment);
             resolved = assignments.ToArray();

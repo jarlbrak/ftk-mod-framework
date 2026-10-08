@@ -15,9 +15,8 @@ namespace FTKModFramework.Core
         internal static bool SupportsHelmetHairVisibility(FTK_itembase item)
         {
             FTK_items helmet = item as FTK_items;
-            // Native world and creation previews instantiate wearable prefabs directly,
-            // bypassing the FTKHub.CreateHelmet hook that owns this override.
-            return helmet != null && helmet.m_ObjectType == FTK_itembase.ObjectType.helmet && helmet.m_WearablePrefab == null;
+            // The attached helmet hook also applies policy to direct wearable-prefab instances.
+            return helmet != null && helmet.m_ObjectType == FTK_itembase.ObjectType.helmet;
         }
         internal static IEnumerable<int> ReloadHelmetHairItems() { return HelmetHair.Keys; }
         internal static void RegisterHelmetHairVisibility(int id, bool top, bool bottom)
@@ -30,6 +29,16 @@ namespace FTKModFramework.Core
             if (helmet == null) return;
             helmet.m_IsHairTopOn = visibility[0];
             helmet.m_IsHairBottomOn = visibility[1];
+        }
+        internal static void ApplyAttachedHelmetHairVisibility(FTK_itembase.ID id, CharacterEventListener avatar)
+        {
+            bool[] visibility;
+            if (avatar == null || avatar.m_Helmet == null ||
+                !HelmetHair.TryGetValue((int)id, out visibility)) return;
+            avatar.m_Helmet.m_IsHairTopOn = visibility[0];
+            avatar.m_Helmet.m_IsHairBottomOn = visibility[1];
+            if (avatar.m_TargetHairTop != null) avatar.m_TargetHairTop.gameObject.SetActive(visibility[0]);
+            if (avatar.m_TargetHairBottom != null) avatar.m_TargetHairBottom.gameObject.SetActive(visibility[1]);
         }
         internal static IEnumerable<KeyValuePair<int, EnemyRendererMesh[]>> ReloadPlans(bool display)
         { return display ? Displays : Models; }
@@ -51,6 +60,15 @@ namespace FTKModFramework.Core
         internal static void RegisterDisplay(int id, EnemyRendererMesh[] meshes) { Displays[id] = (EnemyRendererMesh[])meshes.Clone(); }
         internal static void RegisterOffHand(int id, EnemyRendererMesh[] meshes) { OffHands[id] = (EnemyRendererMesh[])meshes.Clone(); }
         internal static void Register(int id, EnemyRendererMesh[] meshes) { Models[id] = (EnemyRendererMesh[])meshes.Clone(); }
+        internal static bool TryGetHeadFallbackPath(int id, out string path)
+        {
+            path = null;
+            EnemyRendererMesh[] models;
+            if (!Models.TryGetValue(id, out models) || models == null || models.Length != 1 ||
+                models[0] == null || models[0].RendererKind != EnemyRendererKind.MeshRenderer) return false;
+            path = models[0].RendererPath;
+            return true;
+        }
         internal static void Apply(FTK_itembase.ID id, GameObject instance)
         {
             Apply(id, instance, Models, "item:");
@@ -98,8 +116,44 @@ namespace FTKModFramework.Core
     {
         internal static void Postfix(FTK_itembase.ID _helmetID, GameObject __result)
         {
-            ItemModelRegistry.Apply(_helmetID, __result);
+            if (!ItemHeadProfileRegistry.HasProfiles((int)_helmetID))
+                ItemModelRegistry.Apply(_helmetID, __result);
             ItemModelRegistry.ApplyHelmetHairVisibility(_helmetID, __result);
+        }
+    }
+
+    // UpdateHelmet creates a fresh attached instance, including the direct wearable-prefab route.
+    [HarmonyPatch(typeof(CharacterEventListener), "UpdateHelmet")]
+    internal static class ItemHeadProfileAttachedPatch
+    {
+        private static bool Prefix(CharacterEventListener __instance, out bool __state)
+        {
+            __state = false;
+            try
+            {
+                HeadFaceResources current = __instance == null ? null : __instance.GetComponent<HeadFaceResources>();
+                if (current == null || current.Restore()) { __state = true; return true; }
+                Plugin.Log.LogError("[head-face] helmet update blocked: prior face references diverged");
+                return false;
+            }
+            catch (Exception e) { Plugin.Log.LogError("[head-face] helmet update blocked: " + e.Message); return false; }
+        }
+        private static void Postfix(CharacterEventListener __instance, bool __state)
+        {
+            if (!__state) return;
+            try { HeadProfileCoordinator.OnHelmetUpdated(__instance); }
+            catch (Exception e) { Plugin.Log.LogWarning("[item-head-profile] attached helmet: " + e.Message); }
+        }
+    }
+
+    [HarmonyPatch(typeof(CharacterEventListener), "SetVisible")]
+    internal static class ItemHeadProfileVisibilityPatch
+    {
+        private static void Postfix(CharacterEventListener __instance, bool _v)
+        {
+            if (!_v) return;
+            try { HeadProfileCoordinator.OnHelmetUpdated(__instance); }
+            catch (Exception e) { Plugin.Log.LogWarning("[head-profile] visible avatar: " + e.Message); }
         }
     }
 

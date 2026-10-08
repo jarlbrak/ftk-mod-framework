@@ -34,6 +34,7 @@ namespace FTKModFramework.Core.HotReload
             foreach (bool display in new[] { false, true })
                 foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadPlans(display)) requiredItems.Add(plan.Key);
             foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadOffHandPlans()) requiredItems.Add(plan.Key);
+            foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemHeadProfileRegistry.ReloadPlans()) requiredItems.Add(plan.Key);
             foreach (KeyValuePair<int, PlayerApparelMesh[]> plan in ItemApparelRegistry.ReloadPlans()) requiredItems.Add(plan.Key);
             foreach (int id in ItemModelRegistry.ReloadHelmetHairItems()) requiredItems.Add(id);
             Dictionary<int, FTK_itembase> items = PreflightRowIndex.Build(ItemRowsForPreflight(), requiredItems,
@@ -76,6 +77,27 @@ namespace FTKModFramework.Core.HotReload
                         if (mesh.MetallicGlossTextureFileName != null) masks.Add(mesh.MetallicGlossTextureFileName);
                     }
                 }
+            foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemHeadProfileRegistry.ReloadPlans())
+            {
+                FTK_itembase item = items[plan.Key];
+                GameObject prefab = item.m_Prefab;
+                Helmet helmet = prefab == null ? null : prefab.GetComponentInChildren<Helmet>();
+                if (helmet == null) throw new InvalidOperationException("Head profile has no native helmet: " + item.m_ID);
+                foreach (EnemyRendererMesh mesh in plan.Value)
+                {
+                    Transform target = ExactTarget(helmet.gameObject, mesh.RendererPath);
+                    MeshRenderer[] renderers = target.GetComponents<MeshRenderer>();
+                    MeshFilter[] filters = target.GetComponents<MeshFilter>();
+                    if (renderers.Length != 1 || filters.Length != 1 || filters[0].sharedMesh == null ||
+                        target.GetComponents<SkinnedMeshRenderer>().Length != 0)
+                        throw new InvalidOperationException("Invalid head profile rigid renderer: " + item.m_ID + "/" + mesh.RendererPath);
+                    ValidateMaterial(renderers[0], true);
+                    string resolved = CustomModelLoader.ResolveModelPath(mesh.GlbFileName);
+                    if (rigidModels.Add(resolved))
+                        jobs.Add(delegate { RuntimeGltfMeshLoader.PreflightResolved(resolved, null, null); });
+                    textures.Add(mesh.TextureFileName);
+                }
+            }
             foreach (KeyValuePair<int, EnemyRendererMesh[]> plan in ItemModelRegistry.ReloadOffHandPlans())
             {
                 FTK_weaponStats2 item = items[plan.Key] as FTK_weaponStats2;

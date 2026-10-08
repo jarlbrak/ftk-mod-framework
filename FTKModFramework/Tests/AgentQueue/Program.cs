@@ -25,7 +25,10 @@ internal static class Program
         var pending = new MainThreadWork(delegate { calls++; return "unexpected"; });
         var timeout = Throws<TimeoutException>(delegate { pending.Wait(0); });
         pending.Execute();
-        Check(calls == 0 && timeout.Message.Contains("before execution"), "Pending timeout must prevent later execution");
+        Check(calls == 0 && timeout.Message == "main-thread work timed out before execution; cancelled without executing", "Pending timeout must prevent later execution and report exact cancellation");
+        Throws<InvalidOperationException>(delegate { pending.Wait(0); });
+        pending.Execute();
+        Check(calls == 0, "Observing a cancelled request cannot execute it later");
 
         var stopped = new MainThreadWork(delegate { calls++; return null; });
         stopped.CancelPending();
@@ -55,7 +58,8 @@ internal static class Program
                 Check(entered.WaitOne(5000), "Worker starts");
                 running.CancelPending();
                 timeout = Throws<TimeoutException>(delegate { running.Wait(1); });
-                Check(timeout.Message.Contains("outcome unknown"), "Running timeout must distinguish unknown outcome");
+                Check(timeout.Message == "main-thread work timed out after execution started; outcome unknown, do not retry automatically", "Running timeout must report exact unknown outcome");
+                running.Execute();
             }
             finally { release.Set(); Check(thread.Join(5000), "Late completion remains safe"); }
             Check((int)running.Wait(0) == 42, "Running cancellation does not abort or lose completion");

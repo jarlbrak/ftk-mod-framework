@@ -18,14 +18,11 @@ namespace FTKModFramework.Core
 
         internal static bool IsExactBaseline(TableManager manager)
         {
-            Dictionary<string, int> ids;
-            int id;
-            if (!presentationReady || row == null || manager == null || IdAllocator.CustomIdCount != 1 ||
-                ContentRegistry.CustomIds.Count != 1 ||
-                !ContentRegistry.CustomIds.TryGetValue(typeof(FTK_itemsDB), out ids) ||
-                ids.Count != 1 || !ids.TryGetValue(ItemId, out id)) return false;
-            return id == (int)FTK_itembase.GetEnum(row.m_ID) &&
-                object.ReferenceEquals(manager.Get<FTK_itemsDB>().GetEntryByInt(id), row);
+            if (manager == null || row == null) return false;
+            int id = (int)FTK_itembase.GetEnum(row.m_ID);
+            return BuiltinExchangeBaseline.IsExact(presentationReady, IdAllocator.CustomIdCount,
+                ContentRegistry.CustomIds, typeof(FTK_itemsDB), ItemId, id, row,
+                manager.Get<FTK_itemsDB>().GetEntryByInt(id));
         }
 
         internal static FTK_items Token

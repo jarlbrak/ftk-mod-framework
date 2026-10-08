@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"math"
 	"path"
 	"strings"
 )
@@ -151,12 +152,102 @@ func rejectModelReferences(value interface{}, depth int) error {
 }
 
 type marketModelRenderer struct {
-	Path                 string  `json:"path"`
-	Model                string  `json:"model"`
-	Texture              string  `json:"texture"`
-	MetallicGlossTexture *string `json:"metallicGlossTexture,omitempty"`
-	NativeMesh           string  `json:"nativeMesh,omitempty"`
+	Path                 string          `json:"path"`
+	Model                string          `json:"model"`
+	Texture              string          `json:"texture"`
+	MetallicGlossTexture *string         `json:"metallicGlossTexture,omitempty"`
+	NativeMesh           string          `json:"nativeMesh,omitempty"`
+	Matte                json.RawMessage `json:"matte,omitempty"`
 }
+type marketHeadCustomRace struct {
+	ModGuid string `json:"modGuid"`
+	Key     string `json:"key"`
+}
+type marketHeadProfile struct {
+	NativeSkinset string                `json:"nativeSkinset,omitempty"`
+	CustomRace    *marketHeadCustomRace `json:"customRace,omitempty"`
+	Model         marketModelRenderer   `json:"model"`
+	FaceOcclusion *marketHeadFace       `json:"faceOcclusion,omitempty"`
+}
+type marketHeadPlane struct {
+	Normal   []float64 `json:"normal"`
+	Distance *float64  `json:"distance"`
+}
+type marketHeadFace struct {
+	BodyPath  string            `json:"bodyPath"`
+	Planes    []marketHeadPlane `json:"planes"`
+	UpperHair string            `json:"upperHair"`
+	LowerHair string            `json:"lowerHair"`
+}
+
+func marketHeadFaceValid(face *marketHeadFace) error {
+	if face == nil {
+		return nil
+	}
+	if face.BodyPath == "." || !marketSafePath(face.BodyPath) {
+		return errors.New("invalid faceOcclusion bodyPath")
+	}
+	if len(face.Planes) < 4 || len(face.Planes) > 16 ||
+		(face.UpperHair != "preserve" && face.UpperHair != "clipStrictHead") ||
+		(face.LowerHair != "preserve" && face.LowerHair != "clipStrictHead" && face.LowerHair != "hideRenderer") {
+		return errors.New("invalid faceOcclusion planes or hair policy")
+	}
+	for _, plane := range face.Planes {
+		if len(plane.Normal) != 3 || plane.Distance == nil {
+			return errors.New("invalid faceOcclusion plane shape")
+		}
+		length2 := 0.0
+		for _, x := range plane.Normal {
+			if math.IsNaN(x) || math.IsInf(x, 0) || math.Abs(x) > 1000 {
+				return errors.New("invalid faceOcclusion normal")
+			}
+			length2 += x * x
+		}
+		if length2 < 0.998001 || length2 > 1.002001 || math.IsNaN(*plane.Distance) || math.IsInf(*plane.Distance, 0) || math.Abs(*plane.Distance) > 1000 {
+			return errors.New("invalid faceOcclusion plane")
+		}
+	}
+	return nil
+}
+
+func marketHeadProfiles(profiles []marketHeadProfile, fallback []marketModelRenderer) error {
+	if len(profiles) == 0 || len(profiles) > 256 || len(fallback) != 1 {
+		return errors.New("headProfiles requires 1-256 profiles and one itemModels fallback")
+	}
+	seen := map[string]bool{}
+	for _, profile := range profiles {
+		if (profile.NativeSkinset == "") == (profile.CustomRace == nil) {
+			return errors.New("headProfiles requires exactly one appearance selector")
+		}
+		key := "native:" + profile.NativeSkinset
+		if profile.CustomRace != nil {
+			if strings.TrimSpace(profile.CustomRace.ModGuid) != profile.CustomRace.ModGuid ||
+				strings.TrimSpace(profile.CustomRace.Key) != profile.CustomRace.Key ||
+				strings.Contains(profile.CustomRace.ModGuid, ":") || strings.Contains(profile.CustomRace.Key, ":") ||
+				profile.CustomRace.ModGuid == "" || profile.CustomRace.Key == "" {
+				return errors.New("invalid headProfiles customRace")
+			}
+			key = "custom:" + profile.CustomRace.ModGuid + ":" + profile.CustomRace.Key
+		} else if strings.TrimSpace(profile.NativeSkinset) != profile.NativeSkinset || profile.NativeSkinset == "" {
+			return errors.New("invalid headProfiles nativeSkinset")
+		}
+		if seen[key] {
+			return errors.New("duplicate headProfiles selector")
+		}
+		seen[key] = true
+		if profile.Model.Path != fallback[0].Path {
+			return errors.New("headProfiles renderer differs from itemModels fallback")
+		}
+		if err := marketModelRenderers([]marketModelRenderer{profile.Model}, false, true); err != nil {
+			return err
+		}
+		if err := marketHeadFaceValid(profile.FaceOcclusion); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 type marketPlayerModel struct {
 	Skinset  string                `json:"skinset"`
 	Body     []marketModelRenderer `json:"body"`
@@ -193,7 +284,7 @@ func marketRaceBindings(bindings []marketRaceBinding) error {
 	return nil
 }
 
-func marketModelRenderers(renderers []marketModelRenderer, apparel bool) error {
+func marketModelRenderers(renderers []marketModelRenderer, apparel bool, allowMatte ...bool) error {
 	if len(renderers) == 0 || len(renderers) > 32 {
 		return errors.New("invalid model renderer count")
 	}
@@ -212,6 +303,12 @@ func marketModelRenderers(renderers []marketModelRenderer, apparel bool) error {
 		if apparel && r.NativeMesh == "" || !apparel && r.NativeMesh != "" {
 			return errors.New("nativeMesh is required only for conditional apparel")
 		}
+		if len(r.Matte) != 0 && string(r.Matte) != "true" && string(r.Matte) != "false" {
+			return errors.New("matte requires a JSON boolean token")
+		}
+		if len(r.Matte) != 0 && (len(allowMatte) == 0 || !allowMatte[0]) {
+			return errors.New("matte requires an item model or item apparel renderer")
+		}
 	}
 	return nil
 }
@@ -223,6 +320,7 @@ func marketModelReferences(data map[string][]byte) error {
 		var doc struct {
 			Entries []struct {
 				ItemModels    []marketModelRenderer `json:"itemModels"`
+				HeadProfiles  []marketHeadProfile   `json:"headProfiles"`
 				OffHandModels []marketModelRenderer `json:"offHandModels"`
 				DisplayModels []marketModelRenderer `json:"displayModels"`
 				PlayerModels  []marketPlayerModel   `json:"playerModels"`
@@ -241,6 +339,9 @@ func marketModelReferences(data map[string][]byte) error {
 				}
 			}
 			refs := append([]marketModelRenderer{}, e.ItemModels...)
+			for _, profile := range e.HeadProfiles {
+				refs = append(refs, profile.Model)
+			}
 			refs = append(refs, e.DisplayModels...)
 			refs = append(refs, e.OffHandModels...)
 			if e.ApparelModels != nil {

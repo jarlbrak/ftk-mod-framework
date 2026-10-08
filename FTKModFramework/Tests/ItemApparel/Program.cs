@@ -28,13 +28,26 @@ internal static class Program
     }
     private static void Main()
     {
+        // Optional parameters are compiled into call-site signatures; preserve these exact old entry points.
+        Check(typeof(EnemyRendererMesh).GetMethod("ForStaticRenderer", new[] {
+            typeof(string), typeof(string), typeof(string), typeof(bool) }) != null,
+            "old four-argument rigid model ABI missing");
+        Check(typeof(PlayerApparelMesh).GetConstructor(new[] {
+            typeof(string), typeof(string), typeof(string), typeof(string) }) != null,
+            "old four-argument apparel ABI missing");
+        Check(typeof(EnemyRendererMesh).GetConstructor(new[] {
+            typeof(string), typeof(string), typeof(string), typeof(bool) }) != null,
+            "old four-argument skinned model ABI missing");
+        Check(typeof(ItemRendererMesh).GetConstructor(new[] {
+            typeof(string), typeof(string), typeof(string) }) != null,
+            "old three-argument item model ABI missing");
         var female = new FTK_skinset { m_ID = "Female", m_Armor = Part(null, "robeF", "nativeF").GetComponent<SkinnedMeshRenderer>() };
         var male = new FTK_skinset { m_ID = "Male", m_Armor = Part(null, "robeM", "nativeM").GetComponent<SkinnedMeshRenderer>() };
         Content.Db<FTK_skinsetDB>().Rows[0] = female; Content.Db<FTK_skinsetDB>().Rows[1] = male;
         var item = new FTK_items { m_ID = "customArmor", m_ObjectSlot = FTK_itembase.ObjectSlot.equip, m_ObjectType = FTK_itembase.ObjectType.armor };
         Content.Db<FTK_itemsDB>().Rows[1] = item;
         ContentRegistry.Bindings[typeof(FTK_itemsDB).Name + item.m_ID] = 1;
-        var meshes = new[] { new PlayerApparelMesh("robeM(Clone)", "nativeM", "itemM.glb", null, "itemM-mask.png"), new PlayerApparelMesh("robeF(Clone)", "nativeF", "itemF.glb") };
+        var meshes = new[] { new PlayerApparelMesh("robeM(Clone)", "nativeM", "itemM.glb", "itemM.png", "itemM-mask.png", true), new PlayerApparelMesh("robeF(Clone)", "nativeF", "itemF.glb") };
         Check(!Content.SetItemApparelMeshesFromGlb(new FTK_items { m_ID = item.m_ID }, FTK_skinset.ID.Female, FTK_skinset.ID.Male, meshes), "detached row rejected");
         var saved = female.m_Armor; female.m_Armor = null;
         Check(!Content.SetItemApparelMeshesFromGlb(item, FTK_skinset.ID.Female, FTK_skinset.ID.Male, meshes) && item.m_WearablePrefab == null, "missing garment fails without throwing or mutation");
@@ -56,6 +69,7 @@ internal static class Program
         PlayerMeshRegistry.Apply(vanilla, male, avatar);
         Check(ExplicitEnemyMeshSwap.Calls == 1 && ExplicitEnemyMeshSwap.Last.Length == 1 && ExplicitEnemyMeshSwap.Last[0].GlbFileName == "itemM.glb", "registered gear works on vanilla class without root lease or enabled custom class plan; registration snapshot preserved");
         Check(ExplicitEnemyMeshSwap.Last[0].MetallicGlossTextureFileName == "itemM-mask.png", "Item apparel mask survives registration and runtime resolution");
+        Check(ExplicitEnemyMeshSwap.Last[0].Matte, "equipped item apparel retains its opt-in material policy");
         ExplicitEnemyMeshSwap.Calls = 0; PlayerMeshRegistry.Apply(vanilla, male, Avatar(true));
         Check(ExplicitEnemyMeshSwap.Calls == 1, "preview inventory selects item apparel");
         var custom = new FTK_playerGameStart { m_ID = "custom", m_Skinsets = new[] { FTK_skinset.ID.Male } };
@@ -108,11 +122,13 @@ internal static class Program
         ItemLootDisplayModelPatch.Postfix(FTK_itembase.ID.Armor, pack.transform);
         Check(ExplicitEnemyMeshSwap.Calls == 0, "equipped mapping is never guessed for loot display hierarchy");
         Check(!Content.SetItemDisplayMeshesFromGlb(new FTK_items { m_ID = item.m_ID }, new ItemRendererMesh("child", "display.glb", "display.png")), "display API rejects detached row");
-        var displayMeshes = new[] { new ItemRendererMesh("child", "display.glb", "display.png") };
+        var displayMeshes = new[] { new ItemRendererMesh("child", "display.glb", "display.png", true) };
         Check(Content.SetItemDisplayMeshesFromGlb(item, displayMeshes), "exact registered item display accepted");
         displayMeshes[0] = new ItemRendererMesh("changed", "wrong.glb", "wrong.png");
         ItemLootDisplayModelPatch.Postfix(FTK_itembase.ID.Armor, pack.transform);
         Check(ExplicitEnemyMeshSwap.Calls == 1 && ExplicitEnemyMeshSwap.LastRoot == pack && ExplicitEnemyMeshSwap.Last[0].GlbFileName == "display.glb" && ExplicitEnemyMeshSwap.Last[0].RendererPath == "child", "loot preview routes exact display snapshot independently of equipped mapping");
+        Check(ExplicitEnemyMeshSwap.Last[0].Matte && !new ItemRendererMesh("child", "other.glb", "other.png").Matte,
+            "display opt-in is scoped and old constructors keep native finish");
         ItemModelRegistry.Apply(FTK_itembase.ID.Armor, pack);
         Check(ExplicitEnemyMeshSwap.Last[0].GlbFileName == "loot.glb" && ExplicitEnemyMeshSwap.Last[0].RendererPath == ".", "equipped mapping remains independent of display mapping");
         var offHand = new GameObject(".");
@@ -126,15 +142,24 @@ internal static class Program
         item.m_ObjectType = FTK_itembase.ObjectType.helmet;
         Check(!Content.SetHelmetHairVisibility(new FTK_items { m_ID = item.m_ID, m_ObjectType = FTK_itembase.ObjectType.helmet }, true, true), "detached helmet row rejected");
         Check(!Content.SetHelmetHairVisibility(new FTK_items { m_ID = "vanilla", m_ObjectType = FTK_itembase.ObjectType.helmet }, true, true), "vanilla helmet row rejected");
-        Check(item.m_WearablePrefab != null && !Content.SetHelmetHairVisibility(item, true, true), "direct wearable-prefab helmet route rejected");
+        Check(item.m_WearablePrefab != null && Content.SetHelmetHairVisibility(item, true, true), "direct wearable-prefab helmet route supported by attached hook");
         var rejectedHair = new GameObject("rejected hair").AddComponent<Helmet>();
         ItemModelRegistry.ApplyHelmetHairVisibility(FTK_itembase.ID.Armor, rejectedHair.gameObject);
-        Check(!rejectedHair.m_IsHairTopOn && !rejectedHair.m_IsHairBottomOn, "rejected wearable registration does not mutate hair registry or native flags");
+        Check(rejectedHair.m_IsHairTopOn && rejectedHair.m_IsHairBottomOn, "wearable registration applies only to fresh helmet instance");
+        var attachedAvatar = new GameObject("attached avatar").AddComponent<CharacterEventListener>();
+        attachedAvatar.m_Helmet = rejectedHair;
+        attachedAvatar.m_TargetHairTop = new GameObject("top hair").AddComponent<Helmet>();
+        attachedAvatar.m_TargetHairBottom = new GameObject("bottom hair").AddComponent<Helmet>();
+        Check(Content.SetHelmetHairVisibility(item, false, true), "wearable attached hair policy registered");
+        ItemModelRegistry.ApplyAttachedHelmetHairVisibility(FTK_itembase.ID.Armor, attachedAvatar);
+        Check(!rejectedHair.m_IsHairTopOn && rejectedHair.m_IsHairBottomOn &&
+            !attachedAvatar.m_TargetHairTop.gameObject.activeSelf && attachedAvatar.m_TargetHairBottom.gameObject.activeSelf,
+            "attached wearable hair policy updates fresh helmet flags and avatar hair renderers");
         item.m_WearablePrefab = null;
         Check(Content.SetHelmetHairVisibility(item, true, true), "custom helmet hair registered");
         item.m_WearablePrefab = new GameObject("direct wearable");
-        Check(!ItemModelRegistry.SupportsHelmetHairVisibility(item), "publication preflight detects a route changed after registration");
-        Check(!Content.SetHelmetHairVisibility(item, false, false), "unsupported route cannot replace a valid hair registration");
+        Check(ItemModelRegistry.SupportsHelmetHairVisibility(item), "publication preflight accepts attached wearable route");
+        Check(Content.SetHelmetHairVisibility(item, true, true), "attached route preserves supported hair policy");
         ItemModelRegistry.ApplyHelmetHairVisibility(FTK_itembase.ID.Armor, rejectedHair.gameObject);
         Check(rejectedHair.m_IsHairTopOn && rejectedHair.m_IsHairBottomOn, "failed re-registration preserves previous hair policy");
         item.m_WearablePrefab = null;

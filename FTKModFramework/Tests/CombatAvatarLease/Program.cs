@@ -12,10 +12,20 @@ namespace UnityEngine
     {
         public static Object NextClone;
         public static T Instantiate<T>(T value) where T:Object { return (T)NextClone; }
+        public static void Destroy(Object value) { ((GameObject)value).Destroyed=true; }
     }
-    public class GameObject:Object {public bool Retained;}
+    public class GameObject:Object {public bool Retained,Destroyed;}
 }
-public class CharacterEventListener:UnityEngine.Object {public UnityEngine.GameObject gameObject=new UnityEngine.GameObject();}
+public class CharacterEventListener:UnityEngine.Object
+{
+    public UnityEngine.GameObject gameObject=new UnityEngine.GameObject();
+    public T[] GetComponentsInChildren<T>(bool inactive) where T:class
+    {
+        if(typeof(T)==typeof(EnemyMeshResources))return new[]{new EnemyMeshResources(gameObject) as T};
+        if(typeof(T)==typeof(HeadFaceResources))return new[]{new HeadFaceResources(gameObject) as T};
+        return new T[0];
+    }
+}
 public class CharacterOverworld {public CharacterEventListener m_Avatar;}
 public class CharacterDummy
 {
@@ -24,11 +34,22 @@ public class CharacterDummy
 }
 namespace FTKModFramework.Core
 {
-    internal static class EnemyMeshResources
+    internal sealed class EnemyMeshResources
     {
+        readonly UnityEngine.GameObject owner;
+        internal EnemyMeshResources(UnityEngine.GameObject value){owner=value;}
+        internal bool HasLease {get{return true;}}
         internal static int Calls;
         internal static bool Fail;
         internal static void RetainHierarchy(UnityEngine.GameObject value){Calls++;if(Fail)throw new Exception("retain failure");value.Retained=true;}
+        internal bool ValidLease(){return owner.Retained;}
+    }
+    internal sealed class HeadFaceResources
+    {
+        internal HeadFaceResources(UnityEngine.GameObject value){}
+        internal bool HasLease {get{return false;}}
+        internal bool Active {get{return false;}}
+        internal static void RetainHierarchy(UnityEngine.GameObject value) { }
     }
     internal static class Plugin {internal static Logger Log=new Logger();}
     internal class Logger {internal void LogWarning(string message){}}
@@ -74,8 +95,10 @@ internal static class Program
         try{Compile(PlayerCombatMeshLeasePatch.Transpiler(throwing).ToList())(dummy);}catch(ApplicationException e){failed=e.Message=="native initialization failed";}
         Check(failed&&dummy.m_EventListener.gameObject.Retained,"Later native exception propagates after clone retained");
         UnityEngine.Object.NextClone=new CharacterEventListener();
-        EnemyMeshResources.Fail=true;Compile(patched)(dummy);EnemyMeshResources.Fail=false;
-        Check(dummy.m_EventListener==UnityEngine.Object.NextClone&&!dummy.m_EventListener.gameObject.Retained&&EnemyMeshResources.Calls==3,"Retention observer error leaves native assignment intact and returns normally");
+        EnemyMeshResources.Fail=true;bool rejectedLease=false;
+        try{Compile(patched)(dummy);}catch(InvalidOperationException){rejectedLease=true;}
+        EnemyMeshResources.Fail=false;
+        Check(rejectedLease&&dummy.m_EventListener.gameObject.Destroyed&&EnemyMeshResources.Calls==3,"Missing combat lease destroys unsafe clone and fails closed");
         foreach(var bad in new[]{new List<CodeInstruction>{new CodeInstruction(OpCodes.Ret)},CloneSequence().Concat(CloneSequence()).ToList()})
         {bool rejected=false;try{PlayerCombatMeshLeasePatch.Transpiler(bad).ToList();}catch(InvalidOperationException){rejected=true;}Check(rejected,"Missing or ambiguous assignment fails before patching");}
         var foreign=CloneSequence();foreign[4]=new CodeInstruction(OpCodes.Call,typeof(Program).GetMethod("LaterFailure"));bool mismatch=false;

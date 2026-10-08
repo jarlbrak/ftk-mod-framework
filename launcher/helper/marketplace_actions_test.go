@@ -2,6 +2,29 @@ package main
 
 import "testing"
 
+func TestMarketNativeBattleButtonAdmission(t *testing.T) {
+	for _, test := range []struct {
+		name, kind, fields string
+		valid              bool
+	}{
+		{"vanilla row", "proficiency", `"nativeBattleButton":"gunFire"`, true},
+		{"blade row", "proficiency", `"nativeBattleButton":"bladeDamage"`, true},
+		{"empty", "proficiency", `"nativeBattleButton":""`, false},
+		{"numeric", "proficiency", `"nativeBattleButton":"123"`, false},
+		{"qualified", "proficiency", `"nativeBattleButton":"other:gunFire"`, false},
+		{"with package icon", "proficiency", `"nativeBattleButton":"gunFire","icon":"assets/fire.png"`, false},
+		{"wrong kind", "weapon", `"nativeBattleButton":"gunFire"`, false},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			body := `{"entries":[{"kind":"` + test.kind + `","id":"test","template":"native",` + test.fields + `}]}`
+			err := marketContent([]byte(body))
+			if (err == nil) != test.valid {
+				t.Fatalf("valid=%v, err=%v", test.valid, err)
+			}
+		})
+	}
+}
+
 func TestMarketClassAndDebuffCapabilities(t *testing.T) {
 	for _, test := range []struct {
 		name, kind, fields string

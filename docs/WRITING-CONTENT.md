@@ -47,6 +47,12 @@ Omitting either option preserves its inherited behavior. Do not copy a historica
 framework minimum for a package using these options; select a release that
 actually includes the APIs before publishing.
 
+In the experimental, unreleased framework candidate (not published 1.6.2), a proficiency button can use `nativeBattleButton` to name an exact vanilla proficiency row, such as `gunFire`, and reuse its existing combat sprite. The source row must exist and have a sprite. This option is mutually exclusive with a nonempty package `icon` and does not change the source row or any item icon. Compiled mods can copy the same native sprite in the `Content.AddProficiency` configure callback.
+
+The unreleased Thief framework candidate adds optional `matte: true` to renderer assignments in `itemModels`, `displayModels`, `offHandModels`, and `apparelModels`. It clears inherited metallic/specular maps and gloss settings on the replacement material copy, preserving the native shader and authored diffuse texture. Omission or `false` retains the inherited finish. This is a strict JSON boolean and is not available in published framework 1.6.2. Use it selectively for cloth or leather after comparing equipped and display materials; it is not a substitute for a material mask on mixed metal and cloth. GLB PBR settings alone do not override the native material in this route.
+
+The unreleased candidate also supports exact wearer-specific `headProfiles` and optional `faceOcclusion` for close-fitting headgear. Native skinsets and registered custom races select original models; clipped face geometry remains an owned runtime copy. See the [head-profile contract](MODEL-HEAD-PROFILES.md) for source checks, fallback behavior, hair treatment and separate native validation gates.
+
 For a compiled mod, reference `FTKModFramework.dll` and the game's publicized `Assembly-CSharp` from a .NET 3.5 BepInEx 5 plugin. Register through `FTKModFramework.Core.Content` after `GridEditor.TableManager.Initialize` has populated the tables. `Content.AddItem`, `AddWeapon`, `AddProficiency`, `AddClass`, `AddEnemy`, and `AddEncounter` clone and register rows; `Content.AttachProficiencies` and `AttachEnemyProficiencies` connect actions to privately cloned weapons. `Content.Db<T>()` ensures a table index exists before direct reads. `Content.AddPassive` binds one of the framework's closed `PassiveTrigger` moments to a registered class; it does not create a database row or a chance roll. Keep registrations idempotent and pass your plugin GUID to each call.
 
 A data mod can declare `behaviorDll` for a `ProficiencyBase` subclass or custom quest-logic verb, but the marketplace's current [content contract](MARKETPLACE.md#submit-a-mod) does not distribute behavior DLLs. Campaign and adventure authoring have separate [campaign](CAMPAIGNS.md) and [adventure](ADVENTURES.md) guides; their availability as framework APIs does not mean that a campaign package has shipped.
@@ -70,6 +76,14 @@ Framework 1.3.0 adds a `loreStoreUnlock` entry. Its only supported form is:
 While the mod is loaded, every Lore Store entry the player could buy reads as purchased. Entries from free DLC packs also unlock. Entries for unowned paid DLC, entries the game hides from the store, and cloud promotions it is not currently offering keep their real state. A purchased class is also shown at character creation.
 
 The framework writes no Lore Store purchase, so removing the mod restores the player's real purchases. Lore reveals and the party's shared reveal state remain genuine progress. In co-op, most unlocks apply only to the player who has the mod. The game shares some world unlocks with the party, except entries it requires every player to own. Co-op is unverified. The entry requires next-launch activation. [Lore Store Unlocked](../marketplace/packages/lore-store-unlocked/README.md) is the package that uses it.
+
+## Experimental Thief armor and Equipment Exchange
+
+The unreleased [Thief candidate](thief/CANDIDATE.md) adds `thiefArmor: {"family": "locksmith", "slot": "body"}` to an item and `thiefArmament: "locksmith"` to a weapon. Families are `locksmith`, `nightblade` or `wayfarer`; visible slots are `head`, `body` or `feet`. The loader prefixes each family with the owning mod GUID. Public code uses `Content.SetThiefVisibleArmor` and `Content.SetThiefArmament` with that same namespaced key. Charms and artifacts cannot complete visible armor, and matching weapons currently confer no additional power.
+
+A class may declare `townExchange: {"offers": [...]}`. Each offer contains `item`, `name`, `family` and a native stock slot such as `Head`, `Body`, `Foot`, `RightHand` or `Trinket`. `Content.RegisterTownExchange` uses the framework's shared Guild Token; do not register another currency or repurpose a wearable charm. Registration preserves authored ordinary acquisition flags. Exchange-exclusive items must explicitly disable ordinary drops and shops after validation. Purchases are offline only. Exchange, custom reward and armor-role registrations require a process restart; title-screen activation is refused while these registrations are active.
+
+These APIs require the experimental build and are not available in published framework 1.6.2. See the candidate contract for provisional effects, compatibility and remaining native gates.
 
 ## Validate and play
 

@@ -15,6 +15,8 @@ namespace UnityEngine
     }
     public class GameObject
     {
+        public bool activeSelf = true;
+        public void SetActive(bool active) { activeSelf = active; }
         public readonly Transform transform;
         private readonly List<Component> components = new List<Component>();
         public GameObject(string path) { transform = new Transform { gameObject = this, path = path }; }
@@ -44,7 +46,7 @@ namespace GridEditor
 {
     public class FTK_itembase
     {
-        public enum ID { None, Armor, Boots, Unregistered }
+        public enum ID { None, Armor, Boots, Unregistered, Helmet }
         public enum ObjectSlot { armor, boot, other, equip }
         public enum ObjectType { armor, boots, helmet, other }
         public ObjectType m_ObjectType;
@@ -58,7 +60,7 @@ namespace GridEditor
     public class FTK_items : FTK_itembase { public UnityEngine.GameObject m_WearablePrefab, m_WearablePrefabM; }
     public class FTK_skinset
     {
-        public enum ID { Female, Male }
+        public enum ID { None = -1, Female = 0, Male = 1, Custom = 2 }
         public string m_ID;
         public UnityEngine.Component m_Armor;
         public UnityEngine.GameObject m_Boot;
@@ -84,30 +86,53 @@ namespace GridEditor
 public class PlayerInventory
 {
     public class Container { public FTK_itembase.ID Item; public FTK_itembase.ID GetOne() { return Item; } }
-    public Container m_ContainerBody = new Container(), m_ContainerFoot = new Container();
+    public Container m_ContainerBody = new Container(), m_ContainerFoot = new Container(), m_ContainerHead = new Container();
+    public enum ContainerID { Head }
+    public Container Get(ContainerID id) { return m_ContainerHead; }
 }
 public class CharacterOverworld
 {
+    public bool m_HideHelmet;
     public PlayerInventory m_PlayerInventory = new PlayerInventory();
-    public FTK_playerGameStart GetDBEntry() { return null; }
-    public FTK_skinset GetSkinset() { return null; }
+    public FTK_playerGameStart Row;
+    public FTK_skinset Skin;
+    public FTK_playerGameStart GetDBEntry() { return Row; }
+    public FTK_skinset GetSkinset() { return Skin; }
 }
 public class uiQuickPlayerCreate
 {
     public PlayerInventory m_PlayerInventory = new PlayerInventory();
-    public FTK_playerGameStart GetClassDBEntry() { return null; }
-    public FTK_skinset GetSkinset() { return null; }
+    public FTK_playerGameStart Row;
+    public FTK_skinset Skin;
+    public FTK_playerGameStart GetClassDBEntry() { return Row; }
+    public FTK_skinset GetSkinset() { return Skin; }
 }
-public class CharacterEventListener : UnityEngine.Component { public UnityEngine.Transform m_Backpack; public CharacterOverworld m_CharacterOverworld; public uiQuickPlayerCreate m_uiQuickPlayerCreate; }
+public class CharacterEventListener : UnityEngine.Component { public UnityEngine.Transform m_Backpack; public UnityEngine.Component m_TargetHairTop, m_TargetHairBottom; public CharacterOverworld m_CharacterOverworld; public uiQuickPlayerCreate m_uiQuickPlayerCreate; public Helmet m_Helmet; }
 public class FTKHub { }
 public class Weapon : UnityEngine.Component { public UnityEngine.GameObject m_OffHand; }
 public class CharacterDummy { public CharacterOverworld m_CharacterOverworld; public CharacterEventListener m_EventListener; }
 namespace HarmonyLib { public class HarmonyPatch : Attribute { public HarmonyPatch(Type t, string method, Type[] args) { } public HarmonyPatch(Type t, string method) { } } }
 namespace FTKModFramework.Core
 {
+    internal sealed class HeadFaceResources : UnityEngine.Component
+    {
+        internal bool Restore() { return true; }
+    }
+    internal static class HeadProfileCoordinator
+    {
+        internal static void MarkReady(CharacterEventListener avatar) { }
+        internal static void OnHelmetUpdated(CharacterEventListener avatar) { }
+    }
     internal static class PlayerRaceRegistry
     {
         internal static PlayerMeshPlan GetPlan(FTK_playerGameStart row, FTK_skinset skin) { return null; }
+        internal static FTK_playerGameStart BoundRow;
+        internal static FTK_skinset BoundSkin;
+        internal static bool TryGetIdentity(FTK_playerGameStart row, FTK_skinset skin, out string guid, out string key)
+        {
+            bool match = object.ReferenceEquals(row, BoundRow) && object.ReferenceEquals(skin, BoundSkin) && row != null && skin != null;
+            guid = match ? "com.example.race" : null; key = match ? "possum" : null; return match;
+        }
     }
     internal static class ExplicitMaterialOptions
     {
@@ -139,7 +164,8 @@ namespace FTKModFramework.Core
     {
         internal static int Calls;
         internal static UnityEngine.GameObject LastRoot;
-        internal static bool ApplyToObject(string identity, UnityEngine.GameObject root, EnemyRendererMesh[] entries, object prepareMaterial = null, bool preserveAuthoredMainPalette = false) { Calls++; Last = entries; LastRoot = root; return true; }
+        internal static bool NextApplyResult = true;
+        internal static bool ApplyToObject(string identity, UnityEngine.GameObject root, EnemyRendererMesh[] entries, object prepareMaterial = null, bool preserveAuthoredMainPalette = false) { Calls++; Last = entries; LastRoot = root; bool result = NextApplyResult; NextApplyResult = true; return result; }
         internal static EnemyRendererMesh[] Last;
         internal static bool ValidateAssignments(EnemyRendererMesh[] entries, out string error)
         {

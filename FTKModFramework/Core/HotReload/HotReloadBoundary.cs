@@ -123,6 +123,9 @@ namespace FTKModFramework.Core.HotReload
                 (!titleFocused && !ModsPanel.HasTitleOwner(main))) return "Return to the initial title screen or its Mods menu.";
             if (FTKInput.Instance.m_WaitingForPopup) return "A native popup is pending.";
             if (!DefinitionState.HasBaseline) return "No pristine database baseline.";
+            if (TownExchangeService.HasRegistrations || EnemyDropRuntime.HasRegistrations ||
+                ThiefRuntime.HasEquipmentRegistrations)
+                return "Exchange, enemy rewards, or Thief equipment profiles require a process restart.";
             if (Plugin.SelfTestsEnabled || !Plugin.EnableDataContent.Value ||
                 Plugin.SyntheticContentCount.Value != 0 || Plugin.DiagnosticsEnableGate.Value)
                 return "Diagnostic content is outside title-screen activation.";

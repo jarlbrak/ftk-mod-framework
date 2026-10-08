@@ -6,8 +6,8 @@ namespace FTKModFramework.Core
 {
     internal static class ThiefRuntime
     {
-        internal enum WeaponKind { None, Paired, Bow }
-        internal enum ActionKind { None, Prepare, Pierce }
+        internal enum WeaponKind { None, Paired, Bow, Pistol }
+        internal enum ActionKind { None, Prepare, Pierce, Shot }
         internal enum ArtifactKind { None, BorrowedFortune, LastLight, LooseAndLeave }
 
         private sealed class PendingSneak
@@ -18,6 +18,9 @@ namespace FTKModFramework.Core
             internal int FocusSpent;
             internal bool Perfect;
             internal ArtifactKind Artifact;
+            internal bool Prepared;
+            internal string ProfileKey;
+            internal int ProfileCount;
         }
 
         private sealed class PendingStrike
@@ -26,25 +29,39 @@ namespace FTKModFramework.Core
             internal float SlotSuccess;
         }
 
+        private sealed class PendingWayfarer
+        {
+            internal string TargetId;
+            internal int WeaponId;
+        }
+
         private static HashSet<int> classes = new HashSet<int>();
         private static Dictionary<int, WeaponKind> weapons = new Dictionary<int, WeaponKind>();
         private static Dictionary<int, ActionKind> actions = new Dictionary<int, ActionKind>();
         private static Dictionary<int, ArtifactKind> artifacts = new Dictionary<int, ArtifactKind>();
         private static Dictionary<string, PendingSneak> pending = new Dictionary<string, PendingSneak>(StringComparer.Ordinal);
         private static Dictionary<string, PendingStrike> strikes = new Dictionary<string, PendingStrike>(StringComparer.Ordinal);
+        private static Dictionary<string, PendingWayfarer> wayfarer = new Dictionary<string, PendingWayfarer>(StringComparer.Ordinal);
         private static Dictionary<string, int> observedWeapons = new Dictionary<string, int>(StringComparer.Ordinal);
+        private static Dictionary<string, string> observedProfiles = new Dictionary<string, string>(StringComparer.Ordinal);
         private static long attackSerial;
         private static ThiefCombatState state = new ThiefCombatState();
+        private static ThiefEquipmentSets equipment = new ThiefEquipmentSets();
         internal const string SlipAwayKey = "ftkmf_thief_slip_away";
         internal const string EvasionSignalKey = "ftkmf_thief_evasion_signal";
+        internal const string WayfarerPreviewKey = "ftkmf_thief_wayfarer_preview";
+        internal const string WayfarerCoreKey = "ftkmf_thief_wayfarer_core";
         internal static FTK_proficiencyTable.ID SlipAwayId = FTK_proficiencyTable.ID.None;
         internal static FTK_proficiencyTable.ID EvasionSignalId = FTK_proficiencyTable.ID.None;
+        internal static FTK_proficiencyTable.ID WayfarerPreviewId = FTK_proficiencyTable.ID.None;
+        internal static FTK_proficiencyTable.ID WayfarerCoreId = FTK_proficiencyTable.ID.None;
 
         internal static bool Enabled { get { return classes.Count != 0; } }
         internal static int ReloadClassCount { get { return classes.Count; } }
         internal static int ReloadWeaponCount { get { return weapons.Count; } }
         internal static int ReloadActionCount { get { return actions.Count; } }
         internal static int ReloadArtifactCount { get { return artifacts.Count; } }
+        internal static bool HasEquipmentRegistrations { get { return equipment.HasRegistrations; } }
 
         internal static Action SuspendForReload()
         {
@@ -54,26 +71,38 @@ namespace FTKModFramework.Core
             Dictionary<int, ArtifactKind> oldArtifacts = artifacts;
             Dictionary<string, PendingSneak> oldPending = pending;
             Dictionary<string, PendingStrike> oldStrikes = strikes;
+            Dictionary<string, PendingWayfarer> oldWayfarer = wayfarer;
             Dictionary<string, int> oldObserved = observedWeapons;
+            Dictionary<string, string> oldProfiles = observedProfiles;
             long oldAttackSerial = attackSerial;
             ThiefCombatState oldState = state;
+            ThiefEquipmentSets oldEquipment = equipment;
             FTK_proficiencyTable.ID oldSlipAway = SlipAwayId;
             FTK_proficiencyTable.ID oldEvasionSignal = EvasionSignalId;
+            FTK_proficiencyTable.ID oldWayfarerPreview = WayfarerPreviewId;
+            FTK_proficiencyTable.ID oldWayfarerCore = WayfarerCoreId;
             classes = new HashSet<int>();
             weapons = new Dictionary<int, WeaponKind>();
             actions = new Dictionary<int, ActionKind>();
             artifacts = new Dictionary<int, ArtifactKind>();
             pending = new Dictionary<string, PendingSneak>(StringComparer.Ordinal);
             strikes = new Dictionary<string, PendingStrike>(StringComparer.Ordinal);
+            wayfarer = new Dictionary<string, PendingWayfarer>(StringComparer.Ordinal);
             observedWeapons = new Dictionary<string, int>(StringComparer.Ordinal);
+            observedProfiles = new Dictionary<string, string>(StringComparer.Ordinal);
             attackSerial = 0;
             state = new ThiefCombatState();
+            equipment = new ThiefEquipmentSets();
             SlipAwayId = FTK_proficiencyTable.ID.None;
             EvasionSignalId = FTK_proficiencyTable.ID.None;
+            WayfarerPreviewId = FTK_proficiencyTable.ID.None;
+            WayfarerCoreId = FTK_proficiencyTable.ID.None;
             return delegate { classes = oldClasses; weapons = oldWeapons; actions = oldActions;
-                artifacts = oldArtifacts; pending = oldPending; strikes = oldStrikes; observedWeapons = oldObserved;
+                artifacts = oldArtifacts; pending = oldPending; strikes = oldStrikes; wayfarer = oldWayfarer;
+                observedWeapons = oldObserved;
                 state = oldState; SlipAwayId = oldSlipAway; EvasionSignalId = oldEvasionSignal;
-                attackSerial = oldAttackSerial; };
+                attackSerial = oldAttackSerial; equipment = oldEquipment; observedProfiles = oldProfiles;
+                WayfarerPreviewId = oldWayfarerPreview; WayfarerCoreId = oldWayfarerCore; };
         }
 
         internal static bool RegisterClass(int id)
@@ -124,12 +153,42 @@ namespace FTKModFramework.Core
                 if (signalId < 0) return false;
                 EvasionSignalId = (FTK_proficiencyTable.ID)signalId;
             }
+            if (WayfarerPreviewId == FTK_proficiencyTable.ID.None)
+                WayfarerPreviewId = RegisterRoleEvasion(WayfarerPreviewKey, 2);
+            if (WayfarerCoreId == FTK_proficiencyTable.ID.None)
+                WayfarerCoreId = RegisterRoleEvasion(WayfarerCoreKey, 4);
+            if (WayfarerPreviewId == FTK_proficiencyTable.ID.None ||
+                WayfarerCoreId == FTK_proficiencyTable.ID.None) return false;
             return classes.Add(id) || classes.Contains(id);
+        }
+
+        private static FTK_proficiencyTable.ID RegisterRoleEvasion(string key, int percent)
+        {
+            ThiefRoleEvasionSignal behavior = (ThiefRoleEvasionSignal)BehaviorHost.Create(
+                typeof(ThiefRoleEvasionSignal), key);
+            if (behavior == null) return FTK_proficiencyTable.ID.None;
+            behavior.Percent = percent;
+            behavior.m_Category = ProficiencyBase.Category.None;
+            Content.AddProficiency(Plugin.Guid, key, FTK_proficiencyTable.ID.taunt,
+                "Wayfarer Evasion", delegate(FTK_proficiencyTable p)
+                {
+                    p.m_ProficiencyPrefab = behavior;
+                    p.m_TargetFriendly = true;
+                    p.m_Target = CharacterDummy.TargetType.None;
+                    p.m_Harmless = true;
+                    p.m_FullSlots = false;
+                    p.m_DmgMultiplier = 0;
+                    p.m_ChanceToAffect = 1;
+                    p.m_RepeatCount = 0;
+                });
+            int id = Content.Db<FTK_proficiencyTableDB>().GetIntFromID(key);
+            return id < 0 ? FTK_proficiencyTable.ID.None : (FTK_proficiencyTable.ID)id;
         }
 
         internal static bool RegisterWeapon(int id, string kind)
         {
-            WeaponKind parsed = kind == "paired" ? WeaponKind.Paired : kind == "bow" ? WeaponKind.Bow : WeaponKind.None;
+            WeaponKind parsed = kind == "paired" ? WeaponKind.Paired :
+                kind == "bow" ? WeaponKind.Bow : kind == "pistol" ? WeaponKind.Pistol : WeaponKind.None;
             if (parsed == WeaponKind.None) return false;
             WeaponKind existing;
             if (weapons.TryGetValue(id, out existing)) return existing == parsed;
@@ -139,7 +198,8 @@ namespace FTKModFramework.Core
 
         internal static bool RegisterAction(int id, string kind)
         {
-            ActionKind parsed = kind == "prepare" ? ActionKind.Prepare : kind == "pierce" ? ActionKind.Pierce : ActionKind.None;
+            ActionKind parsed = kind == "prepare" ? ActionKind.Prepare :
+                kind == "pierce" ? ActionKind.Pierce : kind == "shot" ? ActionKind.Shot : ActionKind.None;
             if (parsed == ActionKind.None) return false;
             ActionKind existing;
             if (actions.TryGetValue(id, out existing)) return existing == parsed;
@@ -154,7 +214,8 @@ namespace FTKModFramework.Core
                 signature == "looseAndLeave" ? ArtifactKind.LooseAndLeave : ArtifactKind.None;
             WeaponKind weapon;
             if (parsed == ArtifactKind.None || !weapons.TryGetValue(id, out weapon) ||
-                (parsed == ArtifactKind.LooseAndLeave ? weapon != WeaponKind.Bow : weapon != WeaponKind.Paired)) return false;
+                (parsed == ArtifactKind.LooseAndLeave ? weapon != WeaponKind.Bow && weapon != WeaponKind.Pistol :
+                    weapon != WeaponKind.Paired)) return false;
             ArtifactKind existing;
             if (artifacts.TryGetValue(id, out existing)) return existing == parsed;
             artifacts.Add(id, parsed);
@@ -166,6 +227,64 @@ namespace FTKModFramework.Core
             return dummy != null && dummy.m_CharacterOverworld != null &&
                 dummy.m_CharacterOverworld.m_CharacterStats != null &&
                 classes.Contains((int)dummy.m_CharacterOverworld.m_CharacterStats.m_CharacterClass);
+        }
+
+        internal static bool IsThiefClass(int id) { return classes.Contains(id); }
+
+        internal static bool RegisterArmor(int id, string key, ThiefEquipmentSets.Slot slot)
+        { return equipment.AddArmor(id, key, slot); }
+
+        internal static bool RegisterArmament(int id, string key)
+        { return equipment.AddArmament(id, key); }
+
+        private static ThiefEquipmentSets.Profile Profile(CharacterDummy actor)
+        {
+            if (!IsThief(actor) || actor.m_CharacterOverworld.m_PlayerInventory == null) return null;
+            PlayerInventory inventory = actor.m_CharacterOverworld.m_PlayerInventory;
+            return equipment.Evaluate(true,
+                (int)inventory.Get(PlayerInventory.ContainerID.Head).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Body).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Foot).GetOne(),
+                (int)actor.m_CharacterOverworld.m_WeaponID);
+        }
+
+        private static bool IsRole(ThiefEquipmentSets.Profile profile, string name)
+        { return profile != null && profile.Key.EndsWith(":" + name, StringComparison.Ordinal); }
+
+        internal static string EquipmentDescription(int itemId, CharacterOverworld wearer)
+        {
+            if (wearer == null || wearer.m_PlayerInventory == null)
+                return equipment.Description(itemId, false, -1, -1, -1, -1);
+            PlayerInventory inventory = wearer.m_PlayerInventory;
+            bool thief = wearer.m_CharacterStats != null &&
+                classes.Contains((int)wearer.m_CharacterStats.m_CharacterClass);
+            return equipment.Description(itemId, thief,
+                (int)inventory.Get(PlayerInventory.ContainerID.Head).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Body).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Foot).GetOne(),
+                (int)wearer.m_WeaponID);
+        }
+
+        internal static string OwnedEquipmentDescription(CharacterOverworld wearer)
+        {
+            if (wearer == null || wearer.m_PlayerInventory == null || wearer.m_CharacterStats == null) return string.Empty;
+            PlayerInventory inventory = wearer.m_PlayerInventory;
+            return equipment.OwnedDescription(IsThiefClass((int)wearer.m_CharacterStats.m_CharacterClass),
+                (int)inventory.Get(PlayerInventory.ContainerID.Head).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Body).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Foot).GetOne(),
+                (int)wearer.m_WeaponID);
+        }
+
+        internal static string OwnedEquipmentLabel(CharacterOverworld wearer)
+        {
+            if (wearer == null || wearer.m_PlayerInventory == null || wearer.m_CharacterStats == null) return string.Empty;
+            PlayerInventory inventory = wearer.m_PlayerInventory;
+            return equipment.OwnedLabel(IsThiefClass((int)wearer.m_CharacterStats.m_CharacterClass),
+                (int)inventory.Get(PlayerInventory.ContainerID.Head).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Body).GetOne(),
+                (int)inventory.Get(PlayerInventory.ContainerID.Foot).GetOne(),
+                (int)wearer.m_WeaponID);
         }
 
         private static WeaponKind CurrentWeapon(CharacterDummy actor)
@@ -187,7 +306,9 @@ namespace FTKModFramework.Core
             state.BeginEncounter(enemies);
             pending.Clear();
             strikes.Clear();
+            wayfarer.Clear();
             observedWeapons.Clear();
+            observedProfiles.Clear();
             attackSerial = 0;
             foreach (CharacterDummy actor in session.m_PlayerDummies.Values) ObserveWeapon(actor);
         }
@@ -197,7 +318,21 @@ namespace FTKModFramework.Core
             if (!Enabled || actor == null) return;
             string id = GuardianRuntime.Identity(actor);
             if (actor is EnemyDummy) state.BeginEnemyTurn(id);
-            else if (IsThief(actor)) { pending.Remove(id); state.BeginActorTurn(id); }
+            else if (IsThief(actor))
+            {
+                pending.Remove(id);
+                wayfarer.Remove(id);
+                state.BeginActorTurn(id);
+                // EngageBattle is the scheduled native turn boundary, including after reload.
+                if (CurrentWeapon(actor) == WeaponKind.Pistol && actor.m_EventListener != null &&
+                    actor.m_EventListener.m_Weapon != null)
+                {
+                    Weapon equipped = actor.m_EventListener.m_Weapon;
+                    if (equipped.m_WeaponType == Weapon.WeaponType.firearm && equipped.m_AmmoCapacity > 0 &&
+                        actor.m_CurrentAmmo < equipped.m_AmmoCapacity)
+                        actor.SetCurrentAmmo(Math.Min(equipped.m_AmmoCapacity, actor.m_CurrentAmmo + 1));
+                }
+            }
         }
 
         internal static void ResetEnemy(CharacterDummy actor)
@@ -217,6 +352,7 @@ namespace FTKModFramework.Core
                 string id = GuardianRuntime.Identity(actor);
                 state.ExpireActor(id);
                 pending.Remove(id);
+                wayfarer.Remove(id);
             }
         }
 
@@ -232,6 +368,12 @@ namespace FTKModFramework.Core
                 state.ClearEvasion(id);
             }
             observedWeapons[id] = weapon;
+            ThiefEquipmentSets.Profile profile = Profile(actor);
+            string identity = profile == null ? string.Empty : profile.Key + ":" + profile.Count;
+            string priorProfile;
+            if (observedProfiles.TryGetValue(id, out priorProfile) && priorProfile != identity)
+                state.ClearEvasion(id);
+            observedProfiles[id] = identity;
         }
 
         internal static bool SlipAwayAvailable(CharacterDummy actor)
@@ -295,10 +437,10 @@ namespace FTKModFramework.Core
             if (!artifacts.TryGetValue((int)victim.m_CharacterOverworld.m_WeaponID, out artifact) ||
                 artifact != ArtifactKind.LooseAndLeave)
             {
-                state.ClearEvasion(id);
-                return;
+                if (!IsRole(Profile(victim), "wayfarer")) { state.ClearEvasion(id); return; }
             }
-            if (state.HasEvasion(id)) properties.m_EvadeRating = Math.Min(1f, properties.m_EvadeRating + 0.08f);
+            int earned = state.EvasionPercent(id);
+            if (earned > 0) properties.m_EvadeRating = Math.Min(1f, properties.m_EvadeRating + earned / 100f);
         }
 
         internal static void GrantEvasion(CharacterDummy actor)
@@ -309,6 +451,14 @@ namespace FTKModFramework.Core
             if (!artifacts.TryGetValue((int)actor.m_CharacterOverworld.m_WeaponID, out artifact) ||
                 artifact != ArtifactKind.LooseAndLeave) return;
             state.GrantEvasion(GuardianRuntime.Identity(actor));
+        }
+
+        internal static void GrantRoleEvasion(CharacterDummy actor, int percent)
+        {
+            if (!IsThief(actor) || !IsRole(Profile(actor), "wayfarer")) return;
+            ThiefEquipmentSets.Profile profile = Profile(actor);
+            int cap = profile.Count == 3 ? 4 : 2;
+            state.GrantEvasion(GuardianRuntime.Identity(actor), Math.Min(percent, cap));
         }
 
         internal static void OnImpact(CharacterDummy victim, int previousHealth)
@@ -331,6 +481,27 @@ namespace FTKModFramework.Core
             }
             if (!IsThief(attacker)) return;
             string actorId = GuardianRuntime.Identity(attacker);
+            PendingWayfarer walk;
+            if (wayfarer.TryGetValue(actorId, out walk))
+            {
+                wayfarer.Remove(actorId);
+                if (walk.TargetId == GuardianRuntime.Identity(victim) &&
+                    walk.WeaponId == (int)attacker.m_CharacterOverworld.m_WeaponID &&
+                    previousHealth > victim.GetCurrentHealth() && !damage.m_IsAOE &&
+                    damage.m_SpecialAttack == CharacterDummy.SpecialAttack.None &&
+                    damage.m_DamageType == FTK_weaponStats2.DamageType.physical &&
+                    attacker.m_CharacterOverworld.IsOwner)
+                {
+                    ThiefEquipmentSets.Profile role = Profile(attacker);
+                    if (IsRole(role, "wayfarer"))
+                    {
+                        FTK_proficiencyTable.ID signal = role.Count == 3 ? WayfarerCoreId : WayfarerPreviewId;
+                        if (signal != FTK_proficiencyTable.ID.None)
+                            attacker.RPCAllSelf("AddProfToDummy", new object[] {
+                                new FTK_proficiencyTable.ID[] { signal }, false, false });
+                    }
+                }
+            }
             PendingSneak receipt;
             if (!pending.TryGetValue(actorId, out receipt) || receipt.TargetId != GuardianRuntime.Identity(victim)) return;
             pending.Remove(actorId);
@@ -347,7 +518,19 @@ namespace FTKModFramework.Core
                     attacker.SpawnHudTextRPC("Borrowed Fortune: +1 Focus", string.Empty);
                 }
             }
-            else if (receipt.Artifact == ArtifactKind.LooseAndLeave)
+            else if (receipt.Prepared && receipt.FocusSpent > 0 && receipt.ProfileCount == 3 &&
+                receipt.ProfileKey != null && receipt.ProfileKey.EndsWith(":locksmith", StringComparison.Ordinal) &&
+                attacker.m_CharacterOverworld.IsOwner &&
+                IsRole(Profile(attacker), "locksmith") && Profile(attacker).Count == 3)
+            {
+                CharacterStats stats = attacker.m_CharacterOverworld.m_CharacterStats;
+                if (stats.m_FocusPoints < stats.MaxFocus && state.TryLocksmithRefund(actorId))
+                {
+                    stats.UpdateFocusPoints(1, true);
+                    attacker.SpawnHudTextRPC("Locksmith: +1 Focus", string.Empty);
+                }
+            }
+            if (receipt.Artifact == ArtifactKind.LooseAndLeave)
             {
                 if (attacker.m_CharacterOverworld.IsOwner &&
                     EvasionSignalId != FTK_proficiencyTable.ID.None)
@@ -368,12 +551,29 @@ namespace FTKModFramework.Core
             string actorId = GuardianRuntime.Identity(attack.m_AttackingDummy);
             // Each committed attack invalidates an earlier artifact receipt, including ineligible attacks.
             pending.Remove(actorId);
+            wayfarer.Remove(actorId);
+            ActionKind action;
+            bool pistolShot = CurrentWeapon(attack.m_AttackingDummy) == WeaponKind.Pistol &&
+                actions.TryGetValue((int)attack.m_AttackProficiency, out action) && action == ActionKind.Shot;
+            bool authoredDirectAction = actions.TryGetValue((int)attack.m_AttackProficiency, out action) &&
+                (action == ActionKind.Prepare || action == ActionKind.Pierce || action == ActionKind.Shot);
+            bool basicPrecision = attack.m_AttackProficiency == FTK_proficiencyTable.ID.None &&
+                CurrentWeapon(attack.m_AttackingDummy) != WeaponKind.None;
+            if (attack.m_AttackingDummy.m_IsAttacking && !attack.m_Harmless &&
+                attack.m_CheatType == SlotControl.AttackCheatType.None &&
+                attack.m_DamagedDummy is EnemyDummy &&
+                attack.m_DamageType == FTK_weaponStats2.DamageType.physical &&
+                attack.m_SpecialAttack == CharacterDummy.SpecialAttack.None &&
+                (basicPrecision || authoredDirectAction) && IsRole(Profile(attack.m_AttackingDummy), "wayfarer"))
+                wayfarer[actorId] = new PendingWayfarer {
+                    TargetId = GuardianRuntime.Identity(attack.m_DamagedDummy),
+                    WeaponId = (int)attack.m_AttackingDummy.m_CharacterOverworld.m_WeaponID };
             if (attack.m_Harmless || attack.m_CheatType != SlotControl.AttackCheatType.None ||
                 !(attack.m_DamagedDummy is EnemyDummy) ||
                 attack.m_DamageType != FTK_weaponStats2.DamageType.physical ||
                 CurrentWeapon(attack.m_AttackingDummy) == WeaponKind.None ||
                 attack.m_SpecialAttack != CharacterDummy.SpecialAttack.None ||
-                attack.m_AttackProficiency != FTK_proficiencyTable.ID.None)
+                (attack.m_AttackProficiency != FTK_proficiencyTable.ID.None && !pistolShot))
             {
                 state.ClearPrepared(actorId);
                 return;
@@ -388,16 +588,32 @@ namespace FTKModFramework.Core
             if (!artifacts.TryGetValue(weaponId, out artifact)) artifact = ArtifactKind.None;
             EnemyDummy enemy = (EnemyDummy)attack.m_DamagedDummy;
             bool targetFull = enemy.GetCurrentHealth() == enemy.m_EnemyCombat.GetHealthTotal();
+            ThiefEquipmentSets.Profile profile = Profile(attack.m_AttackingDummy);
+            bool prepared = state.HasPrepared(actorId);
             ThiefCombatState.AttackCommit commit = state.CommitPrecisionAttack(actorId, targetId,
                 artifact == ArtifactKind.LastLight, targetFull);
             if (commit.EligibleForSneakAttack)
                 pending[actorId] = new PendingSneak { TargetId = targetId,
                     TargetHealth = enemy.GetCurrentHealth(), WeaponId = weaponId,
                     FocusSpent = attack.m_AttackFocused, Perfect = attack.m_SlotSuccessPercent == 1f,
-                    Artifact = artifact };
+                    Artifact = artifact, Prepared = prepared,
+                    ProfileKey = profile == null ? null : profile.Key,
+                    ProfileCount = profile == null ? 0 : profile.Count };
             if (commit.LastLight) attack.m_AttackingDummy.SpawnHudTextRPC("Last Light spent", string.Empty);
             if (commit.EligibleForSneakAttack && attack.m_SlotSuccessPercent == 1f)
-                damageMultiplier *= 1f + commit.BonusPercent / 100f;
+            {
+                int bonus = commit.BonusPercent;
+                if (!commit.LastLight)
+                {
+                    if (IsRole(profile, "nightblade"))
+                        bonus += (targetFull || !state.HasEnemyActed(targetId))
+                            ? (profile.Count == 3 ? 10 : 5) : -(profile.Count == 3 ? 10 : 5);
+                    if (IsRole(profile, "locksmith"))
+                        bonus += profile.Count == 3 ? -10 : prepared ? 5 : -5;
+                    if (IsRole(profile, "wayfarer")) bonus -= profile.Count == 3 ? 10 : 5;
+                }
+                damageMultiplier *= 1f + Math.Max(0, bonus) / 100f;
+            }
         }
 
         internal static void RecordAttack(CharacterDummy attacker, DummyDamageInfo damage, float slotSuccess)
@@ -462,6 +678,18 @@ namespace FTKModFramework.Core
         {
             try { ThiefRuntime.GrantEvasion(dummy); }
             catch (Exception e) { Plugin.Log.LogError("[thief] Evasion signal failed: " + e); }
+        }
+    }
+
+    public sealed class ThiefRoleEvasionSignal : ProficiencyBase
+    {
+        public int Percent;
+        public override bool IsImmune(CharacterDummy dummy) { return false; }
+        public override bool IsIgnore(CharacterDummy dummy) { return false; }
+        public override void AddToDummy(CharacterDummy dummy)
+        {
+            try { ThiefRuntime.GrantRoleEvasion(dummy, Percent); }
+            catch (Exception e) { Plugin.Log.LogError("[thief] role Evasion failed: " + e); }
         }
     }
 }

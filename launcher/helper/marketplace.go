@@ -37,6 +37,7 @@ var marketID = regexp.MustCompile(`^[a-z0-9][a-z0-9._-]{0,127}$`)
 var marketHex = regexp.MustCompile(`^[a-f0-9]{32}$`)
 var marketSHA = regexp.MustCompile(`^[a-f0-9]{64}$`)
 var marketVersion = regexp.MustCompile(`^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$`)
+var marketNativeBattleButton = regexp.MustCompile(`^[A-Za-z][A-Za-z0-9]*$`)
 
 type marketDependency struct {
 	PackageID string `json:"packageId"`
@@ -1201,18 +1202,22 @@ func marketContent(b []byte) error {
 			PrecisionWeapon          string                       `json:"precisionWeapon,omitempty"`
 			PrecisionAction          string                       `json:"precisionAction,omitempty"`
 			ThiefArtifact            string                       `json:"thiefArtifact,omitempty"`
+			ThiefArmor               *marketThiefArmor            `json:"thiefArmor,omitempty"`
+			ThiefArmament            *string                      `json:"thiefArmament,omitempty"`
+			EnemyDropRule            *marketEnemyDropRule         `json:"enemyDropRule,omitempty"`
+			TownExchange             *marketTownExchange          `json:"townExchange,omitempty"`
 			ReplaceProficiencies     bool                         `json:"replaceProficiencies,omitempty"`
 			GuardianBonuses          *marketGuardianBonuses       `json:"guardianBonuses,omitempty"`
 			GuardianProfile          *marketGuardianProfile       `json:"guardianProfile,omitempty"`
 			GuardianSmiteAction      string                       `json:"guardianSmiteAction,omitempty"`
 			GuardianEquipmentSets    []marketGuardianSet          `json:"guardianEquipmentSets,omitempty"`
-			EnemyDropRule            *marketEnemyDropRule         `json:"enemyDropRule,omitempty"`
-			TownExchange             *marketTownExchange          `json:"townExchange,omitempty"`
 			Icon                     string                       `json:"icon,omitempty"`
+			NativeBattleButton       *string                      `json:"nativeBattleButton,omitempty"`
 			ApparelModels            *marketApparelModel          `json:"apparelModels,omitempty"`
 			Modifiers                *marketItemModifiers         `json:"modifiers,omitempty"`
 			HelmetHairVisibility     *marketHelmetHairVisibility  `json:"helmetHairVisibility,omitempty"`
 			ItemModels               []marketModelRenderer        `json:"itemModels,omitempty"`
+			HeadProfiles             []marketHeadProfile          `json:"headProfiles,omitempty"`
 			OffHandModels            []marketModelRenderer        `json:"offHandModels,omitempty"`
 			DisplayModels            []marketModelRenderer        `json:"displayModels,omitempty"`
 			PlayerModels             []marketPlayerModel          `json:"playerModels,omitempty"`
@@ -1253,16 +1258,19 @@ func marketContent(b []byte) error {
 		if entry.Opportunist && entry.Kind != "class" {
 			return errors.New("opportunist requires a class")
 		}
-		if entry.PrecisionWeapon != "" && (entry.Kind != "weapon" || !contains([]string{"paired", "bow"}, entry.PrecisionWeapon)) {
+		if entry.PrecisionWeapon != "" && (entry.Kind != "weapon" || !contains([]string{"paired", "bow", "pistol"}, entry.PrecisionWeapon)) {
 			return errors.New("invalid precision weapon declaration")
 		}
-		if entry.PrecisionAction != "" && (entry.Kind != "proficiency" || !contains([]string{"prepare", "pierce"}, entry.PrecisionAction)) {
+		if entry.PrecisionAction != "" && (entry.Kind != "proficiency" || !contains([]string{"prepare", "pierce", "shot"}, entry.PrecisionAction)) {
 			return errors.New("invalid precision action declaration")
 		}
 		if entry.ThiefArtifact != "" {
 			expectedWeapon := "paired"
 			if entry.ThiefArtifact == "looseAndLeave" {
 				expectedWeapon = "bow"
+			}
+			if entry.ThiefArtifact == "looseAndLeave" && entry.PrecisionWeapon == "pistol" {
+				expectedWeapon = "pistol"
 			}
 			if entry.Kind != "weapon" || !contains([]string{"borrowedFortune", "lastLight", "looseAndLeave"}, entry.ThiefArtifact) || entry.PrecisionWeapon != expectedWeapon {
 				return errors.New("invalid thief artifact precision weapon")
@@ -1295,7 +1303,7 @@ func marketContent(b []byte) error {
 			if entry.Kind != "weapon" {
 				return errors.New("offHandModels requires a weapon")
 			}
-			if e := marketModelRenderers(entry.OffHandModels, false); e != nil {
+			if e := marketModelRenderers(entry.OffHandModels, false, true); e != nil {
 				return e
 			}
 		}
@@ -1329,12 +1337,15 @@ func marketContent(b []byte) error {
 		if entry.Icon != "" && (!marketSafePath(entry.Icon) || !strings.HasPrefix(entry.Icon, "assets/") || path.Ext(entry.Icon) != ".png" || entry.Kind != "item" && entry.Kind != "weapon" && entry.Kind != "proficiency" && !(entry.Kind == "class" && (entry.Guardian || entry.Opportunist))) {
 			return errors.New("invalid original icon declaration")
 		}
+		if entry.NativeBattleButton != nil && (entry.Kind != "proficiency" || entry.Icon != "" || !marketNativeBattleButton.MatchString(*entry.NativeBattleButton)) {
+			return errors.New("nativeBattleButton requires a vanilla proficiency name and no icon")
+		}
 		if entry.ApparelModels != nil {
 			a := entry.ApparelModels
 			if entry.Kind != "item" || a.FemaleBinding == "" || a.MaleBinding == "" {
 				return errors.New("invalid apparel item binding")
 			}
-			if e := marketModelRenderers(a.Renderers, true); e != nil {
+			if e := marketModelRenderers(a.Renderers, true, true); e != nil {
 				return e
 			}
 		}
@@ -1343,6 +1354,9 @@ func marketContent(b []byte) error {
 			if entry.Kind != "item" && entry.Kind != "weapon" || m.Armor < 0 || m.Armor > 100 || m.Resistance < 0 || m.Resistance > 100 || m.Reflect < 0 || m.Reflect > 100 || m.Vitality < -1 || m.Vitality > 1 || m.Speed < -1 || m.Speed > 1 || m.Awareness < -1 || m.Awareness > 1 || m.Talent < -1 || m.Talent > 1 || m.FocusCapacity < 0 || m.FocusCapacity > 10 {
 				return errors.New("invalid item modifiers")
 			}
+		}
+		if err := marketExchangeEntry(entry.Kind, entry.ThiefArmor, entry.ThiefArmament, entry.TownExchange); err != nil {
+			return err
 		}
 		if entry.Guardian && entry.Kind != "class" {
 			return errors.New("guardian requires a class")
@@ -1361,7 +1375,15 @@ func marketContent(b []byte) error {
 			if entry.Kind != "item" && entry.Kind != "weapon" {
 				return errors.New("itemModels requires equipment")
 			}
-			if e := marketModelRenderers(entry.ItemModels, false); e != nil {
+			if e := marketModelRenderers(entry.ItemModels, false, true); e != nil {
+				return e
+			}
+		}
+		if entry.HeadProfiles != nil {
+			if entry.Kind != "item" || !strings.HasPrefix(entry.Template, "helmet") {
+				return errors.New("headProfiles requires a helmet item")
+			}
+			if e := marketHeadProfiles(entry.HeadProfiles, entry.ItemModels); e != nil {
 				return e
 			}
 		}
@@ -1369,7 +1391,7 @@ func marketContent(b []byte) error {
 			if entry.Kind != "item" && entry.Kind != "weapon" {
 				return errors.New("displayModels requires equipment")
 			}
-			if e := marketModelRenderers(entry.DisplayModels, false); e != nil {
+			if e := marketModelRenderers(entry.DisplayModels, false, true); e != nil {
 				return e
 			}
 		}
@@ -1718,7 +1740,7 @@ func marketAllowedFields(kind string, fields map[string]interface{}) error {
 	case "item":
 		add("_useable=_useable m_ObjectType=m_ObjectType m_ObjectSlot=m_ObjectSlot m_BackpackEquip=m_BackpackEquip")
 	case "weapon":
-		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_AttackDisplay=m_AttackDisplay m_NoRegularAttack=m_NoRegularAttack")
+		add("damage=_maxdmg damagetype=_dmgtype skill=_skilltest slots=_slots damagegain=_dmggain m_AttackDisplay=m_AttackDisplay m_NoRegularAttack=m_NoRegularAttack m_ObjectSlot=m_ObjectSlot m_CanBreak=m_CanBreak m_NoFocus=m_NoFocus")
 	case "proficiency":
 		add("damage=m_DmgMultiplier ignoresarmor=m_IgnoresArmor chancetoaffect=m_ChanceToAffect slots=m_SlotOverride fullslots=m_FullSlots customvalue=m_CustomValue repeatcount=m_RepeatCount m_Target=m_Target")
 		add("m_DmgTypeOverride=m_DmgTypeOverride m_WpnTypeOverride=m_WpnTypeOverride m_TargetFriendly=m_TargetFriendly m_Harmless=m_Harmless m_PerSlotSkillRoll=m_PerSlotSkillRoll m_Quickness=m_Quickness m_DamagePerAttack=m_DamagePerAttack m_Suicide=m_Suicide m_GunShot=m_GunShot m_BoatDamage=m_BoatDamage m_ChaosOption=m_ChaosOption")

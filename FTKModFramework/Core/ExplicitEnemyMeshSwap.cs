@@ -203,6 +203,7 @@ namespace FTKModFramework.Core
                         Material material = new Material(p.originalMaterials[i]);
                         p.materials[i] = material;
                         owned.Add(material);
+                        ExplicitMaterialOptions.ApplyMatte(material, assignment.Matte);
                         ExplicitMaterialOptions.Apply(material, option == null ? assignment.DisableNativeEmission : option.DisableNativeEmission);
                         if (assignment.MetallicGlossTextureFileName != null)
                         {
@@ -339,6 +340,7 @@ namespace FTKModFramework.Core
         // Ownership-only tint/legacy assignments are not a completed explicit mesh plan.
         [SerializeField] internal bool VisualResourcesOnly;
         [NonSerialized] private bool _acquired;
+        internal bool HasLease { get { return _leaseId != 0; } }
         [SerializeField] private Renderer[] _scrollRenderers;
         [SerializeField] private Material[] _scrollMaterials;
         [SerializeField] private int[] _scrollCounts;

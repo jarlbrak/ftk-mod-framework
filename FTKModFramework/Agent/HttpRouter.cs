@@ -88,10 +88,6 @@ namespace FTKModFramework.Agent
                 object snapshot = AgentBridge.RunOnMainThread(StateReader.ReadState, StateTimeoutMs);
                 WriteJson(ctx, 200, Json.Write(snapshot));
             }
-            catch (TimeoutException)
-            {
-                WriteJson(ctx, 500, Json.Write(Err("state read timed out (main thread busy)")));
-            }
             catch (Exception e)
             {
                 WriteJson(ctx, 500, Json.Write(Err("state read failed: " + e.Message)));

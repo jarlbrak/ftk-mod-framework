@@ -112,6 +112,25 @@ namespace FTKModFramework.Core
             return null;
         }
 
+        internal static bool TryGetIdentity(FTK_playerGameStart row, FTK_skinset skinset,
+            out string modGuid, out string raceKey)
+        {
+            modGuid = null; raceKey = null;
+            if (row == null || skinset == null ||
+                !object.ReferenceEquals(Content.Db<FTK_playerGameStartDB>().GetEntryByStringID(row.m_ID), row))
+                return false;
+            foreach (Race race in Races.Values)
+            {
+                Binding binding;
+                if (race.Classes.TryGetValue(row.m_ID, out binding) &&
+                    object.ReferenceEquals(binding.Skinset, skinset))
+                {
+                    modGuid = race.Guid; raceKey = race.Key; return true;
+                }
+            }
+            return false;
+        }
+
         internal static bool NeedsResolution(FTK_playerGameStart row, int selected)
         {
             return selected != -1 && (selected < 0 || row.m_Skinsets == null || selected >= row.m_Skinsets.Length);
