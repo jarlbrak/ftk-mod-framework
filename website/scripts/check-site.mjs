@@ -6,6 +6,19 @@ import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const root=process.env.SITE_URL || 'http://127.0.0.1:4321/ftk-mod-framework/';
 const paths=['','installation/','tweaks/','compatibility/','troubleshooting/','mods/paladin/','mods/paladin-equipment/','mods/thief/','mods/blacksmith/','mods/possum/','mods/lore-store-unlocked/','gallery/','releases/','credits/'];
+async function verifyImage(image){
+ await image.evaluate(async i=>{
+  if(!i.complete)await new Promise((resolve,reject)=>{
+   const timer=setTimeout(()=>reject(new Error(`Image load timed out: ${i.currentSrc||i.src}`)),10000);
+   const done=callback=>event=>{clearTimeout(timer);callback(event)};
+   i.addEventListener('load',done(resolve),{once:true});
+   i.addEventListener('error',done(()=>reject(new Error(`Image request failed: ${i.currentSrc||i.src}`))),{once:true});
+   if(i.complete){clearTimeout(timer);resolve()}
+  });
+  if(!i.naturalWidth)throw new Error(`Image has no decoded pixels: ${i.currentSrc||i.src}`);
+  try{await i.decode()}catch(error){throw new Error(`Image failed to decode: ${i.currentSrc||i.src}: ${error.message}`)}
+ });
+}
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage();
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -15,7 +28,10 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
  for(const path of paths){
   const response=await page.goto(root+path);assert.equal(response.status(),200,path);
   await page.waitForLoadState('networkidle');
-  for(const img of await page.locator('img:visible').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(async i=>{try{await i.decode()}catch(error){throw new Error(`Image failed to decode: ${i.src}: ${error.message}`)}});}
+  for(const img of await page.locator('img:visible').all()){
+   await img.scrollIntoViewIfNeeded();
+   await verifyImage(img);
+  }
   await page.evaluate(()=>window.scrollTo(0,0));
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`Overflow ${path} at ${size.width}`);
   const info=await page.evaluate(()=>({images:[...document.images].filter(i=>i.getClientRects().length).map(i=>({src:i.src,alt:i.alt,decorativeCheck:i.getAttribute('aria-hidden')==='true'&&/\d+ .+ checks$/.test(i.closest('[role=img]')?.getAttribute('aria-label')??''),loaded:i.complete&&i.naturalWidth>0})),links:[...document.querySelectorAll('a[href]')].map(a=>a.href),media:[...document.querySelectorAll('source')].map(s=>s.src),videos:[...document.querySelectorAll('video')].map(v=>({controls:v.controls,autoplay:v.autoplay,poster:v.poster,loop:v.loop}))}));
@@ -49,7 +65,9 @@ for(const size of [{width:1440,height:1000},{width:390,height:844}]){
   for(const item of await items.all()){
    const name=await item.locator('h2').textContent();
    await item.scrollIntoViewIfNeeded();
-   await item.locator('.forge-art > img').evaluate(i=>i.decode());
+   const img=item.locator('.forge-art > img');
+   await img.scrollIntoViewIfNeeded();
+   await verifyImage(img);
    assert.equal(await item.evaluate(d=>d.scrollWidth<=d.clientWidth),true,'Card overflow '+name);
    assert.equal(await item.locator('details, summary').count(),0);
    if(name==='Tin Oath Token'){assert.doesNotMatch(await item.innerText(),/Smite|Censure|set bonus/i);assert.match(await item.innerText(),/Vitality/);}

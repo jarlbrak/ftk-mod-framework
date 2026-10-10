@@ -2,9 +2,7 @@
 
 Scope: historical 1.0.0 bow collection. For the unreleased pistol and visible-armor implementation, use [the candidate contract](CANDIDATE.md). Historical evidence below does not validate the candidate.
 
-Status: implementation evidence through 2026-10-08. This separates offline checks, isolated native observations, and remaining release gates.
-
-For the latest checkpoint, issue hierarchy, exact package pins and resumption prerequisites, read [release readiness](RELEASE-READINESS.md). The dated sections below preserve their original binary and evidence boundaries.
+Status: implementation evidence through 2026-10-09. This separates offline checks, isolated native observations, and remaining release gates.
 
 ## Current candidate checkpoint, 2026-10-04
 
@@ -1114,9 +1112,15 @@ V393 attempted the corrected cold route with the reviewed framework and eight-pl
 
 A further prospective receipt correction retains process exit observations before and after owned cleanup, with all 311 private checks passing, including four checks using ordinary nongame children. It has no runtime admission. The world-entry crash, native autosave verification, comparison fights, bow migration and historical combat crash remain open gates. These failure logs do not assign a cause or establish that the two crashes share one. Website impact: unreleased validation only.
 
+## Revised framework title verification, V390
+
+The framework containing the state-read error correction passed the isolated title route with the original six plugins. Six native title inputs completed, including audio verification and native Exit with status 0. No save was loaded or advanced. All 494 original runtime files, the six-plugin inventory, all six save hashes and 619 protected profile files matched after restoration, with no owned process left running.
+
+This passes title startup and exit for the revised framework on this configured macOS setup. It does not verify saved-world entry or identify the cause of V393 or V169. Autosave verification, native balance comparisons, migration and crash resolution remain release gates. Website impact: unreleased validation only.
+
 ## Delayed world-entry primary report and source review, V396
 
-The subsequently recovered primary report matches V393's process and crash chronology. It records a protection fault and SIGABRT termination, with named frames in Mono and Unity signal handling. A mismatched instruction register, invalid stack-length metadata and negative recursion metadata prevent reliable attribution to a managed method or recursion. The OS termination record does not supply the missing retained-child return code. This report does not establish a shared cause with V169's combat stack-guard fault.
+The recovered primary report matches V393's process and crash chronology. It records a protection fault and SIGABRT termination, with named frames in Mono and Unity signal handling. A mismatched instruction register, invalid stack-length metadata and negative recursion metadata prevent reliable attribution to a managed method or recursion. The OS termination record does not supply the missing retained-child return code. This report does not establish a shared cause with V169's combat stack-guard fault.
 
 Installed-assembly review traces the final two analytics messages through `FTKHub.EnterFahrul` and `FTKGameStats.SendStartSession`. The second message is logged before `Analytics.CustomEvent` returns; additional world-entry work follows. V389 also logged both messages before reaching the world. The last message therefore cannot identify a failing call or prove world-entry completion. The corrected observer's world-read method was not requested in V393, but its plugin was loaded; that distinction does not exclude effects from plugin startup or changed timing.
 
@@ -1130,8 +1134,8 @@ Genuine native Save and Exit returned to observed title, and native Exit returne
 
 This completes the bounded verification of the preceding autosave and its native Save/Exit route. V393 did not recur, but this successful run identifies no cause or production correction. V393 world entry, V169 combat, the two natural comparison fights, legacy ownership/migration and final release identities remain open. Website impact: unreleased validation only; published availability and gameplay claims remain unchanged.
 
-## Revised framework title verification, V390
+## V398 passive startup and rollback, 2026-10-09
 
-The framework containing the state-read error correction passed the isolated title route with the original six plugins. Six native title inputs completed, including audio verification and native Exit with status 0. No save was loaded or advanced. All 494 original runtime files, the six-plugin inventory, all six save hashes and 619 protected profile files matched after restoration, with no owned process left running.
+A fresh no-launch preflight caught a stale private-home binding before the first attempt could start FTK; that transaction rolled back and its parent checks passed. After correcting the isolated binding and repeating the preflight, the owned game process started but did not reach native title within the bounded wait. The BepInEx chainloader began loading the framework, but no framework completion, bridge readiness, content-registration result or title-ready response was observed. The process was stopped by owned cleanup. The observed startup boundary does not identify why framework initialization failed to complete.
 
-This passes title startup and exit for the revised framework on this configured macOS setup. It does not verify saved-world entry or identify the cause of V393 or V169. Autosave verification, native balance comparisons, migration and crash resolution remain release gates. Website impact: unreleased validation only.
+No save was accepted. No world observer ran, and the attempt submitted no movement, End Turn, combat, trace arm or save operation. Cleanup and post-run checks passed for the original runtime, six-plugin inventory, protected profiles and save hash/size guards. V398 is NON-PASS and establishes neither a crash cause nor a correction. The user-approved repeat of V384's unsaved male movement/EndTurn segment and one additional published-bow migration campaign remain unconsumed because this run did not pass the required cold-save check. V393 world entry and V169 combat remain separate blockers. Website impact: unreleased validation only; published Thief 1.0.0 remains authoritative.
