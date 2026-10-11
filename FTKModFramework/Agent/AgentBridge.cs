@@ -33,6 +33,7 @@ namespace FTKModFramework.Agent
         private static readonly HashSet<MainThreadWork> Outstanding = new HashSet<MainThreadWork>();
 
         private static bool _started;
+        private static bool _stopRequested;
         private static volatile bool _running;
         private static HttpListener _listener;
         private static Thread _thread;
@@ -41,8 +42,11 @@ namespace FTKModFramework.Agent
         /// <summary>Idempotent. No-ops unless FTK_AGENT_BRIDGE==1. Safe to call once from Plugin.Awake().</summary>
         public static void Start()
         {
-            if (_started) return; // _done guard: never start twice.
-            _started = true;
+            lock (Gate)
+            {
+                if (_started) return; // Once per process, including disabled or stopped startup.
+                _started = true;
+            }
 
             string flag = Environment.GetEnvironmentVariable(EnvFlag);
             if (flag != "1")
@@ -57,18 +61,10 @@ namespace FTKModFramework.Agent
                 go.hideFlags = HideFlags.HideAndDontSave;
                 go.AddComponent<BridgeHost>();
 
-                _listener = new HttpListener();
-                _listener.Prefixes.Add("http://127.0.0.1:" + _port + "/");
-                _listener.Start();
-                _running = true;
-
-                _thread = new Thread(ListenLoop);
+                _thread = new Thread(StartListener);
                 _thread.IsBackground = true;
                 _thread.Name = "FTKAgentBridge";
                 _thread.Start();
-
-                Plugin.Log.LogInfo("FTKAgentBridge listening on http://127.0.0.1:" + _port + "/");
-                Plugin.Log.LogWarning("FTKAgentBridge is SINGLE-PLAYER TEST USE ONLY. Do not enable in co-op.");
             }
             catch (Exception e)
             {
@@ -80,15 +76,19 @@ namespace FTKModFramework.Agent
         /// <summary>Stop the listener and background thread. Idempotent.</summary>
         public static void Stop()
         {
+            HttpListener listener;
             lock (Gate)
             {
+                _stopRequested = true;
                 _running = false;
                 foreach (MainThreadWork work in Outstanding) work.CancelPending();
                 Queue.Clear();
+                listener = _listener;
+                _listener = null;
             }
-            try { if (_listener != null) _listener.Stop(); } catch { }
-            try { if (_listener != null) _listener.Close(); } catch { }
-            _listener = null;
+            // Only a fully started listener is published. A starting listener belongs to its worker.
+            try { if (listener != null) listener.Stop(); } catch { }
+            try { if (listener != null) listener.Close(); } catch { }
         }
 
         private static int ResolvePort()
@@ -102,14 +102,50 @@ namespace FTKModFramework.Agent
 
         internal static int Port { get { return _port; } }
 
-        private static void ListenLoop()
+        private static void StartListener()
+        {
+            HttpListener listener = null;
+            try
+            {
+                lock (Gate) { if (_stopRequested) return; }
+                // Mono can block while constructing or starting a listener. Never hold Gate or Unity's
+                // main thread here; Stop must still cancel pending work and prohibit late publication.
+                listener = new HttpListener();
+                listener.Prefixes.Add("http://127.0.0.1:" + _port + "/");
+                listener.Start();
+                lock (Gate)
+                {
+                    if (_stopRequested) return;
+                    _listener = listener;
+                    _running = true;
+                }
+                Plugin.Log.LogInfo("FTKAgentBridge listening on http://127.0.0.1:" + _port + "/");
+                Plugin.Log.LogWarning("FTKAgentBridge is SINGLE-PLAYER TEST USE ONLY. Do not enable in co-op.");
+                ListenLoop(listener);
+            }
+            catch (Exception e)
+            {
+                Plugin.Log.LogError("FTKAgentBridge failed to start: " + e);
+            }
+            finally
+            {
+                lock (Gate)
+                {
+                    _running = false;
+                    if (ReferenceEquals(_listener, listener)) _listener = null;
+                }
+                try { if (listener != null) listener.Close(); } catch { }
+            }
+        }
+
+        private static void ListenLoop(HttpListener listener)
         {
             while (_running)
             {
                 HttpListenerContext ctx;
                 try
                 {
-                    ctx = _listener.GetContext(); // blocks until a request or the listener is stopped
+                    ctx = listener.GetContext(); // blocks until a request or the listener is stopped
                 }
                 catch (Exception)
                 {

@@ -16,6 +16,13 @@ Agent session   <-- stdio MCP -->  ftk_mcp_server.py  <-- loopback HTTP -->  in-
   Python SDK / FastMCP) that wraps that HTTP API as MCP tools. HTTP calls use
   only the Python standard library (`urllib`); the only dependency is `mcp`.
 
+Listener construction, startup and request listening run on the bridge worker. The hidden Unity
+host is created on the main thread before the worker starts. A stalled or failed listener startup
+therefore leaves Unity's main thread available; bridge requests remain unavailable until startup
+succeeds. Shutdown cancels pending work without waiting for an initializing listener. That worker
+closes its listener when initialization returns and cannot publish it after shutdown. Startup is
+once per process, including disabled or failed startup; it does not retry automatically.
+
 ## Tools
 
 | Tool | Wraps | Purpose |
