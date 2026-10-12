@@ -1,0 +1,532 @@
+{
+  "schema": "ftkmf.thief.knife-grip.v1",
+  "baseRevision": "256974a74f7a8c26b6d5676827431bda4531a19c",
+  "originalAuthored": true,
+  "nativeGeometryUsed": false,
+  "scope": "Seven tier knives in both hands and their 14 break pieces; translation only",
+  "basis": "Move the hand mount from the lower wrapped handle to its authored midpoint",
+  "targetFractionFromPommelEnd": 0.5,
+  "previousFitSha256": "62d8e5332e93f879ed5c6ab1f1ff6592b1f8d42c3756905fbb2aa01029983fd2",
+  "generatorSha256": "17cc4277463ec79eda9c60d5f973ea2147dde44ee2ce68c715d97daf6624606d",
+  "routeMetadata": {
+    "path": "art-experiments/thief/native-route.json",
+    "sha256": "22203d9c3fcdd6dfb828e73216b9fb89a9bff1e58b9d6ac81634cddf0c9eaf12",
+    "usage": "Child transform rotations and scales only"
+  },
+  "landmarks": [
+    {
+      "tier": "street",
+      "originalSourceSha256": "6fc7dfdbd7717ffd41c9ef34db57c88d1ff48a8a5e04888b389d88f6f6d318dd",
+      "wrappedHandleSpanY": [
+        -0.79,
+        -0.25
+      ],
+      "previousGripY": -0.6712,
+      "revisedGripY": -0.52,
+      "uniformScale": 0.35521034462893375,
+      "weaponLocalDelta": [
+        0.043994858221112,
+        -0.030805528434952087,
+        0.0
+      ]
+    },
+    {
+      "tier": "burglar",
+      "originalSourceSha256": "71d31fe2e1fa3ca3b47072876a2f46903ab1d713914266ee11f82a3f6e499aa5",
+      "wrappedHandleSpanY": [
+        -0.72,
+        -0.34
+      ],
+      "previousGripY": -0.6364000000000001,
+      "revisedGripY": -0.53,
+      "uniformScale": 0.35724379605053586,
+      "weaponLocalDelta": [
+        0.031136575783489145,
+        -0.021802063001194767,
+        0.0
+      ]
+    },
+    {
+      "tier": "guild",
+      "originalSourceSha256": "0acf8232c3c4d663a124b5fd4bff589a24168417526fccac353be34d41f9b3ff",
+      "wrappedHandleSpanY": [
+        -0.69,
+        -0.23
+      ],
+      "previousGripY": -0.59,
+      "revisedGripY": -0.45999999999999996,
+      "uniformScale": 0.3570414531326019,
+      "weaponLocalDelta": [
+        0.03802126130775009,
+        -0.026622771244358256,
+        0.0
+      ]
+    },
+    {
+      "tier": "locksmith",
+      "originalSourceSha256": "af1b939b9ae58f4a0bb7772961443c60e359c9ba66d646ccaf4b3251e52dbab7",
+      "wrappedHandleSpanY": [
+        -0.66,
+        -0.28
+      ],
+      "previousGripY": -0.5764,
+      "revisedGripY": -0.47000000000000003,
+      "uniformScale": 0.35585203934967496,
+      "weaponLocalDelta": [
+        0.031015273360696594,
+        -0.02171712613844176,
+        0.0
+      ]
+    },
+    {
+      "tier": "masterwork",
+      "originalSourceSha256": "62794fbbaa50f4dfe41f68960182ab23bce63662299a5e7e9e708efb7215b90d",
+      "wrappedHandleSpanY": [
+        -0.71,
+        -0.34
+      ],
+      "previousGripY": -0.6286,
+      "revisedGripY": -0.525,
+      "uniformScale": 0.35768324807166463,
+      "weaponLocalDelta": [
+        0.030354485933850667,
+        -0.021254437845076773,
+        0.0
+      ]
+    },
+    {
+      "tier": "nightblade",
+      "originalSourceSha256": "652abb45401e0f0d0b3ac6d2b151da9933992445b6b3f14675dd619d552e026e",
+      "wrappedHandleSpanY": [
+        -0.69,
+        -0.31
+      ],
+      "previousGripY": -0.6064,
+      "revisedGripY": -0.5,
+      "uniformScale": 0.35649472530762355,
+      "weaponLocalDelta": [
+        0.031071288441310685,
+        -0.02175634831640563,
+        0.0
+      ]
+    },
+    {
+      "tier": "wayfarer",
+      "originalSourceSha256": "8ee87748a2802f8cbfae338917ae4be15832c1c6c682123ba48c080cf00a25cd",
+      "wrappedHandleSpanY": [
+        -0.66,
+        -0.3
+      ],
+      "previousGripY": -0.5808,
+      "revisedGripY": -0.48,
+      "uniformScale": 0.356783930885042,
+      "weaponLocalDelta": [
+        0.029459837327759086,
+        -0.020627998206705144,
+        0.0
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/thief-street-twins.glb",
+      "tier": "street",
+      "route": ".",
+      "previousSha256": "32f1547a7bca6d563a58a09582e5d7fb8f91bd538a933e4b88006f696300a147",
+      "sha256": "4c338b7efadddc686b94e6dc05ddb144d1b590f96855231a50d4c9554e2c3a5e",
+      "bytes": 409040,
+      "localDelta": [
+        0.043994858221112,
+        -0.030805528434952087,
+        0.0
+      ],
+      "vertices": 12000,
+      "triangles": 4000,
+      "maximumRootSpaceTranslationError": 1.4261303651896817e-08
+    },
+    {
+      "path": "assets/thief-street-twins-fragment-1.glb",
+      "tier": "street",
+      "route": "Break",
+      "previousSha256": "5995116385712dcb30e216b49141b0dac242feb7d3adcb42eb83317f088027b3",
+      "sha256": "4c334e817525964764f5cde3501176822f919a1a4b2f02acdc3640108f6c4fbd",
+      "bytes": 77884,
+      "localDelta": [
+        0.043994858106352466,
+        -0.030805528598845704,
+        0.0
+      ],
+      "vertices": 2250,
+      "triangles": 808,
+      "maximumRootSpaceTranslationError": 1.4466225398135357e-08
+    },
+    {
+      "path": "assets/thief-street-twins-fragment-2.glb",
+      "tier": "street",
+      "route": "Break/Break",
+      "previousSha256": "0dd49106db3b1aa557c290806aea0f41b456e7e071d8894802785641c120b2bd",
+      "sha256": "0a36c11e8f0528c540f92c5b1ec9a61785b06b4e66c890457d6486fa9ceb19e5",
+      "bytes": 344912,
+      "localDelta": [
+        0.043994858106352466,
+        -0.030805528598845704,
+        0.0
+      ],
+      "vertices": 10104,
+      "triangles": 3424,
+      "maximumRootSpaceTranslationError": 6.69596351976498e-09
+    },
+    {
+      "path": "assets/thief-twins-burglar.glb",
+      "tier": "burglar",
+      "route": ".",
+      "previousSha256": "4f4d8fdfae25312b4cc94efc92dfabcbcb3ed238df829da2d1ee26443637df15",
+      "sha256": "8463ff99c3006710e16bba0e9e40d13f7ff059ea8aeb8fb881e964650a858b59",
+      "bytes": 409044,
+      "localDelta": [
+        0.031136575783489145,
+        -0.021802063001194767,
+        0.0
+      ],
+      "vertices": 12000,
+      "triangles": 4000,
+      "maximumRootSpaceTranslationError": 4.755458065525131e-09
+    },
+    {
+      "path": "assets/thief-twins-burglar-fragment-1.glb",
+      "tier": "burglar",
+      "route": "Break",
+      "previousSha256": "3c7bc55dc86b76ef5f402b2c5400b70aeee76b26f72237bfe3b8cf6a37544947",
+      "sha256": "3fa315e54d1ace94a5b860a41f12fe737b6b10a3dc2d1108f70b4178ae8228a0",
+      "bytes": 71788,
+      "localDelta": [
+        0.03113657570227013,
+        -0.02180206311718755,
+        0.0
+      ],
+      "vertices": 2066,
+      "triangles": 774,
+      "maximumRootSpaceTranslationError": 1.0261695899266288e-08
+    },
+    {
+      "path": "assets/thief-twins-burglar-fragment-2.glb",
+      "tier": "burglar",
+      "route": "Break/Break",
+      "previousSha256": "5e520941a139f70204679cfc54947ac23837756e16c02be7af96e908e25a5e24",
+      "sha256": "1cfed40b23266e58abb07de5f5c8dafe8495be01ecd3a1f3444f97f83231cb34",
+      "bytes": 357700,
+      "localDelta": [
+        0.03113657570227013,
+        -0.02180206311718755,
+        0.0
+      ],
+      "vertices": 10474,
+      "triangles": 3582,
+      "maximumRootSpaceTranslationError": 4.6394652945813686e-09
+    },
+    {
+      "path": "assets/thief-twins-guild.glb",
+      "tier": "guild",
+      "route": ".",
+      "previousSha256": "eb5b21687a06b52a37c84ad778f85409510c0c9fb3e6915ba2f09f0921e3d9c8",
+      "sha256": "87b7f0726acced1f775ed6a836f566b80dba5094484b279e38b81a46d30ad45b",
+      "bytes": 409040,
+      "localDelta": [
+        0.03802126130775009,
+        -0.026622771244358256,
+        0.0
+      ],
+      "vertices": 12000,
+      "triangles": 4000,
+      "maximumRootSpaceTranslationError": 5.1526686112302045e-09
+    },
+    {
+      "path": "assets/thief-twins-guild-fragment-1.glb",
+      "tier": "guild",
+      "route": "Break",
+      "previousSha256": "5a19b0473a2ce1bfa6a7e56e326978b93a41464432a7ee1eb2f3a2bda73f3680",
+      "sha256": "aa75d09163c31553938c28fda9206b6edbda6bcffd820dda90c3ff83eae95a5d",
+      "bytes": 49504,
+      "localDelta": [
+        0.038021261208572535,
+        -0.02662277138599849,
+        0.0
+      ],
+      "vertices": 1418,
+      "triangles": 516,
+      "maximumRootSpaceTranslationError": 1.4070362829715632e-08
+    },
+    {
+      "path": "assets/thief-twins-guild-fragment-2.glb",
+      "tier": "guild",
+      "route": "Break/Break",
+      "previousSha256": "b4c1de83d735dcfd6c3804c5ed937dcc5e67883193438d082cb11444f4cac96e",
+      "sha256": "0c90b02f6b5045dda8b9461f3dcb0b8edebab0a1ebb9ea4c436c70c998bcd35b",
+      "bytes": 370264,
+      "localDelta": [
+        0.038021261208572535,
+        -0.02662277138599849,
+        0.0
+      ],
+      "vertices": 10852,
+      "triangles": 3660,
+      "maximumRootSpaceTranslationError": 5.251846166287599e-09
+    },
+    {
+      "path": "assets/thief-twins-locksmith.glb",
+      "tier": "locksmith",
+      "route": ".",
+      "previousSha256": "72437f3641c350669ef0023383088747e0266f477f86c52007191553885f0dd9",
+      "sha256": "02ccd2aefe25b08cc570badcb8c4eee3dd02f19736487ab9c55f37df312976cc",
+      "bytes": 409040,
+      "localDelta": [
+        0.031015273360696594,
+        -0.02171712613844176,
+        0.0
+      ],
+      "vertices": 12000,
+      "triangles": 4000,
+      "maximumRootSpaceTranslationError": 4.999406139072349e-09
+    },
+    {
+      "path": "assets/thief-twins-locksmith-fragment-1.glb",
+      "tier": "locksmith",
+      "route": "Break",
+      "previousSha256": "da69ddd7ab76ed6b45208a3aa14aa838600f9741c8aa0af398a2f7216d749eb5",
+      "sha256": "f1fecae64870ca7d4521a76c5a1e954d140e3850515fc8a759774d0199124d6e",
+      "bytes": 41984,
+      "localDelta": [
+        0.031015273279793993,
+        -0.021717126253982658,
+        0.0
+      ],
+      "vertices": 1198,
+      "triangles": 436,
+      "maximumRootSpaceTranslationError": 1.0017295964948048e-08
+    },
+    {
+      "path": "assets/thief-twins-locksmith-fragment-2.glb",
+      "tier": "locksmith",
+      "route": "Break/Break",
+      "previousSha256": "ac45743c868b9ed2c28a64b51439d733b1968017c8c7ff57ab69fae10e0c7b79",
+      "sha256": "b0cf0e984947241928c7c2d765e07634fe58de789c4a9f1dc6e13685d0b4da5b",
+      "bytes": 376272,
+      "localDelta": [
+        0.031015273279793993,
+        -0.021717126253982658,
+        0.0
+      ],
+      "vertices": 11030,
+      "triangles": 3712,
+      "maximumRootSpaceTranslationError": 4.883865256655184e-09
+    },
+    {
+      "path": "assets/thief-twins-masterwork.glb",
+      "tier": "masterwork",
+      "route": ".",
+      "previousSha256": "6bb914bdf21577c13fd18ff1b8009080c1fde384b07b91aa39d7f1aee043557b",
+      "sha256": "282b0d0afa8e3f621d166bb56b1478e7b758823ab84acbf5cb88690d4c189d29",
+      "bytes": 409040,
+      "localDelta": [
+        0.030354485933850667,
+        -0.021254437845076773,
+        0.0
+      ],
+      "vertices": 12000,
+      "triangles": 4000,
+      "maximumRootSpaceTranslationError": 1.3883043863821554e-08
+    },
+    {
+      "path": "assets/thief-twins-masterwork-fragment-1.glb",
+      "tier": "masterwork",
+      "route": "Break",
+      "previousSha256": "97d4e37142d7a0cc2e08b99cd5b28ae39ddd00049d5b9963a4818702d4ed61b1",
+      "sha256": "0e4b17e7e4f8774271cfef6f152265633c00a642366d039d124041330406128f",
+      "bytes": 27760,
+      "localDelta": [
+        0.030354485854671716,
+        -0.021254437958156045,
+        0.0
+      ],
+      "vertices": 780,
+      "triangles": 296,
+      "maximumRootSpaceTranslationError": 1.3962222832758497e-08
+    },
+    {
+      "path": "assets/thief-twins-masterwork-fragment-2.glb",
+      "tier": "masterwork",
+      "route": "Break/Break",
+      "previousSha256": "ae7a11b4496a480e6fc45bd6daf380bc67aa26211a49b11d0694304d28b7af3b",
+      "sha256": "c801317e4549033392f9cfeb33d65c5756ac951bea3d6070445745a1980aecf8",
+      "bytes": 390488,
+      "localDelta": [
+        0.030354485854671716,
+        -0.021254437958156045,
+        0.0
+      ],
+      "vertices": 11448,
+      "triangles": 3852,
+      "maximumRootSpaceTranslationError": 1.2124622892489834e-08
+    },
+    {
+      "path": "assets/thief-twins-nightblade.glb",
+      "tier": "nightblade",
+      "route": ".",
+      "previousSha256": "cccf39951fd61b6a912eef3113c6f5463a5c7d1b006395b19957c6b761ea9553",
+      "sha256": "bcb6cf4de090e251b179881b04f281a5f41ea73cdbd829ec38f17cd04ed1d49f",
+      "bytes": 409040,
+      "localDelta": [
+        0.031071288441310685,
+        -0.02175634831640563,
+        0.0
+      ],
+      "vertices": 12000,
+      "triangles": 4000,
+      "maximumRootSpaceTranslationError": 1.2968669693691481e-08
+    },
+    {
+      "path": "assets/thief-twins-nightblade-fragment-1.glb",
+      "tier": "nightblade",
+      "route": "Break",
+      "previousSha256": "c0ec08dd7a25ba88d30598fb31ca5e810ac83d304b2f2f69d941b3c8b89d9ee8",
+      "sha256": "25358cec5ab6cef516eb52a432d0b38b39c89921a1d179a1c2068558589a9a91",
+      "bytes": 69680,
+      "localDelta": [
+        0.031071288360261972,
+        -0.0217563484321552,
+        0.0
+      ],
+      "vertices": 2012,
+      "triangles": 710,
+      "maximumRootSpaceTranslationError": 1.2887620998158766e-08
+    },
+    {
+      "path": "assets/thief-twins-nightblade-fragment-2.glb",
+      "tier": "nightblade",
+      "route": "Break/Break",
+      "previousSha256": "72b6fc35dd5cad082a4a8961e527539e9ac3a7b93ba91f7c998e4be4b63d4a36",
+      "sha256": "c8450e060e50390743eca94d342f3dcf700238a551fadb2932566c9de26c699e",
+      "bytes": 349440,
+      "localDelta": [
+        0.031071288360261972,
+        -0.0217563484321552,
+        0.0
+      ],
+      "vertices": 10240,
+      "triangles": 3454,
+      "maximumRootSpaceTranslationError": 2.561954915575315e-09
+    },
+    {
+      "path": "assets/thief-twins-wayfarer.glb",
+      "tier": "wayfarer",
+      "route": ".",
+      "previousSha256": "9256e18bea46952809fcdb365e5e329898ed91b5317bc7447fc3188f610c261a",
+      "sha256": "370e84bc87e2e5c5c2194d81579315110084e59f4684549bc4787c8ad26d882f",
+      "bytes": 409044,
+      "localDelta": [
+        0.029459837327759086,
+        -0.020627998206705144,
+        0.0
+      ],
+      "vertices": 12000,
+      "triangles": 4000,
+      "maximumRootSpaceTranslationError": 7.05948443105453e-09
+    },
+    {
+      "path": "assets/thief-twins-wayfarer-fragment-1.glb",
+      "tier": "wayfarer",
+      "route": "Break",
+      "previousSha256": "6f12a35073a4ba02edca641f9a0a1dcd0a1616741f8268c7264e75a2ad60257d",
+      "sha256": "0f1871ba3fa28ac2145def61b4793af69f2bd37eedb1cb7a6f2f5efe6fe7b7f4",
+      "bytes": 41348,
+      "localDelta": [
+        0.029459837250913803,
+        -0.02062799831645159,
+        0.0
+      ],
+      "vertices": 1178,
+      "triangles": 436,
+      "maximumRootSpaceTranslationError": 7.951423196955743e-09
+    },
+    {
+      "path": "assets/thief-twins-wayfarer-fragment-2.glb",
+      "tier": "wayfarer",
+      "route": "Break/Break",
+      "previousSha256": "7e6fc15aab100c47659d808ab60498573aeb5ce9b6177edef60694963cb9fea1",
+      "sha256": "ef78e9e560cc9aa0b982637e354a0fbc2c639c5d5437ac023f3eb24a041ddfdb",
+      "bytes": 378424,
+      "localDelta": [
+        0.029459837250913803,
+        -0.02062799831645159,
+        0.0
+      ],
+      "vertices": 11092,
+      "triangles": 3740,
+      "maximumRootSpaceTranslationError": 6.949737996891914e-09
+    }
+  ],
+  "maximumRootSpaceTranslationError": 1.4466225398135357e-08,
+  "preserved": [
+    "mesh topology",
+    "normals",
+    "UVs",
+    "textures",
+    "blade rotation",
+    "uniform scale",
+    "inventory display meshes",
+    "item declarations"
+  ],
+  "artifactAudit": {
+    "sourceRecipeSha256": "b6c00cd1dea546d9d329e5786fbfe5d15aa00c2250db38c2581c0df3f76a430e",
+    "sourceRecipe": "retained-source/scratch/gear-consolidation/thief-replacements/second-batch/fit-v1.json",
+    "basis": "Authored grip windows, not native geometry or bounds",
+    "items": [
+      {
+        "id": "thief_twins_skeleton_key",
+        "scale": 0.45,
+        "gripCenterY": -0.54,
+        "gripWindowY": [
+          -0.68,
+          -0.42
+        ],
+        "assets": [
+          {
+            "path": "assets/thief-twins-skeleton-key.glb",
+            "sha256": "70224e0c9d950076c1e97e33372172e1f8e1695e4126b108928ec25891e6fef9"
+          },
+          {
+            "path": "assets/thief-twins-skeleton-key-offhand.glb",
+            "sha256": "946bde689e1fd71cb9df793007eb0887c58f69715a2ca209c66978cf00522686"
+          }
+        ]
+      },
+      {
+        "id": "thief_twins_candles_end",
+        "scale": 0.45,
+        "gripCenterY": -0.51,
+        "gripWindowY": [
+          -0.69,
+          -0.35
+        ],
+        "assets": [
+          {
+            "path": "assets/thief-twins-candles-end.glb",
+            "sha256": "d0423790a1f7faadf15c6471001d950abf56786c378a806d43d912a797253508"
+          },
+          {
+            "path": "assets/thief-twins-candles-end-offhand.glb",
+            "sha256": "e9af1e8503b30f03b6f05c397040e885ab619f2edc64691ba4e91606cfb8cdfd"
+          }
+        ]
+      }
+    ]
+  },
+  "artifactAuditConclusion": "Both artifacts already center their declared authored grip windows within .01 source units; unchanged, native fit still requires review",
+  "remainingGates": [
+    "Native close views of both hands on female and male",
+    "Native fit review on all six additional races, including Possum",
+    "Native attack, recovery, locomotion and break-piece review",
+    "User visual acceptance of the revised hold"
+  ],
+  "nativeApproval": "PENDING_NEW_GEOMETRY_NATIVE_REVIEW"
+}

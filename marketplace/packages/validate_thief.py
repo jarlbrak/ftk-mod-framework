@@ -28,6 +28,33 @@ NATIVE_SKINSETS = ("treasureHunter_Female", "treasureHunter_Male", "treasureHunt
                    "treasureHunter_Goblin")
 
 
+def check_knife_grip_import(ledger):
+    if "knifeGripImport" not in ledger:
+        return
+    imported = ledger["knifeGripImport"]
+    assert imported["schema"] == "ftkmf.thief.knife-grip-import.v1"
+    assert imported["sourceLedger"] == "assets/thief-knife-grip.provenance.json"
+    raw = (PACKAGE / imported["sourceLedger"]).read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == imported["sourceLedgerSha256"]
+    source = json.loads(raw)
+    assert source["schema"] == "ftkmf.thief.knife-grip.v1"
+    assert source["originalAuthored"] is True and source["nativeGeometryUsed"] is False
+    assert source["scope"] == imported["scope"]
+    assert source["nativeApproval"] == imported["nativeApproval"]
+    expected = {"assets/" + ("thief-street-twins" if tier == "street" else "thief-twins-" + tier)
+                + suffix + ".glb" for tier in TIERS
+                for suffix in ("", "-fragment-1", "-fragment-2")}
+    assert len(source["assets"]) == 21 and {r["path"] for r in source["assets"]} == expected
+    inventory = {r["path"]: r for r in ledger["assets"]}
+    for row in source["assets"]:
+        assert row["sha256"] == inventory[row["path"]]["sha256"]
+        assert row["bytes"] == inventory[row["path"]]["bytes"]
+        assert row["maximumRootSpaceTranslationError"] < 1e-7
+    for item in source["artifactAudit"]["items"]:
+        for asset in item["assets"]:
+            assert hashlib.sha256((PACKAGE / asset["path"]).read_bytes()).hexdigest() == asset["sha256"]
+
+
 def check_worn_import(ledger):
     # Installed packages validate portable identities without private source files.
     if "wornCoatBootImport" not in ledger:
@@ -305,6 +332,7 @@ def main():
     ledger = json.loads((PACKAGE / "assets/advanced-import.provenance.json").read_text())
     for asset in ledger["assets"]:
         assert hashlib.sha256((PACKAGE / asset["path"]).read_bytes()).hexdigest() == asset["sha256"], asset["path"]
+    check_knife_grip_import(ledger)
     check_worn_import(ledger)
     check_coat_display_import(ledger)
     assert all((PACKAGE / ref).is_file() for ref in refs)
