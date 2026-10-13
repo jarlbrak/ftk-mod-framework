@@ -2,7 +2,7 @@
 
 Scope: historical 1.0.0 bow collection. For the unreleased pistol and visible-armor implementation, use [the candidate contract](CANDIDATE.md). Historical evidence below does not validate the candidate.
 
-Status: implementation evidence through 2026-10-12. This separates offline checks, isolated native observations, and remaining release gates.
+Status: implementation evidence through 2026-10-13. This separates offline checks, isolated native observations, and remaining release gates.
 
 ## Current candidate checkpoint, 2026-10-04
 
@@ -1702,3 +1702,13 @@ The supervisor honors the first native failure and reaps the owner. No title-rea
 Owned termination returns -15, the keep-awake child exits zero, and original runtime restoration completes. Fresh checks pass for all 494 runtime files, six plugin names, 619 protected-profile files, six normal-save hashes/sizes and all four immutable provisional namespace files. The supervisor, owner and native processes are reaped, and both bridge ports are free. Root and independent actual review accept the truthful closed NONPASS result. A private observer-location supplement corrects a report pointer only; it supplies no native request or response evidence.
 
 No gameplay, saving, checkpoint promotion or retry occurs. External saves remain hash/size only. The accepted normal manual checkpoint and shared budgets are unchanged. The one windowed startup allowance is spent and permanently closed. Startup, provisional-save cold qualification, separate world-entry and combat crash causes, native balance, genuine migration and ammunition behavior, exact revised-package acceptance and release parity remain open. Website impact: unreleased verification only; published Thief 1.0.0, accepted art and public availability remain unchanged.
+
+## Startup-phase diagnostic preparation (V557-V561)
+
+Static inspection narrows the next observation to the managed `SceneManager.LoadSceneAsync(string, LoadSceneMode)` wrapper for `FTK_main` in additive mode and the first `OnOffManager.Awake` boundary. The probe does not patch the engine's native internal calls or initiate scene loading. The authored source and compiled CIL preserve the original arguments, results and exact exception object. Hook receipts identify observed patch boundaries; foreign Harmony patches can still skip or change an original call, so a receipt alone does not prove original execution or a causal method.
+
+The companion probe passes 75 game-free checks and independent source/artifact review. It records bounded operation, scene and intro-video getter observations, with at most seven scheduled snapshots after arming, 12 other records, 16 KiB per record and 320 KiB total. Atomic private record publication prevents an owner from reading a partially written final record. The complete owner also passes independent game-free source and lifecycle review. The separately tested owner binds the exact process lifetime before exec, admits only the original six-plugin recipe plus this seventh probe, stops at the first failure and restores runtime files only after verified owned-process cleanup. Tests use authored fake processes and installations; they do not execute the game or prove Unity Mono, live Harmony or native getter compatibility.
+
+The proposed batch permits zero native inputs, bridge requests, world reads, gameplay, saving or retry. Arming is bounded to 60 seconds and observation to 180 seconds after arming. The owner stops observation by 240 seconds from launch, then performs bounded owned termination and cleanup within the existing overall ceilings. Missing phase records remain unknown. Complete evidence is not a startup cure. The original runtime, plugin and protected-profile checks remain, together with hash/size-only checks for the six normal saves and four immutable provisional namespace files. A changed save is never restored by the operator.
+
+No game is launched or deployed during this preparation. The V555 startup remains spent and permanently closed; any diagnostic activation requires fresh specific authorization and actual admission review. The other Thief session remains on native hold. Startup, provisional-save cold qualification, separate world-entry and combat crash causes, native balance, genuine migration and ammunition behavior, exact revised-package acceptance and release parity remain open. Website impact: unreleased verification only; published Thief 1.0.0, accepted art and public availability remain unchanged.
