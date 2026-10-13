@@ -2,7 +2,7 @@
 
 Scope: historical 1.0.0 bow collection. For the unreleased pistol and visible-armor implementation, use [the candidate contract](CANDIDATE.md). Historical evidence below does not validate the candidate.
 
-Status: implementation evidence through 2026-10-11. This separates offline checks, isolated native observations, and remaining release gates.
+Status: implementation evidence through 2026-10-12. This separates offline checks, isolated native observations, and remaining release gates.
 
 ## Current candidate checkpoint, 2026-10-04
 
@@ -1643,3 +1643,16 @@ No native process launches, no game input is submitted, and no runtime attempt d
 The attempt closes NONPASS without retry, and all remaining contingent lifetimes stay closed. The absence of a startup marker does not renew permission. The original approval, admission, reviews and failure remain immutable. Shared usage and the accepted manual checkpoint remain unchanged. The corrective offline work must run the exact prospective startup-quantity contract during both check and actual preflight, cover the omitted field with regression tests, and reject reuse of this closed question identity.
 
 No bow acquisition, ownership, saving, cold migration, native balance, ammunition behavior or crash-cause evidence is added. Both historical crash investigations, genuine migration, measured native balance, final-package acceptance and release parity remain open. Website impact: private verification failure only; published Thief 1.0.0, package bytes and public availability remain unchanged. Release-time website requirements remain in the candidate handoff.
+
+
+## Native migration creation and save-thumbnail guard refusal (V540)
+
+One newly approved V537/V538 campaign starts with the published bow package and reaches a healthy Thief/Hunter/Thief overworld under the exact Dungeon Crawl, Solo, Apprentice and +5 starting-gold configuration. Two opening Continue inputs complete. All three native Save and Exit route inputs then complete, but the post-input namespace guard refuses before retained title confirmation or native Exit zero. No accepted migration checkpoint follows.
+
+Independent source analysis identifies the narrow refusal: the auxiliary validator excludes campaign run files but treats the new same-basename JPEG thumbnail as an unauthorized auxiliary. The recorded output reproduces that rejected set. This is a save-artifact guard mismatch, not an observed native crash; completed input alone does not prove title arrival, serialized-save validity or successful checkpoint acceptance. The output run file and thumbnail remain provisional and preserved in place, without save contents being parsed, copied, edited or restored. The thumbnail-policy correction remains offline work, without a fix or native acceptance claim.
+
+The controller deliberately terminates the owned game with -15, the keep-awake child exits zero and cleanup is verified. The owner restores runtime files, but its full namespace guard still records NON-PASS for the thumbnail. Separate fresh component checks pass for all 494 original runtime files, six plugins, 619 protected-profile files, six save hashes/sizes and both original isolated auxiliary files. No owned game remains and both bridge ports are free. These passing component checks do not turn the complete namespace guard into a pass.
+
+Root and independent actual-closure review verify 47 references and 13 completed native input requests, accepting the truthful closed NON-PASS outcome without checkpoint or namespace acceptance. Startup and Create are spent, and all remaining contingent lifetimes close under the first-failure rule without retry. No movement, EndTurn, combat, tutorial acknowledgement or new diagnostic occurs. The accepted normal manual checkpoint remains unchanged. Cumulative usage remains seven turns spent and zero remaining, three movement segments spent and nine remaining, with both carried comparison slots unused.
+
+Genuine bow ownership and cold persistence, same-ID pistol migration, ammunition/reload behavior, measured native balance, both historical crash causes, exact final-package acceptance and release package/wiki/site parity remain open. Website impact: unreleased validation evidence only; published Thief 1.0.0, package bytes, accepted artwork and public availability remain unchanged.
