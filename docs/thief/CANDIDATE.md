@@ -334,6 +334,20 @@ The single passive startup allowance is spent. V545 and the earlier V540 campaig
 
 See [the retained passive-attempt outcome](VALIDATION.md#passive-qualification-stopped-before-load-commands-v545).
 
+## Continuous operator preparation and startup stop (V546, V548)
+
+V546 passes 47 focused offline checks in root and independent runs. A continuous parent supervisor binds its fixed five load callbacks, source, admission and process identity before owner startup, carries the existing fresh inspect/propose/execute sequence, and internally reaps the owner. The regression completes all 17 controller commands without outer process polling. Supervisor-loss cleanup and exclusive, complete publication of owned Python evidence records are tested. That publication helper is specific to the configured macOS host; native C# output publication is unchanged. The original native control sequence, save comparison and startup limits remain intact. These are offline coordination results, not native cold-load acceptance.
+
+The specifically approved V548 passive attempt starts under that reviewed supervisor. The native game does not reach title readiness within the unchanged nominal 180-second title observation. The 634 retained UI observations show advancing frames, with the last reporting no controls, no input module and no bindings. The supervisor honors the native refusal and reaps the owner. No title-ready boundary, setup input, load command, world-readonly request or cold comparison occurs.
+
+The retained sound-focus exception also appears in the prior title-ready attempt. It does not identify a cause for this startup failure. No native crash is observed, and neither a save-load failure nor a historical crash cure is proved. The actual native full operator sequence and two-field response remain unverified because the title prerequisite failed.
+
+Planned owned termination returns -15, the keep-awake child exits zero and original runtime restoration completes. Fresh checks pass for all 494 runtime files, six plugin names, 619 protected-profile files, six normal-save hashes/sizes and all four immutable provisional namespace files. Owned processes are gone and both bridge ports are free. Tool and owner exit zero do not convert the semantic NON-PASS result into a pass. No saving, gameplay, checkpoint promotion or retry occurs; external saves remain hash/size only. The accepted normal manual checkpoint and shared budgets are unchanged. The prospective four-file guard does not retroactively pass V540's historical full-namespace refusal.
+
+The single supervised startup is spent, with no automatic repeat. Root and independent actual closure review accept the truthful closed NON-PASS outcome. Startup, save cold qualification, separate world-entry and combat crash causes, native balance, genuine bow-to-pistol migration and ammunition behavior, exact revised-package acceptance and release parity remain open. Website impact: unreleased verification only; published Thief 1.0.0, accepted art and public availability remain unchanged.
+
+See [the supervised startup result](VALIDATION.md#continuous-operator-preparation-and-startup-stop-v546-v548).
+
 ## Website impact
 
 Keep published Thief data at 1.0.0 until an authorized release. At release, regenerate `website/src/data/catalog.json` and `website/src/data/thief.json` from the public hash-verified archive; update `website/src/content/docs/mods/thief.mdx` and its item/action cards, library listing and banner/media provenance, pistol migration and framework 1.9.0 minimum, shared token/Back Alley availability, online limitation, compatibility/download links, and `website/src/content/docs/releases.mdx`. Complete website build, desktop/mobile browser, media, accessibility and public download checks. Existing bow imagery must not represent the pistol candidate. Do not claim campaign balance, co-op, platform or full appearance coverage from game-free checks.
