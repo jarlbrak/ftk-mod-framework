@@ -348,6 +348,20 @@ The single supervised startup is spent, with no automatic repeat. Root and indep
 
 See [the supervised startup result](VALIDATION.md#continuous-operator-preparation-and-startup-stop-v546-v548).
 
+## Windowed startup correction preparation (V549-V553)
+
+The retained launch comparison finds a concrete difference: all three V503 ordinary windowed title checks report a 1280x800 UI surface and threaded rendering, while V548 headless startup reports 640x480 and nonthreaded rendering despite the same requested resolution. The windowed examples use a different plugin route, and earlier headless starts also reach title. This supports a bounded windowed correction candidate; it does not prove an engine root cause or cure.
+
+Static inspection of the exact game and deployed framework confirms that both compared admitted configurations use the same default skip-intro preference, which resolves to off. The shared sound-focus exception also occurs before a successful title. Missing version logs do not prove that no main-scene Awake began, because several operations precede that marker. Advancing complete UI receipts are serviced through the framework's main-thread queue. No unsupported video, scene-activation, focus or audio patch follows from this evidence.
+
+V552 removes batch mode and requires the observed windowed 1280x800 geometry consistently in the controller, native-input status checks and root command adapter. It retains the continuous supervisor, fixed five load steps, exact source and process binding, read-only party comparison, save namespace, plugin stack and original protection checks. The nominal title observation and controller/owner deadlines remain 180/900/1100 seconds, with at most 10 native inputs, 32 controller commands and one world read. No gameplay, saving, retry, extra reader or diagnostic capture is added.
+
+V552 passes all 55 focused offline checks in root and independent runs, with independent frozen-source review. The tests cover retained native windowed UI observations, source-shaped load fixtures, geometry and identity refusals, continuous supervision, publication and cleanup. These checks establish harness consistency, not a successful native startup or cold save acceptance. No game is launched or deployed by this preparation; save contents remain untouched, with external saves restricted to hash/size guards. V548 stays closed with its one-use permission spent.
+
+Startup acceptance, provisional-save cold qualification, the separate world-entry and combat crash causes, native balance, genuine bow-to-pistol migration and ammunition behavior, exact revised-package acceptance and release parity remain open. Website impact: unreleased verification only; published Thief 1.0.0, accepted art and public availability are unchanged.
+
+See [the windowed preparation](VALIDATION.md#windowed-startup-correction-preparation-v549-v553).
+
 ## Website impact
 
 Keep published Thief data at 1.0.0 until an authorized release. At release, regenerate `website/src/data/catalog.json` and `website/src/data/thief.json` from the public hash-verified archive; update `website/src/content/docs/mods/thief.mdx` and its item/action cards, library listing and banner/media provenance, pistol migration and framework 1.9.0 minimum, shared token/Back Alley availability, online limitation, compatibility/download links, and `website/src/content/docs/releases.mdx`. Complete website build, desktop/mobile browser, media, accessibility and public download checks. Existing bow imagery must not represent the pistol candidate. Do not claim campaign balance, co-op, platform or full appearance coverage from game-free checks.
