@@ -164,6 +164,23 @@ namespace FTKModFramework.Core
             return false;
         }
 
+        // Fixed-arity internal calls avoid a params array on every patched GetEnum, including
+        // vanilla misses. Keep the public array entry point for existing mod binaries and callers.
+        internal static bool TryGetSyntheticId(string contentId, out int id, Type dbType)
+        {
+            Dictionary<string, int> map;
+            if (CustomIds.TryGetValue(dbType, out map) && map.TryGetValue(contentId, out id))
+                return true;
+            id = -1;
+            return false;
+        }
+
+        internal static bool TryGetSyntheticId(string contentId, out int id, Type firstDbType, Type secondDbType)
+        {
+            return TryGetSyntheticId(contentId, out id, firstDbType) ||
+                TryGetSyntheticId(contentId, out id, secondDbType);
+        }
+
         /// <summary>
         /// Reverse lookup: true iff <paramref name="id"/> is a synthetic int this framework actually
         /// REGISTERED under one of <paramref name="dbTypes"/>. Unlike <see cref="IdAllocator.IsCustom"/>

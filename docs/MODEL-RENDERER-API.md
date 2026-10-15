@@ -14,6 +14,14 @@ Registration snapshots the array and reports only that the request was accepted.
 
 Each GLB has one primitive, so the replacement renderer receives exactly one private material cloned from the target's first native material slot. Additional native slots are not retained on the replacement, avoiding repeated draws of the same primitive. The original material array is preserved for rollback. A target without a usable first material rejects the set.
 
+File-backed model PNGs are uploaded without retaining a CPU-readable pixel copy.
+Treat these framework-owned textures as immutable: do not call pixel-read/write
+APIs on them, destroy them, or assume each renderer has a distinct texture.
+Explicit assignments reuse a PNG with the same resolved path across slots and
+renderers in one transaction. Materials remain private, and separate assignment
+transactions have independent textures. Legacy optional model PNGs also discard
+their CPU pixel copies, but do not participate in transaction-local reuse.
+
 ## Rigid MeshRenderer assignments
 
 Use `ForStaticRenderer` only for a native rigid child that has exactly one `MeshRenderer`, one `MeshFilter`, one native mesh, and one usable native material slot at the selected path:

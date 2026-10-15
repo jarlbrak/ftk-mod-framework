@@ -20,6 +20,13 @@ namespace FTKModFramework.Core
                 __result = (FTK_itembase.ID)v;
                 return false; // resolved; skip the vanilla Enum.Parse + warning
             }
+            // Custom registrations take precedence, even when they reuse a native name.
+            FTK_itembase.ID native;
+            if (CanonicalEnumLookup<FTK_itembase.ID>.TryGetValue(_id, out native))
+            {
+                __result = native;
+                return false;
+            }
             return true; // not ours; run the original
         }
     }
