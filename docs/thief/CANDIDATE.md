@@ -502,6 +502,22 @@ Website impact: unreleased preparation only. Published Thief 1.0.0, package byte
 
 See [passive cold-load preparation after scene observation](VALIDATION.md#passive-cold-load-preparation-after-scene-observation-v596-v598).
 
+## Passive supervisor invocation refusal (V601)
+
+V601 stops before owner invocation. The exact root command supplies a relative path for the supervisor script, while its own-process guard requires the fully resolved absolute script path in the process command. Its admission and review paths and hashes match the reviewed metadata. The recorded refusal is `Continuous supervisor identity before owner invocation`, after preflight but before supervisor readiness publication. The exact failed process-row operand was not separately recorded, so this establishes an invocation-contract mismatch rather than assigning an unobserved compound-check operand or a game startup cause.
+
+No owner or game is spawned, no runtime is staged, and no setup/resume input, world request, gameplay or saving occurs. No supervisor readiness, owner spend/context, supervisor result or native/owner result is fabricated. Fresh post-attempt checks pass for 494 runtime files, six plugins, 619 protected profile files, six normal saves and four immutable provisional files; both test ports are free and no owned game is running. Root and independent reviews close the allowance as permanently spent with zero remaining startups and no retry, including the pre-owner failure. The exact tool invocation, failure, source/admission/review identities, closure and protection checks are preserved outside worktrees.
+
+The invocation audit includes both ordinary function-call and custom tool-call records. An earlier function-only scan is explicitly qualified; the complete audit identifies the sole actual supervisor invocation. V593's bounded scene-load observation remains valid and separate. Title readiness and passive cold-save qualification remain unrun by V601.
+
+V603 reproduces the command-path mismatch offline using byte-exact production supervisor copies, real own-process identity checks, direct isolated Python entry and native-free fake dependencies. The relative script argument refuses before readiness or owner spawn; the absolute argument passes the identity guard, completes the existing 17-command fake-owner sequence and reaps that harmless process. These are fixture results, separate from V601's unrecorded process row and from native startup or save qualification. Independent review accepts the proof and an acyclic absolute invocation-plan design for fresh preparation. The future producer will derive the command from verified metadata and completed review hashes, preserve its exact argument list and execute the sole supervisor. Its final source/tests and a new one-use approval are still required; no retry or native authority is created here.
+
+Any new native attempt requires a separate tested and independently reviewed preparation, exact fresh human permission and protection/admission checks. Other FTK native work stays on hold. External saves remain hash/size only; the existing provisional input files remain unchanged. Native balance, genuine published-bow migration and ammunition/reload behavior, separate world-entry and combat crash causes, exact artifacts and art, and final package/wiki/site parity remain open.
+
+Website impact: unreleased verification evidence only. Published Thief 1.0.0, package bytes, accepted art and website remain unchanged; release-time catalog, Thief data, guide, item information and notes follow accepted artifacts.
+
+See [passive supervisor invocation refusal](VALIDATION.md#passive-supervisor-invocation-refusal-v601).
+
 ## Website impact
 
 Keep published Thief data at 1.0.0 until an authorized release. At release, regenerate `website/src/data/catalog.json` and `website/src/data/thief.json` from the public hash-verified archive; update `website/src/content/docs/mods/thief.mdx` and its item/action cards, library listing and banner/media provenance, pistol migration and framework 1.9.0 minimum, shared token/Back Alley availability, online limitation, compatibility/download links, and `website/src/content/docs/releases.mdx`. Complete website build, desktop/mobile browser, media, accessibility and public download checks. Existing bow imagery must not represent the pistol candidate. Do not claim campaign balance, co-op, platform or full appearance coverage from game-free checks.
