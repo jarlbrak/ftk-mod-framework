@@ -472,6 +472,20 @@ Website impact: unreleased diagnostic evidence only. Published Thief 1.0.0, its 
 
 See [native hooks and first snapshot timing](VALIDATION.md#native-hooks-and-first-snapshot-timing-v587-v591).
 
+## Completed native startup phase observation (V593)
+
+The single approved V591 diagnostic passes its bounded phase-evidence gate. Sixteen contiguous records bind to the same owned process and session: admission, verified ownership of both hooks, scene-load entry and return, seven snapshots, OnOff Awake prefix/context/postfix observations, completion and verified hook removal. No failure record is present. The operator returns `PASS-BOUNDED-PHASE-EVIDENCE-ONLY`, stops the owned game and caffeinate, restores the original runtime and plugins, and passes staged, final and fresh post-restoration protection checks. These cover 494 runtime files, seven temporary then six original plugins, 619 protected profile files, six normal saves and four provisional files. Zero game inputs, bridge/world requests, gameplay, saving, samples or captures occur. External saves remain hash/size checks only. The one-use permission is spent and closed without retry.
+
+The revised schedule records all seven declared slots at 2, 5, 10, 30, 60, 120 and 170 seconds. The third snapshot, scheduled at 10, occurs at 15.848032 seconds within the existing [10,30) window. It shows `FTK_main` loaded, asynchronous progress 1 and completion true; those values persist through the final snapshot at 170.043408 seconds. Native frame counts advance from 120 to 16459. The first two snapshots show loading in progress. Both OnOff Awake boundary receipts are present, but a postfix receipt alone does not independently prove that other patches allowed the native body to run.
+
+The active scene remains named `SplashScreen`; the active splash-object query returns zero from the 30-second snapshot onward. Those observations alone establish neither title readiness nor a failure, and a zero query count does not prove object destruction. No title control, saved-world load or gameplay is exercised. This result verifies bounded scene-loading evidence for this exact diagnostic recipe; it does not identify or cure the historical startup failures or the separate world-entry and combat crashes.
+
+Root and independent closure reviews preserve those limits. The actual phase records, source and binary identities, admission and spent-claim records, tool completion and original protection checks are durably preserved. Other FTK native sessions remain on hold. The next step is offline comparison with the existing passive cold-load preparation before any freshly authorized attempt. Strict provisional-save cold qualification, native balance, genuine published-bow migration and ammunition/reload behavior, separate crash causes, exact release artifacts and art, and final package/wiki/site parity remain open.
+
+Website impact: unreleased verification evidence only. Published Thief 1.0.0, package bytes, accepted art and site remain unchanged. Release-time catalog, Thief data, guide, item information and release notes must follow accepted artifacts.
+
+See [completed native startup phase observation](VALIDATION.md#completed-native-startup-phase-observation-v593).
+
 ## Website impact
 
 Keep published Thief data at 1.0.0 until an authorized release. At release, regenerate `website/src/data/catalog.json` and `website/src/data/thief.json` from the public hash-verified archive; update `website/src/content/docs/mods/thief.mdx` and its item/action cards, library listing and banner/media provenance, pistol migration and framework 1.9.0 minimum, shared token/Back Alley availability, online limitation, compatibility/download links, and `website/src/content/docs/releases.mdx`. Complete website build, desktop/mobile browser, media, accessibility and public download checks. Existing bow imagery must not represent the pistol candidate. Do not claim campaign balance, co-op, platform or full appearance coverage from game-free checks.
