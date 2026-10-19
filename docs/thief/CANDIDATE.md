@@ -564,6 +564,25 @@ Website impact: unreleased verification only. Published Thief 1.0.0, package byt
 
 See [the correction and remaining position gate](VALIDATION.md#stationary-path-correction-and-visual-position-blocker-v611-v616).
 
+## Fresh logical-location baseline batch preparation (V618-V623)
+
+The next preparation uses a fresh isolated campaign because the old checkpoint has no observed before-save logical locations for all three heroes. V619 provides canonical external setup and source references; V620 supplies a separately compiled fresh-namespace policy; V621 integrates the continuous operator, owner, guarded runtime transaction and two contingent lifetimes; V622 supplies the strict comparison. The existing stationary-path correction is retained. No historical allowance, admission, checkpoint or loaded observation becomes a fresh baseline or launch permission.
+
+The first lifetime must create the exact reviewed solo roster, record all 36 actual party values and all three FID-keyed native logical locations before saving, complete native Save and Exit, then native title Exit0. Only complete native output, owned cleanup, restoration and fresh protection checks can admit the second lifetime. That lifetime must load the exact native-produced output, compare actual saved values and logical coordinates, then stop without saving. Object identities remain local to each lifetime; visual transform rotation cannot substitute for logical-location equality. Actual action points are retained rather than assuming five.
+
+The new native namespace starts empty. Native input settings become immutable at the title boundary; an optional tutorial file is bound to one exact first-turn acknowledgement. Run/JPG creation is admitted only inside the native SaveExit transaction, and the complete produced inventory becomes immutable for cold loading. The original six saves and four provisional files stay separate and unchanged. The operator checks save hashes and sizes without parsing or copying save contents. Future execution retains the original 494 runtime-file, six-plugin and 619-profile guards, all original save identities, the complete 3,005-entry app inventory with 2,719 regular files, and critical sandbox, executable, isolation and loader identities.
+
+The integrated game-free suite passes 73 tests, including actual harmless worker processes, full 48/32-command round trips, first-failure suppression of cold loading, timeout cleanup, aggregate input budgets, real strict-comparator/save-menu composition and original setup-metadata projection. These tests caught and corrected receipt-shape and elapsed-time comparison defects before any native attempt. The independently reviewed components separately pass 25 canonical-support fixtures, 85 compiled namespace-policy cases and 228 comparator tests. Source verification covers the frozen integrated preparation and all 6,709 original canonical source references. None of these checks executes the actual save/profile guards or proves native campaign, saving, cold-load or focus behavior.
+
+Preparation allows at most two contingent lifetimes, with 20 aggregate creation inputs, 10 cold-load inputs, one world observation per lifetime and fixed controller/parent/batch deadlines. Other FTK native sessions remain on hold. Final exact scope approval and fresh protection checks are required before any launch. There is no movement, combat, EndTurn, Inn, acquisition, extra diagnostic, retry or publication allowance. A failure or unknown closes the batch; partial new output remains quarantined. No native launch has occurred under this preparation.
+
+Strict cold acceptance, genuine saved-bow ownership and same-item pistol migration, ammunition/reload behavior, native balance, the separate historical world-entry and combat causes, exact final artifacts and package/wiki/site parity remain release gates. A successful baseline batch alone would not close those gates or retroactively qualify the old provisional save.
+
+Website impact: unreleased verification preparation and handoff only. Published Thief 1.0.0, package bytes, accepted art and public website behavior remain unchanged; the recorded release-time catalog, guide, item and release-note updates still require accepted final artifacts.
+
+See [the guarded baseline preparation](VALIDATION.md#fresh-logical-location-baseline-batch-preparation-v618-v623).
+
+
 ## Website impact
 
 Keep published Thief data at 1.0.0 until an authorized release. At release, regenerate `website/src/data/catalog.json` and `website/src/data/thief.json` from the public hash-verified archive; update `website/src/content/docs/mods/thief.mdx` and its item/action cards, library listing and banner/media provenance, pistol migration and framework 1.9.0 minimum, shared token/Back Alley availability, online limitation, compatibility/download links, and `website/src/content/docs/releases.mdx`. Complete website build, desktop/mobile browser, media, accessibility and public download checks. Existing bow imagery must not represent the pistol candidate. Do not claim campaign balance, co-op, platform or full appearance coverage from game-free checks.
