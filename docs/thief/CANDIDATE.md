@@ -534,6 +534,20 @@ Website impact: private operator coordination and unreleased evidence only. Publ
 
 See [absolute passive invocation preparation](VALIDATION.md#absolute-passive-invocation-preparation-v605-v608).
 
+## Native passive world boundary refusal (V609)
+
+V609 exercises the reviewed absolute producer and continuous supervisor under fresh direct typed approval. The exact process handoff succeeds, title/content readiness passes, and the existing resume sequence enters the saved world. Fifteen controller commands complete with ten native UI inputs. The sole world-read command is issued, but its adapter refuses before the strict 36-value comparison because the native movement-list count and partial-list count are both one, while the passive boundary requires both zero.
+
+The observed native flags are `nativeResumingAutoSave=false` and `nativeMovementSlotsRolled=true`. These observations do not classify the save or override the movement-boundary refusal. No checkpoint authority is promoted, no gameplay or game saving is authorized or performed, and there is no retry. The successful title/resume/world entry is useful bounded evidence; it does not identify or cure either historical world-entry or combat crash, prove strict cold compatibility, or satisfy balance and published-bow migration gates.
+
+The owned game is stopped with TERM and returns -15; this is not native Exit or SaveExit proof. The owner returns zero, the supervisor is reaped, temporary runtime files are restored, and all post checks pass for 494 runtime files, six plugins, 619 protected profile files, six normal saves and the four immutable provisional files. Root and independent closure agree that the single allowance is permanently spent with zero remaining startups.
+
+The user subsequently prioritizes immediate storage relocation. Project, worktree, recovery, evidence and visualization payloads are copied to external storage and verified before internal originals are removed. Historical evidence remains unchanged, and operational Git references are repaired separately. Existing full-path native preparations must not be reused after relocation: further native testing requires a separately reviewed setup and fresh exact permission. Other FTK native sessions remain on hold; external saves remain hash/size only and are never parsed, copied, edited, restored or deleted.
+
+Website impact: unreleased validation and local storage coordination only. Published Thief 1.0.0, package bytes, accepted art and the public site are unchanged. Native balance, genuine bow ownership and same-item pistol migration, ammunition/reload, separate crash causes, final artifacts/art and package/wiki/site parity remain open.
+
+See [the native passive result](VALIDATION.md#native-passive-world-boundary-refusal-v609).
+
 ## Website impact
 
 Keep published Thief data at 1.0.0 until an authorized release. At release, regenerate `website/src/data/catalog.json` and `website/src/data/thief.json` from the public hash-verified archive; update `website/src/content/docs/mods/thief.mdx` and its item/action cards, library listing and banner/media provenance, pistol migration and framework 1.9.0 minimum, shared token/Back Alley availability, online limitation, compatibility/download links, and `website/src/content/docs/releases.mdx`. Complete website build, desktop/mobile browser, media, accessibility and public download checks. Existing bow imagery must not represent the pistol candidate. Do not claim campaign balance, co-op, platform or full appearance coverage from game-free checks.
