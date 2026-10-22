@@ -1,0 +1,13 @@
+{
+  "name": "ftk-reporting-cloudflare-preparation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/index.js && node --check src/receipt-bridge.mjs"
+  },
+  "devDependencies": {
+    "miniflare": "5.20261019.1-beta",
+    "wrangler": "4.151.3"
+  }
+}

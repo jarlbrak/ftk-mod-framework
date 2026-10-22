@@ -18,6 +18,8 @@ import (
 type config struct {
 	dataDir, repository, token, publicURL, apiURL      string
 	maxReports, perIP, global, daily, trustedProxyHops int
+	receiptBridge                                      string
+	receiptBridgeEnabled                               bool
 }
 
 func positiveEnv(name string, fallback int) int {
@@ -34,6 +36,11 @@ func positiveEnv(name string, fallback int) int {
 
 func environmentConfig() (config, error) {
 	c := config{dataDir: os.Getenv("DATA_DIR"), repository: os.Getenv("GITHUB_REPOSITORY"), token: os.Getenv("GITHUB_TOKEN"), publicURL: strings.TrimRight(os.Getenv("PUBLIC_BASE_URL"), "/"), apiURL: "https://api.github.com", maxReports: positiveEnv("MAX_REPORTS", 1000), perIP: positiveEnv("REPORTS_PER_IP_HOUR", 5), global: positiveEnv("REPORTS_PER_HOUR", 100), daily: positiveEnv("REPORTS_PER_DAY", 500)}
+	c.receiptBridge = os.Getenv("RECEIPT_STORE_BRIDGE_URL")
+	c.receiptBridgeEnabled = os.Getenv("FTK_RECEIPT_BRIDGE_ENABLED") == "true"
+	if c.receiptBridgeEnabled && c.receiptBridge == "" {
+		return c, errors.New("receipt bridge origin is required when enabled")
+	}
 	if c.dataDir == "" {
 		c.dataDir = "/data"
 	}

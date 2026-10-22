@@ -10,7 +10,6 @@ import (
 	"mime"
 	"net"
 	"net/http"
-	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -58,6 +57,8 @@ type service struct {
 	cfg      config
 	client   *http.Client
 	mu       sync.Mutex
+	store    receiptStore
+	versions map[string]string
 	receipts map[string]*receipt
 	ips      map[string]bucket
 	global   bucket
@@ -67,36 +68,38 @@ type service struct {
 }
 
 func newService(cfg config, client *http.Client) (*service, error) {
-	if err := os.MkdirAll(cfg.dataDir, 0700); err != nil {
-		return nil, err
+	if cfg.receiptBridgeEnabled && cfg.receiptBridge == "" {
+		return nil, errors.New("receipt bridge origin is required when enabled")
 	}
-	s := &service{cfg: cfg, client: client, receipts: make(map[string]*receipt), ips: make(map[string]bucket), now: time.Now, inflight: make(chan struct{}, 8)}
-	entries, err := os.ReadDir(cfg.dataDir)
+	var store receiptStore
+	var err error
+	if cfg.receiptBridge != "" {
+		if !cfg.receiptBridgeEnabled {
+			return nil, errors.New("receipt bridge activation is disabled")
+		}
+		store, err = newBridgeReceiptStore(cfg.receiptBridge)
+	} else {
+		store, err = newFileReceiptStore(cfg.dataDir)
+	}
 	if err != nil {
 		return nil, err
 	}
-	for _, entry := range entries {
-		if !strings.HasSuffix(entry.Name(), ".json") {
-			continue
+	return newServiceWithStore(cfg, client, store)
+}
+
+func newServiceWithStore(cfg config, client *http.Client, store receiptStore) (*service, error) {
+	s := &service{cfg: cfg, client: client, store: store, versions: make(map[string]string), receipts: make(map[string]*receipt), ips: make(map[string]bucket), now: time.Now, inflight: make(chan struct{}, 8)}
+	ids, err := store.list()
+	if err != nil {
+		return nil, err
+	}
+	for _, id := range ids {
+		if err := s.refresh(id); err != nil {
+			return nil, err
 		}
-		id := strings.TrimSuffix(entry.Name(), ".json")
-		if !idPattern.MatchString(id) || entry.IsDir() {
-			return nil, errors.New("unexpected receipt file")
+		if s.receipts[id] == nil {
+			return nil, errors.New("listed receipt is missing")
 		}
-		f, err := os.Open(filepath.Join(cfg.dataDir, entry.Name()))
-		if err != nil {
-			return nil, errors.New("cannot open receipt")
-		}
-		data, err := io.ReadAll(io.LimitReader(f, maxStoredReceipt+1))
-		_ = f.Close()
-		if err != nil || len(data) > maxStoredReceipt {
-			return nil, errors.New("cannot read receipt")
-		}
-		var rec receipt
-		if json.Unmarshal(data, &rec) != nil || rec.ReportID != id || rec.Hash == "" || rec.Created.IsZero() || (rec.Status != "pending" && rec.Status != "submitted" && rec.Status != "rejected") {
-			return nil, errors.New("invalid receipt")
-		}
-		s.receipts[id] = &rec
 	}
 	if err := s.expire(); err != nil {
 		return nil, err
@@ -104,41 +107,30 @@ func newService(cfg config, client *http.Client) (*service, error) {
 	return s, nil
 }
 
-// Sync the file and containing directory before attempting GitHub. A pending receipt
-// never becomes permission to POST again, even after a timeout or process restart.
+// A local cache never grants permission to create an issue. Reads must reach the
+// authoritative store; a missing previously observed receipt fails closed.
+func (s *service) refresh(id string) error {
+	rec, version, err := s.store.get(id)
+	if err != nil {
+		return err
+	}
+	if rec == nil {
+		if s.receipts[id] != nil {
+			return errors.New("previous receipt is missing")
+		}
+		return nil
+	}
+	s.receipts[id], s.versions[id] = rec, version
+	return nil
+}
+
 func (s *service) persist(rec *receipt) error {
-	data, err := encodeReceipt(rec)
+	version, err := s.store.put(rec, s.versions[rec.ReportID])
 	if err != nil {
 		return err
 	}
-	f, err := os.CreateTemp(s.cfg.dataDir, ".receipt-*")
-	if err != nil {
-		return err
-	}
-	name := f.Name()
-	defer os.Remove(name)
-	if err = f.Chmod(0600); err == nil {
-		_, err = f.Write(data)
-	}
-	if err == nil {
-		err = f.Sync()
-	}
-	closeErr := f.Close()
-	if err == nil {
-		err = closeErr
-	}
-	if err != nil {
-		return err
-	}
-	if err = os.Rename(name, filepath.Join(s.cfg.dataDir, rec.ReportID+".json")); err != nil {
-		return err
-	}
-	dir, err := os.Open(s.cfg.dataDir)
-	if err != nil {
-		return err
-	}
-	defer dir.Close()
-	return dir.Sync()
+	s.versions[rec.ReportID] = version
+	return nil
 }
 
 func encodeReceipt(rec *receipt) ([]byte, error) {
@@ -157,7 +149,18 @@ func encodeReceipt(rec *receipt) ([]byte, error) {
 func (s *service) expire() error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
-	for _, rec := range s.receipts {
+	ids, err := s.store.list()
+	if err != nil {
+		return err
+	}
+	for _, id := range ids {
+		if err := s.refresh(id); err != nil {
+			return err
+		}
+		rec := s.receipts[id]
+		if rec == nil {
+			return errors.New("listed receipt is missing")
+		}
 		if rec.Report != nil && s.now().Sub(rec.Created) >= retention {
 			copy := *rec
 			copy.Report = nil
@@ -250,6 +253,10 @@ func (s *service) submit(w http.ResponseWriter, r *http.Request) {
 	hash := hex.EncodeToString(digest[:])
 	s.mu.Lock()
 	defer s.mu.Unlock()
+	if err := s.refresh(req.ReportID); err != nil {
+		fail(w, 503, "service_unavailable")
+		return
+	}
 	if rec := s.receipts[req.ReportID]; rec != nil {
 		if rec.Hash != hash {
 			fail(w, 409, "report_conflict")
@@ -309,6 +316,10 @@ func (s *service) submit(w http.ResponseWriter, r *http.Request) {
 	// must never allow a second attempt with a different payload in this process.
 	s.receipts[rec.ReportID] = rec
 	if err := s.persist(rec); err != nil {
+		if errors.Is(err, errReceiptCapacity) {
+			fail(w, 503, "capacity_reached")
+			return
+		}
 		fail(w, 503, "service_unavailable")
 		return
 	}
@@ -375,6 +386,10 @@ func (s *service) download(w http.ResponseWriter, r *http.Request) {
 	}
 	s.mu.Lock()
 	defer s.mu.Unlock()
+	if err := s.refresh(id); err != nil {
+		fail(w, 503, "service_unavailable")
+		return
+	}
 	rec := s.receipts[id]
 	if rec == nil || rec.Status != "submitted" || rec.Report == nil || !rec.Report.IncludeDiagnostics || s.now().Sub(rec.Created) >= retention {
 		fail(w, 404, "not_found")

@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ftk-reporting-migration",
+  "main": "src/index.js",
+  "keep_names": false,
+  "compatibility_date": "2026-10-21",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  "observability": { "enabled": false },
+  "vars": {
+    "FTK_REPORTING_ACTIVATION_ENABLED": "false",
+    "FTK_RECEIPTS_IMPORTED": "false",
+    "FTK_RECEIPT_BRIDGE_ENABLED": "false",
+    "FTK_RETENTION_ENABLED": "false",
+    "MAX_REPORTS": "1000"
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "RECEIPT_AUTHORITY", "class_name": "ReceiptAuthority" }
+    ]
+  },
+  "migrations": [{ "tag": "v1-receipts", "new_sqlite_classes": ["ReceiptAuthority"] }]
+}
