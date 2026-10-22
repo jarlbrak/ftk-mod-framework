@@ -1,5 +1,6 @@
 import { DurableObject, WorkerEntrypoint } from "cloudflare:workers";
 import { handleReceiptRequest, expireReceiptBatch } from "./receipt-bridge.mjs";
+import { activated, unavailable, ingressRequest, runtimeForward, receiptEgress, githubEgress } from "./runtime-policy.mjs";
 
 const enabled = env => env.FTK_RECEIPT_BRIDGE_ENABLED === "true";
 const options = env => ({ enabled: enabled(env), retentionEnabled: env.FTK_RETENTION_ENABLED === "true", maximum: Number(env.MAX_REPORTS || "1000") });
@@ -21,11 +22,36 @@ export class ReceiptAuthority extends DurableObject {
   }
 }
 
-// Private service-binding preparation only. This entrypoint cannot start a
-// container, forward a report, or acquire GitHub authorization.
+// A trusted gateway supplies its verified edge address as an RPC argument.
+// No HTTP header can opt into this private ingress capability.
 export class ReportingController extends WorkerEntrypoint {
-  async fetch() {
-    return new Response("Reporting activation integration is pending", { status: 503, headers: { "Cache-Control": "no-store" } });
+  async fetch() { return unavailable(); }
+  async forward(request, address) {
+    if (!activated(this.env)) return unavailable();
+    try {
+      // Validate before resolving a runtime instance. The runtime validates and
+      // reconstructs the request again at its own capability boundary.
+      const incoming = ingressRequest(request, address);
+      return await this.env.REPORTING_RUNTIME.getByName("canonical").forward(incoming, address);
+    } catch { return unavailable(); }
+  }
+}
+
+export class ReportingRuntime extends DurableObject {
+  async fetch() { return new Response(null, { status: 404 }); }
+  async forward(request, address) { return runtimeForward(this.ctx, this.env, request, address); }
+}
+
+export class ReceiptEgress extends WorkerEntrypoint {
+  async fetch(request) {
+    try { return await receiptEgress(request, this.env); }
+    catch { return unavailable(); }
+  }
+}
+export class GithubEgress extends WorkerEntrypoint {
+  async fetch(request) {
+    try { return await githubEgress(request, this.env); }
+    catch { return unavailable(); }
   }
 }
 

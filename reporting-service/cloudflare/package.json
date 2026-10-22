@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "check": "node --check src/index.js && node --check src/receipt-bridge.mjs"
+    "check": "node --check src/index.js && node --check src/receipt-bridge.mjs && node --check src/runtime-policy.mjs"
   },
   "devDependencies": {
     "miniflare": "5.20261019.1-beta",
